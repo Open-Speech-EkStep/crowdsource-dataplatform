@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <title>Crowd Sourcing Platform</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+</head>
+
+<body>
+    <header>
+        <a href="/">Crowd Sourcing Platform</a>
+    </header>
+    <div class="container">
+        <div class="d-flex j-center mt-5">
+            <label class="fnt-2" id="currentSentenceLbl"></label>
+            <label class="fnt-2">/</label>
+            <label class="fnt-2" id="totalSentencesLbl"></label>
+        </div>
+    
+        <div class="d-flex j-center h-150">
+            <div class="col-6">
+                <div class="d-flex j-center">
+                    <label class="fnt-2" id="sentenceLbl"></label>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex j-center h-50">
+            <div class="col-3">
+                <div class="d-flex j-center">
+                    <button id="startRecord" class="small-btn button1">Record</button>
+                    <div id="recording-sign">
+                        <span class="">Recording....</span>
+                        <label class="recording"></label>
+                    </div>
+                </div>
+               
+             
+            </div>
+            <div class="col-3">
+                <div class="d-flex j-center">
+                    <button id="stopRecord" disabled class="small-btn button1">Stop</button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="d-flex j-center">
+            <div class="col-6">
+                <div class="d-flex j-center mt-5">
+                    <audio  id="player" controls></audio>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div  id="controls" class="d-flex j-sa">
+        <!-- <button class="button2" disabled id="prevBtn">Previous</button> -->
+        <button class="button2" disabled id="nextBtn">Upload and Proceed</button>
+    </div>
+
+
+    <script src="js/recorder.js"></script>
+    <script>
+        window.sentences=[];
+        <% sentences.forEach(function(sentence) { %>
+            window.sentences.push(" <%= sentence.sentence %>");
+        <% }); %>
+    </script>
+    <script src="js/record.js"></script>
+</body>
+
+</html>

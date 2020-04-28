@@ -1,0 +1,35 @@
+{
+  "name": "ektep-crowdsource-platform",
+  "version": "1.0.0",
+  "description": "This will hold the crowdsourcing platform to be used to store voice data from various speakers",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ekstep2/ektep-crowdsource-platform.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ekstep2/ektep-crowdsource-platform/issues"
+  },
+  "homepage": "https://github.com/ekstep2/ektep-crowdsource-platform#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "ejs": "^1.0.0",
+    "express": "^4.17.1",
+    "multer": "^1.4.2",
+    "pg-promise": "^10.5.2",
+    "uuid": "^7.0.3"
+  },
+  "engines": {
+    "node": "12.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
