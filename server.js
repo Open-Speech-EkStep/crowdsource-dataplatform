@@ -1,16 +1,18 @@
+require('dotenv').config();
+const { uploadFile } = require("./uploader");
 const express = require('express');
 const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const router = express.Router();
 const pgp = require('pg-promise')();
-const db = pgp('postgres://postgres:1234@localhost:2345/CrowdSource');
-app.use(cookieParser());
-app.use(express.static('public'));
+const envVars = process.env;
+const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}:${envVars.DB_PORT}/${envVars.DB_NAME}`);
+const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
 
-var multer = require('multer')
-var storage = multer.diskStorage({
+const multer = require('multer')
+const multerStorage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/')
     },
@@ -18,7 +20,11 @@ var storage = multer.diskStorage({
         cb(null, new Date().toISOString() + ".wav")
     }
 })
-var upload = multer({ storage: storage })
+const upload = multer({ storage: multerStorage })
+
+
+app.use(cookieParser());
+app.use(express.static('public'));
 app.use(function (req, res, next) {
     var cookie = req.cookies.userId;
     if (cookie === undefined) {
@@ -26,7 +32,6 @@ app.use(function (req, res, next) {
     }
     next();
 });
-
 app.use(express.static('public'))
 app.set('view engine', 'ejs');
 
@@ -48,11 +53,17 @@ router.get('/record', function (req, res) {
 
 
 router.post("/upload", upload.any(), (req, res) => {
-    const file = req.body.speakerDetails;
-
-    res.sendStatus(200);
+    const file = req.files[0];
+    uploadFile(file.path)
+    .then(data => {
+        res.sendStatus(200);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+    });
+    
 })
-
 
 
 app.use('/', router);
