@@ -1,9 +1,4 @@
-const speakerDetails = localStorage.getItem("speakerDetails");
-if (!speakerDetails) {
-    location.href = "/"
-}
-
-const sentences = window.sentences;
+const sentences = crowdSource.sentences;
 
 const currentSentenceLbl = document.getElementById("currentSentenceLbl");
 const totalSentencesLbl = document.getElementById("totalSentencesLbl");
@@ -110,22 +105,25 @@ stopRecordBtn.addEventListener('click', () => {
     rec.exportWAV((blob) => {
         const URL = window.URL || window.webkitURL;
         var bloburl = URL.createObjectURL(blob);
-        window.audioBlob = blob;
+        crowdSource.audioBlob = blob;
         const player = document.getElementById('player');
         player.src = bloburl;
     });
 });
 
-function uploadToServer(){
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function (e) {
-        if (this.readyState === 4) {
-            console.log("Server returned: ", e.target.responseText);
-        }
-    };
+function uploadToServer() {
     var fd = new FormData();
-    fd.append("audio_data", audioBlob);
-    fd.append("speakerDetails",localStorage.getItem("speakerDetails"));
-    xhr.open("POST", "/upload", true);
-    xhr.send(fd);
+    fd.append("audio_data", crowdSource.audioBlob);
+    fd.append("speakerDetails", localStorage.getItem("speakerDetails"));
+    fetch("/upload", {
+        method: "POST",
+        body: fd
+    })
+        .then(res => res.json())
+        .then(result => {
+            console.log(result);
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }

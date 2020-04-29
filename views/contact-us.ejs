@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Crowd Sourcing Platform</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/notyf.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+
+<body>
+
+    <%- include common/header.ejs %>
+    <div class="container">
+        <div class="d-flex j-center">
+            <div class="col-6 card mt-1">
+                <div class="d-flex j-center  mt-1">
+                    <h1>Contact Us</h1>
+                </div>
+                <div class="d-flex j-center mt-1">
+                    <div class="col-3">
+                        <label for="email">Email</label>
+                        <span class="required">*</span>
+                    </div>
+                    <div class="col-8">
+                        <input required type="email" id="email" placeholder="Email" />
+                    </div>
+                </div>
+                <div class="d-flex j-center mt-1">
+                    <div class="col-3">
+                        <label for="query">Your Query</label>
+                        <span class="required">*</span>
+                    </div>
+                    <div class="col-8">
+                        <textarea required id="query" class="" placeholder="Write Your Query Here"  rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="d-flex j-center mt-1 mb-1">
+                    <button class="button1 small-btn" id="submitQuery">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include common/footer.ejs %>
+    <script src="js/notyf.min.js"></script>
+        <script type="application/javascript">
+          var notyf = new Notyf({
+            duration: 2000,
+            position:{x:'right',y:'top'}
+          });
+        </script>
+    <script src="js/contact-us.js"></script>
+</body>
+
+</html>
