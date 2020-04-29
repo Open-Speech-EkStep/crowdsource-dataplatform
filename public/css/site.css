@@ -1,0 +1,189 @@
+body {
+  color: white;
+  background: linear-gradient(to left, #434343, #000000);
+}
+* {
+  box-sizing: border-box;
+}
+header {
+  border-bottom: 2px solid white;
+  background: linear-gradient(to left, #434343, #000000);
+}
+header a {
+  font-size: 4rem;
+  margin: 1rem;
+  text-decoration: none;
+  color: whitesmoke;
+  text-shadow: 1px 1px 10px #f2385a;;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.1rem;
+  border-top: 2px solid white;
+  background: linear-gradient(to left, #434343, #000000);
+}
+footer a {
+  color: #f2385a;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.container {
+  margin: 3rem 0 15rem 0;
+}
+.d-flex {
+  display: flex;
+  margin: 0.1rem;
+  align-items: center;
+}
+.j-center {
+  justify-content: center;
+}
+.t-center {
+  text-align: center;
+}
+.j-sb {
+  justify-content: space-between;
+}
+.j-sa {
+  justify-content: space-around;
+}
+.j-se {
+  justify-content: space-evenly;
+}
+.col-3,
+.col-4,
+.col-6 {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.col-6 {
+  flex: 0 0 50%;
+}
+.col-3 {
+  flex: 0 0 25%;
+}
+.col-4 {
+  flex: 0 0 33.33333%;
+}
+.col-8 {
+  flex: 0 0 66.666666%;
+}
+button {
+  width: 150px;
+  height: 70px;
+  margin: 25px;
+  padding: 10px;
+  font-size: 1.2rem;
+  box-shadow: 1px 1px 3px 3px white;
+  border-radius: 0.25rem;
+  color: white;
+  transition: all 0.2s;
+}
+button:enabled:hover {
+  transform: scale(1.05, 1.05);
+}
+button:disabled {
+  background: #cccccc;
+  opacity: 0.65;
+}
+.button1 {
+  background-color: #f2385a;
+}
+.button2 {
+  background-color: #3498db;
+  box-shadow: 1px 1px 3px 3px white;
+}
+.small-btn {
+  font-size: 1rem;
+  padding: 0.1rem;
+  box-shadow: 1px 1px 2px 2px white;
+  border-radius: 0.25rem;
+  width: 120px;
+  height: 50px;
+  margin: 5px;
+}
+.card {
+  border: 1px solid white;
+  border-radius: 0.25rem;
+  box-shadow: 2px 2px 5px 1px white;
+}
+label,
+select,
+input {
+  font-size: 1.2rem;
+  padding: 0.3rem;
+  border-radius: 0.25rem;
+}
+select,
+input,
+textarea {
+  width: 100%;
+}
+.fnt-2 {
+  font-size: 2rem;
+}
+.fnt-3 {
+  font-size: 3rem;
+}
+.mt-5 {
+  margin-top: 5rem;
+}
+.mt-1 {
+  margin-top: 1rem;
+}
+.mb-1{
+    margin-bottom: 1rem;
+}
+.ml-1{
+    margin-left: 1rem;
+}
+.h-150 {
+  height: 150px;
+}
+.h-50 {
+  height: 50px;
+}
+input,
+textarea {
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.recording {
+  animation-name: pulse;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  width: 35px;
+  height: 35px;
+  font-size: 0;
+  background-color: #f2385a;
+  border: 0;
+  border-radius: 35px;
+  margin: 18px;
+  outline: none;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0px 0px 5px 0px #f2385a;
+  }
+  65% {
+    box-shadow: 0px 0px 5px 13px #f2385a;
+  }
+  90% {
+    box-shadow: 0px 0px 5px 13px #f2385a;
+  }
+}
+.color-blue {
+  color: #19435a;
+}
+.bg-yellow {
+  background: center top #ecd177;
+}
+.required{
+  color: red;
+}

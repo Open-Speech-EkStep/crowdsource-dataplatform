@@ -5,25 +5,23 @@
     <title>Crowd Sourcing Platform</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/site.css">
 </head>
 
 <body>
 
-    <header>
-        <a href="/">Crowd Sourcing Platform</a>
-    </header>
+    <%- include common/header.ejs %>
     <div class="container">
         <div class="d-flex j-center">
             <div class="col-6 card">
                 <div class="d-flex j-center">
                     <h1>Speaker Characteristics</h1>
                 </div>
-                <div class="d-flex j-center">
+                <div class="d-flex j-center mt-1">
                     <div class="col-3">
                         <label for="gender">Gender</label>
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                         <select name="gender" id="gender">
                             <option>
                                 Please Select
@@ -34,11 +32,11 @@
                         </select>
                     </div>
                 </div>
-                <div class="d-flex j-center">
+                <div class="d-flex j-center mt-1">
                     <div class="col-3">
                         <label for="age">Age</label>
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                         <select type="text" id="age">
                             <option>
                                 Please Select
@@ -54,15 +52,77 @@
                         </select>
                     </div>
                 </div>
+                <div class="d-flex j-center mt-1">
+                    <div class="col-3">
+                        <label for="state">State</label>
+                    </div>
+                    <div class="col-4">
+                        <select type="text" id="state">
+                            <option>
+                                Please Select
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chandigarh">Chandigarh</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                            <option value="Daman and Diu">Daman and Diu</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Lakshadweep">Lakshadweep</option>
+                            <option value="Puducherry">Puducherry</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex j-center mt-1">
+                    <div class="col-3">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="email" id="email" placeholder="Email" />
+                    </div>
+                </div>
+                <div class="d-flex j-center mt-1">
+                    <div class="col-3">
+                        <label for="speakerName">Speaker Name</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="speakerName" placeholder="Speaker Name"/>
+                    </div>
+                </div>
                 <div class="d-flex j-center">
-                    <button class="button1" href="/record" id="start-record">Start Recording</button>
+                    <button class="button1" id="start-record">Start Recording</button>
                 </div>
             </div>
         </div>
     </div>
 
-
-
+    <%- include common/footer.ejs %>
 
     <script src="js/index.js"></script>
 </body>
