@@ -7,8 +7,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const router = express.Router();
 const pgp = require('pg-promise')();
+const {updateAndFetch} = require('./dbQuerys')
 const envVars = process.env;
-const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}:${envVars.DB_PORT}/${envVars.DB_NAME}`);
+const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}/${envVars.DB_NAME}`);
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression')
@@ -57,8 +58,9 @@ router.get('/privacy-policy', function (req, res) {
     res.render('privacy-policy.ejs');
 });
 
+
 router.get('/record', function (req, res) {
-    db.many("select sentence from sentences limit 15")
+    db.many( updateAndFetch)
         .then(data => {
             res.render('record.ejs', { sentences: data });
         })
@@ -70,16 +72,16 @@ router.get('/record', function (req, res) {
 
 router.post("/upload", upload.any(), (req, res) => {
     const file = req.files[0];
-    // console.log(file);
-    // console.log(req.body);
-    // uploadFile(file.path)
-    // .then(data => {
-    //     res.sendStatus(200);
-    // })
-    // .catch((err) => {
-    //     console.error(err);
-    //     res.sendStatus(500);
-    // });
+    console.log(file);
+    console.log(req.body);
+    uploadFile(file.path)
+    .then(data => {
+        res.sendStatus(200);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+    });
     res.status(200).send({ success: true })
 })
 
