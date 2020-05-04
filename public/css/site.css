@@ -14,7 +14,7 @@ header a {
   margin: 1rem;
   text-decoration: none;
   color: whitesmoke;
-  text-shadow: 1px 1px 10px #f2385a;;
+  text-shadow: 1px 1px 5px #f2385a;;
 }
 footer {
   position: fixed;
@@ -36,7 +36,6 @@ footer a {
 .d-flex {
   display: flex;
   margin: 0.1rem;
-  align-items: center;
 }
 .j-center {
   justify-content: center;
@@ -53,6 +52,9 @@ footer a {
 .j-se {
   justify-content: space-evenly;
 }
+.j-end{
+  justify-content: flex-end;
+}
 .col-3,
 .col-4,
 .col-6 {
@@ -66,7 +68,10 @@ footer a {
   flex: 0 0 25%;
 }
 .col-4 {
-  flex: 0 0 33.33333%;
+  flex: 0 0 33.333333%;
+}
+.col-2{
+  flex: 0 0 16.666666%
 }
 .col-8 {
   flex: 0 0 66.666666%;
@@ -122,6 +127,9 @@ input,
 textarea {
   width: 100%;
 }
+.fnt-1-5{
+  font-size: 1.5rem;
+}
 .fnt-2 {
   font-size: 2rem;
 }
@@ -139,6 +147,9 @@ textarea {
 }
 .ml-1{
     margin-left: 1rem;
+}
+.p-1{
+  padding: 1rem;
 }
 .h-150 {
   height: 150px;
@@ -186,4 +197,16 @@ textarea {
 }
 .required{
   color: red;
+}
+.hidden{
+  visibility: hidden;
+}
+.d-none{
+  display: none;
+}
+canvas#visualizer {
+    width: 100%;
+    border: 1px solid white;
+    height: 120px;
+
 }

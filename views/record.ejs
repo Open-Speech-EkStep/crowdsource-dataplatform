@@ -1,72 +1,86 @@
 <!doctype html>
 <html>
+
 <head>
     <title>Crowd Sourcing Platform</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/notyf.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/site.css">
 </head>
 
 <body>
     <%- include common/header.ejs %>
     <div class="container">
-        <div class="d-flex j-center mt-5">
-            <label class="fnt-2" id="currentSentenceLbl"></label>
-            <label class="fnt-2">/</label>
-            <label class="fnt-2" id="totalSentencesLbl"></label>
-        </div>
-    
-        <div class="d-flex j-center">
-            <div class="col-8">
-                <div class="d-flex j-center">
-                    <label class="fnt-2" id="sentenceLbl"></label>
-                </div>
+        <div class="d-flex j-center ">
+            <div class="col-2 p-1 fnt-1-5">
             </div>
-        </div>
-        <div class="d-flex j-center">
-            <div class="col-3">
+            <div class="col-8 card">
                 <div class="d-flex j-center">
-                    <button id="startRecord" class="small-btn button1">Record</button>
-                    <div id="recording-sign">
-                        <span class="">Recording....</span>
-                        <label class="recording"></label>
+                    <label class="fnt-2" id="currentSentenceLbl"></label>
+                    <label class="fnt-2">/</label>
+                    <label class="fnt-2" id="totalSentencesLbl"></label>
+                </div>
+
+                <div class="d-flex j-center">
+                    <div class="col-8">
+                        <div class="d-flex j-center">
+                            <label class="fnt-2" id="sentenceLbl"></label>
+                        </div>
                     </div>
                 </div>
-               
-             
-            </div>
-            <div class="col-3">
                 <div class="d-flex j-center">
-                    <button id="stopRecord" disabled class="small-btn button1">Stop</button>
+                    <div class="col-3">
+                        <div class="d-flex j-center">
+                            <button id="startRecord" class="small-btn button1">Record</button>
+                            <div class="d-none" id="recording-sign">
+                                <span>Recording....</span>
+                                <label class="recording"></label>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-3">
+                        <div class="d-flex j-center">
+                            <button id="stopRecord" disabled class="small-btn button1">Stop</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex j-center mt-1">
+                    <div class="col-6">
+                        <canvas class="hidden" id="visualizer"></canvas>
+                    </div>
+                </div>
+                <div class="d-flex j-center mt-1">
+                    <audio class="hidden" id="player" controls></audio>
+                </div>
+                <div id="controls" class="d-flex j-sa">
+                    <!-- <button class="button2" disabled id="prevBtn">Previous</button> -->
+                    <button class="button2" disabled id="nextBtn">Upload and Proceed</button>
                 </div>
             </div>
-        </div>
-    
-        <div class="d-flex j-center">
-            <div class="col-6">
-                <div class="d-flex j-center">
-                    <audio  id="player" controls></audio>
-                </div>
+            <div class="col-2  p-1 fnt-1-5">
+
             </div>
         </div>
-        <div  id="controls" class="d-flex j-sa">
-            <!-- <button class="button2" disabled id="prevBtn">Previous</button> -->
-            <button class="button2" disabled id="nextBtn">Upload and Proceed</button>
-        </div>
+
     </div>
     <%- include common/footer.ejs %>
 
-   
+
 
 
     <script src="js/recorder.js"></script>
     <script>
-        window.crowdSource = window.crowdSource || {};
-        crowdSource.sentences=[];
-        <% sentences.forEach(function(sentence) { %>
-            crowdSource.sentences.push(" <%= sentence.sentence %>");
+        window.crowdSource = {};
+        crowdSource.sentences = [];
+        <% sentences.forEach(function (sentence) { %>
+            crowdSource.sentences.push({sentence:" <%= sentence.sentence %>",id:Number(" <%= sentence.sentenceId %>")});
         <% }); %>
     </script>
+    <script src="js/notyf.min.js"></script>
     <script src="js/record.js"></script>
 </body>
 
