@@ -29,11 +29,15 @@ app.use(helmet())
 app.disable('x-powered-by');
 app.use(compression())
 app.use(cookieParser());
-app.use(express.static('public'));
+app.use(express.json())
 app.use(function (req, res, next) {
     var cookie = req.cookies.userId;
     if (cookie === undefined) {
-        res.cookie('userId', uuidv4(), { maxAge: 60 * 60 * 24 * 365, httpOnly: true, secure: true, });
+        res.cookie('userId', uuidv4(), {
+            maxAge: 60 * 60 * 24 * 365,
+            // httpOnly: true,
+            // secure: true,
+        });
     }
     next();
 });
@@ -62,13 +66,19 @@ router.get('/privacy-policy', function (req, res) {
 router.get('/record', function (req, res) {
     db.many( updateAndFetch)
         .then(data => {
+            console.log(data);
             res.render('record.ejs', { sentences: data });
         })
         .catch(err => {
+            console.log(err);
             res.sendStatus(500);
         })
 });
-
+router.post("/contact-us", (req, res) => {
+    const body = req.body;
+    console.log(body);
+    res.status(200).send({ success: true })
+})
 
 router.post("/upload", upload.any(), (req, res) => {
     const file = req.files[0];
@@ -76,13 +86,12 @@ router.post("/upload", upload.any(), (req, res) => {
     console.log(req.body);
     uploadFile(file.path)
     .then(data => {
-        res.sendStatus(200);
+        res.status(200).send({ success: true })
     })
     .catch((err) => {
         console.error(err);
         res.sendStatus(500);
     });
-    res.status(200).send({ success: true })
 })
 
 

@@ -14,7 +14,7 @@
     <%- include common/header.ejs %>
     <div class="container">
         <div class="d-flex j-center">
-            <div class="col-6 card mt-1">
+            <div class="col-6 card">
                 <div class="d-flex j-center  mt-1">
                     <h1>Contact Us</h1>
                 </div>
@@ -33,7 +33,7 @@
                         <span class="required">*</span>
                     </div>
                     <div class="col-8">
-                        <textarea required id="query" class="" placeholder="Write Your Query Here"  rows="10"></textarea>
+                        <textarea required id="query" class="" placeholder="Write Your Query Here" rows="10"></textarea>
                     </div>
                 </div>
                 <div class="d-flex j-center mt-1 mb-1">
@@ -45,12 +45,6 @@
 
     <%- include common/footer.ejs %>
     <script src="js/notyf.min.js"></script>
-        <script type="application/javascript">
-          var notyf = new Notyf({
-            duration: 2000,
-            position:{x:'right',y:'top'}
-          });
-        </script>
     <script src="js/contact-us.js"></script>
 </body>
 
