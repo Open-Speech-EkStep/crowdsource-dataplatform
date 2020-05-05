@@ -85,7 +85,12 @@ router.post("/upload", upload.any(), (req, res) => {
     console.log(req.body);
     uploadFile(file.path)
     .then(data => {
+        console.log(data)
         res.status(200).send({ success: true })
+        fs.unlink(file.path, function (err) {
+            if (err) console.log(err);
+           console.log('File deleted!');
+        }); 
     })
     .catch((err) => {
         console.error(err);
