@@ -4,10 +4,10 @@
   "description": "This will hold the crowdsourcing platform to be used to store voice data from various speakers",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "watch": "nodemon server.js",
-    "start-cluster": "pm2 start server.js -i 2"
+    "start": "node src/server.js",
+    "watch": "nodemon src/server.js",
+    "start-cluster": "pm2 start server.js -i 2",
+    "test":"mocha"
   },
   "repository": {
     "type": "git",
