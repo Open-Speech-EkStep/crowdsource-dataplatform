@@ -74,9 +74,8 @@ router.get('/record', function (req, res) {
             res.sendStatus(500);
         })
 });
+
 router.post("/contact-us", (req, res) => {
-    const body = req.body;
-    console.log(body);
     res.status(200).send({ success: true })
 })
 
@@ -100,3 +99,5 @@ app.use('/', router);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+
+module.exports = app;
