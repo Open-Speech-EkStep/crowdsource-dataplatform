@@ -6,63 +6,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/notyf.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+        type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="css/record.css">
 </head>
 
 <body>
     <%- include common/header.ejs %>
-    <div class="container">
-        <div class="d-flex j-center ">
-            <div class="col-2 p-1 fnt-1-5">
+    <div class="container pt-5 pb-6 mb-5">
+        <div class="row justify-content-center my-5">
+            <div class="col-lg-10 text-center">
+                <span class="h2" id="currentSentenceLbl"></span>
+                <span class="h2">/</span>
+                <span class="h2" id="totalSentencesLbl"></span>
             </div>
-            <div class="col-8 card">
-                <div class="d-flex j-center">
-                    <label class="fnt-2" id="currentSentenceLbl"></label>
-                    <label class="fnt-2">/</label>
-                    <label class="fnt-2" id="totalSentencesLbl"></label>
-                </div>
-
-                <div class="d-flex j-center">
-                    <div class="col-8">
-                        <div class="d-flex j-center">
-                            <label class="fnt-2" id="sentenceLbl"></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex j-center">
-                    <div class="col-3">
-                        <div class="d-flex j-center">
-                            <button id="startRecord" class="small-btn button1">Record</button>
-                            <div class="d-none" id="recording-sign">
-                                <span>Recording....</span>
-                                <label class="recording"></label>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="col-3">
-                        <div class="d-flex j-center">
-                            <button id="stopRecord" disabled class="small-btn button1">Stop</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="d-flex j-center mt-1">
-                    <div class="col-6">
-                        <canvas class="hidden" id="visualizer"></canvas>
-                    </div>
-                </div>
-                <div class="d-flex j-center mt-1">
-                    <audio class="hidden" id="player" controls></audio>
-                </div>
-                <div id="controls" class="d-flex j-sa">
-                    <!-- <button class="button2" disabled id="prevBtn">Previous</button> -->
-                    <button class="button2" disabled id="nextBtn">Upload and Proceed</button>
+        </div>
+        <div class="row justify-content-center my-5">
+            <div class="col-lg-10">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width: 3%">0</div>
                 </div>
             </div>
-            <div class="col-2  p-1 fnt-1-5">
-
+        </div>
+        <div class="row justify-content-center my-5">
+            <div class="col-lg-10 text-center">
+                <label class="animated  h2" id="sentenceLbl"></label>
+            </div>
+        </div>
+        <div class="row justify-content-center my-5">
+            <div class="col-lg-4 col-md-8 text-center">
+                <div>
+                    
+                </div>
+                <button type="button" class="btn btn-primary" id="startRecord">
+                    <i class="material-icons align-middle md-48">record_voice_over</i>
+                    <span class="align-middle pl-2">
+                        Record
+                    </span>
+                </button>
+            </div>
+            <div class="col-lg-4 col-md-8 text-center justify-content-center mx-auto">
+                <div class="row justify-content-center">
+                    <div id="recording-sign" class="recorder-container d-none">
+                        <div class="outer"></div>
+                        <div class="outer-2"></div>
+                        <div class="icon-microphone"> <i class="material-icons md-48">mic</i></div>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="col-lg-4 col-md-8 text-center">
+                <button type="button" class="btn btn-primary" disabled id="stopRecord">
+                    <i class="material-icons align-middle md-48">voice_over_off</i>
+                    <span class="align-middle pl-2">
+                        Stop
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div class="row justify-content-center my-5">
+            <div class="col-lg-8 col-md-10 text-center">
+                <canvas class="d-none" id="visualizer"></canvas>
+            </div>
+        </div>
+        <div class="row justify-content-center my-5">
+            <div class="col-lg-8 col-md-10 text-center">
+                <audio class="d-none" id="player" controls></audio>
+            </div>
+        </div>
+        <div class="row justify-content-center my-5">
+            <div class="col-lg-8 col-md-10 text-center">
+                <button type="button" class="btn btn-success" disabled id="nextBtn">
+                    <i class="material-icons align-middle md-48">cloud_upload</i>
+                    <span class="align-middle pl-2">
+                        Upload
+                    </span>
+                </button>
             </div>
         </div>
 
@@ -77,10 +101,19 @@
         window.crowdSource = {};
         crowdSource.sentences = [];
         <% sentences.forEach(function (sentence) { %>
-            crowdSource.sentences.push({sentence:" <%= sentence.sentence %>",id:Number(" <%= sentence.sentenceId %>")});
+            crowdSource.sentences.push({ sentence: " <%= sentence.sentence %>", id: Number(" <%= sentence.sentenceId %>") });
         <% }); %>
     </script>
     <script src="js/notyf.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
     <script src="js/record.js"></script>
 </body>
 

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/server.js",
     "watch": "nodemon src/server.js",
-    "start-cluster": "pm2 start server.js -i 2",
+    "start-cluster": "pm2 start src/server.js -i 2",
     "test":"mocha"
   },
   "repository": {
