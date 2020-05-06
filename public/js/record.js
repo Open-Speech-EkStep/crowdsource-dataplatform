@@ -2,10 +2,11 @@ const sentences = crowdSource.sentences;
 const currentSentenceLbl = document.getElementById("currentSentenceLbl");
 const totalSentencesLbl = document.getElementById("totalSentencesLbl");
 const sentenceLbl = document.getElementById("sentenceLbl");
-const startRecordBtn = document.getElementById("startRecord");
-const stopRecordBtn = document.getElementById("stopRecord");
-const visualizer = document.getElementById("visualizer");
-const nextBtn = document.getElementById("nextBtn");
+const $startRecordBtn = $("#startRecord");
+const $stopRecordBtn = $("#stopRecord");
+const $visualizer = $("#visualizer");
+const $player = $("#player");
+const $nextBtn = $("#nextBtn");
 const gender = document.getElementById("gender");
 const age = document.getElementById("age");
 const state= document.getElementById("state");
@@ -16,8 +17,30 @@ const speakerDetailsKey = "speakerDetails";
 const completedBatchKey = "completedBatch";
 const speakerDetailsValue = localStorage.getItem(speakerDetailsKey);
 const completedBatchValue = localStorage.getItem(completedBatchKey);
+const $recordingSign = $("#recording-sign");
+const $progressBar = $(".progress-bar");
 
-const setSentenceText = (index) => sentenceLbl.innerText = sentences[index].sentence;
+function animateCSS(element, animationName, callback) {
+    const node = document.querySelector(element)
+    node.classList.add('animated', animationName)
+    function handleAnimationEnd() {
+        node.classList.remove('animated', animationName)
+        node.removeEventListener('animationend', handleAnimationEnd)
+
+        if (typeof callback === 'function') callback()
+    }
+    node.addEventListener('animationend', handleAnimationEnd)
+}
+
+const setSentenceText = (index) => {
+    sentenceLbl.innerText = sentences[index].sentence
+    animateCSS('#sentenceLbl', 'lightSpeedIn');
+    if(currentIndex){
+        $progressBar.width(currentIndex*10+"%");
+        $progressBar.text(currentIndex);
+        $progressBar.prop("aria-valuenow",currentIndex)
+    }
+};
 const setCurrentSentenceIndex = (index) => currentSentenceLbl.innerText = index;
 const setTotalSentenceIndex = (index) => totalSentencesLbl.innerText = index;
 
@@ -48,14 +71,14 @@ let rec;
 let input;
 //MediaStreamAudioSourceNode we'll be recording 
 
-startRecordBtn.addEventListener('click', () => {
+$startRecordBtn.on('click', () => {
     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
         .then((stream) => {
-            stopRecordBtn.disabled = false;
-            setElementDisplayById("recording-sign", "inline-block");
-            setElementDisplayById("startRecord", "none");
-            setElementVisibilityById("player", "hidden");
-            setElementVisibilityById("visualizer", "visible");
+            $startRecordBtn.prop('disabled',true);
+            $stopRecordBtn.prop('disabled' , false);
+            $recordingSign.removeClass('d-none');
+            $player.addClass('d-none');
+            $visualizer.removeClass("d-none");
 
             gumStream = stream;
             // shim for AudioContext when it's not avb. 
@@ -76,49 +99,42 @@ startRecordBtn.addEventListener('click', () => {
         .catch(err => {
             console.log(err)
             notyf.error("Sorry !!! We could not get access to your audio input device");
-            setElementDisplayById("startRecord", "inline-block");
+            $startRecordBtn.prop('disabled',false);
         })
 });
 
-stopRecordBtn.addEventListener('click', () => {
-    stopRecordBtn.disabled = true;
-    nextBtn.disabled = false;
-    setElementDisplayById("recording-sign", "none");
-    setElementDisplayById("startRecord", "inline-block");
-    setElementVisibilityById("player", "visible");
-    setElementVisibilityById("visualizer", "hidden");
+$stopRecordBtn.on('click', () => {
+    $stopRecordBtn.prop("disabled", true);
+    $nextBtn.prop("disabled", false);
+    $recordingSign.addClass('d-none');
+    $startRecordBtn.prop("disabled", false);
+    $player.removeClass('d-none');
+    $visualizer.addClass("d-none");
+
     rec.stop(); //stop microphone access 
     gumStream.getAudioTracks()[0].stop();
-    //create the wav blob and pass it on to createDownloadLink 
+    //create the wav blob and pass it on to createObjectURL 
     rec.exportWAV((blob) => {
         const URL = window.URL || window.webkitURL;
         var bloburl = URL.createObjectURL(blob);
         crowdSource.audioBlob = blob;
-        const player = document.getElementById('player');
-        player.src = bloburl;
+        $player.prop("src",bloburl)
     });
 });
 
-nextBtn.addEventListener('click', () => {
+$nextBtn.on('click', () => {
+    if (currentIndex == totalItems - 1) {
+        notyf.success("Congratulations!!! You have completed this batch of sentences");
+    }
     if (currentIndex < totalItems - 1) {
         currentIndex++;
         setSentenceText(currentIndex);
         setCurrentSentenceIndex(currentIndex + 1);
-        // prevBtn.disabled = false;
         uploadToServer();
-    }
-    if (currentIndex == totalItems - 1) {
-        notyf.success("Congratulations!!! You have completed this batch of sentences")
-    }
-    setElementVisibilityById("player", "hidden");
-    nextBtn.disabled = true;
+    } 
+    $player.addClass('d-none');
+    $nextBtn.prop("disabled", true);
 })
-const setElementVisibilityById = (id, visibility) => {
-    document.getElementById(id).style.visibility = visibility;
-}
-const setElementDisplayById = (id, display) => {
-    document.getElementById(id).style.display = display;
-}
 
 function uploadToServer() {
     var fd = new FormData();

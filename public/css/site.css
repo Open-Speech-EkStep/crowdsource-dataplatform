@@ -1,6 +1,14 @@
 body {
-  color: white;
-  background: linear-gradient(to left, #434343, #000000);
+  font-family: Lato,'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
 }
 * {
   box-sizing: border-box;
@@ -15,23 +23,6 @@ header a {
   text-decoration: none;
   color: whitesmoke;
   text-shadow: 1px 1px 5px #f2385a;;
-}
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 0.1rem;
-  border-top: 2px solid white;
-  background: linear-gradient(to left, #434343, #000000);
-}
-footer a {
-  color: #f2385a;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-.container {
-  margin: 3rem 0 15rem 0;
 }
 .d-flex {
   display: flex;
@@ -209,4 +200,4 @@ canvas#visualizer {
     border: 1px solid white;
     height: 120px;
 
-}
+} */

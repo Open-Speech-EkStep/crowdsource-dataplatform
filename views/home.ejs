@@ -5,47 +5,64 @@
     <title>Crowd Sourcing Platform</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+        type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
 </head>
 
 <body>
 
     <%- include common/header.ejs %>
-    <div class="container">
-        <div class="d-flex j-center">
-            <div class="col-6 card p-1 fnt-1-5">
-                <h2 class="t-center">Instructions</h2>
-                <ul class="p-1">
-                    <li>
-                        Click Record to start, reading aloud only the sentence shown.
-                    </li>
-                    <li>
-                        When done speaking, click Stop.
-                    </li>
-                    <li>
-                        Review any recordings with warnings.
-                    </li>
-                </ul>
-                <div>
+    <div class="masthead text-white text-center">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <h1 class="mb-5">Recording Instructions</h1>
                 </div>
-                <div>
-                </div>
-                <div>
+                <div class="col-md-10 col-lg-8 col-xl-8 mx-auto">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <i class="material-icons md-48">settings_voice</i>
+                            <p>Click Record to start, reading aloud only the sentence shown.</p>
 
+                        </div>
+                        <div class="col-lg-3">
+
+                            <i class="material-icons md-48">mic_off</i>
+                            <p> When done speaking, click Stop button to stop recording.</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <i class="material-icons md-48">volume_up</i>
+                            <p> Listen to recorded audio using Play button.</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <i class="material-icons md-48">repeat</i>
+                            <p> Re-record if not satisfied with the previous recording.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="d-flex j-center">
-            <div class="col-6 card">
-                <div class="d-flex j-center">
-                    <h1>Speaker Characteristics</h1>
-                </div>
-                <div class="d-flex j-center mt-1">
-                    <div class="col-3">
-                        <label for="gender">Gender</label>
+    </div>
+
+    <div class="container-fluid bg-light pt-5 pb-6 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 card p-5">
+                <h2 class="text-center mb-3">Speaker Details</h2>
+                <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label">User Id</label>
+                    <div class="col-md-8">
+                        <input type="email" class="form-control" id="email" placeholder="User Id or Email">
                     </div>
-                    <div class="col-4">
-                        <select name="gender" id="gender">
+                </div>
+                <div class="form-group row">
+                    <label for="gender" class="col-md-4 col-form-label">Gender</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="gender">
                             <option>
                                 Please Select
                             </option>
@@ -55,12 +72,10 @@
                         </select>
                     </div>
                 </div>
-                <div class="d-flex j-center mt-1">
-                    <div class="col-3">
-                        <label for="age">Age</label>
-                    </div>
-                    <div class="col-4">
-                        <select type="text" id="age">
+                <div class="form-group row">
+                    <label for="age" class="col-md-4 col-form-label">Age</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="age">
                             <option>
                                 Please Select
                             </option>
@@ -75,12 +90,10 @@
                         </select>
                     </div>
                 </div>
-                <div class="d-flex j-center mt-1">
-                    <div class="col-3">
-                        <label for="state">State</label>
-                    </div>
-                    <div class="col-4">
-                        <select type="text" id="state">
+                <div class="form-group row">
+                    <label for="state" class="col-md-4 col-form-label">State</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="state">
                             <option>
                                 Please Select
                             <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -122,32 +135,30 @@
                         </select>
                     </div>
                 </div>
-                <div class="d-flex j-center mt-1">
-                    <div class="col-3">
-                        <label for="email">Email</label>
+                <div class="row justify-content-center">
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-primary" id="start-record">
+                            <i class="material-icons md-48 align-middle">play_circle_outline</i>
+                            <span class="align-middle">
+                                Start Recording
+                            </span>
+                        </button>
                     </div>
-                    <div class="col-4">
-                        <input type="email" id="email" placeholder="Email" />
-                    </div>
-                </div>
-                <div class="d-flex j-center mt-1">
-                    <div class="col-3">
-                        <label for="speakerName">Speaker Name</label>
-                    </div>
-                    <div class="col-4">
-                        <input type="text" id="speakerName" placeholder="Speaker Name"/>
-                    </div>
-                </div>
-                <div class="d-flex j-center">
-                    <button class="button1" id="start-record">Start Recording</button>
                 </div>
             </div>
         </div>
-       
     </div>
 
     <%- include common/footer.ejs %>
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <script src="js/index.js"></script>
 </body>
 
