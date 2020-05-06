@@ -3,13 +3,9 @@ const { uploadFile } = require("./uploader");
 const helmet = require('helmet')
 const express = require('express');
 const app = express();
-const path = require('path');
 const cookieParser = require('cookie-parser');
 const router = express.Router();
-const pgp = require('pg-promise')();
-const {updateAndFetch} = require('./dbQuerys')
-const envVars = process.env;
-const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}/${envVars.DB_NAME}`);
+const {updateDbWithFileName,updateAndFetch} = require('./dbQuerys')
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression')
@@ -63,17 +59,8 @@ router.get('/privacy-policy', function (req, res) {
 });
 
 
-router.get('/record', function (req, res) {
-    db.many( updateAndFetch)
-        .then(data => {
-            console.log(data);
-            res.render('record.ejs', { sentences: data });
-        })
-        .catch(err => {
-            console.log(err);
-            res.sendStatus(500);
-        })
-});
+router.get('/record', (req,res) =>  updateAndFetch(req,res));
+
 
 router.post("/contact-us", (req, res) => {
     res.status(200).send({ success: true })
@@ -81,12 +68,11 @@ router.post("/contact-us", (req, res) => {
 
 router.post("/upload", upload.any(), (req, res) => {
     const file = req.files[0];
-    console.log(file);
-    console.log(req.body);
+    const id = req.body.sentenceId;
     uploadFile(file.path)
     .then(data => {
-        console.log(data)
         res.status(200).send({ success: true })
+        updateDbWithFileName(file.filename,id)
         fs.unlink(file.path, function (err) {
             if (err) console.log(err);
            console.log('File deleted!');
