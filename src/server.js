@@ -5,13 +5,11 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 const router = express.Router();
-const {updateDbWithFileName,updateAndFetch,updateAndFetchqueryforRecord} = require('./dbQuerys')
+const {updateDbWithFileName,updateAndFetch} = require('./dbQuerys')
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression')
-const envVars = process.env;
-const pgp = require('pg-promise')();
-const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}/${envVars.DB_NAME}`);
+
 
 const multer = require('multer')
 const multerStorage = multer.diskStorage({
@@ -62,19 +60,13 @@ router.get('/privacy-policy', function (req, res) {
 });
 
 router.get('/record', (req, res) => {
-    db.many(updateAndFetchqueryforRecord)
-        .then(data => {
-            res.render('record.ejs', { sentences: data });
-        })
-        .catch(err => {
-            console.log(err);
-            res.sendStatus(500);
-        });
+    res.render('record.ejs')        
 })
 
 
 
-router.post('/sentences', (req, res) => updateAndFetch(req, res))
+router.post('/sentences', (req, res) => updateAndFetch(req, res));
+
 router.post("/contact-us", (req, res) => {
     res.status(200).send({ success: true })
 })

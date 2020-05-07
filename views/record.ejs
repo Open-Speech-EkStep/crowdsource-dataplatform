@@ -97,13 +97,6 @@
 
 
     <script src="js/recorder.js"></script>
-    <script>
-        window.crowdSource = {};
-        crowdSource.sentences = [];
-        <% sentences.forEach(function (sentence) { %>
-            crowdSource.sentences.push({ sentence: " <%= sentence.sentence %>", id: Number(" <%= sentence.sentenceId %>") });
-        <% }); %>
-    </script>
     <script src="js/notyf.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
