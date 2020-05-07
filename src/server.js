@@ -32,8 +32,8 @@ app.use(function (req, res, next) {
     if (cookie === undefined) {
         res.cookie('userId', uuidv4(), {
             maxAge: 60 * 60 * 24 * 365,
-            // httpOnly: true,
-            // secure: true,
+            httpOnly: true,
+            secure: true,
         });
     }
     next();
@@ -62,7 +62,6 @@ router.get('/privacy-policy', function (req, res) {
 router.get('/record', (req, res) => {
     res.render('record.ejs')        
 })
-
 
 
 router.post('/sentences', (req, res) => updateAndFetch(req, res));

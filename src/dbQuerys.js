@@ -9,10 +9,11 @@ const updateDbWithFileName = function (file,id) {
 }
 
 const updateAndFetch = function (req, res) {
-    // let userId = req.cookies.userId;
+    let userId = req.cookies.userId;
+    if(!userId) return res.end(400);
     db.many( updateAndFetchquery)
         .then(data => {
-            res.status(200).send({ sentences: data });
+            res.status(200).send(data);
         })
         .catch(err => {
             console.log(err);
