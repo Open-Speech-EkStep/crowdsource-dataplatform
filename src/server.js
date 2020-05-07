@@ -5,10 +5,13 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 const router = express.Router();
-const {updateDbWithFileName,updateAndFetch} = require('./dbQuerys')
+const {updateDbWithFileName,updateAndFetch,updateAndFetchqueryforRecord} = require('./dbQuerys')
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression')
+const envVars = process.env;
+const pgp = require('pg-promise')();
+const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}/${envVars.DB_NAME}`);
 
 const multer = require('multer')
 const multerStorage = multer.diskStorage({
@@ -27,7 +30,7 @@ app.use(compression())
 app.use(cookieParser());
 app.use(express.json())
 app.use(function (req, res, next) {
-    var cookie = req.cookies.userId;
+    let cookie = req.cookies.userId;
     if (cookie === undefined) {
         res.cookie('userId', uuidv4(), {
             maxAge: 60 * 60 * 24 * 365,
@@ -58,10 +61,20 @@ router.get('/privacy-policy', function (req, res) {
     res.render('privacy-policy.ejs');
 });
 
+router.get('/record', (req, res) => {
+    db.many(updateAndFetchqueryforRecord)
+        .then(data => {
+            res.render('record.ejs', { sentences: data });
+        })
+        .catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+})
 
-router.get('/record', (req,res) =>  updateAndFetch(req,res));
 
 
+router.post('/sentences', (req, res) => updateAndFetch(req, res))
 router.post("/contact-us", (req, res) => {
     res.status(200).send({ success: true })
 })
@@ -69,10 +82,10 @@ router.post("/contact-us", (req, res) => {
 router.post("/upload", upload.any(), (req, res) => {
     const file = req.files[0];
     const id = req.body.sentenceId;
+    updateDbWithFileName(file.filename,id)
     uploadFile(file.path)
     .then(data => {
         res.status(200).send({ success: true })
-        updateDbWithFileName(file.filename,id)
         fs.unlink(file.path, function (err) {
             if (err) console.log(err);
            console.log('File deleted!');
