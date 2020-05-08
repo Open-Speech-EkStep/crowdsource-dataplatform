@@ -4,12 +4,31 @@ body {
 html {
   scroll-behavior: smooth;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+
+html { font-size: 6px; }
+
+@media (min-width: 321px) {
+  html { font-size:  8px;}
+}
+@media (min-width: 576px) {
+    html { font-size:  10px;}
+}
+@media (min-width: 768px) {
+    html { font-size: 12px; }
+}
+@media (min-width: 992px) {
+    html { font-size:  14px; }
+}
+@media (min-width: 1200px) {
+    html { font-size: 15px; }
+}
+@media (min-width: 1400px) {
+  html { font-size: 16px; }
+}
+
+
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6
+ {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
 }
@@ -19,39 +38,30 @@ h6 {
 .pb-6{
     padding-bottom: 6rem;
 }
-div.masthead {
-  position: relative;
-  background-color: #343a40;
-  background: url("../img/bg-masthead.jpg") no-repeat fixed center;
-  background-size: cover;
-  padding-top: 8rem;
-  padding-bottom: 8rem;
-  height: auto;
+.pt-6{
+  padding-top: 6rem;
 }
-
-div.masthead .overlay {
-  position: absolute;
-  background-color: #212529;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0.2;
-}
-
-div.masthead h1 {
-  font-size: 2rem;
-}
-
-@media (min-width: 768px) {
-  div.masthead {
-    padding-top: 8rem;
-    padding-bottom: 12rem;
-  }
-  div.masthead h1 {
-    font-size: 3rem;
-  }
+.lh-7{
+line-height: 1.7;
 }
 .material-icons.md-48 {
   font-size: 48px;
+}
+.font-wt-800{
+  font-weight: 800;
+}
+.display-5{
+  font-size: 3rem;
+}
+#header-img{
+  background-image: url(../img/home.png);
+  background-size:     cover;                    
+  background-repeat:   no-repeat;
+  background-position: center center; 
+}
+.site-blue{
+  color: #11223F;
+}
+.border-3{
+  border: 3px solid #007bff;
 }
