@@ -1,109 +1,168 @@
 body {
-    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
-  html {
-    scroll-behavior: smooth;
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 700;
-  }
-  * {
-    box-sizing: border-box;
-  }
-  .pb-6{
-    padding-bottom: 6rem;
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-  .material-icons.md-48 { font-size: 48px; }
-  .material-icons.blue { color: #007bff; }
-  div.progress-bar, div.progress{
-      height: 25px;
+html {
+  scroll-behavior: smooth;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}
+* {
+  box-sizing: border-box;
+}
+.pb-6 {
+  padding-bottom: 6rem;
+}
+.material-icons.md-48 {
+  font-size: 48px;
+}
+.material-icons.blue {
+  color: #007bff;
+}
+.display-5 {
+  font-size: 3rem;
+}
+.recorder-container {
+  width: 61px;
+  background-color: #e74c3c;
+  display: block;
+  border-radius: 100%;
+  box-shadow: 0px 0px 15px 2px #bdc3c7;
+  cursor: default;
+  transition: 0.3s all ease-in;
+  position: relative;
+}
+.recorder-container .icon-microphone {
+  color: #fff;
+  font-size: 60px;
+  line-height: 61px;
+  display: block;
+  text-align: center;
+  transition: 0.1s all ease-in;
+  position: relative;
+}
+
+.recorder-container .outer {
+  width: 59px;
+  height: 59px;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  border-radius: 100%;
+  position: absolute;
+  background-color: transparent;
+  border: 1px solid #7f8c8d;
+  z-index: -1;
+  transition: 1.5s all ease;
+  -webkit-animation: woong 1.5s infinite;
+  animation: woong 1.5s infinite;
+}
+
+.recorder-container .outer-2 {
+  width: 61px;
+  height: 61px;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  border-radius: 100%;
+  position: absolute;
+  background-color: #bdc3c7;
+  z-index: -1;
+  transition: 1.5s all ease;
+  -webkit-animation: woong-2 1.5s infinite;
+  animation: woong-2 1.5s infinite;
+  -webkit-animation-delay: 2.5s;
+  animation-delay: 2.5s;
+}
+@-webkit-keyframes woong {
+  0% {
+    -webkit-trasform: scale(1.2);
   }
-  .recorder-container {
-    width: 75px;
-    background-color: #e74c3c;
-    display: block;
-    border-radius: 100%;
-    box-shadow: 0px 0px 15px 2px #bdc3c7;
-    cursor: default;
-    transition: .3s all ease-in;
-    position: relative;
+  50% {
+    -webkit-transform: scale(1.8);
+    opacity: 0.5;
   }
-  .recorder-container .icon-microphone {
-    color: #fff;
-    font-size: 60px;
-    line-height: 75px;
-    display: block;
-    text-align: center;
-    transition: .1s all ease-in;
-    position: relative;
+  100% {
+    -webkit-transform: scale(2.4);
+    opacity: 0;
   }
-  
-  .recorder-container .outer {
-    width: 74px;
-    height: 74px;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    border-radius: 100%;
-    position: absolute;
-    background-color: transparent;
-    border: 1px solid #7f8c8d;
-    z-index: -1;
-    transition: 1.5s all ease;
-    -webkit-animation: woong 1.5s infinite;
-    animation: woong 1.5s infinite;
+}
+
+@-webkit-keyframes woong-2 {
+  0% {
+    -webkit-transform: scale(1.2);
+    opacity: 0.6;
   }
-  
-  .recorder-container .outer-2 {
-    width: 75px;
-    height: 75px;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    border-radius: 100%;
-    position: absolute;
-    background-color: #bdc3c7;
-    z-index: -1;
-    transition: 1.5s all ease;
-    -webkit-animation: woong-2 1.5s infinite;
-    animation: woong-2 1.5s infinite;
-    -webkit-animation-delay: 2.5s;
-    animation-delay: 2.5s;
+  50% {
+    -webkit-transform: scale(1.6);
+    opacity: 0.5;
   }
-  @-webkit-keyframes woong {
-    0% {
-      -webkit-trasform: scale(1.2);
-    }
-    50% {
-      -webkit-transform: scale(1.8);
-      opacity: 0.5;
-    }
-    100% {
-      -webkit-transform: scale(2.4);
-      opacity: 0;
-    }
+  100% {
+    -webkit-transform: scale(2);
+    opacity: 0;
   }
-  
-  @-webkit-keyframes woong-2 {
-    0% {
-      -webkit-transform: scale(1.2);
-      opacity: 0.6;
-    }
-    50% {
-      -webkit-transform: scale(1.6);
-      opacity: 0.5;
-    }
-    100% {
-      -webkit-transform: scale(2);
-      opacity: 0;
-    }
-  }
-  canvas#visualizer {
-    width: 100%;
-    border: 1px solid white;
-    height: 120px;
-} 
+}
+canvas#visualizer {
+  width: 100%;
+  border: 1px solid white;
+  height: 120px;
+}
+audio {
+  width: 40%;
+}
+/* .overlay{
+  background-color: rgba(0,0,0,0.5);
+  position: fixed; 
+  width: 100%; 
+  height: 100%;
+  z-index: 100;
+  top: 0; 
+  left: 0;
+} */
+
+/* loader */
+/* .overlay {
+  left: 0;
+  top: 150;
+  width: 100%;
+  height: 0%;
+  position: fixed;
+}
+
+.overlay__inner {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+} */
+
+.overlay__content {
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner {
+  width: 10rem;
+  height: 10rem;
+  display: inline-block;
+  border-width: 12px;
+  border-color: #007bff;
+  border-top-color: #fff;
+  animation: spin 1s infinite linear;
+  border-radius: 100%;
+  border-style: solid;
+}
+
+@keyframes spin {
+100% {
+  transform: rotate(360deg);
+}
+}
+/* loader end */

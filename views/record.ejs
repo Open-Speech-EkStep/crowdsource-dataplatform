@@ -4,12 +4,11 @@
 <head>
     <title>Crowd Sourcing Platform</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="css/notyf.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
-        type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" type="text/css" href="css/record.css">
@@ -17,96 +16,106 @@
 
 <body>
     <%- include common/header.ejs %>
-    <div class="container pt-5 pb-6 mb-5">
-        <div class="row justify-content-center my-5">
-            <div class="col-lg-10 text-center">
-                <span class="h2" id="currentSentenceLbl"></span>
-                <span class="h2">/</span>
-                <span class="h2" id="totalSentencesLbl"></span>
-            </div>
-        </div>
-        <div class="row justify-content-center my-5">
-            <div class="col-lg-10">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width: 3%">0</div>
+    <div id="loader" class="overlay__content"><span class="spinner"></span></div>
+    <div id="page-content" class="d-none">
+        <div class="container-fluid pt-5 pb-6 mb-5 mt-5">
+
+            <div class="row justify-content-center my-5">
+                <div class="col-md-8 col-sm-10 text-center">
+                    <label class="animated display-5" id="sentenceLbl"></label>
                 </div>
             </div>
-        </div>
-        <div class="row justify-content-center my-5">
-            <div class="col-lg-10 text-center">
-                <label class="animated  h2" id="sentenceLbl"></label>
-            </div>
-        </div>
-        <div class="row justify-content-center my-5">
-            <div class="col-lg-4 col-md-8 text-center">
-                <div>
-                    
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-5">
+                    <div class="progress mt-1">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width: 0.5%"></div>
+                    </div>
                 </div>
-                <button type="button" class="btn btn-primary" id="startRecord">
-                    <i class="material-icons align-middle md-48">record_voice_over</i>
-                    <span class="align-middle pl-2">
-                        Record
-                    </span>
-                </button>
+                <div class="col-lg-1">
+                    <span class="" id="currentSentenceLbl"></span>
+                    <span class="">/</span>
+                    <span class="" id="totalSentencesLbl"></span>
+                </div>
             </div>
-            <div class="col-lg-4 col-md-8 text-center justify-content-center mx-auto">
-                <div class="row justify-content-center">
+            <div class="row justify-content-center ">
+                <div class="col-6 text-muted" id="get-started">
+                    Let's get started!
+                </div>
+            </div>
+            <div class="row justify-content-center my-5">
+                <div class="col-2">
+                    <button type="button" class=" btn btn-primary shadow-lg w-100 rounded mt-4 p-3"
+                        id="startRecord">
+                        <i class="material-icons align-middle mr-2">record_voice_over</i>
+                        <span class="align-middle font-weight-bold">
+                            START RECORDING
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="row justify-content-center my-5">
+                <div class="col-md-1 ">
                     <div id="recording-sign" class="recorder-container d-none">
                         <div class="outer"></div>
                         <div class="outer-2"></div>
                         <div class="icon-microphone"> <i class="material-icons md-48">mic</i></div>
                     </div>
                 </div>
-            
+                <div class="col-lg-5 col-md-8 text-center">
+                    <canvas id="visualizer"></canvas>
+                </div>
             </div>
-            <div class="col-lg-4 col-md-8 text-center">
-                <button type="button" class="btn btn-primary" disabled id="stopRecord">
-                    <i class="material-icons align-middle md-48">voice_over_off</i>
-                    <span class="align-middle pl-2">
-                        Stop
-                    </span>
-                </button>
+            <div class="row justify-content-center mt-5">
+                <div class="col-2">
+                    <button type="button" id="stopRecord" class="d-none btn btn-primary shadow-lg w-100 rounded mt-4 p-3">
+                        <i class="material-icons align-middle mr-2">voice_over_off</i>
+                        <span class="align-middle font-weight-bold">
+                            STOP RECORDING
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10 text-center">
+                    <audio class="d-none" id="player" controls tabindex="-1"></audio>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-2">
+                    <button type="button" id="reRecord" class="d-none btn btn-outline-primary w-100 rounded mt-4 p-3">
+                        <i class="material-icons align-middle mr-2">repeat</i>
+                        <span class="align-middle font-weight-bold">
+                            RE_RECORD
+                        </span>
+                    </button>
+                </div>
+                <div class="col-lg-2">
+                    <button type="button" id="nextBtn" class="d-none btn btn-primary shadow-lg w-100 rounded mt-4 p-3">
+                        <i class="material-icons align-middle mr-2">navigate_next</i>
+                        <span class="align-middle font-weight-bold">
+                            NEXT
+                        </span>
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="row justify-content-center my-5">
-            <div class="col-lg-8 col-md-10 text-center">
-                <canvas class="d-none" id="visualizer"></canvas>
-            </div>
-        </div>
-        <div class="row justify-content-center my-5">
-            <div class="col-lg-8 col-md-10 text-center">
-                <audio class="d-none" id="player" controls></audio>
-            </div>
-        </div>
-        <div class="row justify-content-center my-5">
-            <div class="col-lg-8 col-md-10 text-center">
-                <button type="button" class="btn btn-success" disabled id="nextBtn">
-                    <i class="material-icons align-middle md-48">cloud_upload</i>
-                    <span class="align-middle pl-2">
-                        Upload
-                    </span>
-                </button>
-            </div>
-        </div>
-
     </div>
+ 
     <%- include common/footer.ejs %>
-
-
 
 
     <script src="js/recorder.js"></script>
     <script src="js/notyf.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <script src="js/record.js"></script>
 </body>
 
