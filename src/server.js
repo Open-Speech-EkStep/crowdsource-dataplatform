@@ -5,10 +5,14 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 const router = express.Router();
-const {updateDbWithFileName,updateAndFetch} = require('./dbQuerys')
+const { updateDbWithFileName, updateAndFetch } = require('./dbQuerys')
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
-const compression = require('compression')
+const compression = require('compression');
+const Ddos = require('ddos')
+const ddos = new Ddos({ burst: 6, limit: 50 })
+app.use(ddos.express);
+
 
 
 const multer = require('multer')
@@ -24,7 +28,7 @@ const upload = multer({ storage: multerStorage })
 
 app.use(helmet())
 app.disable('x-powered-by');
-app.use(compression())
+app.use(compression());
 app.use(cookieParser());
 app.use(express.json())
 app.use(function (req, res, next) {
@@ -60,7 +64,7 @@ router.get('/privacy-policy', function (req, res) {
 });
 
 router.get('/record', (req, res) => {
-    res.render('record.ejs')        
+    res.render('record.ejs')
 })
 
 
@@ -73,19 +77,19 @@ router.post("/contact-us", (req, res) => {
 router.post("/upload", upload.any(), (req, res) => {
     const file = req.files[0];
     const id = req.body.sentenceId;
-    updateDbWithFileName(file.filename,id)
+    updateDbWithFileName(file.filename, id)
     uploadFile(file.path)
-    .then(data => {
-        res.status(200).send({ success: true })
-        fs.unlink(file.path, function (err) {
-            if (err) console.log(err);
-           console.log('File deleted!');
-        }); 
-    })
-    .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-    });
+        .then(data => {
+            res.status(200).send({ success: true })
+            fs.unlink(file.path, function (err) {
+                if (err) console.log(err);
+                console.log('File deleted!');
+            });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.sendStatus(500);
+        });
 })
 
 
