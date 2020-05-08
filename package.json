@@ -24,6 +24,7 @@
     "chai": "^4.2.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
+    "ddos": "^0.2.1",
     "dotenv": "^8.2.0",
     "ejs": "^1.0.0",
     "express": "^4.17.1",
