@@ -9,9 +9,9 @@ const { updateDbWithFileName, updateAndFetch } = require('./dbQuerys')
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
-const Ddos = require('ddos')
-const ddos = new Ddos({ burst: 6, limit: 50 })
-app.use(ddos.express);
+// const Ddos = require('ddos')
+// const ddos = new Ddos({ burst: 6, limit: 50 })
+// app.use(ddos.express);
 
 
 
@@ -62,13 +62,16 @@ router.get('/terms-and-conditions', function (req, res) {
 router.get('/privacy-policy', function (req, res) {
     res.render('privacy-policy.ejs');
 });
+router.get('/thank-you', function (req, res) {
+    res.render('thank-you.ejs');
+});
 
 router.get('/record', (req, res) => {
     res.render('record.ejs')
 })
 
 
-router.post('/sentences', (req, res) => updateAndFetch(req, res));
+router.get('/sentences', (req, res) => updateAndFetch(req, res));
 
 router.post("/contact-us", (req, res) => {
     res.status(200).send({ success: true })
@@ -91,7 +94,9 @@ router.post("/upload", upload.any(), (req, res) => {
             res.sendStatus(500);
         });
 })
-
+router.get("*", (req, res) => {
+    res.render('not-found.ejs');
+});
 
 app.use('/', router);
 
