@@ -7,7 +7,7 @@
     "start": "node src/server.js",
     "watch": "nodemon src/server.js",
     "start-cluster": "pm2 start src/server.js -i 2",
-    "test": "mocha"
+    "test": "ENCRYPTION_KEY=oDNfdP0UrceNfafgAg77Fk35KkcHfo0uyFCWEFCEWof mocha"
   },
   "repository": {
     "type": "git",
