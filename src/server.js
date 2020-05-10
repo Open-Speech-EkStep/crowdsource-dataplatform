@@ -35,9 +35,9 @@ app.use(function (req, res, next) {
     let cookie = req.cookies.userId;
     if (cookie === undefined) {
         res.cookie('userId', uuidv4(), {
-            maxAge: 60 * 60 * 24 * 365,
+            maxAge: 60 * 60 * 24 * 365*1000,
             httpOnly: true,
-            secure: true,
+            // secure: true,
         });
     }
     next();

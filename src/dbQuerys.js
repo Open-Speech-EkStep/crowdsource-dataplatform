@@ -13,7 +13,7 @@ const updateDbWithFileName = function (file, id) {
 const updateAndFetch = function (req, res) {
     let userId = req.cookies.userId;
     console.log(userId)
-    if (!userId) { return res.end("Wrong UserId"); }
+    if (!userId) { return res.send(500); }
     db.many(updateAndFetchquery)
         .then(data => {
             console.log("data from DB received");
