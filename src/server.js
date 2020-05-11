@@ -80,7 +80,6 @@ router.post("/contact-us", (req, res) => {
 router.post("/upload", upload.any(), (req, res) => {
     const file = req.files[0];
     const userId = req.body.sentenceId;
-    console.log(userId)
     const speakerDetails = req.body.speakerDetails;   
     updateDbWithFileName(file.filename, userId,speakerDetails)
     uploadFile(file.path)

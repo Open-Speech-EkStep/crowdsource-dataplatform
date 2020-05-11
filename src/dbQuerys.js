@@ -9,7 +9,6 @@ const updateAndFetchquery = 'update sentences set assign = true, \
 where assign = false limit 10) returning *;'
 
 const updateDbWithFileName = function (file, id,speakerDetails) {
-    // console.log(speakerDetails)
     const speakerDetailsJson = JSON.parse( speakerDetails);
     const ageGroup = encrypt(speakerDetailsJson.age);
     const gender = encrypt(speakerDetailsJson.gender);
@@ -22,7 +21,8 @@ const updateDbWithFileName = function (file, id,speakerDetails) {
 const updateAndFetch = function (req, res,) {
     const userId = req.cookies.userId;
     if (!userId) { return res.send(500); }
-    db.many(updateAndFetchquery,[userId])
+    const encryptUserId = encrypt(userId);
+    db.many(updateAndFetchquery,[encryptUserId])
         .then(data => {
             console.log("data from DB received");
             res.status(200).send(data);
