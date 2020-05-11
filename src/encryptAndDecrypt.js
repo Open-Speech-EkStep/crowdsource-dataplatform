@@ -3,7 +3,6 @@ const algorithm = 'aes-256-ctr';
 const PASSWORD = process.env.ENCRYPTION_KEY;
 const ENCRYPTION_KEY = Buffer.from(PASSWORD, 'base64');
 const IV_LENGTH = 16;
-console.log(Buffer.from('FoCKvdLslUuB4y3EZlKate7XGottHski1LmyqJHvUhs=', 'base64'))
 
 function encrypt(text) {
     if (text == undefined) return;
@@ -32,7 +31,3 @@ module.exports = {
     encrypt,
     decrypt
 }
-
-let a = encrypt(JSON.stringify({ a: "ff", b: "fsf" }));
-let b = decrypt(a);
-console.log(a, b);
