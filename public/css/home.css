@@ -45,10 +45,10 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6
 line-height: 1.7;
 }
 .material-icons.md-48 {
-  font-size: 48px;
+  font-size: 2.5rem;
 }
-.font-wt-800{
-  font-weight: 800;
+.font-wt-900{
+  font-weight: 900;
 }
 .display-5{
   font-size: 3rem;
