@@ -28,7 +28,6 @@
     "dotenv": "^8.2.0",
     "ejs": "^1.0.0",
     "express": "^4.17.1",
-    "express-force-ssl": "^0.3.2",
     "helmet": "^3.22.0",
     "mocha": "^7.1.2",
     "multer": "^1.4.2",
