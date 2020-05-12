@@ -14,15 +14,15 @@ const http = require('http');
 // const Ddos = require('ddos')
 // const ddos = new Ddos({ burst: 6, limit: 50 })
 // app.use(ddos.express);
-//
+
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/codmento.com/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/etc/letsencrypt/live/codmento.com/cert.pem', 'utf8');
 const ca = fs.readFileSync('/etc/letsencrypt/live/codmento.com/chain.pem', 'utf8');
 
 const credentials = {
-	  key: privateKey,
-          cert: certificate,
-	  ca: ca
+    key: privateKey,
+    cert: certificate,
+    ca: ca
 };
 
 const multer = require('multer')
@@ -35,7 +35,7 @@ const multerStorage = multer.diskStorage({
     }
 })
 const upload = multer({ storage: multerStorage })
-app.use(express.static(__dirname, { dotfiles: 'allow' } ));
+app.use(express.static(__dirname, { dotfiles: 'allow' }));
 app.use(helmet())
 app.disable('x-powered-by');
 app.use(compression());
@@ -45,7 +45,7 @@ app.use(function (req, res, next) {
     let cookie = req.cookies.userId;
     if (cookie === undefined) {
         res.cookie('userId', uuidv4(), {
-            maxAge: 60 * 60 * 24 * 365*1000,
+            maxAge: 60 * 60 * 24 * 365 * 1000,
             httpOnly: true,
             // secure: true,
         });
@@ -89,9 +89,10 @@ router.post("/contact-us", (req, res) => {
 
 router.post("/upload", upload.any(), (req, res) => {
     const file = req.files[0];
-    const userId = req.body.sentenceId;
-    const speakerDetails = req.body.speakerDetails;   
-    updateDbWithFileName(file.filename, userId,speakerDetails)
+    const sentenceId = req.body.sentenceId;
+    const speakerDetails = req.body.speakerDetails;
+    const userId = req.cookies.userId
+    updateDbWithFileName(file.filename, sentenceId, speakerDetails, userId)
     uploadFile(file.path)
         .then(data => {
             res.status(200).send({ success: true })
@@ -105,20 +106,20 @@ router.post("/upload", upload.any(), (req, res) => {
             res.sendStatus(500);
         });
 })
-//router.get("*", (req, res) => {
-  //  res.render('not-found.ejs');
-//});
+// router.get("*", (req, res) => {
+//     res.render('not-found.ejs');
+// });
 
 app.use('/', router);
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app);
 
-httpServer.listen(80, () => {
-	    console.log('HTTP Server running on port 80');
+httpServer.listen(3000, () => {
+    console.log('HTTP Server running on port 80');
 });
 
 httpsServer.listen(443, () => {
-	    console.log('HTTPS Server running on port 443');
+    console.log('HTTPS Server running on port 443');
 });
 
 module.exports = app;

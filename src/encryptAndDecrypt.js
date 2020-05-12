@@ -5,7 +5,7 @@ const ENCRYPTION_KEY = Buffer.from(PASSWORD, 'base64');
 const IV_LENGTH = 16;
 
 function encrypt(text) {
-    if (text == undefined) return;
+    if (!text) return;
     if (Number.isInteger(text))
         text = text.toString();
     let iv = crypto.randomBytes(IV_LENGTH);
@@ -16,7 +16,7 @@ function encrypt(text) {
 }
 
 function decrypt(text) {
-    if (text == undefined) { return; }
+    if (!text)  return; 
     let textParts = text.split(':');
     let iv = Buffer.from(textParts.shift(), 'hex');
     let encryptedText = Buffer.from(textParts.join(':'), 'hex');
