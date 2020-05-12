@@ -1,5 +1,6 @@
 const speakerDetailsKey = "speakerDetails";
 const sentencesKey = "sentences";
+const currentIndexKey = "currentIndex";
 const initialize = () => {
     const sentences = crowdSource.sentences;
     const currentSentenceLbl = document.getElementById("currentSentenceLbl");
@@ -12,22 +13,17 @@ const initialize = () => {
     const $player = $("#player");
     const $nextBtn = $("#nextBtn");
     const $getStarted = $("#get-started");
-    const currentIndexKey = "currentIndex";
     const currentIndexInStorage = localStorage.getItem(currentIndexKey);
-    
-    // const completedBatch = document.getElementById("completedBatch");
-    // const completedBatchKey = "completedBatch";
-    // const completedBatchValue = localStorage.getItem(completedBatchKey);
     const $recordingSign = $("#recording-sign");
     const $progressBar = $(".progress-bar");
-    
+
     function animateCSS(element, animationName, callback) {
         const node = document.querySelector(element)
         node.classList.add('animated', animationName)
         function handleAnimationEnd() {
             node.classList.remove('animated', animationName)
             node.removeEventListener('animationend', handleAnimationEnd)
-    
+
             if (typeof callback === 'function') callback()
         }
         node.addEventListener('animationend', handleAnimationEnd)
@@ -41,17 +37,17 @@ const initialize = () => {
         animateCSS('#sentenceLbl', 'lightSpeedIn');
         currentIndex && setProgressBar(currentIndex)
     };
-    
+
     const setCurrentSentenceIndex = (index) => currentSentenceLbl.innerText = index;
     const setTotalSentenceIndex = (index) => totalSentencesLbl.innerText = index;
-    
+
     let currentIndex = Number(currentIndexInStorage) || 0;
-    
+
     const totalItems = sentences.length;
     setSentenceText(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    
+
     const notyf = new Notyf({
         duration: 3000,
         position: { x: 'right', y: 'top' },
@@ -73,7 +69,7 @@ const initialize = () => {
     let input;
     //MediaStreamAudioSourceNode we'll be recording 
     let cleartTimeoutKey;
-    
+
     $startRecordBtn.add($reRecordBtn).on('click', () => {
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             .then((stream) => {
@@ -85,7 +81,7 @@ const initialize = () => {
                 $nextBtn.addClass('d-none');
                 $player.addClass('d-none');
                 $visualizer.removeClass("d-none");
-    
+
                 gumStream = stream;
                 // shim for AudioContext when it's not avb. 
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -109,10 +105,10 @@ const initialize = () => {
             .catch(err => {
                 console.log(err)
                 notyf.error("Sorry !!! We could not get access to your audio input device");
-                $startRecordBtn.prop('disabled', false);
+                $startRecordBtn.removeClass('d-none');
             })
     });
-    
+
     $stopRecordBtn.on('click', () => {
         clearTimeout(cleartTimeoutKey);
         $stopRecordBtn.addClass("d-none");
@@ -122,7 +118,7 @@ const initialize = () => {
         $startRecordBtn.addClass("d-none");
         $player.removeClass('d-none');
         $visualizer.addClass("d-none");
-    
+
         rec.stop(); //stop microphone access 
         gumStream.getAudioTracks()[0].stop();
         //create the wav blob and pass it on to createObjectURL 
@@ -133,23 +129,25 @@ const initialize = () => {
             $player.prop("src", bloburl)
         });
     });
-    
+
     $nextBtn.on('click', () => {
+        uploadToServer();
         if (currentIndex == totalItems - 1) {
             localStorage.removeItem(sentencesKey);
             localStorage.removeItem(currentIndexKey);
             notyf.success("Congratulations!!! You have completed this batch of sentences");
             setProgressBar(currentIndex);
-            window.location.href="/thank-you";
+            setTimeout(() => {
+                window.location.href = "/thank-you";
+            }, 2000);
         }
-        if (currentIndex < totalItems - 1) {
-            uploadToServer();
+        else if (currentIndex < totalItems - 1) {
             currentIndex++;
             setSentenceText(currentIndex);
             setCurrentSentenceIndex(currentIndex + 1);
-            localStorage.setItem(currentIndexKey,currentIndex);
+            localStorage.setItem(currentIndexKey, currentIndex);
         }
-    
+
         $player.addClass('d-none');
         $nextBtn.addClass('d-none');
         $reRecordBtn.addClass('d-none');
@@ -161,7 +159,7 @@ const initialize = () => {
             $getStarted.hide();
         }
     })
-    
+
     function uploadToServer() {
         var fd = new FormData();
         fd.append("audio_data", crowdSource.audioBlob);
@@ -173,7 +171,6 @@ const initialize = () => {
         })
             .then(res => res.json())
             .then(result => {
-                console.log(result);
             })
             .catch(err => {
                 console.log(err)
@@ -192,7 +189,7 @@ const initialize = () => {
             // and sending floatarray with each call...
             requestAnimationFrame(draw);
             analyser.getByteTimeDomainData(dataArray);
-            canvasCtx.fillStyle = 'rgb(255, 255, 255)';
+            canvasCtx.fillStyle = 'rgb(255, 255, 255, 0.8)';
             canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
             canvasCtx.lineWidth = 2;
             canvasCtx.strokeStyle = 'rgb(0,123,255)';
@@ -216,29 +213,32 @@ const initialize = () => {
     }
 }
 $(document).ready(() => {
-    if(!localStorage.getItem(speakerDetailsKey)){
+    if (!localStorage.getItem(speakerDetailsKey)) {
         window.location.href = '/';
+        return;
     }
     window.crowdSource = {};
     const localSentences = localStorage.getItem(sentencesKey);
     const $loader = $("#loader");
     const $pageContent = $("#page-content")
     if (localSentences) {
-        console.log("sentence taken from local")
-        crowdSource.sentences = JSON.parse( localSentences);
+        crowdSource.sentences = JSON.parse(localSentences);
         $loader.hide();
         $pageContent.removeClass('d-none')
         initialize();
     }
     else {
-        fetch('/sentences')
+        localStorage.removeItem(currentIndexKey);
+        fetch('/sentences', {
+            method: "POST"
+        })
             .then(data => data.json())
             .then(sentenceData => {
                 crowdSource.sentences = sentenceData;
                 $loader.hide();
                 $pageContent.removeClass('d-none')
                 initialize();
-                localStorage.setItem(sentencesKey,JSON.stringify(sentenceData));
+                localStorage.setItem(sentencesKey, JSON.stringify(sentenceData));
             })
             .catch((err) => {
                 console.log(err);

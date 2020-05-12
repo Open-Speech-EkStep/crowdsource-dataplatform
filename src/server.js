@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 const router = express.Router();
-const { updateDbWithFileName, updateAndFetch } = require('./dbQuerys')
+const { updateDbWithFileName, updateAndGetSentences } = require('./dbQuerys')
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
@@ -15,15 +15,15 @@ const http = require('http');
 // const ddos = new Ddos({ burst: 6, limit: 50 })
 // app.use(ddos.express);
 
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/codmento.com/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/codmento.com/cert.pem', 'utf8');
-const ca = fs.readFileSync('/etc/letsencrypt/live/codmento.com/chain.pem', 'utf8');
+// const privateKey = fs.readFileSync('/etc/letsencrypt/live/codmento.com/privkey.pem', 'utf8');
+// const certificate = fs.readFileSync('/etc/letsencrypt/live/codmento.com/cert.pem', 'utf8');
+// const ca = fs.readFileSync('/etc/letsencrypt/live/codmento.com/chain.pem', 'utf8');
 
-const credentials = {
-    key: privateKey,
-    cert: certificate,
-    ca: ca
-};
+// const credentials = {
+//     key: privateKey,
+//     cert: certificate,
+//     ca: ca
+// };
 
 const multer = require('multer')
 const multerStorage = multer.diskStorage({
@@ -47,6 +47,7 @@ app.use(function (req, res, next) {
         res.cookie('userId', uuidv4(), {
             maxAge: 60 * 60 * 24 * 365 * 1000,
             httpOnly: true,
+            // uncomment this line when deployed on HTTPS using SSL
             // secure: true,
         });
     }
@@ -54,8 +55,6 @@ app.use(function (req, res, next) {
 });
 app.use(express.static('public'))
 app.set('view engine', 'ejs');
-
-
 
 router.get('/', function (req, res) {
     res.render('home.ejs');
@@ -81,7 +80,7 @@ router.get('/record', (req, res) => {
 })
 
 
-router.get('/sentences', (req, res) => updateAndFetch(req, res));
+router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 
 router.post("/contact-us", (req, res) => {
     res.status(200).send({ success: true })
@@ -92,10 +91,11 @@ router.post("/upload", upload.any(), (req, res) => {
     const sentenceId = req.body.sentenceId;
     const speakerDetails = req.body.speakerDetails;
     const userId = req.cookies.userId
-    updateDbWithFileName(file.filename, sentenceId, speakerDetails, userId)
     uploadFile(file.path)
         .then(data => {
-            res.status(200).send({ success: true })
+            updateDbWithFileName(file.filename, sentenceId, speakerDetails, userId, (resStatus, resBody) => {
+                res.status(resStatus).send(resBody);
+            })
             fs.unlink(file.path, function (err) {
                 if (err) console.log(err);
                 console.log('File deleted!');
@@ -112,14 +112,14 @@ router.post("/upload", upload.any(), (req, res) => {
 
 app.use('/', router);
 const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials, app);
+// const httpsServer = https.createServer(credentials, app);
 
 httpServer.listen(3000, () => {
     console.log('HTTP Server running on port 80');
 });
 
-httpsServer.listen(443, () => {
-    console.log('HTTPS Server running on port 443');
-});
+// httpsServer.listen(443, () => {
+//     console.log('HTTPS Server running on port 443');
+// });
 
 module.exports = app;

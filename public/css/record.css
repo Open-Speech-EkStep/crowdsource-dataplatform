@@ -1,26 +1,39 @@
 body {
   font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-html {
-  scroll-behavior: smooth;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6
+ {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
 }
 * {
   box-sizing: border-box;
 }
+html { font-size: 6px; }
+
+@media (min-width: 321px) {
+  html { font-size:  8px;}
+}
+@media (min-width: 576px) {
+    html { font-size:  10px;}
+}
+@media (min-width: 768px) {
+    html { font-size: 12px; }
+}
+@media (min-width: 992px) {
+    html { font-size:  14px; }
+}
+@media (min-width: 1200px) {
+    html { font-size: 15px; }
+}
+@media (min-width: 1400px) {
+  html { font-size: 16px; }
+}
 .pb-6 {
   padding-bottom: 6rem;
 }
 .material-icons.md-48 {
-  font-size: 48px;
+  font-size: 2.5rem;
 }
 .material-icons.blue {
   color: #007bff;
@@ -29,7 +42,7 @@ h6 {
   font-size: 3rem;
 }
 .recorder-container {
-  width: 61px;
+  width: 4rem;
   background-color: #e74c3c;
   display: block;
   border-radius: 100%;
@@ -40,8 +53,8 @@ h6 {
 }
 .recorder-container .icon-microphone {
   color: #fff;
-  font-size: 60px;
-  line-height: 61px;
+  font-size: 4rem;
+  line-height: 4rem;
   display: block;
   text-align: center;
   transition: 0.1s all ease-in;
@@ -49,8 +62,8 @@ h6 {
 }
 
 .recorder-container .outer {
-  width: 59px;
-  height: 59px;
+  width: 4rem;
+  height: 4rem;
   -webkit-transform: scale(1);
   transform: scale(1);
   border-radius: 100%;
@@ -64,8 +77,8 @@ h6 {
 }
 
 .recorder-container .outer-2 {
-  width: 61px;
-  height: 61px;
+  width: 4rem;
+  height: 4rem;
   -webkit-transform: scale(1);
   transform: scale(1);
   border-radius: 100%;
@@ -112,42 +125,18 @@ canvas#visualizer {
   height: 120px;
 }
 audio {
-  width: 40%;
+  width: 80%;
 }
-/* .overlay{
-  background-color: rgba(0,0,0,0.5);
-  position: fixed; 
-  width: 100%; 
-  height: 100%;
-  z-index: 100;
-  top: 0; 
-  left: 0;
-} */
-
+.sans-serif{
+  font-family: Arial, Helvetica, sans-serif;
+}
 /* loader */
-/* .overlay {
-  left: 0;
-  top: 150;
-  width: 100%;
-  height: 0%;
-  position: fixed;
-}
-
-.overlay__inner {
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-} */
-
 .overlay__content {
   left: 50%;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
 }
-
 .spinner {
   width: 10rem;
   height: 10rem;
@@ -159,7 +148,6 @@ audio {
   border-radius: 100%;
   border-style: solid;
 }
-
 @keyframes spin {
 100% {
   transform: rotate(360deg);

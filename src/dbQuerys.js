@@ -3,8 +3,8 @@ const { encrypt, decrypt } = require("./encryptAndDecrypt")
 const envVars = process.env;
 const pgp = require('pg-promise')();
 const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}/${envVars.DB_NAME}`);
-//, userId = $1
-const updateAndFetchquery = 'update sentences set assign = true, \
+
+const updateAndGetSentencesQuery = 'update sentences set assign = true, \
 "assignDate" = current_date, "userId" = $1 where "sentenceId" in (select "sentenceId" from sentences \
 where assign = false limit 10) returning *;'
 
@@ -13,41 +13,42 @@ where "sentenceId" = $6;'
 
 const setNewUserAndFileName = 'insert into changeduser ("fileName","userName","ageGroup","gender","state","userId","sentenceId") values ($1,$2,$3,$4,$5,$6,$7);'
 
-const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId) {
+const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId, cb) {
     const encryptUserId = encrypt(userId)
     let ageGroup = null, gender = null, state = null, userName = null;
-    console.log(sentenceId);
     const speakerDetailsJson = JSON.parse(speakerDetails);
     if (speakerDetailsJson) {
-        console.log(speakerDetails);
         ageGroup = encrypt(speakerDetailsJson.age);
         gender = encrypt(speakerDetailsJson.gender);
         state = encrypt(speakerDetailsJson.state);
         userName = encrypt(speakerDetailsJson.username);
     }
 
-
-    db.any('select "userId" from sentences where "sentenceId" = $1', sentenceId)
+    db.one('select "userId" from sentences where "sentenceId" = $1', sentenceId)
         .then(data => {
-            const decryptedUserId = decrypt(data[0].userId)
-            if (decryptedUserId == userId) {
+            const decryptedUserId = decrypt(data.userId)
+            if (decryptedUserId === userId) {
                 db.any(setUserDetailsAndFileName, [file, userName, ageGroup, gender, state, sentenceId, encryptUserId])
+                .then(() => cb(200,{success:true}))
+                .catch(() => cb(500,{error:true}))
             } else {
                 db.any(setNewUserAndFileName, [file, userName, ageGroup, gender, state, encryptUserId,sentenceId])
+                .then(() => cb(200,{success:true}))
+                .catch(() => cb(500,{error:true}))
             }
         })
         .catch(err => {
             console.log(err);
+            cb(500,{error:true})
         })
 }
 
-const updateAndFetch = function (req, res, ) {
+const updateAndGetSentences = function (req, res) {
     const userId = req.cookies.userId;
-    if (!userId) { return res.send(500); }
+    if (!userId) { return res.sendStatus(400).send("Invalid UserId"); }
     const encryptUserId = encrypt(userId);
-    db.many(updateAndFetchquery, [encryptUserId])
+    db.many(updateAndGetSentencesQuery, [encryptUserId])
         .then(data => {
-            console.log("data from DB received");
             res.status(200).send(data);
         })
         .catch(err => {
@@ -57,6 +58,6 @@ const updateAndFetch = function (req, res, ) {
 }
 
 module.exports = {
-    updateAndFetch,
+    updateAndGetSentences,
     updateDbWithFileName
 } 
