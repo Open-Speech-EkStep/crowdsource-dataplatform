@@ -9,11 +9,21 @@ const { updateDbWithFileName, updateAndFetch } = require('./dbQuerys')
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
+const https = require('https');
+const http = require('http');
 // const Ddos = require('ddos')
 // const ddos = new Ddos({ burst: 6, limit: 50 })
 // app.use(ddos.express);
+//
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/codmento.com/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/codmento.com/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/codmento.com/chain.pem', 'utf8');
 
-
+const credentials = {
+	  key: privateKey,
+          cert: certificate,
+	  ca: ca
+};
 
 const multer = require('multer')
 const multerStorage = multer.diskStorage({
@@ -25,7 +35,7 @@ const multerStorage = multer.diskStorage({
     }
 })
 const upload = multer({ storage: multerStorage })
-
+app.use(express.static(__dirname, { dotfiles: 'allow' } ));
 app.use(helmet())
 app.disable('x-powered-by');
 app.use(compression());
@@ -95,14 +105,20 @@ router.post("/upload", upload.any(), (req, res) => {
             res.sendStatus(500);
         });
 })
-router.get("*", (req, res) => {
-    res.render('not-found.ejs');
-});
+//router.get("*", (req, res) => {
+  //  res.render('not-found.ejs');
+//});
 
 app.use('/', router);
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(credentials, app);
 
+httpServer.listen(80, () => {
+	    console.log('HTTP Server running on port 80');
+});
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server listening at http://localhost:${port}`))
+httpsServer.listen(443, () => {
+	    console.log('HTTPS Server running on port 443');
+});
 
 module.exports = app;
