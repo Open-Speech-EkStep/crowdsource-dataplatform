@@ -104,7 +104,7 @@ const initialize = () => {
             })
             .catch(err => {
                 console.log(err)
-                notyf.error("Sorry !!! We could not get access to your audio input device");
+                notyf.error("Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission");
                 $startRecordBtn.removeClass('d-none');
             })
     });

@@ -31,7 +31,7 @@ const multerStorage = multer.diskStorage({
         cb(null, 'uploads/')
     },
     filename: function (req, file, cb) {
-        cb(null, new Date().toISOString() + ".wav")
+        cb(null, new Date().toISOString()+"_"+ (Math.random() + 1).toString(36).substring(2,10)+ ".wav")
     }
 })
 const upload = multer({ storage: multerStorage })
