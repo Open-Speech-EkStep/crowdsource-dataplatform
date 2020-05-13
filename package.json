@@ -7,7 +7,8 @@
     "start": "node src/server.js",
     "watch": "nodemon src/server.js",
     "start-cluster": "pm2 start src/server.js -i 2",
-    "test": "ENCRYPTION_KEY=oDNfdP0UrceNfafgAg77Fk35KkcHfo0uyFCWEFCEWof mocha"
+    "test": "ENCRYPTION_KEY=oDNfdP0UrceNfafgAg77Fk35KkcHfo0uyFCWEFCEWof mocha",
+    "gulp": "gulp"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,11 @@
     "node": "12.16.0"
   },
   "devDependencies": {
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-minify": "^3.1.0",
     "nodemon": "^2.0.3"
   }
 }
