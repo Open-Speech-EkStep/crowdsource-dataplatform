@@ -59,6 +59,9 @@ line-height: 1.7;
 .border-3{
   border: 3px solid #007bff;
 }
+.bg-light-blue{
+  background-color: #FBFCFF;
+}
 .bg-thank-you{
   background-image: url(/img/bg-thank-you.svg);
 }

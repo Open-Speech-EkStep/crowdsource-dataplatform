@@ -62,15 +62,15 @@ router.get('/', function (req, res) {
 router.get('/about-us', function (req, res) {
     res.render('about-us.ejs');
 });
-router.get('/contact-us', function (req, res) {
-    res.render('contact-us.ejs');
-});
+// router.get('/contact-us', function (req, res) {
+//     res.render('contact-us.ejs');
+// });
 router.get('/terms-and-conditions', function (req, res) {
     res.render('terms-and-conditions.ejs');
 });
-router.get('/privacy-policy', function (req, res) {
-    res.render('privacy-policy.ejs');
-});
+// router.get('/privacy-policy', function (req, res) {
+//     res.render('privacy-policy.ejs');
+// });
 router.get('/thank-you', function (req, res) {
     res.render('thank-you.ejs');
 });
@@ -82,9 +82,9 @@ router.get('/record', (req, res) => {
 
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 
-router.post("/contact-us", (req, res) => {
-    res.status(200).send({ success: true })
-})
+// router.post("/contact-us", (req, res) => {
+//     res.status(200).send({ success: true })
+// })
 
 router.post("/upload", upload.any(), (req, res) => {
     const file = req.files[0];

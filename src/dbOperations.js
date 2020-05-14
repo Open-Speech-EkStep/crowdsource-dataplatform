@@ -28,18 +28,24 @@ const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId,
 }
 
 const updateAndGetSentences = async function (req, res) {
-    const username = "joshi";
+
     const userId = req.cookies.userId;
-    console.log(req.body);
-    const userName = encrypt(username);
-    const encryptUserId = encrypt(userId);
-    
-    db.many(updateAndGetSentencesQuery, [encryptUserId, userName])
+    const userName = req.body.userName;
+    if (!userId || userName===null || userName===undefined) {
+        res.status(400).send({error:'required parameters missing'})
+        return;
+    }
+
+    const encryptedUserName = encrypt(userName);
+    const encryptedUserId = encrypt(userId);
+
+    db.many(updateAndGetSentencesQuery, [encryptedUserId, encryptedUserName])
         .then(data => {
-            db.any(sentencesCount, [encryptUserId, userName])
-            .then(count => {
-                db.any(unassignIncompleteSentences, [encryptUserId, userName]).then(d1ata=>{console.log(d1ata)}).catch(e=>{console.log(e)})
-                res.status(200).send({data,count});
+            db.any(sentencesCount, [encryptedUserId, encryptedUserName])
+                .then(count => {
+                    db.any(unassignIncompleteSentences, [encryptedUserId, encryptedUserName])
+                    .then(d1ata => { console.log(d1ata) }).catch(e => { console.log(e) })
+                    res.status(200).send({ data, count });
                 })
         })
         .catch(err => {

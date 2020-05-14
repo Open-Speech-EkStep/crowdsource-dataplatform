@@ -1,32 +1,56 @@
 body {
   font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6
- {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
 }
 * {
   box-sizing: border-box;
 }
-html { font-size: 6px; }
+html {
+  font-size: 6px;
+}
 @media (min-width: 321px) {
-  html { font-size:  8px;}
+  html {
+    font-size: 8px;
+  }
 }
 @media (min-width: 576px) {
-    html { font-size:  10px;}
+  html {
+    font-size: 10px;
+  }
 }
 @media (min-width: 768px) {
-    html { font-size: 12px; }
+  html {
+    font-size: 12px;
+  }
 }
 @media (min-width: 992px) {
-    html { font-size:  13px; }
+  html {
+    font-size: 13px;
+  }
 }
 @media (min-width: 1200px) {
-    html { font-size: 14px; }
+  html {
+    font-size: 14px;
+  }
 }
 @media (min-width: 1400px) {
-  html { font-size: 16px; }
+  html {
+    font-size: 16px;
+  }
 }
 .pb-6 {
   padding-bottom: 6rem;
@@ -126,20 +150,11 @@ canvas#visualizer {
 audio {
   width: 80%;
 }
-.border-3{
+.border-3 {
   border: 3px solid #007bff;
 }
-.font-wt-900{
+.font-wt-900 {
   font-weight: 900;
-}
-#instructionsModal .modal-dialog {
-  margin-top: 0;
-  margin-bottom: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 90%;
 }
 /* loader */
 .overlay__content {
@@ -160,8 +175,8 @@ audio {
   border-style: solid;
 }
 @keyframes spin {
-100% {
-  transform: rotate(360deg);
-}
+  100% {
+    transform: rotate(360deg);
+  }
 }
 /* loader end */
