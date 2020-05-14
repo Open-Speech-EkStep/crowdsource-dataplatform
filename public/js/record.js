@@ -268,7 +268,8 @@ $(document).ready(() => {
             })
                 .then(data => data.json())
                 .then(sentenceData => {
-                    crowdSource.sentences = sentenceData;
+                    console.log(sentenceData)
+                    crowdSource.sentences = sentenceData.data;
                     $loader.hide();
                     initialize();
                     localStorage.setItem(sentencesKey, JSON.stringify({
