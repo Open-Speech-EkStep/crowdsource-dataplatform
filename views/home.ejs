@@ -5,11 +5,10 @@
     <title>Vakyaansh: A crowdsourcing initiative for Indic languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet"
+        type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-    
     <link rel="stylesheet" type="text/css" href="css/home.css">
 </head>
 
@@ -19,110 +18,132 @@
     <div class="container-fluid">
         <div class="row pt-5">
             <div class="col-6 ml-auto p-5 text-dark mt-5">
-                <h1 class="display-5 font-wt-900 site-blue">Vakyaansh: A crowdsourcing initiative for Indic languages</h1>
-                <p class="h4 font-weight-light lh-7 site-blue text-justify">We have envisioned a Speech recognition product that focusses solely on our languages. This vision requires enormous amount of diversified dataset of Indian voices and hence, we are reaching out to you for your contribution.<a class="ml-1"
-                    href="/about-us"> See More</a></p>
+                <h1 class="display-5 font-wt-900 site-blue">Vakyaansh: A crowdsourcing initiative for Indic languages
+                </h1>
+                <p class="h4 font-weight-light lh-7 site-blue text-justify">We have envisioned a Speech recognition
+                    product that focusses solely on our languages. This vision requires enormous amount of diversified
+                    dataset of Indian voices and hence, we are reaching out to you for your contribution.<a class="ml-1"
+                        href="/about-us"> See More</a></p>
                 <div class="row">
-                    <div class="col-8 col-sm-6 col-lg-5">
-                        <a role="button" href="#speaker-details" class="btn btn-primary h6 shadow w-100 rounded mt-4 p-3">
-                                START RECORDING
+                    <div class="col-8 col-lg-5">
+                        <a role="button" href="#speaker-details"
+                            class="btn btn-outline-primary h6 w-100 rounded mt-4 p-3">
+                            START RECORDING
                         </a>
                     </div>
                 </div>
 
             </div>
-            <div class="col-5 py-5 mt-5 text-right pr-0">
+            <div class="col-5 pt-5 mt-5 text-right pr-0">
                 <img src="/img/home.svg" class="img img-fluid">
             </div>
-
         </div>
     </div>
-   
-    <div class="container-fluid pt-5 pb-6 mb-5">
-        <div class="row justify-content-center">
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-8 p-5 card" id="speaker-details">
-                <p class="display-5 font-wt-900 site-blue text-center">Speaker Details</h1>
-                    <!-- <p class="lead lh-7 site-blue text-center">Type Something</p> -->
 
-                <div class="form-group">
-                    <label for="username" class="form-label">User Name</label>
+    <div class="container-fluid bg-light-blue mt-n5">
+        <div class="row justify-content-center pt-5">
+            <div class="col-10 col-md-8 col-xl-6 text-center my-5">
+                <p class="display-5 font-wt-900 site-blue">Speaker Diversification</h1>
+            </div>
+        </div>
+        <div class="row pb-5 justify-content-center mt-5">
+            <div class="col-8 col-lg-4 mb-3 text-center pb-5">
+               <img src="img/spd-1.png" class="img img-fluid">
+            </div>
+            <div class="col-8 col-lg-4 mb-3 text-center pb-5">
+                <img src="img/spd-2.png" class="img img-fluid">
+            </div>
+            <div class="col-8 col-lg-4 mb-3 text-center pb-5">
+                <img src="img/spd-3.png" class="img img-fluid">
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid pt-5 pb-6 my-5">
+        <div class="row justify-content-center">
+            <div class="col-xl-4 col-md-6 col-sm-8 col-11 p-5 card" id="speaker-details">
+                <p class="display-5 font-wt-900 site-blue text-center">Speaker Details</h1>
+                    <div class="form-group">
+                        <label for="username" class="form-label">User Name</label>
                         <input class="form-control" id="username" placeholder="speaker.xyz">
-                </div>
-                <div class="form-group pt-3">
-                    <label for="gender" class="form-label">Gender</label>
-                    <div class="d-flex justify-content-around">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="male-check" value="male">
-                            <label class="form-check-label p-2" for="male-check">Male</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="female-check" value="female">
-                            <label class="form-check-label p-2" for="female-check">Female</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="other-check" value="others">
-                            <label class="form-check-label p-2" for="other-check">Others</label>
-                          </div>
-                    </div> 
-                </div>
-                <div class="row pt-3">
-                    <div class="form-group col-md-4 col-sm-12">
-                        <label for="age" class="form-label">Age Group</label>
-                        <select class="form-control" id="age">
-                            <option selected value="">Please Select</option>
-                            <option value="13 - 17">13 - 17 (Youth)</option>
-                            <option value="18 - 29">18 - 29 (Adult)</option>
-                            <option value="30 - 39">30 - 39 (Adult)</option>
-                            <option value="40 - 49">40 - 49 (Adult)</option>
-                            <option value="50 - 59">50 - 59 (Adult)</option>
-                            <option value="60 - 64">60 - 64 (Adult)</option>
-                            <option value="65 - 74">65 - 74 (Senior)</option>
-                            <option value="> 75">&gt; 75 (Senior)</option>
-                        </select>
                     </div>
-                    <div class="form-group col-md-8 col-sm-12">
-                        <label for="mother-tongue" class="form-label">Mother Tongue</label>
-                        <select class="form-control" id="mother-tongue">
-                            <option selected value="">Please Select</option>
-                            <option value="Assamese">Assamese</option>
-                            <option value="Bengali">Bengali</option>
-                            <option value="Bodo">Bodo</option>
-                            <option value="Dogri">Dogri</option>
-                            <option value="Gujarati">Gujarati</option>
-                            <option value="Hindi">Hindi</option>
-                            <option value="Kannada">Kannada</option>
-                            <option value="Kashmiri">Kashmiri</option>
-                            <option value="Konkani">Konkani</option>
-                            <option value="Maithili">Maithili</option>
-                            <option value="Malayalam">Malayalam</option>
-                            <option value="Manipuri">Manipuri</option>
-                            <option value="Marathi">Marathi</option>
-                            <option value="Nepali">Nepali</option>
-                            <option value="Odia">Odia</option>
-                            <option value="Punjabi">Punjabi</option>
-                            <option value="Sanskrit">Sanskrit</option>
-                            <option value="Santali">Santali</option>
-                            <option value="Sindhi">Sindhi</option>
-                            <option value="Tamil">Tamil</option>
-                            <option value="Telugu">Telugu</option>
-                            <option value="Urdu">Urdu</option>
-                        </select>
+                    <div class="form-group pt-3">
+                        <label for="gender" class="form-label">Gender</label>
+                        <div class="d-flex justify-content-around">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="male-check" value="male">
+                                <label class="form-check-label p-2" for="male-check">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="female-check"
+                                    value="female">
+                                <label class="form-check-label p-2" for="female-check">Female</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="other-check"
+                                    value="others">
+                                <label class="form-check-label p-2" for="other-check">Others</label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-check mt-1">
-                    <input class="form-check-input" type="checkbox" value="" id="tnc">
-                    <label class="form-check-label" for="tnc">
-                      I have read and agree to the <a href="/terms-and-conditions">Terms and Conditions</a>
-                    </label>
-                  </div>
-                <div class="row justify-content-center">
-                    <div class="col-8 col-sm-6 col-lg-7 col-xl-6">
-                        <button type="button" id="start-record" class="btn btn-primary h6 shadow w-100 rounded mt-4 p-3"
-                            id="start-record" disabled>
+                    <div class="row pt-3">
+                        <div class="form-group col-md-4 col-sm-12">
+                            <label for="age" class="form-label">Age Group</label>
+                            <select class="form-control" id="age">
+                                <option selected value="">Please Select</option>
+                                <option value="13 - 17">13 - 17 (Youth)</option>
+                                <option value="18 - 29">18 - 29 (Adult)</option>
+                                <option value="30 - 39">30 - 39 (Adult)</option>
+                                <option value="40 - 49">40 - 49 (Adult)</option>
+                                <option value="50 - 59">50 - 59 (Adult)</option>
+                                <option value="60 - 64">60 - 64 (Adult)</option>
+                                <option value="65 - 74">65 - 74 (Senior)</option>
+                                <option value="> 75">&gt; 75 (Senior)</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-8 col-sm-12">
+                            <label for="mother-tongue" class="form-label">Mother Tongue</label>
+                            <select class="form-control" id="mother-tongue">
+                                <option selected value="">Please Select</option>
+                                <option value="Assamese">Assamese</option>
+                                <option value="Bengali">Bengali</option>
+                                <option value="Bodo">Bodo</option>
+                                <option value="Dogri">Dogri</option>
+                                <option value="Gujarati">Gujarati</option>
+                                <option value="Hindi">Hindi</option>
+                                <option value="Kannada">Kannada</option>
+                                <option value="Kashmiri">Kashmiri</option>
+                                <option value="Konkani">Konkani</option>
+                                <option value="Maithili">Maithili</option>
+                                <option value="Malayalam">Malayalam</option>
+                                <option value="Manipuri">Manipuri</option>
+                                <option value="Marathi">Marathi</option>
+                                <option value="Nepali">Nepali</option>
+                                <option value="Odia">Odia</option>
+                                <option value="Punjabi">Punjabi</option>
+                                <option value="Sanskrit">Sanskrit</option>
+                                <option value="Santali">Santali</option>
+                                <option value="Sindhi">Sindhi</option>
+                                <option value="Tamil">Tamil</option>
+                                <option value="Telugu">Telugu</option>
+                                <option value="Urdu">Urdu</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-check mt-1">
+                        <input class="form-check-input" type="checkbox" value="" id="tnc">
+                        <label class="form-check-label" for="tnc">
+                            I have read and agree to the <a href="/terms-and-conditions">Terms and Conditions</a>
+                        </label>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <button type="button" id="start-record"
+                                class="btn btn-primary h6 shadow w-100 rounded mt-4 p-3" disabled>
                                 START RECORDING
-                        </button>
+                            </button>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>

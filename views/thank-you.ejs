@@ -5,7 +5,7 @@
     <title>Vakyaansh: A crowdsourcing initiative for Indic languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Lato:700,900&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -16,14 +16,45 @@
 <body>
 
     <%- include common/header.ejs %>
-    <div class="container-fluid my-5 p-5">
-        <div class="row justify-content-center bg-thank-you">
+    <div class="container-fluid my-5 p-5 bg-thank-you h-100">
+        <div class="text-center">
+            <h1 class="display-5 font-wt-900 site-blue">Thank you for contributing!</h1>
+        </div>
+        <div class="row justify-content-center">
             <div class="col-6 text-center">
-                <img src="/img/thank-you.svg" class="img img-fluid">
+                <img src="/img/thanks.svg" class="img img-fluid">
             </div>
         </div>
-        <div class="text-center">
-            <h1 class="display-5 font-wt-900 site-blue">Thanks for contributing</h1>
+       
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-8 col-10 text-center">
+                <p>
+                    You have contributed enormously and are just <b>20 minutes</b> away from your goal.
+                </p>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-xl-6 col-lg-8 col-10 text-center">
+                <p>
+                    Vakyaansh has been envisioned to meet a goal of approx. 10,000 hours of diversified Indian voices.
+                </p>
+                <p>
+                    A contribution of 30-45 mins voice per speaker can make Vakyaansh come closer to it’s vision.
+                </p>
+                <p>
+                    We know you can do more!
+                </p>
+            </div>
+        </div>
+        <div class="text-center mt-2">
+            <a href="/record" class="btn btn-primary btn-lg">Contribute More</a>
+        </div>
+        <div class="text-center mt-5">
+            <p>Come Back again to hit your Goalpost <span class="text-primary material-icons md-48 align-middle">
+                watch_later
+                </span></p>
+            
+            <a href="/">Done for now</a>
         </div>
     </div>
     <%- include common/footer.ejs %>

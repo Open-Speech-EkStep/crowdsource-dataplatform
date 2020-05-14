@@ -17,10 +17,10 @@ const initialize = () => {
     const $recordingSign = $("#recording-sign");
     const $progressBar = $(".progress-bar");
     const progressMessages = [
-        "Let’s get started","",
-        "We know you can do more! ","","",
-        "You are halfway there. Keep going!","",
-        "Just few more steps to go!","",
+        "Let’s get started", "",
+        "We know you can do more! ", "", "",
+        "You are halfway there. Keep going!", "",
+        "Just few more steps to go!", "",
         "Nine dead, one more to go!",
         "Yay! Done & Dusted!"
     ]
@@ -144,7 +144,7 @@ const initialize = () => {
             crowdSource.audioBlob = blob;
             $player.prop("src", bloburl)
         });
-        if (currentIndex == totalItems - 1){
+        if (currentIndex == totalItems - 1) {
             $getStarted.text(progressMessages[totalItems]).show();
         }
     });
@@ -233,12 +233,14 @@ const initialize = () => {
     }
 }
 $(document).ready(() => {
+    window.crowdSource = {};
+    const $instructionModal = $('#instructionsModal');
+    const $errorModal = $("#errorModal");
+    const $loader = $("#loader");
+    const $pageContent = $("#page-content");
+    const $navUser = $("#nav-user");
+    const $navUserName = $navUser.find("#nav-username");
     try {
-        window.crowdSource = {};
-        const $instructionModal = $('#instructionsModal');
-        const $errorModal = $("#errorModal");
-        const $loader = $("#loader");
-        const $pageContent = $("#page-content");
         const localSpeakerData = localStorage.getItem(speakerDetailsKey);
         const localSpeakerDataParsed = JSON.parse(localSpeakerData);
         const localSentences = localStorage.getItem(sentencesKey);
@@ -247,28 +249,48 @@ $(document).ready(() => {
         $instructionModal.on('hidden.bs.modal', function (e) {
             $pageContent.removeClass('d-none');
         })
+        $errorModal.on('show.bs.modal', function (e) {
+            $instructionModal.modal('hide');
+        })
+        $errorModal.on('hidden.bs.modal', function (e) {
+            location.href = "/";
+        })
 
         if (!localSpeakerDataParsed) {
             location.href = '/';
             return;
         }
 
+        if (localSpeakerDataParsed.userName) {
+            $navUser.removeClass('d-none');
+            $navUserName.text(localSpeakerDataParsed.userName);
+        }
+
         if (localSentencesParsed && localSentencesParsed.userName === localSpeakerDataParsed.userName) {
-            crowdSource.sentences = localSentencesParsed.sentences;
+            crowdSource.sentences = localSentencesParsed.sentences.data;
             $loader.hide();
             $pageContent.removeClass('d-none');
             initialize();
         }
         else {
             localStorage.removeItem(currentIndexKey);
-            $instructionModal.modal('show');
             fetch('/sentences', {
                 method: "POST",
-                body: localSpeakerDataParsed.userName
+                body: JSON.stringify({ userName: localSpeakerDataParsed.userName }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
             })
-                .then(data => data.json())
+                .then(data => {
+                    if (!data.ok) {
+                        throw Error(data.statusText || 'HTTP error');
+                    }
+                    else {
+                        return data.json();
+                    }
+                })
                 .then(sentenceData => {
-                    console.log(sentenceData)
+                    $instructionModal.modal('show');
                     crowdSource.sentences = sentenceData.data;
                     $loader.hide();
                     initialize();
@@ -279,7 +301,6 @@ $(document).ready(() => {
                 })
                 .catch((err) => {
                     console.log(err);
-                    $instructionModal.modal('hide');
                     $errorModal.modal('show');
                 })
                 .then(() => {
@@ -289,7 +310,6 @@ $(document).ready(() => {
     }
     catch (err) {
         console.log(err);
-        $instructionModal.modal('hide');
         $errorModal.modal('show');
     }
 })

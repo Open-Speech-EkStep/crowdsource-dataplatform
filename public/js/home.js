@@ -47,3 +47,10 @@ $startRecordBtn.on('click', (event) => {
     localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
     location.href = "/record"
 })
+
+//lazy load animate.css and other libs
+setTimeout(() => {
+    fetch("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css");
+    fetch("css/notyf.min.css");
+    fetch("css/record.css");
+}, 2000);
