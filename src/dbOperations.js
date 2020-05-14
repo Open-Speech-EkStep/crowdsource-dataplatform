@@ -1,17 +1,10 @@
 const { encrypt, decrypt } = require("./encryptAndDecrypt")
-
+const {setUserDetailsAndFileName,setNewUserAndFileName,updateAndGetSentencesQuery} = require("./dbQuery");
 const envVars = process.env;
 const pgp = require('pg-promise')();
 const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}/${envVars.DB_NAME}`);
 
-const updateAndGetSentencesQuery = 'update sentences set assign = true, \
-"assignDate" = current_date, "userId" = $1 where "sentenceId" in (select "sentenceId" from sentences \
-where assign = false limit 10) returning "sentenceId","sentence";'
 
-const setUserDetailsAndFileName = 'update sentences set "fileName" = $1, "userName" = $2, "ageGroup" =$3, "gender" = $4, "motherTongue" = $5 \
-where "sentenceId" = $6;'
-
-const setNewUserAndFileName = 'insert into changeduser ("fileName","userName","ageGroup","gender","motherTongue","userId","sentenceId") values ($1,$2,$3,$4,$5,$6,$7);'
 
 const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId, cb) {
     const encryptUserId = encrypt(userId)
@@ -44,11 +37,13 @@ const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId,
 }
 
 const updateAndGetSentences = function (req, res) {
+    const userName = req.body.userName;
     const userId = req.cookies.userId;
     if (!userId) { return res.sendStatus(400).send("Invalid UserId"); }
     const encryptUserId = encrypt(userId);
     db.many(updateAndGetSentencesQuery, [encryptUserId])
         .then(data => {
+            db.any()
             res.status(200).send(data);
         })
         .catch(err => {
