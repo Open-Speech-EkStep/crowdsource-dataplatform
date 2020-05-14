@@ -1,17 +1,24 @@
 const { encrypt, decrypt } = require("./encryptAndDecrypt")
-const { UpdateFileName, setNewUserAndFileName, updateAndGetSentencesQuery } = require("./dbQuery");
+const { UpdateFileNameAndUserDetails, setNewUserAndFileName, updateAndGetSentencesQuery } = require("./dbQuery");
 const envVars = process.env;
 const pgp = require('pg-promise')();
 const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}/${envVars.DB_NAME}`);
 
 
 
-const updateDbWithFileName = function (file, sentenceId, userId, cb) {
+const updateDbWithFileName = function (file, sentenceId,speakerDetails, userId, cb) {
+    const speakerDetailsJson = JSON.parse(speakerDetails);
+    let ageGroup = null, gender = null, motherTongue = null;
+    if (speakerDetailsJson) {
+        ageGroup = encrypt(speakerDetailsJson.age);
+        gender = encrypt(speakerDetailsJson.gender);
+        motherTongue = encrypt(speakerDetailsJson.motherTongue);
+    }
     const encryptUserId = encrypt(userId);
-    db.any(UpdateFileName, [file, sentenceId, encryptUserId])
+    db.any(UpdateFileNameAndUserDetails, [file, ageGroup, gender, motherTongue, sentenceId, encryptUserId])
         .then(() => cb(200, { success: true }))
         .catch(() => cb(500, { error: true }))
-    db.any(setNewUserAndFileName, [file, userName, ageGroup, gender, motherTongue, encryptUserId, sentenceId])
+    db.any(setNewUserAndFileName, [file, encryptUserId, sentenceId])
         .then(() => cb(200, { success: true }))
         .catch(() => cb(500, { error: true }))
         .catch(err => {
@@ -21,18 +28,11 @@ const updateDbWithFileName = function (file, sentenceId, userId, cb) {
 }
 
 const updateAndGetSentences = function (req, res) {
-    const speakerDetails = req.body.speakerDetails;
+    const username = req.body.username;
     const userId = req.cookies.userId;
-    let ageGroup = null, gender = null, motherTongue = null, userName = null;
-    const speakerDetailsJson = JSON.parse(speakerDetails);
-    if (speakerDetailsJson) {
-        ageGroup = encrypt(speakerDetailsJson.age);
-        gender = encrypt(speakerDetailsJson.gender);
-        motherTongue = encrypt(speakerDetailsJson.motherTongue);
-        userName = encrypt(speakerDetailsJson.username);
-    }
+    const userName = encrypt(username);
     const encryptUserId = encrypt(userId);
-    db.many(updateAndGetSentencesQuery, [encryptUserId, userName, ageGroup, gender, motherTongue])
+    db.many(updateAndGetSentencesQuery, [encryptUserId, userName])
         .then(data => {
             db.any(sentencesCount, [encryptUserId, userName])
                 .then(count => {
