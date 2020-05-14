@@ -126,13 +126,13 @@ canvas#visualizer {
 audio {
   width: 80%;
 }
-.sans-serif{
-  font-family: Arial, Helvetica, sans-serif;
-}
 .border-3{
   border: 3px solid #007bff;
 }
-.modal-dialog {
+.font-wt-900{
+  font-weight: 900;
+}
+#instructionsModal .modal-dialog {
   margin-top: 0;
   margin-bottom: 0;
   height: 100vh;

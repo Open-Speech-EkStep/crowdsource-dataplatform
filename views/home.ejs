@@ -2,16 +2,13 @@
 <html>
 
 <head>
-    <title>Crowd Sourcing Platform</title>
+    <title>Vakyaansh: A crowdsourcing initiative for Indic languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-        <!--TO DO :  Lazy load this -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     
     <link rel="stylesheet" type="text/css" href="css/home.css">
 </head>
@@ -19,14 +16,11 @@
 <body>
 
     <%- include common/header.ejs %>
-    <div class="container-fluid pb-6">
-        <div class="row py-5">
-            <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-1 offset-md-2 offset-sm-1 p-5 text-dark mt-5">
-                <h1 class="display-5 font-wt-900 site-blue">Crowd Sourcing Platform:</h1>
-                <p class="display-5 font-wt-900 site-blue">Speech Recognition</p>
-                <p class="h4 font-weight-light lh-7 site-blue">EkStep is an enabler. Our layered modular platform allows
-                    the creation of
-                    non-linear, agile and scalable solutions.<a class="ml-1"
+    <div class="container-fluid">
+        <div class="row pt-5">
+            <div class="col-6 ml-auto p-5 text-dark mt-5">
+                <h1 class="display-5 font-wt-900 site-blue">Vakyaansh: A crowdsourcing initiative for Indic languages</h1>
+                <p class="h4 font-weight-light lh-7 site-blue text-justify">We have envisioned a Speech recognition product that focusses solely on our languages. This vision requires enormous amount of diversified dataset of Indian voices and hence, we are reaching out to you for your contribution.<a class="ml-1"
                     href="/about-us"> See More</a></p>
                 <div class="row">
                     <div class="col-8 col-sm-6 col-lg-5">
@@ -37,10 +31,8 @@
                 </div>
 
             </div>
-            <div id="header-img"
-                class="col-lg-4 col-md-8 col-sm-10 offset-lg-1 offset-md-2 offset-sm-1 bg-secondary p-5 mt-5 d-flex text-center">
-
-                <p class="h1 align-self-center">Dummy Image Here</p>
+            <div class="col-5 py-5 mt-5 text-right pr-0">
+                <img src="/img/home.svg" class="img img-fluid">
             </div>
 
         </div>
@@ -48,13 +40,13 @@
    
     <div class="container-fluid pt-5 pb-6 mb-5">
         <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 col-sm-8 p-5 card" id="speaker-details">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-8 p-5 card" id="speaker-details">
                 <p class="display-5 font-wt-900 site-blue text-center">Speaker Details</h1>
                     <!-- <p class="lead lh-7 site-blue text-center">Type Something</p> -->
 
                 <div class="form-group">
                     <label for="username" class="form-label">User Name</label>
-                        <input class="form-control" id="username" placeholder="User Name">
+                        <input class="form-control" id="username" placeholder="speaker.xyz">
                 </div>
                 <div class="form-group pt-3">
                     <label for="gender" class="form-label">Gender</label>
@@ -77,7 +69,7 @@
                     <div class="form-group col-md-4 col-sm-12">
                         <label for="age" class="form-label">Age Group</label>
                         <select class="form-control" id="age">
-                            <option value="">Please Select</option>
+                            <option selected value="">Please Select</option>
                             <option value="13 - 17">13 - 17 (Youth)</option>
                             <option value="18 - 29">18 - 29 (Adult)</option>
                             <option value="30 - 39">30 - 39 (Adult)</option>
@@ -91,7 +83,7 @@
                     <div class="form-group col-md-8 col-sm-12">
                         <label for="mother-tongue" class="form-label">Mother Tongue</label>
                         <select class="form-control" id="mother-tongue">
-                            <option value="">Please Select</option>
+                            <option selected value="">Please Select</option>
                             <option value="Assamese">Assamese</option>
                             <option value="Bengali">Bengali</option>
                             <option value="Bodo">Bodo</option>
@@ -120,7 +112,7 @@
                 <div class="form-check mt-1">
                     <input class="form-check-input" type="checkbox" value="" id="tnc">
                     <label class="form-check-label" for="tnc">
-                      I have read and agree to the <a href="/terms-and-conditons">Terms and Condtions</a>
+                      I have read and agree to the <a href="/terms-and-conditions">Terms and Conditions</a>
                     </label>
                   </div>
                 <div class="row justify-content-center">
@@ -139,12 +131,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-
-
-        <!-- Do we really need popper ? -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script> -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>

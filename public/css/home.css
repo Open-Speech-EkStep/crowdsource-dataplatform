@@ -53,15 +53,12 @@ line-height: 1.7;
 .display-5{
   font-size: 3rem;
 }
-#header-img{
-  background-image: url(../img/home.png);
-  background-size:     cover;                    
-  background-repeat:   no-repeat;
-  background-position: center center; 
-}
 .site-blue{
   color: #11223F;
 }
 .border-3{
   border: 3px solid #007bff;
+}
+.bg-thank-you{
+  background-image: url(/img/bg-thank-you.svg);
 }

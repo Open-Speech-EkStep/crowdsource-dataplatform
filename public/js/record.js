@@ -16,6 +16,14 @@ const initialize = () => {
     const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
     const $recordingSign = $("#recording-sign");
     const $progressBar = $(".progress-bar");
+    const progressMessages = [
+        "Let’s get started","",
+        "We know you can do more! ","","",
+        "You are halfway there. Keep going!","",
+        "Just few more steps to go!","",
+        "Nine dead, one more to go!",
+        "Yay! Done & Dusted!"
+    ]
 
     function animateCSS(element, animationName, callback) {
         const node = document.querySelector(element)
@@ -84,10 +92,9 @@ const initialize = () => {
                 $visualizer.removeClass("d-none");
 
                 gumStream = stream;
-                // shim for AudioContext when it's not avb. 
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 const audioContext = new AudioContext;
-                window.audioAnalyser = audioContext.createAnalyser();
+                const audioAnalyser = audioContext.createAnalyser();
                 //new audio context to help us record 
                 input = audioContext.createMediaStreamSource(stream);
                 input.connect(audioAnalyser);
@@ -137,6 +144,9 @@ const initialize = () => {
             crowdSource.audioBlob = blob;
             $player.prop("src", bloburl)
         });
+        if (currentIndex == totalItems - 1){
+            $getStarted.text(progressMessages[totalItems]).show();
+        }
     });
 
     $nextBtn.on('click', () => {
@@ -147,7 +157,7 @@ const initialize = () => {
             notyf.success("Congratulations!!! You have completed this batch of sentences");
             setProgressBar(currentIndex);
             setTimeout(() => {
-                window.location.href = "/thank-you";
+                location.href = "/thank-you";
             }, 2000);
         }
         else if (currentIndex < totalItems - 1) {
@@ -162,8 +172,8 @@ const initialize = () => {
         $nextBtn.addClass('d-none');
         $reRecordBtn.addClass('d-none');
         $startRecordBtn.removeClass('d-none');
-        if (currentIndex === Math.floor(totalItems / 2)) {
-            $getStarted.text("You are half way there!! Keep Going!!").show();
+        if (progressMessages[currentIndex] && currentIndex < totalItems - 1) {
+            $getStarted.text(progressMessages[currentIndex]).show();
         }
         else {
             $getStarted.hide();
@@ -223,41 +233,62 @@ const initialize = () => {
     }
 }
 $(document).ready(() => {
-    if (!localStorage.getItem(speakerDetailsKey)) {
-        window.location.href = '/';
-        return;
-    }
-    $('#instructions').modal('show')
-    window.crowdSource = {};
-    const localSentences = localStorage.getItem(sentencesKey);
-    const $loader = $("#loader");
-    const $pageContent = $("#page-content")
-    if (localSentences) {
-        crowdSource.sentences = JSON.parse(localSentences);
-        $loader.hide();
-        $pageContent.removeClass('d-none')
-        initialize();
-    }
-    else {
-        localStorage.removeItem(currentIndexKey);
-        fetch('/sentences', {
-            method: "POST"
+    try {
+        window.crowdSource = {};
+        const $instructionModal = $('#instructionsModal');
+        const $errorModal = $("#errorModal");
+        const $loader = $("#loader");
+        const $pageContent = $("#page-content");
+        const localSpeakerData = localStorage.getItem(speakerDetailsKey);
+        const localSpeakerDataParsed = JSON.parse(localSpeakerData);
+        const localSentences = localStorage.getItem(sentencesKey);
+        const localSentencesParsed = JSON.parse(localSentences);
+
+        $instructionModal.on('hidden.bs.modal', function (e) {
+            $pageContent.removeClass('d-none');
         })
-            .then(data => data.json())
-            .then(sentenceData => {
-                crowdSource.sentences = sentenceData;
-                $loader.hide();
-                $pageContent.removeClass('d-none')
-                initialize();
-                localStorage.setItem(sentencesKey, JSON.stringify(sentenceData));
+
+        if (!localSpeakerDataParsed) {
+            location.href = '/';
+            return;
+        }
+
+        if (localSentencesParsed && localSentencesParsed.userName === localSpeakerDataParsed.userName) {
+            crowdSource.sentences = localSentencesParsed.sentences;
+            $loader.hide();
+            $pageContent.removeClass('d-none');
+            initialize();
+        }
+        else {
+            localStorage.removeItem(currentIndexKey);
+            $instructionModal.modal('show');
+            fetch('/sentences', {
+                method: "POST",
+                body: localSpeakerDataParsed.userName
             })
-            .catch((err) => {
-                console.log(err);
-                // To DO
-                // show error modal
-            })
-            .then(() => {
-                $loader.hide();
-            })
+                .then(data => data.json())
+                .then(sentenceData => {
+                    crowdSource.sentences = sentenceData;
+                    $loader.hide();
+                    initialize();
+                    localStorage.setItem(sentencesKey, JSON.stringify({
+                        userName: localSpeakerDataParsed.userName,
+                        sentences: sentenceData
+                    }));
+                })
+                .catch((err) => {
+                    console.log(err);
+                    $instructionModal.modal('hide');
+                    $errorModal.modal('show');
+                })
+                .then(() => {
+                    $loader.hide();
+                })
+        }
+    }
+    catch (err) {
+        console.log(err);
+        $instructionModal.modal('hide');
+        $errorModal.modal('show');
     }
 })
