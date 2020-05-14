@@ -1,6 +1,6 @@
 const { encrypt, decrypt } = require("./encryptAndDecrypt")
 const { UpdateFileNameAndUserDetails, setNewUserAndFileName,
-    unassignIncompleteSentences, updateAndGetSentencesQuery,sentencesCount } = require("./dbQuery");
+    unassignIncompleteSentences, updateAndGetSentencesQuery, sentencesCount } = require("./dbQuery");
 const envVars = process.env;
 const pgp = require('pg-promise')();
 const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}/${envVars.DB_NAME}`);
@@ -24,29 +24,24 @@ const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId,
                     .catch(() => cb(500, { error: true }))
             }
         })
-        .catch(() => cb(500, { error: true }))
+        .catch(err => console.log(err))
 }
 
 const updateAndGetSentences = async function (req, res) {
-
     const userId = req.cookies.userId;
     const userName = req.body.userName;
-    if (!userId || userName===null || userName===undefined) {
-        res.status(400).send({error:'required parameters missing'})
+    if (!userId || userName === null || userName === undefined) {
+        res.status(400).send({ error: 'required parameters missing' })
         return;
     }
-
     const encryptedUserName = encrypt(userName);
     const encryptedUserId = encrypt(userId);
-
-    db.many(updateAndGetSentencesQuery, [encryptedUserId, encryptedUserName])
-        .then(data => {
-            db.any(sentencesCount, [encryptedUserId, encryptedUserName])
-                .then(count => {
-                    db.any(unassignIncompleteSentences, [encryptedUserId, encryptedUserName])
-                    .then(d1ata => { console.log(d1ata) }).catch(e => { console.log(e) })
-                    res.status(200).send({ data, count });
-                })
+    const sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, encryptedUserName]);
+    const count = db.any(sentencesCount, [encryptedUserId, encryptedUserName]);
+    const unAssign = db.any(unassignIncompleteSentences, [encryptedUserId, encryptedUserName])
+    Promise.all([sentences, count, unAssign])
+        .then(response => {
+            res.status(200).send({ data: response[0], count: response[1] });
         })
         .catch(err => {
             console.log(err);
