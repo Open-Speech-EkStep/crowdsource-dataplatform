@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Crowd Sourcing Platform</title>
+    <title>Vakyaansh: A crowdsourcing initiative for Indic languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="css/notyf.min.css" rel="stylesheet">
@@ -21,7 +21,7 @@
         <div class="container-fluid pt-5 pb-6 mb-5">
             <div class="row justify-content-center my-5">
                 <div class="col-md-8 col-sm-10 text-center">
-                    <label class="display-5 sans-serif" id="sentenceLbl"></label>
+                    <label class="h1 font-weight-normal" id="sentenceLbl"></label>
                 </div>
             </div>
             <div class="row mt-5">
@@ -97,42 +97,38 @@
  
     <%- include common/footer.ejs %>
 
-<div class="modal fade bd-example-modal-xl" id="instructions" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
+<div class="modal fade" id="instructionsModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         <div class="container-fluid bg-light" id="recording-instructions">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="h2" aria-hidden="true">&times;</span>
+              </button>
             <div class="text-center pb-5 pt-5">
                 <p class="display-5 font-wt-900 site-blue">Recording Instructions</h1>
             </div>
             <div class="row pb-5">
                 <div class="col-10 offset-1">
-                    <div class="row">
-                        <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-4 col-6 mb-3 text-center">
                             <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">settings_voice</i>
-                            <p class="mt-3 lh-7 site-blue">Click <b>Record</b> to start recording</p>
+                            <p class="mt-3 lh-7 site-blue">Please test your <b>microphone</b></p>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
+                        <div class="col-lg-4 col-md-4 col-6 mb-3 text-center">
+                            <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">speaker</i>
+                            <p class="mt-3 lh-7 site-blue">Please test your <b>speakers</b></p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-6 mb-3 text-center">
+                            <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">equalizer</i>
+                            <p class="mt-3 lh-7 site-blue">Ensure there is <b>no background noise</b></p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-6 mb-3 text-center">
                             <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">record_voice_over</i>
-                            <p class="mt-3 lh-7 site-blue"><b>Read aloud</b> the sentences shown</p>
+                            <p class="mt-3 lh-7 site-blue">Get comfortable with the prompted text, before recording, by <b>reading it aloud</b></p>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
-                            <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">mic_off</i>
-                            <p class="mt-3 lh-7 site-blue">Click <b>Stop button</b> to stop recording</p>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
-                            <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">hearing</i>
-                            <p class="mt-3 lh-7 site-blue">Listen recorded audio using <b>Play</b> button</p>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
-                            <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">repeat</i>
-                            <p class="mt-3 lh-7 site-blue"><b>Re-record</b> if not happy with the previous recording</p>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
-                            <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">navigate_next</i>
-                            <p class="mt-3 lh-7 site-blue">Click <b>Next</b> to upload recording</p>
+                        <div class="col-lg-4 col-md-4 col-6 mb-3 text-center">
+                            <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">play_circle_filled</i>
+                            <p class="mt-3 lh-7 site-blue">Get started by clicking on <b>Record</b> button</p>
                         </div>
                     </div>
                 </div>
@@ -143,16 +139,35 @@
   </div>
 </div>
 
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-danger">
+          <h5 class="modal-title h2" id="errorModalLabel">
+            <span class="material-icons md-48 align-middle">
+                error
+                </span>
+                Error !!!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          An unexpected error occured while processing your request. Please try after some time.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
     <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
     <script src="js/notyf.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-        <!-- Do we really need popper ? -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script> -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>

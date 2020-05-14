@@ -2,7 +2,7 @@ const $startRecordBtn = $("#start-record");
 const genderRadios = document.querySelectorAll('input[name = "gender"]');
 const age = document.getElementById("age");
 const motherTongue = document.getElementById("mother-tongue");
-const username = document.getElementById("username");
+const userName = document.getElementById("username");
 const $tncCheckbox = $("#tnc");
 const speakerDetailsKey = "speakerDetails";
 const speakerDetailsValue = localStorage.getItem(speakerDetailsKey);
@@ -15,7 +15,7 @@ if (speakerDetailsValue) {
     }
     age.value = parsedSpeakerDetails.age;
     motherTongue.value = parsedSpeakerDetails.motherTongue;
-    username.value = parsedSpeakerDetails.username;
+    userName.value = parsedSpeakerDetails.userName ? parsedSpeakerDetails.userName.trim() : "";
 }
 
 genderRadios.forEach(element => {
@@ -41,8 +41,8 @@ $startRecordBtn.on('click', (event) => {
     const speakerDetails = {
         gender: genderValue,
         age: age.value,
-        mother: motherTongue.value,
-        username: username.value,
+        motherTongue: motherTongue.value,
+        userName: userName.value.trim(),
     }
     localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
     location.href = "/record"
