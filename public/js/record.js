@@ -13,7 +13,7 @@ const initialize = () => {
     const $player = $("#player");
     const $nextBtn = $("#nextBtn");
     const $getStarted = $("#get-started");
-    const currentIndexInStorage = localStorage.getItem(currentIndexKey);
+    const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
     const $recordingSign = $("#recording-sign");
     const $progressBar = $(".progress-bar");
 
@@ -41,7 +41,7 @@ const initialize = () => {
     const setCurrentSentenceIndex = (index) => currentSentenceLbl.innerText = index;
     const setTotalSentenceIndex = (index) => totalSentencesLbl.innerText = index;
 
-    let currentIndex = Number(currentIndexInStorage) || 0;
+    let currentIndex = currentIndexInStorage < 0 ? 0 : currentIndexInStorage > 9 ? 9 : currentIndexInStorage;
 
     const totalItems = sentences.length;
     setSentenceText(currentIndex);
@@ -80,6 +80,7 @@ const initialize = () => {
                 $reRecordBtn.addClass('d-none');
                 $nextBtn.addClass('d-none');
                 $player.addClass('d-none');
+                $player.trigger('pause');
                 $visualizer.removeClass("d-none");
 
                 gumStream = stream;
@@ -106,6 +107,14 @@ const initialize = () => {
                 console.log(err)
                 notyf.error("Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission");
                 $startRecordBtn.removeClass('d-none');
+                $stopRecordBtn.addClass("d-none");
+                $nextBtn.addClass('d-none');
+                $reRecordBtn.addClass('d-none');
+                $recordingSign.addClass('d-none');
+                $startRecordBtn.addClass("d-none");
+                $player.addClass('d-none');
+                $player.trigger('pause');
+                $visualizer.addClass("d-none");
             })
     });
 
@@ -149,6 +158,7 @@ const initialize = () => {
         }
 
         $player.addClass('d-none');
+        $player.trigger('pause');
         $nextBtn.addClass('d-none');
         $reRecordBtn.addClass('d-none');
         $startRecordBtn.removeClass('d-none');
@@ -217,6 +227,7 @@ $(document).ready(() => {
         window.location.href = '/';
         return;
     }
+    $('#instructions').modal('show')
     window.crowdSource = {};
     const localSentences = localStorage.getItem(sentencesKey);
     const $loader = $("#loader");

@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="css/notyf.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:700,900&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -19,7 +19,6 @@
     <div id="loader" class="overlay__content"><span class="spinner"></span></div>
     <div id="page-content" class="d-none">
         <div class="container-fluid pt-5 pb-6 mb-5">
-
             <div class="row justify-content-center my-5">
                 <div class="col-md-8 col-sm-10 text-center">
                     <label class="display-5 sans-serif" id="sentenceLbl"></label>
@@ -45,7 +44,7 @@
             </div>
             <div class="row justify-content-center mt-5">
                 <div class="col-lg-2 col-md-4 col-6">
-                    <button type="button" class="btn btn-primary shadow-lg w-100 rounded mt-4 p-3"
+                    <button type="button" class="btn btn-primary shadow h6 w-100 rounded mt-4 p-3"
                         id="startRecord">
                             START RECORDING
                     </button>
@@ -65,7 +64,7 @@
             </div>
             <div class="row justify-content-center mt-5">
                 <div class="col-lg-2 col-md-4 col-6">
-                    <button type="button" id="stopRecord" class="d-none btn btn-primary shadow-lg w-100 rounded mt-4 p-3">
+                    <button type="button" id="stopRecord" class="d-none btn btn-primary shadow h6 w-100 rounded mt-4 p-3">
                             STOP RECORDING
                     </button>
                 </div>
@@ -77,7 +76,7 @@
             </div>
             <div class="row justify-content-center mt-5">
                 <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-                    <button type="button" id="reRecord" class="d-none btn btn-outline-primary w-100 rounded mt-4 p-3">
+                    <button type="button" id="reRecord" class="d-none btn btn-outline-primary shadow h6 w-100 rounded mt-4 p-3">
                         <i class="material-icons align-middle mr-2">repeat</i>
                         <span class="align-middle">
                             RE_RECORD
@@ -85,7 +84,7 @@
                     </button>
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-                    <button type="button" id="nextBtn" class="d-none btn btn-primary shadow-lg w-100 rounded mt-4 p-3">
+                    <button type="button" id="nextBtn" class="d-none btn btn-primary shadow h6 w-100 rounded mt-4 p-3">
                         <i class="material-icons align-middle mr-2">navigate_next</i>
                         <span class="align-middle">
                             NEXT
@@ -98,15 +97,62 @@
  
     <%- include common/footer.ejs %>
 
+<div class="modal fade bd-example-modal-xl" id="instructions" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        <div class="container-fluid bg-light" id="recording-instructions">
+            <div class="text-center pb-5 pt-5">
+                <p class="display-5 font-wt-900 site-blue">Recording Instructions</h1>
+            </div>
+            <div class="row pb-5">
+                <div class="col-10 offset-1">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
+                            <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">settings_voice</i>
+                            <p class="mt-3 lh-7 site-blue">Click <b>Record</b> to start recording</p>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
+                            <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">record_voice_over</i>
+                            <p class="mt-3 lh-7 site-blue"><b>Read aloud</b> the sentences shown</p>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
+                            <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">mic_off</i>
+                            <p class="mt-3 lh-7 site-blue">Click <b>Stop button</b> to stop recording</p>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
+                            <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">hearing</i>
+                            <p class="mt-3 lh-7 site-blue">Listen recorded audio using <b>Play</b> button</p>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
+                            <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">repeat</i>
+                            <p class="mt-3 lh-7 site-blue"><b>Re-record</b> if not happy with the previous recording</p>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
+                            <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">navigate_next</i>
+                            <p class="mt-3 lh-7 site-blue">Click <b>Next</b> to upload recording</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+  </div>
+</div>
 
-    <script src="js/recorder.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
     <script src="js/notyf.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        <!-- Do we really need popper ? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
