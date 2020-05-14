@@ -1,33 +1,25 @@
-const crypto = require('crypto');
-const algorithm = 'aes-256-ctr';
-const PASSWORD = process.env.ENCRYPTION_KEY;
-const ENCRYPTION_KEY = Buffer.from(PASSWORD, 'base64');
-const IV_LENGTH = 16;
+const CryptoJS = require('crypto-js');
+const key = process.env.ENCRYPTION_KEY;
+const keyutf = CryptoJS.enc.Utf8.parse(key);
+const iv = CryptoJS.enc.Base64.parse(key);
 
-function encrypt(text) {
-    if (!text) return;
-    if (Number.isInteger(text))
-        text = text.toString();
-    let iv = crypto.randomBytes(IV_LENGTH);
-    let cipher = crypto.createCipheriv(algorithm, ENCRYPTION_KEY, iv);
-    let encrypted = cipher.update(text);
-    encrypted = Buffer.concat([encrypted, cipher.final()]);
-    return iv.toString('hex') + ':' + encrypted.toString('hex');
+const encrypt = function (text) {
+    if (!text) return
+    let encrypted = CryptoJS.AES.encrypt(text, keyutf, { iv: iv });
+    return encrypted.toString()
 }
 
-function decrypt(text) {
-    if (!text) return;
-    let textParts = text.split(':');
-    let iv = Buffer.from(textParts.shift(), 'hex');
-    let encryptedText = Buffer.from(textParts.join(':'), 'hex');
-    let decipher = crypto.createDecipheriv(algorithm, ENCRYPTION_KEY, iv);
-    let decrypted = decipher.update(encryptedText);
-    decrypted = Buffer.concat([decrypted, decipher.final()]);
-    return decrypted.toString();
+const decrypt = function (text) {
+    if (!text) return
+    const decrypted = CryptoJS.AES.decrypt(
+        { ciphertext: CryptoJS.enc.Base64.parse(text) }, keyutf,
+        { iv: iv });
+    const decryptedString = CryptoJS.enc.Utf8.stringify(decrypted);
+    return decryptedString;
 }
-
 
 module.exports = {
-    encrypt,
-    decrypt
+    decrypt,
+    encrypt
+
 }
