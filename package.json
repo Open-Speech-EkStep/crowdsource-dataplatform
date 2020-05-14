@@ -7,7 +7,7 @@
     "start": "node src/server.js",
     "watch": "nodemon src/server.js",
     "start-cluster": "pm2 start src/server.js -i 2",
-    "test": "ENCRYPTION_KEY=oDNfdP0UrceNfafgAg77Fk35KkcHfo0uyFCWEFCEWof mocha",
+    "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= mocha",
     "gulp": "gulp"
   },
   "repository": {
@@ -25,6 +25,7 @@
     "chai": "^4.2.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
+    "crypto-js": "^4.0.0",
     "ddos": "^0.2.1",
     "dotenv": "^8.2.0",
     "ejs": "^1.0.0",
