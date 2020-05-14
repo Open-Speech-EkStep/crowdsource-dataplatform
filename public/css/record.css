@@ -10,7 +10,6 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6
   box-sizing: border-box;
 }
 html { font-size: 6px; }
-
 @media (min-width: 321px) {
   html { font-size:  8px;}
 }
@@ -21,10 +20,10 @@ html { font-size: 6px; }
     html { font-size: 12px; }
 }
 @media (min-width: 992px) {
-    html { font-size:  14px; }
+    html { font-size:  13px; }
 }
 @media (min-width: 1200px) {
-    html { font-size: 15px; }
+    html { font-size: 14px; }
 }
 @media (min-width: 1400px) {
   html { font-size: 16px; }
@@ -129,6 +128,18 @@ audio {
 }
 .sans-serif{
   font-family: Arial, Helvetica, sans-serif;
+}
+.border-3{
+  border: 3px solid #007bff;
+}
+.modal-dialog {
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 90%;
 }
 /* loader */
 .overlay__content {

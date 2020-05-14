@@ -1,24 +1,12 @@
 const gulp = require("gulp");
 const minify = require("gulp-minify");
 const cleanCss = require("gulp-clean-css");
-const del = require("del");
 const htmlmin = require("gulp-htmlmin");
-
-gulp.task("clean-js", function () {
-    return del(["public/build/js/*.js"]);
-});
-
-gulp.task("clean-html", function () {
-    return del(["dist/*"]);
-});
-
-gulp.task("clean-css", function () {
-    return del(["public/build/css/*.css"]);
-});
+const imagemin = require('gulp-imagemin');
 
 gulp.task("html", function () {
     return gulp
-        .src(["views/*"])
+        .src(["views/**"])
         .pipe(
             htmlmin({
                 collapseWhitespace: true,
@@ -30,7 +18,7 @@ gulp.task("html", function () {
 
 gulp.task("js", function () {
     return gulp
-        .src(["public/js/*.js"])
+        .src(["assets/js/*.js"])
         .pipe(
             minify({
                 ext: {
@@ -39,28 +27,28 @@ gulp.task("js", function () {
                 noSource: true,
             })
         )
-        .pipe(gulp.dest("public/build/js"));
+        .pipe(gulp.dest("public/js"));
 });
 gulp.task("css", function () {
     return gulp
-        .src(["public/css/*.css"])
-        .pipe(cleanCss({
-            ext: {
-                min: ".min.css",
-            },
-            noSource: true,
-        }))
-        .pipe(gulp.dest("public/build/css"));
+        .src(["assets/css/*.css"])
+        .pipe(cleanCss())
+        .pipe(gulp.dest("public/css"));
+});
+
+gulp.task("img", function () {
+    return gulp
+        .src(["assets/img/*"])
+        .pipe(imagemin())
+        .pipe(gulp.dest('public/img'));
 });
 
 gulp.task(
     "default",
     gulp.series(
-        "clean-html",
-        "clean-js",
-        "clean-css",
         "html",
         "js",
-        "css"
+        "css",
+        "img"
     )
 );

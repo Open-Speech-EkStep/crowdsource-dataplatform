@@ -5,7 +5,7 @@
     <title>Crowd Sourcing Platform</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -24,17 +24,14 @@
             <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-1 offset-md-2 offset-sm-1 p-5 text-dark mt-5">
                 <h1 class="display-5 font-wt-900 site-blue">Crowd Sourcing Platform:</h1>
                 <p class="display-5 font-wt-900 site-blue">Speech Recognition</p>
-                <p class="h4 font-weight-normal lh-7 site-blue">EkStep is an enabler. Our layered modular platform allows
+                <p class="h4 font-weight-light lh-7 site-blue">EkStep is an enabler. Our layered modular platform allows
                     the creation of
                     non-linear, agile and scalable solutions.<a class="ml-1"
                     href="/about-us"> See More</a></p>
                 <div class="row">
                     <div class="col-8 col-sm-6 col-lg-5">
-                        <a role="button" href="#recording-instructions" class="btn btn-primary shadow-lg w-100 rounded mt-4 p-3">
-                            <i class="material-icons align-middle">play_circle_outline</i>
-                            <span class="align-middle h6">
+                        <a role="button" href="#speaker-details" class="btn btn-primary h6 shadow w-100 rounded mt-4 p-3">
                                 START RECORDING
-                            </span>
                         </a>
                     </div>
                 </div>
@@ -48,51 +45,16 @@
 
         </div>
     </div>
-    <div class="container-fluid bg-light pb-6" id="recording-instructions">
-        <div class="text-center pb-5 pt-5">
-            <p class="display-5 font-wt-900 site-blue">Recording Instructions</h1>
-        </div>
-        <div class="row pb-5">
-            <div class="col-10 offset-1">
-                <div class="row">
-                    <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
-                        <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">settings_voice</i>
-                        <p class="mt-3 h6 lh-7 site-blue">Click <b>Record</b> to start recording</p>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
-                        <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">record_voice_over</i>
-                        <p class="mt-3 h6 lh-7 site-blue"><b>Read aloud</b> the sentences shown</p>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
-                        <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">mic_off</i>
-                        <p class="mt-3 h6 lh-7 site-blue">Click <b>Stop button</b> to stop recording</p>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
-                        <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">hearing</i>
-                        <p class="mt-3 h6 lh-7 site-blue">Listen recorded audio using <b>Play</b> button</p>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
-                        <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">repeat</i>
-                        <p class="mt-3 h6 lh-7 site-blue"><b>Re-record</b> if not happy with the previous recording</p>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-6 mb-3 text-center">
-                        <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">navigate_next</i>
-                        <p class="mt-3 h6 lh-7 site-blue">Click <b>Next</b> to upload recording</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+   
     <div class="container-fluid pt-5 pb-6 mb-5">
         <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 col-sm-8 p-5" id="speaker-details">
+            <div class="col-lg-4 col-md-6 col-sm-8 p-5 card" id="speaker-details">
                 <p class="display-5 font-wt-900 site-blue text-center">Speaker Details</h1>
                     <!-- <p class="lead lh-7 site-blue text-center">Type Something</p> -->
 
                 <div class="form-group">
-                    <label for="username" class="form-label">User Id</label>
-                        <input class="form-control" id="username" placeholder="User Id">
+                    <label for="username" class="form-label">User Name</label>
+                        <input class="form-control" id="username" placeholder="User Name">
                 </div>
                 <div class="form-group pt-3">
                     <label for="gender" class="form-label">Gender</label>
@@ -127,62 +89,45 @@
                         </select>
                     </div>
                     <div class="form-group col-md-8 col-sm-12">
-                        <label for="state" class="form-label">State</label>
-                        <select class="form-control" id="state">
+                        <label for="mother-tongue" class="form-label">Mother Tongue</label>
+                        <select class="form-control" id="mother-tongue">
                             <option value="">Please Select</option>
-                            <option value="Andhra Pradesh">Andhra Pradesh</option>
-                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                            <option value="Assam">Assam</option>
-                            <option value="Bihar">Bihar</option>
-                            <option value="Chandigarh">Chandigarh</option>
-                            <option value="Chhattisgarh">Chhattisgarh</option>
-                            <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
-                            <option value="Daman and Diu">Daman and Diu</option>
-                            <option value="Delhi">Delhi</option>
-                            <option value="Lakshadweep">Lakshadweep</option>
-                            <option value="Puducherry">Puducherry</option>
-                            <option value="Goa">Goa</option>
-                            <option value="Gujarat">Gujarat</option>
-                            <option value="Haryana">Haryana</option>
-                            <option value="Himachal Pradesh">Himachal Pradesh</option>
-                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                            <option value="Jharkhand">Jharkhand</option>
-                            <option value="Karnataka">Karnataka</option>
-                            <option value="Kerala">Kerala</option>
-                            <option value="Madhya Pradesh">Madhya Pradesh</option>
-                            <option value="Maharashtra">Maharashtra</option>
-                            <option value="Manipur">Manipur</option>
-                            <option value="Meghalaya">Meghalaya</option>
-                            <option value="Mizoram">Mizoram</option>
-                            <option value="Nagaland">Nagaland</option>
-                            <option value="Odisha">Odisha</option>
-                            <option value="Punjab">Punjab</option>
-                            <option value="Rajasthan">Rajasthan</option>
-                            <option value="Sikkim">Sikkim</option>
-                            <option value="Tamil Nadu">Tamil Nadu</option>
-                            <option value="Telangana">Telangana</option>
-                            <option value="Tripura">Tripura</option>
-                            <option value="Uttar Pradesh">Uttar Pradesh</option>
-                            <option value="Uttarakhand">Uttarakhand</option>
-                            <option value="West Bengal">West Bengal</option>
+                            <option value="Assamese">Assamese</option>
+                            <option value="Bengali">Bengali</option>
+                            <option value="Bodo">Bodo</option>
+                            <option value="Dogri">Dogri</option>
+                            <option value="Gujarati">Gujarati</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="Kannada">Kannada</option>
+                            <option value="Kashmiri">Kashmiri</option>
+                            <option value="Konkani">Konkani</option>
+                            <option value="Maithili">Maithili</option>
+                            <option value="Malayalam">Malayalam</option>
+                            <option value="Manipuri">Manipuri</option>
+                            <option value="Marathi">Marathi</option>
+                            <option value="Nepali">Nepali</option>
+                            <option value="Odia">Odia</option>
+                            <option value="Punjabi">Punjabi</option>
+                            <option value="Sanskrit">Sanskrit</option>
+                            <option value="Santali">Santali</option>
+                            <option value="Sindhi">Sindhi</option>
+                            <option value="Tamil">Tamil</option>
+                            <option value="Telugu">Telugu</option>
+                            <option value="Urdu">Urdu</option>
                         </select>
                     </div>
                 </div>
-                <!-- <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
+                <div class="form-check mt-1">
+                    <input class="form-check-input" type="checkbox" value="" id="tnc">
+                    <label class="form-check-label" for="tnc">
                       I have read and agree to the <a href="/terms-and-conditons">Terms and Condtions</a>
                     </label>
-                  </div> -->
+                  </div>
                 <div class="row justify-content-center">
-                    <div class="col-8 col-sm-6 col-lg-6">
-                        <button type="button" id="start-record" class="btn btn-primary shadow-lg w-100 rounded mt-4 p-3"
-                            id="start-record">
-                            <i class="material-icons align-middle">play_circle_outline</i>
-                            <span class="align-middle h6">
+                    <div class="col-8 col-sm-6 col-lg-7 col-xl-6">
+                        <button type="button" id="start-record" class="btn btn-primary h6 shadow w-100 rounded mt-4 p-3"
+                            id="start-record" disabled>
                                 START RECORDING
-                            </span>
                         </button>
                     </div>
                 </div>
