@@ -63,5 +63,6 @@ line-height: 1.7;
   background-color: #FBFCFF;
 }
 .bg-thank-you{
-  background-image: url(/img/bg-thank-you.svg);
+  background: url(/img/bg-thank-you.svg) no-repeat;
+  background-size: cover;
 }

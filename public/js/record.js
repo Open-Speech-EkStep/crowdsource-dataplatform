@@ -1,6 +1,7 @@
 const speakerDetailsKey = "speakerDetails";
 const sentencesKey = "sentences";
 const currentIndexKey = "currentIndex";
+const countKey = "count";
 const initialize = () => {
     const sentences = crowdSource.sentences;
     const currentSentenceLbl = document.getElementById("currentSentenceLbl");
@@ -245,6 +246,7 @@ $(document).ready(() => {
         const localSpeakerDataParsed = JSON.parse(localSpeakerData);
         const localSentences = localStorage.getItem(sentencesKey);
         const localSentencesParsed = JSON.parse(localSentences);
+        const localCount = Number(localStorage.getItem(countKey));
 
         $instructionModal.on('hidden.bs.modal', function (e) {
             $pageContent.removeClass('d-none');
@@ -267,7 +269,8 @@ $(document).ready(() => {
         }
 
         if (localSentencesParsed && localSentencesParsed.userName === localSpeakerDataParsed.userName) {
-            crowdSource.sentences = localSentencesParsed.sentences.data;
+            crowdSource.sentences = localSentencesParsed.sentences;
+            crowdSource.count = localCount;
             $loader.hide();
             $pageContent.removeClass('d-none');
             initialize();
@@ -292,12 +295,14 @@ $(document).ready(() => {
                 .then(sentenceData => {
                     $instructionModal.modal('show');
                     crowdSource.sentences = sentenceData.data;
+                    crowdSource.count = sentenceData.count;
                     $loader.hide();
                     initialize();
                     localStorage.setItem(sentencesKey, JSON.stringify({
                         userName: localSpeakerDataParsed.userName,
-                        sentences: sentenceData
+                        sentences: sentenceData.data
                     }));
+                    localStorage.setItem(countKey,sentenceData.count);
                 })
                 .catch((err) => {
                     console.log(err);

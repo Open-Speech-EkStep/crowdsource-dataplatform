@@ -18,13 +18,22 @@ const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId,
     const encryptUserId = encrypt(userId);
     db.any(UpdateFileNameAndUserDetails, [file, ageGroup, gender, motherTongue, sentenceId, encryptUserId])
         .then((data) => {
-            if (!data) {
+            if (!data || !data.length) {
                 db.any(setNewUserAndFileName, [file, encryptUserId, sentenceId])
                     .then(() => cb(200, { success: true }))
-                    .catch(() => cb(500, { error: true }))
+                    .catch((err) => {
+                        console.log(err);
+                        cb(500, { error: true })
+                    })
+            }
+            else{
+                cb(200, { success: true })
             }
         })
-        .catch(err => console.log(err))
+        .catch((err) => {
+            console.log(err);
+            cb(500, { error: true })
+        })
 }
 
 const updateAndGetSentences = async function (req, res) {
@@ -37,11 +46,11 @@ const updateAndGetSentences = async function (req, res) {
     const encryptedUserName = encrypt(userName);
     const encryptedUserId = encrypt(userId);
     const sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, encryptedUserName]);
-    const count = db.any(sentencesCount, [encryptedUserId, encryptedUserName]);
+    const count = db.one(sentencesCount, [encryptedUserId, encryptedUserName]);
     const unAssign = db.any(unassignIncompleteSentences, [encryptedUserId, encryptedUserName])
     Promise.all([sentences, count, unAssign])
         .then(response => {
-            res.status(200).send({ data: response[0], count: response[1] });
+            res.status(200).send({ data: response[0], count: response[1].count });
         })
         .catch(err => {
             console.log(err);
