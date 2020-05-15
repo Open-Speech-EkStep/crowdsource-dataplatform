@@ -11,6 +11,7 @@ const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
 const https = require('https');
 const http = require('http');
+const {MAX_SIZE,VALID_FILE_TYPE} = require("./constants")
 // const Ddos = require('ddos')
 // const ddos = new Ddos({ burst: 6, limit: 50 })
 // app.use(ddos.express);
@@ -85,14 +86,14 @@ router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 // router.post("/contact-us", (req, res) => {
 //     res.status(200).send({ success: true })
 // })
-
+const convertIntoMB = (fileSizeInByte)=>{return Math.round(fileSizeInByte / (1024 * 1000));}
 router.post("/upload", upload.any(), (req, res) => {
     const file = req.files[0];
     const sentenceId = req.body.sentenceId;
     const speakerDetails = req.body.speakerDetails;
     const userId = req.cookies.userId
-    const fileSizeInMB = Math.round(file.size / (1024 * 1000));
-    if(fileSizeInMB > 10 && file.mimetype != 'audio/wav'){
+    const fileSizeInMB = convertIntoMB(file.size); 
+    if(fileSizeInMB > MAX_SIZE && file.mimetype != VALID_FILE_TYPE){
         res.status(400).send("Bad request");
     }
     uploadFile(file.path)
@@ -110,9 +111,9 @@ router.post("/upload", upload.any(), (req, res) => {
             res.sendStatus(500);
         });
 })
-// router.get("*", (req, res) => {
-//     res.render('not-found.ejs');
-// });
+router.get("*", (req, res) => {
+    res.render('not-found.ejs');
+});
 
 app.use('/', router);
 const httpServer = http.createServer(app);
