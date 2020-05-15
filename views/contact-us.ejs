@@ -4,55 +4,51 @@
 <head>
     <title>Vakyaansh: A crowdsourcing initiative for Indic languages</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link href="css/notyf.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/notyf.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+    type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
 
     <%- include common/header.ejs %>
-   
-    <div class="container-fluid pt-5 pb-6 mb-5">
-        <div class="row justify-content-center">
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-8 p-5 card bg-light">
-                <p class="display-5 font-wt-900 site-blue text-center">Contact Us</h1>
-
-                <div class="form-group">
-                    <label for="query" class="form-label">Email</label>
-                    <span class="text-danger">*</span>
-                        <input class="form-control" id="email" placeholder="example@xyz.com">
+    <div class="container">
+        <div class="d-flex j-center">
+            <div class="col-6 card">
+                <div class="d-flex j-center  mt-1">
+                    <h1>Contact Us</h1>
                 </div>
-                <div class="form-group">
-                    <label for="query" class="form-label">Query</label>
-                    <span class="text-danger">*</span>
-                        <textarea class="form-control" id="query" rows="5" placeholder="Your Query Here"></textarea>
-                </div>
-                <span class="text-danger">* Required Fields</span>
-
-                <div class="row justify-content-center">
-                    <div class="col-8 col-sm-6 col-lg-7 col-xl-6">
-                        <button type="button" id="submitQuery" class="btn btn-primary h6 shadow w-100 rounded mt-4 p-3">
-                                SUBMIT
-                        </button>
+                <div class="d-flex j-center mt-1">
+                    <div class="col-3">
+                        <label for="email">Email</label>
+                        <span class="required">*</span>
                     </div>
+                    <div class="col-8">
+                        <input required type="email" id="email" placeholder="Email" />
+                    </div>
+                </div>
+                <div class="d-flex j-center mt-1">
+                    <div class="col-3">
+                        <label for="query">Your Query</label>
+                        <span class="required">*</span>
+                    </div>
+                    <div class="col-8">
+                        <textarea required id="query" class="" placeholder="Write Your Query Here" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="d-flex j-center mt-1 mb-1">
+                    <button class="button1 small-btn" id="submitQuery">Submit</button>
                 </div>
             </div>
         </div>
     </div>
 
     <%- include common/footer.ejs %>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-        <script src="js/notyf.min.js"></script>
-        <script src="js/contact-us.js"></script>
+    <script src="js/notyf.min.js"></script>
+    <script src="js/contact-us.js"></script>
 </body>
 
 </html>
