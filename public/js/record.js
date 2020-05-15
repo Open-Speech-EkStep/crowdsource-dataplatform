@@ -7,6 +7,7 @@ const initialize = () => {
     const currentSentenceLbl = document.getElementById("currentSentenceLbl");
     const totalSentencesLbl = document.getElementById("totalSentencesLbl");
     const sentenceLbl = document.getElementById("sentenceLbl");
+    const $timeValue = $("#time-value");
     const $startRecordBtn = $("#startRecord");
     const $stopRecordBtn = $("#stopRecord");
     const $reRecordBtn = $("#reRecord");
@@ -46,6 +47,13 @@ const initialize = () => {
         animateCSS('#sentenceLbl', 'lightSpeedIn');
         currentIndex && setProgressBar(currentIndex)
     };
+    const setTimeProgress = (index) => {
+        const totalSeconds = (crowdSource.count+index) * 6;
+        const minutes = Math.floor(totalSeconds/60);
+        const seconds = totalSeconds % 60;
+        $timeValue.text(`${minutes}m ${seconds}s`);
+        animateCSS('#time-value', 'flash');
+    };
 
     const setCurrentSentenceIndex = (index) => currentSentenceLbl.innerText = index;
     const setTotalSentenceIndex = (index) => totalSentencesLbl.innerText = index;
@@ -56,6 +64,7 @@ const initialize = () => {
     setSentenceText(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
+    setTimeProgress(currentIndex);
 
     const notyf = new Notyf({
         duration: 3000,
@@ -152,6 +161,7 @@ const initialize = () => {
 
     $nextBtn.on('click', () => {
         uploadToServer();
+        setTimeProgress(currentIndex+1);
         if (currentIndex == totalItems - 1) {
             localStorage.removeItem(sentencesKey);
             localStorage.removeItem(currentIndexKey);
@@ -295,7 +305,7 @@ $(document).ready(() => {
                 .then(sentenceData => {
                     $instructionModal.modal('show');
                     crowdSource.sentences = sentenceData.data;
-                    crowdSource.count = sentenceData.count;
+                    crowdSource.count = Number(sentenceData.count);
                     $loader.hide();
                     initialize();
                     localStorage.setItem(sentencesKey, JSON.stringify({
