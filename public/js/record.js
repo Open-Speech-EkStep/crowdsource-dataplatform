@@ -49,8 +49,9 @@ const initialize = () => {
     };
     const setTimeProgress = (index) => {
         const totalSeconds = (crowdSource.count+index) * 6;
-        const minutes = Math.floor(totalSeconds/60);
-        const seconds = totalSeconds % 60;
+        const remainingSeconds = (30*60) - totalSeconds;
+        const minutes = Math.floor(remainingSeconds/60);
+        const seconds = remainingSeconds % 60;
         $timeValue.text(`${minutes}m ${seconds}s`);
         animateCSS('#time-value', 'flash');
     };
