@@ -31,7 +31,7 @@ const multerStorage = multer.diskStorage({
         cb(null, 'uploads/')
     },
     filename: function (req, file, cb) {
-        cb(null, new Date().toISOString()+"_"+ (Math.random() + 1).toString(36).substring(2,10)+ ".wav")
+        cb(null, new Date().toISOString() + "_" + (Math.random() + 1).toString(36).substring(2, 10) + ".wav")
     }
 })
 const upload = multer({ storage: multerStorage })
@@ -91,6 +91,10 @@ router.post("/upload", upload.any(), (req, res) => {
     const sentenceId = req.body.sentenceId;
     const speakerDetails = req.body.speakerDetails;
     const userId = req.cookies.userId
+    const fileSizeInMB = Math.round(file.size / (1024 * 1000));
+    if(fileSizeInMB > 10 && file.mimetype != 'audio/wav'){
+        res.status(400).send("Bad request");
+    }
     uploadFile(file.path)
         .then(data => {
             updateDbWithFileName(file.filename, sentenceId, speakerDetails, userId, (resStatus, resBody) => {
