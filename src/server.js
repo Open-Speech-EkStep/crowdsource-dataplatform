@@ -11,7 +11,7 @@ const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
 const https = require('https');
 const http = require('http');
-const {MAX_SIZE,VALID_FILE_TYPE} = require("./constants")
+const {MAX_SIZE,VALID_FILE_TYPE,ONE_YEAR} = require("./constants")
 // const Ddos = require('ddos')
 // const ddos = new Ddos({ burst: 6, limit: 50 })
 // app.use(ddos.express);
@@ -46,7 +46,7 @@ app.use(function (req, res, next) {
     let cookie = req.cookies.userId;
     if (cookie === undefined) {
         res.cookie('userId', uuidv4(), {
-            maxAge: 60 * 60 * 24 * 365 * 1000,
+            maxAge: ONE_YEAR,
             httpOnly: true,
             // uncomment this line when deployed on HTTPS using SSL
             // secure: true,
