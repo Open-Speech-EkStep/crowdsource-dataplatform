@@ -1,4 +1,4 @@
-const MAX_SIZE = 10;
+const MAX_SIZE = 8;
 const VALID_FILE_TYPE = 'audio/wav';
 const ONE_YEAR = 31536000000
 
