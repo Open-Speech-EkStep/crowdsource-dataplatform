@@ -26,13 +26,17 @@ const {MAX_SIZE,VALID_FILE_TYPE,ONE_YEAR} = require("./constants")
 //     ca: ca
 // };
 
+const randomString = ()=>{return (Math.random() + 1).toString(36).substring(2, 10)}
+
+const currentDateAndTime = ()=>{return new Date().toISOString().replace(/[-:T.]/g, "")}
+
 const multer = require('multer')
 const multerStorage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/')
     },
     filename: function (req, file, cb) {
-        cb(null, new Date().toISOString() + "_" + (Math.random() + 1).toString(36).substring(2, 10) + ".wav")
+        cb(null, currentDateAndTime() + "_" + randomString() + ".wav")
     }
 })
 const upload = multer({ storage: multerStorage })
