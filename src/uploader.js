@@ -3,7 +3,7 @@ const storage = new Storage();
 
 function uploadFile(filename) {
     const currentDate = new Date().toISOString().slice(0, 10)
-    return storage.bucket(process.env.BUCKET_NAME).upload(filename, { destination: `${currentDate}/${filename}` });
+    return storage.bucket(process.env.BUCKET_NAME).upload(filename, { destination: `raw/landing/hindi/audio/${currentDate}/${filename}`});
 }
 module.exports = {
     uploadFile
