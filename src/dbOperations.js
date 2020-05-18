@@ -1,6 +1,8 @@
-const { encrypt, decrypt } = require("./encryptAndDecrypt")
+const { encrypt } = require("./encryptAndDecrypt")
 const { UpdateFileNameAndUserDetails, setNewUserAndFileName,
-    unassignIncompleteSentences, updateAndGetSentencesQuery, sentencesCount } = require("./dbQuery");
+    unassignIncompleteSentences, updateAndGetSentencesQuery,
+    sentencesCount,getCountOfTotalSpeakerAndRecordedAudio} = require("./dbQuery");
+const {KIDS_AGE_GROUP,ADULT,KIDS} = require("./constants")
 const envVars = process.env;
 const pgp = require('pg-promise')();
 const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}/${envVars.DB_NAME}`);
@@ -11,9 +13,9 @@ const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId,
     const speakerDetailsJson = JSON.parse(speakerDetails);
     let ageGroup = null, gender = null, motherTongue = null;
     if (speakerDetailsJson) {
-        ageGroup = encrypt(speakerDetailsJson.age);
-        gender = encrypt(speakerDetailsJson.gender);
-        motherTongue = encrypt(speakerDetailsJson.motherTongue);
+        ageGroup = speakerDetailsJson.age;
+        gender = speakerDetailsJson.gender;
+        motherTongue = speakerDetailsJson.motherTongue;
     }
     const encryptUserId = encrypt(userId);
     db.any(UpdateFileNameAndUserDetails, [file, ageGroup, gender, motherTongue, sentenceId, encryptUserId])
@@ -36,6 +38,14 @@ const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId,
         })
 }
 
+const getSentencesBasedOnAge = function(ageGroup,encryptedUserId,userName) {
+    if(ageGroup == KIDS_AGE_GROUP){
+       return sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, userName,KIDS]);
+    }else{
+       return sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, userName, ADULT]);
+    }
+}
+
 const updateAndGetSentences = async function (req, res) {
     const userId = req.cookies.userId;
     const userName = req.body.userName;
@@ -43,11 +53,12 @@ const updateAndGetSentences = async function (req, res) {
         res.status(400).send({ error: 'required parameters missing' })
         return;
     }
-    const encryptedUserName = encrypt(userName);
+
+    const ageGroup = "ageGroup";
     const encryptedUserId = encrypt(userId);
-    const sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, encryptedUserName]);
-    const count = db.one(sentencesCount, [encryptedUserId, encryptedUserName]);
-    const unAssign = db.any(unassignIncompleteSentences, [encryptedUserId, encryptedUserName])
+    const sentences = getSentencesBasedOnAge(ageGroup,encryptedUserId,userName)
+    const count = db.one(sentencesCount, [encryptedUserId, userName]);
+    const unAssign = db.any(unassignIncompleteSentences, [encryptedUserId, userName])
     Promise.all([sentences, count, unAssign])
         .then(response => {
             res.status(200).send({ data: response[0], count: response[1].count });
@@ -58,7 +69,14 @@ const updateAndGetSentences = async function (req, res) {
         })
 }
 
+
+const getAllDetails =async function(){
+ const totalCount = await db.any(getCountOfTotalSpeakerAndRecordedAudio);
+ return totalCount
+}
+
 module.exports = {
     updateAndGetSentences,
-    updateDbWithFileName
+    updateDbWithFileName,
+    getAllDetails
 } 

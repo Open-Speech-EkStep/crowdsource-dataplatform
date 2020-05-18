@@ -5,13 +5,13 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 const router = express.Router();
-const { updateDbWithFileName, updateAndGetSentences } = require('./dbOperations')
+const { updateDbWithFileName, updateAndGetSentences, getAllDetails } = require('./dbOperations')
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
 const https = require('https');
 const http = require('http');
-const {MAX_SIZE,VALID_FILE_TYPE,ONE_YEAR} = require("./constants")
+const { MAX_SIZE, VALID_FILE_TYPE, ONE_YEAR } = require("./constants")
 // const Ddos = require('ddos')
 // const ddos = new Ddos({ burst: 6, limit: 50 })
 // app.use(ddos.express);
@@ -26,9 +26,9 @@ const {MAX_SIZE,VALID_FILE_TYPE,ONE_YEAR} = require("./constants")
 //     ca: ca
 // };
 
-const randomString = ()=>{return (Math.random() + 1).toString(36).substring(2, 10)}
+const randomString = () => { return (Math.random() + 1).toString(36).substring(2, 10) }
 
-const currentDateAndTime = ()=>{return new Date().toISOString().replace(/[-:T.]/g, "")}
+const currentDateAndTime = () => { return new Date().toISOString().replace(/[-:T.]/g, "") }
 
 const multer = require('multer')
 const multerStorage = multer.diskStorage({
@@ -61,7 +61,8 @@ app.use(function (req, res, next) {
 app.use(express.static('public'))
 app.set('view engine', 'ejs');
 
-router.get('/', function (req, res) {
+router.get('/', async function (req, res) {
+    const allDetails = await getAllDetails()
     res.render('home.ejs');
 });
 router.get('/about-us', function (req, res) {
@@ -90,14 +91,14 @@ router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 // router.post("/contact-us", (req, res) => {
 //     res.status(200).send({ success: true })
 // })
-const convertIntoMB = (fileSizeInByte)=>{return Math.round(fileSizeInByte / (1024 * 1000));}
+const convertIntoMB = (fileSizeInByte) => { return Math.round(fileSizeInByte / (1024 * 1000)); }
 router.post("/upload", upload.any(), (req, res) => {
     const file = req.files[0];
     const sentenceId = req.body.sentenceId;
     const speakerDetails = req.body.speakerDetails;
     const userId = req.cookies.userId
-    const fileSizeInMB = convertIntoMB(file.size); 
-    if(fileSizeInMB > MAX_SIZE && file.mimetype != VALID_FILE_TYPE){
+    const fileSizeInMB = convertIntoMB(file.size);
+    if (fileSizeInMB > MAX_SIZE && file.mimetype != VALID_FILE_TYPE) {
         res.status(400).send("Bad request");
     }
     uploadFile(file.path)
