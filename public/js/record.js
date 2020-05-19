@@ -9,12 +9,14 @@ const initialize = () => {
     const sentenceLbl = document.getElementById("sentenceLbl");
     const $timeValue = $("#time-value");
     const $startRecordBtn = $("#startRecord");
+    const $startRecordRow = $("#startRecordRow");
     const $stopRecordBtn = $("#stopRecord");
     const $reRecordBtn = $("#reRecord");
     const $visualizer = $("#visualizer");
     const $player = $("#player");
     const $nextBtn = $("#nextBtn");
     const $getStarted = $("#get-started");
+    const $skipBtn = $("#skipBtn");
     const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
     const $recordingSign = $("#recording-sign");
     const $progressBar = $(".progress-bar");
@@ -48,9 +50,9 @@ const initialize = () => {
         currentIndex && setProgressBar(currentIndex)
     };
     const setTimeProgress = (index) => {
-        const totalSeconds = (crowdSource.count+index) * 6;
-        const remainingSeconds = (30*60) - totalSeconds;
-        const minutes = Math.floor(remainingSeconds/60);
+        const totalSeconds = (crowdSource.count + index) * 6;
+        const remainingSeconds = (30 * 60) - totalSeconds;
+        const minutes = Math.floor(remainingSeconds / 60);
         const seconds = remainingSeconds % 60;
         $timeValue.text(`${minutes}m ${seconds}s`);
         animateCSS('#time-value', 'flash');
@@ -93,7 +95,7 @@ const initialize = () => {
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             .then((stream) => {
                 $getStarted.hide();
-                $startRecordBtn.addClass('d-none');
+                $startRecordRow.addClass('d-none');
                 $stopRecordBtn.removeClass('d-none');
                 $recordingSign.removeClass('d-none');
                 $reRecordBtn.addClass('d-none');
@@ -124,12 +126,11 @@ const initialize = () => {
             .catch(err => {
                 console.log(err)
                 notyf.error("Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission");
-                $startRecordBtn.removeClass('d-none');
+                $startRecordRow.removeClass('d-none');
                 $stopRecordBtn.addClass("d-none");
                 $nextBtn.addClass('d-none');
                 $reRecordBtn.addClass('d-none');
                 $recordingSign.addClass('d-none');
-                $startRecordBtn.addClass("d-none");
                 $player.addClass('d-none');
                 $player.trigger('pause');
                 $visualizer.addClass("d-none");
@@ -142,7 +143,7 @@ const initialize = () => {
         $nextBtn.removeClass('d-none');
         $reRecordBtn.removeClass('d-none');
         $recordingSign.addClass('d-none');
-        $startRecordBtn.addClass("d-none");
+        $startRecordRow.addClass("d-none");
         $player.removeClass('d-none');
         $visualizer.addClass("d-none");
 
@@ -151,7 +152,7 @@ const initialize = () => {
         //create the wav blob and pass it on to createObjectURL 
         rec.exportWAV((blob) => {
             const URL = window.URL || window.webkitURL;
-            var bloburl = URL.createObjectURL(blob);
+            const bloburl = URL.createObjectURL(blob);
             crowdSource.audioBlob = blob;
             $player.prop("src", bloburl)
         });
@@ -160,9 +161,12 @@ const initialize = () => {
         }
     });
 
-    $nextBtn.on('click', () => {
-        uploadToServer();
-        setTimeProgress(currentIndex+1);
+    $nextBtn.add($skipBtn).on('click', (event) => {
+        if(event.target.id === "nextBtn")
+        {
+            uploadToServer();
+        }
+        setTimeProgress(currentIndex + 1);
         if (currentIndex == totalItems - 1) {
             localStorage.removeItem(sentencesKey);
             localStorage.removeItem(currentIndexKey);
@@ -173,27 +177,32 @@ const initialize = () => {
             }, 2000);
         }
         else if (currentIndex < totalItems - 1) {
-            currentIndex++;
-            setSentenceText(currentIndex);
-            setCurrentSentenceIndex(currentIndex + 1);
-            localStorage.setItem(currentIndexKey, currentIndex);
+            incrementCurrentIndex();
         }
 
         $player.addClass('d-none');
         $player.trigger('pause');
         $nextBtn.addClass('d-none');
         $reRecordBtn.addClass('d-none');
-        $startRecordBtn.removeClass('d-none');
-        if (progressMessages[currentIndex] && currentIndex < totalItems - 1) {
-            $getStarted.text(progressMessages[currentIndex]).show();
-        }
-        else {
-            $getStarted.hide();
-        }
-    })
+        $startRecordRow.removeClass('d-none');
+        // if (progressMessages[currentIndex] && currentIndex < totalItems - 1) {
+        //     $getStarted.text(progressMessages[currentIndex]).show();
+        // }
+        // else {
+        //     $getStarted.hide();
+        // }
+    });
+
+    function incrementCurrentIndex() {
+        currentIndex++;
+        setSentenceText(currentIndex);
+        setCurrentSentenceIndex(currentIndex + 1);
+        $getStarted.text(progressMessages[currentIndex])
+        localStorage.setItem(currentIndexKey, currentIndex);
+    }
 
     function uploadToServer() {
-        var fd = new FormData();
+        const fd = new FormData();
         fd.append("audio_data", crowdSource.audioBlob);
         fd.append("speakerDetails", localStorage.getItem(speakerDetailsKey));
         fd.append("sentenceId", crowdSource.sentences[currentIndex].sentenceId);
@@ -209,9 +218,9 @@ const initialize = () => {
             })
     }
     function visualize(visualizer, analyser) {
-        var canvasCtx = visualizer.getContext("2d");
-        var bufferLength = analyser.frequencyBinCount;
-        var dataArray = new Uint8Array(bufferLength);
+        const canvasCtx = visualizer.getContext("2d");
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
         WIDTH = visualizer.width;
         HEIGHT = visualizer.height;
         // TODO do we need to limit the number of time visualize refreshes per second
@@ -226,11 +235,11 @@ const initialize = () => {
             canvasCtx.lineWidth = 2;
             canvasCtx.strokeStyle = 'rgb(0,123,255)';
             canvasCtx.beginPath();
-            var sliceWidth = WIDTH * 1.0 / bufferLength;
-            var x = 0;
-            for (var i = 0; i < bufferLength; i++) {
-                var v = dataArray[i] / 128.0; // uint8
-                var y = v * HEIGHT / 2; // uint8
+            const sliceWidth = WIDTH * 1.0 / bufferLength;
+            let x = 0;
+            for (let i = 0; i < bufferLength; i++) {
+                let v = dataArray[i] / 128.0; // uint8
+                let y = v * HEIGHT / 2; // uint8
                 if (i === 0) {
                     canvasCtx.moveTo(x, y);
                 } else {
@@ -313,7 +322,7 @@ $(document).ready(() => {
                         userName: localSpeakerDataParsed.userName,
                         sentences: sentenceData.data
                     }));
-                    localStorage.setItem(countKey,sentenceData.count);
+                    localStorage.setItem(countKey, sentenceData.count);
                 })
                 .catch((err) => {
                     console.log(err);

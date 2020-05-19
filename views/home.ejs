@@ -17,7 +17,7 @@
     <%- include common/header.ejs %>
     <div class="container-fluid">
         <div class="row pt-5">
-            <div class="col-6 ml-auto p-5 text-dark mt-5">
+            <div class="col-6 ml-lg-auto py-5 pl-5 text-dark mt-5">
                 <h1 class="display-5 font-wt-900 site-blue">Vakyaansh: A crowdsourcing initiative for Indic languages
                 </h1>
                 <p class="h4 font-weight-light lh-7 site-blue text-justify">We have envisioned a Speech recognition
@@ -45,7 +45,7 @@
                 </div>
 
             </div>
-            <div class="col-5 pt-5 mt-5 text-right pr-0">
+            <div class="col-lg-5 col-6 pt-5 mt-5 text-right px-0">
                 <img src="/img/home.svg" class="img img-fluid">
             </div>
         </div>
@@ -59,8 +59,8 @@
         </div>
         <div class="row pb-5 justify-content-center mt-5">
             <div class="col-8 col-lg-4 mb-3 text-center pb-5">
-               <img src="img/spd-1.svg" alt="Speaker Diversity" class="img img-fluid h-100">
-               <p class="h4 mt-4">Age Group</p>
+                <img src="img/spd-1.svg" alt="Speaker Diversity" class="img img-fluid h-100">
+                <p class="h4 mt-4">Age Group</p>
             </div>
             <div class="col-8 col-lg-4 mb-3 text-center pb-5">
                 <img src="img/spd-2.svg" alt="Speaker Diversity" class="img img-fluid h-100">
@@ -79,7 +79,7 @@
                 <p class="display-5 font-wt-900 site-blue text-center">Speaker Details</h1>
                     <div class="form-group">
                         <label for="username" class="form-label">User Name</label>
-                        <input class="form-control" id="username" placeholder="speaker.xyz">
+                        <input class="form-control" maxlength="8" id="username" placeholder="Please don't enter mobile/email here">
                     </div>
                     <div class="form-group pt-3">
                         <label for="gender" class="form-label">Gender</label>
@@ -145,8 +145,8 @@
                         </div>
                     </div>
                     <div class="form-check mt-1">
-                        <input class="form-check-input" type="checkbox" value="" id="tnc">
-                        <label class="form-check-label ml-2" for="tnc">
+                        <input class="form-check-input mt-0 mt-sm-1" type="checkbox" value="" id="tnc">
+                        <label class="form-check-label ml-md-2 ml-4" for="tnc">
                             I have read and agree to the <a href="/terms-and-conditions">Terms and Conditions</a>
                         </label>
                     </div>
@@ -157,6 +157,12 @@
                                 START RECORDING
                             </button>
                         </div>
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade d-none" role="alert" id="username-alert">
+                        Please don't use email or mobile number as user name
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade d-none" role="alert" id="tnc-alert">
+                        Please agree to the terms and condition before proceeding
                     </div>
             </div>
         </div>

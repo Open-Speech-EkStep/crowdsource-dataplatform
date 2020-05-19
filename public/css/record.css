@@ -160,6 +160,9 @@ audio {
   right: 1rem;
   bottom: 2.8rem;
 }
+.h-1r{
+  height: 1rem;
+}
 /* loader */
 .overlay__content {
   left: 50%;

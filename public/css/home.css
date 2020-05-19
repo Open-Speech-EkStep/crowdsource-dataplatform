@@ -41,6 +41,12 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6
 .pt-6{
   padding-top: 6rem;
 }
+.mb-6{
+  margin-bottom: 6rem;
+}
+.mt-n6{
+  margin-top: -6rem;
+}
 .lh-7{
 line-height: 1.7;
 }
@@ -61,6 +67,9 @@ line-height: 1.7;
 }
 .bg-light-blue{
   background-color: #FBFCFF;
+}
+.bg-blue{
+  background-color: #3F80FF;
 }
 .bg-thank-you{
   background: url(/img/bg-thank-you.svg) no-repeat;
