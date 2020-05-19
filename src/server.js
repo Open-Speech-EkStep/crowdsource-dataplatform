@@ -92,8 +92,8 @@ router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 //     res.status(200).send({ success: true })
 // })
 const convertIntoMB = (fileSizeInByte) => { return Math.round(fileSizeInByte / (1024 * 1000)); }
-router.post("/upload", upload.any(), (req, res) => {
-    const file = req.files[0];
+router.post("/upload", upload.single('audio_data'), (req, res) => {
+    const file = req.file;
     const sentenceId = req.body.sentenceId;
     const speakerDetails = req.body.speakerDetails;
     const userId = req.cookies.userId

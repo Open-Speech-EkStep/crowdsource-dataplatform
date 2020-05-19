@@ -299,7 +299,7 @@ $(document).ready(() => {
             localStorage.removeItem(currentIndexKey);
             fetch('/sentences', {
                 method: "POST",
-                body: JSON.stringify({ userName: localSpeakerDataParsed.userName }),
+                body: JSON.stringify({ userName: localSpeakerDataParsed.userName, age:localSpeakerDataParsed.age }),
                 headers: {
                     'Content-Type': 'application/json'
                 },
