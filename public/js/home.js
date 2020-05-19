@@ -5,7 +5,7 @@ const motherTongue = document.getElementById("mother-tongue");
 const userName = document.getElementById("username");
 const $tncCheckbox = $("#tnc");
 const $usernameAlert = $("#username-alert");
-const tncAlert = $("#tnc-alert");
+const $tncAlert = $("#tnc-alert");
 const mobileRegex  =/^[6-9]\d{9}$/;
 const emailRegex = /^\S+@\S+[\.][0-9a-z]+$/
 
@@ -39,9 +39,11 @@ genderRadios.forEach(element => {
 $tncCheckbox.change(function () {
     if (this.checked) {
         $startRecordBtn.removeAttr('disabled');
+        $tncAlert.removeClass("show").addClass("d-none");
     }
     else {
         $startRecordBtn.prop("disabled", "true");
+        $tncAlert.removeClass("d-none").addClass("show");
     }
 });
 
