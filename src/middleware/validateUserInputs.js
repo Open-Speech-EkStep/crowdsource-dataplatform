@@ -6,7 +6,7 @@ const convertIntoMB = (fileSizeInByte) => { return Math.round(fileSizeInByte / (
 const validateUserInputAndFile = function (req, res, next) {
     const speakerDetails = req.body.speakerDetails;
     const speakerDetailsJson = JSON.parse(speakerDetails);
-    const file = req.files[0];
+    const file = req.file;
     const fileSizeInMB = convertIntoMB(file.size);
     const gender = speakerDetailsJson.gender;
     const motherTongue = speakerDetailsJson.motherTongue;

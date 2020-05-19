@@ -12,7 +12,7 @@ const compression = require('compression');
 const https = require('https');
 const http = require('http');
 const { ONE_YEAR } = require("./constants");
-const {validateUserInputAndFile,validateUserInfo} = require("./middleware/validateUserInputs")
+const { validateUserInputAndFile, validateUserInfo } = require("./middleware/validateUserInputs")
 // const Ddos = require('ddos')
 // const ddos = new Ddos({ burst: 6, limit: 50 })
 // app.use(ddos.express);
@@ -43,8 +43,8 @@ const multerStorage = multer.diskStorage({
 const upload = multer({ storage: multerStorage })
 app.use(express.json());
 app.use(upload.single('audio_data'));
-app.use("/sentences",validateUserInfo)
-app.use("/upload",validateUserInputAndFile)
+app.use("/sentences", validateUserInfo)
+app.use("/upload", validateUserInputAndFile)
 app.use(express.static(__dirname, { dotfiles: 'allow' }));
 app.use(helmet())
 app.disable('x-powered-by');
