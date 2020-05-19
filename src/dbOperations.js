@@ -1,8 +1,8 @@
 const { encrypt } = require("./encryptAndDecrypt")
 const { UpdateFileNameAndUserDetails, setNewUserAndFileName,
     unassignIncompleteSentences, updateAndGetSentencesQuery,
-    sentencesCount,getCountOfTotalSpeakerAndRecordedAudio} = require("./dbQuery");
-const {KIDS_AGE_GROUP,ADULT,KIDS} = require("./constants")
+    sentencesCount, getCountOfTotalSpeakerAndRecordedAudio } = require("./dbQuery");
+const { KIDS_AGE_GROUP, ADULT, KIDS } = require("./constants")
 const envVars = process.env;
 const pgp = require('pg-promise')();
 const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}/${envVars.DB_NAME}`);
@@ -17,6 +17,7 @@ const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId,
         gender = speakerDetailsJson.gender;
         motherTongue = speakerDetailsJson.motherTongue;
     }
+    console.log(ageGroup)
     const encryptUserId = encrypt(userId);
     db.any(UpdateFileNameAndUserDetails, [file, ageGroup, gender, motherTongue, sentenceId, encryptUserId])
         .then((data) => {
@@ -28,7 +29,7 @@ const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId,
                         cb(500, { error: true })
                     })
             }
-            else{
+            else {
                 cb(200, { success: true })
             }
         })
@@ -38,11 +39,11 @@ const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId,
         })
 }
 
-const getSentencesBasedOnAge = function(ageGroup,encryptedUserId,userName) {
-    if(ageGroup == KIDS_AGE_GROUP){
-       return sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, userName,KIDS]);
-    }else{
-       return sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, userName, ADULT]);
+const getSentencesBasedOnAge = function (ageGroup, encryptedUserId, userName) {
+    if (ageGroup === KIDS_AGE_GROUP) {
+        return sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, userName, KIDS]);
+    } else {
+        return sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, userName, ADULT]);
     }
 }
 
@@ -56,7 +57,7 @@ const updateAndGetSentences = async function (req, res) {
 
     const ageGroup = "ageGroup";
     const encryptedUserId = encrypt(userId);
-    const sentences = getSentencesBasedOnAge(ageGroup,encryptedUserId,userName)
+    const sentences = getSentencesBasedOnAge(ageGroup, encryptedUserId, userName)
     const count = db.one(sentencesCount, [encryptedUserId, userName]);
     const unAssign = db.any(unassignIncompleteSentences, [encryptedUserId, userName])
     Promise.all([sentences, count, unAssign])
@@ -70,9 +71,9 @@ const updateAndGetSentences = async function (req, res) {
 }
 
 
-const getAllDetails =async function(){
- const totalCount = await db.any(getCountOfTotalSpeakerAndRecordedAudio);
- return totalCount
+const getAllDetails = async function () {
+    const totalCount = await db.any(getCountOfTotalSpeakerAndRecordedAudio);
+    return totalCount
 }
 
 module.exports = {
