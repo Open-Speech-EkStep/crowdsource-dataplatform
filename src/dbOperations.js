@@ -17,7 +17,6 @@ const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId,
         gender = speakerDetailsJson.gender;
         motherTongue = speakerDetailsJson.motherTongue;
     }
-    console.log(ageGroup)
     const encryptUserId = encrypt(userId);
     db.any(UpdateFileNameAndUserDetails, [file, ageGroup, gender, motherTongue, sentenceId, encryptUserId])
         .then((data) => {
@@ -54,8 +53,7 @@ const updateAndGetSentences = async function (req, res) {
         res.status(400).send({ error: 'required parameters missing' })
         return;
     }
-
-    const ageGroup = "ageGroup";
+    const ageGroup = req.body.age;
     const encryptedUserId = encrypt(userId);
     const sentences = getSentencesBasedOnAge(ageGroup, encryptedUserId, userName)
     const count = db.one(sentencesCount, [encryptedUserId, userName]);
