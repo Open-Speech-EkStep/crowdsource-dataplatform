@@ -65,10 +65,13 @@ app.use(function (req, res, next) {
 app.use(express.static('public'))
 app.set('view engine', 'ejs');
 
-router.get('/', async function (req, res) {
-    const allDetails = await getAllDetails()
+router.get('/',function (req, res) {
     res.render('home.ejs');
 });
+
+router.get("/getDetails",async function (req, res) {
+    const allDetails = await getAllDetails()});
+
 router.get('/about-us', function (req, res) {
     res.render('about-us.ejs');
 });
