@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 const router = express.Router();
-const { updateDbWithFileName, updateAndGetSentences, getAllDetails } = require('./dbOperations')
+const { updateDbWithFileName, updateAndGetSentences, getAllDetails, getAllInfo } = require('./dbOperations')
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
@@ -65,12 +65,19 @@ app.use(function (req, res, next) {
 app.use(express.static('public'))
 app.set('view engine', 'ejs');
 
-router.get('/',function (req, res) {
+router.get('/', function (req, res) {
     res.render('home.ejs');
 });
 
-router.get("/getDetails",async function (req, res) {
-    const allDetails = await getAllDetails()});
+router.get("/getDetails", function (req, res) {
+    const allDetails = getAllDetails()
+    res.send(allDetails)
+});
+
+router.get("/getAllInfo", async function (req, res) {
+    const allDetails = await getAllInfo()
+    res.status(200).send(allDetails);
+});
 
 router.get('/about-us', function (req, res) {
     res.render('about-us.ejs');
