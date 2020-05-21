@@ -116,8 +116,10 @@ router.post("/upload", (req, res) => {
                 res.status(resStatus).send(resBody);
             })
             fs.unlink(file.path, function (err) {
-                if (err) console.log(err);
-                console.log('File deleted!');
+                if (err) {
+                    console.log(`File ${file.path} not deleted!`);
+                    console.log(err);
+                }
             });
         })
         .catch((err) => {

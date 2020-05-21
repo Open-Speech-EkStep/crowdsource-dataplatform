@@ -7,7 +7,9 @@ const initialize = () => {
     const currentSentenceLbl = document.getElementById("currentSentenceLbl");
     const totalSentencesLbl = document.getElementById("totalSentencesLbl");
     const sentenceLbl = document.getElementById("sentenceLbl");
+    const $timeProgress = $("#time-progress");
     const $timeValue = $("#time-value");
+    const $timeGraphBar = $("#graphbar");
     const $startRecordBtn = $("#startRecord");
     const $startRecordRow = $("#startRecordRow");
     const $stopRecordBtn = $("#stopRecord");
@@ -20,6 +22,7 @@ const initialize = () => {
     const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
     const $recordingSign = $("#recording-sign");
     const $progressBar = $(".progress-bar");
+    const $footer = $("footer");
     const progressMessages = [
         "Let’s get started", "",
         "We know you can do more! ", "", "",
@@ -27,8 +30,17 @@ const initialize = () => {
         "Just few more steps to go!", "",
         "Nine dead, one more to go!",
         "Yay! Done & Dusted!"
-    ]
-
+    ];
+    const adjustTimeProgressBarHeight = () => {
+        const footerHeight = $footer.outerHeight();
+        const timeProgressBottomInPx = $timeProgress.css('bottom');
+        const timeProgressBottomInNumber = Number(timeProgressBottomInPx.substring(0, timeProgressBottomInPx.length - 2));
+        if (timeProgressBottomInNumber) {
+            $timeProgress.css('bottom', footerHeight + "px")
+        }
+    };
+    $(window).resize(adjustTimeProgressBarHeight);
+    adjustTimeProgressBarHeight();
     function animateCSS(element, animationName, callback) {
         const node = document.querySelector(element)
         node.classList.add('animated', animationName)
@@ -50,12 +62,20 @@ const initialize = () => {
         currentIndex && setProgressBar(currentIndex)
     };
     const setTimeProgress = (index) => {
-        const totalSeconds = (crowdSource.count + index) * 6;
-        const remainingSeconds = (30 * 60) - totalSeconds;
+        //42em is graphforeground height in css
+        const graphforegroundHeight = 42;
+        // assuming a sentence is of 6 second
+        const totalSecondsContributed = (crowdSource.count + index) * 6;
+        const totalSecondsToContribute = 30 * 60;
+        const remainingSeconds = totalSecondsToContribute - totalSecondsContributed;
         const minutes = Math.floor(remainingSeconds / 60);
         const seconds = remainingSeconds % 60;
         $timeValue.text(`${minutes}m ${seconds}s`);
         animateCSS('#time-value', 'flash');
+        const perSecondTimeGraphHeight = graphforegroundHeight/totalSecondsToContribute;
+        const currentTimeGraphHeight = perSecondTimeGraphHeight * totalSecondsContributed;
+        $timeGraphBar.height(currentTimeGraphHeight+"em");
+
     };
 
     const setCurrentSentenceIndex = (index) => currentSentenceLbl.innerText = index;
@@ -162,8 +182,7 @@ const initialize = () => {
     });
 
     $nextBtn.add($skipBtn).on('click', (event) => {
-        if(event.target.id === "nextBtn")
-        {
+        if (event.target.id === "nextBtn") {
             uploadToServer();
         }
         setTimeProgress(currentIndex + 1);
@@ -299,7 +318,7 @@ $(document).ready(() => {
             localStorage.removeItem(currentIndexKey);
             fetch('/sentences', {
                 method: "POST",
-                body: JSON.stringify({ userName: localSpeakerDataParsed.userName, age:localSpeakerDataParsed.age }),
+                body: JSON.stringify({ userName: localSpeakerDataParsed.userName, age: localSpeakerDataParsed.age }),
                 headers: {
                     'Content-Type': 'application/json'
                 },
