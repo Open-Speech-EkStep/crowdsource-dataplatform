@@ -5,13 +5,15 @@
     <title>Vakyaansh: A crowdsourcing initiative for Indic languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="css/notyf.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet"
-        type="text/css">
+    <!-- google APIs -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- 3rd party libs -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link href="css/notyf.min.css" rel="stylesheet">
+    <!-- My custom css -->
     <link rel="stylesheet" type="text/css" href="css/record.css">
 </head>
 
@@ -50,7 +52,8 @@
                     </button>
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-                    <button type="button" tabindex="-1" id="skipBtn" class="btn btn-outline-primary h6 w-100 rounded mt-4 p-3">
+                    <button type="button" tabindex="-1" id="skipBtn"
+                        class="btn btn-outline-primary h6 w-100 rounded mt-4 p-3">
                         SKIP
                     </button>
                 </div>
@@ -95,13 +98,19 @@
             </div>
         </div>
         <div id="time-progress" class="position-fixed text-center">
-            <img src="img/progress-bar-sq.svg" alt="time progress" class="img img-fluid">
+            <!-- <img src="img/progress-bar-sq.svg" alt="time progress" class="img img-fluid"> -->
+            <div id="graphcontainer" class="mx-auto">
+                <div id="graphbackground"></div>
+                <div id="graphbar"></div>
+                <div id="graphforeground">
+                </div>
+            </div>
             <div>
                 <span class="h6" id="time-value">0s</span><span class="text-muted">/30 min</span>
+                <p>away from reaching your goal!</p>
             </div>
-            
-            <p>away from reaching your goal!</p>
         </div>
+
     </div>
 
     <%- include common/footer.ejs %>
@@ -119,26 +128,26 @@
                     <div class="row pb-5 justify-content-center">
                         <div class="col-lg-2 col-sm-4 col-6 mb-3 text-center">
                             <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">settings_voice</i>
-                            <p class="mt-3 lh-7 site-blue">Please test your <b>microphone</b></p>
+                            <p class="mt-3 site-blue">Please test your <b>microphone</b></p>
                         </div>
                         <div class="col-lg-2 col-sm-4 col-6 mb-3 text-center">
                             <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">speaker</i>
-                            <p class="mt-3 lh-7 site-blue">Please test your <b>speakers</b></p>
+                            <p class="mt-3 site-blue">Please test your <b>speakers</b></p>
                         </div>
                         <div class="col-lg-2 col-sm-4 col-6 mb-3 text-center">
                             <i class="material-icons p-4  rounded-circle md-48 text-primary border-3">equalizer</i>
-                            <p class="mt-3 lh-7 site-blue">Ensure there is <b>no background noise</b></p>
+                            <p class="mt-3 site-blue">Ensure there is <b>no background noise</b></p>
                         </div>
                         <div class="col-lg-2 col-sm-4 col-6 mb-3 text-center">
                             <i
                                 class="material-icons p-4  rounded-circle md-48 text-primary border-3">record_voice_over</i>
-                            <p class="mt-3 lh-7 site-blue">Get comfortable with the prompted text, before recording, by
+                            <p class="mt-3 site-blue">Get comfortable with the prompted text, before recording, by
                                 <b>reading it aloud</b></p>
                         </div>
                         <div class="col-lg-2 col-sm-4 col-6 mb-3 text-center">
                             <i
                                 class="material-icons p-4  rounded-circle md-48 text-primary border-3">play_circle_filled</i>
-                            <p class="mt-3 lh-7 site-blue">Get started by clicking on <b>Record</b> button</p>
+                            <p class="mt-3 site-blue">Get started by clicking on <b>Record</b> button</p>
                         </div>
                     </div>
                 </div>

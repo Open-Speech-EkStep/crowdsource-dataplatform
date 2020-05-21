@@ -5,10 +5,12 @@
     <title>Vakyaansh: A crowdsourcing initiative for Indic languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet"
-        type="text/css">
+    <!-- google APIs -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <!-- 3rd party libs -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- My custom css -->
     <link rel="stylesheet" type="text/css" href="css/home.css">
 </head>
 
@@ -16,15 +18,17 @@
 
     <%- include common/header.ejs %>
     <div class="container-fluid">
-        <div class="row pt-5">
-            <div class="col-6 ml-lg-auto py-5 pl-5 text-dark mt-5">
-                <h1 class="display-5 font-wt-900 site-blue">Vakyaansh: A crowdsourcing initiative for Indic languages
+        <div class="row pt-lg-5">
+            <div class="col-8 col-lg-6 ml-lg-auto py-5 pl-5 text-dark mt-4">
+                <h1 class="display-5 font-wt-900 site-blue lh-5">Vakyaansh: A crowdsourcing initiative for Indic
+                    languages
                 </h1>
-                <p class="h4 font-weight-light lh-7 site-blue text-justify">We have envisioned a Speech recognition
-                    product that focusses solely on our languages. This vision requires enormous amount of diversified
-                    dataset of Indian voices and hence, we are reaching out to you for your contribution.<a class="ml-1"
-                        href="/about-us"> See More</a></p>
-                <div class="row align-items-center">
+                <p class="h4 font-weight-light lh-7 site-blue text-justify mt-5">For the development of a speech
+                    recognition product that focuses solely on Indian languages,
+                    there is a need for an enormous repository of diversified Indian voices. Through
+                    Vakyaansh, we are reaching out to you to contribute your voices to create a diverse open source
+                    repository of Indian voices to this end.<a class="ml-1" href="/about-us"> See More</a></p>
+                <div class="row align-items-center mt-4">
                     <div class="col-8 col-lg-5">
                         <a role="button" href="#speaker-details"
                             class="btn btn-outline-primary h6 w-100 rounded mt-4 p-3">
@@ -45,7 +49,7 @@
                 </div>
 
             </div>
-            <div class="col-lg-5 col-6 pt-5 mt-5 text-right px-0">
+            <div class="col-lg-5 col-12 pt-5 mt-5 text-right px-0">
                 <img src="/img/home.svg" class="img img-fluid">
             </div>
         </div>
@@ -59,15 +63,15 @@
         </div>
         <div class="row pb-5 justify-content-center mt-5">
             <div class="col-8 col-lg-4 mb-3 text-center pb-5">
-                <img src="img/spd-1.svg" alt="Speaker Diversity" class="img img-fluid h-100">
+                <img src="img/spd-1-2.png" alt="Speaker Diversity" class="img img-fluid">
                 <p class="h4 mt-4">Age Group</p>
             </div>
             <div class="col-8 col-lg-4 mb-3 text-center pb-5">
-                <img src="img/spd-2.svg" alt="Speaker Diversity" class="img img-fluid h-100">
+                <img src="img/spd-2-2.png" alt="Speaker Diversity" class="img img-fluid">
                 <p class="h4 mt-4">Mother Tongue</p>
             </div>
             <div class="col-8 col-lg-4 mb-3 text-center pb-5">
-                <img src="img/spd-3.svg" alt="Speaker Diversity" class="img img-fluid h-100">
+                <img src="img/spd-3-2.png" alt="Speaker Diversity" class="img img-fluid">
                 <p class="h4 mt-4">Gender</p>
             </div>
         </div>
@@ -77,9 +81,24 @@
         <div class="row justify-content-center">
             <div class="col-xl-4 col-md-6 col-sm-8 col-11 p-5 card" id="speaker-details">
                 <p class="display-5 font-wt-900 site-blue text-center">Speaker Details</h1>
-                    <div class="form-group">
+                    <p class="text-muted font-italic">All the fields are optional but you can make your submitted data
+                        rich by providing some anonymous data.</p>
+                    <div class="form-group mt-2">
                         <label for="username" class="form-label">User Name</label>
-                        <input class="form-control" maxlength="12" id="username" placeholder="Please don't enter mobile/email here">
+                        <input class="form-control" maxlength="12" id="username"
+                            placeholder="Please don't enter mobile/email here" data-toggle="tooltip"
+                            title="Username can't be more than 12 characters">
+                        <div class="text-danger mt-2 d-none" id="username-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px"
+                                height="18px">
+                                <path d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                            </svg>
+                            <span class="align-middle">
+                                Please don't use email or mobile number as user name
+                            </span>
+                        </div>
                     </div>
                     <div class="form-group pt-3">
                         <label for="gender" class="form-label">Gender</label>
@@ -153,17 +172,14 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-12">
-                            <button type="button" id="start-record"
-                                class="btn btn-primary h6 shadow w-100 rounded mt-4 p-3" disabled>
-                                START RECORDING
-                            </button>
+                            <div class="mt-4 outline-0" tabindex="0" data-toggle="tooltip"
+                                title="Please validate all fields and agree to the terms and condition before proceeding">
+                                <button id="start-record" class="btn btn-primary h6 shadow w-100 rounded p-3 point-none"
+                                    disabled>
+                                    START RECORDING
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="alert alert-danger alert-dismissible fade d-none" role="alert" id="username-alert">
-                        Please don't use email or mobile number as user name
-                    </div>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="tnc-alert">
-                        Please agree to the terms and condition before proceeding
                     </div>
             </div>
         </div>
@@ -172,6 +188,9 @@
     <%- include common/footer.ejs %>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
