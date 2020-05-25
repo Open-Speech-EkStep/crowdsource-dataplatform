@@ -1,8 +1,8 @@
 const { encrypt } = require("./encryptAndDecrypt")
 const { UpdateFileNameAndUserDetails, setNewUserAndFileName,
     unassignIncompleteSentences, updateAndGetSentencesQuery,
-    sentencesCount, getCountOfTotalSpeakerAndRecordedAudio,getGenderData,
-    getAgeGroupsData, getMotherTonguesData} = require("./dbQuery");
+    sentencesCount, getCountOfTotalSpeakerAndRecordedAudio, getGenderData,
+    getAgeGroupsData, getMotherTonguesData } = require("./dbQuery");
 const { KIDS_AGE_GROUP, ADULT, KIDS } = require("./constants")
 const envVars = process.env;
 const pgp = require('pg-promise')();
@@ -82,8 +82,7 @@ const getAllInfo = async function () {
     const motherTongues = db.any(getMotherTonguesData);
     Promise.all([genderData, ageGroups, motherTongues])
         .then(response => {
-            // console.log(response)
-            return ({ genderData: response[0], ageGroups: response[1].count,motherTongues:response[2]});
+            return ({ genderData: response[0], ageGroups: response[1].count, motherTongues: response[2] });
         })
         .catch(err => {
             console.log(err);
