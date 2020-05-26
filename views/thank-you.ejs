@@ -5,14 +5,17 @@
     <title>Vakyaansh: A crowdsourcing initiative for Indic languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- google APIs -->
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
-        <!-- 3rd party libs -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <!-- My custom css -->
-        <link rel="stylesheet" type="text/css" href="css/home.css">
+    <!-- google APIs -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- 3rd party libs -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- My custom css -->
+    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <link rel="stylesheet" type="text/css" href="css/thank-you.css">
 </head>
+
 <body>
 
     <%- include common/header.ejs %>
@@ -28,16 +31,17 @@
             <div class="col-5 text-left">
                 <img src="/img/thanks.svg" class="img img-fluid w-100">
             </div>
-      
+
         </div>
         <div class="row justify-content-center">
             <div class="col-5 offset-2 text-muted text-left">
                 <p class="ml-3">
-                    We are <b>20 minutes</b> closer to our goal!!!
+                    Your contribution has got us <span id="user-contribution" class="">12 minutes 18 seconds</span>
+                    closer to our goal!!!
                 </p>
             </div>
         </div>
-       
+
         <div class="row justify-content-center mt-5">
             <div class="col-xl-6 col-lg-8 col-10 text-center lead">
                 <p>
@@ -56,29 +60,69 @@
                 <a href="/record" class="btn btn-primary btn-lg h6 w-50">Contribute More</a>
             </div>
         </div>
+        <div id="time-progress" class="position-fixed text-center">
+            <div id="graphcontainer" class="mx-auto">
+                <div id="graphbackground"></div>
+                <div id="graphbar"></div>
+                <div id="graphforeground">
+                </div>
+            </div>
+            <div>
+                <span class="h6" id="time-value">0s</span><span class="text-muted">/30 mins</span>
+                <p>Come Back again to hit your goalpost</p>
+            </div>
+        </div>
         <div class="row justify-content-center mt-5">
             <div class="col-md-3 col-6 text-center">
-                <p class="text-muted">Come Back again to hit your Goalpost </p>
-                <span class="text-primary">40%</span>
-                <img src="/img/progress.svg" class="img img-fluid">
-            </div>
-            <div class="col-md-3 col-6 text-center text-muted">
                 <p class="text-primary">Share it with your friends and family</p>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//codmento.com/" class="opc-4">
                     <img src="/img/fb.png" class="img img-fluid">
                 </a>
                 <span>&sdot;</span>
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//codmento.com/&title=Vakyansh" class="opc-4">
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//codmento.com/&title=Vakyansh"
+                    class="opc-4">
                     <img src="/img/linkedin.png" class="img img-fluid">
                 </a>
                 <span>&sdot;</span>
-                <a href="https://twitter.com/intent/tweet?text=Hey%20checkout%20this%20this%20https%3A//codmento.com/" class="opc-4">
+                <a href="https://twitter.com/intent/tweet?text=Hey%20checkout%20this%20this%20https%3A//codmento.com/"
+                    class="opc-4">
                     <img src="/img/twitter.png" class="img img-fluid">
                 </a>
             </div>
         </div>
     </div>
     <%- include common/footer.ejs %>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script>
+        const speakerDetailsKey = "speakerDetails";
+        const localSpeakerData = localStorage.getItem(speakerDetailsKey);
+        const localSpeakerDataParsed = JSON.parse(localSpeakerData);
+        const $navUser = $("#nav-user");
+        const $timeProgress = $("#time-progress");
+        const $footer = $("footer");
+
+        const adjustTimeProgressBarHeight = () => {
+            const footerHeight = $footer.outerHeight();
+            const timeProgressBottomInPx = $timeProgress.css('bottom');
+            const timeProgressBottomInNumber = Number(timeProgressBottomInPx.substring(0, timeProgressBottomInPx.length - 2));
+            if (timeProgressBottomInNumber) {
+                $timeProgress.css('bottom', footerHeight + "px")
+            }
+        };
+        $(window).resize(adjustTimeProgressBarHeight);
+    adjustTimeProgressBarHeight();
+        const $navUserName = $navUser.find("#nav-username");
+        if (localSpeakerDataParsed.userName) {
+            $navUser.removeClass('d-none');
+            $navUserName.text(localSpeakerDataParsed.userName);
+        }
+    </script>
 </body>
 
 </html>

@@ -27,9 +27,19 @@ html {
     font-size: 8px;
   }
 }
+@media (min-width: 448px) {
+  html {
+    font-size: 9px;
+  }
+}
 @media (min-width: 576px) {
   html {
     font-size: 10px;
+  }
+}
+@media (min-width: 672px) {
+  html {
+    font-size: 11px;
   }
 }
 @media (min-width: 768px) {
@@ -45,6 +55,11 @@ html {
 @media (min-width: 1200px) {
   html {
     font-size: 14px;
+  }
+}
+@media (min-width: 1300px) {
+  html {
+    font-size: 15px;
   }
 }
 @media (min-width: 1400px) {
@@ -156,11 +171,11 @@ audio {
 .font-wt-900 {
   font-weight: 900;
 }
-#time-progress{
+#time-progress {
   right: 1rem;
   bottom: 2.8rem;
 }
-.h-1r{
+.h-1r {
   height: 1rem;
 }
 /* loader */
@@ -188,7 +203,6 @@ audio {
 }
 /* loader end */
 
-
 /* 3d bar css */
 /** CONTAINER **/
 #graphcontainer {
@@ -196,7 +210,7 @@ audio {
   position: relative;
   height: 44em;
   width: 9em;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 /* left bottom patch */
@@ -209,7 +223,7 @@ audio {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 0 1.3em 1.3em 0;
+  border-width: 0 1.25em 1.25em 0;
   border-color: transparent transparent #fff transparent;
 }
 
@@ -221,7 +235,7 @@ audio {
   position: absolute;
   bottom: 0em;
   left: 0;
-  background-color: rgba(0, 123, 255, .2);
+  background-color: rgba(0, 123, 255, 0.2);
 
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -230,7 +244,8 @@ audio {
   transform: rotate(0deg);
 }
 
-#graphbackground:before,#graphbackground:after {
+#graphbackground:before,
+#graphbackground:after {
   content: "";
   position: absolute;
 }
@@ -241,7 +256,7 @@ audio {
   left: 0.625em;
   width: 6.55em;
   height: 1.225em;
-  background-color: rgba(0, 123, 255, .1);
+  background-color: rgba(0, 123, 255, 0.1);
 
   -webkit-transform: skew(45deg);
   -moz-transform: skew(45deg);
@@ -252,11 +267,11 @@ audio {
 
 /* Right back panel */
 #graphbackground:after {
-  top: 21.5em;
-  left: 0em;
+  top: 21.6em;
+  right: -22.125em;
   width: 43em;
   height: 1.225em;
-  background-color: rgba(0, 123, 255, .0);
+  background-color: rgba(0, 123, 255, 0.27);
 
   -webkit-transform: rotate(90deg) skew(-45deg);
   -moz-transform: rotate(90deg) skew(-45deg);
@@ -274,7 +289,7 @@ audio {
   height: 42em;
   bottom: 0em;
   left: 1.225em;
-  background-color: rgba(0, 123, 255, .1);
+  background-color: rgba(0, 123, 255, 0.1);
 
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -283,7 +298,8 @@ audio {
   transform: rotate(0deg);
 }
 
-#graphforeground:before,#graphforeground:after {
+#graphforeground:before,
+#graphforeground:after {
   content: "";
   position: absolute;
 }
@@ -294,7 +310,7 @@ audio {
   right: -14em;
   width: 42em;
   height: 1.25em;
-  background-color: rgba(0, 123, 255, .27);
+  background-color: rgba(0, 123, 255, 0.27);
 
   -webkit-transform: rotate(90deg) skew(-45deg);
   -moz-transform: rotate(90deg) skew(-45deg);
@@ -310,7 +326,7 @@ audio {
   right: 0.6em;
   width: 6.55em;
   height: 1.225em;
-  background-color: rgba(0, 123, 255, .2);
+  background-color: rgba(0, 123, 255, 0.2);
 
   -webkit-transform: skew(45deg);
   -moz-transform: skew(45deg);
@@ -332,10 +348,11 @@ audio {
   height: 0em;
   bottom: 0em; /* default bar state */
   left: 0;
-  background-color: rgba(5, 62, 123, .7);
+  background-color: rgba(0, 123, 255);
 }
 
-#graphbar:before,#graphbar:after {
+#graphbar:before,
+#graphbar:after {
   content: "";
   position: absolute;
 }
@@ -346,7 +363,7 @@ audio {
   left: 0.625em;
   width: 6.55em;
   height: 1.225em;
-  background-color: rgba(0, 123, 255, .4);
+  background-color: rgba(0, 123, 255, 0.27);
 
   -webkit-transform: skew(45deg);
   -moz-transform: skew(45deg);
@@ -359,7 +376,7 @@ audio {
 #graphbar:after {
   top: -1.25em;
   left: 0;
-  border-bottom: 1.25em solid rgba(5, 62, 123, .7);
+  border-bottom: 1.25em solid rgba(0, 123, 255);
   border-left: 0 solid transparent;
   border-right: 1.275em solid transparent;
 }
