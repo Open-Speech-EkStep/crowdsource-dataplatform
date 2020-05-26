@@ -1,12 +1,14 @@
 const speakerDetailsKey = "speakerDetails";
 const sentencesKey = "sentences";
 const currentIndexKey = "currentIndex";
+const skipCountKey = "skipCount";
 const countKey = "count";
 const initialize = () => {
     const sentences = crowdSource.sentences;
     const currentSentenceLbl = document.getElementById("currentSentenceLbl");
     const totalSentencesLbl = document.getElementById("totalSentencesLbl");
     const sentenceLbl = document.getElementById("sentenceLbl");
+    const $sentenceLbl = $("#sentenceLbl");
     const $timeProgress = $("#time-progress");
     const $timeValue = $("#time-value");
     const $timeGraphBar = $("#graphbar");
@@ -19,9 +21,14 @@ const initialize = () => {
     const $nextBtn = $("#nextBtn");
     const $getStarted = $("#get-started");
     const $skipBtn = $("#skipBtn");
-    const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
     const $recordingSign = $("#recording-sign");
     const $progressBar = $(".progress-bar");
+    const $pageContent = $("#page-content");
+    const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
+    const skipCountInStorage = Number(localStorage.getItem(skipCountKey));
+    const totalItems = sentences.length;
+    let currentIndex = currentIndexInStorage < 0 ? 0 : currentIndexInStorage > (totalItems-1) ? (totalItems-1) : currentIndexInStorage;
+    let skipCount = skipCountInStorage < 0 ? 0 : skipCountInStorage > (totalItems-1) ? (totalItems-1) : skipCountInStorage;
     const $footer = $("footer");
     const progressMessages = [
         "Let’s get started", "",
@@ -39,18 +46,14 @@ const initialize = () => {
             $timeProgress.css('bottom', footerHeight + "px")
         }
     };
-    $(window).resize(adjustTimeProgressBarHeight);
-    adjustTimeProgressBarHeight();
-    function animateCSS(element, animationName, callback) {
-        const node = document.querySelector(element)
-        node.classList.add('animated', animationName)
+    const animateCSS = ($element, animationName, callback) => {
+        $element.addClass(`animated ${animationName}`);
         function handleAnimationEnd() {
-            node.classList.remove('animated', animationName)
-            node.removeEventListener('animationend', handleAnimationEnd)
-
+            $element.removeClass(`animated ${animationName}`);
+            $element.off('animationend');
             if (typeof callback === 'function') callback()
         }
-        node.addEventListener('animationend', handleAnimationEnd)
+        $element.on('animationend', handleAnimationEnd);
     }
     const setProgressBar = (currentIndex) => {
         $progressBar.width(currentIndex * 10 + "%");
@@ -58,40 +61,28 @@ const initialize = () => {
     }
     const setSentenceText = (index) => {
         sentenceLbl.innerText = sentences[index].sentence
-        animateCSS('#sentenceLbl', 'lightSpeedIn');
+        animateCSS($sentenceLbl, 'lightSpeedIn');
         currentIndex && setProgressBar(currentIndex)
     };
+    const setCurrentSentenceIndex = (index) => currentSentenceLbl.innerText = index;
+    const setTotalSentenceIndex = (index) => totalSentencesLbl.innerText = index;
     const setTimeProgress = (index) => {
         //42em is graphforeground height in css
         const graphforegroundHeight = 42;
         // assuming a sentence is of 6 second
-        const totalSecondsContributed = (crowdSource.count + index) * 6;
+        const totalSecondsContributed = (crowdSource.count + index - skipCount) * 6;
         const totalSecondsToContribute = 30 * 60;
         const remainingSeconds = totalSecondsToContribute - totalSecondsContributed;
         const minutes = Math.floor(remainingSeconds / 60);
         const seconds = remainingSeconds % 60;
         $timeValue.text(`${minutes}m ${seconds}s`);
-        animateCSS('#time-value', 'flash');
-        const perSecondTimeGraphHeight = graphforegroundHeight/totalSecondsToContribute;
+        animateCSS($timeValue, 'flash');
+        const perSecondTimeGraphHeight = graphforegroundHeight / totalSecondsToContribute;
         const currentTimeGraphHeight = perSecondTimeGraphHeight * totalSecondsContributed;
-        $timeGraphBar.height(currentTimeGraphHeight+"em");
-
+        $timeGraphBar.height(currentTimeGraphHeight + "em");
     };
-
-    const setCurrentSentenceIndex = (index) => currentSentenceLbl.innerText = index;
-    const setTotalSentenceIndex = (index) => totalSentencesLbl.innerText = index;
-
-    let currentIndex = currentIndexInStorage < 0 ? 0 : currentIndexInStorage > 9 ? 9 : currentIndexInStorage;
-
-    const totalItems = sentences.length;
-    setSentenceText(currentIndex);
-    setCurrentSentenceIndex(currentIndex + 1);
-    setTotalSentenceIndex(totalItems);
-    setTimeProgress(currentIndex);
-
     const notyf = new Notyf({
-        duration: 3000,
-        position: { x: 'right', y: 'top' },
+        position: { x: 'center', y: 'top' },
         types: [
             {
                 type: 'success',
@@ -99,10 +90,28 @@ const initialize = () => {
             },
             {
                 type: 'error',
+                duration: 3500,
                 className: "fnt-1-5"
             }
         ]
     });
+    const handleAudioDurationError = (duration) => {
+        console.log(duration);
+        // To Do: Show error on short audio recordings
+    }
+
+
+
+    $(window).resize(adjustTimeProgressBarHeight);
+    adjustTimeProgressBarHeight();
+    animateCSS($timeProgress, 'lightSpeedIn');
+
+    setSentenceText(currentIndex);
+    setCurrentSentenceIndex(currentIndex + 1);
+    setTotalSentenceIndex(totalItems);
+    setTimeProgress(currentIndex);
+
+
     let gumStream;
     //stream from getUserMedia() 
     let rec;
@@ -174,7 +183,11 @@ const initialize = () => {
             const URL = window.URL || window.webkitURL;
             const bloburl = URL.createObjectURL(blob);
             crowdSource.audioBlob = blob;
-            $player.prop("src", bloburl)
+            $player.prop("src", bloburl);
+            $player.on('loadedmetadata',() => {
+                const audioDuration = $player[0].duration;
+                handleAudioDurationError(audioDuration);
+            });
         });
         if (currentIndex == totalItems - 1) {
             $getStarted.text(progressMessages[totalItems]).show();
@@ -184,16 +197,19 @@ const initialize = () => {
     $nextBtn.add($skipBtn).on('click', (event) => {
         if (event.target.id === "nextBtn") {
             uploadToServer();
+            setTimeProgress(currentIndex + 1);
         }
-        setTimeProgress(currentIndex + 1);
+        else if (event.target.id === "skipBtn") {
+            incrementSkipCount();
+        }
         if (currentIndex == totalItems - 1) {
+            animateCSS($pageContent,'zoomOut',() => $pageContent.addClass('d-none'));
+            setProgressBar(currentIndex+1);
             localStorage.removeItem(sentencesKey);
-            localStorage.removeItem(currentIndexKey);
             notyf.success("Congratulations!!! You have completed this batch of sentences");
-            setProgressBar(currentIndex);
             setTimeout(() => {
                 location.href = "/thank-you";
-            }, 2000);
+            }, 2500);
         }
         else if (currentIndex < totalItems - 1) {
             incrementCurrentIndex();
@@ -204,12 +220,6 @@ const initialize = () => {
         $nextBtn.addClass('d-none');
         $reRecordBtn.addClass('d-none');
         $startRecordRow.removeClass('d-none');
-        // if (progressMessages[currentIndex] && currentIndex < totalItems - 1) {
-        //     $getStarted.text(progressMessages[currentIndex]).show();
-        // }
-        // else {
-        //     $getStarted.hide();
-        // }
     });
 
     function incrementCurrentIndex() {
@@ -218,6 +228,10 @@ const initialize = () => {
         setCurrentSentenceIndex(currentIndex + 1);
         $getStarted.text(progressMessages[currentIndex])
         localStorage.setItem(currentIndexKey, currentIndex);
+    }
+    function incrementSkipCount() {
+        skipCount++;
+        localStorage.setItem(skipCountKey, skipCount);
     }
 
     function uploadToServer() {
@@ -316,6 +330,7 @@ $(document).ready(() => {
         }
         else {
             localStorage.removeItem(currentIndexKey);
+            localStorage.removeItem(skipCountKey);
             fetch('/sentences', {
                 method: "POST",
                 body: JSON.stringify({ userName: localSpeakerDataParsed.userName, age: localSpeakerDataParsed.age }),

@@ -5,88 +5,121 @@ html {
   scroll-behavior: smooth;
 }
 
-html { font-size: 6px; }
-
+html {
+  font-size: 6px;
+}
 @media (min-width: 321px) {
-  html { font-size:  8px;}
+  html {
+    font-size: 8px;
+  }
+}
+@media (min-width: 448px) {
+  html {
+    font-size: 9px;
+  }
 }
 @media (min-width: 576px) {
-    html { font-size:  10px;}
+  html {
+    font-size: 10px;
+  }
+}
+@media (min-width: 672px) {
+  html {
+    font-size: 11px;
+  }
 }
 @media (min-width: 768px) {
-    html { font-size: 12px; }
+  html {
+    font-size: 12px;
+  }
 }
 @media (min-width: 992px) {
-    html { font-size:  13px; }
+  html {
+    font-size: 13px;
+  }
 }
 @media (min-width: 1200px) {
-    html { font-size: 14px; }
+  html {
+    font-size: 14px;
+  }
+}
+@media (min-width: 1300px) {
+  html {
+    font-size: 15px;
+  }
 }
 @media (min-width: 1400px) {
-  html { font-size: 16px; }
+  html {
+    font-size: 16px;
+  }
 }
 
-
-h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6
- {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
 }
 * {
   box-sizing: border-box;
 }
-.pb-6{
-    padding-bottom: 6rem;
+.pb-6 {
+  padding-bottom: 6rem;
 }
-.pt-6{
+.pt-6 {
   padding-top: 6rem;
 }
-.mb-6{
+.mb-6 {
   margin-bottom: 6rem;
 }
-.mt-n6{
+.mt-n6 {
   margin-top: -6rem;
 }
-.lh-7{
-line-height: 1.7;
+.lh-7 {
+  line-height: 1.7;
 }
-.lh-5{
+.lh-5 {
   line-height: 1.5;
-  }
+}
 .material-icons.md-48 {
   font-size: 2.5rem;
 }
-.font-wt-900{
+.font-wt-900 {
   font-weight: 900;
 }
-.display-5{
+.display-5 {
   font-size: 3rem;
 }
-.site-blue{
-  color: #11223F;
+.site-blue {
+  color: #11223f;
 }
-.border-3{
+.border-3 {
   border: 3px solid #007bff;
 }
-.bg-light-blue{
-  background-color: #FBFCFF;
+.bg-light-blue {
+  background-color: #fbfcff;
 }
-.bg-blue{
-  background-color: #3F80FF;
+.bg-blue {
+  background-color: #3f80ff;
 }
-.bg-thank-you{
-  background: url(/img/bg-thank-you.svg) no-repeat;
-  background-size: cover;
+.opc-4 {
+  opacity: 0.4;
 }
-.opc-4{
-opacity: 0.4;
-}
-.point-none { 
+.point-none {
   pointer-events: none;
 }
-.outline-0{
+.outline-0 {
   outline: 0;
 }
-.form-control.is-invalid{
+.form-control.is-invalid {
   background-image: none;
 }

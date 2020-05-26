@@ -17,9 +17,9 @@
 <body>
 
     <%- include common/header.ejs %>
-    <div class="container-fluid">
+    <div class="container-fluid pr-1">
         <div class="row pt-lg-5">
-            <div class="col-8 col-lg-6 ml-lg-auto py-5 pl-5 text-dark mt-4">
+            <div class="col-12 col-sm-7 col-lg-6 ml-lg-auto p-5 text-dark mt-4">
                 <h1 class="display-5 font-wt-900 site-blue lh-5">Vakyaansh: A crowdsourcing initiative for Indic
                     languages
                 </h1>
@@ -27,7 +27,7 @@
                     recognition product that focuses solely on Indian languages,
                     there is a need for an enormous repository of diversified Indian voices. Through
                     Vakyaansh, we are reaching out to you to contribute your voices to create a diverse open source
-                    repository of Indian voices to this end.<a class="ml-1" href="/about-us"> See More</a></p>
+                    repository of Indian voices to this end.<a class="ml-1" href="/about-us"> Know More</a></p>
                 <div class="row align-items-center mt-4">
                     <div class="col-8 col-lg-5">
                         <a role="button" href="#speaker-details"
@@ -49,7 +49,7 @@
                 </div>
 
             </div>
-            <div class="col-lg-5 col-12 pt-5 mt-5 text-right px-0">
+            <div class="col-12 col-sm-5 col-lg-5 text-right px-0 align-self-center">
                 <img src="/img/home.svg" class="img img-fluid">
             </div>
         </div>
@@ -63,15 +63,15 @@
         </div>
         <div class="row pb-5 justify-content-center mt-5">
             <div class="col-8 col-lg-4 mb-3 text-center pb-5">
-                <img src="img/spd-1-2.png" alt="Speaker Diversity" class="img img-fluid">
+                <img src="img/spd-1.svg" alt="Speaker Diversity" class="h-100 img img-fluid">
                 <p class="h4 mt-4">Age Group</p>
             </div>
             <div class="col-8 col-lg-4 mb-3 text-center pb-5">
-                <img src="img/spd-2-2.png" alt="Speaker Diversity" class="img img-fluid">
+                <img src="img/spd-2.svg" alt="Speaker Diversity" class="h-100 img img-fluid">
                 <p class="h4 mt-4">Mother Tongue</p>
             </div>
             <div class="col-8 col-lg-4 mb-3 text-center pb-5">
-                <img src="img/spd-3-2.png" alt="Speaker Diversity" class="img img-fluid">
+                <img src="img/spd-3.svg" alt="Speaker Diversity" class="h-100 img img-fluid">
                 <p class="h4 mt-4">Gender</p>
             </div>
         </div>
@@ -81,12 +81,12 @@
         <div class="row justify-content-center">
             <div class="col-xl-4 col-md-6 col-sm-8 col-11 p-5 card" id="speaker-details">
                 <p class="display-5 font-wt-900 site-blue text-center">Speaker Details</h1>
-                    <p class="text-muted font-italic">All the fields are optional but you can make your submitted data
-                        rich by providing some anonymous data.</p>
-                    <div class="form-group mt-2">
+                    <p class="text-muted text-center">All the fields are optional but you can enrich your dataset contribution 
+                        by providing the demographic details.</p>
+                    <div class="form-group mt-5">
                         <label for="username" class="form-label">User Name</label>
                         <input class="form-control" maxlength="12" id="username"
-                            placeholder="Please don't enter mobile/email here" data-toggle="tooltip"
+                            placeholder="Please do not enter your mobile/email/name here" data-toggle="tooltip"
                             title="Username can't be more than 12 characters">
                         <div class="text-danger mt-2 d-none" id="username-error">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px"
@@ -173,7 +173,7 @@
                     <div class="row justify-content-center">
                         <div class="col-12">
                             <div class="mt-4 outline-0" tabindex="0" data-toggle="tooltip"
-                                title="Please validate all fields and agree to the terms and condition before proceeding">
+                                title="Please validate any error message and agree to the Terms and Condition before proceeding">
                                 <button id="start-record" class="btn btn-primary h6 shadow w-100 rounded p-3 point-none"
                                     disabled>
                                     START RECORDING
