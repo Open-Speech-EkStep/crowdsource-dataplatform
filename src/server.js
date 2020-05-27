@@ -69,14 +69,26 @@ router.get('/', function (req, res) {
     res.render('home.ejs');
 });
 
-router.get("/getDetails", function (req, res) {
-    const allDetails = getAllDetails()
-    res.send(allDetails)
+router.get("/getDetails",async function (req, res) {
+    try{
+        const allDetails = await getAllDetails();
+        res.status(200).send(allDetails);
+    }
+    catch(err){
+        console.log(err);
+        res.sendStatus(500);
+    }
 });
 
 router.get("/getAllInfo", async function (req, res) {
-    const allDetails = await getAllInfo()
-    res.status(200).send(allDetails);
+    try{
+        const allDetails = await getAllInfo();
+        res.status(200).send({ genderData: allDetails[0], ageGroups: allDetails[1], motherTongues: allDetails[2] });
+    }
+    catch(err){
+        console.log(err);
+        res.sendStatus(500);
+    }
 });
 
 router.get('/about-us', function (req, res) {

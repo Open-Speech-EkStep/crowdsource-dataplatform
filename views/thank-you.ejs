@@ -25,8 +25,8 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-2 my-auto text-muted text-right pr-0">
-                <p class="mb-0">5000/</p>
-                <p>10000 hours</p>
+                <p id="hour-value" class="mb-0">5000</p>
+                <p>/10000 hours</p>
             </div>
             <div class="col-5 text-left">
                 <img src="/img/thanks.svg" class="img img-fluid w-100">
@@ -34,12 +34,10 @@
 
         </div>
         <div class="row justify-content-center">
-            <div class="col-5 offset-2 text-muted text-left">
-                <p class="ml-3">
-                    Your contribution has got us <span id="user-contribution" class="">12 minutes 18 seconds</span>
-                    closer to our goal!!!
-                </p>
-            </div>
+            <p class="ml-3 lead">
+                Your contribution has got us <b><span id="user-contribution" class="">0 seconds</span></b>
+                closer to our goal!!!
+            </p>
         </div>
 
         <div class="row justify-content-center mt-5">
@@ -56,11 +54,11 @@
             </div>
         </div>
         <div class="row justify-content-center mt-5">
-            <div class="col-xl-6 col-lg-8 col-10 text-center lead">
-                <a href="/record" class="btn btn-primary btn-lg h6 w-50">Contribute More</a>
+            <div class="col-lg-3 col-md-6 col-8 text-center lead">
+                <a href="/record" class="btn btn-primary btn-lg h6 w-100">Contribute More</a>
             </div>
         </div>
-        <div id="time-progress" class="position-fixed text-center">
+        <div id="progress-percent-wrapper" class="position-fixed text-center">
             <div id="graphcontainer" class="mx-auto">
                 <div id="graphbackground"></div>
                 <div id="graphbar"></div>
@@ -68,25 +66,23 @@
                 </div>
             </div>
             <div>
-                <span class="h6" id="time-value">0s</span><span class="text-muted">/30 mins</span>
+                <span class="h6 text-primary" id="progress-percent">0</span><span class="text-primary">%</span>
                 <p>Come Back again to hit your goalpost</p>
             </div>
         </div>
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-3 col-6 text-center">
-                <p class="text-primary">Share it with your friends and family</p>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//codmento.com/" class="opc-4">
-                    <img src="/img/fb.png" class="img img-fluid">
+        <div class="text-primary mt-5 text-center">Share it with your friends and family</div>
+        <div class="row justify-content-center mt-2 bg-white">
+            <div class="col-lg-3 col-sm-5 col-12 text-center">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//codmento.com/">
+                    <img src="/img/fb-icon.svg" width="8%" alt="Facebook">
                 </a>
                 <span>&sdot;</span>
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//codmento.com/&title=Vakyansh"
-                    class="opc-4">
-                    <img src="/img/linkedin.png" class="img img-fluid">
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//codmento.com/&title=Vakyansh" >
+                    <img src="/img/linkedin-icon.svg" width="8%" alt="LinkedIn">
                 </a>
                 <span>&sdot;</span>
-                <a href="https://twitter.com/intent/tweet?text=Hey%20checkout%20this%20this%20https%3A//codmento.com/"
-                    class="opc-4">
-                    <img src="/img/twitter.png" class="img img-fluid">
+                <a href="https://twitter.com/intent/tweet?text=Hey%20checkout%20this%20this%20https%3A//codmento.com/" >
+                    <img src="/img/twitter-icon.svg" width="8%" alt="Twitter">
                 </a>
             </div>
         </div>
@@ -99,30 +95,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script>
-        const speakerDetailsKey = "speakerDetails";
-        const localSpeakerData = localStorage.getItem(speakerDetailsKey);
-        const localSpeakerDataParsed = JSON.parse(localSpeakerData);
-        const $navUser = $("#nav-user");
-        const $timeProgress = $("#time-progress");
-        const $footer = $("footer");
-
-        const adjustTimeProgressBarHeight = () => {
-            const footerHeight = $footer.outerHeight();
-            const timeProgressBottomInPx = $timeProgress.css('bottom');
-            const timeProgressBottomInNumber = Number(timeProgressBottomInPx.substring(0, timeProgressBottomInPx.length - 2));
-            if (timeProgressBottomInNumber) {
-                $timeProgress.css('bottom', footerHeight + "px")
-            }
-        };
-        $(window).resize(adjustTimeProgressBarHeight);
-    adjustTimeProgressBarHeight();
-        const $navUserName = $navUser.find("#nav-username");
-        if (localSpeakerDataParsed.userName) {
-            $navUser.removeClass('d-none');
-            $navUserName.text(localSpeakerDataParsed.userName);
-        }
-    </script>
+    <script src="js/thank-you.js"></script>
 </body>
 
 </html>

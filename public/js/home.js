@@ -9,6 +9,14 @@ $(document).ready(function () {
     const $tncCheckbox = $("#tnc");
     const mobileRegex = /^[6-9]\d{9}$/;
     const emailRegex = /^\S+@\S+[\.][0-9a-z]+$/
+    const $speakersData = $("#speaker-data");
+    const $speakersDataLoader = $speakersData.find("#loader");
+    const $speakersDataSpeakerWrapper = $speakersData.find("#speakers-wrapper");
+    const $speakersDataSpeakerValue = $speakersData.find("#speaker-value");
+    const $speakersDataHoursWrapper = $speakersData.find("#hours-wrapper");
+    const $speakersDataHoursValue = $speakersData.find("#hour-value");
+    const speakersDataKey = "speakersData";
+
     const testUserName = (val) => mobileRegex.test(val) || emailRegex.test(val);
     const setUserNameTooltip = () => {
         if($userName.val().length>11){
@@ -99,6 +107,40 @@ $(document).ready(function () {
             localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
             location.href = "/record"
         }
+    })
+
+
+    fetch('/getDetails')
+    .then(data => {
+        if (!data.ok) {
+            throw Error(data.statusText || 'HTTP error');
+        }
+        else {
+            return data.json();
+        }
+    })
+    .then(data => {
+        try {
+            $speakersDataLoader.addClass('d-none');
+            const totalSentence = data[0].count;
+            const totalSeconds = totalSentence * 6;
+            const hours = Math.floor(totalSeconds / 3600);
+            const remainingAfterHours = totalSeconds % 3600;
+            const minutes = Math.floor(remainingAfterHours / 60);
+            const seconds = remainingAfterHours % 60;
+            console.log(totalSeconds,hours,remainingAfterHours,minutes,seconds)
+
+            $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
+            $speakersDataSpeakerValue.text(data[1].count);
+            $speakersDataHoursWrapper.removeClass('d-none');
+            $speakersDataSpeakerWrapper.removeClass('d-none');
+            localStorage.setItem(speakersDataKey,JSON.stringify(data));
+        } catch (error) {
+            console.log(error);
+        }
+    })
+    .catch(err => {
+        console.log(err);
     })
 
     //lazy load other css libs
