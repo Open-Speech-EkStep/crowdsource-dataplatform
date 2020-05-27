@@ -71,23 +71,14 @@ const updateAndGetSentences = async function (req, res) {
 
 
 const getAllDetails = async function () {
-    const totalCount = await db.any(getCountOfTotalSpeakerAndRecordedAudio);
-    // console.log(totalCount);
-    return totalCount
+    return db.any(getCountOfTotalSpeakerAndRecordedAudio);
 }
 
 const getAllInfo = async function () {
     const genderData = db.any(getGenderData);
     const ageGroups = db.any(getAgeGroupsData);
     const motherTongues = db.any(getMotherTonguesData);
-    Promise.all([genderData, ageGroups, motherTongues])
-        .then(response => {
-            return ({ genderData: response[0], ageGroups: response[1].count, motherTongues: response[2] });
-        })
-        .catch(err => {
-            console.log(err);
-            // res.sendStatus(500);
-        })
+    return Promise.all([genderData, ageGroups, motherTongues])
 }
 
 module.exports = {

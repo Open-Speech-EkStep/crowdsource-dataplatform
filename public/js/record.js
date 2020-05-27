@@ -100,11 +100,9 @@ const initialize = () => {
         // To Do: Show error on short audio recordings
     }
 
-
-
     $(window).resize(adjustTimeProgressBarHeight);
     adjustTimeProgressBarHeight();
-    animateCSS($timeProgress, 'lightSpeedIn');
+    animateCSS($timeProgress, 'fadeIn');
 
     setSentenceText(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
@@ -201,11 +199,15 @@ const initialize = () => {
         }
         else if (event.target.id === "skipBtn") {
             incrementSkipCount();
+            $skipBtn.addClass('d-none');
         }
         if (currentIndex == totalItems - 1) {
+            $skipBtn.addClass('d-none');
+            currentIndex++;
             animateCSS($pageContent,'zoomOut',() => $pageContent.addClass('d-none'));
-            setProgressBar(currentIndex+1);
+            setProgressBar(currentIndex);
             localStorage.removeItem(sentencesKey);
+            localStorage.setItem(currentIndexKey, currentIndex);
             notyf.success("Congratulations!!! You have completed this batch of sentences");
             setTimeout(() => {
                 location.href = "/thank-you";
@@ -228,6 +230,7 @@ const initialize = () => {
         setCurrentSentenceIndex(currentIndex + 1);
         $getStarted.text(progressMessages[currentIndex])
         localStorage.setItem(currentIndexKey, currentIndex);
+        $skipBtn.removeClass('d-none');
     }
     function incrementSkipCount() {
         skipCount++;
