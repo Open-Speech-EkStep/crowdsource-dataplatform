@@ -121,8 +121,10 @@ router.post("/upload", (req, res) => {
     const file = req.file;
     const sentenceId = req.body.sentenceId;
     const speakerDetails = req.body.speakerDetails;
+    const speakerDetailsJson = JSON.parse(speakerDetails);
+    const userName = speakerDetailsJson.userName
     const userId = req.cookies.userId
-    uploadFile(file.path)
+    uploadFile(file.path,userName)
         .then(data => {
             updateDbWithFileName(file.filename, sentenceId, speakerDetails, userId, (resStatus, resBody) => {
                 res.status(resStatus).send(resBody);

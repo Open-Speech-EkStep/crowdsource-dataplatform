@@ -138,6 +138,7 @@ $(document).ready(function () {
                 const remainingAfterHours = totalSeconds % 3600;
                 const minutes = Math.floor(remainingAfterHours / 60);
                 const seconds = remainingAfterHours % 60;
+
                 $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
                 $speakersDataSpeakerValue.text(data[1].count);
                 $speakersDataHoursWrapper.removeClass('d-none');
@@ -150,30 +151,6 @@ $(document).ready(function () {
         .catch(err => {
             console.log(err);
         })
-
-
-        fetch('/getAllInfo')
-        .then(data => {
-            if (!data.ok) {
-                throw Error(data.statusText || 'HTTP error');
-            }
-            else {
-                return data.json();
-            }
-        })
-        .then(data => {
-            try {
-               console.log((JSON.stringify(data.ageGroups)));
-               console.log((JSON.stringify(data.genderData)));
-               console.log((JSON.stringify(data.motherTongues)));
-            } catch (error) {
-                console.log(error);
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        })
-
 
             //lazy load other css libs
             setTimeout(() => {
