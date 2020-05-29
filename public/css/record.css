@@ -178,6 +178,12 @@ audio {
 .h-1r {
   height: 1rem;
 }
+.point-none {
+  pointer-events: none;
+}
+.outline-0 {
+  outline: 0;
+  }
 /* loader */
 .overlay__content {
   left: 50%;

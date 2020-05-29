@@ -10,7 +10,7 @@ $(document).ready(function () {
     const mobileRegex = /^[6-9]\d{9}$/;
     const emailRegex = /^\S+@\S+[\.][0-9a-z]+$/
     const $speakersData = $("#speaker-data");
-    const $speakersDataLoader = $speakersData.find("#loader");
+    const $speakersDataLoader = $speakersData.find("#loader1,#loader2");
     const $speakersDataSpeakerWrapper = $speakersData.find("#speakers-wrapper");
     const $speakersDataSpeakerValue = $speakersData.find("#speaker-value");
     const $speakersDataHoursWrapper = $speakersData.find("#hours-wrapper");
@@ -19,11 +19,11 @@ $(document).ready(function () {
 
     const testUserName = (val) => mobileRegex.test(val) || emailRegex.test(val);
     const setUserNameTooltip = () => {
-        if($userName.val().length>11){
+        if ($userName.val().length > 11) {
             $userName.tooltip('enable');
             $userName.tooltip('show');
         }
-        else{
+        else {
             $userName.tooltip('disable');
             $userName.tooltip('hide');
         }
@@ -63,7 +63,7 @@ $(document).ready(function () {
         }
         age.value = parsedSpeakerDetails.age;
         motherTongue.value = parsedSpeakerDetails.motherTongue;
-        $userName.val(parsedSpeakerDetails.userName ? parsedSpeakerDetails.userName.trim().substring(0,12) : "");
+        $userName.val(parsedSpeakerDetails.userName ? parsedSpeakerDetails.userName.trim().substring(0, 12) : "");
         validateUserName();
     }
 
@@ -75,14 +75,24 @@ $(document).ready(function () {
             e.target.previous = e.target.checked;
         })
     });
+
+    const setStartRecordBtnToolTipContent = (userName) => {
+        if(testUserName(userName)){
+            $startRecordBtnTooltip.attr('data-original-title','Please validate any error message before proceeding')
+        }
+        else{
+            $startRecordBtnTooltip.attr('data-original-title','Please agree to the Terms and Condition before proceeding')
+        }
+    }
+    setStartRecordBtnToolTipContent($userName.val().trim());
     $tncCheckbox.change(function () {
         const userNameValue = $userName.val().trim();
         if (this.checked && !testUserName(userNameValue)) {
             $startRecordBtn.removeAttr('disabled').removeClass('point-none');
             $startRecordBtnTooltip.tooltip('disable');
-
         }
         else {
+            setStartRecordBtnToolTipContent(userNameValue);
             $startRecordBtn.prop("disabled", "true").addClass('point-none');
             $startRecordBtnTooltip.tooltip('enable');
         }
@@ -94,7 +104,7 @@ $(document).ready(function () {
         if ($tncCheckbox.prop('checked')) {
             const checkedGender = Array.from(genderRadios).filter(el => el.checked)
             const genderValue = checkedGender.length ? checkedGender[0].value : ""
-            const userNameValue = $userName.val().trim().substring(0,12);
+            const userNameValue = $userName.val().trim().substring(0, 12);
             if (testUserName(userNameValue)) {
                 return;
             }
@@ -111,45 +121,67 @@ $(document).ready(function () {
 
 
     fetch('/getDetails')
-    .then(data => {
-        if (!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
-        }
-        else {
-            return data.json();
-        }
-    })
-    .then(data => {
-        try {
-            $speakersDataLoader.addClass('d-none');
-            const totalSentence = data[0].count;
-            const totalSeconds = totalSentence * 6;
-            const hours = Math.floor(totalSeconds / 3600);
-            const remainingAfterHours = totalSeconds % 3600;
-            const minutes = Math.floor(remainingAfterHours / 60);
-            const seconds = remainingAfterHours % 60;
-            console.log(totalSeconds,hours,remainingAfterHours,minutes,seconds)
+        .then(data => {
+            if (!data.ok) {
+                throw Error(data.statusText || 'HTTP error');
+            }
+            else {
+                return data.json();
+            }
+        })
+        .then(data => {
+            try {
+                $speakersDataLoader.addClass('d-none');
+                const totalSentence = data[0].count;
+                const totalSeconds = totalSentence * 6;
+                const hours = Math.floor(totalSeconds / 3600);
+                const remainingAfterHours = totalSeconds % 3600;
+                const minutes = Math.floor(remainingAfterHours / 60);
+                const seconds = remainingAfterHours % 60;
+                $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
+                $speakersDataSpeakerValue.text(data[1].count);
+                $speakersDataHoursWrapper.removeClass('d-none');
+                $speakersDataSpeakerWrapper.removeClass('d-none');
+                localStorage.setItem(speakersDataKey, JSON.stringify(data));
+            } catch (error) {
+                console.log(error);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
 
-            $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
-            $speakersDataSpeakerValue.text(data[1].count);
-            $speakersDataHoursWrapper.removeClass('d-none');
-            $speakersDataSpeakerWrapper.removeClass('d-none');
-            localStorage.setItem(speakersDataKey,JSON.stringify(data));
-        } catch (error) {
-            console.log(error);
-        }
-    })
-    .catch(err => {
-        console.log(err);
-    })
 
-    //lazy load other css libs
-    setTimeout(() => {
-        fetch("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css");
-        fetch("https://fonts.googleapis.com/icon?family=Material+Icons");
-        fetch("css/notyf.min.css");
-        fetch("css/record.css");
-    }, 2000);
+        fetch('/getAllInfo')
+        .then(data => {
+            if (!data.ok) {
+                throw Error(data.statusText || 'HTTP error');
+            }
+            else {
+                return data.json();
+            }
+        })
+        .then(data => {
+            try {
+               console.log((JSON.stringify(data.ageGroups)));
+               console.log((JSON.stringify(data.genderData)));
+               console.log((JSON.stringify(data.motherTongues)));
+            } catch (error) {
+                console.log(error);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
+
+            //lazy load other css libs
+            setTimeout(() => {
+                fetch("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css");
+                fetch("https://fonts.googleapis.com/icon?family=Material+Icons");
+                fetch("css/notyf.min.css");
+                fetch("css/record.css");
+            }, 2500);
 });
 
 

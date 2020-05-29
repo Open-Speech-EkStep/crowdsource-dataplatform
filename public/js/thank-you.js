@@ -33,7 +33,6 @@ else {
         const totalSecondsContributed = (localCount + index - skipCountInStorage) * 6;
         const minutes = Math.floor(totalSecondsContributed / 60);
         const seconds = totalSecondsContributed % 60;
-        console.log(minutes, seconds);
         const finalText = (minutes > 0 ? `${minutes} minute ` : '') + (seconds > 0 ? `${seconds} seconds ` : minutes > 0 ? '' : '0 second');
         $userContribution.text(finalText);
     }
