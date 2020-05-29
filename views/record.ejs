@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Vakyaansh: A crowdsourcing initiative for Indic languages</title>
+    <title>Vakyansh: A crowdsourcing initiative for Indic languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- google APIs -->
@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css"
+        integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
     <!-- My custom css -->
     <link rel="stylesheet" type="text/css" href="css/record.css">
 </head>
@@ -81,6 +82,12 @@
             <div class="row justify-content-center">
                 <div class="col-lg-4 col-md-6 col-sm-8 col-12 text-center">
                     <audio class="d-none" id="player" controls tabindex="-1"></audio>
+                    <div class="text-danger mt-2 d-none" id="audio-small-error">
+                        <i class="material-icons align-middle">error</i>
+                        <span class="align-middle">
+                            Audio recording is too small. Please Re-record
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="row justify-content-center mt-5">
@@ -91,9 +98,12 @@
                     </button>
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-                    <button type="button" id="nextBtn" class="d-none btn btn-primary shadow h6 w-100 rounded mt-4 p-3">
-                        NEXT
-                    </button>
+                    <div class="outline-0" tabindex="0" data-toggle="tooltip"
+                        title="Please validate any error message before proceeding">
+                        <button id="nextBtn" class="d-none btn btn-primary shadow h6 w-100 rounded mt-4 p-3 point-none">
+                            NEXT
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -180,9 +190,13 @@
 
     <script
         src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js"
+        integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"

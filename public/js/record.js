@@ -19,11 +19,13 @@ const initialize = () => {
     const $visualizer = $("#visualizer");
     const $player = $("#player");
     const $nextBtn = $("#nextBtn");
+    const $nextBtnToolTip = $nextBtn.parent();
     const $getStarted = $("#get-started");
     const $skipBtn = $("#skipBtn");
     const $recordingSign = $("#recording-sign");
     const $progressBar = $(".progress-bar");
     const $pageContent = $("#page-content");
+    const $audioSmallError = $("#audio-small-error");
     const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
     const skipCountInStorage = Number(localStorage.getItem(skipCountKey));
     const totalItems = sentences.length;
@@ -38,6 +40,12 @@ const initialize = () => {
         "Nine dead, one more to go!",
         "Yay! Done & Dusted!"
     ];
+
+    $nextBtnToolTip.tooltip({
+        container: 'body',
+        placement: screen.availWidth > 900 ? 'right' : 'bottom',
+    });
+
     const adjustTimeProgressBarHeight = () => {
         const footerHeight = $footer.outerHeight();
         const timeProgressBottomInPx = $timeProgress.css('bottom');
@@ -97,7 +105,16 @@ const initialize = () => {
     });
     const handleAudioDurationError = (duration) => {
         console.log(duration);
-        // To Do: Show error on short audio recordings
+        if (duration < 2) {
+            $nextBtnToolTip.tooltip('enable');
+            $nextBtn.prop('disabled',true).addClass('point-none');
+            $audioSmallError.removeClass('d-none');
+        }
+        else {
+            $nextBtnToolTip.tooltip('disable');
+            $nextBtn.removeAttr('disabled').removeClass('point-none');
+            $audioSmallError.addClass('d-none');
+        }
     }
 
     $(window).resize(adjustTimeProgressBarHeight);
@@ -130,6 +147,8 @@ const initialize = () => {
                 $player.addClass('d-none');
                 $player.trigger('pause');
                 $visualizer.removeClass("d-none");
+                $nextBtnToolTip.tooltip('disable');
+                $audioSmallError.addClass('d-none');
 
                 gumStream = stream;
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -161,6 +180,7 @@ const initialize = () => {
                 $player.addClass('d-none');
                 $player.trigger('pause');
                 $visualizer.addClass("d-none");
+                $audioSmallError.addClass('d-none');
             })
     });
 
