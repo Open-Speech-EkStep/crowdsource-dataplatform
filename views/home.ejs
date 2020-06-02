@@ -37,17 +37,17 @@
                     </div>
                 </div>
                 <div class="row mt-4" id="speaker-data">
-                    <div class="col-6 col-lg-4 text-left" id="loader1">
+                    <div class="col-6 col-lg-5 col-xl-4 text-left" id="loader1">
                         <div><span class="spinner"></span></div>
                     </div>
-                    <div class="col-6 col-lg-4 text-left" id="loader2">
+                    <div class="col-6 col-lg-6 col-xl-4 text-left" id="loader2">
                         <div><span class="spinner"></span></div>
                     </div>
-                    <div class="col-6 col-lg-4 text-left d-none" id="speakers-wrapper">
+                    <div class="col-6 col-lg-5 col-xl-4 text-left d-none" id="speakers-wrapper">
                         <p class="mb-0 h3" id="speaker-value">0</p>
                         <p class="mb-0">speakers contributed</p>
                     </div>
-                    <div class="col-6 col-lg-4 text-left d-none" id="hours-wrapper">
+                    <div class="col-6 col-lg-6 col-xl-4 text-left d-none" id="hours-wrapper">
                         <p class="mb-0"><span class="h3" id="hour-value">0</span><sup class="h6">/10000</sup></p>
                         <p class="mb-0">hours recorded</p>
                     </div>
@@ -62,22 +62,31 @@
 
     <div class="container-fluid bg-light-blue mt-n5">
         <div class="row justify-content-center pt-5">
-            <div class="col-10 col-md-8 col-xl-6 text-center my-5">
+            <div class="col-10 col-md-8 col-xl-6 text-center mt-5">
                 <p class="display-5 font-wt-900 site-blue">Speaker Diversification</h1>
             </div>
         </div>
-        <div class="row pb-5 justify-content-center mt-5">
-            <div class="col-8 col-lg-4 mb-3 text-center pb-5">
-                <img src="img/spd-1.svg" alt="Speaker Diversity" class="h-100 img img-fluid">
-                <p class="h4 mt-4">Age Group</p>
+        <div class="row pb-5 py-5" id='chart-row'>
+            <div class="col-12 col-lg-4 text-center d-flex justify-content-center align-items-center loader chart">
+                <span class="spinner"></span>
             </div>
-            <div class="col-8 col-lg-4 mb-3 text-center pb-5">
-                <img src="img/spd-2.svg" alt="Speaker Diversity" class="h-100 img img-fluid">
-                <p class="h4 mt-4">Mother Tongue</p>
+            <div class="col-12 col-lg-4 text-center d-flex justify-content-center align-items-center loader chart">
+                <div><span class="spinner"></span></div>
             </div>
-            <div class="col-8 col-lg-4 mb-3 text-center pb-5">
-                <img src="img/spd-3.svg" alt="Speaker Diversity" class="h-100 img img-fluid">
-                <p class="h4 mt-4">Gender</p>
+            <div class="col-12 col-lg-4 text-center d-flex justify-content-center align-items-center loader chart">
+                <div><span class="spinner"></span></div>
+            </div>
+            <div class="col-12 col-lg-4 mb-3 text-center chart d-none p-4">
+                <div id="mother-tongue-chart" class="h-100 p-5"></div>
+                <span class="h3 badge-pill border-primary border p-3 text-primary" data-html="true" data-toggle="popover" data-placement="bottom" data-trigger='hover focus'>Mother Tongue</span>
+            </div>
+            <div class="col-12 col-lg-4 mb-3 text-center chart d-none p-4">
+                <div id="age-group-chart" class="h-100 p-5"></div>
+                <span class="h3 badge-pill border-primary border p-3 text-primary" data-html="true" data-toggle="popover" data-placement="bottom" data-trigger='hover focus'>Age Group</span>
+            </div>
+            <div class="col-12 col-lg-4 mb-3 text-center chart d-none p-4">
+                <div id="gender-chart" class="h-100 p-5"></div>
+                <span class="h3 badge-pill border-primary border p-3 text-primary" data-html="true" data-toggle="popover" data-placement="bottom" data-trigger='hover focus'>Gender</span>
             </div>
         </div>
     </div>
@@ -201,6 +210,9 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="js/home.js"></script>
+    <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+    <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+    <script src="js/draw-chart.js"></script>
 </body>
 
 </html>
