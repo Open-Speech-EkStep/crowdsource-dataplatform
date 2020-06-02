@@ -2,6 +2,7 @@ const $chartRow = $('#chart-row');
 const $chartLoaders = $chartRow.find('.loader');
 const $charts = $chartRow.find('.chart');
 const $popovers = $chartRow.find('[data-toggle="popover"]');
+const $body = $('body');
 fetch('/getAllInfo')
     .then(data => {
         if (!data.ok) {
@@ -25,7 +26,7 @@ fetch('/getAllInfo')
             drawMotherTongueChart(formattedMotherTongueData);
             const formattedGenderData = data.genderData.map(item => item.gender ? { ...item, gender: item.gender.charAt(0).toUpperCase() + item.gender.slice(1) } : { gender: 'Unknown', count: item.count }).sort((a, b) => Number(a.count) - Number(b.count))
             drawGenderChart(formattedGenderData);
-            setPopOverContent($popovers.eq(0), formattedMotherTongueData, 'motherTongue');
+            setPopOverContent($popovers.eq(0), formattedMotherTongueData, 'motherTongue',true);
             setPopOverContent($popovers.eq(1), formattedAgeGroupData, 'ageGroup');
             setPopOverContent($popovers.eq(2), formattedGenderData, 'gender');
         } catch (error) {
@@ -41,16 +42,51 @@ $.fn.popover.Constructor.Default.whiteList.table = [];
 $.fn.popover.Constructor.Default.whiteList.tbody = [];
 $.fn.popover.Constructor.Default.whiteList.tr = [];
 $.fn.popover.Constructor.Default.whiteList.td = [];
-const setPopOverContent = ($popover, data, dataKey) => {
-    const dataHtml = data.map(datum => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`);
-    console.log(dataHtml);
-    const tableHtml = `<table class="table table-sm table-borderless mb-0"><tbody>${dataHtml.join('')}</tbody></table>`;
-    console.log(tableHtml);
+const setPopOverContent = ($popover, data, dataKey, isSplit) => {
+    let tableHtml='';
+    if (isSplit) {
+        const half = Math.ceil(data.length / 2);
+        const firstHalfDataHtml = data.splice(0, half).map(datum => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`);
+        const secondHalfDataHtml = data.splice(-half).map(datum => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`);
+        tableHtml = `<div class="row">
+            <div class="col-6"><table class="table table-sm table-borderless mb-0"><tbody>${firstHalfDataHtml.join('')}</tbody></table></div>
+            <div class="col-6"><table class="table table-sm table-borderless mb-0"><tbody>${secondHalfDataHtml.join('')}</tbody></table></div>
+        </div>`;
+    }
+    else{
+        const dataHtml = data.map(datum => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`);
+        tableHtml = `<div class="row"><div class="col"><table class="table table-sm table-borderless mb-0"><tbody>${dataHtml.join('')}</tbody></table></div></div>`;
+    }
+   
     $popover.popover({
-        content: tableHtml
-    });
+        content: tableHtml,
+        fallbackPlacement: ['bottom'],
+        animation: false
+    })
+    .on("mouseenter focus", function () {
+        $popover.popover("show");
+        $body.children('.popover').on("mouseleave blur", function () {
+            $popover.popover('hide');
+        });
+    }).on("mouseleave blur", function () {
+        setTimeout(function () {
+            if (!$body.children('.popover').find(':hover').length) {
+                $popover.popover("hide");
+            }
+        }, 300)})
+    $popover.on('shown.bs.popover', function () {
+        const popoverBody = $body.children('.popover')[0];
+        //hack : to explore alternatives
+        setTimeout(() => {
+            const boundary = popoverBody.getBoundingClientRect();
+            if (boundary.height + boundary.y > innerHeight) {
+                popoverBody.scrollIntoView(false)
+            }
+        }, 0);
+       
+    })
 }
-
+const chartColors = ['#3f80ff', '#4D55A5', '#735dc6', '#68b7dc']
 const drawAgeGroupChart = (chartData) => {
     const chart = am4core.create("age-group-chart", am4charts.PieChart3D);
     chart.data = chartData.slice(0, 4);
@@ -58,6 +94,23 @@ const drawAgeGroupChart = (chartData) => {
     chart.innerRadius = am4core.percent(40);
     chart.depth = 10;
     chart.legend = new am4charts.Legend();
+    chart.legend.labels.template.fill = am4core.color("#74798c");
+    chart.legend.valueLabels.template.fill = am4core.color("#74798c");
+
+    chart.legend.labels.template.textDecoration = "none";
+    chart.legend.valueLabels.template.textDecoration = "none";
+    chart.legend.itemContainers.template.paddingTop = 5;
+    chart.legend.itemContainers.template.paddingBottom = 5;
+
+    const activeLegend = chart.legend.labels.template.states.getKey("active");
+    activeLegend.properties.textDecoration = "line-through";
+
+    const activeLegendLabel = chart.legend.valueLabels.template.states.getKey("active");
+    activeLegendLabel.properties.textDecoration = "line-through";
+
+    chart.legend.valueLabels.template.align = "right"
+    chart.legend.valueLabels.template.textAlign = "start"
+
     //break point for large screen
     if (screen.availWidth < 992) {
         chart.legend.position = "right"
@@ -70,34 +123,12 @@ const drawAgeGroupChart = (chartData) => {
     series.dataFields.value = "count";
     series.dataFields.depthValue = "count";
     series.dataFields.category = "ageGroup";
-    series.slices.template.cornerRadius = 5;
-    series.colors.step = 3;
+    series.slices.template.adapter.add("fill", function (fill, target) {
+        return chartColors[target.dataItem.index];
+    })
 }
 
 const drawMotherTongueChart = (chartData) => {
-
-    // am4core.ready(function () {
-    //     const chart = am4core.create("mother-tongue-chart", am4charts.XYChart3D);
-    //     chart.data = chartData.map(item => item.motherTongue ? { ...item, "color": chart.colors.next() } : { motherTongue: 'Unknown', count: item.count, "color": chart.colors.next() }).sort((a,b) => Number(a.count) - Number(b.count));
-    //     const categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
-    //     categoryAxis.dataFields.category = "motherTongue";
-    //     categoryAxis.renderer.minGridDistance = 10;
-    //     categoryAxis.numberFormatter.numberFormat = "#";
-    //     categoryAxis.renderer.inversed = true;
-
-    //     const valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
-
-    //     const series = chart.series.push(new am4charts.ColumnSeries3D());
-    //     series.dataFields.valueX = "count";
-    //     series.dataFields.categoryY = "motherTongue";
-    //     series.name = "count";
-    //     series.columns.template.propertyFields.fill = "color";
-    //     series.columns.template.tooltipText = "{categoryY} : {valueX}";
-    //     series.columns.template.column3D.stroke = am4core.color("#fff");
-    //     series.columns.template.column3D.strokeOpacity = 0.2;
-
-    // });
-
     const chart = am4core.create("mother-tongue-chart", am4charts.XYChart3D);
     chart.data = chartData.slice(0, 4);
     // Create axes
@@ -108,47 +139,38 @@ const drawMotherTongueChart = (chartData) => {
     categoryAxis.renderer.minGridDistance = 10;
     categoryAxis.renderer.labels.template.horizontalCenter = "right";
     categoryAxis.renderer.labels.template.verticalCenter = "middle";
+    categoryAxis.renderer.labels.template.fill = "#74798c"
 
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-
+    const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.renderer.labels.template.fill = "#74798c";
     // Create series
-    var series = chart.series.push(new am4charts.ColumnSeries3D());
+    const series = chart.series.push(new am4charts.ColumnSeries3D());
     series.dataFields.valueY = "count";
     series.dataFields.categoryX = "motherTongue";
-    series.columns.template.tooltipText = "{categoryX} : {valueY}";
-    // series.columns.template.fillOpacity = .8;
-
-    var columnTemplate = series.columns.template;
-    // columnTemplate.strokeWidth = 2;
-    // columnTemplate.strokeOpacity = 1;
-    // columnTemplate.stroke = am4core.color("#FFFFFF");
-
+    const columnTemplate = series.columns.template;
+    columnTemplate.tooltipText = "{categoryX} : {valueY}";
     columnTemplate.adapter.add("fill", function (fill, target) {
-        return chart.colors.getIndex(target.dataItem.index);
+        return chartColors[target.dataItem.index];
     })
-
-    columnTemplate.adapter.add("stroke", function (stroke, target) {
-        return chart.colors.getIndex(target.dataItem.index);
-    })
-
 }
 
 const drawGenderChart = (chartData) => {
     am4core.ready(function () {
         const chart = am4core.create("gender-chart", am4charts.XYChart3D);
-        chart.paddingBottom = 50;
+        chart.angle = 35;
+        chart.paddingBottom = 30;
         chart.data = chartData;
 
         // Create axes
         const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
         categoryAxis.dataFields.category = "gender";
         categoryAxis.renderer.grid.template.location = 0;
-        categoryAxis.renderer.minGridDistance = 10;
-        categoryAxis.renderer.inside = true;
+        categoryAxis.renderer.minGridDistance = 20;
+        categoryAxis.renderer.inside = false;
         categoryAxis.renderer.grid.template.disabled = false;
-        categoryAxis.renderer.minGridDistance = 10;
+        categoryAxis.renderer.labels.template.fill = "#74798c";
 
-        let labelTemplate = categoryAxis.renderer.labels.template;
+        const labelTemplate = categoryAxis.renderer.labels.template;
         labelTemplate.rotation = -90;
         labelTemplate.horizontalCenter = "left";
         labelTemplate.verticalCenter = "middle";
@@ -157,7 +179,7 @@ const drawGenderChart = (chartData) => {
 
         const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
         valueAxis.renderer.grid.template.disabled = false;
-
+        valueAxis.renderer.labels.template.fill = "#74798c";
         // Create series
         const series = chart.series.push(new am4charts.ConeSeries());
         series.dataFields.valueY = "count";
@@ -166,10 +188,10 @@ const drawGenderChart = (chartData) => {
 
         const columnTemplate = series.columns.template;
         columnTemplate.adapter.add("fill", function (fill, target) {
-            return chart.colors.getIndex(target.dataItem.index);
+            return chartColors[chartColors.length - 1 - target.dataItem.index];
         })
         columnTemplate.adapter.add("stroke", function (stroke, target) {
-            return chart.colors.getIndex(target.dataItem.index);
+            return chartColors[chartColors.length - 1 - target.dataItem.index];
         })
 
     });
