@@ -16,11 +16,11 @@ const getCountOfTotalSpeakerAndRecordedAudio = 'SELECT COUNT(*) \
 FROM (SELECT DISTINCT "userId", "userName" \
 FROM sentences) as allRecord  UNION ALL (select count(*) from sentences  where "fileName" IS NOT NULL);'
 
-const getMotherTonguesData = 'select "motherTongue" ,count("motherTongue") from sentences group by "motherTongue";'
+const getMotherTonguesData = 'select "motherTongue",count("motherTongue") from sentences where "fileName" is not null group by "motherTongue";'
 
-const getAgeGroupsData = 'select "ageGroup" ,count("ageGroup") from sentences group by "ageGroup";'
+const getAgeGroupsData = 'select "ageGroup",count("ageGroup") from sentences where "fileName" is not null  group by "ageGroup";'
 
-const getGenderData = 'select "gender" ,count("gender") from sentences group by "gender";'
+const getGenderData = 'select "gender",count("gender") from sentences where "fileName" is not null  group by "gender";'
 
 module.exports = {
     unassignIncompleteSentences,

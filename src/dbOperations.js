@@ -74,7 +74,7 @@ const getAllDetails = async function () {
     return db.any(getCountOfTotalSpeakerAndRecordedAudio);
 }
 
-const getAllInfo = async function () {
+const getAllInfo = function () {
     const genderData = db.any(getGenderData);
     const ageGroups = db.any(getAgeGroupsData);
     const motherTongues = db.any(getMotherTonguesData);
