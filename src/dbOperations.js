@@ -47,7 +47,7 @@ const getSentencesBasedOnAge = function (ageGroup, encryptedUserId, userName) {
     }
 }
 
-const updateAndGetSentences = async function (req, res) {
+const updateAndGetSentences = function (req, res) {
     const userId = req.cookies.userId;
     const userName = req.body.userName;
     if (!userId || userName === null || userName === undefined) {
@@ -70,7 +70,7 @@ const updateAndGetSentences = async function (req, res) {
 }
 
 
-const getAllDetails = async function () {
+const getAllDetails = function () {
     return db.any(getCountOfTotalSpeakerAndRecordedAudio);
 }
 

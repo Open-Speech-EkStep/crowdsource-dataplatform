@@ -132,7 +132,7 @@ $(document).ready(function () {
         .then(data => {
             try {
                 $speakersDataLoader.addClass('d-none');
-                const totalSentence = data[0].count;
+                const totalSentence = data.find(t=>t.index===1).count;
                 const totalSeconds = totalSentence * 6;
                 const hours = Math.floor(totalSeconds / 3600);
                 const remainingAfterHours = totalSeconds % 3600;
@@ -140,7 +140,7 @@ $(document).ready(function () {
                 const seconds = remainingAfterHours % 60;
 
                 $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
-                $speakersDataSpeakerValue.text(data[1].count);
+                $speakersDataSpeakerValue.text(data.find(t=>t.index===0).count);
                 $speakersDataHoursWrapper.removeClass('d-none');
                 $speakersDataSpeakerWrapper.removeClass('d-none');
                 localStorage.setItem(speakersDataKey, JSON.stringify(data));
@@ -150,15 +150,7 @@ $(document).ready(function () {
         })
         .catch(err => {
             console.log(err);
-        })
-
-            //lazy load other css libs
-            setTimeout(() => {
-                fetch("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css");
-                fetch("https://fonts.googleapis.com/icon?family=Material+Icons");
-                fetch("css/notyf.min.css");
-                fetch("css/record.css");
-            }, 2500);
+        });
 });
 
 

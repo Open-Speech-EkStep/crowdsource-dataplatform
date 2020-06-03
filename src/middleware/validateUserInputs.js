@@ -8,10 +8,13 @@ const validateUserInputAndFile = function (req, res, next) {
     const speakerDetailsJson = JSON.parse(speakerDetails);
     const file = req.file;
     const fileSizeInMB = convertIntoMB(file.size);
+    const userName = speakerDetailsJson.userName;
     const gender = speakerDetailsJson.gender;
+    const ageGroup = speakerDetailsJson.age;
     const motherTongue = speakerDetailsJson.motherTongue;
     if (fileSizeInMB > MAX_SIZE || file.mimetype != VALID_FILE_TYPE
-        || !GENDER.includes(gender) || !MOTHER_TONGUE.includes(motherTongue)) {
+        || !GENDER.includes(gender) || !MOTHER_TONGUE.includes(motherTongue) ||
+        userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName) || !AGE_GROUP.includes(ageGroup)) {
         return res.status(400).send("Bad request");
     }
     next()

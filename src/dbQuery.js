@@ -12,15 +12,15 @@ where "sentenceId" = $5 AND "userId" = $6 returning "fileName";'
 
 const setNewUserAndFileName = 'insert into changeduser ("fileName","userId","sentenceId") values ($1,$2,$3);'
 
-const getCountOfTotalSpeakerAndRecordedAudio = 'SELECT COUNT(*) \
-FROM (SELECT DISTINCT "userId", "userName" \
-FROM sentences) as allRecord  UNION ALL (select count(*) from sentences  where "fileName" IS NOT NULL);'
+const getCountOfTotalSpeakerAndRecordedAudio = 'SELECT COUNT(*),0 as index \
+FROM (SELECT DISTINCT ("userId", "userName") \
+FROM sentences where "fileName" IS NOT NULL) as allRecord UNION ALL (select count(*),1 as index from sentences  where "fileName" IS NOT NULL);'
 
-const getMotherTonguesData = 'select "motherTongue",count("motherTongue") from sentences where "fileName" is not null group by "motherTongue";'
+const getMotherTonguesData = 'select data."motherTongue", count (*) from (select "userId","userName","motherTongue" from sentences where "fileName" is not null group by "motherTongue","userId","userName") as data group by data."motherTongue";'
 
-const getAgeGroupsData = 'select "ageGroup",count("ageGroup") from sentences where "fileName" is not null  group by "ageGroup";'
-
-const getGenderData = 'select "gender",count("gender") from sentences where "fileName" is not null  group by "gender";'
+const getAgeGroupsData = 'select data."ageGroup", count (*) from (select "userId","userName","ageGroup" from sentences where "fileName" is not null group by "ageGroup","userId","userName") as data group by data."ageGroup";'
+                         
+const getGenderData = 'select data."gender", count (*) from (select "userId","userName","gender" from sentences where "fileName" is not null group by "gender","userId","userName") as data group by data."gender";'
 
 module.exports = {
     unassignIncompleteSentences,
