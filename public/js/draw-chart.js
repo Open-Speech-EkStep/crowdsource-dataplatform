@@ -14,7 +14,6 @@ fetch('/getAllInfo')
     })
     .then(data => {
         try {
-            console.log(data)
             $chartLoaders.hide().removeClass('d-flex');
             $charts.removeClass('d-none');
             const formattedAgeGroupData = data.ageGroups.map(item => item.ageGroup ? { ...item, ageGroup: item.ageGroup.padEnd(7, ' ') } : { ageGroup: 'Unknown', count: item.count })
@@ -29,6 +28,14 @@ fetch('/getAllInfo')
             setPopOverContent($popovers.eq(0), formattedMotherTongueData, 'motherTongue',true);
             setPopOverContent($popovers.eq(1), formattedAgeGroupData, 'ageGroup');
             setPopOverContent($popovers.eq(2), formattedGenderData, 'gender');
+            //lazy load other css 
+            setTimeout(() => {
+                fetch("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css");
+                fetch("https://fonts.googleapis.com/icon?family=Material+Icons");
+                fetch("css/notyf.min.css");
+                fetch("css/record.css");
+            }, 2000);
+
         } catch (error) {
             console.log(error);
             $chartLoaders.show().addClass('d-flex');

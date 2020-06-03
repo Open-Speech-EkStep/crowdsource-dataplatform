@@ -104,7 +104,6 @@ const initialize = () => {
         ]
     });
     const handleAudioDurationError = (duration) => {
-        console.log(duration);
         if (duration < 2) {
             $nextBtnToolTip.tooltip('enable');
             $nextBtn.prop('disabled',true).addClass('point-none');
