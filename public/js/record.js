@@ -29,8 +29,8 @@ const initialize = () => {
     const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
     const skipCountInStorage = Number(localStorage.getItem(skipCountKey));
     const totalItems = sentences.length;
-    let currentIndex = currentIndexInStorage < 0 ? 0 : currentIndexInStorage > (totalItems-1) ? (totalItems-1) : currentIndexInStorage;
-    let skipCount = skipCountInStorage < 0 ? 0 : skipCountInStorage > (totalItems-1) ? (totalItems-1) : skipCountInStorage;
+    let currentIndex = currentIndexInStorage < 0 ? 0 : currentIndexInStorage > (totalItems - 1) ? (totalItems - 1) : currentIndexInStorage;
+    let skipCount = skipCountInStorage < 0 ? 0 : skipCountInStorage > (totalItems - 1) ? (totalItems - 1) : skipCountInStorage;
     const $footer = $("footer");
     const progressMessages = [
         "Let’s get started", "",
@@ -84,7 +84,6 @@ const initialize = () => {
         const minutes = Math.floor(remainingSeconds / 60);
         const seconds = remainingSeconds % 60;
         $timeValue.text(`${minutes}m ${seconds}s`);
-        animateCSS($timeValue, 'flash');
         const perSecondTimeGraphHeight = graphforegroundHeight / totalSecondsToContribute;
         const currentTimeGraphHeight = perSecondTimeGraphHeight * totalSecondsContributed;
         $timeGraphBar.height(currentTimeGraphHeight + "em");
@@ -106,7 +105,7 @@ const initialize = () => {
     const handleAudioDurationError = (duration) => {
         if (duration < 2) {
             $nextBtnToolTip.tooltip('enable');
-            $nextBtn.prop('disabled',true).addClass('point-none');
+            $nextBtn.prop('disabled', true).addClass('point-none');
             $audioSmallError.removeClass('d-none');
         }
         else {
@@ -201,7 +200,7 @@ const initialize = () => {
             const bloburl = URL.createObjectURL(blob);
             crowdSource.audioBlob = blob;
             $player.prop("src", bloburl);
-            $player.on('loadedmetadata',() => {
+            $player.on('loadedmetadata', () => {
                 const audioDuration = $player[0].duration;
                 handleAudioDurationError(audioDuration);
             });
@@ -223,7 +222,7 @@ const initialize = () => {
         if (currentIndex == totalItems - 1) {
             $skipBtn.addClass('d-none');
             currentIndex++;
-            animateCSS($pageContent,'zoomOut',() => $pageContent.addClass('d-none'));
+            animateCSS($pageContent, 'zoomOut', () => $pageContent.addClass('d-none'));
             setProgressBar(currentIndex);
             localStorage.removeItem(sentencesKey);
             localStorage.setItem(currentIndexKey, currentIndex);
@@ -308,15 +307,57 @@ const initialize = () => {
         draw();
     }
 }
+const isScreenRotated = () => {
+    const orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
+    const screenWidth = innerWidth;
+    const screenHeight = innerHeight;
+    if ((orientation === "landscape-primary" || orientation === "landscape-secondary") && screenHeight < 768 && (screenHeight < screenWidth)) {
+        return true;
+    } 
+    else if (orientation === undefined) {
+        const screenAngle = screen.orientation.angle;
+        if(screenAngle === 90 || screenAngle === -90){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    else{
+        return false;
+    }
+}
 $(document).ready(() => {
     window.crowdSource = {};
     const $instructionModal = $('#instructionsModal');
     const $errorModal = $("#errorModal");
+    const $landscapeModal = $('#landscapeModal');
     const $loader = $("#loader");
     const $pageContent = $("#page-content");
     const $navUser = $("#nav-user");
     const $navUserName = $navUser.find("#nav-username");
+    window.addEventListener("orientationchange", function() {
+        const screenAngle = screen.orientation.angle;
+        if(screenAngle === 90 || screenAngle === -90){
+            $pageContent.addClass('d-none');
+            $landscapeModal.modal('show');
+        }
+      });
+      screen.orientation.onchange = function (){
+        const screenRotated = isScreenRotated();
+        if(screenRotated){
+            $pageContent.addClass('d-none');
+            $landscapeModal.modal('show');
+        }
+    };
     try {
+        const screenRotated = isScreenRotated();
+        if(screenRotated){
+            $loader.hide();
+            $pageContent.addClass('d-none');
+            $landscapeModal.modal('show');
+            return;
+        }
         const localSpeakerData = localStorage.getItem(speakerDetailsKey);
         const localSpeakerDataParsed = JSON.parse(localSpeakerData);
         const localSentences = localStorage.getItem(sentencesKey);

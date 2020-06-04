@@ -4,56 +4,12 @@ body {
 html {
   scroll-behavior: smooth;
 }
-
 html {
-  font-size: 8px;
+  font-size: 10px;
 }
-@media (min-width: 321px) {
-  html {
-    font-size: 9px;
-  }
+.display-5 {
+  font-size: 2rem;
 }
-@media (min-width: 448px) {
-  html {
-    font-size: 10px;
-  }
-}
-@media (min-width: 576px) {
-  html {
-    font-size: 11px;
-  }
-}
-@media (min-width: 672px) {
-  html {
-    font-size: 12px;
-  }
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 13px;
-  }
-}
-@media (min-width: 992px) {
-  html {
-    font-size: 14px;
-  }
-}
-@media (min-width: 1200px) {
-  html {
-    font-size: 15px;
-  }
-}
-@media (min-width: 1300px) {
-  html {
-    font-size: 16px;
-  }
-}
-@media (min-width: 1400px) {
-  html {
-    font-size: 17px;
-  }
-}
-
 h1,
 h2,
 h3,
@@ -68,6 +24,63 @@ h6,
 .h6 {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
+}
+@media (min-width: 321px) {
+  html {
+    font-size: 12px;
+  }
+  .display-5 {
+    font-size: 2.2rem;
+  }
+}
+@media (min-width: 448px) {
+  html {
+    font-size: 13px;
+  }
+  .display-5 {
+    font-size: 2.5rem;
+  }
+}
+@media (min-width: 576px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media (min-width: 672px) {
+
+}
+@media (max-width: 768px) {
+  .font-weight-normal-sm{
+    font-weight: 400!important;
+  }
+}
+@media (min-width: 768px) {
+  .font-weight-light-lg{
+    font-weight: 300!important;
+  }
+}
+@media (min-width: 992px) {
+  html {
+    font-size: 15px;
+  }
+}
+@media (min-width: 1200px) {
+  html {
+    font-size: 16px;
+  }
+  .display-5 {
+    font-size: 2.8rem;
+  }
+}
+@media (min-width: 1300px) {
+  .display-5 {
+    font-size: 3rem;
+  }
+}
+@media (min-width: 1400px) {
+  html {
+    font-size: 17px;
+  }
 }
 * {
   box-sizing: border-box;
@@ -98,9 +111,6 @@ padding: 2rem;
 }
 .font-wt-900 {
   font-weight: 900;
-}
-.display-5 {
-  font-size: 3rem;
 }
 .site-blue {
   color: #11223f;
