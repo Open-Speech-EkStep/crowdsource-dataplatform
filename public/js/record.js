@@ -115,9 +115,7 @@ const initialize = () => {
         }
     }
 
-    $(window).resize(adjustTimeProgressBarHeight);
     adjustTimeProgressBarHeight();
-    animateCSS($timeProgress, 'fadeIn');
 
     setSentenceText(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
@@ -311,7 +309,7 @@ const isScreenRotated = () => {
     const orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
     const screenWidth = innerWidth;
     const screenHeight = innerHeight;
-    if ((orientation === "landscape-primary" || orientation === "landscape-secondary") && screenHeight < 768 && (screenHeight < screenWidth)) {
+    if ((orientation === "landscape-primary" || orientation === "landscape-secondary") && screenHeight < 600 && (screenHeight < screenWidth)) {
         return true;
     } 
     else if (orientation === undefined) {
@@ -327,37 +325,33 @@ const isScreenRotated = () => {
         return false;
     }
 }
+const adjustTimeProgressBarPosition = () => {
+    const $timeProgress = $("#time-progress");
+    const $previousContainer = $timeProgress.prev();
+    const $graphcontainer = $("#graphcontainer");
+    const screenRotated = isScreenRotated();
+    if(screenRotated || innerWidth < 600){
+        $timeProgress.removeClass('position-fixed text-center').addClass('position-relative text-right');
+        $graphcontainer.removeClass('mx-auto').addClass('ml-auto');
+        $previousContainer.removeClass('mb-5')
+    }
+}
 $(document).ready(() => {
     window.crowdSource = {};
     const $instructionModal = $('#instructionsModal');
     const $errorModal = $("#errorModal");
-    const $landscapeModal = $('#landscapeModal');
     const $loader = $("#loader");
     const $pageContent = $("#page-content");
     const $navUser = $("#nav-user");
     const $navUserName = $navUser.find("#nav-username");
-    window.addEventListener("orientationchange", function() {
-        const screenAngle = screen.orientation.angle;
-        if(screenAngle === 90 || screenAngle === -90){
-            $pageContent.addClass('d-none');
-            $landscapeModal.modal('show');
-        }
-      });
-      screen.orientation.onchange = function (){
-        const screenRotated = isScreenRotated();
-        if(screenRotated){
-            $pageContent.addClass('d-none');
-            $landscapeModal.modal('show');
-        }
-    };
+    try{
+        screen.orientation.onchange = adjustTimeProgressBarPosition;
+    }
+    catch(err){
+        console.log(err);
+    }
     try {
-        const screenRotated = isScreenRotated();
-        if(screenRotated){
-            $loader.hide();
-            $pageContent.addClass('d-none');
-            $landscapeModal.modal('show');
-            return;
-        }
+        adjustTimeProgressBarPosition();
         const localSpeakerData = localStorage.getItem(speakerDetailsKey);
         const localSpeakerDataParsed = JSON.parse(localSpeakerData);
         const localSentences = localStorage.getItem(sentencesKey);

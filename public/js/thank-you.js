@@ -5,17 +5,17 @@ const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
 const localSpeakerData = localStorage.getItem(speakerDetailsKey);
 const localSpeakerDataParsed = JSON.parse(localSpeakerData);
 if (!(localSpeakerDataParsed && localSpeakerDataParsed.userName)) {
-    location.href = "/";
+    location.href = "/#start-record";
 }
 else if (currentIndexInStorage < totalSentence) {
-    location.href = "/";
+    location.href = "/#start-record";
 }
 else {
     const $navUser = $("#nav-user");
     const $navUserName = $navUser.find("#nav-username");
     $navUserName.text(localSpeakerDataParsed.userName);
     $navUser.removeClass('d-none');
-
+    $totalProgress = $('#total-progress');
     const countKey = "count";
     const skipCountKey = "skipCount";
     const skipCountInStorage = Number(localStorage.getItem(skipCountKey));
@@ -52,16 +52,22 @@ else {
     setProgressPercent(currentIndexInStorage)
 
     const showSpeakersHoursData = (index) => {
-        try{
-            const totalSentence = Number(speakerDetailsValue.find(t=>t.index===1).count);
+        try {
+            const totalSentence = Number(speakerDetailsValue.find(t => t.index === 1).count);
             const totalSeconds = (totalSentence + index - skipCountInStorage) * 6;
             const hours = Math.floor(totalSeconds / 3600);
             const remainingAfterHours = totalSeconds % 3600;
             const minutes = Math.floor(remainingAfterHours / 60);
             const seconds = remainingAfterHours % 60;
             $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
+            const targetPercentCompleted = (totalSeconds / (10000 * 3600)) * 100;
+            console.log(targetPercentCompleted)
+            $totalProgress.width(((targetPercentCompleted * 75) / 100) + "%");
+            if (targetPercentCompleted >= 100) {
+                $totalProgress.next().removeClass('d-none');
+            }
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
     }
@@ -75,6 +81,53 @@ else {
             $progressPercentWrapper.css('bottom', footerHeight + "px")
         }
     };
-    adjustTimeProgressBarHeight();
-    $(window).resize(adjustTimeProgressBarHeight);
+    const isScreenRotated = () => {
+        const orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
+        const screenWidth = innerWidth;
+        const screenHeight = innerHeight;
+        if ((orientation === "landscape-primary" || orientation === "landscape-secondary") && screenHeight < 600 && (screenHeight < screenWidth)) {
+            return true;
+        }
+        else if (orientation === undefined) {
+            const screenAngle = screen.orientation.angle;
+            if (screenAngle === 90 || screenAngle === -90) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+    const adjustTimeProgressBarPosition = () => {
+        const $progressPercentWrapper = $("#progress-percent-wrapper");
+        const $previousContainer = $progressPercentWrapper.prev();
+        const $graphcontainer = $("#graphcontainer");
+        const screenRotated = isScreenRotated();
+        if (screenRotated || innerWidth < 600) {
+            $progressPercentWrapper.removeClass('position-fixed text-center').addClass('position-relative text-right').css({
+                right: 0,
+                bottom: 0
+            });
+            $graphcontainer.removeClass('mx-auto').addClass('ml-auto mr-3');
+            const documentFontSize = getComputedStyle(document.documentElement).fontSize;
+            const graphforegroundWidth = $graphcontainer.find("#graphforeground").width();
+            $graphcontainer.next().find('span').not("#progress-percent").css({
+                marginRight: (graphforegroundWidth / 3) + Number(documentFontSize.substring(0, documentFontSize.length - 2))
+            });
+            $previousContainer.removeClass('mb-6')
+        }
+        else {
+            adjustTimeProgressBarHeight();
+        }
+    }
+    adjustTimeProgressBarPosition();
+    try {
+        screen.orientation.onchange = adjustTimeProgressBarPosition;
+    }
+    catch (err) {
+        console.log(err);
+    }
 }
