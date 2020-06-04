@@ -4,7 +4,7 @@
 <head>
     <title>Vakyansh: A crowdsourcing initiative for Indic languages</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet"
         type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -15,20 +15,22 @@
 <body>
 
     <%- include common/header.ejs %>
-    <div class="container-fluid pr-1">
+    <div class="container-fluid">
         <div class="row pt-lg-5">
-            <div class="col-12 col-sm-7 col-lg-6 ml-lg-auto p-5 text-dark mt-4">
+            <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 text-dark mt-4">
                 <h1 class="display-5 font-wt-900 site-blue lh-5">Vakyansh: A crowdsourcing initiative for Indic
                     languages
                 </h1>
-                <p class="h5 font-weight-light lh-7 site-blue text-justify mt-5">
+                <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
                     For the development of a speech recognition product that focuses solely on Indian languages,
                     there is a need for an enormous repository of diversified Indian voices. Through
                     Vakyansh, we are reaching out to you to contribute your voices to create a diverse open source
                     repository of Indian voices to this end.
                 </p>
+                </br>
+                </br>
             </div>
-            <div class="col-12 col-sm-5 col-lg-5 text-right px-0 align-self-center">
+            <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center">
                 <img src="/img/home.svg" class="img img-fluid">
             </div>
         </div>
@@ -36,20 +38,20 @@
 
     <div class="container-fluid bg-blue mt-n6 pb-6 pt-6">
         <div class="row justify-content-center text-white pt-5 pb-5">
-            <div class="col-8 col-lg-4 text-left pr-4 pl-0 mb-2">
+            <div class="col-10 col-lg-4 text-left pr-4 pl-0 mb-2">
                 <p class="h1 font-wt-900 lh-5">
                     Our multilingual DNA is still a missing piece in digital first strategy
                 </p>
             </div>
-            <div class="col-8 col-lg-3 text-left lh-7 pl-lg-3 pl-0 mb-2">
-                <section class="lead">India being a vast multilingual country, 90% of India’s population relies on
+            <div class="col-10 col-lg-3 text-left lh-7 pl-lg-3 pl-0 mb-2">
+                <section class="lead font-weight-normal-sm">India being a vast multilingual country, 90% of India’s population relies on
                     regional languages to
                     conduct their educational, social & digital activities.</section>
 
 
             </div>
-            <div class="col-8 col-lg-3 text-left lh-7 pl-lg-3 pl-0 mb-2">
-                <section class="lead">As the volume of internet users multiplies and there is a demand to access digital
+            <div class="col-10 col-lg-3 text-left lh-7 pl-lg-3 pl-0 mb-2">
+                <section class="lead font-weight-normal-sm">As the volume of internet users multiplies and there is a demand to access digital
                     platforms for financial, educational and economic activities, there is a need to
                     start thinking Indic languages
                     first and move towards language localization.</section>
@@ -59,14 +61,14 @@
 
     <div class="container-fluid bg-light-blue mt-n5">
         <div class="row pb-6 pt-6 justify-content-center mt-5">
-            <div class="col-8 col-lg-4 text-center p-5 align-self-center">
+            <div class="col-10 col-lg-4 text-center p-5 align-self-center">
                 <img src="img/about-us-1.svg" alt="Speaker Diversity" class="img img-fluid">
             </div>
-            <div class="col-8 col-lg-6 text-left pb-5">
+            <div class="col-10 col-lg-6 text-left pb-5">
                 <p class="h1 font-wt-900 lh-5">
                     Winning back our languages by introducing localisation
                 </p>
-                <p class="lead lh-7 mt-5">There is a felt need for a speech recognition product that specializes in
+                <p class="lead lh-7 mt-5 font-weight-normal-sm">There is a felt need for a speech recognition product that specializes in
                     Indic languages, that
                     meets a high accuracy bar and is closer to the daily language and
                     communication functions of users of diverse Indian languages.
@@ -87,11 +89,11 @@
 
     <div class="container-fluid bg-blue mt-n5">
         <div class="row pb-5 pt-6 justify-content-center  text-white mt-5">
-            <div class="col-8 col-lg-6 mb-3 text-left pb-5">
+            <div class="col-10 col-lg-6 mb-3 text-left pb-5">
                 <p class="h1 font-wt-900 lh-5">
                     Crowd Sourcing & your contribution
                 </p>
-                <p class="lead lh-7 mt-5">Speech recognition relies on "machine-learning" technology that requires huge
+                <p class="lead lh-7 mt-5 font-weight-normal-sm">Speech recognition relies on "machine-learning" technology that requires huge
                     collections of datasets that includes diversified Indian voices and the corresponding text. Through
                     Vakyansh, EkStep wants to create a diverse open source repository of Indian voices speaking Indian
                     language which can be used for this initiative and others. The initial plan is to begin
@@ -108,10 +110,12 @@
                     us off.
                     </br>
                     </br>
-                    Every minute of your contribution will make a huge difference and bring us closer to our objective.</p>
+                    Every minute of your contribution will make a huge difference and bring us closer to our objective.
+                </p>
                 <div class="row">
-                    <div class="col-8 col-lg-5">
-                        <a role="button" href="/record" class="btn bg-white shadow text-primary h6 w-100 rounded mt-3 p-3">
+                    <div class="col-10 col-sm-8 col-lg-5">
+                        <a role="button" href="/record"
+                            class="btn bg-white shadow text-primary h6 w-100 rounded mt-3 p-3">
                             START RECORDING
                         </a>
                     </div>
@@ -132,7 +136,7 @@
         </p>
 
         <div class="row pb-6 justify-content-center text-muted">
-            <div class="col-sm-8 col-10 col-lg-6 mb-3 text-left lh-7 py-5 lead">
+            <div class="col-10 col-lg-6 mb-3 text-left lh-7 py-5 lead font-weight-normal-sm">
                 EkStep Foundation gathers partners and creates open infrastructure, tools and frameworks to solve
                 complex societal problems at scale. We do this by leveraging the open source digital infrastructure we
                 have created called Sunbird and by following a way of thinking and doing called the Societal Platform

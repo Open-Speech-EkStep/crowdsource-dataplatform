@@ -20,51 +20,59 @@ h6,
   box-sizing: border-box;
 }
 html {
-  font-size: 6px;
+  font-size: 10px;
+}
+.display-5 {
+  font-size: 2rem;
 }
 @media (min-width: 321px) {
   html {
-    font-size: 8px;
+    font-size: 12px;
+  }
+  .display-5 {
+    font-size: 2.2rem;
   }
 }
 @media (min-width: 448px) {
   html {
-    font-size: 9px;
+    font-size: 13px;
+  }
+  .display-5 {
+    font-size: 2.5rem;
   }
 }
 @media (min-width: 576px) {
   html {
-    font-size: 10px;
-  }
-}
-@media (min-width: 672px) {
-  html {
-    font-size: 11px;
-  }
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 12px;
-  }
-}
-@media (min-width: 992px) {
-  html {
-    font-size: 13px;
-  }
-}
-@media (min-width: 1200px) {
-  html {
     font-size: 14px;
   }
 }
-@media (min-width: 1300px) {
+@media (min-width: 672px) {
+
+}
+@media (min-width: 768px) {
+
+}
+@media (min-width: 992px) {
   html {
     font-size: 15px;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1200px) {
   html {
     font-size: 16px;
+  }
+  .display-5 {
+    font-size: 2.8rem;
+  }
+}
+@media (min-width: 1300px) {
+  .display-5 {
+    font-size: 3rem;
+  }
+}
+@media (min-width: 1400px) {
+  html {
+    font-size: 17px;
   }
 }
 .pb-6 {
@@ -75,9 +83,6 @@ html {
 }
 .material-icons.blue {
   color: #007bff;
-}
-.display-5 {
-  font-size: 3rem;
 }
 .recorder-container {
   width: 4rem;
@@ -212,11 +217,21 @@ audio {
 /* 3d bar css */
 /** CONTAINER **/
 #graphcontainer {
-  font-size: 0.4rem;
+  font-size: 0.2rem;
   position: relative;
   height: 44em;
   width: 9em;
   overflow: hidden;
+}
+@media (min-width: 672px) {
+  #graphcontainer {
+    font-size: 0.3rem;
+  }
+}
+@media (min-width: 992px) {
+  #graphcontainer {
+    font-size: 0.4rem;
+  }
 }
 
 /* left bottom patch */

@@ -7,12 +7,22 @@
     bottom: 2.8rem;
   }
 #graphcontainer {
-    font-size: 0.4rem;
-    position: relative;
-    height: 44em;
-    width: 9em;
-    overflow: hidden;
+  font-size: 0.2rem;
+  position: relative;
+  height: 44em;
+  width: 9em;
+  overflow: hidden;
+}
+@media (min-width: 672px) {
+  #graphcontainer {
+    font-size: 0.3rem;
   }
+}
+@media (min-width: 992px) {
+  #graphcontainer {
+    font-size: 0.4rem;
+  }
+}
   
   /* left bottom patch */
   #graphcontainer:before {
