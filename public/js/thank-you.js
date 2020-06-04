@@ -52,13 +52,18 @@ else {
     setProgressPercent(currentIndexInStorage)
 
     const showSpeakersHoursData = (index) => {
-        const totalSentence = Number(speakerDetailsValue[0].count);
-        const totalSeconds = (totalSentence + index - skipCountInStorage) * 6;
-        const hours = Math.floor(totalSeconds / 3600);
-        const remainingAfterHours = totalSeconds % 3600;
-        const minutes = Math.floor(remainingAfterHours / 60);
-        const seconds = remainingAfterHours % 60;
-        $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
+        try{
+            const totalSentence = Number(speakerDetailsValue.find(t=>t.index===1).count);
+            const totalSeconds = (totalSentence + index - skipCountInStorage) * 6;
+            const hours = Math.floor(totalSeconds / 3600);
+            const remainingAfterHours = totalSeconds % 3600;
+            const minutes = Math.floor(remainingAfterHours / 60);
+            const seconds = remainingAfterHours % 60;
+            $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
+        }
+        catch(err){
+            console.log(err);
+        }
     }
     showSpeakersHoursData(currentIndexInStorage);
 
