@@ -11,6 +11,10 @@ else if (currentIndexInStorage < totalSentence) {
     location.href = "/#start-record";
 }
 else {
+    const breakPointForSmallScreen = 576;
+    const breakPointForLargeScreen = 1200;
+    const breakPointForExtraLargeScreen = 2000;
+    const secondsInTenThousandHours = 10000 * 3600;
     const $navUser = $("#nav-user");
     const $navUserName = $navUser.find("#nav-username");
     $navUserName.text(localSpeakerDataParsed.userName);
@@ -51,6 +55,52 @@ else {
     };
     setProgressPercent(currentIndexInStorage)
 
+    const getTotalProgressSize = () => {
+        //magic calculation for every screen size
+        let screenSizeDiff = 0;
+        let totalProgressBarWidth = 0;
+        let totalProgressBarBulbWidth = 11;
+        let totalProgressBarBulbLeft = 0;
+        if (innerWidth < breakPointForSmallScreen) {
+            screenSizeDiff = breakPointForSmallScreen - innerWidth;
+            totalProgressBarWidth = 70.5 - ((1.333 * screenSizeDiff) / 100);
+            totalProgressBarBulbLeft = 75.2 - ((0.4 * screenSizeDiff) / 100);
+        }
+        else if (innerWidth < breakPointForLargeScreen) {
+            screenSizeDiff = breakPointForLargeScreen - innerWidth;
+            totalProgressBarWidth = 70.5 - ((0.5 * screenSizeDiff) / 100);
+            totalProgressBarBulbLeft = 75.75 - ((0.25 * screenSizeDiff) / 100);
+        }
+        else if (innerWidth < breakPointForExtraLargeScreen) {
+            screenSizeDiff = breakPointForExtraLargeScreen - innerWidth;
+            totalProgressBarWidth = 71.5 - ((0.1 * screenSizeDiff) / 100);
+            totalProgressBarBulbWidth = 12 - ((0.1 * screenSizeDiff) / 100);;
+            totalProgressBarBulbLeft = innerWidth < 1500 ? 75.2 : (75.5 - ((0.003 * screenSizeDiff) / 100));
+        }
+        else {
+            screenSizeDiff = innerWidth - breakPointForExtraLargeScreen;
+            totalProgressBarWidth = 71.5 + ((0.1 * screenSizeDiff) / 100);
+            totalProgressBarBulbWidth = 12;
+            totalProgressBarBulbLeft = 75.8;
+        }
+        return {
+            totalProgressBarWidth, totalProgressBarBulbWidth, totalProgressBarBulbLeft
+        }
+    }
+    const setTotalProgressBar = (totalSeconds) => {
+        const barWidth = getTotalProgressSize();
+        const targetPercentCompleted = (totalSeconds / secondsInTenThousandHours) * 100;
+        if (targetPercentCompleted >= 100) {
+            $totalProgress.next().css({
+                width: barWidth.totalProgressBarBulbWidth + "%",
+                left: barWidth.totalProgressBarBulbLeft + "%",
+            }).removeClass('d-none');
+            $totalProgress.width(((100 * barWidth.totalProgressBarWidth) / 100) + "%");
+        }
+        else {
+            $totalProgress.width(((targetPercentCompleted * barWidth.totalProgressBarWidth) / 100) + "%");
+        }
+    }
     const showSpeakersHoursData = (index) => {
         try {
             const totalSentence = Number(speakerDetailsValue.find(t => t.index === 1).count);
@@ -60,12 +110,7 @@ else {
             const minutes = Math.floor(remainingAfterHours / 60);
             const seconds = remainingAfterHours % 60;
             $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
-            const targetPercentCompleted = (totalSeconds / (10000 * 3600)) * 100;
-            console.log(targetPercentCompleted)
-            $totalProgress.width(((targetPercentCompleted * 75) / 100) + "%");
-            if (targetPercentCompleted >= 100) {
-                $totalProgress.next().removeClass('d-none');
-            }
+            setTotalProgressBar(totalSeconds);
         }
         catch (err) {
             console.log(err);
