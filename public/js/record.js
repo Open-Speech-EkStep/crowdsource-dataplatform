@@ -365,11 +365,11 @@ $(document).ready(() => {
             $instructionModal.modal('hide');
         })
         $errorModal.on('hidden.bs.modal', function (e) {
-            location.href = "/";
+            location.href = "/#speaker-details";
         })
 
         if (!localSpeakerDataParsed) {
-            location.href = '/';
+            location.href = '/#speaker-details';
             return;
         }
 
