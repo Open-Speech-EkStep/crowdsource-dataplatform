@@ -139,6 +139,9 @@ outline: 0;
 #chart-row .chart{
   height: 40rem;
 }
+.cursor-pointer{
+  cursor: pointer;
+}
 [data-toggle="popover"]::after {
   display: inline-block;
   margin-left: .255em;

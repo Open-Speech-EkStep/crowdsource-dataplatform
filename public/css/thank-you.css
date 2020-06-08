@@ -29,7 +29,7 @@
   height: 12.68%;
   top: 48%;
   left: calc(15px + 3.7%);
-  transition: width 1s;
+  transition: width 1s linear;
 }
 #total-progress-bulb {
   width: 11%;
