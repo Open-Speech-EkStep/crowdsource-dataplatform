@@ -94,8 +94,23 @@ else {
             $totalProgress.next().css({
                 width: barWidth.totalProgressBarBulbWidth + "%",
                 left: barWidth.totalProgressBarBulbLeft + "%",
-            }).removeClass('d-none');
+            });
             $totalProgress.width(((100 * barWidth.totalProgressBarWidth) / 100) + "%");
+            $("#total-progress").one('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd',
+            () => {
+                let progressWidth = 0;
+                let timerKey =  setInterval(() => {
+                    if(progressWidth>=100){
+                        clearInterval(timerKey);
+                    }
+                    $totalProgress.next().css(
+                        'background', `linear-gradient(to right, #007bff 0%, #007bff ${progressWidth}%, transparent 0%)`
+                    )
+                    progressWidth = progressWidth+5;
+                }, 30);
+            
+                
+            });
         }
         else {
             $totalProgress.width(((targetPercentCompleted * barWidth.totalProgressBarWidth) / 100) + "%");
