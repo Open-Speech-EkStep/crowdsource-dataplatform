@@ -52,6 +52,11 @@ else {
         $progressPercent.text(Number(contributionPercent.toFixed(1)));
         const currentTimeGraphHeight = (totalSecondsContributed / totalSecondsToContribute) * graphforegroundHeight;
         $timeGraphBar.height(currentTimeGraphHeight + "em");
+        if(contributionPercent >=100 ){
+            $progressPercent.parent().find('.small').addClass('d-none');
+            $progressPercentWrapper.addClass('mb-3');
+            $('#do-more').addClass('d-none')
+        }
     };
     setProgressPercent(currentIndexInStorage)
 
@@ -97,20 +102,20 @@ else {
             });
             $totalProgress.width(((100 * barWidth.totalProgressBarWidth) / 100) + "%");
             $("#total-progress").one('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd',
-            () => {
-                let progressWidth = 0;
-                let timerKey =  setInterval(() => {
-                    if(progressWidth>=100){
-                        clearInterval(timerKey);
-                    }
-                    $totalProgress.next().css(
-                        'background', `linear-gradient(to right, #007bff 0%, #007bff ${progressWidth}%, transparent 0%)`
-                    )
-                    progressWidth = progressWidth+5;
-                }, 30);
-            
-                
-            });
+                () => {
+                    let progressWidth = 0;
+                    let timerKey = setInterval(() => {
+                        if (progressWidth >= 100) {
+                            clearInterval(timerKey);
+                        }
+                        $totalProgress.next().css(
+                            'background', `linear-gradient(to right, #007bff 0%, #007bff ${progressWidth}%, transparent 0%)`
+                        )
+                        progressWidth = progressWidth + 5;
+                    }, 30);
+
+
+                });
         }
         else {
             $totalProgress.width(((targetPercentCompleted * barWidth.totalProgressBarWidth) / 100) + "%");
@@ -175,7 +180,7 @@ else {
             const documentFontSize = getComputedStyle(document.documentElement).fontSize;
             const graphforegroundWidth = $graphcontainer.find("#graphforeground").width();
             $graphcontainer.next().find('span').not("#progress-percent").css({
-                marginRight: (graphforegroundWidth / 3) + Number(documentFontSize.substring(0, documentFontSize.length - 2))
+                marginRight: Number(documentFontSize.substring(0, documentFontSize.length - 2))
             });
             $previousContainer.removeClass('mb-6')
         }
