@@ -49,6 +49,6 @@ gulp.task(
         "html",
         "js",
         "css",
-        "img"
+        // "img"
     )
 );
