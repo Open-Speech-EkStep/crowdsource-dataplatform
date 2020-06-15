@@ -16,17 +16,17 @@ fetch('/getAllInfo')
         try {
             $chartLoaders.hide().removeClass('d-flex');
             $charts.removeClass('d-none');
-            const formattedAgeGroupData = data.ageGroups.map(item => item.ageGroup ? { ...item, ageGroup: item.ageGroup.padEnd(7, ' ') } : { ageGroup: 'Unknown', count: item.count })
+            const formattedAgeGroupData = data.ageGroups.map(item => item.ageGroup ? item: { ageGroup: 'Anonymous', count: item.count })
                 .sort((a, b) => Number(b.count) - Number(a.count));
             drawAgeGroupChart(formattedAgeGroupData);
-            const formattedMotherTongueData = data.motherTongues.map(item => item.motherTongue ?
-                item : { motherTongue: 'Unknown', count: item.count })
+            const formattedMotherTongueData = data.motherTongues.map(item => item.motherTongue ? item : { motherTongue: 'Anonymous', count: item.count })
                 .sort((a, b) => Number(b.count) - Number(a.count));
             drawMotherTongueChart(formattedMotherTongueData);
-            const formattedGenderData = data.genderData.map(item => item.gender ? { ...item, gender: item.gender.charAt(0).toUpperCase() + item.gender.slice(1) } : { gender: 'Unknown', count: item.count }).sort((a, b) => Number(a.count) - Number(b.count))
+            const formattedGenderData = data.genderData.map(item => item.gender ? { ...item, gender: item.gender.charAt(0).toUpperCase() + item.gender.slice(1) } : { gender: 'Anonymous', count: item.count })
+                .sort((a, b) => Number(a.count) - Number(b.count))
             drawGenderChart(formattedGenderData);
             setPopOverContent($popovers.eq(0), formattedMotherTongueData, 'motherTongue',true);
-            setPopOverContent($popovers.eq(1), formattedAgeGroupData, 'ageGroup');
+            setPopOverContent($popovers.eq(1), formattedAgeGroupData, 'ageGroup',true);
             setPopOverContent($popovers.eq(2), formattedGenderData, 'gender');
             //lazy load other css 
             setTimeout(() => {
@@ -73,11 +73,15 @@ const setPopOverContent = ($popover, data, dataKey, isSplit) => {
     .on("mouseenter focus", function () {
         $popover.popover("show");
         $body.children('.popover').on("mouseleave blur", function () {
-            $popover.popover('hide');
+            setTimeout(function () {
+                if (!$body.children('.popover').find(':hover').length && !$popover.is(':hover')) {
+                    $popover.popover("hide");
+                }
+            }, 300)
         });
     }).on("mouseleave blur", function () {
         setTimeout(function () {
-            if (!$body.children('.popover').find(':hover').length) {
+            if (!$body.children('.popover').find(':hover').length && !$popover.is(':hover')) {
                 $popover.popover("hide");
             }
         }, 300)})
@@ -96,10 +100,12 @@ const setPopOverContent = ($popover, data, dataKey, isSplit) => {
 const chartColors = ['#3f80ff', '#4D55A5', '#735dc6', '#68b7dc']
 const drawAgeGroupChart = (chartData) => {
     const chart = am4core.create("age-group-chart", am4charts.PieChart3D);
-    chart.data = chartData.slice(0, 4);
+    chart.data = chartData.slice(0,3)
+    .concat({ageGroup:"Others",count:chartData.slice(3).reduce((acc,curr) => acc+Number(curr.count),0)})
+    // .sort((a, b) => Number(b.count) - Number(a.count));
     chart.paddingBottom = 50;
     chart.innerRadius = am4core.percent(40);
-    chart.depth = 10;
+    chart.depth = 50;
     chart.legend = new am4charts.Legend();
     chart.legend.labels.template.fill = am4core.color("#74798c");
     chart.legend.valueLabels.template.fill = am4core.color("#74798c");
@@ -118,15 +124,12 @@ const drawAgeGroupChart = (chartData) => {
     chart.legend.valueLabels.template.align = "right"
     chart.legend.valueLabels.template.textAlign = "start"
 
-    //break point for large screen
-    if (screen.availWidth < 992) {
-        chart.legend.position = "right"
-    }
     const series = chart.series.push(new am4charts.PieSeries3D());
     series.labels.template.disabled = true;
     series.ticks.template.disabled = true;
-    series.slices.template.tooltipText = "{category}: {value.value}";
-    series.labels.template.text = "{category}: {value.value}";
+    series.calculatePercent = true;
+    series.slices.template.tooltipText = "{category}: [bold]{value.percent.formatNumber('#.0')}% ({value.value})[/]";
+    // series.labels.template.text = "{category}: {value.percent.formatNumber('#.0')}%";
     series.dataFields.value = "count";
     series.dataFields.depthValue = "count";
     series.dataFields.category = "ageGroup";
@@ -138,6 +141,9 @@ const drawAgeGroupChart = (chartData) => {
 const drawMotherTongueChart = (chartData) => {
     const chart = am4core.create("mother-tongue-chart", am4charts.XYChart3D);
     chart.data = chartData.slice(0, 4);
+    // .slice(0,3)
+    // .concat({motherTongue:"Others",count:chartData.slice(3).reduce((acc,curr) => acc+Number(curr.count),0)})
+    // .sort((a, b) => Number(b.count) - Number(a.count));
     // Create axes
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = "motherTongue";
@@ -150,11 +156,16 @@ const drawMotherTongueChart = (chartData) => {
 
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.renderer.labels.template.fill = "#74798c";
+    // valueAxis.renderer.labels.template.adapter.add("text", function(text) {
+    //     return text + "%";
+    //   });
     // Create series
     const series = chart.series.push(new am4charts.ColumnSeries3D());
     series.dataFields.valueY = "count";
     series.dataFields.categoryX = "motherTongue";
+    series.calculatePercent = true;
     const columnTemplate = series.columns.template;
+    // columnTemplate.tooltipText = "{categoryX} : [bold]{valueY.percent.formatNumber('#.0')}% ({valueY.value})[/]";
     columnTemplate.tooltipText = "{categoryX} : {valueY}";
     columnTemplate.adapter.add("fill", function (fill, target) {
         return chartColors[target.dataItem.index];
@@ -167,7 +178,6 @@ const drawGenderChart = (chartData) => {
         chart.angle = 35;
         chart.paddingBottom = 30;
         chart.data = chartData;
-
         // Create axes
         const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
         categoryAxis.dataFields.category = "gender";
@@ -189,9 +199,10 @@ const drawGenderChart = (chartData) => {
         valueAxis.renderer.labels.template.fill = "#74798c";
         // Create series
         const series = chart.series.push(new am4charts.ConeSeries());
+        series.calculatePercent = true;
         series.dataFields.valueY = "count";
         series.dataFields.categoryX = "gender";
-        series.columns.template.tooltipText = "{categoryX} : {valueY}";
+        series.columns.template.tooltipText = "{categoryX} : [bold]{valueY.percent.formatNumber('#.0')}% ({valueY.value})[/]";
 
         const columnTemplate = series.columns.template;
         columnTemplate.adapter.add("fill", function (fill, target) {

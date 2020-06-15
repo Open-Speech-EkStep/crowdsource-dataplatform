@@ -36,19 +36,11 @@ gulp.task("css", function () {
         .pipe(gulp.dest("public/css"));
 });
 
-gulp.task("img", function () {
-    return gulp
-        .src(["assets/img/*"])
-        .pipe(imagemin())
-        .pipe(gulp.dest('public/img'));
-});
-
 gulp.task(
     "default",
-    gulp.series(
+    gulp.parallel(
         "html",
         "js",
         "css",
-        // "img"
     )
 );
