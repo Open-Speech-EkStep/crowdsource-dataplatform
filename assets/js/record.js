@@ -313,7 +313,7 @@ const isScreenRotated = () => {
         return true;
     } 
     else if (orientation === undefined) {
-        const screenAngle = screen.orientation.angle;
+        const screenAngle = (screen.orientation || {}).angle;
         if(screenAngle === 90 || screenAngle === -90){
             return true;
         }
@@ -346,12 +346,12 @@ $(document).ready(() => {
     const $navUserName = $navUser.find("#nav-username");
     try{
         screen.orientation.onchange = adjustTimeProgressBarPosition;
+        adjustTimeProgressBarPosition();
     }
     catch(err){
         console.log(err);
     }
     try {
-        adjustTimeProgressBarPosition();
         const localSpeakerData = localStorage.getItem(speakerDetailsKey);
         const localSpeakerDataParsed = JSON.parse(localSpeakerData);
         const localSentences = localStorage.getItem(sentencesKey);
