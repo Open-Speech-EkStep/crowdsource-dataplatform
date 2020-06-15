@@ -345,7 +345,9 @@ $(document).ready(() => {
     const $navUser = $("#nav-user");
     const $navUserName = $navUser.find("#nav-username");
     try{
-        screen.orientation.onchange = adjustTimeProgressBarPosition;
+        if(screen.orientation && screen.orientation.onchange){
+            screen.orientation.onchange = adjustTimeProgressBarPosition;
+        }
         adjustTimeProgressBarPosition();
     }
     catch(err){
