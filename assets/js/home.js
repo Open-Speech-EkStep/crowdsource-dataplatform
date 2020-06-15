@@ -81,7 +81,7 @@ $(document).ready(function () {
             $startRecordBtnTooltip.attr('data-original-title','Please validate any error message before proceeding')
         }
         else{
-            $startRecordBtnTooltip.attr('data-original-title','Please agree to the Terms and Condition before proceeding')
+            $startRecordBtnTooltip.attr('data-original-title','Please agree to the Terms and Conditions before proceeding')
         }
     }
     setStartRecordBtnToolTipContent($userName.val().trim());
