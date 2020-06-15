@@ -17,15 +17,15 @@ const Ddos = require('ddos')
 const ddos = new Ddos({ burst: 4, limit: 20 })
 app.use(ddos.express);
 
-const privateKey = fs.readFileSync('./vakyansh.key', 'utf8');
-const certificate = fs.readFileSync('./vakyansh_in.crt', 'utf8');
-const ca = fs.readFileSync('./vakyansh_in.ca-bundle', 'utf8');
+// const privateKey = fs.readFileSync('./vakyansh.key', 'utf8');
+// const certificate = fs.readFileSync('./vakyansh_in.crt', 'utf8');
+// const ca = fs.readFileSync('./vakyansh_in.ca-bundle', 'utf8');
 
-const credentials = {
-    key: privateKey,
-    cert: certificate,
-    ca: ca
-};
+// const credentials = {
+//     key: privateKey,
+//     cert: certificate,
+//     ca: ca
+// };
 
 const randomString = () => { return (Math.random() + 1).toString(36).substring(2, 10) }
 
@@ -133,15 +133,15 @@ router.get("*", (req, res) => {
 });
 
 app.use('/', router);
-// const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials, app);
+const httpServer = http.createServer(app);
+// const httpsServer = https.createServer(credentials, app);
 
-// httpServer.listen(3000, () => {
-//     console.log('HTTP Server running on port 80');
-// });
-
-httpsServer.listen(443, () => {
-    console.log('HTTPS Server running on port 443');
+httpServer.listen(3000, () => {
+    console.log('HTTP Server running on port 80');
 });
+
+// httpsServer.listen(443, () => {
+//     console.log('HTTPS Server running on port 443');
+// });
 
 module.exports = app;
