@@ -2,7 +2,6 @@ const gulp = require("gulp");
 const minify = require("gulp-minify");
 const cleanCss = require("gulp-clean-css");
 const htmlmin = require("gulp-htmlmin");
-const imagemin = require('gulp-imagemin');
 
 gulp.task("html", function () {
     return gulp
