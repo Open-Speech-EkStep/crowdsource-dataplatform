@@ -124,12 +124,10 @@ const initialize = () => {
 
 
     let gumStream;
-    //stream from getUserMedia() 
     let rec;
-    //Recorder.js object 
     let input;
-    //MediaStreamAudioSourceNode we'll be recording 
     let cleartTimeoutKey;
+    let audioCtx;
 
     $startRecordBtn.add($reRecordBtn).on('click', () => {
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
@@ -148,10 +146,13 @@ const initialize = () => {
 
                 gumStream = stream;
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
-                const audioContext = new AudioContext;
-                const audioAnalyser = audioContext.createAnalyser();
+                if(audioCtx){
+                    audioCtx.close();
+                }
+                audioCtx = new AudioContext;
+                const audioAnalyser = audioCtx.createAnalyser();
                 //new audio context to help us record 
-                input = audioContext.createMediaStreamSource(stream);
+                input = audioCtx.createMediaStreamSource(stream);
                 input.connect(audioAnalyser);
                 visualize(visualizer, audioAnalyser)
                 /* Create the Recorder object and configure to record mono sound (1 channel) Recording 2 channels will double the file size */
