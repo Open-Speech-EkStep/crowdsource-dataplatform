@@ -154,7 +154,7 @@ else {
             return true;
         }
         else if (orientation === undefined) {
-            const screenAngle = screen.orientation.angle;
+            const screenAngle = (screen.orientation || {}).angle;
             if (screenAngle === 90 || screenAngle === -90) {
                 return true;
             }
@@ -188,9 +188,11 @@ else {
             adjustTimeProgressBarHeight();
         }
     }
-    adjustTimeProgressBarPosition();
     try {
-        screen.orientation.onchange = adjustTimeProgressBarPosition;
+        if(screen.orientation && screen.orientation.onchange){
+            screen.orientation.onchange = adjustTimeProgressBarPosition;
+        }
+        adjustTimeProgressBarPosition();
     }
     catch (err) {
         console.log(err);
