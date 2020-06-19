@@ -153,9 +153,12 @@ const drawMotherTongueChart = (chartData) => {
     categoryAxis.renderer.labels.template.horizontalCenter = "right";
     categoryAxis.renderer.labels.template.verticalCenter = "middle";
     categoryAxis.renderer.labels.template.fill = "#74798c"
+    categoryAxis.renderer.grid.template.disabled = true;
 
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.renderer.labels.template.fill = "#74798c";
+    valueAxis.renderer.grid.template.disabled = false;
+    valueAxis.renderer.baseGrid.disabled = true;
     // valueAxis.renderer.labels.template.adapter.add("text", function(text) {
     //     return text + "%";
     //   });
@@ -165,8 +168,8 @@ const drawMotherTongueChart = (chartData) => {
     series.dataFields.categoryX = "motherTongue";
     series.calculatePercent = true;
     const columnTemplate = series.columns.template;
-    // columnTemplate.tooltipText = "{categoryX} : [bold]{valueY.percent.formatNumber('#.0')}% ({valueY.value})[/]";
-    columnTemplate.tooltipText = "{categoryX} : {valueY}";
+    columnTemplate.tooltipText = "{categoryX} : [bold]{valueY.percent.formatNumber('#.0')}% ({valueY.value})[/]";
+    // columnTemplate.tooltipText = "{categoryX} : {valueY}";
     columnTemplate.adapter.add("fill", function (fill, target) {
         return chartColors[target.dataItem.index];
     })
@@ -175,17 +178,16 @@ const drawMotherTongueChart = (chartData) => {
 const drawGenderChart = (chartData) => {
     am4core.ready(function () {
         const chart = am4core.create("gender-chart", am4charts.XYChart3D);
-        chart.angle = 35;
         chart.paddingBottom = 30;
+        chart.paddingTop = 5;
         chart.data = chartData;
         // Create axes
         const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
         categoryAxis.dataFields.category = "gender";
-        categoryAxis.renderer.grid.template.location = 0;
         categoryAxis.renderer.minGridDistance = 20;
         categoryAxis.renderer.inside = false;
-        categoryAxis.renderer.grid.template.disabled = false;
         categoryAxis.renderer.labels.template.fill = "#74798c";
+        categoryAxis.renderer.grid.template.disabled = true;
 
         const labelTemplate = categoryAxis.renderer.labels.template;
         labelTemplate.rotation = -90;
@@ -197,6 +199,7 @@ const drawGenderChart = (chartData) => {
         const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
         valueAxis.renderer.grid.template.disabled = false;
         valueAxis.renderer.labels.template.fill = "#74798c";
+        valueAxis.renderer.baseGrid.disabled = true;
         // Create series
         const series = chart.series.push(new am4charts.ConeSeries());
         series.calculatePercent = true;
