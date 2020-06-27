@@ -7,6 +7,12 @@ const updateAndGetSentencesQuery = 'update sentences set assign = true, \
 "assignDate" = current_date, "userId" = $1, "userName" = $2 \
 where "sentenceId" in (select "sentenceId" from sentences where "assign" = false AND "label" = $3 limit 10) returning "sentenceId","sentence";'
 
+const updateAndGetSentencesQueryForAdult = 'update sentences set assign = true, \
+"assignDate" = current_date, "userId" = $1, "userName" = $2 \
+where "sentenceId" in ((select "sentenceId" from sentences where "assign" = false AND "label" = $3 limit 5) \
+union \
+(select "sentenceId" from sentences where "assign" = false AND "label" = $4 limit 5)) returning "sentenceId","sentence";'
+
 const UpdateFileNameAndUserDetails = 'update sentences set "fileName" = $1 ,"ageGroup" = $2,"gender" = $3,"motherTongue" = $4 \
 where "sentenceId" = $5 AND "userId" = $6 returning "fileName";'
 
@@ -31,5 +37,6 @@ module.exports = {
     getCountOfTotalSpeakerAndRecordedAudio,
     getMotherTonguesData,
     getGenderData,
-    getAgeGroupsData
+    getAgeGroupsData,
+    updateAndGetSentencesQueryForAdult
 }
