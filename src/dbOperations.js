@@ -2,7 +2,7 @@ const { encrypt } = require("./encryptAndDecrypt")
 const { UpdateFileNameAndUserDetails, setNewUserAndFileName,
     unassignIncompleteSentences, updateAndGetSentencesQuery,
     sentencesCount, getCountOfTotalSpeakerAndRecordedAudio, getGenderData,
-    getAgeGroupsData, getMotherTonguesData } = require("./dbQuery");
+    getAgeGroupsData, getMotherTonguesData, updateAndGetSentencesQueryForAdult } = require("./dbQuery");
 const { KIDS_AGE_GROUP, ADULT, KIDS } = require("./constants")
 const envVars = process.env;
 const pgp = require('pg-promise')();
@@ -43,7 +43,7 @@ const getSentencesBasedOnAge = function (ageGroup, encryptedUserId, userName) {
     if (ageGroup === KIDS_AGE_GROUP) {
         return sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, userName, KIDS]);
     } else {
-        return sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, userName, ADULT]);
+        return sentences = db.many(updateAndGetSentencesQueryForAdult, [encryptedUserId, userName,KIDS,ADULT]);
     }
 }
 
