@@ -14,7 +14,7 @@ const http = require('http');
 const { ONE_YEAR } = require("./constants");
 const { validateUserInputAndFile, validateUserInfo } = require("./middleware/validateUserInputs")
 const Ddos = require('ddos')
-const ddos = new Ddos({ burst: 4, limit: 20 })
+const ddos = new Ddos({ burst: 6, limit: 30 })
 app.use(ddos.express);
 
 const privateKey = fs.readFileSync('./vakyansh.key', 'utf8');
