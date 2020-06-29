@@ -31,7 +31,6 @@ else {
     const $userContribution = $("#user-contribution");
     const $speakersDataHoursValue = $("#hour-value");
     const speakersDataKey = "speakersData";
-    const speakerDetailsValue = JSON.parse(localStorage.getItem(speakersDataKey));
 
     const setUserContribution = (index) => {
         const totalSecondsContributed = (localCount + index - skipCountInStorage) * 6;
@@ -52,7 +51,7 @@ else {
         $progressPercent.text(Number(contributionPercent.toFixed(1)));
         const currentTimeGraphHeight = (totalSecondsContributed / totalSecondsToContribute) * graphforegroundHeight;
         $timeGraphBar.height(currentTimeGraphHeight + "em");
-        if(contributionPercent >=100 ){
+        if (contributionPercent >= 100) {
             $progressPercent.parent().find('.small').addClass('d-none');
             $progressPercentWrapper.addClass('mb-3');
             $('#do-more').addClass('d-none')
@@ -121,10 +120,10 @@ else {
             $totalProgress.width(((targetPercentCompleted * barWidth.totalProgressBarWidth) / 100) + "%");
         }
     }
-    const showSpeakersHoursData = (index) => {
+    const showSpeakersHoursData = (speakerDetailsValue) => {
         try {
             const totalSentence = Number(speakerDetailsValue.find(t => t.index === 1).count);
-            const totalSeconds = (totalSentence + index - skipCountInStorage) * 6;
+            const totalSeconds = (totalSentence + currentIndexInStorage - skipCountInStorage) * 6;
             const hours = Math.floor(totalSeconds / 3600);
             const remainingAfterHours = totalSeconds % 3600;
             const minutes = Math.floor(remainingAfterHours / 60);
@@ -136,7 +135,26 @@ else {
             console.log(err);
         }
     }
-    showSpeakersHoursData(currentIndexInStorage);
+
+    fetch('/getDetails')
+        .then(data => {
+            if (!data.ok) {
+                throw Error(data.statusText || 'HTTP error');
+            }
+            else {
+                return data.json();
+            }
+        })
+        .then(data => {
+            localStorage.setItem(speakersDataKey, JSON.stringify(data));
+            showSpeakersHoursData(data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+        .then(final => {
+            $speakersDataHoursValue.next().addClass('d-none');
+        });
 
     const adjustTimeProgressBarHeight = () => {
         const footerHeight = $footer.outerHeight();
@@ -189,7 +207,7 @@ else {
         }
     }
     try {
-        if(screen.orientation && screen.orientation.onchange){
+        if (screen.orientation && screen.orientation.onchange) {
             screen.orientation.onchange = adjustTimeProgressBarPosition;
         }
         adjustTimeProgressBarPosition();

@@ -211,8 +211,12 @@ const initialize = () => {
         }
     });
 
+    const goToThankYouPage = () => {
+        location.href = "/thank-you";
+    }
+
     $nextBtn.add($skipBtn).on('click', (event) => {
-        if (event.target.id === "nextBtn") {
+        if (event.target.id === "nextBtn" && currentIndex < totalItems - 1) {
             uploadToServer();
             setTimeProgress(currentIndex + 1);
         }
@@ -221,6 +225,13 @@ const initialize = () => {
             $skipBtn.addClass('d-none');
         }
         if (currentIndex == totalItems - 1) {
+            if (event.target.id === "nextBtn")
+            {
+                uploadToServer(goToThankYouPage);
+            }
+            else{
+                setTimeout(goToThankYouPage, 2500);
+            }
             $skipBtn.addClass('d-none');
             currentIndex++;
             animateCSS($pageContent, 'zoomOut', () => $pageContent.addClass('d-none'));
@@ -228,9 +239,7 @@ const initialize = () => {
             localStorage.removeItem(sentencesKey);
             localStorage.setItem(currentIndexKey, currentIndex);
             notyf.success("Congratulations!!! You have completed this batch of sentences");
-            setTimeout(() => {
-                location.href = "/thank-you";
-            }, 2500);
+            $("#loader").show();
         }
         else if (currentIndex < totalItems - 1) {
             incrementCurrentIndex();
@@ -256,7 +265,7 @@ const initialize = () => {
         localStorage.setItem(skipCountKey, skipCount);
     }
 
-    function uploadToServer() {
+    function uploadToServer(cb) {
         const fd = new FormData();
         fd.append("audio_data", crowdSource.audioBlob);
         fd.append("speakerDetails", localStorage.getItem(speakerDetailsKey));
@@ -270,6 +279,11 @@ const initialize = () => {
             })
             .catch(err => {
                 console.log(err)
+            })
+            .then(finalRes => {
+                if(cb && typeof cb === 'function'){
+                    cb();
+                }
             })
     }
     function visualize(visualizer, analyser) {
