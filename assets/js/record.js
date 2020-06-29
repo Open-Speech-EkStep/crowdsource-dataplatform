@@ -80,10 +80,12 @@ const initialize = () => {
         // assuming a sentence is of 6 second
         const totalSecondsContributed = (crowdSource.count + index - skipCount) * 6;
         const totalSecondsToContribute = 30 * 60;
-        const remainingSeconds = totalSecondsToContribute - totalSecondsContributed;
+        const contriComplete = totalSecondsContributed >= totalSecondsToContribute;
+        const remainingSeconds = contriComplete ? totalSecondsContributed : (totalSecondsToContribute - totalSecondsContributed);
         const minutes = Math.floor(remainingSeconds / 60);
         const seconds = remainingSeconds % 60;
         $timeValue.text(`${minutes}m ${seconds}s`);
+        contriComplete && $timeValue.siblings('p').text('We are loving it!')
         const perSecondTimeGraphHeight = graphforegroundHeight / totalSecondsToContribute;
         const currentTimeGraphHeight = perSecondTimeGraphHeight * totalSecondsContributed;
         $timeGraphBar.height(currentTimeGraphHeight + "em");

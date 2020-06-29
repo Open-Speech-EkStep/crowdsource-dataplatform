@@ -145,6 +145,9 @@ outline: 0;
 .oflow-x-hid{
   overflow-x: hidden;
 }
+.w-90{
+  width: 90%!important;
+}
 [data-toggle="popover"]::after {
   display: inline-block;
   margin-left: .255em;
