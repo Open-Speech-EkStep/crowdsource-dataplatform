@@ -16,18 +16,24 @@ fetch('/getAllInfo')
         try {
             $chartLoaders.hide().removeClass('d-flex');
             $charts.removeClass('d-none');
-            const formattedAgeGroupData = data.ageGroups.map(item => item.ageGroup ? item: { ageGroup: 'Anonymous', count: item.count })
+            const formattedAgeGroupData = data.ageGroups.map(item => item.ageGroup ? item : { ageGroup: 'Anonymous', count: item.count })
                 .sort((a, b) => Number(b.count) - Number(a.count));
             drawAgeGroupChart(formattedAgeGroupData);
+            const motherTongueTotal = data.motherTongues.reduce((acc, curr) => acc + Number(curr.count), 0);
             const formattedMotherTongueData = data.motherTongues.map(item => item.motherTongue ? item : { motherTongue: 'Anonymous', count: item.count })
                 .sort((a, b) => Number(b.count) - Number(a.count));
-            drawMotherTongueChart(formattedMotherTongueData);
+            drawMotherTongueChart(formattedMotherTongueData.slice(0, 4), motherTongueTotal, "mother-tongue-chart",true);
+            drawMotherTongueChart(formattedMotherTongueData, motherTongueTotal, "modal-chart");
             const formattedGenderData = data.genderData.map(item => item.gender ? { ...item, gender: item.gender.charAt(0).toUpperCase() + item.gender.slice(1) } : { gender: 'Anonymous', count: item.count })
                 .sort((a, b) => Number(a.count) - Number(b.count))
             drawGenderChart(formattedGenderData);
-            setPopOverContent($popovers.eq(0), formattedMotherTongueData, 'motherTongue',true);
-            setPopOverContent($popovers.eq(1), formattedAgeGroupData, 'ageGroup',true);
+            setPopOverContent($popovers.eq(0), formattedMotherTongueData, 'motherTongue', true);
+            setPopOverContent($popovers.eq(1), formattedAgeGroupData, 'ageGroup', true);
             setPopOverContent($popovers.eq(2), formattedGenderData, 'gender');
+            // for small screen increase width of mother tongue chart modal
+            if(innerWidth < 992){
+                $('#modal-chart-wrapper').find('.modal-dialog').addClass('w-90')
+            }
             //lazy load other css 
             setTimeout(() => {
                 fetch("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css");
@@ -50,41 +56,42 @@ $.fn.popover.Constructor.Default.whiteList.tbody = [];
 $.fn.popover.Constructor.Default.whiteList.tr = [];
 $.fn.popover.Constructor.Default.whiteList.td = [];
 const setPopOverContent = ($popover, data, dataKey, isSplit) => {
-    let tableHtml='';
+    let tableHtml = '';
     if (isSplit) {
         const half = Math.ceil(data.length / 2);
-        const firstHalfDataHtml = data.splice(0, half).map(datum => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`);
-        const secondHalfDataHtml = data.splice(-half).map(datum => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`);
+        const firstHalfDataHtml = data.slice(0, half).map(datum => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`);
+        const secondHalfDataHtml = data.slice(-half).map(datum => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`);
         tableHtml = `<div class="row">
             <div class="col-6"><table class="table table-sm table-borderless mb-0"><tbody>${firstHalfDataHtml.join('')}</tbody></table></div>
             <div class="col-6"><table class="table table-sm table-borderless mb-0"><tbody>${secondHalfDataHtml.join('')}</tbody></table></div>
         </div>`;
     }
-    else{
+    else {
         const dataHtml = data.map(datum => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`);
         tableHtml = `<div class="row"><div class="col"><table class="table table-sm table-borderless mb-0"><tbody>${dataHtml.join('')}</tbody></table></div></div>`;
     }
-   
+
     $popover.popover({
         content: tableHtml,
         fallbackPlacement: ['bottom'],
         animation: false
     })
-    .on("mouseenter focus", function () {
-        $popover.popover("show");
-        $body.children('.popover').on("mouseleave blur", function () {
+        .on("mouseenter focus", function () {
+            $popover.popover("show");
+            $body.children('.popover').on("mouseleave blur", function () {
+                setTimeout(function () {
+                    if (!$body.children('.popover').find(':hover').length && !$popover.is(':hover')) {
+                        $popover.popover("hide");
+                    }
+                }, 300)
+            });
+        }).on("mouseleave blur", function () {
             setTimeout(function () {
                 if (!$body.children('.popover').find(':hover').length && !$popover.is(':hover')) {
                     $popover.popover("hide");
                 }
             }, 300)
-        });
-    }).on("mouseleave blur", function () {
-        setTimeout(function () {
-            if (!$body.children('.popover').find(':hover').length && !$popover.is(':hover')) {
-                $popover.popover("hide");
-            }
-        }, 300)})
+        })
     $popover.on('shown.bs.popover', function () {
         const popoverBody = $body.children('.popover')[0];
         //hack : to explore alternatives
@@ -94,14 +101,14 @@ const setPopOverContent = ($popover, data, dataKey, isSplit) => {
                 popoverBody.scrollIntoView(false)
             }
         }, 0);
-       
+
     })
 }
 const chartColors = ['#3f80ff', '#4D55A5', '#735dc6', '#68b7dc']
 const drawAgeGroupChart = (chartData) => {
     const chart = am4core.create("age-group-chart", am4charts.PieChart3D);
-    chart.data = chartData.slice(0,3)
-    .concat({ageGroup:"Others",count:chartData.slice(3).reduce((acc,curr) => acc+Number(curr.count),0)})
+    chart.data = chartData.slice(0, 3)
+        .concat({ ageGroup: "Others", count: chartData.slice(3).reduce((acc, curr) => acc + Number(curr.count), 0) })
     // .sort((a, b) => Number(b.count) - Number(a.count));
     chart.paddingBottom = 50;
     chart.innerRadius = am4core.percent(40);
@@ -138,13 +145,9 @@ const drawAgeGroupChart = (chartData) => {
     })
 }
 
-const drawMotherTongueChart = (chartData) => {
-    const chart = am4core.create("mother-tongue-chart", am4charts.XYChart3D);
-    chart.data = chartData.slice(0, 4);
-    // .slice(0,3)
-    // .concat({motherTongue:"Others",count:chartData.slice(3).reduce((acc,curr) => acc+Number(curr.count),0)})
-    // .sort((a, b) => Number(b.count) - Number(a.count));
-    // Create axes
+const drawMotherTongueChart = (chartData, totalData, element, staticColor) => {
+    const chart = am4core.create(element, am4charts.XYChart3D);
+    chart.data = chartData;
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = "motherTongue";
     categoryAxis.renderer.labels.template.rotation = 270;
@@ -159,19 +162,26 @@ const drawMotherTongueChart = (chartData) => {
     valueAxis.renderer.labels.template.fill = "#74798c";
     valueAxis.renderer.grid.template.disabled = false;
     valueAxis.renderer.baseGrid.disabled = true;
-    // valueAxis.renderer.labels.template.adapter.add("text", function(text) {
-    //     return text + "%";
-    //   });
-    // Create series
+
     const series = chart.series.push(new am4charts.ColumnSeries3D());
     series.dataFields.valueY = "count";
     series.dataFields.categoryX = "motherTongue";
     series.calculatePercent = true;
     const columnTemplate = series.columns.template;
-    columnTemplate.tooltipText = "{categoryX} : [bold]{valueY.percent.formatNumber('#.0')}% ({valueY.value})[/]";
-    // columnTemplate.tooltipText = "{categoryX} : {valueY}";
+    columnTemplate.tooltipText = "{categoryX} : [bold]@@@% ({valueY.value})[/]";
+    series.tooltip.label.adapter.add("text", function (text, target) {
+        if (target.dataItem && text) {
+            return text.replace("@@@", ((target.dataItem.valueY * 100) / totalData).toFixed(1));
+        }
+        else {
+            return "";
+        }
+    });
     columnTemplate.adapter.add("fill", function (fill, target) {
-        return chartColors[target.dataItem.index];
+        if(staticColor){
+            return chartColors[target.dataItem.index];
+        }
+        return chart.colors.getIndex(target.dataItem.index);
     })
 }
 
