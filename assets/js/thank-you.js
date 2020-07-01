@@ -122,8 +122,8 @@ else {
     }
     const showSpeakersHoursData = (speakerDetailsValue) => {
         try {
-            const totalSentence = Number(speakerDetailsValue.find(t => t.index === 1).count);
-            const totalSeconds = (totalSentence + currentIndexInStorage - skipCountInStorage) * 6;
+            const totalCompletedSentence = Number(speakerDetailsValue.find(t => t.index === 1).count);
+            const totalSeconds = totalCompletedSentence * 6;
             const hours = Math.floor(totalSeconds / 3600);
             const remainingAfterHours = totalSeconds % 3600;
             const minutes = Math.floor(remainingAfterHours / 60);
