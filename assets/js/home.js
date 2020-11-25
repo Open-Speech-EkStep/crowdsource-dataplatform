@@ -3,6 +3,7 @@ $(document).ready(function () {
     const $startRecordBtnTooltip = $startRecordBtn.parent();
     const genderRadios = document.querySelectorAll('input[name = "gender"]');
     const age = document.getElementById("age");
+    const language = document.getElementById("language");
     const motherTongue = document.getElementById("mother-tongue");
     const $userName = $("#username");
     const $userNameError = $userName.next();
@@ -113,6 +114,7 @@ $(document).ready(function () {
                 age: age.value,
                 motherTongue: motherTongue.value,
                 userName: userNameValue,
+                language:language.value
             }
             localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
             location.href = "/record"

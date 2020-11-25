@@ -39,25 +39,26 @@ const updateDbWithFileName = function (file, sentenceId, speakerDetails, userId,
         })
 }
 
-const getSentencesBasedOnAge = function (ageGroup, encryptedUserId, userName) {
+const getSentencesBasedOnAge = function (ageGroup, encryptedUserId, userName,language) {
     if (ageGroup === KIDS_AGE_GROUP) {
-        return sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, userName, KIDS]);
+        return sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, userName, KIDS,language]);
     } else {
-        return sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, userName,ADULT]);
+        return sentences = db.many(updateAndGetSentencesQuery, [encryptedUserId, userName,ADULT,language]);
     }
 }
 
 const updateAndGetSentences = function (req, res) {
     const userId = req.cookies.userId;
     const userName = req.body.userName;
+    const language = req.body.language;
     if (!userId || userName === null || userName === undefined) {
         res.status(400).send({ error: 'required parameters missing' })
         return;
     }
     const ageGroup = req.body.age;
     const encryptedUserId = encrypt(userId);
-    const sentences = getSentencesBasedOnAge(ageGroup, encryptedUserId, userName)
-    const count = db.one(sentencesCount, [encryptedUserId, userName]);
+    const sentences = getSentencesBasedOnAge(ageGroup, encryptedUserId, userName,language)
+    const count = db.one(sentencesCount, [encryptedUserId, userName,language]);
     const unAssign = db.any(unassignIncompleteSentences, [encryptedUserId, userName])
     Promise.all([sentences, count, unAssign])
         .then(response => {

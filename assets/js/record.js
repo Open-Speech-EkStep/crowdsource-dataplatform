@@ -397,7 +397,8 @@ $(document).ready(() => {
             $navUserName.text(localSpeakerDataParsed.userName);
         }
 
-        if (localSentencesParsed && localSentencesParsed.userName === localSpeakerDataParsed.userName) {
+        if (localSentencesParsed && localSentencesParsed.userName === localSpeakerDataParsed.userName 
+            && localSentencesParsed.language === localSpeakerDataParsed.language) {
             crowdSource.sentences = localSentencesParsed.sentences;
             crowdSource.count = localCount;
             $loader.hide();
@@ -409,7 +410,7 @@ $(document).ready(() => {
             localStorage.removeItem(skipCountKey);
             fetch('/sentences', {
                 method: "POST",
-                body: JSON.stringify({ userName: localSpeakerDataParsed.userName, age: localSpeakerDataParsed.age }),
+                body: JSON.stringify({ userName: localSpeakerDataParsed.userName, age: localSpeakerDataParsed.age ,language:localSpeakerDataParsed.language}),
                 headers: {
                     'Content-Type': 'application/json'
                 },

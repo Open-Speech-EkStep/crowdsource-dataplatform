@@ -136,7 +136,7 @@ app.use('/', router);
 const httpsServer = https.createServer(credentials, app);
 
 // httpServer.listen(3000, () => {
-//     console.log('HTTP Server running on port 80');
+//     console.log('HTTP Server running on port 3000');
 // });
 
 httpsServer.listen(443, () => {
