@@ -1,7 +1,10 @@
 const unassignIncompleteSentences = 'update sentences set "assign" = false,"assignDate" = NULL,"userName" = NULL,"ageGroup" = NULL,\
  "gender" = NULL, "motherTongue" = NULL, "userId" = NULL where "fileName" IS NULL AND "userId" = $1 AND "userName" != $2;'
 
-const sentencesCount = 'select count(*) from sentences where "userId" = $1 AND "userName" = $2 AND "language" = $3 AND "fileName" IS NOT NULL;'
+const unassignIncompleteSentencesWhenLanChange = 'update sentences set "assign" = false,"assignDate" = NULL,"userName" = NULL,"ageGroup" = NULL,\
+ "gender" = NULL, "motherTongue" = NULL, "userId" = NULL where "fileName" IS NULL AND "userId" = $1 AND "language" != $2;'
+
+const sentencesCount = 'select count(*) from sentences where "userId" = $1 AND "userName" = $2  AND "fileName" IS NOT NULL;'
 
 const updateAndGetSentencesQuery = 'update sentences set assign = true, \
 "assignDate" = current_date, "userId" = $1, "userName" = $2 \
@@ -38,4 +41,5 @@ module.exports = {
     getMotherTonguesData,
     getGenderData,
     getAgeGroupsData,
+    unassignIncompleteSentencesWhenLanChange,
 }
