@@ -1,7 +1,7 @@
 const CryptoJS = require('crypto-js');
 const key = process.env.ENCRYPTION_KEY;
 const keyutf = CryptoJS.enc.Utf8.parse(key);
-const iv = CryptoJS.enc.Base64.parse(key);
+const iv = CryptoJS.enc.Utf8.parse(key);
 
 const encrypt = function (text) {
     if (!text) return text;

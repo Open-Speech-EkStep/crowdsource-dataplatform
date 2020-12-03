@@ -2,8 +2,9 @@ const { encrypt } = require("./encryptAndDecrypt")
 const { UpdateFileNameAndUserDetails, setNewUserAndFileName,
     unassignIncompleteSentences, updateAndGetSentencesQuery,
     sentencesCount, getCountOfTotalSpeakerAndRecordedAudio, getGenderData,
-    getAgeGroupsData, getMotherTonguesData } = require("./dbQuery");
+    getAgeGroupsData, getMotherTonguesData,unassignIncompleteSentencesWhenLanChange } = require("./dbQuery");
 const { KIDS_AGE_GROUP, ADULT, KIDS } = require("./constants")
+const process = require('process');
 const envVars = process.env;
 const pgp = require('pg-promise')();
 const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}/${envVars.DB_NAME}`);
@@ -60,7 +61,8 @@ const updateAndGetSentences = function (req, res) {
     const sentences = getSentencesBasedOnAge(ageGroup, encryptedUserId, userName,language)
     const count = db.one(sentencesCount, [encryptedUserId, userName,language]);
     const unAssign = db.any(unassignIncompleteSentences, [encryptedUserId, userName])
-    Promise.all([sentences, count, unAssign])
+    const unAssignWhenLanChange = db.any(unassignIncompleteSentencesWhenLanChange, [encryptedUserId, language])
+    Promise.all([sentences, count, unAssign,unAssignWhenLanChange])
         .then(response => {
             res.status(200).send({ data: response[0], count: response[1].count });
         })
@@ -69,7 +71,6 @@ const updateAndGetSentences = function (req, res) {
             res.sendStatus(500);
         })
 }
-
 
 const getAllDetails = function () {
     return db.any(getCountOfTotalSpeakerAndRecordedAudio);
