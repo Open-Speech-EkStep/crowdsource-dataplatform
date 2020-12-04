@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       — image: circleci/node:13.4
-    working_directory: ~/repo
+    working_directory: ~/crowdsource-dataplatform
     steps:
       — checkout
       - run: npm install
