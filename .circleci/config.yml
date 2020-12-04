@@ -5,9 +5,7 @@ jobs:
       — image: circleci/node:13.4
     working_directory: ~/crowdsource-dataplatform
     steps:
-
-      — checkout
-      
+      — checkout:
       - run: 
         command: npm install
       — run: 
