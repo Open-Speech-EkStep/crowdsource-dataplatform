@@ -1,18 +1,9 @@
+orbs:
+  node: circleci/node@4.0.0
+
 version: 2.1
-jobs:
-  build:
-    docker:
-      — image: circleci/node:13.4
-    working_directory: ~/crowdsource-dataplatform
-    steps:
-      — checkout
-      - run: 
-          command: npm install
-      — run: 
-          command: npm test
 
 workflows:
-  version: 2
-  build:
+  app-tests:
     jobs:
-      - build
+      - node/test
