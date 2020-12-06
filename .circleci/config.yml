@@ -7,9 +7,9 @@ jobs:
     steps:
       — checkout
       - run: 
-        command: npm install
+          command: npm install
       — run: 
-        command: npm test
+          command: npm test
 
 workflows:
   version: 2
