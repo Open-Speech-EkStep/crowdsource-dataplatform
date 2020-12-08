@@ -33,7 +33,7 @@ jobs:
             - run:
                 name: Deploy in test env
                 command: |
-                  cd {HOME}
+                  cd ${HOME}
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
                   cd ~/crowdsource-dataplatform
