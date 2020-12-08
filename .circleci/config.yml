@@ -15,10 +15,15 @@ jobs:
             - run:
                 name: Deploy in test env
                 command: |
+                  wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-265.0.0-linux-x86_64.tar.gz
+                  tar -zxf google-cloud-sdk-*
+                  cd google-cloud-sdk
+                  pwd
+                  ./install.sh --quiet
                   echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
-
-                  gcloud app deploy ~/crowdsource-dataplatform/app.yaml
+                  cd ~/crowdsource-dataplatform
+                  gcloud app deploy app.yaml
 
                   rm ${HOME}/gcp-key.json
