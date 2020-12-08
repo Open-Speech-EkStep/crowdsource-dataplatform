@@ -3,6 +3,15 @@ jobs:
     build:
         docker:
             - image: circleci/node:13.4
+
+        environment:
+            DB_HOST: ${DB_HOST}
+            DB_USER: ${DB_USER}
+            DB_NAME: ${DB_NAME}
+            DB_PASS: ${DB_PASS}
+            BUCKET_NAME: ${BUCKET_NAME}
+            ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+          
         steps:
             - checkout
             - run:
