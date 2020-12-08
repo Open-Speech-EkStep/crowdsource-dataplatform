@@ -28,7 +28,7 @@ jobs:
                   source /home/circleci/google-cloud-sdk/completion.bash.inc
                   source /home/circleci/google-cloud-sdk/path.bash.inc
                   gcloud -v
-                  cd {HOME}
+                  cd ${HOME}
                   gcloud components update
             - run:
                 name: Deploy in test env
