@@ -32,6 +32,7 @@ jobs:
                   gcloud components update
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
+                  ls
                   cd ~/crowdsource-dataplatform
                   gcloud app deploy app.yaml
 
