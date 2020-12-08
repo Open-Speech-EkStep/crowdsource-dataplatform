@@ -1,45 +1,51 @@
 version: 2
 jobs:
-    build:
+    build_test:
         docker:
             - image: circleci/node:13.4
-
         steps:
             - checkout
             - run:
                 name: install-dependencies
                 command: npm install
+            - run:
+                name: Tests
+                command: npm test
+    deploy:
+        docker:
+            - image: google/cloud-sdk
+        steps:
+            - checkout
             - run: 
                 name: Make app.yaml file
                 command: |
                   chmod +rwx app_yaml.sh
                   ./app_yaml.sh > app.yaml
             - run:
-                name: Tests
-                command: npm test
-            - run:
-                name: Install gcloud
-                command: |
-                  cd ${HOME}
-                  wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-265.0.0-linux-x86_64.tar.gz
-                  tar -zxf google-cloud-sdk-*
-                  cd google-cloud-sdk
-                  pwd
-                  ./install.sh --quiet
-                  source /home/circleci/google-cloud-sdk/completion.bash.inc
-                  source /home/circleci/google-cloud-sdk/path.bash.inc
-                  cd ${HOME}
-                  gcloud components update
-            - run:
                 name: Authorize gcloud
                 command: |
+                #   cd ${HOME}
+                #   wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-265.0.0-linux-x86_64.tar.gz
+                #   tar -zxf google-cloud-sdk-*
+                #   cd google-cloud-sdk
+                #   pwd
+                #   ./install.sh --quiet
+                #   source /home/circleci/google-cloud-sdk/completion.bash.inc
+                #   source /home/circleci/google-cloud-sdk/path.bash.inc
+                #   cd ${HOME}
+                #   gcloud components update
                   echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
-            # - run:
-            #     name: Deploy app to GAE
-            #     command: |
-            #       cd ~/project
-            #       gcloud app deploy app.yaml
-            #       rm ${HOME}/gcp-key.json
-            #       rm app.yaml
+            - deploy:
+                name: Deploy app to GAE
+                command: |
+                  cd ~/project
+                  gcloud app deploy app.yaml
+                  rm ${HOME}/gcp-key.json
+                  rm app.yaml
+
+workflows:
+    build_test_deploy:
+        jobs:
+          - build_test
