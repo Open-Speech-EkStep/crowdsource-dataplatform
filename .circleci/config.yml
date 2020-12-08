@@ -9,8 +9,8 @@ jobs:
             - run: 
                 name: make yaml file
                 command: |
-                chmod +rwx app_yaml.sh
-                ./app_yaml.sh > app.yaml
+                  chmod +rwx app_yaml.sh
+                  ./app_yaml.sh > app.yaml
             - run:
                 name: install-dependencies
                 command: npm install
