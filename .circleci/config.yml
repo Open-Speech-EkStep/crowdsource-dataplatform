@@ -33,7 +33,7 @@ jobs:
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
                   ls
-                  cd ~/crowdsource-dataplatform
+                  cd ~/project/crowdsource-dataplatform
                   gcloud app deploy app.yaml
 
                   rm ${HOME}/gcp-key.json
