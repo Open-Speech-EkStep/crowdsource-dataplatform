@@ -15,6 +15,7 @@ jobs:
             - run:
                 name: Deploy in test env
                 command: |
+                  cd ${HOME}
                   wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-265.0.0-linux-x86_64.tar.gz
                   tar -zxf google-cloud-sdk-*
                   cd google-cloud-sdk
