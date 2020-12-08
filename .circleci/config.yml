@@ -28,11 +28,11 @@ jobs:
                   ./install.sh --quiet
                   source /home/circleci/google-cloud-sdk/completion.bash.inc
                   source /home/circleci/google-cloud-sdk/path.bash.inc
+                  cd ${HOME}
                   gcloud components update
             - run:
                 name: Authorize gcloud
                 command: |
-                  cd ${HOME}
                   echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
