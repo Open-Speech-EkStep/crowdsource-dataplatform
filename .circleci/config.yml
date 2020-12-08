@@ -10,7 +10,7 @@ jobs:
                 name: make app.yaml
                 command: |
                 chmod +rwx app.yaml.sh
-                ./app.yaml.sh > app.yaml
+                ./app_yaml.sh > app.yaml
             - run:
                 name: install-dependencies
                 command: npm install
