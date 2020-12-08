@@ -7,9 +7,9 @@ jobs:
         steps:
             - checkout
             - run: 
-                name: make app.yaml
+                name: make yaml file
                 command: |
-                chmod +rwx app.yaml.sh
+                chmod +rwx app_yaml.sh
                 ./app_yaml.sh > app.yaml
             - run:
                 name: install-dependencies
