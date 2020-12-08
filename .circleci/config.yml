@@ -20,6 +20,9 @@ jobs:
             - run:
                 name: tests
                 command: npm test
+            - run: 
+                name: export env
+                command: echo 'export DB_HOST="$DB_HOST"' >> $BASH_ENV
             - run:
                 name: install gcloud
                 command: |
@@ -28,22 +31,14 @@ jobs:
                   tar -zxf google-cloud-sdk-*
                   cd google-cloud-sdk
                   pwd
-                  echo "Installing GCLOUD"
                   ./install.sh --quiet
-                  echo "Installed GCLOUD"
-                  
                   echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
-                  
                   source /home/circleci/google-cloud-sdk/completion.bash.inc
                   source /home/circleci/google-cloud-sdk/path.bash.inc
-                  gcloud -v
                   cd ${HOME}
                   gcloud components update
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
-                  ls
                   cd ~/project
-                  ls
                   gcloud app deploy app.yaml
-
                   rm ${HOME}/gcp-key.json
