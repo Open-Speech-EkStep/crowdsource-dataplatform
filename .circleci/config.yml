@@ -4,16 +4,11 @@ jobs:
         docker:
             - image: circleci/node:13.4
 
-        environment:
-            DB_HOST: ${DB_HOST}
-            DB_USER: ${DB_USER}
-            DB_NAME: ${DB_NAME}
-            DB_PASS: ${DB_PASS}
-            BUCKET_NAME: ${BUCKET_NAME}
-            ENCRYPTION_KEY: ${ENCRYPTION_KEY}
-          
         steps:
             - checkout
+            - run: 
+                name: make app.yaml
+                command: ./app.yaml.sh > app.yaml
             - run:
                 name: install-dependencies
                 command: npm install
@@ -36,8 +31,7 @@ jobs:
                   gcloud components update
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
-                  echo 'export DB_HOST="$DB_HOST"' >> $BASH_ENV
-                  source $BASH_ENV
                   cd ~/project
                   gcloud app deploy app.yaml
                   rm ${HOME}/gcp-key.json
+                  rm app.yaml
