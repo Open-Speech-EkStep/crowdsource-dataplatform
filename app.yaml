@@ -8,12 +8,12 @@ resources:
   memory_gb: 0.5
   disk_size_gb: 10
 env_variables:
-  DB_HOST: /cloudsql/<%= ENV['DB_HOST'] %>
-  DB_USER: <%= ENV['DB_USER'] %>
-  DB_NAME: <%= ENV['DB_NAME'] %>
-  DB_PASS: <%= ENV['DB_PASS'] %>
-  BUCKET_NAME: <%= ENV['BUCKET_NAME'] %>
-  ENCRYPTION_KEY: <%= ENV['ENCRYPTION_KEY'] %>
+  DB_HOST: /cloudsql/${DB_HOST}
+  DB_USER: ${DB_USER}
+  DB_NAME: ${DB_NAME}
+  DB_PASS: ${DB_PASS}
+  BUCKET_NAME: ${BUCKET_NAME}
+  ENCRYPTION_KEY: ${ENCRYPTION_KEY}
 
 beta_settings:
-  cloud_sql_instances: <%= ENV['DB_HOST'] %>
+  cloud_sql_instances: ${DB_HOST}
