@@ -11,3 +11,14 @@ jobs:
             - run:
                 name: tests
                 command: npm test
+            
+            - run:
+                name: Deploy in test env
+                command: |
+                  echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
+                  gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
+                  gcloud --quiet config set project ${GCP_PROJECT}
+
+                  gcloud app deploy ~/crowdsource-dataplatform/app.yaml
+
+                  rm ${HOME}/gcp-key.json

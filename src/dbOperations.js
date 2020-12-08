@@ -7,7 +7,22 @@ const { KIDS_AGE_GROUP, ADULT, KIDS } = require("./constants")
 const process = require('process');
 const envVars = process.env;
 const pgp = require('pg-promise')();
-const db = pgp(`postgres://${envVars.DB_USER}:${envVars.DB_PASS}@${envVars.DB_HOST}/${envVars.DB_NAME}`);
+
+let cn = {
+    user: envVars.DB_USER,
+    password: envVars.DB_PASS,
+    database: envVars.DB_NAME,
+    host: envVars.DB_HOST,
+    logging: false,
+    dialect: 'postgres',
+    ssl: false,
+    dialectOptions: {
+      ssl: false
+    },
+    operatorsAliases: false
+  }
+
+const db = pgp(cn);
 
 
 
