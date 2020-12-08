@@ -8,7 +8,9 @@ jobs:
             - checkout
             - run: 
                 name: make app.yaml
-                command: ./app.yaml.sh > app.yaml
+                command: |
+                chmod +rwx app.yaml.sh
+                ./app.yaml.sh > app.yaml
             - run:
                 name: install-dependencies
                 command: npm install
