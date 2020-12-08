@@ -10,7 +10,7 @@ resources:
   memory_gb: 0.5
   disk_size_gb: 10
 env_variables:
-  DB_HOST: /cloudsql/\"$DB_HOST\"
+  DB_HOST: \"/cloudsql/$DB_HOST\"
   DB_USER: \"$DB_USER\"
   DB_NAME: \"$DB_NAME\"
   DB_PASS: \"$DB_PASS\"
