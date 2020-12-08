@@ -6,19 +6,18 @@ jobs:
 
         steps:
             - checkout
-            - run: 
-                name: make yaml file
-                command: |
-                  chmod +rwx app_yaml.sh
-                  ./app_yaml.sh > app.yaml
             - run:
                 name: install-dependencies
                 command: npm install
+            - run: 
+                name: Make app.yaml file
+                command: |
+                  ./app_yaml.sh > app.yaml
             - run:
-                name: tests
+                name: Tests
                 command: npm test
             - run:
-                name: install gcloud
+                name: Install gcloud
                 command: |
                   cd ${HOME}
                   wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-265.0.0-linux-x86_64.tar.gz
@@ -26,14 +25,20 @@ jobs:
                   cd google-cloud-sdk
                   pwd
                   ./install.sh --quiet
-                  echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
                   source /home/circleci/google-cloud-sdk/completion.bash.inc
                   source /home/circleci/google-cloud-sdk/path.bash.inc
-                  cd ${HOME}
                   gcloud components update
+            - run:
+                name: Authorize gcloud
+                command: |
+                  cd ${HOME}
+                  echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
-                  cd ~/project
-                  gcloud app deploy app.yaml
-                  rm ${HOME}/gcp-key.json
-                  rm app.yaml
+            # - run:
+            #     name: Deploy app to GAE
+            #     command: |
+            #       cd ~/project
+            #       gcloud app deploy app.yaml
+            #       rm ${HOME}/gcp-key.json
+            #       rm app.yaml
