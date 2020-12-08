@@ -22,12 +22,13 @@ jobs:
                   echo "Installing GCLOUD"
                   ./install.sh --quiet
                   echo "Installed GCLOUD"
-                  gcloud components update
+                  
                   echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
                   
                   source /home/circleci/google-cloud-sdk/completion.bash.inc
                   source /home/circleci/google-cloud-sdk/path.bash.inc
                   gcloud -v
+                  gcloud components update
             - run:
                 name: Deploy in test env
                 command: |
