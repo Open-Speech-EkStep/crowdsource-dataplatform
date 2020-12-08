@@ -4,8 +4,7 @@ jobs:
         docker:
             - image: circleci/node:13.4
         steps:
-            - checkout:
-                path: ~/crowdsource-dataplatform
+            - checkout
             - run:
                 name: install-dependencies
                 command: npm install
@@ -34,7 +33,7 @@ jobs:
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
                   ls
-                  cd ~/crowdsource-dataplatform
+                  cd ~/project
                   ls
                   gcloud app deploy app.yaml
 
