@@ -11,17 +11,21 @@ jobs:
             - run:
                 name: tests
                 command: npm test
-            
             - run:
-                name: Deploy in test env
+                name: install gcloud
                 command: |
                   cd ${HOME}
                   wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-265.0.0-linux-x86_64.tar.gz
                   tar -zxf google-cloud-sdk-*
                   cd google-cloud-sdk
                   pwd
+                  echo "Installing GCLOUD"
                   ./install.sh --quiet
+                  echo "Installed GCLOUD"
                   echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
+            - run:
+                name: Deploy in test env
+                command: |
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
                   cd ~/crowdsource-dataplatform
