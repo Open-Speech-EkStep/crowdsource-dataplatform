@@ -31,7 +31,7 @@ jobs:
                 name: Deploy app to GAE
                 command: |
                   cd ~/project
-                  gcloud app deploy app.yaml
+                  gcloud app deploy app.yaml -v test --no-promote
                   rm ${HOME}/gcp-key.json
                   rm app.yaml
 
