@@ -40,9 +40,7 @@ jobs:
                   else
                     echo "Deploy app to production"
                     gcloud app deploy app.yaml
-            - run:
-                name: Remove files
-                command: |
+                  fi
                   rm ${HOME}/gcp-key.json
                   rm app.yaml
     approve_for_prod_deploy:
