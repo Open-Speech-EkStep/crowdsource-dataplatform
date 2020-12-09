@@ -12,6 +12,9 @@ jobs:
                 name: Tests
                 command: npm test
     deploy:
+        parameters:
+            env_name:
+                type: string
         docker:
             - image: google/cloud-sdk
         steps:
@@ -28,17 +31,41 @@ jobs:
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
             - deploy:
-                name: Deploy app to GAE
+                name: Deploy app to test
                 command: |
                   cd ~/project
-                  gcloud app deploy app.yaml -v test --no-promote
+                  if [[ << parameters.env_name >> == "test" ]]; then
+                    echo "Deploy app to test"
+                    gcloud app deploy app.yaml -v test --no-promote
+                  else
+                    echo "Deploy app to production"
+                    gcloud app deploy app.yaml
+            - run:
+                name: Remove files
+                command: |
                   rm ${HOME}/gcp-key.json
                   rm app.yaml
+    approve_for_prod_deploy:
+        docker: 
+            - image: circleci/node:13.4
+        steps:
+            - run: echo "Hold for approval"
 
 workflows:
     build_test_deploy:
         jobs:
           - build_test
           - deploy:
+                name: deploy_test
+                env_name: test
                 requires:
                   - build_test
+          - approve_for_prod_deploy:
+                type: approval
+                requires:
+                  - deploy_test
+          - deploy:
+                name: deploy_prod
+                env_name: prod
+                requires:
+                  - approve_for_prod_deploy
