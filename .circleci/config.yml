@@ -31,14 +31,18 @@ jobs:
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
             - deploy:
-                name: Deploy app to test
+                name: Deploy app to GAE
                 command: |
                   cd ~/project
                   if [[ << parameters.env_name >> == "test" ]]; then
                     echo "Deploy app to test"
+                    chmod +rwx app_yaml_test.sh
+                    ./app_yaml_test.sh > app.yaml
                     gcloud app deploy app.yaml -v test --no-promote
                   else
                     echo "Deploy app to production"
+                    chmod +rwx app_yaml.sh
+                    ./app_yaml.sh > app.yaml
                     gcloud app deploy app.yaml
                   fi
                   rm ${HOME}/gcp-key.json
