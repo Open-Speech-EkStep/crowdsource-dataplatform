@@ -19,11 +19,6 @@ jobs:
             - image: google/cloud-sdk
         steps:
             - checkout
-            - run: 
-                name: Make app.yaml file
-                command: |
-                  chmod +rwx app_yaml.sh
-                  ./app_yaml.sh > app.yaml
             - run:
                 name: Authorize gcloud
                 command: |
