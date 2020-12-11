@@ -14,8 +14,9 @@ env_variables:
   DB_USER: \"$DB_USER\"
   DB_NAME: \"$TEST_DB_NAME\"
   DB_PASS: \"$DB_PASS\"
-  BUCKET_NAME: \"${BUCKET_NAME}test/\"
+  BUCKET_NAME: \"$TEST_BUCKET_NAME\"
   ENCRYPTION_KEY: \"$ENCRYPTION_KEY\"
+
 
 beta_settings:
   cloud_sql_instances: \"$DB_HOST\"
