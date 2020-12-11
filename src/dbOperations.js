@@ -1,3 +1,4 @@
+const fs = require("fs")
 const { encrypt } = require("./encryptAndDecrypt")
 const { UpdateFileNameAndUserDetails, setNewUserAndFileName,
     unassignIncompleteSentences, updateAndGetSentencesQuery,
@@ -64,6 +65,11 @@ const getSentencesBasedOnAge = function (ageGroup, encryptedUserId, userName,lan
 }
 
 const updateAndGetSentences = function (req, res) {
+    console.log("creating dir")
+    if (!fs.existsSync('uploads')) {
+        fs.mkdirSync('uploads')
+        console.log('Created directory uploads');
+    }
     const userId = req.cookies.userId;
     const userName = req.body.userName;
     const language = req.body.language;
