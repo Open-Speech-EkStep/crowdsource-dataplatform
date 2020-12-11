@@ -14,7 +14,7 @@ env_variables:
   DB_USER: \"$DB_USER\"
   DB_NAME: \"$TEST_DB_NAME\"
   DB_PASS: \"$DB_PASS\"
-  BUCKET_NAME: \"$BUCKET_NAME\"test/
+  BUCKET_NAME: \"${BUCKET_NAME}test/\"
   ENCRYPTION_KEY: \"$ENCRYPTION_KEY\"
 
 beta_settings:
