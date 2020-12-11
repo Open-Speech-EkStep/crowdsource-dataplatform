@@ -112,6 +112,9 @@ router.post("/upload", (req, res) => {
     const userName = speakerDetailsJson.userName
     const userId = req.cookies.userId
     const language = speakerDetailsJson.language;
+    if (!fs.existsSync('../uploads')) {
+        fs.mkdirSync('../uploads')
+    }
     uploadFile(file.path,userName,userId,language)
         .then(data => {
             updateDbWithFileName(file.filename, sentenceId, speakerDetails, userId, (resStatus, resBody) => {
