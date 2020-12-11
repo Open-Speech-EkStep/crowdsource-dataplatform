@@ -112,11 +112,6 @@ router.post("/upload", (req, res) => {
     const userName = speakerDetailsJson.userName
     const userId = req.cookies.userId
     const language = speakerDetailsJson.language;
-    console.log('Creating directory uploads');
-    if (!fs.existsSync('../uploads')) {
-        fs.mkdirSync('../uploads')
-        console.log('Created directory uploads');
-    }
     uploadFile(file.path,userName,userId,language)
         .then(data => {
             updateDbWithFileName(file.filename, sentenceId, speakerDetails, userId, (resStatus, resBody) => {
