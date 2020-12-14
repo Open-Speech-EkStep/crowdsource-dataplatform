@@ -3,8 +3,16 @@ echo """
 runtime: nodejs
 env: flex
 
-manual_scaling:
-  instances: 1
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 8
+  cool_down_period_sec: 70
+  cpu_utilization:
+    target_utilization: 0.7
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
 resources:
   cpu: 1
   memory_gb: 0.5
