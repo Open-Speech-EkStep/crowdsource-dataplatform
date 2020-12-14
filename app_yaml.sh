@@ -13,10 +13,6 @@ resources:
   cpu: 1
   memory_gb: 0.5
   disk_size_gb: 10
-resources:
-  cpu: 1
-  memory_gb: 0.5
-  disk_size_gb: 10
 env_variables:
   DB_HOST: \"/cloudsql/$DB_HOST\"
   DB_USER: \"$DB_USER\"
