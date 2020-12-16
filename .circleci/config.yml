@@ -32,13 +32,13 @@ jobs:
                   if [[ << parameters.env_name >> == "test" ]]; then
                     echo "Deploy app to test"
                     chmod +rwx app_yaml_test.sh
-                    ./app_yaml_test.sh > app.yaml
-                    gcloud app deploy app.yaml -v test --no-promote
+                    ./app_yaml_test.sh > app_test.yaml
+                    gcloud app deploy app_test.yaml -v test --no-promote
                   else
                     echo "Deploy app to production"
-                    chmod +rwx app_yaml.sh
-                    ./app_yaml.sh > app.yaml
-                    gcloud app deploy app.yaml
+                    chmod +rwx app_yaml_prod.sh
+                    ./app_yaml_prod.sh > app_prod.yaml
+                    gcloud app deploy app_prod.yaml
                   fi
                   rm ${HOME}/gcp-key.json
                   rm app.yaml
