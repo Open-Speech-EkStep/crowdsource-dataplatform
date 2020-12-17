@@ -1,6 +1,7 @@
 version: 2.1
 commands:
     delete_files:
+        description: Remove files
         steps:
             - run: rm ${HOME}/gcp-key.json
             - run: rm app.yaml
@@ -10,7 +11,9 @@ commands:
                 type: string
         steps:
             - run:
+                name: Create app yaml file
                 command: |
+                    cd ~/project
                     chmod +rwx << parameters.file >>
                     ./<< parameters.file >> > app.yaml
 jobs:
@@ -39,10 +42,20 @@ jobs:
                   echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
-            - run: cd ~/project
             - create_yaml:
-                file: app_yaml_test.sh
-            - run: gcloud app deploy app.yaml -v test --no-promote
+                file: if [[ << parameters.env_name >> == "test" ]]; then 
+                        app_yaml_test.sh
+                      else 
+                        app_yaml_prod.sh
+                      fi
+            - deploy: 
+                name: Deploy app to GAE
+                command: |
+                  if [[ << parameters.env_name >> == "test" ]]; then
+                    gcloud app deploy app.yaml -v test --no-promote
+                  else
+                    gcloud app deploy app.yaml
+                  fi
             - delete_files
     approve_for_prod_deploy:
         docker: 
