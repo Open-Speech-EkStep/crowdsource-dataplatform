@@ -1,4 +1,18 @@
 version: 2.1
+commands:
+    delete_files:
+        steps:
+            - run: rm ${HOME}/gcp-key.json
+            - run: rm app.yaml
+    create_yaml:
+        parameters:
+            file:
+                type: string
+        steps:
+            - run:
+                command: |
+                    chmod +rwx << parameters.file >>
+                    ./<< parameters.file >> > app.yaml
 jobs:
     build_test:
         docker:
@@ -25,23 +39,11 @@ jobs:
                   echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
-            - deploy:
-                name: Deploy app to GAE
-                command: |
-                  cd ~/project
-                  if [[ << parameters.env_name >> == "test" ]]; then
-                    echo "Deploy app to test"
-                    chmod +rwx app_yaml_test.sh
-                    ./app_yaml_test.sh > app_test.yaml
-                    gcloud app deploy app_test.yaml -v test --no-promote
-                  else
-                    echo "Deploy app to production"
-                    chmod +rwx app_yaml_prod.sh
-                    ./app_yaml_prod.sh > app_prod.yaml
-                    gcloud app deploy app_prod.yaml
-                  fi
-                  rm ${HOME}/gcp-key.json
-                  rm app.yaml
+            - run: cd ~/project
+            - create_yaml:
+                file: app_yaml_test.sh
+            - run: gcloud app deploy app.yaml -v test --no-promote
+            - delete_files
     approve_for_prod_deploy:
         docker: 
             - image: circleci/node:13.4
