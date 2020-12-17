@@ -58,13 +58,13 @@ workflows:
     build_test_deploy:
         jobs:
           - node/test:
-                version: 13.4
+                version: "13.4"
           - deploy:
                 name: deploy_test
                 env_name: test
                 sh_file: app_yaml_test.sh
                 requires:
-                  - build_test
+                  - node/test
           - approve_for_prod_deploy:
                 type: approval
                 requires:
