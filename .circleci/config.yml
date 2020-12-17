@@ -1,10 +1,7 @@
 version: 2.1
+orbs:
+  node: circleci/node@4.1.0
 commands:
-    delete_files:
-        description: Remove files
-        steps:
-            - run: rm ${HOME}/gcp-key.json
-            - run: rm app.yaml
     create_yaml:
         parameters:
             file:
@@ -16,18 +13,14 @@ commands:
                     cd ~/project
                     chmod +rwx << parameters.file >>
                     ./<< parameters.file >> > app.yaml
-jobs:
-    build_test:
-        docker:
-            - image: circleci/node:13.4
+    delete_files:
         steps:
-            - checkout
-            - run:
-                name: install-dependencies
-                command: npm install
-            - run:
-                name: Tests
-                command: npm test
+            - run: 
+                name: Remove files
+                command: |
+                  rm ${HOME}/gcp-key.json
+                  rm app.yaml
+jobs:
     deploy:
         parameters:
             env_name:
@@ -64,7 +57,8 @@ jobs:
 workflows:
     build_test_deploy:
         jobs:
-          - build_test
+          - node/test:
+                version: 13.4
           - deploy:
                 name: deploy_test
                 env_name: test
