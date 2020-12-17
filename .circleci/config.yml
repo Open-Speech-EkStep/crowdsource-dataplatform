@@ -32,6 +32,8 @@ jobs:
         parameters:
             env_name:
                 type: string
+            sh_file:
+                type: string
         docker:
             - image: google/cloud-sdk
         steps:
@@ -43,11 +45,7 @@ jobs:
                   gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
                   gcloud --quiet config set project ${GCP_PROJECT}
             - create_yaml:
-                file: if [[ << parameters.env_name >> == "test" ]]; then 
-                        app_yaml_test.sh
-                      else 
-                        app_yaml_prod.sh
-                      fi
+                file: <<parameters.sh_file>>
             - deploy: 
                 name: Deploy app to GAE
                 command: |
@@ -70,6 +68,7 @@ workflows:
           - deploy:
                 name: deploy_test
                 env_name: test
+                sh_file: app_yaml_test.sh
                 requires:
                   - build_test
           - approve_for_prod_deploy:
@@ -79,5 +78,6 @@ workflows:
           - deploy:
                 name: deploy_prod
                 env_name: prod
+                sh_file: app_yaml_prod.sh
                 requires:
                   - approve_for_prod_deploy
