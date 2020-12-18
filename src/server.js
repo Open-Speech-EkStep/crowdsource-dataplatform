@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 const { uploadFile } = require("./uploader");
 const helmet = require('helmet')
 const express = require('express');
@@ -35,7 +35,6 @@ const currentDateAndTime = () => { return new Date().toISOString().replace(/[-:T
 const multer = require('multer')
 const multerStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        console.log("creating dir")
         if (!fs.existsSync('uploads')) {
             fs.mkdirSync('uploads')
             console.log('Created directory uploads');
@@ -61,8 +60,8 @@ app.use(function (req, res, next) {
     if (cookie === undefined) {
         res.cookie('userId', uuidv4(), {
             maxAge: ONE_YEAR,
-            httpOnly: true,
-            secure: true
+            // httpOnly: true,
+            // secure: true
         });
     }
     next();
