@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 const { uploadFile } = require("./uploader");
 const helmet = require('helmet')
 const express = require('express');
@@ -60,8 +60,8 @@ app.use(function (req, res, next) {
     if (cookie === undefined) {
         res.cookie('userId', uuidv4(), {
             maxAge: ONE_YEAR,
-            // httpOnly: true,
-            // secure: true
+            httpOnly: true,
+            secure: true
         });
     }
     next();
