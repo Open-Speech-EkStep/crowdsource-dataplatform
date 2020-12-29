@@ -46,6 +46,7 @@ jobs:
                     gcloud app deploy app.yaml -v test --no-promote
                   else
                     if [[ << pipeline.git.branch >> == "master" ]]; then
+                      echo "Deploying to prod"
                       gcloud app deploy app.yaml
                     else
                       echo "Changes not merged to master"
