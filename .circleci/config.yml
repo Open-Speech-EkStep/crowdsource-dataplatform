@@ -45,7 +45,11 @@ jobs:
                   if [[ << parameters.env_name >> == "test" ]]; then
                     gcloud app deploy app.yaml -v test --no-promote
                   else
-                    gcloud app deploy app.yaml
+                    if [[ << pipeline.git.branch >> == "master" ]]; then
+                      gcloud app deploy app.yaml
+                    else
+                      echo "Changes not merged to master"
+                    fi
                   fi
             - delete_files
     approve_for_prod_deploy:
