@@ -13,9 +13,9 @@ const https = require('https');
 const http = require('http');
 const { ONE_YEAR } = require("./constants");
 const { validateUserInputAndFile, validateUserInfo } = require("./middleware/validateUserInputs")
-const Ddos = require('ddos')
-const ddos = new Ddos({ burst: 6, limit: 30 })
-app.use(ddos.express);
+// const Ddos = require('ddos')
+// const ddos = new Ddos({ burst: 6, limit: 30 })
+// app.use(ddos.express);
 app.enable('trust proxy');
 
 // const privateKey = fs.readFileSync('./vakyansh.key', 'utf8');
