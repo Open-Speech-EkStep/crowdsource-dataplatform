@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 const { uploadFile } = require("./uploader");
 const helmet = require('helmet')
 const express = require('express');
@@ -139,18 +139,18 @@ router.get("*", (req, res) => {
 
 app.use('/', router);
 
-const PORT = process.env.PORT || 8080;
+//const PORT = process.env.PORT || 8080;
 
-// const httpServer = http.createServer(app);
+ const httpServer = http.createServer(app);
 // const httpsServer = https.createServer(credentials, app);
 
-app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`);
-    console.log('Press Ctrl+C to quit.');
-  });
-// httpServer.listen(8080, () => {
-//     console.log('HTTP Server running on port 3000');
-// });
+//app.listen(PORT, () => {
+//    console.log(`App listening on port ${PORT}`);
+//    console.log('Press Ctrl+C to quit.');
+//  });
+ httpServer.listen(8080, () => {
+     console.log('HTTP Server running on port 8080');
+ });
 
 // httpsServer.listen(443, () => {
 //     console.log('HTTPS Server running on port 443');

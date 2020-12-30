@@ -21,5 +21,4 @@ const decrypt = function (text) {
 module.exports = {
     decrypt,
     encrypt
-
 }
