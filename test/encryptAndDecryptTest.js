@@ -10,7 +10,7 @@ describe('crypto', function() {
       assert.equal(decryptOutput, plaintext);
     });
 
-    it('should return undefined if text is not defiend', function() {
+    it('should return undefined if text is not defined', function() {
       let encryptText = crypto.encrypt();
       let decryptOutput = crypto.decrypt(encryptText);
 
