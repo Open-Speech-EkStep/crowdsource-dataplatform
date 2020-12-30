@@ -73,9 +73,10 @@ router.get('/', function (req, res) {
     res.render('home.ejs');
 });
 
-router.get("/getDetails",async function (req, res) {
+router.get("/getDetails/:language",async function (req, res) {
     try{
-        const allDetails = await getAllDetails();
+        const currentLanguage = req.params.language;
+        const allDetails = await getAllDetails(currentLanguage);
         res.status(200).send(allDetails);
     }
     catch(err){

@@ -24,7 +24,7 @@ const validateUserInfo = function (req, res, next) {
     const userName = req.body.userName;
     const ageGroup = req.body.age;
     if (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName) || !AGE_GROUP.includes(ageGroup)) {
-        return res.status(400).send("Bad request");;
+        return res.status(400).send("Bad request");
     }
     next()
 }

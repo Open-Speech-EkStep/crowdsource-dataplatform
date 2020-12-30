@@ -33,15 +33,15 @@
             </p>
             <div class="row mt-4">
                 <div class="col-6 col-lg-7">
-                    <select class="btn btn-outline-primary h6 w-100 rounded mt-4 p-3" id="language">
-                        <option value="" disabled selected>Select language</option>
+                    <select class="btn btn-outline-primary h6 w-100 rounded mt-4 p-3" id="languageTop" onchange="enableRecording()">
+                        <option disabled selected>Select language</option>
                         <option value="Hindi">Hindi</option>
                         <option value="Odiya">Odiya</option>
                     </select>
                 </div>
                 <div class="col-8 col-lg-5">
                     <button href="#speaker-details"
-                            class="btn btn-primary h6 shadow w-100 rounded mt-4 p-3" disabled="disabled">START
+                            class="btn btn-primary h6 shadow w-100 rounded mt-4 p-3" disabled="disabled" id="start_recording">START
                         RECORDING
                     </button>
                 </div>
@@ -70,12 +70,12 @@
             <div class="row">
                 <div class="button-group col-10 col-lg-6 ml-lg-5 pl-5">
                     <button type="button" class="btn btn-outline-primary h6 w-100 mt-4 p-2 dropdown-toggle"
-                            data-toggle="dropdown">
-                        Select languages
+                            data-toggle="dropdown" id="language_button">
+                        Odia (Select languages)
                     </button>
-                    <div class="dropdown-menu col-10 col-lg-10 btn-outline h6">
-                        <a class="dropdown-item" href="#">Hindi</a>
-                        <a class="dropdown-item" href="#">Odiya</a>
+                    <div class="dropdown-menu col-10 col-lg-10 btn-outline h6" id="language">
+                        <button class="dropdown-item"  onclick="updateLanguage('Hindi')">Hindi</button>
+                        <button class="dropdown-item" onclick="updateLanguage('Odia')">Odia</button>
                     </div>
                 </div>
             </div>
@@ -167,11 +167,11 @@
                                for="other-check">Others</label></div>
                 </div>
             </div>
-            <div class="form-group pt-3"><label for="gender" class="form-label">Language To Record</label> <select
-                        class="form-control" id="language">
-                    <option selected="selected" value="Hindi">Hindi</option>
-                    <option value="Odia">Odia</option>
-                </select></div>
+<!--            <div class="form-group pt-3"><label for="gender" class="form-label">Language To Record</label> <select-->
+<!--                        class="form-control" id="language">-->
+<!--                    <option selected="selected" value="Hindi">Hindi</option>-->
+<!--                    <option value="Odia">Odia</option>-->
+<!--                </select></div>-->
             <div class="row pt-3">
                 <div class="form-group col-md-4 col-sm-12"><label for="age" class="form-label">Age Group</label>
                     <select class="form-control" id="age">
