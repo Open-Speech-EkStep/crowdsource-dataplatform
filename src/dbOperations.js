@@ -88,8 +88,9 @@ const updateAndGetSentences = function (req, res) {
         })
 }
 
-const getAllDetails = function () {
-    return db.any(getCountOfTotalSpeakerAndRecordedAudio);
+const getAllDetails = function (language) {
+    console.log(language);
+    return db.any(getCountOfTotalSpeakerAndRecordedAudio, [language]);
 }
 
 const getAllInfo = function () {
