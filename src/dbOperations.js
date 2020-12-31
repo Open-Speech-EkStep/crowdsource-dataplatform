@@ -93,10 +93,10 @@ const getAllDetails = function (language) {
     return db.any(getCountOfTotalSpeakerAndRecordedAudio, [language]);
 }
 
-const getAllInfo = function () {
-    const genderData = db.any(getGenderData);
-    const ageGroups = db.any(getAgeGroupsData);
-    const motherTongues = db.any(getMotherTonguesData);
+const getAllInfo = function (language) {
+    const genderData = db.any(getGenderData, [language]);
+    const ageGroups = db.any(getAgeGroupsData, [language]);
+    const motherTongues = db.any(getMotherTonguesData, [language]);
     return Promise.all([genderData, ageGroups, motherTongues])
 }
 

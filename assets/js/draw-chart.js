@@ -3,54 +3,74 @@ const $chartLoaders = $chartRow.find('.loader');
 const $charts = $chartRow.find('.chart');
 const $popovers = $chartRow.find('[data-toggle="popover"]');
 const $body = $('body');
-fetch('/getAllInfo')
-    .then(data => {
-        if (!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
-        }
-        else {
-            return data.json();
-        }
-    })
-    .then(data => {
-        try {
-            $chartLoaders.hide().removeClass('d-flex');
-            $charts.removeClass('d-none');
-            const formattedAgeGroupData = data.ageGroups.map(item => item.ageGroup ? item : { ageGroup: 'Anonymous', count: item.count })
-                .sort((a, b) => Number(b.count) - Number(a.count));
-            drawAgeGroupChart(formattedAgeGroupData);
-            const motherTongueTotal = data.motherTongues.reduce((acc, curr) => acc + Number(curr.count), 0);
-            const formattedMotherTongueData = data.motherTongues.map(item => item.motherTongue ? item : { motherTongue: 'Anonymous', count: item.count })
-                .sort((a, b) => Number(b.count) - Number(a.count));
-            drawMotherTongueChart(formattedMotherTongueData.slice(0, 4), motherTongueTotal, "mother-tongue-chart",true);
-            drawMotherTongueChart(formattedMotherTongueData, motherTongueTotal, "modal-chart");
-            const formattedGenderData = data.genderData.map(item => item.gender ? { ...item, gender: item.gender.charAt(0).toUpperCase() + item.gender.slice(1) } : { gender: 'Anonymous', count: item.count })
-                .sort((a, b) => Number(a.count) - Number(b.count))
-            drawGenderChart(formattedGenderData);
-            setPopOverContent($popovers.eq(0), formattedMotherTongueData, 'motherTongue', true);
-            setPopOverContent($popovers.eq(1), formattedAgeGroupData, 'ageGroup', true);
-            setPopOverContent($popovers.eq(2), formattedGenderData, 'gender');
-            // for small screen increase width of mother tongue chart modal
-            if(innerWidth < 992){
-                $('#modal-chart-wrapper').find('.modal-dialog').addClass('w-90')
-            }
-            //lazy load other css 
-            setTimeout(() => {
-                fetch("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css");
-                fetch("https://fonts.googleapis.com/icon?family=Material+Icons");
-                fetch("css/notyf.min.css");
-                fetch("css/record.css");
-            }, 2000);
+let defaultLang = 'Odia';
 
-        } catch (error) {
-            console.log(error);
-            $chartLoaders.show().addClass('d-flex');
-            $charts.addClass('d-none');
-        }
-    })
-    .catch(err => {
-        console.log(err);
-    })
+function buildGraphs(language) {
+    fetch(`/getAllInfo/${language}`)
+        .then(data => {
+            if (!data.ok) {
+                throw Error(data.statusText || 'HTTP error');
+            } else {
+                return data.json();
+            }
+        })
+        .then(data => {
+            try {
+                $chartLoaders.hide().removeClass('d-flex');
+                $charts.removeClass('d-none');
+                const formattedAgeGroupData = data.ageGroups.map(item => item.ageGroup ? item : {
+                    ageGroup: 'Anonymous',
+                    count: item.count
+                })
+                    .sort((a, b) => Number(b.count) - Number(a.count));
+                drawAgeGroupChart(formattedAgeGroupData);
+                const motherTongueTotal = data.motherTongues.reduce((acc, curr) => acc + Number(curr.count), 0);
+                const formattedMotherTongueData = data.motherTongues.map(item => item.motherTongue ? item : {
+                    motherTongue: 'Anonymous',
+                    count: item.count
+                })
+                    .sort((a, b) => Number(b.count) - Number(a.count));
+                drawMotherTongueChart(formattedMotherTongueData.slice(0, 4), motherTongueTotal, "mother-tongue-chart", true);
+                drawMotherTongueChart(formattedMotherTongueData, motherTongueTotal, "modal-chart");
+                const formattedGenderData = data.genderData.map(item => item.gender ? {
+                    ...item,
+                    gender: item.gender.charAt(0).toUpperCase() + item.gender.slice(1)
+                } : {gender: 'Anonymous', count: item.count})
+                    .sort((a, b) => Number(a.count) - Number(b.count))
+                drawGenderChart(formattedGenderData);
+                setPopOverContent($popovers.eq(0), formattedMotherTongueData, 'motherTongue', true);
+                setPopOverContent($popovers.eq(1), formattedAgeGroupData, 'ageGroup', true);
+                setPopOverContent($popovers.eq(2), formattedGenderData, 'gender');
+                // for small screen increase width of mother tongue chart modal
+                if (innerWidth < 992) {
+                    $('#modal-chart-wrapper').find('.modal-dialog').addClass('w-90')
+                }
+                //lazy load other css
+                setTimeout(() => {
+                    fetch("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css");
+                    fetch("https://fonts.googleapis.com/icon?family=Material+Icons");
+                    fetch("css/notyf.min.css");
+                    fetch("css/record.css");
+                }, 2000);
+
+            } catch (error) {
+                console.log(error);
+                $chartLoaders.show().addClass('d-flex');
+                $charts.addClass('d-none');
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
+
+buildGraphs(defaultLang);
+
+function updateGraph(language) {
+    am4core.disposeAllCharts();
+    buildGraphs(language);
+}
+
 $.fn.popover.Constructor.Default.whiteList.table = [];
 $.fn.popover.Constructor.Default.whiteList.tbody = [];
 $.fn.popover.Constructor.Default.whiteList.tr = [];
@@ -65,8 +85,7 @@ const setPopOverContent = ($popover, data, dataKey, isSplit) => {
             <div class="col-6"><table class="table table-sm table-borderless mb-0"><tbody>${firstHalfDataHtml.join('')}</tbody></table></div>
             <div class="col-6"><table class="table table-sm table-borderless mb-0"><tbody>${secondHalfDataHtml.join('')}</tbody></table></div>
         </div>`;
-    }
-    else {
+    } else {
         const dataHtml = data.map(datum => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`);
         tableHtml = `<div class="row"><div class="col"><table class="table table-sm table-borderless mb-0"><tbody>${dataHtml.join('')}</tbody></table></div></div>`;
     }
@@ -86,12 +105,12 @@ const setPopOverContent = ($popover, data, dataKey, isSplit) => {
                 }, 300)
             });
         }).on("mouseleave blur", function () {
-            setTimeout(function () {
-                if (!$body.children('.popover').find(':hover').length && !$popover.is(':hover')) {
-                    $popover.popover("hide");
-                }
-            }, 300)
-        })
+        setTimeout(function () {
+            if (!$body.children('.popover').find(':hover').length && !$popover.is(':hover')) {
+                $popover.popover("hide");
+            }
+        }, 300)
+    })
     $popover.on('shown.bs.popover', function () {
         const popoverBody = $body.children('.popover')[0];
         //hack : to explore alternatives
@@ -108,7 +127,7 @@ const chartColors = ['#3f80ff', '#4D55A5', '#735dc6', '#68b7dc']
 const drawAgeGroupChart = (chartData) => {
     const chart = am4core.create("age-group-chart", am4charts.PieChart3D);
     chart.data = chartData.slice(0, 3)
-        .concat({ ageGroup: "Others", count: chartData.slice(3).reduce((acc, curr) => acc + Number(curr.count), 0) })
+        .concat({ageGroup: "Others", count: chartData.slice(3).reduce((acc, curr) => acc + Number(curr.count), 0)})
     // .sort((a, b) => Number(b.count) - Number(a.count));
     chart.paddingBottom = 50;
     chart.innerRadius = am4core.percent(40);
@@ -172,13 +191,12 @@ const drawMotherTongueChart = (chartData, totalData, element, staticColor) => {
     series.tooltip.label.adapter.add("text", function (text, target) {
         if (target.dataItem && text) {
             return text.replace("@@@", ((target.dataItem.valueY * 100) / totalData).toFixed(1));
-        }
-        else {
+        } else {
             return "";
         }
     });
     columnTemplate.adapter.add("fill", function (fill, target) {
-        if(staticColor){
+        if (staticColor) {
             return chartColors[target.dataItem.index];
         }
         return chart.colors.getIndex(target.dataItem.index);
@@ -224,6 +242,5 @@ const drawGenderChart = (chartData) => {
         columnTemplate.adapter.add("stroke", function (stroke, target) {
             return chartColors[chartColors.length - 1 - target.dataItem.index];
         })
-
     });
 }
