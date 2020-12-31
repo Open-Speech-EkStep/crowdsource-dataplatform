@@ -85,9 +85,10 @@ router.get("/getDetails/:language",async function (req, res) {
     }
 });
 
-router.get("/getAllInfo", async function (req, res) {
+router.get("/getAllInfo/:language", async function (req, res) {
     try{
-        const allDetails = await getAllInfo();
+        const currentLanguage = req.params.language;
+        const allDetails = await getAllInfo(currentLanguage);
         res.status(200).send({ genderData: allDetails[0], ageGroups: allDetails[1], motherTongues: allDetails[2] });
     }
     catch(err){
