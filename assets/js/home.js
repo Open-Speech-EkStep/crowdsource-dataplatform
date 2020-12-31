@@ -1,7 +1,7 @@
 $(document).ready(function () {
   var defaultLang = 'Odia';
 
-  const $startRecordBtn = $('#start-record');
+  const $startRecordBtn = $('#proceed-box');
   const $startRecordBtnTooltip = $startRecordBtn.parent();
   const genderRadios = document.querySelectorAll('input[name = "gender"]');
   const age = document.getElementById('age');
@@ -40,14 +40,14 @@ $(document).ready(function () {
       $userNameError.addClass('d-none');
     }
     $tncCheckbox.trigger('change');
-    // setUserNameTooltip();
+    setUserNameTooltip();
   };
   $userName.tooltip({
     container: 'body',
     placement: screen.availWidth > 500 ? 'right' : 'auto',
     trigger: 'focus',
   });
-  //   setUserNameTooltip();
+  setUserNameTooltip();
   $tncCheckbox.prop('checked', false);
   $startRecordBtnTooltip.tooltip({
     container: 'body',
@@ -101,11 +101,11 @@ $(document).ready(function () {
     const userNameValue = $userName.val().trim();
     if (this.checked && !testUserName(userNameValue)) {
       $startRecordBtn.removeAttr('disabled').removeClass('point-none');
-      //   $startRecordBtnTooltip.tooltip('disable');
+      $startRecordBtnTooltip.tooltip('disable');
     } else {
       setStartRecordBtnToolTipContent(userNameValue);
       $startRecordBtn.prop('disabled', 'true').addClass('point-none');
-      //   $startRecordBtnTooltip.tooltip('enable');
+      $startRecordBtnTooltip.tooltip('enable');
     }
   });
 
