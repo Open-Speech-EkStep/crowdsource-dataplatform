@@ -179,3 +179,13 @@ h6,
     transform: rotate(360deg);
   }
 }
+body.modal-open .supreme-container {
+  opacity: 0.2;
+}
+.px-6 {
+  padding-right: 6rem !important;
+  padding-left: 6rem !important;
+}
+.modal-lg {
+  max-width: 40% !important;
+}
