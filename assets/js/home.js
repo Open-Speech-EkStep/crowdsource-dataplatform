@@ -233,7 +233,6 @@ function updateLanguage(language) {
 }
 
 $('#userModal').on('shown.bs.modal', function () {
-
     const $resetButton = $('#resetBtn');
 
     toggleChangeUser();
