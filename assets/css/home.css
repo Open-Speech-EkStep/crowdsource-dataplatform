@@ -189,3 +189,6 @@ body.modal-open .supreme-container {
 .modal-lg {
   max-width: 40% !important;
 }
+.modal-backdrop {
+  background-color: white;
+}
