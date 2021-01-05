@@ -111,12 +111,10 @@ $(document).ready(function () {
   });
 
   let languageBottom = defaultLang;
-
-  document.getElementById('language').addEventListener('click', (e) => {
-    const lang = e.target.value;
-    updateLanguage(lang);
-    updateGraph(lang);
-    languageBottom = lang;
+  document.getElementById('language').addEventListener('change', (e) => {
+    languageBottom = e.target.value;
+    updateLanguage(languageBottom);
+    updateGraph(languageBottom);
   });
 
   document.getElementById('start-record').addEventListener('click', () => {
@@ -235,7 +233,7 @@ function updateLanguage(language) {
     });
 }
 
-// function enableRecording() {
-//   const $toggleButton = $('#start_recording');
-//   $toggleButton.removeAttr('disabled');
-// }
+function disableBackCover() {
+  const backCover = document.getElementById('backCover');
+  backCover.addClass('fadeBackCover');
+}
