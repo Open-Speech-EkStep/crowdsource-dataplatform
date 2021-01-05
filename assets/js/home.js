@@ -233,7 +233,20 @@ function updateLanguage(language) {
     });
 }
 
-function disableBackCover() {
-  const backCover = document.getElementById('backCover');
-  backCover.addClass('fadeBackCover');
+function resetDetails() {
+  document.querySelector('input[name = "gender"]:checked').checked = false;
+  document.getElementById('age').selectedIndex = 0;
+  document.getElementById('mother-tongue').selectedIndex = 0;
+  document.getElementById('username').value = '';
 }
+
+$('#userModal').on('shown.bs.modal', function () {
+  const genderValue = document.querySelector('input[name = "gender"]:checked')
+    .value;
+  const ageValue = document.getElementById('age').selectedIndex;
+  const nameValue = document.getElementById('username').value;
+  const motherTongue = document.getElementById('mother-tongue').selectedIndex;
+  if (genderValue || ageValue || nameValue || motherTongue) {
+    $('#resetBtn').removeClass('d-none');
+  }
+});
