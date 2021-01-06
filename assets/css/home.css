@@ -62,6 +62,9 @@ h6,
   html {
     font-size: 15px;
   }
+  .modal-lg, .modal-xl {
+    max-width: 600px;
+  }
 }
 @media (min-width: 1200px) {
   html {
@@ -183,11 +186,8 @@ body.modal-open .supreme-container {
   opacity: 0.2;
 }
 .px-6 {
-  padding-right: 6rem !important;
-  padding-left: 6rem !important;
-}
-.modal-lg {
-  max-width: 40% !important;
+  padding-right: 6vw !important;
+  padding-left: 6vw !important;
 }
 .modal-backdrop {
   background-color: white;
