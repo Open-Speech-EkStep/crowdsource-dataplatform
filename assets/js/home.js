@@ -202,6 +202,9 @@ function updateLanguage(language) {
         p = g.find('#speaker-value'),
         h = g.find('#hours-wrapper'),
         v = g.find('#hour-value');
+    u.removeClass('d-none');
+    h.addClass('d-none');
+    m.addClass('d-none');
     fetch(`/getDetails/${language}`)
         .then((e) => {
             if (e.ok) return e.json();
@@ -218,11 +221,13 @@ function updateLanguage(language) {
                 document.getElementById('language_button').innerText = language;
                 updateLanguageInButton(language);
 
-                v.text(`${a}h ${r}m ${n}s`),
-                    p.text(e.find((e) => 0 === e.index).count),
-                    h.removeClass('d-none'),
-                    m.removeClass('d-none'),
-                    localStorage.setItem('speakersData', JSON.stringify(e));
+                v.text(`${a}h ${r}m ${n}s`);
+                p.text(e.find((e) => 0 === e.index).count);
+                u.addClass('d-none');
+                h.removeClass('d-none');
+                m.removeClass('d-none');
+
+                localStorage.setItem('speakersData', JSON.stringify(e));
             } catch (e) {
                 console.log(e);
             }
