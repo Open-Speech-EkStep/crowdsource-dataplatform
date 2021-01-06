@@ -68,6 +68,8 @@ buildGraphs(defaultLang);
 
 function updateGraph(language) {
     am4core.disposeAllCharts();
+    $chartLoaders.show().addClass('d-flex');
+    $charts.addClass('d-none');
     buildGraphs(language);
 }
 
