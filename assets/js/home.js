@@ -18,6 +18,7 @@ $(document).ready(function () {
   const $speakersDataHoursWrapper = $speakersData.find('#hours-wrapper');
   const $speakersDataHoursValue = $speakersData.find('#hour-value');
   const speakersDataKey = 'speakersData';
+  const speakerDetailsKey = 'speakerDetails';
   let sentenceLanguage = defaultLang;
 
   const testUserName = (val) => mobileRegex.test(val) || emailRegex.test(val);
@@ -53,26 +54,30 @@ $(document).ready(function () {
     container: 'body',
     placement: screen.availWidth > 500 ? 'right' : 'auto',
   });
-  const speakerDetailsKey = 'speakerDetails';
-  const speakerDetailsValue = localStorage.getItem(speakerDetailsKey);
-  if (speakerDetailsValue) {
-    const parsedSpeakerDetails = JSON.parse(speakerDetailsValue);
-    const genderRadio = document.querySelector(
-      'input[name = "gender"][value="' + parsedSpeakerDetails.gender + '"]'
-    );
-    if (genderRadio) {
-      genderRadio.checked = true;
-      genderRadio.previous = true;
+
+  const setSpeakerDetails = () => {
+    const speakerDetailsValue = localStorage.getItem(speakerDetailsKey);
+    if (speakerDetailsValue) {
+      const parsedSpeakerDetails = JSON.parse(speakerDetailsValue);
+      const genderRadio = document.querySelector(
+        'input[name = "gender"][value="' + parsedSpeakerDetails.gender + '"]'
+      );
+      if (genderRadio) {
+        genderRadio.checked = true;
+        genderRadio.previous = true;
+      }
+      age.value = parsedSpeakerDetails.age;
+      motherTongue.value = parsedSpeakerDetails.motherTongue;
+      $userName.val(
+        parsedSpeakerDetails.userName
+          ? parsedSpeakerDetails.userName.trim().substring(0, 12)
+          : ''
+      );
+      validateUserName();
     }
-    age.value = parsedSpeakerDetails.age;
-    motherTongue.value = parsedSpeakerDetails.motherTongue;
-    $userName.val(
-      parsedSpeakerDetails.userName
-        ? parsedSpeakerDetails.userName.trim().substring(0, 12)
-        : ''
-    );
-    validateUserName();
-  }
+  };
+
+  setSpeakerDetails();
 
   genderRadios.forEach((element) => {
     element.addEventListener('click', (e) => {
@@ -155,12 +160,12 @@ $(document).ready(function () {
     }
   });
 
-  const updateLanguage = (lang) => {
+  const updateLanguage = (language) => {
     $speakersDataLoader.removeClass('d-none');
     $speakersDataHoursWrapper.addClass('d-none');
     $speakersDataSpeakerWrapper.addClass('d-none');
-    updateLanguageInButton(lang);
-    fetch(`/getDetails/${lang}`)
+    updateLanguageInButton(language);
+    fetch(`/getDetails/${language}`)
       .then((data) => {
         if (!data.ok) {
           throw Error(data.statusText || 'HTTP error');
@@ -203,9 +208,7 @@ function updateLanguageInButton(lang) {
 }
 
 $('#userModal').on('shown.bs.modal', function () {
-  const $resetButton = $('#resetBtn');
-
-  $resetButton[0].addEventListener('click', () => {
+  document.getElementById('resetBtn').addEventListener('click', () => {
     const selectedGender = document.querySelector(
       'input[name = "gender"]:checked'
     );
