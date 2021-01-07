@@ -240,8 +240,6 @@ function updateLanguage(language) {
 $('#userModal').on('shown.bs.modal', function () {
     const $resetButton = $('#resetBtn');
 
-    toggleChangeUser();
-
     $resetButton[0].addEventListener('click', () => {
         const selectedGender = document.querySelector('input[name = "gender"]:checked')
         if (selectedGender)
@@ -250,26 +248,4 @@ $('#userModal').on('shown.bs.modal', function () {
         document.getElementById('mother-tongue').selectedIndex = 0;
         document.getElementById('username').value = '';
     });
-
-    function isFilled() {
-        const genderValue = document.querySelector('input[name = "gender"]:checked');
-        const ageValue = document.getElementById('age').selectedIndex;
-        const nameValue = document.getElementById('username').value;
-        const motherTongue = document.getElementById('mother-tongue').selectedIndex;
-        return genderValue || ageValue || nameValue || motherTongue;
-    }
-
-    function toggleChangeUser() {
-        if (isFilled()) {
-            $resetButton.removeClass('d-none');
-        } else {
-            $resetButton.addClass('d-none');
-        }
-    }
-
-    document.querySelectorAll('.form-group').forEach(item => {
-        item.addEventListener('change', event => {
-            toggleChangeUser();
-        })
-    })
 });
