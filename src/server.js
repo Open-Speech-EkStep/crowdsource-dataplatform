@@ -100,6 +100,7 @@ router.get('/getAllInfo/:language', async function (req, res) {
   try {
     const currentLanguage = req.params.language;
     const allDetails = await getAllInfo(currentLanguage);
+
     res.status(200).send({
       genderData: allDetails[0],
       ageGroups: allDetails[1],
