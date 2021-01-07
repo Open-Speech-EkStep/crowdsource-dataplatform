@@ -16,7 +16,7 @@ const {v4: uuidv4} = require('uuid');
 const compression = require('compression');
 const https = require('https');
 const http = require('http');
-const {ONE_YEAR, MOTHER_TONGUE} = require('./constants');
+const {ONE_YEAR, MOTHER_TONGUE, LANGUAGES} = require('./constants');
 const {
   validateUserInputAndFile,
   validateUserInfo,
@@ -82,7 +82,7 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
-  res.render('home.ejs', {language: MOTHER_TONGUE});
+  res.render('home.ejs', {MOTHER_TONGUE, LANGUAGES});
 });
 
 router.get('/getDetails/:language', async function (req, res) {
