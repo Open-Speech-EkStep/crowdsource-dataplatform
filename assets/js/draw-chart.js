@@ -117,7 +117,7 @@ $.fn.popover.Constructor.Default.whiteList.tbody = [];
 $.fn.popover.Constructor.Default.whiteList.tr = [];
 $.fn.popover.Constructor.Default.whiteList.td = [];
 const setPopOverContent = ($popover, data, dataKey, isSplit) => {
-  let tableHtml = '';
+  let tableHtml;
   if (isSplit) {
     const half = Math.ceil(data.length / 2);
     const firstHalfDataHtml = data

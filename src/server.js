@@ -14,14 +14,14 @@ const {
 const fs = require('fs');
 const {v4: uuidv4} = require('uuid');
 const compression = require('compression');
-const https = require('https');
+// const https = require('https');
 const http = require('http');
 const {ONE_YEAR, MOTHER_TONGUE, LANGUAGES} = require('./constants');
 const {
   validateUserInputAndFile,
   validateUserInfo,
 } = require('./middleware/validateUserInputs');
-const Ddos = require('ddos');
+// const Ddos = require('ddos');
 // const ddos = new Ddos({ burst: 6, limit: 30 })
 // app.use(ddos.express);
 // app.enable('trust proxy');
@@ -134,7 +134,7 @@ router.post('/upload', (req, res) => {
   const userId = req.cookies.userId;
   const language = speakerDetailsJson.language;
   uploadFile(file.path, userName, userId, language)
-    .then((data) => {
+    .then(() => {
       updateDbWithFileName(
         file.filename,
         sentenceId,
