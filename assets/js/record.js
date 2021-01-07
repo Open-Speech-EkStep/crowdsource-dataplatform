@@ -361,11 +361,7 @@ const isScreenRotated = () => {
     return true;
   } else if (orientation === undefined) {
     const screenAngle = (screen.orientation || {}).angle;
-    if (screenAngle === 90 || screenAngle === -90) {
-      return true;
-    } else {
-      return false;
-    }
+    return screenAngle === 90 || screenAngle === -90;
   } else {
     return false;
   }
