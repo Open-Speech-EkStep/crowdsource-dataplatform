@@ -366,18 +366,19 @@ const isScreenRotated = () => {
     return false;
   }
 };
+
 const adjustTimeProgressBarPosition = () => {
   const $timeProgress = $('#time-progress');
   const $previousContainer = $timeProgress.prev();
   const $graphcontainer = $('#graphcontainer');
   const screenRotated = isScreenRotated();
-  if (screenRotated || innerWidth < 600) {
-    $timeProgress
-      .removeClass('position-fixed text-center')
-      .addClass('position-relative text-right');
-    $graphcontainer.removeClass('mx-auto').addClass('ml-auto');
-    $previousContainer.removeClass('mb-5');
-  }
+  // if (screenRotated || innerWidth < 600) {
+  //   $timeProgress
+  //     .removeClass('position-fixed text-center')
+  //     .addClass('position-relative text-right');
+  //   $graphcontainer.removeClass('mx-auto').addClass('ml-auto');
+  //   $previousContainer.removeClass('mb-5');
+  // }
 };
 $(document).ready(() => {
   window.crowdSource = {};
