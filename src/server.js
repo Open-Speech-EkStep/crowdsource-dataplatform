@@ -1,6 +1,6 @@
-require('dotenv').config();
-const {uploadFile} = require('./uploader');
-const helmet = require('helmet');
+// require('dotenv').config();
+const { uploadFile } = require("./uploader");
+const helmet = require('helmet')
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
@@ -14,17 +14,17 @@ const {
 const fs = require('fs');
 const {v4: uuidv4} = require('uuid');
 const compression = require('compression');
-// const https = require('https');
+const https = require('https');
 const http = require('http');
 const {ONE_YEAR, MOTHER_TONGUE, LANGUAGES} = require('./constants');
 const {
   validateUserInputAndFile,
   validateUserInfo,
 } = require('./middleware/validateUserInputs');
-// const Ddos = require('ddos');
-// const ddos = new Ddos({ burst: 6, limit: 30 })
-// app.use(ddos.express);
-// app.enable('trust proxy');
+const Ddos = require('ddos');
+const ddos = new Ddos({ burst: 6, limit: 30 })
+app.use(ddos.express);
+app.enable('trust proxy');
 
 // const privateKey = fs.readFileSync('./vakyansh.key', 'utf8');
 // const certificate = fs.readFileSync('./vakyansh_in.crt', 'utf8');
@@ -68,15 +68,15 @@ app.disable('x-powered-by');
 app.use(compression());
 app.use(cookieParser());
 app.use(function (req, res, next) {
-  let cookie = req.cookies.userId;
-  if (cookie === undefined) {
-    res.cookie('userId', uuidv4(), {
-      maxAge: ONE_YEAR,
-      //   httpOnly: true,
-      //   secure: true,
-    });
-  }
-  next();
+    let cookie = req.cookies.userId;
+    if (cookie === undefined) {
+        res.cookie('userId', uuidv4(), {
+            maxAge: ONE_YEAR,
+            httpOnly: true,
+            secure: true
+        });
+    }
+    next();
 });
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -162,18 +162,18 @@ router.get('*', (req, res) => {
 
 app.use('/', router);
 
-//const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
-const httpServer = http.createServer(app);
+// const httpServer = http.createServer(app);
 // const httpsServer = https.createServer(credentials, app);
 
-//app.listen(PORT, () => {
-//    console.log(`App listening on port ${PORT}`);
-//    console.log('Press Ctrl+C to quit.');
-//  });
-httpServer.listen(8080, () => {
-  console.log('HTTP Server running on port 8080');
-});
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+    console.log('Press Ctrl+C to quit.');
+  });
+// httpServer.listen(8080, () => {
+//     console.log('HTTP Server running on port 3000');
+// });
 
 // httpsServer.listen(443, () => {
 //     console.log('HTTPS Server running on port 443');
