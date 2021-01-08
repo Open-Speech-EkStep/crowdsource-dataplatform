@@ -22,6 +22,7 @@ const initialize = () => {
   const $nextBtnToolTip = $nextBtn.parent();
   const $getStarted = $('#get-started');
   const $skipBtn = $('#skipBtn');
+  const $recordingRow = $('#recording-row');
   const $recordingSign = $('#recording-sign');
   const $progressBar = $('.progress-bar');
   const $pageContent = $('#page-content');
@@ -159,6 +160,7 @@ const initialize = () => {
         $getStarted.hide();
         $startRecordRow.addClass('d-none');
         $stopRecordBtn.removeClass('d-none');
+        $recordingRow.removeClass('d-none');
         $recordingSign.removeClass('d-none');
         $reRecordBtn.addClass('d-none');
         $nextBtn.addClass('d-none');
@@ -200,6 +202,7 @@ const initialize = () => {
         $nextBtn.addClass('d-none');
         $reRecordBtn.addClass('d-none');
         $recordingSign.addClass('d-none');
+        $recordingRow.addClass('d-none');
         $player.addClass('d-none');
         $player.trigger('pause');
         $visualizer.addClass('d-none');
@@ -213,6 +216,7 @@ const initialize = () => {
     $nextBtn.removeClass('d-none');
     $reRecordBtn.removeClass('d-none');
     $recordingSign.addClass('d-none');
+    $recordingRow.addClass('d-none');
     $startRecordRow.addClass('d-none');
     $player.removeClass('d-none');
     $visualizer.addClass('d-none');
