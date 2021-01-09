@@ -172,7 +172,7 @@ app.listen(PORT, () => {
     console.log('Press Ctrl+C to quit.');
   });
 // httpServer.listen(8080, () => {
-//     console.log('HTTP Server running on port 3000');
+//     console.log('HTTP Server running on port 8080');
 // });
 
 // httpsServer.listen(443, () => {

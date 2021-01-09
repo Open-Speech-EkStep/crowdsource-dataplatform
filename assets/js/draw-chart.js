@@ -64,7 +64,7 @@ function buildGraphs(language) {
                             }
                             : {gender: 'Anonymous', count: item.count}
                     )
-                let orderedGenderData = [];
+                let orderedGenderData = ['1','2','3','4'];
                 let order = {'Female': 0,'Male': 1, 'Others': 2, 'Anonymous': 3};
                 formattedGenderData.forEach((data)=>{
                     let pos = order[data['gender']];
