@@ -349,41 +349,7 @@ const initialize = () => {
     draw();
   }
 };
-const isScreenRotated = () => {
-  const orientation =
-    (screen.orientation || {}).type ||
-    screen.mozOrientation ||
-    screen.msOrientation;
-  const screenWidth = innerWidth;
-  const screenHeight = innerHeight;
-  if (
-    (orientation === 'landscape-primary' ||
-      orientation === 'landscape-secondary') &&
-    screenHeight < 600 &&
-    screenHeight < screenWidth
-  ) {
-    return true;
-  } else if (orientation === undefined) {
-    const screenAngle = (screen.orientation || {}).angle;
-    return screenAngle === 90 || screenAngle === -90;
-  } else {
-    return false;
-  }
-};
 
-const adjustTimeProgressBarPosition = () => {
-  const $timeProgress = $('#time-progress');
-  const $previousContainer = $timeProgress.prev();
-  const $graphcontainer = $('#graphcontainer');
-  const screenRotated = isScreenRotated();
-  // if (screenRotated || innerWidth < 600) {
-  //   $timeProgress
-  //     .removeClass('position-fixed text-center')
-  //     .addClass('position-relative text-right');
-  //   $graphcontainer.removeClass('mx-auto').addClass('ml-auto');
-  //   $previousContainer.removeClass('mb-5');
-  // }
-};
 $(document).ready(() => {
   window.crowdSource = {};
   const $instructionModal = $('#instructionsModal');

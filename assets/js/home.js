@@ -179,6 +179,7 @@ function updateLanguageInButton(lang) {
 
 function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
+    const speakersDataKey = 'speakersData';
     const $speakersDataLoader = $speakersData.find('#loader1,#loader2');
     const $speakersDataSpeakerWrapper = $speakersData.find('#speakers-wrapper');
     const $speakersDataSpeakerValue = $speakersData.find('#speaker-value');
