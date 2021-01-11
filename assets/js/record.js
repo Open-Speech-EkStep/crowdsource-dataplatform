@@ -258,6 +258,7 @@ const initialize = () => {
         setTimeout(goToThankYouPage, 2500);
       }
       $skipBtn.addClass('d-none');
+      $footer.addClass('fixed-bottom');
       currentIndex++;
       animateCSS($pageContent, 'zoomOut', () =>
         $pageContent.addClass('d-none')
@@ -351,6 +352,7 @@ const initialize = () => {
 };
 
 $(document).ready(() => {
+  const $footer = $('footer');
   window.crowdSource = {};
   const $instructionModal = $('#instructionsModal');
   const $errorModal = $('#errorModal');
@@ -358,14 +360,7 @@ $(document).ready(() => {
   const $pageContent = $('#page-content');
   const $navUser = $('#nav-user');
   const $navUserName = $navUser.find('#nav-username');
-  try {
-    if (screen.orientation && screen.orientation.onchange) {
-      screen.orientation.onchange = adjustTimeProgressBarPosition;
-    }
-    adjustTimeProgressBarPosition();
-  } catch (err) {
-    console.log(err);
-  }
+
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
@@ -373,13 +368,15 @@ $(document).ready(() => {
     const localSentencesParsed = JSON.parse(localSentences);
     const localCount = Number(localStorage.getItem(countKey));
 
-    $instructionModal.on('hidden.bs.modal', function (e) {
+    $instructionModal.on('hidden.bs.modal', function () {
       $pageContent.removeClass('d-none');
+      $footer.removeClass('fixed-bottom');
+      $footer.addClass('bottom');
     });
-    $errorModal.on('show.bs.modal', function (e) {
+    $errorModal.on('show.bs.modal', function () {
       $instructionModal.modal('hide');
     });
-    $errorModal.on('hidden.bs.modal', function (e) {
+    $errorModal.on('hidden.bs.modal', function () {
       location.href = '/#speaker-details';
     });
 
