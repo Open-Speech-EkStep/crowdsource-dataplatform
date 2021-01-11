@@ -64,9 +64,9 @@ function buildGraphs(language) {
                             }
                             : {gender: 'Anonymous', count: item.count}
                     )
-                let orderedGenderData = ['1','2','3','4'];
-                let order = {'Female': 0,'Male': 1, 'Others': 2, 'Anonymous': 3};
-                formattedGenderData.forEach((data)=>{
+                let orderedGenderData = ['1', '2', '3', '4'];
+                let order = {'Female': 0, 'Male': 1, 'Others': 2, 'Anonymous': 3};
+                formattedGenderData.forEach((data) => {
                     let pos = order[data['gender']];
                     orderedGenderData[pos] = data;
                 });
@@ -124,14 +124,15 @@ $.fn.popover.Constructor.Default.whiteList.td = [];
 const setPopOverContent = ($popover, data, dataKey, isSplit) => {
     let tableHtml;
     if (isSplit) {
-        const half = Math.ceil(data.length / 2);
+        let dataLength = data.length;
+        const half = Math.ceil(dataLength / 2);
         const firstHalfDataHtml = data
             .slice(0, half)
             .map(
                 (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
             );
         const secondHalfDataHtml = data
-            .slice(-half)
+            .slice(half, dataLength)
             .map(
                 (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
             );
@@ -153,12 +154,8 @@ const setPopOverContent = ($popover, data, dataKey, isSplit) => {
     }
 
     $popover
-        .popover({
-            content: tableHtml,
-            fallbackPlacement: ['bottom'],
-            animation: false,
-        })
         .on('mouseenter focus', function () {
+            $popover.attr('data-content',tableHtml);
             $popover.popover('show');
             $body.children('.popover').on('mouseleave blur', function () {
                 setTimeout(function () {
@@ -201,7 +198,6 @@ const drawAgeGroupChart = (chartData) => {
             .slice(3)
             .reduce((acc, curr) => acc + Number(curr.count), 0),
     });
-    // .sort((a, b) => Number(b.count) - Number(a.count));
     chart.paddingBottom = 50;
     chart.innerRadius = am4core.percent(40);
     chart.depth = 50;
