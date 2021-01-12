@@ -14,8 +14,6 @@ const {
 const fs = require('fs');
 const {v4: uuidv4} = require('uuid');
 const compression = require('compression');
-const https = require('https');
-const http = require('http');
 const {ONE_YEAR, MOTHER_TONGUE, LANGUAGES} = require('./constants');
 const {
   validateUserInputAndFile,
@@ -164,19 +162,9 @@ app.use('/', router);
 
 const PORT = process.env.PORT || 8080;
 
-// const httpServer = http.createServer(app);
-// const httpsServer = https.createServer(credentials, app);
-
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
     console.log('Press Ctrl+C to quit.');
   });
-// httpServer.listen(8080, () => {
-//     console.log('HTTP Server running on port 8080');
-// });
-
-// httpsServer.listen(443, () => {
-//     console.log('HTTPS Server running on port 443');
-// });
 
 module.exports = app;
