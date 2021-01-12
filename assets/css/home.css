@@ -217,3 +217,13 @@ body.modal-open .supreme-container {
   background-color: #007bff;
   background-image: url("data:image/svg+xml;utf8,<svg fill='white' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M16.003 18.626l7.081-7.081L25 13.46l-8.997 8.998-9.003-9 1.917-1.916z'/></svg>");
 }
+
+.supreme-container .btn-outline-primary:focus {
+  color: #007bff;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='RoyalBlue' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M16.003 18.626l7.081-7.081L25 13.46l-8.997 8.998-9.003-9 1.917-1.916z'/></svg>");
+}
+
+.supreme-container .btn-outline-primary:focus option {
+  color: #444444;
+}
