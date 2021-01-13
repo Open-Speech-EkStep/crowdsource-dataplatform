@@ -223,4 +223,4 @@ function updateLanguage(language) {
     });
 }
 
-module.exports = {updateLanguageInButton};
+module.exports = {updateLanguageInButton, updateLanguage};
