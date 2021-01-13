@@ -179,6 +179,15 @@ function updateLanguageInButton(lang) {
   ).innerText = `START RECORDING IN ${lang.toUpperCase()}`;
 }
 
+function calculateTime(totalSentence) {
+  const totalSeconds = totalSentence * 6;
+  const hours = Math.floor(totalSeconds / 3600);
+  const remainingAfterHours = totalSeconds % 3600;
+  const minutes = Math.floor(remainingAfterHours / 60);
+  const seconds = remainingAfterHours % 60;
+  return {hours, minutes, seconds};
+}
+
 function updateLanguage(language) {
   const $speakersData = $('#speaker-data');
   const speakersDataKey = 'speakersData';
@@ -202,12 +211,7 @@ function updateLanguage(language) {
     .then((data) => {
       try {
         const totalSentence = data.find((t) => t.index === 1).count;
-        const totalSeconds = totalSentence * 6;
-        const hours = Math.floor(totalSeconds / 3600);
-        const remainingAfterHours = totalSeconds % 3600;
-        const minutes = Math.floor(remainingAfterHours / 60);
-        const seconds = remainingAfterHours % 60;
-
+        const {hours, minutes, seconds} = calculateTime(totalSentence);
         $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
         $speakersDataSpeakerValue.text(data.find((t) => t.index === 0).count);
         $speakersDataLoader.addClass('d-none');
@@ -223,4 +227,4 @@ function updateLanguage(language) {
     });
 }
 
-module.exports = {updateLanguageInButton, updateLanguage};
+module.exports = {updateLanguageInButton, calculateTime};
