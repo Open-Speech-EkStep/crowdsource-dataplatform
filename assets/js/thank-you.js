@@ -211,27 +211,18 @@ if (!(localSpeakerDataParsed && localSpeakerDataParsed.userName)) {
     const screenRotated = isScreenRotated();
     if (screenRotated || innerWidth < 600) {
       $progressPercentWrapper
-        .removeClass('position-fixed text-center')
-        .addClass('position-relative text-right')
+        .removeClass('position-fixed')
+        .addClass('position-relative')
         .css({
           right: 0,
           bottom: 0,
         });
-      $graphcontainer.removeClass('mx-auto').addClass('ml-auto mr-3');
+      $graphcontainer.removeClass('mx-auto');
       const documentFontSize = getComputedStyle(document.documentElement)
         .fontSize;
       const graphforegroundWidth = $graphcontainer
         .find('#graphforeground')
         .width();
-      $graphcontainer
-        .next()
-        .find('span')
-        .not('#progress-percent')
-        .css({
-          marginRight: Number(
-            documentFontSize.substring(0, documentFontSize.length - 2)
-          ),
-        });
       $previousContainer.removeClass('mb-6');
     } else {
       adjustTimeProgressBarHeight();
