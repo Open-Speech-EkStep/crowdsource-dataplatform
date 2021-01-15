@@ -15,7 +15,6 @@ const initialize = () => {
   const $startRecordBtn = $('#startRecord');
   const $startRecordRow = $('#startRecordRow');
   const $stopRecordBtn = $('#stopRecord');
-  const $stopRecordRow = $('#stop-recording-row');
   const $reRecordBtn = $('#reRecord');
   const $visualizer = $('#visualizer');
   const $player = $('#player');
@@ -160,7 +159,6 @@ const initialize = () => {
       .then((stream) => {
         $getStarted.hide();
         $startRecordRow.addClass('d-none');
-        $stopRecordRow.removeClass('d-none');
         $stopRecordBtn.removeClass('d-none');
         $recordingRow.removeClass('d-none');
         $recordingSign.removeClass('d-none');
@@ -200,7 +198,6 @@ const initialize = () => {
           'Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission'
         );
         $startRecordRow.removeClass('d-none');
-        $stopRecordRow.addClass('d-none');
         $stopRecordBtn.addClass('d-none');
         $nextBtn.addClass('d-none');
         $reRecordBtn.addClass('d-none');
