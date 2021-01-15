@@ -23,6 +23,7 @@
   "homepage": "https://github.com/ekstep2/ektep-crowdsource-platform#readme",
   "dependencies": {
     "@google-cloud/storage": "^4.7.0",
+    "browserify": "^17.0.0",
     "chai": "^4.2.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
@@ -53,5 +54,10 @@
     "gulp-imagemin": "^7.1.0",
     "gulp-minify": "^3.1.0",
     "nodemon": "^2.0.3"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/test-env.js"
+    ]
   }
 }
