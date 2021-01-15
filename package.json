@@ -23,7 +23,6 @@
   "homepage": "https://github.com/ekstep2/ektep-crowdsource-platform#readme",
   "dependencies": {
     "@google-cloud/storage": "^4.7.0",
-    "browserify": "^17.0.0",
     "chai": "^4.2.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
@@ -47,8 +46,12 @@
     "node": "12.16.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babelify": "^10.0.0",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
+    "gulp-browserify": "^0.5.1",
     "gulp-clean-css": "^4.3.0",
     "gulp-htmlmin": "^5.0.1",
     "gulp-imagemin": "^7.1.0",
@@ -59,5 +62,8 @@
     "setupFiles": [
       "<rootDir>/test-env.js"
     ]
-  }
+  },
+  "presets": [
+    "@babel/preset-env"
+  ]
 }
