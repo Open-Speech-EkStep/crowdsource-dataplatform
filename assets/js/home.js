@@ -1,5 +1,3 @@
-const $ = require('jquery');
-
 $(document).ready(function () {
   const mobileRegex = /^[6-9]\d{9}$/;
   const emailRegex = /^\S+@\S+[\.][0-9a-z]+$/;
