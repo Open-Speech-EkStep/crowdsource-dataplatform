@@ -1,6 +1,4 @@
 $(document).ready(function () {
-  const mobileRegex = /^[6-9]\d{9}$/;
-  const emailRegex = /^\S+@\S+[\.][0-9a-z]+$/;
   const speakerDetailsKey = 'speakerDetails';
   const defaultLang = 'Odia';
   const $startRecordBtn = $('#proceed-box');
@@ -13,17 +11,21 @@ $(document).ready(function () {
   const $tncCheckbox = $('#tnc');
   let sentenceLanguage = defaultLang;
 
-  const testUserName = (val) => mobileRegex.test(val) || emailRegex.test(val);
-
-  const setUserNameTooltip = () => {
-    if ($userName.val().length > 11) {
-      $userName.tooltip('enable');
-      $userName.tooltip('show');
+  const setStartRecordBtnToolTipContent = (userName) => {
+    if (testUserName(userName)) {
+      $startRecordBtnTooltip.attr(
+        'data-original-title',
+        'Please validate any error message before proceeding'
+      );
     } else {
-      $userName.tooltip('disable');
-      $userName.tooltip('hide');
+      $startRecordBtnTooltip.attr(
+        'data-original-title',
+        'Please agree to the Terms and Conditions before proceeding'
+      );
     }
   };
+
+  setUserNameTooltip($userName);
 
   const validateUserName = () => {
     const userNameValue = $userName.val().trim();
@@ -84,20 +86,6 @@ $(document).ready(function () {
       e.target.previous = e.target.checked;
     });
   });
-
-  const setStartRecordBtnToolTipContent = (userName) => {
-    if (testUserName(userName)) {
-      $startRecordBtnTooltip.attr(
-        'data-original-title',
-        'Please validate any error message before proceeding'
-      );
-    } else {
-      $startRecordBtnTooltip.attr(
-        'data-original-title',
-        'Please agree to the Terms and Conditions before proceeding'
-      );
-    }
-  };
 
   let langTop;
   document.getElementById('languageTop').addEventListener('change', (e) => {
@@ -171,6 +159,22 @@ $(document).ready(function () {
   updateLanguage(defaultLang);
 });
 
+const testUserName = (val) => {
+  const mobileRegex = /^[6-9]\d{9}$/;
+  const emailRegex = /^\S+@\S+[\.][0-9a-z]+$/;
+  return mobileRegex.test(val) || emailRegex.test(val);
+};
+
+function setUserNameTooltip($userName) {
+  if ($userName.val().length > 11) {
+    $userName.tooltip('enable');
+    $userName.tooltip('show');
+  } else {
+    $userName.tooltip('disable');
+    $userName.tooltip('hide');
+  }
+}
+
 function updateLanguageInButton(lang) {
   document.getElementById(
     'start-record'
@@ -225,4 +229,8 @@ function updateLanguage(language) {
     });
 }
 
-module.exports = {updateLanguageInButton, calculateTime};
+module.exports = {
+  updateLanguageInButton,
+  calculateTime,
+  testUserName,
+};
