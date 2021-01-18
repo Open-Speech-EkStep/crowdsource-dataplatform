@@ -14,8 +14,7 @@ const decrypt = function (text) {
     const decrypted = CryptoJS.AES.decrypt(
         { ciphertext: CryptoJS.enc.Base64.parse(text) }, keyutf,
         { iv: iv });
-    const decryptedString = CryptoJS.enc.Utf8.stringify(decrypted);
-    return decryptedString;
+    return CryptoJS.enc.Utf8.stringify(decrypted);
 }
 
 module.exports = {
