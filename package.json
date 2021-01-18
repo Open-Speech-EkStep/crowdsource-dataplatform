@@ -46,8 +46,6 @@
     "node": "12.16.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
     "babelify": "^10.0.0",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
@@ -62,8 +60,5 @@
     "setupFiles": [
       "<rootDir>/test-env.js"
     ]
-  },
-  "presets": [
-    "@babel/preset-env"
-  ]
+  }
 }
