@@ -27,8 +27,6 @@ $(document).ready(function () {
     }
   };
 
-  setUserNameTooltip($userName);
-
   const validateUserName = () => {
     const userNameValue = $userName.val().trim();
     if (testUserName(userNameValue)) {
@@ -41,12 +39,6 @@ $(document).ready(function () {
     $tncCheckbox.trigger('change');
     setUserNameTooltip($userName);
   };
-
-  $userName.tooltip({
-    container: 'body',
-    placement: screen.availWidth > 500 ? 'right' : 'auto',
-    trigger: 'focus',
-  });
 
   $tncCheckbox.prop('checked', false);
 
@@ -89,25 +81,25 @@ $(document).ready(function () {
   });
 
   let langTop;
-  document.getElementById('languageTop').addEventListener('change', (e) => {
+  $('#languageTop').on('change', (e) => {
     langTop = e.target.value;
     const $toggleButton = $('#start_recording');
     $toggleButton.removeAttr('disabled');
   });
 
-  document.getElementById('start_recording').addEventListener('click', () => {
+  $('#start_recording').on('click', () => {
     sentenceLanguage = langTop;
   });
 
   let languageBottom = defaultLang;
-  document.getElementById('language').addEventListener('change', (e) => {
+  $('#language').on('change', (e) => {
     languageBottom = e.target.value;
     updateLanguage(languageBottom);
     updateLanguageInButton(languageBottom);
     updateGraph(languageBottom);
   });
 
-  document.getElementById('start-record').addEventListener('click', () => {
+  $('#start-record').on('click', () => {
     sentenceLanguage = languageBottom;
   });
 
@@ -147,7 +139,7 @@ $(document).ready(function () {
   });
 
   $('#userModal').on('shown.bs.modal', function () {
-    document.getElementById('resetBtn').addEventListener('click', () => {
+    $('#resetBtn').on('click', () => {
       const selectedGender = document.querySelector(
         'input[name = "gender"]:checked'
       );
@@ -156,6 +148,13 @@ $(document).ready(function () {
       motherTongue.selectedIndex = 0;
       $userName[0].value = '';
     });
+    $userName.tooltip({
+      container: 'body',
+      placement: screen.availWidth > 500 ? 'right' : 'auto',
+      trigger: 'focus',
+    });
+
+    setUserNameTooltip($userName);
   });
 
   updateLanguageInButton(defaultLang);
