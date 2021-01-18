@@ -1,4 +1,4 @@
-// const {updateGraph} = require('./draw-chart');
+const {updateGraph, buildGraphs} = require('./draw-chart');
 
 $(document).ready(function () {
   const speakerDetailsKey = 'speakerDetails';
@@ -160,6 +160,7 @@ $(document).ready(function () {
 
   updateLanguageInButton(defaultLang);
   updateLanguage(defaultLang);
+  buildGraphs(defaultLang);
 });
 
 const testUserName = (val) => {
