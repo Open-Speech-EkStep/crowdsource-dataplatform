@@ -1,3 +1,4 @@
+const fetchMock = require('fetch-mock')
 const {
     updateLanguageInButton,
     updateLanguage,
@@ -7,7 +8,6 @@ const {
 } = require('../assets/js/home');
 const {readFileSync} = require('fs');
 const {stringToHTML, flushPromises} = require('./utils');
-const fetchMock = require('fetch-mock')
 
 document.body = stringToHTML(
     readFileSync(`${__dirname}/../views/home.ejs`, 'UTF-8')
