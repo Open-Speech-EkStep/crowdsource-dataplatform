@@ -318,8 +318,8 @@ const initialize = () => {
     const canvasCtx = visualizer.getContext('2d');
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
-    WIDTH = visualizer.width;
-    HEIGHT = visualizer.height;
+    const WIDTH = visualizer.width;
+    const HEIGHT = visualizer.height;
     // TODO do we need to limit the number of time visualize refreshes per second
     // so that it can run on Android processors without causing audio to drop?
     function draw() {
