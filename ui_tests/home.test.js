@@ -1,7 +1,8 @@
 const {
-  testUserName,
   updateLanguageInButton,
+  updateLanguage,
   calculateTime,
+  testUserName,
 } = require('../assets/js/home');
 
 describe('updateLanguageInButton', () => {
@@ -13,6 +14,29 @@ describe('updateLanguageInButton', () => {
     );
   });
 });
+
+// describe('updateLanguage', () => {
+//   test('should update speakers count and num of hours recorded on home page', () => {
+//     document.body.innerHTML =
+//       '<div><div id="speaker-data"><div id="loader1"></div> <div id="loader2"></div>' +
+//       '<div id="speakers-wrapper"><div id="speaker-value"></div></div><div id="hours-wrapper">' +
+//       '<div id="hour-value"></div></div> </div></div>';
+
+//     const fetchDetails = (language) =>
+//       Promise.resolve([
+//         {count: 7, index: 0},
+//         {count: 5, index: 1},
+//       ]);
+
+//     updateLanguage('Hindi', fetchDetails)
+//       .then((e) => {
+//         expect(document.getElementById('speaker-value').innerText).toEqual('7');
+//       })
+//       .catch((e) => {
+//         console.log(e);
+//       });
+//   });
+// });
 
 describe('calculateTime', () => {
   test('should calculate time in hours,min and sec for given sentence count', () => {

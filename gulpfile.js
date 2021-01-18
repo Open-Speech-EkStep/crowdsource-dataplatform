@@ -19,22 +19,24 @@ gulp.task('html', function () {
 });
 
 gulp.task('js', function () {
-  return gulp
-    .src(['assets/js/*.js'])
-    .pipe(
-      browserify({
-        transform: ['babelify'],
-      })
-    )
-    .pipe(
-      minify({
-        ext: {
-          min: '.js',
-        },
-        noSource: true,
-      })
-    )
-    .pipe(gulp.dest('public/js'));
+  return (
+    gulp
+      .src(['assets/js/*.js'])
+      // .pipe(
+      //   browserify({
+      //     transform: ['babelify'],
+      //   })
+      // )
+      .pipe(
+        minify({
+          ext: {
+            min: '.js',
+          },
+          noSource: true,
+        })
+      )
+      .pipe(gulp.dest('public/js'))
+  );
 });
 gulp.task('css', function () {
   return gulp
