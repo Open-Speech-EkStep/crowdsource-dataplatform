@@ -214,26 +214,24 @@ function updateLanguage(language, fetchDetail) {
   $speakersDataHoursWrapper.addClass('d-none');
   $speakersDataSpeakerWrapper.addClass('d-none');
 
-  return fetchDetail(language)
+  fetchDetail(language)
     .then((data) => {
       try {
         const totalSentence = data.find((t) => t.index === 1).count;
         const {hours, minutes, seconds} = calculateTime(totalSentence);
         $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
         $speakersDataSpeakerValue.text(data.find((t) => t.index === 0).count);
+
         $speakersDataLoader.addClass('d-none');
         $speakersDataHoursWrapper.removeClass('d-none');
         $speakersDataSpeakerWrapper.removeClass('d-none');
         localStorage.setItem('speakersData', JSON.stringify(data));
-        return Promise.resolve(true);
       } catch (error) {
         console.log(error);
-        return Promise.reject(error);
       }
     })
     .catch((err) => {
       console.log(err);
-      return Promise.reject(err);
     });
 }
 
