@@ -102,7 +102,7 @@ $(document).ready(function () {
   let languageBottom = defaultLang;
   document.getElementById('language').addEventListener('change', (e) => {
     languageBottom = e.target.value;
-    updateLanguage(languageBottom, fetchDetail);
+    updateLanguage(languageBottom);
     updateLanguageInButton(languageBottom);
     updateGraph(languageBottom);
   });
@@ -159,7 +159,7 @@ $(document).ready(function () {
   });
 
   updateLanguageInButton(defaultLang);
-  updateLanguage(defaultLang, fetchDetail);
+  updateLanguage(defaultLang);
 });
 
 const testUserName = (val) => {
@@ -203,7 +203,7 @@ const fetchDetail = (language) => {
   });
 };
 
-function updateLanguage(language, fetchDetail) {
+function updateLanguage(language) {
   const $speakersData = $('#speaker-data');
   const $speakersDataLoader = $speakersData.find('#loader1,#loader2');
   const $speakersDataSpeakerWrapper = $('#speakers-wrapper');
@@ -240,4 +240,5 @@ module.exports = {
   updateLanguage,
   calculateTime,
   testUserName,
+  fetchDetail
 };
