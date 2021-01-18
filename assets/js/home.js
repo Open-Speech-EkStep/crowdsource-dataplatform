@@ -1,4 +1,4 @@
-const {updateGraph} = require('./draw-chart');
+// const {updateGraph} = require('./draw-chart');
 
 $(document).ready(function () {
   const speakerDetailsKey = 'speakerDetails';

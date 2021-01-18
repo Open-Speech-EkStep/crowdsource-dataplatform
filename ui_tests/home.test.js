@@ -4,10 +4,13 @@ const {
   calculateTime,
   testUserName,
 } = require('../assets/js/home');
+const {readFileSync} = require('fs')
+const {stringToHTML} = require('./utils')
+
+document.body = stringToHTML(readFileSync(`${__dirname}/../views/home.ejs`, 'UTF-8'));
 
 describe('updateLanguageInButton', () => {
   test('should update innerText of start record btn for given language', () => {
-    document.body.innerHTML = '<div><button id="start-record" /></div>';
     updateLanguageInButton('hindi');
     expect(document.getElementById('start-record').innerText).toEqual(
       'START RECORDING IN HINDI'
@@ -17,10 +20,6 @@ describe('updateLanguageInButton', () => {
 
 // describe('updateLanguage', () => {
 //   test('should update speakers count and num of hours recorded on home page', () => {
-//     document.body.innerHTML =
-//       '<div><div id="speaker-data"><div id="loader1"></div> <div id="loader2"></div>' +
-//       '<div id="speakers-wrapper"><div id="speaker-value"></div></div><div id="hours-wrapper">' +
-//       '<div id="hour-value"></div></div> </div></div>';
 
 //     const fetchDetails = (language) =>
 //       Promise.resolve([
