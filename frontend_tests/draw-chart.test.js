@@ -3,7 +3,8 @@ const {
     createTableWithTwoColumns,
     createTableRows,
     createTableWithOneColumn,
-    getOrderedGenderData
+    getOrderedGenderData,
+    getFormattedAgeGroupData
 } = require('../assets/js/draw-chart');
 
 describe('Test Draw Charts', () => {
@@ -60,6 +61,22 @@ describe('Test Draw Charts', () => {
             const testData = [{gender: 'Anonymous'},{gender: 'Female'}, {gender: 'Others'}, {gender: 'Male'}];
             const actualData = getOrderedGenderData(testData);
             const expectedData = [{gender: 'Female'}, {gender: 'Male'}, {gender: 'Others'}, {gender: 'Anonymous'}];
+            expect(actualData).toEqual(expectedData)
+        });
+    });
+
+    describe('getFormatedAgeGroupData', () => {
+        test('should ordered data on basis of count when each element has given key', () => {
+            const testData = [{ageGroup : '2-3', count: 5},{ageGroup: '3-4', count: 10},{ageGroup: '4-5', count: 2}];
+            const actualData = getFormattedAgeGroupData(testData, 'ageGroup');
+            const expectedData = [{ageGroup: '4-5', count: 2}, {ageGroup : '2-3', count: 5},{ageGroup: '3-4', count: 10}];
+            expect(actualData).toEqual(expectedData)
+        });
+
+        test('should ordered data and add key with "Anonymous" value when any element has not key', () => {
+            const testData = [{ageGroup : '2-3', count: 5},{count: 10},{ageGroup: '4-5', count: 2}];
+            const actualData = getFormattedAgeGroupData(testData, 'ageGroup');
+            const expectedData = [{ageGroup: '4-5', count: 2}, {ageGroup : '2-3', count: 5},{ageGroup: 'Anonymous', count: 10}];
             expect(actualData).toEqual(expectedData)
         });
     });
