@@ -4,13 +4,6 @@ const $charts = $chartRow.find('.chart');
 const $popovers = $chartRow.find('[data-toggle="popover"]');
 const $body = $('body');
 
-function updateGraph(language) {
-    am4core.disposeAllCharts();
-    $chartLoaders.show().addClass('d-flex');
-    $charts.addClass('d-none');
-    buildGraphs(language);
-}
-
 function getOrderedGenderData(formattedGenderData) {
     const orderedGenderData = [];
     const order = ['Female', 'Male', 'Others', 'Anonymous'];
@@ -21,6 +14,53 @@ function getOrderedGenderData(formattedGenderData) {
         });
     });
     return orderedGenderData;
+}
+
+function createColumn(dataHtml, columnSize) {
+    return `<div class="${columnSize}">` + '<table class="table table-sm table-borderless mb-0">' +
+        '<tbody>' + dataHtml.join('') + '</tbody></table></div>';
+}
+
+function createTableWithTwoColumns(data, dataKey) {
+    let dataLength = data.length;
+    const half = Math.ceil(dataLength / 2);
+    const firstHalfDataHtml = createTableRows(data.slice(0, half), dataKey);
+    const secondHalfDataHtml = createTableRows(data.slice(half, dataLength), dataKey);
+
+    return '<div class="row">' +
+        createColumn(firstHalfDataHtml, "col-6") +
+        createColumn(secondHalfDataHtml, "col-6") +
+        '</div>';
+}
+
+function createTableRows(data, dataKey) {
+    return data.map(
+        (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
+    );
+}
+
+function createTableWithOneColumn(data, dataKey) {
+    const dataHtml = createTableRows(data, dataKey);
+    return `<div class="row">${createColumn(dataHtml, "col")}</div>`;
+}
+
+function updateGraph(language) {
+    am4core.disposeAllCharts();
+    $chartLoaders.show().addClass('d-flex');
+    $charts.addClass('d-none');
+    buildGraphs(language);
+}
+
+function getFormattedAgeGroupData(data, key) {
+    return data.map((item) =>
+            item[key]
+                ? item
+                : {
+                    [key]: 'Anonymous',
+                    count: item.count
+                }
+        )
+        .sort((a, b) => Number(a.count) - Number(b.count));
 }
 
 function buildGraphs(language) {
@@ -41,16 +81,7 @@ function buildGraphs(language) {
             try {
                 $chartLoaders.hide().removeClass('d-flex');
                 $charts.removeClass('d-none');
-                const formattedAgeGroupData = data.ageGroups
-                    .map((item) =>
-                        item.ageGroup
-                            ? item
-                            : {
-                                ageGroup: 'Anonymous',
-                                count: item.count,
-                            }
-                    )
-                    .sort((a, b) => Number(a.count) - Number(b.count));
+                const formattedAgeGroupData = getFormattedAgeGroupData(data.ageGroups, 'ageGroup');
                 drawAgeGroupChart(formattedAgeGroupData);
                 const motherTongueTotal = data.motherTongues.reduce(
                     (acc, curr) => acc + Number(curr.count),
@@ -124,33 +155,7 @@ function buildGraphs(language) {
         });
 }
 
-function createColumn(dataHtml, columnSize) {
-    return `<div class="${columnSize}">` + '<table class="table table-sm table-borderless mb-0">' +
-        '<tbody>' + dataHtml.join('') + '</tbody></table></div>';
-}
 
-function createTableWithTwoColumns(data, dataKey) {
-    let dataLength = data.length;
-    const half = Math.ceil(dataLength / 2);
-    const firstHalfDataHtml = createTableRows(data.slice(0, half), dataKey);
-    const secondHalfDataHtml = createTableRows(data.slice(half, dataLength), dataKey);
-
-    return '<div class="row">' +
-        createColumn(firstHalfDataHtml, "col-6") +
-        createColumn(secondHalfDataHtml, "col-6") +
-        '</div>';
-}
-
-function createTableRows(data, dataKey) {
-    return data.map(
-        (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
-    );
-}
-
-function createTableWithOneColumn(data, dataKey) {
-    const dataHtml = createTableRows(data, dataKey);
-    return `<div class="row">${createColumn(dataHtml, "col")}</div>`;
-}
 
 const setPopOverContent = ($popover, tableHtml = `<div></div>`) => {
 
@@ -329,5 +334,6 @@ module.exports = {
     createTableWithTwoColumns,
     updateGraph,
     buildGraphs,
-    getOrderedGenderData
+    getOrderedGenderData,
+    getFormattedAgeGroupData
 };
