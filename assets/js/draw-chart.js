@@ -118,7 +118,7 @@ function buildGraphs(language) {
 }
 
 function createColumn(dataHtml, columnSize) {
-    return `<div class=${columnSize}>
+    return `<div class="${columnSize}">
         <table class="table table-sm table-borderless mb-0">
             <tbody>${dataHtml.join(
                 ''
@@ -130,8 +130,8 @@ function createColumn(dataHtml, columnSize) {
 function createTableWithTwoColumns(data, dataKey) {
     let dataLength = data.length;
     const half = Math.ceil(dataLength / 2);
-    const firstHalfDataHtml = createTableRow(data.slice(0, half), dataKey);
-    const secondHalfDataHtml = createTableRow(data.slice(half,dataLength), dataKey);
+    const firstHalfDataHtml = createTableRows(data.slice(0, half), dataKey);
+    const secondHalfDataHtml = createTableRows(data.slice(half,dataLength), dataKey);
 
     return `<div class="row">
             ${createColumn(firstHalfDataHtml, "col-6")}
@@ -139,14 +139,14 @@ function createTableWithTwoColumns(data, dataKey) {
         </div>`;
 }
 
-function createTableRow(data, dataKey) {
+function createTableRows(data, dataKey) {
     return data.map(
         (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
     );
 }
 
 function createTableWithOneColumn(data, dataKey) {
-    const dataHtml = createTableRow(data, dataKey);
+    const dataHtml = createTableRows(data, dataKey);
     return `<div class="row">${createColumn(dataHtml,"col")}</div>`;
 }
 
@@ -320,4 +320,4 @@ const drawGenderChart = (chartData) => {
     });
 };
 
-module.exports = {updateGraph, buildGraphs};
+module.exports = {createColumn, createTableRows, createTableWithOneColumn, createTableWithTwoColumns, updateGraph, buildGraphs};
