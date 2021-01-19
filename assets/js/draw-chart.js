@@ -11,6 +11,18 @@ function updateGraph(language) {
     buildGraphs(language);
 }
 
+function getOrderedGenderData(formattedGenderData) {
+    const orderedGenderData = [];
+    const order = ['Female', 'Male', 'Others', 'Anonymous'];
+    order.forEach((gender) => {
+        formattedGenderData.forEach((data) => {
+            if (gender === data['gender'])
+                orderedGenderData.push(data);
+        });
+    });
+    return orderedGenderData;
+}
+
 function buildGraphs(language) {
     $.fn.popover.Constructor.Default.whiteList.table = [];
     $.fn.popover.Constructor.Default.whiteList.tbody = [];
@@ -74,12 +86,7 @@ function buildGraphs(language) {
                         }
                         : {gender: 'Anonymous', count: item.count}
                 );
-                let orderedGenderData = ['1', '2', '3', '4'];
-                let order = {Female: 0, Male: 1, Others: 2, Anonymous: 3};
-                formattedGenderData.forEach((data) => {
-                    let pos = order[data['gender']];
-                    orderedGenderData[pos] = data;
-                });
+                let orderedGenderData = getOrderedGenderData(formattedGenderData);
                 drawGenderChart(orderedGenderData);
                 setPopOverContent(
                     $popovers.eq(0),
@@ -118,25 +125,20 @@ function buildGraphs(language) {
 }
 
 function createColumn(dataHtml, columnSize) {
-    return `<div class="${columnSize}">
-        <table class="table table-sm table-borderless mb-0">
-            <tbody>${dataHtml.join(
-                ''
-            )}</tbody>
-        </table>
-    </div>`;
+    return `<div class="${columnSize}">` + '<table class="table table-sm table-borderless mb-0">' +
+        '<tbody>' + dataHtml.join('') + '</tbody></table></div>';
 }
 
 function createTableWithTwoColumns(data, dataKey) {
     let dataLength = data.length;
     const half = Math.ceil(dataLength / 2);
     const firstHalfDataHtml = createTableRows(data.slice(0, half), dataKey);
-    const secondHalfDataHtml = createTableRows(data.slice(half,dataLength), dataKey);
+    const secondHalfDataHtml = createTableRows(data.slice(half, dataLength), dataKey);
 
-    return `<div class="row">
-            ${createColumn(firstHalfDataHtml, "col-6")}
-            ${createColumn(secondHalfDataHtml, "col-6")}
-        </div>`;
+    return '<div class="row">' +
+        createColumn(firstHalfDataHtml, "col-6") +
+        createColumn(secondHalfDataHtml, "col-6") +
+        '</div>';
 }
 
 function createTableRows(data, dataKey) {
@@ -147,7 +149,7 @@ function createTableRows(data, dataKey) {
 
 function createTableWithOneColumn(data, dataKey) {
     const dataHtml = createTableRows(data, dataKey);
-    return `<div class="row">${createColumn(dataHtml,"col")}</div>`;
+    return `<div class="row">${createColumn(dataHtml, "col")}</div>`;
 }
 
 const setPopOverContent = ($popover, tableHtml = `<div></div>`) => {
@@ -320,4 +322,12 @@ const drawGenderChart = (chartData) => {
     });
 };
 
-module.exports = {createColumn, createTableRows, createTableWithOneColumn, createTableWithTwoColumns, updateGraph, buildGraphs};
+module.exports = {
+    createColumn,
+    createTableRows,
+    createTableWithOneColumn,
+    createTableWithTwoColumns,
+    updateGraph,
+    buildGraphs,
+    getOrderedGenderData
+};
