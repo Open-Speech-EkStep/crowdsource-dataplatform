@@ -60,14 +60,11 @@ function buildGraphs(language) {
                     'mother-tongue-chart',
                     true
                 );
-                console.log('mother tong 1')
-
                 drawMotherTongueChart(
                     formattedMotherTongueData,
                     motherTongueTotal,
                     'modal-chart'
                 );
-                console.log('mother tong 1')
                 const formattedGenderData = data.genderData.map((item) =>
                     item.gender
                         ? {
@@ -86,17 +83,16 @@ function buildGraphs(language) {
                 drawGenderChart(orderedGenderData);
                 setPopOverContent(
                     $popovers.eq(0),
-                    formattedMotherTongueData,
-                    'motherTongue',
-                    true
+                    createTableWithTwoColumns(formattedMotherTongueData, 'motherTongue')
                 );
                 setPopOverContent(
                     $popovers.eq(1),
-                    formattedAgeGroupData,
-                    'ageGroup',
-                    true
+                    createTableWithTwoColumns(formattedAgeGroupData, 'ageGroup')
                 );
-                setPopOverContent($popovers.eq(2), formattedGenderData, 'gender');
+                setPopOverContent(
+                    $popovers.eq(2),
+                    createTableWithOneColumn(formattedGenderData, 'gender')
+                );
                 // for small screen increase width of mother tongue chart modal
                 if (innerWidth < 992) {
                     $('#modal-chart-wrapper').find('.modal-dialog').addClass('w-90');
@@ -121,37 +117,40 @@ function buildGraphs(language) {
         });
 }
 
-const setPopOverContent = ($popover, data, dataKey, isSplit) => {
-    let tableHtml;
-    if (isSplit) {
-        let dataLength = data.length;
-        const half = Math.ceil(dataLength / 2);
-        const firstHalfDataHtml = data
-            .slice(0, half)
-            .map(
-                (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
-            );
-        const secondHalfDataHtml = data
-            .slice(half, dataLength)
-            .map(
-                (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
-            );
-        tableHtml = `<div class="row">
-            <div class="col-6"><table class="table table-sm table-borderless mb-0"><tbody>${firstHalfDataHtml.join(
-            ''
-        )}</tbody></table></div>
-            <div class="col-6"><table class="table table-sm table-borderless mb-0"><tbody>${secondHalfDataHtml.join(
-            ''
-        )}</tbody></table></div>
+function createColumn(dataHtml, columnSize) {
+    return `<div class=${columnSize}>
+        <table class="table table-sm table-borderless mb-0">
+            <tbody>${dataHtml.join(
+                ''
+            )}</tbody>
+        </table>
+    </div>`;
+}
+
+function createTableWithTwoColumns(data, dataKey) {
+    let dataLength = data.length;
+    const half = Math.ceil(dataLength / 2);
+    const firstHalfDataHtml = createTableRow(data.slice(0, half), dataKey);
+    const secondHalfDataHtml = createTableRow(data.slice(half,dataLength), dataKey);
+
+    return `<div class="row">
+            ${createColumn(firstHalfDataHtml, "col-6")}
+            ${createColumn(secondHalfDataHtml, "col-6")}
         </div>`;
-    } else {
-        const dataHtml = data.map(
-            (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
-        );
-        tableHtml = `<div class="row"><div class="col"><table class="table table-sm table-borderless mb-0"><tbody>${dataHtml.join(
-            ''
-        )}</tbody></table></div></div>`;
-    }
+}
+
+function createTableRow(data, dataKey) {
+    return data.map(
+        (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
+    );
+}
+
+function createTableWithOneColumn(data, dataKey) {
+    const dataHtml = createTableRow(data, dataKey);
+    return `<div class="row">${createColumn(dataHtml,"col")}</div>`;
+}
+
+const setPopOverContent = ($popover, tableHtml = `<div></div>`) => {
 
     $popover
         .on('mouseenter focus', function () {
