@@ -1,21 +1,20 @@
-const assert = require('assert');
 const crypto = require('../src/encryptAndDecrypt');
 describe('crypto', function() {
   describe('decrypt()', function() {
-    it('should return the same mesage text after decryption of text encrypted with a key generated from a password', function() {
+    test('should return the same mesage text after decryption of text encrypted with a key generated from a password', function() {
       let plaintext = 'my message text';
       let encryptText = crypto.encrypt(plaintext);
       const decryptOutput = crypto.decrypt(encryptText);
       
-      assert.equal(decryptOutput, plaintext);
+      expect(decryptOutput).toBe(plaintext);
     });
 
-    it('should return undefined if text is not defined', function() {
+    test('should return undefined if text is not defined', function() {
       let encryptText = crypto.encrypt();
       let decryptOutput = crypto.decrypt(encryptText);
 
-      assert.equal(encryptText, undefined);
-      assert.equal(decryptOutput, undefined);
+      expect(encryptText).toBe(undefined);
+      expect(decryptOutput).toBe(undefined);
     });
   });
 });
