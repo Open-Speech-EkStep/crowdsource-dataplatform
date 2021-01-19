@@ -44,23 +44,16 @@ function createTableWithOneColumn(data, dataKey) {
     return `<div class="row">${createColumn(dataHtml, "col")}</div>`;
 }
 
+function getFormattedData(data, key) {
+    return data.map((item) => item[key] ? item : {[key]: 'Anonymous', count: item.count})
+}
+
 function updateGraph(language) {
     am4core.disposeAllCharts();
+
     $chartLoaders.show().addClass('d-flex');
     $charts.addClass('d-none');
     buildGraphs(language);
-}
-
-function getFormattedAgeGroupData(data, key) {
-    return data.map((item) =>
-            item[key]
-                ? item
-                : {
-                    [key]: 'Anonymous',
-                    count: item.count
-                }
-        )
-        .sort((a, b) => Number(a.count) - Number(b.count));
 }
 
 function buildGraphs(language) {
@@ -81,22 +74,13 @@ function buildGraphs(language) {
             try {
                 $chartLoaders.hide().removeClass('d-flex');
                 $charts.removeClass('d-none');
-                const formattedAgeGroupData = getFormattedAgeGroupData(data.ageGroups, 'ageGroup');
-                drawAgeGroupChart(formattedAgeGroupData);
+                const formattedAgeGroupData = getFormattedData(data.ageGroups, 'ageGroup').sort((a, b) => Number(a.count) - Number(b.count));
+                drawAgeGroupChart( formattedAgeGroupData);
                 const motherTongueTotal = data.motherTongues.reduce(
                     (acc, curr) => acc + Number(curr.count),
                     0
                 );
-                const formattedMotherTongueData = data.motherTongues
-                    .map((item) =>
-                        item.motherTongue
-                            ? item
-                            : {
-                                motherTongue: 'Anonymous',
-                                count: item.count,
-                            }
-                    )
-                    .sort((a, b) => Number(b.count) - Number(a.count));
+                const formattedMotherTongueData = getFormattedData(data.motherTongues, 'motherTongue').sort((a, b) => Number(b.count) - Number(a.count));
                 drawMotherTongueChart(
                     formattedMotherTongueData.slice(0, 4),
                     motherTongueTotal,
@@ -108,15 +92,15 @@ function buildGraphs(language) {
                     motherTongueTotal,
                     'modal-chart'
                 );
-                const formattedGenderData = data.genderData.map((item) =>
-                    item.gender
+                const formattedGenderData = data.genderData.map((item) =>{
+                    return item.gender
                         ? {
                             ...item,
                             gender:
                                 item.gender.charAt(0).toUpperCase() + item.gender.slice(1),
                         }
                         : {gender: 'Anonymous', count: item.count}
-                );
+            });
                 let orderedGenderData = getOrderedGenderData(formattedGenderData);
                 drawGenderChart(orderedGenderData);
                 setPopOverContent(
@@ -335,5 +319,5 @@ module.exports = {
     updateGraph,
     buildGraphs,
     getOrderedGenderData,
-    getFormattedAgeGroupData
+    getFormattedData
 };
