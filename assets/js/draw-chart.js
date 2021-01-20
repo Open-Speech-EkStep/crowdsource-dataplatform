@@ -102,18 +102,19 @@ function buildGraphs(language) {
                         : {gender: 'Anonymous', count: item.count}
             });
                 let orderedGenderData = getOrderedGenderData(formattedGenderData);
+                const table = new Table()
                 drawGenderChart(orderedGenderData);
                 setPopOverContent(
                     $popovers.eq(0),
-                    createTableWithTwoColumns(formattedMotherTongueData, 'motherTongue')
+                    table.createTableWithTwoColumns(formattedMotherTongueData, 'motherTongue')
                 );
                 setPopOverContent(
                     $popovers.eq(1),
-                    createTableWithTwoColumns(formattedAgeGroupData, 'ageGroup')
+                    table.createTableWithTwoColumns(formattedAgeGroupData, 'ageGroup')
                 );
                 setPopOverContent(
                     $popovers.eq(2),
-                    createTableWithOneColumn(formattedGenderData, 'gender')
+                    table.createTableWithOneColumn(formattedGenderData, 'gender')
                 );
                 // for small screen increase width of mother tongue chart modal
                 if (innerWidth < 992) {
@@ -137,6 +138,37 @@ function buildGraphs(language) {
         .catch((err) => {
             console.log(err);
         });
+}
+
+class Table {
+
+    createColumn(dataHtml, columnSize) {
+        return `<div class="${columnSize}">` + '<table class="table table-sm table-borderless mb-0">' +
+            '<tbody>' + dataHtml.join('') + '</tbody></table></div>';
+    }
+
+    createTableWithTwoColumns(data, dataKey) {
+        let dataLength = data.length;
+        const half = Math.ceil(dataLength / 2);
+        const firstHalfDataHtml = this.createTableRows(data.slice(0, half), dataKey);
+        const secondHalfDataHtml = this.createTableRows(data.slice(half, dataLength), dataKey);
+
+        return '<div class="row">' +
+            this.createColumn(firstHalfDataHtml, "col-6") +
+            this.createColumn(secondHalfDataHtml, "col-6") +
+            '</div>';
+    }
+
+    createTableRows(data, dataKey) {
+        return data.map(
+            (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
+        );
+    }
+
+    createTableWithOneColumn(data, dataKey) {
+        const dataHtml = this.createTableRows(data, dataKey);
+        return `<div class="row">${this.createColumn(dataHtml, "col")}</div>`;
+    }
 }
 
 const setPopOverContent = ($popover, tableHtml = `<div></div>`) => {
@@ -311,10 +343,7 @@ const drawGenderChart = (chartData) => {
 };
 
 module.exports = {
-    createColumn,
-    createTableRows,
-    createTableWithOneColumn,
-    createTableWithTwoColumns,
+    Table,
     updateGraph,
     buildGraphs,
     getOrderedGenderData,

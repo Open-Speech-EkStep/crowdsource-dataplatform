@@ -1,8 +1,5 @@
 const {
-    createColumn,
-    createTableWithTwoColumns,
-    createTableRows,
-    createTableWithOneColumn,
+    Table,
     getOrderedGenderData,
     getFormattedData
 } = require('../assets/js/draw-chart');
@@ -10,7 +7,7 @@ const {
 describe('Test Draw Charts', () => {
     describe('Create Row', () => {
         test('should create row with given data', () => {
-            const row = createTableRows([{testKey: "testValue", count: 10}], 'testKey');
+            const row = new Table().createTableRows([{testKey: "testValue", count: 10}], 'testKey');
             const expectedRow = ['<tr><td>testValue</td><td>10</td></tr>']
             expect(row).toEqual(expectedRow);
         });
@@ -18,7 +15,7 @@ describe('Test Draw Charts', () => {
 
     describe('Create Column', () => {
         test('should create column with given data and column size', () => {
-            const column = createColumn(['<tr><td>testValue</td><td>10</td></tr>', '<tr><td>testValue2</td><td>5</td></tr>'], "col");
+            const column = new Table().createColumn(['<tr><td>testValue</td><td>10</td></tr>', '<tr><td>testValue2</td><td>5</td></tr>'], "col");
             const expectedColumn = '<div class="col"><table class="table table-sm table-borderless mb-0">' +
                 '<tbody><tr><td>testValue</td><td>10</td></tr><tr><td>testValue2</td><td>5</td></tr></tbody>' +
                 '</table></div>';
@@ -28,31 +25,38 @@ describe('Test Draw Charts', () => {
 
     describe('Create table with one column', () => {
         test('should create a table with only one column', () => {
-            const column = createTableWithOneColumn([{testKey: "testValue", count: 10}, {
-                testKey: "testValue2",
-                count: 5
-            }], "testKey");
-            const expectedColumn = '<div class="row"><div class="col">' +
-                '<table class="table table-sm table-borderless mb-0"><tbody>' +
-                '<tr><td>testValue</td><td>10</td></tr>' +
-                '<tr><td>testValue2</td><td>5</td></tr>' +
-                '</tbody></table></div></div>';
+            const table = new Table()
+            jest.spyOn(table,'createTableRows').mockImplementation();
+            jest.spyOn(table,'createColumn').mockImplementation();
+            table.createColumn.mockReturnValue('testColumnData')
+            table.createTableRows.mockReturnValue('testRowData')
+            const column = table.createTableWithOneColumn('testTableData', "testKey");
+            const expectedColumn = '<div class="row">testColumnData</div>';
+
+            expect(table.createTableRows).toHaveBeenCalledTimes(1)
+            expect(table.createColumn).toHaveBeenCalledTimes(1)
+            expect(table.createColumn).toBeCalledWith('testRowData','col')
             expect(column).toEqual(expectedColumn);
         });
     });
 
     describe('Create table with two columns', () => {
         test('should create a table with two columns', () => {
-            const column = createTableWithTwoColumns([{testKey: "testValue", count: 10}, {
-                testKey: "testValue2",
-                count: 5
-            }], "testKey");
-            const expectedColumn = '<div class="row"><div class="col-6">' +
-                '<table class="table table-sm table-borderless mb-0">' +
-                '<tbody><tr><td>testValue</td><td>10</td></tr></tbody></table></div>' +
-                '<div class="col-6"><table class="table table-sm table-borderless mb-0">' +
-                '<tbody><tr><td>testValue2</td><td>5</td></tr></tbody></table></div></div>';
+            const table = new Table()
+            jest.spyOn(table,'createTableRows').mockImplementation();
+            jest.spyOn(table,'createColumn').mockImplementation();
+            table.createTableRows.mockReturnValueOnce('testRowData1').mockReturnValueOnce('testRowData2')
+            table.createColumn.mockReturnValue('testColumnData')
+            const column = table.createTableWithTwoColumns(['testTableData1','testTableData2'], "testKey");
+            const expectedColumn = '<div class="row">testColumnDatatestColumnData</div>';
+
             expect(column).toEqual(expectedColumn);
+            expect(table.createColumn).toHaveBeenCalledTimes(2)
+            expect(table.createTableRows).toHaveBeenCalledTimes(2)
+            expect(table.createTableRows).toBeCalledWith(['testTableData1'],'testKey')
+            expect(table.createTableRows).toBeCalledWith(['testTableData2'],'testKey')
+            expect(table.createColumn).toBeCalledWith('testRowData1','col-6')
+            expect(table.createColumn).toBeCalledWith('testRowData2','col-6')
         });
     });
 
