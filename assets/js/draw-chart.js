@@ -4,8 +4,53 @@ const $charts = $chartRow.find('.chart');
 const $popovers = $chartRow.find('[data-toggle="popover"]');
 const $body = $('body');
 
+function getOrderedGenderData(formattedGenderData) {
+    const orderedGenderData = [];
+    const order = ['Female', 'Male', 'Others', 'Anonymous'];
+    order.forEach((gender) => {
+        formattedGenderData.forEach((data) => {
+            if (gender === data['gender'])
+                orderedGenderData.push(data);
+        });
+    });
+    return orderedGenderData;
+}
+
+function createColumn(dataHtml, columnSize) {
+    return `<div class="${columnSize}">` + '<table class="table table-sm table-borderless mb-0">' +
+        '<tbody>' + dataHtml.join('') + '</tbody></table></div>';
+}
+
+function createTableWithTwoColumns(data, dataKey) {
+    let dataLength = data.length;
+    const half = Math.ceil(dataLength / 2);
+    const firstHalfDataHtml = createTableRows(data.slice(0, half), dataKey);
+    const secondHalfDataHtml = createTableRows(data.slice(half, dataLength), dataKey);
+
+    return '<div class="row">' +
+        createColumn(firstHalfDataHtml, "col-6") +
+        createColumn(secondHalfDataHtml, "col-6") +
+        '</div>';
+}
+
+function createTableRows(data, dataKey) {
+    return data.map(
+        (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
+    );
+}
+
+function createTableWithOneColumn(data, dataKey) {
+    const dataHtml = createTableRows(data, dataKey);
+    return `<div class="row">${createColumn(dataHtml, "col")}</div>`;
+}
+
+function getFormattedData(data, key) {
+    return data.map((item) => item[key] ? item : {[key]: 'Anonymous', count: item.count})
+}
+
 function updateGraph(language) {
     am4core.disposeAllCharts();
+
     $chartLoaders.show().addClass('d-flex');
     $charts.addClass('d-none');
     buildGraphs(language);
@@ -29,74 +74,47 @@ function buildGraphs(language) {
             try {
                 $chartLoaders.hide().removeClass('d-flex');
                 $charts.removeClass('d-none');
-                const formattedAgeGroupData = data.ageGroups
-                    .map((item) =>
-                        item.ageGroup
-                            ? item
-                            : {
-                                ageGroup: 'Anonymous',
-                                count: item.count,
-                            }
-                    )
-                    .sort((a, b) => Number(a.count) - Number(b.count));
-                drawAgeGroupChart(formattedAgeGroupData);
+                const formattedAgeGroupData = getFormattedData(data.ageGroups, 'ageGroup').sort((a, b) => Number(a.count) - Number(b.count));
+                drawAgeGroupChart( formattedAgeGroupData);
                 const motherTongueTotal = data.motherTongues.reduce(
                     (acc, curr) => acc + Number(curr.count),
                     0
                 );
-                const formattedMotherTongueData = data.motherTongues
-                    .map((item) =>
-                        item.motherTongue
-                            ? item
-                            : {
-                                motherTongue: 'Anonymous',
-                                count: item.count,
-                            }
-                    )
-                    .sort((a, b) => Number(b.count) - Number(a.count));
+                const formattedMotherTongueData = getFormattedData(data.motherTongues, 'motherTongue').sort((a, b) => Number(b.count) - Number(a.count));
                 drawMotherTongueChart(
                     formattedMotherTongueData.slice(0, 4),
                     motherTongueTotal,
                     'mother-tongue-chart',
                     true
                 );
-                console.log('mother tong 1')
-
                 drawMotherTongueChart(
                     formattedMotherTongueData,
                     motherTongueTotal,
                     'modal-chart'
                 );
-                console.log('mother tong 1')
-                const formattedGenderData = data.genderData.map((item) =>
-                    item.gender
+                const formattedGenderData = data.genderData.map((item) =>{
+                    return item.gender
                         ? {
                             ...item,
                             gender:
                                 item.gender.charAt(0).toUpperCase() + item.gender.slice(1),
                         }
                         : {gender: 'Anonymous', count: item.count}
-                );
-                let orderedGenderData = ['1', '2', '3', '4'];
-                let order = {Female: 0, Male: 1, Others: 2, Anonymous: 3};
-                formattedGenderData.forEach((data) => {
-                    let pos = order[data['gender']];
-                    orderedGenderData[pos] = data;
-                });
+            });
+                let orderedGenderData = getOrderedGenderData(formattedGenderData);
                 drawGenderChart(orderedGenderData);
                 setPopOverContent(
                     $popovers.eq(0),
-                    formattedMotherTongueData,
-                    'motherTongue',
-                    true
+                    createTableWithTwoColumns(formattedMotherTongueData, 'motherTongue')
                 );
                 setPopOverContent(
                     $popovers.eq(1),
-                    formattedAgeGroupData,
-                    'ageGroup',
-                    true
+                    createTableWithTwoColumns(formattedAgeGroupData, 'ageGroup')
                 );
-                setPopOverContent($popovers.eq(2), formattedGenderData, 'gender');
+                setPopOverContent(
+                    $popovers.eq(2),
+                    createTableWithOneColumn(formattedGenderData, 'gender')
+                );
                 // for small screen increase width of mother tongue chart modal
                 if (innerWidth < 992) {
                     $('#modal-chart-wrapper').find('.modal-dialog').addClass('w-90');
@@ -121,37 +139,9 @@ function buildGraphs(language) {
         });
 }
 
-const setPopOverContent = ($popover, data, dataKey, isSplit) => {
-    let tableHtml;
-    if (isSplit) {
-        let dataLength = data.length;
-        const half = Math.ceil(dataLength / 2);
-        const firstHalfDataHtml = data
-            .slice(0, half)
-            .map(
-                (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
-            );
-        const secondHalfDataHtml = data
-            .slice(half, dataLength)
-            .map(
-                (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
-            );
-        tableHtml = `<div class="row">
-            <div class="col-6"><table class="table table-sm table-borderless mb-0"><tbody>${firstHalfDataHtml.join(
-            ''
-        )}</tbody></table></div>
-            <div class="col-6"><table class="table table-sm table-borderless mb-0"><tbody>${secondHalfDataHtml.join(
-            ''
-        )}</tbody></table></div>
-        </div>`;
-    } else {
-        const dataHtml = data.map(
-            (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
-        );
-        tableHtml = `<div class="row"><div class="col"><table class="table table-sm table-borderless mb-0"><tbody>${dataHtml.join(
-            ''
-        )}</tbody></table></div></div>`;
-    }
+
+
+const setPopOverContent = ($popover, tableHtml = `<div></div>`) => {
 
     $popover
         .on('mouseenter focus', function () {
@@ -321,4 +311,13 @@ const drawGenderChart = (chartData) => {
     });
 };
 
-module.exports = {updateGraph, buildGraphs};
+module.exports = {
+    createColumn,
+    createTableRows,
+    createTableWithOneColumn,
+    createTableWithTwoColumns,
+    updateGraph,
+    buildGraphs,
+    getOrderedGenderData,
+    getFormattedData
+};
