@@ -4,7 +4,8 @@ const {
     updateLanguage,
     calculateTime,
     testUserName,
-    fetchDetail
+    fetchDetail,
+    validateUserName
 } = require('../assets/js/home');
 const {readFileSync} = require('fs');
 const {stringToHTML, flushPromises} = require('./utils');
@@ -86,5 +87,29 @@ describe('testUserName', () => {
 
     test('should give false for given emailId not having "."', () => {
         expect(testUserName('abc@gmailcom')).toEqual(false);
+    });
+});
+
+
+describe('validateUserName', () => {
+    test('should show username when username is valid', () => {
+        const $userName = $('#username');
+        $userName.val = () => "abc@gmail.com";
+        const $userNameError = $userName.next();
+        const $tncCheckbox = $('#tnc');
+        validateUserName($userName, $userNameError, $tncCheckbox);
+
+        expect($userName.hasClass('is-invalid')).toEqual(true);
+        expect($userNameError.hasClass('d-none')).toEqual(false);
+    });
+
+    test('should show error when username is not valid', () => {
+        const $userName = $('#username');
+        const $userNameError = $userName.next();
+        const $tncCheckbox = $('#tnc');
+        validateUserName($userName, $userNameError, $tncCheckbox);
+
+        expect($userName.hasClass('is-invalid')).toEqual(false);
+        expect($userNameError.hasClass('d-none')).toEqual(true);
     });
 });

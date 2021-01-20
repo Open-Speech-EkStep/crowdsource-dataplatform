@@ -1,5 +1,17 @@
 const {updateGraph, buildGraphs} = require('./draw-chart');
 
+function validateUserName($userName, $userNameError, $tncCheckbox) {
+  const userNameValue = $userName.val().trim();
+  if (testUserName(userNameValue)) {
+    $userName.addClass('is-invalid');
+    $userNameError.removeClass('d-none');
+  } else {
+    $userName.removeClass('is-invalid');
+    $userNameError.addClass('d-none');
+  }
+  $tncCheckbox.trigger('change');
+}
+
 $(document).ready(function () {
   const speakerDetailsKey = 'speakerDetails';
   const defaultLang = 'Odia';
@@ -27,19 +39,6 @@ $(document).ready(function () {
     }
   };
 
-  const validateUserName = () => {
-    const userNameValue = $userName.val().trim();
-    if (testUserName(userNameValue)) {
-      $userName.addClass('is-invalid');
-      $userNameError.removeClass('d-none');
-    } else {
-      $userName.removeClass('is-invalid');
-      $userNameError.addClass('d-none');
-    }
-    $tncCheckbox.trigger('change');
-    setUserNameTooltip($userName);
-  };
-
   $tncCheckbox.prop('checked', false);
 
   $startRecordBtnTooltip.tooltip({
@@ -65,7 +64,7 @@ $(document).ready(function () {
           ? parsedSpeakerDetails.userName.trim().substring(0, 12)
           : ''
       );
-      validateUserName();
+      validateUserName($userName, $userNameError, $tncCheckbox);
     }
   };
 
@@ -116,7 +115,10 @@ $(document).ready(function () {
     }
   });
 
-  $userName.on('input focus', validateUserName);
+  $userName.on('input focus', ()=> {
+    validateUserName($userName, $userNameError, $tncCheckbox);
+    setUserNameTooltip($userName);
+  });
 
   $startRecordBtn.on('click', () => {
     if ($tncCheckbox.prop('checked')) {
@@ -240,5 +242,6 @@ module.exports = {
   updateLanguage,
   calculateTime,
   testUserName,
-  fetchDetail
+  fetchDetail,
+  validateUserName
 };
