@@ -5,9 +5,6 @@ const request = require("supertest");
 const express = require("express");
 const app = express();
 
-
-
-
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/", routes);
@@ -35,6 +32,7 @@ describe("Test the root path", () => {
     test("It should response the GET method of getDetails", async () => {
         dbOperations.getAllDetails.mockReturnValue({ "total_speaker": 2345, "sentence": 100 })
         const response = await request(app).get("/getDetails/Hindi");
+
         expect(dbOperations.getAllDetails).toHaveBeenCalled()
         expect(dbOperations.getAllDetails).toHaveBeenCalledWith("Hindi")
         expect(response.status).toBe(200)
@@ -45,37 +43,34 @@ describe("Test the root path", () => {
         const expectedResponse = { "ageGroups": [{ "dummy_data": "abc" }], "genderData": [{ "dummy_data": "abc" }], "motherTongues": [{ "dummy_data": "abc" }] }
 
         const response = await request(app).get("/getAllInfo/Hindi");
-        expect(dbOperations.getAllDetails).not.toHaveBeenCalled()
 
+        expect(dbOperations.getAllDetails).not.toHaveBeenCalled()
         expect(dbOperations.getAllInfo).toHaveBeenCalled()
         expect(dbOperations.getAllInfo).toHaveBeenCalledWith("Hindi")
         expect(response.status).toBe(200)
         expect(response.body).toStrictEqual(expectedResponse)
-
-
     });
 
     test("It should response the GET method", async () => {
         const res = await request(app).get("/terms-and-conditions");
+
         expect(res.status).toBe(200);
         expect(res.text.includes("may be prohibited to be deleted as required under any applicable law")).toBe(true)
-
     });
 
     test("It should response the GET method", async () => {
         const res = await request(app).get("/thank-you");
+
         expect(res.status).toBe(200);
         expect(res.text.includes("Vakyansh has been envisioned to meet a goal of approx. 10,000")).toBe(true)
-
     });
 
     test("It should response the GET method", async () => {
         const res = await request(app).get("/record");
+
         expect(res.status).toBe(200);
         expect(res.text.includes("Get comfortable with the prompted text, before recording")).toBe(true)
-
     });
-
 
 
     //   test("It should response the post method of get sentences and update db", async () => {
