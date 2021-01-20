@@ -139,8 +139,6 @@ function buildGraphs(language) {
         });
 }
 
-
-
 const setPopOverContent = ($popover, tableHtml = `<div></div>`) => {
 
     $popover
@@ -179,6 +177,7 @@ const setPopOverContent = ($popover, tableHtml = `<div></div>`) => {
         }, 0);
     });
 };
+
 const chartColors = ['#3f80ff', '#4D55A5', '#735dc6', '#68b7dc'];
 const drawAgeGroupChart = (chartData) => {
     const chart = am4core.create('age-group-chart', am4charts.PieChart3D);
