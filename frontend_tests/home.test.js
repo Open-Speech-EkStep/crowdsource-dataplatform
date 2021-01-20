@@ -5,7 +5,8 @@ const {
     calculateTime,
     testUserName,
     fetchDetail,
-    validateUserName
+    validateUserName,
+    resetSpeakerDetails
 } = require('../assets/js/home');
 const {readFileSync} = require('fs');
 const {stringToHTML, flushPromises} = require('./utils');
@@ -43,7 +44,7 @@ describe('updateLanguage', () => {
 describe('Fetch Details', () => {
     test('should give details for given language if server responds ok', () => {
         const language = 'Hindi'
-        fetchMock.get(`getDetails/${language}`, {count: 5},{overwriteRoutes:true});
+        fetchMock.get(`getDetails/${language}`, {count: 5}, {overwriteRoutes: true});
         fetchDetail(language).then((data) => {
             expect(data).toEqual({count: 5});
         });
@@ -112,4 +113,27 @@ describe('validateUserName', () => {
         expect($userName.hasClass('is-invalid')).toEqual(false);
         expect($userNameError.hasClass('d-none')).toEqual(true);
     });
+});
+
+describe('Reset Speaker Details', () => {
+    test('should reset all details from popup', () => {
+        const $username = $('#username');
+        const age = document.getElementById('age');
+        const motherTongue = document.getElementById('mother-tongue');
+        const gender = document.querySelectorAll(
+            'input[name = "gender"]'
+        );
+        age.selectedIndex = 1;
+        motherTongue.selectedIndex = 1;
+        gender[0].checked = true;
+        $username.val('testName')
+        resetSpeakerDetails();
+        const selectedGender = document.querySelector(
+            'input[name = "gender"]:checked'
+        );
+        expect($username.val()).toBe('')
+        expect(age.selectedIndex).toBe(0)
+        expect(motherTongue.selectedIndex).toBe(0)
+        expect(selectedGender).toBeNull()
+    })
 });
