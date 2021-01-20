@@ -30,4 +30,4 @@ const validateUserInfo = function (req, res, next) {
 }
 
 
-module.exports = { validateUserInputAndFile, validateUserInfo }
+module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB }
