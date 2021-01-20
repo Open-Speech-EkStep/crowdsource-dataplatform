@@ -16,34 +16,6 @@ function getOrderedGenderData(formattedGenderData) {
     return orderedGenderData;
 }
 
-function createColumn(dataHtml, columnSize) {
-    return `<div class="${columnSize}">` + '<table class="table table-sm table-borderless mb-0">' +
-        '<tbody>' + dataHtml.join('') + '</tbody></table></div>';
-}
-
-function createTableWithTwoColumns(data, dataKey) {
-    let dataLength = data.length;
-    const half = Math.ceil(dataLength / 2);
-    const firstHalfDataHtml = createTableRows(data.slice(0, half), dataKey);
-    const secondHalfDataHtml = createTableRows(data.slice(half, dataLength), dataKey);
-
-    return '<div class="row">' +
-        createColumn(firstHalfDataHtml, "col-6") +
-        createColumn(secondHalfDataHtml, "col-6") +
-        '</div>';
-}
-
-function createTableRows(data, dataKey) {
-    return data.map(
-        (datum) => `<tr><td>${datum[dataKey]}</td><td>${datum.count}</td></tr>`
-    );
-}
-
-function createTableWithOneColumn(data, dataKey) {
-    const dataHtml = createTableRows(data, dataKey);
-    return `<div class="row">${createColumn(dataHtml, "col")}</div>`;
-}
-
 function getFormattedData(data, key) {
     return data.map((item) => item[key] ? item : {[key]: 'Anonymous', count: item.count})
 }
