@@ -9,7 +9,7 @@
     "start-cluster": "pm2 start src/server.js -i 2",
     "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= mocha",
     "gulp": "gulp",
-    "jest": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest"
+    "jest": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest --coverage"
   },
   "repository": {
     "type": "git",
