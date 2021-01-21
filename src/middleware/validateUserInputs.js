@@ -1,7 +1,18 @@
-const { MAX_SIZE, VALID_FILE_TYPE, MOBILE_REGEX, EMAIL_REGEX, GENDER, AGE_GROUP, MOTHER_TONGUE, MAX_LENGTH } = require("../constants")
+const {
+    MAX_SIZE,
+    VALID_FILE_TYPE,
+    MOBILE_REGEX,
+    EMAIL_REGEX,
+    GENDER,
+    AGE_GROUP,
+    MOTHER_TONGUE,
+    MAX_LENGTH
+} = require("../constants")
 
 
-const convertIntoMB = (fileSizeInByte) => { return Math.round(fileSizeInByte / (1024 * 1000)); }
+const convertIntoMB = (fileSizeInByte) => {
+    return Math.round(fileSizeInByte / (1024 * 1000));
+}
 
 const validateUserInputAndFile = function (req, res, next) {
     const speakerDetails = req.body.speakerDetails;
@@ -31,5 +42,4 @@ const validateUserInfo = function (req, res, next) {
     next()
 }
 
-
-module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB }
+module.exports = {validateUserInputAndFile, validateUserInfo, convertIntoMB}
