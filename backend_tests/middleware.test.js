@@ -25,7 +25,7 @@ describe('middleware test', function () {
             validateUserInfo(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
-            expect(res.send).toHaveBeenCalledTimes(0)
+            expect(res.send).not.toHaveBeenCalled()
         });
 
         test('should fail and send bad request if userName is more than 12 char and age is given format', function () {
@@ -33,7 +33,7 @@ describe('middleware test', function () {
             validateUserInfo(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1)
-            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(nextSpy).not.toHaveBeenCalled()
         });
 
         test('should fail and send bad request if userName is more than 12 char and age is given format', function () {
@@ -41,7 +41,7 @@ describe('middleware test', function () {
             validateUserInfo(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1)
-            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(nextSpy).not.toHaveBeenCalled()
         });
 
         test('should fail if userName contain mobile number and age is given format', function () {
@@ -49,7 +49,7 @@ describe('middleware test', function () {
             validateUserInfo(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1)
-            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(nextSpy).not.toHaveBeenCalled()
         });
 
         test('should fail and send bad request if userName contain email address and age is given format', function () {
@@ -57,7 +57,7 @@ describe('middleware test', function () {
             validateUserInfo(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1)
-            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(nextSpy).not.toHaveBeenCalled()
         });
 
         test('should fail and send bad request if age is not given format', function () {
@@ -65,7 +65,7 @@ describe('middleware test', function () {
             validateUserInfo(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1)
-            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(nextSpy).not.toHaveBeenCalled()
         });
     });
 
@@ -98,7 +98,7 @@ describe('middleware test', function () {
             const req = {body: {speakerDetails: JSON.stringify({})}, file: {size: 1024000}};
             validateUserInputAndFile(req, res, nextSpy);
 
-            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(nextSpy).not.toHaveBeenCalled()
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
@@ -106,7 +106,7 @@ describe('middleware test', function () {
             const req = {body: {speakerDetails: JSON.stringify({})}, file: {size: 8192000, mimeType: "text/html"}};
             validateUserInputAndFile(req, res, nextSpy);
 
-            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(nextSpy).not.toHaveBeenCalled()
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
@@ -118,7 +118,7 @@ describe('middleware test', function () {
             };
             validateUserInputAndFile(req, res, nextSpy);
 
-            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(nextSpy).not.toHaveBeenCalled()
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
@@ -130,7 +130,7 @@ describe('middleware test', function () {
             };
             validateUserInputAndFile(req, res, nextSpy);
 
-            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(nextSpy).not.toHaveBeenCalled()
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
@@ -142,7 +142,7 @@ describe('middleware test', function () {
             };
             validateUserInputAndFile(req, res, nextSpy);
 
-            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(nextSpy).not.toHaveBeenCalled()
             expect(res.send).toHaveBeenCalledTimes(1)
         });
     });

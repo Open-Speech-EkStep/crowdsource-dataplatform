@@ -7,9 +7,8 @@
     "start": "node src/server.js",
     "watch": "nodemon src/server.js",
     "start-cluster": "pm2 start src/server.js -i 2",
-    "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= mocha",
-    "gulp": "gulp",
-    "jest": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest --coverage"
+    "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest",
+    "gulp": "gulp"
   },
   "repository": {
     "type": "git",
@@ -23,7 +22,6 @@
   "homepage": "https://github.com/ekstep2/ektep-crowdsource-platform#readme",
   "dependencies": {
     "@google-cloud/storage": "^4.7.0",
-    "chai": "^4.2.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "crypto-js": "^4.0.0",
@@ -34,7 +32,6 @@
     "helmet": "^3.22.0",
     "jest": "^26.6.3",
     "jquery": "^3.5.1",
-    "mocha": "^7.1.2",
     "multer": "^1.4.2",
     "pg-promise": "^10.5.2",
     "pm2": "^4.4.0",
