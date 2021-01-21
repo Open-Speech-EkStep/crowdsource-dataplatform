@@ -22,7 +22,7 @@ function getTotalSecondsContributed() {
     return (localCount + currentIndexInStorage - skipCountInStorage) * 6;
 }
 
-if (!(localSpeakerDataParsed && localSpeakerDataParsed.userName)) {
+if (!(localSpeakerDataParsed)) {
     location.href = '/#start-record';
 } else if (currentIndexInStorage < totalSentence) {
     location.href = '/#start-record';
