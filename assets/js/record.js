@@ -226,6 +226,7 @@ const initialize = () => {
 
     $stopRecordBtn.on('click', () => {
         clearTimeout(cleartTimeoutKey);
+        $startRecordRow.addClass('d-none');
         $stopRecordBtn.addClass('d-none');
         $nextBtn.removeClass('d-none');
         $reRecordBtn.removeClass('d-none');
