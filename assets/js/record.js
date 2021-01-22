@@ -21,7 +21,7 @@ function setPageContentHeight() {
     const $nav = $('.navbar');
     const edgeHeightInPixel = $footer.outerHeight() + $nav.outerHeight()
     const contentHeightInVH = 100 - convertPXToVH(edgeHeightInPixel)
-    $('#page-content').css('min-height', contentHeightInVH + 'vh');
+    $('#content-wrapper').css('min-height', contentHeightInVH + 'vh');
 }
 
 function getCurrentIndex(lastIndex) {
