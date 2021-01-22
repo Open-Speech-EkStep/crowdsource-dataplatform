@@ -12,6 +12,18 @@ function getValue(number, maxValue) {
             : number;
 }
 
+function convertPXToVH(px) {
+    return px * (100 / document.documentElement.clientHeight);
+}
+
+function setPageContentHeight() {
+    const $footer = $('footer');
+    const $nav = $('.navbar');
+    const edgeHeightInPixel = $footer.outerHeight() + $nav.outerHeight()
+    const contentHeightInVH = 100 - convertPXToVH(edgeHeightInPixel)
+    $('#page-content').css('min-height', contentHeightInVH + 'vh');
+}
+
 function getCurrentIndex(lastIndex) {
     const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
     return getValue(currentIndexInStorage, lastIndex);
@@ -294,10 +306,6 @@ const initialize = () => {
         $nextBtn.addClass('d-none');
         $reRecordBtn.addClass('d-none');
         $startRecordRow.removeClass('d-none');
-        if ($("#page-content").height() > $(window).height()){
-            $footer.removeClass('fixed-bottom');
-            $footer.addClass('bottom');
-        }
     });
 
     function incrementCurrentIndex() {
@@ -391,12 +399,13 @@ $(document).ready(() => {
         const localSentencesParsed = JSON.parse(localSentences);
         const localCount = Number(localStorage.getItem(countKey));
 
-        if ($("#page-content").height() > $(window).height()){
-            $footer.removeClass('fixed-bottom');
-            $footer.addClass('bottom');
-        }
+        setPageContentHeight();
+
         $instructionModal.on('hidden.bs.modal', function () {
             $pageContent.removeClass('d-none');
+            $footer.removeClass('fixed-bottom');
+            $footer.addClass('bottom');
+            $footer.css("bottom", "0")
         });
 
         $errorModal.on('show.bs.modal', function () {
