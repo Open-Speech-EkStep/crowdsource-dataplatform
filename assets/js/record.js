@@ -294,6 +294,10 @@ const initialize = () => {
         $nextBtn.addClass('d-none');
         $reRecordBtn.addClass('d-none');
         $startRecordRow.removeClass('d-none');
+        if ($("#page-content").height() > $(window).height()){
+            $footer.removeClass('fixed-bottom');
+            $footer.addClass('bottom');
+        }
     });
 
     function incrementCurrentIndex() {
@@ -387,11 +391,14 @@ $(document).ready(() => {
         const localSentencesParsed = JSON.parse(localSentences);
         const localCount = Number(localStorage.getItem(countKey));
 
-        $instructionModal.on('hidden.bs.modal', function () {
-            $pageContent.removeClass('d-none');
+        if ($("#page-content").height() > $(window).height()){
             $footer.removeClass('fixed-bottom');
             $footer.addClass('bottom');
+        }
+        $instructionModal.on('hidden.bs.modal', function () {
+            $pageContent.removeClass('d-none');
         });
+
         $errorModal.on('show.bs.modal', function () {
             $instructionModal.modal('hide');
         });
