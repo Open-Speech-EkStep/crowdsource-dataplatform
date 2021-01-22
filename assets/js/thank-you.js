@@ -6,6 +6,14 @@ const localSpeakerData = localStorage.getItem(speakerDetailsKey);
 const localSpeakerDataParsed = JSON.parse(localSpeakerData);
 const $footer = $('footer');
 
+function setPageContentHeight() {
+    const $footer = $('footer');
+    const $nav = $('.navbar');
+    const edgeHeightInPixel = $footer.outerHeight() + $nav.outerHeight()
+    const contentHeightInVH = 100 - (edgeHeightInPixel* (100 / document.documentElement.clientHeight));
+    $('#content-wrapper').css('min-height', contentHeightInVH + 'vh');
+}
+
 const setUserContribution = (totalSecondsContributed) => {
     const $userContribution = $('#user-contribution');
     const minutes = Math.floor(totalSecondsContributed / 60);
@@ -42,6 +50,8 @@ if (!(localSpeakerDataParsed)) {
 
     const $speakersDataHoursValue = $('#hour-value');
     const speakersDataKey = 'speakersData';
+
+    setPageContentHeight();
 
     setUserContribution(getTotalSecondsContributed());
 
