@@ -43,6 +43,18 @@ const setTotalSentenceIndex = (index) => {
     totalSentencesLbl.innerText = index;
 }
 
+const adjustTimeProgressBarHeight = ($footer) => {
+    const $timeProgress = $('#time-progress');
+    const footerHeight = $footer.outerHeight();
+    const timeProgressBottomInPx = $timeProgress.css('bottom');
+    const timeProgressBottomInNumber = Number(
+        timeProgressBottomInPx.substring(0, timeProgressBottomInPx.length - 2)
+    );
+    if (timeProgressBottomInNumber) {
+        $timeProgress.css('bottom', footerHeight + 'px');
+    }
+};
+
 const initialize = () => {
     const sentences = crowdSource.sentences;
     const $startRecordBtn = $('#startRecord');
@@ -85,17 +97,6 @@ const initialize = () => {
         placement: screen.availWidth > 900 ? 'right' : 'bottom',
     });
 
-    const adjustTimeProgressBarHeight = () => {
-        const $timeProgress = $('#time-progress');
-        const footerHeight = $footer.outerHeight();
-        const timeProgressBottomInPx = $timeProgress.css('bottom');
-        const timeProgressBottomInNumber = Number(
-            timeProgressBottomInPx.substring(0, timeProgressBottomInPx.length - 2)
-        );
-        if (timeProgressBottomInNumber) {
-            $timeProgress.css('bottom', footerHeight + 'px');
-        }
-    };
     const animateCSS = ($element, animationName, callback) => {
         $element.addClass(`animated ${animationName}`);
 
@@ -166,7 +167,7 @@ const initialize = () => {
         }
     };
 
-    adjustTimeProgressBarHeight();
+    adjustTimeProgressBarHeight($footer);
 
     setSentenceText(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
