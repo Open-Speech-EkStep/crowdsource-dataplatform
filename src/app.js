@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 const { uploadFile } = require("./uploader");
 const helmet = require('helmet')
 const express = require('express');
@@ -19,10 +19,10 @@ const {
   validateUserInputAndFile,
   validateUserInfo,
 } = require('./middleware/validateUserInputs');
-const Ddos = require('ddos');
-const ddos = new Ddos({ burst: 6, limit: 30 })
-app.use(ddos.express);
-app.enable('trust proxy');
+// const Ddos = require('ddos');
+// const ddos = new Ddos({ burst: 6, limit: 30 })
+// app.use(ddos.express);
+// app.enable('trust proxy');
 
 // const privateKey = fs.readFileSync('./vakyansh.key', 'utf8');
 // const certificate = fs.readFileSync('./vakyansh_in.crt', 'utf8');
@@ -108,6 +108,10 @@ router.get('/getAllInfo/:language', async function (req, res) {
     console.log(err);
     res.sendStatus(500);
   }
+});
+
+router.get('/validator/promp-page', (req, res) => {
+  res.render('validator-promp-page.ejs');
 });
 
 router.get('/about-us', function (req, res) {
