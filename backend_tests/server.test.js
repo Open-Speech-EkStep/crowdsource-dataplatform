@@ -31,7 +31,7 @@ describe("Test the root path", () => {
 
     test("It should response the GET method for validator-prompt-page", async () => {
         await request(app)
-            .get("/validator/promp-page")
+            .get("/validator/prompt-page")
             .expect(200);
     });
 

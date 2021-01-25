@@ -110,7 +110,7 @@ router.get('/getAllInfo/:language', async function (req, res) {
   }
 });
 
-router.get('/validator/promp-page', (req, res) => {
+router.get('/validator/prompt-page', (req, res) => {
   res.render('validator-promp-page.ejs');
 });
 
