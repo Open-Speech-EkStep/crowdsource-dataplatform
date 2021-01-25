@@ -111,7 +111,7 @@ router.get('/getAllInfo/:language', async function (req, res) {
 });
 
 router.get('/validator/prompt-page', (req, res) => {
-  res.render('validator-promp-page.ejs');
+  res.render('validator-prompt-page.ejs');
 });
 
 router.get('/about-us', function (req, res) {
