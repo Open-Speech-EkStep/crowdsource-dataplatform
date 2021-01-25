@@ -6,7 +6,10 @@ const {
     testUserName,
     fetchDetail,
     validateUserName,
-    resetSpeakerDetails
+    resetSpeakerDetails,
+    setUserNameTooltip,
+    setStartRecordBtnToolTipContent,
+    setSpeakerDetails
 } = require('../assets/js/home');
 const {readFileSync} = require('fs');
 const {stringToHTML, flushPromises} = require('./utils');
@@ -36,17 +39,19 @@ describe('updateLanguage', () => {
         updateLanguage(language);
         flushPromises().then(() => {
             expect(speakerValue.innerHTML).toEqual('7');
+            fetchMock.reset();
             done();
         });
     });
 });
 
-describe('Fetch Details', () => {
+describe('fetchDetails', () => {
     test('should give details for given language if server responds ok', () => {
-        const language = 'Hindi'
-        fetchMock.get(`getDetails/${language}`, {count: 5}, {overwriteRoutes: true});
+        const language = 'Hindi';
+        fetchMock.get(`getDetails/${language}`, {count: 5});
         fetchDetail(language).then((data) => {
             expect(data).toEqual({count: 5});
+            fetchMock.reset();
         });
     });
 });
@@ -137,3 +142,70 @@ describe('Reset Speaker Details', () => {
         expect(selectedGender).toBeNull()
     })
 });
+
+
+describe('setUserNameTooltip', () => {
+    test("should make tooltip enable and add show class when userName's length is more than 11", () => {
+        const $userName = $('#username');
+        $userName.tooltip = (e) => {
+        };
+        jest.spyOn($userName, 'val').mockReturnValue("abcdeUserName");
+        jest.spyOn($userName, 'tooltip');
+        setUserNameTooltip($userName);
+        expect($userName.val).toBeCalledTimes(1);
+        expect($userName.tooltip).toBeCalledTimes(2);
+        expect($userName.tooltip).toBeCalledWith("enable");
+        expect($userName.tooltip).toBeCalledWith("show");
+        fetchMock.reset();
+    });
+
+    test("should make tooltip disable and add hide class when userName's length is less or equal to 11", () => {
+        const $userName = $('#username');
+        $userName.tooltip = (e) => {
+        };
+        jest.spyOn($userName, 'val').mockReturnValue("UserName");
+        jest.spyOn($userName, 'tooltip');
+        setUserNameTooltip($userName);
+        expect($userName.val).toBeCalledTimes(1);
+        expect($userName.tooltip).toBeCalledTimes(2);
+        expect($userName.tooltip).toBeCalledWith("disable");
+        expect($userName.tooltip).toBeCalledWith("hide");
+        fetchMock.reset();
+    });
+});
+
+describe('setStartRecordBtnToolTipContent', () => {
+    test("should add attributes for agreeing T&C to $startRecordBtnTooltip when userName is valid", () => {
+        const $startRecordBtnTooltip = $('#proceed-box').parent();
+        jest.spyOn($startRecordBtnTooltip, 'attr');
+        setStartRecordBtnToolTipContent("abcdeUserName", $startRecordBtnTooltip);
+        expect($startRecordBtnTooltip.attr).toBeCalledTimes(1);
+        expect($startRecordBtnTooltip.attr).toBeCalledWith('data-original-title', 'Please agree to the Terms and Conditions before proceeding');
+        fetchMock.reset();
+    });
+
+    test("should add attributes with error msg to $startRecordBtnTooltip when userName is invalid", () => {
+        const $startRecordBtnTooltip = $('#proceed-box').parent();
+        jest.spyOn($startRecordBtnTooltip, 'attr');
+        setStartRecordBtnToolTipContent("abc@gmail.com", $startRecordBtnTooltip);
+        expect($startRecordBtnTooltip.attr).toBeCalledTimes(1);
+        expect($startRecordBtnTooltip.attr).toBeCalledWith('data-original-title', 'Please validate any error message before proceeding');
+        fetchMock.reset();
+    });
+})
+
+describe('setSpeakerDetails', () => {
+    test("should set Speakers details on homePage when speakerDetailsValue is present in localStorage", (done) => {
+        const age = document.getElementById('age');
+        const motherTongue = document.getElementById('mother-tongue');
+        const $userName = $('#username');
+        localStorage.setItem('speakerDetails',JSON.stringify({age:"0-5", motherTongue:"Hindi", userName:"abcdeUsername"}) );
+        setSpeakerDetails("speakerDetails", age, motherTongue, $userName);
+        flushPromises().then(() => {
+            expect($userName.val()).toEqual("abcdeUsernam"); //trimmed username 0-12 chars only
+            fetchMock.reset();
+            done();
+        });
+    });
+
+})
