@@ -1,11 +1,11 @@
-const showInstructions = ()=>{
-    const $instructionModal = $('#validator-instructions-modal');
+const showInstructions = ($instructionModal)=>{
     $instructionModal.modal('show');
 }
 
 $(document).ready(()=>{
-    $("#instructions-link").on('click',showInstructions);
-    showInstructions()
+    const $instructionModal = $('#validator-instructions-modal');
+    $("#instructions-link").on('click',()=>showInstructions($instructionModal));
+    showInstructions($instructionModal)
 });
 
 module.exports = {showInstructions}

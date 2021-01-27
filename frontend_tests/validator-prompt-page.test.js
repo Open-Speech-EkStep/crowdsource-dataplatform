@@ -11,18 +11,27 @@ describe('showInstructions', () => {
     test('should show Instructions pop-up', () => {
         const $instructionModal = $('#validator-instructions-modal');
         $instructionModal.modal = (e)=>{};
-        const spy =  jest.spyOn($instructionModal, 'modal');
-        // showInstructions();
-        // expect(spy.modal).toBeCalledTimes(1);
+        jest.spyOn($instructionModal, 'modal');
+
+        showInstructions($instructionModal);
+
+        expect($instructionModal.modal).toBeCalledTimes(1);
+        expect($instructionModal.modal).toBeCalledWith('show');
+        jest.clearAllMocks();
     });
 });
 
-describe('onClick', () => {
-    test('should show Instructions pop-up on click instructions link', () => {
-
-        document.getElementById('instructions-link').click()
-        // expect(spy.showInstructions).toBeCalledTimes(1);
-
-    });
-});
+// describe('onClick', () => {
+//     test('should show Instructions pop-up on click instructions link', () => {
+//         const $instructionModal = $('#validator-instructions-modal');
+//         $instructionModal.modal = (e)=>{};
+//         jest.spyOn($instructionModal, 'modal');
+//
+//         // document.getElementById('instructions-link').click();
+//
+//         // expect($instructionModal.modal).toBeCalledTimes(1);
+//         // expect($instructionModal.modal).toBeCalledWith('show');
+//
+//     });
+// });
 
