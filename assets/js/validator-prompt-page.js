@@ -3,7 +3,10 @@ const showInstructions = ()=>{
     $instructionModal.modal('show');
 }
 
-$(document).ready(showInstructions);
+$(document).ready(()=>{
+    $("#instructions").on('click',showInstructions);
+    showInstructions()
+});
 
 module.exports = {showInstructions}
 
