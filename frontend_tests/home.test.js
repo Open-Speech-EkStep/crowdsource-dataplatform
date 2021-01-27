@@ -170,7 +170,6 @@ describe('setUserNameTooltip', () => {
         expect($userName.tooltip).toBeCalledTimes(2);
         expect($userName.tooltip).toBeCalledWith("disable");
         expect($userName.tooltip).toBeCalledWith("hide");
-        fetchMock.reset();
     });
 });
 
