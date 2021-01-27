@@ -1,11 +1,7 @@
-const showInstructions = ($instructionModal)=>{
-    $instructionModal.modal('show');
-}
+const {showInstructions} = require('./validator-instructions')
 
 $(document).ready(()=>{
-    const $instructionModal = $('#validator-instructions-modal');
-    $("#instructions-link").on('click',()=>showInstructions($instructionModal));
-    showInstructions($instructionModal)
+    showInstructions()
 });
 
-module.exports = {showInstructions}
+$("#instructions-link").on('click', showInstructions);
