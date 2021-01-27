@@ -4,9 +4,8 @@ const showInstructions = ()=>{
 }
 
 $(document).ready(()=>{
-    $("#instructions").on('click',showInstructions);
+    $("#instructions-link").on('click',showInstructions);
     showInstructions()
 });
 
 module.exports = {showInstructions}
-
