@@ -12,6 +12,6 @@ const decideToShowPopUp = () => {
 
 $(document).ready(decideToShowPopUp);
 
-$("#instructions-link").on('click', showInstructions);
+$("#instructions-link").on('click', ()=>showInstructions());
 
 module.exports = {decideToShowPopUp};
