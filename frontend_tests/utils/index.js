@@ -5,7 +5,7 @@ const stringToHTML = function (str) {
 };
 
 const localStorageMock = (function () {
-    const store = {};
+    let store = {};
     return {
         getItem: function (key) {
             return store[key];
@@ -13,6 +13,9 @@ const localStorageMock = (function () {
         setItem: function (key, value) {
             store[key] = value.toString();
         },
+        clear: function () {
+            store = {}
+        }
     };
 })();
 
