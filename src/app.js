@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 const { uploadFile } = require("./uploader");
 const helmet = require('helmet')
 const express = require('express');
@@ -20,7 +20,7 @@ const {
   validateUserInfo,
 } = require('./middleware/validateUserInputs');
 const Ddos = require('ddos');
-const ddos = new Ddos({ burst: 6, limit: 30 })
+const ddos = new Ddos({ burst: 8, limit: 50 })
 app.use(ddos.express);
 app.enable('trust proxy');
 
@@ -70,8 +70,8 @@ app.use(function (req, res, next) {
     if (cookie === undefined) {
         res.cookie('userId', uuidv4(), {
             maxAge: ONE_YEAR,
-            // httpOnly: true,
-            // secure: true
+            httpOnly: true,
+            secure: true
         });
     }
     next();
