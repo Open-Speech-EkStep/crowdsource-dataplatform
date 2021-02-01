@@ -80,6 +80,8 @@ workflows:
                           - master
           - run_functional_tests:
                 name: test
+                requires:
+                    - deploy_test
           - approve_for_prod_deploy:
                 type: approval
                 requires:
