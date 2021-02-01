@@ -119,11 +119,16 @@ step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio butto
 });
 
 step("Hover on the Lets Go button should give some message", async function() {
-    await taiko.waitFor(2000)
-    await hover(button({id:'proceed-box'}))
-    assert.ok(await taiko.text('Please agree to the Terms and Conditions before proceeding').exists())
-    
+    // await button({id:'proceed-box'}).exists()
+    await hover("LET'S GO")
+    await taiko.text('Please agree to the Terms and Conditions before proceeding').exists()
 });
+
+// // Insert step text below as first parameter
+// step("", async function() {
+// 	await hover(button({id:'proceed-box'}));
+// 	await text('Please agree to the Terms and Conditions before proceeding').exists();
+// });
 
 step("if a user enter username and click on Not you change user button , the field should be cleared", async function() {
     const usernameFiled = taiko.textBox({id:'username'})
