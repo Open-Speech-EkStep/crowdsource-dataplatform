@@ -21,6 +21,15 @@ commands:
                   rm ${HOME}/gcp-key.json
                   rm app.yaml
 jobs:
+    run_functional_tests:
+        executor:
+            name: node/default
+        steps:
+            - checkout
+            - node/install-packages
+            - run: 
+                name: Gauge tests
+                command: npm run functional_test
     deploy:
         parameters:
             env_name:
@@ -69,6 +78,8 @@ workflows:
                     branches:
                         only:
                           - master
+          - run_functional_tests:
+                name: test
           - approve_for_prod_deploy:
                 type: approval
                 requires:
