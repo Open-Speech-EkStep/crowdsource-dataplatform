@@ -22,6 +22,10 @@ const setAudioPlayer = function () {
     const pause = $('#pause');
     const replay = $('#replay');
 
+    const skipButton = $("#skip_button");
+    const likeButton =  $("#like_button");
+    const dislikeButton = $("#dislike_button");
+
     play.on('click', playAudio);
     pause.on('click', pauseAudio);
     replay.on('click', replayAudio);
@@ -29,6 +33,12 @@ const setAudioPlayer = function () {
     function playAudio() {
         play.addClass('d-none');
         pause.removeClass('d-none');
+        skipButton.children().removeAttr("opacity")
+        skipButton.removeAttr("disabled")
+        likeButton.children().removeAttr("opacity")
+        likeButton.removeAttr("disabled")
+        dislikeButton.children().removeAttr("opacity")
+        dislikeButton.removeAttr("disabled")
         myAudio.play();
     }
 
@@ -67,27 +77,40 @@ function setSentenceLabel(index) {
     animateCSS($sentenceLabel, 'lightSpeedIn');
 }
 
-function getNextSentence() {
+function getNextSentence(color) {
+    document.getElementById(`rect_${currentIndex + 1}`).setAttribute("fill",color);
     if (currentIndex < sampleSentences.length - 1) {
         currentIndex++;
         setSentenceLabel(currentIndex);
     }
 }
 
-$('#skip_button').on('click', getNextSentence)
+$('#skip_button').on('click', ()=> {
+    getNextSentence("#CCCCCC");
+} )
 
 $('#dislike_button').on('click', () => {
-    getNextSentence();
+    const dislikeButton = $("#dislike_button");
+    const children = dislikeButton.children().children();
+    children[0].setAttribute("fill","#007BFF");
+    children[1].setAttribute("fill","white");
+    children[2].setAttribute("fill","white");
+    getNextSentence("#ccebff");
 })
 
 $('#like_button').on('click', () => {
-    getNextSentence();
+    const likeButton =  $("#like_button");
+    const children = likeButton.children().children();
+    children[0].setAttribute("fill","#007BFF");
+    children[1].setAttribute("fill","white");
+    children[2].setAttribute("fill","white");
+
+    getNextSentence("#007BFF");
 })
 
 $(document).ready(() => {
     decideToShowPopUp();
     setAudioPlayer();
-    drawStraightLine();
     setSentenceLabel(currentIndex)
 });
 
