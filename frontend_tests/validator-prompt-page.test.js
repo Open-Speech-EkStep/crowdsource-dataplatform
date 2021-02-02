@@ -12,6 +12,8 @@ jest.mock('../assets/js/validator-instructions', () => ({
 }))
 
 
+const {decideToShowPopUp, setSentenceLabel, setAudioPlayer} = require('../assets/js/validator-prompt-page');
+
 describe('onClick instructions-link', () => {
     test('should show Instructions pop-up when link is clicked', () => {
 
@@ -24,7 +26,6 @@ describe('onClick instructions-link', () => {
 });
 
 describe('onReady prompt-page', () => {
-    const {decideToShowPopUp, setAudioPlayer} = require('../assets/js/validator-prompt-page');
 
     describe('decideToShowPopUp', () => {
         mockLocalStorage();
@@ -102,3 +103,31 @@ describe('onReady prompt-page', () => {
 
     })
 });
+
+describe('Display Sentence in label', () => {
+    test('should initially set text of sentence label', () => {
+        setSentenceLabel(0);
+
+        const actualText = document.getElementById('sentenceLabel').innerText
+
+        expect(actualText).toBe('Sentence 1')
+    })
+
+    test('should update text of sentence label when skip clicked once', () => {
+        document.getElementById('skip_button').click()
+
+        const actualText = document.getElementById('sentenceLabel').innerText
+
+        expect(actualText).toBe('Sentence 2')
+    })
+
+    test('should update text of sentence label when skip clicked N times', () => {
+        const number = 2;
+        for (let i = 0; i < number; ++i)
+            document.getElementById('skip_button').click();
+
+        const actualText = document.getElementById('sentenceLabel').innerText
+
+        expect(actualText).toBe('Sentence 3')
+    })
+})
