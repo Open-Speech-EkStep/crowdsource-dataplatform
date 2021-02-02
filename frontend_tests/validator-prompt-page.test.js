@@ -91,6 +91,7 @@ describe('onReady prompt-page', () => {
         test('should replay audio when replay button is clicked', () => {
             const myAudio = document.getElementById('my-audio');
             myAudio.play = ()=>{};
+            myAudio.load = ()=>{};
             const pause = $('#pause');
             const replay = $('#replay');
 
