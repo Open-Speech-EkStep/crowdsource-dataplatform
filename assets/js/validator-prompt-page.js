@@ -56,8 +56,9 @@ const setAudioPlayer = function () {
     }
 }
 
-const sampleSentences = ['Sentence 1', 'Sentence 2', 'Sentence 3']
-let currentIndex = 0
+const sampleSentences = ['Sentence 1', 'Sentence 2', 'Sentence 3'];
+let currentIndex = 0;
+let progressCount = 0;
 
 const animateCSS = ($element, animationName, callback) => {
     $element.addClass(`animated ${animationName}`);
@@ -77,8 +78,7 @@ function setSentenceLabel(index) {
     animateCSS($sentenceLabel, 'lightSpeedIn');
 }
 
-function getNextSentence(color) {
-    document.getElementById(`rect_${currentIndex + 1}`).setAttribute("fill",color);
+function getNextSentence() {
     if (currentIndex < sampleSentences.length - 1) {
         currentIndex++;
         resetDecisionRow();
@@ -87,26 +87,33 @@ function getNextSentence(color) {
 }
 
 $('#skip_button').on('click', ()=> {
-    getNextSentence("#CCCCCC");
+    getNextSentence();
 } )
+
+const updateDecisionButton = (button, colors)=>{
+    const children = button.children().children();
+    children[0].setAttribute("fill",colors[0]);
+    children[1].setAttribute("fill",colors[1]);
+    children[2].setAttribute("fill",colors[2]);
+}
+
+const updateProgressBar = (color)=>{
+    progressCount++;
+    document.getElementById(`rect_${progressCount}`).setAttribute("fill", color);
+}
 
 $('#dislike_button').on('click', () => {
     const dislikeButton = $("#dislike_button");
-    const children = dislikeButton.children().children();
-    children[0].setAttribute("fill","#007BFF");
-    children[1].setAttribute("fill","white");
-    children[2].setAttribute("fill","white");
-    getNextSentence("#ccebff");
+    updateDecisionButton(dislikeButton, ["#007BFF","white","white"]);
+    updateProgressBar("#ccebff");
+    getNextSentence();
 })
 
 $('#like_button').on('click', () => {
     const likeButton =  $("#like_button");
-    const children = likeButton.children().children();
-    children[0].setAttribute("fill","#007BFF");
-    children[1].setAttribute("fill","white");
-    children[2].setAttribute("fill","white");
-
-    getNextSentence("#007BFF");
+    updateDecisionButton(likeButton, ["#007BFF","white","white"]);
+    updateProgressBar("#007BFF");
+    getNextSentence();
 })
 
 $(document).ready(() => {
@@ -128,16 +135,10 @@ $('#validator-instructions-modal').on('show.bs.modal', function () {
 
 function resetDecisionRow(){
     const dislikeButton = $("#dislike_button");
-    const dislikeBtnChildren = dislikeButton.children().children();
-    dislikeBtnChildren[0].setAttribute("fill","white");
-    dislikeBtnChildren[1].setAttribute("fill","#007BFF");
-    dislikeBtnChildren[2].setAttribute("fill","#343A40");
-
     const likeButton =  $("#like_button");
-    const likeBtnChildren = likeButton.children().children();
-    likeBtnChildren[0].setAttribute("fill","white");
-    likeBtnChildren[1].setAttribute("fill","#007BFF");
-    likeBtnChildren[2].setAttribute("fill","#343A40");
+
+    updateDecisionButton(dislikeButton, ["white","#007BFF","#343A40"]);
+    updateDecisionButton(likeButton, ["white","#007BFF","#343A40"]);
 
     const skipButton = $("#skip_button");
     skipButton.children().attr("opacity","50%");
