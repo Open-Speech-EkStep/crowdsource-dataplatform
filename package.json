@@ -8,7 +8,8 @@
     "watch": "nodemon src/server.js",
     "start-cluster": "pm2 start src/server.js -i 2",
     "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest",
-    "gulp": "gulp"
+    "gulp": "gulp",
+    "functional_test": "cd functional_tests && npm i && gauge run specs/Vakyansh.spec"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/ekstep2/ektep-crowdsource-platform#readme",
   "dependencies": {
+    "@getgauge/cli": "^1.1.7",
     "@google-cloud/storage": "^4.7.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",

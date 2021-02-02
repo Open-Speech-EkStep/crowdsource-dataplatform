@@ -21,6 +21,19 @@ commands:
                   rm ${HOME}/gcp-key.json
                   rm app.yaml
 jobs:
+    run_functional_tests:
+        executor:
+            name: node/default
+        steps:
+            - checkout
+            - node/install-packages
+            - run: 
+                name: Gauge tests
+                command: |
+                  sudo apt-get update
+                  sudo apt-get install -y git-all gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libgbm-dev libappindicator1 libnss3 lsb-release xdg-utils wget
+                  sudo rm -rf /var/lib/apt/lists/*
+                  npm run functional_test
     deploy:
         parameters:
             env_name:
@@ -60,22 +73,25 @@ workflows:
           - node/test:
                 version: "13.4"
           - deploy:
-                name: deploy_test
-                env_name: test
-                sh_file: app_yaml_test.sh
-                requires:
-                  - node/test
-                filters: 
-                    branches:
-                        only:
-                          - master
+               name: deploy_test
+               env_name: test
+               sh_file: app_yaml_test.sh
+               requires:
+                 - node/test
+          - run_functional_tests:
+                 requires:
+                   - deploy_test
           - approve_for_prod_deploy:
                 type: approval
                 requires:
-                  - deploy_test
+                   - deploy_test
           - deploy:
                 name: deploy_prod
                 env_name: prod
                 sh_file: app_yaml_prod.sh
                 requires:
                   - approve_for_prod_deploy
+                filters:
+                  branches:
+                    only:
+                      - master
