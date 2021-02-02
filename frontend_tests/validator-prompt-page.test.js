@@ -57,6 +57,7 @@ describe('onReady prompt-page', () => {
 
             decideToShowPopUp();
             expect(localStorage.getItem('validatorDetails')).toEqual(JSON.stringify({priyanshu: "priyanshu"}));
+
             expect(showInstructions).toBeCalledTimes(1);
         });
     });
@@ -103,32 +104,34 @@ describe('onReady prompt-page', () => {
         });
 
     })
+
+    describe('displaySentenceLabel', () => {
+        test('should initially set text of sentence label', () => {
+            setSentenceLabel(0);
+
+            const actualText = document.getElementById('sentenceLabel').innerText
+
+            expect(actualText).toBe('Sentence 1')
+        })
+
+        test('should update text of sentence label when skip clicked once', () => {
+            $('#skip_button').click()
+
+            const actualText = document.getElementById('sentenceLabel').innerText
+
+            expect(actualText).toBe('Sentence 2')
+        })
+
+        test('should update text of sentence label when skip clicked N times', () => {
+            const number = 2;
+            for (let i = 0; i < number; ++i)
+                $('#skip_button').click();
+
+            const actualText = document.getElementById('sentenceLabel').innerText
+
+            expect(actualText).toBe('Sentence 3')
+        })
+    })
+
 });
 
-describe('Display Sentence in label', () => {
-    test('should initially set text of sentence label', () => {
-        setSentenceLabel(0);
-
-        const actualText = document.getElementById('sentenceLabel').innerText
-
-        expect(actualText).toBe('Sentence 1')
-    })
-
-    test('should update text of sentence label when skip clicked once', () => {
-        document.getElementById('skip_button').click()
-
-        const actualText = document.getElementById('sentenceLabel').innerText
-
-        expect(actualText).toBe('Sentence 2')
-    })
-
-    test('should update text of sentence label when skip clicked N times', () => {
-        const number = 2;
-        for (let i = 0; i < number; ++i)
-            document.getElementById('skip_button').click();
-
-        const actualText = document.getElementById('sentenceLabel').innerText
-
-        expect(actualText).toBe('Sentence 3')
-    })
-})
