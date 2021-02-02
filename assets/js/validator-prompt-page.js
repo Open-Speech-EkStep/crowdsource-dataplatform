@@ -112,6 +112,7 @@ $(document).ready(() => {
     decideToShowPopUp();
     setAudioPlayer();
     setSentenceLabel(currentIndex)
+    drawStraightLine();
 });
 
 $("#instructions-link").on('click', () => showInstructions());
@@ -155,13 +156,13 @@ $('#validator-instructions-modal').on('show.bs.modal', function () {
 //     canvasCtx.stroke();
 // }
 
-// const drawStraightLine = () => {
-//     const canvas = document.getElementById("myCanvas");
-//     const canvasCtx = canvas.getContext("2d");
-//     canvasCtx.moveTo(0, canvas.height/2);
-//     canvasCtx.lineTo(canvas.width, canvas.height/2);
-//     canvasCtx.strokeStyle = 'rgb(0,123,255)';
-//     canvasCtx.stroke();
-// }
+const drawStraightLine = () => {
+    const canvas = document.getElementById("myCanvas");
+    const canvasCtx = canvas.getContext("2d");
+    canvasCtx.moveTo(0, canvas.height/2);
+    canvasCtx.lineTo(canvas.width, canvas.height/2);
+    canvasCtx.strokeStyle = 'rgb(0,123,255)';
+    canvasCtx.stroke();
+}
 
 module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer};
