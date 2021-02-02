@@ -29,16 +29,6 @@
 * Hover on the Lets Go button should give some message
 * Once user agree to terms and conditions Lets Go the button should be enabled
 
-## Validate Admin Login
-* When user clicks on the "Admin Login" button
-* user should see the Sign In pop up
-* When user clicks on cross button, pop up should be closed
-
-## Validate Validator Login
-* When user clicks on the Are you a validator button
-* user should see the Sign In pop up
-* When user clicks on cross button, pop up should be closed
-
 ## Validate Recording flow
 * When user selects "Hindi" language and click on start recording button
 * And User enter random Username and selects Age , Mother tongue ,gender

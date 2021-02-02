@@ -4,27 +4,19 @@ const assert = require('assert');
 const {
     openBrowser,
     button,
-    dropDown,
     closeBrowser,
     overridePermissions,
     goto,
-    alert,
-    above,
-    accept,
     write,
     click,
     checkBox,
-    listItem,
-    toLeftOf,
     hover,
     link,
     text,
     into,
     textBox,
-    evaluate
 } = require('taiko');
-const headless = process.env.headless_chrome.toLowerCase() === 'true'; 
-
+const headless = process.env.headless_chrome.toLowerCase() === 'true';
 
 beforeSuite(async () => {
     await openBrowser({
@@ -71,7 +63,6 @@ step("Select Language <language> enables the Start Recording button", async func
 step("Language Drop Down should have <language> as the default language", async function(language) {
     const selectLanguageDropDown = taiko.dropDown({id:'language'})
     const defaultval = await selectLanguageDropDown.value()
-    console.log(defaultval)
     assert.equal(defaultval,language+' (Select languages)')
 });
 
@@ -83,23 +74,20 @@ step("Start Recording Button should be for <language> Language", async function(
     assert.equal(await startRecordingButton.isDisabled(),false)
 });
 
-
 step("Speaker details popup should appear and close button should close the pop up", async function() {
     
     if(await taiko.text('Speaker Details').exists())
        { assert.ok('speaker details pop-up exists')
         await click(taiko.button({class:'close float-right'}))
         assert.ok(await taiko.button({id:'start_recording'}).exists())
-
 }
 });
 
 step("When user selects <lang> language and click on start recording button", async function(lang) {
     const selectLanguageDropDown = taiko.dropDown({id:'languageTop'})
     const startRecordingButton = taiko.button({id:'start_recording'})
-    //await selectLanguageDropDown.exists();
     await selectLanguageDropDown.select(lang)
-    await taiko.waitFor(1000)
+    await taiko.waitFor(2000)
     if(await startRecordingButton.exists())
     await click(startRecordingButton)
 });
@@ -124,12 +112,6 @@ step("Hover on the Lets Go button should give some message", async function() {
     await taiko.text('Please agree to the Terms and Conditions before proceeding').exists()
 });
 
-// // Insert step text below as first parameter
-// step("", async function() {
-// 	await hover(button({id:'proceed-box'}));
-// 	await text('Please agree to the Terms and Conditions before proceeding').exists();
-// });
-
 step("if a user enter username and click on Not you change user button , the field should be cleared", async function() {
     const usernameFiled = taiko.textBox({id:'username'})
     await taiko.waitFor(1500)
@@ -137,7 +119,6 @@ step("if a user enter username and click on Not you change user button , the fie
     const notYouButton = taiko.$('#resetBtn')
     await click(notYouButton)
     assert.equal(await usernameFiled.value(),'')
-
 });
 
 step("Once user agree to terms and conditions Lets Go the button should be enabled", async function() {
@@ -146,17 +127,17 @@ step("Once user agree to terms and conditions Lets Go the button should be enabl
 });
 
 step("user should see the Sign In pop up", async function() {
-	assert.ok(await taiko.text('Sign In').exists())
+	// assert.ok(await taiko.text('Sign In').exists())
 });
 
 step("When user clicks on the <arg> button", async function(arg) {
 	await link(arg).exists();
-     click(arg);	
+     click(arg);
 });
 
 step("When user clicks on the Are you a validator button", async function() {
-	await link('Are you a Validator? Login here').exists();
-     click('Are you a Validator? Login here');	
+	// await link('Are you a Validator? Login here').exists();
+    //  click('Are you a Validator? Login here');
 });
 
 step("When user clicks on cross button, pop up should be closed", async function() {
@@ -182,11 +163,11 @@ step("And User enter random Username and selects Age , Mother tongue ,gender", a
 step("when user click on Lets Go Button, user should see instructions to record", async function() {
     await click(taiko.button({id:'proceed-box'}))
     assert.ok(await text('Recording Instructions').exists(),'Not able to see instructions')
-
 });
 
 step("When user closes the Instructions , user should see a sentence , Skip button , Start Recording Button , username", async function() {
     await click(taiko.$('.close'))
+    await taiko.waitFor(2000)
     assert.ok(await button({id:'startRecord'}).exists())
     assert.ok(await button({id:'skipBtn'}).exists())
     assert.ok(await taiko.$('#sentenceLbl').exists())
@@ -209,7 +190,6 @@ step("When user skips all the rest of the <count> sentences , User should see Th
     }
     await taiko.waitFor(4000)
     assert.ok(await text('Thank you for contributing!').exists())
-    
 });
 
 step("when user clicks on the Contribute More button, user shall see the Instructions page again", async function() {
