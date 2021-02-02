@@ -24,7 +24,6 @@
   "dependencies": {
     "@getgauge/cli": "^1.1.7",
     "@google-cloud/storage": "^4.7.0",
-    "chromium": "^3.0.2",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "crypto-js": "^4.0.0",
@@ -41,7 +40,6 @@
     "regenerator-runtime": "^0.13.7",
     "sinon": "^9.0.2",
     "supertest": "^4.0.2",
-    "taiko": "^1.1.0",
     "uuid": "^7.0.3"
   },
   "engines": {
