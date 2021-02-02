@@ -81,6 +81,7 @@ function getNextSentence(color) {
     document.getElementById(`rect_${currentIndex + 1}`).setAttribute("fill",color);
     if (currentIndex < sampleSentences.length - 1) {
         currentIndex++;
+        resetDecisionRow();
         setSentenceLabel(currentIndex);
     }
 }
@@ -124,6 +125,33 @@ $('#validator-instructions-modal').on('hidden.bs.modal', function () {
 $('#validator-instructions-modal').on('show.bs.modal', function () {
     $("#validator-page-content").addClass('d-none');
 });
+
+function resetDecisionRow(){
+    const dislikeButton = $("#dislike_button");
+    const dislikeBtnChildren = dislikeButton.children().children();
+    dislikeBtnChildren[0].setAttribute("fill","white");
+    dislikeBtnChildren[1].setAttribute("fill","#007BFF");
+    dislikeBtnChildren[2].setAttribute("fill","#343A40");
+
+    const likeButton =  $("#like_button");
+    const likeBtnChildren = likeButton.children().children();
+    likeBtnChildren[0].setAttribute("fill","white");
+    likeBtnChildren[1].setAttribute("fill","#007BFF");
+    likeBtnChildren[2].setAttribute("fill","#343A40");
+
+    const skipButton = $("#skip_button");
+    skipButton.children().attr("opacity","50%");
+    skipButton.attr("disabled","disabled");
+    likeButton.children().attr("opacity","50%");
+    likeButton.attr("disabled","disabled");
+    dislikeButton.children().attr("opacity","50%");
+    dislikeButton.attr("disabled","disabled");
+
+    $("#replay").addClass('d-none');
+    $("#play").removeClass('d-none');
+
+}
+
 
 // function drawVisualizer() {
 //     const canvas = document.getElementById("myCanvas");
