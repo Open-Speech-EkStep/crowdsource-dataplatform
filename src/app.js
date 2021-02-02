@@ -20,7 +20,7 @@ const {
   validateUserInfo,
 } = require('./middleware/validateUserInputs');
 const Ddos = require('ddos');
-const ddos = new Ddos({ burst: 8, limit: 50 })
+const ddos = new Ddos({ burst: 12, limit: 70 })
 app.use(ddos.express);
 app.enable('trust proxy');
 
