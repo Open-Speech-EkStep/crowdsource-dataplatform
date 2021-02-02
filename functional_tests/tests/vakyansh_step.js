@@ -163,6 +163,7 @@ step("And User enter random Username and selects Age , Mother tongue ,gender", a
 
 step("when user click on Lets Go Button, user should see instructions to record", async function() {
     await click(taiko.button({id:'proceed-box'}))
+    await taiko.waitFor(1500)
     assert.ok(await text('Recording Instructions').exists(),'Not able to see instructions')
 });
 
