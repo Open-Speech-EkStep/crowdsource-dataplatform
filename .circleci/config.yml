@@ -29,7 +29,10 @@ jobs:
             - node/install-packages
             - run: 
                 name: Gauge tests
-                command: npm run functional_test
+                command: |
+                  sudo apt-get update
+                  sudo apt-get install libnss3
+                  npm run functional_test
     deploy:
         parameters:
             env_name:
