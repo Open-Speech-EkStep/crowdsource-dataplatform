@@ -16,7 +16,39 @@ const decideToShowPopUp = () => {
     }
 }
 
-$(document).ready(decideToShowPopUp);
+const setAudioPlayer = function(){
+    const myAudio = document.getElementById('my-audio');
+    const play = $('#play');
+    const pause = $('#pause');
+    const replay = $('#replay');
+
+    play.on('click',playAudio);
+    pause.on('click',pauseAudio);
+    replay.on('click',replayAudio);
+
+    function playAudio() {
+        play.addClass('d-none');
+        pause.removeClass('d-none');
+        myAudio.play();
+    }
+
+    function pauseAudio() {
+        pause.addClass('d-none');
+        replay.removeClass('d-none');
+        myAudio.pause();
+    }
+
+    function replayAudio() {
+        replay.addClass('d-none');
+        pause.removeClass('d-none');
+        myAudio.play();
+    }
+}
+
+$(document).ready(()=>{
+    decideToShowPopUp();
+    setAudioPlayer();
+});
 
 $("#instructions-link").on('click', ()=>showInstructions());
 
@@ -29,4 +61,4 @@ $('#validator-instructions-modal').on('show.bs.modal', function () {
 });
 
 
-module.exports = {decideToShowPopUp};
+module.exports = {decideToShowPopUp, setAudioPlayer};
