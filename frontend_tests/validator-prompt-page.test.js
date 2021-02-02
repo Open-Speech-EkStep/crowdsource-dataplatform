@@ -7,7 +7,7 @@ document.body = stringToHTML(
 );
 
 
-jest.mock('../assets/js/validator-instructions', ()=>({
+jest.mock('../assets/js/validator-instructions', () => ({
     showInstructions: jest.fn()
 }))
 
@@ -24,36 +24,81 @@ describe('onClick instructions-link', () => {
 });
 
 describe('onReady prompt-page', () => {
-    const {decideToShowPopUp} = require('../assets/js/validator-prompt-page');
-    mockLocalStorage();
-    afterEach(()=>{
-        localStorage.clear();
-        jest.clearAllMocks();
+    const {decideToShowPopUp, setAudioPlayer} = require('../assets/js/validator-prompt-page');
+
+    describe('decideToShowPopUp', () => {
+        mockLocalStorage();
+        afterEach(() => {
+            localStorage.clear();
+            jest.clearAllMocks();
+        });
+
+        test('should show Instructions pop-up when validator visit to page first time', () => {
+
+            localStorage.setItem('validatorDetails', JSON.stringify({}));
+            localStorage.setItem('currentValidator', "abc");
+
+            decideToShowPopUp();
+            expect(showInstructions).toBeCalledTimes(1);
+        });
+
+        test('should not show Instructions pop-up when validator re-visit to page', () => {
+
+            localStorage.setItem('validatorDetails', JSON.stringify({xyz: "xyz"}));
+            localStorage.setItem('currentValidator', "xyz");
+
+            decideToShowPopUp();
+            expect(showInstructions).not.toBeCalled();
+        });
+
+        test('should show Instructions pop-up when validator visit to page first time and set validatorDetails if its null', () => {
+            localStorage.setItem('currentValidator', "priyanshu");
+
+            decideToShowPopUp();
+            expect(localStorage.getItem('validatorDetails')).toEqual(JSON.stringify({priyanshu: "priyanshu"}));
+            expect(showInstructions).toBeCalledTimes(1);
+        });
     });
 
-    test('should show Instructions pop-up when validator visit to page first time', () => {
+    describe("setAudioPlayer",()=>{
+        test('should start playing audio when play button is clicked', () => {
+            const myAudio = document.getElementById('my-audio');
+            myAudio.play = ()=>{};
+            const play = $('#play');
+            const pause = $('#pause');
 
-        localStorage.setItem('validatorDetails', JSON.stringify({}));
-        localStorage.setItem('currentValidator', "abc");
+            setAudioPlayer();
+            play.click();
 
-        decideToShowPopUp();
-        expect(showInstructions).toBeCalledTimes(1);
-    });
+            expect(play.hasClass("d-none")).toEqual(true);
+            expect(pause.hasClass("d-none")).toEqual(false);
+        });
 
-    test('should not show Instructions pop-up when validator re-visit to page', () => {
+        test('should pause audio when pause button is clicked', () => {
+            const myAudio = document.getElementById('my-audio');
+            myAudio.pause = ()=>{};
+            const pause = $('#pause');
+            const replay = $('#replay');
 
-        localStorage.setItem('validatorDetails', JSON.stringify({xyz:"xyz"}));
-        localStorage.setItem('currentValidator', "xyz");
+            setAudioPlayer();
+            pause.click();
 
-        decideToShowPopUp();
-        expect(showInstructions).not.toBeCalled();
-    });
+            expect(pause.hasClass("d-none")).toEqual(true);
+            expect(replay.hasClass("d-none")).toEqual(false);
+        });
 
-    test('should show Instructions pop-up when validator visit to page first time and set validatorDetails if its null', () => {
-        localStorage.setItem('currentValidator', "priyanshu");
+        test('should replay audio when replay button is clicked', () => {
+            const myAudio = document.getElementById('my-audio');
+            myAudio.play = ()=>{};
+            const pause = $('#pause');
+            const replay = $('#replay');
 
-        decideToShowPopUp();
-        expect(localStorage.getItem('validatorDetails')).toEqual(JSON.stringify({priyanshu:"priyanshu"}));
-        expect(showInstructions).toBeCalledTimes(1);
-    });
+            setAudioPlayer();
+            replay.click();
+
+            expect(replay.hasClass("d-none")).toEqual(true);
+            expect(pause.hasClass("d-none")).toEqual(false);
+        });
+
+    })
 });
