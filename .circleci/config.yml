@@ -74,14 +74,6 @@ workflows:
                 sh_file: app_yaml_test.sh
                 requires:
                   - node/test
-                filters: 
-                    branches:
-                        only:
-                          - master
-          - run_functional_tests:
-                name: test
-                requires:
-                    - deploy_test
           - approve_for_prod_deploy:
                 type: approval
                 requires:
@@ -92,3 +84,7 @@ workflows:
                 sh_file: app_yaml_prod.sh
                 requires:
                   - approve_for_prod_deploy
+                filters:
+                  branches:
+                    only:
+                      - master
