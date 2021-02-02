@@ -74,7 +74,9 @@ workflows:
                 sh_file: app_yaml_test.sh
                 requires:
                   - node/test
-          - run_functional_tests
+          - run_functional_tests:
+                requires:
+                  - deploy_test
           - approve_for_prod_deploy:
                 type: approval
                 requires:
