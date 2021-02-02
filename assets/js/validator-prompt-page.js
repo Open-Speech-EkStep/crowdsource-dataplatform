@@ -29,7 +29,6 @@ const setAudioPlayer = function () {
     function playAudio() {
         play.addClass('d-none');
         pause.removeClass('d-none');
-        drawVisualizer();
         myAudio.play();
     }
 
@@ -37,14 +36,12 @@ const setAudioPlayer = function () {
         pause.addClass('d-none');
         replay.removeClass('d-none');
         myAudio.pause();
-        drawStraightLine();
     }
 
     function replayAudio() {
         myAudio.load();
         replay.addClass('d-none');
         pause.removeClass('d-none');
-        drawVisualizer();
         myAudio.play();
     }
 }
@@ -104,44 +101,44 @@ $('#validator-instructions-modal').on('show.bs.modal', function () {
     $("#validator-page-content").addClass('d-none');
 });
 
-function drawVisualizer() {
-    const canvas = document.getElementById("myCanvas");
-    const canvasCtx = canvas.getContext('2d');
-    const WIDTH = canvas.width;
-    const HEIGHT = canvas.height;
-    const audioCtx = new AudioContext();
-    const analyser = audioCtx.createAnalyser();
+// function drawVisualizer() {
+//     const canvas = document.getElementById("myCanvas");
+//     const canvasCtx = canvas.getContext('2d');
+//     const WIDTH = canvas.width;
+//     const HEIGHT = canvas.height;
+//     const audioCtx = new AudioContext();
+//     const analyser = audioCtx.createAnalyser();
+//
+//     const bufferLength = analyser.frequencyBinCount;
+//     const dataArray = new Uint8Array(bufferLength);
+//     canvasCtx.fillStyle = 'rgb(255, 255, 255, 0.8)';
+//     canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+//     canvasCtx.lineWidth = 2;
+//     canvasCtx.strokeStyle = 'rgb(0,123,255)';
+//     canvasCtx.beginPath();
+//     const sliceWidth = (WIDTH * 1.0) / bufferLength;
+//     let x_coordinate = 0;
+//     for (let count = 0; count < bufferLength; count++) {
+//         const verticalHeight = dataArray[count] / 128.0; // uint8
+//         const y_coordinate = (verticalHeight * HEIGHT) / 2; // uint8
+//         if (count === 0) {
+//             canvasCtx.moveTo(x_coordinate, y_coordinate);
+//         } else {
+//             canvasCtx.lineTo(x_coordinate, y_coordinate);
+//         }
+//         x_coordinate += sliceWidth;
+//     }
+//     canvasCtx.lineTo(WIDTH, HEIGHT / 2);
+//     canvasCtx.stroke();
+// }
 
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-    canvasCtx.fillStyle = 'rgb(255, 255, 255, 0.8)';
-    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-    canvasCtx.lineWidth = 2;
-    canvasCtx.strokeStyle = 'rgb(0,123,255)';
-    canvasCtx.beginPath();
-    const sliceWidth = (WIDTH * 1.0) / bufferLength;
-    let x_coordinate = 0;
-    for (let count = 0; count < bufferLength; count++) {
-        const verticalHeight = dataArray[count] / 128.0; // uint8
-        const y_coordinate = (verticalHeight * HEIGHT) / 2; // uint8
-        if (count === 0) {
-            canvasCtx.moveTo(x_coordinate, y_coordinate);
-        } else {
-            canvasCtx.lineTo(x_coordinate, y_coordinate);
-        }
-        x_coordinate += sliceWidth;
-    }
-    canvasCtx.lineTo(WIDTH, HEIGHT / 2);
-    canvasCtx.stroke();
-}
-
-const drawStraightLine = () => {
-    const canvas = document.getElementById("myCanvas");
-    const canvasCtx = canvas.getContext("2d");
-    canvasCtx.moveTo(0, canvas.height/2);
-    canvasCtx.lineTo(canvas.width, canvas.height/2);
-    canvasCtx.strokeStyle = 'rgb(0,123,255)';
-    canvasCtx.stroke();
-}
+// const drawStraightLine = () => {
+//     const canvas = document.getElementById("myCanvas");
+//     const canvasCtx = canvas.getContext("2d");
+//     canvasCtx.moveTo(0, canvas.height/2);
+//     canvasCtx.lineTo(canvas.width, canvas.height/2);
+//     canvasCtx.strokeStyle = 'rgb(0,123,255)';
+//     canvasCtx.stroke();
+// }
 
 module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer};
