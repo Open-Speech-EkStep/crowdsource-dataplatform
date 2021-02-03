@@ -12,7 +12,12 @@ jest.mock('../assets/js/validator-instructions', () => ({
 }))
 
 
-const {decideToShowPopUp, setSentenceLabel, setAudioPlayer} = require('../assets/js/validator-prompt-page');
+const {
+    decideToShowPopUp,
+    setSentenceLabel,
+    setAudioPlayer,
+    drawStraightLine
+} = require('../assets/js/validator-prompt-page');
 
 describe('onClick instructions-link', () => {
     test('should show Instructions pop-up when link is clicked', () => {
@@ -57,14 +62,16 @@ describe('onReady prompt-page', () => {
 
             decideToShowPopUp();
             expect(localStorage.getItem('validatorDetails')).toEqual(JSON.stringify({priyanshu: "priyanshu"}));
+
             expect(showInstructions).toBeCalledTimes(1);
         });
     });
 
-    describe("setAudioPlayer",()=>{
+    describe("setAudioPlayer", () => {
         test('should start playing audio when play button is clicked', () => {
             const myAudio = document.getElementById('my-audio');
-            myAudio.play = ()=>{};
+            myAudio.play = () => {
+            };
             const play = $('#play');
             const pause = $('#pause');
 
@@ -77,7 +84,8 @@ describe('onReady prompt-page', () => {
 
         test('should pause audio when pause button is clicked', () => {
             const myAudio = document.getElementById('my-audio');
-            myAudio.pause = ()=>{};
+            myAudio.pause = () => {
+            };
             const pause = $('#pause');
             const replay = $('#replay');
 
@@ -90,7 +98,10 @@ describe('onReady prompt-page', () => {
 
         test('should replay audio when replay button is clicked', () => {
             const myAudio = document.getElementById('my-audio');
-            myAudio.play = ()=>{};
+            myAudio.play = () => {
+            };
+            myAudio.load = () => {
+            };
             const pause = $('#pause');
             const replay = $('#replay');
 
@@ -102,32 +113,50 @@ describe('onReady prompt-page', () => {
         });
 
     })
+
+    describe('displaySentenceLabel', () => {
+        test('should initially set text of sentence label', () => {
+            setSentenceLabel(0);
+
+            const actualText = document.getElementById('sentenceLabel').innerText
+
+            expect(actualText).toBe('Sentence 1')
+        })
+
+        test('should update text of sentence label when skip clicked once', () => {
+            $('#skip_button').click()
+
+            const actualText = document.getElementById('sentenceLabel').innerText
+
+            expect(actualText).toBe('Sentence 2')
+        })
+
+        test('should update text of sentence label when skip clicked N times', () => {
+            const number = 2;
+            for (let i = 0; i < number; ++i)
+                $('#skip_button').click();
+
+            const actualText = document.getElementById('sentenceLabel').innerText
+
+            expect(actualText).toBe('Sentence 3')
+        })
+    })
+
+    describe("drawStraightLine", () => {
+        test('should draw straight line in middle canvas', () => {
+            const canvas = document.getElementById("myCanvas");
+            canvas.getContext = (e) => {
+                return  {
+                    moveTo:(a,b)=>{},
+                    lineTo:(a,b)=>{},
+                    stroke:()=>{}
+                }
+            }
+            jest.spyOn(canvas, 'getContext');
+            drawStraightLine();
+            expect(canvas.getContext).toHaveBeenCalledTimes(1);
+
+        })
+    })
 });
 
-describe('Display Sentence in label', () => {
-    test('should initially set text of sentence label', () => {
-        setSentenceLabel(0);
-
-        const actualText = document.getElementById('sentenceLabel').innerText
-
-        expect(actualText).toBe('Sentence 1')
-    })
-
-    test('should update text of sentence label when skip clicked once', () => {
-        document.getElementById('skip_button').click()
-
-        const actualText = document.getElementById('sentenceLabel').innerText
-
-        expect(actualText).toBe('Sentence 2')
-    })
-
-    test('should update text of sentence label when skip clicked N times', () => {
-        const number = 2;
-        for (let i = 0; i < number; ++i)
-            document.getElementById('skip_button').click();
-
-        const actualText = document.getElementById('sentenceLabel').innerText
-
-        expect(actualText).toBe('Sentence 3')
-    })
-})
