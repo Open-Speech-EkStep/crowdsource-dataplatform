@@ -109,3 +109,16 @@ dist
 
 
 .well-known
+
+
+# Gauge - metadata dir
+.gauge
+.vscode
+# Gauge - log files dir
+logs
+
+# Gauge - reports dir
+*/reports
+
+# Gauge - JavaScript node dependencies
+*/node_modules
