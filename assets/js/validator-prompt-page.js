@@ -194,4 +194,4 @@ const drawStraightLine = () => {
     canvasCtx.stroke();
 }
 
-module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer};
+module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer, drawStraightLine};
