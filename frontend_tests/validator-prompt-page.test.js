@@ -16,7 +16,6 @@ const {
     decideToShowPopUp,
     setSentenceLabel,
     setAudioPlayer,
-    drawStraightLine,
     setValidatorNameInHeader
 } = require('../assets/js/validator-prompt-page');
 
@@ -68,49 +67,49 @@ describe('onReady prompt-page', () => {
         });
     });
 
-    describe("setAudioPlayer", () => {
-        test('should start playing audio when play button is clicked', () => {
-            const myAudio = document.getElementById('my-audio');
-            myAudio.play = () => {
-            };
-            const play = $('#play');
-            const pause = $('#pause');
-
-            setAudioPlayer();
-            play.click();
-
-            expect(play.hasClass("d-none")).toEqual(true);
-            expect(pause.hasClass("d-none")).toEqual(false);
-        });
-
-        test('should pause audio when pause button is clicked', () => {
-            const myAudio = document.getElementById('my-audio');
-            myAudio.pause = () => {};
-            const pause = $('#pause');
-            const replay = $('#replay');
-
-            setAudioPlayer();
-            pause.click();
-
-            expect(pause.hasClass("d-none")).toEqual(true);
-            expect(replay.hasClass("d-none")).toEqual(false);
-        });
-
-        test('should replay audio when replay button is clicked', () => {
-            const myAudio = document.getElementById('my-audio');
-            myAudio.play = () => {};
-            myAudio.load = () => {};
-            const pause = $('#pause');
-            const replay = $('#replay');
-
-            setAudioPlayer();
-            replay.click();
-
-            expect(replay.hasClass("d-none")).toEqual(true);
-            expect(pause.hasClass("d-none")).toEqual(false);
-        });
-
-    })
+    // describe("setAudioPlayer", () => {
+    //     test('should start playing audio when play button is clicked', () => {
+    //         const myAudio = document.getElementById('my-audio');
+    //         myAudio.play = () => {
+    //         };
+    //         const play = $('#play');
+    //         const pause = $('#pause');
+    //
+    //         setAudioPlayer();
+    //         play.click();
+    //
+    //         expect(play.hasClass("d-none")).toEqual(true);
+    //         expect(pause.hasClass("d-none")).toEqual(false);
+    //     });
+    //
+    //     test('should pause audio when pause button is clicked', () => {
+    //         const myAudio = document.getElementById('my-audio');
+    //         myAudio.pause = () => {};
+    //         const pause = $('#pause');
+    //         const replay = $('#replay');
+    //
+    //         setAudioPlayer();
+    //         pause.click();
+    //
+    //         expect(pause.hasClass("d-none")).toEqual(true);
+    //         expect(replay.hasClass("d-none")).toEqual(false);
+    //     });
+    //
+    //     test('should replay audio when replay button is clicked', () => {
+    //         const myAudio = document.getElementById('my-audio');
+    //         myAudio.play = () => {};
+    //         myAudio.load = () => {};
+    //         const pause = $('#pause');
+    //         const replay = $('#replay');
+    //
+    //         setAudioPlayer();
+    //         replay.click();
+    //
+    //         expect(replay.hasClass("d-none")).toEqual(true);
+    //         expect(pause.hasClass("d-none")).toEqual(false);
+    //     });
+    //
+    // })
 
     describe('displaySentenceLabel', () => {
         test('should initially set text of sentence label', () => {
@@ -137,26 +136,6 @@ describe('onReady prompt-page', () => {
             const actualText = document.getElementById('sentenceLabel').innerText
 
             expect(actualText).toBe('Sentence 3')
-        })
-    })
-
-    describe("drawStraightLine", () => {
-        test('should draw straight line in middle canvas', () => {
-            const canvas = document.getElementById("myCanvas");
-            canvas.getContext = (e) => {
-                return {
-                    moveTo: (a, b) => {
-                    },
-                    lineTo: (a, b) => {
-                    },
-                    stroke: () => {
-                    }
-                }
-            }
-            jest.spyOn(canvas, 'getContext');
-            drawStraightLine();
-            expect(canvas.getContext).toHaveBeenCalledTimes(1);
-
         })
     })
 
