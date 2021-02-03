@@ -116,7 +116,18 @@ $('#like_button').on('click', () => {
     getNextSentence();
 })
 
+
+const setValidatorNameInHeader = ()=>{
+    const $navUser = $('#nav-user');
+    const $navUserName = $navUser.find('#nav-username');
+    $navUser.removeClass('d-none');
+    const currentValidator = localStorage.getItem('currentValidator');
+    $navUserName.text(currentValidator);
+};
+
+
 $(document).ready(() => {
+    setValidatorNameInHeader();
     decideToShowPopUp();
     setAudioPlayer();
     setSentenceLabel(currentIndex)
