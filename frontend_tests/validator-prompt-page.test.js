@@ -6,18 +6,14 @@ document.body = stringToHTML(
     readFileSync(`${__dirname}/../views/validator-prompt-page.ejs`, 'UTF-8')
 );
 
-
 jest.mock('../assets/js/validator-instructions', () => ({
     showInstructions: jest.fn()
 }))
 
-
 const {
     decideToShowPopUp,
     setSentenceLabel,
-    setAudioPlayer,
-    drawStraightLine,
-    setValidatorNameInHeader
+    setAudioPlayer
 } = require('../assets/js/validator-prompt-page');
 
 describe('onClick instructions-link', () => {
@@ -139,41 +135,4 @@ describe('onReady prompt-page', () => {
             expect(actualText).toBe('Sentence 3')
         })
     })
-
-    describe("drawStraightLine", () => {
-        test('should draw straight line in middle canvas', () => {
-            const canvas = document.getElementById("myCanvas");
-            canvas.getContext = (e) => {
-                return {
-                    moveTo: (a, b) => {
-                    },
-                    lineTo: (a, b) => {
-                    },
-                    stroke: () => {
-                    }
-                }
-            }
-            jest.spyOn(canvas, 'getContext');
-            drawStraightLine();
-            expect(canvas.getContext).toHaveBeenCalledTimes(1);
-
-        })
-    })
-
-    // describe("setValidatorNameInHeader", () => {
-    //     test('should set validator name with dummy profile icon when page get ready', () => {
-    //         mockLocalStorage();
-    //         localStorage.setItem('currentValidator', "abc");
-    //
-    //         setValidatorNameInHeader();
-    //
-    //         const $navUser = $('#nav-user');
-    //         const $navUserName = $navUser.find('#nav-username');
-    //
-    //         expect($navUser.hasClass("d-none")).toEqual(false);
-    //         expect($navUserName.text()).toEqual("abc");
-    //         localStorage.clear();
-    //     })
-    // })
 });
-
