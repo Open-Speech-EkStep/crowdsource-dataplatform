@@ -22,9 +22,11 @@ const setAudioPlayer = function () {
     const pause = $('#pause');
     const replay = $('#replay');
 
-    const skipButton = $("#skip_button");
-    const likeButton =  $("#like_button");
-    const dislikeButton = $("#dislike_button");
+    myAudio.addEventListener("ended",()=>{
+        enableButtons();
+        pause.addClass('d-none');
+        replay.removeClass('d-none');
+    });
 
     play.on('click', playAudio);
     pause.on('click', pauseAudio);
@@ -33,18 +35,25 @@ const setAudioPlayer = function () {
     function playAudio() {
         play.addClass('d-none');
         pause.removeClass('d-none');
+        myAudio.play();
+    }
+
+    function enableButtons(){
+        const skipButton = $("#skip_button");
+        const likeButton =  $("#like_button");
+        const dislikeButton = $("#dislike_button");
         skipButton.children().removeAttr("opacity")
         skipButton.removeAttr("disabled")
         likeButton.children().removeAttr("opacity")
         likeButton.removeAttr("disabled")
         dislikeButton.children().removeAttr("opacity")
         dislikeButton.removeAttr("disabled")
-        myAudio.play();
     }
 
     function pauseAudio() {
         pause.addClass('d-none');
         replay.removeClass('d-none');
+        enableButtons();
         myAudio.pause();
     }
 
@@ -125,7 +134,6 @@ const setValidatorNameInHeader = ()=>{
     $navUserName.text(currentValidator);
 };
 
-
 $(document).ready(() => {
     setValidatorNameInHeader();
     decideToShowPopUp();
@@ -205,4 +213,4 @@ const drawStraightLine = () => {
     canvasCtx.stroke();
 }
 
-module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer, drawStraightLine};
+module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer, drawStraightLine, setValidatorNameInHeader};

@@ -16,7 +16,8 @@ const {
     decideToShowPopUp,
     setSentenceLabel,
     setAudioPlayer,
-    drawStraightLine
+    drawStraightLine,
+    setValidatorNameInHeader
 } = require('../assets/js/validator-prompt-page');
 
 describe('onClick instructions-link', () => {
@@ -84,8 +85,7 @@ describe('onReady prompt-page', () => {
 
         test('should pause audio when pause button is clicked', () => {
             const myAudio = document.getElementById('my-audio');
-            myAudio.pause = () => {
-            };
+            myAudio.pause = () => {};
             const pause = $('#pause');
             const replay = $('#replay');
 
@@ -98,10 +98,8 @@ describe('onReady prompt-page', () => {
 
         test('should replay audio when replay button is clicked', () => {
             const myAudio = document.getElementById('my-audio');
-            myAudio.play = () => {
-            };
-            myAudio.load = () => {
-            };
+            myAudio.play = () => {};
+            myAudio.load = () => {};
             const pause = $('#pause');
             const replay = $('#replay');
 
@@ -146,10 +144,13 @@ describe('onReady prompt-page', () => {
         test('should draw straight line in middle canvas', () => {
             const canvas = document.getElementById("myCanvas");
             canvas.getContext = (e) => {
-                return  {
-                    moveTo:(a,b)=>{},
-                    lineTo:(a,b)=>{},
-                    stroke:()=>{}
+                return {
+                    moveTo: (a, b) => {
+                    },
+                    lineTo: (a, b) => {
+                    },
+                    stroke: () => {
+                    }
                 }
             }
             jest.spyOn(canvas, 'getContext');
@@ -158,5 +159,21 @@ describe('onReady prompt-page', () => {
 
         })
     })
+
+    // describe("setValidatorNameInHeader", () => {
+    //     test('should set validator name with dummy profile icon when page get ready', () => {
+    //         mockLocalStorage();
+    //         localStorage.setItem('currentValidator', "abc");
+    //
+    //         setValidatorNameInHeader();
+    //
+    //         const $navUser = $('#nav-user');
+    //         const $navUserName = $navUser.find('#nav-username');
+    //
+    //         expect($navUser.hasClass("d-none")).toEqual(false);
+    //         expect($navUserName.text()).toEqual("abc");
+    //         localStorage.clear();
+    //     })
+    // })
 });
 
