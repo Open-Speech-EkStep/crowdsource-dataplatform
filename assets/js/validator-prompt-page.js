@@ -35,18 +35,20 @@ const setAudioPlayer = function () {
     const pause = $('#pause');
     const replay = $('#replay');
 
-    myAudio.addEventListener("ended",()=>{
-        enableButtons();
+    myAudio.addEventListener("ended", () => {
+        enableValidation();
         pause.addClass('d-none');
         replay.removeClass('d-none');
     });
 
-    play.on('click', ()=>{
+    play.on('click', () => {
         playAudio();
         setUpVisualizer();
     });
+
     pause.on('click', pauseAudio);
-    replay.on('click', ()=>{
+
+    replay.on('click', () => {
         replayAudio();
         setUpVisualizer();
     });
@@ -57,22 +59,10 @@ const setAudioPlayer = function () {
         myAudio.play();
     }
 
-    function enableButtons(){
-        const skipButton = $("#skip_button");
-        const likeButton =  $("#like_button");
-        const dislikeButton = $("#dislike_button");
-        skipButton.children().removeAttr("opacity")
-        skipButton.removeAttr("disabled")
-        likeButton.children().removeAttr("opacity")
-        likeButton.removeAttr("disabled")
-        dislikeButton.children().removeAttr("opacity")
-        dislikeButton.removeAttr("disabled")
-    }
-
     function pauseAudio() {
         pause.addClass('d-none');
         replay.removeClass('d-none');
-        enableButtons();
+        enableValidation();
         myAudio.pause();
     }
 
@@ -81,6 +71,18 @@ const setAudioPlayer = function () {
         replay.addClass('d-none');
         pause.removeClass('d-none');
         myAudio.play();
+    }
+
+    function enableButton(element) {
+        element.children().removeAttr("opacity")
+        element.removeAttr("disabled")
+    }
+
+    function enableValidation() {
+        const likeButton = $("#like_button");
+        const dislikeButton = $("#dislike_button");
+        enableButton(likeButton)
+        enableButton(dislikeButton)
     }
 }
 
@@ -109,43 +111,44 @@ function setSentenceLabel(index) {
 function getNextSentence() {
     if (currentIndex < sampleSentences.length - 1) {
         currentIndex++;
-        resetDecisionRow();
-        setSentenceLabel(currentIndex);
+        setTimeout(() => {
+            resetDecisionRow();
+            setSentenceLabel(currentIndex);
+        }, 500);
     }
 }
 
-$('#skip_button').on('click', ()=> {
+$('#skip_button').on('click', () => {
     getNextSentence();
-} )
+})
 
-const updateDecisionButton = (button, colors)=>{
+const updateDecisionButton = (button, colors) => {
     const children = button.children().children();
-    children[0].setAttribute("fill",colors[0]);
-    children[1].setAttribute("fill",colors[1]);
-    children[2].setAttribute("fill",colors[2]);
+    children[0].setAttribute("fill", colors[0]);
+    children[1].setAttribute("fill", colors[1]);
+    children[2].setAttribute("fill", colors[2]);
 }
 
-const updateProgressBar = (color)=>{
+const updateProgressBar = (color) => {
     progressCount++;
     document.getElementById(`rect_${progressCount}`).setAttribute("fill", color);
 }
 
 $('#dislike_button').on('click', () => {
     const dislikeButton = $("#dislike_button");
-    updateDecisionButton(dislikeButton, ["#007BFF","white","white"]);
+    updateDecisionButton(dislikeButton, ["#007BFF", "white", "white"]);
     updateProgressBar("#ccebff");
     getNextSentence();
 })
 
 $('#like_button').on('click', () => {
-    const likeButton =  $("#like_button");
-    updateDecisionButton(likeButton, ["#007BFF","white","white"]);
+    const likeButton = $("#like_button");
+    updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
     updateProgressBar("#007BFF");
     getNextSentence();
 })
 
-
-const setValidatorNameInHeader = ()=>{
+const setValidatorNameInHeader = () => {
     const $navUser = $('#nav-user');
     const $navUserName = $navUser.find('#nav-username');
     $navUser.removeClass('d-none');
@@ -171,40 +174,36 @@ $('#validator-instructions-modal').on('show.bs.modal', function () {
     $("#validator-page-content").addClass('d-none');
 });
 
-function resetDecisionRow(){
+function resetDecisionRow() {
     const dislikeButton = $("#dislike_button");
-    const likeButton =  $("#like_button");
+    const likeButton = $("#like_button");
 
-    updateDecisionButton(dislikeButton, ["white","#007BFF","#343A40"]);
-    updateDecisionButton(likeButton, ["white","#007BFF","#343A40"]);
+    updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
+    updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
 
-    const skipButton = $("#skip_button");
-    skipButton.children().attr("opacity","50%");
-    skipButton.attr("disabled","disabled");
-    likeButton.children().attr("opacity","50%");
-    likeButton.attr("disabled","disabled");
-    dislikeButton.children().attr("opacity","50%");
-    dislikeButton.attr("disabled","disabled");
+    likeButton.children().attr("opacity", "50%");
+    likeButton.attr("disabled", "disabled");
+    dislikeButton.children().attr("opacity", "50%");
+    dislikeButton.attr("disabled", "disabled");
 
     $("#replay").addClass('d-none');
     $("#play").removeClass('d-none');
-
 }
 
 function setUpVisualizer() {
     const canvas = document.getElementById('myCanvas');
     navigator.mediaDevices
         .getUserMedia({audio: true, video: false})
-        .then((stream) => {
+        .then(() => {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             const audioCtx = new AudioContext();
             const audioAnalyser = audioCtx.createAnalyser();
-            // const source = audioCtx.createMediaStreamSource(stream);
-            const audio = document.getElementById("my-audio");
+            const audio = document.querySelector('audio');
             const source = audioCtx.createMediaElementSource(audio);
             source.connect(audioAnalyser);
+            source.connect(audioCtx.destination);
             visualize(canvas, audioAnalyser);
         });
-};
+}
 
 module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer, setValidatorNameInHeader};
