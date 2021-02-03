@@ -23,11 +23,14 @@ const validateUserInputAndFile = function (req, res, next) {
     const gender = speakerDetailsJson.gender;
     const ageGroup = speakerDetailsJson.age;
     const motherTongue = speakerDetailsJson.motherTongue;
-    const isValidReqParams = fileSizeInMB > MAX_SIZE || file.mimetype != VALID_FILE_TYPE
-    || !GENDER.includes(gender) || !MOTHER_TONGUE.includes(motherTongue) ||
+
+    const invalidMotherTongue = (!MOTHER_TONGUE.includes(motherTongue)&&(motherTongue.length));
+
+    const isInValidReqParams = fileSizeInMB > MAX_SIZE || file.mimetype != VALID_FILE_TYPE
+    || !GENDER.includes(gender) || invalidMotherTongue ||
     userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName) || !AGE_GROUP.includes(ageGroup);
 
-    if (isValidReqParams) {
+    if (isInValidReqParams) {
         return res.status(400).send("Bad request");
     }
     next()
