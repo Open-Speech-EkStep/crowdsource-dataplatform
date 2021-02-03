@@ -12,7 +12,6 @@ function setPageContentHeight() {
     $('#content-wrapper').css('min-height', contentHeightInVH + 'vh');
 }
 
-
 const decideToShowPopUp = () => {
     const currentValidator = localStorage.getItem('currentValidator');
     const validatorDetails = localStorage.getItem('validatorDetails');
