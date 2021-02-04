@@ -29,6 +29,53 @@ const decideToShowPopUp = () => {
     }
 }
 
+function addListeners() {
+    $("#instructions-link").on('click', () => showInstructions());
+
+    const $validatorInstructionsModal = $('#validator-instructions-modal');
+
+    $validatorInstructionsModal.on('hidden.bs.modal', function () {
+        $("#validator-page-content").removeClass('d-none');
+    });
+
+    $validatorInstructionsModal.on('show.bs.modal', function () {
+        $("#validator-page-content").addClass('d-none');
+    });
+
+    const likeButton = $("#like_button");
+    const dislikeButton = $("#dislike_button");
+    likeButton.hover(function () {
+            updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
+        },
+        function () {
+            updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
+        }
+    );
+
+    dislikeButton.hover(function () {
+            updateDecisionButton(dislikeButton, ["#007BFF", "white", "white"]);
+        },
+        function () {
+            updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
+        }
+    );
+
+    dislikeButton.on('click', () => {
+        updateProgressBar("#ccebff");
+        getNextSentence();
+    })
+
+    likeButton.on('click', () => {
+        updateProgressBar("#007BFF");
+        getNextSentence();
+    })
+
+    $('#skip_button').on('click', () => {
+        getNextSentence();
+    })
+
+}
+
 const setAudioPlayer = function () {
     const myAudio = document.getElementById('my-audio');
     const play = $('#play');
@@ -42,6 +89,8 @@ const setAudioPlayer = function () {
     });
 
     play.on('click', () => {
+        $('canvas').removeClass('d-none')
+        $('#default_line').addClass('d-none')
         playAudio();
         setUpVisualizer();
     });
@@ -82,8 +131,10 @@ const setAudioPlayer = function () {
     function enableValidation() {
         const likeButton = $("#like_button");
         const dislikeButton = $("#dislike_button");
+        const skipButton = $("#skip_button");
         enableButton(likeButton)
         enableButton(dislikeButton)
+        enableButton(skipButton)
     }
 }
 
@@ -112,16 +163,10 @@ function setSentenceLabel(index) {
 function getNextSentence() {
     if (currentIndex < sampleSentences.length - 1) {
         currentIndex++;
-        setTimeout(() => {
-            resetDecisionRow();
-            setSentenceLabel(currentIndex);
-        }, 500);
+        resetDecisionRow();
+        setSentenceLabel(currentIndex);
     }
 }
-
-$('#skip_button').on('click', () => {
-    getNextSentence();
-})
 
 const updateDecisionButton = (button, colors) => {
     const children = button.children().children();
@@ -135,20 +180,6 @@ const updateProgressBar = (color) => {
     document.getElementById(`rect_${progressCount}`).setAttribute("fill", color);
 }
 
-$('#dislike_button').on('click', () => {
-    const dislikeButton = $("#dislike_button");
-    updateDecisionButton(dislikeButton, ["#007BFF", "white", "white"]);
-    updateProgressBar("#ccebff");
-    getNextSentence();
-})
-
-$('#like_button').on('click', () => {
-    const likeButton = $("#like_button");
-    updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
-    updateProgressBar("#007BFF");
-    getNextSentence();
-})
-
 const setValidatorNameInHeader = () => {
     const $navUser = $('#nav-user');
     const $navUserName = $navUser.find('#nav-username');
@@ -158,37 +189,35 @@ const setValidatorNameInHeader = () => {
 };
 
 $(document).ready(() => {
-    setPageContentHeight()
+    setPageContentHeight();
+    addListeners();
     setValidatorNameInHeader();
     decideToShowPopUp();
     setAudioPlayer();
     setSentenceLabel(currentIndex)
 });
 
-$("#instructions-link").on('click', () => showInstructions());
-
-$('#validator-instructions-modal').on('hidden.bs.modal', function () {
-    $("#validator-page-content").removeClass('d-none');
-});
-
-$('#validator-instructions-modal').on('show.bs.modal', function () {
-    $("#validator-page-content").addClass('d-none');
-});
+function disableButton(button) {
+    button.children().attr("opacity", "50%");
+    button.attr("disabled", "disabled");
+}
 
 function resetDecisionRow() {
     const dislikeButton = $("#dislike_button");
     const likeButton = $("#like_button");
+    const skipButton = $("#skip_button");
 
     updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
     updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
 
-    likeButton.children().attr("opacity", "50%");
-    likeButton.attr("disabled", "disabled");
-    dislikeButton.children().attr("opacity", "50%");
-    dislikeButton.attr("disabled", "disabled");
+    disableButton(likeButton)
+    disableButton(dislikeButton)
+    disableButton(skipButton)
 
     $("#replay").addClass('d-none');
     $("#play").removeClass('d-none');
+    $('canvas').addClass('d-none')
+    $('#default_line').removeClass('d-none')
 }
 
 let context, src;
@@ -206,4 +235,4 @@ function setUpVisualizer() {
     visualize(canvas, analyser);
 }
 
-module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer, setValidatorNameInHeader};
+module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer, setValidatorNameInHeader, addListeners};
