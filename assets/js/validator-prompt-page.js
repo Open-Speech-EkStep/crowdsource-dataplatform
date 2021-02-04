@@ -1,17 +1,6 @@
-const {showInstructions} = require('./validator-instructions')
-const {visualize} = require('./visualizer')
+const {showInstructions} = require('./validator-instructions');
+const {setPageContentHeight } = require('./pageHeight');
 
-function convertPXToVH(px) {
-    return px * (100 / document.documentElement.clientHeight);
-}
-
-function setPageContentHeight() {
-    const $footer = $('footer');
-    const $nav = $('.navbar');
-    const edgeHeightInPixel = $footer.outerHeight() + $nav.outerHeight()
-    const contentHeightInVH = 100 - convertPXToVH(edgeHeightInPixel)
-    $('#content-wrapper').css('min-height', contentHeightInVH + 'vh');
-}
 
 const decideToShowPopUp = () => {
     const currentValidator = localStorage.getItem('currentValidator');
@@ -30,32 +19,45 @@ const decideToShowPopUp = () => {
 }
 
 const setAudioPlayer = function () {
-    const myAudio = document.getElementById('my-audio');
+    const audio = document.getElementById('my-audio');
     const play = $('#play');
     const pause = $('#pause');
     const replay = $('#replay');
 
-    myAudio.addEventListener("ended",()=>{
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const context = new AudioContext();
+    const src = context.createMediaElementSource(audio);
+    const analyser = context.createAnalyser();
+    src.connect(analyser);
+    analyser.connect(context.destination);
+
+    audio.onplay = ()=>{
+        context.resume();
+    }
+
+    audio.addEventListener("ended",()=>{
         enableButtons();
         pause.addClass('d-none');
         replay.removeClass('d-none');
     });
 
-    play.on('click', ()=>{
-        playAudio();
-        setUpVisualizer();
-    });
-    pause.on('click', pauseAudio);
-    replay.on('click', ()=>{
-        replayAudio();
-        setUpVisualizer();
-    });
-
-    function playAudio() {
+    play.on('click', () => {
         play.addClass('d-none');
         pause.removeClass('d-none');
-        myAudio.play();
-    }
+        audio.load();
+        audio.play();
+        renderFrame(analyser);
+    });
+
+    pause.on('click', pauseAudio);
+
+    replay.on('click', () => {
+        replay.addClass('d-none');
+        pause.removeClass('d-none');
+        audio.load();
+        audio.play();
+        renderFrame(analyser);
+    });
 
     function enableButtons(){
         const skipButton = $("#skip_button");
@@ -73,14 +75,7 @@ const setAudioPlayer = function () {
         pause.addClass('d-none');
         replay.removeClass('d-none');
         enableButtons();
-        myAudio.pause();
-    }
-
-    function replayAudio() {
-        myAudio.load();
-        replay.addClass('d-none');
-        pause.removeClass('d-none');
-        myAudio.play();
+        audio.pause();
     }
 }
 
@@ -163,11 +158,13 @@ $(document).ready(() => {
 
 $("#instructions-link").on('click', () => showInstructions());
 
-$('#validator-instructions-modal').on('hidden.bs.modal', function () {
+const $validatorInstructionsModal = $('#validator-instructions-modal');
+
+$validatorInstructionsModal.on('hidden.bs.modal', function () {
     $("#validator-page-content").removeClass('d-none');
 });
 
-$('#validator-instructions-modal').on('show.bs.modal', function () {
+$validatorInstructionsModal.on('show.bs.modal', function () {
     $("#validator-page-content").addClass('d-none');
 });
 
@@ -191,20 +188,39 @@ function resetDecisionRow(){
 
 }
 
-function setUpVisualizer() {
+function renderFrame(analyser) {
+    requestAnimationFrame(()=>renderFrame(analyser));
     const canvas = document.getElementById('myCanvas');
-    navigator.mediaDevices
-        .getUserMedia({audio: true, video: false})
-        .then((stream) => {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            const audioCtx = new AudioContext();
-            const audioAnalyser = audioCtx.createAnalyser();
-            // const source = audioCtx.createMediaStreamSource(stream);
-            const audio = document.getElementById("my-audio");
-            const source = audioCtx.createMediaElementSource(audio);
-            source.connect(audioAnalyser);
-            visualize(canvas, audioAnalyser);
-        });
-};
+
+    const ctx = canvas.getContext("2d");
+
+    const bufferLength = analyser.frequencyBinCount;
+
+    const dataArray = new Uint8Array(bufferLength);
+
+    const WIDTH = canvas.width;
+    const HEIGHT = canvas.height;
+    analyser.getByteTimeDomainData(dataArray);
+    ctx.fillStyle = 'rgb(255, 255, 255, 0.8)';
+    ctx.fillRect(0, 0, WIDTH, HEIGHT);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgb(0,123,255)';
+    ctx.beginPath();
+    const sliceWidth = (WIDTH * 1.0) / bufferLength;
+    let x_coordinate = 0;
+    for (let count = 0; count < bufferLength; count++) {
+        const verticalHeight = dataArray[count] / 128.0; // uint8
+        const y_coordinate = (verticalHeight * HEIGHT) / 2; // uint8
+        if (count === 0) {
+            ctx.moveTo(x_coordinate, y_coordinate);
+        } else {
+            ctx.lineTo(x_coordinate, y_coordinate);
+        }
+        x_coordinate += sliceWidth;
+    }
+    ctx.lineTo(WIDTH, HEIGHT / 2);
+    ctx.stroke();
+}
+
 
 module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer, setValidatorNameInHeader};
