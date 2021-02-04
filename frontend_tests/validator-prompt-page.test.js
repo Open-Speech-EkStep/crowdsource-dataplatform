@@ -13,7 +13,6 @@ jest.mock('../assets/js/validator-instructions', () => ({
 
 
 const {
-    addListeners,
     decideToShowPopUp,
     setSentenceLabel,
     setAudioPlayer,
@@ -24,7 +23,6 @@ describe('onClick instructions-link', () => {
     test('should show Instructions pop-up when link is clicked', () => {
 
         require('../assets/js/validator-prompt-page')
-        addListeners();
         document.getElementById('instructions-link').click();
 
         expect(showInstructions).toHaveBeenCalled();
@@ -119,7 +117,8 @@ describe('onReady prompt-page', () => {
 
             const actualText = document.getElementById('sentenceLabel').innerText
 
-            expect(actualText).toBe('Sentence 1')
+            setTimeout(() => {  expect(actualText).toBe('Sentence 1') }, 500);
+
         })
 
         test('should update text of sentence label when skip clicked once', () => {
@@ -127,7 +126,7 @@ describe('onReady prompt-page', () => {
 
             const actualText = document.getElementById('sentenceLabel').innerText
 
-            expect(actualText).toBe('Sentence 2')
+            setTimeout(() => {  expect(actualText).toBe('Sentence 2') }, 500);
         })
 
         test('should update text of sentence label when skip clicked N times', () => {
@@ -137,7 +136,8 @@ describe('onReady prompt-page', () => {
 
             const actualText = document.getElementById('sentenceLabel').innerText
 
-            expect(actualText).toBe('Sentence 3')
+            setTimeout(() => {  expect(actualText).toBe('Sentence 3') }, 500);
+
         })
     })
 
