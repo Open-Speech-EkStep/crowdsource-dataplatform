@@ -54,6 +54,7 @@ const setAudioPlayer = function () {
     });
 
     function playAudio() {
+        myAudio.load();
         play.addClass('d-none');
         pause.removeClass('d-none');
         myAudio.play();
@@ -190,20 +191,19 @@ function resetDecisionRow() {
     $("#play").removeClass('d-none');
 }
 
+let context, src;
+
 function setUpVisualizer() {
     const canvas = document.getElementById('myCanvas');
-    navigator.mediaDevices
-        .getUserMedia({audio: true, video: false})
-        .then(() => {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            const audioCtx = new AudioContext();
-            const audioAnalyser = audioCtx.createAnalyser();
-            const audio = document.querySelector('audio');
-            const source = audioCtx.createMediaElementSource(audio);
-            source.connect(audioAnalyser);
-            source.connect(audioCtx.destination);
-            visualize(canvas, audioAnalyser);
-        });
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audio = document.querySelector('audio');
+
+    context = context || new AudioContext();
+    src = src || context.createMediaElementSource(audio);
+    const analyser = context.createAnalyser();
+    src.connect(analyser);
+    analyser.connect(context.destination);
+    visualize(canvas, analyser);
 }
 
 module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer, setValidatorNameInHeader};
