@@ -126,18 +126,37 @@ const updateProgressBar = (color)=>{
 }
 
 $('#dislike_button').on('click', () => {
-    const dislikeButton = $("#dislike_button");
-    updateDecisionButton(dislikeButton, ["#007BFF","white","white"]);
     updateProgressBar("#ccebff");
     getNextSentence();
 })
 
 $('#like_button').on('click', () => {
-    const likeButton =  $("#like_button");
-    updateDecisionButton(likeButton, ["#007BFF","white","white"]);
     updateProgressBar("#007BFF");
     getNextSentence();
 })
+
+
+$('#like_button').hover(function(){
+    const likeButton =  $("#like_button");
+    updateDecisionButton(likeButton, ["#007BFF","white","white"]);
+},
+    function(){
+        const likeButton =  $("#like_button");
+        updateDecisionButton(likeButton, ["white","#007BFF","#343A40"]);
+    }
+
+);
+
+$('#dislike_button').hover(function(){
+        const dislikeButton = $("#dislike_button");
+        updateDecisionButton(dislikeButton, ["#007BFF","white","white"]);
+    },
+    function(){
+        const dislikeButton = $("#dislike_button");
+        updateDecisionButton(dislikeButton, ["white","#007BFF","#343A40"]);
+    }
+
+);
 
 
 const setValidatorNameInHeader = ()=>{
