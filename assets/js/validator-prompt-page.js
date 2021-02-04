@@ -109,9 +109,6 @@ function getNextSentence() {
     }
 }
 
-$('#skip_button').on('click', ()=> {
-    getNextSentence();
-} )
 
 const updateDecisionButton = (button, colors)=>{
     const children = button.children().children();
@@ -125,40 +122,6 @@ const updateProgressBar = (color)=>{
     document.getElementById(`rect_${progressCount}`).setAttribute("fill", color);
 }
 
-$('#dislike_button').on('click', () => {
-    updateProgressBar("#ccebff");
-    getNextSentence();
-})
-
-$('#like_button').on('click', () => {
-    updateProgressBar("#007BFF");
-    getNextSentence();
-})
-
-
-$('#like_button').hover(function(){
-    const likeButton =  $("#like_button");
-    updateDecisionButton(likeButton, ["#007BFF","white","white"]);
-},
-    function(){
-        const likeButton =  $("#like_button");
-        updateDecisionButton(likeButton, ["white","#007BFF","#343A40"]);
-    }
-
-);
-
-$('#dislike_button').hover(function(){
-        const dislikeButton = $("#dislike_button");
-        updateDecisionButton(dislikeButton, ["#007BFF","white","white"]);
-    },
-    function(){
-        const dislikeButton = $("#dislike_button");
-        updateDecisionButton(dislikeButton, ["white","#007BFF","#343A40"]);
-    }
-
-);
-
-
 const setValidatorNameInHeader = ()=>{
     const $navUser = $('#nav-user');
     const $navUserName = $navUser.find('#nav-username');
@@ -167,25 +130,57 @@ const setValidatorNameInHeader = ()=>{
     $navUserName.text(currentValidator);
 };
 
-$(document).ready(() => {
-    setPageContentHeight()
-    setValidatorNameInHeader();
-    decideToShowPopUp();
-    setAudioPlayer();
-    setSentenceLabel(currentIndex)
-});
 
-$("#instructions-link").on('click', () => showInstructions());
+function addListeners(){
+    $("#instructions-link").on('click', () => showInstructions());
 
-const $validatorInstructionsModal = $('#validator-instructions-modal');
+    const $validatorInstructionsModal = $('#validator-instructions-modal');
 
-$validatorInstructionsModal.on('hidden.bs.modal', function () {
-    $("#validator-page-content").removeClass('d-none');
-});
+    $validatorInstructionsModal.on('hidden.bs.modal', function () {
+        $("#validator-page-content").removeClass('d-none');
+    });
 
-$validatorInstructionsModal.on('show.bs.modal', function () {
-    $("#validator-page-content").addClass('d-none');
-});
+    $validatorInstructionsModal.on('show.bs.modal', function () {
+        $("#validator-page-content").addClass('d-none');
+    });
+
+    $('#like_button').hover(function(){
+            const likeButton =  $("#like_button");
+            updateDecisionButton(likeButton, ["#007BFF","white","white"]);
+        },
+        function(){
+            const likeButton =  $("#like_button");
+            updateDecisionButton(likeButton, ["white","#007BFF","#343A40"]);
+        }
+
+    );
+
+    $('#dislike_button').hover(function(){
+            const dislikeButton = $("#dislike_button");
+            updateDecisionButton(dislikeButton, ["#007BFF","white","white"]);
+        },
+        function(){
+            const dislikeButton = $("#dislike_button");
+            updateDecisionButton(dislikeButton, ["white","#007BFF","#343A40"]);
+        }
+
+    );
+
+    $('#dislike_button').on('click', () => {
+        updateProgressBar("#ccebff");
+        getNextSentence();
+    })
+
+    $('#like_button').on('click', () => {
+        updateProgressBar("#007BFF");
+        getNextSentence();
+    })
+
+    $('#skip_button').on('click', ()=> {
+        getNextSentence();
+    } )
+
+}
 
 function resetDecisionRow(){
     const dislikeButton = $("#dislike_button");
@@ -241,5 +236,13 @@ function renderFrame(analyser) {
     ctx.stroke();
 }
 
+$(document).ready(() => {
+    addListeners();
+    decideToShowPopUp();
+    setValidatorNameInHeader();
+    setPageContentHeight()
+    setAudioPlayer();
+    setSentenceLabel(currentIndex)
+});
 
-module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer, setValidatorNameInHeader};
+module.exports = {addListeners, decideToShowPopUp, setSentenceLabel, setAudioPlayer, setValidatorNameInHeader};
