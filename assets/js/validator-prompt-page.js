@@ -30,8 +30,8 @@ const decideToShowPopUp = () => {
 }
 
 function addListeners() {
-    $("#instructions-link").on('click', () => showInstructions());
 
+    $("#instructions-link").on('click', () => showInstructions());
     const $validatorInstructionsModal = $('#validator-instructions-modal');
 
     $validatorInstructionsModal.on('hidden.bs.modal', function () {
@@ -41,7 +41,6 @@ function addListeners() {
     $validatorInstructionsModal.on('show.bs.modal', function () {
         $("#validator-page-content").addClass('d-none');
     });
-
     const likeButton = $("#like_button");
     const dislikeButton = $("#dislike_button");
     likeButton.hover(function () {
@@ -189,6 +188,7 @@ const setValidatorNameInHeader = () => {
 };
 
 $(document).ready(() => {
+
     setPageContentHeight();
     addListeners();
     setValidatorNameInHeader();
