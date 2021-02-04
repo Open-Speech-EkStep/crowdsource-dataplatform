@@ -184,7 +184,6 @@ const initialize = () => {
         navigator.mediaDevices
             .getUserMedia({audio: true, video: false})
             .then((stream) => {
-                console.log(stream);
                 $getStarted.hide();
                 $startRecordRow.addClass('d-none');
                 $stopRecordBtn.removeClass('d-none');
@@ -347,7 +346,6 @@ const initialize = () => {
     }
 
     function visualize(visualizer, analyser) {
-        console.log("hello");
         const canvasCtx = visualizer.getContext('2d');
         const bufferLength = analyser.frequencyBinCount;
         const dataArray = new Uint8Array(bufferLength);
@@ -359,7 +357,6 @@ const initialize = () => {
             // this is more efficient than calling with processor.onaudioprocess
             // and sending floatarray with each call...
             requestAnimationFrame(draw);
-            console.log("in draw");
             analyser.getByteTimeDomainData(dataArray);
             canvasCtx.fillStyle = 'rgb(255, 255, 255, 0.8)';
             canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
