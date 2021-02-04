@@ -13,6 +13,7 @@ jest.mock('../assets/js/validator-instructions', () => ({
 
 
 const {
+    addListeners,
     decideToShowPopUp,
     setSentenceLabel,
     setAudioPlayer,
@@ -23,6 +24,7 @@ describe('onClick instructions-link', () => {
     test('should show Instructions pop-up when link is clicked', () => {
 
         require('../assets/js/validator-prompt-page')
+        addListeners();
         document.getElementById('instructions-link').click();
 
         expect(showInstructions).toHaveBeenCalled();
