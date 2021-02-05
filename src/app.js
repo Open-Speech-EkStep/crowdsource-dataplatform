@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 const { uploadFile } = require("./uploader");
 const helmet = require('helmet')
 const express = require('express');
@@ -78,6 +78,79 @@ app.use(function (req, res, next) {
 });
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+
+
+
+/*** block start */
+
+var passport = require('passport');
+var Auth0Strategy = require('passport-auth0');
+
+// Configure Passport to use Auth0
+var strategy = new Auth0Strategy(
+  {
+    domain: 'dev-hxh0z5qn.us.auth0.com',
+    clientID: process.env.AUTH0_CLIENT_ID,
+    clientSecret: process.env.AUTH0_CLIENT_SECRET,
+    callbackURL:
+      process.env.AUTH0_CALLBACK_URL || 'http://localhost:8080/callback'
+  },
+  function (accessToken, refreshToken, extraParams, profile, done) {
+    // accessToken is the token to call Auth0 API (not needed in the most cases)
+    // extraParams.id_token has the JSON Web Token
+    // profile has all the information from the user
+    // console.log("access_token", accessToken);
+    profile.accessToken = accessToken;
+    profile.refreshToken = refreshToken;
+    profile.extra = extraParams;
+    return done(null, profile);
+  }
+);
+passport.use(strategy);
+
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+  done(null, user);
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+var session = require('express-session');
+
+// config express-session
+var sess = {
+  secret: 'CHANGE THIS TO A RANDOM SECRET',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true
+};
+
+if (app.get('env') === 'production') {
+  // Use secure cookies in production (requires SSL/TLS)
+  sess.cookie.secure = true;
+
+  // Uncomment the line below if your application is behind a proxy (like on Heroku)
+  // or if you're encountering the error message:
+  // "Unable to verify authorization request state"
+  // app.set('trust proxy', 1);
+}
+
+app.use(session(sess));
+
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
+
+app.use('/',require('./authroute'));
+
+/*** block end */
 
 router.get('/', function (req, res) {
   res.render('home.ejs', {MOTHER_TONGUE, LANGUAGES});
@@ -164,6 +237,5 @@ router.get('*', (req, res) => {
 
 app.use('/', router);
 
-
-
 module.exports = app;
+
