@@ -119,16 +119,18 @@ describe('onReady prompt-page', () => {
             setSentenceLabel(0);
 
             const actualText = document.getElementById('sentenceLabel').innerText;
+            const sentence1 = 'लटक कर पैरों को मुक्त करने की एक नई कसरत बालकों के हाथ लग गई';
 
-            expect(actualText).toBe('Sentence 1');
+            expect(actualText).toBe(sentence1);
         })
 
         test('should update text of sentence label when skip clicked once', () => {
             $('#skip_button').click()
 
             const actualText = document.getElementById('sentenceLabel').innerText
+            const sentence2 = 'जल्द ही पोलैंड में कोर्चार्क के रेडियो प्रोग्राम बहुत';
 
-            expect(actualText).toBe('Sentence 2');
+            expect(actualText).toBe(sentence2);
         })
 
         test('should update text of sentence label when skip clicked N times', () => {
@@ -137,8 +139,9 @@ describe('onReady prompt-page', () => {
                 $('#skip_button').click();
 
             const actualText = document.getElementById('sentenceLabel').innerText
+            const sentence3 = 'उसने कहा क्योंकि उसमें दिल नहीं होगा जो सारे शरीर में खून भेजता';
 
-            expect(actualText).toBe('Sentence 3');
+            expect(actualText).toBe(sentence3);
         })
     })
 
