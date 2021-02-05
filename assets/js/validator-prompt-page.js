@@ -17,9 +17,11 @@ const decideToShowPopUp = () => {
     const currentValidator = localStorage.getItem('currentValidator');
     const validatorDetails = localStorage.getItem('validatorDetails');
 
+    const $footer = $('footer');
     if (!validatorDetails) {
         localStorage.setItem('validatorDetails', JSON.stringify({[currentValidator]: currentValidator}));
         $("#validator-page-content").addClass('d-none');
+        $footer.removeClass('bottom').addClass('fixed-bottom')
         showInstructions();
         return;
     }
@@ -27,11 +29,10 @@ const decideToShowPopUp = () => {
     if (!(parsedDetails.hasOwnProperty(currentValidator))) {
         localStorage.setItem('validatorDetails', JSON.stringify(Object.assign(parsedDetails, {[currentValidator]: currentValidator})));
         $("#validator-page-content").addClass('d-none');
+        $footer.removeClass('bottom').addClass('fixed-bottom')
         showInstructions();
     }
 }
-
-
 
 const setAudioPlayer = function () {
     const myAudio = document.getElementById('my-audio');
@@ -184,8 +185,10 @@ function setUpVisualizer() {
 }
 
 function addListeners() {
+    const $footer = $('footer');
     $("#instructions-link").on('click', () => {
         $("#validator-page-content").addClass('d-none');
+        $footer.removeClass('bottom').addClass('fixed-bottom')
         showInstructions();
     });
 
@@ -193,6 +196,7 @@ function addListeners() {
 
     $validatorInstructionsModal.on('hidden.bs.modal', function () {
         $("#validator-page-content").removeClass('d-none');
+        $footer.removeClass('fixed-bottom').addClass('bottom')
     });
 
     const likeButton = $("#like_button");
@@ -228,10 +232,11 @@ function addListeners() {
         updateProgressBar();
         getNextSentence();
     })
-
 }
 
 $(document).ready(() => {
+    const $footer = $('footer')
+    $footer.addClass('bottom').removeClass('fixed-bottom')
     setPageContentHeight();
     addListeners();
     setValidatorNameInHeader();
@@ -240,4 +245,11 @@ $(document).ready(() => {
     setSentenceLabel(currentIndex)
 });
 
-module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer, setValidatorNameInHeader, addListeners,setUpVisualizer};
+module.exports = {
+    decideToShowPopUp,
+    setSentenceLabel,
+    setAudioPlayer,
+    setValidatorNameInHeader,
+    addListeners,
+    setUpVisualizer
+};
