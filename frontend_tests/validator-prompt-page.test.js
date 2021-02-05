@@ -6,31 +6,36 @@ document.body = stringToHTML(
     readFileSync(`${__dirname}/../views/validator-prompt-page.ejs`, 'UTF-8')
 );
 
-
 jest.mock('../assets/js/validator-instructions', () => ({
     showInstructions: jest.fn()
 }))
-
 
 const {
     addListeners,
     decideToShowPopUp,
     setSentenceLabel,
     setAudioPlayer,
-    setValidatorNameInHeader
+    setValidatorNameInHeader,
+    setUpVisualizer
 } = require('../assets/js/validator-prompt-page');
 
-describe('onClick instructions-link', () => {
-    test('should show Instructions pop-up when link is clicked', () => {
+describe("addListeners",()=>{
+    describe('onClick instructions-link', () => {
+        test('should show Instructions pop-up', () => {
 
-        require('../assets/js/validator-prompt-page')
-        addListeners();
-        document.getElementById('instructions-link').click();
+            require('../assets/js/validator-prompt-page')
+            addListeners();
+            document.getElementById('instructions-link').click();
+            expect($("#validator-page-content").hasClass("d-none")).toEqual(true);
 
-        expect(showInstructions).toHaveBeenCalled();
-        jest.clearAllMocks();
+            expect(showInstructions).toHaveBeenCalled();
+            jest.clearAllMocks();
+        });
+
     });
-});
+})
+
+
 
 describe('onReady prompt-page', () => {
 
@@ -48,6 +53,7 @@ describe('onReady prompt-page', () => {
 
             decideToShowPopUp();
             expect(showInstructions).toBeCalledTimes(1);
+            expect($("#validator-page-content").hasClass("d-none")).toEqual(true);
         });
 
         test('should not show Instructions pop-up when validator re-visit to page', () => {
@@ -72,8 +78,8 @@ describe('onReady prompt-page', () => {
     // describe("setAudioPlayer", () => {
     //     test('should start playing audio when play button is clicked', () => {
     //         const myAudio = document.getElementById('my-audio');
-    //         myAudio.play = () => {
-    //         };
+    //         myAudio.play = () => {};
+    //         myAudio.load = () => {};
     //         const play = $('#play');
     //         const pause = $('#pause');
     //
@@ -111,13 +117,12 @@ describe('onReady prompt-page', () => {
     //         expect(pause.hasClass("d-none")).toEqual(false);
     //     });
     //
-    // })
 
     describe('displaySentenceLabel', () => {
         test('should initially set text of sentence label', () => {
             setSentenceLabel(0);
 
-            const actualText = document.getElementById('sentenceLabel').innerText
+            const actualText = document.getElementById('sentenceLabel').innerText;
 
             expect(actualText).toBe('Sentence 1');
 
@@ -142,20 +147,16 @@ describe('onReady prompt-page', () => {
         })
     })
 
-    // describe("setValidatorNameInHeader", () => {
-    //     test('should set validator name with dummy profile icon when page get ready', () => {
-    //         mockLocalStorage();
-    //         localStorage.setItem('currentValidator', "abc");
-    //
-    //         setValidatorNameInHeader();
-    //
-    //         const $navUser = $('#nav-user');
-    //         const $navUserName = $navUser.find('#nav-username');
-    //
-    //         expect($navUser.hasClass("d-none")).toEqual(false);
-    //         expect($navUserName.text()).toEqual("abc");
-    //         localStorage.clear();
-    //     })
-    // })
+    describe("setValidatorNameInHeader", () => {
+        test('should set validator name with dummy profile icon when page get ready', () => {
+
+            setValidatorNameInHeader();
+
+            const $navUser = $('#nav-user');
+
+            expect($navUser.hasClass("d-none")).toEqual(false);
+            localStorage.clear();
+        })
+    })
 });
 

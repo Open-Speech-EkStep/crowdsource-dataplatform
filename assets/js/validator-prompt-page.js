@@ -19,61 +19,19 @@ const decideToShowPopUp = () => {
 
     if (!validatorDetails) {
         localStorage.setItem('validatorDetails', JSON.stringify({[currentValidator]: currentValidator}));
+        $("#validator-page-content").addClass('d-none');
         showInstructions();
         return;
     }
     const parsedDetails = JSON.parse(validatorDetails);
     if (!(parsedDetails.hasOwnProperty(currentValidator))) {
         localStorage.setItem('validatorDetails', JSON.stringify(Object.assign(parsedDetails, {[currentValidator]: currentValidator})));
-        showInstructions()
+        $("#validator-page-content").addClass('d-none');
+        showInstructions();
     }
 }
 
-function addListeners() {
 
-    $("#instructions-link").on('click', () => showInstructions());
-    const $validatorInstructionsModal = $('#validator-instructions-modal');
-
-    $validatorInstructionsModal.on('hidden.bs.modal', function () {
-        $("#validator-page-content").removeClass('d-none');
-    });
-
-    $validatorInstructionsModal.on('show.bs.modal', function () {
-        $("#validator-page-content").addClass('d-none');
-    });
-    const likeButton = $("#like_button");
-    const dislikeButton = $("#dislike_button");
-    likeButton.hover(function () {
-            updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
-        },
-        function () {
-            updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
-        }
-    );
-
-    dislikeButton.hover(function () {
-            updateDecisionButton(dislikeButton, ["#007BFF", "white", "white"]);
-        },
-        function () {
-            updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
-        }
-    );
-
-    dislikeButton.on('click', () => {
-        updateProgressBar("#ccebff");
-        getNextSentence();
-    })
-
-    likeButton.on('click', () => {
-        updateProgressBar("#007BFF");
-        getNextSentence();
-    })
-
-    $('#skip_button').on('click', () => {
-        getNextSentence();
-    })
-
-}
 
 const setAudioPlayer = function () {
     const myAudio = document.getElementById('my-audio');
@@ -174,9 +132,9 @@ const updateDecisionButton = (button, colors) => {
     children[2].setAttribute("fill", colors[2]);
 }
 
-const updateProgressBar = (color) => {
+const updateProgressBar = () => {
     progressCount++;
-    document.getElementById(`rect_${progressCount}`).setAttribute("fill", color);
+    document.getElementById(`rect_${progressCount}`).setAttribute("fill", "#007BFF");
 }
 
 const setValidatorNameInHeader = () => {
@@ -186,16 +144,6 @@ const setValidatorNameInHeader = () => {
     const currentValidator = localStorage.getItem('currentValidator');
     $navUserName.text(currentValidator);
 };
-
-$(document).ready(() => {
-
-    setPageContentHeight();
-    addListeners();
-    setValidatorNameInHeader();
-    decideToShowPopUp();
-    setAudioPlayer();
-    setSentenceLabel(currentIndex)
-});
 
 function disableButton(button) {
     button.children().attr("opacity", "50%");
@@ -235,4 +183,61 @@ function setUpVisualizer() {
     visualize(canvas, analyser);
 }
 
-module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer, setValidatorNameInHeader, addListeners};
+function addListeners() {
+    $("#instructions-link").on('click', () => {
+        $("#validator-page-content").addClass('d-none');
+        showInstructions();
+    });
+
+    const $validatorInstructionsModal = $('#validator-instructions-modal');
+
+    $validatorInstructionsModal.on('hidden.bs.modal', function () {
+        $("#validator-page-content").removeClass('d-none');
+    });
+
+    const likeButton = $("#like_button");
+    const dislikeButton = $("#dislike_button");
+
+    likeButton.hover(function () {
+            updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
+        },
+        function () {
+            updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
+        }
+    );
+
+    dislikeButton.hover(function () {
+            updateDecisionButton(dislikeButton, ["#007BFF", "white", "white"]);
+        },
+        function () {
+            updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
+        }
+    );
+
+    dislikeButton.on('click', () => {
+        updateProgressBar();
+        getNextSentence();
+    })
+
+    likeButton.on('click', () => {
+        updateProgressBar();
+        getNextSentence();
+    })
+
+    $('#skip_button').on('click', () => {
+        updateProgressBar();
+        getNextSentence();
+    })
+
+}
+
+$(document).ready(() => {
+    setPageContentHeight();
+    addListeners();
+    setValidatorNameInHeader();
+    decideToShowPopUp();
+    setAudioPlayer();
+    setSentenceLabel(currentIndex)
+});
+
+module.exports = {decideToShowPopUp, setSentenceLabel, setAudioPlayer, setValidatorNameInHeader, addListeners,setUpVisualizer};
