@@ -96,7 +96,7 @@ const setAudioPlayer = function () {
     }
 }
 
-const sampleSentences = ['Sentence 1', 'Sentence 2', 'Sentence 3'];
+const sampleSentences = ['लटक कर पैरों को मुक्त करने की एक नई कसरत बालकों के हाथ लग गई', 'जल्द ही पोलैंड में कोर्चार्क के रेडियो प्रोग्राम बहुत', 'उसने कहा क्योंकि उसमें दिल नहीं होगा जो सारे शरीर में खून भेजता'];
 let currentIndex = 0;
 let progressCount = 0;
 
