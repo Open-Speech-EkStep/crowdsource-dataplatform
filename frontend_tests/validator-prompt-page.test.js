@@ -14,9 +14,7 @@ const {
     addListeners,
     decideToShowPopUp,
     setSentenceLabel,
-    setAudioPlayer,
     setValidatorNameInHeader,
-    setUpVisualizer
 } = require('../assets/js/validator-prompt-page');
 
 describe("addListeners",()=>{
@@ -31,11 +29,8 @@ describe("addListeners",()=>{
             expect(showInstructions).toHaveBeenCalled();
             jest.clearAllMocks();
         });
-
     });
 })
-
-
 
 describe('onReady prompt-page', () => {
 
@@ -52,6 +47,7 @@ describe('onReady prompt-page', () => {
             localStorage.setItem('currentValidator', "abc");
 
             decideToShowPopUp();
+
             expect(showInstructions).toBeCalledTimes(1);
             expect($("#validator-page-content").hasClass("d-none")).toEqual(true);
         });
@@ -125,7 +121,6 @@ describe('onReady prompt-page', () => {
             const actualText = document.getElementById('sentenceLabel').innerText;
 
             expect(actualText).toBe('Sentence 1');
-
         })
 
         test('should update text of sentence label when skip clicked once', () => {
@@ -149,7 +144,6 @@ describe('onReady prompt-page', () => {
 
     describe("setValidatorNameInHeader", () => {
         test('should set validator name with dummy profile icon when page get ready', () => {
-
             setValidatorNameInHeader();
 
             const $navUser = $('#nav-user');
@@ -159,4 +153,3 @@ describe('onReady prompt-page', () => {
         })
     })
 });
-
