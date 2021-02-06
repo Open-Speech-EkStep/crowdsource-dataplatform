@@ -47,17 +47,16 @@ const setAudioPlayer = function () {
     });
 
     play.on('click', () => {
-        $('canvas').removeClass('d-none')
         $('#default_line').addClass('d-none')
         playAudio();
-        setUpVisualizer();
+        startVisualizer();
     });
 
     pause.on('click', pauseAudio);
 
     replay.on('click', () => {
         replayAudio();
-        setUpVisualizer();
+        startVisualizer();
     });
 
     function playAudio() {
@@ -165,23 +164,40 @@ function resetDecisionRow() {
 
     $("#replay").addClass('d-none');
     $("#play").removeClass('d-none');
-    $('canvas').addClass('d-none')
     $('#default_line').removeClass('d-none')
 }
 
 let context, src;
+let $canvas;
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+function drawCanvasLine() {
+    const canvasCtx = $canvas.getContext('2d');
+    const WIDTH = $canvas.width;
+    const HEIGHT = $canvas.height;
+
+    canvasCtx.fillStyle = 'rgb(255, 255, 255, 0.8)';
+    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+    canvasCtx.lineWidth = 2;
+    canvasCtx.strokeStyle = 'rgb(0,123,255)';
+    canvasCtx.moveTo(0, HEIGHT / 2);
+    canvasCtx.lineTo(WIDTH, HEIGHT / 2);
+    canvasCtx.stroke();
+}
 
 function setUpVisualizer() {
-    const canvas = document.getElementById('myCanvas');
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const audio = document.querySelector('audio');
+    $canvas = document.getElementById('myCanvas');
+    drawCanvasLine();
+}
 
+function startVisualizer() {
+    const audio = document.querySelector('audio');
     context = context || new AudioContext();
     src = src || context.createMediaElementSource(audio);
     const analyser = context.createAnalyser();
     src.connect(analyser);
     analyser.connect(context.destination);
-    visualize(canvas, analyser);
+    visualize($canvas, analyser);
 }
 
 function addListeners() {
@@ -238,6 +254,7 @@ $(document).ready(() => {
     const $footer = $('footer')
     $footer.addClass('bottom').removeClass('fixed-bottom')
     setPageContentHeight();
+    setUpVisualizer();
     addListeners();
     setValidatorNameInHeader();
     decideToShowPopUp();
