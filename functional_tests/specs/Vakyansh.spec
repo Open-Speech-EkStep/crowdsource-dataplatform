@@ -42,3 +42,13 @@
 * When user clicks on "NEXT" button, "SKIP" button should appear
 * When user skips all the rest of the "9" sentences , User should see Thank you Page
 * when user clicks on the Contribute More button, user shall see the Instructions page again
+
+## Validate Admin Login
+* When user clicks on the "Admin Login" button
+* user should see the Sign In pop up
+* When user clicks on cross button, pop up should be closed
+
+## Validate Validator Login
+* When user clicks on the Are you a validator button
+* user should see the Sign In pop up
+* When user clicks on cross button, pop up should be closed

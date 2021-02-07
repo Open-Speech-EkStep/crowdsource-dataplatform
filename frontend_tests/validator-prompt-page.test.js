@@ -62,10 +62,10 @@ describe('onReady prompt-page', () => {
         });
 
         test('should show Instructions pop-up when validator visit to page first time and set validatorDetails if its null', () => {
-            localStorage.setItem('currentValidator', "priyanshu");
+            localStorage.setItem('currentValidator', "testValidator");
 
             decideToShowPopUp();
-            expect(localStorage.getItem('validatorDetails')).toEqual(JSON.stringify({priyanshu: "priyanshu"}));
+            expect(localStorage.getItem('validatorDetails')).toEqual(JSON.stringify({testValidator: "testValidator"}));
 
             expect(showInstructions).toBeCalledTimes(1);
         });
