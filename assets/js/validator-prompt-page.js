@@ -1,36 +1,26 @@
 const {showInstructions} = require('./validator-instructions')
 const {visualize} = require('./visualizer')
+const {setPageContentHeight, toggleFooterPosition} = require('./utils')
 
-function convertPXToVH(px) {
-    return px * (100 / document.documentElement.clientHeight);
-}
-
-function setPageContentHeight() {
-    const $footer = $('footer');
-    const $nav = $('.navbar');
-    const edgeHeightInPixel = $footer.outerHeight() + $nav.outerHeight()
-    const contentHeightInVH = 100 - convertPXToVH(edgeHeightInPixel)
-    $('#content-wrapper').css('min-height', contentHeightInVH + 'vh');
+const showInstructionsPopup = () => {
+    $("#validator-page-content").addClass('d-none');
+    toggleFooterPosition();
+    showInstructions();
 }
 
 const decideToShowPopUp = () => {
     const currentValidator = localStorage.getItem('currentValidator');
     const validatorDetails = localStorage.getItem('validatorDetails');
 
-    const $footer = $('footer');
     if (!validatorDetails) {
         localStorage.setItem('validatorDetails', JSON.stringify({[currentValidator]: currentValidator}));
-        $("#validator-page-content").addClass('d-none');
-        $footer.removeClass('bottom').addClass('fixed-bottom')
-        showInstructions();
+        showInstructionsPopup();
         return;
     }
     const parsedDetails = JSON.parse(validatorDetails);
     if (!(parsedDetails.hasOwnProperty(currentValidator))) {
         localStorage.setItem('validatorDetails', JSON.stringify(Object.assign(parsedDetails, {[currentValidator]: currentValidator})));
-        $("#validator-page-content").addClass('d-none');
-        $footer.removeClass('bottom').addClass('fixed-bottom')
-        showInstructions();
+        showInstructionsPopup();
     }
 }
 
@@ -201,18 +191,15 @@ function startVisualizer() {
 }
 
 function addListeners() {
-    const $footer = $('footer');
     $("#instructions-link").on('click', () => {
-        $("#validator-page-content").addClass('d-none');
-        $footer.removeClass('bottom').addClass('fixed-bottom')
-        showInstructions();
+        showInstructionsPopup();
     });
 
     const $validatorInstructionsModal = $('#validator-instructions-modal');
 
     $validatorInstructionsModal.on('hidden.bs.modal', function () {
         $("#validator-page-content").removeClass('d-none');
-        $footer.removeClass('fixed-bottom').addClass('bottom')
+        toggleFooterPosition();
     });
 
     const likeButton = $("#like_button");
@@ -251,8 +238,7 @@ function addListeners() {
 }
 
 $(document).ready(() => {
-    const $footer = $('footer')
-    $footer.addClass('bottom').removeClass('fixed-bottom')
+    toggleFooterPosition();
     setPageContentHeight();
     setUpVisualizer();
     addListeners();
