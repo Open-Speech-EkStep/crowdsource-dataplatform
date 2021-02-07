@@ -37,12 +37,12 @@ step("Opening Vakyansh", async () => {
 });
 
 step("Search for About Us button", async function () {
-    await link('About Us').exists();
-    click('About Us');
+    assert.ok(await link('About Us').exists())
 });
 
 step("Validate about us content", async function () {
-    await text('ABOUT THE ORGANISATION').exists()
+    await click('About Us');
+    assert.ok(await text('ABOUT THE ORGANISATION').exists());
 });
 
 step("Start Recording button is disabled", async function () {
@@ -64,10 +64,8 @@ step("Language Drop Down should have <language> as the default language", async 
 
 step("Start Recording Button should be for <language> Language", async function (language) {
     const startRecordingButton = taiko.button({id: 'start-record'})
-    if (!await text("START RECORDING IN " + language).exists())
-        assert.fail('Button is not for ODIA Language')
-
-    assert.equal(await startRecordingButton.isDisabled(), false)
+    assert.ok(await text("START RECORDING IN " + language).exists())
+    assert.ok(!(await startRecordingButton.isDisabled()))
 });
 
 step("Speaker details popup should appear and close button should close the pop up", async function () {

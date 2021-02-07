@@ -1,4 +1,5 @@
 const {updateGraph, buildGraphs} = require('./draw-chart');
+const {toggleFooterPosition} = require('./utils')
 
 function validateUserName($userName, $userNameError, $tncCheckbox) {
     const userNameValue = $userName.val().trim();
@@ -114,7 +115,7 @@ const setStartRecordBtnToolTipContent = (userName, $startRecordBtnTooltip) => {
     }
 };
 
-const setSpeakerDetails = (speakerDetailsKey, age, motherTongue,$userName ) => {
+const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
     const speakerDetailsValue = localStorage.getItem(speakerDetailsKey);
     if (speakerDetailsValue) {
         const parsedSpeakerDetails = JSON.parse(speakerDetailsValue);
@@ -150,6 +151,8 @@ $(document).ready(function () {
     let sentenceLanguage = defaultLang;
 
     $tncCheckbox.prop('checked', false);
+
+    toggleFooterPosition();
 
     $startRecordBtnTooltip.tooltip({
         container: 'body',

@@ -1,3 +1,5 @@
+const {setPageContentHeight, toggleFooterPosition} = require('./utils')
+
 const currentIndexKey = 'currentIndex';
 const speakerDetailsKey = 'speakerDetails';
 const totalSentence = 10;
@@ -5,14 +7,6 @@ const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
 const localSpeakerData = localStorage.getItem(speakerDetailsKey);
 const localSpeakerDataParsed = JSON.parse(localSpeakerData);
 const $footer = $('footer');
-
-function setPageContentHeight() {
-    const $footer = $('footer');
-    const $nav = $('.navbar');
-    const edgeHeightInPixel = $footer.outerHeight() + $nav.outerHeight()
-    const contentHeightInVH = 100 - (edgeHeightInPixel* (100 / document.documentElement.clientHeight));
-    $('#content-wrapper').css('min-height', contentHeightInVH + 'vh');
-}
 
 const setUserContribution = (totalSecondsContributed) => {
     const $userContribution = $('#user-contribution');
@@ -178,68 +172,72 @@ if (!(localSpeakerDataParsed)) {
             $speakersDataHoursValue.next().addClass('d-none');
         });
 
-  const adjustTimeProgressBarHeight = () => {
-    const footerHeight = $footer.outerHeight();
-    const progressBottomInPx = $progressPercentWrapper.css('bottom');
-    const progressBottomInNumber = Number(
-      progressBottomInPx.substring(0, progressBottomInPx.length - 2)
-    );
-    if (progressBottomInNumber) {
-      $progressPercentWrapper.css('bottom', footerHeight + 'px');
+    const adjustTimeProgressBarHeight = () => {
+        const footerHeight = $footer.outerHeight();
+        const progressBottomInPx = $progressPercentWrapper.css('bottom');
+        const progressBottomInNumber = Number(
+            progressBottomInPx.substring(0, progressBottomInPx.length - 2)
+        );
+        if (progressBottomInNumber) {
+            $progressPercentWrapper.css('bottom', footerHeight + 'px');
+        }
+    };
+    const isScreenRotated = () => {
+        const orientation =
+            (screen.orientation || {}).type ||
+            screen.mozOrientation ||
+            screen.msOrientation;
+        const screenWidth = innerWidth;
+        const screenHeight = innerHeight;
+        if (
+            (orientation === 'landscape-primary' ||
+                orientation === 'landscape-secondary') &&
+            screenHeight < 600 &&
+            screenHeight < screenWidth
+        ) {
+            return true;
+        } else if (orientation === undefined) {
+            const screenAngle = (screen.orientation || {}).angle;
+            if (screenAngle === 90 || screenAngle === -90) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    };
+    const adjustTimeProgressBarPosition = () => {
+        const $progressPercentWrapper = $('#progress-percent-wrapper');
+        const $previousContainer = $progressPercentWrapper.prev();
+        const $graphcontainer = $('#graphcontainer');
+        const screenRotated = isScreenRotated();
+        if (screenRotated || innerWidth < 600) {
+            $progressPercentWrapper
+                .removeClass('position-fixed')
+                .addClass('position-relative')
+                .css({
+                    right: 0,
+                    bottom: 0,
+                });
+            $graphcontainer.removeClass('mx-auto');
+            $previousContainer.removeClass('mb-6');
+        } else {
+            adjustTimeProgressBarHeight();
+        }
+    };
+    try {
+        if (screen.orientation && screen.orientation.onchange) {
+            screen.orientation.onchange = adjustTimeProgressBarPosition;
+        }
+        adjustTimeProgressBarPosition();
+    } catch (err) {
+        console.log(err);
     }
-  };
-  const isScreenRotated = () => {
-    const orientation =
-      (screen.orientation || {}).type ||
-      screen.mozOrientation ||
-      screen.msOrientation;
-    const screenWidth = innerWidth;
-    const screenHeight = innerHeight;
-    if (
-      (orientation === 'landscape-primary' ||
-        orientation === 'landscape-secondary') &&
-      screenHeight < 600 &&
-      screenHeight < screenWidth
-    ) {
-      return true;
-    } else if (orientation === undefined) {
-      const screenAngle = (screen.orientation || {}).angle;
-      if (screenAngle === 90 || screenAngle === -90) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  };
-  const adjustTimeProgressBarPosition = () => {
-    const $progressPercentWrapper = $('#progress-percent-wrapper');
-    const $previousContainer = $progressPercentWrapper.prev();
-    const $graphcontainer = $('#graphcontainer');
-    const screenRotated = isScreenRotated();
-    if (screenRotated || innerWidth < 600) {
-      $progressPercentWrapper
-        .removeClass('position-fixed')
-        .addClass('position-relative')
-        .css({
-          right: 0,
-          bottom: 0,
-        });
-      $graphcontainer.removeClass('mx-auto');
-      $previousContainer.removeClass('mb-6');
-    } else {
-      adjustTimeProgressBarHeight();
-    }
-  };
-  try {
-    if (screen.orientation && screen.orientation.onchange) {
-      screen.orientation.onchange = adjustTimeProgressBarPosition;
-    }
-    adjustTimeProgressBarPosition();
-  } catch (err) {
-    console.log(err);
-  }
 }
+
+$(document).ready(()=>{
+    toggleFooterPosition();
+})
 
 module.exports = {setUserContribution, getTotalSecondsContributed};

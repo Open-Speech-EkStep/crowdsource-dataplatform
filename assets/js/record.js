@@ -1,3 +1,5 @@
+const {setPageContentHeight, toggleFooterPosition} = require('./utils')
+
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
 const currentIndexKey = 'currentIndex';
@@ -10,18 +12,6 @@ function getValue(number, maxValue) {
         : number > maxValue
             ? maxValue
             : number;
-}
-
-function convertPXToVH(px) {
-    return px * (100 / document.documentElement.clientHeight);
-}
-
-function setPageContentHeight() {
-    const $footer = $('footer');
-    const $nav = $('.navbar');
-    const edgeHeightInPixel = $footer.outerHeight() + $nav.outerHeight()
-    const contentHeightInVH = 100 - convertPXToVH(edgeHeightInPixel)
-    $('#content-wrapper').css('min-height', contentHeightInVH + 'vh');
 }
 
 function getCurrentIndex(lastIndex) {
@@ -286,7 +276,7 @@ const initialize = () => {
                 setTimeout(goToThankYouPage, 2500);
             }
             $skipBtn.addClass('d-none');
-            $footer.addClass('fixed-bottom');
+            toggleFooterPosition()
             currentIndex++;
             animateCSS($pageContent, 'zoomOut', () =>
                 $pageContent.addClass('d-none')
@@ -384,7 +374,6 @@ const initialize = () => {
 };
 
 $(document).ready(() => {
-    const $footer = $('footer');
     window.crowdSource = {};
     const $instructionModal = $('#instructionsModal');
     const $errorModal = $('#errorModal');
@@ -404,9 +393,7 @@ $(document).ready(() => {
 
         $instructionModal.on('hidden.bs.modal', function () {
             $pageContent.removeClass('d-none');
-            $footer.removeClass('fixed-bottom');
-            $footer.addClass('bottom');
-            $footer.css("bottom", "0")
+            toggleFooterPosition();
         });
 
         $errorModal.on('show.bs.modal', function () {
