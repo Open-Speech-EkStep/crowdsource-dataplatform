@@ -147,6 +147,7 @@ function resetDecisionRow() {
 
     updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
     updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
+    skipButton.removeAttr('style');
 
     disableButton(likeButton)
     disableButton(dislikeButton)
@@ -200,22 +201,29 @@ function addListeners() {
 
     const likeButton = $("#like_button");
     const dislikeButton = $("#dislike_button");
+    const $skipButton = $('#skip_button');
 
-    likeButton.hover(function () {
-            updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
+    likeButton.hover(() => {
+            updateDecisionButton(likeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
         },
-        function () {
+        () => {
             updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
-        }
-    );
+        });
 
-    dislikeButton.hover(function () {
-            updateDecisionButton(dislikeButton, ["#007BFF", "white", "white"]);
+    dislikeButton.hover(() => {
+            updateDecisionButton(dislikeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
         },
-        function () {
+        () => {
             updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
-        }
-    );
+        });
+
+    dislikeButton.mousedown(() => {
+        updateDecisionButton(dislikeButton, ["#007BFF", "white", "white"]);
+    });
+
+    likeButton.mousedown(() => {
+        updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
+    });
 
     dislikeButton.on('click', () => {
         updateProgressBar();
@@ -227,9 +235,19 @@ function addListeners() {
         getNextSentence();
     })
 
-    $('#skip_button').on('click', () => {
+    $skipButton.on('click', () => {
         updateProgressBar();
         getNextSentence();
+    })
+
+    $skipButton.hover(() => {
+        $skipButton.css('border-color', '#bfddf5');
+    }, () => {
+        $skipButton.removeAttr('style');
+    },)
+
+    $skipButton.mousedown(()=>{
+        $skipButton.css('background-color', '#bfddf5')
     })
 }
 
