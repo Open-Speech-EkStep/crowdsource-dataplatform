@@ -29,11 +29,13 @@ const setAudioPlayer = function () {
     const play = $('#play');
     const pause = $('#pause');
     const replay = $('#replay');
+    const textDiv = $('#audioplayer-text');
 
     myAudio.addEventListener("ended", () => {
         enableValidation();
         pause.addClass('d-none');
         replay.removeClass('d-none');
+        textDiv.text('Replay');
     });
 
     play.on('click', () => {
@@ -53,12 +55,14 @@ const setAudioPlayer = function () {
         myAudio.load();
         play.addClass('d-none');
         pause.removeClass('d-none');
+        textDiv.text('Pause');
         myAudio.play();
     }
 
     function pauseAudio() {
         pause.addClass('d-none');
         replay.removeClass('d-none');
+        textDiv.text('Replay');
         enableValidation();
         myAudio.pause();
     }
@@ -67,6 +71,7 @@ const setAudioPlayer = function () {
         myAudio.load();
         replay.addClass('d-none');
         pause.removeClass('d-none');
+        textDiv.text('Pause');
         myAudio.play();
     }
 
@@ -144,10 +149,12 @@ function resetDecisionRow() {
     const dislikeButton = $("#dislike_button");
     const likeButton = $("#like_button");
     const skipButton = $("#skip_button");
+    const textDiv = $('#audioplayer-text');
 
     updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
     updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
     skipButton.removeAttr('style');
+    textDiv.text('Play');
 
     disableButton(likeButton)
     disableButton(dislikeButton)
