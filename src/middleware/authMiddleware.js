@@ -1,34 +1,21 @@
-var jsonwebtoken = require('jsonwebtoken');
-
 const managerAuthMiddleWare = (req, res, next) => {
-    try{
-        let permissions = req.session.passport.user.permissions;
-        if (permissions.includes("manager:action")) {
-            next();
-        } else {
-            console.log("permission not present");
-            res.sendStatus(401);
-        }
-    } catch(err){
-        console.log(err);
+    let permissions = req.session.passport.user.permissions;
+    if (permissions.includes("manager:action")) {
+        next();
+    } else {
+        console.log("permission not present");
         res.sendStatus(401);
     }
 }
 
 const validatorAuthMiddleware = (req, res, next) => {
-    try{
-        let permissions = req.session.passport.user.permissions;
-        if (permissions.includes("validator:action")) {
-            next();
-        } else {
-            console.log("permission not present");
-            res.sendStatus(401);
-        }
-    }catch(err){
-        console.log(err);
+    let permissions = req.session.passport.user.permissions;
+    if (permissions.includes("validator:action")) {
+        next();
+    } else {
+        console.log("permission not present");
         res.sendStatus(401);
     }
-    
 }
 
 const sessionMiddleware = (req, res, next) => {
@@ -54,4 +41,4 @@ const sessionMiddleware = (req, res, next) => {
     next();
 };
 
-module.exports = { managerAuthMiddleWare, validatorAuthMiddleware,sessionMiddleware };
+module.exports = { managerAuthMiddleWare, validatorAuthMiddleware, sessionMiddleware };

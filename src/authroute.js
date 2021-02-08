@@ -1,13 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-var dotenv = require('dotenv');
 var util = require('util');
 var url = require('url');
 var querystring = require('querystring');
 var jsonwebtoken = require('jsonwebtoken');
 
-// dotenv.config();
 
 // Perform the login, after login Auth0 will redirect to callback
 router.get('/login', passport.authenticate('auth0', {

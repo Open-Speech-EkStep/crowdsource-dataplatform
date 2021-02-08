@@ -25,7 +25,6 @@ describe('middleware test', function () {
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
             expect(res.send).toHaveBeenCalledTimes(0)
-
         });
 
         test('should fail and send bad request if userName is more than 12 char and age is given format', function () {

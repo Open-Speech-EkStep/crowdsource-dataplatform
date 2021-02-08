@@ -142,7 +142,6 @@ if (app.get('env') === 'production') {
 app.use(session(sess));
 
 app.use('/', require('./authroute'));
-app.use('/', require('./secureroute'));
 
 /*** block end */
 
@@ -230,6 +229,7 @@ router.get('*', (req, res) => {
 });
 
 app.use('/', router);
-
+// Any routes added after this secure route should be authorized urls only otherwise you will get 401 because of middleware added.
+app.use('/', require('./secureroute'));
 module.exports = app;
 
