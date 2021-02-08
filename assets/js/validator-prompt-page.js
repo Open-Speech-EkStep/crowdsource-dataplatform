@@ -158,10 +158,10 @@ function resetDecisionRow() {
 }
 
 let context, src;
-let $canvas;
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 
 function drawCanvasLine() {
+    const $canvas = document.getElementById('myCanvas');
     const canvasCtx = $canvas.getContext('2d');
     const WIDTH = $canvas.width;
     const HEIGHT = $canvas.height;
@@ -175,12 +175,8 @@ function drawCanvasLine() {
     canvasCtx.stroke();
 }
 
-function setUpVisualizer() {
-    $canvas = document.getElementById('myCanvas');
-    drawCanvasLine();
-}
-
 function startVisualizer() {
+    const $canvas = document.getElementById('myCanvas');
     const audio = document.querySelector('audio');
     context = context || new AudioContext();
     src = src || context.createMediaElementSource(audio);
@@ -240,7 +236,7 @@ function addListeners() {
 $(document).ready(() => {
     toggleFooterPosition();
     setPageContentHeight();
-    setUpVisualizer();
+    drawCanvasLine();
     addListeners();
     setValidatorNameInHeader();
     decideToShowPopUp();
@@ -253,6 +249,5 @@ module.exports = {
     setSentenceLabel,
     setAudioPlayer,
     setValidatorNameInHeader,
-    addListeners,
-    setUpVisualizer
+    addListeners
 };
