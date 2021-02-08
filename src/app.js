@@ -12,15 +12,15 @@ const {
   getAllInfo,
 } = require('./dbOperations');
 const fs = require('fs');
-const {v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
-const {ONE_YEAR, MOTHER_TONGUE, LANGUAGES} = require('./constants');
+const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES } = require('./constants');
 const {
   validateUserInputAndFile,
   validateUserInfo,
 } = require('./middleware/validateUserInputs');
 const Ddos = require('ddos');
-const ddos = new Ddos({ burst: 12, limit: 70 })
+const ddos = new Ddos({ burst: 12, limit: 70 });
 app.use(ddos.express);
 app.enable('trust proxy');
 
@@ -55,26 +55,26 @@ const multerStorage = multer.diskStorage({
     cb(null, currentDateAndTime() + '_' + randomString() + '.wav');
   },
 });
-const upload = multer({storage: multerStorage});
+const upload = multer({ storage: multerStorage });
 app.use(express.json());
 app.use(upload.single('audio_data'));
 app.use('/sentences', validateUserInfo);
 app.use('/upload', validateUserInputAndFile);
-app.use(express.static(__dirname, {dotfiles: 'allow'}));
+app.use(express.static(__dirname, { dotfiles: 'allow' }));
 app.use(helmet());
 app.disable('x-powered-by');
 app.use(compression());
 app.use(cookieParser());
 app.use(function (req, res, next) {
-    let cookie = req.cookies.userId;
-    if (cookie === undefined) {
-        res.cookie('userId', uuidv4(), {
-            maxAge: ONE_YEAR,
-            httpOnly: true,
-            secure: true
-        });
-    }
-    next();
+  let cookie = req.cookies.userId;
+  if (cookie === undefined) {
+    res.cookie('userId', uuidv4(), {
+      maxAge: ONE_YEAR,
+      httpOnly: true,
+      secure: true
+    });
+  }
+  next();
 });
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -89,7 +89,7 @@ var Auth0Strategy = require('passport-auth0');
 // Configure Passport to use Auth0
 var strategy = new Auth0Strategy(
   {
-    domain: 'dev-hxh0z5qn.us.auth0.com',
+    domain: process.env.AUTH0_ISSUER_BASE_URL.replace("https://", "").replace("/", ""),
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
     callbackURL:
@@ -101,8 +101,6 @@ var strategy = new Auth0Strategy(
     // profile has all the information from the user
     // console.log("access_token", accessToken);
     profile.accessToken = accessToken;
-    profile.refreshToken = refreshToken;
-    profile.extra = extraParams;
     return done(null, profile);
   }
 );
@@ -125,7 +123,7 @@ var session = require('express-session');
 
 // config express-session
 var sess = {
-  secret: 'CHANGE THIS TO A RANDOM SECRET',
+  secret: process.env.SESSION_SECRET,
   cookie: {},
   resave: false,
   saveUninitialized: true
@@ -143,23 +141,19 @@ if (app.get('env') === 'production') {
 
 app.use(session(sess));
 
-app.use(function (req, res, next) {
-  res.locals.user = req.user;
-  next();
-});
-
-app.use('/',require('./authroute'));
+app.use('/', require('./authroute'));
+app.use('/', require('./secureroute'));
 
 /*** block end */
 
 router.get('/', function (req, res) {
-  res.render('home.ejs', {MOTHER_TONGUE, LANGUAGES});
+  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES });
 });
 
 router.get('/getDetails/:language', async function (req, res) {
   try {
-      const currentLanguage = req.params.language;
-      const allDetails = await getAllDetails(currentLanguage);
+    const currentLanguage = req.params.language;
+    const allDetails = await getAllDetails(currentLanguage);
     res.status(200).send(allDetails);
   } catch (err) {
     console.log(err);
@@ -199,7 +193,7 @@ router.get('/thank-you', function (req, res) {
 router.get('/record', (req, res) => {
   res.render('record.ejs');
 });
-router.post('/sentences', (req, res) =>  updateAndGetSentences(req, res));
+router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 router.post('/upload', (req, res) => {
   const file = req.file;
   const sentenceId = req.body.sentenceId;

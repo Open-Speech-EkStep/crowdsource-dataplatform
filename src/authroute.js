@@ -5,12 +5,14 @@ var dotenv = require('dotenv');
 var util = require('util');
 var url = require('url');
 var querystring = require('querystring');
+var jsonwebtoken = require('jsonwebtoken');
 
-dotenv.config();
+// dotenv.config();
 
 // Perform the login, after login Auth0 will redirect to callback
 router.get('/login', passport.authenticate('auth0', {
-  scope: 'openid email profile metadata language'
+  scope: 'openid email profile metadata language',
+  audience: process.env.AUDIENCE_URL
 }), function (req, res) {
   res.redirect('/');
 });
@@ -20,12 +22,18 @@ router.get('/callback', function (req, res, next) {
   passport.authenticate('auth0', function (err, user, info) {
     if (err) { return next(err); }
     if (!user) { return res.redirect('/'); }
-    console.log(user);
+    var decoded = jsonwebtoken.decode(user.accessToken);
+    user.permissions = decoded.permissions;
     req.logIn(user, function (err) {
       if (err) { return next(err); }
-      const returnTo = req.session.returnTo;
-      delete req.session.returnTo;
-      res.redirect(returnTo || '/');
+      const permissions = user.permissions;
+      if(permissions.includes("validator:action")){
+        res.redirect('/validator');
+      }else if(permissions.includes("manager:action")){
+        res.redirect('/manager');
+      } else {
+        res.redirect(returnTo || '/');
+      }
     });
   })(req, res, next);
 });
@@ -40,7 +48,7 @@ router.get('/logout', (req, res) => {
     returnTo += ':' + port;
   }
   var logoutURL = new url.URL(
-    util.format('https://%s/v2/logout', process.env.AUTH0_DOMAIN)
+    util.format(process.env.AUTH0_ISSUER_BASE_URL+'v2/logout')
   );
   var searchString = querystring.stringify({
     client_id: process.env.AUTH0_CLIENT_ID,
@@ -50,5 +58,7 @@ router.get('/logout', (req, res) => {
 
   res.redirect(logoutURL);
 });
+
+
 
 module.exports = router;
