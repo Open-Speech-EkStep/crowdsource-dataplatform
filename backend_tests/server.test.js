@@ -29,11 +29,11 @@ describe("Test the root path", () => {
             .expect(200);
     });
 
-    test("It should response the GET method for validator-prompt-page", async () => {
-        await request(app)
-            .get("/validator/prompt-page")
-            .expect(200);
-    });
+    // test("It should response the GET method for validator-prompt-page", async () => {
+    //     await request(app)
+    //         .get("/validator/prompt-page")
+    //         .expect(200);
+    // });
 
     test("It should response the GET method of getDetails", async () => {
         dbOperations.getAllDetails.mockReturnValue({ "total_speaker": 2345, "sentence": 100 })
