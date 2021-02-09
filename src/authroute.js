@@ -1,16 +1,26 @@
-var express = require('express');
-var router = express.Router();
-var passport = require('passport');
-var util = require('util');
-var url = require('url');
-var querystring = require('querystring');
-var jsonwebtoken = require('jsonwebtoken');
+const express = require('express');
+const router = express.Router();
+const passport = require('passport');
+const util = require('util');
+const url = require('url');
+const querystring = require('querystring');
+const jsonwebtoken = require('jsonwebtoken');
 
+const redirectUser = (user) => {
+    const permissions = user.permissions;
+    if(permissions.includes("validator:action")){
+      res.redirect('/validator');
+    }else if(permissions.includes("manager:action")){
+      res.redirect('/manager');
+    } else {
+      res.redirect(returnTo || '/');
+    }
+}
 
 // Perform the login, after login Auth0 will redirect to callback
 router.get('/login', passport.authenticate('auth0', {
   scope: 'openid email profile metadata language',
-  audience: process.env.AUDIENCE_URL
+  audience: process.env.API_AUDIENCE
 }), function (req, res) {
   res.redirect('/');
 });
@@ -19,19 +29,15 @@ router.get('/login', passport.authenticate('auth0', {
 router.get('/callback', function (req, res, next) {
   passport.authenticate('auth0', function (err, user, info) {
     if (err) { return next(err); }
+
     if (!user) { return res.redirect('/'); }
-    var decoded = jsonwebtoken.decode(user.accessToken);
+
+    let decoded = jsonwebtoken.decode(user.accessToken);
     user.permissions = decoded.permissions;
+    
     req.logIn(user, function (err) {
       if (err) { return next(err); }
-      const permissions = user.permissions;
-      if(permissions.includes("validator:action")){
-        res.redirect('/validator');
-      }else if(permissions.includes("manager:action")){
-        res.redirect('/manager');
-      } else {
-        res.redirect(returnTo || '/');
-      }
+      redirectUser(user)
     });
   })(req, res, next);
 });
@@ -40,15 +46,15 @@ router.get('/callback', function (req, res, next) {
 router.get('/logout', (req, res) => {
   req.logout();
 
-  var returnTo = req.protocol + '://' + req.hostname;
-  var port = req.connection.localPort;
+  let returnTo = req.protocol + '://' + req.hostname;
+  let port = req.connection.localPort;
   if (port !== undefined && port !== 80 && port !== 443) {
     returnTo += ':' + port;
   }
-  var logoutURL = new url.URL(
-    util.format(process.env.AUTH0_ISSUER_BASE_URL+'v2/logout')
+  let logoutURL = new url.URL(
+    util.format(process.env.AUTH_ISSUER_DOMAIN+'v2/logout')
   );
-  var searchString = querystring.stringify({
+  let searchString = querystring.stringify({
     client_id: process.env.AUTH0_CLIENT_ID,
     returnTo: returnTo
   });
