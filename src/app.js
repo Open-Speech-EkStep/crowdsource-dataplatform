@@ -87,7 +87,6 @@ app.set('view engine', 'ejs');
 /*** block start */
 
 
-
 // Configure Passport to use Auth0
 let strategy = new Auth0Strategy(
   {
