@@ -2,7 +2,7 @@ let express = require('express');
 let router = express.Router();
 const { managerAuthMiddleWare, validatorAuthMiddleware, sessionMiddleware } = require('./middleware/authMiddleware');
 
-router.use(sessionMiddleware);
+router.use(['/manager','/validator'],sessionMiddleware);
 
 router.get('/manager', managerAuthMiddleWare, (req, res) => {
     res.send("I am a manager")

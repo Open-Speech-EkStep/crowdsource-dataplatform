@@ -224,12 +224,14 @@ router.post('/upload', (req, res) => {
       res.sendStatus(500);
     });
 });
-router.get('*', (req, res) => {
-  res.render('not-found.ejs');
-});
 
 app.use('/', router);
 // Any routes added after this secure route should be authorized urls only otherwise you will get 401 because of middleware added.
 app.use('/', require('./secureroute'));
+
+app.get('*', (req, res) => {
+  res.render('not-found.ejs');
+});
+
 module.exports = app;
 
