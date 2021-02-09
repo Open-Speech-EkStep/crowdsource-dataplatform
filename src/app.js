@@ -1,9 +1,12 @@
-// require('dotenv').config();
+require('dotenv').config();
 const { uploadFile } = require("./uploader");
 const helmet = require('helmet')
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
+const passport = require('passport');
+const Auth0Strategy = require('passport-auth0');
+const session = require('express-session');
 const router = express.Router();
 const {
   updateDbWithFileName,
@@ -12,15 +15,15 @@ const {
   getAllInfo,
 } = require('./dbOperations');
 const fs = require('fs');
-const {v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
-const {ONE_YEAR, MOTHER_TONGUE, LANGUAGES} = require('./constants');
+const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES } = require('./constants');
 const {
   validateUserInputAndFile,
   validateUserInfo,
 } = require('./middleware/validateUserInputs');
 const Ddos = require('ddos');
-const ddos = new Ddos({ burst: 12, limit: 70 })
+const ddos = new Ddos({ burst: 12, limit: 70 });
 app.use(ddos.express);
 app.enable('trust proxy');
 
@@ -55,38 +58,102 @@ const multerStorage = multer.diskStorage({
     cb(null, currentDateAndTime() + '_' + randomString() + '.wav');
   },
 });
-const upload = multer({storage: multerStorage});
+const upload = multer({ storage: multerStorage });
 app.use(express.json());
 app.use(upload.single('audio_data'));
 app.use('/sentences', validateUserInfo);
 app.use('/upload', validateUserInputAndFile);
-app.use(express.static(__dirname, {dotfiles: 'allow'}));
+app.use(express.static(__dirname, { dotfiles: 'allow' }));
 app.use(helmet());
 app.disable('x-powered-by');
 app.use(compression());
 app.use(cookieParser());
 app.use(function (req, res, next) {
-    let cookie = req.cookies.userId;
-    if (cookie === undefined) {
-        res.cookie('userId', uuidv4(), {
-            maxAge: ONE_YEAR,
-            httpOnly: true,
-            secure: true
-        });
-    }
-    next();
+  let cookie = req.cookies.userId;
+  if (cookie === undefined) {
+    res.cookie('userId', uuidv4(), {
+      maxAge: ONE_YEAR,
+      httpOnly: true,
+      secure: true
+    });
+  }
+  next();
 });
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+
+
+/*** block start */
+
+
+
+// Configure Passport to use Auth0
+let strategy = new Auth0Strategy(
+  {
+    domain: process.env.AUTH_ISSUER_DOMAIN,
+    clientID: process.env.AUTH0_CLIENT_ID,
+    clientSecret: process.env.AUTH0_CLIENT_SECRET,
+    callbackURL:
+      process.env.AUTH0_CALLBACK_URL || 'http://localhost:8080/callback'
+  },
+  function (accessToken, refreshToken, extraParams, profile, done) {
+    // accessToken is the token to call Auth0 API (not needed in the most cases)
+    // extraParams.id_token has the JSON Web Token
+    // profile has all the information from the user
+    // console.log("access_token", accessToken);
+    profile.accessToken = accessToken;
+    return done(null, profile);
+  }
+);
+passport.use(strategy);
+
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+  done(null, user);
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+
+// config express-session
+let sess = {
+  secret: process.env.SESSION_SECRET,
+  cookie: {},
+  resave: false,
+  saveUninitialized: true
+};
+
+if (app.get('env') === 'production') {
+  // Use secure cookies in production (requires SSL/TLS)
+  sess.cookie.secure = true;
+
+  // Uncomment the line below if your application is behind a proxy (like on Heroku)
+  // or if you're encountering the error message:
+  // "Unable to verify authorization request state"
+  // app.set('trust proxy', 1);
+}
+
+app.use(session(sess));
+
+app.use('/', require('./authroute'));
+
+/*** block end */
+
 router.get('/', function (req, res) {
-  res.render('home.ejs', {MOTHER_TONGUE, LANGUAGES});
+  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES });
 });
 
 router.get('/getDetails/:language', async function (req, res) {
   try {
-      const currentLanguage = req.params.language;
-      const allDetails = await getAllDetails(currentLanguage);
+    const currentLanguage = req.params.language;
+    const allDetails = await getAllDetails(currentLanguage);
     res.status(200).send(allDetails);
   } catch (err) {
     console.log(err);
@@ -126,7 +193,7 @@ router.get('/thank-you', function (req, res) {
 router.get('/record', (req, res) => {
   res.render('record.ejs');
 });
-router.post('/sentences', (req, res) =>  updateAndGetSentences(req, res));
+router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 router.post('/upload', (req, res) => {
   const file = req.file;
   const sentenceId = req.body.sentenceId;
@@ -158,12 +225,14 @@ router.post('/upload', (req, res) => {
       res.sendStatus(500);
     });
 });
-router.get('*', (req, res) => {
+
+app.use('/', router);
+// Any routes added after this secure route should be authorized urls only otherwise you will get 401 because of middleware added.
+app.use('/', require('./secureroute'));
+
+app.get('*', (req, res) => {
   res.render('not-found.ejs');
 });
 
-app.use('/', router);
-
-
-
 module.exports = app;
+
