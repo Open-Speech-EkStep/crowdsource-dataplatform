@@ -4,6 +4,9 @@ const helmet = require('helmet')
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
+const passport = require('passport');
+const Auth0Strategy = require('passport-auth0');
+const session = require('express-session');
 const router = express.Router();
 const {
   updateDbWithFileName,
@@ -83,13 +86,12 @@ app.set('view engine', 'ejs');
 
 /*** block start */
 
-var passport = require('passport');
-var Auth0Strategy = require('passport-auth0');
+
 
 // Configure Passport to use Auth0
-var strategy = new Auth0Strategy(
+let strategy = new Auth0Strategy(
   {
-    domain: process.env.AUTH0_ISSUER_BASE_URL.replace("https://", "").replace("/", ""),
+    domain: process.env.AUTH_ISSUER_DOMAIN,
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
     callbackURL:
@@ -119,10 +121,9 @@ app.use(passport.session());
 
 
 
-var session = require('express-session');
 
 // config express-session
-var sess = {
+let sess = {
   secret: process.env.SESSION_SECRET,
   cookie: {},
   resave: false,
