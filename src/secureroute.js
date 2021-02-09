@@ -2,14 +2,18 @@ let express = require('express');
 let router = express.Router();
 const { managerAuthMiddleWare, validatorAuthMiddleware, sessionMiddleware } = require('./middleware/authMiddleware');
 
-router.use(['/manager','/validator'],sessionMiddleware);
+router.use(['/manager','/validator','/validator/prompt-page'],sessionMiddleware);
 
 router.get('/manager', managerAuthMiddleWare, (req, res) => {
     res.send("I am a manager")
 })
 
 router.get('/validator', validatorAuthMiddleware, (req, res) => {
-    res.send("I am a validator")
+    res.send("I am a validator");
 })
+
+router.get('/validator/prompt-page', validatorAuthMiddleware, (req, res) => {
+    res.render('validator-prompt-page.ejs');
+  });
 
 module.exports = router;

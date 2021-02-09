@@ -9,11 +9,11 @@ const jsonwebtoken = require('jsonwebtoken');
 const redirectUser = (user, res) => {
     const permissions = user.permissions;
     if(permissions.includes("validator:action")){
-      res.redirect('/validator');
+      res.redirect('/validator/prompt-page');
     }else if(permissions.includes("manager:action")){
       res.redirect('/manager');
     } else {
-      res.redirect(returnTo || '/');
+      res.redirect('/');
     }
 }
 
