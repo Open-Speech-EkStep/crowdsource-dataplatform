@@ -6,7 +6,7 @@ const url = require('url');
 const querystring = require('querystring');
 const jsonwebtoken = require('jsonwebtoken');
 
-const redirectUser = (user) => {
+const redirectUser = (user, res) => {
     const permissions = user.permissions;
     if(permissions.includes("validator:action")){
       res.redirect('/validator');
@@ -37,7 +37,7 @@ router.get('/callback', function (req, res, next) {
     
     req.logIn(user, function (err) {
       if (err) { return next(err); }
-      redirectUser(user)
+      redirectUser(user, res)
     });
   })(req, res, next);
 });
@@ -52,7 +52,7 @@ router.get('/logout', (req, res) => {
     returnTo += ':' + port;
   }
   let logoutURL = new url.URL(
-    util.format(process.env.AUTH_ISSUER_DOMAIN+'v2/logout')
+    util.format("https://"+process.env.AUTH_ISSUER_DOMAIN+'/v2/logout')
   );
   let searchString = querystring.stringify({
     client_id: process.env.AUTH0_CLIENT_ID,
