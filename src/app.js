@@ -177,9 +177,6 @@ router.get('/getAllInfo/:language', async function (req, res) {
   }
 });
 
-router.get('/validator/prompt-page', (req, res) => {
-  res.render('validator-prompt-page.ejs');
-});
 
 router.get('/about-us', function (req, res) {
   res.render('about-us.ejs');
