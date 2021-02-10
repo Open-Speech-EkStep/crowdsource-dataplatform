@@ -11,7 +11,7 @@ const redirectUser = (user, res) => {
     if(permissions.includes("validator:action")){
       res.redirect('/validator/prompt-page');
     }else if(permissions.includes("manager:action")){
-      res.redirect('/manager');
+      res.redirect(process.env.AUTH0_ADMIN_LOGIN_URL);
     } else {
       res.redirect('/');
     }
@@ -79,6 +79,5 @@ router.get('/logout', (req, res) => {
 
   clearSessionAndRedirect(req, res, logoutURL);
 });
-
 
 module.exports = router;

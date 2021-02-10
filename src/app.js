@@ -176,7 +176,6 @@ router.get('/getAllInfo/:language', async function (req, res) {
   }
 });
 
-
 router.get('/about-us', function (req, res) {
   res.render('about-us.ejs');
 });
@@ -231,4 +230,3 @@ app.get('*', (req, res) => {
 });
 
 module.exports = app;
-
