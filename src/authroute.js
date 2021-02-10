@@ -17,6 +17,35 @@ const redirectUser = (user, res) => {
     }
 }
 
+const getLogOutUrl = (req) => {
+  let returnTo = req.protocol + '://' + req.hostname;
+  let port = req.connection.localPort;
+  if (port !== undefined && port !== 80 && port !== 443) {
+    returnTo += ':' + port;
+  }
+  let logoutURL = new url.URL(
+    util.format("https://"+process.env.AUTH_ISSUER_DOMAIN+'/v2/logout')
+  );
+  let searchString = querystring.stringify({
+    client_id: process.env.AUTH0_CLIENT_ID,
+    returnTo: returnTo
+  });
+  logoutURL.search = searchString;
+  return logoutURL;
+}
+
+const clearSessionAndRedirect = (req,res, logoutURL) => {
+  if (req.session) {
+    req.session.destroy(function (err) {
+      if (err) {
+        console.log(err)
+      }
+      console.log("Destroyed the user session on Auth0 endpoint");
+      res.redirect(logoutURL);
+    });
+  }
+}
+
 // Perform the login, after login Auth0 will redirect to callback
 router.get('/login', passport.authenticate('auth0', {
   scope: 'openid email profile metadata language',
@@ -46,23 +75,10 @@ router.get('/callback', function (req, res, next) {
 router.get('/logout', (req, res) => {
   req.logout();
 
-  let returnTo = req.protocol + '://' + req.hostname;
-  let port = req.connection.localPort;
-  if (port !== undefined && port !== 80 && port !== 443) {
-    returnTo += ':' + port;
-  }
-  let logoutURL = new url.URL(
-    util.format("https://"+process.env.AUTH_ISSUER_DOMAIN+'/v2/logout')
-  );
-  let searchString = querystring.stringify({
-    client_id: process.env.AUTH0_CLIENT_ID,
-    returnTo: returnTo
-  });
-  logoutURL.search = searchString;
+  const logoutURL = getLogOutUrl(req);
 
-  res.redirect(logoutURL);
+  clearSessionAndRedirect(req, res, logoutURL);
 });
-
 
 
 module.exports = router;
