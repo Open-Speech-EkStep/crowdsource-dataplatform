@@ -13,7 +13,8 @@ router.get('/validator', validatorAuthMiddleware, (req, res) => {
 })
 
 router.get('/validator/prompt-page', validatorAuthMiddleware, (req, res) => {
-    res.render('validator-prompt-page.ejs');
+    const { displayName } = req.session.passport.user;
+    res.render('validator-prompt-page.ejs',{username:displayName});
   });
 
 module.exports = router;
