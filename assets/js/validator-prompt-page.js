@@ -136,7 +136,8 @@ const setValidatorNameInHeader = () => {
     const $navUser = $('#nav-user');
     const $navUserName = $navUser.find('#nav-username');
     $navUser.removeClass('d-none');
-    const currentValidator = localStorage.getItem('currentValidator');
+    const currentValidator = document.getElementById('validator-username').getAttribute('username');
+    // const currentValidator = localStorage.getItem('currentValidator');
     $navUserName.text(currentValidator);
 };
 
