@@ -255,6 +255,7 @@ $(document).ready(() => {
     toggleFooterPosition();
     setPageContentHeight();
     drawCanvasLine();
+    resetDecisionRow();
     addListeners();
     decideToShowPopUp();
     setAudioPlayer();
