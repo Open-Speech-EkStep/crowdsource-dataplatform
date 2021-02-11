@@ -3,7 +3,7 @@ const {readFileSync} = require('fs');
 const {stringToHTML, mockLocalStorage} = require('./utils');
 
 document.body = stringToHTML(
-    readFileSync(`${__dirname}/../views/validator-prompt-page.ejs`, 'UTF-8')
+    readFileSync(`${__dirname}/../views/validator-prompt-page.ejs`, 'UTF-8') + readFileSync(`${__dirname}/../views/common/header.ejs`, 'UTF-8')
 );
 
 jest.mock('../assets/js/validator-instructions', () => ({
@@ -14,7 +14,6 @@ const {
     addListeners,
     decideToShowPopUp,
     setSentenceLabel,
-    setValidatorNameInHeader,
 } = require('../assets/js/validator-prompt-page');
 
 describe("addListeners",()=>{
@@ -35,6 +34,10 @@ describe("addListeners",()=>{
 describe('onReady prompt-page', () => {
 
     describe('decideToShowPopUp', () => {
+        beforeAll(()=>{
+            localStorage.clear();
+        })
+
         mockLocalStorage();
         afterEach(() => {
             localStorage.clear();
@@ -43,8 +46,7 @@ describe('onReady prompt-page', () => {
 
         test('should show Instructions pop-up when validator visit to page first time', () => {
 
-            localStorage.setItem('validatorDetails', JSON.stringify({}));
-            localStorage.setItem('currentValidator', "abc");
+            $('#nav-username').text('abc')
 
             decideToShowPopUp();
 
@@ -54,18 +56,18 @@ describe('onReady prompt-page', () => {
 
         test('should not show Instructions pop-up when validator re-visit to page', () => {
 
-            localStorage.setItem('validatorDetails', JSON.stringify({xyz: "xyz"}));
-            localStorage.setItem('currentValidator', "xyz");
+            localStorage.setItem('validatorDetails', JSON.stringify( ["xyz"]));
+            document.getElementById('nav-username').innerText='xyz'
 
             decideToShowPopUp();
             expect(showInstructions).not.toBeCalled();
         });
 
         test('should show Instructions pop-up when validator visit to page first time and set validatorDetails if its null', () => {
-            localStorage.setItem('currentValidator', "testValidator");
+            document.getElementById('nav-username').innerText='testValidator'
 
             decideToShowPopUp();
-            expect(localStorage.getItem('validatorDetails')).toEqual(JSON.stringify({testValidator: "testValidator"}));
+            expect(localStorage.getItem('validatorDetails')).toEqual(JSON.stringify( ["testValidator"]));
 
             expect(showInstructions).toBeCalledTimes(1);
         });
@@ -142,17 +144,6 @@ describe('onReady prompt-page', () => {
             const sentence3 = 'उसने कहा क्योंकि उसमें दिल नहीं होगा जो सारे शरीर में खून भेजता';
 
             expect(actualText).toBe(sentence3);
-        })
-    })
-
-    describe("setValidatorNameInHeader", () => {
-        test('should set validator name with dummy profile icon when page get ready', () => {
-            setValidatorNameInHeader();
-
-            const $navUser = $('#nav-user');
-
-            expect($navUser.hasClass("d-none")).toEqual(false);
-            localStorage.clear();
         })
     })
 });

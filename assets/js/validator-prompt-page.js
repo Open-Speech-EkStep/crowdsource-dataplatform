@@ -9,17 +9,18 @@ const showInstructionsPopup = () => {
 }
 
 const decideToShowPopUp = () => {
-    const currentValidator = localStorage.getItem('currentValidator');
+    const currentValidator = document.getElementById('nav-username').innerText
     const validatorDetails = localStorage.getItem('validatorDetails');
-
     if (!validatorDetails) {
-        localStorage.setItem('validatorDetails', JSON.stringify({[currentValidator]: currentValidator}));
+        localStorage.setItem('validatorDetails',JSON.stringify([currentValidator]));
         showInstructionsPopup();
         return;
     }
+
     const parsedDetails = JSON.parse(validatorDetails);
-    if (!(parsedDetails.hasOwnProperty(currentValidator))) {
-        localStorage.setItem('validatorDetails', JSON.stringify(Object.assign(parsedDetails, {[currentValidator]: currentValidator})));
+    if (!(parsedDetails.includes(currentValidator))) {
+        parsedDetails.push(currentValidator);
+        localStorage.setItem('validatorDetails', JSON.stringify(parsedDetails));
         showInstructionsPopup();
     }
 }
@@ -131,15 +132,6 @@ const updateProgressBar = () => {
     progressCount++;
     document.getElementById(`rect_${progressCount}`).setAttribute("fill", "#007BFF");
 }
-
-const setValidatorNameInHeader = () => {
-    const $navUser = $('#nav-user');
-    const $navUserName = $navUser.find('#nav-username');
-    $navUser.removeClass('d-none');
-    const currentValidator = document.getElementById('validator-username').getAttribute('username');
-    // const currentValidator = localStorage.getItem('currentValidator');
-    $navUserName.text(currentValidator);
-};
 
 function disableButton(button) {
     button.children().attr("opacity", "50%");
@@ -264,7 +256,6 @@ $(document).ready(() => {
     setPageContentHeight();
     drawCanvasLine();
     addListeners();
-    setValidatorNameInHeader();
     decideToShowPopUp();
     setAudioPlayer();
     setSentenceLabel(currentIndex)
@@ -274,6 +265,5 @@ module.exports = {
     decideToShowPopUp,
     setSentenceLabel,
     setAudioPlayer,
-    setValidatorNameInHeader,
     addListeners
 };
