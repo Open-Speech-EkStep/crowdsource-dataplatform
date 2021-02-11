@@ -23,7 +23,7 @@ describe("Test the root path", () => {
         jest.clearAllMocks();
     })
 
-    test("It should response the GET method", async () => {
+    test("/about-us should response the GET method", async () => {
         await request(app)
             .get("/about-us")
             .expect(200);
@@ -35,7 +35,7 @@ describe("Test the root path", () => {
     //         .expect(200);
     // });
 
-    test("It should response the GET method of getDetails", async () => {
+    test("/getDetails/Hindi should response the GET method of getDetails", async () => {
         dbOperations.getAllDetails.mockReturnValue({ "total_speaker": 2345, "sentence": 100 })
         const response = await request(app).get("/getDetails/Hindi");
 
@@ -45,7 +45,7 @@ describe("Test the root path", () => {
         expect(response.body).toStrictEqual({ "total_speaker": 2345, "sentence": 100 })
     });
 
-    test("It should response the GET method of getAllInfo", async () => {
+    test("/getAllInfo/Hindi should response the GET method of getAllInfo", async () => {
         const expectedResponse = { "ageGroups": [{ "dummy_data": "abc" }], "genderData": [{ "dummy_data": "abc" }], "motherTongues": [{ "dummy_data": "abc" }] }
 
         const response = await request(app).get("/getAllInfo/Hindi");
@@ -57,21 +57,21 @@ describe("Test the root path", () => {
         expect(response.body).toStrictEqual(expectedResponse)
     });
 
-    test("It should response the GET method", async () => {
+    test("/terms-and-conditions should response the GET method", async () => {
         const res = await request(app).get("/terms-and-conditions");
 
         expect(res.status).toBe(200);
         expect(res.text.includes("may be prohibited to be deleted as required under any applicable law")).toBe(true)
     });
 
-    test("It should response the GET method", async () => {
+    test("/thank-you should response the GET method", async () => {
         const res = await request(app).get("/thank-you");
 
         expect(res.status).toBe(200);
         expect(res.text.includes("Vakyansh has been envisioned to meet a goal of approx. 10,000")).toBe(true)
     });
 
-    test("It should response the GET method", async () => {
+    test("/record should response the GET method", async () => {
         const res = await request(app).get("/record");
 
         expect(res.status).toBe(200);
