@@ -6,18 +6,6 @@ const url = require('url');
 const querystring = require('querystring');
 const jsonwebtoken = require('jsonwebtoken');
 
-const redirectUser = (user, res) => {
-    const permissions = user.permissions;
-
-    if (permissions.includes("validator:action")) {
-        res.redirect('/validator/prompt-page');
-    } else if (permissions.includes("manager:action")) {
-        res.redirect(process.env.AUTH0_ADMIN_LOGIN_URL);
-    } else {
-        res.redirect('/');
-    }
-}
-
 const getLogOutUrl = (req) => {
     let returnTo = req.protocol + '://' + req.hostname;
     let port = req.connection.localPort;
@@ -57,10 +45,9 @@ router.get('/login', passport.authenticate('auth0', {
 
 const validator = {action: 'validator:action', landingPage: '/validator/prompt-page'}
 const manager = {action: 'manager:action', landingPage: process.env.AUTH0_ADMIN_LOGIN_URL}
-let role;
 
 router.get('/login/validator', function (req,res){
-        role = validator;
+        req.session.role = validator;
         res.redirect('/login');
     }
     , function (req, res) {
@@ -69,7 +56,7 @@ router.get('/login/validator', function (req,res){
 
 router.get('/login/manager',
     function (req,res){
-        role = manager;
+        req.session.role = manager;
         res.redirect('/login');
     }
     , function (req, res) {
@@ -91,14 +78,15 @@ router.get('/callback', function (req, res, next) {
         let decoded = jsonwebtoken.decode(user.accessToken);
         user.permissions = decoded.permissions;
 
-        if (!(user.permissions.includes(role.action))) {
-            return res.sendStatus(401);
+        if (!(user.permissions.includes(req.session.role.action))) {
+            return res.redirect('/logout')
         }
+
         req.logIn(user, function (err) {
             if (err) {
                 return next(err);
             }
-            redirectUser(user, res);
+            res.redirect(req.session.role.landingPage);
         });
     })(req, res, next);
 });
