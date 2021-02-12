@@ -1,5 +1,5 @@
 const {showInstructions} = require('./validator-instructions')
-const {visualize} = require('./visualizer')
+const {visualize, drawCanvasLine} = require('./visualizer')
 const {setPageContentHeight, toggleFooterPosition} = require('./utils')
 
 const showInstructionsPopup = () => {
@@ -160,21 +160,6 @@ function resetDecisionRow() {
 
 let context, src;
 const AudioContext = window.AudioContext || window.webkitAudioContext;
-
-function drawCanvasLine() {
-    const $canvas = document.getElementById('myCanvas');
-    const canvasCtx = $canvas.getContext('2d');
-    const WIDTH = $canvas.width;
-    const HEIGHT = $canvas.height;
-
-    canvasCtx.fillStyle = 'rgb(255, 255, 255, 0.8)';
-    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-    canvasCtx.lineWidth = 2;
-    canvasCtx.strokeStyle = 'rgb(0,123,255)';
-    canvasCtx.moveTo(0, HEIGHT / 2);
-    canvasCtx.lineTo(WIDTH, HEIGHT / 2);
-    canvasCtx.stroke();
-}
 
 function startVisualizer() {
     const $canvas = document.getElementById('myCanvas');
