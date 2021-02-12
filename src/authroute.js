@@ -8,22 +8,23 @@ const jsonwebtoken = require('jsonwebtoken');
 
 const getLogOutUrl = (req) => {
     let returnTo = req.protocol + '://' + req.hostname;
-    let port = req.connection.localPort;
+    const port = req.connection.localPort;
     if (port !== undefined && port !== 80 && port !== 443) {
         returnTo += ':' + port;
     }
-    let logoutURL = new url.URL(
+    const logoutURL = new url.URL(
         util.format("https://" + process.env.AUTH_ISSUER_DOMAIN + '/v2/logout')
     );
-    let searchString = querystring.stringify({
+    logoutURL.search = querystring.stringify({
         client_id: process.env.AUTH0_CLIENT_ID,
         returnTo: returnTo
     });
-    logoutURL.search = searchString;
     return logoutURL;
 }
 
-const clearSessionAndRedirect = (req, res, logoutURL) => {
+const clearSessionAndRedirect = (req, res) => {
+    const logoutURL = getLogOutUrl(req);
+
     if (req.session) {
         req.session.destroy(function (err) {
             if (err) {
@@ -35,38 +36,39 @@ const clearSessionAndRedirect = (req, res, logoutURL) => {
     }
 }
 
-// Perform the login, after login Auth0 will redirect to callback
-router.get('/login', passport.authenticate('auth0', {
+const passportAuthenticate = passport.authenticate('auth0', {
     scope: 'openid email profile metadata language',
     audience: process.env.API_AUDIENCE,
-}), function (req, res) {
-    res.redirect('/');
-});
+})
 
-const validator = {action: 'validator:action', landingPage: '/validator/prompt-page'}
-const manager = {action: 'manager:action', landingPage: process.env.AUTH0_ADMIN_LOGIN_URL}
+const redirectToHome = (req,res) => res.redirect('/');
 
-router.get('/login/validator', function (req,res){
-        req.session.role = validator;
-        res.redirect('/login');
+// Perform the login, after login Auth0 will redirect to callback
+// router.get('/login', passport.authenticate('auth0', {
+//     scope: 'openid email profile metadata language',
+//     audience: process.env.API_AUDIENCE,
+// }), function (req, res) {
+//     res.redirect('/');
+// });
+
+
+router.get('/login/validator', function (req,res,next){
+        req.session.role = {action: 'validator:action', landingPage: '/validator/prompt-page'};
+        next();
     }
-    , function (req, res) {
-        res.redirect('/');
-    });
+    ,passportAuthenticate, redirectToHome);
 
 router.get('/login/manager',
-    function (req,res){
-        req.session.role = manager;
-        res.redirect('/login');
+    function (req,res,next){
+        req.session.role = {action: 'manager:action', landingPage: process.env.AUTH0_ADMIN_LOGIN_URL};
+        next();
     }
-    , function (req, res) {
-        res.redirect('/');
-    });
+    ,passportAuthenticate, redirectToHome);
 
 
 // Perform the final stage of authentication and redirect to previously requested URL or '/user'
 router.get('/callback', function (req, res, next) {
-    passport.authenticate('auth0', function (err, user, info) {
+    passport.authenticate('auth0', function (err, user) {
         if (err) {
             return next(err);
         }
@@ -75,10 +77,12 @@ router.get('/callback', function (req, res, next) {
             return res.redirect('/');
         }
 
-        let decoded = jsonwebtoken.decode(user.accessToken);
+        const decoded = jsonwebtoken.decode(user.accessToken);
         user.permissions = decoded.permissions;
 
-        if (!(user.permissions.includes(req.session.role.action))) {
+        const {action, landingPage} = req.session.role;
+
+        if (!(user.permissions.includes(action))) {
             return res.redirect('/logout')
         }
 
@@ -86,7 +90,7 @@ router.get('/callback', function (req, res, next) {
             if (err) {
                 return next(err);
             }
-            res.redirect(req.session.role.landingPage);
+            res.redirect(landingPage);
         });
     })(req, res, next);
 });
@@ -94,10 +98,7 @@ router.get('/callback', function (req, res, next) {
 // Perform session logout and redirect to homepage
 router.get('/logout', (req, res) => {
     req.logout();
-
-    const logoutURL = getLogOutUrl(req);
-
-    clearSessionAndRedirect(req, res, logoutURL);
+    clearSessionAndRedirect(req, res);
 });
 
 module.exports = router;
