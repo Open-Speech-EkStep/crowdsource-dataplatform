@@ -32,4 +32,20 @@ function visualize(canvas, analyser) {
     draw();
 }
 
-module.exports = {visualize};
+
+function drawCanvasLine() {
+    const $canvas = document.getElementById('myCanvas');
+    const canvasCtx = $canvas.getContext('2d');
+    const WIDTH = $canvas.width;
+    const HEIGHT = $canvas.height;
+
+    canvasCtx.fillStyle = 'rgb(255, 255, 255, 0.8)';
+    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+    canvasCtx.lineWidth = 2;
+    canvasCtx.strokeStyle = 'rgb(0,123,255)';
+    canvasCtx.moveTo(0, HEIGHT / 2);
+    canvasCtx.lineTo(WIDTH, HEIGHT / 2);
+    canvasCtx.stroke();
+}
+
+module.exports = {visualize, drawCanvasLine};
