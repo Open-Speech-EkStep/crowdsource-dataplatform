@@ -1,103 +1,105 @@
-const {visualize, drawCanvasLine} = require('./../assets/js/visualizer');
-
-const {readFileSync} = require('fs');
+const Visualizer = require('./../assets/js/visualizer');
 const {stringToHTML} = require('./utils');
+document.body = stringToHTML('<canvas id="test_canvas"></canvas>');
 
-document.body = stringToHTML(
-    readFileSync(`${__dirname}/../views/validator-prompt-page.ejs`, 'UTF-8')
-);
+const $canvas = document.getElementById('test_canvas');
 
+const visualizer = new Visualizer();
 
-describe("visualize",()=>{
+const testCanvasCtx = {
+    fillStyle: "", fillRect: () => {
+    }, beginPath: () => {
+    }, moveTo: () => {
+    }, lineTo: () => {
+    }, stroke: () => {
+    }
+};
+
+test('test setCanvasCtx', () => {
+    const canvas = {getContext: () => testCanvasCtx, width: 100, height: 50};
+    jest.spyOn(canvas, 'getContext');
+    jest.spyOn(testCanvasCtx, 'fillRect');
+    const {canvasCtx, canvasWidth, canvasHeight} = visualizer.setCanvasCtx(canvas);
+
+    expect(canvas.getContext).toHaveBeenCalledWith('2d')
+    expect(canvasWidth).toBe(100)
+    expect(canvasHeight).toBe(50)
+    expect(canvasCtx.fillStyle).toBe('rgb(255, 255, 255, 0.8)')
+    expect(canvasCtx.fillRect).toHaveBeenCalledWith(0, 0, 100, 50)
+    expect(canvasCtx.lineWidth).toBe(2)
+    expect(canvasCtx.strokeStyle).toBe('rgb(0,123,255)')
+    jest.clearAllMocks();
+})
+
+describe('Test Visualizer', () => {
+
+    beforeEach(() => {
+        jest.spyOn(visualizer, 'setCanvasCtx').mockImplementation()
+        visualizer.setCanvasCtx.mockReturnValue({canvasCtx: testCanvasCtx, width: 100, height: 50})
+        jest.spyOn(testCanvasCtx, 'fillRect');
+        jest.spyOn(testCanvasCtx, 'beginPath');
+        jest.spyOn(testCanvasCtx, 'moveTo');
+        jest.spyOn(testCanvasCtx, 'lineTo');
+        jest.spyOn(testCanvasCtx, 'stroke');
+    })
+
+    afterEach(() => {
+        jest.clearAllMocks();
+    })
+
     test('should draw single straight line when frequencyBinCount is 1', () => {
-        const canvasCtx = {fillStyle:"", fillRect:(e)=>{}, beginPath:()=>{},moveTo:(a,b)=>{},lineTo:(a,b)=>{},stroke:()=>{}};
-        jest.spyOn(canvasCtx, 'fillRect');
-        jest.spyOn(canvasCtx, 'beginPath');
-        jest.spyOn(canvasCtx, 'moveTo');
-        jest.spyOn(canvasCtx, 'lineTo');
-        jest.spyOn(canvasCtx, 'stroke');
+        const analyser = {
+            frequencyBinCount: 1, getByteTimeDomainData: () => {
+            }
+        };
+        jest.spyOn(analyser, 'getByteTimeDomainData');
 
+        visualizer.visualize($canvas, analyser);
 
-        const canvas = {getContext:(e)=>canvasCtx, width:100, height:50};
-            const analyser = {frequencyBinCount:1, getByteTimeDomainData:(e)=>{}};
-            jest.spyOn(analyser, 'getByteTimeDomainData');
-            jest.spyOn(canvas, 'getContext');
-
-            visualize(canvas, analyser);
-
-            expect(canvas.getContext).toHaveBeenCalledTimes(1);
-            expect(canvas.getContext).toHaveBeenCalledWith('2d');
-            expect(canvasCtx.fillRect).toHaveBeenCalledTimes(1);
-            expect(canvasCtx.fillRect).toHaveBeenCalledWith(0, 0, 100, 50);
-            expect(canvasCtx.beginPath).toHaveBeenCalledTimes(1);
-            expect(canvasCtx.moveTo).toHaveBeenCalledTimes(1);
-            expect(canvasCtx.lineTo).toHaveBeenCalledTimes(1);
-            expect(canvasCtx.stroke).toHaveBeenCalledTimes(1);
-
-            jest.clearAllMocks();
-
+        expect(visualizer.setCanvasCtx).toHaveBeenCalled()
+        expect(testCanvasCtx.beginPath).toHaveBeenCalledTimes(1);
+        expect(testCanvasCtx.moveTo).toHaveBeenCalledTimes(1);
+        expect(testCanvasCtx.lineTo).toHaveBeenCalledTimes(1);
+        expect(testCanvasCtx.stroke).toHaveBeenCalledTimes(1);
     });
 
     test('should draw five straight line when frequencyBinCount is 5', () => {
-        const canvasCtx = {fillStyle:"", fillRect:(e)=>{}, beginPath:()=>{},moveTo:(a,b)=>{},lineTo:(a,b)=>{},stroke:()=>{}};
-        jest.spyOn(canvasCtx, 'fillRect');
-        jest.spyOn(canvasCtx, 'beginPath');
-        jest.spyOn(canvasCtx, 'moveTo');
-        jest.spyOn(canvasCtx, 'lineTo');
-        jest.spyOn(canvasCtx, 'stroke');
-
-
-        const canvas = {getContext:(e)=>canvasCtx, width:100, height:50};
-        const analyser = {frequencyBinCount:5, getByteTimeDomainData:(e)=>{}};
-        jest.spyOn(analyser, 'getByteTimeDomainData');
-        jest.spyOn(canvas, 'getContext');
-
-        visualize(canvas, analyser);
-
-        expect(canvas.getContext).toHaveBeenCalledTimes(1);
-        expect(canvas.getContext).toHaveBeenCalledWith('2d');
-        expect(canvasCtx.fillRect).toHaveBeenCalledTimes(1);
-        expect(canvasCtx.fillRect).toHaveBeenCalledWith(0, 0, 100, 50);
-        expect(canvasCtx.beginPath).toHaveBeenCalledTimes(1);
-        expect(canvasCtx.moveTo).toHaveBeenCalledTimes(1);
-        expect(canvasCtx.lineTo).toHaveBeenCalledTimes(5);
-        expect(canvasCtx.stroke).toHaveBeenCalledTimes(1);
-        jest.clearAllMocks();
-
-    });
-
-})
-
-describe("drawCanvasLine",()=> {
-    test('should draw single straight line', () => {
-        const $canvas = document.getElementById('myCanvas');
-        const canvasCtx = {
-            fillStyle: "", fillRect: (e) => {
-            }, beginPath: () => {
-            }, moveTo: (a, b) => {
-            }, lineTo: (a, b) => {
-            }, stroke: () => {
+        const analyser = {
+            frequencyBinCount: 5, getByteTimeDomainData: () => {
             }
         };
-        jest.spyOn(canvasCtx, 'fillRect');
-        jest.spyOn(canvasCtx, 'beginPath');
-        jest.spyOn(canvasCtx, 'moveTo');
-        jest.spyOn(canvasCtx, 'lineTo');
-        jest.spyOn(canvasCtx, 'stroke');
+        jest.spyOn(analyser, 'getByteTimeDomainData');
 
+        visualizer.visualize($canvas, analyser);
 
-         $canvas.getContext =  (e) => canvasCtx
-        jest.spyOn($canvas, 'getContext');
+        expect(visualizer.setCanvasCtx).toHaveBeenCalled()
+        expect(testCanvasCtx.beginPath).toHaveBeenCalledTimes(1);
+        expect(testCanvasCtx.moveTo).toHaveBeenCalledTimes(1);
+        expect(testCanvasCtx.lineTo).toHaveBeenCalledTimes(5);
+        expect(testCanvasCtx.stroke).toHaveBeenCalledTimes(1);
+    });
 
-        drawCanvasLine();
-        expect($canvas.getContext).toHaveBeenCalledTimes(1);
-        expect($canvas.getContext).toHaveBeenCalledWith('2d');
-        expect(canvasCtx.fillRect).toHaveBeenCalledTimes(1);
-        expect(canvasCtx.fillRect).toHaveBeenCalledWith(0, 0, 300, 120);
-        expect(canvasCtx.moveTo).toHaveBeenCalledTimes(1);
-        expect(canvasCtx.lineTo).toHaveBeenCalledTimes(1);
-        expect(canvasCtx.stroke).toHaveBeenCalledTimes(1);
+    beforeEach(() => {
+        jest.spyOn(visualizer, 'setCanvasCtx').mockImplementation()
+        visualizer.setCanvasCtx.mockReturnValue({canvasCtx: testCanvasCtx, width: 100, height: 50})
+        jest.spyOn(testCanvasCtx, 'fillRect');
+        jest.spyOn(testCanvasCtx, 'beginPath');
+        jest.spyOn(testCanvasCtx, 'moveTo');
+        jest.spyOn(testCanvasCtx, 'lineTo');
+        jest.spyOn(testCanvasCtx, 'stroke');
+    })
+
+    afterEach(() => {
         jest.clearAllMocks();
+    })
 
+    test('should draw single straight line', () => {
+
+        visualizer.drawCanvasLine($canvas);
+
+        expect(visualizer.setCanvasCtx).toHaveBeenCalled()
+        expect(testCanvasCtx.moveTo).toHaveBeenCalled();
+        expect(testCanvasCtx.lineTo).toHaveBeenCalled();
+        expect(testCanvasCtx.stroke).toHaveBeenCalled();
     });
 })

@@ -1,6 +1,8 @@
 const {showInstructions} = require('./validator-instructions')
-const {visualize, drawCanvasLine} = require('./visualizer')
+const Visualizer = require('./visualizer')
 const {setPageContentHeight, toggleFooterPosition} = require('./utils')
+
+const visualizer = new Visualizer();
 
 const showInstructionsPopup = () => {
     $("#validator-page-content").addClass('d-none');
@@ -169,7 +171,7 @@ function startVisualizer() {
     const analyser = context.createAnalyser();
     src.connect(analyser);
     analyser.connect(context.destination);
-    visualize($canvas, analyser);
+    visualizer.visualize($canvas, analyser);
 }
 
 function addListeners() {
@@ -239,7 +241,8 @@ function addListeners() {
 $(document).ready(() => {
     toggleFooterPosition();
     setPageContentHeight();
-    drawCanvasLine();
+    const $canvas = document.getElementById('myCanvas');
+    visualizer.drawCanvasLine($canvas);
     resetDecisionRow();
     addListeners();
     decideToShowPopUp();
