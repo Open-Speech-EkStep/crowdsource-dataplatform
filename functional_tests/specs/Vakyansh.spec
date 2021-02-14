@@ -43,12 +43,10 @@
 * When user skips all the rest of the "9" sentences , User should see Thank you Page
 * when user clicks on the Contribute More button, user shall see the Instructions page again
 
-## Validate Admin Login
+## Validate Login Screen
 * When user clicks on the "Admin Login" button
 * user should see the Sign In pop up
-* When user clicks on cross button, pop up should be closed
-
-## Validate Validator Login
-* When user clicks on the Are you a validator button
-* user should see the Sign In pop up
-* When user clicks on cross button, pop up should be closed
+* User enters email as "invalid_email@gmail" and password as "wrong_password"
+* When user clicks on the "Log In" button
+* Wrong credentials error must be shown
+* Click "Go to Home Page" redirects to home
