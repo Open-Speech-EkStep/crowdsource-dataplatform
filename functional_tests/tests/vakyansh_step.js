@@ -16,7 +16,9 @@ const {
     into,
     textBox,
 } = require('taiko');
+
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
+const testUrl = process.env.test_url;
 
 beforeSuite(async () => {
     await openBrowser({
@@ -26,6 +28,7 @@ beforeSuite(async () => {
             '--use-fake-ui-for-media-stream'
         ]
     })
+    await overridePermissions(testUrl, ['audioCapture']);
 });
 
 afterSuite(async () => {
@@ -33,7 +36,7 @@ afterSuite(async () => {
 });
 
 step("Opening Vakyansh", async () => {
-    await goto("https://test-dot-ekstepspeechrecognition.el.r.appspot.com");
+    await goto(testUrl);
 });
 
 step("Search for About Us button", async function () {
@@ -69,7 +72,6 @@ step("Start Recording Button should be for <language> Language", async function 
 });
 
 step("Speaker details popup should appear and close button should close the pop up", async function () {
-
     if (await taiko.text('Speaker Details').exists()) {
         assert.ok('speaker details pop-up exists')
         await click(taiko.button({class: 'close float-right'}))
@@ -101,7 +103,6 @@ step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio butto
 });
 
 step("Hover on the Lets Go button should give some message", async function () {
-    // await button({id:'proceed-box'}).exists()
     await hover("LET'S GO")
     await taiko.text('Please agree to the Terms and Conditions before proceeding').exists()
 });
@@ -122,11 +123,28 @@ step("Once user agree to terms and conditions Lets Go the button should be enabl
 
 step("user should see the Sign In pop up", async function () {
     assert.ok(await taiko.text('Sign In').exists())
+    await textBox(taiko.below('Email')).exists();
+    await textBox(taiko.below('Password')).exists();
+    await link('Go to Home Page').exists();
+});
+
+step("User enters email as <email> and password as <password>", async function (email, password){
+    await write(email,into(textBox(taiko.below('Email'))));
+    await write(password,into(textBox(taiko.below('Password'))));
 });
 
 step("When user clicks on the <arg> button", async function (arg) {
     await link(arg).exists();
     await click(arg);
+});
+
+step("Wrong credentials error must be shown",async ()=>{
+    await text('Wrong email or password').exists();
+});
+
+step("Click <linkText> redirects to home", async (linkText)=>{
+    await click(link(linkText));
+    assert.strictEqual(await taiko.currentURL(),testUrl)
 });
 
 step("When user clicks on the Are you a validator button", async function () {
@@ -170,7 +188,6 @@ step("When user closes the Instructions , user should see a sentence , Skip butt
 
 step("When user clicks on <arg0> button, <arg1> button should appear", async function (arg0, arg1) {
     await click(button(arg0))
-    await overridePermissions('https://test-dot-ekstepspeechrecognition.el.r.appspot.com', ['audioCapture']);
     await taiko.waitFor(3000)
     assert.ok(await button(arg1).exists())
 });
