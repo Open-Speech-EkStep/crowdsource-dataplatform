@@ -56,7 +56,7 @@ jobs:
                 name: Deploy app to GAE
                 command: |
                   if [[ << parameters.env_name >> == "test" ]]; then
-                    gcloud app deploy app.yaml -v latest --no-promote
+                    gcloud app deploy app.yaml -v somerandom --no-promote
                   else
                     gcloud app deploy app.yaml
                   fi
