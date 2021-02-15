@@ -9,7 +9,7 @@
     "start-cluster": "pm2 start src/server.js -i 2",
     "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest",
     "gulp": "gulp",
-    "functional_test": "cd functional_tests && npm i && gauge run specs --env dev"
+    "functional_test": "cd functional_tests && npm i && gauge run specs"
   },
   "repository": {
     "type": "git",
