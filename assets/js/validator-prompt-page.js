@@ -1,5 +1,5 @@
 const {showInstructions} = require('./validator-instructions')
-const {visualize, drawCanvasLine} = require('./visualizer')
+const {startVisualizer, drawCanvasLine} = require('./visualizer')
 const {setPageContentHeight, toggleFooterPosition} = require('./utils')
 
 const showInstructionsPopup = () => {
@@ -158,19 +158,6 @@ function resetDecisionRow() {
     $('#default_line').removeClass('d-none')
 }
 
-let context, src;
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-
-function startVisualizer() {
-    const $canvas = document.getElementById('myCanvas');
-    const audio = document.querySelector('audio');
-    context = context || new AudioContext();
-    src = src || context.createMediaElementSource(audio);
-    const analyser = context.createAnalyser();
-    src.connect(analyser);
-    analyser.connect(context.destination);
-    visualize($canvas, analyser);
-}
 
 function addListeners() {
     $("#instructions-link").on('click', () => {
