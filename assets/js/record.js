@@ -409,10 +409,8 @@ $(document).ready(() => {
         }
 
         $navUser.removeClass('d-none');
-
-        if (localSpeakerDataParsed.userName) {
-            $navUserName.text(localSpeakerDataParsed.userName);
-        }
+        $('#nav-login').addClass('d-none');
+        $navUserName.text(localSpeakerDataParsed.userName);
 
         if (
             localSentencesParsed &&

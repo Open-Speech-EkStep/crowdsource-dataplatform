@@ -11,7 +11,8 @@ const showInstructionsPopup = () => {
 }
 
 const decideToShowPopUp = () => {
-    const currentValidator = document.getElementById('nav-username').innerText
+    const currentValidator = document.getElementById('nav-username').innerText;
+    localStorage.setItem('currentUser', JSON.stringify(currentValidator));
     const validatorDetails = localStorage.getItem('validatorDetails');
     if (!validatorDetails) {
         localStorage.setItem('validatorDetails',JSON.stringify([currentValidator]));
