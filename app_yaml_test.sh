@@ -2,7 +2,7 @@
 echo """
 runtime: nodejs
 env: flex
-module: test
+service: test
 automatic_scaling:
   min_num_instances: 1
   max_num_instances: 2
