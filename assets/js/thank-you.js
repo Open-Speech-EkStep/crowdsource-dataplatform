@@ -33,10 +33,9 @@ if (!(localSpeakerDataParsed)) {
     const breakPointForLargeScreen = 1200;
     const breakPointForExtraLargeScreen = 2000;
     const secondsInTenThousandHours = 10000 * 3600;
-    const $navUser = $('#nav-user');
-    const $navUserName = $navUser.find('#nav-username');
-    $navUserName.text(localSpeakerDataParsed.userName);
-    $navUser.removeClass('d-none');
+    $('#nav-user').removeClass('d-none');
+    $('#nav-login').addClass('d-none');
+    $('#nav-username').text(localSpeakerDataParsed.userName);
     const $totalProgress = $('#total-progress');
     const $timeGraphBar = $('#graphbar');
     const $progressPercentWrapper = $('#progress-percent-wrapper');
@@ -236,6 +235,6 @@ if (!(localSpeakerDataParsed)) {
     }
 }
 
-$(document).ready(toggleFooterPosition)
+$(document).ready(toggleFooterPosition);
 
 module.exports = {setUserContribution, getTotalSecondsContributed};
