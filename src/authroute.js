@@ -6,6 +6,17 @@ const url = require('url');
 const querystring = require('querystring');
 const jsonwebtoken = require('jsonwebtoken');
 
+const redirectUser = (user, res) => {
+    const permissions = user.permissions;
+    if(permissions.includes("validator:action")){
+        res.redirect('/validator/prompt-page');
+    }else if(permissions.includes("manager:action")){
+        res.redirect(process.env.AUTH0_ADMIN_LOGIN_URL);
+    } else {
+        res.redirect('/logout');
+    }
+}
+
 const getLogOutUrl = (req) => {
     let returnTo = req.protocol + '://' + req.hostname;
     const port = req.connection.localPort;
@@ -36,34 +47,14 @@ const clearSessionAndRedirect = (req, res) => {
     }
 }
 
-const passportAuthenticate = passport.authenticate('auth0', {
-    scope: 'openid email profile metadata language',
-    audience: process.env.API_AUDIENCE,
-})
-
-const redirectToHome = (req,res) => res.redirect('/');
 
 // Perform the login, after login Auth0 will redirect to callback
-// router.get('/login', passport.authenticate('auth0', {
-//     scope: 'openid email profile metadata language',
-//     audience: process.env.API_AUDIENCE,
-// }), function (req, res) {
-//     res.redirect('/');
-// });
-
-
-router.get('/login/validator', function (req,res,next){
-        req.session.role = {action: 'validator:action', landingPage: '/validator/prompt-page'};
-        next();
-    }
-    ,passportAuthenticate, redirectToHome);
-
-router.get('/login/manager',
-    function (req,res,next){
-        req.session.role = {action: 'manager:action', landingPage: process.env.AUTH0_ADMIN_LOGIN_URL};
-        next();
-    }
-    ,passportAuthenticate, redirectToHome);
+router.get('/login', passport.authenticate('auth0', {
+    scope: 'openid email profile metadata language',
+    audience: process.env.API_AUDIENCE,
+}), function (req, res) {
+    res.redirect('/');
+});
 
 
 // Perform the final stage of authentication and redirect to previously requested URL or '/user'
@@ -80,17 +71,11 @@ router.get('/callback', function (req, res, next) {
         const decoded = jsonwebtoken.decode(user.accessToken);
         user.permissions = decoded.permissions;
 
-        const {action, landingPage} = req.session.role;
-
-        if (!(user.permissions.includes(action))) {
-            return res.redirect('/logout')
-        }
-
         req.logIn(user, function (err) {
             if (err) {
                 return next(err);
             }
-            res.redirect(landingPage);
+            return redirectUser(user, res)
         });
     })(req, res, next);
 });

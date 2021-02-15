@@ -44,9 +44,9 @@
 * when user clicks on the Contribute More button, user shall see the Instructions page again
 
 ## Validate Login Screen
-* When user clicks on the "Admin Login" button
+* When user clicks on the "Sign In" button
 * user should see the Sign In pop up
 * User enters email as "invalid_email@gmail" and password as "wrong_password"
-* When user clicks on the "Log In" button
+* When user clicks on the "Sign In" button
 * Wrong credentials error must be shown
 * Click "Go to Home Page" redirects to home

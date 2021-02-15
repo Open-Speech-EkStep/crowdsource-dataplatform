@@ -17,6 +17,6 @@ function setUserProfileName(){
     document.getElementById('nav-username').innerText = validatorName;
 }
 
-$(document).ready(setUserProfileName);
+// $(document).ready(setUserProfileName);
 
 module.exports = {setUserProfileName};
