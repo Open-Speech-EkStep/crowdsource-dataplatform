@@ -236,8 +236,6 @@ if (!(localSpeakerDataParsed)) {
     }
 }
 
-$(document).ready(()=>{
-    toggleFooterPosition();
-})
+$(document).ready(toggleFooterPosition)
 
 module.exports = {setUserContribution, getTotalSecondsContributed};
