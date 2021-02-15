@@ -48,4 +48,19 @@ function drawCanvasLine() {
     canvasCtx.stroke();
 }
 
-module.exports = {visualize, drawCanvasLine};
+
+let context, src;
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+function startVisualizer() {
+    const $canvas = document.getElementById('myCanvas');
+    const audio = document.querySelector('audio');
+    context = context || new AudioContext();
+    src = src || context.createMediaElementSource(audio);
+    const analyser = context.createAnalyser();
+    src.connect(analyser);
+    analyser.connect(context.destination);
+    visualize($canvas, analyser);
+}
+
+module.exports = {visualize, drawCanvasLine, startVisualizer};
