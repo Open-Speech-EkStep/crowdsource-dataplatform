@@ -35,7 +35,7 @@ jobs:
                   sudo rm -rf /var/lib/apt/lists/*
                   cd functional_tests
                   npm i
-                  gauge run functional_test -- --env test
+                  npm run functional_test -- --env test
     deploy:
         parameters:
             env_name:
