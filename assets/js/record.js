@@ -45,6 +45,7 @@ const adjustTimeProgressBarHeight = ($footer) => {
     }
 };
 
+
 const initialize = () => {
     const sentences = crowdSource.sentences;
     const $startRecordBtn = $('#startRecord');

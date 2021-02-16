@@ -30,6 +30,7 @@ const logout = () => {
     const index = validatorsName.findIndex(e => e === parsedCurrentUser);
     const newSet = validatorsName.slice(0, index).concat(validatorsName.slice(index + 1, validatorsName.length));
     localStorage.setItem('validatorDetails', JSON.stringify(newSet));
+
     document.getElementById('logout-2').click();
 }
 
