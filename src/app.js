@@ -82,8 +82,6 @@ app.use(function (req, res, next) {
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-app.locals.isSignedIn = false;
-
 /*** block start */
 
 
@@ -144,9 +142,9 @@ app.use(session(sess));
 app.use('/', require('./authroute'));
 
 /*** block end */
-
 router.get('/', function (req, res) {
-  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isSignedIn: req.app.locals.isSignedIn});
+  const isSignedIn = req.session.passport ? true : false;
+  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isSignedIn});
 });
 
 router.get('/getDetails/:language', async function (req, res) {
@@ -177,10 +175,12 @@ router.get('/getAllInfo/:language', async function (req, res) {
 });
 
 router.get('/about-us', function (req, res) {
-  res.render('about-us.ejs', {isSignedIn: req.app.locals.isSignedIn});
+  const isSignedIn = req.session.passport ? true : false;
+  res.render('about-us.ejs', {isSignedIn});
 });
 router.get('/terms-and-conditions', function (req, res) {
-  res.render('terms-and-conditions.ejs', {isSignedIn: req.app.locals.isSignedIn});
+  const isSignedIn = req.session.passport ? true : false;
+  res.render('terms-and-conditions.ejs', {isSignedIn});
 });
 router.get('/thank-you', function (req, res) {
   res.render('thank-you.ejs');

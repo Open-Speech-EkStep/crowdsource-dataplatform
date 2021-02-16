@@ -1,14 +1,17 @@
 function setUserProfileName(){
     const header = document.getElementById('header-script');
     const isSignedIn = header.getAttribute('isSignedIn');
-    const currentUser = localStorage.getItem('currentUser');
-    const currentUserName = currentUser && JSON.parse(currentUser);
+    const validator = localStorage.getItem('currentUser');
+    const admin = localStorage.getItem('admin');
+
+    const validatorName = validator && JSON.parse(validator);
+
+    const adminName = admin && JSON.parse(admin);
 
     if(JSON.parse(isSignedIn)) {
-
         $('#nav-login').addClass('d-none');
         $('#nav-user').removeClass('d-none');
-        document.getElementById('nav-username').innerText = currentUserName;
+        document.getElementById('nav-username').innerText = validatorName || adminName;
         return;
     }
     $('#nav-login').removeClass('d-none');
@@ -17,15 +20,14 @@ function setUserProfileName(){
     localStorage.removeItem('currentUser');
 
     const validators = localStorage.getItem('validatorDetails');
-    const validatorsName = validators && JSON.parse(validators);
+    const validatorList = validators && JSON.parse(validators);
 
-    if(validatorsName){
-        const index =  validatorsName.findIndex(e => e === currentUserName);
-        const newSet = validatorsName.slice(0, index).concat(validatorsName.slice(index + 1, validatorsName.length));
+    if(validatorList){
+        const index =  validatorList.findIndex(e => e === validatorName);
+        const newSet = validatorList.slice(0, index).concat(validatorList.slice(index + 1, validatorList.length));
         localStorage.setItem('validatorDetails', JSON.stringify(newSet));
     }
 }
-
 
 $(document).ready(setUserProfileName);
 
