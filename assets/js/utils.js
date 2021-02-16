@@ -16,22 +16,4 @@ function toggleFooterPosition(){
     $footer.toggleClass('bottom')
 }
 
-const logout = () => {
-    $('#nav-login').removeClass('d-none');
-    $('#nav-user').addClass('d-none');
-    document.getElementById('nav-username').innerText = undefined;
-    const currentUser = localStorage.getItem('currentUser');
-    const parsedCurrentUser = JSON.parse(currentUser);
-
-    localStorage.removeItem('currentUser');
-    const validators = localStorage.getItem('validatorDetails');
-    const validatorsName = JSON.parse(validators);
-
-    const index = validatorsName.findIndex(e => e === parsedCurrentUser);
-    const newSet = validatorsName.slice(0, index).concat(validatorsName.slice(index + 1, validatorsName.length));
-    localStorage.setItem('validatorDetails', JSON.stringify(newSet));
-
-    document.getElementById('logout-2').click();
-}
-
-module.exports = {setPageContentHeight, toggleFooterPosition, logout}
+module.exports = {setPageContentHeight, toggleFooterPosition}
