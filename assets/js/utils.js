@@ -16,4 +16,16 @@ function toggleFooterPosition(){
     $footer.toggleClass('bottom')
 }
 
-module.exports = {setPageContentHeight, toggleFooterPosition}
+const logout = () =>{
+    console.log("here");
+    $('#nav-login').removeClass('d-none');
+    $('#nav-user').addClass('d-none');
+    document.getElementById('nav-username').innerText = undefined;
+    const currentUser = localStorage.getItem('currentUser');
+    const parsedCurrentUser = JSON.parse(currentUser);
+    localStorage.removeItem('currentUser');
+    delete(localStorage.validatorDetails[parsedCurrentUser]);
+    document.getElementById('logout-2').click();
+}
+
+module.exports = {setPageContentHeight, toggleFooterPosition, logout}
