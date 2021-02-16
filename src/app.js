@@ -82,6 +82,8 @@ app.use(function (req, res, next) {
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+app.locals.isSignedIn = false;
+
 /*** block start */
 
 
@@ -144,7 +146,7 @@ app.use('/', require('./authroute'));
 /*** block end */
 
 router.get('/', function (req, res) {
-  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES});
+  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isSignedIn: req.app.locals.isSignedIn});
 });
 
 router.get('/getDetails/:language', async function (req, res) {
@@ -175,10 +177,10 @@ router.get('/getAllInfo/:language', async function (req, res) {
 });
 
 router.get('/about-us', function (req, res) {
-  res.render('about-us.ejs');
+  res.render('about-us.ejs', {isSignedIn: req.app.locals.isSignedIn});
 });
 router.get('/terms-and-conditions', function (req, res) {
-  res.render('terms-and-conditions.ejs');
+  res.render('terms-and-conditions.ejs', {isSignedIn: req.app.locals.isSignedIn});
 });
 router.get('/thank-you', function (req, res) {
   res.render('thank-you.ejs');

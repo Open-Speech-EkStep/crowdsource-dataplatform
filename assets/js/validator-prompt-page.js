@@ -1,6 +1,6 @@
 const {showInstructions} = require('./validator-instructions')
 const Visualizer = require('./visualizer')
-const {setPageContentHeight, toggleFooterPosition,logout} = require('./utils')
+const {setPageContentHeight, toggleFooterPosition} = require('./utils')
 
 const visualizer = new Visualizer();
 
@@ -252,8 +252,6 @@ $(document).ready(() => {
     setSentenceLabel(currentIndex)
 });
 
-
-$('#logout-1').on('click',logout);
 
 module.exports = {
     decideToShowPopUp,
