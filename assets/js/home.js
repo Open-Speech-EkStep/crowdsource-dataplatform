@@ -1,5 +1,5 @@
 const {updateGraph, buildGraphs} = require('./draw-chart');
-const {toggleFooterPosition} = require('./utils')
+const {toggleFooterPosition, logout} = require('./utils')
 
 function validateUserName($userName, $userNameError, $tncCheckbox) {
     const userNameValue = $userName.val().trim();
@@ -246,6 +246,7 @@ $(document).ready(function () {
     buildGraphs(defaultLang);
 });
 
+$('#logout-1').on('click',logout);
 module.exports = {
     updateLanguageInButton,
     updateLanguage,

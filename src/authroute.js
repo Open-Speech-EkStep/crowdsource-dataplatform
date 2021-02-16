@@ -9,13 +9,10 @@ const jsonwebtoken = require('jsonwebtoken');
 const redirectUser = (user,req, res) => {
     const permissions = user.permissions;
     if(permissions.includes("validator:action")){
-        req.app.locals.isSignedIn = true;
         res.redirect('/validator/prompt-page');
     }else if(permissions.includes("manager:action")){
-        req.app.locals.isSignedIn = true;
         res.redirect(process.env.AUTH0_ADMIN_LOGIN_URL);
     } else {
-        req.app.locals.isSignedIn = false;
         res.redirect('/logout');
     }
 }
@@ -45,7 +42,6 @@ const clearSessionAndRedirect = (req, res) => {
                 console.log(err)
             }
             console.log("Destroyed the user session on Auth0 endpoint");
-            req.app.locals.isSignedIn = false;
             res.redirect(logoutURL);
         });
     }
@@ -57,7 +53,6 @@ router.get('/login', passport.authenticate('auth0', {
     scope: 'openid email profile metadata language',
     audience: process.env.API_AUDIENCE,
 }), function (req, res) {
-    req.app.locals.isSignedIn = false;
     res.redirect('/');
 });
 
@@ -70,7 +65,6 @@ router.get('/callback', function (req, res, next) {
         }
 
         if (!user) {
-            req.app.locals.isSignedIn = false;
             return res.redirect('/');
         }
 
