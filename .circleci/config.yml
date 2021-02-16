@@ -59,6 +59,7 @@ jobs:
                     gcloud app deploy app.yaml -v somerandom --no-promote
                   else
                     gcloud app deploy app.yaml
+                    gcloud app deploy dispatch.yaml
                   fi
             - delete_files
     approve_for_prod_deploy:
