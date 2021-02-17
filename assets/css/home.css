@@ -227,3 +227,10 @@ body.modal-open .supreme-container {
 .supreme-container .btn-outline-primary:focus option {
   color: #444444;
 }
+
+@media (min-width: 1000px) {
+  .dropdown-menu{
+    right:0;
+    left:auto;
+  }
+}
