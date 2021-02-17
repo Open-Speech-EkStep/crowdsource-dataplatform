@@ -6,3 +6,12 @@
 a{
     cursor: pointer;
 }
+
+@media (min-width: 1000px) {
+    .dropdown-menu{
+        right:0;
+        left:auto;
+    }
+}
+
+
