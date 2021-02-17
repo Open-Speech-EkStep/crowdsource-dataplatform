@@ -2,16 +2,13 @@ function setUserProfileName(){
     const header = document.getElementById('header-script');
     const isSignedIn = header.getAttribute('isSignedIn');
     const validator = localStorage.getItem('currentUser');
-    const admin = localStorage.getItem('admin');
 
     const validatorName = validator && JSON.parse(validator);
 
-    const adminName = admin && JSON.parse(admin);
-
-    if(JSON.parse(isSignedIn)) {
+    if(JSON.parse(isSignedIn) && validatorName) {
         $('#nav-login').addClass('d-none');
         $('#nav-user').removeClass('d-none');
-        document.getElementById('nav-username').innerText = validatorName || adminName;
+        document.getElementById('nav-username').innerText = validatorName;
         return;
     }
     $('#nav-login').removeClass('d-none');

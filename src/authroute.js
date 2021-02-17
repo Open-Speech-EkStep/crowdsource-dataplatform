@@ -11,7 +11,7 @@ const redirectUser = (user, res) => {
     if(permissions.includes("validator:action")){
         res.redirect('/validator/prompt-page');
     }else if(permissions.includes("manager:action")){
-        res.redirect('/admin/dashboard');
+        res.redirect(process.env.AUTH0_ADMIN_LOGIN_URL);
     } else {
         res.redirect('/logout');
     }
