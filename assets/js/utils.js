@@ -10,7 +10,7 @@ function setPageContentHeight() {
     $('#content-wrapper').css('min-height', contentHeightInVH + 'vh');
 }
 
-function toggleFooterPosition(){
+function toggleFooterPosition() {
     const $footer = $('footer');
     $footer.toggleClass('fixed-bottom')
     $footer.toggleClass('bottom')
