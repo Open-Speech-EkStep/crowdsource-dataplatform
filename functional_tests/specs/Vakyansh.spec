@@ -43,10 +43,21 @@
 * When user skips all the rest of the "9" sentences , User should see Thank you Page
 * when user clicks on the Contribute More button, user shall see the Instructions page again
 
-## Validate Login Screen
+## Validate Login Screen with invalid credentials
 * When user clicks on the "Sign In" button
 * user should see the Sign In pop up
 * User enters email as "invalid_email@gmail" and password as "wrong_password"
 * When user clicks on the "Sign In" button
 * Wrong credentials error must be shown
-* Click "Go to Home Page" redirects to home
+//* Click "Go to Home Page" redirects to home
+
+## Validate Login Screen with valid credentials
+* When user clicks on the "Sign In" button
+* user should see the Sign In pop up
+* User enters email as "test3@gmail" and password as "test1234$"
+* When user clicks on the "Sign In" button
+* user should see the validator prompt page
+* When user clicks on the "test3" button
+* user should see dropdown menu
+//* When user clicks on the "Log Out" button
+//* user should see the Home page

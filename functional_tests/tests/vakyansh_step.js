@@ -15,6 +15,7 @@ const {
     text,
     into,
     textBox,
+    dropDown
 } = require('taiko');
 
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
@@ -121,36 +122,9 @@ step("Once user agree to terms and conditions Lets Go the button should be enabl
     assert.equal(await taiko.button({id: 'proceed-box'}).isDisabled(), false)
 });
 
-step("user should see the Sign In pop up", async function () {
-    assert.ok(await taiko.text('Sign In').exists())
-    await textBox(taiko.below('Email')).exists();
-    await textBox(taiko.below('Password')).exists();
-    await link('Go to Home Page').exists();
-});
-
-step("User enters email as <email> and password as <password>", async function (email, password){
-    await write(email,into(textBox(taiko.below('Email'))));
-    await write(password,into(textBox(taiko.below('Password'))));
-});
-
 step("When user clicks on the <arg> button", async function (arg) {
     await link(arg).exists();
     await click(arg);
-});
-
-step("Wrong credentials error must be shown",async ()=>{
-    await text('Wrong email or password').exists();
-});
-
-step("Click <linkText> redirects to home", async (linkText)=>{
-    await click(link(linkText));
-    assert.strictEqual(await taiko.currentURL(),testUrl)
-});
-
-step("When user clicks on the Are you a validator button", async function () {
-    const validatorLoginLink = 'Are you a Validator? Login here';
-    await link(validatorLoginLink).exists();
-    await click(validatorLoginLink);
 });
 
 step("When user clicks on cross button, pop up should be closed", async function () {
@@ -207,3 +181,56 @@ step("when user clicks on the Contribute More button, user shall see the Instruc
     await taiko.waitFor(1000)
     assert.ok(await text('Recording Instructions').exists(), 'Not able to see instructions')
 });
+
+step("user should see the Sign In pop up", async function () {
+    assert.ok(await taiko.text('Sign In').exists())
+    await textBox(taiko.below('Email')).exists();
+    await textBox(taiko.below('Password')).exists();
+    await link('Go to Home Page').exists();
+});
+
+step("User enters email as <email> and password as <password>", async function (email, password){
+    await write(email,into(textBox(taiko.below('Email'))));
+    await write(password,into(textBox(taiko.below('Password'))));
+});
+
+step("Wrong credentials error must be shown",async ()=>{
+    await text('Wrong email or password').exists();
+});
+
+step("Click <linkText> redirects to home", async (linkText)=>{
+    await click(link(linkText));
+    assert.strictEqual(await taiko.currentURL(),testUrl)
+});
+
+step("user should see the validator prompt page",async ()=>{
+    await text('test3').exists();
+    await text('Play').exists();
+    await text('No').exists();
+    await text('Yes').exists();
+    await text('Skip').exists();
+    await text('Instructions').exists();
+});
+
+step("user should see pause button and other buttons should disable",async ()=>{
+    await text('test3').exists();
+    await text('Pause').exists();
+    await text('Instructions').exists();
+});
+
+step("user should see replay button and other buttons should enable",async ()=>{
+    await text('test3').exists();
+    await text('Replay').exists();
+    await text('Instructions').exists();
+});
+
+step("user should see dropdown menu", async ()=>{
+    await text('Log Out').exists();
+    await text('Validate contributions').exists();
+})
+
+step("user should see the Home page", async ()=>{
+    await text('Sign In').exists();
+    await text('We rely on your contributions').exists();
+    await text('Speaker Diversification').exists();
+})
