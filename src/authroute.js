@@ -19,7 +19,7 @@ const redirectUser = (user, res) => {
 
 const getLogOutUrl = (req) => {
     let returnTo = req.protocol + '://' + req.hostname;
-    const port = req.connection.localPort;
+    const port = req.protocol === 'https' ? 443 : req.connection.localPort;
     if (port !== undefined && port !== 80 && port !== 443) {
         returnTo += ':' + port;
     }
