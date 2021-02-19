@@ -3,5 +3,5 @@ INSERT INTO contributions (
 	
 	
 select s."sentenceId", s."fileName" ,con."contributor_id",s."assignDate", 'completed' from "sentences" s
-inner join "contributors" con on con."contributor_identifier" = s."userId" where s."fileName" is NOT NULL;
+inner join "contributors" con on con."contributor_identifier" = s."userId" and s."userName" = con.user_name where s."fileName" is NOT NULL;
 ;

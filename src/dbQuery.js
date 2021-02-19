@@ -49,11 +49,11 @@ const getCountOfTotalSpeakerAndRecordedAudio = 'select  count(DISTINCT(con.*)), 
 from "contributors" con inner join "contributions" cont on con.contributor_id = cont.contributed_by inner join "sentences" s on  s."sentenceId" = cont.sentence_id  where s.language = $1 \
 UNION ALL (select count(*),1 as index from sentences s inner join "contributions" cont on cont.sentence_id = s."sentenceId" where s.language = $1);'
 
-const getMotherTonguesData = 'select data."mother_tongue", count (*) from (select con."mother_tongue" from sentences s inner join "contributions" cont on s."sentenceId" = cont.sentence_id inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."mother_tongue") as data group by data."mother_tongue";'
+const getMotherTonguesData = 'select data."mother_tongue", count (*) from (select con."mother_tongue" from sentences s inner join "contributions" cont on s."sentenceId" = cont.sentence_id inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."mother_tongue", con.user_name, con.contributor_identifier) as data group by data."mother_tongue";'
 
-const getAgeGroupsData = 'select data."age_group", count (*) from (select con."age_group" from sentences s inner join "contributions" cont on s."sentenceId" = cont.sentence_id inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."age_group") as data group by data."age_group";'
+const getAgeGroupsData = 'select data."age_group", count (*) from (select con."age_group" from sentences s inner join "contributions" cont on s."sentenceId" = cont.sentence_id inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."age_group", con.user_name, con.contributor_identifier) as data group by data."age_group";'
 
-const getGenderData = 'select data."gender", count (*) from (select con."gender" from sentences s inner join "contributions" cont on s."sentenceId" = cont.sentence_id inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."gender") as data group by data."gender";'
+const getGenderData = 'select data."gender", count (*) from (select con."gender" from sentences s inner join "contributions" cont on s."sentenceId" = cont.sentence_id inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."gender", con.user_name, con.contributor_identifier) as data group by data."gender";'
 
 module.exports = {
     unassignIncompleteSentences,
