@@ -74,8 +74,8 @@ jobs:
         executor:
             name: node/default
         environment:
-          DB_USER: $DB_USER
-          DB_PASS: $DB_PASS
+          DB_USER: $DEV_DB_USER
+          DB_PASS: $DEV_DB_PASS
           DEV_DB_NAME: $DEV_DB_NAME
         steps:
             - checkout
