@@ -78,18 +78,33 @@ jobs:
             name: node/default
         steps:
             - checkout
+            - run :
+                name: Run DB Proxy
+                command: |
+                  sudo apt-get update
+                  sudo apt-get install wget
+                  wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-265.0.0-linux-x86_64.tar.gz
+                  tar -zxf google-cloud-sdk-*
+                  cd google-cloud-sdk
+                  pwd
+                  ./install.sh --quiet
+                  echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
+                  ./bin/gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
+                  ./bin/gcloud --quiet config set project ${GCP_PROJECT}
+                  export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/gcp-key.json
+                  echo $GOOGLE_APPLICATION_CREDENTIALS
+                  wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+                  chmod +x cloud_sql_proxy
+                  nohup ./cloud_sql_proxy -dir=./cloudsql -instances=ekstepspeechrecognition:us-central1:crowdsourcedb=tcp:5432 &
+                  sleep 25s
+                  cat nohup.out
             - node/install-packages
             - run:
                 name: Run DB Migrate
-                command: |
-                    npm run db-migrate -- -e <<parameters.env_name>>
+                command: npm run db-migrate
                 environment:
-                  DB_USER: $DB_USER
-                  DB_PASS: $DB_PASS
-                  DB_HOST: $DB_HOST
-                  DEV_DB_NAME: $DEV_DB_NAME
+                  DATABASE_URL: postgresql://${DB_USER}:${DB_PASS}@localhost/${DEV_DB_NAME}
                 
-
 workflows:
     build_test_deploy:
         jobs:
