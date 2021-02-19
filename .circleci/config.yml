@@ -100,9 +100,12 @@ jobs:
                   sleep 25s
                   cat nohup.out
             - node/install-packages
-            - run:
+            - run: 
                 name: Run DB Migrate
-                command: npx db-migrate up
+                command: |
+                    export DATABASE_URL= postgresql://${DEV_DB_USER}:${DEV_DB_PASS}@127.0.0.1/${DEV_DB_NAME}
+                    echo $DATABASE_URL
+                    npx db-migrate up
                 environment:
                   DATABASE_URL: postgresql://${DEV_DB_USER}:${DEV_DB_PASS}@127.0.0.1/${DEV_DB_NAME}
                 
