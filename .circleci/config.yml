@@ -71,11 +71,12 @@ jobs:
             - run: echo "Hold for approval"
 
     db_migrate:
-        parameters:
-            env_name:
-              type: string
         executor:
             name: node/default
+        environment:
+          DB_USER: $DB_USER
+          DB_PASS: $DB_PASS
+          DEV_DB_NAME: $DEV_DB_NAME
         steps:
             - checkout
             - run :
@@ -112,7 +113,6 @@ workflows:
                 version: "13.4"
           - db_migrate:
                name: migrate_dev
-               env_name: dev
           - deploy:
                name: deploy_dev
                env_name: dev
@@ -126,7 +126,6 @@ workflows:
                    - deploy_dev
           - db_migrate:
                name: migrate_test
-               env_name: test
                requires:
                  - approve_test
           - deploy:
@@ -145,7 +144,6 @@ workflows:
                    - deploy_test
           - db_migrate:
               name: migrate_prod
-              env_name: prod
               requires:
                 - approve_prod
           - deploy:
