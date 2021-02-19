@@ -81,7 +81,10 @@ jobs:
             - node/install-packages
             - run:
                 name: Run DB Migrate
-                command: npm run db-migrate -- -e <<parameters.env_name>>
+                command: |
+                    echo $DB_USER
+                    npm run db-migrate -- -e <<parameters.env_name>>
+                
 
 workflows:
     build_test_deploy:
@@ -91,12 +94,13 @@ workflows:
           - db_migrate:
                name: migrate_dev
                env_name: dev
+               requires: 
+                 - node/test
           - deploy:
                name: deploy_dev
                env_name: dev
                sh_file: app_yaml_dev.sh
                requires:
-                 - node/test
                  - migrate_dev
           - approve_to_deploy:
                 name: approve_test
