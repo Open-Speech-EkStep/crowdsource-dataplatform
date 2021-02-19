@@ -82,8 +82,10 @@ jobs:
             - run:
                 name: Run DB Migrate
                 command: |
-                    echo $DB_USER
+                    echo $DEV_DB_USER
                     npm run db-migrate -- -e <<parameters.env_name>>
+                environment:
+                  DEV_DB_USER: test_user
                 
 
 workflows:
