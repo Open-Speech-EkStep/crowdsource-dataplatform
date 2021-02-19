@@ -19,3 +19,8 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.contributions
     OWNER to postgres;
+
+
+GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE public.contributions TO crowdsourcedbuser;
+
+GRANT ALL ON TABLE public.contributions TO postgres;

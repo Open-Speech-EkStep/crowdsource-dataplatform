@@ -15,3 +15,7 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.contributors
     OWNER to postgres;
+
+GRANT UPDATE, INSERT, SELECT ON TABLE public.contributors TO crowdsourcedbuser;
+
+GRANT ALL ON TABLE public.contributors TO postgres;
