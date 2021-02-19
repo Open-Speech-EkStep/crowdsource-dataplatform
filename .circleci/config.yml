@@ -99,7 +99,7 @@ jobs:
             - run: 
                 name: Run DB Migrate
                 command: |
-                    export DATABASE_URL= postgresql://${DEV_DB_USER}:${DEV_DB_PASS}@127.0.0.1/${DEV_DB_NAME}
+                    export DATABASE_URL=postgresql://${DEV_DB_USER}:${DEV_DB_PASS}@127.0.0.1/${DEV_DB_NAME}
                     echo $DATABASE_URL
                     npx db-migrate up
                 
