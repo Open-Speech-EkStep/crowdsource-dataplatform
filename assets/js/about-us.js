@@ -1,4 +1,4 @@
-const {validateUserName, testUserName, resetSpeakerDetails,setUserNameTooltip,setStartRecordBtnToolTipContent} = require('./speakerDetails');
+const {validateUserName, testUserName,setSpeakerDetails, resetSpeakerDetails,setUserNameTooltip,setStartRecordBtnToolTipContent} = require('./speakerDetails');
 
 $(document).ready(function () {
     const speakerDetailsKey = 'speakerDetails';
@@ -20,29 +20,8 @@ $(document).ready(function () {
         placement: screen.availWidth > 500 ? 'right' : 'auto',
     });
 
-    const setSpeakerDetails = () => {
-        const speakerDetailsValue = localStorage.getItem(speakerDetailsKey);
-        if (speakerDetailsValue) {
-            const parsedSpeakerDetails = JSON.parse(speakerDetailsValue);
-            const genderRadio = document.querySelector(
-                'input[name = "gender"][value="' + parsedSpeakerDetails.gender + '"]'
-            );
-            if (genderRadio) {
-                genderRadio.checked = true;
-                genderRadio.previous = true;
-            }
-            age.value = parsedSpeakerDetails.age;
-            motherTongue.value = parsedSpeakerDetails.motherTongue;
-            $userName.val(
-                parsedSpeakerDetails.userName
-                    ? parsedSpeakerDetails.userName.trim().substring(0, 12)
-                    : ''
-            );
-            validateUserName($userName, $userNameError, $tncCheckbox);
-        }
-    };
 
-    setSpeakerDetails();
+    setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
 
     genderRadios.forEach((element) => {
         element.addEventListener('click', (e) => {

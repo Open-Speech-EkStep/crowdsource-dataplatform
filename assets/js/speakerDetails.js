@@ -53,9 +53,33 @@ const setStartRecordBtnToolTipContent = (userName, $startRecordBtnTooltip) => {
     }
 };
 
+const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
+    const speakerDetailsValue = localStorage.getItem(speakerDetailsKey);
+    if (speakerDetailsValue) {
+        const parsedSpeakerDetails = JSON.parse(speakerDetailsValue);
+        const genderRadio = document.querySelector(
+            'input[name = "gender"][value="' + parsedSpeakerDetails.gender + '"]'
+        );
+        if (genderRadio) {
+            genderRadio.checked = true;
+            genderRadio.previous = true;
+        }
+        age.value = parsedSpeakerDetails.age;
+        motherTongue.value = parsedSpeakerDetails.motherTongue;
+        $userName.val(
+            parsedSpeakerDetails.userName
+                ? parsedSpeakerDetails.userName.trim().substring(0, 12)
+                : ''
+        );
+        validateUserName($userName, $userName.next(), $('#tnc'));
+    }
+};
+
+
 module.exports = {
     testUserName,
     validateUserName,
+    setSpeakerDetails,
     resetSpeakerDetails,
     setUserNameTooltip,
     setStartRecordBtnToolTipContent
