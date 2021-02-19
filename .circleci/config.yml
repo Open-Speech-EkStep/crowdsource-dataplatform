@@ -71,6 +71,9 @@ jobs:
             - run: echo "Hold for approval"
 
     db_migrate:
+        parameters:
+            db_name:
+              type: string
         executor:
             name: node/default
         steps:
@@ -99,8 +102,8 @@ jobs:
             - run: 
                 name: Run DB Migrate
                 command: |
-                    export DATABASE_URL=postgresql://${DEV_DB_USER}:${DEV_DB_PASS}@127.0.0.1/${DEV_DB_NAME}
-                    echo $DATABASE_URL
+                    export DATABASE_URL=postgresql://${DEV_DB_USER}:${DEV_DB_PASS}@127.0.0.1/<< parameters.db_name >>
+                    echo << parameters.db_name >>
                     npx db-migrate up
                 
 workflows:
@@ -110,6 +113,7 @@ workflows:
                 version: "13.4"
           - db_migrate:
                name: migrate_dev
+               db_name: ${DEV_DB_NAME}
           - deploy:
                name: deploy_dev
                env_name: dev
@@ -123,6 +127,7 @@ workflows:
                    - deploy_dev
           - db_migrate:
                name: migrate_test
+               db_name: ${TEST_DB_NAME}
                requires:
                  - approve_test
           - deploy:
@@ -141,6 +146,7 @@ workflows:
                    - deploy_test
           - db_migrate:
               name: migrate_prod
+              db_name: ${DB_NAME}
               requires:
                 - approve_prod
           - deploy:
