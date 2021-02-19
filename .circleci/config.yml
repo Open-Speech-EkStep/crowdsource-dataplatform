@@ -104,7 +104,7 @@ jobs:
                 name: Run DB Migrate
                 command: npx db-migrate up
                 environment:
-                  DATABASE_URL: postgresql://${DB_USER}:${DB_PASS}@localhost/${DEV_DB_NAME}
+                  DATABASE_URL: postgresql://${DEV_DB_USER}:${DEV_DB_PASS}@localhost/${DEV_DB_NAME}
                 
 workflows:
     build_test_deploy:
