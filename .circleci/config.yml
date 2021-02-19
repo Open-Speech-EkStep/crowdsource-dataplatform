@@ -64,48 +64,75 @@ jobs:
                     gcloud app deploy dispatch.yaml
                   fi
             - delete_files
-    approve_for_prod_deploy:
+    approve_to_deploy:
         docker: 
             - image: circleci/node:13.4
         steps:
             - run: echo "Hold for approval"
+
+    db_migrate:
+        parameters:
+            env_name:
+              type: string
+        executor:
+            name: node/default
+        steps:
+            - checkout
+            - node/install-packages
+            - run:
+                name: Run DB Migrate
+                command: npm run db-migrate -- -e <<parameters.env_name>>
 
 workflows:
     build_test_deploy:
         jobs:
           - node/test:
                 version: "13.4"
+          - db_migrate:
+               name: migrate_dev
+               env_name: dev
           - deploy:
                name: deploy_dev
                env_name: dev
                sh_file: app_yaml_dev.sh
                requires:
                  - node/test
-          - approve_for_prod_deploy:
-                name: test_deploy
+                 - migrate_dev
+          - approve_to_deploy:
+                name: approve_test
                 type: approval
                 requires:
                    - deploy_dev
+          - db_migrate:
+               name: migrate_test
+               env_name: test
+               requires:
+                 - approve_test
           - deploy:
                name: deploy_test
                env_name: test
                sh_file: app_yaml_test.sh
                requires:
-                 - test_deploy
+                 - migrate_test
           - run_functional_tests:
                  requires:
                    - deploy_test
-          - approve_for_prod_deploy:
-                name: wait_for_prod_deploy
+          - approve_to_deploy:
+                name: approve_prod
                 type: approval
                 requires:
                    - deploy_test
+          - db_migrate:
+              name: migrate_prod
+              env_name: prod
+              requires:
+                - approve_prod
           - deploy:
                 name: deploy_prod
                 env_name: prod
                 sh_file: app_yaml_prod.sh
                 requires:
-                  - wait_for_prod_deploy
+                  - migrate_prod
                 filters:
                   branches:
                     only:

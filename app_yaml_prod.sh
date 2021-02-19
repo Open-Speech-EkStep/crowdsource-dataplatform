@@ -5,7 +5,7 @@ env: flex
 
 automatic_scaling:
   min_num_instances: 1
-  max_num_instances: 8
+  max_num_instances: 2
   cool_down_period_sec: 70
   cpu_utilization:
     target_utilization: 0.8
