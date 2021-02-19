@@ -1,0 +1,199 @@
+const {
+    testUserName,
+    validateUserName,
+    resetSpeakerDetails,
+    setUserNameTooltip,
+    setStartRecordBtnToolTipContent
+} = require('../assets/js/speakerDetails');
+const {readFileSync} = require('fs');
+const {stringToHTML} = require('./utils');
+
+document.body = stringToHTML(
+    readFileSync(`${__dirname}/../views/modals/speakerDetail.ejs`, 'UTF-8')
+);
+
+describe('testUserName', () => {
+    test('should give true for given mobile number of 10-digits start from 6-9', () => {
+        expect(testUserName('9818181818')).toEqual(true);
+    });
+
+    test('should give false for given mobile number of less than 10-digits', () => {
+        expect(testUserName('981818181')).toEqual(false);
+    });
+
+    test('should give false for given mobile number of more than 10-digits', () => {
+        expect(testUserName('98181818188')).toEqual(false);
+    });
+
+    test('should give false for given mobile number of than 10-digits not start from 6-9', () => {
+        expect(testUserName('58181818188')).toEqual(false);
+    });
+
+    test('should give true for given emailId start with string followed by @<String>.<String>', () => {
+        expect(testUserName('abc@gmail.com')).toEqual(true);
+    });
+
+    test('should give true for given emailId with string followed by @<String>.<digits>', () => {
+        expect(testUserName('abc@gmail.123')).toEqual(true);
+    });
+
+    test('should give false for given emailId not having "@"', () => {
+        expect(testUserName('abcgmail.com')).toEqual(false);
+    });
+
+    test('should give false for given emailId not having "."', () => {
+        expect(testUserName('abc@gmailcom')).toEqual(false);
+    });
+});
+
+
+describe('validateUserName', () => {
+    test('should show username when username is valid', () => {
+        const $userName = $('#username');
+        $userName.val = () => "abc@gmail.com";
+        const $userNameError = $userName.next();
+        const $tncCheckbox = $('#tnc');
+        validateUserName($userName, $userNameError, $tncCheckbox);
+
+        expect($userName.hasClass('is-invalid')).toEqual(true);
+        expect($userNameError.hasClass('d-none')).toEqual(false);
+    });
+
+    test('should show error when username is not valid', () => {
+        const $userName = $('#username');
+        const $userNameError = $userName.next();
+        const $tncCheckbox = $('#tnc');
+        validateUserName($userName, $userNameError, $tncCheckbox);
+
+        expect($userName.hasClass('is-invalid')).toEqual(false);
+        expect($userNameError.hasClass('d-none')).toEqual(true);
+    });
+});
+
+describe('validateUserName', () => {
+    test('should show username when username is valid', () => {
+        const $userName = $('#username');
+        $userName.val = () => "abc@gmail.com";
+        const $userNameError = $userName.next();
+        const $tncCheckbox = $('#tnc');
+        validateUserName($userName, $userNameError, $tncCheckbox);
+
+        expect($userName.hasClass('is-invalid')).toEqual(true);
+        expect($userNameError.hasClass('d-none')).toEqual(false);
+    });
+
+    test('should show error when username is not valid', () => {
+        const $userName = $('#username');
+        const $userNameError = $userName.next();
+        const $tncCheckbox = $('#tnc');
+        validateUserName($userName, $userNameError, $tncCheckbox);
+
+        expect($userName.hasClass('is-invalid')).toEqual(false);
+        expect($userNameError.hasClass('d-none')).toEqual(true);
+    });
+});
+
+
+describe('resetSpeakerDetails', () => {
+    test('should reset all details from popup', () => {
+        const $username = $('#username');
+        const age = document.getElementById('age');
+        const motherTongue = document.getElementById('mother-tongue');
+        const gender = document.querySelectorAll(
+            'input[name = "gender"]'
+        );
+        age.selectedIndex = 1;
+        motherTongue.selectedIndex = 1;
+        gender[0].checked = true;
+        $username.val('testName')
+        resetSpeakerDetails();
+        const selectedGender = document.querySelector(
+            'input[name = "gender"]:checked'
+        );
+        expect($username.val()).toBe('')
+        expect(age.selectedIndex).toBe(0)
+        expect(motherTongue.selectedIndex).toBe(0)
+        expect(selectedGender).toBeNull()
+    })
+});
+
+describe("setUserNameTooltip",()=>{
+    test("should enable username tooltip when username is more than 11 characters",()=>{
+        const $userName = $('#username');
+        $userName.val = function (){
+            return {length:12};
+        };
+        $userName.tooltip = (e)=>{};
+        jest.spyOn($userName,'tooltip');
+        setUserNameTooltip($userName);
+        expect($userName.tooltip).toHaveBeenCalledTimes(2);
+        expect($userName.tooltip).toHaveBeenCalledWith('enable');
+        expect($userName.tooltip).toHaveBeenCalledWith('show');
+
+    })
+
+    test("should disable username tooltip when username is less than 11 characters",()=>{
+        const $userName = $('#username');
+        $userName.val = function (){
+            return {length:10};
+        };
+        $userName.tooltip = (e)=>{};
+        jest.spyOn($userName,'tooltip');
+        setUserNameTooltip($userName);
+        expect($userName.tooltip).toHaveBeenCalledTimes(2);
+        expect($userName.tooltip).toHaveBeenCalledWith('disable');
+        expect($userName.tooltip).toHaveBeenCalledWith('hide');
+
+    })
+
+    test("should disable username tooltip when username is equal to 11 characters",()=>{
+        const $userName = $('#username');
+        $userName.val = function (){
+            return {length:11};
+        };
+        $userName.tooltip = (e)=>{};
+        jest.spyOn($userName,'tooltip');
+        setUserNameTooltip($userName);
+        expect($userName.tooltip).toHaveBeenCalledTimes(2);
+        expect($userName.tooltip).toHaveBeenCalledWith('disable');
+        expect($userName.tooltip).toHaveBeenCalledWith('hide');
+
+    })
+})
+
+describe('setStartRecordBtnToolTipContent', () => {
+    test('should set username error msg when username is an phone no.', () => {
+        const $startRecordBtn = $('#proceed-box');
+        const $startRecordBtnTooltip = $startRecordBtn.parent();
+        jest.spyOn($startRecordBtn,'parent');
+        jest.spyOn($startRecordBtnTooltip,'attr');
+
+        setStartRecordBtnToolTipContent("8787878788", $startRecordBtnTooltip);
+        expect($startRecordBtnTooltip.attr).toHaveBeenCalledTimes(1);
+        expect($startRecordBtnTooltip.attr).toHaveBeenCalledWith('data-original-title','Please validate any error message before proceeding');
+        jest.clearAllMocks();
+    })
+
+    test('should set username error msg when username is an emailId', () => {
+        const $startRecordBtn = $('#proceed-box');
+        const $startRecordBtnTooltip = $startRecordBtn.parent();
+        jest.spyOn($startRecordBtnTooltip,'attr');
+
+        setStartRecordBtnToolTipContent("abc@gmail.com", $startRecordBtnTooltip);
+        expect($startRecordBtnTooltip.attr).toHaveBeenCalledTimes(1);
+        expect($startRecordBtnTooltip.attr).toHaveBeenCalledWith('data-original-title','Please validate any error message before proceeding');
+        jest.clearAllMocks();
+    })
+
+    test('should set t&c error msg username is not emailId nor phone no.', () => {
+        const $startRecordBtn = $('#proceed-box');
+        const $startRecordBtnTooltip = $startRecordBtn.parent();
+        jest.spyOn($startRecordBtnTooltip,'attr');
+
+        setStartRecordBtnToolTipContent("abc", $startRecordBtnTooltip);
+        expect($startRecordBtnTooltip.attr).toHaveBeenCalledTimes(1);
+        expect($startRecordBtnTooltip.attr).toHaveBeenCalledWith('data-original-title','Please agree to the Terms and Conditions before proceeding');
+        jest.clearAllMocks();
+    })
+
+});

@@ -176,7 +176,7 @@ router.get('/getAllInfo/:language', async function (req, res) {
 
 router.get('/about-us', function (req, res) {
   const isSignedIn = req.session.passport ? true : false;
-  res.render('about-us.ejs', {isSignedIn});
+  res.render('about-us.ejs', {MOTHER_TONGUE, LANGUAGES, isSignedIn});
 });
 router.get('/terms-and-conditions', function (req, res) {
   const isSignedIn = req.session.passport ? true : false;
