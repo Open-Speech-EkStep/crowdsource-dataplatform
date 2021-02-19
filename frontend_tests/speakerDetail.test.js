@@ -1,12 +1,14 @@
+const fetchMock = require('fetch-mock')
 const {
     testUserName,
     validateUserName,
+    setSpeakerDetails,
     resetSpeakerDetails,
     setUserNameTooltip,
     setStartRecordBtnToolTipContent
 } = require('../assets/js/speakerDetails');
 const {readFileSync} = require('fs');
-const {stringToHTML} = require('./utils');
+const {stringToHTML, flushPromises} = require('./utils');
 
 document.body = stringToHTML(
     readFileSync(`${__dirname}/../views/modals/speakerDetail.ejs`, 'UTF-8')
@@ -46,7 +48,6 @@ describe('testUserName', () => {
     });
 });
 
-
 describe('validateUserName', () => {
     test('should show username when username is valid', () => {
         const $userName = $('#username');
@@ -70,26 +71,22 @@ describe('validateUserName', () => {
     });
 });
 
-describe('validateUserName', () => {
-    test('should show username when username is valid', () => {
+describe('setSpeakerDetails', () => {
+    test("should set Speakers details on homePage when speakerDetailsValue is present in localStorage", (done) => {
+        const age = document.getElementById('age');
+        const motherTongue = document.getElementById('mother-tongue');
         const $userName = $('#username');
-        $userName.val = () => "abc@gmail.com";
-        const $userNameError = $userName.next();
-        const $tncCheckbox = $('#tnc');
-        validateUserName($userName, $userNameError, $tncCheckbox);
-
-        expect($userName.hasClass('is-invalid')).toEqual(true);
-        expect($userNameError.hasClass('d-none')).toEqual(false);
-    });
-
-    test('should show error when username is not valid', () => {
-        const $userName = $('#username');
-        const $userNameError = $userName.next();
-        const $tncCheckbox = $('#tnc');
-        validateUserName($userName, $userNameError, $tncCheckbox);
-
-        expect($userName.hasClass('is-invalid')).toEqual(false);
-        expect($userNameError.hasClass('d-none')).toEqual(true);
+        localStorage.setItem('speakerDetails', JSON.stringify({
+            age: "0-5",
+            motherTongue: "Hindi",
+            userName: "abcdeUsername"
+        }));
+        setSpeakerDetails("speakerDetails", age, motherTongue, $userName);
+        flushPromises().then(() => {
+            expect($userName.val()).toEqual("abcdeUsernam"); //trimmed username 0-12 chars only
+            fetchMock.reset();
+            done();
+        });
     });
 });
 
