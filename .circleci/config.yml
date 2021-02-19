@@ -73,10 +73,6 @@ jobs:
     db_migrate:
         executor:
             name: node/default
-        environment:
-          DB_USER: $DEV_DB_USER
-          DB_PASS: $DEV_DB_PASS
-          DEV_DB_NAME: $DEV_DB_NAME
         steps:
             - checkout
             - run :
@@ -106,8 +102,6 @@ jobs:
                     export DATABASE_URL= postgresql://${DEV_DB_USER}:${DEV_DB_PASS}@127.0.0.1/${DEV_DB_NAME}
                     echo $DATABASE_URL
                     npx db-migrate up
-                environment:
-                  DATABASE_URL: postgresql://${DEV_DB_USER}:${DEV_DB_PASS}@127.0.0.1/${DEV_DB_NAME}
                 
 workflows:
     build_test_deploy:
