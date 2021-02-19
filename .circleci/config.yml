@@ -101,7 +101,7 @@ jobs:
             - node/install-packages
             - run:
                 name: Run DB Migrate
-                command: npm run db-migrate
+                command: npx db-migrate up
                 environment:
                   DATABASE_URL: postgresql://${DB_USER}:${DB_PASS}@localhost/${DEV_DB_NAME}
                 
@@ -113,8 +113,6 @@ workflows:
           - db_migrate:
                name: migrate_dev
                env_name: dev
-               requires: 
-                 - node/test
           - deploy:
                name: deploy_dev
                env_name: dev
