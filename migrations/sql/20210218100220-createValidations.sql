@@ -18,3 +18,8 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.validations
     OWNER to postgres;
+
+
+GRANT UPDATE, INSERT, SELECT ON TABLE public.validations TO crowdsourcedbuser;
+
+GRANT ALL ON TABLE public.validations TO postgres;
