@@ -16,7 +16,7 @@ resources:
 env_variables:
   DB_HOST: \"/cloudsql/$DB_HOST\"
   DB_USER: \"$DB_USER\"
-  DB_NAME: \"$TEST_DB_NAME\"
+  DB_NAME: \"$DEV_DB_NAME\"
   DB_PASS: \"$DB_PASS\"
   BUCKET_NAME: \"$TEST_BUCKET_NAME\"
   ENCRYPTION_KEY: \"$ENCRYPTION_KEY\"
