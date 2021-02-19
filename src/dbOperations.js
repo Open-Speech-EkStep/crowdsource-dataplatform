@@ -61,7 +61,7 @@ const updateDbWithFileName = function (
         encryptUserId,
     ])
         .then((data) => {
-            db.none(updateSentencesWithContributedState,[sentenceId]).resolve();
+            db.none(updateSentencesWithContributedState,[sentenceId]).then();
             if (!data || !data.length) {
                 db.any(setNewUserAndFileName, [file, encryptUserId, sentenceId])
                     .then(() => cb(200, {success: true}))
@@ -112,7 +112,7 @@ const updateAndGetSentences = function (req, res) {
     }
     const ageGroup = req.body.age;
     const encryptedUserId = encrypt(userId);
-    db.none(insertContributor, [encryptedUserId, userName]).resolve();
+    db.none(insertContributor, [encryptedUserId, userName]).then();
     const sentences = getSentencesBasedOnAge(
         ageGroup,
         encryptedUserId,
