@@ -10,7 +10,11 @@ inner join "contributions" cont on s."sentenceId" = cont.sentence_id \
 inner join "contributors" con on cont.contributed_by = con.contributor_id \
 where con.contributor_identifier = $1 AND s."language" = $3;'
 
-const updateAndGetSentencesQuery = 'with ins (sentence_id) as \
+const updateAndGetSentencesQuery = '\
+INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 \
+where not exists \
+(select "contributor_id" from "contributors" where "contributor_identifier" = $1 and user_name=$2); \
+with ins (sentence_id) as \
 ( insert into "contributions" ("action","sentence_id", "date", "contributed_by") \
 select \'assigned\', "sentenceId", now(), con."contributor_id" \
 from sentences inner join "contributors" con on con."contributor_identifier" = $1 \
@@ -19,16 +23,6 @@ where "state" is null and language = $4 and label=$3 and cont."action" is NULL l
   returning "sentence_id") \
 select ins.sentence_id, sentences.sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins.sentence_id;'
-
-// const updateAndGetSentencesQueryForAdult = 'update sentences set assign = true, \
-// "assignDate" = current_date, "userId" = $1, "userName" = $2 \
-// where "sentenceId" in ((select "sentenceId" from sentences where "assign" = false AND "label" = $3 limit 5) \
-// union \
-// (select "sentenceId" from sentences where "assign" = false AND "label" = $4 limit 5)) returning "sentenceId","sentence";'
-
-const insertContributor = 'INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 \
-    where not exists \
-    (select "contributor_id" from "contributors" where "contributor_identifier" = $1 and user_name=$2);'
 
 const UpdateAudioPathAndUserDetails = 'WITH src AS ( \
     update "contributors" set "age_group" = $2, gender = $3, mother_tongue = $4 \
@@ -66,6 +60,5 @@ module.exports = {
     getGenderData,
     getAgeGroupsData,
     unassignIncompleteSentencesWhenLanChange,
-    insertContributor,
     updateSentencesWithContributedState
 }
