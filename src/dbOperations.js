@@ -1,4 +1,3 @@
-const fs = require('fs');
 const {encrypt} = require('./encryptAndDecrypt');
 const {
     UpdateAudioPathAndUserDetails,
@@ -11,7 +10,6 @@ const {
     getAgeGroupsData,
     getMotherTonguesData,
     unassignIncompleteSentencesWhenLanChange,
-    insertContributor,
     updateSentencesWithContributedState
 } = require('./dbQuery');
 const {KIDS_AGE_GROUP, ADULT, KIDS} = require('./constants');
@@ -63,7 +61,7 @@ const updateDbWithAudioPath = function (
         userName
     ])
         .then((data) => {
-            db.none(updateSentencesWithContributedState,[sentenceId]).then();
+            db.none(updateSentencesWithContributedState, [sentenceId]).then();
             if (!data || !data.length) {
                 db.any(setNewUserAndFileName, [audioPath, encryptUserId, sentenceId])
                     .then(() => cb(200, {success: true}))
@@ -88,14 +86,14 @@ const getSentencesBasedOnAge = function (
     language
 ) {
     if (ageGroup === KIDS_AGE_GROUP) {
-        return (sentences = db.many(updateAndGetSentencesQuery, [
+        return (db.many(updateAndGetSentencesQuery, [
             encryptedUserId,
             userName,
             KIDS,
             language,
         ]));
     } else {
-        return (sentences = db.many(updateAndGetSentencesQuery, [
+        return (db.many(updateAndGetSentencesQuery, [
             encryptedUserId,
             userName,
             ADULT,
@@ -114,7 +112,6 @@ const updateAndGetSentences = function (req, res) {
     }
     const ageGroup = req.body.age;
     const encryptedUserId = encrypt(userId);
-    db.none(insertContributor, [encryptedUserId, userName]).then();
     const sentences = getSentencesBasedOnAge(
         ageGroup,
         encryptedUserId,
