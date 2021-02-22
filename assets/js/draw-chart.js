@@ -9,15 +9,33 @@ function getOrderedGenderData(formattedGenderData) {
     const order = ['Female', 'Male', 'Others', 'Anonymous'];
     order.forEach((gender) => {
         formattedGenderData.forEach((data) => {
-            if (gender === data['gender'])
-                orderedGenderData.push(data);
+            if (gender.toLowerCase() === data.gender.toLowerCase()) {
+
+                const index = orderedGenderData.findIndex(e => gender.toLowerCase() === e.gender.toLowerCase());
+                if (index === -1) {
+                    orderedGenderData.push(data);
+                } else {
+                    orderedGenderData[index].count += data.count;
+                }
+            }
+
         });
     });
     return orderedGenderData;
 }
 
 function getFormattedData(data, key) {
-    return data.map((item) => item[key] ? item : {[key]: 'Anonymous', count: item.count})
+    let formattedData = [];
+    data.forEach((item) => {
+        const element = item[key] ? item : {[key]: 'Anonymous', count: item.count};
+        const index = formattedData.findIndex(e => element[key].toLowerCase() === e[key].toLowerCase());
+        if (index >= 0) {
+            formattedData[index].count += element.count;
+        } else {
+            formattedData.push(element);
+        }
+    })
+return formattedData;
 }
 
 function updateGraph(language) {
@@ -47,7 +65,7 @@ function buildGraphs(language) {
                 $chartLoaders.hide().removeClass('d-flex');
                 $charts.removeClass('d-none');
                 const formattedAgeGroupData = getFormattedData(data.ageGroups, 'ageGroup').sort((a, b) => Number(a.count) - Number(b.count));
-                drawAgeGroupChart( formattedAgeGroupData);
+                drawAgeGroupChart(formattedAgeGroupData);
                 const motherTongueTotal = data.motherTongues.reduce(
                     (acc, curr) => acc + Number(curr.count),
                     0
@@ -64,7 +82,7 @@ function buildGraphs(language) {
                     motherTongueTotal,
                     'modal-chart'
                 );
-                const formattedGenderData = data.genderData.map((item) =>{
+                const formattedGenderData = data.genderData.map((item) => {
                     return item.gender
                         ? {
                             ...item,
@@ -72,7 +90,7 @@ function buildGraphs(language) {
                                 item.gender.charAt(0).toUpperCase() + item.gender.slice(1),
                         }
                         : {gender: 'Anonymous', count: item.count}
-            });
+                });
                 let orderedGenderData = getOrderedGenderData(formattedGenderData);
                 const table = new Table()
                 drawGenderChart(orderedGenderData);
