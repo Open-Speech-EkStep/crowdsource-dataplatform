@@ -42,7 +42,6 @@ describe('setUserProfileName',()=>{
         expect($('#nav-user').hasClass('d-none')).toEqual(true);
         expect(document.getElementById('nav-username').innerText).toEqual(undefined);
 
-        console.log(localStorage.getItem('validatorDetails'))
         expect(localStorage.getItem('validatorDetails')).toEqual(JSON.stringify(["xyz"]));
         localStorage.clear();
     })
