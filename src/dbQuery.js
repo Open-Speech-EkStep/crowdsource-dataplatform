@@ -28,11 +28,11 @@ select ins.sentence_id, sentences.sentence from ins  \
 
 const insertContributor = 'INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 \
     where not exists \
-    (select "contributor_id" from "contributors" where "contributor_identifier" = $1);'
+    (select "contributor_id" from "contributors" where "contributor_identifier" = $1 and user_name=$2);'
 
-const UpdateFileNameAndUserDetails = 'WITH src AS ( \
+const UpdateAudioPathAndUserDetails = 'WITH src AS ( \
     update "contributors" set "age_group" = $2, gender = $3, mother_tongue = $4 \
-    where contributor_identifier = $6 \
+    where contributor_identifier = $6 and user_name = $7\
     RETURNING contributor_id \
     ) \
 UPDATE "contributions" \
@@ -60,7 +60,7 @@ module.exports = {
     sentencesCount,
     updateAndGetSentencesQuery,
     setNewUserAndFileName,
-    UpdateFileNameAndUserDetails,
+    UpdateAudioPathAndUserDetails,
     getCountOfTotalSpeakerAndRecordedAudio,
     getMotherTonguesData,
     getGenderData,
