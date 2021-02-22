@@ -114,6 +114,8 @@ workflows:
           - db_migrate:
                name: migrate_dev
                db_name: ${DEV_DB_NAME}
+               requires:
+                 - node/test
           - deploy:
                name: deploy_dev
                env_name: dev

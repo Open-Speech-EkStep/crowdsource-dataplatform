@@ -10,7 +10,7 @@
     "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest",
     "gulp": "gulp",
     "functional_test": "cd functional_tests && npm i && gauge run specs/Vakyansh.spec",
-    "db-migrate": "npx db-migrate up --config migrations/config/migration_config.json"
+    "db-migrate": "npx db-migrate up --config migrations/config/migration_config.json -e dev"
   },
   "repository": {
     "type": "git",
