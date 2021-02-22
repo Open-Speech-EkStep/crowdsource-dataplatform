@@ -1,7 +1,7 @@
 const fs = require('fs');
 const {encrypt} = require('./encryptAndDecrypt');
 const {
-    UpdateFileNameAndUserDetails,
+    UpdateAudioPathAndUserDetails,
     setNewUserAndFileName,
     unassignIncompleteSentences,
     updateAndGetSentencesQuery,
@@ -35,11 +35,12 @@ let cn = {
 
 const db = pgp(cn);
 
-const updateDbWithFileName = function (
-    file,
+const updateDbWithAudioPath = function (
+    audioPath,
     sentenceId,
     speakerDetails,
     userId,
+    userName,
     cb
 ) {
     const speakerDetailsJson = JSON.parse(speakerDetails);
@@ -52,18 +53,19 @@ const updateDbWithFileName = function (
         motherTongue = speakerDetailsJson.motherTongue;
     }
     const encryptUserId = encrypt(userId);
-    db.any(UpdateFileNameAndUserDetails, [
-        file,
+    db.any(UpdateAudioPathAndUserDetails, [
+        audioPath,
         ageGroup,
         gender,
         motherTongue,
         sentenceId,
         encryptUserId,
+        userName
     ])
         .then((data) => {
             db.none(updateSentencesWithContributedState,[sentenceId]).then();
             if (!data || !data.length) {
-                db.any(setNewUserAndFileName, [file, encryptUserId, sentenceId])
+                db.any(setNewUserAndFileName, [audioPath, encryptUserId, sentenceId])
                     .then(() => cb(200, {success: true}))
                     .catch((err) => {
                         console.log(err);
@@ -151,7 +153,7 @@ const getAllInfo = function (language) {
 
 module.exports = {
     updateAndGetSentences,
-    updateDbWithFileName,
+    updateDbWithAudioPath,
     getAllDetails,
     getAllInfo,
 };
