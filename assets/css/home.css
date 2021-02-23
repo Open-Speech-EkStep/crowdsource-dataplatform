@@ -167,6 +167,11 @@ h6,
 .popover-body {
   overflow-y: auto;
 }
+
+.popover {
+  max-width: fit-content;
+}
+
 .spinner {
   width: 3rem;
   height: 3rem;
