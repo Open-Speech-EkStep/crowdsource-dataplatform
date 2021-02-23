@@ -444,6 +444,8 @@ $(document).ready(() => {
                     userName: localSpeakerDataParsed.userName,
                     age: localSpeakerDataParsed.age,
                     language: localSpeakerDataParsed.language,
+                    motherTongue: localSpeakerDataParsed.motherTongue,
+                    gender: localSpeakerDataParsed.gender,
                 }),
                 headers: {
                     'Content-Type': 'application/json',

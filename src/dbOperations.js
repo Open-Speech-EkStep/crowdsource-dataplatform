@@ -83,29 +83,31 @@ const getSentencesBasedOnAge = function (
     ageGroup,
     encryptedUserId,
     userName,
-    language
+    language,
+    motherTongue,
+    gender
 ) {
+    let languageLabel = ADULT;
     if (ageGroup === KIDS_AGE_GROUP) {
-        return (db.many(updateAndGetSentencesQuery, [
-            encryptedUserId,
-            userName,
-            KIDS,
-            language,
-        ]));
-    } else {
-        return (db.many(updateAndGetSentencesQuery, [
-            encryptedUserId,
-            userName,
-            ADULT,
-            language,
-        ]));
+        languageLabel = KIDS;
     }
+    return (db.many(updateAndGetSentencesQuery, [
+        encryptedUserId,
+        userName,
+        languageLabel,
+        language,
+        motherTongue,
+        gender,
+        ageGroup
+    ]));
 };
 
 const updateAndGetSentences = function (req, res) {
     const userId = req.cookies.userId;
     const userName = req.body.userName;
     const language = req.body.language;
+    const motherTongue = req.body.motherTongue;
+    const gender = req.body.gender;
     if (!userId || userName === null || userName === undefined) {
         res.status(400).send({error: 'required parameters missing'});
         return;
@@ -116,7 +118,9 @@ const updateAndGetSentences = function (req, res) {
         ageGroup,
         encryptedUserId,
         userName,
-        language
+        language,
+        motherTongue,
+        gender
     );
     const count = db.one(sentencesCount, [encryptedUserId, userName, language]);
     const unAssign = db.any(unassignIncompleteSentences, [
