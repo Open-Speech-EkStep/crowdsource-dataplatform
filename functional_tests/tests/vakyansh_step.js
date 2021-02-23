@@ -17,13 +17,17 @@ const {
     textBox,
 } = require('taiko');
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
+const testUrl = process.env.test_url;
 
 beforeSuite(async () => {
     await openBrowser({
         headless: headless,
-        args: ['--node-sandbox']
+        args: [
+            '--node-sandbox',
+            '--use-fake-ui-for-media-stream'
+        ]
     })
-    await overridePermissions('https://test-dot-ekstepspeechrecognition.el.r.appspot.com', ['audioCapture']);
+    await overridePermissions(testUrl, ['audioCapture']);
 });
 
 afterSuite(async () => {
@@ -31,7 +35,7 @@ afterSuite(async () => {
 });
 
 step("Opening Vakyansh", async () => {
-    await goto("https://test-dot-ekstepspeechrecognition.el.r.appspot.com");
+    await goto(testUrl);
 });
 
 step("Search for About Us button", async function () {
@@ -164,7 +168,7 @@ step("And User enter random Username and selects Age , Mother tongue ,gender", a
 step("when user click on Lets Go Button, user should see instructions to record", async function () {
     await click(taiko.button({id: 'proceed-box'}))
     await taiko.waitFor(1500)
-    assert.ok(await text('Recording Instructions').exists(), 'Not able to see instructions')
+    assert.ok(await text('Recording Instructions').exists())
 });
 
 step("When user closes the Instructions , user should see a sentence , Skip button , Start Recording Button , username", async function () {
@@ -177,6 +181,8 @@ step("When user closes the Instructions , user should see a sentence , Skip butt
 });
 
 step("When user clicks on <arg0> button, <arg1> button should appear", async function (arg0, arg1) {
+    await taiko.waitFor(async ()=> (await button(arg0).exists()))
+    await taiko.waitFor(1000)
     await click(button(arg0))
     await taiko.waitFor(2000)
     assert.ok(await button(arg1).exists())
