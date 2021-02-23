@@ -324,8 +324,13 @@ const initialize = () => {
 
     function uploadToServer(cb) {
         const fd = new FormData();
+        const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
+        const speakerDetails = JSON.stringify({
+            userName: localSpeakerDataParsed.userName,
+            language: localSpeakerDataParsed.language,
+        })
         fd.append('audio_data', crowdSource.audioBlob);
-        fd.append('speakerDetails', localStorage.getItem(speakerDetailsKey));
+        fd.append('speakerDetails', speakerDetails);
         fd.append('sentenceId', crowdSource.sentences[currentIndex].sentence_id);
         fetch('/upload', {
             method: 'POST',
