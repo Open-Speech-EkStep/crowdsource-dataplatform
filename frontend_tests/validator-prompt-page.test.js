@@ -3,7 +3,7 @@ const {readFileSync} = require('fs');
 const {stringToHTML, mockLocalStorage} = require('./utils');
 
 document.body = stringToHTML(
-    readFileSync(`${__dirname}/../views/validator-prompt-page.ejs`, 'UTF-8') + readFileSync(`${__dirname}/../views/common/header.ejs`, 'UTF-8')
+    readFileSync(`${__dirname}/../views/validator-prompt-page.ejs`, 'UTF-8') + readFileSync(`${__dirname}/../views/common/headerForContributor.ejs`, 'UTF-8')
 );
 
 jest.mock('../assets/js/validator-instructions', () => ({
