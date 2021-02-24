@@ -1,7 +1,7 @@
 CREATE TABLE public.contributions
 (
     contribution_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    sentence_id integer NOT NULL,
+    "sentenceId" integer NOT NULL,
     audio_path text COLLATE pg_catalog."default",
     contributed_by integer NOT NULL,
     date date NOT NULL,

@@ -20,4 +20,4 @@ ALTER TABLE "sentences"
 
 update "sentences" s set "state" = 'contributed'
 from "contributions" con
-where s."sentenceId" = con.sentence_id and con.action = 'completed';
+where s."sentenceId" = con."sentenceId" and con.action = 'completed';
