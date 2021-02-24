@@ -22,10 +22,10 @@ const {
     validateUserInputAndFile,
     validateUserInfo,
 } = require('./middleware/validateUserInputs');
-// const Ddos = require('ddos');
-// const ddos = new Ddos({ burst: 12, limit: 70 })
-// app.use(ddos.express);
-// app.enable('trust proxy');
+const Ddos = require('ddos');
+const ddos = new Ddos({ burst: 12, limit: 70 })
+app.use(ddos.express);
+app.enable('trust proxy');
 
 // const privateKey = fs.readFileSync('./vakyansh.key', 'utf8');
 // const certificate = fs.readFileSync('./vakyansh_in.crt', 'utf8');
@@ -73,8 +73,8 @@ app.use(function (req, res, next) {
   if (cookie === undefined) {
     res.cookie('userId', uuidv4(), {
       maxAge: ONE_YEAR,
-      // httpOnly: true,
-      // secure: true
+      httpOnly: true,
+      secure: true
     });
   }
   next();
