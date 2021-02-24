@@ -57,7 +57,7 @@ jobs:
                 command: |
                   if [[ << parameters.env_name >> == "dev" ]]; then
                     gcloud app deploy app.yaml -v devversion --no-promote
-                  elif [[[ << parameters.env_name >> == "test" ]]; then
+                  elif [[ << parameters.env_name >> == "test" ]]; then
                     gcloud app deploy app.yaml -v somerandom --no-promote
                   else
                     gcloud app deploy app.yaml
