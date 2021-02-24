@@ -1,5 +1,5 @@
 const unassignIncompleteSentences = 'delete from "contributions" cont using "contributors" con where \
-cont.contributed_by = con.contributor_id and cont.audio_path is null and cont.action = \'assigned\' and con.contributor_identifier = $1 and user_name=$2;'
+cont.contributed_by = con.contributor_id and cont.audio_path is null and cont.action = \'assigned\' and con.contributor_identifier = $1 and user_name!=$2;'
 
 const unassignIncompleteSentencesWhenLanChange = 'delete from "contributions" cont using "contributors" con, sentences sen \
 where sen."sentenceId" = cont."sentenceId" and  cont.contributed_by = con.contributor_id and cont.audio_path is null and cont.action = \'assigned\' \
