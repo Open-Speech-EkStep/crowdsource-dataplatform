@@ -64,13 +64,13 @@ function buildGraphs(language) {
             try {
                 $chartLoaders.hide().removeClass('d-flex');
                 $charts.removeClass('d-none');
-                const formattedAgeGroupData = getFormattedData(data.ageGroups, 'ageGroup').sort((a, b) => Number(a.count) - Number(b.count));
-                drawAgeGroupChart(formattedAgeGroupData);
+                const formattedAgeGroupData = getFormattedData(data.ageGroups, 'age_group').sort((a, b) => Number(a.count) - Number(b.count));
+                drawAgeGroupChart( formattedAgeGroupData);
                 const motherTongueTotal = data.motherTongues.reduce(
                     (acc, curr) => acc + Number(curr.count),
                     0
                 );
-                const formattedMotherTongueData = getFormattedData(data.motherTongues, 'motherTongue').sort((a, b) => Number(b.count) - Number(a.count));
+                const formattedMotherTongueData = getFormattedData(data.motherTongues, 'mother_tongue').sort((a, b) => Number(b.count) - Number(a.count));
                 drawMotherTongueChart(
                     formattedMotherTongueData.slice(0, 4),
                     motherTongueTotal,
@@ -96,11 +96,11 @@ function buildGraphs(language) {
                 drawGenderChart(orderedGenderData);
                 setPopOverContent(
                     $popovers.eq(0),
-                    table.createTableWithTwoColumns(formattedMotherTongueData, 'motherTongue')
+                    table.createTableWithTwoColumns(formattedMotherTongueData, 'mother_tongue')
                 );
                 setPopOverContent(
                     $popovers.eq(1),
-                    table.createTableWithTwoColumns(formattedAgeGroupData, 'ageGroup')
+                    table.createTableWithTwoColumns(formattedAgeGroupData, 'age_group')
                 );
                 setPopOverContent(
                     $popovers.eq(2),
@@ -204,7 +204,7 @@ const chartColors = ['#3f80ff', '#4D55A5', '#735dc6', '#68b7dc'];
 const drawAgeGroupChart = (chartData) => {
     const chart = am4core.create('age-group-chart', am4charts.PieChart3D);
     chart.data = chartData.slice(0, 3).concat({
-        ageGroup: 'Others',
+        age_group: 'Others',
         count: chartData
             .slice(3)
             .reduce((acc, curr) => acc + Number(curr.count), 0),
@@ -241,7 +241,7 @@ const drawAgeGroupChart = (chartData) => {
     // series.labels.template.text = "{category}: {value.percent.formatNumber('#.0')}%";
     series.dataFields.value = 'count';
     series.dataFields.depthValue = 'count';
-    series.dataFields.category = 'ageGroup';
+    series.dataFields.category = 'age_group';
     series.slices.template.adapter.add('fill', function (fill, target) {
         return chartColors[target.dataItem.index];
     });
@@ -251,7 +251,7 @@ const drawMotherTongueChart = (chartData, totalData, element, staticColor) => {
     const chart = am4core.create(element, am4charts.XYChart3D);
     chart.data = chartData;
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = 'motherTongue';
+    categoryAxis.dataFields.category = 'mother_tongue';
     categoryAxis.renderer.labels.template.rotation = 270;
     categoryAxis.renderer.labels.template.hideOversized = false;
     categoryAxis.renderer.minGridDistance = 10;
@@ -267,7 +267,7 @@ const drawMotherTongueChart = (chartData, totalData, element, staticColor) => {
 
     const series = chart.series.push(new am4charts.ColumnSeries3D());
     series.dataFields.valueY = 'count';
-    series.dataFields.categoryX = 'motherTongue';
+    series.dataFields.categoryX = 'mother_tongue';
     series.calculatePercent = true;
     const columnTemplate = series.columns.template;
     columnTemplate.tooltipText = '{categoryX} : [bold]@@@% ({valueY.value})[/]';

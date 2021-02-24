@@ -9,7 +9,8 @@
     "start-cluster": "pm2 start src/server.js -i 2",
     "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest",
     "gulp": "gulp",
-    "functional_test": "cd functional_tests && npm i && gauge run specs"
+    "functional_test": "cd functional_tests && npm i && gauge run specs/Vakyansh.spec",
+    "db-migrate": "npx db-migrate up --config migrations/config/migration_config.json -e dev"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,8 @@
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "crypto-js": "^4.0.0",
+    "db-migrate": "^0.11.12",
+    "db-migrate-pg": "^1.2.2",
     "ddos": "^0.2.1",
     "dotenv": "^8.2.0",
     "ejs": "^1.0.0",
