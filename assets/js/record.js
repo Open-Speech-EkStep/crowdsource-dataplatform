@@ -316,9 +316,14 @@ const initialize = () => {
 
     function uploadToServer(cb) {
         const fd = new FormData();
+        const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
+        const speakerDetails = JSON.stringify({
+            userName: localSpeakerDataParsed.userName,
+            language: localSpeakerDataParsed.language,
+        })
         fd.append('audio_data', crowdSource.audioBlob);
-        fd.append('speakerDetails', localStorage.getItem(speakerDetailsKey));
-        fd.append('sentenceId', crowdSource.sentences[currentIndex].sentence_id);
+        fd.append('speakerDetails', speakerDetails);
+        fd.append('sentenceId', crowdSource.sentences[currentIndex].sentenceId);
         fetch('/upload', {
             method: 'POST',
             body: fd,
@@ -432,6 +437,8 @@ $(document).ready(() => {
                     userName: localSpeakerDataParsed.userName,
                     age: localSpeakerDataParsed.age,
                     language: localSpeakerDataParsed.language,
+                    motherTongue: localSpeakerDataParsed.motherTongue,
+                    gender: localSpeakerDataParsed.gender,
                 }),
                 headers: {
                     'Content-Type': 'application/json',

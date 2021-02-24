@@ -18,6 +18,6 @@ ALTER TABLE "sentences"
     ADD COLUMN state text;
 
 
-update "sentences" s set "state" = 'CONTRIBUTED'
+update "sentences" s set "state" = 'contributed'
 from "contributions" con
-where s."sentenceId" = con.sentence_id and con.action = 'completed';
+where s."sentenceId" = con."sentenceId" and con.action = 'completed';
