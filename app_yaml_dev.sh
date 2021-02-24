@@ -28,7 +28,6 @@ env_variables:
   AUTH0_CALLBACK_URL: \"$AUTH0_TEST_CALLBACK_URL\"
   AUTH0_ADMIN_LOGIN_URL: \"$AUTH0_ADMIN_LOGIN_URL\"
 
-
 beta_settings:
   cloud_sql_instances: \"$DB_HOST\"
 """
