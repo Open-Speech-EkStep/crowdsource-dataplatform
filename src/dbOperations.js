@@ -129,7 +129,7 @@ const updateAndGetSentences = function (req, res) {
     ]);
     const unAssignWhenLanChange = db.any(
         unassignIncompleteSentencesWhenLanChange,
-        [encryptedUserId, language]
+        [encryptedUserId, userName, language]
     );
     Promise.all([sentences, count, unAssign, unAssignWhenLanChange])
         .then((response) => {

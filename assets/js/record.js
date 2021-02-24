@@ -331,7 +331,7 @@ const initialize = () => {
         })
         fd.append('audio_data', crowdSource.audioBlob);
         fd.append('speakerDetails', speakerDetails);
-        fd.append('sentenceId', crowdSource.sentences[currentIndex].sentence_id);
+        fd.append('sentenceId', crowdSource.sentences[currentIndex].sentenceId);
         fetch('/upload', {
             method: 'POST',
             body: fd,
