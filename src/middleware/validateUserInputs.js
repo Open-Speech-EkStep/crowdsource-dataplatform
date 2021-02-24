@@ -20,17 +20,11 @@ const validateUserInputAndFile = function (req, res, next) {
     const file = req.file;
     const fileSizeInMB = convertIntoMB(file.size);
     const userName = speakerDetailsJson.userName;
-    const gender = speakerDetailsJson.gender;
-    const ageGroup = speakerDetailsJson.age;
-    const motherTongue = speakerDetailsJson.motherTongue;
 
-    const invalidMotherTongue = (!MOTHER_TONGUE.includes(motherTongue)&&(motherTongue.length));
+    const isValidReqParams = fileSizeInMB > MAX_SIZE || file.mimetype != VALID_FILE_TYPE
+        userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName);
 
-    const isInValidReqParams = fileSizeInMB > MAX_SIZE || file.mimetype != VALID_FILE_TYPE
-    || !GENDER.includes(gender) || invalidMotherTongue ||
-    userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName) || !AGE_GROUP.includes(ageGroup);
-
-    if (isInValidReqParams) {
+    if (isValidReqParams) {
         return res.status(400).send("Bad request");
     }
     next()
@@ -39,7 +33,14 @@ const validateUserInputAndFile = function (req, res, next) {
 const validateUserInfo = function (req, res, next) {
     const userName = req.body.userName;
     const ageGroup = req.body.age;
-    if (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName) || !AGE_GROUP.includes(ageGroup)) {
+    const gender = req.body.gender;
+    const motherTongue = req.body.motherTongue;
+
+    const invalidMotherTongue = (!MOTHER_TONGUE.includes(motherTongue) && (motherTongue.length));
+
+    if (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) ||
+        EMAIL_REGEX.test(userName) || !AGE_GROUP.includes(ageGroup) ||
+        !GENDER.includes(gender) || invalidMotherTongue) {
         return res.status(400).send("Bad request");
     }
     next()

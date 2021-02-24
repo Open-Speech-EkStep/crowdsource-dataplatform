@@ -1,5 +1,5 @@
-require('dotenv').config();
-const {uploadFile} = require("./uploader");
+// require('dotenv').config();
+const { uploadFile } = require("./uploader");
 const helmet = require('helmet')
 const express = require('express');
 const app = express();
