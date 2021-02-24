@@ -69,17 +69,26 @@ const initialize = () => {
     let skipCount =
         getSkipCount(totalItems - 1);
     const $footer = $('footer');
+    // const progressMessages = [
+    //     'Let’s get started',
+    //     '',
+    //     'We know you can do more! ',
+    //     '',
+    //     '',
+    //     'You are halfway there. Keep going!',
+    //     '',
+    //     'Just few more steps to go!',
+    //     '',
+    //     'Nine dead, one more to go!',
+    //     'Yay! Done & Dusted!',
+    // ];
+
     const progressMessages = [
         'Let’s get started',
-        '',
         'We know you can do more! ',
-        '',
-        '',
         'You are halfway there. Keep going!',
-        '',
         'Just few more steps to go!',
-        '',
-        'Nine dead, one more to go!',
+        'Four dead, one more to go!',
         'Yay! Done & Dusted!',
     ];
 
@@ -100,7 +109,7 @@ const initialize = () => {
         $element.on('animationend', handleAnimationEnd);
     };
     const setProgressBar = (currentIndex) => {
-        $progressBar.width(currentIndex * 10 + '%');
+        $progressBar.width(currentIndex * 20 + '%');
         $progressBar.prop('aria-valuenow', currentIndex);
     };
     const setSentenceText = (index) => {
