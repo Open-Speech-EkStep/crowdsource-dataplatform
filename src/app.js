@@ -4,9 +4,6 @@ const helmet = require('helmet')
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
-const passport = require('passport');
-const Auth0Strategy = require('passport-auth0');
-const session = require('express-session');
 const router = express.Router();
 const {
     updateDbWithAudioPath,
@@ -82,51 +79,6 @@ app.use(function (req, res, next) {
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-/*** block start */
-
-
-// Configure Passport to use Auth0
-let strategy = new Auth0Strategy(
-  {
-    domain: process.env.AUTH_ISSUER_DOMAIN,
-    clientID: process.env.AUTH0_CLIENT_ID,
-    clientSecret: process.env.AUTH0_CLIENT_SECRET,
-    callbackURL:
-      process.env.AUTH0_CALLBACK_URL || 'http://localhost:8080/callback'
-  },
-  function (accessToken, refreshToken, extraParams, profile, done) {
-    // accessToken is the token to call Auth0 API (not needed in the most cases)
-    // extraParams.id_token has the JSON Web Token
-    // profile has all the information from the user
-    // console.log("access_token", accessToken);
-    profile.accessToken = accessToken;
-    return done(null, profile);
-  }
-);
-passport.use(strategy);
-
-passport.serializeUser(function (user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function (user, done) {
-  done(null, user);
-});
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-
-
-// config express-session
-let sess = {
-  secret: process.env.SESSION_SECRET,
-  cookie: {},
-  resave: false,
-  saveUninitialized: true
-};
-
 if (app.get('env') === 'production') {
   // Use secure cookies in production (requires SSL/TLS)
   sess.cookie.secure = true;
@@ -136,15 +88,8 @@ if (app.get('env') === 'production') {
   // "Unable to verify authorization request state"
   // app.set('trust proxy', 1);
 }
-
-app.use(session(sess));
-
-app.use('/', require('./authroute'));
-
-/*** block end */
 router.get('/', function (req, res) {
-  const isSignedIn = req.session.passport ? true : false;
-  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isSignedIn});
+  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES});
 });
 
 router.get('/getDetails/:language', async function (req, res) {
@@ -175,12 +120,10 @@ router.get('/getAllInfo/:language', async function (req, res) {
 });
 
 router.get('/about-us', function (req, res) {
-  const isSignedIn = req.session.passport ? true : false;
-  res.render('about-us.ejs', {MOTHER_TONGUE, LANGUAGES, isSignedIn});
+  res.render('about-us.ejs', {MOTHER_TONGUE, LANGUAGES});
 });
 router.get('/terms-and-conditions', function (req, res) {
-  const isSignedIn = req.session.passport ? true : false;
-  res.render('terms-and-conditions.ejs', {isSignedIn});
+  res.render('terms-and-conditions.ejs');
 });
 router.get('/thank-you', function (req, res) {
     res.render('thank-you.ejs');
@@ -225,7 +168,6 @@ router.post('/upload', (req, res) => {
 
 app.use('/', router);
 // Any routes added after this secure route should be authorized urls only otherwise you will get 401 because of middleware added.
-app.use('/', require('./secureroute'));
 
 app.get('*', (req, res) => {
   res.render('not-found.ejs');
