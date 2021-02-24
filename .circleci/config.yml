@@ -55,43 +55,109 @@ jobs:
             - deploy: 
                 name: Deploy app to GAE
                 command: |
-                  if [[ << parameters.env_name >> == "test" ]]; then
+                  if [[ << parameters.env_name >> == "dev" ]]; then
+                    gcloud app deploy app.yaml -v devversion --no-promote
+                  elif [[[ << parameters.env_name >> == "test" ]]; then
                     gcloud app deploy app.yaml -v somerandom --no-promote
                   else
                     gcloud app deploy app.yaml
+                    gcloud app deploy dispatch.yaml
                   fi
             - delete_files
-    approve_for_prod_deploy:
+    approve_to_deploy:
         docker: 
             - image: circleci/node:13.4
         steps:
             - run: echo "Hold for approval"
+
+    db_migrate:
+        parameters:
+            db_name:
+              type: string
+        executor:
+            name: node/default
+        steps:
+            - checkout
+            - run :
+                name: Run DB Proxy
+                command: |
+                  sudo apt-get update
+                  sudo apt-get install wget
+                  wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-265.0.0-linux-x86_64.tar.gz
+                  tar -zxf google-cloud-sdk-*
+                  cd google-cloud-sdk
+                  pwd
+                  ./install.sh --quiet
+                  echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
+                  ./bin/gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
+                  ./bin/gcloud --quiet config set project ${GCP_PROJECT}
+                  export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/gcp-key.json
+                  echo $GOOGLE_APPLICATION_CREDENTIALS
+                  wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+                  chmod +x cloud_sql_proxy
+                  nohup ./cloud_sql_proxy -dir=./cloudsql -instances=ekstepspeechrecognition:us-central1:crowdsourcedb=tcp:5432 &
+                  sleep 25s
+                  cat nohup.out
+            - node/install-packages
+            - run:
+                name: Run DB Migrate
+                command: |
+                    export DATABASE_URL=postgresql://${DEV_DB_USER}:${DEV_DB_PASS}@127.0.0.1/<< parameters.db_name >>
+                    echo << parameters.db_name >>
+                    npx db-migrate up
 
 workflows:
     build_test_deploy:
         jobs:
           - node/test:
                 version: "13.4"
+          - db_migrate:
+               name: migrate_dev
+               db_name: ${DEV_DB_NAME}
+               requires:
+                 - node/test
+          - deploy:
+               name: deploy_dev
+               env_name: dev
+               sh_file: app_yaml_dev.sh
+               requires:
+                 - migrate_dev
+          - approve_to_deploy:
+                name: approve_test
+                type: approval
+                requires:
+                   - deploy_dev
+          - db_migrate:
+               name: migrate_test
+               db_name: ${TEST_DB_NAME}
+               requires:
+                 - approve_test
           - deploy:
                name: deploy_test
                env_name: test
                sh_file: app_yaml_test.sh
                requires:
-                 - node/test
+                 - migrate_test
           - run_functional_tests:
                  requires:
                    - deploy_test
-          - approve_for_prod_deploy:
+          - approve_to_deploy:
+                name: approve_prod
                 type: approval
                 requires:
                    - deploy_test
+          - db_migrate:
+              name: migrate_prod
+              db_name: ${DB_NAME}
+              requires:
+                - approve_prod
           - deploy:
                 name: deploy_prod
                 env_name: prod
                 sh_file: app_yaml_prod.sh
                 requires:
-                  - approve_for_prod_deploy
+                  - migrate_prod
                 filters:
                   branches:
                     only:
-                      - master
+                      - release

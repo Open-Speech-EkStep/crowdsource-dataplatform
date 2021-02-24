@@ -1,0 +1,7 @@
+dispatch:
+  - url: "test.vakyansh.in/*"
+    service: test
+  - url: "dev.vakyansh.in/*"
+    service: dev
+  - url: "vakyansh.in/*"
+    service: default
