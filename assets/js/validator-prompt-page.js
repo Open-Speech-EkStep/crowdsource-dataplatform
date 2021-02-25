@@ -145,9 +145,20 @@ const updateDecisionButton = (button, colors) => {
     children[2].setAttribute("fill", colors[2]);
 }
 
+const updateValidationCount = ()=>{
+    const currentSentenceLbl = document.getElementById('currentSentenceLbl');
+    currentSentenceLbl.innerText = progressCount;
+    const totalSentencesLbl = document.getElementById('totalSentencesLbl');
+    totalSentencesLbl.innerText = validationSentences.length;
+}
+
 const updateProgressBar = () => {
+    const $progressBar = $("#progress_bar");
     progressCount++;
-    document.getElementById(`rect_${progressCount}`).setAttribute("fill", "#007BFF");
+    const multiplier = 10 * (10 / validationSentences.length);
+    $progressBar.width(progressCount * multiplier + '%');
+    $progressBar.prop('aria-valuenow', progressCount);
+    updateValidationCount();
 }
 
 function disableButton(button) {
@@ -309,8 +320,9 @@ $(document).ready(() => {
         validationSentences = sentenceData.data
         const sentence = validationSentences[currentIndex];
         if (sentence && sentence.audio_path) {
-            getAudioClip(sentence.audio_path)
-            setSentenceLabel(currentIndex)
+            getAudioClip(sentence.audio_path);
+            setSentenceLabel(currentIndex);
+            updateValidationCount();
             resetDecisionRow();
             addListeners();
             setAudioPlayer();

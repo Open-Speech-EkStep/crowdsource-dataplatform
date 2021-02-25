@@ -28,7 +28,7 @@ select ins."sentenceId", sentences.sentence from ins  \
 
 const getValidationSentencesQuery = 'select audio_path, con."sentenceId", sen.sentence \
     from contributions con inner join sentences sen on sen."sentenceId"=con."sentenceId" \
-    where "state"= \'contributed\' and language=$1 limit 10;'
+    where "state"= \'contributed\' and language=$1 limit 5;'
 
 const addValidationAndUpdateSentenceQuery = 'insert into validations (contribution_id, "action", validated_by, "date") \
 select contribution_id, $3, $1, now() from contributions where "sentenceId" = $2;'
