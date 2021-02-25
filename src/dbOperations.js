@@ -1,4 +1,5 @@
 const {encrypt} = require('./encryptAndDecrypt');
+const {getFile} = require('./downloader')
 const {
     UpdateAudioPathAndUserDetails,
     setNewUserAndFileName,
@@ -148,7 +149,6 @@ const getValidationSentences = function (req, res) {
     const language = req.params.language;
     db.any(getValidationSentencesQuery, [language])
         .then((response) => {
-
             res.status(200).send({data: response})
         })
         .catch((err) => {
@@ -156,6 +156,16 @@ const getValidationSentences = function (req, res) {
             res.sendStatus(500);
         });
 };
+
+const getAudioClip = function (req, res) {
+    if (!(req.body && req.body.file)) {
+        res.status(400).send('No file selected.');
+        return;
+    }
+    const file = req.body.file
+    const readStream = getFile(file).createReadStream();
+    readStream.pipe(res);
+}
 
 const updateTablesAfterValidation = function (req, res) {
     const {validatorId, sentenceId, action} = req.body
@@ -195,4 +205,5 @@ module.exports = {
     updateTablesAfterValidation,
     getAllDetails,
     getAllInfo,
+    getAudioClip
 };

@@ -12,6 +12,7 @@ const {
     getAllDetails,
     getAllInfo,
     updateTablesAfterValidation,
+    getAudioClip
 } = require('./dbOperations');
 const fs = require('fs');
 const {v4: uuidv4} = require('uuid');
@@ -130,6 +131,7 @@ router.get('/validator-page', (req, res) => {
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 router.get('/validation/sentences/:language', (req, res) => getValidationSentences(req, res));
 router.post('/validation/action', (req, res)=> updateTablesAfterValidation(req, res))
+router.post('/audioClip', (req, res)=> getAudioClip(req, res))
 router.post('/upload', (req, res) => {
     const file = req.file;
     const sentenceId = req.body.sentenceId;
@@ -138,7 +140,7 @@ router.post('/upload', (req, res) => {
     const userName = speakerDetailsJson.userName;
     const userId = req.cookies.userId;
     const language = speakerDetailsJson.language;
-    const audioPath = `raw/landing/${language}/audio/users/${userId}/${userName}/${file.filename}`;
+    const audioPath = `raw/landing/${language}/audio/users/${userId}/${userName}/uploads/${file.filename}`;
     uploadFile(file.path, userName, userId, language)
         .then(() => {
             updateDbWithAudioPath(
