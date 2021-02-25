@@ -2,7 +2,7 @@ const {setPageContentHeight, toggleFooterPosition} = require('./utils')
 
 const currentIndexKey = 'currentIndex';
 const speakerDetailsKey = 'speakerDetails';
-const totalSentence = 10;
+const totalSentence = 5;
 const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
 const localSpeakerData = localStorage.getItem(speakerDetailsKey);
 const localSpeakerDataParsed = JSON.parse(localSpeakerData);
