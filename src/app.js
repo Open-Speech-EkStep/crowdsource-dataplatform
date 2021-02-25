@@ -122,6 +122,9 @@ router.get('/thank-you', function (req, res) {
 router.get('/record', (req, res) => {
     res.render('record.ejs');
 });
+router.get('/validator-page', (req, res) => {
+    res.render('validator-prompt-page.ejs');
+});
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 router.post('/upload', (req, res) => {
     const file = req.file;
@@ -158,7 +161,6 @@ router.post('/upload', (req, res) => {
 });
 
 app.use('/', router);
-// Any routes added after this secure route should be authorized urls only otherwise you will get 401 because of middleware added.
 
 app.get('*', (req, res) => {
   res.render('not-found.ejs');
