@@ -15,7 +15,7 @@ const decideToShowPopUp = () => {
     localStorage.setItem('currentUser', JSON.stringify(currentValidator));
     const validatorDetails = localStorage.getItem('validatorDetails');
     if (!validatorDetails) {
-        localStorage.setItem('validatorDetails',JSON.stringify([currentValidator]));
+        localStorage.setItem('validatorDetails', JSON.stringify([currentValidator]));
         showInstructionsPopup();
         return;
     }
@@ -108,7 +108,6 @@ const setAudioPlayer = function () {
     }
 }
 
-const sampleSentences = ['लटक कर पैरों को मुक्त करने की एक नई कसरत बालकों के हाथ लग गई', 'जल्द ही पोलैंड में कोर्चार्क के रेडियो प्रोग्राम बहुत', 'उसने कहा क्योंकि उसमें दिल नहीं होगा जो सारे शरीर में खून भेजता'];
 let currentIndex = 0;
 let progressCount = 0;
 
@@ -126,12 +125,12 @@ const animateCSS = ($element, animationName, callback) => {
 
 function setSentenceLabel(index) {
     const $sentenceLabel = $('#sentenceLabel')
-    $sentenceLabel[0].innerText = sampleSentences[index];
+    $sentenceLabel[0].innerText = validationSentences[index].sentence;
     animateCSS($sentenceLabel, 'lightSpeedIn');
 }
 
 function getNextSentence() {
-    if (currentIndex < sampleSentences.length - 1) {
+    if (currentIndex < validationSentences.length - 1) {
         currentIndex++;
         resetDecisionRow();
         setSentenceLabel(currentIndex);
@@ -175,6 +174,27 @@ function resetDecisionRow() {
     $('#default_line').removeClass('d-none')
 }
 
+function recordValidation(action) {
+    const validatorId = 123
+    const sentenceId = validationSentences[currentIndex].sentenceId
+    fetch('/validation/action', {
+        method: 'POST',
+        body: JSON.stringify({
+            validatorId: validatorId,
+            sentenceId: sentenceId,
+            action: action
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(
+            (data) => {
+                if (!data.ok) {
+                    throw Error(data.statusText || 'HTTP error');
+                }
+            });
+}
 
 function addListeners() {
     $("#instructions-link").on('click', () => {
@@ -215,16 +235,19 @@ function addListeners() {
     });
 
     dislikeButton.on('click', () => {
+        recordValidation('reject')
         updateProgressBar();
         getNextSentence();
     })
 
     likeButton.on('click', () => {
+        recordValidation('accept')
         updateProgressBar();
         getNextSentence();
     })
 
     $skipButton.on('click', () => {
+        recordValidation('skip')
         updateProgressBar();
         getNextSentence();
     })
@@ -235,10 +258,12 @@ function addListeners() {
         $skipButton.removeAttr('style');
     },)
 
-    $skipButton.mousedown(()=>{
+    $skipButton.mousedown(() => {
         $skipButton.css('background-color', '#bfddf5')
     })
 }
+
+let validationSentences = [{sentence: ''}]
 
 $(document).ready(() => {
     toggleFooterPosition();
@@ -249,7 +274,19 @@ $(document).ready(() => {
     addListeners();
     decideToShowPopUp();
     setAudioPlayer();
-    setSentenceLabel(currentIndex)
+    const language = 'Odia';
+    fetch(`/validation/sentences/${language}`)
+        .then((data) => {
+            if (!data.ok) {
+                throw Error(data.statusText || 'HTTP error');
+            } else {
+                return data.json();
+            }
+        }).then((sentenceData) => {
+        console.log(sentenceData);
+        validationSentences = sentenceData.data
+        setSentenceLabel(currentIndex)
+    })
 });
 
 

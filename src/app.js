@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { uploadFile } = require("./uploader");
+const {uploadFile} = require("./uploader");
 const helmet = require('helmet')
 const express = require('express');
 const app = express();
@@ -8,19 +8,21 @@ const router = express.Router();
 const {
     updateDbWithAudioPath,
     updateAndGetSentences,
+    getValidationSentences,
     getAllDetails,
     getAllInfo,
+    updateTablesAfterValidation,
 } = require('./dbOperations');
 const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
+const {v4: uuidv4} = require('uuid');
 const compression = require('compression');
-const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES } = require('./constants');
+const {ONE_YEAR, MOTHER_TONGUE, LANGUAGES} = require('./constants');
 const {
     validateUserInputAndFile,
     validateUserInfo,
 } = require('./middleware/validateUserInputs');
 const Ddos = require('ddos');
-const ddos = new Ddos({ burst: 12, limit: 70 })
+const ddos = new Ddos({burst: 12, limit: 70})
 app.use(ddos.express);
 app.enable('trust proxy');
 
@@ -55,26 +57,26 @@ const multerStorage = multer.diskStorage({
         cb(null, currentDateAndTime() + '_' + randomString() + '.wav');
     },
 });
-const upload = multer({ storage: multerStorage });
+const upload = multer({storage: multerStorage});
 app.use(express.json());
 app.use(upload.single('audio_data'));
 app.use('/sentences', validateUserInfo);
 app.use('/upload', validateUserInputAndFile);
-app.use(express.static(__dirname, { dotfiles: 'allow' }));
+app.use(express.static(__dirname, {dotfiles: 'allow'}));
 app.use(helmet());
 app.disable('x-powered-by');
 app.use(compression());
 app.use(cookieParser());
 app.use(function (req, res, next) {
-  let cookie = req.cookies.userId;
-  if (cookie === undefined) {
-    res.cookie('userId', uuidv4(), {
-      maxAge: ONE_YEAR,
-      httpOnly: true,
-      secure: true
-    });
-  }
-  next();
+    let cookie = req.cookies.userId;
+    if (cookie === undefined) {
+        res.cookie('userId', uuidv4(), {
+            maxAge: ONE_YEAR,
+            // httpOnly: true,
+            // secure: true
+        });
+    }
+    next();
 });
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -84,14 +86,14 @@ router.get('/', function (req, res) {
 });
 
 router.get('/getDetails/:language', async function (req, res) {
-  try {
-    const currentLanguage = req.params.language;
-    const allDetails = await getAllDetails(currentLanguage);
-    res.status(200).send(allDetails);
-  } catch (err) {
-    console.log(err);
-    res.sendStatus(500);
-  }
+    try {
+        const currentLanguage = req.params.language;
+        const allDetails = await getAllDetails(currentLanguage);
+        res.status(200).send(allDetails);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
 });
 
 router.get('/getAllInfo/:language', async function (req, res) {
@@ -126,6 +128,8 @@ router.get('/validator-page', (req, res) => {
     res.render('validator-prompt-page.ejs');
 });
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
+router.get('/validation/sentences/:language', (req, res) => getValidationSentences(req, res));
+router.post('/validation/action', (req, res)=> updateTablesAfterValidation(req, res))
 router.post('/upload', (req, res) => {
     const file = req.file;
     const sentenceId = req.body.sentenceId;
