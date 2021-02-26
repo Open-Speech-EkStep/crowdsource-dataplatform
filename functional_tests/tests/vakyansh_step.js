@@ -19,7 +19,7 @@ const {
 } = require('taiko');
 
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
-const testUrl = 'http://localhost:8080'; //process.env.test_url;
+const testUrl = process.env.test_url;
 
 beforeSuite(async () => {
     await openBrowser({
