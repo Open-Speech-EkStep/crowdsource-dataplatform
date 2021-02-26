@@ -1,4 +1,4 @@
-const {setPageContentHeight, toggleFooterPosition} = require('./utils')
+const {setPageContentHeight, toggleFooterPosition, fetchLocationInfo} = require('./utils')
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
@@ -333,6 +333,8 @@ const initialize = () => {
         fd.append('audio_data', crowdSource.audioBlob);
         fd.append('speakerDetails', speakerDetails);
         fd.append('sentenceId', crowdSource.sentences[currentIndex].sentenceId);
+        fd.append('state',localStorage.getItem('state_region') || "");
+        fd.append('country',localStorage.getItem('country') || "");
         fetch('/upload', {
             method: 'POST',
             body: fd,
@@ -396,7 +398,12 @@ $(document).ready(() => {
     const $pageContent = $('#page-content');
     const $navUser = $('#nav-user');
     const $navUserName = $navUser.find('#nav-username');
-
+    fetchLocationInfo().then(res=>{
+        return res.json()
+    }).then(response=>{
+        localStorage.setItem("state_region", response.regionName);
+        localStorage.setItem("country",response.country);
+    }).catch(console.log);
     try {
         const localSpeakerData = localStorage.getItem(speakerDetailsKey);
         const localSpeakerDataParsed = JSON.parse(localSpeakerData);
