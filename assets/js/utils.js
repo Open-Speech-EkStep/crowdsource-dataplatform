@@ -16,4 +16,8 @@ function toggleFooterPosition() {
     $footer.toggleClass('bottom')
 }
 
-module.exports = {setPageContentHeight, toggleFooterPosition}
+function fetchLocationInfo(){
+    return fetch('http://ip-api.com/json/?fields=country,regionName');
+}
+
+module.exports = {setPageContentHeight, toggleFooterPosition, fetchLocationInfo}

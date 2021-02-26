@@ -21,14 +21,14 @@ with ins ("sentenceId") as \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
 from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" \
-where "state" is null and language = $4 and label=$3 and cont."action" is NULL limit 5 \
+where sentences."state" is null and language = $4 and label=$3 and cont."action" is NULL limit 5 \
   returning "sentenceId") \
 select ins."sentenceId", sentences.sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";'
 
 const getValidationSentencesQuery = 'select audio_path, con."sentenceId", sen.sentence \
     from contributions con inner join sentences sen on sen."sentenceId"=con."sentenceId" \
-    where "state"= \'contributed\' and language=$1 limit 5;'
+    where sen."state"= \'contributed\' and language=$1 limit 5;'
 
 const addValidationAndUpdateSentenceQuery = 'insert into validations (contribution_id, "action", validated_by, "date") \
 select contribution_id, $3, $1, now() from contributions where "sentenceId" = $2;'
@@ -41,7 +41,7 @@ const UpdateAudioPathAndUserDetails = 'WITH src AS ( \
     where contributor_identifier = $6 and user_name = $7\
     ) \
 UPDATE "contributions" \
-SET "audio_path" = $1, "action" = \'completed\' , "date" = now()\
+SET "audio_path" = $1, "action" = \'completed\' , "date" = now(), "state_region" = $8, "country" = $9\
 FROM src \
 WHERE "sentenceId" = $5 AND contributed_by  = src.contributor_id \
 returning "audio_path";'
