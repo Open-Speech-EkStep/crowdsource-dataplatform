@@ -21,17 +21,18 @@ with ins ("sentenceId") as \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
 from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" \
-where "state" is null and language = $4 and label=$3 and cont."action" is NULL limit 5 \
+where sentences."state" is null and language = $4 and label=$3 and cont."action" is NULL limit 5 \
   returning "sentenceId") \
 select ins."sentenceId", sentences.sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";'
 
 const getValidationSentencesQuery = 'select audio_path, con."sentenceId", sen.sentence \
     from contributions con inner join sentences sen on sen."sentenceId"=con."sentenceId" \
-    where "state"= \'contributed\' and language=$1 limit 5;'
+    where sen."state"= \'contributed\' and language=$1 limit 5;'
 
-const addValidationAndUpdateSentenceQuery = 'insert into validations (contribution_id, "action", validated_by, "date") \
-select contribution_id, $3, $1, now() from contributions where "sentenceId" = $2;'
+const addValidationQuery = 'insert into validations (contribution_id, "action", validated_by, "date") \
+select contribution_id, $3, $1, now() from contributions inner join sentences on sentences."sentenceId"=contributions."sentenceId" \
+where sentences."sentenceId" = $2 and sentences.state = \'contributed\';'
 
 const updateSentencesWithValidatedState = 'update sentences set "state" = \
 \'validated\' where "sentenceId" = $1;'
@@ -73,6 +74,6 @@ module.exports = {
     getAgeGroupsData,
     unassignIncompleteSentencesWhenLanChange,
     updateSentencesWithContributedState,
-    addValidationAndUpdateSentenceQuery,
+    addValidationQuery,
     updateSentencesWithValidatedState
 }

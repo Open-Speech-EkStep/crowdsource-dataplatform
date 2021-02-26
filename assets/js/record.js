@@ -429,8 +429,9 @@ $(document).ready(() => {
 
         if (
             localSentencesParsed &&
-            localSentencesParsed.userName === localSpeakerDataParsed.userName &&
-            localSentencesParsed.language === localSpeakerDataParsed.language
+            localSentencesParsed.userName === localSpeakerDataParsed.userName
+            // &&
+            // localSentencesParsed.language === localSpeakerDataParsed.language
         ) {
             crowdSource.sentences = localSentencesParsed.sentences;
             crowdSource.count = localCount;

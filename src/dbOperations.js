@@ -13,7 +13,7 @@ const {
     getMotherTonguesData,
     unassignIncompleteSentencesWhenLanChange,
     updateSentencesWithContributedState,
-    addValidationAndUpdateSentenceQuery,
+    addValidationQuery,
     updateSentencesWithValidatedState
 } = require('./dbQuery');
 const {KIDS_AGE_GROUP, ADULT, KIDS} = require('./constants');
@@ -168,9 +168,9 @@ const getAudioClip = function (req, res) {
 }
 
 const updateTablesAfterValidation = function (req, res) {
-    const {validatorId, sentenceId, action} = req.body
-
-    return db.none(addValidationAndUpdateSentenceQuery, [validatorId, sentenceId, action]).then(() => {
+    const validatorId = req.cookies.userId;
+    const {sentenceId, action} = req.body
+    return db.none(addValidationQuery, [validatorId, sentenceId, action]).then(() => {
         if (action !== 'skip')
             db.none(updateSentencesWithValidatedState, [sentenceId]).then(() => {
                 res.sendStatus(200);
