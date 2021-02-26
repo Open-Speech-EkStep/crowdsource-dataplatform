@@ -24,7 +24,7 @@ const ddos = new Ddos({ burst: 12, limit: 70 })
 app.use(ddos.express);
 const { I18n } = require('i18n');
 const i18n = new I18n({
-    locales: ['en', 'hi'],
+    locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te'],
     directory: './locales',
     cookie: 'i18n'
   })
