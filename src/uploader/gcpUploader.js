@@ -1,7 +1,7 @@
 const { Storage } = require('@google-cloud/storage');
 const storage = new Storage();
 
-function uploadFile(filename, userName,userId,language) {
+function gcpUploader(filename, userName, userId, language) {
     if (!userName) {
         userName = "unknown";
     }
@@ -9,5 +9,5 @@ function uploadFile(filename, userName,userId,language) {
     return storage.bucket(process.env.BUCKET_NAME).upload(filename, { destination: `raw/landing/${language}/audio/users/${userId}/${userName}/${filename}` });
 }
 module.exports = {
-    uploadFile
+    gcpUploader
 }
