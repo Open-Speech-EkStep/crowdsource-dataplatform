@@ -15,7 +15,7 @@ const decideToShowPopUp = () => {
     localStorage.setItem('currentUser', JSON.stringify(currentValidator));
     const validatorDetails = localStorage.getItem('validatorDetails');
     if (!validatorDetails) {
-        localStorage.setItem('validatorDetails',JSON.stringify([currentValidator]));
+        localStorage.setItem('validatorDetails', JSON.stringify([currentValidator]));
         showInstructionsPopup();
         return;
     }
@@ -108,7 +108,6 @@ const setAudioPlayer = function () {
     }
 }
 
-const sampleSentences = ['लटक कर पैरों को मुक्त करने की एक नई कसरत बालकों के हाथ लग गई', 'जल्द ही पोलैंड में कोर्चार्क के रेडियो प्रोग्राम बहुत', 'उसने कहा क्योंकि उसमें दिल नहीं होगा जो सारे शरीर में खून भेजता'];
 let currentIndex = 0;
 let progressCount = 0;
 
@@ -126,13 +125,14 @@ const animateCSS = ($element, animationName, callback) => {
 
 function setSentenceLabel(index) {
     const $sentenceLabel = $('#sentenceLabel')
-    $sentenceLabel[0].innerText = sampleSentences[index];
+    $sentenceLabel[0].innerText = validationSentences[index].sentence;
     animateCSS($sentenceLabel, 'lightSpeedIn');
 }
 
 function getNextSentence() {
-    if (currentIndex < sampleSentences.length - 1) {
+    if (currentIndex < validationSentences.length - 1) {
         currentIndex++;
+        getAudioClip(validationSentences[currentIndex].audio_path)
         resetDecisionRow();
         setSentenceLabel(currentIndex);
     }
@@ -145,9 +145,31 @@ const updateDecisionButton = (button, colors) => {
     children[2].setAttribute("fill", colors[2]);
 }
 
+const updateValidationCount = ()=>{
+    const currentSentenceLbl = document.getElementById('currentSentenceLbl');
+    currentSentenceLbl.innerText = progressCount;
+    const totalSentencesLbl = document.getElementById('totalSentencesLbl');
+    totalSentencesLbl.innerText = validationSentences.length;
+}
+
 const updateProgressBar = () => {
+    const $getStarted = $('#get-started');
+    const progressMessages = [
+        'Let’s get started',
+        'We know you can do more! ',
+        'You are halfway there. Keep going!',
+        'Just few more steps to go!',
+        'Four dead, one more to go!',
+        'Yay! Done & Dusted!',
+    ];
+    const $progressBar = $("#progress_bar");
     progressCount++;
-    document.getElementById(`rect_${progressCount}`).setAttribute("fill", "#007BFF");
+    $getStarted.text(progressMessages[progressCount]).show();
+
+    const multiplier = 10 * (10 / validationSentences.length);
+    $progressBar.width(progressCount * multiplier + '%');
+    $progressBar.prop('aria-valuenow', progressCount);
+    updateValidationCount();
 }
 
 function disableButton(button) {
@@ -175,6 +197,27 @@ function resetDecisionRow() {
     $('#default_line').removeClass('d-none')
 }
 
+function recordValidation(action) {
+    const validatorId = 123
+    const sentenceId = validationSentences[currentIndex].sentenceId
+    fetch('/validation/action', {
+        method: 'POST',
+        body: JSON.stringify({
+            validatorId: validatorId,
+            sentenceId: sentenceId,
+            action: action
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(
+            (data) => {
+                if (!data.ok) {
+                    throw Error(data.statusText || 'HTTP error');
+                }
+            });
+}
 
 function addListeners() {
     $("#instructions-link").on('click', () => {
@@ -215,16 +258,19 @@ function addListeners() {
     });
 
     dislikeButton.on('click', () => {
+        recordValidation('reject')
         updateProgressBar();
         getNextSentence();
     })
 
     likeButton.on('click', () => {
+        recordValidation('accept')
         updateProgressBar();
         getNextSentence();
     })
 
     $skipButton.on('click', () => {
+        recordValidation('skip')
         updateProgressBar();
         getNextSentence();
     })
@@ -235,23 +281,67 @@ function addListeners() {
         $skipButton.removeAttr('style');
     },)
 
-    $skipButton.mousedown(()=>{
+    $skipButton.mousedown(() => {
         $skipButton.css('background-color', '#bfddf5')
     })
+}
+
+let validationSentences = [{sentence: ''}]
+
+const loadAudio = function (audioLink) {
+    $('#my-audio').attr('src', audioLink)
+};
+
+const getAudioClip = function (audioPath) {
+    fetch('/audioClip', {
+        method: 'POST',
+        body: JSON.stringify({
+            file: audioPath
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then((stream) => {
+        stream.arrayBuffer().then((buffer) => {
+            const blob = new Blob([buffer], {type: "audio/wav"});
+            loadAudio(URL.createObjectURL(blob))
+            // const fileReader = new FileReader();
+            // fileReader.onload = function (e) {
+            //     loadAudio(e.target.result);
+            // }
+            // fileReader.readAsDataURL(blob);
+        });
+    });
 }
 
 $(document).ready(() => {
     toggleFooterPosition();
     setPageContentHeight();
-    const $canvas = document.getElementById('myCanvas');
-    visualizer.drawCanvasLine($canvas);
-    resetDecisionRow();
-    addListeners();
     decideToShowPopUp();
-    setAudioPlayer();
-    setSentenceLabel(currentIndex)
-});
 
+    const language = 'Odia';
+    fetch(`/validation/sentences/${language}`)
+        .then((data) => {
+            if (!data.ok) {
+                throw Error(data.statusText || 'HTTP error');
+            } else {
+                return data.json();
+            }
+        }).then((sentenceData) => {
+        validationSentences = sentenceData.data
+        const sentence = validationSentences[currentIndex];
+        if (sentence && sentence.audio_path) {
+            getAudioClip(sentence.audio_path);
+            setSentenceLabel(currentIndex);
+            updateValidationCount();
+            resetDecisionRow();
+            addListeners();
+            setAudioPlayer();
+            const $canvas = document.getElementById('myCanvas');
+            visualizer.drawCanvasLine($canvas);
+        }
+    })
+});
 
 module.exports = {
     decideToShowPopUp,

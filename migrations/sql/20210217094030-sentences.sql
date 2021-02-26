@@ -26,7 +26,7 @@ TABLESPACE pg_default;
 ALTER TABLE public.sentences
     OWNER to postgres;
 
-GRANT UPDATE, INSERT, SELECT ON TABLE public.sentences TO crowdsourcedbuser;
+-- GRANT UPDATE, INSERT, SELECT ON TABLE public.sentences TO crowdsourcedbuser;
 
 GRANT ALL ON TABLE public.sentences TO postgres;
 -- Index: language
