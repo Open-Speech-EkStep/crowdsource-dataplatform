@@ -132,6 +132,7 @@ function setSentenceLabel(index) {
 function getNextSentence() {
     if (currentIndex < validationSentences.length - 1) {
         currentIndex++;
+        getAudioClip(validationSentences[currentIndex].audio_path)
         resetDecisionRow();
         setSentenceLabel(currentIndex);
     }
@@ -287,16 +288,38 @@ function addListeners() {
 
 let validationSentences = [{sentence: ''}]
 
+const loadAudio = function (audioLink) {
+    $('#my-audio').attr('src', audioLink)
+};
+
+const getAudioClip = function (audioPath) {
+    fetch('/audioClip', {
+        method: 'POST',
+        body: JSON.stringify({
+            file: audioPath
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then((stream) => {
+        stream.arrayBuffer().then((buffer) => {
+            const blob = new Blob([buffer], {type: "audio/wav"});
+            loadAudio(URL.createObjectURL(blob))
+            // const fileReader = new FileReader();
+            // fileReader.onload = function (e) {
+            //     loadAudio(e.target.result);
+            // }
+            // fileReader.readAsDataURL(blob);
+        });
+    });
+}
+
 $(document).ready(() => {
     toggleFooterPosition();
     setPageContentHeight();
-    const $canvas = document.getElementById('myCanvas');
-    visualizer.drawCanvasLine($canvas);
-    resetDecisionRow();
-    addListeners();
     decideToShowPopUp();
-    setAudioPlayer();
-    const language = 'Hindi';
+
+    const language = 'Odia';
     fetch(`/validation/sentences/${language}`)
         .then((data) => {
             if (!data.ok) {
@@ -305,13 +328,20 @@ $(document).ready(() => {
                 return data.json();
             }
         }).then((sentenceData) => {
-        validationSentences = sentenceData.data;
-        setSentenceLabel(currentIndex);
-        updateValidationCount();
-
+        validationSentences = sentenceData.data
+        const sentence = validationSentences[currentIndex];
+        if (sentence && sentence.audio_path) {
+            getAudioClip(sentence.audio_path);
+            setSentenceLabel(currentIndex);
+            updateValidationCount();
+            resetDecisionRow();
+            addListeners();
+            setAudioPlayer();
+            const $canvas = document.getElementById('myCanvas');
+            visualizer.drawCanvasLine($canvas);
+        }
     })
 });
-
 
 module.exports = {
     decideToShowPopUp,
