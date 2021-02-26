@@ -43,3 +43,5 @@
 * When user skips all the rest of the "9" sentences , User should see Thank you Page
 * when user clicks on the Contribute More button, user shall see the Instructions page again
 
+## Validate Locale content in About Us Page
+* When user changes the locale to Hindi 

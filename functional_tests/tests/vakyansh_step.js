@@ -19,7 +19,7 @@ const {
 } = require('taiko');
 
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
-const testUrl = process.env.test_url;
+const testUrl = 'http://localhost:8080'; //process.env.test_url;
 
 beforeSuite(async () => {
     await openBrowser({
@@ -236,3 +236,12 @@ step("user should see the Home page", async ()=>{
     await text('We rely on your contributions').exists();
     await text('Speaker Diversification').exists();
 })
+
+step("When user changes the locale to Hindi", async function () {
+    const selectLanguageDropDown = taiko.$('#localeDropdownMenuButton');
+    await click(selectLanguageDropDown);
+    const hindiDropDown = taiko.$('#hindi');
+    await click(hindiDropDown);
+    await taiko.waitFor(2000);
+    assert.ok(await text("वकण्ठ: भारतीय भाषाओं के लिए वाक् पहचान की अनिवार्यता का घर").exists());
+});
