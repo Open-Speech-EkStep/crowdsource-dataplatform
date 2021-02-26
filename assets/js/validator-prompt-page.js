@@ -152,8 +152,19 @@ const updateValidationCount = ()=>{
 }
 
 const updateProgressBar = () => {
+    const $getStarted = $('#get-started');
+    const progressMessages = [
+        'Let’s get started',
+        'We know you can do more! ',
+        'You are halfway there. Keep going!',
+        'Just few more steps to go!',
+        'Four dead, one more to go!',
+        'Yay! Done & Dusted!',
+    ];
     const $progressBar = $("#progress_bar");
     progressCount++;
+    $getStarted.text(progressMessages[progressCount]).show();
+
     const multiplier = 10 * (10 / validationSentences.length);
     $progressBar.width(progressCount * multiplier + '%');
     $progressBar.prop('aria-valuenow', progressCount);
