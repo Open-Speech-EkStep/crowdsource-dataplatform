@@ -12,7 +12,6 @@ jest.mock('../assets/js/validator-instructions', () => ({
 
 const {
     addListeners,
-    decideToShowPopUp,
     setSentenceLabel,
     setAudioPlayer,
 } = require('../assets/js/validator-prompt-page');
@@ -33,52 +32,6 @@ describe("addListeners",()=>{
 })
 //
 // describe('onReady prompt-page', () => {
-//
-//     describe('decideToShowPopUp', () => {
-//         beforeAll(()=>{
-//             localStorage.clear();
-//         })
-//
-//         mockLocalStorage();
-//         afterEach(() => {
-//             localStorage.clear();
-//             jest.clearAllMocks();
-//         });
-//
-//         test('should show Instructions pop-up when first validator visit to page and initialize validatorDetails list', () => {
-//             document.getElementById('nav-username').innerText='testValidator'
-//
-//             expect(localStorage.getItem('validatorDetails')).toEqual(JSON.stringify( undefined));
-//
-//             decideToShowPopUp();
-//
-//             expect(localStorage.getItem('validatorDetails')).toEqual(JSON.stringify( ["testValidator"]));
-//             expect($("#validator-page-content").hasClass("d-none")).toEqual(true);
-//             expect(showInstructions).toBeCalledTimes(1);
-//         });
-//
-//         test('should show Instructions pop-up when validator visit to page first time and add it to validatorDetails list', () => {
-//             localStorage.setItem('validatorDetails', JSON.stringify( ["testValidator"]));
-//
-//             document.getElementById('nav-username').innerText='abc'
-//
-//             decideToShowPopUp();
-//
-//             expect(showInstructions).toBeCalledTimes(1);
-//             expect($("#validator-page-content").hasClass("d-none")).toEqual(true);
-//             expect(localStorage.getItem('validatorDetails')).toEqual(JSON.stringify( ["testValidator","abc"]));
-//         });
-//
-//         test('should not show Instructions pop-up when validator re-visit to page', () => {
-//
-//             localStorage.setItem('validatorDetails', JSON.stringify( ["xyz"]));
-//             document.getElementById('nav-username').innerText='xyz'
-//
-//             decideToShowPopUp();
-//             expect(showInstructions).not.toBeCalled();
-//         });
-//     });
-
     // describe("setAudioPlayer", () => {
     //     test('should start playing audio when play button is clicked', () => {
     //         const myAudio = document.getElementById('my-audio');
