@@ -146,6 +146,9 @@ router.post('/upload', (req, res) => {
   const language = speakerDetailsJson.language;
   const audioPath = `raw/landing/${language}/audio/users/${userId}/${userName}/${file.filename}`;
 
+  const state = req.body.state || "";
+  const country = req.body.country || "";
+
   const uploadFile = uploader(objectStorage)
 
   uploadFile(file.path, userName, userId, language)
@@ -156,6 +159,8 @@ router.post('/upload', (req, res) => {
         speakerDetails,
         userId,
         userName,
+        state,
+        country,
         (resStatus, resBody) => {
           res.status(resStatus).send(resBody);
         }
