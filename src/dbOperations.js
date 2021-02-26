@@ -1,16 +1,20 @@
 const {encrypt} = require('./encryptAndDecrypt');
+const {getFile} = require('./downloader')
 const {
     UpdateAudioPathAndUserDetails,
     setNewUserAndFileName,
     unassignIncompleteSentences,
     updateAndGetSentencesQuery,
+    getValidationSentencesQuery,
     sentencesCount,
     getCountOfTotalSpeakerAndRecordedAudio,
     getGenderData,
     getAgeGroupsData,
     getMotherTonguesData,
     unassignIncompleteSentencesWhenLanChange,
-    updateSentencesWithContributedState
+    updateSentencesWithContributedState,
+    addValidationAndUpdateSentenceQuery,
+    updateSentencesWithValidatedState
 } = require('./dbQuery');
 const {KIDS_AGE_GROUP, ADULT, KIDS} = require('./constants');
 const process = require('process');
@@ -141,6 +145,48 @@ const updateAndGetSentences = function (req, res) {
         });
 };
 
+const getValidationSentences = function (req, res) {
+    const language = req.params.language;
+    db.any(getValidationSentencesQuery, [language])
+        .then((response) => {
+            res.status(200).send({data: response})
+        })
+        .catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+};
+
+const getAudioClip = function (req, res) {
+    if (!(req.body && req.body.file)) {
+        res.status(400).send('No file selected.');
+        return;
+    }
+    const file = req.body.file
+    const readStream = getFile(file).createReadStream();
+    readStream.pipe(res);
+}
+
+const updateTablesAfterValidation = function (req, res) {
+    const {validatorId, sentenceId, action} = req.body
+
+    return db.none(addValidationAndUpdateSentenceQuery, [validatorId, sentenceId, action]).then(() => {
+        if (action !== 'skip')
+            db.none(updateSentencesWithValidatedState, [sentenceId]).then(() => {
+                res.sendStatus(200);
+            })
+                .catch((err) => {
+                    console.log(err);
+                    res.sendStatus(500);
+                });
+        else res.sendStatus(200);
+    })
+        .catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+}
+
 const getAllDetails = function (language) {
     return db.any(getCountOfTotalSpeakerAndRecordedAudio, [language]);
 };
@@ -154,7 +200,10 @@ const getAllInfo = function (language) {
 
 module.exports = {
     updateAndGetSentences,
+    getValidationSentences,
     updateDbWithAudioPath,
+    updateTablesAfterValidation,
     getAllDetails,
     getAllInfo,
+    getAudioClip
 };
