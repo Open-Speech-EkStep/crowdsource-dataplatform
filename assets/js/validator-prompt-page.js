@@ -145,7 +145,7 @@ const updateDecisionButton = (button, colors) => {
     children[2].setAttribute("fill", colors[2]);
 }
 
-const updateValidationCount = ()=>{
+const updateValidationCount = () => {
     const currentSentenceLbl = document.getElementById('currentSentenceLbl');
     currentSentenceLbl.innerText = progressCount;
     const totalSentencesLbl = document.getElementById('totalSentencesLbl');
@@ -187,12 +187,10 @@ function resetDecisionRow() {
 }
 
 function recordValidation(action) {
-    const validatorId = 123
     const sentenceId = validationSentences[currentIndex].sentenceId
     fetch('/validation/action', {
         method: 'POST',
         body: JSON.stringify({
-            validatorId: validatorId,
             sentenceId: sentenceId,
             action: action
         }),
@@ -293,12 +291,12 @@ const getAudioClip = function (audioPath) {
     }).then((stream) => {
         stream.arrayBuffer().then((buffer) => {
             const blob = new Blob([buffer], {type: "audio/wav"});
-            loadAudio(URL.createObjectURL(blob))
-            // const fileReader = new FileReader();
-            // fileReader.onload = function (e) {
-            //     loadAudio(e.target.result);
-            // }
-            // fileReader.readAsDataURL(blob);
+            // loadAudio(URL.createObjectURL(blob))
+            const fileReader = new FileReader();
+            fileReader.onload = function (e) {
+                loadAudio(e.target.result);
+            }
+            fileReader.readAsDataURL(blob);
         });
     });
 }
