@@ -10,24 +10,6 @@ const showInstructionsPopup = () => {
     showInstructions();
 }
 
-const decideToShowPopUp = () => {
-    const currentValidator = document.getElementById('nav-username').innerText;
-    localStorage.setItem('currentUser', JSON.stringify(currentValidator));
-    const validatorDetails = localStorage.getItem('validatorDetails');
-    if (!validatorDetails) {
-        localStorage.setItem('validatorDetails', JSON.stringify([currentValidator]));
-        showInstructionsPopup();
-        return;
-    }
-
-    const parsedDetails = JSON.parse(validatorDetails);
-    if (!(parsedDetails.includes(currentValidator))) {
-        parsedDetails.push(currentValidator);
-        localStorage.setItem('validatorDetails', JSON.stringify(parsedDetails));
-        showInstructionsPopup();
-    }
-}
-
 let context, src;
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 
@@ -315,7 +297,6 @@ const getAudioClip = function (audioPath) {
 $(document).ready(() => {
     toggleFooterPosition();
     setPageContentHeight();
-    decideToShowPopUp();
 
     const language = 'Odia';
     fetch(`/validation/sentences/${language}`)
@@ -342,7 +323,6 @@ $(document).ready(() => {
 });
 
 module.exports = {
-    decideToShowPopUp,
     setSentenceLabel,
     setAudioPlayer,
     addListeners

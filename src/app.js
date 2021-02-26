@@ -156,7 +156,7 @@ router.post('/upload', (req, res) => {
   const userName = speakerDetailsJson.userName;
   const userId = req.cookies.userId;
   const language = speakerDetailsJson.language;
-  const audioPath = `raw/landing/${language}/audio/users/${userId}/${userName}/${file.filename}`;
+  const audioPath = `raw/landing/${language}/audio/users/${userId}/${userName}/uploads/${file.filename}`;
 
   const state = req.body.state || "";
   const country = req.body.country || "";
