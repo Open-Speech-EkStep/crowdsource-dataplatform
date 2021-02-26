@@ -29,6 +29,13 @@ const {
 const Ddos = require('ddos');
 const ddos = new Ddos({ burst: 12, limit: 70 })
 app.use(ddos.express);
+const { I18n } = require('i18n');
+const i18n = new I18n({
+    locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te'],
+    directory: './locales',
+    cookie: 'i18n'
+  })
+// app.use(ddos.express);
 app.enable('trust proxy');
 
 // const privateKey = fs.readFileSync('./vakyansh.key', 'utf8');
@@ -72,18 +79,23 @@ app.use(helmet());
 app.disable('x-powered-by');
 app.use(compression());
 app.use(cookieParser());
+app.use(i18n.init)
 app.use(function (req, res, next) {
   let cookie = req.cookies.userId;
   if (cookie === undefined) {
     res.cookie('userId', uuidv4(), {
       maxAge: ONE_YEAR,
-      httpOnly: true,
-      secure: true
+       httpOnly: true,
+       secure: true
     });
   }
   next();
 });
 app.use(express.static('public'));
+app.get('/changeLocale/:locale', function (req, res) {
+    res.cookie('i18n', req.params.locale);
+    res.redirect(req.headers.referer);
+});
 app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
