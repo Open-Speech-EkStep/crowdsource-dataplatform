@@ -118,6 +118,10 @@ function getNextSentence() {
         resetDecisionRow();
         setSentenceLabel(currentIndex);
     }
+    else {
+        resetDecisionRow();
+        showThankYou();
+    }
 }
 
 const updateDecisionButton = (button, colors) => {
@@ -294,6 +298,13 @@ const getAudioClip = function (audioPath) {
     }).catch((err)=>{
         console.log(err)
     });
+}
+
+function showThankYou() {
+    $('#instructions-row').addClass('d-none')
+    $('#sentences-row').addClass('d-none')
+    $('#audio-row').addClass('d-none')
+    $('#thank-you-row').removeClass('d-none')
 }
 
 $(document).ready(() => {
