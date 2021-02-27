@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@4.1.0
+  aws-ecr: circleci/aws-ecr@6.9.1
 commands:
     create_yaml:
         parameters:
@@ -106,9 +107,16 @@ jobs:
                     echo << parameters.db_name >>
                     npx db-migrate up
 
+
+
+
+
+
 workflows:
     build_test_deploy:
         jobs:
+          - aws-ecr/build-and-push-image:
+                repo: ${REPO}
           - node/test:
                 version: "13.4"
           - db_migrate:
