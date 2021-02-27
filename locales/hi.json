@@ -79,5 +79,13 @@
 	"Please test your <b>speakers</b>": "Please test your <b>speakers</b>",
 	"Ensure there is <b>no background noise</b>": "Ensure there is <b>no background noise</b>",
 	"Get comfortable with the prompted text, before recording, by <b>reading it aloud</b>": "Get comfortable with the prompted text, before recording, by <b>reading it aloud</b>",
-	"Get started by clicking on <b>Record</b> button": "Get started by clicking on <b>Record</b> button"
+	"Get started by clicking on <b>Record</b> button": "Get started by clicking on <b>Record</b> button",
+	"Oops": "Oops",
+	"Page Not Found": "Page Not Found",
+	"Looks like you have taken a wrong turn here": "Looks like you have taken a wrong turn here",
+	"Click Here": "Click Here",
+	"to go back to home page": "to go back to home page",
+	"Instructions": "Instructions",
+	"Play": "Play",
+	"Validating Instructions": "Validating Instructions"
 }
