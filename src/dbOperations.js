@@ -5,6 +5,7 @@ const {
     setNewUserAndFileName,
     unassignIncompleteSentences,
     updateAndGetSentencesQuery,
+    updateAndGetUniqueSentencesQuery,
     getValidationSentencesQuery,
     sentencesCount,
     getCountOfTotalSpeakerAndRecordedAudio,
@@ -20,6 +21,7 @@ const {KIDS_AGE_GROUP, ADULT, KIDS} = require('./constants');
 const process = require('process');
 const envVars = process.env;
 const pgp = require('pg-promise')();
+const showUniqueSentences = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION||true;
 
 let cn = {
     user: envVars.DB_USER,
@@ -96,10 +98,17 @@ const getSentencesBasedOnAge = function (
     gender
 ) {
     let languageLabel = ADULT;
+    let query = updateAndGetSentencesQuery;
+
     if (ageGroup === KIDS_AGE_GROUP) {
         languageLabel = KIDS;
     }
-    return (db.many(updateAndGetSentencesQuery, [
+
+    if( showUniqueSentences) {
+        query = updateAndGetUniqueSentencesQuery
+    }
+
+    return (db.many(query, [
         encryptedUserId,
         userName,
         languageLabel,
@@ -166,9 +175,15 @@ const getAudioClip = function (req, res) {
         res.status(400).send('No file selected.');
         return;
     }
-    const file = req.body.file
-    const readStream = getFile(file).createReadStream();
-    readStream.pipe(res);
+    const file = getFile(req.body.file)
+    file.exists().then((result)=>{
+        if(result[0]){
+            const readStream = file.createReadStream();
+            readStream.pipe(res);
+        }
+        else
+            res.sendStatus(500);
+    })
 }
 
 const updateTablesAfterValidation = function (req, res) {
