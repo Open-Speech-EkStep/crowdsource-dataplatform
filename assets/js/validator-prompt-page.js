@@ -291,6 +291,8 @@ const getAudioClip = function (audioPath) {
             }
             fileReader.readAsDataURL(blob);
         });
+    }).catch((err)=>{
+        console.log(err)
     });
 }
 
@@ -319,7 +321,9 @@ $(document).ready(() => {
             const $canvas = document.getElementById('myCanvas');
             visualizer.drawCanvasLine($canvas);
         }
-    })
+    }).catch((err)=>{
+        console.log(err)
+    });
 });
 
 module.exports = {
