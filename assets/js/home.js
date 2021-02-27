@@ -94,15 +94,8 @@ $(document).ready(function () {
         });
     });
 
-    let langTop;
-    $('#languageTop').on('change', (e) => {
-        langTop = e.target.value;
-        const $toggleButton = $('#start_recording');
-        $toggleButton.removeAttr('disabled');
-    });
-
     $('#start_recording').on('click', () => {
-        sentenceLanguage = langTop;
+        sentenceLanguage = 'Hindi';
     });
 
     let languageBottom = defaultLang;
