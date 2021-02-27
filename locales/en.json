@@ -80,6 +80,9 @@
 	"Ensure there is <b>no background noise</b>": "Ensure there is <b>no background noise</b>",
 	"Get comfortable with the prompted text, before recording, by <b>reading it aloud</b>": "Get comfortable with the prompted text, before recording, by <b>reading it aloud</b>",
 	"Get started by clicking on <b>Record</b> button": "Get started by clicking on <b>Record</b> button",
-	"Select the language you wish to contribute/validate in:": "Select the language you wish to contribute/validate in:",
+	"Select the language you wish to contribute/validate in:": "Select the language you wish to contribute/validate in:"
+	"Instructions": "Instructions",
+	"Play": "Play",
+	"Validating Instructions": "Validating Instructions",
 	"Select Your Preferred Language": "Select Your Preferred Language"
 }
