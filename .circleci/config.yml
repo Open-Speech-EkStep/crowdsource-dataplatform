@@ -117,7 +117,6 @@ workflows:
         jobs:
           - aws-ecr/build-and-push-image:
                 repo: ${REPO}
-                tag: "latest,test"
           - node/test:
                 version: "13.4"
           - db_migrate:
