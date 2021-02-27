@@ -1,0 +1,7 @@
+./nodemodule
+./.env
+./app_*
+./.*
+.dockerignore
+.env
+.git
