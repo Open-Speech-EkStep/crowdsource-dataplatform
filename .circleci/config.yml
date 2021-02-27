@@ -107,9 +107,7 @@ jobs:
                     echo << parameters.db_name >>
                     npx db-migrate up
 
-    aws-ecr/build-and-push-image:
-          repo: ${REPO}
-          tag: "latest"
+
 
 
 
@@ -117,7 +115,9 @@ jobs:
 workflows:
     build_test_deploy:
         jobs:
-          - aws-ecr/build-and-push-image
+          - aws-ecr/build-and-push-image:
+                repo: ${REPO}
+                tag: "latest"
           - node/test:
                 version: "13.4"
           - db_migrate:
