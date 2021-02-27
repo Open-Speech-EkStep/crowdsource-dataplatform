@@ -25,9 +25,9 @@ commands:
     delete_dockerfile:
       steps:
         - run:
-          name: Remove docker file
-          command: |
-            rm Dockerfile
+            name: Remove docker file
+            command: |
+             rm Dockerfile
 
 jobs:
     run_functional_tests:
