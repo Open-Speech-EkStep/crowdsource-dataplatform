@@ -166,9 +166,15 @@ const getAudioClip = function (req, res) {
         res.status(400).send('No file selected.');
         return;
     }
-    const file = req.body.file
-    const readStream = getFile(file).createReadStream();
-    readStream.pipe(res);
+    const file = getFile(req.body.file)
+    file.exists().then((result)=>{
+        if(result[0]){
+            const readStream = file.createReadStream();
+            readStream.pipe(res);
+        }
+        else
+            res.sendStatus(500);
+    })
 }
 
 const updateTablesAfterValidation = function (req, res) {
