@@ -99,7 +99,7 @@ app.get('/changeLocale/:locale', function (req, res) {
 app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
-  const isCookiePresent = req.cookies._ga ? true : false;
+  const isCookiePresent = req.cookies.userId ? true : false;
   res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
 });
 
