@@ -157,6 +157,38 @@ $(document).ready(function () {
         });
         setUserNameTooltip($userName);
     });
+    const $say = $('#say');
+    const $listen = $('#listen');
+    const $listen_p_2 = $('#listen-p-2');
+    const $say_p_2 = $('#say-p-2');
+
+    $say.hover(()=>{
+        $say.removeClass('col-lg-5');
+        $listen.removeClass('col-lg-5');
+        $say.addClass('col-lg-7');
+        $listen.addClass('col-lg-3');
+        $say_p_2.removeClass('d-none');
+    }, ()=>{
+        $say.removeClass('col-lg-7');
+        $listen.removeClass('col-lg-3');
+        $say.addClass('col-lg-5');
+        $listen.addClass('col-lg-5');
+        $say_p_2.addClass('d-none');
+    })
+
+    $listen.hover(()=>{
+        $say.removeClass('col-lg-5');
+        $listen.removeClass('col-lg-5');
+        $listen.addClass('col-lg-7');
+        $say.addClass('col-lg-3');
+        $listen_p_2.removeClass('d-none');
+    }, ()=>{
+        $say.removeClass('col-lg-3');
+        $listen.removeClass('col-lg-7');
+        $say.addClass('col-lg-5');
+        $listen.addClass('col-lg-5');
+        $listen_p_2.addClass('d-none');
+    })
 
     updateLanguageInButton(defaultLang);
     updateLanguage(defaultLang);
