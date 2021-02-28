@@ -437,8 +437,8 @@ $(document).ready(() => {
         if (
             localSentencesParsed &&
             localSentencesParsed.userName === localSpeakerDataParsed.userName
-            // &&
-            // localSentencesParsed.language === localSpeakerDataParsed.language
+            &&
+            localSentencesParsed.language === localSpeakerDataParsed.language
         ) {
             crowdSource.sentences = localSentencesParsed.sentences;
             crowdSource.count = localCount;
@@ -479,6 +479,7 @@ $(document).ready(() => {
                         JSON.stringify({
                             userName: localSpeakerDataParsed.userName,
                             sentences: sentenceData.data,
+                            language:localSpeakerDataParsed.language,
                         })
                     );
                     localStorage.setItem(countKey, sentenceData.count);

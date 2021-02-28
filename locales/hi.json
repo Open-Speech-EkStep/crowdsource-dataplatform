@@ -1,8 +1,20 @@
 {
+	"Language": "हिन्दी",
+	"Assamese": "Assamese",
+	"Bengali": "বাংলা",
+	"English": "English",
+	"Gujrati": "ગુજરાતી",
+	"Hindi": "हिन्दी",
+	"Kannada": "ಕನ್ನಡ",
+	"Malayalam": "മലയാളം",
+	"Marathi": "मराठी",
+	"Odia": "ଘୃଣା",
+	"Punjabi": "ਪੰਜਾਬੀ",
+	"Tamil": "தமிழ்",
+	"Telugu": "తెలుగు",
 	"Vakyansh: The Home of Speech Recognition Essentials for Indian Languages": "वकण्ठ: भारतीय भाषाओं के लिए वाक् पहचान की अनिवार्यता का घर",
 	"Know More": "ज्यादा जानें",
 	"Vakyansh aims to host the key essentials of Automatic Speech Recognition (ASR) technology, focusing on Indian languages. It is a resource that allows people to build applications that leverage speech recognition.": "Vakyansh aims to host the key essentials of Automatic Speech Recognition (ASR) technology, focusing on Indian languages. It is a resource that allows people to build applications that leverage speech recognition.",
-	"Language": "Language",
 	"Speech Recognition Models": "Speech Recognition Models",
 	"About Us": "About Us",
 	"Select language": "Select language",
@@ -97,4 +109,5 @@
 	"Verify What They Say": "Verify What They Say",
 	"Help us by validating the voice samples that others have contributed": "Help us by validating the voice samples that others have contributed",
 	"Odia (Select languages)": "Odia (Select languages)"
+
 }
