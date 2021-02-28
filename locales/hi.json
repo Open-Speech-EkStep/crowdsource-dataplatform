@@ -89,5 +89,12 @@
 	"Play": "Play",
 	"Validating Instructions": "Validating Instructions",
 	"Select Your Preferred Language": "Select Your Preferred Language",
-	"Select the language you wish to contribute/validate in:": "Select the language you wish to contribute/validate in:"
+	"Select the language you wish to contribute/validate in:": "Select the language you wish to contribute/validate in:",
+	"Say": "Say",
+	"Contribute Your Voice": "Contribute Your Voice",
+	"Contribute your voice to create an open data repository of Indian languages": "Contribute your voice to create an open data repository of Indian languages",
+	"Listen": "Listen",
+	"Verify What They Say": "Verify What They Say",
+	"Help us by validating the voice samples that others have contributed": "Help us by validating the voice samples that others have contributed",
+	"Odia (Select languages)": "Odia (Select languages)"
 }
