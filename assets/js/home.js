@@ -94,8 +94,13 @@ $(document).ready(function () {
         });
     });
 
+    let top_lang;
+    $('#say-listen-language').on('click',(e)=>{
+        top_lang  = e.target.getAttribute("value");
+    })
+
     $('#start_recording').on('click', () => {
-        sentenceLanguage = 'Hindi';
+        sentenceLanguage = top_lang || "Hindi";
     });
 
     let languageBottom = defaultLang;
