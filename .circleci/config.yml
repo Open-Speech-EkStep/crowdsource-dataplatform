@@ -145,7 +145,7 @@ jobs:
         steps:
           - run:
               command: |
-                echo $<< parameters.cluster-name >>
+                echo $ << parameters.cluster-name >>
           - aws-eks/update-kubeconfig-with-authenticator:
               install-kubectl: true
               cluster-name: << parameters.cluster-name >>
