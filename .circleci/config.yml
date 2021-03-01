@@ -4,6 +4,7 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.9.1
   aws-eks: circleci/aws-eks@1.0.3
   aws-cli: circleci/aws-cli@1.4.0
+  kubernetes: circleci/kubernetes@0.11.2
 commands:
     create_yaml:
         parameters:
