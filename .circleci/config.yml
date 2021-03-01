@@ -228,13 +228,13 @@ workflows:
           #     db_name: ${DB_NAME}
           #     requires:
           #       - approve_prod
-          - deploy:
-                name: deploy_prod
-                env_name: prod
-                sh_file: app_yaml_prod.sh
-                requires:
-                  - migrate_prod
-                filters:
-                  branches:
-                    only:
-                      - release
+          # - deploy:
+          #       name: deploy_prod
+          #       env_name: prod
+          #       sh_file: app_yaml_prod.sh
+          #       requires:
+          #         - migrate_prod
+          #       filters:
+          #         branches:
+          #           only:
+          #             - release
