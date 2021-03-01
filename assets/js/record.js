@@ -83,7 +83,7 @@ const initialize = () => {
     //     'Yay! Done & Dusted!',
     // ];
 
-    const progressMessages = [
+    let progressMessages = [
         'Let’s get started',
         'We know you can do more! ',
         'You are halfway there. Keep going!',
@@ -91,6 +91,37 @@ const initialize = () => {
         'Four dead, one more to go!',
         'Yay! Done & Dusted!',
     ];
+
+    if (sentences.length == 4) {
+        progressMessages = [
+            'Let’s get started',
+            'We know you can do more! ',
+            'You are halfway there. Keep going!',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }
+    else if (sentences.length == 3) {
+        progressMessages = [
+            'Let’s get started',
+            'We know you can do more! ',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }
+    else if (sentences.length == 2) {
+        progressMessages = [
+            'Let’s get started',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }    
+    else if (sentences.length == 1) {
+        progressMessages = [
+            'Let’s get started',
+            'Yay! Done & Dusted!'
+        ];
+    }
 
     $nextBtnToolTip.tooltip({
         container: 'body',
