@@ -162,7 +162,7 @@ jobs:
           - run:
               command: |
                  aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
-                 kubectl apply -f deployments/k8s/deployment.yaml -n << parameters.env_name >>
+                 kubectl apply -f deployments/k8s/deployment.yaml -n << parameters.env-name >>
                  kubectl get pods
               name: Test cluster
 
@@ -184,7 +184,7 @@ workflows:
 
           - eks_fargate_deployment:
               cluster-name: ${CLUSTER_NAME}
-              env_name: test
+              env-name: test
 
           - db_migrate:
                name: migrate_dev
