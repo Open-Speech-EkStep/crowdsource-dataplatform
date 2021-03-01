@@ -27,6 +27,23 @@ const fetchDetail = (language) => {
     });
 };
 
+function updateHrsForSayAndListen (language){
+    fetchDetail(language)
+        .then((data) => {
+            try {
+                const totalSentence = data.find((t) => t.index === 1).count;
+                const {hours, minutes, seconds} = calculateTime(totalSentence);
+                $("#say-p-3").text(`${hours}h ${minutes}m ${seconds}s are recorded in ${language}`);
+                $("#listen-p-3").text(`0h is validated in ${language}`);
+            } catch (error) {
+                console.log(error);
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
 function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
     const $speakersDataLoader = $speakersData.find('#loader1,#loader2');
@@ -97,6 +114,7 @@ $(document).ready(function () {
     let top_lang;
     $('#say-listen-language').on('click',(e)=>{
         top_lang  = e.target.getAttribute("value");
+        updateHrsForSayAndListen(top_lang);
     })
 
     $('#start_recording').on('click', () => {
@@ -170,12 +188,12 @@ $(document).ready(function () {
     $say.hover(()=>{
         $say.removeClass('col-lg-5');
         $listen.removeClass('col-lg-5');
-        $say.addClass('col-lg-7');
-        $listen.addClass('col-lg-3');
+        $say.addClass('col-lg-6');
+        $listen.addClass('col-lg-4');
         $say_p_2.removeClass('d-none');
     }, ()=>{
-        $say.removeClass('col-lg-7');
-        $listen.removeClass('col-lg-3');
+        $say.removeClass('col-lg-6');
+        $listen.removeClass('col-lg-4');
         $say.addClass('col-lg-5');
         $listen.addClass('col-lg-5');
         $say_p_2.addClass('d-none');
@@ -184,12 +202,12 @@ $(document).ready(function () {
     $listen.hover(()=>{
         $say.removeClass('col-lg-5');
         $listen.removeClass('col-lg-5');
-        $listen.addClass('col-lg-7');
-        $say.addClass('col-lg-3');
+        $listen.addClass('col-lg-6');
+        $say.addClass('col-lg-4');
         $listen_p_2.removeClass('d-none');
     }, ()=>{
-        $say.removeClass('col-lg-3');
-        $listen.removeClass('col-lg-7');
+        $say.removeClass('col-lg-4');
+        $listen.removeClass('col-lg-6');
         $say.addClass('col-lg-5');
         $listen.addClass('col-lg-5');
         $listen_p_2.addClass('d-none');
