@@ -1,7 +1,12 @@
-<div class="modal fade" id="language-pop-up-wrapper" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered" role="document"><div class="modal-content p-4 border-primary border-2"><div class="modal-header d-block border-0"><h6 class="modal-title text-center text-muted"><%= __('Select the language you wish to contribute/validate in:') %></h6></div><div class="modal-body"><div class="row justify-content-centerd-flex flex-row-wrap text-primary cursor-pointer" id="say-listen-language"> <% [{value: "Hindi", text: "বাংলা"}, {value: "Hindi", text: "ગુજરાતી"}, {
-                        value: "Hindi",
-                        text: "हिन्दी"
-                    }, {value: "Hindi", text: "ಕನ್ನಡ"}, {value: "Hindi", text: "മലയാളം"}, {
-                        value: "Hindi",
-                        text: "English"
-                    }, {value: "Odia", text: "Odia"}].forEach(e=>{ %> <div class="p-2" value="<%= e.value %>"><%= e.text %></div> <% }) %> <% for(let i = 0;i < 20;i++) { %> <div class="p-2" value="Hindi">Lorem lyp</div> <% } %> </div></div><div class="margin-left-auto"><button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button></div></div></div></div>
+<div class="modal fade" id="language-pop-up-wrapper" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered" role="document"><div class="modal-content p-4 border-primary border-2"><div class="modal-header d-block border-0"><h6 class="modal-title text-center text-muted"><%= __('Select the language you wish to contribute/validate in:') %></h6></div><div class="modal-body"><div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer" id="say-listen-language"> <% [{value: "Assamese", text: "Assamese"},
+                        {value: "Bengali", text: "বাংলা"},
+                        {value: "English", text: "English"},
+                        {value: "Gujrati", text: "ગુજરાતી"},
+                        {value: "Hindi", text: "हिन्दी"},
+                        {value: "Kannada", text: "ಕನ್ನಡ"},
+                        {value: "Malayalam", text: "മലയാളം"},
+                        {value: "Marathi", text: "मराठी"},
+                        {value: "Odia", text: "ଘୃଣା"},
+                        {value: "Punjabi", text: "ਪੰਜਾਬੀ"},
+                        {value: "Tamil", text: "தமிழ்"},
+                        {value: "Telugu", text: "తెలుగు"}].forEach(e=>{ %> <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="<%= e.value %>"><%= e.text %></div> <% }) %> </div></div><div class="margin-left-auto"><button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button></div></div></div></div>
