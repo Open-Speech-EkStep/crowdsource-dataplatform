@@ -157,7 +157,8 @@ jobs:
           #     aws-profile: circle-ci
           - run:
               command: |
-                 aws sts get-caller-identity
+                 aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
+                 kubectl get pods
               name: Test cluster
 
 
