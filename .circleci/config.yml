@@ -151,10 +151,10 @@ jobs:
           - aws-cli/setup:
               profile-name: circle-ci
           - kubernetes/install
-          - aws-eks/update-kubeconfig-with-authenticator:
-              # install-kubectl: true
-              cluster-name: << parameters.cluster-name >>
-              aws-profile: circle-ci
+          # - aws-eks/update-kubeconfig-with-authenticator:
+          #     # install-kubectl: true
+          #     cluster-name: << parameters.cluster-name >>
+          #     aws-profile: circle-ci
           - run:
               command: |
                  aws sts get-caller-identity
