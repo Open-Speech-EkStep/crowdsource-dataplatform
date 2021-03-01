@@ -162,10 +162,9 @@ jobs:
           - run:
               command: |
                  aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
-                 echo ${HOME}
-                 ls;
-                 pwd;
-                 kubectl apply -f /home/circleci/project/deployments/k8s/deployment.yaml -n << parameters.env-name >>
+                 ENV_IMAGE_NAME=${REPO}:<< parameters.env-name >>
+                 sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g" deployments/k8s/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
+                #  kubectl apply -f deployments/k8s/deployment.yaml -n << parameters.env-name >>
                  kubectl get pods
               name: Test cluster
 
