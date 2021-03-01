@@ -2,11 +2,11 @@ const {updateGraph, buildGraphs} = require('./draw-chart');
 const {toggleFooterPosition} = require('./utils')
 const {validateUserName, testUserName,setSpeakerDetails, resetSpeakerDetails,setUserNameTooltip,setStartRecordBtnToolTipContent} = require('./speakerDetails');
 
-function updateLanguageInButton(lang) {
-    document.getElementById(
-        'start-record'
-    ).innerText = `START RECORDING IN ${lang.toUpperCase()}`;
-}
+// function updateLanguageInButton(lang) {
+//     document.getElementById(
+//         'start-record'
+//     ).innerText = `START RECORDING IN ${lang.toUpperCase()}`;
+// }
 
 function calculateTime(totalSentence) {
     const totalSeconds = totalSentence * 6;
@@ -26,6 +26,16 @@ const fetchDetail = (language) => {
         }
     });
 };
+
+const performAPIRequest = (url) => {
+    return fetch(url).then((data) => {
+        if(!data.ok) {
+            throw Error(data.statusText || 'HTTP error');
+        } else {
+            return Promise.resolve(data.json());
+        }
+    });
+}
 
 function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
@@ -59,7 +69,144 @@ function updateLanguage(language) {
         });
 }
 
+function showStatistics() {
+    performAPIRequest('/aggregate-data-count').then((response) => {
+        console.log('aggregate-data-count: ', response);
+    });
+}
 
+function constructChart(response, xAxisLabel, yAxisLabel) {
+    var chart = am4core.create("speakers_hours_chart", am4charts.XYChart);
+    chart.data = response;
+
+    var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = yAxisLabel;
+    categoryAxis.renderer.grid.template.location = 0;
+    categoryAxis.renderer.cellStartLocation = 0.2;
+    categoryAxis.renderer.cellEndLocation = 0.8;
+    categoryAxis.renderer.grid.template.strokeWidth = 0;
+    categoryAxis.labelsEnabled = false;
+    
+    var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+    valueAxis.renderer.grid.template.strokeWidth = 0;
+    valueAxis.labelsEnabled = false;
+
+    categoryAxis.renderer.minGridDistance = 25;
+    var series = chart.series.push(new am4charts.ColumnSeries());
+    series.dataFields.valueX = xAxisLabel;
+    series.dataFields.categoryY = yAxisLabel;
+
+    var valueLabel = series.bullets.push(new am4charts.LabelBullet());
+    valueLabel.label.text = 'yAxisLabel';
+    valueLabel.label.fontSize = 20;
+    valueLabel.label.horizontalCenter = "right";
+    valueLabel.label.dx = 10;
+
+    var cellSize = 35;
+    chart.events.on("datavalidated", function(ev) {
+        var chart = ev.target;
+        var categoryAxis = chart.yAxes.getIndex(0);
+        var adjustHeight = chart.data.length * cellSize - categoryAxis.pixelHeight;
+        var targetHeight = chart.pixelHeight + adjustHeight;
+        chart.svgContainer.htmlElement.style.height = targetHeight + "px";
+    });
+}
+
+function showByHoursChart() {
+    const $topLanguageSpinner = $('#topLanguageSpinner');
+    $topLanguageSpinner.show().addClass('d-flex');
+    performAPIRequest('/top-languages-by-hours').then((response) => {
+        constructChart(response.data, 'total_contributions', 'language');
+        $topLanguageSpinner.hide().removeClass('d-flex');
+    });
+}
+
+function showBySpeakersChart() {
+    const $topLanguageSpinner = $('#topLanguageSpinner');
+    const $speakersHoursChart = $('#speakers_hours_chart_container');
+    $topLanguageSpinner.show().addClass('d-flex');
+    $speakersHoursChart.addClass('d-none');
+    performAPIRequest('/top-languages-by-speakers').then((response) => {
+        constructChart(response.data, 'total_speakers', 'language');
+        $topLanguageSpinner.hide().removeClass('d-flex');
+        $speakersHoursChart.removeClass('d-none');
+    });
+}
+
+function generateIndiaMap() {
+    performAPIRequest('/aggregate-data-count?byState=true')
+    .then((response) => {
+        response.data.forEach(ele => {
+            ele.id = ele.state;
+            ele.value = Number(ele.total_contributions) + Number(ele.total_validations);
+        });
+        var chart = am4core.create("indiaMapChart", am4maps.MapChart);
+        chart.geodataSource.url = "./js/states_india_geo.json"; 
+        chart.projection = new am4maps.projections.Miller();
+        var polygonSeries = new am4maps.MapPolygonSeries(); 
+        chart.seriesContainer.draggable = false;
+        chart.seriesContainer.resizable = false;
+        chart.maxZoomLevel = 1;
+        polygonSeries.useGeodata = true;
+        polygonSeries.data = response.data;
+        var polygonTemplate = polygonSeries.mapPolygons.template;
+        polygonTemplate.tooltipHTML = `<div><h6>{state}</h6> <div>{total_speakers} Speakers  <label style="margin-left: 32px">{total_contributions}</label></div> <div>Validated:  <label style="margin-left: 16px">{total_validations}</label></div></div>`;
+        polygonTemplate.nonScalingStroke = true;
+        polygonTemplate.strokeWidth = 0.5;
+        polygonTemplate.fill = am4core.color("#fff");
+    
+        // Create hover state and set alternative fill color
+        var hs = polygonTemplate.states.create("hover");
+        hs.properties.fill = chart.colors.getIndex(1).brighten(-0.5);
+
+        polygonSeries.mapPolygons.template.adapter.add("fill", function(fill, target) {
+            if (target.dataItem) {
+                if (target.dataItem.value > 5) {
+                    return am4core.color("#98C52B");
+                } else if (target.dataItem.value > 2) {
+                    return am4core.color("#E4953D");
+                } else if (target.dataItem.value > 1) {
+                    return am4core.color("#CFA238");
+                } else if (target.dataItem.value > 0) {
+                    return am4core.color("#F6D350");
+                } else {
+                    return am4core.color("#DDD8A5");
+                }
+            }
+            return fill;
+        });
+
+        chart.series.push(polygonSeries);
+
+        // Set up heat legend
+        let heatLegend = chart.createChild(am4maps.HeatLegend);
+        heatLegend.series = polygonSeries;
+        heatLegend.align = "right";
+        heatLegend.valign = "bottom";
+        heatLegend.width = am4core.percent(100);
+        heatLegend.marginRight = am4core.percent(4);
+        heatLegend.minValue = 0;
+        heatLegend.maxValue = 5;
+
+        var legendContainer = am4core.create("legendDiv", am4core.Container);
+        legendContainer.width = am4core.percent(100);
+        legendContainer.height = am4core.percent(100);
+        heatLegend.parent = legendContainer;
+
+        // Set up custom heat map legend labels using axis ranges
+        var minRange = heatLegend.valueAxis.axisRanges.create();
+        minRange.value = heatLegend.minValue;
+        var maxRange = heatLegend.valueAxis.axisRanges.create();
+        maxRange.value = heatLegend.maxValue;
+        
+        // Blank out internal heat legend value axis labels
+        heatLegend.valueAxis.renderer.labels.template.adapter.add("text", function(labelText) {
+            return `${labelText} hr`;
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
+}
 
 $(document).ready(function () {
     const speakerDetailsKey = 'speakerDetails';
@@ -103,17 +250,26 @@ $(document).ready(function () {
         sentenceLanguage = top_lang || "Hindi";
     });
 
-    let languageBottom = defaultLang;
-    $('#language').on('change', (e) => {
-        languageBottom = e.target.value;
-        updateLanguage(languageBottom);
-        updateLanguageInButton(languageBottom);
-        updateGraph(languageBottom);
+    $('[name="topLanguageChart"]').on('change', (event) => {
+        console.log(event.target.value);
+        if(event.target.value === 'hours') {
+            showByHoursChart();
+        } else {
+            showBySpeakersChart();
+        }
     });
 
-    $('#start-record').on('click', () => {
-        sentenceLanguage = languageBottom;
-    });
+    // let languageBottom = defaultLang;
+    // $('#language').on('change', (e) => {
+    //     languageBottom = e.target.value;
+    //     updateLanguage(languageBottom);
+    //     updateLanguageInButton(languageBottom);
+    //     updateGraph(languageBottom);
+    // });
+
+    // $('#start-record').on('click', () => {
+    //     sentenceLanguage = languageBottom;
+    // });
 
     setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
     $tncCheckbox.change(function () {
@@ -195,13 +351,16 @@ $(document).ready(function () {
         $listen_p_2.addClass('d-none');
     })
 
-    updateLanguageInButton(defaultLang);
+    //updateLanguageInButton(defaultLang);
     updateLanguage(defaultLang);
     buildGraphs(defaultLang);
+    generateIndiaMap();
+    showByHoursChart();
+    showStatistics();
 });
 
 module.exports = {
-    updateLanguageInButton,
+    //updateLanguageInButton,
     updateLanguage,
     calculateTime,
     fetchDetail,
