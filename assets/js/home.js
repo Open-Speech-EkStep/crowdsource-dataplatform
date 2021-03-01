@@ -28,6 +28,10 @@ const fetchDetail = (language) => {
 };
 
 function updateHrsForSayAndListen (language){
+    const $sayLoader = $('#say-loader');
+    const $listenLoader = $('#listen-loader');
+    $sayLoader.removeClass('d-none');
+    $listenLoader.removeClass('d-none');
     fetchDetail(language)
         .then((data) => {
             try {
@@ -35,6 +39,8 @@ function updateHrsForSayAndListen (language){
                 const {hours, minutes, seconds} = calculateTime(totalSentence);
                 $("#say-p-3").text(`${hours}h ${minutes}m ${seconds}s are recorded in ${language}`);
                 $("#listen-p-3").text(`0h is validated in ${language}`);
+                $sayLoader.addClass('d-none');
+                $listenLoader.addClass('d-none');
             } catch (error) {
                 console.log(error);
             }
@@ -111,14 +117,56 @@ $(document).ready(function () {
         });
     });
 
+    const $languageNavBar = $('#language-nav-bar');
+
     let top_lang;
     $('#say-listen-language').on('click',(e)=>{
-        top_lang  = e.target.getAttribute("value");
+        const targetedDiv = e.target;
+        top_lang  = targetedDiv.getAttribute("value");
+        const allDivs = $languageNavBar.children();
+        let targetttedDivIndex = -1
+        allDivs.each( function( index, element ){
+            if(element.getAttribute('value') === top_lang){
+                targetttedDivIndex = index;
+            }
+        });
+        const centeredDiv = allDivs[2];
+        const temp = targetedDiv.innerText;
+        if(targetttedDivIndex >= 0){
+            const centeredDivValue = centeredDiv.getAttribute('value');
+            targetedDiv.innerText = centeredDiv.innerText;
+            centeredDiv.innerText = temp;
+            targetedDiv.setAttribute('value',centeredDivValue);
+        }
+        centeredDiv.innerText = temp;
+        centeredDiv.setAttribute('value',top_lang);
+        centeredDiv.classList.add('text-dark');
+        centeredDiv.style.fontWeight = 900;
+        updateHrsForSayAndListen(top_lang);
+    })
+
+    $languageNavBar.on('click', (e)=>{
+        const centeredDiv = $languageNavBar.children()[2];
+        const targetedDiv = e.target;
+        const targetedDivValue = targetedDiv.getAttribute('value');
+        const centeredDivValue = centeredDiv.getAttribute('value');
+        const temp = targetedDiv.innerText;
+        targetedDiv.innerText = centeredDiv.innerText;
+        centeredDiv.innerText = temp;
+        centeredDiv.setAttribute('value',targetedDivValue);
+        targetedDiv.setAttribute('value',centeredDivValue);
+        centeredDiv.classList.add('text-dark');
+        centeredDiv.style.fontWeight = 900;
+        top_lang = targetedDivValue;
         updateHrsForSayAndListen(top_lang);
     })
 
     $('#start_recording').on('click', () => {
-        sentenceLanguage = top_lang || "Hindi";
+        if(top_lang === "Hindi" || top_lang === "Odia"){
+            sentenceLanguage = top_lang;
+        } else {
+            sentenceLanguage = "Hindi";
+        }
     });
 
     let languageBottom = defaultLang;
