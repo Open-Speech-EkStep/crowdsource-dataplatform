@@ -136,16 +136,19 @@ jobs:
 
     eks_fargate_deployment:
         executor: aws-eks/python3
-        # parameters:
-        #   cluster-name:
-        #     description: |
-        #       Name of the EKS cluster
-        #     type: string
+        parameters:
+          cluster-name:
+            description: |
+              Name of the EKS cluster
+            type: string
           
         steps:
+          - run:
+              command: |
+                echo $<< parameters.cluster-name >>
           - aws-eks/update-kubeconfig-with-authenticator:
               install-kubectl: true
-              cluster-name: ${CLUSTER_NAME}
+              cluster-name: << parameters.cluster-name >>
           - run:
               command: |
                 kubectl get nodes
@@ -167,7 +170,8 @@ workflows:
                repo: ${REPO}
                tag: "test"
 
-          - eks_fargate_deployment
+          - eks_fargate_deployment:
+              cluster-name: ${CLUSTER_NAME}
 
           - db_migrate:
                name: migrate_dev
