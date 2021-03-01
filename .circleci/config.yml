@@ -191,7 +191,7 @@ workflows:
 
           - eks_fargate_deployment:
               cluster-name: ${CLUSTER_NAME}
-              env-name: test
+              env-name: prod
 
           # - db_migrate:
           #      name: migrate_dev
