@@ -162,6 +162,8 @@ jobs:
           - run:
               command: |
                  aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
+                 ls;
+                 pwd;
                  kubectl apply -f deployments/k8s/deployment.yaml -n << parameters.env-name >>
                  kubectl get pods
               name: Test cluster
@@ -186,46 +188,46 @@ workflows:
               cluster-name: ${CLUSTER_NAME}
               env-name: test
 
-          - db_migrate:
-               name: migrate_dev
-               db_name: ${DEV_DB_NAME}
-               requires:
-                 - node/test
-          - deploy:
-               name: deploy_dev
-               env_name: dev
-               sh_file: app_yaml_dev.sh
-               requires:
-                 - migrate_dev
-          - approve_to_deploy:
-                name: approve_test
-                type: approval
-                requires:
-                   - deploy_dev
-          - db_migrate:
-               name: migrate_test
-               db_name: ${TEST_DB_NAME}
-               requires:
-                 - approve_test
-          - deploy:
-               name: deploy_test
-               env_name: test
-               sh_file: app_yaml_test.sh
-               requires:
-                 - migrate_test
-          - run_functional_tests:
-                 requires:
-                   - deploy_test
-          - approve_to_deploy:
-                name: approve_prod
-                type: approval
-                requires:
-                   - deploy_test
-          - db_migrate:
-              name: migrate_prod
-              db_name: ${DB_NAME}
-              requires:
-                - approve_prod
+          # - db_migrate:
+          #      name: migrate_dev
+          #      db_name: ${DEV_DB_NAME}
+          #      requires:
+          #        - node/test
+          # - deploy:
+          #      name: deploy_dev
+          #      env_name: dev
+          #      sh_file: app_yaml_dev.sh
+          #      requires:
+          #        - migrate_dev
+          # - approve_to_deploy:
+          #       name: approve_test
+          #       type: approval
+          #       requires:
+          #          - deploy_dev
+          # - db_migrate:
+          #      name: migrate_test
+          #      db_name: ${TEST_DB_NAME}
+          #      requires:
+          #        - approve_test
+          # - deploy:
+          #      name: deploy_test
+          #      env_name: test
+          #      sh_file: app_yaml_test.sh
+          #      requires:
+          #        - migrate_test
+          # - run_functional_tests:
+          #        requires:
+          #          - deploy_test
+          # - approve_to_deploy:
+          #       name: approve_prod
+          #       type: approval
+          #       requires:
+          #          - deploy_test
+          # - db_migrate:
+          #     name: migrate_prod
+          #     db_name: ${DB_NAME}
+          #     requires:
+          #       - approve_prod
           - deploy:
                 name: deploy_prod
                 env_name: prod
