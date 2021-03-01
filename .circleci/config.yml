@@ -136,18 +136,18 @@ jobs:
                     echo << parameters.db_name >>
                     npx db-migrate up
 
-    build_and_push_image_ecr:
-        parameters:
-          env-name:
-            description: |
-              Name of the env
-            type: string
-        executor:
-            name: node/default
-        steps:
-          - aws-ecr/build-and-push-image:
-              repo: ${REPO}
-              tag: << parameters.env-name >>
+    # build_and_push_image_ecr:
+    #     parameters:
+    #       env-name:
+    #         description: |
+    #           Name of the env
+    #         type: string
+    #     executor:
+    #         name: node/default
+    #     steps:
+    #       - aws-ecr/build-and-push-image:
+    #           repo: ${REPO}
+    #           tag: << parameters.env-name >>
 
     eks_fargate_deployment:
         executor: aws-eks/python3
@@ -186,10 +186,10 @@ workflows:
                name: migrate_test_aws
                db_name: ${TEST_DB_NAME}
 
-          - build_and_push_image_ecr:
-               name: push_dev_image
-               env-name: test
-               requires:
+          - aws-ecr/build-and-push-image:
+              repo: ${REPO}
+              tag: test
+              requires:
                  - node/test
 
           - eks_fargate_deployment:
@@ -198,6 +198,7 @@ workflows:
               env-name: test
               requires:
                 - push_dev_image
+
 
           - approve_to_deploy:
                 name: approve_prod_deployment
@@ -212,11 +213,12 @@ workflows:
                requires:
                  - approve_prod_deployment
 
-          - build_and_push_image_ecr:
-               name: push_prod_image
-               env-name: prod
-               requires:
-                 - migrate_prod_aws
+          - aws-ecr/build-and-push-image:
+              name: push_prod_image
+              repo: ${REPO}
+              tag: prod
+              requires:
+                #  - migrate_prod_aws
                  - approve_prod_deployment
 
           - eks_fargate_deployment:
