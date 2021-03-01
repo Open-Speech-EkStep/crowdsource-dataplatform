@@ -13,8 +13,7 @@ SELECT contributions.contributed_by,
 			contributions."sentenceId",
 			CASE WHEN validations.action = ANY (ARRAY['accept'::text, 'reject'::text]) THEN 1::bigint
                     ELSE 0::bigint
-                END AS is_validated,
-            1::bigint as is_contributed
+                END AS is_validated
            FROM contributions 
            	 LEFT JOIN validations  ON contributions.contribution_id = validations.contribution_id
              JOIN sentences ON sentences."sentenceId" = contributions."sentenceId"
