@@ -20,3 +20,5 @@ SELECT contributions.contributed_by,
              LEFT JOIN contributors ON contributors.contributor_id = contributions.contributed_by
           WHERE contributions.action = 'completed'::text AND contributions.date >= (CURRENT_DATE - '1 year'::interval)
 		  ORDER BY contributions.contributed_by);
+
+REFRESH MATERIALIZED VIEW contributions_and_demo_stats;
