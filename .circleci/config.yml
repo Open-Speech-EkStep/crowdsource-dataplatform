@@ -143,6 +143,10 @@ jobs:
             description: |
               Name of the EKS cluster
             type: string
+          env-name:
+            description: |
+              Name of the env
+            type: string
           
         steps:
           - run:
@@ -158,6 +162,7 @@ jobs:
           - run:
               command: |
                  aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
+                 kubectl apply -f deployments/k8s/deployment.yaml -n << parameters.env_name >>
                  kubectl get pods
               name: Test cluster
 
@@ -179,6 +184,7 @@ workflows:
 
           - eks_fargate_deployment:
               cluster-name: ${CLUSTER_NAME}
+              env_name: test
 
           - db_migrate:
                name: migrate_dev
