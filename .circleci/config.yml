@@ -142,10 +142,12 @@ jobs:
             description: |
               Name of the env
             type: string
-
-        - aws-ecr/build-and-push-image:
-          repo: ${REPO}
-          tag: << parameters.env-name >>
+        executor:
+            name: node/default
+        steps:
+          - aws-ecr/build-and-push-image:
+              repo: ${REPO}
+              tag: << parameters.env-name >>
 
     eks_fargate_deployment:
         executor: aws-eks/python3
@@ -194,8 +196,8 @@ workflows:
               name: dev_deployment_eks
               cluster-name: ${CLUSTER_NAME}
               env-name: test
-               requires:
-                 - push_dev_image
+              requires:
+                - push_dev_image
 
           - approve_to_deploy:
                 name: approve_prod_deployment
@@ -218,10 +220,10 @@ workflows:
                  - approve_prod_deployment
 
           - eks_fargate_deployment:
-              name: dev_deployment_eks
+              name: prod_deployment_eks
               cluster-name: ${CLUSTER_NAME}
               env-name: test
-               requires:
+              requires:
                  - push_prod_image
                  - approve_prod_deployment  
 
