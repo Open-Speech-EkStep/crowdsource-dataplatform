@@ -202,7 +202,7 @@ workflows:
 
 
           - approve_to_deploy:
-                name: approve_prod_deployment
+                name: approve_prod_deployment_eks
                 type: approval
                 requires:
                    - push_dev_image
@@ -212,7 +212,7 @@ workflows:
                name: migrate_prod_aws
                db_name: ${TEST_DB_NAME}
                requires:
-                 - approve_prod_deployment
+                 - approve_prod_deployment_eks
 
           - aws-ecr/build-and-push-image:
               name: push_prod_image
@@ -220,15 +220,15 @@ workflows:
               tag: prod
               requires:
                 #  - migrate_prod_aws
-                 - approve_prod_deployment
+                 - approve_prod_deployment_eks
 
           - eks_fargate_deployment:
               name: prod_deployment_eks
               cluster-name: ${CLUSTER_NAME}
-              env-name: test
+              env-name: prod
               requires:
                  - push_prod_image
-                 - approve_prod_deployment  
+                 - approve_prod_deployment_eks  
 
           - db_migrate:
                name: migrate_dev
