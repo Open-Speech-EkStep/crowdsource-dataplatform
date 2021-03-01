@@ -149,14 +149,14 @@ jobs:
                 echo $ << parameters.cluster-name >>
           - aws-cli/setup:
               profile-name: circle-ci
-
+          - kubernetes/install
           - aws-eks/update-kubeconfig-with-authenticator:
-              install-kubectl: true
+              # install-kubectl: true
               cluster-name: << parameters.cluster-name >>
               aws-profile: circle-ci
           - run:
               command: |
-                kubectl get nodes
+                 aws sts get-caller-identity
               name: Test cluster
 
 
