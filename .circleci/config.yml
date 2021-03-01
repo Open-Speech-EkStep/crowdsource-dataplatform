@@ -165,7 +165,7 @@ jobs:
                  ENV_IMAGE_NAME=${REPO}:<< parameters.env-name >>
                  sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g" deployments/k8s/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
                 #  kubectl apply -f deployments/k8s/deployment.yaml -n << parameters.env-name >>
-                 kubectl get pods
+                #  kubectl get pods
               name: Test cluster
 
 
