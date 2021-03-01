@@ -254,3 +254,7 @@ body.modal-open .supreme-container {
     height: 450px;
   }
 }
+
+.options:hover{
+  color:#5d5d5d;
+}
