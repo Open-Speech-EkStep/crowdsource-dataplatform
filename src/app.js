@@ -191,6 +191,8 @@ router.post('/upload', (req, res) => {
     });
 });
 
+require('./dashboard-api')(router);
+
 app.use('/', router);
 
 app.get('*', (req, res) => {
