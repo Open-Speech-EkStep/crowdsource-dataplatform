@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@4.1.0
   aws-ecr: circleci/aws-ecr@6.9.1
+  aws-eks: circleci/aws-eks@1.0.3
 commands:
     create_yaml:
         parameters:
@@ -117,19 +118,57 @@ jobs:
                     echo << parameters.db_name >>
                     npx db-migrate up
 
+    db_migrate_aws:
+        parameters:
+            db_name:
+              type: string
+        executor:
+            name: node/default
+        steps:
+            - checkout
+            - node/install-packages
+            - run:
+                name: Run DB Migrate
+                command: |
+                    export DATABASE_URL=postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@{DB_HOST_AWS}/<< parameters.db_name >>
+                    echo << parameters.db_name >>
+                    npx db-migrate up
 
-
+    eks_fargate_deployment:
+        executor: aws-eks/python3
+        # parameters:
+        #   cluster-name:
+        #     description: |
+        #       Name of the EKS cluster
+        #     type: string
+          
+        steps:
+          - aws-eks/update-kubeconfig-with-authenticator:
+              install-kubectl: true
+              cluster-name: ${CLUSTER_NAME}
+          - run:
+              command: |
+                kubectl get nodes
+              name: Test cluster
 
 
 
 workflows:
     build_test_deploy:
         jobs:
-          - aws-ecr/build-and-push-image:
-                repo: ${REPO}
-                tag: "test,prod"
           - node/test:
-                version: "13.4"
+               version: "13.4"
+
+          - db_migrate_aws:
+               name: migrate_test_aws
+               db_name: ${TEST_DB_NAME}
+
+          - aws-ecr/build-and-push-image:
+               repo: ${REPO}
+               tag: "test"
+
+          - eks_fargate_deployment
+
           - db_migrate:
                name: migrate_dev
                db_name: ${DEV_DB_NAME}
