@@ -1,6 +1,6 @@
-const ageGroupContributions = "select age_group,count(*) as contributions from contributions_and_demo_stats where $1:raw group by age_group ORDER BY contributions DESC;";
+const ageGroupContributions = "select age_group,count(*) as contributions, count(distinct(contributed_by)) as speakers from contributions_and_demo_stats where $1:raw group by age_group ORDER BY contributions DESC;";
 
-const genderGroupContributions = "select gender,count(*) as contributions from contributions_and_demo_stats where $1:raw group by gender ORDER BY contributions DESC;";
+const genderGroupContributions = "select gender,count(*) as contributions, count(distinct(contributed_by)) as speakers from contributions_and_demo_stats where $1:raw group by gender ORDER BY contributions DESC;";
 
 const dailyTimeline = "select day, month, year, language, ROUND(cumulative_contributions::decimal *6/3600,3) as cumulative_contributions,ROUND(cumulative_validations::decimal *6/3600,3) as cumulative_validations from daily_cumulative_stats_per_language where $1:raw;";
 
