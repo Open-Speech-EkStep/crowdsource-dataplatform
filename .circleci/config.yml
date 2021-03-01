@@ -3,6 +3,7 @@ orbs:
   node: circleci/node@4.1.0
   aws-ecr: circleci/aws-ecr@6.9.1
   aws-eks: circleci/aws-eks@1.0.3
+  aws-cli: circleci/aws-cli@1.4.0
 commands:
     create_yaml:
         parameters:
@@ -146,9 +147,13 @@ jobs:
           - run:
               command: |
                 echo $ << parameters.cluster-name >>
+          - aws-cli/setup:
+              profile-name: circle-ci
+
           - aws-eks/update-kubeconfig-with-authenticator:
               install-kubectl: true
               cluster-name: << parameters.cluster-name >>
+              aws-profile: circle-ci
           - run:
               command: |
                 kubectl get nodes
