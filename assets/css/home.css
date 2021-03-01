@@ -254,3 +254,7 @@ body.modal-open .supreme-container {
     height: 450px;
   }
 }
+
+#topLanguageSpinner, #chartSpinner {
+  height: 300px;
+}
