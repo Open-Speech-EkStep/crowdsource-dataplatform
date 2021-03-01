@@ -161,9 +161,13 @@ jobs:
           #     aws-profile: circle-ci
           - run:
               command: |
+                 ls;
+                 ls -al;
                  aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
                  ENV_IMAGE_NAME=${REPO}:<< parameters.env-name >>
-                 sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g" deployments/k8s/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
+                 sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g" ${HOME}/project/deployments/k8s/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
+
+                #  ls project
                 #  kubectl apply -f deployments/k8s/deployment.yaml -n << parameters.env-name >>
                 #  kubectl get pods
               name: Test cluster
