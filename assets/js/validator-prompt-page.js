@@ -307,6 +307,13 @@ function showThankYou() {
     $('#thank-you-row').removeClass('d-none')
 }
 
+function showNoSentencesMessage() {
+    $('#instructions-row').addClass('d-none')
+    $('#sentences-row').addClass('d-none')
+    $('#audio-row').addClass('d-none')
+    $('#no-sentences-row').removeClass('d-none')
+}
+
 $(document).ready(() => {
     toggleFooterPosition();
     setPageContentHeight();
@@ -320,6 +327,10 @@ $(document).ready(() => {
                 return data.json();
             }
         }).then((sentenceData) => {
+        if (sentenceData.data.length == 0){
+            showNoSentencesMessage();
+            return;
+        }
         validationSentences = sentenceData.data
         const sentence = validationSentences[currentIndex];
         if (sentence && sentence.audio_path) {
