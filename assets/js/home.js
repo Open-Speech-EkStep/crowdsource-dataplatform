@@ -1,12 +1,13 @@
 const {updateGraph, buildGraphs} = require('./draw-chart');
 const {toggleFooterPosition} = require('./utils')
-const {validateUserName, testUserName,setSpeakerDetails, resetSpeakerDetails,setUserNameTooltip,setStartRecordBtnToolTipContent} = require('./speakerDetails');
-
-// function updateLanguageInButton(lang) {
-//     document.getElementById(
-//         'start-record'
-//     ).innerText = `START RECORDING IN ${lang.toUpperCase()}`;
-// }
+const {
+    validateUserName,
+    testUserName,
+    setSpeakerDetails,
+    resetSpeakerDetails,
+    setUserNameTooltip,
+    setStartRecordBtnToolTipContent
+} = require('./speakerDetails');
 
 function calculateTime(totalSeconds, isSeconds=true) {
     const hours = Math.floor(totalSeconds / 3600);
@@ -30,9 +31,31 @@ const performAPIRequest = (url) => {
     });
 }
 
+function updateHrsForSayAndListen(language) {
+    const $sayLoader = $('#say-loader');
+    const $listenLoader = $('#listen-loader');
+    $sayLoader.removeClass('d-none');
+    $listenLoader.removeClass('d-none');
+    const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
+    const aggregateDetails = JSON.parse(stringifyData);
+    const totalInfo = aggregateDetails.find((element) => element.language === language);
+    const $say_p_3 = $("#say-p-3");
+    const $listen_p_3 = $("#listen-p-3");
+    if (totalInfo) {
+        const {total_contributions, total_validations} = totalInfo;
+        total_contributions && $say_p_3.text(`${total_contributions} hrs are recorded in ${language}`);
+        total_validations && $listen_p_3.text(`${total_validations} hrs are validated in ${language}`);
+    } else {
+        $say_p_3.text(`0 hr is recorded in ${language}`);
+        $listen_p_3.text(`0 hr is validated in ${language}`);
+    }
+    $sayLoader.addClass('d-none');
+    $listenLoader.addClass('d-none');
+}
+
 function getStatistics() {
     const $speakersData = $('#speaker-data');
-    const $speakersDataLoader = $speakersData.find('#loader1,#loader2, #loader3');
+    const $speakersDataLoader = $speakersData.find('#loader1, #loader2, #loader3');
     const $speakersDataSpeakerWrapper = $('#speakers-wrapper');
     const $speakersDataSpeakerValue = $('#speaker-value');
     const $speakersDataHoursWrapper = $('#hours-wrapper');
@@ -55,7 +78,7 @@ function getStatistics() {
                 $speakersDataHoursWrapper.removeClass('d-none');
                 $speakersDataSpeakerWrapper.removeClass('d-none');
                 $speakersDataLanguagesWrapper.removeClass('d-none');
-                // localStorage.setItem('speakersData', JSON.stringify(data));
+                //localStorage.setItem('speakersData', JSON.stringify(data));
             } catch (error) {
                 console.log(error);
             }
@@ -93,8 +116,8 @@ function constructChart(response, xAxisLabel, yAxisLabel) {
     var valueLabel = series.bullets.push(new am4charts.LabelBullet());
     valueLabel.label.text = xAxisLabel === "total_speakers" ? "{total_speakers}" : "{total_contributions}";
     valueLabel.label.fontSize = 20;
-    valueLabel.label.horizontalCenter = "left";
-    valueLabel.label.dx = 5;
+    valueLabel.label.horizontalCenter = "right";
+    valueLabel.label.dx = 0;
 
     var cellSize = 35;
     chart.events.on("datavalidated", function(ev) {
@@ -187,6 +210,69 @@ function generateIndiaMap() {
     });
 }
 
+const setAggregateDataCountByLanguage = function () {
+    performAPIRequest(`/aggregate-data-count?byLanguage=true`)
+        .then((details) => {
+            localStorage.setItem('aggregateDataCountByLanguage', JSON.stringify(details.data));
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
+const getDefaultTargettedDiv = function (defaultLangId, $sayListenLanguage) {
+    let targetIndex = 0;
+    $sayListenLanguage.children().each(function (index, element) {
+        if (element.getAttribute('id') === defaultLangId) {
+            targetIndex = index;
+        }
+    });
+
+    return $sayListenLanguage.children()[targetIndex];
+}
+
+const setLangNavBar = (targetedDiv,top_lang, $languageNavBar) => {
+    const allDivs = $languageNavBar.children();
+    let targetttedDivIndex = -1
+    allDivs.each(function (index, element) {
+        if (element.getAttribute('value') === top_lang) {
+            targetttedDivIndex = index;
+        }
+    });
+
+    const previousActiveDiv = $languageNavBar.find('.active');
+    previousActiveDiv.removeClass('active');
+    const $6th_place = document.getElementById('6th_option');
+    if (targetttedDivIndex < 0) {
+        $6th_place.innerText = top_lang;
+        $6th_place.classList.remove('d-none');
+        $6th_place.classList.add('active');
+
+        $6th_place.setAttribute('value', top_lang);
+    } else {
+        allDivs[targetttedDivIndex].classList.add('active');
+        $6th_place.classList.add('d-none');
+    }
+}
+
+const setTop5LanInNavBar = function(){
+    const $languageNavBar= $('#language-nav-bar');
+    const $languageNavBarItems = $languageNavBar.children();
+    const $navBarLoader = $('#nav-bar-loader');
+    performAPIRequest('/top-languages-by-hours')
+        .then((details) => {
+            details.data.forEach((element,index)=>{
+                $languageNavBarItems[index].setAttribute('value',element.language);
+                $languageNavBarItems[index].innerText = element.language;
+            })
+            $navBarLoader.addClass('d-none');
+            $languageNavBar.removeClass('d-none');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
 $(document).ready(function () {
     const speakerDetailsKey = 'speakerDetails';
     const defaultLang = 'Odia';
@@ -209,24 +295,43 @@ $(document).ready(function () {
         placement: screen.availWidth > 500 ? 'right' : 'auto',
     });
 
-    setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
-
-    genderRadios.forEach((element) => {
-        element.addEventListener('click', (e) => {
-            if (e.target.previous) {
-                e.target.checked = false;
-            }
-            e.target.previous = e.target.checked;
-        });
-    });
+    setTop5LanInNavBar();
 
     let top_lang;
-    $('#say-listen-language').on('click',(e)=>{
-        top_lang  = e.target.getAttribute("value");
+
+    const $languageNavBar = $('#language-nav-bar');
+    const $sayListenLanguage = $('#say-listen-language')
+    const $homePage = document.getElementById('home-page');
+    const defaultLangId = $homePage.getAttribute('default-lang');
+    const targettedDiv = getDefaultTargettedDiv(defaultLangId, $sayListenLanguage);
+    top_lang = targettedDiv.getAttribute("value");
+    setLangNavBar(targettedDiv, top_lang, $languageNavBar);
+    updateHrsForSayAndListen(top_lang);
+
+    $sayListenLanguage.on('click',(e)=>{
+        let targetedDiv = e.target;
+        top_lang = targetedDiv.getAttribute("value");
+        setLangNavBar(targetedDiv, top_lang, $languageNavBar);
+        updateHrsForSayAndListen(top_lang);
+    })
+
+    $languageNavBar.on('click', (e) => {
+        const targetedDiv = e.target;
+        top_lang = targetedDiv.getAttribute('value');
+        const previousActiveDiv = $languageNavBar.find('.active');
+        previousActiveDiv.removeClass('active');
+        const $6th_place = $('#6th_option')
+        $6th_place.addClass('d-none');
+        targetedDiv.classList.add('active');
+        updateHrsForSayAndListen(top_lang);
     })
 
     $('#start_recording').on('click', () => {
-        sentenceLanguage = top_lang || "Hindi";
+        if (top_lang === "Hindi" || top_lang === "Odia") {
+            sentenceLanguage = top_lang;
+        } else {
+            sentenceLanguage = "Hindi";
+        }
     });
 
     $('[name="topLanguageChart"]').on('change', (event) => {
@@ -237,17 +342,18 @@ $(document).ready(function () {
         }
     });
 
-    // let languageBottom = defaultLang;
-    // $('#language').on('change', (e) => {
-    //     languageBottom = e.target.value;
-    //     updateLanguage(languageBottom);
-    //     updateLanguageInButton(languageBottom);
-    //     updateGraph(languageBottom);
-    // });
+    setAggregateDataCountByLanguage();
 
-    // $('#start-record').on('click', () => {
-    //     sentenceLanguage = languageBottom;
-    // });
+    setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+
+    genderRadios.forEach((element) => {
+        element.addEventListener('click', (e) => {
+            if (e.target.previous) {
+                e.target.checked = false;
+            }
+            e.target.previous = e.target.checked;
+        });
+    });
 
     setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
     $tncCheckbox.change(function () {
@@ -301,29 +407,29 @@ $(document).ready(function () {
     const $listen_p_2 = $('#listen-p-2');
     const $say_p_2 = $('#say-p-2');
 
-    $say.hover(()=>{
+    $say.hover(() => {
         $say.removeClass('col-lg-5');
         $listen.removeClass('col-lg-5');
-        $say.addClass('col-lg-7');
-        $listen.addClass('col-lg-3');
+        $say.addClass('col-lg-6');
+        $listen.addClass('col-lg-4');
         $say_p_2.removeClass('d-none');
-    }, ()=>{
-        $say.removeClass('col-lg-7');
-        $listen.removeClass('col-lg-3');
+    }, () => {
+        $say.removeClass('col-lg-6');
+        $listen.removeClass('col-lg-4');
         $say.addClass('col-lg-5');
         $listen.addClass('col-lg-5');
         $say_p_2.addClass('d-none');
     })
 
-    $listen.hover(()=>{
+    $listen.hover(() => {
         $say.removeClass('col-lg-5');
         $listen.removeClass('col-lg-5');
-        $listen.addClass('col-lg-7');
-        $say.addClass('col-lg-3');
+        $listen.addClass('col-lg-6');
+        $say.addClass('col-lg-4');
         $listen_p_2.removeClass('d-none');
-    }, ()=>{
-        $say.removeClass('col-lg-3');
-        $listen.removeClass('col-lg-7');
+    }, () => {
+        $say.removeClass('col-lg-4');
+        $listen.removeClass('col-lg-6');
         $say.addClass('col-lg-5');
         $listen.addClass('col-lg-5');
         $listen_p_2.addClass('d-none');

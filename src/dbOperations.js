@@ -1,5 +1,5 @@
-const { encrypt } = require('./encryptAndDecrypt');
-const { getFile } = require('./downloader')
+const {encrypt} = require('./encryptAndDecrypt');
+const { downloader } = require('./downloader/objDownloader')
 const {
     UpdateAudioPathAndUserDetails,
     setNewUserAndFileName,
@@ -22,7 +22,7 @@ const { topLanguagesBySpeakerContributions, topLanguagesByHoursContributed, cumu
 const { KIDS_AGE_GROUP, ADULT, KIDS } = require('./constants');
 const envVars = process.env;
 const pgp = require('pg-promise')();
-const showUniqueSentences = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION||true;
+const showUniqueSentences = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION == 'true';
 
 let cn = {
     user: envVars.DB_USER,
@@ -171,19 +171,23 @@ const getValidationSentences = function (req, res) {
         });
 };
 
-const getAudioClip = function (req, res) {
+const getAudioClip = function (req, res, objectStorage) {
     if (!(req.body && req.body.file)) {
         res.status(400).send('No file selected.');
         return;
     }
-    const file = getFile(req.body.file)
+
+
+  const downloadFile = downloader(objectStorage);
+
+    const file = downloadFile(req.body.file);
     file.exists().then((result)=>{
         if(result[0]){
             const readStream = file.createReadStream();
             readStream.pipe(res);
         }
         else
-            res.sendStatus(500);
+            res.sendStatus(404);
     })
 }
 

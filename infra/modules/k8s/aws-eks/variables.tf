@@ -15,7 +15,7 @@ variable "worker_groups" {
   default = [
     {
       instance_type        = "t2.medium"
-      asg_desired_capacity = 3
+      asg_desired_capacity = 0
       asg_max_size         = 6
       key_name             = ""
       root_volume_type     = "gp2"
