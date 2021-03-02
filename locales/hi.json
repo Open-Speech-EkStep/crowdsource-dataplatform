@@ -1,18 +1,6 @@
 {
 	"-----------HOME PAGE STARTS-----------": "-----------HOME PAGE STARTS-----------",
 	"Language": "भाषा",
-	"Assamese": "Assamese",
-	"Bengali": "Bengali",
-	"English": "English",
-	"Gujrati": "Gujrati",
-	"Hindi": "Hindi",
-	"Kannada": "Kannada",
-	"Malayalam": "Malayalam",
-	"Marathi": "Marathi",
-	"Odia": "Odia",
-	"Punjabi": "Punjabi",
-	"Tamil": "Tamil",
-	"Telugu": "Telugu",
 	"Speech Recognition Models": "भाषण मान्यता मॉडल",
 	"About Us": "हमारे बारे में",
 	"Say": "कहो",
@@ -122,6 +110,10 @@
 	"total validated": "कुल मान्य",
 	"total contributed": "कुल योगदान",
 	"Validate More": "अधिक मान्य",
-	"-----------VALIDATOR PAGE ENDS---------": "-----------VALIDATOR PAGE END-----------"
-
+	"-----------VALIDATOR PAGE ENDS---------": "-----------VALIDATOR PAGE END-----------",
+	"Kannada": "Kannada",
+	"Odia": "Odia",
+	"Hindi": "Hindi",
+	"Tamil": "Tamil",
+	"Telugu": "Telugu"
 }
