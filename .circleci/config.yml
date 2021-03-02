@@ -66,6 +66,7 @@ jobs:
           command: |
             aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
             ENV_IMAGE_NAME=${AWS_ECR_ACCOUNT_URL}/${REPO}:<< parameters.env-name >>
+            kubectl set image deployment vakyansh vakyansh=$ENV_IMAGE_NAME
             sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g" ${HOME}/project/deployments/k8s/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
 
           name: Deploy container
@@ -79,6 +80,8 @@ workflows:
       - db_migrate_aws:
           name: migrate_dev_aws
           db_name: ${DEV_DB_NAME}
+          requires:
+             - node/test
 
       - aws-ecr/build-and-push-image:
           name: push_dev_image
@@ -98,6 +101,8 @@ workflows:
       - db_migrate_aws:
           name: migrate_test_aws
           db_name: ${TEST_DB_NAME}
+          requires:
+            - dev_deployment_eks
 
       - aws-ecr/build-and-push-image:
           name: push_test_image
@@ -105,21 +110,25 @@ workflows:
           tag: test
           requires:
             - migrate_test_aws
+
       - eks_fargate_deployment:
           name: test_deployment_eks
           cluster-name: ${CLUSTER_NAME}
           env-name: test
           requires:
             - push_test_image
-      - run_functional_tests:
-          name: functional_tests
-          requires:
-            - test_deployment_eks
+
+      # - run_functional_tests:
+      #     name: functional_tests
+      #     requires:
+      #       - test_deployment_eks
+
       - approve_to_deploy:
           name: approve_prod_deployment_eks
           type: approval
           requires:
             - test_deployment_eks
+
       - db_migrate_aws:
           name: migrate_prod_aws
           db_name: ${TEST_DB_NAME}
