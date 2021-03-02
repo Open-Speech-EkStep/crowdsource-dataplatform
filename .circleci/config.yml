@@ -186,11 +186,30 @@ workflows:
                version: "13.4"
 
           - db_migrate_aws:
+               name: migrate_dev_aws
+               db_name: ${DEV_DB_NAME}
+
+          - aws-ecr/build-and-push-image:
+              name: push_dev_image
+              repo: ${REPO}
+              tag: dev
+              requires:
+                #  - node/test
+                 - migrate_dev_aws
+
+          - eks_fargate_deployment:
+              name: dev_deployment_eks
+              cluster-name: ${CLUSTER_NAME}
+              env-name: dev
+              requires:
+                - push_dev_image
+
+          - db_migrate_aws:
                name: migrate_test_aws
                db_name: ${TEST_DB_NAME}
 
           - aws-ecr/build-and-push-image:
-              name: push_dev_image
+              name: push_test_image
               repo: ${REPO}
               tag: test
               requires:
@@ -202,7 +221,7 @@ workflows:
               cluster-name: ${CLUSTER_NAME}
               env-name: test
               requires:
-                - push_dev_image
+                - push_test_image
 
 
           - approve_to_deploy:
