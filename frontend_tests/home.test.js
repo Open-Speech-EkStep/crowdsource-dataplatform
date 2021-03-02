@@ -43,8 +43,26 @@ describe('fetchDetails', () => {
     test('should give details for given language if server responds ok', () => {
         const language = 'Hindi';
         fetchMock.get(`getDetails/${language}`, {count: 5});
-        fetchDetail(language).then((data) => {
+        fetchDetail(`getDetails/${language}`).then((data) => {
             expect(data).toEqual({count: 5});
+            fetchMock.reset();
+        });
+    });
+
+
+    test('should give details for all language if server responds ok', () => {
+        fetchMock.get(`/aggregate-data-count?byLanguage=${true}`, [{language:"Hindi",count: 5}]);
+        fetchDetail(`/aggregate-data-count?byLanguage=${true}`).then((data) => {
+            expect(data).toEqual([{language:"Hindi",count: 5}]);
+            fetchMock.reset();
+        });
+    });
+
+    test('should give list for top-5 languages based on no. of contributions if server responds ok', () => {
+        const response = [{language:"Hindi",contributions: 5},{language:"Odia",contributions:4}];
+        fetchMock.get('/top-languages-by-hours', response);
+        fetchDetail('/top-languages-by-hours').then((data) => {
+            expect(data).toEqual(response);
             fetchMock.reset();
         });
     });

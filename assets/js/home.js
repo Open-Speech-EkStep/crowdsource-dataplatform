@@ -24,29 +24,8 @@ function calculateTime(totalSentence) {
     return {hours, minutes, seconds};
 }
 
-const fetchDetail = (language) => {
-    return fetch(`/getDetails/${language}`).then((data) => {
-        if (!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
-        } else {
-            return Promise.resolve(data.json());
-        }
-    });
-};
-
-
-const fetchHrsDetail = () => {
-    return fetch(`/aggregate-data-count?byLanguage=${true}`).then((data) => {
-        if (!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
-        } else {
-            return Promise.resolve(data.json());
-        }
-    });
-};
-
-const fetchTop5Lan = () => {
-    return fetch('/top-languages-by-hours').then((data) => {
+const fetchDetail = (url) => {
+    return fetch(url).then((data) => {
         if (!data.ok) {
             throw Error(data.statusText || 'HTTP error');
         } else {
@@ -88,7 +67,7 @@ function updateLanguage(language) {
     $speakersDataHoursWrapper.addClass('d-none');
     $speakersDataSpeakerWrapper.addClass('d-none');
 
-    fetchDetail(language)
+    fetchDetail(`/getDetails/${language}`)
         .then((data) => {
             try {
                 const totalSentence = data.find((t) => t.index === 1).count;
@@ -110,7 +89,7 @@ function updateLanguage(language) {
 }
 
 const setAggregateDataCountByLanguage = function () {
-    fetchHrsDetail()
+    fetchDetail(`/aggregate-data-count?byLanguage=${true}`)
         .then((details) => {
             localStorage.setItem('aggregateDataCountByLanguage', JSON.stringify(details.data));
         })
@@ -119,15 +98,16 @@ const setAggregateDataCountByLanguage = function () {
         });
 }
 
-const getDefaultTargettedDiv = function (defaultLangId, $sayListenLanguage) {
+const getDefaultTargettedDiv = function (key, value, $sayListenLanguage) {
     let targetIndex = 0;
-    $sayListenLanguage.children().each(function (index, element) {
-        if (element.getAttribute('id') === defaultLangId) {
+    const  $sayListenLanguageItems = $sayListenLanguage.children();
+    $sayListenLanguageItems.each(function (index, element) {
+        if (element.getAttribute(key) === value) {
             targetIndex = index;
         }
     });
 
-    return $sayListenLanguage.children()[targetIndex];
+    return $sayListenLanguageItems[targetIndex];
 }
 
 const setLangNavBar = (targetedDiv,top_lang, $languageNavBar) => {
@@ -150,6 +130,7 @@ const setLangNavBar = (targetedDiv,top_lang, $languageNavBar) => {
         $6th_place.setAttribute('value', top_lang);
     } else {
         allDivs[targetttedDivIndex].classList.add('active');
+        $6th_place.classList.remove('active');
         $6th_place.classList.add('d-none');
     }
 }
@@ -158,19 +139,40 @@ const setTop5LanInNavBar = function(){
     const $languageNavBar= $('#language-nav-bar');
     const $languageNavBarItems = $languageNavBar.children();
     const $navBarLoader = $('#nav-bar-loader');
-    fetchTop5Lan()
+    fetchDetail('/top-languages-by-hours')
         .then((details) => {
-            console.log(details.data)
             details.data.forEach((element,index)=>{
                 $languageNavBarItems[index].setAttribute('value',element.language);
                 $languageNavBarItems[index].innerText = element.language;
             })
             $navBarLoader.addClass('d-none');
             $languageNavBar.removeClass('d-none');
-        })
+        }).then(()=>{
+        setDefaultLang();
+    })
         .catch((err) => {
             console.log(err);
         });
+}
+
+const setDefaultLang = function (){
+    const contributionLanguage = localStorage.getItem('contributionLanguage');
+    const $sayListenLanguage = $('#say-listen-language');
+    const  $languageNavBar = $('#language-nav-bar')
+
+    if(!contributionLanguage){
+        const $homePage = document.getElementById('home-page');
+        const defaultLangId = $homePage.getAttribute('default-lang');
+        const targettedDiv = getDefaultTargettedDiv('id',defaultLangId, $sayListenLanguage);
+        const language = targettedDiv.getAttribute("value");
+        localStorage.setItem('contributionLanguage', language);
+        updateHrsForSayAndListen(language);
+        setLangNavBar(targettedDiv, language, $languageNavBar);
+        return;
+    }
+    const targettedDiv = getDefaultTargettedDiv('value',contributionLanguage, $sayListenLanguage);
+    updateHrsForSayAndListen(contributionLanguage);
+    setLangNavBar(targettedDiv, contributionLanguage, $languageNavBar);
 }
 
 $(document).ready(function () {
@@ -196,56 +198,54 @@ $(document).ready(function () {
     });
 
     setTop5LanInNavBar();
-
-    let top_lang;
-
+    let top_lang = localStorage.getItem('contributionLanguage');
     const $languageNavBar = $('#language-nav-bar');
-    const $sayListenLanguage = $('#say-listen-language')
-    const $homePage = document.getElementById('home-page');
-    const defaultLangId = $homePage.getAttribute('default-lang');
-    const targettedDiv = getDefaultTargettedDiv(defaultLangId, $sayListenLanguage);
-    top_lang = targettedDiv.getAttribute("value");
-    setLangNavBar(targettedDiv, top_lang, $languageNavBar);
-    updateHrsForSayAndListen(top_lang);
+    const $sayListenLanguage = $('#say-listen-language');
 
     $sayListenLanguage.on('click',(e)=>{
-        let targetedDiv = e.target;
-        top_lang = targetedDiv.getAttribute("value");
-        setLangNavBar(targetedDiv, top_lang, $languageNavBar);
-        updateHrsForSayAndListen(top_lang);
+        const targetedDiv = e.target;
+        const language = targetedDiv.getAttribute("value");
+        top_lang = language;
+        localStorage.setItem('contributionLanguage',language);
+        setLangNavBar(targetedDiv, language, $languageNavBar);
+        updateHrsForSayAndListen(language);
     })
 
     $languageNavBar.on('click', (e) => {
         const targetedDiv = e.target;
-        top_lang = targetedDiv.getAttribute('value');
-        const previousActiveDiv = $languageNavBar.find('.active');
-        previousActiveDiv.removeClass('active');
+        const language = targetedDiv.getAttribute('value');
+        top_lang = language;
+        localStorage.setItem('contributionLanguage',language);
         const $6th_place = $('#6th_option')
+        const previousActiveDiv = $languageNavBar.find('.active') || $6th_place;
+        previousActiveDiv.removeClass('active');
         $6th_place.addClass('d-none');
         targetedDiv.classList.add('active');
-        updateHrsForSayAndListen(top_lang);
+        updateHrsForSayAndListen(language);
     })
+
+    setAggregateDataCountByLanguage();
 
     $('#start_recording').on('click', () => {
         if (top_lang === "Hindi" || top_lang === "Odia") {
             sentenceLanguage = top_lang;
         } else {
-            sentenceLanguage = "Hindi";
+            sentenceLanguage = "Odia";
         }
     });
 
-    setAggregateDataCountByLanguage();
+    let bottomLanguage = defaultLang;
 
-    let languageBottom = defaultLang;
     $('#language').on('change', (e) => {
-        languageBottom = e.target.value;
-        updateLanguage(languageBottom);
-        updateLanguageInButton(languageBottom);
-        updateGraph(languageBottom);
+        const language = e.target.value;
+        bottomLanguage = language;
+        updateLanguage(language);
+        updateLanguageInButton(language);
+        updateGraph(language);
     });
 
     $('#start-record').on('click', () => {
-        sentenceLanguage = languageBottom;
+        sentenceLanguage = bottomLanguage;
     });
 
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
@@ -290,7 +290,7 @@ $(document).ready(function () {
                 age: age.value,
                 motherTongue: motherTongue.value,
                 userName: userNameValue,
-                language: sentenceLanguage,
+                language: "Odia",
             };
             localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
             location.href = '/record';
