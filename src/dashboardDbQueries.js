@@ -14,10 +14,9 @@ const monthlyTimeline = "select year, month, language, ROUND(cumulative_contribu
 
 const monthlyTimelineCumulative = "SELECT year, month, ROUND(cumulative_contributions::decimal *6/3600,3) as cumulative_contributions,ROUND(cumulative_validations::decimal *6/3600,3) as cumulative_validations FROM monthly_cumulative_stats_all;";
 
-const quarterlyTimeline = "";
+const quarterlyTimeline = "select year, month,language, ROUND(cumulative_contributions::decimal *6/3600,3) as cumulative_contributions,ROUND(cumulative_validations::decimal *6/3600,3) as cumulative_validations from monthly_cumulative_stats_per_language where $1:raw ORDER BY year DESC,month DESC LIMIT 3;";
 
-const quarterlyTimelineCumulative = "";
-
+const quarterlyTimelineCumulative = "SELECT year, month, ROUND(cumulative_contributions::decimal *6/3600,3) as cumulative_contributions,ROUND(cumulative_validations::decimal *6/3600,3) as cumulative_validations FROM monthly_cumulative_stats_all ORDER BY year DESC,month DESC LIMIT 3;";
 
 const cumulativeCount = "select count(distinct(language)) as total_languages, count(distinct(contributed_by)) as total_speakers,ROUND(count(distinct(contribution_id))::decimal *6/3600,3)  as total_contributions,ROUND(sum(is_validated)::decimal *6/3600,3)  as total_validations from contributions_and_demo_stats;";
 
@@ -32,6 +31,7 @@ const listLanguages = "select distinct(language) from contributions_and_demo_sta
 const topLanguagesBySpeakerContributions = "select language,count(distinct(contributed_by)) as total_speakers from contributions_and_demo_stats group by language ORDER BY total_speakers DESC LIMIT 5;";
 
 const topLanguagesByHoursContributed = "select language,ROUND(count(distinct(contribution_id))::decimal *6/3600,3)  as total_contributions from contributions_and_demo_stats group by language ORDER BY total_contributions DESC LIMIT 5;";
+
 
 module.exports = {
     listLanguages,
