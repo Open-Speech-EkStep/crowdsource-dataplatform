@@ -239,3 +239,22 @@ body.modal-open .supreme-container {
     left:auto;
   }
 }
+
+.card{
+  /*background: #FFFFFF;*/
+  background-image: url("https://static.vecteezy.com/system/resources/previews/000/204/357/large_2x/vector-abstract-wave-design.jpg");
+  mix-blend-mode: normal;
+  box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  min-height: 100px;
+}
+
+@media (min-width: 992px) {
+  .card{
+    height: 450px;
+  }
+}
+
+.options:hover{
+  color:#5d5d5d;
+}

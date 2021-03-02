@@ -2,6 +2,9 @@ version: 2.1
 orbs:
   node: circleci/node@4.1.0
   aws-ecr: circleci/aws-ecr@6.9.1
+  aws-eks: circleci/aws-eks@1.0.3
+  aws-cli: circleci/aws-cli@1.4.0
+  kubernetes: circleci/kubernetes@0.11.2
 commands:
     create_yaml:
         parameters:
@@ -88,48 +91,148 @@ jobs:
         executor:
             name: node/default
         steps:
-            - checkout
-            - run :
-                name: Run DB Proxy
+            # - checkout
+            # - run :
+            #     name: Run DB Proxy
+            #     command: |
+            #       sudo apt-get update
+            #       sudo apt-get install wget
+            #       wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-265.0.0-linux-x86_64.tar.gz
+            #       tar -zxf google-cloud-sdk-*
+            #       cd google-cloud-sdk
+            #       pwd
+            #       ./install.sh --quiet
+            #       echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
+            #       ./bin/gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
+            #       ./bin/gcloud --quiet config set project ${GCP_PROJECT}
+            #       export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/gcp-key.json
+            #       echo $GOOGLE_APPLICATION_CREDENTIALS
+            #       wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+            #       chmod +x cloud_sql_proxy
+            #       nohup ./cloud_sql_proxy -dir=./cloudsql -instances=ekstepspeechrecognition:us-central1:crowdsourcedb=tcp:5432 &
+            #       sleep 25s
+            #       cat nohup.out
+            # - node/install-packages
+            - run:
+                name: Run DB Migrate
                 command: |
-                  sudo apt-get update
-                  sudo apt-get install wget
-                  wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-265.0.0-linux-x86_64.tar.gz
-                  tar -zxf google-cloud-sdk-*
-                  cd google-cloud-sdk
-                  pwd
-                  ./install.sh --quiet
-                  echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
-                  ./bin/gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
-                  ./bin/gcloud --quiet config set project ${GCP_PROJECT}
-                  export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/gcp-key.json
-                  echo $GOOGLE_APPLICATION_CREDENTIALS
-                  wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
-                  chmod +x cloud_sql_proxy
-                  nohup ./cloud_sql_proxy -dir=./cloudsql -instances=ekstepspeechrecognition:us-central1:crowdsourcedb=tcp:5432 &
-                  sleep 25s
-                  cat nohup.out
+                    # export DATABASE_URL=postgresql://${DEV_DB_USER}:${DEV_DB_PASS}@127.0.0.1/<< parameters.db_name >>
+                    # echo << parameters.db_name >>
+                    # npx db-migrate up
+                    echo dummy
+
+    db_migrate_aws:
+        parameters:
+            db_name:
+              type: string
+        executor:
+            name: node/default
+        steps:
+            - checkout
             - node/install-packages
             - run:
                 name: Run DB Migrate
                 command: |
-                    export DATABASE_URL=postgresql://${DEV_DB_USER}:${DEV_DB_PASS}@127.0.0.1/<< parameters.db_name >>
                     echo << parameters.db_name >>
+                    export DATABASE_URL=postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@{DB_HOST_AWS}/<< parameters.db_name >>
+                    echo << parameters.db_name >>
+                    echo $DATABASE_URL
                     npx db-migrate up
 
+    # build_and_push_image_ecr:
+    #     parameters:
+    #       env-name:
+    #         description: |
+    #           Name of the env
+    #         type: string
+    #     executor:
+    #         name: node/default
+    #     steps:
+    #       - aws-ecr/build-and-push-image:
+    #           repo: ${REPO}
+    #           tag: << parameters.env-name >>
 
+    eks_fargate_deployment:
+        executor: aws-eks/python3
+        parameters:
+          cluster-name:
+            description: |
+              Name of the EKS cluster
+            type: string
+          env-name:
+            description: |
+              Name of the env
+            type: string
+          
+        steps:
+          - checkout
+          - aws-cli/setup:
+              profile-name: circle-ci
+          - kubernetes/install
+          - run:
+              command: |
+                 aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
+                 ENV_IMAGE_NAME=${AWS_ECR_ACCOUNT_URL}/${REPO}:<< parameters.env-name >>
+                 sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g" ${HOME}/project/deployments/k8s/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
 
+              name: Deploy container 
 
 
 
 workflows:
     build_test_deploy:
         jobs:
-          - aws-ecr/build-and-push-image:
-                repo: ${REPO}
-                tag: "test,prod"
           - node/test:
-                version: "13.4"
+               version: "13.4"
+
+          - db_migrate_aws:
+               name: migrate_test_aws
+               db_name: ${TEST_DB_NAME}
+
+          - aws-ecr/build-and-push-image:
+              name: push_dev_image
+              repo: ${REPO}
+              tag: test
+              requires:
+                 - node/test
+
+          - eks_fargate_deployment:
+              name: dev_deployment_eks
+              cluster-name: ${CLUSTER_NAME}
+              env-name: test
+              requires:
+                - push_dev_image
+
+
+          - approve_to_deploy:
+                name: approve_prod_deployment_eks
+                type: approval
+                requires:
+                   - push_dev_image
+                   - dev_deployment_eks
+
+          - db_migrate_aws:
+               name: migrate_prod_aws
+               db_name: ${TEST_DB_NAME}
+               requires:
+                 - approve_prod_deployment_eks
+
+          - aws-ecr/build-and-push-image:
+              name: push_prod_image
+              repo: ${REPO}
+              tag: prod
+              requires:
+                #  - migrate_prod_aws
+                 - approve_prod_deployment_eks
+
+          - eks_fargate_deployment:
+              name: prod_deployment_eks
+              cluster-name: ${CLUSTER_NAME}
+              env-name: prod
+              requires:
+                 - push_prod_image
+                 - approve_prod_deployment_eks  
+
           - db_migrate:
                name: migrate_dev
                db_name: ${DEV_DB_NAME}
