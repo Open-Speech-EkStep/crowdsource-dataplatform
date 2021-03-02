@@ -194,7 +194,7 @@ workflows:
               repo: ${REPO}
               tag: test
               requires:
-                 - node/test
+                #  - node/test
                  - migrate_test_aws
 
           - eks_fargate_deployment:
