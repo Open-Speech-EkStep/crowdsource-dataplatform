@@ -17,11 +17,12 @@ const {
     addValidationQuery,
     updateSentencesWithValidatedState
 } = require('./dbQuery');
-const {KIDS_AGE_GROUP, ADULT, KIDS} = require('./constants');
-const process = require('process');
+const { topLanguagesBySpeakerContributions, topLanguagesByHoursContributed, cumulativeCount, cumulativeDataByState, cumulativeDataByLanguage, cumulativeDataByLanguageAndState, listLanguages, dailyTimeline, ageGroupContributions, genderGroupContributions,dailyTimelineCumulative } = require('./dashboardDbQueries');
+
+const { KIDS_AGE_GROUP, ADULT, KIDS } = require('./constants');
 const envVars = process.env;
 const pgp = require('pg-promise')();
-const showUniqueSentences = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION||true;
+const showUniqueSentences = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION == 'true';
 
 let cn = {
     user: envVars.DB_USER,
@@ -74,18 +75,18 @@ const updateDbWithAudioPath = function (
             db.none(updateSentencesWithContributedState, [sentenceId]).then();
             if (!data || !data.length) {
                 db.any(setNewUserAndFileName, [audioPath, encryptUserId, sentenceId])
-                    .then(() => cb(200, {success: true}))
+                    .then(() => cb(200, { success: true }))
                     .catch((err) => {
                         console.log(err);
-                        cb(500, {error: true});
+                        cb(500, { error: true });
                     });
             } else {
-                cb(200, {success: true});
+                cb(200, { success: true });
             }
         })
         .catch((err) => {
             console.log(err);
-            cb(500, {error: true});
+            cb(500, { error: true });
         });
 };
 
@@ -126,7 +127,7 @@ const updateAndGetSentences = function (req, res) {
     const motherTongue = req.body.motherTongue;
     const gender = req.body.gender;
     if (!userId || userName === null || userName === undefined) {
-        res.status(400).send({error: 'required parameters missing'});
+        res.status(400).send({ error: 'required parameters missing' });
         return;
     }
     const ageGroup = req.body.age;
@@ -150,7 +151,7 @@ const updateAndGetSentences = function (req, res) {
     );
     Promise.all([sentences, count, unAssign, unAssignWhenLanChange])
         .then((response) => {
-            res.status(200).send({data: response[0], count: response[1].count});
+            res.status(200).send({ data: response[0], count: response[1].count });
         })
         .catch((err) => {
             console.log(err);
@@ -162,7 +163,7 @@ const getValidationSentences = function (req, res) {
     const language = req.params.language;
     db.any(getValidationSentencesQuery, [language])
         .then((response) => {
-            res.status(200).send({data: response})
+            res.status(200).send({ data: response })
         })
         .catch((err) => {
             console.log(err);
@@ -192,7 +193,7 @@ const getAudioClip = function (req, res, objectStorage) {
 
 const updateTablesAfterValidation = function (req, res) {
     const validatorId = req.cookies.userId;
-    const {sentenceId, action} = req.body
+    const { sentenceId, action } = req.body
     return db.none(addValidationQuery, [validatorId, sentenceId, action]).then(() => {
         if (action !== 'skip')
             db.none(updateSentencesWithValidatedState, [sentenceId]).then(() => {
@@ -221,6 +222,62 @@ const getAllInfo = function (language) {
     return Promise.all([genderData, ageGroups, motherTongues]);
 };
 
+
+const getTopLanguageByHours = () => {
+    return db.any(topLanguagesByHoursContributed);
+};
+
+const getTopLanguageBySpeakers = () => {
+    return db.any(topLanguagesBySpeakerContributions);
+};
+
+const getAggregateDataCount = (language, state) => {
+    let query = "";
+    if (language && state) {
+        query = cumulativeDataByLanguageAndState;
+    } else if (language) {
+        query = cumulativeDataByLanguage;
+    } else if (state) {
+        query = cumulativeDataByState;
+    } else {
+        query = cumulativeCount;
+    }
+    return db.many(query);
+}
+
+const getLanguages = () => {
+    return db.any(listLanguages, []);
+}
+
+const getTimeline = (language = "") => {
+    if (language.length !== 0) {
+        languageFilter = `language iLike '${language}'`
+        let filter = pgp.as.format('$1:raw', [languageFilter])
+        return db.any(dailyTimeline, filter);
+    } else {
+        return db.any(dailyTimelineCumulative, []);
+    }
+}
+
+const getGenderGroupData = (language = '') => {
+    let languageFilter = 'true';
+    if (language.length !== 0) {
+        languageFilter = `language iLike '${language}'`
+    }
+    let filter = pgp.as.format('$1:raw', [languageFilter])
+    console.log(filter);
+    return db.any(genderGroupContributions, filter);
+}
+
+const getAgeGroupData = (language = '') => {
+    let languageFilter = "true";
+    if (language.length !== 0) {
+        languageFilter = `language iLike '${language}'`
+    }
+    let filter = pgp.as.format('$1:raw', [languageFilter])
+    return db.any(ageGroupContributions, filter);
+}
+
 module.exports = {
     updateAndGetSentences,
     getValidationSentences,
@@ -228,5 +285,12 @@ module.exports = {
     updateTablesAfterValidation,
     getAllDetails,
     getAllInfo,
-    getAudioClip
+    getAudioClip,
+    getTopLanguageByHours,
+    getAggregateDataCount,
+    getTopLanguageBySpeakers,
+    getLanguages,
+    getTimeline,
+    getAgeGroupData,
+    getGenderGroupData
 };
