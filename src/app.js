@@ -99,7 +99,9 @@ app.get('/changeLocale/:locale', function (req, res) {
 app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
-  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES });
+  const isCookiePresent = req.cookies.userId ? true : false;
+  const top_5_languages = ["Kannada","Odia", "Hindi","Tamil", "Telugu"];
+  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent, top_5_languages, defaultLang:req.cookies.i18n });
 });
 
 router.get('/getDetails/:language', async function (req, res) {
@@ -147,7 +149,7 @@ router.get('/validator-page', (req, res) => {
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 router.get('/validation/sentences/:language', (req, res) => getValidationSentences(req, res));
 router.post('/validation/action', (req, res) => updateTablesAfterValidation(req, res))
-router.post('/audioClip', (req, res) => getAudioClip(req, res))
+router.post('/audioClip', (req, res) => getAudioClip(req, res, objectStorage))
 router.post('/upload', (req, res) => {
   const file = req.file;
   const sentenceId = req.body.sentenceId;

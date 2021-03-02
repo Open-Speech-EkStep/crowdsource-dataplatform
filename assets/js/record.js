@@ -83,7 +83,7 @@ const initialize = () => {
     //     'Yay! Done & Dusted!',
     // ];
 
-    const progressMessages = [
+    let progressMessages = [
         'Let’s get started',
         'We know you can do more! ',
         'You are halfway there. Keep going!',
@@ -91,6 +91,37 @@ const initialize = () => {
         'Four dead, one more to go!',
         'Yay! Done & Dusted!',
     ];
+
+    if (sentences.length == 4) {
+        progressMessages = [
+            'Let’s get started',
+            'We know you can do more! ',
+            'You are halfway there. Keep going!',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }
+    else if (sentences.length == 3) {
+        progressMessages = [
+            'Let’s get started',
+            'We know you can do more! ',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }
+    else if (sentences.length == 2) {
+        progressMessages = [
+            'Let’s get started',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }    
+    else if (sentences.length == 1) {
+        progressMessages = [
+            'Let’s get started',
+            'Yay! Done & Dusted!'
+        ];
+    }
 
     $nextBtnToolTip.tooltip({
         container: 'body',
@@ -292,7 +323,9 @@ const initialize = () => {
                 $pageContent.addClass('d-none')
             );
             setProgressBar(currentIndex);
-            localStorage.removeItem(sentencesKey);
+            const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
+            Object.assign(sentencesObj, {sentences:[]});
+            localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj) );
             localStorage.setItem(currentIndexKey, currentIndex);
             notyf.success(
                 'Congratulations!!! You have completed this batch of sentences'
@@ -333,8 +366,8 @@ const initialize = () => {
         fd.append('audio_data', crowdSource.audioBlob);
         fd.append('speakerDetails', speakerDetails);
         fd.append('sentenceId', crowdSource.sentences[currentIndex].sentenceId);
-        fd.append('state',localStorage.getItem('state_region') || "");
-        fd.append('country',localStorage.getItem('country') || "");
+        fd.append('state', localStorage.getItem('state_region') || "");
+        fd.append('country', localStorage.getItem('country') || "");
         fetch('/upload', {
             method: 'POST',
             body: fd,
@@ -398,11 +431,11 @@ $(document).ready(() => {
     const $pageContent = $('#page-content');
     const $navUser = $('#nav-user');
     const $navUserName = $navUser.find('#nav-username');
-    fetchLocationInfo().then(res=>{
+    fetchLocationInfo().then(res => {
         return res.json()
-    }).then(response=>{
+    }).then(response => {
         localStorage.setItem("state_region", response.regionName);
-        localStorage.setItem("country",response.country);
+        localStorage.setItem("country", response.country);
     }).catch(console.log);
     try {
         const localSpeakerData = localStorage.getItem(speakerDetailsKey);
@@ -433,13 +466,12 @@ $(document).ready(() => {
         $navUser.removeClass('d-none');
         $('#nav-login').addClass('d-none');
         $navUserName.text(localSpeakerDataParsed.userName);
-
-        if (
-            localSentencesParsed &&
+        const isExistingUser = localSentencesParsed &&
             localSentencesParsed.userName === localSpeakerDataParsed.userName
-            // &&
-            // localSentencesParsed.language === localSpeakerDataParsed.language
-        ) {
+            &&
+            localSentencesParsed.language === localSpeakerDataParsed.language;
+
+        if (isExistingUser && localSentencesParsed.sentences.length != 0) {
             crowdSource.sentences = localSentencesParsed.sentences;
             crowdSource.count = localCount;
             $loader.hide();
@@ -469,19 +501,26 @@ $(document).ready(() => {
                     }
                 })
                 .then((sentenceData) => {
-                    $instructionModal.modal('show');
+                    console.log(isExistingUser, sentenceData, "else part")
+                    if(!isExistingUser){
+                        $instructionModal.modal('show');
+                    } else {
+                        $pageContent.removeClass('d-none');
+                        toggleFooterPosition();
+                    }
                     crowdSource.sentences = sentenceData.data;
                     crowdSource.count = Number(sentenceData.count);
                     $loader.hide();
-                    initialize();
                     localStorage.setItem(
                         sentencesKey,
                         JSON.stringify({
                             userName: localSpeakerDataParsed.userName,
                             sentences: sentenceData.data,
+                            language: localSpeakerDataParsed.language,
                         })
                     );
                     localStorage.setItem(countKey, sentenceData.count);
+                    initialize();
                 })
                 .catch((err) => {
                     console.log(err);

@@ -118,6 +118,10 @@ function getNextSentence() {
         resetDecisionRow();
         setSentenceLabel(currentIndex);
     }
+    else {
+        resetDecisionRow();
+        showThankYou();
+    }
 }
 
 const updateDecisionButton = (button, colors) => {
@@ -291,7 +295,23 @@ const getAudioClip = function (audioPath) {
             }
             fileReader.readAsDataURL(blob);
         });
+    }).catch((err)=>{
+        console.log(err)
     });
+}
+
+function showThankYou() {
+    $('#instructions-row').addClass('d-none')
+    $('#sentences-row').addClass('d-none')
+    $('#audio-row').addClass('d-none')
+    $('#thank-you-row').removeClass('d-none')
+}
+
+function showNoSentencesMessage() {
+    $('#instructions-row').addClass('d-none')
+    $('#sentences-row').addClass('d-none')
+    $('#audio-row').addClass('d-none')
+    $('#no-sentences-row').removeClass('d-none')
 }
 
 $(document).ready(() => {
@@ -307,6 +327,10 @@ $(document).ready(() => {
                 return data.json();
             }
         }).then((sentenceData) => {
+        if (sentenceData.data.length == 0){
+            showNoSentencesMessage();
+            return;
+        }
         validationSentences = sentenceData.data
         const sentence = validationSentences[currentIndex];
         if (sentence && sentence.audio_path) {
@@ -319,7 +343,9 @@ $(document).ready(() => {
             const $canvas = document.getElementById('myCanvas');
             visualizer.drawCanvasLine($canvas);
         }
-    })
+    }).catch((err)=>{
+        console.log(err)
+    });
 });
 
 module.exports = {
