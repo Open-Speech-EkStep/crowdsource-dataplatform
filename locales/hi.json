@@ -115,5 +115,11 @@
 	"Odia": "Odia",
 	"Hindi": "Hindi",
 	"Tamil": "Tamil",
-	"Telugu": "Telugu"
+	"Telugu": "Telugu",
+	"languages contributed": "languages contributed",
+	"hours recorded": "hours recorded",
+	"Thank you for your enthusiasm to validate the voice samples": "Thank you for your enthusiasm to validate the voice samples",
+	"We have recently commenced the data contribution journey for \"Y\" language and hope that very soon there will be voice samples collected for your validation.": "We have recently commenced the data contribution journey for \"Y\" language and hope that very soon there will be voice samples collected for your validation.",
+	"Would you also like to contribute your voice?": "Would you also like to contribute your voice?",
+	"Start Contributing": "Start Contributing"
 }
