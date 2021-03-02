@@ -258,3 +258,35 @@ body.modal-open .supreme-container {
 #topLanguageSpinner, #chartSpinner {
   height: 300px;
 }
+
+#legendDiv > div {
+  height: 20px;
+  width: 100%;
+  margin-top: 25px;
+}
+
+.quarter {
+  background-color: #C6C6C6;
+}
+
+.half {
+  background-color: #FBEA5A;
+}
+
+.threeQuarter {
+  background-color: #EA923F;
+}
+
+.full {
+  background-color: #86D126;
+}
+
+.legend-val {
+  margin-top: 25px;
+  text-align: center;
+}
+
+#viewAllDetailsBtn {
+  width: 300px;
+  background-image: none;
+}
