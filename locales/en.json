@@ -90,10 +90,15 @@
 	"Verify What They Say": "Verify What They Say",
 	"Help us by validating the voice samples that others have contributed": "Help us by validating the voice samples that others have contributed",
 	"Odia (Select languages)": "Odia (Select languages)",
+	"Thank you for your enthusiasm to validate the voice samples": "Thank you for your enthusiasm to validate the voice samples",
+	"We have recently commenced the data contribution journey for \"Y\" language and hope that very soon there will be voice samples collected for your validation.": "We have recently commenced the data contribution journey for \"Y\" language and hope that very soon there will be voice samples collected for your validation.",
+	"Would you also like to contribute your voice?": "Would you also like to contribute your voice?",
+	"Start Contributing": "Start Contributing",
 	"Thank you for validating!": "Thank you for validating!",
-	"We don't have any more sentences for you to validate. You can contribute more for the language for others to validate": "We don't have any more sentences for you to validate. You can contribute more for the language for others to validate",
 	"You have helped us validate 10 recordings out \"x\" sentences contributed in \"y\" language.": "You have helped us validate 10 recordings out \"x\" sentences contributed in \"y\" language.",
 	"total validated": "total validated",
 	"total contributed": "total contributed",
-	"Validate More": "Validate More"
+	"Validate More": "Validate More",
+	"languages contributed": "languages contributed",
+	"hours recorded": "hours recorded"
 }

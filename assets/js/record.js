@@ -501,7 +501,6 @@ $(document).ready(() => {
                     }
                 })
                 .then((sentenceData) => {
-                    console.log(isExistingUser, sentenceData, "else part")
                     if(!isExistingUser){
                         $instructionModal.modal('show');
                     } else {
