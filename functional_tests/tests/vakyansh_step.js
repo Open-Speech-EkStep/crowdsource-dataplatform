@@ -243,5 +243,5 @@ step("When user changes the locale to Hindi", async function () {
     const hindiDropDown = taiko.$('#hindi');
     await click(hindiDropDown);
     await taiko.waitFor(2000);
-    assert.ok(await text("वकण्ठ: भारतीय भाषाओं के लिए वाक् पहचान की अनिवार्यता का घर").exists());
+    assert.ok(await text("वकंश: भारतीय भाषाओं के लिए एक क्राउडसोर्सिंग पहल").exists());
 });
