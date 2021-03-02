@@ -2,13 +2,14 @@ require('dotenv').config();
 
 const objectStorage = process.argv[2] || 'gcp';
 
-
 const { uploader } = require('./uploader/objUploader')
 const helmet = require('helmet')
 const express = require('express');
 const app = express();
+
 const cookieParser = require('cookie-parser');
 const router = express.Router();
+
 const {
   updateDbWithAudioPath,
   updateAndGetSentences,
