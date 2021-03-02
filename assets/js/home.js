@@ -447,4 +447,6 @@ module.exports = {
     //updateLanguage,
     calculateTime,
     //fetchDetail,
+    getStatistics,
+    performAPIRequest,
 };
