@@ -89,5 +89,11 @@
 	"Listen": "Listen",
 	"Verify What They Say": "Verify What They Say",
 	"Help us by validating the voice samples that others have contributed": "Help us by validating the voice samples that others have contributed",
-	"Odia (Select languages)": "Odia (Select languages)"
+	"Odia (Select languages)": "Odia (Select languages)",
+	"Thank you for validating!": "Thank you for validating!",
+	"We don't have any more sentences for you to validate. You can contribute more for the language for others to validate": "We don't have any more sentences for you to validate. You can contribute more for the language for others to validate",
+	"You have helped us validate 10 recordings out \"x\" sentences contributed in \"y\" language.": "You have helped us validate 10 recordings out \"x\" sentences contributed in \"y\" language.",
+	"total validated": "total validated",
+	"total contributed": "total contributed",
+	"Validate More": "Validate More"
 }

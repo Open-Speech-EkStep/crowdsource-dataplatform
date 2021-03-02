@@ -318,7 +318,7 @@ $(document).ready(() => {
     toggleFooterPosition();
     setPageContentHeight();
 
-    const language = 'Odia';
+    const language = localStorage.getItem('contributionLanguage');
     fetch(`/validation/sentences/${language}`)
         .then((data) => {
             if (!data.ok) {
@@ -333,7 +333,7 @@ $(document).ready(() => {
         }
         validationSentences = sentenceData.data
         const sentence = validationSentences[currentIndex];
-        if (sentence && sentence.audio_path) {
+        if (sentence) {
             getAudioClip(sentence.audio_path);
             setSentenceLabel(currentIndex);
             updateValidationCount();
