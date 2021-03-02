@@ -132,6 +132,7 @@ jobs:
             - run:
                 name: Run DB Migrate
                 command: |
+                    echo << parameters.db_name >>
                     export DATABASE_URL=postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@{DB_HOST_AWS}/<< parameters.db_name >>
                     echo << parameters.db_name >>
                     npx db-migrate up
