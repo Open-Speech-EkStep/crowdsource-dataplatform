@@ -290,3 +290,12 @@ body.modal-open .supreme-container {
   width: 300px;
   background-image: none;
 }
+
+.options:hover{
+  color:#5d5d5d;
+}
+
+.active{
+  font-weight: 900;
+  color: black;
+}

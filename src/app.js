@@ -100,7 +100,7 @@ app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
   const isCookiePresent = req.cookies.userId ? true : false;
-  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
+  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent, defaultLang:req.cookies.i18n });
 });
 
 router.get('/getDetails/:language', async function (req, res) {
@@ -148,7 +148,7 @@ router.get('/validator-page', (req, res) => {
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 router.get('/validation/sentences/:language', (req, res) => getValidationSentences(req, res));
 router.post('/validation/action', (req, res) => updateTablesAfterValidation(req, res))
-router.post('/audioClip', (req, res) => getAudioClip(req, res))
+router.post('/audioClip', (req, res) => getAudioClip(req, res, objectStorage))
 router.post('/upload', (req, res) => {
   const file = req.file;
   const sentenceId = req.body.sentenceId;
