@@ -217,7 +217,7 @@ workflows:
                  - migrate_test_aws
 
           - eks_fargate_deployment:
-              name: dev_deployment_eks
+              name: test_deployment_eks
               cluster-name: ${CLUSTER_NAME}
               env-name: test
               requires:
@@ -229,7 +229,7 @@ workflows:
                 type: approval
                 requires:
                    - push_dev_image
-                   - dev_deployment_eks
+                   - test_deployment_eks
 
           - db_migrate_aws:
                name: migrate_prod_aws
