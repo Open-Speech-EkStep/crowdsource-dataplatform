@@ -172,6 +172,7 @@ jobs:
               command: |
                  aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
                  ENV_IMAGE_NAME=${AWS_ECR_ACCOUNT_URL}/${REPO}:<< parameters.env-name >>
+                 kubectl -n  << parameters.env-name >> delete deployment vakyansh 
                  sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g" ${HOME}/project/deployments/k8s/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
 
               name: Deploy container 
