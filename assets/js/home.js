@@ -35,8 +35,18 @@ const fetchDetail = (language) => {
 };
 
 
-const fetchHrsDetail = (language) => {
+const fetchHrsDetail = () => {
     return fetch(`/aggregate-data-count?byLanguage=${true}`).then((data) => {
+        if (!data.ok) {
+            throw Error(data.statusText || 'HTTP error');
+        } else {
+            return Promise.resolve(data.json());
+        }
+    });
+};
+
+const fetchTop5Lan = () => {
+    return fetch('/top-languages-by-hours').then((data) => {
         if (!data.ok) {
             throw Error(data.statusText || 'HTTP error');
         } else {
@@ -144,6 +154,25 @@ const setLangNavBar = (targetedDiv,top_lang, $languageNavBar) => {
     }
 }
 
+const setTop5LanInNavBar = function(){
+    const $languageNavBar= $('#language-nav-bar');
+    const $languageNavBarItems = $languageNavBar.children();
+    const $navBarLoader = $('#nav-bar-loader');
+    fetchTop5Lan()
+        .then((details) => {
+            console.log(details.data)
+            details.data.forEach((element,index)=>{
+                $languageNavBarItems[index].setAttribute('value',element.language);
+                $languageNavBarItems[index].innerText = element.language;
+            })
+            $navBarLoader.addClass('d-none');
+            $languageNavBar.removeClass('d-none');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
 $(document).ready(function () {
     const speakerDetailsKey = 'speakerDetails';
     const defaultLang = 'Odia';
@@ -165,6 +194,8 @@ $(document).ready(function () {
         container: 'body',
         placement: screen.availWidth > 500 ? 'right' : 'auto',
     });
+
+    setTop5LanInNavBar();
 
     let top_lang;
 

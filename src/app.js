@@ -100,8 +100,7 @@ app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
   const isCookiePresent = req.cookies.userId ? true : false;
-  const top_5_languages = ["Kannada","Odia", "Hindi","Tamil", "Telugu"];
-  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent, top_5_languages, defaultLang:req.cookies.i18n });
+  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent, defaultLang:req.cookies.i18n });
 });
 
 router.get('/getDetails/:language', async function (req, res) {
