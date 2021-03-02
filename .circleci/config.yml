@@ -136,6 +136,7 @@ jobs:
                     echo << parameters.db_name >>
                     export DATABASE_URL=postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@{DB_HOST_AWS}/<< parameters.db_name >>
                     echo << parameters.db_name >>
+                    echo $DATABASE_URL
                     npx db-migrate up
 
     # build_and_push_image_ecr:
