@@ -8,24 +8,17 @@ const {validateUserName, testUserName,setSpeakerDetails, resetSpeakerDetails,set
 //     ).innerText = `START RECORDING IN ${lang.toUpperCase()}`;
 // }
 
-function calculateTime(totalSentence) {
-    const totalSeconds = totalSentence * 6;
+function calculateTime(totalSeconds, isSeconds=true) {
     const hours = Math.floor(totalSeconds / 3600);
     const remainingAfterHours = totalSeconds % 3600;
     const minutes = Math.floor(remainingAfterHours / 60);
-    const seconds = remainingAfterHours % 60;
-    return {hours, minutes, seconds};
+    const seconds = Math.round(remainingAfterHours % 60);
+    if(isSeconds) {
+        return {hours, minutes, seconds};
+    } else {
+        return {hours, minutes};
+    }
 }
-
-const fetchDetail = (language) => {
-    return fetch(`/getDetails/${language}`).then((data) => {
-        if (!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
-        } else {
-            return Promise.resolve(data.json());
-        }
-    });
-};
 
 const performAPIRequest = (url) => {
     return fetch(url).then((data) => {
@@ -37,29 +30,32 @@ const performAPIRequest = (url) => {
     });
 }
 
-function updateLanguage(language) {
+function getStatistics() {
     const $speakersData = $('#speaker-data');
-    const $speakersDataLoader = $speakersData.find('#loader1,#loader2');
+    const $speakersDataLoader = $speakersData.find('#loader1,#loader2, #loader3');
     const $speakersDataSpeakerWrapper = $('#speakers-wrapper');
     const $speakersDataSpeakerValue = $('#speaker-value');
     const $speakersDataHoursWrapper = $('#hours-wrapper');
     const $speakersDataHoursValue = $('#hour-value');
+    const $speakersDataLanguagesWrapper = $('#languages-wrapper');
+    const $speakersDataLanguagesValue = $('#languages-value');
     $speakersDataLoader.removeClass('d-none');
     $speakersDataHoursWrapper.addClass('d-none');
     $speakersDataSpeakerWrapper.addClass('d-none');
+    $speakersDataLanguagesWrapper.addClass('d-none');
 
-    fetchDetail(language)
-        .then((data) => {
+    performAPIRequest('/aggregate-data-count')
+        .then((response) => {
             try {
-                const totalSentence = data.find((t) => t.index === 1).count;
-                const {hours, minutes, seconds} = calculateTime(totalSentence);
+                const {hours, minutes, seconds} = calculateTime((Number(response.data[0].total_contributions)*60*60));
                 $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
-                $speakersDataSpeakerValue.text(data.find((t) => t.index === 0).count);
-
+                $speakersDataSpeakerValue.text(response.data[0].total_speakers);
+                $speakersDataLanguagesValue.text(response.data[0].total_languages);
                 $speakersDataLoader.addClass('d-none');
                 $speakersDataHoursWrapper.removeClass('d-none');
                 $speakersDataSpeakerWrapper.removeClass('d-none');
-                localStorage.setItem('speakersData', JSON.stringify(data));
+                $speakersDataLanguagesWrapper.removeClass('d-none');
+                // localStorage.setItem('speakersData', JSON.stringify(data));
             } catch (error) {
                 console.log(error);
             }
@@ -67,12 +63,6 @@ function updateLanguage(language) {
         .catch((err) => {
             console.log(err);
         });
-}
-
-function showStatistics() {
-    performAPIRequest('/aggregate-data-count').then((response) => {
-        console.log('aggregate-data-count: ', response);
-    });
 }
 
 function constructChart(response, xAxisLabel, yAxisLabel) {
@@ -85,11 +75,15 @@ function constructChart(response, xAxisLabel, yAxisLabel) {
     categoryAxis.renderer.cellStartLocation = 0.2;
     categoryAxis.renderer.cellEndLocation = 0.8;
     categoryAxis.renderer.grid.template.strokeWidth = 0;
-    categoryAxis.labelsEnabled = false;
-    
+    var label = categoryAxis.renderer.labels.template;
+    label.truncate = false;
+
     var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
     valueAxis.renderer.grid.template.strokeWidth = 0;
     valueAxis.labelsEnabled = false;
+
+    var label = valueAxis.renderer.labels.template;
+    label.truncate = false;
 
     categoryAxis.renderer.minGridDistance = 25;
     var series = chart.series.push(new am4charts.ColumnSeries());
@@ -97,10 +91,10 @@ function constructChart(response, xAxisLabel, yAxisLabel) {
     series.dataFields.categoryY = yAxisLabel;
 
     var valueLabel = series.bullets.push(new am4charts.LabelBullet());
-    valueLabel.label.text = 'yAxisLabel';
+    valueLabel.label.text = xAxisLabel === "total_speakers" ? "{total_speakers}" : "{total_contributions}";
     valueLabel.label.fontSize = 20;
-    valueLabel.label.horizontalCenter = "right";
-    valueLabel.label.dx = 10;
+    valueLabel.label.horizontalCenter = "left";
+    valueLabel.label.dx = 5;
 
     var cellSize = 35;
     chart.events.on("datavalidated", function(ev) {
@@ -114,31 +108,42 @@ function constructChart(response, xAxisLabel, yAxisLabel) {
 
 function showByHoursChart() {
     const $topLanguageSpinner = $('#topLanguageSpinner');
-    $topLanguageSpinner.show().addClass('d-flex');
+   // $topLanguageSpinner.show().addClass('d-flex');
     performAPIRequest('/top-languages-by-hours').then((response) => {
         constructChart(response.data, 'total_contributions', 'language');
-        $topLanguageSpinner.hide().removeClass('d-flex');
+     //   $topLanguageSpinner.hide().removeClass('d-flex');
     });
 }
 
 function showBySpeakersChart() {
     const $topLanguageSpinner = $('#topLanguageSpinner');
     const $speakersHoursChart = $('#speakers_hours_chart_container');
-    $topLanguageSpinner.show().addClass('d-flex');
-    $speakersHoursChart.addClass('d-none');
+    //$topLanguageSpinner.show().addClass('d-flex');
+   // $speakersHoursChart.addClass('d-none');
     performAPIRequest('/top-languages-by-speakers').then((response) => {
         constructChart(response.data, 'total_speakers', 'language');
-        $topLanguageSpinner.hide().removeClass('d-flex');
-        $speakersHoursChart.removeClass('d-none');
+     //   $topLanguageSpinner.hide().removeClass('d-flex');
+      //  $speakersHoursChart.removeClass('d-none');
     });
 }
 
 function generateIndiaMap() {
     performAPIRequest('/aggregate-data-count?byState=true')
     .then((response) => {
+        const total = response.data.reduce((a,c) => a + Number(c.total_contributions) + Number(c.total_validations), 0);
         response.data.forEach(ele => {
-            ele.id = ele.state;
-            ele.value = Number(ele.total_contributions) + Number(ele.total_validations);
+            const {hours:cHours, minutes: cMinutes, seconds: cSeconds} = calculateTime((Number(ele.total_contributions)*60*60), true);
+            const {hours:vHours, minutes:vMinutes, seconds: vSeconds} = calculateTime((Number(ele.total_validations)*60*60), true);
+            ele.contributed_time = `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
+            ele.validated_time = `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;                
+            const value = Number(ele.total_contributions)+Number(ele.total_validations);
+            ele.value = (value / total) * 100;
+            if(ele.state === 'ANONYMOUS') {
+                ele.id = 'Andhra Pradesh';
+                ele.state = 'Andhra Pradesh';
+            } else {
+                ele.id = ele.state;
+            }
         });
         var chart = am4core.create("indiaMapChart", am4maps.MapChart);
         chart.geodataSource.url = "./js/states_india_geo.json"; 
@@ -150,7 +155,7 @@ function generateIndiaMap() {
         polygonSeries.useGeodata = true;
         polygonSeries.data = response.data;
         var polygonTemplate = polygonSeries.mapPolygons.template;
-        polygonTemplate.tooltipHTML = `<div><h6>{state}</h6> <div>{total_speakers} Speakers  <label style="margin-left: 32px">{total_contributions}</label></div> <div>Validated:  <label style="margin-left: 16px">{total_validations}</label></div></div>`;
+        polygonTemplate.tooltipHTML = `<div><h6>{state}</h6> <div>{total_speakers} Speakers  <label style="margin-left: 32px">{contributed_time}</label></div> <div>Validated:  <label style="margin-left: 16px">{validated_time}</label></div></div>`;
         polygonTemplate.nonScalingStroke = true;
         polygonTemplate.strokeWidth = 0.5;
         polygonTemplate.fill = am4core.color("#fff");
@@ -161,48 +166,22 @@ function generateIndiaMap() {
 
         polygonSeries.mapPolygons.template.adapter.add("fill", function(fill, target) {
             if (target.dataItem) {
-                if (target.dataItem.value > 5) {
-                    return am4core.color("#98C52B");
-                } else if (target.dataItem.value > 2) {
-                    return am4core.color("#E4953D");
-                } else if (target.dataItem.value > 1) {
-                    return am4core.color("#CFA238");
-                } else if (target.dataItem.value > 0) {
-                    return am4core.color("#F6D350");
+                if (target.dataItem.value >= 75) {
+                    return am4core.color("#86D126");
+                } else if (target.dataItem.value >= 50) {
+                    return am4core.color("#EA923F");
+                } else if (target.dataItem.value >= 25) {
+                    return am4core.color("#FBEA5A");
                 } else {
-                    return am4core.color("#DDD8A5");
+                    return am4core.color("#C6C6C6");
                 }
             }
             return fill;
         });
-
         chart.series.push(polygonSeries);
-
-        // Set up heat legend
-        let heatLegend = chart.createChild(am4maps.HeatLegend);
-        heatLegend.series = polygonSeries;
-        heatLegend.align = "right";
-        heatLegend.valign = "bottom";
-        heatLegend.width = am4core.percent(100);
-        heatLegend.marginRight = am4core.percent(4);
-        heatLegend.minValue = 0;
-        heatLegend.maxValue = 5;
-
-        var legendContainer = am4core.create("legendDiv", am4core.Container);
-        legendContainer.width = am4core.percent(100);
-        legendContainer.height = am4core.percent(100);
-        heatLegend.parent = legendContainer;
-
-        // Set up custom heat map legend labels using axis ranges
-        var minRange = heatLegend.valueAxis.axisRanges.create();
-        minRange.value = heatLegend.minValue;
-        var maxRange = heatLegend.valueAxis.axisRanges.create();
-        maxRange.value = heatLegend.maxValue;
         
-        // Blank out internal heat legend value axis labels
-        heatLegend.valueAxis.renderer.labels.template.adapter.add("text", function(labelText) {
-            return `${labelText} hr`;
-        });
+        const $legendDiv = $("#legendDiv");
+        $legendDiv.removeClass("d-none");
     }).catch((err) => {
         console.log(err);
     });
@@ -251,7 +230,6 @@ $(document).ready(function () {
     });
 
     $('[name="topLanguageChart"]').on('change', (event) => {
-        console.log(event.target.value);
         if(event.target.value === 'hours') {
             showByHoursChart();
         } else {
@@ -352,16 +330,15 @@ $(document).ready(function () {
     })
 
     //updateLanguageInButton(defaultLang);
-    updateLanguage(defaultLang);
+    getStatistics();
     buildGraphs(defaultLang);
     generateIndiaMap();
     showByHoursChart();
-    showStatistics();
 });
 
 module.exports = {
     //updateLanguageInButton,
-    updateLanguage,
+    //updateLanguage,
     calculateTime,
-    fetchDetail,
+    //fetchDetail,
 };
