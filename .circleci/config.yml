@@ -133,8 +133,9 @@ jobs:
                 name: Run DB Migrate
                 command: |
                     echo << parameters.db_name >>
-                    export DATABASE_URL=postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@{DB_HOST_AWS}/<< parameters.db_name >>
+                    export DATABASE_URL=postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@${DB_HOST_AWS}/<< parameters.db_name >>
                     echo << parameters.db_name >>
+                    echo $DATABASE_URL
                     npx db-migrate up
 
     # build_and_push_image_ecr:
@@ -171,6 +172,7 @@ jobs:
               command: |
                  aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
                  ENV_IMAGE_NAME=${AWS_ECR_ACCOUNT_URL}/${REPO}:<< parameters.env-name >>
+                 kubectl -n  << parameters.env-name >> delete deployment vakyansh 
                  sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g" ${HOME}/project/deployments/k8s/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
 
               name: Deploy container 
@@ -193,6 +195,7 @@ workflows:
               tag: test
               requires:
                  - node/test
+                 - migrate_test_aws
 
           - eks_fargate_deployment:
               name: dev_deployment_eks
@@ -220,7 +223,7 @@ workflows:
               repo: ${REPO}
               tag: prod
               requires:
-                #  - migrate_prod_aws
+                 - migrate_prod_aws
                  - approve_prod_deployment_eks
 
           - eks_fargate_deployment:
