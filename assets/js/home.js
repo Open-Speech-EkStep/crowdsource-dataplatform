@@ -99,20 +99,6 @@ function updateLanguage(language) {
         });
 }
 
-function updateLanguageNavBar(selectedlang, targetedDiv, centeredDiv, canSwap) {
-    const temp = targetedDiv.innerText;
-    const centeredDivValue = centeredDiv.getAttribute('value');
-
-    if (canSwap) {
-        targetedDiv.innerText = centeredDiv.innerText;
-        targetedDiv.setAttribute('value', centeredDivValue);
-    }
-    centeredDiv.innerText = temp;
-    centeredDiv.setAttribute('value', selectedlang);
-    centeredDiv.classList.add('text-dark');
-    centeredDiv.style.fontWeight = 900;
-}
-
 const setAggregateDataCountByLanguage = function () {
     fetchHrsDetail()
         .then((details) => {
@@ -143,13 +129,19 @@ const setLangNavBar = (targetedDiv,top_lang, $languageNavBar) => {
         }
     });
 
+    const previousActiveDiv = $languageNavBar.find('.active');
+    previousActiveDiv.removeClass('active');
+    const $6th_place = document.getElementById('6th_option');
     if (targetttedDivIndex < 0) {
-        updateLanguageNavBar(top_lang, targetedDiv, allDivs[2], false);
-    } else {
-        targetedDiv = allDivs[targetttedDivIndex];
-        updateLanguageNavBar(top_lang, targetedDiv, allDivs[2], true);
-    }
+        $6th_place.innerText = top_lang;
+        $6th_place.classList.remove('d-none');
+        $6th_place.classList.add('active');
 
+        $6th_place.setAttribute('value', top_lang);
+    } else {
+        allDivs[targetttedDivIndex].classList.add('active');
+        $6th_place.classList.add('d-none');
+    }
 }
 
 $(document).ready(function () {
@@ -193,10 +185,13 @@ $(document).ready(function () {
     })
 
     $languageNavBar.on('click', (e) => {
-        const centeredDiv = $languageNavBar.children()[2];
         const targetedDiv = e.target;
         top_lang = targetedDiv.getAttribute('value');
-        updateLanguageNavBar(top_lang, targetedDiv, centeredDiv, true)
+        const previousActiveDiv = $languageNavBar.find('.active');
+        previousActiveDiv.removeClass('active');
+        const $6th_place = $('#6th_option')
+        $6th_place.addClass('d-none');
+        targetedDiv.classList.add('active');
         updateHrsForSayAndListen(top_lang);
     })
 
