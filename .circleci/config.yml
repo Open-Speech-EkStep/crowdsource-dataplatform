@@ -132,9 +132,23 @@ jobs:
             - run:
                 name: Run DB Migrate
                 command: |
+                    echo << parameters.db_name >>
                     export DATABASE_URL=postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@{DB_HOST_AWS}/<< parameters.db_name >>
                     echo << parameters.db_name >>
                     npx db-migrate up
+
+    # build_and_push_image_ecr:
+    #     parameters:
+    #       env-name:
+    #         description: |
+    #           Name of the env
+    #         type: string
+    #     executor:
+    #         name: node/default
+    #     steps:
+    #       - aws-ecr/build-and-push-image:
+    #           repo: ${REPO}
+    #           tag: << parameters.env-name >>
 
     eks_fargate_deployment:
         executor: aws-eks/python3
@@ -150,28 +164,16 @@ jobs:
           
         steps:
           - checkout
-          - run:
-              command: |
-                echo $ << parameters.cluster-name >>
           - aws-cli/setup:
               profile-name: circle-ci
           - kubernetes/install
-          # - aws-eks/update-kubeconfig-with-authenticator:
-          #     # install-kubectl: true
-          #     cluster-name: << parameters.cluster-name >>
-          #     aws-profile: circle-ci
           - run:
               command: |
-                 ls;
-                 ls -al;
                  aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
                  ENV_IMAGE_NAME=${AWS_ECR_ACCOUNT_URL}/${REPO}:<< parameters.env-name >>
                  sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g" ${HOME}/project/deployments/k8s/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
 
-                #  ls project
-                #  kubectl apply -f deployments/k8s/deployment.yaml -n << parameters.env-name >>
-                #  kubectl get pods
-              name: Test cluster
+              name: Deploy container 
 
 
 
@@ -186,60 +188,96 @@ workflows:
                db_name: ${TEST_DB_NAME}
 
           - aws-ecr/build-and-push-image:
-               repo: ${REPO}
-               tag: "test"
+              name: push_dev_image
+              repo: ${REPO}
+              tag: test
+              requires:
+                 - node/test
 
           - eks_fargate_deployment:
+              name: dev_deployment_eks
               cluster-name: ${CLUSTER_NAME}
               env-name: test
+              requires:
+                - push_dev_image
 
-          # - db_migrate:
-          #      name: migrate_dev
-          #      db_name: ${DEV_DB_NAME}
-          #      requires:
-          #        - node/test
-          # - deploy:
-          #      name: deploy_dev
-          #      env_name: dev
-          #      sh_file: app_yaml_dev.sh
-          #      requires:
-          #        - migrate_dev
-          # - approve_to_deploy:
-          #       name: approve_test
-          #       type: approval
-          #       requires:
-          #          - deploy_dev
-          # - db_migrate:
-          #      name: migrate_test
-          #      db_name: ${TEST_DB_NAME}
-          #      requires:
-          #        - approve_test
-          # - deploy:
-          #      name: deploy_test
-          #      env_name: test
-          #      sh_file: app_yaml_test.sh
-          #      requires:
-          #        - migrate_test
-          # - run_functional_tests:
-          #        requires:
-          #          - deploy_test
-          # - approve_to_deploy:
-          #       name: approve_prod
-          #       type: approval
-          #       requires:
-          #          - deploy_test
-          # - db_migrate:
-          #     name: migrate_prod
-          #     db_name: ${DB_NAME}
-          #     requires:
-          #       - approve_prod
-          # - deploy:
-          #       name: deploy_prod
-          #       env_name: prod
-          #       sh_file: app_yaml_prod.sh
-          #       requires:
-          #         - migrate_prod
-          #       filters:
-          #         branches:
-          #           only:
-          #             - release
+
+          - approve_to_deploy:
+                name: approve_prod_deployment_eks
+                type: approval
+                requires:
+                   - push_dev_image
+                   - dev_deployment_eks
+
+          - db_migrate_aws:
+               name: migrate_prod_aws
+               db_name: ${TEST_DB_NAME}
+               requires:
+                 - approve_prod_deployment_eks
+
+          - aws-ecr/build-and-push-image:
+              name: push_prod_image
+              repo: ${REPO}
+              tag: prod
+              requires:
+                #  - migrate_prod_aws
+                 - approve_prod_deployment_eks
+
+          - eks_fargate_deployment:
+              name: prod_deployment_eks
+              cluster-name: ${CLUSTER_NAME}
+              env-name: prod
+              requires:
+                 - push_prod_image
+                 - approve_prod_deployment_eks  
+
+          - db_migrate:
+               name: migrate_dev
+               db_name: ${DEV_DB_NAME}
+               requires:
+                 - node/test
+          - deploy:
+               name: deploy_dev
+               env_name: dev
+               sh_file: app_yaml_dev.sh
+               requires:
+                 - migrate_dev
+          - approve_to_deploy:
+                name: approve_test
+                type: approval
+                requires:
+                   - deploy_dev
+          - db_migrate:
+               name: migrate_test
+               db_name: ${TEST_DB_NAME}
+               requires:
+                 - approve_test
+          - deploy:
+               name: deploy_test
+               env_name: test
+               sh_file: app_yaml_test.sh
+               requires:
+                 - migrate_test
+          - run_functional_tests:
+                 requires:
+                   - deploy_test
+          - approve_to_deploy:
+                name: approve_prod
+                type: approval
+                requires:
+                   - deploy_test
+          - db_migrate:
+              name: migrate_prod
+              db_name: ${DB_NAME}
+              requires:
+                - approve_prod
+          - deploy:
+                name: deploy_prod
+                env_name: prod
+                sh_file: app_yaml_prod.sh
+                requires:
+                  - migrate_prod
+                filters:
+                  branches:
+                    only:
+                      - release
