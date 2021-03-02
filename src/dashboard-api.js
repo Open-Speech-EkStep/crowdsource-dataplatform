@@ -22,7 +22,11 @@ const dashboardRoutes = (router) => {
         const byLanguage = req.query.byLanguage || false;
         const byState = req.query.byState || false;
 
-        const aggregateData = await getAggregateDataCount(byLanguage, byState);
+        let aggregateData = await getAggregateDataCount(byLanguage, byState);
+        aggregateData =  aggregateData.map(data=>{
+            data.last_updated_at =  new Date(data.last_updated_at).toLocaleString()
+            return data;
+        })
         res.send({ "data": aggregateData });
     });
 
