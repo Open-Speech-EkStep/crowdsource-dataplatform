@@ -22,7 +22,7 @@ const { topLanguagesBySpeakerContributions, topLanguagesByHoursContributed, cumu
 const { KIDS_AGE_GROUP, ADULT, KIDS } = require('./constants');
 const envVars = process.env;
 const pgp = require('pg-promise')();
-const showUniqueSentences = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION||true;
+const showUniqueSentences = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION == 'true' ||true;
 
 let cn = {
     user: envVars.DB_USER,
