@@ -120,7 +120,6 @@ workflows:
           name: approve_prod_deployment_eks
           type: approval
           requires:
-            - eks_fargate_deployment
             - test_deployment_eks
       - db_migrate_aws:
           name: migrate_prod_aws
