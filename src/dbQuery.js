@@ -20,7 +20,7 @@ with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
 from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
-left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" \
+left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
 and (coalesce(cont.action,\'\')!=\'completed\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id)) \
 limit 5  returning "sentenceId") \
