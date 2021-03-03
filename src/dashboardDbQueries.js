@@ -1,6 +1,6 @@
-const ageGroupContributions = "select age_group,count(*) as contributions, count(distinct(contributed_by)) as speakers from contributions_and_demo_stats where $1:raw group by age_group ORDER BY contributions DESC;";
+const ageGroupContributions = "select age_group, count(*) as contributions, ROUND(count(*)::decimal *6/3600,3) as hours_contributed, count(distinct(contributed_by)) as speakers from contributions_and_demo_stats where $1:raw group by age_group ORDER BY contributions DESC;";
 
-const genderGroupContributions = "select gender,count(*) as contributions, count(distinct(contributed_by)) as speakers from contributions_and_demo_stats where $1:raw group by gender ORDER BY contributions DESC;";
+const genderGroupContributions = "select gender,count(*) as contributions,ROUND(count(*)::decimal *6/3600,3) as hours_contributed, count(distinct(contributed_by)) as speakers from contributions_and_demo_stats where $1:raw group by gender ORDER BY contributions DESC;";
 
 const dailyTimeline = "select day, month, year, language, ROUND(cumulative_contributions::decimal *6/3600,3) as cumulative_contributions,ROUND(cumulative_validations::decimal *6/3600,3) as cumulative_validations from daily_cumulative_stats_per_language where $1:raw;";
 
@@ -14,9 +14,9 @@ const monthlyTimeline = "select year, month, language, ROUND(cumulative_contribu
 
 const monthlyTimelineCumulative = "SELECT year, month, ROUND(cumulative_contributions::decimal *6/3600,3) as cumulative_contributions,ROUND(cumulative_validations::decimal *6/3600,3) as cumulative_validations FROM monthly_cumulative_stats_all;";
 
-const quarterlyTimeline = "select year, month,language, ROUND(cumulative_contributions::decimal *6/3600,3) as cumulative_contributions,ROUND(cumulative_validations::decimal *6/3600,3) as cumulative_validations from monthly_cumulative_stats_per_language where $1:raw ORDER BY year DESC,month DESC LIMIT 3;";
+const quarterlyTimeline = "select year, quarter, language, ROUND(cumulative_contributions::decimal *6/3600,3) as cumulative_contributions,ROUND(cumulative_validations::decimal *6/3600,3) as cumulative_validations from quarterly_cumulative_stats_per_language where $1:raw;";//"select year, month,language, ROUND(cumulative_contributions::decimal *6/3600,3) as cumulative_contributions,ROUND(cumulative_validations::decimal *6/3600,3) as cumulative_validations from monthly_cumulative_stats_per_language where $1:raw ORDER BY year DESC,month DESC LIMIT 3;";
 
-const quarterlyTimelineCumulative = "SELECT year, month, ROUND(cumulative_contributions::decimal *6/3600,3) as cumulative_contributions,ROUND(cumulative_validations::decimal *6/3600,3) as cumulative_validations FROM monthly_cumulative_stats_all ORDER BY year DESC,month DESC LIMIT 3;";
+const quarterlyTimelineCumulative = "SELECT year, quarter, ROUND(cumulative_contributions::decimal *6/3600,3) as cumulative_contributions,ROUND(cumulative_validations::decimal *6/3600,3) as cumulative_validations FROM quarterly_cumulative_stats_all;";//"SELECT year, month, ROUND(cumulative_contributions::decimal *6/3600,3) as cumulative_contributions,ROUND(cumulative_validations::decimal *6/3600,3) as cumulative_validations FROM monthly_cumulative_stats_all ORDER BY year DESC,month DESC LIMIT 3;";
 
 const cumulativeCount = "select count(distinct(language)) as total_languages, count(distinct(contributed_by)) as total_speakers,ROUND(count(distinct(contribution_id))::decimal *6/3600,3)  as total_contributions,ROUND(sum(is_validated)::decimal *6/3600,3)  as total_validations from contributions_and_demo_stats;";
 
