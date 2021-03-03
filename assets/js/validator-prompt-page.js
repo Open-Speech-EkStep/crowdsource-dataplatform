@@ -141,7 +141,7 @@ const updateValidationCount = () => {
 
 const updateProgressBar = () => {
     const $getStarted = $('#get-started');
-    const progressMessages = [
+    let progressMessages = [
         'Let’s get started',
         'We know you can do more! ',
         'You are halfway there. Keep going!',
@@ -149,6 +149,36 @@ const updateProgressBar = () => {
         'Four dead, one more to go!',
         'Yay! Done & Dusted!',
     ];
+    if (validationSentences.length == 4) {
+        progressMessages = [
+            'Let’s get started',
+            'We know you can do more! ',
+            'You are halfway there. Keep going!',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }
+    else if (validationSentences.length == 3) {
+        progressMessages = [
+            'Let’s get started',
+            'We know you can do more! ',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }
+    else if (validationSentences.length == 2) {
+        progressMessages = [
+            'Let’s get started',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }    
+    else if (validationSentences.length == 1) {
+        progressMessages = [
+            'Let’s get started',
+            'Yay! Done & Dusted!'
+        ];
+    }
     const $progressBar = $("#progress_bar");
     progressCount++;
     $getStarted.text(progressMessages[progressCount]).show();
