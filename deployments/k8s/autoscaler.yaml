@@ -8,25 +8,11 @@ spec:
     kind: Deployment
     name: vakyansh
   minReplicas: 1
-  maxReplicas: 3
+  maxReplicas: 10
   metrics:
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 60
-
-
-status:
-  observedGeneration: 1
-  lastScaleTime: 10
-  currentReplicas: 2
-  desiredReplicas: 1
-  currentMetrics:
-  - type: Resource
-    resource:
-      name: cpu
-      current:
-        averageUtilization: 0
-        averageValue: 0
+        averageUtilization: 20
