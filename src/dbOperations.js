@@ -17,7 +17,25 @@ const {
     addValidationQuery,
     updateSentencesWithValidatedState
 } = require('./dbQuery');
-const { topLanguagesBySpeakerContributions, topLanguagesByHoursContributed, cumulativeCount, cumulativeDataByState, cumulativeDataByLanguage, cumulativeDataByLanguageAndState, listLanguages, dailyTimeline, ageGroupContributions, genderGroupContributions,dailyTimelineCumulative } = require('./dashboardDbQueries');
+const {
+    topLanguagesBySpeakerContributions, 
+    topLanguagesByHoursContributed, 
+    cumulativeCount, 
+    cumulativeDataByState, 
+    cumulativeDataByLanguage, 
+    cumulativeDataByLanguageAndState, 
+    listLanguages, 
+    dailyTimeline, 
+    ageGroupContributions, 
+    genderGroupContributions, 
+    dailyTimelineCumulative,
+    weeklyTimeline,
+    weeklyTimelineCumulative,
+    monthlyTimeline,
+    monthlyTimelineCumulative,
+    quarterlyTimeline,
+    quarterlyTimelineCumulative
+} = require('./dashboardDbQueries');
 
 const { KIDS_AGE_GROUP, ADULT, KIDS } = require('./constants');
 const envVars = process.env;
@@ -248,14 +266,29 @@ const getAggregateDataCount = (language, state) => {
 const getLanguages = () => {
     return db.any(listLanguages, []);
 }
+const normalTimeLineQueries = {
+    "weekly": weeklyTimeline,
+    "daily": dailyTimeline,
+    "monthly": monthlyTimeline,
+    "quarterly": quarterlyTimeline
+}
 
-const getTimeline = (language = "") => {
+const cumulativeTimeLineQueries = {
+    "weekly": weeklyTimelineCumulative,
+    "daily": dailyTimelineCumulative,
+    "monthly": monthlyTimelineCumulative,
+    "quarterly": quarterlyTimelineCumulative
+}
+const getTimeline = (language = "", timeframe) => {
+    timeframe = timeframe.toLowerCase();
     if (language.length !== 0) {
         languageFilter = `language iLike '${language}'`
         let filter = pgp.as.format('$1:raw', [languageFilter])
-        return db.any(dailyTimeline, filter);
+        let query = normalTimeLineQueries[timeframe] || weeklyTimeline;
+        return db.any(query, filter);
     } else {
-        return db.any(dailyTimelineCumulative, []);
+        let query = cumulativeTimeLineQueries[timeframe] || weeklyTimelineCumulative;
+        return db.any(query, []);
     }
 }
 
