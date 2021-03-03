@@ -8,7 +8,7 @@ const dashboardRoutes = (router) => {
             res.send({ "data": topLanguagesByHours });
         } catch (err) {
             console.log(err);
-            res.status(500);
+            res.status(500).send("Internal Server Error");
         }
 
     });
@@ -22,7 +22,11 @@ const dashboardRoutes = (router) => {
         const byLanguage = req.query.byLanguage || false;
         const byState = req.query.byState || false;
 
-        const aggregateData = await getAggregateDataCount(byLanguage, byState);
+        let aggregateData = await getAggregateDataCount(byLanguage, byState);
+        aggregateData =  aggregateData.map(data=>{
+            data.last_updated_at =  new Date(data.last_updated_at).toLocaleString()
+            return data;
+        })
         res.send({ "data": aggregateData });
     });
 
@@ -46,11 +50,22 @@ const dashboardRoutes = (router) => {
     });
 
     router.get('/timeline', async (req, res) => {
+        const allowedTimeFrames = ['weekly', 'monthly', 'daily', 'quarterly'];
         const language = req.query.language || '';
+        const timeframe = req.query.timeframe || 'weekly';
 
-        const timelineData = await getTimeline(language);
-        let hoursContributed = timelineData[timelineData.length - 1]['cumulative_contributions'];
-        let hoursValidated = timelineData[timelineData.length - 1]['cumulative_validations'];
+        if(!allowedTimeFrames.includes(timeframe.toLowerCase())){
+            res.status(400).send("Timeframe mentioned is invalid");
+            return;
+        }
+
+        const timelineData = await getTimeline(language, timeframe);
+        let hoursContributed = 0, hoursValidated = 0;
+
+        if(timelineData.length !== 0){
+            hoursContributed = timelineData[timelineData.length - 1]['cumulative_contributions'] || 0;
+            hoursValidated = timelineData[timelineData.length - 1]['cumulative_validations'] || 0;
+        }
 
         res.send({
             'total-hours-contributed': hoursContributed,
