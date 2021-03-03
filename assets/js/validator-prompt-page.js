@@ -92,6 +92,7 @@ const setAudioPlayer = function () {
 
 let currentIndex = 0;
 let progressCount = 0;
+let validationCount = 0;
 
 const animateCSS = ($element, animationName, callback) => {
     $element.addClass(`animated ${animationName}`);
@@ -184,6 +185,9 @@ function resetDecisionRow() {
 }
 
 function recordValidation(action) {
+    if (action == 'reject' || action == 'accept') {
+        validationCount++;
+    }
     const sentenceId = validationSentences[currentIndex].sentenceId
     fetch('/validation/action', {
         method: 'POST',
@@ -301,17 +305,35 @@ const getAudioClip = function (audioPath) {
 }
 
 function showThankYou() {
-    $('#instructions-row').addClass('d-none')
-    $('#sentences-row').addClass('d-none')
-    $('#audio-row').addClass('d-none')
-    $('#thank-you-row').removeClass('d-none')
+    $('#instructions-row').addClass('d-none');
+    $('#sentences-row').addClass('d-none');
+    $('#audio-row').addClass('d-none');
+    $('#thank-you-row').removeClass('d-none');
+    
+    var language = localStorage.getItem('contributionLanguage');
+    const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
+    const aggregateDetails = JSON.parse(stringifyData);
+    const totalInfo = aggregateDetails.find((element) => element.language === language);
+    if (totalInfo) {
+        $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
+        $('#spn-total-hr-validated').html(totalInfo.total_validations);
+    }
+    else {
+        $('#spn-total-hr-contributed').html(0);
+        $('#spn-total-hr-validated').html(0);
+    }
+    $('#spn-validation-language-2').html(language);
+    $('#spn-validation-count').html(validationCount);
+    $('#spn-total-contribution-count').html(progressCount);
+
 }
 
 function showNoSentencesMessage() {
-    $('#instructions-row').addClass('d-none')
-    $('#sentences-row').addClass('d-none')
-    $('#audio-row').addClass('d-none')
-    $('#no-sentences-row').removeClass('d-none')
+    $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+    $('#instructions-row').addClass('d-none');
+    $('#sentences-row').addClass('d-none');
+    $('#audio-row').addClass('d-none');
+    $('#no-sentences-row').removeClass('d-none');
 }
 
 $(document).ready(() => {

@@ -9,6 +9,8 @@ spec:
   replicas: 2
   template:
     metadata:
+      annotations:
+        commit_sha: CIRCLE_SHA1
       labels:
         app: vakyansh
     spec:
@@ -77,3 +79,9 @@ spec:
           requests:
             cpu: 250m
             memory: 500Mi
+      
+      # spec:
+      #   template:
+      #    metadata:
+      #      annotations:
+      #        commit_sha: CI_COMMIT_SHA
