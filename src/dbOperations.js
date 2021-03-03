@@ -260,7 +260,7 @@ const getAggregateDataCount = (language, state) => {
     } else {
         query = cumulativeCount;
     }
-    return db.many(query);
+    return db.any(query);
 }
 
 const getLanguages = () => {
