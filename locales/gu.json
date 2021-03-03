@@ -120,5 +120,6 @@
 	"Start Contributing in <span id=\"spn-contribution-language\"></span>": "Start Contributing in <span id=\"spn-contribution-language\"></span>",
 	"You have helped us validate <span id=\"spn-validation-count\"></span> recordings out \"<span id=\"spn-total-contribution-count\"></span>\" sentences contributed in \"<span id=\"spn-validation-language-2\"></span>\" language.": "You have helped us validate <span id=\"spn-validation-count\"></span> recordings out \"<span id=\"spn-total-contribution-count\"></span>\" sentences contributed in \"<span id=\"spn-validation-language-2\"></span>\" language.",
 	"total hours validated": "total hours validated",
-	"total hours contributed": "total hours contributed"
+	"total hours contributed": "total hours contributed",
+	"You have helped us validate <span id=\"spn-validation-count\"></span>recordings out \"<span id=\"spn-total-contribution-count\"></span>\" sentences contributed in \"<span id=\"spn-validation-language-2\"></span>\" language.": "You have helped us validate <span id=\"spn-validation-count\"></span>recordings out \"<span id=\"spn-total-contribution-count\"></span>\" sentences contributed in \"<span id=\"spn-validation-language-2\"></span>\" language."
 }
