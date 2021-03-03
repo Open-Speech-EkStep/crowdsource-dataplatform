@@ -47,16 +47,16 @@ spec:
             secretKeyRef:
               name: vakyansh-secret
               key: ENCRYPTION_KEY          
-        - name: aws_access_key_id
+        - name: AWS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
               name: vakyansh-secret
-              key: aws_access_key_id          
-        - name: aws_secret_access_key
+              key: AWS_ACCESS_KEY_ID          
+        - name: AWS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
               name: vakyansh-secret
-              key: aws_secret_access_key          
+              key: AWS_SECRET_ACCESS_KEY          
         - name: region
           valueFrom:
             secretKeyRef:
@@ -70,8 +70,10 @@ spec:
         ports:
         - containerPort: 8080
 
-        # resources:
-        #   limits:
-        #     cpu: 500m
-        #   requests:
-        #     cpu: 200m
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1000Mi
+          requests:
+            cpu: 250m
+            memory: 500Mi
