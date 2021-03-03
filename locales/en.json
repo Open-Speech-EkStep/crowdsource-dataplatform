@@ -100,5 +100,9 @@
 	"total contributed": "total contributed",
 	"Validate More": "Validate More",
 	"languages contributed": "languages contributed",
-	"hours recorded": "hours recorded"
+	"hours recorded": "hours recorded",
+	"Validate What They Say": "Validate What They Say",
+	"Vakyansh: A crowdsourcing initiative for Indian languages": "Vakyansh: A crowdsourcing initiative for Indian languages",
+	"For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.": "For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.",
+	"The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.": "The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages."
 }
