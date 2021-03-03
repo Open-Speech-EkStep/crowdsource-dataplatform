@@ -1,4 +1,4 @@
-const $chartRow = $('#chart-row');
+const $chartRow = $('.chart-row');
 const $chartLoaders = $chartRow.find('.loader');
 const $charts = $chartRow.find('.chart');
 const $popovers = $chartRow.find('[data-toggle="popover"]');
@@ -24,110 +24,148 @@ function getOrderedGenderData(formattedGenderData) {
     return orderedGenderData;
 }
 
-function getFormattedData(data, key) {
+function getAgeGroupData(data, key) {
     let formattedData = [];
     data.forEach((item) => {
-        const element = item[key] ? item : {[key]: 'Anonymous', count: item.count};
+        const element = item[key] ? item : {...item, [key]: 'Anonymous'};
         const index = formattedData.findIndex(e => element[key].toLowerCase() === e[key].toLowerCase());
         if (index >= 0) {
-            formattedData[index].count += element.count;
+            formattedData[index].contributions += element.contributions;
+            formattedData[index].speakers += element.speakers;
         } else {
             formattedData.push(element);
         }
-    })
-return formattedData;
+    });
+    return formattedData;
 }
 
-function updateGraph(language) {
+const getGenderData = (genderData) => {
+    const genderOrder = ['male', 'female', 'anonymous', 'others'];
+    const formattedGenderData = [];
+    genderOrder.forEach(gender => {
+        genderData.data.forEach(item => {
+            if (!item.gender) item.gender = 'anonymous';
+            if (gender === item.gender) {
+                formattedGenderData.push({
+                    ...item,
+                    gender: item.gender.charAt(0).toUpperCase() + item.gender.slice(1)
+                });
+            }
+        });
+    });
+    return formattedGenderData;
+}
+
+function updateGraph(language, timeframe) {
     am4core.disposeAllCharts();
 
     $chartLoaders.show().addClass('d-flex');
     $charts.addClass('d-none');
-    buildGraphs(language);
+    buildGraphs(language, timeframe);
 }
 
-function buildGraphs(language) {
+function buildGraphs(language, timeframe) {
     $.fn.popover.Constructor.Default.whiteList.table = [];
     $.fn.popover.Constructor.Default.whiteList.tbody = [];
     $.fn.popover.Constructor.Default.whiteList.tr = [];
     $.fn.popover.Constructor.Default.whiteList.td = [];
 
-    fetch(`/getAllInfo/${language}`)
-        .then((data) => {
-            if (!data.ok) {
-                throw Error(data.statusText || 'HTTP error');
-            } else {
-                return data.json();
-            }
-        })
-        .then((data) => {
-            try {
-                $chartLoaders.hide().removeClass('d-flex');
-                $charts.removeClass('d-none');
-                const formattedAgeGroupData = getFormattedData(data.ageGroups, 'age_group').sort((a, b) => Number(a.count) - Number(b.count));
-                drawAgeGroupChart( formattedAgeGroupData);
-                const motherTongueTotal = data.motherTongues.reduce(
-                    (acc, curr) => acc + Number(curr.count),
-                    0
+    Promise.all([
+        fetch(`/timeline?language=${language}&timeframe=${timeframe}`),
+        fetch(`/contributions/gender?language=${language}`),
+        fetch(`/contributions/age?language=${language}`)
+    ]).then(function (responses) {
+        return Promise.all(responses.map(function (response) {
+            return response.json();
+        }));
+    }).then((data) => {
+        try {
+            $chartLoaders.hide().removeClass('d-flex');
+            $charts.removeClass('d-none');
+
+            const genderData = getGenderData(data[1]);
+            const ageGroupData = getAgeGroupData(data[2].data, 'age_group').sort((a, b) => Number(a.speakers) - Number(b.speakers));
+
+            // Draw timeline chart
+            drawTimelineChart(data[0]);
+
+            // Draw gender chart
+            drawGenderChart(genderData);
+
+            // Draw age group chart
+            drawAgeGroupChart(ageGroupData);
+
+            //lazy load other css
+            setTimeout(() => {
+                fetch(
+                    'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'
                 );
-                const formattedMotherTongueData = getFormattedData(data.motherTongues, 'mother_tongue').sort((a, b) => Number(b.count) - Number(a.count));
-                drawMotherTongueChart(
-                    formattedMotherTongueData.slice(0, 4),
-                    motherTongueTotal,
-                    'mother-tongue-chart',
-                    true
-                );
-                drawMotherTongueChart(
-                    formattedMotherTongueData,
-                    motherTongueTotal,
-                    'modal-chart'
-                );
-                const formattedGenderData = data.genderData.map((item) => {
-                    return item.gender
-                        ? {
-                            ...item,
-                            gender:
-                                item.gender.charAt(0).toUpperCase() + item.gender.slice(1),
-                        }
-                        : {gender: 'Anonymous', count: item.count}
-                });
-                let orderedGenderData = getOrderedGenderData(formattedGenderData);
-                const table = new Table()
-                drawGenderChart(orderedGenderData);
-                setPopOverContent(
-                    $popovers.eq(0),
-                    table.createTableWithTwoColumns(formattedMotherTongueData, 'mother_tongue')
-                );
-                setPopOverContent(
-                    $popovers.eq(1),
-                    table.createTableWithTwoColumns(formattedAgeGroupData, 'age_group')
-                );
-                setPopOverContent(
-                    $popovers.eq(2),
-                    table.createTableWithOneColumn(formattedGenderData, 'gender')
-                );
-                // for small screen increase width of mother tongue chart modal
-                if (innerWidth < 992) {
-                    $('#modal-chart-wrapper').find('.modal-dialog').addClass('w-90');
-                }
-                //lazy load other css
-                setTimeout(() => {
-                    fetch(
-                        'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'
-                    );
-                    fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
-                    fetch('css/notyf.min.css');
-                    fetch('css/record.css');
-                }, 2000);
-            } catch (error) {
-                console.log(error);
-                $chartLoaders.show().addClass('d-flex');
-                $charts.addClass('d-none');
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+                fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
+                fetch('css/notyf.min.css');
+                fetch('css/record.css');
+            }, 2000);
+        } catch (error) {
+            console.log(error);
+            $chartLoaders.show().addClass('d-flex');
+            $charts.addClass('d-none');
+        }
+    }).catch((err) => {
+        console.log(err);
+    });
+
+    // fetch(`/getAllInfo/${language}`)
+    //     .then((data) => {
+    //         if (!data.ok) {
+    //             throw Error(data.statusText || 'HTTP error');
+    //         } else {
+    //             return data.json();
+    //         }
+    //     })
+    //     .then((data) => {
+    //         try {
+    //             $chartLoaders.hide().removeClass('d-flex');
+    //             $charts.removeClass('d-none');
+    //             const formattedAgeGroupData = getFormattedData(data.ageGroups, 'age_group').sort((a, b) => Number(a.count) - Number(b.count));
+    //             drawAgeGroupChart( formattedAgeGroupData);
+    //             const formattedGenderData = data.genderData.map((item) => {
+    //                 return item.gender
+    //                     ? {
+    //                         ...item,
+    //                         gender:
+    //                             item.gender.charAt(0).toUpperCase() + item.gender.slice(1),
+    //                     }
+    //                     : {gender: 'Anonymous', count: item.count}
+    //             });
+    //             let orderedGenderData = getOrderedGenderData(formattedGenderData);
+    //             const table = new Table()
+    //             drawGenderChart(orderedGenderData);
+    //             drawTimelineChart();
+    //             setPopOverContent(
+    //                 $popovers.eq(1),
+    //                 table.createTableWithTwoColumns(formattedAgeGroupData, 'age_group')
+    //             );
+    //             setPopOverContent(
+    //                 $popovers.eq(2),
+    //                 table.createTableWithOneColumn(formattedGenderData, 'gender')
+    //             );
+    //             //lazy load other css
+    //             setTimeout(() => {
+    //                 fetch(
+    //                     'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'
+    //                 );
+    //                 fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
+    //                 fetch('css/notyf.min.css');
+    //                 fetch('css/record.css');
+    //             }, 2000);
+    //         } catch (error) {
+    //             console.log(error);
+    //             $chartLoaders.show().addClass('d-flex');
+    //             $charts.addClass('d-none');
+    //         }
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
 }
 
 class Table {
@@ -200,14 +238,14 @@ const setPopOverContent = ($popover, tableHtml = `<div></div>`) => {
     });
 };
 
-const chartColors = ['#3f80ff', '#4D55A5', '#735dc6', '#68b7dc'];
+const chartColors = ['#85A8F9', '#B7D0FE', '#316AFF', '#294691'];
 const drawAgeGroupChart = (chartData) => {
     const chart = am4core.create('age-group-chart', am4charts.PieChart3D);
     chart.data = chartData.slice(0, 3).concat({
         age_group: 'Others',
-        count: chartData
+        speakers: chartData
             .slice(3)
-            .reduce((acc, curr) => acc + Number(curr.count), 0),
+            .reduce((acc, curr) => acc + Number(curr.speakers), 0),
     });
     chart.paddingBottom = 50;
     chart.innerRadius = am4core.percent(40);
@@ -239,8 +277,8 @@ const drawAgeGroupChart = (chartData) => {
     series.slices.template.tooltipText =
         "{category}: [bold]{value.percent.formatNumber('#.0')}% ({value.value})[/]";
     // series.labels.template.text = "{category}: {value.percent.formatNumber('#.0')}%";
-    series.dataFields.value = 'count';
-    series.dataFields.depthValue = 'count';
+    series.dataFields.value = 'speakers';
+    series.dataFields.depthValue = 'speakers';
     series.dataFields.category = 'age_group';
     series.slices.template.adapter.add('fill', function (fill, target) {
         return chartColors[target.dataItem.index];
@@ -291,33 +329,28 @@ const drawMotherTongueChart = (chartData, totalData, element, staticColor) => {
 
 const drawGenderChart = (chartData) => {
     am4core.ready(function () {
-        const chart = am4core.create('gender-chart', am4charts.XYChart3D);
-        chart.paddingBottom = 30;
-        chart.paddingTop = 5;
+        const chart = am4core.create('gender-chart', am4charts.XYChart);
         chart.data = chartData;
         // Create axes
         const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
         categoryAxis.dataFields.category = 'gender';
         categoryAxis.renderer.minGridDistance = 20;
-        categoryAxis.renderer.inside = false;
-        categoryAxis.renderer.labels.template.fill = '#74798c';
+        categoryAxis.renderer.labels.template.fill = '#000';
         categoryAxis.renderer.grid.template.disabled = true;
-
-        const labelTemplate = categoryAxis.renderer.labels.template;
-        labelTemplate.rotation = -90;
-        labelTemplate.horizontalCenter = 'left';
-        labelTemplate.verticalCenter = 'middle';
-        labelTemplate.dy = 10; // moves it a bit down;
-        labelTemplate.inside = false; // this is done to avoid settings which are not suitable when label is rotated
+        categoryAxis.renderer.baseGrid.disabled = false;
+        categoryAxis.renderer.labels.template.fontSize = 12;
 
         const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
         valueAxis.renderer.grid.template.disabled = false;
-        valueAxis.renderer.labels.template.fill = '#74798c';
-        valueAxis.renderer.baseGrid.disabled = true;
+        valueAxis.renderer.labels.template.fill = '#000';
+        valueAxis.renderer.grid.template.strokeDasharray = "3,3";
+        valueAxis.renderer.labels.template.fontSize = 12;
+        valueAxis.title.text = 'Number of hours';
+        valueAxis.title.fontSize = 12;
         // Create series
-        const series = chart.series.push(new am4charts.ConeSeries());
+        const series = chart.series.push(new am4charts.ColumnSeries());
         series.calculatePercent = true;
-        series.dataFields.valueY = 'count';
+        series.dataFields.valueY = 'speakers';
         series.dataFields.categoryX = 'gender';
         series.columns.template.tooltipText =
             "{categoryX} : [bold]{valueY.percent.formatNumber('#.0')}% ({valueY.value})[/]";
@@ -332,10 +365,74 @@ const drawGenderChart = (chartData) => {
     });
 };
 
+const drawTimelineChart = (timelineData) => {
+    am4core.ready(function () {
+        am4core.useTheme(am4themes_animated);
+
+        // Create chart instance
+        var chart = am4core.create("timeline-chart", am4charts.XYChart);
+
+        const chartData = timelineData.data;
+        for (let i = 0; i < chartData.length; i++) {
+            chartData[i].duration = new Date(chartData[i].year, chartData[i].month-1, 1);
+        }
+
+        chart.data = chartData;
+
+        const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+        dateAxis.renderer.minGridDistance = 10;
+        dateAxis.renderer.grid.template.disabled = true;
+        dateAxis.renderer.baseGrid.disabled = false;
+        dateAxis.renderer.labels.template.fill = '#000';
+        dateAxis.title.text = 'Time';
+        dateAxis.renderer.labels.template.fontSize = 12;
+        dateAxis.title.fontSize = 12;
+
+        const hourAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        hourAxis.min = 0;
+        hourAxis.renderer.minGridDistance = 50;
+        hourAxis.renderer.grid.template.strokeDasharray = "3,3";
+        hourAxis.renderer.labels.template.fill = '#000';
+        hourAxis.title.text = 'Number of hours';
+        hourAxis.renderer.labels.template.fontSize = 12;
+        hourAxis.title.fontSize = 12;
+        chart.numberFormatter.numberFormat = "#a";
+
+        // Create series
+        var series = chart.series.push(new am4charts.LineSeries());
+        series.dataFields.dateX = "duration";
+        series.dataFields.valueY = "cumulative_contributions";
+        series.strokeWidth = 3;
+        series.tensionX = 0.8;
+        series.tooltipText = "Contributions: {cumulative_contributions} Validations: {cumulative_validations}";
+        series.sequencedInterpolation = true;
+        series.stroke = am4core.color("#FCC232")
+        series.name = "Recorded";
+
+        // Create series
+        var series2 = chart.series.push(new am4charts.LineSeries());
+        series2.dataFields.dateX = "duration";
+        series2.dataFields.valueY = "cumulative_validations";
+        series2.sequencedInterpolation = true;
+        series2.tensionX = 0.8;
+        series2.strokeWidth = 3;
+        series2.stroke = am4core.color("#83E661");
+        series2.name = "Validated";
+
+        chart.legend = new am4charts.Legend();
+        chart.legend.labels.template.fontSize = 12;
+
+        // Add cursor
+        chart.cursor = new am4charts.XYCursor();
+        chart.cursor.xAxis = dateAxis;
+    });
+};
+
 module.exports = {
     Table,
     updateGraph,
     buildGraphs,
     getOrderedGenderData,
-    getFormattedData
+    getGenderData,
+    getAgeGroupData
 };

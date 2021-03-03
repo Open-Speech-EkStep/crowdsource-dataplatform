@@ -121,5 +121,10 @@
 	"Thank you for your enthusiasm to validate the voice samples": "Thank you for your enthusiasm to validate the voice samples",
 	"We have recently commenced the data contribution journey for \"Y\" language and hope that very soon there will be voice samples collected for your validation.": "We have recently commenced the data contribution journey for \"Y\" language and hope that very soon there will be voice samples collected for your validation.",
 	"Would you also like to contribute your voice?": "Would you also like to contribute your voice?",
-	"Start Contributing": "Start Contributing"
+	"Start Contributing": "Start Contributing",
+	"Select the language:": "Select the language:",
+	"All Languages": "All Languages",
+	"hours validated": "hours validated",
+	"Progress Chart": "Progress Chart",
+	"Gender Contribution": "Gender Contribution"
 }
