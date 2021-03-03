@@ -406,7 +406,7 @@ $(document).ready(function () {
                 age: age.value,
                 motherTongue: motherTongue.value,
                 userName: userNameValue,
-                language: "Odia",
+                language: sentenceLanguage,
             };
             localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
             location.href = '/record';
