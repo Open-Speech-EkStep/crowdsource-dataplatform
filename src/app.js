@@ -100,8 +100,9 @@ app.get('/changeLocale/:locale', function (req, res) {
 app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
-  const isCookiePresent = req.cookies.userId ? true : false;
-  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent, defaultLang:req.cookies.i18n });
+  const localLanguage = req.cookies.i18n;
+  const isCookiePresent = localLanguage ? true : false;
+  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent, defaultLang:localLanguage });
 });
 
 router.get('/getDetails/:language', async function (req, res) {
