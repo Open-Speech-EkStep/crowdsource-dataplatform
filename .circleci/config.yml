@@ -64,10 +64,11 @@ jobs:
       - kubernetes/install
       - run:
           command: |
+            echo $CIRCLE_SHA1
             aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
             ENV_IMAGE_NAME=${AWS_ECR_ACCOUNT_URL}/${REPO}:<< parameters.env-name >>
-            kubectl -n << parameters.env-name >> set image deployment vakyansh vakyansh=$ENV_IMAGE_NAME
-            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g" ${HOME}/project/deployments/k8s/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
+            # kubectl -n << parameters.env-name >> set image deployment vakyansh vakyansh=$ENV_IMAGE_NAME
+            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/deployments/k8s/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
 
           name: Deploy container
 
