@@ -27,16 +27,19 @@ const {
   validateUserInputAndFile,
   validateUserInfo,
 } = require('./middleware/validateUserInputs');
-const Ddos = require('ddos');
-const ddos = new Ddos({ burst: 12, limit: 70 })
-app.use(ddos.express);
+
+// const Ddos = require('ddos');
+// const ddos = new Ddos({ burst: 12, limit: 70 })
+// app.use(ddos.express);
+
 const { I18n } = require('i18n');
 const i18n = new I18n({
     locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te'],
     directory: './locales',
     cookie: 'i18n'
   })
-// app.use(ddos.express);
+
+
 app.enable('trust proxy');
 
 // const privateKey = fs.readFileSync('./vakyansh.key', 'utf8');
