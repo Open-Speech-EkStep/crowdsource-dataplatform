@@ -11,6 +11,11 @@ a{
     cursor: pointer;
 }
 
+.w-h-5 {
+    width: 5rem;
+    height: 5rem;
+}
+
 @media (min-width: 1000px) {
     .dropdown-menu{
         right:0;
