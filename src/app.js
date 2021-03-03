@@ -86,8 +86,8 @@ app.use(function (req, res, next) {
   if (cookie === undefined) {
     res.cookie('userId', uuidv4(), {
       maxAge: ONE_YEAR,
-       httpOnly: true,
-       secure: true
+      httpOnly: true,
+      secure: true
     });
   }
   next();
@@ -145,6 +145,10 @@ router.get('/record', (req, res) => {
 });
 router.get('/validator-page', (req, res) => {
   res.render('validator-prompt-page.ejs');
+});
+router.get('/dashboard', function (req, res) {
+  const isCookiePresent = req.cookies.userId ? true : false;
+  res.render('dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
 });
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 router.get('/validation/sentences/:language', (req, res) => getValidationSentences(req, res));
