@@ -55,7 +55,6 @@ function updateHrsForSayAndListen(language) {
     const $listenLoader = $('#listen-loader');
     $sayLoader.removeClass('d-none');
     $listenLoader.removeClass('d-none');
-    setAggregateDataCountByLanguage();
     const $say_p_3 = $("#say-p-3");
     const $listen_p_3 = $("#listen-p-3");
     const stringifyData = localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE);
@@ -63,11 +62,11 @@ function updateHrsForSayAndListen(language) {
     const totalInfo = aggregateDetails && aggregateDetails.find((element) => element.language === language);
     if (totalInfo) {
         const {total_contributions, total_validations} = totalInfo;
-        total_contributions && $say_p_3.text(`${total_contributions} hrs are recorded in ${language}`);
-        total_validations && $listen_p_3.text(`${total_validations} hrs are validated in ${language}`);
+        total_contributions && $say_p_3.text(`${total_contributions} hrs recorded in ${language}`);
+        total_validations && $listen_p_3.text(`${total_validations} hrs validated in ${language}`);
     } else {
-        $say_p_3.text(`0 hr is recorded in ${language}`);
-        $listen_p_3.text(`0 hr is validated in ${language}`);
+        $say_p_3.text(`0 hr recorded in ${language}`);
+        $listen_p_3.text(`0 hr validated in ${language}`);
     }
     $sayLoader.addClass('d-none');
     $listenLoader.addClass('d-none');

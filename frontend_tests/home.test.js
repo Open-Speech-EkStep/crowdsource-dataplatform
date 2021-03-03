@@ -99,8 +99,8 @@ describe('updateHrsForSayAndListen', () => {
         fetchMock.get(`/aggregate-data-count?byLanguage=${true}`, {data:[]});
         updateHrsForSayAndListen("Hindi");
         flushPromises().then(() => {
-            expect($say_p_3.innerHTML).toEqual('0 hr is recorded in Hindi');
-            expect($listen_p_3.innerHTML).toEqual('0 hr is validated in Hindi');
+            expect($say_p_3.innerHTML).toEqual('0 hr recorded in Hindi');
+            expect($listen_p_3.innerHTML).toEqual('0 hr validated in Hindi');
             fetchMock.reset();
             localStorage.clear();
             done();
