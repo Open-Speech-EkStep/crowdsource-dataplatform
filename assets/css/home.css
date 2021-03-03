@@ -33,6 +33,12 @@ h6,
     font-size: 2.2rem;
   }
 }
+
+@media screen and (min-width: 1700px) {
+  #start_recording, #start_validating {
+    width: 250px;
+  }
+}
 @media (min-width: 448px) {
   html {
     font-size: 13px;
