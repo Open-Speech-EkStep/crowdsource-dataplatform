@@ -355,7 +355,11 @@ function showThankYou() {
     const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
     const aggregateDetails = JSON.parse(stringifyData);
     const totalInfo = aggregateDetails.find((element) => element.language === language);
+    let totalSentences = 0;
+    let totalValidations = 0;
     if (totalInfo) {
+        totalSentences = Math.floor(Number(totalInfo.total_contributions) * 3600 / 6);
+        totalValidations = Math.floor(Number(totalInfo.total_validations) * 3600 / 6);
         $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
         $('#spn-total-hr-validated').html(totalInfo.total_validations);
     }
@@ -364,8 +368,8 @@ function showThankYou() {
         $('#spn-total-hr-validated').html(0);
     }
     $('#spn-validation-language-2').html(language);
-    $('#spn-validation-count').html(validationCount);
-    $('#spn-total-contribution-count').html(progressCount);
+    $('#spn-validation-count').html((validationCount + totalValidations));
+    $('#spn-total-contribution-count').html(totalSentences);
 
 }
 
