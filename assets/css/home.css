@@ -52,6 +52,13 @@ h6,
   .font-weight-normal-sm {
     font-weight: 400 !important;
   }
+  #start_recording, #start_validating {
+    width: 100px;
+  }
+  .say-active #say-p-2, .listen-active #listen-p-2 {
+    position: relative !important;
+    margin-top: 2rem;
+  }
 }
 @media (min-width: 768px) {
   .font-weight-light-lg {
@@ -298,4 +305,36 @@ body.modal-open .supreme-container {
 .active{
   font-weight: 900;
   color: black;
+}
+
+@media screen and (max-width: 480px) {
+  #start_recording, #start_validating {
+    width: 85px;
+  }
+  .say-active #say-p-2, .listen-active #listen-p-2 {
+    position: relative !important;
+    margin-top: 2rem;
+  }
+  .mt-xs-5 {
+     margin-top: 5rem;
+  }
+  #languages-wrapper, #speakers-wrapper, #hours-wrapper {
+    display: flex;
+    flex-flow: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+  }
+  #speaker-value, #languages-value, #hour-value {
+    margin-bottom: 0;
+  }
+  .fs-h4 {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #start_recording, #start_validating {
+    width: 64px;
+  }
 }
