@@ -63,9 +63,9 @@ describe('performAPIRequest', () => {
 
 
     test('should give details for all language if server responds ok', () => {
-        fetchMock.get(`/aggregate-data-count?byLanguage=${true}`, [{language: "Hindi", count: 5}]);
+        fetchMock.get(`/aggregate-data-count?byLanguage=${true}`, {data:[{language: "Hindi", count: 5}]});
         performAPIRequest(`/aggregate-data-count?byLanguage=${true}`).then((data) => {
-            expect(data).toEqual([{language: "Hindi", count: 5}]);
+            expect(data).toEqual({data:[{language: "Hindi", count: 5}]});
             fetchMock.reset();
         });
     });
@@ -96,7 +96,7 @@ describe('updateHrsForSayAndListen', () => {
         const $listen_p_3 = document.getElementById("listen-p-3");
         mockLocalStorage();
         localStorage.setItem('aggregateDataCountByLanguage', JSON.stringify([]))
-        fetchMock.get(`/aggregate-data-count?byLanguage=${true}`, []);
+        fetchMock.get(`/aggregate-data-count?byLanguage=${true}`, {data:[]});
         updateHrsForSayAndListen("Hindi");
         flushPromises().then(() => {
             expect($say_p_3.innerHTML).toEqual('0 hr is recorded in Hindi');
