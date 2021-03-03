@@ -102,5 +102,17 @@
 	"Select Your Preferred Language": "Select Your Preferred Language",
 	"Select the language you wish to contribute/validate in:": "Select the language you wish to contribute/validate in:",
 	"languages contributed": "languages contributed",
-	"hours recorded": "hours recorded"
+	"hours recorded": "hours recorded",
+	"Instructions": "Instructions",
+	"Play": "Play",
+	"Thank you for your enthusiasm to validate the voice samples": "Thank you for your enthusiasm to validate the voice samples",
+	"We have recently commenced the data contribution journey for \"Y\" language and hope that very soon there will be voice samples collected for your validation.": "We have recently commenced the data contribution journey for \"Y\" language and hope that very soon there will be voice samples collected for your validation.",
+	"Would you also like to contribute your voice?": "Would you also like to contribute your voice?",
+	"Start Contributing": "Start Contributing",
+	"Thank you for validating!": "Thank you for validating!",
+	"You have helped us validate 10 recordings out \"x\" sentences contributed in \"y\" language.": "You have helped us validate 10 recordings out \"x\" sentences contributed in \"y\" language.",
+	"total validated": "total validated",
+	"total contributed": "total contributed",
+	"Validate More": "Validate More",
+	"Validating Instructions": "Validating Instructions"
 }
