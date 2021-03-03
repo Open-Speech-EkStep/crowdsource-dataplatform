@@ -281,6 +281,7 @@ const loadAudio = function (audioLink) {
 };
 
 const getAudioClip = function (audioPath) {
+    hideAudioRow();
     fetch('/audioClip', {
         method: 'POST',
         body: JSON.stringify({
@@ -296,14 +297,24 @@ const getAudioClip = function (audioPath) {
             const fileReader = new FileReader();
             fileReader.onload = function (e) {
                 loadAudio(e.target.result);
+                showAudioRow();
             }
             fileReader.readAsDataURL(blob);
         });
     }).catch((err)=>{
         console.log(err)
+        showAudioRow();
     });
 }
 
+function hideAudioRow() {
+ $('#loader-audio-row').removeClass('d-none');
+ $('#audio-row').addClass('d-none');
+}
+function showAudioRow() {
+    $('#loader-audio-row').addClass('d-none');
+    $('#audio-row').removeClass('d-none');
+}
 function showThankYou() {
     $('#instructions-row').addClass('d-none');
     $('#sentences-row').addClass('d-none');
