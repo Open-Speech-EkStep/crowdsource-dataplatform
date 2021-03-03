@@ -1,4 +1,4 @@
-const {encrypt} = require('./encryptAndDecrypt');
+const { encrypt } = require('./encryptAndDecrypt');
 const { downloader } = require('./downloader/objDownloader')
 const {
     UpdateAudioPathAndUserDetails,
@@ -17,9 +17,28 @@ const {
     addValidationQuery,
     updateSentencesWithValidatedState
 } = require('./dbQuery');
-const { topLanguagesBySpeakerContributions, topLanguagesByHoursContributed, cumulativeCount, cumulativeDataByState, cumulativeDataByLanguage, cumulativeDataByLanguageAndState, listLanguages, dailyTimeline, ageGroupContributions, genderGroupContributions,dailyTimelineCumulative } = require('./dashboardDbQueries');
+const {
+    topLanguagesBySpeakerContributions,
+    topLanguagesByHoursContributed,
+    cumulativeCount,
+    cumulativeDataByState,
+    cumulativeDataByLanguage,
+    cumulativeDataByLanguageAndState,
+    listLanguages,
+    dailyTimeline,
+    ageGroupContributions,
+    genderGroupContributions,
+    dailyTimelineCumulative,
+    weeklyTimeline,
+    weeklyTimelineCumulative,
+    monthlyTimeline,
+    monthlyTimelineCumulative,
+    quarterlyTimeline,
+    quarterlyTimelineCumulative
+} = require('./dashboardDbQueries');
 
 const { KIDS_AGE_GROUP, ADULT, KIDS } = require('./constants');
+
 const envVars = process.env;
 const pgp = require('pg-promise')();
 const showUniqueSentences = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION == 'true';
@@ -105,7 +124,7 @@ const getSentencesBasedOnAge = function (
         languageLabel = KIDS;
     }
 
-    if( showUniqueSentences) {
+    if (showUniqueSentences) {
         query = updateAndGetUniqueSentencesQuery
     }
 
@@ -178,17 +197,19 @@ const getAudioClip = function (req, res, objectStorage) {
     }
 
 
-  const downloadFile = downloader(objectStorage);
+    const downloadFile = downloader(objectStorage);
 
-    const file = downloadFile(req.body.file);
-    file.exists().then((result)=>{
-        if(result[0]){
-            const readStream = file.createReadStream();
-            readStream.pipe(res);
-        }
-        else
-            res.sendStatus(404);
-    })
+    try {
+        const file = downloadFile(req.body.file);
+
+        const readStream = file.createReadStream();
+        readStream.pipe(res);
+    }
+    catch (err) {
+        res.sendStatus(500);
+    }
+    
+
 }
 
 const updateTablesAfterValidation = function (req, res) {
@@ -248,14 +269,29 @@ const getAggregateDataCount = (language, state) => {
 const getLanguages = () => {
     return db.any(listLanguages, []);
 }
+const normalTimeLineQueries = {
+    "weekly": weeklyTimeline,
+    "daily": dailyTimeline,
+    "monthly": monthlyTimeline,
+    "quarterly": quarterlyTimeline
+}
 
-const getTimeline = (language = "") => {
+const cumulativeTimeLineQueries = {
+    "weekly": weeklyTimelineCumulative,
+    "daily": dailyTimelineCumulative,
+    "monthly": monthlyTimelineCumulative,
+    "quarterly": quarterlyTimelineCumulative
+}
+const getTimeline = (language = "", timeframe) => {
+    timeframe = timeframe.toLowerCase();
     if (language.length !== 0) {
         languageFilter = `language iLike '${language}'`
         let filter = pgp.as.format('$1:raw', [languageFilter])
-        return db.any(dailyTimeline, filter);
+        let query = normalTimeLineQueries[timeframe] || weeklyTimeline;
+        return db.any(query, filter);
     } else {
-        return db.any(dailyTimelineCumulative, []);
+        let query = cumulativeTimeLineQueries[timeframe] || weeklyTimelineCumulative;
+        return db.any(query, []);
     }
 }
 

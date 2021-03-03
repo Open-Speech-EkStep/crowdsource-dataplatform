@@ -55,11 +55,12 @@ function updateHrsForSayAndListen(language) {
     const $listenLoader = $('#listen-loader');
     $sayLoader.removeClass('d-none');
     $listenLoader.removeClass('d-none');
-    const stringifyData = localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE);
-    const aggregateDetails = JSON.parse(stringifyData);
-    const totalInfo = aggregateDetails.find((element) => element.language === language);
+    setAggregateDataCountByLanguage();
     const $say_p_3 = $("#say-p-3");
     const $listen_p_3 = $("#listen-p-3");
+    const stringifyData = localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE);
+    const aggregateDetails = JSON.parse(stringifyData);
+    const totalInfo = aggregateDetails && aggregateDetails.find((element) => element.language === language);
     if (totalInfo) {
         const {total_contributions, total_validations} = totalInfo;
         total_contributions && $say_p_3.text(`${total_contributions} hrs are recorded in ${language}`);
@@ -535,4 +536,6 @@ module.exports = {
     calculateTime,
     getStatistics,
     performAPIRequest,
+    updateHrsForSayAndListen,
+    getDefaultTargettedDiv
 };

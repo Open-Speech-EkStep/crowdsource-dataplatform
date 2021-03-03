@@ -109,5 +109,17 @@
 	"total validated": "total validated",
 	"total contributed": "total contributed",
 	"Validate More": "Validate More",
-	"Validating Instructions": "Validating Instructions"
+	"Validating Instructions": "Validating Instructions",
+	"languages contributed": "languages contributed",
+	"hours recorded": "hours recorded",
+	"Thank you for your enthusiasm to validate the voice samples": "Thank you for your enthusiasm to validate the voice samples",
+	"We have recently commenced the data contribution journey for \"Y\" language and hope that very soon there will be voice samples collected for your validation.": "We have recently commenced the data contribution journey for \"Y\" language and hope that very soon there will be voice samples collected for your validation.",
+	"Would you also like to contribute your voice?": "Would you also like to contribute your voice?",
+	"Start Contributing": "Start Contributing",
+	"We have recently commenced the data contribution journey for \"<span id=\"spn-validation-language\"></span>\" language and hope that very soon there will be voice samples collected for your validation.": "We have recently commenced the data contribution journey for \"<span id=\"spn-validation-language\"></span>\" language and hope that very soon there will be voice samples collected for your validation.",
+	"Start Contributing in <span id=\"spn-contribution-language\"></span>": "Start Contributing in <span id=\"spn-contribution-language\"></span>",
+	"You have helped us validate <span id=\"spn-validation-count\"></span> recordings out \"<span id=\"spn-total-contribution-count\"></span>\" sentences contributed in \"<span id=\"spn-validation-language-2\"></span>\" language.": "You have helped us validate <span id=\"spn-validation-count\"></span> recordings out \"<span id=\"spn-total-contribution-count\"></span>\" sentences contributed in \"<span id=\"spn-validation-language-2\"></span>\" language.",
+	"total hours validated": "total hours validated",
+	"total hours contributed": "total hours contributed",
+	"You have helped us validate <span id=\"spn-validation-count\"></span>recordings out \"<span id=\"spn-total-contribution-count\"></span>\" sentences contributed in \"<span id=\"spn-validation-language-2\"></span>\" language.": "You have helped us validate <span id=\"spn-validation-count\"></span>recordings out \"<span id=\"spn-total-contribution-count\"></span>\" sentences contributed in \"<span id=\"spn-validation-language-2\"></span>\" language."
 }
