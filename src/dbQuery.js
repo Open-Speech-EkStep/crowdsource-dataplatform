@@ -23,6 +23,7 @@ from sentences inner join "contributors" con on con."contributor_identifier" = $
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
 and (coalesce(cont.action,\'\')!=\'completed\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id)) \
+group by sentences."sentenceId", con."contributor_id" \
 limit 5  returning "sentenceId") \
 select ins."sentenceId", sentences.sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";'
