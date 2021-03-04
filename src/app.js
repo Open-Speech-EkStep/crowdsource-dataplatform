@@ -196,6 +196,20 @@ router.post('/upload', (req, res) => {
     });
 });
 
+router.get('/location-info',(req, res)=>{
+    const ip = req.query.ip || null;
+    if(ip === null){
+      res.sendStatus(400);
+      return;
+    }
+
+    fetch(`http://ip-api.com/json/${ip}?fields=country,regionName`).then(response=>{
+      res.send(response);
+    }).catch(err=>{
+      res.sendStatus(500);
+    })
+})
+
 require('./dashboard-api')(router);
 
 app.use('/', router);
