@@ -203,12 +203,16 @@ const getAudioClip = async function (req, res, objectStorage) {
     try {
         const file = await downloadFile(req.body.file);
 
-        const readStream = file.createReadStream();
-        readStream.pipe(res);
+        if (file == null) {
+            res.sendStatus(404);
+        }
+        else {
+            const readStream = file.createReadStream();
+            readStream.pipe(res);
+        }
     }
     catch (err) {
-        console.log(err);
-        res.sendStatus(err.statusCode);
+        res.sendStatus(500);
     }
     
 
