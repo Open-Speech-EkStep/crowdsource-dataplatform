@@ -1,4 +1,4 @@
-const {generateIndiaMap, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
+const {generateIndiaMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
 const {toggleFooterPosition} = require('./utils')
 const {
     validateUserName,
@@ -122,13 +122,11 @@ const setLanguagesInHeader = function(response) {
 
 const setTop5LanInNavBar = function(){
      const topLanguagesByHours = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-     console.log("toplng resP :", topLanguagesByHours);
     if(topLanguagesByHours) {
         setLanguagesInHeader(JSON.parse(topLanguagesByHours));
     } else {
         performAPIRequest('/top-languages-by-hours')
         .then((response) => {
-            console.log("response: ", response);
             localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response));
             setLanguagesInHeader(response);
         });
@@ -333,7 +331,7 @@ $(document).ready(function () {
         $listen_p_2.addClass('d-none');
         $listen_container.removeClass('listen-active');
     })
-
+    getStatistics();
     generateIndiaMap();
     showByHoursChart();
 });
