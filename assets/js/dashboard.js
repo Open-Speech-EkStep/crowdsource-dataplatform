@@ -1,7 +1,9 @@
 const { updateGraph, calculateTime } = require('./draw-chart');
-const {toggleFooterPosition} = require('./utils');
+const { testUserName, setStartRecordBtnToolTipContent } = require('./speakerDetails');
+const { toggleFooterPosition } = require('./utils');
 
 let timer;
+let languageToRecord = '';
 
 const fetchDetail = (language) => {
     const byLanguage = language ? true : false;
@@ -107,6 +109,7 @@ function updateLanguage(language) {
                     $speakerDataDetails.removeClass('d-none');
                 } else {
                     const previousLanguage = localStorage.getItem('previousLanguage');
+                    languageToRecord = language;
                     $("#language").val(previousLanguage);
                     $("#languageSelected").text(` ${language}, `);
                     $("#no-data-found").removeClass('d-none');
@@ -125,7 +128,13 @@ function updateLanguage(language) {
 
 $(document).ready(function () {
     localStorage.removeItem('previousLanguage');
-    //updateGraph('', 'monthly');
+    const $startRecordBtn = $('#proceed-box');
+    const $startRecordBtnTooltip = $startRecordBtn.parent();
+    const $tncCheckbox = $('#tnc');
+    const genderRadios = document.querySelectorAll('input[name = "gender"]');
+    const $userName = $('#username');
+    const motherTongue = document.getElementById('mother-tongue');
+    const age = document.getElementById('age');
     updateLanguage('');
 
     $('#language').on('change', (e) => {
@@ -152,6 +161,43 @@ $(document).ready(function () {
         timer = setTimeout(() => {
             $('#no-data-found').addClass('d-none');
         }, 5000);
+    });
+
+    $("#contribute-now").on('click', (e) => {
+        localStorage.setItem('contributionLanguage', languageToRecord);
+    });
+
+    $tncCheckbox.change(function () {
+        const userNameValue = $userName.val().trim();
+        if (this.checked && !testUserName(userNameValue)) {
+            $startRecordBtn.removeAttr('disabled').removeClass('point-none');
+            $startRecordBtnTooltip.tooltip('disable');
+        } else {
+            setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
+            $startRecordBtn.prop('disabled', 'true').addClass('point-none');
+            $startRecordBtnTooltip.tooltip('enable');
+        }
+    });
+
+    $startRecordBtn.on('click', () => {
+        if ($tncCheckbox.prop('checked')) {
+            const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
+            const genderValue = checkedGender.length ? checkedGender[0].value : '';
+            const userNameValue = $userName.val().trim().substring(0, 12);
+            if (languageToRecord === 'English' || languageToRecord === 'Gujrati') languageToRecord = 'Odia';
+            if (testUserName(userNameValue)) {
+                return;
+            }
+            const speakerDetails = {
+                gender: genderValue,
+                age: age.value,
+                motherTongue: motherTongue.value,
+                userName: userNameValue,
+                language: languageToRecord,
+            };
+            localStorage.setItem('speakerDetails', JSON.stringify(speakerDetails));
+            location.href = '/record';
+        }
     });
 
     toggleFooterPosition();

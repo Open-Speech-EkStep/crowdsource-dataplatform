@@ -213,11 +213,7 @@ $(document).ready(function () {
     setAggregateDataCountByLanguage();
 
     $('#start_recording').on('click', () => {
-        if (top_lang === "Hindi" || top_lang === "Odia") {
-            sentenceLanguage = top_lang;
-        } else {
-            sentenceLanguage = "Odia";
-        }
+        sentenceLanguage = top_lang;
     });
 
     $('[name="topLanguageChart"]').on('change', (event) => {
@@ -262,6 +258,7 @@ $(document).ready(function () {
             const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
             const genderValue = checkedGender.length ? checkedGender[0].value : '';
             const userNameValue = $userName.val().trim().substring(0, 12);
+            if (sentenceLanguage === 'English' || sentenceLanguage === 'Gujrati') sentenceLanguage = 'Odia';
             if (testUserName(userNameValue)) {
                 return;
             }
