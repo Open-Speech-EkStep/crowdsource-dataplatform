@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: vakyansh
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       annotations:
@@ -74,5 +74,5 @@ spec:
 
         resources:
           limits:
-            cpu: 2000m
-            memory: 2Gi
+            cpu: 500m
+            memory: 1Gi
