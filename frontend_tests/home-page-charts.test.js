@@ -54,7 +54,7 @@ describe("calculateTime", () => {
       expect(formatTime(162, 12)).toEqual("162 hrs 12 min");
     });
   
-    test("should format hrs, min & sec for given hrs, min & sec", () => {
-      expect(formatTime(162, 12, 8)).toEqual("162 hrs 12 min 8 sec");
+    test("should format hrs, min & sec as hrs and mins as hrs, min greater than 0", () => {
+      expect(formatTime(162, 12)).toEqual("162 hrs 12 min");
     });
   });
