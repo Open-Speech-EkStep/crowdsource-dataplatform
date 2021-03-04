@@ -6,9 +6,11 @@ spec:
   selector:
     matchLabels:
       app: vakyansh
-  replicas: 2
+  replicas: 1
   template:
     metadata:
+      annotations:
+        commit_sha: CIRCLE_SHA1
       labels:
         app: vakyansh
     spec:
@@ -72,8 +74,5 @@ spec:
 
         resources:
           limits:
-            cpu: 500m
-            memory: 1000Mi
-          requests:
             cpu: 250m
             memory: 500Mi
