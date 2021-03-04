@@ -191,7 +191,7 @@ const getValidationSentences = function (req, res) {
         });
 };
 
-const getAudioClip = async function (req, res, objectStorage) {
+const getAudioClip = function (req, res, objectStorage) {
     if (!(req.body && req.body.file)) {
         res.status(400).send('No file selected.');
         return;
@@ -201,14 +201,13 @@ const getAudioClip = async function (req, res, objectStorage) {
     const downloadFile = downloader(objectStorage);
 
     try {
-        const file = await downloadFile(req.body.file);
+        const file = downloadFile(req.body.file);
 
         const readStream = file.createReadStream();
         readStream.pipe(res);
     }
     catch (err) {
-        console.log(err);
-        res.sendStatus(err.statusCode);
+        res.sendStatus(500);
     }
     
 
