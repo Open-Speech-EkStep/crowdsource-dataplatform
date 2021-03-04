@@ -31,10 +31,10 @@ const MOTHER_TONGUE = [
   'Telugu',
   'Urdu',
 ];
-const LANGUAGES = [{value: "Assamese",id: "as", text: "Assamese"},
+const LANGUAGES = [{value: "Assamese",id: "as", text: "অসমীয়া"},
   {value: "Bengali", id: "bn", text: "বাংলা"},
   {value: "English", id: "en", text: "English"},
-  {value: "Gujrati", id: "gu", text: "ગુજરાતી"},
+  {value: "Gujarati", id: "gu", text: "ગુજરાતી"},
   {value: "Hindi", id: "hi", text: "हिन्दी"},
   {value: "Kannada", id: "kn", text: "ಕನ್ನಡ"},
   {value: "Malayalam", id: "ml", text: "മലയാളം"},
