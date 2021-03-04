@@ -109,5 +109,17 @@
 	"total validated": "total validated",
 	"total contributed": "total contributed",
 	"Validate More": "Validate More",
-	"Validating Instructions": "Validating Instructions"
+	"Validating Instructions": "Validating Instructions",
+	"Select the language for contribution": "Select the language for contribution",
+	"Vakyansh: A crowdsourcing initiative for Indian languages": "Vakyansh: A crowdsourcing initiative for Indian languages",
+	"For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.": "For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.",
+	"The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.": "The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.",
+	"languages contributed": "languages contributed",
+	"hours recorded": "hours recorded",
+	"Top Languages": "Top Languages",
+	"By hours of data contributed": "By hours of data contributed",
+	"By number of speakers": "By number of speakers",
+	"VIEW ALL DETAILS": "VIEW ALL DETAILS",
+	"Select Age Group": "Select Age Group",
+	"I have read and agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions </a>": "I have read and agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions </a>"
 }

@@ -276,24 +276,25 @@ body.modal-open .supreme-container {
 }
 
 .quarter {
-  background-color: #C6C6C6;
+  background-color: #CDD8F6;
 }
 
 .half {
-  background-color: #FBEA5A;
+  background-color: #92A8E8;
 }
 
 .threeQuarter {
-  background-color: #EA923F;
+  background-color: #6B85CE;
 }
 
 .full {
-  background-color: #86D126;
+  background-color: #4061BF;
 }
 
 .legend-val {
   margin-top: 25px;
   text-align: center;
+  font-size: 14px;
 }
 
 #viewAllDetailsBtn {
