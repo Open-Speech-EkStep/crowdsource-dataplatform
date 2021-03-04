@@ -72,6 +72,17 @@ const setAudioPlayer = function () {
         replay.addClass('d-none');
         pause.removeClass('d-none');
         textDiv.text('Pause');
+        const dislikeButton = $("#dislike_button");
+        const likeButton = $("#like_button");
+        const skipButton = $("#skip_button");
+
+        updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
+        updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
+        skipButton.removeAttr('style');
+
+        disableButton(likeButton)
+        disableButton(dislikeButton)
+        disableButton(skipButton)
         myAudio.play();
     }
 
@@ -92,6 +103,7 @@ const setAudioPlayer = function () {
 
 let currentIndex = 0;
 let progressCount = 0;
+let validationCount = 0;
 
 const animateCSS = ($element, animationName, callback) => {
     $element.addClass(`animated ${animationName}`);
@@ -140,7 +152,7 @@ const updateValidationCount = () => {
 
 const updateProgressBar = () => {
     const $getStarted = $('#get-started');
-    const progressMessages = [
+    let progressMessages = [
         'Let’s get started',
         'We know you can do more! ',
         'You are halfway there. Keep going!',
@@ -148,6 +160,36 @@ const updateProgressBar = () => {
         'Four dead, one more to go!',
         'Yay! Done & Dusted!',
     ];
+    if (validationSentences.length == 4) {
+        progressMessages = [
+            'Let’s get started',
+            'We know you can do more! ',
+            'You are halfway there. Keep going!',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }
+    else if (validationSentences.length == 3) {
+        progressMessages = [
+            'Let’s get started',
+            'We know you can do more! ',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }
+    else if (validationSentences.length == 2) {
+        progressMessages = [
+            'Let’s get started',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }    
+    else if (validationSentences.length == 1) {
+        progressMessages = [
+            'Let’s get started',
+            'Yay! Done & Dusted!'
+        ];
+    }
     const $progressBar = $("#progress_bar");
     progressCount++;
     $getStarted.text(progressMessages[progressCount]).show();
@@ -184,6 +226,9 @@ function resetDecisionRow() {
 }
 
 function recordValidation(action) {
+    if (action == 'reject' || action == 'accept') {
+        validationCount++;
+    }
     const sentenceId = validationSentences[currentIndex].sentenceId
     fetch('/validation/action', {
         method: 'POST',
@@ -277,6 +322,7 @@ const loadAudio = function (audioLink) {
 };
 
 const getAudioClip = function (audioPath) {
+    hideAudioRow();
     fetch('/audioClip', {
         method: 'POST',
         body: JSON.stringify({
@@ -292,26 +338,58 @@ const getAudioClip = function (audioPath) {
             const fileReader = new FileReader();
             fileReader.onload = function (e) {
                 loadAudio(e.target.result);
+                showAudioRow();
             }
             fileReader.readAsDataURL(blob);
         });
     }).catch((err)=>{
         console.log(err)
+        showAudioRow();
     });
 }
 
+function hideAudioRow() {
+ $('#loader-audio-row').removeClass('d-none');
+ $('#audio-row').addClass('d-none');
+}
+function showAudioRow() {
+    $('#loader-audio-row').addClass('d-none');
+    $('#audio-row').removeClass('d-none');
+}
 function showThankYou() {
-    $('#instructions-row').addClass('d-none')
-    $('#sentences-row').addClass('d-none')
-    $('#audio-row').addClass('d-none')
-    $('#thank-you-row').removeClass('d-none')
+    $('#instructions-row').addClass('d-none');
+    $('#sentences-row').addClass('d-none');
+    $('#audio-row').addClass('d-none');
+    $('#thank-you-row').removeClass('d-none');
+    
+    var language = localStorage.getItem('contributionLanguage');
+    const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
+    const aggregateDetails = JSON.parse(stringifyData);
+    const totalInfo = aggregateDetails.find((element) => element.language === language);
+    let totalSentences = 0;
+    let totalValidations = 0;
+    if (totalInfo) {
+        totalSentences = Math.floor(Number(totalInfo.total_contributions) * 3600 / 6);
+        totalValidations = Math.floor(Number(totalInfo.total_validations) * 3600 / 6);
+        $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
+        $('#spn-total-hr-validated').html(totalInfo.total_validations);
+    }
+    else {
+        $('#spn-total-hr-contributed').html(0);
+        $('#spn-total-hr-validated').html(0);
+    }
+    $('#spn-validation-language-2').html(language);
+    $('#spn-validation-count').html((validationCount + totalValidations));
+    $('#spn-total-contribution-count').html(totalSentences);
+
 }
 
 function showNoSentencesMessage() {
-    $('#instructions-row').addClass('d-none')
-    $('#sentences-row').addClass('d-none')
-    $('#audio-row').addClass('d-none')
-    $('#no-sentences-row').removeClass('d-none')
+    $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+    $('#instructions-row').addClass('d-none');
+    $('#sentences-row').addClass('d-none');
+    $('#audio-row').addClass('d-none');
+    $('#no-sentences-row').removeClass('d-none');
 }
 
 $(document).ready(() => {
