@@ -152,9 +152,6 @@ h6,
 .form-control.is-invalid {
   background-image: none;
 }
-#chart-row .chart {
-  height: 40rem;
-}
 .cursor-pointer {
   cursor: pointer;
 }
