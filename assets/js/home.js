@@ -260,7 +260,6 @@ function generateIndiaMap() {
             drawMap(response);
         }).catch((err) => {
             console.log(err);
-            $legendDiv.show();
         });
     }
 }
