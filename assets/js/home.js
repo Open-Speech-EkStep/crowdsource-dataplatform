@@ -18,7 +18,7 @@ const ALL_LANGUAGES = [
     {value: "Assamese",id: "as", text: "অসমীয়া"},
     {value: "Bengali", id: "bn", text: "বাংলা"},
     {value: "English", id: "en", text: "English"},
-    {value: "Gujrati", id: "gu", text: "ગુજરાતી"},
+    {value: "Gujarati", id: "gu", text: "ગુજરાતી"},
     {value: "Hindi", id: "hi", text: "हिन्दी"},
     {value: "Kannada", id: "kn", text: "ಕನ್ನಡ"},
     {value: "Malayalam", id: "ml", text: "മലയാളം"},
@@ -259,7 +259,7 @@ $(document).ready(function () {
             const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
             const genderValue = checkedGender.length ? checkedGender[0].value : '';
             const userNameValue = $userName.val().trim().substring(0, 12);
-            if (sentenceLanguage === 'English' || sentenceLanguage === 'Gujrati') sentenceLanguage = 'Odia';
+            if (sentenceLanguage === 'English') sentenceLanguage = 'Odia';
             if (testUserName(userNameValue)) {
                 return;
             }
