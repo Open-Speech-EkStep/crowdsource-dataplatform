@@ -14,7 +14,8 @@ const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
 const AGGREGATED_DATA_BY_STATE = "aggregatedDataByState";
 const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
 
-const ALL_LANGUAGES = [{value: "Assamese",id: "as", text: "অসমীয়া"},
+const ALL_LANGUAGES = [
+    {value: "Assamese",id: "as", text: "অসমীয়া"},
     {value: "Bengali", id: "bn", text: "বাংলা"},
     {value: "English", id: "en", text: "English"},
     {value: "Gujrati", id: "gu", text: "ગુજરાતી"},
