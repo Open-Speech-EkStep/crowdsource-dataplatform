@@ -31,7 +31,19 @@ const MOTHER_TONGUE = [
   'Telugu',
   'Urdu',
 ];
-const LANGUAGES = ['Hindi', 'Odia'];
+const LANGUAGES = [{value: "Assamese",id: "as", text: "Assamese"},
+  {value: "Bengali", id: "bn", text: "বাংলা"},
+  {value: "English", id: "en", text: "English"},
+  {value: "Gujrati", id: "gu", text: "ગુજરાતી"},
+  {value: "Hindi", id: "hi", text: "हिन्दी"},
+  {value: "Kannada", id: "kn", text: "ಕನ್ನಡ"},
+  {value: "Malayalam", id: "ml", text: "മലയാളം"},
+  {value: "Marathi", id: "mr", text: "मराठी"},
+  {value: "Odia", id: "or", text: "ଘୃଣା"},
+  {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ"},
+  {value: "Tamil", id: "ta", text: "தமிழ்"},
+  {value: "Telugu", id: "te", text: "తెలుగు"}];
+  
 const AGE_GROUP = [
   '',
   '00 - 13',
