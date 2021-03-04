@@ -9,6 +9,25 @@ const {
     setStartRecordBtnToolTipContent
 } = require('./speakerDetails');
 
+const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
+const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
+const AGGREGATED_DATA_BY_STATE = "aggregatedDataByState";
+const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
+
+function formatTime(hours, minutes=0, seconds=0) {
+    let result = '';
+    if(hours > 0) {
+        result += `${hours} hrs `;
+    }
+    if(minutes > 0) {
+        result += `${minutes} min `;
+    }
+    if(seconds > 0) {
+        result += `${seconds} sec `;
+    }
+    return result.substr(0, result.length-1);
+}
+
 function calculateTime(totalSeconds, isSeconds=true) {
     const hours = Math.floor(totalSeconds / 3600);
     const remainingAfterHours = totalSeconds % 3600;
@@ -36,18 +55,18 @@ function updateHrsForSayAndListen(language) {
     const $listenLoader = $('#listen-loader');
     $sayLoader.removeClass('d-none');
     $listenLoader.removeClass('d-none');
-    const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
-    const aggregateDetails = JSON.parse(stringifyData);
-    const totalInfo = aggregateDetails.find((element) => element.language === language);
     const $say_p_3 = $("#say-p-3");
     const $listen_p_3 = $("#listen-p-3");
+    const stringifyData = localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE);
+    const aggregateDetails = JSON.parse(stringifyData);
+    const totalInfo = aggregateDetails && aggregateDetails.find((element) => element.language === language);
     if (totalInfo) {
         const {total_contributions, total_validations} = totalInfo;
-        total_contributions && $say_p_3.text(`${total_contributions} hrs are recorded in ${language}`);
-        total_validations && $listen_p_3.text(`${total_validations} hrs are validated in ${language}`);
+        total_contributions && $say_p_3.text(`${total_contributions} hrs recorded in ${language}`);
+        total_validations && $listen_p_3.text(`${total_validations} hrs validated in ${language}`);
     } else {
-        $say_p_3.text(`0 hr is recorded in ${language}`);
-        $listen_p_3.text(`0 hr is validated in ${language}`);
+        $say_p_3.text(`0 hr recorded in ${language}`);
+        $listen_p_3.text(`0 hr validated in ${language}`);
     }
     $sayLoader.addClass('d-none');
     $listenLoader.addClass('d-none');
@@ -90,8 +109,14 @@ function getStatistics() {
 
 function constructChart(response, xAxisLabel, yAxisLabel) {
     var chart = am4core.create("speakers_hours_chart", am4charts.XYChart);
+    chartReg["chart"] = chart;
+    if (xAxisLabel !== "total_speakers") {
+        response.forEach(ele => {
+            const {hours, minutes, seconds} = calculateTime(Number(ele.total_contributions)*60*60, true);
+            ele.total_contributions_text = formatTime(hours, minutes, seconds);
+        });
+    }
     chart.data = response;
-
     var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = yAxisLabel;
     categoryAxis.renderer.grid.template.location = 0;
@@ -114,7 +139,7 @@ function constructChart(response, xAxisLabel, yAxisLabel) {
     series.dataFields.categoryY = yAxisLabel;
 
     var valueLabel = series.bullets.push(new am4charts.LabelBullet());
-    valueLabel.label.text = xAxisLabel === "total_speakers" ? "{total_speakers}" : "{total_contributions}";
+    valueLabel.label.text = xAxisLabel === "total_speakers" ? '{total_speakers}' : '{total_contributions_text}';
     valueLabel.label.fontSize = 20;
     valueLabel.label.horizontalCenter = "right";
     valueLabel.label.dx = 0;
@@ -129,44 +154,51 @@ function constructChart(response, xAxisLabel, yAxisLabel) {
     });
 }
 
+//lastRefreshedDate
+//store api Response in local
+
+var chartReg = {};
 function showByHoursChart() {
-    const $topLanguageSpinner = $('#topLanguageSpinner');
-   // $topLanguageSpinner.show().addClass('d-flex');
-    performAPIRequest('/top-languages-by-hours').then((response) => {
-        constructChart(response.data, 'total_contributions', 'language');
-     //   $topLanguageSpinner.hide().removeClass('d-flex');
-    });
+    if(chartReg["chart"]) {
+        chartReg["chart"].dispose();
+    }
+    const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
+    if (topLanguagesByHoursData) {
+        constructChart(JSON.parse(topLanguagesByHoursData).data, 'total_contributions', 'language');
+    } else {
+        performAPIRequest('/top-languages-by-hours').then((response) => {
+            localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response));
+            constructChart(response.data, 'total_contributions', 'language');
+        });
+    }
 }
 
 function showBySpeakersChart() {
-    const $topLanguageSpinner = $('#topLanguageSpinner');
-    const $speakersHoursChart = $('#speakers_hours_chart_container');
-    //$topLanguageSpinner.show().addClass('d-flex');
-   // $speakersHoursChart.addClass('d-none');
-    performAPIRequest('/top-languages-by-speakers').then((response) => {
-        constructChart(response.data, 'total_speakers', 'language');
-     //   $topLanguageSpinner.hide().removeClass('d-flex');
-      //  $speakersHoursChart.removeClass('d-none');
-    });
+    if(chartReg["chart"]) {
+        chartReg["chart"].dispose();
+    }
+    const topLanguagesBySpeakers = localStorage.getItem(TOP_LANGUAGES_BY_SPEAKERS);
+    if(topLanguagesBySpeakers) {
+        constructChart(JSON.parse(topLanguagesBySpeakers).data, 'total_speakers', 'language');
+    } else {
+        performAPIRequest('/top-languages-by-speakers').then((response) => {
+            localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response));
+            constructChart(response.data, 'total_speakers', 'language');
+        });
+    }
 }
 
-function generateIndiaMap() {
-    performAPIRequest('/aggregate-data-count?byState=true')
-    .then((response) => {
-        const total = response.data.reduce((a,c) => a + Number(c.total_contributions) + Number(c.total_validations), 0);
+function drawMap(response) {
+    const $legendDiv = $("#legendDiv");
+    const maxContribution = Math.max.apply(Math, response.data.map(function(ele) { return Number(ele.total_contributions); }))
+        const quarterVal = maxContribution / 4;
         response.data.forEach(ele => {
             const {hours:cHours, minutes: cMinutes, seconds: cSeconds} = calculateTime((Number(ele.total_contributions)*60*60), true);
             const {hours:vHours, minutes:vMinutes, seconds: vSeconds} = calculateTime((Number(ele.total_validations)*60*60), true);
             ele.contributed_time = `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
             ele.validated_time = `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
-            const value = Number(ele.total_contributions)+Number(ele.total_validations);
-            ele.value = (value / total) * 100;
-            if(ele.state === 'ANONYMOUS') {
-                ele.id = 'Andhra Pradesh';
-                ele.state = 'Andhra Pradesh';
-            } else {
-                ele.id = ele.state;
-            }
+            ele.value = Number(ele.total_contributions);
+            ele.id = ele.state;
         });
         var chart = am4core.create("indiaMapChart", am4maps.MapChart);
         chart.geodataSource.url = "./js/states_india_geo.json";
@@ -189,11 +221,11 @@ function generateIndiaMap() {
 
         polygonSeries.mapPolygons.template.adapter.add("fill", function(fill, target) {
             if (target.dataItem) {
-                if (target.dataItem.value >= 75) {
+                if (target.dataItem.value >= (quarterVal*3)) {
                     return am4core.color("#86D126");
-                } else if (target.dataItem.value >= 50) {
+                } else if (target.dataItem.value >= (quarterVal*2)) {
                     return am4core.color("#EA923F");
-                } else if (target.dataItem.value >= 25) {
+                } else if (target.dataItem.value >= quarterVal) {
                     return am4core.color("#FBEA5A");
                 } else {
                     return am4core.color("#C6C6C6");
@@ -203,17 +235,40 @@ function generateIndiaMap() {
         });
         chart.series.push(polygonSeries);
 
-        const $legendDiv = $("#legendDiv");
-        $legendDiv.removeClass("d-none");
-    }).catch((err) => {
-        console.log(err);
-    });
+        const $quarter = $("#quarter .legend-val");
+        const $half = $("#half .legend-val");
+        const $threeQuarter = $("#threeQuarter .legend-val");
+        const $full = $("#full .legend-val");
+        const {hours: qHours, minutes: qMinuts, seconds: qSeconds} = calculateTime(quarterVal*60*60, true);
+        const {hours: hHours, minutes: hMinuts, seconds: hSeconds} = calculateTime(quarterVal*2*60*60, true);
+        const {hours: tQHours, minutes: tQMinuts, seconds: tQSeconds} = calculateTime(quarterVal*3*60*60, true);
+        $quarter.text(`0 - ${formatTime(qHours, qMinuts, qSeconds)}`);
+        $half.text(`${formatTime(qHours, qMinuts, qSeconds)} - ${formatTime(hHours, hMinuts, hSeconds)}`);
+        $threeQuarter.text(`${formatTime(hHours, hMinuts, hSeconds)} - ${formatTime(tQHours, tQMinuts, tQSeconds)}`);
+        $full.text(`> ${formatTime(tQHours, tQMinuts, tQSeconds)}`);
+        $legendDiv.removeClass('d-none').addClass("d-flex");
+}
+
+function generateIndiaMap() {
+    const response  = localStorage.getItem(AGGREGATED_DATA_BY_STATE);
+    if(response) {
+        drawMap(JSON.parse(response));
+    } else {
+        performAPIRequest('/aggregate-data-count?byState=true')
+        .then((response) => {
+            localStorage.setItem(AGGREGATED_DATA_BY_STATE, JSON.stringify(response));
+            drawMap(response);
+        }).catch((err) => {
+            console.log(err);
+            $legendDiv.show();
+        });
+    }
 }
 
 const setAggregateDataCountByLanguage = function () {
     performAPIRequest(`/aggregate-data-count?byLanguage=true`)
         .then((details) => {
-            localStorage.setItem('aggregateDataCountByLanguage', JSON.stringify(details.data));
+            localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(details.data));
         })
         .catch((err) => {
             console.log(err);
@@ -257,24 +312,31 @@ const setLangNavBar = (targetedDiv,top_lang, $languageNavBar) => {
     }
 }
 
-const setTop5LanInNavBar = function(){
+const setLanguagesInHeader = function(response) {
     const $languageNavBar= $('#language-nav-bar');
     const $languageNavBarItems = $languageNavBar.children();
     const $navBarLoader = $('#nav-bar-loader');
-    performAPIRequest('/top-languages-by-hours')
-        .then((details) => {
-            details.data.forEach((element,index)=>{
-                $languageNavBarItems[index].setAttribute('value',element.language);
-                $languageNavBarItems[index].innerText = element.language;
-            })
-            $navBarLoader.addClass('d-none');
-            $languageNavBar.removeClass('d-none');
-        }).then(()=>{
-        setDefaultLang();
+   
+    response.data.forEach((element,index)=>{
+        $languageNavBarItems[index].setAttribute('value',element.language);
+        $languageNavBarItems[index].innerText = element.language;
     })
-        .catch((err) => {
-            console.log(err);
+    $navBarLoader.addClass('d-none');
+    $languageNavBar.removeClass('d-none');
+    setDefaultLang();
+}
+
+const setTop5LanInNavBar = function(){
+     const topLanguagesByHours = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
+    if(topLanguagesByHours) {
+        setLanguagesInHeader(JSON.parse(topLanguagesByHours));
+    } else {
+        performAPIRequest('/top-languages-by-hours')
+        .then((response) => {
+            localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response));
+            setLanguagesInHeader(response);
         });
+    }
 }
 
 const setDefaultLang = function (){
@@ -297,7 +359,15 @@ const setDefaultLang = function (){
     setLangNavBar(targettedDiv, contributionLanguage, $languageNavBar);
 }
 
+const clearLocalStroage = function() {
+    localStorage.removeItem(TOP_LANGUAGES_BY_HOURS);
+    localStorage.removeItem(TOP_LANGUAGES_BY_SPEAKERS);
+    localStorage.removeItem(AGGREGATED_DATA_BY_STATE);
+    localStorage.removeItem(AGGREGATED_DATA_BY_LANGUAGE);
+}
+
 $(document).ready(function () {
+    clearLocalStroage();
     const speakerDetailsKey = 'speakerDetails';
     const defaultLang = 'Odia';
     const $startRecordBtn = $('#proceed-box');
@@ -426,19 +496,30 @@ $(document).ready(function () {
     const $listen = $('#listen');
     const $listen_p_2 = $('#listen-p-2');
     const $say_p_2 = $('#say-p-2');
-
+    const $say_container = $('#say_container');
+    const $listen_container = $('#listen_container');
     $say.hover(() => {
         $say.removeClass('col-lg-5');
         $listen.removeClass('col-lg-5');
         $say.addClass('col-lg-6');
         $listen.addClass('col-lg-4');
+        $say.removeClass('col-md-5');
+        $listen.removeClass('col-md-5');
+        $say.addClass('col-md-6');
+        $listen.addClass('col-md-4');
         $say_p_2.removeClass('d-none');
+        $say_container.addClass('say-active');
     }, () => {
         $say.removeClass('col-lg-6');
         $listen.removeClass('col-lg-4');
         $say.addClass('col-lg-5');
         $listen.addClass('col-lg-5');
+        $say.removeClass('col-md-6');
+        $listen.removeClass('col-md-4');
+        $say.addClass('col-md-5');
+        $listen.addClass('col-md-5');
         $say_p_2.addClass('d-none');
+        $say_container.removeClass('say-active');
     })
 
     $listen.hover(() => {
@@ -447,12 +528,14 @@ $(document).ready(function () {
         $listen.addClass('col-lg-6');
         $say.addClass('col-lg-4');
         $listen_p_2.removeClass('d-none');
+        $listen_container.addClass('listen-active');
     }, () => {
         $say.removeClass('col-lg-4');
         $listen.removeClass('col-lg-6');
         $say.addClass('col-lg-5');
         $listen.addClass('col-lg-5');
         $listen_p_2.addClass('d-none');
+        $listen_container.removeClass('listen-active');
     })
 
     getStatistics();
@@ -465,4 +548,6 @@ module.exports = {
     calculateTime,
     getStatistics,
     performAPIRequest,
+    updateHrsForSayAndListen,
+    getDefaultTargettedDiv
 };
