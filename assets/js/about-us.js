@@ -66,7 +66,7 @@ $(document).ready(function () {
             const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
             const genderValue = checkedGender.length ? checkedGender[0].value : '';
             const userNameValue = $userName.val().trim().substring(0, 12);
-            if (sentenceLanguage === 'English' || sentenceLanguage === 'Gujrati') sentenceLanguage = 'Odia';
+            if (sentenceLanguage === 'English') sentenceLanguage = 'Odia';
             if (testUserName(userNameValue)) {
                 return;
             }
