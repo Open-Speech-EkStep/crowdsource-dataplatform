@@ -65,6 +65,12 @@ function updateLanguage(language) {
         .then((data) => {
             try {
                 const langaugeExists = isLanguageAvailable(data.data, language);
+                if (data.last_updated_at) {
+                    $('#data-updated').text(` ${data.last_updated_at}`);
+                    $('#data-updated').removeClass('d-none');
+                } else {
+                    $('#data-updated').addClass('d-none');
+                }
                 if (langaugeExists) {
                     $speakersDataLoader.removeClass('d-none');
                     $speakerDataLanguagesWrapper.addClass('d-none');
