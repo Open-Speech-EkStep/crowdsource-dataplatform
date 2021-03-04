@@ -32,6 +32,7 @@ const topLanguagesBySpeakerContributions = "select language,count(distinct(contr
 
 const topLanguagesByHoursContributed = "select language,ROUND(count(distinct(contribution_id))::decimal *6/3600,3)  as total_contributions from contributions_and_demo_stats group by language ORDER BY total_contributions DESC LIMIT 5;";
 
+const lastUpdatedAtQuery = "select max(lastupdated) AT TIME ZONE 'Asia/Kolkata' from audit_load_log;";
 
 module.exports = {
     listLanguages,
@@ -50,5 +51,6 @@ module.exports = {
     monthlyTimeline,
     monthlyTimelineCumulative,
     quarterlyTimeline,
-    quarterlyTimelineCumulative
+    quarterlyTimelineCumulative,
+    lastUpdatedAtQuery
 };
