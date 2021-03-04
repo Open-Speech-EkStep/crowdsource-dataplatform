@@ -1,14 +1,7 @@
-const { updateGraph } = require('./draw-chart');
+const { updateGraph, calculateTime } = require('./draw-chart');
+const {toggleFooterPosition} = require('./utils');
 
-function calculateTime(contributions) {
-    const totalSeconds = contributions * 3600;
-    console.log(totalSeconds);
-    const hours = Math.floor(totalSeconds / 3600);
-    const remainingAfterHours = totalSeconds % 3600;
-    const minutes = Math.floor(remainingAfterHours / 60);
-    const seconds = parseInt(remainingAfterHours % 60);
-    return {hours, minutes, seconds};
-}
+let timer;
 
 const fetchDetail = (language) => {
     const byLanguage = language ? true : false;
@@ -22,6 +15,7 @@ const fetchDetail = (language) => {
 };
 
 const getSpeakersData = (data, lang) => {
+    localStorage.setItem('previousLanguage', lang);
     const speakersData = {
         languages: 0,
         speakers: 0,
@@ -44,6 +38,17 @@ const getSpeakersData = (data, lang) => {
     return speakersData;
 }
 
+function isLanguageAvailable(data, lang) {
+    let langaugeExists = false;
+    if (!lang) return true;
+    data.forEach(item => {
+        if (item.language.toLowerCase() === lang.toLowerCase()) {
+            langaugeExists = true;
+        }
+    });
+    return langaugeExists;
+}
+
 function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
     const $speakersDataLoader = $speakersData.find('#loader1');
@@ -54,42 +59,55 @@ function updateLanguage(language) {
     const $speakersDataSpeakerValue = $('#speaker-value');
     const $speakersDataContributionValue = $('#contributed-value');
     const $speakersDataValidationValue = $('#validated-value');
-    $speakersDataLoader.removeClass('d-none');
-    $speakerDataLanguagesWrapper.addClass('d-none');
-    $speakerDataDetails.addClass('d-none');
+    const activeDurationText = $('#duration').find('.active')[0].dataset.value;
 
     fetchDetail(language)
         .then((data) => {
             try {
-                const speakersData = getSpeakersData(data.data, language);
-                const {
-                    hours: contributedHours,
-                    minutes: contributedMinutes,
-                    seconds: contributedSeconds
-                } = calculateTime(speakersData.contributions.toFixed(3));
-                const {
-                    hours: validatedHours,
-                    minutes: validatedMinutes,
-                    seconds: validatedSeconds
-                } = calculateTime(speakersData.validations.toFixed(3));
-
-                if (speakersData.languages) {
-                    $speakerDataLanguagesValue.text(speakersData.languages);
-                    $speakerDataLanguagesWrapper.removeClass('d-none');
-                    $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4')
-                    $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xl-3');
-                } else {
+                const langaugeExists = isLanguageAvailable(data.data, language);
+                if (langaugeExists) {
+                    $speakersDataLoader.removeClass('d-none');
                     $speakerDataLanguagesWrapper.addClass('d-none');
-                    $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xl-3');
-                    $speakerContributionData.addClass('col-12 col-md-4 col-lg-4 col-xl-4')
+                    $speakerDataDetails.addClass('d-none');
+                    updateGraph(language, activeDurationText);
+                    const speakersData = getSpeakersData(data.data, language);
+                    const {
+                        hours: contributedHours,
+                        minutes: contributedMinutes,
+                        seconds: contributedSeconds
+                    } = calculateTime(speakersData.contributions.toFixed(3));
+                    const {
+                        hours: validatedHours,
+                        minutes: validatedMinutes,
+                        seconds: validatedSeconds
+                    } = calculateTime(speakersData.validations.toFixed(3));
+
+                    if (speakersData.languages) {
+                        $speakerDataLanguagesValue.text(speakersData.languages);
+                        $speakerDataLanguagesWrapper.removeClass('d-none');
+                        $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4')
+                        $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xl-3');
+                    } else {
+                        $speakerDataLanguagesWrapper.addClass('d-none');
+                        $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xl-3');
+                        $speakerContributionData.addClass('col-12 col-md-4 col-lg-4 col-xl-4')
+                    }
+
+                    $speakersDataContributionValue.text(`${contributedHours}h ${contributedMinutes}m ${contributedSeconds}s`);
+                    $speakersDataValidationValue.text(`${validatedHours}h ${validatedMinutes}m ${validatedSeconds}s`);
+                    $speakersDataSpeakerValue.text(speakersData.speakers);
+
+                    $speakersDataLoader.addClass('d-none');
+                    $speakerDataDetails.removeClass('d-none');
+                } else {
+                    const previousLanguage = localStorage.getItem('previousLanguage');
+                    $("#language").val(previousLanguage);
+                    $("#languageSelected").text(` ${language}, `);
+                    $("#no-data-found").removeClass('d-none');
+                    timer = setTimeout(() => {
+                        $('#no-data-found').addClass('d-none');
+                    }, 5000);
                 }
-
-                $speakersDataContributionValue.text(`${contributedHours}h ${contributedMinutes}m ${contributedSeconds}s`);
-                $speakersDataValidationValue.text(`${validatedHours}h ${validatedMinutes}m ${validatedSeconds}s`);
-                $speakersDataSpeakerValue.text(speakersData.speakers);
-
-                $speakersDataLoader.addClass('d-none');
-                $speakerDataDetails.removeClass('d-none');
             } catch (error) {
                 console.log(error);
             }
@@ -100,13 +118,36 @@ function updateLanguage(language) {
 }
 
 $(document).ready(function () {
-    updateGraph('', 'monthly');
+    localStorage.removeItem('previousLanguage');
+    //updateGraph('', 'monthly');
     updateLanguage('');
 
     $('#language').on('change', (e) => {
         const selectedLanguage = e.target.value;
         updateLanguage(selectedLanguage);
-        updateGraph(selectedLanguage, 'monthly');
     });
+
+    $('#duration').on('click', (e) => {
+        const $durationLiInactive = $('#duration').find('li.inactive');
+        const $durationLiActive = $('#duration').find('li.active');
+        $durationLiInactive.removeClass('inactive').addClass('active');
+        $durationLiActive.removeClass('active').addClass('inactive');
+
+        const selectedDuration = e.target.dataset.value;
+        const selectedLanguage = $('#language option:selected').val();
+        updateGraph(selectedLanguage, selectedDuration, true);
+    });
+
+    $("#no-data-found").on('mouseenter touchstart', (e) => {
+        clearTimeout(timer);
+    });
+
+    $("#no-data-found").on('mouseleave touchend', (e) => {
+        timer = setTimeout(() => {
+            $('#no-data-found').addClass('d-none');
+        }, 5000);
+    });
+
+    toggleFooterPosition();
 
 });
