@@ -23,4 +23,6 @@ a{
     }
 }
 
-
+.oflow-x-hid {
+    overflow-x: hidden;
+}
