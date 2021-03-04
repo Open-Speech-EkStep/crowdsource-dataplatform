@@ -379,7 +379,7 @@ function showThankYou() {
         $('#spn-total-hr-validated').html(0);
     }
     $('#spn-validation-language-2').html(language);
-    $('#spn-validation-count').html((validationCount + totalValidations));
+    $('#spn-validation-count').html(validationCount);
     $('#spn-total-contribution-count').html(totalSentences);
 
 }
