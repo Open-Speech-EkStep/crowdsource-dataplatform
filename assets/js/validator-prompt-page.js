@@ -72,6 +72,7 @@ const setAudioPlayer = function () {
         replay.addClass('d-none');
         pause.removeClass('d-none');
         textDiv.text('Pause');
+        resetDecisionRow();
         myAudio.play();
     }
 
