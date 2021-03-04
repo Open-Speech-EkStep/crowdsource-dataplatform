@@ -14,7 +14,7 @@ const awsDownloader = function (filename) {
 
     const downloadParams = { Bucket: bucket, Key: filename };
 
-    return s3.getObject(downloadParams);
+    return s3.getObject(downloadParams).promise();
 };
 
 module.exports = { awsDownloader }
