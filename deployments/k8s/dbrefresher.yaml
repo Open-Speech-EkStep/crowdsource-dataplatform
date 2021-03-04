@@ -1,0 +1,40 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: refresh-data
+spec:
+  schedule: "30 23 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: db-refresher
+            image: postgres
+            imagePullPolicy: IfNotPresent
+            env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: vakyansh-secret
+                  key: DB_HOST
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: vakyansh-secret
+                  key: DB_NAME
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: vakyansh-secret
+                  key: DB_USER
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: vakyansh-secret
+                  key: DB_PASS
+            args:
+            - /bin/sh
+            - -c
+            - echo "Db refresh Initiating...";echo "REFRESH MATERIALIZED VIEW contributions_and_demo_stats;" > db_refresh.sql;echo "INSERT INTO audit_load_log(tablename,user_name,command)  values('contributions_and_demo_stats','root','REFRESH');" >> db_refresh.sql;echo "REFRESH MATERIALIZED VIEW daily_stats_complete;" >> db_refresh.sql;echo "INSERT INTO audit_load_log(tablename,user_name,command) values('daily_stats_complete','root','REFRESH');" >> db_refresh.sql;cat db_refresh.sql;echo "Db refresh Complete!";psql "postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}" -f db_refresh.sql
+          restartPolicy: OnFailure
