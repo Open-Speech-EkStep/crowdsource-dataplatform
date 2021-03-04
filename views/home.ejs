@@ -1,1 +1,303 @@
-<!DOCTYPE html><html lang="en"><head><title>Vakyansh: A crowdsourcing initiative for Indic languages</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU"><meta name="description" content="Vakyansh: A crowdsourcing initiative for Indic languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script><link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><link rel="stylesheet" type="text/css" href="css/home.css"></head><body> <%- include common/headerForContributor.ejs %> <div class="container-fluid supreme-container"><div class="row"><div class="col-12 col-md-8 col-lg-10 offset-lg-1 mt-4"><nav class="navbar navbar-expand-lg navbar-light bg-white px-4"><div class="mx-2"><%= __('Select the language for contribution') %>:</div><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedLanguage" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarSupportedLanguage"><div class="col-5 col-lg-5 col-xl-4" id="nav-bar-loader"><div><span class="spinner"></span></div></div><ul class="navbar-nav text-primary cursor-pointer d-none" id="language-nav-bar"><li class="nav-item mx-2 mx-lg-4 options" value="Hindi">Hindi</li><li class="nav-item mx-2 mx-lg-4 options" value="Bengali">Bengali</li><li class="nav-item mx-2 mx-lg-4 options" value="Marathi">Marathi</li><li class="nav-item mx-2 mx-lg-4 options" value="Telugu">Telugu</li><li class="nav-item mx-2 mx-lg-4 options" value="Tamil">Tamil</li></ul><ul class="navbar-nav text-primary cursor-pointer"><li class="nav-item mx-2 mx-lg-4 options d-none" id="6th_option"></li></ul><ul class="navbar-nav text-primary cursor-pointer"><li class="nav-item mx-2 mx-lg-4 options"><div id="Show_all_language" data-toggle="modal" data-target="#language-pop-up-wrapper" class="cursor-pointer">Show All</div></li></ul></div></nav></div></div><div class="m-auto row justify-content-center mt-lg-5 mx-lg-5"><div class="col-12 col-md-5 col-lg-5 p-3 px-lg-5 py-lg-3 text-dark mt-4 card mr-lg-3" id="say"><div id="say_container" class="row align-items-center py-lg-5 position-relative" style="height:100%"><div class="col-lg-7 col-md-7 col-8"><h1 class="display-5"> <%= __('Say') %> </h1><div class="mt-3 font-weight-bold"> <%= __('Contribute Your Voice') %> </div></div><div class="col-lg-5 col-md-5 col-4"><img src="img/contributor.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer" data-target="#userModal"></div><div id="say-p-2" class="col-lg-7 col-md-7 col-12 d-none position-absolute" style="bottom:1rem"><div> <%= __('Contribute your voice to create an open data repository of Indian languages') %> </div><div class="col-5 col-lg-5 col-xl-4" id="say-loader"><div><span class="spinner"></span></div></div><div id="say-p-3" class="font-wt-900 mt-2 mt-lg-2"></div></div></div></div><div class="col-12 col-md-5 col-lg-5 p-3 px-lg-5 py-lg-3 text-dark mt-4 card ml-lg-3" id="listen"><div id="listen_container" class="row position-relative align-items-center py-lg-5" style="height:100%"><div class="col-lg-7 col-md-7 col-8"><h1 class="display-5"> <%= __('Listen') %> </h1><div class="mt-3 font-weight-bold"> <%= __('Verify What They Say') %> </div></div><div class="col-lg-5 col-md-5 col-4"><a href="/validator-page"><img src="img/validator.svg" alt="validator" id="start_validating"></a></div><div class="col-lg-7 col-md-7 col-12 d-none position-absolute" id="listen-p-2" style="bottom:1rem"><div> <%= __('Help us by validating the voice samples that others have contributed') %> </div><div class="col-7 col-lg-6 col-xl-6" id="listen-loader"><div><span class="spinner"></span></div></div><div id="listen-p-3" class="font-wt-900 mt-2 mt-lg-2"></div></div></div></div></div><div class="row"><div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 text-dark mt-4"><h1 class="display-5 font-wt-900 site-blue lh-5 mt-lg-5"> <%= __('Vakyansh: A crowdsourcing initiative for Indian languages') %> </h1><p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5"> <%= __('For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.') %> <a class="ml-1" href="/about-us"> <%= __('Know More') %> </a></p></div><div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="/img/home.svg" class="img-fluid mr-n1"></div></div><div class="row"><div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 pt-lg-0 text-dark"><h1 class="display-5 font-wt-900 site-blue lh-5"> <%= __('We rely on your contributions') %> </h1><p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5"> <%= __('The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.') %> <a class="ml-1" href="/about-us"> <%= __('Know More') %> </a></p><div class="row mt-5" id="speaker-data"><div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader1"><div><span class="spinner"></span></div></div><div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader2"><div><span class="spinner"></span></div></div><div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader3"><div><span class="spinner"></span></div></div><div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="languages-wrapper"><p class="h4" id="languages-value"></p><p class="mb-0 fs-h4"> <%= __('languages contributed') %> </p></div><div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="speakers-wrapper"><p class="h4" id="speaker-value"></p><p class="mb-0 fs-h4"> <%= __('speakers contributed') %> </p></div><div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="hours-wrapper"><div class="mb-0 d-flex align-items-center"><span class="h4" id="hour-value"></span></div><p class="mb-0 fs-h4"> <%= __('hours recorded') %> </p></div></div></div><div class="col-12 col-md-5 col-lg-5 px-0 oflow-x-hid"></div></div><div class="row"><div class="col-12 col-md-6 col-lg-6 ml-lg-auto pt-5 pt-lg-0 text-dark"><div class="justify-content-center align-items-center d-none" id="chartSpinner"><div><span class="spinner"></span></div></div><div id="indiaMapChart" style="width:100%;height:500px"></div><div id="legendDiv" class="justify-content-evenly d-none"><div id="quarter" class="quarter"><div class="legend-val">0 - 1hr</div></div><div id="half" class="half"><div class="legend-val">1 - 2hrs</div></div><div id="threeQuarter" class="threeQuarter"><div class="legend-val">2 - 4hrs</div></div><div id="full" class="full"><div class="legend-val">4+ hrs</div></div></div></div><div class="col-12 col-md-6 col-lg-5 mt-xs-5 pr-lg-5"><h4 class="h4 mb-4"> <%= __('Top Languages') %> </h4><div class="d-flex mb-3"><div class="form-check mr-5"><label class="form-check-label" for="flexRadioDefault1"><input class="form-check-input" type="radio" name="topLanguageChart" id="hours_chart" value="hours" checked="checked"> <%= __('By hours of data contributed') %> </label></div><div class="form-check"><label class="form-check-label" for="flexRadioDefault2"><input class="form-check-input" type="radio" name="topLanguageChart" id="speakers_chart" value="speakers"> <%= __('By number of speakers') %> </label></div></div><div class="justify-content-center align-items-center d-none" id="topLanguageSpinner"><div><span class="spinner"></span></div></div><div id="speakers_hours_chart_container" class="w-100" style="height:370px"><div id="speakers_hours_chart" class="w-100" style="height:370px"></div></div><div class="d-flex jumbotron justify-content-center"><span class="text-muted">Language quote</span></div></div><div class="col-12 col-md-12 col-lg-12 px-0 oflow-x-hid"></div></div><div class="row mt-5 mb-5"><div class="col-12 d-flex justify-content-center"><button id="viewAllDetailsBtn" class="btn btn-outline-primary text-primary"> <%= __('VIEW ALL DETAILS') %> </button></div></div></div><div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered" role="document"><div class="modal-content p-4 border-primary border-2"><div class="margin-left-auto"><button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-header d-block border-0"><h1 class="modal-title text-center"> <%= __('Speaker Details') %> </h1></div><div class="modal-body px-6" id="speaker-details"><p class="text-muted text-center"> <%= __('All the fields are optional but you can enrich your dataset contribution by providing the demographic details.') %> </p><div class="col-12 text-center text-primary" id="resetBtn" style="cursor:pointer"> <%= __('Not You? Change User') %> </div><div class="form-group mt-5"><label for="username" class="form-label"> <%= __('Username') %> </label> <input class="form-control" maxlength="12" id="username" data-toggle="tooltip" placeholder="Enter preferred username" title="Username can't be more than 12 characters"><div class="text-danger mt-2 d-none" id="username-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg> <span class="align-middle"> <%= __('Please don\'t use email or mobile number as user name') %> </span></div></div><div class="form-group"><label for="mother-tongue" class="form-label"> <%= __('Mother Tongue') %> </label> <select class="form-control" id="mother-tongue"><option selected="selected" value=""> <%= __('Select Mothertongue') %> </option> <% MOTHER_TONGUE.forEach(function(lang) { %> <option value="<%= lang %>"> <%= lang %> </option> <% }) %> </select></div><div class="form-group"><label for="age" class="form-label"> <%= __('Age Group') %> </label> <select class="form-control" id="age"><option selected="selected" value=""> <%= __('Select Age Group') %> </option><option value="00 - 13">00 - 12 (Kid)</option><option value="13 - 17">13 - 17 (Youth)</option><option value="18 - 29">18 - 29 (Adult)</option><option value="30 - 39">30 - 39 (Adult)</option><option value="40 - 49">40 - 49 (Adult)</option><option value="50 - 59">50 - 59 (Adult)</option><option value="60 - 64">60 - 64 (Adult)</option><option value="65 - 74">65 - 74 (Senior)</option><option value="> 75">&gt; 75 (Senior)</option></select></div><div class="form-group"><label for="gender" class="form-label"> <%= __('Gender') %> </label><div class="justify-content-between"><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="male-check" value="male"> <label class="form-check-label p-2" for="male-check"><%= __('Male') %></label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="female-check" value="female"> <label class="form-check-label p-2" for="female-check"><%= __('Female') %></label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="other-check" value="others"> <label class="form-check-label p-2" for="other-check"><%= __('Others') %></label></div></div></div><div class="form-check mt-4"><input class="form-check-input mt-0 mt-sm-1" type="checkbox" value="" id="tnc"> <label class="form-check-label ml-md-2 ml-4" for="tnc"> <%- __('I have read and agree to the <a href="/terms-and-conditions"> Terms and Conditions </a>') %> </label></div><div class="row justify-content-center mt-5"><div class="col-12"><button type="button" id="proceed-box" class="btn btn-primary h6 shadow w-100 rounded p-3 point-none" disabled="disabled" data-toggle="modal" data-target="#languageModal"> <%= __('LET\'S GO') %> </button></div></div></div></div></div></div><div class="modal fade" id="modal-chart-wrapper" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-lg w-75 mw-100 h-75 mx-auto"><div class="modal-content border-primary border-2 h-100 p-lg-5 px-2 py-4"><div class="text-right" aria-label="Close"><a href="#" aria-hidden="true" data-dismiss="modal"> <%= __('Hide details') %> &lt;</a></div><div id="modal-chart" class="h-100"></div></div></div></div><button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button> <%- include modals/content-languages.ejs %> <%- include modals/say-listen-language.ejs %> <%- include common/footer.ejs %> <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> <% if(!isCookiePresent) { %> <script>document.getElementById("toggle-content-language").click()</script> <% } else { %> <script src="js/home.js" id="home-page" default-lang="<%= defaultLang %>"></script><script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script><script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script><script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script><script src="js/draw-chart.js"></script> <% } %> </body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Vakyansh: A crowdsourcing initiative for Indic languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
+    <meta name="description" content="Vakyansh: A crowdsourcing initiative for Indic languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag() { dataLayer.push(arguments) } window.dataLayer = window.dataLayer || [], gtag("js", new Date), gtag("config", "UA-169921734-1")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
+</head>
+
+<body>
+    <%- include common/headerForContributor.ejs %>
+        <div class="container-fluid supreme-container">
+            <div class="row">
+                <div class="col-12 col-md-8 col-lg-10 offset-lg-1 mt-4">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white px-4">
+                        <div class="mx-2">
+                            <%= __('Select the language for contribution') %>:
+                        </div><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedLanguage" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedLanguage">
+                            <div class="col-5 col-lg-5 col-xl-4" id="nav-bar-loader">
+                                <div><span class="spinner"></span></div>
+                            </div>
+                            <ul class="navbar-nav text-primary cursor-pointer d-none" id="language-nav-bar">
+                            </ul>
+                            <ul class="navbar-nav text-primary cursor-pointer">
+                                <li class="nav-item mx-2 mx-lg-4 options d-none" id="6th_option"></li>
+                            </ul>
+                            <ul class="navbar-nav text-primary cursor-pointer">
+                                <li class="nav-item mx-2 mx-lg-4 options">
+                                    <div id="Show_all_language" data-toggle="modal" data-target="#language-pop-up-wrapper" class="cursor-pointer">Show All</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="m-auto row justify-content-center mt-lg-5 mx-lg-5">
+                <div class="col-12 col-md-5 col-lg-5 p-3 px-lg-5 py-lg-3 text-dark mt-4 card mr-lg-3" id="say">
+                    <div id="say_container" class="row align-items-center py-lg-5 position-relative" style="height:100%">
+                        <div class="col-lg-7 col-md-7 col-8">
+                            <h1 class="display-5">
+                                <%= __('Say') %>
+                            </h1>
+                            <div class="mt-3 font-weight-bold">
+                                <%= __('Contribute Your Voice') %>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-4"><img src="img/contributor.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer" data-target="#userModal"></div>
+                        <div id="say-p-2" class="col-lg-7 col-md-7 col-12 d-none position-absolute" style="bottom:1rem">
+                            <div>
+                                <%= __('Contribute your voice to create an open data repository of Indian languages') %>
+                            </div>
+                            <div class="col-5 col-lg-5 col-xl-4" id="say-loader">
+                                <div><span class="spinner"></span></div>
+                            </div>
+                            <div id="say-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 col-lg-5 p-3 px-lg-5 py-lg-3 text-dark mt-4 card ml-lg-3" id="listen">
+                    <div id="listen_container" class="row position-relative align-items-center py-lg-5" style="height:100%">
+                        <div class="col-lg-7 col-md-7 col-8">
+                            <h1 class="display-5">
+                                <%= __('Listen') %>
+                            </h1>
+                            <div class="mt-3 font-weight-bold">
+                                <%= __('Verify What They Say') %>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-4"><a href="/validator-page"><img src="img/validator.svg" alt="validator" id="start_validating"></a></div>
+                        <div class="col-lg-7 col-md-7 col-12 d-none position-absolute" id="listen-p-2" style="bottom:1rem">
+                            <div>
+                                <%= __('Help us by validating the voice samples that others have contributed') %>
+                            </div>
+                            <div class="col-7 col-lg-6 col-xl-6" id="listen-loader">
+                                <div><span class="spinner"></span></div>
+                            </div>
+                            <div id="listen-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 text-dark mt-4">
+                    <h1 class="display-5 font-wt-900 site-blue lh-5 mt-lg-5">
+                        <%= __('Vakyansh: A crowdsourcing initiative for Indian languages') %>
+                    </h1>
+                    <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
+                        <%= __('For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.') %> <a class="ml-1" href="/about-us">
+                                <%= __('Know More') %>
+                            </a>
+                    </p>
+                </div>
+                <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="/img/home.svg" class="img-fluid mr-n1"></div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 pt-lg-0 text-dark">
+                    <h1 class="display-5 font-wt-900 site-blue lh-5">
+                        <%= __('We rely on your contributions') %>
+                    </h1>
+                    <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
+                        <%= __('The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.') %> <a class="ml-1" href="/about-us">
+                                <%= __('Know More') %>
+                            </a>
+                    </p>
+                    <div class="row mt-5" id="speaker-data">
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader1">
+                            <div><span class="spinner"></span></div>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader2">
+                            <div><span class="spinner"></span></div>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader3">
+                            <div><span class="spinner"></span></div>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="languages-wrapper">
+                            <p class="h4" id="languages-value"></p>
+                            <p class="mb-0 fs-h4">
+                                <%= __('languages contributed') %>
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="speakers-wrapper">
+                            <p class="h4" id="speaker-value"></p>
+                            <p class="mb-0 fs-h4">
+                                <%= __('speakers contributed') %>
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="hours-wrapper">
+                            <div class="mb-0 d-flex align-items-center"><span class="h4" id="hour-value"></span></div>
+                            <p class="mb-0 fs-h4">
+                                <%= __('hours recorded') %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 col-lg-5 px-0 oflow-x-hid"></div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6 ml-lg-auto pt-5 pt-lg-0 text-dark">
+                    <div class="justify-content-center align-items-center d-none" id="chartSpinner">
+                        <div><span class="spinner"></span></div>
+                    </div>
+                    <div id="indiaMapChart" style="width:100%;height:500px"></div>
+                    <div id="legendDiv" class="justify-content-evenly d-none">
+                        <div id="quarter" class="quarter">
+                            <div class="legend-val">0 - 1hr</div>
+                        </div>
+                        <div id="half" class="half">
+                            <div class="legend-val">1 - 2hrs</div>
+                        </div>
+                        <div id="threeQuarter" class="threeQuarter">
+                            <div class="legend-val">2 - 4hrs</div>
+                        </div>
+                        <div id="full" class="full">
+                            <div class="legend-val">4+ hrs</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-5 mt-xs-5 pr-lg-5">
+                    <h4 class="h4 mb-4">
+                        <%= __('Top Languages') %>
+                    </h4>
+                    <div class="d-flex mb-3">
+                        <div class="form-check mr-5"><label class="form-check-label" for="flexRadioDefault1"><input class="form-check-input" type="radio" name="topLanguageChart" id="hours_chart" value="hours" checked="checked">
+                                <%= __('By hours of data contributed') %>
+                            </label></div>
+                        <div class="form-check"><label class="form-check-label" for="flexRadioDefault2"><input class="form-check-input" type="radio" name="topLanguageChart" id="speakers_chart" value="speakers">
+                                <%= __('By number of speakers') %>
+                            </label></div>
+                    </div>
+                    <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
+                        <div><span class="spinner"></span></div>
+                    </div>
+                    <div id="speakers_hours_chart_container" class="w-100" style="height:370px">
+                        <div id="speakers_hours_chart" class="w-100" style="height:370px"></div>
+                    </div>
+                    <div class="d-flex jumbotron justify-content-center"><span class="text-muted">Language quote</span></div>
+                </div>
+                <div class="col-12 col-md-12 col-lg-12 px-0 oflow-x-hid"></div>
+            </div>
+            <div class="row mt-5 mb-5">
+                <div class="col-12 d-flex justify-content-center"><button id="viewAllDetailsBtn" class="btn btn-outline-primary text-primary">
+                        <%= __('VIEW ALL DETAILS') %>
+                    </button></div>
+            </div>
+        </div>
+        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content p-4 border-primary border-2">
+                    <div class="margin-left-auto"><button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+                    <div class="modal-header d-block border-0">
+                        <h1 class="modal-title text-center">
+                            <%= __('Speaker Details') %>
+                        </h1>
+                    </div>
+                    <div class="modal-body px-6" id="speaker-details">
+                        <p class="text-muted text-center">
+                            <%= __('All the fields are optional but you can enrich your dataset contribution by providing the demographic details.') %>
+                        </p>
+                        <div class="col-12 text-center text-primary" id="resetBtn" style="cursor:pointer">
+                            <%= __('Not You? Change User') %>
+                        </div>
+                        <div class="form-group mt-5"><label for="username" class="form-label">
+                                <%= __('Username') %>
+                            </label> <input class="form-control" maxlength="12" id="username" data-toggle="tooltip" placeholder="Enter preferred username" title="Username can't be more than 12 characters">
+                            <div class="text-danger mt-2 d-none" id="username-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px" height="18px">
+                                    <path d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                                </svg> <span class="align-middle">
+                                    <%= __('Please don\'t use email or mobile number as user name') %>
+                                </span></div>
+                        </div>
+                        <div class="form-group"><label for="mother-tongue" class="form-label">
+                                <%= __('Mother Tongue') %>
+                            </label> <select class="form-control" id="mother-tongue">
+                                <option selected="selected" value="">
+                                    <%= __('Select Mothertongue') %>
+                                </option>
+                                <% MOTHER_TONGUE.forEach(function(lang) { %>
+                                    <option value="<%= lang %>">
+                                        <%= lang %>
+                                    </option>
+                                    <% }) %>
+                            </select></div>
+                        <div class="form-group"><label for="age" class="form-label">
+                                <%= __('Age Group') %>
+                            </label> <select class="form-control" id="age">
+                                <option selected="selected" value="">
+                                    <%= __('Select Age Group') %>
+                                </option>
+                                <option value="00 - 13">00 - 12 (Kid)</option>
+                                <option value="13 - 17">13 - 17 (Youth)</option>
+                                <option value="18 - 29">18 - 29 (Adult)</option>
+                                <option value="30 - 39">30 - 39 (Adult)</option>
+                                <option value="40 - 49">40 - 49 (Adult)</option>
+                                <option value="50 - 59">50 - 59 (Adult)</option>
+                                <option value="60 - 64">60 - 64 (Adult)</option>
+                                <option value="65 - 74">65 - 74 (Senior)</option>
+                                <option value="> 75">&gt; 75 (Senior)</option>
+                            </select></div>
+                        <div class="form-group"><label for="gender" class="form-label">
+                                <%= __('Gender') %>
+                            </label>
+                            <div class="justify-content-between">
+                                <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="male-check" value="male"> <label class="form-check-label p-2" for="male-check">
+                                        <%= __('Male') %>
+                                    </label></div>
+                                <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="female-check" value="female"> <label class="form-check-label p-2" for="female-check">
+                                        <%= __('Female') %>
+                                    </label></div>
+                                <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="other-check" value="others"> <label class="form-check-label p-2" for="other-check">
+                                        <%= __('Others') %>
+                                    </label></div>
+                            </div>
+                        </div>
+                        <div class="form-check mt-4"><input class="form-check-input mt-0 mt-sm-1" type="checkbox" value="" id="tnc"> <label class="form-check-label ml-md-2 ml-4" for="tnc">
+                                <%- __('I have read and agree to the <a href="/terms-and-conditions"> Terms and Conditions </a>') %>
+                            </label></div>
+                        <div class="row justify-content-center mt-5">
+                            <div class="col-12"><button type="button" id="proceed-box" class="btn btn-primary h6 shadow w-100 rounded p-3 point-none" disabled="disabled" data-toggle="modal" data-target="#languageModal">
+                                    <%= __('LET\'S GO') %>
+                                </button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-chart-wrapper" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg w-75 mw-100 h-75 mx-auto">
+                <div class="modal-content border-primary border-2 h-100 p-lg-5 px-2 py-4">
+                    <div class="text-right" aria-label="Close"><a href="#" aria-hidden="true" data-dismiss="modal">
+                            <%= __('Hide details') %> &lt;
+                        </a></div>
+                    <div id="modal-chart" class="h-100"></div>
+                </div>
+            </div>
+        </div><button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
+        <%- include modals/content-languages.ejs %>
+            <%- include modals/say-listen-language.ejs %>
+                <%- include common/footer.ejs %>
+                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                    <% if(!isCookiePresent) { %>
+                        <script>document.getElementById("toggle-content-language").click()</script>
+                        <% } else { %>
+                            <script src="js/home.js" id="home-page" default-lang="<%= defaultLang %>"></script>
+                            <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+                            <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+                            <script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
+                            <script src="js/draw-chart.js"></script>
+                            <% } %>
+</body>
+
+</html>
