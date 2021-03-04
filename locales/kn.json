@@ -1,7 +1,8 @@
 {
-	"Language": "Language",
+	"Language": "ಕನ್ನಡ",
 	"Speech Recognition Models": "Speech Recognition Models",
 	"About Us": "ನಮ್ಮ ಕುರಿತು",
+	"Select the language for contribution": "ಕೊಡುಗೆಗಾಗಿ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
 	"Say": "ಹೇಳಿ",
 	"Contribute Your Voice": "ನಿಮ್ಮ ಧ್ವನಿಯನ್ನು ನೀಡಿ",
 	"Contribute your voice to create an open data repository of Indian languages": "ಭಾರತೀಯ ಭಾಷೆಗಳ ಮುಕ್ತ ಮಾಹಿತಿ ಭಂಡಾರವನ್ನು ರಚಿಸಲು ನಿಮ್ಮ ಧ್ವನಿಯನ್ನು ನೀಡಿ",
@@ -24,7 +25,7 @@
 	"Mother Tongue": "ಮಾತೃ ಭಾಷೆ",
 	"Select Mothertongue": "ಮಾತೃಭಾಷೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
 	"Age Group": "ವಯೋಮಾನ",
-	"Pick age range": "ವಯೋಮಾನವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
+	"Select Age Group": "ವಯೋಮಾನವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
 	"Gender": "ಲಿಂಗ",
 	"I have read and agree to the": "ನಾನು ನಿಯಮಗಳು ಮತ್ತು ಷರತ್ತುಗಳನ್ನು ಓದಿದ್ದೇನೆ ಮತ್ತು ಒಪ್ಪುತ್ತೇನೆ",
 	"Terms and Conditions": "Terms and Conditions",
@@ -90,7 +91,8 @@
 	"Verify What They Say": "ಅವರ ಹೇಳಿಕೆಯನ್ನು  ಮೌಲ್ಯೀಕರಿಸಿ",
 	"Odia (Select languages)": "Odia (Select languages)",
 	"Top Languages": "ಉನ್ನತ ಭಾಷೆಗಳು",
-	"By hours of data recorded": "ಮಾಹಿತಿ ಕೊಡುಗೆಯಿಂದ ಸಮಯದೊಳಗೆ",
+	"By hours of data contributed": "ಮಾಹಿತಿ ಕೊಡುಗೆಯಿಂದ ಸಮಯದೊಳಗೆ",
 	"By number of speakers": "ಭಾಷಣಕಾರರ ಸಂಖ್ಯೆಯಿಂದ",
-	"VIEW ALL DETAILS": "ಎಲ್ಲಾ ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ"
+	"VIEW ALL DETAILS": "ಎಲ್ಲಾ ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ",
+	"I have read and agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions </a>": "I have read and agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions </a>"
 }

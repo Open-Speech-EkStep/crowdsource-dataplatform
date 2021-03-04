@@ -14,6 +14,19 @@ const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
 const AGGREGATED_DATA_BY_STATE = "aggregatedDataByState";
 const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
 
+const ALL_LANGUAGES = [{value: "Assamese",id: "as", text: "অসমীয়া"},
+    {value: "Bengali", id: "bn", text: "বাংলা"},
+    {value: "English", id: "en", text: "English"},
+    {value: "Gujrati", id: "gu", text: "ગુજરાતી"},
+    {value: "Hindi", id: "hi", text: "हिन्दी"},
+    {value: "Kannada", id: "kn", text: "ಕನ್ನಡ"},
+    {value: "Malayalam", id: "ml", text: "മലയാളം"},
+    {value: "Marathi", id: "mr", text: "मराठी"},
+    {value: "Odia", id: "or", text: "ଘୃଣା"},
+    {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ"},
+    {value: "Tamil", id: "ta", text: "தமிழ்"},
+    {value: "Telugu", id: "te", text: "తెలుగు"}];
+
 function formatTime(hours, minutes=0, seconds=0) {
     let result = '';
     if(hours > 0) {
@@ -260,7 +273,6 @@ function generateIndiaMap() {
             drawMap(response);
         }).catch((err) => {
             console.log(err);
-            $legendDiv.show();
         });
     }
 }
@@ -299,11 +311,11 @@ const setLangNavBar = (targetedDiv,top_lang, $languageNavBar) => {
     const previousActiveDiv = $languageNavBar.find('.active');
     previousActiveDiv.removeClass('active');
     const $6th_place = document.getElementById('6th_option');
+    const lang = ALL_LANGUAGES.find(ele => ele.value === top_lang);
+    $6th_place.innerText = lang.text;
     if (targetttedDivIndex < 0) {
-        $6th_place.innerText = top_lang;
         $6th_place.classList.remove('d-none');
         $6th_place.classList.add('active');
-
         $6th_place.setAttribute('value', top_lang);
     } else {
         allDivs[targetttedDivIndex].classList.add('active');
@@ -314,13 +326,13 @@ const setLangNavBar = (targetedDiv,top_lang, $languageNavBar) => {
 
 const setLanguagesInHeader = function(response) {
     const $languageNavBar= $('#language-nav-bar');
-    const $languageNavBarItems = $languageNavBar.children();
     const $navBarLoader = $('#nav-bar-loader');
-   
+  
     response.data.forEach((element,index)=>{
-        $languageNavBarItems[index].setAttribute('value',element.language);
-        $languageNavBarItems[index].innerText = element.language;
-    })
+        const lang = ALL_LANGUAGES.find(ele => ele.value === element.language);
+        $languageNavBar.append(`<li class="nav-item mx-2 mx-lg-4 options" value=${element.language}>${lang.text}</li>`);
+    });
+
     $navBarLoader.addClass('d-none');
     $languageNavBar.removeClass('d-none');
     setDefaultLang();
@@ -328,11 +340,13 @@ const setLanguagesInHeader = function(response) {
 
 const setTop5LanInNavBar = function(){
      const topLanguagesByHours = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
+     console.log("toplng resP :", topLanguagesByHours);
     if(topLanguagesByHours) {
         setLanguagesInHeader(JSON.parse(topLanguagesByHours));
     } else {
         performAPIRequest('/top-languages-by-hours')
         .then((response) => {
+            console.log("response: ", response);
             localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response));
             setLanguagesInHeader(response);
         });
@@ -549,5 +563,6 @@ module.exports = {
     getStatistics,
     performAPIRequest,
     updateHrsForSayAndListen,
-    getDefaultTargettedDiv
+    getDefaultTargettedDiv,
+    formatTime
 };
