@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const objectStorage = process.argv[2] || 'gcp';
+const fetch = require('node-fetch');
 
 const { uploader } = require('./uploader/objUploader')
 const helmet = require('helmet')
@@ -34,10 +35,10 @@ const {
 
 const { I18n } = require('i18n');
 const i18n = new I18n({
-    locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te'],
-    directory: './locales',
-    cookie: 'i18n'
-  })
+  locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te'],
+  directory: './locales',
+  cookie: 'i18n'
+})
 
 
 app.enable('trust proxy');
@@ -97,15 +98,15 @@ app.use(function (req, res, next) {
 });
 app.use(express.static('public'));
 app.get('/changeLocale/:locale', function (req, res) {
-    res.cookie('i18n', req.params.locale);
-    res.redirect(req.headers.referer);
+  res.cookie('i18n', req.params.locale);
+  res.redirect(req.headers.referer);
 });
 app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
   const localLanguage = req.cookies.i18n;
   const isCookiePresent = localLanguage ? true : false;
-  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent, defaultLang:localLanguage });
+  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent, defaultLang: localLanguage });
 });
 
 router.get('/getDetails/:language', async function (req, res) {
@@ -199,6 +200,19 @@ router.post('/upload', (req, res) => {
       res.sendStatus(500);
     });
 });
+
+router.get('/location-info', (req, res) => {
+  const ip = req.query.ip || null;
+  if (ip === null) {
+    res.sendStatus(400);
+    return;
+  }
+  fetch(`http://ip-api.com/json/${ip}?fields=country,regionName`).then(res=>res.json()).then(response => {
+    res.send(response);
+  }).catch(err => {
+    res.sendStatus(500);
+  })
+})
 
 require('./dashboard-api')(router);
 

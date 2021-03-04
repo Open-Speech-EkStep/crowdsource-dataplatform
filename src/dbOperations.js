@@ -34,7 +34,8 @@ const {
     monthlyTimeline,
     monthlyTimelineCumulative,
     quarterlyTimeline,
-    quarterlyTimelineCumulative
+    quarterlyTimelineCumulative,
+    lastUpdatedAtQuery
 } = require('./dashboardDbQueries');
 
 const { KIDS_AGE_GROUP, ADULT, KIDS } = require('./constants');
@@ -190,7 +191,7 @@ const getValidationSentences = function (req, res) {
         });
 };
 
-const getAudioClip = function (req, res, objectStorage) {
+const getAudioClip = async function (req, res, objectStorage) {
     if (!(req.body && req.body.file)) {
         res.status(400).send('No file selected.');
         return;
@@ -200,10 +201,15 @@ const getAudioClip = function (req, res, objectStorage) {
     const downloadFile = downloader(objectStorage);
 
     try {
-        const file = downloadFile(req.body.file);
+        const file = await downloadFile(req.body.file);
 
-        const readStream = file.createReadStream();
-        readStream.pipe(res);
+        if (file == null) {
+            res.sendStatus(404);
+        }
+        else {
+            const readStream = file.createReadStream();
+            readStream.pipe(res);
+        }
     }
     catch (err) {
         res.sendStatus(500);
@@ -314,6 +320,16 @@ const getAgeGroupData = (language = '') => {
     return db.any(ageGroupContributions, filter);
 }
 
+const getLastUpdatedAt = async () => {
+    const lastUpdatedAt = await db.one(lastUpdatedAtQuery, []);
+    console.log(lastUpdatedAt);
+    let lastUpdatedDateTime = "";
+    if("timezone" in lastUpdatedAt){
+        lastUpdatedDateTime = new Date(lastUpdatedAt['timezone']).toLocaleString();
+    }
+    return lastUpdatedDateTime;
+}
+
 module.exports = {
     updateAndGetSentences,
     getValidationSentences,
@@ -328,5 +344,6 @@ module.exports = {
     getLanguages,
     getTimeline,
     getAgeGroupData,
-    getGenderGroupData
+    getGenderGroupData,
+    getLastUpdatedAt
 };

@@ -72,6 +72,17 @@ const setAudioPlayer = function () {
         replay.addClass('d-none');
         pause.removeClass('d-none');
         textDiv.text('Pause');
+        const dislikeButton = $("#dislike_button");
+        const likeButton = $("#like_button");
+        const skipButton = $("#skip_button");
+
+        updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
+        updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
+        skipButton.removeAttr('style');
+
+        disableButton(likeButton)
+        disableButton(dislikeButton)
+        disableButton(skipButton)
         myAudio.play();
     }
 
@@ -378,6 +389,8 @@ function showNoSentencesMessage() {
     $('#instructions-row').addClass('d-none');
     $('#sentences-row').addClass('d-none');
     $('#audio-row').addClass('d-none');
+    $('#validation-button-row').addClass('d-none');
+    $('#progress-row').addClass('d-none');
     $('#no-sentences-row').removeClass('d-none');
 }
 
