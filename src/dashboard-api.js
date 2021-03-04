@@ -25,7 +25,7 @@ const dashboardRoutes = (router) => {
             const topLanguagesByHours = await getTopLanguageByHours();
             const topLanguagesBySpeakers = await getTopLanguageBySpeakers();
             const lastUpdatedDateTime = await getLastUpdatedAt();
-            res.send({ "data": { "top-languages-by-hours":topLanguagesByHours, "top-languages-by-speakers": topLanguagesBySpeakers} , last_updated_at: lastUpdatedDateTime});
+            res.send({ "data": { "top-languages-by-hours": topLanguagesByHours, "top-languages-by-speakers": topLanguagesBySpeakers }, last_updated_at: lastUpdatedDateTime });
         } catch (err) {
             console.log(err);
             res.status(500).send("Internal Server Error");
@@ -42,13 +42,36 @@ const dashboardRoutes = (router) => {
             return data;
         })
         const lastUpdatedDateTime = await getLastUpdatedAt();
-        res.send({ "data": aggregateData , last_updated_at: lastUpdatedDateTime});
+        res.send({ "data": aggregateData, last_updated_at: lastUpdatedDateTime });
     });
 
     router.get('/languages', async (req, res) => {
         const languagesData = await getLanguages();
         const lastUpdatedDateTime = await getLastUpdatedAt();
-        res.send({ "data": languagesData.map(data => data.language) , last_updated_at: lastUpdatedDateTime});
+        res.send({ "data": languagesData.map(data => data.language), last_updated_at: lastUpdatedDateTime });
+    });
+
+    router.get('/stats', async (req, res) => {
+        const topLanguagesByHours = await getTopLanguageByHours();
+        const topLanguagesBySpeakers = await getTopLanguageBySpeakers();
+        const lastUpdatedDateTime = await getLastUpdatedAt();
+        const languagesData = await getLanguages();
+
+        let aggregateDataByLanguage = await getAggregateDataCount(true, false);
+        let aggregateDataByDate = await getAggregateDataCount(false, true);
+        let aggregateDataByDateAndLanguage = await getAggregateDataCount(false, true);
+
+        res.send({
+            "data": {
+                "top_languages_by_hours": topLanguagesByHours,
+                "top_languages_by_speakers": topLanguagesBySpeakers,
+                "languages": languagesData,
+                "aggregate_data_by_language": aggregateDataByLanguage,
+                "aggregate_data_by_date": aggregateDataByDate,
+                "aggregate_data_by_date_and_language": aggregateDataByDateAndLanguage,
+            },
+            "last_updated_at": lastUpdatedDateTime
+        });
     });
 
     router.get('/contributions/age', async (req, res) => {
@@ -56,7 +79,7 @@ const dashboardRoutes = (router) => {
 
         const ageGroupData = await getAgeGroupData(language);
         const lastUpdatedDateTime = await getLastUpdatedAt();
-        res.send({ "data": ageGroupData , last_updated_at: lastUpdatedDateTime});
+        res.send({ "data": ageGroupData, last_updated_at: lastUpdatedDateTime });
     });
 
     router.get('/contributions/gender', async (req, res) => {
