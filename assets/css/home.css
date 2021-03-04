@@ -304,6 +304,10 @@ body.modal-open .supreme-container {
   background-image: none;
 }
 
+#viewAllDetailsBtn:hover {
+  color: #fff !important;
+}
+
 .options:hover{
   color:#5d5d5d;
 }

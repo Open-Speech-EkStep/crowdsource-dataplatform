@@ -23,7 +23,7 @@ function formatTime(hours, minutes=0, seconds=0) {
         result += `${minutes} min `;
     }
     if(seconds > 0) {
-        result += `${seconds} min `;
+        result += `${seconds} sec `;
     }
     return result.substr(0, result.length-1);
 }
@@ -112,8 +112,8 @@ function constructChart(response, xAxisLabel, yAxisLabel) {
     chartReg["chart"] = chart;
     if (xAxisLabel !== "total_speakers") {
         response.forEach(ele => {
-            const {hours, minutes} = calculateTime(Number(ele.total_contributions)*60*60);
-            ele.total_contributions_text = formatTime(hours, minutes);
+            const {hours, minutes, seconds} = calculateTime(Number(ele.total_contributions)*60*60, true);
+            ele.total_contributions_text = formatTime(hours, minutes, seconds);
         });
     }
     chart.data = response;
@@ -239,13 +239,13 @@ function drawMap(response) {
         const $half = $("#half .legend-val");
         const $threeQuarter = $("#threeQuarter .legend-val");
         const $full = $("#full .legend-val");
-        const {hours: qHours, minutes: qMinuts} = calculateTime(quarterVal*60*60);
-        const {hours: hHours, minutes: hMinuts} = calculateTime(quarterVal*2*60*60);
-        const {hours: tQHours, minutes: tQMinuts} = calculateTime(quarterVal*3*60*60);
-        $quarter.text(`0 - ${formatTime(qHours, qMinuts)}`);
-        $half.text(`${formatTime(qHours, qMinuts)} - ${formatTime(hHours, hMinuts)}`);
-        $threeQuarter.text(`${formatTime(hHours, hMinuts)} - ${formatTime(tQHours, tQMinuts)}`);
-        $full.text(`> ${formatTime(tQHours, tQMinuts)}`);
+        const {hours: qHours, minutes: qMinuts, seconds: qSeconds} = calculateTime(quarterVal*60*60, true);
+        const {hours: hHours, minutes: hMinuts, seconds: hSeconds} = calculateTime(quarterVal*2*60*60, true);
+        const {hours: tQHours, minutes: tQMinuts, seconds: tQSeconds} = calculateTime(quarterVal*3*60*60, true);
+        $quarter.text(`0 - ${formatTime(qHours, qMinuts, qSeconds)}`);
+        $half.text(`${formatTime(qHours, qMinuts, qSeconds)} - ${formatTime(hHours, hMinuts, hSeconds)}`);
+        $threeQuarter.text(`${formatTime(hHours, hMinuts, hSeconds)} - ${formatTime(tQHours, tQMinuts, tQSeconds)}`);
+        $full.text(`> ${formatTime(tQHours, tQMinuts, tQSeconds)}`);
         $legendDiv.removeClass('d-none').addClass("d-flex");
 }
 
