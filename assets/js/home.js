@@ -549,5 +549,6 @@ module.exports = {
     getStatistics,
     performAPIRequest,
     updateHrsForSayAndListen,
-    getDefaultTargettedDiv
+    getDefaultTargettedDiv,
+    formatTime
 };
