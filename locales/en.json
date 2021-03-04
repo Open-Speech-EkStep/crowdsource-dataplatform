@@ -127,5 +127,16 @@
 	"Top Languages": "Top Languages",
 	"By hours of data recorded": "By hours of data recorded",
 	"By number of speakers": "By number of speakers",
-	"VIEW ALL DETAILS": "VIEW ALL DETAILS"
+	"VIEW ALL DETAILS": "VIEW ALL DETAILS",
+	"Oops": "Oops",
+	"Page Not Found": "Page Not Found",
+	"Looks like you have taken a wrong turn here": "Looks like you have taken a wrong turn here",
+	"Click Here": "Click Here",
+	"to go back to home page": "to go back to home page",
+	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span><span class=\"font-wt-900\"> recordings out of</span> <span id=\"spn-total-contribution-count\" class=\"font-wt-900\"></span class=\"font-wt-900\"> sentences contributed in <span id=\"spn-validation-language-2\" class=\"font-wt-900\"></span> language.": "You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span><span class=\"font-wt-900\"> recordings out of</span> <span id=\"spn-total-contribution-count\" class=\"font-wt-900\"></span class=\"font-wt-900\"> sentences contributed in <span id=\"spn-validation-language-2\" class=\"font-wt-900\"></span> language.",
+	"Select the language for contribution": "Select the language for contribution",
+	"By hours of data contributed": "By hours of data contributed",
+	"Select Age Group": "Select Age Group",
+	"I have read and agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions </a>": "I have read and agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions </a>",
+	"Replay": "dsffasdf"
 }

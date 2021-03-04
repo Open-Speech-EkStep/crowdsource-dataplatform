@@ -34,7 +34,8 @@ const {
     monthlyTimeline,
     monthlyTimelineCumulative,
     quarterlyTimeline,
-    quarterlyTimelineCumulative
+    quarterlyTimelineCumulative,
+    lastUpdatedAtQuery
 } = require('./dashboardDbQueries');
 
 const { KIDS_AGE_GROUP, ADULT, KIDS } = require('./constants');
@@ -314,6 +315,16 @@ const getAgeGroupData = (language = '') => {
     return db.any(ageGroupContributions, filter);
 }
 
+const getLastUpdatedAt = async () => {
+    const lastUpdatedAt = await db.one(lastUpdatedAtQuery, []);
+    console.log(lastUpdatedAt);
+    let lastUpdatedDateTime = "";
+    if("timezone" in lastUpdatedAt){
+        lastUpdatedDateTime = new Date(lastUpdatedAt['timezone']).toLocaleString();
+    }
+    return lastUpdatedDateTime;
+}
+
 module.exports = {
     updateAndGetSentences,
     getValidationSentences,
@@ -328,5 +339,6 @@ module.exports = {
     getLanguages,
     getTimeline,
     getAgeGroupData,
-    getGenderGroupData
+    getGenderGroupData,
+    getLastUpdatedAt
 };
