@@ -297,6 +297,7 @@ body.modal-open .supreme-container {
 .legend-val {
   margin-top: 25px;
   text-align: center;
+  font-size: 14px;
 }
 
 #viewAllDetailsBtn {
