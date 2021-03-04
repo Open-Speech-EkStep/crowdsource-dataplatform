@@ -18,10 +18,17 @@ function toggleFooterPosition() {
 
 function fetchLocationInfo(){
     //https://api.ipify.org/?format=json
-    return fetch('https://api.ipify.org/?format=json').then(ipAddressJson => {
-        if("ip" in ipAddressJson){
-            const ip = ipAddressJson["ip"];
-            return fetch(`/location-info?ip=${ip}`);
+    return fetch('https://www.cloudflare.com/cdn-cgi/trace').then(res=>res.text()).then(ipAddressText => {
+        const dataArray = ipAddressText.split('\n');
+        let ipAddress = "";
+        for(let ind in dataArray){
+            if(dataArray[ind].startsWith("ip=")){
+                ipAddress = dataArray[ind].replace('ip=','');
+                break;
+            }
+        }
+        if(ipAddress.length !== 0){
+            return fetch(`/location-info?ip=${ipAddress}`);
         } else {
             return new Promise((resolve, reject)=>{
                 reject("Ip Address not available")
