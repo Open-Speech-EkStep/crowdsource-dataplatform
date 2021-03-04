@@ -17,7 +17,17 @@ function toggleFooterPosition() {
 }
 
 function fetchLocationInfo(){
-    return fetch('http://ip-api.com/json/?fields=country,regionName');
+    //https://api.ipify.org/?format=json
+    return fetch('https://api.ipify.org/?format=json').then(ipAddressJson => {
+        if("ip" in ipAddressJson){
+            const ip = ipAddressJson["ip"];
+            return fetch(`/location-info?ip=${ip}`);
+        } else {
+            return new Promise((resolve, reject)=>{
+                reject("Ip Address not available")
+            })
+        }
+    });
 }
 
 module.exports = {setPageContentHeight, toggleFooterPosition, fetchLocationInfo}
