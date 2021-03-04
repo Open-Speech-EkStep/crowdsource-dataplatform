@@ -90,7 +90,6 @@ const drawMap = function (response) {
     "fill",
     function (fill, target) {
       if (target.dataItem) {
-        console.log("target: ", target.dataItem.value);
         if (target.dataItem.value >= quarterVal * 3) {
           return am4core.color("#4061BF");
         } else if (target.dataItem.value >= quarterVal * 2) {
