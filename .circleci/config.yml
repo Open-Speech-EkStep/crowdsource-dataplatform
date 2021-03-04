@@ -99,11 +99,17 @@ workflows:
           requires:
             - push_dev_image
 
+      - approve_to_deploy:
+          name: approve_test_deployment_eks
+          type: approval
+          requires:
+            - dev_deployment_eks
+
       - db_migrate_aws:
           name: migrate_test_aws
           db_name: ${TEST_DB_NAME}
           requires:
-            - dev_deployment_eks
+            - approve_test_deployment_eks
 
       - aws-ecr/build-and-push-image:
           name: push_test_image
