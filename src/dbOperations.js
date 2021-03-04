@@ -1,4 +1,4 @@
-const {encrypt} = require('./encryptAndDecrypt');
+const { encrypt } = require('./encryptAndDecrypt');
 const { downloader } = require('./downloader/objDownloader')
 const {
     UpdateAudioPathAndUserDetails,
@@ -18,16 +18,16 @@ const {
     updateSentencesWithValidatedState
 } = require('./dbQuery');
 const {
-    topLanguagesBySpeakerContributions, 
-    topLanguagesByHoursContributed, 
-    cumulativeCount, 
-    cumulativeDataByState, 
-    cumulativeDataByLanguage, 
-    cumulativeDataByLanguageAndState, 
-    listLanguages, 
-    dailyTimeline, 
-    ageGroupContributions, 
-    genderGroupContributions, 
+    topLanguagesBySpeakerContributions,
+    topLanguagesByHoursContributed,
+    cumulativeCount,
+    cumulativeDataByState,
+    cumulativeDataByLanguage,
+    cumulativeDataByLanguageAndState,
+    listLanguages,
+    dailyTimeline,
+    ageGroupContributions,
+    genderGroupContributions,
     dailyTimelineCumulative,
     weeklyTimeline,
     weeklyTimelineCumulative,
@@ -39,6 +39,7 @@ const {
 } = require('./dashboardDbQueries');
 
 const { KIDS_AGE_GROUP, ADULT, KIDS } = require('./constants');
+
 const envVars = process.env;
 const pgp = require('pg-promise')();
 const showUniqueSentences = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION == 'true';
@@ -124,7 +125,7 @@ const getSentencesBasedOnAge = function (
         languageLabel = KIDS;
     }
 
-    if( showUniqueSentences) {
+    if (showUniqueSentences) {
         query = updateAndGetUniqueSentencesQuery
     }
 
@@ -197,17 +198,19 @@ const getAudioClip = function (req, res, objectStorage) {
     }
 
 
-  const downloadFile = downloader(objectStorage);
+    const downloadFile = downloader(objectStorage);
 
-    const file = downloadFile(req.body.file);
-    file.exists().then((result)=>{
-        if(result[0]){
-            const readStream = file.createReadStream();
-            readStream.pipe(res);
-        }
-        else
-            res.sendStatus(404);
-    })
+    try {
+        const file = downloadFile(req.body.file);
+
+        const readStream = file.createReadStream();
+        readStream.pipe(res);
+    }
+    catch (err) {
+        res.sendStatus(500);
+    }
+    
+
 }
 
 const updateTablesAfterValidation = function (req, res) {
