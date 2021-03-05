@@ -360,6 +360,7 @@ function showThankYou() {
     $('#instructions-row').addClass('d-none');
     $('#sentences-row').addClass('d-none');
     $('#audio-row').addClass('d-none');
+    $('#validation-button-row').addClass('d-none');
     $('#thank-you-row').removeClass('d-none');
     
     var language = localStorage.getItem('contributionLanguage');
