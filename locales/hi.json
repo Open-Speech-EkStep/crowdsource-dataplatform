@@ -3,7 +3,7 @@
 	"Speech Recognition Models": "Speech Recognition Models",
 	"About Us": "हमारे बारे में",
 	"Select the language for contribution": "योगदान के लिए भाषा का चुनाव करें",
-	"Say": "कहिए",
+	"Say": "बोलिये",
 	"Contribute Your Voice": "आपकी आवाज़ का योगदान",
 	"Contribute your voice to create an open data repository of Indian languages": "भारतीय भाषाओं के विशाल डाटा संग्रह के लिए अपनी आवाज़ का योगदान दें",
 	"Listen": "सुनिए",
@@ -118,5 +118,8 @@
 	"Page Not Found": "पेज नहीं मिल रहा",
 	"Looks like you have taken a wrong turn here": "लगता है आपने गलत तरीका चुन लिया है",
 	"Click Here": "यहाँ क्लिक करें",
-	"to go back to home page": "अपने होम पेज पर जाने के लिए"
+	"to go back to home page": "अपने होम पेज पर जाने के लिए",
+	"Show All": "अन्य भाषाएं",
+	"Select the language for contribution:": "Select the language for contribution:",
+	"Enter preferred username": "Enter preferred username"
 }
