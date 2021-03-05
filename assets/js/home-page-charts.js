@@ -37,6 +37,45 @@ const performAPIRequest = (url) => {
   });
 };
 
+const statesInformation = [
+  {state: 'Telangana',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Andaman and Nicobar Islands',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Andhra Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Arunanchal Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Assam',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Bihar',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Chhattisgarh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Daman & Diu',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Goa',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Gujarat',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Haryana',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Himachal Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Jammu & Kashmir',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Jharkhand',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Karnataka',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Kerala',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Lakshadweep',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Madhya Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Maharashtra',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Manipur',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Chandigarh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Puducherry',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Punjab',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Rajasthan',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Sikkim',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Tamil Nadu',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Tripura',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Uttar Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Uttarakhand',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'West Bengal',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Odisha',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Dadara & Nagar Havelli',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Meghalaya',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Mizoram',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'Nagaland',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {state: 'National Capital Territory of Delhi',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0}
+]
+
 const drawMap = function (response) {
   const $legendDiv = $("#legendDiv");
   const maxContribution = Math.max.apply(
@@ -51,22 +90,29 @@ const drawMap = function (response) {
   } else {
     quarterVal = 0.25;
   }
-  response.data.forEach((ele) => {
-    const {
-      hours: cHours,
-      minutes: cMinutes,
-      seconds: cSeconds,
-    } = calculateTime(Number(ele.total_contributions) * 60 * 60, true);
-    const {
-      hours: vHours,
-      minutes: vMinutes,
-      seconds: vSeconds,
-    } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
-    ele.contributed_time = `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
-    ele.validated_time = `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
-    ele.value = Number(ele.total_contributions);
-    ele.id = ele.state;
+
+  statesInformation.forEach(st => {
+    const ele = response.data.find(s => st.state === s.state);
+    if(ele) {
+      const {
+        hours: cHours,
+        minutes: cMinutes,
+        seconds: cSeconds,
+      } = calculateTime(Number(ele.total_contributions) * 60 * 60, true);
+      const {
+        hours: vHours,
+        minutes: vMinutes,
+        seconds: vSeconds,
+      } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
+      st.contributed_time = `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
+      st.validated_time = `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
+      st.value = Number(ele.total_contributions);
+      st.id = st.state;
+    } else {
+      st.id = st.state;
+    }
   });
+
   var chart = am4core.create("indiaMapChart", am4maps.MapChart);
   chart.geodataSource.url = "./js/states_india_geo.json";
   chart.projection = new am4maps.projections.Miller();
@@ -75,9 +121,9 @@ const drawMap = function (response) {
   chart.seriesContainer.resizable = false;
   chart.maxZoomLevel = 1;
   polygonSeries.useGeodata = true;
-  polygonSeries.data = response.data;
+  polygonSeries.data = statesInformation;
   var polygonTemplate = polygonSeries.mapPolygons.template;
-  polygonTemplate.tooltipHTML = `<div><h6>{state}</h6> <div>{total_speakers} Speakers  <label style="margin-left: 32px">{contributed_time}</label></div> <div>Validated:  <label style="margin-left: 16px">{validated_time}</label></div></div>`;
+  polygonTemplate.tooltipHTML = `<div><h6>{state}</h6> <div>{total_speakers} Speakers  <label style="margin-left: 32px">Contributed: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div>Validated:  <label style="margin-left: 8px">{validated_time}</label></div></div>`;
   polygonTemplate.nonScalingStroke = true;
   polygonTemplate.strokeWidth = 0.5;
   polygonTemplate.fill = am4core.color("#fff");
@@ -180,9 +226,17 @@ function getStatistics() {
     });
 }
 
-function constructChart(response, xAxisLabel, yAxisLabel) {
+function constructChart(responseData, xAxisLabel, yAxisLabel) {
   var chart = am4core.create("speakers_hours_chart", am4charts.XYChart);
   chartReg["chart"] = chart;
+  
+  let response = [...responseData];
+  if (xAxisLabel === "total_speakers") {
+    response = response.sort((a,b) => Number(a.total_speakers) < Number(b.total_speakers) ? -1: 1);
+  } else {
+    response = response.sort((a,b) => Number(a.total_contributions) < Number(b.total_contributions) ? -1: 1);
+  }
+
   if (xAxisLabel !== "total_speakers") {
     response.forEach((ele) => {
       const { hours, minutes, seconds } = calculateTime(
@@ -202,7 +256,7 @@ function constructChart(response, xAxisLabel, yAxisLabel) {
   var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
   valueAxis.renderer.grid.template.strokeWidth = 0;
   valueAxis.renderer.labels.template.disabled = true;
-
+  
   categoryAxis.renderer.minGridDistance = 25;
   var series = chart.series.push(new am4charts.ColumnSeries());
   series.dataFields.valueX = xAxisLabel;
@@ -214,8 +268,10 @@ function constructChart(response, xAxisLabel, yAxisLabel) {
       ? "{total_speakers}"
       : "{total_contributions_text}";
   valueLabel.label.fontSize = 14;
-  valueLabel.label.horizontalCenter = "right";
-  valueLabel.label.dx = 0;
+  valueLabel.label.horizontalCenter = "left";
+  valueLabel.label.dx = 10;
+  valueLabel.label.truncate = false;
+  valueLabel.label.hideOversized = false;
 
   var cellSize = 35;
   chart.events.on("datavalidated", function (ev) {
