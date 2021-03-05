@@ -10,11 +10,31 @@ const config = {
 
 const s3 = new AWS.S3(config);
 
-const awsDownloader = function (filename) {
+const awsDownloader = async function (filename) {
 
     const downloadParams = { Bucket: bucket, Key: filename };
-
-    return s3.getObject(downloadParams).promise();
+    
+    const exists = await s3
+            .headObject({
+                Bucket: bucket,
+                Key: filename,
+            })
+            .promise()
+            .then(
+                () => true,
+                err => {
+                if (err.code === 'NotFound') {
+                    return false;
+                }
+                throw err;
+                }
+            );
+    if (exists) {
+        return s3.getObject(downloadParams);
+    }
+    else {
+        return null;
+    }
 };
 
 module.exports = { awsDownloader }
