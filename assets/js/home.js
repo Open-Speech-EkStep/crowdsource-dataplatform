@@ -140,7 +140,7 @@ const setLanguagesInHeader = function() {
         {value: "Telugu", id: "te", text: "తెలుగు"}
     ]
     languages.forEach((element,index)=>{
-        $languageNavBar.append(`<li class="nav-item mx-2 mx-lg-4 options" value=${element.value}>${element.text}</li>`);
+        $languageNavBar.append(`<li class="nav-item px-lg-4 px-md-4 px-2 options" value=${element.value}>${element.text}</li>`);
     });
 
     $navBarLoader.addClass('d-none');
