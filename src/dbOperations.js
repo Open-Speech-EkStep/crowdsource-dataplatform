@@ -325,6 +325,19 @@ const getLastUpdatedAt = async () => {
     let lastUpdatedDateTime = "";
     if("timezone" in lastUpdatedAt){
         lastUpdatedDateTime = new Date(lastUpdatedAt['timezone']).toString();
+        let dateSplits = lastUpdatedDateTime.split(" ");
+        if(dateSplits.length < 5){
+            return lastUpdatedDateTime;
+        }
+        lastUpdatedDateTime = "";
+        let count = 0;
+        for(let i=0;i<dateSplits.length;i++){
+            if(count < 5){
+                lastUpdatedDateTime = lastUpdatedDateTime + " " + dateSplits[i];
+            }
+            count += 1;
+        }
+        lastUpdatedDateTime = lastUpdatedDateTime.trim();
     }
     return lastUpdatedDateTime;
 }
