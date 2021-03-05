@@ -97,7 +97,7 @@
 	"Would you also like to contribute your voice?": "നിങ്ങളുടെ ശബ്‌ദം സംഭാവന ചെയ്യാനും നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ?",
 	"Start Contributing": "സംഭാവന ചെയ്യാൻ ആരംഭിക്കുക",
 	"Thank you for validating!": "സാധൂകരിച്ചതിന് നന്ദി!",
-	"You have helped us validate <span id=\"spn-validation-count\"></span> voice samples out of <span id=\"spn-total-contribution-count\"></span> contributed in \"<span id=\"spn-validation-language-2\"></span>\" language.": "<span id=\"spn-validation-language-2\"></span> ഭാഷയിൽ സംഭാവന ചെയ്യപ്പെട്ട <span id=\"spn-total-contribution-count\"></span> ശബ്ദ സാമ്പിളുകളിൽ <span id=\"spn-validation-count\"></span> ശബ്ദ സാമ്പിളുകൾ സാധൂകരിക്കാൻ നിങ്ങൾ ഞങ്ങളെ സഹായിച്ചിരിക്കുന്നു.",
+	"You have helped us validate <span id=\"spn-validation-count\"></span> voice samples out of <span id=\"spn-total-contribution-count\"></span> contributed in \"<span id=\"spn-validation-language-2\"></span>\" language.": "സംഭാവന ചെയ്യപ്പെട്ട <span id=\"spn-total-contribution-count\"></span> ശബ്ദ സാമ്പിളുകളിൽ <span id=\"spn-validation-count\"></span> ശബ്ദ സാമ്പിളുകൾ സാധൂകരിക്കാൻ നിങ്ങൾ ഞങ്ങളെ സഹായിച്ചിരിക്കുന്നു.",
 	"total hours validated": "ആകെ സാധൂകരിച്ചത്",
 	"total hours contributed": "ആകെ സംഭാവന ചെയ്തത്",
 	"Validate More": "കൂടുതൽ സാധൂകരിക്കുക",

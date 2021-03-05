@@ -92,7 +92,7 @@
 	"Would you also like to contribute your voice?": "আপনি কি নিজের কন্ঠে অবদান রাখতে চান?",
 	"Start Contributing": "অবদান শুরু করুন",
 	"Thank you for validating!": "বৈধ হওয়ার জন্য ধন্যবাদ!",
-	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span><span class=\"font-wt-900\"> recordings out of</span> <span id=\"spn-total-contribution-count\" class=\"font-wt-900\"></span class=\"font-wt-900\"> sentences contributed in <span id=\"spn-validation-language-2\" class=\"font-wt-900\"></span> language.": "আপনি আমাদের <span id=\"spn-validation-language-2\" class=\"font-wt-900\"></span> ভাষার <span id=\"spn-total-contribution-count\" class=\"font-wt-900\"></span> টি নমুনার মধ্যে <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> টি ভয়েস নমুনাগুলি যাচাই করতে সহায়তা করেছেন",
+	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span><span class=\"font-wt-900\"> recordings out of</span> <span id=\"spn-total-contribution-count\" class=\"font-wt-900\"></span class=\"font-wt-900\"> sentences contributed in <span id=\"spn-validation-language-2\" class=\"font-wt-900\"></span> language.": "আপনি <span id=\"spn-total-contribution-count\" class=\"font-wt-900\"></span> টি নমুনার মধ্যে <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> টি ভয়েস নমুনাগুলি যাচাই করতে সহায়তা করেছেন",
 	"total hours validated": "মোট বৈধ",
 	"total hours contributed": "মোট অবদান",
 	"Validate More": "আরও বৈধতা দিন",
