@@ -54,6 +54,18 @@ h6,
 }
 @media (min-width: 672px) {
 }
+
+@media screen and (max-width: 991px) {
+  #start_recording, #start_validating {
+    width: 120px;
+  }
+
+  .say-active #say-p-2, .listen-active #listen-p-2 {
+    position: relative !important;
+    margin-top: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
   .font-weight-normal-sm {
     font-weight: 400 !important;
@@ -64,6 +76,10 @@ h6,
   .say-active #say-p-2, .listen-active #listen-p-2 {
     position: relative !important;
     margin-top: 2rem;
+  }
+
+  .mt-xs-5{
+    margin-top: 5rem;
   }
 }
 @media (min-width: 768px) {
@@ -341,8 +357,13 @@ body.modal-open .supreme-container {
   }
 }
 
+
+
 @media screen and (max-width: 320px) {
   #start_recording, #start_validating {
     width: 64px;
   }
 }
+
+
+
