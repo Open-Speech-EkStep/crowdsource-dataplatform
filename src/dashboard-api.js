@@ -33,8 +33,8 @@ const dashboardRoutes = (router) => {
     });
 
     router.get('/aggregate-data-count', async (req, res) => {
-        const byLanguage = Boolean(req.query.byLanguage) || false;
-        const byState = Boolean(req.query.byState) || false;
+        const byLanguage = req.query.byLanguage || false;
+        const byState = req.query.byState || false;
 
         let aggregateData = await getAggregateDataCount(byLanguage, byState);
         const lastUpdatedDateTime = await getLastUpdatedAt();
