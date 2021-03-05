@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: refresh-data
 spec:
-  schedule: "*/3 * * * *"
+  schedule: "*/4 * * * *"
   jobTemplate:
     spec:
       template:
