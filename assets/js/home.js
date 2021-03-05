@@ -107,13 +107,19 @@ const setLangNavBar = (targetedDiv,top_lang, $languageNavBar) => {
     }
 }
 
-const setLanguagesInHeader = function(response) {
+const setLanguagesInHeader = function() {
     const $languageNavBar= $('#language-nav-bar');
     const $navBarLoader = $('#nav-bar-loader');
-  
-    response.data.forEach((element,index)=>{
-        const lang = ALL_LANGUAGES.find(ele => ele.value === element.language);
-        $languageNavBar.append(`<li class="nav-item mx-2 mx-lg-4 options" value=${element.language}>${lang.text}</li>`);
+    const languages = [
+        {value: "Hindi", id: "hi", text: "हिन्दी"},
+        {value: "Marathi", id: "mr", text: "मराठी"},
+        {value: "Bengali", id: "bn", text: "বাংলা"},
+        {value: "Tamil", id: "ta", text: "தமிழ்"},
+        {value: "Telugu", id: "te", text: "తెలుగు"}
+    ]
+    languages.forEach((element,index)=>{
+        // const lang = ALL_LANGUAGES.find(ele => ele.value === element.language);
+        $languageNavBar.append(`<li class="nav-item mx-2 mx-lg-4 options" value=${element.value}>${element.text}</li>`);
     });
 
     $navBarLoader.addClass('d-none');
@@ -183,8 +189,8 @@ $(document).ready(function () {
         container: 'body',
         placement: screen.availWidth > 500 ? 'right' : 'auto',
     });
-
-    setTop5LanInNavBar();
+    setLanguagesInHeader();
+    // setTop5LanInNavBar();
     let top_lang = localStorage.getItem('contributionLanguage');
     const $languageNavBar = $('#language-nav-bar');
     const $sayListenLanguage = $('#say-listen-language');
