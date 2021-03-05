@@ -24,6 +24,7 @@ left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and 
 where language = $4 and label=$3 \
 and (coalesce(cont.action,\'\')!=\'completed\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id)) \
 group by sentences."sentenceId", con."contributor_id" \
+order by RANDOM() \
 limit 5  returning "sentenceId") \
 select ins."sentenceId", sentences.sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";'
@@ -44,13 +45,13 @@ where sentences."state" is null and language = $4 and label=$3 and cont."action"
 select ins."sentenceId", sentences.sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";'
 
-const getValidationSentencesQuery = 'select audio_path, con."sentenceId", sen.sentence \
+const getValidationSentencesQuery = 'select audio_path, con."sentenceId", sen.sentence, con.contribution_id \
     from contributions con inner join sentences sen on sen."sentenceId"=con."sentenceId" and con.action=\'completed\' \
-    where sen."state"= \'contributed\' and language=$1 order by RANDOM() limit 5;'
+    where sen."state"= \'contributed\' and language=$1 group by audio_path, con."sentenceId", sen.sentence, con.contribution_id order by RANDOM() limit 5;'
 
 const addValidationQuery = 'insert into validations (contribution_id, "action", validated_by, "date") \
 select contribution_id, $3, $1, now() from contributions inner join sentences on sentences."sentenceId"=contributions."sentenceId" \
-where sentences."sentenceId" = $2 and sentences.state = \'contributed\';'
+where sentences."sentenceId" = $2 and sentences.state = \'contributed\' and contribution_id=$4;'
 
 const updateSentencesWithValidatedState = 'update sentences set "state" = \
 \'validated\' where "sentenceId" = $1;'
