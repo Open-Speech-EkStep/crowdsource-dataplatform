@@ -138,7 +138,7 @@ workflows:
 
       - db_migrate_aws:
           name: migrate_prod_aws
-          db_name: ${TEST_DB_NAME}
+          db_name: ${DB_NAME}
           requires:
             - approve_prod_deployment_eks
 
