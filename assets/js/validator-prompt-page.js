@@ -230,11 +230,13 @@ function recordValidation(action) {
         validationCount++;
     }
     const sentenceId = validationSentences[currentIndex].sentenceId
+    const contribution_id = validationSentences[currentIndex].contribution_id
     fetch('/validation/action', {
         method: 'POST',
         body: JSON.stringify({
             sentenceId: sentenceId,
-            action: action
+            action: action,
+            contributionId: contribution_id
         }),
         headers: {
             'Content-Type': 'application/json',
