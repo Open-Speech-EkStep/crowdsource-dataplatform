@@ -260,11 +260,11 @@ const getTopLanguageBySpeakers = () => {
 
 const getAggregateDataCount = (language, state) => {
     let query = "";
-    if (language && state) {
+    if (language && state && language === true && state === true) {
         query = cumulativeDataByLanguageAndState;
-    } else if (language) {
+    } else if (language && language === true) {
         query = cumulativeDataByLanguage;
-    } else if (state) {
+    } else if (state && state === true) {
         query = cumulativeDataByState;
     } else {
         query = cumulativeCount;
