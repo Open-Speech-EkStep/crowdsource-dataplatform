@@ -41,6 +41,7 @@
     "jest": "^26.6.3",
     "jquery": "^3.5.1",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
     "multer": "^1.4.2",
     "node-fetch": "^2.6.1",
     "pg-promise": "^10.5.2",

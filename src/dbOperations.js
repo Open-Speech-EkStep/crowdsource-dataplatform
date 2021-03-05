@@ -1,5 +1,6 @@
 const { encrypt } = require('./encryptAndDecrypt');
 const { downloader } = require('./downloader/objDownloader')
+const moment = require('moment');
 const {
     UpdateAudioPathAndUserDetails,
     setNewUserAndFileName,
@@ -214,7 +215,7 @@ const getAudioClip = async function (req, res, objectStorage) {
     catch (err) {
         res.sendStatus(500);
     }
-    
+
 
 }
 
@@ -260,11 +261,18 @@ const getTopLanguageBySpeakers = () => {
 
 const getAggregateDataCount = (language, state) => {
     let query = "";
-    if (language && state) {
+    if (typeof language !== "boolean") {
+        language = language === 'true' ? true : false;
+    }
+
+    if (typeof state !== "boolean") {
+        state = state === 'true' ? true : false;
+    }
+    if (language && state && language === true && state === true) {
         query = cumulativeDataByLanguageAndState;
-    } else if (language) {
+    } else if (language && language === true) {
         query = cumulativeDataByLanguage;
-    } else if (state) {
+    } else if (state && state === true) {
         query = cumulativeDataByState;
     } else {
         query = cumulativeCount;
@@ -323,21 +331,12 @@ const getAgeGroupData = (language = '') => {
 const getLastUpdatedAt = async () => {
     const lastUpdatedAt = await db.one(lastUpdatedAtQuery, []);
     let lastUpdatedDateTime = "";
-    if("timezone" in lastUpdatedAt){
-        lastUpdatedDateTime = new Date(lastUpdatedAt['timezone']).toString();
-        let dateSplits = lastUpdatedDateTime.split(" ");
-        if(dateSplits.length < 5){
-            return lastUpdatedDateTime;
+    if ("timezone" in lastUpdatedAt) {
+        try{
+            lastUpdatedDateTime = moment(lastUpdatedAt['timezone']).format('DD-MM-YYYY, h:mm:ss a');
+        }catch(err){
+            console.log(err);
         }
-        lastUpdatedDateTime = "";
-        let count = 0;
-        for(let i=0;i<dateSplits.length;i++){
-            if(count < 5){
-                lastUpdatedDateTime = lastUpdatedDateTime + " " + dateSplits[i];
-            }
-            count += 1;
-        }
-        lastUpdatedDateTime = lastUpdatedDateTime.trim();
     }
     return lastUpdatedDateTime;
 }
