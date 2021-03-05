@@ -88,7 +88,7 @@
 	"Instructions": "নির্দেশাবলী",
 	"Play": "শুরু করুন",
 	"Thank you for your enthusiasm to validate the voice samples": "ভয়েস নমুনাগুলি যাচাই করতে আপনার উত্সাহের জন্য আপনাকে ধন্যবাদ",
-	"We have recently commenced the data contribution journey for <span id=\"spn-validation-language\"></span> language and hope that very soon there will be voice samples collected for your validation.": "আমরা সম্প্রতি ডেটা অবদানের যাত্রা শুরু করেছি <span id=\"spn-validation-language\"></span> ভাষা এবং আশা করি খুব শীঘ্রই আপনার বৈধতার জন্য ভয়েস নমুনাগুলি সংগ্রহ করা হবে।",
+	"We have recently commenced the data contribution journey for <span id=\"spn-validation-language\"></span> language and hope that very soon there will be voice samples collected for your validation.": "আমরা সম্প্রতি <span id=\"spn-validation-language\"></span> ভাষার জন্য ডেটা অবদানের যাত্রা শুরু করেছি এবং আশা করি খুব শীঘ্রই আপনার বৈধতার জন্য ভয়েস নমুনাগুলি সংগ্রহ করা হবে।",
 	"Would you also like to contribute your voice?": "আপনি কি নিজের কন্ঠে অবদান রাখতে চান?",
 	"Start Contributing": "অবদান শুরু করুন",
 	"Thank you for validating!": "বৈধ হওয়ার জন্য ধন্যবাদ!",
