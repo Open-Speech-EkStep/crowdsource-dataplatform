@@ -226,9 +226,17 @@ function getStatistics() {
     });
 }
 
-function constructChart(response, xAxisLabel, yAxisLabel) {
+function constructChart(responseData, xAxisLabel, yAxisLabel) {
   var chart = am4core.create("speakers_hours_chart", am4charts.XYChart);
   chartReg["chart"] = chart;
+  
+  let response = [...responseData];
+  if (xAxisLabel === "total_speakers") {
+    response = response.sort((a,b) => Number(a.total_speakers) < Number(b.total_speakers) ? -1: 1);
+  } else {
+    response = response.sort((a,b) => Number(a.total_contributions) < Number(b.total_contributions) ? -1: 1);
+  }
+
   if (xAxisLabel !== "total_speakers") {
     response.forEach((ele) => {
       const { hours, minutes, seconds } = calculateTime(
@@ -260,8 +268,10 @@ function constructChart(response, xAxisLabel, yAxisLabel) {
       ? "{total_speakers}"
       : "{total_contributions_text}";
   valueLabel.label.fontSize = 14;
-  valueLabel.label.horizontalCenter = "right";
-  valueLabel.label.dx = 0;
+  valueLabel.label.horizontalCenter = "left";
+  valueLabel.label.dx = 10;
+  valueLabel.label.truncate = false;
+  valueLabel.label.hideOversized = false;
 
   var cellSize = 35;
   chart.events.on("datavalidated", function (ev) {
