@@ -107,6 +107,7 @@ const drawMap = function (response) {
       st.contributed_time = `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
       st.validated_time = `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
       st.value = Number(ele.total_contributions);
+      st.total_speakers = ele.total_speakers;
       st.id = st.state;
     } else {
       st.id = st.state;
