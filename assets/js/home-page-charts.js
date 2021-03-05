@@ -120,6 +120,7 @@ const drawMap = function (response) {
   var polygonSeries = new am4maps.MapPolygonSeries();
   chart.seriesContainer.draggable = false;
   chart.seriesContainer.resizable = false;
+  chart.chartContainer.wheelable = false;
   chart.maxZoomLevel = 1;
   polygonSeries.useGeodata = true;
   polygonSeries.data = statesInformation;
