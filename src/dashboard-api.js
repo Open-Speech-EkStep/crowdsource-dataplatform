@@ -37,10 +37,6 @@ const dashboardRoutes = (router) => {
         const byState = req.query.byState || false;
 
         let aggregateData = await getAggregateDataCount(byLanguage, byState);
-        aggregateData = aggregateData.map(data => {
-            data.last_updated_at = new Date(data.last_updated_at).toLocaleString()
-            return data;
-        })
         const lastUpdatedDateTime = await getLastUpdatedAt();
         res.send({ "data": aggregateData, last_updated_at: lastUpdatedDateTime });
     });

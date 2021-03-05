@@ -322,10 +322,9 @@ const getAgeGroupData = (language = '') => {
 
 const getLastUpdatedAt = async () => {
     const lastUpdatedAt = await db.one(lastUpdatedAtQuery, []);
-    console.log(lastUpdatedAt);
     let lastUpdatedDateTime = "";
     if("timezone" in lastUpdatedAt){
-        lastUpdatedDateTime = new Date(lastUpdatedAt['timezone']).toLocaleString();
+        lastUpdatedDateTime = new Date(lastUpdatedAt['timezone']).toString();
     }
     return lastUpdatedDateTime;
 }
