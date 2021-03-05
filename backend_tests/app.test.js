@@ -68,7 +68,7 @@ describe("Test the root path", () => {
         const res = await request(app).get("/thank-you");
 
         expect(res.status).toBe(200);
-        expect(res.text.includes("Vakyansh has been envisioned to meet a goal of approx. 10,000")).toBe(true)
+        expect(res.text.includes("A contribution of 30-45 mins voice per speaker can make Vakyansh come closer to it’s vision.")).toBe(true)
     });
 
     test("/record should response the GET method", async () => {

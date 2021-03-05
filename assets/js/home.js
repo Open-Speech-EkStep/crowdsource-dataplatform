@@ -1,4 +1,4 @@
-const {buildGraphs} = require('./draw-chart');
+const {generateIndiaMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
 const {toggleFooterPosition} = require('./utils')
 const {
     validateUserName,
@@ -14,10 +14,11 @@ const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
 const AGGREGATED_DATA_BY_STATE = "aggregatedDataByState";
 const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
 
-const ALL_LANGUAGES = [{value: "Assamese",id: "as", text: "অসমীয়া"},
+const ALL_LANGUAGES = [
+    {value: "Assamese",id: "as", text: "অসমীয়া"},
     {value: "Bengali", id: "bn", text: "বাংলা"},
     {value: "English", id: "en", text: "English"},
-    {value: "Gujrati", id: "gu", text: "ગુજરાતી"},
+    {value: "Gujarati", id: "gu", text: "ગુજરાતી"},
     {value: "Hindi", id: "hi", text: "हिन्दी"},
     {value: "Kannada", id: "kn", text: "ಕನ್ನಡ"},
     {value: "Malayalam", id: "ml", text: "മലയാളം"},
@@ -26,32 +27,6 @@ const ALL_LANGUAGES = [{value: "Assamese",id: "as", text: "অসমীয়া
     {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ"},
     {value: "Tamil", id: "ta", text: "தமிழ்"},
     {value: "Telugu", id: "te", text: "తెలుగు"}];
-
-function formatTime(hours, minutes=0, seconds=0) {
-    let result = '';
-    if(hours > 0) {
-        result += `${hours} hrs `;
-    }
-    if(minutes > 0) {
-        result += `${minutes} min `;
-    }
-    if(seconds > 0) {
-        result += `${seconds} sec `;
-    }
-    return result.substr(0, result.length-1);
-}
-
-function calculateTime(totalSeconds, isSeconds=true) {
-    const hours = Math.floor(totalSeconds / 3600);
-    const remainingAfterHours = totalSeconds % 3600;
-    const minutes = Math.floor(remainingAfterHours / 60);
-    const seconds = Math.round(remainingAfterHours % 60);
-    if(isSeconds) {
-        return {hours, minutes, seconds};
-    } else {
-        return {hours, minutes};
-    }
-}
 
 const performAPIRequest = (url) => {
     return fetch(url).then((data) => {
@@ -83,198 +58,6 @@ function updateHrsForSayAndListen(language) {
     }
     $sayLoader.addClass('d-none');
     $listenLoader.addClass('d-none');
-}
-
-function getStatistics() {
-    const $speakersData = $('#speaker-data');
-    const $speakersDataLoader = $speakersData.find('#loader1, #loader2, #loader3');
-    const $speakersDataSpeakerWrapper = $('#speakers-wrapper');
-    const $speakersDataSpeakerValue = $('#speaker-value');
-    const $speakersDataHoursWrapper = $('#hours-wrapper');
-    const $speakersDataHoursValue = $('#hour-value');
-    const $speakersDataLanguagesWrapper = $('#languages-wrapper');
-    const $speakersDataLanguagesValue = $('#languages-value');
-    $speakersDataLoader.removeClass('d-none');
-    $speakersDataHoursWrapper.addClass('d-none');
-    $speakersDataSpeakerWrapper.addClass('d-none');
-    $speakersDataLanguagesWrapper.addClass('d-none');
-
-    performAPIRequest('/aggregate-data-count')
-        .then((response) => {
-            try {
-                const {hours, minutes, seconds} = calculateTime((Number(response.data[0].total_contributions)*60*60));
-                $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
-                $speakersDataSpeakerValue.text(response.data[0].total_speakers);
-                $speakersDataLanguagesValue.text(response.data[0].total_languages);
-                $speakersDataLoader.addClass('d-none');
-                $speakersDataHoursWrapper.removeClass('d-none');
-                $speakersDataSpeakerWrapper.removeClass('d-none');
-                $speakersDataLanguagesWrapper.removeClass('d-none');
-                //localStorage.setItem('speakersData', JSON.stringify(data));
-            } catch (error) {
-                console.log(error);
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-}
-
-function constructChart(response, xAxisLabel, yAxisLabel) {
-    var chart = am4core.create("speakers_hours_chart", am4charts.XYChart);
-    chartReg["chart"] = chart;
-    if (xAxisLabel !== "total_speakers") {
-        response.forEach(ele => {
-            const {hours, minutes, seconds} = calculateTime(Number(ele.total_contributions)*60*60, true);
-            ele.total_contributions_text = formatTime(hours, minutes, seconds);
-        });
-    }
-    chart.data = response;
-    var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = yAxisLabel;
-    categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.renderer.cellStartLocation = 0.2;
-    categoryAxis.renderer.cellEndLocation = 0.8;
-    categoryAxis.renderer.grid.template.strokeWidth = 0;
-    var label = categoryAxis.renderer.labels.template;
-    label.truncate = false;
-
-    var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
-    valueAxis.renderer.grid.template.strokeWidth = 0;
-    valueAxis.labelsEnabled = false;
-
-    var label = valueAxis.renderer.labels.template;
-    label.truncate = false;
-
-    categoryAxis.renderer.minGridDistance = 25;
-    var series = chart.series.push(new am4charts.ColumnSeries());
-    series.dataFields.valueX = xAxisLabel;
-    series.dataFields.categoryY = yAxisLabel;
-
-    var valueLabel = series.bullets.push(new am4charts.LabelBullet());
-    valueLabel.label.text = xAxisLabel === "total_speakers" ? '{total_speakers}' : '{total_contributions_text}';
-    valueLabel.label.fontSize = 20;
-    valueLabel.label.horizontalCenter = "right";
-    valueLabel.label.dx = 0;
-
-    var cellSize = 35;
-    chart.events.on("datavalidated", function(ev) {
-        var chart = ev.target;
-        var categoryAxis = chart.yAxes.getIndex(0);
-        var adjustHeight = chart.data.length * cellSize - categoryAxis.pixelHeight;
-        var targetHeight = chart.pixelHeight + adjustHeight;
-        chart.svgContainer.htmlElement.style.height = targetHeight + "px";
-    });
-}
-
-//lastRefreshedDate
-//store api Response in local
-
-var chartReg = {};
-function showByHoursChart() {
-    if(chartReg["chart"]) {
-        chartReg["chart"].dispose();
-    }
-    const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-    if (topLanguagesByHoursData) {
-        constructChart(JSON.parse(topLanguagesByHoursData).data, 'total_contributions', 'language');
-    } else {
-        performAPIRequest('/top-languages-by-hours').then((response) => {
-            localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response));
-            constructChart(response.data, 'total_contributions', 'language');
-        });
-    }
-}
-
-function showBySpeakersChart() {
-    if(chartReg["chart"]) {
-        chartReg["chart"].dispose();
-    }
-    const topLanguagesBySpeakers = localStorage.getItem(TOP_LANGUAGES_BY_SPEAKERS);
-    if(topLanguagesBySpeakers) {
-        constructChart(JSON.parse(topLanguagesBySpeakers).data, 'total_speakers', 'language');
-    } else {
-        performAPIRequest('/top-languages-by-speakers').then((response) => {
-            localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response));
-            constructChart(response.data, 'total_speakers', 'language');
-        });
-    }
-}
-
-function drawMap(response) {
-    const $legendDiv = $("#legendDiv");
-    const maxContribution = Math.max.apply(Math, response.data.map(function(ele) { return Number(ele.total_contributions); }))
-        const quarterVal = maxContribution / 4;
-        response.data.forEach(ele => {
-            const {hours:cHours, minutes: cMinutes, seconds: cSeconds} = calculateTime((Number(ele.total_contributions)*60*60), true);
-            const {hours:vHours, minutes:vMinutes, seconds: vSeconds} = calculateTime((Number(ele.total_validations)*60*60), true);
-            ele.contributed_time = `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
-            ele.validated_time = `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
-            ele.value = Number(ele.total_contributions);
-            ele.id = ele.state;
-        });
-        var chart = am4core.create("indiaMapChart", am4maps.MapChart);
-        chart.geodataSource.url = "./js/states_india_geo.json";
-        chart.projection = new am4maps.projections.Miller();
-        var polygonSeries = new am4maps.MapPolygonSeries();
-        chart.seriesContainer.draggable = false;
-        chart.seriesContainer.resizable = false;
-        chart.maxZoomLevel = 1;
-        polygonSeries.useGeodata = true;
-        polygonSeries.data = response.data;
-        var polygonTemplate = polygonSeries.mapPolygons.template;
-        polygonTemplate.tooltipHTML = `<div><h6>{state}</h6> <div>{total_speakers} Speakers  <label style="margin-left: 32px">{contributed_time}</label></div> <div>Validated:  <label style="margin-left: 16px">{validated_time}</label></div></div>`;
-        polygonTemplate.nonScalingStroke = true;
-        polygonTemplate.strokeWidth = 0.5;
-        polygonTemplate.fill = am4core.color("#fff");
-
-        // Create hover state and set alternative fill color
-        var hs = polygonTemplate.states.create("hover");
-        hs.properties.fill = chart.colors.getIndex(1).brighten(-0.5);
-
-        polygonSeries.mapPolygons.template.adapter.add("fill", function(fill, target) {
-            if (target.dataItem) {
-                if (target.dataItem.value >= (quarterVal*3)) {
-                    return am4core.color("#86D126");
-                } else if (target.dataItem.value >= (quarterVal*2)) {
-                    return am4core.color("#EA923F");
-                } else if (target.dataItem.value >= quarterVal) {
-                    return am4core.color("#FBEA5A");
-                } else {
-                    return am4core.color("#C6C6C6");
-                }
-            }
-            return fill;
-        });
-        chart.series.push(polygonSeries);
-
-        const $quarter = $("#quarter .legend-val");
-        const $half = $("#half .legend-val");
-        const $threeQuarter = $("#threeQuarter .legend-val");
-        const $full = $("#full .legend-val");
-        const {hours: qHours, minutes: qMinuts, seconds: qSeconds} = calculateTime(quarterVal*60*60, true);
-        const {hours: hHours, minutes: hMinuts, seconds: hSeconds} = calculateTime(quarterVal*2*60*60, true);
-        const {hours: tQHours, minutes: tQMinuts, seconds: tQSeconds} = calculateTime(quarterVal*3*60*60, true);
-        $quarter.text(`0 - ${formatTime(qHours, qMinuts, qSeconds)}`);
-        $half.text(`${formatTime(qHours, qMinuts, qSeconds)} - ${formatTime(hHours, hMinuts, hSeconds)}`);
-        $threeQuarter.text(`${formatTime(hHours, hMinuts, hSeconds)} - ${formatTime(tQHours, tQMinuts, tQSeconds)}`);
-        $full.text(`> ${formatTime(tQHours, tQMinuts, tQSeconds)}`);
-        $legendDiv.removeClass('d-none').addClass("d-flex");
-}
-
-function generateIndiaMap() {
-    const response  = localStorage.getItem(AGGREGATED_DATA_BY_STATE);
-    if(response) {
-        drawMap(JSON.parse(response));
-    } else {
-        performAPIRequest('/aggregate-data-count?byState=true')
-        .then((response) => {
-            localStorage.setItem(AGGREGATED_DATA_BY_STATE, JSON.stringify(response));
-            drawMap(response);
-        }).catch((err) => {
-            console.log(err);
-        });
-    }
 }
 
 const setAggregateDataCountByLanguage = function () {
@@ -340,13 +123,11 @@ const setLanguagesInHeader = function(response) {
 
 const setTop5LanInNavBar = function(){
      const topLanguagesByHours = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-     console.log("toplng resP :", topLanguagesByHours);
     if(topLanguagesByHours) {
         setLanguagesInHeader(JSON.parse(topLanguagesByHours));
     } else {
         performAPIRequest('/top-languages-by-hours')
         .then((response) => {
-            console.log("response: ", response);
             localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response));
             setLanguagesInHeader(response);
         });
@@ -433,11 +214,7 @@ $(document).ready(function () {
     setAggregateDataCountByLanguage();
 
     $('#start_recording').on('click', () => {
-        if (top_lang === "Hindi" || top_lang === "Odia") {
-            sentenceLanguage = top_lang;
-        } else {
-            sentenceLanguage = "Odia";
-        }
+        sentenceLanguage = top_lang;
     });
 
     $('[name="topLanguageChart"]').on('change', (event) => {
@@ -482,6 +259,7 @@ $(document).ready(function () {
             const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
             const genderValue = checkedGender.length ? checkedGender[0].value : '';
             const userNameValue = $userName.val().trim().substring(0, 12);
+            if (sentenceLanguage === 'English') sentenceLanguage = 'Odia';
             if (testUserName(userNameValue)) {
                 return;
             }
@@ -551,18 +329,13 @@ $(document).ready(function () {
         $listen_p_2.addClass('d-none');
         $listen_container.removeClass('listen-active');
     })
-
     getStatistics();
-    buildGraphs(defaultLang);
     generateIndiaMap();
     showByHoursChart();
 });
 
 module.exports = {
-    calculateTime,
-    getStatistics,
     performAPIRequest,
     updateHrsForSayAndListen,
     getDefaultTargettedDiv,
-    formatTime
 };
