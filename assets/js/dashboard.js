@@ -7,7 +7,8 @@ let languageToRecord = '';
 
 const fetchDetail = (language) => {
     const byLanguage = language ? true : false;
-    return fetch(`/aggregate-data-count?byLanguage=${byLanguage}`).then((data) => {
+    const url = language ? '/aggregate-data-count?byLanguage=true' : '/aggregate-data-count'
+    return fetch(url).then((data) => {
         if (!data.ok) {
             throw Error(data.statusText || 'HTTP error');
         } else {
@@ -25,12 +26,11 @@ const getSpeakersData = (data, lang) => {
         validations: 0
     }
     if (!lang) {
-        data.forEach(item => {
-            speakersData.languages++;
-            speakersData.speakers += parseInt(item.total_speakers);
-            speakersData.contributions += parseFloat(item.total_contributions);
-            speakersData.validations += parseFloat(item.total_validations);
-        });
+        console.log(data);
+        speakersData.languages = parseInt(data[0].total_languages);
+        speakersData.speakers = parseInt(data[0].total_speakers);
+        speakersData.contributions = parseFloat(data[0].total_contributions);
+        speakersData.validations = parseFloat(data[0].total_validations);
     } else {
         const langSpeakersData = data.filter(item => item.language.toLowerCase() === lang.toLowerCase());
         speakersData.speakers = parseInt(langSpeakersData[0].total_speakers);

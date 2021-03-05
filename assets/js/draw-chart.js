@@ -397,6 +397,16 @@ const drawTimelineChart = (timelineData) => {
         series2.stroke = am4core.color("#83E661");
         series2.name = "Validated";
 
+        if (chartData.length === 1) {
+            const circleBullet = series.bullets.push(new am4charts.CircleBullet());
+            circleBullet.circle.fill = am4core.color("#FCC232");
+            // circleBullet.circle.strokeWidth = 3;
+
+            const circleBullet2 = series2.bullets.push(new am4charts.CircleBullet());
+            circleBullet2.circle.fill = am4core.color("#83E661");
+            // circleBullet2.circle.strokeWidth = 3;
+        }
+
         chart.legend = new am4charts.Legend();
         chart.legend.labels.template.fontSize = 12;
 
@@ -445,6 +455,7 @@ function drawMap(response) {
         var polygonSeries = new am4maps.MapPolygonSeries();
         chart.seriesContainer.draggable = false;
         chart.seriesContainer.resizable = false;
+        chart.chartContainer.wheelable = false;
         chart.maxZoomLevel = 1;
         polygonSeries.useGeodata = true;
         polygonSeries.data = statesInformation;
