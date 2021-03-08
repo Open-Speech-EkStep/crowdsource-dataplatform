@@ -88,14 +88,7 @@ const setAudioPlayer = function () {
         hideElement(replay)
         showElement(pause)
         textDiv.text(PAUSE_TEXT);
-        const dislikeButton = $("#dislike_button");
-        const likeButton = $("#like_button");
-
-        updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
-        updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
-
-        disableButton(likeButton)
-        disableButton(dislikeButton)
+        disableValidation();
         myAudio.play();
     }
 
@@ -136,10 +129,10 @@ function getNextSentence() {
     if (currentIndex < validationSentences.length - 1) {
         currentIndex++;
         getAudioClip(validationSentences[currentIndex].audio_path)
-        resetDecisionRow();
+        resetValidation();
         setSentenceLabel(currentIndex);
     } else {
-        resetDecisionRow();
+        resetValidation();
         showThankYou();
     }
 }
@@ -210,19 +203,20 @@ function disableButton(button) {
     button.attr("disabled", "disabled");
 }
 
-function resetDecisionRow() {
+function disableValidation() {
     const dislikeButton = $("#dislike_button");
     const likeButton = $("#like_button");
-    const textDiv = $('#audioplayer-text');
-
     updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
     updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
-    textDiv.text(PLAY_TEXT);
-
     disableButton(likeButton)
     disableButton(dislikeButton)
+}
 
+function resetValidation() {
+    disableValidation();
+    $('#audioplayer-text').text(PLAY_TEXT);
     hideElement($("#replay"))
+    hideElement($('#pause'))
     showElement($("#play"))
     showElement($('#default_line'))
 }
@@ -422,7 +416,7 @@ $(document).ready(() => {
             getAudioClip(sentence.audio_path);
             setSentenceLabel(currentIndex);
             updateValidationCount();
-            resetDecisionRow();
+            resetValidation();
             addListeners();
             setAudioPlayer();
             const $canvas = document.getElementById('myCanvas');
