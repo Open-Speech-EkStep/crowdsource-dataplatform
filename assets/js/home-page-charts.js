@@ -76,7 +76,9 @@ const statesInformation = [
   {id: 'IN-LK',state: 'Ladakh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0}
 ]
 
+var polygonSeries = undefined;
 const drawMap = function (response) {
+  let statesData = [...statesInformation];
   const $legendDiv = $("#legendDiv");
   const maxContribution = Math.max.apply(
     Math,
@@ -91,7 +93,7 @@ const drawMap = function (response) {
     quarterVal = 0.25;
   }
 
-  statesInformation.forEach(st => {
+  statesData.forEach(st => {
     const ele = response.data.find(s => st.state === s.state);
     if(ele) {
       const {
@@ -111,19 +113,27 @@ const drawMap = function (response) {
       st.id = st.id;
     } else {
       st.id = st.id;
+      st.contributed_time= "0 hrs";
+      st.validated_time = "0 hrs";
+      st.value = 0;
+      st.total_speakers = 0;
     }
   });
 
   var chart = am4core.create("indiaMapChart", am4maps.MapChart);
+  const index = chart.series.indexOf(polygonSeries);
+  if(index > -1 ){
+    chart.series.removeIndex(index);
+  }
   chart.geodataSource.url = "https://cdn.amcharts.com/lib/4/geodata/json/india2020Low.json";
   chart.projection = new am4maps.projections.Miller();
-  var polygonSeries = new am4maps.MapPolygonSeries();
+  polygonSeries = new am4maps.MapPolygonSeries();
   chart.seriesContainer.draggable = false;
   chart.seriesContainer.resizable = false;
   chart.chartContainer.wheelable = false;
   chart.maxZoomLevel = 1;
   polygonSeries.useGeodata = true;
-  polygonSeries.data = statesInformation;
+  polygonSeries.data = statesData;
   var polygonTemplate = polygonSeries.mapPolygons.template;
   polygonTemplate.tooltipHTML = `<div><h6>{state}</h6> <div>{total_speakers} Speakers  <label style="margin-left: 32px">Contributed: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div>Validated:  <label style="margin-left: 8px">{validated_time}</label></div></div>`;
   polygonTemplate.nonScalingStroke = true;
@@ -144,7 +154,7 @@ const drawMap = function (response) {
           return am4core.color("#6B85CE");
         } else if (target.dataItem.value >= quarterVal) {
           return am4core.color("#92A8E8");
-        } else if (target.dataItem.value >= 0) {
+        } else if (target.dataItem.value > 0) {
           return am4core.color("#CDD8F6");
         } else {
           return am4core.color("#E9E9E9");
