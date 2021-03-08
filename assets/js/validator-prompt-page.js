@@ -12,8 +12,16 @@ const PLAY_TEXT = 'Play';
 const REPLAY_TEXT = 'Replay';
 const PAUSE_TEXT = 'Pause';
 
+function showElement(element) {
+    element.removeClass('d-none');
+}
+
+function hideElement(element) {
+    element.addClass('d-none');
+}
+
 const showInstructionsPopup = () => {
-    $("#validator-page-content").addClass('d-none');
+    hideElement($("#validator-page-content"));
     toggleFooterPosition();
     showInstructions();
 }
@@ -41,13 +49,13 @@ const setAudioPlayer = function () {
 
     myAudio.addEventListener("ended", () => {
         enableValidation();
-        pause.addClass('d-none');
-        replay.removeClass('d-none');
+        hideElement(pause)
+        showElement(replay)
         textDiv.text(REPLAY_TEXT);
     });
 
     play.on('click', () => {
-        $('#default_line').addClass('d-none')
+        hideElement($('#default_line'))
         playAudio();
         startVisualizer();
     });
@@ -61,15 +69,15 @@ const setAudioPlayer = function () {
 
     function playAudio() {
         myAudio.load();
-        play.addClass('d-none');
-        pause.removeClass('d-none');
+        hideElement(play)
+        showElement(pause)
         textDiv.text(PAUSE_TEXT);
         myAudio.play();
     }
 
     function pauseAudio() {
-        pause.addClass('d-none');
-        replay.removeClass('d-none');
+        hideElement(pause)
+        showElement(replay)
         textDiv.text(REPLAY_TEXT);
         enableValidation();
         myAudio.pause();
@@ -77,8 +85,8 @@ const setAudioPlayer = function () {
 
     function replayAudio() {
         myAudio.load();
-        replay.addClass('d-none');
-        pause.removeClass('d-none');
+        hideElement(replay)
+        showElement(pause)
         textDiv.text(PAUSE_TEXT);
         const dislikeButton = $("#dislike_button");
         const likeButton = $("#like_button");
@@ -130,8 +138,7 @@ function getNextSentence() {
         getAudioClip(validationSentences[currentIndex].audio_path)
         resetDecisionRow();
         setSentenceLabel(currentIndex);
-    }
-    else {
+    } else {
         resetDecisionRow();
         showThankYou();
     }
@@ -169,23 +176,20 @@ const updateProgressBar = () => {
             'Just few more steps to go!',
             'Yay! Done & Dusted!'
         ];
-    }
-    else if (validationSentences.length == 3) {
+    } else if (validationSentences.length == 3) {
         progressMessages = [
             'Let’s get started',
             'We know you can do more! ',
             'Just few more steps to go!',
             'Yay! Done & Dusted!'
         ];
-    }
-    else if (validationSentences.length == 2) {
+    } else if (validationSentences.length == 2) {
         progressMessages = [
             'Let’s get started',
             'Just few more steps to go!',
             'Yay! Done & Dusted!'
         ];
-    }    
-    else if (validationSentences.length == 1) {
+    } else if (validationSentences.length == 1) {
         progressMessages = [
             'Let’s get started',
             'Yay! Done & Dusted!'
@@ -218,9 +222,9 @@ function resetDecisionRow() {
     disableButton(likeButton)
     disableButton(dislikeButton)
 
-    $("#replay").addClass('d-none');
-    $("#play").removeClass('d-none');
-    $('#default_line').removeClass('d-none')
+    hideElement($("#replay"))
+    showElement($("#play"))
+    showElement($('#default_line'))
 }
 
 function recordValidation(action) {
@@ -256,7 +260,7 @@ function addListeners() {
     const $validatorInstructionsModal = $('#validator-instructions-modal');
 
     $validatorInstructionsModal.on('hidden.bs.modal', function () {
-        $("#validator-page-content").removeClass('d-none');
+        showElement($("#validator-page-content"));
         toggleFooterPosition();
     });
 
@@ -342,29 +346,29 @@ const getAudioClip = function (audioPath) {
             }
             fileReader.readAsDataURL(blob);
         });
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log(err)
         showAudioRow();
     });
 }
 
 function hideAudioRow() {
- $('#loader-audio-row').removeClass('d-none');
- $('#audio-row').addClass('d-none');
+    showElement($('#loader-audio-row'));
+    hideElement($('#audio-row'))
 }
 
 function showAudioRow() {
-    $('#loader-audio-row').addClass('d-none');
-    $('#audio-row').removeClass('d-none');
+    hideElement($('#loader-audio-row'))
+    showElement($('#audio-row'));
 }
 
 function showThankYou() {
-    $('#instructions-row').addClass('d-none');
-    $('#sentences-row').addClass('d-none');
-    $('#audio-row').addClass('d-none');
-    $('#validation-button-row').addClass('d-none');
-    $('#thank-you-row').removeClass('d-none');
-    
+    hideElement($('#instructions-row'));
+    hideElement($('#sentences-row'));
+    hideElement($('#audio-row'))
+    hideElement($('#validation-button-row'))
+    showElement($('#thank-you-row'))
+
     const language = localStorage.getItem('contributionLanguage');
     const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
     const aggregateDetails = JSON.parse(stringifyData);
@@ -376,8 +380,7 @@ function showThankYou() {
         totalValidations = Math.floor(Number(totalInfo.total_validations) * 3600 / 6);
         $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
         $('#spn-total-hr-validated').html(totalInfo.total_validations);
-    }
-    else {
+    } else {
         $('#spn-total-hr-contributed').html(0);
         $('#spn-total-hr-validated').html(0);
     }
@@ -388,12 +391,12 @@ function showThankYou() {
 
 function showNoSentencesMessage() {
     $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
-    $('#instructions-row').addClass('d-none');
-    $('#sentences-row').addClass('d-none');
-    $('#audio-row').addClass('d-none');
-    $('#validation-button-row').addClass('d-none');
-    $('#progress-row').addClass('d-none');
-    $('#no-sentences-row').removeClass('d-none');
+    hideElement($('#instructions-row'));
+    hideElement($('#sentences-row'));
+    hideElement($('#audio-row'))
+    hideElement($('#validation-button-row'))
+    hideElement($('#progress-row'))
+    showElement($('#no-sentences-row'))
 }
 
 $(document).ready(() => {
@@ -409,7 +412,7 @@ $(document).ready(() => {
                 return data.json();
             }
         }).then((sentenceData) => {
-        if (sentenceData.data.length === 0){
+        if (sentenceData.data.length === 0) {
             showNoSentencesMessage();
             return;
         }
@@ -425,7 +428,7 @@ $(document).ready(() => {
             const $canvas = document.getElementById('myCanvas');
             visualizer.drawCanvasLine($canvas);
         }
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log(err)
     });
 });
