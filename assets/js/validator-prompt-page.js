@@ -4,6 +4,12 @@ const {setPageContentHeight, toggleFooterPosition} = require('./utils')
 
 const visualizer = new Visualizer();
 
+const ACCEPT_ACTION = 'accept';
+
+const REJECT_ACTION = 'reject';
+
+const SKIP_ACTION = 'skip';
+
 const showInstructionsPopup = () => {
     $("#validator-page-content").addClass('d-none');
     toggleFooterPosition();
@@ -74,15 +80,12 @@ const setAudioPlayer = function () {
         textDiv.text('Pause');
         const dislikeButton = $("#dislike_button");
         const likeButton = $("#like_button");
-        const skipButton = $("#skip_button");
 
         updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
         updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
-        skipButton.removeAttr('style');
 
         disableButton(likeButton)
         disableButton(dislikeButton)
-        disableButton(skipButton)
         myAudio.play();
     }
 
@@ -94,16 +97,12 @@ const setAudioPlayer = function () {
     function enableValidation() {
         const likeButton = $("#like_button");
         const dislikeButton = $("#dislike_button");
-        const skipButton = $("#skip_button");
         enableButton(likeButton)
         enableButton(dislikeButton)
-        enableButton(skipButton)
     }
 }
 
-let currentIndex = 0;
-let progressCount = 0;
-let validationCount = 0;
+let currentIndex = 0, progressCount = 0, validationCount = 0;
 
 const animateCSS = ($element, animationName, callback) => {
     $element.addClass(`animated ${animationName}`);
@@ -208,17 +207,14 @@ function disableButton(button) {
 function resetDecisionRow() {
     const dislikeButton = $("#dislike_button");
     const likeButton = $("#like_button");
-    const skipButton = $("#skip_button");
     const textDiv = $('#audioplayer-text');
 
     updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
     updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
-    skipButton.removeAttr('style');
     textDiv.text('Play');
 
     disableButton(likeButton)
     disableButton(dislikeButton)
-    disableButton(skipButton)
 
     $("#replay").addClass('d-none');
     $("#play").removeClass('d-none');
@@ -226,7 +222,7 @@ function resetDecisionRow() {
 }
 
 function recordValidation(action) {
-    if (action == 'reject' || action == 'accept') {
+    if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
         validationCount++;
     }
     const sentenceId = validationSentences[currentIndex].sentenceId
@@ -289,19 +285,19 @@ function addListeners() {
     });
 
     dislikeButton.on('click', () => {
-        recordValidation('reject')
+        recordValidation(REJECT_ACTION)
         updateProgressBar();
         getNextSentence();
     })
 
     likeButton.on('click', () => {
-        recordValidation('accept')
+        recordValidation(ACCEPT_ACTION)
         updateProgressBar();
         getNextSentence();
     })
 
     $skipButton.on('click', () => {
-        recordValidation('skip')
+        recordValidation(SKIP_ACTION)
         updateProgressBar();
         getNextSentence();
     })
@@ -354,10 +350,12 @@ function hideAudioRow() {
  $('#loader-audio-row').removeClass('d-none');
  $('#audio-row').addClass('d-none');
 }
+
 function showAudioRow() {
     $('#loader-audio-row').addClass('d-none');
     $('#audio-row').removeClass('d-none');
 }
+
 function showThankYou() {
     $('#instructions-row').addClass('d-none');
     $('#sentences-row').addClass('d-none');
@@ -365,7 +363,7 @@ function showThankYou() {
     $('#validation-button-row').addClass('d-none');
     $('#thank-you-row').removeClass('d-none');
     
-    var language = localStorage.getItem('contributionLanguage');
+    const language = localStorage.getItem('contributionLanguage');
     const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
     const aggregateDetails = JSON.parse(stringifyData);
     const totalInfo = aggregateDetails.find((element) => element.language === language);
@@ -384,7 +382,6 @@ function showThankYou() {
     $('#spn-validation-language-2').html(language);
     $('#spn-validation-count').html(validationCount);
     $('#spn-total-contribution-count').html(totalSentences);
-
 }
 
 function showNoSentencesMessage() {
