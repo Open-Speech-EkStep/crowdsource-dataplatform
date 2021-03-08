@@ -40,6 +40,11 @@ function startVisualizer() {
     visualizer.visualize($canvas, analyser);
 }
 
+function enableButton(element) {
+    element.children().removeAttr("opacity")
+    element.removeAttr("disabled")
+}
+
 const setAudioPlayer = function () {
     const myAudio = document.getElementById('my-audio');
     const play = $('#play');
@@ -90,11 +95,6 @@ const setAudioPlayer = function () {
         textDiv.text(PAUSE_TEXT);
         disableValidation();
         myAudio.play();
-    }
-
-    function enableButton(element) {
-        element.children().removeAttr("opacity")
-        element.removeAttr("disabled")
     }
 
     function enableValidation() {
@@ -320,8 +320,15 @@ const loadAudio = function (audioLink) {
     $('#my-audio').attr('src', audioLink)
 };
 
+function disableSkipButton(){
+    const $skipButton = $('#skip_button');
+    $skipButton.removeAttr('style');
+    disableButton($skipButton)
+}
+
 const getAudioClip = function (audioPath) {
     hideAudioRow();
+    disableSkipButton();
     fetch('/audioClip', {
         method: 'POST',
         body: JSON.stringify({
@@ -338,6 +345,7 @@ const getAudioClip = function (audioPath) {
             fileReader.onload = function (e) {
                 loadAudio(e.target.result);
                 showAudioRow();
+                enableButton($('#skip_button'))
             }
             fileReader.readAsDataURL(blob);
         });
