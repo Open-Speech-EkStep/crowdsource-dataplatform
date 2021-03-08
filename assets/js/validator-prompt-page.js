@@ -5,10 +5,12 @@ const {setPageContentHeight, toggleFooterPosition} = require('./utils')
 const visualizer = new Visualizer();
 
 const ACCEPT_ACTION = 'accept';
-
 const REJECT_ACTION = 'reject';
-
 const SKIP_ACTION = 'skip';
+
+const PLAY_TEXT = 'Play';
+const REPLAY_TEXT = 'Replay';
+const PAUSE_TEXT = 'Pause';
 
 const showInstructionsPopup = () => {
     $("#validator-page-content").addClass('d-none');
@@ -41,7 +43,7 @@ const setAudioPlayer = function () {
         enableValidation();
         pause.addClass('d-none');
         replay.removeClass('d-none');
-        textDiv.text('Replay');
+        textDiv.text(REPLAY_TEXT);
     });
 
     play.on('click', () => {
@@ -61,14 +63,14 @@ const setAudioPlayer = function () {
         myAudio.load();
         play.addClass('d-none');
         pause.removeClass('d-none');
-        textDiv.text('Pause');
+        textDiv.text(PAUSE_TEXT);
         myAudio.play();
     }
 
     function pauseAudio() {
         pause.addClass('d-none');
         replay.removeClass('d-none');
-        textDiv.text('Replay');
+        textDiv.text(REPLAY_TEXT);
         enableValidation();
         myAudio.pause();
     }
@@ -77,7 +79,7 @@ const setAudioPlayer = function () {
         myAudio.load();
         replay.addClass('d-none');
         pause.removeClass('d-none');
-        textDiv.text('Pause');
+        textDiv.text(PAUSE_TEXT);
         const dislikeButton = $("#dislike_button");
         const likeButton = $("#like_button");
 
@@ -211,7 +213,7 @@ function resetDecisionRow() {
 
     updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
     updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
-    textDiv.text('Play');
+    textDiv.text(PLAY_TEXT);
 
     disableButton(likeButton)
     disableButton(dislikeButton)
@@ -407,7 +409,7 @@ $(document).ready(() => {
                 return data.json();
             }
         }).then((sentenceData) => {
-        if (sentenceData.data.length == 0){
+        if (sentenceData.data.length === 0){
             showNoSentencesMessage();
             return;
         }
