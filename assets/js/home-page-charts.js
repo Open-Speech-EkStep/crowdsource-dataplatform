@@ -38,42 +38,42 @@ const performAPIRequest = (url) => {
 };
 
 const statesInformation = [
-  {state: 'Telangana',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Andaman and Nicobar Islands',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Andhra Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Arunanchal Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Assam',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Bihar',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Chhattisgarh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Daman & Diu',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Goa',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Gujarat',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Haryana',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Himachal Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Jammu & Kashmir',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Jharkhand',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Karnataka',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Kerala',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Lakshadweep',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Madhya Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Maharashtra',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Manipur',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Chandigarh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Puducherry',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Punjab',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Rajasthan',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Sikkim',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Tamil Nadu',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Tripura',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Uttar Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Uttarakhand',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'West Bengal',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Odisha',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Dadara & Nagar Havelli',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Meghalaya',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Mizoram',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'Nagaland',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {state: 'National Capital Territory of Delhi',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0}
+  {id: 'IN-TG',state: 'Telangana',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-AN',state: 'Andaman and Nicobar Islands',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-AP',state: 'Andhra Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-AR',state: 'Arunanchal Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-AS',state: 'Assam',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-BR',state: 'Bihar',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-CT',state: 'Chhattisgarh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-GA',state: 'Goa',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-GJ',state: 'Gujarat',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-HR',state: 'Haryana',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-HP',state: 'Himachal Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-JK',state: 'Jammu & Kashmir',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-JH',state: 'Jharkhand',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-KA',state: 'Karnataka',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-KL',state: 'Kerala',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-LD',state: 'Lakshadweep',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-MP',state: 'Madhya Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-MH',state: 'Maharashtra',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-MN',state: 'Manipur',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-CH',state: 'Chandigarh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-PY',state: 'Puducherry',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-PB',state: 'Punjab',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-RJ',state: 'Rajasthan',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-SK',state: 'Sikkim',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-TN',state: 'Tamil Nadu',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-TR',state: 'Tripura',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-UP',state: 'Uttar Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-UT',state: 'Uttarakhand',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-WB',state: 'West Bengal',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-OR',state: 'Odisha',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-DNDD',state: 'Dadra and Nagar Haveli and Daman and Diu',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-ML',state: 'Meghalaya',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-MZ',state: 'Mizoram',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-NL',state: 'Nagaland',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-DL',state: 'National Capital Territory of Delhi',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
+  {id: 'IN-LK',state: 'Ladakh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0}
 ]
 
 const drawMap = function (response) {
@@ -108,14 +108,14 @@ const drawMap = function (response) {
       st.validated_time = `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
       st.value = Number(ele.total_contributions);
       st.total_speakers = ele.total_speakers;
-      st.id = st.state;
+      st.id = st.id;
     } else {
-      st.id = st.state;
+      st.id = st.id;
     }
   });
 
   var chart = am4core.create("indiaMapChart", am4maps.MapChart);
-  chart.geodataSource.url = "./js/states_india_geo.json";
+  chart.geodataSource.url = "https://cdn.amcharts.com/lib/4/geodata/json/india2020Low.json";
   chart.projection = new am4maps.projections.Miller();
   var polygonSeries = new am4maps.MapPolygonSeries();
   chart.seriesContainer.draggable = false;
