@@ -444,9 +444,9 @@ function drawMap(response) {
               st.validated_time = `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
               st.value = Number(ele.total_contributions);
               st.total_speakers = ele.total_speakers;
-              st.id = st.state;
+              st.id = st.id;
             } else {
-              st.id = st.state;
+              st.id = st.id;
             }
           });
         var chart = am4core.create("indiaMapChart", am4maps.MapChart);
