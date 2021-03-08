@@ -297,6 +297,7 @@ function addListeners() {
     })
 
     $skipButton.on('click', () => {
+        $('#pause').trigger('click');
         recordValidation(SKIP_ACTION)
         updateProgressBar();
         getNextSentence();
@@ -362,16 +363,17 @@ function showThankYou() {
     hideElement($('#audio-row'))
     hideElement($('#validation-button-row'))
     showElement($('#thank-you-row'))
+    hideElement($('#progress-row'));
 
     const language = localStorage.getItem('contributionLanguage');
     const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
     const aggregateDetails = JSON.parse(stringifyData);
     const totalInfo = aggregateDetails.find((element) => element.language === language);
     let totalSentences = 0;
-    let totalValidations = 0;
+    // let totalValidations = 0;
     if (totalInfo) {
         totalSentences = Math.floor(Number(totalInfo.total_contributions) * 3600 / 6);
-        totalValidations = Math.floor(Number(totalInfo.total_validations) * 3600 / 6);
+        // totalValidations = Math.floor(Number(totalInfo.total_validations) * 3600 / 6);
         $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
         $('#spn-total-hr-validated').html(totalInfo.total_validations);
     } else {

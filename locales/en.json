@@ -153,5 +153,6 @@
 	"State Wise distribution": "State Wise distribution",
 	"Age Group Distribution": "Age Group Distribution",
 	"Show All": "Show All",
-	"Enter preferred username": "Enter preferred username"
+	"Enter preferred username": "Enter preferred username",
+	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span><span class=\"font-wt-900\"> recordings"
 }
