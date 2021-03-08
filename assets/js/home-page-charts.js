@@ -179,9 +179,25 @@ const drawMap = function (response) {
   $legendDiv.removeClass("d-none").addClass("d-flex");
 };
 
-const generateIndiaMap = function () {
-  performAPIRequest("/aggregate-data-count?byState=true")
-    .then((response) => {
+function getLanguageSpecificData(data, lang) {
+  const stateData = {
+      data: [],
+  };
+  data.data.forEach(item => {
+      if (item.language.toLowerCase() === lang.toLowerCase() 
+          && item.state !== '' 
+          && item.state.toLowerCase() !== 'anonymous') {
+          stateData.data.push(item);
+      }
+  });
+  return stateData;
+}
+
+const generateIndiaMap = function (language="") {
+  const url = language !== "" ? '/aggregate-data-count?byState=true&byLanguage=true' : '/aggregate-data-count?byState=true';  
+  performAPIRequest(url)
+    .then((data) => {
+      const response = language !== "" ? getLanguageSpecificData(data, language) : data;
       drawMap(response);
     })
     .catch((err) => {
