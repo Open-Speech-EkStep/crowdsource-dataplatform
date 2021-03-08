@@ -95,6 +95,7 @@
 	"Start Contributing": "योगदान करें",
 	"Thank you for validating!": "प्रमाणित करने के लिए शुक्रिया!",
 	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span><span class=\"font-wt-900\"> recordings out of</span> <span id=\"spn-total-contribution-count\" class=\"font-wt-900\"></span class=\"font-wt-900\"> sentences contributed in <span id=\"spn-validation-language-2\" class=\"font-wt-900\"></span> language.": "आपने हमें दिए गए  <span id=\"spn-total-contribution-count\" class=\"font-wt-900\"></span> में से <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> आवाज़ों के नमूनों को प्रमाणित करने में मदद की है।",
+	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings":  "आपने <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> आवाज़ों के नमूनों को प्रमाणित करने में मदद की है।",
 	"total hours validated": "कुल प्रमाणित घंटे",
 	"total hours contributed": "कुल योगदान के घंटे",
 	"Validate More": "अधिक प्रमाणित करें",
