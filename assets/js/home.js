@@ -152,7 +152,7 @@ const setDefaultLang = function (){
     const contributionLanguage = localStorage.getItem('contributionLanguage');
     const $sayListenLanguage = $('#say-listen-language');
     const  $languageNavBar = $('#language-nav-bar')
-
+    console.log('contribution lang: ', contributionLanguage);
     if(!contributionLanguage){
         const $homePage = document.getElementById('home-page');
         const defaultLangId = $homePage.getAttribute('default-lang');
@@ -222,9 +222,7 @@ $(document).ready(function () {
         $6th_place.addClass('d-none');
         targetedDiv.classList.add('active');
         updateHrsForSayAndListen(language);
-    })
-
-    setAggregateDataCountByLanguage();
+    });
 
     $('#start_recording').on('click', () => {
         sentenceLanguage = top_lang;
