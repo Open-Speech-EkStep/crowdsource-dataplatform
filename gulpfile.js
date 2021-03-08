@@ -42,10 +42,5 @@ gulp.task('css', function () {
     .pipe(cleanCss())
     .pipe(gulp.dest('public/css'));
 });
-gulp.task('json', function () {
-  return gulp
-    .src(['assets/js/*.json'])
-    .pipe(gulp.dest('public/js'));
-});
 
-gulp.task('default', gulp.parallel('html', 'js', 'css', 'json'));
+gulp.task('default', gulp.parallel('html', 'js', 'css'));
