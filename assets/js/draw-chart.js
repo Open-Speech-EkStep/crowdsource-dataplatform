@@ -1,51 +1,11 @@
+const {generateIndiaMap} = require('./home-page-charts');
 const $chartRow = $('.chart-row');
 const $chartLoaders = $chartRow.find('.loader');
 const $charts = $chartRow.find('.chart');
-const $popovers = $chartRow.find('[data-toggle="popover"]');
-const $body = $('body');
 const $timelineLoader = $('#timeline-loader');
 const $timelineChart = $('#timeline-chart');
 
 const chartReg = {};
-
-const statesInformation = [
-    {id: 'IN-TG',state: 'Telangana',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-AN',state: 'Andaman and Nicobar Islands',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-AP',state: 'Andhra Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-AR',state: 'Arunanchal Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-AS',state: 'Assam',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-BR',state: 'Bihar',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-CT',state: 'Chhattisgarh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-GA',state: 'Goa',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-GJ',state: 'Gujarat',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-HR',state: 'Haryana',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-HP',state: 'Himachal Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-JK',state: 'Jammu & Kashmir',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-JH',state: 'Jharkhand',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-KA',state: 'Karnataka',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-KL',state: 'Kerala',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-LD',state: 'Lakshadweep',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-MP',state: 'Madhya Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-MH',state: 'Maharashtra',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-MN',state: 'Manipur',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-CH',state: 'Chandigarh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-PY',state: 'Puducherry',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-PB',state: 'Punjab',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-RJ',state: 'Rajasthan',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-SK',state: 'Sikkim',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-TN',state: 'Tamil Nadu',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-TR',state: 'Tripura',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-UP',state: 'Uttar Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-UT',state: 'Uttarakhand',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-WB',state: 'West Bengal',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-OR',state: 'Odisha',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-DNDD',state: 'Dadra and Nagar Haveli and Daman and Diu',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-ML',state: 'Meghalaya',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-MZ',state: 'Mizoram',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-NL',state: 'Nagaland',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-DL',state: 'National Capital Territory of Delhi',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-LK',state: 'Ladakh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0}
-]
 
 function formatTime(hours, minutes=0, seconds=0) {
     let result = '';
@@ -418,121 +378,11 @@ const drawTimelineChart = (timelineData) => {
     });
 };
 
-function drawMap(response) {
-    const $legendDiv = $("#legendDiv");
-    const maxContribution = Math.max.apply(Math, response.data.map(function(ele) { return Number(ele.total_contributions); }))
-        let quarterVal;
-        if (maxContribution > 1) {
-        quarterVal = maxContribution / 4;
-        } else {
-        quarterVal = 0.25;
-        }
-        statesInformation.forEach(st => {
-            const ele = response.data.find(s => st.state === s.state);
-            if(ele) {
-              const {
-                hours: cHours,
-                minutes: cMinutes,
-                seconds: cSeconds,
-              } = calculateTime(Number(ele.total_contributions), true);
-              const {
-                hours: vHours,
-                minutes: vMinutes,
-                seconds: vSeconds,
-              } = calculateTime(Number(ele.total_validations), true);
-              st.contributed_time = `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
-              st.validated_time = `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
-              st.value = Number(ele.total_contributions);
-              st.total_speakers = ele.total_speakers;
-              st.id = st.id;
-            } else {
-              st.id = st.id;
-            }
-          });
-        var chart = am4core.create("indiaMapChart", am4maps.MapChart);
-        chart.geodataSource.url = "https://cdn.amcharts.com/lib/4/geodata/json/india2020Low.json";
-        chart.projection = new am4maps.projections.Miller();
-        var polygonSeries = new am4maps.MapPolygonSeries();
-        chart.seriesContainer.draggable = false;
-        chart.seriesContainer.resizable = false;
-        chart.chartContainer.wheelable = false;
-        chart.maxZoomLevel = 1;
-        polygonSeries.useGeodata = true;
-        polygonSeries.data = statesInformation;
-        var polygonTemplate = polygonSeries.mapPolygons.template;
-        polygonTemplate.tooltipHTML = `<div><h6>{state}</h6> <div>{total_speakers} Speakers  <label style="margin-left: 32px">Contributed: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div>Validated:  <label style="margin-left: 8px">{validated_time}</label></div></div>`;
-        polygonTemplate.nonScalingStroke = true;
-        polygonTemplate.strokeWidth = 0.5;
-        polygonTemplate.fill = am4core.color("#fff");
-
-        // Create hover state and set alternative fill color
-        var hs = polygonTemplate.states.create("hover");
-        hs.properties.fill = chart.colors.getIndex(1).brighten(-0.5);
-
-        polygonSeries.mapPolygons.template.adapter.add("fill", function(fill, target) {
-            if (target.dataItem) {
-                if (target.dataItem.value >= quarterVal * 3) {
-                    return am4core.color("#4061BF");
-                  } else if (target.dataItem.value >= quarterVal * 2) {
-                    return am4core.color("#6B85CE");
-                  } else if (target.dataItem.value >= quarterVal) {
-                    return am4core.color("#92A8E8");
-                  } else if (target.dataItem.value >= 0) {
-                    return am4core.color("#CDD8F6");
-                  } else {
-                    return am4core.color("#E9E9E9");
-                  }
-            }
-            return fill;
-        });
-        chart.series.push(polygonSeries);
-
-        const $quarter = $("#quarter .legend-val");
-        const $half = $("#half .legend-val");
-        const $threeQuarter = $("#threeQuarter .legend-val");
-        const $full = $("#full .legend-val");
-        const {hours: qHours, minutes: qMinuts, seconds: qSeconds} = calculateTime(quarterVal, true);
-        const {hours: hHours, minutes: hMinuts, seconds: hSeconds} = calculateTime(quarterVal*2, true);
-        const {hours: tQHours, minutes: tQMinuts, seconds: tQSeconds} = calculateTime(quarterVal*3, true);
-        $quarter.text(`0 - ${formatTime(qHours, qMinuts, qSeconds)}`);
-        $half.text(`${formatTime(qHours, qMinuts, qSeconds)} - ${formatTime(hHours, hMinuts, hSeconds)}`);
-        $threeQuarter.text(`${formatTime(hHours, hMinuts, hSeconds)} - ${formatTime(tQHours, tQMinuts, tQSeconds)}`);
-        $full.text(`> ${formatTime(tQHours, tQMinuts, tQSeconds)}`);
-        $legendDiv.removeClass('d-none').addClass("d-flex");
-}
-
-function getLanguageSpecificData(data, lang) {
-    const stateData = {
-        data: [],
-    };
-    data.data.forEach(item => {
-        if (item.language.toLowerCase() === lang.toLowerCase() 
-            && item.state !== '' 
-            && item.state.toLowerCase() !== 'anonymous') {
-            stateData.data.push(item);
-        }
-    });
-    return stateData;
-}
-
-function generateIndiaMap(language) {
-    const url = language ? '/aggregate-data-count?byState=true&byLanguage=true' : '/aggregate-data-count?byState=true';
-    const byLanguage = language ? true : false;
-    performAPIRequest(url)
-    .then((data) => {
-        const response = byLanguage? getLanguageSpecificData(data, language) : data;
-        drawMap(response);
-    }).catch((err) => {
-        console.log(err);
-    });
-}
-
 module.exports = {
     updateGraph,
     buildGraphs,
     getOrderedGenderData,
     getGenderData,
     getAgeGroupData,
-    calculateTime,
-    generateIndiaMap,
+    calculateTime
 };
