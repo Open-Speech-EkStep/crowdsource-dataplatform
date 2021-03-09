@@ -1,3 +1,5 @@
+const {setPageContentHeight, toggleFooterPosition, fetchLocationInfo} = require('./utils')
+
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
 const currentIndexKey = 'currentIndex';
@@ -10,18 +12,6 @@ function getValue(number, maxValue) {
         : number > maxValue
             ? maxValue
             : number;
-}
-
-function convertPXToVH(px) {
-    return px * (100 / document.documentElement.clientHeight);
-}
-
-function setPageContentHeight() {
-    const $footer = $('footer');
-    const $nav = $('.navbar');
-    const edgeHeightInPixel = $footer.outerHeight() + $nav.outerHeight()
-    const contentHeightInVH = 100 - convertPXToVH(edgeHeightInPixel)
-    $('#content-wrapper').css('min-height', contentHeightInVH + 'vh');
 }
 
 function getCurrentIndex(lastIndex) {
@@ -42,6 +32,19 @@ const setTotalSentenceIndex = (index) => {
     const totalSentencesLbl = document.getElementById('totalSentencesLbl');
     totalSentencesLbl.innerText = index;
 }
+
+const adjustTimeProgressBarHeight = ($footer) => {
+    const $timeProgress = $('#time-progress');
+    const footerHeight = $footer.outerHeight();
+    const timeProgressBottomInPx = $timeProgress.css('bottom');
+    const timeProgressBottomInNumber = Number(
+        timeProgressBottomInPx.substring(0, timeProgressBottomInPx.length - 2)
+    );
+    if (timeProgressBottomInNumber) {
+        $timeProgress.css('bottom', footerHeight + 'px');
+    }
+};
+
 
 const initialize = () => {
     const sentences = crowdSource.sentences;
@@ -66,36 +69,65 @@ const initialize = () => {
     let skipCount =
         getSkipCount(totalItems - 1);
     const $footer = $('footer');
-    const progressMessages = [
+    // const progressMessages = [
+    //     'Let’s get started',
+    //     '',
+    //     'We know you can do more! ',
+    //     '',
+    //     '',
+    //     'You are halfway there. Keep going!',
+    //     '',
+    //     'Just few more steps to go!',
+    //     '',
+    //     'Nine dead, one more to go!',
+    //     'Yay! Done & Dusted!',
+    // ];
+
+    let progressMessages = [
         'Let’s get started',
-        '',
         'We know you can do more! ',
-        '',
-        '',
         'You are halfway there. Keep going!',
-        '',
         'Just few more steps to go!',
-        '',
-        'Nine dead, one more to go!',
+        'Four dead, one more to go!',
         'Yay! Done & Dusted!',
     ];
+
+    if (sentences.length == 4) {
+        progressMessages = [
+            'Let’s get started',
+            'We know you can do more! ',
+            'You are halfway there. Keep going!',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }
+    else if (sentences.length == 3) {
+        progressMessages = [
+            'Let’s get started',
+            'We know you can do more! ',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }
+    else if (sentences.length == 2) {
+        progressMessages = [
+            'Let’s get started',
+            'Just few more steps to go!',
+            'Yay! Done & Dusted!'
+        ];
+    }    
+    else if (sentences.length == 1) {
+        progressMessages = [
+            'Let’s get started',
+            'Yay! Done & Dusted!'
+        ];
+    }
 
     $nextBtnToolTip.tooltip({
         container: 'body',
         placement: screen.availWidth > 900 ? 'right' : 'bottom',
     });
 
-    const adjustTimeProgressBarHeight = () => {
-        const $timeProgress = $('#time-progress');
-        const footerHeight = $footer.outerHeight();
-        const timeProgressBottomInPx = $timeProgress.css('bottom');
-        const timeProgressBottomInNumber = Number(
-            timeProgressBottomInPx.substring(0, timeProgressBottomInPx.length - 2)
-        );
-        if (timeProgressBottomInNumber) {
-            $timeProgress.css('bottom', footerHeight + 'px');
-        }
-    };
     const animateCSS = ($element, animationName, callback) => {
         $element.addClass(`animated ${animationName}`);
 
@@ -108,7 +140,7 @@ const initialize = () => {
         $element.on('animationend', handleAnimationEnd);
     };
     const setProgressBar = (currentIndex) => {
-        $progressBar.width(currentIndex * 10 + '%');
+        $progressBar.width(currentIndex * 20 + '%');
         $progressBar.prop('aria-valuenow', currentIndex);
     };
     const setSentenceText = (index) => {
@@ -166,7 +198,7 @@ const initialize = () => {
         }
     };
 
-    adjustTimeProgressBarHeight();
+    adjustTimeProgressBarHeight($footer);
 
     setSentenceText(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
@@ -285,13 +317,15 @@ const initialize = () => {
                 setTimeout(goToThankYouPage, 2500);
             }
             $skipBtn.addClass('d-none');
-            $footer.addClass('fixed-bottom');
+            toggleFooterPosition()
             currentIndex++;
             animateCSS($pageContent, 'zoomOut', () =>
                 $pageContent.addClass('d-none')
             );
             setProgressBar(currentIndex);
-            localStorage.removeItem(sentencesKey);
+            const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
+            Object.assign(sentencesObj, {sentences:[]});
+            localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj) );
             localStorage.setItem(currentIndexKey, currentIndex);
             notyf.success(
                 'Congratulations!!! You have completed this batch of sentences'
@@ -332,6 +366,8 @@ const initialize = () => {
         fd.append('audio_data', crowdSource.audioBlob);
         fd.append('speakerDetails', speakerDetails);
         fd.append('sentenceId', crowdSource.sentences[currentIndex].sentenceId);
+        fd.append('state', localStorage.getItem('state_region') || "");
+        fd.append('country', localStorage.getItem('country') || "");
         fetch('/upload', {
             method: 'POST',
             body: fd,
@@ -388,7 +424,6 @@ const initialize = () => {
 };
 
 $(document).ready(() => {
-    const $footer = $('footer');
     window.crowdSource = {};
     const $instructionModal = $('#instructionsModal');
     const $errorModal = $('#errorModal');
@@ -396,7 +431,12 @@ $(document).ready(() => {
     const $pageContent = $('#page-content');
     const $navUser = $('#nav-user');
     const $navUserName = $navUser.find('#nav-username');
-
+    fetchLocationInfo().then(res => {
+        return res.json()
+    }).then(response => {
+        localStorage.setItem("state_region", response.regionName);
+        localStorage.setItem("country", response.country);
+    }).catch(console.log);
     try {
         const localSpeakerData = localStorage.getItem(speakerDetailsKey);
         const localSpeakerDataParsed = JSON.parse(localSpeakerData);
@@ -408,9 +448,7 @@ $(document).ready(() => {
 
         $instructionModal.on('hidden.bs.modal', function () {
             $pageContent.removeClass('d-none');
-            $footer.removeClass('fixed-bottom');
-            $footer.addClass('bottom');
-            $footer.css("bottom", "0")
+            toggleFooterPosition();
         });
 
         $errorModal.on('show.bs.modal', function () {
@@ -425,15 +463,15 @@ $(document).ready(() => {
             return;
         }
 
-        if (localSpeakerDataParsed.userName) {
-            $navUser.removeClass('d-none');
-            $navUserName.text(localSpeakerDataParsed.userName);
-        }
-
-        if (
-            localSentencesParsed &&
+        $navUser.removeClass('d-none');
+        $('#nav-login').addClass('d-none');
+        $navUserName.text(localSpeakerDataParsed.userName);
+        const isExistingUser = localSentencesParsed &&
             localSentencesParsed.userName === localSpeakerDataParsed.userName
-        ) {
+            &&
+            localSentencesParsed.language === localSpeakerDataParsed.language;
+
+        if (isExistingUser && localSentencesParsed.sentences.length != 0) {
             crowdSource.sentences = localSentencesParsed.sentences;
             crowdSource.count = localCount;
             $loader.hide();
@@ -463,19 +501,25 @@ $(document).ready(() => {
                     }
                 })
                 .then((sentenceData) => {
-                    $instructionModal.modal('show');
+                    if(!isExistingUser){
+                        $instructionModal.modal('show');
+                    } else {
+                        $pageContent.removeClass('d-none');
+                        toggleFooterPosition();
+                    }
                     crowdSource.sentences = sentenceData.data;
                     crowdSource.count = Number(sentenceData.count);
                     $loader.hide();
-                    initialize();
                     localStorage.setItem(
                         sentencesKey,
                         JSON.stringify({
                             userName: localSpeakerDataParsed.userName,
                             sentences: sentenceData.data,
+                            language: localSpeakerDataParsed.language,
                         })
                     );
                     localStorage.setItem(countKey, sentenceData.count);
+                    initialize();
                 })
                 .catch((err) => {
                     console.log(err);
