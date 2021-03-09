@@ -121,5 +121,8 @@
 	"Data Last Updated": "अंतिम बार आधार-सामाग्री अपडेट की गई",
 	"We do not have any data for <span id=\"languageSelected\"></span> would you like to contribute for it?": "हमारे पास <span id=\"languageSelected\"></span> के लिए कोई डेटा नहीं है क्या आप इसके लिए योगदान करना चाहेंगे?",
 	"We do not have any data for this language, would you like to contribute for it?": "हमारे पास इस भाषा के लिए कोई डेटा नहीं है, क्या आप इसके लिए योगदान देना चाहेंगे?",
-	"Username cannot be more than 12 characters": "Username cannot be more than 12 characters"
+	"Username cannot be more than 12 characters": "Username cannot be more than 12 characters",
+	"Ensure the voice is <b>clear and audible</b>": "Ensure the voice is <b>clear and audible</b>",
+	"Match the voice to the text <b>accurately</b>": "Match the voice to the text <b>accurately</b>",
+	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample"
 }
