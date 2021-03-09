@@ -13,6 +13,22 @@ html {
     padding-bottom: 50px;
 }
 
+.px-6 {
+    padding-right: 6vw !important;
+    padding-left: 6vw !important;
+}
+.modal-title {
+    font-weight: 700;
+}
+
+body.modal-open .supreme-container {
+    opacity: 0.2;
+}
+
+.modal-backdrop {
+    background-color: white;
+}
+
 .supreme-container .btn-outline-primary {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -265,6 +281,13 @@ html {
 }
 
 @media (min-width: 992px) {
+    html {
+        font-size: 15px;
+    }
+    .modal-lg,
+    .modal-xl {
+        max-width: 700px;
+    }
     .chart {
         flex: 0 0 48%;
         max-width: 48%;
@@ -299,9 +322,9 @@ html {
     }
 }
 
-@media (min-width: 1400px) {
-    html {
-      font-size: 16px;
+@media (min-width: 1360px) {
+    .container {
+        max-width: 1280px;
     }
 }
 
@@ -339,6 +362,37 @@ html {
         margin-top: 0;
         margin-bottom: 2rem;
         padding-top: 0;
+    }
+    .modal-content.p-4 {
+        padding: 1.2rem !important;
+    }
+    .modal-header {
+        padding: 0.75rem;
+    }
+    .modal-title {
+        font-size: 2rem;
+    }
+    .modal-body {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        font-size: 0.75rem;
+    }
+    .modal-body {
+        margin-bottom: 0.75rem;
+    }
+    .mt-5 {
+        margin-top: 2.25rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+    .form-group input, .form-group select, .form-check, .modal-body button {
+        font-size: 0.75rem;
+    }
+    .chart-row .chart,
+    .chart-row .chart-spinner {
+        min-height: 30rem;
+    }
+    .chart-row .age-group-chart {
+        min-height: 32rem;
     }
 }
 
