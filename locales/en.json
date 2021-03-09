@@ -21,7 +21,7 @@
 	"Not You? Change User": "Not You? Change User",
 	"Username": "Username",
 	"Please don't use email or mobile number as user name": "Please don't use email or mobile number as user name",
-	"Select Mothertongue": "Select Mothertongue",
+	"Select Mother Tongue": "Select Mother Tongue",
 	"Pick age range": "Pick age range",
 	"I have read and agree to the": "I have read and agree to the",
 	"Terms and Conditions": "Terms and Conditions",
@@ -154,5 +154,7 @@
 	"Age Group Distribution": "Age Group Distribution",
 	"Show All": "Show All",
 	"Enter preferred username": "Enter preferred username",
-	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span><span class=\"font-wt-900\"> recordings"
+	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span><span class=\"font-wt-900\"> recordings",
+	"Username cannot be more than 12 characters": "Username cannot be more than 12 characters",
+	"EkStep Foundation": "EkStep Foundation"
 }
