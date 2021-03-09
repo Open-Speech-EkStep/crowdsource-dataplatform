@@ -13,19 +13,15 @@ document.body = stringToHTML(
 
 describe('getStatistics', () => {
     test('should get speakers count and num of hours recorded on home page', (done) => {
-        fetchMock.get('/aggregate-data-count', {
-            "data": [{
-                "total_languages": "2",
-                "total_speakers": "80",
-                "total_contributions": "0.348",
-                "total_validations": "0.175"
-            }]
-        }, {overwriteRoutes: true});
-
         const speakerValue = document.getElementById('speaker-value');
         const languagesValue = document.getElementById('languages-value');
 
-        getStatistics();
+        getStatistics({
+          "total_languages": "2",
+          "total_speakers": "80",
+          "total_contributions": "0.348",
+          "total_validations": "0.175"
+      });
         flushPromises().then(() => {
             expect(speakerValue.innerHTML).toEqual('80');
             expect(languagesValue.innerHTML).toEqual('2');

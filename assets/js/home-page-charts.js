@@ -215,7 +215,7 @@ const generateIndiaMap = function (language="") {
     });
 };
 
-function getStatistics() {
+function getStatistics(response) {
   const $speakersData = $("#speaker-data");
   const $speakersDataLoader = $speakersData.find(
     "#loader1, #loader2, #loader3"
@@ -231,27 +231,16 @@ function getStatistics() {
   $speakersDataSpeakerWrapper.addClass("d-none");
   $speakersDataLanguagesWrapper.addClass("d-none");
 
-  performAPIRequest("/aggregate-data-count")
-    .then((response) => {
-      try {
-        const { hours, minutes, seconds } = calculateTime(
-          Number(response.data[0].total_contributions) * 60 * 60
-        );
-        $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
-        $speakersDataSpeakerValue.text(response.data[0].total_speakers);
-        $speakersDataLanguagesValue.text(response.data[0].total_languages);
-        $speakersDataLoader.addClass("d-none");
-        $speakersDataHoursWrapper.removeClass("d-none");
-        $speakersDataSpeakerWrapper.removeClass("d-none");
-        $speakersDataLanguagesWrapper.removeClass("d-none");
-        //localStorage.setItem('speakersData', JSON.stringify(data));
-      } catch (error) {
-        console.log(error);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const { hours, minutes, seconds } = calculateTime(
+    Number(response.total_contributions) * 60 * 60
+  );
+  $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
+  $speakersDataSpeakerValue.text(response.total_speakers);
+  $speakersDataLanguagesValue.text(response.total_languages);
+  $speakersDataLoader.addClass("d-none");
+  $speakersDataHoursWrapper.removeClass("d-none");
+  $speakersDataSpeakerWrapper.removeClass("d-none");
+  $speakersDataLanguagesWrapper.removeClass("d-none");
 }
 
 function constructChart(responseData, xAxisLabel, yAxisLabel) {
@@ -317,18 +306,11 @@ function showByHoursChart() {
     chartReg["chart"].dispose();
   }
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-  if (topLanguagesByHoursData) {
-    constructChart(
-      JSON.parse(topLanguagesByHoursData).data,
-      "total_contributions",
-      "language"
-    );
-  } else {
-    performAPIRequest("/top-languages-by-hours").then((response) => {
-      localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response));
-      constructChart(response.data, "total_contributions", "language");
-    });
-  }
+  constructChart(
+    JSON.parse(topLanguagesByHoursData),
+    "total_contributions",
+    "language"
+  );
 }
 
 function showBySpeakersChart() {
@@ -338,18 +320,11 @@ function showBySpeakersChart() {
   const topLanguagesBySpeakers = localStorage.getItem(
     TOP_LANGUAGES_BY_SPEAKERS
   );
-  if (topLanguagesBySpeakers) {
-    constructChart(
-      JSON.parse(topLanguagesBySpeakers).data,
-      "total_speakers",
-      "language"
-    );
-  } else {
-    performAPIRequest("/top-languages-by-speakers").then((response) => {
-      localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response));
-      constructChart(response.data, "total_speakers", "language");
-    });
-  }
+  constructChart(
+    JSON.parse(topLanguagesBySpeakers),
+    "total_speakers",
+    "language"
+  );
 }
 
 module.exports = {
@@ -359,4 +334,5 @@ module.exports = {
   getStatistics,
   calculateTime,
   formatTime,
+  drawMap,
 };
