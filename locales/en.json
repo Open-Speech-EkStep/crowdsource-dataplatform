@@ -156,5 +156,8 @@
 	"Enter preferred username": "Enter preferred username",
 	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span><span class=\"font-wt-900\"> recordings",
 	"Username cannot be more than 12 characters": "Username cannot be more than 12 characters",
-	"EkStep Foundation": "EkStep Foundation"
+	"EkStep Foundation": "EkStep Foundation",
+	"Select the language": "Select the language",
+	"Data Last Updated": "Data Last Updated",
+	"We do not have any data for this language, would you like to contribute for it?": "We do not have any data for this language, would you like to contribute for it?"
 }
