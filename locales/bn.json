@@ -113,5 +113,10 @@
 	"Gender Contribution": "লিঙ্গ অবদান",
 	"State Wise distribution": "রাজ্য অনুসারে বিতরণ",
 	"Age Group Distribution": "বয়স গ্রুপ বিতরণ",
-	"We do not have any data for this language, would you like to contribute for it?": "এই ভাষার জন্য আমাদের কাছে কোনও ডেটা নেই, আপনি কি এর জন্য অবদান রাখতে চান?"
+	"We do not have any data for this language, would you like to contribute for it?": "এই ভাষার জন্য আমাদের কাছে কোনও ডেটা নেই, আপনি কি এর জন্য অবদান রাখতে চান?",
+	"EkStep Foundation": "একস্টেপ ফাউন্ডেশন",
+	"Username cannot be more than 12 characters": "ব্যবহারকারীর নাম 12 টির বেশি অক্ষর হতে পারে না",
+	"Ensure the voice is <b>clear and audible</b>": "Ensure the voice is <b>clear and audible</b>",
+	"Match the voice to the text <b>accurately</b>": "Match the voice to the text <b>accurately</b>",
+	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample"
 }
