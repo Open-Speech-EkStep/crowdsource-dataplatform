@@ -2,10 +2,6 @@
   background: url(/img/bg-thank-you.svg) no-repeat;
   background-size: cover;
 }
-#progress-percent-wrapper {
-  right: 1rem;
-  bottom: 2.8rem;
-}
 #graphcontainer {
   font-size: 0.2rem;
   position: relative;

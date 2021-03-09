@@ -129,7 +129,7 @@ const getSentencesBasedOnAge = function (
     if (showUniqueSentences) {
         query = updateAndGetUniqueSentencesQuery
     }
-
+    
     return (db.many(query, [
         encryptedUserId,
         userName,
