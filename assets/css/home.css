@@ -331,6 +331,14 @@ body.modal-open .supreme-container {
   color: black;
 }
 
+#speakers_hours_chart_container, #speakers_hours_chart {
+  height: 400px;
+}
+
+#indiaMapChart {
+ height: 500px;
+}
+
 @media screen and (max-width: 480px) {
   #start_recording, #start_validating {
     width: 85px;
@@ -355,6 +363,16 @@ body.modal-open .supreme-container {
   .fs-h4 {
     font-size: 1.5rem;
   }
+  .form-check-input {
+    margin-left: -1.75rem;
+    margin-top: 1px;
+  }
+  #indiaMapChart {
+    height: 380px;
+  }
+  #speakers_hours_chart_container, #speakers_hours_chart {
+    height: 220px;
+ }
 }
 
 
