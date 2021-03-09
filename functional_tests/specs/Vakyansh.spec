@@ -6,9 +6,9 @@
 * Search for About Us button
 * Validate about us content
 
-## Validate Start Recording Button on Home Page
-* Start Recording button is disabled
-* Select Language "Hindi" enables the Start Recording button
+//## Validate Start Recording Button on Home Page
+//* Start Recording button is disabled
+//* Select Language "Hindi" enables the Start Recording button
 
 ## Validate default Language and Start Recording Button
 * Language Drop Down should have "Odia" as the default language
@@ -42,3 +42,6 @@
 * When user clicks on "NEXT" button, "SKIP" button should appear
 * When user skips all the rest of the "9" sentences , User should see Thank you Page
 * when user clicks on the Contribute More button, user shall see the Instructions page again
+
+## Validate Locale content in About Us Page
+* When user changes the locale to Hindi 

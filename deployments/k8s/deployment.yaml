@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vakyansh
+spec:
+  selector:
+    matchLabels:
+      app: vakyansh
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        commit_sha: CIRCLE_SHA1
+      labels:
+        app: vakyansh
+    spec:
+      containers:
+      - image: IMAGE_NAME
+        imagePullPolicy: Always
+        name: vakyansh
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: vakyansh-secret
+              key: DB_HOST
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: vakyansh-secret
+              key: DB_NAME
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: vakyansh-secret
+              key: DB_USER          
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: vakyansh-secret
+              key: DB_PASS          
+        - name: BUCKET_NAME
+          valueFrom:
+            secretKeyRef:
+              name: vakyansh-secret
+              key: BUCKET_NAME          
+        - name: ENCRYPTION_KEY
+          valueFrom:
+            secretKeyRef:
+              name: vakyansh-secret
+              key: ENCRYPTION_KEY          
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: vakyansh-secret
+              key: AWS_ACCESS_KEY_ID          
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: vakyansh-secret
+              key: AWS_SECRET_ACCESS_KEY          
+        - name: region
+          valueFrom:
+            secretKeyRef:
+              name: vakyansh-secret
+              key: region    
+        - name: PORT
+          valueFrom:
+            secretKeyRef:
+              name: vakyansh-secret
+              key: PORT         
+        ports:
+        - containerPort: 8080
+
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 2Gi
