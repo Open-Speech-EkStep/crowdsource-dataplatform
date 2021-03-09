@@ -47,7 +47,6 @@ function updateHrsForSayAndListen(language) {
     const $listen_p_3 = $("#listen-p-3");
     const stringifyData = localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE);
     const aggregateDetails = JSON.parse(stringifyData);
-    console.log(aggregateDetails,'aggregateDetails')
     if(!aggregateDetails){
         performAPIRequest(`/aggregate-data-count?byLanguage=true`)
             .then((details) => {
