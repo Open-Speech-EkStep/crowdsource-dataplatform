@@ -41,19 +41,20 @@ let validateAndReturnRequiredStatsFields = (queryObject) => {
 }
 
 let validateAndReturnRequiredStatsCategoryFields = (queryObject) => {
-    const ageLanguage = queryObject.ageLanguage || null;
-    const genderLanguage = queryObject.genderLanguage || null;
-    const timelineLanguage = queryObject.timelineLanguage || null;
-    const timeframe = queryObject.timeframe || null;
-    
+    const ageGroupFlag = queryObject.ageGroup || null;
+    const genderGroupFlag = queryObject.genderGroup || null;
+    const timeLineFlag = queryObject.timeline || null;
+
 
     let resultObject = {
-        
+        'age_group_data': ageGroupFlag,
+        'gender_group_data': genderGroupFlag,
+        'timeline': timeLineFlag
     }
 
-    // let avoidUnMentioned = isFieldsMentioned(resultObject);
+    let avoidUnMentioned = isFieldsMentioned(resultObject);
 
-    // return verifyAndRemoveField(resultObject, avoidUnMentioned);
+    return verifyAndRemoveField(resultObject, avoidUnMentioned);
 }
 
 
@@ -106,7 +107,7 @@ const dashboardRoutes = (router) => {
         res.send({ "data": languagesData.map(data => data.language), last_updated_at: lastUpdatedDateTime });
     });
 
-    
+
     router.get('/stats/summary', async (req, res) => {
 
         const resultFields = Object.keys(validateAndReturnRequiredStatsFields(req.query));
@@ -143,40 +144,47 @@ const dashboardRoutes = (router) => {
     });
 
     router.get('/stats/categories', async (req, res) => {
+        let result = {};
 
-        // let result = {};
+        const resultFields = Object.keys(validateAndReturnRequiredStatsCategoryFields(req.query));
 
-        // const allowedTimeFrames = ['weekly', 'monthly', 'daily', 'quarterly'];
+        const language = req.query.language || '';
 
-        // if (!allowedTimeFrames.includes(timeframe.toLowerCase())) {
-        //     res.status(400).send("Timeframe mentioned is invalid");
-        //     return;
-        // }
+        if (resultFields.includes('timeline')) {
+            const timeframe = req.query.timeframe || 'monthly';
+            const allowedTimeFrames = ['weekly', 'monthly', 'daily', 'quarterly'];
 
-        // const ageGroupData = await getAgeGroupData(language);
-        // const genderGroupData = await getGenderGroupData(language);
+            if (!allowedTimeFrames.includes(timeframe.toLowerCase())) {
+                res.status(400).send("Timeframe mentioned is invalid");
+                return;
+            }
 
-        // const timelineData = await getTimeline(language, timeframe);
-        // let hoursContributed = 0, hoursValidated = 0;
+            const timelineData = await getTimeline(language, timeframe);
+            let hoursContributed = 0, hoursValidated = 0;
 
-        // if (timelineData.length !== 0) {
-        //     hoursContributed = timelineData[timelineData.length - 1]['cumulative_contributions'] || 0;
-        //     hoursValidated = timelineData[timelineData.length - 1]['cumulative_validations'] || 0;
-        // }
-        // // {
-        // //     'total-hours-contributed': hoursContributed,
-        // //     'total-hours-validated': hoursValidated,
-        // //     "data": timelineData,
-        // //     last_updated_at: lastUpdatedDateTime
-        // // }
+            if (timelineData.length !== 0) {
+                hoursContributed = timelineData[timelineData.length - 1]['cumulative_contributions'] || 0;
+                hoursValidated = timelineData[timelineData.length - 1]['cumulative_validations'] || 0;
+            }
+            result['total-hours-contributed'] = hoursContributed;
+            result['total-hours-validated'] = hoursValidated;
+            result['timeline'] = timelineData;
+        }
 
-
-        // const lastUpdatedDateTime = await getLastUpdatedAt();
-        // result['last_updated_at'] = lastUpdatedDateTime;
-        
-        // res.send(result);
+        if (resultFields.includes('age_group_data')) {
+            const ageGroupData = await getAgeGroupData(language);
+            result['age_group_data'] = ageGroupData;
+        }
+        if (resultFields.includes('gender_group_data')) {
+            const genderGroupData = await getGenderGroupData(language);
+            result['gender_group_data'] = genderGroupData;
+        }
+        const lastUpdatedDateTime = await getLastUpdatedAt();
+        result['last_updated_at'] = lastUpdatedDateTime;
+        res.send(result);
     });
 
+    // Optional
     router.get('/contributions/age', async (req, res) => {
         const language = req.query.language || '';
 
@@ -185,6 +193,7 @@ const dashboardRoutes = (router) => {
         res.send({ "data": ageGroupData, last_updated_at: lastUpdatedDateTime });
     });
 
+    //Optional
     router.get('/contributions/gender', async (req, res) => {
         const language = req.query.language || '';
 
@@ -193,6 +202,7 @@ const dashboardRoutes = (router) => {
         res.send({ "data": genderGroupData, last_updated_at: lastUpdatedDateTime });
     });
 
+    //Optional
     router.get('/timeline', async (req, res) => {
         const allowedTimeFrames = ['weekly', 'monthly', 'daily', 'quarterly'];
 
