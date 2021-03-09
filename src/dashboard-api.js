@@ -24,6 +24,7 @@ let validateAndReturnRequiredStatsFields = (queryObject) => {
     const languageDataFlag = queryObject.languageData || null;
     const aggregateDataByLanguageFlag = queryObject.aggregateDataByLanguage || null;
     const aggregateDataByStateFlag = queryObject.aggregateDataByState || null;
+    const aggregateDataCountFlag = queryObject.aggregateDataCount || null;
     const aggregateDataByStateAndLanguageFlag = queryObject.aggregateDataByStateAndLanguage || null;
 
     let resultObject = {
@@ -32,7 +33,8 @@ let validateAndReturnRequiredStatsFields = (queryObject) => {
         'languages': languageDataFlag,
         'aggregate_data_by_state': aggregateDataByStateFlag,
         'aggregate_data_by_language': aggregateDataByLanguageFlag,
-        'aggregate_data_by_state_and_language': aggregateDataByStateAndLanguageFlag
+        'aggregate_data_by_state_and_language': aggregateDataByStateAndLanguageFlag,
+        'aggregate_data_count': aggregateDataCountFlag
     }
 
     let avoidUnMentioned = isFieldsMentioned(resultObject);
@@ -138,6 +140,11 @@ const dashboardRoutes = (router) => {
             const aggregateDataByDateAndLanguage = await getAggregateDataCount(false, true);
             result['aggregate_data_by_state_and_language'] = aggregateDataByDateAndLanguage;
         }
+        if(resultFields.includes('aggregate_data_count')){
+            const aggregateCount = await getAggregateDataCount(false, false);
+            result['aggregate_data_count'] = aggregateCount;
+        }
+        
         const lastUpdatedDateTime = await getLastUpdatedAt();
         result['last_updated_at'] = lastUpdatedDateTime;
         res.send(result);
