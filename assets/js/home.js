@@ -1,4 +1,4 @@
-const {generateIndiaMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
+const {drawMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
 const {toggleFooterPosition} = require('./utils')
 const {
     validateUserName,
@@ -11,7 +11,6 @@ const {
 
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
-const AGGREGATED_DATA_BY_STATE = "aggregatedDataByState";
 const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
 
 const ALL_LANGUAGES = [
@@ -47,48 +46,17 @@ function updateHrsForSayAndListen(language) {
     const $listen_p_3 = $("#listen-p-3");
     const stringifyData = localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE);
     const aggregateDetails = JSON.parse(stringifyData);
-    if(!aggregateDetails){
-        performAPIRequest(`/aggregate-data-count?byLanguage=true`)
-            .then((details) => {
-                localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(details.data));
-                const totalInfo = details.data.find((element) => element.language === language);
-                if (totalInfo) {
-                    const {total_contributions, total_validations} = totalInfo;
-                    total_contributions && $say_p_3.text(`${total_contributions} hrs recorded in ${language}`);
-                    total_validations && $listen_p_3.text(`${total_validations} hrs validated in ${language}`);
-                } else {
-                    $say_p_3.text(`0 hr recorded in ${language}`);
-                    $listen_p_3.text(`0 hr validated in ${language}`);
-                }
-                $sayLoader.addClass('d-none');
-                $listenLoader.addClass('d-none');
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+    const totalInfo = aggregateDetails && aggregateDetails.find((element) => element.language === language);
+    if (totalInfo) {
+        const {total_contributions, total_validations} = totalInfo;
+        total_contributions && $say_p_3.text(`${total_contributions} hrs recorded in ${language}`);
+        total_validations && $listen_p_3.text(`${total_validations} hrs validated in ${language}`);
     } else {
-        const totalInfo = aggregateDetails && aggregateDetails.find((element) => element.language === language);
-        if (totalInfo) {
-            const {total_contributions, total_validations} = totalInfo;
-            total_contributions && $say_p_3.text(`${total_contributions} hrs recorded in ${language}`);
-            total_validations && $listen_p_3.text(`${total_validations} hrs validated in ${language}`);
-        } else {
-            $say_p_3.text(`0 hr recorded in ${language}`);
-            $listen_p_3.text(`0 hr validated in ${language}`);
-        }
-        $sayLoader.addClass('d-none');
-        $listenLoader.addClass('d-none');
+        $say_p_3.text(`0 hr recorded in ${language}`);
+        $listen_p_3.text(`0 hr validated in ${language}`);
     }
-}
-
-const setAggregateDataCountByLanguage = function () {
-    performAPIRequest(`/aggregate-data-count?byLanguage=true`)
-        .then((details) => {
-            localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(details.data));
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+    $sayLoader.addClass('d-none');
+    $listenLoader.addClass('d-none');
 }
 
 const getDefaultTargettedDiv = function (key, value, $sayListenLanguage) {
@@ -151,7 +119,6 @@ const setDefaultLang = function (){
     const contributionLanguage = localStorage.getItem('contributionLanguage');
     const $sayListenLanguage = $('#say-listen-language');
     const  $languageNavBar = $('#language-nav-bar')
-    console.log('contribution lang: ', contributionLanguage);
     if(!contributionLanguage){
         const $homePage = document.getElementById('home-page');
         const defaultLangId = $homePage.getAttribute('default-lang');
@@ -170,8 +137,20 @@ const setDefaultLang = function (){
 const clearLocalStroage = function() {
     localStorage.removeItem(TOP_LANGUAGES_BY_HOURS);
     localStorage.removeItem(TOP_LANGUAGES_BY_SPEAKERS);
-    localStorage.removeItem(AGGREGATED_DATA_BY_STATE);
     localStorage.removeItem(AGGREGATED_DATA_BY_LANGUAGE);
+}
+
+const getStatsSummary = function () {
+    performAPIRequest('/stats/summary')
+    .then(response => {
+        drawMap({data: response.aggregate_data_by_state});
+        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response.top_languages_by_hours));
+        showByHoursChart();
+        localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
+        localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
+        setLanguagesInHeader();
+        getStatistics(response.aggregate_data_count[0]);
+    });
 }
 
 $(document).ready(function () {
@@ -196,7 +175,6 @@ $(document).ready(function () {
         container: 'body',
         placement: screen.availWidth > 500 ? 'right' : 'auto',
     });
-    setLanguagesInHeader();
     let top_lang = localStorage.getItem('contributionLanguage');
     const $languageNavBar = $('#language-nav-bar');
     const $sayListenLanguage = $('#say-listen-language');
@@ -322,7 +300,7 @@ $(document).ready(function () {
         $listen.addClass('col-md-5');
         $say_p_2.addClass('d-none');
         $say_container.removeClass('say-active');
-    })
+    });
 
     $listen.hover(() => {
         $say.removeClass('col-lg-5');
@@ -338,10 +316,9 @@ $(document).ready(function () {
         $listen.addClass('col-lg-5');
         $listen_p_2.addClass('d-none');
         $listen_container.removeClass('listen-active');
-    })
-    getStatistics();
-    generateIndiaMap();
-    showByHoursChart();
+    });
+
+    getStatsSummary();
 });
 
 module.exports = {
