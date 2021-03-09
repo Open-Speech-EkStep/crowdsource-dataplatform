@@ -18,7 +18,7 @@ const ALL_LANGUAGES = [
     {value: "Bengali", id: "bn", text: "বাংলা"},
     {value: "English", id: "en", text: "English"},
     {value: "Gujarati", id: "gu", text: "ગુજરાતી"},
-    {value: "Hindi", id: "hi", text: "हिन्दी"},
+    {value: "Hindi", id: "hi", text: "हिंदी"},
     {value: "Kannada", id: "kn", text: "ಕನ್ನಡ"},
     {value: "Malayalam", id: "ml", text: "മലയാളം"},
     {value: "Marathi", id: "mr", text: "मराठी"},
@@ -100,7 +100,7 @@ const setLanguagesInHeader = function() {
     const $languageNavBar= $('#language-nav-bar');
     const $navBarLoader = $('#nav-bar-loader');
     const languages = [
-        {value: "Hindi", id: "hi", text: "हिन्दी"},
+        {value: "Hindi", id: "hi", text: "हिंदी"},
         {value: "Marathi", id: "mr", text: "मराठी"},
         {value: "Bengali", id: "bn", text: "বাংলা"},
         {value: "Tamil", id: "ta", text: "தமிழ்"},
