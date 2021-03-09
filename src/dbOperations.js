@@ -356,5 +356,6 @@ module.exports = {
     getTimeline,
     getAgeGroupData,
     getGenderGroupData,
-    getLastUpdatedAt
+    getLastUpdatedAt,
+    getSentencesBasedOnAge
 };
