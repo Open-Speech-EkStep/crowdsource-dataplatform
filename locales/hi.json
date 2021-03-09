@@ -1,5 +1,5 @@
 {
-	"Language": "हिन्दी",
+	"Language": "हिंदी",
 	"Speech Recognition Models": "Speech Recognition Models",
 	"About Us": "हमारे बारे में",
 	"Select the language for contribution": "योगदान के लिए भाषा का चुनाव करें",
@@ -122,5 +122,7 @@
 	"We do not have any data for <span id=\"languageSelected\"></span> would you like to contribute for it?": "हमारे पास <span id=\"languageSelected\"></span> के लिए कोई डेटा नहीं है क्या आप इसके लिए योगदान करना चाहेंगे?",
 	"We do not have any data for this language, would you like to contribute for it?": "हमारे पास इस भाषा के लिए कोई डेटा नहीं है, क्या आप इसके लिए योगदान देना चाहेंगे?",
 	"Username cannot be more than 12 characters": "यूज़रनेम 12 कैरेक्चर से अधिक नहीं हो सकता",
-	"EkStep Foundation": "एकस्टेप संगठन"
+	"EkStep Foundation": "एकस्टेप संगठन",
+	"min": "मिनट",
+	"hrs recorded in": "%s घंटे %s में रिकॉर्ड हुए"
 }
