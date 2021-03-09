@@ -37,9 +37,6 @@ if (!(localSpeakerDataParsed)) {
     $('#nav-login').addClass('d-none');
     $('#nav-username').text(localSpeakerDataParsed.userName);
     const $totalProgress = $('#total-progress');
-    const $timeGraphBar = $('#graphbar');
-    const $progressPercentWrapper = $('#progress-percent-wrapper');
-    const $progressPercent = $progressPercentWrapper.find('#progress-percent');
 
     const $speakersDataHoursValue = $('#hour-value');
     const speakersDataKey = 'speakersData';
@@ -47,26 +44,6 @@ if (!(localSpeakerDataParsed)) {
     setPageContentHeight();
 
     setUserContribution(getTotalSecondsContributed());
-
-    const setProgressPercent = (totalSecondsContributed) => {
-        //42em is graphforeground height in css
-        const graphforegroundHeight = 42;
-        // assuming a sentence is of 6 second
-        const totalSecondsToContribute = 30 * 60;
-        const contributionPercent =
-            (totalSecondsContributed / totalSecondsToContribute) * 100;
-        $progressPercent.text(Number(contributionPercent.toFixed(1)));
-        const currentTimeGraphHeight =
-            (totalSecondsContributed / totalSecondsToContribute) *
-            graphforegroundHeight;
-        $timeGraphBar.height(currentTimeGraphHeight + 'em');
-        if (contributionPercent >= 100) {
-            $progressPercent.parent().find('.small').addClass('d-none');
-            $progressPercentWrapper.addClass('mb-3');
-            $('#do-more').addClass('d-none');
-        }
-    };
-    setProgressPercent(getTotalSecondsContributed());
 
     const getTotalProgressSize = () => {
         //magic calculation for every screen size
@@ -171,16 +148,6 @@ if (!(localSpeakerDataParsed)) {
             $speakersDataHoursValue.next().addClass('d-none');
         });
 
-    const adjustTimeProgressBarHeight = () => {
-        const footerHeight = $footer.outerHeight();
-        const progressBottomInPx = $progressPercentWrapper.css('bottom');
-        const progressBottomInNumber = Number(
-            progressBottomInPx.substring(0, progressBottomInPx.length - 2)
-        );
-        if (progressBottomInNumber) {
-            $progressPercentWrapper.css('bottom', footerHeight + 'px');
-        }
-    };
     const isScreenRotated = () => {
         const orientation =
             (screen.orientation || {}).type ||
@@ -206,33 +173,6 @@ if (!(localSpeakerDataParsed)) {
             return false;
         }
     };
-    const adjustTimeProgressBarPosition = () => {
-        const $progressPercentWrapper = $('#progress-percent-wrapper');
-        const $previousContainer = $progressPercentWrapper.prev();
-        const $graphcontainer = $('#graphcontainer');
-        const screenRotated = isScreenRotated();
-        if (screenRotated || innerWidth < 600) {
-            $progressPercentWrapper
-                .removeClass('position-fixed')
-                .addClass('position-relative')
-                .css({
-                    right: 0,
-                    bottom: 0,
-                });
-            $graphcontainer.removeClass('mx-auto');
-            $previousContainer.removeClass('mb-6');
-        } else {
-            adjustTimeProgressBarHeight();
-        }
-    };
-    try {
-        if (screen.orientation && screen.orientation.onchange) {
-            screen.orientation.onchange = adjustTimeProgressBarPosition;
-        }
-        adjustTimeProgressBarPosition();
-    } catch (err) {
-        console.log(err);
-    }
 }
 
 $(document).ready(toggleFooterPosition);
