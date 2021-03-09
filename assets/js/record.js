@@ -33,19 +33,6 @@ const setTotalSentenceIndex = (index) => {
     totalSentencesLbl.innerText = index;
 }
 
-const adjustTimeProgressBarHeight = ($footer) => {
-    const $timeProgress = $('#time-progress');
-    const footerHeight = $footer.outerHeight();
-    const timeProgressBottomInPx = $timeProgress.css('bottom');
-    const timeProgressBottomInNumber = Number(
-        timeProgressBottomInPx.substring(0, timeProgressBottomInPx.length - 2)
-    );
-    if (timeProgressBottomInNumber) {
-        $timeProgress.css('bottom', footerHeight + 'px');
-    }
-};
-
-
 const initialize = () => {
     const sentences = crowdSource.sentences;
     const $startRecordBtn = $('#startRecord');
@@ -139,10 +126,12 @@ const initialize = () => {
 
         $element.on('animationend', handleAnimationEnd);
     };
+
     const setProgressBar = (currentIndex) => {
         $progressBar.width(currentIndex * 20 + '%');
         $progressBar.prop('aria-valuenow', currentIndex);
     };
+
     const setSentenceText = (index) => {
         const $sentenceLbl = $('#sentenceLbl');
         $sentenceLbl[0].innerText = sentences[index].sentence;
@@ -150,28 +139,6 @@ const initialize = () => {
         currentIndex && setProgressBar(currentIndex);
     };
 
-    const setTimeProgress = (index) => {
-        const $timeGraphBar = $('#graphbar');
-        const $timeValue = $('#time-value');
-        //42em is graphforeground height in css
-        const graphforegroundHeight = 42;
-        // assuming a sentence is of 6 second
-        const totalSecondsContributed = (crowdSource.count + index - skipCount) * 6;
-        const totalSecondsToContribute = 30 * 60;
-        const contriComplete = totalSecondsContributed >= totalSecondsToContribute;
-        const remainingSeconds = contriComplete
-            ? totalSecondsContributed
-            : totalSecondsToContribute - totalSecondsContributed;
-        const minutes = Math.floor(remainingSeconds / 60);
-        const seconds = remainingSeconds % 60;
-        $timeValue.text(`${minutes}m ${seconds}s`);
-        contriComplete && $timeValue.siblings('p').text('We are loving it!');
-        const perSecondTimeGraphHeight =
-            graphforegroundHeight / totalSecondsToContribute;
-        const currentTimeGraphHeight =
-            perSecondTimeGraphHeight * totalSecondsContributed;
-        $timeGraphBar.height(currentTimeGraphHeight + 'em');
-    };
     const notyf = new Notyf({
         position: {x: 'center', y: 'top'},
         types: [
@@ -198,12 +165,9 @@ const initialize = () => {
         }
     };
 
-    adjustTimeProgressBarHeight($footer);
-
     setSentenceText(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    setTimeProgress(currentIndex);
 
     let gumStream;
     let rec;
@@ -305,7 +269,6 @@ const initialize = () => {
     $nextBtn.add($skipBtn).on('click', (event) => {
         if (event.target.id === 'nextBtn' && currentIndex < totalItems - 1) {
             uploadToServer();
-            setTimeProgress(currentIndex + 1);
         } else if (event.target.id === 'skipBtn') {
             incrementSkipCount();
             $skipBtn.addClass('d-none');
