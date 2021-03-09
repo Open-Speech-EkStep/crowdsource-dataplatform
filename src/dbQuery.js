@@ -20,18 +20,48 @@ with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
 from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
+left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
+where language = $4 and label=$3 \
+and (coalesce(cont.action,\'\')!=\'completed\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id)) \
+group by sentences."sentenceId", con."contributor_id" \
+order by RANDOM() \
+limit 5  returning "sentenceId") \
+select ins."sentenceId", sentences.sentence from ins  \
+  inner join sentences on sentences."sentenceId" = ins."sentenceId";'
+
+const updateAndGetUniqueSentencesQuery = '\
+INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 \
+where not exists \
+(select "contributor_id" from "contributors" where "contributor_identifier" = $1 and user_name=$2); \
+update "contributors" set "age_group" = $7, gender = $6, mother_tongue = $5 \
+where contributor_identifier = $1 and user_name = $2; \
+with ins ("sentenceId") as \
+( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
+select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" \
-where "state" is null and language = $4 and label=$3 and cont."action" is NULL limit 10 \
+where sentences."state" is null and language = $4 and label=$3 and cont."action" is NULL limit 5 \
   returning "sentenceId") \
 select ins."sentenceId", sentences.sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";'
+
+const getValidationSentencesQuery = 'select audio_path, con."sentenceId", sen.sentence, con.contribution_id \
+    from contributions con inner join sentences sen on sen."sentenceId"=con."sentenceId" and con.action=\'completed\' \
+    where sen."state"= \'contributed\' and language=$1 group by audio_path, con."sentenceId", sen.sentence, con.contribution_id order by RANDOM() limit 5;'
+
+const addValidationQuery = 'insert into validations (contribution_id, "action", validated_by, "date") \
+select contribution_id, $3, $1, now() from contributions inner join sentences on sentences."sentenceId"=contributions."sentenceId" \
+where sentences."sentenceId" = $2 and sentences.state = \'contributed\' and contribution_id=$4;'
+
+const updateSentencesWithValidatedState = 'update sentences set "state" = \
+\'validated\' where "sentenceId" = $1;'
 
 const UpdateAudioPathAndUserDetails = 'WITH src AS ( \
     select contributor_id from "contributors" \
     where contributor_identifier = $6 and user_name = $7\
     ) \
 UPDATE "contributions" \
-SET "audio_path" = $1, "action" = \'completed\' , "date" = now()\
+SET "audio_path" = $1, "action" = \'completed\' , "date" = now(), "state_region" = $8, "country" = $9\
 FROM src \
 WHERE "sentenceId" = $5 AND contributed_by  = src.contributor_id \
 returning "audio_path";'
@@ -54,6 +84,8 @@ module.exports = {
     unassignIncompleteSentences,
     sentencesCount,
     updateAndGetSentencesQuery,
+    updateAndGetUniqueSentencesQuery,
+    getValidationSentencesQuery,
     setNewUserAndFileName,
     UpdateAudioPathAndUserDetails,
     getCountOfTotalSpeakerAndRecordedAudio,
@@ -61,5 +93,7 @@ module.exports = {
     getGenderData,
     getAgeGroupsData,
     unassignIncompleteSentencesWhenLanChange,
-    updateSentencesWithContributedState
+    updateSentencesWithContributedState,
+    addValidationQuery,
+    updateSentencesWithValidatedState
 }

@@ -15,7 +15,9 @@ const {
     text,
     into,
     textBox,
+    dropDown
 } = require('taiko');
+
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
 const testUrl = process.env.test_url;
 
@@ -39,31 +41,23 @@ step("Opening Vakyansh", async () => {
 });
 
 step("Search for About Us button", async function () {
-    await link('About Us').exists();
-    click('About Us');
+    assert.ok(await link('About Us').exists())
 });
 
 step("Validate about us content", async function () {
-    await text('ABOUT THE ORGANISATION').exists()
+    await click('About Us');
+    assert.ok(await text('ABOUT THE ORGANISATION').exists());
 });
 
 step("Start Recording button is disabled", async function () {
-    const startRecordingButton = taiko.button({id: 'start_recording'})
-    //await startRecordingButton.exists()
-    await taiko.waitFor(1000)
-    if (!startRecordingButton.isDisabled())
-        assert.fail('the start recording button is not disabled')
+    assert.ok(await taiko.button({id: 'start_recording'}).isDisabled())
 });
 
 step("Select Language <language> enables the Start Recording button", async function (language) {
-
     const selectLanguageDropDown = taiko.dropDown({id: 'languageTop'})
-    //await selectLanguageDropDown.exists();
     await selectLanguageDropDown.select(language)
     await taiko.waitFor(1000)
-    if (await taiko.button({id: 'start_recording'}).isDisabled())
-        assert.fail('Start Recording Button should have been enabled')
-
+    assert.ok(!await taiko.button({id: 'start_recording'}).isDisabled(), 'the start recording button is disabled')
 });
 
 step("Language Drop Down should have <language> as the default language", async function (language) {
@@ -74,14 +68,11 @@ step("Language Drop Down should have <language> as the default language", async 
 
 step("Start Recording Button should be for <language> Language", async function (language) {
     const startRecordingButton = taiko.button({id: 'start-record'})
-    if (!await text("START RECORDING IN " + language).exists())
-        assert.fail('Button is not for ODIA Language')
-
-    assert.equal(await startRecordingButton.isDisabled(), false)
+    assert.ok(await text("START RECORDING IN " + language).exists())
+    assert.ok(!(await startRecordingButton.isDisabled()))
 });
 
 step("Speaker details popup should appear and close button should close the pop up", async function () {
-
     if (await taiko.text('Speaker Details').exists()) {
         assert.ok('speaker details pop-up exists')
         await click(taiko.button({class: 'close float-right'}))
@@ -113,7 +104,6 @@ step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio butto
 });
 
 step("Hover on the Lets Go button should give some message", async function () {
-    // await button({id:'proceed-box'}).exists()
     await hover("LET'S GO")
     await taiko.text('Please agree to the Terms and Conditions before proceeding').exists()
 });
@@ -132,18 +122,9 @@ step("Once user agree to terms and conditions Lets Go the button should be enabl
     assert.equal(await taiko.button({id: 'proceed-box'}).isDisabled(), false)
 });
 
-step("user should see the Sign In pop up", async function () {
-    // assert.ok(await taiko.text('Sign In').exists())
-});
-
 step("When user clicks on the <arg> button", async function (arg) {
     await link(arg).exists();
-    click(arg);
-});
-
-step("When user clicks on the Are you a validator button", async function () {
-    // await link('Are you a Validator? Login here').exists();
-    //  click('Are you a Validator? Login here');
+    await click(arg);
 });
 
 step("When user clicks on cross button, pop up should be closed", async function () {
@@ -154,7 +135,6 @@ step("When user clicks on cross button, pop up should be closed", async function
 });
 
 step("And User enter random Username and selects Age , Mother tongue ,gender", async function () {
-
     if (await taiko.text('Speaker Details').exists()) {
         const username = taiko.textBox({id: 'username'})
         await taiko.waitFor(700)
@@ -168,11 +148,11 @@ step("And User enter random Username and selects Age , Mother tongue ,gender", a
 step("when user click on Lets Go Button, user should see instructions to record", async function () {
     await click(taiko.button({id: 'proceed-box'}))
     await taiko.waitFor(1500)
-    assert.ok(await text('Recording Instructions').exists())
+    assert.ok(await text('Recording Instructions').exists(), 'Not able to see instructions')
 });
 
 step("When user closes the Instructions , user should see a sentence , Skip button , Start Recording Button , username", async function () {
-    await click(taiko.$('.close'))
+    await click(button('START'))
     await taiko.waitFor(2000)
     assert.ok(await button({id: 'startRecord'}).exists())
     assert.ok(await button({id: 'skipBtn'}).exists())
@@ -202,4 +182,66 @@ step("when user clicks on the Contribute More button, user shall see the Instruc
     await click(link('Contribute More'))
     await taiko.waitFor(1000)
     assert.ok(await text('Recording Instructions').exists(), 'Not able to see instructions')
+});
+
+step("user should see the Sign In pop up", async function () {
+    assert.ok(await taiko.text('Sign In').exists())
+    await textBox(taiko.below('Email')).exists();
+    await textBox(taiko.below('Password')).exists();
+    await link('Go to Home Page').exists();
+});
+
+step("User enters email as <email> and password as <password>", async function (email, password){
+    await write(email,into(textBox(taiko.below('Email'))));
+    await write(password,into(textBox(taiko.below('Password'))));
+});
+
+step("Wrong credentials error must be shown",async ()=>{
+    await text('Wrong email or password').exists();
+});
+
+step("Click <linkText> redirects to home", async (linkText)=>{
+    await click(link(linkText));
+    assert.strictEqual(await taiko.currentURL(),testUrl)
+});
+
+step("user should see the validator prompt page",async ()=>{
+    await text('test3').exists();
+    await text('Play').exists();
+    await text('No').exists();
+    await text('Yes').exists();
+    await text('Skip').exists();
+    await text('Instructions').exists();
+});
+
+step("user should see pause button and other buttons should disable",async ()=>{
+    await text('test3').exists();
+    await text('Pause').exists();
+    await text('Instructions').exists();
+});
+
+step("user should see replay button and other buttons should enable",async ()=>{
+    await text('test3').exists();
+    await text('Replay').exists();
+    await text('Instructions').exists();
+});
+
+step("user should see dropdown menu", async ()=>{
+    await text('Log Out').exists();
+    await text('Validate contributions').exists();
+})
+
+step("user should see the Home page", async ()=>{
+    await text('Sign In').exists();
+    await text('We rely on your contributions').exists();
+    await text('Speaker Diversification').exists();
+})
+
+step("When user changes the locale to Hindi", async function () {
+    const selectLanguageDropDown = taiko.$('#localeDropdownMenuButton');
+    await click(selectLanguageDropDown);
+    const hindiDropDown = taiko.$('#hindi');
+    await click(hindiDropDown);
+    await taiko.waitFor(2000);
+    assert.ok(await text("वकंश: भारतीय भाषाओं के लिए एक क्राउडसोर्सिंग पहल").exists());
 });

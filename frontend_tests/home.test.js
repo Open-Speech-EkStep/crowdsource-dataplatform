@@ -1,139 +1,109 @@
-const fetchMock = require('fetch-mock')
+const fetchMock = require("fetch-mock");
 const {
-    updateLanguageInButton,
-    updateLanguage,
-    calculateTime,
-    testUserName,
-    fetchDetail,
-    validateUserName,
-    resetSpeakerDetails
-} = require('../assets/js/home');
-const {readFileSync} = require('fs');
-const {stringToHTML, flushPromises} = require('./utils');
+  performAPIRequest,
+  updateHrsForSayAndListen,
+  getDefaultTargettedDiv,
+} = require("../assets/js/home");
+const { readFileSync } = require("fs");
+const { stringToHTML, flushPromises, mockLocalStorage } = require("./utils");
 
 document.body = stringToHTML(
-    readFileSync(`${__dirname}/../views/home.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../views/home.ejs`, "UTF-8")
 );
-describe('updateLanguageInButton', () => {
-    test('should update innerText of start record btn for given language', () => {
-        updateLanguageInButton('hindi');
-        expect(document.getElementById('start-record').innerText).toEqual(
-            'START RECORDING IN HINDI'
-        );
+
+describe("performAPIRequest", () => {
+  test("should give details for given language if server responds ok", () => {
+    fetchMock.get("/aggregate-data-count", {
+      data: [
+        {
+          total_languages: "2",
+          total_speakers: "80",
+          total_contributions: "0.348",
+          total_validations: "0.175",
+        },
+      ],
     });
+    performAPIRequest("/aggregate-data-count").then((data) => {
+      expect(data).toEqual({
+        data: [
+          {
+            total_languages: "2",
+            total_speakers: "80",
+            total_contributions: "0.348",
+            total_validations: "0.175",
+          },
+        ],
+      });
+      fetchMock.reset();
+    });
+  });
+
+  test("should give details for all language if server responds ok", () => {
+    fetchMock.get(`/aggregate-data-count?byLanguage=${true}`, {
+      data: [{ language: "Hindi", count: 5 }],
+    });
+    performAPIRequest(`/aggregate-data-count?byLanguage=${true}`).then(
+      (data) => {
+        expect(data).toEqual({ data: [{ language: "Hindi", count: 5 }] });
+        fetchMock.reset();
+      }
+    );
+  });
+
+  test("should give list for top-5 languages based on no. of contributions if server responds ok", () => {
+    const response = [
+      { language: "Hindi", contributions: 5 },
+      { language: "Odia", contributions: 4 },
+    ];
+    fetchMock.get("/top-languages-by-hours", response);
+    performAPIRequest("/top-languages-by-hours").then((data) => {
+      expect(data).toEqual(response);
+      fetchMock.reset();
+    });
+  });
 });
 
-describe('updateLanguage', () => {
-    test('should update speakers count and num of hours recorded on home page', (done) => {
-        const language = 'Hindi';
-        fetchMock.get(`getDetails/${language}`, [
-            {count: 7, index: 0},
-            {count: 5, index: 1},
-        ], {overwriteRoutes: true});
-
-        const speakerValue = document.getElementById('speaker-value');
-
-        updateLanguage(language);
-        flushPromises().then(() => {
-            expect(speakerValue.innerHTML).toEqual('7');
-            done();
-        });
+describe("updateHrsForSayAndListen", () => {
+  test("should updade 0 hrs in both say and listen component when there is empty aggregateDataCountByLanguage", (done) => {
+    const $say_p_3 = document.getElementById("say-p-3");
+    const $listen_p_3 = document.getElementById("listen-p-3");
+    mockLocalStorage();
+    localStorage.setItem("aggregateDataCountByLanguage", JSON.stringify([]));
+    fetchMock.get(`/aggregate-data-count?byLanguage=${true}`, { data: [] });
+    updateHrsForSayAndListen("Hindi");
+    flushPromises().then(() => {
+      expect($say_p_3.innerHTML).toEqual("0 hr recorded in Hindi");
+      expect($listen_p_3.innerHTML).toEqual("0 hr validated in Hindi");
+      fetchMock.reset();
+      localStorage.clear();
+      done();
     });
+  });
 });
 
-describe('Fetch Details', () => {
-    test('should give details for given language if server responds ok', () => {
-        const language = 'Hindi'
-        fetchMock.get(`getDetails/${language}`, {count: 5}, {overwriteRoutes: true});
-        fetchDetail(language).then((data) => {
-            expect(data).toEqual({count: 5});
-        });
-    });
-});
+describe("getDefaultTargettedDiv", () => {
+  test("should give div having same value in $sayListenLanguage", () => {
+    const $sayListenLanguage = $("#say-listen-language");
+    const actualDiv = $sayListenLanguage.children()[2];
+    const expectedDiv = getDefaultTargettedDiv(
+      "value",
+      "English",
+      $sayListenLanguage
+    );
+    expect(expectedDiv).toEqual(actualDiv);
+  });
 
-describe('calculateTime', () => {
-    test('should calculate time in hours,min and sec for given sentence count', () => {
-        expect(calculateTime(27)).toEqual({hours: 0, minutes: 2, seconds: 42});
-    });
-});
+  test("should give div having same id in $sayListenLanguage", () => {
+    const $sayListenLanguage = $("#say-listen-language");
+    const actualDiv = $sayListenLanguage.children()[1];
+    const expectedDiv = getDefaultTargettedDiv("id", "bn", $sayListenLanguage);
+    expect(expectedDiv).toEqual(actualDiv);
+  });
 
-describe('testUserName', () => {
-    test('should give true for given mobile number of 10-digits start from 6-9', () => {
-        expect(testUserName('9818181818')).toEqual(true);
-    });
-
-    test('should give false for given mobile number of less than 10-digits', () => {
-        expect(testUserName('981818181')).toEqual(false);
-    });
-
-    test('should give false for given mobile number of more than 10-digits', () => {
-        expect(testUserName('98181818188')).toEqual(false);
-    });
-
-    test('should give false for given mobile number of than 10-digits not start from 6-9', () => {
-        expect(testUserName('58181818188')).toEqual(false);
-    });
-
-    test('should give true for given emailId start with string followed by @<String>.<String>', () => {
-        expect(testUserName('abc@gmail.com')).toEqual(true);
-    });
-
-    test('should give true for given emailId with string followed by @<String>.<digits>', () => {
-        expect(testUserName('abc@gmail.123')).toEqual(true);
-    });
-
-    test('should give false for given emailId not having "@"', () => {
-        expect(testUserName('abcgmail.com')).toEqual(false);
-    });
-
-    test('should give false for given emailId not having "."', () => {
-        expect(testUserName('abc@gmailcom')).toEqual(false);
-    });
-});
-
-
-describe('validateUserName', () => {
-    test('should show username when username is valid', () => {
-        const $userName = $('#username');
-        $userName.val = () => "abc@gmail.com";
-        const $userNameError = $userName.next();
-        const $tncCheckbox = $('#tnc');
-        validateUserName($userName, $userNameError, $tncCheckbox);
-
-        expect($userName.hasClass('is-invalid')).toEqual(true);
-        expect($userNameError.hasClass('d-none')).toEqual(false);
-    });
-
-    test('should show error when username is not valid', () => {
-        const $userName = $('#username');
-        const $userNameError = $userName.next();
-        const $tncCheckbox = $('#tnc');
-        validateUserName($userName, $userNameError, $tncCheckbox);
-
-        expect($userName.hasClass('is-invalid')).toEqual(false);
-        expect($userNameError.hasClass('d-none')).toEqual(true);
-    });
-});
-
-describe('Reset Speaker Details', () => {
-    test('should reset all details from popup', () => {
-        const $username = $('#username');
-        const age = document.getElementById('age');
-        const motherTongue = document.getElementById('mother-tongue');
-        const gender = document.querySelectorAll(
-            'input[name = "gender"]'
-        );
-        age.selectedIndex = 1;
-        motherTongue.selectedIndex = 1;
-        gender[0].checked = true;
-        $username.val('testName')
-        resetSpeakerDetails();
-        const selectedGender = document.querySelector(
-            'input[name = "gender"]:checked'
-        );
-        expect($username.val()).toBe('')
-        expect(age.selectedIndex).toBe(0)
-        expect(motherTongue.selectedIndex).toBe(0)
-        expect(selectedGender).toBeNull()
-    })
+  test("should give 0th div when given id or value not found in $sayListenLanguage", () => {
+    const $sayListenLanguage = $("#say-listen-language");
+    const actualDiv = $sayListenLanguage.children()[0];
+    const expectedDiv = getDefaultTargettedDiv("id", "cd", $sayListenLanguage);
+    expect(expectedDiv).toEqual(actualDiv);
+  });
 });

@@ -1,21 +1,49 @@
-const {encrypt} = require('./encryptAndDecrypt');
+const { encrypt } = require('./encryptAndDecrypt');
+const { downloader } = require('./downloader/objDownloader')
+const moment = require('moment');
 const {
     UpdateAudioPathAndUserDetails,
     setNewUserAndFileName,
     unassignIncompleteSentences,
     updateAndGetSentencesQuery,
+    updateAndGetUniqueSentencesQuery,
+    getValidationSentencesQuery,
     sentencesCount,
     getCountOfTotalSpeakerAndRecordedAudio,
     getGenderData,
     getAgeGroupsData,
     getMotherTonguesData,
     unassignIncompleteSentencesWhenLanChange,
-    updateSentencesWithContributedState
+    updateSentencesWithContributedState,
+    addValidationQuery,
+    updateSentencesWithValidatedState
 } = require('./dbQuery');
-const {KIDS_AGE_GROUP, ADULT, KIDS} = require('./constants');
-const process = require('process');
+const {
+    topLanguagesBySpeakerContributions,
+    topLanguagesByHoursContributed,
+    cumulativeCount,
+    cumulativeDataByState,
+    cumulativeDataByLanguage,
+    cumulativeDataByLanguageAndState,
+    listLanguages,
+    dailyTimeline,
+    ageGroupContributions,
+    genderGroupContributions,
+    dailyTimelineCumulative,
+    weeklyTimeline,
+    weeklyTimelineCumulative,
+    monthlyTimeline,
+    monthlyTimelineCumulative,
+    quarterlyTimeline,
+    quarterlyTimelineCumulative,
+    lastUpdatedAtQuery
+} = require('./dashboardDbQueries');
+
+const { KIDS_AGE_GROUP, ADULT, KIDS } = require('./constants');
+
 const envVars = process.env;
 const pgp = require('pg-promise')();
+const showUniqueSentences = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION == 'true';
 
 let cn = {
     user: envVars.DB_USER,
@@ -39,6 +67,8 @@ const updateDbWithAudioPath = function (
     speakerDetails,
     userId,
     userName,
+    state,
+    country,
     cb
 ) {
     const speakerDetailsJson = JSON.parse(speakerDetails);
@@ -58,24 +88,26 @@ const updateDbWithAudioPath = function (
         motherTongue,
         sentenceId,
         encryptUserId,
-        userName
+        userName,
+        state,
+        country
     ])
         .then((data) => {
             db.none(updateSentencesWithContributedState, [sentenceId]).then();
             if (!data || !data.length) {
                 db.any(setNewUserAndFileName, [audioPath, encryptUserId, sentenceId])
-                    .then(() => cb(200, {success: true}))
+                    .then(() => cb(200, { success: true }))
                     .catch((err) => {
                         console.log(err);
-                        cb(500, {error: true});
+                        cb(500, { error: true });
                     });
             } else {
-                cb(200, {success: true});
+                cb(200, { success: true });
             }
         })
         .catch((err) => {
             console.log(err);
-            cb(500, {error: true});
+            cb(500, { error: true });
         });
 };
 
@@ -88,10 +120,17 @@ const getSentencesBasedOnAge = function (
     gender
 ) {
     let languageLabel = ADULT;
+    let query = updateAndGetSentencesQuery;
+
     if (ageGroup === KIDS_AGE_GROUP) {
         languageLabel = KIDS;
     }
-    return (db.many(updateAndGetSentencesQuery, [
+
+    if (showUniqueSentences) {
+        query = updateAndGetUniqueSentencesQuery
+    }
+
+    return (db.many(query, [
         encryptedUserId,
         userName,
         languageLabel,
@@ -109,7 +148,7 @@ const updateAndGetSentences = function (req, res) {
     const motherTongue = req.body.motherTongue;
     const gender = req.body.gender;
     if (!userId || userName === null || userName === undefined) {
-        res.status(400).send({error: 'required parameters missing'});
+        res.status(400).send({ error: 'required parameters missing' });
         return;
     }
     const ageGroup = req.body.age;
@@ -133,13 +172,72 @@ const updateAndGetSentences = function (req, res) {
     );
     Promise.all([sentences, count, unAssign, unAssignWhenLanChange])
         .then((response) => {
-            res.status(200).send({data: response[0], count: response[1].count});
+            res.status(200).send({ data: response[0], count: response[1].count });
         })
         .catch((err) => {
             console.log(err);
             res.sendStatus(500);
         });
 };
+
+const getValidationSentences = function (req, res) {
+    const language = req.params.language;
+    db.any(getValidationSentencesQuery, [language])
+        .then((response) => {
+            res.status(200).send({ data: response })
+        })
+        .catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+};
+
+const getAudioClip = async function (req, res, objectStorage) {
+    if (!(req.body && req.body.file)) {
+        res.status(400).send('No file selected.');
+        return;
+    }
+
+
+    const downloadFile = downloader(objectStorage);
+
+    try {
+        const file = await downloadFile(req.body.file);
+
+        if (file == null) {
+            res.sendStatus(404);
+        }
+        else {
+            const readStream = file.createReadStream();
+            readStream.pipe(res);
+        }
+    }
+    catch (err) {
+        res.sendStatus(500);
+    }
+
+
+}
+
+const updateTablesAfterValidation = function (req, res) {
+    const validatorId = req.cookies.userId;
+    const { sentenceId, action, contributionId } = req.body
+    return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId]).then(() => {
+        if (action !== 'skip')
+            db.none(updateSentencesWithValidatedState, [sentenceId]).then(() => {
+                res.sendStatus(200);
+            })
+                .catch((err) => {
+                    console.log(err);
+                    res.sendStatus(500);
+                });
+        else res.sendStatus(200);
+    })
+        .catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+}
 
 const getAllDetails = function (language) {
     return db.any(getCountOfTotalSpeakerAndRecordedAudio, [language]);
@@ -152,9 +250,111 @@ const getAllInfo = function (language) {
     return Promise.all([genderData, ageGroups, motherTongues]);
 };
 
+
+const getTopLanguageByHours = () => {
+    return db.any(topLanguagesByHoursContributed);
+};
+
+const getTopLanguageBySpeakers = () => {
+    return db.any(topLanguagesBySpeakerContributions);
+};
+
+const getAggregateDataCount = (language, state) => {
+    let query = "";
+    if (typeof language !== "boolean") {
+        language = language === 'true' ? true : false;
+    }
+
+    if (typeof state !== "boolean") {
+        state = state === 'true' ? true : false;
+    }
+    if (language && state && language === true && state === true) {
+        query = cumulativeDataByLanguageAndState;
+    } else if (language && language === true) {
+        query = cumulativeDataByLanguage;
+    } else if (state && state === true) {
+        query = cumulativeDataByState;
+    } else {
+        query = cumulativeCount;
+    }
+    return db.any(query);
+}
+
+const getLanguages = () => {
+    return db.any(listLanguages, []);
+}
+const normalTimeLineQueries = {
+    "weekly": weeklyTimeline,
+    "daily": dailyTimeline,
+    "monthly": monthlyTimeline,
+    "quarterly": quarterlyTimeline
+}
+
+const cumulativeTimeLineQueries = {
+    "weekly": weeklyTimelineCumulative,
+    "daily": dailyTimelineCumulative,
+    "monthly": monthlyTimelineCumulative,
+    "quarterly": quarterlyTimelineCumulative
+}
+const getTimeline = (language = "", timeframe) => {
+    timeframe = timeframe.toLowerCase();
+    if (language.length !== 0) {
+        languageFilter = `language iLike '${language}'`
+        let filter = pgp.as.format('$1:raw', [languageFilter])
+        let query = normalTimeLineQueries[timeframe] || weeklyTimeline;
+        return db.any(query, filter);
+    } else {
+        let query = cumulativeTimeLineQueries[timeframe] || weeklyTimelineCumulative;
+        return db.any(query, []);
+    }
+}
+
+const getGenderGroupData = (language = '') => {
+    let languageFilter = 'true';
+    if (language.length !== 0) {
+        languageFilter = `language iLike '${language}'`
+    }
+    let filter = pgp.as.format('$1:raw', [languageFilter])
+    console.log(filter);
+    return db.any(genderGroupContributions, filter);
+}
+
+const getAgeGroupData = (language = '') => {
+    let languageFilter = "true";
+    if (language.length !== 0) {
+        languageFilter = `language iLike '${language}'`
+    }
+    let filter = pgp.as.format('$1:raw', [languageFilter])
+    return db.any(ageGroupContributions, filter);
+}
+
+const getLastUpdatedAt = async () => {
+    const lastUpdatedAt = await db.one(lastUpdatedAtQuery, []);
+    let lastUpdatedDateTime = "";
+    if ("timezone" in lastUpdatedAt) {
+        try{
+            lastUpdatedDateTime = moment(lastUpdatedAt['timezone']).format('DD-MM-YYYY, h:mm:ss a');
+        }catch(err){
+            console.log(err);
+        }
+    }
+    return lastUpdatedDateTime;
+}
+
 module.exports = {
     updateAndGetSentences,
+    getValidationSentences,
     updateDbWithAudioPath,
+    updateTablesAfterValidation,
     getAllDetails,
     getAllInfo,
+    getAudioClip,
+    getTopLanguageByHours,
+    getAggregateDataCount,
+    getTopLanguageBySpeakers,
+    getLanguages,
+    getTimeline,
+    getAgeGroupData,
+    getGenderGroupData,
+    getLastUpdatedAt
 };
