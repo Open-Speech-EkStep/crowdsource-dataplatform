@@ -1,5 +1,5 @@
 const { updateGraph, calculateTime } = require('./draw-chart');
-const { testUserName, setStartRecordBtnToolTipContent } = require('./speakerDetails');
+const { testUserName, setStartRecordBtnToolTipContent, setSpeakerDetails } = require('./speakerDetails');
 const { toggleFooterPosition } = require('./utils');
 
 let timer;
@@ -177,6 +177,8 @@ $(document).ready(function () {
             $startRecordBtnTooltip.tooltip('enable');
         }
     });
+
+    setSpeakerDetails('speakerDetails', age, motherTongue, $userName);
 
     $startRecordBtn.on('click', () => {
         if ($tncCheckbox.prop('checked')) {
