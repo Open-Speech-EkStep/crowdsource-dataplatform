@@ -26,7 +26,6 @@ const getSpeakersData = (data, lang) => {
         validations: 0
     }
     if (!lang) {
-        console.log(data);
         speakersData.languages = parseInt(data[0].total_languages);
         speakersData.speakers = parseInt(data[0].total_speakers);
         speakersData.contributions = parseFloat(data[0].total_contributions);
