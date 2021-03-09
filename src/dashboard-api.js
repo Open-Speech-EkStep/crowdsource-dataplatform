@@ -1,5 +1,62 @@
 const { getLastUpdatedAt, getTopLanguageByHours, getTopLanguageBySpeakers, getAggregateDataCount, getLanguages, getTimeline, getGenderGroupData, getAgeGroupData } = require('./dbOperations');
 
+let isFieldsMentioned = (fieldsArray) => {
+    for (let key in fieldsArray) {
+        if (fieldsArray[key] !== null && fieldsArray[key] === 'true') {
+            return true
+        }
+    }
+    return false;
+}
+let verifyAndRemoveField = (resultObject, avoidUnMentioned) => {
+    let finalResultObject = { ...resultObject };
+    for (let key in resultObject) {
+        if ((avoidUnMentioned && resultObject[key] === null) || resultObject[key] === 'false') {
+            delete finalResultObject[key];
+        }
+    }
+    return finalResultObject;
+}
+
+let validateAndReturnRequiredStatsFields = (queryObject) => {
+    const topLanguageByHoursFlag = queryObject.topLanguageByHours || null;
+    const topLanguageBySpeakersFlag = queryObject.topLanguageBySpeakers || null;
+    const languageDataFlag = queryObject.languageData || null;
+    const aggregateDataByLanguageFlag = queryObject.aggregateDataByLanguage || null;
+    const aggregateDataByStateFlag = queryObject.aggregateDataByState || null;
+    const aggregateDataByStateAndLanguageFlag = queryObject.aggregateDataByStateAndLanguage || null;
+
+    let resultObject = {
+        'top_language_by_hours': topLanguageByHoursFlag,
+        'top_language_by_speakers': topLanguageBySpeakersFlag,
+        'languages': languageDataFlag,
+        'aggregate_data_by_state': aggregateDataByStateFlag,
+        'aggregate_data_by_language': aggregateDataByLanguageFlag,
+        'aggregate_data_by_state_and_language': aggregateDataByStateAndLanguageFlag
+    }
+
+    let avoidUnMentioned = isFieldsMentioned(resultObject);
+
+    return verifyAndRemoveField(resultObject, avoidUnMentioned);
+}
+
+let validateAndReturnRequiredStatsCategoryFields = (queryObject) => {
+    const ageLanguage = queryObject.ageLanguage || null;
+    const genderLanguage = queryObject.genderLanguage || null;
+    const timelineLanguage = queryObject.timelineLanguage || null;
+    const timeframe = queryObject.timeframe || null;
+    
+
+    let resultObject = {
+        
+    }
+
+    // let avoidUnMentioned = isFieldsMentioned(resultObject);
+
+    // return verifyAndRemoveField(resultObject, avoidUnMentioned);
+}
+
+
 const dashboardRoutes = (router) => {
 
     // Optional
@@ -49,49 +106,10 @@ const dashboardRoutes = (router) => {
         res.send({ "data": languagesData.map(data => data.language), last_updated_at: lastUpdatedDateTime });
     });
 
-    let checkValues = (fieldsArray) => {
-        for (let key in fieldsArray) {
-            if (fieldsArray[key] !== null && fieldsArray[key] === 'true') {
-                return true
-            }
-        }
-        return false;
-    }
-    let verifyAndRemoveField = (resultObject, avoidUnMentioned) => {
-        let finalResultObject = { ...resultObject };
-        for (let key in resultObject) {
-            if ((avoidUnMentioned && resultObject[key] === null) || resultObject[key] === 'false') {
-                delete finalResultObject[key];
-            }
-        }
-        return finalResultObject;
-    }
-
-    let validateAndReturn = (queryObject) => {
-        const topLanguageByHoursFlag = queryObject.topLanguageByHours || null;
-        const topLanguageBySpeakersFlag = queryObject.topLanguageBySpeakers || null;
-        const languageDataFlag = queryObject.languageData || null;
-        const aggregateDataByLanguageFlag = queryObject.aggregateDataByLanguage || null;
-        const aggregateDataByDateFlag = queryObject.aggregateDataByDate || null;
-        const aggregateDataByDateAndLanguageFlag = queryObject.aggregateDataByDateAndLanguage || null;
-
-        let resultObject = {
-            'top_language_by_hours': topLanguageByHoursFlag,
-            'top_language_by_speakers': topLanguageBySpeakersFlag,
-            'languages': languageDataFlag,
-            'aggregate_data_by_date': aggregateDataByDateFlag,
-            'aggregate_data_by_language': aggregateDataByLanguageFlag,
-            'aggregate_data_by_date_and_language': aggregateDataByDateAndLanguageFlag
-        }
-
-        let avoidUnMentioned = checkValues(resultObject);
-
-        return verifyAndRemoveField(resultObject, avoidUnMentioned);
-    }
-
+    
     router.get('/stats/summary', async (req, res) => {
 
-        const resultFields = Object.keys(validateAndReturn(req.query));
+        const resultFields = Object.keys(validateAndReturnRequiredStatsFields(req.query));
 
         let result = {};
         if (resultFields.includes('top_language_by_hours')) {
@@ -107,17 +125,17 @@ const dashboardRoutes = (router) => {
             languagesData = languagesData.map(data => data.language);
             result['languages'] = languagesData;
         }
-        if (resultFields.includes('aggregate_data_by_date')) {
+        if (resultFields.includes('aggregate_data_by_state')) {
             const aggregateDataByDate = await getAggregateDataCount(false, true);
-            result['aggregate_data_by_date'] = aggregateDataByDate;
+            result['aggregate_data_by_state'] = aggregateDataByDate;
         }
         if (resultFields.includes('aggregate_data_by_language')) {
             const aggregateDataByLanguage = await getAggregateDataCount(true, false);
             result['aggregate_data_by_language'] = aggregateDataByLanguage;
         }
-        if (resultFields.includes('aggregate_data_by_date_and_language')) {
+        if (resultFields.includes('aggregate_data_by_state_and_language')) {
             const aggregateDataByDateAndLanguage = await getAggregateDataCount(false, true);
-            result['aggregate_data_by_date_and_language'] = aggregateDataByDateAndLanguage;
+            result['aggregate_data_by_state_and_language'] = aggregateDataByDateAndLanguage;
         }
         const lastUpdatedDateTime = await getLastUpdatedAt();
         result['last_updated_at'] = lastUpdatedDateTime;
@@ -126,6 +144,37 @@ const dashboardRoutes = (router) => {
 
     router.get('/stats/categories', async (req, res) => {
 
+        // let result = {};
+
+        // const allowedTimeFrames = ['weekly', 'monthly', 'daily', 'quarterly'];
+
+        // if (!allowedTimeFrames.includes(timeframe.toLowerCase())) {
+        //     res.status(400).send("Timeframe mentioned is invalid");
+        //     return;
+        // }
+
+        // const ageGroupData = await getAgeGroupData(language);
+        // const genderGroupData = await getGenderGroupData(language);
+
+        // const timelineData = await getTimeline(language, timeframe);
+        // let hoursContributed = 0, hoursValidated = 0;
+
+        // if (timelineData.length !== 0) {
+        //     hoursContributed = timelineData[timelineData.length - 1]['cumulative_contributions'] || 0;
+        //     hoursValidated = timelineData[timelineData.length - 1]['cumulative_validations'] || 0;
+        // }
+        // // {
+        // //     'total-hours-contributed': hoursContributed,
+        // //     'total-hours-validated': hoursValidated,
+        // //     "data": timelineData,
+        // //     last_updated_at: lastUpdatedDateTime
+        // // }
+
+
+        // const lastUpdatedDateTime = await getLastUpdatedAt();
+        // result['last_updated_at'] = lastUpdatedDateTime;
+        
+        // res.send(result);
     });
 
     router.get('/contributions/age', async (req, res) => {
