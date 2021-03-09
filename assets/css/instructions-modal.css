@@ -177,10 +177,6 @@ audio {
 .font-wt-900 {
     font-weight: 900;
 }
-#time-progress {
-    right: 1rem;
-    bottom: 2.8rem;
-}
 .h-1r {
     height: 1rem;
 }
