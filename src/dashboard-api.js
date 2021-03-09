@@ -32,6 +32,7 @@ const dashboardRoutes = (router) => {
         }
     });
 
+    //Optional
     router.get('/aggregate-data-count', async (req, res) => {
         const byLanguage = req.query.byLanguage || false;
         const byState = req.query.byState || false;
@@ -41,33 +42,90 @@ const dashboardRoutes = (router) => {
         res.send({ "data": aggregateData, last_updated_at: lastUpdatedDateTime });
     });
 
+    //Optional
     router.get('/languages', async (req, res) => {
         const languagesData = await getLanguages();
         const lastUpdatedDateTime = await getLastUpdatedAt();
         res.send({ "data": languagesData.map(data => data.language), last_updated_at: lastUpdatedDateTime });
     });
 
-    router.get('/stats', async (req, res) => {
-        const topLanguagesByHours = await getTopLanguageByHours();
-        const topLanguagesBySpeakers = await getTopLanguageBySpeakers();
+    let checkValues = (fieldsArray) => {
+        for (let key in fieldsArray) {
+            if (fieldsArray[key] !== null && fieldsArray[key] === 'true') {
+                return true
+            }
+        }
+        return false;
+    }
+    let verifyAndRemoveField = (resultObject, avoidUnMentioned) => {
+        let finalResultObject = { ...resultObject };
+        for (let key in resultObject) {
+            if ((avoidUnMentioned && resultObject[key] === null) || resultObject[key] === 'false') {
+                delete finalResultObject[key];
+            }
+        }
+        return finalResultObject;
+    }
+
+    let validateAndReturn = (queryObject) => {
+        const topLanguageByHoursFlag = queryObject.topLanguageByHours || null;
+        const topLanguageBySpeakersFlag = queryObject.topLanguageBySpeakers || null;
+        const languageDataFlag = queryObject.languageData || null;
+        const aggregateDataByLanguageFlag = queryObject.aggregateDataByLanguage || null;
+        const aggregateDataByDateFlag = queryObject.aggregateDataByDate || null;
+        const aggregateDataByDateAndLanguageFlag = queryObject.aggregateDataByDateAndLanguage || null;
+
+        let resultObject = {
+            'top_language_by_hours': topLanguageByHoursFlag,
+            'top_language_by_speakers': topLanguageBySpeakersFlag,
+            'languages': languageDataFlag,
+            'aggregate_data_by_date': aggregateDataByDateFlag,
+            'aggregate_data_by_language': aggregateDataByLanguageFlag,
+            'aggregate_data_by_date_and_language': aggregateDataByDateAndLanguageFlag
+        }
+
+        let avoidUnMentioned = checkValues(resultObject);
+
+        return verifyAndRemoveField(resultObject, avoidUnMentioned);
+    }
+
+    router.get('/stats/summary', async (req, res) => {
+
+        const resultFields = Object.keys(validateAndReturn(req.query));
+
+        let result = {};
+        if (resultFields.includes('top_language_by_hours')) {
+            const topLanguagesByHours = await getTopLanguageByHours();
+            result['top_languages_by_hours'] = topLanguagesByHours;
+        }
+        if (resultFields.includes('top_language_by_speakers')) {
+            const topLanguagesBySpeakers = await getTopLanguageBySpeakers();
+            result['top_languages_by_speakers'] = topLanguagesBySpeakers;
+        }
+        if (resultFields.includes('languages')) {
+            let languagesData = await getLanguages();
+            languagesData = languagesData.map(data => data.language);
+            result['languages'] = languagesData;
+        }
+        if (resultFields.includes('aggregate_data_by_date')) {
+            const aggregateDataByDate = await getAggregateDataCount(false, true);
+            result['aggregate_data_by_date'] = aggregateDataByDate;
+        }
+        if (resultFields.includes('aggregate_data_by_language')) {
+            const aggregateDataByLanguage = await getAggregateDataCount(true, false);
+            result['aggregate_data_by_language'] = aggregateDataByLanguage;
+        }
+        if (resultFields.includes('aggregate_data_by_date_and_language')) {
+            const aggregateDataByDateAndLanguage = await getAggregateDataCount(false, true);
+            result['aggregate_data_by_date_and_language'] = aggregateDataByDateAndLanguage;
+        }
         const lastUpdatedDateTime = await getLastUpdatedAt();
-        const languagesData = await getLanguages();
+        result['last_updated_at'] = lastUpdatedDateTime;
+        res.send(result);
+    });
 
-        let aggregateDataByLanguage = await getAggregateDataCount(true, false);
-        let aggregateDataByDate = await getAggregateDataCount(false, true);
-        let aggregateDataByDateAndLanguage = await getAggregateDataCount(false, true);
+    router.get('/stats/categories', async (req, res) => {
 
-        res.send({
-            "data": {
-                "top_languages_by_hours": topLanguagesByHours,
-                "top_languages_by_speakers": topLanguagesBySpeakers,
-                "languages": languagesData,
-                "aggregate_data_by_language": aggregateDataByLanguage,
-                "aggregate_data_by_date": aggregateDataByDate,
-                "aggregate_data_by_date_and_language": aggregateDataByDateAndLanguage,
-            },
-            "last_updated_at": lastUpdatedDateTime
-        });
     });
 
     router.get('/contributions/age', async (req, res) => {
@@ -88,6 +146,7 @@ const dashboardRoutes = (router) => {
 
     router.get('/timeline', async (req, res) => {
         const allowedTimeFrames = ['weekly', 'monthly', 'daily', 'quarterly'];
+
         const language = req.query.language || '';
         const timeframe = req.query.timeframe || 'weekly';
 
