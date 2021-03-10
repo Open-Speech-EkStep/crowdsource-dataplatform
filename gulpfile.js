@@ -9,7 +9,7 @@ gulp.task('html', function () {
     .src(['views/**'])
     .pipe(
       htmlmin({
-        collapseWhitespace: true,
+        collapseWhitespace: false,
         removeComments: true,
         minifyCSS: true,
         minifyJS: true,
