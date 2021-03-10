@@ -198,7 +198,6 @@ const getAudioClip = async function (req, res, objectStorage) {
         return;
     }
 
-
     const downloadFile = downloader(objectStorage);
 
     try {
@@ -215,8 +214,6 @@ const getAudioClip = async function (req, res, objectStorage) {
     catch (err) {
         res.sendStatus(500);
     }
-
-
 }
 
 const updateTablesAfterValidation = function (req, res) {
@@ -264,7 +261,6 @@ const getAggregateDataCount = (language, state) => {
     if (typeof language !== "boolean") {
         language = language === 'true' ? true : false;
     }
-
     if (typeof state !== "boolean") {
         state = state === 'true' ? true : false;
     }
@@ -296,6 +292,7 @@ const cumulativeTimeLineQueries = {
     "monthly": monthlyTimelineCumulative,
     "quarterly": quarterlyTimelineCumulative
 }
+
 const getTimeline = (language = "", timeframe) => {
     timeframe = timeframe.toLowerCase();
     if (language.length !== 0) {
@@ -332,9 +329,9 @@ const getLastUpdatedAt = async () => {
     const lastUpdatedAt = await db.one(lastUpdatedAtQuery, []);
     let lastUpdatedDateTime = "";
     if ("timezone" in lastUpdatedAt) {
-        try{
+        try {
             lastUpdatedDateTime = moment(lastUpdatedAt['timezone']).format('DD-MM-YYYY, h:mm:ss a');
-        }catch(err){
+        } catch (err) {
             console.log(err);
         }
     }
