@@ -131,7 +131,5 @@
 	"Username cannot be more than 12 characters": "യൂസർനെയിമിൽ 12 പ്രതീകങ്ങളിൽ കൂടുതൽ പാടില്ല",
 	"EkStep Foundation": "ഏക്സ്റ്റെപ്പ് ഫൗണ്ടേഷൻ",
 	"hrs recorded in": "%language ഭാഷയിൽ %hours എണ്ണം റെക്കോർഡ് ചെയ്തിട്ടുണ്ട്",
-	"hrs validated in": "%language ഭാഷയിൽ %hours എണ്ണം സാധൂകരിച്ചിട്ടുണ്ട്",
-	"For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices.Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.": "For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices.Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.",
-	"The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group.The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.": "The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group.The magnitude of this diversity across the nation, gives us collective strength in empowering our languages."
+	"hrs validated in": "%language ഭാഷയിൽ %hours എണ്ണം സാധൂകരിച്ചിട്ടുണ്ട്"
 }
