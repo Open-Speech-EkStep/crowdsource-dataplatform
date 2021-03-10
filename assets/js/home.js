@@ -12,7 +12,7 @@ const {
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
 const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
-
+const LOCALE_STRINGS = 'localeString';
 const ALL_LANGUAGES = [
     {value: "Assamese",id: "as", text: "অসমীয়া"},
     {value: "Bengali", id: "bn", text: "বাংলা"},
@@ -37,6 +37,17 @@ const performAPIRequest = (url) => {
     });
 }
 
+const updateLocaleLanguagesDropdown = (language) => {
+    const dropDown = $('#localisation_dropdown');
+    if(language.toLowerCase() === "english") {
+        dropDown.html('<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>');
+    } else {
+        const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+        dropDown.html(`<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="/changeLocale/${localeLang.id}">${localeLang.text}</a>`);
+    }
+}
+
 function updateHrsForSayAndListen(language) {
     const $sayLoader = $('#say-loader');
     const $listenLoader = $('#listen-loader');
@@ -49,7 +60,11 @@ function updateHrsForSayAndListen(language) {
     const totalInfo = aggregateDetails && aggregateDetails.find((element) => element.language === language);
     if (totalInfo) {
         const {total_contributions, total_validations} = totalInfo;
-        total_contributions && $say_p_3.text(`${total_contributions} hrs recorded in ${language}`);
+        const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+        let localeValue = localeStrings['hrs recorded in'];
+        localeValue = localeValue.replace("%hours", total_contributions);
+        localeValue = localeValue.replace("%language", language);
+        total_contributions && $say_p_3.text(localeValue);
         total_validations && $listen_p_3.text(`${total_validations} hrs validated in ${language}`);
     } else {
         $say_p_3.text(`0 hr recorded in ${language}`);
@@ -57,6 +72,7 @@ function updateHrsForSayAndListen(language) {
     }
     $sayLoader.addClass('d-none');
     $listenLoader.addClass('d-none');
+    updateLocaleLanguagesDropdown(language);
 }
 
 const getDefaultTargettedDiv = function (key, value, $sayListenLanguage) {
@@ -138,6 +154,7 @@ const clearLocalStroage = function() {
     localStorage.removeItem(TOP_LANGUAGES_BY_HOURS);
     localStorage.removeItem(TOP_LANGUAGES_BY_SPEAKERS);
     localStorage.removeItem(AGGREGATED_DATA_BY_LANGUAGE);
+    localStorage.removeItem(LOCALE_STRINGS);
 }
 
 const getStatsSummary = function () {
@@ -153,8 +170,16 @@ const getStatsSummary = function () {
     });
 }
 
+const getLocaleString = function() {
+    performAPIRequest('/get-locale-strings')
+        .then((response) => {
+            localStorage.setItem(LOCALE_STRINGS, JSON.stringify(response));
+        });
+}
+
 $(document).ready(function () {
     clearLocalStroage();
+    getLocaleString();
     const speakerDetailsKey = 'speakerDetails';
     const defaultLang = 'Odia';
     const $startRecordBtn = $('#proceed-box');
