@@ -166,5 +166,8 @@
 	"The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group.The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.": "The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group.The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.",
 	"Ensure the voice is <b>clear and audible</b>": "Ensure the voice is <b>clear and audible</b>",
 	"Match the voice to the text <b>accurately</b>": "Match the voice to the text <b>accurately</b>",
-	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample"
+	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample",
+	"Incorrect": "Incorrect",
+	"Correct": "Correct",
+	"Skip": "Skip"
 }
