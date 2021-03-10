@@ -57,6 +57,9 @@ const AGE_GROUP = [
   '> 75',
 ];
 const GENDER = ['', 'male', 'female', 'others'];
+const AUDIO_DURATION = 6;
+const SIXTY = 60;
+const HOUR_IN_SECONDS = 3600;
 
 module.exports = {
   MAX_SIZE,
@@ -72,6 +75,7 @@ module.exports = {
   MAX_LENGTH,
   AGE_GROUP,
   GENDER,
+  AUDIO_DURATION,
+  SIXTY,
+  HOUR_IN_SECONDS
 };
-
-

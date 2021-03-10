@@ -212,7 +212,26 @@ router.get('/location-info', (req, res) => {
   }).catch(err => {
     res.sendStatus(500);
   })
-})
+});
+
+app.get('/get-locale-strings', function (req, res) {
+  const cookies = req.headers.cookie.split("; ");
+  const cookie = cookies.find(cookie => cookie.toLowerCase().startsWith("i18n"));
+  const cookieName = cookie.split("=").pop();
+  fs.readFile(`${__dirname}/../locales/${cookieName}.json`, (err, body) => {
+    if(err) {
+      return res.sendStatus(500);
+    }
+    const data = JSON.parse(body);
+    const list = ['hrs recorded in'];
+    
+    const langSttr = {};
+    list.forEach((key) => {
+      langSttr[key] = data[key];
+    });
+    res.send(langSttr);
+  });
+});
 
 require('./dashboard-api')(router);
 
