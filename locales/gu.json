@@ -151,5 +151,6 @@
 	"We have recently commenced the data contribution journey for <span id=\"spn-validation-language\"></span> language and hope that very soon there will be voice samples collected for your validation.": "અમે <span id=\"spn-validation-language\"></span> ભાષા માટે તાજેતરમાં જ ડેટાનો ફાળો શરૂ કર્યો છે અને આશા રાખીએ છીએ કે જલદી જ વોઇસ સેમ્પલ્સ ભેગા કરવામાં આવશે",
 	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "તમે અમને <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> સેકંડ માન્ય કરવામાં સહાય કરી છે",
 	"EkStep Foundation": "EkStep ફાઉન્ડેશન",
-	"hrs recorded in": "%hours घंटे %language में रिकॉर्ड हुए"
+	"hrs recorded in": "%language માં %hours અવાજો રેકોર્ડ કર્યા",
+	"hrs validated in": "%language માં %hours અવાજો રેકોર્ડ કર્યા"
 }
