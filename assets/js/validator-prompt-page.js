@@ -1,7 +1,7 @@
 const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
 const { setPageContentHeight, toggleFooterPosition } = require('./utils');
-const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('../../src/constants');
+const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('./constants');
 
 const visualizer = new Visualizer();
 
