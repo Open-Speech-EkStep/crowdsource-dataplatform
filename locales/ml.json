@@ -129,5 +129,6 @@
 	"Match the voice to the text <b>accurately</b>": "Match the voice to the text <b>accurately</b>",
 	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample",
 	"Username cannot be more than 12 characters": "യൂസർനെയിമിൽ 12 പ്രതീകങ്ങളിൽ കൂടുതൽ പാടില്ല",
-	"EkStep Foundation": "ഏക്സ്റ്റെപ്പ് ഫൗണ്ടേഷൻ"
+	"EkStep Foundation": "ഏക്സ്റ്റെപ്പ് ഫൗണ്ടേഷൻ",
+	"hrs recorded in": "%hours घंटे %language में रिकॉर्ड हुए"
 }
