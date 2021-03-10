@@ -9,6 +9,8 @@ const {
     setStartRecordBtnToolTipContent
 } = require('./speakerDetails');
 
+const {DEFAULT_CON_LANGUAGE} = require('./constants');
+
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
 const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
@@ -186,7 +188,6 @@ $(document).ready(function () {
     clearLocalStroage();
     getLocaleString();
     const speakerDetailsKey = 'speakerDetails';
-    const defaultLang = 'Odia';
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
     const genderRadios = document.querySelectorAll('input[name = "gender"]');
@@ -195,7 +196,7 @@ $(document).ready(function () {
     const $userName = $('#username');
     const $userNameError = $userName.next();
     const $tncCheckbox = $('#tnc');
-    let sentenceLanguage = defaultLang;
+    let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
     $tncCheckbox.prop('checked', false);
 
@@ -277,7 +278,7 @@ $(document).ready(function () {
             const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
             const genderValue = checkedGender.length ? checkedGender[0].value : '';
             const userNameValue = $userName.val().trim().substring(0, 12);
-            if (sentenceLanguage === 'English') sentenceLanguage = 'Odia';
+            if (sentenceLanguage === 'English') sentenceLanguage = DEFAULT_CON_LANGUAGE;
             if (testUserName(userNameValue)) {
                 return;
             }

@@ -2,6 +2,8 @@ const { updateGraph, calculateTime } = require('./draw-chart');
 const { testUserName, setStartRecordBtnToolTipContent, setSpeakerDetails } = require('./speakerDetails');
 const { toggleFooterPosition } = require('./utils');
 
+const {DEFAULT_CON_LANGUAGE} = require('./constants');
+
 let timer;
 let languageToRecord = '';
 
@@ -185,7 +187,7 @@ $(document).ready(function () {
             const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
             const genderValue = checkedGender.length ? checkedGender[0].value : '';
             const userNameValue = $userName.val().trim().substring(0, 12);
-            if (languageToRecord === 'English') languageToRecord = 'Odia';
+            if (languageToRecord === 'English') languageToRecord = DEFAULT_CON_LANGUAGE;
             if (testUserName(userNameValue)) {
                 return;
             }

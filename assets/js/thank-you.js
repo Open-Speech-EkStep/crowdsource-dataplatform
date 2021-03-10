@@ -1,4 +1,4 @@
-const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('../../src/constants');
+const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('./constants');
 const { setPageContentHeight, toggleFooterPosition } = require('./utils')
 
 const currentIndexKey = 'currentIndex';

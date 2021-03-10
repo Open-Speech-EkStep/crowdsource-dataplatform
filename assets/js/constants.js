@@ -1,0 +1,11 @@
+const DEFAULT_CON_LANGUAGE = "Hindi";
+const AUDIO_DURATION = 6;
+const SIXTY = 60;
+const HOUR_IN_SECONDS = 3600;
+
+module.exports = {
+    DEFAULT_CON_LANGUAGE,
+    AUDIO_DURATION,
+    SIXTY,
+    HOUR_IN_SECONDS
+}
