@@ -138,7 +138,6 @@ $(document).ready(function () {
     const age = document.getElementById('age');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem('contributionLanguage');
-    console.log('contributionLanguage', contributionLanguage);
     updateLocaleLanguagesDropdown(contributionLanguage);
 
     $('#language').on('change', (e) => {

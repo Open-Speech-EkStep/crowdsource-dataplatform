@@ -179,7 +179,6 @@ if (!(localSpeakerDataParsed)) {
 $(document).ready(function () {
     toggleFooterPosition();
     const contributionLanguage = localStorage.getItem('contributionLanguage');
-    console.log('contributionLanguage', contributionLanguage);
     updateLocaleLanguagesDropdown(contributionLanguage);
 });
 
