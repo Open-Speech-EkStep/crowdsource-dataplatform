@@ -58,7 +58,7 @@ const updateLocaleText = function (total_contributions, total_validations, langu
     $say_p_3.text(hrsRecordedIn);
     
     let hrsValidatedIn = localeStrings['hrs validated in'];
-    hrsValidatedIn = hrsValidatedIn.replace("%hours", total_contributions);
+    hrsValidatedIn = hrsValidatedIn.replace("%hours", total_validations);
     hrsValidatedIn = hrsValidatedIn.replace("%language", language);
     $listen_p_3.text(hrsValidatedIn);
 }
