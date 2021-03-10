@@ -146,5 +146,6 @@
 	"Gender Contribution": "ଲିଙ୍ଗ ଅବଦାନ",
 	"State Wise distribution": "ରାଜ୍ୟ ୱାରି ଆବଣ୍ଟନ",
 	"Age Group Distribution": "ବୟସ ବର୍ଗ ଆବଣ୍ଟନ",
-	"hrs recorded in": "%hours घंटे %language में रिकॉर्ड हुए"
+	"hrs recorded in": "%language ରେ %hours ଘଣ୍ଟା ରେକର୍ଡ଼ ହୋଇଛି",
+	"hrs validated in": "%language ରେ %hours ଘଣ୍ଟା ବୈଧ ହୋଇଛି"
 }

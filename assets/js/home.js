@@ -48,27 +48,32 @@ const updateLocaleLanguagesDropdown = (language) => {
     }
 }
 
+const updateLocaleText = function (total_contributions, total_validations, language) {
+    const $say_p_3 = $("#say-p-3");
+    const $listen_p_3 = $("#listen-p-3");
+    const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+    let hrsRecordedIn = localeStrings['hrs recorded in'];
+    hrsRecordedIn = hrsRecordedIn.replace("%hours", total_contributions);
+    hrsRecordedIn = hrsRecordedIn.replace("%language", language);
+    $say_p_3.text(hrsRecordedIn);
+    
+    let hrsValidatedIn = localeStrings['hrs validated in'];
+    hrsValidatedIn = hrsValidatedIn.replace("%hours", total_contributions);
+    hrsValidatedIn = hrsValidatedIn.replace("%language", language);
+    $listen_p_3.text(hrsValidatedIn);
+}
+
 function updateHrsForSayAndListen(language) {
     const $sayLoader = $('#say-loader');
     const $listenLoader = $('#listen-loader');
     $sayLoader.removeClass('d-none');
     $listenLoader.removeClass('d-none');
-    const $say_p_3 = $("#say-p-3");
-    const $listen_p_3 = $("#listen-p-3");
-    const stringifyData = localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE);
-    const aggregateDetails = JSON.parse(stringifyData);
+    const aggregateDetails = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE));
     const totalInfo = aggregateDetails && aggregateDetails.find((element) => element.language === language);
     if (totalInfo) {
-        const {total_contributions, total_validations} = totalInfo;
-        const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-        let localeValue = localeStrings['hrs recorded in'];
-        localeValue = localeValue.replace("%hours", total_contributions);
-        localeValue = localeValue.replace("%language", language);
-        total_contributions && $say_p_3.text(localeValue);
-        total_validations && $listen_p_3.text(`${total_validations} hrs validated in ${language}`);
+        updateLocaleText(totalInfo.total_contributions, totalInfo.total_validations, language);
     } else {
-        $say_p_3.text(`0 hr recorded in ${language}`);
-        $listen_p_3.text(`0 hr validated in ${language}`);
+        updateLocaleText(0, 0, language);
     }
     $sayLoader.addClass('d-none');
     $listenLoader.addClass('d-none');
