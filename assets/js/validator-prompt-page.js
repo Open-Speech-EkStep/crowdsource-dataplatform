@@ -1,6 +1,7 @@
-const {showInstructions} = require('./validator-instructions')
+const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
-const {setPageContentHeight, toggleFooterPosition} = require('./utils')
+const { setPageContentHeight, toggleFooterPosition } = require('./utils');
+const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('../../src/constants');
 
 const visualizer = new Visualizer();
 
@@ -263,15 +264,15 @@ function addListeners() {
     const $skipButton = $('#skip_button');
 
     likeButton.hover(() => {
-            updateDecisionButton(likeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-        },
+        updateDecisionButton(likeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
+    },
         () => {
             updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
         });
 
     dislikeButton.hover(() => {
-            updateDecisionButton(dislikeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-        },
+        updateDecisionButton(dislikeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
+    },
         () => {
             updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
         });
@@ -307,20 +308,20 @@ function addListeners() {
         $skipButton.css('border-color', '#bfddf5');
     }, () => {
         $skipButton.removeAttr('style');
-    },)
+    })
 
     $skipButton.mousedown(() => {
         $skipButton.css('background-color', '#bfddf5')
     })
 }
 
-let validationSentences = [{sentence: ''}]
+let validationSentences = [{ sentence: '' }]
 
 const loadAudio = function (audioLink) {
     $('#my-audio').attr('src', audioLink)
 };
 
-function disableSkipButton(){
+function disableSkipButton() {
     const $skipButton = $('#skip_button');
     $skipButton.removeAttr('style');
     disableButton($skipButton)
@@ -339,7 +340,7 @@ const getAudioClip = function (audioPath) {
         }
     }).then((stream) => {
         stream.arrayBuffer().then((buffer) => {
-            const blob = new Blob([buffer], {type: "audio/wav"});
+            const blob = new Blob([buffer], { type: "audio/wav" });
             // loadAudio(URL.createObjectURL(blob))
             const fileReader = new FileReader();
             fileReader.onload = function (e) {
@@ -380,8 +381,8 @@ function showThankYou() {
     let totalSentences = 0;
     // let totalValidations = 0;
     if (totalInfo) {
-        totalSentences = Math.floor(Number(totalInfo.total_contributions) * 3600 / 6);
-        // totalValidations = Math.floor(Number(totalInfo.total_validations) * 3600 / 6);
+        totalSentences = Math.floor(Number(totalInfo.total_contributions) * HOUR_IN_SECONDS / AUDIO_DURATION);
+        // totalValidations = Math.floor(Number(totalInfo.total_validations) * HOUR_IN_SECONDS / AUDIO_DURATION);
         $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
         $('#spn-total-hr-validated').html(totalInfo.total_validations);
     } else {
@@ -416,25 +417,25 @@ $(document).ready(() => {
                 return data.json();
             }
         }).then((sentenceData) => {
-        if (sentenceData.data.length === 0) {
-            showNoSentencesMessage();
-            return;
-        }
-        validationSentences = sentenceData.data
-        const sentence = validationSentences[currentIndex];
-        if (sentence) {
-            getAudioClip(sentence.audio_path);
-            setSentenceLabel(currentIndex);
-            updateValidationCount();
-            resetValidation();
-            addListeners();
-            setAudioPlayer();
-            const $canvas = document.getElementById('myCanvas');
-            visualizer.drawCanvasLine($canvas);
-        }
-    }).catch((err) => {
-        console.log(err)
-    });
+            if (sentenceData.data.length === 0) {
+                showNoSentencesMessage();
+                return;
+            }
+            validationSentences = sentenceData.data
+            const sentence = validationSentences[currentIndex];
+            if (sentence) {
+                getAudioClip(sentence.audio_path);
+                setSentenceLabel(currentIndex);
+                updateValidationCount();
+                resetValidation();
+                addListeners();
+                setAudioPlayer();
+                const $canvas = document.getElementById('myCanvas');
+                visualizer.drawCanvasLine($canvas);
+            }
+        }).catch((err) => {
+            console.log(err)
+        });
 });
 
 module.exports = {
