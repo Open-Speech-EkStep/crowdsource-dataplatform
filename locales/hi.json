@@ -124,5 +124,8 @@
 	"Username cannot be more than 12 characters": "यूज़रनेम 12 कैरेक्चर से अधिक नहीं हो सकता",
 	"EkStep Foundation": "एकस्टेप संगठन",
 	"min": "मिनट",
-	"hrs recorded in": "%s घंटे %s में रिकॉर्ड हुए"
+	"hrs recorded in": "%s घंटे %s में रिकॉर्ड हुए",
+	"Ensure the voice is <b>clear and audible</b>": "Ensure the voice is <b>clear and audible</b>",
+	"Match the voice to the text <b>accurately</b>": "Match the voice to the text <b>accurately</b>",
+	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample"
 }
