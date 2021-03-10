@@ -143,5 +143,10 @@
 	"Looks like you have taken a wrong turn here": "ਲੱਗਦਾ ਹੈ ਕਿ ਤੁਸੀਂ ਕਿਸੇ ਗਲਤ ਥਾਂ 'ਤੇ ਆ ਗਏ ਹੋ",
 	"Click Here": "ਕਲਿਕ ਕਰੋ",
 	"to go back to home page": "ਹੋਮ ਪੇਜ ਤੇ ਵਾਪਸ ਜਾਣ ਲਈ ਇੱਥੇ",
-	"hrs recorded in": "%hours घंटे %language में रिकॉर्ड हुए"
+	"hrs recorded in": "%language ਭਾਸ਼ਾ ਵਿੱਚ %hours ਘੰਟੇ ਰਿਕਾਰਡ ਕੀਤੇ ਗਏ",
+	"hrs validated in": "%language ਭਾਸ਼ਾ ਵਿੱਚ %hours ਘੰਟੇ ਪ੍ਰਮਾਣਿਤ ਕੀਤੇ ਗਏ",
+	"For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices.Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.": "For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices.Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.",
+	"The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group.The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.": "The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group.The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.",
+	"Not You ? Change User": "Not You ? Change User",
+	"I have read and agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions < /a>": "I have read and agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions < /a>"
 }
