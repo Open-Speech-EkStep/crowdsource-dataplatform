@@ -1,4 +1,5 @@
-const {setPageContentHeight, toggleFooterPosition} = require('./utils')
+const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('../../src/constants');
+const { setPageContentHeight, toggleFooterPosition } = require('./utils')
 
 const currentIndexKey = 'currentIndex';
 const speakerDetailsKey = 'speakerDetails';
@@ -10,8 +11,8 @@ const $footer = $('footer');
 
 const setUserContribution = (totalSecondsContributed) => {
     const $userContribution = $('#user-contribution');
-    const minutes = Math.floor(totalSecondsContributed / 60);
-    const seconds = totalSecondsContributed % 60;
+    const minutes = Math.floor(totalSecondsContributed / SIXTY);
+    const seconds = totalSecondsContributed % SIXTY;
     const finalText =
         (minutes > 0 ? `${minutes} minute ` : '') +
         (seconds > 0 ? `${seconds} seconds ` : minutes > 0 ? '' : '0 second');
@@ -21,7 +22,7 @@ const setUserContribution = (totalSecondsContributed) => {
 function getTotalSecondsContributed() {
     const skipCountInStorage = Number(localStorage.getItem('skipCount'));
     const localCount = Number(localStorage.getItem('count'));
-    return (localCount + currentIndexInStorage - skipCountInStorage) * 6;
+    return (localCount + currentIndexInStorage - skipCountInStorage) * AUDIO_DURATION;
 }
 
 if (!(localSpeakerDataParsed)) {
@@ -32,7 +33,7 @@ if (!(localSpeakerDataParsed)) {
     const breakPointForSmallScreen = 576;
     const breakPointForLargeScreen = 1200;
     const breakPointForExtraLargeScreen = 2000;
-    const secondsInTenThousandHours = 10000 * 3600;
+    const secondsInTenThousandHours = 10000 * HOUR_IN_SECONDS;
     $('#nav-user').removeClass('d-none');
     $('#nav-login').addClass('d-none');
     $('#nav-username').text(localSpeakerDataParsed.userName);
@@ -114,14 +115,14 @@ if (!(localSpeakerDataParsed)) {
     };
     const showSpeakersHoursData = (speakerDetailsValue) => {
         try {
-            const totalComplateSentence = Number(
+            const totalCompleteSentence = Number(
                 speakerDetailsValue.find((t) => t.index === 1).count
             );
-            const totalSeconds = totalComplateSentence * 6;
-            const hours = Math.floor(totalSeconds / 3600);
-            const remainingAfterHours = totalSeconds % 3600;
-            const minutes = Math.floor(remainingAfterHours / 60);
-            const seconds = remainingAfterHours % 60;
+            const totalSeconds = totalCompleteSentence * AUDIO_DURATION;
+            const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
+            const remainingAfterHours = totalSeconds % HOUR_IN_SECONDS;
+            const minutes = Math.floor(remainingAfterHours / SIXTY);
+            const seconds = remainingAfterHours % SIXTY;
             $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
             setTotalProgressBar(totalSeconds);
         } catch (err) {
@@ -177,4 +178,4 @@ if (!(localSpeakerDataParsed)) {
 
 $(document).ready(toggleFooterPosition);
 
-module.exports = {setUserContribution, getTotalSecondsContributed};
+module.exports = { setUserContribution, getTotalSecondsContributed };
