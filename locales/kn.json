@@ -134,5 +134,10 @@
 	"Click Here": "ಇಲ್ಲಿ ಅನ್ನು ಒತ್ತಿ",
 	"to go back to home page": "ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಲು",
 	"hrs recorded in": "%hours ಗಂಟೆಗಳನ್ನು %language ನಲ್ಲಿ ದಾಖಲಿಸಲಾಗಿದೆ",
-	"hrs validated in": "%hours ಗಂಟೆಗಳ %language ನಲ್ಲಿ ಮೌಲ್ಯೀಕರಿಸಲಾಗಿದೆ"
+	"hrs validated in": "%hours ಗಂಟೆಗಳ %language ನಲ್ಲಿ ಮೌಲ್ಯೀಕರಿಸಲಾಗಿದೆ",
+	"Incorrect": "Incorrect",
+	"Replay": "Replay",
+	"Pause": "Pause",
+	"Correct": "Correct",
+	"Skip": "Skip"
 }

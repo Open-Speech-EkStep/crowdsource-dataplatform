@@ -1,4 +1,4 @@
-const {setPageContentHeight, toggleFooterPosition, fetchLocationInfo} = require('./utils')
+const {setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown} = require('./utils')
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
@@ -394,6 +394,9 @@ $(document).ready(() => {
     const $pageContent = $('#page-content');
     const $navUser = $('#nav-user');
     const $navUserName = $navUser.find('#nav-username');
+    const contributionLanguage = localStorage.getItem('contributionLanguage');
+    console.log('contributionLanguage', contributionLanguage);
+    updateLocaleLanguagesDropdown(contributionLanguage);
     fetchLocationInfo().then(res => {
         return res.json()
     }).then(response => {

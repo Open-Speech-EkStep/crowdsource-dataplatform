@@ -1,6 +1,6 @@
 const { updateGraph, calculateTime } = require('./draw-chart');
 const { testUserName, setStartRecordBtnToolTipContent, setSpeakerDetails } = require('./speakerDetails');
-const { toggleFooterPosition } = require('./utils');
+const { toggleFooterPosition, updateLocaleLanguagesDropdown } = require('./utils');
 
 const {DEFAULT_CON_LANGUAGE} = require('./constants');
 
@@ -137,6 +137,9 @@ $(document).ready(function () {
     const motherTongue = document.getElementById('mother-tongue');
     const age = document.getElementById('age');
     updateLanguage('');
+    const contributionLanguage = localStorage.getItem('contributionLanguage');
+    console.log('contributionLanguage', contributionLanguage);
+    updateLocaleLanguagesDropdown(contributionLanguage);
 
     $('#language').on('change', (e) => {
         const selectedLanguage = e.target.value;
