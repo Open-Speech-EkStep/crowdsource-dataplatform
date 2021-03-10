@@ -33,6 +33,21 @@ const setTotalSentenceIndex = (index) => {
     totalSentencesLbl.innerText = index;
 }
 
+const startTimer = (seconds, display) => {
+    const counterSpan = document.getElementById('counter')
+    counterSpan.innerHTML = `0${seconds}`
+    display.classList.remove('d-none');
+    let interval = setInterval(function () {
+        
+        counterSpan.innerText = `0${seconds}`
+        seconds--
+        if (seconds < 0) {
+            clearInterval(interval)
+            display.classList.add('d-none');
+        }
+    }, 1000);
+}
+
 const initialize = () => {
     const sentences = crowdSource.sentences;
     const $startRecordBtn = $('#startRecord');
@@ -50,6 +65,7 @@ const initialize = () => {
     const $progressBar = $('.progress-bar');
     const $pageContent = $('#page-content');
     const $audioSmallError = $('#audio-small-error');
+    const $autoStopWarning = document.getElementById("count-down")
     const totalItems = sentences.length;
     let currentIndex =
         getCurrentIndex(totalItems - 1);
@@ -102,7 +118,7 @@ const initialize = () => {
             'Just few more steps to go!',
             'Yay! Done & Dusted!'
         ];
-    }    
+    }
     else if (sentences.length == 1) {
         progressMessages = [
             'Let’s get started',
@@ -140,7 +156,7 @@ const initialize = () => {
     };
 
     const notyf = new Notyf({
-        position: {x: 'center', y: 'top'},
+        position: { x: 'center', y: 'top' },
         types: [
             {
                 type: 'success',
@@ -173,11 +189,12 @@ const initialize = () => {
     let rec;
     let input;
     let cleartTimeoutKey;
+    let timerTimeoutKey;
     let audioCtx;
 
     $startRecordBtn.add($reRecordBtn).on('click', () => {
         navigator.mediaDevices
-            .getUserMedia({audio: true, video: false})
+            .getUserMedia({ audio: true, video: false })
             .then((stream) => {
                 $getStarted.hide();
                 $startRecordRow.addClass('d-none');
@@ -210,9 +227,16 @@ const initialize = () => {
                 //start the recording process
                 rec.record();
                 //automatically click stop button after 30 seconds
+
+                timerTimeoutKey = setTimeout(() => {
+                    $autoStopWarning.classList.remove('d-none');
+                    startTimer(5, $autoStopWarning)
+                }, 15 * 1000);
+
+
                 cleartTimeoutKey = setTimeout(() => {
                     $stopRecordBtn.click();
-                }, 30 * 1000);
+                }, 21 * 1000);
             })
             .catch((err) => {
                 console.log(err);
@@ -234,6 +258,8 @@ const initialize = () => {
 
     $stopRecordBtn.on('click', () => {
         clearTimeout(cleartTimeoutKey);
+        clearTimeout(timerTimeoutKey)
+        $autoStopWarning.classList.add('d-none');
         $startRecordRow.addClass('d-none');
         $stopRecordBtn.addClass('d-none');
         $nextBtn.removeClass('d-none');
@@ -287,8 +313,8 @@ const initialize = () => {
             );
             setProgressBar(currentIndex);
             const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
-            Object.assign(sentencesObj, {sentences:[]});
-            localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj) );
+            Object.assign(sentencesObj, { sentences: [] });
+            localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
             localStorage.setItem(currentIndexKey, currentIndex);
             notyf.success(
                 'Congratulations!!! You have completed this batch of sentences'
@@ -466,7 +492,7 @@ $(document).ready(() => {
                     }
                 })
                 .then((sentenceData) => {
-                    if(!isExistingUser){
+                    if (!isExistingUser) {
                         $instructionModal.modal('show');
                     } else {
                         $pageContent.removeClass('d-none');
@@ -500,4 +526,4 @@ $(document).ready(() => {
     }
 });
 
-module.exports = {getCurrentIndex, getSkipCount, getValue, setCurrentSentenceIndex, setTotalSentenceIndex}
+module.exports = { getCurrentIndex, getSkipCount, getValue, setCurrentSentenceIndex, setTotalSentenceIndex }

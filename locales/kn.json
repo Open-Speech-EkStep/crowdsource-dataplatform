@@ -139,5 +139,6 @@
 	"Replay": "Replay",
 	"Pause": "Pause",
 	"Correct": "Correct",
-	"Skip": "Skip"
+	"Skip": "Skip",
+	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "<span id=\"counter\"></span> ಸೆಕೆಂಡುಗಳ ನಂತರ ರೆಕಾರ್ಡಿಂಗ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ನಿಲ್ಲುತ್ತದೆ"
 }

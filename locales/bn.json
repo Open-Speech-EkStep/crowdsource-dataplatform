@@ -120,5 +120,6 @@
 	"Match the voice to the text <b>accurately</b>": "Match the voice to the text <b>accurately</b>",
 	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample",
 	"hrs recorded in": "%language য় %hours ঘণ্টা রেকডিং হয়েছে",
-	"hrs validated in": "%hours ঘন্টা %language য়  বৈধ হয়েছে"
+	"hrs validated in": "%hours ঘন্টা %language য়  বৈধ হয়েছে",
+	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "রেকর্ডিং স্বয়ংক্রিয়ভাবে <span id=\"counter\"></span> সেকেন্ড পরে বন্ধ হবে"
 }
