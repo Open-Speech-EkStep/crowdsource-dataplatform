@@ -144,5 +144,6 @@
 	"Click Here": "ক্লিক কৰক",
 	"to go back to home page": "পুণৰ আগৰ পেজলৈ ঘুৰি যাবলৈ ত",
 	"hrs recorded in": "%hours ঘন্টাত %language ৰেকৰ্ড কৰক",
-	"hrs validated in": "%hours ঘন্টা %language ৰেকৰ্ড কৰক"
+	"hrs validated in": "%hours ঘন্টা %language ৰেকৰ্ড কৰক",
+	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "রেকর্ডিং স্বয়ংক্রিয়ভাবে <span id=\"counter\"></span> সেকেন্ড পরে বন্ধ হবে"
 }
