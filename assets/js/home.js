@@ -14,18 +14,18 @@ const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
 const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
 const LOCALE_STRINGS = 'localeString';
 const ALL_LANGUAGES = [
-    {value: "Assamese",id: "as", text: "অসমীয়া"},
-    {value: "Bengali", id: "bn", text: "বাংলা"},
-    {value: "English", id: "en", text: "English"},
-    {value: "Gujarati", id: "gu", text: "ગુજરાતી"},
-    {value: "Hindi", id: "hi", text: "हिंदी"},
-    {value: "Kannada", id: "kn", text: "ಕನ್ನಡ"},
-    {value: "Malayalam", id: "ml", text: "മലയാളം"},
-    {value: "Marathi", id: "mr", text: "मराठी"},
-    {value: "Odia", id: "or", text: "ଘୃଣା"},
-    {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ"},
-    {value: "Tamil", id: "ta", text: "தமிழ்"},
-    {value: "Telugu", id: "te", text: "తెలుగు"}];
+    {value: "Assamese",id: "as", text: "অসমীয়া", hasLocaleText: true},
+    {value: "Bengali", id: "bn", text: "বাংলা", hasLocaleText: true},
+    {value: "English", id: "en", text: "English", hasLocaleText: true},
+    {value: "Gujarati", id: "gu", text: "ગુજરાતી", hasLocaleText: true},
+    {value: "Hindi", id: "hi", text: "हिंदी", hasLocaleText: true},
+    {value: "Kannada", id: "kn", text: "ಕನ್ನಡ", hasLocaleText: true},
+    {value: "Malayalam", id: "ml", text: "മലയാളം", hasLocaleText: true},
+    {value: "Marathi", id: "mr", text: "मराठी", hasLocaleText: true},
+    {value: "Odia", id: "or", text: "ଘୃଣା", hasLocaleText: true},
+    {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ", hasLocaleText: true},
+    {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: false},
+    {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: false}];
 
 const performAPIRequest = (url) => {
     return fetch(url).then((data) => {
@@ -39,13 +39,28 @@ const performAPIRequest = (url) => {
 
 const updateLocaleLanguagesDropdown = (language) => {
     const dropDown = $('#localisation_dropdown');
-    if(language.toLowerCase() === "english") {
+    const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+    if(language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
         dropDown.html('<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>');
     } else {
-        const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
         dropDown.html(`<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>
         <a id=${localeLang.value} class="dropdown-item" href="/changeLocale/${localeLang.id}">${localeLang.text}</a>`);
     }
+}
+
+const updateLocaleText = function (total_contributions, total_validations, language) {
+    const $say_p_3 = $("#say-p-3");
+    const $listen_p_3 = $("#listen-p-3");
+    const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+    let hrsRecordedIn = localeStrings['hrs recorded in'];
+    hrsRecordedIn = hrsRecordedIn.replace("%hours", total_contributions);
+    hrsRecordedIn = hrsRecordedIn.replace("%language", language);
+    $say_p_3.text(hrsRecordedIn);
+    
+    let hrsValidatedIn = localeStrings['hrs validated in'];
+    hrsValidatedIn = hrsValidatedIn.replace("%hours", total_contributions);
+    hrsValidatedIn = hrsValidatedIn.replace("%language", language);
+    $listen_p_3.text(hrsValidatedIn);
 }
 
 function updateHrsForSayAndListen(language) {
@@ -53,22 +68,12 @@ function updateHrsForSayAndListen(language) {
     const $listenLoader = $('#listen-loader');
     $sayLoader.removeClass('d-none');
     $listenLoader.removeClass('d-none');
-    const $say_p_3 = $("#say-p-3");
-    const $listen_p_3 = $("#listen-p-3");
-    const stringifyData = localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE);
-    const aggregateDetails = JSON.parse(stringifyData);
+    const aggregateDetails = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE));
     const totalInfo = aggregateDetails && aggregateDetails.find((element) => element.language === language);
     if (totalInfo) {
-        const {total_contributions, total_validations} = totalInfo;
-        const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-        let localeValue = localeStrings['hrs recorded in'];
-        localeValue = localeValue.replace("%hours", total_contributions);
-        localeValue = localeValue.replace("%language", language);
-        total_contributions && $say_p_3.text(localeValue);
-        total_validations && $listen_p_3.text(`${total_validations} hrs validated in ${language}`);
+        updateLocaleText(totalInfo.total_contributions, totalInfo.total_validations, language);
     } else {
-        $say_p_3.text(`0 hr recorded in ${language}`);
-        $listen_p_3.text(`0 hr validated in ${language}`);
+        updateLocaleText(0, 0, language);
     }
     $sayLoader.addClass('d-none');
     $listenLoader.addClass('d-none');

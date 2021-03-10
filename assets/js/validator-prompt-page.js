@@ -359,11 +359,15 @@ const getAudioClip = function (audioPath) {
 function hideAudioRow() {
     showElement($('#loader-audio-row'));
     hideElement($('#audio-row'))
+    showElement($('#loader-play-btn'));
+    hideElement($('#audio-player-btn'))
 }
 
 function showAudioRow() {
-    hideElement($('#loader-audio-row'))
+    hideElement($('#loader-audio-row'));
     showElement($('#audio-row'));
+    hideElement($('#loader-play-btn'));
+    showElement($('#audio-player-btn'))
 }
 
 function showThankYou() {
@@ -373,6 +377,7 @@ function showThankYou() {
     hideElement($('#validation-button-row'))
     showElement($('#thank-you-row'))
     hideElement($('#progress-row'));
+    hideElement($('#skip_btn_row'));
 
     const language = localStorage.getItem('contributionLanguage');
     const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
@@ -402,6 +407,7 @@ function showNoSentencesMessage() {
     hideElement($('#validation-button-row'))
     hideElement($('#progress-row'))
     showElement($('#no-sentences-row'))
+    hideElement($('#skip_btn_row'));
 }
 
 $(document).ready(() => {

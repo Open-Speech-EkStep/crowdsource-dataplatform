@@ -119,5 +119,10 @@
 	"Ensure the voice is <b>clear and audible</b>": "Ensure the voice is <b>clear and audible</b>",
 	"Match the voice to the text <b>accurately</b>": "Match the voice to the text <b>accurately</b>",
 	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample",
-	"hrs recorded in": "%hours घंटे %language में रिकॉर्ड हुए"
+	"hrs recorded in": "%language য় %hours ঘণ্টা রেকডিং হয়েছে",
+	"hrs validated in": "%hours ঘন্টা %language য়  বৈধ হয়েছে",
+	"For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices.Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.": "For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices.Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.",
+	"The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group.The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.": "The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group.The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.",
+	"Not You ? Change User": "Not You ? Change User",
+	"I have read and agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions < /a>": "I have read and agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions < /a>"
 }
