@@ -26,6 +26,7 @@ describe("Running tests for dbOperations", () => {
         afterEach(() => {
             jest.clearAllMocks();
         })
+        
         test("should return expected result", () => {
             const mockResult = [
                 { sentenceId: 1, sentence: "Mock sentence 1" },
@@ -48,6 +49,20 @@ describe("Running tests for dbOperations", () => {
 
         test('should call query with label medium for kids', () => {
             const ageGroup = "0-13";
+            const mockDB = {
+                many: jest.fn(),
+            }
+            jest.mock('pg-promise', () => jest.fn(() => {
+                return jest.fn(()=>mockDB);
+            }));
+            const spyDB  = jest.spyOn(mockDB, 'many')
+            const dbOperations = require('../src/dbOperations');
+            dbOperations.getSentencesBasedOnAge(ageGroup, "abcdefghi", "test_username", "Hindi", "Gujrati", "Male")
+            expect(spyDB).toHaveBeenCalledWith(expect.anything(), ["abcdefghi", "test_username", "medium", "Hindi", "Gujrati", "Male", ageGroup]);
+        });
+
+        test('should call query with label medium for adults', () => {
+            const ageGroup = "50-59";
             const mockDB = {
                 many: jest.fn(),
             }
