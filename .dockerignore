@@ -5,3 +5,8 @@
 .dockerignore
 .env
 .git
+./*_tests
+deployments
+assets
+infra
+migrations
