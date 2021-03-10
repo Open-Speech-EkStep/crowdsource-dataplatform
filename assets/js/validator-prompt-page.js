@@ -9,10 +9,6 @@ const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
-const PLAY_TEXT = 'Play';
-const REPLAY_TEXT = 'Replay';
-const PAUSE_TEXT = 'Pause';
-
 function showElement(element) {
     element.removeClass('d-none');
 }
@@ -51,13 +47,17 @@ const setAudioPlayer = function () {
     const play = $('#play');
     const pause = $('#pause');
     const replay = $('#replay');
-    const textDiv = $('#audioplayer-text');
+    const textPlay = $('#audioplayer-text_play');
+    const textReplay = $('#audioplayer-text_replay');
+    const textPause = $('#audioplayer-text_pause');
+
 
     myAudio.addEventListener("ended", () => {
         enableValidation();
         hideElement(pause)
         showElement(replay)
-        textDiv.text(REPLAY_TEXT);
+        hideElement(textPause);
+        showElement(textReplay);
     });
 
     play.on('click', () => {
@@ -77,14 +77,16 @@ const setAudioPlayer = function () {
         myAudio.load();
         hideElement(play)
         showElement(pause)
-        textDiv.text(PAUSE_TEXT);
+        hideElement(textPlay);
+        showElement(textPause);
         myAudio.play();
     }
 
     function pauseAudio() {
         hideElement(pause)
         showElement(replay)
-        textDiv.text(REPLAY_TEXT);
+        hideElement(textPause)
+        showElement(textReplay)
         enableValidation();
         myAudio.pause();
     }
@@ -93,7 +95,8 @@ const setAudioPlayer = function () {
         myAudio.load();
         hideElement(replay)
         showElement(pause)
-        textDiv.text(PAUSE_TEXT);
+        hideElement(textReplay);
+        showElement(textPause);
         disableValidation();
         myAudio.play();
     }
@@ -215,7 +218,13 @@ function disableValidation() {
 
 function resetValidation() {
     disableValidation();
-    $('#audioplayer-text').text(PLAY_TEXT);
+    const textPlay = $('#audioplayer-text_play');
+    const textReplay = $('#audioplayer-text_replay');
+    const textPause = $('#audioplayer-text_pause');
+    hideElement(textPause);
+    hideElement(textReplay);
+    showElement(textPlay);
+
     hideElement($("#replay"))
     hideElement($('#pause'))
     showElement($("#play"))
