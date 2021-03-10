@@ -12,20 +12,20 @@ const {
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
 const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
-
+const LOCALE_STRINGS = 'localeString';
 const ALL_LANGUAGES = [
-    {value: "Assamese",id: "as", text: "অসমীয়া"},
-    {value: "Bengali", id: "bn", text: "বাংলা"},
-    {value: "English", id: "en", text: "English"},
-    {value: "Gujarati", id: "gu", text: "ગુજરાતી"},
-    {value: "Hindi", id: "hi", text: "हिंदी"},
-    {value: "Kannada", id: "kn", text: "ಕನ್ನಡ"},
-    {value: "Malayalam", id: "ml", text: "മലയാളം"},
-    {value: "Marathi", id: "mr", text: "मराठी"},
-    {value: "Odia", id: "or", text: "ଘୃଣା"},
-    {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ"},
-    {value: "Tamil", id: "ta", text: "தமிழ்"},
-    {value: "Telugu", id: "te", text: "తెలుగు"}];
+    {value: "Assamese",id: "as", text: "অসমীয়া", hasLocaleText: true},
+    {value: "Bengali", id: "bn", text: "বাংলা", hasLocaleText: true},
+    {value: "English", id: "en", text: "English", hasLocaleText: true},
+    {value: "Gujarati", id: "gu", text: "ગુજરાતી", hasLocaleText: true},
+    {value: "Hindi", id: "hi", text: "हिंदी", hasLocaleText: true},
+    {value: "Kannada", id: "kn", text: "ಕನ್ನಡ", hasLocaleText: true},
+    {value: "Malayalam", id: "ml", text: "മലയാളം", hasLocaleText: true},
+    {value: "Marathi", id: "mr", text: "मराठी", hasLocaleText: true},
+    {value: "Odia", id: "or", text: "ଘୃଣା", hasLocaleText: true},
+    {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ", hasLocaleText: true},
+    {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: false},
+    {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: false}];
 
 const performAPIRequest = (url) => {
     return fetch(url).then((data) => {
@@ -35,6 +35,17 @@ const performAPIRequest = (url) => {
             return Promise.resolve(data.json());
         }
     });
+}
+
+const updateLocaleLanguagesDropdown = (language) => {
+    const dropDown = $('#localisation_dropdown');
+    const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+    if(language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
+        dropDown.html('<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>');
+    } else {
+        dropDown.html(`<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="/changeLocale/${localeLang.id}">${localeLang.text}</a>`);
+    }
 }
 
 function updateHrsForSayAndListen(language) {
@@ -49,7 +60,11 @@ function updateHrsForSayAndListen(language) {
     const totalInfo = aggregateDetails && aggregateDetails.find((element) => element.language === language);
     if (totalInfo) {
         const {total_contributions, total_validations} = totalInfo;
-        total_contributions && $say_p_3.text(`${total_contributions} hrs recorded in ${language}`);
+        const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+        let localeValue = localeStrings['hrs recorded in'];
+        localeValue = localeValue.replace("%hours", total_contributions);
+        localeValue = localeValue.replace("%language", language);
+        total_contributions && $say_p_3.text(localeValue);
         total_validations && $listen_p_3.text(`${total_validations} hrs validated in ${language}`);
     } else {
         $say_p_3.text(`0 hr recorded in ${language}`);
@@ -57,6 +72,7 @@ function updateHrsForSayAndListen(language) {
     }
     $sayLoader.addClass('d-none');
     $listenLoader.addClass('d-none');
+    updateLocaleLanguagesDropdown(language);
 }
 
 const getDefaultTargettedDiv = function (key, value, $sayListenLanguage) {
@@ -138,6 +154,7 @@ const clearLocalStroage = function() {
     localStorage.removeItem(TOP_LANGUAGES_BY_HOURS);
     localStorage.removeItem(TOP_LANGUAGES_BY_SPEAKERS);
     localStorage.removeItem(AGGREGATED_DATA_BY_LANGUAGE);
+    localStorage.removeItem(LOCALE_STRINGS);
 }
 
 const getStatsSummary = function () {
@@ -153,8 +170,16 @@ const getStatsSummary = function () {
     });
 }
 
+const getLocaleString = function() {
+    performAPIRequest('/get-locale-strings')
+        .then((response) => {
+            localStorage.setItem(LOCALE_STRINGS, JSON.stringify(response));
+        });
+}
+
 $(document).ready(function () {
     clearLocalStroage();
+    getLocaleString();
     const speakerDetailsKey = 'speakerDetails';
     const defaultLang = 'Odia';
     const $startRecordBtn = $('#proceed-box');
