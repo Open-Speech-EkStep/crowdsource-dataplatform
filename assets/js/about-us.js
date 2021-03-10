@@ -1,8 +1,8 @@
 const {validateUserName, testUserName,setSpeakerDetails, resetSpeakerDetails,setUserNameTooltip,setStartRecordBtnToolTipContent} = require('./speakerDetails');
+const {DEFAULT_CON_LANGUAGE} = require('./constants');
 
 $(document).ready(function () {
     const speakerDetailsKey = 'speakerDetails';
-    const defaultLang = 'Odia';
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
     const genderRadios = document.querySelectorAll('input[name = "gender"]');
@@ -11,7 +11,7 @@ $(document).ready(function () {
     const $userName = $('#username');
     const $userNameError = $userName.next();
     const $tncCheckbox = $('#tnc');
-    let sentenceLanguage = defaultLang;
+    let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
     $tncCheckbox.prop('checked', false);
 
@@ -66,7 +66,7 @@ $(document).ready(function () {
             const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
             const genderValue = checkedGender.length ? checkedGender[0].value : '';
             const userNameValue = $userName.val().trim().substring(0, 12);
-            if (sentenceLanguage === 'English') sentenceLanguage = 'Odia';
+            if (sentenceLanguage === 'English') sentenceLanguage = DEFAULT_CON_LANGUAGE;
             if (testUserName(userNameValue)) {
                 return;
             }
