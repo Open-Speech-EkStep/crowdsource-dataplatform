@@ -169,5 +169,6 @@
 	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample",
 	"Incorrect": "Incorrect",
 	"Correct": "Correct",
-	"Skip": "Skip"
+	"Skip": "Skip",
+	"Pause": "Pause"
 }

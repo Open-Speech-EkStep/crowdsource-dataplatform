@@ -1,5 +1,5 @@
 const {drawMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
-const {toggleFooterPosition} = require('./utils')
+const {toggleFooterPosition, updateLocaleLanguagesDropdown} = require('./utils')
 const {
     validateUserName,
     testUserName,
@@ -37,17 +37,6 @@ const performAPIRequest = (url) => {
             return Promise.resolve(data.json());
         }
     });
-}
-
-const updateLocaleLanguagesDropdown = (language) => {
-    const dropDown = $('#localisation_dropdown');
-    const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-    if(language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
-        dropDown.html('<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>');
-    } else {
-        dropDown.html(`<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="/changeLocale/${localeLang.id}">${localeLang.text}</a>`);
-    }
 }
 
 const updateLocaleText = function (total_contributions, total_validations, language) {

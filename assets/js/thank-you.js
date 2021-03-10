@@ -1,5 +1,5 @@
 const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('./constants');
-const { setPageContentHeight, toggleFooterPosition } = require('./utils')
+const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown } = require('./utils')
 
 const currentIndexKey = 'currentIndex';
 const speakerDetailsKey = 'speakerDetails';
@@ -176,6 +176,11 @@ if (!(localSpeakerDataParsed)) {
     };
 }
 
-$(document).ready(toggleFooterPosition);
+$(document).ready(function () {
+    toggleFooterPosition();
+    const contributionLanguage = localStorage.getItem('contributionLanguage');
+    console.log('contributionLanguage', contributionLanguage);
+    updateLocaleLanguagesDropdown(contributionLanguage);
+});
 
 module.exports = { setUserContribution, getTotalSecondsContributed };
