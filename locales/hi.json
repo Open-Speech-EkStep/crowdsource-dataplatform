@@ -124,5 +124,15 @@
 	"Username cannot be more than 12 characters": "यूज़रनेम 12 कैरेक्चर से अधिक नहीं हो सकता",
 	"EkStep Foundation": "एकस्टेप संगठन",
 	"hrs recorded in": "%hours घंटे %language में रिकॉर्ड हुए",
-	"hrs validated in": "%hours घंटे %language में प्रमाणित हुए"
+	"hrs validated in": "%hours घंटे %language में प्रमाणित हुए",
+	"For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices.Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.": "For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices.Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.",
+	"The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group.The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.": "The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group.The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.",
+	"Incorrect": "ग़लत",
+	"Correct": "सही",
+	"Skip": "छोड़ें",
+	"Ensure the voice is <b>clear and audible</b>": "Ensure the voice is <b>clear and audible</b>",
+	"Match the voice to the text <b>accurately</b>": "Match the voice to the text <b>accurately</b>",
+	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample",
+	"Replay": "फिर से प्ले करें",
+	"Pause": "Pause"
 }
