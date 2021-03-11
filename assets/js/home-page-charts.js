@@ -1,31 +1,6 @@
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
-
-const formatTime = function (hours, minutes = 0, seconds = 0) {
-  let result = "";
-  if (hours > 0) {
-    result += `${hours} hrs `;
-  }
-  if (minutes > 0) {
-    result += `${minutes} min `;
-  }
-  if (hours === 0 && minutes === 0 && seconds > 0) {
-    result += `${seconds} sec `;
-  }
-  return result.substr(0, result.length - 1);
-};
-
-const calculateTime = function (totalSeconds, isSeconds = true) {
-  const hours = Math.floor(totalSeconds / 3600);
-  const remainingAfterHours = totalSeconds % 3600;
-  const minutes = Math.floor(remainingAfterHours / 60);
-  const seconds = Math.round(remainingAfterHours % 60);
-  if (isSeconds) {
-    return { hours, minutes, seconds };
-  } else {
-    return { hours, minutes };
-  }
-};
+const {calculateTime, formatTime} = require('./utils')
 
 const performAPIRequest = (url) => {
   return fetch(url).then((data) => {
@@ -332,7 +307,5 @@ module.exports = {
   showByHoursChart,
   showBySpeakersChart,
   getStatistics,
-  calculateTime,
-  formatTime,
   drawMap,
 };
