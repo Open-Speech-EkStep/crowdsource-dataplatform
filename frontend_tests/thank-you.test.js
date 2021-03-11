@@ -12,9 +12,12 @@ document.body = stringToHTML(
 
 describe('Set User Contribution', () => {
   test('should set time on user contribution', () => {
+    mockLocalStorage();
+    localStorage.setItem("localeString", JSON.stringify({'seconds': 'seconds'}));
     setUserContribution(10);
     const $userContribution = $('#user-contribution').text();
     expect($userContribution).toBe('10 seconds ');
+    localStorage.clear();
   });
 });
 
