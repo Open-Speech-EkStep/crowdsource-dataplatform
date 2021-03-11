@@ -1,4 +1,5 @@
 const {generateIndiaMap} = require('./home-page-charts');
+const {calculateTime, formatTime} = require('./utils')
 const $chartRow = $('.chart-row');
 const $chartLoaders = $chartRow.find('.loader');
 const $charts = $chartRow.find('.chart');
@@ -6,33 +7,6 @@ const $timelineLoader = $('#timeline-loader');
 const $timelineChart = $('#timeline-chart');
 
 const chartReg = {};
-
-function formatTime(hours, minutes=0, seconds=0) {
-    let result = '';
-    if(hours > 0) {
-        result += `${hours} hrs `;
-    }
-    if(minutes > 0) {
-        result += `${minutes} min `;
-    }
-    if(hours === 0 && minutes === 0 && seconds > 0) {
-        result += `${seconds} sec `;
-    }
-    return result.substr(0, result.length-1);
-}
-
-function calculateTime(contributions, isSeconds=true) {
-    const totalSeconds = contributions * 3600;
-    const hours = Math.floor(totalSeconds / 3600);
-    const remainingAfterHours = totalSeconds % 3600;
-    const minutes = Math.floor(remainingAfterHours / 60);
-    const seconds = parseInt(remainingAfterHours % 60);
-    if(isSeconds) {
-        return {hours, minutes, seconds};
-    } else {
-        return {hours, minutes};
-    }
-}
 
 function getOrderedGenderData(formattedGenderData) {
     const orderedGenderData = [];
@@ -125,16 +99,6 @@ const buildTimelineGraph = (language, timeframe) => {
         drawTimelineChart(data);
     }).catch((err) => {
         console.log(err);
-    });
-}
-
-const performAPIRequest = (url) => {
-    return fetch(url).then((data) => {
-        if(!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
-        } else {
-            return Promise.resolve(data.json());
-        }
     });
 }
 
@@ -384,5 +348,4 @@ module.exports = {
     getOrderedGenderData,
     getGenderData,
     getAgeGroupData,
-    calculateTime
 };

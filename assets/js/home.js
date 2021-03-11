@@ -26,7 +26,7 @@ const ALL_LANGUAGES = [
     {value: "Marathi", id: "mr", text: "मराठी", hasLocaleText: true},
     {value: "Odia", id: "or", text: "ଓଡିଆ", hasLocaleText: true},
     {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ", hasLocaleText: true},
-    {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: false},
+    {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: true},
     {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true}];
 
 const performAPIRequest = (url) => {
