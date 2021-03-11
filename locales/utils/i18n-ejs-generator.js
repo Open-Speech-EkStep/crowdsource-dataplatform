@@ -31,14 +31,14 @@ const generateLocalisedHtmlFromEjs = function (ejsPath, outPath) {
     i18n.getLocales().forEach(async locale => {
         fs.rmdirSync(`${outPath}/${locale}`, { recursive: true });
 
-        // await ejs2html(`${ejsPath}/about-us.ejs`, { MOTHER_TONGUE, LANGUAGES }, i18n, `${outPath}/${locale}`, 'about-us.html', locale);
-        // await ejs2html(`${ejsPath}/dashboard.ejs`, { MOTHER_TONGUE, LANGUAGES, isCookiePresent: false }, i18n, `${outPath}/${locale}`, 'dashboard.html', locale);
-        // await ejs2html(`${ejsPath}/home.ejs`, { MOTHER_TONGUE, LANGUAGES, isCookiePresent: false, defaultLang: undefined }, i18n, `${outPath}/${locale}`, 'home.html', locale);
-        // await ejs2html(`${ejsPath}/not-found.ejs`, {}, i18n, `${outPath}/${locale}`, 'not-found.html', locale);
-        // await ejs2html(`${ejsPath}/record.ejs`, {}, i18n, `${outPath}/${locale}`, 'record.html', locale);
-        // await ejs2html(`${ejsPath}/terms-and-conditions.ejs`, {}, i18n, `${outPath}/${locale}`, 'terms-and-conditions.html', locale);
-        // await ejs2html(`${ejsPath}/thank-you.ejs`, {}, i18n, `${outPath}/${locale}`, 'thank-you.html', locale);
-        // await ejs2html(`${ejsPath}/validator-prompt-page.ejs`, {}, i18n, `${outPath}/${locale}`, 'validator-page.html', locale);
+        await ejs2html(`${ejsPath}/about-us.ejs`, { MOTHER_TONGUE, LANGUAGES }, i18n, `${outPath}/${locale}`, 'about-us.html', locale);
+        await ejs2html(`${ejsPath}/dashboard.ejs`, { MOTHER_TONGUE, LANGUAGES, isCookiePresent: false }, i18n, `${outPath}/${locale}`, 'dashboard.html', locale);
+        await ejs2html(`${ejsPath}/home.ejs`, { MOTHER_TONGUE, LANGUAGES, isCookiePresent: false, defaultLang: undefined }, i18n, `${outPath}/${locale}`, 'home.html', locale);
+        await ejs2html(`${ejsPath}/not-found.ejs`, {}, i18n, `${outPath}/${locale}`, 'not-found.html', locale);
+        await ejs2html(`${ejsPath}/record.ejs`, {}, i18n, `${outPath}/${locale}`, 'record.html', locale);
+        await ejs2html(`${ejsPath}/terms-and-conditions.ejs`, {}, i18n, `${outPath}/${locale}`, 'terms-and-conditions.html', locale);
+        await ejs2html(`${ejsPath}/thank-you.ejs`, {}, i18n, `${outPath}/${locale}`, 'thank-you.html', locale);
+        await ejs2html(`${ejsPath}/validator-prompt-page.ejs`, {}, i18n, `${outPath}/${locale}`, 'validator-page.html', locale);
     })
 }
 

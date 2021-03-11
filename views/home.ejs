@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/home.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/home.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 
 <body>
@@ -55,7 +55,7 @@
                                 <%= __('Contribute Your Voice') %>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-4"><img src="img/contributor.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer" data-target="#userModal"></div>
+                        <div class="col-lg-5 col-md-5 col-4"><img src="../img/contributor.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer" data-target="#userModal"></div>
                         <div id="say-p-2" class="col-lg-7 col-md-7 col-12 d-none position-absolute" style="bottom:1rem">
                             <div>
                                 <%= __('Contribute your voice to create an open data repository of Indian languages') %>
@@ -77,7 +77,7 @@
                                 <%= __('Verify What They Say') %>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-4"><a href="/validator-page"><img src="img/validator.svg" alt="validator" id="start_validating"></a></div>
+                        <div class="col-lg-5 col-md-5 col-4"><a href="./validator-page.html"><img src="../img/validator.svg" alt="validator" id="start_validating"></a></div>
                         <div class="col-lg-7 col-md-7 col-12 d-none position-absolute" id="listen-p-2" style="bottom:1rem">
                             <div>
                                 <%= __('Help us by validating the voice samples that others have contributed') %>
@@ -96,12 +96,12 @@
                         <%= __('Vakyansh: A crowdsourcing initiative for Indian languages') %>
                     </h1>
                     <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
-                        <%= __('For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.') %> <a class="ml-1" href="/about-us">
+                        <%= __('For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.') %> <a class="ml-1" href="./about-us.html">
                                 <%= __('Know More') %>
                             </a>
                     </p>
                 </div>
-                <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="/img/home.svg" class="img-fluid mr-n1"></div>
+                <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="../img/home.svg" class="img-fluid mr-n1"></div>
             </div>
             <div class="row">
                 <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 pt-lg-0 text-dark">
@@ -109,7 +109,7 @@
                         <%= __('We rely on your contributions') %>
                     </h1>
                     <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
-                        <%= __('The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.') %> <a class="ml-1" href="/about-us">
+                        <%= __('The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.') %> <a class="ml-1" href="./about-us.html">
                                 <%= __('Know More') %>
                             </a>
                     </p>
@@ -188,7 +188,7 @@
                 <div class="col-12 col-md-12 col-lg-12 px-0 oflow-x-hid"></div>
             </div>
             <div class="row mt-5 mb-5">
-                <div class="col-12 d-flex justify-content-center"><a href="/dashboard" id="viewAllDetailsBtn" class="btn btn-outline-primary text-primary">
+                <div class="col-12 d-flex justify-content-center"><a href="./dashboard.html" id="viewAllDetailsBtn" class="btn btn-outline-primary text-primary">
                         <%= __('VIEW ALL DETAILS') %>
                     </a></div>
             </div>
@@ -263,7 +263,7 @@
                             </div>
                         </div>
                         <div class="form-check mt-4"><input class="form-check-input mt-0 mt-sm-1" type="checkbox" value="" id="tnc"> <label class="form-check-label ml-md-2 ml-4" for="tnc">
-                                <%- __('I have read and agree to the <a href="/terms-and-conditions"> Terms and Conditions </a>') %>
+                                <%- __('I have read and agree to the <a href="./terms-and-conditions.html"> Terms and Conditions </a>') %>
                             </label></div>
                         <div class="row justify-content-center mt-5">
                             <div class="col-12"><button type="button" id="proceed-box" class="btn btn-primary h6 shadow w-100 rounded p-3 point-none" disabled="disabled" data-toggle="modal" data-target="#languageModal">
@@ -286,18 +286,16 @@
         </div><button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
         <%- include modals/content-languages.ejs %>
             <%- include modals/say-listen-language.ejs %>
-                <%- include common/footer.ejs %>
-                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <%- include common/footer.ejs %>
                     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-                    <% if(!isCookiePresent) { %>
-                        <script>document.getElementById("toggle-content-language").click()</script>
-                        <% } else { %>
-                            <script src="js/home.js" id="home-page" default-lang="<%= defaultLang %>"></script>
-                            <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
-                            <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
-                            <script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
-                            <% } %>
+            
+                    <script src="../js/home.js" id="home-page" default-lang="<%= defaultLang %>"></script>
+                    <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+                    <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+                    <script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
+            
 </body>
 
 </html>

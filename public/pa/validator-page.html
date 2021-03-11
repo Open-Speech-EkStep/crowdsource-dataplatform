@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Vakyansh: A crowdsourcing initiative for Indic languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/instructions-modal.css">
+    <link rel="stylesheet" type="text/css" href="../css/validator-prompt.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-4"><a class="logo-text text-dark" href="./home.html">
+    <h2 class="mb-0">NPLT</h2></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item p-2 dropdown">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ਪੰਜਾਬੀ
+                </div>
+                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton"><a id="english" class="dropdown-item" href="#" locale="en">English</a></div>
+            </li>
+            <li class="nav-item p-2 dropdown d-none">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Speech Recognition Models
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="https://inference.vakyansh.in/indian-english">English (IN)</a><a class="dropdown-item" href="https://inference.vakyansh.in/gujarati">Gujarati</a> <a class="dropdown-item" href="https://inference.vakyansh.in/hindi">Hindi</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada">Kannada</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada-lm">Kannada (With LM)</a> <a class="dropdown-item" href="https://inference.vakyansh.in/odia">Odia</a> <a class="dropdown-item" href="https://inference.vakyansh.in/tamil">Tamil</a> <a class="dropdown-item" href="https://inference.vakyansh.in/telugu">Telugu</a></div>
+            </li>
+            <li class="nav-item p-2"><a href="./about-us.html" class="nav-link text-dark font-weight-bold">
+                    ਸਾਡੇ ਬਾਰੇ
+                </a></li>
+            <li class="nav-item p-2"><a class="nav-link text-dark font-weight-bold d-none" id="nav-user"><span class="material-icons align-middle mx-1">account_circle</span> <span id="nav-username"></span></a></li>
+        </ul>
+    </div>
+</nav>
+        <div id="validator-page-content">
+            <div class="container-fluid pt-1 pb-1">
+                <div id="content-wrapper" class="d-flex flex-column justify-content-between">
+                    <div class="row justify-content-center" id="instructions-row">
+                        <div id="instructions-link" class="d-flex justify-content-end align-items-center d-none"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007BFF" style="cursor:pointer" class="bi bi-info-circle-fill d-none" viewBox="0 0 16 16">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg> <span class="btn d-none" style="cursor:pointer">
+                                ਹਿਦਾਇਤਾਂ
+                            </span></div>
+                    </div>
+                    <div class="row justify-content-center mb-5 mb-lg-0" id="sentences-row">
+                        <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-normal" id="sentenceLabel"></label></div>
+                    </div>
+                    <div class="row justify-content-center mx-2 d-none" id="loader-audio-row">
+                        <div><span class="spinner w-h-5"></span></div>
+                    </div>
+                    <div class="row justify-content-center mx-2" id="audio-row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 justify-content-center"><audio id="my-audio" controls tabindex="-1" src="" type="audio/wav" class="d-none" crossorigin="anonymous"></audio><canvas id="myCanvas" class="w-100" height="80px"></canvas></div>
+                    </div>
+                    <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-sentences-row">
+                        <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-bold">
+                                ਅਵਾਜ਼ੀ ਨਮੂਨਿਆਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਉਤਸ਼ਾਹ ਦਿਖਾਉਣ ਵਾਸਤੇ ਤੁਹਾਡਾ ਧੰਨਵਾਦ
+                            </label><br><br>
+                            <p>
+                                ਅਸੀਂ ਹਾਲ ਹੀ ਵਿੱਚ <span id="spn-validation-language"></span> ਭਾਸ਼ਾ ਲਈ ਡਾਟਾ ਇਕੱਤਰ ਕਰਨ ਦੀ ਸ਼ੁਰੂਆਤ ਕੀਤੀ ਹੈ ਅਤੇ ਅਸੀਂ ਉਮੀਦ ਕਰਦੇ ਹਾਂ ਕਿ ਸਾਡੇ ਕੋਲ ਬਹੁਤ ਜਲਦ ਅਵਾਜ਼ੀ ਨਮੂਨੇ ਹੋਣਗੇ, ਜਿਨ੍ਹਾਂ ਨੂੰ ਤੁਸੀਂ ਪ੍ਰਮਾਣਿਤ ਕਰ ਸਕੋਗੇ।
+                            </p>
+                            <p>
+                                ਕੀ ਤੁਸੀਂ ਆਪਣੀ ਅਵਾਜ਼ ਅਤੇ ਸ਼ਬਦਾਂ ਰਾਹੀਂ ਵੀ ਯੋਗਦਾਨ ਪਾਉਣਾ ਚਾਹੋਗੇ?
+                            </p>
+                            <div class="row justify-content-center mt-5">
+                                <div class="col-lg-3 col-md-6 col-8 text-center lead"><a href="./record.html" class="btn btn-primary btn-lg h6 w-100">
+                                        ਯੋਗਦਾਨ ਪਾਉਣਾ ਸ਼ੁਰੂ ਕਰੋ
+                                    </a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center my-auto my-3 d-none" id="thank-you-row">
+                        <div class="col-md-8 col-sm-10 text-center align-items-center"><label class="h1 font-weight-bold my-5">
+                                ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ!
+                            </label>
+                            <p>
+                                ਤੁਸੀਂ ਸਾਡੀ <span id="spn-validation-count" class="font-wt-900"></span> ਰਿਕਾਰਡਿੰਗਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਵਿੱਚ ਸਹਾਇਤਾ ਕੀਤੀ ਹੈ
+                            </p>
+                            <div class="row justify-content-center mb-3 mx-2">
+                                <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div><a class="btn btn-primary h6 shadow rounded mt-4 p-3 my-lg-5 col-lg-4 col-md-4 col-sm-10" href="./validator-page.html">
+                                    ਹੋਰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ
+                                </a>
+                                <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 mx-5" id="validation-button-row">
+                        <div class="col-lg-8 col-md-8 flex-lg-row flex-md-row flex-column-reverse d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2"><button class="w-100 btn align-self-start mb-2" disabled="disabled" id="dislike_button"><svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
+                                    <path d="M183.666 19.6666H178.333V35.6666H183.666V19.6666ZM154.333 34.3333C154.333 35.7999 155.533 36.9999 156.999 36.9999H165.413L164.146 43.0933L164.106 43.5199C164.106 44.0666 164.333 44.5733 164.693 44.9333L166.106 46.3333L174.879 37.5466C175.373 37.0666 175.666 36.3999 175.666 35.6666V22.3333C175.666 20.8666 174.466 19.6666 172.999 19.6666H160.999C159.893 19.6666 158.946 20.3333 158.546 21.2933L154.519 30.6933C154.399 30.9999 154.333 31.3199 154.333 31.6666V34.3333Z" fill="#007BFF"/><text x="26" y="43" font-family="lato" font-size="28" fill="#007BFF" style="text-align:center">
+                                        Incorrect
+                                    </text>
+                                </svg></button>
+                            <div class="row justify-content-center mx-2" id="loader-play-btn">
+                                <div><span class="spinner w-h-5"></span></div>
+                            </div>
+                            <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn">
+                                <div class="audioplayer d-flex justify-content-center align-items-center"><img src="../img/play.svg" alt="play" id="play" class="cursor-pointer"> <img src="../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer"> <img src="../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer"></div>
+                                    <h3 class="font-wt-800 text-center mt-2" id="audioplayer-text_play">
+                                        ਚਲਾਓ
+                                    </h3>
+                                    <h3 class="font-wt-800 text-center d-none mt-2" id="audioplayer-text_replay">
+                                        Replay
+                                    </h3>
+                                    <h3 class="font-wt-800 text-center d-none mt-2" id="audioplayer-text_pause">
+                                        Pause
+                                    </h3>
+                            </div><button class="btn align-self-start mb-2 w-100" disabled="disabled" id="like_button"><svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="1" y="1" width="206" height="64" rx="32" fill="white" stroke="#007BFF" stroke-width="2"/>
+                                    <path d="M24.334 46.3334H29.6673V30.3334H24.334V46.3334ZM53.6673 31.6667C53.6673 30.2001 52.4673 29.0001 51.0006 29.0001H42.5873L43.854 22.9067L43.894 22.4801C43.894 21.9334 43.6673 21.4267 43.3073 21.0667L41.894 19.6667L33.1207 28.4534C32.6273 28.9334 32.334 29.6001 32.334 30.3334V43.6667C32.334 45.1334 33.534 46.3334 35.0007 46.3334H47.0007C48.1073 46.3334 49.054 45.6667 49.454 44.7067L53.4806 35.3067C53.6007 35.0001 53.6673 34.6801 53.6673 34.3334V31.6667Z" fill="#007BFF"/><text x="86" y="43" font-family="lato" font-size="28" fill="#007BFF" style="text-align:center">
+                                        Correct
+                                    </text>
+                                </svg></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center" id="skip_btn_row"><button class="btn text-primary mt-2 mb-2" id="skip_button">
+                        Skip
+                    </button></div>
+                <div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
+                    <div class="col-12 col-sm-8 col-lg-7">
+                        <div class="progress mt-1">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress_bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
+                        </div>
+                        <div class="mt-4 text-muted h-1r d-none" id="get-started">
+                            ਆਓ ਸ਼ੁਰੂਆਤ ਕਰੀਏ!
+                        </div>
+                    </div>
+                    <div class="px-3">
+                        <div class="row justify-content-center"><span class="" id="currentSentenceLbl"></span><span class="">/</span><span class="" id="totalSentencesLbl"></span></div>
+                    </div>
+                </div>
+                <div class="modal fade" id="validator-instructions-modal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog mw-100 mt-0" role="document"><div class="modal-content"><div class="container-fluid bg-light" id="recording-instructions"><div class="text-center pb-5 pt-5"><p class="display-5 font-wt-900 site-blue"> ਪ੍ਰਮਾਣੀਕਰਨ ਸੰਬੰਧੀ ਹਿਦਾਇਤਾਂ </p></div><div class="row pb-3 justify-content-center"><div class="col-lg-2 col-sm-4 col-6 mb-3 text-center"><i class="material-icons p-4 rounded-circle md-48 text-primary border-3">settings_voice</i><p class="mt-3 site-blue">ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ <b>ਸਪੀਕਰਾਂ</b> ਦੀ ਜਾਂਚ ਕਰੋ</p></div><div class="col-lg-2 col-sm-4 col-6 mb-3 text-center"><i class="material-icons p-4 rounded-circle md-48 text-primary border-3">speaker</i><p class="mt-3 site-blue">Ensure the voice is <b>clear and audible</b></p></div><div class="col-lg-2 col-sm-4 col-6 mb-3 text-center"><i class="material-icons p-4 rounded-circle md-48 text-primary border-3">equalizer</i><p class="mt-3 site-blue"> Match the voice to the text <b>accurately</b> </p></div><div class="col-lg-2 col-sm-4 col-6 mb-3 text-center"><i class="material-icons p-4 rounded-circle md-48 text-primary border-3">record_voice_over</i><p class="mt-3 site-blue"> If you are unsure of the match, skip the particular voice sample </p></div></div><div class="row justify-content-center pb-5"><div class="col-lg-3 col-md-4 col-6"><button type="button" class="btn btn-primary h3 shadow w-100 rounded p-3 font-wt-700" data-dismiss="modal" aria-label="Close"> ਸ਼ੁਰੂ ਕਰੋ </button></div></div></div></div></div></div>
+                    <footer class="fixed-bottom bg-light pt-3 border-top mt-lg-2 w-100">
+    <div class="container-fluid">
+        <div class="d-flex flex-column-reverse flex-lg-row justify-content-lg-around align-items-sm-center align-items-md-center text-center">
+            <div class="">
+                <p class="text-muted">Supported by EkStep Foundation (built on <a href="https://sunbird.org/ai">sunbird.org/ai</a>)</p>
+            </div>
+            <div class="d-lg-inline-flex justify-content-around mb-2">
+                <div class="p-2"><a href="./about-us.html">
+                        ਸਾਡੇ ਬਾਰੇ
+                    </a></div>
+                <div class="p-2"><a href="./terms-and-conditions.html">
+                        ਨਿਯਮ ਅਤੇ ਸ਼ਰਤਾਂ
+                    </a></div>
+                <div class="p-2"><a href="./terms-and-conditions#privacy-policy.html">
+                        ਪਰਦੇਦਾਰੀ ਨੀਤੀ
+                    </a></div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../js/locale.js"></script>
+                        <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
+                        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                        <script src="../js/validator-prompt-page.js"></script>
+            </div>
+        </div>
+</body>
+
+</html>
