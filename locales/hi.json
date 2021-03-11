@@ -134,6 +134,6 @@
 	"Match the voice to the text <b>accurately</b>": "Match the voice to the text <b>accurately</b>",
 	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample",
 	"Replay": "फिर से प्ले करें",
-	"Pause": "Pause",
+	"Pause": "पॉज",
 	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "रिकॉर्डिंग <span id=\"counter\"></span>  सेकंड के बाद स्वतः बंद हो जाएगी"
 }

@@ -39,7 +39,7 @@ const LANGUAGES = [{value: "Assamese",id: "as", text: "অসমীয়া"},
   {value: "Kannada", id: "kn", text: "ಕನ್ನಡ"},
   {value: "Malayalam", id: "ml", text: "മലയാളം"},
   {value: "Marathi", id: "mr", text: "मराठी"},
-  {value: "Odia", id: "or", text: "ଘୃଣା"},
+  {value: "Odia", id: "or", text: "ଓଡିଆ"},
   {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ"},
   {value: "Tamil", id: "ta", text: "தமிழ்"},
   {value: "Telugu", id: "te", text: "తెలుగు"}];
