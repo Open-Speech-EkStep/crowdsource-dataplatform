@@ -3,6 +3,12 @@ const minify = require('gulp-minify');
 const cleanCss = require('gulp-clean-css');
 const htmlmin = require('gulp-htmlmin');
 const browserify = require('gulp-browserify');
+const generateLocalisedHtmlFromEjs = require('./locales/utils/i18n-ejs-generator')
+
+gulp.task('ejs', function (callback) {
+  generateLocalisedHtmlFromEjs(`${__dirname}/views`, `${__dirname}/public`);
+  callback();
+});
 
 gulp.task('html', function () {
   return gulp
@@ -43,4 +49,4 @@ gulp.task('css', function () {
     .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('default', gulp.parallel('html', 'js', 'css'));
+gulp.task('default', gulp.parallel('html', 'js', 'css', 'ejs'));

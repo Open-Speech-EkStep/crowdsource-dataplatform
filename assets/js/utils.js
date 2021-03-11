@@ -55,10 +55,10 @@ const updateLocaleLanguagesDropdown = (language) => {
     const dropDown = $('#localisation_dropdown');
     const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
     if(language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
-        dropDown.html('<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>');
+        dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
     } else {
-        dropDown.html(`<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="/changeLocale/${localeLang.id}">${localeLang.text}</a>`);
+        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
     }
 }
 

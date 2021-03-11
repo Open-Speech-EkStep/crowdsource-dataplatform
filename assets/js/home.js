@@ -10,6 +10,7 @@ const {
 } = require('./speakerDetails');
 
 const {DEFAULT_CON_LANGUAGE} = require('./constants');
+const {checkCookie} = require('./locale')
 
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
@@ -179,6 +180,7 @@ const getLocaleString = function() {
 }
 
 $(document).ready(function () {
+    checkCookie();
     clearLocalStroage();
     getLocaleString();
     const speakerDetailsKey = 'speakerDetails';
