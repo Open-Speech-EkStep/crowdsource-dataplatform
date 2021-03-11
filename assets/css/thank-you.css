@@ -218,3 +218,6 @@
     transform: rotate(360deg);
   }
 }
+.logo-text:hover {
+  text-decoration: none;
+}
