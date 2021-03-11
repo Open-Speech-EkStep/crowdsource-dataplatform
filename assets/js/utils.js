@@ -10,7 +10,7 @@ const ALL_LANGUAGES = [
     {value: "Odia", id: "or", text: "ଓଡିଆ", hasLocaleText: true},
     {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ", hasLocaleText: true},
     {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: false},
-    {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: false}];
+    {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true}];
 
 function convertPXToVH(px) {
     return px * (100 / document.documentElement.clientHeight);
