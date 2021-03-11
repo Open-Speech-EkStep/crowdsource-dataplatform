@@ -21,3 +21,6 @@ a{
 .oflow-x-hid {
     overflow-x: hidden;
 }
+.logo-text:hover {
+    text-decoration: none;
+}
