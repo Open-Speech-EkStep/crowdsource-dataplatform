@@ -78,7 +78,7 @@
 	"An unexpected error occured while processing your request. Please try after some time.": "আপনার অনুরোধটি প্রক্রিয়া করার সময় একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। কিছু সময় পরে চেষ্টা করুন।",
 	"Close": "বন্ধ করুন",
 	"Thank you for contributing!": "অবদানের জন্য ধন্যবাদ!",
-	"Your contribution has got us <b><span id=\"user-contribution\">0 seconds</span></b> closer to our goal!!!": "আপনাদের এই অবদান আমাদের লক্ষ্যকে আরও <b><span id=\"user-contribution\">0 seconds</span></b> সেকেন্ডের কাছাকাছি পৌঁছে দিয়েছে",
+	"Your contribution has got us <b><span id=\"user-contribution\">0 seconds</span></b> closer to our goal!!!": "আপনাদের এই অবদান আমাদের লক্ষ্যকে আরও <b><span id=\"user-contribution\">0 seconds</span></b> কাছাকাছি পৌঁছে দিয়েছে",
 	"Vakyansh has been envisioned to meet a goal of approx. 10,000 hours of diversified Indian voices.": "Vakyansh has been envisioned to meet a goal of approx. 10,000 hours of diversified Indian voices.",
 	"A contribution of 30-45 mins voice per speaker can make Vakyansh come closer to it’s vision.": "আপনার কণ্ঠের ৩০-৪৫ মিনিটের একটি অবদান ভাক্যাংশকে বৈচিত্র্যময় কণ্ঠের একটি উন্মুক্ত ডেটা ভাণ্ডার তৈরি করতে পারে।",
 	"We know you can do more!": "আমরা জানি আরও কিছু করতে পারেন!",
@@ -121,5 +121,13 @@
 	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample",
 	"hrs recorded in": "%language য় %hours ঘণ্টা রেকডিং হয়েছে",
 	"hrs validated in": "%hours ঘন্টা %language য়  বৈধ হয়েছে",
-	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "রেকর্ডিং স্বয়ংক্রিয়ভাবে <span id=\"counter\"></span> সেকেন্ড পরে বন্ধ হবে"
+	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "রেকর্ডিং স্বয়ংক্রিয়ভাবে <span id=\"counter\"></span> সেকেন্ড পরে বন্ধ হবে",
+	"Incorrect": "ভুল",
+	"Replay": "পুনরায় শুরু করুন",
+	"Pause": "বিরতি দিন",
+	"Correct": "সঠিক",
+	"Skip": "এড়িয়ে যান",
+	"hours": "ঘন্টা",
+	"minutes": "মিনিট",
+	"seconds": "সেকেন্ডের"
 }

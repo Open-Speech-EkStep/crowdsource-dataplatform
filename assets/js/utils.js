@@ -53,6 +53,23 @@ function fetchLocationInfo() {
     });
 }
 
+const performAPIRequest = (url) => {
+    return fetch(url).then((data) => {
+        if(!data.ok) {
+            throw Error(data.statusText || 'HTTP error');
+        } else {
+            return Promise.resolve(data.json());
+        }
+    });
+}
+
+const getLocaleString = function() {
+    performAPIRequest('/get-locale-strings')
+        .then((response) => {
+            localStorage.setItem('localeString', JSON.stringify(response));
+        });
+}
+
 const updateLocaleLanguagesDropdown = (language) => {
     const dropDown = $('#localisation_dropdown');
     const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
@@ -62,6 +79,8 @@ const updateLocaleLanguagesDropdown = (language) => {
         dropDown.html(`<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>
         <a id=${localeLang.value} class="dropdown-item" href="/changeLocale/${localeLang.id}">${localeLang.text}</a>`);
     }
+    localStorage.removeItem('localeString');
+    getLocaleString();
 }
 
 const calculateTime = function (totalSeconds, isSeconds = true) {
@@ -90,4 +109,4 @@ const formatTime = function (hours, minutes = 0, seconds = 0) {
     return result.substr(0, result.length - 1);
 };
 
-module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime}
+module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime, getLocaleString, performAPIRequest}
