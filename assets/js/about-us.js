@@ -83,6 +83,7 @@ $(document).ready(function () {
             };
             localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
             localStorage.setItem("contributionLanguage", sentenceLanguage);
+            document.cookie = `i18n=en`;
             location.href = '/record';
         }
     });
