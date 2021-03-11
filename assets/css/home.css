@@ -383,5 +383,6 @@ body.modal-open .supreme-container {
   }
 }
 
-
-
+.logo-text:hover {
+  text-decoration: none;
+}
