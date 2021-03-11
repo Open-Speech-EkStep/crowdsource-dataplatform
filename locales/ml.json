@@ -132,6 +132,5 @@
 	"EkStep Foundation": "ഏക്സ്റ്റെപ്പ് ഫൗണ്ടേഷൻ",
 	"hrs recorded in": "%language ഭാഷയിൽ %hours എണ്ണം റെക്കോർഡ് ചെയ്തിട്ടുണ്ട്",
 	"hrs validated in": "%language ഭാഷയിൽ %hours എണ്ണം സാധൂകരിച്ചിട്ടുണ്ട്",
-	"For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices.Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.": "For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices.Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.",
-	"The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group.The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.": "The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group.The magnitude of this diversity across the nation, gives us collective strength in empowering our languages."
+	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "<span id=\"counter\"></span> സെക്കൻഡിനുശേഷം റെക്കോർഡിംഗ് യാന്ത്രികമായി നിർത്തും"
 }

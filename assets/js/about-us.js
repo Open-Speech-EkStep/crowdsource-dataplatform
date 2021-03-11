@@ -1,5 +1,6 @@
 const {validateUserName, testUserName,setSpeakerDetails, resetSpeakerDetails,setUserNameTooltip,setStartRecordBtnToolTipContent} = require('./speakerDetails');
 const {DEFAULT_CON_LANGUAGE} = require('./constants');
+const { updateLocaleLanguagesDropdown } = require('./utils');
 
 $(document).ready(function () {
     const speakerDetailsKey = 'speakerDetails';
@@ -12,6 +13,9 @@ $(document).ready(function () {
     const $userNameError = $userName.next();
     const $tncCheckbox = $('#tnc');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
+
+    const contributionLanguage = localStorage.getItem('contributionLanguage');
+    updateLocaleLanguagesDropdown(contributionLanguage);
 
     $tncCheckbox.prop('checked', false);
 
@@ -78,6 +82,7 @@ $(document).ready(function () {
                 language: sentenceLanguage,
             };
             localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
+            localStorage.setItem("contributionLanguage", sentenceLanguage);
             location.href = '/record';
         }
     });
