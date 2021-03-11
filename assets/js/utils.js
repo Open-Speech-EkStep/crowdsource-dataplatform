@@ -1,3 +1,5 @@
+const { HOUR_IN_SECONDS, SIXTY } = require("./constants");
+
 const ALL_LANGUAGES = [
     {value: "Assamese",id: "as", text: "অসমীয়া", hasLocaleText: true},
     {value: "Bengali", id: "bn", text: "বাংলা", hasLocaleText: true},
@@ -30,21 +32,21 @@ function toggleFooterPosition() {
     $footer.toggleClass('bottom')
 }
 
-function fetchLocationInfo(){
+function fetchLocationInfo() {
     //https://api.ipify.org/?format=json
-    return fetch('https://www.cloudflare.com/cdn-cgi/trace').then(res=>res.text()).then(ipAddressText => {
+    return fetch('https://www.cloudflare.com/cdn-cgi/trace').then(res => res.text()).then(ipAddressText => {
         const dataArray = ipAddressText.split('\n');
         let ipAddress = "";
-        for(let ind in dataArray){
-            if(dataArray[ind].startsWith("ip=")){
-                ipAddress = dataArray[ind].replace('ip=','');
+        for (let ind in dataArray) {
+            if (dataArray[ind].startsWith("ip=")) {
+                ipAddress = dataArray[ind].replace('ip=', '');
                 break;
             }
         }
-        if(ipAddress.length !== 0){
+        if (ipAddress.length !== 0) {
             return fetch(`/location-info?ip=${ipAddress}`);
         } else {
-            return new Promise((resolve, reject)=>{
+            return new Promise((resolve, reject) => {
                 reject("Ip Address not available")
             })
         }
@@ -54,7 +56,7 @@ function fetchLocationInfo(){
 const updateLocaleLanguagesDropdown = (language) => {
     const dropDown = $('#localisation_dropdown');
     const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-    if(language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
+    if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
         dropDown.html('<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>');
     } else {
         dropDown.html(`<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>
@@ -62,4 +64,30 @@ const updateLocaleLanguagesDropdown = (language) => {
     }
 }
 
-module.exports = {setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown}
+const calculateTime = function (totalSeconds, isSeconds = true) {
+    const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
+    const remainingAfterHours = totalSeconds % HOUR_IN_SECONDS;
+    const minutes = Math.floor(remainingAfterHours / SIXTY);
+    const seconds = Math.round(remainingAfterHours % SIXTY);
+    if (isSeconds) {
+        return { hours, minutes, seconds };
+    } else {
+        return { hours, minutes };
+    }
+};
+
+const formatTime = function (hours, minutes = 0, seconds = 0) {
+    let result = "";
+    if (hours > 0) {
+        result += `${hours} hrs `;
+    }
+    if (minutes > 0) {
+        result += `${minutes} min `;
+    }
+    if (hours === 0 && minutes === 0 && seconds > 0) {
+        result += `${seconds} sec `;
+    }
+    return result.substr(0, result.length - 1);
+};
+
+module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime}
