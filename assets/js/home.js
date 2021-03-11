@@ -207,23 +207,31 @@ $(document).ready(function () {
     $sayListenLanguage.on('click',(e)=>{
         const targetedDiv = e.target;
         const language = targetedDiv.getAttribute("value");
-        top_lang = language;
-        localStorage.setItem('contributionLanguage',language);
-        setLangNavBar(targetedDiv, language, $languageNavBar);
-        updateHrsForSayAndListen(language);
+        if(top_lang !== language) {
+            top_lang = language;
+            localStorage.setItem('contributionLanguage',language);
+            document.cookie = `i18n=en`;
+            window.location.href = "/";
+            setLangNavBar(targetedDiv, language, $languageNavBar);
+            updateHrsForSayAndListen(language);
+        }
     })
 
     $languageNavBar.on('click', (e) => {
         const targetedDiv = e.target;
         const language = targetedDiv.getAttribute('value');
-        top_lang = language;
-        localStorage.setItem('contributionLanguage',language);
-        const $6th_place = $('#6th_option')
-        const previousActiveDiv = $languageNavBar.find('.active') || $6th_place;
-        previousActiveDiv.removeClass('active');
-        $6th_place.addClass('d-none');
-        targetedDiv.classList.add('active');
-        updateHrsForSayAndListen(language);
+        if(top_lang !== language) {
+            localStorage.setItem('contributionLanguage',language);
+            top_lang = language;
+            const $6th_place = $('#6th_option')
+            const previousActiveDiv = $languageNavBar.find('.active') || $6th_place;
+            previousActiveDiv.removeClass('active');
+            $6th_place.addClass('d-none');
+            targetedDiv.classList.add('active');
+            updateHrsForSayAndListen(language);
+            document.cookie = `i18n=en`;
+            window.location.href = "/";
+        }
     });
 
     $('#start_recording').on('click', () => {
