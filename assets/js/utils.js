@@ -1,3 +1,17 @@
+const ALL_LANGUAGES = [
+    {value: "Assamese",id: "as", text: "অসমীয়া", hasLocaleText: true},
+    {value: "Bengali", id: "bn", text: "বাংলা", hasLocaleText: true},
+    {value: "English", id: "en", text: "English", hasLocaleText: true},
+    {value: "Gujarati", id: "gu", text: "ગુજરાતી", hasLocaleText: true},
+    {value: "Hindi", id: "hi", text: "हिंदी", hasLocaleText: true},
+    {value: "Kannada", id: "kn", text: "ಕನ್ನಡ", hasLocaleText: true},
+    {value: "Malayalam", id: "ml", text: "മലയാളം", hasLocaleText: true},
+    {value: "Marathi", id: "mr", text: "मराठी", hasLocaleText: true},
+    {value: "Odia", id: "or", text: "ଘୃଣା", hasLocaleText: true},
+    {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ", hasLocaleText: true},
+    {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: false},
+    {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: false}];
+
 function convertPXToVH(px) {
     return px * (100 / document.documentElement.clientHeight);
 }
@@ -37,4 +51,15 @@ function fetchLocationInfo(){
     });
 }
 
-module.exports = {setPageContentHeight, toggleFooterPosition, fetchLocationInfo}
+const updateLocaleLanguagesDropdown = (language) => {
+    const dropDown = $('#localisation_dropdown');
+    const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+    if(language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
+        dropDown.html('<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>');
+    } else {
+        dropDown.html(`<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="/changeLocale/${localeLang.id}">${localeLang.text}</a>`);
+    }
+}
+
+module.exports = {setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown}

@@ -170,5 +170,6 @@
 	"Incorrect": "Incorrect",
 	"Correct": "Correct",
 	"Skip": "Skip",
-	"Pause": "Pause"
+	"Pause": "Pause",
+	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "Recording will automatically stop after <span id=\"counter\"></span> seconds"
 }

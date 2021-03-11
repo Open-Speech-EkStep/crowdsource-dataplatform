@@ -104,5 +104,6 @@
 	"Odia (Select languages)": "Odia (Select languages)",
 	"Select Your Preferred Language": "Select Your Preferred Language",
 	"Select the language you wish to contribute/validate in:": "Select the language you wish to contribute/validate in:",
-	"hrs recorded in": "%hours hrs recorded in %language"
+	"hrs recorded in": "%hours hrs recorded in %language",
+	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "<span id=\"counter\"></span> விநாடிகளுக்குப் பிறகு பதிவு தானாகவே நிறுத்தப்படும்"
 }
