@@ -75,6 +75,11 @@ const getDefaultTargettedDiv = function (key, value, $sayListenLanguage) {
     let targetIndex = 0;
     const  $sayListenLanguageItems = $sayListenLanguage.children();
     $sayListenLanguageItems.each(function (index, element) {
+        if (element.getAttribute('value') === DEFAULT_CON_LANGUAGE) {
+            targetIndex = index;
+        }
+    });
+    $sayListenLanguageItems.each(function (index, element) {
         if (element.getAttribute(key) === value) {
             targetIndex = index;
         }
