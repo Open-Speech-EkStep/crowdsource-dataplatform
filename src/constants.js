@@ -33,7 +33,7 @@ const MOTHER_TONGUE = [
 ];
 const LANGUAGES = [{value: "Assamese",id: "as", text: "অসমীয়া"},
   {value: "Bengali", id: "bn", text: "বাংলা"},
-  {value: "English", id: "en", text: "English"},
+  // {value: "English", id: "en", text: "English"},
   {value: "Gujarati", id: "gu", text: "ગુજરાતી"},
   {value: "Hindi", id: "hi", text: "हिंदी"},
   {value: "Kannada", id: "kn", text: "ಕನ್ನಡ"},
