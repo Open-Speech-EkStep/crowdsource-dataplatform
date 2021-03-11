@@ -1,9 +1,10 @@
 const { updateGraph } = require('./draw-chart');
 const { testUserName, setStartRecordBtnToolTipContent, setSpeakerDetails } = require('./speakerDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime } = require('./utils');
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString } = require('./utils');
 
 const {DEFAULT_CON_LANGUAGE} = require('./constants');
 
+const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
 
@@ -84,12 +85,12 @@ function updateLanguage(language) {
                         hours: contributedHours,
                         minutes: contributedMinutes,
                         seconds: contributedSeconds
-                    } = calculateTime(speakersData.contributions.toFixed(3));
+                    } = calculateTime(speakersData.contributions.toFixed(3)*60*60);
                     const {
                         hours: validatedHours,
                         minutes: validatedMinutes,
                         seconds: validatedSeconds
-                    } = calculateTime(speakersData.validations.toFixed(3));
+                    } = calculateTime(speakersData.validations.toFixed(3)*60*60);
 
                     if (speakersData.languages) {
                         $speakerDataLanguagesValue.text(speakersData.languages);
@@ -129,6 +130,7 @@ function updateLanguage(language) {
 
 $(document).ready(function () {
     localStorage.removeItem('previousLanguage');
+    if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
     const $tncCheckbox = $('#tnc');

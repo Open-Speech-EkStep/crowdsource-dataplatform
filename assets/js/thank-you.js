@@ -13,9 +13,10 @@ const setUserContribution = (totalSecondsContributed) => {
     const $userContribution = $('#user-contribution');
     const minutes = Math.floor(totalSecondsContributed / SIXTY);
     const seconds = totalSecondsContributed % SIXTY;
+    const localeString = JSON.parse(localStorage.getItem('localeString'));
     const finalText =
-        (minutes > 0 ? `${minutes} minute ` : '') +
-        (seconds > 0 ? `${seconds} seconds ` : minutes > 0 ? '' : '0 second');
+        (minutes > 0 ? `${minutes} ${localeString['minutes']} ` : '') +
+        (seconds > 0 ? `${seconds} ${localeString['seconds']} ` : minutes > 0 ? '' : `0 ${localeString['seconds']}`);
     $userContribution.text(finalText);
 };
 

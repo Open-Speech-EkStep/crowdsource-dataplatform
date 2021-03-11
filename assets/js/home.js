@@ -1,5 +1,5 @@
 const {drawMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
-const {toggleFooterPosition, updateLocaleLanguagesDropdown} = require('./utils')
+const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest} = require('./utils')
 const {
     validateUserName,
     testUserName,
@@ -28,16 +28,6 @@ const ALL_LANGUAGES = [
     {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ", hasLocaleText: true},
     {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: true},
     {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true}];
-
-const performAPIRequest = (url) => {
-    return fetch(url).then((data) => {
-        if(!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
-        } else {
-            return Promise.resolve(data.json());
-        }
-    });
-}
 
 const updateLocaleText = function (total_contributions, total_validations, language) {
     const $say_p_3 = $("#say-p-3");
@@ -169,13 +159,6 @@ const getStatsSummary = function () {
         setLanguagesInHeader();
         getStatistics(response.aggregate_data_count[0]);
     });
-}
-
-const getLocaleString = function() {
-    performAPIRequest('/get-locale-strings')
-        .then((response) => {
-            localStorage.setItem(LOCALE_STRINGS, JSON.stringify(response));
-        });
 }
 
 $(document).ready(function () {
@@ -355,7 +338,6 @@ $(document).ready(function () {
 });
 
 module.exports = {
-    performAPIRequest,
     updateHrsForSayAndListen,
     getDefaultTargettedDiv,
 };
