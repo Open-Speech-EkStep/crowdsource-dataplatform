@@ -49,4 +49,4 @@ gulp.task('css', function () {
     .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('default', gulp.parallel('html', 'js', 'css', 'ejs'));
+gulp.task('default', gulp.parallel('js', 'css', 'ejs'));
