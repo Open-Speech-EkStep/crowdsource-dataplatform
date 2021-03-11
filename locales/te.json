@@ -126,5 +126,6 @@
 	"Enter preferred username": "Enter preferred username",
 	"Username cannot be more than 12 characters": "Username cannot be more than 12 characters",
 	"Select Mother Tongue": "Select Mother Tongue",
-	"hrs recorded in": "%hours hrs recorded in %language"
+	"hrs recorded in": "%hours hrs recorded in %language",
+	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "<span id=\"counter\"></span> సెకన్ల తర్వాత రికార్డింగ్ స్వయంచాలకంగా ఆగిపోతుంది"
 }

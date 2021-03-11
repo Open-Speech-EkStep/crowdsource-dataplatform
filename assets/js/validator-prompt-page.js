@@ -1,6 +1,6 @@
 const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
-const { setPageContentHeight, toggleFooterPosition } = require('./utils');
+const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown } = require('./utils');
 const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('./constants');
 
 const visualizer = new Visualizer();
@@ -422,8 +422,9 @@ function showNoSentencesMessage() {
 $(document).ready(() => {
     toggleFooterPosition();
     setPageContentHeight();
-
     const language = localStorage.getItem('contributionLanguage');
+    console.log('contributionLanguage', language);
+    updateLocaleLanguagesDropdown(language);
     fetch(`/validation/sentences/${language}`)
         .then((data) => {
             if (!data.ok) {
