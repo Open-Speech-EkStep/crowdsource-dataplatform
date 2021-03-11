@@ -1,6 +1,6 @@
-const { updateGraph, calculateTime } = require('./draw-chart');
+const { updateGraph } = require('./draw-chart');
 const { testUserName, setStartRecordBtnToolTipContent, setSpeakerDetails } = require('./speakerDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown } = require('./utils');
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime } = require('./utils');
 
 const {DEFAULT_CON_LANGUAGE} = require('./constants');
 
