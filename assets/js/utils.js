@@ -79,8 +79,6 @@ const updateLocaleLanguagesDropdown = (language) => {
         dropDown.html(`<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>
         <a id=${localeLang.value} class="dropdown-item" href="/changeLocale/${localeLang.id}">${localeLang.text}</a>`);
     }
-    localStorage.removeItem('localeString');
-    getLocaleString();
 }
 
 const calculateTime = function (totalSeconds, isSeconds = true) {
