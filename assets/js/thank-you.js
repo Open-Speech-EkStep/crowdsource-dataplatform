@@ -9,21 +9,16 @@ const localSpeakerData = localStorage.getItem(speakerDetailsKey);
 const localSpeakerDataParsed = JSON.parse(localSpeakerData);
 const $footer = $('footer');
 
-const setUserContribution = (totalSecondsContributed) => {
+const setUserContribution = (totalSentencesContributed) => {
     const $userContribution = $('#user-contribution');
-    const minutes = Math.floor(totalSecondsContributed / SIXTY);
-    const seconds = totalSecondsContributed % SIXTY;
-    const localeString = JSON.parse(localStorage.getItem('localeString'));
-    const finalText =
-        (minutes > 0 ? `${minutes} ${localeString['minutes']} ` : '') +
-        (seconds > 0 ? `${seconds} ${localeString['seconds']} ` : minutes > 0 ? '' : `0 ${localeString['seconds']}`);
-    $userContribution.text(finalText);
+    $userContribution.html(totalSentencesContributed);
 };
 
-function getTotalSecondsContributed() {
+function getTotalSentencesContributed() {
     const skipCountInStorage = Number(localStorage.getItem('skipCount'));
     const localCount = Number(localStorage.getItem('count'));
-    return (localCount + currentIndexInStorage - skipCountInStorage) * AUDIO_DURATION;
+    const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
+    return (localCount + currentIndexInStorage - skipCountInStorage);
 }
 
 if (!(localSpeakerDataParsed)) {
@@ -46,7 +41,7 @@ if (!(localSpeakerDataParsed)) {
 
     setPageContentHeight();
 
-    setUserContribution(getTotalSecondsContributed());
+    setUserContribution(getTotalSentencesContributed());
 
     const getTotalProgressSize = () => {
         //magic calculation for every screen size
@@ -184,4 +179,4 @@ $(document).ready(function () {
     updateLocaleLanguagesDropdown(contributionLanguage);
 });
 
-module.exports = { setUserContribution, getTotalSecondsContributed };
+module.exports = { setUserContribution, getTotalSentencesContributed };

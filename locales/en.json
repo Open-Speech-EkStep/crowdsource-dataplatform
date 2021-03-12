@@ -174,5 +174,6 @@
 	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "Recording will automatically stop after <span id=\"counter\"></span> seconds",
 	"hours": "hours",
 	"minutes": "minutes",
-	"seconds": "seconds"
+	"seconds": "seconds",
+	"You have contributed <b><span id=\"user-contribution\"></span></b><b><span> recordings</span></b> of your voice": "You have contributed <b><span id=\"user-contribution\"></span></b><b><span> recordings</span></b> of your voice"
 }
