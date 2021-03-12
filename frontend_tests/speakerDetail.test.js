@@ -88,6 +88,24 @@ describe('setSpeakerDetails', () => {
             done();
         });
     });
+
+    test("should set Speakers details on homePage when speakerDetailsValue with gender is present in localStorage", (done) => {
+        const age = document.getElementById('age');
+        const motherTongue = document.getElementById('mother-tongue');
+        const $userName = $('#username');
+        localStorage.setItem('speakerDetails', JSON.stringify({
+            age: "0-5",
+            motherTongue: "Hindi",
+            userName: "abcdeUsername",
+            gender:"male"
+        }));
+        setSpeakerDetails("speakerDetails", age, motherTongue, $userName);
+        flushPromises().then(() => {
+            expect($userName.val()).toEqual("abcdeUsernam"); //trimmed username 0-12 chars only
+            fetchMock.reset();
+            done();
+        });
+    });
 });
 
 

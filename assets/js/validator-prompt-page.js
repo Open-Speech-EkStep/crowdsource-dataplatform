@@ -1,6 +1,6 @@
 const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
-const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown } = require('./utils');
+const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown,showElement,hideElement  } = require('./utils');
 const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('./constants');
 
 const visualizer = new Visualizer();
@@ -8,14 +8,6 @@ const visualizer = new Visualizer();
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
-
-function showElement(element) {
-    element.removeClass('d-none');
-}
-
-function hideElement(element) {
-    element.addClass('d-none');
-}
 
 const showInstructionsPopup = () => {
     hideElement($("#validator-page-content"));
