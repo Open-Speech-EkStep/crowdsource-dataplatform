@@ -129,5 +129,9 @@
 	"Skip": "এড়িয়ে যান",
 	"hours": "ঘন্টা",
 	"minutes": "মিনিট",
-	"seconds": "সেকেন্ডের"
+	"seconds": "সেকেন্ডের",
+	"Oops": "উফ!",
+	"Page Not Found": "পৃষ্ঠা খুঁজে পাওয়া যায়নি",
+	"Looks like you have taken a wrong turn here": "দেখে মনে হচ্ছে আপনি এখানে কোনও ভুল অভিমুখ নিয়েছেন",
+	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "হোম পৃষ্ঠায় ফিরে যেতে এখানে <a class=\"\" href=\"/\">ক্লিক করুন</a>"
 }

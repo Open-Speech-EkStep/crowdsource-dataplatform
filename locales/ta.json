@@ -170,9 +170,10 @@
 	"Match the voice to the text <b>accurately</b>": "Match the voice to the text <b>accurately</b>",
 	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample",
 	"Oops": "அச்சச்சோ",
-	"Page Not Found": "நீங்கள் தேடிய பக்கம் கிடைக்கவில்லை"	,
+	"Page Not Found": "நீங்கள் தேடிய பக்கம் கிடைக்கவில்லை",
 	"Looks like you have taken a wrong turn here": "நீங்கள் இங்கே ஒரு தவறான திருப்பம் எடுத்தது போல தோன்றுகிறது",
 	"Click Here": "சொடுக்கவும் இங்கே",
 	"to go back to home page": "முகப்புப் பக்கத்துக்கு செல்ல",
-	"seconds": "வினாடிகள்"
+	"seconds": "வினாடிகள்",
+	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "முகப்புப் பக்கத்துக்கு செல்ல இங்கே <a class=\"\" href=\"/\">என்னும் இடத்தில்</a> சொடுக்கவும்"
 }
