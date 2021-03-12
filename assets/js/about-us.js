@@ -15,7 +15,9 @@ $(document).ready(function () {
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
     const contributionLanguage = localStorage.getItem('contributionLanguage');
-    updateLocaleLanguagesDropdown(contributionLanguage);
+    if(contributionLanguage) {
+        updateLocaleLanguagesDropdown(contributionLanguage);
+    }
 
     $tncCheckbox.prop('checked', false);
 

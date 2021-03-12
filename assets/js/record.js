@@ -428,7 +428,9 @@ $(document).ready(() => {
     const $navUser = $('#nav-user');
     const $navUserName = $navUser.find('#nav-username');
     const contributionLanguage = localStorage.getItem('contributionLanguage');
-    updateLocaleLanguagesDropdown(contributionLanguage);
+    if(contributionLanguage) {
+        updateLocaleLanguagesDropdown(contributionLanguage);
+    }
     fetchLocationInfo().then(res => {
         return res.json()
     }).then(response => {

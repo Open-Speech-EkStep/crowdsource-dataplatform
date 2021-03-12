@@ -176,7 +176,9 @@ if (!(localSpeakerDataParsed)) {
 $(document).ready(function () {
     toggleFooterPosition();
     const contributionLanguage = localStorage.getItem('contributionLanguage');
-    updateLocaleLanguagesDropdown(contributionLanguage);
+    if(contributionLanguage) {
+        updateLocaleLanguagesDropdown(contributionLanguage);
+    }
 });
 
 module.exports = { setUserContribution, getTotalSentencesContributed };
