@@ -171,5 +171,8 @@
 	"Correct": "Correct",
 	"Skip": "Skip",
 	"Pause": "Pause",
-	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "Recording will automatically stop after <span id=\"counter\"></span> seconds"
+	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "Recording will automatically stop after <span id=\"counter\"></span> seconds",
+	"hours": "hours",
+	"minutes": "minutes",
+	"seconds": "seconds"
 }
