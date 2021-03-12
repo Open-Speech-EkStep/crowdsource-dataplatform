@@ -102,7 +102,11 @@ body.modal-open .supreme-container {
 
 .chart-row .chart,
 .chart-row .chart-spinner {
-    min-height: 35rem;
+    height: 35rem;
+}
+
+.chart-row .state-chart {
+    height: 45rem;
 }
 
 .chart-container {
@@ -259,6 +263,10 @@ body.modal-open .supreme-container {
     font-size: 0.75rem;
 }
 
+#indiaMapChart {
+    height: 500px;
+}
+
 @media screen and (min-width: 280px) {
     .no-data-found {
         left: 11%;
@@ -389,9 +397,19 @@ body.modal-open .supreme-container {
     }
     .chart-row .chart,
     .chart-row .chart-spinner {
-        min-height: 30rem;
+        height: 30rem;
+    }
+    .chart-row .state-chart {
+        height: 35rem;
+        padding: 1rem 0 0 !important;
+    }
+    .state-chart-text {
+        padding-left: 2rem !important;
     }
     .chart-row .age-group-chart {
         min-height: 32rem;
+    }
+    #indiaMapChart {
+        height: 380px;
     }
 }
