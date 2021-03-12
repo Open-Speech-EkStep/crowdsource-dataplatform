@@ -34,8 +34,9 @@ if (!(localSpeakerDataParsed)) {
     const breakPointForSmallScreen = 576;
     const breakPointForLargeScreen = 1200;
     const breakPointForExtraLargeScreen = 2000;
-    const secondsInTenThousandHours = 10000 * HOUR_IN_SECONDS;
+    const secondsInHundredHours = 100 * HOUR_IN_SECONDS;
     $('#nav-user').removeClass('d-none');
+
     $('#nav-login').addClass('d-none');
     $('#nav-username').text(localSpeakerDataParsed.userName);
     const $totalProgress = $('#total-progress');
@@ -83,7 +84,7 @@ if (!(localSpeakerDataParsed)) {
     const setTotalProgressBar = (totalSeconds) => {
         const barWidth = getTotalProgressSize();
         const targetPercentCompleted =
-            (totalSeconds / secondsInTenThousandHours) * 100;
+            (totalSeconds / secondsInHundredHours) * 100;
         if (targetPercentCompleted >= 100) {
             $totalProgress.next().css({
                 width: barWidth.totalProgressBarBulbWidth + '%',
