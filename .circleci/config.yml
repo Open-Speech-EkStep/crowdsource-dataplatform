@@ -125,10 +125,10 @@ workflows:
           requires:
             - push_test_image
 
-      # - run_functional_tests:
-      #     name: functional_tests
-      #     requires:
-      #       - test_deployment_eks
+      - run_functional_tests:
+          name: functional_tests
+          requires:
+            - test_deployment_eks
 
       - approve_to_deploy:
           name: approve_prod_deployment_eks
