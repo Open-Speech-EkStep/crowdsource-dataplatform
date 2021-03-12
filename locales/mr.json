@@ -159,5 +159,6 @@
 	"Skip": "वगळा",
 	"hours": "तास",
 	"minutes": "मिनिटे",
-	"seconds": "सेकंद"
+	"seconds": "सेकंद",
+	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "होम पेजवर परत जाण्यासाठी <a class=\"\" href=\"/\">इथे क्लिक करा</a>"
 }

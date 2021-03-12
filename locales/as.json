@@ -153,5 +153,6 @@
 	"Skip": "বাদ দিয়ক",
 	"hours": "ঘন্টা",
 	"minutes": "মিনিট",
-	"seconds": "ছেকেণ্ড"
+	"seconds": "ছেকেণ্ড",
+	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "পুণৰ আগৰ পেজলৈ ঘুৰি যাবলৈ <a class=\"\" href=\"/\">ত ক্লিক কৰক</a>"
 }

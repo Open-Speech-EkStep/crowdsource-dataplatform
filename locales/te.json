@@ -121,5 +121,9 @@
 	"If you are unsure of the match, skip the particular voice sample": "ఒకవేళ మీ మాటలు ఆ పదాలకు సరిగ్గా వస్తున్నాయని మీకు అనిపించకపోతే దాన్ని స్కిప్ చెయ్యండి",
 	"minutes": "గంటలు",
 	"hours": "నెలలు",
-	"seconds": "సెకనుల"
+	"seconds": "సెకనుల",
+	"Oops": "అయ్యో",
+	"Page Not Found": "పేజీ కనిపించలేదు",
+	"Looks like you have taken a wrong turn here": "మీరు ఇక్కడ తప్పు దారి తీసుకున్నట్టు ఉన్నారు",
+	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "హోమ్ పేజీ లోకి వెళ్ళడానికి <a class=\"\" href=\"/\">క్లిక్ చెయ్యండి</a>"
 }
