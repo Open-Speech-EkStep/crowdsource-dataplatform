@@ -79,7 +79,7 @@ $(document).ready(function () {
                 age: age.value,
                 motherTongue: motherTongue.value,
                 userName: userNameValue,
-                language: sentenceLanguage,
+                language: sentenceLanguage || localStorage.getItem('contributionLanguage'),
             };
             localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
             localStorage.setItem("contributionLanguage", sentenceLanguage);
