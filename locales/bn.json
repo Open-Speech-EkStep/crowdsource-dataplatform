@@ -134,4 +134,5 @@
 	"Page Not Found": "পৃষ্ঠা খুঁজে পাওয়া যায়নি",
 	"Looks like you have taken a wrong turn here": "দেখে মনে হচ্ছে আপনি এখানে কোনও ভুল অভিমুখ নিয়েছেন",
 	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "হোম পৃষ্ঠায় ফিরে যেতে এখানে <a class=\"\" href=\"/\">ক্লিক করুন</a>"
+	"You have contributed <b><span id=\"user-contribution\"></span></b><b><span> recordings</span></b> of your voice": "You have contributed <b><span id=\"user-contribution\"></span></b><b><span> recordings</span></b> of your voice"
 }
