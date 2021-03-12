@@ -423,7 +423,9 @@ $(document).ready(() => {
     toggleFooterPosition();
     setPageContentHeight();
     const language = localStorage.getItem('contributionLanguage');
-    updateLocaleLanguagesDropdown(language);
+    if(contributionLanguage) {
+        updateLocaleLanguagesDropdown(language);
+    }
     fetch(`/validation/sentences/${language}`)
         .then((data) => {
             if (!data.ok) {
