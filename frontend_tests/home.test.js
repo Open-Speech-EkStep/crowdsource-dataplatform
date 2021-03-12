@@ -1,10 +1,10 @@
 const fetchMock = require("fetch-mock");
 const {
-  performAPIRequest,
   updateHrsForSayAndListen,
   getDefaultTargettedDiv,
 } = require("../assets/js/home");
 const { readFileSync } = require("fs");
+const { performAPIRequest } = require("../assets/js/utils");
 const { stringToHTML, flushPromises, mockLocalStorage } = require("./utils");
 
 document.body = stringToHTML(

@@ -208,7 +208,7 @@ const drawGenderChart = (chartData) => {
     am4core.ready(function () {
         const chart = am4core.create('gender-chart', am4charts.XYChart);
         chartData.forEach(item => {
-            const {hours:cHours, minutes: cMinutes, seconds: cSeconds} = calculateTime((Number(item.hours_contributed)), true);
+            const {hours:cHours, minutes: cMinutes, seconds: cSeconds} = calculateTime((Number(item.hours_contributed)*60*60), true);
             item.contributedHours = formatTime(cHours, cMinutes, cSeconds);
         })
         chart.data = chartData;
@@ -265,8 +265,8 @@ const drawTimelineChart = (timelineData) => {
             }
             chartData[i].duration = new Date(chartData[i].year, chartData[i].month-1, 1);
             chartData[i].year = String(chartData[i].year);
-            const {hours:cHours, minutes: cMinutes, seconds: cSeconds} = calculateTime((Number(chartData[i].cumulative_contributions)), true);
-            const {hours:vHours, minutes:vMinutes, seconds: vSeconds} = calculateTime((Number(chartData[i].cumulative_validations)), true);
+            const {hours:cHours, minutes: cMinutes, seconds: cSeconds} = calculateTime((Number(chartData[i].cumulative_contributions)*60*60), true);
+            const {hours:vHours, minutes:vMinutes, seconds: vSeconds} = calculateTime((Number(chartData[i].cumulative_validations)*60*60), true);
             chartData[i].contributedHours = `${cHours}hrs ${cMinutes}mins ${cSeconds}secs`;
             chartData[i].validatedHours = `${vHours}hrs ${vMinutes}mins ${vSeconds}secs`;
         }

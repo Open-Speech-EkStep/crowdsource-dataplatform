@@ -150,5 +150,15 @@
 	"If you are unsure of the match, skip the particular voice sample": "If you are unsure of the match, skip the particular voice sample",
 	"hrs recorded in": "%hours तास नोंदवले %language मध्ये",
 	"hrs validated in": "%hours तास सत्यापित केले %language मध्ये",
-	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "<span id=\"counter\"></span> सेकंदानंतर रेकॉर्डिंग स्वयंचलितपणे थांबेल"
+	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "<span id=\"counter\"></span> सेकंदानंतर रेकॉर्डिंग स्वयंचलितपणे थांबेल",
+	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings",
+	"Incorrect": "चुकीचे",
+	"Replay": "रि-प्ले",
+	"Pause": "विराम द्या",
+	"Correct": "योग्य",
+	"Skip": "वगळा",
+	"hours": "तास",
+	"minutes": "मिनिटे",
+	"seconds": "सेकंद",
+	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "होम पेजवर परत जाण्यासाठी <a class=\"\" href=\"/\">इथे क्लिक करा</a>"
 }

@@ -13,9 +13,10 @@ const setUserContribution = (totalSecondsContributed) => {
     const $userContribution = $('#user-contribution');
     const minutes = Math.floor(totalSecondsContributed / SIXTY);
     const seconds = totalSecondsContributed % SIXTY;
+    const localeString = JSON.parse(localStorage.getItem('localeString'));
     const finalText =
-        (minutes > 0 ? `${minutes} minute ` : '') +
-        (seconds > 0 ? `${seconds} seconds ` : minutes > 0 ? '' : '0 second');
+        (minutes > 0 ? `${minutes} ${localeString['minutes']} ` : '') +
+        (seconds > 0 ? `${seconds} ${localeString['seconds']} ` : minutes > 0 ? '' : `0 ${localeString['seconds']}`);
     $userContribution.text(finalText);
 };
 
@@ -33,8 +34,9 @@ if (!(localSpeakerDataParsed)) {
     const breakPointForSmallScreen = 576;
     const breakPointForLargeScreen = 1200;
     const breakPointForExtraLargeScreen = 2000;
-    const secondsInTenThousandHours = 10000 * HOUR_IN_SECONDS;
+    const secondsInHundredHours = 100 * HOUR_IN_SECONDS;
     $('#nav-user').removeClass('d-none');
+
     $('#nav-login').addClass('d-none');
     $('#nav-username').text(localSpeakerDataParsed.userName);
     const $totalProgress = $('#total-progress');
@@ -82,7 +84,7 @@ if (!(localSpeakerDataParsed)) {
     const setTotalProgressBar = (totalSeconds) => {
         const barWidth = getTotalProgressSize();
         const targetPercentCompleted =
-            (totalSeconds / secondsInTenThousandHours) * 100;
+            (totalSeconds / secondsInHundredHours) * 100;
         if (targetPercentCompleted >= 100) {
             $totalProgress.next().css({
                 width: barWidth.totalProgressBarBulbWidth + '%',

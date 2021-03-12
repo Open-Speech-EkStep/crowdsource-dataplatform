@@ -145,5 +145,14 @@
 	"to go back to home page": "ਹੋਮ ਪੇਜ ਤੇ ਵਾਪਸ ਜਾਣ ਲਈ ਇੱਥੇ",
 	"hrs recorded in": "%language ਭਾਸ਼ਾ ਵਿੱਚ %hours ਘੰਟੇ ਰਿਕਾਰਡ ਕੀਤੇ ਗਏ",
 	"hrs validated in": "%language ਭਾਸ਼ਾ ਵਿੱਚ %hours ਘੰਟੇ ਪ੍ਰਮਾਣਿਤ ਕੀਤੇ ਗਏ",
-	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "ਰਿਕਾਰਡਿੰਗ ਆਪਣੇ ਆਪ <span id=\"counter\"></span> ਸੈਕਿੰਡ ਬਾਅਦ ਬੰਦ ਹੋ ਜਾਵੇਗੀ"
+	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "ਰਿਕਾਰਡਿੰਗ ਆਪਣੇ ਆਪ <span id=\"counter\"></span> ਸੈਕਿੰਡ ਬਾਅਦ ਬੰਦ ਹੋ ਜਾਵੇਗੀ",
+	"Incorrect": "ਗਲਤ",
+	"Replay": "ਮੁੜ-ਚਲਾਓ",
+	"Pause": "ਵਿਰਾਮ",
+	"Correct": "ਸਹੀ",
+	"Skip": "ਛੱਡੋ",
+	"hours": "ਘੰਟੇ",
+	"minutes": "ਮਿੰਟ",
+	"seconds": "ਸਕਿੰਟ",
+	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "ਹੋਮ ਪੰਨੇ 'ਤੇ ਜਾਣ ਲਈ <a class=\"\" href=\"/\">'ਤੇ ਕਲਿੱਕ ਕਰੋ</a>"
 }

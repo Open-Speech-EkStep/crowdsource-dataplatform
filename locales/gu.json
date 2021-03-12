@@ -153,6 +153,14 @@
 	"EkStep Foundation": "EkStep ફાઉન્ડેશન",
 	"hrs recorded in": "%language માં %hours અવાજો રેકોર્ડ કર્યા",
 	"hrs validated in": "%language માં %hours અવાજો રેકોર્ડ કર્યા",
-	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "રેકોર્ડિંગ આપમેળે <span id=\"counter\"></span> સેકંડ પછી બંધ થઈ જશે"
-	
+	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "રેકોર્ડિંગ આપમેળે <span id=\"counter\"></span> સેકંડ પછી બંધ થઈ જશે",
+	"Incorrect": "ખોટો",
+	"Replay": "ફરી-પ્લે કરો",
+	"Pause": "થોભો",
+	"Correct": "યોગ્ય",
+	"Skip": "પછી રાખો",
+	"hours": "કલાકો",
+	"minutes": "મિનિટો",
+	"seconds": "સેકન્ડ્સ",
+	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "હોમ પેજ પર જવા માટે અહીં <a class=\"\" href=\"/\">ક્લિક કરો</a>"
 }
