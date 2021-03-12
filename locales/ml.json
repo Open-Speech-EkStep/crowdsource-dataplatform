@@ -140,5 +140,6 @@
 	"Skip": "ഒഴിവാക്കുക",
 	"hours": "മണിക്കൂർ",
 	"minutes": "മിനിറ്റ്",
-	"seconds": "സെക്കൻഡ്"
+	"seconds": "സെക്കൻഡ്",
+	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "ഹോം പേജിലേക്ക് തിരികെ പോകാൻ <a class=\"\" href=\"/\">ക്ലിക്ക് ചെയ്യുക</a>"
 }

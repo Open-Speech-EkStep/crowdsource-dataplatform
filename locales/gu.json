@@ -161,5 +161,6 @@
 	"Skip": "પછી રાખો",
 	"hours": "કલાકો",
 	"minutes": "મિનિટો",
-	"seconds": "સેકન્ડ્સ"
+	"seconds": "સેકન્ડ્સ",
+	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "હોમ પેજ પર જવા માટે અહીં <a class=\"\" href=\"/\">ક્લિક કરો</a>"
 }
