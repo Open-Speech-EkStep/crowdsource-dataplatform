@@ -163,6 +163,7 @@ router.post('/upload', (req, res) => {
   const file = req.file;
   const sentenceId = req.body.sentenceId;
   const speakerDetails = req.body.speakerDetails;
+  const audioDuration = req.body.audioDuration;
   const speakerDetailsJson = JSON.parse(speakerDetails);
   const userName = speakerDetailsJson.userName;
   const userId = req.cookies.userId;
@@ -184,6 +185,7 @@ router.post('/upload', (req, res) => {
         userName,
         state,
         country,
+        audioDuration,
         (resStatus, resBody) => {
           res.status(resStatus).send(resBody);
         }
