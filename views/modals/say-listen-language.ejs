@@ -1,4 +1,18 @@
-<div class="modal fade" id="language-pop-up-wrapper" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered" role="document"><div class="modal-content p-4 border-primary border-2"><div class="modal-header d-block border-0"><h6 class="modal-title text-center text-muted"><%= __('Select the language for contribution') %>:</h6></div><div class="modal-body"><div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer" id="say-listen-language"> <% [{value: "Assamese", id: "as", text: "অসমীয়া"},
+<div class="modal fade" id="language-pop-up-wrapper" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="margin-left-auto">
+                <button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span>
+                </button>
+            </div>g
+            <div class="modal-header d-block border-0"><h6 class="modal-title text-center text-muted"><%= __('Select the language for contribution') %>
+                    :</h6>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer" id="say-listen-language">
+                    <% [{value: "Assamese", id: "as", text: "অসমীয়া"},
                         {value: "Bengali", id: "bn", text: "বাংলা"},
                         // {value: "English", id: "en", text: "English"},
                         {value: "Gujarati", id: "gu", text: "ગુજરાતી"},
@@ -9,4 +23,12 @@
                         {value: "Odia", id: "or", text: "ଓଡିଆ"},
                         {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ"},
                         {value: "Tamil", id: "ta", text: "தமிழ்"},
-                        {value: "Telugu", id: "te", text: "తెలుగు"}].forEach(e=>{ %> <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="<%= e.value %>" id="<%= e.id %>"><%= e.text %></div> <% }) %> </div></div><div class="margin-left-auto"><button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button></div></div></div></div>
+                        {value: "Telugu", id: "te", text: "తెలుగు"}].forEach(e=>{ %>
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="<%= e.value %>" id="<%= e.id %>"><%= e.text %></div>
+                    <% }) %>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
