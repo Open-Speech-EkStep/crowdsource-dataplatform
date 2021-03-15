@@ -56,6 +56,12 @@ html {
   html {
     font-size: 15px;
   }
+  .recording-container {
+    min-height: 250px;
+  }
+  .prompt{
+    min-height: 120px;
+  }
 }
 @media (min-width: 1200px) {
   html {
@@ -396,8 +402,4 @@ audio {
   border-bottom: 1.25em solid rgba(0, 123, 255);
   border-left: 0 solid transparent;
   border-right: 1.275em solid transparent;
-}
-
-.prompt{
-  min-height: 120px;
 }
