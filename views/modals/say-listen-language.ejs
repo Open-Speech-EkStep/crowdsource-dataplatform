@@ -13,7 +13,7 @@
 
                 <div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer" id="say-listen-language">
                 <% LANGUAGES.forEach(e=>{ %>
-                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="<%= e.value %>" id="<%= e.id %>"><%= e.text %></div>
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="<%= e.value %>" id="<%= e.id %>"><%= e.value %></div>
                     <% }) %>
                 </div>
             </div>
