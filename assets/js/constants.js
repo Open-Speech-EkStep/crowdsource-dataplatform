@@ -19,7 +19,17 @@ const ALL_LANGUAGES = [
     {value: "Odia", id: "or", text: "ଓଡିଆ", hasLocaleText: true},
     {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ", hasLocaleText: true},
     {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: true},
-    {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true}];
+    {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true},
+    {value: "Dogri", id: "doi", text: "Dogri", hasLocaleText: false},
+    {value: "Maithili", id: "mai", text: "Maithili", hasLocaleText: false},
+    {value: "Urdu", id: "ur", text: "Urdu", hasLocaleText: false},
+    {value: "Konkani Roman", id: "kr", text: "Konkani Roman", hasLocaleText: false},
+    {value: "Konkani DV", id: "kd", text: "Konkani DV", hasLocaleText: false},
+    {value: "Manipuri BN", id: "mnibn", text: "Manipuri BN", hasLocaleText: false},
+    {value: "Manipuri MM", id: "mnimm", text: "Manipuri MM", hasLocaleText: false},
+    {value: "Santali OL", id: "satol", text: "Santali OL", hasLocaleText: false},
+    {value: "Santali DV", id: "satdv", text: "Santali DV", hasLocaleText: false},
+    {value: "Sanskrit", id: "sa", text: "Sanskrit", hasLocaleText: false}];
 
 module.exports = {
     DEFAULT_CON_LANGUAGE,
