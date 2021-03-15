@@ -155,15 +155,10 @@ function buildGraphs(language, timeframe) {
     });
 }
 
-const chartColors = ['#85A8F9', '#B7D0FE', '#316AFF', '#294691'];
 const drawAgeGroupChart = (chartData) => {
+    const chartColors = ['#85A8F9', '#B7D0FE', '#6C85CE', '#316AFF', '#294691'];
     const chart = am4core.create('age-group-chart', am4charts.PieChart3D);
-    chart.data = chartData.slice(0, 3).concat({
-        age_group: 'Others',
-        speakers: chartData
-            .slice(3)
-            .reduce((acc, curr) => acc + Number(curr.speakers), 0),
-    });
+    chart.data = chartData;
     chart.paddingBottom = 50;
     chart.innerRadius = am4core.percent(40);
     chart.depth = 50;
@@ -205,6 +200,7 @@ const drawAgeGroupChart = (chartData) => {
 };
 
 const drawGenderChart = (chartData) => {
+    const chartColors = ['#85A8F9', '#B7D0FE', '#316AFF', '#294691'];
     am4core.ready(function () {
         const chart = am4core.create('gender-chart', am4charts.XYChart);
         chartData.forEach(item => {
