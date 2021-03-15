@@ -1,4 +1,5 @@
 const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require("./constants");
+const fetch = require('./fetch')
 
 function showElement(element) {
     element.removeClass('d-none');
@@ -48,7 +49,7 @@ function fetchLocationInfo() {
 }
 
 const performAPIRequest = (url) => {
-    return fetch(url).then((data) => {
+    return fetch(`${url}`).then((data) => {
         if(!data.ok) {
             throw Error(data.statusText || 'HTTP error');
         } else {
@@ -58,7 +59,7 @@ const performAPIRequest = (url) => {
 }
 
 const getLocaleString = function() {
-    performAPIRequest('/get-locale-strings')
+    performAPIRequest(`/get-locale-strings`)
         .then((response) => {
             localStorage.setItem('localeString', JSON.stringify(response));
         });

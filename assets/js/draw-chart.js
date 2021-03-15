@@ -1,3 +1,4 @@
+const fetch = require('./fetch')
 const {generateIndiaMap} = require('./home-page-charts');
 const {calculateTime, formatTime} = require('./utils')
 const $chartRow = $('.chart-row');
@@ -109,9 +110,9 @@ function buildGraphs(language, timeframe) {
     // $.fn.popover.Constructor.Default.whiteList.td = [];
 
     Promise.all([
-        fetch(`/timeline?language=${language}&timeframe=${timeframe}`),
-        fetch(`/contributions/gender?language=${language}`),
-        fetch(`/contributions/age?language=${language}`)
+        fetch(`${api_url}/timeline?language=${language}&timeframe=${timeframe}`),
+        fetch(`${api_url}/contributions/gender?language=${language}`),
+        fetch(`${api_url}/contributions/age?language=${language}`)
     ]).then(function (responses) {
         return Promise.all(responses.map(function (response) {
             return response.json();

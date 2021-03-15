@@ -1,3 +1,4 @@
+const { api_url } = require('./env-api')
 const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('./constants');
 const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown } = require('./utils')
 
@@ -127,7 +128,7 @@ if (!(localSpeakerDataParsed)) {
         }
     };
 
-    fetch(`/getDetails/${localSpeakerDataParsed.language}`)
+    fetch(`${api_url}/getDetails/${localSpeakerDataParsed.language}`)
         .then((data) => {
             if (!data.ok) {
                 throw Error(data.statusText || 'HTTP error');

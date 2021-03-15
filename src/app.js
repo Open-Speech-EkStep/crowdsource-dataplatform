@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const objectStorage = process.argv[2] || 'gcp';
 const fetch = require('node-fetch');
-
+const cors = require('cors');
 const { uploader } = require('./uploader/objUploader')
 const helmet = require('helmet')
 const express = require('express');
@@ -74,7 +74,11 @@ const multerStorage = multer.diskStorage({
     cb(null, currentDateAndTime() + '_' + randomString() + '.wav');
   },
 });
+const corsOptions = {
+  origin: /vakyansh\.in$/,
+}
 const upload = multer({ storage: multerStorage });
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(upload.single('audio_data'));
 app.use('/sentences', validateUserInfo);

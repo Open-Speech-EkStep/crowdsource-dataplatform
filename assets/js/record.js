@@ -1,3 +1,4 @@
+const { api_url } = require('./env-api')
 const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown } = require('./utils')
 
 const speakerDetailsKey = 'speakerDetails';
@@ -364,7 +365,7 @@ const initialize = () => {
         fd.append('state', localStorage.getItem('state_region') || "");
         fd.append('country', localStorage.getItem('country') || "");
         fd.append('audioDuration', crowdSource.audioDuration);
-        fetch('/upload', {
+        fetch(`${api_url}/upload`, {
             method: 'POST',
             body: fd,
         })
@@ -480,7 +481,7 @@ $(document).ready(() => {
         } else {
             localStorage.removeItem(currentIndexKey);
             localStorage.removeItem(skipCountKey);
-            fetch('/sentences', {
+            fetch(`${api_url}/sentences`, {
                 method: 'POST',
                 body: JSON.stringify({
                     userName: localSpeakerDataParsed.userName,

@@ -28,6 +28,7 @@
     "aws-sdk": "^2.851.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "crypto-js": "^4.0.0",
     "db-migrate": "^0.11.12",
     "db-migrate-pg": "^1.2.2",
@@ -65,7 +66,9 @@
     "gulp-htmlmin": "^5.0.1",
     "gulp-imagemin": "^7.1.0",
     "gulp-minify": "^3.1.0",
-    "nodemon": "^2.0.3"
+    "gulp-replace-task": "^2.0.1",
+    "nodemon": "^2.0.3",
+    "yargs": "^16.2.0"
   },
   "jest": {
     "setupFiles": [

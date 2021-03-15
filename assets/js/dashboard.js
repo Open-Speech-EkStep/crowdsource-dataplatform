@@ -3,7 +3,7 @@ const { testUserName, setStartRecordBtnToolTipContent, setSpeakerDetails } = req
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString } = require('./utils');
 
 const {DEFAULT_CON_LANGUAGE} = require('./constants');
-
+const fetch = require('./fetch')
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
@@ -11,7 +11,7 @@ let languageToRecord = '';
 const fetchDetail = (language) => {
     const byLanguage = language ? true : false;
     const url = language ? '/aggregate-data-count?byLanguage=true' : '/aggregate-data-count'
-    return fetch(url).then((data) => {
+    return fetch(`/${url}`).then((data) => {
         if (!data.ok) {
             throw Error(data.statusText || 'HTTP error');
         } else {

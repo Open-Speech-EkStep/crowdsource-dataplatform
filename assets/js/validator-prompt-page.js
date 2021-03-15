@@ -1,3 +1,4 @@
+const { api_url } = require('./env-api')
 const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
 const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown,showElement,hideElement  } = require('./utils');
@@ -229,7 +230,7 @@ function recordValidation(action) {
     }
     const sentenceId = validationSentences[currentIndex].sentenceId
     const contribution_id = validationSentences[currentIndex].contribution_id
-    fetch('/validation/action', {
+    fetch(`${api_url}/validation/action`, {
         method: 'POST',
         body: JSON.stringify({
             sentenceId: sentenceId,
@@ -331,7 +332,7 @@ function disableSkipButton() {
 const getAudioClip = function (audioPath) {
     hideAudioRow();
     disableSkipButton();
-    fetch('/audioClip', {
+    fetch(`${api_url}/audioClip`, {
         method: 'POST',
         body: JSON.stringify({
             file: audioPath
@@ -418,7 +419,7 @@ $(document).ready(() => {
     if(language) {
         updateLocaleLanguagesDropdown(language);
     }
-    fetch(`/validation/sentences/${language}`)
+    fetch(`${api_url}/validation/sentences/${language}`)
         .then((data) => {
             if (!data.ok) {
                 throw Error(data.statusText || 'HTTP error');

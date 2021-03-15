@@ -1,3 +1,4 @@
+const fetch = require('./fetch')
 const submitQueryBtn = document.getElementById("submitQuery");
 const email = document.getElementById("email");
 const query = document.getElementById("query");
@@ -28,7 +29,7 @@ submitQueryBtn.addEventListener("click", event => {
     }))
 })
 const submitQuery = (queryText) => {
-    fetch("/contact-us", {
+    fetch(`/contact-us`, {
         method: "POST",
         body: queryText,
         headers: {

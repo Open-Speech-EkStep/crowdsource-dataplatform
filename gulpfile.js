@@ -3,6 +3,9 @@ const minify = require('gulp-minify');
 const cleanCss = require('gulp-clean-css');
 const htmlmin = require('gulp-htmlmin');
 const browserify = require('gulp-browserify');
+const replace = require('gulp-replace-task');
+const args = require('yargs').argv;
+const fs = require('fs');
 const generateLocalisedHtmlFromEjs = require('./locales/utils/i18n-ejs-generator')
 
 gulp.task('ejs', function (callback) {
@@ -25,6 +28,10 @@ gulp.task('html', function () {
 });
 
 gulp.task('js', function () {
+  var env = args.env || 'local';
+
+  var filename = 'env.config.' + env + '.json';
+  var settings = JSON.parse(fs.readFileSync('assets/config/' + filename, 'utf8'));
   return gulp
     .src(['assets/js/*.js'])
     .pipe(
@@ -32,6 +39,14 @@ gulp.task('js', function () {
         transform: ['babelify'],
       })
     )
+    .pipe(replace({
+      patterns: [
+        {
+          match: 'apiUrl',
+          replacement: settings.apiUrl
+        },
+      ]
+    }))
     .pipe(
       minify({
         ext: {
@@ -49,4 +64,4 @@ gulp.task('css', function () {
     .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('default', gulp.parallel('js', 'css', 'ejs'));
+gulp.task('default', gulp.parallel('js', 'css', gulp.series('html', 'ejs')));
