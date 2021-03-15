@@ -210,7 +210,7 @@ $(document).ready(function () {
     setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
     setTNCOnChange($userName, $startRecordBtnTooltip);
     setUserNameOnInputFocus();
-    setStartRecordingBtnOnClick();
+    setStartRecordingBtnOnClick(top_lang);
     setUserModalOnShown($userName);
 
     const $say = $('#say');
