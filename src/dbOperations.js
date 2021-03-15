@@ -314,7 +314,6 @@ const getGenderGroupData = (language = '') => {
         languageFilter = `language iLike '${language}'`
     }
     let filter = pgp.as.format('$1:raw', [languageFilter])
-    console.log(filter);
     return db.any(genderGroupContributions, filter);
 }
 
