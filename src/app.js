@@ -35,7 +35,7 @@ const {
 
 const { I18n } = require('i18n');
 const i18n = new I18n({
-  locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te'],
+  locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te', 'doi', 'mai', 'ur', 'kr', 'kd', 'mnibn', 'mnimm', 'satol', 'satdv', 'sa'],
   directory: './locales',
   cookie: 'i18n'
 })
