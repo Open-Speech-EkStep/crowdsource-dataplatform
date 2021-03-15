@@ -192,7 +192,9 @@ $(document).ready(function () {
             const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
             const genderValue = checkedGender.length ? checkedGender[0].value : '';
             const userNameValue = $userName.val().trim().substring(0, 12);
-            if (languageToRecord === 'English') languageToRecord = DEFAULT_CON_LANGUAGE;
+            const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === languageToRecord);
+            if (! selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
+            // if (languageToRecord === 'English') languageToRecord = DEFAULT_CON_LANGUAGE;
             if (testUserName(userNameValue)) {
                 return;
             }
