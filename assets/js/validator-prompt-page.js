@@ -1,6 +1,6 @@
 const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
-const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown,showElement,hideElement  } = require('./utils');
+const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo } = require('./utils');
 const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('./constants');
 
 const visualizer = new Visualizer();
@@ -234,7 +234,9 @@ function recordValidation(action) {
         body: JSON.stringify({
             sentenceId: sentenceId,
             action: action,
-            contributionId: contribution_id
+            contributionId: contribution_id,
+            state: localStorage.getItem('state_region') || "",
+            country: localStorage.getItem('country') || ""
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -415,9 +417,15 @@ $(document).ready(() => {
     toggleFooterPosition();
     setPageContentHeight();
     const language = localStorage.getItem('contributionLanguage');
-    if(language) {
+    if (language) {
         updateLocaleLanguagesDropdown(language);
     }
+    fetchLocationInfo().then(res => {
+        return res.json()
+    }).then(response => {
+        localStorage.setItem("state_region", response.regionName);
+        localStorage.setItem("country", response.country);
+    }).catch(console.log);
     fetch(`/validation/sentences/${language}`)
         .then((data) => {
             if (!data.ok) {

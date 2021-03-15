@@ -49,8 +49,8 @@ const getValidationSentencesQuery = 'select audio_path, con."sentenceId", sen.se
     from contributions con inner join sentences sen on sen."sentenceId"=con."sentenceId" and con.action=\'completed\' \
     where sen."state"= \'contributed\' and language=$1 group by audio_path, con."sentenceId", sen.sentence, con.contribution_id order by RANDOM() limit 5;'
 
-const addValidationQuery = 'insert into validations (contribution_id, "action", validated_by, "date") \
-select contribution_id, $3, $1, now() from contributions inner join sentences on sentences."sentenceId"=contributions."sentenceId" \
+const addValidationQuery = 'insert into validations (contribution_id, "action", validated_by, "date", "state_region", "country") \
+select contribution_id, $3, $1, now(), $5, $6 from contributions inner join sentences on sentences."sentenceId"=contributions."sentenceId" \
 where sentences."sentenceId" = $2 and sentences.state = \'contributed\' and contribution_id=$4;'
 
 const updateSentencesWithValidatedState = 'update sentences set "state" = \

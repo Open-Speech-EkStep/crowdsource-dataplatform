@@ -220,8 +220,8 @@ const getAudioClip = async function (req, res, objectStorage) {
 
 const updateTablesAfterValidation = function (req, res) {
     const validatorId = req.cookies.userId;
-    const { sentenceId, action, contributionId } = req.body
-    return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId]).then(() => {
+    const { sentenceId, action, contributionId, state = "", country = "" } = req.body
+    return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country]).then(() => {
         if (action !== 'skip')
             db.none(updateSentencesWithValidatedState, [sentenceId]).then(() => {
                 res.sendStatus(200);
