@@ -1,6 +1,5 @@
 const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require("./constants");
 
-
 function showElement(element) {
     element.removeClass('d-none');
 }

@@ -1,4 +1,4 @@
-const { calculateTime, formatTime,updateLocaleLanguagesDropdown, showElement,hideElement} = require("../assets/js/utils");
+const { calculateTime, formatTime,updateLocaleLanguagesDropdown, showElement,hideElement,performAPIRequest} = require("../assets/js/utils");
 const { stringToHTML} = require("./utils");
 const fetchMock = require("fetch-mock");
 const { readFileSync } = require("fs");
@@ -7,8 +7,60 @@ document.body = stringToHTML(
     readFileSync(`${__dirname}/../views/common/headerForContributor.ejs`, "UTF-8")
 );
 
-
 describe('test utils', () => {
+    describe("performAPIRequest", () => {
+        test("should give details for given language if server responds ok", () => {
+            fetchMock.get("/aggregate-data-count", {
+                data: [
+                    {
+                        total_languages: "2",
+                        total_speakers: "80",
+                        total_contributions: "0.348",
+                        total_validations: "0.175",
+                    },
+                ],
+            });
+            performAPIRequest("/aggregate-data-count").then((data) => {
+                expect(data).toEqual({
+                    data: [
+                        {
+                            total_languages: "2",
+                            total_speakers: "80",
+                            total_contributions: "0.348",
+                            total_validations: "0.175",
+                        },
+                    ],
+                });
+                fetchMock.reset();
+            });
+        });
+
+        test("should give details for all language if server responds ok", () => {
+            fetchMock.get(`/aggregate-data-count?byLanguage=${true}`, {
+                data: [{ language: "Hindi", count: 5 }],
+            });
+            performAPIRequest(`/aggregate-data-count?byLanguage=${true}`).then(
+                (data) => {
+                    expect(data).toEqual({ data: [{ language: "Hindi", count: 5 }] });
+                    fetchMock.reset();
+                }
+            );
+        });
+
+        test("should give list for top-5 languages based on no. of contributions if server responds ok", () => {
+            const response = [
+                { language: "Hindi", contributions: 5 },
+                { language: "Odia", contributions: 4 },
+            ];
+            fetchMock.get("/top-languages-by-hours", response);
+            performAPIRequest("/top-languages-by-hours").then((data) => {
+                expect(data).toEqual(response);
+                fetchMock.reset();
+            });
+        });
+    });
+
+
     describe("calculateTime", () => {
         test("should calculate time in hours,min and sec for given sentence count", () => {
             expect(calculateTime(162)).toEqual({ hours: 0, minutes: 2, seconds: 42 });

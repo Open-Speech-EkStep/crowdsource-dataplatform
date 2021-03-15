@@ -5,10 +5,13 @@ const {
     setSpeakerDetails,
     resetSpeakerDetails,
     setUserNameTooltip,
-    setStartRecordBtnToolTipContent
+    setStartRecordBtnToolTipContent,
+    setTNCOnChange,
+    setGenderRadioButtonOnClick,
+    setStartRecordingBtnOnClick
 } = require('../assets/js/speakerDetails');
 const {readFileSync} = require('fs');
-const {stringToHTML, flushPromises} = require('./utils');
+const {stringToHTML, flushPromises,mockLocation, mockLocalStorage} = require('./utils');
 
 document.body = stringToHTML(
     readFileSync(`${__dirname}/../views/modals/speakerDetail.ejs`, 'UTF-8')
@@ -211,4 +214,125 @@ describe('setStartRecordBtnToolTipContent', () => {
         jest.clearAllMocks();
     })
 
+});
+
+describe("setTNCOnChange",()=> {
+    test("should disable startRecordBtnTooltip when TNC checkbox is checked & username is valid", () => {
+        const $tncCheckbox = $('#tnc');
+        const $startRecordBtn = $('#proceed-box');
+        const $startRecordBtnTooltip = $startRecordBtn.parent();
+        const $userName = $('#username');
+
+        $tncCheckbox.prop('checked', true);
+        $userName.val = function () {
+            return {trim:()=>"ABC_User"};
+        };
+        $startRecordBtnTooltip.tooltip = (e) => {}
+
+        jest.spyOn($userName, 'val');
+        jest.spyOn($startRecordBtnTooltip, 'tooltip');
+        setTNCOnChange($userName,$startRecordBtnTooltip);
+
+        $tncCheckbox.change();
+
+        expect($startRecordBtn.hasClass('point-none')).toEqual(false);
+        expect($startRecordBtnTooltip.tooltip).toBeCalledWith('disable');
+
+    })
+
+    test("should enable startRecordBtnTooltip when TNC checkbox is not checked & username is valid", () => {
+        const $tncCheckbox = $('#tnc');
+        const $startRecordBtn = $('#proceed-box');
+        const $startRecordBtnTooltip = $startRecordBtn.parent();
+        const $userName = $('#username');
+
+
+        $tncCheckbox.prop('checked', false);
+        $userName.val = function () {
+            return {trim:()=>"ABC_User"};
+        };
+        $startRecordBtnTooltip.tooltip = (e) => {}
+
+        jest.spyOn($userName, 'val');
+        jest.spyOn($startRecordBtnTooltip, 'tooltip');
+        setTNCOnChange($userName,$startRecordBtnTooltip);
+
+        $tncCheckbox.change();
+
+        expect($startRecordBtn.hasClass('point-none')).toEqual(true);
+        expect($startRecordBtnTooltip.tooltip).toBeCalledWith('enable');
+    })
+
+    test("should enable startRecordBtnTooltip when TNC checkbox is checked & username is invalid", () => {
+        const $tncCheckbox = $('#tnc');
+        const $startRecordBtn = $('#proceed-box');
+        const $startRecordBtnTooltip = $startRecordBtn.parent();
+        const $userName = $('#username');
+
+
+        $tncCheckbox.prop('checked', true);
+        $userName.val = function () {
+            return {trim:()=>"ABC@gmail.com"};
+        };
+        $startRecordBtnTooltip.tooltip = (e) => {}
+
+        jest.spyOn($userName, 'val');
+        jest.spyOn($startRecordBtnTooltip, 'tooltip');
+        setTNCOnChange($userName,$startRecordBtnTooltip);
+
+        $tncCheckbox.change();
+
+        expect($startRecordBtn.hasClass('point-none')).toEqual(true);
+        expect($startRecordBtnTooltip.tooltip).toBeCalledWith('enable');
+    })
+});
+
+describe('setGenderRadioButtonOnClick', () => {
+    test('should mark the clicked radio button as checked', () => {
+        const genderRadios = document.querySelectorAll('input[name = "gender"]');
+        const selectedRadio = genderRadios[0];
+        selectedRadio.previous = false;
+        setGenderRadioButtonOnClick();
+        selectedRadio.click();
+
+        expect(selectedRadio.checked).toEqual(true);
+        expect(selectedRadio.previous).toEqual(true);
+        selectedRadio.previous = false;
+        selectedRadio.checked = false;
+
+    })
+
+});
+
+describe('setStartRecordingBtnOnClick', () => {
+    test('should setSpeakerDetails in local Storage and land on /record page', () => {
+        mockLocation();
+        mockLocalStorage();
+        const $startRecordBtn = $('#proceed-box');
+        const $tncCheckbox = $('#tnc');
+
+        $tncCheckbox.prop('checked', true);
+        setStartRecordingBtnOnClick("Hindi");
+        $startRecordBtn.click();
+
+        const expectedDetails = localStorage.getItem('speakerDetails');
+        expect(expectedDetails).toEqual(JSON.stringify({gender:"",age:"",motherTongue:"",userName:"",language:"Hindi"}));
+        expect(location.href).toEqual("/record");
+        localStorage.clear();
+    })
+
+    test('should not do anything when $tncCheckbox is not checked', () => {
+        mockLocation();
+        mockLocalStorage();
+        const $startRecordBtn = $('#proceed-box');
+        const $tncCheckbox = $('#tnc');
+
+        $tncCheckbox.prop('checked', false);
+        setStartRecordingBtnOnClick("Hindi");
+        $startRecordBtn.click();
+
+        const expectedDetails = localStorage.getItem('speakerDetails');
+        expect(expectedDetails).toEqual(undefined);
+        localStorage.clear();
+    })
 });
