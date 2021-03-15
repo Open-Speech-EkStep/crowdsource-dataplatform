@@ -69,6 +69,7 @@ const updateDbWithAudioPath = function (
     userName,
     state,
     country,
+    audioDuration,
     cb
 ) {
     const speakerDetailsJson = JSON.parse(speakerDetails);
@@ -90,7 +91,8 @@ const updateDbWithAudioPath = function (
         encryptUserId,
         userName,
         state,
-        country
+        country,
+        audioDuration
     ])
         .then((data) => {
             db.none(updateSentencesWithContributedState, [sentenceId]).then();

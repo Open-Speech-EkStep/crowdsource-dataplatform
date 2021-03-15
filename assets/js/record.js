@@ -1,4 +1,4 @@
-const {setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown} = require('./utils')
+const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown } = require('./utils')
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
@@ -28,6 +28,7 @@ const setCurrentSentenceIndex = (index) => {
     const currentSentenceLbl = document.getElementById('currentSentenceLbl');
     currentSentenceLbl.innerText = index;
 }
+
 const setTotalSentenceIndex = (index) => {
     const totalSentencesLbl = document.getElementById('totalSentencesLbl');
     totalSentencesLbl.innerText = index;
@@ -38,7 +39,7 @@ const startTimer = (seconds, display) => {
     counterSpan.innerHTML = `0${seconds}`
     display.classList.remove('d-none');
     let interval = setInterval(function () {
-        
+
         counterSpan.innerText = `0${seconds}`
         seconds--
         if (seconds < 0) {
@@ -169,15 +170,18 @@ const initialize = () => {
             },
         ],
     });
+
     const handleAudioDurationError = (duration) => {
         if (duration < 2) {
             $nextBtnToolTip.tooltip('enable');
             $nextBtn.prop('disabled', true).addClass('point-none');
             $audioSmallError.removeClass('d-none');
+            return false;
         } else {
             $nextBtnToolTip.tooltip('disable');
             $nextBtn.removeAttr('disabled').removeClass('point-none');
             $audioSmallError.addClass('d-none');
+            return true;
         }
     };
 
@@ -233,7 +237,6 @@ const initialize = () => {
                     startTimer(5, $autoStopWarning)
                 }, 15 * 1000);
 
-
                 cleartTimeoutKey = setTimeout(() => {
                     $stopRecordBtn.click();
                 }, 21 * 1000);
@@ -279,8 +282,11 @@ const initialize = () => {
             crowdSource.audioBlob = blob;
             $player.prop('src', bloburl);
             $player.on('loadedmetadata', () => {
-                const audioDuration = $player[0].duration;
-                handleAudioDurationError(audioDuration);
+                const duration = $player[0].duration;
+                const isValidAudio = handleAudioDurationError(duration);
+                if (isValidAudio) {
+                    crowdSource.audioDuration = duration
+                }
             });
         });
         if (currentIndex === totalItems - 1) {
@@ -357,6 +363,7 @@ const initialize = () => {
         fd.append('sentenceId', crowdSource.sentences[currentIndex].sentenceId);
         fd.append('state', localStorage.getItem('state_region') || "");
         fd.append('country', localStorage.getItem('country') || "");
+        fd.append('audioDuration', crowdSource.audioDuration);
         fetch('/upload', {
             method: 'POST',
             body: fd,
@@ -421,7 +428,9 @@ $(document).ready(() => {
     const $navUser = $('#nav-user');
     const $navUserName = $navUser.find('#nav-username');
     const contributionLanguage = localStorage.getItem('contributionLanguage');
-    updateLocaleLanguagesDropdown(contributionLanguage);
+    if(contributionLanguage) {
+        updateLocaleLanguagesDropdown(contributionLanguage);
+    }
     fetchLocationInfo().then(res => {
         return res.json()
     }).then(response => {

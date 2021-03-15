@@ -61,7 +61,7 @@ const UpdateAudioPathAndUserDetails = 'WITH src AS ( \
     where contributor_identifier = $6 and user_name = $7\
     ) \
 UPDATE "contributions" \
-SET "audio_path" = $1, "action" = \'completed\' , "date" = now(), "state_region" = $8, "country" = $9\
+SET "audio_path" = $1, "action" = \'completed\' , "date" = now(), "state_region" = $8, "country" = $9, "audio_duration" = $10\
 FROM src \
 WHERE "sentenceId" = $5 AND contributed_by  = src.contributor_id \
 returning "audio_path";'

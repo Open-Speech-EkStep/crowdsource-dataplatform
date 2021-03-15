@@ -1,18 +1,12 @@
-const { HOUR_IN_SECONDS, SIXTY } = require("./constants");
+const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require("./constants");
 
-const ALL_LANGUAGES = [
-    {value: "Assamese",id: "as", text: "অসমীয়া", hasLocaleText: true},
-    {value: "Bengali", id: "bn", text: "বাংলা", hasLocaleText: true},
-    {value: "English", id: "en", text: "English", hasLocaleText: true},
-    {value: "Gujarati", id: "gu", text: "ગુજરાતી", hasLocaleText: true},
-    {value: "Hindi", id: "hi", text: "हिंदी", hasLocaleText: true},
-    {value: "Kannada", id: "kn", text: "ಕನ್ನಡ", hasLocaleText: true},
-    {value: "Malayalam", id: "ml", text: "മലയാളം", hasLocaleText: true},
-    {value: "Marathi", id: "mr", text: "मराठी", hasLocaleText: true},
-    {value: "Odia", id: "or", text: "ଓଡିଆ", hasLocaleText: true},
-    {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ", hasLocaleText: true},
-    {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: true},
-    {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true}];
+function showElement(element) {
+    element.removeClass('d-none');
+}
+
+function hideElement(element) {
+    element.addClass('d-none');
+}
 
 function convertPXToVH(px) {
     return px * (100 / document.documentElement.clientHeight);
@@ -107,4 +101,4 @@ const formatTime = function (hours, minutes = 0, seconds = 0) {
     return result.substr(0, result.length - 1);
 };
 
-module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime, getLocaleString, performAPIRequest}
+module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime, getLocaleString, performAPIRequest,showElement,hideElement}
