@@ -1,33 +1,25 @@
 const {drawMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest} = require('./utils')
 const {
-    validateUserName,
     testUserName,
     setSpeakerDetails,
-    resetSpeakerDetails,
-    setUserNameTooltip,
-    setStartRecordBtnToolTipContent
+    setStartRecordBtnToolTipContent,
+    setTNCOnChange,
+    setUserModalOnShown,
+    setUserNameOnInputFocus,
+    setGenderRadioButtonOnClick,
+    setStartRecordingBtnOnClick
 } = require('./speakerDetails');
 
-const {DEFAULT_CON_LANGUAGE} = require('./constants');
-
-const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
-const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
-const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
-const LOCALE_STRINGS = 'localeString';
-const ALL_LANGUAGES = [
-    {value: "Assamese",id: "as", text: "অসমীয়া", hasLocaleText: true},
-    {value: "Bengali", id: "bn", text: "বাংলা", hasLocaleText: true},
-    {value: "English", id: "en", text: "English", hasLocaleText: true},
-    {value: "Gujarati", id: "gu", text: "ગુજરાતી", hasLocaleText: true},
-    {value: "Hindi", id: "hi", text: "हिंदी", hasLocaleText: true},
-    {value: "Kannada", id: "kn", text: "ಕನ್ನಡ", hasLocaleText: true},
-    {value: "Malayalam", id: "ml", text: "മലയാളം", hasLocaleText: true},
-    {value: "Marathi", id: "mr", text: "मराठी", hasLocaleText: true},
-    {value: "Odia", id: "or", text: "ଓଡିଆ", hasLocaleText: true},
-    {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ", hasLocaleText: true},
-    {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: true},
-    {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true}];
+const {
+    DEFAULT_CON_LANGUAGE,
+    TOP_LANGUAGES_BY_HOURS,
+    TOP_LANGUAGES_BY_SPEAKERS,
+    AGGREGATED_DATA_BY_LANGUAGE,
+    CONTRIBUTION_LANGUAGE,
+    LOCALE_STRINGS,
+    ALL_LANGUAGES
+} = require('./constants');
 
 const updateLocaleText = function (total_contributions, total_validations, language) {
     const $say_p_3 = $("#say-p-3");
@@ -37,7 +29,7 @@ const updateLocaleText = function (total_contributions, total_validations, langu
     hrsRecordedIn = hrsRecordedIn.replace("%hours", total_contributions);
     hrsRecordedIn = hrsRecordedIn.replace("%language", language);
     $say_p_3.text(hrsRecordedIn);
-    
+
     let hrsValidatedIn = localeStrings['hrs validated in'];
     hrsValidatedIn = hrsValidatedIn.replace("%hours", total_validations);
     hrsValidatedIn = hrsValidatedIn.replace("%language", language);
@@ -63,7 +55,7 @@ function updateHrsForSayAndListen(language) {
 
 const getDefaultTargettedDiv = function (key, value, $sayListenLanguage) {
     let targetIndex = 0;
-    const  $sayListenLanguageItems = $sayListenLanguage.children();
+    const $sayListenLanguageItems = $sayListenLanguage.children();
     $sayListenLanguageItems.each(function (index, element) {
         if (element.getAttribute('value') === DEFAULT_CON_LANGUAGE) {
             targetIndex = index;
@@ -78,7 +70,7 @@ const getDefaultTargettedDiv = function (key, value, $sayListenLanguage) {
     return $sayListenLanguageItems[targetIndex];
 }
 
-const setLangNavBar = (targetedDiv,top_lang, $languageNavBar) => {
+const setLangNavBar = (targetedDiv, top_lang, $languageNavBar) => {
     const allDivs = $languageNavBar.children();
     let targetttedDivIndex = -1
     allDivs.each(function (index, element) {
@@ -103,45 +95,30 @@ const setLangNavBar = (targetedDiv,top_lang, $languageNavBar) => {
     }
 }
 
-const setLanguagesInHeader = function() {
-    const $languageNavBar= $('#language-nav-bar');
+const setDefaultLang = function () {
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    const $sayListenLanguage = $('#say-listen-language');
+    const $languageNavBar = $('#language-nav-bar')
     const $navBarLoader = $('#nav-bar-loader');
-    const languages = [
-        {value: "Hindi", id: "hi", text: "हिंदी"},
-        {value: "Marathi", id: "mr", text: "मराठी"},
-        {value: "Bengali", id: "bn", text: "বাংলা"},
-        {value: "Tamil", id: "ta", text: "தமிழ்"},
-        {value: "Telugu", id: "te", text: "తెలుగు"}
-    ]
-    languages.forEach((element,index)=>{
-        $languageNavBar.append(`<li class="nav-item px-lg-4 px-md-4 px-2 options" value=${element.value}>${element.text}</li>`);
-    });
-
     $navBarLoader.addClass('d-none');
     $languageNavBar.removeClass('d-none');
-    setDefaultLang();
-}
 
-const setDefaultLang = function (){
-    const contributionLanguage = localStorage.getItem('contributionLanguage');
-    const $sayListenLanguage = $('#say-listen-language');
-    const  $languageNavBar = $('#language-nav-bar')
-    if(!contributionLanguage){
+    if (!contributionLanguage) {
         const $homePage = document.getElementById('home-page');
         const defaultLangId = $homePage.getAttribute('default-lang');
-        const targettedDiv = getDefaultTargettedDiv('id',defaultLangId, $sayListenLanguage);
+        const targettedDiv = getDefaultTargettedDiv('id', defaultLangId, $sayListenLanguage);
         const language = targettedDiv.getAttribute("value");
-        localStorage.setItem('contributionLanguage', language);
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
         updateHrsForSayAndListen(language);
         setLangNavBar(targettedDiv, language, $languageNavBar);
         return;
     }
-    const targettedDiv = getDefaultTargettedDiv('value',contributionLanguage, $sayListenLanguage);
+    const targettedDiv = getDefaultTargettedDiv('value', contributionLanguage, $sayListenLanguage);
     updateHrsForSayAndListen(contributionLanguage);
     setLangNavBar(targettedDiv, contributionLanguage, $languageNavBar);
 }
 
-const clearLocalStroage = function() {
+const clearLocalStroage = function () {
     localStorage.removeItem(TOP_LANGUAGES_BY_HOURS);
     localStorage.removeItem(TOP_LANGUAGES_BY_SPEAKERS);
     localStorage.removeItem(AGGREGATED_DATA_BY_LANGUAGE);
@@ -150,15 +127,15 @@ const clearLocalStroage = function() {
 
 const getStatsSummary = function () {
     performAPIRequest('/stats/summary')
-    .then(response => {
-        drawMap({data: response.aggregate_data_by_state});
-        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response.top_languages_by_hours));
-        showByHoursChart();
-        localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
-        localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-        setLanguagesInHeader();
-        getStatistics(response.aggregate_data_count[0]);
-    });
+        .then(response => {
+            drawMap({data: response.aggregate_data_by_state});
+            localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response.top_languages_by_hours));
+            showByHoursChart();
+            localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
+            localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
+            setDefaultLang();
+            getStatistics(response.aggregate_data_count[0]);
+        });
 }
 
 $(document).ready(function () {
@@ -167,11 +144,9 @@ $(document).ready(function () {
     const speakerDetailsKey = 'speakerDetails';
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
-    const genderRadios = document.querySelectorAll('input[name = "gender"]');
     const age = document.getElementById('age');
     const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
-    const $userNameError = $userName.next();
     const $tncCheckbox = $('#tnc');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
@@ -183,16 +158,17 @@ $(document).ready(function () {
         container: 'body',
         placement: screen.availWidth > 500 ? 'right' : 'auto',
     });
-    let top_lang = localStorage.getItem('contributionLanguage');
+
+    let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const $languageNavBar = $('#language-nav-bar');
     const $sayListenLanguage = $('#say-listen-language');
 
-    $sayListenLanguage.on('click',(e)=>{
+    $sayListenLanguage.on('click', (e) => {
         const targetedDiv = e.target;
         const language = targetedDiv.getAttribute("value");
-        if(top_lang !== language) {
+        if (top_lang !== language) {
             top_lang = language;
-            localStorage.setItem('contributionLanguage',language);
+            localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
             document.cookie = `i18n=en`;
             window.location.href = "/";
             setLangNavBar(targetedDiv, language, $languageNavBar);
@@ -203,8 +179,8 @@ $(document).ready(function () {
     $languageNavBar.on('click', (e) => {
         const targetedDiv = e.target;
         const language = targetedDiv.getAttribute('value');
-        if(top_lang !== language) {
-            localStorage.setItem('contributionLanguage',language);
+        if (top_lang !== language) {
+            localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
             top_lang = language;
             const $6th_place = $('#6th_option')
             const previousActiveDiv = $languageNavBar.find('.active') || $6th_place;
@@ -222,7 +198,7 @@ $(document).ready(function () {
     });
 
     $('[name="topLanguageChart"]').on('change', (event) => {
-        if(event.target.value === 'hours') {
+        if (event.target.value === 'hours') {
             showByHoursChart();
         } else {
             showBySpeakersChart();
@@ -230,64 +206,13 @@ $(document).ready(function () {
     });
 
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
-
-    genderRadios.forEach((element) => {
-        element.addEventListener('click', (e) => {
-            if (e.target.previous) {
-                e.target.checked = false;
-            }
-            e.target.previous = e.target.checked;
-        });
-    });
-
+    setGenderRadioButtonOnClick();
     setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
-    $tncCheckbox.change(function () {
-        const userNameValue = $userName.val().trim();
-        if (this.checked && !testUserName(userNameValue)) {
-            $startRecordBtn.removeAttr('disabled').removeClass('point-none');
-            $startRecordBtnTooltip.tooltip('disable');
-        } else {
-            setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
-            $startRecordBtn.prop('disabled', 'true').addClass('point-none');
-            $startRecordBtnTooltip.tooltip('enable');
-        }
-    });
+    setTNCOnChange($userName, $startRecordBtnTooltip);
+    setUserNameOnInputFocus();
+    setStartRecordingBtnOnClick();
+    setUserModalOnShown($userName);
 
-    $userName.on('input focus', () => {
-        validateUserName($userName, $userNameError, $tncCheckbox);
-        setUserNameTooltip($userName);
-    });
-
-    $startRecordBtn.on('click', () => {
-        if ($tncCheckbox.prop('checked')) {
-            const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
-            const genderValue = checkedGender.length ? checkedGender[0].value : '';
-            const userNameValue = $userName.val().trim().substring(0, 12);
-            if (sentenceLanguage === 'English') sentenceLanguage = DEFAULT_CON_LANGUAGE;
-            if (testUserName(userNameValue)) {
-                return;
-            }
-            const speakerDetails = {
-                gender: genderValue,
-                age: age.value,
-                motherTongue: motherTongue.value,
-                userName: userNameValue,
-                language: sentenceLanguage || localStorage.getItem('contributionLanguage'),
-            };
-            localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
-            location.href = '/record';
-        }
-    });
-
-    $('#userModal').on('shown.bs.modal', function () {
-        $('#resetBtn').on('click', resetSpeakerDetails);
-        $userName.tooltip({
-            container: 'body',
-            placement: screen.availWidth > 500 ? 'right' : 'auto',
-            trigger: 'focus',
-        });
-        setUserNameTooltip($userName);
-    });
     const $say = $('#say');
     const $listen = $('#listen');
     const $listen_p_2 = $('#listen-p-2');
@@ -340,4 +265,5 @@ $(document).ready(function () {
 module.exports = {
     updateHrsForSayAndListen,
     getDefaultTargettedDiv,
+    setLangNavBar
 };

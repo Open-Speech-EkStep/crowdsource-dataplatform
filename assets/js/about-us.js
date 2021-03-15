@@ -1,6 +1,14 @@
-const {validateUserName, testUserName,setSpeakerDetails, resetSpeakerDetails,setUserNameTooltip,setStartRecordBtnToolTipContent} = require('./speakerDetails');
+const {
+    testUserName,
+    setSpeakerDetails,
+    setStartRecordBtnToolTipContent,
+    setTNCOnChange,
+    setUserModalOnShown,
+    setUserNameOnInputFocus,
+    setGenderRadioButtonOnClick
+} = require('./speakerDetails');
 const {DEFAULT_CON_LANGUAGE} = require('./constants');
-const { updateLocaleLanguagesDropdown } = require('./utils');
+const {updateLocaleLanguagesDropdown} = require('./utils');
 
 $(document).ready(function () {
     const speakerDetailsKey = 'speakerDetails';
@@ -10,12 +18,11 @@ $(document).ready(function () {
     const age = document.getElementById('age');
     const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
-    const $userNameError = $userName.next();
     const $tncCheckbox = $('#tnc');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
     const contributionLanguage = localStorage.getItem('contributionLanguage');
-    if(contributionLanguage) {
+    if (contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }
 
@@ -28,15 +35,7 @@ $(document).ready(function () {
 
 
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
-
-    genderRadios.forEach((element) => {
-        element.addEventListener('click', (e) => {
-            if (e.target.previous) {
-                e.target.checked = false;
-            }
-            e.target.previous = e.target.checked;
-        });
-    });
+    setGenderRadioButtonOnClick();
 
     let langTop;
     $('#languageTop').on('change', (e) => {
@@ -50,22 +49,8 @@ $(document).ready(function () {
     });
 
     setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
-    $tncCheckbox.change(function () {
-        const userNameValue = $userName.val().trim();
-        if (this.checked && !testUserName(userNameValue)) {
-            $startRecordBtn.removeAttr('disabled').removeClass('point-none');
-            $startRecordBtnTooltip.tooltip('disable');
-        } else {
-            setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
-            $startRecordBtn.prop('disabled', 'true').addClass('point-none');
-            $startRecordBtnTooltip.tooltip('enable');
-        }
-    });
-
-    $userName.on('input focus', () => {
-        validateUserName($userName, $userNameError, $tncCheckbox);
-        setUserNameTooltip($userName);
-    });
+    setTNCOnChange($userName, $startRecordBtnTooltip);
+    setUserNameOnInputFocus();
 
     $startRecordBtn.on('click', () => {
         if ($tncCheckbox.prop('checked')) {
@@ -90,15 +75,5 @@ $(document).ready(function () {
         }
     });
 
-    $('#userModal').on('shown.bs.modal', function () {
-        $('#resetBtn').on('click', resetSpeakerDetails);
-
-        $userName.tooltip({
-            container: 'body',
-            placement: screen.availWidth > 500 ? 'right' : 'auto',
-            trigger: 'focus',
-        });
-
-        setUserNameTooltip($userName);
-    });
+    setUserModalOnShown($userName);
 });
