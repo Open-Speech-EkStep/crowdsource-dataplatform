@@ -22,14 +22,14 @@ const ALL_LANGUAGES = [
     {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true,data:true},
     {value: "Dogri", id: "doi", text: "Dogri", hasLocaleText: false,data:true},
     {value: "Maithili", id: "mai", text: "Maithili", hasLocaleText: false,data:true},
-    {value: "Urdu", id: "ur", text: "Urdu", hasLocaleText: false,data:true},
-    {value: "Konkani Roman", id: "kr", text: "Konkani Roman", hasLocaleText: false,data:false},
+    {value: "Urdu", id: "ur", text: "Urdu", hasLocaleText: true,data:false},
+    {value: "Konkani Roman", id: "kr", text: "Konkani Roman", hasLocaleText: true,data:false},
     {value: "Konkani DV", id: "kd", text: "Konkani DV", hasLocaleText: false,data:false},
     {value: "Manipuri BN", id: "mnibn", text: "Manipuri BN", hasLocaleText: false,data:false},
     {value: "Manipuri MM", id: "mnimm", text: "Manipuri MM", hasLocaleText: false,data:false},
     {value: "Santali OL", id: "satol", text: "Santali OL", hasLocaleText: false,data:false},
     {value: "Santali DV", id: "satdv", text: "Santali DV", hasLocaleText: false,data:false},
-    {value: "Sanskrit", id: "sa", text: "Sanskrit", hasLocaleText: false,data:false}];
+    {value: "Sanskrit", id: "sa", text: "Sanskrit", hasLocaleText: true,data:false}];
 
 module.exports = {
     DEFAULT_CON_LANGUAGE,
