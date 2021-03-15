@@ -4,6 +4,8 @@ const objectStorage = process.argv[2] || 'gcp';
 const fetch = require('node-fetch');
 
 const { uploader } = require('./uploader/objUploader')
+const { calculateSNR } = require('./audio_attributes/snr')
+
 const helmet = require('helmet')
 const express = require('express');
 const app = express();
@@ -203,13 +205,25 @@ router.post('/upload', (req, res) => {
     });
 });
 
+router.post('/audio/snr', async (req, res) => {
+  const file = req.file;
+  const filePath = file.path
+  const command = `${WADASNR_BIN_PATH}/WADASNR-i ${filePath} -t ${WADASNR_BIN_PATH}/Alpha0.400000.txt -ifmt mswav`
+  try {
+    const snr = await calculateSNR(command)
+    res.status(200).send({ 'snr': snr });
+  } catch (err) {
+    res.sendStatus(400);
+  }
+});
+
 router.get('/location-info', (req, res) => {
   const ip = req.query.ip || null;
   if (ip === null) {
     res.sendStatus(400);
     return;
   }
-  fetch(`http://ip-api.com/json/${ip}?fields=country,regionName`).then(res=>res.json()).then(response => {
+  fetch(`http://ip-api.com/json/${ip}?fields=country,regionName`).then(res => res.json()).then(response => {
     res.send(response);
   }).catch(err => {
     res.sendStatus(500);
@@ -221,12 +235,12 @@ app.get('/get-locale-strings', function (req, res) {
   const cookie = cookies.find(cookie => cookie.toLowerCase().startsWith("i18n"));
   const cookieName = cookie.split("=").pop();
   fs.readFile(`${__dirname}/../locales/${cookieName}.json`, (err, body) => {
-    if(err) {
+    if (err) {
       return res.sendStatus(500);
     }
     const data = JSON.parse(body);
     const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds'];
-    
+
     const langSttr = {};
     list.forEach((key) => {
       langSttr[key] = data[key];
