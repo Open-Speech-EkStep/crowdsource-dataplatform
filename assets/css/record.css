@@ -397,3 +397,7 @@ audio {
   border-left: 0 solid transparent;
   border-right: 1.275em solid transparent;
 }
+
+.prompt{
+  min-height: 120px;
+}
