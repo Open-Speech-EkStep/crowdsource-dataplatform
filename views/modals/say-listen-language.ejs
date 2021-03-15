@@ -12,18 +12,7 @@
             <div class="modal-body">
 
                 <div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer" id="say-listen-language">
-                    <% [{value: "Assamese", id: "as", text: "অসমীয়া"},
-                        {value: "Bengali", id: "bn", text: "বাংলা"},
-                        // {value: "English", id: "en", text: "English"},
-                        {value: "Gujarati", id: "gu", text: "ગુજરાતી"},
-                        {value: "Hindi", id: "hi", text: "हिंदी"},
-                        {value: "Kannada", id: "kn", text: "ಕನ್ನಡ"},
-                        {value: "Malayalam", id: "ml", text: "മലയാളം"},
-                        {value: "Marathi", id: "mr", text: "मराठी"},
-                        {value: "Odia", id: "or", text: "ଓଡିଆ"},
-                        {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ"},
-                        {value: "Tamil", id: "ta", text: "தமிழ்"},
-                        {value: "Telugu", id: "te", text: "తెలుగు"}].forEach(e=>{ %>
+                <% LANGUAGES.forEach(e=>{ %>
                         <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="<%= e.value %>" id="<%= e.id %>"><%= e.text %></div>
                     <% }) %>
                 </div>

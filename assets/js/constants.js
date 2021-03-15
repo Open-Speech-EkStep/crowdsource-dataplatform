@@ -2,6 +2,11 @@ const DEFAULT_CON_LANGUAGE = "Hindi";
 const AUDIO_DURATION = 6;
 const SIXTY = 60;
 const HOUR_IN_SECONDS = 3600;
+const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
+const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
+const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
+const LOCALE_STRINGS = 'localeString';
+const CONTRIBUTION_LANGUAGE = "contributionLanguage";
 const ALL_LANGUAGES = [
     {value: "Assamese",id: "as", text: "অসমীয়া", hasLocaleText: true},
     {value: "Bengali", id: "bn", text: "বাংলা", hasLocaleText: true},
@@ -21,5 +26,10 @@ module.exports = {
     AUDIO_DURATION,
     SIXTY,
     HOUR_IN_SECONDS,
-    ALL_LANGUAGES
+    ALL_LANGUAGES,
+    TOP_LANGUAGES_BY_HOURS,
+    TOP_LANGUAGES_BY_SPEAKERS,
+    AGGREGATED_DATA_BY_LANGUAGE,
+    LOCALE_STRINGS,
+    CONTRIBUTION_LANGUAGE
 }

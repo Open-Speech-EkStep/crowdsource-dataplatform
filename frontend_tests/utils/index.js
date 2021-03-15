@@ -26,6 +26,15 @@ function mockLocalStorage() {
     Object.defineProperty(window, 'localStorage', {value: localStorageMock});
 }
 
+
+function mockLocation(url=""){
+    Object.defineProperty(window, 'location', {
+        value: {
+            href: url,
+        }
+    });
+}
+
 const flushPromises = () => new Promise(setImmediate);
 
-module.exports = {stringToHTML, mockLocalStorage, flushPromises};
+module.exports = {stringToHTML, mockLocalStorage, flushPromises,mockLocation};
