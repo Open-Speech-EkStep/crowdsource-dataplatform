@@ -201,7 +201,9 @@ const initialize = () => {
             .getUserMedia({ audio: true, video: false })
             .then((stream) => {
                 $getStarted.hide();
-                $startRecordRow.addClass('d-none');
+                $startRecordBtn.addClass('d-none');
+                $skipBtn.prop('disabled',true);
+                $startRecordRow.removeClass('d-none');
                 $stopRecordBtn.removeClass('d-none');
                 $recordingRow.removeClass('d-none');
                 $recordingSign.removeClass('d-none');
@@ -246,7 +248,7 @@ const initialize = () => {
                 notyf.error(
                     'Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission'
                 );
-                $startRecordRow.removeClass('d-none');
+                // $startRecordRow.removeClass('d-none');
                 $stopRecordBtn.addClass('d-none');
                 $nextBtn.addClass('d-none');
                 $reRecordBtn.addClass('d-none');
@@ -260,16 +262,17 @@ const initialize = () => {
     });
 
     $stopRecordBtn.on('click', () => {
+        const $startRecordRow = $('#startRecordRow');
         clearTimeout(cleartTimeoutKey);
         clearTimeout(timerTimeoutKey)
         $autoStopWarning.classList.add('d-none');
         $startRecordRow.addClass('d-none');
         $stopRecordBtn.addClass('d-none');
         $nextBtn.removeClass('d-none');
+        $skipBtn.prop('disabled',false);
         $reRecordBtn.removeClass('d-none');
         $recordingSign.addClass('d-none');
         $recordingRow.addClass('d-none');
-        $startRecordRow.addClass('d-none');
         $player.removeClass('d-none');
         $visualizer.addClass('d-none');
 
@@ -333,8 +336,10 @@ const initialize = () => {
         $player.addClass('d-none');
         $player.trigger('pause');
         $nextBtn.addClass('d-none');
+
         $reRecordBtn.addClass('d-none');
         $startRecordRow.removeClass('d-none');
+        $startRecordBtn.removeClass('d-none');
     });
 
     function incrementCurrentIndex() {
