@@ -33,7 +33,18 @@ const cumulativeCountOld = "select count(distinct(language)) as total_languages,
 const cumulativeCount = "select count(distinct(language)) as total_languages, count(distinct(contributed_by)) as total_speakers,ROUND(count(distinct(contribution_id))::decimal *6/3600,3)  as total_contributions,ROUND(sum(is_validated)::decimal *6/3600,3)  as total_validations from contributions_and_demo_stats;";
 
 // Distinct(contribution id causes issues)
-const cumulativeDataByState = "select contributions_state_region as state,count(distinct(contributed_by)) as total_speakers,ROUND(count(distinct(contribution_id))::decimal *6/3600,3)  as total_contributions,ROUND(sum(is_validated)::decimal *6/3600,3)  as total_validations from contributions_and_demo_stats group by contributions_state_region;";
+const cumulativeDataByStateOld = "select contributions_state_region as state,count(distinct(contributed_by)) as total_speakers,ROUND(count(distinct(contribution_id))::decimal *6/3600,3)  as total_contributions,ROUND(sum(is_validated)::decimal *6/3600,3)  as total_validations from contributions_and_demo_stats group by contributions_state_region;";
+const cumulativeDataByState = "select coalesce(contribution_by_state.state, validation_by_state.state) as state, total_speakers, total_contributions, total_validations \
+from \
+(select contributions_state_region as state, \
+count(distinct(contributed_by)) as total_speakers, \
+ROUND(count(distinct(contribution_id))::decimal *6/3600,3)  as total_contributions \
+from contributions_and_demo_stats  \
+group by contributions_state_region) as contribution_by_state FULL OUTER JOIN \
+(select validations_state_region as state, \
+ROUND(sum(is_validated)::decimal *6/3600,3)  as total_validations  \
+from contributions_and_demo_stats  \
+group by validations_state_region) as validation_by_state on contribution_by_state.state = validation_by_state.state;";
 
 // Distinct(contribution id causes issues)
 const cumulativeDataByLanguage = "select language,count(distinct(contributed_by)) as total_speakers,ROUND(count(distinct(contribution_id))::decimal *6/3600,3)  as total_contributions,ROUND(sum(is_validated)::decimal *6/3600,3)  as total_validations from contributions_and_demo_stats group by language;";
