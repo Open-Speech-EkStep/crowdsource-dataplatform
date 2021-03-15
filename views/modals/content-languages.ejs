@@ -8,7 +8,6 @@
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer">
-                    <a id="bengali" class="p-2" href="/changeLocale/bn">বাংলা</a>
                     <% LANGUAGES.forEach(e=>{ %>
                         <a id="<%= e.value %>" class="p-2" href="/changeLocale/<%= e.id %>"><%= e.value %></a>
                     <% }) %>
