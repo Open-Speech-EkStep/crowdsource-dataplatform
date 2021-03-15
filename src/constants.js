@@ -1,7 +1,7 @@
 const MAX_SIZE = 8;
 const VALID_FILE_TYPE = 'audio/wav';
 const ONE_YEAR = 31536000000;
-const KIDS_AGE_GROUP = '00 - 13'; //should be change when we have data for kids
+const KIDS_AGE_GROUP = 'upto 10'; //should be change when we have data for kids
 const KIDS = 'medium';
 const ADULT = 'medium';
 const MAX_LENGTH = 12;
@@ -46,15 +46,10 @@ const LANGUAGES = [{value: "Assamese",id: "as", text: "অসমীয়া"},
   
 const AGE_GROUP = [
   '',
-  '00 - 13',
-  '13 - 17',
-  '18 - 29',
-  '30 - 39',
-  '40 - 49',
-  '50 - 59',
-  '60 - 64',
-  '65 - 74',
-  '> 75',
+  'upto 10',
+  '10 - 30',
+  '30 - 60',
+  '60+',
 ];
 const GENDER = ['', 'male', 'female', 'others'];
 
