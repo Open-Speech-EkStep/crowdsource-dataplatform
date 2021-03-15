@@ -1,4 +1,4 @@
-const {DEFAULT_CON_LANGUAGE,CONTRIBUTION_LANGUAGE} = require('./constants');
+const {DEFAULT_CON_LANGUAGE,CONTRIBUTION_LANGUAGE,ALL_LANGUAGES} = require('./constants');
 
 function validateUserName($userName, $userNameError, $tncCheckbox) {
     const userNameValue = $userName.val().trim();
@@ -141,7 +141,9 @@ const setStartRecordingBtnOnClick = function (sentenceLanguage) {
             const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
             const genderValue = checkedGender.length ? checkedGender[0].value : '';
             const userNameValue = $userName.val().trim().substring(0, 12);
-            if (sentenceLanguage === 'English') sentenceLanguage = DEFAULT_CON_LANGUAGE;
+            console.log(sentenceLanguage)
+            const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === sentenceLanguage);
+            if (! selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
             if (testUserName(userNameValue)) {
                 return;
             }
