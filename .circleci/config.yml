@@ -102,6 +102,9 @@ workflows:
       - approve_to_deploy:
           name: approve_test_deployment_eks
           type: approval
+          filters:
+            branches:
+              only: master
           requires:
             - dev_deployment_eks
 
