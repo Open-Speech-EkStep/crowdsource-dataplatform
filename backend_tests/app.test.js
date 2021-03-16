@@ -75,7 +75,7 @@ describe("Test the root path", () => {
         const res = await request(app).get("/record");
 
         expect(res.status).toBe(200);
-        expect(res.text.includes("Get comfortable with the prompted text, before recording")).toBe(true)
+        expect(res.text.includes("Recording Instructions")).toBe(true)
     });
 
 
