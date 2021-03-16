@@ -2,7 +2,7 @@ const { encrypt } = require('./encryptAndDecrypt');
 const { downloader } = require('./downloader/objDownloader')
 const moment = require('moment');
 const {
-    UpdateAudioPathAndUserDetails,
+    updateAudioPathAndUserDetails,
     setNewUserAndFileName,
     unassignIncompleteSentences,
     updateAndGetSentencesQuery,
@@ -82,7 +82,9 @@ const updateDbWithAudioPath = function (
         motherTongue = speakerDetailsJson.motherTongue;
     }
     const encryptUserId = encrypt(userId);
-    db.any(UpdateAudioPathAndUserDetails, [
+    const roundedAudioDuration = Number(Number(audioDuration).toFixed(3));
+
+    db.any(updateAudioPathAndUserDetails, [
         audioPath,
         ageGroup,
         gender,
@@ -92,7 +94,7 @@ const updateDbWithAudioPath = function (
         userName,
         state,
         country,
-        audioDuration
+        roundedAudioDuration
     ])
         .then((data) => {
             db.none(updateSentencesWithContributedState, [sentenceId]).then();
