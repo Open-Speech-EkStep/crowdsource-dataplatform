@@ -70,9 +70,9 @@ const updateSentencesWithContributedState = 'update sentences set state = \'cont
 
 const setNewUserAndFileName = 'insert into changeduser ("fileName","userId","sentenceId") values ($1,$2,$3);'
 
-const getCountOfTotalSpeakerAndRecordedAudio = 'select  count(DISTINCT(con.*)), 0 as index \
-from "contributors" con inner join "contributions" cont on con.contributor_id = cont.contributed_by inner join "sentences" s on  s."sentenceId" = cont."sentenceId"  where s.language = $1 \
-UNION ALL (select count(*),1 as index from sentences s inner join "contributions" cont on cont."sentenceId" = s."sentenceId" where s.language = $1);'
+const getCountOfTotalSpeakerAndRecordedAudio = 'select  count(DISTINCT(con.*)), 0 as index, 0 as duration \
+from "contributors" con inner join "contributions" cont on con.contributor_id = cont.contributed_by and cont.action=\'completed\' inner join "sentences" s on  s."sentenceId" = cont."sentenceId"  where s.language = $1 \
+UNION ALL (select count(*),1 as index, sum(cont.audio_duration) as duration from sentences s inner join "contributions" cont on cont."sentenceId" = s."sentenceId" and cont.action=\'completed\' where s.language = $1);'
 
 const getMotherTonguesData = 'select data."mother_tongue", count (*) from (select con."mother_tongue" from sentences s inner join "contributions" cont on s."sentenceId" = cont."sentenceId" and "action"=\'completed\' inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."mother_tongue", con.user_name, con.contributor_identifier) as data group by data."mother_tongue";'
 
