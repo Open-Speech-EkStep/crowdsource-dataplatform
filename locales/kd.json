@@ -1,5 +1,5 @@
 {
-	"Language": "Language",
+	"Language": "Konkani DV",
 	"Speech Recognition Models": "Speech Recognition Models",
 	"About Us": "आमचेविशीं",
 	"Select the language for contribution": "Select the language for contribution",
@@ -113,5 +113,7 @@
 	"You have contributed <b><span id=\"user-contribution\"></span></b><b><span> recordings</span></b> of your voice": "You have contributed <b><span id=\"user-contribution\"></span></b><b><span> recordings</span></b> of your voice",
 	"We know you can do more!": "तुमच्यान आऩीक करू येता हे आमी जाणां!",
 	"Contribute More": "आणीक योगदान दियात",
-	"Share it with your friends and family": "तुमचे इश्ट आणी परिवारांक कळीत करात"
+	"Share it with your friends and family": "तुमचे इश्ट आणी परिवारांक कळीत करात",
+	"hrs recorded in": "%hours hrs recorded in %language",
+	"hrs validated in": "%hours hrs validated in %language"
 }

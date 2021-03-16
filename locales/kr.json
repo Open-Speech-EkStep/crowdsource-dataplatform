@@ -1,5 +1,5 @@
 {
-	"Language": "Language",
+	"Language": "Konkani Roman",
 	"Speech Recognition Models": "Speech Recognition Models",
 	"About Us": "Amche vixim",
 	"Select the language for contribution": "Select the language for contribution",
@@ -113,5 +113,7 @@
 	"Validating Instructions": "Suchovnneo Promannit kortam",
 	"Ensure the voice is <b>clear and audible</b>": "Tuzo tallo nivoll ani aikunk ieta tachi khatri kor",
 	"Match the voice to the text <b>accurately</b>": "Mozkura vixim tuzo tallo ochukponnim zulloi",
-	"If you are unsure of the match, skip the particular voice sample": "Tuka zor zullpachi khatri na, omuk talleacho nomuno vogllai"
+	"If you are unsure of the match, skip the particular voice sample": "Tuka zor zullpachi khatri na, omuk talleacho nomuno vogllai",
+	"hrs recorded in": "%hours hrs recorded in %language",
+	"hrs validated in": "%hours hrs validated in %language"
 }
