@@ -2,24 +2,29 @@ const { calculateSNR } = require('../../src/audio_attributes/snr');
 const { async } = require('regenerator-runtime');
 // const { validateUserInputAndFile, validateUserInfo, convertIntoMB } = require('../src/middleware/validateUserInputs')
 
+
 describe('SNR ', function () {
     describe('calculateSNR()', function () {
-        test('should return the snr', async function () {
-            // const command = `/Users/rajats/projects/ekstep/crowdsource-dataplatform/binaries/WadaSNR/Exe/WADASNR -i ${filename} -t /Users/rajats/projects/ekstep/crowdsource-dataplatform/binaries/WadaSNR/Exe/Alpha0.400000.txt -ifmt mswav`
+        test('should return the snr', done => {
             const command = 'echo 4.0 mock_output mock_output'
-            const snr = await calculateSNR(command)
-
-            expect(snr).toBe(4.00);
+            const onSuccess = jest.fn((snr) => {
+                console.log('snr:' + snr);
+                expect(snr).toBe(4);
+                done();
+            })
+            const onError = jest.fn()
+            calculateSNR(command, onSuccess, onError)
         });
 
-        test('should throw error if wada process fails', async function () {
+        test('should throw error if wada process fails', done => {
             const command = 'ech 4.0 mock_output mock_output'
-            try {
-                await calculateSNR(command)
-            } catch (err) {
-                console.log(err.message)
-                expect(err.message).toBe('Problem in calculating SNR')
-            }
+            const onSuccess = jest.fn()
+            const onError = jest.fn((snr) => {
+                console.log('snr:' + snr);
+                expect(snr).toBe(-1);
+                done();
+            })
+            calculateSNR(command, onSuccess, onError)
         });
     });
 });
