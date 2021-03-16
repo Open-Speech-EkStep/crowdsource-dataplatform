@@ -187,11 +187,10 @@
 	"Contributed": "பங்களிக்கப்பட்டது",
 	"Other languages": "பிற மொழிகள்",
 	"More languages": "மேலும் பிற மொழிகள்",
-	"You have contributed <b><span id=\"user-contribution\"></span></b><b><span> recordings</span></b> of your voice": "உங்கள்  குரலில் <b><span id=\"user-contribution\"></span></b><b><span> recordings</span></b> பதிவுகளை பங்களித்துள்ளீர்",
-	"Thank you for validating \"x\" recordings": "\"X\" பதிவுகளை சரிபார்த்ததற்கு நன்றி",
+	"You have contributed <b><span id=\"user-contribution\"></span></b><b><span> recordings</span></b> of your voice": "உங்கள்  குரலில் <b><span id=\"user-contribution\"></span></b><b><span></span></b> பதிவுகளை பங்களித்துள்ளீர்",
 	"Quick tips": "விரைவு குறிப்புகள்",
 	"Read once before recording it": "பதிவு செய்யும் முன் இதை ஒருமுறை படிக்கவும்",
 	"By proceeding ahead you agree to the Terms and Conditions": "மேலே தொடர்வதன் மூலம், நீங்கள் விதிமுறைகள் மற்றும் நிபந்தனைகளை ஒப்புக்கொள்கிறீர்கள்",
-	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off.": "As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off.",
+	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off.": "எங்கள் குழுவிற்காக, எங்களுடன் சேர்ந்து, இந்த முயற்சிக்கு உங்கள் குரலை  பங்களிக்க நாங்கள் உங்களை அழைக்கிறோம். உங்கள் குரலை ஒரே மூச்சில் பதிவு செய்வது திணரடிப்பதாக இருக்கலாம், எனவே, நீங்கள் எங்களை வலைத்தளத்தை பலமுறை பார்வையிடவும், நீங்கள் எங்களை விட்டுச் சென்ற இடத்திலிருந்து தொடங்கவும், எங்கள் வலைத்தளத்தில் நாங்கள் எளிய செயலேற்பாடுகளைை உருவாக்கியுள்ளோம்",
 	"Thank you for validating <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> பதிவுகளை சரிபார்த்ததற்கு நன்றி"
 }
