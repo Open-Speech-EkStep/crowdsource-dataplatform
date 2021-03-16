@@ -25,7 +25,7 @@ const {
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
-const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES } = require('./constants');
+const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH } = require('./constants');
 const {
   validateUserInputAndFile,
   validateUserInfo,
@@ -192,12 +192,7 @@ router.post('/upload', (req, res) => {
           res.status(resStatus).send(resBody);
         }
       );
-      fs.unlink(file.path, function (err) {
-        if (err) {
-          console.log(`File ${file.path} not deleted!`);
-          console.log(err);
-        }
-      });
+      removeTempFile(file);
     })
     .catch((err) => {
       console.error(err);
@@ -208,12 +203,13 @@ router.post('/upload', (req, res) => {
 router.post('/audio/snr', async (req, res) => {
   const file = req.file;
   const filePath = file.path
-  const command = `${WADASNR_BIN_PATH}/WADASNR-i ${filePath} -t ${WADASNR_BIN_PATH}/Alpha0.400000.txt -ifmt mswav`
+  const command = `${WADASNR_BIN_PATH}/WADASNR -i ${filePath} -t ${WADASNR_BIN_PATH}/Alpha0.400000.txt -ifmt mswav`
   try {
     const snr = await calculateSNR(command)
     res.status(200).send({ 'snr': snr });
+    removeTempFile(file);
   } catch (err) {
-    res.sendStatus(400);
+    res.sendStatus(502);
   }
 });
 
@@ -256,5 +252,14 @@ app.use('/', router);
 app.get('*', (req, res) => {
   res.render('not-found.ejs');
 });
+
+function removeTempFile(file) {
+  fs.unlink(file.path, function (err) {
+    if (err) {
+      console.log(`File ${file.path} not deleted!`);
+      console.log(err);
+    }
+  });
+}
 
 module.exports = app;
