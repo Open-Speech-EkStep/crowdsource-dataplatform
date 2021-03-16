@@ -33,29 +33,71 @@
                     <div class="position-absolute rounded-pill" id="total-progress-bulb"></div>
                 </div>
             </div>
-            <div class="row justify-content-center mt-5">
-                <div class="col-xl-6 col-lg-8 col-11 text-center">
-                    <p class="lead"><%- __('You have contributed <b><span id="user-contribution"></span></b><b><span> recordings</span></b> of your voice')%></p>
+            <div class="row mt-5">
+                <div class="col-lg-8 offset-lg-2 border border-primary p-4-5 text-center overflow-hidden contribuion-info">
+                    <div class="champion-ribbon">
+                        <span>You are a champion</span>
+                    </div>
+                    <h4 class="mb-3">WooHoo!! You took the first important step</h4>
+                    <p><span id="user-contribution" class="text-primary">5</span> recordings contributed</p>
+                    <p>You are just 10 sentences away from earning your 1st Badge.</p>
+                    <div class="mt-5 text-center">
+                        <%= __('Share it with your friends and family') %>
+                    </div>
+                    <div class="row justify-content-center my-2">
+                        <div class="col-12 text-center bg-white">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//vakyansh.in/" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                <img src="/img/fb-icon.svg" width="24px" alt="Share on Facebook"> 
+                            </a><span>&sdot;</span> 
+                            <a id="linkedin_share" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//vakyansh.in/&title=What%20If%20we%20tell%20you%20that%20you%20can%20have%20a%20Speech%20recognition%20product,%20that%20will%20be%20as%20Indian,%20as%20you%20and%20I.%20It%20will%20also%20be%20free%20of%20cost%20for%20every%20Indian.%20Make%20it%20happen%20by%20donating%20your%20voice%20today.%20Visit%20https%3A//vakyansh.in/&summary=What%20If%20we%20tell%20you%20that%20you%20can%20have%20a%20Speech%20recognition%20product,%20that%20will%20be%20as%20Indian,%20as%20you%20and%20I.%20It%20will%20also%20be%20free%20of%20cost%20for%20every%20Indian.%0AMake%20it%20happen%20by%20donating%20your%20voice%20today.%20Visit%20https%3A//vakyansh.in/&source=" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                <img src="/img/linkedin-icon.svg" width="24px" alt="Share on LinkedIn">
+                            </a><span>&sdot;</span> 
+                            <a id="twitter_share" href="https://twitter.com/intent/tweet?text=What%20If%20we%20tell%20you%20that%20you%20can%20have%20a%20Speech%20recognition%20product,%20that%20will%20be%20as%20Indian,%20as%20you%20and%20I.%20It%20will%20also%20be%20free%20of%20cost%20for%20every%20Indian.%0AMake%20it%20happen%20by%20donating%20your%20voice%20today.%20Visit%20https%3A//vakyansh.in/" target="_blank" rel="noopener noreferrer">
+                                <img src="/img/twitter-icon.svg" width="24px" alt="Share on Twitter"> 
+                            </a><span>&sdot;</span> 
+                            <a id="whatsapp_share" href="https://api.whatsapp.com/send?text=What%20If%20we%20tell%20you%20that%20you%20can%20have%20a%20Speech%20recognition%20product,%20that%20will%20be%20as%20Indian,%20as%20you%20and%20I.%20It%20will%20also%20be%20free%20of%20cost%20for%20every%20Indian.%0AMake%20it%20happen%20by%20donating%20your%20voice%20today.%20Visit%20https%3A//vakyansh.in/" target="_blank" rel="noopener noreferrer">
+                                <img src="/img/whatsapp.svg" width="32px" alt="Share on Whatsapp">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-lg-8 offset-lg-2 border p-4 stats-container">
+                    <div class="row justify-content-around align-items-center">
+                        <div>
+                            Did you know?
+                        </div>
+                        <div>
+                            <p>Most data recorded for <span id="languageId"></span></p>
+                            <div class="position-relative">
+                                <div class="progress mb-2 w-80">
+                                    <div id="highest_language_progress" class="progress-bar time-contributed" role="progressbar" style="width:90%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span id="highest_language_time" class="time"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Data recorded for <span id="languageChoiceId"></span></p>
+                            <div class="position-relative">
+                                <div class="progress mb-2 w-80">
+                                    <div id="contribute_language_progress" class="progress-bar time-contributed" role="progressbar" style="width:50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <span id="contribute_language_time" class="time"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row justify-content-center mt-5">
-                <div class="col-xl-6 col-lg-8 col-11 text-center lead">
-                    <p id="do-more"><b>
-                            <%= __('We know you can do more!') %>
-                        </b></p>
-                </div>
-            </div>
-            <div class="row justify-content-center mt-5">
-                <div class="col-lg-3 col-md-6 col-8 text-center lead"><a href="/record" class="btn btn-primary btn-lg h6 w-100">
+                <div class="col-lg-3 col-md-6 col-8 text-center">
+                    <div class="mb-3">
+                        <span>Help your language achieve it’s goal of 100 hrs. We know you can do more!</span>
+                    </div>
+                    <a href="/record" class="btn btn-primary btn-lg h6 w-100">
                         <%= __('Contribute More') %>
-                    </a></div>
-            </div>
-            <div class="text-primary mt-5 text-center">
-                <%= __('Share it with your friends and family') %>
-            </div>
-            <div class="row justify-content-center my-2">
-                <div class="col-lg-3 col-sm-5 col-12 text-center bg-white"><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//vakyansh.in/" target="_blank" rel="noopener noreferrer" class="text-decoration-none"><img src="/img/fb-icon.svg" width="8%" alt="Share on Facebook"> </a><span>&sdot;</span> <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//vakyansh.in/&title=What%20If%20we%20tell%20you%20that%20you%20can%20have%20a%20Speech%20recognition%20product,%20that%20will%20be%20as%20Indian,%20as%20you%20and%20I.%20It%20will%20also%20be%20free%20of%20cost%20for%20every%20Indian.%20Make%20it%20happen%20by%20donating%20your%20voice%20today.%20Visit%20https%3A//vakyansh.in/&summary=What%20If%20we%20tell%20you%20that%20you%20can%20have%20a%20Speech%20recognition%20product,%20that%20will%20be%20as%20Indian,%20as%20you%20and%20I.%20It%20will%20also%20be%20free%20of%20cost%20for%20every%20Indian.%0AMake%20it%20happen%20by%20donating%20your%20voice%20today.%20Visit%20https%3A//vakyansh.in/&source=" target="_blank" rel="noopener noreferrer" class="text-decoration-none"><img src="/img/linkedin-icon.svg" width="8%" alt="Share on LinkedIn">
-                    </a><span>&sdot;</span> <a href="https://twitter.com/intent/tweet?text=What%20If%20we%20tell%20you%20that%20you%20can%20have%20a%20Speech%20recognition%20product,%20that%20will%20be%20as%20Indian,%20as%20you%20and%20I.%20It%20will%20also%20be%20free%20of%20cost%20for%20every%20Indian.%0AMake%20it%20happen%20by%20donating%20your%20voice%20today.%20Visit%20https%3A//vakyansh.in/" target="_blank" rel="noopener noreferrer"><img src="/img/twitter-icon.svg" width="8%" alt="Share on Twitter"> </a><span>&sdot;</span> <a href="https://api.whatsapp.com/send?text=What%20If%20we%20tell%20you%20that%20you%20can%20have%20a%20Speech%20recognition%20product,%20that%20will%20be%20as%20Indian,%20as%20you%20and%20I.%20It%20will%20also%20be%20free%20of%20cost%20for%20every%20Indian.%0AMake%20it%20happen%20by%20donating%20your%20voice%20today.%20Visit%20https%3A//vakyansh.in/" target="_blank" rel="noopener noreferrer"><img src="/img/whatsapp.svg" width="10%" alt="Share on Whatsapp"></a></div>
+                    </a>
+                </div>
             </div>
         </div>
         <%- include common/footer.ejs %>
