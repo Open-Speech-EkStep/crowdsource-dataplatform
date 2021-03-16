@@ -22,7 +22,7 @@ If you like Vakyansh, ⭐ the project to support its development!_
 
 ## Documentation
 
-Please follow the documentation for Intelligent Data Pipeline [here](https://open-speech-ekstep.github.io/mkdocs/crowdsource_platform/)
+Please follow the documentation for Crowdsourcing Platform [here](https://open-speech-ekstep.github.io/mkdocs/crowdsource_platform/)
 
 You can improve it by sending pull requests to the
 [documentation repository](https://github.com/Open-Speech-EkStep/mkdocs).
