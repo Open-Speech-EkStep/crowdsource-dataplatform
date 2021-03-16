@@ -56,7 +56,7 @@ where sentences."sentenceId" = $2 and sentences.state = \'contributed\' and cont
 const updateSentencesWithValidatedState = 'update sentences set "state" = \
 \'validated\' where "sentenceId" = $1;'
 
-const UpdateAudioPathAndUserDetails = 'WITH src AS ( \
+const updateAudioPathAndUserDetails = 'WITH src AS ( \
     select contributor_id from "contributors" \
     where contributor_identifier = $6 and user_name = $7\
     ) \
@@ -87,7 +87,7 @@ module.exports = {
     updateAndGetUniqueSentencesQuery,
     getValidationSentencesQuery,
     setNewUserAndFileName,
-    UpdateAudioPathAndUserDetails,
+    updateAudioPathAndUserDetails,
     getCountOfTotalSpeakerAndRecordedAudio,
     getMotherTonguesData,
     getGenderData,
