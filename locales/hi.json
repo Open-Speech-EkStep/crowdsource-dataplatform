@@ -140,5 +140,6 @@
 	"minutes": "मिनट",
 	"seconds": "सेकंड",
 	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "अपने होम पेज पर जाने के लिए <a class=\"\" href=\"/\">यहाँ क्लिक</a> करें",
-	"You have contributed <b><span id=\"user-contribution\"></span></b><b><span> recordings</span></b> of your voice": "आपने अपनी आवाज़ की <b><span id=\"user-contribution\"></span></b><b><span> रिकॉर्डिंग</span></b> में योगदान दिया है"
+	"You have contributed <b><span id=\"user-contribution\"></span></b><b><span> recordings</span></b> of your voice": "आपने अपनी आवाज़ की <b><span id=\"user-contribution\"></span></b><b><span> रिकॉर्डिंग</span></b> में योगदान दिया है",
+	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off": ""
 }
