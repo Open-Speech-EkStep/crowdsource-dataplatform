@@ -2,7 +2,7 @@ const { updateGraph } = require('./draw-chart');
 const { testUserName, setStartRecordBtnToolTipContent, setSpeakerDetails } = require('./speakerDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString } = require('./utils');
 
-const {DEFAULT_CON_LANGUAGE} = require('./constants');
+const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES} = require('./constants');
 
 const LOCALE_STRINGS = 'localeString';
 let timer;

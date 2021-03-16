@@ -59,7 +59,6 @@ $(document).ready(function () {
             const userNameValue = $userName.val().trim().substring(0, 12);
             const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === sentenceLanguage);
             if (! selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
-            // if (sentenceLanguage === 'English') sentenceLanguage = DEFAULT_CON_LANGUAGE;
             if (testUserName(userNameValue)) {
                 return;
             }
@@ -72,7 +71,7 @@ $(document).ready(function () {
             };
             localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
             localStorage.setItem("contributionLanguage", sentenceLanguage);
-            document.cookie = `i18n=en`;
+            // document.cookie = `i18n=en`;
             location.href = '/record';
         }
     });
