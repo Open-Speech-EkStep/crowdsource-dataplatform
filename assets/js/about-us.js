@@ -7,7 +7,7 @@ const {
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick
 } = require('./speakerDetails');
-const {DEFAULT_CON_LANGUAGE} = require('./constants');
+const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES} = require('./constants');
 const {updateLocaleLanguagesDropdown} = require('./utils');
 
 $(document).ready(function () {
