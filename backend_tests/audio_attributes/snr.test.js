@@ -1,4 +1,4 @@
-const { calculateSNR } = require('/Users/rajats/projects/ekstep/crowdsource-dataplatform/src/audio_attributes/snr');
+const { calculateSNR } = require('../../src/audio_attributes/snr');
 const { async } = require('regenerator-runtime');
 // const { validateUserInputAndFile, validateUserInfo, convertIntoMB } = require('../src/middleware/validateUserInputs')
 
