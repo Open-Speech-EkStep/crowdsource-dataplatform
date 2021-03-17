@@ -64,7 +64,7 @@ const AGE_GROUP = [
 const GENDER = ['', 'male', 'female', 'others'];
 
 const WADASNR_BIN_PATH = '/opt/binaries/WadaSNR/Exe'
-const FEEDBACK_MIN_LENGTH = 10
+const SUBJECT_MAX_LENGTH = 256
 
 const FEEDBACK_MAX_LENGTH = 1000
 
@@ -83,6 +83,6 @@ module.exports = {
   AGE_GROUP,
   GENDER,
   WADASNR_BIN_PATH,
-  FEEDBACK_MIN_LENGTH,
+  SUBJECT_MAX_LENGTH,
   FEEDBACK_MAX_LENGTH
 };
