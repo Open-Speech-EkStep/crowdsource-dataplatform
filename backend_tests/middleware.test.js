@@ -157,7 +157,7 @@ describe('middleware test', function () {
         });
     });
 
-    describe('validateUserInputAndFile', function () {
+    describe('validateUserInputForFeedback', function () {
         const longFeedback = `
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquam ultrices laoreet. Morbi at dui libero. Ut sodales maximus ante vitae tempus. Curabitur 
         scelerisque odio ut suscipit mattis. Vestibulum ultricies, libero laoreet scelerisque efficitur, diam justo posuere eros, in blandit mauris elit in massa. 
@@ -186,7 +186,7 @@ describe('middleware test', function () {
         })
 
         test('should call next() once if all params in req are valid', function () {
-            const req = { body: { feedback:"Dummy feedback",subject:"some subject"} };
+            const req = { body: { feedback:"Dummy feedback",subject:"some subject",language:"Hindi"} };
             validateUserInputForFeedback(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
@@ -194,7 +194,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if feedback is null', function () {
-            const req = { body: { feedback:"",subject:""} };
+            const req = { body: { feedback:"",subject:"",language:"Hindi"} };
             validateUserInputForFeedback(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -203,7 +203,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if subject is empty', function () {
-            const req = { body: { feedback:"some           ",subject:""} };
+            const req = { body: { feedback:"some           ",subject:"",language:"Hindi"} };
             validateUserInputForFeedback(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -212,7 +212,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if feedback is greater than 1000 char', function () {
-            const req = { body: { feedback:longFeedback,subject:"some subject"} };
+            const req = { body: { feedback:longFeedback,subject:"some subject",language:"Hindi"} };
             validateUserInputForFeedback(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
