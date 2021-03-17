@@ -108,4 +108,15 @@ const formatTime = function (hours, minutes = 0, seconds = 0) {
     return result.substr(0, result.length - 1);
 };
 
-module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime, getLocaleString, performAPIRequest,showElement,hideElement}
+const setFooterPosition = () => {
+    const contentHeight = $('#page-content').outerHeight();
+    const bodyHeight = $('body').outerHeight();
+    const navHeight = $('nav').outerHeight();
+    const footerHeight = $('footer').outerHeight();
+    const totalHeight = contentHeight + navHeight + footerHeight;
+    if (bodyHeight <= totalHeight) {
+        $('footer').removeClass('fixed-bottom').addClass('bottom');
+    }
+}
+
+module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime, getLocaleString, performAPIRequest,showElement,hideElement, setFooterPosition}
