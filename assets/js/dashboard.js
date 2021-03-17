@@ -2,7 +2,7 @@ const { updateGraph } = require('./draw-chart');
 const { testUserName, setStartRecordBtnToolTipContent, setSpeakerDetails } = require('./speakerDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString } = require('./utils');
 
-const {DEFAULT_CON_LANGUAGE} = require('./constants');
+const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES} = require('./constants');
 const fetch = require('./fetch')
 const LOCALE_STRINGS = 'localeString';
 let timer;
@@ -11,7 +11,7 @@ let languageToRecord = '';
 const fetchDetail = (language) => {
     const byLanguage = language ? true : false;
     const url = language ? '/aggregate-data-count?byLanguage=true' : '/aggregate-data-count'
-    return fetch(`/${url}`).then((data) => {
+    return fetch(url).then((data) => {
         if (!data.ok) {
             throw Error(data.statusText || 'HTTP error');
         } else {
@@ -192,7 +192,9 @@ $(document).ready(function () {
             const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
             const genderValue = checkedGender.length ? checkedGender[0].value : '';
             const userNameValue = $userName.val().trim().substring(0, 12);
-            if (languageToRecord === 'English') languageToRecord = DEFAULT_CON_LANGUAGE;
+            const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === languageToRecord);
+            if (! selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
+            // if (languageToRecord === 'English') languageToRecord = DEFAULT_CON_LANGUAGE;
             if (testUserName(userNameValue)) {
                 return;
             }

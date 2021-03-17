@@ -8,16 +8,9 @@
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer">
-                    <a id="bengali" class="p-2" href="#" locale="bn">বাংলা</a>
-                    <a id="hindi" class="p-2" href="#" locale="hi">हिंदी</a> 
-                    <a id="kannada" class="p-2" href="#" locale="kn">ಕನ್ನಡ</a>
-                    <a id="malayalam" class="p-2" href="#" locale="ml">മലയാളം</a>
-                    <a id="english" class="p-2" href="#" locale="en">English</a>
-                    <a id="gujarati" class="p-2" href="#" locale="gu">ગુજરાતી</a>
-                    <a id="marathi" class="p-2" href="#" locale="mr">मराठी</a>
-                    <a id="odia" class="p-2" href="#" locale="or">ଓଡିଆ</a>
-                    <a id="punjabi" class="p-2" href="#" locale="pa">ਪੰਜਾਬੀ</a>
-                    <a id="assamese" class="p-2" href="#" locale="as">অসমীয়া</a>
+                    <% LANGUAGES.forEach(e=>{ %>
+                        <a id="<%= e.value %>" class="p-2" href="#" locale="<%= e.id %>"><%= e.value %></a>
+                    <% }) %>
                 </div>
             </div>
         </div>

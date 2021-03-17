@@ -49,14 +49,14 @@ const getValidationSentencesQuery = 'select audio_path, con."sentenceId", sen.se
     from contributions con inner join sentences sen on sen."sentenceId"=con."sentenceId" and con.action=\'completed\' \
     where sen."state"= \'contributed\' and language=$1 group by audio_path, con."sentenceId", sen.sentence, con.contribution_id order by RANDOM() limit 5;'
 
-const addValidationQuery = 'insert into validations (contribution_id, "action", validated_by, "date") \
-select contribution_id, $3, $1, now() from contributions inner join sentences on sentences."sentenceId"=contributions."sentenceId" \
+const addValidationQuery = 'insert into validations (contribution_id, "action", validated_by, "date", "state_region", "country") \
+select contribution_id, $3, $1, now(), $5, $6 from contributions inner join sentences on sentences."sentenceId"=contributions."sentenceId" \
 where sentences."sentenceId" = $2 and sentences.state = \'contributed\' and contribution_id=$4;'
 
 const updateSentencesWithValidatedState = 'update sentences set "state" = \
 \'validated\' where "sentenceId" = $1;'
 
-const UpdateAudioPathAndUserDetails = 'WITH src AS ( \
+const updateAudioPathAndUserDetails = 'WITH src AS ( \
     select contributor_id from "contributors" \
     where contributor_identifier = $6 and user_name = $7\
     ) \
@@ -70,15 +70,17 @@ const updateSentencesWithContributedState = 'update sentences set state = \'cont
 
 const setNewUserAndFileName = 'insert into changeduser ("fileName","userId","sentenceId") values ($1,$2,$3);'
 
-const getCountOfTotalSpeakerAndRecordedAudio = 'select  count(DISTINCT(con.*)), 0 as index \
-from "contributors" con inner join "contributions" cont on con.contributor_id = cont.contributed_by inner join "sentences" s on  s."sentenceId" = cont."sentenceId"  where s.language = $1 \
-UNION ALL (select count(*),1 as index from sentences s inner join "contributions" cont on cont."sentenceId" = s."sentenceId" where s.language = $1);'
+const getCountOfTotalSpeakerAndRecordedAudio = 'select  count(DISTINCT(con.*)), 0 as index, 0 as duration \
+from "contributors" con inner join "contributions" cont on con.contributor_id = cont.contributed_by and cont.action=\'completed\' inner join "sentences" s on  s."sentenceId" = cont."sentenceId"  where s.language = $1 \
+UNION ALL (select count(*),1 as index, sum(cont.audio_duration) as duration from sentences s inner join "contributions" cont on cont."sentenceId" = s."sentenceId" and cont.action=\'completed\' where s.language = $1);'
 
 const getMotherTonguesData = 'select data."mother_tongue", count (*) from (select con."mother_tongue" from sentences s inner join "contributions" cont on s."sentenceId" = cont."sentenceId" and "action"=\'completed\' inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."mother_tongue", con.user_name, con.contributor_identifier) as data group by data."mother_tongue";'
 
 const getAgeGroupsData = 'select data."age_group", count (*) from (select con."age_group" from sentences s inner join "contributions" cont on s."sentenceId" = cont."sentenceId" and "action"=\'completed\' inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."age_group", con.user_name, con.contributor_identifier) as data group by data."age_group";'
 
 const getGenderData = 'select data."gender", count (*) from (select con."gender" from sentences s inner join "contributions" cont on s."sentenceId" = cont."sentenceId" and "action"=\'completed\' inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."gender", con.user_name, con.contributor_identifier) as data group by data."gender";'
+
+const feedbackInsertion = 'Insert into feedbacks (subject,feedback,language) values ($1,$2,$3);'
 
 module.exports = {
     unassignIncompleteSentences,
@@ -87,7 +89,7 @@ module.exports = {
     updateAndGetUniqueSentencesQuery,
     getValidationSentencesQuery,
     setNewUserAndFileName,
-    UpdateAudioPathAndUserDetails,
+    updateAudioPathAndUserDetails,
     getCountOfTotalSpeakerAndRecordedAudio,
     getMotherTonguesData,
     getGenderData,
@@ -95,5 +97,6 @@ module.exports = {
     unassignIncompleteSentencesWhenLanChange,
     updateSentencesWithContributedState,
     addValidationQuery,
-    updateSentencesWithValidatedState
+    updateSentencesWithValidatedState,
+    feedbackInsertion
 }

@@ -29,7 +29,7 @@ submitQueryBtn.addEventListener("click", event => {
     }))
 })
 const submitQuery = (queryText) => {
-    fetch(`/contact-us`, {
+    fetch("/contact-us", {
         method: "POST",
         body: queryText,
         headers: {

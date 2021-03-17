@@ -1,8 +1,8 @@
-const { api_url } = require('./env-api')
+const fetch = require('./fetch')
 const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
-const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown,showElement,hideElement  } = require('./utils');
-const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('./constants');
+const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo } = require('./utils');
+// const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('./constants');
 
 const visualizer = new Visualizer();
 
@@ -230,12 +230,14 @@ function recordValidation(action) {
     }
     const sentenceId = validationSentences[currentIndex].sentenceId
     const contribution_id = validationSentences[currentIndex].contribution_id
-    fetch(`${api_url}/validation/action`, {
+    fetch('/validation/action', {
         method: 'POST',
         body: JSON.stringify({
             sentenceId: sentenceId,
             action: action,
-            contributionId: contribution_id
+            contributionId: contribution_id,
+            state: localStorage.getItem('state_region') || "",
+            country: localStorage.getItem('country') || ""
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -332,7 +334,7 @@ function disableSkipButton() {
 const getAudioClip = function (audioPath) {
     hideAudioRow();
     disableSkipButton();
-    fetch(`${api_url}/audioClip`, {
+    fetch('/audioClip', {
         method: 'POST',
         body: JSON.stringify({
             file: audioPath
@@ -385,10 +387,10 @@ function showThankYou() {
     const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
     const aggregateDetails = JSON.parse(stringifyData);
     const totalInfo = aggregateDetails.find((element) => element.language === language);
-    let totalSentences = 0;
+    // let totalSentences = 0;
     // let totalValidations = 0;
     if (totalInfo) {
-        totalSentences = Math.floor(Number(totalInfo.total_contributions) * HOUR_IN_SECONDS / AUDIO_DURATION);
+        // totalSentences = Math.floor(Number(totalInfo.total_contributions) * HOUR_IN_SECONDS / AUDIO_DURATION);
         // totalValidations = Math.floor(Number(totalInfo.total_validations) * HOUR_IN_SECONDS / AUDIO_DURATION);
         $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
         $('#spn-total-hr-validated').html(totalInfo.total_validations);
@@ -396,9 +398,9 @@ function showThankYou() {
         $('#spn-total-hr-contributed').html(0);
         $('#spn-total-hr-validated').html(0);
     }
-    $('#spn-validation-language-2').html(language);
+    // $('#spn-validation-language-2').html(language);
     $('#spn-validation-count').html(validationCount);
-    $('#spn-total-contribution-count').html(totalSentences);
+    // $('#spn-total-contribution-count').html(totalSentences);
 }
 
 function showNoSentencesMessage() {
@@ -416,10 +418,16 @@ $(document).ready(() => {
     toggleFooterPosition();
     setPageContentHeight();
     const language = localStorage.getItem('contributionLanguage');
-    if(language) {
+    if (language) {
         updateLocaleLanguagesDropdown(language);
     }
-    fetch(`${api_url}/validation/sentences/${language}`)
+    fetchLocationInfo().then(res => {
+        return res.json()
+    }).then(response => {
+        localStorage.setItem("state_region", response.regionName);
+        localStorage.setItem("country", response.country);
+    }).catch(console.log);
+    fetch(`/validation/sentences/${language}`)
         .then((data) => {
             if (!data.ok) {
                 throw Error(data.statusText || 'HTTP error');

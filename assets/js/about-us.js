@@ -5,9 +5,10 @@ const {
     setTNCOnChange,
     setUserModalOnShown,
     setUserNameOnInputFocus,
-    setGenderRadioButtonOnClick
+    setGenderRadioButtonOnClick,
+    setStartRecordingBtnOnClick
 } = require('./speakerDetails');
-const {DEFAULT_CON_LANGUAGE} = require('./constants');
+const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES} = require('./constants');
 const {updateLocaleLanguagesDropdown} = require('./utils');
 
 $(document).ready(function () {
@@ -42,6 +43,7 @@ $(document).ready(function () {
         langTop = e.target.value;
         const $toggleButton = $('#start_recording');
         $toggleButton.removeAttr('disabled');
+        document.cookie = `i18n=en`;
     });
 
     $('#start_recording').on('click', () => {
@@ -57,7 +59,8 @@ $(document).ready(function () {
             const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
             const genderValue = checkedGender.length ? checkedGender[0].value : '';
             const userNameValue = $userName.val().trim().substring(0, 12);
-            if (sentenceLanguage === 'English') sentenceLanguage = DEFAULT_CON_LANGUAGE;
+            const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === sentenceLanguage);
+            if (! selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
             if (testUserName(userNameValue)) {
                 return;
             }
@@ -70,7 +73,7 @@ $(document).ready(function () {
             };
             localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
             localStorage.setItem("contributionLanguage", sentenceLanguage);
-            document.cookie = `i18n=en`;
+            // document.cookie = `i18n=en`;
             location.href = '/record';
         }
     });

@@ -4,6 +4,8 @@ const objectStorage = process.argv[2] || 'gcp';
 const fetch = require('node-fetch');
 const cors = require('cors');
 const { uploader } = require('./uploader/objUploader')
+const { calculateSNR } = require('./audio_attributes/snr')
+
 const helmet = require('helmet')
 const express = require('express');
 const app = express();
@@ -18,15 +20,17 @@ const {
   getAllDetails,
   getAllInfo,
   updateTablesAfterValidation,
-  getAudioClip
+  getAudioClip,
+  insertFeedback
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
-const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES } = require('./constants');
+const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH } = require('./constants');
 const {
   validateUserInputAndFile,
   validateUserInfo,
+  validateUserInputForFeedback
 } = require('./middleware/validateUserInputs');
 
 // const Ddos = require('ddos');
@@ -35,7 +39,7 @@ const {
 
 const { I18n } = require('i18n');
 const i18n = new I18n({
-  locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te'],
+  locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te', 'doi', 'mai', 'ur', 'kr', 'kd', 'mnibn', 'mnimm', 'satol', 'satdv', 'sa'],
   directory: './locales',
   cookie: 'i18n'
 })
@@ -100,7 +104,9 @@ app.use(function (req, res, next) {
   }
   next();
 });
+
 app.use(express.static('public'));
+
 app.get('/changeLocale/:locale', function (req, res) {
   res.cookie('i18n', req.params.locale);
   res.redirect(req.headers.referer);
@@ -142,6 +148,10 @@ router.get('/getAllInfo/:language', async function (req, res) {
   }
 });
 
+router.get('/feedback', function (req, res) {
+  res.render('feedback.ejs');
+});
+
 router.get('/about-us', function (req, res) {
   res.render('about-us.ejs', { MOTHER_TONGUE, LANGUAGES });
 });
@@ -162,9 +172,13 @@ router.get('/dashboard', function (req, res) {
   res.render('dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
 });
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
+
 router.get('/validation/sentences/:language', (req, res) => getValidationSentences(req, res));
+
 router.post('/validation/action', (req, res) => updateTablesAfterValidation(req, res))
+
 router.post('/audioClip', (req, res) => getAudioClip(req, res, objectStorage))
+
 router.post('/upload', (req, res) => {
   const file = req.file;
   const sentenceId = req.body.sentenceId;
@@ -196,17 +210,27 @@ router.post('/upload', (req, res) => {
           res.status(resStatus).send(resBody);
         }
       );
-      fs.unlink(file.path, function (err) {
-        if (err) {
-          console.log(`File ${file.path} not deleted!`);
-          console.log(err);
-        }
-      });
+      removeTempFile(file);
     })
     .catch((err) => {
       console.error(err);
       res.sendStatus(500);
     });
+});
+
+router.post('/audio/snr', async (req, res) => {
+  const file = req.file;
+  const filePath = file.path
+  const command = buildWadaSnrCommand(filePath)
+  const onSuccess = (snr) => {
+    removeTempFile(file);
+    res.status(200).send({ 'snr': snr });
+  }
+  const onError = (snr) => {
+    removeTempFile(file);
+    res.sendStatus(502);
+  }
+  calculateSNR(command, onSuccess, onError)
 });
 
 router.get('/location-info', (req, res) => {
@@ -215,7 +239,7 @@ router.get('/location-info', (req, res) => {
     res.sendStatus(400);
     return;
   }
-  fetch(`http://ip-api.com/json/${ip}?fields=country,regionName`).then(res=>res.json()).then(response => {
+  fetch(`http://ip-api.com/json/${ip}?fields=country,regionName`).then(res => res.json()).then(response => {
     res.send(response);
   }).catch(err => {
     res.sendStatus(500);
@@ -227,12 +251,11 @@ app.get('/get-locale-strings', function (req, res) {
   const cookie = cookies.find(cookie => cookie.toLowerCase().startsWith("i18n"));
   const cookieName = cookie.split("=").pop();
   fs.readFile(`${__dirname}/../locales/${cookieName}.json`, (err, body) => {
-    if(err) {
+    if (err) {
       return res.sendStatus(500);
     }
     const data = JSON.parse(body);
     const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds'];
-    
     const langSttr = {};
     list.forEach((key) => {
       langSttr[key] = data[key];
@@ -241,6 +264,21 @@ app.get('/get-locale-strings', function (req, res) {
   });
 });
 
+router.post('/feedback', validateUserInputForFeedback, (req, res) => {
+  const feedback = req.body.feedback.trim();
+  const subject = req.body.subject.trim();
+  const language = req.body.language.trim();
+  
+  insertFeedback(subject, feedback, language).then(() => {
+    console.log("Feedback is inserted into the DB.")
+    res.sendStatus(200);
+  }).catch(e => {
+    console.log(`Error while insertion ${e}`)
+    res.sendStatus(502);
+  })
+
+})
+
 require('./dashboard-api')(router);
 
 app.use('/', router);
@@ -248,5 +286,18 @@ app.use('/', router);
 app.get('*', (req, res) => {
   res.render('not-found.ejs');
 });
+
+function buildWadaSnrCommand(filePath) {
+  return `${WADASNR_BIN_PATH}/WADASNR -i ${filePath} -t ${WADASNR_BIN_PATH}/Alpha0.400000.txt -ifmt mswav`;
+}
+
+function removeTempFile(file) {
+  fs.unlink(file.path, function (err) {
+    if (err) {
+      console.log(`File ${file.path} not deleted!`);
+      console.log(err);
+    }
+  });
+}
 
 module.exports = app;

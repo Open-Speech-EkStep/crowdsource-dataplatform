@@ -29,6 +29,13 @@ function toggleFooterPosition() {
 
 function fetchLocationInfo() {
     //https://api.ipify.org/?format=json
+    let regionName = localStorage.getItem("state_region") || "NOT_PRESENT";
+    let countryName = localStorage.getItem("country") || "NOT_PRESENT";
+    if(regionName !== "NOT_PRESENT" && countryName !== "NOT_PRESENT" && regionName.length > 0 && countryName.length > 0){
+        return new Promise((resolve)=>{
+            resolve({"regionName": regionName ,"country": countryName})
+        })
+    }
     return fetch('https://www.cloudflare.com/cdn-cgi/trace').then(res => res.text()).then(ipAddressText => {
         const dataArray = ipAddressText.split('\n');
         let ipAddress = "";
@@ -49,7 +56,7 @@ function fetchLocationInfo() {
 }
 
 const performAPIRequest = (url) => {
-    return fetch(`${url}`).then((data) => {
+    return fetch(url).then((data) => {
         if(!data.ok) {
             throw Error(data.statusText || 'HTTP error');
         } else {
@@ -59,7 +66,7 @@ const performAPIRequest = (url) => {
 }
 
 const getLocaleString = function() {
-    performAPIRequest(`/get-locale-strings`)
+    performAPIRequest('/get-locale-strings')
         .then((response) => {
             localStorage.setItem('localeString', JSON.stringify(response));
         });

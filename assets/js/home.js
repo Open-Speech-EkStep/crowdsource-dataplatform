@@ -54,7 +54,7 @@ function updateHrsForSayAndListen(language) {
     updateLocaleLanguagesDropdown(language);
 }
 
-const getDefaultTargettedDiv = function (key, value, $sayListenLanguage) {
+const getDefaultTargetedDiv = function (key, value, $sayListenLanguage) {
     let targetIndex = 0;
     const $sayListenLanguageItems = $sayListenLanguage.children();
     $sayListenLanguageItems.each(function (index, element) {
@@ -73,10 +73,10 @@ const getDefaultTargettedDiv = function (key, value, $sayListenLanguage) {
 
 const setLangNavBar = (targetedDiv, top_lang, $languageNavBar) => {
     const allDivs = $languageNavBar.children();
-    let targetttedDivIndex = -1
+    let targetedDivIndex = -1
     allDivs.each(function (index, element) {
         if (element.getAttribute('value') === top_lang) {
-            targetttedDivIndex = index;
+            targetedDivIndex = index;
         }
     });
 
@@ -85,15 +85,30 @@ const setLangNavBar = (targetedDiv, top_lang, $languageNavBar) => {
     const $6th_place = document.getElementById('6th_option');
     const lang = ALL_LANGUAGES.find(ele => ele.value === top_lang);
     $6th_place.innerText = lang.text;
-    if (targetttedDivIndex < 0) {
+    if (targetedDivIndex < 0) {
         $6th_place.classList.remove('d-none');
         $6th_place.classList.add('active');
         $6th_place.setAttribute('value', top_lang);
     } else {
-        allDivs[targetttedDivIndex].classList.add('active');
+        allDivs[targetedDivIndex].classList.add('active');
         $6th_place.classList.remove('active');
         $6th_place.classList.add('d-none');
     }
+}
+
+const getDefaultLang = function (){
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    const $sayListenLanguage = $('#say-listen-language');
+
+    if (!contributionLanguage) {
+        const $homePage = document.getElementById('home-page');
+        const defaultLangId = $homePage.getAttribute('default-lang');
+        const targetedDiv = getDefaultTargetedDiv('id', defaultLangId, $sayListenLanguage);
+        const language = targetedDiv.getAttribute("value");
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
+        return language;
+    }
+    return contributionLanguage;
 }
 
 const setDefaultLang = function () {
@@ -107,19 +122,19 @@ const setDefaultLang = function () {
     if (!contributionLanguage) {
         const $homePage = document.getElementById('home-page');
         const defaultLangId = $homePage.getAttribute('default-lang');
-        const targettedDiv = getDefaultTargettedDiv('id', defaultLangId, $sayListenLanguage);
-        const language = targettedDiv.getAttribute("value");
+        const targetedDiv = getDefaultTargetedDiv('id', defaultLangId, $sayListenLanguage);
+        const language = targetedDiv.getAttribute("value");
         localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
         updateHrsForSayAndListen(language);
-        setLangNavBar(targettedDiv, language, $languageNavBar);
+        setLangNavBar(targetedDiv, language, $languageNavBar);
         return;
     }
-    const targettedDiv = getDefaultTargettedDiv('value', contributionLanguage, $sayListenLanguage);
+    const targetedDiv = getDefaultTargetedDiv('value', contributionLanguage, $sayListenLanguage);
     updateHrsForSayAndListen(contributionLanguage);
-    setLangNavBar(targettedDiv, contributionLanguage, $languageNavBar);
+    setLangNavBar(targetedDiv, contributionLanguage, $languageNavBar);
 }
 
-const clearLocalStroage = function () {
+const clearLocalStorage = function () {
     localStorage.removeItem(TOP_LANGUAGES_BY_HOURS);
     localStorage.removeItem(TOP_LANGUAGES_BY_SPEAKERS);
     localStorage.removeItem(AGGREGATED_DATA_BY_LANGUAGE);
@@ -161,7 +176,8 @@ $(document).ready(function () {
         placement: screen.availWidth > 500 ? 'right' : 'auto',
     });
 
-    let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    let top_lang = getDefaultLang();
+
     const $languageNavBar = $('#language-nav-bar');
     const $sayListenLanguage = $('#say-listen-language');
 
@@ -197,6 +213,7 @@ $(document).ready(function () {
 
     $('#start_recording').on('click', () => {
         sentenceLanguage = top_lang;
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
     });
 
     $('[name="topLanguageChart"]').on('change', (event) => {
@@ -266,6 +283,6 @@ $(document).ready(function () {
 
 module.exports = {
     updateHrsForSayAndListen,
-    getDefaultTargettedDiv,
+    getDefaultTargetedDiv,
     setLangNavBar
 };

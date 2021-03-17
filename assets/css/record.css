@@ -56,6 +56,12 @@ html {
   html {
     font-size: 15px;
   }
+  .recording-container {
+    min-height: 250px;
+  }
+  .prompt{
+    min-height: 120px;
+  }
 }
 @media (min-width: 1200px) {
   html {

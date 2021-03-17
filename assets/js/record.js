@@ -1,4 +1,4 @@
-const { api_url } = require('./env-api')
+const fetch = require('./fetch')
 const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown } = require('./utils')
 
 const speakerDetailsKey = 'speakerDetails';
@@ -202,7 +202,9 @@ const initialize = () => {
             .getUserMedia({ audio: true, video: false })
             .then((stream) => {
                 $getStarted.hide();
-                $startRecordRow.addClass('d-none');
+                $startRecordBtn.addClass('d-none');
+                $skipBtn.prop('disabled',true);
+                $startRecordRow.removeClass('d-none');
                 $stopRecordBtn.removeClass('d-none');
                 $recordingRow.removeClass('d-none');
                 $recordingSign.removeClass('d-none');
@@ -247,7 +249,7 @@ const initialize = () => {
                 notyf.error(
                     'Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission'
                 );
-                $startRecordRow.removeClass('d-none');
+                // $startRecordRow.removeClass('d-none');
                 $stopRecordBtn.addClass('d-none');
                 $nextBtn.addClass('d-none');
                 $reRecordBtn.addClass('d-none');
@@ -261,16 +263,17 @@ const initialize = () => {
     });
 
     $stopRecordBtn.on('click', () => {
+        const $startRecordRow = $('#startRecordRow');
         clearTimeout(cleartTimeoutKey);
         clearTimeout(timerTimeoutKey)
         $autoStopWarning.classList.add('d-none');
         $startRecordRow.addClass('d-none');
         $stopRecordBtn.addClass('d-none');
         $nextBtn.removeClass('d-none');
+        $skipBtn.prop('disabled',false);
         $reRecordBtn.removeClass('d-none');
         $recordingSign.addClass('d-none');
         $recordingRow.addClass('d-none');
-        $startRecordRow.addClass('d-none');
         $player.removeClass('d-none');
         $visualizer.addClass('d-none');
 
@@ -334,8 +337,10 @@ const initialize = () => {
         $player.addClass('d-none');
         $player.trigger('pause');
         $nextBtn.addClass('d-none');
+
         $reRecordBtn.addClass('d-none');
         $startRecordRow.removeClass('d-none');
+        $startRecordBtn.removeClass('d-none');
     });
 
     function incrementCurrentIndex() {
@@ -365,7 +370,7 @@ const initialize = () => {
         fd.append('state', localStorage.getItem('state_region') || "");
         fd.append('country', localStorage.getItem('country') || "");
         fd.append('audioDuration', crowdSource.audioDuration);
-        fetch(`${api_url}/upload`, {
+        fetch('/upload', {
             method: 'POST',
             body: fd,
         })
@@ -481,7 +486,7 @@ $(document).ready(() => {
         } else {
             localStorage.removeItem(currentIndexKey);
             localStorage.removeItem(skipCountKey);
-            fetch(`${api_url}/sentences`, {
+            fetch('/sentences', {
                 method: 'POST',
                 body: JSON.stringify({
                     userName: localSpeakerDataParsed.userName,

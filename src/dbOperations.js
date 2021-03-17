@@ -2,7 +2,7 @@ const { encrypt } = require('./encryptAndDecrypt');
 const { downloader } = require('./downloader/objDownloader')
 const moment = require('moment');
 const {
-    UpdateAudioPathAndUserDetails,
+    updateAudioPathAndUserDetails,
     setNewUserAndFileName,
     unassignIncompleteSentences,
     updateAndGetSentencesQuery,
@@ -16,7 +16,8 @@ const {
     unassignIncompleteSentencesWhenLanChange,
     updateSentencesWithContributedState,
     addValidationQuery,
-    updateSentencesWithValidatedState
+    updateSentencesWithValidatedState,
+    feedbackInsertion
 } = require('./dbQuery');
 const {
     topLanguagesBySpeakerContributions,
@@ -82,7 +83,9 @@ const updateDbWithAudioPath = function (
         motherTongue = speakerDetailsJson.motherTongue;
     }
     const encryptUserId = encrypt(userId);
-    db.any(UpdateAudioPathAndUserDetails, [
+    const roundedAudioDuration = Number(Number(audioDuration).toFixed(3));
+
+    db.any(updateAudioPathAndUserDetails, [
         audioPath,
         ageGroup,
         gender,
@@ -92,7 +95,7 @@ const updateDbWithAudioPath = function (
         userName,
         state,
         country,
-        audioDuration
+        roundedAudioDuration
     ])
         .then((data) => {
             db.none(updateSentencesWithContributedState, [sentenceId]).then();
@@ -220,8 +223,8 @@ const getAudioClip = async function (req, res, objectStorage) {
 
 const updateTablesAfterValidation = function (req, res) {
     const validatorId = req.cookies.userId;
-    const { sentenceId, action, contributionId } = req.body
-    return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId]).then(() => {
+    const { sentenceId, action, contributionId, state = "", country = "" } = req.body
+    return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country]).then(() => {
         if (action !== 'skip')
             db.none(updateSentencesWithValidatedState, [sentenceId]).then(() => {
                 res.sendStatus(200);
@@ -314,7 +317,6 @@ const getGenderGroupData = (language = '') => {
         languageFilter = `language iLike '${language}'`
     }
     let filter = pgp.as.format('$1:raw', [languageFilter])
-    console.log(filter);
     return db.any(genderGroupContributions, filter);
 }
 
@@ -340,6 +342,10 @@ const getLastUpdatedAt = async () => {
     return lastUpdatedDateTime;
 }
 
+const insertFeedback = (subject,feedback,language) => {
+    return db.any(feedbackInsertion, [subject,feedback,language]);
+}
+
 module.exports = {
     updateAndGetSentences,
     getValidationSentences,
@@ -356,5 +362,6 @@ module.exports = {
     getAgeGroupData,
     getGenderGroupData,
     getLastUpdatedAt,
-    getSentencesBasedOnAge
+    getSentencesBasedOnAge,
+    insertFeedback
 };

@@ -110,9 +110,9 @@ function buildGraphs(language, timeframe) {
     // $.fn.popover.Constructor.Default.whiteList.td = [];
 
     Promise.all([
-        fetch(`${api_url}/timeline?language=${language}&timeframe=${timeframe}`),
-        fetch(`${api_url}/contributions/gender?language=${language}`),
-        fetch(`${api_url}/contributions/age?language=${language}`)
+        fetch(`/timeline?language=${language}&timeframe=${timeframe}`),
+        fetch(`/contributions/gender?language=${language}`),
+        fetch(`/contributions/age?language=${language}`)
     ]).then(function (responses) {
         return Promise.all(responses.map(function (response) {
             return response.json();
@@ -156,15 +156,10 @@ function buildGraphs(language, timeframe) {
     });
 }
 
-const chartColors = ['#85A8F9', '#B7D0FE', '#316AFF', '#294691'];
 const drawAgeGroupChart = (chartData) => {
+    const chartColors = ['#85A8F9', '#B7D0FE', '#6C85CE', '#316AFF', '#294691'];
     const chart = am4core.create('age-group-chart', am4charts.PieChart3D);
-    chart.data = chartData.slice(0, 3).concat({
-        age_group: 'Others',
-        speakers: chartData
-            .slice(3)
-            .reduce((acc, curr) => acc + Number(curr.speakers), 0),
-    });
+    chart.data = chartData;
     chart.paddingBottom = 50;
     chart.innerRadius = am4core.percent(40);
     chart.depth = 50;
@@ -206,6 +201,7 @@ const drawAgeGroupChart = (chartData) => {
 };
 
 const drawGenderChart = (chartData) => {
+    const chartColors = ['#85A8F9', '#B7D0FE', '#316AFF', '#294691'];
     am4core.ready(function () {
         const chart = am4core.create('gender-chart', am4charts.XYChart);
         chartData.forEach(item => {
