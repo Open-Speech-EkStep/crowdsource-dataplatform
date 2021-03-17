@@ -186,7 +186,7 @@ describe('middleware test', function () {
         })
 
         test('should call next() once if all params in req are valid', function () {
-            const req = { body: { feedback:"Dummy feedback"} };
+            const req = { body: { feedback:"Dummy feedback",subject:"some subject"} };
             validateUserInputForFeedback(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
@@ -194,7 +194,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if feedback is null', function () {
-            const req = { body: { feedback:""} };
+            const req = { body: { feedback:"",subject:""} };
             validateUserInputForFeedback(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -202,8 +202,8 @@ describe('middleware test', function () {
 
         });
 
-        test('should return 400 if feedback is less than 10 char', function () {
-            const req = { body: { feedback:"some           "} };
+        test('should return 400 if subject is empty', function () {
+            const req = { body: { feedback:"some           ",subject:""} };
             validateUserInputForFeedback(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -212,7 +212,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if feedback is greater than 1000 char', function () {
-            const req = { body: { feedback:longFeedback} };
+            const req = { body: { feedback:longFeedback,subject:"some subject"} };
             validateUserInputForFeedback(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)

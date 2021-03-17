@@ -271,10 +271,10 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
   
   insertFeedback(subject, feedback, language).then(() => {
     console.log("Feedback is inserted into the DB.")
-    res.sendStatus(200);
+    res.send({ statusCode:200, message: "Feedback submitted successfully." });
   }).catch(e => {
     console.log(`Error while insertion ${e}`)
-    res.sendStatus(502);
+    res.send({ statusCode: 502, message: "Failed to submit feedback." });
   })
 
 })
