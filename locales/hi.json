@@ -142,5 +142,10 @@
 	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off.": "एक टीम के तौर पर, हम आपको आमंत्रण दे रहे हैं, हमारे साथ शामिल होकर अपनी आवाज़ का योगदान दें। इस क्रम में आपकी आवाज़ को रिकॉर्ड करके हमें बेहद खुशी होगी और इसीलिए, हमने अपनी वेबसाइट पर कई साधन तैयार किए हैं, ताकि आप इस वेबसाइट पर कई बार जा सकते हैं और वहीं से अपने कार्य को शुरू कर सकते हैं, जहां पर आपने इसे अधूरा छोड़ा था।",
 	"Speech recognition relies on \"machine-learning\" technology that requires huge collections of datasets that include diversified Indian voices and the corresponding text. Through Vakyansh, we want to create a diverse open repository of Indian voice speaking Indian language which can be used for this initiative": "भाषण मान्यता \"मशीन-लर्निंग\" तकनीक पर निर्भर करती है, जिसके लिए डाटा के विशाल संग्रह की आवश्यकता होती है, जिसमें विविध भारतीय आवाज़ें औरउसी की तरह के सूत्र शामिल हों। वाक्यांश के ज़रिए, हम भारतीय भाषा बोलने वाली भारतीय आवाज़ों के एक विविध डाटा का संग्रह बनाना चाहता है, जिसका उपयोग इस पहल और अन्य उद्देश्यों के लिए किया जा सके।",
 	"<b>Read once</b> before recording it": "इसे रिकॉर्ड करने से पहले <b>एक बार पढ़ें</b>",
-	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> रिकॉर्डिंग प्रमाणित करने के लिए शुक्रिया!  "
+	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> रिकॉर्डिंग प्रमाणित करने के लिए शुक्रिया!  ",
+	"Transgender - He": "Transgender - He",
+	"Transgender - She": "Transgender - She",
+	"Rather Not Say": "Rather Not Say",
+	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>",
+	"Feedback": "Feedback"
 }
