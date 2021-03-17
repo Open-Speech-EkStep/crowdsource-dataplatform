@@ -308,11 +308,12 @@ describe('setStartRecordingBtnOnClick', () => {
     test('should setSpeakerDetails in local Storage and land on /record page', () => {
         mockLocation();
         mockLocalStorage();
+        localStorage.setItem('contributionLanguage',"Hindi");
         const $startRecordBtn = $('#proceed-box');
         const $tncCheckbox = $('#tnc');
 
         $tncCheckbox.prop('checked', true);
-        setStartRecordingBtnOnClick("Hindi");
+        setStartRecordingBtnOnClick();
         $startRecordBtn.click();
 
         const expectedDetails = localStorage.getItem('speakerDetails');
@@ -324,11 +325,12 @@ describe('setStartRecordingBtnOnClick', () => {
     test('should not do anything when $tncCheckbox is not checked', () => {
         mockLocation();
         mockLocalStorage();
+        localStorage.setItem('contributionLanguage',"Hindi");
         const $startRecordBtn = $('#proceed-box');
         const $tncCheckbox = $('#tnc');
 
         $tncCheckbox.prop('checked', false);
-        setStartRecordingBtnOnClick("Hindi");
+        setStartRecordingBtnOnClick();
         $startRecordBtn.click();
 
         const expectedDetails = localStorage.getItem('speakerDetails');

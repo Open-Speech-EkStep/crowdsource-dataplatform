@@ -128,7 +128,7 @@ const setGenderRadioButtonOnClick = function () {
     });
 }
 
-const setStartRecordingBtnOnClick = function (sentenceLanguage) {
+const setStartRecordingBtnOnClick = function () {
     const speakerDetailsKey = 'speakerDetails';
     const $startRecordBtn = $('#proceed-box');
     const $tncCheckbox = $('#tnc');
@@ -141,9 +141,9 @@ const setStartRecordingBtnOnClick = function (sentenceLanguage) {
             const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
             const genderValue = checkedGender.length ? checkedGender[0].value : '';
             const userNameValue = $userName.val().trim().substring(0, 12);
-            console.log(sentenceLanguage)
-            const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === sentenceLanguage);
-            if (! selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
+            let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+            const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === contributionLanguage);
+            if (! selectedLanguage.data) contributionLanguage = DEFAULT_CON_LANGUAGE;
             if (testUserName(userNameValue)) {
                 return;
             }
@@ -152,9 +152,10 @@ const setStartRecordingBtnOnClick = function (sentenceLanguage) {
                 age: age.value,
                 motherTongue: motherTongue.value,
                 userName: userNameValue,
-                language: sentenceLanguage || localStorage.getItem(CONTRIBUTION_LANGUAGE),
+                language: contributionLanguage,
             };
             localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
+            localStorage.setItem(CONTRIBUTION_LANGUAGE, contributionLanguage);
             location.href = '/record';
         }
     });
