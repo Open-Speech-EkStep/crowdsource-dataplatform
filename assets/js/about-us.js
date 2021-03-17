@@ -5,7 +5,8 @@ const {
     setTNCOnChange,
     setUserModalOnShown,
     setUserNameOnInputFocus,
-    setGenderRadioButtonOnClick
+    setGenderRadioButtonOnClick,
+    setStartRecordingBtnOnClick
 } = require('./speakerDetails');
 const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES} = require('./constants');
 const {updateLocaleLanguagesDropdown} = require('./utils');
@@ -42,6 +43,7 @@ $(document).ready(function () {
         langTop = e.target.value;
         const $toggleButton = $('#start_recording');
         $toggleButton.removeAttr('disabled');
+        document.cookie = `i18n=en`;
     });
 
     $('#start_recording').on('click', () => {
