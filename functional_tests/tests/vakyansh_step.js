@@ -113,7 +113,7 @@ step("And User enter random Username and selects Age , Mother tongue ,gender", a
 step("when user click on Lets Go Button, user should see instructions to record", async function () {
     await click(taiko.button({id: 'proceed-box'}))
     await taiko.waitFor(1500)
-    assert.ok(await text('Recording Instructions').exists(), 'Not able to see instructions')
+    assert.ok(await text('Quick Tips').exists(), 'Not able to see instructions')
 });
 
 step("When user closes the Instructions , user should see a sentence , Skip button , Start Recording Button , username", async function () {
@@ -146,7 +146,7 @@ step("When user skips all the rest of the <count> sentences , User should see Th
 step("when user clicks on the Contribute More button, user should not see the Instructions page again", async function () {
     await click(link('Contribute More'))
     await taiko.waitFor(1000)
-    assert(! await text('Recording Instructions').exists(0,0));
+    assert(! await text('Quick Tips').exists(0,0));
 });
 
 
