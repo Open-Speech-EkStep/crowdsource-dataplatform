@@ -126,5 +126,7 @@
 	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "హోమ్ పేజీ లోకి వెళ్ళడానికి <a class=\"\" href=\"/\">క్లిక్ చెయ్యండి</a>",
 	"Speech recognition relies on \"machine-learning\" technology that requires huge collections of datasets that include diversified Indian voices and the corresponding text. Through Vakyansh, we want to create a diverse open repository of Indian voice speaking Indian language which can be used for this initiative": "శబ్దగ్రాహకం అనేది \"మెషిన్ లెర్నింగ్\" సాంకేతికత మీద ఆధారపడి ఉంటుంది, దానికి వివిధ భారతీయ గొంతులు మరియు సంభందిత పదాలతో కూడిన డేటా సెట్స్ యొక్క భారీ సమూహాలు అవసరం. వాకన్ష్ ద్వారా,వివిధ భారతీయ భాషలు మాట్లాడుతున్న భారతీయ గొంతులను ఒక బాహ్య సమూహంగా పేర్చి దీని ప్రారంభానికి తయారు చెయ్యలనుకుంటోంది",
 	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off.": "ఒక బృందంగా, మాలో మీరు చేరాలి అనుకుంటున్నాం మరియు మీ గొంతును   మాకు ఇవ్వాలని కోరుకుంటున్నాము.  మీ గొంతును ఒక్కసారిగా రికార్డ్ చేయడం మీకు కష్టం గా ఉండొచ్చు అందుకు, మీరు మా వెబ్సైట్ ను పలుమార్లు దర్శించి మీరు వదిలేసిన దగ్గర నుంచి కొనసాగించే లా మేము జాగ్రత్తలు తీసుకున్నాము.",
-	"<b>Read once</b> before recording it": "రికార్డ్ చేసేముందు ఒకసారి చదవండి"
+	"<b>Read once</b> before recording it": "రికార్డ్ చేసేముందు ఒకసారి చదవండి",
+	"Feedback": "Feedback",
+	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> రికార్డింగ్లను చెల్లుబాటు చేసినందుకు ధన్యవాదాలు"
 }
