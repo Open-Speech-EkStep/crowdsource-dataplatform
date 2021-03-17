@@ -25,7 +25,7 @@ const ALL_LANGUAGES = [
     {value: "Urdu", id: "ur", text: "اردو", hasLocaleText: true,data:false},
     {value: "Konkani Roman", id: "kr", text: "Konkani Roman", hasLocaleText: true,data:false},
     {value: "Konkani DV", id: "kd", text: "Konkani DV", hasLocaleText: true,data:false},
-    {value: "Manipuri BN", id: "mnibn", text: "Manipuri BN", hasLocaleText: false,data:false},
+    {value: "Manipuri BN", id: "mnibn", text: "Manipuri BN", hasLocaleText: true, data:false},
     {value: "Manipuri MM", id: "mnimm", text: "Manipuri MM", hasLocaleText: false,data:false},
     {value: "Santali OL", id: "satol", text: "Santali OL", hasLocaleText: false,data:false},
     {value: "Santali DV", id: "satdv", text: "Santali DV", hasLocaleText: false,data:false},
