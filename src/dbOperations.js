@@ -3,7 +3,6 @@ const { downloader } = require('./downloader/objDownloader')
 const moment = require('moment');
 const {
     updateContributionDetails,
-    setNewUserAndFileName,
     unassignIncompleteSentences,
     updateAndGetSentencesQuery,
     updateAndGetUniqueSentencesQuery,
@@ -97,18 +96,9 @@ const updateDbWithAudioPath = function (
         country,
         roundedAudioDuration
     ])
-        .then((data) => {
+        .then(() => {
             db.none(updateSentencesWithContributedState, [sentenceId]).then();
-            if (!data || !data.length) {
-                db.any(setNewUserAndFileName, [audioPath, encryptUserId, sentenceId])
-                    .then(() => cb(200, { success: true }))
-                    .catch((err) => {
-                        console.log(err);
-                        cb(500, { error: true });
-                    });
-            } else {
-                cb(200, { success: true });
-            }
+            cb(200, { success: true });
         })
         .catch((err) => {
             console.log(err);
@@ -342,8 +332,8 @@ const getLastUpdatedAt = async () => {
     return lastUpdatedDateTime;
 }
 
-const insertFeedback = (subject,feedback,language) => {
-    return db.any(feedbackInsertion, [subject,feedback,language]);
+const insertFeedback = (subject, feedback, language) => {
+    return db.any(feedbackInsertion, [subject, feedback, language]);
 }
 
 module.exports = {
