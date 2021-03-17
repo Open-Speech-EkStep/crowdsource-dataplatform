@@ -31,7 +31,7 @@ function fetchLocationInfo() {
     let regionName = localStorage.getItem("state_region") || "NOT_PRESENT";
     let countryName = localStorage.getItem("country") || "NOT_PRESENT";
     if(regionName !== "NOT_PRESENT" && countryName !== "NOT_PRESENT" && regionName.length > 0 && countryName.length > 0){
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve)=>{
             resolve({"regionName": regionName ,"country": countryName})
         })
     }
