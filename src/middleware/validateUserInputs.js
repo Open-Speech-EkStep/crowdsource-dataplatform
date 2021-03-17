@@ -6,7 +6,9 @@ const {
     GENDER,
     AGE_GROUP,
     MOTHER_TONGUE,
-    MAX_LENGTH
+    MAX_LENGTH,
+    FEEDBACK_MIN_LENGTH,
+    FEEDBACK_MAX_LENGTH
 } = require("../constants")
 
 
@@ -46,4 +48,17 @@ const validateUserInfo = function (req, res, next) {
     next()
 }
 
-module.exports = {validateUserInputAndFile, validateUserInfo, convertIntoMB}
+const validateUserInputForFeedback = function (req, res, next) {
+    const feedback = req.body.feedback;
+
+    const feedbackLength = feedback.trim().length
+
+    const invalidFeedback = (!feedback || feedbackLength < FEEDBACK_MIN_LENGTH || feedbackLength > FEEDBACK_MAX_LENGTH);
+
+    if (invalidFeedback) {
+        return res.status(400).send("Bad request");
+    }
+    next()
+}
+
+module.exports = {validateUserInputAndFile, validateUserInfo, convertIntoMB,validateUserInputForFeedback}
