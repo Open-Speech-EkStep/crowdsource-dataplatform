@@ -20,7 +20,8 @@ const {
   getAllDetails,
   getAllInfo,
   updateTablesAfterValidation,
-  getAudioClip
+  getAudioClip,
+  insertFeedback
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
@@ -29,6 +30,7 @@ const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH } = require('./cons
 const {
   validateUserInputAndFile,
   validateUserInfo,
+  validateUserInputForFeedback
 } = require('./middleware/validateUserInputs');
 
 // const Ddos = require('ddos');
@@ -98,11 +100,14 @@ app.use(function (req, res, next) {
   }
   next();
 });
+
 app.use(express.static('public'));
+
 app.get('/changeLocale/:locale', function (req, res) {
   res.cookie('i18n', req.params.locale);
   res.redirect(req.headers.referer);
 });
+
 app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
@@ -138,6 +143,10 @@ router.get('/getAllInfo/:language', async function (req, res) {
   }
 });
 
+router.get('/feedback', function (req, res) {
+  res.render('feedback.ejs');
+});
+
 router.get('/about-us', function (req, res) {
   res.render('about-us.ejs', { MOTHER_TONGUE, LANGUAGES });
 });
@@ -158,9 +167,13 @@ router.get('/dashboard', function (req, res) {
   res.render('dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
 });
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
+
 router.get('/validation/sentences/:language', (req, res) => getValidationSentences(req, res));
+
 router.post('/validation/action', (req, res) => updateTablesAfterValidation(req, res))
+
 router.post('/audioClip', (req, res) => getAudioClip(req, res, objectStorage))
+
 router.post('/upload', (req, res) => {
   const file = req.file;
   const sentenceId = req.body.sentenceId;
@@ -246,6 +259,21 @@ app.get('/get-locale-strings', function (req, res) {
     res.send(langSttr);
   });
 });
+
+router.post('/feedback', validateUserInputForFeedback, (req, res) => {
+  const feedback = req.body.feedback.trim();
+  const subject = req.body.subject.trim();
+  const language = req.body.language.trim();
+  
+  insertFeedback(subject, feedback, language).then(() => {
+    console.log("Feedback is inserted into the DB.")
+    res.send({ statusCode:200, message: "Feedback submitted successfully." });
+  }).catch(e => {
+    console.log(`Error while insertion ${e}`)
+    res.send({ statusCode: 502, message: "Failed to submit feedback." });
+  })
+
+})
 
 require('./dashboard-api')(router);
 

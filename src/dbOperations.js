@@ -16,7 +16,8 @@ const {
     unassignIncompleteSentencesWhenLanChange,
     updateSentencesWithContributedState,
     addValidationQuery,
-    updateSentencesWithValidatedState
+    updateSentencesWithValidatedState,
+    feedbackInsertion
 } = require('./dbQuery');
 const {
     topLanguagesBySpeakerContributions,
@@ -341,6 +342,10 @@ const getLastUpdatedAt = async () => {
     return lastUpdatedDateTime;
 }
 
+const insertFeedback = (subject,feedback,language) => {
+    return db.any(feedbackInsertion, [subject,feedback,language]);
+}
+
 module.exports = {
     updateAndGetSentences,
     getValidationSentences,
@@ -357,5 +362,6 @@ module.exports = {
     getAgeGroupData,
     getGenderGroupData,
     getLastUpdatedAt,
-    getSentencesBasedOnAge
+    getSentencesBasedOnAge,
+    insertFeedback
 };
