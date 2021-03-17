@@ -7,7 +7,7 @@ const {
     AGE_GROUP,
     MOTHER_TONGUE,
     MAX_LENGTH,
-    FEEDBACK_MIN_LENGTH,
+    SUBJECT_MAX_LENGTH,
     FEEDBACK_MAX_LENGTH
 } = require("../constants")
 
@@ -50,10 +50,10 @@ const validateUserInfo = function (req, res, next) {
 
 const validateUserInputForFeedback = function (req, res, next) {
     const feedback = req.body.feedback;
+    const subject = req.body.subject;
 
-    const feedbackLength = feedback.trim().length
 
-    const invalidFeedback = (!feedback || feedbackLength < FEEDBACK_MIN_LENGTH || feedbackLength > FEEDBACK_MAX_LENGTH);
+    const invalidFeedback = (!feedback || feedback.trim().length > FEEDBACK_MAX_LENGTH || !subject || subject.trim().length > SUBJECT_MAX_LENGTH );
 
     if (invalidFeedback) {
         return res.status(400).send("Bad request");
