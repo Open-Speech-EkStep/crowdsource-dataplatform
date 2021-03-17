@@ -33,7 +33,7 @@ const MOTHER_TONGUE = [
 ];
 const LANGUAGES = [{ value: "Assamese", id: "as", text: "অসমীয়া" },
 { value: "Bengali", id: "bn", text: "বাংলা" },
-// {value: "English", id: "en", text: "English"},
+{value: "English", id: "en", text: "English"},
 { value: "Gujarati", id: "gu", text: "ગુજરાતી" },
 { value: "Hindi", id: "hi", text: "हिंदी" },
 { value: "Kannada", id: "kn", text: "ಕನ್ನಡ" },
@@ -42,17 +42,7 @@ const LANGUAGES = [{ value: "Assamese", id: "as", text: "অসমীয়া" 
 { value: "Odia", id: "or", text: "ଓଡିଆ" },
 { value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ" },
 { value: "Tamil", id: "ta", text: "தமிழ்" },
-{ value: "Telugu", id: "te", text: "తెలుగు" },
-{ value: "Dogri", id: "doi", text: "Dogri" },
-{ value: "Maithili", id: "mai", text: "Maithili" },
-{ value: "Urdu", id: "ur", text: "Urdu" },
-{ value: "Konkani Roman", id: "kr", text: "Konkani Roman" },
-{ value: "Konkani DV", id: "kd", text: "Konkani DV" },
-{ value: "Manipuri BN", id: "mnibn", text: "Manipuri BN" },
-{ value: "Manipuri MM", id: "mnimm", text: "Manipuri MM" },
-{ value: "Santali OL", id: "satol", text: "Santali OL" },
-{ value: "Santali DV", id: "satdv", text: "Santali DV" },
-{ value: "Sanskrit", id: "sa", text: "Sanskrit" }];
+{ value: "Telugu", id: "te", text: "తెలుగు" }];
 
 const AGE_GROUP = [
   '',
