@@ -207,14 +207,16 @@ router.post('/upload', (req, res) => {
 router.post('/audio/snr', async (req, res) => {
   const file = req.file;
   const filePath = file.path
-  const command = `${WADASNR_BIN_PATH}/WADASNR -i ${filePath} -t ${WADASNR_BIN_PATH}/Alpha0.400000.txt -ifmt mswav`
-  try {
-    const snr = await calculateSNR(command)
-    res.status(200).send({ 'snr': snr });
+  const command = buildWadaSnrCommand(filePath)
+  const onSuccess = (snr) => {
     removeTempFile(file);
-  } catch (err) {
+    res.status(200).send({ 'snr': snr });
+  }
+  const onError = (snr) => {
+    removeTempFile(file);
     res.sendStatus(502);
   }
+  calculateSNR(command, onSuccess, onError)
 });
 
 router.get('/location-info', (req, res) => {
@@ -256,6 +258,10 @@ app.use('/', router);
 app.get('*', (req, res) => {
   res.render('not-found.ejs');
 });
+
+function buildWadaSnrCommand(filePath) {
+  return `${WADASNR_BIN_PATH}/WADASNR -i ${filePath} -t ${WADASNR_BIN_PATH}/Alpha0.400000.txt -ifmt mswav`;
+}
 
 function removeTempFile(file) {
   fs.unlink(file.path, function (err) {

@@ -95,6 +95,21 @@ const setLangNavBar = (targetedDiv, top_lang, $languageNavBar) => {
     }
 }
 
+const getDefaultLang = function (){
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    const $sayListenLanguage = $('#say-listen-language');
+
+    if (!contributionLanguage) {
+        const $homePage = document.getElementById('home-page');
+        const defaultLangId = $homePage.getAttribute('default-lang');
+        const targettedDiv = getDefaultTargettedDiv('id', defaultLangId, $sayListenLanguage);
+        const language = targettedDiv.getAttribute("value");
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
+        return language;
+    }
+    return contributionLanguage;
+}
+
 const setDefaultLang = function () {
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const $sayListenLanguage = $('#say-listen-language');
@@ -159,7 +174,8 @@ $(document).ready(function () {
         placement: screen.availWidth > 500 ? 'right' : 'auto',
     });
 
-    let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    let top_lang = getDefaultLang();
+
     const $languageNavBar = $('#language-nav-bar');
     const $sayListenLanguage = $('#say-listen-language');
 
