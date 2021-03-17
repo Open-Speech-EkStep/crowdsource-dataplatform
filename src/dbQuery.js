@@ -80,6 +80,8 @@ const getAgeGroupsData = 'select data."age_group", count (*) from (select con."a
 
 const getGenderData = 'select data."gender", count (*) from (select con."gender" from sentences s inner join "contributions" cont on s."sentenceId" = cont."sentenceId" and "action"=\'completed\' inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."gender", con.user_name, con.contributor_identifier) as data group by data."gender";'
 
+const feedbackInsertion = 'Insert into feedbacks (subject,feedback,language) values ($1,$2,$3);'
+
 module.exports = {
     unassignIncompleteSentences,
     sentencesCount,
@@ -95,5 +97,6 @@ module.exports = {
     unassignIncompleteSentencesWhenLanChange,
     updateSentencesWithContributedState,
     addValidationQuery,
-    updateSentencesWithValidatedState
+    updateSentencesWithValidatedState,
+    feedbackInsertion
 }

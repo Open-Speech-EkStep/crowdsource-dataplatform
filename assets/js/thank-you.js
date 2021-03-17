@@ -134,13 +134,13 @@ const showSpeakersHoursData = (speakerDetailsValue) => {
     try {
         const $speakersDataHoursValue = $('#hour-value');
         const totalCompleteSentence = Number(
-            speakerDetailsValue.find((t) => t.index === 1).count
+            speakerDetailsValue.find((t) => t.index === 1).duration
         );
-        const totalSeconds = totalCompleteSentence * AUDIO_DURATION;
+        const totalSeconds = totalCompleteSentence;
         const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
         const remainingAfterHours = totalSeconds % HOUR_IN_SECONDS;
         const minutes = Math.floor(remainingAfterHours / SIXTY);
-        const seconds = remainingAfterHours % SIXTY;
+        const seconds = Math.ceil(remainingAfterHours % SIXTY);
         $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
         setTotalProgressBar(totalSeconds);
     } catch (err) {
