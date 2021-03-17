@@ -342,8 +342,8 @@ const getLastUpdatedAt = async () => {
     return lastUpdatedDateTime;
 }
 
-const insertFeedback = (feedback) => {
-    return db.any(feedbackInsertion, feedback);
+const insertFeedback = (subject,feedback,language) => {
+    return db.any(feedbackInsertion, [subject,feedback,language]);
 }
 
 module.exports = {
