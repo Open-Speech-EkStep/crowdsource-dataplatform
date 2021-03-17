@@ -459,6 +459,151 @@ audio {
   height: 15px;
 }
 
+
+.validation-instruction {
+  background-color: #343A40;
+  border-radius: 4px;
+  height: 130px;
+  padding: 20px;
+}
+
+.quick-tips-container {
+  background-color: rgb(149 149 149 / 20%);
+  border-radius: 4px;
+  font-size: 14px;
+  width: 87px;
+}
+
+.quick-tips-text {
+  color: #F7F7F7;
+  margin-top: 10px;
+}
+
+.instruction-box {
+  color: #fff;
+  width: 130px;
+  font-size: 12px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.instruction-box:not(.first)::before {
+  content: '';
+  width: 100%;
+  height: 2px;
+  border: 1px dashed #676b6e;
+  position: absolute;
+  right: 90%;
+  top: 22px;
+  z-index: 1;
+}
+
+.instruction-box:not(.last)::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  border: 1px dashed #676b6e;
+  position: absolute;
+  left: 90%;
+  top: 22px;
+  z-index: 1;
+}
+
+.instruction-icon {
+  background: rgba(196, 196, 196, 0.2);
+  height: 54px;
+  width: 54px;
+  padding: 12px;
+}
+
+.instruction-icon-border {
+  border: 3px solid rgba(196,196,196, .2);
+}
+
+.close-btn {
+  color: #F7F7F7;
+  font-size: 34px;
+  position: absolute;
+  top: 0;
+  right: 1rem;
+}
+
+@media screen and (max-width: 599px) {
+  #content-wrapper {
+    padding: 0;
+  }
+  .validation-instruction {
+    height: auto;
+    flex-direction: column;
+    padding: 8px;
+  }
+  .quick-tips-container {
+    flex-direction: row !important;
+    padding: 8px;
+    width: 115px;
+  }
+  .instructions {
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .instruction-box {
+    width: 95px;
+  }
+  .instruction-box:not(.first)::before{
+    width: 0%;
+  }
+
+  .instruction-box:not(.last)::after {
+    width: 35%;
+    top: 27px;
+  }
+
+  .third::after {
+    width: 0% !important;
+  }
+
+  .fourth {
+    margin-top: 25px;
+    margin-bottom: 16px;
+  }
+
+  .last {
+    width: 140px;
+    margin-top: 25px;
+    margin-bottom: 16px;
+  }
+
+  .fourth::after {
+    width: 80% !important;
+    top: 27px !important;
+    left: 100% !important;
+  }
+  .quick-tips-text {
+    margin-top: 0 !important;
+    margin-left: 8px;
+  }
+  .xs-p-16 {
+    padding: 16px;
+  }
+ }
+
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .instruction-box:not(.first)::before, .instruction-box:not(.last)::after  {
+    width: 35%;
+    top: 24px;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1280px) {
+  .instruction-box:not(.first)::before, .instruction-box:not(.last)::after  {
+    width: 65%;
+    top: 24px;
+  }
+}
+
 @media (max-width: 767px) {
   .test-mic-speaker {
     padding: 0;

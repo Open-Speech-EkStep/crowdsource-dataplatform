@@ -663,9 +663,11 @@ function playSpeaker() {
 }
 
 $(document).ready(() => {
-    setFooterPosition();
+    toggleFooterPosition();
+    setPageContentHeight();
     window.crowdSource = {};
-    const $instructionModal = $('#instructionsModal');
+    //const $instructionModal = $('#instructionsModal');
+    const $validationInstructionModal = $("#validation-instruction-modal");
     const $errorModal = $('#errorModal');
     const $loader = $('#loader');
     const $pageContent = $('#page-content');
@@ -692,13 +694,19 @@ $(document).ready(() => {
 
         setPageContentHeight();
 
-        $instructionModal.on('hidden.bs.modal', function () {
-            $pageContent.removeClass('d-none');
+        //$instructionModal.on('hidden.bs.modal', function () {
+          //  $pageContent.removeClass('d-none');
             // toggleFooterPosition();
-        });
+        //});
+    
+            $("#instructions_close_btn").on("click", function() {
+                $validationInstructionModal.addClass("d-none");
+            })
 
         $errorModal.on('show.bs.modal', function () {
-            $instructionModal.modal('hide');
+            //$instructionModal.modal('hide');
+            $validationInstructionModal.addClass("d-none");
+
         });
         $errorModal.on('hidden.bs.modal', function () {
             location.href = '/#speaker-details';
@@ -748,11 +756,12 @@ $(document).ready(() => {
                 })
                 .then((sentenceData) => {
                     if (!isExistingUser) {
-                        $instructionModal.modal('show');
-                    } else {
-                        $pageContent.removeClass('d-none');
-                        // toggleFooterPosition();
-                    }
+                        //$instructionModal.modal('show');
+                        $validationInstructionModal.removeClass("d-none");
+                    } 
+                    $pageContent.removeClass('d-none');
+                    // toggleFooterPosition();
+                    
                     crowdSource.sentences = sentenceData.data;
                     crowdSource.count = Number(sentenceData.count);
                     $loader.hide();
