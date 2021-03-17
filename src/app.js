@@ -262,7 +262,10 @@ app.get('/get-locale-strings', function (req, res) {
 
 router.post('/feedback', validateUserInputForFeedback, (req, res) => {
   const feedback = req.body.feedback.trim();
-  insertFeedback(feedback).then(() => {
+  const subject = req.body.subject.trim();
+  const language = req.body.language.trim();
+  
+  insertFeedback(subject, feedback, language).then(() => {
     console.log("Feedback is inserted into the DB.")
     res.sendStatus(200);
   }).catch(e => {
