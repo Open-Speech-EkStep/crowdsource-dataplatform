@@ -54,7 +54,7 @@
 	"Terms of Use": "Terms of Use",
 	"Copyright & Licensing Notice": "Copyright & Licensing Notice",
 	"Recording Instructions": "ରେକର୍ଡ଼ ନିର୍ଦ୍ଦେଶାବଳୀ",
-	"START": "ଆରମ୍ଭ କରନ୍ତୁ |",
+	"START": "ଆରମ୍ଭ",
 	"Let's get started!": "ଆସନ୍ତୁ ଆରମ୍ଭ କରିବା!",
 	"SKIP": "ଏଡାନ୍ତୁ",
 	"STOP RECORDING": "ରେକର୍ଡ଼ିଂ ବନ୍ଦ କରନ୍ତୁ",
@@ -133,7 +133,7 @@
 	"to go back to home page": "ହୋମ୍ ପେଜକୁ ଯିବା ପାଇଁ",
 	"Select the language": "ଭାଷା ଚୟନ କରନ୍ତୁ",
 	"All Languages": "ସମସ୍ତ ଭାଷା",
-	"We do not have any data for this language, would you like to contribute for it?": "ଏହି ଭାଷା ପାଇଁ ଆମର କ data ଣସି ତଥ୍ୟ ନାହିଁ, ଆପଣ ଏଥିପାଇଁ ସହଯୋଗ କରିବାକୁ ଚାହୁଁଛନ୍ତି କି?",
+	"We do not have any data for this language, would you like to contribute for it?": "ଏହି ଭାଷା ପାଇଁ ଆମ ନିକଟରେ କୌଣସି ଡାଟା ନାହିଁ, ଆପଣ ଏଥିପାଇଁ ପ୍ରଦାନ କରିବାକୁ ଚାହିଁବେ କି?",
 	"Contribute Now": "ବର୍ତ୍ତମାନ ଯୋଗଦାନ କରନ୍ତୁ |",
 	"hours validated": "ଘଣ୍ଟା ବୈଧ",
 	"Progress Chart": "ପ୍ରଗତି ଟାଇମଲାଇନ୍",
@@ -144,10 +144,10 @@
 	"Age Group Distribution": "ବୟସ ବର୍ଗ ଆବଣ୍ଟନ",
 	"hrs recorded in": "%language ରେ %hours ଘଣ୍ଟା ରେକର୍ଡ଼ ହୋଇଛି",
 	"hrs validated in": "%language ରେ %hours ଘଣ୍ଟା ବୈଧ ହୋଇଛି",
-	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "<span id=\"counter\"></span> ସେକେଣ୍ଡ ପରେ ରେକର୍ଡିଂ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ବନ୍ଦ ହୋଇଯିବ |",
+	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "<span id=\"counter\"></span> ସେକେଣ୍ଡ ପରେ ରେକର୍ଡ଼ିଂ ଆପେ ଆପେ ବନ୍ଦ ହେବ",
 	"Incorrect": "ଭୁଲ",
 	"Replay": "ରିପ୍ଲେ",
-	"Pause": "ବିରାମ",
+	"Pause": "ରୁହନ୍ତୁ",
 	"Correct": "ସଠିକ୍",
 	"Skip": "ଏଡାନ୍ତୁ",
 	"hours": "ଘଣ୍ଟା",
@@ -156,5 +156,5 @@
 	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "ହୋମ୍ ପେଜକୁ ଯିବା ପାଇଁ ଏଠାରେ <a class=\"\" href=\"/\"> ଉପରେ କ୍ଲିକ କରନ୍ତୁ।</a>",
 	"Speech recognition relies on \"machine-learning\" technology that requires huge collections of datasets that include diversified Indian voices and the corresponding text. Through Vakyansh, we want to create a diverse open repository of Indian voice speaking Indian language which can be used for this initiative": "ଭାଷା ସ୍ୱୀକୃତି \"ମେସିନ୍-ଲର୍ନିଂ\" ଟେକ୍ନୋଲୋଜି ଉପରେ ନିର୍ଭର କରେ ଯେଉଁଥିରେ ଡାଟା ସେଟ୍ ର ବିଶାଳ ସଂଗ୍ରହ ଆବଶ୍ୟକ ତଥା ଯେଉଁଥିରେ ରହିଛି ବିବିଧ ଭାରତୀୟ ସ୍ୱର ଏବଂ ସଂପୃକ୍ତ ଟେକ୍ସଟ। ବାକ୍ୟାଂଶ ମାଧ୍ୟମରେ, ଆମେ ଭାରତୀୟ ସ୍ବର କହୁଥିବା ଭାରତୀୟ ଭାଷାର ଏକ ବ୍ୟାପକ ଉନ୍ମୁକ୍ତ ସଂଗ୍ରହାଳୟ ସୃଷ୍ଟି କରିବାକୁ ଚାହୁଁଛୁ ଯାହା ଏହି ପଦକ୍ଷେପ ପାଇଁ ବ୍ୟବହୃତ ହୋଇପାରିବ |",
 	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off.": "ଏକ ଟିମ ଭାବରେ, ଆମେ ଆପଣଙ୍କୁ ଆମ ସହିତ ଯୋଗଦେବାକୁ ଏବଂ ଏହି ପଦକ୍ଷେପରେ ଆପଣଙ୍କର ସ୍ୱର ପ୍ରଦାନ କରିବାକୁ ଆମନ୍ତ୍ରଣ କରୁଛୁ। ଗୋଟିଏ ଥରରେ ଆପଣଙ୍କର ସ୍ବର ରେକର୍ଡିଂ କରିବା ହୁଏତ କଷ୍ଟକର ହୋଇପାରେ  ତେଣୁ, ଆମେ ଆମ ୱେବସାଇଟରେ ଶିକ୍ଷାଗ୍ରହଣକାରୀ ପଦକ୍ଷେପ ସୃଷ୍ଟି କରିଛୁ, ଯଦ୍ବାରା ଆପଣ ଆମକୁ ଏକାଧିକ ଥର ପରିଦର୍ଶନ କରିପାରିବେ ଏବଂ ଯେଉଁଠାରୁ ଛାଡ଼ିଥିଲେ ସେହି ସ୍ଥାନରୁ ପୁଣି ଥରେ ଆରମ୍ଭ କରିପାରିବେ। ",
-	"<b>Read once</b> before recording it": "<b>Read once</b> before recording it"
+	"<b>Read once</b> before recording it": "ଏହାକୁ ରେକର୍ଡ଼ କରିବା ପୂର୍ବରୁ ଥରେ ପଢ଼ି ନିଅନ୍ତୁ"
 }
