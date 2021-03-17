@@ -144,5 +144,6 @@
 	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off.": "ഒരു ടീം എന്ന നിലയിൽ, ഞങ്ങളോടൊപ്പം ചേരാനും ഈ സംരംഭത്തിലേക്ക് നിങ്ങളുടെ ശബ്ദം സംഭാവന നൽകാനും ഞങ്ങൾ നിങ്ങളെ ക്ഷണിക്കുന്നു. നിങ്ങളുടെ ശബ്ദം ഒരു അവസരത്തിൽ പൂർണ്ണമായി റെക്കോർഡ് ചെയ്യുന്നതിൽ ബുദ്ധിമുട്ടുണ്ടാവാമെന്നതിനാൽ, ഞങ്ങളുടെ വെബ്സൈറ്റ് പല തവണകളിലായി സന്ദർശിച്ച് നിങ്ങൾ നിർത്തിയിടത്തു നിന്ന് തുടങ്ങാനുള്ള സംവിധാനം ഞങ്ങൾ ഒരുക്കിയിട്ടുണ്ട്.",
 	"Feedback": "Feedback",
 	"<b>Read once</b> before recording it": "റെക്കോർഡ് ചെയ്യുന്നതിനു മുൻപ് <b>ഒരു തവണ വായിച്ചു നോക്കുക</b>",
-	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> റെക്കോർഡിംഗുകൾ സാധൂകരിച്ചതിന് നന്ദി"
+	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> റെക്കോർഡിംഗുകൾ സാധൂകരിച്ചതിന് നന്ദി",
+	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>"
 }
