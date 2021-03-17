@@ -66,9 +66,9 @@ step("Speaker details popup should appear and close button should close the pop 
     }
 });
 
-step("By default the Lets Go button should be disabled", async function () {
-    assert.ok(await taiko.button({id: 'proceed-box'}).isDisabled())
-});
+// step("By default the Lets Go button should be disabled", async function () {
+//     assert.ok(await taiko.button({id: 'proceed-box'}).isDisabled())
+// });
 
 step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present", async function () {
     await taiko.waitFor(1000)
@@ -80,10 +80,10 @@ step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio butto
     assert.ok(await taiko.radioButton({id: 'male-check'}).exists())
 });
 
-step("Hover on the Lets Go button should give some message", async function () {
-    await hover("LET'S GO")
-    await taiko.text('Please agree to the Terms and Conditions before proceeding').exists()
-});
+// step("Hover on the Lets Go button should give some message", async function () {
+//     await hover("LET'S GO")
+//     await taiko.text('Please agree to the Terms and Conditions before proceeding').exists()
+// });
 
 step("if a user enter username and click on Not you change user button , the field should be cleared", async function () {
     const usernameFiled = taiko.textBox({id: 'username'})
@@ -94,10 +94,10 @@ step("if a user enter username and click on Not you change user button , the fie
     assert.equal(await usernameFiled.value(), '')
 });
 
-step("Once user agree to terms and conditions Lets Go the button should be enabled", async function () {
-    await click(checkBox({id: 'tnc'}))
-    assert.equal(await taiko.button({id: 'proceed-box'}).isDisabled(), false)
-});
+// step("Once user agree to terms and conditions Lets Go the button should be enabled", async function () {
+//     await click(checkBox({id: 'tnc'}))
+//     assert.equal(await taiko.button({id: 'proceed-box'}).isDisabled(), false)
+// });
 
 step("And User enter random Username and selects Age , Mother tongue ,gender", async function () {
     if (await taiko.text('Speaker Details').exists()) {

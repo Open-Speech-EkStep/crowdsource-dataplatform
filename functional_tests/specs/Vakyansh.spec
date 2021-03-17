@@ -25,11 +25,8 @@
 ## Validate the Speaker Details pop-up in Contribute section
 * Select Preferred language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
-* By default the Lets Go button should be disabled
 * Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present
 * if a user enter username and click on Not you change user button , the field should be cleared
-* Hover on the Lets Go button should give some message
-* Once user agree to terms and conditions Lets Go the button should be enabled
 * Speaker details popup should appear and close button should close the pop up
 
 
@@ -38,7 +35,6 @@
 * Select Preferred language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
-* Once user agree to terms and conditions Lets Go the button should be enabled
 * when user click on Lets Go Button, user should see instructions to record
 * When user closes the Instructions , user should see a sentence , Skip button , Start Recording Button , username
 * When user clicks on "START RECORDING" button, "STOP RECORDING" button should appear
