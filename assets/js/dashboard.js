@@ -206,7 +206,7 @@ $(document).ready(function () {
                 language: languageToRecord || localStorage.getItem('contributionLanguage'),
             };
             localStorage.setItem('speakerDetails', JSON.stringify(speakerDetails));
-            location.href = '/record';
+            location.href = './record.html';
         }
     });
 

@@ -1,4 +1,5 @@
 const {updateLocaleLanguagesDropdown} = require('./utils');
+const { ALL_LANGUAGES } = require("./constants");
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');
@@ -43,21 +44,23 @@ function getCookie(cname) {
 
 function checkCookie() {
     var locale = getCookie("i18n");
-    if (locale == "") {
-        document.getElementById("toggle-content-language").click();
+    return locale != "";
+}
+function showLanguagePopup() { 
+    document.getElementById("toggle-content-language").click();
+}
+function redirectToLocalisedPage(){
+    var locale = getCookie("i18n");
+    let splitValues = location.href.split('/');
+    let currentLocale = splitValues[splitValues.length - 2];
+    $('#home-page').attr('default-lang', locale);
+    if (currentLocale != locale) {
+        changeLocale(locale);
     }
     else {
-        let splitValues = location.href.split('/');
-        let currentLocale = splitValues[splitValues.length - 2];
-        $('#home-page').attr('default-lang', locale);
-        if (currentLocale != locale) {
-            changeLocale(locale);
-        }
-        else {
-            const contributionLanguage = localStorage.getItem('contributionLanguage');
-            if (contributionLanguage) {
-                updateLocaleLanguagesDropdown(contributionLanguage);
-            }
+        const language = ALL_LANGUAGES.find(ele => ele.id === locale);
+        if (language) {
+            updateLocaleLanguagesDropdown(language.value);
         }
     }
 }
@@ -69,5 +72,7 @@ module.exports = {
     checkCookie,
     getCookie,
     setCookie,
-    changeLocale
+    changeLocale,
+    showLanguagePopup,
+    redirectToLocalisedPage
 };

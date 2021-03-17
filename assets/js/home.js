@@ -1,4 +1,4 @@
-const {checkCookie} = require('./locale')
+const {checkCookie, showLanguagePopup, redirectToLocalisedPage} = require('./locale')
 const {drawMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest} = require('./utils')
 const {
@@ -155,8 +155,14 @@ const getStatsSummary = function () {
 }
 
 $(document).ready(function () {
-    checkCookie();
-    clearLocalStroage();
+    if (!checkCookie()){
+        showLanguagePopup();
+        return;
+    }
+    else {
+        redirectToLocalisedPage();
+    }
+    clearLocalStorage();
     getLocaleString();
     const speakerDetailsKey = 'speakerDetails';
     const $startRecordBtn = $('#proceed-box');
