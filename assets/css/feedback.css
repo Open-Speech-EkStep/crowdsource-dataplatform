@@ -1,0 +1,18 @@
+#feedback_subject, #submit_btn {
+    height: 48px;
+}
+
+#back_btn {
+    cursor: pointer;
+}
+
+#feedback_description {
+    resize: none;
+}
+
+#count_message {
+    position: absolute;
+    padding: .2em .6em .3em;
+    right: 16px;
+    bottom: 0;
+}

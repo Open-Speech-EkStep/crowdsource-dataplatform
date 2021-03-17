@@ -15,25 +15,47 @@
 
 <body>
     <%- include common/headerForContributor.ejs %>
-        <div id="content-wrapper" class="container-fluid mt-5 pt-5 pb-2 px-3 px-md-5 h-100">
-            <div class="">
-                <div class="text-center">
-                    <h1 class="display-5 font-wt-900 site-blue">
-                        <%= __('Feedback') %>
-                    </h1>
+        <div id="content-wrapper" class="container-fluid pt-5 pb-2 px-3 px-md-5 h-100">
+            <div id="feedback_form">
+                <div class="col-lg-8 offset-lg-2 row align-items-center mb-5">
+                    <svg id="back_btn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.422863 10.9173L11.5394 0.326913C12.0492 -0.159072 12.8201 -0.0954105 13.2592 0.465893C13.6999 1.02809 13.6438 1.87722 13.1339 2.36321L4.613 10.4797H22.7803C23.4536 10.4797 24 11.0813 24 11.8247C24 12.568 23.4536 13.1696 22.7803 13.1696H4.30644L9.16336 17.9497L12.9339 21.6006C13.4616 22.0614 13.5519 22.907 13.1339 23.4898C12.8933 23.8252 12.5363 24 12.1761 24C11.911 24 11.6443 23.9058 11.4198 23.7095L7.5948 20.0066L0.408228 12.9374C0.146395 12.6801 -0.00240898 12.3107 3.05176e-05 11.9233C0.00328255 11.5368 0.156151 11.1701 0.422863 10.9173Z" fill="#343A40"/>
+                    </svg>  
+                    <h2 class="font-wt-900 ml-4">Feedback</h2>
                 </div>
-                <div>
-                    <div class="mb-3 row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Subject</label>
+                <div class="row">
+                    <div class="mb-4 row col-lg-8 offset-lg-2">
+                        <label for="feedback_subject" class="col-sm-2 col-form-label">Subject</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword">
+                            <input type="text" class="form-control" id="feedback_subject" placeholder="Subject">
                         </div>
                     </div>
                 </div>
-                <div class="mb-3 row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
-                    <div class="col-sm-10">
-                        <textarea rows="10" type="password" class="form-control" id="inputPassword"></textarea>
+                <div class="row">
+                    <div class="mb-3 row col-lg-8 offset-lg-2">
+                        <label for="feedback_description" class="col-sm-2 col-form-label">Description</label>
+                        <div class="col-sm-10 position-relative">
+                            <textarea maxlength="1000" rows="12" type="password" class="form-control" id="feedback_description" placeholder="Please type here..."></textarea>
+                            <span class="pull-right label label-default" id="count_message"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 row col-lg-8 offset-lg-2">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10 d-flex flex-column align-items-center justify-content-center">
+                            <p id="feedback_failure_msg" class="d-none text-danger font-weight-bold">Failed to submit the feedback. Please try again.</p>
+                            <button class="btn btn-primary w-75 mt-3" id="submit_btn">SUBMIT</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="feedback_thank_you_screen" class="d-none">
+                <div class="row">
+                    <div class="col-sm-6 offset-sm-3 d-flex flex-column align-items-center text-center">
+                        <h2 class="font-wt-900 mb-5">Thank You for you valueable feedback</h2>
+                        <p class="mb-5">Your feedback helps us keep the portal relevant to you, we appreciate you taking time to leave feedback for us.</p>
+                        <a role="button" href="/" class="btn btn-outline-primary d-flex justify-content-center align-items-center w-75 mt-3" id="submit_btn">Back to Home</a>
                     </div>
                 </div>
             </div>
