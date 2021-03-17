@@ -2,7 +2,7 @@ const { encrypt } = require('./encryptAndDecrypt');
 const { downloader } = require('./downloader/objDownloader')
 const moment = require('moment');
 const {
-    updateAudioPathAndUserDetails,
+    updateContributionDetails,
     setNewUserAndFileName,
     unassignIncompleteSentences,
     updateAndGetSentencesQuery,
@@ -85,7 +85,7 @@ const updateDbWithAudioPath = function (
     const encryptUserId = encrypt(userId);
     const roundedAudioDuration = Number(Number(audioDuration).toFixed(3));
 
-    db.any(updateAudioPathAndUserDetails, [
+    db.any(updateContributionDetails, [
         audioPath,
         ageGroup,
         gender,

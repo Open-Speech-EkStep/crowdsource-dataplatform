@@ -1,21 +1,6 @@
 const { spy } = require('fetch-mock');
 const {
-    UpdateAudioPathAndUserDetails,
-    setNewUserAndFileName,
-    unassignIncompleteSentences,
-    updateAndGetSentencesQuery,
-    updateAndGetUniqueSentencesQuery,
-    getValidationSentencesQuery,
-    sentencesCount,
-    getCountOfTotalSpeakerAndRecordedAudio,
-    getGenderData,
-    getAgeGroupsData,
-    getMotherTonguesData,
-    unassignIncompleteSentencesWhenLanChange,
-    updateSentencesWithContributedState,
-    addValidationQuery,
-    updateSentencesWithValidatedState,
-    updateAudioPathAndUserDetails
+    updateContributionDetails
 } = require('./../src/dbQuery');
 
 const mockDB = {
@@ -108,7 +93,7 @@ describe("Running tests for dbOperations", () => {
             )
 
             expect(spyDB).toHaveBeenCalledWith(
-                updateAudioPathAndUserDetails,
+                updateContributionDetails,
                 [
                     testAudioPath,
                     null,
@@ -138,7 +123,7 @@ describe("Running tests for dbOperations", () => {
             )
 
             expect(spyDB).toHaveBeenCalledWith(
-                updateAudioPathAndUserDetails,
+                updateContributionDetails,
                 [
                     testAudioPath,
                     "10-15",
@@ -171,7 +156,7 @@ describe("Running tests for dbOperations", () => {
             )
 
             expect(spyDB).toHaveBeenCalledWith(
-                updateAudioPathAndUserDetails,
+                updateContributionDetails,
                 [
                     testAudioPath,
                     null,
