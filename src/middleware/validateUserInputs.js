@@ -8,7 +8,8 @@ const {
     MOTHER_TONGUE,
     MAX_LENGTH,
     SUBJECT_MAX_LENGTH,
-    FEEDBACK_MAX_LENGTH
+    FEEDBACK_MAX_LENGTH,
+    LANGUAGES
 } = require("../constants")
 
 
@@ -51,11 +52,17 @@ const validateUserInfo = function (req, res, next) {
 const validateUserInputForFeedback = function (req, res, next) {
     const feedback = req.body.feedback;
     const subject = req.body.subject;
+    const language = req.body.language
 
+    const allLanguage = LANGUAGES.map(language=>language.value)
+    
+    const invalidLanguage = !allLanguage.includes(language)
 
-    const invalidFeedback = (!feedback || feedback.trim().length > FEEDBACK_MAX_LENGTH || !subject || subject.trim().length > SUBJECT_MAX_LENGTH );
+    const invalidSubject = (!subject || !subject.trim().length|| subject.trim().length > SUBJECT_MAX_LENGTH )
 
-    if (invalidFeedback) {
+    const invalidFeedback = (!feedback || !feedback.trim().length || feedback.trim().length > FEEDBACK_MAX_LENGTH);
+
+    if (invalidFeedback || invalidSubject || invalidLanguage) {
         return res.status(400).send("Bad request");
     }
     next()

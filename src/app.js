@@ -268,7 +268,6 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
   const feedback = req.body.feedback.trim();
   const subject = req.body.subject.trim();
   const language = req.body.language.trim();
-  
   insertFeedback(subject, feedback, language).then(() => {
     console.log("Feedback is inserted into the DB.")
     res.send({ statusCode:200, message: "Feedback submitted successfully." });

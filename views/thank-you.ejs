@@ -36,11 +36,11 @@
             <div class="row mt-5">
                 <div class="col-lg-8 offset-lg-2 border border-primary p-4-5 text-center overflow-hidden contribuion-info">
                     <div class="champion-ribbon">
-                        <span>You are a champion</span>
+                        <span><%= __('You are a champion') %></span>
                     </div>
-                    <h4 class="mb-3">WooHoo!! You took the first important step</h4>
-                    <p><span id="user-contribution" class="text-primary">5</span> recordings contributed</p>
-                    <p>You are just 10 sentences away from earning your 1st Badge.</p>
+                    <h4 class="mb-3"><%= __('WooHoo!! You took the first important step') %></h4>
+                    <p><span id="user-contribution" class="text-primary">5</span> <%= __('recordings contributed') %></p>
+                    <p><%= __('You are just 10 sentences away from earning your 1st Badge.') %></p>
                     <div class="mt-5 text-center">
                         <%= __('Share it with your friends and family') %>
                     </div>
@@ -66,10 +66,10 @@
                 <div class="col-lg-8 offset-lg-2 border p-4 stats-container">
                     <div class="row justify-content-around align-items-center">
                         <div>
-                            Did you know?
+                            <%= __('Did you know?') %>
                         </div>
                         <div>
-                            <p>Most data recorded for <span id="languageId"></span></p>
+                            <p><%= __('Most data recorded for') %> <span id="languageId"></span></p>
                             <div class="position-relative">
                                 <div class="progress mb-2 w-80">
                                     <div id="highest_language_progress" class="progress-bar time-contributed" role="progressbar" style="width:90%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div>
-                            <p>Data recorded for <span id="languageChoiceId"></span></p>
+                            <p><%= __('Data recorded for') %> <span id="languageChoiceId"></span></p>
                             <div class="position-relative">
                                 <div class="progress mb-2 w-80">
                                     <div id="contribute_language_progress" class="progress-bar time-contributed" role="progressbar" style="width:50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -92,7 +92,7 @@
             <div class="row justify-content-center mt-5">
                 <div class="col-lg-3 col-md-6 col-8 text-center">
                     <div class="mb-3">
-                        <span>Help your language achieve it’s goal of 100 hrs. We know you can do more!</span>
+                        <span><%= __('Help your language achieve it’s goal of 100 hrs. We know you can do more!') %></span>
                     </div>
                     <a href="./record.html" class="btn btn-primary btn-lg h6 w-100">
                         <%= __('Contribute More') %>
