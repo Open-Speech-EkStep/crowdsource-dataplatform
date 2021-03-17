@@ -19,17 +19,7 @@ const ALL_LANGUAGES = [
     {value: "Odia", id: "or", text: "ଓଡିଆ", hasLocaleText: true,data:true},
     {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ", hasLocaleText: true,data:true},
     {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: true,data:true},
-    {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true,data:true},
-    {value: "Dogri", id: "doi", text: "डोगरी", hasLocaleText: true,data:false},
-    {value: "Maithili", id: "mai", text: "Maithili", hasLocaleText: true,data:false},
-    {value: "Urdu", id: "ur", text: "اردو", hasLocaleText: true,data:false},
-    {value: "Konkani Roman", id: "kr", text: "Konkani Roman", hasLocaleText: true,data:false},
-    {value: "Konkani DV", id: "kd", text: "Konkani DV", hasLocaleText: true,data:false},
-    {value: "Manipuri BN", id: "mnibn", text: "Manipuri BN", hasLocaleText: true, data:false},
-    {value: "Manipuri MM", id: "mnimm", text: "Manipuri MM", hasLocaleText: false,data:false},
-    {value: "Santali OL", id: "satol", text: "Santali OL", hasLocaleText: false,data:false},
-    {value: "Santali DV", id: "satdv", text: "Santali DV", hasLocaleText: false,data:false},
-    {value: "Sanskrit", id: "sa", text: "Sanskrit", hasLocaleText: true,data:false}];
+    {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true,data:true}];
 
 module.exports = {
     DEFAULT_CON_LANGUAGE,
