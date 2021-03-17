@@ -3,7 +3,7 @@ const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, per
 const {
     setSpeakerDetails,
     setStartRecordBtnToolTipContent,
-    setTNCOnChange,
+    //setTNCOnChange,
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
@@ -161,18 +161,12 @@ $(document).ready(function () {
     const age = document.getElementById('age');
     const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
-    const $tncCheckbox = $('#tnc');
+    //const $tncCheckbox = $('#tnc');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
-    $tncCheckbox.prop('checked', false);
+   // $tncCheckbox.prop('checked', false);
 
     toggleFooterPosition();
-
-    $startRecordBtnTooltip.tooltip({
-        container: 'body',
-        placement: screen.availWidth > 500 ? 'right' : 'auto',
-    });
-
     let top_lang = getDefaultLang();
 
     const $languageNavBar = $('#language-nav-bar');
@@ -224,7 +218,7 @@ $(document).ready(function () {
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
-    setTNCOnChange($userName, $startRecordBtnTooltip);
+    //setTNCOnChange($userName, $startRecordBtnTooltip);
     setUserNameOnInputFocus();
     setStartRecordingBtnOnClick();
     setUserModalOnShown($userName);
@@ -273,6 +267,18 @@ $(document).ready(function () {
         $listen.addClass('col-lg-5');
         $listen_p_2.addClass('d-none');
         $listen_container.removeClass('listen-active');
+    });
+
+    $('input[name = "gender"]').on('change', function() {
+        const selectedGender = document.querySelector(
+            'input[name = "gender"]:checked'
+        );
+        const options = $("#transgender_options");
+        if(selectedGender.value === "others") {
+            options.removeClass("d-none");
+        } else {
+            options.addClass("d-none");
+        }
     });
 
     getStatsSummary();
