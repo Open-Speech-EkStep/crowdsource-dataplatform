@@ -51,7 +51,7 @@ const AGE_GROUP = [
   '30 - 60',
   '60+',
 ];
-const GENDER = ['', 'male', 'female', 'others'];
+const GENDER = ['', 'male', 'female', 'others', 'Transgender - He', 'Transgender - She', 'Rather Not Say'];
 
 const WADASNR_BIN_PATH = '/opt/binaries/WadaSNR/Exe'
 const SUBJECT_MAX_LENGTH = 256
