@@ -93,7 +93,7 @@
 	"By number of speakers": "ಭಾಷಣಕಾರರ ಸಂಖ್ಯೆಯಿಂದ",
 	"VIEW ALL DETAILS": "ಎಲ್ಲಾ ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ",
 	"I have read and agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions </a>": "ನಾನು <a href=\"/terms-and-conditions\">ನಿಯಮಗಳು ಮತ್ತು ಷರತ್ತುಗಳನ್ನು</a> ಓದಿದ್ದೇನೆ ಮತ್ತು ಒಪ್ಪುತ್ತೇನೆ",
-	"Show All": "ಎಲ್ಲ ತೋರಿಸು",
+	"Show All": "ಎಲ್ಲವನ್ನು ಪ್ರದರ್ಶಿಸು",
 	"Enter preferred username": "ಆದ್ಯತೆಯ ಬಳಕೆದಾರರ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
 	"Select the language": "ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
 	"All Languages": "ಎಲ್ಲಾ ಭಾಷೆಗಳು",
@@ -119,7 +119,7 @@
 	"total hours contributed": "total hours contributed",
 	"Validate More": "ಮತ್ತಷ್ಟು ಮೌಲ್ಯೀಕರಿಸಿ",
 	"Validating Instructions": "ಮೌಲ್ಯೀಕರಿಸಲಾದ ಸೂಚನೆಗಳು",
-	"We do not have any data for this language, would you like to contribute for it?": "ಈ ಭಾಷೆಗೆ ನಮ್ಮಲ್ಲಿ ಯಾವುದೇ ಡೇಟಾ ಇಲ್ಲ, ಅದಕ್ಕಾಗಿ ನೀವು ಕೊಡುಗೆ ನೀಡಲು ಬಯಸುವಿರಾ?",
+	"We do not have any data for this language, would you like to contribute for it?": "ಈ ಭಾಷೆಗೆ ನಮ್ಮಲ್ಲಿ ಯಾವುದೇ ಮಾಹಿತಿ ಇರುವುದಿಲ್ಲ, ಆದಕಾರಣ ನೀವು ಕೊಡುಗೆ ನೀಡಲು ಇಚ್ಚಿಸುತ್ತಿರಾ?",
 	"EkStep Foundation": "ಯ್ಯಾಕ್ ಸ್ಟೆಪ್ ಸಂಸ್ಥೆ",
 	"Username cannot be more than 12 characters": "ಬಳಕೆದಾರನ ಹೆಸರು 12 ಅಕ್ಷರಗಳಿಗಿಂತ ಹೆಚ್ಚು ಇರಬಾರದು",
 	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> ರೆಕಾರ್ಡಿಂಗ್‌ಗಳನ್ನು ಮೌಲ್ಯೀಕರಿಸಲು ನೀವು ನಮಗೆ ಸಹಾಯ ಮಾಡಿದ್ದೀ",
@@ -135,7 +135,7 @@
 	"hrs validated in": "%hours ಗಂಟೆಗಳ %language ನಲ್ಲಿ ಮೌಲ್ಯೀಕರಿಸಲಾಗಿದೆ",
 	"Incorrect": "ತಪ್ಪಾಗಿದೆ",
 	"Replay": "ಮರು-ಚಾಲನೆ ಮಾಡಿ",
-	"Pause": "ವಿರಾಮ",
+	"Pause": "ತಡೆ",
 	"Correct": "ಸರಿಯಾದ",
 	"Skip": "ತ್ಯಜಿಸಿ",
 	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "<span id=\"counter\"></span> ಸೆಕೆಂಡುಗಳ ನಂತರ ರೆಕಾರ್ಡಿಂಗ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ನಿಲ್ಲುತ್ತದೆ",
@@ -143,6 +143,9 @@
 	"minutes": "ನಿಮಿಷಗಳು",
 	"seconds": "ಸೆಕೆಂಡುಗಳನ್ನು",
 	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಲು <a class=\"\" href=\"/\">ಇಲ್ಲಿ ಅನ್ನು ಒತ್ತಿರಿ</a>",
-	"Speech recognition relies on \"machine-learning\" technology that requires huge collections of datasets that include diversified Indian voices and the corresponding text. Through Vakyansh, we want to create a diverse open repository of Indian voice speaking Indian language which can be used for this initiative": "ಭಾಷಣ ಮಾನ್ಯತೆಯು \"ಯಂತ್ರ-ಕಲಿಕೆ\" ತಂತ್ರಜ್ಞಾನವನ್ನು ಅವಲಂಬಿಸಿದೆ, ಇದು ವೈವಿಧ್ಯಮಯ ಭಾರತೀಯ ಧ್ವನಿಗಳು ಮತ್ತು ಅನುಗುಣವಾದ ಪಠ್ಯವನ್ನು ಒಳಗೊಂಡಿರುವ ಡೇಟಾಸೆಟ್\u200Cಗಳ ದೊಡ್ಡ ಸಂಗ್ರಹಗಳ ಅಗತ್ಯವಿರುತ್ತದೆ. ವಾಕ್ಯಾಂಶ್ ಮೂಲಕ, ಈ ಉಪಕ್ರಮಕ್ಕಾಗಿ ಬಳಸಬಹುದಾದ ಭಾರತೀಯ ಧ್ವನಿ ಮಾತನಾಡುವ ಭಾರತೀಯ ಭಾಷೆಯ ವೈವಿಧ್ಯಮಯ ಮುಕ್ತ ಭಂಡಾರವನ್ನು ರಚಿಸಲು ನಾವು ಬಯಸುತ್ತೇವೆ",
-	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off.": "ಒಂದು ತಂಡವಾಗಿ, ನಮ್ಮೊಂದಿಗೆ ಸೇರಲು ಮತ್ತು ಈ ಉಪಕ್ರಮಕ್ಕೆ ನಿಮ್ಮ ಧ್ವನಿಯನ್ನು ಕೊಡುಗೆ ನೀಡಲು ನಾವು ನಿಮ್ಮನ್ನು ಆಹ್ವಾನಿಸುತ್ತಿದ್ದೇವೆ. ನಿಮ್ಮ ಧ್ವನಿಯನ್ನು ವಿಸ್ತಾರವಾಗಿ ರೆಕಾರ್ಡ್ ಮಾಡುವುದು ಅಗಾಧವಾಗಿರಬಹುದು ಮತ್ತು ಆದ್ದರಿಂದ, ಆದ್ದರಿಂದ, ನಮ್ಮ ವೆಬ್\u200Cಸೈಟ್\u200Cನಲ್ಲಿ ನಾವು ಹಗುರವಾದ ಕ್ರಮಗಳನ್ನು ರಚಿಸಿದ್ದೇವೆ, ಏಕೆಂದರೆ ನೀವು ನಮ್ಮನ್ನು ಹಲವು ಬಾರಿ ಭೇಟಿ ಮಾಡುವ ಸಲುವಾಗಿ ಮತ್ತು ನಿಮ್ಮ ಕೆಲಸವನ್ನು ನೀವು ಅಪೂರ್ಣವಾಗಿ ಬಿಟ್ಟು ಹೋದ ಸ್ಥಳದಿಂದ ಪ್ರಾರಂಭಿಸಬಹುದು."
+	"Speech recognition relies on \"machine-learning\" technology that requires huge collections of datasets that include diversified Indian voices and the corresponding text. Through Vakyansh, we want to create a diverse open repository of Indian voice speaking Indian language which can be used for this initiative": "ಭಾಷಣ ಮಾನ್ಯತೆಯು \"ಯಂತ್ರ-ಕಲಿಕೆ\" ತಂತ್ರಜ್ಞಾನವನ್ನು ಅವಲಂಬಿಸಿದೆ, ಇದು ವೈವಿಧ್ಯಮಯ ಭಾರತೀಯ ಧ್ವನಿಗಳು ಮತ್ತು ಅನುಗುಣವಾದ ಪಠ್ಯವನ್ನು ಒಳಗೊಂಡಿರುವ ಡೇಟಾಸೆಟ್‌ಗಳ ದೊಡ್ಡ ಸಂಗ್ರಹಗಳ ಅಗತ್ಯವಿರುತ್ತದೆ. ವಾಕ್ಯಾಂಶ್ ಮೂಲಕ, ಈ ಉಪಕ್ರಮಕ್ಕಾಗಿ ಬಳಸಬಹುದಾದ ಭಾರತೀಯ ಧ್ವನಿ ಮಾತನಾಡುವ ಭಾರತೀಯ ಭಾಷೆಯ ವೈವಿಧ್ಯಮಯ ಮುಕ್ತ ಭಂಡಾರವನ್ನು ರಚಿಸಲು ನಾವು ಬಯಸುತ್ತೇವೆ",
+	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off.": "ಒಂದು ತಂಡವಾಗಿ, ನಮ್ಮೊಂದಿಗೆ ಸೇರಲು ಮತ್ತು ಈ ಉಪಕ್ರಮಕ್ಕೆ ನಿಮ್ಮ ಧ್ವನಿಯನ್ನು ಕೊಡುಗೆ ನೀಡಲು ನಾವು ನಿಮ್ಮನ್ನು ಆಹ್ವಾನಿಸುತ್ತಿದ್ದೇವೆ. ನಿಮ್ಮ ಧ್ವನಿಯನ್ನು ವಿಸ್ತಾರವಾಗಿ ರೆಕಾರ್ಡ್ ಮಾಡುವುದು ಅಗಾಧವಾಗಿರಬಹುದು ಮತ್ತು ಆದ್ದರಿಂದ, ಆದ್ದರಿಂದ, ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ನಾವು ಹಗುರವಾದ ಕ್ರಮಗಳನ್ನು ರಚಿಸಿದ್ದೇವೆ, ಏಕೆಂದರೆ ನೀವು ನಮ್ಮನ್ನು ಹಲವು ಬಾರಿ ಭೇಟಿ ಮಾಡುವ ಸಲುವಾಗಿ ಮತ್ತು ನಿಮ್ಮ ಕೆಲಸವನ್ನು ನೀವು ಅಪೂರ್ಣವಾಗಿ ಬಿಟ್ಟು ಹೋದ ಸ್ಥಳದಿಂದ ಪ್ರಾರಂಭಿಸಬಹುದು.",
+	"Feedback": "Feedback",
+	"<b>Read once</b> before recording it": "ರೆಕಾರ್ಡ್ ಮಾಡುವ ಮೊದಲು ಒಮ್ಮೆ ಅದನ್ನು ಓದಿ",
+	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> ರೆಕಾರ್ಡಿಂಗ್ ಅನ್ನು ಮೌಲ್ಯೀಕರಿಸಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು"
 }
