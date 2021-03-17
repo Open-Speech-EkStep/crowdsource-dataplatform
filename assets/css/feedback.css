@@ -16,3 +16,19 @@
     right: 16px;
     bottom: 0;
 }
+
+#back_to_home_btn, #submit_btn {
+    width: 50%;
+}
+
+@media screen and (max-width: 599px) {
+    #back_to_home_btn, #submit_btn {
+        width: 75%;
+    }
+    #feedback_title_container {
+        justify-content: center;
+    }
+    .no_xs_margin {
+        margin: 0;
+    }
+}
