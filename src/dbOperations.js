@@ -1,6 +1,7 @@
 const { encrypt } = require('./encryptAndDecrypt');
 const { downloader } = require('./downloader/objDownloader')
 const moment = require('moment');
+
 const {
     updateContributionDetails,
     unassignIncompleteSentences,
@@ -16,8 +17,10 @@ const {
     updateSentencesWithContributedState,
     addValidationQuery,
     updateSentencesWithValidatedState,
-    feedbackInsertion
+    feedbackInsertion,
+    getAudioPath
 } = require('./dbQuery');
+
 const {
     topLanguagesBySpeakerContributions,
     topLanguagesByHoursContributed,
@@ -187,28 +190,35 @@ const getValidationSentences = function (req, res) {
         });
 };
 
-const getAudioClip = async function (req, res, objectStorage) {
-    if (!(req.body && req.body.file)) {
+const getAudioClip = function (req, res, objectStorage) {
+    if (!(req.body && req.body.contributionId)) {
         res.status(400).send('No file selected.');
         return;
     }
 
-    const downloadFile = downloader(objectStorage);
+    const contributionId = req.body.contributionId;
+    db.one(getAudioPath, [contributionId]).then(async (data) => {
+        const downloadFile = downloader(objectStorage);
 
-    try {
-        const file = await downloadFile(req.body.file);
+        try {
+            const file = await downloadFile(data.audio_path);
 
-        if (file == null) {
-            res.sendStatus(404);
+            if (file == null) {
+                res.sendStatus(404);
+            }
+            else {
+                const readStream = file.createReadStream();
+                readStream.pipe(res);
+            }
         }
-        else {
-            const readStream = file.createReadStream();
-            readStream.pipe(res);
+        catch (err) {
+            res.sendStatus(500);
         }
-    }
-    catch (err) {
-        res.sendStatus(500);
-    }
+    })
+        .catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });;
 }
 
 const updateTablesAfterValidation = function (req, res) {

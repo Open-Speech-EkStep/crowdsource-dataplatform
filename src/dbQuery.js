@@ -45,9 +45,9 @@ where sentences."state" is null and language = $4 and label=$3 and cont."action"
 select ins."sentenceId", sentences.sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";'
 
-const getValidationSentencesQuery = 'select audio_path, con."sentenceId", sen.sentence, con.contribution_id \
+const getValidationSentencesQuery = 'select con."sentenceId", sen.sentence, con.contribution_id \
     from contributions con inner join sentences sen on sen."sentenceId"=con."sentenceId" and con.action=\'completed\' \
-    where sen."state"= \'contributed\' and language=$1 group by audio_path, con."sentenceId", sen.sentence, con.contribution_id order by RANDOM() limit 5;'
+    where sen."state"= \'contributed\' and language=$1 group by con."sentenceId", sen.sentence, con.contribution_id order by RANDOM() limit 5;'
 
 const addValidationQuery = 'insert into validations (contribution_id, "action", validated_by, "date", "state_region", "country") \
 select contribution_id, $3, $1, now(), $5, $6 from contributions inner join sentences on sentences."sentenceId"=contributions."sentenceId" \
@@ -80,6 +80,8 @@ const getGenderData = 'select data."gender", count (*) from (select con."gender"
 
 const feedbackInsertion = 'Insert into feedbacks (subject,feedback,language) values ($1,$2,$3);'
 
+const getAudioPath = 'select audio_path from contributions where contribution_id = $1;'
+
 module.exports = {
     unassignIncompleteSentences,
     sentencesCount,
@@ -95,5 +97,6 @@ module.exports = {
     updateSentencesWithContributedState,
     addValidationQuery,
     updateSentencesWithValidatedState,
-    feedbackInsertion
+    feedbackInsertion,
+    getAudioPath
 }
