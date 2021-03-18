@@ -124,7 +124,7 @@ const getFormattedTime = (totalSeconds) => {
 };
 
 const updateShareContent = function (language, rank) {
-  const text = `I've contributed towards building open language repository for India on http://bhaashadaan.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great lingusitic applications. Our ${language} language ranks ${rank} on Bhaashadaan. Do your bit and empower the language?`;
+  const text = `I've contributed towards building open language repository for India on http://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great lingusitic applications. Our ${language} language ranks ${rank} on boloindia. Do your bit and empower the language?`;
   const $whatsappShare = $("#whatsapp_share");
   $whatsappShare.attr("href", `https://api.whatsapp.com/send?text=${text}`);
   const $twitterShare = $("#twitter_share");
@@ -132,7 +132,7 @@ const updateShareContent = function (language, rank) {
   const $linkedinShare = $("#linkedin_share");
   $linkedinShare.attr(
     "href",
-    `https://www.linkedin.com/shareArticle?mini=true&url=https://bhaashadaan.nplt.in&title=I've contributed towards building open language repository for India on http://bhaashadaan.nplt.in&summary=${text}`
+    `https://www.linkedin.com/shareArticle?mini=true&url=https://boloindia.nplt.in&title=I've contributed towards building open language repository for India on http://boloindia.nplt.in&summary=${text}`
   );
 };
 
