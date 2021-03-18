@@ -2,7 +2,7 @@ const {
     testUserName,
     setSpeakerDetails,
     setStartRecordBtnToolTipContent,
-    setTNCOnChange,
+    //setTNCOnChange,
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
@@ -19,7 +19,7 @@ $(document).ready(function () {
     const age = document.getElementById('age');
     const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
-    const $tncCheckbox = $('#tnc');
+    //const $tncCheckbox = $('#tnc');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
     const contributionLanguage = localStorage.getItem('contributionLanguage');
@@ -27,7 +27,19 @@ $(document).ready(function () {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }
 
-    $tncCheckbox.prop('checked', false);
+    $('input[name = "gender"]').on('change', function() {
+        const selectedGender = document.querySelector(
+            'input[name = "gender"]:checked'
+        );
+        const options = $("#transgender_options");
+        if(selectedGender.value === "others") {
+            options.removeClass("d-none");
+        } else {
+            options.addClass("d-none");
+        }
+    });
+
+  //  $tncCheckbox.prop('checked', false);
 
     $startRecordBtnTooltip.tooltip({
         container: 'body',
@@ -51,31 +63,35 @@ $(document).ready(function () {
     });
 
     setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
-    setTNCOnChange($userName, $startRecordBtnTooltip);
+    //setTNCOnChange($userName, $startRecordBtnTooltip);
     setUserNameOnInputFocus();
 
     $startRecordBtn.on('click', () => {
-        if ($tncCheckbox.prop('checked')) {
-            const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
-            const genderValue = checkedGender.length ? checkedGender[0].value : '';
-            const userNameValue = $userName.val().trim().substring(0, 12);
-            const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === sentenceLanguage);
-            if (! selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
-            if (testUserName(userNameValue)) {
-                return;
-            }
-            const speakerDetails = {
-                gender: genderValue,
-                age: age.value,
-                motherTongue: motherTongue.value,
-                userName: userNameValue,
-                language: sentenceLanguage || localStorage.getItem('contributionLanguage'),
-            };
-            localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
-            localStorage.setItem("contributionLanguage", sentenceLanguage);
-            // document.cookie = `i18n=en`;
-            location.href = './record.html';
+        const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
+        let genderValue = checkedGender.length ? checkedGender[0].value : '';
+        const userNameValue = $userName.val().trim().substring(0, 12);
+        const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === sentenceLanguage);
+        if (! selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
+        if (testUserName(userNameValue)) {
+            return;
         }
+        const transGenderRadios = document.querySelectorAll('input[name = "trans_gender"]');
+        if (genderValue === "others") {
+            const transGender = Array.from(transGenderRadios).filter((el) => el.checked);
+            genderValue = transGender.length ? transGender[0].value : '';
+        }
+
+        const speakerDetails = {
+            gender: genderValue,
+            age: age.value,
+            motherTongue: motherTongue.value,
+            userName: userNameValue,
+            language: sentenceLanguage || localStorage.getItem('contributionLanguage'),
+        };
+        localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
+        localStorage.setItem("contributionLanguage", sentenceLanguage);
+        // document.cookie = `i18n=en`;
+        location.href = '/record';
     });
 
     setUserModalOnShown($userName);

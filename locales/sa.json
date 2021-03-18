@@ -87,8 +87,8 @@
 	"RE-RECORD": "पुन: मुद्रणं करोतु",
 	"NEXT": "अग्रिम:",
 	"Recording Instructions": "ध्वनिमुद्रणाय सूचना:",
-	"Please test your <b>microphone</b>": "कृपया भवत: ध्वनिवर्धकं परीक्षताम्",
-	"Please test your <b>speakers</b>": "कृपया भवत: भाषकान् परीक्षताम्",
+	"Please test your <b>Microphone</b>": "कृपया भवत: ध्वनिवर्धकं परीक्षताम्",
+	"Please test your <b>Speakers</b>": "कृपया भवत: भाषकान् परीक्षताम्",
 	"Ensure there is <b>no background noise</b>": "पार्श्वभागे किंशब्दं नास्ति इति निश्चितीकरोतु",
 	"Get comfortable with the prompted text, before recording, by <b>reading it aloud</b>": "मुद्रणात् प्राक् उच्चैः पठित्वा संसूचित-पाठ्यं सह सुस्थितं भवतु",
 	"Get started by clicking on <b>Record</b> button": "मुद्रण-कुञ्जिकां क्लिक्-कृत्वा आरभताम्",
@@ -123,5 +123,5 @@
 	"Page Not Found": "पृष्ठं न लब्धम्  |",
 	"Looks like you have taken a wrong turn here": "भवता  अत्र अनुचितं वर्तनं कृतम् इव भासते  |",
 	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "पुन: मूलपृष्ठं गन्तुं अत्र <a class=\"\" href=\"/\">क्लिक्-करोतु |</a>",
-	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off": ""
+	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>"
 }

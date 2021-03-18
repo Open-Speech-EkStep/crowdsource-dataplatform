@@ -73,8 +73,8 @@
 	"Contribute More": "ଅଧିକ ପ୍ରଦାନ କରନ୍ତୁ",
 	"Share it with your friends and family": "ଏହାକୁ ଆପଣଙ୍କର ପରିବାର ଓ ବନ୍ଧୁଙ୍କ ସହିତ ସେୟାର କରନ୍ତୁ",
 	"Come Back again to<br />hit your goalpost": "ଆପଣଙ୍କର ଗୋଲ ପୋଷ୍ଟକୁ ହିଟ୍<br />କରିବା ପାଇଁ ପୁଣି ଥରେ ଆସନ୍ତୁ",
-	"Please test your <b>microphone</b>": "ଦୟାକରି ଆପଣଙ୍କର <b>ମାଇକ୍ରୋଫୋନକୁ</b> ଚେକ କରନ୍ତୁ",
-	"Please test your <b>speakers</b>": "ଦୟାକରି ଆପଣଙ୍କର <b>ସ୍ପିକରକୁ</b> ଚେକ କରନ୍ତୁ",
+	"Please test your <b>Microphone</b>": "ଦୟାକରି ଆପଣଙ୍କର <b>ମାଇକ୍ରୋଫୋନକୁ</b> ଚେକ କରନ୍ତୁ",
+	"Please test your <b>Speakers</b>": "ଦୟାକରି ଆପଣଙ୍କର <b>ସ୍ପିକରକୁ</b> ଚେକ କରନ୍ତୁ",
 	"Ensure there is <b>no background noise</b>": "<b>କୌଣସି ପୃଷ୍ଠଭୂମି ଶବ୍ଦ ନଥିବା</b> ସୁନିଶ୍ଚିତ କରନ୍ତୁ",
 	"Get comfortable with the prompted text, before recording, by <b>reading it aloud</b>": "ରେକର୍ଡ଼ିଂ ପୂର୍ବରୁ ଏହାକୁ ବଡ଼ ପାଟିରେ ପଢ଼ି ପ୍ରମ୍ପଟ ହେଉଥିବା ଟେକ୍ସଟ ସହିତ ନିଜକୁ ପରିଚିତ କରାଇ ନିଅନ୍ତୁ।",
 	"Get started by clicking on <b>Record</b> button": "<b>ରେକର୍ଡ</b> ବଟନକୁ ଚିପି ଆରମ୍ଭ କରନ୍ତୁ",
@@ -158,5 +158,6 @@
 	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off.": "ଏକ ଟିମ ଭାବରେ, ଆମେ ଆପଣଙ୍କୁ ଆମ ସହିତ ଯୋଗଦେବାକୁ ଏବଂ ଏହି ପଦକ୍ଷେପରେ ଆପଣଙ୍କର ସ୍ୱର ପ୍ରଦାନ କରିବାକୁ ଆମନ୍ତ୍ରଣ କରୁଛୁ। ଗୋଟିଏ ଥରରେ ଆପଣଙ୍କର ସ୍ବର ରେକର୍ଡିଂ କରିବା ହୁଏତ କଷ୍ଟକର ହୋଇପାରେ  ତେଣୁ, ଆମେ ଆମ ୱେବସାଇଟରେ ଶିକ୍ଷାଗ୍ରହଣକାରୀ ପଦକ୍ଷେପ ସୃଷ୍ଟି କରିଛୁ, ଯଦ୍ବାରା ଆପଣ ଆମକୁ ଏକାଧିକ ଥର ପରିଦର୍ଶନ କରିପାରିବେ ଏବଂ ଯେଉଁଠାରୁ ଛାଡ଼ିଥିଲେ ସେହି ସ୍ଥାନରୁ ପୁଣି ଥରେ ଆରମ୍ଭ କରିପାରିବେ। ",
 	"<b>Read once</b> before recording it": "ଏହାକୁ ରେକର୍ଡ଼ କରିବା ପୂର୍ବରୁ ଥରେ ପଢ଼ି ନିଅନ୍ତୁ",
 	"Feedback": "Feedback",
-	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> ରେକର୍ଡ଼ିଂକୁ ଭାଲିଡେଟ୍ କରିଥିବାରୁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ"
+	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> ରେକର୍ଡ଼ିଂକୁ ଭାଲିଡେଟ୍ କରିଥିବାରୁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ",
+	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>"
 }

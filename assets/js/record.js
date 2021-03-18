@@ -1,11 +1,16 @@
 const fetch = require('./fetch')
-const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown } = require('./utils')
+const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition } = require('./utils')
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
 const currentIndexKey = 'currentIndex';
 const skipCountKey = 'skipCount';
 const countKey = 'count';
+
+let cnvs;
+let cnvs_cntxt;
+const $testMicBtn = $('#test-mic-button');
+const $testSpeakerBtn = $('#play-speaker');
 
 function getValue(number, maxValue) {
     return number < 0
@@ -50,6 +55,166 @@ const startTimer = (seconds, display) => {
     }, 1000);
 }
 
+function flattenArray(channelBuffer, recordingLength) {
+    let result = new Float32Array(recordingLength);
+    let offset = 0;
+    for (let i = 0; i < channelBuffer.length; i++) {
+        let buffer = channelBuffer[i];
+        result.set(buffer, offset);
+        offset += buffer.length;
+    }
+    return result;
+}
+function writeUTFBytes(view, offset, string) {
+    for (var i = 0; i < string.length; i++) {
+        view.setUint8(offset + i, string.charCodeAt(i));
+    }
+}
+function generateWavBlob(finalBuffer, defaultSampleRate) {
+    let buffer = new ArrayBuffer(44 + finalBuffer.length * 2);
+    let view = new DataView(buffer);
+    // RIFF chunk descriptor
+    writeUTFBytes(view, 0, 'RIFF');
+    view.setUint32(4, 44 + finalBuffer.length * 2, true);
+    writeUTFBytes(view, 8, 'WAVE');
+    // FMT sub-chunk
+    writeUTFBytes(view, 12, 'fmt ');
+    view.setUint32(16, 16, true); // chunkSize
+    view.setUint16(20, 1, true); // wFormatTag
+    view.setUint16(22, 1, true); // wChannels:mono(1 channel) / stereo (2 channels)
+    view.setUint32(24, defaultSampleRate, true); // dwSamplesPerSec
+    view.setUint32(28, defaultSampleRate * 2, true); // dwAvgBytesPerSec
+    view.setUint16(32, 4, true); // wBlockAlign
+    view.setUint16(34, 16, true); // wBitsPerSample
+    // data sub-chunk
+    writeUTFBytes(view, 36, 'data');
+    view.setUint32(40, finalBuffer.length * 2, true);
+    // write the PCM samples
+    let index = 44;
+    let volume = 1;
+    for (var i = 0; i < finalBuffer.length; i++) {
+        view.setInt16(index, finalBuffer[i] * (0x7FFF * volume), true);
+        index += 2;
+    }
+    // our final blob
+    let blob = new Blob([view], {
+        type: 'audio/wav'
+    });
+    return blob;
+}
+const resetMicButton = () => {
+    const $testMicText = $('#test-mic-text');
+    if (audioContext) audioContext.close();
+    $testMicText.text('Test Mic');
+    $('#mic-svg').removeClass('d-none');
+    $testMicBtn.attr('data-value', 'test-mic');
+    cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
+}
+let audioData = [];
+let recordingLength = 0;
+let audioContext;
+const getMediaRecorder = () => {
+    let stream = null,
+        microphone = null,
+        javascriptNode = null,
+        sampleRate = 44100;
+    let max_level_L = 0;
+    let old_level_L = 0;
+    const start = () => {
+        let constraints = {
+            audio: true,
+            video: false
+        };
+        navigator.mediaDevices
+            .getUserMedia(constraints)
+            .then(function (stream) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioContext = new AudioContext();
+                sampleRate = audioContext.sampleRate;
+                microphone = audioContext.createMediaStreamSource(stream);
+                javascriptNode = audioContext.createScriptProcessor(1024, 1, 1);
+                microphone.connect(javascriptNode);
+                javascriptNode.connect(audioContext.destination);
+                javascriptNode.onaudioprocess = function (event) {
+                    let inpt_L = event.inputBuffer.getChannelData(0);
+                    recordingLength += 1024;
+                    audioData.push(new Float32Array(inpt_L));
+                    let instant_L = 0.0;
+                    let sum_L = 0.0;
+                    for (let i = 0; i < inpt_L.length; ++i) {
+                        sum_L += inpt_L[i] * inpt_L[i];
+                    }
+                    instant_L = Math.sqrt(sum_L / inpt_L.length);
+                    max_level_L = Math.max(max_level_L, instant_L);
+                    instant_L = Math.max(instant_L, old_level_L - 0.008);
+                    old_level_L = instant_L;
+                    cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
+                    cnvs_cntxt.fillStyle = "#83E561";
+                    cnvs_cntxt.fillRect(
+                        0,
+                        0,
+                        cnvs.width * (instant_L / max_level_L),
+                        cnvs.height
+                    );
+                };
+            })
+            .catch(function (err) {
+                console.log(e);
+            });
+    }
+    const stop = () => {
+        if (microphone !== null)
+            microphone.disconnect();
+        if (javascriptNode !== null)
+            javascriptNode.disconnect();
+        let finalBuffer = flattenArray(audioData, recordingLength);
+        let audioBlob = generateWavBlob(finalBuffer, sampleRate);
+        if (audioBlob !== null) {
+            const audioUrl = URL.createObjectURL(audioBlob);
+            const audio = new Audio(audioUrl);
+            audio.onloadedmetadata = function() {
+                const audioDuration = Math.ceil(audio.duration*1000);
+                setTimeout(() => {
+                    resetMicButton();
+                }, audioDuration);
+            };
+            const play = () => {
+                audio.play();
+            };
+            return ({
+                audioBlob,
+                audioUrl,
+                play
+            });
+        } else {
+            console.log("No blob present")
+            return null;
+        }
+    }
+    return {
+        start,
+        stop
+    };
+}
+const testMic = (btnDataAttr) => {
+    const $micSvg = $('#mic-svg');
+    const $testMicText = $('#test-mic-text');
+    const recorder = getMediaRecorder();
+    if (btnDataAttr === 'test-mic') {
+        audioData = [];
+        recordingLength = 0;
+        $micSvg.addClass('d-none');
+        $testMicBtn.attr('data-value', 'recording');
+        $testMicText.text('Recording');
+        recorder.start();
+    } else if (btnDataAttr === 'recording') {
+        const audio = recorder.stop();
+        audio.play();
+        $testMicBtn.attr('data-value', 'playing');
+        $testMicText.text('Playing');
+    }
+}
+
 const initialize = () => {
     const sentences = crowdSource.sentences;
     const $startRecordBtn = $('#startRecord');
@@ -67,7 +232,11 @@ const initialize = () => {
     const $progressBar = $('.progress-bar');
     const $pageContent = $('#page-content');
     const $audioSmallError = $('#audio-small-error');
-    const $autoStopWarning = document.getElementById("count-down")
+    const $autoStopWarning = document.getElementById("count-down");
+    const $testMicDiv = $('#test-mic-speakers');
+    const $testMicSpeakerBtn = $('#test-mic-speakers-button')
+    const $testMicSpeakerDetails = $('#test-mic-speakers-details');
+    const $testMicCloseBtn = $('#test-mic-close');
     const totalItems = sentences.length;
     let currentIndex =
         getCurrentIndex(totalItems - 1);
@@ -87,6 +256,30 @@ const initialize = () => {
     //     'Nine dead, one more to go!',
     //     'Yay! Done & Dusted!',
     // ];
+
+    $testMicSpeakerBtn.on('click', (e) => {
+        $testMicDiv.addClass('d-none');
+        $testMicSpeakerDetails.removeClass('d-none');
+    });
+    $testMicCloseBtn.on('click', (e) => {
+        let audio = document.getElementById("test-speaker-hidden");
+        audio.pause();
+        $testSpeakerBtn.attr('data-value', 'test-speaker');
+        $('#test-speaker-text').text('Test Speakers');
+        $('#speaker-svg').removeClass('d-none');
+        $testMicDiv.removeClass('d-none');
+        $testMicSpeakerDetails.addClass('d-none');
+    });
+    $testMicBtn.on('click', (e) => {
+        const btnDataAttr = $('#test-mic-button').attr('data-value');
+        testMic(btnDataAttr);
+    });
+    $testSpeakerBtn.on('click', (e) => {
+        $testSpeakerBtn.attr('data-value', 'playing');
+        $('#test-speaker-text').text('Playing');
+        $('#speaker-svg').addClass('d-none');
+        playSpeaker();
+    });
 
     let progressMessages = [
         'Let’s get started',
@@ -316,7 +509,7 @@ const initialize = () => {
                 setTimeout(goToThankYouPage, 2500);
             }
             $skipBtn.addClass('d-none');
-            toggleFooterPosition()
+            // toggleFooterPosition()
             currentIndex++;
             animateCSS($pageContent, 'zoomOut', () =>
                 $pageContent.addClass('d-none')
@@ -425,15 +618,71 @@ const initialize = () => {
     }
 };
 
+let context;
+let analyser;
+let mediaElementSrc;
+function playSpeaker() {
+    let audio = document.getElementById("test-speaker-hidden");
+    audio.load();
+    audio.play();
+    if (!context) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        context = new AudioContext();
+        mediaElementSrc = context.createMediaElementSource(audio);
+        analyser = context.createAnalyser();
+        mediaElementSrc.connect(analyser);
+        analyser.connect(context.destination);
+        analyser.fftSize = 256;
+    }
+    let canvas = document.getElementById("speaker-canvas");
+    let cnvs_cntxt = canvas.getContext("2d");
+    let bufferLength = analyser.frequencyBinCount;
+    let max_level_L = 50;
+    let dataArray = new Uint8Array(bufferLength);
+    let animationId = null;
+    function renderFrame() {
+        animationId = requestAnimationFrame(renderFrame);
+        analyser.getByteFrequencyData(dataArray);
+        let instant_L = 0.0;
+        let sum_L = 0.0;
+        for (let i = 0; i < dataArray.length; ++i) {
+            sum_L += dataArray[i] * dataArray[i];
+        }
+        instant_L = Math.sqrt(sum_L / dataArray.length);
+        max_level_L = Math.max(max_level_L, instant_L);
+        cnvs_cntxt.clearRect(0, 0, canvas.width, canvas.height);
+        cnvs_cntxt.fillStyle = "#83E561";
+        cnvs_cntxt.fillRect(
+            0,
+            0,
+            canvas.width * (instant_L / max_level_L),
+            canvas.height
+        );
+    }
+    renderFrame();
+    audio.onended = function() {
+        cancelAnimationFrame(animationId);
+        cnvs_cntxt.clearRect(0, 0, canvas.width, canvas.height);
+        $testSpeakerBtn.attr('data-value', 'test-speaker');
+        $('#test-speaker-text').text('Test Speakers');
+        $('#speaker-svg').removeClass('d-none');
+    };
+}
+
 $(document).ready(() => {
+    toggleFooterPosition();
+    setPageContentHeight();
     window.crowdSource = {};
-    const $instructionModal = $('#instructionsModal');
+    //const $instructionModal = $('#instructionsModal');
+    const $validationInstructionModal = $("#validation-instruction-modal");
     const $errorModal = $('#errorModal');
     const $loader = $('#loader');
     const $pageContent = $('#page-content');
     const $navUser = $('#nav-user');
     const $navUserName = $navUser.find('#nav-username');
     const contributionLanguage = localStorage.getItem('contributionLanguage');
+    cnvs = document.getElementById("mic-canvas");
+    cnvs_cntxt = cnvs.getContext("2d");
     if(contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }
@@ -452,13 +701,19 @@ $(document).ready(() => {
 
         setPageContentHeight();
 
-        $instructionModal.on('hidden.bs.modal', function () {
-            $pageContent.removeClass('d-none');
-            toggleFooterPosition();
-        });
+        //$instructionModal.on('hidden.bs.modal', function () {
+          //  $pageContent.removeClass('d-none');
+            // toggleFooterPosition();
+        //});
+    
+            $("#instructions_close_btn").on("click", function() {
+                $validationInstructionModal.addClass("d-none");
+            })
 
         $errorModal.on('show.bs.modal', function () {
-            $instructionModal.modal('hide');
+            //$instructionModal.modal('hide');
+            $validationInstructionModal.addClass("d-none");
+
         });
         $errorModal.on('hidden.bs.modal', function () {
             location.href = '/#speaker-details';
@@ -508,11 +763,12 @@ $(document).ready(() => {
                 })
                 .then((sentenceData) => {
                     if (!isExistingUser) {
-                        $instructionModal.modal('show');
-                    } else {
-                        $pageContent.removeClass('d-none');
-                        toggleFooterPosition();
-                    }
+                        //$instructionModal.modal('show');
+                        $validationInstructionModal.removeClass("d-none");
+                    } 
+                    $pageContent.removeClass('d-none');
+                    // toggleFooterPosition();
+                    
                     crowdSource.sentences = sentenceData.data;
                     crowdSource.count = Number(sentenceData.count);
                     $loader.hide();
@@ -539,6 +795,11 @@ $(document).ready(() => {
         console.log(err);
         $errorModal.modal('show');
     }
+});
+
+
+$(window).resize(() => {
+    setFooterPosition();
 });
 
 module.exports = { getCurrentIndex, getSkipCount, getValue, setCurrentSentenceIndex, setTotalSentenceIndex }

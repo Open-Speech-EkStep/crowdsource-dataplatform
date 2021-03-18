@@ -85,8 +85,8 @@
 	"Contribute More": "மேலும் பங்களிக்க",
 	"Share it with your friends and family": "இதை உங்கள் நண்பர்கள் மற்றும் குடும்பத்தினருடன் பகிர்ந்து கொள்ளுங்கள்",
 	"Come Back again to<br />hit your goalpost": "உங்கள் இலக்கு இடுகையை<br />அடைய மீண்டும் வருக",
-	"Please test your <b>microphone</b>": "உங்கள் <b>ஒலிவாங்கியை</b> சோதிக்கவும்",
-	"Please test your <b>speakers</b>": "உங்கள் <b>ஒலிபெருக்கி</b> சோதிக்கவும்",
+	"Please test your <b>Microphone</b>": "உங்கள் <b>ஒலிவாங்கியை</b> சோதிக்கவும்",
+	"Please test your <b>Speakers</b>": "உங்கள் <b>ஒலிபெருக்கி</b> சோதிக்கவும்",
 	"Ensure there is <b>no background noise</b>": "<b>பின்னணி இரைச்சல் இல்லை</b> என்பதை உறுதிப்படுத்தவும்",
 	"Get comfortable with the prompted text, before recording, by <b>reading it aloud</b>": "கொடுக்கப்பட்ட உரையை பதிவு செய்வதற்கு முன், <b>சத்தமாக வாசிப்பதன் </b> மூலம் சௌகரியப்படுத்திக் கொள்ளுங்கள்",
 	"Get started by clicking on <b>Record</b> button": "<b>பதிவு</b> பொத்தானைக் கிளிக் செய்து தொடங்கவும்",
@@ -188,5 +188,6 @@
 	"By proceeding ahead you agree to the Terms and Conditions": "மேலே தொடர்வதன் மூலம், நீங்கள் விதிமுறைகள் மற்றும் நிபந்தனைகளை ஒப்புக்கொள்கிறீர்கள்",
 	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off.": "எங்கள் குழுவிற்காக, எங்களுடன் சேர்ந்து, இந்த முயற்சிக்கு உங்கள் குரலை  பங்களிக்க நாங்கள் உங்களை அழைக்கிறோம். உங்கள் குரலை ஒரே மூச்சில் பதிவு செய்வது திணரடிப்பதாக இருக்கலாம், எனவே, நீங்கள் எங்களை வலைத்தளத்தை பலமுறை பார்வையிடவும், நீங்கள் எங்களை விட்டுச் சென்ற இடத்திலிருந்து தொடங்கவும், எங்கள் வலைத்தளத்தில் நாங்கள் எளிய செயலேற்பாடுகளைை உருவாக்கியுள்ளோம்",
 	"Thank you for validating <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> பதிவுகளை சரிபார்த்ததற்கு நன்றி",
-	"Speech recognition relies on \"machine-learning\" technology that requires huge collections of datasets that include diversified Indian voices and the corresponding text. Through Vakyansh, we want to create a diverse open repository of Indian voice speaking Indian language which can be used for this initiative": "பேச்சறிதல் \"இயந்திர கற்றல்\" தொழில்நுட்பத்தை நம்பியுள்ளது. இதற்கு பன்முகப்படுத்தப்பட்ட இந்திய குரல்கள் மற்றும் அதனுடன் தொடர்புடைய உரையை உள்ளடக்கிய தரவுத்தொகுப்புகளின் பெரிய தொகுப்புகள் தேவைப்படுகிறது. வாகியன்ஷ் மூலம், நாங்கள் இந்திய குரல் பேசும் இந்திய மொழியின் மாறுபட்ட திறந்த களஞ்சியத்தை உருவாக்க விரும்புகிறோம். இது இந்த முயற்சிக்கு பயன்படுத்தப்படக்கூடும்."
+	"Speech recognition relies on \"machine-learning\" technology that requires huge collections of datasets that include diversified Indian voices and the corresponding text. Through Vakyansh, we want to create a diverse open repository of Indian voice speaking Indian language which can be used for this initiative": "பேச்சறிதல் \"இயந்திர கற்றல்\" தொழில்நுட்பத்தை நம்பியுள்ளது. இதற்கு பன்முகப்படுத்தப்பட்ட இந்திய குரல்கள் மற்றும் அதனுடன் தொடர்புடைய உரையை உள்ளடக்கிய தரவுத்தொகுப்புகளின் பெரிய தொகுப்புகள் தேவைப்படுகிறது. வாகியன்ஷ் மூலம், நாங்கள் இந்திய குரல் பேசும் இந்திய மொழியின் மாறுபட்ட திறந்த களஞ்சியத்தை உருவாக்க விரும்புகிறோம். இது இந்த முயற்சிக்கு பயன்படுத்தப்படக்கூடும்.",
+	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>"
 }

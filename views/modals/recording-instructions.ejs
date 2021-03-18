@@ -1,27 +1,41 @@
-<div class="modal fade" id="instructionsModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog mw-100 mt-0" role="document">
-        <div class="modal-content">
-            <div class="container-fluid bg-light" id="recording-instructions">
-                <div class="text-center pb-5 pt-5"><p class="display-5 font-wt-900 site-blue"><%= __('Recording Instructions') %></p></div>
-                <div class="row pb-3 justify-content-center">
-                    <div class="col-lg-2 col-sm-4 col-6 mb-3 text-center"><i class="material-icons p-4 rounded-circle md-48 text-primary border-3">settings_voice</i>
-                        <p class="mt-3 site-blue"><%- __('Please test your <b>microphone</b>') %></p></div>
-                    <div class="col-lg-2 col-sm-4 col-6 mb-3 text-center"><i class="material-icons p-4 rounded-circle md-48 text-primary border-3">speaker</i>
-                        <p class="mt-3 site-blue"><%- __('Please test your <b>speakers</b>') %></p></div>
-                    <div class="col-lg-2 col-sm-4 col-6 mb-3 text-center"><i class="material-icons p-4 rounded-circle md-48 text-primary border-3">equalizer</i>
-                        <p class="mt-3 site-blue"><%- __('Ensure there is <b>no background noise</b>') %></p></div>
-                    <div class="col-lg-2 col-sm-4 col-6 mb-3 text-center"><i class="material-icons p-4 rounded-circle md-48 text-primary border-3">record_voice_over</i>
-                        <p class="mt-3 site-blue"><%- __('<b>Read once</b> before recording it') %></p>
-                    </div>
-                    <div class="col-lg-2 col-sm-4 col-6 mb-3 text-center"><i class="material-icons p-4 rounded-circle md-48 text-primary border-3">play_circle_filled</i>
-                        <p class="mt-3 site-blue"><%- __('Get started by clicking on <b>Record</b> button') %></p></div>
-                </div>
-                <div class="row justify-content-center pb-5">
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <button type="button" class="btn btn-primary h3 shadow w-100 rounded p-3 font-wt-700" data-dismiss="modal" aria-label="Close"><%= __('START') %></button>
-                    </div>
-                </div>
-            </div>
+
+<div id="validation-instruction-modal" class="d-none">
+    <div class="validation-instruction d-flex justify-content-between position-relative">
+        <div class="quick-tips-container d-flex flex-column justify-content-center align-items-center">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.6255 9.63106C20.125 9.58306 20.125 10.3511 19.6255 10.3991C18.6501 10.4952 17.651 10.6152 16.7233 10.7112C16.2237 10.7592 16.2237 9.9911 16.7233 9.9431C17.651 9.82308 18.6501 9.72707 19.6255 9.63106Z" fill="#F7F7F7"/>
+                <path d="M16.4378 3.17488C16.7471 2.76683 17.4131 3.17488 17.1039 3.58292C16.533 4.399 15.9383 5.16707 15.3198 5.98316C15.0105 6.3912 14.3444 5.98316 14.6537 5.57512C15.296 4.75903 15.8669 3.94295 16.4378 3.17488Z" fill="#F7F7F7"/>
+                <path d="M7.99273 16.064C8.08788 16.616 8.13546 17.1441 8.13546 17.6481V17.7441C8.13546 18.5122 8.75396 19.1363 9.51518 19.1363H10.324C10.9901 19.1363 11.5848 18.6322 11.7037 17.9602C11.6561 17.9602 11.6561 17.9602 11.6085 17.9602C10.7997 17.9602 10.0385 17.9602 9.22972 17.9602C8.73017 17.9602 8.73017 17.1921 9.22972 17.1921C10.0385 17.1921 10.7997 17.1921 11.6085 17.1921C11.6561 17.1921 11.7037 17.1921 11.7513 17.2401C11.7989 16.112 12.0605 14.6718 12.4174 14.1678L12.4649 14.1198C12.4649 14.1198 12.679 13.8558 12.7266 13.8558C13.6306 13.0877 14.0587 12.0556 14.0587 10.7834C14.0587 8.52722 12.227 6.67904 9.99095 6.67904C7.75485 6.67904 5.92315 8.52722 5.92315 10.7834C5.92315 12.0556 6.4227 13.0877 7.30287 13.8558L7.35045 13.9038L7.56454 14.1678C7.70727 14.3838 7.87379 14.8399 7.96894 15.3439C8.01652 15.3439 8.06409 15.2959 8.11167 15.2959C8.92047 15.2959 9.6817 15.2959 10.4905 15.2959C10.9901 15.2959 10.9901 16.064 10.4905 16.064C9.53897 16.064 8.77774 16.064 7.99273 16.064ZM14.8913 10.7114C14.8913 12.2476 14.3442 13.5197 13.2737 14.4078L13.0834 14.6238C12.8931 14.9839 12.5839 16.424 12.5839 17.6001V17.6961C12.5839 18.9683 11.561 20.0004 10.3002 20.0004H9.49139C8.23061 20.0004 7.20772 18.9683 7.20772 17.6961V17.6001C7.20772 16.424 6.89847 14.9839 6.70816 14.6238L6.54164 14.4798C5.47117 13.5197 4.87646 12.2716 4.87646 10.7354C4.87646 7.97517 7.11256 5.71894 9.84822 5.71894C12.6314 5.69494 14.8913 7.92716 14.8913 10.7114Z" fill="#F7F7F7"/>
+                <path d="M10.229 0.414041C10.229 1.39814 10.229 2.40624 10.229 3.39034C10.229 3.89439 9.46777 3.89439 9.46777 3.39034C9.46777 2.40624 9.46777 1.39814 9.46777 0.414041C9.46777 -0.138014 10.229 -0.138014 10.229 0.414041Z" fill="#F7F7F7"/>
+                <path d="M5.30492 5.57512C5.61417 5.98316 4.9481 6.34319 4.63885 5.98316C4.06793 5.21508 3.47323 4.399 2.85473 3.58292C2.59306 3.17488 3.25913 2.76683 3.5208 3.17488C4.1393 3.94295 4.71022 4.75903 5.30492 5.57512Z" fill="#F7F7F7"/>
+                <path d="M3.28278 9.9431C3.78234 9.9911 3.78234 10.8072 3.28278 10.7112C2.28368 10.6392 1.30836 10.4952 0.356824 10.3991C-0.118941 10.3511 -0.118941 9.58306 0.356824 9.63106C1.35593 9.72707 2.28368 9.82308 3.28278 9.9431Z" fill="#F7F7F7"/>
+                </svg>
+            <span class="quick-tips-text mt-2"><%= __('Quick Tips') %></span>            
         </div>
+        <div class="instructions d-flex flex-grow-1 justify-content-around">
+            <div class="d-flex flex-column instruction-box first">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">settings_voice</i>
+                <span class="text-center mt-2"><%- __('Please test your <b>Microphone</b>') %></span>            
+            </div>          
+            <div class="d-flex flex-column instruction-box second">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">speaker</i>
+                <span class="text-center mt-2"><%- __('Please test your <b>Speakers</b>') %></span>            
+            </div>          
+            <div class="d-flex flex-column instruction-box third">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">equalizer</i>
+                <span class="text-center mt-2"><%- __('Ensure there is <b>no background noise</b>') %></span>            
+            </div>          
+            <div class="d-flex flex-column instruction-box fourth">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">record_voice_over</i>
+                <span class="text-center mt-2"><%- __('Read once <b>before recording it</b>') %></span>            
+            </div>          
+            <div class="d-flex flex-column instruction-box last">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">play_circle_filled</i>
+                <span class="text-center mt-2"><%- __('Get started by clicking on <b>Record</b> button') %></span>            
+            </div>
+        </div>  
+        <div>
+            <button id="instructions_close_btn" class="btn p-0 close-btn">&times;</button>
+        </div>        
     </div>
 </div>

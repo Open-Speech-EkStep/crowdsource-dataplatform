@@ -9,8 +9,8 @@
 * Start Recording button is disabled
 * Select Language "Hindi" enables the Start Recording button
 
-
 ## Validate Locale content on Home Page
+* Select Contribution Language as Hindi
 * Select Preferred language as "Hindi"
 * User should see the content in "Hindi"
 * User should see State Wise distribution and Top Languages
@@ -22,25 +22,29 @@
 * user should be able to see "Progress Chart" , "Gender Contribution" , "State Wise distribution" , "Age Group Distribution"
 * When user select "हिंदी" Language from dropdown then "languages contributed" should not visible
 
+## Validate Feedback Page
+* When user clicks on the Feedback link in the footer , user should land on the feedback page
+* Submit button should be disbaled ,When user enters the subject and  Description submit button should be enabled
+* when user clicks on the submit button , user should land on the Thank you page 
+* When user clicks on the go to home page button , usre should see the home page
+
 ## Validate the Speaker Details pop-up in Contribute section
 * Select Preferred language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
-* By default the Lets Go button should be disabled
 * Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present
 * if a user enter username and click on Not you change user button , the field should be cleared
-* Hover on the Lets Go button should give some message
-* Once user agree to terms and conditions Lets Go the button should be enabled
+* If user selects Other as gender, some more gender options should be visible
 * Speaker details popup should appear and close button should close the pop up
-
 
 ## Validate Contributor flow
 * Select Contribution Language as Hindi
 * Select Preferred language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
-* Once user agree to terms and conditions Lets Go the button should be enabled
 * when user click on Lets Go Button, user should see instructions to record
-* When user closes the Instructions , user should see a sentence , Skip button , Start Recording Button , username
+* User should be able to close the Instructions , user should see a sentence , Skip button , Start Recording Button , username,Test Mic and speaker button
+* When user clicks on the Test Microphone Speaker button, user should see "play-speaker" and "test-mic-button" buttons
+* When user clicks on the cross button , pop up should close and user should see the Test Mic and speaker button
 * When user clicks on "START RECORDING" button, "STOP RECORDING" button should appear
 * When user clicks on "STOP RECORDING" button, "RE-RECORD" button should appear
 * When user clicks on "RE-RECORD" button, "STOP RECORDING" button should appear
@@ -48,8 +52,6 @@
 * When user clicks on "NEXT" button, "SKIP" button should appear
 * When user skips all the rest of the "4" sentences , User should see Thank you Page
 * when user clicks on the Contribute More button, user should not see the Instructions page again
-
-
 
 ## Validate Validator flow
 * Select Contribution Language as Hindi

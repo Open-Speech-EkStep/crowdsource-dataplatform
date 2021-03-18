@@ -6,7 +6,7 @@ const {
     resetSpeakerDetails,
     setUserNameTooltip,
     setStartRecordBtnToolTipContent,
-    setTNCOnChange,
+    // setTNCOnChange,setStartRecordBtnToolTipContentsetStartRecordBtnToolTipContent
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick
 } = require('../assets/js/speakerDetails');
@@ -56,8 +56,8 @@ describe('validateUserName', () => {
         const $userName = $('#username');
         $userName.val = () => "abc@gmail.com";
         const $userNameError = $userName.next();
-        const $tncCheckbox = $('#tnc');
-        validateUserName($userName, $userNameError, $tncCheckbox);
+        // const $tncCheckbox = $('#tnc');
+        validateUserName($userName, $userNameError);
 
         expect($userName.hasClass('is-invalid')).toEqual(true);
         expect($userNameError.hasClass('d-none')).toEqual(false);
@@ -66,8 +66,8 @@ describe('validateUserName', () => {
     test('should show error when username is not valid', () => {
         const $userName = $('#username');
         const $userNameError = $userName.next();
-        const $tncCheckbox = $('#tnc');
-        validateUserName($userName, $userNameError, $tncCheckbox);
+        //const $tncCheckbox = $('#tnc');
+        validateUserName($userName, $userNameError);
 
         expect($userName.hasClass('is-invalid')).toEqual(false);
         expect($userNameError.hasClass('d-none')).toEqual(true);
@@ -203,88 +203,6 @@ describe('setStartRecordBtnToolTipContent', () => {
         jest.clearAllMocks();
     })
 
-    test('should set t&c error msg username is not emailId nor phone no.', () => {
-        const $startRecordBtn = $('#proceed-box');
-        const $startRecordBtnTooltip = $startRecordBtn.parent();
-        jest.spyOn($startRecordBtnTooltip,'attr');
-
-        setStartRecordBtnToolTipContent("abc", $startRecordBtnTooltip);
-        expect($startRecordBtnTooltip.attr).toHaveBeenCalledTimes(1);
-        expect($startRecordBtnTooltip.attr).toHaveBeenCalledWith('data-original-title','Please agree to the Terms and Conditions before proceeding');
-        jest.clearAllMocks();
-    })
-
-});
-
-describe("setTNCOnChange",()=> {
-    test("should disable startRecordBtnTooltip when TNC checkbox is checked & username is valid", () => {
-        const $tncCheckbox = $('#tnc');
-        const $startRecordBtn = $('#proceed-box');
-        const $startRecordBtnTooltip = $startRecordBtn.parent();
-        const $userName = $('#username');
-
-        $tncCheckbox.prop('checked', true);
-        $userName.val = function () {
-            return {trim:()=>"ABC_User"};
-        };
-        $startRecordBtnTooltip.tooltip = (e) => {}
-
-        jest.spyOn($userName, 'val');
-        jest.spyOn($startRecordBtnTooltip, 'tooltip');
-        setTNCOnChange($userName,$startRecordBtnTooltip);
-
-        $tncCheckbox.change();
-
-        expect($startRecordBtn.hasClass('point-none')).toEqual(false);
-        expect($startRecordBtnTooltip.tooltip).toBeCalledWith('disable');
-
-    })
-
-    test("should enable startRecordBtnTooltip when TNC checkbox is not checked & username is valid", () => {
-        const $tncCheckbox = $('#tnc');
-        const $startRecordBtn = $('#proceed-box');
-        const $startRecordBtnTooltip = $startRecordBtn.parent();
-        const $userName = $('#username');
-
-
-        $tncCheckbox.prop('checked', false);
-        $userName.val = function () {
-            return {trim:()=>"ABC_User"};
-        };
-        $startRecordBtnTooltip.tooltip = (e) => {}
-
-        jest.spyOn($userName, 'val');
-        jest.spyOn($startRecordBtnTooltip, 'tooltip');
-        setTNCOnChange($userName,$startRecordBtnTooltip);
-
-        $tncCheckbox.change();
-
-        expect($startRecordBtn.hasClass('point-none')).toEqual(true);
-        expect($startRecordBtnTooltip.tooltip).toBeCalledWith('enable');
-    })
-
-    test("should enable startRecordBtnTooltip when TNC checkbox is checked & username is invalid", () => {
-        const $tncCheckbox = $('#tnc');
-        const $startRecordBtn = $('#proceed-box');
-        const $startRecordBtnTooltip = $startRecordBtn.parent();
-        const $userName = $('#username');
-
-
-        $tncCheckbox.prop('checked', true);
-        $userName.val = function () {
-            return {trim:()=>"ABC@gmail.com"};
-        };
-        $startRecordBtnTooltip.tooltip = (e) => {}
-
-        jest.spyOn($userName, 'val');
-        jest.spyOn($startRecordBtnTooltip, 'tooltip');
-        setTNCOnChange($userName,$startRecordBtnTooltip);
-
-        $tncCheckbox.change();
-
-        expect($startRecordBtn.hasClass('point-none')).toEqual(true);
-        expect($startRecordBtnTooltip.tooltip).toBeCalledWith('enable');
-    })
 });
 
 describe('setGenderRadioButtonOnClick', () => {
@@ -310,31 +228,15 @@ describe('setStartRecordingBtnOnClick', () => {
         mockLocalStorage();
         localStorage.setItem('contributionLanguage',"Hindi");
         const $startRecordBtn = $('#proceed-box');
-        const $tncCheckbox = $('#tnc');
+        // const $tncCheckbox = $('#tnc');
 
-        $tncCheckbox.prop('checked', true);
+        // $tncCheckbox.prop('checked', true);
         setStartRecordingBtnOnClick();
         $startRecordBtn.click();
 
         const expectedDetails = localStorage.getItem('speakerDetails');
         expect(expectedDetails).toEqual(JSON.stringify({gender:"",age:"",motherTongue:"",userName:"",language:"Hindi"}));
         expect(location.href).toEqual("/record");
-        localStorage.clear();
-    })
-
-    test('should not do anything when $tncCheckbox is not checked', () => {
-        mockLocation();
-        mockLocalStorage();
-        localStorage.setItem('contributionLanguage',"Hindi");
-        const $startRecordBtn = $('#proceed-box');
-        const $tncCheckbox = $('#tnc');
-
-        $tncCheckbox.prop('checked', false);
-        setStartRecordingBtnOnClick();
-        $startRecordBtn.click();
-
-        const expectedDetails = localStorage.getItem('speakerDetails');
-        expect(expectedDetails).toEqual(undefined);
         localStorage.clear();
     })
 });

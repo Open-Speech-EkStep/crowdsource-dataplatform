@@ -56,7 +56,7 @@ where sentences."sentenceId" = $2 and sentences.state = \'contributed\' and cont
 const updateSentencesWithValidatedState = 'update sentences set "state" = \
 \'validated\' where "sentenceId" = $1;'
 
-const updateAudioPathAndUserDetails = 'WITH src AS ( \
+const updateContributionDetails = 'WITH src AS ( \
     select contributor_id from "contributors" \
     where contributor_identifier = $6 and user_name = $7\
     ) \
@@ -67,8 +67,6 @@ WHERE "sentenceId" = $5 AND contributed_by  = src.contributor_id \
 returning "audio_path";'
 
 const updateSentencesWithContributedState = 'update sentences set state = \'contributed\' where "sentenceId" = $1;'
-
-const setNewUserAndFileName = 'insert into changeduser ("fileName","userId","sentenceId") values ($1,$2,$3);'
 
 const getCountOfTotalSpeakerAndRecordedAudio = 'select  count(DISTINCT(con.*)), 0 as index, 0 as duration \
 from "contributors" con inner join "contributions" cont on con.contributor_id = cont.contributed_by and cont.action=\'completed\' inner join "sentences" s on  s."sentenceId" = cont."sentenceId"  where s.language = $1 \
@@ -88,8 +86,7 @@ module.exports = {
     updateAndGetSentencesQuery,
     updateAndGetUniqueSentencesQuery,
     getValidationSentencesQuery,
-    setNewUserAndFileName,
-    updateAudioPathAndUserDetails,
+    updateContributionDetails,
     getCountOfTotalSpeakerAndRecordedAudio,
     getMotherTonguesData,
     getGenderData,

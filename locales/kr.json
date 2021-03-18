@@ -52,8 +52,8 @@
 	"RE-RECORD": "PORTUN MUDRAI",
 	"NEXT": "UPRANTLEM",
 	"Recording Instructions": "Mudravpacheo suchovnneo",
-	"Please test your <b>microphone</b>": "Tuzo microphone topas",
-	"Please test your <b>speakers</b>": "Tuje speakers topas",
+	"Please test your <b>Microphone</b>": "Tuzo microphone topas",
+	"Please test your <b>Speakers</b>": "Tuje speakers topas",
 	"Ensure there is <b>no background noise</b>": "Fattbhuimcho avaz na tachi khatri kor",
 	"Get comfortable with the prompted text, before recording, by <b>reading it aloud</b>": "Mudravche adim,mottean vach ani suchit mozkura vixim somadhan za",
 	"Get started by clicking on <b>Record</b> button": "Record butanv klik korun suru kor",
@@ -116,5 +116,5 @@
 	"If you are unsure of the match, skip the particular voice sample": "Tuka zor zullpachi khatri na, omuk talleacho nomuno vogllai",
 	"hrs recorded in": "%hours hrs recorded in %language",
 	"hrs validated in": "%hours hrs validated in %language",
-	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off": ""
+	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>"
 }

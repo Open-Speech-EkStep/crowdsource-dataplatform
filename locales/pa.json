@@ -73,8 +73,8 @@
 	"Contribute More": "ਹੋਰ ਯੋਗਦਾਨ ਪਾਓ",
 	"Share it with your friends and family": "ਆਪਣੇ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰ ਨਾਲ ਸਾਂਝਾ ਕਰੋ",
 	"Come Back again to<br />hit your goalpost": "ਆਪਣੇ ਟੀਚੇ ਨੂੰ ਹਾਸਲ ਕਰਨ<br />ਲਈ ਜਲਦੀ ਵਾਪਸ ਆਓ",
-	"Please test your <b>microphone</b>": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ <b>ਮਾਈਕਰੋਫ਼ੋਨ</b> ਦੀ ਜਾਂਚ ਕਰੋ",
-	"Please test your <b>speakers</b>": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ <b>ਸਪੀਕਰਾਂ</b> ਦੀ ਜਾਂਚ ਕਰੋ",
+	"Please test your <b>Microphone</b>": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ <b>ਮਾਈਕਰੋਫ਼ੋਨ</b> ਦੀ ਜਾਂਚ ਕਰੋ",
+	"Please test your <b>Speakers</b>": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ <b>ਸਪੀਕਰਾਂ</b> ਦੀ ਜਾਂਚ ਕਰੋ",
 	"Ensure there is <b>no background noise</b>": "ਪੱਕਾ ਕਰੋ ਕਿ <b>ਪਿੱਛੇ ਕੋਈ ਸ਼ੋਰ ਨਾ ਪੈਂਦਾ ਹੋਵੇ</b>",
 	"Get comfortable with the prompted text, before recording, by <b>reading it aloud</b>": "ਸਕ੍ਰੀਨ 'ਤੇ ਦਿਸਦੀ ਲਿਖਤ ਨੂੰ ਰਿਕਾਰਡ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਉੱਚੀ ਬੋਲ ਕੇ ਪੜ੍ਹੋ ਤਾਂਕਿ ਰਿਕਾਰਡ ਕਰਨਾ ਆਸਾਨ ਹੋਵੇ",
 	"Get started by clicking on <b>Record</b> button": "<b>ਰਿਕਾਰਡ ਕਰੋ</b> ਬਟਨ 'ਤੇ ਕਲਿੱਕ ਕਰਕੇ ਸ਼ੁਰੂ ਕਰੋ",
@@ -155,5 +155,6 @@
 	"You have contributed <b><span id=\"user-contribution\"></span></b><b><span> recordings</span></b> of your voice": "ਤੁਸੀਂ ਆਪਣੀ ਅਵਾਜ਼ ਦੀਆਂ <b><span id=\"user-contribution\"></span></b><b><span></span></b> ਰਿਕਾਰਡਿੰਗਾਂ ਦਾ ਯੋਗਦਾਨ ਕੀਤਾ ਹੈ",
 	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> ਰਿਕਾਰਡਿੰਗਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ",
 	"<b>Read once</b> before recording it": "ਰਿਕਾਰਡ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਇੱਕ ਵਾਰ ਜ਼ਰੂਰ ਪੜ੍ਹੋ",
-	"Speech recognition relies on \"machine-learning\" technology that requires huge collections of datasets that include diversified Indian voices and the corresponding text. Through Vakyansh, we want to create a diverse open repository of Indian voice speaking Indian language which can be used for this initiative": "ਬੋਲੀ ਪਛਾਣ ਤਕਨਾਲੋਜੀ \"ਮਸ਼ੀਨ ਸਿਖਲਾਈ\" ਤਕਨਾਲੋਜੀ 'ਤੇ ਨਿਰਭਰ ਕਰਦੀ ਹੈ ਜਿਸ ਲਈ ਬਹੁਤ ਵਿਸ਼ਾਲ ਮਾਤਰਾ ਵਿੱਚ ਡਾਟਾਸੈੱਟਾਂ ਦੇ ਸੰਗ੍ਰਹਿ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ, ਜਿਸ ਵਿੱਚ ਬਹੁਭਾਂਤੀ ਭਾਰਤੀ ਅਵਾਜ਼ਾਂ ਅਤੇ ਉਹਨਾਂ ਨਾਲ ਸੰਬੰਧਿਤ ਲਿਖਤਾਂ ਸ਼ਾਮਲ ਹੁੰਦੀਆਂ ਹਨ। ਵਾਕਿਆਂਸ਼ ਦੇ ਰਾਹੀਂ,ਅਸੀਂ ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਬੋਲਣ ਵਾਲੀਆਂ ਭਾਰਤੀ ਅਵਾਜਾਂ ਦਾ ਇੱਕ ਵਿਭਿੰਨ ਖੁੱਲੇ ਸਰੋਤ ਦਾ ਭੰਡਾਰ ਬਣਾਉਣਾ ਚਾਹੁੰਦਾ ਹੈ, ਜਿਸ ਨੂੰ ਇਸ ਪਹਿਲ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕੇ"
+	"Speech recognition relies on \"machine-learning\" technology that requires huge collections of datasets that include diversified Indian voices and the corresponding text. Through Vakyansh, we want to create a diverse open repository of Indian voice speaking Indian language which can be used for this initiative": "ਬੋਲੀ ਪਛਾਣ ਤਕਨਾਲੋਜੀ \"ਮਸ਼ੀਨ ਸਿਖਲਾਈ\" ਤਕਨਾਲੋਜੀ 'ਤੇ ਨਿਰਭਰ ਕਰਦੀ ਹੈ ਜਿਸ ਲਈ ਬਹੁਤ ਵਿਸ਼ਾਲ ਮਾਤਰਾ ਵਿੱਚ ਡਾਟਾਸੈੱਟਾਂ ਦੇ ਸੰਗ੍ਰਹਿ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ, ਜਿਸ ਵਿੱਚ ਬਹੁਭਾਂਤੀ ਭਾਰਤੀ ਅਵਾਜ਼ਾਂ ਅਤੇ ਉਹਨਾਂ ਨਾਲ ਸੰਬੰਧਿਤ ਲਿਖਤਾਂ ਸ਼ਾਮਲ ਹੁੰਦੀਆਂ ਹਨ। ਵਾਕਿਆਂਸ਼ ਦੇ ਰਾਹੀਂ,ਅਸੀਂ ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਬੋਲਣ ਵਾਲੀਆਂ ਭਾਰਤੀ ਅਵਾਜਾਂ ਦਾ ਇੱਕ ਵਿਭਿੰਨ ਖੁੱਲੇ ਸਰੋਤ ਦਾ ਭੰਡਾਰ ਬਣਾਉਣਾ ਚਾਹੁੰਦਾ ਹੈ, ਜਿਸ ਨੂੰ ਇਸ ਪਹਿਲ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕੇ",
+	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>"
 }
