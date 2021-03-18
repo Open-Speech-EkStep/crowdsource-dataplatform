@@ -1,4 +1,5 @@
-const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition } = require('./utils')
+const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition } = require('./utils');
+const { LOCALE_STRINGS } = require('./constants');
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
@@ -10,6 +11,7 @@ let cnvs;
 let cnvs_cntxt;
 const $testMicBtn = $('#test-mic-button');
 const $testSpeakerBtn = $('#play-speaker');
+let localeStrings;
 
 function getValue(number, maxValue) {
     return number < 0
@@ -104,7 +106,7 @@ function generateWavBlob(finalBuffer, defaultSampleRate) {
 const resetMicButton = () => {
     const $testMicText = $('#test-mic-text');
     if (audioContext) { audioContext.close(); audioContext = undefined };
-    $testMicText.text('Test Mic');
+    $testMicText.text(localeStrings['Test mic']);
     $('#mic-svg').removeClass('d-none');
     $testMicBtn.attr('data-value', 'test-mic');
     cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
@@ -205,13 +207,13 @@ const testMic = (btnDataAttr) => {
         recordingLength = 0;
         $micSvg.addClass('d-none');
         $testMicBtn.attr('data-value', 'recording');
-        $testMicText.text('Recording');
+        $testMicText.text(localeStrings['Recording']);
         recorder.start();
     } else if (btnDataAttr === 'recording') {
         const audio = recorder.stop();
         audio.play();
         $testMicBtn.attr('data-value', 'playing');
-        $testMicText.text('Playing');
+        $testMicText.text(localeStrings['Playing']);
     }
 }
 
@@ -283,7 +285,7 @@ const initialize = () => {
     });
     $testSpeakerBtn.on('click', (e) => {
         $testSpeakerBtn.attr('data-value', 'playing');
-        $('#test-speaker-text').text('Playing');
+        $('#test-speaker-text').text(localeStrings['Playing']);
         $('#speaker-svg').addClass('d-none');
         playSpeaker();
     });
@@ -629,7 +631,7 @@ const resetSpeakerButton = () => {
     cancelAnimationFrame(speakerAnimationID);
     if (speakerCanvasCtx) {speakerCanvasCtx.clearRect(0, 0, speakerCanvas.width, speakerCanvas.height)};
     $testSpeakerBtn.attr('data-value', 'test-speaker');
-    $('#test-speaker-text').text('Test Speakers');
+    $('#test-speaker-text').text(localeStrings['Test Speakers']);
     $('#speaker-svg').removeClass('d-none');
 }
 
@@ -696,6 +698,7 @@ $(document).ready(() => {
     const contributionLanguage = localStorage.getItem('contributionLanguage');
     cnvs = document.getElementById("mic-canvas");
     cnvs_cntxt = cnvs.getContext("2d");
+    localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
     if(contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }

@@ -159,5 +159,10 @@
 	"<b>Read once</b> before recording it": "ଏହାକୁ ରେକର୍ଡ଼ କରିବା ପୂର୍ବରୁ ଥରେ ପଢ଼ି ନିଅନ୍ତୁ",
 	"Feedback": "Feedback",
 	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> ରେକର୍ଡ଼ିଂକୁ ଭାଲିଡେଟ୍ କରିଥିବାରୁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ",
-	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>"
+	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>",
+	"Test your Microphone and Speakers": "ଆପଣଙ୍କର ମାଇକ୍ରୋଫୋନ୍ ଓ ସ୍ପିକର ଯାଞ୍ଚ କରନ୍ତୁ",
+	"Test mic": "ମାଇକ୍ ଟେଷ୍ଟ କରନ୍ତୁ",
+	"Test Speakers": "ସ୍ପିକର ଟେଷ୍ଟ କରନ୍ତୁ",
+	"Recording": "ରେକର୍ଡ଼ିଂ କରନ୍ତୁ",
+	"Playing": "ପ୍ଲେ ହେଉଛି"
 }

@@ -145,5 +145,15 @@
 	"Feedback": "Feedback",
 	"<b>Read once</b> before recording it": "റെക്കോർഡ് ചെയ്യുന്നതിനു മുൻപ് <b>ഒരു തവണ വായിച്ചു നോക്കുക</b>",
 	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> റെക്കോർഡിംഗുകൾ സാധൂകരിച്ചതിന് നന്ദി",
-	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>"
+	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>",
+	"Test your Microphone and Speakers": "നിങ്ങളുടെ മൈക്രോഫോണും സ്പീക്കറുകളും പരിശോധിക്കുക",
+	"Test mic": "മൈക്ക് പരിശോധിക്കുക",
+	"Test Speakers": "സ്പീക്കർ പരിശോധിക്കുക",
+	"Recording": "റെക്കോർഡ് ചെയ്യുന്നു",
+	"Playing": "പ്ലേ ചെയ്യുന്നു",
+	"Transgender - He": "Transgender - He",
+	"Transgender - She": "Transgender - She",
+	"Rather Not Say": "Rather Not Say",
+	"Quick Tips": "Quick Tips",
+	"Read once <b>before recording it</b>": "Read once <b>before recording it</b>"
 }
