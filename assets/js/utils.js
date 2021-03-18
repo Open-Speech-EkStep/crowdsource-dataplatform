@@ -1,4 +1,5 @@
 const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require("./constants");
+const { getCookie } = require("./locale")
 
 function showElement(element) {
     element.removeClass('d-none');
@@ -65,7 +66,8 @@ const performAPIRequest = (url) => {
 }
 
 const getLocaleString = function() {
-    performAPIRequest('/get-locale-strings')
+    const locale = getCookie("i18n");
+    performAPIRequest(`/get-locale-strings/${locale}`)
         .then((response) => {
             localStorage.setItem('localeString', JSON.stringify(response));
         });
