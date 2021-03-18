@@ -254,7 +254,7 @@ app.get('/get-locale-strings', function (req, res) {
       return res.sendStatus(500);
     }
     const data = JSON.parse(body);
-    const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds'];
+    const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds', 'Recording', 'Playing', 'Test mic', 'Test Speakers'];
 
     const langSttr = {};
     list.forEach((key) => {

@@ -520,9 +520,10 @@ const initialize = () => {
             $skipBtn.addClass('d-none');
             // toggleFooterPosition()
             currentIndex++;
-            animateCSS($pageContent, 'zoomOut', () =>
-                $pageContent.addClass('d-none')
-            );
+            animateCSS($pageContent, 'zoomOut', () => {
+                $pageContent.addClass('d-none');
+                $('footer').removeClass('bottom').addClass('fixed-bottom');
+            });
             setProgressBar(currentIndex);
             const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
             Object.assign(sentencesObj, { sentences: [] });
@@ -685,7 +686,7 @@ function playSpeaker() {
 }
 
 $(document).ready(() => {
-    toggleFooterPosition();
+    $('footer').removeClass('bottom').addClass('fixed-bottom');
     setPageContentHeight();
     window.crowdSource = {};
     //const $instructionModal = $('#instructionsModal');
@@ -724,11 +725,13 @@ $(document).ready(() => {
     
             $("#instructions_close_btn").on("click", function() {
                 $validationInstructionModal.addClass("d-none");
+                setFooterPosition();
             })
 
         $errorModal.on('show.bs.modal', function () {
             //$instructionModal.modal('hide');
             $validationInstructionModal.addClass("d-none");
+            setFooterPosition();
 
         });
         $errorModal.on('hidden.bs.modal', function () {
@@ -753,6 +756,7 @@ $(document).ready(() => {
             crowdSource.count = localCount;
             $loader.hide();
             $pageContent.removeClass('d-none');
+            setFooterPosition();
             initialize();
         } else {
             localStorage.removeItem(currentIndexKey);
@@ -781,6 +785,8 @@ $(document).ready(() => {
                     if (!isExistingUser) {
                         //$instructionModal.modal('show');
                         $validationInstructionModal.removeClass("d-none");
+                        setFooterPosition();
+                        // toggleFooterPosition();
                     } 
                     $pageContent.removeClass('d-none');
                     // toggleFooterPosition();
@@ -797,6 +803,7 @@ $(document).ready(() => {
                         })
                     );
                     localStorage.setItem(countKey, sentenceData.count);
+                    setFooterPosition();
                     initialize();
                 })
                 .catch((err) => {
