@@ -10,7 +10,7 @@ const CONTRIBUTION_LANGUAGE = "contributionLanguage";
 const ALL_LANGUAGES = [
     {value: "Assamese",id: "as", text: "অসমীয়া", hasLocaleText: true, data:true},
     {value: "Bengali", id: "bn", text: "বাংলা", hasLocaleText: true,data:true},
-    {value: "English", id: "en", text: "English", hasLocaleText: true,data:true},
+    {value: "English", id: "en", text: "English", hasLocaleText: true,data:false},
     {value: "Gujarati", id: "gu", text: "ગુજરાતી", hasLocaleText: true,data:true},
     {value: "Hindi", id: "hi", text: "हिंदी", hasLocaleText: true,data:true},
     {value: "Kannada", id: "kn", text: "ಕನ್ನಡ", hasLocaleText: true,data:true},
