@@ -162,5 +162,16 @@
 	"You have contributed <b><span id=\"user-contribution\"></span></b><b><span> recordings</span></b> of your voice": "તમે તમારા અવાજના <b><span id=\"user-contribution\"></span></b> રેકોર્ડિંગનો ફાળો આપેલો છે",
 	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off.": "ટીમ તરીકે, અમે તમને અમારી સાથે જોડાવા અને આ પહેલમાં તમારા અવાજનું યોગદાન આપવા માટે આમંત્રણ આપી રહ્યા છીએ. એક લાંબા શ્વાસમાં તમારો અવાજ રેકોર્ડ કરવો મુશ્કેલ શકે છે અને તેથી, અમે અમારી વેબસાઇટ પર સરળ પગલાં બનાવ્યા છે, જેથી કરીને તમે ઘણી વખત અમારી મુલાકાત લો અને જ્યાંથી તમે છોડી દીધું છે તે શરૂ કરો.",
 	"Speech recognition relies on \"machine-learning\" technology that requires huge collections of datasets that include diversified Indian voices and the corresponding text. Through Vakyansh, we want to create a diverse open repository of Indian voice speaking Indian language which can be used for this initiative": "સ્પીચ રેકગ્નિશન \"મશીન લર્નિંગ\" ટેકનોલોજી પર આધાર રાખે છે, જેમાં ડેટાબેસનું મોટું કલેક્શન જરૂરી છે જેમાં જુદા જુદા ભારતીય અવાજો અને સંબંધિત શબ્દોનો સમાવેશ થાય છે. વાક્યાંશ દ્વારા અમે ભારતીય ભાષા બોલતા ભારતીય અવાજનો વિવિધ ખુલ્લો ભંડાર બનાવવા માંગીએ છીએ જેનો ઉપયોગ આ પહેલ માટે કરી શકાય છે",
-	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>"
+	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>",
+	"Test your Microphone and Speakers": "તમારો માઈક્રોફોન અને સ્પીકર્સ ટેસ્ટ કરો",
+	"Test mic": "માઈક ટેસ્ટ કરો",
+	"Test Speakers": "સ્પીકર ટેસ્ટ કરો",
+	"Recording": "રેેકોર્ડિંગ",
+	"Playing": "ચાલી રહ્યું છે",
+	"Transgender - He": "Transgender - He",
+	"Transgender - She": "Transgender - She",
+	"Rather Not Say": "Rather Not Say",
+	"Feedback": "Feedback",
+	"Quick Tips": "Quick Tips",
+	"Read once <b>before recording it</b>": "Read once <b>before recording it</b>"
 }
