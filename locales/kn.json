@@ -81,8 +81,8 @@
 	"Contribute More": "ಮತ್ತಷ್ಟು ಕೊಡುಗೆ ನೀಡಿ",
 	"Share it with your friends and family": "ಇದನ್ನು ನಿಮ್ಮ ಸ್ನೇಹಿತರು ಮತ್ತು ಕುಟುಂಬದವರೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳಿ",
 	"Come Back again to<br />hit your goalpost": "ನಿಮ್ಮ ಗುರಿಯ ಸ್ಥಾನವನ್ನು<br />ಮುಟ್ಟಲು ಮತ್ತೆ ಹಿಂತಿರುಗಿ",
-	"Please test your <b>microphone</b>": "ದಯವಿಟ್ಟು ನಿಮ್ಮ <b>ಮೈಕ್ರೊಫೋನ್</b> ಅನ್ನು ಪರೀಕ್ಷಿಸಿ",
-	"Please test your <b>speakers</b>": "ದಯವಿಟ್ಟು ನಿಮ್ಮ <b>ಸ್ಪೀಕರ್‌ಗಳನ್ನು</b> ಪರೀಕ್ಷಿಸಿ",
+	"Please test your <b>Microphone</b>": "ದಯವಿಟ್ಟು ನಿಮ್ಮ <b>ಮೈಕ್ರೊಫೋನ್</b> ಅನ್ನು ಪರೀಕ್ಷಿಸಿ",
+	"Please test your <b>Speakers</b>": "ದಯವಿಟ್ಟು ನಿಮ್ಮ <b>ಸ್ಪೀಕರ್‌ಗಳನ್ನು</b> ಪರೀಕ್ಷಿಸಿ",
 	"Ensure there is <b>no background noise</b>": "ಹಿನ್ನೆಲೆ ಶಬ್ದವಿಲ್ಲ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ",
 	"Get comfortable with the prompted text, before recording, by <b>reading it aloud</b>": "ರೆಕಾರ್ಡ್ ಮಾಡುವ ಮೊದಲು, ಗಟ್ಟಿಯಾಗಿ ಓದುವ ಮೂಲಕ ಪ್ರಚೋದಿಸಿದ ಪಠ್ಯದೊಂದಿಗೆ ಆರಾಮಧಾಯಕವಾಗಿರಿ",
 	"Get started by clicking on <b>Record</b> button": "<b>ರೆಕಾರ್ಡ್</b> ಬಟನ್ ಒತ್ತುವ ಮಾಡುವ ಮೂಲಕ ಪ್ರಾರಂಭಿಸಿ",
@@ -148,5 +148,13 @@
 	"Feedback": "Feedback",
 	"<b>Read once</b> before recording it": "ರೆಕಾರ್ಡ್ ಮಾಡುವ ಮೊದಲು ಒಮ್ಮೆ ಓದಿ",
 	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> ರೆಕಾರ್ಡಿಂಗ್ ಅನ್ನು ಮೌಲ್ಯೀಕರಿಸಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು",
-	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>"
+	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>",
+	"Transgender - He": "Transgender - He",
+	"Transgender - She": "Transgender - She",
+	"Rather Not Say": "Rather Not Say",
+	"Quick Tips": "Quick Tips",
+	"Read once <b>before recording it</b>": "Read once <b>before recording it</b>",
+	"Test your Microphone and Speakers": "Test your Microphone and Speakers",
+	"Test mic": "Test mic",
+	"Test Speakers": "Test Speakers"
 }
