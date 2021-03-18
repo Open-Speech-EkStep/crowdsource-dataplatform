@@ -135,7 +135,7 @@ step("When user skips all the rest of the <count> sentences , User should see Th
 step("when user clicks on the Contribute More button, user should not see the Instructions page again", async function () {
     await click(link('Contribute More'))
     await taiko.waitFor(1000)
-    assert(! await text('Quick Tips').exists(0,0));
+    assert(! await text('Quick Tips').isVisible());
 });
 
 
@@ -196,8 +196,8 @@ step("When user select <lang> Language from dropdown then <arg0> should not visi
     const selectLanguageDropDown = taiko.dropDown({id: 'language'})
     assert.ok(await selectLanguageDropDown.exists());
     await selectLanguageDropDown.select(lang);
-    await taiko.waitFor(500)
-    assert(! await text(arg0).exists(0,0));
+    await taiko.waitFor(500);
+    assert(! await text(arg0).isVisible());
 });
 
 step("user should be able to see <arg0> , <arg1> , <arg2> , <arg3>", async function(arg0, arg1, arg2, arg3) {
