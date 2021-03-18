@@ -245,11 +245,9 @@ router.get('/location-info', (req, res) => {
   })
 });
 
-app.get('/get-locale-strings', function (req, res) {
-  const cookies = req.headers.cookie.split("; ");
-  const cookie = cookies.find(cookie => cookie.toLowerCase().startsWith("i18n"));
-  const cookieName = cookie.split("=").pop();
-  fs.readFile(`${__dirname}/../locales/${cookieName}.json`, (err, body) => {
+app.get('/get-locale-strings/:locale', function (req, res) {
+  let locale = req.params.locale;
+  fs.readFile(`${__dirname}/../locales/${locale}.json`, (err, body) => {
     if (err) {
       return res.sendStatus(500);
     }
