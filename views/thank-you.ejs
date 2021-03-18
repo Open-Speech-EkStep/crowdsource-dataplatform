@@ -40,7 +40,7 @@
                     </div>
                     <h4 class="mb-3"><%= __('WooHoo!! You took the first important step') %></h4>
                     <p><span id="user-contribution" class="text-primary">5</span> <%= __('recordings contributed') %></p>
-                    <p><%= __('You are just 10 sentences away from earning your 1st Badge.') %></p>
+                    <p id="badge_status"><%- __('You are just <span id="remainingSentences"></span> sentences away from earning your <span id="badgeName"></span> Badge.') %></p>
                     <div class="mt-5 text-center">
                         <%= __('Share it with your friends and family') %>
                     </div>
