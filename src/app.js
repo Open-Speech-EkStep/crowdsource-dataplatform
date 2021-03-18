@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const cors = require('cors');
 const objectStorage = process.argv[2] || 'gcp';
 const fetch = require('node-fetch');
 
@@ -79,6 +79,10 @@ const multerStorage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: multerStorage });
+const corsOptions = {
+  origin: /vakyansh\.in$/,
+}
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(upload.single('audio_data'));
 app.use('/sentences', validateUserInfo);
