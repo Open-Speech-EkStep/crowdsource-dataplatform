@@ -103,7 +103,7 @@ function generateWavBlob(finalBuffer, defaultSampleRate) {
 }
 const resetMicButton = () => {
     const $testMicText = $('#test-mic-text');
-    if (audioContext) audioContext.close();
+    if (audioContext) { audioContext.close(); audioContext = undefined };
     $testMicText.text('Test Mic');
     $('#mic-svg').removeClass('d-none');
     $testMicBtn.attr('data-value', 'test-mic');
@@ -112,6 +112,7 @@ const resetMicButton = () => {
 let audioData = [];
 let recordingLength = 0;
 let audioContext;
+let micAudio;
 const getMediaRecorder = () => {
     let stream = null,
         microphone = null,
@@ -170,15 +171,15 @@ const getMediaRecorder = () => {
         let audioBlob = generateWavBlob(finalBuffer, sampleRate);
         if (audioBlob !== null) {
             const audioUrl = URL.createObjectURL(audioBlob);
-            const audio = new Audio(audioUrl);
-            audio.onloadedmetadata = function() {
-                const audioDuration = Math.ceil(audio.duration*1000);
+            micAudio = new Audio(audioUrl);
+            micAudio.onloadedmetadata = function() {
+                const audioDuration = Math.ceil(micAudio.duration*1000);
                 setTimeout(() => {
                     resetMicButton();
                 }, audioDuration);
             };
             const play = () => {
-                audio.play();
+                micAudio.play();
             };
             return ({
                 audioBlob,
@@ -261,13 +262,20 @@ const initialize = () => {
         $testMicSpeakerDetails.removeClass('d-none');
     });
     $testMicCloseBtn.on('click', (e) => {
-        let audio = document.getElementById("test-speaker-hidden");
-        audio.pause();
-        $testSpeakerBtn.attr('data-value', 'test-speaker');
-        $('#test-speaker-text').text('Test Speakers');
-        $('#speaker-svg').removeClass('d-none');
         $testMicDiv.removeClass('d-none');
         $testMicSpeakerDetails.addClass('d-none');
+        audioData = [];
+        recordingLength = 0;
+        if (micAudio) {
+            micAudio.pause();
+            micAudio.currentTime = 0;
+        }
+        if (speakerAudio) {
+            speakerAudio.pause();
+            speakerAudio.currentTime = 0;
+        }
+        resetMicButton();
+        resetSpeakerButton();
     });
     $testMicBtn.on('click', (e) => {
         const btnDataAttr = $('#test-mic-button').attr('data-value');
@@ -617,30 +625,40 @@ const initialize = () => {
     }
 };
 
+const resetSpeakerButton = () => {
+    cancelAnimationFrame(speakerAnimationID);
+    if (speakerCanvasCtx) {speakerCanvasCtx.clearRect(0, 0, speakerCanvas.width, speakerCanvas.height)};
+    $testSpeakerBtn.attr('data-value', 'test-speaker');
+    $('#test-speaker-text').text('Test Speakers');
+    $('#speaker-svg').removeClass('d-none');
+}
+
 let context;
 let analyser;
 let mediaElementSrc;
+let speakerAnimationID = null;
+let speakerAudio;
+let speakerCanvas;
+let speakerCanvasCtx;
 function playSpeaker() {
-    let audio = document.getElementById("test-speaker-hidden");
-    audio.load();
-    audio.play();
+    speakerAudio = document.getElementById("test-speaker-hidden");
+    speakerAudio.play();
     if (!context) {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         context = new AudioContext();
-        mediaElementSrc = context.createMediaElementSource(audio);
+        mediaElementSrc = context.createMediaElementSource(speakerAudio);
         analyser = context.createAnalyser();
         mediaElementSrc.connect(analyser);
         analyser.connect(context.destination);
         analyser.fftSize = 256;
     }
-    let canvas = document.getElementById("speaker-canvas");
-    let cnvs_cntxt = canvas.getContext("2d");
+    speakerCanvas = document.getElementById("speaker-canvas");
+    speakerCanvasCtx = speakerCanvas.getContext("2d");
     let bufferLength = analyser.frequencyBinCount;
     let max_level_L = 50;
     let dataArray = new Uint8Array(bufferLength);
-    let animationId = null;
     function renderFrame() {
-        animationId = requestAnimationFrame(renderFrame);
+        speakerAnimationID = requestAnimationFrame(renderFrame);
         analyser.getByteFrequencyData(dataArray);
         let instant_L = 0.0;
         let sum_L = 0.0;
@@ -649,22 +667,18 @@ function playSpeaker() {
         }
         instant_L = Math.sqrt(sum_L / dataArray.length);
         max_level_L = Math.max(max_level_L, instant_L);
-        cnvs_cntxt.clearRect(0, 0, canvas.width, canvas.height);
-        cnvs_cntxt.fillStyle = "#83E561";
-        cnvs_cntxt.fillRect(
+        speakerCanvasCtx.clearRect(0, 0, speakerCanvas.width, speakerCanvas.height);
+        speakerCanvasCtx.fillStyle = "#83E561";
+        speakerCanvasCtx.fillRect(
             0,
             0,
-            canvas.width * (instant_L / max_level_L),
-            canvas.height
+            speakerCanvas.width * (instant_L / max_level_L),
+            speakerCanvas.height
         );
     }
     renderFrame();
-    audio.onended = function() {
-        cancelAnimationFrame(animationId);
-        cnvs_cntxt.clearRect(0, 0, canvas.width, canvas.height);
-        $testSpeakerBtn.attr('data-value', 'test-speaker');
-        $('#test-speaker-text').text('Test Speakers');
-        $('#speaker-svg').removeClass('d-none');
+    speakerAudio.onended = function() {
+        resetSpeakerButton();
     };
 }
 
