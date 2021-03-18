@@ -167,12 +167,12 @@
 	"Recording": "ध्वनिमुद्रण",
 	"Playing": "वाजत आहे",
 	"Help your own language": "तुमच्या स्वतःच्या भाषेला सहाय्य करा",
+	"Quick Tips": "जाता जाता सूचना",
+	"Read once <b>before recording it</b>": "ध्वनिमुद्रित करण्यापूर्वी ते वाचा",
 	"Transgender - He": "Transgender - He",
 	"Transgender - She": "Transgender - She",
 	"Rather Not Say": "Rather Not Say",
 	"Feedback": "Feedback",
-	"Quick Tips": "Quick Tips",
-	"Read once <b>before recording it</b>": "ध्वनिमुद्रण करण्याआधी एकदा ते वाचा",
 	"You are a champion": "तुम्ही विजेते आहात",
 	"WooHoo!! You took the first important step": "वाह! तुम्ही महत्त्वाचे पहिले पाऊल उचलले आहे",
 	"recordings contributed": "ध्वनिमुद्रणांचे योगदान झाले",
@@ -182,5 +182,5 @@
 	"Data recorded for": "Data recorded for",
 	"Help your language achieve it’s goal of 100 hrs. We know you can do more!": "तुमच्या भाषेला तिच्या 100 तासांच्या लक्ष्यापर्यंत पोहोचण्यासाठी मदत करा. आपण याहून अधिक काही करू शकता हे आम्ही जाणतो!",
 	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings",
-	"Please test your <b>speakers</b>": "Please test your <b>speakers</b>"
+	"Please test your <b>speakers</b>": "कृपया तुमच्या <b>स्पीकर्सची</b> चाचणी घ्या"
 }
