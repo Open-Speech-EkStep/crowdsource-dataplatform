@@ -1,5 +1,5 @@
 const { updateGraph } = require('./draw-chart');
-const { testUserName, setStartRecordBtnToolTipContent, setSpeakerDetails } = require('./speakerDetails');
+const { testUserName, setStartRecordBtnToolTipContent, setSpeakerDetails, setUserNameOnInputFocus, setStartRecordingBtnOnClick, setGenderRadioButtonOnClick, setUserModalOnShown } = require('./speakerDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString } = require('./utils');
 
 const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES} = require('./constants');
@@ -186,6 +186,11 @@ $(document).ready(function () {
     });
 
     setSpeakerDetails('speakerDetails', age, motherTongue, $userName);
+    setGenderRadioButtonOnClick();
+    setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
+    setUserNameOnInputFocus();
+    setStartRecordingBtnOnClick();
+    setUserModalOnShown($userName);
 
     $startRecordBtn.on('click', () => {
         if ($tncCheckbox.prop('checked')) {
@@ -207,6 +212,20 @@ $(document).ready(function () {
             };
             localStorage.setItem('speakerDetails', JSON.stringify(speakerDetails));
             location.href = '/record';
+        }
+    });
+
+    $('input[name = "gender"]').on('change', function() {
+        const selectedGender = document.querySelector(
+            'input[name = "gender"]:checked'
+        );
+        const options = $("#transgender_options");
+        if(selectedGender.value === "others") {
+            console.log(options);
+            options.removeClass("d-none");
+        } else {
+            console.log(options);
+            options.addClass("d-none");
         }
     });
 
