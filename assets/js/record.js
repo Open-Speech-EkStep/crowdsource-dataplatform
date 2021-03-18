@@ -261,6 +261,13 @@ const initialize = () => {
         $testMicSpeakerDetails.removeClass('d-none');
     });
     $testMicCloseBtn.on('click', (e) => {
+        const recorder = getMediaRecorder();
+        const mic_audio = recorder.stop();
+        let audio = document.getElementById("test-speaker-hidden");
+        audio.pause();
+        $testSpeakerBtn.attr('data-value', 'test-speaker');
+        $('#test-speaker-text').text('Test Speakers');
+        $('#speaker-svg').removeClass('d-none');
         $testMicDiv.removeClass('d-none');
         $testMicSpeakerDetails.addClass('d-none');
     });
@@ -617,6 +624,7 @@ let analyser;
 let mediaElementSrc;
 function playSpeaker() {
     let audio = document.getElementById("test-speaker-hidden");
+    audio.load();
     audio.play();
     if (!context) {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
