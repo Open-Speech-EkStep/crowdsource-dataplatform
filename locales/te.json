@@ -135,9 +135,9 @@
 	"Rather Not Say": "Rather Not Say",
 	"Quick Tips": "Quick Tips",
 	"Read once <b>before recording it</b>": "Read once <b>before recording it</b>",
-	"Test your Microphone and Speakers": "Test your Microphone and Speakers",
-	"Test mic": "Test mic",
-	"Test Speakers": "Test Speakers",
+	"Test your Microphone and Speakers": "దయచేసి మీ మైక్రోఫోన్   మరియు స్పీకర్లను పరీక్ష చెయ్యండి",
+	"Test mic": "మీ మైక్ను  పరీక్ష చెయ్యండి",
+	"Test Speakers": "స్పీకర్ను పరీక్ష చెయ్యండి",
 	"Please test your <b>speakers</b>": "Please test your <b>speakers</b>",
 	"You are a champion": "You are a champion",
 	"WooHoo!! You took the first important step": "WooHoo!! You took the first important step",
@@ -147,5 +147,7 @@
 	"Most data recorded for": "Most data recorded for",
 	"Data recorded for": "Data recorded for",
 	"Help your language achieve it’s goal of 100 hrs. We know you can do more!": "Help your language achieve it’s goal of 100 hrs. We know you can do more!",
-	"You are just <span id=\"remainingSentences\"></span> sentences away from earning your <span id=\"badgeName\"></span> Badge.": "You are just <span id=\"remainingSentences\"></span> sentences away from earning your <span id=\"badgeName\"></span> Badge."
+	"You are just <span id=\"remainingSentences\"></span> sentences away from earning your <span id=\"badgeName\"></span> Badge.": "You are just <span id=\"remainingSentences\"></span> sentences away from earning your <span id=\"badgeName\"></span> Badge.",
+	"Recording": "రికార్డ్ అవుతోంది",
+	"Playing": "ప్లే అవుతోంది"
 }
