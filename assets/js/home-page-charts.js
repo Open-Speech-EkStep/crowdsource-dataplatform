@@ -100,7 +100,7 @@ const drawMap = function (response) {
   polygonSeries.useGeodata = true;
   polygonSeries.data = statesData;
   var polygonTemplate = polygonSeries.mapPolygons.template;
-  polygonTemplate.tooltipHTML = `<div><h6>{state}</h6> <div>{total_speakers} Speakers  <label style="margin-left: 32px">Contributed: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div>Validated:  <label style="margin-left: 8px">{validated_time}</label></div></div>`;
+  polygonTemplate.tooltipHTML = `<div style="text-align: left;"><h6>{state}</h6> <div style="text-align: left;">{total_speakers} Speakers  <label style="margin-left: 32px">Contributed: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div style="text-align: left;">Validated:  <label style="margin-left: 8px">{validated_time}</label></div></div>`;
   polygonTemplate.nonScalingStroke = true;
   polygonTemplate.strokeWidth = 0.5;
   polygonTemplate.stroke = am4core.color("#929292")
