@@ -1,5 +1,5 @@
 # Crowdsourcing Platform
-### It is a part of [Vakyansh's](https://open-speech-ekstep.github.io/mkdocs/) recipes to build state of the art Speech Recogniition Model
+### It is a part of [Vakyansh's](https://open-speech-ekstep.github.io) recipes to build state of the art Speech Recogniition Model
 
 
 This will hold the crowdsourcing platform to be used to store voice data from various speakers 
@@ -22,10 +22,10 @@ If you like Vakyansh, ⭐ the project to support its development!_
 
 ## Documentation
 
-Please follow the documentation for Crowdsourcing Platform [here](https://open-speech-ekstep.github.io/mkdocs/crowdsource_platform/)
+Please follow the documentation for Crowdsourcing Platform [here](https://open-speech-ekstep.github.io/crowdsource_platform/)
 
 You can improve it by sending pull requests to the
-[documentation repository](https://github.com/Open-Speech-EkStep/mkdocs).
+[documentation repository](https://github.com/Open-Speech-EkStep/open-speech-ekstep.github.io).
 
 ## License
 [MIT License](LICENSE)
