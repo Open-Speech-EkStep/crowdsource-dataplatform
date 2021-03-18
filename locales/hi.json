@@ -152,5 +152,13 @@
 	"Read once <b>before recording it</b>": "Read once <b>before recording it</b>",
 	"Test your Microphone and Speakers": "Test your Microphone and Speakers",
 	"Test mic": "Test mic",
-	"Test Speakers": "Test Speakers"
+	"Test Speakers": "Test Speakers",
+	"You are a champion": "You are a champion",
+	"WooHoo!! You took the first important step": "WooHoo!! You took the first important step",
+	"recordings contributed": "recordings contributed",
+	"You are just <span id=\"remainingSentences\"></span> sentences away from earning your <span id=\"badgeName\"></span> Badge.": "You are just <span id=\"remainingSentences\"></span> sentences away from earning your <span id=\"badgeName\"></span> Badge.",
+	"Did you know?": "Did you know?",
+	"Most data recorded for": "Most data recorded for",
+	"Data recorded for": "Data recorded for",
+	"Help your language achieve it’s goal of 100 hrs. We know you can do more!": "Help your language achieve it’s goal of 100 hrs. We know you can do more!"
 }
