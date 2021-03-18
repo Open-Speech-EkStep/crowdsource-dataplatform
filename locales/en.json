@@ -194,5 +194,6 @@
 	"Please test your <b>Speakers</b>": "Please test your <b>Speakers</b>",
 	"Read once <b>before recording it</b>": "Read once <b>before recording it</b>",
 	"You are just <span id=\"remainingSentences\"></span> sentences away from earning your <span id=\"badgeName\"></span> Badge.": "You are just <span id=\"remainingSentences\"></span> sentences away from earning your <span id=\"badgeName\"></span> Badge.",
-	"Help your own language": "Help your own language"
+	"Help your own language": "Help your own language",
+	"Please test your <b>speakers</b>": "Please test your <b>speakers</b>"
 }
