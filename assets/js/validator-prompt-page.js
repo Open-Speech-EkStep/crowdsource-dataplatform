@@ -424,6 +424,17 @@ $(document).ready(() => {
     if (language) {
         updateLocaleLanguagesDropdown(language);
     }
+
+    $("#start_contributing_id").on('click', function() {
+        const data = localStorage.getItem("speakerDetails");
+        if(data !== null) {
+            const speakerDetails = JSON.parse(data);
+            speakerDetails.language = language;
+            localStorage.setItem("speakerDetails", JSON.stringify(speakerDetails));
+        }
+        location.href = '/record';
+    });
+
     fetchLocationInfo().then(res => {
         return res.json()
     }).then(response => {
