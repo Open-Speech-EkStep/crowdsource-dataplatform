@@ -191,21 +191,21 @@ $(document).ready(function () {
     setPageContentHeight();
     const sentencesContributed = getTotalSentencesContributed();
     setUserContribution(sentencesContributed);
-    const $remainingSentences = $("#remainingSentences");
-    const $badgeName = $("#badgeName");
-    const $badgeStatus = $("#badge_status");
-    let remainingCount = 0;
-    for (let i=0; i<4; i++) {
-        remainingCount = badagesCount[i]-sentencesContributed;
-        if (badagesCount[i] > sentencesContributed) {
-           $remainingSentences.text(remainingCount);
-           $badgeName.text(badgeNames[i]);
-           break;
-        } else if (badagesCount[i] === sentencesContributed) {
-            $badgeStatus.text(`Woaah! You've earned your ${badgeNames[i]} badge`);
-            break;
-        }
-    }
+    //const $remainingSentences = $("#remainingSentences");
+    //const $badgeName = $("#badgeName");
+    //const $badgeStatus = $("#badge_status");
+    //let remainingCount = 0;
+    // for (let i=0; i<4; i++) {
+    //     remainingCount = badagesCount[i]-sentencesContributed;
+    //     if (badagesCount[i] > sentencesContributed) {
+    //        $remainingSentences.text(remainingCount);
+    //        $badgeName.text(badgeNames[i]);
+    //        break;
+    //     } else if (badagesCount[i] === sentencesContributed) {
+    //         $badgeStatus.text(`Woaah! You've earned your ${badgeNames[i]} badge`);
+    //         break;
+    //     }
+    // }
 
     fetch(`/getDetails/${localSpeakerDataParsed.language}`)
       .then((data) => {
