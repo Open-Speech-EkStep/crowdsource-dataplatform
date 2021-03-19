@@ -26,7 +26,7 @@ const {
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
-const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH } = require('./constants');
+const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH, MIN_SNR_LEVEL } = require('./constants');
 const {
   validateUserInputAndFile,
   validateUserInfo,
@@ -237,8 +237,9 @@ router.post('/audio/snr', async (req, res) => {
   const filePath = file.path
   const command = buildWadaSnrCommand(filePath)
   const onSuccess = (snr) => {
+    const ambient_noise = snr < MIN_SNR_LEVEL ? true : false
     removeTempFile(file);
-    res.status(200).send({ 'snr': snr });
+    res.status(200).send({ 'snr': snr, 'ambient_noise': ambient_noise });
   }
   const onError = (snr) => {
     removeTempFile(file);
