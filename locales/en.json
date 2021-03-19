@@ -197,5 +197,18 @@
 	"Read once <b>before recording it</b>": "Read once <b>before recording it</b>",
 	"You are just <span id=\"remainingSentences\"></span> sentences away from earning your <span id=\"badgeName\"></span> Badge.": "You are just <span id=\"remainingSentences\"></span> sentences away from earning your <span id=\"badgeName\"></span> Badge.",
 	"Help your own language": "Help your own language",
-	"Please test your <b>speakers</b>": "Please test your <b>speakers</b>"
+	"Please test your <b>speakers</b>": "Please test your <b>speakers</b>",
+	"Report": "Report",
+	"Report Content": "Report Content",
+	"Help us understand what’s wrong with the sentence": "Help us understand what’s wrong with the sentence",
+	"Offensive": "Offensive",
+	"Hurting sentiments of religion, community or abusive content etc.": "Hurting sentiments of religion, community or abusive content etc.",
+	"Prohibited Content": "Prohibited Content",
+	"Hateful / Discriminatory / Vulgar language, drugs promotion etc.": "Hateful / Discriminatory / Vulgar language, drugs promotion etc.",
+	"Political Statement": "Political Statement",
+	"Hateful Political views, amplifying hate-speech etc.": "Hateful Political views, amplifying hate-speech etc.",
+	"Misinformation": "Misinformation",
+	"Hearsay / Rumors, deliberate falsified facts etc.": "Hearsay / Rumors, deliberate falsified facts etc.",
+	"Thank You": "Thank You",
+	"Your feedback helps us keep the portal relevant to you, we appreciate you taking time to leave feedback for us.": "Your feedback helps us keep the portal relevant to you, we appreciate you taking time to leave feedback for us."
 }
