@@ -1,10 +1,10 @@
-const {updateLocaleLanguagesDropdown} = require('./utils');
+const { updateLocaleLanguagesDropdown } = require('./utils');
 const { ALL_LANGUAGES } = require("./constants");
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');
     const localisation_popup = $('#content-language');
-    localisation_popup.on("click", localisationChangeHandler);    
+    localisation_popup.on("click", localisationChangeHandler);
     localisation_dropdown.on("click", localisationChangeHandler);
 }
 const localisationChangeHandler = e => {
@@ -46,10 +46,10 @@ function checkCookie() {
     var locale = getCookie("i18n");
     return locale != "";
 }
-function showLanguagePopup() { 
+function showLanguagePopup() {
     document.getElementById("toggle-content-language").click();
 }
-function redirectToLocalisedPage(){
+function redirectToLocalisedPage() {
     var locale = getCookie("i18n");
     let splitValues = location.href.split('/');
     let currentLocale = splitValues[splitValues.length - 2];

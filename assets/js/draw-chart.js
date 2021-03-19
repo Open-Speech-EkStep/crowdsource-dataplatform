@@ -45,16 +45,40 @@ function getAgeGroupData(data, key) {
 }
 
 const getGenderData = (genderData) => {
-    const genderOrder = ['male', 'female', 'anonymous', 'others'];
+    const genderOrder = ['male', 'female', 'anonymous', 'transgender'];
     const formattedGenderData = [];
     genderOrder.forEach(gender => {
         genderData.data.forEach(item => {
-            if (!item.gender) item.gender = 'anonymous';
-            if (gender === item.gender) {
-                formattedGenderData.push({
-                    ...item,
-                    gender: item.gender.charAt(0).toUpperCase() + item.gender.slice(1)
-                });
+            let gType = item.gender;
+            if (item.gender === "") item.gender = 'anonymous';
+            if(item.gender.toLowerCase().indexOf('transgender') > -1 || item.gender.toLowerCase().indexOf('rather') > -1) gType = "transgender";
+            if (gender === gType) {
+                const genderType = gType.charAt(0).toUpperCase() + gType.slice(1);
+                const {hours:cHours, minutes: cMinutes, seconds: cSeconds} = calculateTime((Number(item.hours_contributed)*60*60), true);
+                const contributedHours = formatTime(cHours, cMinutes, cSeconds);
+                if (gType === "transgender") {
+                    formattedGenderData.push({
+                        ...item,
+                        gender: "Others",
+                        tooltipText: `
+                                <div>
+                                    <h6 style="text-align: left; font-weight: bold">${item.gender}</h6>
+                                    <div>Contributed: <label>${contributedHours}</label></div>
+                                    <div style="text-align: left;">Speakers: <label>${item.speakers}</label></div>
+                                </div>`
+                    });
+                } else {
+                    formattedGenderData.push({
+                        ...item,
+                        gender: genderType,
+                        tooltipText: `
+                                <div>
+                                    <h6 style="text-align: left; font-weight: bold">${genderType}</h6>
+                                    <div>Contributed: <label>${contributedHours}</label></div>
+                                    <div style="text-align: left;">Speakers: <label>${item.speakers}</label></div>
+                                </div>`
+                    });
+                }
             }
         });
     });
@@ -201,7 +225,7 @@ const drawAgeGroupChart = (chartData) => {
 };
 
 const drawGenderChart = (chartData) => {
-    const chartColors = ['#85A8F9', '#B7D0FE', '#316AFF', '#294691'];
+    const chartColors = ['#5d6d9a', '#85A8F9', '#B7D0FE', '#6C85CE', '#316AFF', '#294691'];
     am4core.ready(function () {
         const chart = am4core.create('gender-chart', am4charts.XYChart);
         chartData.forEach(item => {
@@ -230,12 +254,7 @@ const drawGenderChart = (chartData) => {
         series.dataFields.valueY = 'hours_contributed';
         series.dataFields.categoryX = 'gender';
         const columnTemplate = series.columns.template;
-        columnTemplate.tooltipHTML = `
-            <div>
-                <h6 style="text-align: left; font-weight: bold">{gender}</h6>
-                <div>Contributed: <label>{contributedHours}</label></div>
-                <div style="text-align: left;">Speakers: <label>{speakers}</label></div>
-            </div>`;
+        columnTemplate.tooltipHTML = `<div> {tooltipText}</div>`;
 
         columnTemplate.adapter.add('fill', function (fill, target) {
             return chartColors[chartColors.length - 1 - target.dataItem.index];

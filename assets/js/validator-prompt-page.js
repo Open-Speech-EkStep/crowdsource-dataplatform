@@ -125,7 +125,7 @@ function setSentenceLabel(index) {
 function getNextSentence() {
     if (currentIndex < validationSentences.length - 1) {
         currentIndex++;
-        getAudioClip(validationSentences[currentIndex].audio_path)
+        getAudioClip(validationSentences[currentIndex].contribution_id)
         resetValidation();
         setSentenceLabel(currentIndex);
     } else {
@@ -331,13 +331,13 @@ function disableSkipButton() {
     disableButton($skipButton)
 }
 
-const getAudioClip = function (audioPath) {
+const getAudioClip = function (contributionId) {
     hideAudioRow();
     disableSkipButton();
     fetch('/audioClip', {
         method: 'POST',
         body: JSON.stringify({
-            file: audioPath
+            contributionId: contributionId
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -442,7 +442,7 @@ $(document).ready(() => {
             validationSentences = sentenceData.data
             const sentence = validationSentences[currentIndex];
             if (sentence) {
-                getAudioClip(sentence.audio_path);
+                getAudioClip(sentence.contribution_id);
                 setSentenceLabel(currentIndex);
                 updateValidationCount();
                 resetValidation();

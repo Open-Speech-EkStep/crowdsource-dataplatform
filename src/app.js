@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const cors = require('cors');
 const objectStorage = process.argv[2] || 'gcp';
 const fetch = require('node-fetch');
 const cors = require('cors');
@@ -82,6 +82,9 @@ const corsOptions = {
   origin: /vakyansh\.in$/,
 }
 const upload = multer({ storage: multerStorage });
+const corsOptions = {
+  origin: /vakyansh\.in$/,
+}
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(upload.single('audio_data'));
@@ -246,16 +249,15 @@ router.get('/location-info', (req, res) => {
   })
 });
 
-app.get('/get-locale-strings', function (req, res) {
-  const cookies = req.headers.cookie.split("; ");
-  const cookie = cookies.find(cookie => cookie.toLowerCase().startsWith("i18n"));
-  const cookieName = cookie.split("=").pop();
-  fs.readFile(`${__dirname}/../locales/${cookieName}.json`, (err, body) => {
+app.get('/get-locale-strings/:locale', function (req, res) {
+  let locale = req.params.locale;
+  fs.readFile(`${__dirname}/../locales/${locale}.json`, (err, body) => {
     if (err) {
       return res.sendStatus(500);
     }
     const data = JSON.parse(body);
-    const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds'];
+    const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds', 'Recording', 'Playing', 'Test mic', 'Test Speakers'];
+
     const langSttr = {};
     list.forEach((key) => {
       langSttr[key] = data[key];

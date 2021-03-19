@@ -1,6 +1,6 @@
 const { spy } = require('fetch-mock');
 const {
-    updateContributionDetails
+    updateContributionDetails, updateSentencesWithContributedState, getValidationSentencesQuery, getCountOfTotalSpeakerAndRecordedAudio, getGenderData, getAgeGroupsData, getMotherTonguesData, feedbackInsertion
 } = require('./../src/dbQuery');
 
 const mockDB = {
@@ -17,6 +17,7 @@ const encryptMock = jest.mock('../src/encryptAndDecrypt');
 encryptMock.encrypt = jest.fn();
 
 const dbOperations = require('../src/dbOperations');
+const { topLanguagesByHoursContributed, topLanguagesBySpeakerContributions, listLanguages } = require('../src/dashboardDbQueries');
 
 describe("Running tests for dbOperations", () => {
     describe('tests for getSentencesBasedOnAge', () => {
@@ -69,18 +70,19 @@ describe("Running tests for dbOperations", () => {
         const testCountry = 'testCountry';
         const testAudioDuration = 10;
         const callback = () => { };
-        let spyDB;
+        let spyDBany, spyDBnone;
 
         beforeEach(() => {
-            spyDB = jest.spyOn(mockDB, 'any')
+            spyDBany = jest.spyOn(mockDB, 'any')
+            spyDBnone = jest.spyOn(mockDB, 'none')
         });
 
         afterEach(() => {
             jest.clearAllMocks();
         })
 
-        test('call query with null speaker details if not exists', () => {
-            dbOperations.updateDbWithAudioPath(
+        test('call query with null speaker details if not exists', async () => {
+            await dbOperations.updateDbWithAudioPath(
                 testAudioPath,
                 testSentenceId,
                 null,
@@ -92,7 +94,7 @@ describe("Running tests for dbOperations", () => {
                 callback
             )
 
-            expect(spyDB).toHaveBeenCalledWith(
+            expect(spyDBany).toHaveBeenCalledWith(
                 updateContributionDetails,
                 [
                     testAudioPath,
@@ -107,10 +109,15 @@ describe("Running tests for dbOperations", () => {
                     testAudioDuration
                 ]
             );
+
+            expect(spyDBnone).toHaveBeenCalledWith(
+                updateSentencesWithContributedState,
+                [testSentenceId]
+            )
         });
 
-        test('call query with age, gender and mother tongue if speaker details exists', () => {
-            dbOperations.updateDbWithAudioPath(
+        test('call query with age, gender and mother tongue if speaker details exists', async () => {
+            await dbOperations.updateDbWithAudioPath(
                 testAudioPath,
                 testSentenceId,
                 '{"age": "10-15", "gender": "male", "motherTongue": "Language"}',
@@ -122,7 +129,7 @@ describe("Running tests for dbOperations", () => {
                 callback
             )
 
-            expect(spyDB).toHaveBeenCalledWith(
+            expect(spyDBany).toHaveBeenCalledWith(
                 updateContributionDetails,
                 [
                     testAudioPath,
@@ -137,13 +144,18 @@ describe("Running tests for dbOperations", () => {
                     testAudioDuration
                 ]
             );
+
+            expect(spyDBnone).toHaveBeenCalledWith(
+                updateSentencesWithContributedState,
+                [testSentenceId]
+            )
         });
 
-        test('call query with rounded audio duration', () => {
+        test('call query with rounded audio duration', async () => {
             const testAudioDuration = 4.78951;
             const expectedAudioDuration = 4.79;
 
-            dbOperations.updateDbWithAudioPath(
+            await dbOperations.updateDbWithAudioPath(
                 testAudioPath,
                 testSentenceId,
                 null,
@@ -155,7 +167,7 @@ describe("Running tests for dbOperations", () => {
                 callback
             )
 
-            expect(spyDB).toHaveBeenCalledWith(
+            expect(spyDBany).toHaveBeenCalledWith(
                 updateContributionDetails,
                 [
                     testAudioPath,
@@ -170,6 +182,79 @@ describe("Running tests for dbOperations", () => {
                     expectedAudioDuration
                 ]
             );
+
+            expect(spyDBnone).toHaveBeenCalledWith(
+                updateSentencesWithContributedState,
+                [testSentenceId]
+            )
         });
-    })
+    });
+
+    test('get validationsentences should call getValidationSentences query once with language', () => {
+        const language = 'testLanguage';
+        const req = { params: { language: language } };
+        const spyDBany = jest.spyOn(mockDB, 'any')
+
+        dbOperations.getValidationSentences(req, {});
+
+        expect(spyDBany).toHaveBeenCalledWith(getValidationSentencesQuery, [language]);
+        jest.clearAllMocks();
+    });
+
+    test('Get all Details should call getCountOfTotalSpeakerAndRecordedAudio query once with language', () => {
+        const language = 'testLanguage';
+        const spyDBany = jest.spyOn(mockDB, 'any')
+
+        dbOperations.getAllDetails(language);
+
+        expect(spyDBany).toHaveBeenCalledWith(getCountOfTotalSpeakerAndRecordedAudio, [language]);
+        jest.clearAllMocks();
+    });
+
+    test('Get All Info should call age, gender and mother tongue data query each once with given language', async () => {
+        const language = 'testLanguage';
+        const spyDBany = jest.spyOn(mockDB, 'any')
+
+        await dbOperations.getAllInfo(language);
+
+        expect(spyDBany).toHaveBeenCalledTimes(3)
+        expect(spyDBany).toHaveBeenCalledWith(getGenderData, [language])
+        expect(spyDBany).toHaveBeenCalledWith(getAgeGroupsData, [language])
+        expect(spyDBany).toHaveBeenCalledWith(getMotherTonguesData, [language])
+    });
+
+    test('Get top language by hours', () => {
+        const spyDBany = jest.spyOn(mockDB, 'any')
+
+        dbOperations.getTopLanguageByHours();
+
+        expect(spyDBany).toHaveBeenCalledWith(topLanguagesByHoursContributed);
+    });
+
+    test('Get top language by speakers', () => {
+        const spyDBany = jest.spyOn(mockDB, 'any')
+
+        dbOperations.getTopLanguageBySpeakers();
+
+        expect(spyDBany).toHaveBeenCalledWith(topLanguagesBySpeakerContributions);
+    });
+
+    test('Get languages', () => {
+        const spyDBany = jest.spyOn(mockDB, 'any')
+
+        dbOperations.getLanguages();
+
+        expect(spyDBany).toHaveBeenCalledWith(listLanguages, []);
+    });
+
+    test('Insert Feedback', () => {
+        const spyDBany = jest.spyOn(mockDB, 'any')
+        const subject = 'subject'
+        const feedback = 'test feedback'
+        const language = 'testLanguage'
+
+        dbOperations.insertFeedback(subject, feedback, language);
+
+        expect(spyDBany).toHaveBeenCalledWith(feedbackInsertion, [subject, feedback, language])
+    });
 });
