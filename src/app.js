@@ -245,10 +245,7 @@ router.post('/audio/snr', async (req, res) => {
 
   }
   const onError = (snr) => {
-    // removeTempFile(file);
-    // res.sendStatus(502);
-    console.log('error' + res.headersSent);
-
+    console.log('error...' + res.headersSent);
   }
   calculateSNR(command, onSuccess, onError)
 });
