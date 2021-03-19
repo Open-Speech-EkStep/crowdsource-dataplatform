@@ -111,7 +111,7 @@ const resetMicButton = () => {
     $testMicBtn.attr('data-value', 'test-mic');
     cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
     secondsDown = 5;
-    timeIntervalUp = undefined;
+    clearInterval(timeIntervalUp);
 }
 let audioData = [];
 let recordingLength = 0;
