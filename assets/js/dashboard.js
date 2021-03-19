@@ -184,7 +184,6 @@ $(document).ready(function () {
     setUserModalOnShown($userName);
 
     $startRecordBtn.on('click', () => {
-        console.log(sentenceLanguage);
         const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
         let genderValue = checkedGender.length ? checkedGender[0].value : '';
         const userNameValue = $userName.val().trim().substring(0, 12);

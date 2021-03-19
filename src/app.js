@@ -180,16 +180,17 @@ router.post('/audioClip', (req, res) => getAudioClip(req, res, objectStorage))
 
 router.post('/report', async(req, res) => {
   const userId = req.cookies.userId || "";
-  const { sentenceId = "", reportText = "", language = ""} = req.body;
+  const { sentenceId = "", reportText = "", language = "", userName = ""} = req.body;
   if (sentenceId === "" || reportText === "" || language === "" || userId === "") {
-    return res.sendStatus(400);
+    return res.send({statusCode: 400, message: "Input values missing"});
   }
   try{ 
-    await saveReport(userId, sentenceId, reportText, language)
+    await saveReport(userId, sentenceId, reportText, language, userName)
   }catch(err){
-    return res.sendStatus(500);
+    console.log(err);
+    return res.send({statusCode: 500, message: err.message});
   }
-  return res.sendStatus(200);
+  return res.send({statusCode: 200, message: "Reported successfully."});
 })
 
 router.post('/upload', (req, res) => {
