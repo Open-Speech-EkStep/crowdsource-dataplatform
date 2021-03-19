@@ -95,6 +95,15 @@ h6,
   .modal-xl {
     max-width: 700px;
   }
+  .say-logo{
+    width: 140px;
+    height:140px ;
+  }
+
+  .listen-logo{
+    width: 140px;
+    height:140px ;
+  }
 }
 @media (min-width: 1200px) {
   html {
