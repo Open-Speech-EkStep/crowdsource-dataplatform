@@ -1,13 +1,10 @@
 const { calculateSNR } = require('../../src/audio_attributes/snr');
 const { async } = require('regenerator-runtime');
-const fs = require('fs');
 
 describe('SNR ', function () {
     describe('calculateSNR()', function () {
         test('should return the snr', done => {
-            // var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
-
-            const output = fs.readFileSync('./backend_tests/audio_attributes/output.log', 'utf8');
+            const output = '===\nTotal SNR is 4.251 dB.\n===='
             const command = `echo "${output}"`
             const onSuccess = jest.fn((snr) => {
                 expect(snr).toBe(4.25);
