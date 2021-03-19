@@ -792,7 +792,7 @@ $(document).ready(() => {
             &&
             localSentencesParsed.language === localSpeakerDataParsed.language;
 
-        if (isExistingUser && localSentencesParsed.sentences.length != 0) {
+        if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === contributionLanguage) {
             crowdSource.sentences = localSentencesParsed.sentences;
             crowdSource.count = localCount;
             $loader.hide();
