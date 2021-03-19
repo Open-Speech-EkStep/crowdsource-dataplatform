@@ -252,7 +252,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
       : "{total_contributions_text}";
   valueLabel.label.fontSize = 14;
   valueLabel.label.horizontalCenter = "left";
-  valueLabel.label.dx = 10;
+  valueLabel.label.dx = 5;
   valueLabel.label.truncate = false;
   valueLabel.label.hideOversized = false;
 
