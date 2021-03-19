@@ -381,6 +381,8 @@ function showThankYou() {
     showElement($('#thank-you-row'))
     hideElement($('#progress-row'));
     hideElement($('#skip_btn_row'));
+    hideElement($('#validation-container'));
+    $("#validation-container").removeClass("validation-container");
 
     const language = localStorage.getItem('contributionLanguage');
     const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
@@ -411,6 +413,8 @@ function showNoSentencesMessage() {
     hideElement($('#progress-row'))
     showElement($('#no-sentences-row'))
     hideElement($('#skip_btn_row'));
+    hideElement($('#validation-container'));
+    $("#validation-container").removeClass("validation-container");
 }
 
 $(document).ready(() => {
