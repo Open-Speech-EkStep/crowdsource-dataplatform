@@ -7,6 +7,7 @@ const currentIndexKey = 'currentIndex';
 const skipCountKey = 'skipCount';
 const countKey = 'count';
 
+let currentIndex;
 let cnvs;
 let cnvs_cntxt;
 const $testMicBtn = $('#test-mic-button');
@@ -263,8 +264,7 @@ const initialize = () => {
     const $testMicSpeakerDetails = $('#test-mic-speakers-details');
     const $testMicCloseBtn = $('#test-mic-close');
     const totalItems = sentences.length;
-    let currentIndex =
-        getCurrentIndex(totalItems - 1);
+    currentIndex = getCurrentIndex(totalItems - 1);
     let skipCount =
         getSkipCount(totalItems - 1);
     const $footer = $('footer');
@@ -710,25 +710,37 @@ function playSpeaker() {
 
 const handleSubmitFeedback = function () {
     const contributionLanguage = localStorage.getItem("contributionLanguage");
+    const otherText = $("other_text").val();
+    const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
+        
     const reqObj = {
-
+        sentenceId: crowdSource.sentences[currentIndex].sentenceId,
+        reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
+        language: contributionLanguage,
+        userName: speakerDetails.userName
     };
-    // fetch(url, {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(reqObj),
-    //     })
-    //     .then((res) => res.json())
-    //     .then((resp) => {
-    //         console.log('response: ', resp.data);
-    //     })
-    $("#report_sentence_modal").modal('hide');
-    $("#report_sentence_thanks_modal").modal('show');
+    fetch('/report', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reqObj),
+        })
+        .then((res) => res.json())
+        .then((resp) => {
+            if (resp.statusCode === 200) {
+                $("#report_sentence_modal").modal('hide');
+                $("#report_sentence_thanks_modal").modal('show');
+                $("#report_submit_id").attr("disabled", true);
+                $("input[type=radio][name=reportRadio]").each(function(){
+                      $(this).prop("checked",false);
+                });
+                $("#other_text").val("");
+            }
+        })
 }
 
-
+let selectedReportVal = '';
 $(document).ready(() => {
     $('footer').removeClass('bottom').addClass('fixed-bottom');
     setPageContentHeight();
@@ -764,6 +776,7 @@ $(document).ready(() => {
     });
 
     $("input[type=radio][name=reportRadio]").on("change", function() {
+        selectedReportVal = this.value;
         $("#report_submit_id").attr("disabled", false);
     });
 
