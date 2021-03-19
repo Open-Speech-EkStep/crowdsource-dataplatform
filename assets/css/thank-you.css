@@ -1,6 +1,12 @@
 .bg-thank-you {
   background-size: cover;
 }
+
+.thank-you-title {
+  width: 85%;
+  margin: 0 auto;
+}
+
 #graphcontainer {
   font-size: 0.2rem;
   position: relative;
@@ -236,12 +242,12 @@
 }
 
 .w-80 {
-  width: 80%;
+  width: 75%;
 }
 
 .time {
   position: absolute;
-  right: -60px;
+  right: -55px;
   top: -1px;
   font-size: 12px;
 }
