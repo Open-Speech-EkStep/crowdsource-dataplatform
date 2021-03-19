@@ -685,6 +685,27 @@ function playSpeaker() {
     };
 }
 
+const handleSubmitFeedback = function () {
+    const contributionLanguage = localStorage.getItem("contributionLanguage");
+    const reqObj = {
+
+    };
+    // fetch(url, {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(reqObj),
+    //     })
+    //     .then((res) => res.json())
+    //     .then((resp) => {
+    //         console.log('response: ', resp.data);
+    //     })
+    $("#report_sentence_modal").modal('hide');
+    $("#report_sentence_thanks_modal").modal('show');
+}
+
+
 $(document).ready(() => {
     $('footer').removeClass('bottom').addClass('fixed-bottom');
     setPageContentHeight();
@@ -692,6 +713,7 @@ $(document).ready(() => {
     //const $instructionModal = $('#instructionsModal');
     const $validationInstructionModal = $("#validation-instruction-modal");
     const $errorModal = $('#errorModal');
+    const $reportModal = $("#report_sentence_modal");
     const $loader = $('#loader');
     const $pageContent = $('#page-content');
     const $navUser = $('#nav-user');
@@ -703,6 +725,25 @@ $(document).ready(() => {
     if(contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }
+
+    $("#report_submit_id").on('click', handleSubmitFeedback);
+
+    $("#report_btn").on('click', function() {
+        $reportModal.modal('show');
+    });
+
+    $("#report_close_btn").on("click", function() {
+        $reportModal.modal('hide');
+    });
+
+    $("#report_sentence_thanks_close_id").on("click", function() {
+        $("#report_sentence_thanks_modal").modal('hide');
+    });
+
+    $("input[type=radio][name=reportRadio]").on("change", function() {
+        $("#report_submit_id").attr("disabled", false);
+    });
+
     fetchLocationInfo().then(res => {
         return res.json()
     }).then(response => {
