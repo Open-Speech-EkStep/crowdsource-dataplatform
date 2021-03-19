@@ -61,7 +61,12 @@
                                 <%= __('Contribute Your Voice') %>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-4"><img src="img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer say-logo" data-target="#userModal"></div>
+                        <div class="col-lg-5 col-md-5 col-4">
+                            <div style="height:140px;width:140px">
+                                <img src="img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer w-auto" data-target="#userModal">
+                            </div>
+                        </div>
+
                         <div id="say-p-2" class="col-lg-7 col-md-7 col-12 d-none position-absolute" style="bottom:1rem">
                             <div>
                                 <%= __('Contribute your voice to create an open data repository of Indian languages') %>
@@ -83,7 +88,10 @@
                                 <%= __('Verify What They Say') %>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-4"><a href="/validator-page"><img src="img/listen.svg" alt="validator" id="start_validating" class="cursor-pointer listen-logo"></a></div>
+                        <div class="col-lg-5 col-md-5 col-4">
+                            <a href="/validator-page" style="height:140px;width:140px">
+                                <img src="img/listen.svg" alt="validator" id="start_validating" class="cursor-pointer w-auto"></a>
+                        </div>
                         <div class="col-lg-7 col-md-7 col-12 d-none position-absolute" id="listen-p-2" style="bottom:1rem">
                             <div>
                                 <%= __('Help us by validating the voice samples that others have contributed') %>
