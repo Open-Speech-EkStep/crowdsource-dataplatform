@@ -141,6 +141,23 @@ const countTimer = () => {
         testMic('stop-recording');
     }
 }
+
+const ambienceNoiseCheck = (audioBlob) => {
+    const fd = new FormData();
+    fd.append('audio_data', audioBlob);
+    fetch('/audio/snr', {
+        method: 'POST',
+        body: fd,
+    })
+    .then(res => res.json)
+    .then(result => {
+        console.log('Ambience noise', result);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
+
 const getMediaRecorder = () => {
     let stream = null,
         microphone = null,
@@ -200,6 +217,7 @@ const getMediaRecorder = () => {
         let finalBuffer = flattenArray(audioData, recordingLength);
         let audioBlob = generateWavBlob(finalBuffer, sampleRate);
         if (audioBlob !== null) {
+            ambienceNoiseCheck(audioBlob);
             const audioUrl = URL.createObjectURL(audioBlob);
             micAudio = new Audio(audioUrl);
             micAudio.onloadedmetadata = function() {
