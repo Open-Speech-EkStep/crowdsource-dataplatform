@@ -179,13 +179,13 @@ router.post('/validation/action', (req, res) => updateTablesAfterValidation(req,
 router.post('/audioClip', (req, res) => getAudioClip(req, res, objectStorage))
 
 router.post('/report', async(req, res) => {
-  const userId = req.cookies.userId;
-  const { sentenceId = "", reportText = "", language = "", userName = "" } = req.body;
-  if (sentenceId === "" || reportText === "" || language === "" || userName === "") {
+  const userId = req.cookies.userId || "";
+  const { sentenceId = "", reportText = "", language = ""} = req.body;
+  if (sentenceId === "" || reportText === "" || language === "" || userId === "") {
     return res.sendStatus(400);
   }
   try{ 
-    await saveReport(userId, sentenceId, reportText, language, userName)
+    await saveReport(userId, sentenceId, reportText, language)
   }catch(err){
     return res.sendStatus(500);
   }

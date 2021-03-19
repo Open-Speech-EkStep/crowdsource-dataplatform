@@ -347,8 +347,8 @@ const insertFeedback = (subject, feedback, language) => {
     return db.any(feedbackInsertion, [subject, feedback, language]);
 }
 
-const saveReport = async (userId, sentenceId, reportText, language, userName) => {
-    await db.any(saveReportQuery,[userId, sentenceId, reportText, language, userName])
+const saveReport = async (userId, sentenceId, reportText, language) => {
+    await db.any(saveReportQuery,[userId, sentenceId, reportText, language])
 }
 
 module.exports = {
