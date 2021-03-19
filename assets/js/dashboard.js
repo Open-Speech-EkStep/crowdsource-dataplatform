@@ -147,6 +147,7 @@ $(document).ready(function () {
     }
     $('#language').on('change', (e) => {
         const selectedLanguage = e.target.value;
+        $('#no-data-found').addClass('d-none');
         updateLanguage(selectedLanguage);
     });
 
