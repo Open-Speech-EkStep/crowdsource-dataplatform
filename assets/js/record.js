@@ -736,11 +736,11 @@ $(document).ready(() => {
 
         });
         $errorModal.on('hidden.bs.modal', function () {
-            location.href = '/#speaker-details';
+            location.href = './home.html#speaker-details';
         });
 
         if (!localSpeakerDataParsed) {
-            location.href = '/#speaker-details';
+            location.href = './home.html#speaker-details';
             return;
         }
 

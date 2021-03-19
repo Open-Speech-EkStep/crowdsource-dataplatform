@@ -1,6 +1,29 @@
 const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require("./constants");
 const fetch = require('./fetch')
-const { getCookie } = require("./locale")
+
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 
 function showElement(element) {
     element.removeClass('d-none');
@@ -122,4 +145,4 @@ const setFooterPosition = () => {
     }
 }
 
-module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime, getLocaleString, performAPIRequest,showElement,hideElement, setFooterPosition}
+module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime, getLocaleString, performAPIRequest,showElement,hideElement, setFooterPosition, getCookie, setCookie}

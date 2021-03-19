@@ -1,4 +1,4 @@
-const { updateLocaleLanguagesDropdown } = require('./utils');
+const { updateLocaleLanguagesDropdown, getCookie, setCookie } = require('./utils');
 const { ALL_LANGUAGES } = require("./constants");
 
 const registerEvents = function () {
@@ -15,31 +15,11 @@ const localisationChangeHandler = e => {
 const changeLocale = function (locale) {
     let splitValues = location.href.split('/');
     let currentPage = splitValues[splitValues.length - 1];
+    if (!currentPage) {
+        currentPage = "home.html";
+    }
     setCookie("i18n", locale, 1);
     location.href = `/${locale}/${currentPage}`;
-}
-
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toGMTString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
 }
 
 function checkCookie() {
@@ -70,8 +50,6 @@ $(document).ready(function () {
 
 module.exports = {
     checkCookie,
-    getCookie,
-    setCookie,
     changeLocale,
     showLanguagePopup,
     redirectToLocalisedPage
