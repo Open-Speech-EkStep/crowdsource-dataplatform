@@ -119,7 +119,7 @@ step("When user clicks on <arg0> button, <arg1> button should appear", async fun
     await taiko.waitFor(async ()=> (await button(arg0).exists()))
     await taiko.waitFor(1000)
     await evaluate(button(arg0), (elem) => elem.click())
-    await taiko.waitFor(2000)
+    await taiko.waitFor(3000)
     assert.ok(await button(arg1).exists())
 });
 
@@ -136,7 +136,9 @@ step("When user skips all the rest of the <count> sentences , User should see Th
 step("when user clicks on the Contribute More button, user should not see the Instructions page again", async function () {
     await click(link('Contribute More'))
     await taiko.waitFor(1000)
-    assert(! await text('Quick Tips').isVisible());
+    if( await text('Quick Tips').exists())
+    {const resp = await text('Quick Tips').isVisible();
+    assert.ok(! resp)}
 });
 
 
@@ -197,8 +199,9 @@ step("When user select <lang> Language from dropdown then <arg0> should not visi
     const selectLanguageDropDown = taiko.dropDown({id: 'language'})
     assert.ok(await selectLanguageDropDown.exists());
     await selectLanguageDropDown.select(lang);
-    await taiko.waitFor(500);
-    assert(! await text(arg0).isVisible());
+    if( await text(arg0).exists())
+        {const resp = await text(arg0).isVisible();
+        assert.ok(! resp)}
 });
 
 step("user should be able to see <arg0> , <arg1> , <arg2> , <arg3>", async function(arg0, arg1, arg2, arg3) {
@@ -218,7 +221,7 @@ step("User plays the audio , <arg0>,<arg1> should be enabled", async function(ar
 });
 
 step("<arg0> should be enabled , <arg1> <arg2> buttons should be disabled", async function(arg0, arg1, arg2) {
-    await taiko.waitFor(2000);
+    await taiko.waitFor(3000);
     assert.ok(! await taiko.button({id: arg0}).isDisabled());
     assert.ok(await taiko.button({id: arg1}).isDisabled());
     assert.ok(await taiko.button({id: arg2}).isDisabled());

@@ -137,7 +137,7 @@ workflows:
           name: approve_prod_deployment_eks
           type: approval
           requires:
-            - test_deployment_eks
+            - functional_tests
 
       - db_migrate_aws:
           name: migrate_prod_aws
