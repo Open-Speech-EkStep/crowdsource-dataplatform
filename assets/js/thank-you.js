@@ -149,18 +149,29 @@ const getLanguageStats = function () {
       const $highestLangTime = $("#highest_language_time");
       $highestLangTime.text(`${hours}hrs ${minutes}min ${seconds}sec`);
 
+      const $highestLanguageProgress = $("#highest_language_progress");
+      const hlh = Number(data[0].total_contributions) * 3600;
+      const hlp = (hlh / (100*3600)) * 100;
+      $highestLanguageProgress.css("width", `${hlp}%`);
+
       const contributionLanguage = localStorage.getItem("contributionLanguage");
       const rank = data.findIndex(
         (x) => x.language.toLowerCase() === contributionLanguage.toLowerCase()
       );
       const $contributedLangTime = $("#contribute_language_time");
+      const $contributeLanguageProgress = $("#contribute_language_progress");
       if (rank > -1) {
+        const tc = data[rank].total_contributions;
         const { hours: hr, minutes: min, seconds: sec } = getFormattedTime(
-          Number(data[rank].total_contributions) * 3600
+          Number(tc) * 3600
         );
         $contributedLangTime.text(`${hr}hrs ${min}min ${sec}sec`);
+        const rh = Number(tc) * 3600;
+        const rhp = (rh / (100*3600)) * 100;
+        $contributeLanguageProgress.css("width", `${rhp}%`);
       } else {
         $contributedLangTime.text("0 hrs");
+        $contributeLanguageProgress.css("width", `0%`);
       }
       const $languageId = $("#languageId");
       $languageId.text(data[0].language);
