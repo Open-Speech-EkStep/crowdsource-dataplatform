@@ -405,7 +405,7 @@ audio {
 }
 
 .test-mic-speakers-container {
-  padding: 1rem 2rem 1rem;
+  padding: 1rem 0 1rem;
   display: flex;
   justify-content: flex-end;
 }

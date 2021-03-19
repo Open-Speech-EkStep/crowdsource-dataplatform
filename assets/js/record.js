@@ -110,11 +110,36 @@ const resetMicButton = () => {
     $('#mic-svg').removeClass('d-none');
     $testMicBtn.attr('data-value', 'test-mic');
     cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
+    secondsDown = 5;
+    clearInterval(timeIntervalUp);
 }
 let audioData = [];
 let recordingLength = 0;
 let audioContext;
 let micAudio;
+let timeIntervalUp;
+let secondsDown = 5;
+
+const startRecordingTimer = () => {
+    $('#mic-svg').addClass('d-none');
+    $('#test-mic-text').text(localeStrings[`Recording for ${secondsDown} seconds`]);
+    $testMicBtn.attr('data-value', 'recording');
+    secondsDown--;
+    timeIntervalUp = setInterval(function () {
+        countTimer();
+    }, 1000);
+}
+
+const countTimer = () => {
+    const $testMicText = $('#test-mic-text');
+    $testMicText.text(localeStrings[`Recording for ${secondsDown} seconds`]);
+    secondsDown--;
+    if (secondsDown === 0) {
+        clearInterval(timeIntervalUp);
+        $testMicBtn.attr('data-value', 'stop-recording');
+        testMic('stop-recording');
+    }
+}
 const getMediaRecorder = () => {
     let stream = null,
         microphone = null,
@@ -130,6 +155,7 @@ const getMediaRecorder = () => {
         navigator.mediaDevices
             .getUserMedia(constraints)
             .then(function (stream) {
+                startRecordingTimer();
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 audioContext = new AudioContext();
                 sampleRate = audioContext.sampleRate;
@@ -161,7 +187,8 @@ const getMediaRecorder = () => {
                 };
             })
             .catch(function (err) {
-                console.log(e);
+                console.log(err);
+                resetMicButton();
             });
     }
     const stop = () => {
@@ -199,21 +226,17 @@ const getMediaRecorder = () => {
     };
 }
 const testMic = (btnDataAttr) => {
-    const $micSvg = $('#mic-svg');
     const $testMicText = $('#test-mic-text');
     const recorder = getMediaRecorder();
     if (btnDataAttr === 'test-mic') {
         audioData = [];
         recordingLength = 0;
-        $micSvg.addClass('d-none');
-        $testMicBtn.attr('data-value', 'recording');
-        $testMicText.text(localeStrings['Recording']);
         recorder.start();
-    } else if (btnDataAttr === 'recording') {
+    } else if (btnDataAttr === 'stop-recording') {
         const audio = recorder.stop();
         audio.play();
         $testMicBtn.attr('data-value', 'playing');
-        $testMicText.text(localeStrings['Playing']);
+        $testMicText.text(localeStrings['Playingback Audio']);
     }
 }
 
