@@ -1,6 +1,12 @@
 .bg-thank-you {
   background-size: cover;
 }
+
+.thank-you-title {
+  width: 85%;
+  margin: 0 auto;
+}
+
 #graphcontainer {
   font-size: 0.2rem;
   position: relative;
