@@ -33,7 +33,7 @@ const MOTHER_TONGUE = [
 ];
 const LANGUAGES = [{ value: "Assamese", id: "as", text: "অসমীয়া" },
 { value: "Bengali", id: "bn", text: "বাংলা" },
-{value: "English", id: "en", text: "English"},
+{ value: "English", id: "en", text: "English" },
 { value: "Gujarati", id: "gu", text: "ગુજરાતી" },
 { value: "Hindi", id: "hi", text: "हिंदी" },
 { value: "Kannada", id: "kn", text: "ಕನ್ನಡ" },
@@ -54,6 +54,8 @@ const AGE_GROUP = [
 const GENDER = ['', 'male', 'female', 'others', 'Transgender - He', 'Transgender - She', 'Rather Not Say'];
 
 const WADASNR_BIN_PATH = '/opt/binaries/WadaSNR/Exe'
+const MIN_SNR_LEVEL = 25
+
 const SUBJECT_MAX_LENGTH = 256
 
 const FEEDBACK_MAX_LENGTH = 1000
@@ -73,6 +75,7 @@ module.exports = {
   AGE_GROUP,
   GENDER,
   WADASNR_BIN_PATH,
+  MIN_SNR_LEVEL,
   SUBJECT_MAX_LENGTH,
   FEEDBACK_MAX_LENGTH
 };
