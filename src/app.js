@@ -239,11 +239,16 @@ router.post('/audio/snr', async (req, res) => {
   const onSuccess = (snr) => {
     const ambient_noise = snr < MIN_SNR_LEVEL ? true : false
     removeTempFile(file);
+    console.log('success:' + res.headersSent);
     res.status(200).send({ 'snr': snr, 'ambient_noise': ambient_noise });
+    console.log('success:' + res.headersSent);
+
   }
   const onError = (snr) => {
     // removeTempFile(file);
     // res.sendStatus(502);
+    console.log('error' + res.headersSent);
+
   }
   calculateSNR(command, onSuccess, onError)
 });
