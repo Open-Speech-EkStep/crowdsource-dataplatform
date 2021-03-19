@@ -178,19 +178,19 @@ router.post('/validation/action', (req, res) => updateTablesAfterValidation(req,
 
 router.post('/audioClip', (req, res) => getAudioClip(req, res, objectStorage))
 
-router.post('/report', async(req, res) => {
+router.post('/report', async (req, res) => {
   const userId = req.cookies.userId || "";
-  const { sentenceId = "", reportText = "", language = "", userName = ""} = req.body;
+  const { sentenceId = "", reportText = "", language = "", userName = "" } = req.body;
   if (sentenceId === "" || reportText === "" || language === "" || userId === "") {
-    return res.send({statusCode: 400, message: "Input values missing"});
+    return res.send({ statusCode: 400, message: "Input values missing" });
   }
-  try{ 
+  try {
     await saveReport(userId, sentenceId, reportText, language, userName)
-  }catch(err){
+  } catch (err) {
     console.log(err);
-    return res.send({statusCode: 500, message: err.message});
+    return res.send({ statusCode: 500, message: err.message });
   }
-  return res.send({statusCode: 200, message: "Reported successfully."});
+  return res.send({ statusCode: 200, message: "Reported successfully." });
 })
 
 router.post('/upload', (req, res) => {
@@ -242,8 +242,8 @@ router.post('/audio/snr', async (req, res) => {
     res.status(200).send({ 'snr': snr, 'ambient_noise': ambient_noise });
   }
   const onError = (snr) => {
-    removeTempFile(file);
-    res.sendStatus(502);
+    // removeTempFile(file);
+    // res.sendStatus(502);
   }
   calculateSNR(command, onSuccess, onError)
 });
