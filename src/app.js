@@ -21,7 +21,7 @@ const {
   getAllInfo,
   updateTablesAfterValidation,
   getAudioClip,
-  insertFeedback
+  insertFeedback, saveReport
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
@@ -178,6 +178,20 @@ router.post('/validation/action', (req, res) => updateTablesAfterValidation(req,
 
 router.post('/audioClip', (req, res) => getAudioClip(req, res, objectStorage))
 
+router.post('/report', async(req, res) => {
+  const userId = req.cookies.userId;
+  const { sentenceId = "", reportText = "", language = "", userName = "" } = req.body;
+  if (sentenceId === "" || reportText === "" || language === "" || userName === "") {
+    return res.sendStatus(400);
+  }
+  try{ 
+    await saveReport(userId, sentenceId, reportText, language, userName)
+  }catch(err){
+    return res.sendStatus(500);
+  }
+  return res.sendStatus(200);
+})
+
 router.post('/upload', (req, res) => {
   const file = req.file;
   const sentenceId = req.body.sentenceId;
@@ -268,7 +282,7 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
   const language = req.body.language.trim();
   insertFeedback(subject, feedback, language).then(() => {
     console.log("Feedback is inserted into the DB.")
-    res.send({ statusCode:200, message: "Feedback submitted successfully." });
+    res.send({ statusCode: 200, message: "Feedback submitted successfully." });
   }).catch(e => {
     console.log(`Error while insertion ${e}`)
     res.send({ statusCode: 502, message: "Failed to submit feedback." });
