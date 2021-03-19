@@ -82,7 +82,13 @@ const feedbackInsertion = 'Insert into feedbacks (subject,feedback,language) val
 
 const getAudioPath = 'select audio_path from contributions where contribution_id = $1;'
 
-const saveReportQuery = "Insert into reports (reported_by,sentence_id,report_text,language) values ($1,$2,$3,$4);";
+const saveReportQuery = 'WITH contributor AS ( \
+  select contributor_id from "contributors" \
+  where contributor_identifier = $1 and user_name = $2 \
+) \
+INSERT INTO reports (reported_by,sentence_id,report_text,language) \
+SELECT contributor_id,$3,$4,$5 \
+FROM contributor;';
 
 module.exports = {
   unassignIncompleteSentences,
