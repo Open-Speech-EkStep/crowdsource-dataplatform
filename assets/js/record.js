@@ -107,17 +107,17 @@ function generateWavBlob(finalBuffer, defaultSampleRate) {
     return blob;
 }
 const resetMicButton = () => {
-    console.log('reset mic button');
     const $testMicText = $('#test-mic-text');
     if (audioContext) { audioContext.close(); audioContext = undefined };
     $testMicText.text(localeStrings['Test Mic']);
-    console.log($('#test-mic-text'));
     $('#mic-svg').removeClass('d-none');
+    $('#mic-msg').addClass('invisible').removeClass('d-none');
+    $('#no-noise').addClass('d-none');
+    $('#noise').addClass('d-none');
     $testMicBtn.attr('data-value', 'test-mic');
     cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
     secondsDown = 5;
     clearInterval(timeIntervalUp);
-    console.log($('#test-mic-text'))
 }
 let audioData = [];
 let recordingLength = 0;
@@ -127,6 +127,7 @@ let timeIntervalUp;
 let secondsDown = 5;
 
 const startRecordingTimer = () => {
+    $('#mic-msg').removeClass('invisible');
     $('#mic-svg').addClass('d-none');
     $('#test-mic-text').text(localeStrings[`Recording for ${secondsDown} seconds`]);
     $testMicBtn.attr('data-value', 'recording');
@@ -150,12 +151,11 @@ const countTimer = () => {
 const showAmbientNoise = (noiseData) => {
     const $noNoise = $('#no-noise');
     const $noise = $('#noise');
+    $('#mic-msg').addClass('d-none');
     if (noiseData.ambient_noise) {
-        $noNoise.addClass('d-none').removeClass('invisible');
         $noise.removeClass('d-none');
     } else {
-        $noNoise.removeClass('invisible d-none');
-        $noise.addClass('d-none');
+        $noNoise.removeClass('d-none');
     }
 }
 
@@ -236,7 +236,8 @@ const getMediaRecorder = () => {
             // check to make ambient noise feature available on dev and localhost
             // remove this check once feature is confirmed for production
             if (window.location.origin.indexOf('localhost') !== -1 ||
-                window.location.origin.indexOf('dev') !== -1) {
+                window.location.origin.indexOf('dev') !== -1 ||
+                window.location.origin.indexOf('test') !== -1) {
                     ambienceNoiseCheck(audioBlob);
             }
             const audioUrl = URL.createObjectURL(audioBlob);
@@ -330,7 +331,8 @@ const initialize = () => {
     $testMicCloseBtn.on('click', (e) => {
         $testMicDiv.removeClass('d-none');
         $testMicSpeakerDetails.addClass('d-none');
-        $noNoise.addClass('invisible').removeClass('d-none');
+        $('#mic-msg').addClass('invisible').removeClass('d-none');
+        $noNoise.addClass('d-none');
         $noise.addClass('d-none');
         audioData = [];
         recordingLength = 0;
@@ -347,8 +349,8 @@ const initialize = () => {
     });
     $testMicBtn.on('click', (e) => {
         const btnDataAttr = $('#test-mic-button').attr('data-value');
-        $noNoise.addClass('invisible').removeClass('d-none');
-        $noise.addClass('d-none');
+        // $noNoise.addClass('invisible').removeClass('d-none');
+        // $noise.addClass('d-none');
         testMic(btnDataAttr);
     });
     $testSpeakerBtn.on('click', (e) => {
