@@ -81,6 +81,7 @@ const multerStorage = multer.diskStorage({
 const upload = multer({ storage: multerStorage });
 const corsOptions = {
   origin: /vakyansh\.in$/,
+  credentials: true
 }
 app.use(cors(corsOptions));
 app.use(express.json());
