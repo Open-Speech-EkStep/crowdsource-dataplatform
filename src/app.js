@@ -109,14 +109,19 @@ app.use(function (req, res, next) {
 app.use(express.static('public'));
 
 app.get('/changeLocale/:locale', function (req, res) {
-  res.cookie('i18n', req.params.locale);
+  if(['hi', 'en'].indexOf(req.params.locale) > -1) {
+    res.cookie('i18n', req.params.locale);
+  } else {
+    res.cookie('contriubtionLanguage', req.params.locale);
+    res.cookie('i18n', 'en');
+  }
   res.redirect(req.headers.referer);
 });
 
 app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
-  const localLanguage = req.cookies.i18n;
+  const localLanguage = req.cookies.contriubtionLanguage;
   const isCookiePresent = localLanguage ? true : false;
   res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent, defaultLang: localLanguage });
 });
