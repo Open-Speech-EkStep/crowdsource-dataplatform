@@ -90,7 +90,7 @@ const drawMap = function (response) {
   if(index > -1 ){
     chart.series.removeIndex(index);
   }
-  chart.geodataSource.url = "https://cdn.amcharts.com/lib/4/geodata/json/india2020Low.json";
+  chart.geodataSource.url = "https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/india2020Low.json";
   chart.projection = new am4maps.projections.Miller();
   polygonSeries = new am4maps.MapPolygonSeries();
   chart.seriesContainer.draggable = false;
