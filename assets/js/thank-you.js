@@ -1,4 +1,4 @@
-const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require("./constants");
+const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS, LOCALE_STRINGS} = require("./constants");
 const {
   setPageContentHeight,
   toggleFooterPosition,
@@ -124,15 +124,24 @@ const getFormattedTime = (totalSeconds) => {
 };
 
 const updateShareContent = function (language, rank) {
-  const text = `I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great lingusitic applications. Our ${language} language ranks ${rank} on BoloIndia. Do your bit and empower the language?`;
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  let localeText = '';
+  if(rank === 0) {
+    localeText = localeStrings['social sharing text without rank'];
+  } else {
+    localeText = localeStrings['social sharing text with rank']
+    localeText = localeText.replace("%language", language);
+    localeText = localeText.replace("%rank", rank);
+  }
+  //const text = `I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Our ${language} language ranks ${rank} on BoloIndia. Do your bit and empower the language?`;
   const $whatsappShare = $("#whatsapp_share");
-  $whatsappShare.attr("href", `https://api.whatsapp.com/send?text=${text}`);
+  $whatsappShare.attr("href", `https://api.whatsapp.com/send?text=${localeText}`);
   const $twitterShare = $("#twitter_share");
-  $twitterShare.attr("href", `https://twitter.com/intent/tweet?text=${text}`);
+  $twitterShare.attr("href", `https://twitter.com/intent/tweet?text=${localeText}`);
   const $linkedinShare = $("#linkedin_share");
   $linkedinShare.attr(
     "href",
-    `https://www.linkedin.com/shareArticle?mini=true&url=https://boloindia.nplt.in&title=I've contributed towards building open language repository for India on https://boloindia.nplt.in&summary=${text}`
+    `https://www.linkedin.com/shareArticle?mini=true&url=https://boloindia.nplt.in&title=I've contributed towards building open language repository for India on https://boloindia.nplt.in&summary=${localeText}`
   );
 };
 
@@ -186,6 +195,7 @@ const getLanguageStats = function () {
           updateShareContent(contributionLanguage, data.length + 1);
         }
       } else {
+        updateShareContent('', 0);
         $("#did_you_know_section").hide();
       }
     });

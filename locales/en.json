@@ -244,5 +244,7 @@
 	"SUBMIT": "SUBMIT",
 	"Congratulations!!! You have completed this batch of sentences": "Congratulations!!! You have completed this batch of sentences",
 	"Most data recorded for <span id=\"languageId\"></span>": "Most data recorded for <span id=\"languageId\"></span>",
-	"Data recorded for <span id=\"languageChoiceId\"></span>": "Data recorded for <span id=\"languageChoiceId\"></span>"
+	"Data recorded for <span id=\"languageChoiceId\"></span>": "Data recorded for <span id=\"languageChoiceId\"></span>",
+	"social sharing text with rank":"I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Our %language language ranks $rank on BoloIndia. Do your bit and empower the language?`",
+	"social sharing text without rank": "I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?`"
 }
