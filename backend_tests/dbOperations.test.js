@@ -15,6 +15,7 @@ jest.mock('pg-promise', () => jest.fn(() => {
 
 const encryptMock = jest.mock('../src/encryptAndDecrypt');
 encryptMock.encrypt = jest.fn();
+process.env.LAUNCH_IDS = '1,2'
 
 const dbOperations = require('../src/dbOperations');
 const { topLanguagesByHoursContributed, topLanguagesBySpeakerContributions, listLanguages } = require('../src/dashboardDbQueries');
@@ -48,7 +49,7 @@ describe("Running tests for dbOperations", () => {
 
             dbOperations.getSentencesBasedOnAge(ageGroup, "abcdefghi", "test_username", "Hindi", "Gujrati", "Male")
 
-            expect(spyDB).toHaveBeenCalledWith(expect.anything(), ["abcdefghi", "test_username", "medium", "Hindi", "Gujrati", "Male", ageGroup]);
+            expect(spyDB).toHaveBeenCalledWith(expect.anything(), ["abcdefghi", "test_username", "medium", "Hindi", "Gujrati", "Male", ageGroup, expect.anything()]);
         });
 
         test('should call query with label medium for adults', () => {
@@ -57,7 +58,7 @@ describe("Running tests for dbOperations", () => {
 
             dbOperations.getSentencesBasedOnAge(ageGroup, "abcdefghi", "test_username", "Hindi", "Gujrati", "Male")
 
-            expect(spyDB).toHaveBeenCalledWith(expect.anything(), ["abcdefghi", "test_username", "medium", "Hindi", "Gujrati", "Male", ageGroup]);
+            expect(spyDB).toHaveBeenCalledWith(expect.anything(), ["abcdefghi", "test_username", "medium", "Hindi", "Gujrati", "Male", ageGroup, expect.anything()]);
         })
     });
 

@@ -19,14 +19,14 @@
 ## Check Dashboard Page
 * Select Preferred language as "English"
 * When user clicks on View all Details buttton , user shall land on Dashboard page
-* user should be able to see "Progress Chart" , "Gender Contribution" , "State Wise distribution" , "Age Group Distribution"
+* user should be able to see "Progress Chart" , "Gender Distribution" , "State Wise distribution" , "Age Group Distribution"
 * When user select "हिंदी" Language from dropdown then "languages contributed" should not visible
 
 ## Validate Feedback Page
 * When user clicks on the Feedback link in the footer , user should land on the feedback page
 * Submit button should be disbaled ,When user enters the subject and  Description submit button should be enabled
 * when user clicks on the submit button , user should land on the Thank you page 
-* When user clicks on the go to home page button , usre should see the home page
+* When user clicks on the go to home page button , user should see the home page
 
 ## Validate the Speaker Details pop-up in Contribute section
 * Select Preferred language as "English"
@@ -60,5 +60,5 @@
 * "skip_button" should be enabled , "dislike_button" "like_button" buttons should be disabled
 * User plays the audio , "dislike_button","like_button" should be enabled
 * User clicks on "dislike_button" , he should see next sentence and "dislike_button" "like_button" buttons should be disabled
-* User skips the next "4" sentneces user should land on Thank you page in Hindi
+* User skips the next "4" sentences user should land on Thank you page in Hindi
 * User should see the "अधिक प्रमाणित करें" button

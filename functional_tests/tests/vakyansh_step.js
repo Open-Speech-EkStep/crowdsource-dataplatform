@@ -46,7 +46,7 @@ step("Opening Vakyansh", async () => {
 });
 
 step("Validate about us content", async function () {
-    assert.ok(await text('Vakyansh: A crowdsourcing initiative for Indian languages').exists());
+    assert.ok(await text('Bolo India: A crowdsourcing initiative for Indian languages').exists());
 });
 
 step("Start Recording button is disabled", async function () {
@@ -145,9 +145,8 @@ step("when user clicks on the Contribute More button, user should not see the In
 
 step("User should see the content in <language>", async function (language) {
     if (language == "Hindi") {
-        assert.ok(await text("वाक्यांश : भारतीय भाषाओं के लिए एक जन-संकुल स्रोत पहल").exists());
+        assert.ok(await text("बोलो इंडिया: भारतीय भाषाओं के लिए एक क्राउडसोर्सिंग पहल").exists());
     }
-
 });
 
 step("Select Preferred language as <language>", async function (language) {
@@ -230,7 +229,7 @@ step("User clicks on <arg0> , he should see next sentence and <arg1> <arg2> butt
     assert.ok(await taiko.button({ id: arg2 }).isDisabled());
 });
 
-step("User skips the next <count> sentneces user should land on Thank you page in Hindi", async function (count) {
+step("User skips the next <count> sentences user should land on Thank you page in Hindi", async function (count) {
     const skipbutton = taiko.button({ id: 'skip_button' })
     for (let i = 0; i < count; i++) {
         await click(skipbutton)
@@ -305,8 +304,8 @@ step("when user clicks on the submit button , user should land on the Thank you 
     assert.ok(await text("Thank You for your valueable feedback").exists());
 });
 
-step("When user clicks on the go to home page button , usre should see the home page", async function () {
+step("When user clicks on the go to home page button , user should see the home page", async function () {
     assert.ok(await taiko.link({ id: "back_to_home_btn" }).exists());
     await click(taiko.link({ id: "back_to_home_btn" }))
-    assert.ok(await text("Vakyansh: A crowdsourcing initiative for Indian languages").exists());
+    assert.ok(await text("Bolo India: A crowdsourcing initiative for Indian languages").exists());
 });

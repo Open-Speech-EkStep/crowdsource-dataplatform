@@ -423,7 +423,7 @@ audio {
 }
 .test-mic-speakers-details {
   background-color: #F8F9FA;
-  padding: 1rem;
+  padding: 1rem 1rem 0.5rem;
 }
 .test-mic-speakers-details p {
   color: #959595;
@@ -457,6 +457,14 @@ audio {
   border: 1px solid #959595;
   border-radius: 4px;
   height: 15px;
+}
+.ambient-noise {
+  font-size: 14px;
+  color: #959595;
+  padding-top: 8px;
+}
+.ambient-noise svg {
+  vertical-align: top;
 }
 
 #report_btn {
@@ -667,4 +675,12 @@ audio {
   .test-mic-heading {
     display: none;
   }
+  .noise-container {
+    text-align: center;
+  }
+}
+
+.px-16{
+  padding-right: 16px !important;
+  padding-left: 16px !important;
 }
