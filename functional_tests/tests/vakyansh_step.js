@@ -305,7 +305,7 @@ step("Submit button should be disbaled ,When user enters the subject and  Descri
 step("when user clicks on the submit button , user should land on the Thank you page", async function () {
     await click(taiko.button({ id: "submit_btn" }))
     await taiko.waitFor(500)
-    assert.ok(await text("Thank You for your valueable feedback").exists());
+    assert.ok(await text("Thank You for your valuable feedback").exists());
 });
 
 step("When user clicks on the go to home page button , user should see the home page", async function () {
