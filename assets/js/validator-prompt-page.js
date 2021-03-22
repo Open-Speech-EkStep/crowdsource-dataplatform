@@ -232,6 +232,8 @@ function recordValidation(action) {
     const contribution_id = validationSentences[currentIndex].contribution_id
     fetch('/validation/action', {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         body: JSON.stringify({
             sentenceId: sentenceId,
             action: action,

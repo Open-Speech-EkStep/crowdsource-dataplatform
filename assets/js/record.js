@@ -617,6 +617,8 @@ const initialize = () => {
         fd.append('audioDuration', crowdSource.audioDuration);
         fetch('/upload', {
             method: 'POST',
+            credentials: 'include',
+            mode: 'cors',
             body: fd,
         })
             .then((res) => res.json())
@@ -740,6 +742,8 @@ const handleSubmitFeedback = function () {
     };
     fetch('/report', {
         method: "POST",
+        credentials: 'include',
+        mode: 'cors',
         headers: {
             "Content-Type": "application/json",
         },
@@ -859,6 +863,8 @@ $(document).ready(() => {
             localStorage.removeItem(skipCountKey);
             fetch('/sentences', {
                 method: 'POST',
+                credentials: 'include',
+                mode: 'cors',
                 body: JSON.stringify({
                     userName: localSpeakerDataParsed.userName,
                     age: localSpeakerDataParsed.age,
