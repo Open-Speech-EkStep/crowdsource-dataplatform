@@ -157,7 +157,7 @@
                 </div>
                 <div class="col-12 col-md-5 col-lg-5 px-0 oflow-x-hid"></div>
             </div>
-            <div class="row">
+            <div class="row mb-5">
                 <div class="col-12 col-md-6 col-lg-6 ml-lg-auto pt-5 pt-lg-0 text-dark">
                     <div class="justify-content-center align-items-center d-none" id="chartSpinner">
                         <div><span class="spinner"></span></div>
@@ -179,30 +179,34 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-5 mt-xs-5 pr-lg-5">
-                    <h4 class="h4 mb-4">
-                        <%= __('Top Languages') %>
-                    </h4>
-                    <div class="d-flex mb-3">
-                        <div class="form-check mr-5"><label class="form-check-label" for="flexRadioDefault1"><input class="form-check-input" type="radio" name="topLanguageChart" id="hours_chart" value="hours" checked="checked">
-                                <%= __('By hours of data contributed') %>
-                            </label></div>
-                        <div class="form-check"><label class="form-check-label" for="flexRadioDefault2"><input class="form-check-input" type="radio" name="topLanguageChart" id="speakers_chart" value="speakers">
-                                <%= __('By number of speakers') %>
-                            </label></div>
-                    </div>
-                    <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
-                        <div><span class="spinner"></span></div>
-                    </div>
-                    <div id="speakers_hours_chart_container" class="w-100">
-                        <div id="speakers_hours_chart" class="w-90"></div>
+                    <div id="bar_charts_container">
+                        <h4 class="h4 mb-4">
+                            <%= __('Top Languages') %>
+                        </h4>
+                        <div class="d-flex mb-3">
+                            <div class="form-check mr-5"><label class="form-check-label" for="flexRadioDefault1"><input class="form-check-input" type="radio" name="topLanguageChart" id="hours_chart" value="hours" checked="checked">
+                                    <%= __('By hours of data contributed') %>
+                                </label></div>
+                            <div class="form-check"><label class="form-check-label" for="flexRadioDefault2"><input class="form-check-input" type="radio" name="topLanguageChart" id="speakers_chart" value="speakers">
+                                    <%= __('By number of speakers') %>
+                                </label></div>
+                        </div>
+                        <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
+                            <div><span class="spinner"></span></div>
+                        </div>
+                        <div id="speakers_hours_chart_container" class="w-100">
+                            <div id="speakers_hours_chart" class="w-90"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-12 col-lg-12 px-0 oflow-x-hid"></div>
             </div>
-            <div class="row mt-5 mb-5">
-                <div class="col-12 d-flex justify-content-center"><a href="/dashboard" id="viewAllDetailsBtn" class="btn btn-outline-primary text-primary">
+            <div class="row mt-5" id="view_all_btn">
+                <div class="col-12 d-flex justify-content-center">
+                    <a href="/dashboard" id="viewAllDetailsBtn" class="btn btn-outline-primary text-primary">
                         <%= __('VIEW ALL DETAILS') %>
-                    </a></div>
+                    </a>
+                </div>
             </div>
         </div>
 

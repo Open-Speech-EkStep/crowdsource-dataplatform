@@ -140,48 +140,53 @@ const getLanguageStats = function () {
   fetch("/stats/summary?aggregateDataByLanguage=true")
     .then((res) => res.json())
     .then((response) => {
-      const data = response.aggregate_data_by_language.sort((a, b) =>
-        Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
-      );
-      const { hours, minutes, seconds } = getFormattedTime(
-        Number(data[0].total_contributions) * 3600
-      );
-      const $highestLangTime = $("#highest_language_time");
-      $highestLangTime.text(`${hours}hrs ${minutes}min ${seconds}sec`);
-
-      const $highestLanguageProgress = $("#highest_language_progress");
-      const hlh = Number(data[0].total_contributions) * 3600;
-      const hlp = (hlh / (100*3600)) * 100;
-      $highestLanguageProgress.css("width", `${hlp}%`);
-
-      const contributionLanguage = localStorage.getItem("contributionLanguage");
-      const rank = data.findIndex(
-        (x) => x.language.toLowerCase() === contributionLanguage.toLowerCase()
-      );
-      const $contributedLangTime = $("#contribute_language_time");
-      const $contributeLanguageProgress = $("#contribute_language_progress");
-      if (rank > -1) {
-        const tc = data[rank].total_contributions;
-        const { hours: hr, minutes: min, seconds: sec } = getFormattedTime(
-          Number(tc) * 3600
+      if(response.aggregate_data_by_language.length > 0) {
+        $("#did_you_know_section").show();
+        const data = response.aggregate_data_by_language.sort((a, b) =>
+          Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
-        $contributedLangTime.text(`${hr}hrs ${min}min ${sec}sec`);
-        const rh = Number(tc) * 3600;
-        const rhp = (rh / (100*3600)) * 100;
-        $contributeLanguageProgress.css("width", `${rhp}%`);
+        const { hours, minutes, seconds } = getFormattedTime(
+          Number(data[0].total_contributions) * 3600
+          );
+        const $highestLangTime = $("#highest_language_time");
+        $highestLangTime.text(`${hours}hrs ${minutes}min ${seconds}sec`);
+
+        const $highestLanguageProgress = $("#highest_language_progress");
+        const hlh = Number(data[0].total_contributions) * 3600;
+        const hlp = (hlh / (100*3600)) * 100;
+        $highestLanguageProgress.css("width", `${hlp}%`);
+
+        const contributionLanguage = localStorage.getItem("contributionLanguage");
+        const rank = data.findIndex(
+          (x) => x.language.toLowerCase() === contributionLanguage.toLowerCase()
+        );
+        const $contributedLangTime = $("#contribute_language_time");
+        const $contributeLanguageProgress = $("#contribute_language_progress");
+        if (rank > -1) {
+          const tc = data[rank].total_contributions;
+          const { hours: hr, minutes: min, seconds: sec } = getFormattedTime(
+            Number(tc) * 3600
+          );
+          $contributedLangTime.text(`${hr}hrs ${min}min ${sec}sec`);
+          const rh = Number(tc) * 3600;
+          const rhp = (rh / (100*3600)) * 100;
+          $contributeLanguageProgress.css("width", `${rhp}%`);
+        } else {
+          $contributedLangTime.text("0 hrs");
+          $contributedLangTime.css("right", 0);
+          $contributeLanguageProgress.css("width", `0%`);
+        }
+        const $languageId = $("#languageId");
+        $languageId.text(data[0].language);
+        const $languageChoiceId = $("#languageChoiceId");
+        $languageChoiceId.text(contributionLanguage);
+        if (rank > -1) {
+          updateShareContent(contributionLanguage, rank + 1);
+        } else {
+          updateShareContent(contributionLanguage, data.length + 1);
+        }
       } else {
-        $contributedLangTime.text("0 hrs");
-        $contributedLangTime.css("right", 0);
-        $contributeLanguageProgress.css("width", `0%`);
-      }
-      const $languageId = $("#languageId");
-      $languageId.text(data[0].language);
-      const $languageChoiceId = $("#languageChoiceId");
-      $languageChoiceId.text(contributionLanguage);
-      if (rank > -1) {
-        updateShareContent(contributionLanguage, rank + 1);
-      } else {
-        updateShareContent(contributionLanguage, data.length + 1);
+        $("#did_you_know_section").hide();
       }
     });
 };
