@@ -71,17 +71,20 @@
                             </div>
                         </div>
                         <div class="row noise-container">
-                            <div class="offset-lg-5 offset-md-5 col-lg-7 col-12 col-md-7 ambient-noise invisible" id="no-noise">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 20C16.4183 20 20 16.4183 20 12C20 10.6137 19.6474 9.3098 19.027 8.17302L11.2006 15.9994L6.72059 11.5194L7.84059 10.3994L11.2006 13.7594L18.1166 6.84342C16.6491 5.1045 14.4535 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z" fill="#83E661"/>
-                                </svg>    
-                                <%= __('Low/No Ambient Noise') %>                              
+                            <div class="offset-lg-5 offset-md-5 col-lg-7 col-12 col-md-7 ambient-noise invisible" id="mic-msg"> 
+                                <%= __('Please speak clearly') %>                              
+                            </div>
+                            <div class="offset-lg-5 offset-md-5 col-lg-7 col-12 col-md-7 ambient-noise d-none" id="no-noise">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C12.4183 16 16 12.4183 16 8C16 6.61372 15.6474 5.3098 15.027 4.17302L7.20059 11.9994L2.72059 7.51941L3.84059 6.39941L7.20059 9.75941L14.1166 2.84342C12.6491 1.1045 10.4535 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z" fill="#83E661"/>
+                                </svg>
+                                <%= __('Low/No Background Noise') %>                              
                             </div>
                             <div class="offset-lg-5 offset-md-5 col-lg-7 col-12 col-md-7 d-none ambient-noise" id="noise">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.2387 5.4273L4.13195 17.0734C3.76928 17.6677 4.19704 18.4298 4.89327 18.4298H19.1067C19.803 18.4298 20.2307 17.6677 19.868 17.0734L12.7613 5.4273C12.4137 4.85757 11.5863 4.85757 11.2387 5.4273ZM11.3311 8.86204H13.1148V14.2133H11.3311V8.86204ZM12.223 16.8889C12.7155 16.8889 13.1148 16.4896 13.1148 15.997C13.1148 15.5045 12.7155 15.1052 12.223 15.1052C11.7304 15.1052 11.3311 15.5045 11.3311 15.997C11.3311 16.4896 11.7304 16.8889 12.223 16.8889Z" fill="#FCC232"/>
-                                </svg>                                  
-                                <%= __('Ambient Noise Detected') %>                              
+                                <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.23868 0.427299L0.131952 12.0734C-0.230716 12.6677 0.197039 13.4298 0.893274 13.4298H15.1067C15.803 13.4298 16.2307 12.6677 15.868 12.0734L8.76132 0.427298C8.41366 -0.142434 7.58634 -0.142432 7.23868 0.427299ZM7.33109 3.86204H9.11485V9.21329H7.33109V3.86204ZM8.22297 11.8889C8.71554 11.8889 9.11485 11.4896 9.11485 10.997C9.11485 10.5045 8.71554 10.1052 8.22297 10.1052C7.7304 10.1052 7.33109 10.5045 7.33109 10.997C7.33109 11.4896 7.7304 11.8889 8.22297 11.8889Z" fill="#FCC232"/>
+                                </svg>
+                                <%= __('Background Noise Detected') %>                              
                             </div>
                         </div>
                     </div>
