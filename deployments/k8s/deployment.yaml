@@ -68,7 +68,17 @@ spec:
           valueFrom:
             secretKeyRef:
               name: vakyansh-secret
-              key: PORT         
+              key: PORT
+        - name: LAUNCH_USER
+          valueFrom:
+            secretKeyRef:
+              name: vakyansh-secret
+              key: LAUNCH_USER
+        - name: LAUNCH_IDS
+          valueFrom:
+            secretKeyRef:
+              name: vakyansh-secret
+              key: LAUNCH_IDS
         ports:
         - containerPort: 8080
 
