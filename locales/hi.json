@@ -181,7 +181,7 @@
 	"Misinformation": "गलत जानकारी",
 	"Hearsay / Rumors, deliberate falsified facts etc.": "पाखंड / अफवाहें, जानबूझकर बताए गए झूठे तथ्य आदि",
 	"Thank You": "धन्यवाद",
-	"Your feedback helps us keep the portal relevant to you, we appreciate you taking time to leave feedback for us.": "Your feedback helps us keep the portal relevant to you, we appreciate you taking time to leave feedback for us.",
+	"Your feedback helps us keep the portal relevant to you, we appreciate you taking time to leave feedback for us.": "आपकी प्रतिक्रिया हमें \"बोलो इंडिया\" को प्रासंगिक बनाए रखने में मदद करती है, प्रतिक्रिया छोड़ने के लिए हम आपकी सराहना करते हैं।",
 	"Speak": "बोलें",
 	"Validate What They Say": "जो लिखा है क्या वही कहा जा रहा है ?",
 	"Help us by validating the recordings that others have contributed": "दूसरे लोगों ने जो आवाज़ के नमूनों का योगदान किया है उनकी पुष्टि करने में हमारी मदद करें",
@@ -209,5 +209,13 @@
 	"Please specify the reason (Optional)": "कृपया कारण बताएं (वैकल्पिक)",
 	"SUBMIT": "सबमिट करें",
 	"Most data recorded for <span id=\"languageId\"></span>": "<span id=\"languageId\"></span> में सबसे ज़्यादा योगदान",
-	"Data recorded for <span id=\"languageChoiceId\"></span>": "<span id=\"languageChoiceId\"></span> के लिए डेटा रिकॉर्ड किया गया"
+	"Data recorded for <span id=\"languageChoiceId\"></span>": "<span id=\"languageChoiceId\"></span> के लिए डेटा रिकॉर्ड किया गया",
+	"Congratulations!!! You have completed this batch of sentences": "बढ़ाई हो! आपने अपनी आवाज़ में एक बैच का योगदान किया है!",
+	"Please type here...": "कृपया यहाँ टाइप करें...",
+	"Failed to submit the feedback. Please try again.": "प्रतिक्रिया सबमिट करने में विफल। कृपया पुन: प्रयास करें।",
+	"Thank You for your valueable feedback": "आपके बहुमूल्य प्रतिक्रिया के लिए शुक्रिया",
+	"Your feedback helps us keep the initiative relevant, we appreciate you taking time to leave the feedback.": "आपकी प्रतिक्रिया हमें \"बोलो इंडिया\" को प्रासंगिक बनाए रखने में मदद करती है, प्रतिक्रिया छोड़ने के लिए हम आपकी सराहना करते हैं।",
+	"Back to Home": "वापिस होम पेज पर",
+	"Subject": "Subject",
+	"Description": "Description"
 }
