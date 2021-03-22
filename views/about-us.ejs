@@ -66,10 +66,9 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid bg-light-blue mt-n5 supreme-container">
-            <div class="row pb-6 justify-content-center mt-5">
-                <div class="col-10 col-lg-4 text-center p-5 align-self-center"><img src="img/about-us-1.svg" alt="Speaker Diversity" class="img-fluid"></div>
-                <div class="col-10 col-lg-6 text-left pb-5">
+        <div class="container-fluid bg-blue mt-n5 supreme-container">
+            <div class="row pt-5 justify-content-center mt-5">
+                <div class="col-10 col-lg-6 text-left text-white pb-5">
                     <p class="h1 font-wt-900 lh-5">
                         <%= __('Crowd Sourcing & your contribution') %>
                     </p>
@@ -79,7 +78,7 @@
                                 <%= __('We are inviting you to join us and voluntarily contribute your voice to this initiative. Recording your voice at one stretch can be overwhelming hence you can do this by visiting the website multiple times and commence from where you left us off') %> <br><br>
                                     <%= __('Every minute of your contribution will make a huge difference and bring us closer to our objective.') %>
                     </p>
-                    <div class="row mt-4 ml-0 mr-0 justify-content-between" id="language-top-row"><select class="btn btn-outline-primary h6 w-100 rounded col-12 col-md-8 col-lg-6 mt-4 p-3" id="languageTop">
+                    <div class="row mt-4 ml-0 mr-0 justify-content-between" id="language-top-row"><select class="btn btn-outline btn-light h6 w-100 rounded col-12 col-md-8 col-lg-6 mt-4 p-3" id="languageTop">
                             <option disabled="disabled" selected="selected" class="pointer">
                                 <%= __('Select a language') %>
                             </option>
@@ -89,11 +88,13 @@
                                 </option>
                                 <% }) %>
                         </select>
-                        <div class="col-md-8 col-12 col-lg-5 pr-0"><button class="btn btn-primary h6 shadow w-100 rounded mt-4 p-3" disabled="disabled" id="start_recording" data-toggle="modal" data-target="#userModal">
+                        <div class="col-md-8 col-12 col-lg-5 pr-0"><button class="btn btn-light h6 shadow w-100 rounded mt-4 p-3" disabled="disabled" id="start_recording" data-toggle="modal" data-target="#userModal">
                                 <%= __('START CONTRIBUTING') %>
                             </button></div>
                     </div>
                 </div>
+                <div class="col-10 col-lg-4 text-center p-5 align-self-center"><img src="img/about-us-2.svg" alt="Speaker Diversity" class="img-fluid"></div>
+
             </div>
         </div>
         <div class="container-fluid bg-blue d-none">
