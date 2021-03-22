@@ -151,7 +151,6 @@
 	"Quick Tips": "झटपट सलाह",
 	"Read once <b>before recording it</b>": "रिकॉर्ड करने से पहले पढ़ें",
 	"Test your Microphone and Speakers": "अपने माइक्रोफ़ोन और स्पीकर की जांच करें",
-	"Test mic": "माइक की जांच करें",
 	"Test Speakers": "स्पीकर्स की जांच करें",
 	"Recording for 5 seconds": "5 सेकंड के लिए रिकॉर्ड किया जा रहा है",
 	"Recording for 4 seconds": "4 सेकंड के लिए रिकॉर्ड किया जा रहा है",
@@ -201,7 +200,7 @@
 	"START CONTRIBUTING": "योगदान देना शुरू करें",
 	"Gender Distribution": "लैंगिक ब्यौरा",
 	"Speech recognition relies on \"machine-learning\" technology that requires large datasets that include diverse voices and the corresponding text. Through Bolo India, we want to create a diverse open repository of Indian voices speaking Indian languages which can be used for this initiative": "बोली पहचान \"मशीन-लर्निंग\" टेक्नोलॉजी पर निर्भर करती है, जिसके लिए डेटासेट के विशाल संग्रह की ज़रूरत होती है, जिसमें विविध भारतीय आवाज़ें और उनसे जुड़े टेक्स्ट शामिल हों। \"बोलो इंडिया\" के ज़रिए, हम भारतीय भाषा बोलने वाली भारतीय आवाज़ों का एक विविध ओपन रिपॉज़िटरी बनाना चाहते हैं, जिसका इस्तेमाल इस पहल के लिए किया जा सके।",
-	"Test Mic": "Test Mic",
+	"Test Mic": "माइक की जांच करें",
 	"Thank you for your enthusiasm to validate the recordings.": "Thank you for your enthusiasm to validate the recordings.",
 	"We do not have any data in <span id=\"spn-validation-language\"></span> language. Please try again later.": "We do not have any data in <span id=\"spn-validation-language\"></span> language. Please try again later.",
 	"Start Contributing in <span id=\"start-validation-language\"></span>": "Start Contributing in <span id=\"start-validation-language\"></span>"

@@ -105,14 +105,17 @@ function generateWavBlob(finalBuffer, defaultSampleRate) {
     return blob;
 }
 const resetMicButton = () => {
+    console.log('reset mic button');
     const $testMicText = $('#test-mic-text');
     if (audioContext) { audioContext.close(); audioContext = undefined };
     $testMicText.text(localeStrings['Test Mic']);
+    console.log($('#test-mic-text'));
     $('#mic-svg').removeClass('d-none');
     $testMicBtn.attr('data-value', 'test-mic');
     cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
     secondsDown = 5;
     clearInterval(timeIntervalUp);
+    console.log($('#test-mic-text'))
 }
 let audioData = [];
 let recordingLength = 0;
