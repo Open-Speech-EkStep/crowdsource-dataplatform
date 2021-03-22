@@ -132,7 +132,8 @@ const getSentencesBasedOnAge = function (
     }
 
     query = updateAndGetOrderedSentencesQuery;
-    const launchUser = envVars.LAUNCH_USER || 'launch_user'
+    const launchUser = envVars.LAUNCH_USER || 'launch_user';
+    const launchIds = envVars.LAUNCH_IDS || '';
 
     if(userName == launchUser) {
         query = getSentencesForLaunch;
@@ -146,7 +147,7 @@ const getSentencesBasedOnAge = function (
         motherTongue,
         gender,
         ageGroup,
-        envVars.LAUNCH_IDS.split(', ')
+        launchIds.split(', ')
     ]));
 };
 
