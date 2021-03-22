@@ -171,6 +171,7 @@ const getLanguageStats = function () {
         $contributeLanguageProgress.css("width", `${rhp}%`);
       } else {
         $contributedLangTime.text("0 hrs");
+        $contributedLangTime.css("right", 0);
         $contributeLanguageProgress.css("width", `0%`);
       }
       const $languageId = $("#languageId");
