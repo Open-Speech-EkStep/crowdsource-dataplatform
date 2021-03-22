@@ -17,6 +17,12 @@ html {
     padding-right: 6vw !important;
     padding-left: 6vw !important;
 }
+
+.px-16{
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+}
+
 .modal-title {
     font-weight: 700;
 }

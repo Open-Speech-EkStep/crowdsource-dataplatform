@@ -7,6 +7,7 @@ const {
     unassignIncompleteSentences,
     updateAndGetSentencesQuery,
     updateAndGetUniqueSentencesQuery,
+    updateAndGetOrderedSentencesQuery,
     getValidationSentencesQuery,
     sentencesCount,
     getCountOfTotalSpeakerAndRecordedAudio,
@@ -19,7 +20,8 @@ const {
     updateSentencesWithValidatedState,
     feedbackInsertion,
     getAudioPath,
-    saveReportQuery
+    saveReportQuery,
+    getSentencesForLaunch
 } = require('./dbQuery');
 
 const {
@@ -126,7 +128,14 @@ const getSentencesBasedOnAge = function (
     }
 
     if (showUniqueSentences) {
-        query = updateAndGetUniqueSentencesQuery
+        query = updateAndGetUniqueSentencesQuery;
+    }
+
+    query = updateAndGetOrderedSentencesQuery;
+    const launchUser = envVars.LAUNCH_USER || 'launch_user'
+
+    if(userName == launchUser) {
+        query = getSentencesForLaunch;
     }
 
     return (db.many(query, [
@@ -136,7 +145,8 @@ const getSentencesBasedOnAge = function (
         language,
         motherTongue,
         gender,
-        ageGroup
+        ageGroup,
+        envVars.LAUNCH_IDS.split(', ')
     ]));
 };
 

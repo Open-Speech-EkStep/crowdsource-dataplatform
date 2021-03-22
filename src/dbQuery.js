@@ -10,6 +10,45 @@ inner join "contributions" cont on s."sentenceId" = cont."sentenceId" \
 inner join "contributors" con on cont.contributed_by = con.contributor_id \
 where con.contributor_identifier = $1 and user_name=$2 AND s."language" = $3 and cont.action = \'completed\';'
 
+const updateAndGetOrderedSentencesQuery = '\
+INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 \
+where not exists \
+(select "contributor_id" from "contributors" where "contributor_identifier" = $1 and user_name=$2); \
+update "contributors" set "age_group" = $7, gender = $6, mother_tongue = $5 \
+where contributor_identifier = $1 and user_name = $2; \
+with ins ("sentenceId") as \
+( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
+select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
+left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
+where language = $4 and label=$3 \
+and (coalesce(cont.action,\'\')!=\'completed\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id)) \
+group by sentences."sentenceId", con."contributor_id" \
+order by sentences."sentenceId" \
+limit 5  returning "sentenceId") \
+select ins."sentenceId", sentences.sentence from ins  \
+  inner join sentences on sentences."sentenceId" = ins."sentenceId";'
+
+const getSentencesForLaunch = '\
+INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 \
+where not exists \
+(select "contributor_id" from "contributors" where "contributor_identifier" = $1 and user_name=$2); \
+update "contributors" set "age_group" = $7, gender = $6, mother_tongue = $5 \
+where contributor_identifier = $1 and user_name = $2; \
+with ins ("sentenceId") as \
+( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
+select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
+left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
+where language = $4 and label=$3 \
+and (coalesce(cont.action,\'\')!=\'completed\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id)) \
+and sentences."sentenceId"= ANY($8::int[])\
+group by sentences."sentenceId", con."contributor_id" \
+order by sentences."sentenceId" \
+limit 5  returning "sentenceId") \
+select ins."sentenceId", sentences.sentence from ins  \
+  inner join sentences on sentences."sentenceId" = ins."sentenceId";'
+
 const updateAndGetSentencesQuery = '\
 INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 \
 where not exists \
@@ -95,6 +134,7 @@ module.exports = {
   sentencesCount,
   updateAndGetSentencesQuery,
   updateAndGetUniqueSentencesQuery,
+  updateAndGetOrderedSentencesQuery,
   getValidationSentencesQuery,
   updateContributionDetails,
   getCountOfTotalSpeakerAndRecordedAudio,
@@ -107,5 +147,6 @@ module.exports = {
   updateSentencesWithValidatedState,
   feedbackInsertion,
   getAudioPath,
-  saveReportQuery
+  saveReportQuery,
+  getSentencesForLaunch
 }

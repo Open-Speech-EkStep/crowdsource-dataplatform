@@ -305,3 +305,8 @@
     left: -70px;
   }
 }
+
+.px-16{
+  padding-right: 16px !important;
+  padding-left: 16px !important;
+}
