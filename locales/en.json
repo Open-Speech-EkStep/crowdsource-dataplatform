@@ -241,5 +241,8 @@
 	"Low/No Ambient Noise": "Low/No Ambient Noise",
 	"Ambient Noise Detected": "Ambient Noise Detected",
 	"Please specify the reason (Optional)": "Please specify the reason (Optional)",
-	"SUBMIT": "SUBMIT"
+	"SUBMIT": "SUBMIT",
+	"Congratulations!!! You have completed this batch of sentences": "Congratulations!!! You have completed this batch of sentences",
+	"Most data recorded for <span id=\"languageId\"></span>": "Most data recorded for <span id=\"languageId\"></span>",
+	"Data recorded for <span id=\"languageChoiceId\"></span>": "Data recorded for <span id=\"languageChoiceId\"></span>"
 }
