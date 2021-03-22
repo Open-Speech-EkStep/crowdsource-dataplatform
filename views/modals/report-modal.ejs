@@ -61,13 +61,13 @@
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="radio" name="reportRadio" id="others_id" value="Others">
                         <label class="form-check-label" for="others_id">
-                            Others
+                            <%= __('Others')%>
                         </label>
                     </div>
                 </div>
-                <textarea maxlength="1000" id="other_text" class="w-100 p-3 other-reason mb-4" rows="3" placeholder="Please specify the reason (Optional)"></textarea>
+                <textarea maxlength="1000" id="other_text" class="w-100 p-3 other-reason mb-4" rows="3" placeholder="<%= __('Please specify the reason (Optional)')%>"></textarea>
                 <div class="d-flex justify-content-center">
-                    <button id="report_submit_id" class="btn btn-primary w-75" disabled="disabled">SUBMIT</button>
+                    <button id="report_submit_id" class="btn btn-primary w-75" disabled="disabled"><%= __('SUBMIT')%></button>
                 </div>
             </div>
         </div>
