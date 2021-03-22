@@ -18,7 +18,8 @@ const {
     addValidationQuery,
     updateSentencesWithValidatedState,
     feedbackInsertion,
-    getAudioPath
+    getAudioPath,
+    saveReportQuery
 } = require('./dbQuery');
 
 const {
@@ -346,6 +347,11 @@ const insertFeedback = (subject, feedback, language) => {
     return db.any(feedbackInsertion, [subject, feedback, language]);
 }
 
+const saveReport = async (userId, sentenceId, reportText, language, userName) => {
+    const encryptUserId = encrypt(userId);
+    await db.any(saveReportQuery,[encryptUserId, userName, sentenceId, reportText, language])
+}
+
 module.exports = {
     updateAndGetSentences,
     getValidationSentences,
@@ -363,5 +369,6 @@ module.exports = {
     getGenderGroupData,
     getLastUpdatedAt,
     getSentencesBasedOnAge,
-    insertFeedback
+    insertFeedback,
+    saveReport
 };

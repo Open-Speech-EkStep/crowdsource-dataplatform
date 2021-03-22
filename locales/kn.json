@@ -148,7 +148,7 @@
 	"Feedback": "Feedback",
 	"<b>Read once</b> before recording it": "ರೆಕಾರ್ಡ್ ಮಾಡುವ ಮೊದಲು ಒಮ್ಮೆ ಓದಿ",
 	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> ರೆಕಾರ್ಡಿಂಗ್ ಅನ್ನು ಮೌಲ್ಯೀಕರಿಸಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು",
-	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>",
+	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "ಮುಂದುವರಿಯುವ ಮೂಲಕ ನೀವು <a href=\"/terms-and-conditions\">ನಿಯಮಗಳು ಮತ್ತು ಷರತ್ತುಗಳನ್ನು</a> ಒಪ್ಪುತ್ತೀರಿ",
 	"Transgender - He": "Transgender - He",
 	"Transgender - She": "Transgender - She",
 	"Rather Not Say": "Rather Not Say",
@@ -157,7 +157,12 @@
 	"Test your Microphone and Speakers": "ನಿಮ್ಮ ಮೈಕ್ರೊಫೋನ್ ಮತ್ತು ಧ್ವನಿವರ್ಧಕಗಳನ್ನು ಪರೀಕ್ಷಿಸಿ",
 	"Test mic": "ಮೈಕ್ ಪರೀಕ್ಷಿಸಿ",
 	"Test Speakers": "ಧ್ವನಿವರ್ಧಕವನ್ನು ಪರೀಕ್ಷಿಸಿ",
-	"Recording": "ರೆಕಾರ್ಡಿಂಗ್",
+	"Recording for 5 seconds": "Recording for 5 seconds",
+	"Recording for 4 seconds": "Recording for 4 seconds",
+	"Recording for 3 seconds": "Recording for 3 seconds",
+	"Recording for 2 seconds": "Recording for 2 seconds",
+	"Recording for 1 seconds": "Recording for 1 second",
+	"Playingback Audio": "Playingback Audio",
 	"Playing": "ನುಡಿಸುವಿಕೆ",
 	"Help your own language": "ನಿಮ್ಮ ಸ್ವಂತ ಭಾಷೆಗೆ ಸಹಾಯ ಮಾಡಿ"
 }

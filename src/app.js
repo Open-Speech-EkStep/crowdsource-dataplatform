@@ -21,12 +21,12 @@ const {
   getAllInfo,
   updateTablesAfterValidation,
   getAudioClip,
-  insertFeedback
+  insertFeedback, saveReport
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
-const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH } = require('./constants');
+const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH, MIN_SNR_LEVEL } = require('./constants');
 const {
   validateUserInputAndFile,
   validateUserInfo,
@@ -84,6 +84,7 @@ const corsOptions = {
 const upload = multer({ storage: multerStorage });
 const corsOptions = {
   origin: /vakyansh\.in$/,
+  credentials: true
 }
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -182,6 +183,21 @@ router.post('/validation/action', (req, res) => updateTablesAfterValidation(req,
 
 router.post('/audioClip', (req, res) => getAudioClip(req, res, objectStorage))
 
+router.post('/report', async (req, res) => {
+  const userId = req.cookies.userId || "";
+  const { sentenceId = "", reportText = "", language = "", userName = "" } = req.body;
+  if (sentenceId === "" || reportText === "" || language === "" || userId === "") {
+    return res.send({ statusCode: 400, message: "Input values missing" });
+  }
+  try {
+    await saveReport(userId, sentenceId, reportText, language, userName)
+  } catch (err) {
+    console.log(err);
+    return res.send({ statusCode: 500, message: err.message });
+  }
+  return res.send({ statusCode: 200, message: "Reported successfully." });
+})
+
 router.post('/upload', (req, res) => {
   const file = req.file;
   const sentenceId = req.body.sentenceId;
@@ -226,12 +242,15 @@ router.post('/audio/snr', async (req, res) => {
   const filePath = file.path
   const command = buildWadaSnrCommand(filePath)
   const onSuccess = (snr) => {
+    const ambient_noise = snr < MIN_SNR_LEVEL ? true : false
     removeTempFile(file);
-    res.status(200).send({ 'snr': snr });
+    console.log('success:' + res.headersSent);
+    res.status(200).send({ 'snr': snr, 'ambient_noise': ambient_noise });
+    console.log('success:' + res.headersSent);
+
   }
   const onError = (snr) => {
-    removeTempFile(file);
-    res.sendStatus(502);
+    console.log('error...' + res.headersSent);
   }
   calculateSNR(command, onSuccess, onError)
 });
@@ -256,7 +275,7 @@ app.get('/get-locale-strings/:locale', function (req, res) {
       return res.sendStatus(500);
     }
     const data = JSON.parse(body);
-    const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds', 'Recording', 'Playing', 'Test mic', 'Test Speakers'];
+    const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds', 'Recording for 5 seconds', 'Recording for 4 seconds', 'Recording for 3 seconds', 'Recording for 2 seconds', 'Recording for 1 seconds', 'Playingback Audio', 'Playing', 'Test mic', 'Test Speakers'];
 
     const langSttr = {};
     list.forEach((key) => {
@@ -272,7 +291,7 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
   const language = req.body.language.trim();
   insertFeedback(subject, feedback, language).then(() => {
     console.log("Feedback is inserted into the DB.")
-    res.send({ statusCode:200, message: "Feedback submitted successfully." });
+    res.send({ statusCode: 200, message: "Feedback submitted successfully." });
   }).catch(e => {
     console.log(`Error while insertion ${e}`)
     res.send({ statusCode: 502, message: "Failed to submit feedback." });

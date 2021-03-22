@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/ekstep2/ektep-crowdsource-platform#readme",
   "dependencies": {
-    "@getgauge/cli": "^1.1.7",
     "@google-cloud/storage": "^5.8.1",
     "aws-sdk": "^2.851.0",
     "compression": "^1.7.4",
@@ -39,7 +38,6 @@
     "express-session": "^1.17.1",
     "helmet": "^3.22.0",
     "i18n": "^0.13.2",
-    "jest": "^26.6.3",
     "jquery": "^3.5.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
@@ -48,8 +46,6 @@
     "pg-promise": "^10.5.2",
     "pm2": "^4.5.5",
     "regenerator-runtime": "^0.13.7",
-    "sinon": "^9.0.2",
-    "supertest": "^4.0.2",
     "uuid": "^7.0.3"
   },
   "engines": {
@@ -57,6 +53,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.11",
+    "@getgauge/cli": "^1.1.7",
     "babelify": "^10.0.0",
     "del": "^5.1.0",
     "fetch-mock": "^9.11.0",
@@ -68,7 +65,9 @@
     "gulp-minify": "^3.1.0",
     "gulp-replace-task": "^2.0.1",
     "nodemon": "^2.0.3",
-    "yargs": "^16.2.0"
+    "yargs": "^16.2.0",
+    "jest": "^26.6.3",
+    "supertest": "^6.1.3"
   },
   "jest": {
     "setupFiles": [

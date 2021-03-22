@@ -129,7 +129,7 @@
 	"<b>Read once</b> before recording it": "రికార్డ్ చేసే ముందు ఒకసారి చదవండి",
 	"Feedback": "Feedback",
 	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> రికార్డింగ్లను చెల్లుబాటు చేసినందుకు ధన్యవాదాలు",
-	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "<a href=\"/terms-and-conditions\">ముందుకు వెళ్తే మీరు షరతులు మరియు నిబంధనలను అంగీకరించాలి</a>",
+	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "ముందుకు వెళ్తే మీరు <a href=\"/terms-and-conditions\">షరతులు మరియు నిబంధనలను</a> అంగీకరించాలి",
 	"Transgender - He": "Transgender - He",
 	"Transgender - She": "Transgender - She",
 	"Rather Not Say": "Rather Not Say",
@@ -148,7 +148,12 @@
 	"Data recorded for": "Data recorded for",
 	"Help your language achieve it’s goal of 100 hrs. We know you can do more!": "Help your language achieve it’s goal of 100 hrs. We know you can do more!",
 	"You are just <span id=\"remainingSentences\"></span> sentences away from earning your <span id=\"badgeName\"></span> Badge.": "You are just <span id=\"remainingSentences\"></span> sentences away from earning your <span id=\"badgeName\"></span> Badge.",
-	"Recording": "రికార్డ్ అవుతోంది",
+	"Recording for 5 seconds": "Recording for 5 seconds",
+	"Recording for 4 seconds": "Recording for 4 seconds",
+	"Recording for 3 seconds": "Recording for 3 seconds",
+	"Recording for 2 seconds": "Recording for 2 seconds",
+	"Recording for 1 seconds": "Recording for 1 second",
+	"Playingback Audio": "Playingback Audio",
 	"Playing": "ప్లే అవుతోంది",
 	"Help your own language": "మీ స్వంత భాష సహాయం"
 }

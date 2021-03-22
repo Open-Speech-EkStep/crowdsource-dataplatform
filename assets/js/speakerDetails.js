@@ -68,7 +68,7 @@ const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
                 genderRadio.checked = true;
                 genderRadio.previous = true;
             }
-        } else {
+        } else if (parsedSpeakerDetails.gender !== "") {
             const genderRadio = document.querySelector(
                 'input[name = "gender"][value="others"]'
             );

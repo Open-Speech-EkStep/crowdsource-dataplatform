@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <title>Vakyansh: A crowdsourcing initiative for Indic languages</title>
+    <title>Bolo India: A crowdsourcing initiative for Indic languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
-    <meta name="description" content="Vakyansh: A crowdsourcing initiative for Indic languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta name="description" content="Bolo India: A crowdsourcing initiative for Indic languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
@@ -55,13 +55,16 @@
                     <div id="say_container" class="row align-items-center py-lg-5 position-relative" style="height:100%">
                         <div class="col-lg-7 col-md-7 col-8">
                             <h1 class="display-5">
-                                <%= __('Say') %>
+                                <%= __('Speak') %>
                             </h1>
                             <div class="mt-3 font-weight-bold">
                                 <%= __('Contribute Your Voice') %>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-4"><img src="../img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer img-fluid" data-target="#userModal"></div>
+                        <div class="col-lg-5 col-md-5 col-4">
+                                <img src="../img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer say-logo" data-target="#userModal">
+                        </div>
+
                         <div id="say-p-2" class="col-lg-7 col-md-7 col-12 d-none position-absolute" style="bottom:1rem">
                             <div>
                                 <%= __('Contribute your voice to create an open data repository of Indian languages') %>
@@ -80,13 +83,16 @@
                                 <%= __('Listen') %>
                             </h1>
                             <div class="mt-3 font-weight-bold">
-                                <%= __('Verify What They Say') %>
+                                <%= __('Validate What They Say') %>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-4"><a href="./validator-page.html"><img src="../img/listen.svg" alt="validator" id="start_validating" class="cursor-pointer img-fluid"></a></div>
+                        <div class="col-lg-5 col-md-5 col-4">
+                            <a href="./validator-page.html">
+                                <img src="../img/listen.svg" alt="validator" id="start_validating" class="cursor-pointer listen-logo"></a>
+                        </div>
                         <div class="col-lg-7 col-md-7 col-12 d-none position-absolute" id="listen-p-2" style="bottom:1rem">
                             <div>
-                                <%= __('Help us by validating the voice samples that others have contributed') %>
+                                <%= __('Help us by validating the recordings that others have contributed') %>
                             </div>
                             <div class="col-7 col-lg-6 col-xl-6" id="listen-loader">
                                 <div><span class="spinner"></span></div>
@@ -99,10 +105,10 @@
             <div class="row">
                 <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 text-dark mt-4">
                     <h1 class="display-5 font-wt-900 site-blue lh-5 mt-lg-5">
-                        <%= __('Vakyansh: A crowdsourcing initiative for Indian languages') %>
+                        <%= __('Bolo India: A crowdsourcing initiative for Indian languages') %>
                     </h1>
                     <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
-                        <%= __('For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.') %> <a class="ml-1" href="./about-us.html">
+                        <%= __('India needs to be Aatmanirbhar in the area of speech recognition in Indian languages.  Hence, we want to create an open data repository of many Indian voices. Bolo India invites you to volunteer contribute your voice for this cause.') %> <a class="ml-1" href="./about-us.html">
                                 <%= __('Know More') %>
                             </a>
                     </p>
@@ -188,7 +194,7 @@
                         <div><span class="spinner"></span></div>
                     </div>
                     <div id="speakers_hours_chart_container" class="w-100">
-                        <div id="speakers_hours_chart" class="w-100"></div>
+                        <div id="speakers_hours_chart" class="w-90"></div>
                     </div>
                 </div>
                 <div class="col-12 col-md-12 col-lg-12 px-0 oflow-x-hid"></div>
@@ -199,7 +205,7 @@
                     </a></div>
             </div>
         </div>
-        
+
         <div class="modal fade" id="modal-chart-wrapper" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg w-75 mw-100 h-75 mx-auto">
                 <div class="modal-content border-primary border-2 h-100 p-lg-5 px-2 py-4">

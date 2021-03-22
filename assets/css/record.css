@@ -405,7 +405,7 @@ audio {
 }
 
 .test-mic-speakers-container {
-  padding: 1rem 2rem 1rem;
+  padding: 1rem 0 1rem;
   display: flex;
   justify-content: flex-end;
 }
@@ -459,6 +459,36 @@ audio {
   height: 15px;
 }
 
+#report_btn {
+  border: 1px solid #959595;
+  color: #959595;
+  margin-right: 1rem;
+  width: 107px;
+}
+
+#report_close_btn, #report_sentence_thanks_close_id {
+  position: absolute;
+  right: 1rem;
+  top: 0rem;
+  font-size: 2.5rem;
+  padding: 0;
+}
+
+.other-reason {
+  resize: none;
+  border-radius: 8px;
+  background: #F2F3F5;
+  border: 1px solid #F2F3F5;
+}
+
+.option-text {
+  padding-left: 1.25rem;
+  font-size: 14px;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
 
 .validation-instruction {
   background-color: #343A40;
@@ -529,7 +559,7 @@ audio {
   right: 1rem;
 }
 
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 768px) {
   #content-wrapper {
     padding: 0;
   }
@@ -587,7 +617,29 @@ audio {
   .xs-p-16 {
     padding: 16px;
   }
+  #report_btn {
+    margin-right: 0;
+    margin-left: 1rem;
+  }
  }
+
+ @media screen and (min-width: 360px) and (max-width: 375px) {
+  .instruction-box {
+    width: 100px;
+  }
+ }
+ 
+ @media screen and (min-width: 376px) and (max-width: 599px) {
+   .instruction-box {
+     width: 110px;
+    }
+  }
+
+  @media screen and (min-width: 599px) and (max-width: 768px) {
+   .instruction-box {
+     width: 195px;
+   }
+  }
 
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
