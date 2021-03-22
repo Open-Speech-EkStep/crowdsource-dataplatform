@@ -15,6 +15,7 @@ const $testSpeakerBtn = $('#play-speaker');
 let localeStrings;
 let sampleRate = 44100;
 
+let ambientNoiseFeature = false;
 
 function getValue(number, maxValue) {
     return number < 0
@@ -111,9 +112,6 @@ const resetMicButton = () => {
     if (audioContext) { audioContext.close(); audioContext = undefined };
     $testMicText.text(localeStrings['Test Mic']);
     $('#mic-svg').removeClass('d-none');
-    $('#mic-msg').addClass('invisible').removeClass('d-none');
-    $('#no-noise').addClass('d-none');
-    $('#noise').addClass('d-none');
     $testMicBtn.attr('data-value', 'test-mic');
     cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
     secondsDown = 5;
@@ -127,7 +125,7 @@ let timeIntervalUp;
 let secondsDown = 5;
 
 const startRecordingTimer = () => {
-    $('#mic-msg').removeClass('invisible');
+    if (ambientNoiseFeature) $('#mic-msg').removeClass('invisible');
     $('#mic-svg').addClass('d-none');
     $('#test-mic-text').text(localeStrings[`Recording for ${secondsDown} seconds`]);
     $testMicBtn.attr('data-value', 'recording');
@@ -235,10 +233,8 @@ const getMediaRecorder = () => {
         if (audioBlob !== null) {
             // check to make ambient noise feature available on dev and localhost
             // remove this check once feature is confirmed for production
-            if (window.location.origin.indexOf('localhost') !== -1 ||
-                window.location.origin.indexOf('dev') !== -1 ||
-                window.location.origin.indexOf('test') !== -1) {
-                    ambienceNoiseCheck(audioBlob);
+            if (ambientNoiseFeature) {
+                ambienceNoiseCheck(audioBlob);
             }
             const audioUrl = URL.createObjectURL(audioBlob);
             micAudio = new Audio(audioUrl);
@@ -267,6 +263,9 @@ const getMediaRecorder = () => {
     };
 }
 const testMic = (btnDataAttr) => {
+    $('#mic-msg').addClass('invisible').removeClass('d-none');
+    $('#no-noise').addClass('d-none');
+    $('#noise').addClass('d-none');
     const $testMicText = $('#test-mic-text');
     const recorder = getMediaRecorder();
     if (btnDataAttr === 'test-mic') {
@@ -791,6 +790,11 @@ $(document).ready(() => {
     $('footer').removeClass('bottom').addClass('fixed-bottom');
     setPageContentHeight();
     window.crowdSource = {};
+    if (window.location.origin.indexOf('localhost') !== -1 ||
+        window.location.origin.indexOf('dev') !== -1 ||
+        window.location.origin.indexOf('test') !== -1) {
+            ambientNoiseFeature = true;
+    }
     //const $instructionModal = $('#instructionsModal');
     const $validationInstructionModal = $("#validation-instruction-modal");
     const $errorModal = $('#errorModal');
