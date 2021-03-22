@@ -728,7 +728,7 @@ function playSpeaker() {
 
 const handleSubmitFeedback = function () {
     const contributionLanguage = localStorage.getItem("contributionLanguage");
-    const otherText = $("other_text").val();
+    const otherText = $("#other_text").val();
     const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
         
     const reqObj = {

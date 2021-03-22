@@ -348,7 +348,8 @@ const insertFeedback = (subject, feedback, language) => {
 }
 
 const saveReport = async (userId, sentenceId, reportText, language, userName) => {
-    await db.any(saveReportQuery,[userId, userName, sentenceId, reportText, language])
+    const encryptUserId = encrypt(userId);
+    await db.any(saveReportQuery,[encryptUserId, userName, sentenceId, reportText, language])
 }
 
 module.exports = {
