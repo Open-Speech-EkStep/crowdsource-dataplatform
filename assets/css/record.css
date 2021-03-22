@@ -468,7 +468,7 @@ audio {
   margin-right: 5px;
 }
 
-#report_btn {
+.report-btn-container button{
   border: 1px solid #959595;
   color: #959595;
   margin-right: 1rem;
@@ -515,7 +515,8 @@ audio {
   background-color: rgb(149 149 149 / 20%);
   border-radius: 4px;
   font-size: 14px;
-  width: 87px;
+  width: 120px;
+  text-align: center;
 }
 
 .quick-tips-text {
@@ -585,7 +586,7 @@ audio {
   .quick-tips-container {
     flex-direction: row !important;
     padding: 8px;
-    width: 115px;
+    width: 150px;
   }
   .instructions {
     width: 100%;
@@ -688,6 +689,16 @@ audio {
   .xs-radio-label {
     margin-top: 2px;
     margin-left: 2px;
+  }
+
+  .record-btn-container {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+  }
+
+  .record-btn-container > .report-btn-container {
+    margin-top: 1rem;
+    margin-right: 0.5rem;
   }
 }
 
