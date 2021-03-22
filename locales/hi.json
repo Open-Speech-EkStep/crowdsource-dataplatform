@@ -207,5 +207,7 @@
 	"Low/No Ambient Noise": "Low/No Ambient Noise",
 	"Ambient Noise Detected": "एंबियंस में शोर सुनाई दिया",
 	"Please specify the reason (Optional)": "कृपया कारण बताएं (वैकल्पिक)",
-	"SUBMIT": "सबमिट करें"
+	"SUBMIT": "सबमिट करें",
+	"Most data recorded for <span id=\"languageId\"></span>": "<span id=\"languageId\"></span> में सबसे ज़्यादा योगदान",
+	"Data recorded for <span id=\"languageChoiceId\"></span>": "<span id=\"languageChoiceId\"></span> के लिए डेटा रिकॉर्ड किया गया"
 }
