@@ -107,7 +107,7 @@ function generateWavBlob(finalBuffer, defaultSampleRate) {
 const resetMicButton = () => {
     const $testMicText = $('#test-mic-text');
     if (audioContext) { audioContext.close(); audioContext = undefined };
-    $testMicText.text(localeStrings['Test mic']);
+    $testMicText.text(localeStrings['Test Mic']);
     $('#mic-svg').removeClass('d-none');
     $testMicBtn.attr('data-value', 'test-mic');
     cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);

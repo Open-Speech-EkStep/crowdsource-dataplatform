@@ -46,7 +46,7 @@ step("Opening Vakyansh", async () => {
 });
 
 step("Validate about us content", async function () {
-    assert.ok(await text('Vakyansh: A crowdsourcing initiative for Indian languages').exists());
+    assert.ok(await text('Bolo India: A crowdsourcing initiative for Indian languages').exists());
 });
 
 step("Start Recording button is disabled", async function () {
