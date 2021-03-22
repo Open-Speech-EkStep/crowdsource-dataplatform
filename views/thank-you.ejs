@@ -68,7 +68,7 @@
                             <%= __('Did you know?') %>
                         </div>
                         <div class="most-data-recorded">
-                            <p><%= __('Most data recorded for') %> <span id="languageId"></span></p>
+                            <p><%- __('Most data recorded for <span id="languageId"></span>') %> </p>
                             <div class="position-relative">
                                 <div class="progress mb-2 w-80">
                                     <div id="highest_language_progress" class="progress-bar time-contributed" role="progressbar" style="width:0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="lang-data-recorded">
-                            <p><%= __('Data recorded for') %> <span id="languageChoiceId"></span></p>
+                            <p><%- __('Data recorded for <span id="languageChoiceId"></span>') %></p>
                             <div class="position-relative">
                                 <div class="progress mb-2 w-80">
                                     <div id="contribute_language_progress" class="progress-bar time-contributed" role="progressbar" style="width:0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
