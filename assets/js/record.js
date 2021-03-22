@@ -142,6 +142,18 @@ const countTimer = () => {
     }
 }
 
+const showAmbientNoise = (noiseData) => {
+    const $noNoise = $('#no-noise');
+    const $noise = $('#noise');
+    if (noiseData.ambient_noise) {
+        $noNoise.addClass('d-none').removeClass('invisible');
+        $noise.removeClass('d-none');
+    } else {
+        $noNoise.removeClass('invisible d-none');
+        $noise.addClass('d-none');
+    }
+}
+
 const ambienceNoiseCheck = (audioBlob) => {
     const fd = new FormData();
     fd.append('audio_data', audioBlob);
@@ -149,9 +161,9 @@ const ambienceNoiseCheck = (audioBlob) => {
         method: 'POST',
         body: fd,
     })
-    .then(res => res.json)
+    .then(res => res.json())
     .then(result => {
-        console.log('Ambience noise', result);
+        showAmbientNoise(result);
     })
     .catch(err => {
         console.log(err);
@@ -217,7 +229,12 @@ const getMediaRecorder = () => {
         let finalBuffer = flattenArray(audioData, recordingLength);
         let audioBlob = generateWavBlob(finalBuffer, sampleRate);
         if (audioBlob !== null) {
-            ambienceNoiseCheck(audioBlob);
+            // check to make ambient noise feature available on dev and localhost
+            // remove this check once feature is confirmed for production
+            if (window.location.origin.indexOf('localhost') !== -1 ||
+                window.location.origin.indexOf('dev') !== -1) {
+                    ambienceNoiseCheck(audioBlob);
+            }
             const audioUrl = URL.createObjectURL(audioBlob);
             micAudio = new Audio(audioUrl);
             micAudio.onloadedmetadata = function() {
@@ -281,6 +298,8 @@ const initialize = () => {
     const $testMicSpeakerBtn = $('#test-mic-speakers-button')
     const $testMicSpeakerDetails = $('#test-mic-speakers-details');
     const $testMicCloseBtn = $('#test-mic-close');
+    const $noNoise = $('#no-noise');
+    const $noise = $('#noise')
     const totalItems = sentences.length;
     currentIndex = getCurrentIndex(totalItems - 1);
     let skipCount =
@@ -307,6 +326,8 @@ const initialize = () => {
     $testMicCloseBtn.on('click', (e) => {
         $testMicDiv.removeClass('d-none');
         $testMicSpeakerDetails.addClass('d-none');
+        $noNoise.addClass('invisible').removeClass('d-none');
+        $noise.addClass('d-none');
         audioData = [];
         recordingLength = 0;
         if (micAudio) {
@@ -322,6 +343,8 @@ const initialize = () => {
     });
     $testMicBtn.on('click', (e) => {
         const btnDataAttr = $('#test-mic-button').attr('data-value');
+        $noNoise.addClass('invisible').removeClass('d-none');
+        $noise.addClass('d-none');
         testMic(btnDataAttr);
     });
     $testSpeakerBtn.on('click', (e) => {

@@ -237,5 +237,7 @@
 	"Gender Distribution": "Gender Distribution",
 	"Thank you for your enthusiasm to validate the recordings.": "Thank you for your enthusiasm to validate the recordings.",
 	"We do not have any data in <span id=\"spn-validation-language\"></span> language. Please try again later.": "We do not have any data in <span id=\"spn-validation-language\"></span> language. Please try again later.",
-	"Start Contributing in <span id=\"start-validation-language\"></span>": "Start Contributing in <span id=\"start-validation-language\"></span>"
+	"Start Contributing in <span id=\"start-validation-language\"></span>": "Start Contributing in <span id=\"start-validation-language\"></span>",
+	"Low/No Ambient Noise": "Low/No Ambient Noise",
+	"Ambient Noise Detected": "Ambient Noise Detected"
 }
