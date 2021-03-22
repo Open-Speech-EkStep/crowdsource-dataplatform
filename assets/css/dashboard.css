@@ -307,12 +307,12 @@ body.modal-open .supreme-container {
         max-width: 48%;
         margin-right: 2rem;
     }
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
     .chart-title {
         padding-right: 0;
     }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
     .duration {
         padding-left: 0;
     }
