@@ -391,3 +391,8 @@ body.modal-open .supreme-container {
     width: 64px;
   }
 }
+
+.px-16{
+  padding-right: 16px !important;
+  padding-left: 16px !important;
+}
