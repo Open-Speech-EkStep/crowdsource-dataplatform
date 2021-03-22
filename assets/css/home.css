@@ -95,14 +95,19 @@ h6,
   .modal-xl {
     max-width: 700px;
   }
-  .say-logo{
-    width: 140px;
-    height:140px ;
+  .card{
+    height: 350px;
   }
-
-  .listen-logo{
-    width: 140px;
-    height:140px ;
+}
+@media screen and (min-width: 992px) and (max-width: 1279px) {
+  .card img {
+    width: 7rem;
+  }
+  #say-p-2 {
+    bottom: 0rem !important;
+  }
+  #listen-p-2 {
+    bottom: 0rem !important;
   }
 }
 @media (min-width: 1200px) {
@@ -267,6 +272,17 @@ body.modal-open .supreme-container {
 .supreme-container .btn-outline-primary:focus option {
   color: #444444;
 }
+.say-logo{
+  background-color: #42B2C6;
+  border-radius: 50%;
+  box-shadow: 0px 0px 12px 8px rgb(105 203 220 / 40%);
+}
+
+.listen-logo{
+  background: #4D82F7;
+  border-radius: 50%;
+  box-shadow: 0px 0px 12px 8px rgba(102, 176, 255, 0.4);
+}
 
 @media (min-width: 1000px) {
   .dropdown-menu{
@@ -282,12 +298,7 @@ body.modal-open .supreme-container {
   box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   min-height: 100px;
-}
-
-@media (min-width: 992px) {
-  .card{
-    height: 450px;
-  }
+  background-position: 0% 15%;
 }
 
 #topLanguageSpinner, #chartSpinner {
