@@ -165,13 +165,17 @@ step("Select Preferred language as <language>", async function (language) {
 step("Navigate to <arg0> button and click <arg0> button", async function (arg0) {
 
     if (arg0 == "Contribute") {
-        assert.ok(await taiko.image({ id: "start_recording" }).exists());
-        await click(taiko.image({ id: "start_recording" }));
+        const startRecordingButton = taiko.image({ id: "start_recording" });
+        assert.ok(await startRecordingButton.exists());
+        await hover(startRecordingButton);
+        await click(startRecordingButton);
     }
 
     else if (arg0 == "Validate") {
-        assert.ok(await taiko.image({ id: "start_validating" }).exists());
-        await click(taiko.image({ id: "start_validating" }));
+        const startValidatingButton = taiko.image({ id: "start_validating" });
+        assert.ok(await startValidatingButton.exists());
+        await hover(startValidatingButton);
+        await click(startValidatingButton);
     }
 
     else {
