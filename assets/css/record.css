@@ -662,12 +662,19 @@ audio {
     width: 35%;
     top: 24px;
   }
+  .only-display {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1280px) {
   .instruction-box:not(.first)::before, .instruction-box:not(.last)::after  {
     width: 65%;
     top: 24px;
+  }
+  .ambient-noise {
+    font-size: 12px;
+    padding-right: 0;
   }
 }
 
@@ -699,6 +706,10 @@ audio {
   .record-btn-container > .report-btn-container {
     margin-top: 1rem;
     margin-right: 0.5rem;
+  }
+  
+  .only-display {
+    display: none;
   }
 }
 
