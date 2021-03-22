@@ -13,6 +13,8 @@ let cnvs_cntxt;
 const $testMicBtn = $('#test-mic-button');
 const $testSpeakerBtn = $('#play-speaker');
 let localeStrings;
+let sampleRate = 44100;
+
 
 function getValue(number, maxValue) {
     return number < 0
@@ -176,8 +178,7 @@ const ambienceNoiseCheck = (audioBlob) => {
 const getMediaRecorder = () => {
     let stream = null,
         microphone = null,
-        javascriptNode = null,
-        sampleRate = 44100;
+        javascriptNode = null;
     let max_level_L = 0;
     let old_level_L = 0;
     const start = () => {
