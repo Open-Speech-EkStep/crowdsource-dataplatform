@@ -16,7 +16,7 @@
                 <div class="mb-4">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="reportRadio" id="offensive_id" value="Offensive">
-                        <label class="form-check-label" for="offensive_id">
+                        <label class="form-check-label xs-radio-label" for="offensive_id">
                             <%= __('Offensive') %>
                         </label>
                     </div>
@@ -27,7 +27,7 @@
                 <div class="mb-4">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="reportRadio" id="prohibitedContent_id" value="Prohibited Content">
-                        <label class="form-check-label" for="prohibitedContent_id">
+                        <label class="form-check-label xs-radio-label" for="prohibitedContent_id">
                             <%= __('Prohibited Content') %>
                         </label>
                     </div>
@@ -38,7 +38,7 @@
                 <div class="mb-4">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="reportRadio" id="politicalStatement_id" value="Political Statement">
-                        <label class="form-check-label" for="politicalStatement_id">
+                        <label class="form-check-label xs-radio-label" for="politicalStatement_id">
                             <%= __('Political Statement') %>
                         </label>
                     </div>
@@ -49,7 +49,7 @@
                 <div class="mb-4">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="reportRadio" id="misinformation_id" value="Misinformation">
-                        <label class="form-check-label" for="misinformation_id">
+                        <label class="form-check-label xs-radio-label" for="misinformation_id">
                             <%= __('Misinformation') %>
                         </label>
                     </div>
@@ -60,14 +60,14 @@
                 <div class="mb-4">
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="radio" name="reportRadio" id="others_id" value="Others">
-                        <label class="form-check-label" for="others_id">
-                            Others
+                        <label class="form-check-label xs-radio-label" for="others_id">
+                            <%= __('Others')%>
                         </label>
                     </div>
                 </div>
-                <textarea maxlength="1000" id="other_text" class="w-100 p-3 other-reason mb-4" rows="3" placeholder="Please specify the reason (Optional)"></textarea>
+                <textarea maxlength="1000" id="other_text" class="w-100 p-3 other-reason mb-4" rows="3" placeholder="<%= __('Please specify the reason (Optional)')%>"></textarea>
                 <div class="d-flex justify-content-center">
-                    <button id="report_submit_id" class="btn btn-primary w-75" disabled="disabled">SUBMIT</button>
+                    <button id="report_submit_id" class="btn btn-primary w-75" disabled="disabled"><%= __('SUBMIT')%></button>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="text-center"><%= __('Your feedback helps us keep the portal relevant to you, we appreciate you taking time to leave feedback for us.') %></div>
+                <div class="text-center"><%= __('Your feedback helps us keep Bolo India relevant, we appreciate you taking time to leave the feedback.') %></div>
             </div>
         </div>
     </div>

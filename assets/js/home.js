@@ -149,8 +149,15 @@ const getStatsSummary = function () {
             showByHoursChart();
             localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
             localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-            setDefaultLang();
             getStatistics(response.aggregate_data_count[0]);
+            setDefaultLang();
+            if(response.top_languages_by_hours.length === 0) {
+                $("#bar_charts_container").hide();
+                $("#view_all_btn").hide();
+            } else {
+                $("#bar_charts_container").show();
+                $("#view_all_btn").show();
+            }
         });
 }
 

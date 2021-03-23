@@ -112,7 +112,13 @@ app.use(function (req, res, next) {
 app.use(express.static('public'));
 
 app.get('/changeLocale/:locale', function (req, res) {
-  res.cookie('i18n', req.params.locale);
+  if(['hi', 'en', 'ta', 'kn', 'gu'].indexOf(req.params.locale) > -1) {
+    res.cookie('contributionLanguage', req.params.locale);
+    res.cookie('i18n', req.params.locale);
+  } else {
+    res.cookie('contributionLanguage', req.params.locale);
+    res.cookie('i18n', 'en');
+  }
   res.redirect(req.headers.referer);
 });
 app.set('view engine', 'ejs');
@@ -275,7 +281,7 @@ app.get('/get-locale-strings/:locale', function (req, res) {
       return res.sendStatus(500);
     }
     const data = JSON.parse(body);
-    const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds', 'Recording for 5 seconds', 'Recording for 4 seconds', 'Recording for 3 seconds', 'Recording for 2 seconds', 'Recording for 1 seconds', 'Playingback Audio', 'Playing', 'Test mic', 'Test Speakers'];
+    const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds', 'Recording for 5 seconds', 'Recording for 4 seconds', 'Recording for 3 seconds', 'Recording for 2 seconds', 'Recording for 1 seconds', 'Playingback Audio', 'Playing', 'Test Mic', 'Test Speakers','Congratulations!!! You have completed this batch of sentences', 'social sharing text with rank', 'social sharing text without rank'];
 
     const langSttr = {};
     list.forEach((key) => {

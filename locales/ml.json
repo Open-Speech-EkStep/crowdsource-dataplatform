@@ -147,7 +147,7 @@
 	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> റെക്കോർഡിംഗുകൾ സാധൂകരിച്ചതിന് നന്ദി",
 	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "മുന്നോട്ട് പോകുന്നതിലൂടെ, നിങ്ങൾ <a href=\"/terms-and-conditions\">നിബന്ധനകളും വ്യവസ്ഥകളും</a> അംഗീകരിക്കുന്നു",
 	"Test your Microphone and Speakers": "നിങ്ങളുടെ മൈക്രോഫോണും സ്പീക്കറുകളും പരിശോധിക്കുക",
-	"Test mic": "മൈക്ക് പരിശോധിക്കുക",
+	"Test Mic": "മൈക്ക് പരിശോധിക്കുക",
 	"Test Speakers": "സ്പീക്കർ പരിശോധിക്കുക",
 	"Recording for 5 seconds": "Recording for 5 seconds",
 	"Recording for 4 seconds": "Recording for 4 seconds",
@@ -169,5 +169,6 @@
 	"Most data recorded for": "Most data recorded for",
 	"Data recorded for": "Data recorded for",
 	"Help your language achieve it’s goal of 100 hrs. We know you can do more!": "Help your language achieve it’s goal of 100 hrs. We know you can do more!",
-	"Help your own language": "നിങ്ങളുടെ മാതൃഭാഷയെ പരിപോഷിപ്പിക്കൂ"
+	"Help your own language": "നിങ്ങളുടെ മാതൃഭാഷയെ പരിപോഷിപ്പിക്കൂ",
+	"Congratulations!!! You have completed this batch of sentences": "Congratulations!!! You have completed this batch of sentences"
 }

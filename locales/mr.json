@@ -162,7 +162,7 @@
 	"<b>Read once</b> before recording it": "ध्वनिमुद्रण करण्याआधी एकदा ते वाचा",
 	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "पुढे चालू ठेऊन तुम्ही <a href=\"/terms-and-conditions\">अटी आणि शर्ती</a> मान्य करता",
 	"Test your Microphone and Speakers": "तुमच्या मायक्रोफोन आणि स्पीकर्सची चाचणी करा",
-	"Test mic": "माईकची चाचणी करा",
+	"Test Mic": "माईकची चाचणी करा",
 	"Test Speakers": "स्पीकरची चाचणी करा",
 	"Recording for 5 seconds": "Recording for 5 seconds",
 	"Recording for 4 seconds": "Recording for 4 seconds",
@@ -200,5 +200,6 @@
 	"Misinformation": "Misinformation",
 	"Hearsay / Rumors, deliberate falsified facts etc.": "Hearsay / Rumors, deliberate falsified facts etc.",
 	"Thank You": "Thank You",
-	"Your feedback helps us keep the portal relevant to you, we appreciate you taking time to leave feedback for us.": "Your feedback helps us keep the portal relevant to you, we appreciate you taking time to leave feedback for us."
+	"Your feedback helps us keep the portal relevant to you, we appreciate you taking time to leave feedback for us.": "Your feedback helps us keep the portal relevant to you, we appreciate you taking time to leave feedback for us.",
+	"Congratulations!!! You have completed this batch of sentences": "Congratulations!!! You have completed this batch of sentences"
 }

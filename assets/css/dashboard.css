@@ -17,6 +17,12 @@ html {
     padding-right: 6vw !important;
     padding-left: 6vw !important;
 }
+
+.px-16{
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+}
+
 .modal-title {
     font-weight: 700;
 }
@@ -301,12 +307,12 @@ body.modal-open .supreme-container {
         max-width: 48%;
         margin-right: 2rem;
     }
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
     .chart-title {
         padding-right: 0;
     }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
     .duration {
         padding-left: 0;
     }

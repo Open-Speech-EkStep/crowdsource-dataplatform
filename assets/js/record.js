@@ -1,5 +1,5 @@
 const fetch = require('./fetch')
-const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition } = require('./utils');
+const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString } = require('./utils');
 const { LOCALE_STRINGS } = require('./constants');
 
 const speakerDetailsKey = 'speakerDetails';
@@ -14,6 +14,9 @@ let cnvs_cntxt;
 const $testMicBtn = $('#test-mic-button');
 const $testSpeakerBtn = $('#play-speaker');
 let localeStrings;
+let sampleRate = 44100;
+
+let ambientNoiseFeature = false;
 
 function getValue(number, maxValue) {
     return number < 0
@@ -108,7 +111,7 @@ function generateWavBlob(finalBuffer, defaultSampleRate) {
 const resetMicButton = () => {
     const $testMicText = $('#test-mic-text');
     if (audioContext) { audioContext.close(); audioContext = undefined };
-    $testMicText.text(localeStrings['Test mic']);
+    $testMicText.text(localeStrings['Test Mic']);
     $('#mic-svg').removeClass('d-none');
     $testMicBtn.attr('data-value', 'test-mic');
     cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
@@ -123,6 +126,7 @@ let timeIntervalUp;
 let secondsDown = 5;
 
 const startRecordingTimer = () => {
+    if (ambientNoiseFeature) $('#mic-msg').removeClass('invisible');
     $('#mic-svg').addClass('d-none');
     $('#test-mic-text').text(localeStrings[`Recording for ${secondsDown} seconds`]);
     $testMicBtn.attr('data-value', 'recording');
@@ -143,6 +147,17 @@ const countTimer = () => {
     }
 }
 
+const showAmbientNoise = (noiseData) => {
+    const $noNoise = $('#no-noise');
+    const $noise = $('#noise');
+    $('#mic-msg').addClass('d-none');
+    if (noiseData.ambient_noise) {
+        $noise.removeClass('d-none');
+    } else {
+        $noNoise.removeClass('d-none');
+    }
+}
+
 const ambienceNoiseCheck = (audioBlob) => {
     const fd = new FormData();
     fd.append('audio_data', audioBlob);
@@ -150,9 +165,9 @@ const ambienceNoiseCheck = (audioBlob) => {
         method: 'POST',
         body: fd,
     })
-    .then(res => res.json)
+    .then(res => res.json())
     .then(result => {
-        console.log('Ambience noise', result);
+        showAmbientNoise(result);
     })
     .catch(err => {
         console.log(err);
@@ -162,8 +177,7 @@ const ambienceNoiseCheck = (audioBlob) => {
 const getMediaRecorder = () => {
     let stream = null,
         microphone = null,
-        javascriptNode = null,
-        sampleRate = 44100;
+        javascriptNode = null;
     let max_level_L = 0;
     let old_level_L = 0;
     const start = () => {
@@ -218,7 +232,11 @@ const getMediaRecorder = () => {
         let finalBuffer = flattenArray(audioData, recordingLength);
         let audioBlob = generateWavBlob(finalBuffer, sampleRate);
         if (audioBlob !== null) {
-            ambienceNoiseCheck(audioBlob);
+            // check to make ambient noise feature available on dev and localhost
+            // remove this check once feature is confirmed for production
+            if (ambientNoiseFeature) {
+                ambienceNoiseCheck(audioBlob);
+            }
             const audioUrl = URL.createObjectURL(audioBlob);
             micAudio = new Audio(audioUrl);
             micAudio.onloadedmetadata = function() {
@@ -246,6 +264,9 @@ const getMediaRecorder = () => {
     };
 }
 const testMic = (btnDataAttr) => {
+    $('#mic-msg').addClass('invisible').removeClass('d-none');
+    $('#no-noise').addClass('d-none');
+    $('#noise').addClass('d-none');
     const $testMicText = $('#test-mic-text');
     const recorder = getMediaRecorder();
     if (btnDataAttr === 'test-mic') {
@@ -282,6 +303,8 @@ const initialize = () => {
     const $testMicSpeakerBtn = $('#test-mic-speakers-button')
     const $testMicSpeakerDetails = $('#test-mic-speakers-details');
     const $testMicCloseBtn = $('#test-mic-close');
+    const $noNoise = $('#no-noise');
+    const $noise = $('#noise')
     const totalItems = sentences.length;
     currentIndex = getCurrentIndex(totalItems - 1);
     let skipCount =
@@ -308,6 +331,9 @@ const initialize = () => {
     $testMicCloseBtn.on('click', (e) => {
         $testMicDiv.removeClass('d-none');
         $testMicSpeakerDetails.addClass('d-none');
+        $('#mic-msg').addClass('invisible').removeClass('d-none');
+        $noNoise.addClass('d-none');
+        $noise.addClass('d-none');
         audioData = [];
         recordingLength = 0;
         if (micAudio) {
@@ -323,6 +349,8 @@ const initialize = () => {
     });
     $testMicBtn.on('click', (e) => {
         const btnDataAttr = $('#test-mic-button').attr('data-value');
+        // $noNoise.addClass('invisible').removeClass('d-none');
+        // $noise.addClass('d-none');
         testMic(btnDataAttr);
     });
     $testSpeakerBtn.on('click', (e) => {
@@ -571,9 +599,8 @@ const initialize = () => {
             Object.assign(sentencesObj, { sentences: [] });
             localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
             localStorage.setItem(currentIndexKey, currentIndex);
-            notyf.success(
-                'Congratulations!!! You have completed this batch of sentences'
-            );
+            const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
+            notyf.success(msg);
             $('#loader').show();
         } else if (currentIndex < totalItems - 1) {
             incrementCurrentIndex();
@@ -764,10 +791,16 @@ const handleSubmitFeedback = function () {
 }
 
 let selectedReportVal = '';
-$(document).ready(() => {
+
+function executeOnLoad() {
     $('footer').removeClass('bottom').addClass('fixed-bottom');
     setPageContentHeight();
     window.crowdSource = {};
+    if (window.location.origin.indexOf('localhost') !== -1 ||
+        window.location.origin.indexOf('dev') !== -1 ||
+        window.location.origin.indexOf('test') !== -1) {
+            ambientNoiseFeature = true;
+    }
     //const $instructionModal = $('#instructionsModal');
     const $validationInstructionModal = $("#validation-instruction-modal");
     const $errorModal = $('#errorModal');
@@ -819,7 +852,7 @@ $(document).ready(() => {
         setPageContentHeight();
 
         //$instructionModal.on('hidden.bs.modal', function () {
-          //  $pageContent.removeClass('d-none');
+        //  $pageContent.removeClass('d-none');
             // toggleFooterPosition();
         //});
     
@@ -920,6 +953,14 @@ $(document).ready(() => {
         console.log(err);
         $errorModal.modal('show');
     }
+}
+
+$(document).ready(() => {
+    getLocaleString().then((data) => {
+        executeOnLoad();
+    }).catch((err) => {
+        executeOnLoad();
+    });
 });
 
 

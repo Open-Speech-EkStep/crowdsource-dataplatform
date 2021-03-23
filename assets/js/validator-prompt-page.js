@@ -418,7 +418,10 @@ function showNoSentencesMessage() {
     hideElement($('#skip_btn_row'));
     hideElement($('#validation-container'));
     $("#validation-container").removeClass("validation-container");
+    $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
 }
+
+
 
 $(document).ready(() => {
     toggleFooterPosition();

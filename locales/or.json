@@ -161,7 +161,7 @@
 	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\" class=\"font-wt-900\"></span> ରେକର୍ଡ଼ିଂକୁ ଭାଲିଡେଟ୍ କରିଥିବାରୁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ",
 	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "ଆଗକୁ ବଢ଼ିବା ସହିତ ଆପଣ <a href=\"/terms-and-conditions\">ସର୍ତ୍ତ ଓ ବ୍ୟବସ୍ଥାବଳୀ</a> ସହିତ ସହମତ ଅଟନ୍ତି",
 	"Test your Microphone and Speakers": "ଆପଣଙ୍କର ମାଇକ୍ରୋଫୋନ୍ ଓ ସ୍ପିକର ଯାଞ୍ଚ କରନ୍ତୁ",
-	"Test mic": "ମାଇକ୍ ଟେଷ୍ଟ କରନ୍ତୁ",
+	"Test Mic": "ମାଇକ୍ ଟେଷ୍ଟ କରନ୍ତୁ",
 	"Test Speakers": "ସ୍ପିକର ଟେଷ୍ଟ କରନ୍ତୁ",
 	"Recording for 5 seconds": "Recording for 5 seconds",
 	"Recording for 4 seconds": "Recording for 4 seconds",
@@ -183,5 +183,6 @@
 	"Most data recorded for": "Most data recorded for",
 	"Data recorded for": "Data recorded for",
 	"Help your language achieve it’s goal of 100 hrs. We know you can do more!": "ଆପଣଙ୍କର ଭାଷାକୁ  100 ଘଣ୍ଟାର ଲକ୍ଷ୍ୟ ହାସଲ କରିବାରେ ସହାୟତା କରନ୍ତୁ। ଆମେ ଜାଣୁ ଆପଣ ଅଧିକ କରିପାରିବେ!",
-	"Please test your <b>speakers</b>": "ଦୟାକରି ଆପଣଙ୍କର <b>ସ୍ପିକରକୁ</b> ଚେକ କରନ୍ତୁ"
+	"Please test your <b>speakers</b>": "ଦୟାକରି ଆପଣଙ୍କର <b>ସ୍ପିକରକୁ</b> ଚେକ କରନ୍ତୁ",
+	"Congratulations!!! You have completed this batch of sentences": "Congratulations!!! You have completed this batch of sentences"
 }
