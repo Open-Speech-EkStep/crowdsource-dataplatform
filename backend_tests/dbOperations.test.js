@@ -20,6 +20,8 @@ process.env.LAUNCH_IDS = '1,2'
 const dbOperations = require('../src/dbOperations');
 const { topLanguagesByHoursContributed, topLanguagesBySpeakerContributions, listLanguages } = require('../src/dashboardDbQueries');
 
+const res = { status: () => { return { send: () => { } }; } };
+
 describe("Running tests for dbOperations", () => {
     describe('tests for getSentencesBasedOnAge', () => {
 
@@ -196,7 +198,7 @@ describe("Running tests for dbOperations", () => {
         const req = { params: { language: language } };
         const spyDBany = jest.spyOn(mockDB, 'any')
 
-        dbOperations.getValidationSentences(req, {});
+        dbOperations.getValidationSentences(req, res);
 
         expect(spyDBany).toHaveBeenCalledWith(getValidationSentencesQuery, [language]);
         jest.clearAllMocks();
