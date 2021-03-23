@@ -577,6 +577,7 @@ const initialize = () => {
         if (event.target.id === 'nextBtn' && currentIndex < totalItems - 1) {
             uploadToServer();
         } else if (event.target.id === 'skipBtn') {
+            markContributionSkipped();
             incrementSkipCount();
             $skipBtn.addClass('d-none');
         }
@@ -626,6 +627,33 @@ const initialize = () => {
     function incrementSkipCount() {
         skipCount++;
         localStorage.setItem(skipCountKey, skipCount);
+    }
+
+    function markContributionSkipped() {
+        const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
+
+        const reqObj = {
+            sentenceId: crowdSource.sentences[currentIndex].sentenceId,
+            userName: speakerDetails.userName
+        };
+        fetch('/skip', {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(reqObj),
+        })
+            .then((res) => res.json())
+            .then((result) => {
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+            .then((finalRes) => {
+                if (cb && typeof cb === 'function') {
+                    cb();
+                }
+            });
     }
 
     function uploadToServer(cb) {

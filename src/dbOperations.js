@@ -21,7 +21,8 @@ const {
     feedbackInsertion,
     getAudioPath,
     saveReportQuery,
-    getSentencesForLaunch
+    getSentencesForLaunch,
+    markContributionSkippedQuery
 } = require('./dbQuery');
 
 const {
@@ -363,6 +364,11 @@ const saveReport = async (userId, sentenceId, reportText, language, userName) =>
     await db.any(saveReportQuery,[encryptUserId, userName, sentenceId, reportText, language])
 }
 
+const markContributionSkipped = (userId, sentenceId, userName) => {
+    const encryptUserId = encrypt(userId);
+    return db.any(markContributionSkippedQuery, [encryptUserId, userName, sentenceId]);
+}
+
 module.exports = {
     updateAndGetSentences,
     getValidationSentences,
@@ -381,5 +387,6 @@ module.exports = {
     getLastUpdatedAt,
     getSentencesBasedOnAge,
     insertFeedback,
-    saveReport
+    saveReport,
+    markContributionSkipped
 };

@@ -22,7 +22,7 @@ select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
 from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
-and (coalesce(cont.action,\'\')!=\'completed\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id)) \
+and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
 group by sentences."sentenceId", con."contributor_id" \
 order by sentences."sentenceId" \
 limit 5  returning "sentenceId") \
@@ -41,7 +41,7 @@ select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
 from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
-and (coalesce(cont.action,\'\')!=\'completed\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id)) \
+and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
 and sentences."sentenceId"= ANY($8::int[])\
 group by sentences."sentenceId", con."contributor_id" \
 order by sentences."sentenceId" \
@@ -61,7 +61,7 @@ select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
 from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
-and (coalesce(cont.action,\'\')!=\'completed\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id)) \
+and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
 group by sentences."sentenceId", con."contributor_id" \
 order by RANDOM() \
 limit 5  returning "sentenceId") \
@@ -129,6 +129,8 @@ INSERT INTO reports (reported_by,sentence_id,report_text,language) \
 SELECT contributor_id,$3,$4,$5 \
 FROM contributor;';
 
+const markContributionSkippedQuery = "update contributions set action='skipped' where contributed_by=(select contributor_id from contributors where user_name=$2 and contributor_identifier = $1) and \"sentenceId\"=$3;";
+
 module.exports = {
   unassignIncompleteSentences,
   sentencesCount,
@@ -148,5 +150,6 @@ module.exports = {
   feedbackInsertion,
   getAudioPath,
   saveReportQuery,
-  getSentencesForLaunch
+  getSentencesForLaunch,
+  markContributionSkippedQuery
 }
