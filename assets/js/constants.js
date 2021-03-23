@@ -11,7 +11,7 @@ const ALL_LANGUAGES = [
     {value: "Assamese",id: "as", text: "অসমীয়া", hasLocaleText: false, data:true},
     {value: "Bengali", id: "bn", text: "বাংলা", hasLocaleText: false,data:true},
     {value: "English", id: "en", text: "English", hasLocaleText: true,data:true},
-    {value: "Gujarati", id: "gu", text: "ગુજરાતી", hasLocaleText: false,data:true},
+    {value: "Gujarati", id: "gu", text: "ગુજરાતી", hasLocaleText: true,data:true},
     {value: "Hindi", id: "hi", text: "हिंदी", hasLocaleText: true,data:true},
     {value: "Kannada", id: "kn", text: "ಕನ್ನಡ", hasLocaleText: true,data:true},
     {value: "Malayalam", id: "ml", text: "മലയാളം", hasLocaleText: false,data:true},
