@@ -208,7 +208,7 @@
 	"Ambient Noise Detected": "एंबियंस में शोर सुनाई दिया",
 	"Please specify the reason (Optional)": "कृपया कारण बताएं (वैकल्पिक)",
 	"SUBMIT": "सबमिट करें",
-	"Most data recorded for <span id=\"languageId\"></span>": "<span id=\"languageId\"></span> में सबसे ज़्यादा योगदान",
+	"Most Contributed - <span id=\"languageId\"></span>": "सबसे ज़्यादा योगदान - <span id=\"languageId\"></span>",
 	"Data recorded for <span id=\"languageChoiceId\"></span>": "<span id=\"languageChoiceId\"></span> के लिए डेटा रिकॉर्ड किया गया",
 	"Congratulations!!! You have completed this batch of sentences": "बधाई हो! आपने अपनी आवाज़ में एक बैच का योगदान किया है!",
 	"Please type here...": "कृपया यहाँ टाइप करें...",

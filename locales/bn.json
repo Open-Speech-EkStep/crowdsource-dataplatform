@@ -236,7 +236,7 @@
 	"You are just 'x' sentences away from earning the Silver Badge.": "রূপা ব্যাজ উপার্জন থেকে আপনি 'এক্স' বাক্য দূরে রয়েছেন।",
 	"You are just 'x' sentences away from earning the Gold Badge.": "সোনা ব্যাজ উপার্জন থেকে আপনি 'এক্স' বাক্য দূরে রয়েছেন।",
 	"You are just 'x' sentences away from earning the Platinum Badge.": "প্ল্যাটিনাম ব্যাজ উপার্জন থেকে আপনি কেবল 'এক্স' বাক্য দূরে রয়েছেন।",
-	"Most data recorded for <span id=\"languageId\"></span>": "সবচেয়ে বেশি অবদান  <span id=\"languageId\"></span>",
+	"Most Contributed - <span id=\"languageId\"></span>": "সবচেয়ে বেশি অবদান - <span id=\"languageId\"></span>",
 	"Data recorded for <span id=\"languageChoiceId\"></span>": "<span id=\"languageChoiceId\"></span> এর জন্য ডেটা রেকর্ড হয়েছে",
 	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "আপনাকে ধন্যবাদ <span id=\"spn-validation-count\" class=\"font-wt-900\"></span>টি রেকর্ডিং যাচাই করার জন্য ",
 	"Thank you for validating  <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> voice samples": "আপনাকে ধন্যবাদ <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> ভয়েস নমুনাগুলি যাচাই করার জন্য ",
