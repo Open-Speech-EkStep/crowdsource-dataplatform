@@ -3,6 +3,7 @@ const {
   setPageContentHeight,
   toggleFooterPosition,
   updateLocaleLanguagesDropdown,
+  getLocaleString
 } = require("./utils");
 
 const CURRENT_INDEX = "currentIndex";
@@ -201,7 +202,7 @@ const getLanguageStats = function () {
     });
 };
 
-$(document).ready(function () {
+function executeOnLoad() {
   const currentIndexInStorage = Number(localStorage.getItem(CURRENT_INDEX));
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem(SPEAKER_DETAILS));
 
@@ -260,6 +261,14 @@ $(document).ready(function () {
     updateLocaleLanguagesDropdown(contributionLanguage);
   }
   getLanguageStats();
+}
+
+$(document).ready(function () {
+  getLocaleString().then((data) => {
+        executeOnLoad();
+    }).catch((err) => {
+        executeOnLoad();
+    });
 });
 
 module.exports = { setUserContribution, getTotalSentencesContributed };

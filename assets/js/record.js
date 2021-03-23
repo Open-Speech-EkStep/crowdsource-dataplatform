@@ -1,4 +1,4 @@
-const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition } = require('./utils');
+const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString } = require('./utils');
 const { LOCALE_STRINGS } = require('./constants');
 
 const speakerDetailsKey = 'speakerDetails';
@@ -786,7 +786,8 @@ const handleSubmitFeedback = function () {
 }
 
 let selectedReportVal = '';
-$(document).ready(() => {
+
+function executeOnLoad() {
     $('footer').removeClass('bottom').addClass('fixed-bottom');
     setPageContentHeight();
     window.crowdSource = {};
@@ -846,7 +847,7 @@ $(document).ready(() => {
         setPageContentHeight();
 
         //$instructionModal.on('hidden.bs.modal', function () {
-          //  $pageContent.removeClass('d-none');
+        //  $pageContent.removeClass('d-none');
             // toggleFooterPosition();
         //});
     
@@ -945,6 +946,14 @@ $(document).ready(() => {
         console.log(err);
         $errorModal.modal('show');
     }
+}
+
+$(document).ready(() => {
+    getLocaleString().then((data) => {
+        executeOnLoad();
+    }).catch((err) => {
+        executeOnLoad();
+    });
 });
 
 

@@ -66,11 +66,14 @@ const performAPIRequest = (url) => {
 }
 
 const getLocaleString = function() {
-    const locale = getCookie("i18n");
-    performAPIRequest(`/get-locale-strings/${locale}`)
+    return new Promise(function(resolve, reject) {
+        const locale = getCookie("i18n");
+        performAPIRequest(`/get-locale-strings/${locale}`)
         .then((response) => {
             localStorage.setItem('localeString', JSON.stringify(response));
+            resolve(response);
         });
+    });
 }
 
 const updateLocaleLanguagesDropdown = (language) => {

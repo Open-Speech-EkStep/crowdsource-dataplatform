@@ -129,7 +129,7 @@ step("When user skips all the rest of the <count> sentences , User should see Th
         await click(skipbutton)
         await taiko.waitFor(500)
     }
-    await taiko.waitFor(4000)
+    await taiko.waitFor(5000)
     assert.ok(await text('Thank you for contributing!').exists())
 });
 
