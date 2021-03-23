@@ -9,17 +9,17 @@ const LOCALE_STRINGS = 'localeString';
 const CONTRIBUTION_LANGUAGE = "contributionLanguage";
 const ALL_LANGUAGES = [
     {value: "Assamese",id: "as", text: "অসমীয়া", hasLocaleText: false, data:true},
-    {value: "Bengali", id: "bn", text: "বাংলা", hasLocaleText: false,data:true},
+    {value: "Bengali", id: "bn", text: "বাংলা", hasLocaleText: true,data:true},
     {value: "English", id: "en", text: "English", hasLocaleText: true,data:true},
     {value: "Gujarati", id: "gu", text: "ગુજરાતી", hasLocaleText: true,data:true},
     {value: "Hindi", id: "hi", text: "हिंदी", hasLocaleText: true,data:true},
     {value: "Kannada", id: "kn", text: "ಕನ್ನಡ", hasLocaleText: true,data:true},
     {value: "Malayalam", id: "ml", text: "മലയാളം", hasLocaleText: false,data:true},
-    {value: "Marathi", id: "mr", text: "मराठी", hasLocaleText: false,data:true},
+    {value: "Marathi", id: "mr", text: "मराठी", hasLocaleText: true,data:true},
     {value: "Odia", id: "or", text: "ଓଡିଆ", hasLocaleText: false,data:true},
     {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ", hasLocaleText: false,data:true},
     {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: true,data:true},
-    {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: false,data:true}];
+    {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true,data:true}];
 
 module.exports = {
     DEFAULT_CON_LANGUAGE,
