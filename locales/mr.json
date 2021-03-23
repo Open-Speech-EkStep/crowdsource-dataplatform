@@ -124,7 +124,7 @@
 	"recordings contributed": "रेकॉर्डिंगचे योगदान दिले गेले",
 	"Share it with your friends and family": "ह्याला तुमच्या मित्र परिवार आणि कुटुंबासह शेअर करा",
 	"Did you know?": "तुम्हाला माहित आहे का?",
-	"Most Contributed": "सर्वात अधिक योगदान",
+	"Most Contributed - <span id=\"languageId\"></span>": "सर्वात अधिक योगदान - <span id=\"languageId\"></span>",
 	"Data recorded for <span id=\"languageChoiceId\"></span>": "<span id=\"languageChoiceId\"></span> साठी डेटा रेकॉर्ड केला गेला",
 	"Help your language achieve it’s goal of 100 hrs. We know you can do more!": "आपल्या भाषेसाठी 100 तासांचे लक्ष्य पूर्ण करण्यासाठी सहयोग करा. आम्हाला माहित आहे की तुम्ही खूप काही करू शकता!",
 	"Contribute More": "अधिक योगदान द्या",
