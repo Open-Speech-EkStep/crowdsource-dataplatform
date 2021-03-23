@@ -13,7 +13,7 @@ const ALL_LANGUAGES = [
     {value: "English", id: "en", text: "English", hasLocaleText: true,data:true},
     {value: "Gujarati", id: "gu", text: "ગુજરાતી", hasLocaleText: false,data:true},
     {value: "Hindi", id: "hi", text: "हिंदी", hasLocaleText: true,data:true},
-    {value: "Kannada", id: "kn", text: "ಕನ್ನಡ", hasLocaleText: false,data:true},
+    {value: "Kannada", id: "kn", text: "ಕನ್ನಡ", hasLocaleText: true,data:true},
     {value: "Malayalam", id: "ml", text: "മലയാളം", hasLocaleText: false,data:true},
     {value: "Marathi", id: "mr", text: "मराठी", hasLocaleText: false,data:true},
     {value: "Odia", id: "or", text: "ଓଡିଆ", hasLocaleText: false,data:true},
