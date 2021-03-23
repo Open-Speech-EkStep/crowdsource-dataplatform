@@ -239,8 +239,8 @@ step("User skips the next <count> sentences user should land on Thank you page i
         await click(skipbutton)
         await taiko.waitFor(700)
     }
-    await taiko.waitFor(1000)
-    assert.ok(await text('प्रमाणित करने के लिए शुक्रिया!').exists())
+    await taiko.waitFor(4000);
+    assert.ok(await text('प्रमाणित करने के लिए शुक्रिया!').exists());
 });
 
 step("User should see the <arg> button", async function (arg) {
