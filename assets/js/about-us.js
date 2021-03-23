@@ -55,11 +55,11 @@ $(document).ready(function () {
         langTop = e.target.value;
         const $toggleButton = $('#start_recording');
         $toggleButton.removeAttr('disabled');
-        document.cookie = `i18n=en`;
     });
 
     $('#start_recording').on('click', () => {
         sentenceLanguage = langTop;
+        document.cookie = `i18n=en`;
     });
 
     setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
