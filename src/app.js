@@ -21,7 +21,7 @@ const {
   getAllInfo,
   updateTablesAfterValidation,
   getAudioClip,
-  insertFeedback, saveReport
+  insertFeedback, saveReport, markContributionSkipped
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
@@ -30,7 +30,8 @@ const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH, MIN_SNR_LEVEL } = 
 const {
   validateUserInputAndFile,
   validateUserInfo,
-  validateUserInputForFeedback
+  validateUserInputForFeedback,
+  validateInputForSkip
 } = require('./middleware/validateUserInputs');
 
 // const Ddos = require('ddos');
@@ -199,6 +200,16 @@ router.post('/report', async (req, res) => {
   }
   return res.send({ statusCode: 200, message: "Reported successfully." });
 })
+
+router.post('/skip', validateInputForSkip, (req, res) => {
+  markContributionSkipped(req.cookies.userId, req.body.sentenceId, req.body.userName).then(() => {
+    return res.send({ statusCode: 200, message: "Skipped successfully." });
+  })
+  .catch((err) => {
+    console.log(err);
+    return res.send({ statusCode: 500, message: err.message });
+  })
+});
 
 router.post('/upload', (req, res) => {
   const file = req.file;

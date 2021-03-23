@@ -68,4 +68,18 @@ const validateUserInputForFeedback = function (req, res, next) {
     next()
 }
 
-module.exports = {validateUserInputAndFile, validateUserInfo, convertIntoMB,validateUserInputForFeedback}
+const validateInputForSkip = function (req, res, next) {
+    const sentenceId = req.body.sentenceId;
+    const userName = req.body.userName;
+    const userId = req.cookies.userId;
+
+    const invalid = !sentenceId || userName == undefined || !userId;
+
+    if (invalid) {
+        return res.status(400).send("Bad request");
+    }
+
+    next();
+}
+
+module.exports = {validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip}
