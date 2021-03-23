@@ -109,7 +109,7 @@ app.use(function (req, res, next) {
 app.use(express.static('public'));
 
 app.get('/changeLocale/:locale', function (req, res) {
-  if(['hi', 'en', 'ta'].indexOf(req.params.locale) > -1) {
+  if(['hi', 'en', 'ta', 'kn'].indexOf(req.params.locale) > -1) {
     res.cookie('contributionLanguage', req.params.locale);
     res.cookie('i18n', req.params.locale);
   } else {
