@@ -78,7 +78,6 @@ const validateInputForSkip = function (req, res, next) {
     if (invalid) {
         return res.status(400).send("Bad request");
     }
-
     next();
 }
 
