@@ -55,7 +55,7 @@ jobs:
     steps:
       - checkout
       - node/install-packages
-      - run: gulp --env << parameters.env_name >>
+      - run: npm run gulp -- --env=<< parameters.env_name >>
       - aws-s3/sync:
           arguments: |
             --acl public-read \
@@ -102,12 +102,6 @@ workflows:
           env_name: test
           requires:
             - node/test
-
-      - approve_to_deploy:
-          name: dont_click_here
-          type: approval
-          requires:
-            - build_dev_ui
 
       - db_migrate_aws:
           name: migrate_dev_aws
