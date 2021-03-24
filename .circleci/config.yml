@@ -57,9 +57,6 @@ jobs:
       - node/install-packages
       - run: npm run gulp -- --env=<< parameters.env_name >>
       - aws-s3/sync:
-          arguments: |
-            --acl public-read \
-            --cache-control "max-age=86400"
           from: public/
           to: 's3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>'
 
