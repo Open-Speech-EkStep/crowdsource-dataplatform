@@ -19,14 +19,12 @@
 <div id="content-wrapper" class="container-fluid pt-5 pb-2 px-3 px-md-5 h-100">
     <div class="row mx-lg-5">
         <div class="col-12">
-            <h1>Levels and Badging @BoloIndia</h1>
+            <h1><%= __('Levels and Badging @BoloIndia')%></h1>
         </div>
     </div>
     <div class="row mx-lg-5 my-3">
-        <p class="col-12 col-lg-8 h5 font-weight-light-lg font-weight-normal-sm lh-7 text-justify">Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate</p>
+        <p class="col-12 col-lg-8 h5 font-weight-light-lg font-weight-normal-sm lh-7 text-justify">
+            <%= __('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate')%></p>
     </div>
     <div class="row mx-lg-5">
         <div class="col-12 col-lg-3 col-md-4 col-sm-6">
@@ -34,7 +32,7 @@
                 <div class="py-3">
                     <%- include modals/bronze_badge.ejs %>
                 </div>
-                <h3 class="py-3">Bronze</h3>
+                <h3 class="py-3"><%= __('Bronze')%></h3>
             </div>
         </div>
         <div class="col-12 col-lg-3 col-md-4 col-sm-6">
@@ -42,7 +40,7 @@
                 <div class="py-3">
                     <%- include modals/silver_badge.ejs %>
                 </div>
-                <h3 class="py-3">Silver</h3>
+                <h3 class="py-3"><%= __('Silver')%></h3>
             </div>
         </div>
         <div class="col-12 col-lg-3 col-md-4 col-sm-6">
@@ -50,7 +48,7 @@
                 <div class="py-3">
                     <%- include modals/gold_badge.ejs %>
                 </div>
-                <h3 class="py-3">Gold</h3>
+                <h3 class="py-3"><%= __('Gold')%></h3>
             </div>
         </div>
         <div class="col-12 col-lg-3 col-md-4 col-sm-6">
@@ -58,79 +56,80 @@
                 <div class="py-3">
                     <%- include modals/platinum_badge.ejs %>
                 </div>
-                <h3 class="py-3">Platinum</h3>
+                <h3 class="py-3"><%= __('Platinum')%></h3>
             </div>
         </div>
     </div>
 
     <div class="row mx-lg-5 mt-5">
-        <h2 class="col-12">Contributor Levels</h2>
+        <h2 class="col-12"><%= __('Contributor Levels')%></h2>
     </div>
     <div class="row mx-lg-5">
-        <p class="col-12">Participate more to gain badges</p>
+        <p class="col-12"><%= __('Participate more to gain badges')%></p>
     </div>
     <div class="row mx-lg-5">
         <table class="table table-bordered table-striped table-responsive-xs text-center mx-3 w-100">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">Level</th>
+                <th scope="col"><%= __('Level')%></th>
                 <th scope="col">
-                    Contributions
-                    <p>(Recording + Validating)</p>
+                    <%= __('Contributions')%>
+
+                    <p><%= __('(Recording + Validating)')%></p>
                 </th>
-                <th scope="col">Badge</th>
+                <th scope="col"><%= __('Badge')%></th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>Level 1</td>
-                <td>1 Senetence</td>
-                <td>N/A</td>
+                <td><%= __('Level 1')%></td>
+                <td><%- __('<span class="level-count"></span> Senetences')%></td>
+                <td><%= __('N/A')%></td>
             </tr>
             <tr>
-                <td>Level 2</td>
-                <td>2 Senetence</td>
-                <td>N/A</td>
+                <td><%= __('Level 2')%></td>
+                <td><%- __('<span class="level-count"></span> Senetences')%></td>
+                <td><%= __('N/A')%></td>
             </tr>
             <tr>
-                <td>Level 3</td>
-                <td>1 Senetnce</td>
+                <td><%= __('Level 3')%></td>
+                <td><%- __('<span class="level-count"></span> Senetences')%></td>
                 <td>
                     <div class="table-img">
                         <%- include modals/bronze_badge.ejs %>
                     </div>
-                    Bronze
+                    <%= __('Bronze')%>
                 </td>
             </tr>
             <tr>
-                <td>Level 4</td>
-                <td>1 Senetnce</td>
+                <td><%= __('Level 4')%></td>
+                <td><%- __('<span class="level-count"></span> Senetences')%></td>
                 <td>
                     <div class="table-img">
                         <%- include modals/silver_badge.ejs %>
                     </div>
-                    Silver
+                    <%= __('Silver')%>
                 </td>
             </tr>
             <tr>
-                <td>Level 5</td>
-                <td>1 Senetnce</td>
+                <td><%= __('Level 5')%></td>
+                <td><%- __('<span class="level-count"></span> Senetences')%></td>
                 <td>
                     <div class="table-img">
                         <%- include modals/gold_badge.ejs %>
                     </div>
-                    Gold
+                    <%= __('Gold')%>
+
                 </td>
             </tr>
             <tr>
-                <td>Level 6</td>
-                <td>1 Senetnce</td>
+                <td><%= __('Level 6')%></td>
+                <td><%- __('<span class="level-count"></span> Senetences')%></td>
                 <td>
                     <div class="table-img">
                         <%- include modals/platinum_badge.ejs %>
                     </div>
-                    Platinum
-
+                    <%= __('Platinum')%>
                 </td>
             </tr>
             </tbody>
