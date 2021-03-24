@@ -159,6 +159,10 @@ router.get('/feedback', function (req, res) {
   res.render('feedback.ejs');
 });
 
+router.get('/badges', function (req, res) {
+  res.render('badge-info.ejs');
+});
+
 router.get('/about-us', function (req, res) {
   res.render('about-us.ejs', { MOTHER_TONGUE, LANGUAGES });
 });
