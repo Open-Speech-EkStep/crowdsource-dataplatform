@@ -236,7 +236,7 @@ describe('setStartRecordingBtnOnClick', () => {
 
         const expectedDetails = localStorage.getItem('speakerDetails');
         expect(expectedDetails).toEqual(JSON.stringify({gender:"",age:"",motherTongue:"",userName:"",language:"Hindi"}));
-        expect(location.href).toEqual("/record");
+        expect(location.href).toEqual("./record.html");
         localStorage.clear();
     })
 });

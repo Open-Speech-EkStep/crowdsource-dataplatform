@@ -2,7 +2,6 @@ require('dotenv').config();
 const cors = require('cors');
 const objectStorage = process.argv[2] || 'gcp';
 const fetch = require('node-fetch');
-const cors = require('cors');
 const { uploader } = require('./uploader/objUploader')
 const { calculateSNR } = require('./audio_attributes/snr')
 
@@ -79,9 +78,6 @@ const multerStorage = multer.diskStorage({
     cb(null, currentDateAndTime() + '_' + randomString() + '.wav');
   },
 });
-const corsOptions = {
-  origin: /vakyansh\.in$/,
-}
 const upload = multer({ storage: multerStorage });
 const corsOptions = {
   origin: /vakyansh\.in$/,
