@@ -95,6 +95,15 @@ workflows:
             #  - node/test
             - migrate_dev_aws
 
+      - aws-ecr/build-and-push-image:
+          name: push_dev_db_refresher_image
+          repo: ${DB_REFRESHER_REPO}
+          dockerfile: dbRefreshDockerfile
+          tag: dev
+          requires:
+            #  - node/test
+            - migrate_dev_aws
+
       - eks_fargate_deployment:
           name: dev_deployment_eks
           cluster-name: ${CLUSTER_NAME}
