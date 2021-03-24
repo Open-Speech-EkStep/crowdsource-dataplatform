@@ -17,7 +17,7 @@ const ALL_LANGUAGES = [
     {value: "Malayalam", id: "ml", text: "മലയാളം", hasLocaleText: false,data:true},
     {value: "Marathi", id: "mr", text: "मराठी", hasLocaleText: true,data:true},
     {value: "Odia", id: "or", text: "ଓଡିଆ", hasLocaleText: false,data:true},
-    {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ", hasLocaleText: false,data:true},
+    {value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ", hasLocaleText: true,data:true},
     {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: true,data:true},
     {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true,data:true}];
 
