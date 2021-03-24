@@ -1,4 +1,4 @@
-const { toggleFooterPosition, setPageContentHeight } = require("./utils");
+const { toggleFooterPosition, setPageContentHeight, updateLocaleLanguagesDropdown } = require("./utils");
 function handleGoBack() {
   window.history.back();
 }
@@ -50,6 +50,10 @@ const enableSubmit = function () {
 $(document).ready(function () {
   toggleFooterPosition();
   setPageContentHeight();
+  const contributionLanguage = localStorage.getItem('contributionLanguage');
+    if(contributionLanguage) {
+        updateLocaleLanguagesDropdown(contributionLanguage);
+    }
   const text_max = 1000;
   $("#count_message").html("0 / " + text_max);
   $("#feedback_description").on("keyup", function () {
