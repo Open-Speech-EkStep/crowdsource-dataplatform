@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/badges.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+</head>
+
+<body>
+<%- include common/headerForContributor.ejs %>
+<div id="content-wrapper" class="container-fluid pt-5 pb-2 px-3 px-md-5 h-100">
+    <div class="row mx-lg-5">
+        <div class="col-12">
+            <h1>Levels and Badging @BoloIndia</h1>
+        </div>
+    </div>
+    <div class="row mx-lg-5 my-3">
+        <p class="col-12 col-lg-8 h5 font-weight-light-lg font-weight-normal-sm lh-7 text-justify">Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate</p>
+    </div>
+    <div class="row mx-lg-5">
+        <div class="col-12 col-lg-3 col-md-4 col-sm-6">
+            <div class="card row text-center m-2">
+                <div class="py-3">
+                    <%- include modals/bronze_badge.ejs %>
+                </div>
+                <h3 class="py-3">Bronze</h3>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3 col-md-4 col-sm-6">
+            <div class="card row text-center m-2">
+                <div class="py-3">
+                    <%- include modals/silver_badge.ejs %>
+                </div>
+                <h3 class="py-3">Silver</h3>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3 col-md-4 col-sm-6">
+            <div class="card row text-center m-2">
+                <div class="py-3">
+                    <%- include modals/gold_badge.ejs %>
+                </div>
+                <h3 class="py-3">Gold</h3>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3 col-md-4 col-sm-6">
+            <div class="card row text-center m-2">
+                <div class="py-3">
+                    <%- include modals/platinum_badge.ejs %>
+                </div>
+                <h3 class="py-3">Platinum</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mx-lg-5 mt-5">
+        <h2 class="col-12">Contributor Levels</h2>
+    </div>
+    <div class="row mx-lg-5">
+        <p class="col-12">Participate more to gain badges</p>
+    </div>
+    <div class="row mx-lg-5">
+        <table class="table table-bordered table-striped table-responsive-xs text-center mx-3 w-100">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Level</th>
+                <th scope="col">
+                    Contributions
+                    <p>(Recording + Validating)</p>
+                </th>
+                <th scope="col">Badge</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Level 1</td>
+                <td>1 Senetence</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Level 2</td>
+                <td>2 Senetence</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Level 3</td>
+                <td>1 Senetnce</td>
+                <td>
+                    <div class="table-img">
+                        <%- include modals/bronze_badge.ejs %>
+                    </div>
+                    Bronze
+                </td>
+            </tr>
+            <tr>
+                <td>Level 4</td>
+                <td>1 Senetnce</td>
+                <td>
+                    <div class="table-img">
+                        <%- include modals/silver_badge.ejs %>
+                    </div>
+                    Silver
+                </td>
+            </tr>
+            <tr>
+                <td>Level 5</td>
+                <td>1 Senetnce</td>
+                <td>
+                    <div class="table-img">
+                        <%- include modals/gold_badge.ejs %>
+                    </div>
+                    Gold
+                </td>
+            </tr>
+            <tr>
+                <td>Level 6</td>
+                <td>1 Senetnce</td>
+                <td>
+                    <div class="table-img">
+                        <%- include modals/platinum_badge.ejs %>
+                    </div>
+                    Platinum
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<%- include common/footer.ejs %>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>$("footer").removeClass("fixed-bottom").addClass("bottom")</script>
+</body>
+</html>
