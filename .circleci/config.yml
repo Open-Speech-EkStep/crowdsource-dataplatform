@@ -98,7 +98,7 @@ workflows:
       - aws-ecr/build-and-push-image:
           name: push_dev_db_refresher_image
           repo: ${DB_REFRESHER_REPO}
-          dockerfile: dbRefreshDockerfile
+          dockerfile: Dockerfile-dbRefresh
           tag: dev
           requires:
             #  - node/test
