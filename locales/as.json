@@ -227,5 +227,18 @@
 	"Help your language achieve it’s goal of 100 hrs. We know you can do more!": " 100 ঘন্টা ৰেকৰ্ড কৰি আপোনাৰ ভাষাক নিৰ্দিষ্ট লক্ষ্যত উপনীত হবলৈ সহায় কৰক, আমি জানো আপুনি এই কাম কৰিব পাৰিব",
 	"Please test your <b>speakers</b>": "Please test your <b>speakers</b>",
 	"I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great lingusitic applications. Our <x> language ranks <y> on BoloIndia. Do your bit and empower the language?": " ভাৰতীয় ভাষাৰ মুক্ত উৎস সৃষ্টি কৰাৰ বাবে মই http://boloindia.nplt.in- ত অৱদান আগবঢ়াইছোঁ, ডাভৰ ডাঙৰ লিংগুষ্টিক এপ্লিকেচন বোৰৰ সৈতে আমাৰ ভাষাত কথা পাতিবলৈ আৰু মেচিন লাৰ্নিঙৰ  বাবে আপুনি আৰু মই আমাৰ কন্ঠ দান কৰি এক বৃহৎ পাৰ্থক্য আনি দিব পাৰোঁ। ভাষাদান কাৰ্যসূচীত আমাৰ <x> ভাষাৰ পদমৰ্যদা <y>। আপুনি ভাষাটো আৰু অলপ শক্তিশালী হোৱাটো বিচাৰে নেকি?",
-	"Congratulations!!! You have completed this batch of sentences": "Congratulations!!! You have completed this batch of sentences"
+	"Congratulations!!! You have completed this batch of sentences": "Congratulations!!! You have completed this batch of sentences",
+	"Most data recorded for <span id=\"languageId\"></span>": "Most data recorded for <span id=\"languageId\"></span>",
+	"Data recorded for <span id=\"languageChoiceId\"></span>": "Data recorded for <span id=\"languageChoiceId\"></span>",
+	"Please speak clearly": "Please speak clearly",
+	"Low/No Background Noise": "Low/No Background Noise",
+	"Background Noise Detected": "Background Noise Detected",
+	"social sharing text with rank": "মই http://boloindia.nplt.in ত ভাৰতৰ বাবে মুক্ত ভাষাৰ ভাণ্ডাৰ নিৰ্মাণত অবদান আগবঢ়াইছো৷ আপুনি আৰু মই আমাৰ কণ্ঠদান কৰি এটা পাৰ্থক্য সৃষ্টি কৰিব পাৰোঁ যিয়ে যন্ত্ৰবোৰক আমাৰ ভাষা শিকিবলৈ সহায় কৰিব পাৰে। বোলো ইণ্ডিয়াত আমাৰ %language ভাষাৰ স্থান %rank। আপোনাৰ অংশটো কৰি ভাষাটো শক্তিশালী কৰক?",
+	"social sharing text without rank": "মই http://boloindia.nplt.in ত ভাৰতৰ বাবে মুক্ত ভাষাৰ ভাণ্ডাৰ নিৰ্মাণত অবদান আগবঢ়াইছো৷ আপুনি আৰু মই আমাৰ কণ্ঠদান কৰি এটা পাৰ্থক্য সৃষ্টি কৰিব পাৰোঁ যিয়ে যন্ত্ৰবোৰক আমাৰ ভাষা শিকিবলৈ সহায় কৰিব পাৰে। আপোনাৰ অংশটো কৰি ভাষাটো শক্তিশালী কৰক?",
+	"Select the language for voluntary contribution": "Select the language for voluntary contribution",
+	"Speak": "Speak",
+	"Validate What They Say": "Validate What They Say",
+	"Help us by validating the recordings that others have contributed": "Help us by validating the recordings that others have contributed",
+	"Bolo India: A crowdsourcing initiative for Indian languages": "Bolo India: A crowdsourcing initiative for Indian languages",
+	"India needs to be Aatmanirbhar in the area of speech recognition in Indian languages.  Hence, we want to create an open data repository of many Indian voices. Bolo India invites you to volunteer contribute your voice for this cause.": "India needs to be Aatmanirbhar in the area of speech recognition in Indian languages.  Hence, we want to create an open data repository of many Indian voices. Bolo India invites you to volunteer contribute your voice for this cause."
 }
