@@ -8,7 +8,7 @@ const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
 const LOCALE_STRINGS = 'localeString';
 const CONTRIBUTION_LANGUAGE = "contributionLanguage";
 const ALL_LANGUAGES = [
-    {value: "Assamese",id: "as", text: "অসমীয়া", hasLocaleText: false, data:true},
+    {value: "Assamese",id: "as", text: "অসমীয়া", hasLocaleText: true, data:true},
     {value: "Bengali", id: "bn", text: "বাংলা", hasLocaleText: true,data:true},
     {value: "English", id: "en", text: "English", hasLocaleText: true,data:true},
     {value: "Gujarati", id: "gu", text: "ગુજરાતી", hasLocaleText: true,data:true},
