@@ -192,12 +192,13 @@ router.post('/audioClip', (req, res) => getAudioClip(req, res, objectStorage))
 
 router.post('/report', async (req, res) => {
   const userId = req.cookies.userId || "";
-  const { sentenceId = "", reportText = "", language = "", userName = "" } = req.body;
-  if (sentenceId === "" || reportText === "" || language === "" || userId === "") {
+  //in case source is validation, we get the contribution id in the sentenceId field, for easier tracking
+  const { sentenceId = "", reportText = "", language = "", userName = "", source = "" } = req.body;
+  if (sentenceId === "" || reportText === "" || language === "" || userId === "" || !['contribution', 'validation'].includes(source)) {
     return res.send({ statusCode: 400, message: "Input values missing" });
   }
   try {
-    await saveReport(userId, sentenceId, reportText, language, userName)
+    await saveReport(userId, sentenceId, reportText, language, userName, source)
   } catch (err) {
     console.log(err);
     return res.send({ statusCode: 500, message: err.message });

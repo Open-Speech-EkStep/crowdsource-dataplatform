@@ -359,9 +359,9 @@ const insertFeedback = (subject, feedback, language) => {
     return db.any(feedbackInsertion, [subject, feedback, language]);
 }
 
-const saveReport = async (userId, sentenceId, reportText, language, userName) => {
+const saveReport = async (userId, sentenceId, reportText, language, userName, source) => {
     const encryptUserId = encrypt(userId);
-    await db.any(saveReportQuery,[encryptUserId, userName, sentenceId, reportText, language])
+    await db.any(saveReportQuery,[encryptUserId, userName, sentenceId, reportText, language, source])
 }
 
 const markContributionSkipped = (userId, sentenceId, userName) => {
