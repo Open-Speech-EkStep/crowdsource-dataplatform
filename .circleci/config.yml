@@ -94,12 +94,6 @@ workflows:
       - node/test:
           version: "13.4"
 
-      - build_ui_push_to_s3:
-          name: build_dev_ui
-          env_name: test
-          requires:
-            - node/test
-
       - db_migrate_aws:
           name: migrate_dev_aws
           db_name: ${DEV_DB_NAME}
@@ -108,6 +102,12 @@ workflows:
           filters:
             branches:
               only: master
+
+      - build_ui_push_to_s3:
+          name: build_dev_ui
+          env_name: dev
+          requires:
+            - migrate_dev_aws
 
       - aws-ecr/build-and-push-image:
           name: push_dev_image
