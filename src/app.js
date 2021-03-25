@@ -116,7 +116,7 @@ app.use(function (req, res, next) {
 app.use(express.static('public'));
 
 app.get('/changeLocale/:locale', function (req, res) {
-  if (['hi', 'en', 'ta', 'kn', 'gu', 'mr', 'te', 'bn', 'as', 'pa', 'or', "ml"].indexOf(req.params.locale) > -1) {
+  if(['hi', 'en', 'ta', 'kn', 'gu', 'mr', 'te', 'bn','as','pa','or'].indexOf(req.params.locale) > -1) {
     res.cookie('contributionLanguage', req.params.locale);
     res.cookie('i18n', req.params.locale);
   } else {
@@ -299,16 +299,7 @@ app.get('/get-locale-strings/:locale', function (req, res) {
       return res.sendStatus(500);
     }
     const data = JSON.parse(body);
-    const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds', 'Recording for 5 seconds', 'Recording for 4 seconds', 'Recording for 3 seconds', 'Recording for 2 seconds', 'Recording for 1 seconds', 'Playingback Audio', 'Playing', 'Test Mic', 'Test Speakers', 'Congratulations!!! You have completed this batch of sentences', 'social sharing text with rank', 'social sharing text without rank',
-      'SKIP',
-      'Next',
-      'Back',
-      'CLOSE',
-      'You can select the language in which you want to participate',
-      'You can change the language in which you want to read content',
-      'Click on the card to start contributing your voice',
-      'Click on the card to validate what others have spoken'
-    ];
+    const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds', 'Recording for 5 seconds', 'Recording for 4 seconds', 'Recording for 3 seconds', 'Recording for 2 seconds', 'Recording for 1 seconds', 'Playingback Audio', 'Playing', 'Test Mic', 'Test Speakers','Congratulations!!! You have completed this batch of sentences', 'social sharing text with rank', 'social sharing text without rank'];
 
     const langSttr = {};
     list.forEach((key) => {
