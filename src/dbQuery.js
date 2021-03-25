@@ -131,6 +131,10 @@ FROM contributor;';
 
 const markContributionSkippedQuery = "update contributions set action='skipped' where contributed_by=(select contributor_id from contributors where user_name=$2 and contributor_identifier = $1) and \"sentenceId\"=$3;";
 
+const rewardsInfoQuery = 'select milestone as contributions, grade as badge from reward_milestones mil \
+inner join reward_catalogue rew on mil.reward_catalogue_id = rew.id \
+where UPPER(language) = UPPER($1) order by mil.milestone';
+
 module.exports = {
   unassignIncompleteSentences,
   sentencesCount,
@@ -151,5 +155,6 @@ module.exports = {
   getAudioPath,
   saveReportQuery,
   getSentencesForLaunch,
-  markContributionSkippedQuery
+  markContributionSkippedQuery,
+  rewardsInfoQuery
 }
