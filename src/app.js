@@ -85,7 +85,7 @@ const multerStorage = multer.diskStorage({
     cb(null, currentDateAndTime() + '_' + randomString() + '.wav');
   },
 });
-const upload = multer({storage: multerStorage});
+const upload = multer({ storage: multerStorage });
 const corsOptions = {
   origin: /vakyansh\.in$/,
   credentials: true
@@ -95,7 +95,7 @@ app.use(express.json());
 app.use(upload.single('audio_data'));
 app.use('/sentences', validateUserInfo);
 app.use('/upload', validateUserInputAndFile);
-app.use(express.static(__dirname, {dotfiles: 'allow'}));
+app.use(express.static(__dirname, { dotfiles: 'allow' }));
 app.use(helmet());
 app.disable('x-powered-by');
 app.use(compression());
@@ -170,7 +170,7 @@ router.get('/badges', function (req, res) {
 });
 
 router.get('/about-us', function (req, res) {
-  res.render('about-us.ejs', {MOTHER_TONGUE, LANGUAGES});
+  res.render('about-us.ejs', { MOTHER_TONGUE, LANGUAGES });
 });
 router.get('/terms-and-conditions', function (req, res) {
   res.render('terms-and-conditions.ejs');
@@ -186,7 +186,7 @@ router.get('/validator-page', (req, res) => {
 });
 router.get('/dashboard', function (req, res) {
   const isCookiePresent = req.cookies.userId ? true : false;
-  res.render('dashboard.ejs', {MOTHER_TONGUE, LANGUAGES, isCookiePresent});
+  res.render('dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
 });
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 
