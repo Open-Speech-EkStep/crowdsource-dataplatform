@@ -373,32 +373,38 @@ const markContributionSkipped = (userId, sentenceId, userName) => {
 const getRewards = (userId, userName, language) => {
     const encryptUserId = encrypt(userId);
     // return db.any(markContributionSkippedQuery, [encryptUserId, userName, sentenceId]);
+    const generatedBadgeId = 1234567;
+    const badgeType = 'Silver'
+    const thankyouMessage = 'You have attained a Silver medal!!'
+    const isNewBadge = true;
+    return {
+        "badgeId": generatedBadgeId, "badgeType": badgeType, "message": thankyouMessage, "isNewBadge": isNewBadge}
 }
 
-const getRewardsInfo = (language) => {
-    return db.any(rewardsInfoQuery, [language]);
-}
+    const getRewardsInfo = (language) => {
+        return db.any(rewardsInfoQuery, [language]);
+    }
 
-module.exports = {
-    updateAndGetSentences,
-    getValidationSentences,
-    updateDbWithAudioPath,
-    updateTablesAfterValidation,
-    getAllDetails,
-    getAllInfo,
-    getAudioClip,
-    getTopLanguageByHours,
-    getAggregateDataCount,
-    getTopLanguageBySpeakers,
-    getLanguages,
-    getTimeline,
-    getAgeGroupData,
-    getGenderGroupData,
-    getLastUpdatedAt,
-    getSentencesBasedOnAge,
-    insertFeedback,
-    saveReport,
-    markContributionSkipped,
-    getRewards,
-    getRewardsInfo
-};
+    module.exports = {
+        updateAndGetSentences,
+        getValidationSentences,
+        updateDbWithAudioPath,
+        updateTablesAfterValidation,
+        getAllDetails,
+        getAllInfo,
+        getAudioClip,
+        getTopLanguageByHours,
+        getAggregateDataCount,
+        getTopLanguageBySpeakers,
+        getLanguages,
+        getTimeline,
+        getAgeGroupData,
+        getGenderGroupData,
+        getLastUpdatedAt,
+        getSentencesBasedOnAge,
+        insertFeedback,
+        saveReport,
+        markContributionSkipped,
+        getRewards,
+        getRewardsInfo
+    };
