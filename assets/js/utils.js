@@ -170,4 +170,4 @@ const reportSentenceOrRecording = (reqObj) => {
     });
 }
 
-module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime, getLocaleString, performAPIRequest,showElement,hideElement, setFooterPosition, reportSentenceOrRecording}
+module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime, getLocaleString, performAPIRequest,showElement,hideElement, setFooterPosition, reportSentenceOrRecording, getCookie, setCookie}
