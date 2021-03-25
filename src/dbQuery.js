@@ -125,8 +125,8 @@ const saveReportQuery = 'WITH contributor AS ( \
   select contributor_id from "contributors" \
   where contributor_identifier = $1 and user_name = $2 \
 ) \
-INSERT INTO reports (reported_by,sentence_id,report_text,language) \
-SELECT contributor_id,$3,$4,$5 \
+INSERT INTO reports (reported_by,sentence_id,report_text,language,source) \
+SELECT contributor_id,$3,$4,$5,$6 \
 FROM contributor;';
 
 const markContributionSkippedQuery = "update contributions set action='skipped' where contributed_by=(select contributor_id from contributors where user_name=$2 and contributor_identifier = $1) and \"sentenceId\"=$3;";
