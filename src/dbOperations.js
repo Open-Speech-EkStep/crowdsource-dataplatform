@@ -22,7 +22,8 @@ const {
     getAudioPath,
     saveReportQuery,
     getSentencesForLaunch,
-    markContributionSkippedQuery
+    markContributionSkippedQuery,
+    rewardsInfoQuery
 } = require('./dbQuery');
 
 const {
@@ -136,7 +137,7 @@ const getSentencesBasedOnAge = function (
     const launchUser = envVars.LAUNCH_USER || 'launch_user';
     const launchIds = envVars.LAUNCH_IDS || '';
 
-    if(userName == launchUser) {
+    if (userName == launchUser) {
         query = getSentencesForLaunch;
     }
 
@@ -361,12 +362,21 @@ const insertFeedback = (subject, feedback, language) => {
 
 const saveReport = async (userId, sentenceId, reportText, language, userName) => {
     const encryptUserId = encrypt(userId);
-    await db.any(saveReportQuery,[encryptUserId, userName, sentenceId, reportText, language])
+    await db.any(saveReportQuery, [encryptUserId, userName, sentenceId, reportText, language])
 }
 
 const markContributionSkipped = (userId, sentenceId, userName) => {
     const encryptUserId = encrypt(userId);
     return db.any(markContributionSkippedQuery, [encryptUserId, userName, sentenceId]);
+}
+
+const getRewards = (userId, userName, language) => {
+    const encryptUserId = encrypt(userId);
+    // return db.any(markContributionSkippedQuery, [encryptUserId, userName, sentenceId]);
+}
+
+const getRewardsInfo = (language) => {
+    return db.any(rewardsInfoQuery, [language]);
 }
 
 module.exports = {
@@ -388,5 +398,7 @@ module.exports = {
     getSentencesBasedOnAge,
     insertFeedback,
     saveReport,
-    markContributionSkipped
+    markContributionSkipped,
+    getRewards,
+    getRewardsInfo
 };
