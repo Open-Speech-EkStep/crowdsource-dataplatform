@@ -1,4 +1,4 @@
-const { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery } = require('../src/middleware/validateUserInputs')
+const { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip } = require('../src/middleware/validateUserInputs')
 
 describe('middleware test', function () {
     const res = {
