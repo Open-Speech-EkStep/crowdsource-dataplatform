@@ -23,7 +23,12 @@ const {
     saveReportQuery,
     getSentencesForLaunch,
     markContributionSkippedQuery,
-    rewardsInfoQuery
+    rewardsInfoQuery,
+    getTotalUserContribution,
+    checkBadgeQuery,
+    insertRewardQuery,
+    getContributorIdQuery,
+    findRewardInfo
 } = require('./dbQuery');
 
 const {
@@ -370,41 +375,54 @@ const markContributionSkipped = (userId, sentenceId, userName) => {
     return db.any(markContributionSkippedQuery, [encryptUserId, userName, sentenceId]);
 }
 
-const getRewards = (userId, userName, language) => {
+const getRewards = async (userId, userName, language, category) => {
     const encryptUserId = encrypt(userId);
-    // return db.any(markContributionSkippedQuery, [encryptUserId, userName, sentenceId]);
-    const generatedBadgeId = 1234567;
-    const badgeType = 'Silver'
-    const thankyouMessage = 'You have attained a Silver medal!!'
-    const isNewBadge = true;
-    return {
-        "badgeId": generatedBadgeId, "badgeType": badgeType, "message": thankyouMessage, "isNewBadge": isNewBadge}
-}
-
-    const getRewardsInfo = (language) => {
-        return db.any(rewardsInfoQuery, [language]);
+    const { contributor_id } = await db.one(getContributorIdQuery, [encryptUserId, userName]);
+    const response = await db.one(checkBadgeQuery, [contributor_id, language]);
+    let rewardIdList = await db.any(findRewardInfo, [contributor_id, language, response.id, category]);
+    let isNewBadge = false;
+    console.log({ reward_id: rewardIdList }, { response });
+    if (rewardIdList.length == 0) {
+        rewardIdList = await db.any(insertRewardQuery, [contributor_id, language, response.id, category]);
+        isNewBadge = true;
     }
 
-    module.exports = {
-        updateAndGetSentences,
-        getValidationSentences,
-        updateDbWithAudioPath,
-        updateTablesAfterValidation,
-        getAllDetails,
-        getAllInfo,
-        getAudioClip,
-        getTopLanguageByHours,
-        getAggregateDataCount,
-        getTopLanguageBySpeakers,
-        getLanguages,
-        getTimeline,
-        getAgeGroupData,
-        getGenderGroupData,
-        getLastUpdatedAt,
-        getSentencesBasedOnAge,
-        insertFeedback,
-        saveReport,
-        markContributionSkipped,
-        getRewards,
-        getRewardsInfo
-    };
+    const generatedBadgeId = rewardIdList[0].reward_id;
+    const badgeType = response.grade;
+    const thankyouMessage = response.message;
+    const currentMilestone = response.milestone;
+    const nextMilestone = 100;
+    return {
+        "badgeId": generatedBadgeId, "badgeType": badgeType,
+        "message": thankyouMessage, "isNewBadge": isNewBadge,
+        "currentMilestone": currentMilestone, "nextMilestone": nextMilestone
+    }
+}
+
+const getRewardsInfo = (language) => {
+    return db.any(rewardsInfoQuery, [language]);
+}
+
+module.exports = {
+    updateAndGetSentences,
+    getValidationSentences,
+    updateDbWithAudioPath,
+    updateTablesAfterValidation,
+    getAllDetails,
+    getAllInfo,
+    getAudioClip,
+    getTopLanguageByHours,
+    getAggregateDataCount,
+    getTopLanguageBySpeakers,
+    getLanguages,
+    getTimeline,
+    getAgeGroupData,
+    getGenderGroupData,
+    getLastUpdatedAt,
+    getSentencesBasedOnAge,
+    insertFeedback,
+    saveReport,
+    markContributionSkipped,
+    getRewards,
+    getRewardsInfo
+};

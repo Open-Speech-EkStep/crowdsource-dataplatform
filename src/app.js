@@ -323,9 +323,9 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
 
 router.get('/rewards', validateRewardsInput, async (req, res) => {
   const userId = req.cookies.userId;
-  const { language, userName = "" } = req.query;
+  const { language, userName = "", category = "" } = req.query;
 
-  const data = await getRewards(userId, userName, language);
+  const data = await getRewards(userId, userName, language, category);
 
   return res.send(data);
 });
