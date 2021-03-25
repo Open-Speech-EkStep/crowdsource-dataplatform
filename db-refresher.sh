@@ -12,3 +12,4 @@ psql "postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}" -f db_queries.sq
 echo "Jsons update Complete!"
 ls -lrt
 aws --version
+aws s3 cp . s3://${BUCKET_NAME}/ --recursive --exclude "*" --include "*json"
