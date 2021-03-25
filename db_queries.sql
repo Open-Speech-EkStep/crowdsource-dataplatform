@@ -48,7 +48,7 @@ SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select state, language, 
 SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  distinct(language) from contributions_and_demo_stats)t;
 
 \o topLanguagesBySpeakerContributions.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select language, total_speakers from language_group_contributions ORDER BY total_speakers DESC LIMIT 5;)t;
+SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select language, total_speakers from language_group_contributions ORDER BY total_speakers DESC LIMIT 5)t;
 
 \o topLanguagesByHoursContributed.json 
 SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select language,ROUND(total_contributions::numeric/3600, 3) as total_contributions from language_group_contributions ORDER BY total_contributions DESC LIMIT 5)t;
