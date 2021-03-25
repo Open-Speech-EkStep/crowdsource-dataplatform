@@ -19,7 +19,11 @@ function resetSpeakerDetails() {
     const selectedGender = document.querySelector(
         'input[name = "gender"]:checked'
     );
+    const transSelectedGender = document.querySelector(
+        'input[name = "trans_gender"]:checked'
+    );
     if (selectedGender) selectedGender.checked = false;
+    if (transSelectedGender) transSelectedGender.checked = false;
     age.selectedIndex = 0;
     motherTongue.selectedIndex = 0;
     userName.value = '';
