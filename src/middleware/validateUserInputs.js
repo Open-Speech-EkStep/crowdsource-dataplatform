@@ -91,4 +91,13 @@ const validateRewardsInput = function (req, res, next) {
     next();
 }
 
-module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput }
+const validateRewardsInfoQuery = function (req, res, next) {
+    const { language } = req.query;
+
+    if (!language) {
+        return res.status(400).send("Query parameter language missing");
+    }
+    next();
+}
+
+module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery }

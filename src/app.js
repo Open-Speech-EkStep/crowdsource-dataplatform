@@ -36,7 +36,8 @@ const {
   validateUserInfo,
   validateUserInputForFeedback,
   validateInputForSkip,
-  validateRewardsInput
+  validateRewardsInput,
+  validateRewardsInfoQuery
 } = require('./middleware/validateUserInputs');
 
 // const Ddos = require('ddos');
@@ -329,7 +330,7 @@ router.get('/rewards', validateRewardsInput, async (req, res) => {
   return res.send({ statusCode: 200, message: message });
 });
 
-router.get('/rewards-info', async (req, res) => {
+router.get('/rewards-info', validateRewardsInfoQuery, async (req, res) => {
   const { language } = req.query;
 
   const info = await getRewardsInfo(language);

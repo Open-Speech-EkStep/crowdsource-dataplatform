@@ -1,4 +1,4 @@
-const { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput } = require('../src/middleware/validateUserInputs')
+const { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery } = require('../src/middleware/validateUserInputs')
 
 describe('middleware test', function () {
     const res = {
@@ -229,7 +229,7 @@ describe('middleware test', function () {
             jest.clearAllMocks();
         })
 
-        test('should call next() if language is empty', () => {
+        test('should call next() if language is inputs are valid', () => {
             const req = { cookies: { userId: 456 }, query: { language: "some language" } };
             validateRewardsInput(req, res, nextSpy);
 
@@ -245,12 +245,35 @@ describe('middleware test', function () {
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
-        test('should return 400 if username is undefined', () => {
+        test('should return 400 if language is undefined', () => {
             const req = { cookies: { userId: 456 }, query: {} };
             validateRewardsInput(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
             expect(res.send).toHaveBeenCalledTimes(1)
         });
-    })
+    });
+
+    describe('Validate Rewards info input', () => {
+
+        afterEach(() => {
+            jest.clearAllMocks();
+        })
+
+        test('should call next() if language is given in query', () => {
+            const req = { cookies: { userId: 456 }, query: { language: "some language" } };
+            validateRewardsInput(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if language is undefined', () => {
+            const req = { cookies: { userId: 456 }, query: {} };
+            validateRewardsInput(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+    });
 });
