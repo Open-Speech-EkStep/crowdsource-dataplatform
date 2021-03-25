@@ -325,9 +325,9 @@ router.get('/rewards', validateRewardsInput, async (req, res) => {
   const userId = req.cookies.userId;
   const { language, userName = "" } = req.query;
 
-  const message = await getRewards(userId, userName, language);
+  const data = await getRewards(userId, userName, language);
 
-  return res.send({ statusCode: 200, message: message });
+  return res.send(data);
 });
 
 router.get('/rewards-info', validateRewardsInfoQuery, async (req, res) => {
