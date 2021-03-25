@@ -333,7 +333,7 @@ router.get('/rewards', validateRewardsInput, async (req, res) => {
 });
 
 router.get('/rewards-info', validateRewardsInfoQuery, async (req, res) => {
-  const {language} = req.query;
+  const { language } = req.query;
 
   const info = await getRewardsInfo(language);
 
