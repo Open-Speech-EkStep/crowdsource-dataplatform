@@ -109,7 +109,7 @@ app.use(function (req, res, next) {
 app.use(express.static('public'));
 
 app.get('/changeLocale/:locale', function (req, res) {
-  if(['hi', 'en', 'ta', 'kn', 'gu', 'mr', 'te', 'bn','as'].indexOf(req.params.locale) > -1) {
+  if(['hi', 'en', 'ta', 'kn', 'gu', 'mr', 'te', 'bn','as','pa','or'].indexOf(req.params.locale) > -1) {
     res.cookie('contributionLanguage', req.params.locale);
     res.cookie('i18n', req.params.locale);
   } else {
@@ -188,12 +188,13 @@ router.post('/audioClip', (req, res) => getAudioClip(req, res, objectStorage))
 
 router.post('/report', async (req, res) => {
   const userId = req.cookies.userId || "";
-  const { sentenceId = "", reportText = "", language = "", userName = "" } = req.body;
-  if (sentenceId === "" || reportText === "" || language === "" || userId === "") {
+  //in case source is validation, we get the contribution id in the sentenceId field, for easier tracking
+  const { sentenceId = "", reportText = "", language = "", userName = "", source = "" } = req.body;
+  if (sentenceId === "" || reportText === "" || language === "" || userId === "" || !['contribution', 'validation'].includes(source)) {
     return res.send({ statusCode: 400, message: "Input values missing" });
   }
   try {
-    await saveReport(userId, sentenceId, reportText, language, userName)
+    await saveReport(userId, sentenceId, reportText, language, userName, source)
   } catch (err) {
     console.log(err);
     return res.send({ statusCode: 500, message: err.message });
