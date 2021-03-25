@@ -124,4 +124,24 @@ const setFooterPosition = () => {
     }
 }
 
-module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime, getLocaleString, performAPIRequest,showElement,hideElement, setFooterPosition}
+const reportSentenceOrRecording = (reqObj) => {
+    return new Promise(function(resolve, reject) {
+        try {
+            fetch('/report', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(reqObj),
+            })
+            .then((res) => res.json())
+            .then((resp) => {
+                resolve(resp);
+            })
+        } catch(err) {
+            reject(err);
+        }
+    });
+}
+
+module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime, getLocaleString, performAPIRequest,showElement,hideElement, setFooterPosition, reportSentenceOrRecording}
