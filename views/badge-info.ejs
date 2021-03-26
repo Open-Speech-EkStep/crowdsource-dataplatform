@@ -19,137 +19,36 @@
 <div id="content-wrapper" class="container-fluid pt-5 pb-2 px-3 px-md-5 h-100">
     <div class="row mx-lg-5">
         <div class="col-12">
-            <h1><%= __('Levels and Badging @BoloIndia')%></h1>
+            <h1><%= __('Levels and Badging @BoloIndia') %></h1>
         </div>
     </div>
     <div class="row mx-lg-5 my-3">
         <p class="col-12 col-lg-8 h5 font-weight-light-lg font-weight-normal-sm lh-7 text-justify">
-            <%= __('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate')%></p>
+            <%= __('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate') %></p>
     </div>
-    <div class="row mx-lg-5">
-        <div class="col-12 col-lg-3 col-md-4 col-sm-6">
-            <div class="card row text-center m-2">
-                <div class="py-3">
-                    <%- include modals/bronze_badge.ejs %>
-                </div>
-                <h3 class="py-3"><%= __('Bronze')%></h3>
-            </div>
-        </div>
-        <div class="col-12 col-lg-3 col-md-4 col-sm-6">
-            <div class="card row text-center m-2">
-                <div class="py-3">
-                    <%- include modals/silver_badge.ejs %>
-                </div>
-                <h3 class="py-3"><%= __('Silver')%></h3>
-            </div>
-        </div>
-        <div class="col-12 col-lg-3 col-md-4 col-sm-6">
-            <div class="card row text-center m-2">
-                <div class="py-3">
-                    <%- include modals/gold_badge.ejs %>
-                </div>
-                <h3 class="py-3"><%= __('Gold')%></h3>
-            </div>
-        </div>
-        <div class="col-12 col-lg-3 col-md-4 col-sm-6">
-            <div class="card row text-center m-2">
-                <div class="py-3">
-                    <%- include modals/platinum_badge.ejs %>
-                </div>
-                <h3 class="py-3"><%= __('Platinum')%></h3>
-            </div>
-        </div>
-    </div>
+    <div><span class="spinner d-none" id="#loader1"></span></div>
+
+    <div class="row mx-lg-5" id="card-row"></div>
 
     <div class="row mx-lg-5 mt-5">
-        <h2 class="col-12"><%= __('Contributor Levels')%></h2>
+        <h2 class="col-12"><%= __('Contributor Levels') %></h2>
     </div>
     <div class="row mx-lg-5">
-        <p class="col-12"><%= __('Participate more to gain badges')%></p>
+        <p class="col-12"><%= __('Participate more to gain badges') %></p>
     </div>
     <div class="row mx-lg-5">
         <table class="table table-bordered table-striped table-responsive-xs text-center mx-3 w-100">
             <thead class="thead-dark">
             <tr>
-                <th scope="col"><%= __('Level')%></th>
+                <th scope="col"><%= __('Level') %></th>
                 <th scope="col">
-                    <%= __('Contributions')%>
-
-                    <p><%= __('(Recording + Validating)')%></p>
+                    <%= __('Contributions') %>
+                    <p><%= __('(Recording + Validating)') %></p>
                 </th>
-                <th scope="col"><%= __('Badge')%></th>
+                <th scope="col"><%= __('Badge') %></th>
             </tr>
             </thead>
-            <tbody id="table-rows">
-            <tr>
-                <td><%= __('Level 1')%></td>
-                <td><%- __('<span id="level-count-1"></span> Senetences')%></td>
-
-                <td>
-                    <span id="level-badge-1">
-                        <%= __('N/A')%>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td><%= __('Level 2')%></td>
-                <td><%- __('<span id="level-count-2"></span> Senetences')%></td>
-                <td><span id="level-badge-2">
-                        <%= __('N/A')%>
-                    </span></td>
-            </tr>
-            <tr>
-                <td><%= __('Level 3')%></td>
-                <td><%- __('<span id="level-count-3"></span> Senetences')%></td>
-                <td>
-                    <div class="table-img">
-                        <%- include modals/bronze_badge.ejs %>
-                    </div>
-                    <span id="level-badge-3">
-                        <%= __('Bronze')%>
-                    </span>
-
-                </td>
-            </tr>
-            <tr>
-                <td><%= __('Level 4')%></td>
-                <td><%- __('<span id="level-count-4"></span> Senetences')%></td>
-                <td>
-                    <div class="table-img">
-                        <%- include modals/silver_badge.ejs %>
-                    </div>
-                    <span id="level-badge-4">
-                        <%= __('Silver')%>
-                    </span>
-
-                </td>
-            </tr>
-            <tr>
-                <td><%= __('Level 5')%></td>
-                <td><%- __('<span id="level-count-5"></span> Senetences')%></td>
-                <td>
-                    <div class="table-img">
-                        <%- include modals/gold_badge.ejs %>
-                    </div>
-                    <span id="level-badge-5">
-                        <%= __('Gold')%>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td><%= __('Level 6')%></td>
-                <td><%- __('<span id="level-count-6"></span> Senetences')%></td>
-                <td>
-                    <div class="table-img">
-                        <%- include modals/platinum_badge.ejs %>
-                    </div>
-                    <span id="level-badge-6">
-                        <%= __('Platinum')%>
-                    </span>
-
-                </td>
-            </tr>
-            </tbody>
+            <tbody id="table-rows"></tbody>
         </table>
     </div>
 
@@ -159,6 +58,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>$("footer").removeClass("fixed-bottom").addClass("bottom")</script>
+<script src="js/badges_info.js"></script>
 
 </body>
 </html>
