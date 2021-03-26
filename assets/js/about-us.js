@@ -1,8 +1,6 @@
 const {
     testUserName,
     setSpeakerDetails,
-    setStartRecordBtnToolTipContent,
-    //setTNCOnChange,
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
@@ -46,6 +44,7 @@ $(document).ready(function () {
         placement: screen.availWidth > 500 ? 'right' : 'auto',
     });
 
+    $startRecordBtnTooltip.tooltip('disable');
 
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
@@ -62,8 +61,6 @@ $(document).ready(function () {
         localStorage.setItem("i18n", "en");
     });
 
-    setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
-    //setTNCOnChange($userName, $startRecordBtnTooltip);
     setUserNameOnInputFocus();
 
     $startRecordBtn.on('click', () => {

@@ -4,8 +4,6 @@ const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, per
 const {
     testUserName,
     setSpeakerDetails,
-    setStartRecordBtnToolTipContent,
-    //setTNCOnChange,
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
@@ -239,8 +237,6 @@ $(document).ready(function () {
 
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
-    setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
-    //setTNCOnChange($userName, $startRecordBtnTooltip);
     setUserNameOnInputFocus();
     setStartRecordingBtnOnClick();
     setUserModalOnShown($userName);
@@ -302,6 +298,50 @@ $(document).ready(function () {
             options.addClass("d-none");
         }
     });
+
+    const tourSteps = [
+        {
+            element: '#contribution_lang_navbar',
+            title: '',
+            preventInteraction: true,
+            placement: "bottom",
+            content: 'You can select the language in which you want to participate'
+        },
+        {
+            element: '#locale_language_dropdown',
+            title: '',
+            preventInteraction: true,
+            placement: "bottom",
+            content: 'You can change the language in which you want to read content'
+        },
+        {
+            element: '#say',
+            title: '',
+            preventInteraction: true,
+            placement: "bottom",
+            content: 'Click on the card to start contributing your voice'
+        },
+        {
+            element: '#listen',
+            title: '',
+            preventInteraction: true,
+            placement: "bottom",
+            content: 'Click on the card to validate what others have spoken'
+        }
+    ];
+
+    const homePageTour = new Tour({
+        steps: tourSteps,
+        framework: "bootstrap4",
+        backdrop: true,
+        localization: {
+            buttonTexts: {  
+                endTourButton: "SKIP",
+            },
+        }
+    });
+
+    homePageTour.start();
 
     getStatsSummary();
 });

@@ -1,4 +1,5 @@
-const {DEFAULT_CON_LANGUAGE,CONTRIBUTION_LANGUAGE,ALL_LANGUAGES} = require('./constants');
+const {DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS} = require('./constants');
+const {getLocaleString} = require('./utils');
 
 function validateUserName($userName, $userNameError) {
     const userNameValue = $userName.val().trim();
@@ -46,18 +47,17 @@ function setUserNameTooltip($userName) {
 }
 
 const setStartRecordBtnToolTipContent = (userName, $startRecordBtnTooltip) => {
-    if (testUserName(userName)) {
-        $startRecordBtnTooltip.attr(
-            'data-original-title',
-            'Please validate any error message before proceeding'
-        );
-    }
-    //  else {
-    //     $startRecordBtnTooltip.attr(
-    //         'data-original-title',
-    //         'Please agree to the Terms and Conditions before proceeding'
-    //     );
-    // }
+    const text = 'Please validate any error message before proceeding';
+    getLocaleString().then(() => {
+        const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+        if (testUserName(userName)) {
+            $startRecordBtnTooltip.attr(
+                'data-original-title',
+                localeString[text]
+            );
+        }
+
+    });
 };
 
 const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
@@ -67,7 +67,7 @@ const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
         const genderRadio = document.querySelector(
             'input[name = "gender"][value="' + parsedSpeakerDetails.gender + '"]'
         );
-        if(['male', 'female'].indexOf(parsedSpeakerDetails.gender) > -1) {
+        if (['male', 'female'].indexOf(parsedSpeakerDetails.gender) > -1) {
             if (genderRadio) {
                 genderRadio.checked = true;
                 genderRadio.previous = true;
@@ -76,7 +76,7 @@ const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
             const genderRadio = document.querySelector(
                 'input[name = "gender"][value="others"]'
             );
-            if(genderRadio) {
+            if (genderRadio) {
                 genderRadio.checked = true;
                 genderRadio.previous = true;
             }
@@ -101,22 +101,6 @@ const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
     }
 };
 
-// const setTNCOnChange = function ($userName, $startRecordBtnTooltip) {
-//     const $tncCheckbox = $('#tnc');
-//     const $startRecordBtn = $('#proceed-box');
-//     $tncCheckbox.change(function () {
-//         const userNameValue = $userName.val().trim();
-//         if (this.checked && !testUserName(userNameValue)) {
-//             $startRecordBtn.removeAttr('disabled').removeClass('point-none');
-//             $startRecordBtnTooltip.tooltip('disable');
-//         } else {
-//             setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
-//             $startRecordBtn.prop('disabled', 'true').addClass('point-none');
-//             $startRecordBtnTooltip.tooltip('enable');
-//         }
-//     });
-// };
-
 const setUserModalOnShown = function ($userName) {
     $('#userModal').on('shown.bs.modal', function () {
         $('#resetBtn').on('click', resetSpeakerDetails);
@@ -125,7 +109,7 @@ const setUserModalOnShown = function ($userName) {
             placement: screen.availWidth > 500 ? 'right' : 'auto',
             trigger: 'focus',
         });
-        setUserNameTooltip($userName);
+        // setUserNameTooltip($userName);
     });
 }
 
@@ -133,9 +117,20 @@ const setUserNameOnInputFocus = function () {
     const $userName = $('#username');
     const $userNameError = $userName.next();
     // const $tncCheckbox = $('#tnc');
+    const $startRecordBtn = $('#proceed-box');
+    const $startRecordBtnTooltip = $startRecordBtn.parent();
     $userName.on('input focus', () => {
         validateUserName($userName, $userNameError);
-        setUserNameTooltip($userName);
+        // setUserNameTooltip($userName);
+        const userNameValue = $userName.val().trim();
+        if (!testUserName(userNameValue)) {
+            $startRecordBtn.removeAttr('disabled').removeClass('point-none');
+            $startRecordBtnTooltip.tooltip('disable');
+        } else {
+            setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
+            $startRecordBtn.prop('disabled', true).addClass('point-none');
+            $startRecordBtnTooltip.tooltip('enable');
+        }
     });
 }
 
@@ -170,8 +165,8 @@ const setStartRecordingBtnOnClick = function () {
         }
         const userNameValue = $userName.val().trim().substring(0, 12);
         let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-        const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === contributionLanguage);
-        if (! selectedLanguage.data) contributionLanguage = DEFAULT_CON_LANGUAGE;
+        const selectedLanguage = ALL_LANGUAGES.find(e => e.value === contributionLanguage);
+        if (!selectedLanguage.data) contributionLanguage = DEFAULT_CON_LANGUAGE;
         if (testUserName(userNameValue)) {
             return;
         }

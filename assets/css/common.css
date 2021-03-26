@@ -63,6 +63,31 @@ h6,
   font-size: 14px;
 }
 
+
+.tour-tour {
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.tour-backdrop {
+  position: fixed;
+}
+
+.tour-tour .popover-header{
+  display: none;
+}
+
+.tour-tour .popover-body {
+  padding: 40px;
+  font-size: 1rem;
+  width: 375px;
+  text-align: center;
+}
+
+.tour-tour .popover-body .progress {
+  display: none;
+}
+
 @media screen and (max-width: 767px) {
   #report_btn {
     margin-right: 0;
@@ -73,4 +98,10 @@ h6,
     margin-right: .5rem;
     margin-bottom: 1rem;
   }
+  .tour-tour {
+    width: 95%;
+    left: 1rem;
+  }
 }
+
+  
