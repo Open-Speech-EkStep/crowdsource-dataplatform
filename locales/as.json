@@ -297,5 +297,11 @@
 	"Level 3": "Level 3",
 	"Level 4": "Level 4",
 	"Level 5": "Level 5",
-	"Level 6": "Level 6"
+	"Level 6": "Level 6",
+	"<span id=\"level-count-1\"></span> Senetences": "<span id=\"level-count-1\"></span> Senetences",
+	"<span id=\"level-count-2\"></span> Senetences": "<span id=\"level-count-2\"></span> Senetences",
+	"<span id=\"level-count-3\"></span> Senetences": "<span id=\"level-count-3\"></span> Senetences",
+	"<span id=\"level-count-4\"></span> Senetences": "<span id=\"level-count-4\"></span> Senetences",
+	"<span id=\"level-count-5\"></span> Senetences": "<span id=\"level-count-5\"></span> Senetences",
+	"<span id=\"level-count-6\"></span> Senetences": "<span id=\"level-count-6\"></span> Senetences"
 }
