@@ -2,8 +2,6 @@ const {drawMap, getStatistics, showByHoursChart, showBySpeakersChart} = require(
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest} = require('./utils')
 const {
     setSpeakerDetails,
-    setStartRecordBtnToolTipContent,
-    //setTNCOnChange,
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
@@ -224,8 +222,6 @@ $(document).ready(function () {
 
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
-    setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
-    //setTNCOnChange($userName, $startRecordBtnTooltip);
     setUserNameOnInputFocus();
     setStartRecordingBtnOnClick();
     setUserModalOnShown($userName);
