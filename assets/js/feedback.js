@@ -13,6 +13,8 @@ function handleFeedbackSubmit() {
   };
   fetch("/feedback", {
     method: "POST",
+    credentials: 'include',
+    mode: 'cors',
     headers: {
       "Content-Type": "application/json",
     },
