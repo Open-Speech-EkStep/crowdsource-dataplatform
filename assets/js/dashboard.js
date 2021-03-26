@@ -3,7 +3,7 @@ const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadio
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString } = require('./utils');
 
 const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES} = require('./constants');
-
+const fetch = require('./fetch')
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
@@ -173,7 +173,7 @@ $(document).ready(function () {
     });
 
     $("#contribute-now").on('click', (e) => {
-        document.cookie = `i18n=en`;
+        localStorage.setItem("i18n", "en");
         sentenceLanguage = languageToRecord;
     });
 
@@ -208,7 +208,7 @@ $(document).ready(function () {
         localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
         localStorage.setItem("contributionLanguage", sentenceLanguage);
         // document.cookie = `i18n=en`;
-        location.href = '/record';
+        location.href = './record.html';
     });
 
     $('input[name = "gender"]').on('change', function() {

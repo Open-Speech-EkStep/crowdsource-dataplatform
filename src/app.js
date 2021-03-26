@@ -2,7 +2,6 @@ require('dotenv').config();
 const cors = require('cors');
 const objectStorage = process.argv[2] || 'gcp';
 const fetch = require('node-fetch');
-
 const { uploader } = require('./uploader/objUploader')
 const { calculateSNR } = require('./audio_attributes/snr')
 
@@ -119,13 +118,10 @@ app.get('/changeLocale/:locale', function (req, res) {
   }
   res.redirect(req.headers.referer);
 });
-
 app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
-  const localLanguage = req.cookies.contributionLanguage;
-  const isCookiePresent = localLanguage ? true : false;
-  res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent, defaultLang: localLanguage });
+  res.redirect("en/home.html");
 });
 
 router.get('/getDetails/:language', async function (req, res) {

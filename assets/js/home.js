@@ -1,6 +1,8 @@
+const {checkCookie, showLanguagePopup, redirectToLocalisedPage} = require('./locale')
 const {drawMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest} = require('./utils')
 const {
+    testUserName,
     setSpeakerDetails,
     setUserModalOnShown,
     setUserNameOnInputFocus,
@@ -138,26 +140,42 @@ const clearLocalStorage = function () {
 }
 
 const getStatsSummary = function () {
-    performAPIRequest('/stats/summary')
-        .then(response => {
-            drawMap({data: response.aggregate_data_by_state});
-            localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response.top_languages_by_hours));
-            showByHoursChart();
-            localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
-            localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-            getStatistics(response.aggregate_data_count[0]);
-            setDefaultLang();
-            if(response.top_languages_by_hours.length === 0) {
-                $("#bar_charts_container").hide();
-                $("#view_all_btn").hide();
-            } else {
-                $("#bar_charts_container").show();
-                $("#view_all_btn").show();
-            }
-        });
+    $.getJSON("../aggregated-json/cumulativeDataByState.json", (data) => {
+        drawMap({data: data});
+    });
+    $.getJSON("../aggregated-json/topLanguagesByHoursContributed.json", (data) => {
+        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(data));
+        showByHoursChart();
+        if(data.length === 0) {
+            $("#bar_charts_container").hide();
+            $("#view_all_btn").hide();
+        } else {
+            $("#bar_charts_container").show();
+            $("#view_all_btn").show();
+        }
+    });
+    $.getJSON("../aggregated-json/topLanguagesBySpeakerContributions.json", (data) => {
+        localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(data));
+    });
+    $.getJSON("../aggregated-json/cumulativeDataByLanguage.json", (data) => {
+        localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(data));
+    });
+    $.getJSON("../aggregated-json/cumulativeCount.json", (data) => {
+        getStatistics(data[0]);
+        window.setTimeout(() => {
+            setDefaultLang()
+        }, 1000);
+    });
 }
 
 $(document).ready(function () {
+    if (!localStorage.getItem("i18n")){
+        showLanguagePopup();
+        return;
+    }
+    else {
+        redirectToLocalisedPage();
+    }
     clearLocalStorage();
     getLocaleString();
     const speakerDetailsKey = 'speakerDetails';
@@ -166,10 +184,7 @@ $(document).ready(function () {
     const age = document.getElementById('age');
     const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
-    //const $tncCheckbox = $('#tnc');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
-
-   // $tncCheckbox.prop('checked', false);
 
     toggleFooterPosition();
     let top_lang = getDefaultLang();
@@ -183,7 +198,7 @@ $(document).ready(function () {
         if (top_lang !== language) {
             top_lang = language;
             localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-            document.cookie = `i18n=en`;
+            localStorage.setItem("i18n", "en");
             window.location.href = "/";
             setLangNavBar(targetedDiv, language, $languageNavBar);
             updateHrsForSayAndListen(language);
@@ -202,7 +217,7 @@ $(document).ready(function () {
             $6th_place.addClass('d-none');
             targetedDiv.classList.add('active');
             updateHrsForSayAndListen(language);
-            document.cookie = `i18n=en`;
+            localStorage.setItem("i18n", "en");
             window.location.href = "/";
         }
     });
