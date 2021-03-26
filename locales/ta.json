@@ -177,13 +177,13 @@
 	"Download": "பதிவிறக்கவும்",
 	"Help us understand what’s wrong with the recording": "பதிவில் இருக்கும் தவறை புரிந்துகொள்ள எங்களுக்கு உதவுங்கள்",
 	"Please validate any error message before proceeding": "தொடர்வதற்கு முன் இருக்கின்ற பிழை செய்தியை சரிபார்க்கவும்",
-	"SKIP": "SKIP",
-	"Next": "Next",
-	"CLOSE": "CLOSE",
-	"Back": "Back",
-	"You can select the language in which you want to participate": "You can select the language in which you want to participate",
-	"You can change the language in which you want to read content": "You can change the language in which you want to read content",
-	"Click on the card to start contributing your voice": "Click on the card to start contributing your voice",
-	"Click on the card to validate what others have spoken":"Click on the card to validate what others have spoken"
+	"SKIP": "தவிர்",
+	"Next": "அடுத்தது",
+	"CLOSE": "மூடு",
+	"Back": "மீண்டும்",
+	"You can select the language in which you want to participate": "நீங்கள் பங்கேற்க விரும்பும் மொழியை நீங்கள் தேர்ந்தெடுக்கலாம்",
+	"You can change the language in which you want to read content": "உள்ளடக்கத்தைப் படிக்க விரும்பும் மொழியை நீங்கள் மாற்றலாம்",
+	"Click on the card to start contributing your voice": "உங்கள் குரலில் பங்களிக்க கார்டில் கிளிக் செய்க",
+	"Click on the card to validate what others have spoken":"மற்றவர்கள் பேசியதை சரிபார்க்க கார்டில் கிளிக் செய்க"
 
 }
