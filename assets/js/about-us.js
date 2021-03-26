@@ -59,7 +59,7 @@ $(document).ready(function () {
 
     $('#start_recording').on('click', () => {
         sentenceLanguage = langTop;
-        document.cookie = `i18n=en`;
+        localStorage.setItem("i18n", "en");
     });
 
     setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);

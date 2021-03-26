@@ -122,10 +122,6 @@ app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
   res.redirect("en/home.html");
-  // res.sendFile(__dirname + "/public/en/home.html");
-  // const localLanguage = req.cookies.i18n;
-  // const isCookiePresent = localLanguage ? true : false;
-  // res.render('home.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent, defaultLang: localLanguage });
 });
 
 router.get('/getDetails/:language', async function (req, res) {

@@ -13,12 +13,12 @@ const localisationChangeHandler = e => {
     changeLocale(locale);
 };
 const changeLocale = function (locale) {
-    let splitValues = location.href.split('/');
+    const splitValues = location.href.split('/');
     let currentPage = splitValues[splitValues.length - 1];
     if (!currentPage) {
         currentPage = "home.html";
     }
-    setCookie("i18n", locale, 1);
+    localStorage.setItem("i18n", locale);
     location.href = `/${locale}/${currentPage}`;
 }
 
@@ -30,9 +30,9 @@ function showLanguagePopup() {
     document.getElementById("toggle-content-language").click();
 }
 function redirectToLocalisedPage() {
-    var locale = getCookie("i18n");
-    let splitValues = location.href.split('/');
-    let currentLocale = splitValues[splitValues.length - 2];
+    const locale = localStorage.getItem("i18n");
+    const splitValues = location.href.split('/');
+    const currentLocale = splitValues[splitValues.length - 2];
     $('#home-page').attr('default-lang', locale);
     if (currentLocale != locale) {
         changeLocale(locale);

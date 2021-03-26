@@ -188,7 +188,7 @@ const getStatsSummary = function () {
 }
 
 $(document).ready(function () {
-    if (!checkCookie()){
+    if (!localStorage.getItem("i18n")){
         showLanguagePopup();
         return;
     }
@@ -220,7 +220,7 @@ $(document).ready(function () {
         if (top_lang !== language) {
             top_lang = language;
             localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-            document.cookie = `i18n=en`;
+            localStorage.setItem("i18n", "en");
             window.location.href = "/";
             setLangNavBar(targetedDiv, language, $languageNavBar);
             updateHrsForSayAndListen(language);
@@ -239,7 +239,7 @@ $(document).ready(function () {
             $6th_place.addClass('d-none');
             targetedDiv.classList.add('active');
             updateHrsForSayAndListen(language);
-            document.cookie = `i18n=en`;
+            localStorage.setItem("i18n", "en");
             window.location.href = "/";
         }
     });

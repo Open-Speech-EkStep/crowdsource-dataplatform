@@ -91,7 +91,7 @@ const performAPIRequest = (url) => {
 
 const getLocaleString = function() {
     return new Promise(function(resolve, reject) {
-        const locale = getCookie("i18n");
+        const locale = localStorage.getItem("i18n");
         performAPIRequest(`/get-locale-strings/${locale}`)
         .then((response) => {
             localStorage.setItem('localeString', JSON.stringify(response));

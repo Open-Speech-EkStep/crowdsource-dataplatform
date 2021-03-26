@@ -173,7 +173,7 @@ $(document).ready(function () {
     });
 
     $("#contribute-now").on('click', (e) => {
-        document.cookie = `i18n=en`;
+        localStorage.setItem("i18n", "en");
         sentenceLanguage = languageToRecord;
     });
 

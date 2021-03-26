@@ -571,7 +571,7 @@ const initialize = () => {
     });
 
     const goToThankYouPage = () => {
-        location.href = '/thank-you';
+        location.href = './thank-you.html';
     };
 
     $nextBtn.add($skipBtn).on('click', (event) => {
