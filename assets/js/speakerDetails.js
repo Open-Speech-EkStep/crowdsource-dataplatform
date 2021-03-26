@@ -133,9 +133,20 @@ const setUserNameOnInputFocus = function () {
     const $userName = $('#username');
     const $userNameError = $userName.next();
     // const $tncCheckbox = $('#tnc');
+    const $startRecordBtn = $('#proceed-box');
+    const $startRecordBtnTooltip = $startRecordBtn.parent();
     $userName.on('input focus', () => {
         validateUserName($userName, $userNameError);
         setUserNameTooltip($userName);
+        const userNameValue = $userName.val().trim();
+        if (!testUserName(userNameValue)) {
+            $startRecordBtn.removeAttr('disabled').removeClass('point-none');
+            $startRecordBtnTooltip.tooltip('disable');
+        } else {
+            setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
+            $startRecordBtn.prop('disabled', 'true').addClass('point-none');
+            $startRecordBtnTooltip.tooltip('enable');
+        }
     });
 }
 
