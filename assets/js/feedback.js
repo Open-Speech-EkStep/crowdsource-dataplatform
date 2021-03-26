@@ -1,4 +1,5 @@
 const { toggleFooterPosition, setPageContentHeight, updateLocaleLanguagesDropdown } = require("./utils");
+const fetch = require('./fetch')
 function handleGoBack() {
   window.history.back();
 }
