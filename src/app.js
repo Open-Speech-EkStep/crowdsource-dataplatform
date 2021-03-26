@@ -21,7 +21,11 @@ const {
   getAllInfo,
   updateTablesAfterValidation,
   getAudioClip,
-  insertFeedback, saveReport, markContributionSkipped
+  insertFeedback,
+  saveReport,
+  markContributionSkipped,
+  getRewards,
+  getRewardsInfo
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
@@ -31,7 +35,9 @@ const {
   validateUserInputAndFile,
   validateUserInfo,
   validateUserInputForFeedback,
-  validateInputForSkip
+  validateInputForSkip,
+  validateRewardsInput,
+  validateRewardsInfoQuery
 } = require('./middleware/validateUserInputs');
 
 // const Ddos = require('ddos');
@@ -110,7 +116,7 @@ app.use(function (req, res, next) {
 app.use(express.static('public'));
 
 app.get('/changeLocale/:locale', function (req, res) {
-  if(['hi', 'en', 'ta', 'kn', 'gu', 'mr', 'te', 'bn','as','pa','or'].indexOf(req.params.locale) > -1) {
+  if (['hi', 'en', 'ta', 'kn', 'gu', 'mr', 'te', 'bn', 'as', 'pa', 'or'].indexOf(req.params.locale) > -1) {
     res.cookie('contributionLanguage', req.params.locale);
     res.cookie('i18n', req.params.locale);
   } else {
@@ -210,10 +216,10 @@ router.post('/skip', validateInputForSkip, (req, res) => {
   markContributionSkipped(req.cookies.userId, req.body.sentenceId, req.body.userName).then(() => {
     return res.send({ statusCode: 200, message: "Skipped successfully." });
   })
-  .catch((err) => {
-    console.log(err);
-    return res.send({ statusCode: 500, message: err.message });
-  })
+    .catch((err) => {
+      console.log(err);
+      return res.send({ statusCode: 500, message: err.message });
+    })
 });
 
 router.post('/upload', (req, res) => {
@@ -293,7 +299,7 @@ app.get('/get-locale-strings/:locale', function (req, res) {
       return res.sendStatus(500);
     }
     const data = JSON.parse(body);
-    const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds', 'Recording for 5 seconds', 'Recording for 4 seconds', 'Recording for 3 seconds', 'Recording for 2 seconds', 'Recording for 1 seconds', 'Playingback Audio', 'Playing', 'Test Mic', 'Test Speakers','Congratulations!!! You have completed this batch of sentences', 'social sharing text with rank', 'social sharing text without rank'];
+    const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds', 'Recording for 5 seconds', 'Recording for 4 seconds', 'Recording for 3 seconds', 'Recording for 2 seconds', 'Recording for 1 seconds', 'Playingback Audio', 'Playing', 'Test Mic', 'Test Speakers', 'Congratulations!!! You have completed this batch of sentences', 'social sharing text with rank', 'social sharing text without rank'];
 
     const langSttr = {};
     list.forEach((key) => {
@@ -314,8 +320,24 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
     console.log(`Error while insertion ${e}`)
     res.send({ statusCode: 502, message: "Failed to submit feedback." });
   })
+});
 
-})
+router.get('/rewards', validateRewardsInput, async (req, res) => {
+  const userId = req.cookies.userId;
+  const { language, userName = "", category = "" } = req.query;
+
+  const data = await getRewards(userId, userName, language, category);
+
+  return res.send(data);
+});
+
+router.get('/rewards-info', validateRewardsInfoQuery, async (req, res) => {
+  const { language } = req.query;
+
+  const info = await getRewardsInfo(language);
+
+  return res.send(info);
+});
 
 require('./dashboard-api')(router);
 

@@ -1,18 +1,18 @@
-const { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip } = require('../src/middleware/validateUserInputs')
+const { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery } = require('../src/middleware/validateUserInputs')
 
 describe('middleware test', function () {
-    const res= {
+    const res = {
         status: jest.fn(function () { return res; }),
         send: jest.fn(),
     };;
     const nextSpy = jest.fn();
 
     describe('validateUserInfo', function () {
-        
+
         afterEach(() => {
             jest.clearAllMocks();
         })
-        
+
         test('should call next() once if userName is less than 12 char and age is given format', function () {
             const req = { body: { age: "upto 10", userName: "lessThan12", gender: "female", motherTongue: "Hindi" } }
             validateUserInfo(req, res, nextSpy);
@@ -77,7 +77,7 @@ describe('middleware test', function () {
     });
 
     describe('validateUserInputAndFile', function () {
-        
+
         afterEach(() => {
             jest.clearAllMocks();
         })
@@ -146,7 +146,7 @@ describe('middleware test', function () {
          Aliquam tempor auctor felis quis dapibus. Donec at lacus ullamcorper, tincidunt nibh non, commodo elit. Ut cursus lorem at nibh hendrerit bibendum. Nam feugiat mauris at 
          eros varius auctor. Vivamus blandit turpis et dignissim tincidunt. Morbi bibendum dignissim sapien, sit amet blandit massa rhoncus a quam   .
         `
-        
+
         afterEach(() => {
             jest.clearAllMocks();
         })
@@ -221,5 +221,59 @@ describe('middleware test', function () {
             expect(nextSpy).toHaveBeenCalledTimes(0)
             expect(res.send).toHaveBeenCalledTimes(1)
         });
-    })
+    });
+
+    describe('Validate Rewards input', () => {
+
+        afterEach(() => {
+            jest.clearAllMocks();
+        })
+
+        test('should call next() if language is inputs are valid', () => {
+            const req = { cookies: { userId: 456 }, query: { language: "some language" } };
+            validateRewardsInput(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if userId is not set', () => {
+            const req = { cookies: {}, query: { language: "abcd" } };
+            validateRewardsInput(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if language is undefined', () => {
+            const req = { cookies: { userId: 456 }, query: {} };
+            validateRewardsInput(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+    });
+
+    describe('Validate Rewards info input', () => {
+
+        afterEach(() => {
+            jest.clearAllMocks();
+        })
+
+        test('should call next() if language is given in query', () => {
+            const req = { cookies: { userId: 456 }, query: { language: "some language" } };
+            validateRewardsInput(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if language is undefined', () => {
+            const req = { cookies: { userId: 456 }, query: {} };
+            validateRewardsInput(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+    });
 });
