@@ -274,6 +274,20 @@
 	"You can select the language in which you want to participate": "ਤੁਸੀਂ ਭਾਸ਼ਾ ਚੁਣ ਸਕਦੇ ਹੋ, ਜਿਸ ਵਾਸਤੇ ਤੁਸੀਂ ਯੋਗਦਾਨ ਪਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ",
 	"You can change the language in which you want to read content": "ਤੁਸੀਂ ਭਾਸ਼ਾ ਚੁਣ ਸਕਦੇ ਹੋ, ਜਿਸ ਵਾਸਤੇ ਤੁਸੀਂ ਸਮੱਗਰੀ ਪੜ੍ਹਨੀ ਚਾਹੁੰਦੇ ਹੋ",
 	"Click on the card to start contributing your voice": "ਆਪਣੀ ਆਵਾਜ਼ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣਾ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਕਾਰਡ ਉੱਤੇ ਕਲਿੱਕ ਕਰੋ",
-	"Click on the card to validate what others have spoken":"ਹੋਰਾਂ ਵਲੋਂ ਬੋਲੇ ਗਏ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਕਾਰਡ ਉੱਤੇ ਕਲਿੱਕ ਕਰੋ"
-
+	"Click on the card to validate what others have spoken":"ਹੋਰਾਂ ਵਲੋਂ ਬੋਲੇ ਗਏ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਕਾਰਡ ਉੱਤੇ ਕਲਿੱਕ ਕਰੋ",
+	"Gender Distribution": "ਲਿੰਗ ਮੁਤਾਬਕ ਵੰਡ",
+	"Levels and Badging @BoloIndia": "Levels and Badging @BoloIndia",
+	"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate",
+	"bronze": "Bronze",
+	"silver": "Silver",
+	"gold": "Gold",
+	"platinum": "Platinum",
+	"Contributor Levels": "Contributor Levels",
+	"Participate more to gain badges": "Participate more to gain badges",
+	"Level": "Level",
+	"Contributions": "Contributions",
+	"Sentences": "Sentences",
+	"(Recording + Validating)": "(Recording + Validating)",
+	"Badge": "Badge",
+	"N/A": "N/A"
 }
