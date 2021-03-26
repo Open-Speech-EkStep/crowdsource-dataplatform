@@ -1,4 +1,4 @@
-const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString } = require('./utils');
+const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording } = require('./utils');
 const { LOCALE_STRINGS } = require('./constants');
 
 const speakerDetailsKey = 'speakerDetails';
@@ -790,27 +790,20 @@ const handleSubmitFeedback = function () {
         sentenceId: crowdSource.sentences[currentIndex].sentenceId,
         reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
         language: contributionLanguage,
-        userName: speakerDetails.userName
+        userName: speakerDetails.userName,
+        source: "contribution"
     };
-    fetch('/report', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(reqObj),
-        })
-        .then((res) => res.json())
-        .then((resp) => {
-            if (resp.statusCode === 200) {
-                $("#report_sentence_modal").modal('hide');
-                $("#report_sentence_thanks_modal").modal('show');
-                $("#report_submit_id").attr("disabled", true);
-                $("input[type=radio][name=reportRadio]").each(function(){
-                      $(this).prop("checked",false);
-                });
-                $("#other_text").val("");
-            }
-        })
+    reportSentenceOrRecording(reqObj).then(function(resp) {
+        if (resp.statusCode === 200) {
+            $("#report_sentence_modal").modal('hide');
+            $("#report_sentence_thanks_modal").modal('show');
+            $("#report_submit_id").attr("disabled", true);
+            $("input[type=radio][name=reportRadio]").each(function(){
+                  $(this).prop("checked",false);
+            });
+            $("#other_text").val("");
+        }
+    });
 }
 
 let selectedReportVal = '';
