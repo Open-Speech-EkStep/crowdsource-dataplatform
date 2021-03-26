@@ -283,5 +283,14 @@
 	"National Language Translation Mission": "ৰাষ্ট্ৰীয় ভাষা অনুবাদ মিছন",
 	"Badge ID": "বেজ পৰিচয় পত্ৰ",
 	"Please validate any error message before proceeding": "অনুগ্ৰহ কৰি আগবাঢ়ি যোৱাৰ আগতে কোনো ত্ৰুটি বাৰ্তা থাকিলে বৈধকৰণ কৰক",
-	"Help us understand what’s wrong with the recording": "বাণীবদ্ধটোত কি ভুল হৈছে আমাক বুজাত সহায় কৰক"
+	"Help us understand what’s wrong with the recording": "বাণীবদ্ধটোত কি ভুল হৈছে আমাক বুজাত সহায় কৰক",
+	"SKIP": "SKIP",
+	"Next": "Next",
+	"CLOSE": "CLOSE",
+	"Back": "Back",
+	"You can select the language in which you want to participate": "You can select the language in which you want to participate",
+	"You can change the language in which you want to read content": "You can change the language in which you want to read content",
+	"Click on the card to start contributing your voice": "Click on the card to start contributing your voice",
+	"Click on the card to validate what others have spoken":"Click on the card to validate what others have spoken"
+
 }

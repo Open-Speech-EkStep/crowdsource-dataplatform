@@ -231,5 +231,13 @@
 	"National Language Translation Mission": "नेशनल लैंग्वेज ट्रांसलेशन मिशन",
 	"Download": "डाउनलोड करें",
 	"Help us understand what’s wrong with the recording": "रिकॉर्डिंग में क्या गड़बड़ी है, यह समझने में हमारी मदद करें",
-	"Please validate any error message before proceeding": "आगे बढ़ने से पहले, कृपया किसी गड़बड़ी वाले मैसेज की पुष्टि करें"
+	"Please validate any error message before proceeding": "आगे बढ़ने से पहले, कृपया किसी गड़बड़ी वाले मैसेज की पुष्टि करें",
+	"SKIP": "छोड़ दें",
+	"Next": "आगे बढ़ें",
+	"CLOSE": "बंद करें",
+	"Back": "वापस जाएं",
+	"You can select the language in which you want to participate": "आप जिस भाषा में योगदान देना चाहते हैं, उसे चुन सकते हैं",
+	"You can change the language in which you want to read content": "आप जिस भाषा में कॉन्टेंट पढ़ना चाहते हैं, उस भाषा में बदल सकते हैं",
+	"Click on the card to start contributing your voice": "अपनी आवाज़ का योगदान देना शुरू करने के लिए कार्ड पर क्लिक करें",
+	"Click on the card to validate what others have spoken":"दूसरे लोगों ने जो बोला है उसकी पुष्टि करने के लिए कार्ड पर क्लिक करें"
 }
