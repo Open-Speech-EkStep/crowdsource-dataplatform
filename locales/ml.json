@@ -222,5 +222,14 @@
 	"Select a language": "ഭാഷ തിരഞ്ഞെടുക്കുക",
 	"START CONTRIBUTING": "സംഭാവന ചെയ്യാൻ തുടങ്ങാം",
 	"Please validate any error message before proceeding": "തുടരുന്നതിനു മുമ്പ് ഏതെങ്കിലും പിശക് സന്ദേശം സാധൂകരിക്കുക",
-	"Help us understand what’s wrong with the recording": "റെക്കോ൪ഡിംഗിൽ എന്താണ് തെറ്റ് എന്ന് മനസിലാക്കാൻ ഞങ്ങളെ സഹായിക്കുക"
+	"Help us understand what’s wrong with the recording": "റെക്കോ൪ഡിംഗിൽ എന്താണ് തെറ്റ് എന്ന് മനസിലാക്കാൻ ഞങ്ങളെ സഹായിക്കുക",
+	"SKIP": "SKIP",
+	"Next": "Next",
+	"CLOSE": "CLOSE",
+	"Back": "Back",
+	"You can select the language in which you want to participate": "You can select the language in which you want to participate",
+	"You can change the language in which you want to read content": "You can change the language in which you want to read content",
+	"Click on the card to start contributing your voice": "Click on the card to start contributing your voice",
+	"Click on the card to validate what others have spoken":"Click on the card to validate what others have spoken"
+
 }

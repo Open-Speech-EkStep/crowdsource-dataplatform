@@ -177,5 +177,14 @@
 	"Badge ID": "બેજ આઇડી",
 	"Download": "ડાઉનલોડ કરો",
 	"Help us understand what’s wrong with the recording": "રેકોર્ડિંગમાં શું ખોટું છે તે સમજવામાં અમને મદદ કરો",
-	"Please validate any error message before proceeding": "કૃપા કરીને પ્રક્રિયા કરતા પહેલાં કોઇપણ એરર સંદેશાને માન્યતા આપો"
+	"Please validate any error message before proceeding": "કૃપા કરીને પ્રક્રિયા કરતા પહેલાં કોઇપણ એરર સંદેશાને માન્યતા આપો",
+	"SKIP": "SKIP",
+	"Next": "Next",
+	"CLOSE": "CLOSE",
+	"Back": "Back",
+	"You can select the language in which you want to participate": "You can select the language in which you want to participate",
+	"You can change the language in which you want to read content": "You can change the language in which you want to read content",
+	"Click on the card to start contributing your voice": "Click on the card to start contributing your voice",
+	"Click on the card to validate what others have spoken":"Click on the card to validate what others have spoken"
+
 }

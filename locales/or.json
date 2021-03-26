@@ -242,5 +242,14 @@
 	"Badge ID": "ବ୍ୟାଜ୍ ID",
 	"Download": "ଡାଉନଲୋଡ୍ କରନ୍ତୁ",
 	"Help us understand what’s wrong with the recording": "ରେକର୍ଡିଂରେ କ’ଣ ଭୁଲ୍ ଅଛି ତାହା ବୁଝିବାରେ ଆମକୁ ସାହାଯ୍ୟ କରନ୍ତୁ",
-	"Please validate any error message before proceeding": "ଆଗକୁ ଯିବା ପୂର୍ବରୁ ଦୟାକରି କୌଣସି ତ୍ରୁଟି ସନ୍ଦେଶକୁ ବୈଧ କରନ୍ତୁ "
+	"Please validate any error message before proceeding": "ଆଗକୁ ଯିବା ପୂର୍ବରୁ ଦୟାକରି କୌଣସି ତ୍ରୁଟି ସନ୍ଦେଶକୁ ବୈଧ କରନ୍ତୁ ",
+	"SKIP": "SKIP",
+	"Next": "Next",
+	"CLOSE": "CLOSE",
+	"Back": "Back",
+	"You can select the language in which you want to participate": "You can select the language in which you want to participate",
+	"You can change the language in which you want to read content": "You can change the language in which you want to read content",
+	"Click on the card to start contributing your voice": "Click on the card to start contributing your voice",
+	"Click on the card to validate what others have spoken":"Click on the card to validate what others have spoken"
+
 }

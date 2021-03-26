@@ -261,5 +261,14 @@
 	"Your feedback helps us keep Bolo India relevant, we appreciate you taking time to leave the feedback": "Your feedback helps us keep Bolo India relevant, we appreciate you taking time to leave the feedback",
 	"Back to Home": "Back to Home",
 	"Help us understand what’s wrong with the recording": "Help us understand what’s wrong with the recording",
-	"Please validate any error message before proceeding": "Please validate any error message before proceeding"
+	"Please validate any error message before proceeding": "Please validate any error message before proceeding",
+	"SKIP": "SKIP",
+	"Next": "Next",
+	"CLOSE": "CLOSE",
+	"Back": "Back",
+	"You can select the language in which you want to participate": "You can select the language in which you want to participate",
+	"You can change the language in which you want to read content": "You can change the language in which you want to read content",
+	"Click on the card to start contributing your voice": "Click on the card to start contributing your voice",
+	"Click on the card to validate what others have spoken":"Click on the card to validate what others have spoken"
+
 }
