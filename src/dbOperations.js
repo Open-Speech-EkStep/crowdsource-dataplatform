@@ -378,23 +378,22 @@ const markContributionSkipped = (userId, sentenceId, userName) => {
 const getRewards = async (userId, userName, language, category) => {
     const encryptUserId = encrypt(userId);
     const { contributor_id } = await db.one(getContributorIdQuery, [encryptUserId, userName]);
-    const response = await db.one(checkBadgeQuery, [contributor_id, language]);
+    const { contribution_count } = await db.one(getTotalUserContribution, [contributor_id, language])
+    const response = await db.one(checkBadgeQuery, [contribution_count, language]);
     let rewardIdList = await db.any(findRewardInfo, [contributor_id, language, response.id, category]);
-    let isNewBadge = false;
+
     console.log({ reward_id: rewardIdList }, { response });
     if (rewardIdList.length == 0) {
         rewardIdList = await db.any(insertRewardQuery, [contributor_id, language, response.id, category]);
-        isNewBadge = true;
     }
 
-    const generatedBadgeId = rewardIdList[0].reward_id;
-    const badgeType = response.grade;
-    const thankyouMessage = response.message;
+    const generatedBadgeId = rewardIdList[0].generated_badge_id;
+    const currentBadgeType = response.grade;
+    const nextBadgeType = response.grade;
     const currentMilestone = response.milestone;
     const nextMilestone = 100;
     return {
-        "badgeId": generatedBadgeId, "badgeType": badgeType,
-        "message": thankyouMessage, "isNewBadge": isNewBadge,
+        "badgeId": generatedBadgeId, "currentBadgeType": currentBadgeType, "nextBadgeType": nextBadgeType,
         "currentMilestone": currentMilestone, "nextMilestone": nextMilestone
     }
 }
