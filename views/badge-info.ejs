@@ -80,56 +80,73 @@
                 <th scope="col"><%= __('Badge')%></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="table-rows">
             <tr>
                 <td><%= __('Level 1')%></td>
-                <td><%- __('<span class="level-count"></span> Senetences')%></td>
-                <td><%= __('N/A')%></td>
+                <td><%- __('<span id="level-count-1"></span> Senetences')%></td>
+
+                <td>
+                    <span id="level-badge-1">
+                        <%= __('N/A')%>
+                    </span>
+                </td>
             </tr>
             <tr>
                 <td><%= __('Level 2')%></td>
-                <td><%- __('<span class="level-count"></span> Senetences')%></td>
-                <td><%= __('N/A')%></td>
+                <td><%- __('<span id="level-count-2"></span> Senetences')%></td>
+                <td><span id="level-badge-2">
+                        <%= __('N/A')%>
+                    </span></td>
             </tr>
             <tr>
                 <td><%= __('Level 3')%></td>
-                <td><%- __('<span class="level-count"></span> Senetences')%></td>
+                <td><%- __('<span id="level-count-3"></span> Senetences')%></td>
                 <td>
                     <div class="table-img">
                         <%- include modals/bronze_badge.ejs %>
                     </div>
-                    <%= __('Bronze')%>
-                </td>
-            </tr>
-            <tr>
-                <td><%= __('Level 4')%></td>
-                <td><%- __('<span class="level-count"></span> Senetences')%></td>
-                <td>
-                    <div class="table-img">
-                        <%- include modals/silver_badge.ejs %>
-                    </div>
-                    <%= __('Silver')%>
-                </td>
-            </tr>
-            <tr>
-                <td><%= __('Level 5')%></td>
-                <td><%- __('<span class="level-count"></span> Senetences')%></td>
-                <td>
-                    <div class="table-img">
-                        <%- include modals/gold_badge.ejs %>
-                    </div>
-                    <%= __('Gold')%>
+                    <span id="level-badge-3">
+                        <%= __('Bronze')%>
+                    </span>
 
                 </td>
             </tr>
             <tr>
+                <td><%= __('Level 4')%></td>
+                <td><%- __('<span id="level-count-4"></span> Senetences')%></td>
+                <td>
+                    <div class="table-img">
+                        <%- include modals/silver_badge.ejs %>
+                    </div>
+                    <span id="level-badge-4">
+                        <%= __('Silver')%>
+                    </span>
+
+                </td>
+            </tr>
+            <tr>
+                <td><%= __('Level 5')%></td>
+                <td><%- __('<span id="level-count-5"></span> Senetences')%></td>
+                <td>
+                    <div class="table-img">
+                        <%- include modals/gold_badge.ejs %>
+                    </div>
+                    <span id="level-badge-5">
+                        <%= __('Gold')%>
+                    </span>
+                </td>
+            </tr>
+            <tr>
                 <td><%= __('Level 6')%></td>
-                <td><%- __('<span class="level-count"></span> Senetences')%></td>
+                <td><%- __('<span id="level-count-6"></span> Senetences')%></td>
                 <td>
                     <div class="table-img">
                         <%- include modals/platinum_badge.ejs %>
                     </div>
-                    <%= __('Platinum')%>
+                    <span id="level-badge-6">
+                        <%= __('Platinum')%>
+                    </span>
+
                 </td>
             </tr>
             </tbody>
@@ -142,5 +159,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>$("footer").removeClass("fixed-bottom").addClass("bottom")</script>
+
 </body>
 </html>
