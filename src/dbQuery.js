@@ -131,6 +131,32 @@ FROM contributor;';
 
 const markContributionSkippedQuery = "update contributions set action='skipped' where contributed_by=(select contributor_id from contributors where user_name=$2 and contributor_identifier = $1) and \"sentenceId\"=$3;";
 
+const rewardsInfoQuery = 'select milestone as contributions, grade as badge from reward_milestones mil \
+inner join reward_catalogue rew on mil.reward_catalogue_id = rew.id \
+where UPPER(language) = UPPER($1) order by mil.milestone';
+
+const getTotalUserContribution = 'select count(*) as count_ from contributions con \
+inner join sentences sen on sen."sentenceId"=con."sentenceId" where language = $3 \
+and action = \'completed\' and contributed_by = ( \
+  select contributor_id from contributors \
+  where contributor_identifier = $1 \
+  and user_name = $2)';
+
+const checkBadgeQuery = 'select grade, message, reward_milestone.milestone, id from reward_catalogue, \
+(select milestone,reward_catalogue_id as rid from reward_milestones where milestone<=( \
+select count(*) from contributions con \
+	inner join sentences sen on sen."sentenceId"=con."sentenceId" where language = $2 \
+	and action = \'completed\' \
+	and contributed_by = $1) and language = $2 order by milestone desc limit 1) \
+as reward_milestone where id=reward_milestone.rid ';
+
+const findRewardInfo = 'select reward_id from rewards where contributor_id = $1 and language = $2 and reward_catalogue_id = $3 and category = $4';
+
+const insertRewardQuery = 'insert into rewards (contributor_id, language, reward_catalogue_id, category) select $1, $2, $3, $4 \
+where not exists (select 1 from rewards where contributor_id=$1 and language=$2 and reward_catalogue_id=$3 and category=$4) returning reward_id';
+
+const getContributorIdQuery = 'select contributor_id from contributors where contributor_identifier = $1 and user_name = $2';
+
 module.exports = {
   unassignIncompleteSentences,
   sentencesCount,
@@ -151,5 +177,11 @@ module.exports = {
   getAudioPath,
   saveReportQuery,
   getSentencesForLaunch,
-  markContributionSkippedQuery
+  markContributionSkippedQuery,
+  rewardsInfoQuery,
+  getTotalUserContribution,
+  checkBadgeQuery,
+  findRewardInfo,
+  insertRewardQuery,
+  getContributorIdQuery
 }

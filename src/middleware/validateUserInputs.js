@@ -25,7 +25,7 @@ const validateUserInputAndFile = function (req, res, next) {
     const userName = speakerDetailsJson.userName;
 
     const isValidReqParams = fileSizeInMB > MAX_SIZE || file.mimetype != VALID_FILE_TYPE
-        userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName);
+    userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName);
 
     if (isValidReqParams) {
         return res.status(400).send("Bad request");
@@ -54,11 +54,11 @@ const validateUserInputForFeedback = function (req, res, next) {
     const subject = req.body.subject;
     const language = req.body.language
 
-    const allLanguage = LANGUAGES.map(language=>language.value)
-    
+    const allLanguage = LANGUAGES.map(language => language.value)
+
     const invalidLanguage = !allLanguage.includes(language)
 
-    const invalidSubject = (!subject || !subject.trim().length|| subject.trim().length > SUBJECT_MAX_LENGTH )
+    const invalidSubject = (!subject || !subject.trim().length || subject.trim().length > SUBJECT_MAX_LENGTH)
 
     const invalidFeedback = (!feedback || !feedback.trim().length || feedback.trim().length > FEEDBACK_MAX_LENGTH);
 
@@ -81,4 +81,23 @@ const validateInputForSkip = function (req, res, next) {
     next();
 }
 
-module.exports = {validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip}
+const validateRewardsInput = function (req, res, next) {
+    const userId = req.cookies.userId || "";
+    const { language = "" } = req.query;
+
+    if (language === "" || userId === "") {
+        return res.status(400).send("Input values missing");
+    }
+    next();
+}
+
+const validateRewardsInfoQuery = function (req, res, next) {
+    const { language } = req.query;
+
+    if (!language) {
+        return res.status(400).send("Query parameter language missing");
+    }
+    next();
+}
+
+module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery }
