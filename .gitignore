@@ -123,9 +123,3 @@ logs
 # Gauge - JavaScript node dependencies
 */node_modules
 .terraform
-
-public/*
-!public/img/*
-!public/favicon.ico
-!public/sitemap.xml
-!public/aud/*

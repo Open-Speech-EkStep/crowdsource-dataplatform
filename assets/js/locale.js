@@ -1,4 +1,4 @@
-const { updateLocaleLanguagesDropdown, getCookie, setCookie } = require('./utils');
+const { updateLocaleLanguagesDropdown } = require('./utils');
 const { ALL_LANGUAGES } = require("./constants");
 
 const registerEvents = function () {
@@ -13,13 +13,33 @@ const localisationChangeHandler = e => {
     changeLocale(locale);
 };
 const changeLocale = function (locale) {
-    const splitValues = location.href.split('/');
+    let splitValues = location.href.split('/');
     let currentPage = splitValues[splitValues.length - 1];
-    if (!currentPage) {
-        currentPage = "home.html";
-    }
-    localStorage.setItem("i18n", locale);
+    setCookie("i18n", locale, 1);
     location.href = `/${locale}/${currentPage}`;
+}
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
 }
 
 function checkCookie() {
@@ -30,9 +50,9 @@ function showLanguagePopup() {
     document.getElementById("toggle-content-language").click();
 }
 function redirectToLocalisedPage() {
-    const locale = localStorage.getItem("i18n");
-    const splitValues = location.href.split('/');
-    const currentLocale = splitValues[splitValues.length - 2];
+    var locale = getCookie("i18n");
+    let splitValues = location.href.split('/');
+    let currentLocale = splitValues[splitValues.length - 2];
     $('#home-page').attr('default-lang', locale);
     if (currentLocale != locale) {
         changeLocale(locale);
@@ -44,12 +64,14 @@ function redirectToLocalisedPage() {
         }
     }
 }
-$(document).ready(function () {
-    registerEvents();
-})
+// $(document).ready(function () {
+//     registerEvents();
+// })
 
 module.exports = {
     checkCookie,
+    getCookie,
+    setCookie,
     changeLocale,
     showLanguagePopup,
     redirectToLocalisedPage

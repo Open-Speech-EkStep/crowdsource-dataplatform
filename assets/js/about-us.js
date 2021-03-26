@@ -58,7 +58,7 @@ $(document).ready(function () {
 
     $('#start_recording').on('click', () => {
         sentenceLanguage = langTop;
-        localStorage.setItem("i18n", "en");
+        document.cookie = `i18n=en`;
     });
 
     setUserNameOnInputFocus();
@@ -88,7 +88,7 @@ $(document).ready(function () {
         localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
         localStorage.setItem("contributionLanguage", sentenceLanguage);
         // document.cookie = `i18n=en`;
-        location.href = './record.html';
+        location.href = '/record';
     });
 
     setUserModalOnShown($userName);

@@ -5,7 +5,6 @@ orbs:
   aws-eks: circleci/aws-eks@1.0.3
   aws-cli: circleci/aws-cli@1.4.0
   kubernetes: circleci/kubernetes@0.11.2
-  aws-s3: circleci/aws-s3@2.0.0
 
 jobs:
   run_functional_tests:
@@ -45,21 +44,6 @@ jobs:
             echo << parameters.db_name >>
             echo $DATABASE_URL
             npx db-migrate up
-  
-  build_ui_push_to_s3:
-    parameters:
-      env_name:
-        type: string
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - node/install-packages
-      - run: npm run gulp -- --env=<< parameters.env_name >>
-      - aws-s3/sync:
-          from: public/
-          to: 's3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>'
-
 
   eks_fargate_deployment:
     executor: aws-eks/python3
@@ -103,12 +87,6 @@ workflows:
             branches:
               only: master
 
-      - build_ui_push_to_s3:
-          name: build_dev_ui
-          env_name: dev
-          requires:
-            - migrate_dev_aws
-
       - aws-ecr/build-and-push-image:
           name: push_dev_image
           repo: ${REPO}
@@ -145,18 +123,12 @@ workflows:
           requires:
             - approve_test_deployment_eks
 
-      - build_ui_push_to_s3:
-          name: build_test_ui
-          env_name: test
-          requires:
-            - migrate_test_aws
-
       - aws-ecr/build-and-push-image:
           name: push_test_image
           repo: ${REPO}
           tag: test
           requires:
-            - build_test_ui
+            - migrate_test_aws
 
       - eks_fargate_deployment:
           name: test_deployment_eks
@@ -182,18 +154,12 @@ workflows:
           requires:
             - approve_prod_deployment_eks
 
-      - build_ui_push_to_s3:
-          name: build_prod_ui
-          env_name: prod
-          requires:
-            - migrate_prod_aws
-
       - aws-ecr/build-and-push-image:
           name: push_prod_image
           repo: ${REPO}
           tag: prod
           requires:
-            - build_prod_ui
+            - migrate_prod_aws
 
       - eks_fargate_deployment:
           name: prod_deployment_eks
