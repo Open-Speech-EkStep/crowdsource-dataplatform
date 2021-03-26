@@ -5,8 +5,6 @@ const {
     setSpeakerDetails,
     resetSpeakerDetails,
     setUserNameTooltip,
-    setStartRecordBtnToolTipContent,
-    // setTNCOnChange,setStartRecordBtnToolTipContentsetStartRecordBtnToolTipContent
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick
 } = require('../assets/js/speakerDetails');
@@ -178,32 +176,6 @@ describe("setUserNameTooltip",()=>{
 
     })
 })
-
-describe('setStartRecordBtnToolTipContent', () => {
-    test('should set username error msg when username is an phone no.', () => {
-        const $startRecordBtn = $('#proceed-box');
-        const $startRecordBtnTooltip = $startRecordBtn.parent();
-        jest.spyOn($startRecordBtn,'parent');
-        jest.spyOn($startRecordBtnTooltip,'attr');
-
-        setStartRecordBtnToolTipContent("8787878788", $startRecordBtnTooltip);
-        expect($startRecordBtnTooltip.attr).toHaveBeenCalledTimes(1);
-        expect($startRecordBtnTooltip.attr).toHaveBeenCalledWith('data-original-title','Please validate any error message before proceeding');
-        jest.clearAllMocks();
-    })
-
-    test('should set username error msg when username is an emailId', () => {
-        const $startRecordBtn = $('#proceed-box');
-        const $startRecordBtnTooltip = $startRecordBtn.parent();
-        jest.spyOn($startRecordBtnTooltip,'attr');
-
-        setStartRecordBtnToolTipContent("abc@gmail.com", $startRecordBtnTooltip);
-        expect($startRecordBtnTooltip.attr).toHaveBeenCalledTimes(1);
-        expect($startRecordBtnTooltip.attr).toHaveBeenCalledWith('data-original-title','Please validate any error message before proceeding');
-        jest.clearAllMocks();
-    })
-
-});
 
 describe('setGenderRadioButtonOnClick', () => {
     test('should mark the clicked radio button as checked', () => {

@@ -1,5 +1,5 @@
 const { updateGraph } = require('./draw-chart');
-const { testUserName, setStartRecordBtnToolTipContent, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('./speakerDetails');
+const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('./speakerDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString } = require('./utils');
 
 const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES} = require('./constants');
@@ -179,7 +179,7 @@ $(document).ready(function () {
 
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
-    setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
+    $startRecordBtnTooltip.tooltip('disable');
     setUserNameOnInputFocus();
     setUserModalOnShown($userName);
 
