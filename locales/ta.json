@@ -184,6 +184,26 @@
 	"You can select the language in which you want to participate": "நீங்கள் பங்கேற்க விரும்பும் மொழியை நீங்கள் தேர்ந்தெடுக்கலாம்",
 	"You can change the language in which you want to read content": "உள்ளடக்கத்தைப் படிக்க விரும்பும் மொழியை நீங்கள் மாற்றலாம்",
 	"Click on the card to start contributing your voice": "உங்கள் குரலில் பங்களிக்க கார்டில் கிளிக் செய்க",
-	"Click on the card to validate what others have spoken":"மற்றவர்கள் பேசியதை சரிபார்க்க கார்டில் கிளிக் செய்க"
-
+	"Click on the card to validate what others have spoken":"மற்றவர்கள் பேசியதை சரிபார்க்க கார்டில் கிளிக் செய்க",
+	"Download": "பதிவிறக்கவும்",
+	"Levels and Badging @BoloIndia": "Levels and Badging @BoloIndia",
+	"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate",
+	"Bronze": "Bronze",
+	"Silver": "Silver",
+	"Gold": "Gold",
+	"Platinum": "Platinum",
+	"Contributor Levels": "Contributor Levels",
+	"Participate more to gain badges": "Participate more to gain badges",
+	"Level": "Level",
+	"Contributions": "Contributions",
+	"(Recording + Validating)": "(Recording + Validating)",
+	"Badge": "Badge",
+	"Level 1": "Level 1",
+	"<span class=\"level-count\"></span> Senetences": "<span class=\"level-count\"></span> Senetences",
+	"N/A": "N/A",
+	"Level 2": "Level 2",
+	"Level 3": "Level 3",
+	"Level 4": "Level 4",
+	"Level 5": "Level 5",
+	"Level 6": "Level 6"
 }
