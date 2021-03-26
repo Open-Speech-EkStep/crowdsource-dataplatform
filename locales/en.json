@@ -279,5 +279,14 @@
 	"Level 4": "Level 4",
 	"Level 5": "Level 5",
 	"Level 6": "Level 6",
-	"<span class=\"level-count\"></span> Senetences": "<span class=\"level-count\"></span> Senetences"
+	"<span class=\"level-count\"></span> Senetences": "<span class=\"level-count\"></span> Senetences",
+	"You are on a spree !!": "You are on a spree !!",
+	"WoaaH!! You’ve earned your <span id=\"badge-name-1\">1st</span> Badge": "WoaaH!! You’ve earned your <span id=\"badge-name-1\">1st</span> Badge",
+	"<span id=\"badge-name-2\">1st</span> Contributor level achieved for contributing <span id=\"max-badge-count\">50</span> sentences.": "<span id=\"badge-name-2\">1st</span> Contributor level achieved for contributing <span id=\"max-badge-count\">50</span> sentences.",
+	"Your next goal is to reach <span id=\"next-badge-count\">50</span> sentences to unlock your 2nd Badge. <a href=\"/badges\">Know more</a>": "Your next goal is to reach <span id=\"next-badge-count\">50</span> sentences to unlock your 2nd Badge. <a href=\"/badges\">Know more</a>",
+	"Your next goal is to reach <span id=\"next-badge-count\">50</span> sentences to unlock your 2nd Badge.": "Your next goal is to reach <span id=\"next-badge-count\">50</span> sentences to unlock your 2nd Badge.",
+	"Know more": "Know more",
+	"<span id=\"badge-name-2\">Bronze</span> Contributor level achieved for contributing <span id=\"max-badge-count\">50</span> sentences.": "<span id=\"badge-name-2\">Bronze</span> Contributor level achieved for contributing <span id=\"max-badge-count\">50</span> sentences.",
+	"Download": "Download",
+	"National Language Translation Mission": "National Language Translation Mission"
 }
