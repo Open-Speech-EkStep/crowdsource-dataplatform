@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
             - name: db-refresher
-              image: postgres
+              image: 535630329499.dkr.ecr.ap-south-1.amazonaws.com/db-refresher:dev
               imagePullPolicy: IfNotPresent
               env:
                 - name: DB_HOST
@@ -33,8 +33,26 @@ spec:
                     secretKeyRef:
                       name: vakyansh-secret
                       key: DB_PASS
-              args:
-                - /bin/sh
-                - -c
-                - echo "Db refresh Initiating...";echo "REFRESH MATERIALIZED VIEW contributions_and_demo_stats;" > db_refresh.sql;echo "INSERT INTO audit_load_log(tablename,username,command)  values('contributions_and_demo_stats','root','REFRESH');" >> db_refresh.sql;echo "REFRESH MATERIALIZED VIEW daily_stats_complete;" >> db_refresh.sql;echo "INSERT INTO audit_load_log(tablename,username,command) values('daily_stats_complete','root','REFRESH');" >> db_refresh.sql;cat db_refresh.sql;psql "postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}" -f db_refresh.sql;echo "Db refresh Complete!"
+                - name: BUCKET_NAME
+                  value: "static-content-vakyansh-dev"
+                - name: ENCRYPTION_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: ENCRYPTION_KEY
+                - name: AWS_ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AWS_ACCESS_KEY_ID
+                - name: AWS_SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AWS_SECRET_ACCESS_KEY
+                - name: region
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: region
           restartPolicy: OnFailure

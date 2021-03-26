@@ -1,10 +1,10 @@
 const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
-const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo } = require('./utils');
+const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('./utils');
 // const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('./constants');
 
 const visualizer = new Visualizer();
-
+const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
@@ -418,8 +418,32 @@ function showNoSentencesMessage() {
     $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
 }
 
+const handleSubmitFeedback = function () {
+    const contributionLanguage = localStorage.getItem("contributionLanguage");
+    const otherText = $("#other_text").val();
+    const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
+        
+    const reqObj = {
+        sentenceId: validationSentences[currentIndex].contribution_id,
+        reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
+        language: contributionLanguage,
+        userName: speakerDetails.userName,
+        source: "validation"
+    };
+    reportSentenceOrRecording(reqObj).then(function(resp) {
+        if (resp.statusCode === 200) {
+            $("#report_recording_modal").modal('hide');
+            $("#report_sentence_thanks_modal").modal('show');
+            $("#report_submit_id").attr("disabled", true);
+            $("input[type=radio][name=reportRadio]").each(function(){
+                  $(this).prop("checked",false);
+            });
+            $("#other_text").val("");
+        }
+    });
+}
 
-
+let selectedReportVal = '';
 $(document).ready(() => {
     toggleFooterPosition();
     setPageContentHeight();
@@ -436,6 +460,27 @@ $(document).ready(() => {
             localStorage.setItem("speakerDetails", JSON.stringify(speakerDetails));
         }
         location.href = '/record';
+    });
+
+    const $reportModal = $("#report_recording_modal");
+    
+    $("#report_submit_id").on('click', handleSubmitFeedback);
+
+    $("#report_btn").on('click', function() {
+        $reportModal.modal('show');
+    });
+
+    $("#report_close_btn").on("click", function() {
+        $reportModal.modal('hide');
+    });
+
+    $("#report_sentence_thanks_close_id").on("click", function() {
+        $("#report_sentence_thanks_modal").modal('hide');
+    });
+
+    $("input[type=radio][name=reportRadio]").on("change", function() {
+        selectedReportVal = this.value;
+        $("#report_submit_id").attr("disabled", false);
     });
 
     fetchLocationInfo().then(res => {

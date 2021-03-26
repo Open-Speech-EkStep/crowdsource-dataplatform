@@ -2,8 +2,6 @@ const {drawMap, getStatistics, showByHoursChart, showBySpeakersChart} = require(
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest} = require('./utils')
 const {
     setSpeakerDetails,
-    setStartRecordBtnToolTipContent,
-    //setTNCOnChange,
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
@@ -159,9 +157,8 @@ const getStatsSummary = function () {
         });
 }
 
-$(document).ready(function () {
-    clearLocalStorage();
-    getLocaleString();
+
+function initializeBlock() {
     const speakerDetailsKey = 'speakerDetails';
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
@@ -171,7 +168,7 @@ $(document).ready(function () {
     //const $tncCheckbox = $('#tnc');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
-   // $tncCheckbox.prop('checked', false);
+    // $tncCheckbox.prop('checked', false);
 
     toggleFooterPosition();
     let top_lang = getDefaultLang();
@@ -224,8 +221,6 @@ $(document).ready(function () {
 
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
-    setStartRecordBtnToolTipContent($userName.val().trim(), $startRecordBtnTooltip);
-    //setTNCOnChange($userName, $startRecordBtnTooltip);
     setUserNameOnInputFocus();
     setStartRecordingBtnOnClick();
     setUserModalOnShown($userName);
@@ -289,7 +284,72 @@ $(document).ready(function () {
     });
 
     getStatsSummary();
+
+}
+
+const renderCoachMarks = function () {
+    const localString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+    const step1 = 'You can select the language in which you want to participate';
+    const step2 = 'You can change the language in which you want to read content';
+    const step3 = 'Click on the card to start contributing your voice';
+    const step4 = 'Click on the card to validate what others have spoken';
+    const tourSteps = [
+        {
+            element: '#contribution_lang_navbar',
+            title: '',
+            preventInteraction: true,
+            placement: "bottom",
+            content: localString[step1]
+        },
+        {
+            element: '#locale_language_dropdown',
+            title: '',
+            preventInteraction: true,
+            placement: "bottom",
+            content: localString[step2]
+        },
+        {
+            element: '#say',
+            title: '',
+            preventInteraction: true,
+            placement: "bottom",
+            content: localString[step3]
+        },
+        {
+            element: '#listen',
+            title: '',
+            preventInteraction: true,
+            placement: "bottom",
+            content: localString[step4]
+        }
+    ];
+
+    const homePageTour = new Tour({
+        steps: tourSteps,
+        framework: "bootstrap4",
+        backdrop: true,
+        localization: {
+            buttonTexts: {
+                nextButton:localString.Next,
+                prevButton:localString.Prev,
+                endTourButton: localString.SKIP,
+            },
+        }
+    });
+
+    homePageTour.start();
+};
+
+$(document).ready(function () {
+    clearLocalStorage();
+    getLocaleString().then(()=>{
+        initializeBlock();
+        renderCoachMarks();
+    }).catch(err => {
+        initializeBlock();
+    });
 });
+
 
 module.exports = {
     updateHrsForSayAndListen,
