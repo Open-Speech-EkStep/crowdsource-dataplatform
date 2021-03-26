@@ -264,5 +264,7 @@
 	"We do not have any data in <span id=\"spn-validation-language\"></span> language. Please try again later.": "ਸਾਡੇ ਕੋਲ <span id=\"spn-validation-language\"></span> ਭਾਸ਼ਾ ਲਈ ਕੋਈ ਡਾਟਾ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਬਾਅਦ 'ਚ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
 	"Start Contributing in <span id=\"start-validation-language\"></span>": "<span id=\"start-validation-language\"></span> ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣਾ ਸ਼ੁਰੂ ਕਰੋ",
 	"Please test your <b>speakers</b>": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ <b>ਸਪੀਕਰਾਂ</b> ਦੀ ਜਾਂਚ ਕਰੋ",
-	"Gender Distribution": "ਲਿੰਗ ਮੁਤਾਬਕ ਵੰਡ"
+	"Gender Distribution": "ਲਿੰਗ ਮੁਤਾਬਕ ਵੰਡ",
+	"Help us understand what’s wrong with the recording": "Help us understand what’s wrong with the recording",
+	"Please validate any error message before proceeding": "Please validate any error message before proceeding"
 }
