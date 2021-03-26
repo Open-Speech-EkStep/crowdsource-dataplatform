@@ -187,6 +187,20 @@
 	"You can select the language in which you want to participate": "మీరు పాల్గొనదలిచిన భాషను ఎంచుకోవచ్చు",
 	"You can change the language in which you want to read content": "మీరు కంటెంట్ చదవాలనుకుంటున్న భాషను మార్చవచ్చు",
 	"Click on the card to start contributing your voice": "మీ వాయిస్\u200Cకు సహకారం అందించడం ప్రారంభించడానికి కార్డ్ పై క్లిక్ చేయండి",
-	"Click on the card to validate what others have spoken":"ఇతరులు మాట్లాడిన వాటిని ధృవీకరించడానికి కార్డుపై క్లిక్ చేయండి"
-
+	"Click on the card to validate what others have spoken":"ఇతరులు మాట్లాడిన వాటిని ధృవీకరించడానికి కార్డుపై క్లిక్ చేయండి",
+	"Badge ID": "బ్యాడ్జ్ ID",
+	"Levels and Badging @BoloIndia": "లెవల్స్ మరియు బ్యాడ్జింగ్ @BoloIndia",
+	"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate",
+	"bronze": "బ్రాంజ్",
+	"silver": "సిల్వర్",
+	"gold": "గోల్డ్",
+	"platinum": "ప్లాటినం",
+	"Contributor Levels": "కంట్రిబ్యూటర్ లెవల్స్",
+	"Participate more to gain badges": "బ్యాడ్జ్లను పొందడానికి మరింత పాల్గొనండి",
+	"Level": "లెవల్",
+	"Contributions": "కాంట్రిబ్యూషన్స్",
+	"Sentences": "వాక్యాలు",
+	"(Recording + Validating)": "(రికార్డింగ్ + ధ్రువీకరిస్తోంది)",
+	"Badge": "బ్యాడ్జ్",
+	"N/A": "N/A"
 }

@@ -14,30 +14,30 @@ const cookieParser = require('cookie-parser');
 const router = express.Router();
 
 const {
-  updateDbWithAudioPath,
-  updateAndGetSentences,
-  getValidationSentences,
-  getAllDetails,
-  getAllInfo,
-  updateTablesAfterValidation,
-  getAudioClip,
-  insertFeedback,
-  saveReport,
-  markContributionSkipped,
-  getRewards,
-  getRewardsInfo
+    updateDbWithAudioPath,
+    updateAndGetSentences,
+    getValidationSentences,
+    getAllDetails,
+    getAllInfo,
+    updateTablesAfterValidation,
+    getAudioClip,
+    insertFeedback,
+    saveReport,
+    markContributionSkipped,
+    getRewards,
+    getRewardsInfo
 } = require('./dbOperations');
 const fs = require('fs');
 const {v4: uuidv4} = require('uuid');
 const compression = require('compression');
 const {ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH, MIN_SNR_LEVEL} = require('./constants');
 const {
-  validateUserInputAndFile,
-  validateUserInfo,
-  validateUserInputForFeedback,
-  validateInputForSkip,
-  validateRewardsInput,
-  validateRewardsInfoQuery
+    validateUserInputAndFile,
+    validateUserInfo,
+    validateUserInputForFeedback,
+    validateInputForSkip,
+    validateRewardsInput,
+    validateRewardsInfoQuery
 } = require('./middleware/validateUserInputs');
 
 // const Ddos = require('ddos');
@@ -46,9 +46,9 @@ const {
 
 const {I18n} = require('i18n');
 const i18n = new I18n({
-  locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te', 'doi', 'mai', 'ur', 'kr', 'kd', 'mnibn', 'mnimm', 'satol', 'satdv', 'sa'],
-  directory: './locales',
-  cookie: 'i18n'
+    locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te', 'doi', 'mai', 'ur', 'kr', 'kd', 'mnibn', 'mnimm', 'satol', 'satdv', 'sa'],
+    directory: './locales',
+    cookie: 'i18n'
 })
 
 
@@ -65,52 +65,52 @@ app.enable('trust proxy');
 // };
 
 const randomString = () => {
-  return (Math.random() + 1).toString(36).substring(2, 10);
+    return (Math.random() + 1).toString(36).substring(2, 10);
 };
 
 const currentDateAndTime = () => {
-  return new Date().toISOString().replace(/[-:T.]/g, '');
+    return new Date().toISOString().replace(/[-:T.]/g, '');
 };
 
 const multer = require('multer');
 const multerStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    if (!fs.existsSync('uploads')) {
-      fs.mkdirSync('uploads');
-      console.log('Created directory uploads');
-    }
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, currentDateAndTime() + '_' + randomString() + '.wav');
-  },
+    destination: function (req, file, cb) {
+        if (!fs.existsSync('uploads')) {
+            fs.mkdirSync('uploads');
+            console.log('Created directory uploads');
+        }
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, currentDateAndTime() + '_' + randomString() + '.wav');
+    },
 });
-const upload = multer({ storage: multerStorage });
+const upload = multer({storage: multerStorage});
 const corsOptions = {
-  origin: /vakyansh\.in$/,
-  credentials: true
+    origin: /vakyansh\.in$/,
+    credentials: true
 }
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(upload.single('audio_data'));
 app.use('/sentences', validateUserInfo);
 app.use('/upload', validateUserInputAndFile);
-app.use(express.static(__dirname, { dotfiles: 'allow' }));
+app.use(express.static(__dirname, {dotfiles: 'allow'}));
 app.use(helmet());
 app.disable('x-powered-by');
 app.use(compression());
 app.use(cookieParser());
 app.use(i18n.init)
 app.use(function (req, res, next) {
-  let cookie = req.cookies.userId;
-  if (cookie === undefined) {
-    res.cookie('userId', uuidv4(), {
-      maxAge: ONE_YEAR,
-      httpOnly: true,
-      secure: true
-    });
-  }
-  next();
+    let cookie = req.cookies.userId;
+    if (cookie === undefined) {
+        res.cookie('userId', uuidv4(), {
+            maxAge: ONE_YEAR,
+            httpOnly: true,
+            secure: true
+        });
+    }
+    next();
 });
 
 app.use(express.static('public'));
@@ -135,58 +135,58 @@ router.get('/', function (req, res) {
 });
 
 router.get('/getDetails/:language', async function (req, res) {
-  try {
-    const currentLanguage = req.params.language;
-    const allDetails = await getAllDetails(currentLanguage);
-    res.status(200).send(allDetails);
-  } catch (err) {
-    console.log(err);
-    res.sendStatus(500);
-  }
+    try {
+        const currentLanguage = req.params.language;
+        const allDetails = await getAllDetails(currentLanguage);
+        res.status(200).send(allDetails);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
 });
 
 router.get('/getAllInfo/:language', async function (req, res) {
-  try {
-    const currentLanguage = req.params.language;
-    const allDetails = await getAllInfo(currentLanguage);
+    try {
+        const currentLanguage = req.params.language;
+        const allDetails = await getAllInfo(currentLanguage);
 
-    res.status(200).send({
-      genderData: allDetails[0],
-      ageGroups: allDetails[1],
-      motherTongues: allDetails[2],
-    });
-  } catch (err) {
-    console.log(err);
-    res.sendStatus(500);
-  }
+        res.status(200).send({
+            genderData: allDetails[0],
+            ageGroups: allDetails[1],
+            motherTongues: allDetails[2],
+        });
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
 });
 
 router.get('/feedback', function (req, res) {
-  res.render('feedback.ejs');
+    res.render('feedback.ejs');
 });
 
 router.get('/badges', function (req, res) {
-  res.render('badge-info.ejs');
+    res.render('badge-info.ejs');
 });
 
 router.get('/about-us', function (req, res) {
-  res.render('about-us.ejs', { MOTHER_TONGUE, LANGUAGES });
+    res.render('about-us.ejs', {MOTHER_TONGUE, LANGUAGES});
 });
 router.get('/terms-and-conditions', function (req, res) {
-  res.render('terms-and-conditions.ejs');
+    res.render('terms-and-conditions.ejs');
 });
 router.get('/thank-you', function (req, res) {
-  res.render('thank-you.ejs');
+    res.render('thank-you.ejs');
 });
 router.get('/record', (req, res) => {
-  res.render('record.ejs');
+    res.render('record.ejs');
 });
 router.get('/validator-page', (req, res) => {
-  res.render('validator-prompt-page.ejs');
+    res.render('validator-prompt-page.ejs');
 });
 router.get('/dashboard', function (req, res) {
-  const isCookiePresent = req.cookies.userId ? true : false;
-  res.render('dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
+    const isCookiePresent = req.cookies.userId ? true : false;
+    res.render('dashboard.ejs', {MOTHER_TONGUE, LANGUAGES, isCookiePresent});
 });
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 
@@ -223,42 +223,42 @@ router.post('/skip', validateInputForSkip, (req, res) => {
 });
 
 router.post('/upload', (req, res) => {
-  const file = req.file;
-  const sentenceId = req.body.sentenceId;
-  const speakerDetails = req.body.speakerDetails;
-  const audioDuration = req.body.audioDuration;
-  const speakerDetailsJson = JSON.parse(speakerDetails);
-  const userName = speakerDetailsJson.userName;
-  const userId = req.cookies.userId;
-  const language = speakerDetailsJson.language;
-  const audioPath = `raw/landing/${language}/audio/users/${userId}/${userName}/uploads/${file.filename}`;
+    const file = req.file;
+    const sentenceId = req.body.sentenceId;
+    const speakerDetails = req.body.speakerDetails;
+    const audioDuration = req.body.audioDuration;
+    const speakerDetailsJson = JSON.parse(speakerDetails);
+    const userName = speakerDetailsJson.userName;
+    const userId = req.cookies.userId;
+    const language = speakerDetailsJson.language;
+    const audioPath = `raw/landing/${language}/audio/users/${userId}/${userName}/uploads/${file.filename}`;
 
-  const state = req.body.state || "";
-  const country = req.body.country || "";
+    const state = req.body.state || "";
+    const country = req.body.country || "";
 
-  const uploadFile = uploader(objectStorage)
+    const uploadFile = uploader(objectStorage)
 
-  uploadFile(file.path, userName, userId, language)
-    .then(() => {
-      updateDbWithAudioPath(
-        audioPath,
-        sentenceId,
-        speakerDetails,
-        userId,
-        userName,
-        state,
-        country,
-        audioDuration,
-        (resStatus, resBody) => {
-          res.status(resStatus).send(resBody);
-        }
-      );
-      removeTempFile(file);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+    uploadFile(file.path, userName, userId, language)
+        .then(() => {
+            updateDbWithAudioPath(
+                audioPath,
+                sentenceId,
+                speakerDetails,
+                userId,
+                userName,
+                state,
+                country,
+                audioDuration,
+                (resStatus, resBody) => {
+                    res.status(resStatus).send(resBody);
+                }
+            );
+            removeTempFile(file);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.sendStatus(500);
+        });
 });
 
 router.post('/audio/snr', async (req, res) => {
@@ -272,41 +272,44 @@ router.post('/audio/snr', async (req, res) => {
     res.status(200).send({'snr': snr, 'ambient_noise': ambient_noise});
     console.log('success:' + res.headersSent);
 
-  }
-  const onError = (snr) => {
-    console.log('error...' + res.headersSent);
-  }
-  calculateSNR(command, onSuccess, onError)
+    }
+    const onError = (snr) => {
+        console.log('error...' + res.headersSent);
+    }
+    calculateSNR(command, onSuccess, onError)
 });
 
 router.get('/location-info', (req, res) => {
-  const ip = req.query.ip || null;
-  if (ip === null) {
-    res.sendStatus(400);
-    return;
-  }
-  fetch(`http://ip-api.com/json/${ip}?fields=country,regionName`).then(res => res.json()).then(response => {
-    res.send(response);
-  }).catch(err => {
-    res.sendStatus(500);
-  })
+    const ip = req.query.ip || null;
+    if (ip === null) {
+        res.sendStatus(400);
+        return;
+    }
+    fetch(`http://ip-api.com/json/${ip}?fields=country,regionName`).then(res => res.json()).then(response => {
+        res.send(response);
+    }).catch(err => {
+        res.sendStatus(500);
+    })
 });
 
 app.get('/get-locale-strings/:locale', function (req, res) {
-  let locale = req.params.locale;
-  fs.readFile(`${__dirname}/../locales/${locale}.json`, (err, body) => {
-    if (err) {
-      return res.sendStatus(500);
-    }
-    const data = JSON.parse(body);
-    const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds', 'Recording for 5 seconds', 'Recording for 4 seconds', 'Recording for 3 seconds', 'Recording for 2 seconds', 'Recording for 1 seconds', 'Playingback Audio', 'Playing', 'Test Mic', 'Test Speakers','Congratulations!!! You have completed this batch of sentences', 'social sharing text with rank', 'social sharing text without rank'];
+    let locale = req.params.locale;
+    fs.readFile(`${__dirname}/../locales/${locale}.json`, (err, body) => {
+        if (err) {
+            return res.sendStatus(500);
+        }
+        const data = JSON.parse(body);
+        const list = ['hrs recorded in', 'hrs validated in', 'hours', 'minutes', 'seconds', 'Recording for 5 seconds', 'Recording for 4 seconds', 'Recording for 3 seconds', 'Recording for 2 seconds', 'Recording for 1 seconds', 'Playingback Audio', 'Playing', 'Test Mic', 'Test Speakers', 'Congratulations!!! You have completed this batch of sentences', 'social sharing text with rank', 'social sharing text without rank',
+'Level','Sentences','bronze','silver','gold','platinum','N/A'
 
-    const langSttr = {};
-    list.forEach((key) => {
-      langSttr[key] = data[key];
+        ];
+
+        const langSttr = {};
+        list.forEach((key) => {
+            langSttr[key] = data[key];
+        });
+        res.send(langSttr);
     });
-    res.send(langSttr);
-  });
 });
 
 router.post('/feedback', validateUserInputForFeedback, (req, res) => {
@@ -327,17 +330,17 @@ router.get('/rewards', validateRewardsInput, async (req, res) => {
   const userId = req.cookies.userId;
   const {language, userName = "", category = ""} = req.query;
 
-  const data = await getRewards(userId, userName, language, category);
+    const data = await getRewards(userId, userName, language, category);
 
-  return res.send(data);
+    return res.send(data);
 });
 
 router.get('/rewards-info', validateRewardsInfoQuery, async (req, res) => {
-  const { language } = req.query;
+    const {language} = req.query;
 
-  const info = await getRewardsInfo(language);
+    const info = await getRewardsInfo(language);
 
-  return res.send(info);
+    return res.send(info);
 });
 
 require('./dashboard-api')(router);
@@ -345,20 +348,20 @@ require('./dashboard-api')(router);
 app.use('/', router);
 
 app.get('*', (req, res) => {
-  res.render('not-found.ejs');
+    res.render('not-found.ejs');
 });
 
 function buildWadaSnrCommand(filePath) {
-  return `${WADASNR_BIN_PATH}/WADASNR -i ${filePath} -t ${WADASNR_BIN_PATH}/Alpha0.400000.txt -ifmt mswav`;
+    return `${WADASNR_BIN_PATH}/WADASNR -i ${filePath} -t ${WADASNR_BIN_PATH}/Alpha0.400000.txt -ifmt mswav`;
 }
 
 function removeTempFile(file) {
-  fs.unlink(file.path, function (err) {
-    if (err) {
-      console.log(`File ${file.path} not deleted!`);
-      console.log(err);
-    }
-  });
+    fs.unlink(file.path, function (err) {
+        if (err) {
+            console.log(`File ${file.path} not deleted!`);
+            console.log(err);
+        }
+    });
 }
 
 module.exports = app;

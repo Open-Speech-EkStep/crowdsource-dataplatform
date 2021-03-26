@@ -54,7 +54,7 @@ h6,
     line-height: 32px;
 }
 
-.table-img svg{
+.table-img{
     width: 90px;
     height: auto;
 }
@@ -64,9 +64,10 @@ h6,
     padding-left: 16px !important;
 }
 
-@media (max-width: 414px) {
+@media (max-width: 320px) {
     h1{
         font-size: 32px;
+        justify-content: center;
     }
     .table-responsive-xs {
         display: block;
@@ -79,7 +80,6 @@ h6,
         border: 0;
     }
 }
-
 
 @media (max-width: 768px) {
     .font-weight-normal-sm {
@@ -94,9 +94,26 @@ h6,
 }
 
 @media (max-width: 1240px) {
-    .card svg {
+    .card img {
         width: 150px;
         height: auto;
+    }
+}
+
+.spinner {
+    width: 3rem;
+    height: 3rem;
+    display: inline-block;
+    border-width: 0.5rem;
+    border-color: #007bff;
+    border-top-color: #fff;
+    animation: spin 1s infinite linear;
+    border-radius: 100%;
+    border-style: solid;
+}
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
     }
 }
 

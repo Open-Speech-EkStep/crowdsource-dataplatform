@@ -294,13 +294,16 @@
 	"Click on the card to validate what others have spoken":"আনসকলে কি কৈছে সেয়া বৈধকৰণ কৰিবলৈ কাৰ্ডত ক্লিক কৰক",
 	"Levels and Badging @BoloIndia": "Levels and Badging @BoloIndia",
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate",
+	"bronze": "Bronze",
+	"silver": "Silver",
+	"gold": "Gold",
+	"platinum": "Platinum",
 	"Contributor Levels": "Contributor Levels",
 	"Participate more to gain badges": "Participate more to gain badges",
 	"Level": "Level",
 	"Contributions": "Contributions",
+	"Sentences": "Sentences",
 	"(Recording + Validating)": "(Recording + Validating)",
 	"Badge": "Badge",
-	"Level 1": "Level 1",
-	"<span class=\"level-count\"></span> Senetences": "<span class=\"level-count\"></span> Senetences",
 	"N/A": "N/A"
 }

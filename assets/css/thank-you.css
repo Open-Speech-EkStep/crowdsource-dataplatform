@@ -8,22 +8,7 @@
   text-align: center;
 }
 
-.spinner {
-  width: 3rem;
-  height: 3rem;
-  display: inline-block;
-  border-width: 0.5rem;
-  border-color: #007bff;
-  border-top-color: #fff;
-  animation: spin 1s infinite linear;
-  border-radius: 100%;
-  border-style: solid;
-}
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
+
 .contribuion-info,
 .stats-container {
   border-radius: 34px;
