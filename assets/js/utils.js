@@ -1,29 +1,5 @@
 const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require("./constants");
-const fetch = require('./fetch')
-
-
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toGMTString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
+const { getCookie } = require("./locale")
 
 function showElement(element) {
     element.removeClass('d-none');
@@ -91,7 +67,7 @@ const performAPIRequest = (url) => {
 
 const getLocaleString = function() {
     return new Promise(function(resolve, reject) {
-        const locale = localStorage.getItem("i18n");
+        const locale = getCookie("i18n");
         performAPIRequest(`/get-locale-strings/${locale}`)
         .then((response) => {
             localStorage.setItem('localeString', JSON.stringify(response));
@@ -103,11 +79,11 @@ const getLocaleString = function() {
 const updateLocaleLanguagesDropdown = (language) => {
     const dropDown = $('#localisation_dropdown');
     const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-    if(language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
-        dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
+    if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
+        dropDown.html('<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>');
     } else {
-        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+        dropDown.html(`<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="/changeLocale/${localeLang.id}">${localeLang.text}</a>`);
     }
 }
 
@@ -153,8 +129,6 @@ const reportSentenceOrRecording = (reqObj) => {
         try {
             fetch('/report', {
                 method: "POST",
-                credentials: 'include',
-                mode: 'cors',
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -170,4 +144,4 @@ const reportSentenceOrRecording = (reqObj) => {
     });
 }
 
-module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime, getLocaleString, performAPIRequest,showElement,hideElement, setFooterPosition, reportSentenceOrRecording, getCookie, setCookie}
+module.exports = { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown ,calculateTime, formatTime, getLocaleString, performAPIRequest,showElement,hideElement, setFooterPosition, reportSentenceOrRecording}

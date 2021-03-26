@@ -1,4 +1,3 @@
-const fetch = require('./fetch')
 const { setPageContentHeight, toggleFooterPosition, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording } = require('./utils');
 const { LOCALE_STRINGS } = require('./constants');
 
@@ -571,7 +570,7 @@ const initialize = () => {
     });
 
     const goToThankYouPage = () => {
-        location.href = './thank-you.html';
+        location.href = '/thank-you';
     };
 
     $nextBtn.add($skipBtn).on('click', (event) => {
@@ -639,8 +638,6 @@ const initialize = () => {
         };
         fetch('/skip', {
             method: 'POST',
-            credentials: 'include',
-            mode: 'cors',
             headers: {
               "Content-Type": "application/json",
             },
@@ -674,8 +671,6 @@ const initialize = () => {
         fd.append('audioDuration', crowdSource.audioDuration);
         fetch('/upload', {
             method: 'POST',
-            credentials: 'include',
-            mode: 'cors',
             body: fd,
         })
             .then((res) => res.json())
@@ -889,11 +884,11 @@ function executeOnLoad() {
 
         });
         $errorModal.on('hidden.bs.modal', function () {
-            location.href = './home.html#speaker-details';
+            location.href = '/#speaker-details';
         });
 
         if (!localSpeakerDataParsed) {
-            location.href = './home.html#speaker-details';
+            location.href = '/#speaker-details';
             return;
         }
 
@@ -917,8 +912,6 @@ function executeOnLoad() {
             localStorage.removeItem(skipCountKey);
             fetch('/sentences', {
                 method: 'POST',
-                credentials: 'include',
-                mode: 'cors',
                 body: JSON.stringify({
                     userName: localSpeakerDataParsed.userName,
                     age: localSpeakerDataParsed.age,

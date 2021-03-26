@@ -14,9 +14,9 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/home.css">
-    <link rel="stylesheet" type="text/css" href="../css/thank-you.css">
-    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <link rel="stylesheet" type="text/css" href="css/thank-you.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
 </head>
 
 <body>
@@ -32,7 +32,7 @@
                         <p id="hour-value" class="mb-0">0</p>
                         <div><span class="spinner"></span></div>
                     </b><b></b></div>
-                <div class="col-12 col-sm-6 text-left align-self-sm-center align-self-start"><img src="../img/thanks.svg" class="img-fluid w-100" alt="Total Sentence Progress">
+                <div class="col-12 col-sm-6 text-left align-self-sm-center align-self-start"><img src="/img/thanks.svg" class="img-fluid w-100" alt="Total Sentence Progress">
                     <div class="bg-primary position-absolute rounded-pill" id="total-progress"></div>
                     <div class="position-absolute rounded-pill" id="total-progress-bulb"></div>
                 </div>
@@ -97,7 +97,7 @@
                     <div class="mb-3">
                         <span><%= __('Help your language achieve it’s goal of 100 hrs. We know you can do more!') %></span>
                     </div>
-                    <a href="./record.html" class="btn btn-primary btn-lg h6 w-100">
+                    <a href="/record" class="btn btn-primary btn-lg h6 w-100">
                         <%= __('Contribute More') %>
                     </a>
                 </div>
@@ -106,7 +106,7 @@
         <%- include common/footer.ejs %>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-            <script src="../js/thank-you.js"></script>
+            <script src="js/thank-you.js"></script>
 </body>
 
 </html>

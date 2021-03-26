@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Bolo India: A crowdsourcing initiative for Indian languages (Beta)</title>
+    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
@@ -13,8 +13,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/home.css">
-    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
 </head>
 
 <body>
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-5 col-4 text-center">
-                                <img src="../img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer say-logo" data-target="#userModal">
+                                <img src="img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer say-logo" data-target="#userModal">
                         </div>
 
                         <div id="say-p-2" class="col-lg-7 col-md-7 col-12 d-none position-absolute" style="bottom:1rem">
@@ -88,8 +88,8 @@
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-5 col-4 text-center">
-                            <a href="./validator-page.html">
-                                <img src="../img/listen.svg" alt="validator" id="start_validating" class="cursor-pointer listen-logo"></a>
+                            <a href="/validator-page">
+                                <img src="img/listen.svg" alt="validator" id="start_validating" class="cursor-pointer listen-logo"></a>
                         </div>
                         <div class="col-lg-7 col-md-7 col-12 d-none position-absolute" id="listen-p-2" style="bottom:1rem">
                             <div>
@@ -109,12 +109,12 @@
                         <%= __('Bolo India: A crowdsourcing initiative for Indian languages') %>
                     </h1>
                     <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
-                        <%= __('India needs to be Aatmanirbhar in the area of speech recognition in Indian languages.  Hence, we want to create an open data repository of many Indian voices. Bolo India invites you to volunteer contribute your voice for this cause.') %> <a class="ml-1" href="./about-us.html">
+                        <%= __('India needs to be Aatmanirbhar in the area of speech recognition in Indian languages.  Hence, we want to create an open data repository of many Indian voices. Bolo India invites you to volunteer contribute your voice for this cause.') %> <a class="ml-1" href="/about-us">
                                 <%= __('Know More') %>
                             </a>
                     </p>
                 </div>
-                <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="../img/home.svg" class="img-fluid mr-n1"></div>
+                <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="/img/home.svg" class="img-fluid mr-n1"></div>
             </div>
             <div class="row">
                 <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 pt-lg-0 text-dark">
@@ -122,7 +122,7 @@
                         <%= __('We rely on your contributions') %>
                     </h1>
                     <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
-                        <%= __('The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.') %> <a class="ml-1" href="./about-us.html">
+                        <%= __('The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.') %> <a class="ml-1" href="/about-us">
                                 <%= __('Know More') %>
                             </a>
                     </p>
@@ -204,7 +204,7 @@
             </div>
             <div class="row mt-5 mb-5" id="view_all_btn">
                 <div class="col-12 d-flex justify-content-center">
-                    <a href="./dashboard.html" id="viewAllDetailsBtn" class="btn btn-outline-primary text-primary">
+                    <a href="/dashboard" id="viewAllDetailsBtn" class="btn btn-outline-primary text-primary">
                         <%= __('VIEW ALL DETAILS') %>
                     </a>
                 </div>
@@ -224,17 +224,19 @@
         <%- include modals/speakerDetail.ejs %>
         <%- include modals/content-languages.ejs %>
             <%- include modals/say-listen-language.ejs %>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <%- include common/footer.ejs %>
-                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-            
-                    <script src="../js/home.js" id="home-page" default-lang="<%= defaultLang %>"></script>
-                    <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
-                    <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
-                    <script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
-                    <script src="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.js"></script>
-            
+                <%- include common/footer.ejs %>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                <% if(!isCookiePresent) { %>
+                    <script>document.getElementById("toggle-content-language").click()</script>
+                    <% } else { %>
+                            <script src="js/home.js" id="home-page" default-lang="<%= defaultLang %>"></script>
+                            <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+                            <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+                            <script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
+                            <script src="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.js"></script>
+                            <% } %>
 </body>
 
 </html>

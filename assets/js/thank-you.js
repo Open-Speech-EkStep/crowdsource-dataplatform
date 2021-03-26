@@ -1,4 +1,3 @@
-const fetch = require('./fetch')
 const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS, LOCALE_STRINGS} = require("./constants");
 const {
   setPageContentHeight,
