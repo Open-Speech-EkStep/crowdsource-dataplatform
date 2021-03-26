@@ -1,4 +1,5 @@
 const { toggleFooterPosition, setPageContentHeight, updateLocaleLanguagesDropdown } = require("./utils");
+const fetch = require('./fetch')
 function handleGoBack() {
   window.history.back();
 }
@@ -12,6 +13,8 @@ function handleFeedbackSubmit() {
   };
   fetch("/feedback", {
     method: "POST",
+    credentials: 'include',
+    mode: 'cors',
     headers: {
       "Content-Type": "application/json",
     },

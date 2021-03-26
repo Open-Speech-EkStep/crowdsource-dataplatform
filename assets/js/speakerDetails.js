@@ -179,7 +179,7 @@ const setStartRecordingBtnOnClick = function () {
         };
         localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
         localStorage.setItem(CONTRIBUTION_LANGUAGE, contributionLanguage);
-        location.href = '/record';
+        location.href = './record.html';
     });
 }
 

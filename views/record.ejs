@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/record.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/record.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 <body> <%- include common/headerForContributor.ejs %>
 <div id="loader" class="overlay__content"><span class="spinner"></span></div>
@@ -93,7 +93,7 @@
                     <div class="col-lg-5 col-md-10 px-0 mt-2 mt-lg-0">
                         <div class="row justify-content-center">
                             <audio controls="controls" id="test-speaker-hidden" style="display:none">
-                                <source src="aud/sample_audio_file.mp3">
+                                <source src="../aud/sample_audio_file.mp3">
                             </audio>
                             <div class="col-lg-5 col-7 col-md-5 col-sm-5 mb-2 mb-lg-0">
                                 <button id="play-speaker" data-value="test-speaker" class="test-btn">
@@ -201,6 +201,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="js/record.js"></script>
+<script src="../js/locale.js"></script>
+<script src="../js/record.js"></script>
 </body>
 </html>
