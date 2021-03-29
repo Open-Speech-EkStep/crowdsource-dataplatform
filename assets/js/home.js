@@ -331,7 +331,7 @@ const renderCoachMarks = function () {
         localization: {
             buttonTexts: {
                 nextButton:localString.Next,
-                prevButton:localString.Prev,
+                prevButton:localString.Back,
                 endTourButton: localString.SKIP,
             },
         }

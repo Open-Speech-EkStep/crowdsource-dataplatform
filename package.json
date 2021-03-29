@@ -25,6 +25,7 @@
   "dependencies": {
     "@google-cloud/storage": "^5.8.1",
     "aws-sdk": "^2.851.0",
+    "chromium": "^3.0.2",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
