@@ -204,7 +204,7 @@ h6,
 }
 
 .popover {
-  max-width: fit-content;
+  max-width: max-content;
 }
 
 .spinner {
@@ -397,7 +397,3 @@ body.modal-open .supreme-container {
   }
 }
 
-.px-16{
-  padding-right: 16px !important;
-  padding-left: 16px !important;
-}
