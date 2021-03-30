@@ -33,6 +33,7 @@
   top: 40px;
   left: -56px;
   width: 240px;
+  max-width: 240px;
   background: linear-gradient(49.38deg, #007bff -227.24%, #89d6e3 169.12%);
   padding: 1rem;
   font-size: 14px;
@@ -109,15 +110,28 @@
   .champion-ribbon {
     left: -70px;
   }
+}
 
+@media screen and (max-width: 414px) {
   .spree-ribbon{
-    left: -5px;
+    max-width: 240px;
+    width: 240px;
+    left: -60px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .spree-ribbon{
+    width: 240px;
+    max-width: 240px;
   }
 }
 
 @media screen and (max-width: 280px) {
   .spree-ribbon{
-    left: -5px;
+    width: 240px;
+    left: -65px;
+    max-width: 240px;
   }
 }
 

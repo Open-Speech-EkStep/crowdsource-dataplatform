@@ -22,10 +22,10 @@ const ALL_LANGUAGES = [
     {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true,data:true}];
 
 const BADGES = {
-    bronze : {imgLg : "/img/bronze_badge.svg"},
-    silver :{imgLg:"/img/silver_badge.svg"},
-    gold :{imgLg:"/img/gold_badge.svg"},
-    platinum :{imgLg:"/img/platinum_badge.svg"}
+    bronze : {imgLg : "/img/bronze_badge.svg", imgSm:"/img/bronze_reward.svg"},
+    silver :{imgLg:"/img/silver_badge.svg",imgSm:"/img/silver_reward.svg"},
+    gold :{imgLg:"/img/gold_badge.svg",imgSm:"/img/gold_reward.svg"},
+    platinum :{imgLg:"/img/platinum_badge.svg",imgSm:"/img/platinum_reward.svg"}
 }
 
 module.exports = {
