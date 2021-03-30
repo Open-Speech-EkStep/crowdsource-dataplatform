@@ -97,33 +97,117 @@ workflows:
       - node/test:
           version: "13.4"
 
+      - db_migrate_aws:
+          name: migrate_dev_aws
+          db_name: ${DEV_DB_NAME}
+          requires:
+             - node/test
+          filters:
+            branches:
+              only: master
+
       - build_ui_push_to_s3:
           name: build_dev_ui
           env_name: dev
           requires:
-            - node/test
+            - migrate_dev_aws
+
+      - aws-ecr/build-and-push-image:
+          name: push_dev_image
+          repo: ${REPO}
+          tag: dev
+          requires:
+            #  - node/test
+            - migrate_dev_aws
+
+      - aws-ecr/build-and-push-image:
+          name: push_dev_db_refresher_image
+          repo: ${DB_REFRESHER_REPO}
+          dockerfile: Dockerfile-dbRefresh
+          tag: dev
+          requires:
+            #  - node/test
+            - migrate_dev_aws
+
+      - eks_fargate_deployment:
+          name: dev_deployment_eks
+          cluster-name: ${CLUSTER_NAME}
+          env-name: dev
+          requires:
+            - push_dev_image
+
+      - run_functional_tests:
+          name: functional_tests_dev
+          env_name: dev
+          requires:
+            - dev_deployment_eks      
 
       - approve_to_deploy:
           name: approve_test_deployment_eks
           type: approval
           requires:
-            - build_dev_ui
+            - functional_tests_dev
+
+      - db_migrate_aws:
+          name: migrate_test_aws
+          db_name: ${TEST_DB_NAME}
+          requires:
+            - approve_test_deployment_eks
 
       - build_ui_push_to_s3:
           name: build_test_ui
           env_name: test
           requires:
-            - approve_test_deployment_eks
+            - migrate_test_aws
+
+      - aws-ecr/build-and-push-image:
+          name: push_test_image
+          repo: ${REPO}
+          tag: test
+          requires:
+            - build_test_ui
+
+      - eks_fargate_deployment:
+          name: test_deployment_eks
+          cluster-name: ${CLUSTER_NAME}
+          env-name: test
+          requires:
+            - push_test_image
+
+      - run_functional_tests:
+          name: functional_tests_test
+          env_name: test
+          requires:
+            - test_deployment_eks
 
       - approve_to_deploy:
           name: approve_prod_deployment_eks
           type: approval
           requires:
-            - build_test_ui
+            - functional_tests_test
+
+      - db_migrate_aws:
+          name: migrate_prod_aws
+          db_name: ${DB_NAME}
+          requires:
+            - approve_prod_deployment_eks
 
       - build_ui_push_to_s3:
           name: build_prod_ui
           env_name: prod
           requires:
-            - approve_prod_deployment_eks
+            - migrate_prod_aws
 
+      - aws-ecr/build-and-push-image:
+          name: push_prod_image
+          repo: ${REPO}
+          tag: prod
+          requires:
+            - build_prod_ui
+
+      - eks_fargate_deployment:
+          name: prod_deployment_eks
+          cluster-name: ${CLUSTER_NAME}
+          env-name: prod
+          requires:
+            - push_prod_image
