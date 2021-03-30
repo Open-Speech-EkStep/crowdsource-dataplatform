@@ -4,15 +4,16 @@ metadata:
   name: refresh-data
 
 spec:
-  template:
-    metadata:
-      annotations:
-        commit_sha: CIRCLE_SHA1
+
   schedule: "0 */2 * * *"
   jobTemplate:
     spec:
       template:
         spec:
+          template:
+            metadata:
+              annotations:
+                commit_sha: CIRCLE_SHA1
           containers:
             - name: db-refresher
               image: IMAGE_NAME_DB_REFRESHER
