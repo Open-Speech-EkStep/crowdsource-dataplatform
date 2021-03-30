@@ -1,4 +1,4 @@
-const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS, LOCALE_STRINGS} = require("./constants");
+const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS, LOCALE_STRINGS, BADGES} = require("./constants");
 const {
   setPageContentHeight,
   toggleFooterPosition,
@@ -266,14 +266,17 @@ function executeOnLoad() {
 $(document).ready(function () {
 
   $("#download_pdf").on('click', function () {
-    var doc = new jsPDF();
-    doc.text(200, 20, 'Hello world!');
-    doc.text(20, 30, 'This is client-side Javascript, pumping out a PDF.');
-    doc.addPage();
-    doc.text(20, 20, 'Do you like that?');
+    const pdf = new jsPDF();
+    const img = new Image;
+    img.onload = function() {
+      pdf.addImage(this, 10, 10);
+      pdf.save("test.pdf");
+    };
 
-    doc.save('Test.pdf');
+    img.crossOrigin = "Anonymous";  // for demo as we are at different origin than image
+    img.src = BADGES.bronze.imgSm;
   })
+
   getLocaleString().then((data) => {
         executeOnLoad();
     }).catch((err) => {

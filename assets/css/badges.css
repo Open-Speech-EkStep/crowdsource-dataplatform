@@ -117,3 +117,7 @@ h6,
     }
 }
 
+table thead th {
+    vertical-align: middle;
+}
+
