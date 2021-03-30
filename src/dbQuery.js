@@ -139,9 +139,14 @@ const getTotalUserContribution = 'select count(*) as contribution_count from con
 inner join sentences sen on sen."sentenceId"=con."sentenceId" where language = $2 \
 and action = \'completed\' and contributed_by = $1';
 
-const checkBadgeQuery = 'select grade, reward_milestone.milestone, id from reward_catalogue, \
+const checkCurrentMilestoneQuery = 'select grade, reward_milestone.milestone, id from reward_catalogue, \
 (select milestone,reward_catalogue_id as rid from reward_milestones where milestone <= $1 \
 and language = $2 order by milestone desc limit 1) \
+as reward_milestone where id=reward_milestone.rid';
+
+const checkNextMilestoneQuery = 'select grade, reward_milestone.milestone, id from reward_catalogue, \
+(select milestone,reward_catalogue_id as rid from reward_milestones where milestone > $1 \
+and language = $2 order by milestone limit 1) \
 as reward_milestone where id=reward_milestone.rid';
 
 const findRewardInfo = 'select generated_badge_id from rewards where contributor_id = $1 and language = $2 and reward_catalogue_id = $3 and category = $4';
@@ -179,7 +184,8 @@ module.exports = {
   getContributorIdQuery,
   rewardsInfoQuery,
   getTotalUserContribution,
-  checkBadgeQuery,
+  checkCurrentMilestoneQuery,
+  checkNextMilestoneQuery,
   findRewardInfo,
   insertRewardQuery,
   getContributorIdQuery
