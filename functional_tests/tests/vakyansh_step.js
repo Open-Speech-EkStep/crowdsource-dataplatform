@@ -213,6 +213,7 @@ step("user should be able to see <arg0> , <arg1> , <arg2> , <arg3>", async funct
 step("User plays the audio , <arg0>,<arg1> should be enabled", async function (arg0, arg1) {
     await taiko.waitFor(1000)
     await click(taiko.image({ id: "play" }));
+    await taiko.waitFor(1000)
     await click(taiko.image({ id: "pause" }));
     await taiko.waitFor(1000)
     assert.ok(! await taiko.button({ id: arg0 }).isDisabled());
@@ -228,7 +229,7 @@ step("<arg0> should be enabled , <arg1> <arg2> buttons should be disabled", asyn
 
 step("User clicks on <arg0> , he should see next sentence and <arg1> <arg2> buttons should be disabled", async function (arg0, arg1, arg2) {
     await click(taiko.button({ id: arg0 }))
-    await taiko.waitFor(500);
+    await taiko.waitFor(1000);
     assert.ok(await taiko.button({ id: arg1 }).isDisabled());
     assert.ok(await taiko.button({ id: arg2 }).isDisabled());
 });
