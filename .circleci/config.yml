@@ -103,9 +103,8 @@ workflows:
           name: push_dev_db_refresher_image
           repo: ${DB_REFRESHER_REPO}
           dockerfile: Dockerfile-dbRefresh
-          tag: dev
+          tag: dev, test, prod
           requires:
-            #  - node/test
             - migrate_dev_aws
 
       - eks_fargate_deployment:
