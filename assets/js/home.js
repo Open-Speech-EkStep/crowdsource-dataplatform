@@ -168,16 +168,8 @@ const getStatsSummary = function () {
     });
 }
 
-$(document).ready(function () {
-    if (!localStorage.getItem("i18n")){
-        showLanguagePopup();
-        return;
-    }
-    else {
-        redirectToLocalisedPage();
-    }
-    clearLocalStorage();
-    getLocaleString();
+
+function initializeBlock() {
     const speakerDetailsKey = 'speakerDetails';
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
@@ -299,34 +291,44 @@ $(document).ready(function () {
         }
     });
 
+    getStatsSummary();
+
+}
+
+const renderCoachMarks = function () {
+    const localString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+    const step1 = 'You can select the language in which you want to participate';
+    const step2 = 'You can change the language in which you want to read content';
+    const step3 = 'Click on the card to start contributing your voice';
+    const step4 = 'Click on the card to validate what others have spoken';
     const tourSteps = [
         {
             element: '#contribution_lang_navbar',
             title: '',
             preventInteraction: true,
             placement: "bottom",
-            content: 'You can select the language in which you want to participate'
+            content: localString[step1]
         },
         {
             element: '#locale_language_dropdown',
             title: '',
             preventInteraction: true,
             placement: "bottom",
-            content: 'You can change the language in which you want to read content'
+            content: localString[step2]
         },
         {
             element: '#say',
             title: '',
             preventInteraction: true,
             placement: "bottom",
-            content: 'Click on the card to start contributing your voice'
+            content: localString[step3]
         },
         {
             element: '#listen',
             title: '',
             preventInteraction: true,
             placement: "bottom",
-            content: 'Click on the card to validate what others have spoken'
+            content: localString[step4]
         }
     ];
 
@@ -335,16 +337,34 @@ $(document).ready(function () {
         framework: "bootstrap4",
         backdrop: true,
         localization: {
-            buttonTexts: {  
-                endTourButton: "SKIP",
+            buttonTexts: {
+                nextButton:localString.Next,
+                prevButton:localString.Back,
+                endTourButton: localString.SKIP,
             },
         }
     });
 
     homePageTour.start();
+};
 
-    getStatsSummary();
+$(document).ready(function () {
+    if (!localStorage.getItem("i18n")){
+        showLanguagePopup();
+        return;
+    }
+    else {
+        redirectToLocalisedPage();
+    }
+    clearLocalStorage();
+    getLocaleString().then(()=>{
+        initializeBlock();
+        renderCoachMarks();
+    }).catch(err => {
+        initializeBlock();
+    });
 });
+
 
 module.exports = {
     updateHrsForSayAndListen,

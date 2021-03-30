@@ -179,5 +179,14 @@
 	"Download": "డౌన్\u200Cలోడ్ చేయండి",
 	"Badge ID": "బ్యాడ్జ్ ID",
 	"Help us understand what’s wrong with the recording": "రికార్డింగ్\u200Cలో తప్పు ఏమిటో అర్థం చేసుకోవడానికి మాకు సహాయపడండి",
-	"Please validate any error message before proceeding": "కొనసాగడానికి ముందు ఏదైనా దోష సందేశాన్ని ధృవీకరించండి"
+	"Please validate any error message before proceeding": "కొనసాగడానికి ముందు ఏదైనా దోష సందేశాన్ని ధృవీకరించండి",
+	"SKIP": "దాటవేయి",
+	"Next": "తరువాత",
+	"CLOSE": "మూసివేయండి",
+	"Back": "వెనక్కి",
+	"You can select the language in which you want to participate": "మీరు పాల్గొనదలిచిన భాషను ఎంచుకోవచ్చు",
+	"You can change the language in which you want to read content": "మీరు కంటెంట్ చదవాలనుకుంటున్న భాషను మార్చవచ్చు",
+	"Click on the card to start contributing your voice": "మీ వాయిస్\u200Cకు సహకారం అందించడం ప్రారంభించడానికి కార్డ్ పై క్లిక్ చేయండి",
+	"Click on the card to validate what others have spoken":"ఇతరులు మాట్లాడిన వాటిని ధృవీకరించడానికి కార్డుపై క్లిక్ చేయండి"
+
 }

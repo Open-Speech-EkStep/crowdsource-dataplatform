@@ -177,5 +177,14 @@
 	"Badge ID": "બેજ આઇડી",
 	"Download": "ડાઉનલોડ કરો",
 	"Help us understand what’s wrong with the recording": "રેકોર્ડિંગમાં શું ખોટું છે તે સમજવામાં અમને મદદ કરો",
-	"Please validate any error message before proceeding": "કૃપા કરીને પ્રક્રિયા કરતા પહેલાં કોઇપણ એરર સંદેશાને માન્યતા આપો"
+	"Please validate any error message before proceeding": "કૃપા કરીને પ્રક્રિયા કરતા પહેલાં કોઇપણ એરર સંદેશાને માન્યતા આપો",
+	"SKIP": "છોડી દો",
+	"Next": "આગામી",
+	"CLOSE": "બંધ",
+	"Back": "પાછળ",
+	"You can select the language in which you want to participate": "તમે જેમાં ભાગ લેવા માંગતા હોવ તે ભાષા પસંદ કરી શકો છો",
+	"You can change the language in which you want to read content": "તમે જેમાં સામગ્રી વાંચવા માંગતા હોવ તે ભાષા બદલી શકો છો",
+	"Click on the card to start contributing your voice": "તમારા અવાજનો ફાળો આપવા માટે કાર્ડ પર ક્લિક કરો",
+	"Click on the card to validate what others have spoken":"અન્ય લોકો બોલ્યા હોય તેને માન્યતા આપવા માટે કાર્ડ પર ક્લિક કરો"
+
 }

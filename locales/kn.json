@@ -198,6 +198,15 @@
 	"National Language Translation Mission": "ರಾಷ್ಟ್ರೀಯ ಭಾಷಾ ಅನುವಾದ ನಿಯೋಗ",
 	"Badge ID": "ಬ್ಯಾಜ್ ಐಡಿ",
 	"Download": "ಡೌನ್ ಲೋಡ್",
-	"Help us understand what’s wrong with the recording": "Help us understand what’s wrong with the recording",
-	"Please validate any error message before proceeding": "Please validate any error message before proceeding"
+	"Help us understand what’s wrong with the recording": "ರೆಕಾರ್ಡಿಂಗ್\u200C ನಲ್ಲಿ ಆದ ತಪ್ಪನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ನಮಗೆ ಸಹಾಯ ಮಾಡಿ",
+	"Please validate any error message before proceeding": "ದಯವಿಟ್ಟು ಮುಂದುವರಿಯುವ ಮೊದಲು ಯಾವುದೇ ಸಂದೇಶದಲ್ಲಿನ ದೋಷವನ್ನು ಮೌಲ್ಯೀಕರಿಸಿರಿ.",
+	"SKIP": "ಬಿಟ್ಟುಬಿಡಿ",
+	"Next": "ಮುಂದಿನ",
+	"CLOSE": "ಮುಚ್ಚು",
+	"Back": "ಹಿಂದೆ",
+	"You can select the language in which you want to participate": "ನೀವು ಭಾಗವಹಿಸಬಯಸುವ ಭಾಷೆಯನ್ನು ನೀವು ಆಯ್ಕೆಮಾಡಬಹುದು",
+	"You can change the language in which you want to read content": "ನೀವು ವಿಷಯವನ್ನು ಓದಬಯಸುವ ಭಾಷೆಯನ್ನು ನೀವು ಬದಲಾಯಿಸಬಹುದು",
+	"Click on the card to start contributing your voice": "ನಿಮ್ಮ ಧ್ವನಿಯನ್ನು ನೀಡುವುದನ್ನು ಪ್ರಾರಂಭಿಸಲು ಕಾರ್ಡ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ",
+	"Click on the card to validate what others have spoken":"ಇತರರು ಮಾತನಾಡಿದುದನ್ನು ಮೌಲ್ಯೀಕರಿಸಲು ಕಾರ್ಡ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ"
+
 }

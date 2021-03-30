@@ -98,7 +98,7 @@
 	"Let's get started!": "चला, सुरू करु या.",
 	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "रेकॉर्डिंग <span id=\"counter\"></span> सेकंदनंतर आपल्या आप बंद होईल",
 	"Audio recording is too small. Please Re-record": "ऑडिओ रेकॉर्डिंग खूपच लहान आहे. कृपया पुन्हा रेकॉर्ड करा",
-	"SKIP": "सोडून टाका/वगळून टाका",
+	"SKIP": "सोडून टाका",
 	"START RECORDING": "रेकॉर्ड करणे सुरू करा",
 	"STOP RECORDING": "रेकॉर्ड करणे बंद करा",
 	"RE-RECORD": "पुन्हा रेकॉर्ड करा",
@@ -176,5 +176,14 @@
 	"Badge ID": "बॅज आयडी",
 	"Download": "डाउनलोड करा",
 	"Help us understand what’s wrong with the recording": "रेकॉर्डिंगमध्ये काय चूकीचे आहे, हे समजण्यास आम्हाला मदत करा",
-	"Please validate any error message before proceeding": "कृपया पुढे जाण्यापूर्वी, कोणत्याही प्रकारच्या त्रुटी संदेशाचे प्रमाणीकरण करा"
+	"Please validate any error message before proceeding": "कृपया पुढे जाण्यापूर्वी, कोणत्याही प्रकारच्या त्रुटी संदेशाचे प्रमाणीकरण करा",
+	"SKIP": "सोडून टाका",
+	"Next": "पुढे जा",
+	"CLOSE": "बंद करा",
+	"Back": "परत जा",
+	"You can select the language in which you want to participate": "आपण ज्या भाषेचे योगदान देऊ इच्छिता, ती भाषा आपण निवडू शकता",
+	"You can change the language in which you want to read content": "आपण ज्या भाषेची सामग्री वाचू इच्छिता, ती भाषा बदलू शकता",
+	"Click on the card to start contributing your voice": "आपल्या आवाजाचे योगदान देण्याची सुरू करण्यासाठी कार्डवर क्लिक करा",
+	"Click on the card to validate what others have spoken":"इतरांनी जे बोलले आहे ते प्रमाणित करण्यासाठी कार्डवर क्लिक करा"
+
 }

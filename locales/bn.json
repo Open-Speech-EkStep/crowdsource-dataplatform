@@ -274,5 +274,14 @@
 	"Badge ID": "ব্যাজ পরিচয়পত্র",
 	"Download": "ডাউনলোড",
 	"Help us understand what’s wrong with the recording": "রেকর্ডিং-এ কি ভুল হয়েছে তা আমাদের বুঝতে সাহায্য করুন",
-	"Please validate any error message before proceeding": "এগিয়ে যাওয়ার আগে যে কোনো ত্রুটি বার্তা বৈধ করুন"
+	"Please validate any error message before proceeding": "এগিয়ে যাওয়ার আগে যে কোনো ত্রুটি বার্তা বৈধ করুন",
+	"SKIP": "এড়িয়ে যান",
+	"Next": "পরের",
+	"CLOSE": "বন্ধ",
+	"Back": "পিছনে",
+	"You can select the language in which you want to participate": "আপনি ভাষা নির্বাচন করতে পারেন যাতে আপনি অংশগ্রহণ করতে চান",
+	"You can change the language in which you want to read content": "আপনি ভাষা বদলাতে পারেন যাতে আপনি যে বিষয় পড়তে চান",
+	"Click on the card to start contributing your voice": "আপনার স্বর অবদান শুরু করতে কার্ড-এ ক্লিক করুন",
+	"Click on the card to validate what others have spoken":"অন্যেরা কে কি বলেছে তা যাচাই করতে কার্ড-এ ক্লিক করুন"
+
 }

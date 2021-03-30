@@ -313,3 +313,8 @@ step("When user clicks on the go to home page button , user should see the home 
     await click(taiko.link({ id: "back_to_home_btn" }))
     assert.ok(await text("Bolo India: A crowdsourcing initiative for Indian languages").exists());
 });
+
+step("Skip coach mark instructions", async function() {
+    await text('SKIP').exists();
+    await click('SKIP');
+});

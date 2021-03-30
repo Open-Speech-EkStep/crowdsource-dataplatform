@@ -386,6 +386,7 @@ function showThankYou() {
     hideElement($('#skip_btn_row'));
     hideElement($('#validation-container'));
     $("#validation-container").removeClass("validation-container");
+    hideElement($('#report_btn'));
 
     const language = localStorage.getItem('contributionLanguage');
     const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
@@ -417,6 +418,7 @@ function showNoSentencesMessage() {
     showElement($('#no-sentences-row'))
     hideElement($('#skip_btn_row'));
     hideElement($('#validation-container'));
+    hideElement($('#report_btn'));
     $("#validation-container").removeClass("validation-container");
     $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
 }
