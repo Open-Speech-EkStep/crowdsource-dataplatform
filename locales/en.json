@@ -290,5 +290,7 @@
 	"<span id=\"badge-name-2\">1st</span> Contributor level achieved for contributing <span id=\"max-badge-count\">50</span> sentences.": "<span id=\"badge-name-2\">1st</span> Contributor level achieved for contributing <span id=\"max-badge-count\">50</span> sentences.",
 	"Know more": "Know more",
 	"<span id=\"badge-name-2\">Bronze</span> Contributor level achieved for contributing <span id=\"max-badge-count\">50</span> sentences.": "<span id=\"badge-name-2\">Bronze</span> Contributor level achieved for contributing <span id=\"max-badge-count\">50</span> sentences.",
-	"Your next goal is to reach <span id=\"next-badge-count\">50</span> sentences to unlock your 2nd Badge. <a href=\"/badges\">Know more</a>": "Your next goal is to reach <span id=\"next-badge-count\">50</span> sentences to unlock your 2nd Badge. <a href=\"/badges\">Know more</a>"
+	"Your next goal is to reach <span id=\"next-badge-count\">50</span> sentences to unlock your 2nd Badge. <a href=\"/badges\">Know more</a>": "Your next goal is to reach <span id=\"next-badge-count\">50</span> sentences to unlock your 2nd Badge. <a href=\"/badges\">Know more</a>",
+	"You are driving the spirit of your language": "You are driving the spirit of your language",
+	"Your next goal is to reach <span id=\"next-badge-count\">50</span> sentences to unlock your <span id=\"next-badge\">2nd</span> Badge. <a href=\"/badges\">Know more</a>": "Your next goal is to reach <span id=\"next-badge-count\">50</span> sentences to unlock your <span id=\"next-badge\">2nd</span> Badge. <a href=\"/badges\">Know more</a>"
 }
