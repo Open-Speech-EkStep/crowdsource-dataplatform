@@ -81,7 +81,7 @@ const multerStorage = multer.diskStorage({
 });
 const upload = multer({storage: multerStorage});
 const corsOptions = {
-    origin: /vakyansh\.in$/,
+    origin: [/vakyansh\.in$/, /nplt\.in$/],
     credentials: true
 }
 app.use(cors(corsOptions));
