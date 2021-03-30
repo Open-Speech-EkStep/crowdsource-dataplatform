@@ -394,13 +394,15 @@ const getRewards = async (userId, userName, language, category) => {
 
     let nextMilestoneData = await db.oneOrNone(checkNextMilestoneQuery, [contribution_count, language]);
 
-    let generatedBadgeId = '';
+    let generatedBadgeId = '', isNewBadge = false;
     if (currentMilestoneData) {
 
         let rewardIdList = await db.any(findRewardInfo, [contributor_id, language, currentMilestoneData.id, category]);
 
         if (rewardIdList.length == 0) {
             rewardIdList = await db.any(insertRewardQuery, [contributor_id, language, currentMilestoneData.id, category]);
+            if (currentMilestoneData.grade)
+                isNewBadge = true;
         }
         generatedBadgeId = rewardIdList[0].generated_badge_id;
     }
@@ -417,14 +419,15 @@ const getRewards = async (userId, userName, language, category) => {
             'milestone': 0
         }
     }
-    
+
     const currentBadgeType = currentMilestoneData.grade || '';
     const nextBadgeType = nextMilestoneData.grade || '';
     const currentMilestone = currentMilestoneData.milestone || 0;
     const nextMilestone = nextMilestoneData.milestone || 0;
     return {
         "badgeId": generatedBadgeId, "currentBadgeType": currentBadgeType, "nextBadgeType": nextBadgeType,
-        "currentMilestone": currentMilestone, "nextMilestone": nextMilestone
+        "currentMilestone": currentMilestone, "nextMilestone": nextMilestone, "contributionCount": contribution_count,
+        "isNewBadge": isNewBadge
     }
 }
 
