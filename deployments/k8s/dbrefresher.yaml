@@ -5,9 +5,9 @@ metadata:
 
 spec:
   template:
-  metadata:
-    annotations:
-      commit_sha: CIRCLE_SHA1
+    metadata:
+      annotations:
+        commit_sha: CIRCLE_SHA1
   schedule: "0 */2 * * *"
   jobTemplate:
     spec:
