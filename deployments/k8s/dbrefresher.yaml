@@ -2,7 +2,11 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: refresh-data
+  labels:
+    app: CIRCLE_SHA1
+
 spec:
+
   schedule: "0 */2 * * *"
   jobTemplate:
     spec:
@@ -10,7 +14,7 @@ spec:
         spec:
           containers:
             - name: db-refresher
-              image: 535630329499.dkr.ecr.ap-south-1.amazonaws.com/db-refresher:dev
+              image: IMAGE_NAME_DB_REFRESHER
               imagePullPolicy: IfNotPresent
               env:
                 - name: DB_HOST
@@ -34,7 +38,10 @@ spec:
                       name: vakyansh-secret
                       key: DB_PASS
                 - name: BUCKET_NAME
-                  value: "static-content-vakyansh-dev"
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: STATIC_BUCKET_NAME
                 - name: ENCRYPTION_KEY
                   valueFrom:
                     secretKeyRef:
