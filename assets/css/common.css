@@ -108,4 +108,8 @@ h6,
   padding-right: 16px !important;
   padding-left: 16px !important;
 }
+
+.dropdown{
+  cursor: pointer;
+}
   
