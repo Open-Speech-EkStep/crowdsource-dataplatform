@@ -3,7 +3,7 @@ const {
   HOUR_IN_SECONDS,
   LOCALE_STRINGS,
   BADGES,
-  CONTRIBUTION_LANGUAGE
+  CONTRIBUTION_LANGUAGE,
 } = require("./constants");
 const {
   setPageContentHeight,
@@ -317,7 +317,6 @@ function executeOnLoad() {
 }
 
 function downloadPdf(badgeType) {
-  console.log("badge type: ", badgeType);
   const pdf = new jsPDF()
   const img = new Image();
   img.onload = function () {
