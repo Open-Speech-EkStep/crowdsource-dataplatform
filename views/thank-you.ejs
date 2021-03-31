@@ -48,12 +48,12 @@
             </div>
             <div id="contribution_text" class="d-none">
                 <h4 class="mb-3 thank-you-title"><%= __('WooHoo!! You took the first important step') %></h4>
-                <p><span id="user-contribution" class="text-primary"></span> <%= __('recordings contributed') %></p>
             </div>
             <div id="before_badge_content" class="d-none">
                 <h4 class="mb-3"><%- __('You are driving the spirit of your language') %></h4>
-                <p><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="/badges">Know more</a>') %></p>
             </div>
+            <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('recordings contributed') %></p>
+            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="/badges">Know more</a>') %></p>
             <%- include modals/badge_milestone.ejs %>
             <div class="mt-5 text-center">
                 <%= __('Share it with your friends and family') %>

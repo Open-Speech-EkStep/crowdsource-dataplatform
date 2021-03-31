@@ -3,7 +3,7 @@ const {
   HOUR_IN_SECONDS,
   LOCALE_STRINGS,
   BADGES,
-  CONTRIBUTION_LANGUAGE
+  CONTRIBUTION_LANGUAGE,
 } = require("./constants");
 const {
   setPageContentHeight,
@@ -31,27 +31,45 @@ function setSentencesContributed() {
   if (speakerDetails) {
     userName = JSON.parse(speakerDetails).userName;
   }
+
+  let rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
+  if(!rawLocaleString){
+    getLocaleString().then(()=>{
+      rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
+    })
+  }
+
+  const localeStrings = JSON.parse(rawLocaleString);
   performAPIRequest(
     `rewards?language=${contributionLanguage}&category=speak&userName=${userName}`
   ).then((data) => {
+    localStorage.setItem('badgeId',data.badgeId);
     $("#user-contribution").text(data.contributionCount);
     if (data.isNewBadge) {
       $("#spree_text").removeClass("d-none");
       $("#milestone_text").removeClass("d-none");
-      $("#current_badge_name").text(data.currentBadgeType);
-      $("#current_badge_name_1").text(data.currentBadgeType);
+      $("#current_badge_name").text(localeStrings[data.currentBadgeType]);
+      $("#current_badge_name_1").text(localeStrings[data.currentBadgeType]);
       $("#current_badge_count").text(data.currentMilestone);
       $("#next_badge_count").text(data.nextMilestone);
-      $("#next_badge_name_1").text(data.nextBadgeType);
+      $("#next_badge_name_1").text(localeStrings[data.nextBadgeType].toLowerCase());
+      $("#sentence_away_msg").addClass("d-none");
+      $("#user-contribution-msg").addClass("d-none");
       $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
     } else if(data.contributionCount <= 5) {
       $("#champion_text").removeClass("d-none");
       $("#contribution_text").removeClass("d-none");
+      $("#sentence_away_msg").removeClass("d-none");
+      $("#user-contribution-msg").removeClass("d-none");
+      $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
+      $("#next_badge_name").text(localeStrings[data.nextBadgeType].toLowerCase());
     } else if ((Number(data.contributionCount) >= Number(data.currentMilestone)) && (Number(data.contributionCount) <= Number(data.nextMilestone))) {
       $("#spree_text").removeClass("d-none");
       $("#before_badge_content").removeClass("d-none");
+      $("#sentence_away_msg").removeClass("d-none");
+      $("#user-contribution-msg").removeClass("d-none");
       $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-      $("#next_badge_name").text(data.nextBadgeType);
+      $("#next_badge_name").text(localeStrings[data.nextBadgeType].toLowerCase());
       const $bronzeBadgeLink = $("#bronze_badge_link img");
       const $silverBadgeLink = $("#silver_badge_link img");
       const $goldBadgeLink = $("#gold_badge_link img");
@@ -317,21 +335,22 @@ function executeOnLoad() {
 }
 
 function downloadPdf(badgeType) {
-  console.log("badge type: ", badgeType);
   const pdf = new jsPDF()
   const img = new Image();
   img.onload = function () {
     pdf.addImage(this, 10, 10);
-    pdf.save("test.pdf");
+    pdf.save(`${badgeType}-badge.pdf`);
   };
 
   img.crossOrigin = "Anonymous";
-  img.src = BADGES[badgeType].imgSm;
+  img.src = BADGES[badgeType].imgLg;
+
+  pdf.text(`Badge Id : ${localStorage.getItem('badgeId')}`, 10,80);
 }
 
 $(document).ready(function () {
   $("#download_pdf").on('click', function() {
-    downloadPdf()
+    downloadPdf($(this).attr("data-badge"));
   });
 
   $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function() {
