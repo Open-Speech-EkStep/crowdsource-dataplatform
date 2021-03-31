@@ -149,7 +149,9 @@ and language = $2 order by milestone desc limit 1) \
 as reward_milestone where id=reward_milestone.rid`;
 
 const checkNextMilestoneQuery = `select grade, reward_milestone.milestone, id from reward_catalogue, \
-(select milestone,reward_catalogue_id as rid from reward_milestones where milestone > $1 \
+(select milestone,reward_catalogue_id as rid from reward_milestones where milestone > $1 and milestone >= \
+  (select milestone from reward_milestones, reward_catalogue where \
+  id=reward_catalogue_id and grade is not null order by milestone limit 1) \
 and language = $2 order by milestone limit 1) \
 as reward_milestone where id=reward_milestone.rid`;
 
