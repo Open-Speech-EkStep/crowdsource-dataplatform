@@ -184,7 +184,7 @@
 	"You can select the language in which you want to participate": "તમે જેમાં ભાગ લેવા માંગતા હોવ તે ભાષા પસંદ કરી શકો છો",
 	"You can change the language in which you want to read content": "તમે જેમાં સામગ્રી વાંચવા માંગતા હોવ તે ભાષા બદલી શકો છો",
 	"Click on the card to start contributing your voice": "તમારા અવાજનો ફાળો આપવા માટે કાર્ડ પર ક્લિક કરો",
-	"Click on the card to validate what others have spoken":"અન્ય લોકો બોલ્યા હોય તેને માન્યતા આપવા માટે કાર્ડ પર ક્લિક કરો",
+	"Click on the card to validate what others have spoken": "અન્ય લોકો બોલ્યા હોય તેને માન્યતા આપવા માટે કાર્ડ પર ક્લિક કરો",
 	"Levels and Badging @BoloIndia": "લેવલ્સ અને બેજિંગ @BoloIndia",
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate",
 	"bronze": "બ્રોન્ઝ",
@@ -198,5 +198,11 @@
 	"Sentences": "વાક્યો",
 	"(Recording + Validating)": "(રેકોર્ડિંગ + માન્યતા)",
 	"Badge": "બેજ",
-	"N/A": "N/A"
+	"N/A": "N/A",
+	"You are on a spree !!": "તમે પળોજણમાં છો!",
+	"You are driving the spirit of your language": "તમે તમારી ભાષાની લાગણી આગળ વધારી રહ્યાં છો.",
+	"You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"/badges\">Know more</a>": "તમે <span id=\"next_badge_name\"></span> બેજ મેળવવાથી ફક્ત <span id=\"sentense_away_count\"></span> રેકોર્ડિંગ દૂર છો. <a href=\"/badges\">વધુ જાણો</a>",
+	"WoaaH!! You’ve earned your <span id=\"current_badge_name\"></span> Badge": "વોહ! તમે <span id=\"current_badge_name\"></span> બેજ જીતી ગયા છો.",
+	"<span id=\"current_badge_name_1\"></span> Contributor level achieved for contributing <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_count\"></span> વાક્યો માટે ફાળો આપવા બદલ <span id=\"current_badge_name_1\"></span> પ્રદાનકર્તા સ્તર પ્રાપ્ત થયું છે.",
+	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"/badges\">Know more</a>": "તમારો <span id=\"next_badge_name_1\"></span> બેજ અનલોક કરવા માટે તમારું આગામી લક્ષ્યાંક <span id=\"next_badge_count\"></span> વાક્યો સુધી પહોંચવાનું છે. <a href=\"/badges\">વધુ જાણો</a>"
 }
