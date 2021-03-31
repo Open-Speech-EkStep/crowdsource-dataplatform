@@ -93,6 +93,11 @@
   text-align: left;
 }
 
+.badges_information {
+  position: absolute;
+  bottom: 36px;
+}
+
 @media screen and (max-width: 599px) {
   .contribuion-info,
   .stats-container {

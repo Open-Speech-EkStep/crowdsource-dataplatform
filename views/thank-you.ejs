@@ -8,7 +8,7 @@
     <meta property="og:title" content="Bolo India">
     <meta property="og:type" content="website">
     <meta property="og:description" content="I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?">
-    <meta property="og:site_name" content="Bolo India "> 
+    <meta property="og:site_name" content="Bolo India ">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
@@ -37,14 +37,24 @@
             <div class="position-absolute rounded-pill" id="total-progress-bulb"></div>
         </div>
     </div>
+
     <div class="row mt-5">
         <div class="col-lg-8 offset-lg-2 border border-primary p-4-5 text-center overflow-hidden contribuion-info">
-            <div class="champion-ribbon">
+            <div id="champion_text" class="champion-ribbon d-none">
                 <span><%= __('You are a champion') %></span>
             </div>
-            <h4 class="mb-3 thank-you-title"><%= __('WooHoo!! You took the first important step') %></h4>
-            <h4 class="mb-3 thank-you-title d-none"><%= __('You are driving the spirit of your language') %></h4>
-            <p><span id="user-contribution" class="text-primary">5</span> <%= __('recordings contributed') %></p>
+            <div id="spree_text" class="spree-ribbon col-5 d-none">
+                <span><%= __('You are on a spree !!') %></span>
+            </div>
+            <div id="contribution_text" class="d-none">
+                <h4 class="mb-3 thank-you-title"><%= __('WooHoo!! You took the first important step') %></h4>
+                <p><span id="user-contribution" class="text-primary"></span> <%= __('recordings contributed') %></p>
+            </div>
+            <div id="before_badge_content" class="d-none">
+                <h4 class="mb-3"><%- __('You are driving the spirit of your language') %></h4>
+                <p><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="/badges">Know more</a>') %></p>
+            </div>
+            <%- include modals/badge_milestone.ejs %>
             <div class="mt-5 text-center">
                 <%= __('Share it with your friends and family') %>
             </div>
@@ -63,6 +73,20 @@
                         <img src="/img/whatsapp.svg" width="32px" alt="Share on Whatsapp">
                     </a>
                 </div>
+            </div>
+            <div class="badges_information">
+                <button class="m-0 p-0 btn border-0 cursor-pointer" disabled="disabled" data-badge="bronze" href="#" id="bronze_badge_link">
+                    <img title="Download Bronze Badge" src="./img/badge_disabled.svg" alt="">
+                </button>
+                <button class="m-0 p-0 btn border-0 cursor-pointer" disabled="disabled" data-badge="silver" href="#" id="silver_badge_link">
+                    <img title="Download Silver Badge" src="./img/badge_disabled.svg" alt="">
+                </button>
+                <button class="m-0 p-0 btn border-0 cursor-pointer" disabled="disabled" data-badge="gold" href="#" id="gold_badge_link">
+                    <img title="Download Gold Badge" src="./img/badge_disabled.svg" alt="">
+                </button>
+                <button class="m-0 p-0 btn border-0 cursor-pointer" disabled="disabled" data-badge="platinum" href="#" id="platinum_badge_link">
+                    <img title="Download Platinum Badge" src="./img/badge_disabled.svg" alt="">
+                </button>
             </div>
         </div>
     </div>
@@ -93,7 +117,6 @@
             </div>
         </div>
     </div>
-    <%- include modals/badge_milestone.ejs %>
     <div class="row justify-content-center mt-5">
         <div class="col-lg-3 col-md-6 col-8 text-center">
             <div class="mb-3">
@@ -114,3 +137,4 @@
 </body>
 
 </html>
+
