@@ -5,9 +5,39 @@
 .thank-you-title {
   width: 85%;
   margin: 0 auto;
-  text-align: center;
 }
 
+#total-progress {
+  width: 0%;
+  height: 12.68%;
+  top: 48%;
+  left: calc(15px + 3.7%);
+  transition: width 1s linear;
+}
+#total-progress-bulb {
+  width: 11%;
+  height: 45.5%;
+  top: 30%;
+  left: 75.56%;
+}
+
+
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  display: inline-block;
+  border-width: 0.5rem;
+  border-color: #007bff;
+  border-top-color: #fff;
+  animation: spin 1s infinite linear;
+  border-radius: 100%;
+  border-style: solid;
+}
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 .contribuion-info,
 .stats-container {
@@ -133,9 +163,4 @@
     left: -65px;
     max-width: 240px;
   }
-}
-
-.px-16{
-  padding-right: 16px !important;
-  padding-left: 16px !important;
 }
