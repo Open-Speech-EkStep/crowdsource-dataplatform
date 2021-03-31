@@ -47,7 +47,7 @@ const renderBadgeDetails = function (data) {
 }
 
 $(document).ready(function () {
-  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
   if (language) {
     updateLocaleLanguagesDropdown(language);
   }
