@@ -27,12 +27,19 @@ function setSentencesContributed() {
   // return localCount + currentIndexInStorage - skipCountInStorage;
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const speakerDetails = localStorage.getItem("speakerDetails");
-  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-
   let userName = "";
   if (speakerDetails) {
     userName = JSON.parse(speakerDetails).userName;
   }
+
+  let rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
+  if(!rawLocaleString){
+    getLocaleString().then(()=>{
+      rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
+    })
+  }
+
+  const localeStrings = JSON.parse(rawLocaleString);
   performAPIRequest(
     `rewards?language=${contributionLanguage}&category=speak&userName=${userName}`
   ).then((data) => {
@@ -45,7 +52,7 @@ function setSentencesContributed() {
       $("#current_badge_name_1").text(localeStrings[data.currentBadgeType]);
       $("#current_badge_count").text(data.currentMilestone);
       $("#next_badge_count").text(data.nextMilestone);
-      $("#next_badge_name_1").text(localeStrings[data.nextBadgeType]);
+      $("#next_badge_name_1").text(localeStrings[data.nextBadgeType].toLowerCase());
       $("#sentence_away_msg").addClass("d-none");
       $("#user-contribution-msg").addClass("d-none");
       $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
@@ -55,14 +62,14 @@ function setSentencesContributed() {
       $("#sentence_away_msg").removeClass("d-none");
       $("#user-contribution-msg").removeClass("d-none");
       $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-      $("#next_badge_name").text(localeStrings[data.nextBadgeType]);
+      $("#next_badge_name").text(localeStrings[data.nextBadgeType].toLowerCase());
     } else if ((Number(data.contributionCount) >= Number(data.currentMilestone)) && (Number(data.contributionCount) <= Number(data.nextMilestone))) {
       $("#spree_text").removeClass("d-none");
       $("#before_badge_content").removeClass("d-none");
       $("#sentence_away_msg").removeClass("d-none");
       $("#user-contribution-msg").removeClass("d-none");
       $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-      $("#next_badge_name").text(localeStrings[data.nextBadgeType]);
+      $("#next_badge_name").text(localeStrings[data.nextBadgeType].toLowerCase());
       const $bronzeBadgeLink = $("#bronze_badge_link img");
       const $silverBadgeLink = $("#silver_badge_link img");
       const $goldBadgeLink = $("#gold_badge_link img");
