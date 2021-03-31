@@ -153,7 +153,7 @@ const checkNextMilestoneQuery = `select grade, reward_milestone.milestone, id fr
   (select milestone from reward_milestones, reward_catalogue where \
   id=reward_catalogue_id and grade is not null order by milestone limit 1) \
 and language = $2 order by milestone limit 1) \
-as reward_milestone where id=reward_milestone.rid`;
+as reward_milestone where id=reward_milestone.rid and grade is not null`;
 
 const findRewardInfo = 'select generated_badge_id from rewards where contributor_id = $1 and language = $2 and reward_catalogue_id = $3 and category = $4';
 
