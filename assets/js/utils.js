@@ -96,7 +96,7 @@ const getLocaleString = function() {
         .then((response) => {
             localStorage.setItem('localeString', JSON.stringify(response));
             resolve(response);
-        });
+        }).catch((err)=>reject(err));
     });
 }
 

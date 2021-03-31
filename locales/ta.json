@@ -177,13 +177,25 @@
 	"Download": "பதிவிறக்கவும்",
 	"Help us understand what’s wrong with the recording": "பதிவில் இருக்கும் தவறை புரிந்துகொள்ள எங்களுக்கு உதவுங்கள்",
 	"Please validate any error message before proceeding": "தொடர்வதற்கு முன் இருக்கின்ற பிழை செய்தியை சரிபார்க்கவும்",
-	"SKIP": "தவிர்",
 	"Next": "அடுத்தது",
 	"CLOSE": "மூடு",
 	"Back": "மீண்டும்",
 	"You can select the language in which you want to participate": "நீங்கள் பங்கேற்க விரும்பும் மொழியை நீங்கள் தேர்ந்தெடுக்கலாம்",
 	"You can change the language in which you want to read content": "உள்ளடக்கத்தைப் படிக்க விரும்பும் மொழியை நீங்கள் மாற்றலாம்",
 	"Click on the card to start contributing your voice": "உங்கள் குரலில் பங்களிக்க கார்டில் கிளிக் செய்க",
-	"Click on the card to validate what others have spoken":"மற்றவர்கள் பேசியதை சரிபார்க்க கார்டில் கிளிக் செய்க"
-
+	"Click on the card to validate what others have spoken":"மற்றவர்கள் பேசியதை சரிபார்க்க கார்டில் கிளிக் செய்க",
+	"Levels and Badging @BoloIndia": "நிலைகள் மற்றும் பேட்ஜிங் @BoloIndia",
+	"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate",
+	"bronze": "வெண்கலம்",
+	"silver": "வெள்ளி",
+	"gold": "தங்கம்",
+	"platinum": "பிளாட்டினம்",
+	"Contributor Levels": "பங்களிப்பாளர் நிலைகள்",
+	"Participate more to gain badges": "பேட்ஜ்களை வெல்ல மேலும் பங்கேற்கவும்",
+	"Level": "நிலை",
+	"Contributions": "பங்களிப்புகள்",
+	"Sentences": "வாக்கியங்கள்",
+	"(Recording + Validating)": "(பதிவுசெய்தல் + சரிபார்த்தல்)",
+	"Badge": "பேட்ஜ்",
+	"N/A": "பொருந்தாதது"
 }

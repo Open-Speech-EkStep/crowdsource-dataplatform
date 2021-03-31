@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/badges.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+</head>
+
+<body>
+<%- include common/headerForContributor.ejs %>
+<div id="content-wrapper" class="container-fluid pt-5 pb-2 px-3 px-md-5 h-100">
+    <div class="row mx-lg-5">
+        <div class="col-12">
+            <h1><%= __('Levels and Badging @BoloIndia') %></h1>
+        </div>
+    </div>
+    <div class="row mx-lg-5 my-3">
+        <p class="col-12 col-lg-8 h5 font-weight-light-lg font-weight-normal-sm lh-7 text-justify d-none">
+            <%= __('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate') %></p>
+    </div>
+    <div><span class="spinner d-none" id="#loader1"></span></div>
+
+    <div class="row mx-lg-5" id="card-row"></div>
+
+    <div class="row mx-lg-5 mt-5">
+        <h2 class="col-12"><%= __('Contributor Levels') %></h2>
+    </div>
+    <div class="row mx-lg-5">
+        <p class="col-12"><%= __('Participate more to gain badges') %></p>
+    </div>
+    <div class="row mx-lg-5">
+        <table class="table table-bordered table-striped table-responsive-xs text-center mx-3 w-100">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col"><%= __('Level') %></th>
+                <th scope="col">
+                    <p><%= __('Contributions') %></p>
+                    <p><%= __('(Recording + Validating)') %></p>
+                </th>
+                <th scope="col"><%= __('Badge') %></th>
+            </tr>
+            </thead>
+            <tbody id="table-rows"></tbody>
+        </table>
+    </div>
+
+</div>
+<%- include common/footer.ejs %>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>$("footer").removeClass("fixed-bottom").addClass("bottom")</script>
+<script src="js/badges_info.js"></script>
+
+</body>
+</html>

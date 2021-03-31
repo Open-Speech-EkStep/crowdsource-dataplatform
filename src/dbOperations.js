@@ -22,7 +22,16 @@ const {
     getAudioPath,
     saveReportQuery,
     getSentencesForLaunch,
-    markContributionSkippedQuery
+    markContributionSkippedQuery,
+    rewardsInfoQuery,
+    getTotalUserContribution,
+    checkCurrentMilestoneQuery,
+    checkNextMilestoneQuery,
+    insertRewardQuery,
+    getContributorIdQuery,
+    findRewardInfo,
+    markSentenceReported,
+    markContributionReported
 } = require('./dbQuery');
 
 const {
@@ -50,6 +59,7 @@ const { KIDS_AGE_GROUP, ADULT, KIDS } = require('./constants');
 
 const envVars = process.env;
 const pgp = require('pg-promise')();
+
 const showUniqueSentences = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION == 'true';
 
 let cn = {
@@ -136,7 +146,7 @@ const getSentencesBasedOnAge = function (
     const launchUser = envVars.LAUNCH_USER || 'launch_user';
     const launchIds = envVars.LAUNCH_IDS || '';
 
-    if(userName == launchUser) {
+    if (userName == launchUser) {
         query = getSentencesForLaunch;
     }
 
@@ -361,12 +371,76 @@ const insertFeedback = (subject, feedback, language) => {
 
 const saveReport = async (userId, sentenceId, reportText, language, userName, source) => {
     const encryptUserId = encrypt(userId);
-    await db.any(saveReportQuery,[encryptUserId, userName, sentenceId, reportText, language, source])
+    await db.any(saveReportQuery, [encryptUserId, userName, sentenceId, reportText, language, source]);
+    if (source === "validation") {
+        await db.any(markContributionReported, [encryptUserId, userName, sentenceId]);
+    }
+    else if (source === "contribution") {
+        await db.any(markSentenceReported, [encryptUserId, userName, sentenceId]);
+    }
 }
 
 const markContributionSkipped = (userId, sentenceId, userName) => {
     const encryptUserId = encrypt(userId);
     return db.any(markContributionSkippedQuery, [encryptUserId, userName, sentenceId]);
+}
+
+const getRewards = async (userId, userName, language, category) => {
+    const encryptUserId = encrypt(userId);
+
+    const contributorInfo = await db.oneOrNone(getContributorIdQuery, [encryptUserId, userName]);
+
+    if (!contributorInfo) {
+        throw new Error('No User found');
+    }
+
+    const contributor_id = contributorInfo.contributor_id;
+
+    const { contribution_count } = await db.one(getTotalUserContribution, [contributor_id, language])
+
+    let currentMilestoneData = await db.oneOrNone(checkCurrentMilestoneQuery, [contribution_count, language]);
+
+    let nextMilestoneData = await db.oneOrNone(checkNextMilestoneQuery, [contribution_count, language]);
+
+    let generatedBadgeId = '', isNewBadge = false;
+    if (currentMilestoneData) {
+
+        let rewardIdList = await db.any(findRewardInfo, [contributor_id, language, currentMilestoneData.id, category]);
+
+        if (rewardIdList.length == 0) {
+            rewardIdList = await db.any(insertRewardQuery, [contributor_id, language, currentMilestoneData.id, category]);
+            if (currentMilestoneData.grade)
+                isNewBadge = true;
+        }
+        generatedBadgeId = rewardIdList[0].generated_badge_id;
+    }
+    else {
+        currentMilestoneData = {
+            'grade': '',
+            'milestone': 0
+        }
+    }
+
+    if (!nextMilestoneData) {
+        nextMilestoneData = {
+            'grade': '',
+            'milestone': 0
+        }
+    }
+
+    const currentBadgeType = currentMilestoneData.grade || '';
+    const nextBadgeType = nextMilestoneData.grade || '';
+    const currentMilestone = currentMilestoneData.milestone || 0;
+    const nextMilestone = nextMilestoneData.milestone || 0;
+    return {
+        "badgeId": generatedBadgeId, "currentBadgeType": currentBadgeType, "nextBadgeType": nextBadgeType,
+        "currentMilestone": currentMilestone, "nextMilestone": nextMilestone, "contributionCount": contribution_count,
+        "isNewBadge": isNewBadge
+    }
+}
+
+const getRewardsInfo = (language) => {
+    return db.any(rewardsInfoQuery, [language]);
 }
 
 module.exports = {
@@ -388,5 +462,7 @@ module.exports = {
     getSentencesBasedOnAge,
     insertFeedback,
     saveReport,
-    markContributionSkipped
+    markContributionSkipped,
+    getRewards,
+    getRewardsInfo
 };

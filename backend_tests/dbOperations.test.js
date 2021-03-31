@@ -1,12 +1,13 @@
-const { spy } = require('fetch-mock');
 const {
-    updateContributionDetails, updateSentencesWithContributedState, getValidationSentencesQuery, getCountOfTotalSpeakerAndRecordedAudio, getGenderData, getAgeGroupsData, getMotherTonguesData, feedbackInsertion
+    updateContributionDetails, updateSentencesWithContributedState, getValidationSentencesQuery, getCountOfTotalSpeakerAndRecordedAudio, getGenderData, getAgeGroupsData, getMotherTonguesData, feedbackInsertion, saveReportQuery, markContributionSkippedQuery, rewardsInfoQuery, getContributorIdQuery, getTotalUserContribution, checkCurrentMilestoneQuery, checkNextMilestoneQuery
 } = require('./../src/dbQuery');
 
 const mockDB = {
     many: jest.fn(() => Promise.resolve()),
+    one: jest.fn(() => Promise.resolve()),
     none: jest.fn(() => Promise.resolve()),
     any: jest.fn(() => Promise.resolve()),
+    oneOrNone: jest.fn(() => Promise.resolve()),
 }
 
 jest.mock('pg-promise', () => jest.fn(() => {
@@ -19,6 +20,7 @@ process.env.LAUNCH_IDS = '1,2'
 
 const dbOperations = require('../src/dbOperations');
 const { topLanguagesByHoursContributed, topLanguagesBySpeakerContributions, listLanguages } = require('../src/dashboardDbQueries');
+const { as } = require('pg-promise');
 
 const res = { status: () => { return { send: () => { } }; } };
 
@@ -259,5 +261,82 @@ describe("Running tests for dbOperations", () => {
         dbOperations.insertFeedback(subject, feedback, language);
 
         expect(spyDBany).toHaveBeenCalledWith(feedbackInsertion, [subject, feedback, language])
+    });
+
+    test('Save Report', () => {
+        const spyDBany = jest.spyOn(mockDB, 'any')
+        const userId = '123'
+        const sentenceId = '456'
+        const language = 'testLanguage'
+        const reportText = 'report text'
+        const userName = 'test user'
+        const source = 'contribution'
+        
+        dbOperations.saveReport(userId, sentenceId, reportText, language, userName, source);
+
+        expect(spyDBany).toHaveBeenCalledWith(saveReportQuery, [undefined, userName, sentenceId, reportText, language, source])
+    });
+
+    test('Mark Skipped Contribution', () => {
+        const spyDBany = jest.spyOn(mockDB, 'any')
+        const userId = '123'
+        const sentenceId = '456'
+        const userName = 'test user'
+
+        dbOperations.markContributionSkipped(userId, sentenceId, userName);
+
+        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [undefined, userName, sentenceId])
+    });
+
+    test('Get Rewards info', () => {
+        const spyDBany = jest.spyOn(mockDB, 'any')
+        const language = 'testLanguage'
+
+        dbOperations.getRewardsInfo(language);
+
+        expect(spyDBany).toHaveBeenCalledWith(rewardsInfoQuery, [language])
+    });
+
+    describe('Test Get Rewards', () => {
+        let spyDBany, spyDBone, spyDBoneOrNone;
+
+        beforeEach(() => {
+            spyDBany = jest.spyOn(mockDB, 'any')
+            spyDBone = jest.spyOn(mockDB, 'one')
+            spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
+        });
+
+        afterEach(() => {
+            jest.clearAllMocks();
+        })
+
+        test('should call queries for rewards data if user found', async () => {
+            const contributor_id = 10
+            const contribution_count = 5
+            spyDBoneOrNone.mockReturnValue({ 'contributor_id': contributor_id })
+            spyDBone.mockReturnValue({ 'contribution_count': contribution_count })
+            spyDBany.mockReturnValue([{ 'ids': 5 }])
+            const userId = '123'
+            const userName = 'userName'
+            const category = 'category'
+            const language = 'testLanguage'
+
+            await dbOperations.getRewards(userId, userName, language, category);
+
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, getContributorIdQuery, [undefined, userName])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkCurrentMilestoneQuery, [contribution_count, language])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, checkNextMilestoneQuery, [contribution_count, language])
+            expect(spyDBone).toHaveBeenCalledWith(getTotalUserContribution, [contributor_id, language])
+        });
+
+        test('should throw error if user not found', async () => {
+            const userId = '123'
+            const userName = 'userName'
+            const category = 'category'
+            const language = 'testLanguage'
+            spyDBoneOrNone.mockReturnValue(null)
+
+            await expect(dbOperations.getRewards(userId, userName, language, category)).rejects.toThrowError('No User found')
+        });
     });
 });

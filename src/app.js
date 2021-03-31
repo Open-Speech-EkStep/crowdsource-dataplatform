@@ -3,8 +3,8 @@ const cors = require('cors');
 const objectStorage = process.argv[2] || 'gcp';
 const fetch = require('node-fetch');
 
-const {uploader} = require('./uploader/objUploader')
-const {calculateSNR} = require('./audio_attributes/snr')
+const { uploader } = require('./uploader/objUploader')
+const { calculateSNR } = require('./audio_attributes/snr')
 
 const helmet = require('helmet')
 const express = require('express');
@@ -21,24 +21,30 @@ const {
     getAllInfo,
     updateTablesAfterValidation,
     getAudioClip,
-    insertFeedback, saveReport, markContributionSkipped
+    insertFeedback,
+    saveReport,
+    markContributionSkipped,
+    getRewards,
+    getRewardsInfo
 } = require('./dbOperations');
 const fs = require('fs');
-const {v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
-const {ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH, MIN_SNR_LEVEL} = require('./constants');
+const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH, MIN_SNR_LEVEL } = require('./constants');
 const {
     validateUserInputAndFile,
     validateUserInfo,
     validateUserInputForFeedback,
-    validateInputForSkip
+    validateInputForSkip,
+    validateRewardsInput,
+    validateRewardsInfoQuery
 } = require('./middleware/validateUserInputs');
 
 // const Ddos = require('ddos');
 // const ddos = new Ddos({ burst: 12, limit: 70 })
 // app.use(ddos.express);
 
-const {I18n} = require('i18n');
+const { I18n } = require('i18n');
 const i18n = new I18n({
     locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te', 'doi', 'mai', 'ur', 'kr', 'kd', 'mnibn', 'mnimm', 'satol', 'satdv', 'sa'],
     directory: './locales',
@@ -79,9 +85,9 @@ const multerStorage = multer.diskStorage({
         cb(null, currentDateAndTime() + '_' + randomString() + '.wav');
     },
 });
-const upload = multer({storage: multerStorage});
+const upload = multer({ storage: multerStorage });
 const corsOptions = {
-    origin: /vakyansh\.in$/,
+    origin: [/vakyansh\.in$/, /nplt\.in$/],
     credentials: true
 }
 app.use(cors(corsOptions));
@@ -89,7 +95,7 @@ app.use(express.json());
 app.use(upload.single('audio_data'));
 app.use('/sentences', validateUserInfo);
 app.use('/upload', validateUserInputAndFile);
-app.use(express.static(__dirname, {dotfiles: 'allow'}));
+app.use(express.static(__dirname, { dotfiles: 'allow' }));
 app.use(helmet());
 app.disable('x-powered-by');
 app.use(compression());
@@ -156,8 +162,12 @@ router.get('/feedback', function (req, res) {
     res.render('feedback.ejs');
 });
 
+router.get('/badges', function (req, res) {
+    res.render('badge-info.ejs');
+});
+
 router.get('/about-us', function (req, res) {
-    res.render('about-us.ejs', {MOTHER_TONGUE, LANGUAGES});
+    res.render('about-us.ejs', { MOTHER_TONGUE, LANGUAGES });
 });
 router.get('/terms-and-conditions', function (req, res) {
     res.render('terms-and-conditions.ejs');
@@ -173,7 +183,7 @@ router.get('/validator-page', (req, res) => {
 });
 router.get('/dashboard', function (req, res) {
     const isCookiePresent = req.cookies.userId ? true : false;
-    res.render('dashboard.ejs', {MOTHER_TONGUE, LANGUAGES, isCookiePresent});
+    res.render('dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
 });
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 
@@ -186,26 +196,26 @@ router.post('/audioClip', (req, res) => getAudioClip(req, res, objectStorage))
 router.post('/report', async (req, res) => {
     const userId = req.cookies.userId || "";
     //in case source is validation, we get the contribution id in the sentenceId field, for easier tracking
-    const {sentenceId = "", reportText = "", language = "", userName = "", source = ""} = req.body;
+    const { sentenceId = "", reportText = "", language = "", userName = "", source = "" } = req.body;
     if (sentenceId === "" || reportText === "" || language === "" || userId === "" || !['contribution', 'validation'].includes(source)) {
-        return res.send({statusCode: 400, message: "Input values missing"});
+        return res.send({ statusCode: 400, message: "Input values missing" });
     }
     try {
         await saveReport(userId, sentenceId, reportText, language, userName, source)
     } catch (err) {
         console.log(err);
-        return res.send({statusCode: 500, message: err.message});
+        return res.send({ statusCode: 500, message: err.message });
     }
-    return res.send({statusCode: 200, message: "Reported successfully."});
+    return res.send({ statusCode: 200, message: "Reported successfully." });
 })
 
 router.post('/skip', validateInputForSkip, (req, res) => {
     markContributionSkipped(req.cookies.userId, req.body.sentenceId, req.body.userName).then(() => {
-        return res.send({statusCode: 200, message: "Skipped successfully."});
+        return res.send({ statusCode: 200, message: "Skipped successfully." });
     })
         .catch((err) => {
             console.log(err);
-            return res.send({statusCode: 500, message: err.message});
+            return res.send({ statusCode: 500, message: err.message });
         })
 });
 
@@ -256,7 +266,7 @@ router.post('/audio/snr', async (req, res) => {
         const ambient_noise = snr < MIN_SNR_LEVEL ? true : false
         removeTempFile(file);
         console.log('success:' + res.headersSent);
-        res.status(200).send({'snr': snr, 'ambient_noise': ambient_noise});
+        res.status(200).send({ 'snr': snr, 'ambient_noise': ambient_noise });
         console.log('success:' + res.headersSent);
 
     }
@@ -294,7 +304,8 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'You can select the language in which you want to participate',
             'You can change the language in which you want to read content',
             'Click on the card to start contributing your voice',
-            'Click on the card to validate what others have spoken'
+            'Click on the card to validate what others have spoken',
+            'Level', 'Sentences', 'bronze', 'silver', 'gold', 'platinum', 'N/A'
         ];
 
         const langSttr = {};
@@ -311,13 +322,31 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
     const language = req.body.language.trim();
     insertFeedback(subject, feedback, language).then(() => {
         console.log("Feedback is inserted into the DB.")
-        res.send({statusCode: 200, message: "Feedback submitted successfully."});
+        res.send({ statusCode: 200, message: "Feedback submitted successfully." });
     }).catch(e => {
         console.log(`Error while insertion ${e}`)
-        res.send({statusCode: 502, message: "Failed to submit feedback."});
+        res.send({ statusCode: 502, message: "Failed to submit feedback." });
     })
+});
 
-})
+router.get('/rewards', validateRewardsInput, async (req, res) => {
+    const userId = req.cookies.userId;
+    const { language, userName = "", category = "" } = req.query;
+    try {
+        const data = await getRewards(userId, userName, language, category);
+        return res.send(data);
+    } catch (error) {
+        res.send({ statusCode: 502, message: error.message });
+    }
+});
+
+router.get('/rewards-info', validateRewardsInfoQuery, async (req, res) => {
+    const { language } = req.query;
+
+    const info = await getRewardsInfo(language);
+
+    return res.send(info);
+});
 
 require('./dashboard-api')(router);
 

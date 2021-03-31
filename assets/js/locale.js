@@ -23,7 +23,7 @@ const changeLocale = function (locale) {
 }
 
 function checkCookie() {
-    var locale = getCookie("i18n");
+    const locale = getCookie("i18n");
     return locale != "";
 }
 function showLanguagePopup() {

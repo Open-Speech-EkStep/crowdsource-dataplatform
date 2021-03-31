@@ -143,7 +143,6 @@
 	"EkStep Foundation gathers partners and creates open infrastructure, tools and frameworks to solve complex societal problems at scale. We do this by leveraging the open source digital infrastructure we have created called Sunbird and by following a way of thinking and doing called the Societal Platform Approach.": "একস্টেপ ফাউন্ডেশন অংশীদারদের একত্রিত করে এবং জটিল সমস্যাগুলি সমাধান করার জন্য উন্মুক্ত কাঠামো, সরঞ্জাম এবং ফ্রেমওয়ার্ক তৈরি করে। আমরা সানবার্ড নামে পরিচিত ওপেন সোর্স ডিজিটাল কাঠামোকে কাজে লাগিয়ে এবং সোসিয়েটাল প্ল্যাটফর্ম অ্যাপ্রোচ নামক চিন্তার উপায় অনুসরণ করে  এটি করে চলেছি",
 	"EkStep is a not-for-profit organization founded by Rohini and Nandan Nilekani and Shankar Maruwada.": "একস্টেপ রোহিনী এবং নন্দন নীলেকানি এবং শঙ্কর মারুওয়াদা দ্বারা প্রতিষ্ঠিত একটি অলাভজনক প্রতিষ্ঠান।",
 	"Let's get started!": "চলুন শুরু করি",
-	"SKIP": "এড়িয়ে যান",
 	"STOP RECORDING": "রেকর্ডিং বন্ধ করুন",
 	"Audio recording is too small. Please Re-record": "অডিও রেকর্ডিং খুব ছোট। দয়া করে পুনরায় রেকর্ড করুন",
 	"RE-RECORD": "পুনরায় রেকর্ড করুন",
@@ -218,7 +217,6 @@
 	"Silver": "রূপা",
 	"Gold": "সোনা",
 	"Platinum": "প্ল্যাটিনাম",
-	"Download": "ডাউনলোড",
 	"Thank you for trying": "চেষ্টা করার জন্য আপনাকে ধন্যবাদ",
 	"Thank you for attempting": "আপনার প্রচেষ্টাকে ধন্যবাদ",
 	"Thank you for trying to donate": "অনুদান দেওয়ার চেষ্টা করার জন্য আপনাকে ধন্যবাদ",
@@ -282,6 +280,19 @@
 	"You can select the language in which you want to participate": "আপনি ভাষা নির্বাচন করতে পারেন যাতে আপনি অংশগ্রহণ করতে চান",
 	"You can change the language in which you want to read content": "আপনি ভাষা বদলাতে পারেন যাতে আপনি যে বিষয় পড়তে চান",
 	"Click on the card to start contributing your voice": "আপনার স্বর অবদান শুরু করতে কার্ড-এ ক্লিক করুন",
-	"Click on the card to validate what others have spoken":"অন্যেরা কে কি বলেছে তা যাচাই করতে কার্ড-এ ক্লিক করুন"
-
+	"Click on the card to validate what others have spoken":"অন্যেরা কে কি বলেছে তা যাচাই করতে কার্ড-এ ক্লিক করুন",
+	"Levels and Badging @BoloIndia": "স্তর ও ব্যাজিং @BoloIndia",
+	"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate",
+	"bronze": "ব্রোঞ্চ",
+	"silver": "রৌপ্য",
+	"gold": "স্বর্ণ",
+	"platinum": "প্ল্যাটিনাম",
+	"Contributor Levels": "আবেদনকারী স্তরগুলি",
+	"Participate more to gain badges": "ব্যাজ অর্জন করতে আরও অংশ নিন",
+	"Level": "স্তর",
+	"Contributions": "আবেদনকারীগণ",
+	"Sentences": "বাক্য",
+	"(Recording + Validating)": "(রেকর্ডিং + বৈধকরণ)",
+	"Badge": "ব্যাজ",
+	"N/A": "প্রযোজ্য নয়"
 }

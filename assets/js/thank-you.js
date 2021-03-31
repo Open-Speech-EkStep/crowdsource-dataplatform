@@ -1,5 +1,5 @@
 const fetch = require('./fetch')
-const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS, LOCALE_STRINGS} = require("./constants");
+const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS, LOCALE_STRINGS, BADGES} = require("./constants");
 const {
   setPageContentHeight,
   toggleFooterPosition,
@@ -265,6 +265,19 @@ function executeOnLoad() {
 }
 
 $(document).ready(function () {
+
+  $("#download_pdf").on('click', function () {
+    const pdf = new jsPDF();
+    const img = new Image;
+    img.onload = function() {
+      pdf.addImage(this, 10, 10);
+      pdf.save("test.pdf");
+    };
+
+    img.crossOrigin = "Anonymous";  // for demo as we are at different origin than image
+    img.src = BADGES.bronze.imgSm;
+  })
+
   getLocaleString().then((data) => {
         executeOnLoad();
     }).catch((err) => {

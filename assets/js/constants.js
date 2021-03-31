@@ -21,6 +21,13 @@ const ALL_LANGUAGES = [
     {value: "Tamil", id: "ta", text: "தமிழ்", hasLocaleText: true,data:true},
     {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true,data:true}];
 
+const BADGES = {
+    bronze : {imgLg : "/img/bronze_badge.svg", imgSm:"/img/bronze_reward.svg"},
+    silver :{imgLg:"/img/silver_badge.svg",imgSm:"/img/silver_reward.svg"},
+    gold :{imgLg:"/img/gold_badge.svg",imgSm:"/img/gold_reward.svg"},
+    platinum :{imgLg:"/img/platinum_badge.svg",imgSm:"/img/platinum_reward.svg"}
+}
+
 module.exports = {
     DEFAULT_CON_LANGUAGE,
     AUDIO_DURATION,
@@ -31,5 +38,6 @@ module.exports = {
     TOP_LANGUAGES_BY_SPEAKERS,
     AGGREGATED_DATA_BY_LANGUAGE,
     LOCALE_STRINGS,
-    CONTRIBUTION_LANGUAGE
+    CONTRIBUTION_LANGUAGE,
+    BADGES
 }
