@@ -270,10 +270,11 @@ describe("Running tests for dbOperations", () => {
         const language = 'testLanguage'
         const reportText = 'report text'
         const userName = 'test user'
+        const source = 'contribution'
+        
+        dbOperations.saveReport(userId, sentenceId, reportText, language, userName, source);
 
-        dbOperations.saveReport(userId, sentenceId, reportText, language, userName);
-
-        expect(spyDBany).toHaveBeenCalledWith(saveReportQuery, [undefined, userName, sentenceId, reportText, language])
+        expect(spyDBany).toHaveBeenCalledWith(saveReportQuery, [undefined, userName, sentenceId, reportText, language, source])
     });
 
     test('Mark Skipped Contribution', () => {
