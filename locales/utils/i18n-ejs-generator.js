@@ -36,6 +36,7 @@ const generateLocalisedHtmlFromEjs = function (ejsPath, outPath) {
         fs.rmdirSync(`${outPath}/${locale}`, { recursive: true });
 
         await ejs2html(`${ejsPath}/about-us.ejs`, { MOTHER_TONGUE, LANGUAGES }, i18n, `${outPath}/${locale}`, 'about-us.html', locale);
+        await ejs2html(`${ejsPath}/badge-info.ejs`, {}, i18n, `${outPath}/${locale}`, 'badge-info.html', locale);
         await ejs2html(`${ejsPath}/dashboard.ejs`, { MOTHER_TONGUE, LANGUAGES, isCookiePresent: false }, i18n, `${outPath}/${locale}`, 'dashboard.html', locale);
         await ejs2html(`${ejsPath}/feedback.ejs`, {}, i18n, `${outPath}/${locale}`, 'feedback.html', locale);
         await ejs2html(`${ejsPath}/home.ejs`, { MOTHER_TONGUE, LANGUAGES, isCookiePresent: false, defaultLang: undefined }, i18n, `${outPath}/${locale}`, 'home.html', locale);
