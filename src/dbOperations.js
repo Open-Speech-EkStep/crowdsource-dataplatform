@@ -99,7 +99,7 @@ const updateDbWithAudioPath = function (
         motherTongue = speakerDetailsJson.motherTongue;
     }
     const encryptUserId = encrypt(userId);
-    const roundedAudioDuration = Number(Number(audioDuration).toFixed(3));
+    const roundedAudioDuration = audioDuration ? Number(Number(audioDuration).toFixed(3)) : 0;
 
     db.any(updateContributionDetails, [
         audioPath,
