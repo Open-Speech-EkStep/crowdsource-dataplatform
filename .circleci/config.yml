@@ -53,6 +53,8 @@ jobs:
     parameters:
       env_name:
         type: string
+      distributionId:
+        type: string
     executor:
       name: node/default
     steps:
@@ -62,6 +64,7 @@ jobs:
       - aws-s3/sync:
           from: public/
           to: 's3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>'
+      - run: aws cloudfront create-invalidation --distribution-id << parameters.distributionId >> --paths '/*'
 
 
   eks_fargate_deployment:
@@ -101,6 +104,7 @@ workflows:
       - build_ui_push_to_s3:
           name: build_dev_ui
           env_name: dev
+          distributionId: ${DEV_DISTRIBUTION_ID}
           requires:
             - node/test
 
@@ -113,6 +117,7 @@ workflows:
       - build_ui_push_to_s3:
           name: build_test_ui
           env_name: test
+          distributionId: ${TEST_DISTRIBUTION_ID}
           requires:
             - approve_test_deployment_eks
 
@@ -125,6 +130,7 @@ workflows:
       - build_ui_push_to_s3:
           name: build_prod_ui
           env_name: prod
+          distributionId: ${PROD_DISTRIBUTION_ID}
           requires:
             - approve_prod_deployment_eks
 
