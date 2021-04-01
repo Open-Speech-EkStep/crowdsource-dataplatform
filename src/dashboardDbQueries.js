@@ -30,7 +30,7 @@ const cumulativeDataByState = "select state, total_speakers, total_contributions
 
 const cumulativeDataByLanguage = "select language, total_speakers,ROUND(total_contributions::numeric/3600,3) as total_contributions,ROUND(total_validations::numeric/3600, 3) as total_validations from language_group_contributions";
 
-const cumulativeDataByLanguageAndState = "select state, language, total_speakers, total_contributions, total_validations from language_and_state_group_contributions;";
+const cumulativeDataByLanguageAndState = "select state, language, total_speakers, ROUND(total_contributions::numeric/3600,3) as total_contributions, total_validations from language_and_state_group_contributions;";
 
 const listLanguages = "select distinct(language) from contributions_and_demo_stats;";
 

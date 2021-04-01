@@ -99,7 +99,7 @@ const updateDbWithAudioPath = function (
         motherTongue = speakerDetailsJson.motherTongue;
     }
     const encryptUserId = encrypt(userId);
-    const roundedAudioDuration = Number(Number(audioDuration).toFixed(3));
+    const roundedAudioDuration = audioDuration ? Number(Number(audioDuration).toFixed(3)) : 0;
 
     db.any(updateContributionDetails, [
         audioPath,
@@ -434,7 +434,7 @@ const getRewards = async (userId, userName, language, category) => {
     const nextMilestone = nextMilestoneData.milestone || 0;
     return {
         "badgeId": generatedBadgeId, "currentBadgeType": currentBadgeType, "nextBadgeType": nextBadgeType,
-        "currentMilestone": currentMilestone, "nextMilestone": nextMilestone, "contributionCount": contribution_count,
+        "currentMilestone": currentMilestone, "nextMilestone": nextMilestone, "contributionCount": Number(contribution_count),
         "isNewBadge": isNewBadge
     }
 }
