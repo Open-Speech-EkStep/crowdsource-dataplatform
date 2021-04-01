@@ -339,7 +339,7 @@ router.get('/rewards', validateRewardsInput, async (req, res) => {
         const data = await getRewards(userId, userName, language, category);
         return res.send(data);
     } catch (error) {
-        res.send({ statusCode: 502, message: error.message });
+        res.status(502).send({ statusCode: 502, message: error.message });
     }
 });
 
@@ -347,8 +347,11 @@ router.get('/rewards-info', validateRewardsInfoQuery, async (req, res) => {
     const { language } = req.query;
 
     const info = await getRewardsInfo(language);
+    if (info && info.length > 0){
+        return res.send(info);
+    }
 
-    return res.send(info);
+        return res.status(404).send('Data not found');
 });
 
 require('./dashboard-api')(router);
