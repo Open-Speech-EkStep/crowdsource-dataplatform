@@ -153,7 +153,7 @@
 	"Recording for 3 seconds": "3 സെക്കന്റുകളുടെ റെക്കോ൪ഡിങ്ങ്",
 	"Recording for 2 seconds": "2 സെക്കന്റുകളുടെ റെക്കോ൪ഡിങ്ങ്",
 	"Recording for 1 seconds": "1 സെക്കന്റുകളുടെ റെക്കോ൪ഡിങ്ങ്",
-	"Playingback Audio": "ഓഡിയോ തിരികെ പ്ലേ ചെയ്യുന്നു",
+	"Playingback Audio": "വീണ്ടും ഓഡിയോ കേൾക്കുകയാണ്",
 	"Playing": "പ്ലേ ചെയ്യുന്നു",
 	"Transgender - He": "ഭിന്നലിംഗം- അവൻ",
 	"Transgender - She": "ഭിന്നലിംഗം- അവൾ",
@@ -247,5 +247,11 @@
 	"Sentences": "വാക്യങ്ങൾ",
 	"(Recording + Validating)": "(റെക്കോ൪ഡിംഗ് + മൂല്യനി൪ണ്ണയം)",
 	"Badge": "ബാഡ്ജ്",
-	"N/A": "ബാധകമല്ല"
+	"N/A": "ബാധകമല്ല",
+	"You are on a spree !!": "നിങ്ങൾ ഒരു പരിശ്രമത്തിൽ മുഴുകിയിരിക്കുകയാണ്",
+	"You are driving the spirit of your language": "നിങ്ങളുടെ ഭാഷയുടെ അന്തസത്തയെ നിങ്ങൾ പരിപോഷിപ്പിക്കുകയാണ്.",
+	"You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"/badges\">Know more</a>": "<span id=\"next_badge_name\"></span> മെഡൽ നേടുന്നതിൽനിന്ന് നിങ്ങൾ <span id=\"sentense_away_count\"></span> വാചകങ്ങൾ മാത്രം അകലെയാണ്. <a href=\"/badges\">കൂടുതൽ അറിയുക</a>",
+	"WoaaH!! You’ve earned your <span id=\"current_badge_name\"></span> Badge": "കൊള്ളാം നിങ്ങൾ <span id=\"current_badge_name\"></span> മെഡൽ നേടിയിരിക്കുന്നു.",
+	"<span id=\"current_badge_name_1\"></span> Contributor level achieved for contributing <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_name_1\"></span> Contributor level achieved for contributing <span id=\"current_badge_count\"></span> sentences.",
+	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"/badges\">Know more</a>": "നിങ്ങളുടെ <span id=\"next_badge_name_1\"></span> ബാഡ്ജ് അൺലോക്കു ചെയ്യുന്നതിന് <span id=\"next_badge_count\"></span> വാക്യങ്ങളിൽ എത്തിച്ചേരുക എന്നതാണ് നിങ്ങളുടെ അടുത്ത ലക്ഷ്യം. <a href=\"/badges\">കൂടുതൽ അറിയുക</a>"
 }
