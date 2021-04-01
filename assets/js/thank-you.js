@@ -338,14 +338,14 @@ function downloadPdf(badgeType) {
   const pdf = new jsPDF()
   const img = new Image();
   img.onload = function () {
-    pdf.addImage(this, 10, 10);
+    pdf.addImage(this, 36, 10, 128,128);
     pdf.save(`${badgeType}-badge.pdf`);
   };
 
   img.crossOrigin = "Anonymous";
-  img.src = BADGES[badgeType].imgLg;
+  img.src = BADGES[badgeType].imgSm;
 
-  pdf.text(`Badge Id : ${localStorage.getItem('badgeId')}`, 10,80);
+  pdf.text(`Badge Id : ${localStorage.getItem('badgeId')}`, 36,150);
 }
 
 $(document).ready(function () {
