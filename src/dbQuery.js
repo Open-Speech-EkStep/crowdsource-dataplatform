@@ -131,7 +131,7 @@ FROM contributor;`;
 
 const markContributionReported = "update contributions set action='reported' where contribution_id=$3";
 
-const markSentenceReported = `update sentences set state='reported' where "sentenceId"=$3`;
+const markSentenceReported = `update sentences set state='reported' where "sentenceId"=$3 and (select count(distinct reported_by) from reports where source='contribution' and sentence_id=$3 group by sentence_id) >= 4;`;
 
 const markContributionSkippedQuery = "update contributions set action='skipped' where contributed_by=(select contributor_id from contributors where user_name=$2 and contributor_identifier = $1) and \"sentenceId\"=$3;";
 
@@ -149,9 +149,11 @@ and language = $2 order by milestone desc limit 1) \
 as reward_milestone where id=reward_milestone.rid`;
 
 const checkNextMilestoneQuery = `select grade, reward_milestone.milestone, id from reward_catalogue, \
-(select milestone,reward_catalogue_id as rid from reward_milestones where milestone > $1 \
+(select milestone,reward_catalogue_id as rid from reward_milestones where milestone > $1 and milestone >= \
+  (select milestone from reward_milestones, reward_catalogue where \
+  id=reward_catalogue_id and grade is not null order by milestone limit 1) \
 and language = $2 order by milestone limit 1) \
-as reward_milestone where id=reward_milestone.rid`;
+as reward_milestone where id=reward_milestone.rid and grade is not null`;
 
 const findRewardInfo = 'select generated_badge_id from rewards where contributor_id = $1 and language = $2 and reward_catalogue_id = $3 and category = $4';
 
