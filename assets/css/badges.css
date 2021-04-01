@@ -117,7 +117,9 @@ h6,
     }
 }
 
-table thead th {
+.table thead th {
     vertical-align: middle;
 }
+
+
 
