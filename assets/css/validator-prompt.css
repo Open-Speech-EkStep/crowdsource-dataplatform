@@ -6,6 +6,10 @@ a{
     cursor: pointer;
 }
 
+.fs-1_5-rem {
+    font-size: 1.5rem;
+}
+
 .w-h-5 {
     width: 5rem;
     height: 5rem;
