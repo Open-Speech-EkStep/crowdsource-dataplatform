@@ -131,7 +131,7 @@ FROM contributor;`;
 
 const markContributionReported = "update contributions set action='reported' where contribution_id=$3";
 
-const markSentenceReported = `update sentences set state='reported' where "sentenceId"=$3`;
+const markSentenceReported = `update sentences set state='reported' where "sentenceId"=$3 and (select count(distinct reported_by) from reports where source='contribution' and sentence_id=$3 group by sentence_id) >= 4;`;
 
 const markContributionSkippedQuery = "update contributions set action='skipped' where contributed_by=(select contributor_id from contributors where user_name=$2 and contributor_identifier = $1) and \"sentenceId\"=$3;";
 
