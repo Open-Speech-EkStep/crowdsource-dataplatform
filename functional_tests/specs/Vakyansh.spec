@@ -3,7 +3,7 @@
 * Opening Vakyansh
 
 ## Check About Us Page
-* Select Preferred language as "English"
+* Select Contribution Language as "English"
 * Skip coach mark instructions
 * Navigate to "About Us" button and click "About Us" button
 * Validate about us content
@@ -11,8 +11,8 @@
 * Select Language "Hindi" enables the Start Recording button
 
 ## Validate Locale content on Home Page
-* Select Contribution Language as Hindi
-* Select Preferred language as "Hindi"
+* Select Contribution Language as "हिंदी"
+* Select Preferred language as "हिंदी"
 * User should see the content in "Hindi"
 * User should see State Wise distribution and Top Languages
 * User should be able to change to preffered Language to English again
@@ -38,7 +38,7 @@
 * Speaker details popup should appear and close button should close the pop up
 
 ## Validate Contributor flow
-* Select Contribution Language as Hindi
+* Select Contribution Language as "हिंदी"
 * Select Preferred language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
@@ -55,8 +55,8 @@
 * when user clicks on the Contribute More button, user should not see the Instructions page again
 
 ## Validate Validator flow
-* Select Contribution Language as Hindi
-* Select Preferred language as "Hindi"
+* Select Contribution Language as "हिंदी"
+* Select Preferred language as "हिंदी"
 * Navigate to "Validate" button and click "Validate" button
 * "skip_button" should be enabled , "dislike_button" "like_button" buttons should be disabled
 * User plays the audio , "dislike_button","like_button" should be enabled

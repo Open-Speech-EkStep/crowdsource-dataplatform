@@ -151,15 +151,9 @@ step("User should see the content in <language>", async function (language) {
 
 step("Select Preferred language as <language>", async function (language) {
     const localeDropDown = taiko.$("#localeDropdownMenuButton");
-    if (language == "Hindi") {
-        await taiko.waitFor(1000);
-        await click(localeDropDown);
-        await click(text("हिंदी"));
-    }
-    else {
-        await taiko.waitFor(500);
-        await click(taiko.text(language));
-    }
+    await taiko.waitFor(1000);
+    await click(localeDropDown);
+    await click(text(language));
 });
 
 step("Navigate to <arg0> button and click <arg0> button", async function (arg0) {
@@ -261,10 +255,13 @@ step("User should be able to change to preffered Language to English again", asy
 
 });
 
-step("Select Contribution Language as Hindi", async function () {
-    await click("show All");
+step("Select Contribution Language as <language>", async function (language) {
+    const prefLanguagePopup = await text('Select Your Preferred Language')
+    if(!prefLanguagePopup.exists()){
+        await click("show All");
+    }
     await taiko.waitFor(500)
-    await click(("हिंदी"));
+    await click(language);
 });
 
 step("If user selects Other as gender, some more gender options should be visible", async function () {
@@ -315,7 +312,7 @@ step("When user clicks on the go to home page button , user should see the home 
     assert.ok(await text("Bolo India: A crowdsourcing initiative for Indian languages").exists());
 });
 
-step("Skip coach mark instructions", async function() {
+step("Skip coach mark instructions", async function () {
     await text('SKIP').exists();
     await click('SKIP');
 });
