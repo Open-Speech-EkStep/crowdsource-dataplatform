@@ -1,24 +1,13 @@
 const { updateGraph } = require('./draw-chart');
 const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('./speakerDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString } = require('./utils');
-
-const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES} = require('./constants');
-const fetch = require('./fetch')
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString, getJson } = require('./utils');
+const moment = require('moment');
+const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES } = require('./constants');
+const fetch = require('./fetch');
+const { data } = require('jquery');
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
-
-const fetchDetail = (language) => {
-    const byLanguage = language ? true : false;
-    const url = language ? '/aggregate-data-count?byLanguage=true' : '/aggregate-data-count'
-    return fetch(url).then((data) => {
-        if (!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
-        } else {
-            return Promise.resolve(data.json());
-        }
-    });
-};
 
 const getSpeakersData = (data, lang) => {
     localStorage.setItem('previousLanguage', lang);
@@ -64,33 +53,27 @@ function updateLanguage(language) {
     const $speakersDataContributionValue = $('#contributed-value');
     const $speakersDataValidationValue = $('#validated-value');
     const activeDurationText = $('#duration').find('.active')[0].dataset.value;
-
-    fetchDetail(language)
-        .then((data) => {
+    const url = language ? '../aggregated-json/cumulativeDataByLanguage.json' : '../aggregated-json/cumulativeCount.json'
+    getJson(url)
+        .then(res => {
             try {
-                const langaugeExists = isLanguageAvailable(data.data, language);
-                if (data.last_updated_at) {
-                    $('#data-updated').text(` ${data.last_updated_at}`);
-                    $('#data-updated').removeClass('d-none');
-                } else {
-                    $('#data-updated').addClass('d-none');
-                }
+                const langaugeExists = isLanguageAvailable(res, language);
                 if (langaugeExists) {
                     $speakersDataLoader.removeClass('d-none');
                     $speakerDataLanguagesWrapper.addClass('d-none');
                     $speakerDataDetails.addClass('d-none');
                     updateGraph(language, activeDurationText);
-                    const speakersData = getSpeakersData(data.data, language);
+                    const speakersData = getSpeakersData(res, language);
                     const {
                         hours: contributedHours,
                         minutes: contributedMinutes,
                         seconds: contributedSeconds
-                    } = calculateTime(speakersData.contributions.toFixed(3)*60*60);
+                    } = calculateTime(speakersData.contributions.toFixed(3) * 60 * 60);
                     const {
                         hours: validatedHours,
                         minutes: validatedMinutes,
                         seconds: validatedSeconds
-                    } = calculateTime(speakersData.validations.toFixed(3)*60*60);
+                    } = calculateTime(speakersData.validations.toFixed(3) * 60 * 60);
 
                     if (speakersData.languages) {
                         $speakerDataLanguagesValue.text(speakersData.languages);
@@ -122,9 +105,16 @@ function updateLanguage(language) {
             } catch (error) {
                 console.log(error);
             }
-        })
-        .catch((err) => {
-            console.log(err);
+        });
+    getJson("../aggregated-json/lastUpdatedAtQuery.json")
+        .then(res => {
+            const lastUpdatedAt = moment(res['timezone']).format('DD-MM-YYYY, h:mm:ss a')
+            if (lastUpdatedAt) {
+                $('#data-updated').text(` ${lastUpdatedAt}`);
+                $('#data-updated').removeClass('d-none');
+            } else {
+                $('#data-updated').addClass('d-none');
+            }
         });
 }
 
@@ -142,7 +132,7 @@ $(document).ready(function () {
     const age = document.getElementById('age');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem('contributionLanguage');
-    if(contributionLanguage) {
+    if (contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }
     $('#language').on('change', (e) => {
@@ -187,8 +177,8 @@ $(document).ready(function () {
         const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
         let genderValue = checkedGender.length ? checkedGender[0].value : '';
         const userNameValue = $userName.val().trim().substring(0, 12);
-        const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === sentenceLanguage);
-        if (! selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
+        const selectedLanguage = ALL_LANGUAGES.find(e => e.value === sentenceLanguage);
+        if (!selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
         if (testUserName(userNameValue)) {
             return;
         }
@@ -211,12 +201,12 @@ $(document).ready(function () {
         location.href = './record.html';
     });
 
-    $('input[name = "gender"]').on('change', function() {
+    $('input[name = "gender"]').on('change', function () {
         const selectedGender = document.querySelector(
             'input[name = "gender"]:checked'
         );
         const options = $("#transgender_options");
-        if(selectedGender.value === "others") {
+        if (selectedGender.value === "others") {
             console.log(options);
             options.removeClass("d-none");
         } else {

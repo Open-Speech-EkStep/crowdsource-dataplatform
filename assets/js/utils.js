@@ -170,6 +170,14 @@ const reportSentenceOrRecording = (reqObj) => {
     });
 }
 
+const getJson = (path) => {
+    return new Promise((resolve) => {
+      $.getJSON(path, (data) => {
+        resolve(data);
+      });
+    })
+}
+
 module.exports = { setPageContentHeight,
   toggleFooterPosition,
   fetchLocationInfo,
@@ -183,4 +191,6 @@ module.exports = { setPageContentHeight,
   setFooterPosition,
   reportSentenceOrRecording, 
   getCookie, 
-  setCookie}
+  setCookie,
+  getJson
+}

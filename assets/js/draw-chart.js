@@ -1,6 +1,7 @@
+const { data } = require('jquery');
 const fetch = require('./fetch')
-const {generateIndiaMap} = require('./home-page-charts');
-const {calculateTime, formatTime} = require('./utils')
+const { generateIndiaMap } = require('./home-page-charts');
+const { calculateTime, formatTime, getJson } = require('./utils')
 const $chartRow = $('.chart-row');
 const $chartLoaders = $chartRow.find('.loader');
 const $charts = $chartRow.find('.chart');
@@ -32,7 +33,7 @@ function getOrderedGenderData(formattedGenderData) {
 function getAgeGroupData(data, key) {
     let formattedData = [];
     data.forEach((item) => {
-        const element = item[key] ? item : {...item, [key]: 'Anonymous'};
+        const element = item[key] ? item : { ...item, [key]: 'Anonymous' };
         const index = formattedData.findIndex(e => element[key].toLowerCase() === e[key].toLowerCase());
         if (index >= 0) {
             formattedData[index].contributions += element.contributions;
@@ -51,10 +52,10 @@ const getGenderData = (genderData) => {
         genderData.data.forEach(item => {
             let gType = item.gender;
             if (item.gender === "") item.gender = 'anonymous';
-            if(item.gender.toLowerCase().indexOf('transgender') > -1 || item.gender.toLowerCase().indexOf('rather') > -1) gType = "transgender";
+            if (item.gender.toLowerCase().indexOf('transgender') > -1 || item.gender.toLowerCase().indexOf('rather') > -1) gType = "transgender";
             if (gender === gType) {
                 const genderType = gType.charAt(0).toUpperCase() + gType.slice(1);
-                const {hours:cHours, minutes: cMinutes, seconds: cSeconds} = calculateTime((Number(item.hours_contributed)*60*60), true);
+                const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(item.hours_contributed) * 60 * 60), true);
                 const contributedHours = formatTime(cHours, cMinutes, cSeconds);
                 if (gType === "transgender") {
                     formattedGenderData.push({
@@ -108,23 +109,51 @@ const disposeChart = (chartDiv) => {
         delete chartReg[chartDiv];
     }
 }
+const getTimelinenUrl = (language, timeframe = "weekly") => {
+    let url = "../aggregated-json/" + timeframe + "Timeline";
+    if (!language) {
+        url += "Cumulative"
+    }
+    url += ".json";
+    return url;
+}
 
 const buildTimelineGraph = (language, timeframe) => {
-    fetch(`/timeline?language=${language}&timeframe=${timeframe}`)
-    .then((data) => {
-        if (!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
-        } else {
-            return data.json();
-        }
-    }).then((data) => {
-        $timelineLoader.hide().removeClass('d-flex');
-        $timelineChart.removeClass('d-none');
+    const url = getTimelinenUrl(language, timeframe);
+    getJson(url)
+        .then(timelineData => {
+            if (language) {
+                timelineData = timelineData.filter(item => {
+                    return item.language == language
+                })
+            }
+            let hoursContributed = 0, hoursValidated = 0;
 
-        drawTimelineChart(data);
-    }).catch((err) => {
-        console.log(err);
-    });
+            if (timelineData.length !== 0) {
+                hoursContributed = timelineData[timelineData.length - 1]['cumulative_contributions'] || 0;
+                hoursValidated = timelineData[timelineData.length - 1]['cumulative_validations'] || 0;
+            }
+            const res = {
+                'total-hours-contributed': hoursContributed,
+                'total-hours-validated': hoursValidated,
+                "data": timelineData,
+            };
+            $timelineLoader.hide().removeClass('d-flex');
+            $timelineChart.removeClass('d-none');
+
+            drawTimelineChart(res);
+        }).catch((err) => {
+            console.log(err);
+        });
+}
+
+function showChartLoaders() {
+    $chartLoaders.hide().removeClass('d-flex');
+    $charts.removeClass('d-none');
+}
+function hideChartLoaders() {
+    $chartLoaders.show().addClass('d-flex');
+    $charts.addClass('d-none');
 }
 
 function buildGraphs(language, timeframe) {
@@ -133,8 +162,34 @@ function buildGraphs(language, timeframe) {
     // $.fn.popover.Constructor.Default.whiteList.tr = [];
     // $.fn.popover.Constructor.Default.whiteList.td = [];
 
+    const url = getTimelinenUrl(language, timeframe);
+    getJson(url)
+        .then(timelineData => {
+            if (language) {
+                timelineData = timelineData.filter(item => {
+                    return item.language == language
+                })
+            }
+            let hoursContributed = 0, hoursValidated = 0;
+
+            if (timelineData.length !== 0) {
+                hoursContributed = timelineData[timelineData.length - 1]['cumulative_contributions'] || 0;
+                hoursValidated = timelineData[timelineData.length - 1]['cumulative_validations'] || 0;
+            }
+            const res = {
+                'total-hours-contributed': hoursContributed,
+                'total-hours-validated': hoursValidated,
+                "data": timelineData,
+            };
+            showChartLoaders();
+
+            drawTimelineChart(res);
+        }).catch((err) => {
+            console.log(err);
+            hideChartLoaders();
+        });
+
     Promise.all([
-        fetch(`/timeline?language=${language}&timeframe=${timeframe}`),
         fetch(`/contributions/gender?language=${language}`),
         fetch(`/contributions/age?language=${language}`)
     ]).then(function (responses) {
@@ -146,11 +201,8 @@ function buildGraphs(language, timeframe) {
             $chartLoaders.hide().removeClass('d-flex');
             $charts.removeClass('d-none');
 
-            const genderData = getGenderData(data[1]);
-            const ageGroupData = getAgeGroupData(data[2].data, 'age_group').sort((a, b) => Number(a.speakers) - Number(b.speakers));
-
-            // Draw timeline chart
-            drawTimelineChart(data[0]);
+            const genderData = getGenderData(data[0]);
+            const ageGroupData = getAgeGroupData(data[1].data, 'age_group').sort((a, b) => Number(a.speakers) - Number(b.speakers));
 
             // Draw gender chart
             drawGenderChart(genderData);
@@ -229,7 +281,7 @@ const drawGenderChart = (chartData) => {
     am4core.ready(function () {
         const chart = am4core.create('gender-chart', am4charts.XYChart);
         chartData.forEach(item => {
-            const {hours:cHours, minutes: cMinutes, seconds: cSeconds} = calculateTime((Number(item.hours_contributed)*60*60), true);
+            const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(item.hours_contributed) * 60 * 60), true);
             item.contributedHours = formatTime(cHours, cMinutes, cSeconds);
         })
         chart.data = chartData;
@@ -281,10 +333,10 @@ const drawTimelineChart = (timelineData) => {
             if (!chartData[i].month) {
                 chartData[i].month = chartData[i].quarter * 3;
             }
-            chartData[i].duration = new Date(chartData[i].year, chartData[i].month-1, 1);
+            chartData[i].duration = new Date(chartData[i].year, chartData[i].month - 1, 1);
             chartData[i].year = String(chartData[i].year);
-            const {hours:cHours, minutes: cMinutes, seconds: cSeconds} = calculateTime((Number(chartData[i].cumulative_contributions)*60*60), true);
-            const {hours:vHours, minutes:vMinutes, seconds: vSeconds} = calculateTime((Number(chartData[i].cumulative_validations)*60*60), true);
+            const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(chartData[i].cumulative_contributions) * 60 * 60), true);
+            const { hours: vHours, minutes: vMinutes, seconds: vSeconds } = calculateTime((Number(chartData[i].cumulative_validations) * 60 * 60), true);
             chartData[i].contributedHours = `${cHours}hrs ${cMinutes}mins ${cSeconds}secs`;
             chartData[i].validatedHours = `${vHours}hrs ${vMinutes}mins ${vSeconds}secs`;
         }
