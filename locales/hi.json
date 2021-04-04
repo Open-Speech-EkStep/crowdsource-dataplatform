@@ -239,7 +239,7 @@
 	"You can change the language in which you want to read content": "आप जिस भाषा में कॉन्टेंट पढ़ना चाहते हैं, उस भाषा में बदल सकते हैं",
 	"Click on the card to start contributing your voice": "अपनी आवाज़ का योगदान देना शुरू करने के लिए कार्ड पर क्लिक करें",
 	"Click on the card to validate what others have spoken": "दूसरे लोगों ने जो बोला है उसकी पुष्टि करने के लिए कार्ड पर क्लिक करें",
-	"Levels and Badging @BoloIndia": "लेवल और बैज @बोलो इंडिया",
+	"Levels and Badging @BoloIndia": "लेवल और बैज",
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate",
 	"bronze": "ब्रॉन्ज",
 	"silver": "सिल्वर",
@@ -258,5 +258,7 @@
 	"You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"/badges\">Know more</a>": "आप <span id=\"next_badge_name\"></span> बैज जीतने से सिर्फ़ <span id=\"sentense_away_count\"></span> वाक्य दूर हैं। <a href=\"/badges\">ज़्यादा जानें</a>",
 	"WoaaH!! You’ve earned your <span id=\"current_badge_name\"></span> Badge": "शाबाश! आपने अपना ब्रॉन्ज <span id=\"current_badge_name\"></span> जीत लिया है",
 	"<span id=\"current_badge_name_1\"></span> Contributor level achieved for contributing <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_count\"></span> वाक्यों का योगदान करने के लिए आपने <span id=\"current_badge_name_1\"></span> योगदानकर्ता लेवल हासिल किया है।",
-	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"/badges\">Know more</a>": "अपना <span id=\"next_badge_name_1\"></span> बैज जीतने के लिए आपका अगला लक्ष्य <span id=\"next_badge_count\"></span> वाक्यों तक पहुंचना है। <a href=\"/badges\">ज़्यादा जानें</a>"
+	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"/badges\">Know more</a>": "अपना <span id=\"next_badge_name_1\"></span> बैज जीतने के लिए आपका अगला लक्ष्य <span id=\"next_badge_count\"></span> वाक्यों तक पहुंचना है। <a href=\"/badges\">ज़्यादा जानें</a>",
+	"Bolo India: A crowdsourcing initiative for Indian languages.": "Bolo India: A crowdsourcing initiative for Indian languages.",
+	"I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?": "I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?"
 }
