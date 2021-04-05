@@ -342,11 +342,12 @@ describe("Running tests for dbOperations", () => {
         const language = 'testLanguage'
         const contributor_id = 10
         const contribution_count = 5
+        const milestoneId = 1
         when(spyDBone).calledWith(getTotalUserContribution, [contributor_id, language]).mockReturnValue({ 'contribution_count': contribution_count });
         when(spyDBany).calledWith(insertRewardQuery, [contributor_id, language, expect.anything(), category]).mockReturnValue([{ 'generated_badge_id': 1 }]);
         when(spyDBoneOrNone).calledWith(getContributorIdQuery, [undefined, userName]).mockReturnValue({ 'contributor_id': contributor_id });
-        when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language]).mockReturnValue({ 'id': 1, 'grade': 'copper', 'milestone': 100 });
-        when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, expect.anything(), category]).mockReturnValue([]);
+        when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language]).mockReturnValue({ 'id': milestoneId, 'grade': 'copper', 'milestone': 100 });
+        when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, category]).mockReturnValue([]);
 
         afterEach(() => {
             jest.clearAllMocks();
@@ -383,22 +384,22 @@ describe("Running tests for dbOperations", () => {
         describe('Test create badge', () => {
 
             test('should call insertRewardQuery id rewardsList is empty', async () => {
-                when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, expect.anything(), category]).mockReturnValue([]);
+                when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, category]).mockReturnValue([]);
 
                 await dbOperations.getRewards(userId, userName, language, category);
 
-                expect(spyDBany).toHaveBeenCalledWith(findRewardInfo, [contributor_id, language, expect.anything(), category])
+                expect(spyDBany).toHaveBeenCalledWith(findRewardInfo, [contributor_id, language, category])
                 expect(spyDBany).toHaveBeenCalledWith(insertRewardQuery, [contributor_id, language, expect.anything(), category])
                 expect(spyDBany).toHaveBeenCalledTimes(2)
                 jest.clearAllMocks()
             });
 
-            test('should not call insertRewardQuery id rewardsList is not empty', async () => {
-                when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, expect.anything(), category]).mockReturnValue([{ "generated_badge_id": 1001 }]);
+            test('should not call insertRewardQuery if matched badge', async () => {
+                when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, category]).mockReturnValue([{ "reward_catalogue_id": milestoneId }]);
 
                 await dbOperations.getRewards(userId, userName, language, category);
 
-                expect(spyDBany).toHaveBeenCalledWith(findRewardInfo, [contributor_id, language, expect.anything(), category])
+                expect(spyDBany).toHaveBeenCalledWith(findRewardInfo, [contributor_id, language, category])
                 expect(spyDBany).toHaveBeenCalledTimes(1)
                 jest.clearAllMocks();
             });
