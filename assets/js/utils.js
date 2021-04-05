@@ -80,7 +80,10 @@ function fetchLocationInfo() {
 }
 
 const performAPIRequest = (url) => {
-  return fetch(url).then((data) => {
+  return fetch(url, {
+    credentials: 'include',
+    mode: 'cors'
+  }).then((data) => {
     if (!data.ok) {
       throw Error(data.statusText || 'HTTP error');
     } else {
