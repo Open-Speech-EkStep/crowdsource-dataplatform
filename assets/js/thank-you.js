@@ -49,6 +49,12 @@ function setSentencesContributed() {
       'Content-Type': 'application/json',
     },
   }).then((data) => {
+    if (!data.ok) {
+      throw Error(data.statusText || 'HTTP error');
+    } else {
+      return data.json();
+    }
+  }).then((data) => {
     localStorage.setItem('badgeId',data.badgeId);
     $("#user-contribution").text(data.contributionCount);
     if (data.isNewBadge) {
