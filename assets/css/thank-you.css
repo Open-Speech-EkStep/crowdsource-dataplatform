@@ -94,8 +94,21 @@
 }
 
 .badges_information {
-  position: absolute;
   bottom: 36px;
+}
+
+@media screen and (min-width: 599px) {
+  .badges_information {
+    position: absolute;
+    bottom: 36px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .reward-img {
+    width: 150px;
+    height: auto;
+  }
 }
 
 @media screen and (max-width: 599px) {
@@ -160,7 +173,14 @@
     width: 240px;
     max-width: 240px;
   }
+
+  .reward-img {
+    width: 100px;
+    height: auto;
+  }
 }
+
+
 
 @media screen and (max-width: 280px) {
   .spree-ribbon{
@@ -168,4 +188,17 @@
     left: -65px;
     max-width: 240px;
   }
+
+  .reward-img {
+    width: 80px;
+    height: auto;
+  }
+}
+
+.disable{
+  opacity: 0.2;
+}
+
+.enable{
+  cursor: pointer;
 }

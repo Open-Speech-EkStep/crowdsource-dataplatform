@@ -162,5 +162,9 @@
 	"Participate more to gain badges": "Participate more to gain badges",
 	"Contributions": "Contributions",
 	"(Recording + Validating)": "(Recording + Validating)",
-	"Badge": "Badge"
+	"Badge": "Badge",
+	"Oops": "Oops",
+	"Page Not Found": "Page Not Found",
+	"Looks like you have taken a wrong turn here": "Looks like you have taken a wrong turn here",
+	"<a class=\"\" href=\"/\">Click Here</a> to go back to home page": "<a class=\"\" href=\"/\">Click Here</a> to go back to home page"
 }
