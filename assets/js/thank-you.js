@@ -41,9 +41,14 @@ function setSentencesContributed() {
   }
 
   const localeStrings = JSON.parse(rawLocaleString);
-  performAPIRequest(
-    `rewards?language=${contributionLanguage}&category=speak&userName=${userName}`
-  ).then((data) => {
+  fetch(`/rewards?language=${contributionLanguage}&category=speak&userName=${userName}`, {
+    method: 'GET',
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then((data) => {
     localStorage.setItem('badgeId',data.badgeId);
     $("#user-contribution").text(data.contributionCount);
     if (data.isNewBadge) {
