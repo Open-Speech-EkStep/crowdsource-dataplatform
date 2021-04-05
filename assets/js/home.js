@@ -345,6 +345,7 @@ const renderCoachMarks = function () {
         }
     });
 
+    // $("body").css("pointer-events", "");
     homePageTour.start();
 };
 

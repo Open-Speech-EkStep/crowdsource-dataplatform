@@ -16,16 +16,10 @@ const {
 
 const CURRENT_INDEX = "currentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
-const SKIP_COUNT = "skipCount";
-const COUNT = "count";
 const SPEAKERS_DATA = "speakersData";
 const totalSentence = 5;
 
 function setSentencesContributed() {
-  // const skipCountInStorage = Number(localStorage.getItem(SKIP_COUNT));
-  // const localCount = Number(localStorage.getItem(COUNT));
-  // const currentIndexInStorage = Number(localStorage.getItem(CURRENT_INDEX));
-  // return localCount + currentIndexInStorage - skipCountInStorage;
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const speakerDetails = localStorage.getItem("speakerDetails");
   let userName = "";
@@ -195,6 +189,8 @@ const showSpeakersHoursData = (speakerDetailsValue) => {
       speakerDetailsValue.find((t) => t.index === 1).duration
     );
     const totalSeconds = totalCompleteSentence;
+
+    // can call getFormattedTime function
     const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
     const remainingAfterHours = totalSeconds % HOUR_IN_SECONDS;
     const minutes = Math.floor(remainingAfterHours / SIXTY);

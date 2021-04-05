@@ -2,7 +2,6 @@ const fetch = require('./fetch')
 const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
 const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('./utils');
-// const { AUDIO_DURATION, SIXTY, HOUR_IN_SECONDS } = require('./constants');
 
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
@@ -392,20 +391,14 @@ function showThankYou() {
     const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
     const aggregateDetails = JSON.parse(stringifyData);
     const totalInfo = aggregateDetails.find((element) => element.language === language);
-    // let totalSentences = 0;
-    // let totalValidations = 0;
     if (totalInfo) {
-        // totalSentences = Math.floor(Number(totalInfo.total_contributions) * HOUR_IN_SECONDS / AUDIO_DURATION);
-        // totalValidations = Math.floor(Number(totalInfo.total_validations) * HOUR_IN_SECONDS / AUDIO_DURATION);
         $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
         $('#spn-total-hr-validated').html(totalInfo.total_validations);
     } else {
         $('#spn-total-hr-contributed').html(0);
         $('#spn-total-hr-validated').html(0);
     }
-    // $('#spn-validation-language-2').html(language);
     $('#spn-validation-count').html(validationCount);
-    // $('#spn-total-contribution-count').html(totalSentences);
 }
 
 function showNoSentencesMessage() {
