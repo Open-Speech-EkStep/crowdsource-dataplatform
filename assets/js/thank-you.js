@@ -83,11 +83,17 @@ function setSentencesContributed() {
       if (data.currentBadgeType.toLowerCase() === "bronze") {
         $bronzeBadgeLink.attr("src","./img/badge_enabled.svg");
         $bronzeBadgeLink.parent().attr("disabled", false);
+        $('#bronze_badge_link_img').addClass('enable');
+        $('#bronze_badge_link_img').removeClass('disable');
+        $("#reward-img").attr('src',"./img/bronze_badge.svg");
       } else if (data.currentBadgeType.toLowerCase() === "silver") {
         $bronzeBadgeLink.attr("src","./img/badge_enabled.svg");
         $bronzeBadgeLink.parent().attr("disabled", false);
         $silverBadgeLink.attr("src","./img/badge_enabled.svg");
         $silverBadgeLink.parent().attr("disabled", false);
+        $('#silver_badge_link_img').addClass('enable');
+        $('#silver_badge_link_img').removeClass('disable');
+        $("#reward-img").attr('src' , "./img/silver_badge.svg");
       } else if (data.currentBadgeType.toLowerCase() === "gold") {
         $bronzeBadgeLink.attr("src","./img/badge_enabled.svg");
         $bronzeBadgeLink.parent().attr("disabled", false);
@@ -95,6 +101,9 @@ function setSentencesContributed() {
         $silverBadgeLink.parent().attr("disabled", false);
         $goldBadgeLink.attr("src","./img/badge_enabled.svg");
         $goldBadgeLink.parent().attr("disabled", false);
+        $('#gold_badge_link_img').addClass('enable');
+        $('#gold_badge_link_img').removeClass('disable');
+        $("#reward-img").attr('src' , "./img/gold_badge.svg");
       } else if (data.currentBadgeType.toLowerCase() === "platinum") {
         $bronzeBadgeLink.attr("src","./img/badge_enabled.svg");
         $bronzeBadgeLink.parent().attr("disabled", false);
@@ -104,6 +113,9 @@ function setSentencesContributed() {
         $goldBadgeLink.parent().attr("disabled", false);
         $platinumBadgeLink.attr("src","./img/badge_enabled.svg");
         $platinumBadgeLink.parent().attr("disabled", false);
+        $('#platinum_badge_link_img').addClass('enable');
+        $('#platinum_badge_link_img').removeClass('disable');
+        $("#reward-img").attr('src', "./img/platinum_badge.svg");
       }
     }
   });
