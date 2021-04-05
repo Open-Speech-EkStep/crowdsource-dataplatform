@@ -168,6 +168,7 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
     else if (arg0 == "Validate") {
         const startValidatingButton = taiko.image({ id: "start_validating" });
         assert.ok(await startValidatingButton.exists());
+        await taiko.waitFor(500);
         await hover(startValidatingButton);
         await click(startValidatingButton);
     }
@@ -250,13 +251,14 @@ step("User should see State Wise distribution and Top Languages", async function
 });
 
 step("User should be able to change to preffered Language to English again", async function () {
+    await taiko.waitFor(500)
     await click(taiko.text("हिंदी"))
     await click(taiko.link("English"));
 
 });
 
 step("Select Contribution Language as <language>", async function (language) {
-    const prefLanguagePopup = await text('Select Your Preferred Language')
+    const prefLanguagePopup = text('Select Your Preferred Language')
     if(!prefLanguagePopup.exists()){
         await click("show All");
     }
@@ -286,6 +288,7 @@ step("When user clicks on the cross button , pop up should close and user should
 
 step("When user clicks on the Feedback link in the footer , user should land on the feedback page", async function () {
     await click(link('Feedback'))
+    await taiko.waitFor(500)
     assert.ok(await text("Subject").exists());
     assert.ok(await text("Description").exists());
 });
