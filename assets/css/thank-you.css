@@ -48,7 +48,6 @@
 .champion-ribbon{
   position: absolute;
   transform: rotate(-45deg);
-  top: 40px;
   left: -56px;
   width: 240px;
   background: linear-gradient(49.38deg, #007bff -227.24%, #89d6e3 169.12%);
@@ -201,4 +200,16 @@
 
 .enable{
   cursor: pointer;
+}
+
+.marquee {
+  white-space: nowrap;
+  text-align: right;
+  width: 100%;
+  -webkit-animation: rightThenLeft 15s linear infinite;
+}
+
+@-webkit-keyframes rightThenLeft {
+  0% {margin-left: 100%;}
+  100% {margin-left:-100%;}
 }
