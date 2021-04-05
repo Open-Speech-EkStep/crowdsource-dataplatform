@@ -155,7 +155,8 @@ const checkNextMilestoneQuery = `select grade, reward_milestone.milestone, id fr
 and language = $2 order by milestone limit 1) \
 as reward_milestone where id=reward_milestone.rid and grade is not null`;
 
-const findRewardInfo = 'select generated_badge_id from rewards where contributor_id = $1 and language = $2 and reward_catalogue_id = $3 and category = $4';
+const findRewardInfo = 'select reward_catalogue_id, reward_catalogue.grade, generated_badge_id from rewards inner join reward_catalogue \
+on reward_catalogue.id= rewards.reward_catalogue_id where contributor_id = $1 and language = $2 and category = $3';
 
 const insertRewardQuery = `insert into rewards (contributor_id, language, reward_catalogue_id, category) select $1, $2, $3, $4 \
 where not exists (select 1 from rewards where contributor_id=$1 and language=$2 and reward_catalogue_id=$3 and category=$4) returning generated_badge_id`;
