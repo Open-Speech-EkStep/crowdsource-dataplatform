@@ -10,7 +10,8 @@
     "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest",
     "gulp": "gulp",
     "functional_test": "cd functional_tests && npm i && gauge run specs/Vakyansh.spec",
-    "db-migrate": "npx db-migrate up --config migrations/config/migration_config.json -e dev"
+    "db-migrate": "npx db-migrate up --config migrations/config/migration_config.json -e dev",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -64,6 +65,7 @@
     "gulp-htmlmin": "^5.0.1",
     "gulp-imagemin": "^7.1.0",
     "gulp-minify": "^3.1.0",
+    "husky": "^6.0.0",
     "jest": "^26.6.3",
     "nodemon": "^2.0.3",
     "supertest": "^6.1.3"
