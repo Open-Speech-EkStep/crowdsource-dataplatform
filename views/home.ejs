@@ -235,6 +235,7 @@
                 <% if(!isCookiePresent) { %>
                     <script>document.getElementById("toggle-content-language").click()</script>
                     <% } else { %>
+                            <script>$("body")&&$("body").css("pointer-events","none")</script>
                             <script src="js/home.js" id="home-page" default-lang="<%= defaultLang %>"></script>
                             <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
                             <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
