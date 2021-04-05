@@ -41,20 +41,9 @@ function setSentencesContributed() {
   }
 
   const localeStrings = JSON.parse(rawLocaleString);
-  fetch(`/rewards?language=${contributionLanguage}&category=speak&userName=${userName}`, {
-    method: 'GET',
-    credentials: 'include',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }).then((data) => {
-    if (!data.ok) {
-      throw Error(data.statusText || 'HTTP error');
-    } else {
-      return data.json();
-    }
-  }).then((data) => {
+  performAPIRequest(
+    `rewards?language=${contributionLanguage}&category=speak&userName=${userName}`
+  ).then((data) => {
     localStorage.setItem('badgeId',data.badgeId);
     $("#user-contribution").text(data.contributionCount);
     if (data.isNewBadge) {
