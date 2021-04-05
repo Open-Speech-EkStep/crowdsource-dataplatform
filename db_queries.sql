@@ -42,7 +42,7 @@ SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select state, total_spea
 SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select language, total_speakers,ROUND(total_contributions::numeric/3600,3) as total_contributions,ROUND(total_validations::numeric/3600, 3) as total_validations from language_group_contributions)t;
 
 \o cumulativeDataByLanguageAndState.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select state, language, total_speakers, total_contributions, total_validations from language_and_state_group_contributions)t;
+SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select state, language, total_speakers, ROUND(total_contributions::numeric/3600,3) as total_contributions, ROUND(total_validations::numeric/3600,3) as total_validations from language_and_state_group_contributions)t;
 
 \o listLanguages.json 
 SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  distinct(language) from contributions_and_demo_stats)t;
