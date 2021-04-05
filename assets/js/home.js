@@ -337,7 +337,7 @@ const renderCoachMarks = function () {
         }
     });
 
-    $("body").css("pointer-events", "");
+    // $("body").css("pointer-events", "");
     homePageTour.start();
 };
 
