@@ -207,6 +207,10 @@ h6,
   max-width: max-content;
 }
 
+.tour-tour .disabled {
+  pointer-events: none;
+}
+
 .spinner {
   width: 3rem;
   height: 3rem;
