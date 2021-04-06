@@ -399,16 +399,28 @@ const getContributorId = async (userId, userName) => {
 }
 
 const createBadge = async (contributor_id, language, currentMilestoneData, category) => {
-    let isNewBadge = false;
-    let rewardIdList = await db.any(findRewardInfo, [contributor_id, language, currentMilestoneData.id, category]);
+    let isNewBadge = false, generatedBadgeId = '';
 
-    if (rewardIdList.length == 0) {
-        rewardIdList = await db.any(insertRewardQuery, [contributor_id, language, currentMilestoneData.id, category]);
+    let badges = await db.any(findRewardInfo, [contributor_id, language, category]);
+    const matchedBadge = badges.filter(function(value){
+        if (value.reward_catalogue_id === currentMilestoneData.id) {
+            return value
+        }
+    })
+
+    badges = badges.map((value) =>{
+        return { 'grade': value.grade, 'generated_badge_id': value.generated_badge_id }
+    })
+
+    if (matchedBadge.length === 0) {
+        let insertResponse = await db.any(insertRewardQuery, [contributor_id, language, currentMilestoneData.id, category]);
         if (currentMilestoneData.grade)
             isNewBadge = true;
+        generatedBadgeId = insertResponse[0].generated_badge_id;
+        badges.push({ 'grade': currentMilestoneData.grade, 'generated_badge_id': generatedBadgeId })
     }
-    let generatedBadgeId = rewardIdList[0].generated_badge_id;
-    return { isNewBadge, generatedBadgeId };
+
+    return { isNewBadge, generatedBadgeId, badges };
 }
 
 const getNextMilestoneData = async (contribution_count, language) => {
@@ -442,9 +454,9 @@ const getRewards = async (userId, userName, language, category) => {
 
     const { isCurrentAvailable, currentMilestoneData } = await getCurrentMilestoneData(contribution_count, language);
 
-    let isNewBadge = false, generatedBadgeId = '';
+    let isNewBadge = false, generatedBadgeId = '', badges = [];
     if (isCurrentAvailable) {
-        ({ isNewBadge, generatedBadgeId } = await createBadge(contributor_id, language, currentMilestoneData, category, isNewBadge, generatedBadgeId));
+        ({ isNewBadge, generatedBadgeId, badges } = await createBadge(contributor_id, language, currentMilestoneData, category, isNewBadge, generatedBadgeId));
     }
 
     const nextMilestoneData = await getNextMilestoneData(contribution_count, language);
@@ -455,7 +467,7 @@ const getRewards = async (userId, userName, language, category) => {
     return {
         "badgeId": generatedBadgeId, "currentBadgeType": currentBadgeType, "nextBadgeType": nextBadgeType,
         "currentMilestone": currentMilestone, "nextMilestone": nextMilestone, "contributionCount": Number(contribution_count),
-        "isNewBadge": isNewBadge
+        "isNewBadge": isNewBadge, 'badges': badges
     }
 }
 
