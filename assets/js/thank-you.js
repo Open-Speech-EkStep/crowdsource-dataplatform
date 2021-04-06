@@ -52,6 +52,7 @@ function setSentencesContributed() {
       $("#sentence_away_msg").addClass("d-none");
       $("#user-contribution-msg").addClass("d-none");
       $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
+      $("#reward-img").attr('src', `./img/${data.currentBadgeType.toLowerCase()}_badge.svg`);
     } else if (data.contributionCount <= 5) {
       $("#champion_text").removeClass("d-none");
       $("#contribution_text").removeClass("d-none");
@@ -71,27 +72,19 @@ function setSentencesContributed() {
       const $goldBadgeLink = $("#gold_badge_link img");
       const $platinumBadgeLink = $("#platinum_badge_link img");
       if (data.currentBadgeType.toLowerCase() === "bronze") {
-        // $bronzeBadgeLink.attr("src", "./img/badge_enabled.svg");
         $bronzeBadgeLink.parent().attr("disabled", false);
         $('#bronze_badge_link_img').addClass('enable');
         $('#bronze_badge_link_img').removeClass('disable');
-        $("#reward-img").attr('src', "./img/bronze_badge.svg");
       } else if (data.currentBadgeType.toLowerCase() === "silver") {
-        // $bronzeBadgeLink.attr("src", "./img/badge_enabled.svg");
         $bronzeBadgeLink.parent().attr("disabled", false);
-        // $silverBadgeLink.attr("src", "./img/badge_enabled.svg");
         $silverBadgeLink.parent().attr("disabled", false);
         $('#bronze_badge_link_img').addClass('enable');
         $('#bronze_badge_link_img').removeClass('disable');
         $('#silver_badge_link_img').addClass('enable');
         $('#silver_badge_link_img').removeClass('disable');
-        $("#reward-img").attr('src', "./img/silver_badge.svg");
       } else if (data.currentBadgeType.toLowerCase() === "gold") {
-        // $bronzeBadgeLink.attr("src", "./img/badge_enabled.svg");
         $bronzeBadgeLink.parent().attr("disabled", false);
-        // $silverBadgeLink.attr("src", "./img/badge_enabled.svg");
         $silverBadgeLink.parent().attr("disabled", false);
-        // $goldBadgeLink.attr("src", "./img/badge_enabled.svg");
         $goldBadgeLink.parent().attr("disabled", false);
         $('#bronze_badge_link_img').addClass('enable');
         $('#bronze_badge_link_img').removeClass('disable');
@@ -99,15 +92,10 @@ function setSentencesContributed() {
         $('#silver_badge_link_img').removeClass('disable');
         $('#gold_badge_link_img').addClass('enable');
         $('#gold_badge_link_img').removeClass('disable');
-        $("#reward-img").attr('src', "./img/gold_badge.svg");
       } else if (data.currentBadgeType.toLowerCase() === "platinum") {
-        // $bronzeBadgeLink.attr("src", "./img/badge_enabled.svg");
         $bronzeBadgeLink.parent().attr("disabled", false);
-        // $silverBadgeLink.attr("src", "./img/badge_enabled.svg");
         $silverBadgeLink.parent().attr("disabled", false);
-        // $goldBadgeLink.attr("src", "./img/badge_enabled.svg");
         $goldBadgeLink.parent().attr("disabled", false);
-        // $platinumBadgeLink.attr("src", "./img/badge_enabled.svg");
         $platinumBadgeLink.parent().attr("disabled", false);
         $('#bronze_badge_link_img').addClass('enable');
         $('#bronze_badge_link_img').removeClass('disable');
@@ -117,7 +105,6 @@ function setSentencesContributed() {
         $('#gold_badge_link_img').removeClass('disable');
         $('#platinum_badge_link_img').addClass('enable');
         $('#platinum_badge_link_img').removeClass('disable');
-        $("#reward-img").attr('src', "./img/platinum_badge.svg");
       }
     }
   });
