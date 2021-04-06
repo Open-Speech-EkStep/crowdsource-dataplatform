@@ -52,7 +52,7 @@ function setSentencesContributed() {
       $("#user-contribution-msg").addClass("d-none");
       $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
       $("#reward-img").attr('src', `./img/${data.currentBadgeType.toLowerCase()}_badge.svg`);
-    } else if (data.contributionCount <= 5) {
+    } else if (data.contributionCount < 5) {
       $("#champion_text").removeClass("d-none");
       $("#contribution_text").removeClass("d-none");
       $("#sentence_away_msg").removeClass("d-none");
