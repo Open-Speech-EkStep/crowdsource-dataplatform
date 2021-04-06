@@ -1,6 +1,8 @@
+const {checkCookie, showLanguagePopup, redirectToLocalisedPage} = require('./locale')
 const {drawMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest} = require('./utils')
 const {
+    testUserName,
     setSpeakerDetails,
     setUserModalOnShown,
     setUserNameOnInputFocus,
@@ -165,10 +167,7 @@ function initializeBlock() {
     const age = document.getElementById('age');
     const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
-    //const $tncCheckbox = $('#tnc');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
-
-    // $tncCheckbox.prop('checked', false);
 
     toggleFooterPosition();
     let top_lang = getDefaultLang();
@@ -182,7 +181,7 @@ function initializeBlock() {
         if (top_lang !== language) {
             top_lang = language;
             localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-            document.cookie = `i18n=en`;
+            localStorage.setItem("i18n", "en");
             window.location.href = "/";
             setLangNavBar(targetedDiv, language, $languageNavBar);
             updateHrsForSayAndListen(language);
@@ -201,7 +200,7 @@ function initializeBlock() {
             $6th_place.addClass('d-none');
             targetedDiv.classList.add('active');
             updateHrsForSayAndListen(language);
-            document.cookie = `i18n=en`;
+            localStorage.setItem("i18n", "en");
             window.location.href = "/";
         }
     });
@@ -342,6 +341,13 @@ const renderCoachMarks = function () {
 };
 
 $(document).ready(function () {
+    if (!localStorage.getItem("i18n")){
+        showLanguagePopup();
+        return;
+    }
+    else {
+        redirectToLocalisedPage();
+    }
     clearLocalStorage();
     getLocaleString().then(()=>{
         initializeBlock();

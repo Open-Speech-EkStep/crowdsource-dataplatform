@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/feedback.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/feedback.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 
 <body>
@@ -56,15 +56,15 @@
                     <div class="col-sm-6 offset-sm-3 d-flex flex-column align-items-center text-center">
                         <h2 class="font-wt-900"><%= __('Thank You for your valuable feedback')%></h2>
                         <p class="p-5"><%= __('Your feedback helps us keep Bolo India relevant, we appreciate you taking time to leave the feedback')%></p>
-                        <a role="button" href="/" class="btn btn-outline-primary d-flex justify-content-center align-items-center mt-3" id="back_to_home_btn"><%= __('Back to Home')%></a>
+                        <a role="button" href="./home.html" class="btn btn-outline-primary d-flex justify-content-center align-items-center mt-3" id="back_to_home_btn"><%= __('Back to Home')%></a>
                     </div>
                 </div>
             </div>
         </div>
-        <%- include common/footer.ejs %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <%- include common/footer.ejs %>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="js/feedback.js"></script>
+        <script src="../js/feedback.js"></script>
 </body>
 
 </html>
