@@ -37,7 +37,6 @@ function setSentencesContributed() {
   performAPIRequest(
     `rewards?language=${contributionLanguage}&category=speak&userName=${userName}`
   ).then((data) => {
-    console.log(data)
     localStorage.setItem('badgeId', data.badgeId);
     localStorage.setItem('badges', JSON.stringify(data.badges));
     $("#user-contribution").text(data.contributionCount);
