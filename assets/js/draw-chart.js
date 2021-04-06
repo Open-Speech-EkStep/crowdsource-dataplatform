@@ -119,32 +119,21 @@ const getTimelinenUrl = (language, timeframe = "weekly") => {
 }
 
 const buildTimelineGraph = (language, timeframe) => {
-    const url = getTimelinenUrl(language, timeframe);
-    getJson(url)
-        .then(timelineData => {
-            if (language) {
-                timelineData = timelineData.filter(item => {
-                    return item.language == language
-                })
-            }
-            let hoursContributed = 0, hoursValidated = 0;
+    fetch(`/timeline?language=${language}&timeframe=${timeframe}`)
+    .then((data) => {
+        if (!data.ok) {
+            throw Error(data.statusText || 'HTTP error');
+        } else {
+            return data.json();
+        }
+    }).then((data) => {
+        $timelineLoader.hide().removeClass('d-flex');
+        $timelineChart.removeClass('d-none');
 
-            if (timelineData.length !== 0) {
-                hoursContributed = timelineData[timelineData.length - 1]['cumulative_contributions'] || 0;
-                hoursValidated = timelineData[timelineData.length - 1]['cumulative_validations'] || 0;
-            }
-            const res = {
-                'total-hours-contributed': hoursContributed,
-                'total-hours-validated': hoursValidated,
-                "data": timelineData,
-            };
-            $timelineLoader.hide().removeClass('d-flex');
-            $timelineChart.removeClass('d-none');
-
-            drawTimelineChart(res);
-        }).catch((err) => {
-            console.log(err);
-        });
+        drawTimelineChart(data);
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 function showChartLoaders() {
@@ -162,34 +151,8 @@ function buildGraphs(language, timeframe) {
     // $.fn.popover.Constructor.Default.whiteList.tr = [];
     // $.fn.popover.Constructor.Default.whiteList.td = [];
 
-    const url = getTimelinenUrl(language, timeframe);
-    getJson(url)
-        .then(timelineData => {
-            if (language) {
-                timelineData = timelineData.filter(item => {
-                    return item.language == language
-                })
-            }
-            let hoursContributed = 0, hoursValidated = 0;
-
-            if (timelineData.length !== 0) {
-                hoursContributed = timelineData[timelineData.length - 1]['cumulative_contributions'] || 0;
-                hoursValidated = timelineData[timelineData.length - 1]['cumulative_validations'] || 0;
-            }
-            const res = {
-                'total-hours-contributed': hoursContributed,
-                'total-hours-validated': hoursValidated,
-                "data": timelineData,
-            };
-            showChartLoaders();
-
-            drawTimelineChart(res);
-        }).catch((err) => {
-            console.log(err);
-            hideChartLoaders();
-        });
-
     Promise.all([
+        fetch(`/timeline?language=${language}&timeframe=${timeframe}`),
         fetch(`/contributions/gender?language=${language}`),
         fetch(`/contributions/age?language=${language}`)
     ]).then(function (responses) {
@@ -201,8 +164,11 @@ function buildGraphs(language, timeframe) {
             $chartLoaders.hide().removeClass('d-flex');
             $charts.removeClass('d-none');
 
-            const genderData = getGenderData(data[0]);
-            const ageGroupData = getAgeGroupData(data[1].data, 'age_group').sort((a, b) => Number(a.speakers) - Number(b.speakers));
+            const genderData = getGenderData(data[1]);
+            const ageGroupData = getAgeGroupData(data[2].data, 'age_group').sort((a, b) => Number(a.speakers) - Number(b.speakers));
+
+            // Draw timeline chart
+            drawTimelineChart(data[0]);
 
             // Draw gender chart
             drawGenderChart(genderData);
@@ -219,8 +185,8 @@ function buildGraphs(language, timeframe) {
                     'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'
                 );
                 fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
-                fetch('../css/notyf.min.css');
-                fetch('../css/record.css');
+                fetch('css/notyf.min.css');
+                fetch('css/record.css');
             }, 2000);
         } catch (error) {
             console.log(error);

@@ -140,32 +140,23 @@ const clearLocalStorage = function () {
 }
 
 const getStatsSummary = function () {
-    $.getJSON("../aggregated-json/cumulativeDataByState.json", (data) => {
-        drawMap({data: data});
-    });
-    $.getJSON("../aggregated-json/topLanguagesByHoursContributed.json", (data) => {
-        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(data));
-        showByHoursChart();
-        if(data.length === 0) {
-            $("#bar_charts_container").hide();
-            $("#view_all_btn").hide();
-        } else {
-            $("#bar_charts_container").show();
-            $("#view_all_btn").show();
-        }
-    });
-    $.getJSON("../aggregated-json/topLanguagesBySpeakerContributions.json", (data) => {
-        localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(data));
-    });
-    $.getJSON("../aggregated-json/cumulativeDataByLanguage.json", (data) => {
-        localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(data));
-    });
-    $.getJSON("../aggregated-json/cumulativeCount.json", (data) => {
-        getStatistics(data[0]);
-        window.setTimeout(() => {
-            setDefaultLang()
-        }, 1000);
-    });
+    performAPIRequest('/stats/summary')
+        .then(response => {
+            drawMap({data: response.aggregate_data_by_state});
+            localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response.top_languages_by_hours));
+            showByHoursChart();
+            localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
+            localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
+            getStatistics(response.aggregate_data_count[0]);
+            setDefaultLang();
+            if(response.top_languages_by_hours.length === 0) {
+                $("#bar_charts_container").hide();
+                $("#view_all_btn").hide();
+            } else {
+                $("#bar_charts_container").show();
+                $("#view_all_btn").show();
+            }
+        });
 }
 
 

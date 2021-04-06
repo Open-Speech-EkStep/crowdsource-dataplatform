@@ -9,6 +9,18 @@ const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
 
+const fetchDetail = (language) => {
+    const byLanguage = language ? true : false;
+    const url = language ? '/aggregate-data-count?byLanguage=true' : '/aggregate-data-count'
+    return fetch(url).then((data) => {
+        if (!data.ok) {
+            throw Error(data.statusText || 'HTTP error');
+        } else {
+            return Promise.resolve(data.json());
+        }
+    });
+};
+
 const getSpeakersData = (data, lang) => {
     localStorage.setItem('previousLanguage', lang);
     const speakersData = {
@@ -53,27 +65,33 @@ function updateLanguage(language) {
     const $speakersDataContributionValue = $('#contributed-value');
     const $speakersDataValidationValue = $('#validated-value');
     const activeDurationText = $('#duration').find('.active')[0].dataset.value;
-    const url = language ? '../aggregated-json/cumulativeDataByLanguage.json' : '../aggregated-json/cumulativeCount.json'
-    getJson(url)
-        .then(res => {
+
+    fetchDetail(language)
+        .then((data) => {
             try {
-                const langaugeExists = isLanguageAvailable(res, language);
+                const langaugeExists = isLanguageAvailable(data.data, language);
+                if (data.last_updated_at) {
+                    $('#data-updated').text(` ${data.last_updated_at}`);
+                    $('#data-updated').removeClass('d-none');
+                } else {
+                    $('#data-updated').addClass('d-none');
+                }
                 if (langaugeExists) {
                     $speakersDataLoader.removeClass('d-none');
                     $speakerDataLanguagesWrapper.addClass('d-none');
                     $speakerDataDetails.addClass('d-none');
                     updateGraph(language, activeDurationText);
-                    const speakersData = getSpeakersData(res, language);
+                    const speakersData = getSpeakersData(data.data, language);
                     const {
                         hours: contributedHours,
                         minutes: contributedMinutes,
                         seconds: contributedSeconds
-                    } = calculateTime(speakersData.contributions.toFixed(3) * 60 * 60);
+                    } = calculateTime(speakersData.contributions.toFixed(3)*60*60);
                     const {
                         hours: validatedHours,
                         minutes: validatedMinutes,
                         seconds: validatedSeconds
-                    } = calculateTime(speakersData.validations.toFixed(3) * 60 * 60);
+                    } = calculateTime(speakersData.validations.toFixed(3)*60*60);
 
                     if (speakersData.languages) {
                         $speakerDataLanguagesValue.text(speakersData.languages);
@@ -105,16 +123,9 @@ function updateLanguage(language) {
             } catch (error) {
                 console.log(error);
             }
-        });
-    getJson("../aggregated-json/lastUpdatedAtQuery.json")
-        .then(res => {
-            const lastUpdatedAt = moment(res['timezone']).format('DD-MM-YYYY, h:mm:ss a')
-            if (lastUpdatedAt) {
-                $('#data-updated').text(` ${lastUpdatedAt}`);
-                $('#data-updated').removeClass('d-none');
-            } else {
-                $('#data-updated').addClass('d-none');
-            }
+        })
+        .catch((err) => {
+            console.log(err);
         });
 }
 
