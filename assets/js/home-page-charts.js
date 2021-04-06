@@ -1,6 +1,6 @@
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
-const { calculateTime, formatTime, getJson } = require('./utils');
+const { calculateTime, formatTime, getJson, performAPIRequest } = require('./utils');
 
 const statesInformation = [
   { id: 'IN-TG', state: 'Telangana', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
