@@ -180,14 +180,14 @@ function buildGraphs(language, timeframe) {
             drawAgeGroupChart(ageGroupData);
 
             //lazy load other css
-            // setTimeout(() => {
-            //     fetch(
-            //         'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'
-            //     );
-            //     fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
-            //     fetch('../css/notyf.min.css');
-            //     fetch('../css/record.css');
-            // }, 2000);
+            setTimeout(() => {
+                fetch(
+                    'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'
+                );
+                fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
+                fetch('../css/notyf.min.css');
+                fetch('../css/record.css');
+            }, 2000);
         } catch (error) {
             console.log(error);
             $chartLoaders.show().addClass('d-flex');
