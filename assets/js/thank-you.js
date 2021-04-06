@@ -1,3 +1,4 @@
+const fetch = require('./fetch')
 const {
   SIXTY,
   HOUR_IN_SECONDS,
@@ -35,7 +36,7 @@ function setSentencesContributed() {
 
   const localeStrings = JSON.parse(rawLocaleString);
   performAPIRequest(
-    `rewards?language=${contributionLanguage}&category=speak&userName=${userName}`
+    `/rewards?language=${contributionLanguage}&category=speak&userName=${userName}`
   ).then((data) => {
     localStorage.setItem('badgeId', data.badgeId);
     localStorage.setItem('badges', JSON.stringify(data.badges));

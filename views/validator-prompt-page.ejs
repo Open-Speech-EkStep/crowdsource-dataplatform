@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/instructions-modal.css">
-    <link rel="stylesheet" type="text/css" href="/css/validator-prompt.css">
-    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/instructions-modal.css">
+    <link rel="stylesheet" type="text/css" href="../css/validator-prompt.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 
 <body>
@@ -75,10 +75,10 @@
                                 <%= __('Thank you for validating!') %>
                             </label>
                             <p>
-                                <%- __('Thank you for validating  <span id="spn-validation-count" class="font-wt-900"></span> recordings') %>
+                                <%- __('You have helped us validate <span id="spn-validation-count" class="font-wt-900"></span> recordings') %>
                             </p>
                             <div class="row justify-content-center mb-3 mx-2">
-                                <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div><a class="btn btn-primary h6 shadow rounded mt-4 p-3 my-lg-5 col-lg-4 col-md-4 col-sm-10" href="/validator-page">
+                                <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div><a class="btn btn-primary h6 shadow rounded mt-4 p-3 my-lg-5 col-lg-4 col-md-4 col-sm-10" href="./validator-page.html">
                                     <%= __('Validate More') %>
                                 </a>
                                 <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div>
@@ -96,7 +96,7 @@
                                 <div><span class="spinner w-h-5"></span></div>
                             </div>
                             <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn">
-                                <div class="audioplayer d-flex justify-content-center align-items-center"><img src="./img/play.svg" alt="play" id="play" class="cursor-pointer"> <img src="./img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer"> <img src="./img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer"></div>
+                                <div class="audioplayer d-flex justify-content-center align-items-center"><img src="../img/play.svg" alt="play" id="play" class="cursor-pointer"> <img src="../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer"> <img src="../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer"></div>
                                     <h3 class="font-wt-800 text-center mt-2" id="audioplayer-text_play">
                                         <%= __('Play') %>
                                     </h3>
@@ -135,13 +135,13 @@
 
                 <%- include modals/validator-instructions.ejs %>
                 <%- include modals/validation-report-modal.ejs %>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                     <%- include common/footer.ejs %>
                         <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
                         <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
-                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
                         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-                        <script src="/js/validator-prompt-page.js"></script>
+                        <script src="../js/validator-prompt-page.js"></script>
             </div>
         </div>
 </body>
