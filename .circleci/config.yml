@@ -111,7 +111,7 @@ workflows:
           env_name: dev
           distributionId: ${DEV_DISTRIBUTION_ID}
           requires:
-            - migrate_dev_aws
+            - push_dev_image
 
       - aws-ecr/build-and-push-image:
           name: push_dev_image
@@ -136,17 +136,17 @@ workflows:
           requires:
             - push_dev_image
 
-      # - run_functional_tests:
-      #     name: functional_tests_dev
-      #     env_name: dev
-      #     requires:
-      #       - dev_deployment_eks      
+      - run_functional_tests:
+          name: functional_tests_dev
+          env_name: dev
+          requires:
+            - dev_deployment_eks      
 
       - approve_to_deploy:
           name: approve_test_deployment_eks
           type: approval
           requires:
-            - dev_deployment_eks
+            - functional_tests_dev
 
       - db_migrate_aws:
           name: migrate_test_aws
@@ -159,7 +159,7 @@ workflows:
           env_name: test
           distributionId: ${TEST_DISTRIBUTION_ID}
           requires:
-            - migrate_test_aws
+            - push_test_image
 
       - aws-ecr/build-and-push-image:
           name: push_test_image
@@ -175,17 +175,17 @@ workflows:
           requires:
             - push_test_image
 
-      # - run_functional_tests:
-      #     name: functional_tests_test
-      #     env_name: test
-      #     requires:
-      #       - test_deployment_eks
+      - run_functional_tests:
+          name: functional_tests_test
+          env_name: test
+          requires:
+            - test_deployment_eks
 
       - approve_to_deploy:
           name: approve_prod_deployment_eks
           type: approval
           requires:
-            - test_deployment_eks
+            - functional_tests_test
 
       - db_migrate_aws:
           name: migrate_prod_aws
@@ -198,7 +198,7 @@ workflows:
           env_name: prod
           distributionId: ${PROD_DISTRIBUTION_ID}
           requires:
-            - migrate_prod_aws
+            - push_prod_image
 
       - aws-ecr/build-and-push-image:
           name: push_prod_image
