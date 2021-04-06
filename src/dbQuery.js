@@ -105,6 +105,8 @@ FROM src \
 WHERE "sentenceId" = $5 AND contributed_by  = src.contributor_id \
 returning "audio_path";`
 
+const updateMaterializedViews = 'REFRESH MATERIALIZED VIEW contributions_and_demo_stats;REFRESH MATERIALIZED VIEW daily_stats_complete;REFRESH MATERIALIZED VIEW gender_group_contributions;REFRESH MATERIALIZED VIEW age_group_contributions;REFRESH MATERIALIZED VIEW language_group_contributions;REFRESH MATERIALIZED VIEW state_group_contributions;REFRESH MATERIALIZED VIEW language_and_state_group_contributions;'
+
 const updateSentencesWithContributedState = 'update sentences set state = \'contributed\' where "sentenceId" = $1;'
 
 const getCountOfTotalSpeakerAndRecordedAudio = `select  count(DISTINCT(con.*)), 0 as index, 0 as duration \
@@ -164,33 +166,34 @@ where not exists (select 1 from rewards where contributor_id=$1 and language=$2 
 const getContributorIdQuery = 'select contributor_id from contributors where contributor_identifier = $1 and user_name = $2';
 
 module.exports = {
-  unassignIncompleteSentences,
-  sentencesCount,
-  updateAndGetSentencesQuery,
-  updateAndGetUniqueSentencesQuery,
-  updateAndGetOrderedSentencesQuery,
-  getValidationSentencesQuery,
-  updateContributionDetails,
-  getCountOfTotalSpeakerAndRecordedAudio,
-  getMotherTonguesData,
-  getGenderData,
-  getAgeGroupsData,
-  unassignIncompleteSentencesWhenLanChange,
-  updateSentencesWithContributedState,
-  addValidationQuery,
-  updateSentencesWithValidatedState,
-  feedbackInsertion,
-  getAudioPath,
-  saveReportQuery,
-  getSentencesForLaunch,
-  markContributionSkippedQuery,
-  rewardsInfoQuery,
-  getTotalUserContribution,
-  findRewardInfo,
-  insertRewardQuery,
-  getContributorIdQuery,
-  checkCurrentMilestoneQuery,
-  checkNextMilestoneQuery,
-  markSentenceReported,
-  markContributionReported
+    unassignIncompleteSentences,
+    sentencesCount,
+    updateAndGetSentencesQuery,
+    updateAndGetUniqueSentencesQuery,
+    updateAndGetOrderedSentencesQuery,
+    getValidationSentencesQuery,
+    updateContributionDetails,
+    getCountOfTotalSpeakerAndRecordedAudio,
+    getMotherTonguesData,
+    getGenderData,
+    getAgeGroupsData,
+    unassignIncompleteSentencesWhenLanChange,
+    updateSentencesWithContributedState,
+    addValidationQuery,
+    updateSentencesWithValidatedState,
+    feedbackInsertion,
+    getAudioPath,
+    saveReportQuery,
+    getSentencesForLaunch,
+    markContributionSkippedQuery,
+    rewardsInfoQuery,
+    getTotalUserContribution,
+    findRewardInfo,
+    insertRewardQuery,
+    getContributorIdQuery,
+    checkCurrentMilestoneQuery,
+    checkNextMilestoneQuery,
+    markSentenceReported,
+    markContributionReported,
+    updateMaterializedViews
 }

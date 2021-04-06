@@ -31,7 +31,8 @@ const {
     getContributorIdQuery,
     findRewardInfo,
     markSentenceReported,
-    markContributionReported
+    markContributionReported,
+    updateMaterializedViews
 } = require('./dbQuery');
 
 const {
@@ -115,6 +116,7 @@ const updateDbWithAudioPath = function (
     ])
         .then(() => {
             db.none(updateSentencesWithContributedState, [sentenceId]).then();
+            db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
         .catch((err) => {
