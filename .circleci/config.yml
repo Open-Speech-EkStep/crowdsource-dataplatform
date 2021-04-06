@@ -136,17 +136,17 @@ workflows:
           requires:
             - push_dev_image
 
-      - run_functional_tests:
-          name: functional_tests_dev
-          env_name: dev
-          requires:
-            - dev_deployment_eks      
+      # - run_functional_tests:
+      #     name: functional_tests_dev
+      #     env_name: dev
+      #     requires:
+      #       - dev_deployment_eks      
 
       - approve_to_deploy:
           name: approve_test_deployment_eks
           type: approval
           requires:
-            - functional_tests_dev
+            - dev_deployment_eks
 
       - db_migrate_aws:
           name: migrate_test_aws
