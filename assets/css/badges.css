@@ -241,5 +241,9 @@ h6,
     vertical-align: middle;
 }
 
+.table tbody td {
+    vertical-align: middle;
+}
+
 
 
