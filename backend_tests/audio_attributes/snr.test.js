@@ -1,5 +1,6 @@
 const { calculateSNR } = require('../../src/audio_attributes/snr');
 const { async } = require('regenerator-runtime');
+jest.setTimeout(10000);
 
 describe('SNR ', function () {
     describe('calculateSNR()', function () {

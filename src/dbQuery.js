@@ -84,16 +84,19 @@ where sentences."state" is null and language = $4 and label=$3 and cont."action"
 select ins."sentenceId", sentences.sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";`
 
-const getValidationSentencesQuery = `select con."sentenceId", sen.sentence, con.contribution_id \
+const getValidationSentencesQuery = `
+    'select con."sentenceId", sen.sentence, con.contribution_id \
     from contributions con inner join sentences sen on sen."sentenceId"=con."sentenceId" and con.action=\'completed\' \
-    where sen."state"= \'contributed\' and language=$1 group by con."sentenceId", sen.sentence, con.contribution_id order by RANDOM() limit 5;`
+    left join validations val on val.contribution_id = con.contribution_id and val.validated_by!= $2 \
+    where sen."state"= \'contributed\' and language=$1 group by con."sentenceId", sen.sentence, con.contribution_id limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, "action", validated_by, "date", "state_region", "country") \
 select contribution_id, $3, $1, now(), $5, $6 from contributions inner join sentences on sentences."sentenceId"=contributions."sentenceId" \
 where sentences."sentenceId" = $2 and sentences.state = \'contributed\' and contribution_id=$4;`
 
 const updateSentencesWithValidatedState = `update sentences set "state" = \
-\'validated\' where "sentenceId" = $1;`
+\'validated\' where "sentenceId" = $1 and (select count(*) from validations where contribution_id = $2 and action != 'skip') >= \
+(select value from configurations where config_name = 'validation_count');`
 
 const updateContributionDetails = `WITH src AS ( \
     select contributor_id from "contributors" \
@@ -165,6 +168,8 @@ where not exists (select 1 from rewards where contributor_id=$1 and language=$2 
 
 const getContributorIdQuery = 'select contributor_id from contributors where contributor_identifier = $1 and user_name = $2';
 
+const getValidationCountQuery = 'select count(*) from validations where contribution_id = $1 and action != \'skip\'';
+
 module.exports = {
     unassignIncompleteSentences,
     sentencesCount,
@@ -195,5 +200,6 @@ module.exports = {
     checkNextMilestoneQuery,
     markSentenceReported,
     markContributionReported,
-    updateMaterializedViews
+    updateMaterializedViews,
+    getValidationCountQuery
 }

@@ -32,7 +32,8 @@ const {
     findRewardInfo,
     markSentenceReported,
     markContributionReported,
-    updateMaterializedViews
+    updateMaterializedViews,
+    getValidationCountQuery
 } = require('./dbQuery');
 
 const {
@@ -78,6 +79,8 @@ let cn = {
 };
 
 const db = pgp(cn);
+
+const voteLimit = Number(envVars.VOTE_LIMIT);
 
 const updateDbWithAudioPath = function (
     audioPath,
@@ -205,7 +208,8 @@ const updateAndGetSentences = function (req, res) {
 
 const getValidationSentences = function (req, res) {
     const language = req.params.language;
-    db.any(getValidationSentencesQuery, [language])
+    const userId = req.cookies.userId;
+    db.any(getValidationSentencesQuery, [language, userId])
         .then((response) => {
             res.status(200).send({ data: response })
         })
@@ -246,20 +250,22 @@ const getAudioClip = function (req, res, objectStorage) {
         });;
 }
 
-const updateTablesAfterValidation = function (req, res) {
+const updateTablesAfterValidation = (req, res) => {
     const validatorId = req.cookies.userId;
     const { sentenceId, action, contributionId, state = "", country = "" } = req.body
-    return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country]).then(() => {
-        if (action !== 'skip')
-            db.none(updateSentencesWithValidatedState, [sentenceId]).then(() => {
-                res.sendStatus(200);
-            })
-                .catch((err) => {
-                    console.log(err);
-                    res.sendStatus(500);
-                });
-        else res.sendStatus(200);
-    })
+    return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country])
+        .then(async () => {
+            if (action !== 'skip') {
+                db.none(updateSentencesWithValidatedState, [sentenceId]).then(() => {
+                    res.sendStatus(200);
+                })
+                    .catch((err) => {
+                        console.log(err);
+                        res.sendStatus(500);
+                    });
+            }
+            else res.sendStatus(200);
+        })
         .catch((err) => {
             console.log(err);
             res.sendStatus(500);
@@ -404,13 +410,13 @@ const createBadge = async (contributor_id, language, currentMilestoneData, categ
     let isNewBadge = false, generatedBadgeId = '';
 
     let badges = await db.any(findRewardInfo, [contributor_id, language, category]);
-    const matchedBadge = badges.filter(function(value){
+    const matchedBadge = badges.filter(function (value) {
         if (value.reward_catalogue_id === currentMilestoneData.id) {
             return value
         }
     })
 
-    badges = badges.map((value) =>{
+    badges = badges.map((value) => {
         return { 'grade': value.grade, 'generated_badge_id': value.generated_badge_id }
     })
 
