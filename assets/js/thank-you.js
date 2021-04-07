@@ -211,6 +211,7 @@ const getFormattedTime = (totalSeconds) => {
 
 const updateShareContent = function (language, rank) {
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const boloIndiaTitle = "Bolo India: A crowdsourcing initiative for Indian languages";
   let localeText = "";
   if (rank === 0) {
     localeText = localeStrings["social sharing text without rank"];
@@ -233,7 +234,7 @@ const updateShareContent = function (language, rank) {
   const $linkedinShare = $("#linkedin_share");
   $linkedinShare.attr(
     "href",
-    `https://www.linkedin.com/shareArticle?mini=true&url=https://boloindia.nplt.in&title=I've contributed towards building open language repository for India on https://boloindia.nplt.in&summary=${localeText}`
+    `https://www.linkedin.com/shareArticle?mini=true&url=https://boloindia.nplt.in&title=${localeStrings[boloIndiaTitle]}&summary=${localeText}`
   );
 };
 
