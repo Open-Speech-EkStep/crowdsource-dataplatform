@@ -42,7 +42,7 @@ afterSuite(async () => {
 });
 
 step("Opening Vakyansh", async () => {
-    await goto(testUrl + "/en/home.html", { navigationTimeout: 100000 });
+    await goto(testUrl);
 });
 
 step("Validate about us content", async function () {
