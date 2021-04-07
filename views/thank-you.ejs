@@ -15,9 +15,9 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/home.css">
-    <link rel="stylesheet" type="text/css" href="css/thank-you.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/home.css">
+    <link rel="stylesheet" type="text/css" href="../css/thank-you.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 
 <body>
@@ -33,7 +33,7 @@
                 <p id="hour-value" class="mb-0">0</p>
                 <div><span class="spinner"></span></div>
             </b><b></b></div>
-        <div class="col-12 col-sm-6 text-left align-self-sm-center align-self-start"><img src="/img/thanks.svg" class="img-fluid w-100" alt="Total Sentence Progress">
+        <div class="col-12 col-sm-6 text-left align-self-sm-center align-self-start"><img src="../img/thanks.svg" class="img-fluid w-100" alt="Total Sentence Progress">
             <div class="bg-primary position-absolute rounded-pill" id="total-progress"></div>
             <div class="position-absolute rounded-pill" id="total-progress-bulb"></div>
         </div>
@@ -54,7 +54,7 @@
                 <h4 class="mb-3 mt-5 mt-lg-0"><%- __('You are driving the spirit of your language') %></h4>
             </div>
             <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('recordings contributed') %></p>
-            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="/badges">Know more</a>') %></p>
+            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="./badges.html">Know more</a>') %></p>
             <%- include modals/badge_milestone.ejs %>
             <div class="mt-5 text-center">
                 <%= __('Share it with your friends and family') %>
@@ -62,31 +62,31 @@
             <div class="row justify-content-center my-2">
                 <div class="col-12 text-center bg-white">
                     <a href="https://www.facebook.com/sharer/sharer.php?u=https://boloindia.nplt.in/" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
-                        <img src="/img/fb-icon.svg" width="24px" alt="Share on Facebook">
+                        <img src="../img/fb-icon.svg" width="24px" alt="Share on Facebook">
                     </a><span>&sdot;</span>
                     <a id="linkedin_share" href="https://www.linkedin.com/shareArticle?mini=true&url=https://boloindia.nplt.in/&title=Bolo India: A crowdsourcing initiative for Indian languages.&summary=I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?/&source=" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
-                        <img src="/img/linkedin-icon.svg" width="24px" alt="Share on LinkedIn">
+                        <img src="../img/linkedin-icon.svg" width="24px" alt="Share on LinkedIn">
                     </a><span>&sdot;</span>
                     <a id="twitter_share" href="https://twitter.com/intent/tweet?text=I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?" target="_blank" rel="noopener noreferrer">
-                        <img src="/img/twitter-icon.svg" width="24px" alt="Share on Twitter">
+                        <img src="../img/twitter-icon.svg" width="24px" alt="Share on Twitter">
                     </a><span>&sdot;</span>
                     <a id="whatsapp_share" href="https://api.whatsapp.com/send?text=I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?" target="_blank" rel="noopener noreferrer">
-                        <img src="/img/whatsapp.svg" width="32px" alt="Share on Whatsapp">
+                        <img src="../img/whatsapp.svg" width="32px" alt="Share on Whatsapp">
                     </a>
                 </div>
             </div>
             <div class="badges_information">
                 <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="bronze" href="#" id="bronze_badge_link">
-                    <img title="Download Bronze Badge" src="./img/bronze_badge.svg" alt="" width="36px" class="disable" id="bronze_badge_link_img">
+                    <img title="Download Bronze Badge" src="../img/bronze_badge.svg" alt="" width="36px" class="disable" id="bronze_badge_link_img">
                 </button>
                 <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="silver" href="#" id="silver_badge_link">
-                    <img title="Download Silver Badge" src="./img/silver_badge.svg" alt="" width="36px" class="disable" id="silver_badge_link_img">
+                    <img title="Download Silver Badge" src="../img/silver_badge.svg" alt="" width="36px" class="disable" id="silver_badge_link_img">
                 </button>
                 <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="gold" href="#" id="gold_badge_link">
-                    <img title="Download Gold Badge" src="./img/gold_badge.svg" alt="" width="36px" class="disable" id="gold_badge_link_img">
+                    <img title="Download Gold Badge" src="../img/gold_badge.svg" alt="" width="36px" class="disable" id="gold_badge_link_img">
                 </button>
                 <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="platinum" href="#" id="platinum_badge_link">
-                    <img title="Download Platinum Badge" src="./img/platinum_badge.svg" alt="" width="36px" class="disable" id="platinum_badge_link_img">
+                    <img title="Download Platinum Badge" src="../img/platinum_badge.svg" alt="" width="36px" class="disable" id="platinum_badge_link_img">
                 </button>
             </div>
         </div>
@@ -123,18 +123,18 @@
             <div class="mb-3">
                 <span><%= __('Help your language achieve it’s goal of 100 hrs. We know you can do more!') %></span>
             </div>
-            <a href="/record" class="btn btn-primary btn-lg h6 w-100">
+            <a href="./record.html" class="btn btn-primary btn-lg h6 w-100">
                 <%= __('Contribute More') %>
             </a>
         </div>
     </div>
 
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <%- include common/footer.ejs %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="js/thank-you.js"></script>
+<script src="../js/thank-you.js"></script>
 </body>
 
 </html>

@@ -1,44 +1,44 @@
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
-const {calculateTime, formatTime, performAPIRequest} = require('./utils');
+const { calculateTime, formatTime, getJson, performAPIRequest } = require('./utils');
 
 const statesInformation = [
-  {id: 'IN-TG',state: 'Telangana',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-AN',state: 'Andaman and Nicobar Islands',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-AP',state: 'Andhra Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-AR',state: 'Arunanchal Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-AS',state: 'Assam',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-BR',state: 'Bihar',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-CT',state: 'Chhattisgarh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-GA',state: 'Goa',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-GJ',state: 'Gujarat',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-HR',state: 'Haryana',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-HP',state: 'Himachal Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-JK',state: 'Jammu & Kashmir',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-JH',state: 'Jharkhand',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-KA',state: 'Karnataka',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-KL',state: 'Kerala',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-LD',state: 'Lakshadweep',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-MP',state: 'Madhya Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-MH',state: 'Maharashtra',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-MN',state: 'Manipur',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-CH',state: 'Chandigarh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-PY',state: 'Puducherry',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-PB',state: 'Punjab',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-RJ',state: 'Rajasthan',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-SK',state: 'Sikkim',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-TN',state: 'Tamil Nadu',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-TR',state: 'Tripura',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-UP',state: 'Uttar Pradesh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-UT',state: 'Uttarakhand',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-WB',state: 'West Bengal',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-OR',state: 'Odisha',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-DNDD',state: 'Dadra and Nagar Haveli and Daman and Diu',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-ML',state: 'Meghalaya',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-MZ',state: 'Mizoram',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-NL',state: 'Nagaland',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-DL',state: 'National Capital Territory of Delhi',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0},
-  {id: 'IN-LK',state: 'Ladakh',contributed_time: "0 hrs",validated_time: "0 hrs", total_speakers: 0}
+  { id: 'IN-TG', state: 'Telangana', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-AN', state: 'Andaman and Nicobar Islands', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-AP', state: 'Andhra Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-AR', state: 'Arunanchal Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-AS', state: 'Assam', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-BR', state: 'Bihar', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-CT', state: 'Chhattisgarh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-GA', state: 'Goa', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-GJ', state: 'Gujarat', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-HR', state: 'Haryana', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-HP', state: 'Himachal Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-JK', state: 'Jammu & Kashmir', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-JH', state: 'Jharkhand', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-KA', state: 'Karnataka', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-KL', state: 'Kerala', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-LD', state: 'Lakshadweep', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-MP', state: 'Madhya Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-MH', state: 'Maharashtra', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-MN', state: 'Manipur', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-CH', state: 'Chandigarh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-PY', state: 'Puducherry', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-PB', state: 'Punjab', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-RJ', state: 'Rajasthan', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-SK', state: 'Sikkim', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-TN', state: 'Tamil Nadu', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-TR', state: 'Tripura', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-UP', state: 'Uttar Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-UT', state: 'Uttarakhand', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-WB', state: 'West Bengal', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-OR', state: 'Odisha', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-DNDD', state: 'Dadra and Nagar Haveli and Daman and Diu', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-ML', state: 'Meghalaya', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-MZ', state: 'Mizoram', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-NL', state: 'Nagaland', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-DL', state: 'National Capital Territory of Delhi', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-LK', state: 'Ladakh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 }
 ]
 
 var polygonSeries = undefined;
@@ -60,7 +60,7 @@ const drawMap = function (response) {
 
   statesData.forEach(st => {
     const ele = response.data.find(s => st.state === s.state);
-    if(ele) {
+    if (ele) {
       const {
         hours: cHours,
         minutes: cMinutes,
@@ -78,7 +78,7 @@ const drawMap = function (response) {
       st.id = st.id;
     } else {
       st.id = st.id;
-      st.contributed_time= "0 hrs";
+      st.contributed_time = "0 hrs";
       st.validated_time = "0 hrs";
       st.value = 0;
       st.total_speakers = 0;
@@ -87,7 +87,7 @@ const drawMap = function (response) {
 
   var chart = am4core.create("indiaMapChart", am4maps.MapChart);
   const index = chart.series.indexOf(polygonSeries);
-  if(index > -1 ){
+  if (index > -1) {
     chart.series.removeIndex(index);
   }
   chart.geodataSource.url = "https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/india2020Low.json";
@@ -157,14 +157,14 @@ const drawMap = function (response) {
 
 function getLanguageSpecificData(data, lang) {
   const stateData = {
-      data: [],
+    data: [],
   };
   data.data.forEach(item => {
-      if (item.language.toLowerCase() === lang.toLowerCase() 
-          && item.state !== '' 
-          && item.state.toLowerCase() !== 'anonymous') {
-          stateData.data.push(item);
-      }
+    if (item.language.toLowerCase() === lang.toLowerCase()
+      && item.state !== ''
+      && item.state.toLowerCase() !== 'anonymous') {
+      stateData.data.push(item);
+    }
   });
   return stateData;
 }
@@ -212,12 +212,12 @@ function getStatistics(response) {
 function constructChart(responseData, xAxisLabel, yAxisLabel) {
   var chart = am4core.create("speakers_hours_chart", am4charts.XYChart);
   chartReg["chart"] = chart;
-  
+
   let response = [...responseData];
   if (xAxisLabel === "total_speakers") {
-    response = response.sort((a,b) => Number(a.total_speakers) < Number(b.total_speakers) ? -1: 1);
+    response = response.sort((a, b) => Number(a.total_speakers) < Number(b.total_speakers) ? -1 : 1);
   } else {
-    response = response.sort((a,b) => Number(a.total_contributions) < Number(b.total_contributions) ? -1: 1);
+    response = response.sort((a, b) => Number(a.total_contributions) < Number(b.total_contributions) ? -1 : 1);
   }
 
   if (xAxisLabel !== "total_speakers") {
@@ -239,7 +239,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
   var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
   valueAxis.renderer.grid.template.strokeWidth = 0;
   valueAxis.renderer.labels.template.disabled = true;
-  
+
   categoryAxis.renderer.minGridDistance = 25;
   var series = chart.series.push(new am4charts.ColumnSeries());
   series.dataFields.valueX = xAxisLabel;

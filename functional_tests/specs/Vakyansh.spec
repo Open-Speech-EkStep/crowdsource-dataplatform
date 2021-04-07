@@ -10,6 +10,7 @@
 * Start Recording button is disabled
 * Select Language "Hindi" enables the Start Recording button
 
+
 ## Validate Locale content on Home Page
 * Select Contribution Language as "हिंदी"
 * Select Preferred language as "हिंदी"
