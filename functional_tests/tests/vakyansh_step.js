@@ -42,7 +42,9 @@ afterSuite(async () => {
 });
 
 step("Opening Vakyansh", async () => {
+   await taiko.waitFor(1000)
     await goto(testUrl);
+    await taiko.waitFor(1000)
 });
 
 step("Validate about us content", async function () {
@@ -153,7 +155,7 @@ step("Select Preferred language as <language>", async function (language) {
     const localeDropDown = taiko.$("#localeDropdownMenuButton");
     await taiko.waitFor(1000);
     await click(localeDropDown);
-    await click(text(language));
+    await click(link(language));
 });
 
 step("Navigate to <arg0> button and click <arg0> button", async function (arg0) {
@@ -262,7 +264,7 @@ step("Select Contribution Language as <language>", async function (language) {
     if(!prefLanguagePopup.exists()){
         await click("show All");
     }
-    await taiko.waitFor(500)
+    await taiko.waitFor(700)
     await click(language);
 });
 
