@@ -140,7 +140,8 @@ workflows:
           name: functional_tests_dev
           env_name: dev
           requires:
-            - dev_deployment_eks      
+            - dev_deployment_eks
+            - build_dev_ui      
 
       - approve_to_deploy:
           name: approve_test_deployment_eks
@@ -180,6 +181,7 @@ workflows:
           env_name: test
           requires:
             - test_deployment_eks
+            - build_test_ui
 
       - approve_to_deploy:
           name: approve_prod_deployment_eks

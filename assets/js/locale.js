@@ -2,7 +2,7 @@ const { updateLocaleLanguagesDropdown, getCookie, setCookie } = require('./utils
 const { ALL_LANGUAGES } = require("./constants");
 
 const registerEvents = function () {
-    const localisation_dropdown = $('#localisation_dropdown');
+    const localisation_dropdown = $('#localisation_dropdown a');
     const localisation_popup = $('#content-language a');
     localisation_popup.on("click", localisationChangeHandler);
     localisation_dropdown.on("click", localisationChangeHandler);
