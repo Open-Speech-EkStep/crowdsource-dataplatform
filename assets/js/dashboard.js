@@ -1,9 +1,10 @@
 const { updateGraph } = require('./draw-chart');
 const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('./speakerDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString } = require('./utils');
-
-const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES} = require('./constants');
-
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString, getJson } = require('./utils');
+const moment = require('moment');
+const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES } = require('./constants');
+const fetch = require('./fetch');
+const { data } = require('jquery');
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
@@ -142,7 +143,7 @@ $(document).ready(function () {
     const age = document.getElementById('age');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem('contributionLanguage');
-    if(contributionLanguage) {
+    if (contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }
     $('#language').on('change', (e) => {
@@ -173,7 +174,7 @@ $(document).ready(function () {
     });
 
     $("#contribute-now").on('click', (e) => {
-        document.cookie = `i18n=en`;
+        localStorage.setItem("i18n", "en");
         sentenceLanguage = languageToRecord;
     });
 
@@ -187,8 +188,8 @@ $(document).ready(function () {
         const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
         let genderValue = checkedGender.length ? checkedGender[0].value : '';
         const userNameValue = $userName.val().trim().substring(0, 12);
-        const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === sentenceLanguage);
-        if (! selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
+        const selectedLanguage = ALL_LANGUAGES.find(e => e.value === sentenceLanguage);
+        if (!selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
         if (testUserName(userNameValue)) {
             return;
         }
@@ -208,15 +209,15 @@ $(document).ready(function () {
         localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
         localStorage.setItem("contributionLanguage", sentenceLanguage);
         // document.cookie = `i18n=en`;
-        location.href = '/record';
+        location.href = './record.html';
     });
 
-    $('input[name = "gender"]').on('change', function() {
+    $('input[name = "gender"]').on('change', function () {
         const selectedGender = document.querySelector(
             'input[name = "gender"]:checked'
         );
         const options = $("#transgender_options");
-        if(selectedGender.value === "others") {
+        if (selectedGender.value === "others") {
             console.log(options);
             options.removeClass("d-none");
         } else {

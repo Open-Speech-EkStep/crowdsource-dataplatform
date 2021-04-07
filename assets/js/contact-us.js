@@ -1,3 +1,4 @@
+const fetch = require('./fetch')
 const submitQueryBtn = document.getElementById("submitQuery");
 const email = document.getElementById("email");
 const query = document.getElementById("query");

@@ -1,5 +1,29 @@
-const {HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES} = require("./constants");
-const {getCookie} = require("./locale")
+const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require("./constants");
+const fetch = require('./fetch')
+
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 
 function showElement(element) {
   element.removeClass('d-none');
@@ -56,7 +80,10 @@ function fetchLocationInfo() {
 }
 
 const performAPIRequest = (url) => {
-  return fetch(url).then((data) => {
+  return fetch(url, {
+    credentials: 'include',
+    mode: 'cors'
+  }).then((data) => {
     if (!data.ok) {
       throw Error(data.statusText || 'HTTP error');
     } else {
@@ -65,30 +92,26 @@ const performAPIRequest = (url) => {
   });
 }
 
-const getLocaleString = function () {
-  return new Promise(function (resolve, reject) {
-    let locale = getCookie("i18n");
-    if (!locale) {
-      document.cookie = `i18n=en`;
-      locale = "en";
-    }
-    performAPIRequest(`/get-locale-strings/${locale}`)
-      .then((response) => {
-        localStorage.setItem('localeString', JSON.stringify(response));
-        resolve(response);
-      }).catch((err) => reject(err));
-  });
+const getLocaleString = function() {
+    return new Promise(function(resolve, reject) {
+        const locale = localStorage.getItem("i18n") ?? "en";
+        performAPIRequest(`/get-locale-strings/${locale}`)
+        .then((response) => {
+            localStorage.setItem('localeString', JSON.stringify(response));
+            resolve(response);
+        }).catch((err)=>reject(err));
+    });
 }
 
 const updateLocaleLanguagesDropdown = (language) => {
-  const dropDown = $('#localisation_dropdown');
-  const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-  if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
-    dropDown.html('<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>');
-  } else {
-    dropDown.html(`<a id="english" class="dropdown-item" href="/changeLocale/en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="/changeLocale/${localeLang.id}">${localeLang.text}</a>`);
-  }
+    const dropDown = $('#localisation_dropdown');
+    const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+    if(language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
+        dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
+    } else {
+        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+    }
 }
 
 const calculateTime = function (totalSeconds, isSeconds = true) {
@@ -129,27 +152,36 @@ const setFooterPosition = () => {
 }
 
 const reportSentenceOrRecording = (reqObj) => {
-  return new Promise(function (resolve, reject) {
-    try {
-      fetch('/report', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(reqObj),
-      })
-        .then((res) => res.json())
-        .then((resp) => {
-          resolve(resp);
-        })
-    } catch (err) {
-      reject(err);
-    }
-  });
+    return new Promise(function(resolve, reject) {
+        try {
+            fetch('/report', {
+                method: "POST",
+                credentials: 'include',
+                mode: 'cors',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(reqObj),
+            })
+            .then((res) => res.json())
+            .then((resp) => {
+                resolve(resp);
+            })
+        } catch(err) {
+            reject(err);
+        }
+    });
 }
 
-module.exports = {
-  setPageContentHeight,
+const getJson = (path) => {
+    return new Promise((resolve) => {
+      $.getJSON(path, (data) => {
+        resolve(data);
+      });
+    })
+}
+
+module.exports = { setPageContentHeight,
   toggleFooterPosition,
   fetchLocationInfo,
   updateLocaleLanguagesDropdown,
@@ -160,5 +192,8 @@ module.exports = {
   showElement,
   hideElement,
   setFooterPosition,
-  reportSentenceOrRecording
+  reportSentenceOrRecording, 
+  getCookie, 
+  setCookie,
+  getJson
 }

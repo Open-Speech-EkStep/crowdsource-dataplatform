@@ -1,45 +1,26 @@
-const { updateLocaleLanguagesDropdown } = require('./utils');
+const { updateLocaleLanguagesDropdown, getCookie, setCookie } = require('./utils');
 const { ALL_LANGUAGES } = require("./constants");
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');
-    const localisation_popup = $('#content-language');
+    const localisation_popup = $('#content-language a');
     localisation_popup.on("click", localisationChangeHandler);
     localisation_dropdown.on("click", localisationChangeHandler);
 }
 const localisationChangeHandler = e => {
     const targetedLang = e.target;
     const locale = targetedLang.getAttribute('locale');
-    changeLocale(locale);
+    if (locale)
+        changeLocale(locale);
 };
 const changeLocale = function (locale) {
-    let splitValues = location.href.split('/');
+    const splitValues = location.href.split('/');
     let currentPage = splitValues[splitValues.length - 1];
-    setCookie("i18n", locale, 1);
-    location.href = `/${locale}/${currentPage}`;
-}
-
-function setCookie(cname, cvalue, exdays) {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    const expires = "expires=" + d.toGMTString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    const name = cname + "=";
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
+    if (!currentPage) {
+        currentPage = "home.html";
     }
-    return "";
+    localStorage.setItem("i18n", locale);
+    location.href = `/${locale}/${currentPage}`;
 }
 
 function checkCookie() {
@@ -50,9 +31,9 @@ function showLanguagePopup() {
     document.getElementById("toggle-content-language").click();
 }
 function redirectToLocalisedPage() {
-    const locale = getCookie("i18n");
-    let splitValues = location.href.split('/');
-    let currentLocale = splitValues[splitValues.length - 2];
+    const locale = localStorage.getItem("i18n");
+    const splitValues = location.href.split('/');
+    const currentLocale = splitValues[splitValues.length - 2];
     $('#home-page').attr('default-lang', locale);
     if (currentLocale != locale) {
         changeLocale(locale);
@@ -64,14 +45,12 @@ function redirectToLocalisedPage() {
         }
     }
 }
-// $(document).ready(function () {
-//     registerEvents();
-// })
+$(document).ready(function () {
+    registerEvents();
+})
 
 module.exports = {
     checkCookie,
-    getCookie,
-    setCookie,
     changeLocale,
     showLanguagePopup,
     redirectToLocalisedPage
