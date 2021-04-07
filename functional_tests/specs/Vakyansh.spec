@@ -10,13 +10,6 @@
 * Start Recording button is disabled
 * Select Language "Hindi" enables the Start Recording button
 
-## Validate Locale content on Home Page
-* Select Contribution Language as "हिंदी"
-* Select Preferred language as "हिंदी"
-* User should see the content in "Hindi"
-* User should see State Wise distribution and Top Languages
-* User should be able to change to preffered Language to English again
-
 ## Check Dashboard Page
 * Select Preferred language as "English"
 * When user clicks on View all Details buttton , user shall land on Dashboard page
@@ -63,3 +56,10 @@
 * User clicks on "dislike_button" , he should see next sentence and "dislike_button" "like_button" buttons should be disabled
 * User skips the next "4" sentences user should land on Thank you page in Hindi
 * User should see the "अधिक प्रमाणित करें" button
+
+## Validate Locale content on Home Page
+* Select Contribution Language as "हिंदी"
+* Select Preferred language as "हिंदी"
+* User should see the content in "Hindi"
+* User should see State Wise distribution and Top Languages
+* User should be able to change to preffered Language to English again

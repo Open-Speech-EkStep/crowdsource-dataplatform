@@ -251,7 +251,7 @@ step("User should see State Wise distribution and Top Languages", async function
 });
 
 step("User should be able to change to preffered Language to English again", async function () {
-    await taiko.waitFor(500)
+    await taiko.waitFor(1000)
     await click(taiko.text("हिंदी"))
     await click(taiko.link("English"));
 
@@ -288,7 +288,7 @@ step("When user clicks on the cross button , pop up should close and user should
 
 step("When user clicks on the Feedback link in the footer , user should land on the feedback page", async function () {
     await click(link('Feedback'))
-    await taiko.waitFor(500)
+    await taiko.waitFor(1000)
     assert.ok(await text("Subject").exists());
     assert.ok(await text("Description").exists());
 });
