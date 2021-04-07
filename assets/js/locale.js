@@ -2,7 +2,7 @@ const { updateLocaleLanguagesDropdown, getCookie, setCookie } = require('./utils
 const { ALL_LANGUAGES } = require("./constants");
 
 const registerEvents = function () {
-    const localisation_dropdown = $('#localisation_dropdown a');
+    const localisation_dropdown = $('#localisation_dropdown');
     const localisation_popup = $('#content-language a');
     localisation_popup.on("click", localisationChangeHandler);
     localisation_dropdown.on("click", localisationChangeHandler);
@@ -10,7 +10,8 @@ const registerEvents = function () {
 const localisationChangeHandler = e => {
     const targetedLang = e.target;
     const locale = targetedLang.getAttribute('locale');
-    changeLocale(locale);
+    if (locale)
+        changeLocale(locale);
 };
 const changeLocale = function (locale) {
     const splitValues = location.href.split('/');
