@@ -478,7 +478,7 @@ const getRewards = async (userId, userName, language, category) => {
     const { isCurrentAvailable, currentMilestoneData } = await getCurrentMilestoneData(contribution_count, language);
 
     let isNewBadge = false, generatedBadgeId = '', badges = [];
-    if (isCurrentAvailable) {
+    if (isCurrentAvailable && contribution_count !== 0) {
         let validationPercent = (validation_count / contribution_count) * 100;
         if(validationPercent >= 80){
             ({ isNewBadge, generatedBadgeId, badges } = await createBadge(contributor_id, language, currentMilestoneData, category, isNewBadge, generatedBadgeId));
