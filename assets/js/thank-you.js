@@ -59,14 +59,14 @@ function setSentencesContributed() {
       $("#sentence_away_msg").removeClass("d-none");
       $("#user-contribution-msg").removeClass("d-none");
       $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-      $("#next_badge_name").text(localeStrings[data.nextBadgeType].toLowerCase());
+      $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
     } else if ((Number(data.contributionCount) >= Number(data.currentMilestone)) && (Number(data.contributionCount) <= Number(data.nextMilestone))) {
       $("#spree_text").removeClass("d-none");
       $("#before_badge_content").removeClass("d-none");
       $("#sentence_away_msg").removeClass("d-none");
       $("#user-contribution-msg").removeClass("d-none");
       $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-      $("#next_badge_name").text(localeStrings[data.nextBadgeType].toLowerCase());
+      $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
       const $bronzeBadgeLink = $("#bronze_badge_link img");
       const $silverBadgeLink = $("#silver_badge_link img");
       const $goldBadgeLink = $("#gold_badge_link img");
@@ -189,12 +189,8 @@ const showSpeakersHoursData = (speakerDetailsValue) => {
       speakerDetailsValue.find((t) => t.index === 1).duration
     );
     const totalSeconds = totalCompleteSentence;
+    const {hours,minutes,seconds } = getFormattedTime(totalSeconds);
 
-    // can call getFormattedTime function
-    const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
-    const remainingAfterHours = totalSeconds % HOUR_IN_SECONDS;
-    const minutes = Math.floor(remainingAfterHours / SIXTY);
-    const seconds = Math.ceil(remainingAfterHours % SIXTY);
     $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
     setTotalProgressBar(totalSeconds);
   } catch (err) {
