@@ -125,7 +125,7 @@ logs
 .terraform
 
 public/*
-!public/img/*
+!public/img/
 !public/favicon.ico
 !public/sitemap.xml
-!public/aud/*
+!public/aud/
