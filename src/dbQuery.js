@@ -88,7 +88,7 @@ const getValidationSentencesQuery = `select con."sentenceId", sen.sentence, con.
     from contributions con \
     inner join sentences sen on sen."sentenceId"=con."sentenceId" and sen."state"= 'contributed' \
     left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' and val.validated_by!= $2 \
-    where  con.action='completed'  and language='Hindi' group by con."sentenceId", sen.sentence, con.contribution_id \
+    where  con.action='completed'  and language=$1 group by con."sentenceId", sen.sentence, con.contribution_id \
     order by count(val.*) desc, RANDOM() limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, "action", validated_by, "date", "state_region", "country") \
