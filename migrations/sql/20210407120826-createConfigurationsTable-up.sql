@@ -15,4 +15,6 @@ TABLESPACE pg_default;
 ALTER TABLE public.configurations
     OWNER to postgres;
 
-insert into configurations(config_name, value, updated_by) values ('validation_count', 3 , 'Admin')
+insert into configurations(config_name, value, updated_by) values ('validation_count', 3 , 'Admin');
+insert into configurations(config_name, value, updated_by) values ('sentence_report_limit', 3 , 'Admin');
+insert into configurations(config_name, value, updated_by) values ('audio_report_limit', 3 , 'Admin');
