@@ -135,9 +135,9 @@ INSERT INTO reports (reported_by,sentence_id,report_text,language,source) \
 SELECT contributor_id,$3,$4,$5,$6 \
 FROM contributor;`;
 
-const markContributionReported = "update contributions set action='reported' where contribution_id=$3";
+const markContributionReported = "update contributions set action='reported' where contribution_id=$3 and (select count(distinct reported_by) from reports where source='validation' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='audio_report_limit');";
 
-const markSentenceReported = `update sentences set state='reported' where "sentenceId"=$3 and (select count(distinct reported_by) from reports where source='contribution' and sentence_id=$3 group by sentence_id) >= 4;`;
+const markSentenceReported = `update sentences set state='reported' where "sentenceId"=$3 and (select count(distinct reported_by) from reports where source='contribution' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='sentence_report_limit');`;
 
 const markContributionSkippedQuery = "update contributions set action='skipped' where contributed_by=(select contributor_id from contributors where user_name=$2 and contributor_identifier = $1) and \"sentenceId\"=$3;";
 
