@@ -102,7 +102,6 @@ const updateDbWithAudioPath = function (
         gender = speakerDetailsJson.gender;
         motherTongue = speakerDetailsJson.motherTongue;
     }
-    const encryptUserId = encrypt(userId);
     const roundedAudioDuration = audioDuration ? Number(Number(audioDuration).toFixed(3)) : 0;
 
     db.any(updateContributionDetails, [
@@ -111,7 +110,7 @@ const updateDbWithAudioPath = function (
         gender,
         motherTongue,
         sentenceId,
-        encryptUserId,
+        userId,
         userName,
         state,
         country,
@@ -178,10 +177,9 @@ const updateAndGetSentences = function (req, res) {
         return;
     }
     const ageGroup = req.body.age;
-    const encryptedUserId = encrypt(userId);
     const sentences = getSentencesBasedOnAge(
         ageGroup,
-        encryptedUserId,
+        userId,
         userName,
         language,
         motherTongue,
@@ -378,8 +376,7 @@ const insertFeedback = (subject, feedback, language) => {
 }
 
 const saveReport = async (userId, sentenceId, reportText, language, userName, source) => {
-    const encryptUserId = encrypt(userId);
-    await db.any(saveReportQuery, [encryptUserId, userName, sentenceId, reportText, language, source]);
+    await db.any(saveReportQuery, [userId, userName, sentenceId, reportText, language, source]);
     if (source === "validation") {
         await db.any(markContributionReported, [encryptUserId, userName, sentenceId]);
     }
@@ -389,14 +386,11 @@ const saveReport = async (userId, sentenceId, reportText, language, userName, so
 }
 
 const markContributionSkipped = (userId, sentenceId, userName) => {
-    const encryptUserId = encrypt(userId);
-    return db.any(markContributionSkippedQuery, [encryptUserId, userName, sentenceId]);
+    return db.any(markContributionSkippedQuery, [userId, userName, sentenceId]);
 }
 
 const getContributorId = async (userId, userName) => {
-    const encryptUserId = encrypt(userId);
-
-    const contributorInfo = await db.oneOrNone(getContributorIdQuery, [encryptUserId, userName]);
+    const contributorInfo = await db.oneOrNone(getContributorIdQuery, [userId, userName]);
 
     if (!contributorInfo) {
         throw new Error('No User found');

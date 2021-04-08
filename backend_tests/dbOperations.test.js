@@ -16,9 +16,6 @@ jest.mock('pg-promise', () => jest.fn(() => {
     return jest.fn(() => mockDB);
 }));
 
-const encryptMock = jest.mock('../src/encryptAndDecrypt');
-encryptMock.encrypt = jest.fn();
-
 process.env.LAUNCH_IDS = '1,2';
 process.env.VOTE_LIMIT = '3';
 const dbOperations = require('../src/dbOperations');
@@ -95,7 +92,7 @@ describe("Running tests for dbOperations", () => {
                 null,
                 null,
                 testSentenceId,
-                undefined,
+                testUserId,
                 testUserName,
                 testState,
                 testCountry,
@@ -120,7 +117,7 @@ describe("Running tests for dbOperations", () => {
                     null,
                     null,
                     testSentenceId,
-                    undefined,
+                    testUserId,
                     testUserName,
                     testState,
                     testCountry,
@@ -142,7 +139,7 @@ describe("Running tests for dbOperations", () => {
                     "male",
                     "Language",
                     testSentenceId,
-                    undefined,
+                    testUserId,
                     testUserName,
                     testState,
                     testCountry,
@@ -167,7 +164,7 @@ describe("Running tests for dbOperations", () => {
                     "male",
                     "Language",
                     testSentenceId,
-                    undefined,
+                    testUserId,
                     testUserName,
                     testState,
                     testCountry,
@@ -191,7 +188,7 @@ describe("Running tests for dbOperations", () => {
                     null,
                     null,
                     testSentenceId,
-                    undefined,
+                    testUserId,
                     testUserName,
                     testState,
                     testCountry,
@@ -219,7 +216,7 @@ describe("Running tests for dbOperations", () => {
                     null,
                     null,
                     testSentenceId,
-                    undefined,
+                    testUserId,
                     testUserName,
                     testState,
                     testCountry,
@@ -315,7 +312,7 @@ describe("Running tests for dbOperations", () => {
 
         dbOperations.saveReport(userId, sentenceId, reportText, language, userName, source);
 
-        expect(spyDBany).toHaveBeenCalledWith(saveReportQuery, [undefined, userName, sentenceId, reportText, language, source])
+        expect(spyDBany).toHaveBeenCalledWith(saveReportQuery, [userId, userName, sentenceId, reportText, language, source])
     });
 
     test('Mark Skipped Contribution', () => {
@@ -326,7 +323,7 @@ describe("Running tests for dbOperations", () => {
 
         dbOperations.markContributionSkipped(userId, sentenceId, userName);
 
-        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [undefined, userName, sentenceId])
+        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [userId, userName, sentenceId])
     });
 
     test('Get Rewards info', () => {
@@ -349,7 +346,7 @@ describe("Running tests for dbOperations", () => {
         const milestoneId = 1
         when(spyDBone).calledWith(getTotalUserContribution, [contributor_id, language]).mockReturnValue({ 'contribution_count': contribution_count });
         when(spyDBany).calledWith(insertRewardQuery, [contributor_id, language, expect.anything(), category]).mockReturnValue([{ 'generated_badge_id': 1 }]);
-        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [undefined, userName]).mockReturnValue({ 'contributor_id': contributor_id });
+        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
         when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language]).mockReturnValue({ 'id': milestoneId, 'grade': 'copper', 'milestone': 100 });
         when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, category]).mockReturnValue([]);
 
@@ -360,7 +357,7 @@ describe("Running tests for dbOperations", () => {
         test('should call queries for rewards data if user found', async () => {
             await dbOperations.getRewards(userId, userName, language, category);
 
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, getContributorIdQuery, [undefined, userName])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, getContributorIdQuery, [userId, userName])
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkCurrentMilestoneQuery, [contribution_count, language])
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, checkNextMilestoneQuery, [contribution_count, language])
             expect(spyDBone).toHaveBeenCalledWith(getTotalUserContribution, [contributor_id, language])
@@ -369,18 +366,18 @@ describe("Running tests for dbOperations", () => {
         describe('Test get contributor id', () => {
 
             test('should throw error if user not found', async () => {
-                when(spyDBoneOrNone).calledWith(getContributorIdQuery, [undefined, userName]).mockReturnValue(null);
+                when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue(null);
 
                 await expect(dbOperations.getRewards(userId, userName, language, category)).rejects.toThrowError('No User found')
                 jest.clearAllMocks();
             });
 
             test('should return contributor id', async () => {
-                when(spyDBoneOrNone).calledWith(getContributorIdQuery, [undefined, userName]).mockReturnValue({ 'contributor_id': contributor_id });
+                when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
 
                 await dbOperations.getRewards(userId, userName, language, category);
 
-                expect(spyDBoneOrNone).toHaveBeenCalledWith(getContributorIdQuery, [undefined, userName])
+                expect(spyDBoneOrNone).toHaveBeenCalledWith(getContributorIdQuery, [userId, userName])
                 jest.clearAllMocks();
             });
         })
