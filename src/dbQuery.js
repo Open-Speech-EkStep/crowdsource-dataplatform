@@ -86,6 +86,7 @@ select ins."sentenceId", sentences.sentence from ins  \
 
 const getValidationSentencesQuery = `select con."sentenceId", sen.sentence, con.contribution_id \
     from contributions con \
+    inner join contributors cont on con.contributed_by = cont.contibutor_id and cont.contributor_identifier!=$2 \ 
     inner join sentences sen on sen."sentenceId"=con."sentenceId" and sen."state"= 'contributed' \
     left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' and val.validated_by!= $2 \
     where  con.action='completed'  and language=$1 group by con."sentenceId", sen.sentence, con.contribution_id \
