@@ -84,11 +84,12 @@ where sentences."state" is null and language = $4 and label=$3 and cont."action"
 select ins."sentenceId", sentences.sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";`
 
-const getValidationSentencesQuery = `
-    'select con."sentenceId", sen.sentence, con.contribution_id \
-    from contributions con inner join sentences sen on sen."sentenceId"=con."sentenceId" and con.action=\'completed\' \
-    left join validations val on val.contribution_id = con.contribution_id and val.validated_by!= $2 \
-    where sen."state"= \'contributed\' and language=$1 group by con."sentenceId", sen.sentence, con.contribution_id limit 5;`
+const getValidationSentencesQuery = `select con."sentenceId", sen.sentence, con.contribution_id \
+    from contributions con \
+    inner join sentences sen on sen."sentenceId"=con."sentenceId" and sen."state"= 'contributed' \
+    left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' and val.validated_by!= $2 \
+    where  con.action='completed'  and language='Hindi' group by con."sentenceId", sen.sentence, con.contribution_id \
+    order by count(val.*) desc, RANDOM() limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, "action", validated_by, "date", "state_region", "country") \
 select contribution_id, $3, $1, now(), $5, $6 from contributions inner join sentences on sentences."sentenceId"=contributions."sentenceId" \
