@@ -462,63 +462,41 @@ describe("Running tests for dbOperations", () => {
         });
     });
 
-    // describe('Test Update Tables after validation', () => {
-    //     const sentenceId = 1;
-    //     const contributionId = 1;
-    //     const state = 'Test State';
-    //     const country = 'Test Country';
-    //     const userId = 123;
-    //     const limit = 3;
+    describe('Test Update Tables after validation', () => {
+        const sentenceId = 1;
+        const contributionId = 1;
+        const state = 'Test State';
+        const country = 'Test Country';
+        const userId = 123;
+        const limit = 3;
 
-    //     test('should call addValidationQuery and updateSentencesWithValidatedState if action is accept/reject and validation count reaches limit', async () => {
-    //         const spyDBnone = jest.spyOn(mockDB, 'none');
-    //         spyDBnone.mockReturnValue(Promise.resolve())
-    //         const spyDBone = jest.spyOn(mockDB, 'one');
-    //         when(spyDBone).calledWith(getValidationCountQuery, [contributionId]).mockReturnValue(limit);
-    //         const action = 'accept';
+        test('should call addValidationQuery and updateSentencesWithValidatedState if action is accept/reject', async () => {
+            const spyDBnone = jest.spyOn(mockDB, 'none');
+            spyDBnone.mockReturnValue(Promise.resolve())
+            const action = 'accept';
 
-    //         const req = { 'body': { sentenceId, action, contributionId, state, country }, 'cookies': { userId } }
+            const req = { 'body': { sentenceId, action, contributionId, state, country }, 'cookies': { userId } }
 
-    //         await dbOperations.updateTablesAfterValidation(req, res);
+            await dbOperations.updateTablesAfterValidation(req, res);
 
-    //         expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [userId, sentenceId, action, contributionId, state, country]);
-    //         expect(spyDBnone).toHaveBeenNthCalledWith(2, updateSentencesWithValidatedState, [sentenceId])
-    //         expect(spyDBone).toBeCalledWith(getValidationCountQuery, [contributionId]);
+            expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [userId, sentenceId, action, contributionId, state, country]);
+            expect(spyDBnone).toHaveBeenNthCalledWith(2, updateSentencesWithValidatedState, [sentenceId])
             
-    //         jest.resetAllMocks();
-    //     });
+            jest.resetAllMocks();
+        });
+        
+        test('should only call addValidationQuery if action is skip', async () => {
+            const spyDBnone = jest.spyOn(mockDB, 'none');
+            spyDBnone.mockReturnValue(Promise.resolve())
+            const action = 'skip';
 
+            const req = { 'body': { sentenceId, action, contributionId, state, country }, 'cookies': { userId } }
 
-    //     test('should not call updateSentencesWithValidatedState if action is accept/reject and validation count is below limit', async () => {
-    //         const spyDBnone = jest.spyOn(mockDB, 'none');
-    //         spyDBnone.mockReturnValue(Promise.resolve())
-    //         const spyDBone = jest.spyOn(mockDB, 'one');
-    //         when(spyDBone).calledWith(getValidationCountQuery, [contributionId]).mockReturnValue(limit-1);
-    //         const action = 'accept';
+            await dbOperations.updateTablesAfterValidation(req, res);
 
-    //         const req = { 'body': { sentenceId, action, contributionId, state, country }, 'cookies': { userId } }
-
-    //         await dbOperations.updateTablesAfterValidation(req, res);
-
-    //         expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [userId, sentenceId, action, contributionId, state, country]);
-    //         expect(spyDBone).toBeCalledWith(getValidationCountQuery, [contributionId]);
-    //         expect(spyDBnone).toBeCalledTimes(1)
-            
-    //         jest.resetAllMocks();
-    //     });
-
-    //     test('should only call addValidationQuery if action is skip', async () => {
-    //         const spyDBnone = jest.spyOn(mockDB, 'none');
-    //         spyDBnone.mockReturnValue(Promise.resolve())
-    //         const action = 'skip';
-
-    //         const req = { 'body': { sentenceId, action, contributionId, state, country }, 'cookies': { userId } }
-
-    //         await dbOperations.updateTablesAfterValidation(req, res);
-
-    //         expect(spyDBnone).toBeCalledWith(addValidationQuery, [userId, sentenceId, action, contributionId, state, country]);
-    //         expect(spyDBnone).toBeCalledTimes(1);
-    //         jest.resetAllMocks();
-    //     })
-    // })
+            expect(spyDBnone).toBeCalledWith(addValidationQuery, [userId, sentenceId, action, contributionId, state, country]);
+            expect(spyDBnone).toBeCalledTimes(1);
+            jest.resetAllMocks();
+        })
+    })
 });
