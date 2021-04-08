@@ -57,9 +57,9 @@
                 </div>
             </div>
             <div class="m-auto row justify-content-center mt-lg-5 mx-lg-5">
-                <div class="col-12 col-md-5 col-lg-5 p-3 px-lg-5 py-lg-3 text-dark mt-4 card mr-lg-3" id="say">
-                    <div id="say_container" class="row align-items-center py-lg-5 position-relative" style="height:100%">
-                        <div class="col-lg-7 col-md-7 col-8">
+                <div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card1 mr-lg-3 justify-content-center align-items-center py-3" id="say">
+                    <div id="say_container" class="row align-items-center py-lg-5 position-relative col-10 card_container px-0" style="height:100%">
+                        <div class="col-8 px-0">
                             <h1 class="display-5">
                                 <%= __('Speak') %>
                             </h1>
@@ -67,11 +67,11 @@
                                 <%= __('Contribute Your Voice') %>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-4 text-center">
+                        <div class="col-4 text-right px-0">
                                 <img src="../img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer say-logo" data-target="#userModal">
                         </div>
 
-                        <div id="say-p-2" class="col-lg-7 col-md-7 col-12 d-none position-absolute" style="bottom:1rem">
+                        <div id="say-p-2" class="col-12 d-none position-absolute px-0" style="bottom:1rem">
                             <div>
                                 <%= __('Contribute your voice to create an open data repository of Indian languages') %>
                             </div>
@@ -82,9 +82,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-5 col-lg-5 p-3 px-lg-5 py-lg-3 text-dark mt-4 card ml-lg-3" id="listen">
-                    <div id="listen_container" class="row position-relative align-items-center py-lg-5" style="height:100%">
-                        <div class="col-lg-7 col-md-7 col-8">
+                <div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card2 ml-lg-3 justify-content-center align-items-center py-3" id="listen">
+                    <div id="listen_container" class="row position-relative align-items-center py-lg-5 col-10 card_container px-0" style="height:100%">
+                        <div class="col-8 px-0">
                             <h1 class="display-5">
                                 <%= __('Listen') %>
                             </h1>
@@ -92,11 +92,11 @@
                                 <%= __('Validate What They Say') %>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-4 text-center">
+                        <div class="col-4 text-right px-0">
                             <a href="./validator-page.html">
                                 <img src="../img/listen.svg" alt="validator" id="start_validating" class="cursor-pointer listen-logo"></a>
                         </div>
-                        <div class="col-lg-7 col-md-7 col-12 d-none position-absolute" id="listen-p-2" style="bottom:1rem">
+                        <div class="col-12 d-none position-absolute px-0" id="listen-p-2" style="bottom:1rem">
                             <div>
                                 <%= __('Help us by validating the recordings that others have contributed') %>
                             </div>
