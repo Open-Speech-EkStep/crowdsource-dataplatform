@@ -48,8 +48,21 @@ h6,
   }
 }
 
+@media (min-width: 768px) {
+  .font-weight-light-lg {
+    font-weight: 300 !important;
+  }
 
+  .card {
+    background-size:615px auto;
+  }
+}
 
+@media (min-width: 992px) {
+  .card {
+    background-size:757px auto;
+  }
+}
 
 @media screen and (min-width: 1024px) {
   .card {
@@ -108,15 +121,7 @@ h6,
     margin-top: 5rem;
   }
 }
-@media (min-width: 768px) {
-  .font-weight-light-lg {
-    font-weight: 300 !important;
-  }
 
-  .card {
-    background-size:615px auto;
-  }
-}
 @media (min-width: 992px) {
   html {
     font-size: 15px;
@@ -127,7 +132,6 @@ h6,
   }
   .card{
     height: 400px;
-    background-size:757px auto;
   }
 }
 @media screen and (min-width: 992px) and (max-width: 1279px) {
@@ -333,8 +337,7 @@ body.modal-open .supreme-container {
 }
 
 .card{
-  /*background: #FFFFFF;*/
-  background-image: url("../img/NEW-WAVE.svg");
+  background-image: url(../img/NEW-WAVE.svg);
   mix-blend-mode: normal;
   box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
