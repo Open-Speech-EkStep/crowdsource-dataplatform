@@ -3,4 +3,4 @@
 
 npm test
 # npm start & npm run functional_test -- --env local
-# exit 1
+exit 1
