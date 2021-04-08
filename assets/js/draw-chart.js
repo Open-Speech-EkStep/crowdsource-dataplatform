@@ -1,7 +1,7 @@
 const { data } = require('jquery');
 const fetch = require('./fetch')
 const { generateIndiaMap } = require('./home-page-charts');
-const { calculateTime, formatTime, getJson } = require('./utils')
+const { calculateTime, formatTime, getJson } = require('./utils');
 const $chartRow = $('.chart-row');
 const $chartLoaders = $chartRow.find('.loader');
 const $charts = $chartRow.find('.chart');
@@ -31,16 +31,11 @@ function getOrderedGenderData(formattedGenderData) {
 }
 
 function getAgeGroupData(data, key) {
+    const years = 'years';
     let formattedData = [];
-    data.forEach((item) => {
-        const element = item[key] ? item : { ...item, [key]: 'Anonymous' };
-        const index = formattedData.findIndex(e => element[key].toLowerCase() === e[key].toLowerCase());
-        if (index >= 0) {
-            formattedData[index].contributions += element.contributions;
-            formattedData[index].speakers += element.speakers;
-        } else {
-            formattedData.push(element);
-        }
+    data.forEach(item => {
+        item[key] === "" ? item[key] = 'Anonymous' : item[key] = `${item[key]} ${years}`;
+        formattedData.push(item);
     });
     return formattedData;
 }
@@ -213,6 +208,11 @@ const drawAgeGroupChart = (chartData) => {
     chart.legend.valueLabels.template.textDecoration = 'none';
     chart.legend.itemContainers.template.paddingTop = 5;
     chart.legend.itemContainers.template.paddingBottom = 5;
+    chart.legend.labels.template.fontSize = 12;
+
+    const markerTemplate = chart.legend.markers.template;
+    markerTemplate.width = 20;
+    markerTemplate.height = 20;
 
     const activeLegend = chart.legend.labels.template.states.getKey('active');
     activeLegend.properties.textDecoration = 'line-through';
@@ -223,6 +223,7 @@ const drawAgeGroupChart = (chartData) => {
     activeLegendLabel.properties.textDecoration = 'line-through';
 
     chart.legend.valueLabels.template.align = 'right';
+    chart.legend.valueLabels.template.fontSize = 12;
     chart.legend.valueLabels.template.textAlign = 'start';
     chart.legend.itemContainers.template.paddingLeft = 20;
     chart.legend.itemContainers.template.paddingRight = 20;
