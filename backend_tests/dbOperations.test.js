@@ -1,7 +1,7 @@
 import { when } from 'jest-when'
 
 const {
-    getBadges,updateContributionDetails, updateSentencesWithContributedState, getValidationSentencesQuery, getCountOfTotalSpeakerAndRecordedAudio, getGenderData, getAgeGroupsData, getMotherTonguesData, feedbackInsertion, saveReportQuery, markContributionSkippedQuery, rewardsInfoQuery, getContributorIdQuery, getTotalUserContribution, checkCurrentMilestoneQuery, checkNextMilestoneQuery, findRewardInfo, insertRewardQuery, getTotalUserValidation
+    getBadges,updateContributionDetails, updateSentencesWithContributedState, getValidationSentencesQuery, getCountOfTotalSpeakerAndRecordedAudio, getGenderData, getAgeGroupsData, getMotherTonguesData, feedbackInsertion, saveReportQuery, markContributionSkippedQuery, rewardsInfoQuery, getContributorIdQuery, getTotalUserContribution, checkCurrentMilestoneQuery, checkNextMilestoneQuery, findRewardInfo, insertRewardQuery, getTotalUserValidation, addContributorQuery
 } = require('./../src/dbQuery');
 
 const mockDB = {
@@ -25,6 +25,11 @@ const { topLanguagesByHoursContributed, topLanguagesBySpeakerContributions, list
 const res = { status: () => { return { send: () => { } }; } };
 
 describe("Running tests for dbOperations", () => {
+
+    afterEach(() => {
+        jest.clearAllMocks();
+    })
+
     describe('tests for getSentencesBasedOnAge', () => {
 
         afterEach(() => {
@@ -300,18 +305,20 @@ describe("Running tests for dbOperations", () => {
         expect(spyDBany).toHaveBeenCalledWith(feedbackInsertion, [subject, feedback, language])
     });
 
-    test('Save Report', () => {
+    test('Save Report', async () => {
         const spyDBany = jest.spyOn(mockDB, 'any')
+        const spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
         const userId = '123'
         const sentenceId = '456'
         const language = 'testLanguage'
         const reportText = 'report text'
         const userName = 'test user'
         const source = 'contribution'
+        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [undefined, userName]).mockReturnValue({ 'contributor_id': 10 });
 
-        dbOperations.saveReport(userId, sentenceId, reportText, language, userName, source);
+        await dbOperations.saveReport(userId, sentenceId, reportText, language, userName, source);
 
-        expect(spyDBany).toHaveBeenCalledWith(saveReportQuery, [undefined, userName, sentenceId, reportText, language, source])
+        expect(spyDBany).toHaveBeenCalledWith(saveReportQuery, [10, sentenceId, reportText, language, source])
     });
 
     test('Mark Skipped Contribution', () => {
@@ -337,7 +344,7 @@ describe("Running tests for dbOperations", () => {
     describe('Test Get Rewards', () => {
         const spyDBany = jest.spyOn(mockDB, 'any'), spyDBone = jest.spyOn(mockDB, 'one'), spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone');
         const userId = '123'
-        const userName = 'userName'
+        const userName = 'test user'
         const category = 'category'
         const language = 'testLanguage'
         const contributor_id = 10
@@ -379,10 +386,13 @@ describe("Running tests for dbOperations", () => {
 
         describe('Test get contributor id', () => {
 
-            test('should throw error if user not found', async () => {
+            test('should call addContributorQuery if user not found', async () => {
                 when(spyDBoneOrNone).calledWith(getContributorIdQuery, [undefined, userName]).mockReturnValue(null);
+                when(spyDBone).calledWith(addContributorQuery, [undefined, userName]).mockReturnValue({'contributor_id': contributor_id});
 
-                await expect(dbOperations.getRewards(userId, userName, language, category)).rejects.toThrowError('No User found')
+                await dbOperations.getRewards(userId, userName, language, category);
+
+                await expect(spyDBone).toBeCalledWith(addContributorQuery, [undefined, userName]);
                 jest.clearAllMocks();
             });
 

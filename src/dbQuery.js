@@ -123,13 +123,9 @@ const feedbackInsertion = 'Insert into feedbacks (subject,feedback,language) val
 
 const getAudioPath = 'select audio_path from contributions where contribution_id = $1;'
 
-const saveReportQuery = `WITH contributor AS ( \
-  select contributor_id from "contributors" \
-  where contributor_identifier = $1 and user_name = $2 \
-) \
+const saveReportQuery = `
 INSERT INTO reports (reported_by,sentence_id,report_text,language,source) \
-SELECT contributor_id,$3,$4,$5,$6 \
-FROM contributor;`;
+SELECT $1,$2,$3,$4,$5`;
 
 const markContributionReported = "update contributions set action='reported' where contribution_id=$3";
 
@@ -168,6 +164,8 @@ where not exists (select 1 from rewards where contributor_id=$1 and language=$2 
 
 const getContributorIdQuery = 'select contributor_id from contributors where contributor_identifier = $1 and user_name = $2';
 
+const addContributorQuery = 'INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 returning contributor_id';
+
 const getBadges = 'select grade, reward_milestone.milestone, id from reward_catalogue, \
 (select milestone,reward_catalogue_id as rid from reward_milestones where milestone <= $1 \
 and LOWER(language) = LOWER($2) order by milestone desc) \
@@ -205,5 +203,6 @@ module.exports = {
     markSentenceReported,
     markContributionReported,
     updateMaterializedViews,
-    getBadges
+    getBadges,
+    addContributorQuery
 }
