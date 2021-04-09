@@ -488,7 +488,7 @@ const initialize = () => {
                 if (audioCtx) {
                     audioCtx.close();
                 }
-                audioCtx = new AudioContext({sampleRate: 16000})
+                audioCtx = new AudioContext({sampleRate: 44100})
                 const audioAnalyser = audioCtx.createAnalyser();
                 //new audio context to help us record
                 input = audioCtx.createMediaStreamSource(stream);
