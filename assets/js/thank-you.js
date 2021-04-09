@@ -48,7 +48,7 @@ function setSentencesContributed() {
       $("#current_badge_name_1").text(localeStrings[data.currentBadgeType]);
       $("#current_badge_count").text(data.currentMilestone);
       $("#next_badge_count").text(data.nextMilestone);
-      $("#next_badge_name_1").text(localeStrings[data.nextBadgeType].toLowerCase());
+      $("#next_badge_name_1").text(localeStrings[data.nextBadgeType.toLowerCase()]);
       $("#sentence_away_msg").addClass("d-none");
       $("#user-contribution-msg").addClass("d-none");
       $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
