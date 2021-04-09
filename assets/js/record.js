@@ -488,7 +488,7 @@ const initialize = () => {
                 if (audioCtx) {
                     audioCtx.close();
                 }
-                audioCtx = new AudioContext();
+                audioCtx = new AudioContext({sampleRate: 44100})
                 const audioAnalyser = audioCtx.createAnalyser();
                 //new audio context to help us record
                 input = audioCtx.createMediaStreamSource(stream);
@@ -496,7 +496,7 @@ const initialize = () => {
                 visualize(visualizer, audioAnalyser);
                 /* Create the Recorder object and configure to record mono sound (1 channel) Recording 2 channels will double the file size */
                 rec = new Recorder(input, {
-                    numChannels: 2,
+                    numChannels: 1,
                 });
                 //start the recording process
                 rec.record();
