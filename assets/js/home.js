@@ -1,8 +1,7 @@
-const {checkCookie, showLanguagePopup, redirectToLocalisedPage} = require('./locale')
+const {showLanguagePopup, redirectToLocalisedPage} = require('./locale')
 const {drawMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest} = require('./utils')
 const {
-    testUserName,
     setSpeakerDetails,
     setUserModalOnShown,
     setUserNameOnInputFocus,
@@ -163,7 +162,6 @@ const getStatsSummary = function () {
 function initializeBlock() {
     const speakerDetailsKey = 'speakerDetails';
     const $startRecordBtn = $('#proceed-box');
-    const $startRecordBtnTooltip = $startRecordBtn.parent();
     const age = document.getElementById('age');
     const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
@@ -336,7 +334,6 @@ const renderCoachMarks = function () {
         }
     });
 
-    // $("body").css("pointer-events", "");
     homePageTour.start();
 };
 
