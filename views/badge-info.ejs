@@ -22,19 +22,15 @@
             <h1><%= __('Levels and Badging') %></h1>
         </div>
     </div>
-    <div class="row mx-lg-5 my-3">
-        <p class="col-12 col-lg-8 h5 font-weight-light-lg font-weight-normal-sm lh-7 text-justify d-none">
-            <%= __('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate') %></p>
+    <div class="row mx-lg-5">
+        <p class="col-12 col-lg-8 text-justify">
+            <%- __('Earn badges or certificate by contributing to Bolo India. Speak a sentence in language of your choice or validate the sentence that is spoken on your desired language. Share badges in your social circle, build the hype, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e. <b>YOU.</b>') %></p>
     </div>
-    <div><span class="spinner d-none" id="#loader1"></span></div>
-
-    <div class="row mx-lg-5" id="card-row"></div>
-
     <div class="row mx-lg-5 mt-5">
         <h2 class="col-12"><%= __('Contributor Levels') %></h2>
     </div>
     <div class="row mx-lg-5">
-        <p class="col-12"><%= __('Participate more to gain badges') %></p>
+        <p class="col-12 col-lg-8"><%= __('The levels defined by an overall mix of contributions and validations on Bolo India. Please see the criteria that defines different levels below:') %></p>
     </div>
     <div class="row mx-lg-5">
         <table class="table table-bordered table-striped table-responsive-xs text-center mx-3 w-100">
@@ -48,11 +44,15 @@
             <tbody id="table-rows"></tbody>
         </table>
     </div>
+    <div class="row mx-lg-5">
+        <p class="col-12 col-lg-8"><%= __('Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but may decrease though if it doesn’t pass the validation test. We want you to remain an active contributor to Bolo India and stand a chance to get recognised by the Ministry of Electronics and Information Technology.')%></p>
+    </div>
 
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <%- include common/footer.ejs %>
 
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>$("footer").removeClass("fixed-bottom").addClass("bottom")</script>
 <script src="../js/badges_info.js"></script>
