@@ -52,54 +52,7 @@ h6,
   .font-weight-light-lg {
     font-weight: 300 !important;
   }
-
-  .card {
-    background-size:615px auto;
-  }
 }
-
-@media (min-width: 992px) {
-  .card {
-    background-size:757px auto;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .card {
-    background-size:785px auto;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .card {
-    background-size:961.656px auto;
-  }
-}
-
-@media screen and (min-width: 1360px) {
-  .card {
-    background-size:1060px auto;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .card {
-    background-size:1127px auto;
-  }
-}
-
-@media screen and (min-width: 1536px) {
-  .card {
-    background-size:1420px auto;
-  }
-}
-
-@media screen and (min-width: 1640px) {
-  .card {
-    background-size:1294px auto;
-  }
-}
-
 
 @media screen and (max-width: 991px) {
   #start_recording, #start_validating {

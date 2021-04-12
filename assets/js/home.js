@@ -158,6 +158,16 @@ const getStatsSummary = function () {
         });
 }
 
+const setSayListenBackground = function (){
+    const $say = $("#say");
+    const $listen = $("#listen");
+    const $sayWidth = $say.outerWidth( true);
+    const $listenWidth = $listen.outerWidth(true);
+    const totalWidth = $sayWidth + $listenWidth;
+    $say.css("background-size",`${totalWidth}px auto`);
+    $listen.css("background-size",`${totalWidth}px auto`);
+}
+
 
 function initializeBlock() {
     const speakerDetailsKey = 'speakerDetails';
@@ -168,6 +178,7 @@ function initializeBlock() {
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
     toggleFooterPosition();
+    setSayListenBackground();
     let top_lang = getDefaultLang();
 
     const $languageNavBar = $('#language-nav-bar');
@@ -352,6 +363,10 @@ $(document).ready(function () {
     }).catch(err => {
         initializeBlock();
     });
+});
+
+$(window).on("orientationchange",function(){
+    setSayListenBackground();
 });
 
 
