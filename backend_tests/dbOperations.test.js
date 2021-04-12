@@ -1,6 +1,8 @@
 import { when } from 'jest-when'
 
 const {
+    getContributionHoursForLanguage,
+    getMultiplierForHourGoal,
     getBadges,updateContributionDetails, updateSentencesWithContributedState, getValidationSentencesQuery, getCountOfTotalSpeakerAndRecordedAudio, getGenderData, getAgeGroupsData, getMotherTonguesData, feedbackInsertion, saveReportQuery, markContributionSkippedQuery, rewardsInfoQuery, getContributorIdQuery, getTotalUserContribution, checkCurrentMilestoneQuery, checkNextMilestoneQuery, findRewardInfo, insertRewardQuery, getTotalUserValidation, addContributorQuery
 } = require('./../src/dbQuery');
 
@@ -11,6 +13,7 @@ const mockDB = {
     any: jest.fn(() => Promise.resolve()),
     oneOrNone: jest.fn(() => Promise.resolve()),
 }
+
 
 jest.mock('pg-promise', () => jest.fn(() => {
     return jest.fn(() => mockDB);
@@ -342,6 +345,7 @@ describe("Running tests for dbOperations", () => {
     });
 
     describe('Test Get Rewards', () => {
+
         const spyDBany = jest.spyOn(mockDB, 'any'), spyDBone = jest.spyOn(mockDB, 'one'), spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone');
         const userId = '123'
         const userName = 'test user'
@@ -364,14 +368,15 @@ describe("Running tests for dbOperations", () => {
         when(spyDBoneOrNone).calledWith(getContributorIdQuery, [undefined, userName]).mockReturnValue({ 'contributor_id': contributor_id });
         when(spyDBany).calledWith(getTotalUserContribution, [contributor_id, language]).mockReturnValue([{ 'contribution_id': 1234 }]);
         when(spyDBone).calledWith(getTotalUserValidation,[[1234]]).mockReturnValue({'validation_count': validation_count})
-        when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language]).mockReturnValue({ 'id': milestoneId, 'grade': 'copper', 'milestone': 100 });
+        when(spyDBone).calledWith(getContributionHoursForLanguage, [language]).mockReturnValue(10);
+        when(spyDBoneOrNone).calledWith(getMultiplierForHourGoal, [language]).mockReturnValue(100);
         when(spyDBany).calledWith(getBadges,[expect.anything(), language]).mockReturnValue([{grade:'bronze',id: 23, milestone: 5},{grade:'silver',id: 24, milestone: 50},{grade:'gold',id: 25, milestone: 100}])
         when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, category]).mockReturnValue([]);
         when(spyDBany).calledWith(insertRewardQuery, [contributor_id, language, bronzeBadge, category]).mockReturnValue([{ 'generated_badge_id': bronzeBadge }]);
         when(spyDBany).calledWith(insertRewardQuery, [contributor_id, language, silverBadge, category]).mockReturnValue([{ 'generated_badge_id': silverBadge }]);
         when(spyDBany).calledWith(insertRewardQuery, [contributor_id, language, goldBadge, category]).mockReturnValue([{ 'generated_badge_id': goldBadge }]);
         when(spyDBoneOrNone).calledWith(checkNextMilestoneQuery, [contribution_count, language]).mockReturnValue({ 'id': milestoneId, 'grade': 'silver', 'milestone': 100 });
-
+        when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language]).mockReturnValue({ 'id': milestoneId, 'grade': 'copper', 'milestone': 100 });
         afterEach(() => {
             jest.clearAllMocks();
         })

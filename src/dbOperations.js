@@ -35,7 +35,9 @@ const {
     markContributionReported,
     updateMaterializedViews,
     getBadges,
-    addContributorQuery
+    addContributorQuery,
+    getContributionHoursForLanguage,
+    getMultiplierForHourGoal
 } = require('./dbQuery');
 
 const {
@@ -512,6 +514,7 @@ const getRewards = async (userId, userName, language, category) => {
     const nextBadgeType = nextMilestoneData.grade || '';
     const currentMilestone = currentMilestoneData.milestone || 0;
     const nextMilestone = nextMilestoneData.milestone || 0;
+    const nextHourGoal = await getHourGoalForLanguage(language);
     return {
         "badgeId": generatedBadgeId,
         "currentBadgeType": currentBadgeType,
@@ -520,12 +523,23 @@ const getRewards = async (userId, userName, language, category) => {
         "nextMilestone": nextMilestone,
         "contributionCount": Number(contribution_count),
         "isNewBadge": isNewBadge,
-        'badges': badges
+        'badges': badges,
+        'nextHourGoal': nextHourGoal
     }
 }
 
 const getRewardsInfo = (language) => {
     return db.any(rewardsInfoQuery, [language]);
+}
+
+const getHourGoalForLanguage = async (language) => {
+    const result = await db.one(getContributionHoursForLanguage, [language]);
+    const multiplierResult = await db.oneOrNone(getMultiplierForHourGoal, [language]);
+    let multiplier = 100;
+    if(multiplierResult){
+        multiplier = multiplierResult['multiplier'];
+    }
+    return parseInt((Math.ceil(result['hours']/parseFloat(multiplier)))*multiplier);
 }
 
 module.exports = {
