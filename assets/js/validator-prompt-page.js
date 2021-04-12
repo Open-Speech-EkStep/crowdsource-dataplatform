@@ -488,7 +488,10 @@ $(document).ready(() => {
         localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);
     }).catch(console.log);
-    fetch(`/validation/sentences/${language}`)
+    fetch(`/validation/sentences/${language}`, {
+        credentials: 'include',
+        mode: 'cors'
+      })
         .then((data) => {
             if (!data.ok) {
                 throw Error(data.statusText || 'HTTP error');
