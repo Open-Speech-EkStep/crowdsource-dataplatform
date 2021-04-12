@@ -458,7 +458,7 @@ $(document).ready(() => {
             speakerDetails.language = language;
             localStorage.setItem("speakerDetails", JSON.stringify(speakerDetails));
         }
-        location.href = '/record';
+        location.href = './record.html';
     });
 
     const $reportModal = $("#report_recording_modal");
