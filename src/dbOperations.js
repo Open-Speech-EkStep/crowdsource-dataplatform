@@ -1,4 +1,3 @@
-const { encrypt } = require('./encryptAndDecrypt');
 const { downloader } = require('./downloader/objDownloader')
 const moment = require('moment');
 
@@ -84,6 +83,8 @@ let cn = {
 
 const db = pgp(cn);
 
+const voteLimit = Number(envVars.VOTE_LIMIT);
+
 const updateDbWithAudioPath = function (
     audioPath,
     sentenceId,
@@ -104,7 +105,6 @@ const updateDbWithAudioPath = function (
         gender = speakerDetailsJson.gender;
         motherTongue = speakerDetailsJson.motherTongue;
     }
-    const encryptUserId = encrypt(userId);
     const roundedAudioDuration = audioDuration ? Number(Number(audioDuration).toFixed(3)) : 0;
 
     db.any(updateContributionDetails, [
@@ -113,7 +113,7 @@ const updateDbWithAudioPath = function (
         gender,
         motherTongue,
         sentenceId,
-        encryptUserId,
+        userId,
         userName,
         state,
         country,
@@ -132,7 +132,7 @@ const updateDbWithAudioPath = function (
 
 const getSentencesBasedOnAge = function (
     ageGroup,
-    encryptedUserId,
+    userId,
     userName,
     language,
     motherTongue,
@@ -158,7 +158,7 @@ const getSentencesBasedOnAge = function (
     }
 
     return (db.many(query, [
-        encryptedUserId,
+        userId,
         userName,
         languageLabel,
         language,
@@ -180,23 +180,22 @@ const updateAndGetSentences = function (req, res) {
         return;
     }
     const ageGroup = req.body.age;
-    const encryptedUserId = encrypt(userId);
     const sentences = getSentencesBasedOnAge(
         ageGroup,
-        encryptedUserId,
+        userId,
         userName,
         language,
         motherTongue,
         gender
     );
-    const count = db.one(sentencesCount, [encryptedUserId, userName, language]);
+    const count = db.one(sentencesCount, [userId, userName, language]);
     const unAssign = db.any(unassignIncompleteSentences, [
-        encryptedUserId,
+        userId,
         userName,
     ]);
     const unAssignWhenLanChange = db.any(
         unassignIncompleteSentencesWhenLanChange,
-        [encryptedUserId, userName, language]
+        [userId, userName, language]
     );
     Promise.all([sentences, count, unAssign, unAssignWhenLanChange])
         .then((response) => {
@@ -210,7 +209,8 @@ const updateAndGetSentences = function (req, res) {
 
 const getValidationSentences = function (req, res) {
     const language = req.params.language;
-    db.any(getValidationSentencesQuery, [language])
+    const userId = req.cookies.userId;
+    db.any(getValidationSentencesQuery, [language, userId])
         .then((response) => {
             res.status(200).send({ data: response })
         })
@@ -250,20 +250,22 @@ const getAudioClip = function (req, res, objectStorage) {
     ;
 }
 
-const updateTablesAfterValidation = function (req, res) {
+const updateTablesAfterValidation = (req, res) => {
     const validatorId = req.cookies.userId;
     const { sentenceId, action, contributionId, state = "", country = "" } = req.body
-    return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country]).then(() => {
-        if (action !== 'skip')
-            db.none(updateSentencesWithValidatedState, [sentenceId]).then(() => {
-                res.sendStatus(200);
-            })
-                .catch((err) => {
-                    console.log(err);
-                    res.sendStatus(500);
-                });
-        else res.sendStatus(200);
-    })
+    return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country])
+        .then(async () => {
+            if (action !== 'skip') {
+                db.none(updateSentencesWithValidatedState, [sentenceId, contributionId]).then(() => {
+                    res.sendStatus(200);
+                })
+                    .catch((err) => {
+                        console.log(err);
+                        res.sendStatus(500);
+                    });
+            }
+            else res.sendStatus(200);
+        })
         .catch((err) => {
             console.log(err);
             res.sendStatus(500);
@@ -394,28 +396,25 @@ const insertFeedback = (subject, feedback, language) => {
 }
 
 const saveReport = async (userId, sentenceId, reportText, language, userName, source) => {
-    const encryptUserId = encrypt(userId);
     const contributor_id = await getContributorId(userId, userName)
     await db.any(saveReportQuery, [contributor_id, sentenceId, reportText, language, source]);
     if (source === "validation") {
-        await db.any(markContributionReported, [encryptUserId, userName, sentenceId]);
-    } else if (source === "contribution") {
-        await db.any(markSentenceReported, [encryptUserId, userName, sentenceId]);
+        await db.any(markContributionReported, [userId, userName, sentenceId]);
+    }
+    else if (source === "contribution") {
+        await db.any(markSentenceReported, [userId, userName, sentenceId]);
     }
 }
 
 const markContributionSkipped = (userId, sentenceId, userName) => {
-    const encryptUserId = encrypt(userId);
-    return db.any(markContributionSkippedQuery, [encryptUserId, userName, sentenceId]);
+    return db.any(markContributionSkippedQuery, [userId, userName, sentenceId]);
 }
 
 const getContributorId = async (userId, userName) => {
-    const encryptUserId = encrypt(userId);
-
-    let contributorInfo = await db.oneOrNone(getContributorIdQuery, [encryptUserId, userName]);
+    let contributorInfo = await db.oneOrNone(getContributorIdQuery, [userId, userName]);
 
     if (!contributorInfo) {
-        contributorInfo =  await db.one(addContributorQuery, [encryptUserId, userName]);
+        contributorInfo = await db.one(addContributorQuery, [userId, userName]);
     }
 
     const contributor_id = contributorInfo.contributor_id;
