@@ -1,7 +1,9 @@
 import { when } from 'jest-when'
 
 const {
-    updateContributionDetails, updateSentencesWithContributedState, getValidationSentencesQuery, getCountOfTotalSpeakerAndRecordedAudio, getGenderData, getAgeGroupsData, getMotherTonguesData, feedbackInsertion, saveReportQuery, markContributionSkippedQuery, rewardsInfoQuery, getContributorIdQuery, getTotalUserContribution, checkCurrentMilestoneQuery, checkNextMilestoneQuery, findRewardInfo, insertRewardQuery, getTotalUserValidation, addContributorQuery, getBadges, addValidationQuery, updateSentencesWithValidatedState, getContributionHoursForLanguage, getMultiplierForHourGoal,
+    getContributionHoursForLanguage,
+    getMultiplierForHourGoal,
+    getBadges,updateContributionDetails, updateSentencesWithContributedState, getValidationSentencesQuery, getCountOfTotalSpeakerAndRecordedAudio, getGenderData, getAgeGroupsData, getMotherTonguesData, feedbackInsertion, saveReportQuery, markContributionSkippedQuery, rewardsInfoQuery, getContributorIdQuery, getTotalUserContribution, checkCurrentMilestoneQuery, checkNextMilestoneQuery, findRewardInfo, insertRewardQuery, getTotalUserValidation, addContributorQuery
 } = require('./../src/dbQuery');
 
 const mockDB = {
@@ -17,13 +19,13 @@ jest.mock('pg-promise', () => jest.fn(() => {
     return jest.fn(() => mockDB);
 }));
 
-process.env.LAUNCH_IDS = '1,2';
-process.env.VOTE_LIMIT = '3';
+const encryptMock = jest.mock('../src/encryptAndDecrypt');
+encryptMock.encrypt = jest.fn();
+
+process.env.LAUNCH_IDS = '1,2'
 const dbOperations = require('../src/dbOperations');
 const { topLanguagesByHoursContributed, topLanguagesBySpeakerContributions, listLanguages } = require('../src/dashboardDbQueries');
-const res = { status: () => { return { send: () => { } }; }, sendStatus: () => { } };
-delete process.env.LAUNCH_IDS;
-delete process.env.VOTE_LIMIT;
+const res = { status: () => { return { send: () => { } }; } };
 
 describe("Running tests for dbOperations", () => {
 
@@ -98,7 +100,7 @@ describe("Running tests for dbOperations", () => {
                 null,
                 null,
                 testSentenceId,
-                testUserId,
+                undefined,
                 testUserName,
                 testState,
                 testCountry,
@@ -123,7 +125,7 @@ describe("Running tests for dbOperations", () => {
                     null,
                     null,
                     testSentenceId,
-                    testUserId,
+                    undefined,
                     testUserName,
                     testState,
                     testCountry,
@@ -145,7 +147,7 @@ describe("Running tests for dbOperations", () => {
                     "male",
                     "Language",
                     testSentenceId,
-                    testUserId,
+                    undefined,
                     testUserName,
                     testState,
                     testCountry,
@@ -170,7 +172,7 @@ describe("Running tests for dbOperations", () => {
                     "male",
                     "Language",
                     testSentenceId,
-                    testUserId,
+                    undefined,
                     testUserName,
                     testState,
                     testCountry,
@@ -194,7 +196,7 @@ describe("Running tests for dbOperations", () => {
                     null,
                     null,
                     testSentenceId,
-                    testUserId,
+                    undefined,
                     testUserName,
                     testState,
                     testCountry,
@@ -222,7 +224,7 @@ describe("Running tests for dbOperations", () => {
                     null,
                     null,
                     testSentenceId,
-                    testUserId,
+                    undefined,
                     testUserName,
                     testState,
                     testCountry,
@@ -239,14 +241,13 @@ describe("Running tests for dbOperations", () => {
 
     test('get validationsentences should call getValidationSentences query once with language', () => {
         const language = 'testLanguage';
-        const userId = 123;
-        const req = { params: { language: language }, cookies: { userId } };
+        const req = { params: { language: language } };
         const spyDBany = jest.spyOn(mockDB, 'any')
-        when(spyDBany).calledWith(getValidationSentencesQuery, [language, userId]).mockReturnValue(Promise.resolve())
+        when(spyDBany).calledWith(getValidationSentencesQuery, [language]).mockReturnValue(Promise.resolve())
 
         dbOperations.getValidationSentences(req, res);
 
-        expect(spyDBany).toHaveBeenCalledWith(getValidationSentencesQuery, [language, userId]);
+        expect(spyDBany).toHaveBeenCalledWith(getValidationSentencesQuery, [language]);
         jest.clearAllMocks();
     });
 
@@ -316,12 +317,11 @@ describe("Running tests for dbOperations", () => {
         const reportText = 'report text'
         const userName = 'test user'
         const source = 'contribution'
-        const contributor_id = 10
-        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
+        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [undefined, userName]).mockReturnValue({ 'contributor_id': 10 });
 
         await dbOperations.saveReport(userId, sentenceId, reportText, language, userName, source);
 
-        expect(spyDBany).toHaveBeenCalledWith(saveReportQuery, [contributor_id, sentenceId, reportText, language, source])
+        expect(spyDBany).toHaveBeenCalledWith(saveReportQuery, [10, sentenceId, reportText, language, source])
     });
 
     test('Mark Skipped Contribution', () => {
@@ -332,7 +332,7 @@ describe("Running tests for dbOperations", () => {
 
         dbOperations.markContributionSkipped(userId, sentenceId, userName);
 
-        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [userId, userName, sentenceId])
+        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [undefined, userName, sentenceId])
     });
 
     test('Get Rewards info', () => {
@@ -365,12 +365,12 @@ describe("Running tests for dbOperations", () => {
         // any (n times)- insert rewards that are missed due to not being validated
         // any - insert rewards for latest nearest milestone
         // one or None - next Milestone data
-        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
+        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [undefined, userName]).mockReturnValue({ 'contributor_id': contributor_id });
         when(spyDBany).calledWith(getTotalUserContribution, [contributor_id, language]).mockReturnValue([{ 'contribution_id': 1234 }]);
-        when(spyDBone).calledWith(getTotalUserValidation, [[1234]]).mockReturnValue({ 'validation_count': validation_count })
+        when(spyDBone).calledWith(getTotalUserValidation,[[1234]]).mockReturnValue({'validation_count': validation_count})
         when(spyDBone).calledWith(getContributionHoursForLanguage, [language]).mockReturnValue(10);
         when(spyDBoneOrNone).calledWith(getMultiplierForHourGoal, [language]).mockReturnValue(100);
-        when(spyDBany).calledWith(getBadges, [expect.anything(), language]).mockReturnValue([{ grade: 'bronze', id: 23, milestone: 5 }, { grade: 'silver', id: 24, milestone: 50 }, { grade: 'gold', id: 25, milestone: 100 }])
+        when(spyDBany).calledWith(getBadges,[expect.anything(), language]).mockReturnValue([{grade:'bronze',id: 23, milestone: 5},{grade:'silver',id: 24, milestone: 50},{grade:'gold',id: 25, milestone: 100}])
         when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, category]).mockReturnValue([]);
         when(spyDBany).calledWith(insertRewardQuery, [contributor_id, language, bronzeBadge, category]).mockReturnValue([{ 'generated_badge_id': bronzeBadge }]);
         when(spyDBany).calledWith(insertRewardQuery, [contributor_id, language, silverBadge, category]).mockReturnValue([{ 'generated_badge_id': silverBadge }]);
@@ -383,8 +383,7 @@ describe("Running tests for dbOperations", () => {
 
         test('should call queries for rewards data if user found', async () => {
             await dbOperations.getRewards(userId, userName, language, category);
-
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, getContributorIdQuery, [userId, userName])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, getContributorIdQuery, [undefined, userName])
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkCurrentMilestoneQuery, [contribution_count, language])
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, checkNextMilestoneQuery, [contribution_count, language])
             expect(spyDBany).toHaveBeenCalledWith(getTotalUserContribution, [contributor_id, language])
@@ -393,21 +392,21 @@ describe("Running tests for dbOperations", () => {
         describe('Test get contributor id', () => {
 
             test('should call addContributorQuery if user not found', async () => {
-                when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue(null);
-                when(spyDBone).calledWith(addContributorQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
+                when(spyDBoneOrNone).calledWith(getContributorIdQuery, [undefined, userName]).mockReturnValue(null);
+                when(spyDBone).calledWith(addContributorQuery, [undefined, userName]).mockReturnValue({'contributor_id': contributor_id});
 
                 await dbOperations.getRewards(userId, userName, language, category);
 
-                await expect(spyDBone).toBeCalledWith(addContributorQuery, [userId, userName]);
+                await expect(spyDBone).toBeCalledWith(addContributorQuery, [undefined, userName]);
                 jest.clearAllMocks();
             });
 
             test('should return contributor id', async () => {
-                when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
+                when(spyDBoneOrNone).calledWith(getContributorIdQuery, [undefined, userName]).mockReturnValue({ 'contributor_id': contributor_id });
 
                 await dbOperations.getRewards(userId, userName, language, category);
 
-                expect(spyDBoneOrNone).toHaveBeenCalledWith(getContributorIdQuery, [userId, userName])
+                expect(spyDBoneOrNone).toHaveBeenCalledWith(getContributorIdQuery, [undefined, userName])
                 jest.clearAllMocks();
             });
         })
@@ -491,41 +490,4 @@ describe("Running tests for dbOperations", () => {
             });
         });
     });
-
-    describe('Test Update Tables after validation', () => {
-        const sentenceId = 1;
-        const contributionId = 1;
-        const state = 'Test State';
-        const country = 'Test Country';
-        const userId = 123;
-
-        test('should call addValidationQuery and updateSentencesWithValidatedState if action is accept/reject', async () => {
-            const spyDBnone = jest.spyOn(mockDB, 'none');
-            spyDBnone.mockReturnValue(Promise.resolve())
-            const action = 'accept';
-
-            const req = { 'body': { sentenceId, action, contributionId, state, country }, 'cookies': { userId } }
-
-            await dbOperations.updateTablesAfterValidation(req, res);
-
-            expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [userId, sentenceId, action, contributionId, state, country]);
-            expect(spyDBnone).toHaveBeenNthCalledWith(2, updateSentencesWithValidatedState, [sentenceId, contributionId])
-
-            jest.resetAllMocks();
-        });
-
-        test('should only call addValidationQuery if action is skip', async () => {
-            const spyDBnone = jest.spyOn(mockDB, 'none');
-            spyDBnone.mockReturnValue(Promise.resolve())
-            const action = 'skip';
-
-            const req = { 'body': { sentenceId, action, contributionId, state, country }, 'cookies': { userId } }
-
-            await dbOperations.updateTablesAfterValidation(req, res);
-
-            expect(spyDBnone).toBeCalledWith(addValidationQuery, [userId, sentenceId, action, contributionId, state, country]);
-            expect(spyDBnone).toBeCalledTimes(1);
-            jest.resetAllMocks();
-        })
-    })
 });

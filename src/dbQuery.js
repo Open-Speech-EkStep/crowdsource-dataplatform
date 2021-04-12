@@ -19,7 +19,7 @@ where contributor_identifier = $1 and user_name = $2; \
 with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
-from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and sentences.state!= 'reported'\
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
 and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
@@ -38,7 +38,7 @@ where contributor_identifier = $1 and user_name = $2; \
 with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
-from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and sentences.state!= 'reported' \
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
 and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
@@ -58,10 +58,10 @@ where contributor_identifier = $1 and user_name = $2; \
 with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
-from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2  and sentences.state!='reported'\
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
-and (coalesce(cont.action,'assigned')='assigned' or (cont.action='completed' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
+and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
 group by sentences."sentenceId", con."contributor_id" \
 order by RANDOM() \
 limit 5  returning "sentenceId") \
@@ -77,7 +77,7 @@ where contributor_identifier = $1 and user_name = $2; \
 with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
-from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and sentences.state!= 'reported' \
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" \
 where sentences."state" is null and language = $4 and label=$3 and cont."action" is NULL limit 5 \
   returning "sentenceId") \
@@ -85,20 +85,15 @@ select ins."sentenceId", sentences.sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";`
 
 const getValidationSentencesQuery = `select con."sentenceId", sen.sentence, con.contribution_id \
-    from contributions con \
-    inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_identifier!=$2 \ 
-    inner join sentences sen on sen."sentenceId"=con."sentenceId" and sen."state"= 'contributed' \
-    left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' \
-    where  con.action='completed' and language=$1 group by con."sentenceId", sen.sentence, con.contribution_id \
-    order by count(val.*) desc, RANDOM() limit 5;`
+    from contributions con inner join sentences sen on sen."sentenceId"=con."sentenceId" and con.action=\'completed\' \
+    where sen."state"= \'contributed\' and language=$1 group by con."sentenceId", sen.sentence, con.contribution_id order by RANDOM() limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, "action", validated_by, "date", "state_region", "country") \
 select contribution_id, $3, $1, now(), $5, $6 from contributions inner join sentences on sentences."sentenceId"=contributions."sentenceId" \
 where sentences."sentenceId" = $2 and sentences.state = \'contributed\' and contribution_id=$4;`
 
 const updateSentencesWithValidatedState = `update sentences set "state" = \
-\'validated\' where "sentenceId" = $1 and (select count(*) from validations where contribution_id = $2 and action != 'skip') >= \
-(select value from configurations where config_name = 'validation_count');`
+\'validated\' where "sentenceId" = $1;`
 
 const updateContributionDetails = `WITH src AS ( \
     select contributor_id from "contributors" \
@@ -132,9 +127,9 @@ const saveReportQuery = `
 INSERT INTO reports (reported_by,sentence_id,report_text,language,source) \
 SELECT $1,$2,$3,$4,$5`;
 
-const markContributionReported = "update contributions set action='reported' where contribution_id=$3 and (select count(distinct reported_by) from reports where source='validation' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='audio_report_limit');";
+const markContributionReported = "update contributions set action='reported' where contribution_id=$3";
 
-const markSentenceReported = `update sentences set state='reported' where "sentenceId"=$3 and (select count(distinct reported_by) from reports where source='contribution' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='sentence_report_limit');`;
+const markSentenceReported = `update sentences set state='reported' where "sentenceId"=$3 and (select count(distinct reported_by) from reports where source='contribution' and sentence_id=$3 group by sentence_id) >= 4;`;
 
 const markContributionSkippedQuery = "update contributions set action='skipped' where contributed_by=(select contributor_id from contributors where user_name=$2 and contributor_identifier = $1) and \"sentenceId\"=$3;";
 
@@ -168,8 +163,6 @@ const insertRewardQuery = `insert into rewards (contributor_id, language, reward
 where not exists (select 1 from rewards where contributor_id=$1 and language=$2 and reward_catalogue_id=$3 and category=$4) returning generated_badge_id`;
 
 const getContributorIdQuery = 'select contributor_id from contributors where contributor_identifier = $1 and user_name = $2';
-
-const getValidationCountQuery = 'select count(*) from validations where contribution_id = $1 and action != \'skip\'';
 
 const addContributorQuery = 'INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 returning contributor_id';
 
@@ -216,7 +209,6 @@ module.exports = {
     markSentenceReported,
     markContributionReported,
     updateMaterializedViews,
-    getValidationCountQuery,
     getBadges,
     addContributorQuery,
     getContributionHoursForLanguage,
