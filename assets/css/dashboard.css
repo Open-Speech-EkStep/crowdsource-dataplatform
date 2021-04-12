@@ -107,7 +107,7 @@ body.modal-open .supreme-container {
 }
 
 .chart-row .state-chart {
-    height: 45rem;
+    height: 42rem;
 }
 
 .chart-container {
@@ -215,7 +215,7 @@ body.modal-open .supreme-container {
 .legend-val {
     margin-top: 25px;
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
   }
 
 .no-data-found {
@@ -304,6 +304,9 @@ body.modal-open .supreme-container {
     }
     .chart-title {
         padding-right: 0;
+    }
+    .chart-row .state-chart {
+        height: 40rem;
     }
 }
 

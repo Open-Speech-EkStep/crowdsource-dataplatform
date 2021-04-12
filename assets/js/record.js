@@ -16,8 +16,6 @@ const $testSpeakerBtn = $('#play-speaker');
 let localeStrings;
 let sampleRate = 44100;
 
-let ambientNoiseFeature = false;
-
 function getValue(number, maxValue) {
     return number < 0
         ? 0
@@ -126,7 +124,7 @@ let timeIntervalUp;
 let secondsDown = 5;
 
 const startRecordingTimer = () => {
-    if (ambientNoiseFeature) $('#mic-msg').removeClass('invisible');
+    $('#mic-msg').removeClass('invisible');
     $('#mic-svg').addClass('d-none');
     $('#test-mic-text').text(localeStrings[`Recording for ${secondsDown} seconds`]);
     $testMicBtn.attr('data-value', 'recording');
@@ -232,11 +230,8 @@ const getMediaRecorder = () => {
         let finalBuffer = flattenArray(audioData, recordingLength);
         let audioBlob = generateWavBlob(finalBuffer, sampleRate);
         if (audioBlob !== null) {
-            // check to make ambient noise feature available on dev and localhost
-            // remove this check once feature is confirmed for production
-            if (ambientNoiseFeature) {
-                ambienceNoiseCheck(audioBlob);
-            }
+           ambienceNoiseCheck(audioBlob);
+            
             const audioUrl = URL.createObjectURL(audioBlob);
             micAudio = new Audio(audioUrl);
             micAudio.onloadedmetadata = function() {
@@ -493,7 +488,7 @@ const initialize = () => {
                 if (audioCtx) {
                     audioCtx.close();
                 }
-                audioCtx = new AudioContext();
+                audioCtx = new AudioContext({sampleRate: 44100})
                 const audioAnalyser = audioCtx.createAnalyser();
                 //new audio context to help us record
                 input = audioCtx.createMediaStreamSource(stream);
@@ -501,7 +496,7 @@ const initialize = () => {
                 visualize(visualizer, audioAnalyser);
                 /* Create the Recorder object and configure to record mono sound (1 channel) Recording 2 channels will double the file size */
                 rec = new Recorder(input, {
-                    numChannels: 2,
+                    numChannels: 1,
                 });
                 //start the recording process
                 rec.record();
@@ -818,11 +813,6 @@ function executeOnLoad() {
     $('footer').removeClass('bottom').addClass('fixed-bottom');
     setPageContentHeight();
     window.crowdSource = {};
-    if (window.location.origin.indexOf('localhost') !== -1 ||
-        window.location.origin.indexOf('dev') !== -1 ||
-        window.location.origin.indexOf('test') !== -1) {
-            ambientNoiseFeature = true;
-    }
     //const $instructionModal = $('#instructionsModal');
     const $validationInstructionModal = $("#validation-instruction-modal");
     const $errorModal = $('#errorModal');

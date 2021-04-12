@@ -7,8 +7,9 @@ const {CONTRIBUTION_LANGUAGE, BADGES, LOCALE_STRINGS} = require('./constants');
 
 
 const rowWithBadge = function (levelId, sentenceCount, badgeName, localeString) {
+  console.log(badgeName)
   const badge = BADGES[badgeName.toLowerCase()];
-  return `<tr><td>${localeString.Level} ${levelId}</td><td>${sentenceCount} ${localeString.Sentences}</td><td><div><img src=${badge.imgLg} class="table-img" alt=${badgeName}></div><span>${localeString[badgeName]}</span></td></tr>`
+  return `<tr><td>${localeString.Level} ${levelId}</td><td>${sentenceCount} ${localeString.Sentences}</td><td><div><img src=${badge.imgLg} class="table-img" alt=${badgeName}></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
 }
 
 const rowWithoutBadge = function (levelId, sentenceCount, localeString) {
@@ -22,7 +23,7 @@ const getCard = function (badgeName, localeString) {
                 <div class="py-3">
                     <img src=${badge.imgLg} alt="bronze_badge">
                 </div>
-                <h3 class="py-3">${localeString[badgeName]}</h3>
+                <h3 class="py-3">${localeString[badgeName.toLowerCase()]}</h3>
             </div>
         </div>`
 }

@@ -128,13 +128,9 @@ const feedbackInsertion = 'Insert into feedbacks (subject,feedback,language) val
 
 const getAudioPath = 'select audio_path from contributions where contribution_id = $1;'
 
-const saveReportQuery = `WITH contributor AS ( \
-  select contributor_id from "contributors" \
-  where contributor_identifier = $1 and user_name = $2 \
-) \
+const saveReportQuery = `
 INSERT INTO reports (reported_by,sentence_id,report_text,language,source) \
-SELECT contributor_id,$3,$4,$5,$6 \
-FROM contributor;`;
+SELECT $1,$2,$3,$4,$5`;
 
 const markContributionReported = "update contributions set action='reported' where contribution_id=$3 and (select count(distinct reported_by) from reports where source='validation' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='audio_report_limit');";
 
@@ -146,13 +142,16 @@ const rewardsInfoQuery = `select milestone as contributions, grade as badge from
 inner join reward_catalogue rew on mil.reward_catalogue_id = rew.id \
 where UPPER(language) = UPPER($1) order by mil.milestone`;
 
-const getTotalUserContribution = `select count(*) as contribution_count from contributions con \
-inner join sentences sen on sen."sentenceId"=con."sentenceId" where language = $2 \
-and action = \'completed\' and contributed_by = $1`;
+const getTotalUserContribution = `select con.contribution_id from contributions con \
+inner join sentences sen on sen."sentenceId"=con."sentenceId" where LOWER(language) = LOWER($2) \
+and action = \'completed\' and con.contributed_by = $1`;
+
+const getTotalUserValidation = 'select count(distinct(contribution_id)) as validation_count from validations \
+where contribution_id in ($1:csv) and action = \'accept\''
 
 const checkCurrentMilestoneQuery = `select grade, reward_milestone.milestone, id from reward_catalogue, \
 (select milestone,reward_catalogue_id as rid from reward_milestones where milestone <= $1 \
-and language = $2 order by milestone desc limit 1) \
+and LOWER(language) = LOWER($2) order by milestone desc limit 1) \
 as reward_milestone where id=reward_milestone.rid`;
 
 const checkNextMilestoneQuery = `select grade, reward_milestone.milestone, id from reward_catalogue, \
@@ -171,6 +170,13 @@ where not exists (select 1 from rewards where contributor_id=$1 and language=$2 
 const getContributorIdQuery = 'select contributor_id from contributors where contributor_identifier = $1 and user_name = $2';
 
 const getValidationCountQuery = 'select count(*) from validations where contribution_id = $1 and action != \'skip\'';
+
+const addContributorQuery = 'INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 returning contributor_id';
+
+const getBadges = 'select grade, reward_milestone.milestone, id from reward_catalogue, \
+(select milestone,reward_catalogue_id as rid from reward_milestones where milestone <= $1 \
+and LOWER(language) = LOWER($2) order by milestone desc) \
+as reward_milestone where id=reward_milestone.rid';
 
 module.exports = {
     unassignIncompleteSentences,
@@ -195,6 +201,7 @@ module.exports = {
     markContributionSkippedQuery,
     rewardsInfoQuery,
     getTotalUserContribution,
+    getTotalUserValidation,
     findRewardInfo,
     insertRewardQuery,
     getContributorIdQuery,
@@ -203,5 +210,7 @@ module.exports = {
     markSentenceReported,
     markContributionReported,
     updateMaterializedViews,
-    getValidationCountQuery
+    getValidationCountQuery,
+    getBadges,
+    addContributorQuery
 }

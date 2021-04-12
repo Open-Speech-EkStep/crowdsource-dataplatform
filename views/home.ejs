@@ -14,12 +14,12 @@
     <meta property="og:url" content="https://boloindia.nplt.in">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.css">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/home.css">
-    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../css/home.css">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../css/common.css">
 </head>
 
 <body>
@@ -57,9 +57,9 @@
                 </div>
             </div>
             <div class="m-auto row justify-content-center mt-lg-5 mx-lg-5">
-                <div class="col-12 col-md-5 col-lg-5 p-3 px-lg-5 py-lg-3 text-dark mt-4 card mr-lg-3" id="say">
-                    <div id="say_container" class="row align-items-center py-lg-5 position-relative" style="height:100%">
-                        <div class="col-lg-7 col-md-7 col-8">
+                <div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card1 mr-lg-3 justify-content-center align-items-center py-3" id="say">
+                    <div id="say_container" class="row align-items-center py-lg-5 position-relative col-10 card_container px-0" style="height:100%">
+                        <div class="col-8 px-0">
                             <h1 class="display-5">
                                 <%= __('Speak') %>
                             </h1>
@@ -67,11 +67,11 @@
                                 <%= __('Contribute Your Voice') %>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-4 text-center">
-                                <img src="../img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer say-logo" data-target="#userModal">
+                        <div class="col-4 text-right px-0">
+                                <img src="../img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer say-logo img-fluid" data-target="#userModal" width="140px" height="140px">
                         </div>
 
-                        <div id="say-p-2" class="col-lg-7 col-md-7 col-12 d-none position-absolute" style="bottom:1rem">
+                        <div id="say-p-2" class="col-12 d-none position-absolute px-0" style="bottom:1rem">
                             <div>
                                 <%= __('Contribute your voice to create an open data repository of Indian languages') %>
                             </div>
@@ -82,9 +82,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-5 col-lg-5 p-3 px-lg-5 py-lg-3 text-dark mt-4 card ml-lg-3" id="listen">
-                    <div id="listen_container" class="row position-relative align-items-center py-lg-5" style="height:100%">
-                        <div class="col-lg-7 col-md-7 col-8">
+                <div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card2 ml-lg-3 justify-content-center align-items-center py-3" id="listen">
+                    <div id="listen_container" class="row position-relative align-items-center py-lg-5 col-10 card_container px-0" style="height:100%">
+                        <div class="col-8 px-0">
                             <h1 class="display-5">
                                 <%= __('Listen') %>
                             </h1>
@@ -92,11 +92,11 @@
                                 <%= __('Validate What They Say') %>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-4 text-center">
+                        <div class="col-4 text-right px-0">
                             <a href="./validator-page.html">
-                                <img src="../img/listen.svg" alt="validator" id="start_validating" class="cursor-pointer listen-logo"></a>
+                                <img src="../img/listen.svg" alt="validator" id="start_validating" width="140px" height="140px" class="cursor-pointer listen-logo img-fluid"></a>
                         </div>
-                        <div class="col-lg-7 col-md-7 col-12 d-none position-absolute" id="listen-p-2" style="bottom:1rem">
+                        <div class="col-12 d-none position-absolute px-0" id="listen-p-2" style="bottom:1rem">
                             <div>
                                 <%= __('Help us by validating the recordings that others have contributed') %>
                             </div>
@@ -119,7 +119,7 @@
                             </a>
                     </p>
                 </div>
-                <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="../img/home.svg" class="img-fluid mr-n1"></div>
+                <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="../img/home.svg" width="614.8" height="759.548" alt="Bolo India Infograph" class="img-fluid mr-n1"></div>
             </div>
             <div class="row">
                 <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 pt-lg-0 text-dark">
@@ -163,7 +163,7 @@
                 </div>
                 <div class="col-12 col-md-5 col-lg-5 px-0 oflow-x-hid"></div>
             </div>
-            <div class="row mb-5">
+            <div class="row mb-5 lazy">
                 <div class="col-12 col-md-6 col-lg-6 ml-lg-auto pt-5 pt-lg-0 text-dark">
                     <div class="justify-content-center align-items-center d-none" id="chartSpinner">
                         <div><span class="spinner"></span></div>
