@@ -234,7 +234,7 @@ describe("Running tests for dbOperations", () => {
     test('get validationsentences should call getValidationSentences query once with language', () => {
         const language = 'testLanguage';
         const userId = 123;
-        const req = { params: { language: language }, cookies:{userId} };
+        const req = { params: { language: language }, cookies: { userId } };
         const spyDBany = jest.spyOn(mockDB, 'any')
         when(spyDBany).calledWith(getValidationSentencesQuery, [language, userId]).mockReturnValue(Promise.resolve())
 
@@ -465,7 +465,6 @@ describe("Running tests for dbOperations", () => {
         const state = 'Test State';
         const country = 'Test Country';
         const userId = 123;
-        const limit = 3;
 
         test('should call addValidationQuery and updateSentencesWithValidatedState if action is accept/reject', async () => {
             const spyDBnone = jest.spyOn(mockDB, 'none');
@@ -477,11 +476,11 @@ describe("Running tests for dbOperations", () => {
             await dbOperations.updateTablesAfterValidation(req, res);
 
             expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [userId, sentenceId, action, contributionId, state, country]);
-            expect(spyDBnone).toHaveBeenNthCalledWith(2, updateSentencesWithValidatedState, [sentenceId])
+            expect(spyDBnone).toHaveBeenNthCalledWith(2, updateSentencesWithValidatedState, [sentenceId, contributionId])
             
             jest.resetAllMocks();
         });
-        
+
         test('should only call addValidationQuery if action is skip', async () => {
             const spyDBnone = jest.spyOn(mockDB, 'none');
             spyDBnone.mockReturnValue(Promise.resolve())

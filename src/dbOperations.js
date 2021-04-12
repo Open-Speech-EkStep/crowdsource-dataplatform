@@ -1,4 +1,3 @@
-const { encrypt } = require('./encryptAndDecrypt');
 const { downloader } = require('./downloader/objDownloader')
 const moment = require('moment');
 
@@ -129,7 +128,7 @@ const updateDbWithAudioPath = function (
 
 const getSentencesBasedOnAge = function (
     ageGroup,
-    encryptedUserId,
+    userId,
     userName,
     language,
     motherTongue,
@@ -155,7 +154,7 @@ const getSentencesBasedOnAge = function (
     }
 
     return (db.many(query, [
-        encryptedUserId,
+        userId,
         userName,
         languageLabel,
         language,
@@ -185,14 +184,14 @@ const updateAndGetSentences = function (req, res) {
         motherTongue,
         gender
     );
-    const count = db.one(sentencesCount, [encryptedUserId, userName, language]);
+    const count = db.one(sentencesCount, [userId, userName, language]);
     const unAssign = db.any(unassignIncompleteSentences, [
-        encryptedUserId,
+        userId,
         userName,
     ]);
     const unAssignWhenLanChange = db.any(
         unassignIncompleteSentencesWhenLanChange,
-        [encryptedUserId, userName, language]
+        [userId, userName, language]
     );
     Promise.all([sentences, count, unAssign, unAssignWhenLanChange])
         .then((response) => {
@@ -254,7 +253,7 @@ const updateTablesAfterValidation = (req, res) => {
     return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country])
         .then(async () => {
             if (action !== 'skip') {
-                db.none(updateSentencesWithValidatedState, [sentenceId]).then(() => {
+                db.none(updateSentencesWithValidatedState, [sentenceId, contributionId]).then(() => {
                     res.sendStatus(200);
                 })
                     .catch((err) => {
@@ -378,10 +377,10 @@ const insertFeedback = (subject, feedback, language) => {
 const saveReport = async (userId, sentenceId, reportText, language, userName, source) => {
     await db.any(saveReportQuery, [userId, userName, sentenceId, reportText, language, source]);
     if (source === "validation") {
-        await db.any(markContributionReported, [encryptUserId, userName, sentenceId]);
+        await db.any(markContributionReported, [userId, userName, sentenceId]);
     }
     else if (source === "contribution") {
-        await db.any(markSentenceReported, [encryptUserId, userName, sentenceId]);
+        await db.any(markSentenceReported, [userId, userName, sentenceId]);
     }
 }
 
