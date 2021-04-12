@@ -7,9 +7,12 @@ const {CONTRIBUTION_LANGUAGE, BADGES, LOCALE_STRINGS} = require('./constants');
 
 
 const rowWithBadge = function (levelId, sentenceCount, badgeName, localeString) {
-  console.log(badgeName)
   const badge = BADGES[badgeName.toLowerCase()];
-  return `<tr><td>${localeString.Level} ${levelId}</td><td>${sentenceCount} ${localeString.Sentences}</td><td><div><img src=${badge.imgLg} class="table-img" alt=${badgeName}></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
+  let badgeDescription = `<p class="text-left m-0">Recording: ${sentenceCount} ${localeString.Sentences}<br/>Validation: 80% of recorded ${sentenceCount} ${localeString.Sentences} need to be "correct"</p>`;
+  if(badgeName == 'Bronze'){
+    badgeDescription= `<p class="text-left m-0">Recording: ${sentenceCount} ${localeString.Sentences}</p>`
+  }
+  return `<tr><td>${localeString.Level} ${levelId}</td><td>${badgeDescription}</td><td><div><img src=${badge.imgLg} class="table-img" alt=${badgeName} id="${badgeName}-image-hover" rel="popover"></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
 }
 
 const rowWithoutBadge = function (levelId, sentenceCount, localeString) {
@@ -18,32 +21,37 @@ const rowWithoutBadge = function (levelId, sentenceCount, localeString) {
 
 const getCard = function (badgeName, localeString) {
   const badge = BADGES[badgeName.toLowerCase()];
-  return `<div class="col-12 col-lg-3 col-md-4 col-sm-6">
-            <div class="card row text-center m-2">
-                <div class="py-3">
-                    <img src=${badge.imgLg} alt="bronze_badge">
+  return `<div class="text-center m-2">
+                <div class="py-2">
+                    <img src=${badge.imgLg} alt="bronze_badge" class="img-fluid">
                 </div>
                 <h3 class="py-3">${localeString[badgeName.toLowerCase()]}</h3>
-            </div>
-        </div>`
+            </div>`
+
 }
 
 const renderBadgeDetails = function (data) {
   const $tableRows = $('#table-rows');
-  const $cardRow = $('#card-row');
   const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   data.forEach((element, index) => {
     const {contributions, badge} = element;
     const rowId = index + 1;
     let row;
     if (badge) {
-      const card = getCard(badge, localeString);
-      $cardRow.append(card)
       row = rowWithBadge(rowId, contributions, badge, localeString);
     } else {
       row = rowWithoutBadge(rowId, contributions, localeString);
     }
+    const card = getCard(badge, localeString);
     $tableRows.append(row);
+
+    $(`#${badge}-image-hover[rel=popover]`).popover({
+      html: true,
+      trigger: 'hover',
+      content: function () {
+        return card;
+      }
+    });
   })
 }
 
@@ -57,7 +65,7 @@ $(document).ready(function () {
     performAPIRequest(`/rewards-info?language=${language}`).then(renderBadgeDetails).catch((err) => {
       console.log(err)
     })
-  }).catch(()=>{
-    window.location.href ="/";
+  }).catch(() => {
+    window.location.href = "/";
   })
 });
