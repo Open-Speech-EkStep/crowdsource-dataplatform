@@ -498,7 +498,7 @@ const getRewards = async (userId, userName, language, category) => {
     let isNewBadge = false, generatedBadgeId = '', badges = [];
     if (isCurrentAvailable && contribution_count !== 0) {
         let validationPercent = (validation_count / contribution_count) * 100;
-        if (contribution_count === 5 || validationPercent >= 80) {
+        if (currentMilestoneData.grade === 'Bronze' || validationPercent >= 80) {
             ({
                 isNewBadge,
                 generatedBadgeId,
