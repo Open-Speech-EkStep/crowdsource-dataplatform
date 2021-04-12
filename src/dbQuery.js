@@ -171,11 +171,11 @@ const getBadges = 'select grade, reward_milestone.milestone, id from reward_cata
 and LOWER(language) = LOWER($2) order by milestone desc) \
 as reward_milestone where id=reward_milestone.rid';
 
-const getContributionHoursForLanguage = 'select sum(con.audio_duration::decimal/3600) as hours from contributions con \
-inner join sentences sen on sen."sentenceId"=con."sentenceId" where LOWER(language) = $1 \
+    const getContributionHoursForLanguage = 'select COALESCE(sum(con.audio_duration::decimal/3600), 0) as hours from contributions con \
+inner join sentences sen on sen."sentenceId"=con."sentenceId" where LOWER(language) = LOWER($1) \
 and action = \'completed\' and con.audio_duration is not null';
 
-const getMultiplierForHourGoal = 'select milestone_multiplier as multiplier from language_milestones where language = $1;';
+const getMultiplierForHourGoal = 'select milestone_multiplier as multiplier from language_milestones where LOWER(language) = $1;';
 
 module.exports = {
     unassignIncompleteSentences,
