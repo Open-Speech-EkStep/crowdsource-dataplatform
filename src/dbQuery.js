@@ -19,7 +19,7 @@ where contributor_identifier = $1 and user_name = $2; \
 with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
-from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and sentences.state!= 'reported'\
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
 and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
@@ -38,7 +38,7 @@ where contributor_identifier = $1 and user_name = $2; \
 with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
-from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and sentences.state!= 'reported' \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
 and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
@@ -58,10 +58,10 @@ where contributor_identifier = $1 and user_name = $2; \
 with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
-from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2  and sentences.state!='reported'\
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
-and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
+and (coalesce(cont.action,'assigned')='assigned' or (cont.action='completed' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
 group by sentences."sentenceId", con."contributor_id" \
 order by RANDOM() \
 limit 5  returning "sentenceId") \
@@ -77,7 +77,7 @@ where contributor_identifier = $1 and user_name = $2; \
 with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
-from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 \
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and sentences.state!= 'reported' \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" \
 where sentences."state" is null and language = $4 and label=$3 and cont."action" is NULL limit 5 \
   returning "sentenceId") \
@@ -86,10 +86,10 @@ select ins."sentenceId", sentences.sentence from ins  \
 
 const getValidationSentencesQuery = `select con."sentenceId", sen.sentence, con.contribution_id \
     from contributions con \
-    inner join contributors cont on con.contributed_by = cont.contibutor_id and cont.contributor_identifier!=$2 \ 
+    inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_identifier!=$2 \ 
     inner join sentences sen on sen."sentenceId"=con."sentenceId" and sen."state"= 'contributed' \
-    left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' and val.validated_by!= $2 \
-    where  con.action='completed'  and language=$1 group by con."sentenceId", sen.sentence, con.contribution_id \
+    left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' \
+    where  con.action='completed' and language=$1 and COALESCE(val.validated_by, '')!= $2 group by con."sentenceId", sen.sentence, con.contribution_id \
     order by count(val.*) desc, RANDOM() limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, "action", validated_by, "date", "state_region", "country") \
