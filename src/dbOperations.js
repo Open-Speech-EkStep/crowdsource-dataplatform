@@ -24,6 +24,7 @@ const {
     markContributionSkippedQuery,
     rewardsInfoQuery,
     getTotalUserContribution,
+    getTotalUserValidation,
     checkCurrentMilestoneQuery,
     checkNextMilestoneQuery,
     insertRewardQuery,
@@ -32,7 +33,8 @@ const {
     markSentenceReported,
     markContributionReported,
     updateMaterializedViews,
-    getValidationCountQuery
+    getBadges,
+    addContributorQuery
 } = require('./dbQuery');
 
 const {
@@ -56,7 +58,7 @@ const {
     lastUpdatedAtQuery
 } = require('./dashboardDbQueries');
 
-const { KIDS_AGE_GROUP, ADULT, KIDS } = require('./constants');
+const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP } = require('./constants');
 
 const envVars = process.env;
 const pgp = require('pg-promise')();
@@ -231,20 +233,19 @@ const getAudioClip = function (req, res, objectStorage) {
 
             if (file == null) {
                 res.sendStatus(404);
-            }
-            else {
+            } else {
                 const readStream = file.createReadStream();
                 readStream.pipe(res);
             }
-        }
-        catch (err) {
+        } catch (err) {
             res.sendStatus(500);
         }
     })
         .catch((err) => {
             console.log(err);
             res.sendStatus(500);
-        });;
+        });
+    ;
 }
 
 const updateTablesAfterValidation = (req, res) => {
@@ -348,13 +349,31 @@ const getGenderGroupData = (language = '') => {
     return db.any(genderGroupContributions, filter);
 }
 
-const getAgeGroupData = (language = '') => {
+const getAgeGroupData = async (language = '') => {
     let languageFilter = "true";
     if (language.length !== 0) {
         languageFilter = `language iLike '${language}'`
     }
     let filter = pgp.as.format('$1:raw', [languageFilter])
-    return db.any(ageGroupContributions, filter);
+    const data = await db.any(ageGroupContributions, filter);
+    let response = [];
+    for (let ind in AGE_GROUP) {
+        const age = AGE_GROUP[ind];
+        let isPresent = false, item = {};
+        for (let d in data) {
+            item = data[d];
+            if (item['age_group'] === age) {
+                isPresent = true;
+                break;
+            }
+        }
+        if (isPresent) {
+            response.push(item);
+        } else {
+            response.push({ "age_group": age, "contributions": 0, "hours_contributed": 0, "hours_validated": 0, "speakers": 0 })
+        }
+    }
+    return response;
 }
 
 const getLastUpdatedAt = async () => {
@@ -375,7 +394,8 @@ const insertFeedback = (subject, feedback, language) => {
 }
 
 const saveReport = async (userId, sentenceId, reportText, language, userName, source) => {
-    await db.any(saveReportQuery, [userId, userName, sentenceId, reportText, language, source]);
+    const contributor_id = await getContributorId(userId, userName)
+    await db.any(saveReportQuery, [contributor_id, sentenceId, reportText, language, source]);
     if (source === "validation") {
         await db.any(markContributionReported, [userId, userName, sentenceId]);
     }
@@ -389,10 +409,10 @@ const markContributionSkipped = (userId, sentenceId, userName) => {
 }
 
 const getContributorId = async (userId, userName) => {
-    const contributorInfo = await db.oneOrNone(getContributorIdQuery, [userId, userName]);
+    let contributorInfo = await db.oneOrNone(getContributorIdQuery, [userId, userName]);
 
     if (!contributorInfo) {
-        throw new Error('No User found');
+        contributorInfo = await db.one(addContributorQuery, [userId, userName]);
     }
 
     const contributor_id = contributorInfo.contributor_id;
@@ -401,6 +421,7 @@ const getContributorId = async (userId, userName) => {
 
 const createBadge = async (contributor_id, language, currentMilestoneData, category) => {
     let isNewBadge = false, generatedBadgeId = '';
+    let actualBadges = await db.any(getBadges, [currentMilestoneData.milestone, language]);
 
     let badges = await db.any(findRewardInfo, [contributor_id, language, category]);
     const matchedBadge = badges.filter(function (value) {
@@ -409,11 +430,21 @@ const createBadge = async (contributor_id, language, currentMilestoneData, categ
         }
     })
 
+    let filteredBadges = actualBadges.filter(function (actualValue) {
+        if ((!badges.includes(actualValue)) && (actualValue.id !== currentMilestoneData.id)) {
+            return actualValue;
+        }
+    })
+
     badges = badges.map((value) => {
         return { 'grade': value.grade, 'generated_badge_id': value.generated_badge_id }
     })
 
     if (matchedBadge.length === 0) {
+        filteredBadges.forEach(async value => {
+            let resp = await db.any(insertRewardQuery, [contributor_id, language, value.id, category]);
+            badges.push({ 'grade': value.grade, 'generated_badge_id': resp[0].generated_badge_id })
+        })
         let insertResponse = await db.any(insertRewardQuery, [contributor_id, language, currentMilestoneData.id, category]);
         if (currentMilestoneData.grade)
             isNewBadge = true;
@@ -450,14 +481,29 @@ const getCurrentMilestoneData = async (contribution_count, language) => {
 
 const getRewards = async (userId, userName, language, category) => {
     const contributor_id = await getContributorId(userId, userName);
-
-    const { contribution_count } = await db.one(getTotalUserContribution, [contributor_id, language])
+    let contributions = await db.any(getTotalUserContribution, [contributor_id, language]);
+    let contribution_count = 0;
+    let validation_count = 0;
+    if (contributions) {
+        contributions = contributions.map(data => data['contribution_id']);
+        contribution_count = contributions.length;
+    }
+    if (contribution_count !== 0) {
+        ({ validation_count } = await db.one(getTotalUserValidation, [contributions]))
+    }
 
     const { isCurrentAvailable, currentMilestoneData } = await getCurrentMilestoneData(contribution_count, language);
 
     let isNewBadge = false, generatedBadgeId = '', badges = [];
-    if (isCurrentAvailable) {
-        ({ isNewBadge, generatedBadgeId, badges } = await createBadge(contributor_id, language, currentMilestoneData, category, isNewBadge, generatedBadgeId));
+    if (isCurrentAvailable && contribution_count !== 0) {
+        let validationPercent = (validation_count / contribution_count) * 100;
+        if (contribution_count === 5 || validationPercent >= 80) {
+            ({
+                isNewBadge,
+                generatedBadgeId,
+                badges
+            } = await createBadge(contributor_id, language, currentMilestoneData, category, isNewBadge, generatedBadgeId));
+        }
     }
 
     const nextMilestoneData = await getNextMilestoneData(contribution_count, language);
@@ -466,9 +512,14 @@ const getRewards = async (userId, userName, language, category) => {
     const currentMilestone = currentMilestoneData.milestone || 0;
     const nextMilestone = nextMilestoneData.milestone || 0;
     return {
-        "badgeId": generatedBadgeId, "currentBadgeType": currentBadgeType, "nextBadgeType": nextBadgeType,
-        "currentMilestone": currentMilestone, "nextMilestone": nextMilestone, "contributionCount": Number(contribution_count),
-        "isNewBadge": isNewBadge, 'badges': badges
+        "badgeId": generatedBadgeId,
+        "currentBadgeType": currentBadgeType,
+        "nextBadgeType": nextBadgeType,
+        "currentMilestone": currentMilestone,
+        "nextMilestone": nextMilestone,
+        "contributionCount": Number(contribution_count),
+        "isNewBadge": isNewBadge,
+        'badges': badges
     }
 }
 
@@ -497,5 +548,6 @@ module.exports = {
     saveReport,
     markContributionSkipped,
     getRewards,
-    getRewardsInfo
+    getRewardsInfo,
+    getBadges
 };

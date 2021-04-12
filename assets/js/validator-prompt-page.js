@@ -420,22 +420,22 @@ const handleSubmitFeedback = function () {
     const contributionLanguage = localStorage.getItem("contributionLanguage");
     const otherText = $("#other_text").val();
     const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-        
+
     const reqObj = {
         sentenceId: validationSentences[currentIndex].contribution_id,
         reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
         language: contributionLanguage,
-        userName: speakerDetails.userName,
+        userName: speakerDetails ? speakerDetails.userName : '',
         source: "validation"
     };
-    reportSentenceOrRecording(reqObj).then(function(resp) {
+    reportSentenceOrRecording(reqObj).then(function (resp) {
         if (resp.statusCode === 200) {
             $('#skip_button').click();
             $("#report_recording_modal").modal('hide');
             $("#report_sentence_thanks_modal").modal('show');
             $("#report_submit_id").attr("disabled", true);
-            $("input[type=radio][name=reportRadio]").each(function(){
-                  $(this).prop("checked",false);
+            $("input[type=radio][name=reportRadio]").each(function () {
+                $(this).prop("checked", false);
             });
             $("#other_text").val("");
         }
@@ -451,9 +451,9 @@ $(document).ready(() => {
         updateLocaleLanguagesDropdown(language);
     }
 
-    $("#start_contributing_id").on('click', function() {
+    $("#start_contributing_id").on('click', function () {
         const data = localStorage.getItem("speakerDetails");
-        if(data !== null) {
+        if (data !== null) {
             const speakerDetails = JSON.parse(data);
             speakerDetails.language = language;
             localStorage.setItem("speakerDetails", JSON.stringify(speakerDetails));
@@ -462,22 +462,22 @@ $(document).ready(() => {
     });
 
     const $reportModal = $("#report_recording_modal");
-    
+
     $("#report_submit_id").on('click', handleSubmitFeedback);
 
-    $("#report_btn").on('click', function() {
+    $("#report_btn").on('click', function () {
         $reportModal.modal('show');
     });
 
-    $("#report_close_btn").on("click", function() {
+    $("#report_close_btn").on("click", function () {
         $reportModal.modal('hide');
     });
 
-    $("#report_sentence_thanks_close_id").on("click", function() {
+    $("#report_sentence_thanks_close_id").on("click", function () {
         $("#report_sentence_thanks_modal").modal('hide');
     });
 
-    $("input[type=radio][name=reportRadio]").on("change", function() {
+    $("input[type=radio][name=reportRadio]").on("change", function () {
         selectedReportVal = this.value;
         $("#report_submit_id").attr("disabled", false);
     });
