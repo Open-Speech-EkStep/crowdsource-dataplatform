@@ -40,6 +40,7 @@ function setSentencesContributed() {
   ).then((data) => {
     localStorage.setItem('badgeId', data.badgeId);
     localStorage.setItem('badges', JSON.stringify(data.badges));
+    localStorage.setItem('nextHourGoal', data.nextHourGoal);
     $("#user-contribution").text(data.contributionCount);
     $("#language-hour-goal").text(data.nextHourGoal);
     if (data.isNewBadge) {
@@ -149,9 +150,10 @@ const getTotalProgressSize = () => {
 
 const setTotalProgressBar = (totalSeconds) => {
   const $totalProgress = $("#total-progress");
-  const secondsInHundredHours = 100 * HOUR_IN_SECONDS;
+  const nextHourGoal = Number(localStorage.getItem('nextHourGoal'));
+  const secondsInHourGoal = nextHourGoal * HOUR_IN_SECONDS;
   const barWidth = getTotalProgressSize();
-  const targetPercentCompleted = (totalSeconds / secondsInHundredHours) * 100;
+  const targetPercentCompleted = (totalSeconds / secondsInHourGoal) * 100;
   if (targetPercentCompleted >= 100) {
     $totalProgress.next().css({
       width: barWidth.totalProgressBarBulbWidth + "%",
@@ -190,7 +192,7 @@ const showSpeakersHoursData = (speakerDetailsValue) => {
       speakerDetailsValue.find((t) => t.index === 1).duration
     );
     const totalSeconds = totalCompleteSentence;
-    const {hours,minutes,seconds } = getFormattedTime(totalSeconds);
+    const {hours, minutes, seconds} = getFormattedTime(totalSeconds);
 
     $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
     setTotalProgressBar(totalSeconds);
@@ -352,7 +354,7 @@ function downloadPdf(badgeType) {
   img.crossOrigin = "Anonymous";
   img.src = BADGES[badgeType].imgSm;
   const allBadges = JSON.parse(localStorage.getItem('badges'));
-  const badge = allBadges.find(e =>e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
+  const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
   if (badge) {
     pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
   }

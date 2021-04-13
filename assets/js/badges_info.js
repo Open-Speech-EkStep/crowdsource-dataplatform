@@ -8,9 +8,9 @@ const {CONTRIBUTION_LANGUAGE, BADGES, LOCALE_STRINGS} = require('./constants');
 
 const rowWithBadge = function (levelId, sentenceCount, badgeName, localeString) {
   const badge = BADGES[badgeName.toLowerCase()];
-  let badgeDescription = `<p class="text-left m-0">Recording: ${sentenceCount} ${localeString.Sentences}<br/>Validation: 80% of recorded ${sentenceCount} ${localeString.Sentences} need to be "correct"</p>`;
+  let badgeDescription = `<p class="text-left mb-0 ml-3">Recording: ${sentenceCount} ${localeString.Sentences}<br/>Validation: 80% of recorded ${sentenceCount} ${localeString.Sentences} need to be "correct"</p>`;
   if(badgeName == 'Bronze'){
-    badgeDescription= `<p class="text-left m-0">Recording: ${sentenceCount} ${localeString.Sentences}</p>`
+    badgeDescription= `<p class="text-left mb-0 ml-3">Recording: ${sentenceCount} ${localeString.Sentences}</p>`
   }
   return `<tr><td>${localeString.Level} ${levelId}</td><td>${badgeDescription}</td><td><div><img src=${badge.imgLg} class="table-img" alt=${badgeName} id="${badgeName}-image-hover" rel="popover"></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
 }
@@ -42,14 +42,12 @@ const renderBadgeDetails = function (data) {
     } else {
       row = rowWithoutBadge(rowId, contributions, localeString);
     }
-    const card = getCard(badge, localeString);
     $tableRows.append(row);
-
     $(`#${badge}-image-hover[rel=popover]`).popover({
       html: true,
       trigger: 'hover',
       content: function () {
-        return card;
+        return getCard(badge, localeString);
       }
     });
   })
@@ -57,13 +55,10 @@ const renderBadgeDetails = function (data) {
 
 $(document).ready(function () {
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
-  if (language) {
-    updateLocaleLanguagesDropdown(language);
-  }
-
+  updateLocaleLanguagesDropdown(language);
   getLocaleString().then(() => {
     performAPIRequest(`/rewards-info?language=${language}`).then(renderBadgeDetails).catch((err) => {
-      console.log(err)
+      console.log(err);
     })
   }).catch(() => {
     window.location.href = "/";

@@ -171,7 +171,6 @@ const setSayListenBackground = function (){
 
 function initializeBlock() {
     const speakerDetailsKey = 'speakerDetails';
-    const $startRecordBtn = $('#proceed-box');
     const age = document.getElementById('age');
     const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
