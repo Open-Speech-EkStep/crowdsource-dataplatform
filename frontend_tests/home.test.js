@@ -10,19 +10,48 @@ document.body = stringToHTML(
 );
 
 describe("updateHrsForSayAndListen", () => {
-  test("should updade 0 hrs in both say and listen component when there is empty aggregateDataCountByLanguage", (done) => {
-    const $say_p_3 = document.getElementById("say-p-3");
-    const $listen_p_3 = document.getElementById("listen-p-3");
+  const $say_p_3 = document.getElementById("say-p-3");
+  const $listen_p_3 = document.getElementById("listen-p-3");
+  const $sayLoader = $('#say-loader');
+  const $listenLoader = $('#listen-loader');
+  const language = "Hindi";
+
+  test("should show 0 hrs in both say and listen component when there is empty aggregateDataCountByLanguage", (done) => {
     mockLocalStorage();
+
     localStorage.setItem("localeString", JSON.stringify({'hrs recorded in': '%hours hrs recorded in %language', 'hrs validated in' :'%hours hrs validated in %language'}));
     localStorage.setItem("aggregateDataCountByLanguage", JSON.stringify([]));
-    fetchMock.get(`/aggregate-data-count?byLanguage=${true}`, { data: [] });
-    updateHrsForSayAndListen("Hindi");
+
+    updateHrsForSayAndListen(language);
+
     flushPromises().then(() => {
       expect($say_p_3.innerHTML).toEqual("0 hrs recorded in Hindi");
       expect($listen_p_3.innerHTML).toEqual("0 hrs validated in Hindi");
+      expect($sayLoader.hasClass('d-none')).toEqual(true);
+      expect($listenLoader.hasClass('d-none')).toEqual(true);
       fetchMock.reset();
       localStorage.clear();
+      jest.clearAllMocks();
+      done();
+    });
+  });
+
+  test("should show hrs except 0 in both say and listen component when there is empty aggregateDataCountByLanguage", (done) => {
+    mockLocalStorage();
+
+    localStorage.setItem("localeString", JSON.stringify({'hrs recorded in': '%hours hrs recorded in %language', 'hrs validated in' :'%hours hrs validated in %language'}));
+    localStorage.setItem("aggregateDataCountByLanguage", JSON.stringify([{language:"Hindi",total_contributions:20, total_validations:30},{language: "Odia"}]));
+
+    updateHrsForSayAndListen(language);
+
+    flushPromises().then(() => {
+      expect($say_p_3.innerHTML).toEqual("20 hrs recorded in Hindi");
+      expect($listen_p_3.innerHTML).toEqual("30 hrs validated in Hindi");
+      expect($sayLoader.hasClass('d-none')).toEqual(true);
+      expect($listenLoader.hasClass('d-none')).toEqual(true);
+      fetchMock.reset();
+      localStorage.clear();
+      jest.clearAllMocks();
       done();
     });
   });
