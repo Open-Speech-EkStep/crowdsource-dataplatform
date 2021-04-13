@@ -71,6 +71,7 @@ jobs:
       name: node/default
     steps:
       - *fast-checkout
+      - run: cd project
       - run: pwd
       - run: ls
       - node/install-packages
