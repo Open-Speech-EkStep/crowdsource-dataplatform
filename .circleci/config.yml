@@ -72,14 +72,10 @@ jobs:
     steps:
       - *fast-checkout
       - run:
-            command: | 
-              cd /home/circleci/project/
-              pwd
-              ls
-              npm i
-      - run:
           name: Run DB Migrate
           command: |
+            cd /home/circleci/project/
+            npm i
             echo << parameters.db_name >>
             export DATABASE_URL=postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@${DB_HOST_AWS}/<< parameters.db_name >>
             echo << parameters.db_name >>
