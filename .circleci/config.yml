@@ -18,10 +18,11 @@ jobs:
     steps:
       - checkout
       - run: rm -rf .git
+      - run: pwd
       - persist_to_workspace:
           root: /root
           paths:
-            - project
+            - crowdsource-dataplatform
 
   run_functional_tests:
     parameters:
