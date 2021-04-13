@@ -71,10 +71,12 @@ jobs:
       name: node/default
     steps:
       - *fast-checkout
-      - run: cd /home/circleci/project/
-      - run: pwd
-      - run: ls
-      - node/install-packages
+      - run:
+            command: | 
+              cd /home/circleci/project/
+              pwd
+              ls
+              npm i
       - run:
           name: Run DB Migrate
           command: |
