@@ -18,8 +18,6 @@ jobs:
     steps:
       - checkout
       - run: rm -rf .git
-      - run: pwd
-      - run: ls
       - persist_to_workspace:
           root: /home/circleci/
           paths:
@@ -73,6 +71,8 @@ jobs:
       name: node/default
     steps:
       - *fast-checkout
+      - run: pwd
+      - run: ls
       - node/install-packages
       - run:
           name: Run DB Migrate
