@@ -25,7 +25,8 @@ const BADGES = {
     bronze : {imgLg : "../img/bronze_badge.svg", imgSm:"../img/bronze_contributor.jpeg"},
     silver :{imgLg:"../img/silver_badge.svg",imgSm:"../img/silver_contributor.jpeg"},
     gold :{imgLg:"../img/gold_badge.svg",imgSm:"../img/gold_contributor.jpeg"},
-    platinum :{imgLg:"../img/platinum_badge.svg",imgSm:"../img/platinum_contributor.jpeg"}
+    platinum :{imgLg:"../img/platinum_badge.svg",imgSm:"../img/platinum_contributor.jpeg"},
+    certificate :{imgLg:"../img/certificate.svg",imgSm:"../img/certificate.svg"}
 }
 
 module.exports = {
