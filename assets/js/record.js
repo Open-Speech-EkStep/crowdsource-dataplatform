@@ -163,13 +163,13 @@ const ambienceNoiseCheck = (audioBlob) => {
         method: 'POST',
         body: fd,
     })
-    .then(res => res.json())
-    .then(result => {
-        showAmbientNoise(result);
-    })
-    .catch(err => {
-        console.log(err);
-    });
+        .then(res => res.json())
+        .then(result => {
+            showAmbientNoise(result);
+        })
+        .catch(err => {
+            console.log(err);
+        });
 }
 
 const getMediaRecorder = () => {
@@ -230,12 +230,12 @@ const getMediaRecorder = () => {
         let finalBuffer = flattenArray(audioData, recordingLength);
         let audioBlob = generateWavBlob(finalBuffer, sampleRate);
         if (audioBlob !== null) {
-           ambienceNoiseCheck(audioBlob);
-            
+            ambienceNoiseCheck(audioBlob);
+
             const audioUrl = URL.createObjectURL(audioBlob);
             micAudio = new Audio(audioUrl);
-            micAudio.onloadedmetadata = function() {
-                const audioDuration = Math.ceil(micAudio.duration*1000);
+            micAudio.onloadedmetadata = function () {
+                const audioDuration = Math.ceil(micAudio.duration * 1000);
                 setTimeout(() => {
                     resetMicButton();
                 }, audioDuration);
@@ -470,7 +470,7 @@ const initialize = () => {
             .then((stream) => {
                 $getStarted.hide();
                 $startRecordBtn.addClass('d-none');
-                $skipBtn.prop('disabled',true);
+                $skipBtn.prop('disabled', true);
                 $startRecordRow.removeClass('d-none');
                 $stopRecordBtn.removeClass('d-none');
                 $recordingRow.removeClass('d-none');
@@ -488,7 +488,7 @@ const initialize = () => {
                 if (audioCtx) {
                     audioCtx.close();
                 }
-                audioCtx = new AudioContext({sampleRate: 44100})
+                audioCtx = new AudioContext()
                 const audioAnalyser = audioCtx.createAnalyser();
                 //new audio context to help us record
                 input = audioCtx.createMediaStreamSource(stream);
@@ -496,7 +496,7 @@ const initialize = () => {
                 visualize(visualizer, audioAnalyser);
                 /* Create the Recorder object and configure to record mono sound (1 channel) Recording 2 channels will double the file size */
                 rec = new Recorder(input, {
-                    numChannels: 1,
+                    numChannels: 2,
                 });
                 //start the recording process
                 rec.record();
@@ -537,7 +537,7 @@ const initialize = () => {
         $startRecordRow.addClass('d-none');
         $stopRecordBtn.addClass('d-none');
         $nextBtn.removeClass('d-none');
-        $skipBtn.prop('disabled',false);
+        $skipBtn.prop('disabled', false);
         $reRecordBtn.removeClass('d-none');
         $recordingSign.addClass('d-none');
         $recordingRow.addClass('d-none');
@@ -637,7 +637,7 @@ const initialize = () => {
             credentials: 'include',
             mode: 'cors',
             headers: {
-              "Content-Type": "application/json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(reqObj),
         })
@@ -726,7 +726,7 @@ const initialize = () => {
 
 const resetSpeakerButton = () => {
     cancelAnimationFrame(speakerAnimationID);
-    if (speakerCanvasCtx) {speakerCanvasCtx.clearRect(0, 0, speakerCanvas.width, speakerCanvas.height)};
+    if (speakerCanvasCtx) { speakerCanvasCtx.clearRect(0, 0, speakerCanvas.width, speakerCanvas.height) };
     $testSpeakerBtn.attr('data-value', 'test-speaker');
     $('#test-speaker-text').text(localeStrings['Test Speakers']);
     $('#speaker-svg').removeClass('d-none');
@@ -776,7 +776,7 @@ function playSpeaker() {
         );
     }
     renderFrame();
-    speakerAudio.onended = function() {
+    speakerAudio.onended = function () {
         resetSpeakerButton();
     };
 }
@@ -785,7 +785,7 @@ const handleSubmitFeedback = function () {
     const contributionLanguage = localStorage.getItem("contributionLanguage");
     const otherText = $("#other_text").val();
     const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-        
+
     const reqObj = {
         sentenceId: crowdSource.sentences[currentIndex].sentenceId,
         reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
@@ -793,14 +793,14 @@ const handleSubmitFeedback = function () {
         userName: speakerDetails.userName,
         source: "contribution"
     };
-    reportSentenceOrRecording(reqObj).then(function(resp) {
+    reportSentenceOrRecording(reqObj).then(function (resp) {
         if (resp.statusCode === 200) {
             $('#skipBtn').click();
             $("#report_sentence_modal").modal('hide');
             $("#report_sentence_thanks_modal").modal('show');
             $("#report_submit_id").attr("disabled", true);
-            $("input[type=radio][name=reportRadio]").each(function(){
-                  $(this).prop("checked",false);
+            $("input[type=radio][name=reportRadio]").each(function () {
+                $(this).prop("checked", false);
             });
             $("#other_text").val("");
         }
@@ -825,25 +825,25 @@ function executeOnLoad() {
     cnvs = document.getElementById("mic-canvas");
     cnvs_cntxt = cnvs.getContext("2d");
     localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-    if(contributionLanguage) {
+    if (contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }
 
     $("#report_submit_id").on('click', handleSubmitFeedback);
 
-    $("#report_btn").on('click', function() {
+    $("#report_btn").on('click', function () {
         $reportModal.modal('show');
     });
 
-    $("#report_close_btn").on("click", function() {
+    $("#report_close_btn").on("click", function () {
         $reportModal.modal('hide');
     });
 
-    $("#report_sentence_thanks_close_id").on("click", function() {
+    $("#report_sentence_thanks_close_id").on("click", function () {
         $("#report_sentence_thanks_modal").modal('hide');
     });
 
-    $("input[type=radio][name=reportRadio]").on("change", function() {
+    $("input[type=radio][name=reportRadio]").on("change", function () {
         selectedReportVal = this.value;
         $("#report_submit_id").attr("disabled", false);
     });
@@ -865,13 +865,13 @@ function executeOnLoad() {
 
         //$instructionModal.on('hidden.bs.modal', function () {
         //  $pageContent.removeClass('d-none');
-            // toggleFooterPosition();
+        // toggleFooterPosition();
         //});
-    
-            $("#instructions_close_btn").on("click", function() {
-                $validationInstructionModal.addClass("d-none");
-                setFooterPosition();
-            })
+
+        $("#instructions_close_btn").on("click", function () {
+            $validationInstructionModal.addClass("d-none");
+            setFooterPosition();
+        })
 
         $errorModal.on('show.bs.modal', function () {
             //$instructionModal.modal('hide');
@@ -934,10 +934,10 @@ function executeOnLoad() {
                         $validationInstructionModal.removeClass("d-none");
                         setFooterPosition();
                         // toggleFooterPosition();
-                    } 
+                    }
                     $pageContent.removeClass('d-none');
                     // toggleFooterPosition();
-                    
+
                     crowdSource.sentences = sentenceData.data;
                     crowdSource.count = Number(sentenceData.count);
                     $loader.hide();
