@@ -21,9 +21,9 @@ jobs:
       - run: pwd
       - run: ls
       - persist_to_workspace:
-          root: /home/circleci/project
+          root: /home/circleci/
           paths:
-            - crowdsource-dataplatform
+            - project
 
   run_functional_tests:
     parameters:
