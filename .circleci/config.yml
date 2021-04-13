@@ -10,7 +10,7 @@ orbs:
 definition:
   fast-checkout: &fast-checkout
     attach_workspace:
-      at: /root
+      at: /home/circleci/project
 
 jobs:
   create-workspace:
