@@ -21,11 +21,11 @@ const rowWithoutBadge = function (levelId, sentenceCount, localeString) {
 
 const getCard = function (badgeName, localeString) {
   const badge = BADGES[badgeName.toLowerCase()];
-  return `<div class="text-center m-2">
+  return `<div class="text-center">
                 <div class="py-2">
                     <img src=${badge.imgLg} alt="bronze_badge" class="img-fluid">
                 </div>
-                <h3 class="py-3">${localeString[badgeName.toLowerCase()]}</h3>
+                <h3>${localeString[badgeName.toLowerCase()]}</h3>
             </div>`
 
 }
@@ -46,6 +46,7 @@ const renderBadgeDetails = function (data) {
     $(`#${badge}-image-hover[rel=popover]`).popover({
       html: true,
       trigger: 'hover',
+      placement: 'left',
       content: function () {
         return getCard(badge, localeString);
       }
