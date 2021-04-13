@@ -21,7 +21,7 @@ jobs:
       - persist_to_workspace:
           root: /root
           paths:
-            - /root/*
+            - project
 
   run_functional_tests:
     parameters:
