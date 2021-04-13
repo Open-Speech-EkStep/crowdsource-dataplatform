@@ -64,6 +64,7 @@ jobs:
       - run: aws cloudfront create-invalidation --distribution-id << parameters.distributionId >> --paths '/*'
 
   db_migrate_aws:
+    working_directory: /home/circleci/project
     parameters:
       db_name:
         type: string
