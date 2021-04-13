@@ -126,7 +126,7 @@ workflows:
              - create-workspace
           filters:
             branches:
-              only: master, circleci-workspace
+              only: [master, circleci-workspace]
 
       - build_ui_push_to_s3:
           name: build_dev_ui
