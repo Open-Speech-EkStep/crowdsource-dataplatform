@@ -19,8 +19,9 @@ jobs:
       - checkout
       - run: rm -rf .git
       - run: pwd
+      - run: ls
       - persist_to_workspace:
-          root: /root
+          root: /home/circleci/project
           paths:
             - crowdsource-dataplatform
 
@@ -112,13 +113,8 @@ jobs:
 workflows:
   build_test_deploy:
     jobs:
-      - node/test:
-          version: "13.4"
-
       - create-workspace:
           name: create-workspace
-          requires:
-             - node/test
 
       - db_migrate_aws:
           name: migrate_dev_aws
