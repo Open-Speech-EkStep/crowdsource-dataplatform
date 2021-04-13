@@ -71,12 +71,11 @@ jobs:
       name: node/default
     steps:
       - *fast-checkout
+      - node/install-packages
       - run:
           name: Run DB Migrate
           command: |
             pwd
-            ls
-            npm i
             echo << parameters.db_name >>
             export DATABASE_URL=postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@${DB_HOST_AWS}/<< parameters.db_name >>
             echo << parameters.db_name >>
