@@ -92,6 +92,24 @@ const performAPIRequest = (url) => {
   });
 }
 
+const performAPIPostRequest = (url, data)=>{
+  return fetch(url, {
+    method: "POST",
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((res) => {
+    if (!res.ok) {
+      throw Error(res.statusText || 'HTTP error');
+    } else {
+      return Promise.resolve(res.json());
+    }
+  });
+}
+
 const getLocaleString = function() {
     return new Promise(function(resolve, reject) {
         const locale = localStorage.getItem("i18n") ?? "en";

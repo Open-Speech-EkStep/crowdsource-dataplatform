@@ -7,6 +7,7 @@ const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
 const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
 const LOCALE_STRINGS = 'localeString';
 const CONTRIBUTION_LANGUAGE = "contributionLanguage";
+const SPEAKER_DETAILS_KEY = 'speakerDetails';
 const ALL_LANGUAGES = [
     {value: "Assamese",id: "as", text: "অসমীয়া", hasLocaleText: true, data:true},
     {value: "Bengali", id: "bn", text: "বাংলা", hasLocaleText: true,data:true},
@@ -40,5 +41,6 @@ module.exports = {
     AGGREGATED_DATA_BY_LANGUAGE,
     LOCALE_STRINGS,
     CONTRIBUTION_LANGUAGE,
-    BADGES
+    BADGES,
+    SPEAKER_DETAILS_KEY
 }
