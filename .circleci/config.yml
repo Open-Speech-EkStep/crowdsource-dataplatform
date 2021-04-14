@@ -59,6 +59,18 @@ jobs:
       - node/install-packages
       - run: npm run gulp -- --env=<< parameters.env_name >>
       - aws-s3/sync:
+          arguments: |
+            --cache-control "max-age=8387800" \
+            --exclude "*" \
+            --include "*.svg" \
+            --include "*.jpeg"
+          from: public/
+          to: 's3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>'
+      - aws-s3/sync:
+          arguments: |
+            --cache-control "max-age=0, s-maxage=600" \
+            --exclude "*.svg" \
+            --exclude "*.jpeg"
           from: public/
           to: 's3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>'
       - run: aws cloudfront create-invalidation --distribution-id << parameters.distributionId >> --paths '/*'
