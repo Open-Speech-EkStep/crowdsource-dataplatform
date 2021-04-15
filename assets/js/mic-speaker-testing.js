@@ -297,7 +297,6 @@ function playSpeaker() {
 }
 
 $testMicSpeakerBtn.on('click', () => {
-  console.log("here");
   $testMicDiv.addClass('d-none');
   $testMicSpeakerDetails.removeClass('d-none');
 });
