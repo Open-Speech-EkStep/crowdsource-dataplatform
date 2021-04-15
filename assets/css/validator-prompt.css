@@ -35,4 +35,11 @@ a{
     overflow-x: hidden;
 }
 
+@media (max-width: 767px) {
+    .record-btn-container {
+        flex-direction: column-reverse;
+        align-items: flex-end;
+    }
+}
+
 
