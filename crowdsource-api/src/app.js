@@ -47,7 +47,11 @@ const {
 const { I18n } = require('i18n');
 const i18n = new I18n({
     locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te', 'doi', 'mai', 'ur', 'kr', 'kd', 'mnibn', 'mnimm', 'satol', 'satdv', 'sa'],
+<<<<<<< HEAD:crowdsource-api/src/app.js
     directory: './crowdsource-ui/locales',
+=======
+    directory: './frontend/locales',
+>>>>>>> |Umair + Sreejith| Change file structure of repository:backend/src/app.js
     cookie: 'i18n'
 })
 
@@ -113,7 +117,11 @@ app.use(function (req, res, next) {
     next();
 });
 
+<<<<<<< HEAD:crowdsource-api/src/app.js
 app.use(express.static('crowdsource-ui/target'));
+=======
+app.use(express.static('frontend/public'));
+>>>>>>> |Umair + Sreejith| Change file structure of repository:backend/src/app.js
 
 app.get('/changeLocale/:locale', function (req, res) {
     if (['hi', 'en', 'ta', 'kn', 'gu', 'mr', 'te', 'bn', 'as', 'pa', 'or', "ml"].indexOf(req.params.locale) > -1) {
@@ -159,6 +167,7 @@ router.get('/getAllInfo/:language', async function (req, res) {
 });
 
 router.get('/feedback', function (req, res) {
+<<<<<<< HEAD:crowdsource-api/src/app.js
     res.render('../crowdsource-ui/src/views/feedback.ejs');
 });
 
@@ -184,11 +193,42 @@ router.get('/record', (req, res) => {
 
 router.get('/validator-page', (req, res) => {
     res.render('../crowdsource-ui/src/views/validator-prompt-page.ejs');
+=======
+    res.render('../frontend/views/feedback.ejs');
+});
+
+router.get('/badges', function (req, res) {
+    res.render('../frontend/views/badge-info.ejs');
+});
+
+router.get('/about-us', function (req, res) {
+    res.render('../frontend/views/about-us.ejs', { MOTHER_TONGUE, LANGUAGES });
+});
+
+router.get('/terms-and-conditions', function (req, res) {
+    res.render('../frontend/views/terms-and-conditions.ejs');
+});
+
+router.get('/thank-you', function (req, res) {
+    res.render('../frontend/views/thank-you.ejs');
+});
+
+router.get('/record', (req, res) => {
+    res.render('../frontend/views/record.ejs');
+});
+
+router.get('/validator-page', (req, res) => {
+    res.render('../frontend/views/validator-prompt-page.ejs');
+>>>>>>> |Umair + Sreejith| Change file structure of repository:backend/src/app.js
 });
 
 router.get('/dashboard', function (req, res) {
     const isCookiePresent = req.cookies.userId ? true : false;
+<<<<<<< HEAD:crowdsource-api/src/app.js
     res.render('../crowdsource-ui/src/views/dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
+=======
+    res.render('../frontend/views/dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
+>>>>>>> |Umair + Sreejith| Change file structure of repository:backend/src/app.js
 });
 
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
@@ -297,7 +337,11 @@ router.get('/location-info', (req, res) => {
 
 app.get('/get-locale-strings/:locale', function (req, res) {
     let locale = req.params.locale;
+<<<<<<< HEAD:crowdsource-api/src/app.js
     fs.readFile(`${__dirname}/../../crowdsource-ui/locales/${locale}.json`, (err, body) => {
+=======
+    fs.readFile(`${__dirname}/../../frontend/locales/${locale}.json`, (err, body) => {
+>>>>>>> |Umair + Sreejith| Change file structure of repository:backend/src/app.js
         if (err) {
             return res.sendStatus(500);
         }

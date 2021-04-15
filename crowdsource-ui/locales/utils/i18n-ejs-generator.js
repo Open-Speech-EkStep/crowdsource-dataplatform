@@ -1,4 +1,8 @@
+<<<<<<< HEAD:crowdsource-ui/locales/utils/i18n-ejs-generator.js
 const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES } = require('../../../crowdsource-api/src/constants');
+=======
+const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES } = require('../../../backend/src/constants');
+>>>>>>> |Umair + Sreejith| Change file structure of repository:frontend/locales/utils/i18n-ejs-generator.js
 const fs = require('fs');
 const ejs = require("ejs");
 const { I18n } = require('i18n');
