@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/feedback.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+    <div class="d-flex align-items-center">
+        <a class="logo-text text-dark" href="/">
+            <h2 class="mb-0">
+                <img src="../img/BoloIndiaLogo.png" alt="Bolo India" width="64px" height="54px">
+            </h2>
+        </a>
+        <div class="version-beta">Beta</div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item p-2 dropdown" id="locale_language_dropdown">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    বাংলা
+                </div>
+                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton"><a id="english" class="dropdown-item" href="#" locale="en">English</a></div>
+            </li>
+            <li class="nav-item p-2 dropdown d-none">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Speech Recognition Models
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="https://inference.vakyansh.in/indian-english">English (IN)</a><a class="dropdown-item" href="https://inference.vakyansh.in/gujarati">Gujarati</a> <a class="dropdown-item" href="https://inference.vakyansh.in/hindi">Hindi</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada">Kannada</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada-lm">Kannada (With LM)</a> <a class="dropdown-item" href="https://inference.vakyansh.in/odia">Odia</a> <a class="dropdown-item" href="https://inference.vakyansh.in/tamil">Tamil</a> <a class="dropdown-item" href="https://inference.vakyansh.in/telugu">Telugu</a></div>
+            </li>
+            <li class="nav-item p-2"><a href="./about-us.html" class="nav-link text-dark font-weight-bold">
+                    আমাদের সম্পর্কে
+                </a></li>
+            <li class="nav-item p-2"><a class="nav-link text-dark font-weight-bold d-none" id="nav-user"><span class="material-icons align-middle mx-1">account_circle</span> <span id="nav-username"></span></a></li>
+        </ul>
+    </div>
+</nav>
+        <div id="content-wrapper" class="container-fluid pt-5 pb-2 px-3 px-md-5 h-100">
+            <div id="feedback_form">
+                <div id="feedback_title_container" class="col-12 col-sm-8 offset-sm-2 row align-items-center mb-5">
+                    <svg id="back_btn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.422863 10.9173L11.5394 0.326913C12.0492 -0.159072 12.8201 -0.0954105 13.2592 0.465893C13.6999 1.02809 13.6438 1.87722 13.1339 2.36321L4.613 10.4797H22.7803C23.4536 10.4797 24 11.0813 24 11.8247C24 12.568 23.4536 13.1696 22.7803 13.1696H4.30644L9.16336 17.9497L12.9339 21.6006C13.4616 22.0614 13.5519 22.907 13.1339 23.4898C12.8933 23.8252 12.5363 24 12.1761 24C11.911 24 11.6443 23.9058 11.4198 23.7095L7.5948 20.0066L0.408228 12.9374C0.146395 12.6801 -0.00240898 12.3107 3.05176e-05 11.9233C0.00328255 11.5368 0.156151 11.1701 0.422863 10.9173Z" fill="#343A40"/>
+                    </svg>  
+                    <h2 class="font-wt-900 ml-4">ফীডব্যাক</h2>
+                </div>
+                <div class="row">
+                    <div class="mb-4 row col-12 col-sm-8 offset-sm-2 no_xs_margin">
+                        <label for="feedback_subject" class="col-12 col-sm-2 col-form-label">বিষয়</label>
+                        <div class="col-12 col-sm-10">
+                            <input maxlength="128" type="text" class="form-control" id="feedback_subject" placeholder="বিষয়">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 row col-12 col-sm-8 offset-sm-2 no_xs_margin">
+                        <label for="feedback_description" class="col-12 col-sm-2 col-form-label">বিবরণ</label>
+                        <div class="col-12 col-sm-10 position-relative">
+                            <textarea maxlength="1000" rows="12" type="password" class="form-control" id="feedback_description" placeholder="এখানে টাইপ করুন ..."></textarea>
+                            <span class="pull-right label label-default" id="count_message"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 row col-12 col-sm-8 offset-sm-2 no_xs_margin">
+                        <div class="col-12 col-sm-2"></div>
+                        <div class="col-12 col-sm-10 d-flex flex-column align-items-center justify-content-center">
+                            <p id="feedback_failure_msg" class="d-none text-danger font-weight-bold">পফীডব্যাক জমা করতে ব্যর্থ। আবার চেষ্টা করুন।</p>
+                            <button class="btn btn-primary mt-3" id="submit_btn">জমা করুন</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="feedback_thank_you_screen" class="d-none">
+                <div class="row">
+                    <div class="col-sm-6 offset-sm-3 d-flex flex-column align-items-center text-center">
+                        <h2 class="font-wt-900">আপনার মূল্যবান ফীডব্যাকের জন্য ধন্যবাদ</h2>
+                        <p class="p-5">আপনার ফীডব্যাক আমাদের বলো ভারতকে প্রাসঙ্গিক রাখতে সাহায্য করে, ফীডব্যাক জানাতে সময় দেওয়ার জন্য আমরা প্রশংসা করি।</p>
+                        <a role="button" href="./home.html" class="btn btn-outline-primary d-flex justify-content-center align-items-center mt-3" id="back_to_home_btn">হোমপেজ-এ ফিরে যান</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <footer class="fixed-bottom bg-light pt-3 border-top w-100">
+    <div class="container-fluid">
+        <div class="d-flex flex-column-reverse flex-lg-row justify-content-lg-around align-items-sm-center align-items-md-center text-center">
+            <div class="d-none">
+                <p class="text-muted">Supported by EkStep Foundation (built on <a href="https://sunbird.org/ai">sunbird.org/ai</a>)</p>
+            </div>
+            <div class="d-lg-inline-flex justify-content-around mb-2">
+                <div class="py-2 px-16">
+                    <a href="./about-us.html">
+                        আমাদের সম্পর্কে
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html">
+                        শর্তাবলী
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html#privacy-policy">
+                        গোপনীয়তা নীতি
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./feedback.html">
+                        ফীডব্যাক
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../js/locale.js"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="../js/feedback.js"></script>
+</body>
+
+</html>
