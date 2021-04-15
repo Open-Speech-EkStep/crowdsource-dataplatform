@@ -162,15 +162,24 @@ $(document).ready(function () {
         updateGraph(selectedLanguage, selectedDuration, true);
     });
 
-    $("#no-data-found").on('mouseenter touchstart', (e) => {
+    $("#no-data-found").on('mouseenter', (e) => {
         clearTimeout(timer);
     });
-
-    $("#no-data-found").on('mouseleave touchend', (e) => {
+    $("#no-data-found").on('mouseleave', (e) => {
         timer = setTimeout(() => {
             $('#no-data-found').addClass('d-none');
         }, 5000);
     });
+
+    const noDataFoundEl = document.getElementById('no-data-found');
+    noDataFoundEl.addEventListener('touchstart', function () {
+        clearTimeout(timer);
+    }, {passive: true});
+    noDataFoundEl.addEventListener('touchend', function () {
+        timer = setTimeout(() => {
+            $('#no-data-found').addClass('d-none');
+        }, 5000);
+    }, {passive: true});
 
     $("#contribute-now").on('click', (e) => {
         localStorage.setItem("i18n", "en");
