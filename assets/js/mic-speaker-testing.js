@@ -1,4 +1,5 @@
 const {LOCALE_STRINGS} = require('../js/constants');
+const fetch = require('./fetch');
 
 let audioData = [];
 let recordingLength = 0;
