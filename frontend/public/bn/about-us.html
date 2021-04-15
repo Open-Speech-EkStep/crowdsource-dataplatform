@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/home.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+    <div class="d-flex align-items-center">
+        <a class="logo-text text-dark" href="/">
+            <h2 class="mb-0">
+                <img src="../img/BoloIndiaLogo.png" alt="Bolo India" width="64px" height="54px">
+            </h2>
+        </a>
+        <div class="version-beta">Beta</div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item p-2 dropdown" id="locale_language_dropdown">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    বাংলা
+                </div>
+                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton"><a id="english" class="dropdown-item" href="#" locale="en">English</a></div>
+            </li>
+            <li class="nav-item p-2 dropdown d-none">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Speech Recognition Models
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="https://inference.vakyansh.in/indian-english">English (IN)</a><a class="dropdown-item" href="https://inference.vakyansh.in/gujarati">Gujarati</a> <a class="dropdown-item" href="https://inference.vakyansh.in/hindi">Hindi</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada">Kannada</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada-lm">Kannada (With LM)</a> <a class="dropdown-item" href="https://inference.vakyansh.in/odia">Odia</a> <a class="dropdown-item" href="https://inference.vakyansh.in/tamil">Tamil</a> <a class="dropdown-item" href="https://inference.vakyansh.in/telugu">Telugu</a></div>
+            </li>
+            <li class="nav-item p-2"><a href="./about-us.html" class="nav-link text-dark font-weight-bold">
+                    আমাদের সম্পর্কে
+                </a></li>
+            <li class="nav-item p-2"><a class="nav-link text-dark font-weight-bold d-none" id="nav-user"><span class="material-icons align-middle mx-1">account_circle</span> <span id="nav-username"></span></a></li>
+        </ul>
+    </div>
+</nav>
+        <div class="container-fluid">
+            <div class="row pt-lg-5">
+                <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 text-dark mt-4">
+                    <h1 class="display-5 font-wt-900 site-blue lh-5">
+                        বোলো ইন্ডিয়া: ভারতীয় ভাষাগুলির জন্য ক্রাউডসোর্সিং-এর উদ্যোগ
+                    </h1>
+                    <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
+                        ভারতীয় ভাষাসমূহে বাচন শনাক্তকরণের ক্ষেত্রে আত্মনির্ভর হওয়া চাই। তাই, আমাদের অনেক ভারতীয় স্বরে ওপেন ডেটা ভাণ্ডার তৈরি করা চাই। রাষ্ট্রীয় ভাষা অনুবাদ মিশনের (এনএলটিএম) অধীনে ভারত সরকারের মেইটি দ্বারা একটি প্রয়াস। এই প্রয়াসটি একস্টেপ ফাউন্ডেশন একটি জনহিতের ভিত্তিতে সমর্থন করে এবং এটি বিভিন্ন ওপেন সোর্স ফ্রেমওয়ার্ক সহ <a href="https://sunbird.org/projects/vakyansh">sunbird.org</a> এর অধীনে ওপেন সোর্স কাজটি উদ্দেশ্যসাধনের সুবিধায় কাজ করে।
+                    </p>
+                    <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify my-5">
+                        সেই উদ্দেশ্যের জন্য আপনার স্বরের অবদান এবং স্বেচ্ছাসেবীর জন্য বোলো ইন্ডিয়া আপনাকে আমন্ত্রণ জানায়। আপনার সমস্ত অবদানগুলি স্বয়ংক্রিয়ভাবে প্রক্রিয়াজাত হয় এবং সমাজের কাছে উপযোগী ফ্যাশনে ওপেন ডেটা হিসেবে উপলব্ধ করায়। এই ধরনের ডেটা ভাষা ও প্রযুক্তিতে আগ্রহী ব্যক্তিগণ বিশ্বস্তরীয় বাচন শনাক্তকরণ অ্যাপ্লিকেশন তৈরির জন্য ব্যবহার করতে পারেন।
+                    </p><br><br>
+                </div>
+                <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="../img/home.svg" class="img-fluid mr-n1" alt="home"></div>
+            </div>
+        </div>
+        <div class="container-fluid bg-blue mt-n6 pb-6 pt-6">
+            <div class="row justify-content-center text-white pt-5 pb-5">
+                <div class="col-10 col-lg-4 text-left pr-4 pl-0 mb-2">
+                    <p class="h1 font-wt-900 lh-5">
+                        ভারত হল বহু ভাষার দেশ, আমাদের ডিজিট্যাল কৌশলে এর প্রভাব হওয়া চাই
+                    </p>
+                </div>
+                <div class="col-10 col-lg-3 text-left lh-7 pl-lg-3 pl-0 mb-2">
+                    <section class="lead font-weight-normal-sm">
+                        ভারতের 90% জনগণ তাদের দৈনন্দিন কাজকর্মের জন্য আঞ্চলিক ভাষা ব্যবহার করে।
+                    </section>
+                </div>
+                <div class="col-10 col-lg-3 text-left lh-7 pl-lg-3 pl-0 mb-2">
+                    <section class="lead font-weight-normal-sm">
+                        যেভাবে আরও বেশি সংখ্যক লোক আর্থিক, শিক্ষামূলক এবং সামাজিক ক্রিয়াকলাপের জন্য ডিজিট্যাল প্ল্যাটফর্মগুলি ব্যবহার করছে, ডিজিট্যাল প্ল্যাটফর্মগুলি অবশ্যই ভারতীয় ভাষাগুলিতে নির্বিঘ্নে কাজ করবে।
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-light-blue mt-n5">
+            <div class="row pb-6 pt-6 justify-content-center mt-5">
+                <div class="col-10 col-lg-4 text-center p-5 align-self-center"><img src="../img/about-us-1.svg" alt="Speaker Diversity" class="img-fluid"></div>
+                <div class="col-10 col-lg-6 text-left pb-5">
+                    <p class="h1 font-wt-900 lh-5">
+                        নিজের ভাষাকে সাহায্য করুন
+                    </p>
+                    <p class="lead lh-7 mt-5 font-weight-normal-sm">
+                        আমাদের বাচন শনাক্তকরণ প্রযুক্তি তৈরি করা প্রয়োজন যা আপনার ভাষার জন্য সঠিক। এটির অবশ্যই নির্ভুল হতে হবে এবং আপনার ভাষার লোকেদের দৈনন্দিন ভাষা এবং যোগাযোগগুলি বুঝতে হবে। <br><br>
+                            আপনার ভাষায় বিশ্বস্তরীয বাচন শনাক্তকরণ প্রযুক্তি বিভিন্ন ক্ষেত্রে যেমন শিক্ষা, স্বাস্থ্যসেবা এবং মিডিয়াতে আপনার ভাষার ডিজিটাল প্রথম মডেল সক্ষম করবে। <br><br>
+                                আপনার ভাষায় বিকাশের প্রস্তাবিত টুল, ইউটিলিটি এবং মডেলগুলি বোলো ইন্ডিয়া ক্রাউড সোর্সিং প্ল্যাটফর্মের মাধ্যমে মুক্ত উৎসের অবদানের উপর নির্ভর করবে
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-blue mt-n5 supreme-container">
+            <div class="row pt-5 justify-content-center mt-5">
+                <div class="col-10 col-lg-6 text-left text-white pb-5">
+                    <p class="h1 font-wt-900 lh-5">
+                        জনসমাগম এবং আপনার অবদান:
+                    </p>
+                    <p class="lead lh-7 mt-5 font-weight-normal-sm">
+                        বাচন শনাক্তকরণ &#34;মেশিন-লার্নিং&#34; প্রযুক্তির উপর নির্ভর করে যার জন্য বিশাল ডেটাসেটের প্রয়োজন যাতে বিবিধ ভারতীয় স্বর এবং সংশ্লিষ্ট পাঠ্যের অন্তর্ভুক্ত। বোলো ইন্ডিয়া-এর মাধ্যমে আমরা ভারতীয় ভাষায় কথা বলার জন্য ভারতীয় স্বরের এক বিভিন্ন ওপেন ভাণ্ডার তৈরি করতে চাই, যার ব্যবহার এই কর্মোদ্যোগের জন্য করা যেতে পারে। <br><br>
+                            এখানেই আপনার আমন্ত্রণ<br><br>
+                                আমরা আপনাকে যোগদান করতে এবং এই উদ্যোগটিতে আপনার স্বর অবদান রাখতে আমন্ত্রণ জানাচ্ছি। এক নাগাড়ে আপনার স্বর রেকর্ডিং অপ্রতিরোধ্য হতে পারে এবং তাই আপনি আমাদের সাথে একাধিকবার দেখা করতে পারেন এবং আপনি যেখান থেকে চলে গিয়েছিলেন সেখান থেকে শুরু করার জন্য আমরা আমাদের ওয়েবসাইটের ব্যবস্থা তৈরি করেছি। <br><br>
+                                    আপনার অবদানের প্রতিটি মিনিট একটি বিশাল মতভেদ তৈরি করবে এবং আমাদের উদ্দেশ্যটি সফল করতে সাহায্য করবে।
+                    </p>
+                    <div class="row mt-4 ml-0 mr-0 justify-content-between" id="language-top-row"><select class="btn btn-outline btn-light h6 w-100 rounded col-12 col-md-8 col-lg-6 mt-4 p-3" id="languageTop">
+                            <option disabled="disabled" selected="selected" class="pointer">
+                                একটি ভাষা নির্বাচন করুন
+                            </option>
+                            
+                                <option value="Assamese">
+                                    অসমীয়া
+                                </option>
+                                
+                                <option value="Bengali">
+                                    বাংলা
+                                </option>
+                                
+                                <option value="English">
+                                    English
+                                </option>
+                                
+                                <option value="Gujarati">
+                                    ગુજરાતી
+                                </option>
+                                
+                                <option value="Hindi">
+                                    हिंदी
+                                </option>
+                                
+                                <option value="Kannada">
+                                    ಕನ್ನಡ
+                                </option>
+                                
+                                <option value="Malayalam">
+                                    മലയാളം
+                                </option>
+                                
+                                <option value="Marathi">
+                                    मराठी
+                                </option>
+                                
+                                <option value="Odia">
+                                    ଓଡିଆ
+                                </option>
+                                
+                                <option value="Punjabi">
+                                    ਪੰਜਾਬੀ
+                                </option>
+                                
+                                <option value="Tamil">
+                                    தமிழ்
+                                </option>
+                                
+                                <option value="Telugu">
+                                    తెలుగు
+                                </option>
+                                
+                        </select>
+                        <div class="col-md-8 col-12 col-lg-5 pr-0"><button class="btn btn-light h6 shadow w-100 rounded mt-4 p-3" disabled="disabled" id="start_recording" data-toggle="modal" data-target="#userModal">
+                                অবদান শুরু করুন
+                            </button></div>
+                    </div>
+                </div>
+                <div class="col-10 col-lg-4 text-center p-5 align-self-center"><img src="../img/about-us-2.svg" alt="Speaker Diversity" class="img-fluid"></div>
+
+            </div>
+        </div>
+        <div class="container-fluid bg-blue d-none">
+            <div class="text-center text-white pt-5">
+                প্রতিষ্ঠান সম্পর্কে
+            </div>
+            <p class="h1 font-wt-900 text-center text-white mt-3">
+                একস্টেপ ফাউন্ডেশন
+            </p>
+            <div class="row pb-6 justify-content-center text-white">
+                <div class="col-10 col-lg-6 mb-3 text-left lh-7 py-5 lead font-weight-normal-sm">
+                    একস্টেপ ফাউন্ডেশন অংশীদারদের একত্রিত করে এবং জটিল সমস্যাগুলি সমাধান করার জন্য উন্মুক্ত কাঠামো, সরঞ্জাম এবং ফ্রেমওয়ার্ক তৈরি করে। আমরা সানবার্ড নামে পরিচিত ওপেন সোর্স ডিজিটাল কাঠামোকে কাজে লাগিয়ে এবং সোসিয়েটাল প্ল্যাটফর্ম অ্যাপ্রোচ নামক চিন্তার উপায় অনুসরণ করে  এটি করে চলেছি <br><br>
+                        একস্টেপ রোহিনী এবং নন্দন নীলেকানি এবং শঙ্কর মারুওয়াদা দ্বারা প্রতিষ্ঠিত একটি অলাভজনক প্রতিষ্ঠান।
+                            <p></p>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <footer class="fixed-bottom bg-light pt-3 border-top w-100">
+    <div class="container-fluid">
+        <div class="d-flex flex-column-reverse flex-lg-row justify-content-lg-around align-items-sm-center align-items-md-center text-center">
+            <div class="d-none">
+                <p class="text-muted">Supported by EkStep Foundation (built on <a href="https://sunbird.org/ai">sunbird.org/ai</a>)</p>
+            </div>
+            <div class="d-lg-inline-flex justify-content-around mb-2">
+                <div class="py-2 px-16">
+                    <a href="./about-us.html">
+                        আমাদের সম্পর্কে
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html">
+                        শর্তাবলী
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html#privacy-policy">
+                        গোপনীয়তা নীতি
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./feedback.html">
+                        ফীডব্যাক
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../js/locale.js"></script>
+
+            <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="margin-left-auto"><button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+            <div class="modal-header d-block border-0">
+                <h1 class="modal-title text-center">
+                    স্পিকারের বিবরণ
+                </h1>
+            </div>
+            <div class="modal-body px-6" id="speaker-details">
+                <p class="text-muted text-center">
+                    সমস্ত ক্ষেত্র ঐচ্ছিক
+                </p>
+                <div class="col-12 text-center text-primary" id="resetBtn" style="cursor:pointer">
+                    আপনি নয়? ব্যবহারকারী পরিবর্তন করুন
+                </div>
+                <div class="form-group mt-5"><label for="username" class="form-label">
+                        ব্যবহারকারীর নাম
+                    </label> <input class="form-control" maxlength="12" id="username" data-toggle="tooltip" placeholder="পছন্দের ব্যবহারকারী নাম লিখুন" title="">
+                    <div class="text-danger mt-2 d-none" id="username-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px" height="18px">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg> <span class="align-middle">
+                            দয়া করে ইমেল বা মোবাইল নম্বর ব্যবহারকারীর নাম হিসাবে ব্যবহার করবেন না
+                        </span></div>
+                </div>
+                <div class="form-group"><label for="mother-tongue" class="form-label">
+                        মাতৃভাষা
+                    </label> <select class="form-control" id="mother-tongue">
+                        <option selected="selected" value="">
+                            মাতৃভাষা নির্বাচন করুন
+                        </option>
+                        
+                            <option value="Assamese">
+                                Assamese
+                            </option>
+                            
+                            <option value="Bengali">
+                                Bengali
+                            </option>
+                            
+                            <option value="Bodo">
+                                Bodo
+                            </option>
+                            
+                            <option value="Dogri">
+                                Dogri
+                            </option>
+                            
+                            <option value="Gujarati">
+                                Gujarati
+                            </option>
+                            
+                            <option value="Hindi">
+                                Hindi
+                            </option>
+                            
+                            <option value="Kannada">
+                                Kannada
+                            </option>
+                            
+                            <option value="Kashmiri">
+                                Kashmiri
+                            </option>
+                            
+                            <option value="Konkani">
+                                Konkani
+                            </option>
+                            
+                            <option value="Maithili">
+                                Maithili
+                            </option>
+                            
+                            <option value="Malayalam">
+                                Malayalam
+                            </option>
+                            
+                            <option value="Manipuri">
+                                Manipuri
+                            </option>
+                            
+                            <option value="Marathi">
+                                Marathi
+                            </option>
+                            
+                            <option value="Nepali">
+                                Nepali
+                            </option>
+                            
+                            <option value="Odia">
+                                Odia
+                            </option>
+                            
+                            <option value="Punjabi">
+                                Punjabi
+                            </option>
+                            
+                            <option value="Sanskrit">
+                                Sanskrit
+                            </option>
+                            
+                            <option value="Santali">
+                                Santali
+                            </option>
+                            
+                            <option value="Sindhi">
+                                Sindhi
+                            </option>
+                            
+                            <option value="Tamil">
+                                Tamil
+                            </option>
+                            
+                            <option value="Telugu">
+                                Telugu
+                            </option>
+                            
+                            <option value="Urdu">
+                                Urdu
+                            </option>
+                            
+                    </select></div>
+                <div class="form-group"><label for="age" class="form-label">
+                        বয়স গ্রুপ
+                    </label> <select class="form-control" id="age">
+                        <option selected="selected" value="">
+                            বয়স গ্রুপ  নির্বাচন করুন
+                        </option>
+                        <option value="upto 10">upto 10 (Kid)</option>
+                        <option value="10 - 30">10 - 30 (Youth)</option>
+                        <option value="30 - 60">30 - 60 (Adult)</option>
+                        <option value="60+">60+ (Senior)</option>
+                    </select></div>
+                <div class="form-group"><label for="gender" class="form-label">
+                        লিঙ্গ
+                    </label>
+                    <div class="justify-content-between">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="male-check" value="male"> 
+                                <label class="form-check-label m-2" for="male-check">
+                                পুরুষ
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="female-check" value="female"> 
+                            <label class="form-check-label m-2" for="female-check">
+                                মহিলা
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="other-check" value="others"> 
+                            <label class="form-check-label m-2" for="other-check">
+                                অন্যান্য
+                            </label>
+                        </div>
+                    </div>
+                    <div id="transgender_options" class="justify-content-between d-none">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="trans-he-check" value="Transgender - He">
+                            <label class="form-check-label m-2" for="trans-he-check">
+                                রূপান্তরকামী - পুরুষ
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="trans-she-check" value="Transgender - She"> 
+                            <label class="form-check-label m-2" for="trans-she-check">
+                                রূপান্তরকামী - মহিলা
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="not-say-check" value="Rather Not Say" checked="checked"> 
+                            <label class="form-check-label m-2" for="not-say-check">
+                                বলতে চান না
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label mt-2">
+                        সামনের ধাপে এগিয়ে গিয়ে আপনি <a href="./terms-and-conditions.html">শর্তাবলী</a> সম্মত হলেন
+                    </label>
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <div class="col-12" data-toggle="tooltip" title="এগিয়ে যাওয়ার আগে যে কোনো ত্রুটি বার্তা বৈধ করুন"><button type="button" id="proceed-box" class="btn btn-primary h6 shadow w-100 rounded p-3" data-toggle="modal" data-target="#languageModal">
+                            চলো শুরু করি
+                        </button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <script>document.body.querySelector("footer").classList.remove("fixed-bottom")</script>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                <script src="../js/about-us.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head><title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/record.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+</head>
+<body> <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+    <div class="d-flex align-items-center">
+        <a class="logo-text text-dark" href="/">
+            <h2 class="mb-0">
+                <img src="../img/BoloIndiaLogo.png" alt="Bolo India" width="64px" height="54px">
+            </h2>
+        </a>
+        <div class="version-beta">Beta</div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item p-2 dropdown" id="locale_language_dropdown">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Konkani DV
+                </div>
+                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton"><a id="english" class="dropdown-item" href="#" locale="en">English</a></div>
+            </li>
+            <li class="nav-item p-2 dropdown d-none">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Speech Recognition Models
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="https://inference.vakyansh.in/indian-english">English (IN)</a><a class="dropdown-item" href="https://inference.vakyansh.in/gujarati">Gujarati</a> <a class="dropdown-item" href="https://inference.vakyansh.in/hindi">Hindi</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada">Kannada</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada-lm">Kannada (With LM)</a> <a class="dropdown-item" href="https://inference.vakyansh.in/odia">Odia</a> <a class="dropdown-item" href="https://inference.vakyansh.in/tamil">Tamil</a> <a class="dropdown-item" href="https://inference.vakyansh.in/telugu">Telugu</a></div>
+            </li>
+            <li class="nav-item p-2"><a href="./about-us.html" class="nav-link text-dark font-weight-bold">
+                    आमचेविशीं
+                </a></li>
+            <li class="nav-item p-2"><a class="nav-link text-dark font-weight-bold d-none" id="nav-user"><span class="material-icons align-middle mx-1">account_circle</span> <span id="nav-username"></span></a></li>
+        </ul>
+    </div>
+</nav>
+<div id="loader" class="overlay__content"><span class="spinner"></span></div>
+<div id="page-content" class="d-none">
+    <div id="content-wrapper" class="container-fluid d-flex flex-column">
+        
+<div id="validation-instruction-modal" class="d-none">
+    <div class="validation-instruction d-flex justify-content-between position-relative">
+        <div class="quick-tips-container d-flex flex-column justify-content-center align-items-center">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.6255 9.63106C20.125 9.58306 20.125 10.3511 19.6255 10.3991C18.6501 10.4952 17.651 10.6152 16.7233 10.7112C16.2237 10.7592 16.2237 9.9911 16.7233 9.9431C17.651 9.82308 18.6501 9.72707 19.6255 9.63106Z" fill="#F7F7F7"/>
+                <path d="M16.4378 3.17488C16.7471 2.76683 17.4131 3.17488 17.1039 3.58292C16.533 4.399 15.9383 5.16707 15.3198 5.98316C15.0105 6.3912 14.3444 5.98316 14.6537 5.57512C15.296 4.75903 15.8669 3.94295 16.4378 3.17488Z" fill="#F7F7F7"/>
+                <path d="M7.99273 16.064C8.08788 16.616 8.13546 17.1441 8.13546 17.6481V17.7441C8.13546 18.5122 8.75396 19.1363 9.51518 19.1363H10.324C10.9901 19.1363 11.5848 18.6322 11.7037 17.9602C11.6561 17.9602 11.6561 17.9602 11.6085 17.9602C10.7997 17.9602 10.0385 17.9602 9.22972 17.9602C8.73017 17.9602 8.73017 17.1921 9.22972 17.1921C10.0385 17.1921 10.7997 17.1921 11.6085 17.1921C11.6561 17.1921 11.7037 17.1921 11.7513 17.2401C11.7989 16.112 12.0605 14.6718 12.4174 14.1678L12.4649 14.1198C12.4649 14.1198 12.679 13.8558 12.7266 13.8558C13.6306 13.0877 14.0587 12.0556 14.0587 10.7834C14.0587 8.52722 12.227 6.67904 9.99095 6.67904C7.75485 6.67904 5.92315 8.52722 5.92315 10.7834C5.92315 12.0556 6.4227 13.0877 7.30287 13.8558L7.35045 13.9038L7.56454 14.1678C7.70727 14.3838 7.87379 14.8399 7.96894 15.3439C8.01652 15.3439 8.06409 15.2959 8.11167 15.2959C8.92047 15.2959 9.6817 15.2959 10.4905 15.2959C10.9901 15.2959 10.9901 16.064 10.4905 16.064C9.53897 16.064 8.77774 16.064 7.99273 16.064ZM14.8913 10.7114C14.8913 12.2476 14.3442 13.5197 13.2737 14.4078L13.0834 14.6238C12.8931 14.9839 12.5839 16.424 12.5839 17.6001V17.6961C12.5839 18.9683 11.561 20.0004 10.3002 20.0004H9.49139C8.23061 20.0004 7.20772 18.9683 7.20772 17.6961V17.6001C7.20772 16.424 6.89847 14.9839 6.70816 14.6238L6.54164 14.4798C5.47117 13.5197 4.87646 12.2716 4.87646 10.7354C4.87646 7.97517 7.11256 5.71894 9.84822 5.71894C12.6314 5.69494 14.8913 7.92716 14.8913 10.7114Z" fill="#F7F7F7"/>
+                <path d="M10.229 0.414041C10.229 1.39814 10.229 2.40624 10.229 3.39034C10.229 3.89439 9.46777 3.89439 9.46777 3.39034C9.46777 2.40624 9.46777 1.39814 9.46777 0.414041C9.46777 -0.138014 10.229 -0.138014 10.229 0.414041Z" fill="#F7F7F7"/>
+                <path d="M5.30492 5.57512C5.61417 5.98316 4.9481 6.34319 4.63885 5.98316C4.06793 5.21508 3.47323 4.399 2.85473 3.58292C2.59306 3.17488 3.25913 2.76683 3.5208 3.17488C4.1393 3.94295 4.71022 4.75903 5.30492 5.57512Z" fill="#F7F7F7"/>
+                <path d="M3.28278 9.9431C3.78234 9.9911 3.78234 10.8072 3.28278 10.7112C2.28368 10.6392 1.30836 10.4952 0.356824 10.3991C-0.118941 10.3511 -0.118941 9.58306 0.356824 9.63106C1.35593 9.72707 2.28368 9.82308 3.28278 9.9431Z" fill="#F7F7F7"/>
+                </svg>
+            <span class="quick-tips-text mt-2">Quick Tips</span>            
+        </div>
+        <div class="instructions d-flex flex-grow-1 justify-content-around">
+            <div class="d-flex flex-column instruction-box first">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">settings_voice</i>
+                <span class="text-center mt-2">तुमच्या मायक्रोफोनाची चाचणी घेयात</span>            
+            </div>          
+            <div class="d-flex flex-column instruction-box second">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">speaker</i>
+                <span class="text-center mt-2">तुमच्या स्पीकर्सची चाचणी घेयात</span>            
+            </div>          
+            <div class="d-flex flex-column instruction-box third">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">equalizer</i>
+                <span class="text-center mt-2">फाटल्यान बोवाळ ना हाची खात्री करून घेयात</span>            
+            </div>          
+            <div class="d-flex flex-column instruction-box fourth">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">record_voice_over</i>
+                <span class="text-center mt-2">Read once <b>before recording it</b></span>            
+            </div>          
+            <div class="d-flex flex-column instruction-box last">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">play_circle_filled</i>
+                <span class="text-center mt-2">ध्वनिमुद्रण बटनार क्लीक करून सूरू करात</span>            
+            </div>
+        </div>  
+        <div>
+            <button id="instructions_close_btn" class="btn p-0 close-btn">&times;</button>
+        </div>        
+    </div>
+</div>
+
+        <div class="d-flex justify-content-end pt-3 record-btn-container">
+            <div class="report-btn-container">
+    <button class="btn" id="report_btn" type="button">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 11V5H11V11H9Z" fill="#959595"/>
+            <path d="M10 14C10.5523 14 11 13.5523 11 13C11 12.4477 10.5523 12 10 12C9.44771 12 9 12.4477 9 13C9 13.5523 9.44771 14 10 14Z" fill="#959595"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.73576 19.6474L6.67338 17.0042C7.71408 17.3253 8.83372 17.5 10 17.5C15.5228 17.5 20 13.5825 20 8.75C20 3.91751 15.5228 0 10 0C4.47715 0 0 3.91751 0 8.75C0 10.8465 0.842648 12.7708 2.24776 14.2777L1.73576 19.6474ZM3.28595 13.9248L2.97914 13.5957C1.72877 12.2548 1 10.5683 1 8.75C1 4.59105 4.89983 1 10 1C15.1002 1 19 4.59105 19 8.75C19 12.909 15.1002 16.5 10 16.5C8.93371 16.5 7.91345 16.3403 6.96822 16.0486L6.5694 15.9256L2.9083 17.8854L3.28595 13.9248Z" fill="#959595"/>
+        </svg>
+        Report
+    </button>
+</div>
+            <div class="col-xs-8 col-sm-7 col-md-5 col-lg-3 test-mic-speaker px-2 px-md-0 px-lg-0" id="test-mic-speakers">
+    <button class="w-100 btn align-items-center d-flex justify-content-center" id="test-mic-speakers-button">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.38572 1.4C7.38572 0.6268 8.01252 0 8.78572 0H11.2143C11.9875 0 12.6143 0.6268 12.6143 1.4V2.45216C12.9142 2.55604 13.2059 2.67724 13.4883 2.81456L14.2325 2.07032L14.6485 2.48624L14.2325 2.07032C14.7793 1.52356 15.6657 1.52356 16.2124 2.07032L15.7882 2.49456L16.2124 2.07032L17.9297 3.78756C18.4764 4.33432 18.4764 5.22072 17.9297 5.76748L17.1854 6.51172C17.3228 6.79412 17.444 7.08584 17.5478 7.38572H18.6C19.3732 7.38572 20 8.01252 20 8.78572V11.2143C20 11.9875 19.3732 12.6143 18.6 12.6143H17.5478C17.444 12.9142 17.3228 13.2059 17.1854 13.4883L17.9297 14.2325C18.4764 14.7792 18.4764 15.6657 17.9297 16.2124L16.2124 17.9297C15.6657 18.4764 14.7792 18.4764 14.2325 17.9297L13.4883 17.1854C13.2059 17.3228 12.9142 17.444 12.6143 17.5478V18.6C12.6143 19.3732 11.9875 20 11.2143 20H8.78572C8.01252 20 7.38572 19.3732 7.38572 18.6V17.5478C7.08584 17.4439 6.79412 17.3228 6.51176 17.1854L5.76744 17.9297C5.22072 18.4764 4.33428 18.4764 3.78756 17.9297L2.07028 16.2124L2.48624 15.7965L2.07028 16.2124C1.52356 15.6657 1.52356 14.7793 2.07028 14.2326L2.81456 13.4883C2.67724 13.2059 2.55608 12.9142 2.4522 12.6143H1.4C0.6268 12.6143 0 11.9875 0 11.2143V8.78572C0 8.01252 0.6268 7.38572 1.4 7.38572H2.4522C2.55604 7.08584 2.67724 6.79412 2.81456 6.51172L2.07028 5.76744C1.52356 5.22072 1.52356 4.33428 2.07028 3.78752L3.78756 2.07028C4.33428 1.52356 5.22072 1.52356 5.76744 2.07028L6.51172 2.81456C6.79412 2.67724 7.08584 2.55604 7.38572 2.4522V1.4ZM8.78572 1.2C8.67524 1.2 8.58572 1.28956 8.58572 1.4V2.89228C8.58572 3.16076 8.40736 3.39656 8.149 3.46964C7.63612 3.61472 7.1478 3.81864 6.6918 4.0738C6.45744 4.20492 6.16448 4.16436 5.97456 3.97444L4.91892 2.9188C4.8408 2.84072 4.71416 2.84072 4.63608 2.9188L2.9188 4.63608C2.84072 4.71416 2.84072 4.8408 2.9188 4.91892L3.97448 5.97456C4.16436 6.16448 4.20496 6.45744 4.0738 6.6918C3.81864 7.1478 3.61472 7.63612 3.46964 8.14904C3.3966 8.40736 3.1608 8.58572 2.89232 8.58572H1.4C1.28956 8.58572 1.2 8.67528 1.2 8.78572V11.2143C1.2 11.3248 1.28956 11.4143 1.4 11.4143H2.89232C3.1608 11.4143 3.3966 11.5926 3.46968 11.851C3.61472 12.3639 3.81868 12.8522 4.0738 13.3082C4.20496 13.5426 4.16436 13.8355 3.97448 14.0254L2.91884 15.0811C2.84072 15.1592 2.84072 15.2858 2.91884 15.3639L4.63608 17.0812C4.7142 17.1593 4.8408 17.1593 4.91892 17.0812L5.3432 17.5054L4.91892 17.0812L5.97456 16.0255C6.16448 15.8356 6.45744 15.795 6.6918 15.9262C7.1478 16.1813 7.63612 16.3853 8.149 16.5303C8.40736 16.6034 8.58572 16.8392 8.58572 17.1077V18.6C8.58572 18.7104 8.67524 18.8 8.78572 18.8H11.2143C11.3247 18.8 11.4143 18.7104 11.4143 18.6V17.1077C11.4143 16.8392 11.5926 16.6034 11.851 16.5304C12.3639 16.3853 12.8522 16.1814 13.3082 15.9262C13.5426 15.795 13.8355 15.8356 14.0254 16.0255L15.081 17.0812C15.1592 17.1592 15.2858 17.1592 15.3639 17.0812L17.0812 15.3639C17.1592 15.2858 17.1592 15.1592 17.0812 15.081L16.0256 14.0254C15.8356 13.8355 15.795 13.5426 15.9262 13.3082C16.1814 12.8522 16.3853 12.3639 16.5304 11.851C16.6034 11.5926 16.8392 11.4143 17.1077 11.4143H18.6C18.7104 11.4143 18.8 11.3248 18.8 11.2143V8.78572C18.8 8.67528 18.7104 8.58572 18.6 8.58572H17.1077C16.8392 8.58572 16.6034 8.40736 16.5304 8.14904C16.3853 7.63612 16.1814 7.1478 15.9262 6.6918C15.7951 6.45744 15.8356 6.16444 16.0256 5.97456L17.0812 4.91896C17.1593 4.84084 17.1593 4.7142 17.0812 4.63612L15.3639 2.91884C15.2858 2.84072 15.1592 2.84072 15.081 2.91884L14.0254 3.97444C13.8356 4.16436 13.5426 4.20492 13.3082 4.0738C12.8522 3.81864 12.3639 3.61468 11.851 3.46964C11.5926 3.39656 11.4143 3.16076 11.4143 2.89228V1.4C11.4143 1.28956 11.3247 1.2 11.2143 1.2H8.78572ZM10 6.26156C7.93532 6.26156 6.26156 7.93532 6.26156 10C6.26156 12.0647 7.93532 13.7385 10 13.7385C12.0647 13.7385 13.7385 12.0647 13.7385 10C13.7385 9.66864 14.0071 9.4 14.3385 9.4C14.6698 9.4 14.9385 9.66864 14.9385 10C14.9385 12.7274 12.7274 14.9385 10 14.9385C7.27256 14.9385 5.06156 12.7274 5.06156 10C5.06156 7.27256 7.27256 5.06156 10 5.06156C10.3314 5.06156 10.6 5.33016 10.6 5.66156C10.6 5.99292 10.3314 6.26156 10 6.26156ZM13.8589 7.89348C14.0932 7.65916 14.0932 7.27928 13.8589 7.04496C13.6246 6.81064 13.2446 6.81064 13.0103 7.04496L10 10.0553L8.97808 9.03344C8.7438 8.79912 8.36388 8.79912 8.12956 9.03344C7.89524 9.26772 7.89524 9.64764 8.12956 9.88196L9.57572 11.3281C9.81004 11.5624 10.1899 11.5624 10.4242 11.3281L13.8589 7.89348Z" fill="#959595"/>
+        </svg>
+        Test your Microphone and Speakers
+    </button>
+</div>
+</div>
+        <div class="test-mic-speakers-container">
+    <div class="col-12 test-mic-speakers-details d-none" id="test-mic-speakers-details">
+        <div class="row justify-content-between mb-4">
+            <div class="col-lg-4 col-md-5 test-mic-heading">
+                <p>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.38572 1.4C7.38572 0.6268 8.01252 0 8.78572 0H11.2143C11.9875 0 12.6143 0.6268 12.6143 1.4V2.45216C12.9142 2.55604 13.2059 2.67724 13.4883 2.81456L14.2325 2.07032L14.6485 2.48624L14.2325 2.07032C14.7793 1.52356 15.6657 1.52356 16.2124 2.07032L15.7882 2.49456L16.2124 2.07032L17.9297 3.78756C18.4764 4.33432 18.4764 5.22072 17.9297 5.76748L17.1854 6.51172C17.3228 6.79412 17.444 7.08584 17.5478 7.38572H18.6C19.3732 7.38572 20 8.01252 20 8.78572V11.2143C20 11.9875 19.3732 12.6143 18.6 12.6143H17.5478C17.444 12.9142 17.3228 13.2059 17.1854 13.4883L17.9297 14.2325C18.4764 14.7792 18.4764 15.6657 17.9297 16.2124L16.2124 17.9297C15.6657 18.4764 14.7792 18.4764 14.2325 17.9297L13.4883 17.1854C13.2059 17.3228 12.9142 17.444 12.6143 17.5478V18.6C12.6143 19.3732 11.9875 20 11.2143 20H8.78572C8.01252 20 7.38572 19.3732 7.38572 18.6V17.5478C7.08584 17.4439 6.79412 17.3228 6.51176 17.1854L5.76744 17.9297C5.22072 18.4764 4.33428 18.4764 3.78756 17.9297L2.07028 16.2124L2.48624 15.7965L2.07028 16.2124C1.52356 15.6657 1.52356 14.7793 2.07028 14.2326L2.81456 13.4883C2.67724 13.2059 2.55608 12.9142 2.4522 12.6143H1.4C0.6268 12.6143 0 11.9875 0 11.2143V8.78572C0 8.01252 0.6268 7.38572 1.4 7.38572H2.4522C2.55604 7.08584 2.67724 6.79412 2.81456 6.51172L2.07028 5.76744C1.52356 5.22072 1.52356 4.33428 2.07028 3.78752L3.78756 2.07028C4.33428 1.52356 5.22072 1.52356 5.76744 2.07028L6.51172 2.81456C6.79412 2.67724 7.08584 2.55604 7.38572 2.4522V1.4ZM8.78572 1.2C8.67524 1.2 8.58572 1.28956 8.58572 1.4V2.89228C8.58572 3.16076 8.40736 3.39656 8.149 3.46964C7.63612 3.61472 7.1478 3.81864 6.6918 4.0738C6.45744 4.20492 6.16448 4.16436 5.97456 3.97444L4.91892 2.9188C4.8408 2.84072 4.71416 2.84072 4.63608 2.9188L2.9188 4.63608C2.84072 4.71416 2.84072 4.8408 2.9188 4.91892L3.97448 5.97456C4.16436 6.16448 4.20496 6.45744 4.0738 6.6918C3.81864 7.1478 3.61472 7.63612 3.46964 8.14904C3.3966 8.40736 3.1608 8.58572 2.89232 8.58572H1.4C1.28956 8.58572 1.2 8.67528 1.2 8.78572V11.2143C1.2 11.3248 1.28956 11.4143 1.4 11.4143H2.89232C3.1608 11.4143 3.3966 11.5926 3.46968 11.851C3.61472 12.3639 3.81868 12.8522 4.0738 13.3082C4.20496 13.5426 4.16436 13.8355 3.97448 14.0254L2.91884 15.0811C2.84072 15.1592 2.84072 15.2858 2.91884 15.3639L4.63608 17.0812C4.7142 17.1593 4.8408 17.1593 4.91892 17.0812L5.3432 17.5054L4.91892 17.0812L5.97456 16.0255C6.16448 15.8356 6.45744 15.795 6.6918 15.9262C7.1478 16.1813 7.63612 16.3853 8.149 16.5303C8.40736 16.6034 8.58572 16.8392 8.58572 17.1077V18.6C8.58572 18.7104 8.67524 18.8 8.78572 18.8H11.2143C11.3247 18.8 11.4143 18.7104 11.4143 18.6V17.1077C11.4143 16.8392 11.5926 16.6034 11.851 16.5304C12.3639 16.3853 12.8522 16.1814 13.3082 15.9262C13.5426 15.795 13.8355 15.8356 14.0254 16.0255L15.081 17.0812C15.1592 17.1592 15.2858 17.1592 15.3639 17.0812L17.0812 15.3639C17.1592 15.2858 17.1592 15.1592 17.0812 15.081L16.0256 14.0254C15.8356 13.8355 15.795 13.5426 15.9262 13.3082C16.1814 12.8522 16.3853 12.3639 16.5304 11.851C16.6034 11.5926 16.8392 11.4143 17.1077 11.4143H18.6C18.7104 11.4143 18.8 11.3248 18.8 11.2143V8.78572C18.8 8.67528 18.7104 8.58572 18.6 8.58572H17.1077C16.8392 8.58572 16.6034 8.40736 16.5304 8.14904C16.3853 7.63612 16.1814 7.1478 15.9262 6.6918C15.7951 6.45744 15.8356 6.16444 16.0256 5.97456L17.0812 4.91896C17.1593 4.84084 17.1593 4.7142 17.0812 4.63612L15.3639 2.91884C15.2858 2.84072 15.1592 2.84072 15.081 2.91884L14.0254 3.97444C13.8356 4.16436 13.5426 4.20492 13.3082 4.0738C12.8522 3.81864 12.3639 3.61468 11.851 3.46964C11.5926 3.39656 11.4143 3.16076 11.4143 2.89228V1.4C11.4143 1.28956 11.3247 1.2 11.2143 1.2H8.78572ZM10 6.26156C7.93532 6.26156 6.26156 7.93532 6.26156 10C6.26156 12.0647 7.93532 13.7385 10 13.7385C12.0647 13.7385 13.7385 12.0647 13.7385 10C13.7385 9.66864 14.0071 9.4 14.3385 9.4C14.6698 9.4 14.9385 9.66864 14.9385 10C14.9385 12.7274 12.7274 14.9385 10 14.9385C7.27256 14.9385 5.06156 12.7274 5.06156 10C5.06156 7.27256 7.27256 5.06156 10 5.06156C10.3314 5.06156 10.6 5.33016 10.6 5.66156C10.6 5.99292 10.3314 6.26156 10 6.26156ZM13.8589 7.89348C14.0932 7.65916 14.0932 7.27928 13.8589 7.04496C13.6246 6.81064 13.2446 6.81064 13.0103 7.04496L10 10.0553L8.97808 9.03344C8.7438 8.79912 8.36388 8.79912 8.12956 9.03344C7.89524 9.26772 7.89524 9.64764 8.12956 9.88196L9.57572 11.3281C9.81004 11.5624 10.1899 11.5624 10.4242 11.3281L13.8589 7.89348Z" fill="#959595"/>
+                    </svg>
+                    Test your Microphone and Speakers
+                </p>
+            </div>
+            <div class="col-lg-1 col-md-1">
+                <button class="test-mic-close" id="test-mic-close">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#343A40"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center">
+            <div class="col-lg-5 col-md-10 px-0 mb-2 mb-lg-0">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5 col-7 col-md-5 col-sm-5 mb-2 mb-lg-0">
+                        <button id="test-mic-button" data-value="test-mic" class="test-btn">
+                            <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg" id="mic-svg">
+                                <path d="M16 17.5V19.5C16 19.6326 15.9473 19.7598 15.8536 19.8536C15.7598 19.9473 15.6326 20 15.5 20H0.5C0.367392 20 0.240215 19.9473 0.146447 19.8536C0.0526785 19.7598 0 19.6326 0 19.5V17.5C0 17.3674 0.0526785 17.2402 0.146447 17.1464C0.240215 17.0527 0.367392 17 0.5 17H7.5V14C6.26238 13.8756 5.11556 13.2944 4.28347 12.3699C3.45137 11.4453 2.99377 10.2438 3 9V8.5C3 8.36739 3.05268 8.24021 3.14645 8.14645C3.24021 8.05268 3.36739 8 3.5 8C3.63261 8 3.75979 8.05268 3.85355 8.14645C3.94732 8.24021 4 8.36739 4 8.5V9C4 10.0609 4.42143 11.0783 5.17157 11.8284C5.92172 12.5786 6.93913 13 8 13C9.06087 13 10.0783 12.5786 10.8284 11.8284C11.5786 11.0783 12 10.0609 12 9V8.5C12 8.36739 12.0527 8.24021 12.1464 8.14645C12.2402 8.05268 12.3674 8 12.5 8C12.6326 8 12.7598 8.05268 12.8536 8.14645C12.9473 8.24021 13 8.36739 13 8.5V9C13.0062 10.2438 12.5486 11.4453 11.7165 12.3699C10.8844 13.2944 9.73762 13.8756 8.5 14V17H15.5C15.6326 17 15.7598 17.0527 15.8536 17.1464C15.9473 17.2402 16 17.3674 16 17.5ZM8 12C8.79565 12 9.55871 11.6839 10.1213 11.1213C10.6839 10.5587 11 9.79565 11 9V8H9.5C9.36739 8 9.24021 7.94732 9.14645 7.85355C9.05268 7.75979 9 7.63261 9 7.5C9 7.36739 9.05268 7.24021 9.14645 7.14645C9.24021 7.05268 9.36739 7 9.5 7H11V5H9.5C9.36739 5 9.24021 4.94732 9.14645 4.85355C9.05268 4.75979 9 4.63261 9 4.5C9 4.36739 9.05268 4.24021 9.14645 4.14645C9.24021 4.05268 9.36739 4 9.5 4H11V3C11 2.20435 10.6839 1.44129 10.1213 0.87868C9.55871 0.316071 8.79565 0 8 0C7.20435 0 6.44129 0.316071 5.87868 0.87868C5.31607 1.44129 5 2.20435 5 3V4H6.5C6.63261 4 6.75979 4.05268 6.85355 4.14645C6.94732 4.24021 7 4.36739 7 4.5C7 4.63261 6.94732 4.75979 6.85355 4.85355C6.75979 4.94732 6.63261 5 6.5 5H5V7H6.5C6.63261 7 6.75979 7.05268 6.85355 7.14645C6.94732 7.24021 7 7.36739 7 7.5C7 7.63261 6.94732 7.75979 6.85355 7.85355C6.75979 7.94732 6.63261 8 6.5 8H5V9C5 9.79565 5.31607 10.5587 5.87868 11.1213C6.44129 11.6839 7.20435 12 8 12ZM13 6.11C13.0596 6.11953 13.1204 6.11953 13.18 6.11C13.2813 6.10935 13.38 6.07856 13.4637 6.02158C13.5474 5.96459 13.6123 5.88397 13.65 5.79C14.1073 4.61976 14.1073 3.32024 13.65 2.15C13.6023 2.02535 13.507 1.92477 13.3851 1.87038C13.2632 1.816 13.1247 1.81226 13 1.86C12.8753 1.90774 12.7748 2.00304 12.7204 2.12494C12.666 2.24684 12.6623 2.38535 12.71 2.51C13.083 3.4476 13.083 4.4924 12.71 5.43C12.6811 5.49328 12.6657 5.5619 12.6648 5.63148C12.6639 5.70106 12.6775 5.77005 12.7048 5.83406C12.7321 5.89806 12.7725 5.95566 12.8233 6.00318C12.8741 6.05069 12.9343 6.08708 13 6.11ZM2.8 6.11C2.85962 6.11953 2.92038 6.11953 2.98 6.11C3.04199 6.08673 3.09874 6.05137 3.14696 6.00599C3.19518 5.9606 3.2339 5.90609 3.26088 5.84562C3.28786 5.78515 3.30256 5.71992 3.30412 5.65373C3.30569 5.58753 3.29409 5.52168 3.27 5.46C2.89703 4.5224 2.89703 3.4776 3.27 2.54C3.29364 2.47828 3.30489 2.41251 3.30311 2.34644C3.30133 2.28037 3.28655 2.2153 3.25962 2.15494C3.23269 2.09458 3.19414 2.04012 3.14616 1.99466C3.09818 1.9492 3.04172 1.91364 2.98 1.89C2.91828 1.86636 2.85251 1.85511 2.78644 1.85689C2.72037 1.85867 2.6553 1.87345 2.59494 1.90038C2.53458 1.92731 2.48012 1.96586 2.43466 2.01384C2.3892 2.06182 2.35364 2.11828 2.33 2.18C1.87266 3.35024 1.87266 4.64976 2.33 5.82C2.36835 5.91556 2.43473 5.99727 2.52041 6.05439C2.60608 6.11151 2.70704 6.14135 2.81 6.14L2.8 6.11ZM15 6.5C15.0529 6.50956 15.1071 6.50956 15.16 6.5C15.2643 6.50075 15.3662 6.46818 15.4507 6.40702C15.5353 6.34587 15.5981 6.25933 15.63 6.16C16.1101 4.73947 16.1101 3.20053 15.63 1.78C15.6153 1.71089 15.5861 1.64568 15.5444 1.58867C15.5027 1.53166 15.4493 1.48413 15.3879 1.44924C15.3265 1.41434 15.2583 1.39286 15.188 1.38621C15.1176 1.37957 15.0467 1.3879 14.9798 1.41067C14.9129 1.43344 14.8516 1.47013 14.7999 1.51831C14.7483 1.5665 14.7074 1.62509 14.68 1.69022C14.6526 1.75535 14.6394 1.82555 14.6411 1.89618C14.6428 1.96681 14.6595 2.03628 14.69 2.1C15.0885 3.31483 15.0885 4.62517 14.69 5.84C14.6648 5.90351 14.6528 5.97151 14.6549 6.03981C14.657 6.10811 14.6731 6.17525 14.7021 6.2371C14.7312 6.29895 14.7726 6.35419 14.8238 6.39941C14.8751 6.44462 14.935 6.47886 15 6.5ZM0.82 6.5C0.879388 6.51212 0.940612 6.51212 1 6.5C1.12409 6.45679 1.22618 6.36646 1.28419 6.24857C1.3422 6.13067 1.35147 5.99468 1.31 5.87C0.911532 4.65517 0.911532 3.34483 1.31 2.13C1.33545 2.01031 1.31613 1.88545 1.25569 1.77905C1.19526 1.67265 1.0979 1.59211 0.982067 1.55268C0.866231 1.51325 0.739957 1.51766 0.627157 1.56508C0.514356 1.6125 0.422862 1.69964 0.37 1.81C-0.110093 3.23053 -0.110093 4.76947 0.37 6.19C0.401409 6.28771 0.462705 6.37309 0.545238 6.43409C0.627772 6.49509 0.727377 6.52864 0.83 6.53L0.82 6.5Z" fill="#959595"/>
+                            </svg>
+                            <span id="test-mic-text">Test Mic</span>
+                        </button>
+                    </div>
+                    <div class="col-lg-7 col-10 col-md-7 col-sm-8 d-flex align-items-center">
+                        <canvas class="w-100 test-canvas" id="mic-canvas" style="background-color:#fff"></canvas>
+                    </div>
+                </div>
+                <div class="row noise-container">
+                    <div class="offset-lg-5 offset-md-5 col-lg-7 col-12 col-md-7 ambient-noise invisible" id="mic-msg">
+                        Please speak clearly
+                    </div>
+                    <div class="offset-lg-5 offset-md-5 col-lg-7 col-12 col-md-7 ambient-noise d-none" id="no-noise">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C12.4183 16 16 12.4183 16 8C16 6.61372 15.6474 5.3098 15.027 4.17302L7.20059 11.9994L2.72059 7.51941L3.84059 6.39941L7.20059 9.75941L14.1166 2.84342C12.6491 1.1045 10.4535 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z" fill="#83E661"/>
+                        </svg>
+                        Low/No Background Noise
+                    </div>
+                    <div class="offset-lg-5 offset-md-5 col-lg-7 col-12 col-md-7 d-none ambient-noise" id="noise">
+                        <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.23868 0.427299L0.131952 12.0734C-0.230716 12.6677 0.197039 13.4298 0.893274 13.4298H15.1067C15.803 13.4298 16.2307 12.6677 15.868 12.0734L8.76132 0.427298C8.41366 -0.142434 7.58634 -0.142432 7.23868 0.427299ZM7.33109 3.86204H9.11485V9.21329H7.33109V3.86204ZM8.22297 11.8889C8.71554 11.8889 9.11485 11.4896 9.11485 10.997C9.11485 10.5045 8.71554 10.1052 8.22297 10.1052C7.7304 10.1052 7.33109 10.5045 7.33109 10.997C7.33109 11.4896 7.7304 11.8889 8.22297 11.8889Z" fill="#FCC232"/>
+                        </svg>
+                        Background Noise Detected
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-10 px-0 mt-2 mt-lg-0">
+                <div class="row justify-content-center">
+                    <audio controls="controls" id="test-speaker-hidden" style="display:none">
+                        <source src="../aud/sample_audio_file.mp3">
+                    </audio>
+                    <div class="col-lg-5 col-7 col-md-5 col-sm-5 mb-2 mb-lg-0">
+                        <button id="play-speaker" data-value="test-speaker" class="test-btn">
+                            <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg" id="speaker-svg">
+                                <path d="M7.245 1.50469C6.9646 1.39249 6.6486 1.45309 6.431 1.66289L2.5428 5.47809C2.4744 5.54529 2.4172 5.62149 2.3848 5.71349H0.2814C0.1256 5.71349 0 5.83449 0 5.98929V10.4425C0 10.5951 0.1256 10.7183 0.2814 10.7183H2.3848C2.4172 10.8037 2.4744 10.8865 2.5428 10.9493L6.4308 14.7633C6.5788 14.9001 6.7728 14.9763 6.9644 14.9763C7.0576 14.9763 7.1518 14.9583 7.2448 14.9269C7.5206 14.8081 7.7044 14.5435 7.7044 14.2543V2.17969C7.7044 1.88229 7.5208 1.62009 7.245 1.50469Z" fill="#959595"/>
+                                <path d="M11.1431 5.68268C10.7407 5.29588 10.0455 5.29588 9.65093 5.68268C9.44913 5.87868 9.33593 6.14128 9.33593 6.42148C9.33593 6.69628 9.44913 6.95528 9.65093 7.15028C9.93693 7.43628 10.1005 7.81508 10.1005 8.20968C10.1005 8.61788 9.93693 8.99448 9.65093 9.28148C9.22833 9.67828 9.22833 10.3421 9.65093 10.7457C9.84933 10.9453 10.1129 11.0485 10.3955 11.0485C10.6767 11.0485 10.9425 10.9453 11.1431 10.7457C11.8337 10.0685 12.2149 9.16928 12.2149 8.20948C12.2149 7.25788 11.8337 6.36328 11.1431 5.68268Z" fill="#959595"/>
+                                <path d="M13.8921 2.98992C13.4929 2.59972 12.7999 2.59972 12.4009 2.98992C11.9861 3.39572 11.9861 4.04832 12.4009 4.45632C13.4279 5.46312 13.9863 6.78712 13.9863 8.20992C13.9863 9.63152 13.4279 10.9635 12.4009 11.9747C11.9861 12.3851 11.9861 13.0399 12.4009 13.4435C12.5915 13.6407 12.8651 13.7507 13.1453 13.7507C13.4279 13.7507 13.6947 13.6407 13.8921 13.4435C15.3181 12.0487 16.1029 10.1923 16.1029 8.20992C16.1029 6.24212 15.3181 4.38252 13.8921 2.98992Z" fill="#959595"/>
+                                <path d="M15.1546 0.29415C14.7398 0.70235 14.7398 1.36055 15.1546 1.76175C16.917 3.48715 17.879 5.77435 17.879 8.20935C17.879 10.6469 16.9168 12.9473 15.1546 14.6717C14.9462 14.8669 14.8428 15.1247 14.8428 15.4051C14.8428 15.6809 14.9462 15.9453 15.1546 16.1337C15.3452 16.3379 15.6142 16.4387 15.9012 16.4387C16.1814 16.4387 16.4482 16.3377 16.6458 16.1337C18.8072 14.0169 20.0002 11.2051 20.0002 8.20935C20.0002 5.22495 18.8072 2.41335 16.6502 0.29415C16.2534 -0.09805 15.5426 -0.09805 15.1546 0.29415Z" fill="#959595"/>
+                            </svg>
+                            <span id="test-speaker-text">Test Speakers</span>
+                        </button>
+                    </div>
+                    <div class="col-lg-7 col-10 col-md-7 col-sm-8 d-flex align-items-center">
+                        <canvas class="w-100 test-canvas" id="speaker-canvas" style="background-color:#fff"></canvas>
+                    </div>
+                </div>
+                <div class="row noise-container only-display">
+                    <div class="offset-lg-5 offset-md-5 col-lg-7 col-12 col-md-7 ambient-noise invisible">
+                        Please speak clearly
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="xs-p-16">
+            <div class="row justify-content-center my-5">
+                <div class="col-md-8 col-sm-10 text-center prompt"><label class="h1 font-weight-normal" id="sentenceLbl"></label></div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-7 col-sm-8 offset-2 offset-lg-3 col-lg-6 col-xl-4 offset-xl-4">
+                    <div class="progress mt-1">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
+                    </div>
+                </div>
+                <div class="col-3 col-sm-2"><span class="" id="currentSentenceLbl"></span> <span class="">/</span> <span class="" id="totalSentencesLbl"></span></div>
+            </div>
+            <div class="recording-container">
+                <div class="row justify-content-center d-none">
+                    <div class="col-8 text-muted h-1r" id="get-started"> चला, सुरू करूया </div>
+                </div>
+
+                <div class="row justify-content-center d-none" id="recording-row">
+                    <div class="col-md-1 col-2 my-auto">
+                        <div id="recording-sign" class="recorder-container ml-auto align-middle d-none">
+                            <div class="outer"></div>
+                            <div class="outer-2"></div>
+                            <div class="icon-microphone"><i class="material-icons md-48">mic</i></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-8 text-center">
+                        <canvas id="visualizer"></canvas>
+                    </div>
+                </div>
+                <div class="row justify-content-center d-none count-down" id="count-down"><span class="align-middle" id="cont-down-span"> Recording will automatically stop after <span id="counter"></span> seconds </span>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 col-sm-8 col-12 text-center my-5">
+                        <audio class="d-none" id="player" controls tabindex="-1"></audio>
+                        <div class="text-danger mt-2 d-none" id="audio-small-error"><i class="material-icons align-middle">error</i>
+                            <span class="align-middle"> Audio recording is too small. Please Re-record </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center align-items-center" id="startRecordRow">
+                <div class="col-xl-3 col-md-3 col-sm-4 col-6 col-lg-3">
+                    <button type="button" tabindex="-1" id="skipBtn" class="btn btn-outline-primary h6 w-100 rounded p-3"> सोडून दियात </button>
+                </div>
+                <div class="col-xl-3 col-md-3 col-sm-4 col-6 col-lg-3">
+                    <button type="button" class="btn btn-primary shadow h6 w-100 rounded p-3" id="startRecord"> ध्वनिमुद्रण सुरू करात </button>
+                    <button type="button" id="stopRecord" class="d-none btn btn-primary shadow h6 w-100 rounded p-3"> ध्वनिमुद्रण थांबयात </button>
+                </div>
+            </div>
+            <div class="row justify-content-center align-items-center">
+                <div class="col-xl-3 col-md-3 col-sm-4 col-6 col-lg-3">
+                    <button type="button" id="reRecord" class="d-none btn btn-outline-primary h6 w-100 rounded p-3"> परतून ध्वनिमुद्रण </button>
+                </div>
+                <div class="col-xl-3 col-md-3 col-sm-4 col-6 col-lg-3">
+                    <div class="outline-0" tabindex="0" data-toggle="tooltip" title="Please validate any error message before proceeding">
+                        <button id="nextBtn" class="d-none btn btn-primary shadow h6 w-100 rounded p-3 point-none"> मुखार </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<footer class="fixed-bottom bg-light pt-3 border-top w-100">
+    <div class="container-fluid">
+        <div class="d-flex flex-column-reverse flex-lg-row justify-content-lg-around align-items-sm-center align-items-md-center text-center">
+            <div class="d-none">
+                <p class="text-muted">Supported by EkStep Foundation (built on <a href="https://sunbird.org/ai">sunbird.org/ai</a>)</p>
+            </div>
+            <div class="d-lg-inline-flex justify-content-around mb-2">
+                <div class="py-2 px-16">
+                    <a href="./about-us.html">
+                        आमचेविशीं
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html">
+                        अटी आणी शर्ती
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html#privacy-policy">
+                        वैयक्तिक धोरण
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./feedback.html">
+                        Feedback
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../js/locale.js"></script>
+
+<div class="modal fade" id="report_sentence_modal" tabindex="-1" aria-labelledby="ReportSentence" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="modal-header d-block border-0">
+                <h4 class="modal-title text-center">
+                    Report Content
+                </h4>
+                <button type="button" id="report_close_btn" class="btn btn-close text-muted" data-bs-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-4">
+                    Help us understand what’s wrong with the sentence
+                </div>
+                <div class="mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reportRadio" id="offensive_id" value="Offensive">
+                        <label class="form-check-label xs-radio-label" for="offensive_id">
+                            Offensive
+                        </label>
+                    </div>
+                    <div class="option-text">
+                        Hurting sentiments of religion, community or abusive content etc.
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reportRadio" id="prohibitedContent_id" value="Prohibited Content">
+                        <label class="form-check-label xs-radio-label" for="prohibitedContent_id">
+                            Prohibited Content
+                        </label>
+                    </div>
+                    <div class="option-text">
+                        Hateful / Discriminatory / Vulgar language, drugs promotion etc.
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reportRadio" id="politicalStatement_id" value="Political Statement">
+                        <label class="form-check-label xs-radio-label" for="politicalStatement_id">
+                            Political Statement
+                        </label>
+                    </div>
+                    <div class="option-text">
+                        Hateful Political views, amplifying hate-speech etc.
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reportRadio" id="misinformation_id" value="Misinformation">
+                        <label class="form-check-label xs-radio-label" for="misinformation_id">
+                            Misinformation
+                        </label>
+                    </div>
+                    <div class="option-text">
+                        Hearsay / Rumors, deliberate falsified facts etc.
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="reportRadio" id="others_id" value="Others">
+                        <label class="form-check-label xs-radio-label" for="others_id">
+                            हेर
+                        </label>
+                    </div>
+                </div>
+                <textarea maxlength="1000" id="other_text" class="w-100 p-3 other-reason mb-4" rows="3" placeholder="Please specify the reason (Optional)"></textarea>
+                <div class="d-flex justify-content-center">
+                    <button id="report_submit_id" class="btn btn-primary w-75" disabled="disabled">SUBMIT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="report_sentence_thanks_modal" tabindex="-1" aria-labelledby="ReportSentenceThankYou" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="modal-header d-block border-0">
+                <h4 class="modal-title text-center">
+                    Thank You
+                </h4>
+                <button type="button" id="report_sentence_thanks_close_id" class="btn btn-close text-muted" data-bs-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">Your feedback helps us keep Bolo India relevant, we appreciate you taking time to leave the feedback.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-danger"><h5 class="modal-title h2" id="errorModalLabel"><span class="material-icons md-48 align-middle">error </span> चुकले!!! </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"> तुमच्या विनंतेचेर प्रक्रिया करतास्तना अनपेक्षित चूक घडली. उपकार करून काय वेळांत परतून यत्न करात. </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> बंद करात </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="../js/record.js"></script>
+<script src="../js/mic-speaker-testing.js"></script>
+</body>
+</html>

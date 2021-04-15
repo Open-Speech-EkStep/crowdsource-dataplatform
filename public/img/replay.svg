@@ -1,6 +1,0 @@
-<svg width="86" height="86" viewBox="0 0 86 86" fill="none"
-     xmlns="http://www.w3.org/2000/svg">
-    <circle cx="43" cy="43" r="43" fill="#007BFF" style="cursor:pointer"/>
-    <path d="M43 27V19L33 29L43 39V31C49.62 31 55 36.38 55 43C55 49.62 49.62 55 43 55C36.38 55 31 49.62 31 43H27C27 51.84 34.16 59 43 59C51.84 59 59 51.84 59 43C59 34.16 51.84 27 43 27Z"
-          fill="white"/>
-</svg>
