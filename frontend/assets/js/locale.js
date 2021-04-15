@@ -1,10 +1,14 @@
-const { updateLocaleLanguagesDropdown, getCookie, setCookie } = require('./utils');
-const { ALL_LANGUAGES } = require("./constants");
+const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
+const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE } = require("./constants");
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');
     const localisation_popup = $('#content-language a');
-    localisation_popup.on("click", localisationChangeHandler);
+    localisation_popup.on("click", (e)=>{
+        const value = e.target.getAttribute('id');
+        localStorage.setItem(CONTRIBUTION_LANGUAGE,value);
+        changeLocale('en');
+    });
     localisation_dropdown.on("click", localisationChangeHandler);
 }
 const localisationChangeHandler = e => {
@@ -34,7 +38,8 @@ function redirectToLocalisedPage() {
     const locale = localStorage.getItem("i18n");
     const splitValues = location.href.split('/');
     const currentLocale = splitValues[splitValues.length - 2];
-    $('#home-page').attr('default-lang', locale);
+    const contribution_langugae = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    $('#home-page').attr('default-lang', contribution_langugae);
     if (currentLocale != locale) {
         changeLocale(locale);
     }
