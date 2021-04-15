@@ -148,9 +148,9 @@ const getTotalProgressSize = () => {
   };
 };
 
-const setTotalProgressBar = (totalSeconds) => {
+
+function updateProgressBulb(nextHourGoal, totalSeconds) {
   const $totalProgress = $("#total-progress");
-  const nextHourGoal = Number(localStorage.getItem('nextHourGoal'));
   const secondsInHourGoal = nextHourGoal * HOUR_IN_SECONDS;
   const barWidth = getTotalProgressSize();
   const targetPercentCompleted = (totalSeconds / secondsInHourGoal) * 100;
@@ -183,6 +183,18 @@ const setTotalProgressBar = (totalSeconds) => {
       (targetPercentCompleted * barWidth.totalProgressBarWidth) / 100 + "%"
     );
   }
+}
+
+const setTotalProgressBar = (totalSeconds) => {
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const localSpeakerDataParsed = JSON.parse(localStorage.getItem(SPEAKER_DETAILS));
+  const userName = localSpeakerDataParsed.userName;
+    performAPIRequest(
+      `/rewards?language=${contributionLanguage}&category=speak&userName=${userName}`
+    ).then((data) => {
+      localStorage.setItem('nextHourGoal',data.nextHourGoal);
+      updateProgressBulb(data.nextHourGoal, totalSeconds);
+    })
 };
 
 const showSpeakersHoursData = (speakerDetailsValue) => {
@@ -296,6 +308,28 @@ const getLanguageStats = function () {
     });
 };
 
+function setTotalHoursContributed(localSpeakerDataParsed) {
+  const $speakersDataHoursValue = $("#hour-value");
+  fetch(`/getDetails/${localSpeakerDataParsed.language}`)
+    .then((data) => {
+      if (!data.ok) {
+        throw Error(data.statusText || "HTTP error");
+      } else {
+        return data.json();
+      }
+    })
+    .then((data) => {
+      localStorage.setItem(SPEAKERS_DATA, JSON.stringify(data));
+      showSpeakersHoursData(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .then(() => {
+      $speakersDataHoursValue.next().addClass("d-none");
+    });
+}
+
 function executeOnLoad() {
   const currentIndexInStorage = Number(localStorage.getItem(CURRENT_INDEX));
   const localSpeakerDataParsed = JSON.parse(
@@ -311,28 +345,9 @@ function executeOnLoad() {
     $("#nav-login").addClass("d-none");
     $("#nav-username").text(localSpeakerDataParsed.userName);
 
-    const $speakersDataHoursValue = $("#hour-value");
     setPageContentHeight();
     setSentencesContributed();
-
-    fetch(`/getDetails/${localSpeakerDataParsed.language}`)
-      .then((data) => {
-        if (!data.ok) {
-          throw Error(data.statusText || "HTTP error");
-        } else {
-          return data.json();
-        }
-      })
-      .then((data) => {
-        localStorage.setItem(SPEAKERS_DATA, JSON.stringify(data));
-        showSpeakersHoursData(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .then(() => {
-        $speakersDataHoursValue.next().addClass("d-none");
-      });
+    setTotalHoursContributed(localSpeakerDataParsed);
   }
 
   toggleFooterPosition();
