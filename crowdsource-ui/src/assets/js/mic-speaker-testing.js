@@ -1,7 +1,7 @@
-const {LOCALE_STRINGS} = require('../js/constants');
+const { LOCALE_STRINGS } = require('../js/constants');
 const fetch = require('./fetch');
 
-const {getLocaleString} = require('./utils');
+const { getLocaleString } = require('./utils');
 const executeOnReady = function () {
 
   let audioData = [];
@@ -206,22 +206,6 @@ const executeOnReady = function () {
     }
   }
 
-  const ambienceNoiseCheck = (audioBlob) => {
-    const fd = new FormData();
-    fd.append('audio_data', audioBlob);
-    fetch('/audio/snr', {
-      method: 'POST',
-      body: fd,
-    })
-      .then(res => res.json())
-      .then(result => {
-        showAmbientNoise(result);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
   const testMic = (btnDataAttr) => {
     $('#mic-msg').addClass('invisible').removeClass('d-none');
     $('#no-noise').addClass('d-none');
@@ -329,7 +313,7 @@ const writeUTFBytes = function (view, offset, string) {
   }
 }
 
-const addOnClickListener = function(){
+const addOnClickListener = function () {
   const $testMicDiv = $('#test-mic-speakers');
   const $testMicSpeakerBtn = $('#test-mic-speakers-button');
   const $testMicSpeakerDetails = $('#test-mic-speakers-details');
@@ -357,6 +341,6 @@ $(document).ready(() => {
   }).catch(() => {
     executeOnReady();
   });
-});
+}
 
-module.exports = {addOnClickListener, showAmbientNoise, writeUTFBytes}
+module.exports = { addOnClickListener, showAmbientNoise, writeUTFBytes }
