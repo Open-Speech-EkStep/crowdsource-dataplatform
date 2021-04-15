@@ -31,6 +31,26 @@ html {
     }
 }
 
+@media (min-width: 768px) {
+    .font-weight-light-lg {
+        font-weight: 300 !important;
+        line-height: 32px;
+    }
+
+    .table tbody td{
+        font-weight: normal;
+        line-height: 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 767px) {
+    .font-weight-light-lg {
+        font-weight: 400 !important;
+        line-height: 32px;
+    }
+}
+
 .table-img{
     width: 80px;
     height: auto;
