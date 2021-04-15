@@ -1,0 +1,571 @@
+<html lang="en">
+
+<head>
+    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
+    <meta name="description" content="Bolo India: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+    <div class="d-flex align-items-center">
+        <a class="logo-text text-dark" href="/">
+            <h2 class="mb-0">
+                <img src="../img/BoloIndiaLogo.png" alt="Bolo India" width="64px" height="54px">
+            </h2>
+        </a>
+        <div class="version-beta">Beta</div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item p-2 dropdown" id="locale_language_dropdown">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    हिंदी
+                </div>
+                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton"><a id="english" class="dropdown-item" href="#" locale="en">English</a></div>
+            </li>
+            <li class="nav-item p-2 dropdown d-none">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Speech Recognition Models
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="https://inference.vakyansh.in/indian-english">English (IN)</a><a class="dropdown-item" href="https://inference.vakyansh.in/gujarati">Gujarati</a> <a class="dropdown-item" href="https://inference.vakyansh.in/hindi">Hindi</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada">Kannada</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada-lm">Kannada (With LM)</a> <a class="dropdown-item" href="https://inference.vakyansh.in/odia">Odia</a> <a class="dropdown-item" href="https://inference.vakyansh.in/tamil">Tamil</a> <a class="dropdown-item" href="https://inference.vakyansh.in/telugu">Telugu</a></div>
+            </li>
+            <li class="nav-item p-2"><a href="./about-us.html" class="nav-link text-dark font-weight-bold">
+                    हमारे बारे में
+                </a></li>
+            <li class="nav-item p-2"><a class="nav-link text-dark font-weight-bold d-none" id="nav-user"><span class="material-icons align-middle mx-1">account_circle</span> <span id="nav-username"></span></a></li>
+        </ul>
+    </div>
+</nav>
+        <div class="container container-fluid supreme-container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 col-md-7 col-lg-6">
+                            <div class="text-muted mb-2">
+                                कोई भाषा चुनें:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-5 all-languages">
+                            <div class="mt-2"><select class="btn btn-outline-primary dropdown-toggle h6 w-100 rounded mb-4 p-3" id="language">
+                                    <option selected="selected" class="pointer" id="language_button" value="">
+                                        सभी भाषाएं
+                                    </option>
+                                    
+                                        <option value="Assamese">
+                                            অসমীয়া
+                                        </option>
+                                        
+                                        <option value="Bengali">
+                                            বাংলা
+                                        </option>
+                                        
+                                        <option value="English">
+                                            English
+                                        </option>
+                                        
+                                        <option value="Gujarati">
+                                            ગુજરાતી
+                                        </option>
+                                        
+                                        <option value="Hindi">
+                                            हिंदी
+                                        </option>
+                                        
+                                        <option value="Kannada">
+                                            ಕನ್ನಡ
+                                        </option>
+                                        
+                                        <option value="Malayalam">
+                                            മലയാളം
+                                        </option>
+                                        
+                                        <option value="Marathi">
+                                            मराठी
+                                        </option>
+                                        
+                                        <option value="Odia">
+                                            ଓଡିଆ
+                                        </option>
+                                        
+                                        <option value="Punjabi">
+                                            ਪੰਜਾਬੀ
+                                        </option>
+                                        
+                                        <option value="Tamil">
+                                            தமிழ்
+                                        </option>
+                                        
+                                        <option value="Telugu">
+                                            తెలుగు
+                                        </option>
+                                        
+                                </select></div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 data-updated">
+                            <div><span>
+                                    अंतिम बार डाटा अपडेट हुआ:
+                                </span><span id="data-updated"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-data-found justify-content-center d-none" id="no-data-found">
+                <div class="col-12 col-md-12 col-lg-8">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-11 col-md-9 col-lg-9 no-data-found-text"><span>
+                                हमारे पास इस भाषा के लिए कोई डेटा नहीं है, क्या आप इसके लिए योगदान देना चाहेंगे?
+                            </span></div>
+                        <div class="col-11 col-md-3 col-lg-3 text-center contribute-now d-flex align-items-center justify-content-center" id="contribute-now" data-toggle="modal" data-target="#userModal">
+                            योगदान करें
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="speaker-data">
+                <div class="col-12">
+                    <div class="row justify-content-center" id="loader1">
+                        <div><span class="spinner"></span></div>
+                    </div>
+                    <div class="row text-center contribution-details d-none" id="contribution-details">
+                        <div class="contribution-data d-none" id="languages-wrapper">
+                            <p class="mb-1" id="languages-value"></p>
+                            <p class="mb-0">
+                                भाषाओं में योगदान
+                            </p>
+                        </div>
+                        <div class="contribution-data">
+                            <p class="mb-1" id="speaker-value"></p>
+                            <p class="mb-0">
+                                वक्ताओं का योगदान
+                            </p>
+                        </div>
+                        <div class="contribution-data">
+                            <p class="mb-1" id="contributed-value"></p>
+                            <p class="mb-0">
+                                रिक़ॉर्ड किए घंटे
+                            </p>
+                        </div>
+                        <div class="contribution-data">
+                            <p class="mb-1" id="validated-value"></p>
+                            <p class="mb-0">
+                                पुष्टि किए गए घंटे
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row chart-row">
+                <div class="col-12">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+                        <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+                    </div>
+                    <div class="row justify-content-center chart-container">
+                        <div class="col-12 col-lg-5 text-center chart d-none timeline-chart-container">
+                            <div class="row">
+                                <div class="text-left col-12 col-md-6 col-lg-6 pb-3 chart-title">
+                                    प्रोग्रेस चार्ट
+                                </div>
+                                <ul class="text-right col-12 col-md-6 col-lg-6 duration" id="duration">
+                                    <li class="tab-left active" data-value="monthly">
+                                        महीने
+                                    </li>
+                                    <li class="tab-right inactive" data-value="quarterly">
+                                        तिमाही
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="text-center justify-content-center d-none align-items-center chart-spinner" id="timeline-loader"><span class="spinner"></span></div>
+                            <div id="timeline-chart" class="h-100 pb-4"></div>
+                        </div>
+                        <div class="col-12 col-lg-5 text-center chart d-none">
+                            <div class="text-left pb-3 chart-title">
+                                लैंगिक ब्यौरा
+                            </div>
+                            <div id="gender-chart" class="h-100 pb-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row chart-row">
+                <div class="col-12">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+                        <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+                    </div>
+                    <div class="row justify-content-center chart-container">
+                        <div class="col-12 col-lg-5 mb-3 text-center chart state-chart text-dark p-4">
+                            <div class="text-left px-3 pb-3 state-chart-text">
+                                राज्यवार ब्यौरा
+                            </div>
+                            <div id="indiaMapChart" style="width:100%"></div>
+                            <div id="legendDiv" class="justify-content-evenly mb-5 d-none">
+                                <div id="quarter" class="quarter">
+                                    <div class="legend-val">0 - 1hr</div>
+                                </div>
+                                <div id="half" class="half">
+                                    <div class="legend-val">1 - 2hrs</div>
+                                </div>
+                                <div id="threeQuarter" class="threeQuarter">
+                                    <div class="legend-val">2 - 4hrs</div>
+                                </div>
+                                <div id="full" class="full">
+                                    <div class="legend-val">4+ hrs</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5 mb-3 text-center chart age-group-chart d-none p-4">
+                            <div class="text-left px-3 pb-3">
+                                आयु वर्ग का ब्यौरा
+                            </div>
+                            <div id="age-group-chart" class="h-100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-chart-wrapper" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg w-75 mw-100 h-75 mx-auto">
+                <div class="modal-content border-primary border-2 h-100 p-lg-5 px-2 py-4">
+                    <div class="text-right" aria-label="Close"><a href="#" aria-hidden="true" data-dismiss="modal">
+                            जानकारी छिपाएँ &lt;
+                        </a></div>
+                    <div id="modal-chart" class="h-100"></div>
+                </div>
+            </div>
+        </div><button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
+        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="margin-left-auto"><button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+            <div class="modal-header d-block border-0">
+                <h1 class="modal-title text-center">
+                    वक्ता का विवरण
+                </h1>
+            </div>
+            <div class="modal-body px-6" id="speaker-details">
+                <p class="text-muted text-center">
+                    सभी फ़ील्ड वैकल्पिक हैं
+                </p>
+                <div class="col-12 text-center text-primary" id="resetBtn" style="cursor:pointer">
+                    आप नहीं ? उपयोगकर्ता बदलें
+                </div>
+                <div class="form-group mt-5"><label for="username" class="form-label">
+                        उपयोगकर्ता नाम
+                    </label> <input class="form-control" maxlength="12" id="username" data-toggle="tooltip" placeholder="पसंदीदा उपयोगकर्ता नाम डालें" title="">
+                    <div class="text-danger mt-2 d-none" id="username-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px" height="18px">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg> <span class="align-middle">
+                            उपयोगकर्ता नाम कोई ईमेल पता या फ़ोन नंबर नहीं हो सकता
+                        </span></div>
+                </div>
+                <div class="form-group"><label for="mother-tongue" class="form-label">
+                        मातृभाषा
+                    </label> <select class="form-control" id="mother-tongue">
+                        <option selected="selected" value="">
+                            मातृभाषा चुनें
+                        </option>
+                        
+                            <option value="Assamese">
+                                Assamese
+                            </option>
+                            
+                            <option value="Bengali">
+                                Bengali
+                            </option>
+                            
+                            <option value="Bodo">
+                                Bodo
+                            </option>
+                            
+                            <option value="Dogri">
+                                Dogri
+                            </option>
+                            
+                            <option value="Gujarati">
+                                Gujarati
+                            </option>
+                            
+                            <option value="Hindi">
+                                Hindi
+                            </option>
+                            
+                            <option value="Kannada">
+                                Kannada
+                            </option>
+                            
+                            <option value="Kashmiri">
+                                Kashmiri
+                            </option>
+                            
+                            <option value="Konkani">
+                                Konkani
+                            </option>
+                            
+                            <option value="Maithili">
+                                Maithili
+                            </option>
+                            
+                            <option value="Malayalam">
+                                Malayalam
+                            </option>
+                            
+                            <option value="Manipuri">
+                                Manipuri
+                            </option>
+                            
+                            <option value="Marathi">
+                                Marathi
+                            </option>
+                            
+                            <option value="Nepali">
+                                Nepali
+                            </option>
+                            
+                            <option value="Odia">
+                                Odia
+                            </option>
+                            
+                            <option value="Punjabi">
+                                Punjabi
+                            </option>
+                            
+                            <option value="Sanskrit">
+                                Sanskrit
+                            </option>
+                            
+                            <option value="Santali">
+                                Santali
+                            </option>
+                            
+                            <option value="Sindhi">
+                                Sindhi
+                            </option>
+                            
+                            <option value="Tamil">
+                                Tamil
+                            </option>
+                            
+                            <option value="Telugu">
+                                Telugu
+                            </option>
+                            
+                            <option value="Urdu">
+                                Urdu
+                            </option>
+                            
+                    </select></div>
+                <div class="form-group"><label for="age" class="form-label">
+                        आयु वर्ग
+                    </label> <select class="form-control" id="age">
+                        <option selected="selected" value="">
+                            आयु वर्ग चुनें
+                        </option>
+                        <option value="upto 10">upto 10 (Kid)</option>
+                        <option value="10 - 30">10 - 30 (Youth)</option>
+                        <option value="30 - 60">30 - 60 (Adult)</option>
+                        <option value="60+">60+ (Senior)</option>
+                    </select></div>
+                <div class="form-group"><label for="gender" class="form-label">
+                        लिंग
+                    </label>
+                    <div class="justify-content-between">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="male-check" value="male"> 
+                                <label class="form-check-label m-2" for="male-check">
+                                पुरुष
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="female-check" value="female"> 
+                            <label class="form-check-label m-2" for="female-check">
+                                महिला
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="other-check" value="others"> 
+                            <label class="form-check-label m-2" for="other-check">
+                                अन्य
+                            </label>
+                        </div>
+                    </div>
+                    <div id="transgender_options" class="justify-content-between d-none">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="trans-he-check" value="Transgender - He">
+                            <label class="form-check-label m-2" for="trans-he-check">
+                                ट्रांसजेंडर - पुरुष
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="trans-she-check" value="Transgender - She"> 
+                            <label class="form-check-label m-2" for="trans-she-check">
+                                ट्रांसजेंडर - महिला
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="not-say-check" value="Rather Not Say" checked="checked"> 
+                            <label class="form-check-label m-2" for="not-say-check">
+                                बताना नहीं चाहते
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label mt-2">
+                        आगे बढ़ते हुए, आप हमारे <a href="./terms-and-conditions.html">नियम और शर्तों</a> से सहमत होते हैं
+                    </label>
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <div class="col-12" data-toggle="tooltip" title="आगे बढ़ने से पहले, कृपया किसी गड़बड़ी वाले मैसेज की पुष्टि करें"><button type="button" id="proceed-box" class="btn btn-primary h6 shadow w-100 rounded p-3" data-toggle="modal" data-target="#languageModal">
+                            आइए, आगे बढ़ें
+                        </button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="modal fade" id="content-language" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="modal-header d-block border-0">
+                <h6 class="modal-title text-center">
+                    अपनी पसंद की भाषा चुनें
+                </h6>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer">
+                    
+                        <a id="Assamese" class="p-2" href="#" locale="as">অসমীয়া</a>
+                    
+                        <a id="Bengali" class="p-2" href="#" locale="bn">বাংলা</a>
+                    
+                        <a id="English" class="p-2" href="#" locale="en">English</a>
+                    
+                        <a id="Gujarati" class="p-2" href="#" locale="gu">ગુજરાતી</a>
+                    
+                        <a id="Hindi" class="p-2" href="#" locale="hi">हिंदी</a>
+                    
+                        <a id="Kannada" class="p-2" href="#" locale="kn">ಕನ್ನಡ</a>
+                    
+                        <a id="Malayalam" class="p-2" href="#" locale="ml">മലയാളം</a>
+                    
+                        <a id="Marathi" class="p-2" href="#" locale="mr">मराठी</a>
+                    
+                        <a id="Odia" class="p-2" href="#" locale="or">ଓଡିଆ</a>
+                    
+                        <a id="Punjabi" class="p-2" href="#" locale="pa">ਪੰਜਾਬੀ</a>
+                    
+                        <a id="Tamil" class="p-2" href="#" locale="ta">தமிழ்</a>
+                    
+                        <a id="Telugu" class="p-2" href="#" locale="te">తెలుగు</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <div class="modal fade" id="language-pop-up-wrapper" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="margin-left-auto">
+                <button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span>
+                </button>
+            </div>
+            <div class="modal-header d-block border-0"><h6 class="modal-title text-center text-muted">अपना योगदान देने के लिए भाषा चुनें
+                    :</h6>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer" id="say-listen-language">
+                
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Assamese" id="as">অসমীয়া</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Bengali" id="bn">বাংলা</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="English" id="en">English</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Gujarati" id="gu">ગુજરાતી</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Hindi" id="hi">हिंदी</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Kannada" id="kn">ಕನ್ನಡ</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Malayalam" id="ml">മലയാളം</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Marathi" id="mr">मराठी</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Odia" id="or">ଓଡିଆ</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Punjabi" id="pa">ਪੰਜਾਬੀ</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Tamil" id="ta">தமிழ்</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Telugu" id="te">తెలుగు</div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <footer class="fixed-bottom bg-light pt-3 border-top w-100">
+    <div class="container-fluid">
+        <div class="d-flex flex-column-reverse flex-lg-row justify-content-lg-around align-items-sm-center align-items-md-center text-center">
+            <div class="d-none">
+                <p class="text-muted">Supported by EkStep Foundation (built on <a href="https://sunbird.org/ai">sunbird.org/ai</a>)</p>
+            </div>
+            <div class="d-lg-inline-flex justify-content-around mb-2">
+                <div class="py-2 px-16">
+                    <a href="./about-us.html">
+                        हमारे बारे में
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html">
+                        नियम और शर्तें
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html#privacy-policy">
+                        निजता नीति
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./feedback.html">
+                        फ़ीडबैक
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../js/locale.js"></script>
+
+                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                    <script src="../js/dashboard.js"></script>
+                    <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+                    <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+                    <script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
+                    <script src="https://www.amcharts.com/lib/version/4.9.23/themes/animated.js"></script>
+                    <script src="../js/draw-chart.js"></script>
+</body>
+
+</html>

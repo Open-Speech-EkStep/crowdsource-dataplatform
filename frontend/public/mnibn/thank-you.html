@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta property="og:title" content="Bolo India: A crowdsourcing initiative for Indian languages">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?">
+    <meta property="og:site_name" content="Bolo India ">
+    <meta property="og:url" content="https://boloindia.nplt.in">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/home.css">
+    <link rel="stylesheet" type="text/css" href="../css/thank-you.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+    <div class="d-flex align-items-center">
+        <a class="logo-text text-dark" href="/">
+            <h2 class="mb-0">
+                <img src="../img/BoloIndiaLogo.png" alt="Bolo India" width="64px" height="54px">
+            </h2>
+        </a>
+        <div class="version-beta">Beta</div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item p-2 dropdown" id="locale_language_dropdown">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Manipuri BN
+                </div>
+                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton"><a id="english" class="dropdown-item" href="#" locale="en">English</a></div>
+            </li>
+            <li class="nav-item p-2 dropdown d-none">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Speech Recognition Models
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="https://inference.vakyansh.in/indian-english">English (IN)</a><a class="dropdown-item" href="https://inference.vakyansh.in/gujarati">Gujarati</a> <a class="dropdown-item" href="https://inference.vakyansh.in/hindi">Hindi</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada">Kannada</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada-lm">Kannada (With LM)</a> <a class="dropdown-item" href="https://inference.vakyansh.in/odia">Odia</a> <a class="dropdown-item" href="https://inference.vakyansh.in/tamil">Tamil</a> <a class="dropdown-item" href="https://inference.vakyansh.in/telugu">Telugu</a></div>
+            </li>
+            <li class="nav-item p-2"><a href="./about-us.html" class="nav-link text-dark font-weight-bold">
+                    ঐখোয়গী মরমদা
+                </a></li>
+            <li class="nav-item p-2"><a class="nav-link text-dark font-weight-bold d-none" id="nav-user"><span class="material-icons align-middle mx-1">account_circle</span> <span id="nav-username"></span></a></li>
+        </ul>
+    </div>
+</nav>
+<div id="content-wrapper" class="container-fluid mt-5 pt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
+    <div class="text-center">
+        <h1 class="display-5 font-wt-900 site-blue">
+            কন্ত্রিব্যুসনগীদমক্তা অদোম্বু থাগৎচরি!
+        </h1>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12 col-sm-3 text-muted text-center text-sm-right align-self-sm-center align-self-end"><b>
+                <p id="hour-value" class="mb-0">0</p>
+                <div><span class="spinner"></span></div>
+            </b><b></b></div>
+        <div class="col-12 col-sm-6 text-left align-self-sm-center align-self-start"><img src="../img/thanks.svg" class="img-fluid w-100" alt="Total Sentence Progress">
+            <div class="bg-primary position-absolute rounded-pill" id="total-progress"></div>
+            <div class="position-absolute rounded-pill" id="total-progress-bulb"></div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-lg-8 offset-lg-2 border border-primary p-4-5 text-center overflow-hidden contribuion-info">
+            <div id="champion_text" class="champion-ribbon d-none">
+                <span class="marquee">You are a champion</span>
+            </div>
+            <div id="spree_text" class="spree-ribbon col-5 d-none">
+                <span class="marquee">You are on a spree !!</span>
+            </div>
+            <div id="contribution_text" class="d-none">
+                <h4 class="mb-3 thank-you-title mt-5 mt-lg-0">WooHoo!! You took the first important step</h4>
+            </div>
+            <div id="before_badge_content" class="d-none">
+                <h4 class="mb-3 mt-5 mt-lg-0">You are driving the spirit of your language</h4>
+            </div>
+            <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> recordings contributed</p>
+            <p id="sentence_away_msg">You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="./badges.html">Know more</a></p>
+            <div class="row d-none" id="milestone_text">
+    <div class="col-12 col-lg-5 col-md-5 mt-lg-5 justify-content-between">
+        <div>
+            <img src="../img/bronze_badge.svg" alt="Bronze Badge" id="reward-img" class="reward-img">
+        </div>
+        <p class="mt-2">National Language Translation Mission</p>
+        <button class="btn btn-outline-primary my-2" data-badge="" download id="download_pdf"><span class="mr-2">Download</span>
+            <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.12766 0C6.40968 0 6.6383 0.228621 6.6383 0.510638V6.49941L8.54196 4.59575L9.19149 5.24528L6.12766 8.30911L3.06383 5.24528L3.71336 4.59575L5.61702 6.49941V0.510638C5.61702 0.228621 5.84564 0 6.12766 0Z" fill="#007BFF"/>
+                <path d="M1.02128 6.12766C1.02128 5.84564 0.792656 5.61702 0.510638 5.61702C0.228621 5.61702 0 5.84564 0 6.12766V9.95745C0 10.2395 0.228621 10.4681 0.510638 10.4681H11.4894C11.7714 10.4681 12 10.2395 12 9.95745V6.12766C12 5.84564 11.7714 5.61702 11.4894 5.61702C11.2073 5.61702 10.9787 5.84564 10.9787 6.12766V9.44681H1.02128V6.12766Z" fill="#007BFF"/>
+            </svg>
+        </button>
+    </div>
+    <div class="col-12 col-lg-7 col-md-7 msg-box mt-5">
+        <h4 class="mb-3">WoaaH!! You’ve earned your <span id="current_badge_name"></span> Badge</h4>
+        <p><span id="user-contribution" class="text-primary"></span> <span id="current_badge_name_1"></span> Contributor level achieved for contributing <span id="current_badge_count"></span> sentences.</p>
+        <p>Your next goal is to reach <span id="next_badge_count"></span> sentences to unlock your <span id="next_badge_name_1"></span> Badge. <a href="./badges.html">Know more</a></p>
+    </div>
+</div>
+
+
+            <div class="mt-5 text-center">
+                মসিবু অদোমগী মরুপ-মপাং অমসুং ইমুং-মনুংদা শেয়র তৌবীয়ু
+            </div>
+            <div class="row justify-content-center my-2">
+                <div class="col-12 text-center bg-white">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://boloindia.nplt.in/" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                        <img src="../img/fb-icon.svg" width="24px" alt="Share on Facebook">
+                    </a><span>&sdot;</span>
+                    <a id="linkedin_share" href="https://www.linkedin.com/shareArticle?mini=true&url=https://boloindia.nplt.in/&title=Bolo India: A crowdsourcing initiative for Indian languages.&summary=I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?/&source=" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                        <img src="../img/linkedin-icon.svg" width="24px" alt="Share on LinkedIn">
+                    </a><span>&sdot;</span>
+                    <a id="twitter_share" href="https://twitter.com/intent/tweet?text=I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?" target="_blank" rel="noopener noreferrer">
+                        <img src="../img/twitter-icon.svg" width="24px" alt="Share on Twitter">
+                    </a><span>&sdot;</span>
+                    <a id="whatsapp_share" href="https://api.whatsapp.com/send?text=I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?" target="_blank" rel="noopener noreferrer">
+                        <img src="../img/whatsapp.svg" width="32px" alt="Share on Whatsapp">
+                    </a>
+                </div>
+            </div>
+            <div class="badges_information">
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="bronze" href="#" id="bronze_badge_link">
+                    <img title="Download Bronze Badge" src="../img/bronze_badge.svg" alt="" width="36px" class="disable" id="bronze_badge_link_img">
+                </button>
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="silver" href="#" id="silver_badge_link">
+                    <img title="Download Silver Badge" src="../img/silver_badge.svg" alt="" width="36px" class="disable" id="silver_badge_link_img">
+                </button>
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="gold" href="#" id="gold_badge_link">
+                    <img title="Download Gold Badge" src="../img/gold_badge.svg" alt="" width="36px" class="disable" id="gold_badge_link_img">
+                </button>
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="platinum" href="#" id="platinum_badge_link">
+                    <img title="Download Platinum Badge" src="../img/platinum_badge.svg" alt="" width="36px" class="disable" id="platinum_badge_link_img">
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5" id="did_you_know_section">
+        <div class="col-lg-8 offset-lg-2 border p-4 stats-container">
+            <div class="row justify-content-around align-items-center">
+                <div class="title">
+                    Did you know?
+                </div>
+                <div class="most-data-recorded">
+                    <p>Most Contributed - <span id="languageId"></span> </p>
+                    <div class="position-relative">
+                        <div class="progress mb-2 w-80">
+                            <div id="highest_language_progress" class="progress-bar time-contributed" role="progressbar" style="width:0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <span id="highest_language_time" class="time"></span>
+                    </div>
+                </div>
+                <div class="lang-data-recorded">
+                    <p>Data recorded for <span id="languageChoiceId"></span></p>
+                    <div class="position-relative">
+                        <div class="progress mb-2 w-80">
+                            <div id="contribute_language_progress" class="progress-bar time-contributed" role="progressbar" style="width:0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <span id="contribute_language_time" class="time"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-3 col-md-6 col-8 text-center">
+            <div class="mb-3">
+                <span>Help your language achieve it’s goal of <span id="language-hour-goal"></span> hrs. We know you can do more!</span>
+            </div>
+            <a href="./record.html" class="btn btn-primary btn-lg h6 w-100">
+                কন্ত্রিব্যুট হেন্না তৌবীয়ু
+            </a>
+        </div>
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<footer class="fixed-bottom bg-light pt-3 border-top w-100">
+    <div class="container-fluid">
+        <div class="d-flex flex-column-reverse flex-lg-row justify-content-lg-around align-items-sm-center align-items-md-center text-center">
+            <div class="d-none">
+                <p class="text-muted">Supported by EkStep Foundation (built on <a href="https://sunbird.org/ai">sunbird.org/ai</a>)</p>
+            </div>
+            <div class="d-lg-inline-flex justify-content-around mb-2">
+                <div class="py-2 px-16">
+                    <a href="./about-us.html">
+                        ঐখোয়গী মরমদা
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html">
+                        টর্ম অমসুং কন্দিসনশিং
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html#privacy-policy">
+                        প্রাইভেসি পোলিসি
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./feedback.html">
+                        Feedback
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../js/locale.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="../js/thank-you.js"></script>
+</body>
+
+</html>
+
