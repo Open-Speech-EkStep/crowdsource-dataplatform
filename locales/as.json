@@ -147,7 +147,7 @@
 	"Would you also like to contribute your voice?": "আপোনাৰ কণ্ঠৰ অৱদান দিব বিচাৰে নেকি?",
 	"Start Contributing": "যোগদান আৰম্ভ কৰক",
 	"Thank you for validating!": "বৈধতা নিৰূপণৰ বাবে ধন্যবাদ!",
-	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "ৈধতা প্ৰদান কৰি আপুনি আমাক সহায় কৰিলে <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> ৰেকৰ্ডিংৰ\"X\"",
+	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "আপুনি আমাক <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> টা বাণীবদ্ধৰ বৈধতা নিৰূপণত সহায় কৰিলে",
 	"Validate More": "বেছি বৈধ",
 	"Validating Instructions": "বৈধতাৰ নিয়মাৱলী",
 	"Ensure the voice is <b>clear and audible</b>": "মাতটো <b>স্পষ্ট আৰু শ্ৰুতিমধুৰ</b> হৈছেনে নিশ্চিত কৰক",
