@@ -17,6 +17,7 @@ jobs:
     executor: node/default
     steps:
       - checkout
+      - node/install
       - run: rm -rf .git
       - persist_to_workspace:
           root: .
