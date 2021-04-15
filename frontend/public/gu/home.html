@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bolo India: A crowdsourcing initiative for Indian languages (Beta)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
+    <meta name="description" content="Bolo India: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta property="og:title" content="બોલો ઇન્ડિયા: ભારતીય ભાષાઓ માટે એક ક્રાઉડસોર્સિંગની પહેલ">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="I&#39;ve contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?">
+    <meta property="og:site_name" content="Bolo India ">
+    <meta property="og:url" content="https://boloindia.nplt.in">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../css/home.css">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../css/common.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+    <div class="d-flex align-items-center">
+        <a class="logo-text text-dark" href="/">
+            <h2 class="mb-0">
+                <img src="../img/BoloIndiaLogo.png" alt="Bolo India" width="64px" height="54px">
+            </h2>
+        </a>
+        <div class="version-beta">Beta</div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item p-2 dropdown" id="locale_language_dropdown">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ગુજરાતી
+                </div>
+                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton"><a id="english" class="dropdown-item" href="#" locale="en">English</a></div>
+            </li>
+            <li class="nav-item p-2 dropdown d-none">
+                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Speech Recognition Models
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="https://inference.vakyansh.in/indian-english">English (IN)</a><a class="dropdown-item" href="https://inference.vakyansh.in/gujarati">Gujarati</a> <a class="dropdown-item" href="https://inference.vakyansh.in/hindi">Hindi</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada">Kannada</a> <a class="dropdown-item" href="https://inference.vakyansh.in/kannada-lm">Kannada (With LM)</a> <a class="dropdown-item" href="https://inference.vakyansh.in/odia">Odia</a> <a class="dropdown-item" href="https://inference.vakyansh.in/tamil">Tamil</a> <a class="dropdown-item" href="https://inference.vakyansh.in/telugu">Telugu</a></div>
+            </li>
+            <li class="nav-item p-2"><a href="./about-us.html" class="nav-link text-dark font-weight-bold">
+                    અમારા વિશે
+                </a></li>
+            <li class="nav-item p-2"><a class="nav-link text-dark font-weight-bold d-none" id="nav-user"><span class="material-icons align-middle mx-1">account_circle</span> <span id="nav-username"></span></a></li>
+        </ul>
+    </div>
+</nav>
+        <div class="container-fluid supreme-container">
+            <div class="row">
+                <div class="col-12 col-md-8 col-lg-10 offset-lg-1 mt-4">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white px-4" id="contribution_lang_navbar">
+                        <div class="mx-2">
+                            સ્વૈચ્છિક યોગદાન માટે ભાષા પસંદ કરો:
+                        </div><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedLanguage" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedLanguage">
+                            <div class="col-5 col-lg-5 col-xl-4" id="nav-bar-loader">
+                                <div><span class="spinner"></span></div>
+                            </div>
+                            <ul class="navbar-nav text-primary cursor-pointer d-none" id="language-nav-bar">
+                                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Hindi">हिंदी</li>
+                                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Marathi">मराठी</li>
+                                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Bengali">বাংলা</li>
+                                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Tamil">தமிழ்</li>
+                                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Telugu">తెలుగు</li>
+                            </ul>
+                            <ul class="navbar-nav text-primary cursor-pointer">
+                                <li class="nav-item mx-2 mx-lg-4 options d-none" id="6th_option"></li>
+                            </ul>
+                            <ul class="navbar-nav text-primary cursor-pointer">
+                                <li class="nav-item mx-2 mx-lg-4 options">
+                                    <div id="Show_all_language" data-toggle="modal" data-target="#language-pop-up-wrapper" class="cursor-pointer">
+                                        તમામ બતાવો
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="m-auto row justify-content-center mt-lg-5 mx-lg-5">
+                <div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card1 mr-lg-3 justify-content-center align-items-center py-3" id="say">
+                    <div id="say_container" class="row align-items-center py-lg-5 position-relative col-10 card_container px-0" style="height:100%">
+                        <div class="col-8 px-0">
+                            <h1 class="display-5">
+                                બોલો
+                            </h1>
+                            <div class="mt-3 font-weight-bold">
+                                તમારા અવાજનો ફાળો આપો
+                            </div>
+                        </div>
+                        <div class="col-4 text-right px-0">
+                                <img src="../img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer say-logo img-fluid" data-target="#userModal" width="140px" height="140px">
+                        </div>
+
+                        <div id="say-p-2" class="col-12 d-none position-absolute px-0" style="bottom:1rem">
+                            <div>
+                                ભારતીય ભાષાઓમાં ઓપન ડેટાનો ભંડાર બનાવવા માટે તમારો અવાજ આપો
+                            </div>
+                            <div class="col-5 col-lg-5 col-xl-4" id="say-loader">
+                                <div><span class="spinner"></span></div>
+                            </div>
+                            <div id="say-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card2 ml-lg-3 justify-content-center align-items-center py-3" id="listen">
+                    <div id="listen_container" class="row position-relative align-items-center py-lg-5 col-10 card_container px-0" style="height:100%">
+                        <div class="col-8 px-0">
+                            <h1 class="display-5">
+                                ખાતરી કરો
+                            </h1>
+                            <div class="mt-3 font-weight-bold">
+                                તે શું કહે છે તેને પ્રમાણિત કરો
+                            </div>
+                        </div>
+                        <div class="col-4 text-right px-0">
+                            <a href="./validator-page.html">
+                                <img src="../img/listen.svg" alt="validator" id="start_validating" width="140px" height="140px" class="cursor-pointer listen-logo img-fluid"></a>
+                        </div>
+                        <div class="col-12 d-none position-absolute px-0" id="listen-p-2" style="bottom:1rem">
+                            <div>
+                                બીજાઓએ ફાળો આપેલાને માન્ય કરવા માટે અમને મદદ કરો
+                            </div>
+                            <div class="col-7 col-lg-6 col-xl-6" id="listen-loader">
+                                <div><span class="spinner"></span></div>
+                            </div>
+                            <div id="listen-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 text-dark mt-4">
+                    <h1 class="display-5 font-wt-900 site-blue lh-5 mt-lg-5">
+                        બોલો ઇન્ડિયા: ભારતીય ભાષાઓ માટે એક ક્રાઉડસોર્સિંગની પહેલ
+                    </h1>
+                    <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
+                        ભારતીય ભાષાઓમાં અવાજ પારખવાના ક્ષેત્રમાં ભારતને આત્મનિર્ભર બનવાની જરૂર છે. આથી, અમે સંખ્યાબંધ ભારતીય અવાજોનો ઓપન ડેટા ભંડાર બનાવવા માંગીએ છીએ. બોલો ઇન્ડિયા આપને આ હેતુસર તમારા અવાજનો સ્વેચ્છાએ ફાળો આપવા માટે આમંત્રણ આપે છે. <a class="ml-1" href="./about-us.html">
+                                વધુ જાણો
+                            </a>
+                    </p>
+                </div>
+                <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="../img/home.svg" width="614.8" height="759.548" alt="Bolo India Infograph" class="img-fluid mr-n1"></div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 pt-lg-0 text-dark">
+                    <h1 class="display-5 font-wt-900 site-blue lh-5">
+                        તમે આપેલા ફાળા પર અમે નિર્ભર છીએ
+                    </h1>
+                    <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
+                        અવાજ પારખનાર મોડલ્સ બનાવવાની ચાવી, સમગ્ર રાજ્યો, બોલીઓ, મૂળ ઉચ્ચારો, જાતિ અને વયજૂથ અનુસાર તમારા દ્વારા પૂરો પાડવામાં આવતો વિવિધ ડેટા છે. આ વિવિધતાનું પરિમાણ સમગ્ર દેશમાં ફેલાયેલું છે, જે અમને આપણી ભાષાઓ સશક્ત બનાવવા માટે સહિયારી શક્તિ આપે છે. <a class="ml-1" href="./about-us.html">
+                                વધુ જાણો
+                            </a>
+                    </p>
+                    <div class="row mt-5" id="speaker-data">
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader1">
+                            <div><span class="spinner"></span></div>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader2">
+                            <div><span class="spinner"></span></div>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader3">
+                            <div><span class="spinner"></span></div>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="languages-wrapper">
+                            <p class="h4" id="languages-value"></p>
+                            <p class="mb-0 fs-h4">
+                                ફાળો આપેલી ભાષાઓ
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="speakers-wrapper">
+                            <p class="h4" id="speaker-value"></p>
+                            <p class="mb-0 fs-h4">
+                                ફાળો આપેલા સ્પીકર્સ
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="hours-wrapper">
+                            <div class="mb-0 d-flex align-items-center"><span class="h4" id="hour-value"></span></div>
+                            <p class="mb-0 fs-h4">
+                                રેકોર્ડ કરેલા કલાકો
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 col-lg-5 px-0 oflow-x-hid"></div>
+            </div>
+            <div class="row mb-5 lazy">
+                <div class="col-12 col-md-6 col-lg-6 ml-lg-auto pt-5 pt-lg-0 text-dark">
+                    <div class="justify-content-center align-items-center d-none" id="chartSpinner">
+                        <div><span class="spinner"></span></div>
+                    </div>
+                    <div id="indiaMapChart" style="width:100%"></div>
+                    <div id="legendDiv" class="justify-content-evenly d-none">
+                        <div id="quarter" class="quarter">
+                            <div class="legend-val">0 - 1hr</div>
+                        </div>
+                        <div id="half" class="half">
+                            <div class="legend-val">1 - 2hrs</div>
+                        </div>
+                        <div id="threeQuarter" class="threeQuarter">
+                            <div class="legend-val">2 - 4hrs</div>
+                        </div>
+                        <div id="full" class="full">
+                            <div class="legend-val">4+ hrs</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-5 mt-xs-5 pr-lg-5">
+                    <div id="bar_charts_container">
+                        <h4 class="h4 mb-4">
+                            મુખ્ય ભાષાઓ
+                        </h4>
+                        <div class="d-flex mb-3">
+                            <div class="form-check mr-5"><label class="form-check-label" for="flexRadioDefault1"><input class="form-check-input" type="radio" name="topLanguageChart" id="hours_chart" value="hours" checked="checked">
+                                    ફાળો આપેલા કલાકોના ડેટા અનુસાર
+                                </label></div>
+                            <div class="form-check"><label class="form-check-label" for="flexRadioDefault2"><input class="form-check-input" type="radio" name="topLanguageChart" id="speakers_chart" value="speakers">
+                                    સ્પીકર્સની સંખ્યા અનુસાર
+                                </label></div>
+                        </div>
+                        <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
+                            <div><span class="spinner"></span></div>
+                        </div>
+                        <div id="speakers_hours_chart_container" class="w-100">
+                            <div id="speakers_hours_chart" class="w-90"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-12 col-lg-12 px-0 oflow-x-hid"></div>
+            </div>
+            <div class="row mt-5 mb-5" id="view_all_btn">
+                <div class="col-12 d-flex justify-content-center">
+                    <a href="./dashboard.html" id="viewAllDetailsBtn" class="btn btn-outline-primary text-primary">
+                        તમામ વિગતો જુઓ
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal-chart-wrapper" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg w-75 mw-100 h-75 mx-auto">
+                <div class="modal-content border-primary border-2 h-100 p-lg-5 px-2 py-4">
+                    <div class="text-right" aria-label="Close"><a href="#" aria-hidden="true" data-dismiss="modal">
+                            વિગતો છુપાવો &lt;
+                        </a></div>
+                    <div id="modal-chart" class="h-100"></div>
+                </div>
+            </div>
+        </div><button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
+        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="margin-left-auto"><button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+            <div class="modal-header d-block border-0">
+                <h1 class="modal-title text-center">
+                    સ્પીકરની વિગતો
+                </h1>
+            </div>
+            <div class="modal-body px-6" id="speaker-details">
+                <p class="text-muted text-center">
+                    તમામ ખાના ભરવા ફરજિયાત નથી
+                </p>
+                <div class="col-12 text-center text-primary" id="resetBtn" style="cursor:pointer">
+                    તમે નથી? વપરાશકર્તા બદલો
+                </div>
+                <div class="form-group mt-5"><label for="username" class="form-label">
+                        યુઝરનેમ
+                    </label> <input class="form-control" maxlength="12" id="username" data-toggle="tooltip" placeholder="પસંદગીનું યુઝરનેમ લખો" title="">
+                    <div class="text-danger mt-2 d-none" id="username-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px" height="18px">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg> <span class="align-middle">
+                            યુઝરનેમ કોઈ ઇમેઇલ એડ્રેસ અથવા મોબાઇલ નંબર ન હોવો જોઈએ
+                        </span></div>
+                </div>
+                <div class="form-group"><label for="mother-tongue" class="form-label">
+                        માતૃભાષા
+                    </label> <select class="form-control" id="mother-tongue">
+                        <option selected="selected" value="">
+                            માતૃભાષા પસંદ કરો
+                        </option>
+                        
+                            <option value="Assamese">
+                                Assamese
+                            </option>
+                            
+                            <option value="Bengali">
+                                Bengali
+                            </option>
+                            
+                            <option value="Bodo">
+                                Bodo
+                            </option>
+                            
+                            <option value="Dogri">
+                                Dogri
+                            </option>
+                            
+                            <option value="Gujarati">
+                                Gujarati
+                            </option>
+                            
+                            <option value="Hindi">
+                                Hindi
+                            </option>
+                            
+                            <option value="Kannada">
+                                Kannada
+                            </option>
+                            
+                            <option value="Kashmiri">
+                                Kashmiri
+                            </option>
+                            
+                            <option value="Konkani">
+                                Konkani
+                            </option>
+                            
+                            <option value="Maithili">
+                                Maithili
+                            </option>
+                            
+                            <option value="Malayalam">
+                                Malayalam
+                            </option>
+                            
+                            <option value="Manipuri">
+                                Manipuri
+                            </option>
+                            
+                            <option value="Marathi">
+                                Marathi
+                            </option>
+                            
+                            <option value="Nepali">
+                                Nepali
+                            </option>
+                            
+                            <option value="Odia">
+                                Odia
+                            </option>
+                            
+                            <option value="Punjabi">
+                                Punjabi
+                            </option>
+                            
+                            <option value="Sanskrit">
+                                Sanskrit
+                            </option>
+                            
+                            <option value="Santali">
+                                Santali
+                            </option>
+                            
+                            <option value="Sindhi">
+                                Sindhi
+                            </option>
+                            
+                            <option value="Tamil">
+                                Tamil
+                            </option>
+                            
+                            <option value="Telugu">
+                                Telugu
+                            </option>
+                            
+                            <option value="Urdu">
+                                Urdu
+                            </option>
+                            
+                    </select></div>
+                <div class="form-group"><label for="age" class="form-label">
+                        વય જૂથ
+                    </label> <select class="form-control" id="age">
+                        <option selected="selected" value="">
+                            વય જૂથ પસંદ કરો
+                        </option>
+                        <option value="upto 10">upto 10 (Kid)</option>
+                        <option value="10 - 30">10 - 30 (Youth)</option>
+                        <option value="30 - 60">30 - 60 (Adult)</option>
+                        <option value="60+">60+ (Senior)</option>
+                    </select></div>
+                <div class="form-group"><label for="gender" class="form-label">
+                        જાતિ
+                    </label>
+                    <div class="justify-content-between">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="male-check" value="male"> 
+                                <label class="form-check-label m-2" for="male-check">
+                                પુરુષ
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="female-check" value="female"> 
+                            <label class="form-check-label m-2" for="female-check">
+                                સ્ત્રી
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="other-check" value="others"> 
+                            <label class="form-check-label m-2" for="other-check">
+                                અન્ય
+                            </label>
+                        </div>
+                    </div>
+                    <div id="transgender_options" class="justify-content-between d-none">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="trans-he-check" value="Transgender - He">
+                            <label class="form-check-label m-2" for="trans-he-check">
+                                ટ્રાન્સજેન્ડર - પુરુષ
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="trans-she-check" value="Transgender - She"> 
+                            <label class="form-check-label m-2" for="trans-she-check">
+                                ટ્રાન્સજેન્ડર - સ્ત્રી
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="not-say-check" value="Rather Not Say" checked="checked"> 
+                            <label class="form-check-label m-2" for="not-say-check">
+                                કહી શકાય નહીં
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label mt-2">
+                        આગળ પ્રક્રિયા કરીને તમે <a href="./terms-and-conditions.html">નિયમો અને શરતો</a> સાથે સંમત છો
+                    </label>
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <div class="col-12" data-toggle="tooltip" title="કૃપા કરીને પ્રક્રિયા કરતા પહેલાં કોઇપણ એરર સંદેશાને માન્યતા આપો"><button type="button" id="proceed-box" class="btn btn-primary h6 shadow w-100 rounded p-3" data-toggle="modal" data-target="#languageModal">
+                            ચાલો શરૂ કરીએ
+                        </button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="modal fade" id="content-language" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="modal-header d-block border-0">
+                <h6 class="modal-title text-center">
+                    તમારી પસંદગીની ભાષા પસંદ કરો
+                </h6>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer">
+                    
+                        <a id="Assamese" class="p-2" href="#" locale="as">অসমীয়া</a>
+                    
+                        <a id="Bengali" class="p-2" href="#" locale="bn">বাংলা</a>
+                    
+                        <a id="English" class="p-2" href="#" locale="en">English</a>
+                    
+                        <a id="Gujarati" class="p-2" href="#" locale="gu">ગુજરાતી</a>
+                    
+                        <a id="Hindi" class="p-2" href="#" locale="hi">हिंदी</a>
+                    
+                        <a id="Kannada" class="p-2" href="#" locale="kn">ಕನ್ನಡ</a>
+                    
+                        <a id="Malayalam" class="p-2" href="#" locale="ml">മലയാളം</a>
+                    
+                        <a id="Marathi" class="p-2" href="#" locale="mr">मराठी</a>
+                    
+                        <a id="Odia" class="p-2" href="#" locale="or">ଓଡିଆ</a>
+                    
+                        <a id="Punjabi" class="p-2" href="#" locale="pa">ਪੰਜਾਬੀ</a>
+                    
+                        <a id="Tamil" class="p-2" href="#" locale="ta">தமிழ்</a>
+                    
+                        <a id="Telugu" class="p-2" href="#" locale="te">తెలుగు</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <div class="modal fade" id="language-pop-up-wrapper" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="margin-left-auto">
+                <button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span>
+                </button>
+            </div>
+            <div class="modal-header d-block border-0"><h6 class="modal-title text-center text-muted">સ્વૈચ્છિક યોગદાન માટે ભાષા પસંદ કરો
+                    :</h6>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer" id="say-listen-language">
+                
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Assamese" id="as">অসমীয়া</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Bengali" id="bn">বাংলা</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="English" id="en">English</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Gujarati" id="gu">ગુજરાતી</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Hindi" id="hi">हिंदी</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Kannada" id="kn">ಕನ್ನಡ</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Malayalam" id="ml">മലയാളം</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Marathi" id="mr">मराठी</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Odia" id="or">ଓଡିଆ</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Punjabi" id="pa">ਪੰਜਾਬੀ</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Tamil" id="ta">தமிழ்</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Telugu" id="te">తెలుగు</div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <footer class="fixed-bottom bg-light pt-3 border-top w-100">
+    <div class="container-fluid">
+        <div class="d-flex flex-column-reverse flex-lg-row justify-content-lg-around align-items-sm-center align-items-md-center text-center">
+            <div class="d-none">
+                <p class="text-muted">Supported by EkStep Foundation (built on <a href="https://sunbird.org/ai">sunbird.org/ai</a>)</p>
+            </div>
+            <div class="d-lg-inline-flex justify-content-around mb-2">
+                <div class="py-2 px-16">
+                    <a href="./about-us.html">
+                        અમારા વિશે
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html">
+                        નિયમો અને શરતો
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html#privacy-policy">
+                        પ્રાઇવસી પોલિસી
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./feedback.html">
+                        પ્રતિસાદ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../js/locale.js"></script>
+
+                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            
+                    <script src="../js/home.js" id="home-page" default-lang=""></script>
+                    <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+                    <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+                    <script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
+                    <script src="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.js"></script>
+            
+</body>
+
+</html>
