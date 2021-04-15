@@ -20,7 +20,7 @@ const AudioContext = window.AudioContext || window.webkitAudioContext;
 
 function startVisualizer() {
     const $canvas = document.getElementById('myCanvas');
-    const audio = document.querySelector('audio');
+    const audio = document.getElementById('my-audio');
     context = context || new AudioContext();
     src = src || context.createMediaElementSource(audio);
     const analyser = context.createAnalyser();
