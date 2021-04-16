@@ -66,7 +66,6 @@
 * User should see the "अधिक प्रमाणित करें" button
 
 ## Validate Report feature
-* Select Contribution Language as "हिंदी"
 * Select Preferred language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
