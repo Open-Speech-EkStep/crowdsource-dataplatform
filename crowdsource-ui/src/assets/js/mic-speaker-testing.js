@@ -341,6 +341,7 @@ $(document).ready(() => {
   }).catch(() => {
     executeOnReady();
   });
-}
+})
+
 
 module.exports = { addOnClickListener, showAmbientNoise, writeUTFBytes }
