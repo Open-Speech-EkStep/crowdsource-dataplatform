@@ -362,7 +362,7 @@ require('./dashboard-api')(router);
 app.use('/', router);
 
 app.get('*', (req, res) => {
-    res.render('not-found.ejs');
+    res.render('../frontend/views/not-found.ejs');
 });
 
 function buildWadaSnrCommand(filePath) {
