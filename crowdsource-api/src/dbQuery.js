@@ -19,7 +19,7 @@ where contributor_identifier = $1 and user_name = $2; \
 with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
-from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and sentences.state!= 'reported'\
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and coalesce(sentences.state,'')!= 'reported' \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
 and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
@@ -38,7 +38,7 @@ where contributor_identifier = $1 and user_name = $2; \
 with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
-from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and sentences.state!= 'reported' \
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and coalesce(sentences.state,'')!= 'reported' \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
 and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
@@ -58,7 +58,7 @@ where contributor_identifier = $1 and user_name = $2; \
 with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
-from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2  and sentences.state!='reported'\
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2  and coalesce(sentences.state,'')!= 'reported' \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
 and (coalesce(cont.action,'assigned')='assigned' or (cont.action='completed' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
@@ -77,7 +77,7 @@ where contributor_identifier = $1 and user_name = $2; \
 with ins ("sentenceId") as \
 ( insert into "contributions" ("action","sentenceId", "date", "contributed_by") \
 select \'assigned\', sentences."sentenceId", now(), con."contributor_id" \
-from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and sentences.state!= 'reported' \
+from sentences inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and coalesce(sentences.state,'')!= 'reported' \
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" \
 where sentences."state" is null and language = $4 and label=$3 and cont."action" is NULL limit 5 \
   returning "sentenceId") \
