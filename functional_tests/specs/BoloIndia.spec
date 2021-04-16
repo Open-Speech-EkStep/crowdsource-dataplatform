@@ -1,6 +1,6 @@
-# Test Vakyansh
+# Test BoloIndia
 
-* Opening Vakyansh
+* Open BoloIndia
 
 ## Check About Us Page
 * Select Contribution Language as "English"
@@ -43,7 +43,7 @@
 * Select Preferred language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
-* when user click on Lets Go Button, user should see instructions to record
+* When user click on Lets Go Button, user should see instructions to record
 * User should be able to close the Instructions , user should see a sentence , Skip button , Start Recording Button , username,Test Mic and speaker button
 * When user clicks on the Test Microphone Speaker button, user should see "play-speaker" and "test-mic-button" buttons
 * When user clicks on the cross button , pop up should close and user should see the Test Mic and speaker button
@@ -64,3 +64,14 @@
 * User clicks on "dislike_button" , he should see next sentence and "dislike_button" "like_button" buttons should be disabled
 * User skips the next "4" sentences user should land on Thank you page in Hindi
 * User should see the "अधिक प्रमाणित करें" button
+
+## Validate Report feature
+* Select Contribution Language as "हिंदी"
+* Select Preferred language as "English"
+* Navigate to "Contribute" button and click "Contribute" button
+* And User enter random Username and selects Age , Mother tongue ,gender
+* When user click on Lets Go Button, user should see instructions to record
+* User should be able to close the Instructions , user should see a sentence , Skip button , Start Recording Button , username,Test Mic and speaker button
+* When user clicks on Report Button, user should see Report Content Dialog Box & Submit button should be disabled
+* Once user clicks on Others Radio button, Submit button should be enabled
+* When user submits , Thank you pop up should come & close button should close the pop up
