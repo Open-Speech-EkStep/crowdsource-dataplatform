@@ -523,5 +523,6 @@ $(document).ready(() => {
 module.exports = {
     setSentenceLabel,
     setAudioPlayer,
-    addListeners
+    addListeners,
+    startVisualizer
 };
