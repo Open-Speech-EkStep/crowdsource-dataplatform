@@ -15,8 +15,8 @@ const showInstructionsPopup = () => {
     showInstructions();
 }
 
-let context, src;
 const AudioContext = window.AudioContext || window.webkitAudioContext;
+let context, src;
 
 function startVisualizer() {
     const $canvas = document.getElementById('myCanvas');
