@@ -1,6 +1,9 @@
 const {LOCALE_STRINGS} = require('../js/constants');
 const fetch = require('./fetch');
 
+const { getLocaleString } = require('./utils');
+const executeOnReady = function (){
+
 let audioData = [];
 let recordingLength = 0;
 let audioContext;
@@ -333,4 +336,13 @@ $testSpeakerBtn.on('click', () => {
   $('#test-speaker-text').text(localeStrings['Playing']);
   $('#speaker-svg').addClass('d-none');
   playSpeaker();
+});
+}
+
+$(document).ready(() => {
+  getLocaleString().then(() => {
+    executeOnReady();
+  }).catch(() => {
+    executeOnReady();
+  });
 });
