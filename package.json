@@ -9,7 +9,7 @@
     "start-cluster": "pm2 start src/server.js -i 2",
     "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest",
     "gulp": "gulp",
-    "functional_test": "cd functional_tests && npm i && gauge run specs/Vakyansh.spec",
+    "functional_test": "cd functional_tests && npm i && gauge run specs/BoloIndia.spec",
     "db-migrate": "npx db-migrate up --config migrations/config/migration_config.json -e dev",
     "prepare": "husky install"
   },
