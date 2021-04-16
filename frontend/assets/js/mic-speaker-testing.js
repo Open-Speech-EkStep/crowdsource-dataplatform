@@ -1,7 +1,7 @@
-const {LOCALE_STRINGS} = require('../js/constants');
+const { LOCALE_STRINGS } = require('../js/constants');
 const fetch = require('./fetch');
 
-const {getLocaleString} = require('./utils');
+const { getLocaleString } = require('./utils');
 const executeOnReady = function () {
 
   let audioData = [];
@@ -329,7 +329,7 @@ const writeUTFBytes = function (view, offset, string) {
   }
 }
 
-const addOnClickListener = function(){
+const addOnClickListener = function () {
   const $testMicDiv = $('#test-mic-speakers');
   const $testMicSpeakerBtn = $('#test-mic-speakers-button');
   const $testMicSpeakerDetails = $('#test-mic-speakers-details');
@@ -359,4 +359,4 @@ $(document).ready(() => {
   });
 });
 
-module.exports = {addOnClickListener, showAmbientNoise, writeUTFBytes}
+module.exports = { addOnClickListener, showAmbientNoise, writeUTFBytes }
