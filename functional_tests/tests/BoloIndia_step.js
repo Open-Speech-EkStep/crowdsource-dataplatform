@@ -319,6 +319,7 @@ step("When user clicks on the go to home page button , user should see the home 
 
 step("Skip coach mark instructions", async function () {
     await text('SKIP').exists();
+    await text('You can select the language in which you want to participate').exists();
     await click('SKIP');
 });
 
