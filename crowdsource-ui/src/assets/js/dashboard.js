@@ -237,3 +237,5 @@ $(document).ready(function () {
     toggleFooterPosition();
 
 });
+
+module.exports = {fetchDetail, getSpeakersData, isLanguageAvailable, updateLanguage}
