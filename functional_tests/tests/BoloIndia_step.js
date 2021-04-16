@@ -41,7 +41,7 @@ afterSuite(async () => {
     await closeBrowser();
 });
 
-step("Opening Vakyansh", async () => {
+step("Open BoloIndia", async () => {
    await taiko.waitFor(1000)
     await goto(testUrl);
     await taiko.waitFor(1000)
@@ -101,7 +101,7 @@ step("And User enter random Username and selects Age , Mother tongue ,gender", a
     }
 });
 
-step("when user click on Lets Go Button, user should see instructions to record", async function () {
+step("When user click on Lets Go Button, user should see instructions to record", async function () {
     await click(taiko.button({ id: 'proceed-box' }))
     await taiko.waitFor(1500)
     assert.ok(await text('Quick Tips').exists(), 'Not able to see instructions')
@@ -320,4 +320,31 @@ step("When user clicks on the go to home page button , user should see the home 
 step("Skip coach mark instructions", async function () {
     await text('SKIP').exists();
     await click('SKIP');
+});
+
+step("When user clicks on Report Button, user should see Report Content Dialog Box & Submit button should be disabled", async function() {
+    await click(taiko.button({ id: "report_btn" }))
+    await taiko.waitFor(500);
+    assert.ok(await text("Report Content").exists());
+    assert.ok( await taiko.button({ id: "report_submit_id" }).isDisabled());    
+});
+
+step("Once user clicks on Others Radio button, Submit button should be enabled", async function() {
+    assert.ok(await taiko.radioButton({ id: 'others_id' }).exists())
+    assert.ok(await taiko.radioButton({ id: 'misinformation_id' }).exists())
+    assert.ok(await taiko.radioButton({ id: 'politicalStatement_id' }).exists())
+    assert.ok(await taiko.radioButton({ id: 'prohibitedContent_id' }).exists())
+    assert.ok(await taiko.radioButton({ id: 'offensive_id' }).exists())
+    await click(taiko.radioButton({ id: 'others_id' }))
+    assert.ok(! await taiko.button({ id: "report_submit_id" }).isDisabled()); 
+
+});
+
+step("When user submits , Thank you pop up should come & close button should close the pop up", async function() {
+    
+    await click(taiko.button({ id: "report_submit_id" }))
+    await taiko.waitFor(500);
+    assert.ok(await text("Thank You").exists());
+    await click(taiko.button({id:"report_sentence_thanks_close_id"}))
+    await taiko.waitFor(500);
 });
