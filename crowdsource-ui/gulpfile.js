@@ -9,7 +9,7 @@ const fs = require('fs');
 const generateLocalisedHtmlFromEjs = require('./locales/utils/i18n-ejs-generator')
 
 gulp.task('ejs', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/src/views`, `${__dirname}/target/public`);
+  generateLocalisedHtmlFromEjs(`${__dirname}/src/views`, `${__dirname}/target`);
   callback();
 });
 
@@ -55,13 +55,13 @@ gulp.task('js', function () {
         noSource: true,
       })
     )
-    .pipe(gulp.dest('target/public/js'));
+    .pipe(gulp.dest('target/js'));
 });
 gulp.task('css', function () {
   return gulp
     .src(['src/assets/css/*.css'])
     .pipe(cleanCss())
-    .pipe(gulp.dest('target/public/css'));
+    .pipe(gulp.dest('target/css'));
 });
 
 gulp.task('default', gulp.parallel('js', 'css', gulp.series('html', 'ejs')));
