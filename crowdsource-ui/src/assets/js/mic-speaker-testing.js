@@ -206,6 +206,22 @@ const executeOnReady = function () {
     }
   }
 
+  const ambienceNoiseCheck = (audioBlob) => {
+    const fd = new FormData();
+    fd.append('audio_data', audioBlob);
+    fetch('/audio/snr', {
+      method: 'POST',
+      body: fd,
+    })
+      .then(res => res.json())
+      .then(result => {
+        showAmbientNoise(result);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   const testMic = (btnDataAttr) => {
     $('#mic-msg').addClass('invisible').removeClass('d-none');
     $('#no-noise').addClass('d-none');
@@ -341,7 +357,6 @@ $(document).ready(() => {
   }).catch(() => {
     executeOnReady();
   });
-})
-
+});
 
 module.exports = { addOnClickListener, showAmbientNoise, writeUTFBytes }
