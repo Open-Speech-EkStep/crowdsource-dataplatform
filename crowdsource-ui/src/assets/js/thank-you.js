@@ -337,9 +337,9 @@ function executeOnLoad() {
   );
 
   if (!localSpeakerDataParsed) {
-    location.href = "/#start-record";
+    location.href = "./home.html#start-record";
   } else if (currentIndexInStorage < totalSentence) {
-    location.href = "/#start-record";
+    location.href = "./home.html#start-record";
   } else {
     $("#nav-user").removeClass("d-none");
     $("#nav-login").addClass("d-none");
