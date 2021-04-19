@@ -124,8 +124,8 @@ logs
 */node_modules
 .terraform
 
-frontend/public/*
-!frontend/public/img/
-!frontend/public/favicon.ico
-!frontend/public/sitemap.xml
-!frontend/public/aud/
+crowdsource-ui/target/public/*
+!crowdsource-ui/target/public/img/
+!crowdsource-ui/target/public/favicon.ico
+!crowdsource-ui/target/public/sitemap.xml
+!crowdsource-ui/target/public/aud/

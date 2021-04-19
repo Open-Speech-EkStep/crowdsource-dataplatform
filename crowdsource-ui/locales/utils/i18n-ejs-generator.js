@@ -1,4 +1,4 @@
-const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES } = require('../../../backend/src/constants');
+const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES } = require('../../../crowdsource-api/src/constants');
 const fs = require('fs');
 const ejs = require("ejs");
 const { I18n } = require('i18n');

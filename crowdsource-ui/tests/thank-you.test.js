@@ -1,6 +1,6 @@
 const {
   setSentencesContributed
-} = require('../assets/js/thank-you');
+} = require('../src/assets/js/thank-you');
 const {readFileSync} = require('fs');
 
 const fetchMock = require("fetch-mock");
@@ -8,7 +8,7 @@ const fetchMock = require("fetch-mock");
 const {stringToHTML, mockLocalStorage, flushPromises} = require('./utils');
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../views/thank-you.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../src/views/thank-you.ejs`, 'UTF-8')
 );
 
 describe("setUserContribution", () => {

@@ -1,10 +1,10 @@
 const fetchMock = require('fetch-mock')
-const { getStatistics } = require('../assets/js/home-page-charts');
+const { getStatistics } = require('../src/assets/js/home-page-charts');
 const { readFileSync } = require("fs");
 const { stringToHTML, flushPromises } = require("./utils");
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../views/home.ejs`, "UTF-8")
+  readFileSync(`${__dirname}/../src/views/home.ejs`, "UTF-8")
 );
 
 describe('getStatistics', () => {

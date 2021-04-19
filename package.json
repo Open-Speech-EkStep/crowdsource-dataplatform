@@ -4,8 +4,8 @@
   "description": "This will hold the crowdsourcing platform to be used to store voice data from various speakers",
   "main": "server.js",
   "scripts": {
-    "start": "node backend/src/server.js",
-    "watch": "gulp --gulpfile frontend/gulpfile.js  && nodemon backend/src/server.js aws",
+    "start": "node crowdsource-api/src/server.js",
+    "watch": "gulp --gulpfile crowdsource-ui/gulpfile.js  && nodemon crowdsource-api/src/server.js aws",
     "start-cluster": "pm2 start src/server.js -i 2",
     "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest",
     "gulp": "gulp",
