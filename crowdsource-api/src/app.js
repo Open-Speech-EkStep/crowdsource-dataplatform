@@ -113,7 +113,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(express.static('crowdsource-ui/target/public'));
+app.use(express.static('crowdsource-ui/target'));
 
 app.get('/changeLocale/:locale', function (req, res) {
     if (['hi', 'en', 'ta', 'kn', 'gu', 'mr', 'te', 'bn', 'as', 'pa', 'or', "ml"].indexOf(req.params.locale) > -1) {
