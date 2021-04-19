@@ -15,7 +15,7 @@ window.AudioContext = jest.fn().mockImplementation(() => {
   }
 });
 
-const { showInstructions } = require('../assets/js/validator-instructions');
+const { showInstructions } = require('../src/assets/js/validator-instructions');
 const { readFileSync } = require('fs');
 const { stringToHTML, mockLocalStorage } = require('./utils');
 
