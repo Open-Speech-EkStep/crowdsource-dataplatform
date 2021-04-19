@@ -9,13 +9,13 @@ const fs = require('fs');
 const generateLocalisedHtmlFromEjs = require('./locales/utils/i18n-ejs-generator')
 
 gulp.task('ejs', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/views`, `${__dirname}/public`);
+  generateLocalisedHtmlFromEjs(`${__dirname}/src/views`, `${__dirname}/target/public`);
   callback();
 });
 
 gulp.task('html', function () {
   return gulp
-    .src(['views/**'])
+    .src(['src/views/**'])
     .pipe(
       htmlmin({
         collapseWhitespace: false,
@@ -24,16 +24,16 @@ gulp.task('html', function () {
         minifyJS: true,
       })
     )
-    .pipe(gulp.dest('views'));
+    .pipe(gulp.dest('src/views'));
 });
 
 gulp.task('js', function () {
   var env = args.env || 'local';
 
   var filename = 'env.config.' + env + '.json';
-  var settings = JSON.parse(fs.readFileSync('assets/config/' + filename, 'utf8'));
+  var settings = JSON.parse(fs.readFileSync('src/assets/config/' + filename, 'utf8'));
   return gulp
-    .src(['assets/js/*.js'])
+    .src(['src/assets/js/*.js'])
     .pipe(
       browserify({
         transform: ['babelify'],
@@ -55,13 +55,13 @@ gulp.task('js', function () {
         noSource: true,
       })
     )
-    .pipe(gulp.dest('public/js'));
+    .pipe(gulp.dest('target/public/js'));
 });
 gulp.task('css', function () {
   return gulp
-    .src(['assets/css/*.css'])
+    .src(['src/assets/css/*.css'])
     .pipe(cleanCss())
-    .pipe(gulp.dest('public/css'));
+    .pipe(gulp.dest('target/public/css'));
 });
 
 gulp.task('default', gulp.parallel('js', 'css', gulp.series('html', 'ejs')));

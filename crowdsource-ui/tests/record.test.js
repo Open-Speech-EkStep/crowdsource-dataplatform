@@ -4,14 +4,14 @@ const {
     getValue,
     setTotalSentenceIndex,
     setCurrentSentenceIndex
-} = require('../assets/js/record')
+} = require('../src/assets/js/record')
 const {mockLocalStorage} = require('./utils');
 
 const {readFileSync} = require('fs');
 const {stringToHTML} = require('./utils');
 
 document.body = stringToHTML(
-    readFileSync(`${__dirname}/../views/record.ejs`, 'UTF-8')
+    readFileSync(`${__dirname}/../src/views/record.ejs`, 'UTF-8')
 );
 
 describe('getValue', () => {

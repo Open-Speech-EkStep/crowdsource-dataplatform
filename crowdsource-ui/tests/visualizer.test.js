@@ -1,4 +1,4 @@
-const Visualizer = require('./../assets/js/visualizer');
+const Visualizer = require('./../src/assets/js/visualizer');
 const {stringToHTML} = require('./utils');
 document.body = stringToHTML('<canvas id="test_canvas"></canvas>');
 

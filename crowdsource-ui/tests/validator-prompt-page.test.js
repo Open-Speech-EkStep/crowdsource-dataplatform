@@ -1,12 +1,12 @@
-const {showInstructions} = require('../assets/js/validator-instructions');
+const {showInstructions} = require('../src/assets/js/validator-instructions');
 const {readFileSync} = require('fs');
 const {stringToHTML, mockLocalStorage} = require('./utils');
 
 document.body = stringToHTML(
-    readFileSync(`${__dirname}/../views/validator-prompt-page.ejs`, 'UTF-8') + readFileSync(`${__dirname}/../views/common/headerForContributor.ejs`, 'UTF-8')
+    readFileSync(`${__dirname}/../src/views/validator-prompt-page.ejs`, 'UTF-8') + readFileSync(`${__dirname}/../src/views/common/headerForContributor.ejs`, 'UTF-8')
 );
 
-jest.mock('../assets/js/validator-instructions', () => ({
+jest.mock('../src/assets/js/validator-instructions', () => ({
     showInstructions: jest.fn()
 }))
 
@@ -14,13 +14,13 @@ const {
     addListeners,
     setSentenceLabel,
     setAudioPlayer,
-} = require('../assets/js/validator-prompt-page');
+} = require('../src/assets/js/validator-prompt-page');
 
 describe("addListeners",()=>{
     describe('onClick instructions-link', () => {
         test('should show Instructions pop-up', () => {
 
-            require('../assets/js/validator-prompt-page')
+            require('../src/assets/js/validator-prompt-page')
             addListeners();
             document.getElementById('instructions-link').click();
             expect($("#validator-page-content").hasClass("d-none")).toEqual(true);

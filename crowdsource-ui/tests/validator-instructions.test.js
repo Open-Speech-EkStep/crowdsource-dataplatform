@@ -1,9 +1,9 @@
 const {readFileSync} = require('fs');
 const {stringToHTML} = require('./utils');
-const {showInstructions} = require('../assets/js/validator-instructions')
+const {showInstructions} = require('../src/assets/js/validator-instructions')
 
 document.body = stringToHTML(
-    readFileSync(`${__dirname}/../views/modals/validator-instructions.ejs`, 'UTF-8')
+    readFileSync(`${__dirname}/../src/views/modals/validator-instructions.ejs`, 'UTF-8')
 );
 
 describe('showInstructions', () => {

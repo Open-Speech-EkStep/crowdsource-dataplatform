@@ -2,7 +2,7 @@ const {
     Table,
     getOrderedGenderData,
     getFormattedData
-} = require('../assets/js/draw-chart');
+} = require('../src/assets/js/draw-chart');
 
 describe('Test Draw Charts', () => {
 

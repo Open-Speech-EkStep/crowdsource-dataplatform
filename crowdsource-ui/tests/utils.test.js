@@ -1,10 +1,10 @@
-const { calculateTime, formatTime,updateLocaleLanguagesDropdown, showElement,hideElement,performAPIRequest} = require("../assets/js/utils");
+const { calculateTime, formatTime,updateLocaleLanguagesDropdown, showElement,hideElement,performAPIRequest} = require("../src/assets/js/utils");
 const { stringToHTML} = require("./utils");
 const fetchMock = require("fetch-mock");
 const { readFileSync } = require("fs");
 
 document.body = stringToHTML(
-    readFileSync(`${__dirname}/../views/common/headerForContributor.ejs`, "UTF-8")
+    readFileSync(`${__dirname}/../src/views/common/headerForContributor.ejs`, "UTF-8")
 );
 
 describe('test utils', () => {

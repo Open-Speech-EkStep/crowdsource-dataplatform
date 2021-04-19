@@ -7,12 +7,12 @@ const {
     setUserNameTooltip,
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick
-} = require('../assets/js/speakerDetails');
+} = require('../src/assets/js/speakerDetails');
 const {readFileSync} = require('fs');
 const {stringToHTML, flushPromises,mockLocation, mockLocalStorage} = require('./utils');
 
 document.body = stringToHTML(
-    readFileSync(`${__dirname}/../views/modals/speakerDetail.ejs`, 'UTF-8')
+    readFileSync(`${__dirname}/../src/views/modals/speakerDetail.ejs`, 'UTF-8')
 );
 
 describe('testUserName', () => {
