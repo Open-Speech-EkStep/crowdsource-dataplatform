@@ -26,7 +26,7 @@ and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed
 group by sentences."sentenceId", con."contributor_id" \
 order by sentences."sentenceId" \
 limit 5  returning "sentenceId") \
-select ins."sentenceId", sentences.sentence from ins  \
+select ins."sentenceId", sentences.media ->> 'data' as sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";`
 
 const getSentencesForLaunch = `\
@@ -46,7 +46,7 @@ and sentences."sentenceId"= ANY($8::int[])\
 group by sentences."sentenceId", con."contributor_id" \
 order by sentences."sentenceId" \
 limit 5  returning "sentenceId") \
-select ins."sentenceId", sentences.sentence from ins  \
+select ins."sentenceId", sentences.media ->> 'data' as sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";`
 
 const updateAndGetSentencesQuery = `\
@@ -65,7 +65,7 @@ and (coalesce(cont.action,'assigned')='assigned' or (cont.action='completed' and
 group by sentences."sentenceId", con."contributor_id" \
 order by RANDOM() \
 limit 5  returning "sentenceId") \
-select ins."sentenceId", sentences.sentence from ins  \
+select ins."sentenceId", sentences.media ->> 'data' as sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";`
 
 const updateAndGetUniqueSentencesQuery = `\
@@ -81,15 +81,15 @@ from sentences inner join "contributors" con on con."contributor_identifier" = $
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" \
 where sentences."state" is null and language = $4 and label=$3 and cont."action" is NULL limit 5 \
   returning "sentenceId") \
-select ins."sentenceId", sentences.sentence from ins  \
+select ins."sentenceId", sentences.media ->> 'data' as sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";`
 
-const getValidationSentencesQuery = `select con."sentenceId", sen.sentence, con.contribution_id \
+const getValidationSentencesQuery = `select con."sentenceId", sen.media ->> 'data' as sentence, con.contribution_id \
     from contributions con \
     inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_identifier!=$2 \ 
     inner join sentences sen on sen."sentenceId"=con."sentenceId" and sen."state"= 'contributed' \
     left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' \
-    where  con.action='completed' and language=$1 and COALESCE(val.validated_by, '')!= $2 group by con."sentenceId", sen.sentence, con.contribution_id \
+    where  con.action='completed' and language=$1 and COALESCE(val.validated_by, '')!= $2 group by con."sentenceId", sen.media ->> 'data', con.contribution_id \
     order by count(val.*) desc, RANDOM() limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, "action", validated_by, "date", "state_region", "country") \
@@ -106,6 +106,7 @@ const updateContributionDetails = `WITH src AS ( \
     ) \
 UPDATE "contributions" \
 SET "audio_path" = $1, "action" = \'completed\' , "date" = now(), "state_region" = $8, "country" = $9, "audio_duration" = $10\
+, media = json_build_object('data', $1, 'type', 'audio', 'language', 'language')
 FROM src \
 WHERE "sentenceId" = $5 AND contributed_by  = src.contributor_id \
 returning "audio_path";`
@@ -126,7 +127,7 @@ const getGenderData = 'select data."gender", count (*) from (select con."gender"
 
 const feedbackInsertion = 'Insert into feedbacks (subject,feedback,language) values ($1,$2,$3);'
 
-const getAudioPath = 'select audio_path from contributions where contribution_id = $1;'
+const getAudioPath = `select media ->> 'data' as audio_path from contributions where contribution_id = $1;`
 
 const saveReportQuery = `
 INSERT INTO reports (reported_by,sentence_id,report_text,language,source) \
