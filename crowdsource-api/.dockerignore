@@ -1,12 +1,8 @@
 ./nodemodule
 ./.env
-./app_*
 ./.*
 .dockerignore
 .env
-.git
 ./*_tests
-deployments
-assets
-infra
+k8s-deployments
 migrations

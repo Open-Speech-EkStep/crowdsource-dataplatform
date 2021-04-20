@@ -44,12 +44,12 @@ const {
 // const ddos = new Ddos({ burst: 12, limit: 70 })
 // app.use(ddos.express);
 
-const { I18n } = require('i18n');
-const i18n = new I18n({
-    locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te', 'doi', 'mai', 'ur', 'kr', 'kd', 'mnibn', 'mnimm', 'satol', 'satdv', 'sa'],
-    directory: './crowdsource-ui/locales',
-    cookie: 'i18n'
-})
+// const { I18n } = require('i18n');
+// const i18n = new I18n({
+//     locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te', 'doi', 'mai', 'ur', 'kr', 'kd', 'mnibn', 'mnimm', 'satol', 'satdv', 'sa'],
+//     directory: '../crowdsource-ui/locales',
+//     cookie: 'i18n'
+// })
 
 
 app.enable('trust proxy');
@@ -100,7 +100,7 @@ app.use(helmet());
 app.disable('x-powered-by');
 app.use(compression());
 app.use(cookieParser());
-app.use(i18n.init)
+// app.use(i18n.init)
 app.use(function (req, res, next) {
     let cookie = req.cookies.userId;
     if (cookie === undefined) {
@@ -113,7 +113,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(express.static('crowdsource-ui/target'));
+app.use(express.static('../crowdsource-ui/target'));
 
 app.get('/changeLocale/:locale', function (req, res) {
     if (['hi', 'en', 'ta', 'kn', 'gu', 'mr', 'te', 'bn', 'as', 'pa', 'or', "ml"].indexOf(req.params.locale) > -1) {
@@ -125,7 +125,7 @@ app.get('/changeLocale/:locale', function (req, res) {
     }
     res.redirect(req.headers.referer);
 });
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
   res.redirect("en/home.html");
@@ -158,62 +158,62 @@ router.get('/getAllInfo/:language', async function (req, res) {
     }
 });
 
-router.get('/feedback', function (req, res) {
-    res.render('../crowdsource-ui/src/views/feedback.ejs');
-});
+// router.get('/feedback', function (req, res) {
+//     res.render('../crowdsource-ui/src/views/feedback.ejs');
+// });
 
-router.get('/badges', function (req, res) {
-    res.render('../crowdsource-ui/src/views/badge-info.ejs');
-});
+// router.get('/badges', function (req, res) {
+//     res.render('../crowdsource-ui/src/views/badge-info.ejs');
+// });
 
-router.get('/about-us', function (req, res) {
-    res.render('../crowdsource-ui/src/views/about-us.ejs', { MOTHER_TONGUE, LANGUAGES });
-});
+// router.get('/about-us', function (req, res) {
+//     res.render('../crowdsource-ui/src/views/about-us.ejs', { MOTHER_TONGUE, LANGUAGES });
+// });
 
-router.get('/terms-and-conditions', function (req, res) {
-    res.render('../crowdsource-ui/src/views/terms-and-conditions.ejs');
-});
+// router.get('/terms-and-conditions', function (req, res) {
+//     res.render('../crowdsource-ui/src/views/terms-and-conditions.ejs');
+// });
 
-router.get('/thank-you', function (req, res) {
-    res.render('../crowdsource-ui/src/views/thank-you.ejs');
-});
+// router.get('/thank-you', function (req, res) {
+//     res.render('../crowdsource-ui/src/views/thank-you.ejs');
+// });
 
-router.get('/record', (req, res) => {
-    res.render('../crowdsource-ui/src/views/record.ejs');
-});
+// router.get('/record', (req, res) => {
+//     res.render('../crowdsource-ui/src/views/record.ejs');
+// });
 
-router.get('/validator-page', (req, res) => {
-    res.render('../crowdsource-ui/src/views/validator-prompt-page.ejs');
-});
+// router.get('/validator-page', (req, res) => {
+//     res.render('../crowdsource-ui/src/views/validator-prompt-page.ejs');
+// });
 
-router.get('/badges', function (req, res) {
-    res.render('../crowdsource-ui/src/views/badge-info.ejs');
-});
+// router.get('/badges', function (req, res) {
+//     res.render('../crowdsource-ui/src/views/badge-info.ejs');
+// });
 
-router.get('/about-us', function (req, res) {
-    res.render('../crowdsource-ui/src/views/about-us.ejs', { MOTHER_TONGUE, LANGUAGES });
-});
+// router.get('/about-us', function (req, res) {
+//     res.render('../crowdsource-ui/src/views/about-us.ejs', { MOTHER_TONGUE, LANGUAGES });
+// });
 
-router.get('/terms-and-conditions', function (req, res) {
-    res.render('../crowdsource-ui/src/views/terms-and-conditions.ejs');
-});
+// router.get('/terms-and-conditions', function (req, res) {
+//     res.render('../crowdsource-ui/src/views/terms-and-conditions.ejs');
+// });
 
-router.get('/thank-you', function (req, res) {
-    res.render('../crowdsource-ui/src/views/thank-you.ejs');
-});
+// router.get('/thank-you', function (req, res) {
+//     res.render('../crowdsource-ui/src/views/thank-you.ejs');
+// });
 
-router.get('/record', (req, res) => {
-    res.render('../crowdsource-ui/src/views/record.ejs');
-});
+// router.get('/record', (req, res) => {
+//     res.render('../crowdsource-ui/src/views/record.ejs');
+// });
 
-router.get('/validator-page', (req, res) => {
-    res.render('../crowdsource-ui/src/views/validator-prompt-page.ejs');
-});
+// router.get('/validator-page', (req, res) => {
+//     res.render('../crowdsource-ui/src/views/validator-prompt-page.ejs');
+// });
 
-router.get('/dashboard', function (req, res) {
-    const isCookiePresent = req.cookies.userId ? true : false;
-    res.render('../crowdsource-ui/src/views/dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
-});
+// router.get('/dashboard', function (req, res) {
+//     const isCookiePresent = req.cookies.userId ? true : false;
+//     res.render('../crowdsource-ui/src/views/dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
+// });
 
 router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
 
@@ -321,7 +321,7 @@ router.get('/location-info', (req, res) => {
 
 app.get('/get-locale-strings/:locale', function (req, res) {
     let locale = req.params.locale;
-    fs.readFile(`${__dirname}/../../crowdsource-ui/locales/${locale}.json`, (err, body) => {
+    fs.readFile(`${__dirname}/../locales/${locale}.json`, (err, body) => {
         if (err) {
             return res.sendStatus(500);
         }
@@ -385,9 +385,9 @@ require('./dashboard-api')(router);
 
 app.use('/', router);
 
-app.get('*', (req, res) => {
-    res.render('../crowdsource-ui/src/views/not-found.ejs');
-});
+// app.get('*', (req, res) => {
+//     res.render('../crowdsource-ui/src/views/not-found.ejs');
+// });
 
 function buildWadaSnrCommand(filePath) {
     return `${WADASNR_BIN_PATH}/WADASNR -i ${filePath} -t ${WADASNR_BIN_PATH}/Alpha0.400000.txt -ifmt mswav`;
