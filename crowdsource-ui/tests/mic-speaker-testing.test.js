@@ -1,10 +1,10 @@
 const {readFileSync} = require("fs");
 const {stringToHTML, flushPromises} = require("./utils");
-const {addOnClickListener, showAmbientNoise, writeUTFBytes} = require('../assets/js/mic-speaker-testing')
+const {addOnClickListener, showAmbientNoise, writeUTFBytes} = require('../src/assets/js/mic-speaker-testing')
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../views/modals/mic-speaker-testing.ejs`, "UTF-8") +
-  readFileSync(`${__dirname}/../views/components/mic-speaker-test-btn.ejs`, "UTF-8")
+  readFileSync(`${__dirname}/../src/views/modals/mic-speaker-testing.ejs`, "UTF-8") +
+  readFileSync(`${__dirname}/../src/views/components/mic-speaker-test-btn.ejs`, "UTF-8")
 );
 
 describe("$testMicSpeakerBtn", () => {
