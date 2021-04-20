@@ -1,4 +1,3 @@
-const { showInstructions } = require('../src/assets/js/validator-instructions');
 window.AudioContext = jest.fn().mockImplementation(() => {
   return {
     createMediaElementSource: (e) => {
@@ -29,8 +28,8 @@ jest.mock('../src/assets/js/validator-instructions', () => ({
   showInstructions: jest.fn()
 }))
 
-const Visualizer = require('../assets/js/visualizer');
-jest.mock('../assets/js/visualizer');
+const Visualizer = require('../src/assets/js/visualizer');
+jest.mock('../src/assets/js/visualizer');
 
 const {
   addListeners,
