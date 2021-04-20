@@ -23,11 +23,11 @@ describe("Test the root path", () => {
         jest.clearAllMocks();
     })
 
-    test("/about-us should response the GET method", async () => {
-        await request(app)
-            .get("/about-us")
-            .expect(200);
-    });
+    // test("/about-us should response the GET method", async () => {
+    //     await request(app)
+    //         .get("/about-us")
+    //         .expect(200);
+    // });
 
     // test("It should response the GET method for validator-prompt-page", async () => {
     //     await request(app)
@@ -57,26 +57,26 @@ describe("Test the root path", () => {
         expect(response.body).toStrictEqual(expectedResponse)
     });
 
-    test("/terms-and-conditions should response the GET method", async () => {
-        const res = await request(app).get("/terms-and-conditions");
+    // test("/terms-and-conditions should response the GET method", async () => {
+    //     const res = await request(app).get("/terms-and-conditions");
 
-        expect(res.status).toBe(200);
-        expect(res.text.includes("may be prohibited to be deleted as required under any applicable law")).toBe(true)
-    });
+    //     expect(res.status).toBe(200);
+    //     expect(res.text.includes("may be prohibited to be deleted as required under any applicable law")).toBe(true)
+    // });
 
-    test("/thank-you should response the GET method", async () => {
-        const res = await request(app).get("/thank-you");
+    // test("/thank-you should response the GET method", async () => {
+    //     const res = await request(app).get("/thank-you");
 
-        expect(res.status).toBe(200);
-        expect(res.text.includes("Thank you for contributing!")).toBe(true)
-    });
+    //     expect(res.status).toBe(200);
+    //     expect(res.text.includes("Thank you for contributing!")).toBe(true)
+    // });
 
-    test("/record should response the GET method", async () => {
-        const res = await request(app).get("/record");
+    // test("/record should response the GET method", async () => {
+    //     const res = await request(app).get("/record");
 
-        expect(res.status).toBe(200);
-        expect(res.text.includes("Quick Tips")).toBe(true)
-    });
+    //     expect(res.status).toBe(200);
+    //     expect(res.text.includes("Quick Tips")).toBe(true)
+    // });
 
 
     //   test("It should response the post method of get sentences and update db", async () => {
