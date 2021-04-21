@@ -1,7 +1,7 @@
 import { when } from 'jest-when'
 
 const {
-    updateContributionDetails, updateSentencesWithContributedState, getValidationSentencesQuery, getCountOfTotalSpeakerAndRecordedAudio, getGenderData, getAgeGroupsData, getMotherTonguesData, feedbackInsertion, saveReportQuery, markContributionSkippedQuery, rewardsInfoQuery, getContributorIdQuery, getTotalUserContribution, checkCurrentMilestoneQuery, checkNextMilestoneQuery, findRewardInfo, insertRewardQuery, getTotalUserValidation, addContributorQuery, getBadges, addValidationQuery, updateSentencesWithValidatedState, getContributionHoursForLanguage, getMultiplierForHourGoal,
+    updateContributionDetails, updateMediaWithContributedState, getValidationMediaQuery, getCountOfTotalSpeakerAndRecordedAudio, getGenderData, getAgeGroupsData, getMotherTonguesData, feedbackInsertion, saveReportQuery, markContributionSkippedQuery, rewardsInfoQuery, getContributorIdQuery, getTotalUserContribution, checkCurrentMilestoneQuery, checkNextMilestoneQuery, findRewardInfo, insertRewardQuery, getTotalUserValidation, addContributorQuery, getBadges, addValidationQuery, updateMediaWithValidatedState, getContributionHoursForLanguage, getMultiplierForHourGoal,
 } = require('./../src/dbQuery');
 
 const mockDB = {
@@ -31,7 +31,7 @@ describe("Running tests for dbOperations", () => {
         jest.clearAllMocks();
     })
 
-    describe('tests for getSentencesBasedOnAge', () => {
+    describe('tests for getMediaBasedOnAge', () => {
 
         afterEach(() => {
             jest.clearAllMocks();
@@ -46,7 +46,7 @@ describe("Running tests for dbOperations", () => {
 
             mockDB.many.mockReturnValue(mockResult);
 
-            const result = dbOperations.getSentencesBasedOnAge(
+            const result = dbOperations.getMediaBasedOnAge(
                 "10-20", "abcdefghi", "test_username", "Hindi", "Gujrati", "Male"
             );
 
@@ -57,7 +57,7 @@ describe("Running tests for dbOperations", () => {
             const ageGroup = "0-13";
             const spyDB = jest.spyOn(mockDB, 'many')
 
-            dbOperations.getSentencesBasedOnAge(ageGroup, "abcdefghi", "test_username", "Hindi", "Gujrati", "Male")
+            dbOperations.getMediaBasedOnAge(ageGroup, "abcdefghi", "test_username", "Hindi", "Gujrati", "Male")
 
             expect(spyDB).toHaveBeenCalledWith(expect.anything(), ["abcdefghi", "test_username", "medium", "Hindi", "Gujrati", "Male", ageGroup, expect.anything()]);
         });
@@ -66,7 +66,7 @@ describe("Running tests for dbOperations", () => {
             const ageGroup = "50-59";
             const spyDB = jest.spyOn(mockDB, 'many')
 
-            dbOperations.getSentencesBasedOnAge(ageGroup, "abcdefghi", "test_username", "Hindi", "Gujrati", "Male")
+            dbOperations.getMediaBasedOnAge(ageGroup, "abcdefghi", "test_username", "Hindi", "Gujrati", "Male")
 
             expect(spyDB).toHaveBeenCalledWith(expect.anything(), ["abcdefghi", "test_username", "medium", "Hindi", "Gujrati", "Male", ageGroup, expect.anything()]);
         })
@@ -132,7 +132,7 @@ describe("Running tests for dbOperations", () => {
             );
 
             expect(spyDBnone).toHaveBeenCalledWith(
-                updateSentencesWithContributedState,
+                updateMediaWithContributedState,
                 [testSentenceId]
             )
         });
@@ -179,7 +179,7 @@ describe("Running tests for dbOperations", () => {
             );
 
             expect(spyDBnone).toHaveBeenCalledWith(
-                updateSentencesWithContributedState,
+                updateMediaWithContributedState,
                 [testSentenceId]
             )
         });
@@ -231,22 +231,22 @@ describe("Running tests for dbOperations", () => {
             );
 
             expect(spyDBnone).toHaveBeenCalledWith(
-                updateSentencesWithContributedState,
+                updateMediaWithContributedState,
                 [testSentenceId]
             )
         });
     });
 
-    test('get validationsentences should call getValidationSentences query once with language', () => {
+    test('get validationMedia should call getValidationMedia query once with language', () => {
         const language = 'testLanguage';
         const userId = 123;
         const req = { params: { language: language }, cookies: { userId } };
         const spyDBany = jest.spyOn(mockDB, 'any')
-        when(spyDBany).calledWith(getValidationSentencesQuery, [language, userId]).mockReturnValue(Promise.resolve())
+        when(spyDBany).calledWith(getValidationMediaQuery, [language, userId]).mockReturnValue(Promise.resolve())
 
-        dbOperations.getValidationSentences(req, res);
+        dbOperations.getValidationMedia(req, res);
 
-        expect(spyDBany).toHaveBeenCalledWith(getValidationSentencesQuery, [language, userId]);
+        expect(spyDBany).toHaveBeenCalledWith(getValidationMediaQuery, [language, userId]);
         jest.clearAllMocks();
     });
 
@@ -499,7 +499,7 @@ describe("Running tests for dbOperations", () => {
         const country = 'Test Country';
         const userId = 123;
 
-        test('should call addValidationQuery and updateSentencesWithValidatedState if action is accept/reject', async () => {
+        test('should call addValidationQuery and updateMediaWithValidatedState if action is accept/reject', async () => {
             const spyDBnone = jest.spyOn(mockDB, 'none');
             spyDBnone.mockReturnValue(Promise.resolve())
             const action = 'accept';
@@ -509,7 +509,7 @@ describe("Running tests for dbOperations", () => {
             await dbOperations.updateTablesAfterValidation(req, res);
 
             expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [userId, sentenceId, action, contributionId, state, country]);
-            expect(spyDBnone).toHaveBeenNthCalledWith(2, updateSentencesWithValidatedState, [sentenceId, contributionId])
+            expect(spyDBnone).toHaveBeenNthCalledWith(2, updateMediaWithValidatedState, [sentenceId, contributionId])
 
             jest.resetAllMocks();
         });

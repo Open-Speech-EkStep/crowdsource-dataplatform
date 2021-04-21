@@ -3,24 +3,24 @@ const moment = require('moment');
 
 const {
     updateContributionDetails,
-    unassignIncompleteSentences,
-    updateAndGetSentencesQuery,
-    updateAndGetUniqueSentencesQuery,
-    updateAndGetOrderedSentencesQuery,
-    getValidationSentencesQuery,
-    sentencesCount,
+    unassignIncompleteMedia,
+    updateAndGetMediaQuery,
+    updateAndGetUniqueMediaQuery,
+    updateAndGetOrderedMediaQuery,
+    getValidationMediaQuery,
+    mediaCount,
     getCountOfTotalSpeakerAndRecordedAudio,
     getGenderData,
     getAgeGroupsData,
     getMotherTonguesData,
-    unassignIncompleteSentencesWhenLanChange,
-    updateSentencesWithContributedState,
+    unassignIncompleteMediaWhenLanChange,
+    updateMediaWithContributedState,
     addValidationQuery,
-    updateSentencesWithValidatedState,
+    updateMediaWithValidatedState,
     feedbackInsertion,
     getAudioPath,
     saveReportQuery,
-    getSentencesForLaunch,
+    getMediaForLaunch,
     markContributionSkippedQuery,
     rewardsInfoQuery,
     getTotalUserContribution,
@@ -65,7 +65,7 @@ const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP } = require('./constants');
 const envVars = process.env;
 const pgp = require('pg-promise')();
 
-const showUniqueSentences = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION == 'true';
+const showUniqueMedia = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION == 'true';
 
 let cn = {
     user: envVars.DB_USER,
@@ -82,8 +82,6 @@ let cn = {
 };
 
 const db = pgp(cn);
-
-const voteLimit = Number(envVars.VOTE_LIMIT);
 
 const updateDbWithAudioPath = function (
     audioPath,
@@ -120,7 +118,7 @@ const updateDbWithAudioPath = function (
         roundedAudioDuration
     ])
         .then(() => {
-            db.none(updateSentencesWithContributedState, [sentenceId]).then();
+            db.none(updateMediaWithContributedState, [sentenceId]).then();
             db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
@@ -130,7 +128,7 @@ const updateDbWithAudioPath = function (
         });
 };
 
-const getSentencesBasedOnAge = function (
+const getMediaBasedOnAge = function (
     ageGroup,
     userId,
     userName,
@@ -139,22 +137,22 @@ const getSentencesBasedOnAge = function (
     gender
 ) {
     let languageLabel = ADULT;
-    let query = updateAndGetSentencesQuery;
+    let query = updateAndGetMediaQuery;
 
     if (ageGroup === KIDS_AGE_GROUP) {
         languageLabel = KIDS;
     }
 
-    if (showUniqueSentences) {
-        query = updateAndGetUniqueSentencesQuery;
+    if (showUniqueMedia) {
+        query = updateAndGetUniqueMediaQuery;
     }
 
-    query = updateAndGetOrderedSentencesQuery;
+    query = updateAndGetOrderedMediaQuery;
     const launchUser = envVars.LAUNCH_USER || 'launch_user';
     const launchIds = envVars.LAUNCH_IDS || '';
 
     if (userName == launchUser) {
-        query = getSentencesForLaunch;
+        query = getMediaForLaunch;
     }
 
     return (db.many(query, [
@@ -169,7 +167,7 @@ const getSentencesBasedOnAge = function (
     ]));
 };
 
-const updateAndGetSentences = function (req, res) {
+const updateAndGetMedia = function (req, res) {
     const userId = req.cookies.userId;
     const userName = req.body.userName;
     const language = req.body.language;
@@ -180,7 +178,7 @@ const updateAndGetSentences = function (req, res) {
         return;
     }
     const ageGroup = req.body.age;
-    const sentences = getSentencesBasedOnAge(
+    const media = getMediaBasedOnAge(
         ageGroup,
         userId,
         userName,
@@ -188,16 +186,16 @@ const updateAndGetSentences = function (req, res) {
         motherTongue,
         gender
     );
-    const count = db.one(sentencesCount, [userId, userName, language]);
-    const unAssign = db.any(unassignIncompleteSentences, [
+    const count = db.one(mediaCount, [userId, userName, language]);
+    const unAssign = db.any(unassignIncompleteMedia, [
         userId,
         userName,
     ]);
     const unAssignWhenLanChange = db.any(
-        unassignIncompleteSentencesWhenLanChange,
+        unassignIncompleteMediaWhenLanChange,
         [userId, userName, language]
     );
-    Promise.all([sentences, count, unAssign, unAssignWhenLanChange])
+    Promise.all([media, count, unAssign, unAssignWhenLanChange])
         .then((response) => {
             res.status(200).send({ data: response[0], count: response[1].count });
         })
@@ -207,10 +205,10 @@ const updateAndGetSentences = function (req, res) {
         });
 };
 
-const getValidationSentences = function (req, res) {
+const getValidationMedia = function (req, res) {
     const language = req.params.language;
     const userId = req.cookies.userId;
-    db.any(getValidationSentencesQuery, [language, userId])
+    db.any(getValidationMediaQuery, [language, userId])
         .then((response) => {
             res.status(200).send({ data: response })
         })
@@ -256,7 +254,7 @@ const updateTablesAfterValidation = (req, res) => {
     return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country])
         .then(async () => {
             if (action !== 'skip') {
-                db.none(updateSentencesWithValidatedState, [sentenceId, contributionId]).then(() => {
+                db.none(updateMediaWithValidatedState, [sentenceId, contributionId]).then(() => {
                     res.sendStatus(200);
                 })
                     .catch((err) => {
@@ -535,15 +533,15 @@ const getHourGoalForLanguage = async (language) => {
     const result = await db.one(getContributionHoursForLanguage, [language]);
     const multiplierResult = await db.oneOrNone(getMultiplierForHourGoal, [language]);
     let multiplier = 100;
-    if(multiplierResult){
+    if (multiplierResult) {
         multiplier = multiplierResult['multiplier'];
     }
-    return parseInt((Math.ceil(result['hours']/parseFloat(multiplier)))*multiplier);
+    return parseInt((Math.ceil(result['hours'] / parseFloat(multiplier))) * multiplier);
 }
 
 module.exports = {
-    updateAndGetSentences,
-    getValidationSentences,
+    updateAndGetMedia,
+    getValidationMedia,
     updateDbWithAudioPath,
     updateTablesAfterValidation,
     getAllDetails,
@@ -557,11 +555,10 @@ module.exports = {
     getAgeGroupData,
     getGenderGroupData,
     getLastUpdatedAt,
-    getSentencesBasedOnAge,
+    getMediaBasedOnAge,
     insertFeedback,
     saveReport,
     markContributionSkipped,
     getRewards,
-    getRewardsInfo,
-    getBadges
+    getRewardsInfo
 };
