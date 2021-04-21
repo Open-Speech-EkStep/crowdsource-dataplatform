@@ -387,7 +387,7 @@ const initialize = () => {
         fd.append('state', localStorage.getItem('state_region') || "");
         fd.append('country', localStorage.getItem('country') || "");
         fd.append('audioDuration', crowdSource.audioDuration);
-        fetch('/upload', {
+        fetch('/store', {
             method: 'POST',
             credentials: 'include',
             mode: 'cors',
@@ -559,7 +559,7 @@ function executeOnLoad() {
         } else {
             localStorage.removeItem(currentIndexKey);
             localStorage.removeItem(skipCountKey);
-            fetch('/sentences', {
+            fetch('/media', {
                 method: 'POST',
                 credentials: 'include',
                 mode: 'cors',
