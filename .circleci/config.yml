@@ -160,7 +160,7 @@ workflows:
           name: push_dev_db_refresher_image
           repo: ${DB_REFRESHER_REPO}
           dockerfile: Dockerfile-dbRefresh
-          path: ./db-referesher
+          path: ./db-refresher
           tag: "dev,test,prod"
           requires:
             - create-workspace
