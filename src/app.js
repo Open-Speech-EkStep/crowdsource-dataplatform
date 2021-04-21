@@ -93,8 +93,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(upload.single('audio_data'));
-app.use('/sentences', validateUserInfo);
-app.use('/upload', validateUserInputAndFile);
 app.use(express.static(__dirname, { dotfiles: 'allow' }));
 app.use(helmet());
 app.disable('x-powered-by');
@@ -128,7 +126,7 @@ app.get('/changeLocale/:locale', function (req, res) {
 app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
-  res.redirect("en/home.html");
+    res.redirect("en/home.html");
 });
 
 router.get('/getDetails/:language', async function (req, res) {
@@ -185,13 +183,13 @@ router.get('/dashboard', function (req, res) {
     const isCookiePresent = req.cookies.userId ? true : false;
     res.render('dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
 });
-router.post('/sentences', (req, res) => updateAndGetSentences(req, res));
+router.post('/media', validateUserInfo, (req, res) => updateAndGetSentences(req, res));
 
-router.get('/validation/sentences/:language', (req, res) => getValidationSentences(req, res));
+router.get('/contributions/:language', (req, res) => getValidationSentences(req, res));
 
-router.post('/validation/action', (req, res) => updateTablesAfterValidation(req, res))
+router.post('/validate', (req, res) => updateTablesAfterValidation(req, res))
 
-router.post('/audioClip', (req, res) => getAudioClip(req, res, objectStorage))
+router.post('/contributions', (req, res) => getAudioClip(req, res, objectStorage))
 
 router.post('/report', async (req, res) => {
     const userId = req.cookies.userId || "";
@@ -219,7 +217,7 @@ router.post('/skip', validateInputForSkip, (req, res) => {
         })
 });
 
-router.post('/upload', (req, res) => {
+router.post('/store', validateUserInputAndFile, (req, res) => {
     const file = req.file;
     const sentenceId = req.body.sentenceId;
     const speakerDetails = req.body.speakerDetails;
@@ -344,11 +342,11 @@ router.get('/rewards-info', validateRewardsInfoQuery, async (req, res) => {
     const { language } = req.query;
 
     const info = await getRewardsInfo(language);
-    if (info && info.length > 0){
+    if (info && info.length > 0) {
         return res.send(info);
     }
 
-        return res.status(404).send('Data not found');
+    return res.status(404).send('Data not found');
 });
 
 require('./dashboard-api')(router);
