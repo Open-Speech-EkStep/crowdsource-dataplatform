@@ -123,45 +123,45 @@ jobs:
 workflows:
   build_test_deploy:
     jobs:
-      - node/test:
-          version: "13.4"
+      # - node/test:
+      #     version: "13.4"
 
       - create-workspace:
           name: create-workspace
-          requires:
-             - node/test
+          # requires:
+          #    - node/test
           filters:
             branches:
               only: [master, organize_file_structure]
 
-      - db_migrate_aws:
-          name: migrate_dev_aws
-          db_name: ${DEV_DB_NAME}
-          requires:
-             - create-workspace
+      # - db_migrate_aws:
+      #     name: migrate_dev_aws
+      #     db_name: ${DEV_DB_NAME}
+      #     requires:
+      #        - create-workspace
 
-      - build_ui_push_to_s3:
-          name: build_dev_ui
-          env_name: dev
-          distributionId: ${DEV_DISTRIBUTION_ID}
-          requires:
-            - push_dev_image
+      # - build_ui_push_to_s3:
+      #     name: build_dev_ui
+      #     env_name: dev
+      #     distributionId: ${DEV_DISTRIBUTION_ID}
+      #     requires:
+      #       - push_dev_image
 
       - aws-ecr/build-and-push-image:
           name: push_dev_image
           repo: ${REPO}
           tag: dev
-          requires:
-            - migrate_dev_aws
+          # requires:
+          #   - migrate_dev_aws
 
       - aws-ecr/build-and-push-image:
           name: push_dev_db_refresher_image
           repo: ${DB_REFRESHER_REPO}
           dockerfile: Dockerfile-dbRefresh
-          path: ./db-refresher
+          context: ./db-refresher
           tag: "dev,test,prod"
-          requires:
-            - migrate_dev_aws
+          # requires:
+          #   - migrate_dev_aws
 
       - eks_fargate_deployment:
           name: dev_deployment_eks
