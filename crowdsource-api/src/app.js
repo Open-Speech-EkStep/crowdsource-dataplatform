@@ -15,8 +15,8 @@ const router = express.Router();
 
 const {
     updateDbWithAudioPath,
-    updateAndGetSentences,
-    getValidationSentences,
+    updateAndGetMedia,
+    getValidationMedia,
     getAllDetails,
     getAllInfo,
     updateTablesAfterValidation,
@@ -228,13 +228,15 @@ router.get('/record', (req, res) => {
 router.get('/validator-page', (req, res) => {
     res.render('validator-prompt-page.ejs');
 });
+
 router.get('/dashboard', function (req, res) {
     const isCookiePresent = req.cookies.userId ? true : false;
     res.render('dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
 });
-router.post('/media', validateUserInfo, (req, res) => updateAndGetSentences(req, res));
 
-router.get('/contributions/:language', (req, res) => getValidationSentences(req, res));
+router.post('/media', validateUserInfo, (req, res) => updateAndGetMedia(req, res));
+
+router.get('/contributions/:language', (req, res) => getValidationMedia(req, res));
 
 router.post('/validate', (req, res) => updateTablesAfterValidation(req, res))
 
