@@ -157,7 +157,8 @@ workflows:
       - aws-ecr/build-and-push-image:
           name: push_dev_db_refresher_image
           repo: ${DB_REFRESHER_REPO}
-          dockerfile: db-refresher/Dockerfile-dbRefresh
+          dockerfile: Dockerfile-dbRefresh
+          path: db-refresher
           tag: "dev,test,prod"
           requires:
             - migrate_dev_aws
