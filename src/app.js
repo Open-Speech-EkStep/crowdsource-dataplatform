@@ -156,6 +156,10 @@ router.get('/getAllInfo/:language', async function (req, res) {
     }
 });
 
+router.get('/temp', function (req, res) {
+    res.render('temp1.ejs');
+});
+
 router.get('/feedback', function (req, res) {
     res.render('feedback.ejs');
 });

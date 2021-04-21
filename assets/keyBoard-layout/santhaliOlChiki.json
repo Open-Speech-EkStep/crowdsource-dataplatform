@@ -1,0 +1,18 @@
+{
+  "layout": {
+    "default": [
+      "ᱴ ᱑ ᱒ ᱓ ᱔ ᱕ ᱖ ᱗ ᱘ ᱙ ᱐ {bksp}",
+      "{tab}   ᱟ   ᱵ ᱦ ᱜ ᱫ ᱡ ᱰ  \\",
+      "{lock} ᱳ ᱮ  ᱤ ᱩ ᱯ ᱨ ᱠ ᱛ ᱪ ' {enter}",
+      "{shift} ᱷ ᱸ ᱢ ᱱ ᱣ ᱞ ᱥ , . ᱭ {shift}",
+      ".com @ {space}"
+    ],
+    "shift": [
+      "ᱻ ! @ # $ % ^ & * ( ) _ + {bksp}",
+      "{tab}       ᱝ    ᱲ ᱧ |",
+      "{lock}          ᱺ \" {enter}",
+      "{shift} ᱽ  ᱬ  ᱶ   ᱿ ᱾ ? {shift}",
+      ".com @ {space}"
+    ]
+  }
+}

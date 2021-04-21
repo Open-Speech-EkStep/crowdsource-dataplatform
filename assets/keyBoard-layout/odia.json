@@ -1,0 +1,18 @@
+{
+  "layout": {
+    "default": [
+      " ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ୦ - = {bksp}",
+      "{tab}  ଅ େ ର ତ ଯ ୁ ି ୋ ପ  ର  ",
+      "{lock} ା ସ ଦ ୍୍ଗ ହ ଜ କ ଲ ; ' {enter}",
+      "{shift} ଙ ଷ ଚ  ବ ନ ମ , । / {shift}",
+      ".com @ {space}"
+    ],
+    "shift": [
+      " ! @ # $ % ^ & * ( ) _ + {bksp}",
+      "{tab}  ଆ ୈ ୃ ଥ ୟ ୂ ୀ ୌ ଫ [ ]  ",
+      "{lock} ା ଶ ଧ ଼ ଘ ଃ ଝ ଖ ଳ : \" {enter}",
+      "{shift} ଁ କ୍ଷ ଛ  ଭ ଣ ଂ < > ? {shift}",
+      ".com @ {space}"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "layout": {
+    "default": [
+      "ె ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ౦ - = {bksp}",
+      "{tab}  అ ే ర త య ు ి ో ప  ర ొ",
+      "{lock} ా స ద ్్గ హ జ క ల ; ' {enter}",
+      "{shift} ఙ ష చ వ బ న మ ,  / {shift}",
+      ".com @ {space}"
+    ],
+    "shift": [
+      "ఎ ! @ # $ % ^ & * ( ) _ + {bksp}",
+      "{tab}  ఆ ై ృ థ  ూ ీ ౌ ఫ [ ] ఒ",
+      "{lock} ా శ ధ  ఘ ఝ ఖ ళ : \" {enter}",
+      "{shift} ఁ క్ష ఛ  భ ణ ం < > ? {shift}",
+      ".com @ {space}"
+    ]
+  }
+}
