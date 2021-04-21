@@ -151,7 +151,8 @@ workflows:
           name: push_dev_image
           repo: ${REPO}
           tag: dev
-          # requires:
+          requires:
+            - create-workspace
           #   - migrate_dev_aws
 
       - aws-ecr/build-and-push-image:
@@ -160,7 +161,8 @@ workflows:
           dockerfile: Dockerfile-dbRefresh
           context: ./db-refresher
           tag: "dev,test,prod"
-          # requires:
+          requires:
+            - create-workspace
           #   - migrate_dev_aws
 
       - eks_fargate_deployment:
