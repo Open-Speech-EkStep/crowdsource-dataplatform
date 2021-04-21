@@ -158,8 +158,9 @@ workflows:
       - aws-ecr/build-and-push-image:
           name: push_dev_db_refresher_image
           repo: ${DB_REFRESHER_REPO}
-          dockerfile: ./db-referesher/Dockerfile-dbRefresh
+          dockerfile: Dockerfile-dbRefresh
           context: ./db-referesher
+          path: ./db-referesher
           tag: "dev,test,prod"
           requires:
             - create-workspace
