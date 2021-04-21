@@ -1,16 +1,16 @@
-const unassignIncompleteSentences = `delete from "contributions" cont using "contributors" con where \
+const unassignIncompleteMedia = `delete from "contributions" cont using "contributors" con where \
 cont.contributed_by = con.contributor_id and cont.audio_path is null and cont.action = \'assigned\' and con.contributor_identifier = $1 and user_name!=$2;`
 
-const unassignIncompleteSentencesWhenLanChange = `delete from "contributions" cont using "contributors" con, sentences sen \
+const unassignIncompleteMediaWhenLanChange = `delete from "contributions" cont using "contributors" con, sentences sen \
 where sen."sentenceId" = cont."sentenceId" and  cont.contributed_by = con.contributor_id and cont.audio_path is null and cont.action = \'assigned\' \
 and con.contributor_identifier = $1 and user_name=$2 and sen.language != $3;`
 
-const sentencesCount = `select count(s.*) from sentences s \
+const mediaCount = `select count(s.*) from sentences s \
 inner join "contributions" cont on s."sentenceId" = cont."sentenceId" \
 inner join "contributors" con on cont.contributed_by = con.contributor_id \
 where con.contributor_identifier = $1 and user_name=$2 AND s."language" = $3 and cont.action = \'completed\';`
 
-const updateAndGetOrderedSentencesQuery = `\
+const updateAndGetOrderedMediaQuery = `\
 INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 \
 where not exists \
 (select "contributor_id" from "contributors" where "contributor_identifier" = $1 and user_name=$2); \
@@ -29,7 +29,7 @@ limit 5  returning "sentenceId") \
 select ins."sentenceId", sentences.media ->> 'data' as sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";`
 
-const getSentencesForLaunch = `\
+const getMediaForLaunch = `\
 INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 \
 where not exists \
 (select "contributor_id" from "contributors" where "contributor_identifier" = $1 and user_name=$2); \
@@ -49,7 +49,7 @@ limit 5  returning "sentenceId") \
 select ins."sentenceId", sentences.media ->> 'data' as sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";`
 
-const updateAndGetSentencesQuery = `\
+const updateAndGetMediaQuery = `\
 INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 \
 where not exists \
 (select "contributor_id" from "contributors" where "contributor_identifier" = $1 and user_name=$2); \
@@ -68,7 +68,7 @@ limit 5  returning "sentenceId") \
 select ins."sentenceId", sentences.media ->> 'data' as sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";`
 
-const updateAndGetUniqueSentencesQuery = `\
+const updateAndGetUniqueMediaQuery = `\
 INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 \
 where not exists \
 (select "contributor_id" from "contributors" where "contributor_identifier" = $1 and user_name=$2); \
@@ -84,7 +84,7 @@ where sentences."state" is null and language = $4 and label=$3 and cont."action"
 select ins."sentenceId", sentences.media ->> 'data' as sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";`
 
-const getValidationSentencesQuery = `select con."sentenceId", sen.media ->> 'data' as sentence, con.contribution_id \
+const getValidationMediaQuery = `select con."sentenceId", sen.media ->> 'data' as sentence, con.contribution_id \
     from contributions con \
     inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_identifier!=$2 \ 
     inner join sentences sen on sen."sentenceId"=con."sentenceId" and sen."state"= 'contributed' \
@@ -96,7 +96,7 @@ const addValidationQuery = `insert into validations (contribution_id, "action", 
 select contribution_id, $3, $1, now(), $5, $6 from contributions inner join sentences on sentences."sentenceId"=contributions."sentenceId" \
 where sentences."sentenceId" = $2 and sentences.state = \'contributed\' and contribution_id=$4;`
 
-const updateSentencesWithValidatedState = `update sentences set "state" = \
+const updateMediaWithValidatedState = `update sentences set "state" = \
 \'validated\' where "sentenceId" = $1 and (select count(*) from validations where contribution_id = $2 and action != 'skip') >= \
 (select value from configurations where config_name = 'validation_count');`
 
@@ -113,7 +113,7 @@ returning "audio_path";`
 
 const updateMaterializedViews = 'REFRESH MATERIALIZED VIEW contributions_and_demo_stats;REFRESH MATERIALIZED VIEW daily_stats_complete;REFRESH MATERIALIZED VIEW gender_group_contributions;REFRESH MATERIALIZED VIEW age_group_contributions;REFRESH MATERIALIZED VIEW language_group_contributions;REFRESH MATERIALIZED VIEW state_group_contributions;REFRESH MATERIALIZED VIEW language_and_state_group_contributions;'
 
-const updateSentencesWithContributedState = 'update sentences set state = \'contributed\' where "sentenceId" = $1;'
+const updateMediaWithContributedState = 'update sentences set state = \'contributed\' where "sentenceId" = $1;'
 
 const getCountOfTotalSpeakerAndRecordedAudio = `select  count(DISTINCT(con.*)), 0 as index, 0 as duration \
 from "contributors" con inner join "contributions" cont on con.contributor_id = cont.contributed_by and cont.action=\'completed\' inner join "sentences" s on  s."sentenceId" = cont."sentenceId"  where s.language = $1 \
@@ -135,7 +135,7 @@ SELECT $1,$2,$3,$4,$5`;
 
 const markContributionReported = "update contributions set action='reported' where contribution_id=$3 and (select count(distinct reported_by) from reports where source='validation' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='audio_report_limit');";
 
-const markSentenceReported = `update sentences set state='reported' where "sentenceId"=$3 and (select count(distinct reported_by) from reports where source='contribution' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='sentence_report_limit');`;
+const markMediaReported = `update sentences set state='reported' where "sentenceId"=$3 and (select count(distinct reported_by) from reports where source='contribution' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='sentence_report_limit');`;
 
 const markContributionSkippedQuery = "update contributions set action='skipped' where contributed_by=(select contributor_id from contributors where user_name=$2 and contributor_identifier = $1) and \"sentenceId\"=$3;";
 
@@ -179,47 +179,47 @@ const getBadges = 'select grade, reward_milestone.milestone, id from reward_cata
 and LOWER(language) = LOWER($2) order by milestone desc) \
 as reward_milestone where id=reward_milestone.rid';
 
-    const getContributionHoursForLanguage = 'select COALESCE(sum(con.audio_duration::decimal/3600), 0) as hours from contributions con \
+const getContributionHoursForLanguage = 'select COALESCE(sum(con.audio_duration::decimal/3600), 0) as hours from contributions con \
 inner join sentences sen on sen."sentenceId"=con."sentenceId" where LOWER(language) = LOWER($1) \
 and action = \'completed\' and con.audio_duration is not null';
 
 const getMultiplierForHourGoal = 'select milestone_multiplier as multiplier from language_milestones where LOWER(language) = $1;';
 
 module.exports = {
-    unassignIncompleteSentences,
-    sentencesCount,
-    updateAndGetSentencesQuery,
-    updateAndGetUniqueSentencesQuery,
-    updateAndGetOrderedSentencesQuery,
-    getValidationSentencesQuery,
-    updateContributionDetails,
-    getCountOfTotalSpeakerAndRecordedAudio,
-    getMotherTonguesData,
-    getGenderData,
-    getAgeGroupsData,
-    unassignIncompleteSentencesWhenLanChange,
-    updateSentencesWithContributedState,
-    addValidationQuery,
-    updateSentencesWithValidatedState,
-    feedbackInsertion,
-    getAudioPath,
-    saveReportQuery,
-    getSentencesForLaunch,
-    markContributionSkippedQuery,
-    rewardsInfoQuery,
-    getTotalUserContribution,
-    getTotalUserValidation,
-    findRewardInfo,
-    insertRewardQuery,
-    getContributorIdQuery,
-    checkCurrentMilestoneQuery,
-    checkNextMilestoneQuery,
-    markSentenceReported,
-    markContributionReported,
-    updateMaterializedViews,
-    getValidationCountQuery,
-    getBadges,
-    addContributorQuery,
-    getContributionHoursForLanguage,
-    getMultiplierForHourGoal
+  unassignIncompleteMedia,
+  mediaCount,
+  updateAndGetMediaQuery,
+  updateAndGetUniqueMediaQuery,
+  updateAndGetOrderedMediaQuery,
+  getValidationMediaQuery,
+  updateContributionDetails,
+  getCountOfTotalSpeakerAndRecordedAudio,
+  getMotherTonguesData,
+  getGenderData,
+  getAgeGroupsData,
+  unassignIncompleteMediaWhenLanChange,
+  updateMediaWithContributedState,
+  addValidationQuery,
+  updateMediaWithValidatedState,
+  feedbackInsertion,
+  getAudioPath,
+  saveReportQuery,
+  getMediaForLaunch,
+  markContributionSkippedQuery,
+  rewardsInfoQuery,
+  getTotalUserContribution,
+  getTotalUserValidation,
+  findRewardInfo,
+  insertRewardQuery,
+  getContributorIdQuery,
+  checkCurrentMilestoneQuery,
+  checkNextMilestoneQuery,
+  markMediaReported,
+  markContributionReported,
+  updateMaterializedViews,
+  getValidationCountQuery,
+  getBadges,
+  addContributorQuery,
+  getContributionHoursForLanguage,
+  getMultiplierForHourGoal
 }
