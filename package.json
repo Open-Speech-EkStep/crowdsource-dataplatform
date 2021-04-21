@@ -33,9 +33,6 @@
   "engines": {
     "node": "12.16.0"
   },
-  "dependencies": {
-    "jquery": "^3.5.1"
-  },
   "devDependencies": {
     "del": "^5.1.0",
     "husky": "^6.0.0",
