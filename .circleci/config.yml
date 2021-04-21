@@ -151,6 +151,7 @@ workflows:
           name: push_dev_image
           repo: ${REPO}
           tag: dev
+          path: ./crowdsource-api
           requires:
             - create-workspace
           #   - migrate_dev_aws
