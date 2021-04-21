@@ -229,7 +229,7 @@ function recordValidation(action) {
     }
     const sentenceId = validationSentences[currentIndex].sentenceId
     const contribution_id = validationSentences[currentIndex].contribution_id
-    fetch('/validation/action', {
+    fetch('/validate', {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
@@ -335,7 +335,7 @@ function disableSkipButton() {
 const getAudioClip = function (contributionId) {
     hideAudioRow();
     disableSkipButton();
-    fetch('/audioClip', {
+    fetch('/contributions', {
         method: 'POST',
         body: JSON.stringify({
             contributionId: contributionId
@@ -488,7 +488,7 @@ $(document).ready(() => {
         localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);
     }).catch(console.log);
-    fetch(`/validation/sentences/${language}`, {
+    fetch(`/contributions/${language}`, {
         credentials: 'include',
         mode: 'cors'
       })
