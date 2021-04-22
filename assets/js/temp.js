@@ -14,6 +14,9 @@ let layout = require('../keyBoard-layout/hindi.json');
 let keyboard = new Keyboard({
   onChange: input => onChange(input),
   onKeyPress: button => onKeyPress(button),
+  physicalKeyboardHighlight : true,
+  physicalKeyboardHighlightPress: true,
+  syncInstanceInputs: true,
   ...layout
 });
 
@@ -28,6 +31,9 @@ console.log(keyboard);
 
 function onChange(input) {
   document.querySelector(".input").value = input;
+  // keyboard.setOptions({
+  //
+  // });
   console.log("Input changed", input);
 }
 
@@ -45,7 +51,7 @@ function handleShift() {
   let shiftToggle = currentLayout === "default" ? "shift" : "default";
 
   keyboard.setOptions({
-    layoutName: shiftToggle
+    layoutName: shiftToggle,
   });
   toggleCapsLock();
 }
