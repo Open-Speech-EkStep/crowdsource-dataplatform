@@ -39,15 +39,15 @@ describe("Running tests for dbOperations", () => {
 
         test("should return expected result", () => {
             const mockResult = [
-                { sentenceId: 1, sentence: "Mock sentence 1" },
-                { sentenceId: 2, sentence: "Mock sentence 2" },
-                { sentenceId: 3, sentence: "Mock sentence 3" }
+                { sentenceId: 1, media_data: "Mock sentence 1" },
+                { sentenceId: 2, media_data: "Mock sentence 2" },
+                { sentenceId: 3, media_data: "Mock sentence 3" }
             ];
 
             mockDB.many.mockReturnValue(mockResult);
 
             const result = dbOperations.getMediaBasedOnAge(
-                "10-20", "abcdefghi", "test_username", "Hindi", "Gujrati", "Male"
+                "10-20", "abcdefghi", "test_username", "Hindi", "Gujrati", "Male", 'text'
             );
 
             expect(result).toEqual(mockResult);
@@ -57,18 +57,18 @@ describe("Running tests for dbOperations", () => {
             const ageGroup = "0-13";
             const spyDB = jest.spyOn(mockDB, 'many')
 
-            dbOperations.getMediaBasedOnAge(ageGroup, "abcdefghi", "test_username", "Hindi", "Gujrati", "Male")
+            dbOperations.getMediaBasedOnAge(ageGroup, "abcdefghi", "test_username", "Hindi", 'text')
 
-            expect(spyDB).toHaveBeenCalledWith(expect.anything(), ["abcdefghi", "test_username", "medium", "Hindi", "Gujrati", "Male", ageGroup, expect.anything()]);
+            expect(spyDB).toHaveBeenCalledWith(expect.anything(), ["abcdefghi", "test_username", "medium", "Hindi", "text", expect.anything()]);
         });
 
         test('should call query with label medium for adults', () => {
             const ageGroup = "50-59";
             const spyDB = jest.spyOn(mockDB, 'many')
 
-            dbOperations.getMediaBasedOnAge(ageGroup, "abcdefghi", "test_username", "Hindi", "Gujrati", "Male")
+            dbOperations.getMediaBasedOnAge(ageGroup, "abcdefghi", "test_username", "Hindi", 'text')
 
-            expect(spyDB).toHaveBeenCalledWith(expect.anything(), ["abcdefghi", "test_username", "medium", "Hindi", "Gujrati", "Male", ageGroup, expect.anything()]);
+            expect(spyDB).toHaveBeenCalledWith(expect.anything(), ["abcdefghi", "test_username", "medium", "Hindi", "text", expect.anything()]);
         })
     });
 

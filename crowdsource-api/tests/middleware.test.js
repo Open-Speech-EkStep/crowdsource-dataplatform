@@ -1,6 +1,7 @@
 const { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery } = require('../src/middleware/validateUserInputs')
 
 describe('middleware test', function () {
+    const cookie = { 'userId': '123' };
     const res = {
         status: jest.fn(function () { return res; }),
         send: jest.fn(),
@@ -14,7 +15,7 @@ describe('middleware test', function () {
         })
 
         test('should call next() once if userName is less than 12 char and age is given format', function () {
-            const req = { body: { age: "upto 10", userName: "lessThan12", gender: "female", motherTongue: "Hindi" } }
+            const req = { cookies: cookie, params: { 'type': 'ocr' }, body: { age: "upto 10", userName: "lessThan12", gender: "female", motherTongue: "Hindi" } }
             validateUserInfo(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
@@ -22,7 +23,7 @@ describe('middleware test', function () {
         });
 
         test('should fail and send bad request if userName is more than 12 char and age is given format', function () {
-            const req = { body: { age: "upto 10", userName: "moreThan12character", gender: "female", motherTongue: "Hindi" } }
+            const req = { cookies: cookie, params: { 'type': 'ocr' }, body: { age: "upto 10", userName: "moreThan12character", gender: "female", motherTongue: "Hindi" } }
             validateUserInfo(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1)
@@ -30,7 +31,7 @@ describe('middleware test', function () {
         });
 
         test('should fail if userName contain mobile number and age is given format', function () {
-            const req = { body: { age: "upto 10", userName: "9411239876", gender: "female", motherTongue: "Hindi" } }
+            const req = { cookies: cookie, params: { 'type': 'ocr' }, body: { age: "upto 10", userName: "9411239876", gender: "female", motherTongue: "Hindi" } }
             validateUserInfo(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1)
@@ -38,7 +39,7 @@ describe('middleware test', function () {
         });
 
         test('should fail and send bad request if userName contain email address and age is given format', function () {
-            const req = { body: { age: "upto 10", userName: "testemail@123.com", gender: "female", motherTongue: "Hindi" } }
+            const req = { cookies: cookie, params: { 'type': 'ocr' }, body: { age: "upto 10", userName: "testemail@123.com", gender: "female", motherTongue: "Hindi" } }
             validateUserInfo(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1)
@@ -46,7 +47,7 @@ describe('middleware test', function () {
         });
 
         test('should fail and send bad request if age is not given format', function () {
-            const req = { body: { age: "00 - 11", userName: "abccom", gender: "female", motherTongue: "Hindi" } }
+            const req = { cookies: cookie, params: { 'type': 'ocr' }, body: { age: "10-13", userName: "abccom", gender: "female", motherTongue: "Hindi" } }
             validateUserInfo(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1)
@@ -54,7 +55,7 @@ describe('middleware test', function () {
         });
 
         test('should call res.send() once if gender is not included in GENDER', function () {
-            const req = { body: { age: "00 - 11", userName: "abccom", gender: "WrongGender", motherTongue: "Hindi" } };
+            const req = { cookies: cookie, params: { 'type': 'ocr' }, body: { age: "upto 10", userName: "abccom", gender: "WrongGender", motherTongue: "Hindi" } };
             validateUserInfo(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -62,11 +63,42 @@ describe('middleware test', function () {
         });
 
         test('should call res.send() once if motherTongue is not included in MOTHERTONGUE', function () {
-            const req = { body: { gender: "female", motherTongue: "notMotherTongue", userName: "abcdeUsername" } };
+            const req = { cookies: cookie, params: { 'type': 'ocr' }, body: { gender: "female", motherTongue: "notMotherTongue", userName: "abcdeUsername" } };
             validateUserInfo(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
             expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should pass if type is valid', () => {
+            const req = { cookies: cookie, params: { 'type': 'ocr' }, body: { age: "upto 10", userName: "abccom", gender: "female", motherTongue: "Hindi" } };
+            validateUserInfo(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+        });
+
+        test('should fail if type is invalid', () => {
+            const req = { cookies: cookie, params: { 'type': 'test' }, body: { age: "upto 10", userName: "abccom", gender: "female", motherTongue: "Hindi" } };
+            validateUserInfo(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0);
+            expect(res.send).toHaveBeenCalledTimes(1);
+        });
+
+        test('should fail if cookie is not present', () => {
+            const req = { cookies: {}, params: { 'type': 'ocr' }, body: { age: "upto 10", userName: "abccom", gender: "female", motherTongue: "Hindi" } };
+            validateUserInfo(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0);
+            expect(res.send).toHaveBeenCalledTimes(1);
+        });
+
+        test('should fail if userName is falsy', () => {
+            const req = { cookies: cookie, params: { 'type': 'ocr' }, body: { age: "upto 10", userName: null, gender: "female", motherTongue: "Hindi" } };
+            validateUserInfo(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0);
+            expect(res.send).toHaveBeenCalledTimes(1);
         });
     });
 
@@ -119,7 +151,7 @@ describe('middleware test', function () {
         });
 
         test('should call res.send() once if userName is a mobile No', function () {
-            const req = { body: { gender: "female", motherTongue: "Hindi", userName: "8989898989" } };
+            const req = { cookies: cookie, params: { 'type': 'ocr' }, body: { gender: "female", motherTongue: "Hindi", userName: "8989898989" } };
             validateUserInfo(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
