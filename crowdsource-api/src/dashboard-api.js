@@ -192,7 +192,7 @@ const dashboardRoutes = (router) => {
     });
 
     // Optional
-    router.get('/contributions/age', async (req, res) => {
+    router.get('/stats/contributions/age', async (req, res) => {
         const language = req.query.language || '';
 
         const ageGroupData = await getAgeGroupData(language);
@@ -201,7 +201,7 @@ const dashboardRoutes = (router) => {
     });
 
     //Optional
-    router.get('/contributions/gender', async (req, res) => {
+    router.get('/stats/contributions/gender', async (req, res) => {
         const language = req.query.language || '';
 
         const genderGroupData = await getGenderGroupData(language);
