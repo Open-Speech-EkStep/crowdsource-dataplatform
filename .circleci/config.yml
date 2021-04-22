@@ -57,7 +57,7 @@ jobs:
     steps:
       - *fast-checkout
       - node/install-packages
-      - run: npm run gulp -- --env=<< parameters.env_name >>
+      - run: npm run gulp -- -- --env=<< parameters.env_name >>
       - aws-s3/sync:
           arguments: |
             --cache-control "max-age=8387800" \
