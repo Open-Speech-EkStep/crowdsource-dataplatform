@@ -4,14 +4,21 @@
   "description": "This will hold the crowdsourcing platform to be used to store voice data from various speakers",
   "main": "server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "watch": "gulp && nodemon src/server.js aws",
-    "start-cluster": "pm2 start src/server.js -i 2",
-    "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest",
-    "gulp": "gulp",
-    "functional_test": "cd functional_tests && npm i && gauge run specs/BoloIndia.spec",
-    "db-migrate": "npx db-migrate up --config migrations/config/migration_config.json -e dev",
-    "prepare": "husky install"
+    "start": "cd crowdsource-api && npm start",
+    "watch": "run-s gulp watch:nodemon",
+    "watch:nodemon": "cd crowdsource-api && npm run watch",
+    "start-cluster": "cd crowdsource-api && pm2 start src/server.js -i 2",
+    "test": "run-p test:api test:ui",
+    "test:api": "cd crowdsource-api && npm run test",
+    "test:ui": "cd crowdsource-ui && npm run test",
+    "gulp": "cd crowdsource-ui && npm run gulp",
+    "functional_test": "cd functional_tests && npm run test",
+    "db-migrate": "cd crowdsource-api && npx db-migrate up --config migrations/config/migration_config.json -e dev",
+    "prepare": "husky install",
+    "install": "run-p install:api install:ui install:ft",
+    "install:api": "cd crowdsource-api && npm i",
+    "install:ui": "cd crowdsource-ui && npm i",
+    "install:ft": "cd functional_tests && npm i"
   },
   "repository": {
     "type": "git",
@@ -23,59 +30,13 @@
     "url": "https://github.com/ekstep2/ektep-crowdsource-platform/issues"
   },
   "homepage": "https://github.com/ekstep2/ektep-crowdsource-platform#readme",
-  "dependencies": {
-    "@google-cloud/storage": "^5.8.1",
-    "aws-sdk": "^2.851.0",
-    "chromium": "^3.0.2",
-    "compression": "^1.7.4",
-    "cookie-parser": "^1.4.5",
-    "cors": "^2.8.5",
-    "crypto-js": "^4.0.0",
-    "db-migrate": "^0.11.12",
-    "db-migrate-pg": "^1.2.2",
-    "ddos": "^0.2.1",
-    "dotenv": "^8.2.0",
-    "ejs": "2.5.5",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "helmet": "^3.22.0",
-    "i18n": "^0.13.2",
-    "jquery": "^3.5.1",
-    "jsonwebtoken": "^8.5.1",
-    "moment": "^2.29.1",
-    "multer": "^1.4.2",
-    "node-fetch": "^2.6.1",
-    "pg-promise": "^10.5.2",
-    "pm2": "^4.5.6",
-    "regenerator-runtime": "^0.13.7",
-    "uuid": "^7.0.3"
-  },
   "engines": {
     "node": "12.16.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.12.11",
-    "@getgauge/cli": "^1.1.7",
-    "babelify": "^10.0.0",
     "del": "^5.1.0",
-    "fetch-mock": "^9.11.0",
-    "gulp": "^4.0.2",
-    "gulp-browserify": "^0.5.1",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-htmlmin": "^5.0.1",
-    "gulp-imagemin": "^7.1.0",
-    "gulp-minify": "^3.1.0",
-    "gulp-replace-task": "^2.0.1",
     "husky": "^6.0.0",
-    "jest": "^26.6.3",
-    "jest-when": "^3.2.1",
-    "nodemon": "^2.0.3",
-    "supertest": "^6.1.3",
+    "npm-run-all": "^4.1.5",
     "yargs": "^16.2.0"
-  },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/test-env.js"
-    ]
   }
 }
