@@ -9,14 +9,14 @@ let Keyboard = window.SimpleKeyboard.default;
  * Available layouts
  * https://github.com/hodgef/simple-keyboard-layouts/tree/master/src/lib/layouts
  */
-let layout = require('../keyBoard-layout/english.json');
+let layout = require('../keyBoard-layout/hindi.json');
 
 let keyboard = new Keyboard({
   onChange: input => onChange(input),
   onKeyPress: button => onKeyPress(button),
   physicalKeyboardHighlight : true,
   physicalKeyboardHighlightPress: true,
-  syncInstanceInputs: false,
+  syncInstanceInputs: true,
   ...layout
 });
 
