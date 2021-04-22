@@ -156,15 +156,6 @@ router.get('/getAllInfo/:language', async function (req, res) {
     }
 });
 
-router.get('/sunoIndia/dashboard', function (req, res) {
-    const isCookiePresent = req.cookies.userId ? true : false;
-    res.render('modules/sunoIndia/dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
-});
-
-router.get('/temp', function (req, res) {
-    res.render('temp1.ejs');
-});
-
 router.get('/feedback', function (req, res) {
     res.render('feedback.ejs');
 });
