@@ -30,7 +30,7 @@ const {
     insertRewardQuery,
     getContributorIdQuery,
     findRewardInfo,
-    markSentenceReported,
+    markMediaReported,
     markContributionReported,
     updateMaterializedViews,
     getBadges,
@@ -400,7 +400,7 @@ const saveReport = async (userId, sentenceId, reportText, language, userName, so
         await db.any(markContributionReported, [userId, userName, sentenceId]);
     }
     else if (source === "contribution") {
-        await db.any(markSentenceReported, [userId, userName, sentenceId]);
+        await db.any(markMediaReported, [userId, userName, sentenceId]);
     }
 }
 
