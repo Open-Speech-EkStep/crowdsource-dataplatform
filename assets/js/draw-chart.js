@@ -148,8 +148,8 @@ function buildGraphs(language, timeframe) {
 
     Promise.all([
         fetch(`/timeline?language=${language}&timeframe=${timeframe}`),
-        fetch(`/contributions/gender?language=${language}`),
-        fetch(`/contributions/age?language=${language}`)
+        fetch(`/stats/contributions/gender?language=${language}`),
+        fetch(`/stats/contributions/age?language=${language}`)
     ]).then(function (responses) {
         return Promise.all(responses.map(function (response) {
             return response.json();
