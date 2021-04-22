@@ -1,13 +1,11 @@
 const fetch = require('./fetch')
 const { calculateTime } = require('./utils');
 
-console.log("here in sunoIndia");
+console.log("here in sunoIndia","lineGraph");
 
 const $chartRow = $('.chart-row');
 const $chartLoaders = $chartRow.find('.loader');
 const $charts = $chartRow.find('.chart');
-const $timelineLoader = $('#timeline-loader');
-const $timelineChart = $('#timeline-chart');
 
 const chartReg = {};
 
