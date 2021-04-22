@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
 </head>
 
 <body>
@@ -96,25 +97,40 @@
     <div class="row chart-row">
         <div class="col-12">
             <div class="row justify-content-center">
-                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
-                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner">
+                    <span class="spinner"></span></div>
+                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner">
+                    <span class="spinner"></span></div>
             </div>
             <div class="row justify-content-center chart-container">
-                <%- include ../../common/charts/lineGraph/lineGraph.ejs %>
-                <%- include ../../common/charts/barGraph/verticalBarGraph.ejs %>
-</div>
+                <div class="col-12 col-lg-5 text-center chart d-none timeline-chart-container">
+                    <%- include ../../common/charts/lineGraph/lineGraph.ejs %>
+                </div>
+                <div class="col-12 col-lg-5 text-center chart d-none">
+                    <%- include ../../common/charts/barGraph/verticalBarGraph.ejs %>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row chart-row">
         <div class="col-12">
             <div class="row justify-content-center">
-                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
-                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner">
+                    <span class="spinner"></span></div>
+                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner">
+                    <span class="spinner"></span></div>
             </div>
             <div class="row justify-content-center chart-container">
-                <%- include ../../common/charts/map/map.ejs %>
-                <%- include ../../common/charts/pieGraph/pieGraph.ejs %>
-</div>
+                <div class="col-12 col-lg-5 mb-3 text-center chart state-chart text-dark p-4">
+                    <div class="text-left px-3 pb-3 state-chart-text">
+                        <%= __('State Wise distribution') %>
+                    </div>
+                    <%- include ../../common/charts/map/map.ejs %>
+                </div>
+                <div class="col-12 col-lg-5 mb-3 text-center chart age-group-chart d-none p-4">
+                    <%- include ../../common/charts/pieGraph/pieGraph.ejs %>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -127,12 +143,13 @@
             <div id="modal-chart" class="h-100"></div>
         </div>
     </div>
-</div><button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
+</div>
+<button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
 <%- include ../../modals/speakerDetail.ejs %>
 <%- include ../../modals/content-languages.ejs %>
-<%- include ../../modals/say-listen-language.ejs%>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<%- include ../../modals/say-listen-language.ejs %>
 <%- include ../../common/footer.ejs %>
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="../js/dashboard.js"></script>
@@ -140,7 +157,5 @@
 <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
 <script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
 <script src="https://www.amcharts.com/lib/version/4.9.23/themes/animated.js"></script>
-<script src="../../js/draw-chart.js"></script>
 </body>
-
 </html>
