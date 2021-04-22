@@ -47,4 +47,13 @@ function handleShift() {
   keyboard.setOptions({
     layoutName: shiftToggle
   });
+  toggleCapsLock();
 }
+
+const toggleCapsLock = function (){
+  const capsLockBtn = $(".hg-layout-shift .hg-row .hg-button-lock")[0];
+  if(capsLockBtn){
+    capsLockBtn.style.backgroundColor = "greenYellow";
+  }
+}
+
