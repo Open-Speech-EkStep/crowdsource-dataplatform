@@ -9,11 +9,14 @@ let Keyboard = window.SimpleKeyboard.default;
  * Available layouts
  * https://github.com/hodgef/simple-keyboard-layouts/tree/master/src/lib/layouts
  */
-let layout = require('../keyBoard-layout/hindi.json');
+let layout = require('../keyBoard-layout/english.json');
 
 let keyboard = new Keyboard({
   onChange: input => onChange(input),
   onKeyPress: button => onKeyPress(button),
+  physicalKeyboardHighlight : true,
+  physicalKeyboardHighlightPress: true,
+  syncInstanceInputs: false,
   ...layout
 });
 
@@ -28,6 +31,9 @@ console.log(keyboard);
 
 function onChange(input) {
   document.querySelector(".input").value = input;
+  // keyboard.setOptions({
+  //
+  // });
   console.log("Input changed", input);
 }
 
@@ -45,7 +51,7 @@ function handleShift() {
   let shiftToggle = currentLayout === "default" ? "shift" : "default";
 
   keyboard.setOptions({
-    layoutName: shiftToggle
+    layoutName: shiftToggle,
   });
   toggleCapsLock();
 }
