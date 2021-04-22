@@ -42,7 +42,7 @@ from sentences inner join "contributors" con on con."contributor_identifier" = $
 left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id \
 where language = $4 and label=$3 \
 and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
-and sentences."sentenceId"= ANY($8::int[])\
+and sentences."sentenceId"= ANY($9::int[])\
 group by sentences."sentenceId", con."contributor_id" \
 order by sentences."sentenceId" \
 limit 5  returning "sentenceId") \
@@ -83,6 +83,17 @@ where sentences."state" is null and language = $4 and label=$3 and cont."action"
   returning "sentenceId") \
 select ins."sentenceId", sentences.media ->> 'data' as sentence from ins  \
   inner join sentences on sentences."sentenceId" = ins."sentenceId";`
+
+const getOrderedMediaQuery = `
+select sentences."sentenceId", sentences.media ->> 'data' as media_data
+from sentences 
+left join "contributors" con on con."contributor_identifier"=$1 and user_name=$2
+left join "contributions" cont on cont."sentenceId"= sentences."sentenceId" and cont.contributed_by = con.contributor_id 
+where language=$4 and label=$3 and coalesce(sentences.state,'')!= 'reported' and type=$5
+and (cont.action is null or (coalesce(cont.action,'')='completed' and cont.contributed_by != con.contributor_id) or (coalesce(cont.action,'')='skipped' and cont.contributed_by != con.contributor_id)) 
+group by sentences."sentenceId", sentences.media ->> 'data' 
+order by sentences."sentenceId"
+limit 5`;
 
 const getValidationMediaQuery = `select con."sentenceId", sen.media ->> 'data' as sentence, con.contribution_id \
     from contributions con \
@@ -221,5 +232,6 @@ module.exports = {
   getBadges,
   addContributorQuery,
   getContributionHoursForLanguage,
-  getMultiplierForHourGoal
+  getMultiplierForHourGoal,
+  getOrderedMediaQuery
 }

@@ -155,7 +155,7 @@ router.get('/getAllInfo/:language', async function (req, res) {
     }
 });
 
-router.post('/media', validateUserInfo, (req, res) => updateAndGetMedia(req, res));
+router.post('/media/:type', validateUserInfo, (req, res) => updateAndGetMedia(req, res));
 
 router.get('/contributions/:language', (req, res) => getValidationMedia(req, res));
 

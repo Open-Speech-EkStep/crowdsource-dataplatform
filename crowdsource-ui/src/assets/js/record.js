@@ -140,7 +140,7 @@ const initialize = () => {
 
     const setSentenceText = (index) => {
         const $sentenceLbl = $('#sentenceLbl');
-        $sentenceLbl[0].innerText = sentences[index].sentence;
+        $sentenceLbl[0].innerText = sentences[index].media_data;
         animateCSS($sentenceLbl, 'lightSpeedIn');
         currentIndex && setProgressBar(currentIndex);
     };
@@ -559,7 +559,8 @@ function executeOnLoad() {
         } else {
             localStorage.removeItem(currentIndexKey);
             localStorage.removeItem(skipCountKey);
-            fetch('/media', {
+            const type = 'text';
+            fetch(`/media/${type}`, {
                 method: 'POST',
                 credentials: 'include',
                 mode: 'cors',

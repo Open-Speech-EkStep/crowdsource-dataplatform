@@ -38,12 +38,21 @@ const validateUserInfo = function (req, res, next) {
     const ageGroup = req.body.age;
     const gender = req.body.gender;
     const motherTongue = req.body.motherTongue;
+    const type = req.params.type;
+    const userId = req.cookies.userId;
+
+    if (!userId || userName === null || userName === undefined) {
+        return res.status(400).send({ error: 'required parameters missing' });
+    }
+
+    const validTypes = ['parallel', 'ocr', 'text', 'asr'];
+    const isValidType = (validTypes.includes(type));
 
     const invalidMotherTongue = (!MOTHER_TONGUE.includes(motherTongue) && (motherTongue.length));
 
     if (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) ||
         EMAIL_REGEX.test(userName) || !AGE_GROUP.includes(ageGroup) ||
-        !GENDER.includes(gender) || invalidMotherTongue) {
+        !GENDER.includes(gender) || invalidMotherTongue || !isValidType) {
         return res.status(400).send("Bad request");
     }
     next()

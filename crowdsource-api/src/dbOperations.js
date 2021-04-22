@@ -36,7 +36,8 @@ const {
     getBadges,
     addContributorQuery,
     getContributionHoursForLanguage,
-    getMultiplierForHourGoal
+    getMultiplierForHourGoal,
+    getOrderedMediaQuery
 } = require('./dbQuery');
 
 const {
@@ -133,26 +134,25 @@ const getMediaBasedOnAge = function (
     userId,
     userName,
     language,
-    motherTongue,
-    gender
+    type
 ) {
     let languageLabel = ADULT;
-    let query = updateAndGetMediaQuery;
+    // let query = updateAndGetMediaQuery;
 
     if (ageGroup === KIDS_AGE_GROUP) {
         languageLabel = KIDS;
     }
 
     if (showUniqueMedia) {
-        query = updateAndGetUniqueMediaQuery;
+        // query = updateAndGetUniqueMediaQuery;
     }
 
-    query = updateAndGetOrderedMediaQuery;
+    let query = getOrderedMediaQuery;
     const launchUser = envVars.LAUNCH_USER || 'launch_user';
     const launchIds = envVars.LAUNCH_IDS || '';
 
     if (userName == launchUser) {
-        query = getMediaForLaunch;
+        // query = getMediaForLaunch;
     }
 
     return (db.many(query, [
@@ -160,9 +160,7 @@ const getMediaBasedOnAge = function (
         userName,
         languageLabel,
         language,
-        motherTongue,
-        gender,
-        ageGroup,
+        type,
         launchIds.split(', ')
     ]));
 };
@@ -171,20 +169,15 @@ const updateAndGetMedia = function (req, res) {
     const userId = req.cookies.userId;
     const userName = req.body.userName;
     const language = req.body.language;
-    const motherTongue = req.body.motherTongue;
-    const gender = req.body.gender;
-    if (!userId || userName === null || userName === undefined) {
-        res.status(400).send({ error: 'required parameters missing' });
-        return;
-    }
+    const type = req.params.type;
+    
     const ageGroup = req.body.age;
     const media = getMediaBasedOnAge(
         ageGroup,
         userId,
         userName,
         language,
-        motherTongue,
-        gender
+        type
     );
     const count = db.one(mediaCount, [userId, userName, language]);
     const unAssign = db.any(unassignIncompleteMedia, [
