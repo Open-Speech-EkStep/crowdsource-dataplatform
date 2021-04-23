@@ -171,6 +171,11 @@ router.get('/dekhoindia/dashboard', function (req, res) {
     res.render('modules/dekhoindia/dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
 });
 
+router.get('/sunoIndia/homePage', function (req, res) {
+    const isCookiePresent = req.cookies.userId ? true : false;
+    res.render('modules/sunoIndia/home/sunoHome.ejs', { MOTHER_TONGUE, LANGUAGES,isCookiePresent: false, defaultLang: undefined });
+});
+
 router.get('/temp', function (req, res) {
     res.render('temp1.ejs');
 });
