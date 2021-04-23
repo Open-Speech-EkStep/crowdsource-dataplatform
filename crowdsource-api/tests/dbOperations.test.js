@@ -1,7 +1,8 @@
 import { when } from 'jest-when'
+import { lang } from 'moment';
 
 const {
-    updateContributionDetails, updateMediaWithContributedState, getValidationMediaQuery, getCountOfTotalSpeakerAndRecordedAudio, getGenderData, getAgeGroupsData, getMotherTonguesData, feedbackInsertion, saveReportQuery, markContributionSkippedQuery, rewardsInfoQuery, getContributorIdQuery, getTotalUserContribution, checkCurrentMilestoneQuery, checkNextMilestoneQuery, findRewardInfo, insertRewardQuery, getTotalUserValidation, addContributorQuery, getBadges, addValidationQuery, updateMediaWithValidatedState, getContributionHoursForLanguage, getMultiplierForHourGoal,
+    updateContributionDetails, updateContributionDetailsWithUserInput, updateMediaWithContributedState, getValidationMediaQuery, getCountOfTotalSpeakerAndRecordedAudio, getGenderData, getAgeGroupsData, getMotherTonguesData, feedbackInsertion, saveReportQuery, markContributionSkippedQuery, rewardsInfoQuery, getContributorIdQuery, getTotalUserContribution, checkCurrentMilestoneQuery, checkNextMilestoneQuery, findRewardInfo, insertRewardQuery, getTotalUserValidation, addContributorQuery, getBadges, addValidationQuery, updateMediaWithValidatedState, getContributionHoursForLanguage, getMultiplierForHourGoal,
 } = require('./../src/dbQuery');
 
 const mockDB = {
@@ -80,12 +81,15 @@ describe("Running tests for dbOperations", () => {
         const testState = 'testState';
         const testCountry = 'testCountry';
         const testAudioDuration = 10;
+        const contributor_id = 27;
+        const language = 'Tamil';
         const callback = () => { };
-        let spyDBany, spyDBnone;
+        let spyDBany, spyDBnone, spyDBoneOrNone;
 
         beforeEach(() => {
             spyDBany = jest.spyOn(mockDB, 'any')
             spyDBnone = jest.spyOn(mockDB, 'none')
+            spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
         });
 
         afterEach(() => {
@@ -93,41 +97,39 @@ describe("Running tests for dbOperations", () => {
         })
 
         test('call query with null speaker details if not exists', async () => {
-            when(spyDBany).calledWith(updateContributionDetails, [testAudioPath,
-                null,
-                null,
-                null,
+
+            when(spyDBoneOrNone).calledWith(getContributorIdQuery, [testUserId, testUserName]).mockReturnValue({ 'contributor_id': contributor_id });
+            when(spyDBany).calledWith(updateContributionDetails, [
                 testSentenceId,
-                testUserId,
-                testUserName,
+                contributor_id,
+                testAudioPath,
+                language,
+                testAudioDuration,
                 testState,
                 testCountry,
-                testAudioDuration]).mockReturnValue(Promise.resolve());
+                ]).mockReturnValue(Promise.resolve());
             await dbOperations.updateDbWithAudioPath(
                 testAudioPath,
                 testSentenceId,
-                null,
                 testUserId,
                 testUserName,
                 testState,
                 testCountry,
                 testAudioDuration,
+                language,
                 callback
             )
 
             expect(spyDBany).toHaveBeenCalledWith(
                 updateContributionDetails,
                 [
-                    testAudioPath,
-                    null,
-                    null,
-                    null,
                     testSentenceId,
-                    testUserId,
-                    testUserName,
+                    contributor_id,
+                    testAudioPath,
+                    language,
+                    testAudioDuration,
                     testState,
-                    testCountry,
-                    testAudioDuration
+                    testCountry
                 ]
             );
 
@@ -138,43 +140,39 @@ describe("Running tests for dbOperations", () => {
         });
 
         test('call query with age, gender and mother tongue if speaker details exists', async () => {
+
+            when(spyDBoneOrNone).calledWith(getContributorIdQuery, [testUserId, testUserName]).mockReturnValue({ 'contributor_id': contributor_id });
             when(spyDBany).calledWith(updateContributionDetails,
                 [
-                    testAudioPath,
-                    "10-15",
-                    "male",
-                    "Language",
                     testSentenceId,
-                    testUserId,
-                    testUserName,
+                    contributor_id,
+                    testAudioPath,
+                    language,
+                    testAudioDuration,
                     testState,
-                    testCountry,
-                    testAudioDuration]).mockReturnValue(Promise.resolve());
+                    testCountry]).mockReturnValue(Promise.resolve());
             await dbOperations.updateDbWithAudioPath(
                 testAudioPath,
                 testSentenceId,
-                '{"age": "10-15", "gender": "male", "motherTongue": "Language"}',
                 testUserId,
                 testUserName,
                 testState,
                 testCountry,
                 testAudioDuration,
+                language,
                 callback
             )
 
             expect(spyDBany).toHaveBeenCalledWith(
                 updateContributionDetails,
                 [
-                    testAudioPath,
-                    "10-15",
-                    "male",
-                    "Language",
                     testSentenceId,
-                    testUserId,
-                    testUserName,
+                    contributor_id,
+                    testAudioPath,
+                    language,
+                    testAudioDuration,
                     testState,
-                    testCountry,
-                    testAudioDuration
+                    testCountry
                 ]
             );
 
@@ -187,46 +185,103 @@ describe("Running tests for dbOperations", () => {
         test('call query with rounded audio duration', async () => {
             const testAudioDuration = 4.78951;
             const expectedAudioDuration = 4.79;
+            when(spyDBoneOrNone).calledWith(getContributorIdQuery, [testUserId, testUserName]).mockReturnValue({ 'contributor_id': contributor_id });
             when(spyDBany).calledWith(updateContributionDetails,
                 [
-                    testAudioPath,
-                    null,
-                    null,
-                    null,
                     testSentenceId,
-                    testUserId,
-                    testUserName,
+                    contributor_id,
+                    testAudioPath,
+                    language,
+                    expectedAudioDuration,
                     testState,
                     testCountry,
-                    expectedAudioDuration
                 ]).mockReturnValue(Promise.resolve());
 
 
             await dbOperations.updateDbWithAudioPath(
                 testAudioPath,
                 testSentenceId,
-                null,
                 testUserId,
                 testUserName,
                 testState,
                 testCountry,
                 testAudioDuration,
+                language,
                 callback
             )
 
             expect(spyDBany).toHaveBeenCalledWith(
                 updateContributionDetails,
                 [
-                    testAudioPath,
-                    null,
-                    null,
-                    null,
                     testSentenceId,
-                    testUserId,
-                    testUserName,
+                    contributor_id,
+                    testAudioPath,
+                    language,
+                    expectedAudioDuration,
                     testState,
                     testCountry,
-                    expectedAudioDuration
+                ]
+            );
+
+            expect(spyDBnone).toHaveBeenCalledWith(
+                updateMediaWithContributedState,
+                [testSentenceId]
+            )
+        });
+    });
+
+    describe('Update DB with user input', () => {
+        const testUserInput = 'testPath';
+        const testSentenceId = 1;
+        const testUserId = 123;
+        const testUserName = 'testName';
+        const testState = 'testState';
+        const testCountry = 'testCountry';
+        const contributor_id = 27;
+        const language = 'Tamil';
+        let spyDBany, spyDBnone, spyDBoneOrNone;
+
+        beforeEach(() => {
+            spyDBany = jest.spyOn(mockDB, 'any')
+            spyDBnone = jest.spyOn(mockDB, 'none')
+            spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
+        });
+
+        afterEach(() => {
+            jest.clearAllMocks();
+        })
+        test('call query with correct parameters', async () => {
+            when(spyDBoneOrNone).calledWith(getContributorIdQuery, [testUserId, testUserName]).mockReturnValue({ 'contributor_id': contributor_id });
+            when(spyDBany).calledWith(updateContributionDetailsWithUserInput,
+                [
+                    testSentenceId,
+                    contributor_id,
+                    testUserInput,
+                    language,
+                    testState,
+                    testCountry
+                ]).mockReturnValue(Promise.resolve());
+
+
+            await dbOperations.updateDbWithUserInput(
+                testUserName,
+                testUserId,
+                language,
+                testUserInput,
+                testSentenceId,
+                testState,
+                testCountry
+            )
+
+            expect(spyDBany).toHaveBeenCalledWith(
+                updateContributionDetailsWithUserInput,
+                [
+                    testSentenceId,
+                    contributor_id,
+                    testUserInput,
+                    language,
+                    testState,
+                    testCountry
                 ]
             );
 

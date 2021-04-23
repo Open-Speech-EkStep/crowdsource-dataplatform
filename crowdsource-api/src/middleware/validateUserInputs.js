@@ -20,14 +20,27 @@ const convertIntoMB = (fileSizeInByte) => {
 const validateUserInputAndFile = function (req, res, next) {
     const speakerDetails = req.body.speakerDetails;
     const speakerDetailsJson = JSON.parse(speakerDetails);
-    const file = req.file;
-    const fileSizeInMB = convertIntoMB(file.size);
     const userName = speakerDetailsJson.userName;
+    const isInvalidParams = userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName);
+    console.log("in method")
+    let isInvalidReqParams = false;
+    if (req.file) {
+        const file = req.file;
+        const fileSizeInMB = convertIntoMB(file.size);
+        const isInvalidFileParam = fileSizeInMB > MAX_SIZE || file.mimetype != VALID_FILE_TYPE;
+        isInvalidReqParams = isInvalidFileParam || isInvalidParams
+    }
+    else if (req.body.userInput) {
+        console.log("in userinput if")
+        isInvalidReqParams = isInvalidParams || req.body.userInput.length <= 5;
+    }
+    else {
+        console.log("in else")
+        isInvalidReqParams = true;
+    }
 
-    const isValidReqParams = fileSizeInMB > MAX_SIZE || file.mimetype != VALID_FILE_TYPE
-    userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName);
 
-    if (isValidReqParams) {
+    if (isInvalidReqParams) {
         return res.status(400).send("Bad request");
     }
     next()
@@ -63,7 +76,7 @@ const validateUserInputForFeedback = function (req, res, next) {
     const subject = req.body.subject;
     const language = req.body.language
 
-    const allLanguage = LANGUAGES.map(language => language.value)
+    const allLanguage = LANGUAGES.map(lang => lang.value)
 
     const invalidLanguage = !allLanguage.includes(language)
 
