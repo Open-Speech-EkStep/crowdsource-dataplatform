@@ -132,7 +132,7 @@ workflows:
              - node/test
           filters:
             branches:
-              only: master
+              only: [master, sunoIndia]
 
       - db_migrate_aws:
           name: migrate_dev_aws
