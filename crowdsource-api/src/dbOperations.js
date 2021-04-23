@@ -1,8 +1,10 @@
 const { downloader } = require('./downloader/objDownloader')
 const moment = require('moment');
+const { uploader } = require('./uploader/objUploader')
 
 const {
     updateContributionDetails,
+    updateContributionDetailsWithUserInput,
     unassignIncompleteMedia,
     updateAndGetMediaQuery,
     updateAndGetUniqueMediaQuery,
@@ -84,49 +86,39 @@ let cn = {
 
 const db = pgp(cn);
 
-const updateDbWithAudioPath = function (
+const updateDbWithAudioPath = async (
     audioPath,
     sentenceId,
-    speakerDetails,
     userId,
     userName,
     state,
     country,
     audioDuration,
+    language,
     cb
-) {
-    const speakerDetailsJson = JSON.parse(speakerDetails);
-    let ageGroup = null,
-        gender = null,
-        motherTongue = null;
-    if (speakerDetailsJson) {
-        ageGroup = speakerDetailsJson.age;
-        gender = speakerDetailsJson.gender;
-        motherTongue = speakerDetailsJson.motherTongue;
-    }
+) => {
     const roundedAudioDuration = audioDuration ? Number(Number(audioDuration).toFixed(3)) : 0;
 
+    const contributor_id = await getContributorId(userId, userName)
+
     db.any(updateContributionDetails, [
-        audioPath,
-        ageGroup,
-        gender,
-        motherTongue,
         sentenceId,
-        userId,
-        userName,
+        contributor_id,
+        audioPath,
+        language,
+        roundedAudioDuration,
         state,
-        country,
-        roundedAudioDuration
+        country
     ])
-        .then(() => {
-            db.none(updateMediaWithContributedState, [sentenceId]).then();
-            db.none(updateMaterializedViews).then();
-            cb(200, { success: true });
-        })
-        .catch((err) => {
-            console.log(err);
-            cb(500, { error: true });
-        });
+    .then(() => {
+        db.none(updateMediaWithContributedState, [sentenceId]).then();
+        db.none(updateMaterializedViews).then();
+        cb(200, { success: true });
+    })
+    .catch((err) => {
+        console.log(err);
+        cb(500, { error: true });
+    });
 };
 
 const getMediaBasedOnAge = function (
@@ -170,7 +162,7 @@ const updateAndGetMedia = function (req, res) {
     const userName = req.body.userName;
     const language = req.body.language;
     const type = req.params.type;
-    
+
     const ageGroup = req.body.age;
     const media = getMediaBasedOnAge(
         ageGroup,
@@ -238,7 +230,7 @@ const getAudioClip = function (req, res, objectStorage) {
             console.log(err);
             res.sendStatus(500);
         });
-    ;
+
 }
 
 const updateTablesAfterValidation = (req, res) => {
@@ -323,7 +315,7 @@ const cumulativeTimeLineQueries = {
 const getTimeline = (language = "", timeframe) => {
     timeframe = timeframe.toLowerCase();
     if (language.length !== 0) {
-        languageFilter = `language iLike '${language}'`
+        let languageFilter = `language iLike '${language}'`
         let filter = pgp.as.format('$1:raw', [languageFilter])
         let query = normalTimeLineQueries[timeframe] || weeklyTimeline;
         return db.any(query, filter);
@@ -533,6 +525,35 @@ const getHourGoalForLanguage = async (language) => {
     return parseInt((Math.ceil(result['hours'] / parseFloat(multiplier))) * multiplier);
 }
 
+const updateDbWithUserInput = async (
+    userName,
+    userId,
+    language,
+    userInput,
+    sentenceId,
+    state,
+    country) => {
+    const contributor_id = await getContributorId(userId, userName)
+
+    db.any(updateContributionDetailsWithUserInput, [
+        sentenceId,
+        contributor_id,
+        userInput,
+        language,
+        state,
+        country
+    ])
+    .then(() => {
+        db.none(updateMediaWithContributedState, [sentenceId]).then();
+        db.none(updateMaterializedViews).then();
+        cb(200, { success: true });
+    })
+    .catch((err) => {
+        console.log(err);
+        cb(500, { error: true });
+    });
+}
+
 module.exports = {
     updateAndGetMedia,
     getValidationMedia,
@@ -554,5 +575,6 @@ module.exports = {
     saveReport,
     markContributionSkipped,
     getRewards,
-    getRewardsInfo
+    getRewardsInfo,
+    updateDbWithUserInput
 };

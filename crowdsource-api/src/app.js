@@ -25,7 +25,8 @@ const {
     saveReport,
     markContributionSkipped,
     getRewards,
-    getRewardsInfo
+    getRewardsInfo,
+    updateDbWithUserInput
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
@@ -191,6 +192,7 @@ router.post('/skip', validateInputForSkip, (req, res) => {
 
 router.post('/store', validateUserInputAndFile, (req, res) => {
     const file = req.file;
+    const userInput = req.body.userInput;
     const sentenceId = req.body.sentenceId;
     const speakerDetails = req.body.speakerDetails;
     const audioDuration = req.body.audioDuration;
@@ -203,29 +205,33 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
     const state = req.body.state || "";
     const country = req.body.country || "";
 
-    const uploadFile = uploader(objectStorage)
+    if (file) {        
+        const uploadFile = uploader(objectStorage)
 
-    uploadFile(file.path, userName, userId, language)
-        .then(() => {
-            updateDbWithAudioPath(
-                audioPath,
-                sentenceId,
-                speakerDetails,
-                userId,
-                userName,
-                state,
-                country,
-                audioDuration,
-                (resStatus, resBody) => {
+        uploadFile(file.path, userName, userId, language)
+            .then(() => {
+                updateDbWithAudioPath(audioPath, sentenceId, userId, userName, state, country, audioDuration, language, 
+                    (resStatus, resBody) => {
+                    removeTempFile(file);
                     res.status(resStatus).send(resBody);
-                }
-            );
-            removeTempFile(file);
+                });
+            })
+            .catch((err) => {
+                console.error(err);
+                res.sendStatus(500);
+            });
+    }
+    else {
+        updateDbWithUserInput(userName, userId, language, userInput, sentenceId, state, country)
+        .then(() => {
+            res.sendStatus(200, { success: true });
         })
         .catch((err) => {
             console.error(err);
             res.sendStatus(500);
         });
+    }
+    
 });
 
 router.post('/audio/snr', async (req, res) => {
@@ -252,7 +258,7 @@ router.get('/location-info', (req, res) => {
         res.sendStatus(400);
         return;
     }
-    fetch(`http://ip-api.com/json/${ip}?fields=country,regionName`).then(res => res.json()).then(response => {
+    fetch(`http://ip-api.com/json/${ip}?fields=country,regionName`).then(jsonRes => jsonRes.json()).then(response => {
         res.send(response);
     }).catch(err => {
         res.sendStatus(500);

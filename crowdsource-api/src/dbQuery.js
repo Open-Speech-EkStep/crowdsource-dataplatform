@@ -111,16 +111,11 @@ const updateMediaWithValidatedState = `update sentences set "state" = \
 \'validated\' where "sentenceId" = $1 and (select count(*) from validations where contribution_id = $2 and action != 'skip') >= \
 (select value from configurations where config_name = 'validation_count');`
 
-const updateContributionDetails = `WITH src AS ( \
-    select contributor_id from "contributors" \
-    where contributor_identifier = $6 and user_name = $7\
-    ) \
-UPDATE "contributions" \
-SET "audio_path" = $1, "action" = \'completed\' , "date" = now(), "state_region" = $8, "country" = $9, "audio_duration" = $10\
-, media = json_build_object('data', $1, 'type', 'audio', 'language', 'language')
-FROM src \
-WHERE "sentenceId" = $5 AND contributed_by  = src.contributor_id \
-returning "audio_path";`
+const updateContributionDetails = `insert into "contributions" ("action","sentenceId", "date", "contributed_by", "state_region", "country", "media")
+select 'completed', $1, now(), $2, $6, $7, json_build_object('data', $3, 'type', 'audio', 'language', $4, 'duration', $5);`;
+
+const updateContributionDetailsWithUserInput = `insert into "contributions" ("action","sentenceId", "date", "contributed_by", "state_region", "country", "media")
+select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4);`;
 
 const updateMaterializedViews = 'REFRESH MATERIALIZED VIEW contributions_and_demo_stats;REFRESH MATERIALIZED VIEW daily_stats_complete;REFRESH MATERIALIZED VIEW gender_group_contributions;REFRESH MATERIALIZED VIEW age_group_contributions;REFRESH MATERIALIZED VIEW language_group_contributions;REFRESH MATERIALIZED VIEW state_group_contributions;REFRESH MATERIALIZED VIEW language_and_state_group_contributions;'
 
@@ -234,5 +229,6 @@ module.exports = {
   addContributorQuery,
   getContributionHoursForLanguage,
   getMultiplierForHourGoal,
-  getOrderedMediaQuery
+  getOrderedMediaQuery,
+  updateContributionDetailsWithUserInput
 }

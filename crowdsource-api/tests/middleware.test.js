@@ -5,7 +5,7 @@ describe('middleware test', function () {
     const res = {
         status: jest.fn(function () { return res; }),
         send: jest.fn(),
-    };;
+    };
     const nextSpy = jest.fn();
 
     describe('validateUserInfo', function () {
@@ -161,6 +161,33 @@ describe('middleware test', function () {
         test('should call res.send() once if userName is a email Id', function () {
             const speakerDetail = { gender: "female", motherTongue: "Hindi", userName: "abc@gmail.com" };
             const req = { body: { speakerDetails: JSON.stringify(speakerDetail) }, file: { size: 1024000, mimeType: "audio/wav" } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should call fail if file object not present', function () {
+            const speakerDetail = { gender: "female", motherTongue: "Hindi", userName: "username" };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail) } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should call next() if file object is not present but userInput is present', function () {
+            const speakerDetail = { gender: "female", motherTongue: "Hindi", userName: "username" };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), userInput: "123456" } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should call res.send() if file object is not present but userInput is less than 5', function () {
+            const speakerDetail = { gender: "female", motherTongue: "Hindi", userName: "username" };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), userInput: "1234" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
