@@ -5,15 +5,37 @@ const $charts = $chartRow.find('.chart');
 
 const chartReg = {};
 
+function updatePieGraph(language, timeframe) {
+      am4core.disposeAllCharts();
+      $chartLoaders.show().addClass('d-flex');
+      $charts.addClass('d-none');
+      $chartLoaders.addClass('d-none');
+      buildGraphs(language, timeframe);
+}
+
+function getAgeGroupData(data, key) {
+  const years = 'years';
+  let formattedData = [];
+  data.forEach(item => {
+      item[key] === "" ? item[key] = 'Anonymous' : item[key] = `${item[key]} ${years}`;
+      formattedData.push(item);
+  });
+  return formattedData;
+}
+
 function buildGraphs(language, timeframe) {
   Promise.all([
     fetch(`/stats/contributions/age?language=${language}`)
-  ]).then((data) => {
+  ]).then(function (responses) {
+    return Promise.all(responses.map(function (response) {
+        return response.json();
+    }));
+}).then((data) => {
     try {
       $chartLoaders.hide().removeClass('d-flex');
       $charts.removeClass('d-none');
 
-      const ageGroupData = getAgeGroupData(data[2].data, 'age_group').sort((a, b) => Number(a.speakers) - Number(b.speakers));
+      const ageGroupData = getAgeGroupData(data[0].data, 'age_group').sort((a, b) => Number(a.speakers) - Number(b.speakers));
       drawAgeGroupChart(ageGroupData);
 
       //lazy load other css
@@ -86,5 +108,6 @@ const drawAgeGroupChart = (chartData) => {
 };
 
 module.exports = {
-  buildGraphs
+  buildGraphs,
+  updatePieGraph
 };
