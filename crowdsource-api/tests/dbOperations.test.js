@@ -324,15 +324,18 @@ describe("Running tests for dbOperations", () => {
         expect(spyDBany).toHaveBeenCalledWith(saveReportQuery, [contributor_id, sentenceId, reportText, language, source])
     });
 
-    test('Mark Skipped Contribution', () => {
+    test('Mark Skipped Contribution', async () => {
         const spyDBany = jest.spyOn(mockDB, 'any')
+        const spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
         const userId = '123'
         const sentenceId = '456'
         const userName = 'test user'
+        const contributor_id = 10
+        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
 
-        dbOperations.markContributionSkipped(userId, sentenceId, userName);
+        await dbOperations.markContributionSkipped(userId, sentenceId, userName);
 
-        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [userId, userName, sentenceId])
+        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [contributor_id, sentenceId])
     });
 
     test('Get Rewards info', () => {

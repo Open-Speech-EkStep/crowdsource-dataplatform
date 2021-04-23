@@ -148,7 +148,8 @@ const markContributionReported = "update contributions set action='reported' whe
 
 const markMediaReported = `update sentences set state='reported' where "sentenceId"=$3 and (select count(distinct reported_by) from reports where source='contribution' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='sentence_report_limit');`;
 
-const markContributionSkippedQuery = "update contributions set action='skipped' where contributed_by=(select contributor_id from contributors where user_name=$2 and contributor_identifier = $1) and \"sentenceId\"=$3;";
+const markContributionSkippedQuery = `insert into "contributions" ("action","sentenceId", "date", "contributed_by")
+select 'skipped', $2, now(), $1;`;
 
 const rewardsInfoQuery = `select milestone as contributions, grade as badge from reward_milestones mil \
 inner join reward_catalogue rew on mil.reward_catalogue_id = rew.id \

@@ -397,8 +397,9 @@ const saveReport = async (userId, sentenceId, reportText, language, userName, so
     }
 }
 
-const markContributionSkipped = (userId, sentenceId, userName) => {
-    return db.any(markContributionSkippedQuery, [userId, userName, sentenceId]);
+const markContributionSkipped = async (userId, sentenceId, userName) => {
+    const contributor_id = await getContributorId(userId, userName);
+    await db.any(markContributionSkippedQuery, [contributor_id, sentenceId]);
 }
 
 const getContributorId = async (userId, userName) => {
@@ -495,7 +496,7 @@ const getRewards = async (userId, userName, language, category) => {
                 isNewBadge,
                 generatedBadgeId,
                 badges
-            } = await createBadge(contributor_id, language, currentMilestoneData, category, isNewBadge, generatedBadgeId));
+            } = await createBadge(contributor_id, language, currentMilestoneData, category));
         }
     }
 
