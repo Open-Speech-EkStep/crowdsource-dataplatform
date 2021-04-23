@@ -1,0 +1,29 @@
+<div class="col-12 col-md-8 col-lg-10 offset-lg-1 mt-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white px-4" id="contribution_lang_navbar">
+        <div class="mx-2">
+            <%= __('Select the language for voluntary contribution') %>:
+        </div><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedLanguage" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedLanguage">
+            <div class="col-5 col-lg-5 col-xl-4" id="nav-bar-loader">
+                <div><span class="spinner"></span></div>
+            </div>
+            <ul class="navbar-nav text-primary cursor-pointer d-none" id="language-nav-bar">
+                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Hindi">हिंदी</li>
+                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Marathi">मराठी</li>
+                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Bengali">বাংলা</li>
+                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Tamil">தமிழ்</li>
+                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Telugu">తెలుగు</li>
+            </ul>
+            <ul class="navbar-nav text-primary cursor-pointer">
+                <li class="nav-item mx-2 mx-lg-4 options d-none" id="6th_option"></li>
+            </ul>
+            <ul class="navbar-nav text-primary cursor-pointer">
+                <li class="nav-item mx-2 mx-lg-4 options">
+                    <div id="Show_all_language" data-toggle="modal" data-target="#language-pop-up-wrapper" class="cursor-pointer">
+                        <%= __('Show All') %>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
