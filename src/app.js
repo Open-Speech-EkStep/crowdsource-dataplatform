@@ -156,9 +156,19 @@ router.get('/getAllInfo/:language', async function (req, res) {
     }
 });
 
-router.get('/sunoIndia/dashboard', function (req, res) {
+router.get('/sunoindia/dashboard', function (req, res) {
     const isCookiePresent = req.cookies.userId ? true : false;
-    res.render('modules/sunoIndia/dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
+    res.render('modules/sunoindia/dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
+});
+
+router.get('/likhoindia/dashboard', function (req, res) {
+    const isCookiePresent = req.cookies.userId ? true : false;
+    res.render('modules/likhoindia/dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
+});
+
+router.get('/dekhoindia/dashboard', function (req, res) {
+    const isCookiePresent = req.cookies.userId ? true : false;
+    res.render('modules/dekhoindia/dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
 });
 
 router.get('/temp', function (req, res) {
