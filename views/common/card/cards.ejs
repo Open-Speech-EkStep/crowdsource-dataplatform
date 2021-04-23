@@ -1,5 +1,6 @@
-<div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card1 mr-lg-3 justify-content-center align-items-center py-3" id="say">
-    <div id="say_container" class="row align-items-center py-lg-5 position-relative col-10 card_container px-0" style="height:100%">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/card.css">
+<div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card1 mr-lg-3 justify-content-center align-items-center py-3" id="left">
+    <div id="left_container" class="row align-items-center py-lg-5 position-relative col-10 card_container px-0" style="height:100%">
         <div class="col-8 px-0">
             <h1 class="display-5">
                 <%= __('Speak') %>
@@ -9,22 +10,22 @@
             </div>
         </div>
         <div class="col-4 text-right px-0">
-            <img src="../img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer say-logo img-fluid" data-target="#userModal" width="140px" height="140px">
+            <img src="../img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer left-logo img-fluid" data-target="#userModal" width="140px" height="140px">
         </div>
 
-        <div id="say-p-2" class="col-12 d-none position-absolute px-0" style="bottom:1rem">
+        <div id="left-p-2" class="col-12 d-none position-absolute px-0" style="bottom:1rem">
             <div>
                 <%= __('Contribute your voice to create an open data repository of Indian languages') %>
             </div>
-            <div class="col-5 col-lg-5 col-xl-4" id="say-loader">
+            <div class="col-5 col-lg-5 col-xl-4" id="left-loader">
                 <div><span class="spinner"></span></div>
             </div>
-            <div id="say-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
+            <div id="left-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
         </div>
     </div>
 </div>
-<div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card2 ml-lg-3 justify-content-center align-items-center py-3" id="listen">
-    <div id="listen_container" class="row position-relative align-items-center py-lg-5 col-10 card_container px-0" style="height:100%">
+<div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card2 ml-lg-3 justify-content-center align-items-center py-3" id="right">
+    <div id="right_container" class="row position-relative align-items-center py-lg-5 col-10 card_container px-0" style="height:100%">
         <div class="col-8 px-0">
             <h1 class="display-5">
                 <%= __('Listen') %>
@@ -35,16 +36,16 @@
         </div>
         <div class="col-4 text-right px-0">
             <a href="./validator-page.html">
-                <img src="../img/listen.svg" alt="validator" id="start_validating" width="140px" height="140px" class="cursor-pointer listen-logo img-fluid"></a>
+                <img src="../img/listen.svg" alt="validator" id="start_validating" width="140px" height="140px" class="cursor-pointer right-logo img-fluid"></a>
         </div>
-        <div class="col-12 d-none position-absolute px-0" id="listen-p-2" style="bottom:1rem">
+        <div class="col-12 d-none position-absolute px-0" id="right-p-2" style="bottom:1rem">
             <div>
                 <%= __('Help us by validating the recordings that others have contributed') %>
             </div>
-            <div class="col-7 col-lg-6 col-xl-6" id="listen-loader">
+            <div class="col-7 col-lg-6 col-xl-6" id="right-loader">
                 <div><span class="spinner"></span></div>
             </div>
-            <div id="listen-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
+            <div id="right-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
         </div>
     </div>
 </div>
