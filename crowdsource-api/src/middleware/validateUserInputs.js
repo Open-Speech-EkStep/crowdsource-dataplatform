@@ -22,7 +22,8 @@ const validateUserInputAndFile = function (req, res, next) {
     const speakerDetailsJson = JSON.parse(speakerDetails);
     const userName = speakerDetailsJson.userName;
     const isInvalidParams = userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName);
-    console.log("in method")
+    const MIN_INPUT_LENGTH = 5;
+    
     let isInvalidReqParams = false;
     if (req.file) {
         const file = req.file;
@@ -31,14 +32,11 @@ const validateUserInputAndFile = function (req, res, next) {
         isInvalidReqParams = isInvalidFileParam || isInvalidParams
     }
     else if (req.body.userInput) {
-        console.log("in userinput if")
-        isInvalidReqParams = isInvalidParams || req.body.userInput.length <= 5;
+        isInvalidReqParams = isInvalidParams || req.body.userInput.length <= MIN_INPUT_LENGTH;
     }
     else {
-        console.log("in else")
         isInvalidReqParams = true;
     }
-
 
     if (isInvalidReqParams) {
         return res.status(400).send("Bad request");
