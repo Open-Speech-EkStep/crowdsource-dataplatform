@@ -92,21 +92,7 @@
             <div class="justify-content-center align-items-center d-none" id="chartSpinner">
                 <div><span class="spinner"></span></div>
             </div>
-            <div id="indiaMapChart" style="width:100%"></div>
-            <div id="legendDiv" class="justify-content-evenly d-none">
-                <div id="quarter" class="quarter">
-                    <div class="legend-val">0 - 1hr</div>
-                </div>
-                <div id="half" class="half">
-                    <div class="legend-val">1 - 2hrs</div>
-                </div>
-                <div id="threeQuarter" class="threeQuarter">
-                    <div class="legend-val">2 - 4hrs</div>
-                </div>
-                <div id="full" class="full">
-                    <div class="legend-val">4+ hrs</div>
-                </div>
-            </div>
+            <%- include ../../../common/charts/map/map.ejs %>
         </div>
         <div class="col-12 col-md-6 col-lg-5 mt-xs-5 pr-lg-5">
             <div id="bar_charts_container">
@@ -126,24 +112,7 @@
         </div>
         <div class="col-12 col-md-12 col-lg-12 px-0 oflow-x-hid"></div>
     </div>
-    <div class="row mt-5 mb-5" id="view_all_btn">
-        <div class="col-12 d-flex justify-content-center">
-            <a href="./dashboard" id="viewAllDetailsBtn" class="btn btn-outline-primary text-primary">
-                <%= __('VIEW ALL DETAILS') %>
-            </a>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="modal-chart-wrapper" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg w-75 mw-100 h-75 mx-auto">
-        <div class="modal-content border-primary border-2 h-100 p-lg-5 px-2 py-4">
-            <div class="text-right" aria-label="Close"><a href="#" aria-hidden="true" data-dismiss="modal">
-                    <%= __('Hide details') %> &lt;
-                </a></div>
-            <div id="modal-chart" class="h-100"></div>
-        </div>
-    </div>
+    <%- include ../../../common/buttons/viewAllDetailBtn/viewAllDetailBtn.ejs%>
 </div>
 <%- include ../../../modals/speakerDetail.ejs %>
 <%- include ../../../modals/content-languages.ejs %>
