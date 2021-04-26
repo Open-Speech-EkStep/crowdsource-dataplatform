@@ -9,7 +9,6 @@ const args = require('yargs').argv;
 const fs = require('fs');
 const generateLocalisedHtmlFromEjs = require('./locales/utils/i18n-ejs-generator');
 
-
 gulp.task('common-ejs-gen', function () {
   return gulp.src(['views/common/**/*.ejs']).pipe(gulpFlatten()).pipe(gulp.dest('build/views/common'));
 });
@@ -77,8 +76,25 @@ gulp.task('js', function () {
     )
     .pipe(gulp.dest('public/js'));
 });
+
 gulp.task('css', function () {
-  return gulp.src(['assets/css/*.css', 'views/*.css']).pipe(cleanCss()).pipe(gulp.dest('public/css'));
+  return gulp.src(['assets/css/*.css']).pipe(gulpFlatten()).pipe(cleanCss()).pipe(gulp.dest('public/css'));
+});
+
+gulp.task('css-common', function () {
+  return gulp
+    .src(['views/common/**/*.css', 'views/style/common.css'])
+    .pipe(gulpFlatten())
+    .pipe(cleanCss())
+    .pipe(gulp.dest('public/css/common'));
+});
+
+gulp.task('css-sunoIndia', function () {
+  return gulp
+    .src(['views/modules/sunoIndia/**/*.css'])
+    .pipe(gulpFlatten())
+    .pipe(cleanCss())
+    .pipe(gulp.dest('public/css/sunoIndia'));
 });
 
 gulp.task(
@@ -86,6 +102,8 @@ gulp.task(
   gulp.parallel(
     'js',
     'css',
+    'css-common',
+    'css-sunoIndia',
     gulp.series('html', 'common-ejs-gen', 'html-gen-boloIndia', 'ejs-gen-sunoIndia', 'html-gen-sunoIndia')
   )
 );
