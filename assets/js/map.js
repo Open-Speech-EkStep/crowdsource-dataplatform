@@ -1,5 +1,4 @@
-const { calculateTime, formatTime, getJson, performAPIRequest } = require('./utils');
-console.log("Map chart");
+const { calculateTime, formatTime, performAPIRequest } = require('./utils');
 
 const statesInformation = [
   { id: 'IN-TG', state: 'Telangana', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
@@ -40,7 +39,7 @@ const statesInformation = [
   { id: 'IN-LK', state: 'Ladakh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 }
 ]
 
-var polygonSeries = undefined;
+let polygonSeries = undefined;
 const drawMap = function (response) {
   let statesData = [...statesInformation];
   const $legendDiv = $("#legendDiv");
@@ -169,7 +168,7 @@ function getLanguageSpecificData(data, lang) {
 }
 
 const generateIndiaMap = function (language="") {
-  const url = language !== "" ? '/aggregate-data-count?byState=true&byLanguage=true' : '/aggregate-data-count?byState=true';  
+  const url = language !== "" ? '/aggregate-data-count?byState=true&byLanguage=true' : '/aggregate-data-count?byState=true';
   performAPIRequest(url)
     .then((data) => {
       const response = language !== "" ? getLanguageSpecificData(data, language) : data;
@@ -180,7 +179,36 @@ const generateIndiaMap = function (language="") {
     });
 };
 
+function getStatistics(response) {
+  const $speakersData = $("#speaker-data");
+  const $speakersDataLoader = $speakersData.find(
+    "#loader1, #loader2, #loader3"
+  );
+  const $speakersDataSpeakerWrapper = $("#speakers-wrapper");
+  const $speakersDataSpeakerValue = $("#speaker-value");
+  const $speakersDataHoursWrapper = $("#hours-wrapper");
+  const $speakersDataHoursValue = $("#hour-value");
+  const $speakersDataLanguagesWrapper = $("#languages-wrapper");
+  const $speakersDataLanguagesValue = $("#languages-value");
+  $speakersDataLoader.removeClass("d-none");
+  $speakersDataHoursWrapper.addClass("d-none");
+  $speakersDataSpeakerWrapper.addClass("d-none");
+  $speakersDataLanguagesWrapper.addClass("d-none");
+
+  const { hours, minutes, seconds } = calculateTime(
+    Number(response.total_contributions) * 60 * 60
+  );
+  $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
+  $speakersDataSpeakerValue.text(response.total_speakers);
+  $speakersDataLanguagesValue.text(response.total_languages);
+  $speakersDataLoader.addClass("d-none");
+  $speakersDataHoursWrapper.removeClass("d-none");
+  $speakersDataSpeakerWrapper.removeClass("d-none");
+  $speakersDataLanguagesWrapper.removeClass("d-none");
+}
+
 module.exports = {
   generateIndiaMap,
+  getStatistics,
   drawMap,
 };
