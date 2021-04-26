@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bolo India: A crowdsourcing initiative for Indian languages (Beta)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
+    <meta name="description" content="Bolo India: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta property="og:title" content="<%= __('Bolo India: A crowdsourcing initiative for Indian languages')%>">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="<%= __('I\'ve contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?')%>">
+    <meta property="og:site_name" content="Bolo India ">
+    <meta property="og:url" content="https://boloindia.nplt.in">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/home.css">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/common.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
+</head>
+
+<body>
+<%- include ../../../common/header.ejs %>
+<div class="container-fluid supreme-container">
+    <div class="row">
+        <%- include ../../../common/languageNavBar/languageNavBar.ejs %>
+    </div>
+    <div class="m-auto row justify-content-center mt-lg-5 mx-lg-5">
+        <%- include('../../../common/card/cards.ejs',{left:{h1:"Speak",h2:"Contribute Your Voice","p1":"Contribute your voice to create an open data repository of Indian languages",img:"../img/say.svg"},right:{h1:"Listen",h2:"Validate What They Say","p1":"Help us by validating the recordings that others have contributed",img:"../img/listen.svg"}}); %>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 text-dark mt-4">
+            <h1 class="display-5 font-wt-900 site-blue lh-5 mt-lg-5">
+                <%= __('Bolo India: A crowdsourcing initiative for Indian languages') %>
+            </h1>
+            <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
+                <%= __('India needs to be Aatmanirbhar in the area of speech recognition in Indian languages.  Hence, we want to create an open data repository of many Indian voices. Bolo India invites you to volunteer contribute your voice for this cause.') %> <a class="ml-1" href="./about-us.html">
+                    <%= __('Know More') %>
+                </a>
+            </p>
+        </div>
+        <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="../img/home.svg" width="614.8" height="759.548" alt="Bolo India Infograph" class="img-fluid mr-n1"></div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 pt-lg-0 text-dark">
+            <h1 class="display-5 font-wt-900 site-blue lh-5">
+                <%= __('We rely on your contributions') %>
+            </h1>
+            <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
+                <%= __('The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.') %> <a class="ml-1" href="./about-us.html">
+                    <%= __('Know More') %>
+                </a>
+            </p>
+            <div class="row mt-5" id="speaker-data">
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader1">
+                    <div><span class="spinner"></span></div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader2">
+                    <div><span class="spinner"></span></div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader3">
+                    <div><span class="spinner"></span></div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="languages-wrapper">
+                    <p class="h4" id="languages-value"></p>
+                    <p class="mb-0 fs-h4">
+                        <%= __('languages contributed') %>
+                    </p>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="speakers-wrapper">
+                    <p class="h4" id="speaker-value"></p>
+                    <p class="mb-0 fs-h4">
+                        <%= __('speakers contributed') %>
+                    </p>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="hours-wrapper">
+                    <div class="mb-0 d-flex align-items-center"><span class="h4" id="hour-value"></span></div>
+                    <p class="mb-0 fs-h4">
+                        <%= __('hours recorded') %>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-5 col-lg-5 px-0 oflow-x-hid"></div>
+    </div>
+    <div class="row mb-5 lazy">
+        <div class="col-12 col-md-6 col-lg-6 ml-lg-auto pt-5 pt-lg-0 text-dark">
+            <div class="justify-content-center align-items-center d-none" id="chartSpinner">
+                <div><span class="spinner"></span></div>
+            </div>
+            <%- include ../../../common/charts/map/map.ejs %>
+        </div>
+        <div class="col-12 col-md-6 col-lg-5 mt-xs-5 pr-lg-5">
+            <div id="bar_charts_container">
+                <h4 class="h4 mb-4">
+                    <%= __('Top Languages') %>
+                </h4>
+                <div class="d-flex mb-3">
+                    <div class="form-check mr-5"><label class="form-check-label" for="flexRadioDefault1"><input class="form-check-input" type="radio" name="topLanguageChart" id="hours_chart" value="hours" checked="checked">
+                            <%= __('By hours of data contributed') %>
+                        </label></div>
+                    <div class="form-check"><label class="form-check-label" for="flexRadioDefault2"><input class="form-check-input" type="radio" name="topLanguageChart" id="speakers_chart" value="speakers">
+                            <%= __('By number of speakers') %>
+                        </label></div>
+                </div>
+                <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
+                    <div><span class="spinner"></span></div>
+                </div>
+                <%- include ../../../common/charts/barGraph/horizontalBarGraph.ejs %>
+            </div>
+        </div>
+        <div class="col-12 col-md-12 col-lg-12 px-0 oflow-x-hid"></div>
+    </div>
+    <%- include ../../../common/buttons/viewAllDetailBtn/viewAllDetailBtn.ejs%>
+</div>
+<%- include ../../../modals/speakerDetail.ejs %>
+<%- include ../../../modals/content-languages.ejs %>
+<%- include ../../../modals/say-listen-language.ejs %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<%- include ../../../common/footer.ejs %>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="../../js/sunoHome.js" id="home-page"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
+
+</body>
+</html>

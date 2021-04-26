@@ -6,6 +6,14 @@ const $charts = $chartRow.find('.chart');
 
 const chartReg = {};
 
+function updateBarGraph(language, timeframe) {
+  am4core.disposeAllCharts();
+  $chartLoaders.show().addClass('d-flex');
+  $charts.addClass('d-none');
+  $chartLoaders.addClass('d-none');
+  buildGraphs(language, timeframe);
+}
+
 const drawGenderChart = (chartData) => {
   const chartColors = ['#5d6d9a', '#85A8F9', '#B7D0FE', '#6C85CE', '#316AFF', '#294691'];
   am4core.ready(function () {
@@ -57,15 +65,20 @@ function buildGraphs(language, timeframe) {
   // $.fn.popover.Constructor.Default.whiteList.tbody = [];
   // $.fn.popover.Constructor.Default.whiteList.tr = [];
   // $.fn.popover.Constructor.Default.whiteList.td = [];
-
+  console.log("bar graph", language, timeframe);
   Promise.all([
-    fetch(`/contributions/gender?language=${language}`),
-  ]).then((data) => {
+    fetch(`/stats/contributions/gender?language=${language}`),
+  ]).then(function (responses) {
+    return Promise.all(responses.map(function (response) {
+        return response.json();
+    }));
+}).then((data) => {
     try {
       $chartLoaders.hide().removeClass('d-flex');
       $charts.removeClass('d-none');
+      console.log(data);
 
-      const genderData = getGenderData(data[1]);
+      const genderData = getGenderData(data[0]);
       // Draw gender chart
       drawGenderChart(genderData);
       //lazy load other css
@@ -87,6 +100,48 @@ function buildGraphs(language, timeframe) {
   });
 }
 
+const getGenderData = (genderData) => {
+  const genderOrder = ['male', 'female', 'anonymous', 'transgender'];
+  const formattedGenderData = [];
+  genderOrder.forEach(gender => {
+      genderData.data.forEach(item => {
+          let gType = item.gender;
+          if (item.gender === "") item.gender = 'anonymous';
+          if (item.gender.toLowerCase().indexOf('transgender') > -1 || item.gender.toLowerCase().indexOf('rather') > -1) gType = "transgender";
+          if (gender === gType) {
+              const genderType = gType.charAt(0).toUpperCase() + gType.slice(1);
+              const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(item.hours_contributed) * 60 * 60), true);
+              const contributedHours = formatTime(cHours, cMinutes, cSeconds);
+              if (gType === "transgender") {
+                  formattedGenderData.push({
+                      ...item,
+                      gender: "Others",
+                      tooltipText: `
+                              <div>
+                                  <h6 style="text-align: left; font-weight: bold">${item.gender}</h6>
+                                  <div>Contributed: <label>${contributedHours}</label></div>
+                                  <div style="text-align: left;">Speakers: <label>${item.speakers}</label></div>
+                              </div>`
+                  });
+              } else {
+                  formattedGenderData.push({
+                      ...item,
+                      gender: genderType,
+                      tooltipText: `
+                              <div>
+                                  <h6 style="text-align: left; font-weight: bold">${genderType}</h6>
+                                  <div>Contributed: <label>${contributedHours}</label></div>
+                                  <div style="text-align: left;">Speakers: <label>${item.speakers}</label></div>
+                              </div>`
+                  });
+              }
+          }
+      });
+  });
+  return formattedGenderData;
+}
+
 module.exports = {
-  buildGraphs
+  buildGraphs,
+  updateBarGraph
 };

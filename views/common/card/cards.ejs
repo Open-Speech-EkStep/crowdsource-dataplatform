@@ -1,0 +1,52 @@
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/card.css">
+<div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card1 mr-lg-3 justify-content-center align-items-center py-3" id="left">
+    <div id="left_container" class="row align-items-center py-lg-5 position-relative col-10 card_container px-0" style="height:100%">
+        <div class="col-8 px-0">
+            <h1 class="display-5">
+                <%= __(left.h1) %>
+            </h1>
+            <div class="mt-3 font-weight-bold">
+                <%= __(left.h2) %>
+            </div>
+        </div>
+        <div class="col-4 text-right px-0">
+            <img src="<%= left.img %>" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer left-logo img-fluid" data-target="#userModal" width="140px" height="140px">
+        </div>
+
+        <div id="left-p-2" class="col-12 d-none position-absolute px-0" style="bottom:1rem">
+            <div>
+                <%= __(left.p1) %>
+            </div>
+            <div class="col-5 col-lg-5 col-xl-4" id="left-loader">
+                <div><span class="spinner"></span></div>
+            </div>
+            <div id="left-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
+        </div>
+    </div>
+</div>
+<div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card2 ml-lg-3 justify-content-center align-items-center py-3" id="right">
+    <div id="right_container" class="row position-relative align-items-center py-lg-5 col-10 card_container px-0" style="height:100%">
+        <div class="col-8 px-0">
+            <h1 class="display-5">
+                <%= __(right.h1) %>
+            </h1>
+            <div class="mt-3 font-weight-bold">
+                <%= __(right.h2) %>
+            </div>
+        </div>
+        <div class="col-4 text-right px-0">
+            <a href="./validator-page.html">
+                <img src="<%= right.img %>" alt="validator" id="start_validating" width="140px" height="140px" class="cursor-pointer right-logo img-fluid"></a>
+        </div>
+        <div class="col-12 d-none position-absolute px-0" id="right-p-2" style="bottom:1rem">
+            <div>
+                <%= __(right.p1) %>
+            </div>
+            <div class="col-7 col-lg-6 col-xl-6" id="right-loader">
+                <div><span class="spinner"></span></div>
+            </div>
+            <div id="right-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
+        </div>
+    </div>
+</div>
+<script src="../js/card.js"></script>
