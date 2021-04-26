@@ -1,11 +1,9 @@
 const fetch = require('./fetch')
 const { calculateTime } = require('./utils');
 
-console.log("here in sunoIndia","lineGraph");
-
 const $chartRow = $('.chart-row');
-const $chartLoaders = $chartRow.find('.loader');
-const $charts = $chartRow.find('.chart');
+const $timelineLoader = $('#timeline-loader');
+const $timelineChart = $('#timeline-chart');
 
 const chartReg = {};
 
@@ -15,7 +13,7 @@ const drawTimelineChart = (timelineData) => {
 
     // Create chart instance
     const chart = am4core.create("timeline-chart", am4charts.XYChart);
-
+    
     const chartData = timelineData.data;
     for (let i = 0; i < chartData.length; i++) {
       if (!chartData[i].month) {
@@ -100,20 +98,35 @@ const drawTimelineChart = (timelineData) => {
   });
 };
 
-function buildGraphs(language, timeframe) {
+const disposeLineChart = (chartDiv) => {
+  if (chartReg[chartDiv]) {
+      chartReg[chartDiv].dispose();
+      delete chartReg[chartDiv];
+  }
+}
+
+function updateLineGraph(language, timeframe) {
+    disposeLineChart('timeline-chart');
+    $timelineLoader.show().addClass('d-flex');
+    $timelineChart.addClass('d-none');
+    buildLineGraphs(language, timeframe);
+}
+
+function buildLineGraphs(language, timeframe) {
   // $.fn.popover.Constructor.Default.whiteList.table = [];
   // $.fn.popover.Constructor.Default.whiteList.tbody = [];
   // $.fn.popover.Constructor.Default.whiteList.tr = [];
   // $.fn.popover.Constructor.Default.whiteList.td = [];
-
   Promise.all([
     fetch(`/timeline?language=${language}&timeframe=${timeframe}`),
-  ]).then((data) => {
+  ]).then(function (responses) {
+    return Promise.all(responses.map(function (response) {
+        return response.json();
+    }));
+}).then((data) => {
     try {
-      $chartLoaders.hide().removeClass('d-flex');
-      $charts.removeClass('d-none');
-
-
+      $timelineLoader.hide().removeClass('d-flex');
+      $timelineChart.removeClass('d-none');
       drawTimelineChart(data[0]);
 
       //lazy load other css
@@ -127,8 +140,8 @@ function buildGraphs(language, timeframe) {
       }, 2000);
     } catch (error) {
       console.log(error);
-      $chartLoaders.show().addClass('d-flex');
-      $charts.addClass('d-none');
+      $timelineLoader.show().addClass('d-flex');
+      $timelineChart.addClass('d-none');
     }
   }).catch((err) => {
     console.log(err);
@@ -136,5 +149,7 @@ function buildGraphs(language, timeframe) {
 }
 
 module.exports = {
-  buildGraphs,
+  buildLineGraphs,
+  disposeLineChart,
+  updateLineGraph
 };

@@ -1,0 +1,26 @@
+<div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card1 mr-lg-3 justify-content-center align-items-center py-3" id="say">
+    <div id="say_container" class="row align-items-center py-lg-5 position-relative col-10 card_container px-0" style="height:100%">
+        <div class="col-8 px-0">
+            <h1 class="display-5">
+                <%= __('Speak') %>
+            </h1>
+            <div class="mt-3 font-weight-bold">
+                <%= __('Contribute Your Voice') %>
+            </div>
+        </div>
+        <div class="col-4 text-right px-0">
+            <img src="../img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer say-logo img-fluid" data-target="#userModal" width="140px" height="140px">
+        </div>
+
+        <div id="say-p-2" class="col-12 d-none position-absolute px-0" style="bottom:1rem">
+            <div>
+                <%= __('Contribute your voice to create an open data repository of Indian languages') %>
+            </div>
+            <div class="col-5 col-lg-5 col-xl-4" id="say-loader">
+                <div><span class="spinner"></span></div>
+            </div>
+            <div id="say-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
+        </div>
+    </div>
+</div>
+<script src="../../js/card.js"></script>
