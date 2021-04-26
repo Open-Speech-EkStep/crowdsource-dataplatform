@@ -20,7 +20,7 @@ const {
     getAllDetails,
     getAllInfo,
     updateTablesAfterValidation,
-    getAudioClip,
+    getMediaObject,
     insertFeedback,
     saveReport,
     markContributionSkipped,
@@ -38,7 +38,8 @@ const {
     validateUserInputForFeedback,
     validateInputForSkip,
     validateRewardsInput,
-    validateRewardsInfoQuery
+    validateRewardsInfoQuery,
+    validateContributedMediaInput
 } = require('./middleware/validateUserInputs');
 
 // const Ddos = require('ddos');
@@ -162,7 +163,7 @@ router.get('/contributions/:language', (req, res) => getValidationMedia(req, res
 
 router.post('/validate', (req, res) => updateTablesAfterValidation(req, res))
 
-router.post('/contributions', (req, res) => getAudioClip(req, res, objectStorage))
+router.post('/contributed-media/:source/:entityId', validateContributedMediaInput, (req, res) => getMediaObject(req, res, objectStorage))
 
 router.post('/report', async (req, res) => {
     const userId = req.cookies.userId || "";

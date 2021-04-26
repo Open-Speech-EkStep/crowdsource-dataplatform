@@ -120,4 +120,12 @@ const validateRewardsInfoQuery = function (req, res, next) {
     next();
 }
 
-module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery }
+const validateContributedMediaInput = (req, res, next) => {
+    if (!(req.params && req.params.entityId && req.params.source && ["contribute", "validate"].includes(req.params.source))) {
+        return res.status(400).send('Invalid params.');
+    }
+
+    next();
+}
+
+module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery, validateContributedMediaInput }

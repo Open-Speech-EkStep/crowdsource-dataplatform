@@ -20,7 +20,8 @@ const {
     addValidationQuery,
     updateMediaWithValidatedState,
     feedbackInsertion,
-    getAudioPath,
+    getPathFromContribution,
+    getPathFromMasterDataSet,
     saveReportQuery,
     getMediaForLaunch,
     markContributionSkippedQuery,
@@ -203,18 +204,14 @@ const getValidationMedia = function (req, res) {
         });
 };
 
-const getAudioClip = function (req, res, objectStorage) {
-    if (!(req.body && req.body.contributionId)) {
-        res.status(400).send('No file selected.');
-        return;
-    }
-
-    const contributionId = req.body.contributionId;
-    db.one(getAudioPath, [contributionId]).then(async (data) => {
+const getMediaObject = (req, res, objectStorage) => {
+    const entityId = req.params.entityId;
+    const query = req.params.source == "contribute" ? getPathFromMasterDataSet : getPathFromContribution;
+    db.one(query, [entityId]).then(async (data) => {
         const downloadFile = downloader(objectStorage);
 
         try {
-            const file = await downloadFile(data.audio_path);
+            const file = await downloadFile(data.path);
 
             if (file == null) {
                 res.sendStatus(404);
@@ -226,10 +223,10 @@ const getAudioClip = function (req, res, objectStorage) {
             res.sendStatus(500);
         }
     })
-        .catch((err) => {
-            console.log(err);
-            res.sendStatus(500);
-        });
+    .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+    });
 
 }
 
@@ -562,7 +559,7 @@ module.exports = {
     updateTablesAfterValidation,
     getAllDetails,
     getAllInfo,
-    getAudioClip,
+    getMediaObject,
     getTopLanguageByHours,
     getAggregateDataCount,
     getTopLanguageBySpeakers,

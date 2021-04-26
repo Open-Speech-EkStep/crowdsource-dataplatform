@@ -133,7 +133,8 @@ const getGenderData = 'select data."gender", count (*) from (select con."gender"
 
 const feedbackInsertion = 'Insert into feedbacks (subject,feedback,language) values ($1,$2,$3);'
 
-const getAudioPath = `select media ->> 'data' as audio_path from contributions where contribution_id = $1;`
+const getPathFromContribution = `select media ->> 'data' as path from contributions where contribution_id = $1;`
+const getPathFromMasterDataSet = `select media ->> 'data' as path from dataset_row where dataset_row_id = $1;`
 
 const saveReportQuery = `
 INSERT INTO reports (reported_by,sentence_id,report_text,language,source) \
@@ -209,7 +210,7 @@ module.exports = {
   addValidationQuery,
   updateMediaWithValidatedState,
   feedbackInsertion,
-  getAudioPath,
+  getPathFromContribution,
   saveReportQuery,
   getMediaForLaunch,
   markContributionSkippedQuery,
@@ -230,5 +231,6 @@ module.exports = {
   getContributionHoursForLanguage,
   getMultiplierForHourGoal,
   getOrderedMediaQuery,
-  updateContributionDetailsWithUserInput
+  updateContributionDetailsWithUserInput,
+  getPathFromMasterDataSet
 }
