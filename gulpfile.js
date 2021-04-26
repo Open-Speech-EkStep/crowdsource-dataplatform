@@ -1,21 +1,39 @@
 const gulp = require('gulp');
 const minify = require('gulp-minify');
+const gulpFlatten = require('gulp-flatten');
 const cleanCss = require('gulp-clean-css');
 const htmlmin = require('gulp-htmlmin');
 const browserify = require('gulp-browserify');
 const replace = require('gulp-replace-task');
 const args = require('yargs').argv;
 const fs = require('fs');
-const generateLocalisedHtmlFromEjs = require('./locales/utils/i18n-ejs-generator')
+const generateLocalisedHtmlFromEjs = require('./locales/utils/i18n-ejs-generator');
 
-gulp.task('ejs', function (callback) {
+
+gulp.task('common-ejs-gen', function () {
+  return gulp.src(['views/common/**/*.ejs']).pipe(gulpFlatten()).pipe(gulp.dest('build/views/common'));
+});
+
+gulp.task('html-gen-boloIndia', function (callback) {
   generateLocalisedHtmlFromEjs(`${__dirname}/views`, `${__dirname}/public`);
   callback();
 });
 
+gulp.task('html-gen-sunoIndia', function (callback) {
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/public`, 'sunoIndia');
+  callback();
+});
+
+gulp.task('ejs-gen-sunoIndia', function () {
+  return gulp
+    .src(['views/modules/sunoIndia/**/*.ejs'])
+    .pipe(gulpFlatten())
+    .pipe(gulp.dest('build/views/sunoIndia'));
+});
+
 gulp.task('html', function () {
   return gulp
-    .src(['views/*.ejs'])
+    .src(['views/*'])
     .pipe(
       htmlmin({
         collapseWhitespace: false,
@@ -33,20 +51,22 @@ gulp.task('js', function () {
   var filename = 'env.config.' + env + '.json';
   var settings = JSON.parse(fs.readFileSync('assets/config/' + filename, 'utf8'));
   return gulp
-    .src(['assets/js/*.js','views/*.js'])
+    .src(['assets/js/*.js', 'views/*.js'])
     .pipe(
       browserify({
         transform: ['babelify'],
       })
     )
-    .pipe(replace({
-      patterns: [
-        {
-          match: 'apiUrl',
-          replacement: settings.apiUrl
-        },
-      ]
-    }))
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'apiUrl',
+            replacement: settings.apiUrl,
+          },
+        ],
+      })
+    )
     .pipe(
       minify({
         ext: {
@@ -58,10 +78,14 @@ gulp.task('js', function () {
     .pipe(gulp.dest('public/js'));
 });
 gulp.task('css', function () {
-  return gulp
-    .src(['assets/css/*.css','views/*.css'])
-    .pipe(cleanCss())
-    .pipe(gulp.dest('public/css'));
+  return gulp.src(['assets/css/*.css', 'views/*.css']).pipe(cleanCss()).pipe(gulp.dest('public/css'));
 });
 
-gulp.task('default', gulp.parallel('js', 'css', gulp.series('html', 'ejs')));
+gulp.task(
+  'default',
+  gulp.parallel(
+    'js',
+    'css',
+    gulp.series('html', 'common-ejs-gen', 'html-gen-boloIndia', 'ejs-gen-sunoIndia', 'html-gen-sunoIndia')
+  )
+);
