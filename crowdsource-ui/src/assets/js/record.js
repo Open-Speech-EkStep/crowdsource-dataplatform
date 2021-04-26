@@ -349,7 +349,7 @@ const initialize = () => {
         const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
         const reqObj = {
-            sentenceId: crowdSource.sentences[currentIndex].sentenceId,
+            sentenceId: crowdSource.sentences[currentIndex].dataset_row_id,
             userName: speakerDetails.userName
         };
         fetch('/skip', {
@@ -383,7 +383,7 @@ const initialize = () => {
         })
         fd.append('audio_data', crowdSource.audioBlob);
         fd.append('speakerDetails', speakerDetails);
-        fd.append('sentenceId', crowdSource.sentences[currentIndex].sentenceId);
+        fd.append('sentenceId', crowdSource.sentences[currentIndex].dataset_row_id);
         fd.append('state', localStorage.getItem('state_region') || "");
         fd.append('country', localStorage.getItem('country') || "");
         fd.append('audioDuration', crowdSource.audioDuration);
@@ -450,7 +450,7 @@ const handleSubmitFeedback = function () {
     const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
     const reqObj = {
-        sentenceId: crowdSource.sentences[currentIndex].sentenceId,
+        sentenceId: crowdSource.sentences[currentIndex].dataset_row_id,
         reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
         language: contributionLanguage,
         userName: speakerDetails.userName,

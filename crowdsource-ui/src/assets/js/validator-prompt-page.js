@@ -227,7 +227,7 @@ function recordValidation(action) {
     if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
         validationCount++;
     }
-    const sentenceId = validationSentences[currentIndex].sentenceId
+    const sentenceId = validationSentences[currentIndex].dataset_row_id
     const contribution_id = validationSentences[currentIndex].contribution_id
     fetch('/validate', {
         method: 'POST',
