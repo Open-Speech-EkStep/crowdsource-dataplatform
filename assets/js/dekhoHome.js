@@ -1,4 +1,5 @@
-const {drawMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
+const {constructChart}= require('./horizontalBarGraph');
+const {drawMap,getStatistics} = require('./map');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest} = require('./utils')
 const {
   setSpeakerDetails,
@@ -19,8 +20,18 @@ const {
   CONTRIBUTION_LANGUAGE,
 } = require('./constants');
 
-
-
+const chartReg = {};
+function showByHoursChart() {
+  if (chartReg["chart"]) {
+    chartReg["chart"].dispose();
+  }
+  const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
+  constructChart(
+    JSON.parse(topLanguagesByHoursData),
+    "total_contributions",
+    "language"
+  );
+}
 
 const getDefaultTargetedDiv = function (key, value, $sayListenLanguage) {
   let targetIndex = 0;
