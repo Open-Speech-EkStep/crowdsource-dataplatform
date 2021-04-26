@@ -21,7 +21,7 @@ with ins ("dataset_row_id") as \
 select \'assigned\', dataset_row."dataset_row_id", now(), con."contributor_id" \
 from dataset_row inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and coalesce(dataset_row.state,'')!= 'reported' \
 left join "contributions" cont on cont."dataset_row_id"= dataset_row."dataset_row_id" and cont.contributed_by = con.contributor_id \
-where language = $4 and label=$3 \
+where language = $4 and difficulty_level=$3 \
 and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
 group by dataset_row."dataset_row_id", con."contributor_id" \
 order by dataset_row."dataset_row_id" \
@@ -40,7 +40,7 @@ with ins ("dataset_row_id") as \
 select \'assigned\', dataset_row."dataset_row_id", now(), con."contributor_id" \
 from dataset_row inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and coalesce(dataset_row.state,'')!= 'reported' \
 left join "contributions" cont on cont."dataset_row_id"= dataset_row."dataset_row_id" and cont.contributed_by = con.contributor_id \
-where language = $4 and label=$3 \
+where language = $4 and difficulty_level=$3 \
 and (coalesce(cont.action,\'assigned\')=\'assigned\' or (cont.action=\'completed\' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
 and dataset_row."dataset_row_id"= ANY($9::int[])\
 group by dataset_row."dataset_row_id", con."contributor_id" \
@@ -60,7 +60,7 @@ with ins ("dataset_row_id") as \
 select \'assigned\', dataset_row."dataset_row_id", now(), con."contributor_id" \
 from dataset_row inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2  and coalesce(dataset_row.state,'')!= 'reported' \
 left join "contributions" cont on cont."dataset_row_id"= dataset_row."dataset_row_id" and cont.contributed_by = con.contributor_id \
-where language = $4 and label=$3 \
+where language = $4 and difficulty_level=$3 \
 and (coalesce(cont.action,'assigned')='assigned' or (cont.action='completed' and cont.contributed_by != con.contributor_id) or (cont.action=\'skipped\' and cont.contributed_by != con.contributor_id)) \
 group by dataset_row."dataset_row_id", con."contributor_id" \
 order by RANDOM() \
@@ -79,7 +79,7 @@ with ins ("dataset_row_id") as \
 select \'assigned\', dataset_row."dataset_row_id", now(), con."contributor_id" \
 from dataset_row inner join "contributors" con on con."contributor_identifier" = $1 and user_name=$2 and coalesce(dataset_row.state,'')!= 'reported' \
 left join "contributions" cont on cont."dataset_row_id"= dataset_row."dataset_row_id" \
-where dataset_row."state" is null and language = $4 and label=$3 and cont."action" is NULL limit 5 \
+where dataset_row."state" is null and language = $4 and difficulty_level=$3 and cont."action" is NULL limit 5 \
   returning "dataset_row_id") \
 select ins."dataset_row_id", dataset_row.media ->> 'data' as sentence from ins  \
   inner join dataset_row on dataset_row."dataset_row_id" = ins."dataset_row_id";`
@@ -89,7 +89,7 @@ select dataset_row."dataset_row_id", dataset_row.media ->> 'data' as media_data
 from dataset_row 
 left join "contributors" con on con."contributor_identifier"=$1 and user_name=$2
 left join "contributions" cont on cont."dataset_row_id"= dataset_row."dataset_row_id" and cont.contributed_by = con.contributor_id 
-where language=$4 and label=$3 and coalesce(dataset_row.state,'')!= 'reported' and type=$5
+where language=$4 and difficulty_level=$3 and coalesce(dataset_row.state,'')!= 'reported' and type=$5
 and (cont.action is null or (coalesce(cont.action,'')='completed' and cont.contributed_by != con.contributor_id) or (coalesce(cont.action,'')='skipped' and cont.contributed_by != con.contributor_id)) 
 group by dataset_row."dataset_row_id", dataset_row.media ->> 'data' 
 order by dataset_row."dataset_row_id"
