@@ -24,4 +24,3 @@ const awsUploader = function (filename, userName, userId, language) {
 };
 
 module.exports = { awsUploader }
-

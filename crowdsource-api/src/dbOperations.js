@@ -532,7 +532,8 @@ const updateDbWithUserInput = async (
     userInput,
     sentenceId,
     state,
-    country) => {
+    country,
+    cb) => {
     const contributor_id = await getContributorId(userId, userName)
 
     db.any(updateContributionDetailsWithUserInput, [

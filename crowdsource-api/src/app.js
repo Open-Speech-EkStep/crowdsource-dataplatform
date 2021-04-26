@@ -200,21 +200,20 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
     const userName = speakerDetailsJson.userName;
     const userId = req.cookies.userId;
     const language = speakerDetailsJson.language;
-    const audioPath = `raw/landing/${language}/audio/users/${userId}/${userName}/uploads/${file.filename}`;
-
     const state = req.body.state || "";
     const country = req.body.country || "";
 
-    if (file) {        
+    if (file) {
         const uploadFile = uploader(objectStorage)
 
         uploadFile(file.path, userName, userId, language)
             .then(() => {
-                updateDbWithAudioPath(audioPath, sentenceId, userId, userName, state, country, audioDuration, language, 
+                const audioPath = `raw/landing/${language}/audio/users/${userId}/${userName}/uploads/${file.filename}`;
+                updateDbWithAudioPath(audioPath, sentenceId, userId, userName, state, country, audioDuration, language,
                     (resStatus, resBody) => {
-                    removeTempFile(file);
-                    res.status(resStatus).send(resBody);
-                });
+                        removeTempFile(file);
+                        res.status(resStatus).send(resBody);
+                    });
             })
             .catch((err) => {
                 console.error(err);
@@ -222,16 +221,15 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
             });
     }
     else {
-        updateDbWithUserInput(userName, userId, language, userInput, sentenceId, state, country)
-        .then(() => {
-            res.sendStatus(200, { success: true });
-        })
-        .catch((err) => {
-            console.error(err);
-            res.sendStatus(500);
-        });
+        updateDbWithUserInput(userName, userId, language, userInput, sentenceId, state, country,
+            (resStatus, resBody) => {
+                res.status(resStatus).send(resBody);
+            })
+            .catch((err) => {
+                console.error(err);
+                res.sendStatus(500);
+            });
     }
-    
 });
 
 router.post('/audio/snr', async (req, res) => {
