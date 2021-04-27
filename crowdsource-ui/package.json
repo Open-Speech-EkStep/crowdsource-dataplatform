@@ -1,0 +1,60 @@
+{
+    "name": "crowdsource-ui",
+    "version": "1.0.0",
+    "description": "",
+    "main": "",
+    "scripts": {
+        "gulp": "gulp",
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ekstep2/ektep-crowdsource-platform.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ekstep2/ektep-crowdsource-platform/issues"
+    },
+    "homepage": "https://github.com/ekstep2/ektep-crowdsource-platform#readme",
+    "dependencies": {
+        "compression": "^1.7.4",
+        "cookie-parser": "^1.4.5",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "ejs": "2.5.5",
+        "express": "^4.17.1",
+        "express-session": "^1.17.1",
+        "helmet": "^3.22.0",
+        "i18n": "^0.13.2",
+        "jquery": "^3.5.1",
+        "jsonwebtoken": "^8.5.1",
+        "node-fetch": "^2.6.1",
+        "pm2": "^4.5.6",
+        "regenerator-runtime": "^0.13.7"
+    },
+    "engines": {
+        "node": "12.16.0"
+    },
+    "devDependencies": {
+        "@babel/preset-env": "^7.12.11",
+        "babelify": "^10.0.0",
+        "del": "^5.1.0",
+        "fetch-mock": "^9.11.0",
+        "gulp": "^4.0.2",
+        "gulp-browserify": "^0.5.1",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-htmlmin": "^5.0.1",
+        "gulp-imagemin": "^7.1.0",
+        "gulp-flatten": "^0.4.0",
+        "gulp-minify": "^3.1.0",
+        "gulp-replace-task": "^2.0.1",
+        "jest": "^26.6.3",
+        "jest-when": "^3.2.1"
+    },
+    "jest": {
+        "setupFiles": [
+            "<rootDir>/test-env.js"
+        ]
+    }
+}

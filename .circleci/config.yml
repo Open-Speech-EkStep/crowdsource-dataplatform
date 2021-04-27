@@ -31,14 +31,14 @@ jobs:
       name: node/default
     steps:
       - *fast-checkout
-      - node/install-packages
       - run:
           name: Gauge tests
           command: |
             sudo apt-get update
             sudo apt-get install -y git-all gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libgbm-dev libappindicator1 libnss3 lsb-release xdg-utils wget
             sudo rm -rf /var/lib/apt/lists/*
-            npm run functional_test -- --env <<parameters.env_name>>
+            npm run install:ft
+            npm run functional_test -- -- --env <<parameters.env_name>>
 
   approve_to_deploy:
     docker:
@@ -57,21 +57,21 @@ jobs:
     steps:
       - *fast-checkout
       - node/install-packages
-      - run: npm run gulp -- --env=<< parameters.env_name >>
+      - run: npm run gulp -- -- --env=<< parameters.env_name >>
       - aws-s3/sync:
           arguments: |
             --cache-control "max-age=8387800" \
             --exclude "*" \
             --include "*.svg" \
             --include "*.jpeg"
-          from: public/
+          from: crowdsource-ui/target/
           to: 's3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>'
       - aws-s3/sync:
           arguments: |
             --cache-control "max-age=0, s-maxage=600" \
             --exclude "*.svg" \
             --exclude "*.jpeg"
-          from: public/
+          from: crowdsource-ui/target/
           to: 's3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>'
       - run: aws cloudfront create-invalidation --distribution-id << parameters.distributionId >> --paths '/*'
 
@@ -83,7 +83,6 @@ jobs:
       name: node/default
     steps:
       - *fast-checkout
-      - node/install-packages
       - run:
           name: Run DB Migrate
           command: |
@@ -91,7 +90,8 @@ jobs:
             export DATABASE_URL=postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@${DB_HOST_AWS}/<< parameters.db_name >>
             echo << parameters.db_name >>
             echo $DATABASE_URL
-            npx db-migrate up
+            npm run install:api
+            cd crowdsource-api && npx db-migrate up
 
   eks_fargate_deployment:
     executor: aws-eks/python3
@@ -115,9 +115,9 @@ jobs:
             aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
             ENV_IMAGE_NAME=${AWS_ECR_ACCOUNT_URL}/${REPO}:<< parameters.env-name >>
             ENV_IMAGE_NAME_DB_REFRESHER=${AWS_ECR_ACCOUNT_URL}/${DB_REFRESHER_REPO}:<< parameters.env-name >>
-            kubectl -n << parameters.env-name >> apply  -f ${HOME}/project/deployments/k8s/autoscaler_<< parameters.env-name >>.yaml
-            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/deployments/k8s/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
-            sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/deployments/k8s/dbrefresher.yaml | kubectl -n << parameters.env-name >> apply  -f -
+            kubectl -n << parameters.env-name >> apply  -f ${HOME}/project/crowdsource-api/k8s-deployments/autoscaler_<< parameters.env-name >>.yaml
+            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
+            sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env-name >> apply  -f -
           name: Deploy container
 
 workflows:
@@ -151,6 +151,7 @@ workflows:
           name: push_dev_image
           repo: ${REPO}
           tag: dev
+          path: ./crowdsource-api
           requires:
             - migrate_dev_aws
 
@@ -158,6 +159,7 @@ workflows:
           name: push_dev_db_refresher_image
           repo: ${DB_REFRESHER_REPO}
           dockerfile: Dockerfile-dbRefresh
+          path: ./db-refresher
           tag: "dev,test,prod"
           requires:
             - migrate_dev_aws
