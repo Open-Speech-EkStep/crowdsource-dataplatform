@@ -50,7 +50,7 @@ gulp.task('js', function () {
   var filename = 'env.config.' + env + '.json';
   var settings = JSON.parse(fs.readFileSync('assets/config/' + filename, 'utf8'));
   return gulp
-    .src(['assets/js/*.js', 'views/*.js'])
+    .src(['assets/js/*.js'])
     .pipe(
       browserify({
         transform: ['babelify'],
@@ -77,6 +77,58 @@ gulp.task('js', function () {
     .pipe(gulp.dest('public/js'));
 });
 
+gulp.task('js-common', function () {
+  var env = args.env || 'local';
+
+  var filename = 'env.config.' + env + '.json';
+  var settings = JSON.parse(fs.readFileSync('assets/config/' + filename, 'utf8'));
+  return gulp
+    .src(['views/common/**/*.js'])
+    .pipe(gulpFlatten())
+    .pipe(
+      browserify({
+        transform: ['babelify'],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'apiUrl',
+            replacement: settings.apiUrl,
+          },
+        ],
+      })
+    )
+    .pipe(gulp.dest('public/js/common'));
+});
+
+gulp.task('js-sunoIndia', function () {
+  var env = args.env || 'local';
+
+  var filename = 'env.config.' + env + '.json';
+  var settings = JSON.parse(fs.readFileSync('assets/config/' + filename, 'utf8'));
+  return gulp
+    .src(['views/modules/sunoIndia/**/*.js'])
+    .pipe(gulpFlatten())
+    .pipe(
+      browserify({
+        transform: ['babelify'],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'apiUrl',
+            replacement: settings.apiUrl,
+          },
+        ],
+      })
+    )
+    .pipe(gulp.dest('public/js/sunoIndia'));
+});
+
 gulp.task('css', function () {
   return gulp.src(['assets/css/*.css']).pipe(gulpFlatten()).pipe(cleanCss()).pipe(gulp.dest('public/css'));
 });
@@ -101,6 +153,8 @@ gulp.task(
   'default',
   gulp.parallel(
     'js',
+    'js-common',
+    'js-sunoIndia',
     'css',
     'css-common',
     'css-sunoIndia',
