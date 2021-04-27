@@ -1,15 +1,15 @@
-const {constructChart} = require('./horizontalBarGraph');
-const {drawMap,getStatistics} = require('./map');
-const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest} = require('./utils')
+const {constructChart}= require('../common/horizontalBarGraph');
+const {drawMap,getStatistics} = require('../common/map');
+const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
 const {
   setSpeakerDetails,
   setUserModalOnShown,
   setUserNameOnInputFocus,
   setStartRecordingBtnOnClick
-} = require('./userDetails');
+} = require('../common/userDetails');
 
-const {updateHrsForCards} = require('./card')
-const {setLangNavBar} = require('./languageNavBar')
+const {updateHrsForCards} = require('../common/card')
+const {setLangNavBar} = require('../common/languageNavBar')
 
 const {
   DEFAULT_CON_LANGUAGE,
@@ -17,7 +17,8 @@ const {
   TOP_LANGUAGES_BY_SPEAKERS,
   AGGREGATED_DATA_BY_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
-} = require('./constants');
+} = require('../common/constants');
+
 
 const chartReg = {};
 function showByHoursChart() {
@@ -28,6 +29,20 @@ function showByHoursChart() {
   constructChart(
     JSON.parse(topLanguagesByHoursData),
     "total_contributions",
+    "language"
+  );
+}
+
+function showBySpeakersChart() {
+  if (chartReg["chart"]) {
+    chartReg["chart"].dispose();
+  }
+  const topLanguagesBySpeakers = localStorage.getItem(
+    TOP_LANGUAGES_BY_SPEAKERS
+  );
+  constructChart(
+    JSON.parse(topLanguagesBySpeakers),
+    "total_speakers",
     "language"
   );
 }
