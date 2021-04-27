@@ -1,13 +1,12 @@
-const {constructChart}= require('./horizontalBarGraph');
+const {constructChart} = require('./horizontalBarGraph');
 const {drawMap,getStatistics} = require('./map');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest} = require('./utils')
 const {
   setSpeakerDetails,
   setUserModalOnShown,
   setUserNameOnInputFocus,
-  setGenderRadioButtonOnClick,
   setStartRecordingBtnOnClick
-} = require('./speakerDetails');
+} = require('./userDetails');
 
 const {updateHrsForCards} = require('./card')
 const {setLangNavBar} = require('./languageNavBar')
@@ -171,23 +170,9 @@ function initializeBlock() {
   });
 
   setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
-  setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
   setStartRecordingBtnOnClick();
   setUserModalOnShown($userName);
-
-  $('input[name = "gender"]').on('change', function() {
-    const selectedGender = document.querySelector(
-      'input[name = "gender"]:checked'
-    );
-    const options = $("#transgender_options");
-    if(selectedGender.value === "others") {
-      options.removeClass("d-none");
-    } else {
-      options.addClass("d-none");
-    }
-  });
-
   getStatsSummary();
 
 }
