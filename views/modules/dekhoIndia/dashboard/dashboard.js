@@ -1,18 +1,14 @@
 const { updateLineGraph } = require('../common/lineGraph');
-const { updatePieGraph } = require('../common/pieGraph');
-const { updateBarGraph } = require('../common/verticalBarGraph');
 const { generateIndiaMap } = require('../common/map');
 const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('../common/speakerDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString, getJson } = require('../common/utils');
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString } = require('../common/utils');
 const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES } = require('../common/constants');
 const fetch = require('../common/fetch');
-const { data } = require('jquery');
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
 
 const fetchDetail = (language) => {
-    const byLanguage = language ? true : false;
     const url = language ? '/aggregate-data-count?byLanguage=true' : '/aggregate-data-count'
     return fetch(url).then((data) => {
         if (!data.ok) {
