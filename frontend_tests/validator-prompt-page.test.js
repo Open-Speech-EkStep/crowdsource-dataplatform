@@ -45,8 +45,8 @@ describe("addListeners", () => {
       // require('../assets/js/validator-prompt-page')
       // addListeners();
       // document.getElementById('instructions-link').click();
-      // // expect($("#validator-page-content").hasClass("d-none")).toEqual(true);
-      // // expect(showInstructions).toHaveBeenCalled();
+      // expect($("#validator-page-content").hasClass("d-none")).toEqual(true);
+      // expect(showInstructions).toHaveBeenCalled();
       // jest.clearAllMocks();
     });
   });
@@ -72,7 +72,7 @@ describe("setAudioPlayer", () => {
     // };
     // const play = $('#play');
     // const pause = $('#pause');
-    //
+
     // setAudioPlayer();
     // play.click();
 
@@ -86,7 +86,7 @@ describe("setAudioPlayer", () => {
     // };
     // const pause = $('#pause');
     // const replay = $('#replay');
-    //
+
     // setAudioPlayer();
     // pause.click();
 
@@ -102,7 +102,7 @@ describe("setAudioPlayer", () => {
     // };
     // const pause = $('#pause');
     // const replay = $('#replay');
-    //
+
     // setAudioPlayer();
     // replay.click();
 

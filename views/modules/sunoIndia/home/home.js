@@ -5,9 +5,8 @@ const {
   setSpeakerDetails,
   setUserModalOnShown,
   setUserNameOnInputFocus,
-  setGenderRadioButtonOnClick,
   setStartRecordingBtnOnClick
-} = require('../common/speakerDetails');
+} = require('../common/userDetails');
 
 const {updateHrsForCards} = require('../common/card')
 const {setLangNavBar} = require('../common/languageNavBar')
@@ -186,23 +185,9 @@ function initializeBlock() {
   });
 
   setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
-  setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
   setStartRecordingBtnOnClick();
   setUserModalOnShown($userName);
-
-  $('input[name = "gender"]').on('change', function() {
-    const selectedGender = document.querySelector(
-      'input[name = "gender"]:checked'
-    );
-    const options = $("#transgender_options");
-    if(selectedGender.value === "others") {
-      options.removeClass("d-none");
-    } else {
-      options.addClass("d-none");
-    }
-  });
-
   getStatsSummary();
 
 }
