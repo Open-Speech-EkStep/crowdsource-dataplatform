@@ -1,0 +1,65 @@
+{
+    "name": "ektep-crowdsource-platform",
+    "version": "1.0.0",
+    "description": "This will hold the crowdsourcing platform to be used to store voice data from various speakers",
+    "main": "server.js",
+    "scripts": {
+        "start": "node src/server.js",
+        "watch": "nodemon src/server.js aws",
+        "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest",
+        "start-cluster": "pm2 start src/server.js -i 2",
+        "db-migrate": "npx db-migrate up --config migrations/config/migration_config.json -e dev"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ekstep2/ektep-crowdsource-platform.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ekstep2/ektep-crowdsource-platform/issues"
+    },
+    "homepage": "https://github.com/ekstep2/ektep-crowdsource-platform#readme",
+    "dependencies": {
+        "@google-cloud/storage": "^5.8.1",
+        "aws-sdk": "^2.851.0",
+        "compression": "^1.7.4",
+        "cookie-parser": "^1.4.5",
+        "cors": "^2.8.5",
+        "crypto-js": "^4.0.0",
+        "db-migrate": "^0.11.12",
+        "db-migrate-pg": "^1.2.2",
+        "ddos": "^0.2.1",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-session": "^1.17.1",
+        "helmet": "^3.22.0",
+        "i18n": "^0.13.2",
+        "jsonwebtoken": "^8.5.1",
+        "moment": "^2.29.1",
+        "multer": "^1.4.2",
+        "node-fetch": "^2.6.1",
+        "pg-promise": "^10.5.2",
+        "pm2": "^4.5.6",
+        "regenerator-runtime": "^0.13.7",
+        "uuid": "^7.0.3"
+    },
+    "engines": {
+        "node": "12.16.0"
+    },
+    "devDependencies": {
+        "@babel/preset-env": "^7.12.11",
+        "del": "^5.1.0",
+        "fetch-mock": "^9.11.0",
+        "jest": "^26.6.3",
+        "jest-when": "^3.2.1",
+        "jquery": "^3.5.1",
+        "nodemon": "^2.0.3",
+        "supertest": "^6.1.3"
+    },
+    "jest": {
+        "setupFiles": [
+            "<rootDir>/test-env.js"
+        ]
+    }
+}
