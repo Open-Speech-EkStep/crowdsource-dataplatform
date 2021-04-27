@@ -516,7 +516,7 @@ describe("Running tests for dbOperations", () => {
             spyDBnone.mockReturnValue(Promise.resolve())
             const action = 'accept';
 
-            const req = { 'body': { sentenceId, action, contributionId, state, country }, 'cookies': { userId } }
+            const req = { 'body': { sentenceId, state, country }, 'cookies': { userId }, params: { action, contributionId } }
 
             await dbOperations.updateTablesAfterValidation(req, res);
 
@@ -528,7 +528,7 @@ describe("Running tests for dbOperations", () => {
             spyDBnone.mockReturnValue(Promise.resolve())
             const action = 'skip';
 
-            const req = { 'body': { sentenceId, action, contributionId, state, country }, 'cookies': { userId } }
+            const req = { 'body': { sentenceId, state, country }, 'cookies': { userId }, params: { action, contributionId } }
 
             await dbOperations.updateTablesAfterValidation(req, res);
 

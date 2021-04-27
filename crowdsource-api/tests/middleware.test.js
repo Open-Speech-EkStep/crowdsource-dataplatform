@@ -5,7 +5,8 @@ const { validateUserInputAndFile,
     validateInputForSkip,
     validateRewardsInput,
     validateRewardsInfoQuery,
-    validateContributedMediaInput } = require('../src/middleware/validateUserInputs')
+    validateContributedMediaInput,
+    validateInputsForValidateEndpoint } = require('../src/middleware/validateUserInputs')
 
 describe('middleware test', function () {
     const cookie = { 'userId': '123' };
@@ -401,5 +402,102 @@ describe('middleware test', function () {
             expect(res.send).toHaveBeenCalledTimes(1)
             expect(nextSpy).toHaveBeenCalledTimes(0)
         });
+    });
+
+
+    describe('Validate validate endpoint inputs', () => {
+
+        afterEach(() => {
+            jest.clearAllMocks();
+        })
+
+        test('should call next() if correct inputs are given in params', () => {
+            const req = { params: { action: "accept", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN' }, cookies: {userId: 7890}};
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if params are not passed', () => {
+            const req = { body: { sentenceId: 456, state: 'TN', country: 'IN' }, cookies: {userId: 7890}};
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if body are not passed', () => {
+            const req = { params: { action: "accept", contributionId: 123 }, cookies: {userId: 7890}};
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if cookies are not passed', () => {
+            const req = { params: { action: "accept", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN' }};
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should call next() if action is reject', () => {
+            const req = { params: { action: "reject", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN' }, cookies: {userId: 7890}};
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(0)
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+        });
+
+        test('should call next() if action is skip', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN' }, cookies: {userId: 7890}};
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(0)
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if action is not valid', () => {
+            const req = { params: { action: "accepted", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN' }, cookies: {userId: 7890}};
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if action is not sent', () => {
+            const req = { params: { contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN' }, cookies: {userId: 7890}};
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if contributionId is not sent', () => {
+            const req = { params: { action: "skip" }, body: { sentenceId: 456, state: 'TN', country: 'IN' }, cookies: {userId: 7890}};
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if sentenceId is not sent', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { state: 'TN', country: 'IN' }, cookies: {userId: 7890}};
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if userId is not sent', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN' }, cookies: {}};
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
     });
 });
