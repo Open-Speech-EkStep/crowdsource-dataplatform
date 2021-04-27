@@ -2,7 +2,7 @@ const { LOCALE_STRINGS } = require("../js/constants");
 const fetch = require("./fetch");
 
 const { getLocaleString } = require("./utils");
-const executeOnReady = function() {
+const executeOnReady = function () {
   let audioData = [];
   let recordingLength = 0;
   let audioContext;
@@ -58,7 +58,7 @@ const executeOnReady = function() {
     }
     // our final blob
     return new Blob([view], {
-      type: "audio/wav"
+      type: "audio/wav",
     });
   }
 
@@ -81,11 +81,11 @@ const executeOnReady = function() {
     const start = () => {
       let constraints = {
         audio: true,
-        video: false
+        video: false,
       };
       navigator.mediaDevices
         .getUserMedia(constraints)
-        .then(function(stream) {
+        .then(function (stream) {
           startRecordingTimer();
           const AudioContext = window.AudioContext || window.webkitAudioContext;
           audioContext = new AudioContext();
@@ -94,7 +94,7 @@ const executeOnReady = function() {
           javascriptNode = audioContext.createScriptProcessor(1024, 1, 1);
           microphone.connect(javascriptNode);
           javascriptNode.connect(audioContext.destination);
-          javascriptNode.onaudioprocess = function(event) {
+          javascriptNode.onaudioprocess = function (event) {
             let inpt_L = event.inputBuffer.getChannelData(0);
             recordingLength += 1024;
             audioData.push(new Float32Array(inpt_L));
@@ -116,7 +116,7 @@ const executeOnReady = function() {
             );
           };
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log(err);
           resetMicButton();
         });
@@ -132,7 +132,7 @@ const executeOnReady = function() {
 
         const audioUrl = URL.createObjectURL(audioBlob);
         micAudio = new Audio(audioUrl);
-        micAudio.onloadedmetadata = function() {
+        micAudio.onloadedmetadata = function () {
           const audioDuration = Math.ceil(micAudio.duration * 1000);
           setTimeout(() => {
             resetMicButton();
@@ -144,7 +144,7 @@ const executeOnReady = function() {
         return {
           audioBlob,
           audioUrl,
-          play
+          play,
         };
       } else {
         console.log("No blob present");
@@ -153,7 +153,7 @@ const executeOnReady = function() {
     };
     return {
       start,
-      stop
+      stop,
     };
   };
 
@@ -194,7 +194,7 @@ const executeOnReady = function() {
     );
     $testMicBtn.attr("data-value", "recording");
     secondsDown--;
-    timeIntervalUp = setInterval(function() {
+    timeIntervalUp = setInterval(function () {
       countTimer();
     }, 1000);
   };
@@ -210,26 +210,24 @@ const executeOnReady = function() {
     }
   };
 
-  const ambienceNoiseCheck = audioBlob => {
+  const ambienceNoiseCheck = (audioBlob) => {
     const fd = new FormData();
     fd.append("audio_data", audioBlob);
     fetch("/audio/snr", {
       method: "POST",
-      body: fd
+      body: fd,
     })
-      .then(res => res.json())
-      .then(result => {
+      .then((res) => res.json())
+      .then((result) => {
         showAmbientNoise(result);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
 
-  const testMic = btnDataAttr => {
-    $("#mic-msg")
-      .addClass("invisible")
-      .removeClass("d-none");
+  const testMic = (btnDataAttr) => {
+    $("#mic-msg").addClass("invisible").removeClass("d-none");
     $("#no-noise").addClass("d-none");
     $("#noise").addClass("d-none");
     const $testMicText = $("#test-mic-text");
@@ -289,7 +287,7 @@ const executeOnReady = function() {
     }
 
     renderFrame();
-    speakerAudio.onended = function() {
+    speakerAudio.onended = function () {
       resetSpeakerButton();
     };
   }
@@ -302,9 +300,7 @@ const executeOnReady = function() {
   $testMicCloseBtn.on("click", () => {
     $testMicDiv.removeClass("d-none");
     $testMicSpeakerDetails.addClass("d-none");
-    $("#mic-msg")
-      .addClass("invisible")
-      .removeClass("d-none");
+    $("#mic-msg").addClass("invisible").removeClass("d-none");
     $noNoise.addClass("d-none");
     $noise.addClass("d-none");
     audioData = [];
@@ -336,13 +332,13 @@ const executeOnReady = function() {
   });
 };
 
-const writeUTFBytes = function(view, offset, string) {
+const writeUTFBytes = function (view, offset, string) {
   for (let i = 0; i < string.length; i++) {
     view.setUint8(offset + i, string.charCodeAt(i));
   }
 };
 
-const addOnClickListener = function() {
+const addOnClickListener = function () {
   const $testMicDiv = $("#test-mic-speakers");
   const $testMicSpeakerBtn = $("#test-mic-speakers-button");
   const $testMicSpeakerDetails = $("#test-mic-speakers-details");
@@ -353,7 +349,7 @@ const addOnClickListener = function() {
   });
 };
 
-const showAmbientNoise = noiseData => {
+const showAmbientNoise = (noiseData) => {
   const $noNoise = $("#no-noise");
   const $noise = $("#noise");
   $("#mic-msg").addClass("d-none");

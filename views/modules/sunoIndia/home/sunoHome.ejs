@@ -24,13 +24,13 @@
 </head>
 
 <body>
-<%- include ../../../common/header.ejs %>
+<%- include ../common/header.ejs %>
 <div class="container-fluid supreme-container">
     <div class="row">
-        <%- include ../../../common/languageNavBar/languageNavBar.ejs %>
+        <%- include ../common/languageNavBar.ejs %>
     </div>
     <div class="m-auto row justify-content-center mt-lg-5 mx-lg-5">
-        <%- include('../../../common/card/cards.ejs',{left:{h1:"Speak",h2:"Contribute Your Voice","p1":"Contribute your voice to create an open data repository of Indian languages",img:"../img/say.svg"},right:{h1:"Listen",h2:"Validate What They Say","p1":"Help us by validating the recordings that others have contributed",img:"../img/listen.svg"}}); %>
+        <%- include('../common/cards.ejs',{left:{h1:"Speak",h2:"Contribute Your Voice","p1":"Contribute your voice to create an open data repository of Indian languages",img:"../img/say.svg"},right:{h1:"Listen",h2:"Validate What They Say","p1":"Help us by validating the recordings that others have contributed",img:"../img/listen.svg"}}); %>
     </div>
     <div class="row">
         <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 text-dark mt-4">
@@ -92,7 +92,7 @@
             <div class="justify-content-center align-items-center d-none" id="chartSpinner">
                 <div><span class="spinner"></span></div>
             </div>
-            <%- include ../../../common/charts/map/map.ejs %>
+            <%- include ../common/map.ejs %>
         </div>
         <div class="col-12 col-md-6 col-lg-5 mt-xs-5 pr-lg-5">
             <div id="bar_charts_container">
@@ -110,18 +110,18 @@
                 <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
                     <div><span class="spinner"></span></div>
                 </div>
-                <%- include ../../../common/charts/barGraph/horizontalBarGraph.ejs %>
+                <%- include ../common/horizontalBarGraph.ejs %>
             </div>
         </div>
         <div class="col-12 col-md-12 col-lg-12 px-0 oflow-x-hid"></div>
     </div>
-    <%- include ../../../common/buttons/viewAllDetailBtn/viewAllDetailBtn.ejs%>
+    <%- include ../common/viewAllDetailBtn.ejs%>
 </div>
-<%- include ../../../common/modals/userDetails/userDetails.ejs %>
-<%- include ../../../modals/content-languages.ejs %>
-<%- include ../../../modals/say-listen-language.ejs %>
+<%- include ../common/speakerDetail.ejs %>
+<%- include ../common/content-languages.ejs %>
+<%- include ../common/say-listen-language.ejs %>
+<%- include ../common/footer.ejs %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%- include ../../../common/footer.ejs %>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
