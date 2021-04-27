@@ -1,19 +1,14 @@
-const { updateLineGraph } = require('./lineGraph');
-const { updatePieGraph } = require('./pieGraph');
-const { updateBarGraph } = require('./verticalBarGraph');
-const { generateIndiaMap } = require('./map');
-const { updateGraph } = require('./draw-chart');
-const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('./speakerDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString, getJson } = require('./utils');
-const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES } = require('./constants');
-const fetch = require('./fetch');
-const { data } = require('jquery');
+const { updateLineGraph } = require('../common/lineGraph');
+const { generateIndiaMap } = require('../common/map');
+const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('../common/speakerDetails');
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString } = require('../common/utils');
+const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES } = require('../common/constants');
+const fetch = require('../common/fetch');
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
 
 const fetchDetail = (language) => {
-    const byLanguage = language ? true : false;
     const url = language ? '/aggregate-data-count?byLanguage=true' : '/aggregate-data-count'
     return fetch(url).then((data) => {
         if (!data.ok) {
