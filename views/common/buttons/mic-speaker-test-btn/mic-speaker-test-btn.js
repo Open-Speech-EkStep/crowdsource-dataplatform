@@ -1,4 +1,4 @@
-const { LOCALE_STRINGS } = require("../js/constants");
+const { LOCALE_STRINGS } = require("./constants");
 const fetch = require("./fetch");
 
 const { getLocaleString } = require("./utils");
