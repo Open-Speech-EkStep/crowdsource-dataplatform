@@ -124,10 +124,13 @@ logs
 */node_modules
 .terraform
 
-public/*
-!public/img/
-!public/favicon.ico
-!public/sitemap.xml
-!public/aud/
+crowdsource-ui/build/*
+crowdsource-ui/target/*
+!crowdsource-ui/target/img/
+!crowdsource-ui/target/favicon.ico
+!crowdsource-ui/target/sitemap.xml
+!crowdsource-ui/target/aud/
 
+
+public 
 build
