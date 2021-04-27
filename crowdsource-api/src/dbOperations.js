@@ -232,7 +232,8 @@ const getMediaObject = (req, res, objectStorage) => {
 
 const updateTablesAfterValidation = (req, res) => {
     const validatorId = req.cookies.userId;
-    const { sentenceId, action, contributionId, state = "", country = "" } = req.body
+    const { sentenceId, state = "", country = "" } = req.body;
+    const { action, contributionId } = req.params;
     return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country])
         .then(async () => {
             if (action !== 'skip') {

@@ -60,6 +60,12 @@ const SUBJECT_MAX_LENGTH = 256
 
 const FEEDBACK_MAX_LENGTH = 1000
 
+const VALIDATION_ACTIONS = ["accept", "reject", "skip"];
+
+const SOURCES = ["contribute", "validate"];
+
+const MEDIA_TYPES = ['parallel', 'ocr', 'text', 'asr'];
+
 module.exports = {
   MAX_SIZE,
   VALID_FILE_TYPE,
@@ -77,5 +83,8 @@ module.exports = {
   WADASNR_BIN_PATH,
   MIN_SNR_LEVEL,
   SUBJECT_MAX_LENGTH,
-  FEEDBACK_MAX_LENGTH
+  FEEDBACK_MAX_LENGTH,
+  VALIDATION_ACTIONS,
+  SOURCES,
+  MEDIA_TYPES
 };

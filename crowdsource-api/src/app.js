@@ -39,7 +39,8 @@ const {
     validateInputForSkip,
     validateRewardsInput,
     validateRewardsInfoQuery,
-    validateContributedMediaInput
+    validateContributedMediaInput,
+    validateInputsForValidateEndpoint
 } = require('./middleware/validateUserInputs');
 
 // const Ddos = require('ddos');
@@ -161,7 +162,7 @@ router.post('/media/:type', validateUserInfo, (req, res) => updateAndGetMedia(re
 
 router.get('/contributions/:language', (req, res) => getValidationMedia(req, res));
 
-router.post('/validate', (req, res) => updateTablesAfterValidation(req, res))
+router.post('/validate/:contributionId/:action', validateInputsForValidateEndpoint, (req, res) => updateTablesAfterValidation(req, res))
 
 router.post('/contributed-media/:source/:entityId', validateContributedMediaInput, (req, res) => getMediaObject(req, res, objectStorage))
 

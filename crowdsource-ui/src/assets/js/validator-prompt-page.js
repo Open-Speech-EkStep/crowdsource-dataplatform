@@ -229,14 +229,12 @@ function recordValidation(action) {
     }
     const sentenceId = validationSentences[currentIndex].dataset_row_id
     const contribution_id = validationSentences[currentIndex].contribution_id
-    fetch('/validate', {
+    fetch(`/validate/${contribution_id}/${action}`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
         body: JSON.stringify({
             sentenceId: sentenceId,
-            action: action,
-            contributionId: contribution_id,
             state: localStorage.getItem('state_region') || "",
             country: localStorage.getItem('country') || ""
         }),

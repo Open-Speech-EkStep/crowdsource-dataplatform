@@ -9,7 +9,10 @@ const {
     MAX_LENGTH,
     SUBJECT_MAX_LENGTH,
     FEEDBACK_MAX_LENGTH,
-    LANGUAGES
+    LANGUAGES,
+    VALIDATION_ACTIONS,
+    SOURCES,
+    MEDIA_TYPES
 } = require("../constants")
 
 
@@ -56,8 +59,7 @@ const validateUserInfo = function (req, res, next) {
         return res.status(400).send({ error: 'required parameters missing' });
     }
 
-    const validTypes = ['parallel', 'ocr', 'text', 'asr'];
-    const isValidType = (validTypes.includes(type));
+    const isValidType = (MEDIA_TYPES.includes(type));
 
     const invalidMotherTongue = (!MOTHER_TONGUE.includes(motherTongue) && (motherTongue.length));
 
@@ -101,7 +103,7 @@ const validateInputForSkip = function (req, res, next) {
     next();
 }
 
-const validateRewardsInput = function (req, res, next) {
+const validateRewardsInput = (req, res, next) => {
     const userId = req.cookies.userId || "";
     const { language = "" } = req.query;
 
@@ -111,7 +113,7 @@ const validateRewardsInput = function (req, res, next) {
     next();
 }
 
-const validateRewardsInfoQuery = function (req, res, next) {
+const validateRewardsInfoQuery = (req, res, next) => {
     const { language } = req.query;
 
     if (!language) {
@@ -121,11 +123,19 @@ const validateRewardsInfoQuery = function (req, res, next) {
 }
 
 const validateContributedMediaInput = (req, res, next) => {
-    if (!(req.params && req.params.entityId && req.params.source && ["contribute", "validate"].includes(req.params.source))) {
+    if (!(req.params && req.params.entityId && req.params.source && SOURCES.includes(req.params.source))) {
         return res.status(400).send('Invalid params.');
     }
 
     next();
 }
 
-module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery, validateContributedMediaInput }
+const validateInputsForValidateEndpoint = (req, res, next) => {
+    if (!(req.cookies && req.cookies.userId && req.body && req.body.sentenceId
+            && req.params && req.params.contributionId && req.params.action && VALIDATION_ACTIONS.includes(req.params.action))) {
+        return res.status(400).send('Invalid params.');
+    }
+    next();
+}
+
+module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery, validateContributedMediaInput, validateInputsForValidateEndpoint }
