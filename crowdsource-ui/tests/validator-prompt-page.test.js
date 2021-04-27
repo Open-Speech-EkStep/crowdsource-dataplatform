@@ -39,7 +39,7 @@ const {
 
 describe("addListeners", () => {
   describe('onClick instructions-link', () => {
-    test('should show Instructions pop-up', () => {
+    test.skip('should show Instructions pop-up', () => {
       require('../src/assets/js/validator-prompt-page')
       addListeners();
       document.getElementById('instructions-link').click();
