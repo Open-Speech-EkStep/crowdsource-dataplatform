@@ -2,6 +2,7 @@ CREATE TABLE public.master_dataset
 (
     master_dataset_id integer NOT NULL GENERATED ALWAYS AS IDENTITY,
     params jsonb NOT NULL,
+    localtion text NULL,
     PRIMARY KEY (master_dataset_id)
 )
 WITH (
@@ -31,3 +32,6 @@ ALTER TABLE public.dataset_row
 
 ALTER TABLE public.contributions
     RENAME "sentenceId" TO dataset_row_id;
+
+insert into contributors (user_name, contributor_identifier)
+select '##system##', '##system##';
