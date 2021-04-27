@@ -1,0 +1,18 @@
+<div class="modal fade" id="content-language" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="modal-header d-block border-0">
+                <h6 class="modal-title text-center">
+                    <%= __('Select Your Preferred Language') %>
+                </h6>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer">
+                    <% LANGUAGES.forEach(e=>{ %>
+                        <a id="<%= e.value %>" class="p-2" href="#" locale="<%= e.id %>"><%= e.text %></a>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
