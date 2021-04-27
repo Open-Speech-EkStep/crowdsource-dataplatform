@@ -486,7 +486,9 @@ $(document).ready(() => {
         localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);
     }).catch(console.log);
-    fetch(`/contributions/${language}`, {
+    const type = 'text';
+    const toLanguage = ""; //can be anything
+    fetch(`/contributions/${type}?from=${language}&to=${toLanguage}`, {
         credentials: 'include',
         mode: 'cors'
       })

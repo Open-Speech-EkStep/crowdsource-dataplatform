@@ -9,7 +9,7 @@ const {
     updateAndGetMediaQuery,
     updateAndGetUniqueMediaQuery,
     updateAndGetOrderedMediaQuery,
-    getValidationMediaQuery,
+    getContributionListQuery,
     mediaCount,
     getCountOfTotalSpeakerAndRecordedAudio,
     getGenderData,
@@ -191,10 +191,12 @@ const updateAndGetMedia = function (req, res) {
         });
 };
 
-const getValidationMedia = function (req, res) {
-    const language = req.params.language;
+const getContributionList = function (req, res) {
+    const fromLanguage = req.query.from;
+    const toLanguage = req.query.to;
+    const type = req.params.type;
     const userId = req.cookies.userId;
-    db.any(getValidationMediaQuery, [language, userId])
+    db.any(getContributionListQuery, [userId, type, fromLanguage, toLanguage])
         .then((response) => {
             res.status(200).send({ data: response })
         })
@@ -555,7 +557,7 @@ const updateDbWithUserInput = async (
 
 module.exports = {
     updateAndGetMedia,
-    getValidationMedia,
+    getContributionList,
     updateDbWithAudioPath,
     updateTablesAfterValidation,
     getAllDetails,

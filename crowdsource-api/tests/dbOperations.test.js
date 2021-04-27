@@ -4,7 +4,6 @@ const {
     updateContributionDetails,
     updateContributionDetailsWithUserInput,
     updateMediaWithContributedState,
-    getValidationMediaQuery,
     getCountOfTotalSpeakerAndRecordedAudio,
     getGenderData,
     getAgeGroupsData,
@@ -27,7 +26,8 @@ const {
     getContributionHoursForLanguage,
     getMultiplierForHourGoal,
     getOrderedMediaQuery,
-    updateMaterializedViews
+    updateMaterializedViews,
+    getContributionListQuery
 } = require('./../src/dbQuery');
 
 const mockDB = {
@@ -248,16 +248,17 @@ describe("Running tests for dbOperations", () => {
         )
     });
 
-    test('get validationMedia should call getValidationMedia query once with language', () => {
+    test('getContributionList should call getContributionListQuery query once with language', () => {
         const language = 'testLanguage';
         const userId = 123;
-        const req = { params: { language: language }, cookies: { userId } };
+        const type = 'text'
+        const req = { params: { type: type }, query: { from: language }, cookies: { userId } };
         const spyDBany = jest.spyOn(mockDB, 'any')
-        when(spyDBany).calledWith(getValidationMediaQuery, [language, userId]).mockReturnValue(Promise.resolve())
+        when(spyDBany).calledWith(getContributionListQuery, [userId, type, language, undefined]).mockReturnValue(Promise.resolve())
 
-        dbOperations.getValidationMedia(req, res);
+        dbOperations.getContributionList(req, res);
 
-        expect(spyDBany).toHaveBeenCalledWith(getValidationMediaQuery, [language, userId]);
+        expect(spyDBany).toHaveBeenCalledWith(getContributionListQuery, [userId, type, language, undefined]);
         jest.clearAllMocks();
     });
 
@@ -389,7 +390,7 @@ describe("Running tests for dbOperations", () => {
         when(spyDBany).calledWith(insertRewardQuery, [contributor_id, language, goldBadge, category]).mockReturnValue([{ 'generated_badge_id': goldBadge }]);
         when(spyDBoneOrNone).calledWith(checkNextMilestoneQuery, [contribution_count, language]).mockReturnValue({ 'id': milestoneId, 'grade': 'silver', 'milestone': 100 });
         when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language]).mockReturnValue({ 'id': milestoneId, 'grade': 'copper', 'milestone': 100 });
-        
+
         afterEach(() => {
             jest.clearAllMocks();
         })

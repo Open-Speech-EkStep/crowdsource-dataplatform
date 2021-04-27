@@ -16,7 +16,7 @@ const router = express.Router();
 const {
     updateDbWithAudioPath,
     updateAndGetMedia,
-    getValidationMedia,
+    getContributionList,
     getAllDetails,
     getAllInfo,
     updateTablesAfterValidation,
@@ -40,7 +40,8 @@ const {
     validateRewardsInput,
     validateRewardsInfoQuery,
     validateContributedMediaInput,
-    validateInputsForValidateEndpoint
+    validateInputsForValidateEndpoint,
+    validateGetContributionsInput
 } = require('./middleware/validateUserInputs');
 
 // const Ddos = require('ddos');
@@ -160,7 +161,7 @@ router.get('/getAllInfo/:language', async function (req, res) {
 
 router.post('/media/:type', validateUserInfo, (req, res) => updateAndGetMedia(req, res));
 
-router.get('/contributions/:language', (req, res) => getValidationMedia(req, res));
+router.get('/contributions/:type', validateGetContributionsInput, (req, res) => getContributionList(req, res));
 
 router.post('/validate/:contributionId/:action', validateInputsForValidateEndpoint, (req, res) => updateTablesAfterValidation(req, res))
 
