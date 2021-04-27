@@ -95,12 +95,15 @@ group by dataset_row."dataset_row_id", dataset_row.media ->> 'data'
 order by dataset_row."dataset_row_id"
 limit 5`;
 
-const getValidationMediaQuery = `select con."dataset_row_id", sen.media ->> 'data' as sentence, con.contribution_id \
-    from contributions con \
-    inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_identifier!=$2 \ 
-    inner join dataset_row sen on sen."dataset_row_id"=con."dataset_row_id" and sen."state"= 'contributed' \
-    left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' \
-    where  con.action='completed' and language=$1 and COALESCE(val.validated_by, '')!= $2 group by con."dataset_row_id", sen.media ->> 'data', con.contribution_id \
+const getContributionListQuery = `
+select con."dataset_row_id", ds.media ->> 'data' as sentence, con.contribution_id 
+    from contributions con 
+    inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_identifier!=$1
+    inner join dataset_row ds on ds."dataset_row_id"=con."dataset_row_id" and ds."state"= 'contributed' 
+	and ds.type=$2 and (ds.type='text' or con.is_system) and (ds.type!='parallel' or con.media->>language=$4)
+    left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' 
+    where  con.action='completed' and ds.media->>'language'=$3 and COALESCE(val.validated_by, '')!= $1
+	group by con."dataset_row_id", ds.media ->> 'data', con.contribution_id 
     order by count(val.*) desc, RANDOM() limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, "action", validated_by, "date", "state_region", "country") \
@@ -199,7 +202,7 @@ module.exports = {
   updateAndGetMediaQuery,
   updateAndGetUniqueMediaQuery,
   updateAndGetOrderedMediaQuery,
-  getValidationMediaQuery,
+  getContributionListQuery,
   updateContributionDetails,
   getCountOfTotalSpeakerAndRecordedAudio,
   getMotherTonguesData,
