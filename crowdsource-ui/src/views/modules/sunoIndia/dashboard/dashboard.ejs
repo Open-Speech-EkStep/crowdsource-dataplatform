@@ -1,0 +1,119 @@
+<html lang="en">
+
+<head>
+    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
+    <meta name="description" content="Bolo India: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
+</head>
+
+<body>
+<%- include ../common/headerForContributor.ejs %>
+<div class="container container-fluid supreme-container">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 col-md-7 col-lg-6">
+                    <div class="text-muted mb-2">
+                        <%= __('Select a language') %>:
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-5 all-languages">
+                    <div class="mt-2"><select class="btn btn-outline-primary dropdown-toggle h6 w-100 rounded mb-4 p-3" id="language">
+                            <option selected="selected" class="pointer" id="language_button" value="">
+                                <%= __('All Languages') %>
+                            </option>
+                            <% LANGUAGES.forEach(function(lang) { %>
+                                <option value="<%= lang.value %>">
+                                    <%= lang.text %>
+                                </option>
+                            <% }) %>
+                        </select></div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 data-updated">
+                    <div><span>
+                                    <%= __('Data Last Updated') %>:
+                                </span><span id="data-updated"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include ../common/noDataFoundPopUp.ejs %>
+    <div class="row" id="speaker-data">
+        <div class="col-12">
+            <div class="row justify-content-center" id="loader1">
+                <div><span class="spinner"></span></div>
+            </div>
+            <div class="row text-center contribution-details d-none" id="contribution-details">
+                <div class="contribution-data d-none" id="languages-wrapper">
+                    <p class="mb-1" id="languages-value"></p>
+                    <p class="mb-0">
+                        <%= __('languages contributed') %>
+                    </p>
+                </div>
+                <div class="contribution-data">
+                    <p class="mb-1" id="speaker-value"></p>
+                    <p class="mb-0">
+                        <%= __('speakers contributed') %>
+                    </p>
+                </div>
+                <div class="contribution-data">
+                    <p class="mb-1" id="contributed-value"></p>
+                    <p class="mb-0">
+                        <%= __('hours recorded') %>
+                    </p>
+                </div>
+                <div class="contribution-data">
+                    <p class="mb-1" id="validated-value"></p>
+                    <p class="mb-0">
+                        <%= __('hours validated') %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row chart-row">
+        <div class="col-12">
+            <div class="row justify-content-center">
+                <div id="timeline-loader" class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center chart-spinner">
+                    <span class="spinner"></span></div>
+            </div>
+            <div class="row justify-content-center mt-5 mx-0">
+                <div class="col-12 col-lg-5 text-center chart timeline-chart-container">
+                    <%- include ../common/lineGraph.ejs %>
+                </div>
+                <div class="col-12 col-lg-5 mb-3 text-center chart state-chart text-dark p-4">
+                    <div class="text-left px-3 pb-3 state-chart-text">
+                        <%= __('State Wise distribution') %>
+                    </div>
+                    <%- include ../common/map.ejs %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include ../common/speakerDetail.ejs %>
+<%- include ../common/content-languages.ejs %>
+<%- include ../common/say-listen-language.ejs %>
+<%- include ../common/footer.ejs %>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="../../js/sunoIndia/dashboard.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/themes/animated.js"></script>
+</body>
+</html>
