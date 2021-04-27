@@ -66,15 +66,21 @@ gulp.task('js', function () {
         ],
       })
     )
-    .pipe(
-      minify({
-        ext: {
-          min: '.js',
-        },
-        noSource: true,
-      })
-    )
     .pipe(gulp.dest('public/js'));
+});
+
+gulp.task('js-common-flat', function () {
+  return gulp
+    .src(['views/common/**/*.js', 'views/js/*.js'])
+    .pipe(gulpFlatten())
+    .pipe(gulp.dest('build/js/common'));
+});
+
+gulp.task('js-sunoIndia-flat', function () {
+  return gulp
+    .src(['views/modules/sunoIndia/**/*.js'])
+    .pipe(gulpFlatten())
+    .pipe(gulp.dest('build/js/sunoIndia'));
 });
 
 gulp.task('js-common', function () {
@@ -83,8 +89,7 @@ gulp.task('js-common', function () {
   var filename = 'env.config.' + env + '.json';
   var settings = JSON.parse(fs.readFileSync('assets/config/' + filename, 'utf8'));
   return gulp
-    .src(['views/common/**/*.js'])
-    .pipe(gulpFlatten())
+    .src(['build/js/common/*.js'])
     .pipe(
       browserify({
         transform: ['babelify'],
@@ -109,7 +114,7 @@ gulp.task('js-sunoIndia', function () {
   var filename = 'env.config.' + env + '.json';
   var settings = JSON.parse(fs.readFileSync('assets/config/' + filename, 'utf8'));
   return gulp
-    .src(['views/modules/sunoIndia/**/*.js'])
+    .src(['build/js/sunoIndia/*.js'])
     .pipe(gulpFlatten())
     .pipe(
       browserify({
@@ -153,8 +158,7 @@ gulp.task(
   'default',
   gulp.parallel(
     'js',
-    'js-common',
-    'js-sunoIndia',
+    gulp.series('js-common-flat', 'js-common', 'js-sunoIndia-flat', 'js-sunoIndia'),
     'css',
     'css-common',
     'css-sunoIndia',
