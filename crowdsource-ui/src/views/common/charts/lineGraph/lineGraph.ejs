@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="text-left col-12 col-md-6 col-lg-6 pb-3 chart-title">
+        <%= __('Progress Chart') %>
+    </div>
+    <ul class="text-right col-12 col-md-6 col-lg-6 duration" id="duration">
+        <li class="tab-left active" data-value="monthly">
+            <%= __('Monthly') %>
+        </li>
+        <li class="tab-right inactive" data-value="quarterly">
+            <%= __('Quarterly') %>
+        </li>
+    </ul>
+</div>
+<div class="text-center justify-content-center d-none align-items-center chart-spinner" id="timeline-loader"><span class="spinner"></span></div>
+<div id="timeline-chart" class="h-100 pb-4"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
+<script src="../../js/lineGraph.js"></script>

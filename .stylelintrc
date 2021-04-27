@@ -1,0 +1,24 @@
+{
+    "extends": ["stylelint-config-standard","stylelint-config-prettier"],
+    "rules": {
+        "indentation": 2,
+        "string-quotes": "single",
+        "no-duplicate-selectors": true,
+        "color-hex-case": "lower",
+        "color-hex-length": "long",
+        "color-named": "never",
+        "function-url-quotes": "always",
+        "at-rule-no-unknown": null,
+        "selector-pseudo-element-no-unknown":[true, {
+          "ignorePseudoElements": ["ng-deep"]
+        }],
+        "no-descending-specificity":null,
+        "selector-type-no-unknown":true,
+        "declaration-block-no-shorthand-property-overrides":null,
+        "declaration-block-no-redundant-longhand-properties": true,
+        "value-keyword-case": "lower",
+        "selector-pseudo-element-colon-notation":"single",
+        "media-query-list-comma-space-after": "always",
+        "media-query-list-comma-space-before": "always"
+    }
+}
