@@ -1,16 +1,18 @@
-const { updateLineGraph } = require('./lineGraph');
-const { updatePieGraph } = require('./pieGraph');
-const { updateBarGraph } = require('./verticalBarGraph');
-const { generateIndiaMap } = require('./map');
-const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('./speakerDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString } = require('./utils');
-const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES } = require('./constants');
-const fetch = require('./fetch');
+const { updateLineGraph } = require('../common/lineGraph');
+const { updatePieGraph } = require('../common/pieGraph');
+const { updateBarGraph } = require('../common/verticalBarGraph');
+const { generateIndiaMap } = require('../common/map');
+const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('../common/speakerDetails');
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString, getJson } = require('../common/utils');
+const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES } = require('../common/constants');
+const fetch = require('../common/fetch');
+const { data } = require('jquery');
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
 
 const fetchDetail = (language) => {
+    const byLanguage = language ? true : false;
     const url = language ? '/aggregate-data-count?byLanguage=true' : '/aggregate-data-count'
     return fetch(url).then((data) => {
         if (!data.ok) {
@@ -82,8 +84,6 @@ function updateLanguage(language) {
                     $speakerDataDetails.addClass('d-none');
                     generateIndiaMap(language);
                     updateLineGraph(language, activeDurationText);
-                    updatePieGraph(language, null);
-                    updateBarGraph(language, null);
                     const speakersData = getSpeakersData(data.data, language);
                     const {
                         hours: contributedHours,
@@ -160,7 +160,6 @@ $(document).ready(function () {
         const $durationLiActive = $('#duration').find('li.active');
         $durationLiInactive.removeClass('inactive').addClass('active');
         $durationLiActive.removeClass('active').addClass('inactive');
-        console.log(e);
         const selectedDuration = e.target.dataset.value;
         const selectedLanguage = $('#language option:selected').val();
         updateLineGraph(selectedLanguage, selectedDuration);

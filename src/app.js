@@ -204,8 +204,8 @@ router.get('/dekhoIndia/dashboard', function (req, res) {
     res.render('modules/dekhoIndia/dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
 });
 
-router.get('/sunoIndia/homePage', function (req, res) {
-    res.render('modules/sunoIndia/home/sunoHome.ejs', { MOTHER_TONGUE, LANGUAGES,isCookiePresent: false, defaultLang: undefined });
+router.get('/sunoIndia/home', function (req, res) {
+    res.render('modules/sunoIndia/home/home.ejs', { MOTHER_TONGUE, LANGUAGES,isCookiePresent: false, defaultLang: undefined });
 });
 
 router.get('/likhoIndia/homePage', function (req, res) {
