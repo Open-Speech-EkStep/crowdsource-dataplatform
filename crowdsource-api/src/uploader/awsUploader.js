@@ -10,12 +10,9 @@ const config = {
 
 const s3 = new AWS.S3(config);
 
-
-
 const awsUploader = function (filename, userName, userId, language) {
 
     const fileContent = fs.readFileSync(filename)
-
     const fullPath = `raw/landing/${language}/audio/users/${userId}/${userName}/${filename}`
 
     const uploadParams = { Bucket: bucket, Key: fullPath, Body: fileContent };
@@ -24,4 +21,3 @@ const awsUploader = function (filename, userName, userId, language) {
 };
 
 module.exports = { awsUploader }
-

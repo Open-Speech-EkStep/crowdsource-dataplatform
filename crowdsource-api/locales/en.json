@@ -214,5 +214,10 @@
 	"Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but may decrease though if it doesn’t pass the validation test. We want you to remain an active contributor to Bolo India and stand a chance to get recognised by the Ministry of Electronics and Information Technology.": "Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but may decrease though if it doesn’t pass the validation test. We want you to remain an active contributor to Bolo India and stand a chance to get recognised by the Ministry of Electronics and Information Technology.",
 	"Recording: X sentence": "Recording: %count sentence",
 	"Validation: Y% of recorded X sentences need to be 'correct'": "Validation: %ValidationPercent of recorded %count sentences need to be 'correct'",
-	"Help your language achieve it’s goal of <span id=\"language-hour-goal\"></span> hrs. We know you can do more!": "Help your language achieve it’s goal of <span id=\"language-hour-goal\"></span> hrs. We know you can do more!"
+	"Help your language achieve it’s goal of <span id=\"language-hour-goal\"></span> hrs. We know you can do more!": "Help your language achieve it’s goal of <span id=\"language-hour-goal\"></span> hrs. We know you can do more!",
+	"Bolo India": "Bolo India",
+	"Suno India": "Suno India",
+	"Likho India": "Likho India",
+	"Dekho India": "Dekho India",
+	"User Details": "User Details"
 }

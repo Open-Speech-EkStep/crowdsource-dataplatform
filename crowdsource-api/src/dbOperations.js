@@ -1,13 +1,15 @@
 const { downloader } = require('./downloader/objDownloader')
 const moment = require('moment');
+const { uploader } = require('./uploader/objUploader')
 
 const {
     updateContributionDetails,
+    updateContributionDetailsWithUserInput,
     unassignIncompleteMedia,
     updateAndGetMediaQuery,
     updateAndGetUniqueMediaQuery,
     updateAndGetOrderedMediaQuery,
-    getValidationMediaQuery,
+    getContributionListQuery,
     mediaCount,
     getCountOfTotalSpeakerAndRecordedAudio,
     getGenderData,
@@ -18,7 +20,8 @@ const {
     addValidationQuery,
     updateMediaWithValidatedState,
     feedbackInsertion,
-    getAudioPath,
+    getPathFromContribution,
+    getPathFromMasterDataSet,
     saveReportQuery,
     getMediaForLaunch,
     markContributionSkippedQuery,
@@ -84,49 +87,39 @@ let cn = {
 
 const db = pgp(cn);
 
-const updateDbWithAudioPath = function (
+const updateDbWithAudioPath = async (
     audioPath,
     sentenceId,
-    speakerDetails,
     userId,
     userName,
     state,
     country,
     audioDuration,
+    language,
     cb
-) {
-    const speakerDetailsJson = JSON.parse(speakerDetails);
-    let ageGroup = null,
-        gender = null,
-        motherTongue = null;
-    if (speakerDetailsJson) {
-        ageGroup = speakerDetailsJson.age;
-        gender = speakerDetailsJson.gender;
-        motherTongue = speakerDetailsJson.motherTongue;
-    }
+) => {
     const roundedAudioDuration = audioDuration ? Number(Number(audioDuration).toFixed(3)) : 0;
 
+    const contributor_id = await getContributorId(userId, userName)
+
     db.any(updateContributionDetails, [
-        audioPath,
-        ageGroup,
-        gender,
-        motherTongue,
         sentenceId,
-        userId,
-        userName,
+        contributor_id,
+        audioPath,
+        language,
+        roundedAudioDuration,
         state,
-        country,
-        roundedAudioDuration
+        country
     ])
-        .then(() => {
-            db.none(updateMediaWithContributedState, [sentenceId]).then();
-            db.none(updateMaterializedViews).then();
-            cb(200, { success: true });
-        })
-        .catch((err) => {
-            console.log(err);
-            cb(500, { error: true });
-        });
+    .then(() => {
+        db.none(updateMediaWithContributedState, [sentenceId]).then();
+        db.none(updateMaterializedViews).then();
+        cb(200, { success: true });
+    })
+    .catch((err) => {
+        console.log(err);
+        cb(500, { error: true });
+    });
 };
 
 const getMediaBasedOnAge = function (
@@ -170,7 +163,7 @@ const updateAndGetMedia = function (req, res) {
     const userName = req.body.userName;
     const language = req.body.language;
     const type = req.params.type;
-    
+
     const ageGroup = req.body.age;
     const media = getMediaBasedOnAge(
         ageGroup,
@@ -198,10 +191,12 @@ const updateAndGetMedia = function (req, res) {
         });
 };
 
-const getValidationMedia = function (req, res) {
-    const language = req.params.language;
+const getContributionList = function (req, res) {
+    const fromLanguage = req.query.from;
+    const toLanguage = req.query.to;
+    const type = req.params.type;
     const userId = req.cookies.userId;
-    db.any(getValidationMediaQuery, [language, userId])
+    db.any(getContributionListQuery, [userId, type, fromLanguage, toLanguage])
         .then((response) => {
             res.status(200).send({ data: response })
         })
@@ -211,18 +206,14 @@ const getValidationMedia = function (req, res) {
         });
 };
 
-const getAudioClip = function (req, res, objectStorage) {
-    if (!(req.body && req.body.contributionId)) {
-        res.status(400).send('No file selected.');
-        return;
-    }
-
-    const contributionId = req.body.contributionId;
-    db.one(getAudioPath, [contributionId]).then(async (data) => {
+const getMediaObject = (req, res, objectStorage) => {
+    const entityId = req.params.entityId;
+    const query = req.params.source == "contribute" ? getPathFromMasterDataSet : getPathFromContribution;
+    db.one(query, [entityId]).then(async (data) => {
         const downloadFile = downloader(objectStorage);
 
         try {
-            const file = await downloadFile(data.audio_path);
+            const file = await downloadFile(data.path);
 
             if (file == null) {
                 res.sendStatus(404);
@@ -234,16 +225,17 @@ const getAudioClip = function (req, res, objectStorage) {
             res.sendStatus(500);
         }
     })
-        .catch((err) => {
-            console.log(err);
-            res.sendStatus(500);
-        });
-    ;
+    .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+    });
+
 }
 
 const updateTablesAfterValidation = (req, res) => {
     const validatorId = req.cookies.userId;
-    const { sentenceId, action, contributionId, state = "", country = "" } = req.body
+    const { sentenceId, state = "", country = "" } = req.body;
+    const { action, contributionId } = req.params;
     return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country])
         .then(async () => {
             if (action !== 'skip') {
@@ -323,7 +315,7 @@ const cumulativeTimeLineQueries = {
 const getTimeline = (language = "", timeframe) => {
     timeframe = timeframe.toLowerCase();
     if (language.length !== 0) {
-        languageFilter = `language iLike '${language}'`
+        let languageFilter = `language iLike '${language}'`
         let filter = pgp.as.format('$1:raw', [languageFilter])
         let query = normalTimeLineQueries[timeframe] || weeklyTimeline;
         return db.any(query, filter);
@@ -533,14 +525,44 @@ const getHourGoalForLanguage = async (language) => {
     return parseInt((Math.ceil(result['hours'] / parseFloat(multiplier))) * multiplier);
 }
 
+const updateDbWithUserInput = async (
+    userName,
+    userId,
+    language,
+    userInput,
+    sentenceId,
+    state,
+    country,
+    cb) => {
+    const contributor_id = await getContributorId(userId, userName)
+
+    db.any(updateContributionDetailsWithUserInput, [
+        sentenceId,
+        contributor_id,
+        userInput,
+        language,
+        state,
+        country
+    ])
+    .then(() => {
+        db.none(updateMediaWithContributedState, [sentenceId]).then();
+        db.none(updateMaterializedViews).then();
+        cb(200, { success: true });
+    })
+    .catch((err) => {
+        console.log(err);
+        cb(500, { error: true });
+    });
+}
+
 module.exports = {
     updateAndGetMedia,
-    getValidationMedia,
+    getContributionList,
     updateDbWithAudioPath,
     updateTablesAfterValidation,
     getAllDetails,
     getAllInfo,
-    getAudioClip,
+    getMediaObject,
     getTopLanguageByHours,
     getAggregateDataCount,
     getTopLanguageBySpeakers,
@@ -554,5 +576,6 @@ module.exports = {
     saveReport,
     markContributionSkipped,
     getRewards,
-    getRewardsInfo
+    getRewardsInfo,
+    updateDbWithUserInput
 };

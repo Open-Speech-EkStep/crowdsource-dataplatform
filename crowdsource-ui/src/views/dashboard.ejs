@@ -17,176 +17,176 @@
 </head>
 
 <body>
-    <%- include common/headerForContributor.ejs %>
-        <div class="container container-fluid supreme-container">
+<%- include common/headerForContributor.ejs %>
+<div class="container container-fluid supreme-container">
+    <div class="row">
+        <div class="col-12">
             <div class="row">
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-12 col-md-7 col-lg-6">
-                            <div class="text-muted mb-2">
-                                <%= __('Select a language') %>:
-                            </div>
-                        </div>
+                <div class="col-12 col-md-7 col-lg-6">
+                    <div class="text-muted mb-2">
+                        <%= __('Select a language') %>:
                     </div>
-                    <div class="row">
-                        <div class="col-12 col-md-6 col-lg-5 all-languages">
-                            <div class="mt-2"><select class="btn btn-outline-primary dropdown-toggle h6 w-100 rounded mb-4 p-3" id="language">
-                                    <option selected="selected" class="pointer" id="language_button" value="">
-                                        <%= __('All Languages') %>
-                                    </option>
-                                    <% LANGUAGES.forEach(function(lang) { %>
-                                        <option value="<%= lang.value %>">
-                                            <%= lang.text %>
-                                        </option>
-                                        <% }) %>
-                                </select></div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4 data-updated">
-                            <div><span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-5 all-languages">
+                    <div class="mt-2"><select class="btn btn-outline-primary dropdown-toggle h6 w-100 rounded mb-4 p-3" id="language">
+                            <option selected="selected" class="pointer" id="language_button" value="">
+                                <%= __('All Languages') %>
+                            </option>
+                            <% LANGUAGES.forEach(function(lang) { %>
+                                <option value="<%= lang.value %>">
+                                    <%= lang.text %>
+                                </option>
+                            <% }) %>
+                        </select></div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 data-updated">
+                    <div><span>
                                     <%= __('Data Last Updated') %>:
                                 </span><span id="data-updated"></span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row no-data-found justify-content-center d-none" id="no-data-found">
-                <div class="col-12 col-md-12 col-lg-8">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-11 col-md-9 col-lg-9 no-data-found-text"><span>
-                                <%- __('We do not have any data for this language, would you like to contribute for it?') %>
-                            </span></div>
-                        <div class="col-11 col-md-3 col-lg-3 text-center contribute-now d-flex align-items-center justify-content-center" id="contribute-now" data-toggle="modal" data-target="#userModal">
-                            <%= __('Contribute Now') %>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row" id="speaker-data">
-                <div class="col-12">
-                    <div class="row justify-content-center" id="loader1">
-                        <div><span class="spinner"></span></div>
-                    </div>
-                    <div class="row text-center contribution-details d-none" id="contribution-details">
-                        <div class="contribution-data d-none" id="languages-wrapper">
-                            <p class="mb-1" id="languages-value"></p>
-                            <p class="mb-0">
-                                <%= __('languages contributed') %>
-                            </p>
-                        </div>
-                        <div class="contribution-data">
-                            <p class="mb-1" id="speaker-value"></p>
-                            <p class="mb-0">
-                                <%= __('speakers contributed') %>
-                            </p>
-                        </div>
-                        <div class="contribution-data">
-                            <p class="mb-1" id="contributed-value"></p>
-                            <p class="mb-0">
-                                <%= __('hours recorded') %>
-                            </p>
-                        </div>
-                        <div class="contribution-data">
-                            <p class="mb-1" id="validated-value"></p>
-                            <p class="mb-0">
-                                <%= __('hours validated') %>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row chart-row">
-                <div class="col-12">
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
-                        <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
-                    </div>
-                    <div class="row justify-content-center chart-container">
-                        <div class="col-12 col-lg-5 text-center chart d-none timeline-chart-container">
-                            <div class="row">
-                                <div class="text-left col-12 col-md-6 col-lg-6 pb-3 chart-title">
-                                    <%= __('Progress Chart') %>
-                                </div>
-                                <ul class="text-right col-12 col-md-6 col-lg-6 duration" id="duration">
-                                    <li class="tab-left active" data-value="monthly">
-                                        <%= __('Monthly') %>
-                                    </li>
-                                    <li class="tab-right inactive" data-value="quarterly">
-                                        <%= __('Quarterly') %>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="text-center justify-content-center d-none align-items-center chart-spinner" id="timeline-loader"><span class="spinner"></span></div>
-                            <div id="timeline-chart" class="h-100 pb-4"></div>
-                        </div>
-                        <div class="col-12 col-lg-5 text-center chart d-none">
-                            <div class="text-left pb-3 chart-title">
-                                <%= __('Gender Distribution') %>
-                            </div>
-                            <div id="gender-chart" class="h-100 pb-4"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row chart-row">
-                <div class="col-12">
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
-                        <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
-                    </div>
-                    <div class="row justify-content-center chart-container">
-                        <div class="col-12 col-lg-5 mb-3 text-center chart state-chart text-dark p-4">
-                            <div class="text-left px-3 pb-3 state-chart-text">
-                                <%= __('State Wise distribution') %>
-                            </div>
-                            <div id="indiaMapChart" style="width:100%"></div>
-                            <div id="legendDiv" class="justify-content-evenly mb-5 d-none">
-                                <div id="quarter" class="quarter">
-                                    <div class="legend-val">0 - 1hr</div>
-                                </div>
-                                <div id="half" class="half">
-                                    <div class="legend-val">1 - 2hrs</div>
-                                </div>
-                                <div id="threeQuarter" class="threeQuarter">
-                                    <div class="legend-val">2 - 4hrs</div>
-                                </div>
-                                <div id="full" class="full">
-                                    <div class="legend-val">4+ hrs</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-5 mb-3 text-center chart age-group-chart d-none p-4">
-                            <div class="text-left px-3 pb-3">
-                                <%= __('Age Group Distribution') %>
-                            </div>
-                            <div id="age-group-chart" class="h-100"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal-chart-wrapper" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg w-75 mw-100 h-75 mx-auto">
-                <div class="modal-content border-primary border-2 h-100 p-lg-5 px-2 py-4">
-                    <div class="text-right" aria-label="Close"><a href="#" aria-hidden="true" data-dismiss="modal">
-                            <%= __('Hide details') %> &lt;
-                        </a></div>
-                    <div id="modal-chart" class="h-100"></div>
+    </div>
+    <div class="row no-data-found justify-content-center d-none" id="no-data-found">
+        <div class="col-12 col-md-12 col-lg-8">
+            <div class="row d-flex justify-content-center">
+                <div class="col-11 col-md-9 col-lg-9 no-data-found-text"><span>
+                                <%- __('We do not have any data for this language, would you like to contribute for it?') %>
+                            </span></div>
+                <div class="col-11 col-md-3 col-lg-3 text-center contribute-now d-flex align-items-center justify-content-center" id="contribute-now" data-toggle="modal" data-target="#userModal">
+                    <%= __('Contribute Now') %>
                 </div>
             </div>
-        </div><button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
-        <%- include modals/speakerDetail.ejs %>
-        <%- include modals/content-languages.ejs %>
-            <%- include modals/say-listen-language.ejs%>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <%- include common/footer.ejs %>
-                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-                    <script src="../js/dashboard.js"></script>
-                    <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
-                    <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
-                    <script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
-                    <script src="https://www.amcharts.com/lib/version/4.9.23/themes/animated.js"></script>
-                    <script src="../js/draw-chart.js"></script>
+        </div>
+    </div>
+    <div class="row" id="speaker-data">
+        <div class="col-12">
+            <div class="row justify-content-center" id="loader1">
+                <div><span class="spinner"></span></div>
+            </div>
+            <div class="row text-center contribution-details d-none" id="contribution-details">
+                <div class="contribution-data d-none" id="languages-wrapper">
+                    <p class="mb-1" id="languages-value"></p>
+                    <p class="mb-0">
+                        <%= __('languages contributed') %>
+                    </p>
+                </div>
+                <div class="contribution-data">
+                    <p class="mb-1" id="speaker-value"></p>
+                    <p class="mb-0">
+                        <%= __('speakers contributed') %>
+                    </p>
+                </div>
+                <div class="contribution-data">
+                    <p class="mb-1" id="contributed-value"></p>
+                    <p class="mb-0">
+                        <%= __('hours recorded') %>
+                    </p>
+                </div>
+                <div class="contribution-data">
+                    <p class="mb-1" id="validated-value"></p>
+                    <p class="mb-0">
+                        <%= __('hours validated') %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row chart-row">
+        <div class="col-12">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+            </div>
+            <div class="row justify-content-center chart-container">
+                <div class="col-12 col-lg-5 text-center chart d-none timeline-chart-container">
+                    <div class="row">
+                        <div class="text-left col-12 col-md-6 col-lg-6 pb-3 chart-title">
+                            <%= __('Progress Chart') %>
+                        </div>
+                        <ul class="text-right col-12 col-md-6 col-lg-6 duration" id="duration">
+                            <li class="tab-left active" data-value="monthly">
+                                <%= __('Monthly') %>
+                            </li>
+                            <li class="tab-right inactive" data-value="quarterly">
+                                <%= __('Quarterly') %>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="text-center justify-content-center d-none align-items-center chart-spinner" id="timeline-loader"><span class="spinner"></span></div>
+                    <div id="timeline-chart" class="h-100 pb-4"></div>
+                </div>
+                <div class="col-12 col-lg-5 text-center chart d-none">
+                    <div class="text-left pb-3 chart-title">
+                        <%= __('Gender Distribution') %>
+                    </div>
+                    <div id="gender-chart" class="h-100 pb-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row chart-row">
+        <div class="col-12">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+            </div>
+            <div class="row justify-content-center chart-container">
+                <div class="col-12 col-lg-5 mb-3 text-center chart state-chart text-dark p-4">
+                    <div class="text-left px-3 pb-3 state-chart-text">
+                        <%= __('State Wise distribution') %>
+                    </div>
+                    <div id="indiaMapChart" style="width:100%"></div>
+                    <div id="legendDiv" class="justify-content-evenly mb-5 d-none">
+                        <div id="quarter" class="quarter">
+                            <div class="legend-val">0 - 1hr</div>
+                        </div>
+                        <div id="half" class="half">
+                            <div class="legend-val">1 - 2hrs</div>
+                        </div>
+                        <div id="threeQuarter" class="threeQuarter">
+                            <div class="legend-val">2 - 4hrs</div>
+                        </div>
+                        <div id="full" class="full">
+                            <div class="legend-val">4+ hrs</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 mb-3 text-center chart age-group-chart d-none p-4">
+                    <div class="text-left px-3 pb-3">
+                        <%= __('Age Group Distribution') %>
+                    </div>
+                    <div id="age-group-chart" class="h-100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-chart-wrapper" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg w-75 mw-100 h-75 mx-auto">
+        <div class="modal-content border-primary border-2 h-100 p-lg-5 px-2 py-4">
+            <div class="text-right" aria-label="Close"><a href="#" aria-hidden="true" data-dismiss="modal">
+                    <%= __('Hide details') %> &lt;
+                </a></div>
+            <div id="modal-chart" class="h-100"></div>
+        </div>
+    </div>
+</div><button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
+<%- include modals/speakerDetail.ejs %>
+<%- include modals/content-languages.ejs %>
+<%- include modals/say-listen-language.ejs%>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<%- include common/footer.ejs %>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="../js/dashboard.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/themes/animated.js"></script>
+<script src="../js/draw-chart.js"></script>
 </body>
 
 </html>

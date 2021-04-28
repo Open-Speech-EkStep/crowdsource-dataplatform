@@ -227,16 +227,14 @@ function recordValidation(action) {
     if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
         validationCount++;
     }
-    const sentenceId = validationSentences[currentIndex].sentenceId
+    const sentenceId = validationSentences[currentIndex].dataset_row_id
     const contribution_id = validationSentences[currentIndex].contribution_id
-    fetch('/validate', {
+    fetch(`/validate/${contribution_id}/${action}`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
         body: JSON.stringify({
             sentenceId: sentenceId,
-            action: action,
-            contributionId: contribution_id,
             state: localStorage.getItem('state_region') || "",
             country: localStorage.getItem('country') || ""
         }),
@@ -335,11 +333,9 @@ function disableSkipButton() {
 const getAudioClip = function (contributionId) {
     hideAudioRow();
     disableSkipButton();
-    fetch('/contributions', {
+    const source = 'validate';
+    fetch(`/contributed-media/${source}/${contributionId}`, {
         method: 'POST',
-        body: JSON.stringify({
-            contributionId: contributionId
-        }),
         headers: {
             'Content-Type': 'application/json',
         }
@@ -490,7 +486,9 @@ $(document).ready(() => {
         localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);
     }).catch(console.log);
-    fetch(`/contributions/${language}`, {
+    const type = 'text';
+    const toLanguage = ""; //can be anything
+    fetch(`/contributions/${type}?from=${language}&to=${toLanguage}`, {
         credentials: 'include',
         mode: 'cors'
       })

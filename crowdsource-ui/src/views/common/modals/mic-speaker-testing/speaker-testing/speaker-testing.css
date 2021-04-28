@@ -1,0 +1,39 @@
+.ambient-noise {
+    font-size: 14px;
+    color: #959595;
+    padding-top: 8px;
+}
+
+.ambient-noise svg {
+    vertical-align: text-bottom;
+    margin-right: 5px;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1280px) {
+    .ambient-noise {
+        font-size: 12px;
+        padding-right: 0;
+    }
+}
+
+.test-btn {
+    font-size: 14px;
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border: 1px solid #959595;
+    border-radius: 4px;
+}
+
+.test-btn svg {
+    margin-right: 8px;
+}
+
+.test-canvas {
+    border: 1px solid #959595;
+    border-radius: 4px;
+    height: 15px;
+}
