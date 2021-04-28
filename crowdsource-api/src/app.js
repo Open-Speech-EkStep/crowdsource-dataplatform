@@ -26,7 +26,8 @@ const {
     markContributionSkipped,
     getRewards,
     getRewardsInfo,
-    updateDbWithUserInput
+    updateDbWithUserInput,
+    getAvailableLanguages
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
@@ -370,6 +371,8 @@ router.get('/rewards-info', validateRewardsInfoQuery, async (req, res) => {
 
     return res.status(404).send('Data not found');
 });
+
+router.get('/available-languages', (req, res) => getAvailableLanguages(res));
 
 require('./dashboard-api')(router);
 

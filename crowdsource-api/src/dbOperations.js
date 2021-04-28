@@ -40,7 +40,9 @@ const {
     addContributorQuery,
     getContributionHoursForLanguage,
     getMultiplierForHourGoal,
-    getOrderedMediaQuery
+    getOrderedMediaQuery,
+    getContributionLanguagesQuery,
+    getDatasetLanguagesQuery
 } = require('./dbQuery');
 
 const {
@@ -561,6 +563,27 @@ const updateDbWithUserInput = async (
         });
 }
 
+const getAvailableLanguages = async (res) => {
+    try {
+        const datasetLanguageList = await db.many(getDatasetLanguagesQuery);
+        const contributionLanguageList = await db.many(getContributionLanguagesQuery);
+
+        const datasetLanguages = datasetLanguageList.map((value) => value.data_language);
+        const contributionLanguages = {};
+        contributionLanguageList.forEach((entry) => {
+            if (contributionLanguages[entry.from_language]) {
+                contributionLanguages[entry.from_language].push(entry.to_language);
+            }
+            else contributionLanguages[entry.from_language] = [entry.to_language];
+        })
+        res.status(200).send({ datasetLanguages, contributionLanguages })
+
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+}
+
 module.exports = {
     updateAndGetMedia,
     getContributionList,
@@ -583,5 +606,6 @@ module.exports = {
     markContributionSkipped,
     getRewards,
     getRewardsInfo,
-    updateDbWithUserInput
+    updateDbWithUserInput,
+    getAvailableLanguages
 };
