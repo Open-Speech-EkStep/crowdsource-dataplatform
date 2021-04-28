@@ -76,6 +76,7 @@ const currentDateAndTime = () => {
 };
 
 const multer = require('multer');
+const { xss } = require('xss');
 const multerStorage = multer.diskStorage({
     destination: function (req, file, cb) {
         if (!fs.existsSync('uploads')) {
@@ -167,7 +168,7 @@ router.get('/contributions/:type', validateGetContributionsInput, (req, res) => 
 
 router.post('/validate/:contributionId/:action', validateInputsForValidateEndpoint, (req, res) => updateTablesAfterValidation(req, res))
 
-router.post('/contributed-media/:source/:entityId', validateContributedMediaInput, (req, res) => getMediaObject(req, res, objectStorage))
+router.post('/media-object/:source/:entityId', validateContributedMediaInput, (req, res) => getMediaObject(req, res, objectStorage))
 
 router.post('/report', async (req, res) => {
     const userId = req.cookies.userId || '';
@@ -204,7 +205,7 @@ router.post('/skip', validateInputForSkip, (req, res) => {
 
 router.post('/store', validateUserInputAndFile, (req, res) => {
     const file = req.file;
-    const userInput = req.body.userInput;
+    const userInput = xss(req.body.userInput);
     const sentenceId = req.body.sentenceId;
     const speakerDetails = req.body.speakerDetails;
     const audioDuration = req.body.audioDuration;
