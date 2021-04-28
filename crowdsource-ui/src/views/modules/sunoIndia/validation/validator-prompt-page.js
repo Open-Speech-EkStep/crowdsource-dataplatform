@@ -1,26 +1,12 @@
 const fetch = require('../common/fetch')
-const Visualizer = require('../common/visualizer')
 const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
+const {CONTRIBUTION_LANGUAGE} = require('../common/constants');
 
-const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-let context, src;
-
-function startVisualizer() {
-  const $canvas = document.getElementById('myCanvas');
-  const audio = document.getElementById('my-audio');
-  context = context || new AudioContext();
-  src = src || context.createMediaElementSource(audio);
-  const analyser = context.createAnalyser();
-  src.connect(analyser);
-  analyser.connect(context.destination);
-  visualizer.visualize($canvas, analyser);
-}
 
 function enableButton(element) {
   element.children().removeAttr("opacity")
@@ -48,14 +34,12 @@ const setAudioPlayer = function () {
   play.on('click', () => {
     hideElement($('#default_line'))
     playAudio();
-    startVisualizer();
   });
 
   pause.on('click', pauseAudio);
 
   replay.on('click', () => {
     replayAudio();
-    startVisualizer();
   });
 
   function playAudio() {
@@ -88,9 +72,9 @@ const setAudioPlayer = function () {
 
   function enableValidation() {
     const likeButton = $("#like_button");
-    const dislikeButton = $("#dislike_button");
+    const needChangeButton = $("#need_change");
     enableButton(likeButton)
-    enableButton(dislikeButton)
+    enableButton(needChangeButton)
   }
 }
 
@@ -141,46 +125,8 @@ const updateValidationCount = () => {
 }
 
 const updateProgressBar = () => {
-  const $getStarted = $('#get-started');
-  let progressMessages = [
-    'Let’s get started',
-    'We know you can do more! ',
-    'You are halfway there. Keep going!',
-    'Just few more steps to go!',
-    'Four dead, one more to go!',
-    'Yay! Done & Dusted!',
-  ];
-  if (validationSentences.length == 4) {
-    progressMessages = [
-      'Let’s get started',
-      'We know you can do more! ',
-      'You are halfway there. Keep going!',
-      'Just few more steps to go!',
-      'Yay! Done & Dusted!'
-    ];
-  } else if (validationSentences.length == 3) {
-    progressMessages = [
-      'Let’s get started',
-      'We know you can do more! ',
-      'Just few more steps to go!',
-      'Yay! Done & Dusted!'
-    ];
-  } else if (validationSentences.length == 2) {
-    progressMessages = [
-      'Let’s get started',
-      'Just few more steps to go!',
-      'Yay! Done & Dusted!'
-    ];
-  } else if (validationSentences.length == 1) {
-    progressMessages = [
-      'Let’s get started',
-      'Yay! Done & Dusted!'
-    ];
-  }
   const $progressBar = $("#progress_bar");
   progressCount++;
-  $getStarted.text(progressMessages[progressCount]).show();
-
   const multiplier = 10 * (10 / validationSentences.length);
   $progressBar.width(progressCount * multiplier + '%');
   $progressBar.prop('aria-valuenow', progressCount);
@@ -193,12 +139,12 @@ function disableButton(button) {
 }
 
 function disableValidation() {
-  const dislikeButton = $("#dislike_button");
+  const needChangeButton = $("#need_change");
   const likeButton = $("#like_button");
-  updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
-  updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
+  updateDecisionButton(needChangeButton, ["white", "#007BFF", "#343A40"]);
+  updateDecisionButton(likeButton, ["white", "", "#343A40"]);
   disableButton(likeButton)
-  disableButton(dislikeButton)
+  disableButton(needChangeButton)
 }
 
 function resetValidation() {
@@ -246,36 +192,37 @@ function recordValidation(action) {
 function addListeners() {
 
   const likeButton = $("#like_button");
-  const dislikeButton = $("#dislike_button");
+  const needChangeButton = $("#need_change");
+  // const dislikeButton = $("#dislike_button");
   const $skipButton = $('#skip_button');
 
   likeButton.hover(() => {
-      updateDecisionButton(likeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
+      updateDecisionButton(likeButton, ["#bfddf5", "", "#007BFF"]);
     },
     () => {
-      updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
+      updateDecisionButton(likeButton, ["white", "", "#343A40"]);
     });
 
-  dislikeButton.hover(() => {
-      updateDecisionButton(dislikeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
+  needChangeButton.hover(() => {
+      updateDecisionButton(needChangeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
     },
     () => {
-      updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
+      updateDecisionButton(needChangeButton, ["white", "#007BFF", "#343A40"]);
     });
 
-  dislikeButton.mousedown(() => {
-    updateDecisionButton(dislikeButton, ["#007BFF", "white", "white"]);
+  needChangeButton.mousedown(() => {
+    updateDecisionButton(needChangeButton, ["#007BFF", "white", "white"]);
   });
 
   likeButton.mousedown(() => {
-    updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
+    updateDecisionButton(likeButton, ["#007BFF", "", "white"]);
   });
 
-  dislikeButton.on('click', () => {
-    recordValidation(REJECT_ACTION)
-    updateProgressBar();
-    getNextSentence();
-  })
+  // dislikeButton.on('click', () => {
+  //   recordValidation(REJECT_ACTION)
+  //   updateProgressBar();
+  //   getNextSentence();
+  // })
 
   likeButton.on('click', () => {
     recordValidation(ACCEPT_ACTION)
@@ -305,6 +252,7 @@ let validationSentences = [{ sentence: '' }]
 
 const loadAudio = function (audioLink) {
   $('#my-audio').attr('src', audioLink)
+  $('#my-audio').addClass('pointer-event')
 };
 
 function disableSkipButton() {
@@ -410,7 +358,7 @@ const handleSubmitFeedback = function () {
   reportSentenceOrRecording(reqObj).then(function (resp) {
     if (resp.statusCode === 200) {
       $('#skip_button').click();
-      $("#report_recording_modal").modal('hide');
+      $("#report_sentence_modal").modal('hide');
       $("#report_sentence_thanks_modal").modal('show');
       $("#report_submit_id").attr("disabled", true);
       $("input[type=radio][name=reportRadio]").each(function () {
@@ -440,7 +388,7 @@ $(document).ready(() => {
     location.href = './record.html';
   });
 
-  const $reportModal = $("#report_recording_modal");
+  const $reportModal = $("#report_sentence_modal");
 
   $("#report_submit_id").on('click', handleSubmitFeedback);
 
@@ -467,9 +415,10 @@ $(document).ready(() => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
   }).catch(console.log);
-  const type = 'text';
+  const type = 'asr';
   const toLanguage = ""; //can be anything
-  fetch(`/contributions/${type}?from=${language}&to=${toLanguage}`, {
+  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  fetch(`/contributions/${type}?from=${fromLanguage}&to=${toLanguage}`, {
     credentials: 'include',
     mode: 'cors'
   })
@@ -479,22 +428,20 @@ $(document).ready(() => {
       } else {
         return data.json();
       }
-    }).then((sentenceData) => {
-    if (sentenceData.data.length === 0) {
+    }).then((result) => {
+    if (result.data.length === 0) {
       showNoSentencesMessage();
       return;
     }
-    validationSentences = sentenceData.data
-    const sentence = validationSentences[currentIndex];
-    if (sentence) {
-      getAudioClip(sentence.contribution_id);
+    validationSentences = result.data
+    const audio = validationSentences[currentIndex];
+    if (audio) {
+      getAudioClip(audio.contribution_id);
       setSentenceLabel(currentIndex);
       updateValidationCount();
       resetValidation();
       addListeners();
       setAudioPlayer();
-      const $canvas = document.getElementById('myCanvas');
-      visualizer.drawCanvasLine($canvas);
     }
   }).catch((err) => {
     console.log(err)
@@ -505,5 +452,4 @@ module.exports = {
   setSentenceLabel,
   setAudioPlayer,
   addListeners,
-  startVisualizer
 };
