@@ -1,5 +1,6 @@
 const {constructChart}= require('../common/horizontalBarGraph');
 const {drawMap,getStatistics} = require('../common/map');
+const { onActiveNavbar } = require('../common/header');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
 const {
   setSpeakerDetails,
@@ -198,6 +199,7 @@ $(document).ready(function () {
   }).catch(err => {
     initializeBlock();
   });
+  onActiveNavbar('dekho');
 });
 
 
