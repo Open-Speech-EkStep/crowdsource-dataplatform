@@ -73,7 +73,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-crowdsource-api/.env
+.env
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -132,6 +132,8 @@ crowdsource-ui/target/*
 !crowdsource-ui/target/aud/
 
 crowdsource-api/.env
+# ignore the upload files
+crowdsource-api/uploads
 
 public 
 build
