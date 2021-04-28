@@ -1,0 +1,60 @@
+<div class="modal fade" id="report_recording_modal" tabindex="-1" aria-labelledby="Report Recording" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="modal-header d-block border-0">
+                <h4 class="modal-title text-center">
+                    <%= __('Report Content') %>
+                </h4>
+                <button type="button" id="report_close_btn" class="btn btn-close text-muted" data-bs-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-4">
+                    <%= __('Help us understand what’s wrong with the recording') %>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reportRadio" id="prohibitedContent_id" value="Prohibited Content">
+                        <label class="form-check-label xs-radio-label" for="prohibitedContent_id">
+                            <%= __('Offensive') %>
+                        </label>
+                    </div>
+                    <div class="option-text">
+                        <%= __('Hateful / Discriminatory / Vulgar language, drugs promotion etc.') %>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="reportRadio" id="others_id" value="Others">
+                        <label class="form-check-label xs-radio-label" for="others_id">
+                            <%= __('Others')%>
+                        </label>
+                    </div>
+                </div>
+                <textarea maxlength="1000" id="other_text" class="w-100 p-3 other-reason mb-4" rows="3" placeholder="<%= __('Please specify the reason (Optional)')%>"></textarea>
+                <div class="d-flex justify-content-center">
+                    <button id="report_submit_id" class="btn btn-primary w-75" disabled="disabled"><%= __('SUBMIT')%></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="report_sentence_thanks_modal" tabindex="-1" aria-labelledby="ReportSentenceThankYou" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="modal-header d-block border-0">
+                <h4 class="modal-title text-center">
+                    <%= __('Thank You') %>
+                </h4>
+                <button type="button" id="report_sentence_thanks_close_id" class="btn btn-close text-muted" data-bs-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center"><%= __('Your feedback helps us keep Bolo India relevant, we appreciate you taking time to leave the feedback.') %></div>
+            </div>
+        </div>
+    </div>
+</div>
