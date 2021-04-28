@@ -40,6 +40,8 @@ const statesInformation = [
 ]
 
 let polygonSeries = undefined;
+const $mapLoader = $('#map-loader');
+const $mapChart = $('#map');
 const drawMap = function (response) {
   let statesData = [...statesInformation];
   const $legendDiv = $("#legendDiv");
@@ -168,11 +170,15 @@ function getLanguageSpecificData(data, lang) {
 }
 
 const generateIndiaMap = function (language="") {
+  $mapLoader.show().addClass('d-flex');
+  $mapChart.addClass('d-none');
   const url = language !== "" ? '/aggregate-data-count?byState=true&byLanguage=true' : '/aggregate-data-count?byState=true';
   performAPIRequest(url)
     .then((data) => {
       const response = language !== "" ? getLanguageSpecificData(data, language) : data;
       drawMap(response);
+      $mapLoader.hide().removeClass('d-flex');
+      $mapChart.removeClass('d-none');
     })
     .catch((err) => {
       console.log(err);

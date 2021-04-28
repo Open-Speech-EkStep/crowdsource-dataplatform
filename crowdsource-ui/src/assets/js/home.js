@@ -1,4 +1,5 @@
-const {showLanguagePopup, redirectToLocalisedPage} = require('./locale')
+const {showLanguagePopup, redirectToLocalisedPage} = require('./locale');
+const { onActiveNavbar } = require('./header');
 const {drawMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest} = require('./utils')
 const {
@@ -356,6 +357,7 @@ $(document).ready(function () {
         redirectToLocalisedPage();
     }
     clearLocalStorage();
+    onActiveNavbar('bolo');
     getLocaleString().then(()=>{
         initializeBlock();
         renderCoachMarks();

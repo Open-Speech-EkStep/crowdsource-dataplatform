@@ -3,7 +3,7 @@ const { calculateTime } = require('./utils');
 
 const $chartRow = $('.chart-row');
 const $timelineLoader = $('#timeline-loader');
-const $timelineChart = $('#timeline-chart');
+const $timelineChart = $('#timeline');
 
 const chartReg = {};
 

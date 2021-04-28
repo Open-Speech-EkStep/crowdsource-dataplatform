@@ -120,4 +120,12 @@ body {
 .dropdown{
   cursor: pointer;
 }
-  
+
+.module-item.active {
+  background: rgba(0, 123, 255, 0.1);
+  border-bottom: 2px solid#007BFF;
+}
+
+.module-item.active > a {
+  color: #007BFF !important;
+}

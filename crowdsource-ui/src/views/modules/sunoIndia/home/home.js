@@ -1,4 +1,5 @@
 const {constructChart}= require('../common/horizontalBarGraph');
+const { onActiveNavbar } = require('../common/header');
 const {drawMap,getStatistics} = require('../common/map');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
 const {
@@ -17,6 +18,7 @@ const {
   TOP_LANGUAGES_BY_SPEAKERS,
   AGGREGATED_DATA_BY_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
+  SELECTED_MODULE
 } = require('../common/constants');
 
 
@@ -178,6 +180,7 @@ $(document).ready(function () {
   }).catch(err => {
     initializeBlock();
   });
+  onActiveNavbar('suno');
 });
 
 
