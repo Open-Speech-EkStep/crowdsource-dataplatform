@@ -1,0 +1,51 @@
+.recorder-container {
+    width: 4rem;
+    background-color: #e74c3c;
+    display: block;
+    border-radius: 100%;
+    box-shadow: 0px 0px 15px 2px #bdc3c7;
+    cursor: default;
+    transition: 0.3s all ease-in;
+    position: relative;
+}
+
+.recorder-container .icon-microphone {
+    color: #fff;
+    font-size: 4rem;
+    line-height: 4rem;
+    display: block;
+    text-align: center;
+    transition: 0.1s all ease-in;
+    position: relative;
+}
+
+.recorder-container .outer {
+    width: 4rem;
+    height: 4rem;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    border-radius: 100%;
+    position: absolute;
+    background-color: transparent;
+    border: 1px solid #7f8c8d;
+    z-index: -1;
+    transition: 1.5s all ease;
+    -webkit-animation: woong 1.5s infinite;
+    animation: woong 1.5s infinite;
+}
+
+.recorder-container .outer-2 {
+    width: 4rem;
+    height: 4rem;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    border-radius: 100%;
+    position: absolute;
+    background-color: #bdc3c7;
+    z-index: -1;
+    transition: 1.5s all ease;
+    -webkit-animation: woong-2 1.5s infinite;
+    animation: woong-2 1.5s infinite;
+    -webkit-animation-delay: 2.5s;
+    animation-delay: 2.5s;
+}
