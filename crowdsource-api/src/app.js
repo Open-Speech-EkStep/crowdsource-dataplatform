@@ -211,7 +211,7 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
     const speakerDetailsJson = JSON.parse(speakerDetails);
     const userName = speakerDetailsJson.userName;
     const userId = req.cookies.userId;
-    const language = speakerDetailsJson.language;
+    const language = req.body.language;
     const state = req.body.state || "";
     const country = req.body.country || "";
 
