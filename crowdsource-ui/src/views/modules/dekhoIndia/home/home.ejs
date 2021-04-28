@@ -27,26 +27,13 @@
 <%- include('../common/header.ejs',{bolo:"../home.html", suno:"../sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./home.html"}); %>
 <div class="container-fluid supreme-container">
     <div class="row">
-        <%- include ../../../common/languageNavBar/languageNavBar.ejs %>
+        <%- include ../common/languageNavBar.ejs %>
     </div>
     <div class="m-auto row justify-content-center mt-lg-5 mx-lg-5">
-        <%- include('../../../common/card/cards.ejs',{left:{h1:"Speak",h2:"Contribute Your Voice","p1":"Contribute your voice to create an open data repository of Indian languages",img:"../img/say.svg"},right:{h1:"Listen",h2:"Validate What They Say","p1":"Help us by validating the recordings that others have contributed",img:"../img/listen.svg"}}); %>
+        <%- include('../common/cards.ejs',{left:{h1:"Look",h2:"Type the text as per the image","p1":"Contribute your voice to create an open data repository of Indian languages",img:"../../img/look.svg"},right:{h1:"Validate",h2:"Correct the text as per the image","p1":"Help us by validating the recordings that others have contributed",img:"../../img/validate.svg"}}); %>
     </div>
     <div class="row">
         <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 text-dark mt-4">
-            <h1 class="display-5 font-wt-900 site-blue lh-5 mt-lg-5">
-                <%= __('Bolo India: A crowdsourcing initiative for Indian languages') %>
-            </h1>
-            <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
-                <%= __('India needs to be Aatmanirbhar in the area of speech recognition in Indian languages.  Hence, we want to create an open data repository of many Indian voices. Bolo India invites you to volunteer contribute your voice for this cause.') %> <a class="ml-1" href="./about-us.html">
-                    <%= __('Know More') %>
-                </a>
-            </p>
-        </div>
-        <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="../img/home.svg" width="614.8" height="759.548" alt="Bolo India Infograph" class="img-fluid mr-n1"></div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 pt-lg-0 text-dark">
             <h1 class="display-5 font-wt-900 site-blue lh-5">
                 <%= __('We rely on your contributions') %>
             </h1>
@@ -74,13 +61,13 @@
                 <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="speakers-wrapper">
                     <p class="h4" id="speaker-value"></p>
                     <p class="mb-0 fs-h4">
-                        <%= __('speakers contributed') %>
+                        <%= __('Image-text contributed') %>
                     </p>
                 </div>
                 <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="hours-wrapper">
                     <div class="mb-0 d-flex align-items-center"><span class="h4" id="hour-value"></span></div>
                     <p class="mb-0 fs-h4">
-                        <%= __('hours recorded') %>
+                        <%= __('Image-text validated') %>
                     </p>
                 </div>
             </div>
@@ -92,7 +79,7 @@
             <div class="justify-content-center align-items-center d-none" id="chartSpinner">
                 <div><span class="spinner"></span></div>
             </div>
-            <%- include ../../../common/charts/map/map.ejs %>
+            <%- include ../common/map.ejs %>
         </div>
         <div class="col-12 col-md-6 col-lg-5 mt-xs-5 pr-lg-5">
             <div id="bar_charts_container">
@@ -100,25 +87,25 @@
                     <%= __('Top Languages') %>
                 </h4>
                 <div class="d-flex mb-3">
-                    <div class="form-check mr-5"><label class="form-check-label" for="flexRadioDefault1"><input class="form-check-input" type="radio" name="topLanguageChart" id="hours_chart" value="hours" checked="checked">
-                            <%= __('By hours of data contributed') %>
-                        </label></div>
+                    <div name="topLanguageChart" id="hours_chart" value="hours">
+                            <%= __('Total no. of image-text corrections') %>
+                    </div>
                 </div>
                 <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
                     <div><span class="spinner"></span></div>
                 </div>
-                <%- include ../../../common/charts/barGraph/horizontalBarGraph.ejs %>
+                <%- include ../common/horizontalBarGraph.ejs %>
             </div>
         </div>
         <div class="col-12 col-md-12 col-lg-12 px-0 oflow-x-hid"></div>
     </div>
-    <%- include ../../../common/buttons/viewAllDetailBtn/viewAllDetailBtn.ejs%>
+    <%- include ../common/viewAllDetailBtn.ejs%>
 </div>
-<%- include ../../../common/modals/userDetails/userDetails.ejs %>
-<%- include ../../../modals/content-languages.ejs %>
-<%- include ../../../modals/say-listen-language.ejs %>
+<%- include ../common/userDetails.ejs %>
+<%- include ../common/content-languages.ejs %>
+<%- include ../common/say-listen-language.ejs %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%- include ../../../common/footer.ejs %>
+<%- include ../common/footer.ejs %>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 

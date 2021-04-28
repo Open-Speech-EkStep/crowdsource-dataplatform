@@ -1,4 +1,4 @@
-const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES } = require('../../../crowdsource-api/src/constants');
+const { MOTHER_TONGUE, LANGUAGES } = require('../../../crowdsource-api/src/constants');
 const fs = require('fs');
 const ejs = require('ejs');
 const { I18n } = require('i18n');
@@ -9,14 +9,14 @@ async function ejs2html(path, information, i18n, targetPath, fileName, locale) {
       return false;
     }
 
-    var info = Object.assign(information, {
+    const info = Object.assign(information, {
       filename: path,
       compileDebug: false,
     });
     i18n.init(info);
     info.setLocale(locale);
 
-    var html = ejs.render(data, info);
+    const html = ejs.render(data, info);
 
     fs.mkdirSync(targetPath, { recursive: true });
     fs.writeFile(targetPath + '/' + fileName, html, function (err2) {
@@ -29,7 +29,6 @@ async function ejs2html(path, information, i18n, targetPath, fileName, locale) {
 }
 
 const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName) {
-  console.log(inputPath, moduleName, outPath);
   const i18n = new I18n({
     locales: [
       'as',
