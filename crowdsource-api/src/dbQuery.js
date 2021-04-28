@@ -8,7 +8,7 @@ and con.contributor_identifier = $1 and user_name=$2 and sen.language != $3;`
 const mediaCount = `select count(s.*) from dataset_row s \
 inner join "contributions" cont on s."dataset_row_id" = cont."dataset_row_id" \
 inner join "contributors" con on cont.contributed_by = con.contributor_id \
-where con.contributor_identifier = $1 and user_name=$2 AND s."language" = $3 and cont.action = \'completed\';`
+where con.contributor_identifier = $1 and user_name=$2 AND s.media ->> 'language' = $3 and cont.action = \'completed\';`
 
 const updateAndGetOrderedMediaQuery = `\
 INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 \
@@ -89,7 +89,7 @@ select dataset_row."dataset_row_id", dataset_row.media ->> 'data' as media_data
 from dataset_row 
 left join "contributors" con on con."contributor_identifier"=$1 and user_name=$2
 left join "contributions" cont on cont."dataset_row_id"= dataset_row."dataset_row_id" and cont.contributed_by = con.contributor_id 
-where language=$4 and difficulty_level=$3 and coalesce(dataset_row.state,'')!= 'reported' and type=$5
+where dataset_row.media ->> 'language'=$4 and difficulty_level=$3 and coalesce(dataset_row.state,'')!= 'reported' and type=$5
 and (cont.action is null or (coalesce(cont.action,'')='completed' and cont.contributed_by != con.contributor_id) or (coalesce(cont.action,'')='skipped' and cont.contributed_by != con.contributor_id)) 
 group by dataset_row."dataset_row_id", dataset_row.media ->> 'data' 
 order by dataset_row."dataset_row_id"
