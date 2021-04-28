@@ -161,46 +161,6 @@ router.get('/getAllInfo/:language', async function (req, res) {
   }
 });
 
-router.get('/sunoIndia/dashboard', function (req, res) {
-  const isCookiePresent = req.cookies.userId ? true : false;
-  res.render('modules/sunoIndia/dashboard.ejs', {
-    MOTHER_TONGUE,
-    LANGUAGES,
-    isCookiePresent,
-  });
-});
-
-router.get('/sunoIndia/record', function (req, res) {
-  const isCookiePresent = req.cookies.userId ? true : false;
-  res.render('modules/sunoIndia/record/record.ejs');
-});
-
-router.get('/likhoIndia/dashboard', function (req, res) {
-    const isCookiePresent = req.cookies.userId ? true : false;
-    res.render('modules/likhoIndia/dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
-});
-
-router.get('/dekhoIndia/dashboard', function (req, res) {
-    const isCookiePresent = req.cookies.userId ? true : false;
-    res.render('modules/dekhoIndia/dashboard.ejs', { MOTHER_TONGUE, LANGUAGES, isCookiePresent });
-});
-
-router.get('/sunoIndia/home', function (req, res) {
-    res.render('modules/sunoIndia/home/home.ejs', { MOTHER_TONGUE, LANGUAGES,isCookiePresent: false, defaultLang: undefined });
-});
-
-router.get('/likhoIndia/homePage', function (req, res) {
-    res.render('modules/likhoIndia/home/likhoHome.ejs', { MOTHER_TONGUE, LANGUAGES,isCookiePresent: false, defaultLang: undefined });
-});
-
-router.get('/dekhoIndia/homePage', function (req, res) {
-    res.render('modules/dekhoIndia/home/dekhoHome.ejs', { MOTHER_TONGUE, LANGUAGES,isCookiePresent: false, defaultLang: undefined });
-});
-
-router.get('/temp', function (req, res) {
-  res.render('temp1.ejs');
-});
-
 router.post('/media/:type', validateUserInfo, (req, res) => updateAndGetMedia(req, res));
 
 router.get('/contributions/:type', validateGetContributionsInput, (req, res) => getContributionList(req, res));
