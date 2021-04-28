@@ -24,7 +24,7 @@ function getValue(number, maxValue) {
 }
 
 function getCurrentIndex(lastIndex) {
-  const curzarentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
+  const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
   return getValue(currentIndexInStorage, lastIndex);
 }
 
