@@ -96,7 +96,7 @@ order by dataset_row."dataset_row_id"
 limit 5`;
 
 const getContributionListQuery = `
-select con."dataset_row_id", con.media ->> 'data' as sentence, con.contribution_id 
+select con."dataset_row_id", ds.media ->> 'data' as sentence, con.media ->> 'data' as contribution, con.contribution_id 
     from contributions con 
     inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_identifier!=$1
     inner join dataset_row ds on ds."dataset_row_id"=con."dataset_row_id" and ds."state"= 'contributed' 
