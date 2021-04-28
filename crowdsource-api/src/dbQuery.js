@@ -137,6 +137,7 @@ const getGenderData = 'select data."gender", count (*) from (select con."gender"
 const feedbackInsertion = 'Insert into feedbacks (subject,feedback,language) values ($1,$2,$3);'
 
 const getPathFromContribution = `select media ->> 'data' as path from contributions where contribution_id = $1;`
+
 const getPathFromMasterDataSet = `select media ->> 'data' as path from dataset_row where dataset_row_id = $1;`
 
 const saveReportQuery = `
@@ -196,6 +197,11 @@ and action = \'completed\' and con.audio_duration is not null';
 
 const getMultiplierForHourGoal = 'select milestone_multiplier as multiplier from language_milestones where LOWER(language) = $1;';
 
+const getContributionLanguagesQuery = `select dr.media->>'language' as from_language,con.media->>'language' as to_language from dataset_row dr inner join 
+contributions con on con.dataset_row_id=dr.dataset_row_id and con.action='completed' and con.is_system=true group by dr.media->>'language',con.media->>'language'`;
+
+const getDatasetLanguagesQuery = `select media->>'language' as data_language from dataset_row group by media->>'language'`;
+
 module.exports = {
   unassignIncompleteMedia,
   mediaCount,
@@ -235,5 +241,7 @@ module.exports = {
   getMultiplierForHourGoal,
   getOrderedMediaQuery,
   updateContributionDetailsWithUserInput,
-  getPathFromMasterDataSet
+  getPathFromMasterDataSet,
+  getContributionLanguagesQuery,
+  getDatasetLanguagesQuery
 }
