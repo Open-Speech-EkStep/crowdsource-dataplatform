@@ -13,50 +13,19 @@
                 <div class="mb-4">
                     <%= __('Help us understand what’s wrong with the sentence') %>
                 </div>
-                <div class="mb-4">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="reportRadio" id="offensive_id" value="Offensive">
-                        <label class="form-check-label xs-radio-label" for="offensive_id">
-                            <%= __('Offensive') %>
-                        </label>
+                <% REPORT.forEach(option =>{ %>
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="reportRadio" id="<%= `${option.h1}_id` %>" value="<%= option.h1 %>">
+                            <label class="form-check-label xs-radio-label" for="<%= `${option.h1}_id` %>">
+                                <%= __(option.h1) %>
+                            </label>
+                        </div>
+                        <div class="option-text">
+                            <%= __(`${option.p1}`) %>
+                        </div>
                     </div>
-                    <div class="option-text">
-                        <%= __('Hurting sentiments of religion, community or abusive content etc.') %>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="reportRadio" id="prohibitedContent_id" value="Prohibited Content">
-                        <label class="form-check-label xs-radio-label" for="prohibitedContent_id">
-                            <%= __('Prohibited Content') %>
-                        </label>
-                    </div>
-                    <div class="option-text">
-                        <%= __('Hateful / Discriminatory / Vulgar language, drugs promotion etc.') %>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="reportRadio" id="politicalStatement_id" value="Political Statement">
-                        <label class="form-check-label xs-radio-label" for="politicalStatement_id">
-                            <%= __('Political Statement') %>
-                        </label>
-                    </div>
-                    <div class="option-text">
-                        <%= __('Hateful Political views, amplifying hate-speech etc.') %>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="reportRadio" id="misinformation_id" value="Misinformation">
-                        <label class="form-check-label xs-radio-label" for="misinformation_id">
-                            <%= __('Misinformation') %>
-                        </label>
-                    </div>
-                    <div class="option-text">
-                        <%= __('Hearsay / Rumors, deliberate falsified facts etc.') %>
-                    </div>
-                </div>
+                <% }) %>
                 <div class="mb-4">
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="radio" name="reportRadio" id="others_id" value="Others">
@@ -91,3 +60,4 @@
         </div>
     </div>
 </div>
+<script src="../../js/common/report.js"></script>

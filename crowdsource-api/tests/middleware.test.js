@@ -61,39 +61,15 @@ describe('middleware test', function () {
             expect(nextSpy).toHaveBeenCalledTimes(0)
         });
 
-        test('should fail and send bad request if age is not given format', function () {
-            const req = { cookies: cookie, params: params, body: { age: "10-13", userName: validUsername, gender: gender, motherTongue: motherTongue, language: language } }
-            validateUserInfo(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(1)
-            expect(nextSpy).toHaveBeenCalledTimes(0)
-        });
-
-        test('should call res.send() once if gender is not included in GENDER', function () {
-            const req = { cookies: cookie, params: params, body: { age: validAgeGroup, userName: validUsername, gender: "WrongGender", motherTongue: motherTongue, language: language } };
-            validateUserInfo(req, res, nextSpy);
-
-            expect(nextSpy).toHaveBeenCalledTimes(0)
-            expect(res.send).toHaveBeenCalledTimes(1)
-        });
-
-        test('should call res.send() once if motherTongue is not included in MOTHERTONGUE', function () {
-            const req = { cookies: cookie, params: params, body: { age: validAgeGroup, gender: gender, motherTongue: "notMotherTongue", userName: "abcdeUsername", language: language } };
-            validateUserInfo(req, res, nextSpy);
-
-            expect(nextSpy).toHaveBeenCalledTimes(0)
-            expect(res.send).toHaveBeenCalledTimes(1)
-        });
-
         test('should pass if type is valid', () => {
-            const req = { cookies: cookie, params: params, body: { age: validAgeGroup, userName: validUsername, gender: gender, motherTongue: motherTongue, language: language } };
+            const req = { cookies: cookie, params: params, body: { userName: validUsername, language: language } };
             validateUserInfo(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
         });
 
         test('should fail if type is invalid', () => {
-            const req = { cookies: cookie, params: { 'type': 'test' }, body: { age: validAgeGroup, userName: validUsername, gender: gender, motherTongue: motherTongue, language: language } };
+            const req = { cookies: cookie, params: { 'type': 'test' }, body: { userName: validUsername, language: language } };
             validateUserInfo(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0);
@@ -101,7 +77,7 @@ describe('middleware test', function () {
         });
 
         test('should fail if cookie is not present', () => {
-            const req = { cookies: {}, params: params, body: { age: validAgeGroup, userName: validUsername, gender: gender, motherTongue: motherTongue, language: language } };
+            const req = { cookies: {}, params: params, body: { userName: validUsername, language: language } };
             validateUserInfo(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0);
@@ -109,7 +85,7 @@ describe('middleware test', function () {
         });
 
         test('should fail if language is not present', () => {
-            const req = { cookies: cookie, params: params, body: { age: validAgeGroup, userName: validUsername, gender: gender, motherTongue: motherTongue } };
+            const req = { cookies: cookie, params: params, body: { userName: validUsername } };
             validateUserInfo(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0);
@@ -117,7 +93,7 @@ describe('middleware test', function () {
         });
 
         test('should fail if userName is falsy', () => {
-            const req = { cookies: cookie, params: params, body: { age: validAgeGroup, userName: null, gender: gender, motherTongue: motherTongue, language: language } };
+            const req = { cookies: cookie, params: params, body: { userName: null, language: language } };
             validateUserInfo(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0);
@@ -132,7 +108,7 @@ describe('middleware test', function () {
     });
 
     describe('validateUserInputAndFile', function () {
-        const speakerDetail = { gender: gender, motherTongue: motherTongue, userName: validUsername };
+        const speakerDetail = { gender: gender, age: validAgeGroup, motherTongue: motherTongue, userName: validUsername };
 
         afterEach(() => {
             jest.clearAllMocks();
@@ -181,6 +157,33 @@ describe('middleware test', function () {
 
         test('should call res.send() once if userName is a email Id', function () {
             const speakerDetail = { gender: gender, motherTongue: motherTongue, userName: "abc@gmail.com" };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail) }, file: { size: 1024000, mimeType: "audio/wav" } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should call res.send() if age is defined but not in given format', function () {
+            const speakerDetail = { age: "10-12yrs", gender: gender, motherTongue: motherTongue, userName: validUsername };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail) }, file: { size: 1024000, mimeType: "audio/wav" } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should call res.send() once if gender is defined but is not included in GENDER', function () {
+            const speakerDetail = { age: validAgeGroup, gender: "someGender", motherTongue: motherTongue, userName: validUsername };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail) }, file: { size: 1024000, mimeType: "audio/wav" } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should call res.send() once if motherTongue is defined but not included in MOTHERTONGUE', function () {
+            const speakerDetail = { age: validAgeGroup, gender: gender, motherTongue: "wrongLanguage", userName: validUsername };
             const req = { body: { speakerDetails: JSON.stringify(speakerDetail) }, file: { size: 1024000, mimeType: "audio/wav" } };
             validateUserInputAndFile(req, res, nextSpy);
 

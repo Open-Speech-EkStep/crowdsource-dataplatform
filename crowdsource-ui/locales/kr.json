@@ -238,5 +238,9 @@
 	"Total no. of image-text corrections": "Total no. of image-text corrections",
 	"Total no. of translations": "Total no. of translations",
 	"Type in the text as you hear it from the following Audio": "Type in the text as you hear it from the following Audio",
-	"Start typing here...": "Start typing here..."
+	"Start typing here...": "Start typing here...",
+	"Does the audio match the sentence?": "Does the audio match the sentence?",
+	"Need change": "Need change",
+	"Need Change": "Need Change",
+	"Needs Change": "Needs Change"
 }
