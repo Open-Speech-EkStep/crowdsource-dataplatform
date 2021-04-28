@@ -408,11 +408,11 @@ describe("Running tests for dbOperations", () => {
 
             test('should call addContributorQuery if user not found', async () => {
                 when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue(null);
-                when(spyDBone).calledWith(addContributorQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
+                when(spyDBone).calledWith(addContributorQuery, [userId, userName, '', '', '']).mockReturnValue({ 'contributor_id': contributor_id });
 
                 await dbOperations.getRewards(userId, userName, language, category);
 
-                await expect(spyDBone).toBeCalledWith(addContributorQuery, [userId, userName]);
+                await expect(spyDBone).toBeCalledWith(addContributorQuery, [userId, userName, '', '', '']);
                 jest.clearAllMocks();
             });
 
