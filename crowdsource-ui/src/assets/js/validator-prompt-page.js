@@ -334,7 +334,7 @@ const getAudioClip = function (contributionId) {
     hideAudioRow();
     disableSkipButton();
     const source = 'validate';
-    fetch(`/contributed-media/${source}/${contributionId}`, {
+    fetch(`/media-object/${source}/${contributionId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
