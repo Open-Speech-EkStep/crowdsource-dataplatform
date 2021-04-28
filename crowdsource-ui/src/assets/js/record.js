@@ -378,11 +378,11 @@ const initialize = () => {
         const fd = new FormData();
         const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
         const speakerDetails = JSON.stringify({
-            userName: localSpeakerDataParsed.userName,
-            language: localSpeakerDataParsed.language,
+            userName: localSpeakerDataParsed.userName
         })
         fd.append('audio_data', crowdSource.audioBlob);
         fd.append('speakerDetails', speakerDetails);
+        fd.append('language', localSpeakerDataParsed.language);
         fd.append('sentenceId', crowdSource.sentences[currentIndex].dataset_row_id);
         fd.append('state', localStorage.getItem('state_region') || "");
         fd.append('country', localStorage.getItem('country') || "");
