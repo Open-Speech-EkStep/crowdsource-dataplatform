@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<%- include ../../common/headerForContributor.ejs %>
+<%- include ../common/headerForContributor.ejs %>
 <div class="container container-fluid supreme-container">
     <div class="row">
         <div class="col-12">
@@ -49,7 +49,7 @@
             </div>
         </div>
     </div>
-    <%- include ../../common/noDataFoundPopUp/noDataFoundPopUp.ejs %>
+    <%- include ../common/noDataFoundPopUp.ejs %>
     <div class="row" id="speaker-data">
         <div class="col-12">
             <div class="row justify-content-center" id="loader1">
@@ -91,13 +91,13 @@
             </div>
             <div class="row justify-content-center mt-5 mx-0">
                 <div class="col-12 col-lg-5 text-center chart timeline-chart-container">
-                    <%- include ../../common/charts/lineGraph/lineGraph.ejs %>
+                    <%- include ../common/lineGraph.ejs %>
                 </div>
                 <div class="col-12 col-lg-5 mb-3 text-center chart state-chart text-dark p-4">
                     <div class="text-left px-3 pb-3 state-chart-text">
                         <%= __('State Wise distribution') %>
                     </div>
-                    <%- include ../../common/charts/map/map.ejs %>
+                    <%- include ../common/map.ejs %>
                 </div>
             </div>
         </div>
@@ -114,10 +114,10 @@
     </div>
 </div>
 <button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
-<%- include ../../common/speakerDetail.ejs %>
-<%- include ../../common/content-languages.ejs %>
-<%- include ../../common/say-listen-language.ejs %>
-<%- include ../../common/footer.ejs %>
+<%- include ../common/userDetails.ejs %>
+<%- include ../common/content-languages.ejs %>
+<%- include ../common/say-listen-language.ejs %>
+<%- include ../common/footer.ejs %>
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

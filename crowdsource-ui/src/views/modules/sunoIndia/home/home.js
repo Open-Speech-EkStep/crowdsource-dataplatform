@@ -33,20 +33,6 @@ function showByHoursChart() {
   );
 }
 
-function showBySpeakersChart() {
-  if (chartReg["chart"]) {
-    chartReg["chart"].dispose();
-  }
-  const topLanguagesBySpeakers = localStorage.getItem(
-    TOP_LANGUAGES_BY_SPEAKERS
-  );
-  constructChart(
-    JSON.parse(topLanguagesBySpeakers),
-    "total_speakers",
-    "language"
-  );
-}
-
 const getDefaultTargetedDiv = function (key, value, $sayListenLanguage) {
   let targetIndex = 0;
   const $sayListenLanguageItems = $sayListenLanguage.children();
@@ -176,13 +162,7 @@ function initializeBlock() {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
   });
 
-  $('[name="topLanguageChart"]').on('change', (event) => {
-    if (event.target.value === 'hours') {
-      showByHoursChart();
-    } else {
-      showBySpeakersChart();
-    }
-  });
+  showByHoursChart();
 
   setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
   setUserNameOnInputFocus();
