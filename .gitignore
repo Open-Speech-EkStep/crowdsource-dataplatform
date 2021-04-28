@@ -131,6 +131,8 @@ crowdsource-ui/target/*
 !crowdsource-ui/target/sitemap.xml
 !crowdsource-ui/target/aud/
 
+# ignore the upload files
+crowdsource-api/uploads
 
 public 
 build
