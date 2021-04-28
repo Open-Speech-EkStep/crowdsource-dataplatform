@@ -12,10 +12,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/instructions-modal.css">
-    <link rel="stylesheet" type="text/css" href="../css/validator-prompt.css">
-    <link rel="stylesheet" type="text/css" href="../css/common.css">
-    <link rel="stylesheet" type="text/css" href="../css/mic-speaker-testing.css">
+    <link rel="stylesheet" type="text/css" href="../../css/validator-prompt.css">
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/mic-speaker-testing.css">
 </head>
 
 <body>
@@ -90,7 +89,7 @@
                         <div><span class="spinner w-h-5"></span></div>
                     </div>
                     <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn">
-                        <div class="audioplayer d-flex justify-content-center align-items-center"><img src="../img/play.svg" alt="play" id="play" class="cursor-pointer"> <img src="../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer"> <img src="../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer"></div>
+                        <div class="audioplayer d-flex justify-content-center align-items-center"><img src="../../img/play.svg" alt="play" id="play" class="cursor-pointer"> <img src="../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer"> <img src="../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer"></div>
                         <h3 class="font-wt-800 text-center mt-2" id="audioplayer-text_play">
                             <%= __('Play') %>
                         </h3>
@@ -127,7 +126,6 @@
 
         </div>
 
-        <%- include ../common/validator-instructions.ejs %>
         <%- include ../common/validation-report-modal.ejs %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <%- include ../common/footer.ejs %>
