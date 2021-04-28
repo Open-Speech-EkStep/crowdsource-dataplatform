@@ -42,7 +42,8 @@
         "pg-promise": "^10.5.2",
         "pm2": "^4.5.6",
         "regenerator-runtime": "^0.13.7",
-        "uuid": "^7.0.3"
+        "uuid": "^7.0.3",
+        "xss": "^1.0.8"
     },
     "engines": {
         "node": "12.16.0"

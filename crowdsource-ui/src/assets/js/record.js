@@ -378,7 +378,10 @@ const initialize = () => {
         const fd = new FormData();
         const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
         const speakerDetails = JSON.stringify({
-            userName: localSpeakerDataParsed.userName
+            userName: localSpeakerDataParsed.userName,
+            age: localSpeakerDataParsed.age,
+            motherTongue: localSpeakerDataParsed.motherTongue,
+            gender: localSpeakerDataParsed.gender
         })
         fd.append('audio_data', crowdSource.audioBlob);
         fd.append('speakerDetails', speakerDetails);
@@ -566,10 +569,7 @@ function executeOnLoad() {
                 mode: 'cors',
                 body: JSON.stringify({
                     userName: localSpeakerDataParsed.userName,
-                    age: localSpeakerDataParsed.age,
                     language: localSpeakerDataParsed.language,
-                    motherTongue: localSpeakerDataParsed.motherTongue,
-                    gender: localSpeakerDataParsed.gender,
                 }),
                 headers: {
                     'Content-Type': 'application/json',
