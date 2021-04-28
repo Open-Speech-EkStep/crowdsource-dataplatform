@@ -1,0 +1,95 @@
+.test-mic-speakers-container {
+  padding: 1rem 0 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+.test-mic-speaker {
+  padding: 0 3rem;
+  min-width: fit-content;
+}
+.test-mic-speaker button {
+  border: 1px solid #959595;
+  color: #959595;
+}
+.test-mic-speaker svg {
+  margin-right: 5px;
+  margin-bottom: 2px;
+}
+.test-mic-speakers-details {
+  background-color: #f8f9fa;
+  padding: 1rem 1rem 0.5rem;
+}
+.test-mic-speakers-details p {
+  color: #959595;
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+.test-btn {
+  font-size: 14px;
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #959595;
+  border-radius: 4px;
+}
+.test-btn svg {
+  margin-right: 8px;
+}
+.test-mic-close {
+  display: flex;
+  float: right;
+  background: none;
+  border: none;
+}
+.test-mic-close:after {
+  clear: both;
+}
+.test-canvas {
+  border: 1px solid #959595;
+  border-radius: 4px;
+  height: 15px;
+}
+.ambient-noise {
+  font-size: 14px;
+  color: #959595;
+  padding-top: 8px;
+}
+.ambient-noise svg {
+  vertical-align: text-bottom;
+  margin-right: 5px;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1280px) {
+  .ambient-noise {
+    font-size: 12px;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .test-mic-speaker {
+    padding: 0;
+  }
+  .test-mic-speakers-container {
+    justify-content: center;
+    padding: 1rem 0;
+  }
+  .test-mic-heading {
+    display: none;
+  }
+  .noise-container {
+    text-align: center;
+  }
+
+  .xs-radio-label {
+    margin-top: 2px;
+    margin-left: 2px;
+  }
+
+  .only-display {
+    display: none;
+  }
+}

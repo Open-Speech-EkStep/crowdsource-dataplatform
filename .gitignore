@@ -124,8 +124,13 @@ logs
 */node_modules
 .terraform
 
+crowdsource-ui/build/*
 crowdsource-ui/target/*
 !crowdsource-ui/target/img/
 !crowdsource-ui/target/favicon.ico
 !crowdsource-ui/target/sitemap.xml
 !crowdsource-ui/target/aud/
+
+
+public 
+build

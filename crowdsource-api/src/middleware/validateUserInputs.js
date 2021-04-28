@@ -9,7 +9,10 @@ const {
     MAX_LENGTH,
     SUBJECT_MAX_LENGTH,
     FEEDBACK_MAX_LENGTH,
-    LANGUAGES
+    LANGUAGES,
+    VALIDATION_ACTIONS,
+    SOURCES,
+    MEDIA_TYPES
 } = require("../constants")
 
 
@@ -20,14 +23,25 @@ const convertIntoMB = (fileSizeInByte) => {
 const validateUserInputAndFile = function (req, res, next) {
     const speakerDetails = req.body.speakerDetails;
     const speakerDetailsJson = JSON.parse(speakerDetails);
-    const file = req.file;
-    const fileSizeInMB = convertIntoMB(file.size);
     const userName = speakerDetailsJson.userName;
+    const isInvalidParams = userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName);
+    const MIN_INPUT_LENGTH = 5;
 
-    const isValidReqParams = fileSizeInMB > MAX_SIZE || file.mimetype != VALID_FILE_TYPE
-    userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName);
+    let isInvalidReqParams = false;
+    if (req.file) {
+        const file = req.file;
+        const fileSizeInMB = convertIntoMB(file.size);
+        const isInvalidFileParam = fileSizeInMB > MAX_SIZE || file.mimetype != VALID_FILE_TYPE;
+        isInvalidReqParams = isInvalidFileParam || isInvalidParams
+    }
+    else if (req.body.userInput) {
+        isInvalidReqParams = isInvalidParams || req.body.userInput.length <= MIN_INPUT_LENGTH;
+    }
+    else {
+        isInvalidReqParams = true;
+    }
 
-    if (isValidReqParams) {
+    if (isInvalidReqParams) {
         return res.status(400).send("Bad request");
     }
     next()
@@ -40,19 +54,19 @@ const validateUserInfo = function (req, res, next) {
     const motherTongue = req.body.motherTongue;
     const type = req.params.type;
     const userId = req.cookies.userId;
+    const language = req.body.language;
 
     if (!userId || userName === null || userName === undefined) {
         return res.status(400).send({ error: 'required parameters missing' });
     }
 
-    const validTypes = ['parallel', 'ocr', 'text', 'asr'];
-    const isValidType = (validTypes.includes(type));
+    const isValidType = (MEDIA_TYPES.includes(type));
 
     const invalidMotherTongue = (!MOTHER_TONGUE.includes(motherTongue) && (motherTongue.length));
 
     if (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) ||
         EMAIL_REGEX.test(userName) || !AGE_GROUP.includes(ageGroup) ||
-        !GENDER.includes(gender) || invalidMotherTongue || !isValidType) {
+        !GENDER.includes(gender) || invalidMotherTongue || !isValidType || !language) {
         return res.status(400).send("Bad request");
     }
     next()
@@ -63,7 +77,7 @@ const validateUserInputForFeedback = function (req, res, next) {
     const subject = req.body.subject;
     const language = req.body.language
 
-    const allLanguage = LANGUAGES.map(language => language.value)
+    const allLanguage = LANGUAGES.map(lang => lang.value)
 
     const invalidLanguage = !allLanguage.includes(language)
 
@@ -90,7 +104,7 @@ const validateInputForSkip = function (req, res, next) {
     next();
 }
 
-const validateRewardsInput = function (req, res, next) {
+const validateRewardsInput = (req, res, next) => {
     const userId = req.cookies.userId || "";
     const { language = "" } = req.query;
 
@@ -100,7 +114,7 @@ const validateRewardsInput = function (req, res, next) {
     next();
 }
 
-const validateRewardsInfoQuery = function (req, res, next) {
+const validateRewardsInfoQuery = (req, res, next) => {
     const { language } = req.query;
 
     if (!language) {
@@ -109,4 +123,36 @@ const validateRewardsInfoQuery = function (req, res, next) {
     next();
 }
 
-module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery }
+const validateContributedMediaInput = (req, res, next) => {
+    if (!(req.params && req.params.entityId && req.params.source && SOURCES.includes(req.params.source))) {
+        return res.status(400).send('Invalid params.');
+    }
+
+    next();
+}
+
+const validateInputsForValidateEndpoint = (req, res, next) => {
+    if (!(req.cookies && req.cookies.userId && req.body && req.body.sentenceId
+        && req.params && req.params.contributionId && req.params.action
+        && VALIDATION_ACTIONS.includes(req.params.action))) {
+        return res.status(400).send('Invalid params.');
+    }
+    next();
+}
+
+const validateGetContributionsInput = (req, res, next) => {
+    const validLanguages = LANGUAGES.map((item) =>
+        item.value
+    )
+    const validUserId = (req.cookies && req.cookies.userId);
+    const validMediaType = (req.params && req.params.type && MEDIA_TYPES.includes(req.params.type));
+    const validFromLanguage = (req.query && req.query.from && validLanguages.includes(req.query.from));
+    const validToLanguage = (req.query && req.query.to && validLanguages.includes(req.query.to));
+
+    if (!(validUserId && validMediaType && validFromLanguage && (req.params.type != 'parallel' || validToLanguage))) {
+        res.status(400).send('Invalid params.');
+    }
+    else { next(); }
+}
+
+module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery, validateContributedMediaInput, validateInputsForValidateEndpoint, validateGetContributionsInput }
