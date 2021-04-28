@@ -6,6 +6,7 @@ const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
 const AGGREGATED_DATA_BY_LANGUAGE =  "aggregateDataCountByLanguage";
 const LOCALE_STRINGS = 'localeString';
+const SELECTED_MODULE = "selectedModule";
 const CONTRIBUTION_LANGUAGE = "contributionLanguage";
 const SPEAKER_DETAILS_KEY = 'speakerDetails';
 const ALL_LANGUAGES = [
@@ -42,5 +43,6 @@ module.exports = {
     LOCALE_STRINGS,
     CONTRIBUTION_LANGUAGE,
     BADGES,
-    SPEAKER_DETAILS_KEY
+    SPEAKER_DETAILS_KEY,
+    SELECTED_MODULE
 }
