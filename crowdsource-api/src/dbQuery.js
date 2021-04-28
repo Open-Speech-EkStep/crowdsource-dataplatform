@@ -183,7 +183,7 @@ const getContributorIdQuery = 'select contributor_id from contributors where con
 
 const getValidationCountQuery = 'select count(*) from validations where contribution_id = $1 and action != \'skip\'';
 
-const addContributorQuery = 'INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 returning contributor_id';
+const addContributorQuery = 'INSERT INTO "contributors" ("user_name","contributor_identifier","age_group","gender","mother_tongue")  select $2, $1, $3, $4, $5 returning contributor_id';
 
 const getBadges = 'select grade, reward_milestone.milestone, id from reward_catalogue, \
 (select milestone,reward_catalogue_id as rid from reward_milestones where milestone <= $1 \
