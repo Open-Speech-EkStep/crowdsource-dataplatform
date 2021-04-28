@@ -27,6 +27,13 @@ const validateUserInputAndFile = function (req, res, next) {
     const isInvalidParams = userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName);
     const MIN_INPUT_LENGTH = 5;
 
+    const invalidMotherTongue = (speakerDetailsJson.motherTongue && !MOTHER_TONGUE.includes(speakerDetailsJson.motherTongue));
+    const invalidGender = (speakerDetailsJson.gender && !GENDER.includes(speakerDetailsJson.gender));
+    const invalidAgeGroup = (speakerDetailsJson.age && !AGE_GROUP.includes(speakerDetailsJson.age));
+
+    if (invalidAgeGroup || invalidGender || invalidMotherTongue)
+        return res.status(400).send("Bad request");
+
     let isInvalidReqParams = false;
     if (req.file) {
         const file = req.file;
@@ -49,9 +56,6 @@ const validateUserInputAndFile = function (req, res, next) {
 
 const validateUserInfo = function (req, res, next) {
     const userName = req.body.userName;
-    const ageGroup = req.body.age;
-    const gender = req.body.gender;
-    const motherTongue = req.body.motherTongue;
     const type = req.params.type;
     const userId = req.cookies.userId;
     const language = req.body.language;
@@ -60,13 +64,10 @@ const validateUserInfo = function (req, res, next) {
         return res.status(400).send({ error: 'required parameters missing' });
     }
 
-    const isValidType = (MEDIA_TYPES.includes(type));
-
-    const invalidMotherTongue = (!MOTHER_TONGUE.includes(motherTongue) && (motherTongue.length));
+    const isValidType = (MEDIA_TYPES.includes(type)); 
 
     if (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) ||
-        EMAIL_REGEX.test(userName) || !AGE_GROUP.includes(ageGroup) ||
-        !GENDER.includes(gender) || invalidMotherTongue || !isValidType || !language) {
+        EMAIL_REGEX.test(userName) || !isValidType || !language) {
         return res.status(400).send("Bad request");
     }
     next()

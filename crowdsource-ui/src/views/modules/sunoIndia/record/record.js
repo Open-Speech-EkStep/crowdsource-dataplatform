@@ -8,6 +8,7 @@ const {
   reportSentenceOrRecording,
 } = require('../common/utils');
 const { LOCALE_STRINGS } = require('../common/constants');
+const {setCurrentSentenceIndex, setTotalSentenceIndex} = require('../common/progress-bar');
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
@@ -23,7 +24,7 @@ function getValue(number, maxValue) {
 }
 
 function getCurrentIndex(lastIndex) {
-  const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
+  const curzarentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
   return getValue(currentIndexInStorage, lastIndex);
 }
 
@@ -31,16 +32,6 @@ function getSkipCount(totalItems) {
   const skipCountInStorage = Number(localStorage.getItem(skipCountKey));
   return getValue(skipCountInStorage, totalItems);
 }
-
-const setCurrentSentenceIndex = index => {
-  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
-  currentSentenceLbl.innerText = index;
-};
-
-const setTotalSentenceIndex = index => {
-  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-  totalSentencesLbl.innerText = index;
-};
 
 const startTimer = (seconds, display) => {
   const counterSpan = document.getElementById('counter');
@@ -132,7 +123,7 @@ const initialize = () => {
 
   const setSentenceText = index => {
     const $sentenceLbl = $('#sentenceLbl');
-    $sentenceLbl[0].innerText = sentences[index].sentence;
+    $sentenceLbl[0].innerText = sentences[index].media_data;
     animateCSS($sentenceLbl, 'lightSpeedIn');
     currentIndex && setProgressBar(currentIndex);
   };
@@ -341,7 +332,7 @@ const initialize = () => {
     const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
     const reqObj = {
-      sentenceId: crowdSource.sentences[currentIndex].sentenceId,
+      sentenceId: crowdSource.sentences[currentIndex].dataset_row_id,
       userName: speakerDetails.userName,
     };
     fetch('/skip', {
@@ -370,11 +361,11 @@ const initialize = () => {
     const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
     const speakerDetails = JSON.stringify({
       userName: localSpeakerDataParsed.userName,
-      language: localSpeakerDataParsed.language,
     });
     fd.append('audio_data', crowdSource.audioBlob);
     fd.append('speakerDetails', speakerDetails);
-    fd.append('sentenceId', crowdSource.sentences[currentIndex].sentenceId);
+    fd.append('language', localSpeakerDataParsed.language);
+    fd.append('sentenceId', crowdSource.sentences[currentIndex].dataset_row_id);
     fd.append('state', localStorage.getItem('state_region') || '');
     fd.append('country', localStorage.getItem('country') || '');
     fd.append('audioDuration', crowdSource.audioDuration);
@@ -440,7 +431,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: crowdSource.sentences[currentIndex].sentenceId,
+    sentenceId: crowdSource.sentences[currentIndex].dataset_row_id,
     reportText:
       otherText !== '' && otherText !== undefined ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
@@ -556,7 +547,8 @@ function executeOnLoad() {
     } else {
       localStorage.removeItem(currentIndexKey);
       localStorage.removeItem(skipCountKey);
-      fetch('/media', {
+      const type = 'text';
+      fetch(`/media/${type}`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
@@ -631,4 +623,4 @@ $(window).resize(() => {
   setFooterPosition();
 });
 
-module.exports = { getCurrentIndex, getSkipCount, getValue, setCurrentSentenceIndex, setTotalSentenceIndex };
+module.exports = { getCurrentIndex, getSkipCount, getValue };
