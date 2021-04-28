@@ -46,18 +46,8 @@
             <div class="row justify-content-center d-none">
               <div class="col-8 text-muted h-1r" id="get-started"> <%= __('Let\'s get started!') %> </div>
             </div>
-
             <div class="row justify-content-center d-none" id="recording-row">
-              <div class="col-md-1 col-2 my-auto">
-                <div id="recording-sign" class="recorder-container ml-auto align-middle d-none">
-                  <div class="outer"></div>
-                  <div class="outer-2"></div>
-                  <div class="icon-microphone"><i class="material-icons md-48">mic</i></div>
-                </div>
-              </div>
-              <div class="col-lg-7 col-8 text-center">
-                <canvas id="visualizer"></canvas>
-              </div>
+              <%- include ../common/recorder.ejs %>
             </div>
             <div class="row justify-content-center d-none count-down" id="count-down">
               <span class="align-middle" id="cont-down-span">
@@ -65,15 +55,7 @@
               </span>
             </div>
             <div class="row justify-content-center">
-              <div class="col-lg-4 col-md-6 col-sm-8 col-12 text-center my-5">
-                <audio class="d-none" id="player" controls tabindex="-1"></audio>
-                <div class="text-danger mt-2 d-none" id="audio-small-error">
-                  <i class="material-icons align-middle">error</i>
-                  <span class="align-middle">
-                    <%= __('Audio recording is too small. Please Re-record') %>
-                  </span>
-                </div>
-              </div>
+              <%- include ../common/audio.ejs %>
             </div>
           </div>
           <div class="row justify-content-center align-items-center" id="startRecordRow">
