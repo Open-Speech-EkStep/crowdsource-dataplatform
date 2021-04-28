@@ -27,13 +27,6 @@
                 <%- include ../common/mic-speaker-test-btn.ejs %>
             </div>
             <%- include ../common/speaker-testing.ejs %>
-            <div class="row justify-content-center" id="instructions-row">
-                <div id="instructions-link" class="d-flex justify-content-end align-items-center d-none"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007BFF" style="cursor:pointer" class="bi bi-info-circle-fill d-none" viewBox="0 0 16 16">
-                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                    </svg> <span class="btn d-none" style="cursor:pointer">
-                                <%= __('Instructions') %>
-                            </span></div>
-            </div>
             <div class="row justify-content-center mb-5 mb-lg-0 mt-5" id="sentences-row">
                 <div class="col-md-8 col-sm-10 text-center prompt"><label class="h1 font-weight-normal" id="sentenceLabel"></label></div>
             </div>
@@ -89,7 +82,7 @@
                         <div><span class="spinner w-h-5"></span></div>
                     </div>
                     <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn">
-                        <div class="audioplayer d-flex justify-content-center align-items-center"><img src="../../img/play.svg" alt="play" id="play" class="cursor-pointer"> <img src="../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer"> <img src="../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer"></div>
+                        <div class="audioplayer d-flex justify-content-center align-items-center"><img src="../../img/play.svg" alt="play" id="play" class="cursor-pointer"> <img src="../../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer"> <img src="../../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer"></div>
                         <h3 class="font-wt-800 text-center mt-2" id="audioplayer-text_play">
                             <%= __('Play') %>
                         </h3>
@@ -126,13 +119,14 @@
 
         </div>
 
-        <%- include ../common/validation-report-modal.ejs %>
+        <%- include('../common/report.ejs',{"REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <%- include ../common/footer.ejs %>
         <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="../../js/sunoIndia/valiadtor-prompt-page.js"></script>
         <script src="../../js/mic-speaker-testing.js"></script>
     </div>
 </div>
