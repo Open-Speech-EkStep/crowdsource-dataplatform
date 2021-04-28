@@ -7,6 +7,10 @@ export paired=$6
 export connection=$7
 
 export pub_path=${dataset_path}/$dataset_name
+export bundle_path=s3://${bucket}/$remote_base_path/${language}/original/bundled
+tar -czvf $dataset_name.tar.gz $dataset_path
+aws s3 cp $dataset_name.tar.gz $bundle_path
+
 mkdir -p $pub_path
 echo 'flattening at: '$pub_path
 cp -rf ${dataset_path}/*/clean/* $pub_path
@@ -17,6 +21,6 @@ echo pushing dataset to: s3://${bucket}/$remote_base_path/${language}/${dataset_
 
 aws s3 cp ${dataset_path}  s3://${bucket}/$remote_base_path/${language}/${dataset_name} --recursive
 
-node ingest.js {} remote_url $remote_base_path $language $paired $connection
+node ingest.js {} $bundle_path $remote_base_path $language $paired $connection
 
 rm -rf $pub_path
