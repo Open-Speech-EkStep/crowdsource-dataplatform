@@ -96,11 +96,14 @@ const updateDbWithAudioPath = async (
     country,
     audioDuration,
     language,
+    age,
+    gender,
+    motherTongue,
     cb
 ) => {
     const roundedAudioDuration = audioDuration ? Number(Number(audioDuration).toFixed(3)) : 0;
 
-    const contributor_id = await getContributorId(userId, userName)
+    const contributor_id = await getContributorId(userId, userName, age, gender, motherTongue,)
 
     db.any(updateContributionDetails, [
         sentenceId,
@@ -111,15 +114,15 @@ const updateDbWithAudioPath = async (
         state,
         country
     ])
-    .then(() => {
-        db.none(updateMediaWithContributedState, [sentenceId]).then();
-        db.none(updateMaterializedViews).then();
-        cb(200, { success: true });
-    })
-    .catch((err) => {
-        console.log(err);
-        cb(500, { error: true });
-    });
+        .then(() => {
+            db.none(updateMediaWithContributedState, [sentenceId]).then();
+            db.none(updateMaterializedViews).then();
+            cb(200, { success: true });
+        })
+        .catch((err) => {
+            console.log(err);
+            cb(500, { error: true });
+        });
 };
 
 const getMediaBasedOnAge = function (
@@ -225,10 +228,10 @@ const getMediaObject = (req, res, objectStorage) => {
             res.sendStatus(500);
         }
     })
-    .catch((err) => {
-        console.log(err);
-        res.sendStatus(500);
-    });
+        .catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });
 
 }
 
@@ -394,11 +397,11 @@ const markContributionSkipped = async (userId, sentenceId, userName) => {
     await db.any(markContributionSkippedQuery, [contributor_id, sentenceId]);
 }
 
-const getContributorId = async (userId, userName) => {
+const getContributorId = async (userId, userName, age = '', gender = '', motherTongue = '') => {
     let contributorInfo = await db.oneOrNone(getContributorIdQuery, [userId, userName]);
 
     if (!contributorInfo) {
-        contributorInfo = await db.one(addContributorQuery, [userId, userName]);
+        contributorInfo = await db.one(addContributorQuery, [userId, userName, age, gender, motherTongue]);
     }
 
     const contributor_id = contributorInfo.contributor_id;
@@ -533,8 +536,11 @@ const updateDbWithUserInput = async (
     sentenceId,
     state,
     country,
+    age,
+    gender,
+    motherTongue,
     cb) => {
-    const contributor_id = await getContributorId(userId, userName)
+    const contributor_id = await getContributorId(userId, userName, age, gender, motherTongue,)
 
     db.any(updateContributionDetailsWithUserInput, [
         sentenceId,
@@ -544,15 +550,15 @@ const updateDbWithUserInput = async (
         state,
         country
     ])
-    .then(() => {
-        db.none(updateMediaWithContributedState, [sentenceId]).then();
-        db.none(updateMaterializedViews).then();
-        cb(200, { success: true });
-    })
-    .catch((err) => {
-        console.log(err);
-        cb(500, { error: true });
-    });
+        .then(() => {
+            db.none(updateMediaWithContributedState, [sentenceId]).then();
+            db.none(updateMaterializedViews).then();
+            cb(200, { success: true });
+        })
+        .catch((err) => {
+            console.log(err);
+            cb(500, { error: true });
+        });
 }
 
 module.exports = {
