@@ -92,7 +92,7 @@ const setUserNameOnInputFocus = function () {
   });
 }
 
-const setStartRecordingBtnOnClick = function () {
+const setStartRecordingBtnOnClick = function (url) {
   const speakerDetailsKey = 'speakerDetails';
   const $startRecordBtn = $('#proceed-box');
   const $userName = $('#username');
@@ -110,7 +110,7 @@ const setStartRecordingBtnOnClick = function () {
     };
     localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
     localStorage.setItem(CONTRIBUTION_LANGUAGE, contributionLanguage);
-    location.href = './record.html';
+    location.href = url;
   });
 }
 
