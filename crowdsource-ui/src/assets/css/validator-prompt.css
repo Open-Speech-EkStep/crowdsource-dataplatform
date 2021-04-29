@@ -37,6 +37,8 @@ a{
     border: none;
     padding: 0;
     box-shadow: none;
+    color: black;
+    font-size: 24px;
 }
 
 .original-text,#edit-text label {
@@ -46,6 +48,7 @@ a{
 
 #original-text {
     font-size: 24px;
+    color: black;
 }
 
 @media (min-width: 992px) {

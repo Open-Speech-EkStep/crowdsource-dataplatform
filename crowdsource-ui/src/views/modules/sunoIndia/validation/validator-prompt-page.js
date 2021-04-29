@@ -8,6 +8,8 @@ const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
+window.crowdSource = {};
+
 function uploadToServer(cb) {
   const fd = new FormData();
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
@@ -20,7 +22,6 @@ function uploadToServer(cb) {
   fd.append('sentenceId', crowdSource.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
-  fd.append('audioDuration', crowdSource.audioDuration);
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -130,6 +131,7 @@ function setSentenceLabel(index) {
   $sentenceLabel[0].innerText = originalText;
   animateCSS($sentenceLabel, 'lightSpeedIn');
   $('#original-text').text(originalText);
+  $('#edit').text(originalText);
 
 }
 
@@ -279,6 +281,9 @@ function addListeners() {
   needChangeButton.on('click',()=>{
     hideElement($('#sentences-row'))
     openEditor();
+    const originalText = validationSentences[currentIndex].contribution;
+    $('#original-text').text(originalText);
+    $('#edit').text(originalText);
   })
 
   $("#edit").focus(function(){
@@ -297,10 +302,21 @@ function addListeners() {
   })
 
   $('#submit-edit-button').on('click', () => {
-    updateProgressBar();
-    getNextSentence();
-    showElement($('#sentences-row'));
+    hideElement($('#cancel-edit-button'));
+    hideElement($('#submit-edit-button'))
+    hideElement($('#audio-player-btn'))
+    hideElement($('#skip_button'))
+    showElement($('#thankyou-text'));
+    crowdSource.editedText = $("#edit").val();
+    uploadToServer()
+    $("#edit").css('pointer-events','none');
     closeEditor();
+    setTimeout(()=>{
+      hideElement($('#thankyou-text'));
+      updateProgressBar();
+      getNextSentence();
+      showElement($('#sentences-row'));
+    }, 2000)
   })
 
   likeButton.on('click', () => {
@@ -314,6 +330,8 @@ function addListeners() {
     recordValidation(SKIP_ACTION)
     updateProgressBar();
     getNextSentence();
+    showElement($('#sentences-row'));
+    closeEditor();
   })
 
   $skipButton.hover(() => {
@@ -391,6 +409,11 @@ function showThankYou() {
   $("#validation-container").removeClass("validation-container");
   hideElement($('#report_btn'));
   hideElement($("#test-mic-speakers"));
+  hideElement($('#instructive-msg'));
+  hideElement($('#editor-row'));
+  hideElement($('#thankyou-text'));
+  hideElement($('.simple-keyboard'));
+
 
   const language = localStorage.getItem('contributionLanguage');
   const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
@@ -417,6 +440,10 @@ function showNoSentencesMessage() {
   hideElement($('#validation-container'));
   hideElement($('#report_btn'));
   hideElement($("#test-mic-speakers"));
+  hideElement($('#instructive-msg'));
+  hideElement($('#editor-row'));
+  hideElement($('#thankyou-text'));
+  hideElement($('.simple-keyboard'));
   $("#validation-container").removeClass("validation-container");
   $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
 }
@@ -512,7 +539,8 @@ $(document).ready(() => {
       showNoSentencesMessage();
       return;
     }
-    validationSentences = result.data
+    validationSentences = result.data;
+    window.crowdSource = result.data;
     const audio = validationSentences[currentIndex];
     if (audio) {
       getAudioClip(audio.dataset_row_id );
