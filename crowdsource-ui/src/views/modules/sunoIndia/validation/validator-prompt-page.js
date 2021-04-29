@@ -8,6 +8,37 @@ const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
+function uploadToServer(cb) {
+  const fd = new FormData();
+  const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
+  const speakerDetails = JSON.stringify({
+    userName: localSpeakerDataParsed.userName,
+  })
+  fd.append('userInput', crowdSource.editedText);
+  fd.append('speakerDetails', speakerDetails);
+  fd.append('language', localSpeakerDataParsed.language);
+  fd.append('sentenceId', crowdSource.sentences[currentIndex].dataset_row_id);
+  fd.append('state', localStorage.getItem('state_region') || "");
+  fd.append('country', localStorage.getItem('country') || "");
+  fd.append('audioDuration', crowdSource.audioDuration);
+  fetch('/store', {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    body: fd,
+  })
+    .then((res) => res.json())
+    .then((result) => {
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .then((finalRes) => {
+      if (cb && typeof cb === 'function') {
+        cb();
+      }
+    });
+}
 
 function enableButton(element) {
   element.children().removeAttr("opacity")
@@ -94,15 +125,18 @@ const animateCSS = ($element, animationName, callback) => {
 };
 
 function setSentenceLabel(index) {
-  const $sentenceLabel = $('#sentenceLabel')
-  $sentenceLabel[0].innerText = validationSentences[index].sentence;
+  const $sentenceLabel = $('#sentenceLabel');
+  const originalText = validationSentences[index].contribution;
+  $sentenceLabel[0].innerText = originalText;
   animateCSS($sentenceLabel, 'lightSpeedIn');
+  $('#original-text').text(originalText);
+
 }
 
 function getNextSentence() {
   if (currentIndex < validationSentences.length - 1) {
     currentIndex++;
-    getAudioClip(validationSentences[currentIndex].contribution_id)
+    getAudioClip(validationSentences[currentIndex].dataset_row_id)
     resetValidation();
     setSentenceLabel(currentIndex);
   } else {
@@ -193,7 +227,7 @@ function recordValidation(action) {
 const openEditor = function (){
 const $editorRow = $('#editor-row');
   $editorRow.removeClass('d-none')
-  $('#original-text').text('something');
+  // $('#original-text').text('Original Text');
   hideElement($("#need_change"));
   hideElement($("#like_button"));
   showElement($('#cancel-edit-button'))
@@ -258,10 +292,7 @@ function addListeners() {
   });
 
   $('#cancel-edit-button').on('click', () => {
-    // recordValidation(REJECT_ACTION)
     showElement($('#sentences-row'));
-    updateProgressBar();
-    getNextSentence();
     closeEditor();
   })
 
@@ -300,7 +331,6 @@ let validationSentences = [{ sentence: '' }]
 
 const loadAudio = function (audioLink) {
   $('#my-audio').attr('src', audioLink)
-  $('#my-audio').addClass('pointer-event')
 };
 
 function disableSkipButton() {
@@ -312,7 +342,7 @@ function disableSkipButton() {
 const getAudioClip = function (contributionId) {
   hideAudioRow();
   disableSkipButton();
-  const source = 'validate';
+  const source = 'contribute';
   fetch(`/media-object/${source}/${contributionId}`, {
     method: 'POST',
     headers: {
@@ -485,7 +515,7 @@ $(document).ready(() => {
     validationSentences = result.data
     const audio = validationSentences[currentIndex];
     if (audio) {
-      getAudioClip(audio.contribution_id);
+      getAudioClip(audio.dataset_row_id );
       setSentenceLabel(currentIndex);
       updateValidationCount();
       resetValidation();
