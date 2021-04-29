@@ -58,35 +58,7 @@
               <%- include ../common/audio.ejs %>
             </div>
           </div>
-          <div class="row justify-content-center align-items-center" id="startRecordRow">
-            <div class="col-xl-3 col-md-3 col-sm-4 col-6 col-lg-3">
-              <button type="button" tabindex="-1" id="skipBtn" class="btn btn-outline-primary h6 w-100 rounded p-3">
-                <%= __('SKIP') %>
-              </button>
-            </div>
-            <div class="col-xl-3 col-md-3 col-sm-4 col-6 col-lg-3">
-              <button type="button" class="btn btn-primary shadow h6 w-100 rounded p-3" id="startRecord">
-                <%= __('START RECORDING') %>
-              </button>
-              <button type="button" id="stopRecord" class="d-none btn btn-primary shadow h6 w-100 rounded p-3">
-                <%= __('STOP RECORDING') %>
-              </button>
-            </div>
-          </div>
-          <div class="row justify-content-center align-items-center">
-            <div class="col-xl-3 col-md-3 col-sm-4 col-6 col-lg-3">
-              <button type="button" id="reRecord" class="d-none btn btn-outline-primary h6 w-100 rounded p-3">
-                <%= __('RE-RECORD') %>
-              </button>
-            </div>
-            <div class="col-xl-3 col-md-3 col-sm-4 col-6 col-lg-3">
-              <div class="outline-0" tabindex="0" data-toggle="tooltip" title="<%= __('Please validate any error message before proceeding')%>">
-                <button id="nextBtn" class="d-none btn btn-primary shadow h6 w-100 rounded p-3 point-none">
-                  <%= __('NEXT') %>
-                </button>
-              </div>
-            </div>
-          </div>
+          <%- include('../common/contribution-actions.ejs',{"primary":"Submit","secondary":"Cancel","play":"Replay"}); %>
         </div>
       </div>
     </div>
