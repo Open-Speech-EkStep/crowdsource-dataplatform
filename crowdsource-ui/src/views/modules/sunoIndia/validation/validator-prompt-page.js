@@ -15,7 +15,8 @@ function uploadToServer(cb) {
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
-  })
+  });
+  crowdSource.sentences = validationSentences;
   fd.append('userInput', crowdSource.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localSpeakerDataParsed.language);
@@ -308,10 +309,10 @@ function addListeners() {
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
     crowdSource.editedText = $("#edit").val();
-    uploadToServer()
+    uploadToServer();
     $("#edit").css('pointer-events','none');
-    closeEditor();
     setTimeout(()=>{
+      closeEditor();
       hideElement($('#thankyou-text'));
       updateProgressBar();
       getNextSentence();
