@@ -3,10 +3,6 @@ const fs = require('fs');
 const { conn, insertMaster } = require('../common/dbUtils')
 
 const ingest1 = async (datasetId, datasetType, client, datset_base_path, language, audio_paths, paired) => {
-    let state = NULL;
-    if (paired === "paired") {
-        state = "contributed"
-    }
     const values = audio_paths.map(path => {
         return `('medium', '${datasetType}',
             '{
@@ -15,7 +11,7 @@ const ingest1 = async (datasetId, datasetType, client, datset_base_path, languag
             "language": "${language}"
             }', 
             ${datasetId},
-            ${state}
+            ${paired ? 'contributed' : null}
         )`
     })
 
