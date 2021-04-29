@@ -134,7 +134,7 @@ function initializeBlock() {
       top_lang = language;
       localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
       localStorage.setItem("i18n", "en");
-      window.location.href = "/";
+      window.location.href = "./home.html";
       setLangNavBar(targetedDiv, language, $languageNavBar);
       updateHrsForCards(language);
       updateLocaleLanguagesDropdown(language);

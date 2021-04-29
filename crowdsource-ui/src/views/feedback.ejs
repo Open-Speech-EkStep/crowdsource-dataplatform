@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <%- include common/headerForContributor.ejs %>
+<%- include('common/headerForContributor.ejs',{path:"./"}); %>
         <div id="content-wrapper" class="container-fluid pt-5 pb-2 px-3 px-md-5 h-100">
             <div id="feedback_form">
                 <div id="feedback_title_container" class="col-12 col-sm-8 offset-sm-2 row align-items-center mb-5">
@@ -62,7 +62,7 @@
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <%- include common/footer.ejs %>
+    <%- include('common/footer.ejs',{path:"./"}) %>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="../js/feedback.js"></script>
 </body>

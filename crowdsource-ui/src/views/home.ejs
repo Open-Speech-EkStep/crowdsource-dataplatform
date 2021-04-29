@@ -23,223 +23,229 @@
 </head>
 
 <body>
-    <%- include('common/header.ejs',{bolo:"./home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html"}); %>
-        <div class="container-fluid supreme-container">
-            <div class="row">
-                <div class="col-12 col-md-8 col-lg-10 offset-lg-1 mt-4">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-white px-4" id="contribution_lang_navbar">
-                        <div class="mx-2">
-                            <%= __('Select the language for voluntary contribution') %>:
-                        </div><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedLanguage" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedLanguage">
-                            <div class="col-5 col-lg-5 col-xl-4" id="nav-bar-loader">
-                                <div><span class="spinner"></span></div>
-                            </div>
-                            <ul class="navbar-nav text-primary cursor-pointer d-none" id="language-nav-bar">
-                                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Hindi">हिंदी</li>
-                                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Marathi">मराठी</li>
-                                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Bengali">বাংলা</li>
-                                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Tamil">தமிழ்</li>
-                                <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Telugu">తెలుగు</li>
-                            </ul>
-                            <ul class="navbar-nav text-primary cursor-pointer">
-                                <li class="nav-item mx-2 mx-lg-4 options d-none" id="6th_option"></li>
-                            </ul>
-                            <ul class="navbar-nav text-primary cursor-pointer">
-                                <li class="nav-item mx-2 mx-lg-4 options">
-                                    <div id="Show_all_language" data-toggle="modal" data-target="#language-pop-up-wrapper" class="cursor-pointer">
-                                        <%= __('Show All') %>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
+<%- include('common/header.ejs',{bolo:"./home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
+<div class="container-fluid supreme-container">
+    <div class="row">
+        <div class="col-12 col-md-8 col-lg-10 offset-lg-1 mt-4">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white px-4" id="contribution_lang_navbar">
+                <div class="mx-2">
+                    <%= __('Select the language for voluntary contribution') %>:
                 </div>
-            </div>
-            <div class="m-auto row justify-content-center mt-lg-5 mx-lg-5">
-                <div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card1 mr-lg-3 justify-content-center align-items-center py-3" id="say">
-                    <div id="say_container" class="row align-items-center py-lg-5 position-relative col-10 card_container px-0" style="height:100%">
-                        <div class="col-8 px-0">
-                            <h1 class="display-5">
-                                <%= __('Speak') %>
-                            </h1>
-                            <div class="mt-3 font-weight-bold">
-                                <%= __('Contribute Your Voice') %>
-                            </div>
-                        </div>
-                        <div class="col-4 text-right px-0">
-                                <img src="../img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer say-logo img-fluid" data-target="#userModal" width="140px" height="140px">
-                        </div>
-
-                        <div id="say-p-2" class="col-12 d-none position-absolute px-0" style="bottom:1rem">
-                            <div>
-                                <%= __('Contribute your voice to create an open data repository of Indian languages') %>
-                            </div>
-                            <div class="col-5 col-lg-5 col-xl-4" id="say-loader">
-                                <div><span class="spinner"></span></div>
-                            </div>
-                            <div id="say-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card2 ml-lg-3 justify-content-center align-items-center py-3" id="listen">
-                    <div id="listen_container" class="row position-relative align-items-center py-lg-5 col-10 card_container px-0" style="height:100%">
-                        <div class="col-8 px-0">
-                            <h1 class="display-5">
-                                <%= __('Listen') %>
-                            </h1>
-                            <div class="mt-3 font-weight-bold">
-                                <%= __('Validate What They Say') %>
-                            </div>
-                        </div>
-                        <div class="col-4 text-right px-0">
-                            <a href="./validator-page.html">
-                                <img src="../img/listen.svg" alt="validator" id="start_validating" width="140px" height="140px" class="cursor-pointer listen-logo img-fluid"></a>
-                        </div>
-                        <div class="col-12 d-none position-absolute px-0" id="listen-p-2" style="bottom:1rem">
-                            <div>
-                                <%= __('Help us by validating the recordings that others have contributed') %>
-                            </div>
-                            <div class="col-7 col-lg-6 col-xl-6" id="listen-loader">
-                                <div><span class="spinner"></span></div>
-                            </div>
-                            <div id="listen-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 text-dark mt-4">
-                    <h1 class="display-5 font-wt-900 site-blue lh-5 mt-lg-5">
-                        <%= __('Bolo India: A crowdsourcing initiative for Indian languages') %>
-                    </h1>
-                    <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
-                        <%= __('India needs to be Aatmanirbhar in the area of speech recognition in Indian languages.  Hence, we want to create an open data repository of many Indian voices. Bolo India invites you to volunteer contribute your voice for this cause.') %> <a class="ml-1" href="./about-us.html">
-                                <%= __('Know More') %>
-                            </a>
-                    </p>
-                </div>
-                <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="../img/home.svg" width="614.8" height="759.548" alt="Bolo India Infograph" class="img-fluid mr-n1"></div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 pt-lg-0 text-dark">
-                    <h1 class="display-5 font-wt-900 site-blue lh-5">
-                        <%= __('We rely on your contributions') %>
-                    </h1>
-                    <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
-                        <%= __('The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.') %> <a class="ml-1" href="./about-us.html">
-                                <%= __('Know More') %>
-                            </a>
-                    </p>
-                    <div class="row mt-5" id="speaker-data">
-                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader1">
-                            <div><span class="spinner"></span></div>
-                        </div>
-                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader2">
-                            <div><span class="spinner"></span></div>
-                        </div>
-                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader3">
-                            <div><span class="spinner"></span></div>
-                        </div>
-                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="languages-wrapper">
-                            <p class="h4" id="languages-value"></p>
-                            <p class="mb-0 fs-h4">
-                                <%= __('languages contributed') %>
-                            </p>
-                        </div>
-                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="speakers-wrapper">
-                            <p class="h4" id="speaker-value"></p>
-                            <p class="mb-0 fs-h4">
-                                <%= __('speakers contributed') %>
-                            </p>
-                        </div>
-                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="hours-wrapper">
-                            <div class="mb-0 d-flex align-items-center"><span class="h4" id="hour-value"></span></div>
-                            <p class="mb-0 fs-h4">
-                                <%= __('hours recorded') %>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-5 col-lg-5 px-0 oflow-x-hid"></div>
-            </div>
-            <div class="row mb-5 lazy">
-                <div class="col-12 col-md-6 col-lg-6 ml-lg-auto pt-5 pt-lg-0 text-dark">
-                    <div class="justify-content-center align-items-center d-none" id="chartSpinner">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedLanguage" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedLanguage">
+                    <div class="col-5 col-lg-5 col-xl-4" id="nav-bar-loader">
                         <div><span class="spinner"></span></div>
                     </div>
-                    <div id="indiaMapChart" style="width:100%"></div>
-                    <div id="legendDiv" class="justify-content-evenly d-none">
-                        <div id="quarter" class="quarter">
-                            <div class="legend-val">0 - 1hr</div>
-                        </div>
-                        <div id="half" class="half">
-                            <div class="legend-val">1 - 2hrs</div>
-                        </div>
-                        <div id="threeQuarter" class="threeQuarter">
-                            <div class="legend-val">2 - 4hrs</div>
-                        </div>
-                        <div id="full" class="full">
-                            <div class="legend-val">4+ hrs</div>
-                        </div>
+                    <ul class="navbar-nav text-primary cursor-pointer d-none" id="language-nav-bar">
+                        <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Hindi">हिंदी</li>
+                        <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Marathi">मराठी</li>
+                        <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Bengali">বাংলা</li>
+                        <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Tamil">தமிழ்</li>
+                        <li class="nav-item px-lg-4 px-md-4 px-2 options" value="Telugu">తెలుగు</li>
+                    </ul>
+                    <ul class="navbar-nav text-primary cursor-pointer">
+                        <li class="nav-item mx-2 mx-lg-4 options d-none" id="6th_option"></li>
+                    </ul>
+                    <ul class="navbar-nav text-primary cursor-pointer">
+                        <li class="nav-item mx-2 mx-lg-4 options">
+                            <div id="Show_all_language" data-toggle="modal" data-target="#language-pop-up-wrapper" class="cursor-pointer">
+                                <%= __('Show All') %>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="m-auto row justify-content-center mt-lg-5 mx-lg-5">
+        <div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card1 mr-lg-3 justify-content-center align-items-center py-3" id="say">
+            <div id="say_container" class="row align-items-center py-lg-5 position-relative col-10 card_container px-0" style="height:100%">
+                <div class="col-8 px-0">
+                    <h1 class="display-5">
+                        <%= __('Speak') %>
+                    </h1>
+                    <div class="mt-3 font-weight-bold">
+                        <%= __('Contribute Your Voice') %>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-5 mt-xs-5 pr-lg-5">
-                    <div id="bar_charts_container">
-                        <h4 class="h4 mb-4">
-                            <%= __('Top Languages') %>
-                        </h4>
-                        <div class="d-flex mb-3">
-                            <div class="form-check mr-5"><label class="form-check-label" for="flexRadioDefault1"><input class="form-check-input" type="radio" name="topLanguageChart" id="hours_chart" value="hours" checked="checked">
-                                    <%= __('By hours of data contributed') %>
-                                </label></div>
-                            <div class="form-check"><label class="form-check-label" for="flexRadioDefault2"><input class="form-check-input" type="radio" name="topLanguageChart" id="speakers_chart" value="speakers">
-                                    <%= __('By number of speakers') %>
-                                </label></div>
-                        </div>
-                        <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
-                            <div><span class="spinner"></span></div>
-                        </div>
-                        <div id="speakers_hours_chart_container" class="w-100">
-                            <div id="speakers_hours_chart" class="w-90"></div>
-                        </div>
-                    </div>
+                <div class="col-4 text-right px-0">
+                    <img src="../img/say.svg" alt="speaker" id="start_recording" data-toggle="modal" class="cursor-pointer say-logo img-fluid" data-target="#userModal" width="140px" height="140px">
                 </div>
-                <div class="col-12 col-md-12 col-lg-12 px-0 oflow-x-hid"></div>
-            </div>
-            <div class="row mt-5 mb-5" id="view_all_btn">
-                <div class="col-12 d-flex justify-content-center">
-                    <a href="./dashboard.html" id="viewAllDetailsBtn" class="btn btn-outline-primary text-primary">
-                        <%= __('VIEW ALL DETAILS') %>
-                    </a>
+
+                <div id="say-p-2" class="col-12 d-none position-absolute px-0" style="bottom:1rem">
+                    <div>
+                        <%= __('Contribute your voice to create an open data repository of Indian languages') %>
+                    </div>
+                    <div class="col-5 col-lg-5 col-xl-4" id="say-loader">
+                        <div><span class="spinner"></span></div>
+                    </div>
+                    <div id="say-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="modal-chart-wrapper" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg w-75 mw-100 h-75 mx-auto">
-                <div class="modal-content border-primary border-2 h-100 p-lg-5 px-2 py-4">
-                    <div class="text-right" aria-label="Close"><a href="#" aria-hidden="true" data-dismiss="modal">
-                            <%= __('Hide details') %> &lt;
-                        </a></div>
-                    <div id="modal-chart" class="h-100"></div>
+        <div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card2 ml-lg-3 justify-content-center align-items-center py-3" id="listen">
+            <div id="listen_container" class="row position-relative align-items-center py-lg-5 col-10 card_container px-0" style="height:100%">
+                <div class="col-8 px-0">
+                    <h1 class="display-5">
+                        <%= __('Listen') %>
+                    </h1>
+                    <div class="mt-3 font-weight-bold">
+                        <%= __('Validate What They Say') %>
+                    </div>
+                </div>
+                <div class="col-4 text-right px-0">
+                    <a href="./validator-page.html">
+                        <img src="../img/listen.svg" alt="validator" id="start_validating" width="140px" height="140px" class="cursor-pointer listen-logo img-fluid"></a>
+                </div>
+                <div class="col-12 d-none position-absolute px-0" id="listen-p-2" style="bottom:1rem">
+                    <div>
+                        <%= __('Help us by validating the recordings that others have contributed') %>
+                    </div>
+                    <div class="col-7 col-lg-6 col-xl-6" id="listen-loader">
+                        <div><span class="spinner"></span></div>
+                    </div>
+                    <div id="listen-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
                 </div>
             </div>
-        </div><button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
-        <%- include modals/speakerDetail.ejs %>
-        <%- include modals/content-languages.ejs %>
-            <%- include modals/say-listen-language.ejs %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 text-dark mt-4">
+            <h1 class="display-5 font-wt-900 site-blue lh-5 mt-lg-5">
+                <%= __('Bolo India: A crowdsourcing initiative for Indian languages') %>
+            </h1>
+            <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
+                <%= __('India needs to be Aatmanirbhar in the area of speech recognition in Indian languages.  Hence, we want to create an open data repository of many Indian voices. Bolo India invites you to volunteer contribute your voice for this cause.') %>
+                <a class="ml-1" href="./about-us.html">
+                    <%= __('Know More') %>
+                </a>
+            </p>
+        </div>
+        <div class="col-12 col-md-5 col-lg-5 text-right px-0 align-self-center oflow-x-hid"><img src="../img/home.svg" width="614.8" height="759.548" alt="Bolo India Infograph" class="img-fluid mr-n1">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 pt-lg-0 text-dark">
+            <h1 class="display-5 font-wt-900 site-blue lh-5">
+                <%= __('We rely on your contributions') %>
+            </h1>
+            <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
+                <%= __('The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.') %>
+                <a class="ml-1" href="./about-us.html">
+                    <%= __('Know More') %>
+                </a>
+            </p>
+            <div class="row mt-5" id="speaker-data">
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader1">
+                    <div><span class="spinner"></span></div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader2">
+                    <div><span class="spinner"></span></div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader3">
+                    <div><span class="spinner"></span></div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="languages-wrapper">
+                    <p class="h4" id="languages-value"></p>
+                    <p class="mb-0 fs-h4">
+                        <%= __('languages contributed') %>
+                    </p>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="speakers-wrapper">
+                    <p class="h4" id="speaker-value"></p>
+                    <p class="mb-0 fs-h4">
+                        <%= __('speakers contributed') %>
+                    </p>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="hours-wrapper">
+                    <div class="mb-0 d-flex align-items-center"><span class="h4" id="hour-value"></span></div>
+                    <p class="mb-0 fs-h4">
+                        <%= __('hours recorded') %>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-5 col-lg-5 px-0 oflow-x-hid"></div>
+    </div>
+    <div class="row mb-5 lazy">
+        <div class="col-12 col-md-6 col-lg-6 ml-lg-auto pt-5 pt-lg-0 text-dark">
+            <div class="justify-content-center align-items-center d-none" id="chartSpinner">
+                <div><span class="spinner"></span></div>
+            </div>
+            <div id="indiaMapChart" style="width:100%"></div>
+            <div id="legendDiv" class="justify-content-evenly d-none">
+                <div id="quarter" class="quarter">
+                    <div class="legend-val">0 - 1hr</div>
+                </div>
+                <div id="half" class="half">
+                    <div class="legend-val">1 - 2hrs</div>
+                </div>
+                <div id="threeQuarter" class="threeQuarter">
+                    <div class="legend-val">2 - 4hrs</div>
+                </div>
+                <div id="full" class="full">
+                    <div class="legend-val">4+ hrs</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-5 mt-xs-5 pr-lg-5">
+            <div id="bar_charts_container">
+                <h4 class="h4 mb-4">
+                    <%= __('Top Languages') %>
+                </h4>
+                <div class="d-flex mb-3">
+                    <div class="form-check mr-5"><label class="form-check-label" for="flexRadioDefault1"><input class="form-check-input" type="radio" name="topLanguageChart" id="hours_chart" value="hours" checked="checked">
+                            <%= __('By hours of data contributed') %>
+                        </label></div>
+                    <div class="form-check"><label class="form-check-label" for="flexRadioDefault2"><input class="form-check-input" type="radio" name="topLanguageChart" id="speakers_chart" value="speakers">
+                            <%= __('By number of speakers') %>
+                        </label></div>
+                </div>
+                <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
+                    <div><span class="spinner"></span></div>
+                </div>
+                <div id="speakers_hours_chart_container" class="w-100">
+                    <div id="speakers_hours_chart" class="w-90"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-12 col-lg-12 px-0 oflow-x-hid"></div>
+    </div>
+    <div class="row mt-5 mb-5" id="view_all_btn">
+        <div class="col-12 d-flex justify-content-center">
+            <a href="./dashboard.html" id="viewAllDetailsBtn" class="btn btn-outline-primary text-primary">
+                <%= __('VIEW ALL DETAILS') %>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-chart-wrapper" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg w-75 mw-100 h-75 mx-auto">
+        <div class="modal-content border-primary border-2 h-100 p-lg-5 px-2 py-4">
+            <div class="text-right" aria-label="Close"><a href="#" aria-hidden="true" data-dismiss="modal">
+                    <%= __('Hide details') %> &lt;
+                </a></div>
+            <div id="modal-chart" class="h-100"></div>
+        </div>
+    </div>
+</div>
+<button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
+<%- include modals/speakerDetail.ejs %>
+<%- include modals/content-languages.ejs %>
+<%- include modals/say-listen-language.ejs %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <%- include common/footer.ejs %>
-                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-            
-                    <script src="../js/home.js" id="home-page" default-lang=""></script>
-                    <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
-                    <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
-                    <script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
-                    <script src="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.js"></script>
-            
+<%- include('common/footer.ejs',{path:"./"}) %>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="../js/home.js" id="home-page" default-lang=""></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
+<script src="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.js"></script>
+
 </body>
 
 </html>

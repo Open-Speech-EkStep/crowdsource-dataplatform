@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../css/record.css">
     <link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
-<body> <%- include common/headerForContributor.ejs %>
+<body> <%- include('common/headerForContributor.ejs',{path:"./"}); %>
 <div id="loader" class="overlay__content"><span class="spinner"></span></div>
 <div id="page-content" class="d-none">
     <div id="content-wrapper" class="container-fluid d-flex flex-column">
@@ -91,7 +91,7 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%- include common/footer.ejs %>
+<%- include('common/footer.ejs',{path:"./"}) %>
 <%- include modals/report-modal.ejs %>
 <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

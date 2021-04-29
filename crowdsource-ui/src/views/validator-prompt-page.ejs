@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<%- include common/headerForContributor.ejs %>
+<%- include('common/headerForContributor.ejs',{path:"./"}); %>
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column">
@@ -130,7 +130,7 @@
         <%- include modals/validator-instructions.ejs %>
         <%- include modals/validation-report-modal.ejs %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <%- include common/footer.ejs %>
+        <%- include('common/footer.ejs',{path:"./"}) %>
         <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

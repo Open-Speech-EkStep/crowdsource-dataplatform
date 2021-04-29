@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <%- include common/headerForContributor.ejs %>
+<%- include('common/headerForContributor.ejs',{path:"./"}); %>
         <div class="container-fluid">
             <div class="row justify-content-center bg-primary">
                 <div class="col-12 col-sm-10 col-md-8 px-1 py-0 text-light text-center mt-0 mt-sm-2 mt-lg-3">
@@ -160,7 +160,7 @@
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <%- include common/footer.ejs %>
+    <%- include('common/footer.ejs',{path:"./"}) %>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
             <script>function setupScroll() {
