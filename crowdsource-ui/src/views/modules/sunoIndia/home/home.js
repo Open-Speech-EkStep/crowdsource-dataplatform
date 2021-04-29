@@ -162,7 +162,14 @@ function initializeBlock() {
   $('#start_recording').on('click', () => {
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    setStartRecordingBtnOnClick('./record.html');
   });
+
+  $('#start_validating').on('click',()=>{
+    sentenceLanguage = top_lang;
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    setStartRecordingBtnOnClick('./validator-page.html');
+  })
 
   showByHoursChart();
 

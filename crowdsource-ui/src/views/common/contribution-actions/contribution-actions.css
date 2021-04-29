@@ -1,0 +1,27 @@
+.contribution-actions__btn {
+    border: 2px solid #007bff;
+    border-radius: 48px;
+    padding: 15px 60px;
+}
+
+.play-btn-container {
+    padding: 0 80px;
+}
+
+.play-btn {
+    height: 50px;
+    width: 50px;
+    border-radius: 40px;
+    border: 2px solid #007bff;
+    transform: scale(1.5);
+}
+
+.play-btn-label {
+    padding: 20px 0 0 0;
+}
+
+.skip-btn {
+    padding: 15px 0 0 0;
+    color: #007bff;
+    cursor: pointer;
+}
