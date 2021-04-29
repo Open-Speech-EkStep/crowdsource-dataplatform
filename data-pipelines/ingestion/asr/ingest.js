@@ -37,7 +37,7 @@ const ingest2 = async (datasetRowIds, client, datset_base_path, language, dataRo
             }', 
             true,
             CURRENT_DATE,
-            'assigned'
+            'completed'
         )`
     })
 
