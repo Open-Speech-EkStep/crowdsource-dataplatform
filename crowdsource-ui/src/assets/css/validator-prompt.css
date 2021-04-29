@@ -29,10 +29,7 @@ a{
     border-top-right-radius:12px;
     border-bottom-right-radius:12px;
     padding: 24px;
-    border: 1px solid rgba(149, 149, 149, 0.5);
-}
-
-#edit-text:focus {
+    box-shadow: inset 0px 0px 8px #007BFF;
     border: 2px solid #007BFF;
 }
 
