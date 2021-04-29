@@ -15,12 +15,50 @@ a{
     height: 5rem;
 }
 
+.original-text {
+    border: 1px solid rgba(149, 149, 149, 0.5); 
+    background-color:#f8f9fa;
+    height:180px;
+    border-top-left-radius:12px;
+    border-bottom-left-radius:12px;
+    padding: 24px;
+}
+
+#edit-text {
+    height:180px;
+    border-top-right-radius:12px;
+    border-bottom-right-radius:12px;
+    padding: 24px;
+    border: 1px solid rgba(149, 149, 149, 0.5);
+}
+
+#edit-text:focus {
+    border: 2px solid #007BFF;
+}
+
+#edit-text textarea {
+    border: none;
+    padding: 0;
+    box-shadow: none;
+}
+
+.original-text,#edit-text label {
+    font-size: 14px;
+    color: #959595;
+}
+
+#original-text {
+    font-size: 24px;
+}
+
 @media (min-width: 992px) {
     .validation-container {
         min-height: 250px;
     }
     .prompt{
-        min-height: 120px;
+        min-height: 150px;
+        max-height: 200px;
+        padding: 32px;
     }
 }
 
