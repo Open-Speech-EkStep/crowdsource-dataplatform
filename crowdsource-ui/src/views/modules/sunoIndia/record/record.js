@@ -1,626 +1,488 @@
-const fetch = require('../common/fetch');
-const {
-  setPageContentHeight,
-  fetchLocationInfo,
-  updateLocaleLanguagesDropdown,
-  setFooterPosition,
-  getLocaleString,
-  reportSentenceOrRecording,
-} = require('../common/utils');
-const { LOCALE_STRINGS } = require('../common/constants');
-const {setCurrentSentenceIndex, setTotalSentenceIndex} = require('../common/progress-bar');
+const fetch = require('../common/fetch')
+const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
+const {CONTRIBUTION_LANGUAGE} = require('../common/constants');
+const {showKeyboard} = require('../common/virtualKeyboard');
 
 const speakerDetailsKey = 'speakerDetails';
-const sentencesKey = 'sentences';
-const currentIndexKey = 'currentIndex';
-const skipCountKey = 'skipCount';
-const countKey = 'count';
+const ACCEPT_ACTION = 'accept';
+const REJECT_ACTION = 'reject';
+const SKIP_ACTION = 'skip';
 
-let currentIndex;
-let localeStrings;
+window.crowdSource = {};
 
-function getValue(number, maxValue) {
-  return number < 0 ? 0 : number > maxValue ? maxValue : number;
+function uploadToServer(cb) {
+  const fd = new FormData();
+  const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
+  const speakerDetails = JSON.stringify({
+    userName: localSpeakerDataParsed.userName,
+  });
+  crowdSource.sentences = validationSentences;
+  fd.append('userInput', crowdSource.editedText);
+  fd.append('speakerDetails', speakerDetails);
+  fd.append('language', localSpeakerDataParsed.language);
+  fd.append('sentenceId', crowdSource.sentences[currentIndex].dataset_row_id);
+  fd.append('state', localStorage.getItem('state_region') || "");
+  fd.append('country', localStorage.getItem('country') || "");
+  fetch('/store', {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    body: fd,
+  })
+    .then((res) => res.json())
+    .then((result) => {
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .then((finalRes) => {
+      if (cb && typeof cb === 'function') {
+        cb();
+      }
+    });
 }
 
-function getCurrentIndex(lastIndex) {
-  const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
-  return getValue(currentIndexInStorage, lastIndex);
+function enableButton(element) {
+  element.children().removeAttr("opacity")
+  element.removeAttr("disabled")
 }
 
-function getSkipCount(totalItems) {
-  const skipCountInStorage = Number(localStorage.getItem(skipCountKey));
-  return getValue(skipCountInStorage, totalItems);
-}
+const setAudioPlayer = function () {
+  console.log("here")
+  const myAudio = document.getElementById('my-audio');
+  const play = $('#play');
+  const pause = $('#pause');
+  const replay = $('#replay');
+  const textPlay = $('#audioplayer-text_play');
+  const textReplay = $('#audioplayer-text_replay');
+  const textPause = $('#audioplayer-text_pause');
 
-const startTimer = (seconds, display) => {
-  const counterSpan = document.getElementById('counter');
-  counterSpan.innerHTML = `0${seconds}`;
-  display.classList.remove('d-none');
-  let interval = setInterval(function () {
-    counterSpan.innerText = `0${seconds}`;
-    seconds--;
-    if (seconds < 0) {
-      clearInterval(interval);
-      display.classList.add('d-none');
-    }
-  }, 1000);
-};
 
-const initialize = () => {
-  const sentences = crowdSource.sentences;
-  const $startRecordBtn = $('#startRecord');
-  const $startRecordRow = $('#startRecordRow');
-  const $stopRecordBtn = $('#stopRecord');
-  const $reRecordBtn = $('#reRecord');
-  const $visualizer = $('#visualizer');
-  const $player = $('#player');
-  const $nextBtn = $('#nextBtn');
-  const $nextBtnToolTip = $nextBtn.parent();
-  const $getStarted = $('#get-started');
-  const $skipBtn = $('#skipBtn');
-  const $recordingRow = $('#recording-row');
-  const $recordingSign = $('#recording-sign');
-  const $progressBar = $('.progress-bar');
-  const $pageContent = $('#page-content');
-  const $audioSmallError = $('#audio-small-error');
-  const $autoStopWarning = document.getElementById('count-down');
-  const totalItems = sentences.length;
-  currentIndex = getCurrentIndex(totalItems - 1);
-  let skipCount = getSkipCount(totalItems - 1);
+  myAudio.addEventListener("ended", () => {
+    hideElement(pause)
+    showElement(replay)
+    hideElement(textPause);
+    showElement(textReplay);
+  });
 
-  let progressMessages = [
-    'Let’s get started',
-    'We know you can do more! ',
-    'You are halfway there. Keep going!',
-    'Just few more steps to go!',
-    'Four dead, one more to go!',
-    'Yay! Done & Dusted!',
-  ];
+  play.on('click', () => {
+    hideElement($('#default_line'))
+    playAudio();
+  });
 
-  if (sentences.length == 4) {
-    progressMessages = [
-      'Let’s get started',
-      'We know you can do more! ',
-      'You are halfway there. Keep going!',
-      'Just few more steps to go!',
-      'Yay! Done & Dusted!',
-    ];
-  } else if (sentences.length == 3) {
-    progressMessages = [
-      'Let’s get started',
-      'We know you can do more! ',
-      'Just few more steps to go!',
-      'Yay! Done & Dusted!',
-    ];
-  } else if (sentences.length == 2) {
-    progressMessages = ['Let’s get started', 'Just few more steps to go!', 'Yay! Done & Dusted!'];
-  } else if (sentences.length == 1) {
-    progressMessages = ['Let’s get started', 'Yay! Done & Dusted!'];
+  pause.on('click', pauseAudio);
+
+  replay.on('click', () => {
+    replayAudio();
+  });
+
+  function playAudio() {
+    myAudio.load();
+    hideElement(play)
+    showElement(pause)
+    hideElement(textPlay);
+    showElement(textPause);
+    myAudio.play();
   }
 
-  $nextBtnToolTip.tooltip({
-    container: 'body',
-    placement: screen.availWidth > 900 ? 'right' : 'bottom',
-  });
+  function pauseAudio() {
+    hideElement(pause)
+    showElement(replay)
+    hideElement(textPause)
+    showElement(textReplay)
+    myAudio.pause();
+  }
 
-  const animateCSS = ($element, animationName, callback) => {
-    $element.addClass(`animated ${animationName}`);
+  function replayAudio() {
+    myAudio.load();
+    hideElement(replay)
+    showElement(pause)
+    hideElement(textReplay);
+    showElement(textPause);
+    myAudio.play();
+  }
 
-    function handleAnimationEnd() {
-      $element.removeClass(`animated ${animationName}`);
-      $element.off('animationend');
-      if (typeof callback === 'function') callback();
-    }
+}
 
-    $element.on('animationend', handleAnimationEnd);
-  };
+let currentIndex = 0, progressCount = 0, validationCount = 0;
 
-  const setProgressBar = currentIndex => {
-    $progressBar.width(currentIndex * 20 + '%');
-    $progressBar.prop('aria-valuenow', currentIndex);
-  };
+const animateCSS = ($element, animationName, callback) => {
+  $element.addClass(`animated ${animationName}`);
 
-  const setSentenceText = index => {
-    const $sentenceLbl = $('#sentenceLbl');
-    $sentenceLbl[0].innerText = sentences[index].media_data;
-    animateCSS($sentenceLbl, 'lightSpeedIn');
-    currentIndex && setProgressBar(currentIndex);
-  };
+  function handleAnimationEnd() {
+    $element.removeClass(`animated ${animationName}`);
+    $element.off('animationend');
+    if (typeof callback === 'function') callback();
+  }
 
-  const notyf = new Notyf({
-    position: { x: 'center', y: 'top' },
-    types: [
-      {
-        type: 'success',
-        className: 'fnt-1-5',
-      },
-      {
-        type: 'error',
-        duration: 3500,
-        className: 'fnt-1-5',
-      },
-    ],
-  });
+  $element.on('animationend', handleAnimationEnd);
+};
 
-  const handleAudioDurationError = duration => {
-    if (duration < 2) {
-      $nextBtnToolTip.tooltip('enable');
-      $nextBtn.prop('disabled', true).addClass('point-none');
-      $audioSmallError.removeClass('d-none');
-      return false;
-    } else {
-      $nextBtnToolTip.tooltip('disable');
-      $nextBtn.removeAttr('disabled').removeClass('point-none');
-      $audioSmallError.addClass('d-none');
-      return true;
-    }
-  };
-
-  setSentenceText(currentIndex);
-  setCurrentSentenceIndex(currentIndex + 1);
-  setTotalSentenceIndex(totalItems);
-
-  let gumStream;
-  let rec;
-  let input;
-  let cleartTimeoutKey;
-  let timerTimeoutKey;
-  let audioCtx;
-
-  $startRecordBtn.add($reRecordBtn).on('click', () => {
-    navigator.mediaDevices
-      .getUserMedia({ audio: true, video: false })
-      .then(stream => {
-        $getStarted.hide();
-        $startRecordBtn.addClass('d-none');
-        $skipBtn.prop('disabled', true);
-        $startRecordRow.removeClass('d-none');
-        $stopRecordBtn.removeClass('d-none');
-        $recordingRow.removeClass('d-none');
-        $recordingSign.removeClass('d-none');
-        $reRecordBtn.addClass('d-none');
-        $nextBtn.addClass('d-none');
-        $player.addClass('d-none');
-        $player.trigger('pause');
-        $visualizer.removeClass('d-none');
-        $nextBtnToolTip.tooltip('disable');
-        $audioSmallError.addClass('d-none');
-
-        gumStream = stream;
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (audioCtx) {
-          audioCtx.close();
-        }
-        audioCtx = new AudioContext();
-        const audioAnalyser = audioCtx.createAnalyser();
-        //new audio context to help us record
-        input = audioCtx.createMediaStreamSource(stream);
-        input.connect(audioAnalyser);
-        visualize(visualizer, audioAnalyser);
-        /* Create the Recorder object and configure to record mono sound (1 channel) Recording 2 channels will double the file size */
-        rec = new Recorder(input, {
-          numChannels: 2,
-        });
-        //start the recording process
-        rec.record();
-        //automatically click stop button after 30 seconds
-
-        timerTimeoutKey = setTimeout(() => {
-          $autoStopWarning.classList.remove('d-none');
-          startTimer(5, $autoStopWarning);
-        }, 15 * 1000);
-
-        cleartTimeoutKey = setTimeout(() => {
-          $stopRecordBtn.click();
-        }, 21 * 1000);
-      })
-      .catch(err => {
-        console.log(err);
-        notyf.error(
-          'Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission'
-        );
-        // $startRecordRow.removeClass('d-none');
-        $stopRecordBtn.addClass('d-none');
-        $nextBtn.addClass('d-none');
-        $reRecordBtn.addClass('d-none');
-        $recordingSign.addClass('d-none');
-        $recordingRow.addClass('d-none');
-        $player.addClass('d-none');
-        $player.trigger('pause');
-        $visualizer.addClass('d-none');
-        $audioSmallError.addClass('d-none');
-      });
-  });
-
-  $stopRecordBtn.on('click', () => {
-    const $startRecordRow = $('#startRecordRow');
-    clearTimeout(cleartTimeoutKey);
-    clearTimeout(timerTimeoutKey);
-    $autoStopWarning.classList.add('d-none');
-    $startRecordRow.addClass('d-none');
-    $stopRecordBtn.addClass('d-none');
-    $nextBtn.removeClass('d-none');
-    $skipBtn.prop('disabled', false);
-    $reRecordBtn.removeClass('d-none');
-    $recordingSign.addClass('d-none');
-    $recordingRow.addClass('d-none');
-    $player.removeClass('d-none');
-    $visualizer.addClass('d-none');
-
-    rec.stop(); //stop microphone access
-    gumStream.getAudioTracks()[0].stop();
-    //create the wav blob and pass it on to createObjectURL
-    rec.exportWAV(blob => {
-      const URL = window.URL || window.webkitURL;
-      const bloburl = URL.createObjectURL(blob);
-      crowdSource.audioBlob = blob;
-      $player.prop('src', bloburl);
-      $player.on('loadedmetadata', () => {
-        const duration = $player[0].duration;
-        const isValidAudio = handleAudioDurationError(duration);
-        if (isValidAudio) {
-          crowdSource.audioDuration = duration;
-        }
-      });
-    });
-    if (currentIndex === totalItems - 1) {
-      $getStarted.text(progressMessages[totalItems]).show();
-    }
-  });
-
-  const goToThankYouPage = () => {
-    location.href = './thank-you.html';
-  };
-
-  $nextBtn.add($skipBtn).on('click', event => {
-    if (event.target.id === 'nextBtn' && currentIndex < totalItems - 1) {
-      uploadToServer();
-    } else if (event.target.id === 'skipBtn') {
-      markContributionSkipped();
-      incrementSkipCount();
-      $skipBtn.addClass('d-none');
-    }
-    if (currentIndex === totalItems - 1) {
-      if (event.target.id === 'nextBtn') {
-        uploadToServer(goToThankYouPage);
-      } else {
-        setTimeout(goToThankYouPage, 2500);
-      }
-      $skipBtn.addClass('d-none');
-      currentIndex++;
-      animateCSS($pageContent, 'zoomOut', () => {
-        $pageContent.addClass('d-none');
-        $('footer').removeClass('bottom').addClass('fixed-bottom');
-      });
-      setProgressBar(currentIndex);
-      const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
-      Object.assign(sentencesObj, { sentences: [] });
-      localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
-      localStorage.setItem(currentIndexKey, currentIndex);
-      const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
-      notyf.success(msg);
-      $('#loader').show();
-    } else if (currentIndex < totalItems - 1) {
-      incrementCurrentIndex();
-    }
-
-    $player.addClass('d-none');
-    $player.trigger('pause');
-    $nextBtn.addClass('d-none');
-
-    $reRecordBtn.addClass('d-none');
-    $startRecordRow.removeClass('d-none');
-    $startRecordBtn.removeClass('d-none');
-  });
-
-  function incrementCurrentIndex() {
+function getNextSentence() {
+  if (currentIndex < validationSentences.length - 1) {
     currentIndex++;
-    setSentenceText(currentIndex);
-    setCurrentSentenceIndex(currentIndex + 1);
-    $getStarted.text(progressMessages[currentIndex]);
-    localStorage.setItem(currentIndexKey, currentIndex);
-    $skipBtn.removeClass('d-none');
+    getAudioClip(validationSentences[currentIndex].dataset_row_id)
+    resetValidation();
+  } else {
+    resetValidation();
+    showThankYou();
   }
+}
 
-  function incrementSkipCount() {
-    skipCount++;
-    localStorage.setItem(skipCountKey, skipCount);
+const updateDecisionButton = (button, colors) => {
+  const children = button.children().children();
+  children[0].setAttribute("fill", colors[0]);
+  children[1].setAttribute("fill", colors[1]);
+  children[2].setAttribute("fill", colors[2]);
+}
+
+const updateValidationCount = () => {
+  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
+  currentSentenceLbl.innerText = progressCount;
+  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
+  totalSentencesLbl.innerText = validationSentences.length;
+}
+
+const updateProgressBar = () => {
+  const $progressBar = $("#progress_bar");
+  progressCount++;
+  const multiplier = 10 * (10 / validationSentences.length);
+  $progressBar.width(progressCount * multiplier + '%');
+  $progressBar.prop('aria-valuenow', progressCount);
+  updateValidationCount();
+}
+
+function disableButton(button) {
+  button.children().attr("opacity", "50%");
+  button.attr("disabled", "disabled");
+}
+
+function resetValidation() {
+  const textPlay = $('#audioplayer-text_play');
+  const textReplay = $('#audioplayer-text_replay');
+  const textPause = $('#audioplayer-text_pause');
+  hideElement(textPause);
+  hideElement(textReplay);
+  showElement(textPlay);
+
+  hideElement($("#replay"))
+  hideElement($('#pause'))
+  showElement($("#play"))
+  showElement($('#default_line'))
+}
+
+function recordValidation(action) {
+  if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
+    validationCount++;
   }
-
-  function markContributionSkipped() {
-    const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-
-    const reqObj = {
-      sentenceId: crowdSource.sentences[currentIndex].dataset_row_id,
-      userName: speakerDetails.userName,
-    };
-    fetch('/skip', {
-      method: 'POST',
-      credentials: 'include',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(reqObj),
-    })
-      .then(res => res.json())
-      .then(result => {})
-      .catch(err => {
-        console.log(err);
-      })
-      .then(finalRes => {
-        if (cb && typeof cb === 'function') {
-          cb();
+  const sentenceId = validationSentences[currentIndex].dataset_row_id
+  const contribution_id = validationSentences[currentIndex].contribution_id
+  fetch(`/validate/${contribution_id}/${action}`, {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    body: JSON.stringify({
+      sentenceId: sentenceId,
+      state: localStorage.getItem('state_region') || "",
+      country: localStorage.getItem('country') || ""
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(
+      (data) => {
+        if (!data.ok) {
+          throw Error(data.statusText || 'HTTP error');
         }
       });
-  }
+}
 
-  function uploadToServer(cb) {
-    const fd = new FormData();
-    const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
-    const speakerDetails = JSON.stringify({
-      userName: localSpeakerDataParsed.userName,
-    });
-    fd.append('audio_data', crowdSource.audioBlob);
-    fd.append('speakerDetails', speakerDetails);
-    fd.append('language', localSpeakerDataParsed.language);
-    fd.append('sentenceId', crowdSource.sentences[currentIndex].dataset_row_id);
-    fd.append('state', localStorage.getItem('state_region') || '');
-    fd.append('country', localStorage.getItem('country') || '');
-    fd.append('audioDuration', crowdSource.audioDuration);
-    fetch('/store', {
-      method: 'POST',
-      credentials: 'include',
-      mode: 'cors',
-      body: fd,
-    })
-      .then(res => res.json())
-      .then(result => {})
-      .catch(err => {
-        console.log(err);
-      })
-      .then(finalRes => {
-        if (cb && typeof cb === 'function') {
-          cb();
-        }
-      });
-  }
+const closeEditor = function (){
+  hideElement($('.simple-keyboard'));
+}
 
-  function visualize(visualizer, analyser) {
-    const canvasCtx = visualizer.getContext('2d');
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-    const WIDTH = visualizer.width;
-    const HEIGHT = visualizer.height;
-    // TODO do we need to limit the number of time visualize refreshes per second
-    // so that it can run on Android processors without causing audio to drop?
-    function draw() {
-      // this is more efficient than calling with processor.onaudioprocess
-      // and sending floatarray with each call...
-      requestAnimationFrame(draw);
-      analyser.getByteTimeDomainData(dataArray);
-      canvasCtx.fillStyle = 'rgb(255, 255, 255, 0.8)';
-      canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-      canvasCtx.lineWidth = 2;
-      canvasCtx.strokeStyle = 'rgb(0,123,255)';
-      canvasCtx.beginPath();
-      const sliceWidth = (WIDTH * 1.0) / bufferLength;
-      let x = 0;
-      for (let i = 0; i < bufferLength; i++) {
-        let v = dataArray[i] / 128.0; // uint8
-        let y = (v * HEIGHT) / 2; // uint8
-        if (i === 0) {
-          canvasCtx.moveTo(x, y);
-        } else {
-          canvasCtx.lineTo(x, y);
-        }
-        x += sliceWidth;
-      }
-      canvasCtx.lineTo(visualizer.width, visualizer.height / 2);
-      canvasCtx.stroke();
-    }
+const openEditor = function (){
+  showElement($('.simple-keyboard'));
+}
 
-    draw();
-  }
+
+const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+showKeyboard(contributionLanguage.toLowerCase());
+function addListeners() {
+
+  const $skipButton = $('#skip_button');
+
+
+  $("#edit").focus(function(){
+    const $submitEditButton = $("#submit-edit-button");
+    $submitEditButton.removeAttr('disabled');
+    const children = $submitEditButton.children().children();
+    children[0].setAttribute("fill", '#007BFF');
+    showElement($('.simple-keyboard'));
+    openEditor();
+  });
+
+  $('#cancel-edit-button').on('click', () => {
+    $("#edit").val("");
+    closeEditor();
+  })
+
+  $('#submit-edit-button').on('click', () => {
+    hideElement($('#cancel-edit-button'));
+    hideElement($('#submit-edit-button'))
+    hideElement($('#audio-player-btn'))
+    hideElement($('#skip_button'))
+    showElement($('#thankyou-text'));
+    crowdSource.editedText = $("#edit").val();
+    uploadToServer();
+    setTimeout(()=>{
+      hideElement($('#thankyou-text'));
+      showElement($('#cancel-edit-button'));
+      showElement($('#submit-edit-button'))
+      showElement($('#audio-player-btn'))
+      showElement($('#skip_button'))
+      $("#edit").val("");
+      closeEditor();
+      updateProgressBar();
+      getNextSentence();
+    }, 2000)
+  })
+
+
+  $skipButton.on('click', () => {
+    $('#pause').trigger('click');
+    recordValidation(SKIP_ACTION)
+    updateProgressBar();
+    getNextSentence();
+    showElement($('#sentences-row'));
+    closeEditor();
+  })
+
+  $skipButton.hover(() => {
+    $skipButton.css('border-color', '#bfddf5');
+  }, () => {
+    $skipButton.removeAttr('style');
+  })
+
+  $skipButton.mousedown(() => {
+    $skipButton.css('background-color', '#bfddf5')
+  })
+}
+
+let validationSentences = [{ sentence: '' }]
+
+const loadAudio = function (audioLink) {
+  $('#my-audio').attr('src', audioLink)
 };
+
+function disableSkipButton() {
+  const $skipButton = $('#skip_button');
+  $skipButton.removeAttr('style');
+  disableButton($skipButton)
+}
+
+const getAudioClip = function (contributionId) {
+  hideAudioRow();
+  disableSkipButton();
+  const source = 'contribute';
+  fetch(`/media-object/${source}/${contributionId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  }).then((stream) => {
+    stream.arrayBuffer().then((buffer) => {
+      const blob = new Blob([buffer], { type: "audio/wav" });
+      // loadAudio(URL.createObjectURL(blob))
+      const fileReader = new FileReader();
+      fileReader.onload = function (e) {
+        loadAudio(e.target.result);
+        showAudioRow();
+        enableButton($('#skip_button'))
+      }
+      fileReader.readAsDataURL(blob);
+    });
+  }).catch((err) => {
+    console.log(err)
+    showAudioRow();
+  });
+}
+
+function hideAudioRow() {
+  showElement($('#loader-audio-row'));
+  hideElement($('#audio-row'))
+  showElement($('#loader-play-btn'));
+  hideElement($('#audio-player-btn'))
+}
+
+function showAudioRow() {
+  hideElement($('#loader-audio-row'));
+  showElement($('#audio-row'));
+  hideElement($('#loader-play-btn'));
+  showElement($('#audio-player-btn'))
+}
+
+function showThankYou() {
+  hideElement($('#sentences-row'));
+  hideElement($('#audio-row'))
+  hideElement($('#validation-button-row'))
+  showElement($('#thank-you-row'))
+  hideElement($('#progress-row'));
+  hideElement($('#skip_btn_row'));
+  hideElement($('#validation-container'));
+  $("#validation-container").removeClass("validation-container");
+  hideElement($('#report_btn'));
+  hideElement($("#test-mic-speakers"));
+  hideElement($('#instructive-msg'));
+  hideElement($('#editor-row'));
+  hideElement($('#thankyou-text'));
+  hideElement($('.simple-keyboard'));
+
+
+  const language = localStorage.getItem('contributionLanguage');
+  const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
+  const aggregateDetails = JSON.parse(stringifyData);
+  const totalInfo = aggregateDetails.find((element) => element.language === language);
+  if (totalInfo) {
+    $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
+    $('#spn-total-hr-validated').html(totalInfo.total_validations);
+  } else {
+    $('#spn-total-hr-contributed').html(0);
+    $('#spn-total-hr-validated').html(0);
+  }
+  $('#spn-validation-count').html(validationCount);
+}
+
+function showNoSentencesMessage() {
+  $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+  hideElement($('#sentences-row'));
+  hideElement($('#audio-row'))
+  hideElement($('#validation-button-row'))
+  hideElement($('#progress-row'))
+  showElement($('#no-sentences-row'))
+  hideElement($('#skip_btn_row'));
+  hideElement($('#validation-container'));
+  hideElement($('#report_btn'));
+  hideElement($("#test-mic-speakers"));
+  hideElement($('#instructive-msg'));
+  hideElement($('#editor-row'));
+  hideElement($('#thankyou-text'));
+  hideElement($('.simple-keyboard'));
+  $("#validation-container").removeClass("validation-container");
+  $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
+}
 
 const handleSubmitFeedback = function () {
-  const contributionLanguage = localStorage.getItem('contributionLanguage');
-  const otherText = $('#other_text').val();
+  const contributionLanguage = localStorage.getItem("contributionLanguage");
+  const otherText = $("#other_text").val();
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: crowdSource.sentences[currentIndex].dataset_row_id,
-    reportText:
-      otherText !== '' && otherText !== undefined ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
+    sentenceId: validationSentences[currentIndex].contribution_id,
+    reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
-    userName: speakerDetails.userName,
-    source: 'contribution',
+    userName: speakerDetails ? speakerDetails.userName : '',
+    source: "validation"
   };
   reportSentenceOrRecording(reqObj).then(function (resp) {
     if (resp.statusCode === 200) {
-      $('#skipBtn').click();
-      $('#report_sentence_modal').modal('hide');
-      $('#report_sentence_thanks_modal').modal('show');
-      $('#report_submit_id').attr('disabled', true);
-      $('input[type=radio][name=reportRadio]').each(function () {
-        $(this).prop('checked', false);
+      $('#skip_button').click();
+      $("#report_sentence_modal").modal('hide');
+      $("#report_sentence_thanks_modal").modal('show');
+      $("#report_submit_id").attr("disabled", true);
+      $("input[type=radio][name=reportRadio]").each(function () {
+        $(this).prop("checked", false);
       });
-      $('#other_text').val('');
+      $("#other_text").val("");
     }
   });
-};
+}
 
 let selectedReportVal = '';
-
-function executeOnLoad() {
-  $('footer').removeClass('bottom').addClass('fixed-bottom');
+$(document).ready(() => {
+  hideElement($('.simple-keyboard'));
+  toggleFooterPosition();
   setPageContentHeight();
-  window.crowdSource = {};
-  const $validationInstructionModal = $('#validation-instruction-modal');
-  const $errorModal = $('#errorModal');
-  const $reportModal = $('#report_sentence_modal');
-  const $loader = $('#loader');
-  const $pageContent = $('#page-content');
-  const $navUser = $('#nav-user');
-  const $navUserName = $navUser.find('#nav-username');
-  const contributionLanguage = localStorage.getItem('contributionLanguage');
-  localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-  if (contributionLanguage) {
-    updateLocaleLanguagesDropdown(contributionLanguage);
+  const language = localStorage.getItem('contributionLanguage');
+  if (language) {
+    updateLocaleLanguagesDropdown(language);
   }
 
-  $('#report_submit_id').on('click', handleSubmitFeedback);
+  $("#start_contributing_id").on('click', function () {
+    const data = localStorage.getItem("speakerDetails");
+    if (data !== null) {
+      const speakerDetails = JSON.parse(data);
+      speakerDetails.language = language;
+      localStorage.setItem("speakerDetails", JSON.stringify(speakerDetails));
+    }
+    location.href = './record.html';
+  });
 
-  $('#report_btn').on('click', function () {
+  const $reportModal = $("#report_sentence_modal");
+
+  $("#report_submit_id").on('click', handleSubmitFeedback);
+
+  $("#report_btn").on('click', function () {
     $reportModal.modal('show');
   });
 
-  $('#report_close_btn').on('click', function () {
+  $("#report_close_btn").on("click", function () {
     $reportModal.modal('hide');
   });
 
-  $('#report_sentence_thanks_close_id').on('click', function () {
-    $('#report_sentence_thanks_modal').modal('hide');
+  $("#report_sentence_thanks_close_id").on("click", function () {
+    $("#report_sentence_thanks_modal").modal('hide');
   });
 
-  $('input[type=radio][name=reportRadio]').on('change', function () {
+  $("input[type=radio][name=reportRadio]").on("change", function () {
     selectedReportVal = this.value;
-    $('#report_submit_id').attr('disabled', false);
+    $("#report_submit_id").attr("disabled", false);
   });
 
-  fetchLocationInfo()
-    .then(res => {
-      return res.json();
-    })
-    .then(response => {
-      localStorage.setItem('state_region', response.regionName);
-      localStorage.setItem('country', response.country);
-    })
-    .catch(console.log);
-  try {
-    const localSpeakerData = localStorage.getItem(speakerDetailsKey);
-    const localSpeakerDataParsed = JSON.parse(localSpeakerData);
-    const localSentences = localStorage.getItem(sentencesKey);
-    const localSentencesParsed = JSON.parse(localSentences);
-    const localCount = Number(localStorage.getItem(countKey));
-
-    setPageContentHeight();
-    $('#instructions_close_btn').on('click', function () {
-      $validationInstructionModal.addClass('d-none');
-      setFooterPosition();
-    });
-
-    $errorModal.on('show.bs.modal', function () {
-      $validationInstructionModal.addClass('d-none');
-      setFooterPosition();
-    });
-    $errorModal.on('hidden.bs.modal', function () {
-      location.href = './home.html#speaker-details';
-    });
-
-    if (!localSpeakerDataParsed) {
-      location.href = './home.html#speaker-details';
+  fetchLocationInfo().then(res => {
+    return res.json()
+  }).then(response => {
+    localStorage.setItem("state_region", response.regionName);
+    localStorage.setItem("country", response.country);
+  }).catch(console.log);
+  const type = 'asr';
+  const toLanguage = ""; //can be anything
+  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  fetch(`/contributions/${type}?from=${fromLanguage}&to=${toLanguage}`, {
+    credentials: 'include',
+    mode: 'cors'
+  })
+    .then((data) => {
+      if (!data.ok) {
+        throw Error(data.statusText || 'HTTP error');
+      } else {
+        return data.json();
+      }
+    }).then((result) => {
+    if (result.data.length === 0) {
+      showNoSentencesMessage();
       return;
     }
+    validationSentences = result.data;
+    window.crowdSource = result.data;
+    const audio = validationSentences[currentIndex];
 
-    $navUser.removeClass('d-none');
-    $('#nav-login').addClass('d-none');
-    $navUserName.text(localSpeakerDataParsed.userName);
-    const isExistingUser =
-      localSentencesParsed &&
-      localSentencesParsed.userName === localSpeakerDataParsed.userName &&
-      localSentencesParsed.language === localSpeakerDataParsed.language;
 
-    if (
-      isExistingUser &&
-      localSentencesParsed.sentences.length != 0 &&
-      localSentencesParsed.language === contributionLanguage
-    ) {
-      crowdSource.sentences = localSentencesParsed.sentences;
-      crowdSource.count = localCount;
-      $loader.hide();
-      $pageContent.removeClass('d-none');
-      setFooterPosition();
-      initialize();
-    } else {
-      localStorage.removeItem(currentIndexKey);
-      localStorage.removeItem(skipCountKey);
-      const type = 'text';
-      fetch(`/media/${type}`, {
-        method: 'POST',
-        credentials: 'include',
-        mode: 'cors',
-        body: JSON.stringify({
-          userName: localSpeakerDataParsed.userName,
-          age: localSpeakerDataParsed.age,
-          language: localSpeakerDataParsed.language,
-          motherTongue: localSpeakerDataParsed.motherTongue,
-          gender: localSpeakerDataParsed.gender,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then(data => {
-          if (!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
-          } else {
-            return data.json();
-          }
-        })
-        .then(sentenceData => {
-          if (!isExistingUser) {
-            //$instructionModal.modal('show');
-            $validationInstructionModal.removeClass('d-none');
-            setFooterPosition();
-            // toggleFooterPosition();
-          }
-          $pageContent.removeClass('d-none');
-          // toggleFooterPosition();
-
-          crowdSource.sentences = sentenceData.data;
-          crowdSource.count = Number(sentenceData.count);
-          $loader.hide();
-          localStorage.setItem(
-            sentencesKey,
-            JSON.stringify({
-              userName: localSpeakerDataParsed.userName,
-              sentences: sentenceData.data,
-              language: localSpeakerDataParsed.language,
-            })
-          );
-          localStorage.setItem(countKey, sentenceData.count);
-          setFooterPosition();
-          initialize();
-        })
-        .catch(err => {
-          console.log(err);
-          $errorModal.modal('show');
-        })
-        .then(() => {
-          $loader.hide();
-        });
+    if (audio) {
+      getAudioClip(audio.dataset_row_id );
+      updateValidationCount();
+      resetValidation();
+      addListeners();
+      setAudioPlayer();
     }
-  } catch (err) {
-    console.log(err);
-    $errorModal.modal('show');
-  }
-}
-
-$(document).ready(() => {
-  getLocaleString()
-    .then(() => {
-      executeOnLoad();
-    })
-    .catch(() => {
-      executeOnLoad();
-    });
+  }).catch((err) => {
+    console.log(err)
+  });
 });
 
-$(window).resize(() => {
-  setFooterPosition();
-});
+module.exports = {
+  setAudioPlayer,
+  addListeners,
+};
 
-module.exports = { getCurrentIndex, getSkipCount, getValue };
