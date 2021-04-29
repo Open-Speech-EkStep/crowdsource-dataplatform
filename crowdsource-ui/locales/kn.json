@@ -273,8 +273,10 @@
 	"Need Change": "Need Change",
 	"Needs Change": "Needs Change",
 	"Your Edit": "Your Edit",
-	"Cancel": "Cancel",
-	"Submit": "Submit",
 	"Test your Speaker": "Test your Speaker",
-	"Original Text": "Original Text"
+	"Original Text": "Original Text",
+	"CANCEL": "CANCEL",
+	"REPLAY": "REPLAY",
+	"Cancel": "Cancel",
+	"Submit": "Submit"
 }
