@@ -155,7 +155,7 @@ function initializeBlock() {
       updateHrsForCards(language);
       updateLocaleLanguagesDropdown(language);
       localStorage.setItem("i18n", "en");
-      window.location.href = "/";
+      window.location.href = "./home.html";
     }
   });
 

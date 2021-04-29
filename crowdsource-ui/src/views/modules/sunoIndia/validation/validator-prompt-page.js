@@ -241,6 +241,7 @@ const closeEditor = function (){
   const $editorRow = $('#editor-row');
   hideElement($editorRow);
   showElement($("#need_change"));
+  showElement($("#skip_button"));
   showElement($("#like_button"));
   hideElement($('#cancel-edit-button'))
   hideElement($('#submit-edit-button'))
@@ -287,14 +288,14 @@ function addListeners() {
     $('#edit').text(originalText);
   })
 
+
+
   $("#edit").focus(function(){
     const $submitEditButton = $("#submit-edit-button");
     $submitEditButton.removeAttr('disabled');
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#007BFF');
     showElement($('.simple-keyboard'));
-    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    showKeyboard(contributionLanguage.toLowerCase());
   });
 
   $('#cancel-edit-button').on('click', () => {
@@ -303,20 +304,23 @@ function addListeners() {
   })
 
   $('#submit-edit-button').on('click', () => {
+    hideElement($('.simple-keyboard'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
     hideElement($('#audio-player-btn'))
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
+
     crowdSource.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events','none');
     setTimeout(()=>{
       closeEditor();
+      showElement($('#sentences-row'));
       hideElement($('#thankyou-text'));
       updateProgressBar();
       getNextSentence();
-      showElement($('#sentences-row'));
+      $("#edit").css('pointer-events','unset');
     }, 2000)
   })
 
@@ -415,7 +419,6 @@ function showThankYou() {
   hideElement($('#thankyou-text'));
   hideElement($('.simple-keyboard'));
 
-
   const language = localStorage.getItem('contributionLanguage');
   const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
   const aggregateDetails = JSON.parse(stringifyData);
@@ -477,6 +480,8 @@ const handleSubmitFeedback = function () {
 
 let selectedReportVal = '';
 $(document).ready(() => {
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  showKeyboard(contributionLanguage.toLowerCase());
   hideElement($('.simple-keyboard'));
   toggleFooterPosition();
   setPageContentHeight();

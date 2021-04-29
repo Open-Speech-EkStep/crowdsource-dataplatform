@@ -449,9 +449,17 @@ $(document).ready(() => {
   const type = 'asr';
   const toLanguage = ""; //can be anything
   const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  fetch(`/contributions/${type}?from=${fromLanguage}&to=${toLanguage}`, {
+  fetch(`/media/${type}`, {
+    method: 'POST',
     credentials: 'include',
-    mode: 'cors'
+    mode: 'cors',
+    body: JSON.stringify({
+      userName: "",
+      language: fromLanguage,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
   })
     .then((data) => {
       if (!data.ok) {
