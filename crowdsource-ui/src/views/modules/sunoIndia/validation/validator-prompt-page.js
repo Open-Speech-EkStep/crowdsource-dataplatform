@@ -1,6 +1,7 @@
 const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE} = require('../common/constants');
+const {showKeyboard} = require('../common/virtualKeyboard');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -189,6 +190,26 @@ function recordValidation(action) {
       });
 }
 
+const openEditor = function (){
+const $editorRow = $('#editor-row');
+  $editorRow.removeClass('d-none')
+  $('#original-text').text('something');
+  hideElement($("#need_change"));
+  hideElement($("#like_button"));
+  showElement($('#cancel-edit-button'))
+  showElement($('#submit-edit-button'))
+}
+
+const closeEditor = function (){
+  const $editorRow = $('#editor-row');
+  hideElement($editorRow);
+  showElement($("#need_change"));
+  showElement($("#like_button"));
+  hideElement($('#cancel-edit-button'))
+  hideElement($('#submit-edit-button'))
+  hideElement($('.simple-keyboard'));
+}
+
 function addListeners() {
 
   const likeButton = $("#like_button");
@@ -205,9 +226,11 @@ function addListeners() {
 
   needChangeButton.hover(() => {
       updateDecisionButton(needChangeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
+      $("#sentences-row .prompt").addClass('hover-edit');
     },
     () => {
       updateDecisionButton(needChangeButton, ["white", "#007BFF", "#343A40"]);
+      $("#sentences-row .prompt").removeClass('hover-edit');
     });
 
   needChangeButton.mousedown(() => {
@@ -218,11 +241,36 @@ function addListeners() {
     updateDecisionButton(likeButton, ["#007BFF", "", "white"]);
   });
 
-  // dislikeButton.on('click', () => {
-  //   recordValidation(REJECT_ACTION)
-  //   updateProgressBar();
-  //   getNextSentence();
-  // })
+
+  needChangeButton.on('click',()=>{
+    hideElement($('#sentences-row'))
+    openEditor();
+  })
+
+  $("#edit").focus(function(){
+    const $submitEditButton = $("#submit-edit-button");
+    $submitEditButton.removeAttr('disabled');
+    const children = $submitEditButton.children().children();
+    children[0].setAttribute("fill", '#007BFF');
+    showElement($('.simple-keyboard'));
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    showKeyboard(contributionLanguage.toLowerCase());
+  });
+
+  $('#cancel-edit-button').on('click', () => {
+    // recordValidation(REJECT_ACTION)
+    showElement($('#sentences-row'));
+    updateProgressBar();
+    getNextSentence();
+    closeEditor();
+  })
+
+  $('#submit-edit-button').on('click', () => {
+    updateProgressBar();
+    getNextSentence();
+    showElement($('#sentences-row'));
+    closeEditor();
+  })
 
   likeButton.on('click', () => {
     recordValidation(ACCEPT_ACTION)
@@ -371,6 +419,7 @@ const handleSubmitFeedback = function () {
 
 let selectedReportVal = '';
 $(document).ready(() => {
+  hideElement($('.simple-keyboard'));
   toggleFooterPosition();
   setPageContentHeight();
   const language = localStorage.getItem('contributionLanguage');
