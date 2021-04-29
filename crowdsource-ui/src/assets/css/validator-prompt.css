@@ -42,4 +42,12 @@ a{
     }
 }
 
+.hover-edit{
+    background-color: #F7F7F7;
+    opacity: 0.5;
+    border: 1px solid #343A40;
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+
 

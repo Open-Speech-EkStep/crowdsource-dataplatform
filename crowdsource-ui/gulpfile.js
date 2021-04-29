@@ -260,10 +260,18 @@ gulp.task('css-dekhoIndia', function () {
     .pipe(gulp.dest('target/css/dekhoIndia'));
 });
 
+gulp.task('json', function () {
+  return gulp
+    .src(['src/assets/keyBoardLayout/*.json'])
+    .pipe(gulpFlatten())
+    .pipe(gulp.dest('build/json'));
+});
+
 gulp.task(
   'default',
   gulp.parallel(
     'js',
+    'json',
     gulp.series('js-common-flat', 'js-common', 'js-sunoIndia-flat', 'js-sunoIndia','js-likhoIndia-flat','js-likhoIndia','js-dekhoIndia-flat','js-dekhoIndia'),
     'css',
     'css-common',

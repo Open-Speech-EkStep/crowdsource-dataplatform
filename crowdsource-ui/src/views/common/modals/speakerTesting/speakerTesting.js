@@ -135,5 +135,5 @@ $(document).ready(() => {
     });
 });
 
-module.exports = { addOnClickListener, showAmbientNoise, writeUTFBytes };
+module.exports = { addOnClickListener, writeUTFBytes };
 

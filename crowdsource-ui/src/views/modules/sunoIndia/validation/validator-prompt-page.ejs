@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../../css/validator-prompt.css">
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
@@ -39,8 +40,17 @@
                     <audio id="my-audio" controls tabindex="-1" src="" type="audio/wav" controlslist="nodownload" crossorigin="anonymous" class="pointer-event"></audio>
                 </div>
             </div>
+
             <div class="row justify-content-center mb-5 mb-lg-0 mt-5" id="sentences-row">
                 <div class="col-md-8 col-sm-10 text-center prompt"><label class="h1 font-weight-normal" id="sentenceLabel"></label></div>
+            </div>
+            <div class="row justify-content-center mb-5 mb-lg-0 mt-5 d-none" id="editor-row">
+                <div class="col-lg-5 col-md-5 col-12" style="background-color:#7f8c8d" id="original-text">
+                    Original Text
+                </div>
+                <div class="form-group green-border-focus col-lg-5 col-md-5 col-12" id="edit-text">
+                    <textarea class="form-control edit-area" id="edit" rows="3" placeholder="<%- __('Your Edit') %>"></textarea>
+                </div>
             </div>
             <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-sentences-row">
                 <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-bold">
@@ -87,6 +97,14 @@
                             </text>
                         </svg>
                     </button>
+                    <button class="w-100 btn align-self-start mb-2 d-none" id="cancel-edit-button">
+                        <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
+                            <text x="65" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">
+                                <%= __('Cancel') %>
+                            </text>
+                        </svg>
+                    </button>
                     <div class="row justify-content-center mx-2" id="loader-play-btn">
                         <div><span class="spinner w-h-5"></span></div>
                     </div>
@@ -111,6 +129,15 @@
                             </text>
                         </svg>
                     </button>
+                    <button class="btn align-self-start mb-2 w-100 d-none" disabled="disabled" id="submit-edit-button">
+                        <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="208" height="66" rx="33" fill="#D7D7D7"/>
+                            <text x="65" y="43" font-family="lato" font-size="24" fill="white" style="text-align:center">
+                                <%= __('Submit') %>
+                            </text>
+                        </svg>
+
+                    </button>
                 </div>
             </div>
             <div class="row justify-content-center" id="skip_btn_row">
@@ -118,6 +145,7 @@
                     <%= __('Skip') %>
                 </button>
             </div>
+            <div class="simple-keyboard d-none"></div>
             <div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
                 <div class="col-12 col-sm-8 col-lg-7">
                     <div class="progress mt-1">
@@ -141,6 +169,8 @@
         <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
+
         <script src="../../js/sunoIndia/validator-prompt-page.js"></script>
         <script src="../../js/common/speakerTesting.js"></script>
     </div>
