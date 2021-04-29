@@ -2,7 +2,11 @@ const fs = require('fs');
 
 const { conn, insertMaster } = require('../common/dbUtils')
 
-const ingest1 = async (datasetId, datasetType, client, datset_base_path, language, audio_paths) => {
+const ingest1 = async (datasetId, datasetType, client, datset_base_path, language, audio_paths, paired) => {
+    let state = NULL;
+    if (paired === "paired") {
+        state = "completed"
+    }
     const values = audio_paths.map(path => {
         return `('medium', '${datasetType}',
             '{
@@ -10,12 +14,13 @@ const ingest1 = async (datasetId, datasetType, client, datset_base_path, languag
             "type": "audio",
             "language": "${language}"
             }', 
-            ${datasetId}
+            ${datasetId},
+            ${state}
         )`
     })
 
     const insert_rows = `insert into dataset_row 
-    ( difficulty_level, type, media, master_dataset_id ) 
+    ( difficulty_level, type, media, master_dataset_id, state ) 
     values ${values} RETURNING dataset_row_id`
 
     const dataset_row_result = await client.query(`${insert_rows}`)
@@ -37,7 +42,7 @@ const ingest2 = async (datasetRowIds, client, datset_base_path, language, dataRo
             }', 
             true,
             CURRENT_DATE,
-            'assigned'
+            'completed'
         )`
     })
 
@@ -71,7 +76,7 @@ const start = async (connectionString, params, remote_dataset_bundle_path, baseP
         console.log('Inserting in dataset_rows')
 
         audio_paths = parse1(files)
-        const datasetRowIds = await ingest1(id, 'asr', client, `${basePath}/${language}`, language, audio_paths)
+        const datasetRowIds = await ingest1(id, 'asr', client, `${basePath}/${language}`, language, audio_paths, paired)
         console.log('Total dataset rows:', datasetRowIds.length)
 
         if (paired === 'paired') {
