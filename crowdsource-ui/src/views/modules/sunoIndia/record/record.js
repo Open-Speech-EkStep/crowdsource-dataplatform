@@ -48,7 +48,6 @@ function enableButton(element) {
 }
 
 const setAudioPlayer = function () {
-  console.log("here")
   const myAudio = document.getElementById('my-audio');
   const play = $('#play');
   const pause = $('#pause');
@@ -63,6 +62,8 @@ const setAudioPlayer = function () {
     showElement(replay)
     hideElement(textPause);
     showElement(textReplay);
+    $("#cancel-edit-button").removeAttr("disabled");
+    $("#edit").removeAttr("disabled");
   });
 
   play.on('click', () => {
@@ -240,6 +241,11 @@ function addListeners() {
     showElement($('#thankyou-text'));
     crowdSource.editedText = $("#edit").val();
     $("#edit").css('pointer-events','none');
+    $("#cancel-edit-button").attr("disabled",true);
+    const $submitEditButton = $('#submit-edit-button');
+    $submitEditButton.attr('disabled',true);
+    const children = $submitEditButton.children().children();
+    children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#progress-row'))
     uploadToServer();
     setTimeout(()=>{
@@ -266,7 +272,8 @@ function addListeners() {
     updateProgressBar();
     getNextSentence();
     showElement($('#sentences-row'));
-    showElement($('#progress-row'))
+    showElement($('#progress-row'));
+    $("#cancel-edit-button").attr("disabled",true);
     closeEditor();
 
   })
