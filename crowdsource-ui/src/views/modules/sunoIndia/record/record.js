@@ -382,7 +382,7 @@ function showNoSentencesMessage() {
   hideElement($('#thankyou-text'));
   hideElement($('.simple-keyboard'));
   $("#validation-container").removeClass("validation-container");
-  $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
+  // $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
 }
 
 const handleSubmitFeedback = function () {
@@ -429,7 +429,7 @@ $(document).ready(() => {
       speakerDetails.language = language;
       localStorage.setItem("speakerDetails", JSON.stringify(speakerDetails));
     }
-    location.href = './record.html';
+    location.href = './home.html';
   });
 
   const $reportModal = $("#report_sentence_modal");
@@ -476,6 +476,7 @@ $(document).ready(() => {
   })
     .then((data) => {
       if (!data.ok) {
+        showNoSentencesMessage();
         throw Error(data.statusText || 'HTTP error');
       } else {
         return data.json();

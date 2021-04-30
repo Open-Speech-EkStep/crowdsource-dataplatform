@@ -32,7 +32,7 @@
       </div>
       <div class="row" id="instructive-msg">
         <div class="col-12 justify-content-center text-center">
-          <%- __('Does the audio match the sentence?') %>
+          <%- __('Type in the text as you hear it from the following Audio') %>
         </div>
       </div>
       <div class="row justify-content-center mt-lg-3 mt-1" id="audio-row">
@@ -48,23 +48,23 @@
       <div class="row justify-content-center d-none" id="thankyou-text">
         <div class="col-12 text-center mt-4">
           <img src="../../img/tick.svg">
-          <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for correcting!</label>
+          <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for contributing!</label>
         </div>
       </div>
       <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-sentences-row">
         <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-bold">
-            <%= __('Thank you for your enthusiasm to validate the recordings.') %>
+            <%= __('Thank you for your enthusiasm to transcribe the recordings.') %>
           </label><br><br>
           <p>
             <%- __('We do not have any data in <span id="spn-validation-language"></span> language. Please try again later.') %>
           </p>
-          <p>
+          <p class="d-none">
             <%= __('Would you also like to contribute your voice?') %>
           </p>
           <div class="row justify-content-center mt-5">
             <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
               <a class="btn btn-primary text-white btn-lg h6 w-100">
-                <%- __('Start Contributing in <span id="start-validation-language"></span>') %>
+                <%- __('Back to SunoIndia Home') %>
               </a></div>
           </div>
         </div>
