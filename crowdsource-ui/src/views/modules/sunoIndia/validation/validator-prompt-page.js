@@ -1,5 +1,5 @@
 const fetch = require('../common/fetch')
-const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
+const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 
@@ -281,7 +281,7 @@ function addListeners() {
 
 
   needChangeButton.on('click',()=>{
-    hideElement($('#sentences-row'))
+    hideElement($('#sentences-row'));
     openEditor();
     const originalText = validationSentences[currentIndex].contribution;
     $('#original-text').text(originalText);
@@ -296,11 +296,13 @@ function addListeners() {
     $submitEditButton.removeAttr('disabled');
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#007BFF');
+    hideElement($('#progress-row'));
     showElement($('.simple-keyboard'));
   });
 
   $('#cancel-edit-button').on('click', () => {
     showElement($('#sentences-row'));
+    showElement($('#progress-row'));
     closeEditor();
   })
 
@@ -311,12 +313,13 @@ function addListeners() {
     hideElement($('#audio-player-btn'))
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
-
+    showElement($('#progress-row'))
     crowdSource.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events','none');
     setTimeout(()=>{
       closeEditor();
+      showElement($('#progress-row'))
       showElement($('#sentences-row'));
       hideElement($('#thankyou-text'));
       updateProgressBar();
@@ -337,6 +340,7 @@ function addListeners() {
     updateProgressBar();
     getNextSentence();
     showElement($('#sentences-row'));
+    showElement($('#progress-row'))
     closeEditor();
   })
 
@@ -483,6 +487,7 @@ const handleSubmitFeedback = function () {
 let selectedReportVal = '';
 $(document).ready(() => {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  setFooterPosition();
   showKeyboard(contributionLanguage.toLowerCase());
   hideElement($('.simple-keyboard'));
   toggleFooterPosition();

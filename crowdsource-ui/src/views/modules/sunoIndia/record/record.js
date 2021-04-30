@@ -1,5 +1,5 @@
 const fetch = require('../common/fetch')
-const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
+const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 
@@ -219,12 +219,14 @@ function addListeners() {
     $submitEditButton.removeAttr('disabled');
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#007BFF');
+    hideElement($('#progress-row'));
     showElement($('.simple-keyboard'));
     openEditor();
   });
 
   $('#cancel-edit-button').on('click', () => {
     $("#edit").val("");
+    showElement($('#progress-row'))
     closeEditor();
   })
 
@@ -236,13 +238,17 @@ function addListeners() {
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
     crowdSource.editedText = $("#edit").val();
+    $("#edit").css('pointer-events','none');
+    showElement($('#progress-row'))
     uploadToServer();
     setTimeout(()=>{
+      showElement($('#progress-row'))
       hideElement($('#thankyou-text'));
       showElement($('#cancel-edit-button'));
       showElement($('#submit-edit-button'))
       showElement($('#audio-player-btn'))
       showElement($('#skip_button'))
+      $("#edit").css('pointer-events','unset');
       $("#edit").val("");
       closeEditor();
       updateProgressBar();
@@ -257,6 +263,7 @@ function addListeners() {
     updateProgressBar();
     getNextSentence();
     showElement($('#sentences-row'));
+    showElement($('#progress-row'))
     closeEditor();
   })
 
@@ -405,6 +412,7 @@ $(document).ready(() => {
   hideElement($('.simple-keyboard'));
   toggleFooterPosition();
   setPageContentHeight();
+  setFooterPosition();
   const language = localStorage.getItem('contributionLanguage');
   if (language) {
     updateLocaleLanguagesDropdown(language);
