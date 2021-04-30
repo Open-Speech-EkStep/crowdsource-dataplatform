@@ -285,7 +285,8 @@ function addListeners() {
     openEditor();
     const originalText = validationSentences[currentIndex].contribution;
     $('#original-text').text(originalText);
-    $('#edit').text(originalText);
+    $('#edit').val('');
+    $('#edit').val(originalText);
   })
 
 
@@ -296,10 +297,6 @@ function addListeners() {
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#007BFF');
     showElement($('.simple-keyboard'));
-  });
-
-  $("#edit").focusout(function() {
-    hideElement($('.simple-keyboard'));
   });
 
   $('#cancel-edit-button').on('click', () => {
@@ -422,6 +419,7 @@ function showThankYou() {
   hideElement($('#editor-row'));
   hideElement($('#thankyou-text'));
   hideElement($('.simple-keyboard'));
+  hideElement($('#sentenceLabel'));
 
   const language = localStorage.getItem('contributionLanguage');
   const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
