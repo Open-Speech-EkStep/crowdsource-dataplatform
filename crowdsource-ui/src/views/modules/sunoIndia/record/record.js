@@ -2,7 +2,7 @@ const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
-
+const { setInput } = require('../common/virtualKeyboard');
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
@@ -229,6 +229,7 @@ function addListeners() {
   })
 
   $('#submit-edit-button').on('click', () => {
+    setInput("");
     hideElement($('.simple-keyboard'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
@@ -258,6 +259,7 @@ function addListeners() {
     getNextSentence();
     showElement($('#sentences-row'));
     closeEditor();
+    setInput("");
   })
 
   $skipButton.hover(() => {

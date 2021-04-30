@@ -23,6 +23,8 @@ const hindi = {
     ]
   }
 }
+
+let keyboard;
 const showKeyboard = function (language) {
   let Keyboard = window.SimpleKeyboard.default;
 
@@ -32,7 +34,7 @@ const showKeyboard = function (language) {
    */
   const layout = hindi;
 
-  let keyboard = new Keyboard({
+  keyboard = new Keyboard({
     onChange: input => onChange(input),
     onKeyPress: button => onKeyPress(button),
     physicalKeyboardHighlight: true,
@@ -80,9 +82,15 @@ const showKeyboard = function (language) {
   }
 }
 
+
 const closeKeyboard = function (){
   keyboard.destroy();
 }
 
-module.exports = {showKeyboard, closeKeyboard}
+const setInput = (text) => {
+  keyboard.setInput(text);
+}
+
+
+module.exports = {showKeyboard, closeKeyboard, setInput}
 
