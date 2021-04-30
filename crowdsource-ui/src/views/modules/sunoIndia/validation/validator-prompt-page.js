@@ -2,6 +2,7 @@ const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
+const { setInput } = require('../common/virtualKeyboard');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -287,6 +288,7 @@ function addListeners() {
     $('#original-text').text(originalText);
     $('#edit').val('');
     $('#edit').val(originalText);
+    setInput(originalText);
   })
 
 
@@ -311,7 +313,7 @@ function addListeners() {
     hideElement($('#audio-player-btn'))
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
-
+   
     crowdSource.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events','none');
