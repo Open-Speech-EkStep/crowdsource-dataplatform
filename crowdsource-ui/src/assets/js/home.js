@@ -177,7 +177,6 @@ function initializeBlock() {
     const $userName = $('#username');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
-    toggleFooterPosition();
     setSayListenBackground();
     let top_lang = getDefaultLang();
 
@@ -294,6 +293,8 @@ function initializeBlock() {
     getStatsSummary();
 
 }
+
+toggleFooterPosition();
 
 const renderCoachMarks = function () {
     const localString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
