@@ -160,10 +160,12 @@ function getLanguageSpecificData(data, lang) {
     data: [],
   };
   data.data.forEach(item => {
-    if (item.language.toLowerCase() === lang.toLowerCase()
+    if(item.language) {
+      if (item.language.toLowerCase() === lang.toLowerCase()
       && item.state !== ''
       && item.state.toLowerCase() !== 'anonymous') {
       stateData.data.push(item);
+    }
     }
   });
   return stateData;
