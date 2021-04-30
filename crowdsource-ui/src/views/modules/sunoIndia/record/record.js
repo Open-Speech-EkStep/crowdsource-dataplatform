@@ -223,16 +223,13 @@ function addListeners() {
     openEditor();
   });
 
-  $("#edit").focusout(function() {
-    hideElement($('.simple-keyboard'));
-  });
-
   $('#cancel-edit-button').on('click', () => {
     $("#edit").val("");
     closeEditor();
   })
 
   $('#submit-edit-button').on('click', () => {
+    hideElement($('.simple-keyboard'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
     hideElement($('#audio-player-btn'))
@@ -342,7 +339,7 @@ function showThankYou() {
   hideElement($('#editor-row'));
   hideElement($('#thankyou-text'));
   hideElement($('.simple-keyboard'));
-
+  hideElement($('#sentenceLabel'));
 
   const language = localStorage.getItem('contributionLanguage');
   const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');

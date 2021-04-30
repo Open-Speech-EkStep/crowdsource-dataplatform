@@ -42,7 +42,7 @@
       </div>
       <div class="row justify-content-center mb-5 mb-lg-0 mt-5" id="editor-row">
         <div class="form-group green-border-focus col-lg-8 col-md-5 col-12 m-0" id="edit-text">
-          <textarea class="form-control edit-area" id="edit" rows="3" placeholder="Start typing here..." style="font-size:42px"></textarea>
+          <textarea class="form-control edit-area" id="edit" rows="3" placeholder="Start typing here..." style="font-size:32px"></textarea>
         </div>
       </div>
       <div class="row justify-content-center d-none" id="thankyou-text">
@@ -71,15 +71,15 @@
       </div>
       <div class="row justify-content-center my-auto my-3 d-none" id="thank-you-row">
         <div class="col-md-8 col-sm-10 text-center align-items-center"><label class="h1 font-weight-bold my-5">
-            <%= __('Thank you for validating!') %>
+            <%= __('Thank you for contributing!') %>
           </label>
-          <p>
+          <p class="d-none">
             <%- __('You have helped us validate <span id="spn-validation-count" class="font-wt-900"></span> recordings') %>
           </p>
           <div class="row justify-content-center mb-3 mx-2">
             <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div>
-            <a class="btn btn-primary h6 shadow rounded mt-4 p-3 my-lg-5 col-lg-4 col-md-4 col-sm-10" href="./validator-page.html">
-              <%= __('Validate More') %>
+            <a class="btn btn-primary h6 shadow rounded mt-4 p-3 my-lg-5 col-lg-4 col-md-4 col-sm-10" href="./record.html">
+              <%= __('Contribute More') %>
             </a>
             <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div>
           </div>

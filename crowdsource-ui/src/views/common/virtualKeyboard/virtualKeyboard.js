@@ -80,5 +80,9 @@ const showKeyboard = function (language) {
   }
 }
 
-module.exports = {showKeyboard}
+const closeKeyboard = function (){
+  keyboard.destroy();
+}
+
+module.exports = {showKeyboard, closeKeyboard}
 
