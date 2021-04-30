@@ -27,12 +27,7 @@
 <%- include('../common/header.ejs',{bolo:"../home.html", suno:"./home.html",likho:"../likhoIndia/home.html",dekho:"../dekhoIndia/home.html",path:"../"}); %>
 <div class="container-fluid supreme-container">
     <div class="row">
-        <div class="col-12 col-md-8 col-lg-10 offset-lg-1 mt-4">
-            <div class="ml-4" style="padding:20px;background:rgba(223,236,251,.3);border-left:10px solid #dfecfb">
-                <h3> <%= __('Suno India') %></h3>
-                <p> <%= __('Help your language by transcribing audio into text') %></p>
-            </div>
-        </div>
+        <%- include('../common/moduleIntro.ejs',{name:'Suno India',intro:'Help your language by transcribing audio into text'}); %>
     </div>
     <div class="row">
         <%- include ../common/languageNavBar.ejs %>
