@@ -23,7 +23,7 @@
 <div id="validator-page-content">
   <div class="container-fluid">
     <div id="content-wrapper" class="d-flex flex-column">
-      <div class="d-flex justify-content-end pt-3 record-btn-container">
+      <div class="modal-footer pt-3 record-btn-container">
         <%- include ../common/report-btn.ejs %>
         <%- include ../common/speakerTestBtn.ejs %>
       </div>
@@ -40,8 +40,8 @@
           <audio id="my-audio" controls tabindex="-1" src="" type="audio/wav" controlslist="nodownload" crossorigin="anonymous" class="pointer-event"></audio>
         </div>
       </div>
-      <div class="row justify-content-center mb-5 mb-lg-0 mt-5" id="editor-row">
-        <div class="form-group green-border-focus col-lg-8 col-md-5 col-12 m-0" id="edit-text">
+      <div class="row justify-content-center mb-5 mb-lg-0 mt-5 mx-1" id="editor-row">
+        <div class="form-group green-border-focus col-lg-8 col-md-5 col-12 m-0 text-area" id="edit-text">
           <textarea class="form-control edit-area" id="edit" rows="3" placeholder="Start typing here..." style="font-size:32px"></textarea>
         </div>
       </div>

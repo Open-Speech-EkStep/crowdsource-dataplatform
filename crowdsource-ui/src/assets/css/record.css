@@ -473,7 +473,13 @@ audio {
   .record-btn-container {
     flex-direction: column-reverse;
     align-items: flex-end;
+    display: -webkit-box;
   }
+
+  #cancel-edit-button > svg {
+    height: 50px;
+    width: 100px;
+}
   
   .only-display {
     display: none;
