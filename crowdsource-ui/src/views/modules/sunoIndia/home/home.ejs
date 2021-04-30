@@ -27,10 +27,18 @@
 <%- include('../common/header.ejs',{bolo:"../home.html", suno:"./home.html",likho:"../likhoIndia/home.html",dekho:"../dekhoIndia/home.html",path:"../"}); %>
 <div class="container-fluid supreme-container">
     <div class="row">
+        <div class="col-12 col-md-8 col-lg-10 offset-lg-1 mt-4">
+            <div class="ml-4" style="padding:20px;background:rgba(223,236,251,.3);border-left:10px solid #dfecfb">
+                <h3> <%= __('Suno India') %></h3>
+                <p> <%= __('India Help your language by transcribing audio into text') %></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <%- include ../common/languageNavBar.ejs %>
     </div>
     <div class="m-auto row justify-content-center mt-lg-5 mx-lg-5">
-        <%- include('../common/cards.ejs',{left:{h1:"Listen",h2:"Type what you hear","p1":"Contribute your voice to create an open data repository of Indian languages",img:"../../img/listen2.svg"},right:{h1:"Validate",h2:"Correct text as per the audio","p1":"Help us by validating the recordings that others have contributed",img:"../../img/validate.svg"}}); %>
+        <%- include('../common/cards.ejs',{left:{h1:"Transcribe",h2:"Type what you hear","p1":"Contribute your voice to create an open data repository of Indian languages",img:"../../img/listen2.svg"},right:{h1:"Correct",h2:"Correct text as per the audio","p1":"Help us by validating the recordings that others have contributed",img:"../../img/validate.svg"}}); %>
     </div>
     <div class="row">
         <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 mt-4 text-dark">

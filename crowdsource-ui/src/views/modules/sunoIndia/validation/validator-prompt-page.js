@@ -298,6 +298,10 @@ function addListeners() {
     showElement($('.simple-keyboard'));
   });
 
+  $("#edit").focusout(function() {
+    hideElement($('.simple-keyboard'));
+  });
+
   $('#cancel-edit-button').on('click', () => {
     showElement($('#sentences-row'));
     closeEditor();

@@ -223,6 +223,10 @@ function addListeners() {
     openEditor();
   });
 
+  $("#edit").focusout(function() {
+    hideElement($('.simple-keyboard'));
+  });
+
   $('#cancel-edit-button').on('click', () => {
     $("#edit").val("");
     closeEditor();
