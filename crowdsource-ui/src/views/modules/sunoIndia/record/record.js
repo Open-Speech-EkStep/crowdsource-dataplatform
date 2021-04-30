@@ -213,12 +213,7 @@ function addListeners() {
 
   const $skipButton = $('#skip_button');
 
-
   $("#edit").focus(function(){
-    const $submitEditButton = $("#submit-edit-button");
-    $submitEditButton.removeAttr('disabled');
-    const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#007BFF');
     hideElement($('#progress-row'));
     showElement($('.simple-keyboard'));
     openEditor();
@@ -226,7 +221,12 @@ function addListeners() {
 
   $('#cancel-edit-button').on('click', () => {
     $("#edit").val("");
+    setInput("");
     showElement($('#progress-row'))
+    const $submitEditButton = $('#submit-edit-button');
+    $submitEditButton.attr('disabled',true);
+    const children = $submitEditButton.children().children();
+    children[0].setAttribute("fill", '#D7D7D7');
     closeEditor();
   })
 
@@ -243,7 +243,6 @@ function addListeners() {
     showElement($('#progress-row'))
     uploadToServer();
     setTimeout(()=>{
-      showElement($('#progress-row'))
       hideElement($('#thankyou-text'));
       showElement($('#cancel-edit-button'));
       showElement($('#submit-edit-button'))
@@ -260,13 +259,16 @@ function addListeners() {
 
   $skipButton.on('click', () => {
     $('#pause').trigger('click');
+    $('#edit').val("");
+    setInput("");
+    $('#submit-edit-button').attr('disabled',true);
     recordValidation(SKIP_ACTION)
     updateProgressBar();
     getNextSentence();
     showElement($('#sentences-row'));
     showElement($('#progress-row'))
     closeEditor();
-    setInput("");
+
   })
 
   $skipButton.hover(() => {
