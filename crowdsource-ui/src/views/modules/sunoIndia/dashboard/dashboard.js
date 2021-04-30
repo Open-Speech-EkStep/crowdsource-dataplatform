@@ -33,7 +33,11 @@ const getSpeakersData = (data, lang) => {
         speakersData.contributions = parseFloat(data[0].total_contributions);
         speakersData.validations = parseFloat(data[0].total_validations);
     } else {
-        const langSpeakersData = data.filter(item => item.language.toLowerCase() === lang.toLowerCase());
+        const langSpeakersData = data.filter(item => {
+            if(item.language) {
+                return item.language.toLowerCase() === lang.toLowerCase()
+            }
+        } );
         speakersData.speakers = parseInt(langSpeakersData[0].total_speakers);
         speakersData.contributions = parseFloat(langSpeakersData[0].total_contributions);
         speakersData.validations = parseFloat(langSpeakersData[0].total_validations);
@@ -45,8 +49,10 @@ function isLanguageAvailable(data, lang) {
     let langaugeExists = false;
     if (!lang) return true;
     data.forEach(item => {
-        if (item.language.toLowerCase() === lang.toLowerCase()) {
-            langaugeExists = true;
+        if(item.language) {
+            if (item.language.toLowerCase() === lang.toLowerCase()) {
+                langaugeExists = true;
+            }
         }
     });
     return langaugeExists;
