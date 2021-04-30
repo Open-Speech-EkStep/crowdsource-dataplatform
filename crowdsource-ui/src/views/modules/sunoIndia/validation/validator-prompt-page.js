@@ -305,6 +305,7 @@ function addListeners() {
   $('#cancel-edit-button').on('click', () => {
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
+    setInput("");
     closeEditor();
   })
 
