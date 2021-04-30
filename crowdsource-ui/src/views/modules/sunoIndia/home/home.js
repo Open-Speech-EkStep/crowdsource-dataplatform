@@ -81,13 +81,13 @@ const setDefaultLang = function () {
     const targetedDiv = getDefaultTargetedDiv('id', defaultLangId, $sayListenLanguage);
     const language = targetedDiv.getAttribute("value");
     localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-    updateHrsForCards(language);
+    // updateHrsForCards(language);
     updateLocaleLanguagesDropdown(language);
     setLangNavBar(targetedDiv, language, $languageNavBar);
     return;
   }
   const targetedDiv = getDefaultTargetedDiv('value', contributionLanguage, $sayListenLanguage);
-  updateHrsForCards(contributionLanguage);
+  // updateHrsForCards(contributionLanguage);
   updateLocaleLanguagesDropdown(contributionLanguage);
   setLangNavBar(targetedDiv, contributionLanguage, $languageNavBar);
 }
@@ -136,7 +136,7 @@ function initializeBlock() {
       localStorage.setItem("i18n", "en");
       window.location.href = "./home.html";
       setLangNavBar(targetedDiv, language, $languageNavBar);
-      updateHrsForCards(language);
+      // updateHrsForCards(language);
       updateLocaleLanguagesDropdown(language);
     }
   })
@@ -152,7 +152,7 @@ function initializeBlock() {
       previousActiveDiv.removeClass('active');
       $6th_place.addClass('d-none');
       targetedDiv.classList.add('active');
-      updateHrsForCards(language);
+      // updateHrsForCards(language);
       updateLocaleLanguagesDropdown(language);
       localStorage.setItem("i18n", "en");
       window.location.href = "./home.html";
