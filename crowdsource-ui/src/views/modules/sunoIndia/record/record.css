@@ -424,6 +424,7 @@ body {
     .record-btn-container {
       flex-direction: column-reverse;
       align-items: flex-end;
+      display: -webkit-box;
     }
     
     .only-display {
