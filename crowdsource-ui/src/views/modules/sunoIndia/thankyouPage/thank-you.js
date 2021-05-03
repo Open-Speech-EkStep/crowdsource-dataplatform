@@ -14,28 +14,13 @@ const {
   performAPIRequest,
 } = require("../common/utils");
 
-const {constructChart}= require('../common/horizontalBarGraph');
+const {constructChart} = require('../common/horizontalBarGraph');
 
+const sentencesKey = 'sunoSentencesKey';
+const totalSentence = 5;
 
-const CURRENT_INDEX = "currentIndex";
+const CURRENT_INDEX = "sunoCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
-
-function setSentencesContributed() {
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const speakerDetails = localStorage.getItem("speakerDetails");
-  let userName = "";
-  if (speakerDetails) {
-    userName = JSON.parse(speakerDetails).userName;
-  }
-  performAPIRequest(
-    `/rewards?language=${contributionLanguage}&category=speak&userName=${userName}`
-  ).then((data) => {
-    localStorage.setItem('nextHourGoal', data.nextHourGoal);
-    $("#user-contribution").text(data.contributionCount);
-    $("#language-hour-goal").text(data.nextHourGoal);
-  });
-}
-
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -76,6 +61,7 @@ const updateShareContent = function (language, rank) {
 
 
 const chartReg = {};
+
 function showByHoursChart() {
   if (chartReg["chart"]) {
     chartReg["chart"].dispose();
@@ -87,8 +73,6 @@ function showByHoursChart() {
     "language"
   );
 }
-
-
 
 const getLanguageStats = function () {
   fetch("/stats/summary?aggregateDataByLanguage=true")
@@ -132,6 +116,98 @@ const getLanguageStats = function () {
     });
 };
 
+function setSentencesContributed() {
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const speakerDetails = localStorage.getItem("speakerDetails");
+  let userName = "";
+  if (speakerDetails) {
+    userName = JSON.parse(speakerDetails).userName;
+  }
+
+  let rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
+  if (!rawLocaleString) {
+    getLocaleString().then(() => {
+      rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
+    })
+  }
+
+  const localeStrings = JSON.parse(rawLocaleString);
+  performAPIRequest(
+    `/rewards?language=${contributionLanguage}&category=speak&userName=${userName}`
+  ).then((data) => {
+    localStorage.setItem('badgeId', data.badgeId);
+    localStorage.setItem('badges', JSON.stringify(data.badges));
+    localStorage.setItem('nextHourGoal', data.nextHourGoal);
+    $("#user-contribution").text(data.contributionCount);
+    $("#language-hour-goal").text(data.nextHourGoal);
+    if (data.isNewBadge) {
+      $("#spree_text").removeClass("d-none");
+      $("#milestone_text").removeClass("d-none");
+      $("#current_badge_name").text(localeStrings[data.currentBadgeType]);
+      $("#current_badge_name_1").text(localeStrings[data.currentBadgeType]);
+      $("#current_badge_count").text(data.currentMilestone);
+      $("#next_badge_count").text(data.nextMilestone);
+      $("#next_badge_name_1").text(localeStrings[data.nextBadgeType.toLowerCase()]);
+      $("#sentence_away_msg").addClass("d-none");
+      $("#user-contribution-msg").addClass("d-none");
+      $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
+      $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_badge.svg`);
+    } else if (data.contributionCount < 5) {
+      $("#champion_text").removeClass("d-none");
+      $("#contribution_text").removeClass("d-none");
+      $("#sentence_away_msg").removeClass("d-none");
+      $("#user-contribution-msg").removeClass("d-none");
+      $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
+      $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
+    } else if ((Number(data.contributionCount) >= Number(data.currentMilestone)) && (Number(data.contributionCount) <= Number(data.nextMilestone))) {
+      $("#spree_text").removeClass("d-none");
+      $("#before_badge_content").removeClass("d-none");
+      $("#sentence_away_msg").removeClass("d-none");
+      $("#user-contribution-msg").removeClass("d-none");
+      $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
+      $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
+      const $bronzeBadgeLink = $("#bronze_badge_link img");
+      const $silverBadgeLink = $("#silver_badge_link img");
+      const $goldBadgeLink = $("#gold_badge_link img");
+      const $platinumBadgeLink = $("#platinum_badge_link img");
+      if (data.currentBadgeType.toLowerCase() === "bronze") {
+        $bronzeBadgeLink.parent().attr("disabled", false);
+        $('#bronze_badge_link_img').addClass('enable');
+        $('#bronze_badge_link_img').removeClass('disable');
+      } else if (data.currentBadgeType.toLowerCase() === "silver") {
+        $bronzeBadgeLink.parent().attr("disabled", false);
+        $silverBadgeLink.parent().attr("disabled", false);
+        $('#bronze_badge_link_img').addClass('enable');
+        $('#bronze_badge_link_img').removeClass('disable');
+        $('#silver_badge_link_img').addClass('enable');
+        $('#silver_badge_link_img').removeClass('disable');
+      } else if (data.currentBadgeType.toLowerCase() === "gold") {
+        $bronzeBadgeLink.parent().attr("disabled", false);
+        $silverBadgeLink.parent().attr("disabled", false);
+        $goldBadgeLink.parent().attr("disabled", false);
+        $('#bronze_badge_link_img').addClass('enable');
+        $('#bronze_badge_link_img').removeClass('disable');
+        $('#silver_badge_link_img').addClass('enable');
+        $('#silver_badge_link_img').removeClass('disable');
+        $('#gold_badge_link_img').addClass('enable');
+        $('#gold_badge_link_img').removeClass('disable');
+      } else if (data.currentBadgeType.toLowerCase() === "platinum") {
+        $bronzeBadgeLink.parent().attr("disabled", false);
+        $silverBadgeLink.parent().attr("disabled", false);
+        $goldBadgeLink.parent().attr("disabled", false);
+        $platinumBadgeLink.parent().attr("disabled", false);
+        $('#bronze_badge_link_img').addClass('enable');
+        $('#bronze_badge_link_img').removeClass('disable');
+        $('#silver_badge_link_img').addClass('enable');
+        $('#silver_badge_link_img').removeClass('disable');
+        $('#gold_badge_link_img').addClass('enable');
+        $('#gold_badge_link_img').removeClass('disable');
+        $('#platinum_badge_link_img').addClass('enable');
+        $('#platinum_badge_link_img').removeClass('disable');
+      }
+    }
+  });
+}
 
 function executeOnLoad() {
   const currentIndexInStorage = Number(localStorage.getItem(CURRENT_INDEX));
@@ -139,29 +215,64 @@ function executeOnLoad() {
     localStorage.getItem(SPEAKER_DETAILS)
   );
 
-  // if (!localSpeakerDataParsed) {
-  //   location.href = "./home.html#start-record";
-  // } else if (currentIndexInStorage < totalSentence) {
-  //   location.href = "./home.html#start-record";
-  // } else {
+  if (!localSpeakerDataParsed) {
+    location.href = "./home.html";
+  } else if (currentIndexInStorage < totalSentence - 1) {
+    location.href = "./home.html";
+  } else {
     $("#nav-user").removeClass("d-none");
     $("#nav-login").addClass("d-none");
     $("#nav-username").text(localSpeakerDataParsed.userName);
 
     setPageContentHeight();
-  setSentencesContributed();
-  // }
+    setSentencesContributed();
+    toggleFooterPosition();
 
-  toggleFooterPosition();
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  if (contributionLanguage) {
-    updateLocaleLanguagesDropdown(contributionLanguage);
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    if (contributionLanguage) {
+      updateLocaleLanguagesDropdown(contributionLanguage);
+    }
+    showByHoursChart();
+    getLanguageStats();
+    localStorage.setItem(CURRENT_INDEX, 0);
+    localStorage.setItem(
+      sentencesKey,
+      JSON.stringify({
+        userName: localSpeakerDataParsed.userName,
+        sentences: [],
+        language: contributionLanguage,
+      })
+    );
   }
-  showByHoursChart();
-  getLanguageStats();
+}
+
+function downloadPdf(badgeType) {
+  const pdf = new jsPDF()
+  const img = new Image();
+  img.onload = function () {
+    pdf.addImage(this, 36, 10, 128, 128);
+    pdf.save(`${badgeType}-badge.pdf`);
+  };
+
+  img.crossOrigin = "Anonymous";
+  img.src = BADGES[badgeType].imgSm;
+  const allBadges = JSON.parse(localStorage.getItem('badges'));
+  const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
+  if (badge) {
+    pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
+  }
 }
 
 $(document).ready(function () {
+  $("#download_pdf").on('click', function () {
+    downloadPdf($(this).attr("data-badge"));
+  });
+
+  $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
+    if (!$(this).attr("disabled")) {
+      downloadPdf($(this).attr("data-badge"));
+    }
+  });
   getLocaleString()
     .then((data) => {
       executeOnLoad();

@@ -9,6 +9,8 @@ const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
+const currentIndexKey = 'sunoValidationCurrentIndex';
+
 window.crowdSource = {};
 
 function uploadToServer(cb) {
@@ -113,7 +115,8 @@ const setAudioPlayer = function () {
   }
 }
 
-let currentIndex = 0, progressCount = 0, validationCount = 0;
+let currentIndex = localStorage.getItem(currentIndexKey) || 0;
+let progressCount = currentIndex, validationCount = 0;
 
 const animateCSS = ($element, animationName, callback) => {
   $element.addClass(`animated ${animationName}`);
@@ -143,6 +146,7 @@ function getNextSentence() {
     getAudioClip(validationSentences[currentIndex].dataset_row_id)
     resetValidation();
     setSentenceLabel(currentIndex);
+    localStorage.setItem(currentIndexKey,currentIndex);
   } else {
     resetValidation();
     showThankYou();
@@ -440,6 +444,8 @@ function showThankYou() {
     $('#spn-total-hr-validated').html(0);
   }
   $('#spn-validation-count').html(validationCount);
+
+  localStorage.setItem(currentIndexKey,0);
 }
 
 function showNoSentencesMessage() {
@@ -459,6 +465,7 @@ function showNoSentencesMessage() {
   hideElement($('.simple-keyboard'));
   $("#validation-container").removeClass("validation-container");
   $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
+
 }
 
 const handleSubmitFeedback = function () {
