@@ -55,6 +55,11 @@ a{
     color: black;
 }
 
+#captured-text {
+    font-size: 24px;
+    color: black;
+}
+
 @media (min-width: 992px) {
     .validation-container {
         min-height: 250px;
@@ -95,6 +100,10 @@ a{
         width: 160px;
     }
 
+    .web-view {
+        display: none;
+    }
+
     #need_change > svg {
         height: 80px;
         width: 160px;
@@ -102,6 +111,28 @@ a{
     #like_button > svg {
         height: 80px;
         width: 160px;
+    }
+
+    .original-text {
+        border-top-left-radius:12px;
+        border-top-right-radius:12px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    
+    #edit-text {
+        border-bottom-right-radius:12px;
+        border-bottom-left-radius:12px;
+        border-top-left-radius:0px;
+        border-top-right-radius:0px;
+    }
+
+    .arrow-right {
+    top: 0 !important;
+    left: 10px !important;
+    border-left: 8px solid transparent !important;
+    border-right: 8px solid transparent !important;
+    border-top: 8px solid #343A40 !important;
     }
 }
 

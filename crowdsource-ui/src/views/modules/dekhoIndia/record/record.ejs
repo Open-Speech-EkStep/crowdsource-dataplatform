@@ -70,30 +70,28 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 mx-5 mt-5" id="validation-button-row">
-                <div class="col-lg-8 col-md-8 flex-lg-row flex-md-row flex-column d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2">
-                    <button class="w-100 btn align-self-start mb-2" id="cancel-edit-button">
-                        <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
-                            <text x="65" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">
-                                <%= __('Cancel') %>
-                            </text>
-                        </svg>
-                    </button>
-                    <div class="row justify-content-center mx-2" id="loader-play-btn">
-                        <div><span class="spinner w-h-5"></span></div>
-                    </div>
-                    <button class="btn align-self-start mb-2 w-100" id="submit-edit-button">
-                        <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="208" height="66" rx="33" fill="#D7D7D7"/>
-                            <text x="65" y="43" font-family="lato" font-size="24" fill="white" style="text-align:center">
-                                <%= __('Submit') %>
-                            </text>
-                        </svg>
+            
+            <div class="row mt-5 justify-content-center mx-0" id="validation-button-row">
+                <button class="btn align-self-start mb-2" id="cancel-edit-button">
+                    <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
+                        <text x="65" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">
+                            <%= __('Cancel') %>
+                        </text>
+                    </svg>
+                </button>
+                <button class="btn web-view"></button>
+                <button class="btn align-self-start mb-2 pl-4" id="submit-edit-button">
+                    <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="208" height="66" rx="33" fill="#D7D7D7"/>
+                        <text x="65" y="43" font-family="lato" font-size="24" fill="white" style="text-align:center">
+                            <%= __('Submit') %>
+                        </text>
+                    </svg>
 
-                    </button>
-                </div>
+                </button>
             </div>
+
             <div class="row justify-content-center" id="skip_btn_row">
                 <button class="btn text-primary mt-2 mb-2 fs-1_5-rem" id="skip_button">
                     <%= __('Skip') %>
