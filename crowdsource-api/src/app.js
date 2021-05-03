@@ -42,7 +42,8 @@ const {
     validateRewardsInfoQuery,
     validateContributedMediaInput,
     validateInputsForValidateEndpoint,
-    validateGetContributionsInput
+    validateGetContributionsInput,
+    validateMediaTypeInput
 } = require('./middleware/validateUserInputs');
 
 // const Ddos = require('ddos');
@@ -372,7 +373,7 @@ router.get('/rewards-info', validateRewardsInfoQuery, async (req, res) => {
     return res.status(404).send('Data not found');
 });
 
-router.get('/available-languages', (req, res) => getAvailableLanguages(res));
+router.get('/available-languages/:type', validateMediaTypeInput, (req, res) => getAvailableLanguages(req, res));
 
 require('./dashboard-api')(router);
 

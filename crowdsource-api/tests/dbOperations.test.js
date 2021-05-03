@@ -40,9 +40,11 @@ const mockDB = {
     oneOrNone: jest.fn(() => Promise.resolve()),
 }
 
-jest.mock('pg-promise', () => jest.fn(() => {
-    return jest.fn(() => mockDB);
-}));
+const mockpgPromise = jest.fn(() => mockpgp)
+
+const mockpgp = jest.fn(() => mockDB)
+
+jest.mock('pg-promise', () => mockpgPromise);
 
 process.env.LAUNCH_IDS = '1,2';
 const dbOperations = require('../src/dbOperations');
@@ -286,28 +288,33 @@ describe("Running tests for dbOperations", () => {
         expect(spyDBany).toHaveBeenCalledWith(getMotherTonguesData, [language])
     });
 
+    const mockpgp = require('pg-promise')()
+    mockpgp.as = jest.fn()
+    const type = 'text';
+    mockpgp.as.format = jest.fn().mockReturnValue(type)
+
     test('Get top language by hours', () => {
         const spyDBany = jest.spyOn(mockDB, 'any')
 
-        dbOperations.getTopLanguageByHours();
+        dbOperations.getTopLanguageByHours(type);
 
-        expect(spyDBany).toHaveBeenCalledWith(topLanguagesByHoursContributed);
+        expect(spyDBany).toHaveBeenCalledWith(topLanguagesByHoursContributed, type);
     });
 
     test('Get top language by speakers', () => {
         const spyDBany = jest.spyOn(mockDB, 'any')
 
-        dbOperations.getTopLanguageBySpeakers();
+        dbOperations.getTopLanguageBySpeakers(type);
 
-        expect(spyDBany).toHaveBeenCalledWith(topLanguagesBySpeakerContributions);
+        expect(spyDBany).toHaveBeenCalledWith(topLanguagesBySpeakerContributions, type);
     });
 
     test('Get languages', () => {
         const spyDBany = jest.spyOn(mockDB, 'any')
 
-        dbOperations.getLanguages();
+        dbOperations.getLanguages(type);
 
-        expect(spyDBany).toHaveBeenCalledWith(listLanguages, []);
+        expect(spyDBany).toHaveBeenCalledWith(listLanguages, type);
     });
 
     test('Insert Feedback', () => {
@@ -541,14 +548,17 @@ describe("Running tests for dbOperations", () => {
     })
 
     describe('Test getAvailableLanguages', () => {
+        const type = 'text'
+        const req = { params: { type: type } };
+
         test('should call getDatasetLanguagesQuery and getContributionLanguagesQuery', async () => {
-            when(spyDBmany).calledWith(getDatasetLanguagesQuery).mockReturnValue([{ data_language: '' }]);
-            when(spyDBmany).calledWith(getContributionLanguagesQuery).mockReturnValue([{ from_language: '', to_language: '' }]);
+            when(spyDBmany).calledWith(getDatasetLanguagesQuery, [type]).mockReturnValue([{ data_language: '' }]);
+            when(spyDBmany).calledWith(getContributionLanguagesQuery, [type]).mockReturnValue([{ from_language: '', to_language: '' }]);
 
-            await dbOperations.getAvailableLanguages(res);
+            await dbOperations.getAvailableLanguages(req, res);
 
-            expect(spyDBmany).toBeCalledWith(getDatasetLanguagesQuery);
-            expect(spyDBmany).toBeCalledWith(getContributionLanguagesQuery);
+            expect(spyDBmany).toBeCalledWith(getDatasetLanguagesQuery, [type]);
+            expect(spyDBmany).toBeCalledWith(getContributionLanguagesQuery, [type]);
         })
 
         test('should return results in given format', async () => {
@@ -558,18 +568,18 @@ describe("Running tests for dbOperations", () => {
             const mockSend = { send: jest.fn() };
             const mockStatus = { status: jest.fn().mockReturnValue(mockSend) };
             const response = mockStatus;
-            when(spyDBmany).calledWith(getDatasetLanguagesQuery).mockReturnValue([{ data_language: langOne }, { data_language: langTwo }]);
-            when(spyDBmany).calledWith(getContributionLanguagesQuery).mockReturnValue([
+            when(spyDBmany).calledWith(getDatasetLanguagesQuery, [type]).mockReturnValue([{ data_language: langOne }, { data_language: langTwo }]);
+            when(spyDBmany).calledWith(getContributionLanguagesQuery, [type]).mockReturnValue([
                 { from_language: langOne, to_language: langThree },
                 { from_language: langTwo, to_language: langOne },
                 { from_language: langTwo, to_language: langThree }]);
             const spySend = jest.spyOn(mockSend, 'send')
             const spyStatus = jest.spyOn(mockStatus, 'status')
 
-            await dbOperations.getAvailableLanguages(response);
+            await dbOperations.getAvailableLanguages(req, response);
 
             expect(spyStatus).toBeCalledWith(200)
-            expect(spySend).toBeCalledWith({ "datasetLanguages": ["language1", "language2"], "contributionLanguages": {"language1": ["language3"], "language2": ["language1", "language3"]}})
+            expect(spySend).toBeCalledWith({ "datasetLanguages": ["language1", "language2"], "contributionLanguages": { "language1": ["language3"], "language2": ["language1", "language3"] } })
         })
     });
 });
