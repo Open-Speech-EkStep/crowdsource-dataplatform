@@ -1,0 +1,113 @@
+html {
+    scroll-behavior: smooth;
+    font-size: 10px;
+}
+@media (min-width: 321px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 448px) {
+    html {
+        font-size: 13px;
+    }
+}
+@media (min-width: 576px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 992px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1200px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 768px) {
+    .font-weight-light-lg {
+        font-weight: 300 !important;
+        line-height: 32px;
+    }
+
+    .table tbody td{
+        font-weight: normal;
+        line-height: 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 767px) {
+    .font-weight-light-lg {
+        font-weight: 400 !important;
+        line-height: 32px;
+    }
+}
+
+.table-img{
+    width: 80px;
+    height: auto;
+}
+
+@media (max-width: 767px) {
+    .font-weight-normal-sm {
+        font-weight: 400 !important;
+    }
+    .mt-xs-5{
+        margin-top: 5rem;
+    }
+    .popover {
+        width: 180px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .popover {
+        width: 200px;
+    }
+}
+
+@media (min-width: 768px) {
+    .font-weight-light-lg {
+        font-weight: 300 !important;
+    }
+}
+
+@media (max-width: 320px) {
+    h1{
+        font-size: 32px;
+        justify-content: center;
+    }
+    .table-responsive-xs {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+    .table-responsive-xs > .table-bordered {
+        border: 0;
+    }
+}
+
+@media (max-width: 1240px) {
+    .card img {
+        width: 150px;
+        height: auto;
+    }
+}
+
+.table thead th {
+    vertical-align: middle;
+}
+
+.table tbody td {
+    vertical-align: middle;
+}
