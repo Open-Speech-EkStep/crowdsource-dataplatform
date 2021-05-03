@@ -118,7 +118,7 @@ function buildLineGraphs(language, timeframe) {
   // $.fn.popover.Constructor.Default.whiteList.tr = [];
   // $.fn.popover.Constructor.Default.whiteList.td = [];
   Promise.all([
-    fetch(`/timeline?language=${language}&timeframe=${timeframe}`),
+    fetch(`/timeline/text?language=${language}&timeframe=${timeframe}`),
   ]).then(function (responses) {
     return Promise.all(responses.map(function (response) {
         return response.json();

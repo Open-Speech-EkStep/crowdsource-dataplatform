@@ -114,7 +114,7 @@ const getTimelinenUrl = (language, timeframe = "weekly") => {
 }
 
 const buildTimelineGraph = (language, timeframe) => {
-    fetch(`/timeline?language=${language}&timeframe=${timeframe}`)
+    fetch(`/timeline/text?language=${language}&timeframe=${timeframe}`)
     .then((data) => {
         if (!data.ok) {
             throw Error(data.statusText || 'HTTP error');
@@ -147,9 +147,9 @@ function buildGraphs(language, timeframe) {
     // $.fn.popover.Constructor.Default.whiteList.td = [];
 
     Promise.all([
-        fetch(`/timeline?language=${language}&timeframe=${timeframe}`),
-        fetch(`/stats/contributions/gender?language=${language}`),
-        fetch(`/stats/contributions/age?language=${language}`)
+        fetch(`/timeline/text?language=${language}&timeframe=${timeframe}`),
+        fetch(`/stats/contributions/gender/text?language=${language}`),
+        fetch(`/stats/contributions/age/text?language=${language}`)
     ]).then(function (responses) {
         return Promise.all(responses.map(function (response) {
             return response.json();

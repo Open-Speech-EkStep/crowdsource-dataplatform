@@ -77,7 +77,7 @@ const currentDateAndTime = () => {
 };
 
 const multer = require('multer');
-const  xss  = require('xss');
+const xss = require('xss');
 const multerStorage = multer.diskStorage({
     destination: function (req, file, cb) {
         if (!fs.existsSync('uploads')) {

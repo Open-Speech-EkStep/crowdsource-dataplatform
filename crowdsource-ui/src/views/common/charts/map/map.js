@@ -174,7 +174,7 @@ function getLanguageSpecificData(data, lang) {
 const generateIndiaMap = function (language="") {
   $mapLoader.show().addClass('d-flex');
   $mapChart.addClass('d-none');
-  const url = language !== "" ? '/aggregate-data-count?byState=true&byLanguage=true' : '/aggregate-data-count?byState=true';
+  const url = language !== "" ? '/aggregate-data-count/text?byState=true&byLanguage=true' : '/aggregate-data-count/text?byState=true';
   performAPIRequest(url)
     .then((data) => {
       const response = language !== "" ? getLanguageSpecificData(data, language) : data;

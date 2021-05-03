@@ -1,10 +1,10 @@
 \a
 \t
 \o ageGroupContributions.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  age_group, count(*) as contributions, ROUND(sum(contribution_audio_duration)::decimal/3600, 3) as hours_contributed,ROUND(sum(validation_audio_duration)::decimal/3600, 3) as hours_validated, count(distinct(contributed_by)) as speakers from contributions_and_demo_stats  group by age_group ORDER BY contributions DESC)t;
+SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  age_group, count(*) as contributions, ROUND(sum(contribution_audio_duration)::decimal/3600, 3) as hours_contributed,ROUND(sum(validation_audio_duration)::decimal/3600, 3) as hours_validated, count(distinct(contributed_by)) as speakers, type from contributions_and_demo_stats_new  group by age_group ORDER BY contributions DESC)t;
 
 \o genderGroupContributions.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  gender,count(*) as contributions, ROUND(sum(contribution_audio_duration)::decimal/3600, 3) as hours_contributed,ROUND(sum(validation_audio_duration)::decimal/3600, 3) as hours_validated, count(distinct(contributed_by)) as speakers from contributions_and_demo_stats  group by gender ORDER BY contributions DESC)t;
+SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  gender,count(*) as contributions, ROUND(sum(contribution_audio_duration)::decimal/3600, 3) as hours_contributed,ROUND(sum(validation_audio_duration)::decimal/3600, 3) as hours_validated, count(distinct(contributed_by)) as speakers, type from contributions_and_demo_stats_new  group by gender ORDER BY contributions DESC)t;
 
 \o dailyTimeline.json
 SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select day, month, year, language, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations from daily_cumulative_stats_per_language)t;

@@ -1,5 +1,5 @@
 const { getLastUpdatedAt, getTopLanguageByHours, getTopLanguageBySpeakers, getAggregateDataCount, getLanguages, getTimeline, getGenderGroupData, getAgeGroupData } = require('./dbOperations');
-
+const { validateMediaTypeInput } = require("./middleware/validateUserInputs")
 let isFieldsMentioned = (fieldsArray) => {
     for (let key in fieldsArray) {
         if (fieldsArray[key] !== null && fieldsArray[key] === 'true') {
@@ -93,11 +93,12 @@ const dashboardRoutes = (router) => {
     });
 
     //Optional
-    router.get('/aggregate-data-count', async (req, res) => {
+    router.get('/aggregate-data-count/:type', validateMediaTypeInput, async (req, res) => {
         const byLanguage = req.query.byLanguage || false;
         const byState = req.query.byState || false;
+        const type = req.params.type;
 
-        let aggregateData = await getAggregateDataCount(byLanguage, byState);
+        let aggregateData = await getAggregateDataCount(byLanguage, byState, type);
         const lastUpdatedDateTime = await getLastUpdatedAt();
         res.send({ "data": aggregateData, last_updated_at: lastUpdatedDateTime });
     });
@@ -110,38 +111,39 @@ const dashboardRoutes = (router) => {
     });
 
 
-    router.get('/stats/summary', async (req, res) => {
+    router.get('/stats/summary/:type', validateMediaTypeInput, async (req, res) => {
 
         const resultFields = Object.keys(validateAndReturnRequiredStatsFields(req.query));
+        const type = req.params.type;
 
         let result = {};
         if (resultFields.includes('top_language_by_hours')) {
-            const topLanguagesByHours = await getTopLanguageByHours();
+            const topLanguagesByHours = await getTopLanguageByHours(type);
             result['top_languages_by_hours'] = topLanguagesByHours;
         }
         if (resultFields.includes('top_language_by_speakers')) {
-            const topLanguagesBySpeakers = await getTopLanguageBySpeakers();
+            const topLanguagesBySpeakers = await getTopLanguageBySpeakers(type);
             result['top_languages_by_speakers'] = topLanguagesBySpeakers;
         }
         if (resultFields.includes('languages')) {
-            let languagesData = await getLanguages();
+            let languagesData = await getLanguages(type);
             languagesData = languagesData.map(data => data.language);
             result['languages'] = languagesData;
         }
         if (resultFields.includes('aggregate_data_by_state')) {
-            const aggregateDataByDate = await getAggregateDataCount(false, true);
+            const aggregateDataByDate = await getAggregateDataCount(false, true, type);
             result['aggregate_data_by_state'] = aggregateDataByDate;
         }
         if (resultFields.includes('aggregate_data_by_language')) {
-            const aggregateDataByLanguage = await getAggregateDataCount(true, false);
+            const aggregateDataByLanguage = await getAggregateDataCount(true, false, type);
             result['aggregate_data_by_language'] = aggregateDataByLanguage;
         }
         if (resultFields.includes('aggregate_data_by_state_and_language')) {
-            const aggregateDataByDateAndLanguage = await getAggregateDataCount(false, true);
+            const aggregateDataByDateAndLanguage = await getAggregateDataCount(false, true, type);
             result['aggregate_data_by_state_and_language'] = aggregateDataByDateAndLanguage;
         }
         if(resultFields.includes('aggregate_data_count')){
-            const aggregateCount = await getAggregateDataCount(false, false);
+            const aggregateCount = await getAggregateDataCount(false, false, type);
             result['aggregate_data_count'] = aggregateCount;
         }
         
@@ -192,25 +194,27 @@ const dashboardRoutes = (router) => {
     });
 
     // Optional
-    router.get('/stats/contributions/age', async (req, res) => {
+    router.get('/stats/contributions/age/:type', validateMediaTypeInput, async (req, res) => {
         const language = req.query.language || '';
+        const type = req.params.type;
 
-        const ageGroupData = await getAgeGroupData(language);
+        const ageGroupData = await getAgeGroupData(language, type);
         const lastUpdatedDateTime = await getLastUpdatedAt();
         res.send({ "data": ageGroupData, last_updated_at: lastUpdatedDateTime });
     });
 
     //Optional
-    router.get('/stats/contributions/gender', async (req, res) => {
+    router.get('/stats/contributions/gender/:type', validateMediaTypeInput, async (req, res) => {
         const language = req.query.language || '';
+        const type = req.params.type;
 
-        const genderGroupData = await getGenderGroupData(language);
+        const genderGroupData = await getGenderGroupData(language, type);
         const lastUpdatedDateTime = await getLastUpdatedAt();
         res.send({ "data": genderGroupData, last_updated_at: lastUpdatedDateTime });
     });
 
     //Optional
-    router.get('/timeline', async (req, res) => {
+    router.get('/timeline/:type', async (req, res) => {
         const allowedTimeFrames = ['weekly', 'monthly', 'daily', 'quarterly'];
 
         const language = req.query.language || '';
