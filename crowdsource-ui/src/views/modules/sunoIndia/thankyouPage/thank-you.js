@@ -14,7 +14,7 @@ const {
   performAPIRequest,
 } = require("../common/utils");
 
-const {constructChart}= require('../common/horizontalBarGraph');
+const {constructChart} = require('../common/horizontalBarGraph');
 
 const sentencesKey = 'sunoSentencesKey';
 const totalSentence = 5;
@@ -78,6 +78,7 @@ const updateShareContent = function (language, rank) {
 
 
 const chartReg = {};
+
 function showByHoursChart() {
   if (chartReg["chart"]) {
     chartReg["chart"].dispose();
@@ -89,7 +90,6 @@ function showByHoursChart() {
     "language"
   );
 }
-
 
 
 const getLanguageStats = function () {
@@ -145,7 +145,7 @@ function executeOnLoad() {
 
   if (!localSpeakerDataParsed) {
     location.href = "./home.html";
-  } else if (currentIndexInStorage < totalSentence-1) {
+  } else if (currentIndexInStorage < totalSentence - 1) {
     location.href = "./home.html";
   } else {
     $("#nav-user").removeClass("d-none");
@@ -153,25 +153,24 @@ function executeOnLoad() {
     $("#nav-username").text(localSpeakerDataParsed.userName);
 
     setPageContentHeight();
-  setSentencesContributed();
+    setSentencesContributed();
+    toggleFooterPosition();
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    if (contributionLanguage) {
+      updateLocaleLanguagesDropdown(contributionLanguage);
+    }
+    showByHoursChart();
+    getLanguageStats();
+    localStorage.setItem(CURRENT_INDEX, 0);
+    localStorage.setItem(
+      sentencesKey,
+      JSON.stringify({
+        userName: localSpeakerDataParsed.userName,
+        sentences: [],
+        language: contributionLanguage,
+      })
+    );
   }
-
-  toggleFooterPosition();
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  if (contributionLanguage) {
-    updateLocaleLanguagesDropdown(contributionLanguage);
-  }
-  showByHoursChart();
-  getLanguageStats();
-  localStorage.setItem(CURRENT_INDEX, 0);
-  localStorage.setItem(
-    sentencesKey,
-    JSON.stringify({
-      userName: localSpeakerDataParsed.userName,
-      sentences: [],
-      language: contributionLanguage,
-    })
-  );
 }
 
 $(document).ready(function () {
