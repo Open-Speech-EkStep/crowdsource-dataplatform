@@ -313,6 +313,7 @@ const getLanguages = (type) => {
     const filter = getTypeFilter(type);
     return db.any(listLanguages, filter);
 }
+
 const normalTimeLineQueries = {
     "weekly": weeklyTimeline,
     "daily": dailyTimeline,
@@ -331,7 +332,7 @@ const getTimeline = (language = "", timeframe, type) => {
     timeframe = timeframe.toLowerCase();
     const typeFilter = `type='${type}'`;
     if (language.length !== 0) {
-        let languageFilter =  `language iLike '${language}'`
+        let languageFilter = `language iLike '${language}'`
         let filter = pgp.as.format('$1:raw', [`${typeFilter} and ${languageFilter}`])
         let query = normalTimeLineQueries[timeframe] || weeklyTimeline;
         return db.any(query, filter);
@@ -575,10 +576,11 @@ const updateDbWithUserInput = async (
         });
 }
 
-const getAvailableLanguages = async (res) => {
+const getAvailableLanguages = async (req, res) => {
+    const type = req.params.type
     try {
-        const datasetLanguageList = await db.many(getDatasetLanguagesQuery);
-        const contributionLanguageList = await db.many(getContributionLanguagesQuery);
+        const datasetLanguageList = await db.many(getDatasetLanguagesQuery, [type]);
+        const contributionLanguageList = await db.many(getContributionLanguagesQuery, [type]);
 
         const datasetLanguages = datasetLanguageList.map((value) => value.data_language);
         const contributionLanguages = {};
