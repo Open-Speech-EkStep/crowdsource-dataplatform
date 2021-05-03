@@ -107,18 +107,6 @@ const setAudioPlayer = function () {
 
 let currentIndex = 0, progressCount = 0, validationCount = 0;
 
-const animateCSS = ($element, animationName, callback) => {
-  $element.addClass(`animated ${animationName}`);
-
-  function handleAnimationEnd() {
-    $element.removeClass(`animated ${animationName}`);
-    $element.off('animationend');
-    if (typeof callback === 'function') callback();
-  }
-
-  $element.on('animationend', handleAnimationEnd);
-};
-
 function getNextSentence() {
   if (currentIndex < validationSentences.length - 1) {
     currentIndex++;
@@ -128,13 +116,6 @@ function getNextSentence() {
     resetValidation();
     showThankYou();
   }
-}
-
-const updateDecisionButton = (button, colors) => {
-  const children = button.children().children();
-  children[0].setAttribute("fill", colors[0]);
-  children[1].setAttribute("fill", colors[1]);
-  children[2].setAttribute("fill", colors[2]);
 }
 
 const updateValidationCount = () => {

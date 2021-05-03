@@ -43,108 +43,13 @@ function uploadToServer(cb) {
     });
 }
 
-function enableButton(element) {
-  element.children().removeAttr("opacity")
-  element.removeAttr("disabled")
-}
-
-const setAudioPlayer = function () {
-  const myAudio = document.getElementById('my-audio');
-  const play = $('#play');
-  const pause = $('#pause');
-  const replay = $('#replay');
-  const textPlay = $('#audioplayer-text_play');
-  const textReplay = $('#audioplayer-text_replay');
-  const textPause = $('#audioplayer-text_pause');
-
-
-  myAudio.addEventListener("ended", () => {
-    enableValidation();
-    hideElement(pause)
-    showElement(replay)
-    hideElement(textPause);
-    showElement(textReplay);
-  });
-
-  play.on('click', () => {
-    hideElement($('#default_line'))
-    playAudio();
-  });
-
-  pause.on('click', pauseAudio);
-
-  replay.on('click', () => {
-    replayAudio();
-  });
-
-  function playAudio() {
-    myAudio.load();
-    hideElement(play)
-    showElement(pause)
-    hideElement(textPlay);
-    showElement(textPause);
-    myAudio.play();
-  }
-
-  function pauseAudio() {
-    hideElement(pause)
-    showElement(replay)
-    hideElement(textPause)
-    showElement(textReplay)
-    enableValidation();
-    myAudio.pause();
-  }
-
-  function replayAudio() {
-    myAudio.load();
-    hideElement(replay)
-    showElement(pause)
-    hideElement(textReplay);
-    showElement(textPause);
-    disableValidation();
-    myAudio.play();
-  }
-
-  function enableValidation() {
-    const likeButton = $("#like_button");
-    const needChangeButton = $("#need_change");
-    enableButton(likeButton)
-    enableButton(needChangeButton)
-  }
-}
-
 let currentIndex = 0, progressCount = 0, validationCount = 0;
-
-const animateCSS = ($element, animationName, callback) => {
-  $element.addClass(`animated ${animationName}`);
-
-  function handleAnimationEnd() {
-    $element.removeClass(`animated ${animationName}`);
-    $element.off('animationend');
-    if (typeof callback === 'function') callback();
-  }
-
-  $element.on('animationend', handleAnimationEnd);
-};
-
-function setSentenceLabel(index) {
-  const $sentenceLabel = $('#sentenceLabel');
-  const originalText = validationSentences[index].contribution;
-  $sentenceLabel[0].innerText = originalText;
-  animateCSS($sentenceLabel, 'lightSpeedIn');
-  $('#original-text').text(originalText);
-  $('#edit').text(originalText);
-  
-}
 
 function getNextSentence() {
   if (currentIndex < validationSentences.length - 1) {
     currentIndex++;
-    getAudioClip(validationSentences[currentIndex].dataset_row_id)
-    resetValidation();
-    setSentenceLabel(currentIndex);
+    getImage(validationSentences[currentIndex].dataset_row_id);
   } else {
-    resetValidation();
     showThankYou();
   }
 }
@@ -177,31 +82,7 @@ function disableButton(button) {
   button.attr("disabled", "disabled");
 }
 
-function disableValidation() {
-  const needChangeButton = $("#need_change");
-  const likeButton = $("#like_button");
-  updateDecisionButton(needChangeButton, ["white", "#007BFF", "#343A40"]);
-  updateDecisionButton(likeButton, ["white", "", "#343A40"]);
-  disableButton(likeButton)
-  disableButton(needChangeButton)
-}
-
-function resetValidation() {
-  disableValidation();
-  const textPlay = $('#audioplayer-text_play');
-  const textReplay = $('#audioplayer-text_replay');
-  const textPause = $('#audioplayer-text_pause');
-  hideElement(textPause);
-  hideElement(textReplay);
-  showElement(textPlay);
-
-  hideElement($("#replay"))
-  hideElement($('#pause'))
-  showElement($("#play"))
-  showElement($('#default_line'))
-}
-
-function recordValidation(action) {
+function skipValidation(action) {
   if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
     validationCount++;
   }
@@ -239,13 +120,6 @@ const $editorRow = $('#editor-row');
 }
 
 const closeEditor = function (){
-  const $editorRow = $('#editor-row');
-  hideElement($editorRow);
-  showElement($("#need_change"));
-  showElement($("#skip_button"));
-  showElement($("#like_button"));
-  hideElement($('#cancel-edit-button'))
-  hideElement($('#submit-edit-button'))
   hideElement($('.simple-keyboard'));
 }
 
@@ -265,11 +139,11 @@ function addListeners() {
 
   needChangeButton.hover(() => {
       updateDecisionButton(needChangeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-      $("#sentences-row .prompt").addClass('hover-edit');
+      $("#textarea-row .prompt").addClass('hover-edit');
     },
     () => {
       updateDecisionButton(needChangeButton, ["white", "#007BFF", "#343A40"]);
-      $("#sentences-row .prompt").removeClass('hover-edit');
+      $("#textarea-row .prompt").removeClass('hover-edit');
     });
 
   needChangeButton.mousedown(() => {
@@ -282,16 +156,15 @@ function addListeners() {
 
 
   needChangeButton.on('click',()=>{
-    hideElement($('#sentences-row'));
+    console.log("need change")
+    hideElement($('#textarea-row'));
     openEditor();
     const originalText = validationSentences[currentIndex].contribution;
-    $('#original-text').text(originalText);
+    $('#captured-text').text(originalText);
     $('#edit').val('');
     $('#edit').val(originalText);
     setInput(originalText);
   })
-
-
 
   $("#edit").focus(function(){
     const $submitEditButton = $("#submit-edit-button");
@@ -303,47 +176,62 @@ function addListeners() {
   });
 
   $('#cancel-edit-button').on('click', () => {
-    showElement($('#sentences-row'));
-    showElement($('#progress-row'));
+    $("#edit").val("");
     setInput("");
+    showElement($('#progress-row'))
+    const $submitEditButton = $('#submit-edit-button');
+    $submitEditButton.attr('disabled',true);
+    const children = $submitEditButton.children().children();
+    children[0].setAttribute("fill", '#D7D7D7');
     closeEditor();
   })
 
   $('#submit-edit-button').on('click', () => {
+    setInput("");
     hideElement($('.simple-keyboard'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
-    hideElement($('#audio-player-btn'))
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
+    $("#edit").css('pointer-events','none');
+    $("#cancel-edit-button").attr("disabled",true);
+    const $submitEditButton = $('#submit-edit-button');
+    $submitEditButton.attr('disabled',true);
+    const children = $submitEditButton.children().children();
+    children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#progress-row'))
     crowdSource.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events','none');
     setTimeout(()=>{
-      closeEditor();
-      showElement($('#progress-row'))
-      showElement($('#sentences-row'));
       hideElement($('#thankyou-text'));
+      showElement($('#cancel-edit-button'));
+      showElement($('#submit-edit-button'))
+      showElement($('#skip_button'))
+      $("#edit").css('pointer-events','unset');
+      $("#edit").val("");
+      closeEditor();
       updateProgressBar();
       getNextSentence();
-      $("#edit").css('pointer-events','unset');
     }, 2000)
   })
 
   likeButton.on('click', () => {
-    recordValidation(ACCEPT_ACTION)
+    skipValidation(ACCEPT_ACTION)
     updateProgressBar();
     getNextSentence();
   })
 
   $skipButton.on('click', () => {
-    $('#pause').trigger('click');
-    recordValidation(SKIP_ACTION)
+    $('#edit').val("");
+    setInput("");
+    $('#submit-edit-button').attr('disabled',true);
+    skipValidation(SKIP_ACTION);
     updateProgressBar();
     getNextSentence();
-    showElement($('#sentences-row'));
-    showElement($('#progress-row'))
+    showElement($('#textarea-row'));
+    showElement($('#progress-row'));
+    $("#cancel-edit-button").attr("disabled",true);
     closeEditor();
   })
 
@@ -360,8 +248,8 @@ function addListeners() {
 
 let validationSentences = [{ sentence: '' }]
 
-const loadAudio = function (audioLink) {
-  $('#my-audio').attr('src', audioLink)
+const setDekhoImage = function (audioLink) {
+  $('#view-image').attr('src', audioLink)
 };
 
 function disableSkipButton() {
@@ -370,8 +258,13 @@ function disableSkipButton() {
   disableButton($skipButton)
 }
 
-const getAudioClip = function (contributionId) {
-  hideAudioRow();
+function enableButton(element) {
+  element.children().removeAttr("opacity")
+  element.removeAttr("disabled")
+}
+
+const getImage = function (contributionId) {
+  // hideAudioRow();
   disableSkipButton();
   const source = 'contribute';
   fetch(`/media-object/${source}/${contributionId}`, {
@@ -385,34 +278,19 @@ const getAudioClip = function (contributionId) {
       // loadAudio(URL.createObjectURL(blob))
       const fileReader = new FileReader();
       fileReader.onload = function (e) {
-        loadAudio(e.target.result);
-        showAudioRow();
+        setDekhoImage(e.target.result);
         enableButton($('#skip_button'))
       }
       fileReader.readAsDataURL(blob);
     });
   }).catch((err) => {
     console.log(err)
-    showAudioRow();
   });
 }
 
-function hideAudioRow() {
-  showElement($('#loader-audio-row'));
-  hideElement($('#audio-row'))
-  showElement($('#loader-play-btn'));
-  hideElement($('#audio-player-btn'))
-}
-
-function showAudioRow() {
-  hideElement($('#loader-audio-row'));
-  showElement($('#audio-row'));
-  hideElement($('#loader-play-btn'));
-  showElement($('#audio-player-btn'))
-}
-
 function showThankYou() {
-  hideElement($('#sentences-row'));
+  hideElement($('#textarea-row'));
+  hideElement($('#dekho-image'));
   hideElement($('#audio-row'))
   hideElement($('#validation-button-row'))
   showElement($('#thank-you-row'))
@@ -444,11 +322,11 @@ function showThankYou() {
 
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
-  hideElement($('#sentences-row'));
+  hideElement($('#textarea-row'));
   hideElement($('#audio-row'))
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
-  showElement($('#no-sentences-row'))
+  showElement($('#no-textarea-row'))
   hideElement($('#skip_btn_row'));
   hideElement($('#validation-container'));
   hideElement($('#report_btn'));
@@ -485,6 +363,54 @@ const handleSubmitFeedback = function () {
       $("#other_text").val("");
     }
   });
+}
+
+const initializeComponent = () => {
+  const type = 'ocr';
+  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  fetch(`/media/${type}`, {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    body: JSON.stringify({
+      userName: "",
+      language: fromLanguage,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((data) => {
+      if (!data.ok) {
+        throw Error(data.statusText || 'HTTP error');
+      } else {
+        return data.json();
+      }
+    }).then((result) => {
+    // if (result.data.length === 0) {
+    //   showNoSentencesMessage();
+    //   return;
+    // }
+    validationSentences = result.data;
+    window.crowdSource = result.data;
+    const validationData = validationSentences[currentIndex];
+    if (validationData) {
+      getImage(validationData.dataset_row_id );
+      updateValidationCount();
+      addListeners();
+    }
+  }).catch((err) => {
+    console.log(err)
+  });
+}
+
+const getLocationInfo = () => {
+  fetchLocationInfo().then(res => {
+    return res.json()
+  }).then(response => {
+    localStorage.setItem("state_region", response.regionName);
+    localStorage.setItem("country", response.country);
+  }).catch(console.log);
 }
 
 let selectedReportVal = '';
@@ -531,48 +457,10 @@ $(document).ready(() => {
     $("#report_submit_id").attr("disabled", false);
   });
 
-  fetchLocationInfo().then(res => {
-    return res.json()
-  }).then(response => {
-    localStorage.setItem("state_region", response.regionName);
-    localStorage.setItem("country", response.country);
-  }).catch(console.log);
-  const type = 'asr';
-  const toLanguage = ""; //can be anything
-  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  fetch(`/contributions/${type}?from=${fromLanguage}&to=${toLanguage}`, {
-    credentials: 'include',
-    mode: 'cors'
-  })
-    .then((data) => {
-      if (!data.ok) {
-        throw Error(data.statusText || 'HTTP error');
-      } else {
-        return data.json();
-      }
-    }).then((result) => {
-    if (result.data.length === 0) {
-      showNoSentencesMessage();
-      return;
-    }
-    validationSentences = result.data;
-    window.crowdSource = result.data;
-    const audio = validationSentences[currentIndex];
-    if (audio) {
-      getAudioClip(audio.dataset_row_id );
-      setSentenceLabel(currentIndex);
-      updateValidationCount();
-      resetValidation();
-      addListeners();
-      setAudioPlayer();
-    }
-  }).catch((err) => {
-    console.log(err)
-  });
+  getLocationInfo();
+  initializeComponent();
 });
 
 module.exports = {
-  setSentenceLabel,
-  setAudioPlayer,
   addListeners,
 };
