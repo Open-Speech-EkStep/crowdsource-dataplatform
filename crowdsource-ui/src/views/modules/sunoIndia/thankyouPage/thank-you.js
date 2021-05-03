@@ -16,8 +16,10 @@ const {
 
 const {constructChart}= require('../common/horizontalBarGraph');
 
+const sentencesKey = 'sunoSentencesKey';
+const totalSentence = 5;
 
-const CURRENT_INDEX = "currentIndex";
+const CURRENT_INDEX = "sunoCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 
 function setSentencesContributed() {
@@ -139,18 +141,20 @@ function executeOnLoad() {
     localStorage.getItem(SPEAKER_DETAILS)
   );
 
-  // if (!localSpeakerDataParsed) {
-  //   location.href = "./home.html#start-record";
-  // } else if (currentIndexInStorage < totalSentence) {
-  //   location.href = "./home.html#start-record";
-  // } else {
+  console.log(localSpeakerDataParsed, currentIndexInStorage)
+
+  if (!localSpeakerDataParsed) {
+    location.href = "./home.html";
+  } else if (currentIndexInStorage < totalSentence-1) {
+    location.href = "./home.html";
+  } else {
     $("#nav-user").removeClass("d-none");
     $("#nav-login").addClass("d-none");
     $("#nav-username").text(localSpeakerDataParsed.userName);
 
     setPageContentHeight();
   setSentencesContributed();
-  // }
+  }
 
   toggleFooterPosition();
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -159,6 +163,15 @@ function executeOnLoad() {
   }
   showByHoursChart();
   getLanguageStats();
+  localStorage.setItem(CURRENT_INDEX, 0);
+  localStorage.setItem(
+    sentencesKey,
+    JSON.stringify({
+      userName: localSpeakerDataParsed.userName,
+      sentences: [],
+      language: contributionLanguage,
+    })
+  );
 }
 
 $(document).ready(function () {
