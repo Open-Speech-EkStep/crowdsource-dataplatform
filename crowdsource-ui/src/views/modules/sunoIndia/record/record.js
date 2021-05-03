@@ -48,6 +48,7 @@ function uploadToServer(cb) {
     .then((result) => {
     })
     .catch((err) => {
+
       console.log(err);
     })
     .then((finalRes) => {
@@ -289,19 +290,24 @@ function addListeners() {
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#progress-row'))
-    uploadToServer();
-    setTimeout(() => {
-      hideElement($('#thankyou-text'));
-      showElement($('#cancel-edit-button'));
-      showElement($('#submit-edit-button'))
-      showElement($('#audio-player-btn'))
-      showElement($('#skip_button'))
-      $("#edit").css('pointer-events', 'unset');
-      $("#edit").val("");
-      closeEditor();
-      updateProgressBar();
-      getNextSentence();
-    }, 2000)
+    try{
+      uploadToServer();
+      setTimeout(() => {
+        hideElement($('#thankyou-text'));
+        showElement($('#cancel-edit-button'));
+        showElement($('#submit-edit-button'))
+        showElement($('#audio-player-btn'))
+        showElement($('#skip_button'))
+        $("#edit").css('pointer-events', 'unset');
+        $("#edit").val("");
+        closeEditor();
+        updateProgressBar();
+        getNextSentence();
+      }, 2000)
+    } catch (e){
+      console.log(e)
+    }
+
   })
 
 
