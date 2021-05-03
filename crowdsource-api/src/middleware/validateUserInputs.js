@@ -156,4 +156,11 @@ const validateGetContributionsInput = (req, res, next) => {
     else { next(); }
 }
 
-module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery, validateContributedMediaInput, validateInputsForValidateEndpoint, validateGetContributionsInput }
+const validateMediaTypeInput = (req, res, next) => {
+    if (!(req.params.type && MEDIA_TYPES.includes(req.params.type))) {
+        return res.status(400).send("Invalid params");
+    }
+    next();
+}
+
+module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery, validateContributedMediaInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput }
