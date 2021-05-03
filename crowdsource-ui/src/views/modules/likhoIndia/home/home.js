@@ -1,6 +1,6 @@
 const {constructChart}= require('../common/horizontalBarGraph');
-const {drawMap,getStatistics} = require('../common/map');
 const { onActiveNavbar } = require('../common/header');
+const {setSpeakerData} = require('../common/contributionStats');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
 const {
   setSpeakerDetails,
@@ -18,7 +18,24 @@ const {
   TOP_LANGUAGES_BY_SPEAKERS,
   AGGREGATED_DATA_BY_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
+  SELECTED_MODULE
 } = require('../common/constants');
+
+function getStatistics(response) {
+  console.log(response)
+  const $speakersData = $("#speaker-data");
+  const $speakersDataLoader = $speakersData.find('#loader1');
+  const $speakerDataDetails = $speakersData.find('#contribution-details');
+
+  $speakersDataLoader.removeClass('d-none');
+  $speakerDataDetails.addClass('d-none');
+
+  setSpeakerData([response]);
+
+  $speakersDataLoader.addClass('d-none');
+  $speakerDataDetails.removeClass('d-none');
+
+}
 
 
 const chartReg = {};
@@ -30,20 +47,6 @@ function showByHoursChart() {
   constructChart(
     JSON.parse(topLanguagesByHoursData),
     "total_contributions",
-    "language"
-  );
-}
-
-function showBySpeakersChart() {
-  if (chartReg["chart"]) {
-    chartReg["chart"].dispose();
-  }
-  const topLanguagesBySpeakers = localStorage.getItem(
-    TOP_LANGUAGES_BY_SPEAKERS
-  );
-  constructChart(
-    JSON.parse(topLanguagesBySpeakers),
-    "total_speakers",
     "language"
   );
 }
@@ -94,13 +97,13 @@ const setDefaultLang = function () {
     const targetedDiv = getDefaultTargetedDiv('id', defaultLangId, $sayListenLanguage);
     const language = targetedDiv.getAttribute("value");
     localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-    updateHrsForCards(language);
+    // updateHrsForCards(language);
     updateLocaleLanguagesDropdown(language);
     setLangNavBar(targetedDiv, language, $languageNavBar);
     return;
   }
   const targetedDiv = getDefaultTargetedDiv('value', contributionLanguage, $sayListenLanguage);
-  updateHrsForCards(contributionLanguage);
+  // updateHrsForCards(contributionLanguage);
   updateLocaleLanguagesDropdown(contributionLanguage);
   setLangNavBar(targetedDiv, contributionLanguage, $languageNavBar);
 }
@@ -108,7 +111,6 @@ const setDefaultLang = function () {
 const getStatsSummary = function () {
   performAPIRequest('/stats/summary')
     .then(response => {
-      drawMap({data: response.aggregate_data_by_state});
       localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response.top_languages_by_hours));
       showByHoursChart();
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
@@ -147,9 +149,9 @@ function initializeBlock() {
       top_lang = language;
       localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
       localStorage.setItem("i18n", "en");
-      window.location.href = "/";
+      window.location.href = "./home.html";
       setLangNavBar(targetedDiv, language, $languageNavBar);
-      updateHrsForCards(language);
+      // updateHrsForCards(language);
       updateLocaleLanguagesDropdown(language);
     }
   })
@@ -165,25 +167,26 @@ function initializeBlock() {
       previousActiveDiv.removeClass('active');
       $6th_place.addClass('d-none');
       targetedDiv.classList.add('active');
-      updateHrsForCards(language);
+      // updateHrsForCards(language);
       updateLocaleLanguagesDropdown(language);
       localStorage.setItem("i18n", "en");
-      window.location.href = "/";
+      window.location.href = "./home.html";
     }
   });
 
   $('#start_recording').on('click', () => {
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    setStartRecordingBtnOnClick('./record.html');
   });
 
-  $('[name="topLanguageChart"]').on('change', (event) => {
-    if (event.target.value === 'hours') {
-      showByHoursChart();
-    } else {
-      showBySpeakersChart();
-    }
-  });
+  $('#start_validating').on('click',()=>{
+    sentenceLanguage = top_lang;
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    setStartRecordingBtnOnClick('./validator-page.html');
+  })
+
+  showByHoursChart();
 
   setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
   setUserNameOnInputFocus();

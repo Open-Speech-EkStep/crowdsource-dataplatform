@@ -69,6 +69,14 @@ describe("getSpeakersData",()=> {
 })
 
 describe("isLanguageAvailable",()=> {
+  test("should give true when languages is given as empty string", () => {
+    const data = [{language:"Hindi",total_speakers: "80",total_contributions: "0.348",total_validations: "0.175"},{language:"English",total_speakers: "90",total_contributions: "0.8",total_validations: "0.75"}];
+
+    const isAvailable = isLanguageAvailable(data,'');
+
+    expect(isAvailable).toEqual(true);
+  })
+
   test("should give true when languages is not given as parameter", () => {
     const data = [{language:"Hindi",total_speakers: "80",total_contributions: "0.348",total_validations: "0.175"},{language:"English",total_speakers: "90",total_contributions: "0.8",total_validations: "0.75"}];
 

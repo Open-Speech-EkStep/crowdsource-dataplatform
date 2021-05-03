@@ -1,0 +1,44 @@
+.contribution-details {
+    padding: 1rem 0;
+    background-color: #F8F9FA;
+    margin: 0;
+    border-radius: 8px;
+}
+
+.contribution-data:last-child {
+    border: none;
+}
+
+.contribution-data > p:first-child {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.8rem;
+}
+
+#contributed-value {
+    color: #FCC232;
+}
+
+#validated-value {
+    color: #83E661;
+}
+
+@media screen and (min-width: 768px) {
+    .contribution-data {
+        border-right: 1px dashed #C4C4C4;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .contribution-details {
+        padding: 0 3rem;
+    }
+    .contribution-data.col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .contribution-data {
+        border-bottom: 1px dashed #C4C4C4;
+        padding: 1rem 0;
+    }
+}
