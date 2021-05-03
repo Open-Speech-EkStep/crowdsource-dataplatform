@@ -87,8 +87,7 @@ function skipValidation(action) {
     validationCount++;
   }
   const sentenceId = validationSentences[currentIndex].dataset_row_id
-  const contribution_id = validationSentences[currentIndex].contribution_id
-  fetch(`/validate/${contribution_id}/${action}`, {
+  fetch(`/validate/${sentenceId}/${action}`, {
     method: 'POST',
     credentials: 'include',
     mode: 'cors',
@@ -289,35 +288,7 @@ const getImage = function (contributionId) {
 }
 
 function showThankYou() {
-  hideElement($('#textarea-row'));
-  hideElement($('#dekho-image'));
-  hideElement($('#audio-row'))
-  hideElement($('#validation-button-row'))
-  showElement($('#thank-you-row'))
-  hideElement($('#progress-row'));
-  hideElement($('#skip_btn_row'));
-  hideElement($('#validation-container'));
-  $("#validation-container").removeClass("validation-container");
-  hideElement($('#report_btn'));
-  hideElement($("#test-mic-speakers"));
-  hideElement($('#instructive-msg'));
-  hideElement($('#editor-row'));
-  hideElement($('#thankyou-text'));
-  hideElement($('.simple-keyboard'));
-  hideElement($('#sentenceLabel'));
-
-  const language = localStorage.getItem('contributionLanguage');
-  const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
-  const aggregateDetails = JSON.parse(stringifyData);
-  const totalInfo = aggregateDetails.find((element) => element.language === language);
-  if (totalInfo) {
-    $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
-    $('#spn-total-hr-validated').html(totalInfo.total_validations);
-  } else {
-    $('#spn-total-hr-contributed').html(0);
-    $('#spn-total-hr-validated').html(0);
-  }
-  $('#spn-validation-count').html(validationCount);
+    window.location.href = './thank-you.html';
 }
 
 function showNoSentencesMessage() {
