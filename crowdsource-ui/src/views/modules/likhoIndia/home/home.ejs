@@ -18,8 +18,8 @@
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/home.css">
-    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/common.css">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/likhoIndia/home.css">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/common/common.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
 </head>
 
@@ -36,63 +36,31 @@
         <%- include('../common/cards.ejs',{left:{h1:"Translate",h2:"Translate and type the text","p1":"Contribute your voice to create an open data repository of Indian languages",img:"../../img/translate.svg"},right:{h1:"Validate",h2:"Correct the translation","p1":"Help us by validating the recordings that others have contributed",img:"../../img/validate.svg"}}); %>
     </div>
     <div class="row">
-        <div class="col-12 col-md-7 col-lg-6 ml-lg-auto p-5 text-dark">
-            <h1 class="display-5 font-wt-900 site-blue lh-5">
-                <%= __('We rely on your contributions') %>
-            </h1>
-            <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 site-blue text-justify mt-5">
-                <%= __('The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.') %>
-                <a class="ml-1" href="./about-us.html">
-                    <%= __('Know More') %>
-                </a>
-            </p>
+        <div class="col-12 col-md-11 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
+            <h2 class="font-wt-900 site-blue lh-5">
+                <%= __('Contributions made to LIKHO India') %>
+            </h2>
             <div class="row mt-5" id="speaker-data">
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader1">
-                    <div><span class="spinner"></span></div>
-                </div>
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader2">
-                    <div><span class="spinner"></span></div>
-                </div>
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left" id="loader3">
-                    <div><span class="spinner"></span></div>
-                </div>
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="languages-wrapper">
-                    <p class="h4" id="languages-value"></p>
-                    <p class="mb-0 fs-h4">
-                        <%= __('languages contributed in pair') %>
-                    </p>
-                </div>
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="speakers-wrapper">
-                    <p class="h4" id="speaker-value"></p>
-                    <p class="mb-0 fs-h4">
-                        <%= __('No. of Translations contributed') %>
-                    </p>
-                </div>
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left d-none" id="hours-wrapper">
-                    <div class="mb-0 d-flex align-items-center"><span class="h4" id="hour-value"></span></div>
-                    <p class="mb-0 fs-h4">
-                        <%= __('No. of translations validated') %>
-                    </p>
+                <div class="col-12 col-lg-11 col-md-11">
+                    <div class="row justify-content-center" id="loader1">
+                        <div><span class="spinner"></span></div>
+                    </div>
+                    <div class="row text-center contribution-details" id="contribution-details">
+                        <%- include('../common/contributionStats.ejs',{labels :['Language pairs','People participated','Translations done','Translations corrected']})%>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-5 col-lg-5 px-0 oflow-x-hid"></div>
     </div>
     <div class="row mb-5 lazy">
-        <div class="col-12 col-md-6 col-lg-6 ml-lg-auto pt-5 pt-lg-0 text-dark">
-            <div class="justify-content-center align-items-center d-none" id="chartSpinner">
-                <div><span class="spinner"></span></div>
-            </div>
-            <%- include ../common/map.ejs %>
-        </div>
-        <div class="col-12 col-md-6 col-lg-5 mt-xs-5 pr-lg-5">
+        <div class="col-12 col-md-11 col-lg-11 p-5 ml-lg-auto">
             <div id="bar_charts_container">
                 <h4 class="h4 mb-4">
-                    <%= __('Top Languages') %>
+                    <%= __('Top 5 most contributed languages') %>
                 </h4>
                 <div class="d-flex mb-3">
                     <div name="topLanguageChart" id="hours_chart" value="hours">
-                        <%= __('Total no. of translations') %>
+                        <%= __('Total translations') %>
                     </div>
                 </div>
                 <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
@@ -101,9 +69,8 @@
                 <%- include ../common/horizontalBarGraph.ejs %>
             </div>
         </div>
-        <div class="col-12 col-md-12 col-lg-12 px-0 oflow-x-hid"></div>
     </div>
-    <%- include ../common/viewAllDetailBtn.ejs %>
+    <%- include('../common/viewAllDetailBtn.ejs',{DASHBOARD:'./dashboard.html'}); %>
 </div>
 <%- include ../common/userDetails.ejs %>
 <%- include ../common/content-languages.ejs %>

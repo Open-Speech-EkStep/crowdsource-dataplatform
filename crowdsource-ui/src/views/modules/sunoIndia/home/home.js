@@ -1,6 +1,6 @@
 const {constructChart}= require('../common/horizontalBarGraph');
 const { onActiveNavbar } = require('../common/header');
-const {drawMap,getStatistics} = require('../common/map');
+const {setSpeakerData} = require('../common/contributionStats');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
 const {
   setSpeakerDetails,
@@ -20,6 +20,22 @@ const {
   CONTRIBUTION_LANGUAGE,
   SELECTED_MODULE
 } = require('../common/constants');
+
+function getStatistics(response) {
+  console.log(response)
+  const $speakersData = $("#speaker-data");
+  const $speakersDataLoader = $speakersData.find('#loader1');
+  const $speakerDataDetails = $speakersData.find('#contribution-details');
+
+  $speakersDataLoader.removeClass('d-none');
+  $speakerDataDetails.addClass('d-none');
+
+  setSpeakerData([response]);
+
+  $speakersDataLoader.addClass('d-none');
+  $speakerDataDetails.removeClass('d-none');
+
+}
 
 
 const chartReg = {};
@@ -95,7 +111,6 @@ const setDefaultLang = function () {
 const getStatsSummary = function () {
   performAPIRequest('/stats/summary')
     .then(response => {
-      drawMap({data: response.aggregate_data_by_state});
       localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response.top_languages_by_hours));
       showByHoursChart();
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));

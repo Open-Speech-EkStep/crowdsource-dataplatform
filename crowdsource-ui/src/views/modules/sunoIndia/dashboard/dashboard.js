@@ -1,9 +1,11 @@
 const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
 const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('../common/speakerDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString } = require('../common/utils');
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
 const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES } = require('../common/constants');
 const fetch = require('../common/fetch');
+
+const {setSpeakerData} = require('../common/contributionStats');
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
@@ -18,32 +20,6 @@ const fetchDetail = (language) => {
         }
     });
 };
-
-const getSpeakersData = (data, lang) => {
-    localStorage.setItem('previousLanguage', lang);
-    const speakersData = {
-        languages: 0,
-        speakers: 0,
-        contributions: 0,
-        validations: 0
-    }
-    if (!lang) {
-        speakersData.languages = parseInt(data[0].total_languages);
-        speakersData.speakers = parseInt(data[0].total_speakers);
-        speakersData.contributions = parseFloat(data[0].total_contributions);
-        speakersData.validations = parseFloat(data[0].total_validations);
-    } else {
-        const langSpeakersData = data.filter(item => {
-            if(item.language) {
-                return item.language.toLowerCase() === lang.toLowerCase()
-            }
-        } );
-        speakersData.speakers = parseInt(langSpeakersData[0].total_speakers);
-        speakersData.contributions = parseFloat(langSpeakersData[0].total_contributions);
-        speakersData.validations = parseFloat(langSpeakersData[0].total_validations);
-    }
-    return speakersData;
-}
 
 function isLanguageAvailable(data, lang) {
     let langaugeExists = false;
@@ -62,12 +38,7 @@ function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
     const $speakersDataLoader = $speakersData.find('#loader1');
     const $speakerDataDetails = $speakersData.find('#contribution-details');
-    const $speakerContributionData = $speakersData.find('.contribution-data');
     const $speakerDataLanguagesWrapper = $('#languages-wrapper');
-    const $speakerDataLanguagesValue = $('#languages-value');
-    const $speakersDataSpeakerValue = $('#speaker-value');
-    const $speakersDataContributionValue = $('#contributed-value');
-    const $speakersDataValidationValue = $('#validated-value');
     const activeDurationText = $('#duration').find('.active')[0].dataset.value;
 
     fetchDetail(language)
@@ -86,33 +57,7 @@ function updateLanguage(language) {
                     $speakerDataDetails.addClass('d-none');
                     generateIndiaMap(language);
                     updateLineGraph(language, activeDurationText);
-                    const speakersData = getSpeakersData(data.data, language);
-                    const {
-                        hours: contributedHours,
-                        minutes: contributedMinutes,
-                        seconds: contributedSeconds
-                    } = calculateTime(speakersData.contributions.toFixed(3)*60*60);
-                    const {
-                        hours: validatedHours,
-                        minutes: validatedMinutes,
-                        seconds: validatedSeconds
-                    } = calculateTime(speakersData.validations.toFixed(3)*60*60);
-
-                    if (speakersData.languages) {
-                        $speakerDataLanguagesValue.text(speakersData.languages);
-                        $speakerDataLanguagesWrapper.removeClass('d-none');
-                        $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4')
-                        $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xl-3');
-                    } else {
-                        $speakerDataLanguagesWrapper.addClass('d-none');
-                        $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xl-3');
-                        $speakerContributionData.addClass('col-12 col-md-4 col-lg-4 col-xl-4')
-                    }
-
-                    $speakersDataContributionValue.text(`${contributedHours}h ${contributedMinutes}m ${contributedSeconds}s`);
-                    $speakersDataValidationValue.text(`${validatedHours}h ${validatedMinutes}m ${validatedSeconds}s`);
-                    $speakersDataSpeakerValue.text(speakersData.speakers);
-
+                    setSpeakerData(data.data, language);
                     $speakersDataLoader.addClass('d-none');
                     $speakerDataDetails.removeClass('d-none');
                 } else {
@@ -243,4 +188,4 @@ $(document).ready(function () {
 
 });
 
-module.exports = {fetchDetail, getSpeakersData, isLanguageAvailable, updateLanguage}
+module.exports = {fetchDetail, isLanguageAvailable, updateLanguage}
