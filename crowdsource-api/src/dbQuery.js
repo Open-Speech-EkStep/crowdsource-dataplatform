@@ -100,7 +100,7 @@ select con."dataset_row_id", ds.media ->> 'data' as sentence, con.media ->> 'dat
     from contributions con 
     inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_identifier!=$1
     inner join dataset_row ds on ds."dataset_row_id"=con."dataset_row_id" and ds."state"= 'contributed' 
-	and ds.type=$2 and (ds.type='text' or con.is_system) and (ds.type!='parallel' or con.media->>language=$4)
+	and ds.type=$2 and (ds.type='text' or con.is_system) and (ds.type!='parallel' or con.media->>'language'=$4)
     left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' 
     where  con.action='completed' and ds.media->>'language'=$3 and COALESCE(val.validated_by, '')!= $1
 	group by con."dataset_row_id", ds.media ->> 'data', con.contribution_id 
