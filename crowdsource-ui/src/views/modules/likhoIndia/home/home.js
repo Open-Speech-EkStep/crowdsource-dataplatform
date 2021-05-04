@@ -9,6 +9,7 @@ const {
   setUserNameOnInputFocus,
   setStartRecordingBtnOnClick
 } = require('../common/userDetails');
+const fetch = require('../common/fetch');
 
 const {updateHrsForCards} = require('../common/card')
 const {setLangNavBar} = require('../common/languageNavBar')
@@ -23,6 +24,16 @@ const {
   CURRENT_MODULE,
   MODULE,
 } = require('../common/constants');
+
+const setLanguageList = () => {
+  return fetch('/available-languages/parallel').then((data) => {
+    if (!data.ok) {
+      throw Error(data.statusText || 'HTTP error');
+    } else {
+      return Promise.resolve(data.json());
+    }
+  });
+};
 
 function getStatistics(response) {
   console.log(response)
@@ -120,6 +131,7 @@ const getStatsSummary = function () {
       showByHoursChart();
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
+      response.aggregate_data_count = [{total_languages: "0", total_speakers: "4", total_contributions: "0.000", total_validations: "0.000"}]
       getStatistics(response.aggregate_data_count[0]);
       setDefaultLang();
       if(response.top_languages_by_hours.length === 0) {
@@ -134,60 +146,49 @@ const getStatsSummary = function () {
   });
 }
 
+const addLanguagesIn = function (id, list){
+  const selectBar = document.getElementById(id);
+  let options = '';
+  list.forEach(lang => {
+    options = options.concat(`<option value=${lang}>${lang}</option>`);
+  })
+  selectBar.innerHTML = options;
+}
+
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
   const age = document.getElementById('age');
   const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
-  let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
   toggleFooterPosition();
-  let top_lang = getDefaultLang();
 
-  const $languageNavBar = $('#language-nav-bar');
-  const $sayListenLanguage = $('#say-listen-language');
+  setLanguageList().then(languagePairs => {
+    const {datasetLanguages,contributionLanguages } = languagePairs;
+    addLanguagesIn('from-language', ["Hindi", "English","Marathi"]);
+    const defaultFrom = datasetLanguages[0];
+    addLanguagesIn('to-language', contributionLanguages[defaultFrom]);
+    $('#from-language').on('change', (e) => {
+      const fromLanguage = e.target.value;
+      const dummyData = {"contributionLanguages":{"Hindi":["English","Urdu"],English:["Assamese","Benagali"],Marathi:["Tamil","Telugu"]}}
+      addLanguagesIn('to-language', dummyData.contributionLanguages[fromLanguage]);
+      localStorage.setItem('from-language', fromLanguage);
+    });
 
-  $sayListenLanguage.on('click', (e) => {
-    const targetedDiv = e.target;
-    const language = targetedDiv.getAttribute("value");
-    if (top_lang !== language) {
-      top_lang = language;
-      localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
+    $('#to-language').on('change', (e) => {
+      const toLanguage = e.target.value;
+      localStorage.setItem('to-language', toLanguage);
       localStorage.setItem("i18n", "en");
       window.location.href = "./home.html";
-      setLangNavBar(targetedDiv, language, $languageNavBar);
-      // updateHrsForCards(language);
-      updateLocaleLanguagesDropdown(language);
-    }
+      updateLocaleLanguagesDropdown(toLanguage);
+    });
   })
 
-  $languageNavBar.on('click', (e) => {
-    const targetedDiv = e.target;
-    const language = targetedDiv.getAttribute('value');
-    if (top_lang !== language) {
-      localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-      top_lang = language;
-      const $6th_place = $('#6th_option')
-      const previousActiveDiv = $languageNavBar.find('.active') || $6th_place;
-      previousActiveDiv.removeClass('active');
-      $6th_place.addClass('d-none');
-      targetedDiv.classList.add('active');
-      // updateHrsForCards(language);
-      updateLocaleLanguagesDropdown(language);
-      localStorage.setItem("i18n", "en");
-      window.location.href = "./home.html";
-    }
-  });
-
   $('#start_recording').on('click', () => {
-    sentenceLanguage = top_lang;
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
     setStartRecordingBtnOnClick('./record.html');
   });
 
   $('#start_validating').on('click',()=>{
-    sentenceLanguage = top_lang;
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
     setStartRecordingBtnOnClick('./validator-page.html');
   })
 
@@ -208,7 +209,7 @@ $(document).ready(function () {
   }).catch(err => {
     initializeBlock();
   });
-  onActiveNavbar('likho');
+  onActiveNavbar(MODULE.likho.value);
 });
 
 
