@@ -35,9 +35,9 @@ const cumulativeDataByLanguageAndState = "select state, language, total_speakers
 
 const listLanguages = "select distinct(language) from contributions_and_demo_stats_new where $1:raw;";
 
-const topLanguagesBySpeakerContributions = "select language, total_speakers from language_group_contributions where $1:raw ORDER BY total_speakers DESC LIMIT 5;";
+const topLanguagesBySpeakerContributions = "select language, total_speakers from language_group_contributions where $1:raw ORDER BY total_speakers DESC;";
 
-const topLanguagesByHoursContributed = "select language,ROUND(total_contributions::numeric/3600, 3) as total_contributions from language_group_contributions where $1:raw ORDER BY total_contributions DESC LIMIT 5;";
+const topLanguagesByHoursContributed = "select language,ROUND(total_contributions::numeric/3600, 3) as total_contributions from language_group_contributions where $1:raw ORDER BY total_contributions DESC;";
 
 const lastUpdatedAtQuery = "select max(lastupdated) AT TIME ZONE 'Asia/Kolkata' from audit_load_log;";
 

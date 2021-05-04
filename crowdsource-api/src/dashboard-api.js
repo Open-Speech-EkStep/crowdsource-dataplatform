@@ -214,18 +214,19 @@ const dashboardRoutes = (router) => {
     });
 
     //Optional
-    router.get('/timeline/:type', async (req, res) => {
+    router.get('/timeline/:type', validateMediaTypeInput, async (req, res) => {
         const allowedTimeFrames = ['weekly', 'monthly', 'daily', 'quarterly'];
 
         const language = req.query.language || '';
         const timeframe = req.query.timeframe || 'weekly';
+        const type = req.params.type;
 
         if (!allowedTimeFrames.includes(timeframe.toLowerCase())) {
             res.status(400).send("Timeframe mentioned is invalid");
             return;
         }
 
-        const timelineData = await getTimeline(language, timeframe);
+        const timelineData = await getTimeline(language, timeframe, type);
         let hoursContributed = 0, hoursValidated = 0;
 
         if (timelineData.length !== 0) {
