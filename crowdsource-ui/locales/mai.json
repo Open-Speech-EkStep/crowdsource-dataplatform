@@ -333,5 +333,10 @@
 	"Top 5 most contributed languages": "Top 5 most contributed languages",
 	"Hours transcribed and corrected": "Hours transcribed and corrected",
 	"Total translations": "Total translations",
-	"Images labelled and corrected": "Images labelled and corrected"
+	"Images labelled and corrected": "Images labelled and corrected",
+	"You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>",
+	"Type the text from the following image in the box": "Type the text from the following image in the box",
+	"Add Text": "Add Text",
+	"Is the text from following image captured correctly?": "Is the text from following image captured correctly?",
+	"Captured Text": "Captured Text"
 }
