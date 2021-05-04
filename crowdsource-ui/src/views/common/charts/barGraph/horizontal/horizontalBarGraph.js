@@ -8,9 +8,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
   let response = [...responseData];
   if (xAxisLabel === "total_speakers") {
     response = response.sort((a, b) => Number(a.total_speakers) < Number(b.total_speakers) ? -1 : 1);
-  } else {
-    response = response.sort((a, b) => Number(a.total_contributions) < Number(b.total_contributions) ? -1 : 1);
-  }
+  } 
 
   if (xAxisLabel !== "total_speakers") {
     response.forEach((ele) => {

@@ -1,5 +1,6 @@
 const {constructChart}= require('../common/horizontalBarGraph');
 const { onActiveNavbar } = require('../common/header');
+const {getContributedAndTopLanguage} = require('../common/common');
 const {setSpeakerData} = require('../common/contributionStats');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
 const {
@@ -45,6 +46,7 @@ function showByHoursChart() {
     chartReg["chart"].dispose();
   }
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
+  console.log(topLanguagesByHoursData);
   constructChart(
     JSON.parse(topLanguagesByHoursData),
     "total_contributions",
@@ -112,7 +114,9 @@ const setDefaultLang = function () {
 const getStatsSummary = function () {
   performAPIRequest('/stats/summary/asr')
     .then(response => {
-      localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response.top_languages_by_hours));
+      const data = [{"language":"Hindi","total_contributions":"0.402"},{"language":"English","total_contributions":"0.069"},{"language":"Bengali","total_contributions":"0.033"},{"language":"Marathi","total_contributions":"0.031"},{"language":"Tamil","total_contributions":"0.020"},{"language":"Kannada","total_contributions":"0.017"},{"language":"Gujarati","total_contributions":"0.010"},{"language":"Assamese","total_contributions":"0.007"},{"language":"Malayalam","total_contributions":"0.006"},{"language":"Punjabi","total_contributions":"0.004"},{"language":"Odia","total_contributions":"0.003"},{"language":"Telugu","total_contributions":"0.002"}]
+      const languages = getContributedAndTopLanguage(data);
+      localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
       showByHoursChart();
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
