@@ -47,18 +47,10 @@ const setSpeakerData = function (data, language){
     minutes: validatedMinutes,
     seconds: validatedSeconds
   } = calculateTime(speakersData.validations.toFixed(3)*60*60);
-
-  if (speakersData.languages) {
+ 
     $speakerDataLanguagesValue.text(speakersData.languages);
-    $speakerDataLanguagesWrapper.removeClass('d-none');
-    $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4')
-    $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xl-3');
-  } else {
-    $speakerDataLanguagesWrapper.addClass('d-none');
-    $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xl-3');
-    $speakerContributionData.addClass('col-12 col-md-4 col-lg-4 col-xl-4')
-  }
-
+    $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xs-6');
+    $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6')
   $speakersDataContributionValue.text(`${contributedHours}h ${contributedMinutes}m ${contributedSeconds}s`);
   $speakersDataValidationValue.text(`${validatedHours}h ${validatedMinutes}m ${validatedSeconds}s`);
   $speakersDataSpeakerValue.text(speakersData.speakers);

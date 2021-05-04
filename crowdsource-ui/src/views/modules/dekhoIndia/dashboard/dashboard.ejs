@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
-    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
 </head>
 
@@ -21,6 +21,9 @@
 <div class="container container-fluid supreme-container">
     <div class="row">
         <div class="col-12">
+            <div class="row">
+                <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
+            </div>
             <div class="row">
                 <div class="col-12 col-md-7 col-lg-6">
                     <div class="text-muted mb-2">
@@ -67,14 +70,14 @@
                     <span class="spinner"></span></div>
             </div>
             <div class="row justify-content-center mt-5 mx-0">
-                <div class="col-12 col-lg-5 text-center chart timeline-chart-container">
-                    <%- include ../common/lineGraph.ejs %>
-                </div>
                 <div class="col-12 col-lg-5 mb-3 text-center chart state-chart text-dark p-4">
                     <div class="text-left px-3 pb-3 state-chart-text">
                         <%= __('State Wise distribution') %>
                     </div>
                     <%- include ../common/map.ejs %>
+                </div>
+                <div class="col-12 col-lg-5 text-center chart timeline-chart-container">
+                    <%- include ../common/lineGraph.ejs %>
                 </div>
             </div>
         </div>

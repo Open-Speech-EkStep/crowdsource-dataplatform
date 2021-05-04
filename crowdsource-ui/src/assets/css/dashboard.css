@@ -284,6 +284,10 @@ body.modal-open .supreme-container {
     .contribution-data {
         border-right: 1px dashed #C4C4C4;
     }
+
+.contribution-data:last-child {
+    border: none;
+}
     .no-data-found {
         left: 14%;
     }

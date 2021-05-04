@@ -5,10 +5,6 @@
     border-radius: 8px;
 }
 
-.contribution-data:last-child {
-    border: none;
-}
-
 .contribution-data > p:first-child {
     font-size: 1.5rem;
     font-weight: 700;
@@ -26,6 +22,9 @@
 @media screen and (min-width: 768px) {
     .contribution-data {
         border-right: 1px dashed #C4C4C4;
+    }
+    .contribution-data:last-child {
+        border: none;
     }
 }
 
