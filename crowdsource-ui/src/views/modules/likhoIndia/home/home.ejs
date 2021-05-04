@@ -38,32 +38,23 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedLanguage" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedLanguage">
-                    <div class="col-5 col-lg-5 col-xl-4" id="nav-bar-loader">
+                    <div class="col-5 col-lg-5 col-xl-4 d-none" id="nav-bar-loader">
                         <div><span class="spinner"></span></div>
                     </div>
                     <div class="col-lg-7">
                         <div class="row">
                         <label class="col-2"><%= __('FROM') %></label>
-                        <select class="col-4 btn btn-outline-primary dropdown-toggle h6 w-90 rounded mb-4 p-3" id="language">
-                            <option selected="selected" class="pointer" id="language_button" value="">
-                                <%= __('All Languages') %>
+                        <select class="col-4 btn btn-outline-primary dropdown-toggle h6 w-90 rounded mb-4 p-3" id="from-language">
+                            <option selected="selected" class="pointer" id="language_button" value="Hindi">
+                                <%= __('') %>
                             </option>
-                            <% LANGUAGES.forEach(function(lang) { %>
-                                <option value="<%= lang.value %>">
-                                    <%= lang.text %>
-                                </option>
-                            <% }) %>
+
                         </select>
                         <label class="col-2"><%= __('TO') %></label>
-                        <select class="col-4 btn btn-outline-primary dropdown-toggle h6 w-90 rounded mb-4 p-3" id="language">
-                            <option selected="selected" class="pointer" id="language_button" value="">
-                                <%= __('All Languages') %>
+                        <select class="col-4 btn btn-outline-primary dropdown-toggle h6 w-90 rounded mb-4 p-3" id="to-language">
+                            <option selected="selected" class="pointer" id="language_button" value="English">
+                                <%= __('') %>
                             </option>
-                            <% LANGUAGES.forEach(function(lang) { %>
-                                <option value="<%= lang.value %>">
-                                    <%= lang.text %>
-                                </option>
-                            <% }) %>
                         </select>
                         </div>
                     </div>
@@ -95,7 +86,7 @@
         <div class="col-12 col-md-11 col-lg-11 p-5 ml-lg-auto">
             <div id="bar_charts_container">
                 <h4 class="h4 mb-4">
-                    <%= __('Top 5 most contributed languages') %>
+                    <%= __('Your language and top 3 most contributed languages') %>
                 </h4>
                 <div class="d-flex mb-3">
                     <div name="topLanguageChart" id="hours_chart" value="hours">
