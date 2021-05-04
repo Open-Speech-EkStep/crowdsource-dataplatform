@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../../css/validator-prompt.css">
+    <link rel="stylesheet" type="text/css" href="../../css/likhoIndia/validator-prompt.css">
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
     <link rel="stylesheet" type="text/css" href="../../css/mic-speaker-testing.css">
 </head>
@@ -34,21 +34,33 @@
                     <%- __('Is the translation correct?') %>
                 </div>
             </div>
-            <div class="row justify-content-center mb-5 mb-lg-0 mt-5 mx-1" id="editor-row">
-                <div class="col-lg-4 col-md-5 col-12 original-text">
-                    <label><%- __('ENGLISH')%></label>
-                    <div id="captured-text"></div>
-                </div>
-                <div class="form-group green-border-focus col-lg-4 col-md-5 col-12 m-0" id="edit-text">
+
+            <div class="row justify-content-center mb-5 mb-lg-0 mt-5" id="translation-row">
+                <div class="col-lg-5 col-md-5 col-12 original-text">
                     <label><%- __('HINDI') %></label>
+                    <div id="original-text">
+
+                    </div>
+                </div>
+                <div class="form-group col-lg-5 col-md-5 col-12 m-0 edit-text" style="box-shadow:0 0;border:1px solid #bfbfbf;pointer-events:none">
+                    <label><%- __('ENGLISH') %></label>
                     <div class="arrow-right"></div>
-                    <textarea class="form-control edit-area" id="edit" rows="3"></textarea>
+                    <textarea class="form-control edit-area" id="translate-text" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-5 mb-lg-0 mt-5 d-none" id="editor-row">
+                <div class="form-group col-lg-10 col-md-5 col-12 m-0 p-0" id="textarea-row">
+                    <div class="form-group col-lg-12 col-md-5 col-12 m-0 edit-text" id="edit-text" style="border-radius:12px">
+                        <label><%- __('YOUR EDIT') %></label>
+                        <textarea class="form-control edit-area" id="edit" rows="3"></textarea>
+                    </div>
                 </div>
             </div>
             <div class="row justify-content-center d-none" id="thankyou-text">
                 <div class="col-12 text-center mt-4">
                     <img src="../../img/tick.svg">
-                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for correcting!</label>
+                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for
+                        correcting!</label>
                 </div>
             </div>
             <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-textarea-row">
@@ -80,7 +92,7 @@
                         </text>
                     </svg>
                 </button>
-                <button class="btn align-self-start mb-2 d-none" id="cancel-edit-button">
+                <button class="btn align-self-start mb-2 d-none disabled" id="cancel-edit-button">
                     <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
                         <text x="65" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">

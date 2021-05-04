@@ -1,4 +1,4 @@
-const {DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS} = require('./constants');
+const {DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS,TO_LANGUAGE} = require('./constants');
 const {getLocaleString} = require('./utils');
 
 function validateUserName($userName, $userNameError) {
@@ -47,7 +47,7 @@ const setStartRecordBtnToolTipContent = (userName, $startRecordBtnTooltip) => {
   });
 };
 
-const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
+const setSpeakerDetails = (speakerDetailsKey, $userName) => {
   const speakerDetailsValue = localStorage.getItem(speakerDetailsKey);
   if (speakerDetailsValue) {
     const parsedSpeakerDetails = JSON.parse(speakerDetailsValue);
@@ -99,6 +99,7 @@ const setStartRecordingBtnOnClick = function (url) {
   $startRecordBtn.on('click', () => {
     const userNameValue = $userName.val().trim().substring(0, 12);
     let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    let toLanguage = localStorage.getItem(TO_LANGUAGE);
     const selectedLanguage = ALL_LANGUAGES.find(e => e.value === contributionLanguage);
     if (!selectedLanguage.data) contributionLanguage = DEFAULT_CON_LANGUAGE;
     if (testUserName(userNameValue)) {
@@ -107,6 +108,7 @@ const setStartRecordingBtnOnClick = function (url) {
     const speakerDetails = {
       userName: userNameValue,
       language: contributionLanguage,
+      toLanguage:toLanguage || '',
     };
     localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
     localStorage.setItem(CONTRIBUTION_LANGUAGE, contributionLanguage);

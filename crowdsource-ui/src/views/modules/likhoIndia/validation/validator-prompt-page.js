@@ -58,18 +58,16 @@ const animateCSS = ($element, animationName, callback) => {
 };
 
 function setCapturedText(index) {
-  const $capturedtext = $('#original-text');
   const capturedText = validationSentences[index].contribution;
-  $capturedtext.text(capturedText);
-  animateCSS($capturedtext, 'lightSpeedIn');
-  $('#captured-text').text(capturedText);
   $('#edit').text(capturedText);
 }
 
 function getNextSentence() {
+  console.log("next Sentence", currentIndex)
   if (currentIndex < validationSentences.length - 1) {
     currentIndex++;
-    getImage(validationSentences[currentIndex].dataset_row_id);
+    setSentence(validationSentences[currentIndex].sentence);
+    setTranslation(validationSentences[currentIndex].contribution);
     setCapturedText(currentIndex);
   } else {
     showThankYou();
@@ -156,7 +154,6 @@ function addListeners() {
 
   const likeButton = $("#like_button");
   const needChangeButton = $("#need_change");
-  // const dislikeButton = $("#dislike_button");
   const $skipButton = $('#skip_button');
 
   likeButton.hover(() => {
@@ -185,8 +182,7 @@ function addListeners() {
 
 
   needChangeButton.on('click',()=>{
-    console.log("need change")
-    hideElement($('#textarea-row'));
+    showElement($('#editor-row'));
     openEditor();
     const originalText = validationSentences[currentIndex].contribution;
     $('#captured-text').text(originalText);
@@ -216,7 +212,6 @@ function addListeners() {
     hideElement($('.simple-keyboard'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
-    hideElement($('#audio-player-btn'))
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
     showElement($('#progress-row'))
@@ -262,40 +257,6 @@ function addListeners() {
 }
 
 let validationSentences = [{ sentence: '' }]
-
-function disableSkipButton() {
-  const $skipButton = $('#skip_button');
-  $skipButton.removeAttr('style');
-  disableButton($skipButton)
-}
-
-function enableButton(element) {
-  element.children().removeAttr("opacity")
-  element.removeAttr("disabled")
-}
-
-const getImage = function (contributionId) {
-  disableSkipButton();
-  const source = 'contribute';
-  fetch(`/media-object/${source}/${contributionId}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  }).then((stream) => {
-    stream.arrayBuffer().then((buffer) => {
-      const blob = new Blob([buffer], { type: "audio/wav" });
-      // loadAudio(URL.createObjectURL(blob))
-      const fileReader = new FileReader();
-      fileReader.onload = function (e) {
-        enableButton($('#skip_button'))
-      }
-      fileReader.readAsDataURL(blob);
-    });
-  }).catch((err) => {
-    console.log(err)
-  });
-}
 
 function showThankYou() {
   hideElement($('#textarea-row'));
@@ -374,10 +335,19 @@ const handleSubmitFeedback = function () {
   });
 }
 
+const setSentence = function (sentence){
+  $('#original-text').text(sentence);
+}
+
+const setTranslation = function (translatedText){
+  $('#translate-text').text(translatedText);
+}
+
+
 const initializeComponent = () => {
   const type = 'parallel';
-  const toLanguage = "English"; //can be anything
-  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const toLanguage = localStorage.getItem('to-language');
+  const fromLanguage = localStorage.getItem('from-language');
   fetch(`/contributions/${type}?from=${fromLanguage}&to=${toLanguage}`, {
     credentials: 'include',
     mode: 'cors'
@@ -396,11 +366,14 @@ const initializeComponent = () => {
     validationSentences = result.data;
     window.crowdSource = result.data;
     const validationData = validationSentences[currentIndex];
+    addListeners();
+    console.log(validationSentences)
+
     if (validationData) {
-      getImage(validationData.dataset_row_id );
+      setSentence(validationData.sentence);
+      setTranslation(validationData.contribution);
       setCapturedText(currentIndex);
       updateValidationCount();
-      addListeners();
     }
   }).catch((err) => {
     console.log(err)
@@ -425,16 +398,17 @@ $(document).ready(() => {
   hideElement($('.simple-keyboard'));
   toggleFooterPosition();
   setPageContentHeight();
-  const language = localStorage.getItem('contributionLanguage');
-  if (language) {
-    updateLocaleLanguagesDropdown(language);
+  const fromLanguage = localStorage.getItem('from-language');
+  const toLanguage = localStorage.getItem('to-language');
+  if (fromLanguage && toLanguage) {
+    updateLocaleLanguagesDropdown(fromLanguage);
   }
 
   $("#start_contributing_id").on('click', function () {
     const data = localStorage.getItem("speakerDetails");
     if (data !== null) {
       const speakerDetails = JSON.parse(data);
-      speakerDetails.language = language;
+      speakerDetails.language = fromLanguage;
       localStorage.setItem("speakerDetails", JSON.stringify(speakerDetails));
     }
     location.href = './record.html';

@@ -1,29 +1,27 @@
 const fetch = require('../common/fetch')
-const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE} = require('../common/constants');
+const {
+  setPageContentHeight,
+  toggleFooterPosition,
+  setFooterPosition,
+  updateLocaleLanguagesDropdown,
+  getLocaleString,
+  showElement,
+  hideElement,
+  fetchLocationInfo,
+  reportSentenceOrRecording
+} = require('../common/utils');
+const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS,CURRENT_MODULE, MODULE,TO_LANGUAGE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
-const { setInput } = require('../common/virtualKeyboard');
-
+const {setInput} = require('../common/virtualKeyboard');
 const speakerDetailsKey = 'speakerDetails';
-const ACCEPT_ACTION = 'accept';
-const REJECT_ACTION = 'reject';
-const SKIP_ACTION = 'skip';
-const currentIndexKey = "likhoCurrentIndex";
 
-window.crowdSource = {};
+const currentIndexKey = 'likhoCurrentIndex';
+const sentencesKey = 'likhoSentencesKey';
+let localeStrings;
+let validationSentences = [{sentence: ''}]
 
-function getValue(number, maxValue) {
-  return number < 0
-    ? 0
-    : number > maxValue
-      ? maxValue
-      : number;
-}
 
-function getCurrentIndex(lastIndex) {
-  const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
-  return getValue(currentIndexInStorage, lastIndex);
-}
+window.likhoIndia = {};
 
 function uploadToServer(cb) {
   const fd = new FormData();
@@ -31,11 +29,10 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  crowdSource.sentences = validationSentences;
-  fd.append('userInput', crowdSource.editedText);
+  fd.append('userInput', likhoIndia.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localSpeakerDataParsed.language);
-  fd.append('sentenceId', crowdSource.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', likhoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fetch('/store', {
@@ -48,6 +45,7 @@ function uploadToServer(cb) {
     .then((result) => {
     })
     .catch((err) => {
+
       console.log(err);
     })
     .then((finalRes) => {
@@ -56,124 +54,82 @@ function uploadToServer(cb) {
       }
     });
 }
-let currentIndex = 0
-let progressCount = 0, validationCount = 0;
+
+let currentIndex;
+let progressCount = 0;
 
 function getNextSentence() {
-  if (currentIndex < validationSentences.length - 1) {
+  console.log("inside sene",currentIndex)
+  if (currentIndex < likhoIndia.sentences.length - 1) {
     currentIndex++;
-    getImage(validationSentences[currentIndex].dataset_row_id);
+    updateProgressBar(currentIndex);
+    setSentence(likhoIndia.sentences[currentIndex].media_data);
+    localStorage.setItem(currentIndexKey, currentIndex);
   } else {
+    const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
+    Object.assign(sentencesObj, { sentences: [] });
+    localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
+    localStorage.setItem(currentIndexKey, currentIndex);
     showThankYou();
   }
-}
-
-const updateDecisionButton = (button, colors) => {
-  const children = button.children().children();
-  children[0].setAttribute("fill", colors[0]);
-  children[1].setAttribute("fill", colors[1]);
-  children[2].setAttribute("fill", colors[2]);
 }
 
 const updateValidationCount = () => {
   const currentSentenceLbl = document.getElementById('currentSentenceLbl');
   currentSentenceLbl.innerText = progressCount;
   const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-  totalSentencesLbl.innerText = validationSentences.length;
+  totalSentencesLbl.innerText = likhoIndia.sentences.length;
 }
 
-const updateProgressBar = () => {
+const updateProgressBar = (index) => {
   const $progressBar = $("#progress_bar");
-  progressCount++;
-  const multiplier = 10 * (10 / validationSentences.length);
-  $progressBar.width(progressCount * multiplier + '%');
-  $progressBar.prop('aria-valuenow', progressCount);
-  updateValidationCount();
+  const multiplier = 10 * (10 / likhoIndia.sentences.length);
+  $progressBar.width(index * multiplier + '%');
+  $progressBar.prop('aria-valuenow', index);
+  setCurrentSentenceIndex(index);
 }
 
-function disableButton(button) {
-  button.children().attr("opacity", "50%");
-  button.attr("disabled", "disabled");
+const closeEditor = function () {
+  hideElement($('.simple-keyboard'));
 }
 
-function skipValidation(action) {
-  if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
-    validationCount++;
-  }
-  const sentenceId = validationSentences[currentIndex].dataset_row_id
-  fetch(`/validate/${sentenceId}/${action}`, {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    body: JSON.stringify({
-      sentenceId: sentenceId,
-      state: localStorage.getItem('state_region') || "",
-      country: localStorage.getItem('country') || ""
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then(
-      (data) => {
-        if (!data.ok) {
-          throw Error(data.statusText || 'HTTP error');
-        }
-      });
-}
-
-const openEditor = function (){
+const openEditor = function () {
   showElement($('.simple-keyboard'));
 }
 
-const closeEditor = function (){
-  hideElement($('.simple-keyboard'));
+
+const translationLanguage = localStorage.getItem(TO_LANGUAGE);
+showKeyboard("hindi");
+
+function markContributionSkipped() {
+  const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
+
+  const reqObj = {
+    sentenceId: likhoIndia.sentences[currentIndex].dataset_row_id,
+    userName: speakerDetails.userName
+  };
+  fetch('/skip', {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(reqObj),
+  })
+    .then((res) => res.json())
+    .then((result) => {
+    })
+    .catch((err) => {
+      console.log(err);
+    })
 }
 
 function addListeners() {
 
-  const likeButton = $("#like_button");
-  const needChangeButton = $("#need_change");
-  // const dislikeButton = $("#dislike_button");
   const $skipButton = $('#skip_button');
 
-  likeButton.hover(() => {
-      updateDecisionButton(likeButton, ["#bfddf5", "", "#007BFF"]);
-    },
-    () => {
-      updateDecisionButton(likeButton, ["white", "", "#343A40"]);
-    });
-
-  needChangeButton.hover(() => {
-      updateDecisionButton(needChangeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-      $("#textarea-row .prompt").addClass('hover-edit');
-    },
-    () => {
-      updateDecisionButton(needChangeButton, ["white", "#007BFF", "#343A40"]);
-      $("#textarea-row .prompt").removeClass('hover-edit');
-    });
-
-  needChangeButton.mousedown(() => {
-    updateDecisionButton(needChangeButton, ["#007BFF", "white", "white"]);
-  });
-
-  likeButton.mousedown(() => {
-    updateDecisionButton(likeButton, ["#007BFF", "", "white"]);
-  });
-
-
-  needChangeButton.on('click',()=>{
-    console.log("need change")
-    hideElement($('#textarea-row'));
-    openEditor();
-    const originalText = validationSentences[currentIndex].contribution;
-    $('#captured-text').text(originalText);
-    $('#edit').val('');
-    $('#edit').val(originalText);
-    setInput(originalText);
-  })
-
-  $("#edit").focus(function(){
+  $("#edit").focus(function () {
     hideElement($('#progress-row'));
     showElement($('.simple-keyboard'));
     const $cancelEditButton = $('#cancel-edit-button');
@@ -185,8 +141,10 @@ function addListeners() {
     $("#edit").val("");
     setInput("");
     showElement($('#progress-row'))
+    const $cancelEditButton = $('#cancel-edit-button');
+    $cancelEditButton.attr('disabled',true);
     const $submitEditButton = $('#submit-edit-button');
-    $submitEditButton.attr('disabled',true);
+    $submitEditButton.attr('disabled', true);
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#D7D7D7');
     closeEditor();
@@ -197,48 +155,50 @@ function addListeners() {
     hideElement($('.simple-keyboard'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
+    hideElement($('#audio-player-btn'))
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
-    $("#edit").css('pointer-events','none');
-    $("#cancel-edit-button").attr("disabled",true);
+    likhoIndia.editedText = $("#edit").val();
+    $("#edit").css('pointer-events', 'none');
+    $("#cancel-edit-button").attr("disabled", true);
     const $submitEditButton = $('#submit-edit-button');
-    $submitEditButton.attr('disabled',true);
+    $submitEditButton.attr('disabled', true);
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#progress-row'))
-    crowdSource.editedText = $("#edit").val();
-    uploadToServer();
-    $("#edit").css('pointer-events','none');
-    setTimeout(()=>{
-      hideElement($('#thankyou-text'));
-      showElement($('#cancel-edit-button'));
-      showElement($('#submit-edit-button'))
-      showElement($('#skip_button'))
-      $("#edit").css('pointer-events','unset');
-      $("#edit").val("");
-      closeEditor();
-      updateProgressBar();
-      getNextSentence();
-    }, 2000)
+    try{
+      uploadToServer();
+      setTimeout(() => {
+        hideElement($('#thankyou-text'));
+        showElement($('#cancel-edit-button'));
+        showElement($('#submit-edit-button'))
+        showElement($('#skip_button'))
+        $("#edit").css('pointer-events', 'unset');
+        $("#edit").val("");
+        closeEditor();
+        getNextSentence();
+      }, 2000)
+    } catch (e){
+      console.log(e)
+    }
+
   })
 
-  likeButton.on('click', () => {
-    skipValidation(ACCEPT_ACTION)
-    updateProgressBar();
-    getNextSentence();
-  })
 
   $skipButton.on('click', () => {
+    if($('#pause').hasClass('d-none')){
+      $('#pause').trigger('click');
+    }
     $('#edit').val("");
     setInput("");
-    $('#submit-edit-button').attr('disabled',true);
-    skipValidation(SKIP_ACTION);
-    updateProgressBar();
+    $('#submit-edit-button').attr('disabled', true);
+    markContributionSkipped();
     getNextSentence();
-    showElement($('#textarea-row'));
+    showElement($('#sentences-row'));
     showElement($('#progress-row'));
-    $("#cancel-edit-button").attr("disabled",true);
+    $("#cancel-edit-button").attr("disabled", true);
     closeEditor();
+
   })
 
   $skipButton.hover(() => {
@@ -252,47 +212,6 @@ function addListeners() {
   })
 }
 
-let validationSentences = [{ sentence: '' }]
-
-const setDekhoImage = function (audioLink) {
-  $('#view-image').attr('src', audioLink)
-};
-
-function disableSkipButton() {
-  const $skipButton = $('#skip_button');
-  $skipButton.removeAttr('style');
-  disableButton($skipButton)
-}
-
-function enableButton(element) {
-  element.children().removeAttr("opacity")
-  element.removeAttr("disabled")
-}
-
-const getImage = function (contributionId) {
-  // hideAudioRow();
-  disableSkipButton();
-  const source = 'contribute';
-  fetch(`/media-object/${source}/${contributionId}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  }).then((stream) => {
-    stream.arrayBuffer().then((buffer) => {
-      const blob = new Blob([buffer], { type: "audio/wav" });
-      // loadAudio(URL.createObjectURL(blob))
-      const fileReader = new FileReader();
-      fileReader.onload = function (e) {
-        setDekhoImage(e.target.result);
-        enableButton($('#skip_button'))
-      }
-      fileReader.readAsDataURL(blob);
-    });
-  }).catch((err) => {
-    console.log(err)
-  });
-}
 
 function showThankYou() {
   window.location.href = './thank-you.html';
@@ -300,11 +219,11 @@ function showThankYou() {
 
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
-  hideElement($('#textarea-row'));
+  hideElement($('#sentences-row'));
   hideElement($('#audio-row'))
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
-  showElement($('#no-textarea-row'))
+  showElement($('#no-sentences-row'))
   hideElement($('#skip_btn_row'));
   hideElement($('#validation-container'));
   hideElement($('#report_btn'));
@@ -314,7 +233,6 @@ function showNoSentencesMessage() {
   hideElement($('#thankyou-text'));
   hideElement($('.simple-keyboard'));
   $("#validation-container").removeClass("validation-container");
-  $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
 }
 
 const handleSubmitFeedback = function () {
@@ -323,7 +241,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: validationSentences[currentIndex].contribution_id,
+    sentenceId: likhoIndia.sentences[currentIndex].contribution_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -343,67 +261,40 @@ const handleSubmitFeedback = function () {
   });
 }
 
-const initializeComponent = () => {
-  const type = 'ocr';
-  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  fetch(`/media/${type}`, {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    body: JSON.stringify({
-      userName: "",
-      language: fromLanguage,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((data) => {
-      if (!data.ok) {
-        throw Error(data.statusText || 'HTTP error');
-      } else {
-        return data.json();
-      }
-    }).then((result) => {
-    // if (result.data.length === 0) {
-    //   showNoSentencesMessage();
-    //   return;
-    // }
-    validationSentences = result.data;
-    window.crowdSource = result.data;
-    const validationData = validationSentences[currentIndex];
-    if (validationData) {
-      getImage(validationData.dataset_row_id );
-      updateValidationCount();
-      addListeners();
-    }
-  }).catch((err) => {
-    console.log(err)
-  });
+const setSentence = function (text){
+    $('#captured-text').text(text);
+    $('#edit').val('');
+    setInput(text);
 }
 
-const getLocationInfo = () => {
-  fetchLocationInfo().then(res => {
-    return res.json()
-  }).then(response => {
-    localStorage.setItem("state_region", response.regionName);
-    localStorage.setItem("country", response.country);
-  }).catch(console.log);
+function getValue(number, maxValue) {
+  return number < 0
+    ? 0
+    : number > maxValue
+      ? maxValue
+      : number;
+}
+
+function getCurrentIndex(lastIndex) {
+  const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
+  return getValue(currentIndexInStorage, lastIndex);
+}
+
+const setCurrentSentenceIndex = (index) => {
+  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
+  currentSentenceLbl.innerText = index;
+}
+
+const setTotalSentenceIndex = (index) => {
+  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
+  totalSentencesLbl.innerText = index;
 }
 
 let selectedReportVal = '';
-$(document).ready(() => {
-  localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  setFooterPosition();
-  showKeyboard(contributionLanguage.toLowerCase());
-  hideElement($('.simple-keyboard'));
-  toggleFooterPosition();
-  setPageContentHeight();
-  const language = localStorage.getItem('contributionLanguage');
-  if (language) {
-    updateLocaleLanguagesDropdown(language);
-  }
+const initialize = function () {
+  const totalItems = likhoIndia.sentences.length;
+  currentIndex = getCurrentIndex(totalItems - 1);
+  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
   $("#start_contributing_id").on('click', function () {
     const data = localStorage.getItem("speakerDetails");
@@ -412,7 +303,7 @@ $(document).ready(() => {
       speakerDetails.language = language;
       localStorage.setItem("speakerDetails", JSON.stringify(speakerDetails));
     }
-    location.href = './record.html';
+    location.href = './home.html';
   });
 
   const $reportModal = $("#report_sentence_modal");
@@ -436,10 +327,159 @@ $(document).ready(() => {
     $("#report_submit_id").attr("disabled", false);
   });
 
-  getLocationInfo();
-  initializeComponent();
+  const translation = likhoIndia.sentences[currentIndex];
+  addListeners();
+
+  if (translation) {
+    setSentence(translation.media_data);
+    setCurrentSentenceIndex(currentIndex);
+    setTotalSentenceIndex(totalItems);
+  }
+};
+
+function executeOnLoad() {
+  toggleFooterPosition();
+  setPageContentHeight();
+  setFooterPosition();
+  const $validationInstructionModal = $("#validation-instruction-modal");
+  const $errorModal = $('#errorModal');
+  const $loader = $('#loader');
+  const $pageContent = $('#page-content');
+  const $navUser = $('#nav-user');
+  const $navUserName = $navUser.find('#nav-username');
+  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const toLanguage = localStorage.getItem(TO_LANGUAGE);
+  localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+
+  if (fromLanguage && toLanguage) {
+    updateLocaleLanguagesDropdown(fromLanguage);
+  }
+
+  fetchLocationInfo().then(res => {
+    return res.json()
+  }).then(response => {
+    localStorage.setItem("state_region", response.regionName);
+    localStorage.setItem("country", response.country);
+  }).catch(console.log);
+  try {
+    const localSpeakerData = localStorage.getItem(speakerDetailsKey);
+    const localSpeakerDataParsed = JSON.parse(localSpeakerData);
+    const localSentences = localStorage.getItem(sentencesKey);
+    const localSentencesParsed = JSON.parse(localSentences);
+
+    setPageContentHeight();
+    $("#instructions_close_btn").on("click", function () {
+      $validationInstructionModal.addClass("d-none");
+      setFooterPosition();
+    })
+
+    $errorModal.on('show.bs.modal', function () {
+      $validationInstructionModal.addClass("d-none");
+      setFooterPosition();
+
+    });
+    $errorModal.on('hidden.bs.modal', function () {
+      location.href = './home.html';
+    });
+
+    if (!localSpeakerDataParsed) {
+      location.href = './home.html';
+      return;
+    }
+
+    $navUser.removeClass('d-none');
+    $('#nav-login').addClass('d-none');
+    $navUserName.text(localSpeakerDataParsed.userName);
+    const isExistingUser = localSentencesParsed &&
+      localSentencesParsed.userName === localSpeakerDataParsed.userName
+      &&
+      localSentencesParsed.language === localSpeakerDataParsed.language;
+
+    if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === fromLanguage && localSentencesParsed.toLanguage === toLanguage) {
+      $loader.hide();
+      $pageContent.removeClass('d-none');
+      setFooterPosition();
+      likhoIndia.sentences = localSentencesParsed.sentences;
+      initialize();
+    } else {
+      localStorage.removeItem(currentIndexKey);
+      const type = 'parallel';
+      fetch(`/media/${type}`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        body: JSON.stringify({
+          userName: localSpeakerDataParsed.userName,
+          language: fromLanguage,
+          toLanguage: toLanguage,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((data) => {
+          if (!data.ok) {
+            showNoSentencesMessage();
+            throw Error(data.statusText || 'HTTP error');
+          } else {
+            return data.json();
+          }
+        })
+        .then((sentenceData) => {
+          if (sentenceData.data.length === 0) {
+            showNoSentencesMessage();
+            return;
+          }
+
+          if (!isExistingUser) {
+            $validationInstructionModal.removeClass("d-none");
+            setFooterPosition();
+          }
+          $pageContent.removeClass('d-none');
+          setFooterPosition();
+
+          likhoIndia.sentences = sentenceData.data;
+          $loader.hide();
+          localStorage.setItem(
+            sentencesKey,
+            JSON.stringify({
+              userName: localSpeakerDataParsed.userName,
+              sentences: sentenceData.data,
+              language: fromLanguage,
+              toLanguage:toLanguage
+            })
+          );
+          setFooterPosition();
+          initialize();
+        })
+        .catch((err) => {
+          console.log(err);
+          $errorModal.modal('show');
+        })
+        .then(() => {
+          $loader.hide();
+        });
+    }
+  } catch (err) {
+    console.log(err);
+    $errorModal.modal('show');
+  }
+}
+
+
+$(document).ready(() => {
+  localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
+  hideElement($('.simple-keyboard'));
+  getLocaleString().then(() => {
+    executeOnLoad();
+  }).catch(() => {
+    executeOnLoad();
+  });
 });
+
 
 module.exports = {
   addListeners,
 };
+
+
