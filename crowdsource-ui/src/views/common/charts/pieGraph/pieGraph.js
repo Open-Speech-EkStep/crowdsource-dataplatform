@@ -25,7 +25,7 @@ function getAgeGroupData(data, key) {
 
 function buildGraphs(language, timeframe) {
   Promise.all([
-    fetch(`/stats/contributions/age?language=${language}`)
+    fetch(`/stats/contributions/age/text?language=${language}`)
   ]).then(function (responses) {
     return Promise.all(responses.map(function (response) {
         return response.json();

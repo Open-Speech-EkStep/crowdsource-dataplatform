@@ -251,7 +251,7 @@ const updateShareContent = function (language, rank) {
 };
 
 const getLanguageStats = function () {
-  fetch("/stats/summary?aggregateDataByLanguage=true")
+  fetch("/stats/summary/text?aggregateDataByLanguage=true")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {

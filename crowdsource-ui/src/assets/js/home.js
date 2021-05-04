@@ -140,7 +140,7 @@ const clearLocalStorage = function () {
 }
 
 const getStatsSummary = function () {
-    performAPIRequest('/stats/summary')
+    performAPIRequest('/stats/summary/text')
         .then(response => {
             drawMap({data: response.aggregate_data_by_state});
             localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response.top_languages_by_hours));

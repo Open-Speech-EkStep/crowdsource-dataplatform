@@ -10,7 +10,7 @@ let languageToRecord = '';
 
 const fetchDetail = (language) => {
     const byLanguage = language ? true : false;
-    const url = language ? '/aggregate-data-count?byLanguage=true' : '/aggregate-data-count'
+    const url = language ? '/aggregate-data-count/text?byLanguage=true' : '/aggregate-data-count/text'
     return fetch(url).then((data) => {
         if (!data.ok) {
             throw Error(data.statusText || 'HTTP error');

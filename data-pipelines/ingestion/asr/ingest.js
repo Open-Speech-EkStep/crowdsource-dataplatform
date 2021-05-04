@@ -51,7 +51,7 @@ const ingest2 = async (datasetRowIds, client, datset_base_path, language, dataRo
     values ${values} RETURNING contribution_id`
 
     const contributions_result = await client.query(`${insert_rows}`)
-    const contributions_ids = contributions_result.rows.map(row => row.master_dataset_id);
+    const contributions_ids = contributions_result.rows.map(row => row.contribution_id);
     return contributions_ids
 }
 
