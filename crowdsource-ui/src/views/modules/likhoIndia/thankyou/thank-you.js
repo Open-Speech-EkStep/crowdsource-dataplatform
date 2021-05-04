@@ -18,10 +18,10 @@ const {
 
 const {constructChart} = require('../common/horizontalBarGraph');
 
-const sentencesKey = 'sunoSentencesKey';
+const sentencesKey = 'likhoSentencesKey';
 const totalSentence = 5;
 
-const CURRENT_INDEX = "sunoCurrentIndex";
+const CURRENT_INDEX = "likhoCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 
 const getFormattedTime = (totalSeconds) => {
@@ -236,15 +236,6 @@ function executeOnLoad() {
     }
     showByHoursChart();
     getLanguageStats();
-    localStorage.setItem(CURRENT_INDEX, 0);
-    localStorage.setItem(
-      sentencesKey,
-      JSON.stringify({
-        userName: localSpeakerDataParsed.userName,
-        sentences: [],
-        language: contributionLanguage,
-      })
-    );
   }
 }
 

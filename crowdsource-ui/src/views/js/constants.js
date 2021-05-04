@@ -8,6 +8,7 @@ const AGGREGATED_DATA_BY_LANGUAGE = "aggregateDataCountByLanguage";
 const LOCALE_STRINGS = 'localeString';
 const SELECTED_MODULE = "selectedModule";
 const CONTRIBUTION_LANGUAGE = "contributionLanguage";
+const TO_LANGUAGE = "to-language";
 const SPEAKER_DETAILS_KEY = 'speakerDetails';
 const ALL_LANGUAGES = [
   {value: "Assamese", id: "as", text: "অসমীয়া", hasLocaleText: true, data: true},
@@ -33,7 +34,12 @@ const BADGES = {
 
 const CURRENT_MODULE = 'module';
 
-const MODULE = {bolo: {url: 'boloIndia' , value:'bolo'}, suno: {url: 'sunoIndia',value:'suno'}, likho: {url: 'likhoIndia',value:'likho'}, dekho: {url: 'dekhoIndia',value:'dekho'}};
+const MODULE = {
+  bolo: {url: 'boloIndia', value: 'bolo'},
+  suno: {url: 'sunoIndia', value: 'suno'},
+  likho: {url: 'likhoIndia', value: 'likho'},
+  dekho: {url: 'dekhoIndia', value: 'dekho'}
+};
 
 module.exports = {
   DEFAULT_CON_LANGUAGE,
@@ -48,5 +54,5 @@ module.exports = {
   CONTRIBUTION_LANGUAGE,
   BADGES,
   SPEAKER_DETAILS_KEY,
-  SELECTED_MODULE,MODULE,CURRENT_MODULE
+  SELECTED_MODULE, MODULE, CURRENT_MODULE, TO_LANGUAGE
 }
