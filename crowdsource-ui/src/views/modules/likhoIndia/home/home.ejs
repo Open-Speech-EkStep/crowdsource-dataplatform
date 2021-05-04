@@ -30,10 +30,49 @@
         <%- include('../common/moduleIntro.ejs',{name:'LIKHO India',intro:'Help your language by translating text'}); %>
     </div>
     <div class="row">
-        <%- include ../common/languageNavBar.ejs %>
+        <div class="col-12 col-md-8 col-lg-10 offset-lg-1 mt-4">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white px-4" id="contribution_lang_navbar">
+                <div class="mx-2">
+                    <%= __('Select the language Pair for voluntary contribution') %>:
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedLanguage" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedLanguage">
+                    <div class="col-5 col-lg-5 col-xl-4" id="nav-bar-loader">
+                        <div><span class="spinner"></span></div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="row">
+                        <label class="col-2"><%= __('FROM') %></label>
+                        <select class="col-4 btn btn-outline-primary dropdown-toggle h6 w-90 rounded mb-4 p-3" id="language">
+                            <option selected="selected" class="pointer" id="language_button" value="">
+                                <%= __('All Languages') %>
+                            </option>
+                            <% LANGUAGES.forEach(function(lang) { %>
+                                <option value="<%= lang.value %>">
+                                    <%= lang.text %>
+                                </option>
+                            <% }) %>
+                        </select>
+                        <label class="col-2"><%= __('TO') %></label>
+                        <select class="col-4 btn btn-outline-primary dropdown-toggle h6 w-90 rounded mb-4 p-3" id="language">
+                            <option selected="selected" class="pointer" id="language_button" value="">
+                                <%= __('All Languages') %>
+                            </option>
+                            <% LANGUAGES.forEach(function(lang) { %>
+                                <option value="<%= lang.value %>">
+                                    <%= lang.text %>
+                                </option>
+                            <% }) %>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
     <div class="m-auto row justify-content-center mt-lg-5 mx-lg-5">
-        <%- include('../common/cards.ejs',{left:{h1:"Translate",h2:"Translate and type the text","p1":"Contribute your voice to create an open data repository of Indian languages",img:"../../img/translate.svg"},right:{h1:"Validate",h2:"Correct the translation","p1":"Help us by validating the recordings that others have contributed",img:"../../img/validate.svg"}}); %>
+        <%- include('../common/cards.ejs',{left:{h1:"Translate",h2:"Translate and type the text","p1":"",img:"../../img/translate.svg"},right:{h1:"Validate",h2:"Correct the translation","p1":"",img:"../../img/validate.svg"}}); %>
     </div>
     <div class="row">
         <div class="col-12 col-md-11 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
@@ -46,7 +85,7 @@
                         <div><span class="spinner"></span></div>
                     </div>
                     <div class="row text-center contribution-details" id="contribution-details">
-                        <%- include('../common/contributionStats.ejs',{labels :['Language pairs','People participated','Translations done','Translations corrected']})%>
+                        <%- include('../common/contributionStats.ejs',{labels :['Language pairs','People participated','Translations done','Translations corrected']}) %>
                     </div>
                 </div>
             </div>

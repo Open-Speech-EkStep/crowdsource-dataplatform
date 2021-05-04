@@ -1,5 +1,5 @@
 const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
-const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE } = require("./constants");
+const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE ,CURRENT_MODULE,MODULE} = require("./constants");
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');
@@ -23,8 +23,9 @@ const changeLocale = function (locale) {
     if (!currentPage) {
         currentPage = "home.html";
     }
+    const module = localStorage.getItem(CURRENT_MODULE);
     localStorage.setItem("i18n", locale);
-    location.href = `/${locale}/${currentPage}`;
+    location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
 }
 
 function checkCookie() {

@@ -18,7 +18,8 @@ const {
   TOP_LANGUAGES_BY_SPEAKERS,
   AGGREGATED_DATA_BY_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
-  SELECTED_MODULE
+  SELECTED_MODULE,
+  CURRENT_MODULE
 } = require('../common/constants');
 
 function getStatistics(response) {
@@ -197,6 +198,7 @@ function initializeBlock() {
 }
 
 $(document).ready(function () {
+  localStorage.setItem(CURRENT_MODULE,'suno');
   getLocaleString().then(()=>{
     initializeBlock();
   }).catch(err => {

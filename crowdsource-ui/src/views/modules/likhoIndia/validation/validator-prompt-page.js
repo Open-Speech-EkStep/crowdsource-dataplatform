@@ -1,6 +1,6 @@
 const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 const { setInput } = require('../common/virtualKeyboard');
 
@@ -132,7 +132,7 @@ function skipValidation(action) {
 }
 
 const openEditor = function (){
-const $editorRow = $('#editor-row');
+  const $editorRow = $('#editor-row');
   $editorRow.removeClass('d-none')
   // $('#original-text').text('Original Text');
   hideElement($("#need_change"));
@@ -263,10 +263,6 @@ function addListeners() {
 
 let validationSentences = [{ sentence: '' }]
 
-const setDekhoImage = function (audioLink) {
-  $('#view-image').attr('src', audioLink)
-};
-
 function disableSkipButton() {
   const $skipButton = $('#skip_button');
   $skipButton.removeAttr('style');
@@ -279,7 +275,6 @@ function enableButton(element) {
 }
 
 const getImage = function (contributionId) {
-  // hideAudioRow();
   disableSkipButton();
   const source = 'contribute';
   fetch(`/media-object/${source}/${contributionId}`, {
@@ -293,7 +288,6 @@ const getImage = function (contributionId) {
       // loadAudio(URL.createObjectURL(blob))
       const fileReader = new FileReader();
       fileReader.onload = function (e) {
-        setDekhoImage(e.target.result);
         enableButton($('#skip_button'))
       }
       fileReader.readAsDataURL(blob);
@@ -381,8 +375,8 @@ const handleSubmitFeedback = function () {
 }
 
 const initializeComponent = () => {
-  const type = 'ocr';
-  const toLanguage = ""; //can be anything
+  const type = 'parallel';
+  const toLanguage = "English"; //can be anything
   const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   fetch(`/contributions/${type}?from=${fromLanguage}&to=${toLanguage}`, {
     credentials: 'include',
@@ -424,7 +418,7 @@ const getLocationInfo = () => {
 
 let selectedReportVal = '';
 $(document).ready(() => {
-  localStorage.setItem(CURRENT_MODULE,'dekho');
+  localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   setFooterPosition();
   showKeyboard(contributionLanguage.toLowerCase());

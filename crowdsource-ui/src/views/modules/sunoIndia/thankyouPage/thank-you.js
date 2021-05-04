@@ -4,7 +4,8 @@ const {
   HOUR_IN_SECONDS,
   LOCALE_STRINGS,
   CONTRIBUTION_LANGUAGE,
-  TOP_LANGUAGES_BY_HOURS
+  TOP_LANGUAGES_BY_HOURS,
+  CURRENT_MODULE,
 } = require("../common/constants");
 const {
   setPageContentHeight,
@@ -264,6 +265,9 @@ function downloadPdf(badgeType) {
 }
 
 $(document).ready(function () {
+
+  localStorage.setItem(CURRENT_MODULE,'suno');
+
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });

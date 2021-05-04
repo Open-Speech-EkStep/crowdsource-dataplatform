@@ -1,6 +1,6 @@
 const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 const { setInput } = require('../common/virtualKeyboard');
 
@@ -8,8 +8,22 @@ const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
+const currentIndexKey = "likhoCurrentIndex";
 
 window.crowdSource = {};
+
+function getValue(number, maxValue) {
+  return number < 0
+    ? 0
+    : number > maxValue
+      ? maxValue
+      : number;
+}
+
+function getCurrentIndex(lastIndex) {
+  const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
+  return getValue(currentIndexInStorage, lastIndex);
+}
 
 function uploadToServer(cb) {
   const fd = new FormData();
@@ -42,35 +56,13 @@ function uploadToServer(cb) {
       }
     });
 }
-
-let currentIndex = 0, progressCount = 0, validationCount = 0;
-
-const animateCSS = ($element, animationName, callback) => {
-  $element.addClass(`animated ${animationName}`);
-
-  function handleAnimationEnd() {
-    $element.removeClass(`animated ${animationName}`);
-    $element.off('animationend');
-    if (typeof callback === 'function') callback();
-  }
-
-  $element.on('animationend', handleAnimationEnd);
-};
-
-function setCapturedText(index) {
-  const $capturedtext = $('#original-text');
-  const capturedText = validationSentences[index].contribution;
-  $capturedtext.text(capturedText);
-  animateCSS($capturedtext, 'lightSpeedIn');
-  $('#captured-text').text(capturedText);
-  $('#edit').text(capturedText);
-}
+let currentIndex = 0
+let progressCount = 0, validationCount = 0;
 
 function getNextSentence() {
   if (currentIndex < validationSentences.length - 1) {
     currentIndex++;
     getImage(validationSentences[currentIndex].dataset_row_id);
-    setCapturedText(currentIndex);
   } else {
     showThankYou();
   }
@@ -109,8 +101,7 @@ function skipValidation(action) {
     validationCount++;
   }
   const sentenceId = validationSentences[currentIndex].dataset_row_id
-  const contribution_id = validationSentences[currentIndex].contribution_id
-  fetch(`/validate/${contribution_id}/${action}`, {
+  fetch(`/validate/${sentenceId}/${action}`, {
     method: 'POST',
     credentials: 'include',
     mode: 'cors',
@@ -132,23 +123,10 @@ function skipValidation(action) {
 }
 
 const openEditor = function (){
-const $editorRow = $('#editor-row');
-  $editorRow.removeClass('d-none')
-  // $('#original-text').text('Original Text');
-  hideElement($("#need_change"));
-  hideElement($("#like_button"));
-  showElement($('#cancel-edit-button'))
-  showElement($('#submit-edit-button'))
+  showElement($('.simple-keyboard'));
 }
 
 const closeEditor = function (){
-  const $editorRow = $('#editor-row');
-  hideElement($editorRow);
-  showElement($("#need_change"));
-  showElement($("#skip_button"));
-  showElement($("#like_button"));
-  hideElement($('#cancel-edit-button'))
-  hideElement($('#submit-edit-button'))
   hideElement($('.simple-keyboard'));
 }
 
@@ -196,18 +174,21 @@ function addListeners() {
   })
 
   $("#edit").focus(function(){
-    const $submitEditButton = $("#submit-edit-button");
-    $submitEditButton.removeAttr('disabled');
-    const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#007BFF');
     hideElement($('#progress-row'));
     showElement($('.simple-keyboard'));
+    const $cancelEditButton = $('#cancel-edit-button');
+    $cancelEditButton.removeAttr('disabled');
+    openEditor();
   });
 
   $('#cancel-edit-button').on('click', () => {
-    showElement($('#textarea-row'));
-    showElement($('#progress-row'));
+    $("#edit").val("");
     setInput("");
+    showElement($('#progress-row'))
+    const $submitEditButton = $('#submit-edit-button');
+    $submitEditButton.attr('disabled',true);
+    const children = $submitEditButton.children().children();
+    children[0].setAttribute("fill", '#D7D7D7');
     closeEditor();
   })
 
@@ -216,21 +197,28 @@ function addListeners() {
     hideElement($('.simple-keyboard'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
-    hideElement($('#audio-player-btn'))
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
+    $("#edit").css('pointer-events','none');
+    $("#cancel-edit-button").attr("disabled",true);
+    const $submitEditButton = $('#submit-edit-button');
+    $submitEditButton.attr('disabled',true);
+    const children = $submitEditButton.children().children();
+    children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#progress-row'))
     crowdSource.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events','none');
     setTimeout(()=>{
-      closeEditor();
-      showElement($('#progress-row'))
-      showElement($('#textarea-row'));
       hideElement($('#thankyou-text'));
+      showElement($('#cancel-edit-button'));
+      showElement($('#submit-edit-button'))
+      showElement($('#skip_button'))
+      $("#edit").css('pointer-events','unset');
+      $("#edit").val("");
+      closeEditor();
       updateProgressBar();
       getNextSentence();
-      $("#edit").css('pointer-events','unset');
     }, 2000)
   })
 
@@ -241,12 +229,15 @@ function addListeners() {
   })
 
   $skipButton.on('click', () => {
-    $('#pause').trigger('click');
-    skipValidation(SKIP_ACTION)
+    $('#edit').val("");
+    setInput("");
+    $('#submit-edit-button').attr('disabled',true);
+    skipValidation(SKIP_ACTION);
     updateProgressBar();
+    getNextSentence();
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
-    getNextSentence();
+    $("#cancel-edit-button").attr("disabled",true);
     closeEditor();
   })
 
@@ -304,35 +295,7 @@ const getImage = function (contributionId) {
 }
 
 function showThankYou() {
-  hideElement($('#textarea-row'));
-  hideElement($('#dekho-image'));
-  hideElement($('#audio-row'))
-  hideElement($('#validation-button-row'))
-  showElement($('#thank-you-row'))
-  hideElement($('#progress-row'));
-  hideElement($('#skip_btn_row'));
-  hideElement($('#validation-container'));
-  $("#validation-container").removeClass("validation-container");
-  hideElement($('#report_btn'));
-  hideElement($("#test-mic-speakers"));
-  hideElement($('#instructive-msg'));
-  hideElement($('#editor-row'));
-  hideElement($('#thankyou-text'));
-  hideElement($('.simple-keyboard'));
-  hideElement($('#sentenceLabel'));
-
-  const language = localStorage.getItem('contributionLanguage');
-  const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
-  const aggregateDetails = JSON.parse(stringifyData);
-  const totalInfo = aggregateDetails.find((element) => element.language === language);
-  if (totalInfo) {
-    $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
-    $('#spn-total-hr-validated').html(totalInfo.total_validations);
-  } else {
-    $('#spn-total-hr-contributed').html(0);
-    $('#spn-total-hr-validated').html(0);
-  }
-  $('#spn-validation-count').html(validationCount);
+  window.location.href = './thank-you.html';
 }
 
 function showNoSentencesMessage() {
@@ -382,11 +345,18 @@ const handleSubmitFeedback = function () {
 
 const initializeComponent = () => {
   const type = 'ocr';
-  const toLanguage = ""; //can be anything
   const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  fetch(`/contributions/${type}?from=${fromLanguage}&to=${toLanguage}`, {
+  fetch(`/media/${type}`, {
+    method: 'POST',
     credentials: 'include',
-    mode: 'cors'
+    mode: 'cors',
+    body: JSON.stringify({
+      userName: "",
+      language: fromLanguage,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
   })
     .then((data) => {
       if (!data.ok) {
@@ -404,7 +374,6 @@ const initializeComponent = () => {
     const validationData = validationSentences[currentIndex];
     if (validationData) {
       getImage(validationData.dataset_row_id );
-      setCapturedText(currentIndex);
       updateValidationCount();
       addListeners();
     }
@@ -424,7 +393,7 @@ const getLocationInfo = () => {
 
 let selectedReportVal = '';
 $(document).ready(() => {
-  localStorage.setItem(CURRENT_MODULE,'dekho');
+  localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   setFooterPosition();
   showKeyboard(contributionLanguage.toLowerCase());
@@ -472,6 +441,5 @@ $(document).ready(() => {
 });
 
 module.exports = {
-  setCapturedText,
   addListeners,
 };
