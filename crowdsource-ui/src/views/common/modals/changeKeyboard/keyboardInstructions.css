@@ -1,0 +1,41 @@
+    .modal-dialog {
+        max-width: 920px;
+        margin: 1.75rem auto;
+    }
+
+    .modal-header .close {
+        font-size: 3rem;
+        font-weight: 400;
+        color: #000;
+    }
+    
+    .modal-body {
+        margin-top: -28px;
+        font-weight: 400;
+        color: #343A40;
+        padding: 15px 50px;
+    }
+
+    .modal-body h3 {
+        font-size: 24px;
+        font-weight: 400;
+    }
+    
+    .layout-btn {
+        background-color: #E9ECEF;
+        color: #007BFF;
+    }
+
+    .modal-footer {
+        justify-content: flex-start;
+    }
+   
+    .close {
+        color : #000;
+        opacity: 1;
+    }
+
+    .btn-link:hover {
+        text-decoration: none;
+    }
+
