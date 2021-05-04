@@ -1,6 +1,6 @@
 const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 const { setInput } = require('../common/virtualKeyboard');
 
@@ -386,6 +386,7 @@ const getLocationInfo = () => {
 
 let selectedReportVal = '';
 $(document).ready(() => {
+  localStorage.setItem(CURRENT_MODULE,'dekho');
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   setFooterPosition();
   showKeyboard(contributionLanguage.toLowerCase());

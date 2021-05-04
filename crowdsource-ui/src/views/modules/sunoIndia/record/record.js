@@ -10,7 +10,7 @@ const {
   fetchLocationInfo,
   reportSentenceOrRecording
 } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS,CURRENT_MODULE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 const {setInput} = require('../common/virtualKeyboard');
 const speakerDetailsKey = 'speakerDetails';
@@ -602,6 +602,7 @@ function executeOnLoad() {
 
 
 $(document).ready(() => {
+  localStorage.setItem(CURRENT_MODULE,'suno');
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {

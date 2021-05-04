@@ -2,7 +2,7 @@ const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
 const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('../common/speakerDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
-const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES } = require('../common/constants');
+const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES,CURRENT_MODULE } = require('../common/constants');
 const fetch = require('../common/fetch');
 
 const {setSpeakerData} = require('../common/contributionStats');
@@ -80,6 +80,7 @@ function updateLanguage(language) {
 }
 
 $(document).ready(function () {
+    localStorage.setItem(CURRENT_MODULE,'suno');
     localStorage.removeItem('previousLanguage');
     const speakerDetailsKey = 'speakerDetails';
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();

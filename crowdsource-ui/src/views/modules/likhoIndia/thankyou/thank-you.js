@@ -6,6 +6,7 @@ const {
   CONTRIBUTION_LANGUAGE,
   TOP_LANGUAGES_BY_HOURS,
   CURRENT_MODULE,
+  MODULE
 } = require("../common/constants");
 const {
   setPageContentHeight,
@@ -265,7 +266,9 @@ function downloadPdf(badgeType) {
 }
 
 $(document).ready(function () {
-  localStorage.setItem(CURRENT_MODULE,'dekho');
+
+  localStorage.setItem(CURRENT_MODULE,MODULE.likho.value);
+
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });

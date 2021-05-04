@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../css/validator-prompt.css">
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/mic-speaker-testing.css">
+</head>
+
+<body>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../"}) %>
+<div id="validator-page-content">
+    <div class="container-fluid">
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div class="modal-footer pt-3 record-btn-container">
+                <%- include ../common/report-btn.ejs %>
+            </div>
+            <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center">
+                <%- include ../common/speakerTesting.ejs %>
+            </div>
+            <div class="row justify-content-center" id="instructive-msg">
+                <div class="col-12 justify-content-center text-center" style="color:#959595;font-style:italic">
+                    <%- __('Is the translation correct?') %>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-5 mb-lg-0 mt-5 mx-1" id="editor-row">
+                <div class="col-lg-4 col-md-5 col-12 original-text">
+                    <label><%- __('ENGLISH')%></label>
+                    <div id="captured-text"></div>
+                </div>
+                <div class="form-group green-border-focus col-lg-4 col-md-5 col-12 m-0" id="edit-text">
+                    <label><%- __('HINDI') %></label>
+                    <div class="arrow-right"></div>
+                    <textarea class="form-control edit-area" id="edit" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="row justify-content-center d-none" id="thankyou-text">
+                <div class="col-12 text-center mt-4">
+                    <img src="../../img/tick.svg">
+                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for correcting!</label>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-textarea-row">
+                <%- include ../common/noDataFound.ejs %>
+            </div>
+            <div class="row justify-content-center my-auto my-3 d-none" id="thank-you-row">
+                <div class="col-md-8 col-sm-10 text-center align-items-center"><label class="h1 font-weight-bold my-5">
+                        <%= __('Thank you for validating!') %>
+                    </label>
+                    <p class="d-none">
+                        <%- __('You have helped us validate <span id="spn-validation-count" class="font-wt-900"></span> recordings') %>
+                    </p>
+                    <div class="row justify-content-center mb-3 mx-2">
+                        <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div>
+                        <a class="btn btn-primary h6 shadow rounded mt-4 p-3 my-lg-5 col-lg-4 col-md-4 col-sm-10" href="./validator-page.html">
+                            <%= __('Validate More') %>
+                        </a>
+                        <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 justify-content-center mx-0" id="validation-button-row">
+                <button class="btn align-self-start mb-2" id="need_change">
+                    <svg width="245" height="66" viewBox="0 0 245 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 33C1 15.3269 15.3269 1 33 1H212C229.673 1 244 15.3269 244 33C244 50.6731 229.673 65 212 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
+                        <path d="M38.06 30.02L38.98 30.94L29.92 40H29V39.08L38.06 30.02ZM41.66 24C41.41 24 41.15 24.1 40.96 24.29L39.13 26.12L42.88 29.87L44.71 28.04C45.1 27.65 45.1 27.02 44.71 26.63L42.37 24.29C42.17 24.09 41.92 24 41.66 24ZM38.06 27.19L27 38.25V42H30.75L41.81 30.94L38.06 27.19Z" fill="#007BFF"/>
+                        <text x="60" y="43" font-family="lato" font-size="24" fill="#007BFF" style="text-align:center">
+                            <%= __('Needs Change') %>
+                        </text>
+                    </svg>
+                </button>
+                <button class="btn align-self-start mb-2 d-none" id="cancel-edit-button">
+                    <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
+                        <text x="65" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">
+                            <%= __('Cancel') %>
+                        </text>
+                    </svg>
+                </button>
+
+                <button class="btn web-view"></button>
+                <button class="btn align-self-start mb-2" id="like_button">
+                    <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="1" y="1" width="206" height="64" rx="32" fill="white" stroke="#007BFF" stroke-width="2"/>
+                        <path d="M34.5 37.5L42 43.5L57.5 26" stroke="#007BFF" stroke-width="3" stroke-linecap="round"/>
+                        <text x="80" y="43" font-family="lato" font-size="24" fill="#007BFF" style="text-align:center">
+                            <%= __('Correct') %>
+                        </text>
+                    </svg>
+                </button>
+                <button class="btn align-self-start mb-2 pl-4 d-none" id="submit-edit-button">
+                    <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="208" height="66" rx="33" fill="#D7D7D7"/>
+                        <text x="65" y="43" font-family="lato" font-size="24" fill="white" style="text-align:center">
+                            <%= __('Submit') %>
+                        </text>
+                    </svg>
+
+                </button>
+            </div>
+
+            <div class="row justify-content-center" id="skip_btn_row">
+                <button class="btn text-primary mt-2 mb-2 fs-1_5-rem" id="skip_button">
+                    <%= __('Skip') %>
+                </button>
+            </div>
+            <div class="simple-keyboard d-none"></div>
+            <div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
+                <div class="col-12 col-sm-8 col-lg-7">
+                    <div class="progress mt-1">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress_bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
+                    </div>
+                    <div class="mt-4 text-muted h-1r d-none" id="get-started">
+                        <%= __('Let\'s get started!') %>
+                    </div>
+                </div>
+                <div class="px-3">
+                    <div class="row justify-content-center"><span class="" id="currentSentenceLbl"></span><span class="">/</span><span class="" id="totalSentencesLbl"></span></div>
+                </div>
+            </div>
+
+        </div>
+
+        <%- include('../common/report.ejs',{"REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <%- include('../common/footer.ejs',{path:"../"}) %>
+        <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
+
+        <script src="../../js/likhoIndia/validator-prompt-page.js"></script>
+        <script src="../../js/common/speakerTesting.js"></script>
+    </div>
+</div>
+</body>
+
+</html>
