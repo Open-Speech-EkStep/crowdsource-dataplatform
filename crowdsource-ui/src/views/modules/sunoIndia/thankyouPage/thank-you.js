@@ -76,7 +76,7 @@ function showByHoursChart() {
 }
 
 const getLanguageStats = function () {
-  fetch("/stats/summary?aggregateDataByLanguage=true")
+  fetch("/stats/summary/asr?aggregateDataByLanguage=true")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {

@@ -271,16 +271,25 @@ const getAllInfo = function (language) {
     return Promise.all([genderData, ageGroups, motherTongues]);
 };
 
+const getTypeFilter = (type) => {
+    const typeFilter = `type='${type}'`;
+    let filter = pgp.as.format('$1:raw', [typeFilter])
+    return filter;
+}
 
-const getTopLanguageByHours = () => {
-    return db.any(topLanguagesByHoursContributed);
+const getTopLanguageByHours = (type) => {
+    const filter = getTypeFilter(type);
+    return db.any(topLanguagesByHoursContributed, filter);
 };
 
-const getTopLanguageBySpeakers = () => {
-    return db.any(topLanguagesBySpeakerContributions);
+const getTopLanguageBySpeakers = (type) => {
+    const filter = getTypeFilter(type);
+    return db.any(topLanguagesBySpeakerContributions, filter);
 };
 
-const getAggregateDataCount = (language, state) => {
+const getAggregateDataCount = (language, state, type) => {
+    const typeFilter = `type='${type}'`;
+    let filter = pgp.as.format('$1:raw', [typeFilter])
     let query = "";
     if (typeof language !== "boolean") {
         language = language === 'true' ? true : false;
@@ -297,12 +306,14 @@ const getAggregateDataCount = (language, state) => {
     } else {
         query = cumulativeCount;
     }
-    return db.any(query);
+    return db.any(query, filter);
 }
 
-const getLanguages = () => {
-    return db.any(listLanguages, []);
+const getLanguages = (type) => {
+    const filter = getTypeFilter(type);
+    return db.any(listLanguages, filter);
 }
+
 const normalTimeLineQueries = {
     "weekly": weeklyTimeline,
     "daily": dailyTimeline,
@@ -317,32 +328,34 @@ const cumulativeTimeLineQueries = {
     "quarterly": quarterlyTimelineCumulative
 }
 
-const getTimeline = (language = "", timeframe) => {
+const getTimeline = (language = "", timeframe, type) => {
     timeframe = timeframe.toLowerCase();
+    const typeFilter = `type='${type}'`;
     if (language.length !== 0) {
         let languageFilter = `language iLike '${language}'`
-        let filter = pgp.as.format('$1:raw', [languageFilter])
+        let filter = pgp.as.format('$1:raw', [`${typeFilter} and ${languageFilter}`])
         let query = normalTimeLineQueries[timeframe] || weeklyTimeline;
         return db.any(query, filter);
     } else {
         let query = cumulativeTimeLineQueries[timeframe] || weeklyTimelineCumulative;
-        return db.any(query, []);
+        let filter = pgp.as.format('$1:raw', [typeFilter])
+        return db.any(query, filter);
     }
 }
 
-const getGenderGroupData = (language = '') => {
-    let languageFilter = 'true';
+const getGenderGroupData = (language = '', type) => {
+    let languageFilter = `type = '${type}'`;
     if (language.length !== 0) {
-        languageFilter = `language iLike '${language}'`
+        languageFilter += ` and language iLike '${language}'`
     }
     let filter = pgp.as.format('$1:raw', [languageFilter])
     return db.any(genderGroupContributions, filter);
 }
 
-const getAgeGroupData = async (language = '') => {
-    let languageFilter = "true";
+const getAgeGroupData = async (language = '', type) => {
+    let languageFilter = `type = '${type}'`;
     if (language.length !== 0) {
-        languageFilter = `language iLike '${language}'`
+        languageFilter += ` and language iLike '${language}'`
     }
     let filter = pgp.as.format('$1:raw', [languageFilter])
     const data = await db.any(ageGroupContributions, filter);
@@ -563,10 +576,11 @@ const updateDbWithUserInput = async (
         });
 }
 
-const getAvailableLanguages = async (res) => {
+const getAvailableLanguages = async (req, res) => {
+    const type = req.params.type
     try {
-        const datasetLanguageList = await db.many(getDatasetLanguagesQuery);
-        const contributionLanguageList = await db.many(getContributionLanguagesQuery);
+        const datasetLanguageList = await db.many(getDatasetLanguagesQuery, [type]);
+        const contributionLanguageList = await db.many(getContributionLanguagesQuery, [type]);
 
         const datasetLanguages = datasetLanguageList.map((value) => value.data_language);
         const contributionLanguages = {};

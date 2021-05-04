@@ -67,7 +67,7 @@ function buildGraphs(language, timeframe) {
   // $.fn.popover.Constructor.Default.whiteList.td = [];
   console.log("bar graph", language, timeframe);
   Promise.all([
-    fetch(`/stats/contributions/gender?language=${language}`),
+    fetch(`/stats/contributions/gender/text?language=${language}`),
   ]).then(function (responses) {
     return Promise.all(responses.map(function (response) {
         return response.json();
