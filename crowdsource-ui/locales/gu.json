@@ -287,7 +287,6 @@
 	"Add Text": "Add Text",
 	"Type the text from the following image in the box": "Type the text from the following image in the box",
 	"You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>",
-	"Your languageand top 3 most contributed languages": "Your languageand top 3 most contributed languages",
 	"Type the translation of the given sentence": "Type the translation of the given sentence",
 	"ENGLISH": "ENGLISH",
 	"HINDI": "HINDI",
@@ -295,5 +294,7 @@
 	"FROM": "FROM",
 	"TO": "TO",
 	"Select the language Pair for voluntary contribution": "Select the language Pair for voluntary contribution",
-	"Your language and top 3 most contributed languages": "Your language and top 3 most contributed languages"
+	"Your language and top 3 most contributed languages": "Your language and top 3 most contributed languages",
+	"Languages pairs": "Languages pairs",
+	"Your languageand top 3 most contributed languages": "Your languageand top 3 most contributed languages"
 }
