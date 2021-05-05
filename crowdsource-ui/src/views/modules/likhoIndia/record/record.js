@@ -19,8 +19,6 @@ const currentIndexKey = 'likhoCurrentIndex';
 const sentencesKey = 'likhoSentencesKey';
 const likhoCountKey = 'likhoCount';
 let localeStrings;
-let validationSentences = [{sentence: ''}]
-
 
 window.likhoIndia = {};
 
@@ -343,6 +341,8 @@ function executeOnLoad() {
   const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const toLanguage = localStorage.getItem(TO_LANGUAGE);
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  $('#from-label').text(fromLanguage);
+  $('#to-label').text(toLanguage);
 
   if (fromLanguage && toLanguage) {
     updateLocaleLanguagesDropdown(fromLanguage);

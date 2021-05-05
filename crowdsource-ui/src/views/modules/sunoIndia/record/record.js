@@ -10,20 +10,39 @@ const {
   fetchLocationInfo,
   reportSentenceOrRecording
 } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS,CURRENT_MODULE} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS,CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 const {setInput} = require('../common/virtualKeyboard');
 const speakerDetailsKey = 'speakerDetails';
-const ACCEPT_ACTION = 'accept';
-const REJECT_ACTION = 'reject';
 
+const sunoCountKey = 'sunoCount';
 const currentIndexKey = 'sunoCurrentIndex';
 const sentencesKey = 'sunoSentencesKey';
 let localeStrings;
-let validationSentences = [{sentence: ''}]
+window.sunoIndia = {};
 
+function getValue(number, maxValue) {
+  return number < 0
+    ? 0
+    : number > maxValue
+      ? maxValue
+      : number;
+}
 
-window.crowdSource = {};
+function getCurrentIndex(lastIndex) {
+  const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
+  return getValue(currentIndexInStorage, lastIndex);
+}
+
+const setCurrentSentenceIndex = (index) => {
+  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
+  currentSentenceLbl.innerText = index;
+}
+
+const setTotalSentenceIndex = (index) => {
+  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
+  totalSentencesLbl.innerText = index;
+}
 
 function uploadToServer(cb) {
   const fd = new FormData();
@@ -31,11 +50,10 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  crowdSource.sentences = validationSentences;
-  fd.append('userInput', crowdSource.editedText);
+  fd.append('userInput', sunoIndia.sentences.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localSpeakerDataParsed.language);
-  fd.append('sentenceId', crowdSource.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', sunoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fetch('/store', {
@@ -125,31 +143,28 @@ let currentIndex = localStorage.getItem(currentIndexKey) || 0;
 let progressCount = currentIndex, validationCount = 0;
 
 function getNextSentence() {
-  if (currentIndex < validationSentences.length - 1) {
+  if (currentIndex < sunoIndia.sentences.length - 1) {
     currentIndex++;
-    getAudioClip(validationSentences[currentIndex].dataset_row_id)
+    updateProgressBar(currentIndex);
+    getAudioClip(sunoIndia.sentences[currentIndex].dataset_row_id)
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
+    const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
+    Object.assign(sentencesObj, { sentences: [] });
+    localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
+    localStorage.setItem(currentIndexKey, currentIndex);
     resetValidation();
     showThankYou();
   }
 }
 
-const updateValidationCount = () => {
-  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
-  currentSentenceLbl.innerText = progressCount;
-  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-  totalSentencesLbl.innerText = validationSentences.length;
-}
-
-const updateProgressBar = () => {
+const updateProgressBar = (index) => {
   const $progressBar = $("#progress_bar");
-  progressCount++;
-  const multiplier = 10 * (10 / validationSentences.length);
-  $progressBar.width(progressCount * multiplier + '%');
-  $progressBar.prop('aria-valuenow', progressCount);
-  updateValidationCount();
+  const multiplier = 10 * (10 / sunoIndia.sentences.length);
+  $progressBar.width(index * multiplier + '%');
+  $progressBar.prop('aria-valuenow', index);
+  setCurrentSentenceIndex(index);
 }
 
 function disableButton(button) {
@@ -171,33 +186,6 @@ function resetValidation() {
   showElement($('#default_line'))
 }
 
-function recordValidation(action) {
-  if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
-    validationCount++;
-  }
-  const sentenceId = validationSentences[currentIndex].dataset_row_id
-  const contribution_id = validationSentences[currentIndex].contribution_id
-  fetch(`/validate/${contribution_id}/${action}`, {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    body: JSON.stringify({
-      sentenceId: sentenceId,
-      state: localStorage.getItem('state_region') || "",
-      country: localStorage.getItem('country') || ""
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then(
-      (data) => {
-        if (!data.ok) {
-          throw Error(data.statusText || 'HTTP error');
-        }
-      });
-}
-
 const closeEditor = function () {
   hideElement($('.simple-keyboard'));
 }
@@ -214,7 +202,7 @@ function markContributionSkipped() {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: validationSentences[currentIndex].dataset_row_id,
+    sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
     userName: speakerDetails.userName
   };
   fetch('/skip', {
@@ -263,7 +251,7 @@ function addListeners() {
     hideElement($('#audio-player-btn'))
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
-    crowdSource.editedText = $("#edit").val();
+    sunoIndia.editedText = $("#edit").val();
     $("#edit").css('pointer-events', 'none');
     $("#cancel-edit-button").attr("disabled", true);
     const $submitEditButton = $('#submit-edit-button');
@@ -282,7 +270,6 @@ function addListeners() {
         $("#edit").css('pointer-events', 'unset');
         $("#edit").val("");
         closeEditor();
-        updateProgressBar();
         getNextSentence();
       }, 2000)
     } catch (e){
@@ -300,7 +287,6 @@ function addListeners() {
     setInput("");
     $('#submit-edit-button').attr('disabled', true);
     markContributionSkipped();
-    updateProgressBar();
     getNextSentence();
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
@@ -373,12 +359,11 @@ function showAudioRow() {
 }
 
 function showThankYou() {
-
   window.location.href = './thank-you.html';
 }
 
 function showNoSentencesMessage() {
-  $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+  $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
   hideElement($('#sentences-row'));
   hideElement($('#audio-row'))
   hideElement($('#validation-button-row'))
@@ -396,12 +381,12 @@ function showNoSentencesMessage() {
 }
 
 const handleSubmitFeedback = function () {
-  const contributionLanguage = localStorage.getItem("contributionLanguage");
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const otherText = $("#other_text").val();
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: validationSentences[currentIndex].contribution_id,
+    sentenceId: sunoIndia.sentences[currentIndex].contribution_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -423,8 +408,9 @@ const handleSubmitFeedback = function () {
 
 let selectedReportVal = '';
 const initialize = function () {
-
-  const language = localStorage.getItem('contributionLanguage');
+  const totalItems = sunoIndia.sentences.length;
+  currentIndex = getCurrentIndex(totalItems - 1);
+  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   if (language) {
     updateLocaleLanguagesDropdown(language);
   }
@@ -460,12 +446,14 @@ const initialize = function () {
     $("#report_submit_id").attr("disabled", false);
   });
 
-  const audio = validationSentences[currentIndex];
+  const audio = sunoIndia.sentences[currentIndex];
+  addListeners();
+
   if (audio) {
     getAudioClip(audio.dataset_row_id);
-    updateValidationCount();
     resetValidation();
-    addListeners();
+    setCurrentSentenceIndex(currentIndex);
+    setTotalSentenceIndex(totalItems);
     setAudioPlayer();
   }
 };
@@ -481,7 +469,7 @@ function executeOnLoad() {
   const $pageContent = $('#page-content');
   const $navUser = $('#nav-user');
   const $navUserName = $navUser.find('#nav-username');
-  const contributionLanguage = localStorage.getItem('contributionLanguage');
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   if (contributionLanguage) {
     updateLocaleLanguagesDropdown(contributionLanguage);
@@ -531,7 +519,7 @@ function executeOnLoad() {
       $loader.hide();
       $pageContent.removeClass('d-none');
       setFooterPosition();
-      validationSentences = localSentencesParsed.sentences;
+      sunoIndia.sentences = localSentencesParsed.sentences;
       initialize();
     } else {
       localStorage.removeItem(currentIndexKey);
@@ -568,12 +556,9 @@ function executeOnLoad() {
             setFooterPosition();
             // toggleFooterPosition();
           }
-          validationSentences = sentenceData.data;
           $pageContent.removeClass('d-none');
-          // toggleFooterPosition();
-
-          // crowdSource.sentences = sentenceData.data;
-          // crowdSource.count = Number(sentenceData.count);
+          sunoIndia.sentences = sentenceData.data;
+          localStorage.setItem(sunoCountKey,sunoIndia.sentences.length);
           $loader.hide();
           localStorage.setItem(
             sentencesKey,
@@ -600,9 +585,8 @@ function executeOnLoad() {
   }
 }
 
-
 $(document).ready(() => {
-  localStorage.setItem(CURRENT_MODULE,'suno');
+  localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {

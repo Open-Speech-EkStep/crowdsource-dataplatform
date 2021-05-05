@@ -6,6 +6,7 @@ const {
   CONTRIBUTION_LANGUAGE,
   TOP_LANGUAGES_BY_HOURS,
   CURRENT_MODULE,
+  MODULE
 } = require("../common/constants");
 const {
   setPageContentHeight,
@@ -17,11 +18,12 @@ const {
 
 const {constructChart} = require('../common/horizontalBarGraph');
 
+const sunoCountKey = 'sunoCount';
 const sentencesKey = 'sunoSentencesKey';
-const totalSentence = 5;
-
 const CURRENT_INDEX = "sunoCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
+const totalSentence = localStorage.getItem(sunoCountKey);
+
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -277,6 +279,7 @@ $(document).ready(function () {
       downloadPdf($(this).attr("data-badge"));
     }
   });
+  localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
   getLocaleString()
     .then((data) => {
       executeOnLoad();

@@ -69,19 +69,8 @@ function uploadToServer(cb) {
     });
 }
 
-let currentIndex, progressCount = 0, validationCount = 0;
-
-const animateCSS = ($element, animationName, callback) => {
-  $element.addClass(`animated ${animationName}`);
-
-  function handleAnimationEnd() {
-    $element.removeClass(`animated ${animationName}`);
-    $element.off('animationend');
-    if (typeof callback === 'function') callback();
-  }
-
-  $element.on('animationend', handleAnimationEnd);
-};
+let currentIndex;
+let validationCount = 0;
 
 function setCapturedText(index) {
   const capturedText = likhoIndiaValidator.sentences[index].contribution;
@@ -112,25 +101,12 @@ const updateDecisionButton = (button, colors) => {
   children[2].setAttribute("fill", colors[2]);
 }
 
-const updateValidationCount = () => {
-  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
-  currentSentenceLbl.innerText = progressCount;
-  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-  totalSentencesLbl.innerText = likhoIndiaValidator.sentences.length;
-}
-
 const updateProgressBar = (index) => {
-  console.log("index",index)
   const $progressBar = $("#progress_bar");
   const multiplier = 10 * (10 / likhoIndiaValidator.sentences.length);
   $progressBar.width(index * multiplier + '%');
   $progressBar.prop('aria-valuenow', index);
   setCurrentSentenceIndex(index);
-}
-
-function disableButton(button) {
-  button.children().attr("opacity", "50%");
-  button.attr("disabled", "disabled");
 }
 
 function skipValidation(action) {
@@ -163,7 +139,6 @@ function skipValidation(action) {
 const openEditor = function (){
   const $editorRow = $('#editor-row');
   $editorRow.removeClass('d-none')
-  // $('#original-text').text('Original Text');
   hideElement($("#need_change"));
   hideElement($("#like_button"));
   showElement($('#cancel-edit-button'))
@@ -284,58 +259,8 @@ function addListeners() {
   })
 }
 
-let validationSentences = [{ sentence: '' }]
-
 function showThankYou() {
-  // hideElement($('#textarea-row'));
-  // hideElement($('#dekho-image'));
-  // hideElement($('#audio-row'))
-  // hideElement($('#validation-button-row'))
-  // showElement($('#thank-you-row'))
-  // hideElement($('#progress-row'));
-  // hideElement($('#skip_btn_row'));
-  // hideElement($('#validation-container'));
-  // $("#validation-container").removeClass("validation-container");
-  // hideElement($('#report_btn'));
-  // hideElement($("#test-mic-speakers"));
-  // hideElement($('#instructive-msg'));
-  // hideElement($('#editor-row'));
-  // hideElement($('#thankyou-text'));
-  // hideElement($('.simple-keyboard'));
-  // hideElement($('#sentenceLabel'));
-
-  // const language = localStorage.getItem('contributionLanguage');
-  // const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
-  // const aggregateDetails = JSON.parse(stringifyData);
-  // const totalInfo = aggregateDetails.find((element) => element.language === language);
-  // if (totalInfo) {
-  //   $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
-  //   $('#spn-total-hr-validated').html(totalInfo.total_validations);
-  // } else {
-  //   $('#spn-total-hr-contributed').html(0);
-  //   $('#spn-total-hr-validated').html(0);
-  // }
-  // $('#spn-validation-count').html(validationCount);
   window.location.href = "./validator-thank-you.html"
-}
-
-function showNoSentencesMessage() {
-  $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
-  hideElement($('#textarea-row'));
-  hideElement($('#audio-row'))
-  hideElement($('#validation-button-row'))
-  hideElement($('#progress-row'))
-  showElement($('#no-textarea-row'))
-  hideElement($('#skip_btn_row'));
-  hideElement($('#validation-container'));
-  hideElement($('#report_btn'));
-  hideElement($("#test-mic-speakers"));
-  hideElement($('#instructive-msg'));
-  hideElement($('#editor-row'));
-  hideElement($('#thankyou-text'));
-  hideElement($('.simple-keyboard'));
-  $("#validation-container").removeClass("validation-container");
-  $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
 }
 
 const handleSubmitFeedback = function () {
