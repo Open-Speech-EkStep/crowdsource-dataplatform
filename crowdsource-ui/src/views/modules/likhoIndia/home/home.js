@@ -99,14 +99,14 @@ function initializeBlock() {
 
   setLanguageList().then(languagePairs => {
     const {datasetLanguages,contributionLanguages } = languagePairs;
-    addLanguagesIn('from-language', ["Hindi", "English","Marathi"]);
-    const defaultFrom = datasetLanguages[0];
-    addLanguagesIn('to-language', contributionLanguages[defaultFrom]);
+    addLanguagesIn('from-language', ["English", "Hindi", "Marathi"]);
     $('#from-language').on('change', (e) => {
       const fromLanguage = e.target.value;
-      const dummyData = {"contributionLanguages":{"Hindi":["English","Kannada"],English:["Assamese","Bengali"],Marathi:["Tamil","Telugu"]}}
-      addLanguagesIn('to-language', dummyData.contributionLanguages[fromLanguage]);
+      const dummyData = {"contributionLanguages":{"Hindi":["English","Kannada"],English:["Assamese","Bengali"],Marathi:["Tamil","Telugu"]}};
+      const toLanguageList = dummyData.contributionLanguages[fromLanguage];
+      addLanguagesIn('to-language',toLanguageList );
       localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
+      localStorage.setItem(TO_LANGUAGE, toLanguageList[0]);
       updateLocaleLanguagesDropdown(fromLanguage);
     });
 
@@ -133,6 +133,8 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
+  localStorage.setItem(CONTRIBUTION_LANGUAGE, 'English');
+  localStorage.setItem(TO_LANGUAGE, 'Hindi');
   getLocaleString().then(()=>{
     initializeBlock();
   }).catch(err => {

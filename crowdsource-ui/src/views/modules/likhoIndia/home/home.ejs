@@ -41,21 +41,25 @@
                     <div class="col-5 col-lg-5 col-xl-4 d-none" id="nav-bar-loader">
                         <div><span class="spinner"></span></div>
                     </div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-8">
                         <div class="row">
-                        <label class="col-2"><%= __('FROM') %></label>
-                        <select class="col-4 btn btn-outline-primary dropdown-toggle h6 w-90 rounded mb-4 p-3" id="from-language">
-                            <option selected="selected" class="pointer" id="language_button" value="Hindi">
-                                <%= __('') %>
-                            </option>
+                            <div class="col-6">
+                                <label class="col-3"><%= __('FROM: ') %></label>
+                                <select class="col-8 btn btn-outline-dark dropdown-toggle h6 w-90 rounded p-3" id="from-language">
+                                    <option selected="selected" class="pointer" id="language_button" value="English">
+                                        <%= __('English') %>
+                                    </option>
 
-                        </select>
-                        <label class="col-2"><%= __('TO') %></label>
-                        <select class="col-4 btn btn-outline-primary dropdown-toggle h6 w-90 rounded mb-4 p-3" id="to-language">
-                            <option selected="selected" class="pointer" id="language_button" value="English">
-                                <%= __('') %>
-                            </option>
-                        </select>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label class="col-2"><%= __('TO: ') %></label>
+                                <select class="col-8 btn btn-outline-dark dropdown-toggle h6 w-90 rounded p-3" id="to-language">
+                                    <option selected="selected" class="pointer" id="language_button" value="Hindi">
+                                        <%= __('Hindi') %>
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
