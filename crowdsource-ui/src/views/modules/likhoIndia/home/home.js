@@ -124,6 +124,7 @@ function initializeBlock() {
     $('#from-language').on('change', (e) => {
       fromLanguage = e.target.value;
       localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
+      localStorage.setItem(TO_LANGUAGE, toLanguageList[0]);
       updateLocaleLanguagesDropdown(fromLanguage);
     });
 

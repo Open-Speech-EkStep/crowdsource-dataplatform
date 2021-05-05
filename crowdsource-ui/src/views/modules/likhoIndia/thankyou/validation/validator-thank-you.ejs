@@ -32,7 +32,25 @@
     </div>
 
     <div class="row mb-5 lazy">
-        <%- include ../common/topLanguageGraph.ejs %>
+        <div class="col-lg-12 col-md-11 col-lg-11 p-5 ml-lg-auto">
+            <div class="row m-0">
+                <div class="col-2"></div>
+                <div class="col-lg-3 col-md-3 col-sm-6 pl-0">
+                    <h4 class="h4 mb-4">
+                        <%= __('Your language and top 3 most contributed languages') %>
+                    </h4>
+                </div>
+                <div class="col-lg-6 col-md-9 col-sm-6">
+                    <div id="bar_charts_container">
+                        <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
+                            <div><span class="spinner"></span></div>
+                        </div>
+                        <%- include ../common/horizontalBarGraph.ejs %>
+                    </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
     </div>
     <div class="row mt-5">
         <div class="col-lg-8 offset-lg-2 border border-primary p-4-5 text-center overflow-hidden contribuion-info">
@@ -66,7 +84,7 @@
 <%- include('../common/footer.ejs',{path:"../"}) %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="../../js/likhoIndia/validationThankyou.js"></script>
+<script src="../../js/likhoIndia/validator-thank-you.js"></script>
 </body>
 
 </html>
