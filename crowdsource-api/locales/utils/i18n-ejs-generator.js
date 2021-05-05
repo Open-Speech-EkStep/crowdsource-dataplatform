@@ -106,6 +106,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName) {
       locale
     );
     await ejs2html(`${ejsPath}/thank-you.ejs`, {}, i18n, outputPath, 'thank-you.html', locale);
+    await ejs2html(`${ejsPath}/validationThankyou.ejs`, {}, i18n, outputPath, 'validation-thank-you.html', locale);
     await ejs2html(
       `${ejsPath}/validator-prompt-page.ejs`,
       {},

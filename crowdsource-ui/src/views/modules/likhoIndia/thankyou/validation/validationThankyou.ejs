@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta property="og:title" content="<%= __('Bolo India: A crowdsourcing initiative for Indian languages')%>">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?">
+    <meta property="og:site_name" content="Bolo India ">
+    <meta property="og:url" content="https://boloindia.nplt.in">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+    <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/likhoIndia/thankyou.css">
+    <link rel="stylesheet" type="text/css" href="../../css/likhoIndia/home.css">
+    <link rel="stylesheet" type="text/css" href="../../css/common/common.css">
+</head>
+
+<body>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../"}); %>
+<div id="content-wrapper" class="container-fluid mt-5 pt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
+    <div class="text-center">
+        <h1 class="display-5 font-wt-900 site-blue">
+            <%= __('Thank you for contributing!') %>
+        </h1>
+    </div>
+
+    <div class="row mb-5 lazy">
+        <%- include ../common/topLanguageGraph.ejs %>
+    </div>
+    <div class="row mt-5">
+        <div class="col-lg-8 offset-lg-2 border border-primary p-4-5 text-center overflow-hidden contribuion-info">
+            <div id="champion_text" class="champion-ribbon d-none">
+                <span class="marquee"><%= __('You are a champion') %></span>
+            </div>
+            <div id="spree_text" class="spree-ribbon col-5 d-none">
+                <span class="marquee"><%= __('You are on a spree !!') %></span>
+            </div>
+            <div id="contribution_text" class="d-none">
+                <h4 class="mb-3 thank-you-title mt-5 mt-lg-0"><%= __('WooHoo!! You took the first important step') %></h4>
+            </div>
+            <div id="before_badge_content" class="d-none">
+                <h4 class="mb-3 mt-5 mt-lg-0"><%- __('You are driving the spirit of your language') %></h4>
+            </div>
+            <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('recordings contributed') %></p>
+            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="../badges.html">Know more</a>') %></p>
+            <%- include ../common/badge_milestone.ejs %>
+            <%- include ../common/sharableLink.ejs %>
+            <div class="badges_information">
+                <%- include('../common/downloadableBadges.ejs', {BADGES:["bronze","silver","gold","platinum"]})%>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <%- include('../common/languageGoal.ejs', {ButtonText:"Validate More",url:"./validator-page.html"})%>
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<%- include('../common/footer.ejs',{path:"../"}) %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="../../js/likhoIndia/validationThankyou.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,7 @@
 const {
-    CONTRIBUTION_LANGUAGE,
-  } = require('../common/constants');
+    CONTRIBUTION_LANGUAGE,TOP_LANGUAGES_BY_HOURS
+  } = require('./constants');
+const {constructChart}= require('./horizontalBarGraph');
 
 const getContributedAndTopLanguage = (topLanguagesData) => {
     const contributedLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -13,4 +14,17 @@ const getContributedAndTopLanguage = (topLanguagesData) => {
     return topLanguageArray.concat(topLanguages).reverse();
   }
 
-  module.exports =  {getContributedAndTopLanguage};
+function showByHoursChart() {
+  const chartReg = {};
+  if (chartReg["chart"]) {
+    chartReg["chart"].dispose();
+  }
+  const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
+  constructChart(
+    JSON.parse(topLanguagesByHoursData),
+    "total_contributions",
+    "language"
+  );
+}
+
+module.exports =  {getContributedAndTopLanguage,showByHoursChart};
