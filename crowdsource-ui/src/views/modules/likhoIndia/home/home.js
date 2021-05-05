@@ -65,8 +65,7 @@ function showByHoursChart() {
 const getStatsSummary = function () {
   performAPIRequest('/stats/summary/parallel')
     .then(response => {
-      const data = [{ "language": "Hindi", "total_contributions": "0.402" }, { "language": "English", "total_contributions": "0.069" }, { "language": "Bengali", "total_contributions": "0.033" }, { "language": "Marathi", "total_contributions": "0.031" }, { "language": "Tamil", "total_contributions": "0.020" }, { "language": "Kannada", "total_contributions": "0.017" }, { "language": "Gujarati", "total_contributions": "0.010" }, { "language": "Assamese", "total_contributions": "0.007" }, { "language": "Malayalam", "total_contributions": "0.006" }, { "language": "Punjabi", "total_contributions": "0.004" }, { "language": "Odia", "total_contributions": "0.003" }, { "language": "Telugu", "total_contributions": "0.002" }]
-      const languages = getContributedAndTopLanguage(data);
+      const languages = getContributedAndTopLanguage(response.top_languages_by_hours, "likho");
       localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
       showByHoursChart();
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
@@ -121,16 +120,18 @@ function initializeBlock() {
     let toLanguage = $('#to-language option:first-child').val();
     checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
+    localStorage.setItem(TO_LANGUAGE, toLanguage);
     $('#from-language').on('change', (e) => {
       fromLanguage = e.target.value;
       localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-      localStorage.setItem(TO_LANGUAGE, toLanguageList[0]);
       updateLocaleLanguagesDropdown(fromLanguage);
     });
 
     $('#to-language').on('change', (e) => {
       toLanguage = e.target.value;
+      localStorage.setItem(TO_LANGUAGE, toLanguage);
       checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
+      getStatsSummary();
     });
   })
 
