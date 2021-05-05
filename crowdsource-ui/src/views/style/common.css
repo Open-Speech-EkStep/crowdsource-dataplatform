@@ -145,3 +145,10 @@ body {
   background:rgba(77,130,247,.1);
   color: #4D82F7;;
 }
+
+
+  .top-back-btn {
+    top:30px;
+    left:35px
+  }
+  
