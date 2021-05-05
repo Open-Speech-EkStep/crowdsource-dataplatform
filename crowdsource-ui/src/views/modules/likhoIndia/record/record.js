@@ -257,7 +257,7 @@ const handleSubmitFeedback = function () {
 const setSentence = function (text){
     $('#captured-text').text(text);
     $('#edit').val('');
-    setInput(text);
+    setInput("");
 }
 
 function getValue(number, maxValue) {
