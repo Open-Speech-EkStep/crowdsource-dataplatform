@@ -1,8 +1,8 @@
-const {constructChart}= require('../common/horizontalBarGraph');
+const { constructChart } = require('../common/horizontalBarGraph');
 const { onActiveNavbar } = require('../common/header');
-const {setSpeakerData} = require('../common/contributionStats');
-const {getContributedAndTopLanguage} = require('../common/common');
-const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
+const { setSpeakerData } = require('../common/contributionStats');
+const { getContributedAndTopLanguage } = require('../common/common');
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest } = require('../common/utils');
 const {
   setSpeakerDetails,
   setUserModalOnShown,
@@ -11,7 +11,7 @@ const {
 } = require('../common/userDetails');
 const fetch = require('../common/fetch');
 
-const {updateHrsForCards} = require('../common/card')
+const { updateHrsForCards } = require('../common/card')
 
 const {
   TOP_LANGUAGES_BY_HOURS,
@@ -21,6 +21,7 @@ const {
   MODULE,
   TO_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
+  ALL_LANGUAGES
 } = require('../common/constants');
 
 const setLanguageList = () => {
@@ -64,26 +65,26 @@ function showByHoursChart() {
 const getStatsSummary = function () {
   performAPIRequest('/stats/summary/parallel')
     .then(response => {
-      const data = [{"language":"Hindi","total_contributions":"0.402"},{"language":"English","total_contributions":"0.069"},{"language":"Bengali","total_contributions":"0.033"},{"language":"Marathi","total_contributions":"0.031"},{"language":"Tamil","total_contributions":"0.020"},{"language":"Kannada","total_contributions":"0.017"},{"language":"Gujarati","total_contributions":"0.010"},{"language":"Assamese","total_contributions":"0.007"},{"language":"Malayalam","total_contributions":"0.006"},{"language":"Punjabi","total_contributions":"0.004"},{"language":"Odia","total_contributions":"0.003"},{"language":"Telugu","total_contributions":"0.002"}]
+      const data = [{ "language": "Hindi", "total_contributions": "0.402" }, { "language": "English", "total_contributions": "0.069" }, { "language": "Bengali", "total_contributions": "0.033" }, { "language": "Marathi", "total_contributions": "0.031" }, { "language": "Tamil", "total_contributions": "0.020" }, { "language": "Kannada", "total_contributions": "0.017" }, { "language": "Gujarati", "total_contributions": "0.010" }, { "language": "Assamese", "total_contributions": "0.007" }, { "language": "Malayalam", "total_contributions": "0.006" }, { "language": "Punjabi", "total_contributions": "0.004" }, { "language": "Odia", "total_contributions": "0.003" }, { "language": "Telugu", "total_contributions": "0.002" }]
       const languages = getContributedAndTopLanguage(data);
       localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
       showByHoursChart();
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
       getStatistics(response.aggregate_data_count[0]);
-      if(response.top_languages_by_hours.length === 0) {
+      if (response.top_languages_by_hours.length === 0) {
         $("#bar_charts_container").hide();
         $("#view_all_btn").hide();
       } else {
         $("#bar_charts_container").show();
         $("#view_all_btn").show();
       }
-    }).catch(err=>{
-    console.log(err)
-  });
+    }).catch(err => {
+      console.log(err)
+    });
 }
 
-const addLanguagesIn = function (id, list){
+const addLanguagesIn = function (id, list) {
   const selectBar = document.getElementById(id);
   let options = '';
   list.forEach(lang => {
@@ -92,27 +93,43 @@ const addLanguagesIn = function (id, list){
   selectBar.innerHTML = options;
 }
 
+const checkIsValidating = (contributionLanguages, fromLanguage, toLanguage) => {
+  const keys = contributionLanguages[fromLanguage];
+  if (keys) {
+    keys.forEach(item => {
+      if (item === toLanguage) {
+        $("#right").removeClass("validate-disabled");
+      } else {
+        $("#right").addClass("validate-disabled");
+      }
+    });
+  }
+  localStorage.setItem(TO_LANGUAGE, toLanguage);
+}
+
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
   const $userName = $('#username');
   toggleFooterPosition();
 
   setLanguageList().then(languagePairs => {
-    const {datasetLanguages,contributionLanguages } = languagePairs;
-    addLanguagesIn('from-language', ["Hindi", "English","Marathi"]);
-    const defaultFrom = datasetLanguages[0];
-    addLanguagesIn('to-language', contributionLanguages[defaultFrom]);
+    const { datasetLanguages, contributionLanguages } = languagePairs;
+    addLanguagesIn('from-language', datasetLanguages);
+    $('#from-language option:first-child').attr("selected", "selected");
+    $('#to-language option:first-child').attr("selected", "selected");
+    let fromLanguage = $('#from-language option:first-child').val();
+    let toLanguage = $('#to-language option:first-child').val();
+    checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
     $('#from-language').on('change', (e) => {
-      const fromLanguage = e.target.value;
-      const dummyData = {"contributionLanguages":{"Hindi":["English","Kannada"],English:["Assamese","Bengali"],Marathi:["Tamil","Telugu"]}}
-      addLanguagesIn('to-language', dummyData.contributionLanguages[fromLanguage]);
+      fromLanguage = e.target.value;
       localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
       updateLocaleLanguagesDropdown(fromLanguage);
     });
 
     $('#to-language').on('change', (e) => {
-      const toLanguage = e.target.value;
-      localStorage.setItem(TO_LANGUAGE, toLanguage);
+      toLanguage = e.target.value;
+      checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
     });
   })
 
@@ -120,11 +137,11 @@ function initializeBlock() {
     setStartRecordingBtnOnClick('./record.html');
   });
 
-  $('#start_validating').on('click',()=>{
+  $('#start_validating').on('click', () => {
     setStartRecordingBtnOnClick('./validator-page.html');
   })
 
-  setSpeakerDetails(speakerDetailsKey,  $userName);
+  setSpeakerDetails(speakerDetailsKey, $userName);
   setUserNameOnInputFocus();
   setUserModalOnShown($userName);
   getStatsSummary();
@@ -133,7 +150,7 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
-  getLocaleString().then(()=>{
+  getLocaleString().then(() => {
     initializeBlock();
   }).catch(err => {
     initializeBlock();

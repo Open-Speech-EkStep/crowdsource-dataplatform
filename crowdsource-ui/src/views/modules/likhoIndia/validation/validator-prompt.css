@@ -60,6 +60,14 @@ a{
     color: black;
 }
 
+
+
+.top-back-btn {
+    top:30px;
+    left:35px
+  }
+  
+
 @media (min-width: 992px) {
     .validation-container {
         min-height: 250px;
@@ -87,6 +95,11 @@ a{
         align-items: flex-end;
         display: -webkit-box;
     }
+  
+    .top-back-btn {
+        top:50px !important;
+    }
+    
     .record-btn-container .test-mic-speaker {
         margin-top: 15px;
     }

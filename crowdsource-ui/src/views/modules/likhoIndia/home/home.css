@@ -366,6 +366,15 @@ body.modal-open .supreme-container {
  height: 500px;
 }
 
+.validate-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.validate-disabled #warning-msg {
+  display: block !important;
+}
+
 @media screen and (max-width: 480px) {
   #start_recording, #start_validating {
     width: 85px;

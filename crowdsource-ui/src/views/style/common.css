@@ -110,6 +110,7 @@ body {
     width: 95%;
     left: 1rem;
   }
+ 
 }
 
 .px-16{
@@ -128,4 +129,19 @@ body {
 
 .module-item.active > a {
   color: #007BFF !important;
+}
+
+
+#warning-msg {
+  display: none;
+  top:25px;
+  left:7%;
+  font-style:italic;
+  border:1px solid #4d82f7;
+  width:89%;
+  padding:8px 15px;
+  height:44px;
+  border-radius:12px;
+  background:rgba(77,130,247,.1);
+  color: #4D82F7;;
 }

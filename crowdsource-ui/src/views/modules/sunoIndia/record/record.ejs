@@ -23,8 +23,11 @@
 <%- include('../common/headerWithoutNavBar.ejs',{path:"../"}) %>
 <div id="validator-page-content">
   <div class="container-fluid">
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content-wrapper" class="d-flex flex-column position-relative">
       <%- include ../common/recording-instructions.ejs %>
+      <div class="row position-absolute top-back-btn">
+        <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
+    </div>
       <div class="modal-footer pt-3 record-btn-container">
         <%- include ../common/report-btn.ejs %>
         <%- include ../common/speakerTestBtn.ejs %>
