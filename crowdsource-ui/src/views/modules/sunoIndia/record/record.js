@@ -524,14 +524,13 @@ function executeOnLoad() {
     } else {
       localStorage.removeItem(currentIndexKey);
       const type = 'asr';
-      const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
       fetch(`/media/${type}`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
         body: JSON.stringify({
           userName: localSpeakerDataParsed.userName,
-          language: fromLanguage,
+          language: contributionLanguage,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -565,7 +564,7 @@ function executeOnLoad() {
             JSON.stringify({
               userName: localSpeakerDataParsed.userName,
               sentences: sentenceData.data,
-              language: fromLanguage,
+              language: localSpeakerDataParsed.language,
             })
           );
           setFooterPosition();

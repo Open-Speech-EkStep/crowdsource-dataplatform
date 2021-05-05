@@ -24,7 +24,6 @@ const {
 } = require('../common/constants');
 
 function getStatistics(response) {
-  console.log(response)
   const $speakersData = $("#speaker-data");
   const $speakersDataLoader = $speakersData.find('#loader1');
   const $speakerDataDetails = $speakersData.find('#contribution-details');
@@ -46,7 +45,6 @@ function showByHoursChart() {
     chartReg["chart"].dispose();
   }
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-  console.log(topLanguagesByHoursData);
   constructChart(
     JSON.parse(topLanguagesByHoursData),
     "total_contributions",
