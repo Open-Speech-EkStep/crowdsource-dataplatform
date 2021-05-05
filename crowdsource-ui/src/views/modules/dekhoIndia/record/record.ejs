@@ -115,7 +115,16 @@
                 </div>
             </div>
 
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+  </div>
         </div>
+
+
+
+  
+  <script>var modal=document.getElementById("myModal"),img=document.getElementById("view-image"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");img.onclick=function(){modal.style.display="block",modalImg.src=this.src};var span=document.getElementsByClassName("close")[0];span.onclick=function(){modal.style.display="none"}</script>
 
         <%- include('../common/report.ejs',{"REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
