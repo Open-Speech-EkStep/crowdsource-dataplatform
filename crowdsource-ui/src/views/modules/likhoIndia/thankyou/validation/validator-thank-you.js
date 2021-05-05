@@ -22,7 +22,7 @@ const {showByHoursChart} = require('../common/common');
 const CURRENT_INDEX = "likhoValidatorCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 const likhoValidatorCountKey = 'likhoValidatorCount';
-const totalSentence = localStorage.getItem(likhoValidatorCountKey);
+const totalSentence = Number(localStorage.getItem(likhoValidatorCountKey));
 
 
 const getFormattedTime = (totalSeconds) => {
