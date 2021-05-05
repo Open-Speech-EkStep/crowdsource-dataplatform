@@ -300,5 +300,7 @@
 	"Hindi": "Hindi",
 	"English": "English",
 	"Bengali": "Bengali",
-	"Urdu": "Urdu"
+	"Urdu": "Urdu",
+	"FROM: ": "FROM: ",
+	"TO: ": "TO: "
 }
