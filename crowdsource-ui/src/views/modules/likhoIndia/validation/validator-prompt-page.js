@@ -11,6 +11,7 @@ const SKIP_ACTION = 'skip';
 
 const currentIndexKey = 'likhoValidatorCurrentIndex';
 const sentencesKey = 'likhoValidatorSentencesKey';
+const likhoValidatorCountKey = 'likhoValidatorCount';
 
 function getValue(number, maxValue) {
   return number < 0
@@ -88,7 +89,6 @@ function setCapturedText(index) {
 }
 
 function getNextSentence() {
-  console.log("next Sentence", currentIndex)
   if (currentIndex < likhoIndiaValidator.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex)
@@ -378,8 +378,6 @@ const initializeComponent = () => {
   currentIndex = getCurrentIndex(totalItems - 1);
     const validationData = likhoIndiaValidator.sentences[currentIndex];
     addListeners();
-    console.log(validationData)
-
     if (validationData) {
       setSentence(validationData.sentence);
       setTranslation(validationData.contribution);
@@ -401,14 +399,16 @@ const getLocationInfo = () => {
 let selectedReportVal = '';
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const toLanguage = localStorage.getItem(TO_LANGUAGE);
   setFooterPosition();
-  showKeyboard(contributionLanguage.toLowerCase());
+  showKeyboard(toLanguage.toLowerCase());
   hideElement($('.simple-keyboard'));
   toggleFooterPosition();
   setPageContentHeight();
-  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const toLanguage = localStorage.getItem(TO_LANGUAGE);
+  $('#from-label').text(fromLanguage);
+  $('#to-label').text(toLanguage);
+
   if (fromLanguage && toLanguage) {
     updateLocaleLanguagesDropdown(fromLanguage);
   }
@@ -480,6 +480,7 @@ $(document).ready(() => {
       }).then(result => {
       setFooterPosition();
       likhoIndiaValidator.sentences = result.data;
+      localStorage.setItem(likhoValidatorCountKey, likhoIndiaValidator.sentences.length);
       localStorage.setItem(
         sentencesKey,
         JSON.stringify({

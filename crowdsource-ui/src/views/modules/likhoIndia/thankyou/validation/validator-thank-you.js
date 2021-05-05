@@ -19,9 +19,11 @@ const {
 const {downloadPdf} = require('../common/downloadableBadges');
 const {showByHoursChart} = require('../common/common');
 
-const totalSentence = 5;
 const CURRENT_INDEX = "likhoValidatorCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
+const likhoValidatorCountKey = 'likhoValidatorCount';
+const totalSentence = localStorage.getItem(likhoValidatorCountKey);
+
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
