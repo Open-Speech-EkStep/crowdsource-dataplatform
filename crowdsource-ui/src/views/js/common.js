@@ -1,10 +1,10 @@
 const {
-    CONTRIBUTION_LANGUAGE,TOP_LANGUAGES_BY_HOURS
+    CONTRIBUTION_LANGUAGE,TOP_LANGUAGES_BY_HOURS,TO_LANGUAGE
   } = require('./constants');
 const {constructChart}= require('./horizontalBarGraph');
 
-const getContributedAndTopLanguage = (topLanguagesData) => {
-    const contributedLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+const getContributedAndTopLanguage = (topLanguagesData, type) => {
+    const contributedLanguage = type === "likho" ? localStorage.getItem(TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const topLanguageArray = [];
     const contributedLanguageHours = topLanguagesData.find(item => item.language === contributedLanguage);
     contributedLanguageHours ? topLanguageArray.push(contributedLanguageHours) : topLanguageArray.push({language: null,total_contributions: "0.000"});
