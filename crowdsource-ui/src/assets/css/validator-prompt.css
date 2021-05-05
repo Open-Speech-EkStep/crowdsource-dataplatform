@@ -1,8 +1,8 @@
-a{
+a {
     cursor: pointer;
 }
 
-.dropdown{
+.dropdown {
     cursor: pointer;
 }
 
@@ -16,18 +16,18 @@ a{
 }
 
 .original-text {
-    border: 1px solid rgba(149, 149, 149, 0.5); 
-    background-color:#f8f9fa;
-    min-height:180px;
-    border-top-left-radius:12px;
-    border-bottom-left-radius:12px;
+    border: 1px solid rgba(149, 149, 149, 0.5);
+    background-color: #f8f9fa;
+    min-height: 180px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
     padding: 24px;
 }
 
 #edit-text {
-    min-height:180px;
-    border-top-right-radius:12px;
-    border-bottom-right-radius:12px;
+    min-height: 180px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
     padding: 24px;
     box-shadow: inset 0px 0px 8px #007BFF;
     border: 2px solid #007BFF;
@@ -45,7 +45,7 @@ a{
     font-size: 24px;
 }
 
-.original-text,#edit-text label {
+.original-text, #edit-text label {
     font-size: 14px;
     color: #959595;
 }
@@ -64,16 +64,17 @@ a{
     .validation-container {
         min-height: 250px;
     }
-    .prompt{
+
+    .prompt {
         min-height: 150px;
         padding: 32px;
     }
 }
 
 @media (min-width: 1000px) {
-    .dropdown-menu{
-        right:0;
-        left:auto;
+    .dropdown-menu {
+        right: 0;
+        left: auto;
     }
 }
 
@@ -87,14 +88,16 @@ a{
         align-items: flex-end;
         display: -webkit-box;
     }
+
     .record-btn-container .test-mic-speaker {
         margin-top: 15px;
     }
+
     #cancel-edit-button > svg {
         height: 80px;
         width: 160px;
     }
-    
+
     #submit-edit-button > svg {
         height: 80px;
         width: 160px;
@@ -108,35 +111,36 @@ a{
         height: 80px;
         width: 160px;
     }
+
     #like_button > svg {
         height: 80px;
         width: 160px;
     }
 
     .original-text {
-        border-top-left-radius:12px;
-        border-top-right-radius:12px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
     }
-    
+
     #edit-text {
-        border-bottom-right-radius:12px;
-        border-bottom-left-radius:12px;
-        border-top-left-radius:0px;
-        border-top-right-radius:0px;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
     }
 
     .arrow-right {
-    top: 0 !important;
-    left: 10px !important;
-    border-left: 8px solid transparent !important;
-    border-right: 8px solid transparent !important;
-    border-top: 8px solid #343A40 !important;
+        top: 0 !important;
+        left: 10px !important;
+        border-left: 8px solid transparent !important;
+        border-right: 8px solid transparent !important;
+        border-top: 8px solid #343A40 !important;
     }
 }
 
-.hover-edit{
+.hover-edit {
     background-color: #F7F7F7;
     opacity: 0.5;
     border: 1px solid #343A40;
@@ -145,20 +149,19 @@ a{
 }
 
 
-
 .arrow-right {
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
     position: absolute;
     left: 0;
     top: 20px;
     border-left: 8px solid #343A40;
-  }
+}
 
-  /* The Modal (background) */
-  #myModal.modal {
+/* The Modal (background) */
+#myModal.modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -168,18 +171,19 @@ a{
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-  }
-  
-  /* Modal Content (image) */
-  #myModal .modal-content {
+}
+
+/* Modal Content (image) */
+#myModal .modal-content {
     margin: auto;
     display: block;
     width: 100%;
-    max-width: 1000px;
-  }
-  
-  /* Caption of Modal Image */
-  #caption {
+    max-width: 1400px;
+    padding: 2%;
+}
+
+/* Caption of Modal Image */
+#caption {
     margin: auto;
     display: block;
     width: 80%;
@@ -188,48 +192,58 @@ a{
     color: #ccc;
     padding: 10px 0;
     height: 150px;
-  }
-  
+}
 
-  /* Add Animation */
-  #myModal .modal-content, #caption {  
+
+/* Add Animation */
+#myModal .modal-content, #caption {
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
     animation-name: zoom;
     animation-duration: 0.6s;
-  }
-  
-  @-webkit-keyframes zoom {
-    from {-webkit-transform:scale(0)} 
-    to {-webkit-transform:scale(1)}
-  }
-  
-  @keyframes zoom {
-    from {transform:scale(0)} 
-    to {transform:scale(1)}
-  }
-  
-  /* The Close Button */
-  .close {
+}
+
+@-webkit-keyframes zoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+/* The Close Button */
+
+.close {
+    z-index: 1;
     position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-  
-  .close:hover,
-  .close:focus {
+    top: 0px;
+    right: 25px;
+    color: #000;
+    font-size: 32px;
+    font-weight: 700;
+    transition: .3s;
+}
+
+.close:hover,
+.close:focus {
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
-  }
-  
-  /* 100% Image Width on Smaller Screens */
-  @media only screen and (max-width: 700px){
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
     .modal-content {
-      width: 100%;
+        width: 100%;
     }
-  }
+}
