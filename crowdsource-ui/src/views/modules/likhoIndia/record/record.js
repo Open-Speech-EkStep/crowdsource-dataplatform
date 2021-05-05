@@ -17,6 +17,7 @@ const speakerDetailsKey = 'speakerDetails';
 
 const currentIndexKey = 'likhoCurrentIndex';
 const sentencesKey = 'likhoSentencesKey';
+const likhoCountKey = 'likhoCount';
 let localeStrings;
 let validationSentences = [{sentence: ''}]
 
@@ -59,7 +60,6 @@ let currentIndex;
 let progressCount = 0;
 
 function getNextSentence() {
-  console.log("inside sene",currentIndex)
   if (currentIndex < likhoIndia.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex);
@@ -72,13 +72,6 @@ function getNextSentence() {
     localStorage.setItem(currentIndexKey, currentIndex);
     showThankYou();
   }
-}
-
-const updateValidationCount = () => {
-  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
-  currentSentenceLbl.innerText = progressCount;
-  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-  totalSentencesLbl.innerText = likhoIndia.sentences.length;
 }
 
 const updateProgressBar = (index) => {
@@ -439,6 +432,7 @@ function executeOnLoad() {
           setFooterPosition();
 
           likhoIndia.sentences = sentenceData.data;
+          localStorage.setItem(likhoCountKey,likhoIndia.sentences.length);
           $loader.hide();
           localStorage.setItem(
             sentencesKey,
