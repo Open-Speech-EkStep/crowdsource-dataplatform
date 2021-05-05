@@ -4,10 +4,10 @@ const {
   HOUR_IN_SECONDS,
   LOCALE_STRINGS,
   CONTRIBUTION_LANGUAGE,
-  TOP_LANGUAGES_BY_HOURS,
   CURRENT_MODULE,
-  MODULE
+  MODULE,
 } = require("../common/constants");
+
 const {
   setPageContentHeight,
   toggleFooterPosition,
@@ -16,12 +16,11 @@ const {
   performAPIRequest,
 } = require("../common/utils");
 
-const {constructChart} = require('../common/horizontalBarGraph');
+const {downloadPdf} = require('../common/downloadableBadges');
+const {showByHoursChart} = require('../common/common');
 
-const sentencesKey = 'likhoSentencesKey';
 const totalSentence = 5;
-
-const CURRENT_INDEX = "likhoCurrentIndex";
+const CURRENT_INDEX = "likhoValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 
 const getFormattedTime = (totalSeconds) => {
@@ -60,21 +59,6 @@ const updateShareContent = function (language, rank) {
     `https://www.linkedin.com/shareArticle?mini=true&url=https://boloindia.nplt.in&title=${localeStrings[boloIndiaTitle]}&summary=${localeText}`
   );
 };
-
-
-const chartReg = {};
-
-function showByHoursChart() {
-  if (chartReg["chart"]) {
-    chartReg["chart"].dispose();
-  }
-  const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-  constructChart(
-    JSON.parse(topLanguagesByHoursData),
-    "total_contributions",
-    "language"
-  );
-}
 
 const getLanguageStats = function () {
   fetch("/stats/summary?aggregateDataByLanguage=true")
@@ -139,7 +123,6 @@ function setSentencesContributed() {
   ).then((data) => {
     localStorage.setItem('badgeId', data.badgeId);
     localStorage.setItem('badges', JSON.stringify(data.badges));
-    localStorage.setItem('nextHourGoal', data.nextHourGoal);
     $("#user-contribution").text(data.contributionCount);
     $("#language-hour-goal").text(data.nextHourGoal);
     if (data.isNewBadge) {
@@ -239,23 +222,6 @@ function executeOnLoad() {
   }
 }
 
-function downloadPdf(badgeType) {
-  const pdf = new jsPDF()
-  const img = new Image();
-  img.onload = function () {
-    pdf.addImage(this, 36, 10, 128, 128);
-    pdf.save(`${badgeType}-badge.pdf`);
-  };
-
-  img.crossOrigin = "Anonymous";
-  img.src = BADGES[badgeType].imgSm;
-  const allBadges = JSON.parse(localStorage.getItem('badges'));
-  const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
-  if (badge) {
-    pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
-  }
-}
-
 $(document).ready(function () {
 
   localStorage.setItem(CURRENT_MODULE,MODULE.likho.value);
@@ -264,11 +230,6 @@ $(document).ready(function () {
     downloadPdf($(this).attr("data-badge"));
   });
 
-  $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
-    if (!$(this).attr("disabled")) {
-      downloadPdf($(this).attr("data-badge"));
-    }
-  });
   getLocaleString()
     .then((data) => {
       executeOnLoad();

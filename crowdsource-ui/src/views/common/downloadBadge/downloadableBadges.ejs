@@ -1,0 +1,8 @@
+<% BADGES.forEach(function(badge) { %>
+    <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="<%= badge %>" href="#" id="<%= `${badge}_badge_link` %>">
+        <img title="<%= `Download ${badge} badge`%>" src="<%= `../../img/${badge}_badge.svg`%>" alt="" width="36px" class="disable" id="<%= `${badge}_badge_link_img`%>">
+    </button>
+<% }) %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script src="../../js/common/downloadableBadges.js"></script>
