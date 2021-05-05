@@ -22,8 +22,11 @@
 <%- include('../common/headerWithoutNavBar.ejs',{path:"../"}) %>
 <div id="validator-page-content">
     <div class="container-fluid">
-        <div id="content-wrapper" class="d-flex flex-column">
-            <div class="modal-footer pt-3 record-btn-container">
+        <div id="content-wrapper" class="d-flex flex-column position-relative">
+            <div class="row position-absolute top-back-btn">
+                <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
+            </div>
+            <div class="modal-footer pt-3">
                 <%- include ../common/report-btn.ejs %>
             </div>
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center">

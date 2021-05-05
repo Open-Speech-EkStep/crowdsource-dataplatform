@@ -41,20 +41,20 @@
                     <div class="col-5 col-lg-5 col-xl-4 d-none" id="nav-bar-loader">
                         <div><span class="spinner"></span></div>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                        <label class="col-2"><%= __('FROM') %></label>
-                        <select class="col-4 btn btn-outline-primary dropdown-toggle h6 w-90 rounded mb-4 p-3" id="from-language">
-                            <option selected="selected" class="pointer" id="language_button" value="Hindi">
-                                <%= __('') %>
-                            </option>
+                    <div class="col-lg-10 pt-2">
+                        <div class="row m-0">
+                        <label class="col-2 text-center mt-2"><%= __('FROM') %>:</label>
+                        <select class="col-4 btn dropdown-toggle h6 w-90 rounded" id="from-language" style="height:40px;padding:0;padding:0 10px;border-color:#959595;color:#959595">
 
                         </select>
-                        <label class="col-2"><%= __('TO') %></label>
-                        <select class="col-4 btn btn-outline-primary dropdown-toggle h6 w-90 rounded mb-4 p-3" id="to-language">
-                            <option selected="selected" class="pointer" id="language_button" value="English">
-                                <%= __('') %>
-                            </option>
+                        <div class="col-1"></div>
+                        <label class="col-1 text-center mt-2"><%= __('TO') %>:</label>
+                        <select class="col-4 btn dropdown-toggle h6 w-90 rounded" id="to-language" style="height:40px;padding:0;padding:0 10px;border-color:#959595;color:#959595">
+                            <% LANGUAGES.forEach(function(lang) { %>
+                                <option value="<%= lang.value %>">
+                                    <%= lang.text %>
+                                </option>
+                            <% }) %>
                         </select>
                         </div>
                     </div>

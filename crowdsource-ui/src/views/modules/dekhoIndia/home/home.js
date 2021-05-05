@@ -193,7 +193,7 @@ function initializeBlock() {
 
   showByHoursChart();
 
-  setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+  setSpeakerDetails(speakerDetailsKey, $userName);
   setUserNameOnInputFocus();
   setStartRecordingBtnOnClick();
   setUserModalOnShown($userName);
