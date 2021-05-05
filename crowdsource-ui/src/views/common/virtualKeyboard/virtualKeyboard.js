@@ -49,13 +49,16 @@ const showKeyboard = function (language) {
   document.querySelector(".edit-area").addEventListener("input", event => {
     keyboard.setInput(event.target.value);
     const $submitEditButton = $("#submit-edit-button");
+    const $cancelEditButton = $("#cancel-edit-button");
 
     if(event.target.value.length > 0) {
+      $cancelEditButton.removeAttr('disabled');
       $submitEditButton.removeAttr('disabled');
       const children = $submitEditButton.children().children();
       children[0].setAttribute("fill", '#007BFF');
     }else {
       $submitEditButton.attr('disabled',true);
+      $cancelEditButton.attr('disabled',true);
       const children = $submitEditButton.children().children();
       children[0].setAttribute("fill", '#D7D7D7');
     }
@@ -64,12 +67,15 @@ const showKeyboard = function (language) {
   function onChange(input) {
     document.querySelector(".edit-area").value = input;
     const $submitEditButton = $("#submit-edit-button");
+    const $cancelEditButton = $("#cancel-edit-button");
     if(input.length > 0) {
       $submitEditButton.removeAttr('disabled');
+      $cancelEditButton.removeAttr('disabled');
       const children = $submitEditButton.children().children();
       children[0].setAttribute("fill", '#007BFF');
     } else {
       $submitEditButton.attr('disabled',true);
+      $cancelEditButton.attr('disabled',true);
       const children = $submitEditButton.children().children();
       children[0].setAttribute("fill", '#D7D7D7');
     }
