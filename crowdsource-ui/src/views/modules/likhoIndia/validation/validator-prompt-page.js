@@ -1,6 +1,6 @@
 const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE,TO_LANGUAGE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 const { setInput } = require('../common/virtualKeyboard');
 
@@ -9,7 +9,33 @@ const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
-window.crowdSource = {};
+const currentIndexKey = 'likhoValidatorCurrentIndex';
+const sentencesKey = 'likhoValidatorSentencesKey';
+
+function getValue(number, maxValue) {
+  return number < 0
+    ? 0
+    : number > maxValue
+      ? maxValue
+      : number;
+}
+
+function getCurrentIndex(lastIndex) {
+  const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
+  return getValue(currentIndexInStorage, lastIndex);
+}
+
+const setCurrentSentenceIndex = (index) => {
+  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
+  currentSentenceLbl.innerText = index;
+}
+
+const setTotalSentenceIndex = (index) => {
+  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
+  totalSentencesLbl.innerText = index;
+}
+
+window.likhoIndiaValidator = {};
 
 function uploadToServer(cb) {
   const fd = new FormData();
@@ -17,11 +43,10 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  crowdSource.sentences = validationSentences;
-  fd.append('userInput', crowdSource.editedText);
+  fd.append('userInput', likhoIndiaValidator.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localSpeakerDataParsed.language);
-  fd.append('sentenceId', crowdSource.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', likhoIndiaValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fetch('/store', {
@@ -43,7 +68,7 @@ function uploadToServer(cb) {
     });
 }
 
-let currentIndex = 0, progressCount = 0, validationCount = 0;
+let currentIndex, progressCount = 0, validationCount = 0;
 
 const animateCSS = ($element, animationName, callback) => {
   $element.addClass(`animated ${animationName}`);
@@ -58,18 +83,24 @@ const animateCSS = ($element, animationName, callback) => {
 };
 
 function setCapturedText(index) {
-  const capturedText = validationSentences[index].contribution;
+  const capturedText = likhoIndiaValidator.sentences[index].contribution;
   $('#edit').text(capturedText);
 }
 
 function getNextSentence() {
   console.log("next Sentence", currentIndex)
-  if (currentIndex < validationSentences.length - 1) {
+  if (currentIndex < likhoIndiaValidator.sentences.length - 1) {
     currentIndex++;
-    setSentence(validationSentences[currentIndex].sentence);
-    setTranslation(validationSentences[currentIndex].contribution);
+    updateProgressBar(currentIndex)
+    setSentence(likhoIndiaValidator.sentences[currentIndex].sentence);
+    setTranslation(likhoIndiaValidator.sentences[currentIndex].contribution);
     setCapturedText(currentIndex);
+    localStorage.setItem(currentIndexKey, currentIndex);
   } else {
+    const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
+    Object.assign(sentencesObj, { sentences: [] });
+    localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
+    localStorage.setItem(currentIndexKey, currentIndex);
     showThankYou();
   }
 }
@@ -85,16 +116,16 @@ const updateValidationCount = () => {
   const currentSentenceLbl = document.getElementById('currentSentenceLbl');
   currentSentenceLbl.innerText = progressCount;
   const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-  totalSentencesLbl.innerText = validationSentences.length;
+  totalSentencesLbl.innerText = likhoIndiaValidator.sentences.length;
 }
 
-const updateProgressBar = () => {
+const updateProgressBar = (index) => {
+  console.log("index",index)
   const $progressBar = $("#progress_bar");
-  progressCount++;
-  const multiplier = 10 * (10 / validationSentences.length);
-  $progressBar.width(progressCount * multiplier + '%');
-  $progressBar.prop('aria-valuenow', progressCount);
-  updateValidationCount();
+  const multiplier = 10 * (10 / likhoIndiaValidator.sentences.length);
+  $progressBar.width(index * multiplier + '%');
+  $progressBar.prop('aria-valuenow', index);
+  setCurrentSentenceIndex(index);
 }
 
 function disableButton(button) {
@@ -106,8 +137,8 @@ function skipValidation(action) {
   if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
     validationCount++;
   }
-  const sentenceId = validationSentences[currentIndex].dataset_row_id
-  const contribution_id = validationSentences[currentIndex].contribution_id
+  const sentenceId = likhoIndiaValidator.sentences[currentIndex].dataset_row_id
+  const contribution_id = likhoIndiaValidator.sentences[currentIndex].contribution_id
   fetch(`/validate/${contribution_id}/${action}`, {
     method: 'POST',
     credentials: 'include',
@@ -184,7 +215,7 @@ function addListeners() {
   needChangeButton.on('click',()=>{
     showElement($('#editor-row'));
     openEditor();
-    const originalText = validationSentences[currentIndex].contribution;
+    const originalText = likhoIndiaValidator.sentences[currentIndex].contribution;
     $('#captured-text').text(originalText);
     $('#edit').val('');
     $('#edit').val(originalText);
@@ -215,7 +246,7 @@ function addListeners() {
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
     showElement($('#progress-row'))
-    crowdSource.editedText = $("#edit").val();
+    likhoIndiaValidator.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events','none');
     setTimeout(()=>{
@@ -223,7 +254,6 @@ function addListeners() {
       showElement($('#progress-row'))
       showElement($('#textarea-row'));
       hideElement($('#thankyou-text'));
-      updateProgressBar();
       getNextSentence();
       $("#edit").css('pointer-events','unset');
     }, 2000)
@@ -231,14 +261,12 @@ function addListeners() {
 
   likeButton.on('click', () => {
     skipValidation(ACCEPT_ACTION)
-    updateProgressBar();
     getNextSentence();
   })
 
   $skipButton.on('click', () => {
     $('#pause').trigger('click');
     skipValidation(SKIP_ACTION)
-    updateProgressBar();
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
     getNextSentence();
@@ -259,35 +287,36 @@ function addListeners() {
 let validationSentences = [{ sentence: '' }]
 
 function showThankYou() {
-  hideElement($('#textarea-row'));
-  hideElement($('#dekho-image'));
-  hideElement($('#audio-row'))
-  hideElement($('#validation-button-row'))
-  showElement($('#thank-you-row'))
-  hideElement($('#progress-row'));
-  hideElement($('#skip_btn_row'));
-  hideElement($('#validation-container'));
-  $("#validation-container").removeClass("validation-container");
-  hideElement($('#report_btn'));
-  hideElement($("#test-mic-speakers"));
-  hideElement($('#instructive-msg'));
-  hideElement($('#editor-row'));
-  hideElement($('#thankyou-text'));
-  hideElement($('.simple-keyboard'));
-  hideElement($('#sentenceLabel'));
+  // hideElement($('#textarea-row'));
+  // hideElement($('#dekho-image'));
+  // hideElement($('#audio-row'))
+  // hideElement($('#validation-button-row'))
+  // showElement($('#thank-you-row'))
+  // hideElement($('#progress-row'));
+  // hideElement($('#skip_btn_row'));
+  // hideElement($('#validation-container'));
+  // $("#validation-container").removeClass("validation-container");
+  // hideElement($('#report_btn'));
+  // hideElement($("#test-mic-speakers"));
+  // hideElement($('#instructive-msg'));
+  // hideElement($('#editor-row'));
+  // hideElement($('#thankyou-text'));
+  // hideElement($('.simple-keyboard'));
+  // hideElement($('#sentenceLabel'));
 
-  const language = localStorage.getItem('contributionLanguage');
-  const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
-  const aggregateDetails = JSON.parse(stringifyData);
-  const totalInfo = aggregateDetails.find((element) => element.language === language);
-  if (totalInfo) {
-    $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
-    $('#spn-total-hr-validated').html(totalInfo.total_validations);
-  } else {
-    $('#spn-total-hr-contributed').html(0);
-    $('#spn-total-hr-validated').html(0);
-  }
-  $('#spn-validation-count').html(validationCount);
+  // const language = localStorage.getItem('contributionLanguage');
+  // const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
+  // const aggregateDetails = JSON.parse(stringifyData);
+  // const totalInfo = aggregateDetails.find((element) => element.language === language);
+  // if (totalInfo) {
+  //   $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
+  //   $('#spn-total-hr-validated').html(totalInfo.total_validations);
+  // } else {
+  //   $('#spn-total-hr-contributed').html(0);
+  //   $('#spn-total-hr-validated').html(0);
+  // }
+  // $('#spn-validation-count').html(validationCount);
+  window.location.href = "./validator-thank-you.html"
 }
 
 function showNoSentencesMessage() {
@@ -315,7 +344,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: validationSentences[currentIndex].contribution_id,
+    sentenceId: likhoIndiaValidator.sentences[currentIndex].contribution_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -345,39 +374,19 @@ const setTranslation = function (translatedText){
 
 
 const initializeComponent = () => {
-  const type = 'parallel';
-  const toLanguage = localStorage.getItem('to-language');
-  const fromLanguage = localStorage.getItem('from-language');
-  fetch(`/contributions/${type}?from=${fromLanguage}&to=${toLanguage}`, {
-    credentials: 'include',
-    mode: 'cors'
-  })
-    .then((data) => {
-      if (!data.ok) {
-        throw Error(data.statusText || 'HTTP error');
-      } else {
-        return data.json();
-      }
-    }).then((result) => {
-    // if (result.data.length === 0) {
-    //   showNoSentencesMessage();
-    //   return;
-    // }
-    validationSentences = result.data;
-    window.crowdSource = result.data;
-    const validationData = validationSentences[currentIndex];
+  const totalItems = likhoIndiaValidator.sentences.length;
+  currentIndex = getCurrentIndex(totalItems - 1);
+    const validationData = likhoIndiaValidator.sentences[currentIndex];
     addListeners();
-    console.log(validationSentences)
+    console.log(validationData)
 
     if (validationData) {
       setSentence(validationData.sentence);
       setTranslation(validationData.contribution);
       setCapturedText(currentIndex);
-      updateValidationCount();
+      setCurrentSentenceIndex(currentIndex);
+      setTotalSentenceIndex(totalItems);
     }
-  }).catch((err) => {
-    console.log(err)
-  });
 }
 
 const getLocationInfo = () => {
@@ -398,8 +407,8 @@ $(document).ready(() => {
   hideElement($('.simple-keyboard'));
   toggleFooterPosition();
   setPageContentHeight();
-  const fromLanguage = localStorage.getItem('from-language');
-  const toLanguage = localStorage.getItem('to-language');
+  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const toLanguage = localStorage.getItem(TO_LANGUAGE);
   if (fromLanguage && toLanguage) {
     updateLocaleLanguagesDropdown(fromLanguage);
   }
@@ -436,7 +445,55 @@ $(document).ready(() => {
   });
 
   getLocationInfo();
-  initializeComponent();
+  const localSpeakerData = localStorage.getItem(speakerDetailsKey);
+  const localSpeakerDataParsed = JSON.parse(localSpeakerData);
+  const localSentences = localStorage.getItem(sentencesKey);
+  const localSentencesParsed = JSON.parse(localSentences);
+  setPageContentHeight();
+  if (!localSpeakerDataParsed) {
+    location.href = './home.html';
+    return;
+  }
+
+  const isExistingUser = localSentencesParsed &&
+    localSentencesParsed.userName === localSpeakerDataParsed.userName
+    &&
+    localSentencesParsed.language === localSpeakerDataParsed.language;
+
+  if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === fromLanguage && localSentencesParsed.toLanguage === toLanguage) {
+    setFooterPosition();
+    likhoIndiaValidator.sentences = localSentencesParsed.sentences;
+    initializeComponent();
+  } else {
+    localStorage.removeItem(currentIndexKey);
+    const type = 'parallel';
+    fetch(`/contributions/${type}?from=${fromLanguage}&to=${toLanguage}`, {
+      credentials: 'include',
+      mode: 'cors'
+    })
+      .then((data) => {
+        if (!data.ok) {
+          throw Error(data.statusText || 'HTTP error');
+        } else {
+          return data.json();
+        }
+      }).then(result => {
+      setFooterPosition();
+      likhoIndiaValidator.sentences = result.data;
+      localStorage.setItem(
+        sentencesKey,
+        JSON.stringify({
+          userName: localSpeakerDataParsed.userName,
+          sentences: result.data,
+          language: fromLanguage,
+          toLanguage: toLanguage
+        })
+      );
+      initializeComponent();
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 });
 
 module.exports = {
