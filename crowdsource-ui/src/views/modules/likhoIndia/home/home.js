@@ -133,8 +133,8 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
-  localStorage.setItem(CONTRIBUTION_LANGUAGE, 'English');
-  localStorage.setItem(TO_LANGUAGE, 'Hindi');
+  localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Hindi');
+  localStorage.setItem(TO_LANGUAGE, 'English');
   getLocaleString().then(()=>{
     initializeBlock();
   }).catch(err => {

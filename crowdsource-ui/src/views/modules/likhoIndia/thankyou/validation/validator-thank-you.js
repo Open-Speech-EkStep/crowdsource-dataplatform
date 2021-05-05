@@ -20,7 +20,7 @@ const {downloadPdf} = require('../common/downloadableBadges');
 const {showByHoursChart} = require('../common/common');
 
 const totalSentence = 5;
-const CURRENT_INDEX = "likhoValidationCurrentIndex";
+const CURRENT_INDEX = "likhoValidatorCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 
 const getFormattedTime = (totalSeconds) => {
@@ -61,7 +61,7 @@ const updateShareContent = function (language, rank) {
 };
 
 const getLanguageStats = function () {
-  fetch("/stats/summary?aggregateDataByLanguage=true")
+  fetch("/stats/summary/parallel")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
@@ -223,13 +223,12 @@ function executeOnLoad() {
 }
 
 $(document).ready(function () {
-
   localStorage.setItem(CURRENT_MODULE,MODULE.likho.value);
 
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });
-
+  localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   getLocaleString()
     .then((data) => {
       executeOnLoad();
