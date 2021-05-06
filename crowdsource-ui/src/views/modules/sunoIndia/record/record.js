@@ -236,6 +236,8 @@ function addListeners() {
     $("#edit").val("");
     setInput("");
     showElement($('#progress-row'))
+    const $cancelEditButton = $('#cancel-edit-button');
+    $cancelEditButton.attr('disabled', true);
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
     const children = $submitEditButton.children().children();
