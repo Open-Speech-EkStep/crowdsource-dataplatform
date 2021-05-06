@@ -177,12 +177,14 @@ const generateIndiaMap = function (language="", type) {
   const url = language !== "" ? `/aggregate-data-count/${type}?byState=true&byLanguage=true` : `/aggregate-data-count/${type}?byState=true`;
   performAPIRequest(url)
     .then((data) => {
-      const response = language !== "" ? getLanguageSpecificData(data, language) : data;
-      drawMap(response);
+      const result = language !== "" ? getLanguageSpecificData(data, language) : data;
+      drawMap(result);
       $mapLoader.hide().removeClass('d-flex');
       $mapChart.removeClass('d-none');
     })
     .catch((err) => {
+      $mapLoader.hide().removeClass('d-flex');
+      $mapChart.removeClass('d-none');
       console.log(err);
     });
 };
