@@ -17,15 +17,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
     <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../css/sunoIndia/thankyou.css">
     <link rel="stylesheet" type="text/css" href="../../css/sunoIndia/home.css">
     <link rel="stylesheet" type="text/css" href="../../css/common/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/sunoIndia/thankyou.css">
 </head>
 
 <body>
 <%- include('../common/headerWithoutNavBar.ejs',{path:"../"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center">
+        <div class="row position-absolute top-back-btn">
+            <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
+        </div>
         <h1 class="display-5 font-wt-900 site-blue">
             <%= __('Thank you for contributing!') %>
         </h1>
