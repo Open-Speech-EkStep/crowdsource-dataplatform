@@ -1,6 +1,6 @@
 const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
-const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('../common/speakerDetails');
+const { testUserName, setStartRecordingBtnOnClick, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('../common/userDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
 const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE } = require('../common/constants');
 const fetch = require('../common/fetch');
@@ -135,41 +135,42 @@ $(document).ready(function () {
     $("#contribute-now").on('click', (e) => {
         localStorage.setItem("i18n", "en");
         sentenceLanguage = languageToRecord;
+        setStartRecordingBtnOnClick("./record.html");
     });
 
-    setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+    setSpeakerDetails(speakerDetailsKey, $userName);
     setGenderRadioButtonOnClick();
     $startRecordBtnTooltip.tooltip('disable');
     setUserNameOnInputFocus();
     setUserModalOnShown($userName);
 
-    $startRecordBtn.on('click', () => {
-        const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
-        let genderValue = checkedGender.length ? checkedGender[0].value : '';
-        const userNameValue = $userName.val().trim().substring(0, 12);
-        const selectedLanguage = ALL_LANGUAGES.find(e => e.value === sentenceLanguage);
-        if (!selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
-        if (testUserName(userNameValue)) {
-            return;
-        }
-        const transGenderRadios = document.querySelectorAll('input[name = "trans_gender"]');
-        if (genderValue === "others") {
-            const transGender = Array.from(transGenderRadios).filter((el) => el.checked);
-            genderValue = transGender.length ? transGender[0].value : '';
-        }
+    // $startRecordBtn.on('click', () => {
+    //     const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
+    //     let genderValue = checkedGender.length ? checkedGender[0].value : '';
+    //     const userNameValue = $userName.val().trim().substring(0, 12);
+    //     const selectedLanguage = ALL_LANGUAGES.find(e => e.value === sentenceLanguage);
+    //     if (!selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
+    //     if (testUserName(userNameValue)) {
+    //         return;
+    //     }
+    //     const transGenderRadios = document.querySelectorAll('input[name = "trans_gender"]');
+    //     if (genderValue === "others") {
+    //         const transGender = Array.from(transGenderRadios).filter((el) => el.checked);
+    //         genderValue = transGender.length ? transGender[0].value : '';
+    //     }
 
-        const speakerDetails = {
-            gender: genderValue,
-            age: age.value,
-            motherTongue: motherTongue.value,
-            userName: userNameValue,
-            language: sentenceLanguage || localStorage.getItem('contributionLanguage'),
-        };
-        localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
-        localStorage.setItem("contributionLanguage", sentenceLanguage);
-        // document.cookie = `i18n=en`;
-        location.href = './record.html';
-    });
+    //     const speakerDetails = {
+    //         gender: genderValue,
+    //         age: age.value,
+    //         motherTongue: motherTongue.value,
+    //         userName: userNameValue,
+    //         language: sentenceLanguage || localStorage.getItem('contributionLanguage'),
+    //     };
+    //     localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
+    //     localStorage.setItem("contributionLanguage", sentenceLanguage);
+    //     // document.cookie = `i18n=en`;
+    //     location.href = './record.html';
+    // });
 
     $('input[name = "gender"]').on('change', function () {
         const selectedGender = document.querySelector(
