@@ -9,6 +9,7 @@ const {
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick
 } = require('./speakerDetails');
+// const {getContributedAndTopLanguage} = require('../../common/common');
 
 const {
     DEFAULT_CON_LANGUAGE,
@@ -143,6 +144,7 @@ const getStatsSummary = function () {
     performAPIRequest('/stats/summary/text')
         .then(response => {
             drawMap({data: response.aggregate_data_by_state});
+            // const languages = getContributedAndTopLanguage(response.top_languages_by_hours);
             localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(response.top_languages_by_hours));
             showByHoursChart();
             localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
