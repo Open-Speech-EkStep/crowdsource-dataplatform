@@ -2,47 +2,8 @@
  * simple-keyboard documentation
  * https://github.com/hodgef/simple-keyboard
  */
-
-const hindi = {
-  "layout": {
-    "default": [
-      "₹ { } - ॄ ॣ ग़ ज़ ड़ = \\ ॢ क़ ; ' < ॰ ॥ /",
-      " १ २ ३ ४ ५ ६ ७ ८ ९ ० - ृ {bksp}",
-      "{tab} ौ ै ा ी ू ब ह ग द ज ड ़ ॉ",
-      "{lock} ो े ् ि ु प र क त च ट {enter}",
-      "{shift}  ं म न व ल स , . य {shift}",
-      ".com @ {space}"
-    ],
-    "shift": [
-      "! # $ % ^ & * [ ] _ ॠ ॡ ॹ ढ़ + | फ़ ख़ : \" ॐ > ऽ ?",
-      "~ ऍ ॅ ्र ४ ज्ञ त्र क्ष श्र ( ) ः ऋ {bksp}",
-      "{tab} औ ऐ आ ई ऊ भ ङ घ ध झ ढ ञ ऑ",
-      "{lock} ओ ए अ इ उ फ ऱ ख थ छ ठ {enter}",
-      "{shift}  ँ ण    श ष । ? {shift}",
-      ".com @ {space}"
-    ]
-  }
-}
-
-const english = {
-  "layout": {
-    "default": [
-      "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
-      "{tab} q w e r t y u i o p [ ] \\",
-      "{lock} a s d f g h j k l ; ' {enter}",
-      "{shift} z x c v b n m , . / {shift}",
-      ".com @ {space}"
-    ],
-    "shift": [
-      "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
-      "{tab} Q W E R T Y U I O P { } |",
-      "{lock} A S D F G H J K L : \" {enter}",
-      "{shift} Z X C V B N M < > ? {shift}",
-      ".com @ {space}"
-    ]
-  }
-}
-
+const {keyboardLayout} = require('./keyboardLayout');
+console.log(keyboardLayout)
 let keyboard;
 const showKeyboard = function (language) {
   let Keyboard = window.SimpleKeyboard.default;
@@ -51,7 +12,7 @@ const showKeyboard = function (language) {
    * Available layouts
    * https://github.com/hodgef/simple-keyboard-layouts/tree/master/src/lib/layouts
    */
-  const layout = language;
+  const layout = keyboardLayout[language];
 
   keyboard = new Keyboard({
     onChange: input => onChange(input),

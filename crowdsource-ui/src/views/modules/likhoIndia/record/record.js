@@ -90,7 +90,7 @@ const openEditor = function () {
 
 
 const translationLanguage = localStorage.getItem(TO_LANGUAGE);
-showKeyboard("hindi");
+showKeyboard(translationLanguage.toLowerCase());
 
 function markContributionSkipped() {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
