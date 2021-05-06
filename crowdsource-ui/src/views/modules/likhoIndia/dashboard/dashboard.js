@@ -129,7 +129,7 @@ $(document).ready(function () {
         $durationLiActive.removeClass('active').addClass('inactive');
         const selectedDuration = e.target.dataset.value;
         const selectedLanguage = $('#language option:selected').val();
-        updateLineGraph(selectedLanguage, selectedDuration);
+        updateLineGraph(selectedLanguage, selectedDuration, 'parallel');
     });
 
     $("#no-data-found").on('mouseenter', (e) => {
@@ -166,6 +166,7 @@ $(document).ready(function () {
 
     $('#to-dash-language').on('change', (e) => {
       toLanguage = e.target.value;
+      updateLanguage(toLanguage);
     });
 
     setSpeakerDetails(speakerDetailsKey, $userName);
