@@ -266,6 +266,7 @@ step("Select Contribution Language as <language>", async function (language) {
     }
     await taiko.waitFor(700)
     await click(language);
+    await taiko.waitFor(700)
 });
 
 step("If user selects Other as gender, some more gender options should be visible", async function () {
