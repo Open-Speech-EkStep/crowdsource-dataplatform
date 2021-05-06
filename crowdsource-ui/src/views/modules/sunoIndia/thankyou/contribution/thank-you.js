@@ -17,6 +17,7 @@ const {
 } = require("../common/utils");
 
 const {constructChart} = require('../common/horizontalBarGraph');
+const {getContributedAndTopLanguage} = require('../common/common');
 
 const sunoCountKey = 'sunoCount';
 const sentencesKey = 'sunoSentencesKey';
@@ -78,13 +79,16 @@ function showByHoursChart() {
 }
 
 const getLanguageStats = function () {
-  fetch("/stats/summary/asr?aggregateDataByLanguage=true")
+  fetch("/stats/summary/asr")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
         const contributionLanguage = localStorage.getItem(
           CONTRIBUTION_LANGUAGE
         );
+        const languages = getContributedAndTopLanguage(response.top_languages_by_hours);
+        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
+        showByHoursChart();
         const rank = data.findIndex(
           (x) => x.language.toLowerCase() === contributionLanguage.toLowerCase()
         );
@@ -235,17 +239,7 @@ function executeOnLoad() {
     if (contributionLanguage) {
       updateLocaleLanguagesDropdown(contributionLanguage);
     }
-    showByHoursChart();
     getLanguageStats();
-    localStorage.setItem(CURRENT_INDEX, 0);
-    localStorage.setItem(
-      sentencesKey,
-      JSON.stringify({
-        userName: localSpeakerDataParsed.userName,
-        sentences: [],
-        language: contributionLanguage,
-      })
-    );
   }
 }
 
