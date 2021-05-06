@@ -24,7 +24,6 @@ const {
 } = require('../common/constants');
 
 function getStatistics(response) {
-  console.log(response)
   const $speakersData = $("#speaker-data");
   const $speakersDataLoader = $speakersData.find('#loader1');
   const $speakerDataDetails = $speakersData.find('#contribution-details');

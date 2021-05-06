@@ -15,15 +15,14 @@ const {
   getLocaleString,
   performAPIRequest,
 } = require("../common/utils");
+const {downloadPdf} = require('../common/downloadableBadges');
+const {showByHoursChart,getContributedAndTopLanguage} = require('../common/common');
 
-const {constructChart} = require('../common/horizontalBarGraph');
-
-const sunoCountKey = 'sunoCount';
-const sentencesKey = 'sunoSentencesKey';
-const CURRENT_INDEX = "sunoCurrentIndex";
+const dekhoCountKey = 'dekhoCount';
+const CURRENT_INDEX = "dekhoCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
-const totalSentence = localStorage.getItem(sunoCountKey);
 
+const totalSentence = Number(localStorage.getItem(dekhoCountKey));
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -62,29 +61,18 @@ const updateShareContent = function (language, rank) {
   );
 };
 
-
-const chartReg = {};
-
-function showByHoursChart() {
-  if (chartReg["chart"]) {
-    chartReg["chart"].dispose();
-  }
-  const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-  constructChart(
-    JSON.parse(topLanguagesByHoursData),
-    "total_contributions",
-    "language"
-  );
-}
-
 const getLanguageStats = function () {
-  fetch("/stats/summary/asr?aggregateDataByLanguage=true")
+  fetch("/stats/summary/ocr")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
         const contributionLanguage = localStorage.getItem(
           CONTRIBUTION_LANGUAGE
         );
+        const languages = getContributedAndTopLanguage(response.top_languages_by_hours);
+        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
+        showByHoursChart();
+
         const rank = data.findIndex(
           (x) => x.language.toLowerCase() === contributionLanguage.toLowerCase()
         );
@@ -223,6 +211,7 @@ function executeOnLoad() {
   } else if (currentIndexInStorage < totalSentence - 1) {
     location.href = "./home.html";
   } else {
+    console.log("here")
     $("#nav-user").removeClass("d-none");
     $("#nav-login").addClass("d-none");
     $("#nav-username").text(localSpeakerDataParsed.userName);
@@ -235,51 +224,17 @@ function executeOnLoad() {
     if (contributionLanguage) {
       updateLocaleLanguagesDropdown(contributionLanguage);
     }
-    showByHoursChart();
     getLanguageStats();
-    localStorage.setItem(CURRENT_INDEX, 0);
-    localStorage.setItem(
-      sentencesKey,
-      JSON.stringify({
-        userName: localSpeakerDataParsed.userName,
-        sentences: [],
-        language: contributionLanguage,
-      })
-    );
   }
 }
 
-function downloadPdf(badgeType) {
-  const pdf = new jsPDF()
-  const img = new Image();
-  img.onload = function () {
-    pdf.addImage(this, 36, 10, 128, 128);
-    pdf.save(`${badgeType}-badge.pdf`);
-  };
-
-  img.crossOrigin = "Anonymous";
-  img.src = BADGES[badgeType].imgSm;
-  const allBadges = JSON.parse(localStorage.getItem('badges'));
-  const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
-  if (badge) {
-    pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
-  }
-}
 
 $(document).ready(function () {
-
-  localStorage.setItem(CURRENT_MODULE,'suno');
-
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });
 
-  $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
-    if (!$(this).attr("disabled")) {
-      downloadPdf($(this).attr("data-badge"));
-    }
-  });
-  localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
+  localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
   getLocaleString()
     .then((data) => {
       executeOnLoad();
