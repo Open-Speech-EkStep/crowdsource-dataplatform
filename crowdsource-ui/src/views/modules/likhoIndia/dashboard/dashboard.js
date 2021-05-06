@@ -57,7 +57,7 @@ function updateLanguage(language) {
                   $speakerDataDetails.addClass('d-none');
                   generateIndiaMap(language, 'parallel');
                   updateLineGraph(language, activeDurationText, 'parallel');
-                  setSpeakerData(data.data, language);
+                  setSpeakerData(data.data, language, 'likho');
                   $speakersDataLoader.addClass('d-none');
                   $speakerDataDetails.removeClass('d-none');
               } else {
@@ -136,13 +136,17 @@ $(document).ready(function () {
     let fromLanguage = $('#from-dash-language option:first-child').val();
     let toLanguage = $('#to-dash-language option:first-child').val();
     $('#from-dash-language').on('change', (e) => {
-      fromLanguage = e.target.value;
+      fromLanguage = e.target.value === "" ? "" : e.target.value;
       updateLocaleLanguagesDropdown(fromLanguage);
     });
 
     $('#to-dash-language').on('change', (e) => {
-      toLanguage = e.target.value;
-      updateLanguage(fromLanguage + '-' +toLanguage);
+      toLanguage = e.target.value === "" ? "" : e.target.value;
+      if(toLanguage !== "") {
+        updateLanguage(fromLanguage + '-' +toLanguage);
+      } else {
+        updateLanguage("");
+      }
     });
 
     setSpeakerDetails(speakerDetailsKey, $userName);

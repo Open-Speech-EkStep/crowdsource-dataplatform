@@ -42,7 +42,7 @@ function getStatistics(response) {
   $speakersDataLoader.removeClass('d-none');
   $speakerDataDetails.addClass('d-none');
 
-  setSpeakerData([response]);
+  setSpeakerData([response], null, "likho");
 
   $speakersDataLoader.addClass('d-none');
   $speakerDataDetails.removeClass('d-none');

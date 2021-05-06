@@ -1,6 +1,6 @@
 const {calculateTime} = require('./utils')
 
-const getSpeakersData = (data, lang) => {
+const getSpeakersData = (data, lang, moduleType) => {
   localStorage.setItem('previousLanguage', lang);
   const speakersData = {
     languages: 0,
@@ -12,8 +12,8 @@ const getSpeakersData = (data, lang) => {
   if (!lang) {
     speakersData.languages = parseInt(data[0].total_languages);
     speakersData.speakers = parseInt(data[0].total_speakers);
-    speakersData.contributions = parseFloat(data[0].total_contributions);
-    speakersData.validations = parseFloat(data[0].total_validations);
+    speakersData.contributions =  moduleType === "likho" || moduleType === "dekho" ?parseFloat(data[0].total_contribution_count) :parseFloat(data[0].total_contributions);
+    speakersData.validations = moduleType === "likho" || moduleType === "dekho" ?parseFloat(data[0].total_validation_count) : parseFloat(data[0].total_validations);
   } else {
     const langSpeakersData = data.filter(item => {
       if (item.language) {
@@ -22,14 +22,14 @@ const getSpeakersData = (data, lang) => {
       return false;
     });
     speakersData.speakers = parseInt(langSpeakersData[0].total_speakers);
-    speakersData.contributions = parseFloat(langSpeakersData[0].total_contributions);
-    speakersData.validations = parseFloat(langSpeakersData[0].total_validations);
+    speakersData.contributions = moduleType === "likho" || moduleType === "dekho" ?parseFloat(langSpeakersData[0].total_contribution_count) : parseFloat(langSpeakersData[0].total_contributions);
+    speakersData.validations = moduleType === "likho" || moduleType === "dekho" ?parseFloat(langSpeakersData[0].total_validation_count) : parseFloat(langSpeakersData[0].total_validations);
   }
   return speakersData;
 }
 
-const setSpeakerData = function (data, language){
-  const speakersData = getSpeakersData(data, language);
+const setSpeakerData = function (data, language, moduleType){
+  const speakersData = getSpeakersData(data, language, moduleType);
   const $speakerDataLanguagesValue = $('#languages-value');
   const $speakersDataSpeakerValue = $('#speaker-value');
   const $speakersDataContributionValue = $('#contributed-value');

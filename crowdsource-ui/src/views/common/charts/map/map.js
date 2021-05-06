@@ -42,13 +42,13 @@ const statesInformation = [
 let polygonSeries = undefined;
 const $mapLoader = $('#map-loader');
 const $mapChart = $('#map');
-const drawMap = function (response) {
+const drawMap = function (response, moduleType) {
   let statesData = [...statesInformation];
   const $legendDiv = $("#legendDiv");
   const maxContribution = Math.max.apply(
     Math,
     response.data.map(function (ele) {
-      return Number(ele.total_contributions);
+      return moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) :  Number(ele.total_contributions);
     })
   );
   let quarterVal;
@@ -65,15 +65,15 @@ const drawMap = function (response) {
         hours: cHours,
         minutes: cMinutes,
         seconds: cSeconds,
-      } = calculateTime(Number(ele.total_contributions) * 60 * 60, true);
+      } = calculateTime(moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions) * 60 * 60, true);
       const {
         hours: vHours,
         minutes: vMinutes,
         seconds: vSeconds,
-      } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
+      } = calculateTime(moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_validation_count) : Number(ele.total_validations) * 60 * 60, true);
       st.contributed_time = `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
       st.validated_time = `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
-      st.value = Number(ele.total_contributions);
+      st.value = moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
       st.total_speakers = ele.total_speakers;
       st.id = st.id;
     } else {
@@ -171,14 +171,14 @@ function getLanguageSpecificData(data, lang) {
   return stateData;
 }
 
-const generateIndiaMap = function (language="", type) {
+const generateIndiaMap = function (language="", moduleType) {
   $mapLoader.show().addClass('d-flex');
   $mapChart.addClass('d-none');
-  const url = language !== "" ? `/aggregate-data-count/${type}?byState=true&byLanguage=true` : `/aggregate-data-count/${type}?byState=true`;
+  const url = language !== "" ? `/aggregate-data-count/${moduleType}?byState=true&byLanguage=true` : `/aggregate-data-count/${moduleType}?byState=true`;
   performAPIRequest(url)
     .then((data) => {
       const result = language !== "" ? getLanguageSpecificData(data, language) : data;
-      drawMap(result);
+      drawMap(result, moduleType);
       $mapLoader.hide().removeClass('d-flex');
       $mapChart.removeClass('d-none');
     })
