@@ -352,6 +352,8 @@ const renderCoachMarks = function () {
 };
 
 $(document).ready(function () {
+    localStorage.setItem('module','bolo');
+
     if (!localStorage.getItem("i18n")){
         showLanguagePopup();
         return;
@@ -361,10 +363,9 @@ $(document).ready(function () {
     }
     clearLocalStorage();
     onActiveNavbar('bolo');
-    localStorage.setItem('module','bolo');
     getLocaleString().then(()=>{
         initializeBlock();
-        renderCoachMarks();
+        // renderCoachMarks();
     }).catch(err => {
         initializeBlock();
     });
