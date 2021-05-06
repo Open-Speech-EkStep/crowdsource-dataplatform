@@ -348,7 +348,7 @@ const renderCoachMarks = function () {
         }
     });
 
-    homePageTour.start();
+    // homePageTour.start();
 };
 
 $(document).ready(function () {
@@ -361,6 +361,7 @@ $(document).ready(function () {
     }
     clearLocalStorage();
     onActiveNavbar('bolo');
+    localStorage.setItem('module','bolo');
     getLocaleString().then(()=>{
         initializeBlock();
         renderCoachMarks();
