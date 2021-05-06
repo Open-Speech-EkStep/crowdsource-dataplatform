@@ -1,6 +1,6 @@
 const {constructChart}= require('../common/horizontalBarGraph');
 const { onActiveNavbar } = require('../common/header');
-const {getContributedAndTopLanguage} = require('../common/common');
+const {getContributedAndTopLanguage,redirectToLocalisedPage} = require('../common/common');
 const {setSpeakerData} = require('../common/contributionStats');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
 const {
@@ -19,8 +19,7 @@ const {
   TOP_LANGUAGES_BY_SPEAKERS,
   AGGREGATED_DATA_BY_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
-  SELECTED_MODULE,
-  CURRENT_MODULE
+  CURRENT_MODULE,
 } = require('../common/constants');
 
 function getStatistics(response) {
@@ -133,8 +132,6 @@ const getStatsSummary = function () {
 
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
-  const age = document.getElementById('age');
-  const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
   let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
@@ -151,10 +148,10 @@ function initializeBlock() {
       top_lang = language;
       localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
       localStorage.setItem("i18n", "en");
-      window.location.href = "./home.html";
       setLangNavBar(targetedDiv, language, $languageNavBar);
       // updateHrsForCards(language);
-      updateLocaleLanguagesDropdown(language);
+
+      redirectToLocalisedPage();
     }
   })
 
@@ -170,9 +167,8 @@ function initializeBlock() {
       $6th_place.addClass('d-none');
       targetedDiv.classList.add('active');
       // updateHrsForCards(language);
-      updateLocaleLanguagesDropdown(language);
       localStorage.setItem("i18n", "en");
-      window.location.href = "./home.html";
+      redirectToLocalisedPage();
     }
   });
 

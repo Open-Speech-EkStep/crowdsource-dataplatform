@@ -4,7 +4,6 @@
 
 ## Check About Us Page
 * Select Contribution Language as "English"
-* Skip coach mark instructions
 * Navigate to "About Us" button and click "About Us" button
 * Validate about us content
 * Start Recording button is disabled

@@ -1,8 +1,8 @@
 const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
-const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('../common/speakerDetails');
+const { setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown,setStartRecordingBtnOnClick } = require('../common/userDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
-const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES,CURRENT_MODULE } = require('../common/constants');
+const { CURRENT_MODULE,CONTRIBUTION_LANGUAGE } = require('../common/constants');
 const fetch = require('../common/fetch');
 
 const {setSpeakerData} = require('../common/contributionStats');
@@ -86,19 +86,16 @@ $(document).ready(function () {
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
-    // const $tncCheckbox = $('#tnc');
-    let sentenceLanguage = DEFAULT_CON_LANGUAGE;
-    const genderRadios = document.querySelectorAll('input[name = "gender"]');
     const $userName = $('#username');
-    const motherTongue = document.getElementById('mother-tongue');
-    const age = document.getElementById('age');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem('contributionLanguage');
     if (contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }
+    let languageWithNoContribution ;
     $('#language').on('change', (e) => {
         const selectedLanguage = e.target.value;
+        languageWithNoContribution = selectedLanguage;
         $('#no-data-found').addClass('d-none');
         updateLanguage(selectedLanguage);
     });
@@ -134,56 +131,14 @@ $(document).ready(function () {
 
     $("#contribute-now").on('click', (e) => {
         localStorage.setItem("i18n", "en");
-        sentenceLanguage = languageToRecord;
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, languageWithNoContribution);
+        setStartRecordingBtnOnClick('./record.html')
     });
 
-    setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
-    setGenderRadioButtonOnClick();
+    setSpeakerDetails(speakerDetailsKey, $userName);
     $startRecordBtnTooltip.tooltip('disable');
     setUserNameOnInputFocus();
     setUserModalOnShown($userName);
-
-    $startRecordBtn.on('click', () => {
-        const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
-        let genderValue = checkedGender.length ? checkedGender[0].value : '';
-        const userNameValue = $userName.val().trim().substring(0, 12);
-        const selectedLanguage = ALL_LANGUAGES.find(e => e.value === sentenceLanguage);
-        if (!selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
-        if (testUserName(userNameValue)) {
-            return;
-        }
-        const transGenderRadios = document.querySelectorAll('input[name = "trans_gender"]');
-        if (genderValue === "others") {
-            const transGender = Array.from(transGenderRadios).filter((el) => el.checked);
-            genderValue = transGender.length ? transGender[0].value : '';
-        }
-
-        const speakerDetails = {
-            gender: genderValue,
-            age: age.value,
-            motherTongue: motherTongue.value,
-            userName: userNameValue,
-            language: sentenceLanguage || localStorage.getItem('contributionLanguage'),
-        };
-        localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
-        localStorage.setItem("contributionLanguage", sentenceLanguage);
-        // document.cookie = `i18n=en`;
-        location.href = './record.html';
-    });
-
-    $('input[name = "gender"]').on('change', function () {
-        const selectedGender = document.querySelector(
-            'input[name = "gender"]:checked'
-        );
-        const options = $("#transgender_options");
-        if (selectedGender.value === "others") {
-            console.log(options);
-            options.removeClass("d-none");
-        } else {
-            console.log(options);
-            options.addClass("d-none");
-        }
-    });
 
     toggleFooterPosition();
 
