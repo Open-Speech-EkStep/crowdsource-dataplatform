@@ -21,16 +21,6 @@ const fetchDetail = (language) => {
     });
 };
 
-const setLanguageList = () => {
-    return fetch('/available-languages/parallel').then((data) => {
-      if (!data.ok) {
-        throw Error(data.statusText || 'HTTP error');
-      } else {
-        return Promise.resolve(data.json());
-      }
-    });
-  };
-
 function isLanguageAvailable(data, lang) {
     let langaugeExists = false;
     if (!lang) return true;
@@ -89,15 +79,6 @@ function updateLanguage(language) {
       });
 }
 
-const addLanguagesIn = function (id, list) {
-    const selectBar = document.getElementById(id);
-    let options = '';
-    list.forEach(lang => {
-      options = options.concat(`<option value=${lang}>${lang}</option>`);
-    })
-    selectBar.innerHTML = options;
-  }
-
 $(document).ready(function () {
     localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
     localStorage.removeItem('previousLanguage');
@@ -116,11 +97,6 @@ $(document).ready(function () {
     if (contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }
-    $('#language').on('change', (e) => {
-        const selectedLanguage = e.target.value;
-        $('#no-data-found').addClass('d-none');
-        updateLanguage(selectedLanguage);
-    });
 
     $('#duration').on('click', (e) => {
         const $durationLiInactive = $('#duration').find('li.inactive');
@@ -166,7 +142,7 @@ $(document).ready(function () {
 
     $('#to-dash-language').on('change', (e) => {
       toLanguage = e.target.value;
-      updateLanguage(toLanguage);
+      updateLanguage(fromLanguage + '-' +toLanguage);
     });
 
     setSpeakerDetails(speakerDetailsKey, $userName);
