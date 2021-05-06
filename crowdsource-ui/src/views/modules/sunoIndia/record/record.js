@@ -388,15 +388,16 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: sunoIndia.sentences[currentIndex].contribution_id,
+    sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
-    source: "validation"
+    source: "contribution"
   };
   reportSentenceOrRecording(reqObj).then(function (resp) {
     if (resp.statusCode === 200) {
       $('#skip_button').click();
+      console.log($("#report_sentence_modal"));
       $("#report_sentence_modal").modal('hide');
       $("#report_sentence_thanks_modal").modal('show');
       $("#report_submit_id").attr("disabled", true);
