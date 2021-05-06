@@ -2,7 +2,7 @@ const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
 const { setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown,setStartRecordingBtnOnClick } = require('../common/userDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
-const { DEFAULT_CON_LANGUAGE,CURRENT_MODULE } = require('../common/constants');
+const { CURRENT_MODULE,CONTRIBUTION_LANGUAGE } = require('../common/constants');
 const fetch = require('../common/fetch');
 
 const {setSpeakerData} = require('../common/contributionStats');
@@ -86,16 +86,16 @@ $(document).ready(function () {
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
-    // const $tncCheckbox = $('#tnc');
-    let sentenceLanguage = DEFAULT_CON_LANGUAGE;
     const $userName = $('#username');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem('contributionLanguage');
     if (contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }
+    let languageWithNoContribution ;
     $('#language').on('change', (e) => {
         const selectedLanguage = e.target.value;
+        languageWithNoContribution = selectedLanguage;
         $('#no-data-found').addClass('d-none');
         updateLanguage(selectedLanguage);
     });
@@ -131,7 +131,7 @@ $(document).ready(function () {
 
     $("#contribute-now").on('click', (e) => {
         localStorage.setItem("i18n", "en");
-        sentenceLanguage = languageToRecord;
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, languageWithNoContribution);
         setStartRecordingBtnOnClick('./record.html')
     });
 

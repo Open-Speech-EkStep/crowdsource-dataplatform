@@ -361,6 +361,7 @@ $(document).ready(function () {
     }
     clearLocalStorage();
     onActiveNavbar('bolo');
+    localStorage.setItem('module','bolo');
     getLocaleString().then(()=>{
         initializeBlock();
         renderCoachMarks();
