@@ -65,19 +65,19 @@
     </div>
     <div class="row chart-row">
         <div class="col-12">
-            <div class="row justify-content-center">
-                <div id="timeline-loader" class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center chart-spinner">
-                    <span class="spinner"></span></div>
-            </div>
             <div class="row justify-content-center mt-5 mx-0">
-                <div class="col-12 col-lg-5 text-center chart timeline-chart-container">
-                    <%- include ../common/lineGraph.ejs %>
-                </div>
+                <div id="map-loader" class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center chart-spinner">
+                    <span class="spinner"></span></div>
                 <div class="col-12 col-lg-5 mb-3 text-center chart state-chart text-dark p-4">
                     <div class="text-left px-3 pb-3 state-chart-text">
                         <%= __('State Wise distribution') %>
                     </div>
                     <%- include ../common/map.ejs %>
+                </div>
+                <div id="timeline-loader" class="col-12 col-lg-5 text-center d-flex justify-content-center align-items-center chart-spinner">
+                    <span class="spinner"></span></div>
+                <div class="col-12 col-lg-5 text-center chart timeline-chart-container">
+                    <%- include ../common/lineGraph.ejs %>
                 </div>
             </div>
         </div>
