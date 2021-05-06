@@ -23,6 +23,7 @@
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
+            <%- include ../common/recording-instructions.ejs %>
             <div class="row position-absolute top-back-btn">
                 <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
             </div>
@@ -51,7 +52,8 @@
             <div class="row justify-content-center d-none" id="thankyou-text">
                 <div class="col-12 text-center mt-4">
                     <img src="../../img/tick.svg">
-                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for correcting!</label>
+                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for
+                        correcting!</label>
                 </div>
             </div>
             <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-textarea-row">
@@ -73,7 +75,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row mt-5 justify-content-center mx-0" id="validation-button-row">
                 <button class="btn align-self-start mb-2" id="cancel-edit-button">
                     <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,18 +117,16 @@
                 </div>
             </div>
 
-<div id="myModal" class="modal">
-    <div class="position-relative d-flex m-auto" style="width:80%">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-    </div>
-  </div>
+            <div id="myModal" class="modal">
+                <div class="position-relative d-flex m-auto" style="width:80%">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="img01">
+                </div>
+            </div>
         </div>
 
 
-
-  
-  <script>var modal=document.getElementById("myModal"),img=document.getElementById("view-image"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");img.onclick=function(){modal.style.display="block",modalImg.src=this.src};var span=document.getElementsByClassName("close")[0];span.onclick=function(){modal.style.display="none"}</script>
+        <script>var modal=document.getElementById("myModal"),img=document.getElementById("view-image"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");img.onclick=function(){modal.style.display="block",modalImg.src=this.src};var span=document.getElementsByClassName("close")[0];span.onclick=function(){modal.style.display="none"}</script>
 
         <%- include('../common/report.ejs',{"REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
