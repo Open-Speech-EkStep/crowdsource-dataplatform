@@ -171,10 +171,10 @@ function getLanguageSpecificData(data, lang) {
   return stateData;
 }
 
-const generateIndiaMap = function (language="") {
+const generateIndiaMap = function (language="", type) {
   $mapLoader.show().addClass('d-flex');
   $mapChart.addClass('d-none');
-  const url = language !== "" ? '/aggregate-data-count/text?byState=true&byLanguage=true' : '/aggregate-data-count/text?byState=true';
+  const url = language !== "" ? `/aggregate-data-count/${type}?byState=true&byLanguage=true` : `/aggregate-data-count/${type}?byState=true`;
   performAPIRequest(url)
     .then((data) => {
       const response = language !== "" ? getLanguageSpecificData(data, language) : data;
