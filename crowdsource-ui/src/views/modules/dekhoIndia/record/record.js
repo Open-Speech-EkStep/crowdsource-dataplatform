@@ -1,15 +1,79 @@
 const fetch = require('../common/fetch')
-const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE} = require('../common/constants');
+const {
+  setPageContentHeight,
+  toggleFooterPosition,
+  setFooterPosition,
+  updateLocaleLanguagesDropdown,
+  showElement,
+  hideElement,
+  fetchLocationInfo,
+  getLocaleString,
+  reportSentenceOrRecording
+} = require('../common/utils');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
-const { setInput } = require('../common/virtualKeyboard');
+const {setInput} = require('../common/virtualKeyboard');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
-const SKIP_ACTION = 'skip';
 
-window.crowdSource = {};
+const dekhoCountKey = 'dekhoCount';
+const currentIndexKey = 'dekhoCurrentIndex';
+const sentencesKey = 'dekhoSentencesKey';
+
+let localeStrings;
+
+window.dekhoIndia = {};
+
+function getValue(number, maxValue) {
+  return number < 0
+    ? 0
+    : number > maxValue
+      ? maxValue
+      : number;
+}
+
+function getCurrentIndex(lastIndex) {
+  const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
+  return getValue(currentIndexInStorage, lastIndex);
+}
+
+const setCurrentSentenceIndex = (index) => {
+  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
+  currentSentenceLbl.innerText = index;
+}
+
+const setTotalSentenceIndex = (index) => {
+  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
+  totalSentencesLbl.innerText = index;
+}
+
+function markContributionSkipped() {
+  const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
+
+  const reqObj = {
+    sentenceId: dekhoIndia.sentences[currentIndex].dataset_row_id,
+    userName: speakerDetails.userName
+  };
+  fetch('/skip', {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(reqObj),
+  })
+    .then((res) => res.json())
+    .then((result) => {
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
+
+
 
 function uploadToServer(cb) {
   const fd = new FormData();
@@ -17,11 +81,10 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  crowdSource.sentences = validationSentences;
-  fd.append('userInput', crowdSource.editedText);
+  fd.append('userInput', dekhoIndia.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localSpeakerDataParsed.language);
-  fd.append('sentenceId', crowdSource.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', dekhoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fetch('/store', {
@@ -43,13 +106,20 @@ function uploadToServer(cb) {
     });
 }
 
-let currentIndex = 0, progressCount = 0, validationCount = 0;
+let currentIndex;
+let progressCount = 0, validationCount = 0;
 
 function getNextSentence() {
-  if (currentIndex < validationSentences.length - 1) {
+  if (currentIndex < dekhoIndia.sentences.length - 1) {
     currentIndex++;
-    getImage(validationSentences[currentIndex].dataset_row_id);
+    updateProgressBar(currentIndex);
+    getImage(dekhoIndia.sentences[currentIndex].dataset_row_id);
+    localStorage.setItem(currentIndexKey, currentIndex);
   } else {
+    const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
+    Object.assign(sentencesObj, { sentences: [] });
+    localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
+    localStorage.setItem(currentIndexKey, currentIndex);
     showThankYou();
   }
 }
@@ -61,20 +131,12 @@ const updateDecisionButton = (button, colors) => {
   children[2].setAttribute("fill", colors[2]);
 }
 
-const updateValidationCount = () => {
-  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
-  currentSentenceLbl.innerText = progressCount;
-  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-  totalSentencesLbl.innerText = validationSentences.length;
-}
-
-const updateProgressBar = () => {
+const updateProgressBar = (index) => {
   const $progressBar = $("#progress_bar");
-  progressCount++;
-  const multiplier = 10 * (10 / validationSentences.length);
-  $progressBar.width(progressCount * multiplier + '%');
-  $progressBar.prop('aria-valuenow', progressCount);
-  updateValidationCount();
+  const multiplier = 10 * (10 / dekhoIndia.sentences.length);
+  $progressBar.width(index * multiplier + '%');
+  $progressBar.prop('aria-valuenow', index);
+  setCurrentSentenceIndex(index);
 }
 
 function disableButton(button) {
@@ -86,7 +148,7 @@ function skipValidation(action) {
   if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
     validationCount++;
   }
-  const sentenceId = validationSentences[currentIndex].dataset_row_id
+  const sentenceId = dekhoIndia.sentences[currentIndex].dataset_row_id
   fetch(`/validate/${sentenceId}/${action}`, {
     method: 'POST',
     credentials: 'include',
@@ -108,8 +170,8 @@ function skipValidation(action) {
       });
 }
 
-const openEditor = function (){
-const $editorRow = $('#editor-row');
+const openEditor = function () {
+  const $editorRow = $('#editor-row');
   $editorRow.removeClass('d-none')
   // $('#original-text').text('Original Text');
   hideElement($("#need_change"));
@@ -118,16 +180,15 @@ const $editorRow = $('#editor-row');
   showElement($('#submit-edit-button'))
 }
 
-const closeEditor = function (){
+const closeEditor = function () {
   hideElement($('.simple-keyboard'));
 }
 
 function addListeners() {
 
-  const likeButton = $("#like_button");
   const needChangeButton = $("#need_change");
-  // const dislikeButton = $("#dislike_button");
   const $skipButton = $('#skip_button');
+  const likeButton = $("#like_button")
 
   likeButton.hover(() => {
       updateDecisionButton(likeButton, ["#bfddf5", "", "#007BFF"]);
@@ -154,18 +215,17 @@ function addListeners() {
   });
 
 
-  needChangeButton.on('click',()=>{
-    console.log("need change")
+  needChangeButton.on('click', () => {
     hideElement($('#textarea-row'));
     openEditor();
-    const originalText = validationSentences[currentIndex].contribution;
+    const originalText = dekhoIndia.sentences[currentIndex].contribution;
     $('#captured-text').text(originalText);
     $('#edit').val('');
     $('#edit').val(originalText);
     setInput(originalText);
   })
 
-  $("#edit").focus(function(){
+  $("#edit").focus(function () {
     const $submitEditButton = $("#submit-edit-button");
     $submitEditButton.removeAttr('disabled');
     const children = $submitEditButton.children().children();
@@ -179,7 +239,7 @@ function addListeners() {
     setInput("");
     showElement($('#progress-row'))
     const $submitEditButton = $('#submit-edit-button');
-    $submitEditButton.attr('disabled',true);
+    $submitEditButton.attr('disabled', true);
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#D7D7D7');
     closeEditor();
@@ -192,45 +252,42 @@ function addListeners() {
     hideElement($('#submit-edit-button'))
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
-    $("#edit").css('pointer-events','none');
-    $("#cancel-edit-button").attr("disabled",true);
+    $("#edit").css('pointer-events', 'none');
+    $("#cancel-edit-button").attr("disabled", true);
     const $submitEditButton = $('#submit-edit-button');
-    $submitEditButton.attr('disabled',true);
+    $submitEditButton.attr('disabled', true);
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#progress-row'))
-    crowdSource.editedText = $("#edit").val();
+    dekhoIndia.editedText = $("#edit").val();
     uploadToServer();
-    $("#edit").css('pointer-events','none');
-    setTimeout(()=>{
+    $("#edit").css('pointer-events', 'none');
+    setTimeout(() => {
       hideElement($('#thankyou-text'));
       showElement($('#cancel-edit-button'));
       showElement($('#submit-edit-button'))
       showElement($('#skip_button'))
-      $("#edit").css('pointer-events','unset');
+      $("#edit").css('pointer-events', 'unset');
       $("#edit").val("");
       closeEditor();
-      updateProgressBar();
       getNextSentence();
     }, 2000)
   })
 
   likeButton.on('click', () => {
     skipValidation(ACCEPT_ACTION)
-    updateProgressBar();
     getNextSentence();
   })
 
   $skipButton.on('click', () => {
     $('#edit').val("");
     setInput("");
-    $('#submit-edit-button').attr('disabled',true);
-    skipValidation(SKIP_ACTION);
-    updateProgressBar();
+    $('#submit-edit-button').attr('disabled', true);
+    markContributionSkipped();
     getNextSentence();
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
-    $("#cancel-edit-button").attr("disabled",true);
+    $("#cancel-edit-button").attr("disabled", true);
     closeEditor();
   })
 
@@ -244,8 +301,6 @@ function addListeners() {
     $skipButton.css('background-color', '#bfddf5')
   })
 }
-
-let validationSentences = [{ sentence: '' }]
 
 const setDekhoImage = function (audioLink) {
   $('#view-image').attr('src', audioLink)
@@ -273,7 +328,7 @@ const getImage = function (contributionId) {
     }
   }).then((stream) => {
     stream.arrayBuffer().then((buffer) => {
-      const blob = new Blob([buffer], { type: "audio/wav" });
+      const blob = new Blob([buffer], {type: "audio/wav"});
       // loadAudio(URL.createObjectURL(blob))
       const fileReader = new FileReader();
       fileReader.onload = function (e) {
@@ -288,7 +343,7 @@ const getImage = function (contributionId) {
 }
 
 function showThankYou() {
-    window.location.href = './thank-you.html';
+  window.location.href = './thank-you.html';
 }
 
 function showNoSentencesMessage() {
@@ -307,16 +362,16 @@ function showNoSentencesMessage() {
   hideElement($('#thankyou-text'));
   hideElement($('.simple-keyboard'));
   $("#validation-container").removeClass("validation-container");
-  $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
+  $('#start-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
 }
 
 const handleSubmitFeedback = function () {
-  const contributionLanguage = localStorage.getItem("contributionLanguage");
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const otherText = $("#other_text").val();
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: validationSentences[currentIndex].contribution_id,
+    sentenceId: dekhoIndia.sentences[currentIndex].contribution_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -337,66 +392,9 @@ const handleSubmitFeedback = function () {
 }
 
 const initializeComponent = () => {
-  const type = 'ocr';
-  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  fetch(`/media/${type}`, {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    body: JSON.stringify({
-      userName: "",
-      language: fromLanguage,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((data) => {
-      if (!data.ok) {
-        throw Error(data.statusText || 'HTTP error');
-      } else {
-        return data.json();
-      }
-    }).then((result) => {
-    // if (result.data.length === 0) {
-    //   showNoSentencesMessage();
-    //   return;
-    // }
-    validationSentences = result.data;
-    window.crowdSource = result.data;
-    const validationData = validationSentences[currentIndex];
-    if (validationData) {
-      getImage(validationData.dataset_row_id );
-      updateValidationCount();
-      addListeners();
-    }
-  }).catch((err) => {
-    console.log(err)
-  });
-}
-
-const getLocationInfo = () => {
-  fetchLocationInfo().then(res => {
-    return res.json()
-  }).then(response => {
-    localStorage.setItem("state_region", response.regionName);
-    localStorage.setItem("country", response.country);
-  }).catch(console.log);
-}
-
-let selectedReportVal = '';
-$(document).ready(() => {
-  localStorage.setItem(CURRENT_MODULE,'dekho');
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  setFooterPosition();
-  showKeyboard(contributionLanguage.toLowerCase());
-  hideElement($('.simple-keyboard'));
-  toggleFooterPosition();
-  setPageContentHeight();
-  const language = localStorage.getItem('contributionLanguage');
-  if (language) {
-    updateLocaleLanguagesDropdown(language);
-  }
+  const totalItems = dekhoIndia.sentences.length;
+  currentIndex = getCurrentIndex(totalItems - 1);
+  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
   $("#start_contributing_id").on('click', function () {
     const data = localStorage.getItem("speakerDetails");
@@ -429,8 +427,137 @@ $(document).ready(() => {
     $("#report_submit_id").attr("disabled", false);
   });
 
+  const validationData = dekhoIndia.sentences[currentIndex];
+  addListeners();
+  if (validationData) {
+    getImage(validationData.dataset_row_id);
+    setCurrentSentenceIndex(currentIndex);
+    setTotalSentenceIndex(totalItems);
+  }
+
+}
+
+const getLocationInfo = () => {
+  fetchLocationInfo().then(res => {
+    return res.json()
+  }).then(response => {
+    localStorage.setItem("state_region", response.regionName);
+    localStorage.setItem("country", response.country);
+  }).catch(console.log);
+}
+
+let selectedReportVal = '';
+
+const executeOnLoad = function () {
+  hideElement($('.simple-keyboard'));
+  toggleFooterPosition();
+  setPageContentHeight();
+  setFooterPosition();
+  const $validationInstructionModal = $("#validation-instruction-modal");
+  const $navUser = $('#nav-user');
+  const $navUserName = $navUser.find('#nav-username');
+  localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  showKeyboard(language.toLowerCase());
+  hideElement($('.simple-keyboard'));
+
+  if (language) {
+    updateLocaleLanguagesDropdown(language);
+  }
+
   getLocationInfo();
-  initializeComponent();
+  try {
+    const localSpeakerData = localStorage.getItem(speakerDetailsKey);
+    const localSpeakerDataParsed = JSON.parse(localSpeakerData);
+    const localSentences = localStorage.getItem(sentencesKey);
+    const localSentencesParsed = JSON.parse(localSentences);
+
+    setPageContentHeight();
+    $("#instructions_close_btn").on("click", function () {
+      $validationInstructionModal.addClass("d-none");
+      setFooterPosition();
+    })
+
+    if (!localSpeakerDataParsed) {
+      location.href = './home.html';
+      return;
+    }
+
+    $navUser.removeClass('d-none');
+    $('#nav-login').addClass('d-none');
+    $navUserName.text(localSpeakerDataParsed.userName);
+    const isExistingUser = localSentencesParsed &&
+      localSentencesParsed.userName === localSpeakerDataParsed.userName
+      &&
+      localSentencesParsed.language === localSpeakerDataParsed.language;
+
+    if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === language) {
+      setFooterPosition();
+      dekhoIndia.sentences = localSentencesParsed.sentences;
+      initializeComponent();
+    } else {
+      localStorage.removeItem(currentIndexKey);
+      console.log(localSpeakerDataParsed )
+      const type = 'ocr';
+      fetch(`/media/${type}`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        body: JSON.stringify({
+          userName: localSpeakerDataParsed.userName,
+          language: localSpeakerDataParsed.language,
+          toLanguage: '',
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((data) => {
+        if (!data.ok) {
+          throw Error(data.statusText || 'HTTP error');
+        } else {
+          return data.json();
+        }
+      }).then((sentenceData) => {
+        if (sentenceData.data.length === 0) {
+          showNoSentencesMessage();
+          return;
+        }
+        if (!isExistingUser) {
+          $validationInstructionModal.removeClass("d-none");
+          setFooterPosition();
+        }
+        setFooterPosition();
+        dekhoIndia.sentences = sentenceData.data;
+        localStorage.setItem(dekhoCountKey, dekhoIndia.sentences.length);
+        localStorage.setItem(
+          sentencesKey,
+          JSON.stringify({
+            userName: localSpeakerDataParsed.userName,
+            sentences: sentenceData.data,
+            language: localSpeakerDataParsed.language,
+            toLanguage: ''
+          })
+        );
+        initializeComponent();
+      }).catch((err) => {
+        console.log(err);
+      }).then(() => {
+      });
+    }
+
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+$(document).ready(() => {
+  localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
+  hideElement($('.simple-keyboard'));
+  getLocaleString().then(() => {
+    executeOnLoad();
+  }).catch(() => {
+    executeOnLoad();
+  });
 });
 
 module.exports = {
