@@ -110,7 +110,7 @@ $(document).ready(function () {
         $durationLiActive.removeClass('active').addClass('inactive');
         const selectedDuration = e.target.dataset.value;
         const selectedLanguage = $('#language option:selected').val();
-        updateLineGraph(selectedLanguage, selectedDuration);
+        updateLineGraph(selectedLanguage, selectedDuration, 'asr');
     });
 
     $("#no-data-found").on('mouseenter', (e) => {
