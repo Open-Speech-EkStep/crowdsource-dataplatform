@@ -26,26 +26,44 @@
             </div>
             <div class="row">
                 <div class="col-12 col-md-7 col-lg-6">
-                    <div class="text-muted mb-2">
-                        <%= __('Select a language') %>:
+                    <div class="mb-3">
+                        <%= __('Select the language pair') %>:
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-6 col-lg-5 all-languages">
-                    <div class="mt-2"><select class="btn btn-outline-primary dropdown-toggle h6 w-100 rounded mb-4 p-3" id="language">
-                            <option selected="selected" class="pointer" id="language_button" value="">
-                                <%= __('All Languages') %>
-                            </option>
-                            <% LANGUAGES.forEach(function(lang) { %>
-                                <option value="<%= lang.value %>">
-                                    <%= lang.text %>
+                <div class="col-12 col-md-6 col-lg-7 all-languages mb-4">
+                        <div class="row m-0">
+                            <div class="col-6 p-0">
+                                <label class="position-absolute text-muted" style="left:15px;margin-top:13px;font-size:14px"><%= __('FROM') %>:</label>
+                                <select class="col-10 btn dropdown-toggle h6 w-90 rounded" id="from-dash-language" style="height:48px;padding:5px 10px 5px 75px;border-color:#959595;color:#959595">
+                                    <option selected="selected" class="pointer" id="language_button" value="">
+                                        <%= __('All Languages') %>
+                                    </option>
+                                    <% LANGUAGES.forEach(function(lang) { %>
+                                        <option value="<%= lang.value %>">
+                                            <%= lang.text %>
+                                        </option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                        <div class="col-5 p-0">
+                            <label class="position-absolute text-muted" style="left:15px;margin-top:13px;font-size:14px"><%= __('TO') %>:</label>
+                            <select class="col-12 btn dropdown-toggle h6 w-90 rounded" id="to-dash-language" style="height:48px;padding:5px 10px 5px 75px;border-color:#959595;color:#959595">
+                                <option selected="selected" class="pointer" id="language_button" value="">
+                                    <%= __('All Languages') %>
                                 </option>
-                            <% }) %>
-                        </select></div>
+                                <% LANGUAGES.forEach(function(lang) { %>
+                                    <option value="<%= lang.value %>">
+                                        <%= lang.text %>
+                                    </option>
+                                <% }) %>
+                            </select>
+                           </div>
+                        </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 data-updated">
-                    <div><span>
+                <div class="col-12 col-md-6 col-lg-5 data-updated">
+                    <div class="m-0" style="padding-top:12px"><span>
                                     <%= __('Data Last Updated') %>:
                                 </span><span id="data-updated"></span></div>
                 </div>
