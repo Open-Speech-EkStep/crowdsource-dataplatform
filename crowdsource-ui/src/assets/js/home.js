@@ -348,7 +348,7 @@ const renderCoachMarks = function () {
         }
     });
 
-    homePageTour.start();
+    // homePageTour.start();
 };
 
 $(document).ready(function () {
