@@ -25,7 +25,11 @@ const changeLocale = function (locale) {
     }
     const module = localStorage.getItem(CURRENT_MODULE);
     localStorage.setItem("i18n", locale);
-    location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
+    if(module === 'bolo'){
+        location.href = `/${locale}/${currentPage}`;
+    } else {
+        location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
+    }
 }
 
 function checkCookie() {
