@@ -11,8 +11,8 @@ const ingest1 = async (datasetId, datasetType, client, datset_base_path, languag
             "language": "${language}"
             }', 
             ${datasetId},
-            ${paired ? 'contributed' : null}
-        )`
+            ${paired === 'paired' ? '\'contributed\'' : null}
+            )`
     })
 
     const insert_rows = `insert into dataset_row 
