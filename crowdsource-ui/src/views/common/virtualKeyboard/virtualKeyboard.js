@@ -3,7 +3,6 @@
  * https://github.com/hodgef/simple-keyboard
  */
 const {keyboardLayout} = require('./keyboardLayout');
-console.log(keyboardLayout)
 let keyboard;
 const showKeyboard = function (language) {
   let Keyboard = window.SimpleKeyboard.default;
