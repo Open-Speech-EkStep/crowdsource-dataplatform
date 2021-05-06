@@ -105,20 +105,20 @@ const disposeLineChart = (chartDiv) => {
   }
 }
 
-function updateLineGraph(language, timeframe) {
+function updateLineGraph(language, timeframe, type) {
     disposeLineChart('timeline-chart');
     $timelineLoader.show().addClass('d-flex');
     $timelineChart.addClass('d-none');
-    buildLineGraphs(language, timeframe);
+    buildLineGraphs(language, timeframe, type);
 }
 
-function buildLineGraphs(language, timeframe) {
+function buildLineGraphs(language, timeframe, type) {
   // $.fn.popover.Constructor.Default.whiteList.table = [];
   // $.fn.popover.Constructor.Default.whiteList.tbody = [];
   // $.fn.popover.Constructor.Default.whiteList.tr = [];
   // $.fn.popover.Constructor.Default.whiteList.td = [];
   Promise.all([
-    fetch(`/timeline/text?language=${language}&timeframe=${timeframe}`),
+    fetch(`/timeline/${type}?language=${language}&timeframe=${timeframe}`),
   ]).then(function (responses) {
     return Promise.all(responses.map(function (response) {
         return response.json();
