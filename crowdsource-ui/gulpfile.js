@@ -277,6 +277,7 @@ gulp.task(
     'css-common',
     'css-sunoIndia',
     'css-likhoIndia',
+    'css-dekhoIndia',
     gulp.series('html', 'common-ejs-gen', 'html-gen-boloIndia', 'ejs-gen-sunoIndia', 'html-gen-sunoIndia','ejs-gen-likhoIndia', 'html-gen-likhoIndia','ejs-gen-dekhoIndia', 'html-gen-dekhoIndia')
   )
 );
