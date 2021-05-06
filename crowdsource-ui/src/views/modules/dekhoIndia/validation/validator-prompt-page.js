@@ -1,6 +1,6 @@
 const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 const { setInput } = require('../common/virtualKeyboard');
 
@@ -9,7 +9,44 @@ const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
-window.crowdSource = {};
+let currentIndex ;
+let validationCount = 0;
+
+const currentIndexKey = 'dekhoValidatorCurrentIndex';
+const sentencesKey = 'dekhoValidatorSentencesKey';
+const dekhoValidatorCountKey = 'dekhoValidatorCount';
+
+function getValue(number, maxValue) {
+  return number < 0
+    ? 0
+    : number > maxValue
+      ? maxValue
+      : number;
+}
+
+function getCurrentIndex(lastIndex) {
+  const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
+  return getValue(currentIndexInStorage, lastIndex);
+}
+
+const setCurrentSentenceIndex = (index) => {
+  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
+  currentSentenceLbl.innerText = index;
+}
+
+const setTotalSentenceIndex = (index) => {
+  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
+  totalSentencesLbl.innerText = index;
+}
+
+window.dekhoIndiaValidator = {};
+
+const updateDecisionButton = (button, colors) => {
+  const children = button.children().children();
+  children[0].setAttribute("fill", colors[0]);
+  children[1].setAttribute("fill", colors[1]);
+  children[2].setAttribute("fill", colors[2]);
+}
 
 function uploadToServer(cb) {
   const fd = new FormData();
@@ -17,11 +54,10 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  crowdSource.sentences = validationSentences;
-  fd.append('userInput', crowdSource.editedText);
+  fd.append('userInput', dekhoIndiaValidator.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localSpeakerDataParsed.language);
-  fd.append('sentenceId', crowdSource.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', dekhoIndiaValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fetch('/store', {
@@ -43,7 +79,6 @@ function uploadToServer(cb) {
     });
 }
 
-let currentIndex = 0, progressCount = 0, validationCount = 0;
 
 const animateCSS = ($element, animationName, callback) => {
   $element.addClass(`animated ${animationName}`);
@@ -53,13 +88,12 @@ const animateCSS = ($element, animationName, callback) => {
     $element.off('animationend');
     if (typeof callback === 'function') callback();
   }
-
   $element.on('animationend', handleAnimationEnd);
 };
 
 function setCapturedText(index) {
   const $capturedtext = $('#original-text');
-  const capturedText = validationSentences[index].contribution;
+  const capturedText = dekhoIndiaValidator.sentences[index].contribution;
   $capturedtext.text(capturedText);
   animateCSS($capturedtext, 'lightSpeedIn');
   $('#captured-text').text(capturedText);
@@ -67,36 +101,27 @@ function setCapturedText(index) {
 }
 
 function getNextSentence() {
-  if (currentIndex < validationSentences.length - 1) {
+  if (currentIndex < dekhoIndiaValidator.sentences.length - 1) {
     currentIndex++;
-    getImage(validationSentences[currentIndex].dataset_row_id);
+    updateProgressBar(currentIndex)
+    getImage(dekhoIndiaValidator.sentences[currentIndex].dataset_row_id);
     setCapturedText(currentIndex);
+    localStorage.setItem(currentIndexKey, currentIndex);
   } else {
+    const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
+    Object.assign(sentencesObj, { sentences: [] });
+    localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
+    localStorage.setItem(currentIndexKey, currentIndex);
     showThankYou();
   }
 }
 
-const updateDecisionButton = (button, colors) => {
-  const children = button.children().children();
-  children[0].setAttribute("fill", colors[0]);
-  children[1].setAttribute("fill", colors[1]);
-  children[2].setAttribute("fill", colors[2]);
-}
-
-const updateValidationCount = () => {
-  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
-  currentSentenceLbl.innerText = progressCount;
-  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-  totalSentencesLbl.innerText = validationSentences.length;
-}
-
-const updateProgressBar = () => {
+const updateProgressBar = (index) => {
   const $progressBar = $("#progress_bar");
-  progressCount++;
-  const multiplier = 10 * (10 / validationSentences.length);
-  $progressBar.width(progressCount * multiplier + '%');
-  $progressBar.prop('aria-valuenow', progressCount);
-  updateValidationCount();
+  const multiplier = 10 * (10 / dekhoIndiaValidator.sentences.length);
+  $progressBar.width(index * multiplier + '%');
+  $progressBar.prop('aria-valuenow', index);
+  setCurrentSentenceIndex(index);
 }
 
 function disableButton(button) {
@@ -108,8 +133,8 @@ function skipValidation(action) {
   if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
     validationCount++;
   }
-  const sentenceId = validationSentences[currentIndex].dataset_row_id
-  const contribution_id = validationSentences[currentIndex].contribution_id
+  const sentenceId = dekhoIndiaValidator.sentences[currentIndex].dataset_row_id
+  const contribution_id = dekhoIndiaValidator.sentences[currentIndex].contribution_id
   fetch(`/validate/${contribution_id}/${action}`, {
     method: 'POST',
     credentials: 'include',
@@ -188,7 +213,7 @@ function addListeners() {
     console.log("need change")
     hideElement($('#textarea-row'));
     openEditor();
-    const originalText = validationSentences[currentIndex].contribution;
+    const originalText = dekhoIndiaValidator.sentences[currentIndex].contribution;
     $('#captured-text').text(originalText);
     $('#edit').val('');
     $('#edit').val(originalText);
@@ -220,7 +245,7 @@ function addListeners() {
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
     showElement($('#progress-row'))
-    crowdSource.editedText = $("#edit").val();
+    dekhoIndiaValidator.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events','none');
     setTimeout(()=>{
@@ -228,7 +253,6 @@ function addListeners() {
       showElement($('#progress-row'))
       showElement($('#textarea-row'));
       hideElement($('#thankyou-text'));
-      updateProgressBar();
       getNextSentence();
       $("#edit").css('pointer-events','unset');
     }, 2000)
@@ -236,14 +260,12 @@ function addListeners() {
 
   likeButton.on('click', () => {
     skipValidation(ACCEPT_ACTION)
-    updateProgressBar();
     getNextSentence();
   })
 
   $skipButton.on('click', () => {
     $('#pause').trigger('click');
     skipValidation(SKIP_ACTION)
-    updateProgressBar();
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
     getNextSentence();
@@ -260,8 +282,6 @@ function addListeners() {
     $skipButton.css('background-color', '#bfddf5')
   })
 }
-
-let validationSentences = [{ sentence: '' }]
 
 const setDekhoImage = function (audioLink) {
   $('#view-image').attr('src', audioLink)
@@ -304,35 +324,7 @@ const getImage = function (contributionId) {
 }
 
 function showThankYou() {
-  hideElement($('#textarea-row'));
-  hideElement($('#dekho-image'));
-  hideElement($('#audio-row'))
-  hideElement($('#validation-button-row'))
-  showElement($('#thank-you-row'))
-  hideElement($('#progress-row'));
-  hideElement($('#skip_btn_row'));
-  hideElement($('#validation-container'));
-  $("#validation-container").removeClass("validation-container");
-  hideElement($('#report_btn'));
-  hideElement($("#test-mic-speakers"));
-  hideElement($('#instructive-msg'));
-  hideElement($('#editor-row'));
-  hideElement($('#thankyou-text'));
-  hideElement($('.simple-keyboard'));
-  hideElement($('#sentenceLabel'));
-
-  const language = localStorage.getItem('contributionLanguage');
-  const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
-  const aggregateDetails = JSON.parse(stringifyData);
-  const totalInfo = aggregateDetails.find((element) => element.language === language);
-  if (totalInfo) {
-    $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
-    $('#spn-total-hr-validated').html(totalInfo.total_validations);
-  } else {
-    $('#spn-total-hr-contributed').html(0);
-    $('#spn-total-hr-validated').html(0);
-  }
-  $('#spn-validation-count').html(validationCount);
+  window.location.href = './validator-thank-you.html'
 }
 
 function showNoSentencesMessage() {
@@ -360,7 +352,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: validationSentences[currentIndex].contribution_id,
+    sentenceId: dekhoIndiaValidator.sentences[currentIndex].contribution_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -381,36 +373,18 @@ const handleSubmitFeedback = function () {
 }
 
 const initializeComponent = () => {
-  const type = 'ocr';
-  const toLanguage = ""; //can be anything
-  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  fetch(`/contributions/${type}?from=${fromLanguage}&to=${toLanguage}`, {
-    credentials: 'include',
-    mode: 'cors'
-  })
-    .then((data) => {
-      if (!data.ok) {
-        throw Error(data.statusText || 'HTTP error');
-      } else {
-        return data.json();
-      }
-    }).then((result) => {
-    // if (result.data.length === 0) {
-    //   showNoSentencesMessage();
-    //   return;
-    // }
-    validationSentences = result.data;
-    window.crowdSource = result.data;
-    const validationData = validationSentences[currentIndex];
+    const totalItems = dekhoIndiaValidator.sentences.length;
+    currentIndex = getCurrentIndex(totalItems - 1);
+
+    addListeners();
+    const validationData = dekhoIndiaValidator.sentences[currentIndex];
+  console.log(dekhoIndiaValidator)
     if (validationData) {
       getImage(validationData.dataset_row_id );
       setCapturedText(currentIndex);
-      updateValidationCount();
-      addListeners();
+      setCurrentSentenceIndex(currentIndex);
+      setTotalSentenceIndex(totalItems);
     }
-  }).catch((err) => {
-    console.log(err)
-  });
 }
 
 const getLocationInfo = () => {
@@ -424,7 +398,7 @@ const getLocationInfo = () => {
 
 let selectedReportVal = '';
 $(document).ready(() => {
-  localStorage.setItem(CURRENT_MODULE,'dekho');
+  localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   setFooterPosition();
   showKeyboard(contributionLanguage.toLowerCase());
@@ -468,7 +442,55 @@ $(document).ready(() => {
   });
 
   getLocationInfo();
-  initializeComponent();
+  const localSpeakerData = localStorage.getItem(speakerDetailsKey);
+  const localSpeakerDataParsed = JSON.parse(localSpeakerData);
+  const localSentences = localStorage.getItem(sentencesKey);
+  const localSentencesParsed = JSON.parse(localSentences);
+  setPageContentHeight();
+  if (!localSpeakerDataParsed) {
+    location.href = './home.html';
+    return;
+  }
+
+  const isExistingUser = localSentencesParsed &&
+    localSentencesParsed.userName === localSpeakerDataParsed.userName
+    &&
+    localSentencesParsed.language === localSpeakerDataParsed.language;
+
+  if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === language) {
+    setFooterPosition();
+    dekhoIndiaValidator.sentences = localSentencesParsed.sentences;
+    initializeComponent();
+  } else {
+    localStorage.removeItem(currentIndexKey);
+    const type = 'ocr';
+    fetch(`/contributions/${type}?from=${language}&to=`, {
+      credentials: 'include',
+      mode: 'cors'
+    }).then((data) => {
+      if (!data.ok) {
+        throw Error(data.statusText || 'HTTP error');
+      } else {
+        return data.json();
+      }
+    }).then(result => {
+      setFooterPosition();
+      dekhoIndiaValidator.sentences = result.data;
+      localStorage.setItem(dekhoValidatorCountKey, dekhoIndiaValidator.sentences.length);
+      localStorage.setItem(
+        sentencesKey,
+        JSON.stringify({
+          userName: localSpeakerDataParsed.userName,
+          sentences: result.data,
+          language: language,
+          toLanguage: ''
+        })
+      );
+      initializeComponent();
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 });
 
 module.exports = {

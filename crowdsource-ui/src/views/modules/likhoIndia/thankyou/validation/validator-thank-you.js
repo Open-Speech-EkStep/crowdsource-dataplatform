@@ -6,6 +6,7 @@ const {
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
+  TOP_LANGUAGES_BY_HOURS
 } = require("../common/constants");
 
 const {
@@ -17,7 +18,7 @@ const {
 } = require("../common/utils");
 
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showByHoursChart} = require('../common/common');
+const {showByHoursChart, getContributedAndTopLanguage} = require('../common/common');
 
 const CURRENT_INDEX = "likhoValidatorCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -70,6 +71,10 @@ const getLanguageStats = function () {
         const contributionLanguage = localStorage.getItem(
           CONTRIBUTION_LANGUAGE
         );
+
+        const languages = getContributedAndTopLanguage(response.top_languages_by_hours);
+        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
+        showByHoursChart();
         const rank = data.findIndex(
           (x) => x.language.toLowerCase() === contributionLanguage.toLowerCase()
         );
@@ -219,7 +224,6 @@ function executeOnLoad() {
     if (contributionLanguage) {
       updateLocaleLanguagesDropdown(contributionLanguage);
     }
-    showByHoursChart();
     getLanguageStats();
   }
 }
