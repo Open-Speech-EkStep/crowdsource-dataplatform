@@ -109,6 +109,7 @@ function updateLineGraph(language, timeframe, type) {
     disposeLineChart('timeline-chart');
     $timelineLoader.show().addClass('d-flex');
     $timelineChart.addClass('d-none');
+    console.log(type);
     buildLineGraphs(language, timeframe, type);
 }
 
