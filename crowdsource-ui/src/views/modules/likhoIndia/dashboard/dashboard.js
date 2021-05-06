@@ -1,6 +1,6 @@
 const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
-const { testUserName, setStartRecordingBtnOnClick, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('../common/userDetails');
+const { testUserName, setStartRecordingBtnOnClick, setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown } = require('../common/userDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
 const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE } = require('../common/constants');
 const fetch = require('../common/fetch');
@@ -20,6 +20,16 @@ const fetchDetail = (language) => {
         }
     });
 };
+
+const setLanguageList = () => {
+    return fetch('/available-languages/parallel').then((data) => {
+      if (!data.ok) {
+        throw Error(data.statusText || 'HTTP error');
+      } else {
+        return Promise.resolve(data.json());
+      }
+    });
+  };
 
 function isLanguageAvailable(data, lang) {
     let langaugeExists = false;
@@ -55,8 +65,8 @@ function updateLanguage(language) {
                   $speakersDataLoader.removeClass('d-none');
                   $speakerDataLanguagesWrapper.addClass('d-none');
                   $speakerDataDetails.addClass('d-none');
-                  generateIndiaMap(language);
-                  updateLineGraph(language, activeDurationText);
+                  generateIndiaMap(language, 'parallel');
+                  updateLineGraph(language, activeDurationText, 'parallel');
                   setSpeakerData(data.data, language);
                   $speakersDataLoader.addClass('d-none');
                   $speakerDataDetails.removeClass('d-none');
@@ -78,6 +88,15 @@ function updateLanguage(language) {
           console.log(err);
       });
 }
+
+const addLanguagesIn = function (id, list) {
+    const selectBar = document.getElementById(id);
+    let options = '';
+    list.forEach(lang => {
+      options = options.concat(`<option value=${lang}>${lang}</option>`);
+    })
+    selectBar.innerHTML = options;
+  }
 
 $(document).ready(function () {
     localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
@@ -138,8 +157,18 @@ $(document).ready(function () {
         setStartRecordingBtnOnClick("./record.html");
     });
 
+    let fromLanguage = $('#from-dash-language option:first-child').val();
+    let toLanguage = $('#to-dash-language option:first-child').val();
+    $('#from-dash-language').on('change', (e) => {
+      fromLanguage = e.target.value;
+      updateLocaleLanguagesDropdown(fromLanguage);
+    });
+
+    $('#to-dash-language').on('change', (e) => {
+      toLanguage = e.target.value;
+    });
+
     setSpeakerDetails(speakerDetailsKey, $userName);
-    setGenderRadioButtonOnClick();
     $startRecordBtnTooltip.tooltip('disable');
     setUserNameOnInputFocus();
     setUserModalOnShown($userName);
