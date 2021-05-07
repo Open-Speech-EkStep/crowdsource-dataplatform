@@ -25,7 +25,7 @@ count(distinct(contributed_by)) as total_speakers,
 ROUND((sum(contribution_audio_duration) FILTER (WHERE audio_row_num_per_contribution_id = 1 ))::numeric/3600,3)  as total_contributions, 
 ROUND(sum(contributions_and_demo_stats.validation_audio_duration)::numeric/3600, 3)  as total_validations,
 count(distinct contribution_id) total_contribution_count,
-count(distinct validation_id) total_validation_count
+sum(contributions_and_demo_stats.is_validated) total_validation_count
 from contributions_and_demo_stats where $1:raw
 group by contributions_and_demo_stats.type;`;
 
