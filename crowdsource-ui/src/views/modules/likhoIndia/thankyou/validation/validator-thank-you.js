@@ -7,7 +7,8 @@ const {
   CURRENT_MODULE,
   MODULE,
   TOP_LANGUAGES_BY_HOURS,
-  TO_LANGUAGE
+  TO_LANGUAGE,
+  ALL_LANGUAGES
 } = require("../common/constants");
 
 const {

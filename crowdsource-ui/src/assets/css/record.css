@@ -480,9 +480,17 @@ audio {
     height: 50px;
     width: 100px;
 }
-  
+    #submit-edit-button>svg {
+      height: 50px;
+      width: 100px;
+    }
   .only-display {
     display: none;
   }
+}
+
+.edit-area.form-control:focus{
+  border: none;
+  box-shadow: none;
 }
 
