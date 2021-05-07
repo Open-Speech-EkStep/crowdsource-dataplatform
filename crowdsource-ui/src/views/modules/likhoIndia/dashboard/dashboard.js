@@ -1,8 +1,8 @@
 const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
 const { testUserName, setStartRecordingBtnOnClick, setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown } = require('../common/userDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
-const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE } = require('../common/constants');
+const { toggleFooterPosition, getLocaleString } = require('../common/utils');
+const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE,TO_LANGUAGE,CONTRIBUTION_LANGUAGE } = require('../common/constants');
 const fetch = require('../common/fetch');
 
 const {setSpeakerData} = require('../common/contributionStats');
@@ -33,6 +33,31 @@ function isLanguageAvailable(data, lang) {
     });
     return langaugeExists;
 }
+
+const updateLocaleLanguagesDropdown = (language, toLanguage) => {
+    const dropDown = $('#localisation_dropdown');
+    const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+    const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
+    const invalidToLang = toLanguage.toLowerCase() === "english" || toLanguage.hasLocaleText === false;
+    const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
+    if (invalidToLang && invalidFromLang) {
+        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
+    } else if (invalidFromLang) {
+        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+      <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+    } else if (invalidToLang) {
+        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+    } else if (toLanguage.toLowerCase() === language.toLowerCase()){
+        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+    }else {
+        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
+        <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+    }
+}
+
 
 function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
@@ -94,8 +119,9 @@ $(document).ready(function () {
     const age = document.getElementById('age');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem('contributionLanguage');
+    const contributionLanguage2 = localStorage.getItem(TO_LANGUAGE);
     if (contributionLanguage) {
-        updateLocaleLanguagesDropdown(contributionLanguage);
+        updateLocaleLanguagesDropdown(contributionLanguage,contributionLanguage2);
     }
 
     $('#duration').on('click', (e) => {
@@ -127,17 +153,13 @@ $(document).ready(function () {
         }, 5000);
     }, {passive: true});
 
-    $("#contribute-now").on('click', (e) => {
-        localStorage.setItem("i18n", "en");
-        sentenceLanguage = languageToRecord;
-        setStartRecordingBtnOnClick("./record.html");
-    });
+
 
     let fromLanguage = $('#from-dash-language option:first-child').val();
     let toLanguage = $('#to-dash-language option:first-child').val();
+
     $('#from-dash-language').on('change', (e) => {
       fromLanguage = e.target.value === "" ? "" : e.target.value;
-      updateLocaleLanguagesDropdown(fromLanguage);
     });
 
     $('#to-dash-language').on('change', (e) => {
@@ -147,6 +169,14 @@ $(document).ready(function () {
       } else {
         updateLanguage("");
       }
+    });
+
+    $("#contribute-now").on('click', (e) => {
+        localStorage.setItem("i18n", "en");
+        sentenceLanguage = languageToRecord;
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
+        localStorage.setItem(TO_LANGUAGE, toLanguage);
+        setStartRecordingBtnOnClick("./record.html");
     });
 
     setSpeakerDetails(speakerDetailsKey, $userName);

@@ -1,8 +1,12 @@
-const { constructChart } = require('../common/horizontalBarGraph');
-const { onActiveNavbar } = require('../common/header');
-const { setSpeakerData } = require('../common/contributionStats');
-const { getContributedAndTopLanguage } = require('../common/common');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest } = require('../common/utils');
+const {constructChart} = require('../common/horizontalBarGraph');
+const {onActiveNavbar} = require('../common/header');
+const {setSpeakerData} = require('../common/contributionStats');
+const {getContributedAndTopLanguage, redirectToLocalisedPage} = require('../common/common');
+const {
+  toggleFooterPosition,
+  getLocaleString,
+  performAPIRequest
+} = require('../common/utils');
 const {
   setSpeakerDetails,
   setUserModalOnShown,
@@ -11,7 +15,7 @@ const {
 } = require('../common/userDetails');
 const fetch = require('../common/fetch');
 
-const { updateHrsForCards } = require('../common/card')
+const {updateHrsForCards} = require('../common/card')
 
 const {
   TOP_LANGUAGES_BY_HOURS,
@@ -50,6 +54,7 @@ function getStatistics(response) {
 }
 
 const chartReg = {};
+
 function showByHoursChart() {
   if (chartReg["chart"]) {
     chartReg["chart"].dispose();
@@ -79,8 +84,8 @@ const getStatsSummary = function () {
         $("#view_all_btn").show();
       }
     }).catch(err => {
-      console.log(err)
-    });
+    console.log(err)
+  });
 }
 
 const addLanguagesIn = function (id, list) {
@@ -106,30 +111,71 @@ const checkIsValidating = (contributionLanguages, fromLanguage, toLanguage) => {
   localStorage.setItem(TO_LANGUAGE, toLanguage);
 }
 
+const updateLocaleLanguagesDropdown = (language, toLanguage) => {
+  const dropDown = $('#localisation_dropdown');
+  const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+  const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
+  const invalidToLang = toLanguage.toLowerCase() === "english" || toLanguage.hasLocaleText === false;
+  const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
+  if (invalidToLang && invalidFromLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
+  } else if (invalidFromLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+      <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+  } else if (invalidToLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  } else if (toLanguage.toLowerCase() === language.toLowerCase()){
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  }else {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
+        <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+  }
+}
+
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
   const $userName = $('#username');
   toggleFooterPosition();
 
   setLanguageList().then(languagePairs => {
-    const { datasetLanguages, contributionLanguages } = languagePairs;
+    const {datasetLanguages, contributionLanguages} = languagePairs;
+    let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    let toLanguage = localStorage.getItem(TO_LANGUAGE);
     addLanguagesIn('from-language', datasetLanguages);
-    $('#from-language option:first-child').attr("selected", "selected");
-    $('#to-language option:first-child').attr("selected", "selected");
-    let fromLanguage = $('#from-language option:first-child').val();
-    let toLanguage = $('#to-language option:first-child').val();
-    checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-    localStorage.setItem(TO_LANGUAGE, toLanguage);
+    if (fromLanguage && toLanguage){
+      updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
+      checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
+      $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
+      $(`#to-language option[value=${toLanguage}]`).attr("selected", "selected");
+    } else {
+      $('#from-language option:first-child').attr("selected", "selected");
+      $('#to-language option:first-child').attr("selected", "selected");
+       fromLanguage = $('#from-language option:first-child').val();
+       toLanguage = $('#to-language option:first-child').val();
+      updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
+      checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
+      localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
+      localStorage.setItem(TO_LANGUAGE, toLanguage);
+    }
+
     $('#from-language').on('change', (e) => {
       fromLanguage = e.target.value;
       localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-      updateLocaleLanguagesDropdown(fromLanguage);
+      updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
+      localStorage.setItem("i18n", "en");
+      redirectToLocalisedPage();
     });
 
     $('#to-language').on('change', (e) => {
       toLanguage = e.target.value;
+      const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
       localStorage.setItem(TO_LANGUAGE, toLanguage);
+      updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
+      localStorage.setItem("i18n", "en");
+      redirectToLocalisedPage();
       checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
       getStatsSummary();
     });

@@ -583,6 +583,7 @@ $(document).ready(() => {
       mode: 'cors'
     }).then((data) => {
       if (!data.ok) {
+        showNoSentencesMessage();
         throw Error(data.statusText || 'HTTP error');
       } else {
         return data.json();
@@ -610,11 +611,6 @@ $(document).ready(() => {
     })
   }
 })
-
-
-
-
-
 
 
 module.exports = {

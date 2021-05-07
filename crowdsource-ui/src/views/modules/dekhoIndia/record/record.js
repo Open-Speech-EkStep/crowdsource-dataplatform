@@ -350,6 +350,7 @@ function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
   hideElement($('#textarea-row'));
   hideElement($('#audio-row'))
+  hideElement($('#dekho-image'));
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
   showElement($('#no-textarea-row'))
@@ -361,8 +362,8 @@ function showNoSentencesMessage() {
   hideElement($('#editor-row'));
   hideElement($('#thankyou-text'));
   hideElement($('.simple-keyboard'));
+  showElement($('#no-sentences-row'));
   $("#validation-container").removeClass("validation-container");
-  $('#start-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
 }
 
 const handleSubmitFeedback = function () {
@@ -513,6 +514,7 @@ const executeOnLoad = function () {
         },
       }).then((data) => {
         if (!data.ok) {
+          showNoSentencesMessage();
           throw Error(data.statusText || 'HTTP error');
         } else {
           return data.json();
