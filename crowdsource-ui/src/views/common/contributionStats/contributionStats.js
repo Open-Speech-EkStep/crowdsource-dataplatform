@@ -37,23 +37,33 @@ const setSpeakerData = function (data, language, moduleType){
   const $speakerDataLanguagesWrapper = $('#languages-wrapper');
   const $speakersData = $('#speaker-data');
   const $speakerContributionData = $speakersData.find('.contribution-data');
-  const {
-    hours: contributedHours,
-    minutes: contributedMinutes,
-    seconds: contributedSeconds
-  } = calculateTime(speakersData.contributions.toFixed(3)*60*60);
-  const {
-    hours: validatedHours,
-    minutes: validatedMinutes,
-    seconds: validatedSeconds
-  } = calculateTime(speakersData.validations.toFixed(3)*60*60);
- 
-    $speakerDataLanguagesValue.text(speakersData.languages);
-    $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xs-6');
-    $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6')
-  $speakersDataContributionValue.text(`${contributedHours}h ${contributedMinutes}m ${contributedSeconds}s`);
-  $speakersDataValidationValue.text(`${validatedHours}h ${validatedMinutes}m ${validatedSeconds}s`);
-  $speakersDataSpeakerValue.text(speakersData.speakers);
+  if(moduleType !== "likho" && moduleType !== "dekho") {
+    const {
+      hours: contributedHours,
+      minutes: contributedMinutes,
+      seconds: contributedSeconds
+    } = calculateTime(speakersData.contributions.toFixed(3)*60*60);
+    const {
+      hours: validatedHours,
+      minutes: validatedMinutes,
+      seconds: validatedSeconds
+    } = calculateTime(speakersData.validations.toFixed(3)*60*60);
+   
+      $speakerDataLanguagesValue.text(speakersData.languages);
+      $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xs-6');
+      $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6')
+    $speakersDataContributionValue.text(`${contributedHours}h ${contributedMinutes}m ${contributedSeconds}s`);
+    $speakersDataValidationValue.text(`${validatedHours}h ${validatedMinutes}m ${validatedSeconds}s`);
+    $speakersDataSpeakerValue.text(speakersData.speakers);
+  } else {
+      $speakerDataLanguagesValue.text(speakersData.languages);
+      $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xs-6');
+      $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6')
+    $speakersDataContributionValue.text(speakersData.contributions);
+    $speakersDataValidationValue.text(speakersData.validations);
+    $speakersDataSpeakerValue.text(speakersData.speakers);
+  }
+  
 }
 
 module.exports = {setSpeakerData}
