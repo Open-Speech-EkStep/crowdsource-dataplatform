@@ -361,11 +361,13 @@ describe("Running tests for dbOperations", () => {
 
     test('Get Rewards info', () => {
         const spyDBany = jest.spyOn(mockDB, 'any')
+        const type = 'testType'
+        const source = 'testSource'
         const language = 'testLanguage'
 
-        dbOperations.getRewardsInfo(language);
+        dbOperations.getRewardsInfo(type, source, language);
 
-        expect(spyDBany).toHaveBeenCalledWith(rewardsInfoQuery, [language])
+        expect(spyDBany).toHaveBeenCalledWith(rewardsInfoQuery, [type, source, language])
     });
 
     describe('Test Get Rewards', () => {
