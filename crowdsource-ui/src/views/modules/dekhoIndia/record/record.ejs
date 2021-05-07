@@ -146,7 +146,7 @@
         </div>
 
 
-        <script>var modal=document.getElementById("myModal"),img=document.getElementById("expand-view"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");img.onclick=function(){modal.style.display="block",modalImg.src=this.src};var span=document.getElementsByClassName("close")[0];span.onclick=function(){modal.style.display="none"}</script>
+        <script>var modal=document.getElementById("myModal"),clickExpandBtn=document.getElementById("expand-view"),img=document.getElementById("view-image"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");clickExpandBtn.onclick=function(){modal.style.display="block",modalImg.src=img.src};var span=document.getElementsByClassName("close")[0];span.onclick=function(){modal.style.display="none"}</script>
 
         <%- include('../common/report.ejs',{"REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
