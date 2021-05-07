@@ -1,5 +1,5 @@
 const fetch = require('../common/fetch')
-const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
+const { setPageContentHeight, toggleFooterPosition,setFooterPosition, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE,TO_LANGUAGE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 const { setInput } = require('../common/virtualKeyboard');
@@ -12,6 +12,30 @@ const SKIP_ACTION = 'skip';
 const currentIndexKey = 'likhoValidatorCurrentIndex';
 const sentencesKey = 'likhoValidatorSentencesKey';
 const likhoValidatorCountKey = 'likhoValidatorCount';
+
+const updateLocaleLanguagesDropdown = (language, toLanguage) => {
+  const dropDown = $('#localisation_dropdown');
+  const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+  const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
+  const invalidToLang = toLanguage.toLowerCase() === "english" || toLanguage.hasLocaleText === false;
+  const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
+  if (invalidToLang && invalidFromLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
+  } else if (invalidFromLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+      <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+  } else if (invalidToLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  } else if (toLanguage.toLowerCase() === language.toLowerCase()){
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  }else {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
+        <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+  }
+}
 
 function getValue(number, maxValue) {
   return number < 0
@@ -353,7 +377,7 @@ $(document).ready(() => {
   $('#to-label').text(toLanguage);
 
   if (fromLanguage && toLanguage) {
-    updateLocaleLanguagesDropdown(fromLanguage);
+    updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
   }
 
   $("#start_contributing_id").on('click', function () {

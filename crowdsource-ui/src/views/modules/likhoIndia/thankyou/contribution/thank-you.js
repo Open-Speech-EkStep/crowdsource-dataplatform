@@ -7,12 +7,12 @@ const {
   CURRENT_MODULE,
   MODULE,
   TOP_LANGUAGES_BY_HOURS,
+  TO_LANGUAGE,
 } = require("../common/constants");
 
 const {
   setPageContentHeight,
   toggleFooterPosition,
-  updateLocaleLanguagesDropdown,
   getLocaleString,
   performAPIRequest,
 } = require("../common/utils");
@@ -24,6 +24,30 @@ const CURRENT_INDEX = "likhoCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 const likhoCountKey = 'likhoCount';
 const totalSentence = Number(localStorage.getItem(likhoCountKey));
+
+const updateLocaleLanguagesDropdown = (language, toLanguage) => {
+  const dropDown = $('#localisation_dropdown');
+  const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+  const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
+  const invalidToLang = toLanguage.toLowerCase() === "english" || toLanguage.hasLocaleText === false;
+  const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
+  if (invalidToLang && invalidFromLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
+  } else if (invalidFromLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+      <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+  } else if (invalidToLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  } else if (toLanguage.toLowerCase() === language.toLowerCase()){
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  }else {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
+        <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+  }
+}
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -219,8 +243,9 @@ function executeOnLoad() {
     toggleFooterPosition();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    if (contributionLanguage) {
-      updateLocaleLanguagesDropdown(contributionLanguage);
+    const toLanguage = localStorage.getItem(TO_LANGUAGE);
+    if (contributionLanguage && toLanguage) {
+      updateLocaleLanguagesDropdown(contributionLanguage, toLanguage);
     }
     getLanguageStats();
   }
