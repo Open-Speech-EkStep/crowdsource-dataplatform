@@ -343,6 +343,7 @@ function showNoSentencesMessage() {
   hideElement($('#instructive-msg'));
   hideElement($('#editor-row'));
   hideElement($('#thankyou-text'));
+  hideElement($('#keyboardInstructions'));
   hideElement($('.simple-keyboard'));
   $("#validation-container").removeClass("validation-container");
 }
