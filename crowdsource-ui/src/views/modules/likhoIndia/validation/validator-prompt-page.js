@@ -36,6 +36,24 @@ const setTotalSentenceIndex = (index) => {
   totalSentencesLbl.innerText = index;
 }
 
+function showNoSentencesMessage() {
+  $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
+  hideElement($('#sentences-row'));
+  hideElement($('#audio-row'))
+  hideElement($('#validation-button-row'))
+  hideElement($('#progress-row'))
+  showElement($('#no-sentences-row'))
+  hideElement($('#skip_btn_row'));
+  hideElement($('#validation-container'));
+  hideElement($('#report_btn'));
+  hideElement($("#test-mic-speakers"));
+  hideElement($('#instructive-msg'));
+  hideElement($('#editor-row'));
+  hideElement($('#thankyou-text'));
+  hideElement($('.simple-keyboard'));
+  $("#validation-container").removeClass("validation-container");
+}
+
 window.likhoIndiaValidator = {};
 
 function uploadToServer(cb) {
@@ -398,11 +416,16 @@ $(document).ready(() => {
     })
       .then((data) => {
         if (!data.ok) {
+          showNoSentencesMessage();
           throw Error(data.statusText || 'HTTP error');
         } else {
           return data.json();
         }
       }).then(result => {
+        if(result.data.length == 0){
+          showNoSentencesMessage();
+          return;
+        }
       setFooterPosition();
       likhoIndiaValidator.sentences = result.data;
       localStorage.setItem(likhoValidatorCountKey, likhoIndiaValidator.sentences.length);

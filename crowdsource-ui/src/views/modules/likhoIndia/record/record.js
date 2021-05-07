@@ -55,7 +55,6 @@ function uploadToServer(cb) {
 }
 
 let currentIndex;
-let progressCount = 0;
 
 function getNextSentence() {
   if (currentIndex < likhoIndia.sentences.length - 1) {
@@ -89,8 +88,7 @@ const openEditor = function () {
 }
 
 
-const translationLanguage = localStorage.getItem(TO_LANGUAGE);
-showKeyboard(translationLanguage.toLowerCase());
+
 
 function markContributionSkipped() {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
@@ -209,7 +207,7 @@ function showThankYou() {
 }
 
 function showNoSentencesMessage() {
-  $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+  $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
   hideElement($('#sentences-row'));
   hideElement($('#audio-row'))
   hideElement($('#validation-button-row'))
@@ -232,11 +230,11 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: likhoIndia.sentences[currentIndex].contribution_id,
+    sentenceId: likhoIndia.sentences[currentIndex].dataset_row_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
-    source: "validation"
+    source: "contribution"
   };
   reportSentenceOrRecording(reqObj).then(function (resp) {
     if (resp.statusCode === 200) {
@@ -460,9 +458,10 @@ function executeOnLoad() {
   }
 }
 
-
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
+  const translationLanguage = localStorage.getItem(TO_LANGUAGE);
+  showKeyboard(translationLanguage.toLowerCase());
   hideElement($('.simple-keyboard'));
   getLocaleString().then(() => {
     executeOnLoad();
