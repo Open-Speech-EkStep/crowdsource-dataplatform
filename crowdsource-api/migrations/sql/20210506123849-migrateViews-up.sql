@@ -219,6 +219,19 @@ CREATE OR REPLACE VIEW public.daily_cumulative_stats_per_language
     daily_stats_complete.type
    FROM daily_stats_complete_newest daily_stats_complete;
 
+CREATE OR REPLACE VIEW public.monthly_stats_complete
+ AS
+ SELECT daily_stats_complete.language,
+    daily_stats_complete.year,
+    daily_stats_complete.month,
+    sum(daily_stats_complete.total_contributions) AS total_contributions,
+    sum(daily_stats_complete.total_validations) AS total_validations,
+    sum(daily_stats_complete.total_contribution_duration) AS total_contribution_duration,
+    sum(daily_stats_complete.total_validation_duration) AS total_validation_duration,
+    daily_stats_complete.type
+   FROM daily_stats_complete_newest daily_stats_complete
+  GROUP BY daily_stats_complete.type, daily_stats_complete.language, daily_stats_complete.year, daily_stats_complete.month;
+
 CREATE OR REPLACE VIEW public.monthly_cumulative_stats_all
  AS
  WITH monthly_stats_all AS (
@@ -254,19 +267,19 @@ CREATE OR REPLACE VIEW public.monthly_cumulative_stats_all
     monthly_stats_complete.type
    FROM monthly_stats_complete;
 
-CREATE OR REPLACE VIEW public.monthly_stats_complete
+
+ CREATE OR REPLACE VIEW public.quarterly_stats_complete
  AS
  SELECT daily_stats_complete.language,
     daily_stats_complete.year,
-    daily_stats_complete.month,
+    date_part('quarter'::text, concat(daily_stats_complete.year, '-', daily_stats_complete.month, '-', daily_stats_complete.day)::date) AS quarter,
     sum(daily_stats_complete.total_contributions) AS total_contributions,
     sum(daily_stats_complete.total_validations) AS total_validations,
     sum(daily_stats_complete.total_contribution_duration) AS total_contribution_duration,
     sum(daily_stats_complete.total_validation_duration) AS total_validation_duration,
     daily_stats_complete.type
    FROM daily_stats_complete_newest daily_stats_complete
-  GROUP BY daily_stats_complete.type, daily_stats_complete.language, daily_stats_complete.year, daily_stats_complete.month;
-
+  GROUP BY daily_stats_complete.type, daily_stats_complete.language, daily_stats_complete.year, (date_part('quarter'::text, concat(daily_stats_complete.year, '-', daily_stats_complete.month, '-', daily_stats_complete.day)::date));
 
 CREATE OR REPLACE VIEW public.quarterly_cumulative_stats_all
  AS
@@ -302,21 +315,20 @@ CREATE OR REPLACE VIEW public.quarterly_cumulative_stats_all
     sum(quarterly_stats_complete.total_validation_duration) OVER (PARTITION BY quarterly_stats_complete.language, quarterly_stats_complete.type ORDER BY quarterly_stats_complete.year, quarterly_stats_complete.quarter ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_validation_duration,
     quarterly_stats_complete.type
    FROM quarterly_stats_complete;
- 
- CREATE OR REPLACE VIEW public.quarterly_stats_complete
- AS
- SELECT daily_stats_complete.language,
+  
+ CREATE OR REPLACE VIEW public.weekly_stats_complete
+    AS
+    SELECT daily_stats_complete.language,
     daily_stats_complete.year,
-    date_part('quarter'::text, concat(daily_stats_complete.year, '-', daily_stats_complete.month, '-', daily_stats_complete.day)::date) AS quarter,
+    date_part('week'::text, make_date(daily_stats_complete.year::integer, daily_stats_complete.month::integer, daily_stats_complete.day::integer)) AS week,
     sum(daily_stats_complete.total_contributions) AS total_contributions,
     sum(daily_stats_complete.total_validations) AS total_validations,
     sum(daily_stats_complete.total_contribution_duration) AS total_contribution_duration,
     sum(daily_stats_complete.total_validation_duration) AS total_validation_duration,
     daily_stats_complete.type
    FROM daily_stats_complete_newest daily_stats_complete
-  GROUP BY daily_stats_complete.type, daily_stats_complete.language, daily_stats_complete.year, (date_part('quarter'::text, concat(daily_stats_complete.year, '-', daily_stats_complete.month, '-', daily_stats_complete.day)::date));
+  GROUP BY daily_stats_complete.type, daily_stats_complete.language, daily_stats_complete.year, (date_part('week'::text, make_date(daily_stats_complete.year::integer, daily_stats_complete.month::integer, daily_stats_complete.day::integer)));
 
- 
  CREATE OR REPLACE VIEW public.weekly_cumulative_stats_all
  AS
  WITH weekly_stats_all AS (
@@ -351,20 +363,7 @@ CREATE OR REPLACE VIEW public.quarterly_cumulative_stats_all
     sum(weekly_stats_complete.total_validation_duration) OVER (PARTITION BY weekly_stats_complete.language, weekly_stats_complete.type ORDER BY weekly_stats_complete.year, weekly_stats_complete.week ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_validation_duration,
     weekly_stats_complete.type
    FROM weekly_stats_complete;
- 
- CREATE OR REPLACE VIEW public.weekly_stats_complete
-    AS
-    SELECT daily_stats_complete.language,
-    daily_stats_complete.year,
-    date_part('week'::text, make_date(daily_stats_complete.year::integer, daily_stats_complete.month::integer, daily_stats_complete.day::integer)) AS week,
-    sum(daily_stats_complete.total_contributions) AS total_contributions,
-    sum(daily_stats_complete.total_validations) AS total_validations,
-    sum(daily_stats_complete.total_contribution_duration) AS total_contribution_duration,
-    sum(daily_stats_complete.total_validation_duration) AS total_validation_duration,
-    daily_stats_complete.type
-   FROM daily_stats_complete_newest daily_stats_complete
-  GROUP BY daily_stats_complete.type, daily_stats_complete.language, daily_stats_complete.year, (date_part('week'::text, make_date(daily_stats_complete.year::integer, daily_stats_complete.month::integer, daily_stats_complete.day::integer)));
-
+   
 DROP MATERIALIZED VIEW public.daily_stats_complete; 
   
 DROP MATERIALIZED VIEW public.contributions_and_demo_stats;
