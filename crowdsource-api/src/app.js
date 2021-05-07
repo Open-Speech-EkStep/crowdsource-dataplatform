@@ -353,9 +353,9 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
 
 router.get('/rewards', validateRewardsInput, async (req, res) => {
     const userId = req.cookies.userId;
-    const { language, userName = '', category = '' } = req.query;
+    const { type, source, language, userName = '' } = req.query;
     try {
-        const data = await getRewards(userId, userName, language, category);
+        const data = await getRewards(userId, userName, language, source, type);
         return res.send(data);
     } catch (error) {
         res.status(502).send({ statusCode: 502, message: error.message });
