@@ -132,7 +132,7 @@ workflows:
              - node/test
           filters:
             branches:
-              only: [master, sunoIndia]
+              only: master
 
       - db_migrate_aws:
           name: migrate_dev_aws
@@ -201,6 +201,7 @@ workflows:
           name: push_test_image
           repo: ${REPO}
           tag: test
+          path: ./crowdsource-api
           requires:
             - migrate_test_aws
 
@@ -241,6 +242,7 @@ workflows:
           name: push_prod_image
           repo: ${REPO}
           tag: prod
+          path: ./crowdsource-api
           requires:
             - migrate_prod_aws
 
