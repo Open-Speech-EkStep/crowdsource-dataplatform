@@ -2,7 +2,7 @@ const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
 const { testUserName, setStartRecordingBtnOnClick, setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown } = require('../common/userDetails');
 const { toggleFooterPosition, getLocaleString } = require('../common/utils');
-const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE,TO_LANGUAGE } = require('../common/constants');
+const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE,TO_LANGUAGE,CONTRIBUTION_LANGUAGE } = require('../common/constants');
 const fetch = require('../common/fetch');
 
 const {setSpeakerData} = require('../common/contributionStats');
@@ -153,14 +153,11 @@ $(document).ready(function () {
         }, 5000);
     }, {passive: true});
 
-    $("#contribute-now").on('click', (e) => {
-        localStorage.setItem("i18n", "en");
-        sentenceLanguage = languageToRecord;
-        setStartRecordingBtnOnClick("./record.html");
-    });
+
 
     let fromLanguage = $('#from-dash-language option:first-child').val();
     let toLanguage = $('#to-dash-language option:first-child').val();
+
     $('#from-dash-language').on('change', (e) => {
       fromLanguage = e.target.value === "" ? "" : e.target.value;
     });
@@ -172,6 +169,14 @@ $(document).ready(function () {
       } else {
         updateLanguage("");
       }
+    });
+
+    $("#contribute-now").on('click', (e) => {
+        localStorage.setItem("i18n", "en");
+        sentenceLanguage = languageToRecord;
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
+        localStorage.setItem(TO_LANGUAGE, toLanguage);
+        setStartRecordingBtnOnClick("./record.html");
     });
 
     setSpeakerDetails(speakerDetailsKey, $userName);

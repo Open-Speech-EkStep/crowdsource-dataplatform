@@ -142,15 +142,25 @@ function initializeBlock() {
 
   setLanguageList().then(languagePairs => {
     const {datasetLanguages, contributionLanguages} = languagePairs;
+    let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    let toLanguage = localStorage.getItem(TO_LANGUAGE);
     addLanguagesIn('from-language', datasetLanguages);
-    $('#from-language option:first-child').attr("selected", "selected");
-    $('#to-language option:first-child').attr("selected", "selected");
-    let fromLanguage = $('#from-language option:first-child').val();
-    let toLanguage = $('#to-language option:first-child').val();
-    updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
-    checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-    localStorage.setItem(TO_LANGUAGE, toLanguage);
+    if (fromLanguage && toLanguage){
+      updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
+      checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
+      $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
+      $(`#to-language option[value=${toLanguage}]`).attr("selected", "selected");
+    } else {
+      $('#from-language option:first-child').attr("selected", "selected");
+      $('#to-language option:first-child').attr("selected", "selected");
+       fromLanguage = $('#from-language option:first-child').val();
+       toLanguage = $('#to-language option:first-child').val();
+      updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
+      checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
+      localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
+      localStorage.setItem(TO_LANGUAGE, toLanguage);
+    }
+
     $('#from-language').on('change', (e) => {
       fromLanguage = e.target.value;
       localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
