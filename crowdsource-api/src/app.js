@@ -39,7 +39,7 @@ const {
     validateUserInputForFeedback,
     validateInputForSkip,
     validateRewardsInput,
-    validateRewardsInfoQuery,
+    validateRewardsInfoInput,
     validateContributedMediaInput,
     validateInputsForValidateEndpoint,
     validateGetContributionsInput,
@@ -362,10 +362,10 @@ router.get('/rewards', validateRewardsInput, async (req, res) => {
     }
 });
 
-router.get('/rewards-info', validateRewardsInfoQuery, async (req, res) => {
-    const { language } = req.query;
+router.get('/rewards-info', validateRewardsInfoInput, async (req, res) => {
+    const { type, source, language } = req.query;
 
-    const info = await getRewardsInfo(language);
+    const info = await getRewardsInfo(type, source, language);
     if (info && info.length > 0) {
         return res.send(info);
     }

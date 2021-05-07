@@ -4,10 +4,10 @@ const { validateUserInputAndFile,
     validateUserInputForFeedback,
     validateInputForSkip,
     validateRewardsInput,
-    validateRewardsInfoQuery,
+    validateRewardsInfoInput,
     validateContributedMediaInput,
-    validateInputsForValidateEndpoint, 
-    validateGetContributionsInput, 
+    validateInputsForValidateEndpoint,
+    validateGetContributionsInput,
     validateMediaTypeInput } = require('../src/middleware/validateUserInputs')
 
 describe('middleware test', function () {
@@ -350,22 +350,53 @@ describe('middleware test', function () {
     });
 
     describe('Validate Rewards info input', () => {
+        const validLanguage = 'language';
+        const validSource = 'contribute';
+        const validType = 'text';
 
         afterEach(() => {
             jest.clearAllMocks();
         })
 
         test('should call next() if language is given in query', () => {
-            const req = { cookies: cookie, query: { language: "some language" } };
-            validateRewardsInput(req, res, nextSpy);
+            const req = { cookies: cookie, query: { type: validType, source: validSource, language: validLanguage } };
+            validateRewardsInfoInput(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
             expect(res.send).toHaveBeenCalledTimes(0)
         });
 
+        test('should return 400 if type is undefined', () => {
+            const req = { cookies: cookie, query: { source: validSource, language: validLanguage } };
+            validateRewardsInfoInput(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if source is undefined', () => {
+            const req = { cookies: cookie, query: { type: validType, language: validLanguage } };
+            validateRewardsInfoInput(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
         test('should return 400 if language is undefined', () => {
-            const req = { cookies: cookie, query: {} };
-            validateRewardsInput(req, res, nextSpy);
+            const req = { cookies: cookie, query: { type: validType, source: validSource } };
+            validateRewardsInfoInput(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if type is not from media types', () => {
+            const req = { cookies: cookie, query: { type: 'someType', source: validSource, language: validLanguage } };
+            validateRewardsInfoInput(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if source is not in the source set', () => {
+            const req = { cookies: cookie, query: { type: validType, source: 'invalidSource', language: validLanguage } };
+            validateRewardsInfoInput(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1)
         });
@@ -609,7 +640,7 @@ describe('middleware test', function () {
 
             expect(res.send).toHaveBeenCalledTimes(1)
         });
-        
+
         test('should return 400 if type not passed', () => {
             const req = { params: {} };
             validateMediaTypeInput(req, res, nextSpy);

@@ -505,8 +505,8 @@ const getRewards = async (userId, userName, language, category) => {
     }
 }
 
-const getRewardsInfo = (language) => {
-    return db.any(rewardsInfoQuery, [language]);
+const getRewardsInfo = (type, source, language) => {
+    return db.any(rewardsInfoQuery, [type, source, language]);
 }
 
 const getHourGoalForLanguage = async (language) => {

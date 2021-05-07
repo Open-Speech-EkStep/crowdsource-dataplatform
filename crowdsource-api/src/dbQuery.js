@@ -151,9 +151,9 @@ const markMediaReported = `update dataset_row set state='reported' where "datase
 const markContributionSkippedQuery = `insert into "contributions" ("action","dataset_row_id", "date", "contributed_by")
 select 'skipped', $2, now(), $1;`;
 
-const rewardsInfoQuery = `select milestone as contributions, grade as badge from reward_milestones mil \
-inner join reward_catalogue rew on mil.reward_catalogue_id = rew.id \
-where LOWER(language) = LOWER($1) order by mil.milestone`;
+const rewardsInfoQuery = `select milestone as contributions, grade as badge from reward_milestones mil
+inner join reward_catalogue rew on mil.reward_catalogue_id = rew.id
+where mil.type=$1 and category=$2 and LOWER(language) = LOWER($3) order by mil.milestone`;
 
 const getTotalUserContribution = `select con.contribution_id from contributions con \
 inner join dataset_row sen on sen."dataset_row_id"=con."dataset_row_id" where LOWER(language) = LOWER($2) \
