@@ -330,11 +330,13 @@ function showThankYou() {
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
   hideElement($('#textarea-row'));
-  hideElement($('#audio-row'))
+  hideElement($('#audio-row'));
+  hideElement($('#dekho-image'));
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
   showElement($('#no-textarea-row'))
   hideElement($('#skip_btn_row'));
+  showElement($('#no-sentences-row'));
   hideElement($('#validation-container'));
   hideElement($('#report_btn'));
   hideElement($("#test-mic-speakers"));
@@ -343,7 +345,6 @@ function showNoSentencesMessage() {
   hideElement($('#thankyou-text'));
   hideElement($('.simple-keyboard'));
   $("#validation-container").removeClass("validation-container");
-  $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
 }
 
 const handleSubmitFeedback = function () {
@@ -469,11 +470,16 @@ $(document).ready(() => {
       mode: 'cors'
     }).then((data) => {
       if (!data.ok) {
+        showNoSentencesMessage();
         throw Error(data.statusText || 'HTTP error');
       } else {
         return data.json();
       }
     }).then(result => {
+      if(result.data.length === 0){
+        showNoSentencesMessage();
+        return;
+      }
       setFooterPosition();
       dekhoIndiaValidator.sentences = result.data;
       localStorage.setItem(dekhoValidatorCountKey, dekhoIndiaValidator.sentences.length);
