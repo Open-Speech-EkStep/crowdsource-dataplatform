@@ -157,7 +157,7 @@ const validateGetContributionsInput = (req, res, next) => {
 }
 
 const validateMediaTypeInput = (req, res, next) => {
-    if (!(req.params.type && MEDIA_TYPES.includes(req.params.type))) {
+    if (!(req.params && req.params.type && MEDIA_TYPES.includes(req.params.type))) {
         return res.status(400).send("Invalid params");
     }
     next();
