@@ -38,11 +38,12 @@ a{
 }
 
 .edit-text textarea {
-    border: none;
+    border: none !important;
     padding: 0;
-    box-shadow: none;
+    box-shadow: none !important;
     color: black;
     font-size: 24px;
+    border-color: transparent !important;
 }
 
 .original-text,.edit-text label {
