@@ -107,11 +107,16 @@ const validateInputForSkip = function (req, res, next) {
 
 const validateRewardsInput = (req, res, next) => {
     const userId = req.cookies.userId || "";
-    const { language = "" } = req.query;
+    const { type, source, language } = req.query;
 
-    if (language === "" || userId === "") {
-        return res.status(400).send("Input values missing");
+    if ( userId === "") {
+        return res.status(400).send("User Id missing");
     }
+
+    if (!(type && source && language && MEDIA_TYPES.includes(type) && SOURCES.includes(source))) {
+        return res.status(400).send("Invalid query");
+    }
+
     next();
 }
 
