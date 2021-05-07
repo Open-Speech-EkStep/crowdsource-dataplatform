@@ -223,7 +223,7 @@ a {
 
 /* The Close Button */
 
-.close {
+.close, .close-validate {
     z-index: 1;
     position: absolute;
     top: 0px;
@@ -235,7 +235,9 @@ a {
 }
 
 .close:hover,
-.close:focus {
+.close-validate:hover,
+.close:focus,
+.close-validate:focus {
     color: #bbb;
     text-decoration: none;
     cursor: pointer;

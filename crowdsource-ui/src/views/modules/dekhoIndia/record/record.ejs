@@ -42,6 +42,7 @@
             <div class="row justify-content-center" id="dekho-image">
                 <div class="col-lg-8 col-md-5 col-12">
                     <%- include ../common/image.ejs %>
+                    <span id="expand-view" class="position-absolute text-muted" style="cursor:pointer;right:16px;font-size:14px;margin-top:5px"> <%= __('Click to open expand view') %></span>
                 </div>
             </div>
             <div class="row m-0 justify-content-center mb-5 mb-lg-0 mt-5" id="textarea-row">
@@ -127,7 +128,7 @@
         </div>
 
 
-        <script>var modal=document.getElementById("myModal"),img=document.getElementById("view-image"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");img.onclick=function(){modal.style.display="block",modalImg.src=this.src};var span=document.getElementsByClassName("close")[0];span.onclick=function(){modal.style.display="none"}</script>
+        <script>var modal=document.getElementById("myModal"),img=document.getElementById("expand-view"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");img.onclick=function(){modal.style.display="block",modalImg.src=this.src};var span=document.getElementsByClassName("close")[0];span.onclick=function(){modal.style.display="none"}</script>
 
         <%- include('../common/report.ejs',{"REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
