@@ -39,7 +39,7 @@ const {
     validateUserInputForFeedback,
     validateInputForSkip,
     validateRewardsInput,
-    validateRewardsInfoQuery,
+    validateRewardsInfoInput,
     validateContributedMediaInput,
     validateInputsForValidateEndpoint,
     validateGetContributionsInput,
@@ -353,19 +353,19 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
 
 router.get('/rewards', validateRewardsInput, async (req, res) => {
     const userId = req.cookies.userId;
-    const { language, userName = '', category = '' } = req.query;
+    const { type, source, language, userName = '' } = req.query;
     try {
-        const data = await getRewards(userId, userName, language, category);
+        const data = await getRewards(userId, userName, language, source, type);
         return res.send(data);
     } catch (error) {
         res.status(502).send({ statusCode: 502, message: error.message });
     }
 });
 
-router.get('/rewards-info', validateRewardsInfoQuery, async (req, res) => {
-    const { language } = req.query;
+router.get('/rewards-info', validateRewardsInfoInput, async (req, res) => {
+    const { type, source, language } = req.query;
 
-    const info = await getRewardsInfo(language);
+    const info = await getRewardsInfo(type, source, language);
     if (info && info.length > 0) {
         return res.send(info);
     }

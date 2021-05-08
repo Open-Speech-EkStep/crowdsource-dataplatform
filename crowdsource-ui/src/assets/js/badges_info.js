@@ -56,9 +56,11 @@ const renderBadgeDetails = function (data) {
 
 $(document).ready(function () {
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
+  const type='text'
+  const source='contribute'
   updateLocaleLanguagesDropdown(language);
   getLocaleString().then(() => {
-    performAPIRequest(`/rewards-info?language=${language}`).then(renderBadgeDetails).catch((err) => {
+    performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then(renderBadgeDetails).catch((err) => {
       console.log(err);
     })
   }).catch(() => {
