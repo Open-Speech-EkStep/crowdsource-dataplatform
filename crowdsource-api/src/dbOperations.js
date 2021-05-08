@@ -196,12 +196,14 @@ const updateAndGetMedia = function (req, res) {
         });
 };
 
-const getContributionList = function (req, res) {
+const getContributionList = async function (req, res) {
     const fromLanguage = req.query.from;
     const toLanguage = req.query.to;
     const type = req.params.type;
     const userId = req.cookies.userId;
-    db.any(getContributionListQuery, [userId, type, fromLanguage, toLanguage])
+    const { userName = "" } = req.body;
+    const contributorId = await getContributorId(userId, userName);
+    db.any(getContributionListQuery, [contributorId, type, fromLanguage, toLanguage])
         .then((response) => {
             res.status(200).send({ data: response })
         })
@@ -237,10 +239,11 @@ const getMediaObject = (req, res, objectStorage) => {
 
 }
 
-const updateTablesAfterValidation = (req, res) => {
-    const validatorId = req.cookies.userId;
-    const { sentenceId, state = "", country = "" } = req.body;
+const updateTablesAfterValidation = async (req, res) => {
+    const userId = req.cookies.userId;
+    const { sentenceId, state = "", country = "", userName = "" } = req.body;
     const { action, contributionId } = req.params;
+    const validatorId = await getContributorId(userId, userName);
     return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country])
         .then(async () => {
             if (action !== 'skip') {
