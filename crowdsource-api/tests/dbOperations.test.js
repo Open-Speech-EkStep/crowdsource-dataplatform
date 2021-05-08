@@ -252,17 +252,21 @@ describe("Running tests for dbOperations", () => {
         )
     });
 
-    test('getContributionList should call getContributionListQuery query once with language', () => {
+    test('getContributionList should call getContributionListQuery query once with language', async () => {
         const language = 'testLanguage';
         const userId = 123;
         const type = 'text'
-        const req = { params: { type: type }, query: { from: language }, cookies: { userId } };
+        const userName = 'name';
+        const contributorId = 1;
+        const req = { params: { type: type }, query: { from: language }, cookies: { userId }, body: { userName } };
         const spyDBany = jest.spyOn(mockDB, 'any')
-        when(spyDBany).calledWith(getContributionListQuery, [userId, type, language, undefined]).mockReturnValue(Promise.resolve())
+        const spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
+        when(spyDBany).calledWith(getContributionListQuery, [contributorId, type, language, undefined]).mockReturnValue(Promise.resolve())
+        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
 
-        dbOperations.getContributionList(req, res);
+        await dbOperations.getContributionList(req, res);
 
-        expect(spyDBany).toHaveBeenCalledWith(getContributionListQuery, [userId, type, language, undefined]);
+        expect(spyDBany).toHaveBeenCalledWith(getContributionListQuery, [contributorId, type, language, undefined]);
         jest.clearAllMocks();
     });
 
@@ -524,28 +528,32 @@ describe("Running tests for dbOperations", () => {
         const state = 'Test State';
         const country = 'Test Country';
         const userId = 123;
+        const contributorId = 1;
+        const userName = 'name';
 
         test('should call addValidationQuery and updateMediaWithValidatedState if action is accept/reject', async () => {
             spyDBnone.mockReturnValue(Promise.resolve())
+            when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
             const action = 'accept';
 
-            const req = { 'body': { sentenceId, state, country }, 'cookies': { userId }, params: { action, contributionId } }
+            const req = { 'body': { sentenceId, state, country, userName }, 'cookies': { userId }, params: { action, contributionId } }
 
             await dbOperations.updateTablesAfterValidation(req, res);
 
-            expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [userId, sentenceId, action, contributionId, state, country]);
+            expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [contributorId, sentenceId, action, contributionId, state, country]);
             expect(spyDBnone).toHaveBeenNthCalledWith(2, updateMediaWithValidatedState, [sentenceId, contributionId])
         });
 
         test('should only call addValidationQuery if action is skip', async () => {
             spyDBnone.mockReturnValue(Promise.resolve())
+            when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
             const action = 'skip';
 
-            const req = { 'body': { sentenceId, state, country }, 'cookies': { userId }, params: { action, contributionId } }
+            const req = { 'body': { sentenceId, state, country, userName }, 'cookies': { userId }, params: { action, contributionId } }
 
             await dbOperations.updateTablesAfterValidation(req, res);
 
-            expect(spyDBnone).toBeCalledWith(addValidationQuery, [userId, sentenceId, action, contributionId, state, country]);
+            expect(spyDBnone).toBeCalledWith(addValidationQuery, [contributorId, sentenceId, action, contributionId, state, country]);
             expect(spyDBnone).toBeCalledTimes(1);
         })
     })

@@ -98,17 +98,17 @@ limit 5`;
 const getContributionListQuery = `
 select con."dataset_row_id", ds.media ->> 'data' as sentence, con.media ->> 'data' as contribution, con.contribution_id 
     from contributions con 
-    inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_identifier!=$1
+    inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_id!=$1
     inner join dataset_row ds on ds."dataset_row_id"=con."dataset_row_id" and ds."state"= 'contributed' 
 	and ds.type=$2 and (ds.type='text' or con.is_system) and (ds.type!='parallel' or con.media->>'language'=$4)
     left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' 
-    where  con.action='completed' and ds.media->>'language'=$3 and COALESCE(val.validated_by, '')!= $1
+    where  con.action='completed' and ds.media->>'language'=$3 and COALESCE(val.validated_by, '')!= $1::text
 	group by con."dataset_row_id", ds.media ->> 'data', con.contribution_id 
     order by count(val.*) desc, RANDOM() limit 5;`
 
-const addValidationQuery = `insert into validations (contribution_id, "action", validated_by, "date", "state_region", "country") \
-select contribution_id, $3, $1, now(), $5, $6 from contributions inner join dataset_row on dataset_row."dataset_row_id"=contributions."dataset_row_id" \
-where dataset_row."dataset_row_id" = $2 and dataset_row.state = \'contributed\' and contribution_id=$4;`
+const addValidationQuery = `insert into validations (contribution_id, action, validated_by, date, state_region, country) 
+select contribution_id, $3, $1, now(), $5, $6 from contributions inner join dataset_row on dataset_row.dataset_row_id=contributions.dataset_row_id 
+where dataset_row.dataset_row_id=$2 and dataset_row.state='contributed' and contribution_id=$4;`
 
 const updateMediaWithValidatedState = `update dataset_row set "state" = \
 \'validated\' where "dataset_row_id" = $1 and (select count(*) from validations where contribution_id = $2 and action != 'skip') >= \
