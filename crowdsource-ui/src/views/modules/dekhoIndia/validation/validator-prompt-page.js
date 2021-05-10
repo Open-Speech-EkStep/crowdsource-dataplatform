@@ -243,7 +243,7 @@ function addListeners() {
     hideElement($('#submit-edit-button'))
     hideElement($('#audio-player-btn'))
     hideElement($('#skip_button'))
-    showElement($('#thankyou-text'));
+    showElement($('#thank-you-row'));
     showElement($('#progress-row'))
     dekhoIndiaValidator.editedText = $("#edit").val();
     uploadToServer();
@@ -252,7 +252,7 @@ function addListeners() {
       closeEditor();
       showElement($('#progress-row'))
       showElement($('#textarea-row'));
-      hideElement($('#thankyou-text'));
+      hideElement($('#thank-you-row'));
       getNextSentence();
       $("#edit").css('pointer-events','unset');
     }, 2000)
@@ -342,7 +342,7 @@ function showNoSentencesMessage() {
   hideElement($("#test-mic-speakers"));
   hideElement($('#instructive-msg'));
   hideElement($('#editor-row'));
-  hideElement($('#thankyou-text'));
+  hideElement($('#thank-you-row'));
   hideElement($('#keyboardInstructions'));
   hideElement($('.simple-keyboard'));
   $("#validation-container").removeClass("validation-container");
