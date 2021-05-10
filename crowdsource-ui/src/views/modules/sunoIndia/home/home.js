@@ -1,6 +1,6 @@
 const {constructChart}= require('../common/horizontalBarGraph');
 const { onActiveNavbar } = require('../common/header');
-const {getContributedAndTopLanguage,redirectToLocalisedPage} = require('../common/common');
+const {getContributedAndTopLanguage,redirectToLocalisedPage, showFucntionalCards} = require('../common/common');
 const {setSpeakerData} = require('../common/contributionStats');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
 const {
@@ -130,16 +130,6 @@ const getStatsSummary = function () {
   });
 }
 
-const setLanguageList = () => {
-  return fetch('/available-languages/asr').then((data) => {
-    if (!data.ok) {
-      throw Error(data.statusText || 'HTTP error');
-    } else {
-      return Promise.resolve(data.json());
-    }
-  });
-};
-
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
   const $userName = $('#username');
@@ -180,6 +170,7 @@ function initializeBlock() {
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
     }
+    // showFucntionalCards('asr');
   });
 
   $('#start_recording').on('click', () => {
@@ -195,8 +186,7 @@ function initializeBlock() {
   })
 
   showByHoursChart();
-  setLanguageList();
-
+  // showFucntionalCards('asr');
   setSpeakerDetails(speakerDetailsKey, $userName);
   setUserNameOnInputFocus();
   setStartRecordingBtnOnClick();
