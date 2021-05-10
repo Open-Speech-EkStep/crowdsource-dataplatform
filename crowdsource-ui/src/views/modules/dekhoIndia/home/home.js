@@ -184,7 +184,7 @@ function initializeBlock() {
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
     }
-    showFucntionalCards('ocr');
+    // showFucntionalCards('ocr');
   });
 
   $('#start_recording').on('click', () => {
@@ -198,7 +198,7 @@ function initializeBlock() {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
     setStartRecordingBtnOnClick('./validator-page.html');
   })
-  showFucntionalCards('ocr');
+  // showFucntionalCards('ocr');
   showByHoursChart();
   setLanguageList();
   setSpeakerDetails(speakerDetailsKey, $userName);
