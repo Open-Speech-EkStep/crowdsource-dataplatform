@@ -2,7 +2,7 @@ CREATE TABLE public.master_dataset
 (
     master_dataset_id integer NOT NULL GENERATED ALWAYS AS IDENTITY,
     params jsonb NOT NULL,
-    localtion text NULL,
+    location text NULL,
     PRIMARY KEY (master_dataset_id)
 )
 WITH (
