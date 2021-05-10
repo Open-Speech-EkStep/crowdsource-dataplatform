@@ -252,17 +252,21 @@ describe("Running tests for dbOperations", () => {
         )
     });
 
-    test('getContributionList should call getContributionListQuery query once with language', () => {
+    test('getContributionList should call getContributionListQuery query once with language', async () => {
         const language = 'testLanguage';
         const userId = 123;
         const type = 'text'
-        const req = { params: { type: type }, query: { from: language }, cookies: { userId } };
+        const userName = 'name';
+        const contributorId = 1;
+        const req = { params: { type: type }, query: { from: language }, cookies: { userId }, body: { userName } };
         const spyDBany = jest.spyOn(mockDB, 'any')
-        when(spyDBany).calledWith(getContributionListQuery, [userId, type, language, undefined]).mockReturnValue(Promise.resolve())
+        const spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
+        when(spyDBany).calledWith(getContributionListQuery, [contributorId, type, language, undefined]).mockReturnValue(Promise.resolve())
+        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
 
-        dbOperations.getContributionList(req, res);
+        await dbOperations.getContributionList(req, res);
 
-        expect(spyDBany).toHaveBeenCalledWith(getContributionListQuery, [userId, type, language, undefined]);
+        expect(spyDBany).toHaveBeenCalledWith(getContributionListQuery, [contributorId, type, language, undefined]);
         jest.clearAllMocks();
     });
 
@@ -361,18 +365,22 @@ describe("Running tests for dbOperations", () => {
 
     test('Get Rewards info', () => {
         const spyDBany = jest.spyOn(mockDB, 'any')
+        const type = 'testType'
+        const source = 'testSource'
         const language = 'testLanguage'
 
-        dbOperations.getRewardsInfo(language);
+        dbOperations.getRewardsInfo(type, source, language);
 
-        expect(spyDBany).toHaveBeenCalledWith(rewardsInfoQuery, [language])
+        expect(spyDBany).toHaveBeenCalledWith(rewardsInfoQuery, [type, source, language])
     });
 
     describe('Test Get Rewards', () => {
         const userId = '123'
         const userName = 'test user'
-        const category = 'category'
+        const categoryContribute = 'contribute'
+        const categoryValidate = 'validate'
         const language = 'testLanguage'
+        const type = 'type'
         const contributor_id = 10
         const contribution_count = 1
         const milestoneId = 1
@@ -388,29 +396,41 @@ describe("Running tests for dbOperations", () => {
         // any - insert rewards for latest nearest milestone
         // one or None - next Milestone data
         when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
-        when(spyDBany).calledWith(getTotalUserContribution, [contributor_id, language]).mockReturnValue([{ 'contribution_id': 1234 }]);
-        when(spyDBone).calledWith(getTotalUserValidation, [[1234]]).mockReturnValue({ 'validation_count': validation_count })
+        when(spyDBany).calledWith(getTotalUserContribution, [contributor_id, language, type]).mockReturnValue([{ 'contribution_id': 1234 }]);
+        when(spyDBany).calledWith(getTotalUserValidation, [contributor_id, language, type]).mockReturnValue([{ 'contribution_id': 1234 }]);
         when(spyDBone).calledWith(getContributionHoursForLanguage, [language]).mockReturnValue(10);
         when(spyDBoneOrNone).calledWith(getMultiplierForHourGoal, [language]).mockReturnValue(100);
         when(spyDBany).calledWith(getBadges, [expect.anything(), language]).mockReturnValue([{ grade: 'bronze', id: 23, milestone: 5 }, { grade: 'silver', id: 24, milestone: 50 }, { grade: 'gold', id: 25, milestone: 100 }])
-        when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, category]).mockReturnValue([]);
-        when(spyDBany).calledWith(insertRewardQuery, [contributor_id, language, bronzeBadge, category]).mockReturnValue([{ 'generated_badge_id': bronzeBadge }]);
-        when(spyDBany).calledWith(insertRewardQuery, [contributor_id, language, silverBadge, category]).mockReturnValue([{ 'generated_badge_id': silverBadge }]);
-        when(spyDBany).calledWith(insertRewardQuery, [contributor_id, language, goldBadge, category]).mockReturnValue([{ 'generated_badge_id': goldBadge }]);
-        when(spyDBoneOrNone).calledWith(checkNextMilestoneQuery, [contribution_count, language]).mockReturnValue({ 'id': milestoneId, 'grade': 'silver', 'milestone': 100 });
-        when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language]).mockReturnValue({ 'id': milestoneId, 'grade': 'copper', 'milestone': 100 });
+        when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryContribute, type]).mockReturnValue([]);
+        when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryValidate, type]).mockReturnValue([]);
+        when(spyDBany).calledWith(insertRewardQuery, [contributor_id, bronzeBadge]).mockReturnValue([{ 'generated_badge_id': bronzeBadge }]);
+        when(spyDBany).calledWith(insertRewardQuery, [contributor_id, silverBadge]).mockReturnValue([{ 'generated_badge_id': silverBadge }]);
+        when(spyDBany).calledWith(insertRewardQuery, [contributor_id, goldBadge]).mockReturnValue([{ 'generated_badge_id': goldBadge }]);
+        when(spyDBoneOrNone).calledWith(checkNextMilestoneQuery, [contribution_count, language, categoryContribute, type]).mockReturnValue({ 'grade': 'silver', 'milestone': 100 });
+        when(spyDBoneOrNone).calledWith(checkNextMilestoneQuery, [contribution_count, language, categoryValidate, type]).mockReturnValue({ 'grade': 'silver', 'milestone': 100 });
+        when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language, type, categoryContribute]).mockReturnValue({ 'milestone_id': milestoneId, 'grade': 'copper', 'milestone': 100 });
+        when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language, type, categoryValidate]).mockReturnValue({ 'milestone_id': milestoneId, 'grade': 'copper', 'milestone': 100 });
 
         afterEach(() => {
             jest.clearAllMocks();
         })
 
-        test('should call queries for rewards data if user found', async () => {
-            await dbOperations.getRewards(userId, userName, language, category);
+        test('should call queries for rewards data if user found for contribute', async () => {
+            await dbOperations.getRewards(userId, userName, language, categoryContribute, type);
 
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, getContributorIdQuery, [userId, userName])
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkCurrentMilestoneQuery, [contribution_count, language])
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, checkNextMilestoneQuery, [contribution_count, language])
-            expect(spyDBany).toHaveBeenCalledWith(getTotalUserContribution, [contributor_id, language])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkCurrentMilestoneQuery, [contribution_count, language, type, categoryContribute])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, checkNextMilestoneQuery, [contribution_count, language, categoryContribute, type])
+            expect(spyDBany).toHaveBeenCalledWith(getTotalUserContribution, [contributor_id, language, type])
+        });
+
+        test('should call queries for rewards data if user found for validate', async () => {
+            await dbOperations.getRewards(userId, userName, language, categoryValidate, type);
+
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, getContributorIdQuery, [userId, userName])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkCurrentMilestoneQuery, [contribution_count, language, type, categoryValidate])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, checkNextMilestoneQuery, [contribution_count, language, categoryValidate, type])
+            expect(spyDBany).toHaveBeenCalledWith(getTotalUserValidation, [contributor_id, language, type])
         });
 
         describe('Test get contributor id', () => {
@@ -419,7 +439,7 @@ describe("Running tests for dbOperations", () => {
                 when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue(null);
                 when(spyDBone).calledWith(addContributorQuery, [userId, userName, '', '', '']).mockReturnValue({ 'contributor_id': contributor_id });
 
-                await dbOperations.getRewards(userId, userName, language, category);
+                await dbOperations.getRewards(userId, userName, language, categoryContribute, type);
 
                 await expect(spyDBone).toBeCalledWith(addContributorQuery, [userId, userName, '', '', '']);
                 jest.clearAllMocks();
@@ -428,7 +448,7 @@ describe("Running tests for dbOperations", () => {
             test('should return contributor id', async () => {
                 when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
 
-                await dbOperations.getRewards(userId, userName, language, category);
+                await dbOperations.getRewards(userId, userName, language, categoryContribute, type);
 
                 expect(spyDBoneOrNone).toHaveBeenCalledWith(getContributorIdQuery, [userId, userName])
                 jest.clearAllMocks();
@@ -439,23 +459,23 @@ describe("Running tests for dbOperations", () => {
 
             test('should call insertRewardQuery id rewardsList is empty', async () => {
                 when(spyDBany).calledWith(getBadges, [expect.anything(), language]).mockReturnValue([]);
-                when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, category]).mockReturnValue([]);
+                when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryContribute, type]).mockReturnValue([]);
 
-                await dbOperations.getRewards(userId, userName, language, category);
+                await dbOperations.getRewards(userId, userName, language, categoryContribute, type);
 
-                expect(spyDBany).toHaveBeenCalledWith(findRewardInfo, [contributor_id, language, category])
-                expect(spyDBany).toHaveBeenCalledWith(insertRewardQuery, [contributor_id, language, expect.anything(), category])
+                expect(spyDBany).toHaveBeenCalledWith(findRewardInfo, [contributor_id, language, categoryContribute, type])
+                expect(spyDBany).toHaveBeenCalledWith(insertRewardQuery, [contributor_id, expect.anything()])
                 jest.clearAllMocks()
             });
 
             test('should not call insertRewardQuery if matched badge', async () => {
                 when(spyDBany).calledWith(getBadges, [expect.anything(), language]).mockReturnValue([]);
-                when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, category]).mockReturnValue([{ "reward_catalogue_id": milestoneId }]);
+                when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryContribute, type]).mockReturnValue([{ "milestone_id": milestoneId }]);
 
-                await dbOperations.getRewards(userId, userName, language, category);
+                await dbOperations.getRewards(userId, userName, language, categoryContribute, type);
 
-                expect(spyDBany).toHaveBeenCalledWith(findRewardInfo, [contributor_id, language, category])
-                expect(spyDBany).not.toHaveBeenCalledWith(insertRewardQuery, [contributor_id, language, expect.anything(), category]);
+                expect(spyDBany).toHaveBeenCalledWith(findRewardInfo, [contributor_id, language, categoryContribute, type])
+                expect(spyDBany).not.toHaveBeenCalledWith(insertRewardQuery, [contributor_id, expect.anything()]);
                 jest.clearAllMocks();
             });
         });
@@ -464,12 +484,12 @@ describe("Running tests for dbOperations", () => {
 
             test('get current milestone data if exists', async () => {
                 when(spyDBany).calledWith(getBadges, [expect.anything(), language]).mockReturnValue([]);
-                when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, expect.anything(), category]).mockReturnValue([]);
-                when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language]).mockReturnValue({ 'id': 1, 'grade': 'copper', 'milestone': 100 });
+                when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryContribute, type]).mockReturnValue([]);
+                when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language, type, categoryContribute]).mockReturnValue({ 'milestone_id': 1, 'grade': 'copper', 'milestone': 100 });
 
-                const result = await dbOperations.getRewards(userId, userName, language, category);
+                const result = await dbOperations.getRewards(userId, userName, language, categoryContribute, type);
 
-                expect(spyDBoneOrNone).toHaveBeenCalledWith(checkNextMilestoneQuery, [contribution_count, language])
+                expect(spyDBoneOrNone).toHaveBeenCalledWith(checkNextMilestoneQuery, [contribution_count, language, categoryContribute, type])
                 expect(result.currentMilestone).toBe(100)
                 expect(result.currentBadgeType).toBe('copper')
                 jest.clearAllMocks();
@@ -477,12 +497,12 @@ describe("Running tests for dbOperations", () => {
 
             test('get current milestone as 0 if data not exists', async () => {
                 when(spyDBany).calledWith(getBadges, [expect.anything(), language]).mockReturnValue([]);
-                when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, expect.anything(), category]).mockReturnValue([]);
-                when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language]).mockReturnValue(null);
+                when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryContribute, type]).mockReturnValue([]);
+                when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language, type, categoryContribute]).mockReturnValue(null);
 
-                const result = await dbOperations.getRewards(userId, userName, language, category);
+                const result = await dbOperations.getRewards(userId, userName, language, categoryContribute, type);
 
-                expect(spyDBoneOrNone).toHaveBeenCalledWith(checkNextMilestoneQuery, [contribution_count, language])
+                expect(spyDBoneOrNone).toHaveBeenCalledWith(checkNextMilestoneQuery, [contribution_count, language, categoryContribute, type])
                 expect(result.currentMilestone).toBe(0)
                 expect(result.currentBadgeType).toBe('')
                 jest.clearAllMocks();
@@ -492,22 +512,22 @@ describe("Running tests for dbOperations", () => {
         describe('Test get next milestone data', () => {
 
             test('get next milestone data if exists', async () => {
-                when(spyDBoneOrNone).calledWith(checkNextMilestoneQuery, [contribution_count, language]).mockReturnValue({ 'id': 2, 'grade': 'silver', 'milestone': 200 });
+                when(spyDBoneOrNone).calledWith(checkNextMilestoneQuery, [contribution_count, language, categoryContribute, type]).mockReturnValue({ 'milestone_id': 2, 'grade': 'silver', 'milestone': 200 });
 
-                const result = await dbOperations.getRewards(userId, userName, language, category);
+                const result = await dbOperations.getRewards(userId, userName, language, categoryContribute, type);
 
-                expect(spyDBoneOrNone).toHaveBeenCalledWith(checkNextMilestoneQuery, [contribution_count, language])
+                expect(spyDBoneOrNone).toHaveBeenCalledWith(checkNextMilestoneQuery, [contribution_count, language, categoryContribute, type])
                 expect(result.nextMilestone).toBe(200)
                 expect(result.nextBadgeType).toBe('silver')
                 jest.clearAllMocks();
             });
 
             test('get next milestone as 0 if data not exists', async () => {
-                when(spyDBoneOrNone).calledWith(checkNextMilestoneQuery, [contribution_count, language]).mockReturnValue({});
+                when(spyDBoneOrNone).calledWith(checkNextMilestoneQuery, [contribution_count, language, categoryContribute, type]).mockReturnValue({});
 
-                const result = await dbOperations.getRewards(userId, userName, language, category);
+                const result = await dbOperations.getRewards(userId, userName, language, categoryContribute, type);
 
-                expect(spyDBoneOrNone).toHaveBeenCalledWith(checkNextMilestoneQuery, [contribution_count, language])
+                expect(spyDBoneOrNone).toHaveBeenCalledWith(checkNextMilestoneQuery, [contribution_count, language, categoryContribute, type])
                 expect(result.nextMilestone).toBe(0)
                 expect(result.nextBadgeType).toBe('')
                 jest.clearAllMocks();
@@ -521,28 +541,32 @@ describe("Running tests for dbOperations", () => {
         const state = 'Test State';
         const country = 'Test Country';
         const userId = 123;
+        const contributorId = 1;
+        const userName = 'name';
 
         test('should call addValidationQuery and updateMediaWithValidatedState if action is accept/reject', async () => {
             spyDBnone.mockReturnValue(Promise.resolve())
+            when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
             const action = 'accept';
 
-            const req = { 'body': { sentenceId, state, country }, 'cookies': { userId }, params: { action, contributionId } }
+            const req = { 'body': { sentenceId, state, country, userName }, 'cookies': { userId }, params: { action, contributionId } }
 
             await dbOperations.updateTablesAfterValidation(req, res);
 
-            expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [userId, sentenceId, action, contributionId, state, country]);
+            expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [contributorId, sentenceId, action, contributionId, state, country]);
             expect(spyDBnone).toHaveBeenNthCalledWith(2, updateMediaWithValidatedState, [sentenceId, contributionId])
         });
 
         test('should only call addValidationQuery if action is skip', async () => {
             spyDBnone.mockReturnValue(Promise.resolve())
+            when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
             const action = 'skip';
 
-            const req = { 'body': { sentenceId, state, country }, 'cookies': { userId }, params: { action, contributionId } }
+            const req = { 'body': { sentenceId, state, country, userName }, 'cookies': { userId }, params: { action, contributionId } }
 
             await dbOperations.updateTablesAfterValidation(req, res);
 
-            expect(spyDBnone).toBeCalledWith(addValidationQuery, [userId, sentenceId, action, contributionId, state, country]);
+            expect(spyDBnone).toBeCalledWith(addValidationQuery, [contributorId, sentenceId, action, contributionId, state, country]);
             expect(spyDBnone).toBeCalledTimes(1);
         })
     })

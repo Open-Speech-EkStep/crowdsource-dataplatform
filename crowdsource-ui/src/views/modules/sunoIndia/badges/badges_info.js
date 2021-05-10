@@ -2,12 +2,14 @@ const {
   performAPIRequest,
   getLocaleString,
   updateLocaleLanguagesDropdown
-} = require('./utils');
-const {CONTRIBUTION_LANGUAGE, BADGES, LOCALE_STRINGS} = require('./constants');
+} = require('../common/utils');
+const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, MODULE, CURRENT_MODULE} = require('../common/constants');
 
 
 const rowWithBadge = function (levelId, sentenceCount, badgeName, localeString) {
-  const badge = BADGES[badgeName.toLowerCase()];
+  const currentModule = localStorage.getItem(CURRENT_MODULE);
+  const badges = MODULE[currentModule].BADGES;
+  const badge = badges[badgeName.toLowerCase()];
   let badgeDescription = `<p class="text-left mb-0 ml-3">Recording: ${sentenceCount} ${localeString.Sentences}<br/>Validation: 80% of recorded ${sentenceCount} ${localeString.Sentences} need to be "correct"</p>`;
   if(badgeName == 'Bronze'){
     badgeDescription= `<p class="text-left mb-0 ml-3">Recording: ${sentenceCount} ${localeString.Sentences}</p>`
@@ -15,12 +17,10 @@ const rowWithBadge = function (levelId, sentenceCount, badgeName, localeString) 
   return `<tr><td>${localeString.Level} ${levelId}</td><td>${badgeDescription}</td><td><div><img src=${badge.imgLg} class="table-img" alt=${badgeName} id="${badgeName}-image-hover" rel="popover"></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
 }
 
-const rowWithoutBadge = function (levelId, sentenceCount, localeString) {
-  return `<tr><td>${localeString.Level} ${levelId}</td><td>${sentenceCount} ${localeString.Sentences}</td><td>${localeString['N/A']}</td></tr>`
-}
-
 const getCard = function (badgeName, localeString) {
-  const badge = BADGES[badgeName.toLowerCase()];
+  const currentModule = localStorage.getItem(CURRENT_MODULE);
+  const badges = MODULE[currentModule].BADGES;
+  const badge = badges[badgeName.toLowerCase()];
   return `<div class="text-center">
                 <div class="py-2">
                     <img src=${badge.imgLg} alt="bronze_badge" class="img-fluid">
@@ -39,8 +39,6 @@ const renderBadgeDetails = function (data) {
     let row;
     if (badge) {
       row = rowWithBadge(rowId, contributions, badge, localeString);
-    } else {
-      row = rowWithoutBadge(rowId, contributions, localeString);
     }
     $tableRows.append(row);
     $(`#${badge}-image-hover[rel=popover]`).popover({
@@ -56,7 +54,7 @@ const renderBadgeDetails = function (data) {
 
 $(document).ready(function () {
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
-  const type='text'
+  const type='asr'
   const source='contribute'
   updateLocaleLanguagesDropdown(language);
   getLocaleString().then(() => {
@@ -64,6 +62,6 @@ $(document).ready(function () {
       console.log(err);
     })
   }).catch(() => {
-    window.location.href = "/";
+    window.location.href = "./home.html";
   })
 });

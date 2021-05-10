@@ -36,7 +36,7 @@ function setSentencesContributed() {
 
   const localeStrings = JSON.parse(rawLocaleString);
   performAPIRequest(
-    `/rewards?language=${contributionLanguage}&category=speak&userName=${userName}`
+    `/rewards?type=text&language=${contributionLanguage}&source=contribute&userName=${userName}`
   ).then((data) => {
     localStorage.setItem('badgeId', data.badgeId);
     localStorage.setItem('badges', JSON.stringify(data.badges));
@@ -190,7 +190,7 @@ const setTotalProgressBar = (totalSeconds) => {
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem(SPEAKER_DETAILS));
   const userName = localSpeakerDataParsed.userName;
     performAPIRequest(
-      `/rewards?language=${contributionLanguage}&category=speak&userName=${userName}`
+      `/rewards?type=text&language=${contributionLanguage}&source=contribute&userName=${userName}`
     ).then((data) => {
       localStorage.setItem('nextHourGoal',data.nextHourGoal);
       updateProgressBulb(data.nextHourGoal, totalSeconds);

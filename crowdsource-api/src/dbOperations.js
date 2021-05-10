@@ -196,12 +196,14 @@ const updateAndGetMedia = function (req, res) {
         });
 };
 
-const getContributionList = function (req, res) {
+const getContributionList = async function (req, res) {
     const fromLanguage = req.query.from;
     const toLanguage = req.query.to;
     const type = req.params.type;
     const userId = req.cookies.userId;
-    db.any(getContributionListQuery, [userId, type, fromLanguage, toLanguage])
+    const { userName = "" } = req.body;
+    const contributorId = await getContributorId(userId, userName);
+    db.any(getContributionListQuery, [contributorId, type, fromLanguage, toLanguage])
         .then((response) => {
             res.status(200).send({ data: response })
         })
@@ -237,10 +239,11 @@ const getMediaObject = (req, res, objectStorage) => {
 
 }
 
-const updateTablesAfterValidation = (req, res) => {
-    const validatorId = req.cookies.userId;
-    const { sentenceId, state = "", country = "" } = req.body;
+const updateTablesAfterValidation = async (req, res) => {
+    const userId = req.cookies.userId;
+    const { sentenceId, state = "", country = "", userName = "" } = req.body;
     const { action, contributionId } = req.params;
+    const validatorId = await getContributorId(userId, userName);
     return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country])
         .then(async () => {
             if (action !== 'skip') {
@@ -423,44 +426,32 @@ const getContributorId = async (userId, userName, age = '', gender = '', motherT
     return contributor_id;
 }
 
-const createBadge = async (contributor_id, language, currentMilestoneData, category) => {
+const createBadge = async (contributor_id, language, currentMilestoneData, source, type) => {
     let isNewBadge = false, generatedBadgeId = '';
-    let actualBadges = await db.any(getBadges, [currentMilestoneData.milestone, language]);
 
-    let badges = await db.any(findRewardInfo, [contributor_id, language, category]);
-    const matchedBadge = badges.filter(function (value) {
-        if (value.reward_catalogue_id === currentMilestoneData.id) {
+    let acquiredBadges = await db.any(findRewardInfo, [contributor_id, language, source, type]);
+    const currentMilestoneBadgeMatch = acquiredBadges.filter(function (value) {
+        if (value.milestone_id === currentMilestoneData.milestone_id) {
             return value
         }
     })
 
-    let filteredBadges = actualBadges.filter(function (actualValue) {
-        if ((!badges.includes(actualValue)) && (actualValue.id !== currentMilestoneData.id)) {
-            return actualValue;
-        }
-    })
-
-    badges = badges.map((value) => {
+    acquiredBadges = acquiredBadges.map((value) => {
         return { 'grade': value.grade, 'generated_badge_id': value.generated_badge_id }
     })
 
-    if (matchedBadge.length === 0) {
-        filteredBadges.forEach(async value => {
-            let resp = await db.any(insertRewardQuery, [contributor_id, language, value.id, category]);
-            badges.push({ 'grade': value.grade, 'generated_badge_id': resp[0].generated_badge_id })
-        })
-        let insertResponse = await db.any(insertRewardQuery, [contributor_id, language, currentMilestoneData.id, category]);
-        if (currentMilestoneData.grade)
-            isNewBadge = true;
+    if (currentMilestoneBadgeMatch.length === 0) {
+        isNewBadge = true;
+        const insertResponse = await db.any(insertRewardQuery, [contributor_id, currentMilestoneData.milestone_id]);
         generatedBadgeId = insertResponse[0].generated_badge_id;
-        badges.push({ 'grade': currentMilestoneData.grade, 'generated_badge_id': generatedBadgeId })
+        acquiredBadges.push({ 'grade': currentMilestoneData.grade, 'generated_badge_id': generatedBadgeId })
     }
 
-    return { isNewBadge, generatedBadgeId, badges };
+    return { isNewBadge, generatedBadgeId, badges: acquiredBadges };
 }
 
-const getNextMilestoneData = async (contribution_count, language) => {
-    let nextMilestoneData = await db.oneOrNone(checkNextMilestoneQuery, [contribution_count, language]);
+const getNextMilestoneData = async (total_count, language, source, type) => {
+    let nextMilestoneData = await db.oneOrNone(checkNextMilestoneQuery, [total_count, language, source, type]);
     if (!nextMilestoneData) {
         nextMilestoneData = {
             'grade': '',
@@ -470,8 +461,8 @@ const getNextMilestoneData = async (contribution_count, language) => {
     return nextMilestoneData;
 }
 
-const getCurrentMilestoneData = async (contribution_count, language) => {
-    let currentMilestoneData = await db.oneOrNone(checkCurrentMilestoneQuery, [contribution_count, language]);
+const getCurrentMilestoneData = async (total_count, language, type, source) => {
+    let currentMilestoneData = await db.oneOrNone(checkCurrentMilestoneQuery, [total_count, language, type, source]);
     let isCurrentAvailable = true
     if (!currentMilestoneData) {
         isCurrentAvailable = false;
@@ -483,34 +474,23 @@ const getCurrentMilestoneData = async (contribution_count, language) => {
     return { isCurrentAvailable, currentMilestoneData };
 }
 
-const getRewards = async (userId, userName, language, category) => {
+const getRewards = async (userId, userName, language, source, type) => {
     const contributor_id = await getContributorId(userId, userName);
-    let contributions = await db.any(getTotalUserContribution, [contributor_id, language]);
-    let contribution_count = 0;
-    let validation_count = 0;
-    if (contributions) {
-        contributions = contributions.map(data => data['contribution_id']);
-        contribution_count = contributions.length;
-    }
-    if (contribution_count !== 0) {
-        ({ validation_count } = await db.one(getTotalUserValidation, [contributions]))
+    const getTotalEntriesQuery = source == 'contribute' ? getTotalUserContribution : getTotalUserValidation;
+    let entries = await db.any(getTotalEntriesQuery, [contributor_id, language, type]);
+    let total_count = 0;
+    if (entries) {
+        total_count = entries.length;
     }
 
-    const { isCurrentAvailable, currentMilestoneData } = await getCurrentMilestoneData(contribution_count, language);
+    const { isCurrentAvailable, currentMilestoneData } = await getCurrentMilestoneData(total_count, language, type, source);
 
     let isNewBadge = false, generatedBadgeId = '', badges = [];
-    if (isCurrentAvailable && contribution_count !== 0) {
-        let validationPercent = (validation_count / contribution_count) * 100;
-        if (currentMilestoneData.grade === 'Bronze' || validationPercent >= 80) {
-            ({
-                isNewBadge,
-                generatedBadgeId,
-                badges
-            } = await createBadge(contributor_id, language, currentMilestoneData, category));
-        }
+    if (isCurrentAvailable /* && contribution_count !== 0*/) {
+        ({ isNewBadge, generatedBadgeId, badges } = await createBadge(contributor_id, language, currentMilestoneData, source, type));
     }
 
-    const nextMilestoneData = await getNextMilestoneData(contribution_count, language);
+    const nextMilestoneData = await getNextMilestoneData(total_count, language, source, type);
     const currentBadgeType = currentMilestoneData.grade || '';
     const nextBadgeType = nextMilestoneData.grade || '';
     const currentMilestone = currentMilestoneData.milestone || 0;
@@ -522,15 +502,15 @@ const getRewards = async (userId, userName, language, category) => {
         "nextBadgeType": nextBadgeType,
         "currentMilestone": currentMilestone,
         "nextMilestone": nextMilestone,
-        "contributionCount": Number(contribution_count),
+        "contributionCount": Number(total_count),
         "isNewBadge": isNewBadge,
         'badges': badges,
         'nextHourGoal': nextHourGoal
     }
 }
 
-const getRewardsInfo = (language) => {
-    return db.any(rewardsInfoQuery, [language]);
+const getRewardsInfo = (type, source, language) => {
+    return db.any(rewardsInfoQuery, [type, source, language]);
 }
 
 const getHourGoalForLanguage = async (language) => {
