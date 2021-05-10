@@ -1,1 +1,0 @@
-$('input').keyboard({ layout: 'bengali-qwerty-1' });
