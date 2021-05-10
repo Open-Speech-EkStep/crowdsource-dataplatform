@@ -1,22 +1,22 @@
-    .modal-dialog {
+#keyboardInstructions .modal-dialog {
         max-width: 920px;
         margin: 1.75rem auto;
     }
 
-    .modal-header .close {
+    #keyboardInstructions .modal-header .close {
         font-size: 3rem;
         font-weight: 400;
         color: #000;
     }
     
-    .modal-body {
+    #keyboardInstructions  .modal-body {
         margin-top: -28px;
         font-weight: 400;
         color: #343A40;
         padding: 15px 50px;
     }
 
-    .modal-body h3 {
+    #keyboardInstructions  .modal-body h3 {
         font-size: 24px;
         font-weight: 400;
     }

@@ -73,7 +73,7 @@ function showNoSentencesMessage() {
   hideElement($("#test-mic-speakers"));
   hideElement($('#instructive-msg'));
   hideElement($('#editor-row'));
-  hideElement($('#thankyou-text'));
+  hideElement($('#thank-you-row'));
   hideElement($('.simple-keyboard'));
   $("#validation-container").removeClass("validation-container");
 }
@@ -261,7 +261,7 @@ function addListeners() {
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
     hideElement($('#skip_button'))
-    showElement($('#thankyou-text'));
+    showElement($('#thank-you-row'));
     showElement($('#progress-row'))
     likhoIndiaValidator.editedText = $("#edit").val();
     uploadToServer();
@@ -270,7 +270,7 @@ function addListeners() {
       closeEditor();
       showElement($('#progress-row'))
       showElement($('#textarea-row'));
-      hideElement($('#thankyou-text'));
+      hideElement($('#thank-you-row'));
       getNextSentence();
       $("#edit").css('pointer-events','unset');
     }, 2000)

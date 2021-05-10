@@ -23,10 +23,11 @@
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
-            <div class="row position-absolute top-back-btn">
-                <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
-            </div>
-            <div class="modal-footer pt-3 record-btn-container">
+          
+            <div class="modal-footer pt-3 record-btn-container position-relative">
+                <div class="row position-absolute top-back-btn">
+                    <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
+                </div>
                 <%- include ../common/report-btn.ejs %>
                 <%- include ../common/speakerTestBtn.ejs %>
             </div>
