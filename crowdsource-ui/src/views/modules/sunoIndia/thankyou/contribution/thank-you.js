@@ -143,7 +143,6 @@ function setSentencesContributed() {
   performAPIRequest(
     `/rewards?type=asr&language=${contributionLanguage}&source=contribute&userName=${userName}`
   ).then((data) => {
-    data = {"badgeId":"123","currentBadgeType":"Bronze","nextBadgeType":"Silver","currentMilestone":5,"nextMilestone":50,"contributionCount":6,"isNewBadge":false,"badges":["bronze"],"nextHourGoal":100}
     setBadge(data,localeStrings);
   });
 }

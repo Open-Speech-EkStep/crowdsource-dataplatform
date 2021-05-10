@@ -77,6 +77,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName) {
       locale
     );
     await ejs2html(`${ejsPath}/badge-info.ejs`, {}, i18n, outputPath, 'badges.html', locale);
+    await ejs2html(`${ejsPath}/validatorBadgesInfo.ejs`, {}, i18n, outputPath, 'validator-badges.html', locale);
     await ejs2html(
       `${ejsPath}/dashboard.ejs`,
       { MOTHER_TONGUE, LANGUAGES, isCookiePresent: false },

@@ -23,14 +23,14 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho India", PAGE_TITLE:""}); %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho India", PAGE_TITLE:"Correct"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pt-2 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center">
         <div class="row position-absolute top-back-btn">
             <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
         </div>
         <h1 class="display-5 font-wt-900 site-blue">
-            <%= __('Thank you for contributing!') %>
+            <%= __('Thank you for validating!') %>
         </h1>
     </div>
 
@@ -70,7 +70,7 @@
                 <h4 class="mb-3 mt-5 mt-lg-0"><%- __('You are driving the spirit of your language') %></h4>
             </div>
             <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('recordings contributed') %></p>
-            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="./badges.html">Know more</a>') %></p>
+            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="./validator-badges.html">Know more</a>') %></p>
             <%- include('../common/badgesMilestone.ejs',{MODULE:"likho"}) %>
             <%- include ../common/sharableLink.ejs %>
             <div class="badges_information">
