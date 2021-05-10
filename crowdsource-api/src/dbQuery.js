@@ -98,17 +98,17 @@ limit 5`;
 const getContributionListQuery = `
 select con."dataset_row_id", ds.media ->> 'data' as sentence, con.media ->> 'data' as contribution, con.contribution_id 
     from contributions con 
-    inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_identifier!=$1
+    inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_id!=$1
     inner join dataset_row ds on ds."dataset_row_id"=con."dataset_row_id" and ds."state"= 'contributed' 
 	and ds.type=$2 and (ds.type='text' or con.is_system) and (ds.type!='parallel' or con.media->>'language'=$4)
     left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' 
-    where  con.action='completed' and ds.media->>'language'=$3 and COALESCE(val.validated_by, '')!= $1
+    where  con.action='completed' and ds.media->>'language'=$3 and COALESCE(val.validated_by, '')!= $1::text
 	group by con."dataset_row_id", ds.media ->> 'data', con.contribution_id 
     order by count(val.*) desc, RANDOM() limit 5;`
 
-const addValidationQuery = `insert into validations (contribution_id, "action", validated_by, "date", "state_region", "country") \
-select contribution_id, $3, $1, now(), $5, $6 from contributions inner join dataset_row on dataset_row."dataset_row_id"=contributions."dataset_row_id" \
-where dataset_row."dataset_row_id" = $2 and dataset_row.state = \'contributed\' and contribution_id=$4;`
+const addValidationQuery = `insert into validations (contribution_id, action, validated_by, date, state_region, country) 
+select contribution_id, $3, $1, now(), $5, $6 from contributions inner join dataset_row on dataset_row.dataset_row_id=contributions.dataset_row_id 
+where dataset_row.dataset_row_id=$2 and dataset_row.state='contributed' and contribution_id=$4;`
 
 const updateMediaWithValidatedState = `update dataset_row set "state" = \
 \'validated\' where "dataset_row_id" = $1 and (select count(*) from validations where contribution_id = $2 and action != 'skip') >= \
@@ -152,15 +152,17 @@ const markContributionSkippedQuery = `insert into "contributions" ("action","dat
 select 'skipped', $2, now(), $1;`;
 
 const rewardsInfoQuery = `select milestone as contributions, grade as badge from reward_milestones mil
-inner join reward_catalogue rew on mil.reward_catalogue_id = rew.id
-where mil.type=$1 and category=$2 and LOWER(language) = LOWER($3) order by mil.milestone`;
+inner join reward_catalogue rew on mil.reward_catalogue_id=rew.id
+where mil.type=$1 and category=$2 and LOWER(language)=LOWER($3) order by mil.milestone`;
 
 const getTotalUserContribution = `select con.contribution_id from contributions con 
 inner join dataset_row dr on dr."dataset_row_id"=con."dataset_row_id" where dr.type=$3 and LOWER(dr.media->>'language') = LOWER($2) 
 and action = 'completed' and con.contributed_by = $1`;
 
-const getTotalUserValidation = 'select count(distinct(contribution_id)) as validation_count from validations \
-where contribution_id in ($1:csv) and action = \'accept\''
+const getTotalUserValidation = `select val.validation_id from validations val 
+inner join contributions con on val.contribution_id=con.contribution_id and val.action!='skip' 
+inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where dr.type=$3 and LOWER(dr.media->>'language')=LOWER($2) 
+and val.validated_by=$1::text`;
 
 const checkCurrentMilestoneQuery = `select grade, reward_milestone.milestone, reward_milestone.milestone_id from reward_catalogue, 
 (select milestone, milestone_id, reward_catalogue_id as rid from reward_milestones where milestone <= $1 
