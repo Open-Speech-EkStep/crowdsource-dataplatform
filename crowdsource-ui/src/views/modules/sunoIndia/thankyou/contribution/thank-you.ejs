@@ -72,26 +72,8 @@
             </div>
             <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('recordings contributed') %></p>
             <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="./badges.html">Know more</a>') %></p>
-            <%- include ../common/badge_milestone.ejs %>
-            <div class="mt-5 text-center">
-                <%= __('Share it with your friends and family') %>
-            </div>
-            <div class="row justify-content-center my-2">
-                <div class="col-12 text-center bg-white">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://boloindia.nplt.in/" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
-                        <img src="../../img/fb-icon.svg" width="24px" alt="Share on Facebook">
-                    </a><span>&sdot;</span>
-                    <a id="linkedin_share" href="https://www.linkedin.com/shareArticle?mini=true&url=https://boloindia.nplt.in/&title=Bolo India: A crowdsourcing initiative for Indian languages.&summary=I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?/&source=" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
-                        <img src="../../img/linkedin-icon.svg" width="24px" alt="Share on LinkedIn">
-                    </a><span>&sdot;</span>
-                    <a id="twitter_share" href="https://twitter.com/intent/tweet?text=I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?" target="_blank" rel="noopener noreferrer">
-                        <img src="../../img/twitter-icon.svg" width="24px" alt="Share on Twitter">
-                    </a><span>&sdot;</span>
-                    <a id="whatsapp_share" href="https://api.whatsapp.com/send?text=I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?" target="_blank" rel="noopener noreferrer">
-                        <img src="../../img/whatsapp.svg" width="32px" alt="Share on Whatsapp">
-                    </a>
-                </div>
-            </div>
+            <%- include('../common/badgesMilestone.ejs',{MODULE:"suno"}) %>
+            <%- include ../common/sharableLink.ejs %>
             <div class="badges_information">
                 <%- include('../common/downloadableBadges.ejs', {BADGES:["bronze","silver","gold","platinum"], MODULE:"suno"})%>
             </div>
