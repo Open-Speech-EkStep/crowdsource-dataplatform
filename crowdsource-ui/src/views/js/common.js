@@ -50,4 +50,45 @@ function redirectToLocalisedPage() {
   }
 }
 
-module.exports =  {getContributedAndTopLanguage,showByHoursChart,redirectToLocalisedPage};
+const setLanguageList = (type) => {
+  return fetch(`/available-languages/${type}`).then((data) => {
+    if (!data.ok) {
+      throw Error(data.statusText || 'HTTP error');
+    } else {
+      return Promise.resolve(data.json());
+    }
+  });
+};
+
+const showFucntionalCards = (type) => {
+  try {
+    setLanguageList(type).then(languagePairs  => {
+      const {datasetLanguages, contributionLanguages} = languagePairs;
+      const selectedLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+
+      const isContLanguagePresent = contributionLanguages[selectedLanguage];
+      const isDataLanguagePresent = datasetLanguages.filter(item => item == selectedLanguage).length;
+      let contributeCard = $("#left");
+      let validateCard = $("#right");
+      if(isContLanguagePresent && isContLanguagePresent.length && isDataLanguagePresent) {
+        contributeCard.removeClass("d-none");
+        validateCard.removeClass("d-none");
+      } else if(isContLanguagePresent && isContLanguagePresent.length) {
+        contributeCard.addClass("d-none");
+        validateCard.removeClass("d-none");
+      } else if(isDataLanguagePresent) {
+        contributeCard.removeClass("d-none");
+        validateCard.addClass("d-none");
+      } else {
+        contributeCard.addClass("d-none");
+        validateCard.addClass("d-none");
+      }
+    });
+  
+  } catch (error) {
+    
+  }
+}
+
+
+module.exports =  {getContributedAndTopLanguage,showByHoursChart,redirectToLocalisedPage, showFucntionalCards};

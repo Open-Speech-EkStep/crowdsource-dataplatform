@@ -1,7 +1,7 @@
 const {constructChart}= require('../common/horizontalBarGraph');
 const { onActiveNavbar } = require('../common/header');
 const {setSpeakerData} = require('../common/contributionStats');
-const {getContributedAndTopLanguage,redirectToLocalisedPage} = require('../common/common');
+const {getContributedAndTopLanguage,redirectToLocalisedPage, showFucntionalCards} = require('../common/common');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
 const {
   setSpeakerDetails,
@@ -184,6 +184,7 @@ function initializeBlock() {
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
     }
+    // showFucntionalCards('ocr');
   });
 
   $('#start_recording').on('click', () => {
@@ -197,7 +198,7 @@ function initializeBlock() {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
     setStartRecordingBtnOnClick('./validator-page.html');
   })
-
+  // showFucntionalCards('ocr');
   showByHoursChart();
   setLanguageList();
   setSpeakerDetails(speakerDetailsKey, $userName);
