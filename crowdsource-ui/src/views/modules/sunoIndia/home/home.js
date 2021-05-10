@@ -170,7 +170,7 @@ function initializeBlock() {
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
     }
-    showFucntionalCards('asr');
+    // showFucntionalCards('asr');
   });
 
   $('#start_recording').on('click', () => {
@@ -186,7 +186,7 @@ function initializeBlock() {
   })
 
   showByHoursChart();
-  showFucntionalCards('asr');
+  // showFucntionalCards('asr');
   setSpeakerDetails(speakerDetailsKey, $userName);
   setUserNameOnInputFocus();
   setStartRecordingBtnOnClick();
