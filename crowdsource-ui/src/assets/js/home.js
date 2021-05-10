@@ -228,11 +228,11 @@ function initializeBlock() {
         }
     });
 
+    setUserModalOnShown($userName);
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     setStartRecordingBtnOnClick();
-    setUserModalOnShown($userName);
 
     const $say = $('#say');
     const $listen = $('#listen');
