@@ -64,7 +64,7 @@ const validateUserInfo = function (req, res, next) {
         return res.status(400).send({ error: 'required parameters missing' });
     }
 
-    const isValidType = (MEDIA_TYPES.includes(type)); 
+    const isValidType = (MEDIA_TYPES.includes(type));
 
     if (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) ||
         EMAIL_REGEX.test(userName) || !isValidType || !language) {
@@ -107,20 +107,26 @@ const validateInputForSkip = function (req, res, next) {
 
 const validateRewardsInput = (req, res, next) => {
     const userId = req.cookies.userId || "";
-    const { language = "" } = req.query;
+    const { type, source, language } = req.query;
 
-    if (language === "" || userId === "") {
-        return res.status(400).send("Input values missing");
+    if ( userId === "") {
+        return res.status(400).send("User Id missing");
     }
+
+    if (!(type && source && language && MEDIA_TYPES.includes(type) && SOURCES.includes(source))) {
+        return res.status(400).send("Invalid query");
+    }
+
     next();
 }
 
-const validateRewardsInfoQuery = (req, res, next) => {
-    const { language } = req.query;
+const validateRewardsInfoInput = (req, res, next) => {
+    const { type, source, language } = req.query;
 
-    if (!language) {
-        return res.status(400).send("Query parameter language missing");
+    if (!(type && source && language && MEDIA_TYPES.includes(type) && SOURCES.includes(source))) {
+        return res.status(400).send("Invalid query");
     }
+
     next();
 }
 
@@ -157,10 +163,10 @@ const validateGetContributionsInput = (req, res, next) => {
 }
 
 const validateMediaTypeInput = (req, res, next) => {
-    if (!(req.params.type && MEDIA_TYPES.includes(req.params.type))) {
+    if (!(req.params && req.params.type && MEDIA_TYPES.includes(req.params.type))) {
         return res.status(400).send("Invalid params");
     }
     next();
 }
 
-module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoQuery, validateContributedMediaInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput }
+module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoInput, validateContributedMediaInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput }

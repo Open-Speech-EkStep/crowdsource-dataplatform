@@ -25,19 +25,42 @@ const ALL_LANGUAGES = [
   {value: "Telugu", id: "te", text: "తెలుగు", hasLocaleText: true, data: true}];
 
 const BADGES = {
+
   bronze: {imgLg: "../../img/bronze_badge.svg", imgSm: "../../img/bronze_contributor.jpeg"},
   silver: {imgLg: "../../img/silver_badge.svg", imgSm: "../../img/silver_contributor.jpeg"},
   gold: {imgLg: "../../img/gold_badge.svg", imgSm: "../../img/gold_contributor.jpeg"},
   platinum: {imgLg: "../../img/platinum_badge.svg", imgSm: "../../img/platinum_contributor.jpeg"},
 }
 
+
 const CURRENT_MODULE = 'module';
 
 const MODULE = {
-  bolo: {url: 'boloIndia', value: 'bolo'},
-  suno: {url: 'sunoIndia', value: 'suno'},
-  likho: {url: 'likhoIndia', value: 'likho'},
-  dekho: {url: 'dekhoIndia', value: 'dekho'}
+  bolo: {url: 'boloIndia', value: 'bolo', BADGES :{
+      bronze: {imgLg: "../../img/bronze_badge.svg", imgSm: "../../img/bronze_contributor.jpeg"},
+      silver: {imgLg: "../../img/silver_badge.svg", imgSm: "../../img/silver_contributor.jpeg"},
+      gold: {imgLg: "../../img/gold_badge.svg", imgSm: "../../img/gold_contributor.jpeg"},
+      platinum: {imgLg: "../../img/platinum_badge.svg", imgSm: "../../img/platinum_contributor.jpeg"},
+    }},
+  suno: {url: 'sunoIndia', value: 'suno',BADGES :{
+      bronze: {imgLg: "../../img/suno_bronze_badge.svg", imgSm: "../../img/bronze_contributor.jpeg"},
+      silver: {imgLg: "../../img/suno_silver_badge.svg", imgSm: "../../img/silver_contributor.jpeg"},
+      gold: {imgLg: "../../img/suno_gold_badge.svg", imgSm: "../../img/gold_contributor.jpeg"},
+      platinum: {imgLg: "../../img/suno_platinum_badge.svg", imgSm: "../../img/platinum_contributor.jpeg"},
+    }},
+
+  likho: {url: 'likhoIndia', value: 'likho',BADGES :{
+      bronze: {imgLg: "../../img/likho_bronze_badge.svg", imgSm: "../../img/bronze_contributor.jpeg"},
+      silver: {imgLg: "../../img/likho_silver_badge.svg", imgSm: "../../img/silver_contributor.jpeg"},
+      gold: {imgLg: "../../img/likho_gold_badge.svg", imgSm: "../../img/gold_contributor.jpeg"},
+      platinum: {imgLg: "../../img/likho_platinum_badge.svg", imgSm: "../../img/platinum_contributor.jpeg"},
+    }},
+  dekho: {url: 'dekhoIndia', value: 'dekho', BADGES :{
+      bronze: {imgLg: "../../img/dekho_bronze_badge.svg", imgSm: "../../img/bronze_contributor.jpeg"},
+      silver: {imgLg: "../../img/dekho_silver_badge.svg", imgSm: "../../img/silver_contributor.jpeg"},
+      gold: {imgLg: "../../img/dekho_gold_badge.svg", imgSm: "../../img/gold_contributor.jpeg"},
+      platinum: {imgLg: "../../img/dekho_platinum_badge.svg", imgSm: "../../img/platinum_contributor.jpeg"},
+    }},
 };
 
 module.exports = {

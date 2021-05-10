@@ -1,0 +1,8 @@
+/* Replace with your SQL commands */
+insert into reward_milestones (milestone, language, reward_catalogue_id, type, category) select milestone, language, reward_catalogue_id, 'text', 'validate' from reward_milestones where type='text' and category='contribute';
+insert into reward_milestones (milestone, language, reward_catalogue_id, type, category) select milestone, language, reward_catalogue_id, 'asr', 'contribute' from reward_milestones where type='text' and category='contribute';
+insert into reward_milestones (milestone, language, reward_catalogue_id, type, category) select milestone, language, reward_catalogue_id, 'asr', 'validate' from reward_milestones where type='text' and category='contribute';
+insert into reward_milestones (milestone, language, reward_catalogue_id, type, category) select milestone, language, reward_catalogue_id, 'ocr', 'contribute' from reward_milestones where type='text' and category='contribute';
+insert into reward_milestones (milestone, language, reward_catalogue_id, type, category) select milestone, language, reward_catalogue_id, 'ocr', 'validate' from reward_milestones where type='text' and category='contribute';
+insert into reward_milestones (milestone, language, reward_catalogue_id, type, category) select milestone, language, reward_catalogue_id, 'parallel', 'contribute' from reward_milestones where type='text' and category='contribute';
+insert into reward_milestones (milestone, language, reward_catalogue_id, type, category) select milestone, language, reward_catalogue_id, 'parallel', 'validate' from reward_milestones where type='text' and category='contribute';
