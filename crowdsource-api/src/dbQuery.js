@@ -202,9 +202,10 @@ and action = 'completed' and con.audio_duration is not null`;
 const getMultiplierForHourGoal = 'select milestone_multiplier as multiplier from language_milestones where LOWER(language) = $1;';
 
 const getContributionLanguagesQuery = `select dr.media->>'language' as from_language,con.media->>'language' as to_language from dataset_row dr inner join 
-contributions con on con.dataset_row_id=dr.dataset_row_id and con.action='completed' and con.is_system=true where dr.type=$1 group by dr.media->>'language',con.media->>'language',dr.type`;
+contributions con on con.dataset_row_id=dr.dataset_row_id and con.action='completed' where dr.type=$1 group by dr.media->>'language',con.media->>'language',dr.type`;
 
-const getDatasetLanguagesQuery = `select media->>'language' as data_language from dataset_row where type=$1 group by media->>'language',type`;
+const getDatasetLanguagesQuery = `select media->>'language' as data_language from dataset_row where type=$1 
+and state is null group by media->>'language',type`;
 
 module.exports = {
   unassignIncompleteMedia,
