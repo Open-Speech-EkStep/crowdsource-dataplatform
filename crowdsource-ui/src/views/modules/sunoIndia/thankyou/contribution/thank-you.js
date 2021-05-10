@@ -15,9 +15,10 @@ const {
   getLocaleString,
   performAPIRequest,
 } = require("../common/utils");
+const {downloadPdf} = require('../common/downloadableBadges');
 
 const {constructChart} = require('../common/horizontalBarGraph');
-const {getContributedAndTopLanguage} = require('../common/common');
+const {getContributedAndTopLanguage,setBadge} = require('../common/common');
 
 const sunoCountKey = 'sunoCount';
 const sentencesKey = 'sunoSentencesKey';
@@ -142,77 +143,8 @@ function setSentencesContributed() {
   performAPIRequest(
     `/rewards?type=asr&language=${contributionLanguage}&source=contribute&userName=${userName}`
   ).then((data) => {
-    localStorage.setItem('badgeId', data.badgeId);
-    localStorage.setItem('badges', JSON.stringify(data.badges));
-    localStorage.setItem('nextHourGoal', data.nextHourGoal);
-    $("#user-contribution").text(data.contributionCount);
-    $("#language-hour-goal").text(data.nextHourGoal);
-    if (data.isNewBadge) {
-      $("#spree_text").removeClass("d-none");
-      $("#milestone_text").removeClass("d-none");
-      $("#current_badge_name").text(localeStrings[data.currentBadgeType]);
-      $("#current_badge_name_1").text(localeStrings[data.currentBadgeType]);
-      $("#current_badge_count").text(data.currentMilestone);
-      $("#next_badge_count").text(data.nextMilestone);
-      $("#next_badge_name_1").text(localeStrings[data.nextBadgeType.toLowerCase()]);
-      $("#sentence_away_msg").addClass("d-none");
-      $("#user-contribution-msg").addClass("d-none");
-      $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
-      $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_badge.svg`);
-    } else if (data.contributionCount < 5) {
-      $("#champion_text").removeClass("d-none");
-      $("#contribution_text").removeClass("d-none");
-      $("#sentence_away_msg").removeClass("d-none");
-      $("#user-contribution-msg").removeClass("d-none");
-      $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-      $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
-    } else if ((Number(data.contributionCount) >= Number(data.currentMilestone)) && (Number(data.contributionCount) <= Number(data.nextMilestone))) {
-      $("#spree_text").removeClass("d-none");
-      $("#before_badge_content").removeClass("d-none");
-      $("#sentence_away_msg").removeClass("d-none");
-      $("#user-contribution-msg").removeClass("d-none");
-      $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-      $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
-      const $bronzeBadgeLink = $("#bronze_badge_link img");
-      const $silverBadgeLink = $("#silver_badge_link img");
-      const $goldBadgeLink = $("#gold_badge_link img");
-      const $platinumBadgeLink = $("#platinum_badge_link img");
-      if (data.currentBadgeType.toLowerCase() === "bronze") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-      } else if (data.currentBadgeType.toLowerCase() === "silver") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $silverBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-        $('#silver_badge_link_img').addClass('enable');
-        $('#silver_badge_link_img').removeClass('disable');
-      } else if (data.currentBadgeType.toLowerCase() === "gold") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $silverBadgeLink.parent().attr("disabled", false);
-        $goldBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-        $('#silver_badge_link_img').addClass('enable');
-        $('#silver_badge_link_img').removeClass('disable');
-        $('#gold_badge_link_img').addClass('enable');
-        $('#gold_badge_link_img').removeClass('disable');
-      } else if (data.currentBadgeType.toLowerCase() === "platinum") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $silverBadgeLink.parent().attr("disabled", false);
-        $goldBadgeLink.parent().attr("disabled", false);
-        $platinumBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-        $('#silver_badge_link_img').addClass('enable');
-        $('#silver_badge_link_img').removeClass('disable');
-        $('#gold_badge_link_img').addClass('enable');
-        $('#gold_badge_link_img').removeClass('disable');
-        $('#platinum_badge_link_img').addClass('enable');
-        $('#platinum_badge_link_img').removeClass('disable');
-      }
-    }
+    data = {"badgeId":"123","currentBadgeType":"Bronze","nextBadgeType":"Silver","currentMilestone":5,"nextMilestone":50,"contributionCount":6,"isNewBadge":false,"badges":["bronze"],"nextHourGoal":100}
+    setBadge(data,localeStrings);
   });
 }
 
@@ -243,37 +175,13 @@ function executeOnLoad() {
   }
 }
 
-function downloadPdf(badgeType) {
-  const pdf = new jsPDF()
-  const img = new Image();
-  img.onload = function () {
-    pdf.addImage(this, 36, 10, 128, 128);
-    pdf.save(`${badgeType}-badge.pdf`);
-  };
-
-  img.crossOrigin = "Anonymous";
-  img.src = BADGES[badgeType].imgSm;
-  const allBadges = JSON.parse(localStorage.getItem('badges'));
-  const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
-  if (badge) {
-    pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
-  }
-}
-
 $(document).ready(function () {
-
-  localStorage.setItem(CURRENT_MODULE,'suno');
+  localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
 
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });
 
-  $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
-    if (!$(this).attr("disabled")) {
-      downloadPdf($(this).attr("data-badge"));
-    }
-  });
-  localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
   getLocaleString()
     .then((data) => {
       executeOnLoad();
