@@ -133,6 +133,16 @@ const getStatsSummary = function () {
   });
 }
 
+const setLanguageList = () => {
+  return fetch('/available-languages/ocr').then((data) => {
+    if (!data.ok) {
+      throw Error(data.statusText || 'HTTP error');
+    } else {
+      return Promise.resolve(data.json());
+    }
+  });
+};
+
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
   const age = document.getElementById('age');
@@ -189,7 +199,7 @@ function initializeBlock() {
   })
 
   showByHoursChart();
-
+  setLanguageList();
   setSpeakerDetails(speakerDetailsKey, $userName);
   setUserNameOnInputFocus();
   setStartRecordingBtnOnClick();

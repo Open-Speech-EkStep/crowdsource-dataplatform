@@ -125,11 +125,16 @@ const setUserNameOnInputFocus = function () {
         const userNameValue = $userName.val().trim();
         if (!testUserName(userNameValue)) {
             $startRecordBtn.removeAttr('disabled').removeClass('point-none');
-            $startRecordBtnTooltip.tooltip('disable');
+            if($startRecordBtnTooltip) {
+                $startRecordBtnTooltip.tooltip('disable');
+            }
+           
         } else {
             setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
             $startRecordBtn.prop('disabled', true).addClass('point-none');
+            if($startRecordBtnTooltip) {
             $startRecordBtnTooltip.tooltip('enable');
+            }
         }
     });
 }
