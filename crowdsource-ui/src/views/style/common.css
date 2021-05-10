@@ -146,9 +146,40 @@ body {
   color: #4D82F7;;
 }
 
+#cont-warning-msg {
+  display: none;
+  top:25px;
+  left:7%;
+  font-style:italic;
+  border: 1px solid #42B2C6;
+  width:89%;
+  padding:8px 15px;
+  height:44px;
+  border-radius:12px;
+  background:rgba(66, 178, 198, 0.1);
+  color: #42B2C6;;
+}
+
 
   .top-back-btn {
     top:30px;
     left:35px
   }
   
+  .validate-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
+  .validate-disabled #warning-msg {
+    display: block !important;
+  }
+  
+  .cont-validate-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
+  .cont-validate-disabled #cont-warning-msg {
+    display: block !important;
+  }
