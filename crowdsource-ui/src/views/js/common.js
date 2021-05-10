@@ -71,17 +71,17 @@ const showFucntionalCards = (type) => {
       let contributeCard = $("#left");
       let validateCard = $("#right");
       if(isContLanguagePresent && isContLanguagePresent.length && isDataLanguagePresent) {
-        contributeCard.removeClass("d-none");
-        validateCard.removeClass("d-none");
+        contributeCard.removeClass("cont-validate-disabled");
+        validateCard.removeClass("validate-disabled");
       } else if(isContLanguagePresent && isContLanguagePresent.length) {
-        contributeCard.addClass("d-none");
-        validateCard.removeClass("d-none");
+        validateCard.removeClass("validate-disabled");
+        contributeCard.addClass("cont-validate-disabled");
       } else if(isDataLanguagePresent) {
-        contributeCard.removeClass("d-none");
-        validateCard.addClass("d-none");
+        contributeCard.removeClass("cont-validate-disabled");
+        validateCard.addClass("validate-disabled");
       } else {
-        contributeCard.addClass("d-none");
-        validateCard.addClass("d-none");
+        contributeCard.addClass("cont-validate-disabled");
+        validateCard.addClass("validate-disabled");
       }
     });
   

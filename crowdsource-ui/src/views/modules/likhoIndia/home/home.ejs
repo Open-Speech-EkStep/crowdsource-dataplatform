@@ -50,11 +50,6 @@
                         <div class="col-1"></div>
                         <label class="col-1 text-right mt-2"><%= __('TO ') %>:</label>
                         <select class="col-4 btn dropdown-toggle h6 w-90 rounded" id="to-language" style="height:40px;padding:0;padding:0 10px;border-color:#959595;color:#959595">
-                            <% LANGUAGES.forEach(function(lang) { %>
-                                <option value="<%= lang.value %>">
-                                    <%= lang.text %>
-                                </option>
-                            <% }) %>
                         </select>
                         </div>
                     </div>
@@ -62,7 +57,7 @@
             </nav>
         </div>
     </div>
-    <div class="m-auto row justify-content-center mt-lg-5 mx-lg-5">
+    <div class="m-auto row justify-content-center mt-lg-4 mx-lg-5">
         <%- include('../common/cards.ejs',{left:{h1:"Translate",h2:"Translate and type the text","p1":"",img:"../../img/translate.svg"},right:{h1:"Validate",h2:"Correct the translation","p1":"",img:"../../img/validate.svg"}}); %>
     </div>
     <div class="row">
