@@ -18,7 +18,7 @@ const {
 } = require("../common/utils");
 
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showByHoursChart,getContributedAndTopLanguage} = require('../common/common');
+const {showByHoursChart,getContributedAndTopLanguage,setBadge} = require('../common/common');
 
 const CURRENT_INDEX = "sunoValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -127,76 +127,7 @@ function setSentencesContributed() {
   performAPIRequest(
     `/rewards?type=asr&language=${contributionLanguage}&source=validate&userName=${userName}`
   ).then((data) => {
-    localStorage.setItem('badgeId', data.badgeId);
-    localStorage.setItem('badges', JSON.stringify(data.badges));
-    $("#user-contribution").text(data.contributionCount);
-    $("#language-hour-goal").text(data.nextHourGoal);
-    if (data.isNewBadge) {
-      $("#spree_text").removeClass("d-none");
-      $("#milestone_text").removeClass("d-none");
-      $("#current_badge_name").text(localeStrings[data.currentBadgeType]);
-      $("#current_badge_name_1").text(localeStrings[data.currentBadgeType]);
-      $("#current_badge_count").text(data.currentMilestone);
-      $("#next_badge_count").text(data.nextMilestone);
-      $("#next_badge_name_1").text(localeStrings[data.nextBadgeType.toLowerCase()]);
-      $("#sentence_away_msg").addClass("d-none");
-      $("#user-contribution-msg").addClass("d-none");
-      $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
-      $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_badge.svg`);
-    } else if (data.contributionCount < 5) {
-      $("#champion_text").removeClass("d-none");
-      $("#contribution_text").removeClass("d-none");
-      $("#sentence_away_msg").removeClass("d-none");
-      $("#user-contribution-msg").removeClass("d-none");
-      $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-      $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
-    } else if ((Number(data.contributionCount) >= Number(data.currentMilestone)) && (Number(data.contributionCount) <= Number(data.nextMilestone))) {
-      $("#spree_text").removeClass("d-none");
-      $("#before_badge_content").removeClass("d-none");
-      $("#sentence_away_msg").removeClass("d-none");
-      $("#user-contribution-msg").removeClass("d-none");
-      $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-      $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
-      const $bronzeBadgeLink = $("#bronze_badge_link img");
-      const $silverBadgeLink = $("#silver_badge_link img");
-      const $goldBadgeLink = $("#gold_badge_link img");
-      const $platinumBadgeLink = $("#platinum_badge_link img");
-      if (data.currentBadgeType.toLowerCase() === "bronze") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-      } else if (data.currentBadgeType.toLowerCase() === "silver") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $silverBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-        $('#silver_badge_link_img').addClass('enable');
-        $('#silver_badge_link_img').removeClass('disable');
-      } else if (data.currentBadgeType.toLowerCase() === "gold") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $silverBadgeLink.parent().attr("disabled", false);
-        $goldBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-        $('#silver_badge_link_img').addClass('enable');
-        $('#silver_badge_link_img').removeClass('disable');
-        $('#gold_badge_link_img').addClass('enable');
-        $('#gold_badge_link_img').removeClass('disable');
-      } else if (data.currentBadgeType.toLowerCase() === "platinum") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $silverBadgeLink.parent().attr("disabled", false);
-        $goldBadgeLink.parent().attr("disabled", false);
-        $platinumBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-        $('#silver_badge_link_img').addClass('enable');
-        $('#silver_badge_link_img').removeClass('disable');
-        $('#gold_badge_link_img').addClass('enable');
-        $('#gold_badge_link_img').removeClass('disable');
-        $('#platinum_badge_link_img').addClass('enable');
-        $('#platinum_badge_link_img').removeClass('disable');
-      }
-    }
+    setBadge(data,localeStrings);
   });
 }
 

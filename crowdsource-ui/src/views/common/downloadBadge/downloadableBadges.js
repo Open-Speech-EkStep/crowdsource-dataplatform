@@ -1,4 +1,4 @@
-const {BADGES} = require('./constants.js');
+const {BADGES, CURRENT_MODULE,MODULE} = require('./constants.js');
 
 function downloadPdf(badgeType) {
   const pdf = new jsPDF()
@@ -9,7 +9,10 @@ function downloadPdf(badgeType) {
   };
 
   img.crossOrigin = "Anonymous";
-  img.src = BADGES[badgeType].imgSm;
+  const currentModule = localStorage.getItem(CURRENT_MODULE);
+  const badges = MODULE[currentModule].BADGES;
+
+  img.src = badges[badgeType].imgSm;
   const allBadges = JSON.parse(localStorage.getItem('badges'));
   const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
   if (badge) {
