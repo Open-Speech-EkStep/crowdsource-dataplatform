@@ -330,5 +330,7 @@
 	"Type the translation of the given text": "Type the translation of the given text",
 	"Type the text from the image": "Type the text from the image",
 	"Is the text from the image captured correctly?": "Is the text from the image captured correctly?",
-	"Click to open expanded view": "Click to open expanded view"
+	"Click to open expanded view": "Click to open expanded view",
+	"sentences validated": "sentences validated",
+	"images labels validated": "images labels validated"
 }

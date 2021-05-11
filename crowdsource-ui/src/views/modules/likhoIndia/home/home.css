@@ -368,8 +368,14 @@ body.modal-open .supreme-container {
 
 .validate-disabled {
   opacity: 0.6;
+  cursor: no-drop;
+}
+
+.validate-disabled #left_container,
+.validate-disabled #right_container {
   pointer-events: none;
 }
+
 
 .validate-disabled #warning-msg {
   display: block !important;
