@@ -376,13 +376,17 @@ body.modal-open .supreme-container {
   pointer-events: none;
 }
 
-
 .validate-disabled #warning-msg {
   display: block !important;
 }
 
 .cont-validate-disabled {
   opacity: 0.6;
+  cursor: no-drop;
+}
+
+.cont-validate-disabled #left_container,
+.cont-validate-disabled #right_container {
   pointer-events: none;
 }
 
