@@ -5,22 +5,16 @@ const assert = require('assert');
 const {
     openBrowser,
     button,
-    page,
     closeBrowser,
     overridePermissions,
     goto,
     write,
     click,
-    image,
-    scrollDown,
-    checkBox,
     hover,
     link,
     text,
     into,
-    textBox,
-    evaluate,
-    dropDown
+    evaluate
 } = require('taiko');
 
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
@@ -82,10 +76,9 @@ step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio butto
 
 step("if a user enter username and click on Not you change user button , the field should be cleared", async function () {
     const usernameFiled = taiko.textBox({ id: 'username' })
-    await taiko.waitFor(1500)
-    await write('TestUser', into(textBox("Enter preferred username")))
-    const notYouButton = taiko.$('#resetBtn')
-    await click(notYouButton)
+    await taiko.waitFor(500)
+    await write('TestUser', into(usernameFiled))
+    await click(taiko.$('#resetBtn'))
     assert.equal(await usernameFiled.value(), '')
 });
 
@@ -101,10 +94,18 @@ step("And User enter random Username and selects Age , Mother tongue ,gender", a
     }
 });
 
-step("When user click on Lets Go Button, user should see instructions to record", async function () {
+step("When user click on Lets Go Button, user should <arg0> see instructions to record", async function (arg0) {
     await click(taiko.button({ id: 'proceed-box' }))
     await taiko.waitFor(1500)
+    
+    if(arg0=="not")
+    {
+        assert.ok(! await text('Quick Tips').exists())
+    }
+    else
+    {
     assert.ok(await text('Quick Tips').exists(), 'Not able to see instructions')
+    }
 });
 
 step("User should be able to close the Instructions , user should see a sentence , Skip button , Start Recording Button , username,Test Mic and speaker button", async function () {
@@ -151,7 +152,7 @@ step("User should see the content in <language>", async function (language) {
     }
 });
 
-step("Select Preferred language as <language>", async function (language) {
+step("Select translation language as <language>", async function (language) {
     const localeDropDown = taiko.$("#localeDropdownMenuButton");
     await taiko.waitFor(1000);
     await click(localeDropDown);
@@ -168,6 +169,19 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
     }
 
     else if (arg0 == "Validate") {
+        const startValidatingButton = taiko.image({ id: "start_validating" });
+        assert.ok(await startValidatingButton.exists());
+        await taiko.waitFor(500);
+        await hover(startValidatingButton);
+        await click(startValidatingButton);
+    }
+    else if (arg0 == "Transcribe") {
+        const startRecordingButton = taiko.image({ id: "start_recording" });
+        assert.ok(await startRecordingButton.exists());
+        await hover(startRecordingButton);
+        await click(startRecordingButton);
+    }
+    else if (arg0 == "Correct") {
         const startValidatingButton = taiko.image({ id: "start_validating" });
         assert.ok(await startValidatingButton.exists());
         await taiko.waitFor(500);
@@ -194,6 +208,7 @@ step("When user select <lang> Language from dropdown then <arg0> should not visi
     const selectLanguageDropDown = taiko.dropDown({ id: 'language' })
     assert.ok(await selectLanguageDropDown.exists());
     await selectLanguageDropDown.select(lang);
+    await taiko.waitFor(1000)
     if (await text(arg0).exists()) {
         const resp = await text(arg0).isVisible();
         assert.ok(!resp)
@@ -208,7 +223,7 @@ step("user should be able to see <arg0> , <arg1> , <arg2> , <arg3>", async funct
 });
 
 step("User plays the audio , <arg0>,<arg1> should be enabled", async function (arg0, arg1) {
-    await taiko.waitFor(1000)
+    await taiko.waitFor(500)
     await click(taiko.image({ id: "play" }));
     await taiko.waitFor(1000)
     await click(taiko.image({ id: "pause" }));
@@ -218,7 +233,7 @@ step("User plays the audio , <arg0>,<arg1> should be enabled", async function (a
 });
 
 step("<arg0> should be enabled , <arg1> <arg2> buttons should be disabled", async function (arg0, arg1, arg2) {
-    await taiko.waitFor(3000);
+    await taiko.waitFor(2000);
     assert.ok(! await taiko.button({ id: arg0 }).isDisabled());
     assert.ok(await taiko.button({ id: arg1 }).isDisabled());
     assert.ok(await taiko.button({ id: arg2 }).isDisabled());
@@ -231,14 +246,23 @@ step("User clicks on <arg0> , he should see next sentence and <arg1> <arg2> butt
     assert.ok(await taiko.button({ id: arg2 }).isDisabled());
 });
 
-step("User skips the next <count> sentences user should land on Thank you page in Hindi", async function (count) {
+step("User skips the next <count> sentences user should land on Thank you page in <lang>", async function (count,lang) {
     const skipbutton = taiko.button({ id: 'skip_button' })
     for (let i = 0; i < count; i++) {
         await click(skipbutton)
         await taiko.waitFor(700)
     }
-    await taiko.waitFor(4000);
-    assert.ok(await text('प्रमाणित करने के लिए शुक्रिया!').exists());
+
+    if(lang=="Hindi")
+    {
+    await taiko.waitFor(3000);
+    assert.ok(await text('प्रमाणित करने के लिए शुक्रिया!').exists());}
+    
+    else
+    {
+    await taiko.waitFor(3000);
+    assert.ok(await text('Thank you for validating').exists());
+    }
 });
 
 step("User should see the <arg> button", async function (arg) {
@@ -260,6 +284,7 @@ step("User should be able to change to preffered Language to English again", asy
 });
 
 step("Select Contribution Language as <language>", async function (language) {
+    await taiko.waitFor(300)
     const prefLanguagePopup = text('Select Your Preferred Language')
     if(!prefLanguagePopup.exists()){
         await click("show All");
@@ -319,6 +344,7 @@ step("When user clicks on the go to home page button , user should see the home 
 });
 
 step("Skip coach mark instructions", async function () {
+    await taiko.waitFor(1000)
     await text('SKIP').exists();
     await text('You can select the language in which you want to participate').exists();
     await click('SKIP');
