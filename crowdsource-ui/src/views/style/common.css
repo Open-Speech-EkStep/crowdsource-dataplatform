@@ -165,11 +165,17 @@ body {
     top:30px;
     left:35px
   }
-  
+
   .validate-disabled {
     opacity: 0.6;
+    cursor: no-drop;
+  }
+  
+  .validate-disabled #left_container,
+  .validate-disabled #right_container {
     pointer-events: none;
   }
+  
   
   .validate-disabled #warning-msg {
     display: block !important;
@@ -177,6 +183,11 @@ body {
   
   .cont-validate-disabled {
     opacity: 0.6;
+    cursor: no-drop;
+  }
+  
+  .cont-validate-disabled #left_container,
+  .cont-validate-disabled #right_container {
     pointer-events: none;
   }
   
