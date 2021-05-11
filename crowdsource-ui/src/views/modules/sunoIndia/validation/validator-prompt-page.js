@@ -309,6 +309,7 @@ function addListeners() {
 
 
   needChangeButton.on('click',()=>{
+   
     hideElement($('#sentences-row'));
     openEditor();
     const originalText = sunoIndiaValidator.sentences[currentIndex].contribution;
@@ -337,6 +338,7 @@ function addListeners() {
   })
 
   $('#submit-edit-button').on('click', () => {
+    recordValidation(REJECT_ACTION);
     hideElement($('.simple-keyboard'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
