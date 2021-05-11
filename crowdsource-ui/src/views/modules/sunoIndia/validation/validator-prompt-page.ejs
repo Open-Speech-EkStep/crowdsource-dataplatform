@@ -35,7 +35,7 @@
                 <%- include ../common/speakerTesting.ejs %>
             </div>
             <div class="row" id="instructive-msg">
-                <div class="col-12 justify-content-center text-center">
+                <div class="col-12 justify-content-center text-center" style="color:#959595;font-style:italic">
                     <%- __('Does the audio match the text?') %>
                 </div>
             </div>
@@ -160,7 +160,11 @@
                     <%= __('Skip') %>
                 </button>
             </div>
-            <div class="simple-keyboard d-none"></div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-6 justify-content-center">
+                    <div class="simple-keyboard d-none"></div>
+                </div>
+            </div>
             <div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
                 <div class="col-12 col-sm-8 col-lg-7">
                     <div class="progress mt-1">
