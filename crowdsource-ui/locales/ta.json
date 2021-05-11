@@ -331,5 +331,6 @@
 	"Is the text from the image captured correctly?": "Is the text from the image captured correctly?",
 	"Click to open expanded view": "Click to open expanded view",
 	"sentences validated": "sentences validated",
-	"images labels validated": "images labels validated"
+	"images labels validated": "images labels validated",
+	"<span id=\"current_badge_name_1\"></span> contributor level achieved for contributing <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_name_1\"></span> contributor level achieved for contributing <span id=\"current_badge_count\"></span> sentences."
 }
