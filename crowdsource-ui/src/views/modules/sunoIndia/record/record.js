@@ -50,7 +50,7 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  fd.append('userInput', sunoIndia.sentences.editedText);
+  fd.append('userInput', sunoIndia.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localSpeakerDataParsed.language);
   fd.append('sentenceId', sunoIndia.sentences[currentIndex].dataset_row_id);
