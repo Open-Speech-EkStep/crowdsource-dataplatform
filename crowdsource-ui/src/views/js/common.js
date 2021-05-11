@@ -97,12 +97,13 @@ const setBadge = function (data,localeStrings){
   localStorage.setItem('nextHourGoal', data.nextHourGoal);
   $("#user-contribution").text(data.contributionCount);
   $("#language-hour-goal").text(data.nextHourGoal);
+
   const module = localStorage.getItem(CURRENT_MODULE);
   if (data.isNewBadge) {
     $("#spree_text").removeClass("d-none");
     $("#milestone_text").removeClass("d-none");
-    $("#current_badge_name").text(localeStrings[data.currentBadgeType]);
-    $("#current_badge_name_1").text(localeStrings[data.currentBadgeType]);
+    $("#current_badge_name").text(localeStrings[data.currentBadgeType.toLowerCase()]);
+    $("#current_badge_name_1").text(localeStrings[data.currentBadgeType.toLowerCase()]);
     $("#current_badge_count").text(data.currentMilestone);
     $("#next_badge_count").text(data.nextMilestone);
     $("#next_badge_name_1").text(localeStrings[data.nextBadgeType.toLowerCase()]);
