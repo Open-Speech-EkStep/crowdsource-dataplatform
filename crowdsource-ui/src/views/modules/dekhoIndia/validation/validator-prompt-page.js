@@ -470,7 +470,7 @@ $(document).ready(() => {
   } else {
     localStorage.removeItem(currentIndexKey);
     const type = 'ocr';
-    fetch(`/contributions/${type}?from=${language}&to=`, {
+    fetch(`/contributions/${type}?from=${language}&to=''&username=${localSpeakerDataParsed.userName}`, {
       credentials: 'include',
       mode: 'cors'
     }).then((data) => {
