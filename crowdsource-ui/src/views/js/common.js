@@ -3,6 +3,7 @@ const {
   } = require('./constants');
 const {constructChart}= require('./horizontalBarGraph');
 const {changeLocale}= require('./locale');
+const fetch = require('./fetch');
 
 const getContributedAndTopLanguage = (topLanguagesData, type) => {
     const contributedLanguage = type === "likho" ? localStorage.getItem(CONTRIBUTION_LANGUAGE) + '-' +  localStorage.getItem(TO_LANGUAGE): localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -166,5 +167,5 @@ const setBadge = function (data,localeStrings){
 }
 
 
-module.exports =  {getContributedAndTopLanguage,showByHoursChart,redirectToLocalisedPage, setBadge, showFucntionalCards};
+module.exports =  {getContributedAndTopLanguage,showByHoursChart,redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages};
 
