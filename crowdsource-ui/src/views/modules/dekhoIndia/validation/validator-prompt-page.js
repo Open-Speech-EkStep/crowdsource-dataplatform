@@ -237,6 +237,7 @@ function addListeners() {
   })
 
   $('#submit-edit-button').on('click', () => {
+    skipValidation(REJECT_ACTION)
     setInput("");
     hideElement($('.simple-keyboard'));
     hideElement($('#cancel-edit-button'));
