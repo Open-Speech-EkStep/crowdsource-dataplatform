@@ -438,7 +438,7 @@ $(document).ready(() => {
   } else {
     localStorage.removeItem(currentIndexKey);
     const type = 'parallel';
-    fetch(`/contributions/${type}?from=${fromLanguage}&to=${toLanguage}`, {
+    fetch(`/contributions/${type}?from=${fromLanguage}&to=${toLanguage}&username=${localSpeakerDataParsed.userName}`, {
       credentials: 'include',
       mode: 'cors'
     })

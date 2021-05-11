@@ -42,7 +42,8 @@ const {
     getMultiplierForHourGoal,
     getOrderedMediaQuery,
     getContributionLanguagesQuery,
-    getDatasetLanguagesQuery
+    getDatasetLanguagesQuery,
+    getOrderedUniqueMediaQuery
 } = require('./dbQuery');
 
 const {
@@ -145,7 +146,7 @@ const getMediaBasedOnAge = function (
         // query = updateAndGetUniqueMediaQuery;
     }
 
-    let query = getOrderedMediaQuery;
+    let query = getOrderedUniqueMediaQuery;
     const launchUser = envVars.LAUNCH_USER || 'launch_user';
     const launchIds = envVars.LAUNCH_IDS || '';
 
@@ -201,7 +202,7 @@ const getContributionList = async function (req, res) {
     const toLanguage = req.query.to;
     const type = req.params.type;
     const userId = req.cookies.userId;
-    const { userName = "" } = req.body;
+    const { userName = "" } = req.query;
     const contributorId = await getContributorId(userId, userName);
     db.any(getContributionListQuery, [contributorId, type, fromLanguage, toLanguage])
         .then((response) => {
@@ -421,7 +422,7 @@ const getContributorId = async (userId, userName, age = '', gender = '', motherT
     if (!contributorInfo) {
         contributorInfo = await db.one(addContributorQuery, [userId, userName, age, gender, motherTongue]);
     }
-
+    
     const contributor_id = contributorInfo.contributor_id;
     return contributor_id;
 }

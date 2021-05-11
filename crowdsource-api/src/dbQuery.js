@@ -85,21 +85,33 @@ select ins."dataset_row_id", dataset_row.media ->> 'data' as sentence from ins  
   inner join dataset_row on dataset_row."dataset_row_id" = ins."dataset_row_id";`
 
 const getOrderedMediaQuery = `
-select dataset_row."dataset_row_id", dataset_row.media ->> 'data' as media_data
+select dataset_row.dataset_row_id, dataset_row.media->>'data' as media_data
 from dataset_row 
-left join "contributors" con on con."contributor_identifier"=$1 and user_name=$2
-left join "contributions" cont on cont."dataset_row_id"= dataset_row."dataset_row_id" and cont.contributed_by = con.contributor_id 
-where dataset_row.media ->> 'language'=$4 and difficulty_level=$3 and coalesce(dataset_row.state,'')!= 'reported' and type=$5
-and (cont.action is null or (coalesce(cont.action,'')='completed' and cont.contributed_by != con.contributor_id) or (coalesce(cont.action,'')='skipped' and cont.contributed_by != con.contributor_id)) 
-group by dataset_row."dataset_row_id", dataset_row.media ->> 'data' 
-order by dataset_row."dataset_row_id"
+left join contributors con on con.contributor_identifier=$1 and user_name=$2
+left join contributions cont on cont.dataset_row_id=dataset_row.dataset_row_id and cont.contributed_by=con.contributor_id 
+where dataset_row.media->>'language'=$4 and difficulty_level=$3 and coalesce(dataset_row.state,'')!='reported' and type=$5
+and (cont.action is null or (coalesce(cont.action,'')='completed' and cont.contributed_by!=con.contributor_id) or (coalesce(cont.action,'')='skipped' and cont.contributed_by!=con.contributor_id)) 
+group by dataset_row.dataset_row_id, dataset_row.media->>'data' 
+order by dataset_row.dataset_row_id
+limit 5`;
+
+const getOrderedUniqueMediaQuery = `
+select dataset_row.dataset_row_id, dataset_row.media->>'data' as media_data
+from dataset_row 
+left join contributors con on con.contributor_identifier=$1 and user_name=$2
+left join contributions cont on cont.dataset_row_id=dataset_row.dataset_row_id and cont.contributed_by=con.contributor_id 
+where dataset_row.media->>'language'=$4 and difficulty_level=$3 and dataset_row.state is null and type=$5
+and (cont.action is null or (coalesce(cont.action,'')='skipped' and cont.contributed_by!=con.contributor_id)) 
+group by dataset_row.dataset_row_id, dataset_row.media->>'data' 
+order by dataset_row.dataset_row_id
 limit 5`;
 
 const getContributionListQuery = `
 select con."dataset_row_id", ds.media ->> 'data' as sentence, con.media ->> 'data' as contribution, con.contribution_id 
     from contributions con 
     inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_id!=$1
-    inner join dataset_row ds on ds."dataset_row_id"=con."dataset_row_id" and ds."state"= 'contributed' 
+    inner join dataset_row ds on ds."dataset_row_id"=con."dataset_row_id"
+    and (COALESCE(ds.state,'')!='validated') and (COALESCE(ds.state,'')!='reported')
 	and ds.type=$2 and (ds.type='text' or con.is_system) and (ds.type!='parallel' or con.media->>'language'=$4)
     left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' 
     where  con.action='completed' and ds.media->>'language'=$3 and COALESCE(val.validated_by, '')!= $1::text
@@ -108,21 +120,31 @@ select con."dataset_row_id", ds.media ->> 'data' as sentence, con.media ->> 'dat
 
 const addValidationQuery = `insert into validations (contribution_id, action, validated_by, date, state_region, country) 
 select contribution_id, $3, $1, now(), $5, $6 from contributions inner join dataset_row on dataset_row.dataset_row_id=contributions.dataset_row_id 
-where dataset_row.dataset_row_id=$2 and dataset_row.state='contributed' and contribution_id=$4;`
+where dataset_row.dataset_row_id=$2 and contribution_id=$4 and contributions.action='completed';`
 
-const updateMediaWithValidatedState = `update dataset_row set "state" = \
-\'validated\' where "dataset_row_id" = $1 and (select count(*) from validations where contribution_id = $2 and action != 'skip') >= \
-(select value from configurations where config_name = 'validation_count');`
+const updateMediaWithValidatedState = `update dataset_row set state=
+'validated' where dataset_row_id=$1 and (select count(*) from validations where contribution_id=$2 and action!='skip')>=
+(select value from configurations where config_name='validation_count');`
 
-const updateContributionDetails = `insert into "contributions" ("action","dataset_row_id", "date", "contributed_by", "state_region", "country", "media")
-select 'completed', $1, now(), $2, $6, $7, json_build_object('data', $3, 'type', 'audio', 'language', $4, 'duration', $5);`;
+const updateMediaWithContributedState = `update dataset_row set state=
+'contributed' where dataset_row_id=$1 and (select count(*) from contributions where dataset_row_id=$1 and action='completed')>=
+(select value from configurations where config_name='contribution_count');`
 
-const updateContributionDetailsWithUserInput = `insert into "contributions" ("action","dataset_row_id", "date", "contributed_by", "state_region", "country", "media")
-select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4);`;
+const updateContributionDetails = 
+`insert into "contributions" ("action","dataset_row_id", "date", "contributed_by", "state_region", "country", "media")
+select 'completed', $1, now(), $2, $6, $7, json_build_object('data', $3, 'type', 'audio', 'language', $4, 'duration', $5) 
+where ((select count(*) from contributions con inner join dataset_row dr on con.dataset_row_id=dr.dataset_row_id and dr.dataset_row_id=$1)
+<
+(select value from configurations where config_name='contribution_count'))`;
+
+const updateContributionDetailsWithUserInput = 
+`insert into "contributions" ("action","dataset_row_id", "date", "contributed_by", "state_region", "country", "media")
+select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'audio', 'language', $4) 
+where ((select count(*) from contributions con inner join dataset_row dr on con.dataset_row_id=dr.dataset_row_id and dr.dataset_row_id=$1)
+<
+(select value from configurations where config_name='contribution_count'))`;
 
 const updateMaterializedViews = 'REFRESH MATERIALIZED VIEW contributions_and_demo_stats;REFRESH MATERIALIZED VIEW daily_stats_complete;REFRESH MATERIALIZED VIEW gender_group_contributions;REFRESH MATERIALIZED VIEW age_group_contributions;REFRESH MATERIALIZED VIEW language_group_contributions;REFRESH MATERIALIZED VIEW state_group_contributions;REFRESH MATERIALIZED VIEW language_and_state_group_contributions;'
-
-const updateMediaWithContributedState = 'update dataset_row set state = \'contributed\' where "dataset_row_id" = $1;'
 
 const getCountOfTotalSpeakerAndRecordedAudio = `select  count(DISTINCT(con.*)), 0 as index, 0 as duration \
 from "contributors" con inner join "contributions" cont on con.contributor_id = cont.contributed_by and cont.action=\'completed\' inner join "dataset_row" s on  s."dataset_row_id" = cont."dataset_row_id"  where s.language = $1 \
@@ -248,5 +270,6 @@ module.exports = {
   updateContributionDetailsWithUserInput,
   getPathFromMasterDataSet,
   getContributionLanguagesQuery,
-  getDatasetLanguagesQuery
+  getDatasetLanguagesQuery,
+  getOrderedUniqueMediaQuery
 }
