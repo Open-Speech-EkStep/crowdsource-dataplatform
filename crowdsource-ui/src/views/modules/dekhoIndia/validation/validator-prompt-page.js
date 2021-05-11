@@ -135,6 +135,7 @@ function skipValidation(action) {
   }
   const sentenceId = dekhoIndiaValidator.sentences[currentIndex].dataset_row_id
   const contribution_id = dekhoIndiaValidator.sentences[currentIndex].contribution_id
+  const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
   fetch(`/validate/${contribution_id}/${action}`, {
     method: 'POST',
     credentials: 'include',
@@ -142,7 +143,8 @@ function skipValidation(action) {
     body: JSON.stringify({
       sentenceId: sentenceId,
       state: localStorage.getItem('state_region') || "",
-      country: localStorage.getItem('country') || ""
+      country: localStorage.getItem('country') || "",
+      userName: speakerDetails && speakerDetails.userName
     }),
     headers: {
       'Content-Type': 'application/json',
