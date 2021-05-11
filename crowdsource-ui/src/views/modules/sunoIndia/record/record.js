@@ -227,6 +227,8 @@ function addListeners() {
   const $skipButton = $('#skip_button');
 
   $("#edit").focus(function () {
+    // $(document).scrollTop($(document).height());
+    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     hideElement($('#progress-row'));
     showElement($('.simple-keyboard'));
     openEditor();
