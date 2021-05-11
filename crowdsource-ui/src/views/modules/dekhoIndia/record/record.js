@@ -226,6 +226,7 @@ function addListeners() {
   })
 
   $("#edit").focus(function () {
+    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     const $submitEditButton = $("#submit-edit-button");
     $submitEditButton.removeAttr('disabled');
     const children = $submitEditButton.children().children();
