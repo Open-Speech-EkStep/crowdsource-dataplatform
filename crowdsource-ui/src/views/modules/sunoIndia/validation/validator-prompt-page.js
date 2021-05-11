@@ -327,7 +327,7 @@ function addListeners() {
     $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     const $submitEditButton = $("#submit-edit-button");
     const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#007BFF');
+    children[0].setAttribute("fill", '#D7D7D7');
     hideElement($('#progress-row'));
     showElement($('.simple-keyboard'));
   });
