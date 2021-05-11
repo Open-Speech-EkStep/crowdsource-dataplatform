@@ -137,6 +137,9 @@ function initializeBlock() {
 
   toggleFooterPosition();
   let top_lang = getDefaultLang();
+  if(top_lang){
+    updateLocaleLanguagesDropdown(top_lang);
+  }
 
   const $languageNavBar = $('#language-nav-bar');
   const $sayListenLanguage = $('#say-listen-language');
