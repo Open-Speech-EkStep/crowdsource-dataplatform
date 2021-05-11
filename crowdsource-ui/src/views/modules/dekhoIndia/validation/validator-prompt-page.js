@@ -225,14 +225,17 @@ function addListeners() {
   $("#edit").focus(function(){
     $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     const $submitEditButton = $("#submit-edit-button");
-    $submitEditButton.removeAttr('disabled');
     const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#007BFF');
+    children[0].setAttribute("fill", '#D7D7D7');
     hideElement($('#progress-row'));
     showElement($('.simple-keyboard'));
   });
 
   $('#cancel-edit-button').on('click', () => {
+    const $submitEditButton = $("#submit-edit-button");
+    $submitEditButton.attr('disabled',true);
+    const children = $submitEditButton.children().children();
+    children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
     setInput("");
