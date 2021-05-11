@@ -362,5 +362,15 @@
 	"Contributions made to Dekho India": "Contributions made to Dekho India",
 	"Badges": "Badges",
 	"Dashboard": "Dashboard",
-	"Label": "Label"
+	"Label": "Label",
+	"You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"./validator-badges.html\">Know more</a>": "You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"./validator-badges.html\">Know more</a>",
+	"Your language pair and top 3 most contributed language pairs": "Your language pair and top 3 most contributed language pairs",
+	"Help your language pairs achieve it’s goal of <span id=\"language-hour-goal\"></span> hrs. We know you can do more!": "Help your language pairs achieve it’s goal of <span id=\"language-hour-goal\"></span> hrs. We know you can do more!",
+	"Help your language pair achieve it’s goal of <span id=\"language-hour-goal\"></span> hrs. We know you can do more!": "Help your language pair achieve it’s goal of <span id=\"language-hour-goal\"></span> hrs. We know you can do more!",
+	"Type the text as you hear the audio": "Type the text as you hear the audio",
+	"Does the audio match the text?": "Does the audio match the text?",
+	"Type the translation of the given text": "Type the translation of the given text",
+	"Type the text from the image": "Type the text from the image",
+	"Is the text from the image captured correctly?": "Is the text from the image captured correctly?",
+	"Click to open expanded view": "Click to open expanded view"
 }

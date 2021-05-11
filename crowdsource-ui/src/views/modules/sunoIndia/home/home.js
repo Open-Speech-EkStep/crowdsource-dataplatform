@@ -185,7 +185,6 @@ function initializeBlock() {
     setStartRecordingBtnOnClick('./validator-page.html');
   })
 
-  showByHoursChart();
   showFucntionalCards('asr');
   setSpeakerDetails(speakerDetailsKey, $userName);
   setUserNameOnInputFocus();
