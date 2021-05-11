@@ -1,7 +1,7 @@
 const { constructChart } = require('../common/horizontalBarGraph');
 const { onActiveNavbar } = require('../common/header');
 const { setSpeakerData } = require('../common/contributionStats');
-const { getContributedAndTopLanguage, redirectToLocalisedPage } = require('../common/common');
+const { getContributedAndTopLanguage, redirectToLocalisedPage,getAvailableLanguages } = require('../common/common');
 const {
   toggleFooterPosition,
   getLocaleString,
@@ -13,7 +13,6 @@ const {
   setUserNameOnInputFocus,
   setStartRecordingBtnOnClick
 } = require('../common/userDetails');
-const fetch = require('../common/fetch');
 
 const { updateHrsForCards } = require('../common/card')
 
@@ -27,16 +26,6 @@ const {
   CONTRIBUTION_LANGUAGE,
   ALL_LANGUAGES
 } = require('../common/constants');
-
-const setLanguageList = () => {
-  return fetch('/available-languages/parallel').then((data) => {
-    if (!data.ok) {
-      throw Error(data.statusText || 'HTTP error');
-    } else {
-      return Promise.resolve(data.json());
-    }
-  });
-};
 
 function getStatistics(response) {
   const $speakersData = $("#speaker-data");
@@ -148,7 +137,7 @@ function initializeBlock() {
   const $userName = $('#username');
   toggleFooterPosition();
 
-  setLanguageList().then(languagePairs => {
+  getAvailableLanguages('parallel').then(languagePairs => {
     const { datasetLanguages, contributionLanguages } = languagePairs;
     let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     let toLanguage = localStorage.getItem(TO_LANGUAGE);
