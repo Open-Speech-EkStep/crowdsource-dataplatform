@@ -582,7 +582,7 @@ $(document).ready(() => {
     localStorage.removeItem(currentIndexKey);
     const type = 'asr';
     const toLanguage = '';
-    fetch(`/contributions/${type}?from=${language}&to=${toLanguage}`, {
+    fetch(`/contributions/${type}?from=${language}&to=${toLanguage}&username=${localSpeakerDataParsed.userName}`, {
       credentials: 'include',
       mode: 'cors'
     }).then((data) => {
