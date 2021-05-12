@@ -1,6 +1,6 @@
 const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition,setFooterPosition, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE,TO_LANGUAGE,ALL_LANGUAGES} = require('../common/constants');
+const {LIKHO_FROM_LANGUAGE, CURRENT_MODULE, MODULE,LIKHO_TO_LANGUAGE,ALL_LANGUAGES} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 const { setInput } = require('../common/virtualKeyboard');
 
@@ -61,7 +61,7 @@ const setTotalSentenceIndex = (index) => {
 }
 
 function showNoSentencesMessage() {
-  $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
+  $('#spn-validation-language').html(localStorage.getItem(LIKHO_FROM_LANGUAGE));
   hideElement($('#sentences-row'));
   hideElement($('#translation-row'));
   hideElement($('#virtualKeyBoardBtn'));
@@ -375,8 +375,8 @@ const getLocationInfo = () => {
 let selectedReportVal = '';
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
-  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const toLanguage = localStorage.getItem(TO_LANGUAGE);
+  const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   setFooterPosition();
   showKeyboard(toLanguage.toLowerCase());
   hideElement($('#keyboardBox'));

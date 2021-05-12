@@ -9,7 +9,7 @@ const {
   fetchLocationInfo,
   reportSentenceOrRecording
 } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS,CURRENT_MODULE, MODULE,TO_LANGUAGE, ALL_LANGUAGES} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, LIKHO_FROM_LANGUAGE,LIKHO_TO_LANGUAGE,  LOCALE_STRINGS,CURRENT_MODULE, MODULE,TO_LANGUAGE, ALL_LANGUAGES} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 const {setInput} = require('../common/virtualKeyboard');
 const speakerDetailsKey = 'speakerDetails';
@@ -207,7 +207,7 @@ function showThankYou() {
 }
 
 function showNoSentencesMessage() {
-  $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
+  $('#spn-validation-language').html(localStorage.getItem(LIKHO_FROM_LANGUAGE));
   hideElement($('#sentences-row'));
   hideElement($('#virtualKeyBoardBtn'));
   hideElement($('#audio-row'))
@@ -284,7 +284,7 @@ let selectedReportVal = '';
 const initialize = function () {
   const totalItems = likhoIndia.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
-  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const language = localStorage.getItem(LIKHO_FROM_LANGUAGE);
 
   $("#start_contributing_id").on('click', function () {
     const data = localStorage.getItem("speakerDetails");
@@ -361,8 +361,8 @@ function executeOnLoad() {
   const $pageContent = $('#page-content');
   const $navUser = $('#nav-user');
   const $navUserName = $navUser.find('#nav-username');
-  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const toLanguage = localStorage.getItem(TO_LANGUAGE);
+  const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   $('#keyboardLayoutName').text(toLanguage);
   $('#from-label').text(fromLanguage);
@@ -486,7 +486,7 @@ function executeOnLoad() {
 
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
-  const translationLanguage = localStorage.getItem(TO_LANGUAGE);
+  const translationLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   showKeyboard(translationLanguage.toLowerCase());
   hideElement($('#keyboardBox'));
   getLocaleString().then(() => {

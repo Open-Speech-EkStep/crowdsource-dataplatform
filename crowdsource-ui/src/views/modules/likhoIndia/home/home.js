@@ -24,7 +24,9 @@ const {
   MODULE,
   TO_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
-  ALL_LANGUAGES
+  ALL_LANGUAGES,
+  LIKHO_FROM_LANGUAGE,
+  LIKHO_TO_LANGUAGE
 } = require('../common/constants');
 
 function getStatistics(response) {
@@ -95,7 +97,7 @@ const addToLanguage = function (id, list) {
   selectBar.innerHTML = options;
 }
 
-const checkIsValidating = (contributionLanguages, fromLanguage, toLanguage) => {
+const checkIsValidating = (contributionLanguages, fromLanguage, toLanguage, datasetLanguages) => {
   const keys = contributionLanguages[fromLanguage];
   if (keys) {
     const isAvailable = keys.find(item => item == toLanguage);
@@ -104,8 +106,13 @@ const checkIsValidating = (contributionLanguages, fromLanguage, toLanguage) => {
     } else {
       $("#right").addClass("validate-disabled");
     }
+  } else if (datasetLanguages && datasetLanguages.filter(item => item == fromLanguage).length) {
+    $("#right").addClass("validate-disabled");
+  } else {
+    $("#left").addClass("cont-validate-disabled");
+    $("#left").removeClass("validate-disabled");
   }
-  localStorage.setItem(TO_LANGUAGE, toLanguage);
+  localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
 }
 
 const updateLocaleLanguagesDropdown = (language, toLanguage) => {
@@ -139,15 +146,15 @@ function initializeBlock() {
 
   getAvailableLanguages('parallel').then(languagePairs => {
     const { datasetLanguages, contributionLanguages } = languagePairs;
-    let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    let toLanguage = localStorage.getItem(TO_LANGUAGE);
+    let fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+    let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
     addLanguagesIn('from-language', datasetLanguages);
 
     if (fromLanguage && toLanguage) {
       const languages = ALL_LANGUAGES.filter(item => item.value !== fromLanguage);
       addToLanguage('to-language', languages);
       updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
-      checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
+      checkIsValidating(contributionLanguages, fromLanguage, toLanguage, datasetLanguages);
       $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
       $(`#to-language option[value=${toLanguage}]`).attr("selected", "selected");
     } else {
@@ -158,15 +165,18 @@ function initializeBlock() {
       $('#to-language option:first-child').attr("selected", "selected");
       toLanguage = $('#to-language option:first-child').val();
       updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
-      checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
-      localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-      localStorage.setItem(TO_LANGUAGE, toLanguage);
+      checkIsValidating(contributionLanguages, fromLanguage, toLanguage, datasetLanguages);
+      localStorage.setItem(LIKHO_FROM_LANGUAGE, fromLanguage);
+      localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
     }
 
 
     $('#from-language').on('change', (e) => {
       fromLanguage = e.target.value;
-      localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
+      localStorage.setItem(LIKHO_FROM_LANGUAGE, fromLanguage);
+      $('#to-language option:first-child').attr("selected", "selected");
+      toLanguage = $('#to-language option:first-child').val();
+      localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
       updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
@@ -174,12 +184,12 @@ function initializeBlock() {
 
     $('#to-language').on('change', (e) => {
       toLanguage = e.target.value;
-      const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-      localStorage.setItem(TO_LANGUAGE, toLanguage);
+      const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+      localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
       updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
-      checkIsValidating(contributionLanguages, fromLanguage, toLanguage);
+      checkIsValidating(contributionLanguages, fromLanguage, toLanguage, datasetLanguages);
       getStatsSummary();
     });
   })
