@@ -13,6 +13,7 @@ const {
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 const {setInput} = require('../common/virtualKeyboard');
+const {isKeyboardExtensionPresent} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
 
 const sunoCountKey = 'sunoCount';
@@ -190,11 +191,6 @@ const closeEditor = function () {
   hideElement($('#keyboardBox'));
 }
 
-const openEditor = function () {
-  showElement($('#simple-keyboard'));
-}
-
-
 const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 showKeyboard(contributionLanguage.toLowerCase());
 
@@ -227,10 +223,9 @@ function addListeners() {
   const $skipButton = $('#skip_button');
 
   $("#edit").focus(function () {
-    // $(document).scrollTop($(document).height());
-    $("html, body").animate({scrollTop: $(document).height()}, 1000);
-    showElement($('#keyboardBox'));
-    openEditor();
+    if(! isKeyboardExtensionPresent()){
+      showElement($('#keyboardBox'));
+    }
   });
 
   $('#cancel-edit-button').on('click', () => {
