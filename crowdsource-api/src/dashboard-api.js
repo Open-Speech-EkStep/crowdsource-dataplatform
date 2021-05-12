@@ -1,4 +1,4 @@
-const { getLastUpdatedAt, getTopLanguageByHours, getTopLanguageBySpeakers, getAggregateDataCount, getLanguages, getTimeline, getGenderGroupData, getAgeGroupData } = require('./dbOperations');
+const { getLastUpdatedAt, getTopLanguageByHours, getTopLanguageByContributionCount, getTopLanguageBySpeakers, getAggregateDataCount, getLanguages, getTimeline, getGenderGroupData, getAgeGroupData } = require('./dbOperations');
 const { validateMediaTypeInput } = require("./middleware/validateUserInputs")
 let isFieldsMentioned = (fieldsArray) => {
     for (let key in fieldsArray) {
@@ -20,6 +20,7 @@ let verifyAndRemoveField = (resultObject, avoidUnMentioned) => {
 
 let validateAndReturnRequiredStatsFields = (queryObject) => {
     const topLanguageByHoursFlag = queryObject.topLanguageByHours || null;
+    const topLanguageByContributionCountFlag = queryObject.topLanguagesByContributionCount || null;
     const topLanguageBySpeakersFlag = queryObject.topLanguageBySpeakers || null;
     const languageDataFlag = queryObject.languageData || null;
     const aggregateDataByLanguageFlag = queryObject.aggregateDataByLanguage || null;
@@ -29,6 +30,7 @@ let validateAndReturnRequiredStatsFields = (queryObject) => {
 
     let resultObject = {
         'top_language_by_hours': topLanguageByHoursFlag,
+        'top_language_by_contribution_count': topLanguageByContributionCountFlag,
         'top_language_by_speakers': topLanguageBySpeakersFlag,
         'languages': languageDataFlag,
         'aggregate_data_by_state': aggregateDataByStateFlag,
@@ -117,6 +119,12 @@ const dashboardRoutes = (router) => {
         const type = req.params.type;
 
         let result = {};
+        if (type === 'ocr' || type === 'parallel') {
+            if (resultFields.includes('top_language_by_contribution_count')) {
+                const topLanguagesByContributionCount = await getTopLanguageByContributionCount(type);
+                result['top_languages_by_contribution_count'] = topLanguagesByContributionCount;
+            }
+        }
         if (resultFields.includes('top_language_by_hours')) {
             const topLanguagesByHours = await getTopLanguageByHours(type);
             result['top_languages_by_hours'] = topLanguagesByHours;
@@ -142,11 +150,11 @@ const dashboardRoutes = (router) => {
             const aggregateDataByDateAndLanguage = await getAggregateDataCount(false, true, type);
             result['aggregate_data_by_state_and_language'] = aggregateDataByDateAndLanguage;
         }
-        if(resultFields.includes('aggregate_data_count')){
+        if (resultFields.includes('aggregate_data_count')) {
             const aggregateCount = await getAggregateDataCount(false, false, type);
             result['aggregate_data_count'] = aggregateCount;
         }
-        
+
         const lastUpdatedDateTime = await getLastUpdatedAt();
         result['last_updated_at'] = lastUpdatedDateTime;
         res.send(result);

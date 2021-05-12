@@ -51,6 +51,17 @@ function redirectToLocalisedPage() {
   }
 }
 
+const updateLocaleLanguagesDropdown = (language) => {
+  const dropDown = $('#localisation_dropdown');
+  const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+  if(language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
+      dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
+  } else {
+      dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+      <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  }
+}
+
 const getAvailableLanguages = (type) => {
   return fetch(`/available-languages/${type}`).then((data) => {
     if (!data.ok) {
@@ -61,23 +72,29 @@ const getAvailableLanguages = (type) => {
   });
 };
 
-const showFucntionalCards = (type) => {
-  try {
-    getAvailableLanguages(type).then(languagePairs  => {
-      const {datasetLanguages, contributionLanguages} = languagePairs;
-      const selectedLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+const getLanguageTargetInfo = (type, sourceLanguage, targetLanguage) => {
+  return fetch(`/target-info/${type}/sourceLanguage=${sourceLanguage}?targetLanguage=${targetLanguage}`).then((data) => {
+    if (!data.ok) {
+      throw Error(data.statusText || 'HTTP error');
+    } else {
+      return Promise.resolve(data.json());
+    }
+  });
+};
 
-      const isContLanguagePresent = contributionLanguages[selectedLanguage];
-      const isDataLanguagePresent = datasetLanguages.filter(item => item == selectedLanguage).length;
+const showFucntionalCards = (type, from, to) => {
+  try {
+    getLanguageTargetInfo(type, from, to).then(languagePairs  => {
+      const {hasTarget, isAllContributed} = languagePairs;
       let contributeCard = $("#left");
       let validateCard = $("#right");
-      if(isContLanguagePresent && isContLanguagePresent.length && isDataLanguagePresent) {
+      if(!hasTarget && !isAllContributed) {
         contributeCard.removeClass("cont-validate-disabled");
         validateCard.removeClass("validate-disabled");
-      } else if(isContLanguagePresent && isContLanguagePresent.length) {
+      } else if(!hasTarget && isAllContributed) {
         validateCard.removeClass("validate-disabled");
         contributeCard.addClass("cont-validate-disabled");
-      } else if(isDataLanguagePresent) {
+      } else if(hasTarget && !isAllContributed) {
         contributeCard.removeClass("cont-validate-disabled");
         validateCard.addClass("validate-disabled");
       } else {
@@ -173,5 +190,5 @@ const isKeyboardExtensionPresent = function (){
 }
 
 
-module.exports =  {getContributedAndTopLanguage,showByHoursChart,redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages,isKeyboardExtensionPresent};
+module.exports =  {getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChart,redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages,isKeyboardExtensionPresent};
 
