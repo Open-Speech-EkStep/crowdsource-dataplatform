@@ -454,6 +454,7 @@ const initialize = function () {
     setCurrentSentenceIndex(currentIndex);
     setTotalSentenceIndex(totalItems);
     setAudioPlayer();
+    updateProgressBar(currentIndex)
   }
 };
 

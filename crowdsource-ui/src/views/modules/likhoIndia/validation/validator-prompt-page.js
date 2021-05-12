@@ -357,6 +357,7 @@ const initializeComponent = () => {
       setCapturedText(currentIndex);
       setCurrentSentenceIndex(currentIndex);
       setTotalSentenceIndex(totalItems);
+      updateProgressBar(currentIndex)
     }
 }
 

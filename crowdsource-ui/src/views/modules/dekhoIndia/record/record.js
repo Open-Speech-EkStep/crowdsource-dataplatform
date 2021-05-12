@@ -432,6 +432,7 @@ const initializeComponent = () => {
     getImage(validationData.dataset_row_id);
     setCurrentSentenceIndex(currentIndex);
     setTotalSentenceIndex(totalItems);
+    updateProgressBar(currentIndex)
   }
 
 }

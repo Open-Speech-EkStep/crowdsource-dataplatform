@@ -321,6 +321,7 @@ const initialize = function () {
     setSentence(translation.media_data);
     setCurrentSentenceIndex(currentIndex);
     setTotalSentenceIndex(totalItems);
+    updateProgressBar(currentIndex)
   }
 };
 
