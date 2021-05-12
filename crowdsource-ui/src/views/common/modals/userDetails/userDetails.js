@@ -1,4 +1,4 @@
-const {DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS,TO_LANGUAGE} = require('./constants');
+const {DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS,LIKHO_TO_LANGUAGE,LIKHO_FROM_LANGUAGE,MODULE} = require('./constants');
 const {getLocaleString} = require('./utils');
 
 function validateUserName($userName, $userNameError) {
@@ -92,22 +92,24 @@ const setUserNameOnInputFocus = function () {
   });
 }
 
-const setStartRecordingBtnOnClick = function (url) {
+const setStartRecordingBtnOnClick = function (url, module='') {
   const speakerDetailsKey = 'speakerDetails';
   const $startRecordBtn = $('#proceed-box');
   const $userName = $('#username');
   $startRecordBtn.on('click', () => {
     const userNameValue = $userName.val().trim().substring(0, 12);
     let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    let toLanguage = localStorage.getItem(TO_LANGUAGE);
+    let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+    let fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
     const selectedLanguage = ALL_LANGUAGES.find(e => e.value === contributionLanguage);
     if (!selectedLanguage.data) contributionLanguage = DEFAULT_CON_LANGUAGE;
     if (testUserName(userNameValue)) {
       return;
     }
+    const userLanguage = module === MODULE.likho.value ? fromLanguage : contributionLanguage;
     const speakerDetails = {
       userName: userNameValue,
-      language: contributionLanguage,
+      language: userLanguage,
       toLanguage:toLanguage || '',
     };
     localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));

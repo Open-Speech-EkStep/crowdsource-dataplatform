@@ -1,9 +1,32 @@
 const {
   performAPIRequest,
   getLocaleString,
-  updateLocaleLanguagesDropdown
 } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, MODULE, CURRENT_MODULE} = require('../common/constants');
+const {LIKHO_FROM_LANGUAGE,LIKHO_TO_LANGUAGE, LOCALE_STRINGS, MODULE, CURRENT_MODULE,ALL_LANGUAGES} = require('../common/constants');
+
+const updateLocaleLanguagesDropdown = (language, toLanguage) => {
+  const dropDown = $('#localisation_dropdown');
+  const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+  const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
+  const invalidToLang = toLanguage.toLowerCase() === "english" || toLanguage.hasLocaleText === false;
+  const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
+  if (invalidToLang && invalidFromLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
+  } else if (invalidFromLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+      <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+  } else if (invalidToLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  } else if (toLanguage.toLowerCase() === language.toLowerCase()){
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  }else {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
+        <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+  }
+}
 
 
 const rowWithBadge = function (levelId, sentenceCount, badgeName, localeString) {
@@ -53,12 +76,13 @@ const renderBadgeDetails = function (data) {
 }
 
 $(document).ready(function () {
-  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
+  const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE) || 'english';
+  const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE) || 'hindi';
   const type='parallel'
   const source='contribute'
-  updateLocaleLanguagesDropdown(language);
+  updateLocaleLanguagesDropdown(fromLanguage,toLanguage);
   getLocaleString().then(() => {
-    performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then(renderBadgeDetails).catch((err) => {
+    performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${fromLanguage}`).then(renderBadgeDetails).catch((err) => {
       console.log(err);
     })
   }).catch(() => {

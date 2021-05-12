@@ -1,8 +1,9 @@
 const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
-const { testUserName, setStartRecordingBtnOnClick, setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown } = require('../common/userDetails');
+const { setStartRecordingBtnOnClick, setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown } = require('../common/userDetails');
 const { toggleFooterPosition, getLocaleString } = require('../common/utils');
-const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE,TO_LANGUAGE,CONTRIBUTION_LANGUAGE } = require('../common/constants');
+const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE,LIKHO_FROM_LANGUAGE,
+    LIKHO_TO_LANGUAGE } = require('../common/constants');
 const fetch = require('../common/fetch');
 
 const {setSpeakerData} = require('../common/contributionStats');
@@ -33,31 +34,6 @@ function isLanguageAvailable(data, lang) {
     });
     return langaugeExists;
 }
-
-const updateLocaleLanguagesDropdown = (language, toLanguage) => {
-    const dropDown = $('#localisation_dropdown');
-    const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-    const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
-    const invalidToLang = toLanguage.toLowerCase() === "english" || toLanguage.hasLocaleText === false;
-    const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
-    if (invalidToLang && invalidFromLang) {
-        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
-    } else if (invalidFromLang) {
-        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-      <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-    } else if (invalidToLang) {
-        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-    } else if (toLanguage.toLowerCase() === language.toLowerCase()){
-        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-    }else {
-        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
-        <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-    }
-}
-
 
 function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
@@ -104,6 +80,7 @@ function updateLanguage(language) {
       });
 }
 
+
 $(document).ready(function () {
     localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
     localStorage.removeItem('previousLanguage');
@@ -111,15 +88,11 @@ $(document).ready(function () {
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
-    // const $tncCheckbox = $('#tnc');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
-    const genderRadios = document.querySelectorAll('input[name = "gender"]');
     const $userName = $('#username');
-    const motherTongue = document.getElementById('mother-tongue');
-    const age = document.getElementById('age');
     updateLanguage('');
-    const contributionLanguage = localStorage.getItem('contributionLanguage');
-    const contributionLanguage2 = localStorage.getItem(TO_LANGUAGE);
+    const contributionLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+    const contributionLanguage2 = localStorage.getItem(LIKHO_TO_LANGUAGE);
     if (contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage,contributionLanguage2);
     }
@@ -174,60 +147,41 @@ $(document).ready(function () {
     $("#contribute-now").on('click', (e) => {
         localStorage.setItem("i18n", "en");
         sentenceLanguage = languageToRecord;
-        localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-        localStorage.setItem(TO_LANGUAGE, toLanguage);
-        setStartRecordingBtnOnClick("./record.html");
+        localStorage.setItem(LIKHO_FROM_LANGUAGE, fromLanguage);
+        localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
+        setStartRecordingBtnOnClick("./record.html",MODULE.likho.value);
     });
 
     setSpeakerDetails(speakerDetailsKey, $userName);
     $startRecordBtnTooltip.tooltip('disable');
     setUserNameOnInputFocus();
     setUserModalOnShown($userName);
-
-    // $startRecordBtn.on('click', () => {
-    //     const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
-    //     let genderValue = checkedGender.length ? checkedGender[0].value : '';
-    //     const userNameValue = $userName.val().trim().substring(0, 12);
-    //     const selectedLanguage = ALL_LANGUAGES.find(e => e.value === sentenceLanguage);
-    //     if (!selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
-    //     if (testUserName(userNameValue)) {
-    //         return;
-    //     }
-    //     const transGenderRadios = document.querySelectorAll('input[name = "trans_gender"]');
-    //     if (genderValue === "others") {
-    //         const transGender = Array.from(transGenderRadios).filter((el) => el.checked);
-    //         genderValue = transGender.length ? transGender[0].value : '';
-    //     }
-
-    //     const speakerDetails = {
-    //         gender: genderValue,
-    //         age: age.value,
-    //         motherTongue: motherTongue.value,
-    //         userName: userNameValue,
-    //         language: sentenceLanguage || localStorage.getItem('contributionLanguage'),
-    //     };
-    //     localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
-    //     localStorage.setItem("contributionLanguage", sentenceLanguage);
-    //     // document.cookie = `i18n=en`;
-    //     location.href = './record.html';
-    // });
-
-    $('input[name = "gender"]').on('change', function () {
-        const selectedGender = document.querySelector(
-          'input[name = "gender"]:checked'
-        );
-        const options = $("#transgender_options");
-        if (selectedGender.value === "others") {
-            console.log(options);
-            options.removeClass("d-none");
-        } else {
-            console.log(options);
-            options.addClass("d-none");
-        }
-    });
-
     toggleFooterPosition();
 
 });
+
+const updateLocaleLanguagesDropdown = (language, toLanguage) => {
+    const dropDown = $('#localisation_dropdown');
+    const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+    const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
+    const invalidToLang = toLanguage.toLowerCase() === "english" || toLanguage.hasLocaleText === false;
+    const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
+    if (invalidToLang && invalidFromLang) {
+        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
+    } else if (invalidFromLang) {
+        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+      <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+    } else if (invalidToLang) {
+        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+    } else if (toLanguage.toLowerCase() === language.toLowerCase()){
+        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+    }else {
+        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
+        <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+    }
+}
 
 module.exports = {fetchDetail, isLanguageAvailable, updateLanguage}

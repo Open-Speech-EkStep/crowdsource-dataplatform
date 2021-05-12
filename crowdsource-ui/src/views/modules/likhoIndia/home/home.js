@@ -22,8 +22,6 @@ const {
   AGGREGATED_DATA_BY_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
-  TO_LANGUAGE,
-  CONTRIBUTION_LANGUAGE,
   ALL_LANGUAGES,
   LIKHO_FROM_LANGUAGE,
   LIKHO_TO_LANGUAGE
@@ -195,11 +193,11 @@ function initializeBlock() {
   })
 
   $('#start_recording').on('click', () => {
-    setStartRecordingBtnOnClick('./record.html');
+    setStartRecordingBtnOnClick('./record.html',MODULE.likho.value);
   });
 
   $('#start_validating').on('click', () => {
-    setStartRecordingBtnOnClick('./validator-page.html');
+    setStartRecordingBtnOnClick('./validator-page.html',MODULE.likho.value);
   })
 
   setSpeakerDetails(speakerDetailsKey, $userName);
