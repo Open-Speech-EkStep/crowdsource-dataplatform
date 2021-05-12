@@ -167,6 +167,11 @@ const setBadge = function (data,localeStrings){
     }
 }
 
+const isKeyboardExtensionPresent = function (){
+  const chromeExtension = document.getElementById('GOOGLE_INPUT_CHEXT_FLAG');
+  return chromeExtension ? true : false
+}
 
-module.exports =  {getContributedAndTopLanguage,showByHoursChart,redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages};
+
+module.exports =  {getContributedAndTopLanguage,showByHoursChart,redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages,isKeyboardExtensionPresent};
 
