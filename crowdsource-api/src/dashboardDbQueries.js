@@ -39,7 +39,9 @@ const listLanguages = "select distinct(language) from contributions_and_demo_sta
 
 const topLanguagesBySpeakerContributions = "select language, total_speakers from language_group_contributions where $1:raw ORDER BY total_speakers DESC;";
 
-const topLanguagesByHoursContributed = "select language,ROUND(total_contributions::numeric/3600, 3) as total_contributions from language_group_contributions where $1:raw ORDER BY total_contributions DESC;";
+const topLanguagesByHoursContributed = "select language,ROUND(total_contributions::numeric/3600, 3) as total_contributions,total_contribution_count from language_group_contributions where $1:raw ORDER BY total_contributions DESC;";
+
+const topLanguagesByContributionCount = "select language,ROUND(total_contributions::numeric/3600, 3) as total_contributions,total_contribution_count from language_group_contributions where $1:raw ORDER BY total_contribution_count DESC;";
 
 const lastUpdatedAtQuery = "select max(lastupdated) AT TIME ZONE 'Asia/Kolkata' from audit_load_log;";
 
@@ -61,5 +63,6 @@ module.exports = {
     monthlyTimelineCumulative,
     quarterlyTimeline,
     quarterlyTimelineCumulative,
-    lastUpdatedAtQuery
+    lastUpdatedAtQuery,
+    topLanguagesByContributionCount
 };
