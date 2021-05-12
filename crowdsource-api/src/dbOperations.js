@@ -63,7 +63,8 @@ const {
     monthlyTimelineCumulative,
     quarterlyTimeline,
     quarterlyTimelineCumulative,
-    lastUpdatedAtQuery
+    lastUpdatedAtQuery,
+    topLanguagesByContributionCount
 } = require('./dashboardDbQueries');
 
 const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP } = require('./constants');
@@ -283,6 +284,11 @@ const getTypeFilter = (type) => {
 const getTopLanguageByHours = (type) => {
     const filter = getTypeFilter(type);
     return db.any(topLanguagesByHoursContributed, filter);
+};
+
+const getTopLanguageByContributionCount = (type) => {
+    const filter = getTypeFilter(type);
+    return db.any(topLanguagesByContributionCount, filter);
 };
 
 const getTopLanguageBySpeakers = (type) => {
@@ -563,7 +569,7 @@ const getAvailableLanguages = async (req, res) => {
         datasetLanguageList = await db.any(getDatasetLanguagesQuery, [type]);
 
         const datasetLanguages = datasetLanguageList.map((value) => value.language);
-        
+
         res.status(200).send({ datasetLanguages })
 
     } catch (err) {
@@ -581,6 +587,7 @@ module.exports = {
     getAllInfo,
     getMediaObject,
     getTopLanguageByHours,
+    getTopLanguageByContributionCount,
     getAggregateDataCount,
     getTopLanguageBySpeakers,
     getLanguages,
