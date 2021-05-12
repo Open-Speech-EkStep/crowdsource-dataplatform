@@ -125,6 +125,7 @@ const setBadge = function (data,localeStrings){
     $("#user-contribution-msg").removeClass("d-none");
     $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
     $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
+  }
     const $bronzeBadgeLink = $("#bronze_badge_link img");
     const $silverBadgeLink = $("#silver_badge_link img");
     const $goldBadgeLink = $("#gold_badge_link img");
@@ -164,7 +165,6 @@ const setBadge = function (data,localeStrings){
       $('#platinum_badge_link_img').addClass('enable');
       $('#platinum_badge_link_img').removeClass('disable');
     }
-  }
 }
 
 
