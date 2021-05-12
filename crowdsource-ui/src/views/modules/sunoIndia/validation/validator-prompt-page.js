@@ -505,6 +505,7 @@ const initializeComponent = function () {
     setTotalSentenceIndex(totalItems);
     resetValidation();
     setAudioPlayer();
+    updateProgressBar(currentIndex)
   }
 }
 
