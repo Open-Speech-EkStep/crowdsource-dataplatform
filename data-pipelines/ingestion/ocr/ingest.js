@@ -37,8 +37,6 @@ const ingest2 = async (imageToIdDict, client, datset_base_path, language, imageT
     contributorId = result.rows[0].contributor_id
     values = []
     for (const [image, text] of Object.entries(imageToTextDict)) {
-        // console.log(image)
-        // textCorrected = text.replace("'", "''")
         const media = {
             "data": `"${text}"`,
             "type": "text",
@@ -124,7 +122,7 @@ const main = () => {
     console.log(basePath, language)
 
     params = JSON.parse(fs.readFileSync(`${localDatasetPath}/params.json`, 'utf-8'))
-    start(connectionString, localDatasetPath, '{}', remote_dataset_bundle_path, basePath, language, paired)
+    start(connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired)
 }
 
 main()
