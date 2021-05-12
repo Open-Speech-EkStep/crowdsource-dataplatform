@@ -576,34 +576,27 @@ describe("Running tests for dbOperations", () => {
         const req = { params: { type: type } };
 
         test('should call getDatasetLanguagesQuery and getContributionLanguagesQuery', async () => {
-            when(spyDBany).calledWith(getDatasetLanguagesQuery, [type]).mockReturnValue([{ data_language: '' }]);
-            when(spyDBany).calledWith(getContributionLanguagesQuery, [type]).mockReturnValue([{ from_language: '', to_language: '' }]);
+            when(spyDBany).calledWith(getDatasetLanguagesQuery, [type]).mockReturnValue([{ language: '' }]);
 
             await dbOperations.getAvailableLanguages(req, res);
 
             expect(spyDBany).toBeCalledWith(getDatasetLanguagesQuery, [type]);
-            expect(spyDBany).toBeCalledWith(getContributionLanguagesQuery, [type]);
         })
 
         test('should return results in given format', async () => {
             const langOne = 'language1';
             const langTwo = 'language2';
-            const langThree = 'language3';
             const mockSend = { send: jest.fn() };
             const mockStatus = { status: jest.fn().mockReturnValue(mockSend) };
             const response = mockStatus;
-            when(spyDBany).calledWith(getDatasetLanguagesQuery, [type]).mockReturnValue([{ data_language: langOne }, { data_language: langTwo }]);
-            when(spyDBany).calledWith(getContributionLanguagesQuery, [type]).mockReturnValue([
-                { from_language: langOne, to_language: langThree },
-                { from_language: langTwo, to_language: langOne },
-                { from_language: langTwo, to_language: langThree }]);
+            when(spyDBany).calledWith(getDatasetLanguagesQuery, [type]).mockReturnValue([{ language: langOne }, { language: langTwo }]);
             const spySend = jest.spyOn(mockSend, 'send')
             const spyStatus = jest.spyOn(mockStatus, 'status')
 
             await dbOperations.getAvailableLanguages(req, response);
 
             expect(spyStatus).toBeCalledWith(200)
-            expect(spySend).toBeCalledWith({ "datasetLanguages": ["language1", "language2"], "contributionLanguages": { "language1": ["language3"], "language2": ["language1", "language3"] } })
+            expect(spySend).toBeCalledWith({ "datasetLanguages": ["language1", "language2"] })
         })
     });
 });

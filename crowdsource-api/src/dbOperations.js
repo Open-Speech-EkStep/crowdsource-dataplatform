@@ -559,20 +559,12 @@ const updateDbWithUserInput = async (
 const getAvailableLanguages = async (req, res) => {
     const type = req.params.type
     let datasetLanguageList = []
-    let contributionLanguageList = []
     try {
         datasetLanguageList = await db.any(getDatasetLanguagesQuery, [type]);
-        contributionLanguageList = await db.any(getContributionLanguagesQuery, [type]);
 
-        const datasetLanguages = datasetLanguageList.map((value) => value.data_language);
-        const contributionLanguages = {};
-        contributionLanguageList.forEach((entry) => {
-            if (contributionLanguages[entry.from_language]) {
-                contributionLanguages[entry.from_language].push(entry.to_language);
-            }
-            else contributionLanguages[entry.from_language] = [entry.to_language];
-        })
-        res.status(200).send({ datasetLanguages, contributionLanguages })
+        const datasetLanguages = datasetLanguageList.map((value) => value.language);
+        
+        res.status(200).send({ datasetLanguages })
 
     } catch (err) {
         console.log(err);
