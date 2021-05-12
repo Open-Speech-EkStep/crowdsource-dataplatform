@@ -42,7 +42,9 @@ const {
     getMultiplierForHourGoal,
     getOrderedMediaQuery,
     getContributionLanguagesQuery,
-    getDatasetLanguagesQuery
+    getDatasetLanguagesQuery,
+    hasTargetQuery,
+    isAllContributedQuery
 } = require('./dbQuery');
 
 const {
@@ -578,6 +580,15 @@ const getAvailableLanguages = async (req, res) => {
     }
 }
 
+const getTargetInfo = async (req, res) => {
+    const { type, sourceLanguage, targetLanguage = '' } = req.params;
+    let hasTarget = false, isAllContributed = false;
+    const toLanguage = type == 'parallel' ? targetLanguage : sourceLanguage;
+    hasTarget = (await db.one(hasTargetQuery, [type, sourceLanguage, toLanguage])).result;
+    isAllContributed = (await db.one(isAllContributedQuery, [type, sourceLanguage, toLanguage])).result;
+    res.status(200).send({ hasTarget, isAllContributed });
+}
+
 module.exports = {
     updateAndGetMedia,
     getContributionList,
@@ -602,5 +613,6 @@ module.exports = {
     getRewards,
     getRewardsInfo,
     updateDbWithUserInput,
-    getAvailableLanguages
+    getAvailableLanguages,
+    getTargetInfo
 };
