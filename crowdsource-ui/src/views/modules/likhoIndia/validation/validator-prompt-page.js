@@ -1,8 +1,8 @@
 const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition,setFooterPosition, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
 const {LIKHO_FROM_LANGUAGE, CURRENT_MODULE, MODULE,LIKHO_TO_LANGUAGE,ALL_LANGUAGES} = require('../common/constants');
-const {showKeyboard} = require('../common/virtualKeyboard');
-const { setInput } = require('../common/virtualKeyboard');
+const {showKeyboard,setInput} = require('../common/virtualKeyboard');
+const { isKeyboardExtensionPresent } = require('../common/common');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -244,12 +244,9 @@ function addListeners() {
   })
 
   $("#edit").focus(function(){
-    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
-    const $submitEditButton = $("#submit-edit-button");
-    const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#D7D7D7');
-    hideElement($('#progress-row'));
-    showElement($('#keyboardBox'));
+    if(! isKeyboardExtensionPresent()){
+      showElement($('#keyboardBox'));
+    }
   });
 
   $('#cancel-edit-button').on('click', () => {

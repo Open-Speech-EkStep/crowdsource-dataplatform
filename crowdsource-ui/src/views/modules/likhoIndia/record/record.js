@@ -10,8 +10,8 @@ const {
   reportSentenceOrRecording
 } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, LIKHO_FROM_LANGUAGE,LIKHO_TO_LANGUAGE,  LOCALE_STRINGS,CURRENT_MODULE, MODULE,TO_LANGUAGE, ALL_LANGUAGES} = require('../common/constants');
-const {showKeyboard} = require('../common/virtualKeyboard');
-const {setInput} = require('../common/virtualKeyboard');
+const {showKeyboard,setInput} = require('../common/virtualKeyboard');
+const {isKeyboardExtensionPresent} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
 
 const currentIndexKey = 'likhoCurrentIndex';
@@ -118,12 +118,9 @@ function addListeners() {
   const $skipButton = $('#skip_button');
 
   $("#edit").focus(function () {
-    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
-    hideElement($('#progress-row'));
-    showElement($('#keyboardBox'));
-    const $cancelEditButton = $('#cancel-edit-button');
-    $cancelEditButton.removeAttr('disabled');
-    openEditor();
+    if(! isKeyboardExtensionPresent()){
+      showElement($('#keyboardBox'));
+    }
   });
 
   $('#cancel-edit-button').on('click', () => {

@@ -142,7 +142,6 @@ function executeOnLoad() {
   } else if (currentIndexInStorage < totalSentence - 1) {
     location.href = "./home.html";
   } else {
-    console.log("here")
     $("#nav-user").removeClass("d-none");
     $("#nav-login").addClass("d-none");
     $("#nav-username").text(localSpeakerDataParsed.userName);
