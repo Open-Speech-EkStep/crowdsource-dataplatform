@@ -63,6 +63,8 @@ const setTotalSentenceIndex = (index) => {
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
   hideElement($('#sentences-row'));
+  hideElement($('#translation-row'));
+  hideElement($('#virtualKeyBoardBtn'));
   hideElement($('#audio-row'))
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
@@ -74,7 +76,7 @@ function showNoSentencesMessage() {
   hideElement($('#instructive-msg'));
   hideElement($('#editor-row'));
   hideElement($('#thank-you-row'));
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
   $("#validation-container").removeClass("validation-container");
 }
 
@@ -197,7 +199,7 @@ const closeEditor = function (){
   showElement($("#like_button"));
   hideElement($('#cancel-edit-button'))
   hideElement($('#submit-edit-button'))
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
 }
 
 function addListeners() {
@@ -247,7 +249,7 @@ function addListeners() {
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#D7D7D7');
     hideElement($('#progress-row'));
-    showElement($('.simple-keyboard'));
+    showElement($('#keyboardBox'));
   });
 
   $('#cancel-edit-button').on('click', () => {
@@ -264,7 +266,7 @@ function addListeners() {
   $('#submit-edit-button').on('click', () => {
     skipValidation(REJECT_ACTION);
     setInput("");
-    hideElement($('.simple-keyboard'));
+    hideElement($('#keyboardBox'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
     hideElement($('#skip_button'))
@@ -377,9 +379,10 @@ $(document).ready(() => {
   const toLanguage = localStorage.getItem(TO_LANGUAGE);
   setFooterPosition();
   showKeyboard(toLanguage.toLowerCase());
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
   toggleFooterPosition();
   setPageContentHeight();
+  $('#keyboardLayoutName').text(toLanguage);
   $('#from-label').text(fromLanguage);
   $('#to-label').text(toLanguage);
 
