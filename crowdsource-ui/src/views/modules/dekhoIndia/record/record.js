@@ -181,7 +181,7 @@ const openEditor = function () {
 }
 
 const closeEditor = function () {
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
 }
 
 function addListeners() {
@@ -232,7 +232,7 @@ function addListeners() {
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#007BFF');
     hideElement($('#progress-row'));
-    showElement($('.simple-keyboard'));
+    showElement($('#keyboardBox'));
   });
 
   $('#cancel-edit-button').on('click', () => {
@@ -248,7 +248,7 @@ function addListeners() {
 
   $('#submit-edit-button').on('click', () => {
     setInput("");
-    hideElement($('.simple-keyboard'));
+    hideElement($('#keyboardBox'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
     hideElement($('#skip_button'))
@@ -350,6 +350,7 @@ function showThankYou() {
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
   hideElement($('#textarea-row'));
+  hideElement($('#virtualKeyBoardBtn'));
   hideElement($('#audio-row'))
   hideElement($('#dekho-image'));
   hideElement($('#validation-button-row'))
@@ -362,7 +363,7 @@ function showNoSentencesMessage() {
   hideElement($('#instructive-msg'));
   hideElement($('#editor-row'));
   hideElement($('#thankyou-text'));
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
   showElement($('#no-sentences-row'));
   $("#validation-container").removeClass("validation-container");
 }
@@ -451,7 +452,7 @@ const getLocationInfo = () => {
 let selectedReportVal = '';
 
 const executeOnLoad = function () {
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
   toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
@@ -460,8 +461,9 @@ const executeOnLoad = function () {
   const $navUserName = $navUser.find('#nav-username');
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  $('#keyboardLayoutName').text(language);
   showKeyboard(language.toLowerCase());
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
 
   if (language) {
     updateLocaleLanguagesDropdown(language);
@@ -555,7 +557,7 @@ const executeOnLoad = function () {
 
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {

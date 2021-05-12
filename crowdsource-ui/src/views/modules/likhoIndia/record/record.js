@@ -79,11 +79,11 @@ const updateProgressBar = (index) => {
 }
 
 const closeEditor = function () {
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
 }
 
 const openEditor = function () {
-  showElement($('.simple-keyboard'));
+  showElement($('#keyboardBox'));
 }
 
 
@@ -120,7 +120,7 @@ function addListeners() {
   $("#edit").focus(function () {
     $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     hideElement($('#progress-row'));
-    showElement($('.simple-keyboard'));
+    showElement($('#keyboardBox'));
     const $cancelEditButton = $('#cancel-edit-button');
     $cancelEditButton.removeAttr('disabled');
     openEditor();
@@ -141,7 +141,7 @@ function addListeners() {
 
   $('#submit-edit-button').on('click', () => {
     setInput("");
-    hideElement($('.simple-keyboard'));
+    hideElement($('#keyboardBox'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
     hideElement($('#audio-player-btn'))
@@ -209,6 +209,7 @@ function showThankYou() {
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem(LIKHO_FROM_LANGUAGE));
   hideElement($('#sentences-row'));
+  hideElement($('#virtualKeyBoardBtn'));
   hideElement($('#audio-row'))
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
@@ -220,7 +221,7 @@ function showNoSentencesMessage() {
   hideElement($('#instructive-msg'));
   hideElement($('#editor-row'));
   hideElement($('#thankyou-text'));
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
   $("#validation-container").removeClass("validation-container");
 }
 
@@ -363,6 +364,7 @@ function executeOnLoad() {
   const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  $('#keyboardLayoutName').text(toLanguage);
   $('#from-label').text(fromLanguage);
   $('#to-label').text(toLanguage);
 
@@ -486,7 +488,7 @@ $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   const translationLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   showKeyboard(translationLanguage.toLowerCase());
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {

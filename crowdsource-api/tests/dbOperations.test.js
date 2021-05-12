@@ -576,13 +576,13 @@ describe("Running tests for dbOperations", () => {
         const req = { params: { type: type } };
 
         test('should call getDatasetLanguagesQuery and getContributionLanguagesQuery', async () => {
-            when(spyDBmany).calledWith(getDatasetLanguagesQuery, [type]).mockReturnValue([{ data_language: '' }]);
-            when(spyDBmany).calledWith(getContributionLanguagesQuery, [type]).mockReturnValue([{ from_language: '', to_language: '' }]);
+            when(spyDBany).calledWith(getDatasetLanguagesQuery, [type]).mockReturnValue([{ data_language: '' }]);
+            when(spyDBany).calledWith(getContributionLanguagesQuery, [type]).mockReturnValue([{ from_language: '', to_language: '' }]);
 
             await dbOperations.getAvailableLanguages(req, res);
 
-            expect(spyDBmany).toBeCalledWith(getDatasetLanguagesQuery, [type]);
-            expect(spyDBmany).toBeCalledWith(getContributionLanguagesQuery, [type]);
+            expect(spyDBany).toBeCalledWith(getDatasetLanguagesQuery, [type]);
+            expect(spyDBany).toBeCalledWith(getContributionLanguagesQuery, [type]);
         })
 
         test('should return results in given format', async () => {
@@ -592,8 +592,8 @@ describe("Running tests for dbOperations", () => {
             const mockSend = { send: jest.fn() };
             const mockStatus = { status: jest.fn().mockReturnValue(mockSend) };
             const response = mockStatus;
-            when(spyDBmany).calledWith(getDatasetLanguagesQuery, [type]).mockReturnValue([{ data_language: langOne }, { data_language: langTwo }]);
-            when(spyDBmany).calledWith(getContributionLanguagesQuery, [type]).mockReturnValue([
+            when(spyDBany).calledWith(getDatasetLanguagesQuery, [type]).mockReturnValue([{ data_language: langOne }, { data_language: langTwo }]);
+            when(spyDBany).calledWith(getContributionLanguagesQuery, [type]).mockReturnValue([
                 { from_language: langOne, to_language: langThree },
                 { from_language: langTwo, to_language: langOne },
                 { from_language: langTwo, to_language: langThree }]);
