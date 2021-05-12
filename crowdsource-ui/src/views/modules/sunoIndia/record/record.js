@@ -230,6 +230,10 @@ function addListeners() {
     hideElement($('#keyboardBox'))
   })
 
+  $('#virtualKeyBoardBtn').on('click',()=>{
+    showElement($('#keyboardBox'))
+  })
+
   $("#edit").focus(function () {
     // $(document).scrollTop($(document).height());
     $("html, body").animate({scrollTop: $(document).height()}, 1000);
