@@ -38,7 +38,6 @@ const keyboardLayout = {
   'assamese':{
     "layout": {
       "default": [
-        "$ ₹ { } - ৄ ৣ ড় = \\ ৢ ৎ ; ' ৺ ৳ ॥ ্য",
         " ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ০ - ৃ {bksp}",
         "{tab} ৌ ৈ া ী ূ ব হ গ দ জ ড ় /",
         "{lock} ো ে ্ ি ু প ৰ ক ত চ ট {enter}",
@@ -46,7 +45,6 @@ const keyboardLayout = {
         ".com @ {space}"
       ],
       "shift": [
-        "৴ ৵ ৶ ৷ ৸ [ ] _ ৠ ! # % ^ & * ঢ় + | : \" ৲ ঽ",
         "~ অ্যা @ ্ৰ ৰ্ জ্ঞ ত্র ক্ষ শ্র ( ) ঃ ঋ {bksp}",
         "{tab} ঔ ঐ আ ঈ ঊ ভ ঙ ঘ ধ ঝ ঢ ঞ ?",
         "{lock} ও এ অ ই উ ফ  খ থ ছ ঠ {enter}",
@@ -58,7 +56,6 @@ const keyboardLayout = {
   'bengali':{
     "layout": {
       "default": [
-        "ৢ ৃ এ ঋ ট য় উ ই ও অ শ্র ড জ্ঞ ঌ ৳ ঞ ঁ",
         "ৎ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ০ - = {bksp}",
         "{tab} র্ অ ে র ত য ু ি ো প [ ] \\",
         "{lock} া স দ ্ গ হ জ ক ল ; ' {enter}",
@@ -66,7 +63,6 @@ const keyboardLayout = {
         ".com @ {space}"
       ],
       "shift": [
-        "ৣ ৄ ঐ ঊ ঔ আ ষ ঢ ৡ ॥",
         "ঽ ! @ # $ % ^ & * ( ) _ + {bksp}",
         "{tab} র‍্ আ ৈ ৃ থ য় ূ ী ৌ ফ { } |",
         "{lock} া শ ধ ় ঘ ঃ ঝ খ  : \" {enter}",
@@ -79,7 +75,6 @@ const keyboardLayout = {
   'gujarati':{
     "layout": {
       "default": [
-        "ઍ એ ઋ ટ ઉ ઇ ઓ [ ] અ શ્ર ડ જ્ઞ ; ' ઞ ઁ ।",
         " ૧ ૨ ૩ ૪ ૫ ૬ ૭  ૮ ૯ ૦ - = {bksp}",
         "{tab} ૅ અ ે ર ત ય ુ િ ો પ   \\",
         "{lock} ા સ દ ્ ગ હ જ ક લ ; ' {enter}",
@@ -87,7 +82,6 @@ const keyboardLayout = {
         ".com @ {space}"
       ],
       "shift": [
-        "ઑ ઐ ઠ ઊ ઔ { } | આ ષ ઢ : ॥",
         "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
         "{tab} ૉ આ ૈ ૃ થ  ૂ ી ૌ ફ [ ] ",
         "{lock} ા શ ધ ઼ ઘ ઃ ઝ ખ ળ : \" {enter}",
@@ -196,7 +190,6 @@ const keyboardLayout = {
   'tamil':{
     "layout": {
       "default": [
-        "ா ீ ூ ை ே ி ு ் ெ æ ோ ொ ≤ •",
         "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
         "{tab} ஆ ஈ ஊ ஐ ஏ ள ற ன ட ண ச ஞ \\",
         "{lock} அ இ உ ் எ க ப ம த ந ய {enter}",
@@ -204,7 +197,6 @@ const keyboardLayout = {
         ".com @ {space}"
       ],
       "shift": [
-        "❊ € ٪ ” ’ » „ ¿",
         "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
         "{tab} ஸ ஷ ஜ ஹ க்ஷ ஸ்ரீ ஶ ஈ [ ] { } |",
         "{lock} ௹ ௺ ௸ ஃ    \" , : ; ' {enter}",
@@ -217,7 +209,6 @@ const keyboardLayout = {
   'telugu':{
     "layout": {
       "default": [
-        "ఏ ఋ ట ఉ ఇ ఓ [ ] \\ అ శ్ర డ జ్ఞ ఞ ఁ",
         "ె ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ౦ - = {bksp}",
         "{tab}  అ ే ర త య ు ి ో ప  ర ొ",
         "{lock} ా స ద ్్గ హ జ క ల ; ' {enter}",
@@ -225,7 +216,6 @@ const keyboardLayout = {
         ".com @ {space}"
       ],
       "shift": [
-        "ఐ ఱ ఠ ఊ ఔ { } | ఆ ష ఢ ఒ",
         "ఎ ! @ # $ % ^ & * ( ) _ + {bksp}",
         "{tab}  ఆ ై ృ థ  ూ ీ ౌ ఫ [ ] ఒ",
         "{lock} ా శ ధ  ఘ ఝ ఖ ళ : \" {enter}",

@@ -10,7 +10,7 @@ const {
   fetchLocationInfo,
   reportSentenceOrRecording
 } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS,CURRENT_MODULE, MODULE} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 const {setInput} = require('../common/virtualKeyboard');
 const speakerDetailsKey = 'speakerDetails';
@@ -151,7 +151,7 @@ function getNextSentence() {
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
     const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
-    Object.assign(sentencesObj, { sentences: [] });
+    Object.assign(sentencesObj, {sentences: []});
     localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
     resetValidation();
@@ -187,11 +187,11 @@ function resetValidation() {
 }
 
 const closeEditor = function () {
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
 }
 
 const openEditor = function () {
-  showElement($('.simple-keyboard'));
+  showElement($('#simple-keyboard'));
 }
 
 
@@ -226,11 +226,14 @@ function addListeners() {
 
   const $skipButton = $('#skip_button');
 
+  $('#keyboardCloseBtn').on('click', () => {
+    hideElement($('#keyboardBox'))
+  })
+
   $("#edit").focus(function () {
     // $(document).scrollTop($(document).height());
-    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
-    hideElement($('#progress-row'));
-    showElement($('.simple-keyboard'));
+    $("html, body").animate({scrollTop: $(document).height()}, 1000);
+    showElement($('#keyboardBox'));
     openEditor();
   });
 
@@ -249,7 +252,7 @@ function addListeners() {
 
   $('#submit-edit-button').on('click', () => {
     setInput("");
-    hideElement($('.simple-keyboard'));
+    hideElement($('#keyboardBox'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
     hideElement($('#audio-player-btn'))
@@ -263,7 +266,7 @@ function addListeners() {
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#progress-row'))
-    try{
+    try {
       uploadToServer();
       setTimeout(() => {
         hideElement($('#thankyou-text'));
@@ -276,7 +279,7 @@ function addListeners() {
         closeEditor();
         getNextSentence();
       }, 2000)
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
 
@@ -284,7 +287,7 @@ function addListeners() {
 
 
   $skipButton.on('click', () => {
-    if($('#pause').hasClass('d-none')){
+    if ($('#pause').hasClass('d-none')) {
       $('#pause').trigger('click');
     }
     $('#edit').val("");
@@ -380,7 +383,7 @@ function showNoSentencesMessage() {
   hideElement($('#instructive-msg'));
   hideElement($('#editor-row'));
   hideElement($('#thankyou-text'));
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
   $("#validation-container").removeClass("validation-container");
 }
 
@@ -399,7 +402,6 @@ const handleSubmitFeedback = function () {
   reportSentenceOrRecording(reqObj).then(function (resp) {
     if (resp.statusCode === 200) {
       $('#skip_button').click();
-      console.log($("#report_sentence_modal"));
       $("#report_sentence_modal").modal('hide');
       $("#report_sentence_thanks_modal").modal('show');
       $("#report_submit_id").attr("disabled", true);
@@ -464,7 +466,7 @@ const initialize = function () {
 };
 
 function executeOnLoad() {
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
   toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
@@ -475,6 +477,7 @@ function executeOnLoad() {
   const $navUser = $('#nav-user');
   const $navUserName = $navUser.find('#nav-username');
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  $('#keyboardLayoutName').text(contributionLanguage);
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   if (contributionLanguage) {
     updateLocaleLanguagesDropdown(contributionLanguage);
@@ -562,7 +565,7 @@ function executeOnLoad() {
           }
           $pageContent.removeClass('d-none');
           sunoIndia.sentences = sentenceData.data;
-          localStorage.setItem(sunoCountKey,sunoIndia.sentences.length);
+          localStorage.setItem(sunoCountKey, sunoIndia.sentences.length);
           $loader.hide();
           localStorage.setItem(
             sentencesKey,
@@ -591,6 +594,7 @@ function executeOnLoad() {
 
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
+  hideElement($('#keyboardBox'));
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {
@@ -598,6 +602,48 @@ $(document).ready(() => {
   });
 });
 
+dragElement(document.getElementById("keyboardBox"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "Header")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
 
 module.exports = {
   setAudioPlayer,

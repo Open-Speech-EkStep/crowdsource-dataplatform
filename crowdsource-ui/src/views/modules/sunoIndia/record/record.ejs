@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/validator-prompt.css">
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
     <link rel="stylesheet" type="text/css" href="../../css/mic-speaker-testing.css">
+
 </head>
 
 <body>
@@ -132,8 +133,12 @@
                     <%= __('Skip') %>
                 </button>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8 col-lg-6 col-xl-6 justify-content-center">
+            <div class="justify-content-center" id="keyboardBox">
+                <div style="width:560px">
+                    <div id="keyboardBoxHeader" class="justify-content-between d-flex">
+                        <div id="keyboardLayoutName">language name</div>
+                        <div id="keyboardCloseBtn">X</div>
+                    </div>
                     <div class="simple-keyboard d-none"></div>
                 </div>
             </div>
@@ -164,8 +169,11 @@
 
         <script src="../../js/sunoIndia/record.js"></script>
         <script src="../../js/common/speakerTesting.js"></script>
+
     </div>
 </div>
+
+
 </body>
 
 </html>
