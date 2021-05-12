@@ -1,6 +1,6 @@
 const {constructChart}= require('../common/horizontalBarGraph');
 const { onActiveNavbar } = require('../common/header');
-const {getContributedAndTopLanguage,redirectToLocalisedPage, showFucntionalCards} = require('../common/common');
+const {getContributedAndTopLanguage,redirectToLocalisedPage, showFucntionalCards, getLanguageTargetInfo} = require('../common/common');
 const {setSpeakerData} = require('../common/contributionStats');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
 const {
@@ -173,7 +173,7 @@ function initializeBlock() {
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
     }
-    showFucntionalCards('asr');
+    showFucntionalCards('asr', language);
   });
 
   $('#start_recording').on('click', () => {
@@ -188,13 +188,13 @@ function initializeBlock() {
     setStartRecordingBtnOnClick('./validator-page.html');
   })
 
-  showFucntionalCards('asr');
+  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  showFucntionalCards('asr', language);
   setSpeakerDetails(speakerDetailsKey, $userName);
   setUserNameOnInputFocus();
   setStartRecordingBtnOnClick();
   setUserModalOnShown($userName);
   getStatsSummary();
-
 }
 
 $(document).ready(function () {

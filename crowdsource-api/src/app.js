@@ -27,7 +27,8 @@ const {
     getRewards,
     getRewardsInfo,
     updateDbWithUserInput,
-    getAvailableLanguages
+    getAvailableLanguages,
+    getTargetInfo
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
@@ -374,6 +375,8 @@ router.get('/rewards-info', validateRewardsInfoInput, async (req, res) => {
 });
 
 router.get('/available-languages/:type', validateMediaTypeInput, (req, res) => getAvailableLanguages(req, res));
+
+router.get('/target-info/:type/:sourceLanguage', (req, res) => getTargetInfo(req, res));
 
 require('./dashboard-api')(router);
 

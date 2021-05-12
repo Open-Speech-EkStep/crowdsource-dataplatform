@@ -42,7 +42,9 @@ const {
     getMultiplierForHourGoal,
     getOrderedMediaQuery,
     getContributionLanguagesQuery,
-    getDatasetLanguagesQuery
+    getDatasetLanguagesQuery,
+    hasTargetQuery,
+    isAllContributedQuery
 } = require('./dbQuery');
 
 const {
@@ -63,7 +65,8 @@ const {
     monthlyTimelineCumulative,
     quarterlyTimeline,
     quarterlyTimelineCumulative,
-    lastUpdatedAtQuery
+    lastUpdatedAtQuery,
+    topLanguagesByContributionCount
 } = require('./dashboardDbQueries');
 
 const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP } = require('./constants');
@@ -283,6 +286,11 @@ const getTypeFilter = (type) => {
 const getTopLanguageByHours = (type) => {
     const filter = getTypeFilter(type);
     return db.any(topLanguagesByHoursContributed, filter);
+};
+
+const getTopLanguageByContributionCount = (type) => {
+    const filter = getTypeFilter(type);
+    return db.any(topLanguagesByContributionCount, filter);
 };
 
 const getTopLanguageBySpeakers = (type) => {
@@ -559,25 +567,26 @@ const updateDbWithUserInput = async (
 const getAvailableLanguages = async (req, res) => {
     const type = req.params.type
     let datasetLanguageList = []
-    let contributionLanguageList = []
     try {
         datasetLanguageList = await db.any(getDatasetLanguagesQuery, [type]);
-        contributionLanguageList = await db.any(getContributionLanguagesQuery, [type]);
 
-        const datasetLanguages = datasetLanguageList.map((value) => value.data_language);
-        const contributionLanguages = {};
-        contributionLanguageList.forEach((entry) => {
-            if (contributionLanguages[entry.from_language]) {
-                contributionLanguages[entry.from_language].push(entry.to_language);
-            }
-            else contributionLanguages[entry.from_language] = [entry.to_language];
-        })
-        res.status(200).send({ datasetLanguages, contributionLanguages })
+        const datasetLanguages = datasetLanguageList.map((value) => value.language);
+
+        res.status(200).send({ datasetLanguages })
 
     } catch (err) {
         console.log(err);
         res.sendStatus(500);
     }
+}
+
+const getTargetInfo = async (req, res) => {
+    const { type, sourceLanguage, targetLanguage = '' } = req.params;
+    let hasTarget = false, isAllContributed = false;
+    const toLanguage = type == 'parallel' ? targetLanguage : sourceLanguage;
+    hasTarget = (await db.one(hasTargetQuery, [type, sourceLanguage, toLanguage])).result;
+    isAllContributed = (await db.one(isAllContributedQuery, [type, sourceLanguage, toLanguage])).result;
+    res.status(200).send({ hasTarget, isAllContributed });
 }
 
 module.exports = {
@@ -589,6 +598,7 @@ module.exports = {
     getAllInfo,
     getMediaObject,
     getTopLanguageByHours,
+    getTopLanguageByContributionCount,
     getAggregateDataCount,
     getTopLanguageBySpeakers,
     getLanguages,
@@ -603,5 +613,6 @@ module.exports = {
     getRewards,
     getRewardsInfo,
     updateDbWithUserInput,
-    getAvailableLanguages
+    getAvailableLanguages,
+    getTargetInfo
 };
