@@ -9,6 +9,8 @@ const LOCALE_STRINGS = 'localeString';
 const SELECTED_MODULE = "selectedModule";
 const CONTRIBUTION_LANGUAGE = "contributionLanguage";
 const TO_LANGUAGE = "to-language";
+const LIKHO_TO_LANGUAGE = "likho_to-language";
+const LIKHO_FROM_LANGUAGE = "likho_from-language";
 const SPEAKER_DETAILS_KEY = 'speakerDetails';
 const ALL_LANGUAGES = [
   {value: "Assamese", id: "as", text: "অসমীয়া", hasLocaleText: true, data: true},
@@ -75,5 +77,6 @@ module.exports = {
   CONTRIBUTION_LANGUAGE,
   BADGES,
   SPEAKER_DETAILS_KEY,
-  SELECTED_MODULE, MODULE, CURRENT_MODULE, TO_LANGUAGE
+  SELECTED_MODULE, MODULE, CURRENT_MODULE, TO_LANGUAGE,
+  LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE
 }
