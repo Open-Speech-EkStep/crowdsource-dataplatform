@@ -10,7 +10,7 @@ const {
   fetchLocationInfo,
   reportSentenceOrRecording
 } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS,CURRENT_MODULE, MODULE} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard} = require('../common/virtualKeyboard');
 const {setInput} = require('../common/virtualKeyboard');
 const speakerDetailsKey = 'speakerDetails';
@@ -151,7 +151,7 @@ function getNextSentence() {
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
     const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
-    Object.assign(sentencesObj, { sentences: [] });
+    Object.assign(sentencesObj, {sentences: []});
     localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
     resetValidation();
@@ -187,11 +187,11 @@ function resetValidation() {
 }
 
 const closeEditor = function () {
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
 }
 
 const openEditor = function () {
-  showElement($('.simple-keyboard'));
+  showElement($('#simple-keyboard'));
 }
 
 
@@ -228,9 +228,8 @@ function addListeners() {
 
   $("#edit").focus(function () {
     // $(document).scrollTop($(document).height());
-    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
-    hideElement($('#progress-row'));
-    showElement($('.simple-keyboard'));
+    $("html, body").animate({scrollTop: $(document).height()}, 1000);
+    showElement($('#keyboardBox'));
     openEditor();
   });
 
@@ -249,7 +248,7 @@ function addListeners() {
 
   $('#submit-edit-button').on('click', () => {
     setInput("");
-    hideElement($('.simple-keyboard'));
+    hideElement($('#keyboardBox'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
     hideElement($('#audio-player-btn'))
@@ -263,7 +262,7 @@ function addListeners() {
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#progress-row'))
-    try{
+    try {
       uploadToServer();
       setTimeout(() => {
         hideElement($('#thankyou-text'));
@@ -276,7 +275,7 @@ function addListeners() {
         closeEditor();
         getNextSentence();
       }, 2000)
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
 
@@ -284,7 +283,7 @@ function addListeners() {
 
 
   $skipButton.on('click', () => {
-    if($('#pause').hasClass('d-none')){
+    if ($('#pause').hasClass('d-none')) {
       $('#pause').trigger('click');
     }
     $('#edit').val("");
@@ -370,6 +369,7 @@ function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
   hideElement($('#sentences-row'));
   hideElement($('#audio-row'))
+  hideElement($('#virtualKeyBoardBtn'));
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
   showElement($('#no-sentences-row'))
@@ -380,7 +380,7 @@ function showNoSentencesMessage() {
   hideElement($('#instructive-msg'));
   hideElement($('#editor-row'));
   hideElement($('#thankyou-text'));
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
   $("#validation-container").removeClass("validation-container");
 }
 
@@ -399,7 +399,6 @@ const handleSubmitFeedback = function () {
   reportSentenceOrRecording(reqObj).then(function (resp) {
     if (resp.statusCode === 200) {
       $('#skip_button').click();
-      console.log($("#report_sentence_modal"));
       $("#report_sentence_modal").modal('hide');
       $("#report_sentence_thanks_modal").modal('show');
       $("#report_submit_id").attr("disabled", true);
@@ -464,7 +463,7 @@ const initialize = function () {
 };
 
 function executeOnLoad() {
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
   toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
@@ -475,6 +474,7 @@ function executeOnLoad() {
   const $navUser = $('#nav-user');
   const $navUserName = $navUser.find('#nav-username');
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  $('#keyboardLayoutName').text(contributionLanguage);
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   if (contributionLanguage) {
     updateLocaleLanguagesDropdown(contributionLanguage);
@@ -562,7 +562,7 @@ function executeOnLoad() {
           }
           $pageContent.removeClass('d-none');
           sunoIndia.sentences = sentenceData.data;
-          localStorage.setItem(sunoCountKey,sunoIndia.sentences.length);
+          localStorage.setItem(sunoCountKey, sunoIndia.sentences.length);
           $loader.hide();
           localStorage.setItem(
             sentencesKey,
@@ -591,6 +591,7 @@ function executeOnLoad() {
 
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
+  hideElement($('#keyboardBox'));
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {

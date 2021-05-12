@@ -176,7 +176,7 @@ const closeEditor = function (){
   showElement($("#like_button"));
   hideElement($('#cancel-edit-button'))
   hideElement($('#submit-edit-button'))
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
 }
 
 function addListeners() {
@@ -228,7 +228,7 @@ function addListeners() {
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#D7D7D7');
     hideElement($('#progress-row'));
-    showElement($('.simple-keyboard'));
+    showElement($('#keyboardBox'));
   });
 
   $('#cancel-edit-button').on('click', () => {
@@ -245,7 +245,7 @@ function addListeners() {
   $('#submit-edit-button').on('click', () => {
     skipValidation(REJECT_ACTION)
     setInput("");
-    hideElement($('.simple-keyboard'));
+    hideElement($('#keyboardBox'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
     hideElement($('#audio-player-btn'))
@@ -337,6 +337,7 @@ function showThankYou() {
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
   hideElement($('#textarea-row'));
+  hideElement($('#virtualKeyBoardBtn'));
   hideElement($('#audio-row'));
   hideElement($('#dekho-image'));
   hideElement($('#validation-button-row'))
@@ -351,7 +352,7 @@ function showNoSentencesMessage() {
   hideElement($('#editor-row'));
   hideElement($('#thank-you-row'));
   hideElement($('#keyboardInstructions'));
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
   $("#validation-container").removeClass("validation-container");
 }
 
@@ -411,9 +412,10 @@ $(document).ready(() => {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   setFooterPosition();
   showKeyboard(contributionLanguage.toLowerCase());
-  hideElement($('.simple-keyboard'));
+  hideElement($('#keyboardBox'));
   toggleFooterPosition();
   setPageContentHeight();
+  $('#keyboardLayoutName').text(contributionLanguage);
   const language = localStorage.getItem('contributionLanguage');
   if (language) {
     updateLocaleLanguagesDropdown(language);
