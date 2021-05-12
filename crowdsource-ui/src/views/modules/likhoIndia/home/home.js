@@ -1,7 +1,7 @@
 const { constructChart } = require('../common/horizontalBarGraph');
 const { onActiveNavbar } = require('../common/header');
 const { setSpeakerData } = require('../common/contributionStats');
-const { getContributedAndTopLanguage, redirectToLocalisedPage,getAvailableLanguages } = require('../common/common');
+const { getContributedAndTopLanguage, redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards } = require('../common/common');
 const {
   toggleFooterPosition,
   getLocaleString,
@@ -97,24 +97,6 @@ const addToLanguage = function (id, list) {
   selectBar.innerHTML = options;
 }
 
-const checkIsValidating = (contributionLanguages, fromLanguage, toLanguage, datasetLanguages) => {
-  const keys = contributionLanguages[fromLanguage];
-  if (keys) {
-    const isAvailable = keys.find(item => item == toLanguage);
-    if (isAvailable) {
-      $("#right").removeClass("validate-disabled");
-    } else {
-      $("#right").addClass("validate-disabled");
-    }
-  } else if (datasetLanguages && datasetLanguages.filter(item => item == fromLanguage).length) {
-    $("#right").addClass("validate-disabled");
-  } else {
-    $("#left").addClass("cont-validate-disabled");
-    $("#left").removeClass("validate-disabled");
-  }
-  localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
-}
-
 const updateLocaleLanguagesDropdown = (language, toLanguage) => {
   const dropDown = $('#localisation_dropdown');
   const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
@@ -154,7 +136,8 @@ function initializeBlock() {
       const languages = ALL_LANGUAGES.filter(item => item.value !== fromLanguage);
       addToLanguage('to-language', languages);
       updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
-      checkIsValidating(contributionLanguages, fromLanguage, toLanguage, datasetLanguages);
+      showFucntionalCards('parallel', fromLanguage, toLanguage);
+      localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
       $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
       $(`#to-language option[value=${toLanguage}]`).attr("selected", "selected");
     } else {
@@ -165,7 +148,7 @@ function initializeBlock() {
       $('#to-language option:first-child').attr("selected", "selected");
       toLanguage = $('#to-language option:first-child').val();
       updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
-      checkIsValidating(contributionLanguages, fromLanguage, toLanguage, datasetLanguages);
+      showFucntionalCards('parallel', fromLanguage, toLanguage);
       localStorage.setItem(LIKHO_FROM_LANGUAGE, fromLanguage);
       localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
     }
@@ -189,7 +172,7 @@ function initializeBlock() {
       updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
-      checkIsValidating(contributionLanguages, fromLanguage, toLanguage, datasetLanguages);
+      showFucntionalCards('parallel', fromLanguage, toLanguage);
       getStatsSummary();
     });
   })
