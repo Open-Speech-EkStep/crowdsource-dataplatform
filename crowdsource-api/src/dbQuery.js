@@ -204,8 +204,8 @@ const getMultiplierForHourGoal = 'select milestone_multiplier as multiplier from
 const getContributionLanguagesQuery = `select dr.media->>'language' as from_language,con.media->>'language' as to_language from dataset_row dr inner join 
 contributions con on con.dataset_row_id=dr.dataset_row_id and con.action='completed' where dr.type=$1 group by dr.media->>'language',con.media->>'language',dr.type`;
 
-const getDatasetLanguagesQuery = `select media->>'language' as data_language from dataset_row where type=$1 
-and state is null group by media->>'language',type`;
+const getDatasetLanguagesQuery = `select distinct(media->>'language') as language from dataset_row where type=$1 
+and ((state is null) or (state='contributed'))`;
 
 module.exports = {
   unassignIncompleteMedia,
