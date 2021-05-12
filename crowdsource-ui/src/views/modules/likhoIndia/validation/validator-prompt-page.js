@@ -312,7 +312,7 @@ function showThankYou() {
 }
 
 const handleSubmitFeedback = function () {
-  const contributionLanguage = localStorage.getItem("contributionLanguage");
+  const contributionLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
   const otherText = $("#other_text").val();
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 

@@ -3,12 +3,12 @@ const {
   SIXTY,
   HOUR_IN_SECONDS,
   LOCALE_STRINGS,
-  CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
   TOP_LANGUAGES_BY_HOURS,
-  TO_LANGUAGE,
-  ALL_LANGUAGES
+  ALL_LANGUAGES,
+  LIKHO_FROM_LANGUAGE,
+  LIKHO_TO_LANGUAGE
 } = require("../common/constants");
 
 const {
@@ -95,7 +95,7 @@ const getLanguageStats = function () {
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
         const contributionLanguage = localStorage.getItem(
-          CONTRIBUTION_LANGUAGE
+          LIKHO_FROM_LANGUAGE
         );
 
         const languages = getContributedAndTopLanguage(response.top_languages_by_hours);
@@ -136,7 +136,7 @@ const getLanguageStats = function () {
 };
 
 function setSentencesContributed() {
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const contributionLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
   const speakerDetails = localStorage.getItem("speakerDetails");
   let userName = "";
   if (speakerDetails) {
@@ -177,8 +177,8 @@ function executeOnLoad() {
     setSentencesContributed();
     toggleFooterPosition();
 
-    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    const toLanguage = localStorage.getItem(TO_LANGUAGE);
+    const contributionLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+    const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
     if (contributionLanguage && toLanguage) {
       updateLocaleLanguagesDropdown(contributionLanguage, toLanguage);
     }
@@ -192,7 +192,6 @@ $(document).ready(function () {
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });
-  localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   getLocaleString()
     .then((data) => {
       executeOnLoad();
