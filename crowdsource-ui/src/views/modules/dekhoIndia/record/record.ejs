@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/record.css">
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
     <link rel="stylesheet" type="text/css" href="../../css/mic-speaker-testing.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
 </head>
 
 <body>
@@ -119,11 +120,7 @@
                     <%= __('Skip') %>
                 </button>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8 col-lg-6 col-xl-6 justify-content-center">
-                    <div class="simple-keyboard d-none"></div>
-                </div>
-            </div>
+            <%- include ../common/virtualKeyboard %>
             <div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
                 <div class="col-12 col-sm-8 col-lg-7">
                     <div class="progress mt-1">
@@ -145,7 +142,9 @@
                 </div>
             </div>
         </div>
-
+        <div class="row my-3 p-3" style="justify-content:flex-end">
+            <%- include ../common/virtualKeyboardBtn.ejs %>
+        </div>
 
         <script>var modal=document.getElementById("myModal"),clickExpandBtn=document.getElementById("expand-view"),img=document.getElementById("view-image"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");clickExpandBtn.onclick=function(){modal.style.display="block",modalImg.src=img.src};var span=document.getElementsByClassName("close")[0];span.onclick=function(){modal.style.display="none"}</script>
 
