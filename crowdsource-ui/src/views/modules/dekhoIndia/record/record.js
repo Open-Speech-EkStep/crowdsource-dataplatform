@@ -11,8 +11,8 @@ const {
   reportSentenceOrRecording
 } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
-const {showKeyboard} = require('../common/virtualKeyboard');
-const {setInput} = require('../common/virtualKeyboard');
+const {showKeyboard,setInput} = require('../common/virtualKeyboard');
+const {isKeyboardExtensionPresent} = require('../common/common');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -226,13 +226,9 @@ function addListeners() {
   })
 
   $("#edit").focus(function () {
-    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
-    const $submitEditButton = $("#submit-edit-button");
-    $submitEditButton.removeAttr('disabled');
-    const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#007BFF');
-    hideElement($('#progress-row'));
-    showElement($('#keyboardBox'));
+    if(! isKeyboardExtensionPresent()){
+      showElement($('#keyboardBox'));
+    }
   });
 
   $('#cancel-edit-button').on('click', () => {
@@ -501,7 +497,6 @@ const executeOnLoad = function () {
       initializeComponent();
     } else {
       localStorage.removeItem(currentIndexKey);
-      console.log(localSpeakerDataParsed )
       const type = 'ocr';
       fetch(`/media/${type}`, {
         method: 'POST',

@@ -1,8 +1,8 @@
 const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE} = require('../common/constants');
-const {showKeyboard} = require('../common/virtualKeyboard');
-const { setInput } = require('../common/virtualKeyboard');
+const {showKeyboard,setInput} = require('../common/virtualKeyboard');
+const { isKeyboardExtensionPresent } = require('../common/common');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -212,7 +212,6 @@ function addListeners() {
 
 
   needChangeButton.on('click',()=>{
-    console.log("need change")
     hideElement($('#textarea-row'));
     openEditor();
     const originalText = dekhoIndiaValidator.sentences[currentIndex].contribution;
@@ -223,12 +222,9 @@ function addListeners() {
   })
 
   $("#edit").focus(function(){
-    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
-    const $submitEditButton = $("#submit-edit-button");
-    const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#D7D7D7');
-    hideElement($('#progress-row'));
-    showElement($('#keyboardBox'));
+    if(! isKeyboardExtensionPresent()){
+      showElement($('#keyboardBox'));
+    }
   });
 
   $('#cancel-edit-button').on('click', () => {
@@ -388,7 +384,6 @@ const initializeComponent = () => {
 
     addListeners();
     const validationData = dekhoIndiaValidator.sentences[currentIndex];
-  console.log(dekhoIndiaValidator)
     if (validationData) {
       getImage(validationData.dataset_row_id );
       setCapturedText(currentIndex);
