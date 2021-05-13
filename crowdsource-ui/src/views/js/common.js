@@ -13,7 +13,9 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
     if(contributedLanguageHours && contributedLanguageHours.language !== topLanguagesData[0].language) {
       contributedLanguageHours ? topLanguageArray.push(contributedLanguageHours) : topLanguageArray.push({language: contributedLanguage,total_contributions: "0.000"});
       let remainingLanguage = topLanguagesData.filter(item => item.language !== contributedLanguage);
-      remainingLanguage = remainingLanguage.sort((a, b) => Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1);
+      console.log(type);
+      remainingLanguage =  type== "dekho" || type== "likho" ? remainingLanguage.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1) : remainingLanguage.sort((a, b) => Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1);
+      console.log("Ayush", remainingLanguage);
       topLanguages = remainingLanguage.slice(0,3);
     } else {
       topLanguages = topLanguagesData.slice(0,3);
