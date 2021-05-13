@@ -19,6 +19,7 @@ const {
   AGGREGATED_DATA_BY_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
+  MODULE
 } = require('../common/constants');
 
 function getStatistics(response) {
@@ -131,7 +132,7 @@ const getStatsSummary = function () {
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
   const $userName = $('#username');
-
+  let sentenceLanguage= DEFAULT_CON_LANGUAGE;
   toggleFooterPosition();
   let top_lang = getDefaultLang();
   if(top_lang){
@@ -175,13 +176,13 @@ function initializeBlock() {
   $('#start_recording').on('click', () => {
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-    setStartRecordingBtnOnClick('./record.html');
+    setStartRecordingBtnOnClick('./record.html',MODULE.suno.value);
   });
 
   $('#start_validating').on('click',()=>{
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-    setStartRecordingBtnOnClick('./validator-page.html');
+    setStartRecordingBtnOnClick('./validator-page.html',MODULE.suno.value);
   })
 
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -194,14 +195,14 @@ function initializeBlock() {
 }
 
 $(document).ready(function () {
-  localStorage.setItem(CURRENT_MODULE,'suno');
+  localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
   getAvailableLanguages("asr");
   getLocaleString().then(()=>{
     initializeBlock();
   }).catch(err => {
     initializeBlock();
   });
-  onActiveNavbar('suno');
+  onActiveNavbar(MODULE.suno.value);
 });
 
 
