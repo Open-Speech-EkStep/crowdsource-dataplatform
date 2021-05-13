@@ -18,7 +18,7 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
       console.log("Ayush", remainingLanguage);
       topLanguages = remainingLanguage.slice(0,3);
     } else {
-      topLanguages = topLanguagesData.slice(0,3);
+      topLanguages = topLanguagesData.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1).slice(0,3);
     }
     return topLanguageArray.concat(topLanguages).reverse();
   }
