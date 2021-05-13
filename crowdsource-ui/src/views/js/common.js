@@ -21,7 +21,7 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
     return topLanguageArray.concat(topLanguages).reverse();
   }
 
-function showByHoursChart() {
+function showByHoursChart(type) {
   const chartReg = {};
   if (chartReg["chart"]) {
     chartReg["chart"].dispose();
@@ -29,7 +29,7 @@ function showByHoursChart() {
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
   constructChart(
     JSON.parse(topLanguagesByHoursData),
-    "total_contributions",
+    type == "suno" ? "total_contributions" : "total_contribution_count",
     "language"
   );
 }
