@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
     <link rel="stylesheet" type="text/css" href="../../css/mic-speaker-testing.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
+    <style>.btn.focus,.btn:focus{outline:0;box-shadow:0 0}</style>
 </head>
 
 <body>
@@ -46,13 +47,13 @@
             </div>
             <div class="row m-0 justify-content-center mb-5 mb-lg-0 mt-5" id="textarea-row">
                 <div class="col-lg-8 col-md-5 col-12 original-text" style="min-height:120px;border-radius:12px">
-                <%- include ../common/textarea-faded.ejs %>
+                    <%- include ../common/textarea-faded.ejs %>
+                </div>
             </div>
-            </div>
-            
+
             <div class="row justify-content-center mb-5 mb-lg-0 mt-5 d-none mx-1" id="editor-row">
                 <div class="col-lg-4 col-md-5 col-12 original-text">
-                    <label><%- __('Captured Text')%></label>
+                    <label><%- __('Captured Text') %></label>
                     <div id="captured-text">
                     </div>
                 </div>
@@ -65,7 +66,8 @@
             <div class="row justify-content-center d-none" id="thankyou-text">
                 <div class="col-12 text-center mt-4">
                     <img src="../../img/tick.svg">
-                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for correcting!</label>
+                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for
+                        correcting!</label>
                 </div>
             </div>
 
@@ -133,7 +135,7 @@
 
                 </button>
             </div>
-            
+
             <div class="row justify-content-center" id="skip_btn_row">
                 <button class="btn text-primary mt-2 mb-2 fs-1_5-rem" id="skip_button">
                     <%= __('Skip') %>
