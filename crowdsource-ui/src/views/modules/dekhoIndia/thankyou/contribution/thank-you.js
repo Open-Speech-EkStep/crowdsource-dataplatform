@@ -16,6 +16,7 @@ const {
   performAPIRequest,
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
+const {showUserProfile} = require('../common/header');
 const {showByHoursChart,getContributedAndTopLanguage,setBadge} = require('../common/common');
 
 const dekhoCountKey = 'dekhoCount';
@@ -141,10 +142,7 @@ function executeOnLoad() {
   } else if (currentIndexInStorage < totalSentence - 1) {
     location.href = "./home.html";
   } else {
-    $("#nav-user").removeClass("d-none");
-    $("#nav-login").addClass("d-none");
-    $("#nav-username").text(localSpeakerDataParsed.userName);
-
+    showUserProfile(localSpeakerDataParsed.userName)
     setPageContentHeight();
     setSentencesContributed();
     toggleFooterPosition();

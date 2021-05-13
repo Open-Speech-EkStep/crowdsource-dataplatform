@@ -3,6 +3,7 @@ const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLoca
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent } = require('../common/common');
+const { showUserProfile } = require('../common/header');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -458,7 +459,7 @@ $(document).ready(() => {
     location.href = './home.html';
     return;
   }
-
+  showUserProfile(localSpeakerDataParsed.userName);
   const isExistingUser = localSentencesParsed &&
     localSentencesParsed.userName === localSpeakerDataParsed.userName
     &&

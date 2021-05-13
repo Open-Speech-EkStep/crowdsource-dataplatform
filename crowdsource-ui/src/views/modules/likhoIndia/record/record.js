@@ -12,6 +12,7 @@ const {
 const {LIKHO_FROM_LANGUAGE,LIKHO_TO_LANGUAGE,  LOCALE_STRINGS,CURRENT_MODULE, MODULE, ALL_LANGUAGES} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent} = require('../common/common');
+const {showUserProfile} = require('../common/header');
 const speakerDetailsKey = 'speakerDetails';
 
 const currentIndexKey = 'likhoCurrentIndex';
@@ -358,8 +359,6 @@ function executeOnLoad() {
   const $errorModal = $('#errorModal');
   const $loader = $('#loader');
   const $pageContent = $('#page-content');
-  const $navUser = $('#nav-user');
-  const $navUserName = $navUser.find('#nav-username');
   const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
@@ -403,9 +402,7 @@ function executeOnLoad() {
       return;
     }
 
-    $navUser.removeClass('d-none');
-    $('#nav-login').addClass('d-none');
-    $navUserName.text(localSpeakerDataParsed.userName);
+    showUserProfile(localSpeakerDataParsed.userName);
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName
       &&
