@@ -19,6 +19,7 @@ const {
   AGGREGATED_DATA_BY_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
+  MODULE
 } = require('../common/constants');
 
 function getStatistics(response) {
@@ -111,7 +112,7 @@ const setDefaultLang = function () {
 const getStatsSummary = function () {
   performAPIRequest('/stats/summary/ocr')
     .then(response => {
-      const languages = getContributedAndTopLanguage(response.top_languages_by_hours);
+      const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.dekho.value);
       localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
       showByHoursChart();
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
