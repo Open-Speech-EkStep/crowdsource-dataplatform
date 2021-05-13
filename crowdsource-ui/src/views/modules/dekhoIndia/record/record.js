@@ -13,6 +13,7 @@ const {
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent} = require('../common/common');
+const { showUserProfile } = require('../common/header');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -454,8 +455,6 @@ const executeOnLoad = function () {
   setPageContentHeight();
   setFooterPosition();
   const $validationInstructionModal = $("#validation-instruction-modal");
-  const $navUser = $('#nav-user');
-  const $navUserName = $navUser.find('#nav-username');
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   $('#keyboardLayoutName').text(language);
@@ -484,9 +483,7 @@ const executeOnLoad = function () {
       return;
     }
 
-    $navUser.removeClass('d-none');
-    $('#nav-login').addClass('d-none');
-    $navUserName.text(localSpeakerDataParsed.userName);
+    showUserProfile(localSpeakerDataParsed.userName);
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName
       &&

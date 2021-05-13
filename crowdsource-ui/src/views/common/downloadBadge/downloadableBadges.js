@@ -1,4 +1,4 @@
-const {BADGES, CURRENT_MODULE,MODULE} = require('./constants.js');
+const {CURRENT_MODULE,MODULE} = require('./constants.js');
 
 function downloadPdf(badgeType) {
   const pdf = new jsPDF()

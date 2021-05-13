@@ -1,8 +1,8 @@
 const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE,CURRENT_MODULE,MODULE} = require('../common/constants');
-const {showKeyboard} = require('../common/virtualKeyboard');
-const { setInput } = require('../common/virtualKeyboard');
+const {showKeyboard,setInput} = require('../common/virtualKeyboard');
+const { showUserProfile } = require('../common/header');
 const { isKeyboardExtensionPresent } = require('../common/common');
 
 const speakerDetailsKey = 'speakerDetails';
@@ -571,6 +571,8 @@ $(document).ready(() => {
     location.href = './home.html';
     return;
   }
+
+  showUserProfile(localSpeakerDataParsed.userName)
 
   const isExistingUser = localSentencesParsed &&
     localSentencesParsed.userName === localSpeakerDataParsed.userName

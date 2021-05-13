@@ -58,16 +58,17 @@ const setSpeakerData = function (data, language, moduleType) {
 
   $speakersDataSpeakerValue.text(speakersData.speakers);
 
-  if (speakersData.languages) {
+
+  if (language) {
+    $speakerDataLanguagesWrapper.addClass('d-none');
+    $speakerContributionData.addClass('col-12 col-md-4 col-lg-4 col-xl-4 col-xs-6')
+    $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
+  } else {
     $speakerDataLanguagesValue.text(speakersData.languages);
     $speakerDataLanguagesWrapper.removeClass('d-none');
     $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4 col-xs-6')
     $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
-  } else {
-    $speakerDataLanguagesWrapper.addClass('d-none');
-    $speakerContributionData.addClass('col-12 col-md-4 col-lg-4 col-xl-4 col-xs-6')
-    $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
   }
-  }
+}
 
 module.exports = {setSpeakerData}

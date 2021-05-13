@@ -11,8 +11,8 @@ const {
   reportSentenceOrRecording
 } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
-const {showKeyboard} = require('../common/virtualKeyboard');
-const {setInput} = require('../common/virtualKeyboard');
+const {showKeyboard,setInput} = require('../common/virtualKeyboard');
+const {showUserProfile} = require('../common/header');
 const {isKeyboardExtensionPresent} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
 
@@ -467,8 +467,6 @@ function executeOnLoad() {
   const $errorModal = $('#errorModal');
   const $loader = $('#loader');
   const $pageContent = $('#page-content');
-  const $navUser = $('#nav-user');
-  const $navUserName = $navUser.find('#nav-username');
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   $('#keyboardLayoutName').text(contributionLanguage);
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
@@ -507,10 +505,7 @@ function executeOnLoad() {
       location.href = './home.html#speaker-details';
       return;
     }
-
-    $navUser.removeClass('d-none');
-    $('#nav-login').addClass('d-none');
-    $navUserName.text(localSpeakerDataParsed.userName);
+    showUserProfile(localSpeakerDataParsed.userName)
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName
       &&
