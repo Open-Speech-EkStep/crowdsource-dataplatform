@@ -261,7 +261,7 @@ describe("Running tests for dbOperations", () => {
         const type = 'text'
         const userName = 'name';
         const contributorId = 1;
-        const req = { params: { type: type }, query: { from: language }, cookies: { userId }, body: { userName } };
+        const req = { params: { type: type }, query: { from: language,userName }, cookies: { userId } };
         const spyDBany = jest.spyOn(mockDB, 'any')
         const spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
         when(spyDBany).calledWith(getContributionListQuery, [contributorId, type, language, undefined]).mockReturnValue(Promise.resolve())
