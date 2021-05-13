@@ -139,7 +139,16 @@ function dragElement(elmnt) {
   }
 }
 
-dragElement(document.getElementById("keyboardBox"));
+
+try{
+  $("#keyboardBox").draggable({
+    containment : "body"
+  });
+} catch (e){
+  dragElement(document.getElementById("keyboardBox"));
+}
+
+
 
 $('#keyboardCloseBtn').on('click', () => {
   $('#keyboardBox').addClass('d-none');
