@@ -581,7 +581,8 @@ const getAvailableLanguages = async (req, res) => {
 }
 
 const getTargetInfo = async (req, res) => {
-    const { type, sourceLanguage, targetLanguage = '' } = req.params;
+    const { type, sourceLanguage } = req.params;
+    const { targetLanguage = ''} = req.query;
     let hasTarget = false, isAllContributed = false;
     const toLanguage = type == 'parallel' ? targetLanguage : sourceLanguage;
     hasTarget = (await db.one(hasTargetQuery, [type, sourceLanguage, toLanguage])).result;

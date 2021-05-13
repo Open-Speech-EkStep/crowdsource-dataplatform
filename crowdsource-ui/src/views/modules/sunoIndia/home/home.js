@@ -1,6 +1,6 @@
 const {constructChart}= require('../common/horizontalBarGraph');
 const { onActiveNavbar } = require('../common/header');
-const {getContributedAndTopLanguage,redirectToLocalisedPage, showFucntionalCards, getLanguageTargetInfo} = require('../common/common');
+const {getContributedAndTopLanguage,redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages} = require('../common/common');
 const {setSpeakerData} = require('../common/contributionStats');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
 const {
@@ -10,7 +10,6 @@ const {
   setStartRecordingBtnOnClick
 } = require('../common/userDetails');
 
-const {updateHrsForCards} = require('../common/card')
 const {setLangNavBar} = require('../common/languageNavBar')
 
 const {
@@ -47,7 +46,8 @@ function showByHoursChart() {
   constructChart(
     JSON.parse(topLanguagesByHoursData),
     "total_contributions",
-    "language"
+    "language",
+    "suno"
   );
 }
 
@@ -97,13 +97,11 @@ const setDefaultLang = function () {
     const targetedDiv = getDefaultTargetedDiv('id', defaultLangId, $sayListenLanguage);
     const language = targetedDiv.getAttribute("value");
     localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-    // updateHrsForCards(language);
     updateLocaleLanguagesDropdown(language);
     setLangNavBar(targetedDiv, language, $languageNavBar);
     return;
   }
   const targetedDiv = getDefaultTargetedDiv('value', contributionLanguage, $sayListenLanguage);
-  // updateHrsForCards(contributionLanguage);
   updateLocaleLanguagesDropdown(contributionLanguage);
   setLangNavBar(targetedDiv, contributionLanguage, $languageNavBar);
 }
@@ -133,7 +131,6 @@ const getStatsSummary = function () {
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
   const $userName = $('#username');
-  let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
   toggleFooterPosition();
   let top_lang = getDefaultLang();
@@ -169,7 +166,6 @@ function initializeBlock() {
       previousActiveDiv.removeClass('active');
       $6th_place.addClass('d-none');
       targetedDiv.classList.add('active');
-      // updateHrsForCards(language);
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
     }
@@ -199,6 +195,7 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,'suno');
+  getAvailableLanguages("asr");
   getLocaleString().then(()=>{
     initializeBlock();
   }).catch(err => {

@@ -73,7 +73,7 @@ const getAvailableLanguages = (type) => {
 };
 
 const getLanguageTargetInfo = (type, sourceLanguage, targetLanguage) => {
-  return fetch(`/target-info/${type}/sourceLanguage=${sourceLanguage}?targetLanguage=${targetLanguage}`).then((data) => {
+  return fetch(`/target-info/${type}/${sourceLanguage}?targetLanguage=${targetLanguage}`).then((data) => {
     if (!data.ok) {
       throw Error(data.statusText || 'HTTP error');
     } else {
@@ -88,13 +88,13 @@ const showFucntionalCards = (type, from, to) => {
       const {hasTarget, isAllContributed} = languagePairs;
       let contributeCard = $("#left");
       let validateCard = $("#right");
-      if(!hasTarget && !isAllContributed) {
+      if(hasTarget && !isAllContributed) {
         contributeCard.removeClass("cont-validate-disabled");
         validateCard.removeClass("validate-disabled");
-      } else if(!hasTarget && isAllContributed) {
+      } else if(hasTarget && isAllContributed) {
         validateCard.removeClass("validate-disabled");
         contributeCard.addClass("cont-validate-disabled");
-      } else if(hasTarget && !isAllContributed) {
+      } else if(!hasTarget && !isAllContributed) {
         contributeCard.removeClass("cont-validate-disabled");
         validateCard.addClass("validate-disabled");
       } else {

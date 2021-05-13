@@ -1,7 +1,7 @@
 const {constructChart}= require('../common/horizontalBarGraph');
 const { onActiveNavbar } = require('../common/header');
 const {setSpeakerData} = require('../common/contributionStats');
-const {getContributedAndTopLanguage,redirectToLocalisedPage, showFucntionalCards} = require('../common/common');
+const {getContributedAndTopLanguage,redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages} = require('../common/common');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
 const {
   setSpeakerDetails,
@@ -10,7 +10,6 @@ const {
   setStartRecordingBtnOnClick
 } = require('../common/userDetails');
 
-const {updateHrsForCards} = require('../common/card')
 const {setLangNavBar} = require('../common/languageNavBar')
 
 const {
@@ -19,7 +18,6 @@ const {
   TOP_LANGUAGES_BY_SPEAKERS,
   AGGREGATED_DATA_BY_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
-  SELECTED_MODULE,
   CURRENT_MODULE,
 } = require('../common/constants');
 
@@ -47,8 +45,9 @@ function showByHoursChart() {
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
   constructChart(
     JSON.parse(topLanguagesByHoursData),
-    "total_contributions",
-    "language"
+    "total_contribution_count",
+    "language",
+    "dekho"
   );
 }
 
@@ -109,12 +108,10 @@ const setDefaultLang = function () {
   setLangNavBar(targetedDiv, contributionLanguage, $languageNavBar);
 }
 
-
 const getStatsSummary = function () {
   performAPIRequest('/stats/summary/ocr')
     .then(response => {
-      const data = [{"language":"Hindi","total_contributions":"0.402"},{"language":"English","total_contributions":"0.069"},{"language":"Bengali","total_contributions":"0.033"},{"language":"Marathi","total_contributions":"0.031"},{"language":"Tamil","total_contributions":"0.020"},{"language":"Kannada","total_contributions":"0.017"},{"language":"Gujarati","total_contributions":"0.010"},{"language":"Assamese","total_contributions":"0.007"},{"language":"Malayalam","total_contributions":"0.006"},{"language":"Punjabi","total_contributions":"0.004"},{"language":"Odia","total_contributions":"0.003"},{"language":"Telugu","total_contributions":"0.002"}]
-      const languages = getContributedAndTopLanguage(data);
+      const languages = getContributedAndTopLanguage(response.top_languages_by_hours);
       localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
       showByHoursChart();
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
@@ -133,20 +130,8 @@ const getStatsSummary = function () {
   });
 }
 
-const setLanguageList = () => {
-  return fetch('/available-languages/ocr').then((data) => {
-    if (!data.ok) {
-      throw Error(data.statusText || 'HTTP error');
-    } else {
-      return Promise.resolve(data.json());
-    }
-  });
-};
-
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
-  const age = document.getElementById('age');
-  const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
   let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
@@ -180,7 +165,6 @@ function initializeBlock() {
       previousActiveDiv.removeClass('active');
       $6th_place.addClass('d-none');
       targetedDiv.classList.add('active');
-      // updateHrsForCards(language);
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
     }
@@ -210,6 +194,7 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,'dekho');
+  getAvailableLanguages("ocr");
   getLocaleString().then(()=>{
     initializeBlock();
   }).catch(err => {
