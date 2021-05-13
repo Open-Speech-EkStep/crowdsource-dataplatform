@@ -1,6 +1,6 @@
 const { calculateTime, formatTime } = require('./utils');
 
-function constructChart(responseData, xAxisLabel, yAxisLabel) {
+function constructChart(responseData, xAxisLabel, yAxisLabel, type) {
   const chartReg = {};
   const chart = am4core.create("speakers_hours_chart", am4charts.XYChart);
   chartReg["chart"] = chart;
@@ -9,17 +9,17 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
   if (xAxisLabel === "total_speakers") {
     response = response.sort((a, b) => Number(a.total_speakers) < Number(b.total_speakers) ? -1 : 1);
   } 
-
   if (xAxisLabel !== "total_speakers") {
     response.forEach((ele) => {
       const { hours, minutes, seconds } = calculateTime(
         Number(ele.total_contributions) * 60 * 60,
         true
       );
-      ele.total_contributions_text = formatTime(hours, minutes, seconds);
+      ele.total_contributions_text = type == "suno" ? formatTime(hours, minutes, seconds) : ele.total_contribution_count;
     });
   }
   chart.data = response;
+  console.log(response);
   const categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
   categoryAxis.dataFields.category = yAxisLabel;
   categoryAxis.renderer.grid.template.location = 0;

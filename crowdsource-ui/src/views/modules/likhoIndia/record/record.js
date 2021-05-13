@@ -24,12 +24,13 @@ window.likhoIndia = {};
 function uploadToServer(cb) {
   const fd = new FormData();
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
+  console.log(localSpeakerDataParsed);
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
   fd.append('userInput', likhoIndia.editedText);
   fd.append('speakerDetails', speakerDetails);
-  fd.append('language', localSpeakerDataParsed.language);
+  fd.append('language', localSpeakerDataParsed.toLanguage);
   fd.append('sentenceId', likhoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");

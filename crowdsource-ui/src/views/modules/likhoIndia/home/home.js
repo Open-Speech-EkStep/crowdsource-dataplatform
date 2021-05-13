@@ -51,8 +51,9 @@ function showByHoursChart() {
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
   constructChart(
     JSON.parse(topLanguagesByHoursData),
-    "total_contributions",
-    "language"
+    "total_contribution_count",
+    "language",
+    "likho"
   );
 }
 

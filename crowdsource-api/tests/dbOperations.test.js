@@ -620,7 +620,7 @@ describe("Running tests for dbOperations", () => {
         when(spyDBone).calledWith(isAllContributedQuery, [parallelType, sourceLanguage, targetLanguage]).mockReturnValue({result:true});
 
         test('should call queries with target as source language for text type', async () => {
-            const req = { params: { type: textType, sourceLanguage: sourceLanguage } }
+            const req = { params: { type: textType, sourceLanguage: sourceLanguage },  query: {} }
             
             await dbOperations.getTargetInfo(req, res);
 
@@ -629,7 +629,7 @@ describe("Running tests for dbOperations", () => {
         });
 
         test('should call queries with target as source language for asr type', async () => {
-            const req = { params: { type: asrType, sourceLanguage: sourceLanguage } }
+            const req = { params: { type: asrType, sourceLanguage: sourceLanguage },  query: {} }
             
             await dbOperations.getTargetInfo(req, res);
 
@@ -638,7 +638,7 @@ describe("Running tests for dbOperations", () => {
         });
 
         test('should call queries with target as source language for ocr type', async () => {
-            const req = { params: { type: ocrType, sourceLanguage: sourceLanguage } }
+            const req = { params: { type: ocrType, sourceLanguage: sourceLanguage }, query: {} }
             
             await dbOperations.getTargetInfo(req, res);
 
@@ -647,7 +647,7 @@ describe("Running tests for dbOperations", () => {
         });
 
         test('should call queries with target language for parallel type', async () => {
-            const req = { params: { type: parallelType, sourceLanguage: sourceLanguage, targetLanguage: targetLanguage } }
+            const req = { params: { type: parallelType, sourceLanguage: sourceLanguage }, query: {targetLanguage: targetLanguage } }
             
             await dbOperations.getTargetInfo(req, res);
 
@@ -657,7 +657,7 @@ describe("Running tests for dbOperations", () => {
 
         test('should return result in given format', async () => {
             
-            const req = { params: { type: textType, sourceLanguage: sourceLanguage } }
+            const req = { params: { type: textType, sourceLanguage: sourceLanguage }, query: {} }
             const mockSend = { send: jest.fn() };
             const res = { status: jest.fn().mockReturnValue(mockSend) };
             const spySend = jest.spyOn(mockSend, 'send')
