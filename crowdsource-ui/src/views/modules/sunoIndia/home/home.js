@@ -110,7 +110,7 @@ const setDefaultLang = function () {
 const getStatsSummary = function () {
   performAPIRequest('/stats/summary/asr')
     .then(response => {
-      const languages = getContributedAndTopLanguage(response.top_languages_by_hours);
+      const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.suno.value);
       localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
       showByHoursChart();
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
