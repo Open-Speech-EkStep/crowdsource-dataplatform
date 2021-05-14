@@ -44,7 +44,8 @@ const {
     getContributionLanguagesQuery,
     getDatasetLanguagesQuery,
     hasTargetQuery,
-    isAllContributedQuery
+    isAllContributedQuery,
+    getDataRowInfo
 } = require('./dbQuery');
 
 const {
@@ -92,6 +93,14 @@ let cn = {
 
 const db = pgp(cn);
 
+const checkLanguageValidity = async (datasetId, language) => {
+    const dataRowInfo = await db.oneOrNone(getDataRowInfo, [datasetId]);
+
+    const invalidLanguage = dataRowInfo.type == 'parallel' ? dataRowInfo.language == language : dataRowInfo.language != language;
+
+    return !invalidLanguage;
+}
+
 const updateDbWithAudioPath = async (
     audioPath,
     datasetId,
@@ -106,9 +115,15 @@ const updateDbWithAudioPath = async (
     motherTongue,
     cb
 ) => {
+    const validLanguage = await checkLanguageValidity(datasetId, language)
+    if (!validLanguage) {
+        cb(400, { error: 'Bad Request' });
+        return
+    }
+
     const roundedAudioDuration = audioDuration ? Number(Number(audioDuration).toFixed(3)) : 0;
 
-    const contributor_id = await getContributorId(userId, userName, age, gender, motherTongue,)
+    const contributor_id = await getContributorId(userId, userName, age, gender, motherTongue)
 
     db.any(updateContributionDetails, [
         datasetId,
@@ -543,6 +558,11 @@ const updateDbWithUserInput = async (
     gender,
     motherTongue,
     cb) => {
+    const validLanguage = await checkLanguageValidity(datasetId, language)
+    if (!validLanguage) {
+        cb(400, { error: 'Bad Request' });
+        return
+    }
     const contributor_id = await getContributorId(userId, userName, age, gender, motherTongue,)
 
     db.any(updateContributionDetailsWithUserInput, [
