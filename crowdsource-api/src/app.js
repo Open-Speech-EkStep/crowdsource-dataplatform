@@ -208,27 +208,20 @@ router.post('/skip', validateInputForSkip, (req, res) => {
 
 router.post('/store', validateUserInputAndFile, (req, res) => {
     const file = req.file;
-    const userInput = xss(req.body.userInput);
-    const sentenceId = req.body.sentenceId;
-    const speakerDetails = req.body.speakerDetails;
-    const audioDuration = req.body.audioDuration;
-    const userId = req.cookies.userId;
-    const language = req.body.language;
-    const state = req.body.state || "";
-    const country = req.body.country || "";
+    const datasetId = req.body.sentenceId;
+    const { userId } = req.cookies;
+    const { speakerDetails, language, state = '', country = '' } = req.body;
     const speakerDetailsJson = JSON.parse(speakerDetails);
-    const userName = speakerDetailsJson.userName;
-    const age = speakerDetailsJson.age || '';
-    const motherTongue = speakerDetailsJson.motherTongue || '';
-    const gender = speakerDetailsJson.gender || '';
+    const { userName, age = '', motherTongue = '', gender = '' } = speakerDetailsJson;
 
     if (file) {
+        const audioDuration = req.body.audioDuration;
         const uploadFile = uploader(objectStorage)
 
         uploadFile(file.path, userName, userId, language)
             .then(() => {
                 const audioPath = `raw/landing/${language}/audio/users/${userId}/${userName}/uploads/${file.filename}`;
-                updateDbWithAudioPath(audioPath, sentenceId, userId, userName, state, country, audioDuration, language, age, gender, motherTongue,
+                updateDbWithAudioPath(audioPath, datasetId, userId, userName, state, country, audioDuration, language, age, gender, motherTongue,
                     (resStatus, resBody) => {
                         removeTempFile(file);
                         res.status(resStatus).send(resBody);
@@ -240,7 +233,8 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
             });
     }
     else {
-        updateDbWithUserInput(userName, userId, language, userInput, sentenceId, state, country, age, gender, motherTongue,
+        const userInput = xss(req.body.userInput);
+        updateDbWithUserInput(userName, userId, language, userInput, datasetId, state, country, age, gender, motherTongue,
             (resStatus, resBody) => {
                 res.status(resStatus).send(resBody);
             })
