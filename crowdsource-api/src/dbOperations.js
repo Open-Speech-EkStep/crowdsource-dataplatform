@@ -94,7 +94,7 @@ const db = pgp(cn);
 
 const updateDbWithAudioPath = async (
     audioPath,
-    sentenceId,
+    datasetId,
     userId,
     userName,
     state,
@@ -111,7 +111,7 @@ const updateDbWithAudioPath = async (
     const contributor_id = await getContributorId(userId, userName, age, gender, motherTongue,)
 
     db.any(updateContributionDetails, [
-        sentenceId,
+        datasetId,
         contributor_id,
         audioPath,
         language,
@@ -120,7 +120,7 @@ const updateDbWithAudioPath = async (
         country
     ])
         .then(() => {
-            db.none(updateMediaWithContributedState, [sentenceId]).then();
+            db.none(updateMediaWithContributedState, [datasetId]).then();
             db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
@@ -536,7 +536,7 @@ const updateDbWithUserInput = async (
     userId,
     language,
     userInput,
-    sentenceId,
+    datasetId,
     state,
     country,
     age,
@@ -546,7 +546,7 @@ const updateDbWithUserInput = async (
     const contributor_id = await getContributorId(userId, userName, age, gender, motherTongue,)
 
     db.any(updateContributionDetailsWithUserInput, [
-        sentenceId,
+        datasetId,
         contributor_id,
         userInput,
         language,
@@ -554,7 +554,7 @@ const updateDbWithUserInput = async (
         country
     ])
         .then(() => {
-            db.none(updateMediaWithContributedState, [sentenceId]).then();
+            db.none(updateMediaWithContributedState, [datasetId]).then();
             db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
