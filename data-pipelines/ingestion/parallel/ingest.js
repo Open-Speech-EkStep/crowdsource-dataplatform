@@ -7,9 +7,9 @@ const { conn, insertMaster } = require('../common/dbUtils')
 const ingest1 = async (datasetId, datasetType, client, language, rows, paired) => {
     const values = rows.map(row => {
         const media = {
-            "data": `"${row}"`,
+            "data": `${row}`,
             "type": "text",
-            "language": `"${language}"`
+            "language": `${language}`
         }
         return `('medium', '${datasetType}',
                 '${JSON.stringify(media)}', 
@@ -34,9 +34,9 @@ const ingest2 = async (datasetIds, client, language, rows) => {
 
     const values = rows.map((row, i) => {
         const media = {
-            "data": `"${row}"`,
+            "data": `${row}`,
             "type": "text",
-            "language": `"${language}"`
+            "language": `${language}`
         }
         return `(${datasetIds[i]}, ${contributorId},
             '${JSON.stringify(media)}', 
