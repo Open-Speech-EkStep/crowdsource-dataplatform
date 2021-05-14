@@ -261,15 +261,15 @@ describe("Running tests for dbOperations", () => {
         const type = 'text'
         const userName = 'name';
         const contributorId = 1;
-        const req = { params: { type: type }, query: { from: language,userName }, cookies: { userId } };
+        const req = { params: { type: type }, query: { from: language, userName }, cookies: { userId } };
         const spyDBany = jest.spyOn(mockDB, 'any')
         const spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
-        when(spyDBany).calledWith(getContributionListQuery, [contributorId, type, language, undefined]).mockReturnValue(Promise.resolve())
+        when(spyDBany).calledWith(getContributionListQuery, [contributorId, type, language, '']).mockReturnValue(Promise.resolve())
         when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
 
         await dbOperations.getContributionList(req, res);
 
-        expect(spyDBany).toHaveBeenCalledWith(getContributionListQuery, [contributorId, type, language, undefined]);
+        expect(spyDBany).toHaveBeenCalledWith(getContributionListQuery, [contributorId, type, language, '']);
         jest.clearAllMocks();
     });
 
@@ -610,18 +610,18 @@ describe("Running tests for dbOperations", () => {
         const parallelType = 'parallel';
         const sourceLanguage = 'Hindi';
         const targetLanguage = 'English';
-        when(spyDBone).calledWith(hasTargetQuery, [textType, sourceLanguage, sourceLanguage]).mockReturnValue({result:true});
-        when(spyDBone).calledWith(hasTargetQuery, [asrType, sourceLanguage, sourceLanguage]).mockReturnValue({result:true});
-        when(spyDBone).calledWith(hasTargetQuery, [ocrType, sourceLanguage, sourceLanguage]).mockReturnValue({result:true});
-        when(spyDBone).calledWith(hasTargetQuery, [parallelType, sourceLanguage, targetLanguage]).mockReturnValue({result:true});
-        when(spyDBone).calledWith(isAllContributedQuery, [textType, sourceLanguage, sourceLanguage]).mockReturnValue({result:true});
-        when(spyDBone).calledWith(isAllContributedQuery, [asrType, sourceLanguage, sourceLanguage]).mockReturnValue({result:true});
-        when(spyDBone).calledWith(isAllContributedQuery, [ocrType, sourceLanguage, sourceLanguage]).mockReturnValue({result:true});
-        when(spyDBone).calledWith(isAllContributedQuery, [parallelType, sourceLanguage, targetLanguage]).mockReturnValue({result:true});
+        when(spyDBone).calledWith(hasTargetQuery, [textType, sourceLanguage, sourceLanguage]).mockReturnValue({ result: true });
+        when(spyDBone).calledWith(hasTargetQuery, [asrType, sourceLanguage, sourceLanguage]).mockReturnValue({ result: true });
+        when(spyDBone).calledWith(hasTargetQuery, [ocrType, sourceLanguage, sourceLanguage]).mockReturnValue({ result: true });
+        when(spyDBone).calledWith(hasTargetQuery, [parallelType, sourceLanguage, targetLanguage]).mockReturnValue({ result: true });
+        when(spyDBone).calledWith(isAllContributedQuery, [textType, sourceLanguage, sourceLanguage]).mockReturnValue({ result: true });
+        when(spyDBone).calledWith(isAllContributedQuery, [asrType, sourceLanguage, sourceLanguage]).mockReturnValue({ result: true });
+        when(spyDBone).calledWith(isAllContributedQuery, [ocrType, sourceLanguage, sourceLanguage]).mockReturnValue({ result: true });
+        when(spyDBone).calledWith(isAllContributedQuery, [parallelType, sourceLanguage, targetLanguage]).mockReturnValue({ result: true });
 
         test('should call queries with target as source language for text type', async () => {
-            const req = { params: { type: textType, sourceLanguage: sourceLanguage },  query: {} }
-            
+            const req = { params: { type: textType, sourceLanguage: sourceLanguage }, query: {} }
+
             await dbOperations.getTargetInfo(req, res);
 
             expect(spyDBone).toBeCalledWith(hasTargetQuery, [textType, sourceLanguage, sourceLanguage]);
@@ -629,8 +629,8 @@ describe("Running tests for dbOperations", () => {
         });
 
         test('should call queries with target as source language for asr type', async () => {
-            const req = { params: { type: asrType, sourceLanguage: sourceLanguage },  query: {} }
-            
+            const req = { params: { type: asrType, sourceLanguage: sourceLanguage }, query: {} }
+
             await dbOperations.getTargetInfo(req, res);
 
             expect(spyDBone).toBeCalledWith(hasTargetQuery, [asrType, sourceLanguage, sourceLanguage]);
@@ -639,7 +639,7 @@ describe("Running tests for dbOperations", () => {
 
         test('should call queries with target as source language for ocr type', async () => {
             const req = { params: { type: ocrType, sourceLanguage: sourceLanguage }, query: {} }
-            
+
             await dbOperations.getTargetInfo(req, res);
 
             expect(spyDBone).toBeCalledWith(hasTargetQuery, [ocrType, sourceLanguage, sourceLanguage]);
@@ -647,8 +647,8 @@ describe("Running tests for dbOperations", () => {
         });
 
         test('should call queries with target language for parallel type', async () => {
-            const req = { params: { type: parallelType, sourceLanguage: sourceLanguage }, query: {targetLanguage: targetLanguage } }
-            
+            const req = { params: { type: parallelType, sourceLanguage: sourceLanguage }, query: { targetLanguage: targetLanguage } }
+
             await dbOperations.getTargetInfo(req, res);
 
             expect(spyDBone).toBeCalledWith(hasTargetQuery, [parallelType, sourceLanguage, targetLanguage]);
@@ -656,7 +656,7 @@ describe("Running tests for dbOperations", () => {
         });
 
         test('should return result in given format', async () => {
-            
+
             const req = { params: { type: textType, sourceLanguage: sourceLanguage }, query: {} }
             const mockSend = { send: jest.fn() };
             const res = { status: jest.fn().mockReturnValue(mockSend) };
