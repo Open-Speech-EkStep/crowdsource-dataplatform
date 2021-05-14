@@ -201,7 +201,7 @@ const updateAndGetMedia = function (req, res) {
 
 const getContributionList = async function (req, res) {
     const fromLanguage = req.query.from;
-    const toLanguage = req.query.to;
+    const toLanguage = req.query.to || '';
     const type = req.params.type;
     const userId = req.cookies.userId;
     const { userName = "" } = req.query;
@@ -582,7 +582,7 @@ const getAvailableLanguages = async (req, res) => {
 
 const getTargetInfo = async (req, res) => {
     const { type, sourceLanguage } = req.params;
-    const { targetLanguage = ''} = req.query;
+    const { targetLanguage = '' } = req.query;
     let hasTarget = false, isAllContributed = false;
     const toLanguage = type == 'parallel' ? targetLanguage : sourceLanguage;
     hasTarget = (await db.one(hasTargetQuery, [type, sourceLanguage, toLanguage])).result;

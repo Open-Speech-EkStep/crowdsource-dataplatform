@@ -111,13 +111,14 @@ describe('middleware test', function () {
 
     describe('validateUserInputAndFile', function () {
         const speakerDetail = { gender: gender, age: validAgeGroup, motherTongue: motherTongue, userName: validUsername };
+        const language = 'Hindi';
 
         afterEach(() => {
             jest.clearAllMocks();
         })
 
         test('should call next() once if all params in req are valid', function () {
-            const req = { body: { speakerDetails: JSON.stringify(speakerDetail) }, file: { size: 1024000, mimetype: "audio/wav" } };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language }, file: { size: 1024000, mimetype: "audio/wav" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
@@ -125,7 +126,7 @@ describe('middleware test', function () {
         });
 
         test('should call res.send() once if fileSize is greater than 12MB', function () {
-            const req = { body: { speakerDetails: JSON.stringify(speakerDetail) }, file: { size: 9 * 1024000, mimetype: "audio/wav" } };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language }, file: { size: 9 * 1024000, mimetype: "audio/wav" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -133,7 +134,7 @@ describe('middleware test', function () {
         });
 
         test('should call res.send() once if fileMimeType is not valid', function () {
-            const req = { body: { speakerDetails: JSON.stringify(speakerDetail) }, file: { size: 1024000, mimetype: "text/wav" } };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language }, file: { size: 1024000, mimetype: "text/wav" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -142,7 +143,7 @@ describe('middleware test', function () {
 
         test('should call res.send() once if userName length is greater than 12', function () {
             const speakerDetail = { gender: gender, motherTongue: motherTongue, userName: "veryLongUsername" };
-            const req = { body: { speakerDetails: JSON.stringify(speakerDetail) }, file: { size: 1024000, mimeType: "audio/wav" } };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language }, file: { size: 1024000, mimeType: "audio/wav" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -150,7 +151,8 @@ describe('middleware test', function () {
         });
 
         test('should call res.send() once if userName is a mobile No', function () {
-            const req = { cookies: cookie, params: params, body: { gender: gender, motherTongue: motherTongue, userName: "8989898989" } };
+            const speakerDetail = { gender: gender, motherTongue: motherTongue, userName: "8989898989" };
+            const req = { cookies: cookie, params: params, body: { speakerDetails: JSON.stringify(speakerDetail), language: language } };
             validateUserInfo(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -159,7 +161,7 @@ describe('middleware test', function () {
 
         test('should call res.send() once if userName is a email Id', function () {
             const speakerDetail = { gender: gender, motherTongue: motherTongue, userName: "abc@gmail.com" };
-            const req = { body: { speakerDetails: JSON.stringify(speakerDetail) }, file: { size: 1024000, mimeType: "audio/wav" } };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language }, file: { size: 1024000, mimeType: "audio/wav" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -168,7 +170,7 @@ describe('middleware test', function () {
 
         test('should call res.send() if age is defined but not in given format', function () {
             const speakerDetail = { age: "10-12yrs", gender: gender, motherTongue: motherTongue, userName: validUsername };
-            const req = { body: { speakerDetails: JSON.stringify(speakerDetail) }, file: { size: 1024000, mimeType: "audio/wav" } };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language }, file: { size: 1024000, mimeType: "audio/wav" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -177,7 +179,7 @@ describe('middleware test', function () {
 
         test('should call res.send() once if gender is defined but is not included in GENDER', function () {
             const speakerDetail = { age: validAgeGroup, gender: "someGender", motherTongue: motherTongue, userName: validUsername };
-            const req = { body: { speakerDetails: JSON.stringify(speakerDetail) }, file: { size: 1024000, mimeType: "audio/wav" } };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language }, file: { size: 1024000, mimeType: "audio/wav" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -186,7 +188,7 @@ describe('middleware test', function () {
 
         test('should call res.send() once if motherTongue is defined but not included in MOTHERTONGUE', function () {
             const speakerDetail = { age: validAgeGroup, gender: gender, motherTongue: "wrongLanguage", userName: validUsername };
-            const req = { body: { speakerDetails: JSON.stringify(speakerDetail) }, file: { size: 1024000, mimeType: "audio/wav" } };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language }, file: { size: 1024000, mimeType: "audio/wav" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -202,7 +204,7 @@ describe('middleware test', function () {
         });
 
         test('should call next() if file object is not present but userInput is present', function () {
-            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), userInput: "123456" } };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, userInput: "123456" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
@@ -210,7 +212,15 @@ describe('middleware test', function () {
         });
 
         test('should call res.send() if file object is not present but userInput is less than 5', function () {
-            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), userInput: "1234" } };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, userInput: "1234" } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should call res.send() if language is not valid', function () {
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: 'invalidLanguage', userInput: "1234text" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
