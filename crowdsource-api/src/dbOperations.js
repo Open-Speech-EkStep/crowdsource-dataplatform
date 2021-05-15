@@ -45,7 +45,9 @@ const {
     getDatasetLanguagesQuery,
     hasTargetQuery,
     isAllContributedQuery,
-    getDataRowInfo
+    getDataRowInfo,
+    getOrderedUniqueMediaQuery,
+    getOrderedUniqueMediaForParallel
 } = require('./dbQuery');
 
 const {
@@ -150,7 +152,8 @@ const getMediaBasedOnAge = function (
     userId,
     userName,
     language,
-    type
+    type,
+    toLanguage
 ) {
     let languageLabel = ADULT;
     // let query = updateAndGetMediaQuery;
@@ -163,7 +166,6 @@ const getMediaBasedOnAge = function (
         // query = updateAndGetUniqueMediaQuery;
     }
 
-    let query = getOrderedMediaQuery;
     const launchUser = envVars.LAUNCH_USER || 'launch_user';
     const launchIds = envVars.LAUNCH_IDS || '';
 
@@ -171,20 +173,21 @@ const getMediaBasedOnAge = function (
         // query = getMediaForLaunch;
     }
 
-    return (db.many(query, [
-        userId,
-        userName,
-        languageLabel,
-        language,
-        type,
-        launchIds.split(', ')
-    ]));
+    let query = getOrderedUniqueMediaQuery;
+    let params = [userId, userName, languageLabel, language, type, launchIds.split(', ')];
+    if (type === 'parallel') {
+        query = getOrderedUniqueMediaForParallel;
+        params = [userId, userName, languageLabel, language, type, toLanguage, launchIds.split(', ')]
+    }
+
+    return (db.any(query, params));
 };
 
 const updateAndGetMedia = function (req, res) {
     const userId = req.cookies.userId;
     const userName = req.body.userName;
     const language = req.body.language;
+    const toLanguage = req.body.toLanguage||'';
     const type = req.params.type;
 
     const ageGroup = req.body.age;
@@ -193,7 +196,8 @@ const updateAndGetMedia = function (req, res) {
         userId,
         userName,
         language,
-        type
+        type,
+        toLanguage
     );
     const count = db.one(mediaCount, [userId, userName, language]);
     const unAssign = db.any(unassignIncompleteMedia, [
