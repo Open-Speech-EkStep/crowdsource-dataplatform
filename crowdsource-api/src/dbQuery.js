@@ -5,10 +5,10 @@ const unassignIncompleteMediaWhenLanChange = `delete from "contributions" cont u
 where sen."dataset_row_id" = cont."dataset_row_id" and  cont.contributed_by = con.contributor_id and cont.audio_path is null and cont.action = \'assigned\' \
 and con.contributor_identifier = $1 and user_name=$2 and sen.language != $3;`
 
-const mediaCount = `select count(s.*) from dataset_row s \
-inner join "contributions" cont on s."dataset_row_id" = cont."dataset_row_id" \
-inner join "contributors" con on cont.contributed_by = con.contributor_id \
-where con.contributor_identifier = $1 and user_name=$2 AND s.media ->> 'language' = $3 and cont.action = \'completed\';`
+const mediaCount = `select count(dr.*) from dataset_row dr 
+inner join "contributions" cont on dr."dataset_row_id"=cont."dataset_row_id" 
+inner join "contributors" con on cont.contributed_by=con.contributor_id 
+where con.contributor_identifier=$1 and user_name=$2 AND dr.media->>'language'=$3 and cont.action='completed';`
 
 const updateAndGetOrderedMediaQuery = `\
 INSERT INTO "contributors" ("user_name","contributor_identifier")  select $2, $1 \
@@ -208,7 +208,7 @@ const getDatasetLanguagesQuery = `select distinct(media->>'language') as languag
 and ((state is null) or (state='contributed'))`;
 
 const hasTargetQuery = `select exists(select 1 from contributions con inner join dataset_row dr on con.dataset_row_id=dr.dataset_row_id 
-  where type=$1 and dr.media->>'language'=$2 and con.media->>'language'=$3) as result`;
+  where type=$1 and dr.media->>'language'=$2 and con.media->>'language'=$3 and con.action='completed') as result`;
 
 const isAllContributedQuery = `select not exists(
 	select dataset_row_id from dataset_row where type=$1 and media->>'language'=$2
