@@ -47,7 +47,8 @@ const {
     isAllContributedQuery,
     getDataRowInfo,
     getOrderedUniqueMediaQuery,
-    getOrderedUniqueMediaForParallel
+    getOrderedUniqueMediaForParallel,
+    getContributionListForParallel
 } = require('./dbQuery');
 
 const {
@@ -223,9 +224,10 @@ const getContributionList = async function (req, res) {
     const toLanguage = req.query.to || '';
     const type = req.params.type;
     const userId = req.cookies.userId;
-    const { userName = "" } = req.query;
+    const userName = req.query.username || '';
     const contributorId = await getContributorId(userId, userName);
-    db.any(getContributionListQuery, [contributorId, type, fromLanguage, toLanguage])
+    const query = type == 'parallel' ? getContributionListForParallel : getContributionListQuery
+    db.any(query, [contributorId, type, fromLanguage, toLanguage])
         .then((response) => {
             res.status(200).send({ data: response })
         })
