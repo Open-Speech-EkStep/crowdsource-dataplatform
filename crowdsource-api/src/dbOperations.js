@@ -187,7 +187,7 @@ const updateAndGetMedia = function (req, res) {
     const userId = req.cookies.userId;
     const userName = req.body.userName;
     const language = req.body.language;
-    const toLanguage = req.body.toLanguage||'';
+    const toLanguage = req.body.toLanguage || '';
     const type = req.params.type;
 
     const ageGroup = req.body.age;
@@ -426,20 +426,20 @@ const insertFeedback = (subject, feedback, language) => {
     return db.any(feedbackInsertion, [subject, feedback, language]);
 }
 
-const saveReport = async (userId, sentenceId, reportText, language, userName, source) => {
+const saveReport = async (userId, datasetId, reportText, language, userName, source) => {
     const contributor_id = await getContributorId(userId, userName)
-    await db.any(saveReportQuery, [contributor_id, sentenceId, reportText, language, source]);
+    await db.any(saveReportQuery, [contributor_id, datasetId, reportText, language, source]);
     if (source === "validation") {
-        await db.any(markContributionReported, [userId, userName, sentenceId]);
+        await db.any(markContributionReported, [userId, userName, datasetId]);
     }
     else if (source === "contribution") {
-        await db.any(markMediaReported, [userId, userName, sentenceId]);
+        await db.any(markMediaReported, [userId, userName, datasetId]);
     }
 }
 
-const markContributionSkipped = async (userId, sentenceId, userName) => {
+const markContributionSkipped = async (userId, datasetId, userName, language) => {
     const contributor_id = await getContributorId(userId, userName);
-    await db.any(markContributionSkippedQuery, [contributor_id, sentenceId]);
+    await db.any(markContributionSkippedQuery, [contributor_id, datasetId, language]);
 }
 
 const getContributorId = async (userId, userName, age = '', gender = '', motherTongue = '') => {

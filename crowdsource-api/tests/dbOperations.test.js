@@ -104,7 +104,7 @@ describe("Running tests for dbOperations", () => {
         });
 
         test('should call query with label medium for adults', () => {
-            dbOperations.getMediaBasedOnAge(ageGroup, testUserId, testUsername, language, type,toLanguage)
+            dbOperations.getMediaBasedOnAge(ageGroup, testUserId, testUsername, language, type, toLanguage)
 
             expect(spyDBany).toHaveBeenCalledWith(getOrderedUniqueMediaQuery, [testUserId, testUsername, mediumLabel, language, type, expect.anything()]);
         })
@@ -431,11 +431,12 @@ describe("Running tests for dbOperations", () => {
         const datasetId = '456'
         const userName = 'test user'
         const contributor_id = 10
+        const language = 'Hindi';
         when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
 
-        await dbOperations.markContributionSkipped(userId, datasetId, userName);
+        await dbOperations.markContributionSkipped(userId, datasetId, userName, language);
 
-        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [contributor_id, datasetId])
+        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [contributor_id, datasetId, language])
     });
 
     test('Get Rewards info', () => {
