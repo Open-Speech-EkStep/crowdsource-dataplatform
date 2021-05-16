@@ -114,14 +114,14 @@ and ((state is null and (cont.action is null or (coalesce(cont.action,'')='skipp
  group by dr."dataset_row_id", dr.media->>'data' order by dr."dataset_row_id" limit 5`;
 
 const getContributionListQuery = `
-select con."dataset_row_id", ds.media ->> 'data' as sentence, con.media ->> 'data' as contribution, con.contribution_id 
+select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id 
     from contributions con 
-    inner join contributors cont on con.contributed_by = cont.contributor_id and cont.contributor_id!=$1
-    inner join dataset_row ds on ds."dataset_row_id"=con."dataset_row_id" and ds."state"= 'contributed' 
+    inner join contributors cont on con.contributed_by=cont.contributor_id and cont.contributor_id!=$1
+    inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.state='contributed' 
 	and ds.type=$2 and (ds.type='text' or con.is_system) and (ds.type!='parallel' or con.media->>'language'=$4)
-    left join validations val on val.contribution_id=con.contribution_id and val.action != 'skip' 
-    where  con.action='completed' and ds.media->>'language'=$3 and COALESCE(val.validated_by, '')!= $1::text
-	group by con."dataset_row_id", ds.media ->> 'data', con.contribution_id 
+    left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' 
+    where  con.action='completed' and ds.media->>'language'=$3 and COALESCE(val.validated_by, '')!=$1::text
+	group by con.dataset_row_id, ds.media->>'data', con.contribution_id 
     order by count(val.*) desc, RANDOM() limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, action, validated_by, date, state_region, country) 
@@ -140,7 +140,7 @@ select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type',
 
 const updateMaterializedViews = 'REFRESH MATERIALIZED VIEW contributions_and_demo_stats;REFRESH MATERIALIZED VIEW daily_stats_complete;REFRESH MATERIALIZED VIEW gender_group_contributions;REFRESH MATERIALIZED VIEW age_group_contributions;REFRESH MATERIALIZED VIEW language_group_contributions;REFRESH MATERIALIZED VIEW state_group_contributions;REFRESH MATERIALIZED VIEW language_and_state_group_contributions;'
 
-const updateMediaWithContributedState = 'update dataset_row set state = \'contributed\' where "dataset_row_id" = $1;'
+const updateMediaWithContributedState = `update dataset_row set state='contributed' where "dataset_row_id"=$1`;
 
 const getCountOfTotalSpeakerAndRecordedAudio = `select  count(DISTINCT(con.*)), 0 as index, 0 as duration \
 from "contributors" con inner join "contributions" cont on con.contributor_id = cont.contributed_by and cont.action=\'completed\' inner join "dataset_row" s on  s."dataset_row_id" = cont."dataset_row_id"  where s.language = $1 \
@@ -166,8 +166,8 @@ const markContributionReported = "update contributions set action='reported' whe
 
 const markMediaReported = `update dataset_row set state='reported' where "dataset_row_id"=$3 and (select count(distinct reported_by) from reports where source='contribution' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='sentence_report_limit');`;
 
-const markContributionSkippedQuery = `insert into "contributions" ("action","dataset_row_id", "date", "contributed_by")
-select 'skipped', $2, now(), $1;`;
+const markContributionSkippedQuery = `insert into contributions (action, dataset_row_id, date, contributed_by, media)
+select 'skipped', $2, now(), $1, json_build_object('language', $3);`;
 
 const rewardsInfoQuery = `select milestone as contributions, grade as badge from reward_milestones mil
 inner join reward_catalogue rew on mil.reward_catalogue_id=rew.id
