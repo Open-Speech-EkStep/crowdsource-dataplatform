@@ -222,10 +222,10 @@ const getValidationCountQuery = 'select count(*) from validations where contribu
 
 const addContributorQuery = 'INSERT INTO "contributors" ("user_name","contributor_identifier","age_group","gender","mother_tongue")  select $2, $1, $3, $4, $5 returning contributor_id';
 
-const getBadges = 'select grade, reward_milestone.milestone, id from reward_catalogue, \
-(select milestone,reward_catalogue_id as rid from reward_milestones where milestone <= $1 \
-and LOWER(language) = LOWER($2) order by milestone desc) \
-as reward_milestone where id=reward_milestone.rid';
+const getBadges = `select grade, reward_milestone.milestone, id from reward_catalogue, 
+(select milestone,reward_catalogue_id as rid from reward_milestones where milestone <= $1 
+and LOWER(language) = LOWER($2) order by milestone desc) 
+as reward_milestone where id=reward_milestone.rid`;
 
 const getContributionHoursForLanguage = `select COALESCE(sum(con.audio_duration::decimal/3600), 0) as hours from contributions con 
 inner join dataset_row dr on dr."dataset_row_id"=con."dataset_row_id" where LOWER(language) = LOWER($1) 
