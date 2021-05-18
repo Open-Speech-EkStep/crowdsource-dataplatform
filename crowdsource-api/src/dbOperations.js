@@ -45,7 +45,10 @@ const {
     getDatasetLanguagesQuery,
     hasTargetQuery,
     isAllContributedQuery,
-    getDataRowInfo
+    getDataRowInfo,
+    getOrderedUniqueMediaQuery,
+    getOrderedUniqueMediaForParallel,
+    getContributionListForParallel
 } = require('./dbQuery');
 
 const {
@@ -150,7 +153,8 @@ const getMediaBasedOnAge = function (
     userId,
     userName,
     language,
-    type
+    type,
+    toLanguage
 ) {
     let languageLabel = ADULT;
     // let query = updateAndGetMediaQuery;
@@ -163,7 +167,6 @@ const getMediaBasedOnAge = function (
         // query = updateAndGetUniqueMediaQuery;
     }
 
-    let query = getOrderedMediaQuery;
     const launchUser = envVars.LAUNCH_USER || 'launch_user';
     const launchIds = envVars.LAUNCH_IDS || '';
 
@@ -171,20 +174,21 @@ const getMediaBasedOnAge = function (
         // query = getMediaForLaunch;
     }
 
-    return (db.many(query, [
-        userId,
-        userName,
-        languageLabel,
-        language,
-        type,
-        launchIds.split(', ')
-    ]));
+    let query = getOrderedUniqueMediaQuery;
+    let params = [userId, userName, languageLabel, language, type, launchIds.split(', ')];
+    if (type === 'parallel') {
+        query = getOrderedUniqueMediaForParallel;
+        params = [userId, userName, languageLabel, language, type, toLanguage, launchIds.split(', ')]
+    }
+
+    return (db.any(query, params));
 };
 
 const updateAndGetMedia = function (req, res) {
     const userId = req.cookies.userId;
     const userName = req.body.userName;
     const language = req.body.language;
+    const toLanguage = req.body.toLanguage || '';
     const type = req.params.type;
 
     const ageGroup = req.body.age;
@@ -193,7 +197,8 @@ const updateAndGetMedia = function (req, res) {
         userId,
         userName,
         language,
-        type
+        type,
+        toLanguage
     );
     const count = db.one(mediaCount, [userId, userName, language]);
     const unAssign = db.any(unassignIncompleteMedia, [
@@ -219,9 +224,10 @@ const getContributionList = async function (req, res) {
     const toLanguage = req.query.to || '';
     const type = req.params.type;
     const userId = req.cookies.userId;
-    const { userName = "" } = req.query;
+    const userName = req.query.username || '';
     const contributorId = await getContributorId(userId, userName);
-    db.any(getContributionListQuery, [contributorId, type, fromLanguage, toLanguage])
+    const query = type == 'parallel' ? getContributionListForParallel : getContributionListQuery
+    db.any(query, [contributorId, type, fromLanguage, toLanguage])
         .then((response) => {
             res.status(200).send({ data: response })
         })
@@ -422,20 +428,20 @@ const insertFeedback = (subject, feedback, language) => {
     return db.any(feedbackInsertion, [subject, feedback, language]);
 }
 
-const saveReport = async (userId, sentenceId, reportText, language, userName, source) => {
+const saveReport = async (userId, datasetId, reportText, language, userName, source) => {
     const contributor_id = await getContributorId(userId, userName)
-    await db.any(saveReportQuery, [contributor_id, sentenceId, reportText, language, source]);
+    await db.any(saveReportQuery, [contributor_id, datasetId, reportText, language, source]);
     if (source === "validation") {
-        await db.any(markContributionReported, [userId, userName, sentenceId]);
+        await db.any(markContributionReported, [userId, userName, datasetId]);
     }
     else if (source === "contribution") {
-        await db.any(markMediaReported, [userId, userName, sentenceId]);
+        await db.any(markMediaReported, [userId, userName, datasetId]);
     }
 }
 
-const markContributionSkipped = async (userId, sentenceId, userName) => {
+const markContributionSkipped = async (userId, datasetId, userName, language) => {
     const contributor_id = await getContributorId(userId, userName);
-    await db.any(markContributionSkippedQuery, [contributor_id, sentenceId]);
+    await db.any(markContributionSkippedQuery, [contributor_id, datasetId, language]);
 }
 
 const getContributorId = async (userId, userName, age = '', gender = '', motherTongue = '') => {
