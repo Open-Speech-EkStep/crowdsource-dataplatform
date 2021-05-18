@@ -359,7 +359,7 @@ const cumulativeTimeLineQueries = {
     "quarterly": quarterlyTimelineCumulative
 }
 
-const getTimeline = (language = "", timeframe, type) => {
+const getTimeline = (timeframe, type, language = "") => {
     timeframe = timeframe.toLowerCase();
     const typeFilter = `type='${type}'`;
     if (language.length !== 0) {
@@ -374,7 +374,7 @@ const getTimeline = (language = "", timeframe, type) => {
     }
 }
 
-const getGenderGroupData = (language = '', type) => {
+const getGenderGroupData = (type, language = '') => {
     let languageFilter = `type = '${type}'`;
     if (language.length !== 0) {
         languageFilter += ` and language iLike '${language}'`
@@ -383,7 +383,7 @@ const getGenderGroupData = (language = '', type) => {
     return db.any(genderGroupContributions, filter);
 }
 
-const getAgeGroupData = async (language = '', type) => {
+const getAgeGroupData = async (type, language = '') => {
     let languageFilter = `type = '${type}'`;
     if (language.length !== 0) {
         languageFilter += ` and language iLike '${language}'`
