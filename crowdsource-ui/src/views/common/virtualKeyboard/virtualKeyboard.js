@@ -29,6 +29,8 @@ const showKeyboard = function (language) {
     keyboard.setInput(event.target.value);
     const $submitEditButton = $("#submit-edit-button");
     const $cancelEditButton = $("#cancel-edit-button");
+    localStorage.setItem("physicalKeyboard",true);
+    $('#keyboardBox').addClass('d-none');
 
     if(event.target.value.length > 0) {
       $cancelEditButton.removeAttr('disabled');
@@ -47,6 +49,7 @@ const showKeyboard = function (language) {
     document.querySelector(".edit-area").value = input;
     const $submitEditButton = $("#submit-edit-button");
     const $cancelEditButton = $("#cancel-edit-button");
+    localStorage.setItem("physicalKeyboard",false);
     if(input.length > 0) {
       $submitEditButton.removeAttr('disabled');
       $cancelEditButton.removeAttr('disabled');
