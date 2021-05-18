@@ -29,8 +29,16 @@ a {
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
     padding: 24px;
-    box-shadow: inset 0px 0px 8px #007BFF;
-    border: 2px solid #007BFF;
+    border: 2px solid #ccc;
+}
+
+#edit-text .form-control:disabled {
+    background-color: transparent !important;
+}
+
+.edit-text {
+    box-shadow: inset 0px 0px 8px #007BFF !important;
+    border: 2px solid #007BFF !important;
 }
 
 .text-area {

@@ -51,13 +51,13 @@
                 <div class="col-md-8 col-sm-10 text-center prompt"><label class="h1 font-weight-normal" id="sentenceLabel"></label></div>
             </div>
             <div class="row justify-content-center mb-5 mb-lg-0 mt-5 d-none" id="editor-row">
-                <div class="col-lg-5 col-md-5 col-12 original-text">
+                <div class="col-lg-4 col-md-5 col-12 original-text">
                     <label><%- __('Original Text')%></label>
                     <div id="original-text">
 
                     </div>
                 </div>
-                <div class="form-group green-border-focus col-lg-5 col-md-5 col-12 m-0" id="edit-text">
+                <div class="form-group green-border-focus col-lg-4 col-md-5 col-12 m-0" id="edit-text">
                     <label><%- __('Your Edit') %></label>
                     <div class="arrow-right"></div>
                     <textarea class="form-control edit-area" id="edit" rows="3" style="resize:none"></textarea>
@@ -182,7 +182,7 @@
             <%- include ../common/virtualKeyboardBtn.ejs %>
         </div>
 
-        <%- include('../common/report.ejs',{"REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
+        <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the sentence", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <%- include('../common/footer.ejs',{path:"../"}) %>
         <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>

@@ -104,12 +104,16 @@ const setAudioPlayer = function () {
   play.on('click', () => {
     hideElement($('#default_line'))
     playAudio();
+    $("#edit").removeAttr("disabled");
+    $("#edit-text").addClass("edit-text");
   });
 
   pause.on('click', pauseAudio);
 
   replay.on('click', () => {
     replayAudio();
+    $("#edit").removeAttr("disabled");
+    $("#edit-text").addClass("edit-text");
   });
 
   function playAudio() {
@@ -243,6 +247,8 @@ function addListeners() {
 
   $('#submit-edit-button').on('click', () => {
     setInput("");
+    $("#edit").attr("disabled", true);
+    $("#edit-text").removeClass("edit-text");
     hideElement($('#keyboardBox'));
     hideElement($('#cancel-edit-button'));
     hideElement($('#submit-edit-button'))
@@ -278,6 +284,8 @@ function addListeners() {
 
 
   $skipButton.on('click', () => {
+    $("#edit").attr("disabled", true);
+    $("#edit-text").removeClass("edit-text");
     if ($('#pause').hasClass('d-none')) {
       $('#pause').trigger('click');
     }
