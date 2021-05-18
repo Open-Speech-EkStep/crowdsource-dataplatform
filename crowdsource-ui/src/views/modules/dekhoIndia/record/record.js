@@ -12,7 +12,7 @@ const {
 } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton} = require('../common/common');
 const { showUserProfile } = require('../common/header');
 
 const speakerDetailsKey = 'speakerDetails';
@@ -460,7 +460,7 @@ const executeOnLoad = function () {
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   $('#keyboardLayoutName').text(language);
-  showKeyboard(language.toLowerCase());
+  showKeyboard(language.toLowerCase(),enableCancelButton,disableCancelButton);
   hideElement($('#keyboardBox'));
 
   if (language) {

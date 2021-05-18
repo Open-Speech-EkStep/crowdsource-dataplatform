@@ -11,7 +11,7 @@ const {
 } = require('../common/utils');
 const {LIKHO_FROM_LANGUAGE,LIKHO_TO_LANGUAGE,  LOCALE_STRINGS,CURRENT_MODULE, MODULE, ALL_LANGUAGES} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton} = require('../common/common');
 const {showUserProfile} = require('../common/header');
 const speakerDetailsKey = 'speakerDetails';
 
@@ -485,7 +485,7 @@ function executeOnLoad() {
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   const translationLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
-  showKeyboard(translationLanguage.toLowerCase());
+  showKeyboard(translationLanguage.toLowerCase(),enableCancelButton,disableCancelButton);
   hideElement($('#keyboardBox'));
   getLocaleString().then(() => {
     executeOnLoad();

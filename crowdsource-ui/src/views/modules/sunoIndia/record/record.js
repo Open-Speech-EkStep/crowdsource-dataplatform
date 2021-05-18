@@ -13,7 +13,7 @@ const {
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {showUserProfile} = require('../common/header');
-const {isKeyboardExtensionPresent} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
 
 const sunoCountKey = 'sunoCount';
@@ -196,7 +196,7 @@ const closeEditor = function () {
 }
 
 const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-showKeyboard(contributionLanguage.toLowerCase());
+showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancelButton);
 
 function markContributionSkipped() {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
