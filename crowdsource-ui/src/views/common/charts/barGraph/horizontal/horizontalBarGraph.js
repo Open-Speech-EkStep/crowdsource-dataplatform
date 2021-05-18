@@ -19,7 +19,6 @@ function constructChart(responseData, xAxisLabel, yAxisLabel, type) {
     });
   }
   chart.data = response;
-  console.log(response);
   const categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
   categoryAxis.dataFields.category = yAxisLabel;
   categoryAxis.renderer.grid.template.location = 0;

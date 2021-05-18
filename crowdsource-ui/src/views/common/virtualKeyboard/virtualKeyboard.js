@@ -2,9 +2,11 @@
  * simple-keyboard documentation
  * https://github.com/hodgef/simple-keyboard
  */
+
+
 const {keyboardLayout} = require('./keyboardLayout');
 let keyboard;
-const showKeyboard = function (language) {
+const showKeyboard = function (language, callBack1=()=>{} , callBack2=()=>{}) {
   let Keyboard = window.SimpleKeyboard.default;
 
   /**
@@ -28,18 +30,17 @@ const showKeyboard = function (language) {
   document.querySelector(".edit-area").addEventListener("input", event => {
     keyboard.setInput(event.target.value);
     const $submitEditButton = $("#submit-edit-button");
-    const $cancelEditButton = $("#cancel-edit-button");
     localStorage.setItem("physicalKeyboard",true);
     $('#keyboardBox').addClass('d-none');
 
     if(event.target.value.length > 0) {
-      $cancelEditButton.removeAttr('disabled');
+      callBack1();
       $submitEditButton.removeAttr('disabled');
       const children = $submitEditButton.children().children();
       children[0].setAttribute("fill", '#007BFF');
     }else {
+      callBack2()
       $submitEditButton.attr('disabled',true);
-      $cancelEditButton.attr('disabled',true);
       const children = $submitEditButton.children().children();
       children[0].setAttribute("fill", '#D7D7D7');
     }
@@ -48,16 +49,15 @@ const showKeyboard = function (language) {
   function onChange(input) {
     document.querySelector(".edit-area").value = input;
     const $submitEditButton = $("#submit-edit-button");
-    const $cancelEditButton = $("#cancel-edit-button");
     localStorage.setItem("physicalKeyboard",false);
     if(input.length > 0) {
+      callBack1();
       $submitEditButton.removeAttr('disabled');
-      $cancelEditButton.removeAttr('disabled');
       const children = $submitEditButton.children().children();
       children[0].setAttribute("fill", '#007BFF');
     } else {
+      callBack2();
       $submitEditButton.attr('disabled',true);
-      $cancelEditButton.attr('disabled',true);
       const children = $submitEditButton.children().children();
       children[0].setAttribute("fill", '#D7D7D7');
     }
