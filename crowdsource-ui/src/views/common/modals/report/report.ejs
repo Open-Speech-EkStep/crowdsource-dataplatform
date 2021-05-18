@@ -11,7 +11,7 @@
             </div>
             <div class="modal-body">
                 <div class="mb-4">
-                    <%= __('Help us understand what’s wrong with the sentence') %>
+                    <%= __(reportPara) %>
                 </div>
                 <% REPORT.forEach(option =>{ %>
                     <div class="mb-4">
@@ -36,7 +36,7 @@
                 </div>
                 <textarea maxlength="1000" id="other_text" class="w-100 p-3 other-reason mb-4" rows="3" placeholder="<%= __('Please specify the reason (Optional)')%>"></textarea>
                 <div class="d-flex justify-content-center">
-                    <button id="report_submit_id" class="btn btn-primary w-75" disabled="disabled"><%= __('SUBMIT')%></button>
+                    <button id="report_submit_id" class="btn btn-primary w-75" disabled="disabled"><%= __('Submit')%></button>
                 </div>
             </div>
         </div>
