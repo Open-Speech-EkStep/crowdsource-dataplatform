@@ -143,14 +143,17 @@ const updateMediaWithValidatedState = `update dataset_row set state =
 (select value from configurations where config_name = 'validation_count');`
 
 const updateContributionDetails = `insert into contributions (action, dataset_row_id, date, contributed_by, state_region, country, media)
-select 'completed', $1, now(), $2, $6, $7, json_build_object('data', $3, 'type', 'audio', 'language', $4, 'duration', $5);`;
+select 'completed', $1, now(), $2, $6, $7, json_build_object('data', $3, 'type', 'audio', 'language', $4, 'duration', $5) where (select count(*) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') >= 
+(select value from configurations where config_name = 'contribution_count');`;
 
 const updateContributionDetailsWithUserInput = `insert into "contributions" ("action","dataset_row_id", "date", "contributed_by", "state_region", "country", "media")
-select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4);`;
+select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4) where (select count(*) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') >= 
+(select value from configurations where config_name = 'contribution_count');`;
 
 const updateMaterializedViews = 'REFRESH MATERIALIZED VIEW contributions_and_demo_stats;REFRESH MATERIALIZED VIEW daily_stats_complete;REFRESH MATERIALIZED VIEW gender_group_contributions;REFRESH MATERIALIZED VIEW age_group_contributions;REFRESH MATERIALIZED VIEW language_group_contributions;REFRESH MATERIALIZED VIEW state_group_contributions;REFRESH MATERIALIZED VIEW language_and_state_group_contributions;'
 
-const updateMediaWithContributedState = `update dataset_row set state='contributed' where "dataset_row_id"=$1`;
+const updateMediaWithContributedState = `update dataset_row set state='contributed' where "dataset_row_id"=$1 and state is null and (select count(*) from contributions where dataset_row_id=$1 and action='completed') >= 
+(select value from configurations where config_name = 'contribution_count')`;
 
 const getCountOfTotalSpeakerAndRecordedAudio = `select  count(DISTINCT(con.*)), 0 as index, 0 as duration \
 from "contributors" con inner join "contributions" cont on con.contributor_id = cont.contributed_by and cont.action=\'completed\' inner join "dataset_row" s on  s."dataset_row_id" = cont."dataset_row_id"  where s.language = $1 \
