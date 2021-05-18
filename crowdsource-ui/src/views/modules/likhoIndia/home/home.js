@@ -1,10 +1,8 @@
 const { onActiveNavbar } = require('../common/header');
-const { setSpeakerData } = require('../common/contributionStats');
-const { getContributedAndTopLanguage, redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,showByHoursChart } = require('../common/common');
+const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards } = require('../common/common');
 const {
   toggleFooterPosition,
   getLocaleString,
-  performAPIRequest
 } = require('../common/utils');
 const {
   setSpeakerDetails,
@@ -12,55 +10,17 @@ const {
   setUserNameOnInputFocus,
   setStartRecordingBtnOnClick
 } = require('../common/userDetails');
+const {getStatsSummary} = require('../common/commonHome')
 
 const { updateHrsForCards } = require('../common/card')
 
 const {
-  TOP_LANGUAGES_BY_HOURS,
-  TOP_LANGUAGES_BY_SPEAKERS,
-  AGGREGATED_DATA_BY_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
   ALL_LANGUAGES,
   LIKHO_FROM_LANGUAGE,
   LIKHO_TO_LANGUAGE
 } = require('../common/constants');
-
-function getStatistics(response) {
-  const $speakersData = $("#speaker-data");
-  const $speakersDataLoader = $speakersData.find('#loader1');
-  const $speakerDataDetails = $speakersData.find('#contribution-details');
-
-  $speakersDataLoader.removeClass('d-none');
-  $speakerDataDetails.addClass('d-none');
-
-  setSpeakerData([response], null, "likho");
-
-  $speakersDataLoader.addClass('d-none');
-  $speakerDataDetails.removeClass('d-none');
-
-}
-
-const getStatsSummary = function () {
-  performAPIRequest('/stats/summary/parallel')
-    .then(response => {
-      const languages = getContributedAndTopLanguage(response.top_languages_by_hours, "likho");
-      localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-      showByHoursChart(MODULE.likho.value);
-      localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
-      localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-      getStatistics(response.aggregate_data_count[0]);
-      if (response.top_languages_by_hours.length === 0) {
-        $("#bar_charts_container").hide();
-        $("#view_all_btn").hide();
-      } else {
-        $("#bar_charts_container").show();
-        $("#view_all_btn").show();
-      }
-    }).catch(err => {
-      console.log(err)
-    });
-}
 
 const addLanguagesIn = function (id, list) {
   const selectBar = document.getElementById(id);
@@ -156,7 +116,7 @@ function initializeBlock() {
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
       showFucntionalCards('parallel', fromLanguage, toLanguage);
-      getStatsSummary();
+      getStatsSummary('/stats/summary/parallel',MODULE.likho.value);
     });
   })
 
@@ -171,7 +131,7 @@ function initializeBlock() {
   setSpeakerDetails(speakerDetailsKey, $userName);
   setUserNameOnInputFocus();
   setUserModalOnShown($userName);
-  getStatsSummary();
+  getStatsSummary('/stats/summary/parallel',MODULE.likho.value);
 
 }
 
