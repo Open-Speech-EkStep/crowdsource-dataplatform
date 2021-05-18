@@ -1,7 +1,6 @@
 const { onActiveNavbar } = require('../common/header');
-const {setSpeakerData} = require('../common/contributionStats');
-const {getContributedAndTopLanguage,redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,showByHoursChart} = require('../common/common');
-const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
+const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages} = require('../common/common');
+const {toggleFooterPosition, getLocaleString,updateLocaleLanguagesDropdown} = require('../common/utils');
 const {
   setSpeakerDetails,
   setUserModalOnShown,
@@ -10,110 +9,15 @@ const {
 } = require('../common/userDetails');
 
 const {setLangNavBar} = require('../common/languageNavBar')
+const {getStatsSummary,getDefaultLang,setDefaultLang} = require('../common/commonHome');
 
 const {
   DEFAULT_CON_LANGUAGE,
-  TOP_LANGUAGES_BY_HOURS,
-  TOP_LANGUAGES_BY_SPEAKERS,
-  AGGREGATED_DATA_BY_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
   MODULE
 } = require('../common/constants');
 
-function getStatistics(response) {
-  const $speakersData = $("#speaker-data");
-  const $speakersDataLoader = $speakersData.find('#loader1');
-  const $speakerDataDetails = $speakersData.find('#contribution-details');
-
-  $speakersDataLoader.removeClass('d-none');
-  $speakerDataDetails.addClass('d-none');
-
-  setSpeakerData([response], null, "dekho");
-
-  $speakersDataLoader.addClass('d-none');
-  $speakerDataDetails.removeClass('d-none');
-
-}
-
-const getDefaultTargetedDiv = function (key, value, $sayListenLanguage) {
-  let targetIndex = 0;
-  const $sayListenLanguageItems = $sayListenLanguage.children();
-  $sayListenLanguageItems.each(function (index, element) {
-    if (element.getAttribute('value') === DEFAULT_CON_LANGUAGE) {
-      targetIndex = index;
-    }
-  });
-  $sayListenLanguageItems.each(function (index, element) {
-    if (element.getAttribute(key) === value) {
-      targetIndex = index;
-    }
-  });
-
-  return $sayListenLanguageItems[targetIndex];
-}
-
-const getDefaultLang = function (){
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const $sayListenLanguage = $('#say-listen-language');
-
-  if (!contributionLanguage) {
-    const $homePage = document.getElementById('home-page');
-    const defaultLangId = $homePage.getAttribute('default-lang');
-    const targetedDiv = getDefaultTargetedDiv('id', defaultLangId, $sayListenLanguage);
-    const language = targetedDiv.getAttribute("value");
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-    return language;
-  }
-  return contributionLanguage;
-}
-
-const setDefaultLang = function () {
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const $sayListenLanguage = $('#say-listen-language');
-  const $languageNavBar = $('#language-nav-bar')
-  const $navBarLoader = $('#nav-bar-loader');
-  $navBarLoader.addClass('d-none');
-  $languageNavBar.removeClass('d-none');
-
-  if (!contributionLanguage) {
-    const $homePage = document.getElementById('home-page');
-    const defaultLangId = $homePage.getAttribute('default-lang');
-    const targetedDiv = getDefaultTargetedDiv('id', defaultLangId, $sayListenLanguage);
-    const language = targetedDiv.getAttribute("value");
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-    // updateHrsForCards(language);
-    updateLocaleLanguagesDropdown(language);
-    setLangNavBar(targetedDiv, language, $languageNavBar);
-    return;
-  }
-  const targetedDiv = getDefaultTargetedDiv('value', contributionLanguage, $sayListenLanguage);
-  // updateHrsForCards(contributionLanguage);
-  updateLocaleLanguagesDropdown(contributionLanguage);
-  setLangNavBar(targetedDiv, contributionLanguage, $languageNavBar);
-}
-
-const getStatsSummary = function () {
-  performAPIRequest('/stats/summary/ocr')
-    .then(response => {
-      const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.dekho.value);
-      localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-      showByHoursChart(MODULE.dekho.value);
-      localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
-      localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-      getStatistics(response.aggregate_data_count[0]);
-      setDefaultLang();
-      if(response.top_languages_by_hours.length === 0) {
-        $("#bar_charts_container").hide();
-        $("#view_all_btn").hide();
-      } else {
-        $("#bar_charts_container").show();
-        $("#view_all_btn").show();
-      }
-    }).catch(err=>{
-    console.log(err)
-  });
-}
 
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
@@ -173,22 +77,22 @@ function initializeBlock() {
   setUserNameOnInputFocus();
   setStartRecordingBtnOnClick();
   setUserModalOnShown($userName);
-  getStatsSummary();
+  getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, setDefaultLang);
 
 }
 
 $(document).ready(function () {
-  localStorage.setItem(CURRENT_MODULE,'dekho');
+  localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
   getAvailableLanguages("ocr");
   getLocaleString().then(()=>{
     initializeBlock();
   }).catch(err => {
     initializeBlock();
   });
-  onActiveNavbar('dekho');
+  onActiveNavbar(MODULE.dekho.value);
 });
 
 
 module.exports = {
-  getDefaultTargetedDiv,
+  initializeBlock,
 };
