@@ -108,7 +108,7 @@ limit 5`;
 left join contributors con on con.contributor_identifier=$1 and user_name=$2
 left join contributions cont on cont.dataset_row_id=dr.dataset_row_id and cont.contributed_by=con.contributor_id 
 where dr.media->>'language'=$4 and difficulty_level=$3 and type=$5 
-and (((state is null) or ((state='contributed' or state='validated') and not exists(select 1 from contributions where dataset_row_id=dr.dataset_row_id and contributions.media->>'language'=$6))) 
+and (((state is null) or ((state='contributed' or state='validated') and not exists (select 1 from contributions where dataset_row_id=dr.dataset_row_id and contributions.media->>'language'=$6))) 
   and (cont.action is null or (coalesce(cont.action,'')='skipped' and cont.contributed_by!=con.contributor_id)))
  group by dr."dataset_row_id", dr.media->>'data' order by dr."dataset_row_id" limit 5`;
 
@@ -127,11 +127,12 @@ const getContributionListForParallel = `
     select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id 
         from contributions con 
         inner join contributors cont on con.contributed_by=cont.contributor_id and cont.contributor_id!=$1
-        inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.state='contributed' 
-      and ds.type=$2 and con.media->>'language'=$4
-        left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' 
+        inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and (ds.state='contributed' or ds.state='validated') and ds.type=$2 and con.media->>'language'=$4 
+        left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' and con.media ->> 'language' = $4
+        inner join configurations conf on conf.config_name='validation_count' 
         where  con.action='completed' and ds.media->>'language'=$3 and (COALESCE(val.action, '')!='skip' or COALESCE(val.validated_by, '')!=$1::text) and COALESCE(val.validated_by, '')!=$1::text 
-      group by con.dataset_row_id, ds.media->>'data', con.contribution_id 
+      group by con.dataset_row_id, ds.media->>'data', con.contribution_id, conf.value 
+      having count(val.*)<conf.value
         order by count(val.*) desc, con.contribution_id limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, action, validated_by, date, state_region, country) 
