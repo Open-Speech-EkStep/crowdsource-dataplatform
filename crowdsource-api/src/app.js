@@ -51,12 +51,6 @@ const {
 // const ddos = new Ddos({ burst: 12, limit: 70 })
 // app.use(ddos.express);
 
-// const { I18n } = require('i18n');
-// const i18n = new I18n({
-//     locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te', 'doi', 'mai', 'ur', 'kr', 'kd', 'mnibn', 'mnimm', 'satol', 'satdv', 'sa'],
-//     directory: '../crowdsource-ui/locales',
-//     cookie: 'i18n'
-// })
 
 app.enable('trust proxy');
 
@@ -132,7 +126,6 @@ app.get('/changeLocale/:locale', function (req, res) {
     }
     res.redirect(req.headers.referer);
 });
-// app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
     res.redirect('en/home.html');
@@ -376,10 +369,6 @@ router.get('/target-info/:type/:sourceLanguage', (req, res) => getTargetInfo(req
 require('./dashboard-api')(router);
 
 app.use('/', router);
-
-// app.get('*', (req, res) => {
-//     res.render('../crowdsource-ui/src/views/not-found.ejs');
-// });
 
 function buildWadaSnrCommand(filePath) {
     return `${WADASNR_BIN_PATH}/WADASNR -i ${filePath} -t ${WADASNR_BIN_PATH}/Alpha0.400000.txt -ifmt mswav`;

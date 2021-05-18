@@ -300,8 +300,7 @@ const getAllInfo = function (language) {
 
 const getTypeFilter = (type) => {
     const typeFilter = `type='${type}'`;
-    let filter = pgp.as.format('$1:raw', [typeFilter])
-    return filter;
+    return pgp.as.format('$1:raw', [typeFilter])
 }
 
 const getTopLanguageByHours = (type) => {
@@ -451,8 +450,7 @@ const getContributorId = async (userId, userName, age = '', gender = '', motherT
         contributorInfo = await db.one(addContributorQuery, [userId, userName, age, gender, motherTongue]);
     }
 
-    const contributor_id = contributorInfo.contributor_id;
-    return contributor_id;
+    return contributorInfo.contributor_id;
 }
 
 const createBadge = async (contributor_id, language, currentMilestoneData, source, type) => {
