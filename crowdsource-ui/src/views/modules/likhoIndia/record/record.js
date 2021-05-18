@@ -13,6 +13,7 @@ const {LIKHO_FROM_LANGUAGE,LIKHO_TO_LANGUAGE,  LOCALE_STRINGS,CURRENT_MODULE, MO
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton} = require('../common/common');
 const {showUserProfile} = require('../common/header');
+const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const speakerDetailsKey = 'speakerDetails';
 
 const currentIndexKey = 'likhoCurrentIndex';
@@ -25,7 +26,6 @@ window.likhoIndia = {};
 function uploadToServer(cb) {
   const fd = new FormData();
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
-  console.log(localSpeakerDataParsed);
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
@@ -60,7 +60,7 @@ let currentIndex;
 function getNextSentence() {
   if (currentIndex < likhoIndia.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex);
+    updateProgressBar(currentIndex,likhoIndia.sentences.length);
     setSentence(likhoIndia.sentences[currentIndex].media_data);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
@@ -70,14 +70,6 @@ function getNextSentence() {
     localStorage.setItem(currentIndexKey, currentIndex);
     showThankYou();
   }
-}
-
-const updateProgressBar = (index) => {
-  const $progressBar = $("#progress_bar");
-  const multiplier = 10 * (10 / likhoIndia.sentences.length);
-  $progressBar.width(index * multiplier + '%');
-  $progressBar.prop('aria-valuenow', index);
-  setCurrentSentenceIndex(index);
 }
 
 const closeEditor = function () {
@@ -271,16 +263,6 @@ function getCurrentIndex(lastIndex) {
   return getValue(currentIndexInStorage, lastIndex);
 }
 
-const setCurrentSentenceIndex = (index) => {
-  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
-  currentSentenceLbl.innerText = index;
-}
-
-const setTotalSentenceIndex = (index) => {
-  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-  totalSentencesLbl.innerText = index;
-}
-
 let selectedReportVal = '';
 const initialize = function () {
   const totalItems = likhoIndia.sentences.length;
@@ -325,7 +307,7 @@ const initialize = function () {
     setSentence(translation.media_data);
     setCurrentSentenceIndex(currentIndex);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex)
+    updateProgressBar(currentIndex,likhoIndia.sentences.length)
   }
 };
 
