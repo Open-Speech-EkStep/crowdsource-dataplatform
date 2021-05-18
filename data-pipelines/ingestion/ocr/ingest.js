@@ -5,9 +5,9 @@ const { conn, insertMaster } = require('../common/dbUtils')
 const ingest1 = async (datasetId, datasetType, client, datset_base_path, language, png_paths, paired) => {
     const values = png_paths.map(path => {
         const media = {
-            "data": `"${datset_base_path}/${path}"`,
+            "data": `${datset_base_path}/${path}`,
             "type": "image",
-            "language": `"${language}"`
+            "language": `${language}`
         }
         return `('medium', '${datasetType}',
                 '${JSON.stringify(media)}', 
@@ -38,9 +38,9 @@ const ingest2 = async (imageToIdDict, client, datset_base_path, language, imageT
     values = []
     for (const [image, text] of Object.entries(imageToTextDict)) {
         const media = {
-            "data": `"${text}"`,
+            "data": `${text}`,
             "type": "text",
-            "language": `"${language}"`
+            "language": `${language}`
         }
         values.push(`(${imageToIdDict[image]}, ${contributorId},
             '${JSON.stringify(media)}', 
