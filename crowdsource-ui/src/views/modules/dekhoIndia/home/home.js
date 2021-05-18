@@ -1,7 +1,6 @@
-const {constructChart}= require('../common/horizontalBarGraph');
 const { onActiveNavbar } = require('../common/header');
 const {setSpeakerData} = require('../common/contributionStats');
-const {getContributedAndTopLanguage,redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages} = require('../common/common');
+const {getContributedAndTopLanguage,redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,showByHoursChart} = require('../common/common');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString,performAPIRequest} = require('../common/utils');
 const {
   setSpeakerDetails,
@@ -35,21 +34,6 @@ function getStatistics(response) {
   $speakersDataLoader.addClass('d-none');
   $speakerDataDetails.removeClass('d-none');
 
-}
-
-
-const chartReg = {};
-function showByHoursChart() {
-  if (chartReg["chart"]) {
-    chartReg["chart"].dispose();
-  }
-  const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-  constructChart(
-    JSON.parse(topLanguagesByHoursData),
-    "total_contribution_count",
-    "language",
-    "dekho"
-  );
 }
 
 const getDefaultTargetedDiv = function (key, value, $sayListenLanguage) {
@@ -114,7 +98,7 @@ const getStatsSummary = function () {
     .then(response => {
       const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.dekho.value);
       localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-      showByHoursChart();
+      showByHoursChart(MODULE.dekho.value);
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
       getStatistics(response.aggregate_data_count[0]);

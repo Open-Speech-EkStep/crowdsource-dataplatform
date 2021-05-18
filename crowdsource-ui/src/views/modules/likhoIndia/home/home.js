@@ -1,7 +1,6 @@
-const { constructChart } = require('../common/horizontalBarGraph');
 const { onActiveNavbar } = require('../common/header');
 const { setSpeakerData } = require('../common/contributionStats');
-const { getContributedAndTopLanguage, redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards } = require('../common/common');
+const { getContributedAndTopLanguage, redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,showByHoursChart } = require('../common/common');
 const {
   toggleFooterPosition,
   getLocaleString,
@@ -42,27 +41,12 @@ function getStatistics(response) {
 
 }
 
-const chartReg = {};
-
-function showByHoursChart() {
-  if (chartReg["chart"]) {
-    chartReg["chart"].dispose();
-  }
-  const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-  constructChart(
-    JSON.parse(topLanguagesByHoursData),
-    "total_contribution_count",
-    "language",
-    "likho"
-  );
-}
-
 const getStatsSummary = function () {
   performAPIRequest('/stats/summary/parallel')
     .then(response => {
       const languages = getContributedAndTopLanguage(response.top_languages_by_hours, "likho");
       localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-      showByHoursChart();
+      showByHoursChart(MODULE.likho.value);
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
       getStatistics(response.aggregate_data_count[0]);

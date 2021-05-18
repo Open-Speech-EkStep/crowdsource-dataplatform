@@ -30,7 +30,8 @@ function showByHoursChart(type) {
   constructChart(
     JSON.parse(topLanguagesByHoursData),
     type == "suno" ? "total_contributions" : "total_contribution_count",
-    "language"
+    "language",
+    type
   );
 }
 
