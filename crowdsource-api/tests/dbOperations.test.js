@@ -32,7 +32,8 @@ const {
     getContributionLanguagesQuery,
     hasTargetQuery,
     isAllContributedQuery,
-    getDataRowInfo
+    getDataRowInfo,
+    getOrderedUniqueMediaQuery
 } = require('./../src/dbQuery');
 
 const mockDB = {
@@ -75,7 +76,7 @@ describe("Running tests for dbOperations", () => {
 
     describe('tests for getMediaBasedOnAge', () => {
         const testUserId = "abcdefghi", testUsername = "test_username";
-        const language = "Hindi", ageGroup = "10-20";
+        const language = "Hindi", ageGroup = "10-20", toLanguage = "Tamil"
         const mediumLabel = 'medium';
 
         afterEach(() => {
@@ -89,23 +90,23 @@ describe("Running tests for dbOperations", () => {
                 { sentenceId: 3, media_data: "Mock sentence 3" }
             ];
 
-            spyDBmany.mockReturnValue(mockResult);
+            spyDBany.mockReturnValue(mockResult);
 
-            const result = dbOperations.getMediaBasedOnAge(ageGroup, testUserId, testUsername, language, type);
+            const result = dbOperations.getMediaBasedOnAge(ageGroup, testUserId, testUsername, language, type, toLanguage);
 
             expect(result).toEqual(mockResult);
         });
 
         test('should call query with label medium for kids', () => {
-            dbOperations.getMediaBasedOnAge(ageGroup, testUserId, testUsername, language, type)
+            dbOperations.getMediaBasedOnAge(ageGroup, testUserId, testUsername, language, type, toLanguage)
 
-            expect(spyDBmany).toHaveBeenCalledWith(getOrderedMediaQuery, [testUserId, testUsername, mediumLabel, language, type, expect.anything()]);
+            expect(spyDBany).toHaveBeenCalledWith(getOrderedUniqueMediaQuery, [testUserId, testUsername, mediumLabel, language, type, expect.anything()]);
         });
 
         test('should call query with label medium for adults', () => {
-            dbOperations.getMediaBasedOnAge(ageGroup, testUserId, testUsername, language, type)
+            dbOperations.getMediaBasedOnAge(ageGroup, testUserId, testUsername, language, type, toLanguage)
 
-            expect(spyDBmany).toHaveBeenCalledWith(getOrderedMediaQuery, [testUserId, testUsername, mediumLabel, language, type, expect.anything()]);
+            expect(spyDBany).toHaveBeenCalledWith(getOrderedUniqueMediaQuery, [testUserId, testUsername, mediumLabel, language, type, expect.anything()]);
         })
     });
 
@@ -336,7 +337,7 @@ describe("Running tests for dbOperations", () => {
         const type = 'text'
         const userName = 'name';
         const contributorId = 1;
-        const req = { params: { type: type }, query: { from: language, userName }, cookies: { userId } };
+        const req = { params: { type: type }, query: { from: language, username: userName }, cookies: { userId } };
         const spyDBany = jest.spyOn(mockDB, 'any')
         const spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
         when(spyDBany).calledWith(getContributionListQuery, [contributorId, type, language, '']).mockReturnValue(Promise.resolve())
@@ -430,11 +431,12 @@ describe("Running tests for dbOperations", () => {
         const datasetId = '456'
         const userName = 'test user'
         const contributor_id = 10
+        const language = 'Hindi';
         when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
 
-        await dbOperations.markContributionSkipped(userId, datasetId, userName);
+        await dbOperations.markContributionSkipped(userId, datasetId, userName, language);
 
-        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [contributor_id, datasetId])
+        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [contributor_id, datasetId, language])
     });
 
     test('Get Rewards info', () => {

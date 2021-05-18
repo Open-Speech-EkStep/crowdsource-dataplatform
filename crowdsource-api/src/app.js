@@ -196,7 +196,8 @@ router.post('/report', async (req, res) => {
 });
 
 router.post('/skip', validateInputForSkip, (req, res) => {
-    markContributionSkipped(req.cookies.userId, req.body.sentenceId, req.body.userName)
+    const language = req.body.language || ''
+    markContributionSkipped(req.cookies.userId, req.body.sentenceId, req.body.userName, language)
         .then(() => {
             return res.send({ statusCode: 200, message: 'Skipped successfully.' });
         })
