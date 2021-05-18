@@ -44,7 +44,8 @@ const {
     getContributionLanguagesQuery,
     getDatasetLanguagesQuery,
     hasTargetQuery,
-    isAllContributedQuery
+    isAllContributedQuery,
+    getDataRowInfo
 } = require('./dbQuery');
 
 const {
@@ -92,9 +93,17 @@ let cn = {
 
 const db = pgp(cn);
 
+const checkLanguageValidity = async (datasetId, language) => {
+    const dataRowInfo = await db.oneOrNone(getDataRowInfo, [datasetId]);
+
+    const invalidLanguage = dataRowInfo.type == 'parallel' ? dataRowInfo.language == language : dataRowInfo.language != language;
+
+    return !invalidLanguage;
+}
+
 const updateDbWithAudioPath = async (
     audioPath,
-    sentenceId,
+    datasetId,
     userId,
     userName,
     state,
@@ -106,12 +115,18 @@ const updateDbWithAudioPath = async (
     motherTongue,
     cb
 ) => {
+    const validLanguage = await checkLanguageValidity(datasetId, language)
+    if (!validLanguage) {
+        cb(400, { error: 'Bad Request' });
+        return
+    }
+
     const roundedAudioDuration = audioDuration ? Number(Number(audioDuration).toFixed(3)) : 0;
 
-    const contributor_id = await getContributorId(userId, userName, age, gender, motherTongue,)
+    const contributor_id = await getContributorId(userId, userName, age, gender, motherTongue)
 
     db.any(updateContributionDetails, [
-        sentenceId,
+        datasetId,
         contributor_id,
         audioPath,
         language,
@@ -120,7 +135,7 @@ const updateDbWithAudioPath = async (
         country
     ])
         .then(() => {
-            db.none(updateMediaWithContributedState, [sentenceId]).then();
+            db.none(updateMediaWithContributedState, [datasetId]).then();
             db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
@@ -201,7 +216,7 @@ const updateAndGetMedia = function (req, res) {
 
 const getContributionList = async function (req, res) {
     const fromLanguage = req.query.from;
-    const toLanguage = req.query.to;
+    const toLanguage = req.query.to || '';
     const type = req.params.type;
     const userId = req.cookies.userId;
     const { userName = "" } = req.query;
@@ -536,17 +551,22 @@ const updateDbWithUserInput = async (
     userId,
     language,
     userInput,
-    sentenceId,
+    datasetId,
     state,
     country,
     age,
     gender,
     motherTongue,
     cb) => {
+    const validLanguage = await checkLanguageValidity(datasetId, language)
+    if (!validLanguage) {
+        cb(400, { error: 'Bad Request' });
+        return
+    }
     const contributor_id = await getContributorId(userId, userName, age, gender, motherTongue,)
 
     db.any(updateContributionDetailsWithUserInput, [
-        sentenceId,
+        datasetId,
         contributor_id,
         userInput,
         language,
@@ -554,7 +574,7 @@ const updateDbWithUserInput = async (
         country
     ])
         .then(() => {
-            db.none(updateMediaWithContributedState, [sentenceId]).then();
+            db.none(updateMediaWithContributedState, [datasetId]).then();
             db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
@@ -582,7 +602,7 @@ const getAvailableLanguages = async (req, res) => {
 
 const getTargetInfo = async (req, res) => {
     const { type, sourceLanguage } = req.params;
-    const { targetLanguage = ''} = req.query;
+    const { targetLanguage = '' } = req.query;
     let hasTarget = false, isAllContributed = false;
     const toLanguage = type == 'parallel' ? targetLanguage : sourceLanguage;
     hasTarget = (await db.one(hasTargetQuery, [type, sourceLanguage, toLanguage])).result;

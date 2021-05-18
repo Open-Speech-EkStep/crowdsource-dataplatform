@@ -23,15 +23,17 @@ const convertIntoMB = (fileSizeInByte) => {
 const validateUserInputAndFile = function (req, res, next) {
     const speakerDetails = req.body.speakerDetails;
     const speakerDetailsJson = JSON.parse(speakerDetails);
-    const userName = speakerDetailsJson.userName;
-    const isInvalidParams = userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName);
+    const isInvalidParams = !speakerDetailsJson.userName || speakerDetailsJson.userName.length > MAX_LENGTH || MOBILE_REGEX.test(speakerDetailsJson.userName) || EMAIL_REGEX.test(speakerDetailsJson.userName);
+
     const MIN_INPUT_LENGTH = 5;
+    const allLanguages = LANGUAGES.map(lang => lang.value)
 
     const invalidMotherTongue = (speakerDetailsJson.motherTongue && !MOTHER_TONGUE.includes(speakerDetailsJson.motherTongue));
     const invalidGender = (speakerDetailsJson.gender && !GENDER.includes(speakerDetailsJson.gender));
     const invalidAgeGroup = (speakerDetailsJson.age && !AGE_GROUP.includes(speakerDetailsJson.age));
+    const invalidLanguage = (!req.body.language || !allLanguages.includes(req.body.language))
 
-    if (invalidAgeGroup || invalidGender || invalidMotherTongue)
+    if (invalidAgeGroup || invalidGender || invalidMotherTongue || invalidLanguage)
         return res.status(400).send("Bad request");
 
     let isInvalidReqParams = false;
@@ -78,9 +80,9 @@ const validateUserInputForFeedback = function (req, res, next) {
     const subject = req.body.subject;
     const language = req.body.language
 
-    const allLanguage = LANGUAGES.map(lang => lang.value)
+    const allLanguages = LANGUAGES.map(lang => lang.value)
 
-    const invalidLanguage = !allLanguage.includes(language)
+    const invalidLanguage = !allLanguages.includes(language)
 
     const invalidSubject = (!subject || !subject.trim().length || subject.trim().length > SUBJECT_MAX_LENGTH)
 
@@ -109,7 +111,7 @@ const validateRewardsInput = (req, res, next) => {
     const userId = req.cookies.userId || "";
     const { type, source, language } = req.query;
 
-    if ( userId === "") {
+    if (userId === "") {
         return res.status(400).send("User Id missing");
     }
 
