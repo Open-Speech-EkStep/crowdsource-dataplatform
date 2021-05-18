@@ -37,11 +37,12 @@ step("When user clicks on View all Details buttton user should be able to see <a
 });
 
 
-step("Add random Username", async function () {
+step("Add <usrnm> Username", async function (usrnm) {
     if (await taiko.text('User Details').exists()) {
         const username = taiko.textBox({ id: 'username' })
         await taiko.waitFor(500)
-        await write('Dummy user', into(username))
+        await write(usrnm, into(username))
+        await taiko.waitFor(500)
     }
 });
 
