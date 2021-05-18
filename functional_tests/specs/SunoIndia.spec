@@ -62,7 +62,7 @@
 * Select "Suno India"from header 
 * Navigate to "Transcribe" button and click "Transcribe" button
 * Add random Username
-* When user click on Lets Go Button, user should "" see instructions to record
+* When user click on Lets Go Button
 * When user clicks on Report Button, user should see Report Content Dialog Box & Submit button should be disabled
 * Once user clicks on Others Radio button in transcribe flow, Submit button should be enabled
 * When user submits , Thank you pop up should come & close button should close the pop up

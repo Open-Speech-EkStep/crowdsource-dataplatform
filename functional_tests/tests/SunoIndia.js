@@ -155,3 +155,9 @@ step("When user skips the rest of the <count> sentences , User should see Thank 
     await taiko.waitFor(5000)
     assert.ok(await text('Thank you for contributing!').exists())
 });
+
+step("When user click on Lets Go Button", async function() {
+    await click(taiko.button({ id: 'proceed-box' }))
+    await taiko.waitFor(1500)
+    
+});
