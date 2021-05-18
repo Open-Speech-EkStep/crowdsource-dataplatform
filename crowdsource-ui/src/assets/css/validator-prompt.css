@@ -30,9 +30,19 @@ a {
     border-bottom-right-radius: 12px;
     padding: 24px;
     border: 2px solid #ccc;
+    box-shadow: inset 0px 0px 8px #007BFF !important;
+    border: 2px solid #007BFF !important;
 }
 
-#edit-text .form-control:disabled {
+#edit-text-suno {
+    min-height: 180px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding: 24px;
+    border: 2px solid #ccc;
+}
+
+#edit-text-suno .form-control:disabled {
     background-color: transparent !important;
 }
 
@@ -45,7 +55,7 @@ a {
     border-radius: 12px !important;
 }
 
-#edit-text textarea {
+#edit-text textarea, #edit-text-suno textarea {
     border: none;
     padding: 0;
     box-shadow: none;
