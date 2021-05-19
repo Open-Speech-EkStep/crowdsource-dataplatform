@@ -4,6 +4,7 @@ const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE} = require('../common/consta
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent } = require('../common/common');
 const { showUserProfile } = require('../common/header');
+const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -28,16 +29,6 @@ function getValue(number, maxValue) {
 function getCurrentIndex(lastIndex) {
   const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
   return getValue(currentIndexInStorage, lastIndex);
-}
-
-const setCurrentSentenceIndex = (index) => {
-  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
-  currentSentenceLbl.innerText = index;
-}
-
-const setTotalSentenceIndex = (index) => {
-  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-  totalSentencesLbl.innerText = index;
 }
 
 window.dekhoIndiaValidator = {};
@@ -104,7 +95,7 @@ function setCapturedText(index) {
 function getNextSentence() {
   if (currentIndex < dekhoIndiaValidator.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex)
+    updateProgressBar(currentIndex,dekhoIndiaValidator.sentences.length)
     getImage(dekhoIndiaValidator.sentences[currentIndex].dataset_row_id);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
@@ -115,14 +106,6 @@ function getNextSentence() {
     localStorage.setItem(currentIndexKey, currentIndex);
     showThankYou();
   }
-}
-
-const updateProgressBar = (index) => {
-  const $progressBar = $("#progress_bar");
-  const multiplier = 10 * (10 / dekhoIndiaValidator.sentences.length);
-  $progressBar.width(index * multiplier + '%');
-  $progressBar.prop('aria-valuenow', index);
-  setCurrentSentenceIndex(index);
 }
 
 function disableButton(button) {
@@ -392,7 +375,7 @@ const initializeComponent = () => {
       setCapturedText(currentIndex);
       setCurrentSentenceIndex(currentIndex);
       setTotalSentenceIndex(totalItems);
-      updateProgressBar(currentIndex)
+      updateProgressBar(currentIndex,dekhoIndiaValidator.sentences.length)
     }
 }
 

@@ -21,7 +21,7 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Dekho India", PAGE_TITLE:"Correct"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Dekho India", PAGE_TITLE:"Validate"}) %>
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
@@ -34,11 +34,7 @@
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center">
                 <%- include ../common/speakerTesting.ejs %>
             </div>
-            <div class="row justify-content-center" id="instructive-msg">
-                <div class="col-12 justify-content-center text-center" style="color:#959595;font-style:italic">
-                    <%- __('Is the text from the image captured correctly?') %>
-                </div>
-            </div>
+            <%- include('../common/assistiveText.ejs',{msg:"Is the text from the image captured correctly?"}) %>
             <div class="row justify-content-center" id="dekho-image">
                 <div class="col-lg-8 col-md-5 col-12">
                     <%- include ../common/image.ejs %>
@@ -60,7 +56,7 @@
                 <div class="form-group green-border-focus col-lg-4 col-md-5 col-12 m-0" id="edit-text">
                     <label><%- __('Your Edit') %></label>
                     <div class="arrow-right"></div>
-                    <textarea class="form-control edit-area" id="edit" rows="3" style="resize:none"></textarea>
+                    <textarea class="form-control edit-area" maxlength="1000" id="edit" rows="3" style="resize:none"></textarea>
                 </div>
             </div>
             <div class="row justify-content-center d-none" id="thankyou-text">
@@ -87,13 +83,6 @@
                                 <%- __('Back to dekhoIndia Home') %>
                             </a></div>
                     </div>
-                </div>
-            </div>
-            <div class="row justify-content-center d-none" id="thank-you-row">
-                <div class="col-12 text-center mt-4">
-                    <img src="../../img/tick.svg">
-                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for
-                        validating!</label>
                 </div>
             </div>
             <div class="row mt-5 justify-content-center mx-0" id="validation-button-row">
@@ -171,7 +160,6 @@
         <script>var modal=document.getElementById("myModal"),clickExpandBtn=document.getElementById("expand-view"),img=document.getElementById("view-image"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");clickExpandBtn.onclick=function(){modal.style.display="block",modalImg.src=img.src};var span=document.getElementsByClassName("close-validate")[0];span.onclick=function(){modal.style.display="none"}</script>
         <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the image labelled", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <%- include('../common/footer.ejs',{path:"../"}) %>
         <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
