@@ -1,12 +1,8 @@
 .virtual-keyboard-btn {
     background-color:#e9ecef;
     position:fixed;
-    bottom:90px;
+    bottom:15px;
     right:15px
-}
-
-@media (min-width: 767px) {
-
 }
 
 
