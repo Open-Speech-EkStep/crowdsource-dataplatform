@@ -4,6 +4,7 @@
  */
 const { keyboardLayout } = require('./keyboardLayout');
 const { CONTRIBUTION_LANGUAGE } = require('./constants');
+const {isMobileDevice} = require('./common');
 let keyboard;
 const showKeyboard = function (language, callBack1=()=>{} , callBack2=()=>{}) {
   let Keyboard = window.SimpleKeyboard.default;
@@ -38,7 +39,7 @@ const showKeyboard = function (language, callBack1=()=>{} , callBack2=()=>{}) {
     // }
   // }
     keyboard.setInput(event.target.value);
-    const $submitEditButton = $("#submit-edit-button");
+    const $submitEditButton = isMobileDevice() ? $("#submit-edit-button_mob") :  $("#submit-edit-button");
     localStorage.setItem("physicalKeyboard",true);
     $('#keyboardBox').addClass('d-none');
 
