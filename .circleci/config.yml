@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  node: circleci/node@4.1.0
+  node: circleci/node@4.3.0
   aws-ecr: circleci/aws-ecr@6.15.3
   aws-eks: circleci/aws-eks@1.0.3
   aws-cli: circleci/aws-cli@1.4.0
@@ -127,7 +127,7 @@ workflows:
   build_test_deploy:
     jobs:
       - node/test:
-          version: "13.4"
+          version: "14.15"
 
       - create-workspace:
           name: create-workspace
