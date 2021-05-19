@@ -53,7 +53,7 @@
     display: flex;
   }
   .d-none-mob {
-    display: block;
+    display: inherit;
   }
   .top-back-btn{
     top: 30px;
