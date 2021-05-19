@@ -14,7 +14,7 @@
     "prettierlint": " prettier --write ./crowdsource-ui/* ./crowdsource-api/*",
     "ci-lint": "npm run stylelint && npm run htmllint && npm run prettier",
     "test:api": "cd crowdsource-api && npm run test",
-    "test:ui": "cd crowdsource-ui && npm run test",
+    "test:ui": "cd crowdsource-ui && gulp generateBuild && npm run test",
     "gulp": "cd crowdsource-ui && npm run gulp",
     "functional_test": "cd functional_tests && npm run test",
     "db-migrate": "cd crowdsource-api && npx db-migrate up --config migrations/config/migration_config.json -e dev",
