@@ -14,7 +14,7 @@ const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require(
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {showUserProfile} = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
 
 const sunoCountKey = 'sunoCount';
@@ -22,6 +22,10 @@ const currentIndexKey = 'sunoCurrentIndex';
 const sentencesKey = 'sunoSentencesKey';
 let localeStrings;
 window.sunoIndia = {};
+
+let playStr = "";
+let pauseStr = "";
+let replayStr = "";
 
 function getValue(number, maxValue) {
   return number < 0
@@ -76,9 +80,9 @@ function enableButton(element) {
 
 const setAudioPlayer = function () {
   const myAudio = document.getElementById('my-audio');
-  const play = $('#play');
-  const pause = $('#pause');
-  const replay = $('#replay');
+  const play = $(playStr);
+  const pause = $(pauseStr);
+  const replay = $(replayStr);
   const textPlay = $('#audioplayer-text_play');
   const textReplay = $('#audioplayer-text_replay');
   const textPause = $('#audioplayer-text_pause');
@@ -94,7 +98,6 @@ const setAudioPlayer = function () {
   });
 
   play.on('click', () => {
-    console.log("playe click")
     hideElement($('#default_line'))
     playAudio();
     $("#edit").removeAttr("disabled");
@@ -170,9 +173,9 @@ function resetValidation() {
   hideElement(textReplay);
   showElement(textPlay);
 
-  hideElement($("#replay"))
-  hideElement($('#pause'))
-  showElement($("#play"))
+  hideElement($(replayStr))
+  hideElement($(pauseStr))
+  showElement($(playStr))
   showElement($('#default_line'))
 }
 
@@ -210,6 +213,8 @@ function markContributionSkipped() {
 function addListeners() {
 
   const $skipButton = $('#skip_button');
+  const $submitButton = isMobileDevice() ?  $('#submit-edit-button_mob') :  $('#submit-edit-button');
+  const cancelButton = isMobileDevice() ? $('#cancel-edit-button_mob') : $('#cancel-edit-button');
 
   $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
@@ -219,32 +224,32 @@ function addListeners() {
     }
   });
 
-  $('#cancel-edit-button').on('click', () => {
+  cancelButton.on('click', () => {
     $("#edit").val("");
     setInput("");
     showElement($('#progress-row'))
-    const $cancelEditButton = $('#cancel-edit-button');
+    const $cancelEditButton = cancelButton;
     $cancelEditButton.attr('disabled', true);
-    const $submitEditButton = $('#submit-edit-button');
+    const $submitEditButton = isMobileDevice() ? $('#submit-edit-button_mob') : $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#D7D7D7');
     closeEditor();
   })
 
-  $('#submit-edit-button').on('click', () => {
+  $submitButton.on('click', () => {
     setInput("");
     $("#edit").attr("disabled", true);
     $("#edit-text-suno").removeClass("edit-text");
     hideElement($('#keyboardBox'));
-    hideElement($('#cancel-edit-button'));
-    hideElement($('#submit-edit-button'))
+    hideElement(cancelButton);
+    hideElement($submitButton)
     hideElement($('#audio-player-btn'))
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
     sunoIndia.editedText = $("#edit").val();
     $("#edit").css('pointer-events', 'none');
-    $("#cancel-edit-button").attr("disabled", true);
+    $(cancelButton).attr("disabled", true);
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
     const children = $submitEditButton.children().children();
@@ -254,8 +259,8 @@ function addListeners() {
       uploadToServer();
       setTimeout(() => {
         hideElement($('#thankyou-text'));
-        showElement($('#cancel-edit-button'));
-        showElement($('#submit-edit-button'))
+        showElement(cancelButton);
+        showElement($submitButton);
         showElement($('#audio-player-btn'))
         showElement($('#skip_button'))
         $("#edit").css('pointer-events', 'unset');
@@ -575,6 +580,21 @@ function executeOnLoad() {
   }
 }
 
+const detectDevice = () => {
+  const isMobileView = isMobileDevice();
+if(isMobileView){
+    // true for mobile device
+    playStr = "#play_mob";
+    replayStr = "#replay_mob";
+    pauseStr = "#pause_mob"
+  }else{
+    // false for not mobile device
+    playStr = "#play";
+    replayStr = "#replay";
+    pauseStr = "#pause"
+  }
+}
+
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
   hideElement($('#keyboardBox'));
@@ -583,6 +603,8 @@ $(document).ready(() => {
   }).catch(() => {
     executeOnLoad();
   });
+  detectDevice();
+  
 });
 
 

@@ -3,7 +3,8 @@
  * https://github.com/hodgef/simple-keyboard
  */
 const { keyboardLayout } = require('./keyboardLayout');
-const { CONTRIBUTION_LANGUAGE } = require('./constants');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE } = require('./constants');
+const {isMobileDevice} = require('./common');
 let keyboard;
 const showKeyboard = function (language, callBack1=()=>{} , callBack2=()=>{}) {
   let Keyboard = window.SimpleKeyboard.default;
@@ -30,23 +31,6 @@ const showKeyboard = function (language, callBack1=()=>{} , callBack2=()=>{}) {
     // if(event.target.value) {
     //   const isLanguage = lngtype(event.target.value);
     // if (isLanguage) {
-      keyboard.setInput(event.target.value);
-      const $submitEditButton = $("#submit-edit-button");
-      const $cancelEditButton = $("#cancel-edit-button");
-      localStorage.setItem("physicalKeyboard", true);
-      $('#keyboardBox').addClass('d-none');
-
-      if (event.target.value.length > 0) {
-        $cancelEditButton.removeAttr('disabled');
-        $submitEditButton.removeAttr('disabled');
-        const children = $submitEditButton.children().children();
-        children[0].setAttribute("fill", '#007BFF');
-      } else {
-        $submitEditButton.attr('disabled', true);
-        $cancelEditButton.attr('disabled', true);
-        const children = $submitEditButton.children().children();
-        children[0].setAttribute("fill", '#D7D7D7');
-      }
     // } else {
     //   $("#wrong-language").removeClass("d-none");
     //   setTimeout(() => {
@@ -55,7 +39,8 @@ const showKeyboard = function (language, callBack1=()=>{} , callBack2=()=>{}) {
     // }
   // }
     keyboard.setInput(event.target.value);
-    // const $submitEditButton = $("#submit-edit-button");
+    const currentModule = localStorage.getItem(CURRENT_MODULE);
+    const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") :  $("#submit-edit-button");
     localStorage.setItem("physicalKeyboard",true);
     $('#keyboardBox').addClass('d-none');
 
