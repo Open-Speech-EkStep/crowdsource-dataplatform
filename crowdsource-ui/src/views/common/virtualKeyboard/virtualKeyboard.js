@@ -30,23 +30,6 @@ const showKeyboard = function (language, callBack1=()=>{} , callBack2=()=>{}) {
     // if(event.target.value) {
     //   const isLanguage = lngtype(event.target.value);
     // if (isLanguage) {
-      keyboard.setInput(event.target.value);
-      const $submitEditButton = $("#submit-edit-button");
-      const $cancelEditButton = $("#cancel-edit-button");
-      localStorage.setItem("physicalKeyboard", true);
-      $('#keyboardBox').addClass('d-none');
-
-      if (event.target.value.length > 0) {
-        $cancelEditButton.removeAttr('disabled');
-        $submitEditButton.removeAttr('disabled');
-        const children = $submitEditButton.children().children();
-        children[0].setAttribute("fill", '#007BFF');
-      } else {
-        $submitEditButton.attr('disabled', true);
-        $cancelEditButton.attr('disabled', true);
-        const children = $submitEditButton.children().children();
-        children[0].setAttribute("fill", '#D7D7D7');
-      }
     // } else {
     //   $("#wrong-language").removeClass("d-none");
     //   setTimeout(() => {
