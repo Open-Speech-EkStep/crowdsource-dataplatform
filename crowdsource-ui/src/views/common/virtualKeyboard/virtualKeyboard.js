@@ -55,7 +55,7 @@ const showKeyboard = function (language, callBack1=()=>{} , callBack2=()=>{}) {
     // }
   // }
     keyboard.setInput(event.target.value);
-    const $submitEditButton = $("#submit-edit-button");
+    // const $submitEditButton = $("#submit-edit-button");
     localStorage.setItem("physicalKeyboard",true);
     $('#keyboardBox').addClass('d-none');
 
