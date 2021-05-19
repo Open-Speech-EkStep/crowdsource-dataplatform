@@ -35,12 +35,7 @@
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center">
                 <%- include ../common/speakerTesting.ejs %>
             </div>
-            <div class="row justify-content-center" id="instructive-msg">
-                <div class="col-12 justify-content-center text-center" style="color:#959595;font-style:italic">
-                    <%- __('Is the translation correct?') %>
-                </div>
-            </div>
-
+            <%- include('../common/assistiveText.ejs',{msg:"Is the translation correct?"}) %>
             <div class="row justify-content-center mb-5 mb-lg-0 mt-5" id="translation-row">
                 <div class="col-lg-4 col-md-5 col-12 original-text">
                     <label id="from-label"><%- __('HINDI') %></label>

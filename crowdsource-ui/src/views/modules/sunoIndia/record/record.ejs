@@ -37,11 +37,7 @@
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center">
                 <%- include ../common/speakerTesting.ejs %>
             </div>
-            <div class="row" id="instructive-msg">
-                <div class="col-12 justify-content-center text-center" style="color:#959595;font-style:italic">
-                    <%- __('Type the text as you hear the audio') %>
-                </div>
-            </div>
+            <%- include('../common/assistiveText.ejs',{msg:"Type the text as you hear the audio"}) %>
             <div class="row justify-content-center mt-lg-3 mt-1" id="audio-row">
                 <div class="col-12 justify-content-center text-center" style="pointer-events:none">
                     <audio id="my-audio" controls tabindex="-1" src="" type="audio/wav" controlslist="nodownload" crossorigin="anonymous" class="pointer-event"></audio>

@@ -36,11 +36,7 @@
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center">
                 <%- include ../common/speakerTesting.ejs %>
             </div>
-            <div class="row justify-content-center" id="instructive-msg">
-                <div class="col-12 justify-content-center text-center" style="color:#959595;font-style:italic">
-                    <%- __('Type the text from the image') %>
-                </div>
-            </div>
+            <%- include('../common/assistiveText.ejs',{msg:"Type the text from the image"}) %>
             <div class="row justify-content-center" id="dekho-image">
                 <div class="col-lg-8 col-md-5 col-12">
                     <%- include ../common/image.ejs %>
