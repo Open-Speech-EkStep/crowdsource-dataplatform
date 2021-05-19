@@ -9,6 +9,7 @@ const {
 } = require('../common/userDetails');
 
 const {setLangNavBar} = require('../common/languageNavBar')
+const {updateHrsForCards} = require('../common/card')
 const {getStatsSummary,getDefaultLang,setDefaultLang} = require('../common/commonHome');
 
 const {
@@ -30,6 +31,7 @@ function initializeBlock() {
 
   const $languageNavBar = $('#language-nav-bar');
   const $sayListenLanguage = $('#say-listen-language');
+  // updateHrsForCards(top_lang);
 
   $sayListenLanguage.on('click', (e) => {
     const targetedDiv = e.target;
@@ -40,7 +42,6 @@ function initializeBlock() {
       localStorage.setItem("i18n", "en");
       setLangNavBar(targetedDiv, language, $languageNavBar);
       // updateHrsForCards(language);
-
       redirectToLocalisedPage();
     }
   })
@@ -57,6 +58,7 @@ function initializeBlock() {
       $6th_place.addClass('d-none');
       targetedDiv.classList.add('active');
       localStorage.setItem("i18n", "en");
+      // updateHrsForCards(language);
       redirectToLocalisedPage();
     }
     showFucntionalCards('asr', language);
