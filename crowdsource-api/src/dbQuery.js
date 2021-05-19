@@ -116,7 +116,7 @@ const getContributionListQuery = `
 select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id 
     from contributions con 
     inner join contributors cont on con.contributed_by=cont.contributor_id and cont.contributor_id!=$1
-    inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.state='contributed' 
+    inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id
 	and ds.type=$2 and (ds.type!='parallel' or con.media->>'language'=$4)
     left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' 
     where  con.action='completed' and ds.media->>'language'=$3 and (COALESCE(val.action, '')!='skip' or COALESCE(val.validated_by, '')!=$1::text) and COALESCE(val.validated_by, '')!=$1::text 
@@ -127,7 +127,7 @@ const getContributionListForParallel = `
     select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id 
         from contributions con 
         inner join contributors cont on con.contributed_by=cont.contributor_id and cont.contributor_id!=$1
-        inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and (ds.state='contributed' or ds.state='validated') and ds.type=$2 and con.media->>'language'=$4 
+        inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.type=$2 and con.media->>'language'=$4 
         left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' and con.media ->> 'language' = $4
         inner join configurations conf on conf.config_name='validation_count' 
         where  con.action='completed' and ds.media->>'language'=$3 and (COALESCE(val.action, '')!='skip' or COALESCE(val.validated_by, '')!=$1::text) and COALESCE(val.validated_by, '')!=$1::text 
@@ -144,11 +144,11 @@ const updateMediaWithValidatedState = `update dataset_row set state =
 (select value from configurations where config_name = 'validation_count');`
 
 const updateContributionDetails = `insert into contributions (action, dataset_row_id, date, contributed_by, state_region, country, media)
-select 'completed', $1, now(), $2, $6, $7, json_build_object('data', $3, 'type', 'audio', 'language', $4, 'duration', $5) where (select count(*) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') >= 
+select 'completed', $1, now(), $2, $6, $7, json_build_object('data', $3, 'type', 'audio', 'language', $4, 'duration', $5) where (select count(*) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') < 
 (select value from configurations where config_name = 'contribution_count');`;
 
 const updateContributionDetailsWithUserInput = `insert into "contributions" ("action","dataset_row_id", "date", "contributed_by", "state_region", "country", "media")
-select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4) where (select count(*) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') >= 
+select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4) where (select count(*) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') < 
 (select value from configurations where config_name = 'contribution_count');`;
 
 const updateMaterializedViews = 'REFRESH MATERIALIZED VIEW contributions_and_demo_stats;REFRESH MATERIALIZED VIEW daily_stats_complete;REFRESH MATERIALIZED VIEW gender_group_contributions;REFRESH MATERIALIZED VIEW age_group_contributions;REFRESH MATERIALIZED VIEW language_group_contributions;REFRESH MATERIALIZED VIEW state_group_contributions;REFRESH MATERIALIZED VIEW language_and_state_group_contributions;'
