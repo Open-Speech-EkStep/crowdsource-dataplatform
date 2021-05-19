@@ -26,6 +26,7 @@ window.sunoIndia = {};
 let playStr = "";
 let pauseStr = "";
 let replayStr = "";
+let audioPlayerBtn = "";
 
 function getValue(number, maxValue) {
   return number < 0
@@ -86,6 +87,7 @@ const setAudioPlayer = function () {
   const textPlay = $('#audioplayer-text_play');
   const textReplay = $('#audioplayer-text_replay');
   const textPause = $('#audioplayer-text_pause');
+  const cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : $("#cancel-edit-button");
 
 
   myAudio.addEventListener("ended", () => {
@@ -93,7 +95,7 @@ const setAudioPlayer = function () {
     showElement(replay)
     hideElement(textPause);
     showElement(textReplay);
-    $("#cancel-edit-button").removeAttr("disabled");
+    cancelButton.removeAttr("disabled");
     $("#edit").removeAttr("disabled");
   });
 
@@ -244,13 +246,13 @@ function addListeners() {
     hideElement($('#keyboardBox'));
     hideElement(cancelButton);
     hideElement($submitButton)
-    hideElement($('#audio-player-btn'))
+    hideElement($(audioPlayerBtn))
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
     sunoIndia.editedText = $("#edit").val();
     $("#edit").css('pointer-events', 'none');
     $(cancelButton).attr("disabled", true);
-    const $submitEditButton = $('#submit-edit-button');
+    const $submitEditButton =isMobileDevice() ? $('#submit-edit-button_mob') : $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#D7D7D7');
@@ -261,7 +263,7 @@ function addListeners() {
         hideElement($('#thankyou-text'));
         showElement(cancelButton);
         showElement($submitButton);
-        showElement($('#audio-player-btn'))
+        showElement($(audioPlayerBtn))
         showElement($('#skip_button'))
         $("#edit").css('pointer-events', 'unset');
         $("#edit").val("");
@@ -288,7 +290,7 @@ function addListeners() {
     getNextSentence();
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
-    $("#cancel-edit-button").attr("disabled", true);
+    cancelButton.attr("disabled", true);
     closeEditor();
 
   })
@@ -346,14 +348,14 @@ function hideAudioRow() {
   showElement($('#loader-audio-row'));
   hideElement($('#audio-row'))
   showElement($('#loader-play-btn'));
-  hideElement($('#audio-player-btn'))
+  hideElement($(audioPlayerBtn))
 }
 
 function showAudioRow() {
   hideElement($('#loader-audio-row'));
   showElement($('#audio-row'));
   hideElement($('#loader-play-btn'));
-  showElement($('#audio-player-btn'))
+  showElement($(audioPlayerBtn))
 }
 
 function showThankYou() {
@@ -586,12 +588,14 @@ if(isMobileView){
     // true for mobile device
     playStr = "#play_mob";
     replayStr = "#replay_mob";
-    pauseStr = "#pause_mob"
+    pauseStr = "#pause_mob";
+    audioPlayerBtn = "#audio-player-btn_mob";
   }else{
     // false for not mobile device
     playStr = "#play";
     replayStr = "#replay";
-    pauseStr = "#pause"
+    pauseStr = "#pause";
+    audioPlayerBtn = "#audio-player-btn";
   }
 }
 
