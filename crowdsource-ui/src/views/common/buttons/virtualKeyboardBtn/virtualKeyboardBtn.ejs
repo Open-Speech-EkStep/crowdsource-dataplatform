@@ -1,4 +1,5 @@
-<button type="button" class="btn text-right layout-btn" id="virtualKeyBoardBtn" style="background-color:#e9ecef;position:fixed;bottom:90px;right:15px">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/common/virtualKeyboardBtn.css">
+<button type="button" class="btn text-right layout-btn virtual-keyboard-btn" id="virtualKeyBoardBtn">
     <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M22.75 15.75H1.75C1.28587 15.75 0.840752 15.5656 0.512563 15.2374C0.184374 14.9092 0 14.4641 0 14V1.75C0 1.28587 0.184374 0.840752 0.512563 0.512563C0.840752 0.184375 1.28587 0 1.75 0H22.75C23.2141 0 23.6592 0.184375 23.9874 0.512563C24.3156 0.840752 24.5 1.28587 24.5 1.75V14C24.5 14.4641 24.3156 14.9092 23.9874 15.2374C23.6592 15.5656 23.2141 15.75 22.75 15.75ZM1.75 1.75V14H22.75V1.75H1.75Z" fill="black"/>
         <path d="M7 10.5H16.625V12.25H7V10.5Z" fill="black"/>
@@ -15,7 +16,7 @@
         <path d="M14 7H15.75V8.75H14V7Z" fill="black"/>
         <path d="M18.375 10.5H21V12.25H18.375V10.5Z" fill="black"/>
     </svg>
-    <%= __('Virtual keyboard')%>
+   <span>  <%= __('Virtual keyboard')%> </span>
 </button>
 
 <script src="../../js/common/virtualKeyboardBtn.js"></script>

@@ -17,6 +17,9 @@
         position: relative !important;
         margin-top: 2rem;
     }
+    .card {
+        min-height: 190px !important;
+    }
 }
 
 @media (min-width: 992px) {

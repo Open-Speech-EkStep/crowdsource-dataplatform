@@ -131,7 +131,26 @@ body {
 }
 
 
-.top-back-btn {
-  top:30px;
-  left:35px
+@media (max-width: 767px) {
+  .d-none-mob {
+    display: none;
+  }
+  .top-back-btn {
+   top: 39px;
+   left: -4px;
+  }
+
+  .top-back-btn .back-text {
+    display: none;
+  }
+}
+
+@media (min-width: 767px) {
+  .d-none-mob {
+    display: block;
+  }
+ .top-back-btn{
+   top: 30px;
+   left: 35px;
+ }
 }

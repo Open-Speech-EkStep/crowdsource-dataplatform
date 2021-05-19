@@ -1,0 +1,22 @@
+.virtual-keyboard-btn {
+    background-color:#e9ecef;
+    position:fixed;
+    bottom:90px;
+    right:15px
+}
+
+@media (min-width: 767px) {
+
+}
+
+
+@media (max-width: 767px) {
+    .virtual-keyboard-btn {
+        border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    }
+    .virtual-keyboard-btn span {
+        display: none;
+    }
+}

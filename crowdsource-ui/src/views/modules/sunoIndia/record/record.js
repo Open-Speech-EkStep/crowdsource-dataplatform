@@ -102,6 +102,7 @@ const setAudioPlayer = function () {
   });
 
   play.on('click', () => {
+    console.log("playe click")
     hideElement($('#default_line'))
     playAudio();
     $("#edit").removeAttr("disabled");
