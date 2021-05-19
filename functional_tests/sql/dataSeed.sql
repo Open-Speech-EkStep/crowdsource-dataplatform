@@ -100,13 +100,13 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
             "data": "হলো হাউ অরে ইউ ডিং টুডে ",
             "type": "text",
             "language": "Bengali"
-            }'::jsonb, true, now(), 'completed' from dataset_row where type='asr' and media ->> 'langauge'='Bengali'
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='asr' and media ->> 'language'='Bengali'
 union all
 select dataset_row_id, (select contributor_id from contributors where user_name='##system##'), '{
             "data": "नमस्कार काय चाललं आहे आज",
             "type": "text",
             "language": "Marathi"
-            }'::jsonb, true, now(), 'completed' from dataset_row where type='asr' and media ->> 'langauge'='Marathi';
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='asr' and media ->> 'language'='Marathi' and state='contributed';
 
 
 --OCR data
@@ -198,13 +198,13 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
             "data": "হলো হাউ অরে ইউ ডিং টুডে ",
             "type": "text",
             "language": "Bengali"
-            }'::jsonb, true, now(), 'completed' from dataset_row where type='ocr' and media ->> 'langauge'='Bengali'
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='ocr' and media ->> 'language'='Bengali'
 union all
 select dataset_row_id, (select contributor_id from contributors where user_name='##system##'), '{
             "data": "नमस्कार काय चाललं आहे आज",
             "type": "text",
             "language": "Marathi"
-            }'::jsonb, true, now(), 'completed' from dataset_row where type='ocr' and media ->> 'langauge'='Marathi';
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='ocr' and media ->> 'language'='Marathi' and state='contributed';
 
 
 
