@@ -289,7 +289,7 @@ step("Select Contribution Language as <language>", async function (language) {
     if(!prefLanguagePopup.exists()){
         await click("show All");
     }
-    await taiko.waitFor(700)
+    await taiko.waitFor(900)
     await click(language);
     await taiko.waitFor(700)
 });
@@ -351,7 +351,7 @@ step("Skip coach mark instructions", async function () {
 });
 
 step("When user clicks on Report Button, user should see Report Content Dialog Box & Submit button should be disabled", async function() {
-    await taiko.waitFor(500);
+    assert.ok(await text("Report").exists());
     await click(taiko.button({ id: "report_btn" }))
     await taiko.waitFor(500);
     assert.ok(await text("Report Content").exists());
