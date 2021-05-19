@@ -132,6 +132,53 @@ body {
 }
 
 
+.validate-disabled {
+  opacity: 0.6;
+  cursor: no-drop;
+}
+
+.validate-disabled #left_container,
+.validate-disabled #right_container {
+  pointer-events: none;
+}
+
+
+.validate-disabled #warning-msg {
+  display: block !important;
+}
+
+.cont-validate-disabled {
+  opacity: 0.6;
+  cursor: no-drop;
+}
+
+.cont-validate-disabled #left_container,
+.cont-validate-disabled #right_container {
+  pointer-events: none;
+}
+
+.cont-validate-disabled #cont-warning-msg {
+  display: block !important;
+}
+
+
+
+  @media (min-width: 767px) {
+    #cont-warning-msg {
+      display: none;
+      top:25px;
+      left:7%;
+      font-style:italic;
+      border: 1px solid #42B2C6;
+      width:89%;
+      padding:8px 15px;
+      height:44px;
+      border-radius:12px;
+      background:rgba(66, 178, 198, 0.1);
+      color: #42B2C6;;
+    }
+
+
 #warning-msg {
   display: none;
   top:25px;
@@ -145,52 +192,37 @@ body {
   background:rgba(77,130,247,.1);
   color: #4D82F7;;
 }
+}
 
-#cont-warning-msg {
+  @media (max-width: 767px) {
+    #cont-warning-msg {
+      display: none;
+      top:5px;
+      left:7%;
+      font-style:italic;
+      border: 1px solid #42B2C6;
+      width:89%;
+      padding:8px 15px;
+      height:38px;
+      border-radius:12px;
+      background:rgba(66, 178, 198, 0.1);
+      color: #42B2C6;;
+    }
+
+
+#warning-msg {
   display: none;
-  top:25px;
+  top:5px;
   left:7%;
   font-style:italic;
-  border: 1px solid #42B2C6;
+  border:1px solid #4d82f7;
   width:89%;
   padding:8px 15px;
-  height:44px;
+  height:38px;
   border-radius:12px;
-  background:rgba(66, 178, 198, 0.1);
-  color: #42B2C6;;
+  background:rgba(77,130,247,.1);
+  color: #4D82F7;;
 }
 
 
-  .top-back-btn {
-    top:30px;
-    left:35px
-  }
-
-  .validate-disabled {
-    opacity: 0.6;
-    cursor: no-drop;
-  }
-  
-  .validate-disabled #left_container,
-  .validate-disabled #right_container {
-    pointer-events: none;
-  }
-  
-  
-  .validate-disabled #warning-msg {
-    display: block !important;
-  }
-  
-  .cont-validate-disabled {
-    opacity: 0.6;
-    cursor: no-drop;
-  }
-  
-  .cont-validate-disabled #left_container,
-  .cont-validate-disabled #right_container {
-    pointer-events: none;
-  }
-  
-  .cont-validate-disabled #cont-warning-msg {
-    display: block !important;
-  }
+}

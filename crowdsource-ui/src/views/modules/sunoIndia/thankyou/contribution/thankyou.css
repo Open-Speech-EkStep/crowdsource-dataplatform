@@ -96,6 +96,11 @@
         width: 150px;
         height: auto;
     }
+  
+    .top-back-btn {
+        top: 80px;
+        left: 20px;
+       }
 }
 
 @media screen and (max-width: 599px) {

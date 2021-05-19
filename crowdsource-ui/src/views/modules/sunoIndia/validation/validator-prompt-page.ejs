@@ -103,7 +103,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 mx-5 mt-5" id="validation-button-row">
+            <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 mx-5 mt-5 web-view" id="validation-button-row">
                 <div class="col-lg-8 col-md-8 flex-lg-row flex-md-row flex-column d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2">
                     <button class="w-100 btn align-self-start mb-2" disabled="disabled" id="need_change">
                         <svg width="245" height="66" viewBox="0 0 245 66" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -157,7 +157,41 @@
                     </button>
                 </div>
             </div>
-            <div class="row justify-content-center" id="skip_btn_row">
+
+            <div class="row mobile-view" id="validation-button-row">
+                <div class="col-lg-8 col-md-8 flex-lg-row flex-md-row flex-column d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2">
+                    <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn">
+                        <div class="audioplayer d-flex justify-content-center align-items-center">
+                            <img src="../../img/play.svg" height="48" width="48" alt="play" id="play" class="cursor-pointer"> 
+                            <img src="../../img/pause.svg" height="48" width="48" alt="pause" id="pause" class="d-none cursor-pointer"> 
+                            <img src="../../img/replay.svg" height="48" width="48" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer">
+                        </div>
+                    </div>
+                    <button class="w-100 btn btn-link-primary my-2" disabled="disabled" id="need_change">
+                                <%= __('Needs Change') %>
+                    </button>
+                    <button class="w-100 btn btn-link-primary my-2 d-none" id="cancel-edit-button">
+                                <%= __('Cancel') %>
+                    </button>
+                    <div class="row justify-content-center mx-2" id="loader-play-btn">
+                        <div><span class="spinner w-h-5"></span></div>
+                    </div>
+                    <button class="btn btn-link-primary my-2 w-100" disabled="disabled" id="like_button">
+                                <%= __('Correct') %>
+                    </button>
+                    <button class="btn btn-link-primary my-2 w-100 d-none" disabled="disabled" id="submit-edit-button">
+                                <%= __('Submit') %>
+                    </button>
+                </div>
+
+                <div class="row mobile-view w-100 m-0" id="skip_btn_row">
+                    <button class="btn text-primary mb-2 w-100" id="skip_button">
+                        <%= __('Skip') %>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row justify-content-center web-view" id="skip_btn_row">
                 <button class="btn text-primary mt-2 mb-2 fs-1_5-rem" id="skip_button">
                     <%= __('Skip') %>
                 </button>

@@ -100,6 +100,48 @@ a {
     overflow-x: hidden;
 }
 
+
+@media (max-width: 767px) {
+    .mobile-view {
+      display: block;
+    }
+.btn-link-primary {
+  border: 2px solid #007BFF;
+  background: transparent;
+  border-radius: 20px;
+}
+    .web-view {
+      display: none;
+    }
+    .d-none-mob {
+      display: none;
+    }
+   .top-back-btn {
+    top: 39px;
+    left: -4px;
+   }
+
+   .top-back-btn .back-text {
+     display: none;
+   }
+}
+
+@media (min-width: 767px) {
+  .mobile-view {
+    display: none;
+  }
+  .web-view {
+    display: inherit;
+  }
+  .d-none-mob {
+    display: block;
+  }
+  .top-back-btn{
+    top: 30px;
+    left: 35px;
+  }
+}
+
 @media (max-width: 767px) {
     .record-btn-container {
         flex-direction: column-reverse;
@@ -119,6 +161,10 @@ a {
     #submit-edit-button > svg {
         height: 80px;
         width: 160px;
+    }
+    #like-button > svg {
+        height: 65px;
+        width: 145px;
     }
 
     .web-view {

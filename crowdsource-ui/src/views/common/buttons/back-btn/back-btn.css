@@ -12,3 +12,63 @@
 .btn-link:hover {
     text-decoration: none;
 }
+
+
+@media (max-width: 767px) {
+    .mobile-view {
+      display: block;
+    }
+    .web-view {
+      display: none;
+    }
+    .d-none-mob {
+      display: none;
+    }
+  
+   .top-back-btn .back-text {
+     display: none;
+   }
+   .thankyou-bar-graph {
+       border: none;;
+   }
+   .thankyou-page {
+    padding-top: 3rem !important;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+.lazy {
+    margin: 0 !important;
+}
+.no-margin-mobile {
+    margin: 0 !important;
+}
+}
+
+@media (min-width: 767px) {
+  .mobile-view {
+    display: none;
+  }
+  .web-view {
+    display: flex;
+  }
+  .d-none-mob {
+    display: block;
+  }
+  .top-back-btn{
+    top: 30px;
+    left: 35px;
+  }
+  .thankyou-bar-graph {
+    border-left: 1px solid #ccc;;
+}
+.thankyou-page {
+    padding: 3rem !important;
+}
+.lazy {
+    margin-bottom: 3rem !important;
+}
+.no-margin-mobile {
+    margin-top: 3rem !important;
+}
+}

@@ -431,3 +431,15 @@ body.modal-open .supreme-container {
   max-width: 90%;
 }
 
+
+@media (max-width: 767px) {
+  .from-label {
+    text-align: left;
+  }
+}
+
+@media (min-width: 767px) {
+  .from-label {
+    text-align: right;
+  }
+}

@@ -18,3 +18,24 @@
 #keyboardCloseBtn {
     cursor: pointer
 }
+
+.no-data-found {
+    position: fixed;
+    z-index: 10;
+    width: 75%;
+    bottom: 0;
+    padding: 1.5rem 0;
+}
+
+.no-data-found > div {
+    padding: 0.5rem 2rem;
+    background-color: #343A40;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 5px 7px 5px -2px #888;
+}
+
+.no-data-found-text {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
