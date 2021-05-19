@@ -267,6 +267,10 @@ gulp.task('json', function () {
     .pipe(gulp.dest('build/json'));
 });
 
+gulp.task('generateBuild',
+   gulp.parallel('common-ejs-gen','ejs-gen-sunoIndia','ejs-gen-likhoIndia','ejs-gen-dekhoIndia','js-common-flat','js-sunoIndia-flat','js-likhoIndia-flat','js-dekhoIndia-flat')
+);
+
 gulp.task(
   'default',
   gulp.parallel(
