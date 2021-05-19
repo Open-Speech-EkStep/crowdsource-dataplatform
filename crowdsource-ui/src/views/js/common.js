@@ -13,9 +13,7 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
     if(contributedLanguageHours && contributedLanguageHours.language !== topLanguagesData[0].language) {
       contributedLanguageHours ? topLanguageArray.push(contributedLanguageHours) : topLanguageArray.push({language: contributedLanguage,total_contributions: "0.000"});
       let remainingLanguage = topLanguagesData.filter(item => item.language !== contributedLanguage);
-      console.log(type);
       remainingLanguage =  type== "dekho" || type== "likho" ? remainingLanguage.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1) : remainingLanguage.sort((a, b) => Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1);
-      console.log("Ayush", remainingLanguage);
       topLanguages = remainingLanguage.slice(0,3);
     } else {
       topLanguages = topLanguagesData.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1).slice(0,3);
@@ -32,7 +30,8 @@ function showByHoursChart(type) {
   constructChart(
     JSON.parse(topLanguagesByHoursData),
     type == "suno" ? "total_contributions" : "total_contribution_count",
-    "language"
+    "language",
+    type
   );
 }
 
@@ -191,6 +190,16 @@ const isKeyboardExtensionPresent = function (){
   return chromeExtension ? true : false
 }
 
+const enableCancelButton = function (){
+  const $cancelEditButton = $("#cancel-edit-button");
+  $cancelEditButton.removeAttr('disabled');
+}
 
-module.exports =  {getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChart,redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages,isKeyboardExtensionPresent};
+const disableCancelButton = function(){
+  const $cancelEditButton = $("#cancel-edit-button");
+  $cancelEditButton.attr('disabled',true);
+}
+
+
+module.exports =  {getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChart,redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages,isKeyboardExtensionPresent,enableCancelButton,disableCancelButton};
 

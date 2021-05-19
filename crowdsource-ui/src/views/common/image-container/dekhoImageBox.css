@@ -1,0 +1,7 @@
+.image-container{
+    border:1px dashed rgb(0,0,0,.2);
+    padding:30px;
+    border-radius:12px;
+    background-image: url(../../img/dekhoBgImg.png);
+    background-repeat: repeat;
+    }

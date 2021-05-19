@@ -56,41 +56,21 @@ $(window).on("orientationchange",function(){
 setCardsBackground();
 
 $left.hover(() => {
-  $left.removeClass('col-lg-5');
-  $right.removeClass('col-lg-5');
-  $left.addClass('col-lg-6');
-  $right.addClass('col-lg-4');
-  $left.removeClass('col-md-5');
-  $right.removeClass('col-md-5');
-  $left.addClass('col-md-6');
-  $right.addClass('col-md-4');
+  $(".card1").css("box-shadow","0px 0px 32px rgba(66, 178, 198, 0.4)")
   $left_p_2.removeClass('d-none');
   $left_container.addClass('left-active');
 }, () => {
-  $left.removeClass('col-lg-6');
-  $right.removeClass('col-lg-4');
-  $left.addClass('col-lg-5');
-  $right.addClass('col-lg-5');
-  $left.removeClass('col-md-6');
-  $right.removeClass('col-md-4');
-  $left.addClass('col-md-5');
-  $right.addClass('col-md-5');
+  $(".card1").css("box-shadow","0px 0px 32px rgb(0 0 0 / 10%)")
   $left_p_2.addClass('d-none');
   $left_container.removeClass('left-active');
 });
 
 $right.hover(() => {
-  $left.removeClass('col-lg-5');
-  $right.removeClass('col-lg-5');
-  $right.addClass('col-lg-6');
-  $left.addClass('col-lg-4');
+  $(".card2").css("box-shadow","0px 0px 32px rgba(166, 192, 251, 0.4)")
   $right_p_2.removeClass('d-none');
   $right_container.addClass('right-active');
 }, () => {
-  $left.removeClass('col-lg-4');
-  $right.removeClass('col-lg-6');
-  $left.addClass('col-lg-5');
-  $right.addClass('col-lg-5');
+  $(".card2").css("box-shadow","0px 0px 32px rgb(0 0 0 / 10%)")
   $right_p_2.addClass('d-none');
   $right_container.removeClass('right-active');
 });

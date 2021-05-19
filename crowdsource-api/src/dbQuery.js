@@ -108,7 +108,7 @@ limit 5`;
 left join contributors con on con.contributor_identifier=$1 and user_name=$2
 left join contributions cont on cont.dataset_row_id=dr.dataset_row_id and cont.contributed_by=con.contributor_id 
 where dr.media->>'language'=$4 and difficulty_level=$3 and type=$5 
-and (((state is null) or ((state='contributed' or state='validated') and not exists(select 1 from contributions where dataset_row_id=dr.dataset_row_id and contributions.media->>'language'=$6))) 
+and (((state is null) or ((state='contributed' or state='validated') and not exists (select 1 from contributions where dataset_row_id=dr.dataset_row_id and contributions.media->>'language'=$6))) 
   and (cont.action is null or (coalesce(cont.action,'')='skipped' and cont.contributed_by!=con.contributor_id)))
  group by dr."dataset_row_id", dr.media->>'data' order by dr."dataset_row_id" limit 5`;
 
@@ -116,7 +116,7 @@ const getContributionListQuery = `
 select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id 
     from contributions con 
     inner join contributors cont on con.contributed_by=cont.contributor_id and cont.contributor_id!=$1
-    inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.state='contributed' 
+    inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id
 	and ds.type=$2 and (ds.type!='parallel' or con.media->>'language'=$4)
     left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' 
     where  con.action='completed' and ds.media->>'language'=$3 and (COALESCE(val.action, '')!='skip' or COALESCE(val.validated_by, '')!=$1::text) and COALESCE(val.validated_by, '')!=$1::text 
@@ -127,11 +127,12 @@ const getContributionListForParallel = `
     select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id 
         from contributions con 
         inner join contributors cont on con.contributed_by=cont.contributor_id and cont.contributor_id!=$1
-        inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.state='contributed' 
-      and ds.type=$2 and con.media->>'language'=$4
-        left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' 
+        inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.type=$2 and con.media->>'language'=$4 
+        left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' and con.media ->> 'language' = $4
+        inner join configurations conf on conf.config_name='validation_count' 
         where  con.action='completed' and ds.media->>'language'=$3 and (COALESCE(val.action, '')!='skip' or COALESCE(val.validated_by, '')!=$1::text) and COALESCE(val.validated_by, '')!=$1::text 
-      group by con.dataset_row_id, ds.media->>'data', con.contribution_id 
+      group by con.dataset_row_id, ds.media->>'data', con.contribution_id, conf.value 
+      having count(val.*)<conf.value
         order by count(val.*) desc, con.contribution_id limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, action, validated_by, date, state_region, country) 
@@ -143,14 +144,17 @@ const updateMediaWithValidatedState = `update dataset_row set state =
 (select value from configurations where config_name = 'validation_count');`
 
 const updateContributionDetails = `insert into contributions (action, dataset_row_id, date, contributed_by, state_region, country, media)
-select 'completed', $1, now(), $2, $6, $7, json_build_object('data', $3, 'type', 'audio', 'language', $4, 'duration', $5);`;
+select 'completed', $1, now(), $2, $6, $7, json_build_object('data', $3, 'type', 'audio', 'language', $4, 'duration', $5) where (select count(*) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') < 
+(select value from configurations where config_name = 'contribution_count');`;
 
 const updateContributionDetailsWithUserInput = `insert into "contributions" ("action","dataset_row_id", "date", "contributed_by", "state_region", "country", "media")
-select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4);`;
+select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4) where (select count(*) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') < 
+(select value from configurations where config_name = 'contribution_count');`;
 
 const updateMaterializedViews = 'REFRESH MATERIALIZED VIEW contributions_and_demo_stats;REFRESH MATERIALIZED VIEW daily_stats_complete;REFRESH MATERIALIZED VIEW gender_group_contributions;REFRESH MATERIALIZED VIEW age_group_contributions;REFRESH MATERIALIZED VIEW language_group_contributions;REFRESH MATERIALIZED VIEW state_group_contributions;REFRESH MATERIALIZED VIEW language_and_state_group_contributions;'
 
-const updateMediaWithContributedState = `update dataset_row set state='contributed' where "dataset_row_id"=$1`;
+const updateMediaWithContributedState = `update dataset_row set state='contributed' where "dataset_row_id"=$1 and state is null and (select count(*) from contributions where dataset_row_id=$1 and action='completed') >= 
+(select value from configurations where config_name = 'contribution_count')`;
 
 const getCountOfTotalSpeakerAndRecordedAudio = `select  count(DISTINCT(con.*)), 0 as index, 0 as duration \
 from "contributors" con inner join "contributions" cont on con.contributor_id = cont.contributed_by and cont.action=\'completed\' inner join "dataset_row" s on  s."dataset_row_id" = cont."dataset_row_id"  where s.language = $1 \
@@ -218,10 +222,10 @@ const getValidationCountQuery = 'select count(*) from validations where contribu
 
 const addContributorQuery = 'INSERT INTO "contributors" ("user_name","contributor_identifier","age_group","gender","mother_tongue")  select $2, $1, $3, $4, $5 returning contributor_id';
 
-const getBadges = 'select grade, reward_milestone.milestone, id from reward_catalogue, \
-(select milestone,reward_catalogue_id as rid from reward_milestones where milestone <= $1 \
-and LOWER(language) = LOWER($2) order by milestone desc) \
-as reward_milestone where id=reward_milestone.rid';
+const getBadges = `select grade, reward_milestone.milestone, id from reward_catalogue, 
+(select milestone,reward_catalogue_id as rid from reward_milestones where milestone <= $1 
+and LOWER(language) = LOWER($2) order by milestone desc) 
+as reward_milestone where id=reward_milestone.rid`;
 
 const getContributionHoursForLanguage = `select COALESCE(sum(con.audio_duration::decimal/3600), 0) as hours from contributions con 
 inner join dataset_row dr on dr."dataset_row_id"=con."dataset_row_id" where LOWER(language) = LOWER($1) 

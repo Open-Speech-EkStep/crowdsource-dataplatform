@@ -13,7 +13,8 @@ const {
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {showUserProfile} = require('../common/header');
-const {isKeyboardExtensionPresent} = require('../common/common');
+const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
 
 const sunoCountKey = 'sunoCount';
@@ -35,15 +36,6 @@ function getCurrentIndex(lastIndex) {
   return getValue(currentIndexInStorage, lastIndex);
 }
 
-const setCurrentSentenceIndex = (index) => {
-  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
-  currentSentenceLbl.innerText = index;
-}
-
-const setTotalSentenceIndex = (index) => {
-  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-  totalSentencesLbl.innerText = index;
-}
 
 function uploadToServer(cb) {
   const fd = new FormData();
@@ -151,7 +143,7 @@ let progressCount = currentIndex, validationCount = 0;
 function getNextSentence() {
   if (currentIndex < sunoIndia.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex);
+    updateProgressBar(currentIndex, sunoIndia.sentences.length);
     getAudioClip(sunoIndia.sentences[currentIndex].dataset_row_id)
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
@@ -163,14 +155,6 @@ function getNextSentence() {
     resetValidation();
     showThankYou();
   }
-}
-
-const updateProgressBar = (index) => {
-  const $progressBar = $("#progress_bar");
-  const multiplier = 10 * (10 / sunoIndia.sentences.length);
-  $progressBar.width(index * multiplier + '%');
-  $progressBar.prop('aria-valuenow', index);
-  setCurrentSentenceIndex(index);
 }
 
 function disableButton(button) {
@@ -197,7 +181,7 @@ const closeEditor = function () {
 }
 
 const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-showKeyboard(contributionLanguage.toLowerCase());
+showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancelButton);
 
 function markContributionSkipped() {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
@@ -465,7 +449,7 @@ const initialize = function () {
     setCurrentSentenceIndex(currentIndex);
     setTotalSentenceIndex(totalItems);
     setAudioPlayer();
-    updateProgressBar(currentIndex)
+    updateProgressBar(currentIndex,sunoIndia.sentences.length)
   }
 };
 

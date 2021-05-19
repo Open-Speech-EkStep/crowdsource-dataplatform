@@ -12,8 +12,9 @@ const {
 } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton} = require('../common/common');
 const { showUserProfile } = require('../common/header');
+const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -38,16 +39,6 @@ function getValue(number, maxValue) {
 function getCurrentIndex(lastIndex) {
   const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
   return getValue(currentIndexInStorage, lastIndex);
-}
-
-const setCurrentSentenceIndex = (index) => {
-  const currentSentenceLbl = document.getElementById('currentSentenceLbl');
-  currentSentenceLbl.innerText = index;
-}
-
-const setTotalSentenceIndex = (index) => {
-  const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-  totalSentencesLbl.innerText = index;
 }
 
 function markContributionSkipped() {
@@ -113,7 +104,7 @@ let progressCount = 0, validationCount = 0;
 function getNextSentence() {
   if (currentIndex < dekhoIndia.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex);
+    updateProgressBar(currentIndex,dekhoIndia.sentences.length);
     getImage(dekhoIndia.sentences[currentIndex].dataset_row_id);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
@@ -132,13 +123,6 @@ const updateDecisionButton = (button, colors) => {
   children[2].setAttribute("fill", colors[2]);
 }
 
-const updateProgressBar = (index) => {
-  const $progressBar = $("#progress_bar");
-  const multiplier = 10 * (10 / dekhoIndia.sentences.length);
-  $progressBar.width(index * multiplier + '%');
-  $progressBar.prop('aria-valuenow', index);
-  setCurrentSentenceIndex(index);
-}
 
 function disableButton(button) {
   button.children().attr("opacity", "50%");
@@ -435,7 +419,7 @@ const initializeComponent = () => {
     getImage(validationData.dataset_row_id);
     setCurrentSentenceIndex(currentIndex);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex)
+    updateProgressBar(currentIndex,dekhoIndia.sentences.length)
   }
 
 }
@@ -460,7 +444,7 @@ const executeOnLoad = function () {
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   $('#keyboardLayoutName').text(language);
-  showKeyboard(language.toLowerCase());
+  showKeyboard(language.toLowerCase(),enableCancelButton,disableCancelButton);
   hideElement($('#keyboardBox'));
 
   if (language) {

@@ -160,7 +160,7 @@ const dashboardRoutes = (router) => {
         res.send(result);
     });
 
-    router.get('/stats/categories', async (req, res) => {
+    router.get('/stats/categories/:type', async (req, res) => {
         let result = {};
 
         const resultFields = Object.keys(validateAndReturnRequiredStatsCategoryFields(req.query));
@@ -176,7 +176,7 @@ const dashboardRoutes = (router) => {
                 return;
             }
 
-            const timelineData = await getTimeline(language, timeframe);
+            const timelineData = await getTimeline(timeframe, req.params.type, language);
             let hoursContributed = 0, hoursValidated = 0;
 
             if (timelineData.length !== 0) {
@@ -189,11 +189,11 @@ const dashboardRoutes = (router) => {
         }
 
         if (resultFields.includes('age_group_data')) {
-            const ageGroupData = await getAgeGroupData(language);
+            const ageGroupData = await getAgeGroupData(req.params.type, language);
             result['age_group_data'] = ageGroupData;
         }
         if (resultFields.includes('gender_group_data')) {
-            const genderGroupData = await getGenderGroupData(language);
+            const genderGroupData = await getGenderGroupData(req.params.type, language);
             result['gender_group_data'] = genderGroupData;
         }
         const lastUpdatedDateTime = await getLastUpdatedAt();
@@ -206,7 +206,7 @@ const dashboardRoutes = (router) => {
         const language = req.query.language || '';
         const type = req.params.type;
 
-        const ageGroupData = await getAgeGroupData(language, type);
+        const ageGroupData = await getAgeGroupData(type, language);
         const lastUpdatedDateTime = await getLastUpdatedAt();
         res.send({ "data": ageGroupData, last_updated_at: lastUpdatedDateTime });
     });
@@ -216,7 +216,7 @@ const dashboardRoutes = (router) => {
         const language = req.query.language || '';
         const type = req.params.type;
 
-        const genderGroupData = await getGenderGroupData(language, type);
+        const genderGroupData = await getGenderGroupData(type, language);
         const lastUpdatedDateTime = await getLastUpdatedAt();
         res.send({ "data": genderGroupData, last_updated_at: lastUpdatedDateTime });
     });
@@ -234,7 +234,7 @@ const dashboardRoutes = (router) => {
             return;
         }
 
-        const timelineData = await getTimeline(language, timeframe, type);
+        const timelineData = await getTimeline(timeframe, type, language);
         let hoursContributed = 0, hoursValidated = 0;
 
         if (timelineData.length !== 0) {

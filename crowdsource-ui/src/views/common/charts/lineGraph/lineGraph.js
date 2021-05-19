@@ -7,7 +7,7 @@ const $timelineChart = $('#timeline');
 
 const chartReg = {};
 
-const drawTimelineChart = (timelineData) => {
+const drawTimelineChart = (timelineData, series1Name, series2Name) => {
   am4core.ready(function () {
     am4core.useTheme(am4themes_animated);
 
@@ -65,7 +65,7 @@ const drawTimelineChart = (timelineData) => {
     series.tooltip.label.fill = am4core.color("#000000");
     series.sequencedInterpolation = true;
     series.stroke = am4core.color("#FCC232");
-    series.name = "Recorded";
+    series.name = series1Name;
 
     // Create series
     var series2 = chart.series.push(new am4charts.LineSeries());
@@ -75,7 +75,7 @@ const drawTimelineChart = (timelineData) => {
     series2.tensionX = 0.8;
     series2.strokeWidth = 3;
     series2.stroke = am4core.color("#83E661");
-    series2.name = "Validated";
+    series2.name = series2Name;
 
     if (chartData.length === 1) {
       const circleBullet = series.bullets.push(new am4charts.CircleBullet());
@@ -105,15 +105,15 @@ const disposeLineChart = (chartDiv) => {
   }
 }
 
-function updateLineGraph(language, timeframe, type) {
+function updateLineGraph(language, timeframe, type,series1Name, series2Name) {
     disposeLineChart('timeline-chart');
     $timelineLoader.show().addClass('d-flex');
     $timelineChart.addClass('d-none');
     console.log(type);
-    buildLineGraphs(language, timeframe, type);
+    buildLineGraphs(language, timeframe, type,series1Name, series2Name);
 }
 
-function buildLineGraphs(language, timeframe, type) {
+function buildLineGraphs(language, timeframe, type, series1Name, series2Name) {
   // $.fn.popover.Constructor.Default.whiteList.table = [];
   // $.fn.popover.Constructor.Default.whiteList.tbody = [];
   // $.fn.popover.Constructor.Default.whiteList.tr = [];
@@ -128,7 +128,7 @@ function buildLineGraphs(language, timeframe, type) {
     try {
       $timelineLoader.hide().removeClass('d-flex');
       $timelineChart.removeClass('d-none');
-      drawTimelineChart(data[0]);
+      drawTimelineChart(data[0],series1Name, series2Name);
 
       //lazy load other css
       setTimeout(() => {

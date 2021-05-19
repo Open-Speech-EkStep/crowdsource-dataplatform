@@ -37,11 +37,12 @@ step("When user clicks on View all Details buttton user should be able to see <a
 });
 
 
-step("Add random Username", async function () {
+step("Add <usrnm> Username", async function (usrnm) {
     if (await taiko.text('User Details').exists()) {
         const username = taiko.textBox({ id: 'username' })
         await taiko.waitFor(500)
-        await write('Dummy user', into(username))
+        await write(usrnm, into(username))
+        await taiko.waitFor(500)
     }
 });
 
@@ -154,4 +155,10 @@ step("When user skips the rest of the <count> sentences , User should see Thank 
     }
     await taiko.waitFor(5000)
     assert.ok(await text('Thank you for contributing!').exists())
+});
+
+step("When user click on Lets Go Button", async function() {
+    await click(taiko.button({ id: 'proceed-box' }))
+    await taiko.waitFor(1500)
+    
 });

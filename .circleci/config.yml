@@ -27,6 +27,8 @@ jobs:
     parameters:
       env_name:
         type: string
+      db_name:
+        type: string
     executor:
       name: node/default
     steps:
@@ -35,7 +37,8 @@ jobs:
           name: Gauge tests
           command: |
             sudo apt-get update
-            sudo apt-get install -y git-all gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libgbm-dev libappindicator1 libnss3 lsb-release xdg-utils wget
+            sudo apt-get install -y postgresql-client git-all gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libgbm-dev libappindicator1 libnss3 lsb-release xdg-utils wget
+            psql "postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@${DB_HOST_AWS}/<< parameters.db_name >>" -f functional_tests/sql/dataSeed.sql
             sudo rm -rf /var/lib/apt/lists/*
             npm run install:ft
             npm run functional_test -- -- --env <<parameters.env_name>>
@@ -174,6 +177,7 @@ workflows:
       - run_functional_tests:
           name: functional_tests_dev
           env_name: dev
+          db_name: ${DEV_DB_NAME}
           requires:
             - dev_deployment_eks
             - build_dev_ui      
@@ -215,6 +219,7 @@ workflows:
       - run_functional_tests:
           name: functional_tests_test
           env_name: test
+          db_name: ${TEST_DB_NAME}
           requires:
             - test_deployment_eks
             - build_test_ui

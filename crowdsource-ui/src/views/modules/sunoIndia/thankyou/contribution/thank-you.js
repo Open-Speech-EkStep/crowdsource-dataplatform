@@ -19,7 +19,7 @@ const {downloadPdf} = require('../common/downloadableBadges');
 const {showUserProfile} = require('../common/header');
 
 const {constructChart} = require('../common/horizontalBarGraph');
-const {getContributedAndTopLanguage,setBadge} = require('../common/common');
+const {getContributedAndTopLanguage,setBadge,showByHoursChart} = require('../common/common');
 
 const sunoCountKey = 'sunoCount';
 const CURRENT_INDEX = "sunoCurrentIndex";
@@ -63,22 +63,6 @@ const updateShareContent = function (language, rank) {
     `https://www.linkedin.com/shareArticle?mini=true&url=https://boloindia.nplt.in&title=${localeStrings[boloIndiaTitle]}&summary=${localeText}`
   );
 };
-
-
-const chartReg = {};
-
-function showByHoursChart() {
-  if (chartReg["chart"]) {
-    chartReg["chart"].dispose();
-  }
-  const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-  constructChart(
-    JSON.parse(topLanguagesByHoursData),
-    "total_contributions",
-    "language",
-    "suno"
-  );
-}
 
 const getLanguageStats = function () {
   fetch("/stats/summary/asr")
