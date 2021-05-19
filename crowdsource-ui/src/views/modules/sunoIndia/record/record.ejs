@@ -43,14 +43,9 @@
                     <audio id="my-audio" controls tabindex="-1" src="" type="audio/wav" controlslist="nodownload" crossorigin="anonymous" class="pointer-event"></audio>
                 </div>
             </div>
-            <div class="row justify-content-center mb-5 mb-lg-0 mt-5 mx-1 web-view" id="editor-row">
+            <div class="row justify-content-center mb-5 mb-lg-0 mt-5 mx-1" id="editor-row">
                 <div class="form-group green-border-focus col-lg-8 col-md-5 col-12 m-0 text-area" id="edit-text-suno">
                     <textarea disabled="disabled" class="form-control edit-area" id="edit" rows="3" placeholder="Start typing here..." style="font-size:32px;resize:none"></textarea>
-                </div>
-            </div>
-            <div class="row justify-content-center mb-3 mb-lg-0 mt-5 mx-1 mobile-view" id="editor-row">
-                <div class="form-group green-border-focus col-lg-8 col-md-5 col-12 m-0 text-area" id="edit-text-suno">
-                    <textarea disabled="disabled" class="form-control edit-area" id="edit" rows="3" placeholder="Start typing here..." maxlength="1000" style="font-size:32px;resize:none"></textarea>
                 </div>
             </div>
             <div class="row justify-content-center d-none" id="thankyou-text">
@@ -137,16 +132,16 @@
                     <div class="col-4 text-center">
                         <div id="audio-player-btn">
                             <div class="audioplayer">
-                                <img src="../../img/play.svg" alt="play" id="play" class="cursor-pointer" height="48" width="48"> 
-                                <img src="../../img/pause.svg" height="48" width="48" alt="pause" id="pause" class="d-none cursor-pointer"> 
-                                <img src="../../img/replay.svg" height="48" width="48" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer">
+                                <img src="../../img/play.svg" alt="play" id="play_mob" class="cursor-pointer" height="48" width="48"> 
+                                <img src="../../img/pause.svg" height="48" width="48" alt="pause" id="pause_mob" class="d-none cursor-pointer"> 
+                                <img src="../../img/replay.svg" height="48" width="48" alt="replay" id="replay_mob" class="d-none justify-self-center cursor-pointer">
                             </div>
                         </div>
                     </div>
                     <div class="col-4"></div>
                     </div>
                     <div class="row w-100 m-0 px-3">
-                            <button class="w-100 btn my-3 btn-link-primary" disabled="disabled" id="cancel-edit-button">
+                            <button class="w-100 btn my-3 btn-link-primary" disabled="disabled" id="cancel-edit-button_mob">
                                         <%= __('Cancel') %>
                             </button>
                     </div>
@@ -154,7 +149,7 @@
                         <div><span class="spinner w-h-5"></span></div>
                     </div>
                     <div class="row w-100 m-0 px-3">
-                        <button class="btn my-2 w-100 btn-link-primary" disabled="disabled" id="submit-edit-button">
+                        <button class="btn my-2 w-100 btn-link-primary" disabled="disabled" id="submit-edit-button_mob">
                            
                                     <%= __('Submit') %>
                         </button>

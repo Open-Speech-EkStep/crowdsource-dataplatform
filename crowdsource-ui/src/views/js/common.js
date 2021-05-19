@@ -200,6 +200,17 @@ const disableCancelButton = function(){
   $cancelEditButton.attr('disabled',true);
 }
 
+const isMobileDevice = () => {
+  if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+      // true for mobile device
+     return true
+    }else{
+      // false for not mobile device
+     return false;
+    }
+  }
+  
 
-module.exports =  {getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChart,redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages,isKeyboardExtensionPresent,enableCancelButton,disableCancelButton};
+
+module.exports =  {isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChart,redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages,isKeyboardExtensionPresent,enableCancelButton,disableCancelButton};
 
