@@ -23,6 +23,10 @@ const sentencesKey = 'sunoSentencesKey';
 let localeStrings;
 window.sunoIndia = {};
 
+let playStr = "";
+let pauseStr = "";
+let replayStr = "";
+
 function getValue(number, maxValue) {
   return number < 0
     ? 0
@@ -76,9 +80,9 @@ function enableButton(element) {
 
 const setAudioPlayer = function () {
   const myAudio = document.getElementById('my-audio');
-  const play = $('#play');
-  const pause = $('#pause');
-  const replay = $('#replay');
+  const play = $(playStr);
+  const pause = $(pauseStr);
+  const replay = $(replayStr);
   const textPlay = $('#audioplayer-text_play');
   const textReplay = $('#audioplayer-text_replay');
   const textPause = $('#audioplayer-text_pause');
@@ -170,9 +174,9 @@ function resetValidation() {
   hideElement(textReplay);
   showElement(textPlay);
 
-  hideElement($("#replay"))
-  hideElement($('#pause'))
-  showElement($("#play"))
+  hideElement($(replayStr))
+  hideElement($(pauseStr))
+  showElement($(playStr))
   showElement($('#default_line'))
 }
 
@@ -575,6 +579,20 @@ function executeOnLoad() {
   }
 }
 
+const detectDevice = () => {
+if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    // true for mobile device
+    playStr = "#play_mob";
+    replayStr = "#replay_mob";
+    pauseStr = "#pause_mob"
+  }else{
+    // false for not mobile device
+    playStr = "#play";
+    replayStr = "#replay";
+    pauseStr = "#pause"
+  }
+}
+
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
   hideElement($('#keyboardBox'));
@@ -583,6 +601,8 @@ $(document).ready(() => {
   }).catch(() => {
     executeOnLoad();
   });
+  detectDevice();
+  
 });
 
 
