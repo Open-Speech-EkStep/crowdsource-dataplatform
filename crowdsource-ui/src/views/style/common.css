@@ -224,5 +224,9 @@ body {
   color: #4D82F7;;
 }
 
+#module_name { 
+  margin-left: 0 !important;
+}
+
 
 }
