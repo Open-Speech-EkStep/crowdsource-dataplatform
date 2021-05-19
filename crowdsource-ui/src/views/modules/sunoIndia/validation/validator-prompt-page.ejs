@@ -46,7 +46,7 @@
             <div class="row justify-content-center mb-5 mb-lg-0 mt-5" id="sentences-row">
                 <div class="col-md-8 col-sm-10 text-center prompt"><label class="h1 font-weight-normal" id="sentenceLabel"></label></div>
             </div>
-            <div class="row justify-content-center mb-5 mb-lg-0 mt-5 d-none" id="editor-row">
+            <div class="row m-0 justify-content-center mb-5 mb-lg-0 mt-5 d-none" id="editor-row">
                 <div class="col-lg-4 col-md-5 col-12 original-text">
                     <label><%- __('Original Text')%></label>
                     <div id="original-text">
@@ -156,26 +156,26 @@
 
             <div class="row mobile-view" id="validation-button-row">
                 <div class="col-lg-8 col-md-8 flex-lg-row flex-md-row flex-column d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2">
-                    <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn">
+                    <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn_mob">
                         <div class="audioplayer d-flex justify-content-center align-items-center">
-                            <img src="../../img/play.svg" height="48" width="48" alt="play" id="play" class="cursor-pointer"> 
-                            <img src="../../img/pause.svg" height="48" width="48" alt="pause" id="pause" class="d-none cursor-pointer"> 
-                            <img src="../../img/replay.svg" height="48" width="48" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer">
+                            <img src="../../img/play.svg" height="48" width="48" alt="play" id="play_mob" class="cursor-pointer"> 
+                            <img src="../../img/pause.svg" height="48" width="48" alt="pause" id="pause_mob" class="d-none cursor-pointer"> 
+                            <img src="../../img/replay.svg" height="48" width="48" alt="replay" id="replay_mob" class="d-none justify-self-center cursor-pointer">
                         </div>
                     </div>
-                    <button class="w-100 btn btn-link-primary my-2" disabled="disabled" id="need_change">
+                    <button class="w-100 btn btn-link-primary my-2" disabled="disabled" id="need_change_mob">
                                 <%= __('Needs Change') %>
                     </button>
-                    <button class="w-100 btn btn-link-primary my-2 d-none" id="cancel-edit-button">
+                    <button class="w-100 btn btn-link-primary my-2 d-none" id="cancel-edit-button_mob">
                                 <%= __('Cancel') %>
                     </button>
                     <div class="row justify-content-center mx-2" id="loader-play-btn">
                         <div><span class="spinner w-h-5"></span></div>
                     </div>
-                    <button class="btn btn-link-primary my-2 w-100" disabled="disabled" id="like_button">
+                    <button class="btn btn-link-primary my-2 w-100" disabled="disabled" id="like_button_mob">
                                 <%= __('Correct') %>
                     </button>
-                    <button class="btn btn-link-primary my-2 w-100 d-none" disabled="disabled" id="submit-edit-button">
+                    <button class="btn btn-link-primary my-2 w-100 d-none" disabled="disabled" id="submit-edit-button_mob">
                                 <%= __('Submit') %>
                     </button>
                 </div>

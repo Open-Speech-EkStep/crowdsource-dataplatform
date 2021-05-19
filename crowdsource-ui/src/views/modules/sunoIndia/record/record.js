@@ -214,7 +214,7 @@ function markContributionSkipped() {
 
 function addListeners() {
 
-  const $skipButton = $('#skip_button');
+  const $skipButton = isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button');
   const $submitButton = isMobileDevice() ?  $('#submit-edit-button_mob') :  $('#submit-edit-button');
   const cancelButton = isMobileDevice() ? $('#cancel-edit-button_mob') : $('#cancel-edit-button');
 
@@ -247,12 +247,12 @@ function addListeners() {
     hideElement(cancelButton);
     hideElement($submitButton)
     hideElement($(audioPlayerBtn))
-    hideElement($('#skip_button'))
+    hideElement($skipButton)
     showElement($('#thankyou-text'));
     sunoIndia.editedText = $("#edit").val();
     $("#edit").css('pointer-events', 'none');
     $(cancelButton).attr("disabled", true);
-    const $submitEditButton =isMobileDevice() ? $('#submit-edit-button_mob') : $('#submit-edit-button');
+    const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#D7D7D7');
@@ -264,7 +264,7 @@ function addListeners() {
         showElement(cancelButton);
         showElement($submitButton);
         showElement($(audioPlayerBtn))
-        showElement($('#skip_button'))
+        showElement($skipButton)
         $("#edit").css('pointer-events', 'unset');
         $("#edit").val("");
         closeEditor();
@@ -312,7 +312,7 @@ const loadAudio = function (audioLink) {
 };
 
 function disableSkipButton() {
-  const $skipButton = $('#skip_button');
+  const $skipButton = isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button');
   $skipButton.removeAttr('style');
   disableButton($skipButton)
 }
@@ -334,7 +334,7 @@ const getAudioClip = function (contributionId) {
       fileReader.onload = function (e) {
         loadAudio(e.target.result);
         showAudioRow();
-        enableButton($('#skip_button'))
+        enableButton(isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button'));
       }
       fileReader.readAsDataURL(blob);
     });
@@ -385,6 +385,7 @@ const handleSubmitFeedback = function () {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const otherText = $("#other_text").val();
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
+  const $skipButton = isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button');
 
   const reqObj = {
     sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
@@ -395,7 +396,7 @@ const handleSubmitFeedback = function () {
   };
   reportSentenceOrRecording(reqObj).then(function (resp) {
     if (resp.statusCode === 200) {
-      $('#skip_button').click();
+      $skipButton.click();
       $("#report_sentence_modal").modal('hide');
       $("#report_sentence_thanks_modal").modal('show');
       $("#report_submit_id").attr("disabled", true);
