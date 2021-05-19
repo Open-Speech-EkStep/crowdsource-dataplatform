@@ -3,7 +3,7 @@
  * https://github.com/hodgef/simple-keyboard
  */
 const { keyboardLayout } = require('./keyboardLayout');
-const { CONTRIBUTION_LANGUAGE } = require('./constants');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE } = require('./constants');
 const {isMobileDevice} = require('./common');
 let keyboard;
 const showKeyboard = function (language, callBack1=()=>{} , callBack2=()=>{}) {
@@ -39,7 +39,8 @@ const showKeyboard = function (language, callBack1=()=>{} , callBack2=()=>{}) {
     // }
   // }
     keyboard.setInput(event.target.value);
-    const $submitEditButton = isMobileDevice() ? $("#submit-edit-button_mob") :  $("#submit-edit-button");
+    const currentModule = localStorage.getItem(CURRENT_MODULE);
+    const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") :  $("#submit-edit-button");
     localStorage.setItem("physicalKeyboard",true);
     $('#keyboardBox').addClass('d-none');
 
