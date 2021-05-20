@@ -307,7 +307,7 @@ step("Select Contribution Language as <language>", async function (language) {
 });
 
 step("Select Contribution Language as <language> first time", async function (language) {
-    await taiko.waitFor(300)
+    await taiko.waitFor(500)
     await click(language);
     await taiko.waitFor(700)
 });
