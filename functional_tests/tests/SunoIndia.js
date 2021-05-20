@@ -7,6 +7,7 @@ const {
     write,
     click,
     link,
+    clear,
     text,
     into
 } = require('taiko');
@@ -40,6 +41,8 @@ step("When user clicks on View all Details buttton user should be able to see <a
 step("Add <usrnm> Username", async function (usrnm) {
     if (await taiko.text('User Details').exists()) {
         const username = taiko.textBox({ id: 'username' })
+        await taiko.waitFor(700)
+        await clear(taiko.textBox({id:'username'}));
         await taiko.waitFor(500)
         await write(usrnm, into(username))
         await taiko.waitFor(500)
@@ -115,10 +118,13 @@ step("User click on <type> field and type <hinditext> submit and cancel button s
     const editfield = taiko.textBox({ id: type })
     await taiko.waitFor(500)
     await write(hinditext, into(editfield))
-
-    assert.ok(await text("प").exists());
-    assert.ok(await text("न").exists());
-    assert.ok(await text("स").exists());
+    assert.ok(! await button({ id: 'submit-edit-button' }).isDisabled())
+    assert.ok(! await button({ id: 'cancel-edit-button' }).isDisabled())
+});
+step("When User clicks on <type> field and type <txt> submit and cancel button should be enabled", async function(type, txt) {
+    const editfield = taiko.textBox({ id: type })
+    await taiko.waitFor(500)
+    await write(txt, into(editfield))
     assert.ok(! await button({ id: 'submit-edit-button' }).isDisabled())
     assert.ok(! await button({ id: 'cancel-edit-button' }).isDisabled())
 });
@@ -161,4 +167,38 @@ step("When user click on Lets Go Button", async function() {
     await click(taiko.button({ id: 'proceed-box' }))
     await taiko.waitFor(1500)
     
+});
+
+step("Check <card> option should be <state> on Home page", async function(card,state) {
+    
+    if(card=="Transcribe"&& state=="disabled")
+    {
+        assert.ok(await text('No contribution data available for selected language').isVisible());
+
+    }
+    if(card=="Correct"&& state=="disabled")
+    {
+        assert.ok(await text('No validation data available for selected language').isVisible());
+    }
+    if(card=="Transcribe"&& state=="enabled")
+    {
+        assert.ok(! await text('No contribution data available for selected language').isVisible());
+    }
+    if(card=="Correct"&& state=="enabled")
+    {
+        assert.ok(! await text('No validation data available for selected language').isVisible());
+    }
+});
+
+step("when user clicks on the Validate more button user should no data available message", async function() {
+    await click(link('Validate More'))
+    await taiko.waitFor(1000)
+    assert.ok(await text('Thank you for validating!').exists())
+});
+
+step("When user clicks on Contribute more button , user should no data available message", async function() {
+    await click(link('Contribute More'))
+    await taiko.waitFor(1000)
+    assert.ok(await text('Thank you for your enthusiasm to transcribe the recordings!').exists())
+    assert.ok(await link('Back to SunoIndia Home').exists());
 });
