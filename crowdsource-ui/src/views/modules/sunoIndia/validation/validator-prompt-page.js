@@ -329,8 +329,10 @@ function addListeners() {
   $cancelButton.on('click', () => {
     const $submitEditButton = $submitButton;
     $submitEditButton.attr('disabled',true);
+    if(!isMobileDevice()) {
       const children = $submitEditButton.children().children();
       children[0].setAttribute("fill", '#D7D7D7');
+    }
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
     setInput("");

@@ -4,9 +4,9 @@
  */
 const { keyboardLayout } = require('./keyboardLayout');
 const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE } = require('./constants');
-const {isMobileDevice} = require('./common');
+const { isMobileDevice } = require('./common');
 let keyboard;
-const showKeyboard = function (language, callBack1=()=>{} , callBack2=()=>{}) {
+const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () => { }) {
   let Keyboard = window.SimpleKeyboard.default;
 
   /**
@@ -37,40 +37,64 @@ const showKeyboard = function (language, callBack1=()=>{} , callBack2=()=>{}) {
     //     $("#wrong-language").addClass("d-none");
     //   },2000)
     // }
-  // }
+    // }
     keyboard.setInput(event.target.value);
     const currentModule = localStorage.getItem(CURRENT_MODULE);
-    const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") :  $("#submit-edit-button");
-    localStorage.setItem("physicalKeyboard",true);
+    const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
+    const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
+    localStorage.setItem("physicalKeyboard", true);
     $('#keyboardBox').addClass('d-none');
 
-    if(event.target.value.length > 0) {
+    if (event.target.value.length > 0) {
       callBack1();
       $submitEditButton.removeAttr('disabled');
-      const children = $submitEditButton.children().children();
-      children[0].setAttribute("fill", '#007BFF');
-    }else {
+      if($cancelButton) {
+        $cancelButton.removeAttr('disabled');
+      }
+      if (!isMobileDevice()) {
+        const children = $submitEditButton.children().children();
+        children[0].setAttribute("fill", '#007BFF');
+      }
+
+    } else {
       callBack2()
-      $submitEditButton.attr('disabled',true);
-      const children = $submitEditButton.children().children();
-      children[0].setAttribute("fill", '#D7D7D7');
+      $submitEditButton.attr('disabled', true);
+      if($cancelButton) {
+        $cancelButton.attr('disabled', true);
+      }
+      if (!isMobileDevice()) {
+        const children = $submitEditButton.children().children();
+        children[0].setAttribute("fill", '#D7D7D7');
+      }
     }
   });
 
   function onChange(input) {
     document.querySelector(".edit-area").value = input;
-    const $submitEditButton = $("#submit-edit-button");
-    localStorage.setItem("physicalKeyboard",false);
-    if(input.length > 0) {
+    const currentModule = localStorage.getItem(CURRENT_MODULE);
+    const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
+    const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
+    localStorage.setItem("physicalKeyboard", false);
+    if (input.length > 0) {
       callBack1();
+      if($cancelButton) {
+        $cancelButton.removeAttr('disabled');
+      }
       $submitEditButton.removeAttr('disabled');
-      const children = $submitEditButton.children().children();
-      children[0].setAttribute("fill", '#007BFF');
+      if (!isMobileDevice()) {
+        const children = $submitEditButton.children().children();
+        children[0].setAttribute("fill", '#007BFF');
+      }
     } else {
       callBack2();
-      $submitEditButton.attr('disabled',true);
-      const children = $submitEditButton.children().children();
-      children[0].setAttribute("fill", '#D7D7D7');
+      if($cancelButton) {
+        $cancelButton.attr('disabled', true);
+      }
+      $submitEditButton.attr('disabled', true);
+      if (!isMobileDevice()) {
+        const children = $submitEditButton.children().children();
+        children[0].setAttribute("fill", '#D7D7D7');
+      }
     }
     // keyboard.setOptions({
     //
@@ -119,7 +143,7 @@ const showKeyboard = function (language, callBack1=()=>{} , callBack2=()=>{}) {
         // return document.getElementById("lang_her").innerHTML = key; //print language name if unicode true  
         if (key == localStorage.getItem(CONTRIBUTION_LANGUAGE)) {
           isLanguageSelected = true;
-        } 
+        }
       }
     });
     return isLanguageSelected;

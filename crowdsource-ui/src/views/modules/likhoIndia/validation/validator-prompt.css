@@ -76,6 +76,12 @@ a{
     .prompt{
         min-height: 150px;
         padding: 32px;
+    } 
+    .need_change_btn {
+        margin-right: 3rem !important;
+    }
+    .pl-4 {
+        padding-left: 1.5rem !important;
     }
 }
 
@@ -91,10 +97,17 @@ a{
 }
 
 @media (max-width: 767px) {
+    .pl-4 {
+        padding-left: 0.5rem !important;
+    }
     .record-btn-container {
         flex-direction: column-reverse;
         align-items: flex-end;
         display: -webkit-box;
+    }
+
+    .need_change_btn {
+        margin-right: 0 !important;
     }
   
     .top-back-btn {

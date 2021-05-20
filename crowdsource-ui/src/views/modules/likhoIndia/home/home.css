@@ -435,6 +435,7 @@ body.modal-open .supreme-container {
 @media (max-width: 767px) {
   .from-label {
     text-align: left;
+    padding-left: 0px !important;
   }
 }
 
