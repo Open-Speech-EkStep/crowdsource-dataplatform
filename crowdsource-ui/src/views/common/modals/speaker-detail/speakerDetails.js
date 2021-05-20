@@ -122,14 +122,16 @@ const setUserNameOnInputFocus = function () {
     $userName.on('input focus', () => {
         validateUserName($userName, $userNameError);
         // setUserNameTooltip($userName);
-        const userNameValue = $userName.val().trim();
-        if (!testUserName(userNameValue)) {
-            $startRecordBtn.removeAttr('disabled').removeClass('point-none');
-            $startRecordBtnTooltip.tooltip('disable');
-        } else {
-            setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
-            $startRecordBtn.prop('disabled', true).addClass('point-none');
-            $startRecordBtnTooltip.tooltip('enable');
+        if($startRecordBtnTooltip) {
+            const userNameValue = $userName.val().trim();
+            if (!testUserName(userNameValue)) {
+                $startRecordBtn.removeAttr('disabled').removeClass('point-none');
+                $startRecordBtnTooltip.tooltip('disable');
+            } else {
+                setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
+                $startRecordBtn.prop('disabled', true).addClass('point-none');
+                $startRecordBtnTooltip.tooltip('enable');
+            }
         }
     });
 }
