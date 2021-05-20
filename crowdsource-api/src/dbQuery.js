@@ -242,8 +242,11 @@ contributions con on con.dataset_row_id=dr.dataset_row_id and con.action='comple
 const getDatasetLanguagesQuery = `select distinct(media->>'language') as language from dataset_row where type=$1 
 and ((state is null) or (state='contributed'))`;
 
-const hasTargetQuery = `select exists(select 1 from contributions con inner join dataset_row dr on con.dataset_row_id=dr.dataset_row_id 
-  where type=$1 and dr.media->>'language'=$2 and con.media->>'language'=$3 and con.action='completed') as result`;
+const hasTargetQuery = `select exists(select 1 from contributions con inner join dataset_row dr on con.dataset_row_id=dr.dataset_row_id left join validations val on 
+  con.contribution_id=val.contribution_id and val.action!='skip' inner join configurations conf on conf.config_name='validation_count'
+where type=$1 and dr.media->>'language'=$2 and con.media->>'language'=$3 and con.action='completed'
+group by val.contribution_id,conf.value having count(val.*)<conf.value) as result
+`;
 
 const isAllContributedQuery = `select not exists(
 	select dataset_row_id from dataset_row where type=$1 and media->>'language'=$2
