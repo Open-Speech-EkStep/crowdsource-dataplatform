@@ -39,3 +39,131 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
+
+@media (max-width: 1024px) {
+    #keyboardBox {
+        top: 760px;
+        left: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    #keyboardBox {
+        top: 600px;
+        left: 100px;
+    }
+}
+
+@media (max-width: 767px) {
+    #keyboardBox {
+        width: 360px;
+        height: auto;
+        top: 700px;
+        left:0px;
+    }
+
+    #keyboardBoxHeader {
+        width: 360px;
+        height: auto;
+    }
+
+    .simple-keyboard{
+        width: 360px;
+        height: auto;
+    }
+}
+
+@media (max-width: 414px) {
+    #keyboardBox {
+        width: 414px;
+        height: auto;
+        top: 700px;
+        left:0px;
+    }
+
+    #keyboardBoxHeader {
+        width: 414px;
+        height: auto;
+    }
+
+    .simple-keyboard{
+        width: 414px;
+        height: auto;
+    }
+}
+
+@media (max-width: 411px) {
+    #keyboardBox {
+        width: 411px;
+        height: auto;
+        top: 700px;
+        left:0px;
+    }
+
+    #keyboardBoxHeader {
+        width: 411px;
+        height: auto;
+    }
+
+    .simple-keyboard{
+        width: 411px;
+        height: auto;
+    }
+}
+
+@media (max-width: 375px) {
+    #keyboardBox {
+        width: 375px;
+        height: auto;
+        top: 700px;
+        left:0px;
+    }
+
+    #keyboardBoxHeader {
+        width: 375px;
+        height: auto;
+    }
+
+    .simple-keyboard{
+        width: 375px;
+        height: auto;
+    }
+}
+
+@media (max-width: 360px) {
+    #keyboardBox {
+        width: 360px;
+        height: auto;
+        top: 700px;
+        left:0px;
+    }
+
+    #keyboardBoxHeader {
+        width: 360px;
+        height: auto;
+    }
+
+    .simple-keyboard{
+        width: 360px;
+        height: auto;
+    }
+}
+
+@media (max-width: 320px) {
+    #keyboardBox {
+        width: 320px;
+        height: auto;
+        top: 700px;
+        left:0px;
+    }
+
+    #keyboardBoxHeader {
+        width: 320px;
+        height: auto;
+    }
+
+    .simple-keyboard{
+        width: 320px;
+        height: auto;
+    }
+}
