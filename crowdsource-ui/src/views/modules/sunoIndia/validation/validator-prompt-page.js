@@ -447,6 +447,7 @@ function showNoSentencesMessage() {
   hideElement($('#virtualKeyBoardBtn'));
   hideElement($(audioPlayerBtn))
   hideElement($('#validation-button-row'))
+  hideElement($('#audio-row'))
   hideElement($('#progress-row'))
   showElement($('#no-sentences-row'))
   hideElement($('#skip_btn_row'));
