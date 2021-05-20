@@ -54,9 +54,7 @@ step("User should be able to close the Instructions , user should see Skip butto
     assert.ok(await button({ id: 'submit-edit-button' }).exists())
     assert.ok(await button({ id: 'cancel-edit-button' }).exists())
     assert.ok(await button({ id: 'skip_button' }).exists())
-    assert.ok(await text('Dummy User').exists())
     assert.ok(await button({ id: 'test-mic-speakers-button' }).exists())
-
 });
 
 step("When user clicks on the Test Speaker button, user should see <arg0>", async function (arg0) {
@@ -146,9 +144,11 @@ step("When user clicks on Play button, Pause button should appear and when user 
 });
 
 step("Once user clicks on Others Radio button in transcribe flow, Submit button should be enabled", async function() {
+    await taiko.waitFor(500)
     assert.ok(await taiko.radioButton({ id: 'others_id' }).exists())
     assert.ok(await taiko.radioButton({ id: 'Offensive_id' }).exists())
     await click(taiko.radioButton({ id: 'others_id' }))
+    await taiko.waitFor(500)
     assert.ok(! await taiko.button({ id: "report_submit_id" }).isDisabled()); 
 
 });
@@ -199,6 +199,6 @@ step("when user clicks on the Validate more button user should no data available
 step("When user clicks on Contribute more button , user should no data available message", async function() {
     await click(link('Contribute More'))
     await taiko.waitFor(1000)
-    assert.ok(await text('Thank you for your enthusiasm to transcribe the recordings!').exists())
+    assert.ok(await text('Thank you for your enthusiasm to transcribe the recordings.').exists())
     assert.ok(await link('Back to SunoIndia Home').exists());
 });

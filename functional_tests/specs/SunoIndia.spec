@@ -32,9 +32,9 @@
 * Check "Correct" option should be "enabled" on Home page
 * Navigate to "Correct" button and click "Correct" button
 * Add "V1 User" Username
+* When user click on Lets Go Button, user should "not" see instructions to record
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be disabled
 * User plays the audio , "need_change","like_button" should be enabled
-
 
 ## Validate Transcribe card should be disabled & Validate should be enabled when the data is already contributed for Bengali language
 * Select "Suno India"from header 
@@ -60,7 +60,6 @@
 
 ## Validate Transcribe flow
 * Select "Suno India"from header    
-* Select Contribution Language as "मराठी"
 * Navigate to "Transcribe" button and click "Transcribe" button
 * Add "T User" Username
 * When user click on Lets Go Button, user should "" see instructions to record
@@ -82,7 +81,6 @@
 
 ## Validate the User Details pop-up in Correct section
 * Select "Suno India"from header    
-* Select Contribution Language as "मराठी"
 * Navigate to "Correct" button and click "Correct" button
 * Username field should be present
 * if a user enter username and click on Not you change user button , the field should be cleared
@@ -90,7 +88,6 @@
 
 ## Validate Validate flow
 * Select "Suno India"from header 
-* Select Contribution Language as "मराठी"
 * Navigate to "Correct" button and click "Correct" button
 * Add "V User" Username
 * When user click on Lets Go Button, user should "not" see instructions to record
@@ -108,9 +105,9 @@
 
 ## Check the Validate flow for new user
 * Select "Suno India"from header 
-* Select Contribution Language as "मराठी"
 * Navigate to "Correct" button and click "Correct" button
 * Add "New V User" Username
+* When user click on Lets Go Button, user should "not" see instructions to record
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be disabled
 * User plays the audio , "need_change","like_button" should be enabled
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be disabled
