@@ -431,10 +431,6 @@ const initialize = function () {
 
   $("#report_submit_id").on('click', handleSubmitFeedback);
 
-  $("#report_btn").on('click', function () {
-    $reportModal.modal('show');
-  });
-
   $("#report_close_btn").on("click", function () {
     $reportModal.modal('hide');
   });
@@ -611,7 +607,6 @@ $(document).ready(() => {
   detectDevice();
   
 });
-
 
 module.exports = {
   setAudioPlayer,
