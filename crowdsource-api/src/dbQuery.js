@@ -129,7 +129,7 @@ select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as 
 const getContributionListForParallel = `
 select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id 
   from contributions con 
-  inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.type=$2 and con.media->>'language'=$4 and cont.contributed_by!=$1
+  inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.type=$2 and con.media->>'language'=$4 and con.contributed_by!=$1
   left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' and con.media ->> 'language' = $4
   inner join configurations conf on conf.config_name='validation_count' 
   where  con.action='completed' and ds.media->>'language'=$3 
