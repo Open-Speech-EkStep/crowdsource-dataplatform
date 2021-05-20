@@ -2,7 +2,8 @@
     background-color:#e9ecef;
     position:fixed;
     bottom:15px;
-    right:15px
+    right:15px;
+    padding: 5px 15px;
 }
 
 

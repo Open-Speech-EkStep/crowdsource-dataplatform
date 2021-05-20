@@ -76,7 +76,7 @@ function initializeBlock() {
     addLanguagesIn('from-language', datasetLanguages);
 
     if (fromLanguage && toLanguage) {
-      const languages = ALL_LANGUAGES.filter(item => item.value !== fromLanguage);
+      const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
       addToLanguage('to-language', languages);
       updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
       showFucntionalCards('parallel', fromLanguage, toLanguage);
@@ -86,7 +86,7 @@ function initializeBlock() {
     } else {
       $('#from-language option:first-child').attr("selected", "selected");
       fromLanguage = $('#from-language option:first-child').val();
-      const languages = ALL_LANGUAGES.filter(item => item.value !== fromLanguage);
+      const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
       addToLanguage('to-language', languages);
       $('#to-language option:first-child').attr("selected", "selected");
       toLanguage = $('#to-language option:first-child').val();
