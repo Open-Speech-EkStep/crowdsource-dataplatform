@@ -62,7 +62,7 @@
 * Select "Suno India"from header    
 * Navigate to "Transcribe" button and click "Transcribe" button
 * Add "T User" Username
-* When user click on Lets Go Button, user should "" see instructions to record
+* When user click on Lets Go Button, user should "not" see instructions to record
 * User should be able to close the Instructions , user should see Skip button , Play Button , username , Cancel , Submit and speaker button
 * When user clicks on the Test Speaker button, user should see "play-speaker"
 * When user clicks on the cross button , pop up should close and user should see the Test Mic and speaker button
