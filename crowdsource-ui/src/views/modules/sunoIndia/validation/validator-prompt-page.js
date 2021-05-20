@@ -275,7 +275,6 @@ const closeEditor = function (){
 function addListeners() {
 
   const likeButton = $(likeBtn);
-  console.log("like button", likeButton);
   const needChangeButton = $(needChange);
   const $submitButton = $(submitButton);
   const $cancelButton = $(cancelButton);

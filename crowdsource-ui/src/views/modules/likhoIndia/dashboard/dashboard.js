@@ -133,11 +133,16 @@ $(document).ready(function () {
 
     $('#from-dash-language').on('change', (e) => {
       fromLanguage = e.target.value === "" ? "" : e.target.value;
+        if(toLanguage !== "" && fromLanguage !== "") {
+            updateLanguage(fromLanguage + '-' +toLanguage);
+        } else {
+            updateLanguage("");
+        }
     });
 
     $('#to-dash-language').on('change', (e) => {
       toLanguage = e.target.value === "" ? "" : e.target.value;
-      if(toLanguage !== "") {
+      if(toLanguage !== "" && fromLanguage !== "") {
         updateLanguage(fromLanguage + '-' +toLanguage);
       } else {
         updateLanguage("");
