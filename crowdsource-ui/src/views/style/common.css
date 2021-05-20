@@ -192,9 +192,17 @@ body {
   background:rgba(77,130,247,.1);
   color: #4D82F7;;
 }
+.footer-links {
+  margin-left: 3rem !important;
+}
 }
 
   @media (max-width: 767px) {
+
+    .footer-links {
+      margin-left: 0 !important;
+    }
+
     #cont-warning-msg {
       display: none;
       top:5px;

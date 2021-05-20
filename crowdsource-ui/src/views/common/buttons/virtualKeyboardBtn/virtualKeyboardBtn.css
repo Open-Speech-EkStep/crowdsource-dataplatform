@@ -11,6 +11,9 @@
         border-radius: 50%;
     height: 50px;
     width: 50px;
+    right: 30px;
+    bottom: 40px;
+    padding: 11px !important;
     }
     .virtual-keyboard-btn span {
         display: none;

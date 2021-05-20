@@ -124,6 +124,18 @@ a {
    .top-back-btn .back-text {
      display: none;
    }
+
+/* Modal Content (image) */
+#myModal .modal-content {
+    height: 200px;
+    padding: 0 !important;
+}
+
+
+.close, .close-validate {
+    top: 10px !important;
+    right: 15px !important;
+}
 }
 
 @media (min-width: 767px) {

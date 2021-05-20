@@ -139,6 +139,10 @@ body {
    top: 39px;
    left: -4px;
   }
+  .dekho-back-btn {
+    left: 1px !important;
+    margin-top: -7px !important;
+  }
 
   .top-back-btn .back-text {
     display: none;

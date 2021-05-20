@@ -202,3 +202,18 @@
     0% {margin-left: 100%;}
     100% {margin-left:-100%;}
 }
+
+@media (max-width: 767px) {
+    .top-back-btn {
+     top: 80px;
+     left: 10px;
+    }
+  }
+  @media screen and (min-width: 768px) {
+  
+    .top-back-btn {
+        top: 100px !important;
+        left: 35px !important;
+       }
+}
+  

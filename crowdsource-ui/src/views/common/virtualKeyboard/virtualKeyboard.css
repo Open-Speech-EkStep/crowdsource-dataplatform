@@ -39,3 +39,20 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
+
+
+@media (min-width: 767px) {
+   .keyboard-layout {
+       width: 560px;
+   }
+}
+
+
+@media (max-width: 767px) {
+    .keyboard-layout {
+        width: 100%;
+    }
+    #keyboardBox {
+        position: initial !important;
+    }
+}
