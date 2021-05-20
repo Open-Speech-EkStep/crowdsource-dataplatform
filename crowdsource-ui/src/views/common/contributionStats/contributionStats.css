@@ -10,18 +10,11 @@
     font-weight: 700;
     line-height: 1.8rem;
 }
-
-#contributed-value {
-    color: #FCC232;
-}
-
-#validated-value {
-    color: #83E661;
-}
-
 @media screen and (min-width: 768px) {
     .contribution-data {
-        border-right: 1px dashed #C4C4C4;
+        border-right: 1px solid #C4C4C4;
+        text-align: left;
+        padding-left: 40px;
     }
     .contribution-data:last-child {
         border: none;
@@ -37,7 +30,8 @@
         max-width: 100%;
     }
     .contribution-data {
-        border-bottom: 1px dashed #C4C4C4;
+        border-bottom: 1px solid #C4C4C4;
         padding: 1rem 0;
+        text-align: center;
     }
 }
