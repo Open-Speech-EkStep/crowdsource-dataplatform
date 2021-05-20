@@ -1,0 +1,105 @@
+#feedback_button{
+    color: #007BFF;
+    width: 60px;
+    height: 60px;
+}
+
+.float{
+	position:fixed;
+	bottom:55px;
+	right:26px;
+	background-color:#FFFFFF;
+	color:#FFF;
+	border-radius:50px;
+	border: 1px solid rgba(0, 123, 255, 0.2);
+	text-align:center;
+	box-sizing: border-box;
+	box-shadow: #007BFF;
+}
+
+.my-float{
+	left: 8.33%;
+	right: 25%;
+	top: 25%;
+	bottom: 9.31%;
+}
+
+#feedback_button:hover {
+	background-color: #c5dffb;
+}
+
+.custom-modal {
+	max-width: 700px;
+	max-height: 867px;
+}
+
+.opinion input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+}
+
+.opinion input[type="radio"] + svg {
+	-webkit-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+.opinion input + svg {
+	cursor: pointer;
+}
+
+.opinion input[class="sad"]:hover + svg,
+.opinion input[class="sad"]:checked + svg,
+.opinion input[class="sad"]:focus + svg {
+	border: 2px solid #E30606;
+	stroke: #E30606;
+	color:#E30606;
+}
+
+.opinion input[class="neutral-1"]:hover + svg,
+.opinion input[class="neutral-1"]:checked + svg,
+.opinion input[class="neutral-1"]:focus + svg {
+	border: 2px solid #EA913F;
+	stroke: #EA913F !important;
+	color:#EA913F;
+}
+
+.opinion input[class="neutral"]:hover + svg,
+.opinion input[class="neutral"]:checked + svg,
+.opinion input[class="neutral"]:focus + svg {
+	border: 2px solid #007BFF;
+	stroke: #007BFF !important;
+	color:#007BFF;
+}
+
+.opinion input[class="happy"]:hover + svg,
+.opinion input[class="happy"]:checked + svg,
+.opinion input[class="happy"]:focus + svg {
+	border: 2px solid #4ED738;
+	stroke: #4ED738;
+	color:#4ED738;
+	fill: #4ED738;
+}
+
+.opinion input[class="very-happy"]:hover + svg,
+.opinion input[class="very-happy"]:checked + svg,
+.opinion input[class="very-happy"]:focus + svg {
+	border: 2px solid #2A8908;
+	stroke: #2A8908;
+	color:#2A8908;
+	fill: #2A8908;
+}
+
+.label-color-feedback {
+	color: #494A4A !important;
+}
+
+.submit-btn-feedback {
+	color: #FFFFFF;
+	background: #007BFF;
+	opacity: 0.4;
+	border: 1px solid #007BFF;
+	box-sizing: border-box;
+	border-radius: 40px;
+	width: 160px;
+	height: 48px;
+}
