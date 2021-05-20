@@ -22,15 +22,6 @@ const {
   LIKHO_TO_LANGUAGE
 } = require('../common/constants');
 
-const addLanguagesIn = function (id, list) {
-  const selectBar = document.getElementById(id);
-  let options = '';
-  list.forEach(lang => {
-    options = options.concat(`<option value=${lang}>${lang}</option>`);
-  })
-  selectBar.innerHTML = options;
-}
-
 const addToLanguage = function (id, list) {
   const selectBar = document.getElementById(id);
   let options = '';
@@ -73,7 +64,16 @@ function initializeBlock() {
     const { datasetLanguages, contributionLanguages } = languagePairs;
     let fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
     let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
-    addLanguagesIn('from-language', datasetLanguages);
+
+    let nativeLanguage  = [];
+    datasetLanguages.forEach((item) => {
+        const data = ALL_LANGUAGES.find(ele => ele.value == item);
+        if(data) {
+          nativeLanguage.push(data);
+        }
+     }
+    );
+    addToLanguage('from-language', nativeLanguage);
 
     if (fromLanguage && toLanguage) {
       const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
