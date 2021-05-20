@@ -275,7 +275,6 @@ const closeEditor = function (){
 function addListeners() {
 
   const likeButton = $(likeBtn);
-  console.log("like button", likeButton);
   const needChangeButton = $(needChange);
   const $submitButton = $(submitButton);
   const $cancelButton = $(cancelButton);
@@ -450,6 +449,7 @@ function showNoSentencesMessage() {
   hideElement($('#virtualKeyBoardBtn'));
   hideElement($(audioPlayerBtn))
   hideElement($('#validation-button-row'))
+  hideElement($('#audio-row'))
   hideElement($('#progress-row'))
   showElement($('#no-sentences-row'))
   hideElement($('#skip_btn_row'));
