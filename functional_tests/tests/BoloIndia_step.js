@@ -288,13 +288,12 @@ step("User should be able to change to preffered Language to English again", asy
 step("Select Contribution Language as <language>", async function (language) {
 
     await taiko.waitFor(300)
-<<<<<<< HEAD
     const prefLanguagePopup = text('Select Your Preferred Language')
     if(!prefLanguagePopup.exists()){
         await click("show All");
     }
     await taiko.waitFor(900)
-=======
+
     await click(taiko.$('#Show_all_language'));
     await taiko.waitFor(300)
     await click(language);
@@ -303,7 +302,6 @@ step("Select Contribution Language as <language>", async function (language) {
 
 step("Select Contribution Language as <language> first time", async function (language) {
     await taiko.waitFor(300)
->>>>>>> added more functional tests
     await click(language);
     await taiko.waitFor(700)
 });
