@@ -3,8 +3,7 @@
 * Open BoloIndia
 
 ## Validate Validator flow
-* Select Contribution Language as "English" first time
-* Select Contribution Language as "हिंदी"
+* Select Contribution Language as "हिंदी" first time
 * Select translation language as "हिंदी"
 * Navigate to "Validate" button and click "Validate" button
 * "skip_button" should be enabled , "dislike_button" "like_button" buttons should be disabled
