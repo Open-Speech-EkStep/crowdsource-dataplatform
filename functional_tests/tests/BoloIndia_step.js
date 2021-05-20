@@ -6,9 +6,11 @@ const {
     openBrowser,
     button,
     closeBrowser,
+    openTab,
     overridePermissions,
     goto,
     clear,
+    listItem,
     write,
     click,
     hover,
@@ -37,9 +39,9 @@ afterSuite(async () => {
 });
 
 step("Open BoloIndia", async () => {
-   await taiko.waitFor(1000)
+   await taiko.waitFor(500)
     await goto(testUrl);
-    await taiko.waitFor(1000)
+    await taiko.waitFor(500)
 });
 
 step("Validate about us content", async function () {
@@ -62,6 +64,7 @@ step("Speaker details popup should appear and close button should close the pop 
         assert.ok('speaker details pop-up exists')
         await click(taiko.button({ class: 'close float-right' }))
     }
+    await taiko.waitFor(500)
 });
 
 step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present", async function () {
@@ -150,31 +153,41 @@ step("when user clicks on the Contribute More button, user should not see the In
 
 step("User should see the content in <language>", async function (language) {
     if (language == "Hindi") {
+        await taiko.waitFor(500)
         assert.ok(await text("बोलो इंडिया: भारतीय भाषाओं के लिए एक क्राउडसोर्सिंग पहल").exists());
     }
 });
 
 step("Select translation language as <language>", async function (language) {
-    const localeDropDown = taiko.$("#localeDropdownMenuButton");
-    await taiko.waitFor(1000);
-    await click(localeDropDown);
+    await taiko.waitFor(500)
+    //await taiko.$("#locale_language_dropdown").exists()
+    //const localeDropDown = taiko.$("#locale_language_dropdown");
+    //await click(localeDropDown);
+
+    await click(listItem({id:"locale_language_dropdown"}));
+    await taiko.waitFor(500);
     await click(link(language));
+    await taiko.waitFor(500);
 });
 
 step("Navigate to <arg0> button and click <arg0> button", async function (arg0) {
 
     if (arg0 == "Contribute") {
+        await taiko.waitFor(1000)
         const startRecordingButton = taiko.image({ id: "start_recording" });
         assert.ok(await startRecordingButton.exists());
         await hover(startRecordingButton);
+        await taiko.waitFor(500)
         await click(startRecordingButton);
     }
 
     else if (arg0 == "Validate") {
+        await taiko.waitFor(1000)
         const startValidatingButton = taiko.image({ id: "start_validating" });
         assert.ok(await startValidatingButton.exists());
         await taiko.waitFor(500);
         await hover(startValidatingButton);
+        await taiko.waitFor(500)
         await click(startValidatingButton);
     }
     else if (arg0 == "Transcribe") {
@@ -286,22 +299,15 @@ step("User should be able to change to preffered Language to English again", asy
 });
 
 step("Select Contribution Language as <language>", async function (language) {
-
-    await taiko.waitFor(300)
-    const prefLanguagePopup = text('Select Your Preferred Language')
-    if(!prefLanguagePopup.exists()){
-        await click("show All");
-    }
-    await taiko.waitFor(900)
-
+    await taiko.waitFor(700)
     await click(taiko.$('#Show_all_language'));
     await taiko.waitFor(300)
     await click(language);
-    await taiko.waitFor(700)
+    await taiko.waitFor(1000)
 });
 
 step("Select Contribution Language as <language> first time", async function (language) {
-    await taiko.waitFor(300)
+    await taiko.waitFor(500)
     await click(language);
     await taiko.waitFor(700)
 });
@@ -355,15 +361,9 @@ step("When user clicks on the go to home page button , user should see the home 
     assert.ok(await text("Bolo India: A crowdsourcing initiative for Indian languages").exists());
 });
 
-step("Skip coach mark instructions", async function () {
-    await taiko.waitFor(1000)
-    await text('SKIP').exists();
-    await text('You can select the language in which you want to participate').exists();
-    await click('SKIP');
-});
-
 step("When user clicks on Report Button, user should see Report Content Dialog Box & Submit button should be disabled", async function() {
     assert.ok(await text("Report").exists());
+    await taiko.waitFor(500);
     await click(taiko.button({ id: "report_btn" }))
     await taiko.waitFor(500);
     assert.ok(await text("Report Content").exists());
