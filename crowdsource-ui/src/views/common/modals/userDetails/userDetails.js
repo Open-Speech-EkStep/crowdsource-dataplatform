@@ -75,23 +75,23 @@ const setUserModalOnShown = function ($userName) {
 const setUserNameOnInputFocus = function () {
   const $userName = $('#username');
   const $userNameError = $userName.next();
-  const $startRecordBtn = $('#proceed-box');
-  const $startRecordBtnTooltip = $startRecordBtn.parent();
-  $userName.on('input focus', () => {
-    validateUserName($userName, $userNameError);
-    // setUserNameTooltip($userName);
-    const userNameValue = $userName.val().trim();
-    if($startRecordBtnTooltip) {
-      if (!testUserName(userNameValue)) {
-        $startRecordBtn.removeAttr('disabled').removeClass('point-none');
-        $startRecordBtnTooltip.tooltip('disable');
-      } else {
-        setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
-        $startRecordBtn.prop('disabled', true).addClass('point-none');
-        $startRecordBtnTooltip.tooltip('enable');
-      }
-    }
-  });
+  // const $startRecordBtn = $('#proceed-box');
+  // const $startRecordBtnTooltip = $startRecordBtn.parent();
+  // $userName.on('input focus', () => {
+  //   validateUserName($userName, $userNameError);
+  //   // setUserNameTooltip($userName);
+  //   const userNameValue = $userName.val().trim();
+  //   if($startRecordBtnTooltip) {
+  //     if (!testUserName(userNameValue)) {
+  //       $startRecordBtn.removeAttr('disabled').removeClass('point-none');
+  //       $startRecordBtnTooltip.tooltip('disable');
+  //     } else {
+  //       setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
+  //       $startRecordBtn.prop('disabled', true).addClass('point-none');
+  //       $startRecordBtnTooltip.tooltip('enable');
+  //     }
+  //   }
+  // });
 }
 
 const setStartRecordingBtnOnClick = function (url, module='') {
