@@ -8,6 +8,7 @@ const {
     closeBrowser,
     overridePermissions,
     goto,
+    clear,
     write,
     click,
     hover,
@@ -78,7 +79,8 @@ step("if a user enter username and click on Not you change user button , the fie
     const usernameFiled = taiko.textBox({ id: 'username' })
     await taiko.waitFor(500)
     await write('TestUser', into(usernameFiled))
-    await click(taiko.$('#resetBtn'))
+    await clear(taiko.textBox({id:'username'}));
+    await taiko.waitFor(500)
     assert.equal(await usernameFiled.value(), '')
 });
 
@@ -284,12 +286,22 @@ step("User should be able to change to preffered Language to English again", asy
 });
 
 step("Select Contribution Language as <language>", async function (language) {
+
     await taiko.waitFor(300)
     const prefLanguagePopup = text('Select Your Preferred Language')
     if(!prefLanguagePopup.exists()){
         await click("show All");
     }
     await taiko.waitFor(900)
+
+    await click(taiko.$('#Show_all_language'));
+    await taiko.waitFor(300)
+    await click(language);
+    await taiko.waitFor(700)
+});
+
+step("Select Contribution Language as <language> first time", async function (language) {
+    await taiko.waitFor(300)
     await click(language);
     await taiko.waitFor(700)
 });

@@ -3,7 +3,7 @@
 * Open BoloIndia
 
 ## Check About Us Page
-* Select Contribution Language as "English"
+* Select Contribution Language as "English" first time
 * Navigate to "About Us" button and click "About Us" button
 * Validate about us content
 * Start Recording button is disabled

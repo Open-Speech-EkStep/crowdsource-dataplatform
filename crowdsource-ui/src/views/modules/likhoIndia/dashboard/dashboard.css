@@ -1,9 +1,11 @@
 body {
     font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
 html {
     scroll-behavior: smooth;
 }
+
 html {
     font-size: 16px;
 }
@@ -66,31 +68,15 @@ body.modal-open .supreme-container {
     border-radius: 100%;
     border-style: solid;
 }
+
 @keyframes spin {
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
 }
 
 #timeline-loader {
     height: 30rem;
-}
-
-.contribution-details {
-    padding: 1rem 0;
-    background-color: #F8F9FA;
-    margin: 0;
-    border-radius: 8px;
-}
-
-.contribution-data:last-child {
-    border: none;
-}
-
-.contribution-data > p:first-child {
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1.8rem;
 }
 
 .chart-row .chart,
@@ -144,8 +130,10 @@ body.modal-open .supreme-container {
 }
 
 .duration li.inactive {
-    background-color: #C0D9F3;
+    background-color: rgba(0, 123, 255, 0.2);
     color: #007BFF;
+    font-family: Lato;
+    font-size: 12px;
 }
 
 .duration li.tab-left {
@@ -190,25 +178,25 @@ body.modal-open .supreme-container {
 
 .quarter {
     background-color: #CDD8F6;
-  }
-  
-  .half {
+}
+
+.half {
     background-color: #92A8E8;
-  }
-  
-  .threeQuarter {
+}
+
+.threeQuarter {
     background-color: #6B85CE;
-  }
-  
-  .full {
+}
+
+.full {
     background-color: #4061BF;
-  }
+}
 
 .legend-val {
     margin-top: 25px;
     text-align: center;
     font-size: 12px;
-  }
+}
 
 .no-data-found {
     position: fixed;
@@ -264,7 +252,7 @@ body.modal-open .supreme-container {
     .no-data-found {
         left: 11%;
     }
-} 
+}
 
 @media screen and (min-width: 320px) {
     .no-data-found {
@@ -277,9 +265,10 @@ body.modal-open .supreme-container {
         border-right: 1px dashed #C4C4C4;
     }
 
-.contribution-data:last-child {
-    border: none;
-}
+    .contribution-data:last-child {
+        border: none;
+    }
+
     .no-data-found {
         left: 14%;
     }
@@ -289,18 +278,22 @@ body.modal-open .supreme-container {
     html {
         font-size: 17px;
     }
+
     .modal-lg,
     .modal-xl {
         max-width: 700px;
     }
+
     .chart {
         flex: 0 0 48%;
         max-width: 48%;
         margin-right: 2rem;
     }
+
     .chart-title {
         padding-right: 0;
     }
+
     .chart-row .state-chart {
         height: 40rem;
     }
@@ -310,6 +303,7 @@ body.modal-open .supreme-container {
     .duration {
         padding-left: 0;
     }
+
     .no-data-found {
         width: 100%;
         left: 0;
@@ -321,9 +315,11 @@ body.modal-open .supreme-container {
         padding-left: 40px;
         padding-right: 40px;
     }
+
     .chart {
         margin-right: 2.5rem;
     }
+
     .no-data-found {
         width: 90%;
         left: 5%;
@@ -332,7 +328,7 @@ body.modal-open .supreme-container {
 
 @media (min-width: 1360px) {
     .container {
-        max-width: 1360px;
+        max-width: 1280px;
     }
 }
 
@@ -340,75 +336,95 @@ body.modal-open .supreme-container {
     .contribution-details {
         padding: 0 3rem;
     }
+
     .contribution-data.col-md-3 {
         flex: 0 0 100%;
         max-width: 100%;
     }
+
     .contribution-data {
         border-bottom: 1px dashed #C4C4C4;
         padding: 1rem 0;
     }
+
     .chart {
         padding: 1rem 1rem 4rem;
         margin-bottom: 2rem;
     }
+
     .chart-title,
     #duration {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
     }
+
     .no-data-found {
         width: 90%;
     }
+
     .no-data-found > div {
         padding: .5rem .5rem;
     }
+
     .all-languages {
         margin-bottom: 0;
     }
+
     .data-updated > div {
         margin-top: 0;
         margin-bottom: 2rem;
         padding-top: 0;
     }
+
     .modal-content.p-4 {
         padding: 1.2rem !important;
     }
+
     .modal-header {
         padding: 0.75rem;
     }
+
     .modal-title {
         font-size: 2rem;
     }
+
     .modal-body {
         padding-top: 0.75rem;
         padding-bottom: 0.75rem;
         font-size: 0.75rem;
     }
+
     .modal-body {
         margin-bottom: 0.75rem;
     }
+
     .mt-5 {
         margin-top: 2.25rem !important;
         margin-bottom: 0.75rem !important;
     }
+
     .form-group input, .form-group select, .form-check, .modal-body button {
         font-size: 0.75rem;
     }
+
     .chart-row .chart,
     .chart-row .chart-spinner {
         height: 30rem;
     }
+
     .chart-row .state-chart {
         height: 35rem;
         padding: 1rem 0 0 !important;
     }
+
     .state-chart-text {
         padding-left: 2rem !important;
     }
+
     .chart-row .age-group-chart {
         min-height: 32rem;
     }
+
     #indiaMapChart {
         height: 380px;
     }
