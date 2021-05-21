@@ -42,11 +42,13 @@ function getCurrentIndex(lastIndex) {
 }
 
 function markContributionSkipped() {
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
     sentenceId: dekhoIndia.sentences[currentIndex].dataset_row_id,
-    userName: speakerDetails.userName
+    userName: speakerDetails.userName,
+    language:contributionLanguage
   };
   fetch('/skip', {
     method: 'POST',

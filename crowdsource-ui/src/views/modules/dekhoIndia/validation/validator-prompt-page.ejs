@@ -25,7 +25,7 @@
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
-            <div class="modal-footer pt-3 position-relative">
+            <div class="modal-footer pt-3 position-relative" style="height:72px">
                 <div class="row position-absolute top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
                 </div>
@@ -56,7 +56,7 @@
                 <div class="form-group green-border-focus col-lg-4 col-md-5 col-12 m-0" id="edit-text">
                     <label><%- __('Your Edit') %></label>
                     <div class="arrow-right"></div>
-                    <textarea class="form-control edit-area" maxlength="1000" id="edit" rows="3" style="resize:none"></textarea>
+                    <textarea class="form-control edit-area" maxlength="1000" id="edit" rows="3" placeholder="Start typing here..." style="resize:none"></textarea>
                 </div>
             </div>
             <div class="row justify-content-center d-none" id="thankyou-text">
@@ -80,7 +80,7 @@
                     <div class="row justify-content-center mt-5">
                         <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
                             <a class="btn btn-primary text-white btn-lg h6 w-100" href="./home.html">
-                                <%- __('Back to dekhoIndia Home') %>
+                                <%- __('Back to dekho India Home') %>
                             </a></div>
                     </div>
                 </div>
