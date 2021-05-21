@@ -173,7 +173,7 @@ step("Check <card> option should be <state> on Home page", async function(card,s
     
     if(card=="Transcribe"&& state=="disabled")
     {
-        assert.ok(await text('No contribution data available for selected language').isVisible());
+        assert.ok(await text('Not collecting contributions for selected language').isVisible());
 
     }
     if(card=="Correct"&& state=="disabled")
@@ -182,7 +182,7 @@ step("Check <card> option should be <state> on Home page", async function(card,s
     }
     if(card=="Transcribe"&& state=="enabled")
     {
-        assert.ok(! await text('No contribution data available for selected language').isVisible());
+        assert.ok(! await text('Not collecting contributions for selected language').isVisible());
     }
     if(card=="Correct"&& state=="enabled")
     {
