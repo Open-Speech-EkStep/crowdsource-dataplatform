@@ -6,6 +6,7 @@ const { CURRENT_MODULE,CONTRIBUTION_LANGUAGE } = require('../common/constants');
 const fetch = require('../common/fetch');
 
 const {setSpeakerData} = require('../common/contributionStats');
+const {checkGivingFeedbackFor} = require('../common/feedback')
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
@@ -81,6 +82,7 @@ function updateLanguage(language) {
 
 $(document).ready(function () {
     localStorage.setItem(CURRENT_MODULE,'suno');
+    checkGivingFeedbackFor();
     localStorage.removeItem('previousLanguage');
     const speakerDetailsKey = 'speakerDetails';
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
