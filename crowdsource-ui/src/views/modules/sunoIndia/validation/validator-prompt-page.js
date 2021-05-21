@@ -169,7 +169,7 @@ function setSentenceLabel(index) {
 function getNextSentence() {
   if (currentIndex < sunoIndiaValidator.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex,sunoIndiaValidator.sentences.length)
+    updateProgressBar(currentIndex + 1,sunoIndiaValidator.sentences.length)
     getAudioClip(sunoIndiaValidator.sentences[currentIndex].dataset_row_id)
     resetValidation();
     setSentenceLabel(currentIndex);
@@ -502,11 +502,11 @@ const initializeComponent = function () {
   if (audio) {
     getAudioClip(audio.dataset_row_id );
     setSentenceLabel(currentIndex);
-    setCurrentSentenceIndex(currentIndex);
+    setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     resetValidation();
     setAudioPlayer();
-    updateProgressBar(currentIndex,sunoIndiaValidator.sentences.length)
+    updateProgressBar(currentIndex + 1,sunoIndiaValidator.sentences.length)
   }
 }
 

@@ -95,7 +95,7 @@ function setCapturedText(index) {
 function getNextSentence() {
   if (currentIndex < dekhoIndiaValidator.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex,dekhoIndiaValidator.sentences.length)
+    updateProgressBar(currentIndex + 1,dekhoIndiaValidator.sentences.length)
     getImage(dekhoIndiaValidator.sentences[currentIndex].dataset_row_id);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
@@ -373,9 +373,9 @@ const initializeComponent = () => {
     if (validationData) {
       getImage(validationData.dataset_row_id );
       setCapturedText(currentIndex);
-      setCurrentSentenceIndex(currentIndex);
+      setCurrentSentenceIndex(currentIndex + 1);
       setTotalSentenceIndex(totalItems);
-      updateProgressBar(currentIndex,dekhoIndiaValidator.sentences.length)
+      updateProgressBar(currentIndex + 1,dekhoIndiaValidator.sentences.length)
     }
 }
 

@@ -403,3 +403,10 @@ body.modal-open .supreme-container {
   max-width: 90%;
 }
 
+#viewAllDetailsBtn:focus {
+  text-decoration: none;
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
