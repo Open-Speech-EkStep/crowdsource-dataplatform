@@ -74,6 +74,10 @@ const getLanguageStats = function () {
         localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
         showByHoursChart(MODULE.dekho.value);
 
+        const data = response.aggregate_data_by_language.sort((a, b) =>
+          Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
+        );
+
         const rank = data.findIndex(
           (x) => x.language.toLowerCase() === contributionLanguage.toLowerCase()
         );
