@@ -4,7 +4,6 @@ function constructChart(responseData, xAxisLabel, yAxisLabel, type) {
   const chartReg = {};
   const chart = am4core.create("speakers_hours_chart", am4charts.XYChart);
   chartReg["chart"] = chart;
-
   let response = [...responseData];
   if (xAxisLabel === "total_speakers") {
     response = response.sort((a, b) => Number(a.total_speakers) < Number(b.total_speakers) ? -1 : 1);
