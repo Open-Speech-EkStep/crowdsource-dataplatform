@@ -5,6 +5,7 @@ const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { showUserProfile } = require('../common/header');
 const { isKeyboardExtensionPresent,isMobileDevice } = require('../common/common');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
+const { cdn_url } = require('../common/env-api');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -170,7 +171,7 @@ function getNextSentence() {
   if (currentIndex < sunoIndiaValidator.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex + 1,sunoIndiaValidator.sentences.length)
-    getAudioClip(sunoIndiaValidator.sentences[currentIndex].dataset_row_id)
+    loadAudio(`${cdn_url}/${sunoIndiaValidator.sentences[currentIndex].sentence}`);
     resetValidation();
     setSentenceLabel(currentIndex);
     localStorage.setItem(currentIndexKey,currentIndex);
@@ -500,7 +501,7 @@ const initializeComponent = function () {
   const audio = sunoIndiaValidator.sentences[currentIndex];
   addListeners();
   if (audio) {
-    getAudioClip(audio.dataset_row_id );
+    loadAudio(`${cdn_url}/${audio.sentence}`);
     setSentenceLabel(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
