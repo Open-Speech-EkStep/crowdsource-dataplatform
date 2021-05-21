@@ -57,7 +57,7 @@ const drawMap = function (response, moduleType) {
   } else {
     quarterVal = 0.25;
   }
-
+console.log(response.data);
   statesData.forEach(st => {
     const ele = response.data.find(s => st.state === s.state);
     if (ele) {
@@ -65,14 +65,14 @@ const drawMap = function (response, moduleType) {
         hours: cHours,
         minutes: cMinutes,
         seconds: cSeconds,
-      } = calculateTime(moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions) * 60 * 60, true);
+      } = calculateTime(Number(ele.total_contributions) * 60 * 60, true);
       const {
         hours: vHours,
         minutes: vMinutes,
         seconds: vSeconds,
-      } = calculateTime(moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_validation_count) : Number(ele.total_validations) * 60 * 60, true);
-      st.contributed_time = `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
-      st.validated_time = `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
+      } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
+      st.contributed_time = moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) : `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
+      st.validated_time = moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_validation_count) : `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
       st.value = moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
       st.total_speakers = ele.total_speakers;
       st.id = st.id;
