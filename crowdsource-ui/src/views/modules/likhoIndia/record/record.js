@@ -84,11 +84,13 @@ const openEditor = function () {
 
 
 function markContributionSkipped() {
+  const contributionLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
     sentenceId: likhoIndia.sentences[currentIndex].dataset_row_id,
-    userName: speakerDetails.userName
+    userName: speakerDetails.userName,
+    language:contributionLanguage
   };
   fetch('/skip', {
     method: 'POST',
