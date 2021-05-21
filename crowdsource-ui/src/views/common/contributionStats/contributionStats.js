@@ -8,22 +8,23 @@ const getSpeakersData = (data, lang, moduleType) => {
     contributions: 0,
     validations: 0
   }
-
-  if (!lang) {
-    speakersData.languages = parseInt(data[0].total_languages);
-    speakersData.speakers = parseInt(data[0].total_speakers);
-    speakersData.contributions = moduleType === "likho" || moduleType === "dekho" ? parseFloat(data[0].total_contribution_count) : parseFloat(data[0].total_contributions);
-    speakersData.validations = moduleType === "likho" || moduleType === "dekho" ? parseFloat(data[0].total_validation_count) : parseFloat(data[0].total_validations);
-  } else {
-    const langSpeakersData = data.filter(item => {
-      if (item.language) {
-        return item.language.toLowerCase() === lang.toLowerCase();
-      }
-      return false;
-    });
-    speakersData.speakers = parseInt(langSpeakersData[0].total_speakers);
-    speakersData.contributions = moduleType === "likho" || moduleType === "dekho" ? parseFloat(langSpeakersData[0].total_contribution_count) : parseFloat(langSpeakersData[0].total_contributions);
-    speakersData.validations = moduleType === "likho" || moduleType === "dekho" ? parseFloat(langSpeakersData[0].total_validation_count) : parseFloat(langSpeakersData[0].total_validations);
+  if(data && data.length) {
+    if (!lang) {
+      speakersData.languages = parseInt(data[0].total_languages);
+      speakersData.speakers = parseInt(data[0].total_speakers);
+      speakersData.contributions = moduleType === "likho" || moduleType === "dekho" ? parseFloat(data[0].total_contribution_count) : parseFloat(data[0].total_contributions);
+      speakersData.validations = moduleType === "likho" || moduleType === "dekho" ? parseFloat(data[0].total_validation_count) : parseFloat(data[0].total_validations);
+    } else {
+      const langSpeakersData = data.filter(item => {
+        if (item.language) {
+          return item.language.toLowerCase() === lang.toLowerCase();
+        }
+        return false;
+      });
+      speakersData.speakers = parseInt(langSpeakersData[0].total_speakers);
+      speakersData.contributions = moduleType === "likho" || moduleType === "dekho" ? parseFloat(langSpeakersData[0].total_contribution_count) : parseFloat(langSpeakersData[0].total_contributions);
+      speakersData.validations = moduleType === "likho" || moduleType === "dekho" ? parseFloat(langSpeakersData[0].total_validation_count) : parseFloat(langSpeakersData[0].total_validations);
+    }
   }
   return speakersData;
 }

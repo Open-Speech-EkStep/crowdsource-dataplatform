@@ -358,5 +358,13 @@
 	"Landing page": "Landing page",
 	"Select a category": "Select a category",
 	"Share your feedback below:": "Share your feedback below:",
-	"What is your opinion of this page": "What is your opinion of this page"
+	"What is your opinion of this page": "What is your opinion of this page",
+	"Hrs validated": "Hrs validated",
+	"Validate text as per the audio": "Validate text as per the audio",
+	"Hours transcribed and validated": "Hours transcribed and validated",
+	"Translations validated": "Translations validated",
+	"Validate the translation": "Validate the translation",
+	"Text validated": "Text validated",
+	"Validate the text as per the image": "Validate the text as per the image",
+	"Images labelled and validated": "Images labelled and validated"
 }
