@@ -189,11 +189,13 @@ const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancelButton);
 
 function markContributionSkipped() {
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
     sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
-    userName: speakerDetails.userName
+    userName: speakerDetails.userName,
+    language:contributionLanguage
   };
   fetch('/skip', {
     method: 'POST',
