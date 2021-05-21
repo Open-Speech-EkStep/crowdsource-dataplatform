@@ -95,7 +95,7 @@ step("User should see the top Language graph and other stats", async function() 
 step("User details popup should appear and close button should close the pop up", async function() {
 	if (await taiko.text('User Details').exists()) {
         assert.ok('user details pop-up exists')
-        await taiko.waitFor(500)
+        await taiko.waitFor(700)
         await click(taiko.button({ class: 'close float-right' }))
     }
 
@@ -188,6 +188,31 @@ step("Check <card> option should be <state> on Home page", async function(card,s
     {
         assert.ok(! await text('No validation data available for selected language').isVisible());
     }
+
+    if(card=="Label"&& state=="disabled")
+    {
+        assert.ok(await text('Not collecting contributions for selected language').isVisible());
+
+    }
+
+    if(card=="Label"&& state=="enabled")
+    {
+        assert.ok(! await text('Not collecting contributions for selected language').isVisible());
+
+    }
+
+    if(card=="Validate"&& state=="disabled")
+    {
+        assert.ok(await text('No validation data available for selected language').isVisible());
+
+    }
+
+    if(card=="Validate"&& state=="enabled")
+    {
+        assert.ok(! await text('No validation data available for selected language').isVisible());
+
+    }
+
 });
 
 step("when user clicks on the Validate more button user should no data available message", async function() {
