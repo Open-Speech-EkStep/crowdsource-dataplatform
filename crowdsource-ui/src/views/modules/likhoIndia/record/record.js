@@ -60,7 +60,7 @@ let currentIndex;
 function getNextSentence() {
   if (currentIndex < likhoIndia.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex,likhoIndia.sentences.length);
+    updateProgressBar(currentIndex + 1,likhoIndia.sentences.length);
     setSentence(likhoIndia.sentences[currentIndex].media_data);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
@@ -305,9 +305,9 @@ const initialize = function () {
 
   if (translation) {
     setSentence(translation.media_data);
-    setCurrentSentenceIndex(currentIndex);
+    setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex,likhoIndia.sentences.length)
+    updateProgressBar(currentIndex + 1,likhoIndia.sentences.length)
   }
 };
 

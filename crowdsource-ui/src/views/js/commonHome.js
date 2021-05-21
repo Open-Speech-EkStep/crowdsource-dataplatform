@@ -18,8 +18,7 @@ function getStatistics(response, language, module) {
 
   $speakersDataLoader.removeClass('d-none');
   $speakerDataDetails.addClass('d-none');
-
-  setSpeakerData([response], language, module);
+  setSpeakerData(response ? [response] : null, language, module);
 
   $speakersDataLoader.addClass('d-none');
   $speakerDataDetails.removeClass('d-none');

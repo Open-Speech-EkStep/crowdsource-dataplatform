@@ -79,9 +79,13 @@ body.modal-open .supreme-container {
     height: 30rem;
 }
 
-.chart-row .chart,
+
 .chart-row .chart-spinner {
     height: 35rem;
+}
+
+.chart-row .chart {
+    height: 40rem;
 }
 
 .chart-row .state-chart {
@@ -328,7 +332,7 @@ body.modal-open .supreme-container {
 
 @media (min-width: 1360px) {
     .container {
-        max-width: 1280px;
+        max-width: 1360px;
     }
 }
 

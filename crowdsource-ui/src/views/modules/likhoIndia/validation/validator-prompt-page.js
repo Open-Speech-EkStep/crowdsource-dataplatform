@@ -116,7 +116,7 @@ function setCapturedText(index) {
 function getNextSentence() {
   if (currentIndex < likhoIndiaValidator.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex,likhoIndiaValidator.sentences.length)
+    updateProgressBar(currentIndex + 1,likhoIndiaValidator.sentences.length)
     setSentence(likhoIndiaValidator.sentences[currentIndex].sentence);
     setTranslation(likhoIndiaValidator.sentences[currentIndex].contribution);
     setCapturedText(currentIndex);
@@ -341,9 +341,9 @@ const initializeComponent = () => {
       setSentence(validationData.sentence);
       setTranslation(validationData.contribution);
       setCapturedText(currentIndex);
-      setCurrentSentenceIndex(currentIndex);
+      setCurrentSentenceIndex(currentIndex + 1);
       setTotalSentenceIndex(totalItems);
-      updateProgressBar(currentIndex,likhoIndiaValidator.sentences.length)
+      updateProgressBar(currentIndex + 1,likhoIndiaValidator.sentences.length)
     }
 }
 
