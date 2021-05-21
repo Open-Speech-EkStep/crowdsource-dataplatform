@@ -19,6 +19,8 @@ const {
   MODULE
 } = require('../common/constants');
 
+const {checkGivingFeedbackFor} = require('../common/feedback');
+
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
   const $userName = $('#username');
@@ -87,6 +89,7 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
+  checkGivingFeedbackFor();
   getAvailableLanguages("asr");
   getLocaleString().then(()=>{
     initializeBlock();

@@ -1,3 +1,4 @@
+const {CURRENT_MODULE,MODULE} = require('./constants.js');
 /**
  * 
  * @param {component_value} value - example Bolo/Suno/Dekho/Likho
@@ -5,15 +6,17 @@
  * 
  * @TODO test this function 
  */
-const checkGivingFeedbackFor = (value) => {
-    document.querySelectorAll('input[name="feedbackRadio"]').forEach((component) => {
-        if(component.value === value)
-        {
-            component.checked = true;
-        }
-    });
-}
 
+const checkGivingFeedbackFor = () => {
+        const currentModule = localStorage.getItem(CURRENT_MODULE);
+        document.querySelectorAll('input[name="feedbackRadio"]').forEach((component) => {
+            console.log(MODULE[currentModule].value)
+            if(component.value === MODULE[currentModule].value)
+            {
+                component.checked = true;
+            }
+        });
+}
 
 module.exports = {
     checkGivingFeedbackFor
