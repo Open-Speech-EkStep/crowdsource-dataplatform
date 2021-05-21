@@ -196,11 +196,11 @@ step("when user clicks on the Validate more button user should no data available
     assert.ok(await text('Thank you for validating!').exists())
 });
 
-step("When user clicks on Contribute more button , user should no data available message", async function() {
+step("When user clicks on Contribute more button , user should see no data available message", async function() {
+    await taiko.waitFor(500)
     await click(link('Contribute More'))
-    await taiko.waitFor(1000)
+    await taiko.waitFor(2000)
     assert.ok(await text('Thank you for your enthusiasm to transcribe the recordings.').exists())
-    assert.ok(await link('Back to SunoIndia Home').exists());
 });
 
 step("When user clicks on back to Suno India home button, user should land on home page", async function() {
