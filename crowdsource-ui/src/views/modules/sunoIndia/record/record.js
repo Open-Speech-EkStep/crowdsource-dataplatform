@@ -148,7 +148,7 @@ let progressCount = currentIndex, validationCount = 0;
 function getNextSentence() {
   if (currentIndex < sunoIndia.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex, sunoIndia.sentences.length);
+    updateProgressBar(currentIndex + 1, sunoIndia.sentences.length);
     getAudioClip(sunoIndia.sentences[currentIndex].dataset_row_id)
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
@@ -454,10 +454,10 @@ const initialize = function () {
   if (audio) {
     getAudioClip(audio.dataset_row_id);
     resetValidation();
-    setCurrentSentenceIndex(currentIndex);
+    setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     setAudioPlayer();
-    updateProgressBar(currentIndex,sunoIndia.sentences.length)
+    updateProgressBar(currentIndex + 1,sunoIndia.sentences.length)
   }
 };
 
