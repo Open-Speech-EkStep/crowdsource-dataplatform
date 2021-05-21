@@ -102,6 +102,9 @@ const getLanguageStats = function () {
         const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.likho.value);
         localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
         showByHoursChart(MODULE.likho.value);
+        const data = response.aggregate_data_by_language.sort((a, b) =>
+          Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
+        );
         const rank = data.findIndex(
           (x) => x.language.toLowerCase() === contributionLanguage.toLowerCase()
         );

@@ -17,8 +17,6 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     
     const chartData = timelineData.data;
     const currentModule = localStorage.getItem(CURRENT_MODULE);
-    console.log(currentModule);
-    console.log(chartData);
     for (let i = 0; i < chartData.length; i++) {
       if (!chartData[i].month) {
         chartData[i].month = chartData[i].quarter * 3;
@@ -131,7 +129,6 @@ function updateLineGraph(language, timeframe, type,series1Name, series2Name) {
     disposeLineChart('timeline-chart');
     $timelineLoader.show().addClass('d-flex');
     $timelineChart.addClass('d-none');
-    console.log(type);
     buildLineGraphs(language, timeframe, type,series1Name, series2Name);
 }
 

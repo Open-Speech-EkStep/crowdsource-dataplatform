@@ -57,7 +57,6 @@ const drawMap = function (response, moduleType) {
   } else {
     quarterVal = 0.25;
   }
-console.log(response.data);
   statesData.forEach(st => {
     const ele = response.data.find(s => st.state === s.state);
     if (ele) {
