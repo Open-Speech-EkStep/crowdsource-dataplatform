@@ -173,7 +173,7 @@ step("Select translation language as <language>", async function (language) {
 step("Navigate to <arg0> button and click <arg0> button", async function (arg0) {
 
     if (arg0 == "Contribute") {
-        await taiko.waitFor(1000)
+        await taiko.waitFor(2000)
         const startRecordingButton = taiko.image({ id: "start_recording" });
         assert.ok(await startRecordingButton.exists());
         await hover(startRecordingButton);
@@ -182,7 +182,7 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
     }
 
     else if (arg0 == "Validate") {
-        await taiko.waitFor(1000)
+        await taiko.waitFor(2000)
         const startValidatingButton = taiko.image({ id: "start_validating" });
         assert.ok(await startValidatingButton.exists());
         await taiko.waitFor(500);
@@ -191,16 +191,20 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
         await click(startValidatingButton);
     }
     else if (arg0 == "Transcribe") {
+        await taiko.waitFor(2000)
         const startRecordingButton = taiko.image({ id: "start_recording" });
         assert.ok(await startRecordingButton.exists());
         await hover(startRecordingButton);
+        await taiko.waitFor(500)
         await click(startRecordingButton);
     }
     else if (arg0 == "Correct") {
+        await taiko.waitFor(2000)
         const startValidatingButton = taiko.image({ id: "start_validating" });
         assert.ok(await startValidatingButton.exists());
         await taiko.waitFor(500);
         await hover(startValidatingButton);
+        await taiko.waitFor(500)
         await click(startValidatingButton);
     }
 
@@ -248,7 +252,7 @@ step("User plays the audio , <arg0>,<arg1> should be enabled", async function (a
 });
 
 step("<arg0> should be enabled , <arg1> <arg2> buttons should be disabled", async function (arg0, arg1, arg2) {
-    await taiko.waitFor(2000);
+    await taiko.waitFor(3000);
     assert.ok(! await taiko.button({ id: arg0 }).isDisabled());
     assert.ok(await taiko.button({ id: arg1 }).isDisabled());
     assert.ok(await taiko.button({ id: arg2 }).isDisabled());
@@ -265,7 +269,7 @@ step("User skips the next <count> sentences user should land on Thank you page i
     const skipbutton = taiko.button({ id: 'skip_button' })
     for (let i = 0; i < count; i++) {
         await click(skipbutton)
-        await taiko.waitFor(700)
+        await taiko.waitFor(1200)
     }
 
     if(lang=="Hindi")
@@ -365,7 +369,7 @@ step("When user clicks on Report Button, user should see Report Content Dialog B
     assert.ok(await text("Report").exists());
     await taiko.waitFor(500);
     await click(taiko.button({ id: "report_btn" }))
-    await taiko.waitFor(500);
+    await taiko.waitFor(1000);
     assert.ok(await text("Report Content").exists());
     assert.ok( await taiko.button({ id: "report_submit_id" }).isDisabled());    
 });
