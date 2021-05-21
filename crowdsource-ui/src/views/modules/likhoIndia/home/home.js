@@ -74,7 +74,7 @@ function initializeBlock() {
      }
     );
     addToLanguage('from-language', nativeLanguage);
-
+    
     if (fromLanguage && toLanguage) {
       const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
       addToLanguage('to-language', languages);
