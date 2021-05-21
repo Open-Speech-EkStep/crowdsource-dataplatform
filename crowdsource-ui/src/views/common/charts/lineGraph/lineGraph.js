@@ -70,14 +70,14 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     hourAxis.renderer.minGridDistance = 50;
     hourAxis.renderer.grid.template.strokeDasharray = "3,3";
     hourAxis.renderer.labels.template.fill = '#000';
-    hourAxis.title.text = 'Number of hours';
+    hourAxis.title.text = currentModule == "dekho" ? "Images Labelled" : currentModule == MODULE.likho.value ? "Number of Sentences" : 'Number of hours';
     hourAxis.renderer.labels.template.fontSize = 12;
     hourAxis.title.fontSize = 12;
 
     // Create series
     var series = chart.series.push(new am4charts.LineSeries());
-    series.dataFields.dateX = currentModule == "dekho" || "likho" ? "validatedHours" : "duration";
-    series.dataFields.valueY = currentModule == "dekho" || "likho" ? "total_contribution_count" : "cumulative_contributions";
+    series.dataFields.dateX = "duration";
+    series.dataFields.valueY = currentModule == "dekho" || MODULE.likho.value ? "total_contribution_count" : "cumulative_contributions";
     series.strokeWidth = 3;
     series.tensionX = 0.8;
     series.tooltipHTML = tooltipContent;
@@ -92,7 +92,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     // Create series
     var series2 = chart.series.push(new am4charts.LineSeries());
     series2.dataFields.dateX = "duration";
-    series2.dataFields.valueY = "cumulative_validations";
+    series2.dataFields.valueY = currentModule == "dekho" || "likho" ? "total_contribution_count" : "cumulative_validations";
     series2.sequencedInterpolation = true;
     series2.tensionX = 0.8;
     series2.strokeWidth = 3;
