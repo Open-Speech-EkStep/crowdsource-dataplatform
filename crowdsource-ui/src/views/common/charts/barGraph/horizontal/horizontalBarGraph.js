@@ -14,7 +14,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel, type) {
         Number(ele.total_contributions) * 60 * 60,
         true
       );
-      ele.total_contributions_text = type == "suno" ? formatTime(hours, minutes, seconds) : ele.total_contribution_count;
+      ele.total_contributions_text = type == "suno" ? formatTime(hours, minutes, seconds) :  type == "dekho" ? ((ele.total_contribution_count).toString() + " images") : ((ele.total_contribution_count).toString() + " translations");
     });
   }
   chart.data = response;
