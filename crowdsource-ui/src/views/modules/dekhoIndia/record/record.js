@@ -10,6 +10,7 @@ const {
   getLocaleString,
   reportSentenceOrRecording
 } = require('../common/utils');
+const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton} = require('../common/common');
@@ -107,7 +108,7 @@ function getNextSentence() {
   if (currentIndex < dekhoIndia.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length);
-    getImage(dekhoIndia.sentences[currentIndex].dataset_row_id);
+    setDekhoImage(`${cdn_url}/${dekhoIndia.sentences[currentIndex].media_data}`);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
     const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
@@ -418,7 +419,7 @@ const initializeComponent = () => {
   const validationData = dekhoIndia.sentences[currentIndex];
   addListeners();
   if (validationData) {
-    getImage(validationData.dataset_row_id);
+    setDekhoImage(`${cdn_url}/${validationData.media_data}`);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length)
