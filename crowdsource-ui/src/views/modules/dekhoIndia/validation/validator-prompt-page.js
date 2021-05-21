@@ -5,6 +5,7 @@ const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent } = require('../common/common');
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
+const { cdn_url } = require('../common/env-api');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -95,8 +96,8 @@ function setCapturedText(index) {
 function getNextSentence() {
   if (currentIndex < dekhoIndiaValidator.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1,dekhoIndiaValidator.sentences.length)
-    getImage(dekhoIndiaValidator.sentences[currentIndex].dataset_row_id);
+    updateProgressBar(currentIndex + 1,dekhoIndiaValidator.sentences.length);
+    setDekhoImage(`${cdn_url}/${dekhoIndiaValidator.sentences[currentIndex].sentence}`);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
@@ -371,7 +372,7 @@ const initializeComponent = () => {
     addListeners();
     const validationData = dekhoIndiaValidator.sentences[currentIndex];
     if (validationData) {
-      getImage(validationData.dataset_row_id );
+      setDekhoImage(`${cdn_url}/${validationData.sentence}`);
       setCapturedText(currentIndex);
       setCurrentSentenceIndex(currentIndex + 1);
       setTotalSentenceIndex(totalItems);
