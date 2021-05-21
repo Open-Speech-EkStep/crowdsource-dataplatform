@@ -365,7 +365,7 @@ step("When user clicks on Report Button, user should see Report Content Dialog B
     assert.ok(await text("Report").exists());
     await taiko.waitFor(500);
     await click(taiko.button({ id: "report_btn" }))
-    await taiko.waitFor(500);
+    await taiko.waitFor(1000);
     assert.ok(await text("Report Content").exists());
     assert.ok( await taiko.button({ id: "report_submit_id" }).isDisabled());    
 });
