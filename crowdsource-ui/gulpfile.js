@@ -90,6 +90,16 @@ gulp.task('js', function () {
         ],
       })
     )
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'cdnUrl',
+            replacement: settings.cdnUrl,
+          },
+        ],
+      })
+    )
     .pipe(gulp.dest('target/js'));
 });
 
@@ -143,6 +153,16 @@ gulp.task('js-common', function () {
         ],
       })
     )
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'cdnUrl',
+            replacement: settings.cdnUrl,
+          },
+        ],
+      })
+    )
     .pipe(gulp.dest('target/js/common'));
 });
 
@@ -165,6 +185,16 @@ gulp.task('js-sunoIndia', function () {
           {
             match: 'apiUrl',
             replacement: settings.apiUrl,
+          },
+        ],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'cdnUrl',
+            replacement: settings.cdnUrl,
           },
         ],
       })
@@ -195,6 +225,16 @@ gulp.task('js-likhoIndia', function () {
         ],
       })
     )
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'cdnUrl',
+            replacement: settings.cdnUrl,
+          },
+        ],
+      })
+    )
     .pipe(gulp.dest('target/js/likhoIndia'));
 });
 
@@ -217,6 +257,16 @@ gulp.task('js-dekhoIndia', function () {
           {
             match: 'apiUrl',
             replacement: settings.apiUrl,
+          },
+        ],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'cdnUrl',
+            replacement: settings.cdnUrl,
           },
         ],
       })

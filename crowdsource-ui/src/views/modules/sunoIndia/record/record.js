@@ -10,6 +10,7 @@ const {
   fetchLocationInfo,
   reportSentenceOrRecording
 } = require('../common/utils');
+const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {showUserProfile} = require('../common/header');
@@ -149,7 +150,7 @@ function getNextSentence() {
   if (currentIndex < sunoIndia.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex + 1, sunoIndia.sentences.length);
-    getAudioClip(sunoIndia.sentences[currentIndex].dataset_row_id)
+    loadAudio(`${cdn_url}/${sunoIndia.sentences[currentIndex].media_data}`);
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
@@ -454,7 +455,7 @@ const initialize = function () {
   addListeners();
 
   if (audio) {
-    getAudioClip(audio.dataset_row_id);
+    loadAudio(`${cdn_url}/${audio.media_data}`);
     resetValidation();
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
