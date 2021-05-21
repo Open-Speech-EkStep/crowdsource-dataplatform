@@ -93,9 +93,13 @@ body.modal-open .supreme-container {
     line-height: 1.8rem;
 }
 
-.chart-row .chart,
+
 .chart-row .chart-spinner {
     height: 35rem;
+}
+
+.chart-row .chart {
+    height: 40rem;
 }
 
 .chart-row .state-chart {

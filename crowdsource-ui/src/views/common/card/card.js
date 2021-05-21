@@ -56,7 +56,7 @@ $(window).on("orientationchange",function(){
 setCardsBackground();
 
 $left.hover(() => {
-  $(".card1").css("box-shadow","0px 0px 32px rgba(66, 178, 198, 0.4)")
+  $(".card1").css("box-shadow","0px 0px 32px rgba(66, 178, 198, 0.6)")
   $left_p_2.removeClass('d-none');
   $left_container.addClass('left-active');
 }, () => {
@@ -66,7 +66,7 @@ $left.hover(() => {
 });
 
 $right.hover(() => {
-  $(".card2").css("box-shadow","0px 0px 32px rgba(166, 192, 251, 0.4)")
+  $(".card2").css("box-shadow","0px 0px 32px rgba(166, 192, 251, 0.6)")
   $right_p_2.removeClass('d-none');
   $right_container.addClass('right-active');
 }, () => {

@@ -1,5 +1,6 @@
 const fetch = require('./fetch')
 const { calculateTime } = require('./utils');
+const { CURRENT_MODULE, MODULE } = require('./constants');
 
 const $chartRow = $('.chart-row');
 const $timelineLoader = $('#timeline-loader');
@@ -27,6 +28,29 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
       chartData[i].validatedHours = `${vHours}hrs ${vMinutes}mins ${vSeconds}secs`;
     }
 
+    let tooltipContent = `<div>
+                <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
+                <div>Transcribed: <label>{contributedHours}</label></div>
+                <div style="text-align: left; font-style: italic;">Validated: <label>{validatedHours}</label></div>
+            </div>`;
+    const currentModule = localStorage.getItem(CURRENT_MODULE);
+    if(currentModule === MODULE.likho.value){
+      tooltipContent = `<div>
+                <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
+                <div>Translated: <label>{contributedHours}</label></div>
+                <div style="text-align: left; font-style: italic;">Validated: <label>{validatedHours}</label></div>
+            </div>`;
+    }
+
+    if(currentModule === MODULE.dekho.value){
+      tooltipContent = `<div>
+                <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
+                <div>Labelled: <label>{contributedHours}</label></div>
+                <div style="text-align: left; font-style: italic;">Validated: <label>{validatedHours}</label></div>
+            </div>`;
+    }
+
+
     chart.data = chartData;
 
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
@@ -53,12 +77,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     series.dataFields.valueY = "cumulative_contributions";
     series.strokeWidth = 3;
     series.tensionX = 0.8;
-    series.tooltipHTML = `
-            <div>
-                <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
-                <div>Contributed: <label>{contributedHours}</label></div>
-                <div style="text-align: left; font-style: italic;">Validated: <label>{validatedHours}</label></div>
-            </div>`;
+    series.tooltipHTML = tooltipContent;
     series.tooltip.getFillFromObject = false;
     series.tooltip.autoTextColor = false;
     series.tooltip.background.fill = am4core.color("#F1F1F2");

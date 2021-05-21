@@ -99,12 +99,12 @@ function uploadToServer(cb) {
 }
 
 let currentIndex;
-let progressCount = 0, validationCount = 0;
+let validationCount = 0;
 
 function getNextSentence() {
   if (currentIndex < dekhoIndia.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex,dekhoIndia.sentences.length);
+    updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length);
     getImage(dekhoIndia.sentences[currentIndex].dataset_row_id);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
@@ -417,9 +417,9 @@ const initializeComponent = () => {
   addListeners();
   if (validationData) {
     getImage(validationData.dataset_row_id);
-    setCurrentSentenceIndex(currentIndex);
+    setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex,dekhoIndia.sentences.length)
+    updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length)
   }
 
 }
