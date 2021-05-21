@@ -42,11 +42,10 @@
 * Check "Transcribe" option should be "disabled" on Home page
 * Check "Correct" option should be "enabled" on Home page
 
-
 ## Check Dashboard Page
 * Select "Suno India"from header    
 * When user clicks on View all Details buttton user should be able to see "Progress Chart" , "State Wise distribution"
-* user should be able to see "People participated" , "Hrs transcribed" , "Hrs corrected" , "Languages"
+* user should be able to see "People participated" , "Hrs transcribed" , "Hrs validated" , "Languages"
 * When user select "हिंदी" Language from dropdown then "languages" should not visible
 * When user clicks on back button, user should land on home page
 
@@ -76,7 +75,7 @@
 * when user clicks on the Contribute More button, user should not see the Instructions page again
 * When user skips the rest of the "1" sentences , User should see Thank you Page
 * When user clicks on Contribute more button , user should no data available message
-* When user clicks on back button, user should land on home page
+* When user clicks on back to Suno India home button, user should land on home page
 * Check "Transcribe" option should be "disabled" on Home page
 
 ## Validate the User Details pop-up in Correct section
@@ -119,11 +118,10 @@
 * User should see the "Validate More" button
 
 ## Validate Report feature
+* Select Contribution Language as "English" first time
 * Select "Suno India"from header 
 * Select Contribution Language as "मराठी"
-* Navigate to "Transcribe" button and click "Transcribe" button
+* Navigate to "Correct" button and click "Correct" button
 * Add "Report User" Username
 * When user click on Lets Go Button
 * When user clicks on Report Button, user should see Report Content Dialog Box & Submit button should be disabled
-* Once user clicks on Others Radio button in transcribe flow, Submit button should be enabled
-* When user submits , Thank you pop up should come & close button should close the pop up

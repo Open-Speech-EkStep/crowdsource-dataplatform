@@ -21,7 +21,7 @@ step("Select <SunoIndiaLink>from header", async function(SunoIndiaLink) {
 });
 step("Validate Suno India content", async function() {
     assert.ok(await text('Help your language by transcribing audio into text').exists());
-    assert.ok(await text('Correct').exists());
+    assert.ok(await text('Validate').exists());
     assert.ok(await text('Transcribe').exists());
 });
 
@@ -89,7 +89,7 @@ step("User should see the top Language graph and other stats", async function() 
     assert.ok(await text("Languages").exists());
     assert.ok(await text("People participated").exists());
     assert.ok(await text("Hrs transcribed").exists());
-    assert.ok(await text("Hrs corrected").exists());
+    assert.ok(await text("Hrs validated").exists());
 });
 
 step("User details popup should appear and close button should close the pop up", async function() {
@@ -145,9 +145,9 @@ step("When user clicks on Play button, Pause button should appear and when user 
 
 step("Once user clicks on Others Radio button in transcribe flow, Submit button should be enabled", async function() {
     await taiko.waitFor(500)
-    assert.ok(await taiko.radioButton({ id: 'others_id' }).exists())
-    assert.ok(await taiko.radioButton({ id: 'Offensive_id' }).exists())
-    await click(taiko.radioButton({ id: 'others_id' }))
+    assert.ok(await taiko.text("Others").exists())
+    assert.ok(await taiko.text("Offensive").exists())
+    await click(taiko.text("Others"))
     await taiko.waitFor(500)
     assert.ok(! await taiko.button({ id: "report_submit_id" }).isDisabled()); 
 
@@ -201,4 +201,11 @@ step("When user clicks on Contribute more button , user should no data available
     await taiko.waitFor(1000)
     assert.ok(await text('Thank you for your enthusiasm to transcribe the recordings.').exists())
     assert.ok(await link('Back to SunoIndia Home').exists());
+});
+
+step("When user clicks on back to Suno India home button, user should land on home page", async function() {
+    await taiko.waitFor(500)
+    await click(link({id:"start_contributing_id"}))
+    await taiko.waitFor(500)
+    assert.ok(await text('Help your language by transcribing audio into text').exists());
 });
