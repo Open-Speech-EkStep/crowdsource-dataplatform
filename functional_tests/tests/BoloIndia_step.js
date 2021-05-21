@@ -207,6 +207,14 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
         await taiko.waitFor(500)
         await click(startValidatingButton);
     }
+    else if (arg0 == "Label") {
+        await taiko.waitFor(2000)
+        const startRecordingButton = taiko.image({ id: "start_recording" });
+        assert.ok(await startRecordingButton.exists());
+        await hover(startRecordingButton);
+        await taiko.waitFor(500)
+        await click(startRecordingButton);
+    }
 
     else {
         assert.ok(await link(arg0).exists());
