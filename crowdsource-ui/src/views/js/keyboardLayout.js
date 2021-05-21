@@ -169,7 +169,6 @@ const keyboardLayout = {
   'punjabi':{
     "layout": {
       "default": [
-        "₹ { } - = ਗ਼ ਜ਼ ੜ ੑ ਁ ॥ ੵ",
         " ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ੦ - = {bksp}",
         "{tab} ੌ ੈ ਾ ੀ ੂ ਬ ਹ ਗ ਦ ਜ ਡ ਼ \\",
         "{lock} ੋ ੇ ੍ ਿ ੁ ਪ ਰ ਕ ਤ ਚ ਟ {enter}",
@@ -177,7 +176,6 @@ const keyboardLayout = {
         ".com @ {space}"
       ],
       "shift": [
-        "# $ % ^ & * [ ] _ ੜ੍ਹ ☬ ੳ ਫ਼ ਖ਼ ੴ < > /",
         "~ ! @ ੍ਰ ੱ % ^ & * ( ) ਃ + {bksp}",
         "{tab} ਔ ਐ ਆ ਈ ਊ ਭ ਙ ਘ ਧ ਝ ਢ ਞ |",
         "{lock} ਓ ਏ ਅ ਇ ਉ ਫ ੜ ਖ ਥ ਛ ਠ {enter}",
