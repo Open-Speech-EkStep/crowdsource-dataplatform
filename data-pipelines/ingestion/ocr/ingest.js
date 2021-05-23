@@ -122,7 +122,7 @@ const main = () => {
     console.log(basePath, language)
 
     params = JSON.parse(fs.readFileSync(`${localDatasetPath}/params.json`, 'utf-8'))
-    start(connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired)
+    start(connectionString, localDatasetPath, {}, remote_dataset_bundle_path, basePath, language, paired)
 }
 
 main()
