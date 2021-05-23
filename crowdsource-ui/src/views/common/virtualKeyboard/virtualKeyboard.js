@@ -3,7 +3,7 @@
  * https://github.com/hodgef/simple-keyboard
  */
 const { keyboardLayout } = require('./keyboardLayout');
-const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE } = require('./constants');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LIKHO_TO_LANGUAGE } = require('./constants');
 const { isMobileDevice } = require('./common');
 let keyboard;
 const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () => { }) {
@@ -144,7 +144,8 @@ function lngtype(text) {
     "Telugu": /^[\u0C00-\u0C7F]+$/,
   }
   let isLanguageSelected = false;
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const currentModule = localStorage.getItem(CURRENT_MODULE);
+  const contributionLanguage = currentModule === 'likho' ? localStorage.getItem(LIKHO_TO_LANGUAGE):  localStorage.getItem(CONTRIBUTION_LANGUAGE);
   Object.entries(langdic).forEach(([key, value]) => {// loop to read all the dictionary items if not true
     if (value.test(newText) == true) {   //Check Unicode to see which one is true
       if (key.toLowerCase() == contributionLanguage.toLowerCase()) {
