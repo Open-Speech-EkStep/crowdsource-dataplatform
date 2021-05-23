@@ -10,9 +10,9 @@ const rowWithBadge = function (levelId, sentenceCount, badgeName, localeString) 
   const currentModule = localStorage.getItem(CURRENT_MODULE);
   const badges = MODULE[currentModule].BADGES;
   const badge = badges[badgeName.toLowerCase()];
-  let badgeDescription = `<p class="text-left mb-0 ml-3">Transcribing: ${sentenceCount} ${localeString.Sentences}</p>`;
+  let badgeDescription = `<p class="text-left mb-0 ml-3">Validating: ${sentenceCount} ${localeString.Sentences}</p>`;
   if(badgeName == 'Bronze'){
-    badgeDescription= `<p class="text-left mb-0 ml-3">Transcribing: ${sentenceCount} ${localeString.Sentences}</p>`
+    badgeDescription= `<p class="text-left mb-0 ml-3">Validating: ${sentenceCount} ${localeString.Sentences}</p>`
   }
   return `<tr><td>${localeString.Level} ${levelId}</td><td>${badgeDescription}</td><td><div><img src=${badge.imgLg} class="table-img" alt=${badgeName} id="${badgeName}-image-hover" rel="popover"></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
 }
@@ -54,8 +54,8 @@ const renderBadgeDetails = function (data) {
 
 $(document).ready(function () {
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
-  const type='asr'
-  const source='contribute'
+  const type='ocr'
+  const source='validate'
   updateLocaleLanguagesDropdown(language);
   getLocaleString().then(() => {
     performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then(renderBadgeDetails).catch((err) => {
