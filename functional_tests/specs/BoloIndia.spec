@@ -4,13 +4,14 @@
 
 ## Validate Validator flow
 * Select Contribution Language as "हिंदी" first time
-* Select translation language as "हिंदी"
+//* Select translation language as "हिंदी"
 * Navigate to "Validate" button and click "Validate" button
 * "skip_button" should be enabled , "dislike_button" "like_button" buttons should be disabled
 * User plays the audio , "dislike_button","like_button" should be enabled
 * User clicks on "dislike_button" , he should see next sentence and "dislike_button" "like_button" buttons should be disabled
 * User skips the next "4" sentences user should land on Thank you page in "Hindi"
-* User should see the "अधिक प्रमाणित करें" button
+//* User should see the "अधिक प्रमाणित करें" button
+* User should see the "Validate More" button
 
 ## Validate Contributor flow
 * Select translation language as "English"
@@ -64,7 +65,7 @@
 * Start Recording button is disabled
 * Select Language "Hindi" enables the Start Recording button
 
-## Validate Locale content on Home Page
-* Select translation language as "हिंदी"
-* User should see the content in "Hindi"
-* User should see State Wise distribution and Top Languages
+//## Validate Locale content on Home Page
+//* Select translation language as "हिंदी"
+//* User should see the content in "Hindi"
+//* User should see State Wise distribution and Top Languages

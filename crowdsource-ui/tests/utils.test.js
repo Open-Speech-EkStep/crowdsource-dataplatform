@@ -86,13 +86,21 @@ describe('test utils', () => {
     });
 
     describe("updateLocaleLanguagesDropdown", () => {
-        test("should insert 'english' and given language in dropdown menu when given language is not english", () => {
+        // test("should insert 'english' and given language in dropdown menu when given language is not english", () => {
+        //     const dropDown = $('#localisation_dropdown');
+        //     updateLocaleLanguagesDropdown("Hindi");
+        //     const children = dropDown.children();
+        //     expect(children[0].getAttribute('id')).toEqual('english');
+        //     expect(children[1].getAttribute('id')).toEqual('Hindi');
+        //     expect(children[2]).toEqual(undefined);
+        // });
+
+        test("should insert 'english' in dropdown menu when given language don't have localisation", () => {
             const dropDown = $('#localisation_dropdown');
             updateLocaleLanguagesDropdown("Hindi");
             const children = dropDown.children();
             expect(children[0].getAttribute('id')).toEqual('english');
-            expect(children[1].getAttribute('id')).toEqual('Hindi');
-            expect(children[2]).toEqual(undefined);
+            expect(children.length).toEqual(1);
         });
 
         test("should insert 'english' in dropdown menu when given language is english", () => {
