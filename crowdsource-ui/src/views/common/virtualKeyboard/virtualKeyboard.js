@@ -28,24 +28,16 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
    * Update simple-keyboard when input is changed directly
    */
   document.querySelector(".edit-area").addEventListener("input", event => {
-    // if(event.target.value) {
-    //   const isLanguage = lngtype(event.target.value);
-    // if (isLanguage) {
-    // } else {
-    //   $("#wrong-language").removeClass("d-none");
-    //   setTimeout(() => {
-    //     $("#wrong-language").addClass("d-none");
-    //   },2000)
-    // }
-    // }
     keyboard.setInput(event.target.value);
     const currentModule = localStorage.getItem(CURRENT_MODULE);
     const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
+    const isLanguage = lngtype(event.target.value);
+
     const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
     localStorage.setItem("physicalKeyboard", true);
     $('#keyboardBox').addClass('d-none');
 
-    if (event.target.value.length > 0) {
+    if (event.target.value.length > 0 && isLanguage) {
       callBack1();
       $submitEditButton.removeAttr('disabled');
       if($cancelButton) {
@@ -56,6 +48,14 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
         children[0].setAttribute("fill", '#007BFF');
       }
 
+    } else if(!isLanguage){
+        $("#wrong-language").removeClass("d-none");
+        $submitEditButton.attr('disabled', true);
+        const children = $submitEditButton.children().children();
+        children[0].setAttribute("fill", '#D7D7D7');
+        setTimeout(() => {
+          $("#wrong-language").addClass("d-none");
+        }, 2000)
     } else {
       callBack2()
       $submitEditButton.attr('disabled', true);
@@ -118,37 +118,6 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
     toggleCapsLock();
   }
 
-  function lngtype(text) {
-    var text = text.replace(/\s/g); //read input value, and remove "space" by replace \s 
-    //Dictionary for Unicode range of the languages
-    var langdic = {
-      "arabic": /[\u0600-\u06FF]/,
-      "persian": /[\u0750-\u077F]/,
-      "Hebrew": /[\u0590-\u05FF]/,
-      "Syriac": /[\u0700-\u074F]/,
-      "Bengali": /[\u0980-\u09FF]/,
-      "Ethiopic": /[\u1200-\u137F]/,
-      "Greek and Coptic": /[\u0370-\u03FF]/,
-      "Georgian": /[\u10A0-\u10FF]/,
-      "Thai": /[\u0E00-\u0E7F]/,
-      "English": /^[a-zA-Z]+$/
-      //add other languages her
-    }
-    //const keys = Object.keys(langdic); //read  keys
-    //const keys = Object.values(langdic); //read  values
-    const keys = Object.entries(langdic); // read  keys and values from the dictionary
-    let isLanguageSelected = false;
-    Object.entries(langdic).forEach(([key, value]) => {// loop to read all the dictionary items if not true
-      if (value.test(text) == true) {   //Check Unicode to see which one is true
-        // return document.getElementById("lang_her").innerHTML = key; //print language name if unicode true  
-        if (key == localStorage.getItem(CONTRIBUTION_LANGUAGE)) {
-          isLanguageSelected = true;
-        }
-      }
-    });
-    return isLanguageSelected;
-  }
-
   const toggleCapsLock = function () {
     const capsLockBtn = $(".hg-layout-shift .hg-row .hg-button-lock")[0];
     if (capsLockBtn) {
@@ -157,6 +126,34 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
   }
 }
 
+function lngtype(text) {
+  const newText = text.replace(/\s/g, ''); //read input value, and remove "space" by replace \s
+  //Dictionary for Unicode range of the languages
+  const langdic = {
+    "Assamese": /^[\u0980-\u09FF]+$/,
+    "Bengali": /^[\u0980-\u09FF]+$/,
+    "English": /^[a-zA-Z]+$/,
+    "Gujarati": /^[\u0A80-\u0AFF]+$/,
+    "Hindi": /^[\u0900-\u097F]+$/,
+    "Kannada": /^[\u0C80-\u0CFF]+$/,
+    "Malayalam": /^[\u0D00-\u0D7F]+$/,
+    "Odia": /^[\u0B00-\u0B7F]+$/,
+    "Marathi": /^[\u0900-\u097F]+$/,
+    "Punjabi": /^[\u0A00-\u0A7F]+$/,
+    "Tamil": /^[\u0B80-\u0BFF]+$/,
+    "Telugu": /^[\u0C00-\u0C7F]+$/,
+  }
+  let isLanguageSelected = false;
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  Object.entries(langdic).forEach(([key, value]) => {// loop to read all the dictionary items if not true
+    if (value.test(newText) == true) {   //Check Unicode to see which one is true
+      if (key.toLowerCase() == contributionLanguage.toLowerCase()) {
+        isLanguageSelected = true;
+      }
+    }
+  });
+  return isLanguageSelected;
+}
 
 const closeKeyboard = function () {
   keyboard.destroy();
@@ -168,7 +165,7 @@ const setInput = (text) => {
 
 
 function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (document.getElementById(elmnt.id + "Header")) {
     /* if present, the header is where you move the DIV from:*/
     document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
