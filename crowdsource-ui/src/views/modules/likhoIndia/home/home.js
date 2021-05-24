@@ -22,7 +22,7 @@ const {
   LIKHO_TO_LANGUAGE
 } = require('../common/constants');
 
-const {checkGivingFeedbackFor} = require('../common/feedback')
+const {initializeFeedbackModal} = require('../common/feedback')
 
 const addToLanguage = function (id, list) {
   const selectBar = document.getElementById(id);
@@ -140,7 +140,7 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
-  checkGivingFeedbackFor();
+  initializeFeedbackModal();
   getLocaleString().then(() => {
     initializeBlock();
   }).catch(err => {
