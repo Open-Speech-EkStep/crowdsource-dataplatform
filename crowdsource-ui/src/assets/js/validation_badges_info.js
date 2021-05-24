@@ -53,6 +53,7 @@ const renderBadgeDetails = function (data) {
 }
 
 $(document).ready(function () {
+  localStorage.setItem('module','bolo');
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
   const type='text'
   const source='validate'
