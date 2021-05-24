@@ -38,14 +38,7 @@
             <div class="row justify-content-center my-5">
                 <div class="col-md-8 col-sm-10 text-center prompt"><label class="h1 font-weight-normal" id="sentenceLbl"></label></div>
             </div>
-            <div class="row mt-5">
-                <div class="col-7 col-sm-8 offset-2 offset-lg-3 col-lg-6 col-xl-4 offset-xl-4">
-                    <div class="progress mt-1">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
-                    </div>
-                </div>
-                <div class="col-3 col-sm-2"><span class="" id="currentSentenceLbl"></span> <span class="">/</span> <span class="" id="totalSentencesLbl"></span></div>
-            </div>
+           
             <div class="recording-container">
                 <div class="row justify-content-center d-none">
                     <div class="col-8 text-muted h-1r" id="get-started"> <%= __('Let\'s get started!') %> </div>
@@ -66,7 +59,7 @@
                 <div class="row justify-content-center d-none count-down" id="count-down"><span class="align-middle" id="cont-down-span"> <%- __('Recording will automatically stop after <span id="counter"></span> seconds') %> </span>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-6 col-sm-8 col-12 text-center my-5">
+                    <div class="col-lg-4 col-md-6 col-sm-8 col-12 text-center mb-5">
                         <audio class="d-none" id="player" controls tabindex="-1"></audio>
                         <div class="text-danger mt-2 d-none" id="audio-small-error"><i class="material-icons align-middle">error</i>
                             <span class="align-middle"> <%= __('Audio recording is too small. Please Re-record') %> </span>
@@ -74,30 +67,37 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center align-items-center" id="startRecordRow">
-                <div class="col-xl-3 col-md-3 col-sm-4 col-6 col-lg-3">
-                    <button type="button" tabindex="-1" id="skipBtn" class="btn btn-outline-primary h6 w-100 rounded p-3"> <%= __('SKIP') %> </button>
+            <div class="row justify-content-center align-items-center mb-5" id="startRecordRow">
+                <div class="col-xl-2 col-md-2 col-sm-4 col-6 col-lg-2 pr-3">
+                    <button type="button" tabindex="-1" id="skipBtn" class="btn btn-outline-primary h6 w-100 p-3" style="border-radius:50px"> <%= __('SKIP') %> </button>
                 </div>
-                <div class="col-xl-3 col-md-3 col-sm-4 col-6 col-lg-3">
-                    <button type="button" class="btn btn-primary shadow h6 w-100 rounded p-3" id="startRecord"> <%= __('START RECORDING') %> </button>
-                    <button type="button" id="stopRecord" class="d-none btn btn-primary shadow h6 w-100 rounded p-3"> <%= __('STOP RECORDING') %> </button>
+                <div class="col-xl-2 col-md-2 col-sm-4 col-6 col-lg-2 pl-3">
+                    <button type="button" class="btn btn-primary shadow h6 w-100 p-3" id="startRecord" style="border-radius:50px"> <%= __('START RECORDING') %> </button>
+                    <button type="button" id="stopRecord" class="d-none btn btn-primary shadow h6 w-100 p-3" style="border-radius:50px"> <%= __('STOP RECORDING') %> </button>
                 </div>
             </div>
             <div class="row justify-content-center align-items-center">
-                <div class="col-xl-3 col-md-3 col-sm-4 col-6 col-lg-3">
-                    <button type="button" id="reRecord" class="d-none btn btn-outline-primary h6 w-100 rounded p-3"> <%= __('RE-RECORD') %> </button>
+                <div class="col-xl-2 col-md-2 col-sm-4 col-6 col-lg-2 pr-3">
+                    <button type="button" id="reRecord" class="d-none btn btn-outline-primary h6 w-100 p-3" style="border-radius:50px"> <%= __('RE-RECORD') %> </button>
                 </div>
-                <div class="col-xl-3 col-md-3 col-sm-4 col-6 col-lg-3">
+                <div class="col-xl-2 col-md-2 col-sm-4 col-6 col-lg-2 pl-3">
                     <div class="outline-0" tabindex="0" data-toggle="tooltip" title="<%= __('Please validate any error message before proceeding')%>">
-                        <button id="nextBtn" class="d-none btn btn-primary shadow h6 w-100 rounded p-3 point-none"> <%= __('NEXT') %> </button>
+                        <button id="nextBtn" class="d-none btn btn-primary shadow h6 w-100 p-3 point-none" style="border-radius:50px"> <%= __('NEXT') %> </button>
                     </div>
                 </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-7 col-sm-8 offset-2 offset-lg-3 col-lg-6 col-xl-4 offset-xl-4">
+                    <div class="progress mt-1">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
+                    </div>
+                </div>
+                <div class="col-3 col-sm-2"><span class="" id="currentSentenceLbl"></span> <span class="">/</span> <span class="" id="totalSentencesLbl"></span></div>
             </div>
         </div>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%- include('common/footer.ejs',{path:"./"}) %>
 <%- include modals/report-modal.ejs %>
 <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

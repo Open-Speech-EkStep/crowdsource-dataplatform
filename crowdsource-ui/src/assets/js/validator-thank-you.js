@@ -16,9 +16,6 @@ const {
   getLocaleString,
   performAPIRequest,
 } = require("./utils");
-
-// const {downloadPdf} = require('../common/downloadableBadges');
-// const {showUserProfile} = require('../common/header');
 const {showByHoursChart,getContributedAndTopLanguage,setBadge} = require('../../../build/js/common/common');
 
 const CURRENT_INDEX = "boloValidationCurrentIndex";
