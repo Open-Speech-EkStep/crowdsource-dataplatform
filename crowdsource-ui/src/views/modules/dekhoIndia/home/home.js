@@ -18,7 +18,7 @@ const {
   MODULE
 } = require('../common/constants');
 
-const {checkGivingFeedbackFor} = require('../common/feedback')
+const { initializeFeedbackModal } = require('../common/feedback');
 
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
@@ -84,7 +84,7 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
-  checkGivingFeedbackFor();
+  initializeFeedbackModal();
   getAvailableLanguages("ocr");
   getLocaleString().then(()=>{
     initializeBlock();
