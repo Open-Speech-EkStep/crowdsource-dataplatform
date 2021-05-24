@@ -251,7 +251,7 @@ const isAllContributedQuery = `select not exists(
 	select dataset_row_id from dataset_row where type=$1 and media->>'language'=$2
 	EXCEPT
 	select dr.dataset_row_id from contributions con inner join dataset_row dr on con.dataset_row_id=dr.dataset_row_id 
-	where type=$1 and dr.media->>'language'=$2 and con.media->>'language'=$3) as result`;
+	where type=$1 and dr.media->>'language'=$2 and con.media->>'language'=$3 and action='completed') as result`;
 
 const getDataRowInfo = `select type, media->>'language' as language from dataset_row where dataset_row_id=$1`;
 

@@ -17,7 +17,7 @@ const {showUserProfile} = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
-
+const {initializeFeedbackModal} = require('../common/feedback')
 const sunoCountKey = 'sunoCount';
 const currentIndexKey = 'sunoCurrentIndex';
 const sentencesKey = 'sunoSentencesKey';
@@ -632,6 +632,7 @@ if(isMobileView){
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
   hideElement($('#keyboardBox'));
+  initializeFeedbackModal();
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {
