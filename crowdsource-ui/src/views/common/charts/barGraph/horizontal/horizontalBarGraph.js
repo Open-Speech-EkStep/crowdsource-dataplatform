@@ -35,7 +35,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel, type) {
 
   const valueLabel = series.bullets.push(new am4charts.LabelBullet());
   valueLabel.label.text =
-    xAxisLabel === "total_speakers"
+    xAxisLabel == "total_speakers"
       ? "{total_speakers}"
       : "{total_contributions_text}";
   valueLabel.label.fontSize = 14;
