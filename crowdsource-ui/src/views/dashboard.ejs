@@ -22,6 +22,9 @@
     <div class="row">
         <div class="col-12">
             <div class="row">
+                <%- include('../../build/views/common/back-btn.ejs',{url:"./home.html"}) %>
+            </div>
+            <div class="row">
                 <div class="col-12 col-md-7 col-lg-6">
                     <div class="text-muted mb-2">
                         <%= __('Select a language') %>:
@@ -67,30 +70,7 @@
                 <div><span class="spinner"></span></div>
             </div>
             <div class="row text-center contribution-details d-none" id="contribution-details">
-                <div class="contribution-data d-none" id="languages-wrapper">
-                    <p class="mb-1" id="languages-value"></p>
-                    <p class="mb-0">
-                        <%= __('languages contributed') %>
-                    </p>
-                </div>
-                <div class="contribution-data">
-                    <p class="mb-1" id="speaker-value"></p>
-                    <p class="mb-0">
-                        <%= __('speakers contributed') %>
-                    </p>
-                </div>
-                <div class="contribution-data">
-                    <p class="mb-1" id="contributed-value"></p>
-                    <p class="mb-0">
-                        <%= __('hours recorded') %>
-                    </p>
-                </div>
-                <div class="contribution-data">
-                    <p class="mb-1" id="validated-value"></p>
-                    <p class="mb-0">
-                        <%= __('hours validated') %>
-                    </p>
-                </div>
+                <%- include('../../build/views/common/contributionStats.ejs',{labels :['Languages','Speakers contributed','Hrs recorded','Hrs validated']})%>
             </div>
         </div>
     </div>

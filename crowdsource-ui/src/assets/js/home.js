@@ -143,7 +143,7 @@ const clearLocalStorage = function () {
 const getStatsSummary = function () {
     performAPIRequest('/stats/summary/text')
         .then(response => {
-            drawMap({data: response.aggregate_data_by_state});
+            // drawMap({data: response.aggregate_data_by_state});
             const languages = getContributedAndTopLanguage(response.top_languages_by_hours);
             localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
             showByHoursChart();
@@ -241,41 +241,45 @@ function initializeBlock() {
     const $say_container = $('#say_container');
     const $listen_container = $('#listen_container');
     $say.hover(() => {
-        $say.removeClass('col-lg-5');
-        $listen.removeClass('col-lg-5');
-        $say.addClass('col-lg-6');
-        $listen.addClass('col-lg-4');
-        $say.removeClass('col-md-5');
-        $listen.removeClass('col-md-5');
-        $say.addClass('col-md-6');
-        $listen.addClass('col-md-4');
+        $(".card1").css("box-shadow","0px 0px 32px rgba(66, 178, 198, 0.6)")
+        // $say.removeClass('col-lg-5');
+        // $listen.removeClass('col-lg-5');
+        // $say.addClass('col-lg-6');
+        // $listen.addClass('col-lg-4');
+        // $say.removeClass('col-md-5');
+        // $listen.removeClass('col-md-5');
+        // $say.addClass('col-md-6');
+        // $listen.addClass('col-md-4');
         $say_p_2.removeClass('d-none');
         $say_container.addClass('say-active');
     }, () => {
-        $say.removeClass('col-lg-6');
-        $listen.removeClass('col-lg-4');
-        $say.addClass('col-lg-5');
-        $listen.addClass('col-lg-5');
-        $say.removeClass('col-md-6');
-        $listen.removeClass('col-md-4');
-        $say.addClass('col-md-5');
-        $listen.addClass('col-md-5');
+        $(".card1").css("box-shadow","0px 0px 32px rgb(0 0 0 / 10%)")
+        // $say.removeClass('col-lg-6');
+        // $listen.removeClass('col-lg-4');
+        // $say.addClass('col-lg-5');
+        // $listen.addClass('col-lg-5');
+        // $say.removeClass('col-md-6');
+        // $listen.removeClass('col-md-4');
+        // $say.addClass('col-md-5');
+        // $listen.addClass('col-md-5');
         $say_p_2.addClass('d-none');
         $say_container.removeClass('say-active');
     });
 
     $listen.hover(() => {
-        $say.removeClass('col-lg-5');
-        $listen.removeClass('col-lg-5');
-        $listen.addClass('col-lg-6');
-        $say.addClass('col-lg-4');
+        $(".card2").css("box-shadow","0px 0px 32px rgba(166, 192, 251, 0.6)")
+        // $say.removeClass('col-lg-5');
+        // $listen.removeClass('col-lg-5');
+        // $listen.addClass('col-lg-6');
+        // $say.addClass('col-lg-4');
         $listen_p_2.removeClass('d-none');
         $listen_container.addClass('listen-active');
     }, () => {
-        $say.removeClass('col-lg-4');
-        $listen.removeClass('col-lg-6');
-        $say.addClass('col-lg-5');
-        $listen.addClass('col-lg-5');
+        $(".card2").css("box-shadow","0px 0px 32px rgb(0 0 0 / 10%)")
+        // $say.removeClass('col-lg-4');
+        // $listen.removeClass('col-lg-6');
+        // $say.addClass('col-lg-5');
+        // $listen.addClass('col-lg-5');
         $listen_p_2.addClass('d-none');
         $listen_container.removeClass('listen-active');
     });

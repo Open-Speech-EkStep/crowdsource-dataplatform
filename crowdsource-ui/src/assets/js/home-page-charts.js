@@ -184,29 +184,30 @@ const generateIndiaMap = function (language="") {
 function getStatistics(response) {
   const $speakersData = $("#speaker-data");
   const $speakersDataLoader = $speakersData.find(
-    "#loader1, #loader2, #loader3"
+    "#loader1"
   );
-  const $speakersDataSpeakerWrapper = $("#speakers-wrapper");
   const $speakersDataSpeakerValue = $("#speaker-value");
-  const $speakersDataHoursWrapper = $("#hours-wrapper");
-  const $speakersDataHoursValue = $("#hour-value");
+  const $speakersDataHoursValue = $("#contributed-value");
   const $speakersDataLanguagesWrapper = $("#languages-wrapper");
   const $speakersDataLanguagesValue = $("#languages-value");
+  const $speakerContributionData = $speakersData.find('.contribution-data');
+  const $validatedValue = $("#validated-value");
   $speakersDataLoader.removeClass("d-none");
-  $speakersDataHoursWrapper.addClass("d-none");
-  $speakersDataSpeakerWrapper.addClass("d-none");
-  $speakersDataLanguagesWrapper.addClass("d-none");
 
-  const { hours, minutes, seconds } = calculateTime(
+  const {hours, minutes, seconds} = calculateTime(
     Number(response.total_contributions) * 60 * 60
   );
+
+  const {hours: validate_hrs, minutes: validate_min, seconds: validate_sec} = calculateTime(
+    Number(response.total_validations) * 60 * 60
+  );
   $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
+  $validatedValue.text(`${validate_hrs}h ${validate_min}m ${validate_sec}s`);
   $speakersDataSpeakerValue.text(response.total_speakers);
   $speakersDataLanguagesValue.text(response.total_languages);
   $speakersDataLoader.addClass("d-none");
-  $speakersDataHoursWrapper.removeClass("d-none");
-  $speakersDataSpeakerWrapper.removeClass("d-none");
-  $speakersDataLanguagesWrapper.removeClass("d-none");
+    $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4 col-xs-6')
+    $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
 }
 
 function constructChart(responseData, xAxisLabel, yAxisLabel) {
