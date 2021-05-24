@@ -108,6 +108,7 @@ const setAudioPlayer = function () {
 
   function playAudio() {
     myAudio.load();
+    enableNeedChangeBtn();
     hideElement(play)
     showElement(pause)
     hideElement(textPlay);
@@ -120,17 +121,15 @@ const setAudioPlayer = function () {
     showElement(replay)
     hideElement(textPause)
     showElement(textReplay)
-    enableValidation();
     myAudio.pause();
   }
 
   function replayAudio() {
-    myAudio.load();
+    // myAudio.load();
     hideElement(replay)
     showElement(pause)
     hideElement(textReplay);
     showElement(textPause);
-    disableValidation();
     myAudio.play();
   }
 
@@ -138,6 +137,11 @@ const setAudioPlayer = function () {
     const likeButton = isMobileDevice() ? $("#like_button_mob") : $("#like_button");
     const needChangeButton = isMobileDevice() ? $("#need_change_mob") : $("#need_change");
     enableButton(likeButton)
+    enableButton(needChangeButton)
+  }
+
+  function enableNeedChangeBtn() {
+    const needChangeButton = isMobileDevice() ? $("#need_change_mob") : $("#need_change");
     enableButton(needChangeButton)
   }
 }
