@@ -18,7 +18,18 @@
 <div id="page-content" class="d-none">
     <div id="content-wrapper" class="container-fluid d-flex flex-column">
         <%- include modals/recording-instructions.ejs %>
-        <div class="d-flex justify-content-end pt-3 record-btn-container">
+        <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">
+            <div class="row position-absolute dekho-back-btn top-back-btn">
+            <button class="btn btn-link p-0 back-btn" id="back-btn">
+                <a href="./home.html" class="nav-link" style="color:#959595;font-size:20px">
+                    <span class="material-icons" style="vertical-align:sub">
+            arrow_back
+            </span>
+                    <span class="back-text"><%= __('Back') %></span>
+            
+                </a>
+            </button>
+        </div>
             <%- include components/report-btn.ejs %>
             <%- include components/mic-speaker-test-btn.ejs %>
         </div>
