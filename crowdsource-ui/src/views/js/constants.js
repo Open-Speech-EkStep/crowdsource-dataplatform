@@ -44,10 +44,10 @@ const MODULE = {
       platinum: {imgLg: "../../img/platinum_badge.svg", imgSm: "../../img/platinum_contributor.jpg"},
     }},
   suno: {url: 'sunoIndia', value: 'suno',BADGES :{
-      bronze: {imgLg: "../../img/suno_bronze_badge.svg", imgSm: "../../img/suno_bronze_contributor.jpg"},
-      silver: {imgLg: "../../img/suno_silver_badge.svg", imgSm: "../../img/suno_silver_contributor.jpg"},
-      gold: {imgLg: "../../img/suno_gold_badge.svg", imgSm: "../../img/suno_gold_contributor.jpg"},
-      platinum: {imgLg: "../../img/suno_platinum_badge.svg", imgSm: "../../img/suno_platinum_contributor.jpg"},
+      bronze: {imgLg: "../../img/suno_bronze_badge.svg", imgSm: "../../img/suno_bronze_contributor.jpg",imgVal:"../../img/suno_bronze_validator.png"},
+      silver: {imgLg: "../../img/suno_silver_badge.svg", imgSm: "../../img/suno_silver_contributor.jpg",imgVal:"../../img/suno_silver_validator.png"},
+      gold: {imgLg: "../../img/suno_gold_badge.svg", imgSm: "../../img/suno_gold_contributor.jpg",imgVal:"../../img/suno_gold_validator.png"},
+        platinum: {imgLg: "../../img/suno_platinum_badge.svg", imgSm: "../../img/suno_platinum_contributor.jpg",imgVal:"../../img/suno_platinum_validator.png"},
     }},
 
   likho: {url: 'likhoIndia', value: 'likho',BADGES :{
