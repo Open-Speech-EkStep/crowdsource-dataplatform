@@ -6,6 +6,7 @@
 * Select Contribution Language as "हिंदी" first time
 //* Select translation language as "हिंदी"
 * Navigate to "Validate" button and click "Validate" button
+* And User enter random Username and selects Age , Mother tongue ,gender
 * "skip_button" should be enabled , "dislike_button" "like_button" buttons should be disabled
 * User plays the audio , "dislike_button","like_button" should be enabled
 * User clicks on "dislike_button" , he should see next sentence and "dislike_button" "like_button" buttons should be disabled

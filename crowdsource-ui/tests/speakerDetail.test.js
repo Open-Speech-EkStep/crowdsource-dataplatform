@@ -203,7 +203,7 @@ describe('setStartRecordingBtnOnClick', () => {
         // const $tncCheckbox = $('#tnc');
 
         // $tncCheckbox.prop('checked', true);
-        setStartRecordingBtnOnClick();
+        setStartRecordingBtnOnClick('./record.html');
         $startRecordBtn.click();
 
         const expectedDetails = localStorage.getItem('speakerDetails');

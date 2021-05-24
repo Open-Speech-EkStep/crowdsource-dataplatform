@@ -225,10 +225,10 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
 step("When user clicks on View all Details buttton , user shall land on Dashboard page", async function () {
     await click(taiko.link({ id: 'viewAllDetailsBtn' }))
     await taiko.waitFor(1000)
-    assert.ok(await text("languages contributed").exists());
-    assert.ok(await text("speakers contributed").exists());
-    assert.ok(await text("hours recorded").exists());
-    assert.ok(await text("hours validated").exists());
+    assert.ok(await text("Languages").exists());
+    assert.ok(await text("Speakers contributed").exists());
+    assert.ok(await text("Hrs recorded").exists());
+    assert.ok(await text("Hrs validated").exists());
 });
 
 step("When user select <lang> Language from dropdown then <arg0> should not visible", async function (lang, arg0) {
