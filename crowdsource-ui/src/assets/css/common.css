@@ -154,7 +154,15 @@ body {
     display: block;
   }
  .top-back-btn{
-   top: 30px;
+   top: 20px;
    left: 35px;
  }
+
+ .back-btn a:hover {
+   text-decoration: none;
+ }
+
+ .btn-link:hover {
+  text-decoration: none;
+}
 }
