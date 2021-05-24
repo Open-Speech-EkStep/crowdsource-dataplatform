@@ -280,20 +280,17 @@ function addListeners() {
 
     dislikeButton.on('click', () => {
         recordValidation(REJECT_ACTION)
-        updateProgressBar();
         getNextSentence();
     })
 
     likeButton.on('click', () => {
         recordValidation(ACCEPT_ACTION)
-        updateProgressBar();
         getNextSentence();
     })
 
     $skipButton.on('click', () => {
         $('#pause').trigger('click');
         recordValidation(SKIP_ACTION)
-        updateProgressBar();
         getNextSentence();
     })
 

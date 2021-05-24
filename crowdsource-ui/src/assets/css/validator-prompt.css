@@ -80,11 +80,11 @@ a {
 
 @media (min-width: 992px) {
     .validation-container {
-        min-height: 250px;
+        min-height: 150px;
     }
 
     .prompt {
-        min-height: 150px;
+        min-height: 100px;
         padding: 32px;
     }
 }

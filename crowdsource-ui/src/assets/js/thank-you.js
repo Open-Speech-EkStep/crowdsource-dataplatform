@@ -5,6 +5,7 @@ const {
   LOCALE_STRINGS,
   BADGES,
   CONTRIBUTION_LANGUAGE,
+  MODULE
 } = require("./constants");
 const {
   setPageContentHeight,
@@ -13,6 +14,7 @@ const {
   getLocaleString,
   performAPIRequest,
 } = require("./utils");
+const {showByHoursChart} = require('../../../build/js/common/common');
 
 const CURRENT_INDEX = "currentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -256,6 +258,7 @@ const getLanguageStats = function () {
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
         $("#did_you_know_section").show();
+        showByHoursChart(MODULE.bolo.value);
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );

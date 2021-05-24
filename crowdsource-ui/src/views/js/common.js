@@ -31,7 +31,7 @@ function showByHoursChart(type) {
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
   constructChart(
     JSON.parse(topLanguagesByHoursData),
-    type == "suno" ? "total_contributions" : "total_contribution_count",
+    type == "suno" || "bolo" ? "total_contributions" : "total_contribution_count",
     "language",
     type
   );
