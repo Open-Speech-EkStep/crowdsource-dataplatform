@@ -21,6 +21,7 @@ window.sunoIndiaValidator = {};
 let playStr = "";
 let pauseStr = "";
 let replayStr = "";
+let resumeStr = "";
 let audioPlayerBtn = "";
 let needChange = "";
 let submitButton ="";
@@ -82,16 +83,20 @@ const setAudioPlayer = function () {
   const play = $(playStr);
   const pause = $(pauseStr);
   const replay = $(replayStr);
+  const resume = $(resumeStr);
   const textPlay = $('#audioplayer-text_play');
   const textReplay = $('#audioplayer-text_replay');
   const textPause = $('#audioplayer-text_pause');
+  const textResume = $('#audioplayer-text_resume');
 
 
   myAudio.addEventListener("ended", () => {
     enableValidation();
     hideElement(pause)
+    hideElement(resume)
     showElement(replay)
     hideElement(textPause);
+    hideElement(textResume);
     showElement(textReplay);
   });
 
@@ -106,23 +111,38 @@ const setAudioPlayer = function () {
     replayAudio();
   });
 
+  resume.on('click', () => {
+    resumeAudio();
+  });
+
   function playAudio() {
     myAudio.load();
     enableNeedChangeBtn();
     hideElement(play)
+    hideElement(resume)
     showElement(pause)
     hideElement(textPlay);
+    hideElement(textResume);
     showElement(textPause);
     myAudio.play();
   }
 
   function pauseAudio() {
     hideElement(pause)
-    showElement(replay)
+    showElement(resume)
     hideElement(textPause)
-    showElement(textReplay)
+    showElement(textResume)
     myAudio.pause();
   }
+
+  function resumeAudio() {
+    showElement(pause)
+    hideElement(resume)
+    showElement(textPause)
+    hideElement(textResume)
+    myAudio.play();
+  }
+
 
   function replayAudio() {
     // myAudio.load();
@@ -361,7 +381,12 @@ function addListeners() {
     setTimeout(()=>{
       closeEditor();
       showElement($('#progress-row'))
+      showElement($(playStr))
+      hideElement($(resumeStr))
+      showElement($("#audioplayer-text_play"));
+      hideElement($("#audioplayer-text_resume"));
       showElement($('#sentences-row'));
+      showElement($(audioPlayerBtn))
       hideElement($('#thankyou-text'));
       getNextSentence();
       $("#edit").css('pointer-events','unset');
@@ -370,6 +395,9 @@ function addListeners() {
 
   likeButton.on('click', () => {
     hideElement($('#virtualKeyBoardBtn'));
+    $(resumeStr).addClass('d-none')
+    const textResume = $('#audioplayer-text_resume');
+    textResume.addClass('d-none');
     recordValidation(ACCEPT_ACTION)
     getNextSentence();
   })
@@ -379,6 +407,9 @@ function addListeners() {
     if($(pauseStr).hasClass('d-none')){
       $(pauseStr).trigger('click');
     }
+    $(resumeStr).addClass('d-none')
+    const textResume = $('#audioplayer-text_resume');
+    textResume.addClass('d-none');
     recordValidation(SKIP_ACTION)
     getNextSentence();
     showElement($('#sentences-row'));
@@ -527,6 +558,7 @@ if(isMobileView){
     playStr = "#play_mob";
     replayStr = "#replay_mob";
     pauseStr = "#pause_mob";
+    resumeStr = "#resume_mob";
     audioPlayerBtn = "#audio-player-btn_mob";
      needChange = "#need_change_mob";
  submitButton ="#submit-edit-button_mob";
@@ -538,6 +570,7 @@ if(isMobileView){
     playStr = "#play";
     replayStr = "#replay";
     pauseStr = "#pause";
+  resumeStr = "#resume";
     audioPlayerBtn = "#audio-player-btn";
     needChange = "#need_change";
     submitButton ="#submit-edit-button";

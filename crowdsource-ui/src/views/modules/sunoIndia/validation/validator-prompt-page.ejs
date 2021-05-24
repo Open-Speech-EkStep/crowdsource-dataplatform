@@ -119,7 +119,12 @@
                         <div><span class="spinner w-h-5"></span></div>
                     </div>
                     <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn">
-                        <div class="audioplayer d-flex justify-content-center align-items-center"><img src="../../img/play.svg" alt="play" id="play" class="cursor-pointer"> <img src="../../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer"> <img src="../../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer"></div>
+                        <div class="audioplayer d-flex justify-content-center align-items-center">
+                            <img src="../../img/play.svg" alt="play" id="play" class="cursor-pointer">
+                            <img src="../../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer">
+                            <img src="../../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer">
+                            <img src="../../img/play.svg" alt="resume" id="resume" class="d-none justify-self-center cursor-pointer">
+                        </div>
                         <h3 class="font-wt-800 text-center mt-2" id="audioplayer-text_play">
                             <%= __('Play') %>
                         </h3>
@@ -128,6 +133,9 @@
                         </h3>
                         <h3 class="font-wt-800 text-center d-none mt-2" id="audioplayer-text_pause">
                             <%= __('Pause') %>
+                        </h3>
+                        <h3 class="font-wt-800 text-center d-none mt-2" id="audioplayer-text_resume">
+                            <%= __('Resume') %>
                         </h3>
                     </div>
                     <button class="btn align-self-start mb-2 w-100" disabled="disabled" id="like_button">
@@ -158,6 +166,7 @@
                             <img src="../../img/play.svg" height="48" width="48" alt="play" id="play_mob" class="cursor-pointer"> 
                             <img src="../../img/pause.svg" height="48" width="48" alt="pause" id="pause_mob" class="d-none cursor-pointer"> 
                             <img src="../../img/replay.svg" height="48" width="48" alt="replay" id="replay_mob" class="d-none justify-self-center cursor-pointer">
+                            <img src="../../img/play.svg" height="48" width="48" alt="resume" id="resume_mob" class="d-none justify-self-center cursor-pointer">
                         </div>
                     </div>
                     <button class="w-100 btn btn-link-primary my-2" disabled="disabled" id="need_change_mob">
