@@ -100,12 +100,15 @@ function getNextSentence() {
     setDekhoImage(`${cdn_url}/${dekhoIndiaValidator.sentences[currentIndex].sentence}`);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
+    enableButton($('#skip_button'))
   } else {
     const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
     Object.assign(sentencesObj, { sentences: [] });
     localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
-    showThankYou();
+    // showThankYou();
+    disableSkipButton();
+    setTimeout(showThankYou, 1000);
   }
 }
 
@@ -254,6 +257,7 @@ function addListeners() {
   })
 
   $skipButton.on('click', () => {
+    disableSkipButton();
     $('#pause').trigger('click');
     skipValidation(SKIP_ACTION)
     showElement($('#textarea-row'));

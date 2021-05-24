@@ -113,6 +113,11 @@ function setCapturedText(index) {
   $('#edit').text(capturedText);
 }
 
+function enableButton(element) {
+  element.children().removeAttr("opacity")
+  element.removeAttr("disabled")
+}
+
 function getNextSentence() {
   if (currentIndex < likhoIndiaValidator.sentences.length - 1) {
     currentIndex++;
@@ -121,13 +126,27 @@ function getNextSentence() {
     setTranslation(likhoIndiaValidator.sentences[currentIndex].contribution);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
+    enableButton($('#skip_button'))
   } else {
     const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
     Object.assign(sentencesObj, { sentences: [] });
     localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
-    showThankYou();
+    // showThankYou();
+    disableSkipButton();
+    setTimeout(showThankYou, 1000);
   }
+}
+
+function disableButton(button) {
+  button.children().attr("opacity", "50%");
+  button.attr("disabled", "disabled");
+}
+
+function disableSkipButton() {
+  const $skipButton = $('#skip_button');
+  $skipButton.removeAttr('style');
+  disableButton($skipButton)
 }
 
 const updateDecisionButton = (button, colors) => {
@@ -187,7 +206,6 @@ const closeEditor = function (){
 }
 
 function addListeners() {
-
   const likeButton = $("#like_button");
   const needChangeButton = $("#need_change");
   const $skipButton = $('#skip_button');
@@ -274,6 +292,7 @@ function addListeners() {
   })
 
   $skipButton.on('click', () => {
+    disableSkipButton();
     $('#pause').trigger('click');
     skipValidation(SKIP_ACTION)
     showElement($('#textarea-row'));
