@@ -110,12 +110,15 @@ function getNextSentence() {
     updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length);
     setDekhoImage(`${cdn_url}/${dekhoIndia.sentences[currentIndex].media_data}`);
     localStorage.setItem(currentIndexKey, currentIndex);
+    enableButton($('#skip_button'))
   } else {
     const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
     Object.assign(sentencesObj, { sentences: [] });
     localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
-    showThankYou();
+    // showThankYou();
+    disableSkipButton();
+    setTimeout(showThankYou, 1000);
   }
 }
 
@@ -267,6 +270,7 @@ function addListeners() {
   })
 
   $skipButton.on('click', () => {
+    disableSkipButton();
     $('#edit').val("");
     setInput("");
     $('#submit-edit-button').attr('disabled', true);
