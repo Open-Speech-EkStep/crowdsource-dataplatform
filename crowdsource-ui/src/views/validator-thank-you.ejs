@@ -15,31 +15,52 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/home.css">
-    <link rel="stylesheet" type="text/css" href="../css/thank-you.css">
-    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+    <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/home.css">
+    <link rel="stylesheet" type="text/css" href="../../css/common/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/thankyou.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
 </head>
 
 <body>
-<%- include('common/headerForContributor.ejs',{path:"./"}); %>
-<div id="content-wrapper" class="container-fluid mt-5 pt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
+<%- include('common/headerForContributor.ejs',{path:"./",MODULE:"Bolo India", PAGE_TITLE:"Validate"}); %>
+<div id="content-wrapper" class="container-fluid mt-5 pt-2 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center">
+        <div class="row position-absolute top-back-btn">
+            <%- include('../../build/views/common/back-btn.ejs',{url:"./home.html"}) %>
+        </div>
         <h1 class="display-5 font-wt-900 site-blue">
-            <%= __('Thank you for contributing!') %>
+            <%= __('Thank you for validating!') %>
         </h1>
     </div>
-    <div class="row mt-5">
-        <div class="col-12 col-sm-3 text-muted text-center text-sm-right align-self-sm-center align-self-end"><b>
-                <p id="hour-value" class="mb-0">0</p>
-                <div><span class="spinner"></span></div>
-            </b><b></b></div>
-        <div class="col-12 col-sm-6 text-left align-self-sm-center align-self-start"><img src="../img/thanks.svg" class="img-fluid w-100" alt="Total Sentence Progress">
-            <div class="bg-primary position-absolute rounded-pill" id="total-progress"></div>
-            <div class="position-absolute rounded-pill" id="total-progress-bulb"></div>
+    <div class="row lazy">
+        <div class="col-lg-12 col-md-11 col-lg-11 thankyou-page ml-lg-auto">
+            <div class="row m-0">
+                <div class="col-2"></div>
+                <div class="col-lg-3 col-md-3 col-sm-6 pl-0 web-view">
+                    <h4 class="h4 my-3 font-weight-normal text-right">
+                        <%= __('Your language and top 3 most contributed languages') %>
+                    </h4>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 pl-0 mobile-view">
+                    <h4 class="h4 my-3 font-weight-normal text-center">
+                        <%= __('Your language and top 3 most contributed languages') %>
+                    </h4>
+                </div>
+                <div class="col-lg-6 col-md-9 col-sm-6 thankyou-bar-graph">
+                    <div id="bar_charts_container">
+                        <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
+                            <div><span class="spinner"></span></div>
+                        </div>
+                        <%- include ../../build/views/common/horizontalBarGraph.ejs %>
+                    </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
         </div>
     </div>
-
-    <div class="row mt-5">
+    <div class="row mt-5 mt-lg-0">
         <div class="col-lg-8 offset-lg-2 border border-primary p-4-5 text-center overflow-hidden contribuion-info">
             <div id="champion_text" class="champion-ribbon d-none">
                 <span class="marquee"><%= __('You are a champion') %></span>
@@ -48,94 +69,156 @@
                 <span class="marquee"><%= __('You are on a spree !!') %></span>
             </div>
             <div id="contribution_text" class="d-none">
-                <h4 class="mb-3 thank-you-title mt-5 mt-lg-0"><%= __('WooHoo!! You took the first important step') %></h4>
+                <h4 class="mb-3 thank-you-title mt-5 mt-lg-0"><%= __('You took the first important step') %></h4>
             </div>
             <div id="before_badge_content" class="d-none">
                 <h4 class="mb-3 mt-5 mt-lg-0"><%- __('You are driving the spirit of your language') %></h4>
             </div>
-            <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('recordings contributed') %></p>
+            <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('sentences validated') %></p>
             <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="./validator-badges.html">Know more</a>') %></p>
-            <%- include modals/badge_milestone.ejs %>
-            <div class="mt-5 text-center">
-                <%= __('Share it with your friends and family') %>
-            </div>
-            <div class="row justify-content-center my-2">
-                <div class="col-12 text-center bg-white">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://boloindia.nplt.in/" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
-                        <img src="../img/fb-icon.svg" width="24px" alt="Share on Facebook">
-                    </a><span>&sdot;</span>
-                    <a id="linkedin_share" href="https://www.linkedin.com/shareArticle?mini=true&url=https://boloindia.nplt.in/&title=Bolo India: A crowdsourcing initiative for Indian languages.&summary=I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?/&source=" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
-                        <img src="../img/linkedin-icon.svg" width="24px" alt="Share on LinkedIn">
-                    </a><span>&sdot;</span>
-                    <a id="twitter_share" href="https://twitter.com/intent/tweet?text=I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?" target="_blank" rel="noopener noreferrer">
-                        <img src="../img/twitter-icon.svg" width="24px" alt="Share on Twitter">
-                    </a><span>&sdot;</span>
-                    <a id="whatsapp_share" href="https://api.whatsapp.com/send?text=I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?" target="_blank" rel="noopener noreferrer">
-                        <img src="../img/whatsapp.svg" width="32px" alt="Share on Whatsapp">
-                    </a>
-                </div>
-            </div>
+            <%- include('../../build/views/common/badgesMilestone.ejs',{MODULE:"bolo"}) %>
+            <%- include ../../build/views/common/sharableLink.ejs %>
             <div class="badges_information">
-                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="bronze" href="#" id="bronze_badge_link">
-                    <img title="Download Bronze Badge" src="../img/bronze_badge.svg" alt="" width="36px" class="disable" id="bronze_badge_link_img">
-                </button>
-                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="silver" href="#" id="silver_badge_link">
-                    <img title="Download Silver Badge" src="../img/silver_badge.svg" alt="" width="36px" class="disable" id="silver_badge_link_img">
-                </button>
-                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="gold" href="#" id="gold_badge_link">
-                    <img title="Download Gold Badge" src="../img/gold_badge.svg" alt="" width="36px" class="disable" id="gold_badge_link_img">
-                </button>
-                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="platinum" href="#" id="platinum_badge_link">
-                    <img title="Download Platinum Badge" src="../img/platinum_badge.svg" alt="" width="36px" class="disable" id="platinum_badge_link_img">
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-5" id="did_you_know_section">
-        <div class="col-lg-8 offset-lg-2 border p-4 stats-container">
-            <div class="row justify-content-around align-items-center">
-                <div class="title">
-                    <%= __('Did you know?') %>
-                </div>
-                <div class="most-data-recorded">
-                    <p><%- __('Most Contributed - <span id="languageId"></span>') %> </p>
-                    <div class="position-relative">
-                        <div class="progress mb-2 w-80">
-                            <div id="highest_language_progress" class="progress-bar time-contributed" role="progressbar" style="width:0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <span id="highest_language_time" class="time"></span>
-                    </div>
-                </div>
-                <div class="lang-data-recorded">
-                    <p><%- __('Data recorded for <span id="languageChoiceId"></span>') %></p>
-                    <div class="position-relative">
-                        <div class="progress mb-2 w-80">
-                            <div id="contribute_language_progress" class="progress-bar time-contributed" role="progressbar" style="width:0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            <span id="contribute_language_time" class="time"></span>
-                        </div>
-                    </div>
-                </div>
+                <%- include('../../build/views/common/downloadableBadges.ejs', {BADGES:["bronze","silver","gold","platinum"],MODULE:"bolo"})%>
             </div>
         </div>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-lg-3 col-md-6 col-8 text-center">
-            <div class="mb-3">
-                <span><%- __('Help your language achieve it’s goal of <span id="language-hour-goal"></span> hrs. We know you can do more!') %></span>
-            </div>
-            <a href="./validator-thank-you.html" class="btn btn-primary btn-lg h6 w-100">
-                <%= __('Validate More') %>
-            </a>
-        </div>
+        <%- include('../../build/views/common/languageGoal.ejs', {ButtonText:"Validate More",url:"./validator-page.html",TEXT:"language"})%>
     </div>
-
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%- include('common/footer.ejs',{path:"./"}) %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="../js/thank-you.js"></script>
+<script src="../js/validator-thank-you.js"></script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

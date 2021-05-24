@@ -18,7 +18,8 @@ const {
     AGGREGATED_DATA_BY_LANGUAGE,
     CONTRIBUTION_LANGUAGE,
     LOCALE_STRINGS,
-    ALL_LANGUAGES
+    ALL_LANGUAGES,
+    MODULE
 } = require('./constants');
 
 const updateLocaleText = function (total_contributions, total_validations, language) {
@@ -218,6 +219,13 @@ function initializeBlock() {
     $('#start_recording').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+        setStartRecordingBtnOnClick('./record.html',MODULE.bolo.value);
+    });
+
+    $('#start_validating').on('click', () => {
+        sentenceLanguage = top_lang;
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+        setStartRecordingBtnOnClick('./validator-page.html',MODULE.bolo.value);
     });
 
     $('[name="topLanguageChart"]').on('change', (event) => {
@@ -232,7 +240,7 @@ function initializeBlock() {
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
-    setStartRecordingBtnOnClick();
+    // setStartRecordingBtnOnClick();
 
     const $say = $('#say');
     const $listen = $('#listen');
