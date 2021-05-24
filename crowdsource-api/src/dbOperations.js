@@ -271,13 +271,13 @@ const updateTablesAfterValidation = async (req, res) => {
     return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country])
         .then(async () => {
             if (action !== 'skip') {
-                db.none(updateMediaWithValidatedState, [sentenceId, contributionId]).then(() => {
-                    res.sendStatus(200);
-                })
+                db.none(updateMediaWithValidatedState, [sentenceId, contributionId]).then()
                     .catch((err) => {
                         console.log(err);
                         res.sendStatus(500);
                     });
+                db.none(updateMaterializedViews).then();
+                res.sendStatus(200);
             }
             else res.sendStatus(200);
         })
