@@ -212,10 +212,10 @@ h6,
 }
 
 .spinner {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
   display: inline-block;
-  border-width: 0.2rem;
+  border-width: 0.2rem !important;
   border-color: #007bff;
   border-top-color: #fff;
   animation: spin 1s infinite linear;
