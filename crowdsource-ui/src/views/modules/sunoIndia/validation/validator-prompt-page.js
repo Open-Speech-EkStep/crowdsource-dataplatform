@@ -307,12 +307,13 @@ function addListeners() {
   });
 
   likeButton.mousedown(() => {
+   
     updateDecisionButton(likeButton, ["#007BFF", "", "white"]);
   });
 
 
   needChangeButton.on('click',()=>{
-   
+    showElement($('#virtualKeyBoardBtn'));
     hideElement($('#sentences-row'));
     openEditor();
     const originalText = sunoIndiaValidator.sentences[currentIndex].contribution;
@@ -331,6 +332,7 @@ function addListeners() {
   });
 
   $cancelButton.on('click', () => {
+    hideElement($('#virtualKeyBoardBtn'));
     const $submitEditButton = $submitButton;
     $submitEditButton.attr('disabled',true);
     if(!isMobileDevice()) {
@@ -346,6 +348,7 @@ function addListeners() {
   $submitButton.on('click', () => {
     recordValidation(REJECT_ACTION);
     hideElement($('#keyboardBox'));
+    hideElement($('#virtualKeyBoardBtn'));
     hideElement($cancelButton);
     hideElement($submitButton)
     hideElement($(audioPlayerBtn))
@@ -366,12 +369,13 @@ function addListeners() {
   })
 
   likeButton.on('click', () => {
-    console.log("click");
+    hideElement($('#virtualKeyBoardBtn'));
     recordValidation(ACCEPT_ACTION)
     getNextSentence();
   })
 
   $skipButton.on('click', () => {
+    hideElement($('#virtualKeyBoardBtn'));
     if($(pauseStr).hasClass('d-none')){
       $(pauseStr).trigger('click');
     }
@@ -500,6 +504,7 @@ let selectedReportVal = '';
 
 
 const initializeComponent = function () {
+  hideElement($('#virtualKeyBoardBtn'));
   const totalItems = sunoIndiaValidator.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const audio = sunoIndiaValidator.sentences[currentIndex];

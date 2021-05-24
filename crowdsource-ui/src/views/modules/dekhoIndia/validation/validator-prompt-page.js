@@ -197,6 +197,7 @@ function addListeners() {
 
 
   needChangeButton.on('click',()=>{
+    showElement($('#virtualKeyBoardBtn'));
     hideElement($('#textarea-row'));
     openEditor();
     const originalText = dekhoIndiaValidator.sentences[currentIndex].contribution;
@@ -215,6 +216,7 @@ function addListeners() {
   });
 
   $('#cancel-edit-button').on('click', () => {
+    hideElement($('#virtualKeyBoardBtn'));
     const $submitEditButton = $("#submit-edit-button");
     $submitEditButton.attr('disabled',true);
     const children = $submitEditButton.children().children();
@@ -226,6 +228,7 @@ function addListeners() {
   })
 
   $('#submit-edit-button').on('click', () => {
+    hideElement($('#virtualKeyBoardBtn'));
     skipValidation(REJECT_ACTION)
     setInput("");
     hideElement($('#keyboardBox'));
@@ -249,11 +252,13 @@ function addListeners() {
   })
 
   likeButton.on('click', () => {
+    hideElement($('#virtualKeyBoardBtn'));
     skipValidation(ACCEPT_ACTION)
     getNextSentence();
   })
 
   $skipButton.on('click', () => {
+    hideElement($('#virtualKeyBoardBtn'));
     $('#pause').trigger('click');
     skipValidation(SKIP_ACTION)
     showElement($('#textarea-row'));
@@ -366,6 +371,7 @@ const handleSubmitFeedback = function () {
 }
 
 const initializeComponent = () => {
+    hideElement($('#virtualKeyBoardBtn'));
     const totalItems = dekhoIndiaValidator.sentences.length;
     currentIndex = getCurrentIndex(totalItems - 1);
 
