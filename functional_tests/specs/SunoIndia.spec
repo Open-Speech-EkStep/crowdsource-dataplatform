@@ -3,7 +3,6 @@
 * Open BoloIndia
 
 ## Check Home Page
-* Select Contribution Language as "English" first time
 * Select "Suno India"from header 
 * Validate Suno India content
 * User should see the top Language graph and other stats
@@ -94,7 +93,6 @@
 * User plays the audio , "need_change","like_button" should be enabled 
 * User clicks on  "need_change" button user should see "Original Text" and "Your Edit" , "cancel-edit-button" should be  enabled
 * User click on "edit" field "submit-edit-button" should be enabled
-* user should see the Keyboard
 * User skips the next "4" sentences user should land on Thank you page in "English"
 * User should see the "Validate More" button
 * when user clicks on the Validate more button user should no data available message
@@ -111,6 +109,5 @@
 * User plays the audio , "need_change","like_button" should be enabled 
 * User clicks on  "need_change" button user should see "Original Text" and "Your Edit" , "cancel-edit-button" should be  enabled
 * User click on "edit" field "submit-edit-button" should be enabled
-* user should see the Keyboard
 * User skips the next "4" sentences user should land on Thank you page in "English"
 * User should see the "Validate More" button
