@@ -48,7 +48,7 @@
 	height: 48px;
 }
 
-.opinion input[type="checkbox"] {
+.opinion input[type="radio"] {
     display: none;
 }
 .opinion label {
@@ -69,4 +69,12 @@ label span {
 
 label .required {
 	color: #C35757;
+}
+
+#feedback_close_btn, #feedback_thank_you_close_id {
+    position: absolute;
+    right: 1rem;
+    top: 0;
+    font-size: 2.5rem;
+    padding: 0;
 }

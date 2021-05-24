@@ -63,11 +63,6 @@ step("When user clicks on the Test Speaker button, user should see <arg0>", asyn
 });
 
 
-step("user should see the Keyboard", async function() {
-    assert.ok(await text("प").exists());
-    assert.ok(await text("न").exists());
-    assert.ok(await text("स").exists());
-});
 
 step("User clicks on  <arg0> button user should see <arg1> and <arg2> , <arg3> should be  enabled", async function(arg0, arg1, arg2, arg3) {
     await click(taiko.button({ id: arg0 }))
@@ -131,6 +126,7 @@ step("When user clicks on submit button user should see <thankutext>", async fun
     await click(taiko.button({ id: 'submit-edit-button'}))
     await taiko.waitFor(500)
     await taiko.text(thankutext).exists()
+    await taiko.waitFor(500)
 });
 
 step("When user clicks on Play button, Pause button should appear and when user clicks on pause, replay should appear", async function() {
@@ -218,7 +214,7 @@ step("Check <card> option should be <state> on Home page", async function(card,s
 step("when user clicks on the Validate more button user should no data available message", async function() {
     await click(link('Validate More'))
     await taiko.waitFor(1000)
-    assert.ok(await text('Thank you for validating!').exists())
+    assert.ok(await text('Thank you for your enthusiasm').exists())
 });
 
 step("When user clicks on Contribute more button , user should see no data available message", async function() {
