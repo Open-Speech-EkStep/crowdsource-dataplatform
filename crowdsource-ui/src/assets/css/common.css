@@ -168,7 +168,7 @@ body {
 
 @media (min-width: 767px) {
   .d-none-mob {
-    display: block;
+    display: flex;
   }
  .top-back-btn{
    top: 20px;
