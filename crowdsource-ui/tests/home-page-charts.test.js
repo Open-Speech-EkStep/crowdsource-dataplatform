@@ -4,7 +4,8 @@ const { readFileSync } = require("fs");
 const { stringToHTML, flushPromises } = require("./utils");
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../src/views/home.ejs`, "UTF-8")
+  readFileSync(`${__dirname}/../src/views/home.ejs`, "UTF-8")+
+readFileSync(`${__dirname}/../build/views/common/contributionStats.ejs`, "UTF-8")
 );
 
 describe('getStatistics', () => {
