@@ -145,7 +145,7 @@ const getStatsSummary = function () {
     performAPIRequest('/stats/summary/text')
         .then(response => {
             // drawMap({data: response.aggregate_data_by_state});
-            const languages = getContributedAndTopLanguage(response.top_languages_by_hours, "suno");
+            const languages = getContributedAndTopLanguage(response.top_languages_by_hours, "bolo");
             localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
             showByHoursChart()
             let topSpeakers = [];
