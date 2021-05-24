@@ -58,10 +58,10 @@ body.modal-open .supreme-container {
 }
 
 .spinner {
-    width: 3rem;
-    height: 3rem;
+    width: 1.5rem;
+    height: 1.5rem;
     display: inline-block;
-    border-width: 0.5rem;
+    border-width: 0.2rem;
     border-color: #007bff;
     border-top-color: #fff;
     animation: spin 1s infinite linear;
