@@ -376,6 +376,7 @@ function downloadPdf(badgeType) {
 }
 
 $(document).ready(function () {
+  localStorage.setItem('module','bolo');
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });

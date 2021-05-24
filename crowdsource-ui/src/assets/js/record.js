@@ -622,6 +622,7 @@ function executeOnLoad() {
 }
 
 $(document).ready(() => {
+    localStorage.setItem('module','bolo');
     getLocaleString().then(() => {
         executeOnLoad();
     }).catch(() => {
