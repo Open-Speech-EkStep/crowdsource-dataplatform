@@ -138,11 +138,11 @@ const drawMap = function (response) {
     quarterVal * 60 * 60,
     false
   );
-  const { hours: hHours, minutes: hMinuts } = calculateTime(
+  const {hours: hHours, minutes: hMinuts} = calculateTime(
     quarterVal * 2 * 60 * 60,
     false
   );
-  const { hours: tQHours, minutes: tQMinuts } = calculateTime(
+  const {hours: tQHours, minutes: tQMinuts} = calculateTime(
     quarterVal * 3 * 60 * 60,
     false
   );
@@ -169,8 +169,8 @@ function getLanguageSpecificData(data, lang) {
   return stateData;
 }
 
-const generateIndiaMap = function (language="") {
-  const url = language !== "" ? '/aggregate-data-count/text?byState=true&byLanguage=true' : '/aggregate-data-count/text?byState=true';  
+const generateIndiaMap = function (language = "") {
+  const url = language !== "" ? '/aggregate-data-count/text?byState=true&byLanguage=true' : '/aggregate-data-count/text?byState=true';
   performAPIRequest(url)
     .then((data) => {
       const response = language !== "" ? getLanguageSpecificData(data, language) : data;
