@@ -31,13 +31,13 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
     keyboard.setInput(event.target.value);
     const currentModule = localStorage.getItem(CURRENT_MODULE);
     const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
-    const isLanguage = lngtype(event.target.value);
+    // const isLanguage = lngtype(event.target.value);
 
     const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
     localStorage.setItem("physicalKeyboard", true);
     $('#keyboardBox').addClass('d-none');
 
-    if (event.target.value.length > 0 && isLanguage) {
+    if (event.target.value.length > 0) {
       callBack1();
       $submitEditButton.removeAttr('disabled');
       if($cancelButton) {
@@ -48,15 +48,17 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
         children[0].setAttribute("fill", '#007BFF');
       }
 
-    } else if(!isLanguage){
-        $("#wrong-language").removeClass("d-none");
-        $submitEditButton.attr('disabled', true);
-        const children = $submitEditButton.children().children();
-        children[0].setAttribute("fill", '#D7D7D7');
-        setTimeout(() => {
-          $("#wrong-language").addClass("d-none");
-        }, 2000)
-    } else {
+    }
+    // else if(!isLanguage){
+    //     $("#wrong-language").removeClass("d-none");
+    //     $submitEditButton.attr('disabled', true);
+    //     const children = $submitEditButton.children().children();
+    //     children[0].setAttribute("fill", '#D7D7D7');
+    //     setTimeout(() => {
+    //       $("#wrong-language").addClass("d-none");
+    //     }, 2000)
+    // }
+    else {
       callBack2()
       $submitEditButton.attr('disabled', true);
       if($cancelButton) {
