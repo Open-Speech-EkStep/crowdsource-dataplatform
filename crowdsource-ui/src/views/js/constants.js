@@ -33,7 +33,6 @@ const BADGES = {
   platinum: {imgLg: "../../img/platinum_badge.svg", imgSm: "../../img/platinum_contributor.jpg"},
 }
 
-
 const CURRENT_MODULE = 'module';
 
 const MODULE = {

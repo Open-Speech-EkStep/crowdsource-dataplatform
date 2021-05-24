@@ -13,11 +13,26 @@ const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
 let currentIndex ;
+let localeStrings;
 let validationCount = 0;
 
 const currentIndexKey = 'dekhoValidatorCurrentIndex';
 const sentencesKey = 'dekhoValidatorSentencesKey';
 const dekhoValidatorCountKey = 'dekhoValidatorCount';
+const notyf = new Notyf({
+  position: { x: 'center', y: 'top' },
+  types: [
+      {
+          type: 'success',
+          className: 'fnt-1-5',
+      },
+      {
+          type: 'error',
+          duration: 3500,
+          className: 'fnt-1-5',
+      },
+  ],
+});
 
 function getValue(number, maxValue) {
   return number < 0
@@ -106,6 +121,8 @@ function getNextSentence() {
     localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
     showThankYou();
+    const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
+    notyf.success(msg);
   }
 }
 

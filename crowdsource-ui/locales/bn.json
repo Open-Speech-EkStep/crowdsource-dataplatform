@@ -489,5 +489,6 @@
 	"Contributions made to Bolo India": "Contributions made to Bolo India",
 	"Earn badges or certificate by contributing to Bolo India. Validate the audio that is recorded on your desired language. Share badges in your social circle, build the hype, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e. <b>YOU.</b>": "Earn badges or certificate by contributing to Bolo India. Validate the audio that is recorded on your desired language. Share badges in your social circle, build the hype, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e. <b>YOU.</b>",
 	"The levels defined by an overall validations on Bolo India. Please see the criteria that defines different levels below:": "The levels defined by an overall validations on Bolo India. Please see the criteria that defines different levels below:",
-	"Resume": "Resume"
+	"Resume": "Resume",
+	"You’ve earned your <span id=\"current_badge_name\"></span> Badge": "You’ve earned your <span id=\"current_badge_name\"></span> Badge"
 }
