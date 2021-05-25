@@ -218,7 +218,8 @@ function recordValidation(action) {
         validationCount++;
     }
     const sentenceId = boloIndiaValidator.sentences[currentIndex].dataset_row_id
-    const contribution_id = boloIndiaValidator.sentences[currentIndex].contribution_id
+    const contribution_id = boloIndiaValidator.sentences[currentIndex].contribution_id;
+    const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
     fetch(`/validate/${contribution_id}/${action}`, {
         method: 'POST',
         credentials: 'include',
@@ -226,7 +227,8 @@ function recordValidation(action) {
         body: JSON.stringify({
             sentenceId: sentenceId,
             state: localStorage.getItem('state_region') || "",
-            country: localStorage.getItem('country') || ""
+            country: localStorage.getItem('country') || "",
+            userName: speakerDetails && speakerDetails.userName
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -457,83 +459,83 @@ $(document).ready(() => {
     const localSentences = localStorage.getItem(sentencesKey);
     const localSentencesParsed = JSON.parse(localSentences);
 
-    if (!localSpeakerDataParsed) {
-        location.href = './home.html';
+  if (!localSpeakerDataParsed) {
+    location.href = './home.html';
+    return;
+  }
+
+  showUserProfile(localSpeakerDataParsed.userName)
+
+  const isExistingUser = localSentencesParsed &&
+    localSentencesParsed.userName === localSpeakerDataParsed.userName
+    &&
+    localSentencesParsed.language === localSpeakerDataParsed.language;
+  if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === language) {
+    setFooterPosition();
+    boloIndiaValidator.sentences = localSentencesParsed.sentences;
+    initializeComponent();
+  } else {
+    localStorage.removeItem(currentIndexKey);
+    const type = 'text';
+    const toLanguage = ""; //can be anything
+
+    fetch(`/contributions/${type}?from=${language}&to=${toLanguage}`, {
+      credentials: 'include',
+      mode: 'cors'
+    })
+      .then((data) => {
+        if (!data.ok) {
+          showNoSentencesMessage();
+          throw Error(data.statusText || 'HTTP error');
+        } else {
+          return data.json();
+        }
+      }).then((sentenceData) => {
+      if (sentenceData.data.length === 0) {
+        showNoSentencesMessage();
         return;
-    }
-
-    showUserProfile(localSpeakerDataParsed.userName)
-
-    const isExistingUser = localSentencesParsed &&
-      localSentencesParsed.userName === localSpeakerDataParsed.userName
-      &&
-      localSentencesParsed.language === localSpeakerDataParsed.language;
-    if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === language) {
-        setFooterPosition();
-        boloIndiaValidator.sentences = localSentencesParsed.sentences;
-        initializeComponent();
-    } else {
-        localStorage.removeItem(currentIndexKey);
-        const type = 'text';
-        const toLanguage = ""; //can be anything
-
-        fetch(`/contributions/${type}?from=${language}&to=${toLanguage}`, {
-            credentials: 'include',
-            mode: 'cors'
+      }
+      // validationSentences = sentenceData.data
+      // const sentence = validationSentences[currentIndex];
+      boloIndiaValidator.sentences = sentenceData.data;
+      localStorage.setItem(boloValidatorCountKey, boloIndiaValidator.sentences.length);
+      localStorage.setItem(
+        sentencesKey,
+        JSON.stringify({
+          userName: localSpeakerDataParsed.userName,
+          sentences: sentenceData.data,
+          language: localSpeakerDataParsed.language,
         })
-          .then((data) => {
-              if (!data.ok) {
-                  showNoSentencesMessage();
-                  throw Error(data.statusText || 'HTTP error');
-              } else {
-                  return data.json();
-              }
-          }).then((sentenceData) => {
-            if (sentenceData.data.length === 0) {
-                showNoSentencesMessage();
-                return;
-            }
-            // validationSentences = sentenceData.data
-            // const sentence = validationSentences[currentIndex];
-            boloIndiaValidator.sentences = sentenceData.data;
-            localStorage.setItem(boloValidatorCountKey, boloIndiaValidator.sentences.length);
-            localStorage.setItem(
-              sentencesKey,
-              JSON.stringify({
-                  userName: localSpeakerDataParsed.userName,
-                  sentences: sentenceData.data,
-                  language: localSpeakerDataParsed.language,
-              })
-            );
-            initializeComponent();
-        }).catch((err) => {
-            console.log(err)
-        });
-    }
+      );
+      initializeComponent();
+    }).catch((err) => {
+      console.log(err)
+    });
+  }
 });
 
-const initializeComponent = function (){
-    const totalItems = boloIndiaValidator.sentences.length;
-    currentIndex = getCurrentIndex(totalItems - 1);
-    const sentence = boloIndiaValidator.sentences[currentIndex];
-    addListeners();
-    if (sentence) {
-        getAudioClip(sentence.contribution_id);
-        setSentenceLabel(currentIndex);
-        setCurrentSentenceIndex(currentIndex + 1);
-        setTotalSentenceIndex(totalItems);
-        updateProgressBar(currentIndex + 1,boloIndiaValidator.sentences.length)
-        // updateValidationCount();
-        resetValidation();
-        setAudioPlayer();
-        const $canvas = document.getElementById('myCanvas');
-        visualizer.drawCanvasLine($canvas);
-    }
+const initializeComponent = function () {
+  const totalItems = boloIndiaValidator.sentences.length;
+  currentIndex = getCurrentIndex(totalItems - 1);
+  const sentence = boloIndiaValidator.sentences[currentIndex];
+  addListeners();
+  if (sentence) {
+    getAudioClip(sentence.contribution_id);
+    setSentenceLabel(currentIndex);
+    setCurrentSentenceIndex(currentIndex + 1);
+    setTotalSentenceIndex(totalItems);
+    updateProgressBar(currentIndex + 1, boloIndiaValidator.sentences.length)
+    // updateValidationCount();
+    resetValidation();
+    setAudioPlayer();
+    const $canvas = document.getElementById('myCanvas');
+    visualizer.drawCanvasLine($canvas);
+  }
 }
 
 module.exports = {
-    setSentenceLabel,
-    setAudioPlayer,
-    addListeners,
-    startVisualizer
+  setSentenceLabel,
+  setAudioPlayer,
+  addListeners,
+  startVisualizer
 };
