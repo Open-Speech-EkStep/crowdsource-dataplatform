@@ -17,7 +17,7 @@ const {
   performAPIRequest,
 } = require("../common/utils");
 
-const {downloadPdf} = require('../common/downloadableBadges');
+// const {downloadPdf} = require('../common/downloadableBadges');
 const {showUserProfile} = require('../common/header');
 const {showByHoursChart,getContributedAndTopLanguage,setBadge} = require('../common/common');
 
@@ -25,6 +25,34 @@ const CURRENT_INDEX = "sunoValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 const sunoValidatorCountKey = 'sunoValidatorCount';
 const totalSentence = Number(localStorage.getItem(sunoValidatorCountKey));
+
+function downloadPdf(badgeType) {
+  try {
+    const pdf = new jsPDF()
+    const img = new Image();
+    img.onload = function () {
+      pdf.addImage(this, 36, 10, 128, 128);
+      pdf.save(`${badgeType}-badge.pdf`);
+    };
+
+    img.crossOrigin = "Anonymous";
+    const currentModule = localStorage.getItem(CURRENT_MODULE);
+    const badges = MODULE[currentModule].BADGES;
+    console.log(badges[badgeType].imgValJpg)
+
+    img.src = badges[badgeType].imgValJpg;
+    const allBadges = JSON.parse(localStorage.getItem('badges'));
+    const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
+    if (badge) {
+      pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+}
+
+
 
 
 const getFormattedTime = (totalSeconds) => {
@@ -131,7 +159,7 @@ function setSentencesContributed() {
   performAPIRequest(
     `/rewards?type=asr&language=${contributionLanguage}&source=validate&userName=${userName}`
   ).then((data) => {
-    setBadge(data,localeStrings);
+    setBadge(data,localeStrings,"validator");
   });
 }
 
@@ -161,6 +189,11 @@ function executeOnLoad() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
+  $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
+    if (!$(this).attr("disabled")) {
+      downloadPdf($(this).attr("data-badge"));
+    }
+  });
 
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));

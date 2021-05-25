@@ -27,7 +27,6 @@ function constructChart(responseData, xAxisLabel, yAxisLabel, type) {
   const valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
   valueAxis.renderer.grid.template.strokeWidth = 0;
   valueAxis.renderer.labels.template.disabled = true;
-
   categoryAxis.renderer.minGridDistance = 25;
   const series = chart.series.push(new am4charts.ColumnSeries());
   series.dataFields.valueX = xAxisLabel;
