@@ -130,13 +130,13 @@ step("When user clicks on submit button user should see <thankutext>", async fun
     await taiko.waitFor(500)
 });
 
-step("When user clicks on Play button, Pause button should appear and when user clicks on pause, replay should appear", async function() {
+step("When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should appear", async function() {
     await taiko.waitFor(1000)
     await click(taiko.image({ id: "play" }));
     await taiko.waitFor(500)
     await click(taiko.image({ id: "pause" }));
-    await taiko.waitFor(1000)
-    await click(taiko.image({ id: "replay" }));
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "resume" }));
 
 });
 
@@ -236,5 +236,15 @@ step("When user clicks on submit button for Odia language user should see <thank
     await click(taiko.button({ id: 'submit-edit-button'}))
     await taiko.waitFor(3000)
     await taiko.text(thankutext).exists()
+});
 
+step("User plays the audio , <needchange> should be enabled & <arg1> should be disabled" , async function(needchange,arg1) {
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "play" }));
+    await taiko.waitFor(1000)
+    assert.ok(! await taiko.button({ id: needchange }).isDisabled());
+    assert.ok(  await taiko.button({ id: arg1 }).isDisabled());
+    // Once the audio is complete , then correct button should be enabled
+    await taiko.waitFor(5000)
+    assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
 });
