@@ -518,13 +518,13 @@ function executeOnLoad() {
     const localSentencesParsed = JSON.parse(localSentences);
 
     setPageContentHeight();
-    $("#instructions_close_btn").on("click", function () {
-      $validationInstructionModal.addClass("d-none");
-      setFooterPosition();
-    })
+    // $("#instructions_close_btn").on("click", function () {
+    //   $validationInstructionModal.addClass("d-none");
+    //   setFooterPosition();
+    // })
 
     $errorModal.on('show.bs.modal', function () {
-      $validationInstructionModal.addClass("d-none");
+      // $validationInstructionModal.addClass("d-none");
       setFooterPosition();
 
     });
@@ -578,7 +578,7 @@ function executeOnLoad() {
           }
           if (!isExistingUser) {
             //$instructionModal.modal('show');
-            $validationInstructionModal.removeClass("d-none");
+            // $validationInstructionModal.removeClass("d-none");
             setFooterPosition();
             // toggleFooterPosition();
           }
