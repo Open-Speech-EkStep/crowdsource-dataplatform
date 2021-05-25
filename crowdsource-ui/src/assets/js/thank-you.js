@@ -71,45 +71,46 @@ function setSentencesContributed() {
       $("#user-contribution-msg").removeClass("d-none");
       $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
       $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
-      const $bronzeBadgeLink = $("#bronze_badge_link img");
-      const $silverBadgeLink = $("#silver_badge_link img");
-      const $goldBadgeLink = $("#gold_badge_link img");
-      const $platinumBadgeLink = $("#platinum_badge_link img");
-      if (data.currentBadgeType.toLowerCase() === "bronze") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-      } else if (data.currentBadgeType.toLowerCase() === "silver") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $silverBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-        $('#silver_badge_link_img').addClass('enable');
-        $('#silver_badge_link_img').removeClass('disable');
-      } else if (data.currentBadgeType.toLowerCase() === "gold") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $silverBadgeLink.parent().attr("disabled", false);
-        $goldBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-        $('#silver_badge_link_img').addClass('enable');
-        $('#silver_badge_link_img').removeClass('disable');
-        $('#gold_badge_link_img').addClass('enable');
-        $('#gold_badge_link_img').removeClass('disable');
-      } else if (data.currentBadgeType.toLowerCase() === "platinum") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $silverBadgeLink.parent().attr("disabled", false);
-        $goldBadgeLink.parent().attr("disabled", false);
-        $platinumBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-        $('#silver_badge_link_img').addClass('enable');
-        $('#silver_badge_link_img').removeClass('disable');
-        $('#gold_badge_link_img').addClass('enable');
-        $('#gold_badge_link_img').removeClass('disable');
-        $('#platinum_badge_link_img').addClass('enable');
-        $('#platinum_badge_link_img').removeClass('disable');
-      }
+    }
+
+    const $bronzeBadgeLink = $("#bronze_badge_link img");
+    const $silverBadgeLink = $("#silver_badge_link img");
+    const $goldBadgeLink = $("#gold_badge_link img");
+    const $platinumBadgeLink = $("#platinum_badge_link img");
+    if (data.currentBadgeType.toLowerCase() === "bronze") {
+      $bronzeBadgeLink.parent().attr("disabled", false);
+      $('#bronze_badge_link_img').addClass('enable');
+      $('#bronze_badge_link_img').removeClass('disable');
+    } else if (data.currentBadgeType.toLowerCase() === "silver") {
+      $bronzeBadgeLink.parent().attr("disabled", false);
+      $silverBadgeLink.parent().attr("disabled", false);
+      $('#bronze_badge_link_img').addClass('enable');
+      $('#bronze_badge_link_img').removeClass('disable');
+      $('#silver_badge_link_img').addClass('enable');
+      $('#silver_badge_link_img').removeClass('disable');
+    } else if (data.currentBadgeType.toLowerCase() === "gold") {
+      $bronzeBadgeLink.parent().attr("disabled", false);
+      $silverBadgeLink.parent().attr("disabled", false);
+      $goldBadgeLink.parent().attr("disabled", false);
+      $('#bronze_badge_link_img').addClass('enable');
+      $('#bronze_badge_link_img').removeClass('disable');
+      $('#silver_badge_link_img').addClass('enable');
+      $('#silver_badge_link_img').removeClass('disable');
+      $('#gold_badge_link_img').addClass('enable');
+      $('#gold_badge_link_img').removeClass('disable');
+    } else if (data.currentBadgeType.toLowerCase() === "platinum") {
+      $bronzeBadgeLink.parent().attr("disabled", false);
+      $silverBadgeLink.parent().attr("disabled", false);
+      $goldBadgeLink.parent().attr("disabled", false);
+      $platinumBadgeLink.parent().attr("disabled", false);
+      $('#bronze_badge_link_img').addClass('enable');
+      $('#bronze_badge_link_img').removeClass('disable');
+      $('#silver_badge_link_img').addClass('enable');
+      $('#silver_badge_link_img').removeClass('disable');
+      $('#gold_badge_link_img').addClass('enable');
+      $('#gold_badge_link_img').removeClass('disable');
+      $('#platinum_badge_link_img').addClass('enable');
+      $('#platinum_badge_link_img').removeClass('disable');
     }
   });
 }
