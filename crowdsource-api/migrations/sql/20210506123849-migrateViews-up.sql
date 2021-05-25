@@ -14,7 +14,7 @@ AS
             WHEN dataset_row.type = 'text'::text THEN COALESCE((contributions.media ->> 'duration'::text)::double precision, 0::double precision)
             ELSE COALESCE((dataset_row.media ->> 'duration'::text)::double precision, 0::double precision)
         END AS contribution_audio_duration,
-    row_number() OVER (PARTITION BY contributions.contribution_id ORDER BY contributions.audio_duration DESC) AS audio_row_num_per_contribution_id,
+    row_number() OVER (PARTITION BY contributions.contribution_id ORDER BY contributions.media ->> 'duration' DESC) AS audio_row_num_per_contribution_id,
         CASE
             WHEN dataset_row.type = 'parallel'::text THEN ((dataset_row.media ->> 'language'::text) || '-'::text) || (contributions.media ->> 'language'::text)
             ELSE dataset_row.media ->> 'language'::text
@@ -25,7 +25,14 @@ AS
             ELSE 0::bigint
         END AS is_validated,
         CASE
-            WHEN validations.action = ANY (ARRAY['accept'::text, 'reject'::text]) THEN COALESCE(contributions.audio_duration, 0::double precision)
+            WHEN validations.action = ANY (ARRAY['accept'::text, 'reject'::text]) 
+			        THEN 
+                case when dataset_row.type = 'text'::text
+                  THEN
+                    COALESCE((contributions.media ->> 'duration'::text)::double precision, 0::double precision)
+                  ELSE 
+                    COALESCE((dataset_row.media ->> 'duration'::text)::double precision, 0::double precision)
+					    END
             ELSE 0::bigint::double precision
         END AS validation_audio_duration,
     dataset_row.type
