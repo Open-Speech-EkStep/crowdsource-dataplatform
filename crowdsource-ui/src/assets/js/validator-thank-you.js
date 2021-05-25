@@ -42,8 +42,7 @@ function downloadPdf(badgeType) {
   const currentModule = localStorage.getItem(CURRENT_MODULE);
   const badges = MODULE[currentModule].BADGES;
 
-  console.log(badges[badgeType].imgSm)
-  img.src = badges[badgeType].imgSm;
+  img.src = badges[badgeType].imgValJpg;
   const allBadges = JSON.parse(localStorage.getItem('badges'));
   const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
   if (badge) {
@@ -56,8 +55,6 @@ $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_lin
     downloadPdf($(this).attr("data-badge"));
   }
 });
-
-
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -163,7 +160,7 @@ function setSentencesContributed() {
   performAPIRequest(
     `/rewards?type=text&language=${contributionLanguage}&source=validate&userName=${userName}`
   ).then((data) => {
-    setBadge(data,localeStrings);
+    setBadge(data,localeStrings,"validator");
   });
 }
 
