@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169921734-1"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-169921734-1")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../css/validator-prompt.css">
+    <link rel="stylesheet" type="text/css" href="../../css/record.css">
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/mic-speaker-testing.css">
+    <style>.btn.focus,.btn:focus{outline:0;box-shadow:0 0}</style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
+</head>
+
+<body>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho India", PAGE_TITLE:"Translate"}) %>
+<div id="validator-page-content">
+    <div class="container-fluid">
+        <div id="content-wrapper" class="d-flex flex-column position-relative">
+            
+         
+            <div class="modal-footer pt-3 position-relative" style="height:72px">
+                <%- include ../common/report-btn.ejs %>
+            </div>
+            <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center">
+                <%- include ../common/speakerTesting.ejs %>
+            </div>
+            
+            <div class="row justify-content-center mb-5 mb-lg-0 mt-5 mx-1" id="editor-row">
+                <div class="col-lg-4 col-md-5 col-12 original-text">
+                    <label id="from-label"><%- __('ENGLISH')%></label>
+                    <div id="captured-text"></div>
+                </div>
+            </div>
+            <div class="row justify-content-center d-none" id="thankyou-text">
+                <div class="col-12 text-center mt-4">
+                    <img src="../../img/tick.svg">
+                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for contributing!</label>
+                </div>
+            </div>
+
+
+
+            <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-sentences-row">
+                <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-bold">
+                        <%= __('Thank you for your enthusiasm to translate the sentences.') %>
+                    </label><br><br>
+                    <p>
+                        <%- __('We do not have any data in <span id="spn-validation-language"></span> language. Please try again later.') %>
+                    </p>
+                    <p class="d-none">
+                        <%= __('Would you also like to contribute your voice?') %>
+                    </p>
+                    <div class="row justify-content-center mt-5">
+                        <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
+                            <a class="btn btn-primary text-white btn-lg h6 w-100" href="./home.html">
+                                <%- __('Back to Likho India Home') %>
+                            </a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center my-auto my-3 d-none" id="thank-you-row">
+                <div class="col-md-8 col-sm-10 text-center align-items-center"><label class="h1 font-weight-bold my-5">
+                        <%= __('Thank you for validating!') %>
+                    </label>
+                    <p class="d-none">
+                        <%- __('You have helped us validate <span id="spn-validation-count" class="font-wt-900"></span> recordings') %>
+                    </p>
+                    <div class="row justify-content-center mb-3 mx-2">
+                        <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div>
+                        <a class="btn btn-primary h6 shadow rounded mt-4 p-3 my-lg-5 col-lg-4 col-md-4 col-sm-10" href="./validator-page.html">
+                            <%= __('Validate More') %>
+                        </a>
+                        <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5 justify-content-center mx-0" id="validation-button-row">
+                <button class="btn align-self-start mb-2" id="cancel-edit-button">
+                    <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
+                        <text x="43" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">Not Profane</text>
+                    </svg>
+                </button>
+                <button class="btn web-view"></button>
+                <button class="btn align-self-start mb-2 pl-4" id="submit-edit-button">
+                    <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="208" height="66" rx="33" fill="#D7D7D7"/>
+                        <text x="65" y="43" font-family="lato" font-size="24" fill="white" style="text-align:center">
+                            Profane
+                        </text>
+                    </svg>
+
+                </button>
+            </div>
+
+            <div class="row justify-content-center" id="skip_btn_row">
+                <button class="btn text-primary mt-2 mb-2 fs-1_5-rem" id="skip_button">
+                    <%= __('Skip') %>
+                </button>
+            </div>
+            <%- include ../common/virtualKeyboard %>
+            <div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
+                <div class="col-12 col-sm-8 col-lg-7">
+                    <div class="progress mt-1">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress_bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
+                    </div>
+                </div>
+                <div class="px-3">
+                    <div class="row justify-content-center"><span class="" id="currentSentenceLbl"></span><span class="">/</span><span class="" id="totalSentencesLbl"></span></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row my-3 p-3" style="justify-content:flex-end">
+            <%- include ../common/virtualKeyboardBtn.ejs %>
+        </div>
+
+        <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the sentence", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
+
+        
+        <script src="../../js/common/speakerTesting.js"></script>
+    </div>
+</div>
+</body>
+
+</html>
