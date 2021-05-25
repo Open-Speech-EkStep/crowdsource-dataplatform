@@ -10,7 +10,7 @@ const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES,MODULE, CURRENT_MODULE} = require('./c
 const {updateLocaleLanguagesDropdown} = require('./utils');
 
 function onActiveNavbar(value) {
-    const $header = $('#module_name');
+    const $header = $('#about-us');
     localStorage.setItem(CURRENT_MODULE, value);
     const allDivs = $header.children();
     let targetedDivIndex = 0;
@@ -26,8 +26,7 @@ function onActiveNavbar(value) {
 
 
 $(document).ready(function () {
-    const currentModule = localStorage.getItem(CURRENT_MODULE);
-    onActiveNavbar(currentModule);
+    onActiveNavbar("about-us");
     const speakerDetailsKey = 'speakerDetails';
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();

@@ -1,0 +1,13 @@
+@media (max-width: 767px) {
+    .speakerDetails {
+      height: 500px;
+      overflow: auto;
+    }
+}
+
+@media (min-width: 767px) {
+    .speakerDetails {
+      height: 700px;
+      overflow: auto;
+    }
+}
