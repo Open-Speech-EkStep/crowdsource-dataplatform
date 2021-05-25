@@ -9,11 +9,11 @@ const {
   fetchLocationInfo,
   reportSentenceOrRecording
 } = require('../common/utils');
-const {LIKHO_FROM_LANGUAGE,LIKHO_TO_LANGUAGE,  LOCALE_STRINGS,CURRENT_MODULE, MODULE, ALL_LANGUAGES} = require('../common/constants');
-const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton} = require('../common/common');
-const {showUserProfile} = require('../common/header');
-const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
+const { LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, ALL_LANGUAGES } = require('../common/constants');
+const { showKeyboard, setInput } = require('../common/virtualKeyboard');
+const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, isMobileDevice } = require('../common/common');
+const { showUserProfile } = require('../common/header');
+const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const speakerDetailsKey = 'speakerDetails';
 
 const currentIndexKey = 'likhoCurrentIndex';
@@ -57,18 +57,37 @@ function uploadToServer(cb) {
 
 let currentIndex;
 
+function disableButton(button) {
+  button.children().attr("opacity", "50%");
+  button.attr("disabled", "disabled");
+}
+
+function enableButton(element) {
+  element.children().removeAttr("opacity")
+  element.removeAttr("disabled")
+}
+
+function disableSkipButton() {
+  const $skipButton = isMobileDevice() ? $('#skip_button_mob') : $('#skip_button');
+  $skipButton.removeAttr('style');
+  disableButton($skipButton)
+}
+
 function getNextSentence() {
   if (currentIndex < likhoIndia.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1,likhoIndia.sentences.length);
+    updateProgressBar(currentIndex + 1, likhoIndia.sentences.length);
     setSentence(likhoIndia.sentences[currentIndex].media_data);
     localStorage.setItem(currentIndexKey, currentIndex);
+    enableButton($('#skip_button'))
   } else {
     const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
     Object.assign(sentencesObj, { sentences: [] });
     localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
-    showThankYou();
+    // showThankYou();
+    disableSkipButton();
+    setTimeout(showThankYou, 1000);
   }
 }
 
@@ -90,7 +109,7 @@ function markContributionSkipped() {
   const reqObj = {
     sentenceId: likhoIndia.sentences[currentIndex].dataset_row_id,
     userName: speakerDetails.userName,
-    language:contributionLanguage
+    language: contributionLanguage
   };
   fetch('/skip', {
     method: 'POST',
@@ -116,7 +135,7 @@ function addListeners() {
   $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if(!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false'){
+    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false') {
       showElement($('#keyboardBox'));
     }
   });
@@ -126,7 +145,7 @@ function addListeners() {
     setInput("");
     showElement($('#progress-row'))
     const $cancelEditButton = $('#cancel-edit-button');
-    $cancelEditButton.attr('disabled',true);
+    $cancelEditButton.attr('disabled', true);
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
     const children = $submitEditButton.children().children();
@@ -150,7 +169,7 @@ function addListeners() {
     const children = $submitEditButton.children().children();
     children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#progress-row'))
-    try{
+    try {
       uploadToServer();
       setTimeout(() => {
         hideElement($('#thankyou-text'));
@@ -162,15 +181,15 @@ function addListeners() {
         closeEditor();
         getNextSentence();
       }, 2000)
-    } catch (e){
+    } catch (e) {
       console.log(e)
     }
 
   })
 
-
   $skipButton.on('click', () => {
-    if($('#pause').hasClass('d-none')){
+    disableSkipButton();
+    if ($('#pause').hasClass('d-none')) {
       $('#pause').trigger('click');
     }
     $('#edit').val("");
@@ -246,10 +265,10 @@ const handleSubmitFeedback = function () {
   });
 }
 
-const setSentence = function (text){
-    $('#captured-text').text(text);
-    $('#edit').val('');
-    setInput("");
+const setSentence = function (text) {
+  $('#captured-text').text(text);
+  $('#edit').val('');
+  setInput("");
 }
 
 function getValue(number, maxValue) {
@@ -309,7 +328,7 @@ const initialize = function () {
     setSentence(translation.media_data);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1,likhoIndia.sentences.length)
+    updateProgressBar(currentIndex + 1, likhoIndia.sentences.length)
   }
 };
 
@@ -327,10 +346,10 @@ const updateLocaleLanguagesDropdown = (language, toLanguage) => {
   } else if (invalidToLang) {
     dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
         <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  } else if (toLanguage.toLowerCase() === language.toLowerCase()){
+  } else if (toLanguage.toLowerCase() === language.toLowerCase()) {
     dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
         <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  }else {
+  } else {
     dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
         <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
         <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
@@ -353,7 +372,7 @@ function executeOnLoad() {
   $('#to-label').text(toLanguage);
 
   if (fromLanguage && toLanguage) {
-    updateLocaleLanguagesDropdown(fromLanguage,toLanguage);
+    updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
   }
 
   fetchLocationInfo().then(res => {
@@ -438,7 +457,7 @@ function executeOnLoad() {
           setFooterPosition();
 
           likhoIndia.sentences = sentenceData.data;
-          localStorage.setItem(likhoCountKey,likhoIndia.sentences.length);
+          localStorage.setItem(likhoCountKey, likhoIndia.sentences.length);
           $loader.hide();
           localStorage.setItem(
             sentencesKey,
@@ -446,7 +465,7 @@ function executeOnLoad() {
               userName: localSpeakerDataParsed.userName,
               sentences: sentenceData.data,
               language: fromLanguage,
-              toLanguage:toLanguage
+              toLanguage: toLanguage
             })
           );
           setFooterPosition();
@@ -469,7 +488,7 @@ function executeOnLoad() {
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   const translationLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
-  showKeyboard(translationLanguage.toLowerCase(),enableCancelButton,disableCancelButton);
+  showKeyboard(translationLanguage.toLowerCase(), enableCancelButton, disableCancelButton);
   hideElement($('#keyboardBox'));
   getLocaleString().then(() => {
     executeOnLoad();
