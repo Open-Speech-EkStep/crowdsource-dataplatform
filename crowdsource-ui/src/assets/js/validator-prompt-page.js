@@ -1,13 +1,35 @@
 const fetch = require('./fetch')
 const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
-const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('./utils');
+const { showUserProfile } = require('../../../build/js/common/header');
+const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
+const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition} = require('./utils');
 
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
+
+const currentIndexKey = 'boloValidationCurrentIndex';
+const sentencesKey = 'boloValidatorSentencesKey';
+const boloValidatorCountKey = 'boloValidatorCount';
+
+window.boloIndiaValidator = {};
+
+function getValue(number, maxValue) {
+    return number < 0
+      ? 0
+      : number > maxValue
+        ? maxValue
+        : number;
+}
+
+function getCurrentIndex(lastIndex) {
+    const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
+    return getValue(currentIndexInStorage, lastIndex);
+}
+
 
 const showInstructionsPopup = () => {
     hideElement($("#validator-page-content"));
@@ -117,17 +139,23 @@ const animateCSS = ($element, animationName, callback) => {
 
 function setSentenceLabel(index) {
     const $sentenceLabel = $('#sentenceLabel')
-    $sentenceLabel[0].innerText = validationSentences[index].sentence;
+    $sentenceLabel[0].innerText = boloIndiaValidator.sentences[index].sentence;
     animateCSS($sentenceLabel, 'lightSpeedIn');
 }
 
 function getNextSentence() {
-    if (currentIndex < validationSentences.length - 1) {
+    if (currentIndex < boloIndiaValidator.sentences.length - 1) {
         currentIndex++;
-        getAudioClip(validationSentences[currentIndex].contribution_id)
+        updateProgressBar(currentIndex + 1,boloIndiaValidator.sentences.length)
+        getAudioClip(boloIndiaValidator.sentences[currentIndex].contribution_id)
         resetValidation();
         setSentenceLabel(currentIndex);
+        localStorage.setItem(currentIndexKey,currentIndex);
     } else {
+        const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
+        Object.assign(sentencesObj, { sentences: [] });
+        localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
+        localStorage.setItem(currentIndexKey, currentIndex);
         resetValidation();
         showThankYou();
     }
@@ -140,59 +168,21 @@ const updateDecisionButton = (button, colors) => {
     children[2].setAttribute("fill", colors[2]);
 }
 
-const updateValidationCount = () => {
-    const currentSentenceLbl = document.getElementById('currentSentenceLbl');
-    currentSentenceLbl.innerText = progressCount;
-    const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-    totalSentencesLbl.innerText = validationSentences.length;
-}
+// const updateValidationCount = () => {
+//     const currentSentenceLbl = document.getElementById('currentSentenceLbl');
+//     currentSentenceLbl.innerText = progressCount;
+//     const totalSentencesLbl = document.getElementById('totalSentencesLbl');
+//     totalSentencesLbl.innerText = validationSentences.length;
+// }
 
-const updateProgressBar = () => {
-    const $getStarted = $('#get-started');
-    let progressMessages = [
-        'Let’s get started',
-        'We know you can do more! ',
-        'You are halfway there. Keep going!',
-        'Just few more steps to go!',
-        'Four dead, one more to go!',
-        'Yay! Done & Dusted!',
-    ];
-    if (validationSentences.length == 4) {
-        progressMessages = [
-            'Let’s get started',
-            'We know you can do more! ',
-            'You are halfway there. Keep going!',
-            'Just few more steps to go!',
-            'Yay! Done & Dusted!'
-        ];
-    } else if (validationSentences.length == 3) {
-        progressMessages = [
-            'Let’s get started',
-            'We know you can do more! ',
-            'Just few more steps to go!',
-            'Yay! Done & Dusted!'
-        ];
-    } else if (validationSentences.length == 2) {
-        progressMessages = [
-            'Let’s get started',
-            'Just few more steps to go!',
-            'Yay! Done & Dusted!'
-        ];
-    } else if (validationSentences.length == 1) {
-        progressMessages = [
-            'Let’s get started',
-            'Yay! Done & Dusted!'
-        ];
-    }
-    const $progressBar = $("#progress_bar");
-    progressCount++;
-    $getStarted.text(progressMessages[progressCount]).show();
-
-    const multiplier = 10 * (10 / validationSentences.length);
-    $progressBar.width(progressCount * multiplier + '%');
-    $progressBar.prop('aria-valuenow', progressCount);
-    updateValidationCount();
-}
+// const updateProgressBar = () => {
+//     const $progressBar = $("#progress_bar");
+//     progressCount++;
+//     const multiplier = 10 * (10 / boloIndiaValidator.sentences.length);
+//     $progressBar.width(progressCount * multiplier + '%');
+//     $progressBar.prop('aria-valuenow', progressCount);
+//     updateValidationCount();
+// }
 
 function disableButton(button) {
     button.children().attr("opacity", "50%");
@@ -227,8 +217,9 @@ function recordValidation(action) {
     if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
         validationCount++;
     }
-    const sentenceId = validationSentences[currentIndex].dataset_row_id
-    const contribution_id = validationSentences[currentIndex].contribution_id
+    const sentenceId = boloIndiaValidator.sentences[currentIndex].dataset_row_id
+    const contribution_id = boloIndiaValidator.sentences[currentIndex].contribution_id;
+    const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
     fetch(`/validate/${contribution_id}/${action}`, {
         method: 'POST',
         credentials: 'include',
@@ -236,7 +227,8 @@ function recordValidation(action) {
         body: JSON.stringify({
             sentenceId: sentenceId,
             state: localStorage.getItem('state_region') || "",
-            country: localStorage.getItem('country') || ""
+            country: localStorage.getItem('country') || "",
+            userName: speakerDetails && speakerDetails.userName
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -290,20 +282,17 @@ function addListeners() {
 
     dislikeButton.on('click', () => {
         recordValidation(REJECT_ACTION)
-        updateProgressBar();
         getNextSentence();
     })
 
     likeButton.on('click', () => {
         recordValidation(ACCEPT_ACTION)
-        updateProgressBar();
         getNextSentence();
     })
 
     $skipButton.on('click', () => {
         $('#pause').trigger('click');
         recordValidation(SKIP_ACTION)
-        updateProgressBar();
         getNextSentence();
     })
 
@@ -372,30 +361,7 @@ function showAudioRow() {
 }
 
 function showThankYou() {
-    hideElement($('#instructions-row'));
-    hideElement($('#sentences-row'));
-    hideElement($('#audio-row'))
-    hideElement($('#validation-button-row'))
-    showElement($('#thank-you-row'))
-    hideElement($('#progress-row'));
-    hideElement($('#skip_btn_row'));
-    hideElement($('#validation-container'));
-    $("#validation-container").removeClass("validation-container");
-    hideElement($('#report_btn'));
-    hideElement($("#test-mic-speakers"));
-
-    const language = localStorage.getItem('contributionLanguage');
-    const stringifyData = localStorage.getItem('aggregateDataCountByLanguage');
-    const aggregateDetails = JSON.parse(stringifyData);
-    const totalInfo = aggregateDetails.find((element) => element.language === language);
-    if (totalInfo) {
-        $('#spn-total-hr-contributed').html(totalInfo.total_contributions);
-        $('#spn-total-hr-validated').html(totalInfo.total_validations);
-    } else {
-        $('#spn-total-hr-contributed').html(0);
-        $('#spn-total-hr-validated').html(0);
-    }
-    $('#spn-validation-count').html(validationCount);
+    window.location.href = './validator-thank-you.html'
 }
 
 function showNoSentencesMessage() {
@@ -420,7 +386,7 @@ const handleSubmitFeedback = function () {
     const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
     const reqObj = {
-        sentenceId: validationSentences[currentIndex].contribution_id,
+        sentenceId: boloIndiaValidator.sentences[currentIndex].contribution_id,
         reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
         language: contributionLanguage,
         userName: speakerDetails ? speakerDetails.userName : '',
@@ -442,6 +408,7 @@ const handleSubmitFeedback = function () {
 
 let selectedReportVal = '';
 $(document).ready(() => {
+    localStorage.setItem('module','bolo');
     toggleFooterPosition();
     setPageContentHeight();
     const language = localStorage.getItem('contributionLanguage');
@@ -486,43 +453,89 @@ $(document).ready(() => {
         localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);
     }).catch(console.log);
+
+    const localSpeakerData = localStorage.getItem(speakerDetailsKey);
+    const localSpeakerDataParsed = JSON.parse(localSpeakerData);
+    const localSentences = localStorage.getItem(sentencesKey);
+    const localSentencesParsed = JSON.parse(localSentences);
+
+  if (!localSpeakerDataParsed) {
+    location.href = './home.html';
+    return;
+  }
+
+  showUserProfile(localSpeakerDataParsed.userName)
+
+  const isExistingUser = localSentencesParsed &&
+    localSentencesParsed.userName === localSpeakerDataParsed.userName
+    &&
+    localSentencesParsed.language === localSpeakerDataParsed.language;
+  if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === language) {
+    setFooterPosition();
+    boloIndiaValidator.sentences = localSentencesParsed.sentences;
+    initializeComponent();
+  } else {
+    localStorage.removeItem(currentIndexKey);
     const type = 'text';
     const toLanguage = ""; //can be anything
+
     fetch(`/contributions/${type}?from=${language}&to=${toLanguage}`, {
-        credentials: 'include',
-        mode: 'cors'
-      })
-        .then((data) => {
-            if (!data.ok) {
-                throw Error(data.statusText || 'HTTP error');
-            } else {
-                return data.json();
-            }
-        }).then((sentenceData) => {
-            if (sentenceData.data.length === 0) {
-                showNoSentencesMessage();
-                return;
-            }
-            validationSentences = sentenceData.data
-            const sentence = validationSentences[currentIndex];
-            if (sentence) {
-                getAudioClip(sentence.contribution_id);
-                setSentenceLabel(currentIndex);
-                updateValidationCount();
-                resetValidation();
-                addListeners();
-                setAudioPlayer();
-                const $canvas = document.getElementById('myCanvas');
-                visualizer.drawCanvasLine($canvas);
-            }
-        }).catch((err) => {
-            console.log(err)
-        });
+      credentials: 'include',
+      mode: 'cors'
+    })
+      .then((data) => {
+        if (!data.ok) {
+          showNoSentencesMessage();
+          throw Error(data.statusText || 'HTTP error');
+        } else {
+          return data.json();
+        }
+      }).then((sentenceData) => {
+      if (sentenceData.data.length === 0) {
+        showNoSentencesMessage();
+        return;
+      }
+      // validationSentences = sentenceData.data
+      // const sentence = validationSentences[currentIndex];
+      boloIndiaValidator.sentences = sentenceData.data;
+      localStorage.setItem(boloValidatorCountKey, boloIndiaValidator.sentences.length);
+      localStorage.setItem(
+        sentencesKey,
+        JSON.stringify({
+          userName: localSpeakerDataParsed.userName,
+          sentences: sentenceData.data,
+          language: localSpeakerDataParsed.language,
+        })
+      );
+      initializeComponent();
+    }).catch((err) => {
+      console.log(err)
+    });
+  }
 });
 
+const initializeComponent = function () {
+  const totalItems = boloIndiaValidator.sentences.length;
+  currentIndex = getCurrentIndex(totalItems - 1);
+  const sentence = boloIndiaValidator.sentences[currentIndex];
+  addListeners();
+  if (sentence) {
+    getAudioClip(sentence.contribution_id);
+    setSentenceLabel(currentIndex);
+    setCurrentSentenceIndex(currentIndex + 1);
+    setTotalSentenceIndex(totalItems);
+    updateProgressBar(currentIndex + 1, boloIndiaValidator.sentences.length)
+    // updateValidationCount();
+    resetValidation();
+    setAudioPlayer();
+    const $canvas = document.getElementById('myCanvas');
+    visualizer.drawCanvasLine($canvas);
+  }
+}
+
 module.exports = {
-    setSentenceLabel,
-    setAudioPlayer,
-    addListeners,
-    startVisualizer
+  setSentenceLabel,
+  setAudioPlayer,
+  addListeners,
+  startVisualizer
 };

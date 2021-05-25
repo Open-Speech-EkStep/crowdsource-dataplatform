@@ -6,10 +6,28 @@ const {
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick
 } = require('./speakerDetails');
-const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES} = require('./constants');
+const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES,MODULE, CURRENT_MODULE} = require('./constants');
 const {updateLocaleLanguagesDropdown} = require('./utils');
 
+function onActiveNavbar(value) {
+    const $header = $('#module_name');
+    localStorage.setItem(CURRENT_MODULE, value);
+    const allDivs = $header.children();
+    let targetedDivIndex = 0;
+    allDivs.each(function (index, element) {
+        if (element.getAttribute('value') === value) {
+            targetedDivIndex = index;
+        }
+    });
+    const previousActiveDiv = $header.find('.active');
+    previousActiveDiv && previousActiveDiv.removeClass('active');
+    allDivs[targetedDivIndex].classList.add('active');
+}
+
+
 $(document).ready(function () {
+    const currentModule = localStorage.getItem(CURRENT_MODULE);
+    onActiveNavbar(currentModule);
     const speakerDetailsKey = 'speakerDetails';
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();

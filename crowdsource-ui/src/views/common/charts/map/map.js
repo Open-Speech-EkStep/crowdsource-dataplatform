@@ -70,9 +70,9 @@ const drawMap = function (response, moduleType) {
         minutes: vMinutes,
         seconds: vSeconds,
       } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
-      st.contributed_time = moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) : `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
-      st.validated_time = moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_validation_count) : `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
-      st.value = moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
+      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
+      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_validation_count) : `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
+      st.value = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
       st.total_speakers = ele.total_speakers;
       st.id = st.id;
     } else {
@@ -154,12 +154,12 @@ const drawMap = function (response, moduleType) {
     quarterVal * 3 * 60 * 60,
     false
   );
-  $quarter.text(`0 - ${formatTime(qHours, qMinuts)}`);
-  $half.text(`${formatTime(qHours, qMinuts)} - ${formatTime(hHours, hMinuts)}`);
-  $threeQuarter.text(
+  $quarter.text(moduleType == "parallel" || moduleType == "ocr" ? `0 - 100` : `0 - ${formatTime(qHours, qMinuts)}`);
+  $half.text(moduleType == "parallel" || moduleType == "ocr" ? `100 - 200` : `${formatTime(qHours, qMinuts)} - ${formatTime(hHours, hMinuts)}`);
+  $threeQuarter.text( moduleType == "parallel" || moduleType == "ocr" ? `200 - 500` :
     `${formatTime(hHours, hMinuts)} - ${formatTime(tQHours, tQMinuts)}`
   );
-  $full.text(`> ${formatTime(tQHours, tQMinuts)}`);
+  $full.text(moduleType == "parallel" || moduleType == "ocr" ? `> 500` : `> ${formatTime(tQHours, tQMinuts)}`);
   $legendDiv.removeClass("d-none").addClass("d-flex");
 };
 

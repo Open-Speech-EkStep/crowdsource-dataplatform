@@ -438,5 +438,9 @@
 	"Hrs Validated": "Hrs Validated",
 	"Contributions made to Bolo India": "Contributions made to Bolo India",
 	"Earn badges or certificate by contributing to Bolo India. Validate the audio that is recorded on your desired language. Share badges in your social circle, build the hype, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e. <b>YOU.</b>": "Earn badges or certificate by contributing to Bolo India. Validate the audio that is recorded on your desired language. Share badges in your social circle, build the hype, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e. <b>YOU.</b>",
-	"The levels defined by an overall validations on Bolo India. Please see the criteria that defines different levels below:": "The levels defined by an overall validations on Bolo India. Please see the criteria that defines different levels below:"
+	"The levels defined by an overall validations on Bolo India. Please see the criteria that defines different levels below:": "The levels defined by an overall validations on Bolo India. Please see the criteria that defines different levels below:",
+	"Resume": "Resume",
+	"You’ve earned your <span id=\"current_badge_name\"></span> Badge": "You’ve earned your <span id=\"current_badge_name\"></span> Badge",
+	"<span id=\"current_badge_name_1\"></span> Contributor level achieved for validating <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_name_1\"></span> Contributor level achieved for validating <span id=\"current_badge_count\"></span> sentences.",
+	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"./validator-badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"./validator-badges.html\">Know more</a>"
 }

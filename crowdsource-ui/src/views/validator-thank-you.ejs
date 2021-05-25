@@ -17,17 +17,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
     <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../css/home.css">
-    <link rel="stylesheet" type="text/css" href="../../css/common/common.css">
-    <link rel="stylesheet" type="text/css" href="../../css/thankyou.css">
+    <link rel="stylesheet" type="text/css" href="../css/home.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/thank-you.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
 </head>
 
 <body>
 <%- include('common/headerForContributor.ejs',{path:"./",MODULE:"Bolo India", PAGE_TITLE:"Validate"}); %>
-<div id="content-wrapper" class="container-fluid mt-5 pt-2 pb-2 px-3 px-md-5 bg-thank-you h-100">
+<div id="content-wrapper" class="container-fluid mt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center">
-        <div class="row position-absolute top-back-btn">
+        <div class="row position-absolute top-back-btn" style="top:80px;left:35px">
             <%- include('../../build/views/common/back-btn.ejs',{url:"./home.html"}) %>
         </div>
         <h1 class="display-5 font-wt-900 site-blue">
@@ -76,10 +76,39 @@
             </div>
             <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('sentences validated') %></p>
             <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="./validator-badges.html">Know more</a>') %></p>
-            <%- include('../../build/views/common/badgesMilestone.ejs',{MODULE:"bolo"}) %>
+            <div class="row d-none" id="milestone_text">
+                <div class="col-12 col-lg-5 col-md-5 mt-lg-5 justify-content-between">
+                    <div>
+                        <img src="../img/bronze_badge.svg" alt="Bronze Badge" id="reward-img" class="reward-img">
+                    </div>
+                    <p class="mt-2"><%= __('National Language Translation Mission')%></p>
+                    <button class="btn btn-outline-primary my-2" data-badge="" download id="download_pdf"><span class="mr-2"><%= __('Download')%></span>
+                        <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.12766 0C6.40968 0 6.6383 0.228621 6.6383 0.510638V6.49941L8.54196 4.59575L9.19149 5.24528L6.12766 8.30911L3.06383 5.24528L3.71336 4.59575L5.61702 6.49941V0.510638C5.61702 0.228621 5.84564 0 6.12766 0Z" fill="#007BFF"/>
+                            <path d="M1.02128 6.12766C1.02128 5.84564 0.792656 5.61702 0.510638 5.61702C0.228621 5.61702 0 5.84564 0 6.12766V9.95745C0 10.2395 0.228621 10.4681 0.510638 10.4681H11.4894C11.7714 10.4681 12 10.2395 12 9.95745V6.12766C12 5.84564 11.7714 5.61702 11.4894 5.61702C11.2073 5.61702 10.9787 5.84564 10.9787 6.12766V9.44681H1.02128V6.12766Z" fill="#007BFF"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="col-12 col-lg-7 col-md-7 msg-box mt-5">
+                    <h4 class="mb-3 mt-lg-5"><%- __('You’ve earned your <span id="current_badge_name"></span> Badge') %></h4>
+                    <p><span id="user-contribution" class="text-primary"></span> <%- __('<span id="current_badge_name_1"></span> Contributor level achieved for validating <span id="current_badge_count"></span> sentences.') %></p>
+                    <p class="mt-lg-5"><%- __('Your next goal is to reach <span id="next_badge_count"></span> sentences to unlock your <span id="next_badge_name_1"></span> Badge. <a href="./validator-badges.html">Know more</a>') %></p>
+                </div>
+            </div>
             <%- include ../../build/views/common/sharableLink.ejs %>
             <div class="badges_information">
-                <%- include('../../build/views/common/downloadableBadges.ejs', {BADGES:["bronze","silver","gold","platinum"],MODULE:"bolo"})%>
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="bronze" href="#" id="<%= `bronze_badge_link` %>">
+                    <img title="<%= `Download bronze badge`%>" src="<%= `../img/bolo_bronze_val.svg`%>" alt="" width="36px" class="disable" id="<%= `bronze_badge_link_img`%>">
+                </button>
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="silver" href="#" id="<%= `silver_badge_link` %>">
+                    <img title="<%= `Download silver badge`%>" src="<%= `../img/bolo_silver_val.svg`%>" alt="" width="36px" class="disable" id="<%= `silver_badge_link_img`%>">
+                </button>
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="gold" href="#" id="<%= `gold_badge_link` %>">
+                    <img title="<%= `Download gold badge`%>" src="<%= `../img/bolo_gold_val.svg`%>" alt="" width="36px" class="disable" id="<%= `gold_badge_link_img`%>">
+                </button>
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="platinum" href="#" id="<%= `platinum_badge_link` %>">
+                    <img title="<%= `Download platinum badge`%>" src="<%= `../img/bolo_platinum_val.svg`%>" alt="" width="36px" class="disable" id="<%= `platinum_badge_link_img`%>">
+                </button>
             </div>
         </div>
     </div>

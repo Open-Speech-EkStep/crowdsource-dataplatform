@@ -23,7 +23,18 @@
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column">
-            <div class="d-flex justify-content-end pt-3 record-btn-container">
+            <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">
+                <div class="row position-absolute dekho-back-btn top-back-btn">
+                    <button class="btn btn-link p-0 back-btn" id="back-btn">
+                        <a href="./home.html" class="nav-link" style="color:#959595;font-size:20px">
+                            <span class="material-icons" style="vertical-align:sub">
+                    arrow_back
+                    </span>
+                            <span class="back-text"><%= __('Back') %></span>
+                    
+                        </a>
+                    </button>
+                </div>
                 <%- include components/report-btn.ejs %>
                 <%- include components/mic-speaker-test-btn.ejs %>
             </div>
@@ -35,7 +46,7 @@
                                 <%= __('Instructions') %>
                             </span></div>
             </div>
-            <div class="row justify-content-center mb-5 mb-lg-0 mt-5" id="sentences-row">
+            <div class="row justify-content-center mb-5 mb-lg-0" id="sentences-row">
                 <div class="col-md-8 col-sm-10 text-center prompt"><label class="h1 font-weight-normal" id="sentenceLabel"></label></div>
             </div>
             <div class="validation-container" id="validation-container">
@@ -80,7 +91,7 @@
                 </div>
             </div>
             <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 mx-5" id="validation-button-row">
-                <div class="col-lg-8 col-md-8 flex-lg-row flex-md-row flex-column-reverse d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2"><button class="w-100 btn align-self-start mb-2" disabled="disabled" id="dislike_button"><svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div class="col-lg-8 col-md-8 flex-lg-row flex-md-row d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2"><button class="w-100 btn align-self-start mb-2" disabled="disabled" id="dislike_button"><svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
                             <path d="M183.666 19.6666H178.333V35.6666H183.666V19.6666ZM154.333 34.3333C154.333 35.7999 155.533 36.9999 156.999 36.9999H165.413L164.146 43.0933L164.106 43.5199C164.106 44.0666 164.333 44.5733 164.693 44.9333L166.106 46.3333L174.879 37.5466C175.373 37.0666 175.666 36.3999 175.666 35.6666V22.3333C175.666 20.8666 174.466 19.6666 172.999 19.6666H160.999C159.893 19.6666 158.946 20.3333 158.546 21.2933L154.519 30.6933C154.399 30.9999 154.333 31.3199 154.333 31.6666V34.3333Z" fill="#007BFF"/><text x="26" y="43" font-family="lato" font-size="28" fill="#007BFF" style="text-align:center">
                                 <%= __('Incorrect') %>
@@ -130,7 +141,6 @@
         <%- include modals/validator-instructions.ejs %>
         <%- include modals/validation-report-modal.ejs %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <%- include('common/footer.ejs',{path:"./"}) %>
         <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

@@ -25,6 +25,22 @@ const dekhoCountKey = 'dekhoCount';
 const currentIndexKey = 'dekhoCurrentIndex';
 const sentencesKey = 'dekhoSentencesKey';
 
+
+const notyf = new Notyf({
+  position: { x: 'center', y: 'top' },
+  types: [
+      {
+          type: 'success',
+          className: 'fnt-1-5',
+      },
+      {
+          type: 'error',
+          duration: 3500,
+          className: 'fnt-1-5',
+      },
+  ],
+});
+
 let localeStrings;
 
 window.dekhoIndia = {};
@@ -119,6 +135,8 @@ function getNextSentence() {
     // showThankYou();
     disableSkipButton();
     setTimeout(showThankYou, 1000);
+    const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
+    notyf.success(msg);
   }
 }
 
@@ -307,6 +325,7 @@ function enableButton(element) {
   element.children().removeAttr("opacity")
   element.removeAttr("disabled")
 }
+
 
 const getImage = function (contributionId) {
   // hideAudioRow();

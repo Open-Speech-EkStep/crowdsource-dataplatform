@@ -14,7 +14,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel, type) {
         Number(ele.total_contributions) * 60 * 60,
         true
       );
-      ele.total_contributions_text = type == "suno" ? formatTime(hours, minutes, seconds) :  type == "dekho" ? ((ele.total_contribution_count).toString() + " images") : ((ele.total_contribution_count).toString() + " translations");
+      ele.total_contributions_text = type == "suno" || type == "bolo" ? formatTime(hours, minutes, seconds) :  type == "dekho" ? ((ele.total_contribution_count).toString() + " images") : ((ele.total_contribution_count).toString() + " translations");
     });
   }
   chart.data = response;
@@ -35,7 +35,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel, type) {
 
   const valueLabel = series.bullets.push(new am4charts.LabelBullet());
   valueLabel.label.text =
-    xAxisLabel === "total_speakers"
+    xAxisLabel == "total_speakers"
       ? "{total_speakers}"
       : "{total_contributions_text}";
   valueLabel.label.fontSize = 14;
