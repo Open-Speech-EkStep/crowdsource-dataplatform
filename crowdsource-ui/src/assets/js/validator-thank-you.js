@@ -20,8 +20,8 @@ const {showByHoursChart,getContributedAndTopLanguage,setBadge} = require('../../
 
 const CURRENT_INDEX = "boloValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
-const sunoValidatorCountKey = 'boloValidatorCount';
-const totalSentence = Number(localStorage.getItem(sunoValidatorCountKey));
+const boloValidatorCountKey = 'boloValidatorCount';
+const totalSentence = Number(localStorage.getItem(boloValidatorCountKey));
 
 const showUserProfile = function (userName){
   const $navUser = $('#nav-user');
@@ -42,6 +42,7 @@ function downloadPdf(badgeType) {
   const currentModule = localStorage.getItem(CURRENT_MODULE);
   const badges = MODULE[currentModule].BADGES;
 
+  console.log(badges[badgeType].imgSm)
   img.src = badges[badgeType].imgSm;
   const allBadges = JSON.parse(localStorage.getItem('badges'));
   const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
