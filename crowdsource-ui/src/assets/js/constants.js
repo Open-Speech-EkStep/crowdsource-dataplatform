@@ -27,7 +27,6 @@ const BADGES = {
     silver :{imgLg:"../img/silver_badge.svg",imgSm:"../img/silver_contributor.jpg"},
     gold :{imgLg:"../img/gold_badge.svg",imgSm:"../img/gold_contributor.jpg"},
     platinum :{imgLg:"../img/platinum_badge.svg",imgSm:"../img/platinum_contributor.jpg"},
-    certificate :{imgLg:"../img/certificate.svg",imgSm:"../img/certificate.svg"}
 }
 const CURRENT_MODULE = 'module';
 const MODULE = {
