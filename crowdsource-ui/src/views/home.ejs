@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <div class="col-4 text-right px-0">
-                    <img src="../img/listen.svg" alt="validator" id="start_validating" data-toggle="modal" class="cursor-pointer listen-logo img-fluid" data-target="#userModal" width="140px" height="140px">
+                    <img src="../img/listen.svg" alt="validator" id="start_validating" data-toggle="modal" class="cursor-pointer listen-logo img-fluid" data-target="#boloUserModal" width="140px" height="140px">
                 </div>
                 <div class="col-12 d-none position-absolute px-0" id="listen-p-2" style="bottom:1rem">
                     <div>
@@ -173,6 +173,47 @@
 <%- include modals/speakerDetail.ejs %>
 <%- include modals/content-languages.ejs %>
 <%- include modals/say-listen-language.ejs %>
+
+<div class="modal fade" id="boloUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="margin-left-auto"><button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+            <div class="modal-header d-block border-0">
+                <h1 class="modal-title text-center">
+                    <%= __('User Details') %>
+                </h1>
+            </div>
+            <div class="modal-body px-6" id="bolo-user-details">
+                <p class="text-muted text-center">
+                    <%= __('All the fields are optional') %>
+                </p>
+                <div class="col-12 text-center text-primary" id="boloResetBtn" style="cursor:pointer">
+                    <%= __('Not You? Change User') %>
+                </div>
+                <div class="form-group mt-5"><label for="bolo-username" class="form-label">
+                        <%= __('Username') %>
+                    </label> <input class="form-control" maxlength="12" id="bolo-username" data-toggle="tooltip" placeholder="<%= __('Enter preferred username') %>" title="<% __('Username cannot be more than 12 characters') %>">
+                    <div class="text-danger mt-2 d-none" id="bolo-username-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px" height="18px">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg> <span class="align-middle">
+                            <%= __('Please don\'t use email or mobile number as user name') %>
+                        </span></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label mt-2">
+                        <%- __('By proceeding ahead you agree to the <a href="./terms-and-conditions.html"> Terms and Conditions</a>') %>
+                    </label>
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <div class="col-12" data-toggle="tooltip" title="<%= __('Please validate any error message before proceeding')%>"><button type="button" id="bolo-proceed-box" class="btn btn-primary h6 shadow w-100 rounded p-3">
+                            <%= __('LET\'S GO') %>
+                        </button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <%- include('common/footer.ejs',{path:"./"}) %>

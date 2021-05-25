@@ -9,6 +9,13 @@ const {
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick
 } = require('./speakerDetails');
+
+const {
+    setBoloSpeakerDetails,
+    setBoloUserModalOnShown,
+    setBoloUserNameOnInputFocus,
+    setLetGoBtnOnClick
+} = require('./bolo_user_details');
 const {getContributedAndTopLanguage} = require('./common');
 
 const {
@@ -179,6 +186,7 @@ function initializeBlock() {
     const age = document.getElementById('age');
     const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
+    const $boloUserName = $('#bolo-username');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
     setSayListenBackground();
@@ -226,7 +234,7 @@ function initializeBlock() {
     $('#start_validating').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-        setStartRecordingBtnOnClick('./validator-page.html',MODULE.bolo.value);
+        setLetGoBtnOnClick('./validator-page.html',MODULE.bolo.value);
     });
 
     $('[name="topLanguageChart"]').on('change', (event) => {
@@ -241,6 +249,9 @@ function initializeBlock() {
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
+    setBoloUserModalOnShown($boloUserName);
+    setBoloSpeakerDetails(speakerDetailsKey, $boloUserName );
+    setBoloUserNameOnInputFocus();
     // setStartRecordingBtnOnClick();
 
     const $say = $('#say');
