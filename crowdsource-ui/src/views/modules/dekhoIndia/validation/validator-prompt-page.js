@@ -124,8 +124,8 @@ function getNextSentence() {
     // showThankYou();
     disableSkipButton();
     setTimeout(showThankYou, 1000);
-    const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
-    notyf.success(msg);
+    // const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
+    // notyf.success(msg);
   }
 }
 

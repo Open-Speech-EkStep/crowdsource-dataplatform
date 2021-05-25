@@ -52,11 +52,11 @@ const drawMap = function (response, moduleType) {
     })
   );
   let quarterVal;
-  if (maxContribution > 1) {
-    quarterVal = maxContribution / 4;
-  } else {
-    quarterVal = 0.25;
-  }
+    if (maxContribution > 1) {
+      quarterVal = maxContribution / 4;
+    } else {
+      quarterVal = 0.25;
+    }
   statesData.forEach(st => {
     const ele = response.data.find(s => st.state === s.state);
     if (ele) {
@@ -122,17 +122,32 @@ const drawMap = function (response, moduleType) {
     "fill",
     function (fill, target) {
       if (target.dataItem) {
-        if (target.dataItem.value >= quarterVal * 3) {
-          return am4core.color("#4061BF");
-        } else if (target.dataItem.value >= quarterVal * 2) {
-          return am4core.color("#6B85CE");
-        } else if (target.dataItem.value >= quarterVal) {
-          return am4core.color("#92A8E8");
-        } else if (target.dataItem.value > 0) {
-          return am4core.color("#CDD8F6");
+        if(moduleType == "bolo" || moduleType == "suno") {
+          if (target.dataItem.value >= quarterVal * 3) {
+            return am4core.color("#4061BF");
+          } else if (target.dataItem.value >= quarterVal * 2) {
+            return am4core.color("#6B85CE");
+          } else if (target.dataItem.value >= quarterVal) {
+            return am4core.color("#92A8E8");
+          } else if (target.dataItem.value > 0) {
+            return am4core.color("#CDD8F6");
+          } else {
+            return am4core.color("#E9E9E9");
+          }
         } else {
-          return am4core.color("#E9E9E9");
+          if (target.dataItem.value >= 500) {
+            return am4core.color("#4061BF");
+          } else if (target.dataItem.value >= 200) {
+            return am4core.color("#6B85CE");
+          } else if (target.dataItem.value >= 100) {
+            return am4core.color("#92A8E8");
+          } else if (target.dataItem.value > 0) {
+            return am4core.color("#CDD8F6");
+          } else {
+            return am4core.color("#E9E9E9");
+          }
         }
+       
       }
       return fill;
     }

@@ -1,5 +1,5 @@
 const {
-    CONTRIBUTION_LANGUAGE,TOP_LANGUAGES_BY_HOURS,TO_LANGUAGE,ALL_LANGUAGES,CURRENT_MODULE
+    CONTRIBUTION_LANGUAGE
   } = require('./constants');
 
   const getContributedAndTopLanguage = (topLanguagesData, type) => {

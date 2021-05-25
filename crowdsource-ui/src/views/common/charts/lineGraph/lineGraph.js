@@ -16,6 +16,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     const chart = am4core.create("timeline-chart", am4charts.XYChart);
     
     const chartData = timelineData.data;
+   
     const currentModule = localStorage.getItem(CURRENT_MODULE);
     for (let i = 0; i < chartData.length; i++) {
       if (!chartData[i].month) {
@@ -94,7 +95,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     // Create series
     var series2 = chart.series.push(new am4charts.LineSeries());
     series2.dataFields.dateX = "duration";
-    series2.dataFields.valueY = currentModule == "dekho" || currentModule == "likho" ? "total_contribution_count" : "cumulative_validations";
+    series2.dataFields.valueY = currentModule == "dekho" || currentModule == "likho" ? "total_validation_count" : "cumulative_validations";
     series2.sequencedInterpolation = true;
     series2.tensionX = 0.8;
     series2.strokeWidth = 3;
