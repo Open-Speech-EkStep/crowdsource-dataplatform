@@ -113,6 +113,18 @@ step("When user click on Lets Go Button, user should <arg0> see instructions to 
     }
 });
 
+step("Add <usrnm> Username for Valiadtion", async function (usrnm) {
+    if (await taiko.text('User Details').exists()) {
+        const username = taiko.textBox({ id: 'bolo-username' })
+        await taiko.waitFor(700)
+        await clear(taiko.textBox({id:'bolo-username'}));
+        await taiko.waitFor(500)
+        await write(usrnm, into(username))
+        await taiko.waitFor(500)
+    }
+});
+
+
 step("User should be able to close the Instructions , user should see a sentence , Skip button , Start Recording Button , username,Test Mic and speaker button", async function () {
     await click(button({ id: "instructions_close_btn" }))
     assert.ok(await button({ id: 'startRecord' }).exists())

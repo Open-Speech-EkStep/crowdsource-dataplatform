@@ -20,7 +20,8 @@
 * Check "Correct" option should be "disabled" on Home page
 * Navigate to "Transcribe" button and click "Transcribe" button
 * Add "T User" Username
-* When user click on Lets Go Button, user should "" see instructions to record
+//* When user click on Lets Go Button, user should "" see instructions to record
+* When user click on Lets Go Button, user should "not" see instructions to record
 * When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should appear
 * User click on "edit" field and type "ହାଏ ଓଡିଆ ଓଡିଆ" submit and cancel button should be enabled
 * When user clicks on submit button user should see " Thank you for contributing!"
@@ -60,8 +61,9 @@
 * Select "Suno India"from header    
 * Navigate to "Transcribe" button and click "Transcribe" button
 * Add "T User" Username
-* When user click on Lets Go Button, user should "" see instructions to record
-* User should be able to close the Instructions , user should see Skip button , Play Button , username , Cancel , Submit and speaker button
+//* When user click on Lets Go Button, user should "" see instructions to record
+* When user click on Lets Go Button, user should "not" see instructions to record
+//* User should be able to close the Instructions , user should see Skip button , Play Button , username , Cancel , Submit and speaker button
 * When user clicks on the Test Speaker button, user should see "play-speaker"
 * When user clicks on the cross button , pop up should close and user should see the Test Mic and speaker button
 * When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should appear
