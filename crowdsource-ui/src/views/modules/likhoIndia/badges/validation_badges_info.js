@@ -37,7 +37,7 @@ const rowWithBadge = function (levelId, sentenceCount, badgeName, localeString) 
   if(badgeName == 'Bronze'){
     badgeDescription= `<p class="text-left mb-0 ml-3">Validating: ${sentenceCount} ${localeString.Sentences}</p>`
   }
-  return `<tr><td>${localeString.Level} ${levelId}</td><td>${badgeDescription}</td><td><div><img src=${badge.imgLg} class="table-img" alt=${badgeName} id="${badgeName}-image-hover" rel="popover"></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
+  return `<tr><td>${localeString.Level} ${levelId}</td><td>${badgeDescription}</td><td><div><img src=${badge.imgValSvg} class="table-img" alt=${badgeName} id="${badgeName}-image-hover" rel="popover"></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
 }
 
 const getCard = function (badgeName, localeString) {
@@ -46,7 +46,7 @@ const getCard = function (badgeName, localeString) {
   const badge = badges[badgeName.toLowerCase()];
   return `<div class="text-center">
                 <div class="py-2">
-                    <img src=${badge.imgLg} alt="bronze_badge" class="img-fluid">
+                    <img src=${badge.imgValSvg} alt="bronze_badge" class="img-fluid">
                 </div>
                 <h3>${localeString[badgeName.toLowerCase()]}</h3>
             </div>`
