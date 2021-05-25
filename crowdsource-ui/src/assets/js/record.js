@@ -544,9 +544,11 @@ function executeOnLoad() {
             return;
         }
 
-        $navUser.removeClass('d-none');
-        $('#nav-login').addClass('d-none');
-        $navUserName.text(localSpeakerDataParsed.userName);
+        if(localSpeakerDataParsed.userName && localSpeakerDataParsed.userName.length > 0){
+            $navUser.removeClass('d-none');
+            $('#nav-login').addClass('d-none');
+            $navUserName.text(localSpeakerDataParsed.userName);
+        }
         const isExistingUser = localSentencesParsed &&
             localSentencesParsed.userName === localSpeakerDataParsed.userName
             &&

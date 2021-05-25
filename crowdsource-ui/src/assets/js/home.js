@@ -145,14 +145,11 @@ const getStatsSummary = function () {
     performAPIRequest('/stats/summary/text')
         .then(response => {
             // drawMap({data: response.aggregate_data_by_state});
-            const languages = getContributedAndTopLanguage(response.top_languages_by_hours, "bolo");
+            const languages = getContributedAndTopLanguage(response.top_languages_by_hours, "hours");
             localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
             showByHoursChart()
-            let topSpeakers = [];
-            if(response.top_languages_by_speakers && response.top_languages_by_speakers.length > 0) {
-                 topSpeakers = response.top_languages_by_speakers.slice(0,4);
-            }
-            localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(topSpeakers));
+            const speakers = getContributedAndTopLanguage(response.top_languages_by_speakers, "speakers");
+            localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(speakers));
             localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
             getStatistics(response.aggregate_data_count[0]);
             setDefaultLang();
