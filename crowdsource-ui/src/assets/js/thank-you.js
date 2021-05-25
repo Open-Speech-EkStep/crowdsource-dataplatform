@@ -345,10 +345,11 @@ function executeOnLoad() {
   } else if (currentIndexInStorage < totalSentence) {
     location.href = "./home.html#start-record";
   } else {
-    $("#nav-user").removeClass("d-none");
-    $("#nav-login").addClass("d-none");
-    $("#nav-username").text(localSpeakerDataParsed.userName);
-
+    if(localSpeakerDataParsed.userName && localSpeakerDataParsed.userName.length > 0){
+      $("#nav-user").removeClass("d-none");
+      $("#nav-login").addClass("d-none");
+      $("#nav-username").text(localSpeakerDataParsed.userName);
+    }
     setPageContentHeight();
     setSentencesContributed();
     setTotalHoursContributed(localSpeakerDataParsed);
