@@ -215,12 +215,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
   chartReg["chart"] = chart;
 
   let response = [...responseData];
-  if (xAxisLabel === "total_speakers") {
-    response = response.sort((a, b) => Number(a.total_speakers) < Number(b.total_speakers) ? -1 : 1);
-  } else {
-    response = response.sort((a, b) => Number(a.total_contributions) < Number(b.total_contributions) ? -1 : 1);
-  }
-
+ 
   if (xAxisLabel !== "total_speakers") {
     response.forEach((ele) => {
       const { hours, minutes, seconds } = calculateTime(
@@ -230,7 +225,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
       ele.total_contributions_text = formatTime(hours, minutes, seconds);
     });
   }
-  chart.data = response;
+  chart.data = response.reverse();
   var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
   categoryAxis.dataFields.category = yAxisLabel;
   categoryAxis.renderer.grid.template.location = 0;
