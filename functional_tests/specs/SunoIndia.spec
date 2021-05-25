@@ -35,9 +35,9 @@
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be disabled
 * User plays the audio , "need_change" should be enabled & "like_button" should be disabled
 
-## Validate Transcribe card should be disabled & Validate should be enabled when the data is already contributed for Bengali language
+## Validate Transcribe card should be disabled & Validate should be enabled when the data is already contributed for Telugu language
 * Select "Suno India"from header 
-* Select Contribution Language as "বাংলা"
+* Select Contribution Language as "తెలుగు"
 * Check "Transcribe" option should be "disabled" on Home page
 * Check "Correct" option should be "enabled" on Home page
 
@@ -48,9 +48,9 @@
 * When user select "हिंदी" Language from dropdown then "languages" should not visible
 * When user clicks on back button, user should land on home page
 
-## Validate the User Details pop-up in Transcribe section
+## Validate the User Details pop-up in Transcribe section for Kannada language
 * Select "Suno India"from header 
-* Select Contribution Language as "मराठी"
+* Select Contribution Language as "ಕನ್ನಡ"
 * Navigate to "Transcribe" button and click "Transcribe" button
 * Username field should be present
 * if a user enter username and click on Not you change user button , the field should be cleared
@@ -65,10 +65,10 @@
 * When user clicks on the Test Speaker button, user should see "play-speaker"
 * When user clicks on the cross button , pop up should close and user should see the Test Mic and speaker button
 * When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should appear
-* When User clicks on "edit" field and type "नमस्कार" submit and cancel button should be enabled
+* When User clicks on "edit" field and type "ನೀವು ಹೇಗಿದ್ದೀರಿ" submit and cancel button should be enabled
 * When user clicks on submit button user should see " Thank you for contributing!"
 * When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should appear
-* When User clicks on "edit" field and type "नमस्कार" submit and cancel button should be enabled
+* When User clicks on "edit" field and type "ನೀವು ಹೇಗಿದ್ದೀರಿ" submit and cancel button should be enabled
 * When user clicks on submit button user should see " Thank you for contributing!"
 * When user skips the rest of the "3" sentences , User should see Thank you Page
 * when user clicks on the Contribute More button, user should not see the Instructions page again

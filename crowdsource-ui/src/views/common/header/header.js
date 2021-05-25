@@ -18,8 +18,10 @@ function onActiveNavbar(value) {
 const showUserProfile = function (userName){
   const $navUser = $('#nav-user');
   const $navUserName = $navUser.find('#nav-username');
+  if(userName && userName.length> 0){
   $navUser.removeClass('d-none');
-  $navUserName.text(userName);
+    $navUserName.text(userName);
+  }
 }
 
 module.exports = {onActiveNavbar,showUserProfile};
