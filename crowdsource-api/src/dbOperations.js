@@ -73,6 +73,11 @@ const {
     topLanguagesByContributionCount
 } = require('./dashboardDbQueries');
 
+const {
+    getSentencesForProfanityCheck,
+    updateSentenceWithProfanity
+} = require('./profanityCheckerQueries')
+
 const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP } = require('./constants');
 
 const envVars = process.env;
@@ -614,6 +619,15 @@ const getTargetInfo = async (req, res) => {
     res.status(200).send({ hasTarget, isAllContributed });
 }
 
+const getSentencesForProfanityChecking = (username, type) => {
+    currentTime = moment().utcOffset("+05:30").format()
+    db.any(getSentencesForProfanityCheck, [username, type, currentTime])
+}
+
+const updateProfanityStatus = (userName,sentenceId,profanityStatus) => {
+    db.any(updateSentenceWithProfanity, [profanityStatus, sentenceId, userName])
+}
+
 module.exports = {
     updateAndGetMedia,
     getContributionList,
@@ -639,5 +653,7 @@ module.exports = {
     getRewardsInfo,
     updateDbWithUserInput,
     getAvailableLanguages,
-    getTargetInfo
+    getTargetInfo,
+    getSentencesForProfanityChecking,
+    updateProfanityStatus
 };

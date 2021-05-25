@@ -5,6 +5,7 @@ const fetch = require('node-fetch');
 
 const { uploader } = require('./uploader/objUploader');
 const { calculateSNR } = require('./audio_attributes/snr');
+const profanityApi = require('./profanityChecker')
 
 const helmet = require('helmet');
 const express = require('express');
@@ -367,6 +368,7 @@ router.get('/available-languages/:type', validateMediaTypeInput, (req, res) => g
 router.get('/target-info/:type/:sourceLanguage', (req, res) => getTargetInfo(req, res));
 
 require('./dashboard-api')(router);
+profanityApi(router)
 
 app.use('/', router);
 
