@@ -81,7 +81,18 @@
             <%- include('../common/badgesMilestone.ejs',{MODULE:"dekho"}) %>
             <%- include ../common/sharableLink.ejs %>
             <div class="badges_information">
-                <%- include('../common/downloadableBadges.ejs', {BADGES:["bronze","silver","gold","platinum"],MODULE:"dekho"})%>
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="bronze" href="#" id="<%= `bronze_badge_link` %>">
+                    <img title="<%= `Download bronze badge`%>" src="<%= `../../img/dekho_bronze_val.svg`%>" alt="" width="36px" class="disable" id="<%= `bronze_badge_link_img`%>">
+                </button>
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="silver" href="#" id="<%= `silver_badge_link` %>">
+                    <img title="<%= `Download silver badge`%>" src="<%= `../../img/dekho_silver_val.svg`%>" alt="" width="36px" class="disable" id="<%= `silver_badge_link_img`%>">
+                </button>
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="gold" href="#" id="<%= `gold_badge_link` %>">
+                    <img title="<%= `Download gold badge`%>" src="<%= `../../img/dekho_gold_val.svg`%>" alt="" width="36px" class="disable" id="<%= `gold_badge_link_img`%>">
+                </button>
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="platinum" href="#" id="<%= `platinum_badge_link` %>">
+                    <img title="<%= `Download platinum badge`%>" src="<%= `../../img/dekho_platinum_val.svg`%>" alt="" width="36px" class="disable" id="<%= `platinum_badge_link_img`%>">
+                </button>
             </div>
         </div>
     </div>
