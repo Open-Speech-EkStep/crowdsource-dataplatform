@@ -111,7 +111,7 @@ const showFucntionalCards = (type, from, to) => {
   }
 }
 
-const setBadge = function (data, localeStrings) {
+const setBadge = function (data, localeStrings, functionalFlow) {
   localStorage.setItem('badgeId', data.badgeId);
   localStorage.setItem('badges', JSON.stringify(data.badges));
   localStorage.setItem('nextHourGoal', data.nextHourGoal);
@@ -131,9 +131,17 @@ const setBadge = function (data, localeStrings) {
     $("#user-contribution-msg").addClass("d-none");
     $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
     if(module === 'bolo'){
-      $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_badge.svg`);
+      if(functionalFlow === 'validator'){
+        $("#reward-img").attr('src', `../img/bolo_${data.currentBadgeType.toLowerCase()}_val.svg`);
+      } else {
+        $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_badge.svg`);
+      }
     } else {
-      $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_badge.svg`);
+      if(functionalFlow === 'validator'){
+        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_val.svg\``);
+      } else {
+        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_badge.svg`);
+      }
     }
   } else if (data.contributionCount < 5) {
     $("#champion_text").removeClass("d-none");
