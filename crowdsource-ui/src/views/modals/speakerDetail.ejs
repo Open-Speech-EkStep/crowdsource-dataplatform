@@ -1,11 +1,11 @@
 <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content p-4 border-primary border-2 speakerDetails">
-            <div class="margin-left-auto"><button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
-            <div class="modal-header d-block border-0">
-                <h1 class="modal-title text-center">
-                    <%= __('Speaker Details') %>
-                </h1>
+        <div class="modal-content p-4 border-primary border-2">
+            <button style="right:25px;font-size:35px;top:30px" class="close float-right position-absolute" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-header d-block border-0 py-0">
+                <h2 class="modal-title text-center">
+                    <%= __('User Details') %>
+                </h2>
             </div>
             <div class="modal-body px-6" id="speaker-details">
                 <p class="text-muted text-center">
@@ -14,7 +14,7 @@
                 <div class="col-12 text-center text-primary" id="resetBtn" style="cursor:pointer">
                     <%= __('Not You? Change User') %>
                 </div>
-                <div class="form-group mt-5"><label for="username" class="form-label">
+                <div class="form-group mt-3"><label for="username" class="form-label">
                         <%= __('Username') %>
                     </label> <input class="form-control" maxlength="12" id="username" data-toggle="tooltip" placeholder="<%= __('Enter preferred username') %>" title="<% __('Username cannot be more than 12 characters') %>">
                     <div class="text-danger mt-2 d-none" id="username-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px" height="18px">
