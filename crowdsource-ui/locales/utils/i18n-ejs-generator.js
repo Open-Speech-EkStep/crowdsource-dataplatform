@@ -100,7 +100,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName) {
     await ejs2html(
       `${ejsPath}/terms-and-conditions.ejs`,
       {},
-      i18n,
+      i18n, 
       outputPath,
       'terms-and-conditions.html',
       locale
@@ -116,6 +116,9 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName) {
       'validator-page.html',
       locale
     );
+
+    await ejs2html(`${ejsPath}/profanity-home.ejs`, {LANGUAGES}, i18n, outputPath, 'profanity-home.html', locale);
+    await ejs2html(`${ejsPath}/profanity.ejs`, {}, i18n, outputPath, 'profanity.html', locale);
   });
 };
 

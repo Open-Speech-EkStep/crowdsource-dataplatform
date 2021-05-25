@@ -132,6 +132,10 @@ router.get('/', function (req, res) {
     res.redirect('en/home.html');
 });
 
+router.get('/profanity', function (req, res) {
+    res.redirect('en/profanity-boloindia.html');
+});
+
 router.get('/getDetails/:language', async function (req, res) {
     try {
         const currentLanguage = req.params.language;
