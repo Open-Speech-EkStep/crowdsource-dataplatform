@@ -134,15 +134,15 @@ const initialize = () => {
     };
 
     const setProgressBar = (currentIndex) => {
-        $progressBar.width(currentIndex * 20 + '%');
-        $progressBar.prop('aria-valuenow', currentIndex);
+        $progressBar.width((currentIndex + 1) * 20 + '%');
+        $progressBar.prop('aria-valuenow', currentIndex + 1);
     };
 
     const setSentenceText = (index) => {
         const $sentenceLbl = $('#sentenceLbl');
         $sentenceLbl[0].innerText = sentences[index].media_data;
         animateCSS($sentenceLbl, 'lightSpeedIn');
-        currentIndex && setProgressBar(currentIndex);
+        setProgressBar(currentIndex);
     };
 
     const notyf = new Notyf({
@@ -622,6 +622,7 @@ function executeOnLoad() {
 }
 
 $(document).ready(() => {
+    localStorage.setItem('module','bolo');
     getLocaleString().then(() => {
         executeOnLoad();
     }).catch(() => {

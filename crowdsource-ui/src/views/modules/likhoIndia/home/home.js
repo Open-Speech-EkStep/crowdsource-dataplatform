@@ -98,10 +98,11 @@ function initializeBlock() {
       localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
     }
 
-
     $('#from-language').on('change', (e) => {
       fromLanguage = e.target.value;
       localStorage.setItem(LIKHO_FROM_LANGUAGE, fromLanguage);
+      const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
+      addToLanguage('to-language', languages);
       $('#to-language option:first-child').attr("selected", "selected");
       toLanguage = $('#to-language option:first-child').val();
       localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);

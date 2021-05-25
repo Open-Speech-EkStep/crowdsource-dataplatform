@@ -27,6 +27,7 @@ window.sunoIndia = {};
 let playStr = "";
 let pauseStr = "";
 let replayStr = "";
+let resumeStr = "";
 let audioPlayerBtn = "";
 
 function getValue(number, maxValue) {
@@ -84,16 +85,20 @@ const setAudioPlayer = function () {
   const play = $(playStr);
   const pause = $(pauseStr);
   const replay = $(replayStr);
+  const resume = $(resumeStr);
   const textPlay = $('#audioplayer-text_play');
   const textReplay = $('#audioplayer-text_replay');
   const textPause = $('#audioplayer-text_pause');
+  const textResume = $('#audioplayer-text_resume');
   const cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : $("#cancel-edit-button");
 
 
   myAudio.addEventListener("ended", () => {
     hideElement(pause)
+    hideElement(resume)
     showElement(replay)
     hideElement(textPause);
+    hideElement(textResume);
     showElement(textReplay);
     cancelButton.removeAttr("disabled");
     $("#edit").removeAttr("disabled");
@@ -114,25 +119,38 @@ const setAudioPlayer = function () {
     $("#edit-text-suno").addClass("edit-text");
   });
 
+  resume.on('click', () => {
+    resumeAudio();
+  });
+
   function playAudio() {
     myAudio.load();
     hideElement(play)
+    hideElement(resume)
     showElement(pause)
     hideElement(textPlay);
+    hideElement(textResume);
     showElement(textPause);
     myAudio.play();
   }
 
   function pauseAudio() {
     hideElement(pause)
-    showElement(replay)
+    showElement(resume)
     hideElement(textPause)
-    showElement(textReplay)
+    showElement(textResume)
     myAudio.pause();
   }
 
+  function resumeAudio() {
+    showElement(pause)
+    hideElement(resume)
+    showElement(textPause)
+    hideElement(textResume)
+    myAudio.play();
+  }
+
   function replayAudio() {
-    myAudio.load();
     hideElement(replay)
     showElement(pause)
     hideElement(textReplay);
@@ -174,12 +192,15 @@ function resetValidation() {
   const textPlay = $('#audioplayer-text_play');
   const textReplay = $('#audioplayer-text_replay');
   const textPause = $('#audioplayer-text_pause');
+  const textResume = $('#audioplayer-text_resume');
   hideElement(textPause);
   hideElement(textReplay);
+  hideElement(textResume);
   showElement(textPlay);
 
   hideElement($(replayStr))
   hideElement($(pauseStr))
+  hideElement($(resumeStr))
   showElement($(playStr))
   showElement($('#default_line'))
 }
@@ -291,6 +312,9 @@ function addListeners() {
     if ($('#pause').hasClass('d-none')) {
       $('#pause').trigger('click');
     }
+    $(resumeStr).addClass('d-none')
+    const textResume = $('#audioplayer-text_resume');
+    textResume.addClass('d-none');
     $('#edit').val("");
     setInput("");
     $('#submit-edit-button').attr('disabled', true);
@@ -594,12 +618,14 @@ if(isMobileView){
     playStr = "#play_mob";
     replayStr = "#replay_mob";
     pauseStr = "#pause_mob";
+    resumeStr = "#resume_mob";
     audioPlayerBtn = "#audio-player-btn_mob";
   }else{
     // false for not mobile device
     playStr = "#play";
     replayStr = "#replay";
     pauseStr = "#pause";
+  resumeStr = "#resume";
     audioPlayerBtn = "#audio-player-btn";
   }
 }
