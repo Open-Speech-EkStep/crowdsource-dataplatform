@@ -98,10 +98,11 @@ step("User details popup should appear and close button should close the pop up"
 });
 
 step("When user clicks on back button, user should land on home page", async function() {
+    await taiko.waitFor(650)
     if (await taiko.text('Back').exists()) {
         assert.ok('Back button exists')
         await click(taiko.text("Back"))
-        await taiko.waitFor(650)
+        await taiko.waitFor(1500)
     }
     assert.ok(await text("Help your language by transcribing audio into text").exists());
 
@@ -229,4 +230,11 @@ step("When user clicks on back to Suno India home button, user should land on ho
     await click(link({id:"start_contributing_id"}))
     await taiko.waitFor(500)
     assert.ok(await text('Help your language by transcribing audio into text').exists());
+});
+
+step("When user clicks on submit button for Odia language user should see <thankutext>", async function(thankutext) {
+    await click(taiko.button({ id: 'submit-edit-button'}))
+    await taiko.waitFor(3000)
+    await taiko.text(thankutext).exists()
+
 });
