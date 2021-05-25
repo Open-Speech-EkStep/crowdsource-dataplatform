@@ -130,15 +130,15 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#sentence_away_msg").addClass("d-none");
     $("#user-contribution-msg").addClass("d-none");
     $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
-    if(module === 'bolo'){
+    if(module == 'bolo'){
       if(functionalFlow === 'validator'){
         $("#reward-img").attr('src', `../img/bolo_${data.currentBadgeType.toLowerCase()}_val.svg`);
       } else {
         $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_badge.svg`);
       }
     } else {
-      if(functionalFlow === 'validator'){
-        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_val.svg\``);
+      if(functionalFlow == 'validator'){
+        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_val.svg`);
       } else {
         $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_badge.svg`);
       }
@@ -162,7 +162,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   const $silverBadgeLink = $("#silver_badge_link img");
   const $goldBadgeLink = $("#gold_badge_link img");
   const $platinumBadgeLink = $("#platinum_badge_link img");
-  if (data.currentBadgeType.toLowerCase() === "bronze") {
+  if (data.currentBadgeType.toLowerCase() == "bronze") {
     $bronzeBadgeLink.parent().attr("disabled", false);
     $('#bronze_badge_link_img').addClass('enable');
     $('#bronze_badge_link_img').removeClass('disable');
