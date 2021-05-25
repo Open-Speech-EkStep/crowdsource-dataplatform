@@ -50,16 +50,16 @@ const MODULE = {
     }},
 
   likho: {url: 'likhoIndia', value: 'likho',BADGES :{
-      bronze: {imgLg: "../../img/likho_bronze_badge.svg", imgSm: "../../img/likho_bronze_contributor.jpg"},
-      silver: {imgLg: "../../img/likho_silver_badge.svg", imgSm: "../../img/likho_silver_contributor.jpg"},
-      gold: {imgLg: "../../img/likho_gold_badge.svg", imgSm: "../../img/likho_gold_contributor.jpg"},
-      platinum: {imgLg: "../../img/likho_platinum_badge.svg", imgSm: "../../img/likho_platinum_contributor.jpg"},
+      bronze: {imgLg: "../../img/likho_bronze_badge.svg", imgSm: "../../img/likho_bronze_contributor.jpg",imgValSvg:"../../img/likho_bronze_val.svg",imgValJpg:"../../img/likho_bronze_val_jpg.jpeg"},
+      silver: {imgLg: "../../img/likho_silver_badge.svg", imgSm: "../../img/likho_silver_contributor.jpg",imgValSvg:"../../img/likho_silver_val.svg",imgValJpg:"../../img/likho_silver_val_jpg.jpeg"},
+      gold: {imgLg: "../../img/likho_gold_badge.svg", imgSm: "../../img/likho_gold_contributor.jpg",imgValSvg:"../../img/likho_gold_val.svg",imgValJpg:"../../img/likho_gold_val_jpg.jpeg"},
+      platinum: {imgLg: "../../img/likho_platinum_badge.svg", imgSm: "../../img/likho_platinum_contributor.jpg",imgValSvg:"../../img/likho_platinum_val.svg",imgValJpg:"../../img/likho_platinum_val_jpg.jpeg"},
     }},
   dekho: {url: 'dekhoIndia', value: 'dekho', BADGES :{
-      bronze: {imgLg: "../../img/dekho_bronze_badge.svg", imgSm: "../../img/dekho_bronze_contributor.jpg"},
-      silver: {imgLg: "../../img/dekho_silver_badge.svg", imgSm: "../../img/dekho_silver_contributor.jpg"},
-      gold: {imgLg: "../../img/dekho_gold_badge.svg", imgSm: "../../img/dekho_gold_contributor.jpg"},
-      platinum: {imgLg: "../../img/dekho_platinum_badge.svg", imgSm: "../../img/dekho_platinum_contributor.jpg"},
+      bronze: {imgLg: "../../img/dekho_bronze_badge.svg", imgSm: "../../img/dekho_bronze_contributor.jpg",imgValSvg:"../../img/dekho_bronze_val.svg",imgValJpg:"../../img/dekho_bronze_val_jpg.jpeg"},
+      silver: {imgLg: "../../img/dekho_silver_badge.svg", imgSm: "../../img/dekho_silver_contributor.jpg",imgValSvg:"../../img/dekho_silver_val.svg",imgValJpg:"../../img/dekho_silver_val_jpg.jpeg"},
+      gold: {imgLg: "../../img/dekho_gold_badge.svg", imgSm: "../../img/dekho_gold_contributor.jpg",imgValSvg:"../../img/dekho_gold_val.svg",imgValJpg:"../../img/dekho_gold_val_jpg.jpeg"},
+      platinum: {imgLg: "../../img/dekho_platinum_badge.svg", imgSm: "../../img/dekho_platinum_contributor.jpg",imgValSvg:"../../img/dekho_platinum_val.svg",imgValJpg:"../../img/dekho_platinum_val_jpg.jpeg"},
     }},
 };
 
