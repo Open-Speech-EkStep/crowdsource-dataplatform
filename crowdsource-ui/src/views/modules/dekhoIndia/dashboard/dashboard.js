@@ -54,7 +54,7 @@ function updateLanguage(language) {
                     $speakerDataLanguagesWrapper.addClass('d-none');
                     $speakerDataDetails.addClass('d-none');
                     generateIndiaMap(language, 'ocr');
-                    updateLineGraph(language, activeDurationText, 'ocr',"Images labelled","Text validated");
+                    updateLineGraph(language, activeDurationText, 'ocr', "Images labelled","Text validated");
                     setSpeakerData(data.data, language, "dekho");
                     $speakersDataLoader.addClass('d-none');
                     $speakerDataDetails.removeClass('d-none');
