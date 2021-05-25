@@ -14,7 +14,7 @@ const {
   getLocaleString,
   performAPIRequest,
 } = require("./utils");
-const {showByHoursChart} = require('../../../build/js/common/common');
+const {showByHoursChart} = require('./home-page-charts');
 
 const CURRENT_INDEX = "currentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
