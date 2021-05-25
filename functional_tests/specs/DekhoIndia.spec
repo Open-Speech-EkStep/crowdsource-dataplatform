@@ -96,7 +96,7 @@
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
 * User clicks on  "need_change" button user should see "Captured Text" and "Your Edit" , "cancel-edit-button" should be  enabled
 * User click on "edit" field "submit-edit-button" should be enabled
-* user should see the Virtual Keyboard button
+//* user should see the Virtual Keyboard button
 * User skips the next "4" sentences user should land on Thank you page in "English"
 * User should see the "Validate More" button
 * when user clicks on the Validate more button user should no data available message
@@ -111,6 +111,5 @@
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
-* User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
-* User should see Bronze batch on Thank you page
+* User clicks on "like_button" he should see thank you page and should be able to see bronze Badge
 * User should see the "Validate More" button
