@@ -132,6 +132,10 @@ body {
 
 
 @media (max-width: 767px) {
+   .speakerDetails {
+   height: 500px;
+   overflow: auto;
+ }
   .d-none-mob {
     display: none;
   }
@@ -173,6 +177,10 @@ body {
  .top-back-btn{
    top: 20px;
    left: 35px;
+ }
+ .speakerDetails {
+   height: 700px;
+   overflow: auto;
  }
 
  .back-btn a:hover {

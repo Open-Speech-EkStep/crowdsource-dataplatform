@@ -20,4 +20,19 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
   return topLanguageArray.concat(topLanguages);
 }
 
-  module.exports =  {getContributedAndTopLanguage};
+function onActiveNavbar(value) {
+  const $header = $('#module_name');
+  localStorage.setItem(CURRENT_MODULE, value);
+  const allDivs = $header.children();
+  let targetedDivIndex = -1;
+  allDivs.each(function (index, element) {
+    if (element.getAttribute('value') === value) {
+      targetedDivIndex = index;
+    }
+  });
+  const previousActiveDiv = $header.find('.active');
+  previousActiveDiv && previousActiveDiv.removeClass('active');
+  allDivs[targetedDivIndex].classList.add('active');
+}
+
+  module.exports =  {getContributedAndTopLanguage, onActiveNavbar};

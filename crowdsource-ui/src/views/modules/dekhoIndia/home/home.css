@@ -186,6 +186,9 @@ h6,
 .w-90 {
   width: 90% !important;
 }
+.w-70 {
+  width: 70% !important;
+}
 [data-toggle='popover']::after {
   display: inline-block;
   margin-left: 0.255em;
