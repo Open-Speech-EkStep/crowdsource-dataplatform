@@ -43,7 +43,6 @@ function getCurrentIndex(lastIndex) {
   return getValue(currentIndexInStorage, lastIndex);
 }
 
-
 function uploadToServer(cb) {
   const fd = new FormData();
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
@@ -171,13 +170,16 @@ function getNextSentence() {
     loadAudio(`${cdn_url}/${sunoIndia.sentences[currentIndex].media_data}`);
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
+    enableButton($('#skip_button'))
   } else {
     const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
     Object.assign(sentencesObj, {sentences: []});
     localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
     resetValidation();
-    showThankYou();
+    // showThankYou();
+    disableSkipButton();
+    setTimeout(showThankYou, 1000);
   }
 }
 
@@ -301,11 +303,10 @@ function addListeners() {
     } catch (e) {
       console.log(e)
     }
-
   })
 
-
   $skipButton.on('click', () => {
+    disableSkipButton();
     $("#edit").attr("disabled", true);
     $("#edit-text-suno").removeClass("edit-text");
     if ($('#pause').hasClass('d-none')) {

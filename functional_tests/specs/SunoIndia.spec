@@ -26,7 +26,7 @@
 * When user clicks on submit button user should see " Thank you for contributing!"
 * When user clicks on Play button, Pause button should appear and when user clicks on pause, replay should appear
 * User click on "edit" field and type "ହାଏ" submit and cancel button should be enabled
-* When user clicks on submit button user should see " Thank you for contributing!"
+* When user clicks on submit button for Odia language user should see "Thank you for contributing!"
 * When user clicks on back button, user should land on home page
 * Check "Correct" option should be "enabled" on Home page
 * Navigate to "Correct" button and click "Correct" button
