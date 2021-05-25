@@ -108,7 +108,7 @@ limit 5`;
 left join contributors con on con.contributor_identifier=$1 and user_name=$2
 left join contributions cont on cont.dataset_row_id=dr.dataset_row_id and cont.contributed_by=con.contributor_id 
 where dr.media->>'language'=$4 and difficulty_level=$3 and type=$5 
-and (((state is null) or ((state='contributed' or state='validated') and not exists (select 1 from contributions where dataset_row_id=dr.dataset_row_id and contributions.media->>'language'=$6))) 
+and (((state is null) or ((state='contributed' or state='validated') and not exists (select 1 from contributions where dataset_row_id=dr.dataset_row_id and contributions.media->>'language'=$6  and action='completed'))) 
   and (cont.action is null or (coalesce(cont.action,'')='skipped' and cont.contributed_by!=con.contributor_id)))
  group by dr."dataset_row_id", dr.media->>'data' order by dr."dataset_row_id" limit 5`;
 

@@ -188,7 +188,6 @@ function setSentenceLabel(index) {
   animateCSS($sentenceLabel, 'lightSpeedIn');
   $('#original-text').text(originalText);
   $('#edit').text(originalText);
-  
 }
 
 function getNextSentence() {
@@ -205,7 +204,9 @@ function getNextSentence() {
     localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
     resetValidation();
-    showThankYou();
+    // showThankYou();
+    disableSkipButton()
+    setTimeout(showThankYou, 1000);
   }
 }
 
