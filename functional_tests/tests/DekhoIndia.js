@@ -5,7 +5,8 @@ const assert = require('assert');
 const {
     button,
     write,
-    click,
+	click,
+	image,
     link,
     clear,
     text,
@@ -101,9 +102,10 @@ step("User should see no data available message", async function() {
 });
 
 step("User clicks on <arg0> he should see thank you page and should be able to see bronze Badge", async function(arg0) {
-	await taiko.waitFor(1000)
+	await click(taiko.button({ id: arg0 }))
+	await taiko.waitFor(2000)
 	assert.ok(await text("You’ve earned your Bronze Badge").isVisible());
 	assert.ok(await text("National Language Translation Mission").isVisible());
 	assert.ok(await text("Share it with your friends and family").isVisible());
-	assert.ok(await Image({id:"reward-img"}).isVisible());
+	assert.ok(await image({id:"reward-img"}).isVisible());
 });
