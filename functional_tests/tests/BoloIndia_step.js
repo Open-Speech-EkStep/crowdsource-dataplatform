@@ -113,6 +113,20 @@ step("When user click on Lets Go Button, user should <arg0> see instructions to 
     }
 });
 
+step("When user click on Lets Go Button for Validate, user should <arg0> see instructions to record", async function (arg0) {
+    await click(taiko.button({ id: 'bolo-proceed-box' }))
+    await taiko.waitFor(1500)
+
+    if(arg0=="not")
+    {
+        assert.ok(! await text('Quick Tips').exists())
+    }
+    else
+    {
+        assert.ok(await text('Quick Tips').exists(), 'Not able to see instructions')
+    }
+});
+
 step("Add <usrnm> Username for Valiadtion", async function (usrnm) {
     if (await taiko.text('User Details').exists()) {
         const username = taiko.textBox({ id: 'bolo-username' })
