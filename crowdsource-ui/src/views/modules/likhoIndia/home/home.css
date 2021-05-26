@@ -186,9 +186,7 @@ h6,
 .w-90 {
   width: 90% !important;
 }
-.w-70 {
-  width: 70% !important;
-}
+
 [data-toggle='popover']::after {
   display: inline-block;
   margin-left: 0.255em;
@@ -440,11 +438,17 @@ body.modal-open .supreme-container {
     text-align: left;
     padding-left: 0px !important;
   }
+  .w-70 {
+    width: 100% !important;
+  }
 }
 
 @media (min-width: 767px) {
   .from-label {
     text-align: right;
+  }
+  .w-70 {
+    width: 70% !important;
   }
 }
 
