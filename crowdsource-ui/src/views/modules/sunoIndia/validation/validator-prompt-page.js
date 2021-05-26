@@ -228,7 +228,7 @@ function disableValidation() {
   const needChangeButton = isMobileDevice() ? $("#need_change_mob") : $("#need_change");
   const likeButton = isMobileDevice() ? $("#like_button_mob") : $("#like_button");
   updateDecisionButton(needChangeButton, ["white", "#007BFF", "#343A40"]);
-  updateDecisionButton(likeButton, ["white", "", "#343A40"]);
+  updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
   disableButton(likeButton)
   disableButton(needChangeButton)
 }
@@ -308,10 +308,10 @@ function addListeners() {
   const $skipButton = $(skipButton);
 
   likeButton.hover(() => {
-      updateDecisionButton(likeButton, ["#bfddf5", "", "#007BFF"]);
+      updateDecisionButton(likeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
     },
     () => {
-      updateDecisionButton(likeButton, ["white", "", "#343A40"]);
+      updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
     });
 
   needChangeButton.hover(() => {
@@ -328,8 +328,7 @@ function addListeners() {
   });
 
   likeButton.mousedown(() => {
-   
-    updateDecisionButton(likeButton, ["#007BFF", "", "white"]);
+    updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
   });
 
 
