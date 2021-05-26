@@ -212,7 +212,7 @@ describe('middleware test', function () {
         });
 
         test('should call res.send() if file object is not present but userInput is less than 5', function () {
-            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, userInput: "1234" } };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, userInput: "1" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
