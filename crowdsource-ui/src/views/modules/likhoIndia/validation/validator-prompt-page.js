@@ -211,10 +211,10 @@ function addListeners() {
   const $skipButton = $('#skip_button');
 
   likeButton.hover(() => {
-      updateDecisionButton(likeButton, ["#bfddf5", "", "#007BFF"]);
+      updateDecisionButton(likeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
     },
     () => {
-      updateDecisionButton(likeButton, ["white", "", "#343A40"]);
+      updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
     });
 
   needChangeButton.hover(() => {
@@ -231,7 +231,7 @@ function addListeners() {
   });
 
   likeButton.mousedown(() => {
-    updateDecisionButton(likeButton, ["#007BFF", "", "white"]);
+    updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
   });
 
 
