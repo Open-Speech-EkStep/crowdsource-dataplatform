@@ -18,8 +18,6 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
   keyboard = new Keyboard({
     onChange: input => onChange(input),
     onKeyPress: button => onKeyPress(button),
-    physicalKeyboardHighlight: true,
-    physicalKeyboardHighlightPress: true,
     syncInstanceInputs: true,
     ...layout
   });
@@ -31,13 +29,12 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
     keyboard.setInput(event.target.value);
     const currentModule = localStorage.getItem(CURRENT_MODULE);
     const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
-    // const isLanguage = lngtype(event.target.value);
-
+    const isLanguage = lngtype(event.target.value);
     const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
     localStorage.setItem("physicalKeyboard", true);
     $('#keyboardBox').addClass('d-none');
 
-    if (event.target.value.length > 0) {
+    if (event.target.value.length > 0 && isLanguage) {
       callBack1();
       $submitEditButton.removeAttr('disabled');
       if($cancelButton) {
@@ -49,15 +46,19 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
       }
 
     }
-    // else if(!isLanguage){
-    //     $("#wrong-language").removeClass("d-none");
-    //     $submitEditButton.attr('disabled', true);
-    //     const children = $submitEditButton.children().children();
-    //     children[0].setAttribute("fill", '#D7D7D7');
-    //     setTimeout(() => {
-    //       $("#wrong-language").addClass("d-none");
-    //     }, 2000)
-    // }
+    else if(!isLanguage){
+      setTimeout(() => {
+        $("#wrong-language").removeClass("d-none");
+      }, 200);
+        $submitEditButton.attr('disabled', true);
+        if (!isMobileDevice() || currentModule != "suno") {
+        const children = $submitEditButton.children().children();
+        children[0].setAttribute("fill", '#D7D7D7');
+        }
+        setTimeout(() => {
+          $("#wrong-language").addClass("d-none");
+        }, 2000);
+    }
     else {
       callBack2()
       $submitEditButton.attr('disabled', true);
@@ -73,11 +74,12 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
 
   function onChange(input) {
     document.querySelector(".edit-area").value = input;
+    const isLanguage = lngtype(input);
     const currentModule = localStorage.getItem(CURRENT_MODULE);
     const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
     const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
     localStorage.setItem("physicalKeyboard", false);
-    if (input.length > 0) {
+    if (input.length > 0 && isLanguage) {
       callBack1();
       if($cancelButton) {
         $cancelButton.removeAttr('disabled');
@@ -87,7 +89,20 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
         const children = $submitEditButton.children().children();
         children[0].setAttribute("fill", '#007BFF');
       }
-    } else {
+    } else if(!isLanguage){
+      setTimeout(() => {
+        $("#wrong-language").removeClass("d-none");
+      }, 200);
+      $submitEditButton.attr('disabled', true);
+      if (!isMobileDevice() || currentModule != "suno") {
+        const children = $submitEditButton.children().children();
+        children[0].setAttribute("fill", '#D7D7D7');
+      }
+        setTimeout(() => {
+          $("#wrong-language").addClass("d-none");
+        }, 2000);
+    } 
+    else {
       callBack2();
       if($cancelButton) {
         $cancelButton.attr('disabled', true);
@@ -122,7 +137,8 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
 
   const toggleCapsLock = function () {
     const capsLockBtn = $(".hg-layout-shift .hg-row .hg-button-lock")[0];
-    if (capsLockBtn) {
+    if (capsLockBtn && capsLockBtn.style) {
+      console.log(capsLockBtn);
       capsLockBtn.style.backgroundColor = "greenYellow";
     }
   }
