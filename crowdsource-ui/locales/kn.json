@@ -428,10 +428,18 @@
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"./validator-badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"./validator-badges.html\">Know more</a>",
 	"Back to Bolo India Home": "Back to Bolo India Home",
 	"<span id=\"current_badge_name_1\"></span> contributor level achieved for validating <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_name_1\"></span> contributor level achieved for validating <span id=\"current_badge_count\"></span> sentences.",
-	"Please select correct lanaguge keyboard for typing...": "Please select correct lanaguge keyboard for typing...",
-	"Please select correct language keyboard for typing...": "Please select correct language keyboard for typing...",
-	"Please type in your chosen language": "Please type in your chosen language",
+	"Contribute your voice": "Contribute your voice",
+	"Validate what they say": "Validate what they say",
+	"By proceeding ahead you agree to the <a href=\"../Terms and Conditions\"</a>": "By proceeding ahead you agree to the <a href=\"../Terms and Conditions\"</a>",
+	"By proceeding ahead you agree to the <a href=\"../Terms and Conditions\"</a> Terms and Conditions": "By proceeding ahead you agree to the <a href=\"../Terms and Conditions\"</a> Terms and Conditions",
+	"By proceeding ahead you agree to the <a href=\"../Terms and Conditions\"</a>Terms and Conditions": "By proceeding ahead you agree to the <a href=\"../Terms and Conditions\"</a>Terms and Conditions",
+	"By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"</a> Terms and Conditions": "By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"</a> Terms and Conditions",
+	"By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"</a>Terms and Conditions": "By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"</a>Terms and Conditions",
 	"Start Recording": "Start Recording",
 	"Stop Recording": "Stop Recording",
-	"Re-record": "Re-record"
+	"Re-record": "Re-record",
+	"Please type in your chosen language": "Please type in your chosen language",
+	"By proceeding ahead you agree to the <a href=\"./terms-and-conditions.html\"> Terms and Conditions": "By proceeding ahead you agree to the <a href=\"./terms-and-conditions.html\"> Terms and Conditions",
+	"By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"> Terms and Conditions": "By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"> Terms and Conditions",
+	"By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"> Terms and Conditions</a>"
 }
