@@ -75,7 +75,8 @@ step("User clicks on  <arg0> button user should see <arg1> and <arg2> , <arg3> s
 step("User click on <textfield> field <submitbtn> should be enabled", async function(textfield, submitbtn) {  
         const text = taiko.textBox({ id: textfield })
         await taiko.waitFor(500)
-        await write('मुगल शासक', into(text))
+        await write('ಗಹಹಜಲಲ', into(text))
+        await taiko.waitFor(500)
         assert.ok(! await taiko.button({ id: submitbtn }).isDisabled());
 });
 
@@ -247,4 +248,18 @@ step("User plays the audio , <needchange> should be enabled & <arg1> should be d
     // Once the audio is complete , then correct button should be enabled
     await taiko.waitFor(5000)
     assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
+});
+
+step("When user click on Lets Go Button, user should <arg0> see instructions to record for Dekho India flow", async function (arg0) {
+    await click(taiko.button({ id: 'proceed-box' }))
+    await taiko.waitFor(1500)
+    
+    if(arg0=="not")
+    {
+        assert.ok(! await text('Quick Tips').exists())
+    }
+    else
+    {
+    assert.ok(await text('Quick Tips').exists(), 'Not able to see instructions')
+    }
 });
