@@ -1,24 +1,20 @@
-const { getSentencesForProfanityChecking, updateProfanityStatus} = require('./dbOperations');
+const { getSentencesForProfanityChecking, updateProfanityStatus } = require('./dbOperations');
 
-const profanityCheckerApi = function(router){
+const profanityCheckerApi = function (router) {
 
-    router.get('/sentences-for-profanity-check/:type',async (req,res)=>{
+    router.get('/sentences-for-profanity-check/:type', async (req, res) => {
         const type = req.params.type;
-        const userId = req.cookies.userId;
         const userName = req.query.username || '';
-
-        sentences = await getSentencesForProfanityChecking(userName,type)
-        res.send(sentences)
+        const language = req.query.language || '';
+        const sentences = await getSentencesForProfanityChecking(userName, type, language)
+        res.status(200).send({ data: sentences, count: sentences.length });
     })
 
-    router.post('/profanity-status/:type',async (req,res)=>{
-        const type = req.params.type;
-        const profanityStatus = req.params.profanityStatus;
-        const userId = req.cookies.userId;
-        const userName = req.query.username;
-        const sentenceId = req.params.sentenceId;
+    router.put('/profanity-status/:type', async (req, res) => {
+        // const type = req.params.type;
+        const { profanityStatus, userName, sentenceId } = req.body;
 
-        sentences = await updateProfanityStatus(userName,type,sentenceId,profanityStatus)
+        await updateProfanityStatus(userName, sentenceId, profanityStatus)
         res.sendStatus(200)
     })
 }

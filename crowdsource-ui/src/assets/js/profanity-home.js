@@ -1,3 +1,4 @@
+const {CONTRIBUTION_LANGUAGE} = require('./constants');
 
 function testUserName(username) {
     let mailformat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -36,6 +37,7 @@ $(document).ready(function () {
         console.log(speakerDetails);
         localStorage.setItem('profanityUserDetails', JSON.stringify(speakerDetails));
         localStorage.setItem('profanityCheckLanguage', language);
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
         location.href = `/en/${type}/profanity.html`;
     });
     // $(window).unload(function(){

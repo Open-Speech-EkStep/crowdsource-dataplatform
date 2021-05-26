@@ -12,16 +12,15 @@ const {
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
-const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {showUserProfile} = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice} = require('../common/common');
+const { isMobileDevice} = require('../common/common');
+
 const speakerDetailsKey = 'speakerDetails';
 
 const sunoCountKey = 'sunoCount';
 const currentIndexKey = 'sunoCurrentIndex';
 const sentencesKey = 'sunoSentencesKey';
-let localeStrings;
 window.sunoIndia = {};
 
 let playStr = "";
@@ -42,39 +41,6 @@ function getCurrentIndex(lastIndex) {
   return getValue(currentIndexInStorage, lastIndex);
 }
 
-
-function uploadToServer(cb) {
-  const fd = new FormData();
-  const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
-  const speakerDetails = JSON.stringify({
-    userName: localSpeakerDataParsed.userName,
-  });
-  fd.append('userInput', sunoIndia.editedText);
-  fd.append('speakerDetails', speakerDetails);
-  fd.append('language', localSpeakerDataParsed.language);
-  fd.append('sentenceId', sunoIndia.sentences[currentIndex].dataset_row_id);
-  fd.append('state', localStorage.getItem('state_region') || "");
-  fd.append('country', localStorage.getItem('country') || "");
-  fetch('/store', {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    body: fd,
-  })
-    .then((res) => res.json())
-    .then((result) => {
-    })
-    .catch((err) => {
-
-      console.log(err);
-    })
-    .then((finalRes) => {
-      if (cb && typeof cb === 'function') {
-        cb();
-      }
-    });
-}
-
 function enableButton(element) {
   element.children().removeAttr("opacity")
   element.removeAttr("disabled")
@@ -88,31 +54,22 @@ const setAudioPlayer = function () {
   const textPlay = $('#audioplayer-text_play');
   const textReplay = $('#audioplayer-text_replay');
   const textPause = $('#audioplayer-text_pause');
-  const cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : $("#cancel-edit-button");
-
 
   myAudio.addEventListener("ended", () => {
     hideElement(pause)
     showElement(replay)
     hideElement(textPause);
     showElement(textReplay);
-    cancelButton.removeAttr("disabled");
-    $("#edit").removeAttr("disabled");
   });
 
   play.on('click', () => {
-    hideElement($('#default_line'))
     playAudio();
-    $("#edit").removeAttr("disabled");
-    $("#edit-text-suno").addClass("edit-text");
   });
 
   pause.on('click', pauseAudio);
 
   replay.on('click', () => {
     replayAudio();
-    $("#edit").removeAttr("disabled");
-    $("#edit-text-suno").addClass("edit-text");
   });
 
   function playAudio() {
@@ -163,11 +120,6 @@ function getNextSentence() {
   }
 }
 
-function disableButton(button) {
-  button.children().attr("opacity", "50%");
-  button.attr("disabled", "disabled");
-}
-
 function resetValidation() {
   const textPlay = $('#audioplayer-text_play');
   const textReplay = $('#audioplayer-text_replay');
@@ -179,19 +131,14 @@ function resetValidation() {
   hideElement($(replayStr))
   hideElement($(pauseStr))
   showElement($(playStr))
-  showElement($('#default_line'))
 }
 
-const closeEditor = function () {
-  hideElement($('#keyboardBox'));
-}
-
-const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancelButton);
+// const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+// showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancelButton);
 
 function markContributionSkipped() {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
+  const speakerDetails = JSON.parse(localStorage.getItem('profanityUserDetails'));
 
   const reqObj = {
     sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
@@ -215,91 +162,80 @@ function markContributionSkipped() {
     })
 }
 
-function addListeners() {
-
-  const $skipButton = isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button');
-  const $submitButton = isMobileDevice() ?  $('#submit-edit-button_mob') :  $('#submit-edit-button');
-  const cancelButton = isMobileDevice() ? $('#cancel-edit-button_mob') : $('#cancel-edit-button');
-
-  $("#edit").focus(function () {
-    const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
-
-    if(!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false'){
-      showElement($('#keyboardBox'));
-    }
+function updateProfanityState(userName, sentenceId, language, state){
+  const fd = new FormData();
+  // fd.append('language', language);
+  fd.append('sentenceId', sentenceId);
+  fd.append('profanityStatus', state);
+  fd.append('userName', userName);
+  return fetch(`/profanity-status/asr`, {
+    method: 'PUT',
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      userName: userName,
+      profanityStatus: state,
+      sentenceId: sentenceId
+    })
   });
+}
 
-  cancelButton.on('click', () => {
-    $("#edit").val("");
-    setInput("");
-    showElement($('#progress-row'))
-    const $cancelEditButton = cancelButton;
-    $cancelEditButton.attr('disabled', true);
-    const $submitEditButton = isMobileDevice() ? $('#submit-edit-button_mob') : $('#submit-edit-button');
-    $submitEditButton.attr('disabled', true);
-    if(!isMobileDevice()) {
-      const children = $submitEditButton.children().children();
-      children[0].setAttribute("fill", '#D7D7D7');
-    }
-    closeEditor();
-  })
-
-  $submitButton.on('click', () => {
-    setInput("");
-    $("#edit").attr("disabled", true);
-    $("#edit-text-suno").removeClass("edit-text");
-    hideElement($('#keyboardBox'));
+function onProfanityUpdated($skipButton, $submitButton, cancelButton){
     hideElement(cancelButton);
     hideElement($submitButton)
     hideElement($(audioPlayerBtn))
     hideElement($skipButton)
     showElement($('#thankyou-text'));
-    sunoIndia.editedText = $("#edit").val();
-    $("#edit").css('pointer-events', 'none');
-    $(cancelButton).attr("disabled", true);
-    const $submitEditButton = $('#submit-edit-button');
-    $submitEditButton.attr('disabled', true);
-    if(!isMobileDevice()) {
-      const children = $submitEditButton.children().children();
-      children[0].setAttribute("fill", '#D7D7D7');
-    }
     showElement($('#progress-row'))
     try {
-      uploadToServer();
       setTimeout(() => {
         hideElement($('#thankyou-text'));
         showElement(cancelButton);
         showElement($submitButton);
         showElement($(audioPlayerBtn))
         showElement($skipButton)
-        $("#edit").css('pointer-events', 'unset');
-        $("#edit").val("");
-        closeEditor();
         getNextSentence();
       }, 2000)
     } catch (e) {
-      console.log(e)
     }
+}
 
+function invokeProfanityStateUpdate(state, $skipButton, $submitButton, cancelButton){
+  const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
+    updateProfanityState(localSpeakerDataParsed.userName, sunoIndia.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
+      .then(res=>{
+        onProfanityUpdated($skipButton, $submitButton, cancelButton);
+      }).catch(err=>{
+        console.log(err);
+      })
+}
+
+function addListeners() {
+
+  const $skipButton = isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button');
+  const $submitButton = isMobileDevice() ?  $('#submit-edit-button_mob') :  $('#submit-edit-button');
+  const cancelButton = isMobileDevice() ? $('#cancel-edit-button_mob') : $('#cancel-edit-button');
+
+  cancelButton.on('click', () => {
+    invokeProfanityStateUpdate(false, $skipButton, $submitButton, cancelButton);
+  })
+
+  $submitButton.on('click', () => {
+    invokeProfanityStateUpdate(true, $skipButton, $submitButton, cancelButton);
   })
 
 
   $skipButton.on('click', () => {
-    $("#edit").attr("disabled", true);
-    $("#edit-text-suno").removeClass("edit-text");
     if ($('#pause').hasClass('d-none')) {
       $('#pause').trigger('click');
     }
-    $('#edit').val("");
-    setInput("");
-    $('#submit-edit-button').attr('disabled', true);
-    markContributionSkipped();
+    // markContributionSkipped();
     getNextSentence();
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
-    cancelButton.attr("disabled", true);
-    closeEditor();
-
   })
 
   $skipButton.hover(() => {
@@ -318,80 +254,28 @@ const loadAudio = function (audioLink) {
   $('#my-audio').attr('src', audioLink)
 };
 
-function disableSkipButton() {
-  const $skipButton = isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button');
-  $skipButton.removeAttr('style');
-  disableButton($skipButton)
-}
-
-const getAudioClip = function (contributionId) {
-  hideAudioRow();
-  disableSkipButton();
-  const source = 'contribute';
-  fetch(`/media-object/${source}/${contributionId}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  }).then((stream) => {
-    stream.arrayBuffer().then((buffer) => {
-      const blob = new Blob([buffer], {type: "audio/wav"});
-      // loadAudio(URL.createObjectURL(blob))
-      const fileReader = new FileReader();
-      fileReader.onload = function (e) {
-        loadAudio(e.target.result);
-        showAudioRow();
-        enableButton(isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button'));
-      }
-      fileReader.readAsDataURL(blob);
-    });
-  }).catch((err) => {
-    console.log(err)
-    showAudioRow();
-  });
-}
-
-function hideAudioRow() {
-  showElement($('#loader-audio-row'));
-  hideElement($('#audio-row'))
-  showElement($('#loader-play-btn'));
-  hideElement($(audioPlayerBtn))
-}
-
-function showAudioRow() {
-  hideElement($('#loader-audio-row'));
-  showElement($('#audio-row'));
-  hideElement($('#loader-play-btn'));
-  showElement($(audioPlayerBtn))
-}
-
-function showThankYou() {
-  window.location.href = './thank-you.html';
+function showThankYou() { 
+  $("#profanityThankYouModal").modal('show');
 }
 
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
   hideElement($('#sentences-row'));
   hideElement($('#audio-row'))
-  hideElement($('#virtualKeyBoardBtn'));
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
   showElement($('#no-sentences-row'))
   hideElement($('#skip_btn_row'));
-  hideElement($('#validation-container'));
   hideElement($('#report_btn'));
   hideElement($("#test-mic-speakers"));
   hideElement($('#instructive-msg'));
-  hideElement($('#editor-row'));
   hideElement($('#thankyou-text'));
-  hideElement($('#keyboardBox'));
-  $("#validation-container").removeClass("validation-container");
 }
 
 const handleSubmitFeedback = function () {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const otherText = $("#other_text").val();
-  const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
+  const speakerDetails = JSON.parse(localStorage.getItem('profanityUserDetails'));
   const $skipButton = isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button');
 
   const reqObj = {
@@ -424,16 +308,6 @@ const initialize = function () {
     updateLocaleLanguagesDropdown(language);
   }
 
-  $("#start_contributing_id").on('click', function () {
-    const data = localStorage.getItem("speakerDetails");
-    if (data !== null) {
-      const speakerDetails = JSON.parse(data);
-      speakerDetails.language = language;
-      localStorage.setItem("speakerDetails", JSON.stringify(speakerDetails));
-    }
-    location.href = './home.html';
-  });
-
   const $reportModal = $("#report_sentence_modal");
 
   $("#report_submit_id").on('click', handleSubmitFeedback);
@@ -465,52 +339,40 @@ const initialize = function () {
 };
 
 function executeOnLoad() {
-  hideElement($('#keyboardBox'));
   toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
-  const $validationInstructionModal = $("#validation-instruction-modal");
-  const $errorModal = $('#errorModal');
   const $loader = $('#loader');
   const $pageContent = $('#page-content');
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  $('#keyboardLayoutName').text(contributionLanguage);
-  localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-  if (contributionLanguage) {
+  if (contributionLanguage) { 
     updateLocaleLanguagesDropdown(contributionLanguage);
   }
 
   fetchLocationInfo().then(res => {
+    console.log(res);
     return res.json()
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
   }).catch(console.log);
+
+
+
   try {
-    const localSpeakerData = localStorage.getItem(speakerDetailsKey);
+    const localSpeakerData = localStorage.getItem('profanityUserDetails');
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
+
     const localSentences = localStorage.getItem(sentencesKey);
     const localSentencesParsed = JSON.parse(localSentences);
 
     setPageContentHeight();
-    $("#instructions_close_btn").on("click", function () {
-      $validationInstructionModal.addClass("d-none");
-      setFooterPosition();
-    })
-
-    $errorModal.on('show.bs.modal', function () {
-      $validationInstructionModal.addClass("d-none");
-      setFooterPosition();
-
-    });
-    $errorModal.on('hidden.bs.modal', function () {
-      location.href = './home.html#speaker-details';
-    });
 
     if (!localSpeakerDataParsed) {
-      location.href = './home.html#speaker-details';
+      location.href = '/profanity/sunoindia';
       return;
     }
+
     showUserProfile(localSpeakerDataParsed.userName)
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName
@@ -525,15 +387,10 @@ function executeOnLoad() {
       initialize();
     } else {
       localStorage.removeItem(currentIndexKey);
-      const type = 'asr';
-      fetch(`/media/${type}`, {
-        method: 'POST',
+      fetch(`/sentences-for-profanity-check/asr?username=${localSpeakerDataParsed.userName}&language=${contributionLanguage}`, {
+        method: 'GET',
         credentials: 'include',
         mode: 'cors',
-        body: JSON.stringify({
-          userName: localSpeakerDataParsed.userName,
-          language: contributionLanguage,
-        }),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -547,15 +404,13 @@ function executeOnLoad() {
           }
         })
         .then((sentenceData) => {
+          console.log("SENTENCE", sentenceData)
           if (sentenceData.data.length === 0) {
             showNoSentencesMessage();
             return;
           }
           if (!isExistingUser) {
-            //$instructionModal.modal('show');
-            $validationInstructionModal.removeClass("d-none");
             setFooterPosition();
-            // toggleFooterPosition();
           }
           $pageContent.removeClass('d-none');
           sunoIndia.sentences = sentenceData.data;
@@ -574,7 +429,6 @@ function executeOnLoad() {
         })
         .catch((err) => {
           console.log(err);
-          $errorModal.modal('show');
         })
         .then(() => {
           $loader.hide();
@@ -582,7 +436,6 @@ function executeOnLoad() {
     }
   } catch (err) {
     console.log(err);
-    $errorModal.modal('show');
   }
 }
 
@@ -605,14 +458,12 @@ if(isMobileView){
 
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
-  hideElement($('#keyboardBox'));
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {
     executeOnLoad();
   });
   detectDevice();
-  
 });
 
 module.exports = {
