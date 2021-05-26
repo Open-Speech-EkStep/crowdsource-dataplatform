@@ -1,4 +1,4 @@
-<div class="modal fade" data-backdrop="static" data-keyboard="false" id="profanityUserModal" tabindex="-1" role="dialog" aria-labelledby="profanitySpeakerDetail" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="profanityUserModal" tabindex="-1" role="dialog" aria-labelledby="profanityUserModal" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content p-4 border-primary border-2">
             <div class="modal-header d-block border-0">
@@ -21,7 +21,7 @@
                             <%= __('Select Your Preferred Language') %>
                         </option>
                         <% LANGUAGES.forEach(function(lang) { %>
-                            <option value="<%= lang.id %>">
+                            <option value="<%= lang.value %>">
                                 <%= lang.text %>
                             </option>
                             <% }) %>

@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../../css/sunoIndia/profanity.css">
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
@@ -24,6 +23,7 @@
 
 <body>
 <%- include('../common/headerWithoutNavBar.ejs',{path:"../", MODULE:"Suno India", PAGE_TITLE:"Transcribe"}) %>
+<%- include('./profanity-thank-you.ejs',{type:"sunoindia"}) %>
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
@@ -50,13 +50,10 @@
             </div>
             <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-sentences-row">
                 <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-bold">
-                        <%= __('Thank you for your enthusiasm to transcribe the recordings.') %>
+                        <%= __('Thank you for contributing.') %>
                     </label><br><br>
                     <p>
                         <%- __('We do not have any data in <span id="spn-validation-language"></span> language. Please try again later.') %>
-                    </p>
-                    <p class="d-none">
-                        <%= __('Would you also like to contribute your voice?') %>
                     </p>
                     <div class="row justify-content-center mt-5">
                         <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
@@ -84,10 +81,10 @@
             </div>
             <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 mx-5 mt-5 web-view" id="validation-button-row">
                 <div class="col-lg-8 col-md-8 flex-lg-row flex-md-row flex-column d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2">
-                    <button class="w-100 btn align-self-start mb-2" disabled="disabled" id="cancel-edit-button">
+                    <button class="w-100 btn align-self-start mb-2" id="cancel-edit-button">
                         <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
-                            <text x="43" y="43" font-family="lato" font-size="24" fill="#343A40" disabled="disabled" style="text-align:center">
+                            <text x="43" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">
                                 Not Profane
                             </text>
                         </svg>
@@ -107,10 +104,10 @@
                             <%= __('Pause') %>
                         </h3>
                     </div>
-                    <button class="btn align-self-start mb-2 w-100" disabled="disabled" id="submit-edit-button">
+                    <button class="btn align-self-start mb-2 w-100" id="submit-edit-button">
                         <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="208" height="66" rx="33" fill="#D7D7D7"/>
-                            <text x="65" y="43" font-family="lato" font-size="24" fill="white" style="text-align:center">
+                            <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
+                            <text x="65" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">
                                 Profane
                             </text>
                         </svg>
@@ -158,7 +155,6 @@
                     <%= __('Skip') %>
                 </button>
             </div>
-            <%- include ../common/virtualKeyboard %>
             <div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
                 <div class="col-12 col-sm-8 col-lg-7">
                     <div class="progress mt-1">
@@ -173,9 +169,6 @@
                 </div>
             </div>
         </div>
-        <div class="row mx-0 my-3 p-3" style="justify-content:flex-end">
-            <%- include ../common/virtualKeyboardBtn.ejs %>
-        </div>
         <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the sentence", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
         <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
@@ -183,7 +176,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
 
-        
+        <script src="../../js/sunoIndia/profanity.js"></script>
         <script src="../../js/common/speakerTesting.js"></script>
 
     </div>
