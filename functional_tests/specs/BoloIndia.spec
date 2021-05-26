@@ -19,23 +19,23 @@
 * User should see the "Validate More" button
 
 ## Validate Contributor flow
-* Select translation language as "English"
+//* Select translation language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
 * When user click on Lets Go Button, user should "" see instructions to record
 * User should be able to close the Instructions , user should see a sentence , Skip button , Start Recording Button , username,Test Mic and speaker button
 * When user clicks on the Test Microphone Speaker button, user should see "play-speaker" and "test-mic-button" buttons
 * When user clicks on the cross button , pop up should close and user should see the Test Mic and speaker button
-* When user clicks on "START RECORDING" button, "STOP RECORDING" button should appear
-* When user clicks on "STOP RECORDING" button, "RE-RECORD" button should appear
-* When user clicks on "RE-RECORD" button, "STOP RECORDING" button should appear
-* When user clicks on "STOP RECORDING" button, "NEXT" button should appear
-* When user clicks on "NEXT" button, "SKIP" button should appear
+* When user clicks on "Start Recording" button, "Stop Recording" button should appear
+* When user clicks on "Stop Recording" button, "Re-record" button should appear
+* When user clicks on "Re-record" button, "Stop Recording" button should appear
+* When user clicks on "Stop Recording" button, "Submit" button should appear
+* When user clicks on "Submit" button, "Skip" button should appear
 * When user skips all the rest of the "4" sentences , User should see Thank you Page
 * when user clicks on the Contribute More button, user should not see the Instructions page again
 
 ## Validate the Speaker Details pop-up in Contribute section
-* Select translation language as "English"
+//* Select translation language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
 * Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present
 * if a user enter username and click on Not you change user button , the field should be cleared
@@ -43,7 +43,7 @@
 * Speaker details popup should appear and close button should close the pop up
 
 ## Check Dashboard Page
-* Select translation language as "English"
+//* Select translation language as "English"
 * When user clicks on View all Details buttton , user shall land on Dashboard page
 * user should be able to see "Progress Chart" , "Gender Distribution" , "State Wise distribution" , "Age Group Distribution"
 * When user select "हिंदी" Language from dropdown then "languages contributed" should not visible
@@ -55,7 +55,7 @@
 * When user clicks on the go to home page button , user should see the home page
 
 ## Validate Report feature
-* Select translation language as "English"
+//* Select translation language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
 * When user click on Lets Go Button, user should "" see instructions to record

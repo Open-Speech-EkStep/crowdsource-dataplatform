@@ -132,7 +132,7 @@ step("Add <usrnm> Username for Valiadtion", async function (usrnm) {
         const username = taiko.textBox({ id: 'bolo-username' })
         await taiko.waitFor(700)
         await clear(taiko.textBox({id:'bolo-username'}));
-        await taiko.waitFor(500)
+        await taiko.waitFor(300)
         await write(usrnm, into(username))
         await taiko.waitFor(500)
     }
