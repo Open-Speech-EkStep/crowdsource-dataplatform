@@ -132,8 +132,13 @@ router.get('/', function (req, res) {
     res.redirect('en/home.html');
 });
 
-router.get('/profanity', function (req, res) {
-    res.redirect('en/profanity-boloindia.html');
+router.get('/profanity/:type', function (req, res) {
+    const type = req.params.type;
+    if(!['sunoindia','likhoindia','dekhoindia'].includes(type)){
+       res.redirect('/en/not-found.html');
+       return; 
+    }
+    res.redirect(`/en/profanity-home.html?type=${type}`);
 });
 
 router.get('/getDetails/:language', async function (req, res) {

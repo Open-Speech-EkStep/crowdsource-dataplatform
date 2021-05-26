@@ -1,17 +1,16 @@
-<div class="modal fade" id="profanityUserModal" tabindex="-1" role="dialog" aria-labelledby="profanitySpeakerDetail" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="profanityUserModal" tabindex="-1" role="dialog" aria-labelledby="profanitySpeakerDetail" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content p-4 border-primary border-2">
-            <div class="margin-left-auto"><button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
             <div class="modal-header d-block border-0">
                 <h1 class="modal-title text-center">
                     <%= __('User Details') %>
                 </h1>
             </div>
             <div class="modal-body px-6" id="speaker-details">
-                <div class="form-group mt-5">
+                <div class="form-group mt-3">
                     <label for="username" class="form-label">
                         <%= __('Username') %>
-                    </label> <input class="form-control" maxlength="12" id="username" data-toggle="tooltip" placeholder="<%= __('Enter preferred username') %>" title="<% __('Username cannot be more than 12 characters') %>">
+                    </label> <input class="form-control" type="email" id="username" data-toggle="tooltip" placeholder="<%= __('Enter preferred username') %>">
                 </div>
                 <div class="form-group">
                     <label for="preferred-language" class="form-label">
@@ -28,8 +27,9 @@
                             <% }) %>
                     </select>
                 </div>
-                <div class="row justify-content-center mt-3">
-                    <div class="col-12" data-toggle="tooltip" title="<%= __('Please validate any error message before proceeding')%>"><button type="button" id="proceed-box" class="btn btn-primary h6 shadow w-100 rounded p-3" data-toggle="modal" data-target="#languageModal">
+                <div class="row justify-content-center mt-4">
+                    <div class="col-12" data-toggle="tooltip" title="<%= __('Please validate any error message before proceeding')%>">
+                        <button type="button" id="proceed-box" class="btn btn-primary h6 shadow w-100 rounded p-2" data-toggle="modal" data-target="#languageModal">
                             <%= __('LET\'S GO') %>
                         </button></div>
                 </div>
