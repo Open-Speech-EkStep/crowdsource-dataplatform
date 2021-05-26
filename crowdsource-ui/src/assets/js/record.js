@@ -117,10 +117,10 @@ const initialize = () => {
         ];
     }
 
-    $nextBtnToolTip.tooltip({
-        container: 'body',
-        placement: screen.availWidth > 900 ? 'right' : 'bottom',
-    });
+    // $nextBtnToolTip.tooltip({
+    //     container: 'body',
+    //     placement: screen.availWidth > 900 ? 'right' : 'bottom',
+    // });
 
     const animateCSS = ($element, animationName, callback) => {
         $element.addClass(`animated ${animationName}`);
@@ -163,13 +163,19 @@ const initialize = () => {
 
     const handleAudioDurationError = (duration) => {
         if (duration < 2) {
-            $nextBtnToolTip.tooltip('enable');
+            // $nextBtnToolTip.tooltip('enable');
             $nextBtn.prop('disabled', true).addClass('point-none');
+            $nextBtn.addClass('btn-secondary');
+            $nextBtn.removeClass('btn-primary');
+            $nextBtn.css('opacity',"0.3");
             $audioSmallError.removeClass('d-none');
             return false;
         } else {
-            $nextBtnToolTip.tooltip('disable');
+            // $nextBtnToolTip.tooltip('disable');
             $nextBtn.removeAttr('disabled').removeClass('point-none');
+            $nextBtn.removeClass('btn-secondary');
+            $nextBtn.addClass('btn-primary');
+            $nextBtn.css('opacity',"1");
             $audioSmallError.addClass('d-none');
             return true;
         }
@@ -194,6 +200,9 @@ const initialize = () => {
                 $startRecordBtn.addClass('d-none');
                 $skipBtn.prop('disabled', true);
                 $nextBtn.prop('disabled', true);
+                $nextBtn.addClass('btn-secondary');
+                $nextBtn.removeClass('btn-primary');
+                $nextBtn.css('opacity',"0.3");
                 $startRecordRow.removeClass('d-none');
                 $stopRecordBtn.removeClass('d-none');
                 $recordingRow.removeClass('d-none');
@@ -204,7 +213,7 @@ const initialize = () => {
                 $audioPlayer.addClass('d-none');
                 $player.trigger('pause');
                 $visualizer.removeClass('d-none');
-                $nextBtnToolTip.tooltip('disable');
+                // $nextBtnToolTip.tooltip('disable');
                 $audioSmallError.addClass('d-none');
 
                 gumStream = stream;
@@ -368,6 +377,9 @@ const initialize = () => {
         $audioPlayer.addClass('d-none');
         $player.trigger('pause');
         $nextBtn.prop('disabled', true);
+        $nextBtn.addClass('btn-secondary');
+        $nextBtn.removeClass('btn-primary');
+        $nextBtn.css('opacity',"0.3");
         $reRecordBtn.addClass('d-none');
         $("#straight-line-row").removeClass('d-none');
         $startRecordRow.removeClass('d-none');
