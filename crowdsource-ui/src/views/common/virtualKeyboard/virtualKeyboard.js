@@ -29,7 +29,7 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
     keyboard.setInput(event.target.value);
     const currentModule = localStorage.getItem(CURRENT_MODULE);
     const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
-    const isLanguage = lngtype(event.target.value);
+    const isLanguage = event.target.value ? lngtype(event.target.value) : true;
     const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
     localStorage.setItem("physicalKeyboard", true);
     $('#keyboardBox').addClass('d-none');
@@ -74,7 +74,7 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
 
   function onChange(input) {
     document.querySelector(".edit-area").value = input;
-    const isLanguage = lngtype(input);
+    const isLanguage = input ? lngtype(input) : true;
     const currentModule = localStorage.getItem(CURRENT_MODULE);
     const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
     const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
@@ -113,9 +113,6 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
         children[0].setAttribute("fill", '#D7D7D7');
       }
     }
-    // keyboard.setOptions({
-    //
-    // });
   }
 
   function onKeyPress(button) {
