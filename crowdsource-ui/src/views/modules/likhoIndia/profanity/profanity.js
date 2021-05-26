@@ -62,7 +62,6 @@ function updateProfanityState(userName, sentenceId, language, state){
 function onProfanityUpdated(){
   hideElement($('#cancel-edit-button'));
   hideElement($('#submit-edit-button'))
-  hideElement($('#audio-player-btn'))
   hideElement($('#skip_button'))
   showElement($('#thankyou-text'));
   showElement($('#progress-row'))
