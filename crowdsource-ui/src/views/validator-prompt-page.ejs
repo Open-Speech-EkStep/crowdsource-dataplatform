@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="../css/validator-prompt.css">
     <link rel="stylesheet" type="text/css" href="../css/common.css">
     <link rel="stylesheet" type="text/css" href="../css/mic-speaker-testing.css">
+    <style>.btn.focus,.btn:focus{outline:0;box-shadow:0 0}</style>
 </head>
 
 <body>
@@ -31,7 +32,7 @@
                     arrow_back
                     </span>
                             <span class="back-text"><%= __('Back') %></span>
-                    
+
                         </a>
                     </button>
                 </div>
@@ -40,9 +41,11 @@
             </div>
             <%- include modals/mic-speaker-testing.ejs %>
             <div class="row justify-content-center" id="instructions-row">
-                <div id="instructions-link" class="d-flex justify-content-end align-items-center d-none"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007BFF" style="cursor:pointer" class="bi bi-info-circle-fill d-none" viewBox="0 0 16 16">
+                <div id="instructions-link" class="d-flex justify-content-end align-items-center d-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007BFF" style="cursor:pointer" class="bi bi-info-circle-fill d-none" viewBox="0 0 16 16">
                         <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                    </svg> <span class="btn d-none" style="cursor:pointer">
+                    </svg>
+                    <span class="btn d-none" style="cursor:pointer">
                                 <%= __('Instructions') %>
                             </span></div>
             </div>
@@ -54,7 +57,10 @@
                     <div><span class="spinner w-h-5"></span></div>
                 </div>
                 <div class="row justify-content-center mx-2" id="audio-row">
-                    <div class="col-lg-6 col-md-6 col-sm-12 justify-content-center"><audio id="my-audio" controls tabindex="-1" src="" type="audio/wav" class="d-none" crossorigin="anonymous"></audio><canvas id="myCanvas" class="w-100" height="80px"></canvas></div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 justify-content-center">
+                        <audio id="my-audio" controls tabindex="-1" src="" type="audio/wav" class="d-none" crossorigin="anonymous"></audio>
+                        <canvas id="myCanvas" class="w-100" height="80px"></canvas>
+                    </div>
                 </div>
             </div>
             <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-sentences-row">
@@ -80,7 +86,8 @@
                         <%- __('You have helped us validate <span id="spn-validation-count" class="font-wt-900"></span> recordings') %>
                     </p>
                     <div class="row justify-content-center mb-3 mx-2">
-                        <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div><a class="btn btn-primary h6 shadow rounded mt-4 p-3 my-lg-5 col-lg-4 col-md-4 col-sm-10" href="./validator-page.html">
+                        <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div>
+                        <a class="btn btn-primary h6 shadow rounded mt-4 p-3 my-lg-5 col-lg-4 col-md-4 col-sm-10" href="./validator-page.html">
                             <%= __('Validate More') %>
                         </a>
                         <div class="col-lg-4 col-md-4 col-sm-10 oflow-x-hid"></div>
@@ -88,12 +95,17 @@
                 </div>
             </div>
             <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 mx-5" id="validation-button-row">
-                <div class="col-lg-8 col-md-8 flex-lg-row flex-md-row d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2"><button class="w-100 btn align-self-start mb-2" disabled="disabled" id="dislike_button"><svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
-                            <path d="M183.666 19.6666H178.333V35.6666H183.666V19.6666ZM154.333 34.3333C154.333 35.7999 155.533 36.9999 156.999 36.9999H165.413L164.146 43.0933L164.106 43.5199C164.106 44.0666 164.333 44.5733 164.693 44.9333L166.106 46.3333L174.879 37.5466C175.373 37.0666 175.666 36.3999 175.666 35.6666V22.3333C175.666 20.8666 174.466 19.6666 172.999 19.6666H160.999C159.893 19.6666 158.946 20.3333 158.546 21.2933L154.519 30.6933C154.399 30.9999 154.333 31.3199 154.333 31.6666V34.3333Z" fill="#007BFF"/><text x="26" y="43" font-family="lato" font-size="28" fill="#007BFF" style="text-align:center">
+                <div class="col-lg-8 col-md-8 flex-lg-row flex-md-row d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2">
+                    <button class="w-100 btn align-self-start mb-2" disabled="disabled" id="dislike_button">
+                        <svg width="201" height="66" viewBox="0 0 201 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1" width="199" height="64" rx="32" fill="white" stroke="#007BFF" stroke-width="2"/>
+                            <path d="M40.7539 25.0279L40.7539 25.0279L40.7497 25.0238C40.569 24.8472 40.3538 24.7097 40.1175 24.62C39.8813 24.5302 39.6291 24.4901 39.3767 24.5021L39.3766 24.502L39.3681 24.5026C38.8833 24.5339 38.4266 24.7406 38.0831 25.0841C37.7396 25.4276 37.5328 25.8843 37.5015 26.369L37.5008 26.379L37.5006 26.3889C37.4945 26.6334 37.5377 26.8766 37.6278 27.104C37.7178 27.3314 37.8527 27.5383 38.0245 27.7124L38.0245 27.7124L38.0269 27.7148L44.3131 34.0004L38.0492 40.2637C37.8737 40.4349 37.7347 40.6398 37.6403 40.8661C37.5455 41.0936 37.4979 41.338 37.5004 41.5845L37.5005 41.595L37.5011 41.6054C37.5268 42.0992 37.7345 42.566 38.0842 42.9156C38.4338 43.2652 38.9006 43.4729 39.3944 43.4986L39.3944 43.4987L39.4038 43.499C39.6583 43.5074 39.9116 43.4629 40.148 43.3684C40.3836 43.2742 40.5971 43.1322 40.7752 42.9515C40.7758 42.951 40.7764 42.9504 40.7769 42.9498L47.0007 36.7267L53.2434 42.9498C53.244 42.9505 53.2447 42.9511 53.2453 42.9518C53.4234 43.1324 53.6369 43.2742 53.8723 43.3684C54.1087 43.4629 54.3621 43.5074 54.6165 43.499L54.6244 43.4987L54.6322 43.4982C55.117 43.4669 55.5738 43.2601 55.9173 42.9167C56.2608 42.5732 56.4675 42.1165 56.4989 41.6317L56.4997 41.6184L56.4999 41.605C56.5054 41.1099 56.3081 40.6314 55.9512 40.2837L49.6862 34.0004L55.9514 27.7168C56.1268 27.5457 56.2657 27.3409 56.36 27.1146C56.4548 26.8871 56.5024 26.6427 56.4999 26.3963L56.4998 26.3826L56.4989 26.369C56.4675 25.8843 56.2608 25.4276 55.9173 25.0841C55.5738 24.7406 55.117 24.5339 54.6322 24.5026L54.6244 24.502L54.6165 24.5018C54.3621 24.4934 54.1087 24.5378 53.8723 24.6324C53.6368 24.7265 53.4234 24.8684 53.2453 25.049L47.0007 31.2741L40.7539 25.0279Z" fill="#157FFB" stroke="#007BFF"/>
+                            <text x="66" y="43" font-family="lato" font-size="24" fill="#007BFF" style="text-align:center">
                                 <%= __('Incorrect') %>
                             </text>
-                        </svg></button>
+                        </svg>
+
+                    </button>
                     <div class="row justify-content-center mx-2" id="loader-play-btn">
                         <div><span class="spinner w-h-5"></span></div>
                     </div>
@@ -108,17 +120,23 @@
                         <h3 class="font-wt-800 text-center d-none mt-2" id="audioplayer-text_pause">
                             <%= __('Pause') %>
                         </h3>
-                    </div><button class="btn align-self-start mb-2 w-100" disabled="disabled" id="like_button"><svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1" y="1" width="206" height="64" rx="32" fill="white" stroke="#007BFF" stroke-width="2"/>
-                            <path d="M24.334 46.3334H29.6673V30.3334H24.334V46.3334ZM53.6673 31.6667C53.6673 30.2001 52.4673 29.0001 51.0006 29.0001H42.5873L43.854 22.9067L43.894 22.4801C43.894 21.9334 43.6673 21.4267 43.3073 21.0667L41.894 19.6667L33.1207 28.4534C32.6273 28.9334 32.334 29.6001 32.334 30.3334V43.6667C32.334 45.1334 33.534 46.3334 35.0007 46.3334H47.0007C48.1073 46.3334 49.054 45.6667 49.454 44.7067L53.4806 35.3067C53.6007 35.0001 53.6673 34.6801 53.6673 34.3334V31.6667Z" fill="#007BFF"/><text x="86" y="43" font-family="lato" font-size="28" fill="#007BFF" style="text-align:center">
+                    </div>
+                    <button class="btn align-self-start mb-2 w-100" disabled="disabled" id="like_button">
+                        <svg width="201" height="66" viewBox="0 0 201 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1" width="199" height="64" rx="32" fill="white" stroke="#007BFF" stroke-width="2"/>
+                            <path d="M45.4291 35.8036L45.4291 35.8036L50.3174 40.6919C50.9677 41.3422 52.0193 41.3422 52.6695 40.6919L65.036 28.3371L65.0362 28.3369C65.6865 27.6867 65.6865 26.6467 65.0362 25.9965C64.3859 25.3462 63.346 25.3462 62.6958 25.9965L51.4993 37.1929L47.7695 33.4632C47.1193 32.8129 46.0794 32.8129 45.4291 33.4632C44.7788 34.1134 44.7788 35.1533 45.4291 35.8036Z" fill="#157FFB" stroke="#157FFB"/>
+                            <text x="80" y="43" font-family="lato" font-size="24" fill="#007BFF" style="text-align:center">
                                 <%= __('Correct') %>
                             </text>
-                        </svg></button>
+                        </svg>
+                    </button>
                 </div>
             </div>
-            <div class="row justify-content-center" id="skip_btn_row"><button class="btn text-primary mt-2 mb-2 fs-1_5-rem" id="skip_button">
+            <div class="row justify-content-center" id="skip_btn_row">
+                <button class="btn text-primary mt-2 mb-2 fs-1_5-rem" id="skip_button">
                     <%= __('Skip') %>
-                </button></div>
+                </button>
+            </div>
             <div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
                 <div class="col-12 col-sm-8 col-lg-7">
                     <div class="progress mt-1">
@@ -129,7 +147,9 @@
                     </div>
                 </div>
                 <div class="px-3">
-                    <div class="row justify-content-center"><span class="" id="currentSentenceLbl"></span><span class="">/</span><span class="" id="totalSentencesLbl"></span></div>
+                    <div class="row justify-content-center">
+                        <span class="" id="currentSentenceLbl"></span>
+                        <span class="">/</span><span class="" id="totalSentencesLbl"></span></div>
                 </div>
             </div>
 
