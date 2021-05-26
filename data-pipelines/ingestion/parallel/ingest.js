@@ -81,7 +81,7 @@ const start = async (connectionString, params, localDatasetPath, paired, remote_
             }
         }
         console.log("langTranslations", langTranslations)
-
+        const textToId = {}
         for (const [pair, rownum] of Object.entries(JSON.parse(pairs))) {
             languages = pair.split('-')
             language1 = languages[0]
@@ -109,7 +109,13 @@ const start = async (connectionString, params, localDatasetPath, paired, remote_
 
                 if (translation1.split(' ').length <= MAX_WORD_LENGTH) {
                     count++
-                    const datasetRowIds = await ingest1(id, 'parallel', client, language1, [translation1], paired)
+                    var datasetRowIds = []
+                    if (textToId[translation1] == null) {
+                        datasetRowIds = await ingest1(id, 'parallel', client, language1, [translation1], paired)
+                        textToId[translation1] = datasetRowIds
+                    } else {
+                        datasetRowIds = textToId[translation1]
+                    }
                     if (paired === 'paired') {
                         console.log('Inserting in contributions:', translation2)
                         const inserted = await ingest2(datasetRowIds, client, language2, [translation2])
