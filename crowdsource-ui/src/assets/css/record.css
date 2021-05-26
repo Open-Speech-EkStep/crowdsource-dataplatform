@@ -494,3 +494,7 @@ audio {
   box-shadow: none;
 }
 
+#skipBtn{
+  font-size: 24px;
+}
+

@@ -62,6 +62,7 @@ const initialize = () => {
     const $reRecordBtn = $('#reRecord');
     const $visualizer = $('#visualizer');
     const $player = $('#player');
+    const $audioPlayer = $('#audio-controller');
     const $nextBtn = $('#nextBtn');
     const $nextBtnToolTip = $nextBtn.parent();
     const $getStarted = $('#get-started');
@@ -192,13 +193,15 @@ const initialize = () => {
                 $getStarted.hide();
                 $startRecordBtn.addClass('d-none');
                 $skipBtn.prop('disabled', true);
+                $nextBtn.prop('disabled', true);
                 $startRecordRow.removeClass('d-none');
                 $stopRecordBtn.removeClass('d-none');
                 $recordingRow.removeClass('d-none');
+                $('#straight-line-row').addClass('d-none');
+
                 $recordingSign.removeClass('d-none');
                 $reRecordBtn.addClass('d-none');
-                $nextBtn.addClass('d-none');
-                $player.addClass('d-none');
+                $audioPlayer.addClass('d-none');
                 $player.trigger('pause');
                 $visualizer.removeClass('d-none');
                 $nextBtnToolTip.tooltip('disable');
@@ -243,7 +246,7 @@ const initialize = () => {
                 $reRecordBtn.addClass('d-none');
                 $recordingSign.addClass('d-none');
                 $recordingRow.addClass('d-none');
-                $player.addClass('d-none');
+                $audioPlayer.addClass('d-none');
                 $player.trigger('pause');
                 $visualizer.addClass('d-none');
                 $audioSmallError.addClass('d-none');
@@ -255,14 +258,14 @@ const initialize = () => {
         clearTimeout(cleartTimeoutKey);
         clearTimeout(timerTimeoutKey)
         $autoStopWarning.classList.add('d-none');
-        $startRecordRow.addClass('d-none');
+        // $startRecordRow.addClass('d-none');
         $stopRecordBtn.addClass('d-none');
-        $nextBtn.removeClass('d-none');
+        // $nextBtn.removeClass('d-none');
         $skipBtn.prop('disabled', false);
         $reRecordBtn.removeClass('d-none');
         $recordingSign.addClass('d-none');
         $recordingRow.addClass('d-none');
-        $player.removeClass('d-none');
+        $audioPlayer.removeClass('d-none');
         $visualizer.addClass('d-none');
 
         rec.stop(); //stop microphone access
@@ -290,13 +293,53 @@ const initialize = () => {
         location.href = './thank-you.html';
     };
 
+    $skipBtn.hover(() => {
+        $skipBtn.css('border-color', '#bfddf5');
+    }, () => {
+        $skipBtn.css('border-color', 'transparent');
+    })
+
+    $skipBtn.mousedown(() => {
+        $skipBtn.css('background-color', 'white')
+    })
+
+    const onHover = function (btn){
+        btn.css('background-color','rgba(0, 123, 255, 0.3)');
+    }
+
+    const afterHover = function (btn){
+        btn.css('background-color','white');
+    }
+
+
+    $stopRecordBtn.hover(() => {
+          onHover($stopRecordBtn);
+      },
+      () => {
+          afterHover($stopRecordBtn)
+      });
+
+    $startRecordBtn.hover(() => {
+          onHover($startRecordBtn);
+      },
+      () => {
+          afterHover($startRecordBtn)
+      });
+
+    $reRecordBtn.hover(() => {
+          onHover($reRecordBtn);
+      },
+      () => {
+          afterHover($reRecordBtn)
+      });
+
     $nextBtn.add($skipBtn).on('click', (event) => {
         if (event.target.id === 'nextBtn' && currentIndex < totalItems - 1) {
             uploadToServer();
         } else if (event.target.id === 'skipBtn') {
             markContributionSkipped();
             incrementSkipCount();
-            $skipBtn.addClass('d-none');
+            // $skipBtn.addClass('d-none');
         }
         if (currentIndex === totalItems - 1) {
             if (event.target.id === 'nextBtn') {
@@ -322,11 +365,11 @@ const initialize = () => {
             incrementCurrentIndex();
         }
 
-        $player.addClass('d-none');
+        $audioPlayer.addClass('d-none');
         $player.trigger('pause');
-        $nextBtn.addClass('d-none');
-
+        $nextBtn.prop('disabled', true);
         $reRecordBtn.addClass('d-none');
+        $("#straight-line-row").removeClass('d-none');
         $startRecordRow.removeClass('d-none');
         $startRecordBtn.removeClass('d-none');
     });
@@ -337,7 +380,7 @@ const initialize = () => {
         setCurrentSentenceIndex(currentIndex + 1);
         $getStarted.text(progressMessages[currentIndex]);
         localStorage.setItem(currentIndexKey, currentIndex);
-        $skipBtn.removeClass('d-none');
+        // $skipBtn.removeClass('d-none');
     }
 
     function incrementSkipCount() {
