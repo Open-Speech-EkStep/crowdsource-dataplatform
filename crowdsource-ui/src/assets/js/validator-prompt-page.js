@@ -4,7 +4,7 @@ const Visualizer = require('./visualizer')
 const { showUserProfile } = require('../../../build/js/common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
 const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition} = require('./utils');
-
+const { cdn_url } = require('./env-api');
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -146,8 +146,8 @@ function setSentenceLabel(index) {
 function getNextSentence() {
     if (currentIndex < boloIndiaValidator.sentences.length - 1) {
         currentIndex++;
-        updateProgressBar(currentIndex + 1,boloIndiaValidator.sentences.length)
-        getAudioClip(boloIndiaValidator.sentences[currentIndex].contribution_id)
+        updateProgressBar(currentIndex + 1,boloIndiaValidator.sentences.length);
+        loadAudio(`${cdn_url}/${boloIndiaValidator.sentences[currentIndex].contribution}`)
         resetValidation();
         setSentenceLabel(currentIndex);
         localStorage.setItem(currentIndexKey,currentIndex);
@@ -520,7 +520,7 @@ const initializeComponent = function () {
   const sentence = boloIndiaValidator.sentences[currentIndex];
   addListeners();
   if (sentence) {
-    getAudioClip(sentence.contribution_id);
+    loadAudio(`${cdn_url}/${sentence.contribution}`);
     setSentenceLabel(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
@@ -530,6 +530,7 @@ const initializeComponent = function () {
     setAudioPlayer();
     const $canvas = document.getElementById('myCanvas');
     visualizer.drawCanvasLine($canvas);
+    showAudioRow();
   }
 }
 
