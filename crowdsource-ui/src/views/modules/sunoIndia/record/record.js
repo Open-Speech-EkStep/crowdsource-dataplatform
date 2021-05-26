@@ -494,7 +494,7 @@ function executeOnLoad() {
   toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
-  const $validationInstructionModal = $("#validation-instruction-modal");
+  // const $validationInstructionModal = $("#validation-instruction-modal");
   const $errorModal = $('#errorModal');
   const $loader = $('#loader');
   const $pageContent = $('#page-content');
