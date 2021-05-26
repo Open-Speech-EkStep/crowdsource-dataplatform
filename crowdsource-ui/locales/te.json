@@ -406,5 +406,8 @@
 	"<span id=\"current_badge_name_1\"></span> Contributor level achieved for validating <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_name_1\"></span> Contributor level achieved for validating <span id=\"current_badge_count\"></span> sentences.",
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"./validator-badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"./validator-badges.html\">Know more</a>",
 	"Back to Bolo India Home": "Back to Bolo India Home",
-	"<span id=\"current_badge_name_1\"></span> contributor level achieved for validating <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_name_1\"></span> contributor level achieved for validating <span id=\"current_badge_count\"></span> sentences."
+	"<span id=\"current_badge_name_1\"></span> contributor level achieved for validating <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_name_1\"></span> contributor level achieved for validating <span id=\"current_badge_count\"></span> sentences.",
+	"Please select correct lanaguge keyboard for typing...": "Please select correct lanaguge keyboard for typing...",
+	"Please select correct language keyboard for typing...": "Please select correct language keyboard for typing...",
+	"Please type in your chosen language": "Please type in your chosen language"
 }
