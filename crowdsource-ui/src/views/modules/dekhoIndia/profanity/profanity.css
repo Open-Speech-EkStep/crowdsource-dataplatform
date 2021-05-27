@@ -1,0 +1,16 @@
+@media (min-width: 768px) {
+    #controls-row {
+        min-height: 200px;
+    }
+}
+
+.px-6 {
+    padding-right: 6vw!important;
+    padding-left: 6vw!important;
+}
+
+@media (min-width: 992px) {
+    #profanityThankYouModal .modal-lg {
+        max-width: 700px;
+    }
+}

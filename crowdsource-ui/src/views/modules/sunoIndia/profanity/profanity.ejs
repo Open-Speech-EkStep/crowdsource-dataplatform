@@ -16,19 +16,19 @@
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
     <link rel="stylesheet" type="text/css" href="../../css/validator-prompt.css">
     <link rel="stylesheet" type="text/css" href="../../css/mic-speaker-testing.css">
+    <link rel="stylesheet" type="text/css" href="../../css/dekhoIndia/profanity.css">
     <style>.btn.focus,.btn:focus{outline:0;box-shadow:0 0}</style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../", MODULE:"Suno India", PAGE_TITLE:"Transcribe"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../", MODULE:"Suno India", PAGE_TITLE:""}) %>
 <%- include('./profanity-thank-you.ejs',{type:"sunoindia"}) %>
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/recording-instructions.ejs %>
             <div class="modal-footer pt-3 record-btn-container position-relative" style="height:72px">
-                <%- include ../common/report-btn.ejs %>
                 <%- include ../common/speakerTestBtn.ejs %>
             </div>
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center">
@@ -40,13 +40,7 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center d-none" id="thankyou-text">
-                <div class="col-12 text-center mt-4">
-                    <img src="../../img/tick.svg">
-                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for
-                        contributing!</label>
-                </div>
-            </div>
+
             <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-sentences-row">
                 <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-bold">
                         <%= __('Thank you for contributing.') %>
@@ -56,7 +50,7 @@
                     </p>
                     <div class="row justify-content-center mt-5">
                         <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
-                            <a class="btn btn-primary text-white btn-lg h6 w-100" href="./home.html">
+                            <a class="btn btn-primary text-white btn-lg h6 w-100" href="#">
                                 <%- __('Back to Suno India Home') %>
                             </a></div>
                     </div>
@@ -78,68 +72,78 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 mx-5 mt-5 web-view" id="validation-button-row">
-                <div class="col-lg-8 col-md-8 flex-lg-row flex-md-row flex-column d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2">
-                    <button class="w-100 btn align-self-start mb-2" id="cancel-edit-button">
-                        <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
-                            <text x="43" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">
-                                Not Profane
-                            </text>
-                        </svg>
-                    </button>
-                    <div class="row justify-content-center mx-2" id="loader-play-btn">
-                        <div><span class="spinner w-h-5"></span></div>
-                    </div>
-                    <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn">
-                        <div class="audioplayer d-flex justify-content-center align-items-center"><img src="../../img/play.svg" alt="play" id="play" class="cursor-pointer"> <img src="../../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer"> <img src="../../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer"></div>
-                        <h3 class="font-wt-800 text-center mt-2" id="audioplayer-text_play">
-                            <%= __('Play') %>
-                        </h3>
-                        <h3 class="font-wt-800 text-center d-none mt-2" id="audioplayer-text_replay">
-                            <%= __('Replay') %>
-                        </h3>
-                        <h3 class="font-wt-800 text-center d-none mt-2" id="audioplayer-text_pause">
-                            <%= __('Pause') %>
-                        </h3>
-                    </div>
-                    <button class="btn align-self-start mb-2 w-100" id="submit-edit-button">
-                        <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
-                            <text x="65" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">
-                                Profane
-                            </text>
-                        </svg>
 
-                    </button>
+            <div class="row m-0" style="height:150px"></div>
+            <div id="controls-row" style="">
+                <div class="row justify-content-center d-none mx-5 mt-5" id="thankyou-text">
+                    <div class="col-12 text-center mt-4">
+                        <img src="../../img/tick.svg">
+                        <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for
+                            contributing!</label>
+                    </div>
                 </div>
-            </div>
+                <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 mx-5 mt-5" id="validation-button-row">
+                    <div class="col-lg-8 col-md-8 flex-lg-row flex-md-row flex-column d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2">
+                        <button class="w-100 btn align-self-start mb-2" id="cancel-edit-button">
+                            <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
+                                <text x="43" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">
+                                    Not Profane
+                                </text>
+                            </svg>
+                        </button>
+                        <div class="row justify-content-center mx-2" id="loader-play-btn">
+                            <div><span class="spinner w-h-5"></span></div>
+                        </div>
+                        <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn">
+                            <div class="audioplayer d-flex justify-content-center align-items-center"><img src="../../img/play.svg" alt="play" id="play" class="cursor-pointer"> <img src="../../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer">
+                                <img src="../../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer"></div>
+                            <h3 class="font-wt-800 text-center mt-2" id="audioplayer-text_play">
+                                <%= __('Play') %>
+                            </h3>
+                            <h3 class="font-wt-800 text-center d-none mt-2" id="audioplayer-text_replay">
+                                <%= __('Replay') %>
+                            </h3>
+                            <h3 class="font-wt-800 text-center d-none mt-2" id="audioplayer-text_pause">
+                                <%= __('Pause') %>
+                            </h3>
+                        </div>
+                        <button class="btn align-self-start mb-2 w-100" id="submit-edit-button">
+                            <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
+                                <text x="65" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">
+                                    Profane
+                                </text>
+                            </svg>
 
-            <div class="row mobile-view" id="validation-button-row_mob">
-                <div class="row m-0 w-100">
-                    <div class="col-4"></div>
-                    <div class="col-4 text-center">
-                        <div id="audio-player-btn_mob">
-                            <div class="audioplayer">
-                                <img src="../../img/play.svg" alt="play" id="play_mob" class="cursor-pointer" height="48" width="48"> 
-                                <img src="../../img/pause.svg" height="48" width="48" alt="pause" id="pause_mob" class="d-none cursor-pointer"> 
-                                <img src="../../img/replay.svg" height="48" width="48" alt="replay" id="replay_mob" class="d-none justify-self-center cursor-pointer">
+                        </button>
+                    </div>
+                </div>
+                <div class="row mobile-view" id="validation-button-row_mob">
+                    <div class="row m-0 w-100">
+                        <div class="col-4"></div>
+                        <div class="col-4 text-center">
+                            <div id="audio-player-btn_mob">
+                                <div class="audioplayer">
+                                    <img src="../../img/play.svg" alt="play" id="play_mob" class="cursor-pointer" height="48" width="48">
+                                    <img src="../../img/pause.svg" height="48" width="48" alt="pause" id="pause_mob" class="d-none cursor-pointer">
+                                    <img src="../../img/replay.svg" height="48" width="48" alt="replay" id="replay_mob" class="d-none justify-self-center cursor-pointer">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-4"></div>
+                        <div class="col-4"></div>
                     </div>
                     <div class="row w-100 m-0 px-3">
-                            <button class="w-100 btn my-3 btn-link-primary" id="cancel-edit-button_mob">
+                        <button class="w-100 btn my-3 btn-link-primary" id="cancel-edit-button_mob">
                             Not Profane
-                            </button>
+                        </button>
                     </div>
                     <div class="row justify-content-center mx-2" id="loader-play-btn">
                         <div><span class="spinner w-h-5"></span></div>
                     </div>
                     <div class="row w-100 m-0 px-3">
                         <button class="btn my-2 w-100 btn-link-primary" id="submit-edit-button_mob">
-                           Profane
+                            Profane
                         </button>
                     </div>
                     <div class="row justify-content-center" id="skip_btn_row_mob">
@@ -147,38 +151,38 @@
                             <%= __('Skip') %>
                         </button>
                     </div>
-            </div>
-            </div>
-            <div class="row justify-content-center" id="skip_btn_row">
-                <button class="btn text-primary mt-2 mb-2 fs-1_5-rem" id="skip_button">
-                    <%= __('Skip') %>
-                </button>
-            </div>
-            <div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
-                <div class="col-12 col-sm-8 col-lg-7">
-                    <div class="progress mt-1">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress_bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
-                    </div>
-                    <div class="mt-4 text-muted h-1r d-none" id="get-started">
-                        <%= __('Let\'s get started!') %>
-                    </div>
                 </div>
-                <div class="px-3">
-                    <div class="row justify-content-center"><span class="" id="currentSentenceLbl"></span><span class="">/</span><span class="" id="totalSentencesLbl"></span></div>
+                <div class="row justify-content-center" id="skip_btn_row">
+                    <button class="btn text-primary mt-2 mb-2 fs-1_5-rem ml-2" id="skip_button">
+                        <%= __('Skip') %>
+                    </button>
                 </div>
+            </div>
+
+        </div>
+        <div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
+            <div class="col-12 col-sm-8 col-lg-6">
+                <div class="progress mt-1">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress_bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
+                </div>
+                <div class="mt-4 text-muted h-1r d-none" id="get-started">
+                    <%= __('Let\'s get started!') %>
+                </div>
+            </div>
+            <div class="px-3">
+                <div class="row justify-content-center"><span class="" id="currentSentenceLbl"></span><span class="">/</span><span class="" id="totalSentencesLbl"></span></div>
             </div>
         </div>
-        <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the sentence", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
-        <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-        <script src="../../js/sunoIndia/profanity.js"></script>
-        <script src="../../js/common/speakerTesting.js"></script>
-
     </div>
+    <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+    <script src="../../js/sunoIndia/profanity.js"></script>
+    <script src="../../js/common/speakerTesting.js"></script>
+
+</div>
 
 
 </body>

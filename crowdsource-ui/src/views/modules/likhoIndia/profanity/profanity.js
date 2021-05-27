@@ -135,38 +135,38 @@ function showNoSentencesMessage() {
   hideElement($('#progress-row'))
   showElement($('#no-sentences-row'))
   hideElement($('#skip_btn_row'));
-  hideElement($('#report_btn'));
+  // hideElement($('#report_btn'));
   hideElement($("#test-mic-speakers"));
   hideElement($('#instructive-msg'));
   hideElement($('#editor-row'));
   hideElement($('#thankyou-text'));
 }
 
-const handleSubmitFeedback = function () {
-  const contributionLanguage = localStorage.getItem("contributionLanguage");
-  const otherText = $("#other_text").val();
-  const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-
-  const reqObj = {
-    sentenceId: likhoIndia.sentences[currentIndex].dataset_row_id,
-    reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
-    language: contributionLanguage,
-    userName: speakerDetails ? speakerDetails.userName : '',
-    source: "contribution"
-  };
-  reportSentenceOrRecording(reqObj).then(function (resp) {
-    if (resp.statusCode === 200) {
-      $('#skip_button').click();
-      $("#report_sentence_modal").modal('hide');
-      $("#report_sentence_thanks_modal").modal('show');
-      $("#report_submit_id").attr("disabled", true);
-      $("input[type=radio][name=reportRadio]").each(function () {
-        $(this).prop("checked", false);
-      });
-      $("#other_text").val("");
-    }
-  });
-}
+// const handleSubmitFeedback = function () {
+//   const contributionLanguage = localStorage.getItem("contributionLanguage");
+//   const otherText = $("#other_text").val();
+//   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
+//
+//   const reqObj = {
+//     sentenceId: likhoIndia.sentences[currentIndex].dataset_row_id,
+//     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
+//     language: contributionLanguage,
+//     userName: speakerDetails ? speakerDetails.userName : '',
+//     source: "contribution"
+//   };
+//   reportSentenceOrRecording(reqObj).then(function (resp) {
+//     if (resp.statusCode === 200) {
+//       $('#skip_button').click();
+//       $("#report_sentence_modal").modal('hide');
+//       $("#report_sentence_thanks_modal").modal('show');
+//       $("#report_submit_id").attr("disabled", true);
+//       $("input[type=radio][name=reportRadio]").each(function () {
+//         $(this).prop("checked", false);
+//       });
+//       $("#other_text").val("");
+//     }
+//   });
+// }
 
 const setSentence = function (text){
   $('#captured-text').text(text);
@@ -201,26 +201,26 @@ const initialize = function () {
   //   location.href = './home.html';
   // });
 
-  const $reportModal = $("#report_sentence_modal");
+  // const $reportModal = $("#report_sentence_modal");
 
-  $("#report_submit_id").on('click', handleSubmitFeedback);
-
-  $("#report_btn").on('click', function () {
-    $reportModal.modal('show');
-  });
-
-  $("#report_close_btn").on("click", function () {
-    $reportModal.modal('hide');
-  });
-
-  $("#report_sentence_thanks_close_id").on("click", function () {
-    $("#report_sentence_thanks_modal").modal('hide');
-  });
-
-  $("input[type=radio][name=reportRadio]").on("change", function () {
-    selectedReportVal = this.value;
-    $("#report_submit_id").attr("disabled", false);
-  });
+  // $("#report_submit_id").on('click', handleSubmitFeedback);
+  //
+  // $("#report_btn").on('click', function () {
+  //   $reportModal.modal('show');
+  // });
+  //
+  // $("#report_close_btn").on("click", function () {
+  //   $reportModal.modal('hide');
+  // });
+  //
+  // $("#report_sentence_thanks_close_id").on("click", function () {
+  //   $("#report_sentence_thanks_modal").modal('hide');
+  // });
+  //
+  // $("input[type=radio][name=reportRadio]").on("change", function () {
+  //   selectedReportVal = this.value;
+  //   $("#report_submit_id").attr("disabled", false);
+  // });
 
   const translation = likhoIndia.sentences[currentIndex];
   addListeners();
