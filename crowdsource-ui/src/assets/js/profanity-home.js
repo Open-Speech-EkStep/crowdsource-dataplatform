@@ -20,7 +20,7 @@ $(document).ready(function () {
 
         const userNameValue = $('#username').val().trim();
         if (!testUserName(userNameValue)) {
-            alert("Enter valid username")
+            alert("Enter valid email")
             return;
         }
 
