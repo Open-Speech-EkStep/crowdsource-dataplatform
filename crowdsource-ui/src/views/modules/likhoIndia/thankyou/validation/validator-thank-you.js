@@ -125,8 +125,8 @@ const getLanguageStats = function () {
         const contributionLanguage = localStorage.getItem(
           LIKHO_FROM_LANGUAGE
         );
-
-        const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.likho.value);
+        const module = localStorage.getItem(CURRENT_MODULE);
+        const languages = getContributedAndTopLanguage(module == MODULE.likho.value || module == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, MODULE.likho.value);
         localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
         showByHoursChart(MODULE.likho.value);
         const data = response.aggregate_data_by_language.sort((a, b) =>
