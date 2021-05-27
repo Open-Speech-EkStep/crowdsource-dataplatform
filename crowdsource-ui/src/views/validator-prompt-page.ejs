@@ -37,9 +37,11 @@
                     </button>
                 </div>
                 <%- include components/report-btn.ejs %>
-                <%- include components/mic-speaker-test-btn.ejs %>
+                <%- include ../../build/views/common/speakerTestBtn.ejs %>
             </div>
-            <%- include modals/mic-speaker-testing.ejs %>
+            <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center">
+                <%- include ../../build/views/common/speakerTesting.ejs %>
+            </div>
             <div class="row justify-content-center" id="instructions-row">
                 <div id="instructions-link" class="d-flex justify-content-end align-items-center d-none">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007BFF" style="cursor:pointer" class="bi bi-info-circle-fill d-none" viewBox="0 0 16 16">
@@ -163,7 +165,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="../js/validator-prompt-page.js"></script>
-        <script src="../js/mic-speaker-testing.js"></script>
+        <script src="../../js/common/speakerTesting.js"></script>
     </div>
 </div>
 </body>
