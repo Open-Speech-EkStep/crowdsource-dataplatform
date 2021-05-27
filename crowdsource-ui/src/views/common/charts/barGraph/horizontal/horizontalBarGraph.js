@@ -27,6 +27,16 @@ function constructChart(responseData, xAxisLabel, yAxisLabel, type) {
   const valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
   valueAxis.renderer.grid.template.strokeWidth = 0;
   valueAxis.renderer.labels.template.disabled = true;
+  if(type == "likho" || type == "dekho") {
+    const maxValue = Math.max.apply(Math, chart.data.map(function(o) { return Number(o.total_contribution_count); })) + 50;
+    valueAxis.min = 0;
+    valueAxis.max = maxValue > 100 ? maxValue : 100;
+  } else {
+    const maxValue = Math.max.apply(Math, chart.data.map(function(o) { return Number(o.total_contributions); })) + 0.05;
+    valueAxis.min = 0;
+    valueAxis.max =  maxValue > 0.1 ? maxValue : 0.1;
+  }
+  valueAxis.strictMinMax = true; 
   categoryAxis.renderer.minGridDistance = 25;
   const series = chart.series.push(new am4charts.ColumnSeries());
   series.dataFields.valueX = xAxisLabel;
