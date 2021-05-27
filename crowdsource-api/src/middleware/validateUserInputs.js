@@ -171,14 +171,20 @@ const validateMediaTypeInput = (req, res, next) => {
     next();
 }
 
-const validateUserInfoForProfanity = (req,res,next) => {
+const validateUserInfoForProfanity = (req, res, next) => {
+    const validLanguages = LANGUAGES.map((item) =>
+        item.value
+    )
     if (!(req.params && req.params.type && MEDIA_TYPES.includes(req.params.type))) {
         return res.status(400).send("Invalid params");
     }
-    if(!req.body && !req.body.username && !EMAIL_REGEX.test(req.body.username)){
+    if (!req.query && !req.query.username && !EMAIL_REGEX.test(req.query.username)) {
         return res.status(400).send("Invalid username");
+    }
+    if(!validLanguages.includes(req.query.language)){
+        return res.status(400).send("Invalid language");
     }
     next();
 }
 
-module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoInput, validateContributedMediaInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput,validateUserInfoForProfanity }
+module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoInput, validateContributedMediaInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput, validateUserInfoForProfanity }
