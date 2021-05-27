@@ -16,8 +16,8 @@ describe("onActiveNavbar",()=> {
     onActiveNavbar("bolo");
 
     expect(localStorage.getItem(CURRENT_MODULE)).toEqual("bolo");
-    expect(allDivs[0].classList.contains('active')).toEqual(true);
-    expect(allDivs[1].classList.contains('active')).toEqual(false);
+    expect(allDivs[1].classList.contains('active')).toEqual(true);
+    expect(allDivs[0].classList.contains('active')).toEqual(false);
     expect(allDivs[2].classList.contains('active')).toEqual(false);
     expect(allDivs[3].classList.contains('active')).toEqual(false);
 
@@ -30,8 +30,8 @@ describe("onActiveNavbar",()=> {
     onActiveNavbar("suno");
 
     expect(localStorage.getItem(CURRENT_MODULE)).toEqual("suno");
-    expect(allDivs[1].classList.contains('active')).toEqual(true);
-    expect(allDivs[0].classList.contains('active')).toEqual(false);
+    expect(allDivs[0].classList.contains('active')).toEqual(true);
+    expect(allDivs[1].classList.contains('active')).toEqual(false);
     expect(allDivs[2].classList.contains('active')).toEqual(false);
     expect(allDivs[3].classList.contains('active')).toEqual(false);
 
@@ -44,10 +44,10 @@ describe("onActiveNavbar",()=> {
     onActiveNavbar("likho");
 
     expect(localStorage.getItem(CURRENT_MODULE)).toEqual("likho");
-    expect(allDivs[3].classList.contains('active')).toEqual(true);
+    expect(allDivs[2].classList.contains('active')).toEqual(true);
     expect(allDivs[0].classList.contains('active')).toEqual(false);
     expect(allDivs[1].classList.contains('active')).toEqual(false);
-    expect(allDivs[2].classList.contains('active')).toEqual(false);
+    expect(allDivs[3].classList.contains('active')).toEqual(false);
 
     localStorage.clear()
 
@@ -58,10 +58,10 @@ describe("onActiveNavbar",()=> {
     onActiveNavbar("dekho");
 
     expect(localStorage.getItem(CURRENT_MODULE)).toEqual("dekho");
-    expect(allDivs[2].classList.contains('active')).toEqual(true);
+    expect(allDivs[3].classList.contains('active')).toEqual(true);
     expect(allDivs[0].classList.contains('active')).toEqual(false);
     expect(allDivs[1].classList.contains('active')).toEqual(false);
-    expect(allDivs[3].classList.contains('active')).toEqual(false);
+    expect(allDivs[2].classList.contains('active')).toEqual(false);
 
     localStorage.clear()
 

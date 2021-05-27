@@ -25,6 +25,7 @@ function resetSpeakerDetails() {
     );
     if (selectedGender) selectedGender.checked = false;
     if (transSelectedGender) transSelectedGender.checked = false;
+    $("#transgender_options").addClass("d-none");
     age.selectedIndex = 0;
     motherTongue.selectedIndex = 0;
     userName.value = '';
@@ -72,7 +73,7 @@ const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
                 genderRadio.checked = true;
                 genderRadio.previous = true;
             }
-        } else if (parsedSpeakerDetails.gender !== "") {
+        } else if (parsedSpeakerDetails.gender !== "" && parsedSpeakerDetails.gender !== undefined) {
             const genderRadio = document.querySelector(
                 'input[name = "gender"][value="others"]'
             );
@@ -141,12 +142,29 @@ const setUserNameOnInputFocus = function () {
 
 const setGenderRadioButtonOnClick = function () {
     const genderRadios = document.querySelectorAll('input[name = "gender"]');
+    const selectedTransGender = document.querySelector(
+      'input[name = "trans_gender"]:checked'
+    );
+
+    const options = $("#transgender_options");
     genderRadios.forEach((element) => {
         element.addEventListener('click', (e) => {
             if (e.target.previous) {
                 e.target.checked = false;
             }
             e.target.previous = e.target.checked;
+            if(e.target.value == 'others' && e.target.checked){
+                if(!selectedTransGender){
+                    const defaultOption = document.querySelector(
+                      'input[name = "trans_gender"][value="Rather Not Say"]'
+                    );
+                    defaultOption.checked = true;
+                    defaultOption.previous = true;
+                }
+                options.removeClass('d-none');
+            } else {
+                options.addClass('d-none');
+            }
 
         });
     });
