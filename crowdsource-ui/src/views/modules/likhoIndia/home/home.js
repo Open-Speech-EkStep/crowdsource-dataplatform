@@ -58,6 +58,8 @@ const updateLocaleLanguagesDropdown = (language, toLanguage) => {
 }
 
 function initializeBlock() {
+  const $startRecordBtn = $('#proceed-box');
+  const $startRecordBtnTooltip = $startRecordBtn.parent();
   const speakerDetailsKey = 'speakerDetails';
   const $userName = $('#username');
   toggleFooterPosition();
@@ -132,6 +134,7 @@ function initializeBlock() {
   })
 
   setSpeakerDetails(speakerDetailsKey, $userName);
+  $startRecordBtnTooltip.tooltip('disable');
   setUserNameOnInputFocus();
   setUserModalOnShown($userName);
   getStatsSummary('/stats/summary/parallel',MODULE.likho.value);
