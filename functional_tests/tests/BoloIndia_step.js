@@ -160,7 +160,6 @@ step("When user skips all the rest of the <count> sentences , User should see Th
     const skipbutton = taiko.button({ id: 'skipBtn' })
     for (let i = 0; i < count; i++) {
         await taiko.waitFor(500)
-        console.log(await skipbutton.isDisabled());
         await click(skipbutton)
         await taiko.waitFor(700)
     }
