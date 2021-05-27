@@ -114,9 +114,10 @@ const showFucntionalCards = (type, from, to) => {
 const setBadge = function (data, localeStrings, functionalFlow) {
   localStorage.setItem('badgeId', data.badgeId);
   localStorage.setItem('badges', JSON.stringify(data.badges));
-  localStorage.setItem('nextHourGoal', data.nextHourGoal);
+  const nextHourGoal = data.nextHourGoal ? data.nextHourGoal : 100;
+  localStorage.setItem('nextHourGoal', nextHourGoal);
   $("#user-contribution").text(data.contributionCount);
-  $("#language-hour-goal").text(data.nextHourGoal);
+  $("#language-hour-goal").text(nextHourGoal);
 
   const module = localStorage.getItem(CURRENT_MODULE);
   if (data.isNewBadge) {
