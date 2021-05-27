@@ -198,7 +198,7 @@ const initialize = () => {
             .then((stream) => {
                 $getStarted.hide();
                 $startRecordBtn.addClass('d-none');
-                $skipBtn.prop('disabled', true);
+                // $skipBtn.prop('disabled', true);
                 $nextBtn.prop('disabled', true);
                 $nextBtn.addClass('btn-secondary');
                 $nextBtn.removeClass('btn-primary');
@@ -270,7 +270,7 @@ const initialize = () => {
         // $startRecordRow.addClass('d-none');
         $stopRecordBtn.addClass('d-none');
         // $nextBtn.removeClass('d-none');
-        $skipBtn.prop('disabled', false);
+        // $skipBtn.prop('disabled', false);
         $reRecordBtn.removeClass('d-none');
         $recordingSign.addClass('d-none');
         $recordingRow.addClass('d-none');
