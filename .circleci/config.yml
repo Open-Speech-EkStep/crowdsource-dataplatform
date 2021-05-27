@@ -136,7 +136,7 @@ workflows:
              - node/test
           filters:
             branches:
-              only: master
+              only: [master,bolo_india]
 
       - db_migrate_aws:
           name: migrate_dev_aws
