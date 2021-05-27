@@ -395,6 +395,8 @@ const initializeComponent = () => {
     hideElement($('#virtualKeyBoardBtn'));
     const totalItems = dekhoIndiaValidator.sentences.length;
     currentIndex = getCurrentIndex(totalItems - 1);
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    $('#edit-language').text(contributionLanguage)
 
     addListeners();
     const validationData = dekhoIndiaValidator.sentences[currentIndex];

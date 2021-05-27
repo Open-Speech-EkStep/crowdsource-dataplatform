@@ -445,6 +445,7 @@ const initialize = function () {
   const totalItems = sunoIndia.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  $('#edit-language').text(language)
   if (language) {
     updateLocaleLanguagesDropdown(language);
   }

@@ -408,6 +408,8 @@ const initializeComponent = () => {
   currentIndex = getCurrentIndex(totalItems - 1);
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
+  $('#edit-language').text(language)
+
   $("#start_contributing_id").on('click', function () {
     const data = localStorage.getItem("speakerDetails");
     if (data !== null) {

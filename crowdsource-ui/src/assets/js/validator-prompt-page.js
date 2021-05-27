@@ -319,47 +319,6 @@ function disableSkipButton() {
     disableButton($skipButton)
 }
 
-const getAudioClip = function (contributionId) {
-    hideAudioRow();
-    disableSkipButton();
-    const source = 'validate';
-    fetch(`/media-object/${source}/${contributionId}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    }).then((stream) => {
-        stream.arrayBuffer().then((buffer) => {
-            const blob = new Blob([buffer], { type: "audio/wav" });
-            // loadAudio(URL.createObjectURL(blob))
-            const fileReader = new FileReader();
-            fileReader.onload = function (e) {
-                loadAudio(e.target.result);
-                showAudioRow();
-                enableButton($('#skip_button'))
-            }
-            fileReader.readAsDataURL(blob);
-        });
-    }).catch((err) => {
-        console.log(err)
-        showAudioRow();
-    });
-}
-
-function hideAudioRow() {
-    showElement($('#loader-audio-row'));
-    hideElement($('#audio-row'))
-    showElement($('#loader-play-btn'));
-    hideElement($('#audio-player-btn'))
-}
-
-function showAudioRow() {
-    hideElement($('#loader-audio-row'));
-    showElement($('#audio-row'));
-    hideElement($('#loader-play-btn'));
-    showElement($('#audio-player-btn'))
-}
-
 function showThankYou() {
     window.location.href = './validator-thank-you.html'
 }
@@ -531,7 +490,6 @@ const initializeComponent = function () {
     setAudioPlayer();
     const $canvas = document.getElementById('myCanvas');
     visualizer.drawCanvasLine($canvas);
-    showAudioRow();
   }
 }
 
