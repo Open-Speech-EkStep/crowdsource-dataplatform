@@ -1,0 +1,10 @@
+@media (min-width: 992px) {
+    #profanityUserModal .modal-lg {
+        max-width: 700px;
+    }
+}
+
+.px-6{
+    padding-right:6vw!important;
+    padding-left:6vw!important;
+}
