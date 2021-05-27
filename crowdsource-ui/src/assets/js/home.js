@@ -268,44 +268,20 @@ function initializeBlock() {
     const $listen_container = $('#listen_container');
     $say.hover(() => {
         $(".card1").css("box-shadow","0px 0px 32px rgba(66, 178, 198, 0.6)")
-        // $say.removeClass('col-lg-5');
-        // $listen.removeClass('col-lg-5');
-        // $say.addClass('col-lg-6');
-        // $listen.addClass('col-lg-4');
-        // $say.removeClass('col-md-5');
-        // $listen.removeClass('col-md-5');
-        // $say.addClass('col-md-6');
-        // $listen.addClass('col-md-4');
         $say_p_2.removeClass('d-none');
         $say_container.addClass('say-active');
     }, () => {
         $(".card1").css("box-shadow","0px 0px 32px rgb(0 0 0 / 10%)")
-        // $say.removeClass('col-lg-6');
-        // $listen.removeClass('col-lg-4');
-        // $say.addClass('col-lg-5');
-        // $listen.addClass('col-lg-5');
-        // $say.removeClass('col-md-6');
-        // $listen.removeClass('col-md-4');
-        // $say.addClass('col-md-5');
-        // $listen.addClass('col-md-5');
         $say_p_2.addClass('d-none');
         $say_container.removeClass('say-active');
     });
 
     $listen.hover(() => {
         $(".card2").css("box-shadow","0px 0px 32px rgba(166, 192, 251, 0.6)")
-        // $say.removeClass('col-lg-5');
-        // $listen.removeClass('col-lg-5');
-        // $listen.addClass('col-lg-6');
-        // $say.addClass('col-lg-4');
         $listen_p_2.removeClass('d-none');
         $listen_container.addClass('listen-active');
     }, () => {
         $(".card2").css("box-shadow","0px 0px 32px rgb(0 0 0 / 10%)")
-        // $say.removeClass('col-lg-4');
-        // $listen.removeClass('col-lg-6');
-        // $say.addClass('col-lg-5');
-        // $listen.addClass('col-lg-5');
         $listen_p_2.addClass('d-none');
         $listen_container.removeClass('listen-active');
     });
@@ -316,6 +292,16 @@ function initializeBlock() {
         );
         const options = $("#transgender_options");
         if(selectedGender.value === "others") {
+            const selectedTransGender = document.querySelector(
+              'input[name = "trans_gender"]:checked'
+            );
+            if(!selectedTransGender){
+                const defaultOption = document.querySelector(
+                  'input[name = "trans_gender"][value="Rather Not Say"]'
+                );
+                defaultOption.checked = true;
+                defaultOption.previous = true;
+            }
             options.removeClass("d-none");
         } else {
             options.addClass("d-none");
