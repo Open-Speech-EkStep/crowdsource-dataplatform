@@ -186,6 +186,7 @@ h6,
 .w-90 {
   width: 90% !important;
 }
+
 [data-toggle='popover']::after {
   display: inline-block;
   margin-left: 0.255em;
@@ -212,10 +213,10 @@ h6,
 }
 
 .spinner {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
   display: inline-block;
-  border-width: 0.2rem;
+  border-width: 0.2rem !important;
   border-color: #007bff;
   border-top-color: #fff;
   animation: spin 1s infinite linear;
@@ -390,6 +391,15 @@ body.modal-open .supreme-container {
   #speakers_hours_chart_container, #speakers_hours_chart {
     height: 220px;
  }
+ .w-70 {
+  width: 100% !important;
+}
+}
+
+@media screen and (min-width: 768px) {
+  .w-70 {
+    width: 70% !important;
+  }
 }
 
 @media screen and (max-width: 320px) {

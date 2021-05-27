@@ -75,7 +75,8 @@ step("User clicks on  <arg0> button user should see <arg1> and <arg2> , <arg3> s
 step("User click on <textfield> field <submitbtn> should be enabled", async function(textfield, submitbtn) {  
         const text = taiko.textBox({ id: textfield })
         await taiko.waitFor(500)
-        await write('मुगल शासक', into(text))
+        await write('ಗಹಹಜಲಲ', into(text))
+        await taiko.waitFor(500)
         assert.ok(! await taiko.button({ id: submitbtn }).isDisabled());
 });
 
@@ -98,10 +99,11 @@ step("User details popup should appear and close button should close the pop up"
 });
 
 step("When user clicks on back button, user should land on home page", async function() {
+    await taiko.waitFor(650)
     if (await taiko.text('Back').exists()) {
         assert.ok('Back button exists')
         await click(taiko.text("Back"))
-        await taiko.waitFor(650)
+        await taiko.waitFor(1500)
     }
     assert.ok(await text("Help your language by transcribing audio into text").exists());
 
@@ -129,13 +131,13 @@ step("When user clicks on submit button user should see <thankutext>", async fun
     await taiko.waitFor(500)
 });
 
-step("When user clicks on Play button, Pause button should appear and when user clicks on pause, replay should appear", async function() {
+step("When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should appear", async function() {
     await taiko.waitFor(1000)
     await click(taiko.image({ id: "play" }));
     await taiko.waitFor(500)
     await click(taiko.image({ id: "pause" }));
-    await taiko.waitFor(1000)
-    await click(taiko.image({ id: "replay" }));
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "resume" }));
 
 });
 
@@ -229,4 +231,35 @@ step("When user clicks on back to Suno India home button, user should land on ho
     await click(link({id:"start_contributing_id"}))
     await taiko.waitFor(500)
     assert.ok(await text('Help your language by transcribing audio into text').exists());
+});
+
+step("When user clicks on submit button for Odia language user should see <thankutext>", async function(thankutext) {
+    await click(taiko.button({ id: 'submit-edit-button'}))
+    await taiko.waitFor(3000)
+    await taiko.text(thankutext).exists()
+});
+
+step("User plays the audio , <needchange> should be enabled & <arg1> should be disabled" , async function(needchange,arg1) {
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "play" }));
+    await taiko.waitFor(1000)
+    assert.ok(! await taiko.button({ id: needchange }).isDisabled());
+    assert.ok(  await taiko.button({ id: arg1 }).isDisabled());
+    // Once the audio is complete , then correct button should be enabled
+    await taiko.waitFor(5000)
+    assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
+});
+
+step("When user click on Lets Go Button, user should <arg0> see instructions to record for Dekho India flow", async function (arg0) {
+    await click(taiko.button({ id: 'proceed-box' }))
+    await taiko.waitFor(1500)
+    
+    if(arg0=="not")
+    {
+        assert.ok(! await text('Quick Tips').exists())
+    }
+    else
+    {
+    assert.ok(await text('Quick Tips').exists(), 'Not able to see instructions')
+    }
 });

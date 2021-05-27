@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="form-group green-border-focus col-lg-4 col-md-5 col-12 m-0" id="edit-text">
-                    <label><%- __('Your Edit') %></label>
+                    <label><%- __('Your Edit') %> ( <span id="edit-language"></span> )</label>
                     <div class="arrow-right"></div>
                     <textarea class="form-control edit-area" id="edit" rows="3" maxlength="1000" placeholder="Start typing here..." style="resize:none"></textarea>
                 </div>
@@ -119,7 +119,12 @@
                         <div><span class="spinner w-h-5"></span></div>
                     </div>
                     <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn">
-                        <div class="audioplayer d-flex justify-content-center align-items-center"><img src="../../img/play.svg" alt="play" id="play" class="cursor-pointer"> <img src="../../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer"> <img src="../../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer"></div>
+                        <div class="audioplayer d-flex justify-content-center align-items-center">
+                            <img src="../../img/play.svg" alt="play" id="play" class="cursor-pointer">
+                            <img src="../../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer">
+                            <img src="../../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer">
+                            <img src="../../img/play.svg" alt="resume" id="resume" class="d-none justify-self-center cursor-pointer">
+                        </div>
                         <h3 class="font-wt-800 text-center mt-2" id="audioplayer-text_play">
                             <%= __('Play') %>
                         </h3>
@@ -129,14 +134,18 @@
                         <h3 class="font-wt-800 text-center d-none mt-2" id="audioplayer-text_pause">
                             <%= __('Pause') %>
                         </h3>
+                        <h3 class="font-wt-800 text-center d-none mt-2" id="audioplayer-text_resume">
+                            <%= __('Resume') %>
+                        </h3>
                     </div>
                     <button class="btn align-self-start mb-2 w-100" disabled="disabled" id="like_button">
-                        <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1" y="1" width="206" height="64" rx="32" fill="white" stroke="#007BFF" stroke-width="2"/>
-                            <path d="M34.5 37.5L42 43.5L57.5 26" stroke="#007BFF" stroke-width="3" stroke-linecap="round"/>
+                        <svg width="201" height="66" viewBox="0 0 201 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1" width="199" height="64" rx="32" fill="white" stroke="#007BFF" stroke-width="2"/>
+                            <path d="M45.4291 35.8036L45.4291 35.8036L50.3174 40.6919C50.9677 41.3422 52.0193 41.3422 52.6695 40.6919L65.036 28.3371L65.0362 28.3369C65.6865 27.6867 65.6865 26.6467 65.0362 25.9965C64.3859 25.3462 63.346 25.3462 62.6958 25.9965L51.4993 37.1929L47.7695 33.4632C47.1193 32.8129 46.0794 32.8129 45.4291 33.4632C44.7788 34.1134 44.7788 35.1533 45.4291 35.8036Z" fill="#157FFB" stroke="#157FFB"/>
                             <text x="80" y="43" font-family="lato" font-size="24" fill="#007BFF" style="text-align:center">
                                 <%= __('Correct') %>
                             </text>
+
                         </svg>
                     </button>
                     <button class="btn align-self-start mb-2 w-100 d-none" disabled="disabled" id="submit-edit-button">
@@ -158,6 +167,7 @@
                             <img src="../../img/play.svg" height="48" width="48" alt="play" id="play_mob" class="cursor-pointer"> 
                             <img src="../../img/pause.svg" height="48" width="48" alt="pause" id="pause_mob" class="d-none cursor-pointer"> 
                             <img src="../../img/replay.svg" height="48" width="48" alt="replay" id="replay_mob" class="d-none justify-self-center cursor-pointer">
+                            <img src="../../img/play.svg" height="48" width="48" alt="resume" id="resume_mob" class="d-none justify-self-center cursor-pointer">
                         </div>
                     </div>
                     <button class="w-100 btn btn-link-primary my-2" disabled="disabled" id="need_change_mob">
@@ -185,7 +195,7 @@
             </div>
 
             <div class="row justify-content-center web-view" id="skip_btn_row">
-                <button class="btn text-primary mt-2 mb-2 fs-1_5-rem" id="skip_button">
+                <button class="btn text-primary mt-2 mb-2 fs-1_5-rem ml-3" id="skip_button">
                     <%= __('Skip') %>
                 </button>
             </div>
@@ -200,7 +210,8 @@
                     </div>
                 </div>
                 <div class="px-3">
-                    <div class="row justify-content-center"><span class="" id="currentSentenceLbl"></span><span class="">/</span><span class="" id="totalSentencesLbl"></span></div>
+                    <div class="row justify-content-center">
+                        <span class="" id="currentSentenceLbl"></span><span class="">/</span><span class="" id="totalSentencesLbl"></span></div>
                 </div>
             </div>
 

@@ -26,7 +26,6 @@
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
-            
             <div class="modal-footer pt-3 position-relative" style="height:72px">
                 <div class="row position-absolute dekho-back-btn top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
@@ -45,7 +44,7 @@
             </div>
             <div class="row m-0 justify-content-center mb-5 mb-lg-0 mt-5" id="textarea-row">
                 <div class="form-group green-border-focus col-lg-8 col-md-5 col-12 m-0" id="edit-text" style="border-radius:12px">
-                    <label><%- __('Add Text') %></label>
+                    <label><%- __('Add Text') %> ( <span id="edit-language"></span> )</label>
                     <textarea class="form-control edit-area" maxlength="1000" id="edit" rows="3" placeholder="Start typing here..." style="resize:none"></textarea>
                 </div>
             </div>

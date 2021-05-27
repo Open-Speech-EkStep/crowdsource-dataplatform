@@ -186,6 +186,7 @@ h6,
 .w-90 {
   width: 90% !important;
 }
+
 [data-toggle='popover']::after {
   display: inline-block;
   margin-left: 0.255em;
@@ -212,8 +213,8 @@ h6,
 }
 
 .spinner {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
   display: inline-block;
   border-width: 0.2rem;
   border-color: #007bff;
@@ -440,6 +441,9 @@ body.modal-open .supreme-container {
   .contribution-data:last-child {
     border: none;
   }
+  .w-70 {
+    width: 70% !important;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -454,6 +458,9 @@ body.modal-open .supreme-container {
     border-bottom: 1px solid #C4C4C4;
     padding: 1rem 0;
     text-align: center;
+  }
+  .w-70 {
+    width: 100% !important;
   }
 }
 

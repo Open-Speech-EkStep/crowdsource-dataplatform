@@ -25,6 +25,22 @@ const dekhoCountKey = 'dekhoCount';
 const currentIndexKey = 'dekhoCurrentIndex';
 const sentencesKey = 'dekhoSentencesKey';
 
+
+const notyf = new Notyf({
+  position: { x: 'center', y: 'top' },
+  types: [
+      {
+          type: 'success',
+          className: 'fnt-1-5',
+      },
+      {
+          type: 'error',
+          duration: 3500,
+          className: 'fnt-1-5',
+      },
+  ],
+});
+
 let localeStrings;
 
 window.dekhoIndia = {};
@@ -119,6 +135,8 @@ function getNextSentence() {
     // showThankYou();
     disableSkipButton();
     setTimeout(showThankYou, 1000);
+    // const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
+    // notyf.success(msg);
   }
 }
 
@@ -308,6 +326,7 @@ function enableButton(element) {
   element.removeAttr("disabled")
 }
 
+
 const getImage = function (contributionId) {
   // hideAudioRow();
   disableSkipButton();
@@ -388,6 +407,8 @@ const initializeComponent = () => {
   const totalItems = dekhoIndia.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+
+  $('#edit-language').text(language)
 
   $("#start_contributing_id").on('click', function () {
     const data = localStorage.getItem("speakerDetails");

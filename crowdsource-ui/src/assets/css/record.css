@@ -57,7 +57,7 @@ html {
     font-size: 15px;
   }
   .recording-container {
-    min-height: 250px;
+    min-height: 150px;
   }
   .prompt{
     min-height: 120px;
@@ -492,5 +492,9 @@ audio {
 .edit-area.form-control:focus{
   border: none;
   box-shadow: none;
+}
+
+#skipBtn{
+  font-size: 24px;
 }
 

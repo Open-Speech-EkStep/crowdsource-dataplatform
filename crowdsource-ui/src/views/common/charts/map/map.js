@@ -4,7 +4,7 @@ const statesInformation = [
   { id: 'IN-TG', state: 'Telangana', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
   { id: 'IN-AN', state: 'Andaman and Nicobar Islands', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
   { id: 'IN-AP', state: 'Andhra Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-AR', state: 'Arunanchal Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-AR', state: 'Arunachal Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
   { id: 'IN-AS', state: 'Assam', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
   { id: 'IN-BR', state: 'Bihar', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
   { id: 'IN-CT', state: 'Chhattisgarh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
@@ -52,11 +52,11 @@ const drawMap = function (response, moduleType) {
     })
   );
   let quarterVal;
-  if (maxContribution > 1) {
-    quarterVal = maxContribution / 4;
-  } else {
-    quarterVal = 0.25;
-  }
+    if (maxContribution > 1) {
+      quarterVal = maxContribution / 4;
+    } else {
+      quarterVal = 0.25;
+    }
   statesData.forEach(st => {
     const ele = response.data.find(s => st.state === s.state);
     if (ele) {
@@ -70,9 +70,9 @@ const drawMap = function (response, moduleType) {
         minutes: vMinutes,
         seconds: vSeconds,
       } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
-      st.contributed_time = moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) : `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
-      st.validated_time = moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_validation_count) : `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
-      st.value = moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
+      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
+      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_validation_count) : `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
+      st.value = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
       st.total_speakers = ele.total_speakers;
       st.id = st.id;
     } else {
@@ -122,17 +122,32 @@ const drawMap = function (response, moduleType) {
     "fill",
     function (fill, target) {
       if (target.dataItem) {
-        if (target.dataItem.value >= quarterVal * 3) {
-          return am4core.color("#4061BF");
-        } else if (target.dataItem.value >= quarterVal * 2) {
-          return am4core.color("#6B85CE");
-        } else if (target.dataItem.value >= quarterVal) {
-          return am4core.color("#92A8E8");
-        } else if (target.dataItem.value > 0) {
-          return am4core.color("#CDD8F6");
+        if(moduleType == "bolo" || moduleType == "suno") {
+          if (target.dataItem.value >= quarterVal * 3) {
+            return am4core.color("#4061BF");
+          } else if (target.dataItem.value >= quarterVal * 2) {
+            return am4core.color("#6B85CE");
+          } else if (target.dataItem.value >= quarterVal) {
+            return am4core.color("#92A8E8");
+          } else if (target.dataItem.value > 0) {
+            return am4core.color("#CDD8F6");
+          } else {
+            return am4core.color("#E9E9E9");
+          }
         } else {
-          return am4core.color("#E9E9E9");
+          if (target.dataItem.value >= 500) {
+            return am4core.color("#4061BF");
+          } else if (target.dataItem.value >= 200) {
+            return am4core.color("#6B85CE");
+          } else if (target.dataItem.value >= 100) {
+            return am4core.color("#92A8E8");
+          } else if (target.dataItem.value > 0) {
+            return am4core.color("#CDD8F6");
+          } else {
+            return am4core.color("#E9E9E9");
+          }
         }
+       
       }
       return fill;
     }
@@ -154,12 +169,12 @@ const drawMap = function (response, moduleType) {
     quarterVal * 3 * 60 * 60,
     false
   );
-  $quarter.text(`0 - ${formatTime(qHours, qMinuts)}`);
-  $half.text(`${formatTime(qHours, qMinuts)} - ${formatTime(hHours, hMinuts)}`);
-  $threeQuarter.text(
+  $quarter.text(moduleType == "parallel" || moduleType == "ocr" ? `0 - 100` : `0 - ${formatTime(qHours, qMinuts)}`);
+  $half.text(moduleType == "parallel" || moduleType == "ocr" ? `100 - 200` : `${formatTime(qHours, qMinuts)} - ${formatTime(hHours, hMinuts)}`);
+  $threeQuarter.text( moduleType == "parallel" || moduleType == "ocr" ? `200 - 500` :
     `${formatTime(hHours, hMinuts)} - ${formatTime(tQHours, tQMinuts)}`
   );
-  $full.text(`> ${formatTime(tQHours, tQMinuts)}`);
+  $full.text(moduleType == "parallel" || moduleType == "ocr" ? `> 500` : `> ${formatTime(tQHours, tQMinuts)}`);
   $legendDiv.removeClass("d-none").addClass("d-flex");
 };
 

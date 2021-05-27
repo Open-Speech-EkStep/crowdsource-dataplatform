@@ -19,15 +19,15 @@
     cursor: pointer
 }
 
-.no-data-found {
+.no-language-selected {
     position: fixed;
     z-index: 10;
     width: 75%;
-    bottom: 0;
+    top: 7%;
     padding: 1.5rem 0;
 }
 
-.no-data-found > div {
+.no-language-selected > div {
     padding: 0.5rem 2rem;
     background-color: #343A40;
     color: #fff;

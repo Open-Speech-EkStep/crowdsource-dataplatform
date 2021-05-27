@@ -16,6 +16,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     const chart = am4core.create("timeline-chart", am4charts.XYChart);
     
     const chartData = timelineData.data;
+   
     const currentModule = localStorage.getItem(CURRENT_MODULE);
     for (let i = 0; i < chartData.length; i++) {
       if (!chartData[i].month) {
@@ -25,16 +26,18 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
       chartData[i].year = String(chartData[i].year);
       const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(chartData[i].cumulative_contributions) * 60 * 60), true);
       const { hours: vHours, minutes: vMinutes, seconds: vSeconds } = calculateTime((Number(chartData[i].cumulative_validations) * 60 * 60), true);
-      chartData[i].contributedHours = currentModule == "dekho" || "likho" ? chartData[i].total_contribution_count :  `${cHours}hrs ${cMinutes}mins ${cSeconds}secs`;
-      chartData[i].validatedHours = currentModule == "dekho" || "likho" ? chartData[i].total_validation_count : `${vHours}hrs ${vMinutes}mins ${vSeconds}secs`;
+      chartData[i].contributedHours = currentModule == "dekho" || currentModule == "likho" ? chartData[i].total_contribution_count :  `${cHours}hrs ${cMinutes}mins ${cSeconds}secs`;
+      chartData[i].validatedHours = currentModule == "dekho" || currentModule == "likho" ? chartData[i].total_validation_count : `${vHours}hrs ${vMinutes}mins ${vSeconds}secs`;
     }
 
-    let tooltipContent = `<div>
+    let tooltipContent
+    if(currentModule == MODULE.suno.value){
+    tooltipContent = `<div>
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div>Transcribed: <label>{contributedHours}</label></div>
                 <div style="text-align: left; font-style: italic;">Validated: <label>{validatedHours}</label></div>
             </div>`;
-   
+    }
     if(currentModule == MODULE.likho.value){
       tooltipContent = `<div>
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
@@ -53,6 +56,8 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
 
 
     chart.data = chartData;
+    console.log(currentModule);
+    console.log(chart.data);
 
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
     dateAxis.renderer.minGridDistance = 10;
@@ -75,7 +80,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     // Create series
     var series = chart.series.push(new am4charts.LineSeries());
     series.dataFields.dateX = "duration";
-    series.dataFields.valueY = currentModule == "dekho" || MODULE.likho.value ? "total_contribution_count" : "cumulative_contributions";
+    series.dataFields.valueY = currentModule == "dekho" || currentModule == MODULE.likho.value ? "total_contribution_count" : "cumulative_contributions";
     series.strokeWidth = 3;
     series.tensionX = 0.8;
     series.tooltipHTML = tooltipContent;
@@ -90,7 +95,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     // Create series
     var series2 = chart.series.push(new am4charts.LineSeries());
     series2.dataFields.dateX = "duration";
-    series2.dataFields.valueY = currentModule == "dekho" || "likho" ? "total_contribution_count" : "cumulative_validations";
+    series2.dataFields.valueY = currentModule == "dekho" || currentModule == "likho" ? "total_validation_count" : "cumulative_validations";
     series2.sequencedInterpolation = true;
     series2.tensionX = 0.8;
     series2.strokeWidth = 3;

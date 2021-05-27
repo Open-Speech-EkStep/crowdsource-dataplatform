@@ -6,7 +6,7 @@ const statesInformation = [
   { id: 'IN-TG', state: 'Telangana', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
   { id: 'IN-AN', state: 'Andaman and Nicobar Islands', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
   { id: 'IN-AP', state: 'Andhra Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-AR', state: 'Arunanchal Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
+  { id: 'IN-AR', state: 'Arunachal Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
   { id: 'IN-AS', state: 'Assam', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
   { id: 'IN-BR', state: 'Bihar', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
   { id: 'IN-CT', state: 'Chhattisgarh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
@@ -215,12 +215,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
   chartReg["chart"] = chart;
 
   let response = [...responseData];
-  if (xAxisLabel === "total_speakers") {
-    response = response.sort((a, b) => Number(a.total_speakers) < Number(b.total_speakers) ? -1 : 1);
-  } else {
-    response = response.sort((a, b) => Number(a.total_contributions) < Number(b.total_contributions) ? -1 : 1);
-  }
-
+ 
   if (xAxisLabel !== "total_speakers") {
     response.forEach((ele) => {
       const { hours, minutes, seconds } = calculateTime(
@@ -230,7 +225,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
       ele.total_contributions_text = formatTime(hours, minutes, seconds);
     });
   }
-  chart.data = response;
+  chart.data = response.reverse();
   var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
   categoryAxis.dataFields.category = yAxisLabel;
   categoryAxis.renderer.grid.template.location = 0;
@@ -240,7 +235,16 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
   var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
   valueAxis.renderer.grid.template.strokeWidth = 0;
   valueAxis.renderer.labels.template.disabled = true;
-
+  if(xAxisLabel != "total_speakers") {
+    const maxValue = Math.max.apply(Math, chart.data.map(function(o) { return Number(o.total_contributions); })) + 0.05;
+    valueAxis.min = 0;
+    valueAxis.max =  maxValue > 0.1 ? maxValue : 0.1;
+  } else {
+    const maxValue = Math.max.apply(Math, chart.data.map(function(o) { return Number(o.total_speakers); })) + 20;
+    valueAxis.min = 0;
+    valueAxis.max =  maxValue > 40 ? maxValue : 40;
+  }
+  valueAxis.strictMinMax = true; 
   categoryAxis.renderer.minGridDistance = 25;
   var series = chart.series.push(new am4charts.ColumnSeries());
   series.dataFields.valueX = xAxisLabel;

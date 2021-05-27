@@ -69,7 +69,10 @@ const parse2 = (localDatasetPath, files) => {
     allKeys = data
     const imageToTextDict = {}
     for (var i = 0; i < allKeys.length; i++) {
-        element = allKeys[i][0]
+        element = allKeys[i]
+        if (element.length == 1) {
+            element = element[0]
+        }
         imageToTextDict[element.imageFilename] = element.groundTruth
     }
 

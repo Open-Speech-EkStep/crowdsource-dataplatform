@@ -132,6 +132,10 @@ body {
 
 
 @media (max-width: 767px) {
+   .speakerDetails {
+   height: 500px;
+   overflow: auto;
+ }
   .d-none-mob {
     display: none;
   }
@@ -139,6 +143,9 @@ body {
    top: 39px;
    left: -4px;
   }
+  .bolo-back-btn {
+    left: 20px !important;
+   }
   .dekho-back-btn {
     left: 1px !important;
     margin-top: -7px !important;
@@ -147,14 +154,40 @@ body {
   .top-back-btn .back-text {
     display: none;
   }
+  #dislike_button svg {
+    height: 80px;
+    width: 160px;
+  }
+
+  #like_button svg {
+    height: 80px;
+    width: 160px;
+  }
+
+  #audio-player-btn img {
+    height: 50px;
+    width: 50px;
+  }
 }
 
 @media (min-width: 767px) {
   .d-none-mob {
-    display: block;
+    display: flex;
   }
  .top-back-btn{
-   top: 30px;
+   top: 20px;
    left: 35px;
  }
+ .speakerDetails {
+   height: 700px;
+   overflow: auto;
+ }
+
+ .back-btn a:hover {
+   text-decoration: none;
+ }
+
+ .btn-link:hover {
+  text-decoration: none;
+}
 }

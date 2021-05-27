@@ -13,9 +13,9 @@
 * Check "Label" option should be "disabled" on Home page
 * Check "Validate" option should be "disabled" on Home page
 
-## Validate Label card should be disabled & Validate should be enabled when the data is already contributed for Bengali language
+## Validate Label card should be disabled & Validate should be enabled when the data is already contributed for Telugu language
 * Select "Dekho India"from header 
-* Select Contribution Language as "বাংলা"
+* Select Contribution Language as "తెలుగు"
 * Check "Label" option should be "disabled" on Home page
 * Check "Validate" option should be "enabled" on Home page
 
@@ -26,9 +26,9 @@
 * When user select "हिंदी" Language from dropdown then "languages" should not visible
 * When user clicks on back button, user should land on Dekho India home page
 
-## Validate the User Details pop-up in Label section
+## Validate the User Details pop-up in Label section for Kannada language
 * Select "Dekho India"from header 
-* Select Contribution Language as "मराठी"
+* Select Contribution Language as "ಕನ್ನಡ"
 * Navigate to "Label" button and click "Label" button
 * Username field should be present
 * if a user enter username and click on Not you change user button , the field should be cleared
@@ -74,13 +74,13 @@
 
 ## Validate Label flow
 * Select "Dekho India"from header    
-* Select Contribution Language as "मराठी"
+* Select Contribution Language as "ಕನ್ನಡ"
 * Navigate to "Label" button and click "Label" button
 * Add "T User" Username
 * When user click on Lets Go Button, user should "not" see instructions to record
-* When User clicks on "edit" field and type "नमस्कार नमस्कार" submit and cancel button should be enabled
+* When User clicks on "edit" field and type "ನೀವು ಹೇಗಿದ್ದೀರಿ" submit and cancel button should be enabled
 * When user clicks on submit button user should see " Thank you for contributing!"
-* When User clicks on "edit" field and type "नमस्कार नमस्कार" submit and cancel button should be enabled
+* When User clicks on "edit" field and type "ನೀವು ಹೇಗಿದ್ದೀರಿ" submit and cancel button should be enabled
 * When user clicks on submit button user should see " Thank you for contributing!"
 * When user skips the rest of the "3" sentences , User should see Thank you Page
 * when user clicks on the Contribute More button, user should not see the Instructions page again
@@ -96,7 +96,7 @@
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
 * User clicks on  "need_change" button user should see "Captured Text" and "Your Edit" , "cancel-edit-button" should be  enabled
 * User click on "edit" field "submit-edit-button" should be enabled
-* user should see the Virtual Keyboard button
+//* user should see the Virtual Keyboard button
 * User skips the next "4" sentences user should land on Thank you page in "English"
 * User should see the "Validate More" button
 * when user clicks on the Validate more button user should no data available message
@@ -111,6 +111,5 @@
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
-* User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
-* User should see Bronze batch on Thank you page
+* User clicks on "like_button" he should see thank you page and should be able to see bronze Badge
 * User should see the "Validate More" button

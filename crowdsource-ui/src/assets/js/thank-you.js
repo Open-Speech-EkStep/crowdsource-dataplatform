@@ -5,6 +5,7 @@ const {
   LOCALE_STRINGS,
   BADGES,
   CONTRIBUTION_LANGUAGE,
+  MODULE
 } = require("./constants");
 const {
   setPageContentHeight,
@@ -13,6 +14,7 @@ const {
   getLocaleString,
   performAPIRequest,
 } = require("./utils");
+const {showByHoursChart} = require('./home-page-charts');
 
 const CURRENT_INDEX = "currentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -40,9 +42,10 @@ function setSentencesContributed() {
   ).then((data) => {
     localStorage.setItem('badgeId', data.badgeId);
     localStorage.setItem('badges', JSON.stringify(data.badges));
-    localStorage.setItem('nextHourGoal', data.nextHourGoal);
+    const nextHourGoal = data.nextHourGoal ? data.nextHourGoal : 100;
+    localStorage.setItem('nextHourGoal', nextHourGoal);
     $("#user-contribution").text(data.contributionCount);
-    $("#language-hour-goal").text(data.nextHourGoal);
+    $("#language-hour-goal").text(nextHourGoal);
     if (data.isNewBadge) {
       $("#spree_text").removeClass("d-none");
       $("#milestone_text").removeClass("d-none");
@@ -69,45 +72,46 @@ function setSentencesContributed() {
       $("#user-contribution-msg").removeClass("d-none");
       $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
       $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
-      const $bronzeBadgeLink = $("#bronze_badge_link img");
-      const $silverBadgeLink = $("#silver_badge_link img");
-      const $goldBadgeLink = $("#gold_badge_link img");
-      const $platinumBadgeLink = $("#platinum_badge_link img");
-      if (data.currentBadgeType.toLowerCase() === "bronze") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-      } else if (data.currentBadgeType.toLowerCase() === "silver") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $silverBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-        $('#silver_badge_link_img').addClass('enable');
-        $('#silver_badge_link_img').removeClass('disable');
-      } else if (data.currentBadgeType.toLowerCase() === "gold") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $silverBadgeLink.parent().attr("disabled", false);
-        $goldBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-        $('#silver_badge_link_img').addClass('enable');
-        $('#silver_badge_link_img').removeClass('disable');
-        $('#gold_badge_link_img').addClass('enable');
-        $('#gold_badge_link_img').removeClass('disable');
-      } else if (data.currentBadgeType.toLowerCase() === "platinum") {
-        $bronzeBadgeLink.parent().attr("disabled", false);
-        $silverBadgeLink.parent().attr("disabled", false);
-        $goldBadgeLink.parent().attr("disabled", false);
-        $platinumBadgeLink.parent().attr("disabled", false);
-        $('#bronze_badge_link_img').addClass('enable');
-        $('#bronze_badge_link_img').removeClass('disable');
-        $('#silver_badge_link_img').addClass('enable');
-        $('#silver_badge_link_img').removeClass('disable');
-        $('#gold_badge_link_img').addClass('enable');
-        $('#gold_badge_link_img').removeClass('disable');
-        $('#platinum_badge_link_img').addClass('enable');
-        $('#platinum_badge_link_img').removeClass('disable');
-      }
+    }
+
+    const $bronzeBadgeLink = $("#bronze_badge_link img");
+    const $silverBadgeLink = $("#silver_badge_link img");
+    const $goldBadgeLink = $("#gold_badge_link img");
+    const $platinumBadgeLink = $("#platinum_badge_link img");
+    if (data.currentBadgeType.toLowerCase() === "bronze") {
+      $bronzeBadgeLink.parent().attr("disabled", false);
+      $('#bronze_badge_link_img').addClass('enable');
+      $('#bronze_badge_link_img').removeClass('disable');
+    } else if (data.currentBadgeType.toLowerCase() === "silver") {
+      $bronzeBadgeLink.parent().attr("disabled", false);
+      $silverBadgeLink.parent().attr("disabled", false);
+      $('#bronze_badge_link_img').addClass('enable');
+      $('#bronze_badge_link_img').removeClass('disable');
+      $('#silver_badge_link_img').addClass('enable');
+      $('#silver_badge_link_img').removeClass('disable');
+    } else if (data.currentBadgeType.toLowerCase() === "gold") {
+      $bronzeBadgeLink.parent().attr("disabled", false);
+      $silverBadgeLink.parent().attr("disabled", false);
+      $goldBadgeLink.parent().attr("disabled", false);
+      $('#bronze_badge_link_img').addClass('enable');
+      $('#bronze_badge_link_img').removeClass('disable');
+      $('#silver_badge_link_img').addClass('enable');
+      $('#silver_badge_link_img').removeClass('disable');
+      $('#gold_badge_link_img').addClass('enable');
+      $('#gold_badge_link_img').removeClass('disable');
+    } else if (data.currentBadgeType.toLowerCase() === "platinum") {
+      $bronzeBadgeLink.parent().attr("disabled", false);
+      $silverBadgeLink.parent().attr("disabled", false);
+      $goldBadgeLink.parent().attr("disabled", false);
+      $platinumBadgeLink.parent().attr("disabled", false);
+      $('#bronze_badge_link_img').addClass('enable');
+      $('#bronze_badge_link_img').removeClass('disable');
+      $('#silver_badge_link_img').addClass('enable');
+      $('#silver_badge_link_img').removeClass('disable');
+      $('#gold_badge_link_img').addClass('enable');
+      $('#gold_badge_link_img').removeClass('disable');
+      $('#platinum_badge_link_img').addClass('enable');
+      $('#platinum_badge_link_img').removeClass('disable');
     }
   });
 }
@@ -192,8 +196,9 @@ const setTotalProgressBar = (totalSeconds) => {
     performAPIRequest(
       `/rewards?type=text&language=${contributionLanguage}&source=contribute&userName=${userName}`
     ).then((data) => {
-      localStorage.setItem('nextHourGoal',data.nextHourGoal);
-      updateProgressBulb(data.nextHourGoal, totalSeconds);
+      const nextHourGoal = data.nextHourGoal ? data.nextHourGoal : 100;
+      localStorage.setItem('nextHourGoal',nextHourGoal);
+      updateProgressBulb(nextHourGoal, totalSeconds);
     })
 };
 
@@ -256,6 +261,7 @@ const getLanguageStats = function () {
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
         $("#did_you_know_section").show();
+        showByHoursChart(MODULE.bolo.value);
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
@@ -341,10 +347,11 @@ function executeOnLoad() {
   } else if (currentIndexInStorage < totalSentence) {
     location.href = "./home.html#start-record";
   } else {
-    $("#nav-user").removeClass("d-none");
-    $("#nav-login").addClass("d-none");
-    $("#nav-username").text(localSpeakerDataParsed.userName);
-
+    if(localSpeakerDataParsed.userName && localSpeakerDataParsed.userName.length > 0){
+      $("#nav-user").removeClass("d-none");
+      $("#nav-login").addClass("d-none");
+      $("#nav-username").text(localSpeakerDataParsed.userName);
+    }
     setPageContentHeight();
     setSentencesContributed();
     setTotalHoursContributed(localSpeakerDataParsed);
@@ -376,6 +383,7 @@ function downloadPdf(badgeType) {
 }
 
 $(document).ready(function () {
+  localStorage.setItem('module','bolo');
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });

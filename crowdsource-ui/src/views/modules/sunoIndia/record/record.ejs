@@ -27,7 +27,6 @@
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
-            <%- include ../common/recording-instructions.ejs %>
             <div class="modal-footer pt-3 record-btn-container position-relative" style="height:72px">
                 <div class="row position-absolute top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
@@ -46,7 +45,8 @@
             </div>
             <div class="row justify-content-center mb-5 mb-lg-0 mt-5 mx-1" id="editor-row">
                 <div class="form-group green-border-focus col-lg-8 col-md-5 col-12 m-0 text-area" id="edit-text-suno">
-                    <textarea disabled="disabled" class="form-control edit-area" id="edit" rows="3" placeholder="Start typing here..." style="font-size:32px;resize:none"></textarea>
+                    <label><%- __('Add Text') %> ( <span id="edit-language"></span> )</label>
+                    <textarea disabled="disabled" class="form-control edit-area" id="edit" rows="3" placeholder="Start typing here..." style="font-size:24px;resize:none"></textarea>
                 </div>
             </div>
             <div class="row justify-content-center d-none" id="thankyou-text">
@@ -104,7 +104,12 @@
                         <div><span class="spinner w-h-5"></span></div>
                     </div>
                     <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn">
-                        <div class="audioplayer d-flex justify-content-center align-items-center"><img src="../../img/play.svg" alt="play" id="play" class="cursor-pointer"> <img src="../../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer"> <img src="../../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer"></div>
+                        <div class="audioplayer d-flex justify-content-center align-items-center">
+                            <img src="../../img/play.svg" alt="play" id="play" class="cursor-pointer">
+                            <img src="../../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer">
+                            <img src="../../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer">
+                            <img src="../../img/play.svg" alt="resume" id="resume" class="d-none justify-self-center cursor-pointer">
+                        </div>
                         <h3 class="font-wt-800 text-center mt-2" id="audioplayer-text_play">
                             <%= __('Play') %>
                         </h3>
@@ -113,6 +118,9 @@
                         </h3>
                         <h3 class="font-wt-800 text-center d-none mt-2" id="audioplayer-text_pause">
                             <%= __('Pause') %>
+                        </h3>
+                        <h3 class="font-wt-800 text-center d-none mt-2" id="audioplayer-text_resume">
+                            <%= __('Resume') %>
                         </h3>
                     </div>
                     <button class="btn align-self-start mb-2 w-100" disabled="disabled" id="submit-edit-button">
@@ -136,6 +144,7 @@
                                 <img src="../../img/play.svg" alt="play" id="play_mob" class="cursor-pointer" height="48" width="48"> 
                                 <img src="../../img/pause.svg" height="48" width="48" alt="pause" id="pause_mob" class="d-none cursor-pointer"> 
                                 <img src="../../img/replay.svg" height="48" width="48" alt="replay" id="replay_mob" class="d-none justify-self-center cursor-pointer">
+                                <img src="../../img/play.svg" height="48" width="48" alt="resume" id="resume_mob" class="d-none justify-self-center cursor-pointer">
                             </div>
                         </div>
                     </div>
@@ -163,7 +172,7 @@
             </div>
             </div>
             <div class="row justify-content-center web-view" id="skip_btn_row">
-                <button class="btn text-primary mt-2 mb-2 fs-1_5-rem" id="skip_button">
+                <button class="btn text-primary mt-2 mb-2 fs-1_5-rem ml-3" id="skip_button">
                     <%= __('Skip') %>
                 </button>
             </div>

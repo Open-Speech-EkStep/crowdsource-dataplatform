@@ -194,10 +194,10 @@ audio {
     transform: translate(-50%, -50%);
 }
 .spinner {
-    width: 10rem;
-    height: 10rem;
+    width: 1.5rem;
+    height: 1.5rem;
     display: inline-block;
-    border-width: 12px;
+    border-width: .2rem;
     border-color: #007bff;
     border-top-color: #fff;
     animation: spin 1s infinite linear;
