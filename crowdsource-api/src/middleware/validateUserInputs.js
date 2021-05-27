@@ -25,7 +25,7 @@ const validateUserInputAndFile = function (req, res, next) {
     const speakerDetailsJson = JSON.parse(speakerDetails);
     const isInvalidParams = !(speakerDetailsJson.userName != undefined && speakerDetailsJson.userName.length <= MAX_LENGTH && !MOBILE_REGEX.test(speakerDetailsJson.userName) && !EMAIL_REGEX.test(speakerDetailsJson.userName));
 
-    const MIN_INPUT_LENGTH = 5;
+    const MIN_INPUT_LENGTH = 2;
     const allLanguages = LANGUAGES.map(lang => lang.value)
 
     const invalidMotherTongue = (speakerDetailsJson.motherTongue && !MOTHER_TONGUE.includes(speakerDetailsJson.motherTongue));

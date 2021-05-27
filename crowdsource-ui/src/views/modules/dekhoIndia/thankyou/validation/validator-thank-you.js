@@ -15,7 +15,7 @@ const {
   getLocaleString,
   performAPIRequest,
 } = require("../common/utils");
-const {downloadPdf} = require('../common/downloadableBadges');
+// const {downloadPdf} = require('../common/downloadableBadges');
 const {showByHoursChart,getContributedAndTopLanguage,setBadge} = require('../common/common');
 const {showUserProfile} = require('../common/header');
 
@@ -23,6 +23,33 @@ const CURRENT_INDEX = "dekhoValidatorCurrentIndex";
 const dekhoValidatorCountKey = 'dekhoValidatorCount';
 const totalSentence = Number(localStorage.getItem(dekhoValidatorCountKey));
 const SPEAKER_DETAILS = "speakerDetails";
+
+function downloadPdf(badgeType) {
+  try {
+    const pdf = new jsPDF()
+    const img = new Image();
+    img.onload = function () {
+      pdf.addImage(this, 36, 10, 128, 128);
+      pdf.save(`${badgeType}-badge.pdf`);
+    };
+
+    img.crossOrigin = "Anonymous";
+    const currentModule = localStorage.getItem(CURRENT_MODULE);
+    const badges = MODULE[currentModule].BADGES;
+    console.log(badges[badgeType].imgValJpg)
+
+    img.src = badges[badgeType].imgValJpg;
+    const allBadges = JSON.parse(localStorage.getItem('badges'));
+    const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
+    if (badge) {
+      pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+}
+
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -69,7 +96,8 @@ const getLanguageStats = function () {
         const contributionLanguage = localStorage.getItem(
           CONTRIBUTION_LANGUAGE
         );
-        const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.dekho.value);
+        const module = localStorage.getItem(CURRENT_MODULE);
+        const languages = getContributedAndTopLanguage(module == MODULE.likho.value || module == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, MODULE.dekho.value);
         localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
         showByHoursChart(MODULE.dekho.value);
         const data = response.aggregate_data_by_language.sort((a, b) =>
@@ -128,7 +156,7 @@ function setSentencesContributed() {
   performAPIRequest(
     `/rewards?type=ocr&language=${contributionLanguage}&source=validate&userName=${userName}`
   ).then((data) => {
-    setBadge(data,localeStrings);
+    setBadge(data,localeStrings,"validator");
   });
 }
 
@@ -161,6 +189,12 @@ function executeOnLoad() {
 $(document).ready(function () {
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
+  });
+
+  $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
+    if (!$(this).attr("disabled")) {
+      downloadPdf($(this).attr("data-badge"));
+    }
   });
 
   localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);

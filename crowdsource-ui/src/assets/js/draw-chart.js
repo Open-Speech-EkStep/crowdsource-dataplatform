@@ -309,7 +309,7 @@ const drawTimelineChart = (timelineData) => {
         }
 
         chart.data = chartData;
-
+        console.log("bolo", chart.data);
         const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
         dateAxis.renderer.minGridDistance = 10;
         dateAxis.renderer.grid.template.disabled = true;

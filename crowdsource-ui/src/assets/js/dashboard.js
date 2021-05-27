@@ -131,6 +131,7 @@ function updateLanguage(language) {
 $(document).ready(function () {
     localStorage.removeItem('previousLanguage');
     const speakerDetailsKey = 'speakerDetails';
+    localStorage.setItem('module','bolo');
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();

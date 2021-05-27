@@ -10,27 +10,27 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-5" id="module_name">
-            <li class="nav-item module-item p-2" value="bolo"><a href="<%= bolo %>" class="nav-link text-dark font-weight-bold">
-                    <%= __('Bolo India') %>
-                </a></li>
             <li class="nav-item module-item p-2" value="suno"><a href="<%= suno %>" class="nav-link text-dark font-weight-bold">
                     <%= __('Suno India') %>
                 </a></li>
-            <li class="nav-item module-item p-2" value="suno"><a href="<%= likho %>" class="nav-link text-dark font-weight-bold">
+            <li class="nav-item module-item p-2" value="bolo"><a href="<%= bolo %>" class="nav-link text-dark font-weight-bold">
+                    <%= __('Bolo India') %>
+                </a></li>
+            <li class="nav-item module-item p-2" value="likho"><a href="<%= likho %>" class="nav-link text-dark font-weight-bold">
                     <%= __('Likho India') %>
                 </a></li>
-            <li class="nav-item module-item p-2" value="suno"><a href="<%= dekho %>" class="nav-link text-dark font-weight-bold">
+                <li class="nav-item module-item p-2" value="dekho"><a href="<%= dekho %>" class="nav-link text-dark font-weight-bold">
                     <%= __('Dekho India') %>
                 </a></li>
         </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item p-2 dropdown" id="locale_language_dropdown">
+        <ul class="navbar-nav ml-auto" id="about-us">
+            <li class="nav-item p-2 module-item dropdown" id="locale_language_dropdown">
                 <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <%= __('Language') %>
                 </div>
                 <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton"><a id="english" class="dropdown-item" href="#" locale="en">English</a></div>
             </li>
-            <li class="nav-item p-2"><a href="<%- `${path}about-us.html`%>" class="nav-link text-dark font-weight-bold">
+            <li class="nav-item module-item p-2" value="about-us"><a href="<%- `${path}about-us.html`%>" class="nav-link text-dark font-weight-bold">
                     <%= __('About Us') %>
                 </a></li>
             <li class="nav-item p-2"><a class="nav-link text-dark font-weight-bold d-none" id="nav-user"><span class="material-icons align-middle mx-1">account_circle</span> <span id="nav-username"></span></a></li>

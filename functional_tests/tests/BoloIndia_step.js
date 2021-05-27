@@ -1,7 +1,6 @@
 const taiko = require('taiko');
 const assert = require('assert');
 
-
 const {
     openBrowser,
     button,
@@ -38,8 +37,12 @@ afterSuite(async () => {
     await closeBrowser();
 });
 
+gauge.screenshotFn = async function () {
+    return await taiko.screenshot({ encoding: 'base64' });
+};
+
 step("Open BoloIndia", async () => {
-   await taiko.waitFor(500)
+    await taiko.waitFor(500)
     await goto(testUrl);
     await taiko.waitFor(500)
 });
@@ -82,14 +85,14 @@ step("if a user enter username and click on Not you change user button , the fie
     const usernameFiled = taiko.textBox({ id: 'username' })
     await taiko.waitFor(500)
     await write('TestUser', into(usernameFiled))
-    await clear(taiko.textBox({id:'username'}));
+    await clear(taiko.textBox({ id: 'username' }));
     await taiko.waitFor(500)
     assert.equal(await usernameFiled.value(), '')
 });
 
 
 step("And User enter random Username and selects Age , Mother tongue ,gender", async function () {
-    if (await taiko.text('Speaker Details').exists()) {
+    if (await taiko.text('User Details').exists()) {
         const username = taiko.textBox({ id: 'username' })
         await taiko.waitFor(700)
         await write('Dummy user', into(username))
@@ -102,16 +105,38 @@ step("And User enter random Username and selects Age , Mother tongue ,gender", a
 step("When user click on Lets Go Button, user should <arg0> see instructions to record", async function (arg0) {
     await click(taiko.button({ id: 'proceed-box' }))
     await taiko.waitFor(1500)
-    
-    if(arg0=="not")
-    {
+
+    if (arg0 == "not") {
         assert.ok(! await text('Quick Tips').exists())
     }
-    else
-    {
-    assert.ok(await text('Quick Tips').exists(), 'Not able to see instructions')
+    else {
+        assert.ok(await text('Quick Tips').exists(), 'Not able to see instructions')
     }
 });
+
+step("When user click on Lets Go Button for Validate, user should <arg0> see instructions to record", async function (arg0) {
+    await click(taiko.button({ id: 'bolo-proceed-box' }))
+    await taiko.waitFor(1500)
+
+    if (arg0 == "not") {
+        assert.ok(! await text('Quick Tips').exists())
+    }
+    else {
+        assert.ok(await text('Quick Tips').exists(), 'Not able to see instructions')
+    }
+});
+
+step("Add <usrnm> Username for Valiadtion", async function (usrnm) {
+    if (await taiko.text('User Details').exists()) {
+        const username = taiko.textBox({ id: 'bolo-username' })
+        await taiko.waitFor(700)
+        await clear(taiko.textBox({ id: 'bolo-username' }));
+        await taiko.waitFor(300)
+        await write(usrnm, into(username))
+        await taiko.waitFor(500)
+    }
+});
+
 
 step("User should be able to close the Instructions , user should see a sentence , Skip button , Start Recording Button , username,Test Mic and speaker button", async function () {
     await click(button({ id: "instructions_close_btn" }))
@@ -134,8 +159,9 @@ step("When user clicks on <arg0> button, <arg1> button should appear", async fun
 step("When user skips all the rest of the <count> sentences , User should see Thank you Page", async function (count) {
     const skipbutton = taiko.button({ id: 'skipBtn' })
     for (let i = 0; i < count; i++) {
-        await click(skipbutton)
         await taiko.waitFor(500)
+        await click(skipbutton)
+        await taiko.waitFor(700)
     }
     await taiko.waitFor(5000)
     assert.ok(await text('Thank you for contributing!').exists())
@@ -164,14 +190,13 @@ step("Select translation language as <language>", async function (language) {
     //const localeDropDown = taiko.$("#locale_language_dropdown");
     //await click(localeDropDown);
 
-    await click(listItem({id:"locale_language_dropdown"}));
+    await click(listItem({ id: "locale_language_dropdown" }));
     await taiko.waitFor(500);
     await click(link(language));
     await taiko.waitFor(500);
 });
 
 step("Navigate to <arg0> button and click <arg0> button", async function (arg0) {
-
     if (arg0 == "Contribute") {
         await taiko.waitFor(2000)
         const startRecordingButton = taiko.image({ id: "start_recording" });
@@ -249,6 +274,7 @@ step("user should be able to see <arg0> , <arg1> , <arg2> , <arg3>", async funct
     assert.ok(await text(arg3).exists());
 });
 
+
 step("User plays the audio , <arg0>,<arg1> should be enabled", async function (arg0, arg1) {
     await taiko.waitFor(500)
     await click(taiko.image({ id: "play" }));
@@ -260,7 +286,7 @@ step("User plays the audio , <arg0>,<arg1> should be enabled", async function (a
 });
 
 step("<arg0> should be enabled , <arg1> <arg2> buttons should be disabled", async function (arg0, arg1, arg2) {
-    await taiko.waitFor(3000);
+    await taiko.waitFor(2000)
     assert.ok(! await taiko.button({ id: arg0 }).isDisabled());
     assert.ok(await taiko.button({ id: arg1 }).isDisabled());
     assert.ok(await taiko.button({ id: arg2 }).isDisabled());
@@ -273,22 +299,21 @@ step("User clicks on <arg0> , he should see next sentence and <arg1> <arg2> butt
     assert.ok(await taiko.button({ id: arg2 }).isDisabled());
 });
 
-step("User skips the next <count> sentences user should land on Thank you page in <lang>", async function (count,lang) {
+step("User skips the next <count> sentences user should land on Thank you page in <lang>", async function (count, lang) {
     const skipbutton = taiko.button({ id: 'skip_button' })
     for (let i = 0; i < count; i++) {
         await click(skipbutton)
         await taiko.waitFor(1200)
     }
 
-    if(lang=="Hindi")
-    {
-    await taiko.waitFor(3000);
-    assert.ok(await text('प्रमाणित करने के लिए शुक्रिया!').exists());}
-    
-    else
-    {
-    await taiko.waitFor(3000);
-    assert.ok(await text('Thank you for validating').exists());
+    if (lang == "Hindi") {
+        await taiko.waitFor(3000);
+        assert.ok(await text('प्रमाणित करने के लिए शुक्रिया!').exists());
+    }
+
+    else {
+        await taiko.waitFor(3000);
+        assert.ok(await text('Thank you for validating').exists());
     }
 });
 
@@ -373,31 +398,29 @@ step("When user clicks on the go to home page button , user should see the home 
     assert.ok(await text("Bolo India: A crowdsourcing initiative for Indian languages").exists());
 });
 
-step("When user clicks on Report Button, user should see Report Content Dialog Box & Submit button should be disabled", async function() {
+step("When user clicks on Report Button, user should see Report Content Dialog Box & Submit button should be disabled", async function () {
     assert.ok(await text("Report").exists());
     await taiko.waitFor(500);
     await click(taiko.button({ id: "report_btn" }))
     await taiko.waitFor(1000);
     assert.ok(await text("Report Content").exists());
-    assert.ok( await taiko.button({ id: "report_submit_id" }).isDisabled());    
+    assert.ok(await taiko.button({ id: "report_submit_id" }).isDisabled());
 });
 
-step("Once user clicks on Others Radio button, Submit button should be enabled", async function() {
+step("Once user clicks on Others Radio button, Submit button should be enabled", async function () {
     assert.ok(await taiko.radioButton({ id: 'others_id' }).exists())
     assert.ok(await taiko.radioButton({ id: 'misinformation_id' }).exists())
     assert.ok(await taiko.radioButton({ id: 'politicalStatement_id' }).exists())
     assert.ok(await taiko.radioButton({ id: 'prohibitedContent_id' }).exists())
     assert.ok(await taiko.radioButton({ id: 'offensive_id' }).exists())
     await click(taiko.radioButton({ id: 'others_id' }))
-    assert.ok(! await taiko.button({ id: "report_submit_id" }).isDisabled()); 
-
+    assert.ok(! await taiko.button({ id: "report_submit_id" }).isDisabled());
 });
 
-step("When user submits , Thank you pop up should come & close button should close the pop up", async function() {
-    
+step("When user submits , Thank you pop up should come & close button should close the pop up", async function () {
     await click(taiko.button({ id: "report_submit_id" }))
     await taiko.waitFor(500);
     assert.ok(await text("Thank You").exists());
-    await click(taiko.button({id:"report_sentence_thanks_close_id"}))
+    await click(taiko.button({ id: "report_sentence_thanks_close_id" }))
     await taiko.waitFor(500);
 });

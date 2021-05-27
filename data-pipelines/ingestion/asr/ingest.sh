@@ -24,3 +24,4 @@ aws s3 cp ${pub_path}  s3://${bucket}/$remote_base_path/${language}/${dataset_na
 node ingest.js {} $bundle_path $remote_base_path $language $paired $connection
 
 rm -rf $pub_path
+rm $dataset_name.tar.gz

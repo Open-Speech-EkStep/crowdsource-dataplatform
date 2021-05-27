@@ -27,35 +27,34 @@ const BADGES = {
     silver :{imgLg:"../img/silver_badge.svg",imgSm:"../img/silver_contributor.jpg"},
     gold :{imgLg:"../img/gold_badge.svg",imgSm:"../img/gold_contributor.jpg"},
     platinum :{imgLg:"../img/platinum_badge.svg",imgSm:"../img/platinum_contributor.jpg"},
-    certificate :{imgLg:"../img/certificate.svg",imgSm:"../img/certificate.svg"}
 }
 const CURRENT_MODULE = 'module';
 const MODULE = {
     bolo: {url: 'boloIndia', value: 'bolo', BADGES :{
-            bronze: {imgLg: "../img/bronze_badge.svg", imgSm: "../img/bronze_contributor.jpg"},
-            silver: {imgLg: "../img/silver_badge.svg", imgSm: "../img/silver_contributor.jpg"},
-            gold: {imgLg: "../img/gold_badge.svg", imgSm: "../img/gold_contributor.jpg"},
-            platinum: {imgLg: "../img/platinum_badge.svg", imgSm: "../img/platinum_contributor.jpg"},
+            bronze: {imgLg: "../img/bronze_badge.svg", imgSm: "../img/bronze_contributor.jpg", imgValSvg:"../img/bolo_bronze_val.svg",imgValJpg:"../img/bolo_bronze_val_jpg.jpeg"},
+            silver: {imgLg: "../img/silver_badge.svg", imgSm: "../img/silver_contributor.jpg",imgValSvg:"../img/bolo_silver_val.svg",imgValJpg:"../img/bolo_silver_val_jpg.jpeg"},
+            gold: {imgLg: "../img/gold_badge.svg", imgSm: "../img/gold_contributor.jpg",imgValSvg:"../img/bolo_gold_val.svg",imgValJpg:"../img/bolo_gold_val_jpg.jpeg"},
+            platinum: {imgLg: "../img/platinum_badge.svg", imgSm: "../img/platinum_contributor.jpg",imgValSvg:"../img/bolo_platinum_val.svg",imgValJpg:"../img/bolo_platinum_val_jpg.jpeg"},
         }},
     suno: {url: 'sunoIndia', value: 'suno',BADGES :{
-            bronze: {imgLg: "../../img/suno_bronze_badge.svg", imgSm: "../../img/suno_bronze_contributor.jpg",imgVal:"../../img/suno_bronze_validator.png"},
-            silver: {imgLg: "../../img/suno_silver_badge.svg", imgSm: "../../img/suno_silver_contributor.jpg",imgVal:"../../img/suno_silver_validator.png"},
-            gold: {imgLg: "../../img/suno_gold_badge.svg", imgSm: "../../img/suno_gold_contributor.jpg",imgVal:"../../img/suno_gold_validator.png"},
-            platinum: {imgLg: "../../img/suno_platinum_badge.svg", imgSm: "../../img/suno_platinum_contributor.jpg",imgVal:"../../img/suno_platinum_validator.png"},
+            bronze: {imgLg: "../../img/suno_bronze_badge.svg", imgSm: "../../img/suno_bronze_contributor.jpg",imgValSvg:"../../img/suno_bronze_val.svg",imgValJpg:"../../img/suno_bronze_val_jpg.jpeg"},
+            silver: {imgLg: "../../img/suno_silver_badge.svg", imgSm: "../../img/suno_silver_contributor.jpg",imgValSvg:"../../img/suno_silver_val.svg",imgValJpg:"../../img/suno_silver_val_jpg.jpeg"},
+            gold: {imgLg: "../../img/suno_gold_badge.svg", imgSm: "../../img/suno_gold_contributor.jpg",imgValSvg:"../../img/suno_gold_val.svg",imgValJpg:"../../img/suno_gold_val_jpg.jpeg"},
+            platinum: {imgLg: "../../img/suno_platinum_badge.svg", imgSm: "../../img/suno_platinum_contributor.jpg",imgValSvg:"../../img/suno_platinum_val.svg",imgValJpg:"../../img/suno_platinum_val_jpg.jpeg"},
         }},
 
-    likho: {url: 'likhoIndia', value: 'likho',BADGES :{
-            bronze: {imgLg: "../../img/likho_bronze_badge.svg", imgSm: "../../img/likho_bronze_contributor.jpg"},
-            silver: {imgLg: "../../img/likho_silver_badge.svg", imgSm: "../../img/likho_silver_contributor.jpg"},
-            gold: {imgLg: "../../img/likho_gold_badge.svg", imgSm: "../../img/likho_gold_contributor.jpg"},
-            platinum: {imgLg: "../../img/likho_platinum_badge.svg", imgSm: "../../img/likho_platinum_contributor.jpg"},
-        }},
-    dekho: {url: 'dekhoIndia', value: 'dekho', BADGES :{
-            bronze: {imgLg: "../../img/dekho_bronze_badge.svg", imgSm: "../../img/dekho_bronze_contributor.jpg"},
-            silver: {imgLg: "../../img/dekho_silver_badge.svg", imgSm: "../../img/dekho_silver_contributor.jpg"},
-            gold: {imgLg: "../../img/dekho_gold_badge.svg", imgSm: "../../img/dekho_gold_contributor.jpg"},
-            platinum: {imgLg: "../../img/dekho_platinum_badge.svg", imgSm: "../../img/dekho_platinum_contributor.jpg"},
-        }},
+  likho: {url: 'likhoIndia', value: 'likho',BADGES :{
+      bronze: {imgLg: "../../img/likho_bronze_badge.svg", imgSm: "../../img/likho_bronze_contributor.jpg",imgValSvg:"../../img/likho_bronze_val.svg",imgValJpg:"../../img/likho_bronze_val_jpg.jpeg"},
+      silver: {imgLg: "../../img/likho_silver_badge.svg", imgSm: "../../img/likho_silver_contributor.jpg",imgValSvg:"../../img/likho_silver_val.svg",imgValJpg:"../../img/likho_silver_val_jpg.jpeg"},
+      gold: {imgLg: "../../img/likho_gold_badge.svg", imgSm: "../../img/likho_gold_contributor.jpg",imgValSvg:"../../img/likho_gold_val.svg",imgValJpg:"../../img/likho_gold_val_jpg.jpeg"},
+      platinum: {imgLg: "../../img/likho_platinum_badge.svg", imgSm: "../../img/likho_platinum_contributor.jpg",imgValSvg:"../../img/likho_platinum_val.svg",imgValJpg:"../../img/likho_platinum_val_jpg.jpeg"},
+    }},
+  dekho: {url: 'dekhoIndia', value: 'dekho', BADGES :{
+      bronze: {imgLg: "../../img/dekho_bronze_badge.svg", imgSm: "../../img/dekho_bronze_contributor.jpg",imgValSvg:"../../img/dekho_bronze_val.svg",imgValJpg:"../../img/dekho_bronze_val_jpg.jpeg"},
+      silver: {imgLg: "../../img/dekho_silver_badge.svg", imgSm: "../../img/dekho_silver_contributor.jpg",imgValSvg:"../../img/dekho_silver_val.svg",imgValJpg:"../../img/dekho_silver_val_jpg.jpeg"},
+      gold: {imgLg: "../../img/dekho_gold_badge.svg", imgSm: "../../img/dekho_gold_contributor.jpg",imgValSvg:"../../img/dekho_gold_val.svg",imgValJpg:"../../img/dekho_gold_val_jpg.jpeg"},
+      platinum: {imgLg: "../../img/dekho_platinum_badge.svg", imgSm: "../../img/dekho_platinum_contributor.jpg",imgValSvg:"../../img/dekho_platinum_val.svg",imgValJpg:"../../img/dekho_platinum_val_jpg.jpeg"},
+    }},
 };
 
 module.exports = {

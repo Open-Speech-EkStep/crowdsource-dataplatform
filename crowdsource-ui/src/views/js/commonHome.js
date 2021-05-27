@@ -4,6 +4,7 @@ const {
   AGGREGATED_DATA_BY_LANGUAGE,
   DEFAULT_CON_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
+  MODULE
 } = require('./constants');
 const {performAPIRequest,updateLocaleLanguagesDropdown} = require('../common/utils');
 const {setLangNavBar} = require('../common/languageNavBar')
@@ -85,7 +86,7 @@ const setDefaultLang = function () {
 const getStatsSummary = function (url, module, callBack=()=>{}) {
   performAPIRequest(url)
     .then(response => {
-      const languages = getContributedAndTopLanguage(response.top_languages_by_hours, module);
+      const languages = getContributedAndTopLanguage(module == MODULE.likho.value || module == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, module);
       localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
       showByHoursChart(module);
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));

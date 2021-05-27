@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  node: circleci/node@4.3.0
+  node: circleci/node@4.4.0
   aws-ecr: circleci/aws-ecr@6.15.3
   aws-eks: circleci/aws-eks@1.0.3
   aws-cli: circleci/aws-cli@1.4.0
@@ -42,6 +42,10 @@ jobs:
             sudo rm -rf /var/lib/apt/lists/*
             npm run install:ft
             npm run functional_test -- -- --env <<parameters.env_name>>
+            psql "postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@${DB_HOST_AWS}/<< parameters.db_name >>" -f functional_tests/sql/deleteSeedData.sql
+      - store_artifacts:
+          path: functional_tests/.gauge/screenshots
+          destination: screenshots
 
   approve_to_deploy:
     docker:
@@ -132,7 +136,7 @@ workflows:
       - create-workspace:
           name: create-workspace
           requires:
-             - node/test
+            - node/test
           filters:
             branches:
               only: master
@@ -180,13 +184,14 @@ workflows:
           db_name: ${DEV_DB_NAME}
           requires:
             - dev_deployment_eks
-            - build_dev_ui      
+            - build_dev_ui
 
       - approve_to_deploy:
           name: approve_test_deployment_eks
           type: approval
           requires:
-            - functional_tests_dev
+            - dev_deployment_eks
+            - build_dev_ui
 
       - db_migrate_aws:
           name: migrate_test_aws

@@ -13,11 +13,26 @@ const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
 let currentIndex ;
+let localeStrings;
 let validationCount = 0;
 
 const currentIndexKey = 'dekhoValidatorCurrentIndex';
 const sentencesKey = 'dekhoValidatorSentencesKey';
 const dekhoValidatorCountKey = 'dekhoValidatorCount';
+const notyf = new Notyf({
+  position: { x: 'center', y: 'top' },
+  types: [
+      {
+          type: 'success',
+          className: 'fnt-1-5',
+      },
+      {
+          type: 'error',
+          duration: 3500,
+          className: 'fnt-1-5',
+      },
+  ],
+});
 
 function getValue(number, maxValue) {
   return number < 0
@@ -109,6 +124,8 @@ function getNextSentence() {
     // showThankYou();
     disableSkipButton();
     setTimeout(showThankYou, 1000);
+    // const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
+    // notyf.success(msg);
   }
 }
 
@@ -175,10 +192,10 @@ function addListeners() {
   const $skipButton = $('#skip_button');
 
   likeButton.hover(() => {
-      updateDecisionButton(likeButton, ["#bfddf5", "", "#007BFF"]);
+      updateDecisionButton(likeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
     },
     () => {
-      updateDecisionButton(likeButton, ["white", "", "#343A40"]);
+      updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
     });
 
   needChangeButton.hover(() => {
@@ -195,11 +212,12 @@ function addListeners() {
   });
 
   likeButton.mousedown(() => {
-    updateDecisionButton(likeButton, ["#007BFF", "", "white"]);
+    updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
   });
 
 
   needChangeButton.on('click',()=>{
+    showElement($('#virtualKeyBoardBtn'));
     hideElement($('#textarea-row'));
     openEditor();
     const originalText = dekhoIndiaValidator.sentences[currentIndex].contribution;
@@ -218,6 +236,7 @@ function addListeners() {
   });
 
   $('#cancel-edit-button').on('click', () => {
+    hideElement($('#virtualKeyBoardBtn'));
     const $submitEditButton = $("#submit-edit-button");
     $submitEditButton.attr('disabled',true);
     const children = $submitEditButton.children().children();
@@ -229,6 +248,7 @@ function addListeners() {
   })
 
   $('#submit-edit-button').on('click', () => {
+    hideElement($('#virtualKeyBoardBtn'));
     skipValidation(REJECT_ACTION)
     setInput("");
     hideElement($('#keyboardBox'));
@@ -252,11 +272,13 @@ function addListeners() {
   })
 
   likeButton.on('click', () => {
+    hideElement($('#virtualKeyBoardBtn'));
     skipValidation(ACCEPT_ACTION)
     getNextSentence();
   })
 
   $skipButton.on('click', () => {
+    hideElement($('#virtualKeyBoardBtn'));
     disableSkipButton();
     $('#pause').trigger('click');
     skipValidation(SKIP_ACTION)
@@ -370,8 +392,11 @@ const handleSubmitFeedback = function () {
 }
 
 const initializeComponent = () => {
+    hideElement($('#virtualKeyBoardBtn'));
     const totalItems = dekhoIndiaValidator.sentences.length;
     currentIndex = getCurrentIndex(totalItems - 1);
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    $('#edit-language').text(contributionLanguage)
 
     addListeners();
     const validationData = dekhoIndiaValidator.sentences[currentIndex];

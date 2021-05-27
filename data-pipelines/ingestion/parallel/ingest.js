@@ -98,22 +98,31 @@ const start = async (connectionString, params, localDatasetPath, paired, remote_
             console.log('choosenRows:', choosenRows)
 
             console.log('Inserting pair:', pair)
-
+            const MAX_WORD_LENGTH = 15
+            var skipped = 0
             for (const row of choosenRows) {
                 const translations = Object.entries(row)
                 translation1 = translations[0][0]
                 translation2 = translations[0][1]
                 console.log('translation1:', translation1)
                 console.log('translation2:', translation2)
-                count++
-                const datasetRowIds = await ingest1(id, 'parallel', client, language1, [translation1], paired)
-                if (paired === 'paired') {
-                    console.log('Inserting in contributions:', translation2)
-                    const inserted = await ingest2(datasetRowIds, client, language2, [translation2])
-                    console.log('Total txt rows:', inserted.length)
+
+                if (translation1.split(' ').length <= MAX_WORD_LENGTH) {
+                    count++
+                    const datasetRowIds = await ingest1(id, 'parallel', client, language1, [translation1], paired)
+                    if (paired === 'paired') {
+                        console.log('Inserting in contributions:', translation2)
+                        const inserted = await ingest2(datasetRowIds, client, language2, [translation2])
+                        console.log('Total txt rows:', inserted.length)
+                    }
+                } else {
+                    console.log('length above threshold', translation1, translation2)
+                    skipped++
                 }
             }
             console.log('Done..', count)
+            console.log('Skipped..', skipped)
+
         }
     } catch (error) {
         console.log('error..', error)
