@@ -16,7 +16,7 @@ const {showUserProfile} = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { isMobileDevice} = require('../common/common');
 
-const speakerDetailsKey = 'speakerDetails';
+const speakerDetailsKey = 'profanityUserDetails';
 
 const sunoCountKey = 'sunoCount';
 const currentIndexKey = 'sunoCurrentIndex';
@@ -138,7 +138,7 @@ function resetValidation() {
 
 function markContributionSkipped() {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const speakerDetails = JSON.parse(localStorage.getItem('profanityUserDetails'));
+  const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
     sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
@@ -204,7 +204,7 @@ function onProfanityUpdated($skipButton, $submitButton, cancelButton){
 }
 
 function invokeProfanityStateUpdate(state, $skipButton, $submitButton, cancelButton){
-  const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
+  const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
     updateProfanityState(localSpeakerDataParsed.userName, sunoIndia.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
       .then(res=>{
         onProfanityUpdated($skipButton, $submitButton, cancelButton);
@@ -275,7 +275,7 @@ function showNoSentencesMessage() {
 const handleSubmitFeedback = function () {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const otherText = $("#other_text").val();
-  const speakerDetails = JSON.parse(localStorage.getItem('profanityUserDetails'));
+  const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
   const $skipButton = isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button');
 
   const reqObj = {
@@ -360,7 +360,7 @@ function executeOnLoad() {
 
 
   try {
-    const localSpeakerData = localStorage.getItem('profanityUserDetails');
+    const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
 
     const localSentences = localStorage.getItem(sentencesKey);
