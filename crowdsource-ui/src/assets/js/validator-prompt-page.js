@@ -518,6 +518,7 @@ const initializeComponent = function () {
   const totalItems = boloIndiaValidator.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const sentence = boloIndiaValidator.sentences[currentIndex];
+  hideElement($('#loader-play-btn'));
   addListeners();
   if (sentence) {
     loadAudio(`${cdn_url}/${sentence.contribution}`);
