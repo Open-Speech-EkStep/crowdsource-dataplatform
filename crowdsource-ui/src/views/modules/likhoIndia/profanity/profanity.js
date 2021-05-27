@@ -27,7 +27,7 @@ function getNextSentence() {
   if (currentIndex < likhoIndia.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex + 1,likhoIndia.sentences.length);
-    setSentence(likhoIndia.sentences[currentIndex].media.data);
+    setSentence(likhoIndia.sentences[currentIndex].media);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
     const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
@@ -226,7 +226,7 @@ const initialize = function () {
   addListeners();
   console.log(translation);
   if (translation) {
-    setSentence(translation.media.data);
+    setSentence(translation.media);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     updateProgressBar(currentIndex + 1,likhoIndia.sentences.length)
