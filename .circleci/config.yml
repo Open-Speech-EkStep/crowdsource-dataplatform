@@ -133,10 +133,10 @@ workflows:
       - create-workspace:
           name: create-workspace
           requires:
-             - node/test
+            - node/test
           filters:
             branches:
-              only: master
+              only: [master,bolo_india]
 
       - db_migrate_aws:
           name: migrate_dev_aws
@@ -181,14 +181,13 @@ workflows:
           db_name: ${DEV_DB_NAME}
           requires:
             - dev_deployment_eks
-            - build_dev_ui      
+            - build_dev_ui
 
       - approve_to_deploy:
           name: approve_test_deployment_eks
           type: approval
           requires:
-            - dev_deployment_eks
-            - build_dev_ui
+            - functional_tests_dev
 
       - db_migrate_aws:
           name: migrate_test_aws
