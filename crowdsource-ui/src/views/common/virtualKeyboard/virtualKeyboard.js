@@ -147,14 +147,14 @@ function lngtype(text) {
   const langdic = {
     "Assamese": /^[\u0980-\u09FF]+$/,
     "Bengali": /^[\u0980-\u09FF]+$/,
-    "English": /^[a-zA-Z]+$/,
+    "English": /^[\u0020-\u007F]+$/,
     "Gujarati": /^[\u0A80-\u0AFF]+$/,
-    "Hindi": /^[\u0900-\u097F]+$/,
+    "Hindi": /^[\u0900-\u097F\u0020-\u003F]+$/,
     "Kannada": /^[\u0C80-\u0CFF]+$/,
     "Malayalam": /^[\u0D00-\u0D7F]+$/,
     "Odia": /^[\u0B00-\u0B7F]+$/,
     "Marathi": /^[\u0900-\u097F]+$/,
-    "Punjabi": /^[\u0A00-\u0A7F]+$/,
+    "Punjabi": /^[\u0A00-\u0A7F\u0020-\u003F]+$/,
     "Tamil": /^[\u0B80-\u0BFF]+$/,
     "Telugu": /^[\u0C00-\u0C7F]+$/,
   }
