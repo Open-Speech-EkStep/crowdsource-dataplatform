@@ -89,7 +89,7 @@ step("if a user enter username and click on Not you change user button , the fie
 
 
 step("And User enter random Username and selects Age , Mother tongue ,gender", async function () {
-    if (await taiko.text('Speaker Details').exists()) {
+    if (await taiko.text('User Details').exists()) {
         const username = taiko.textBox({ id: 'username' })
         await taiko.waitFor(700)
         await write('Dummy user', into(username))
