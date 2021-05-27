@@ -42,9 +42,10 @@ function setSentencesContributed() {
   ).then((data) => {
     localStorage.setItem('badgeId', data.badgeId);
     localStorage.setItem('badges', JSON.stringify(data.badges));
-    localStorage.setItem('nextHourGoal', data.nextHourGoal);
+    const nextHourGoal = data.nextHourGoal ? data.nextHourGoal : 100;
+    localStorage.setItem('nextHourGoal', nextHourGoal);
     $("#user-contribution").text(data.contributionCount);
-    $("#language-hour-goal").text(data.nextHourGoal);
+    $("#language-hour-goal").text(nextHourGoal);
     if (data.isNewBadge) {
       $("#spree_text").removeClass("d-none");
       $("#milestone_text").removeClass("d-none");
@@ -195,8 +196,9 @@ const setTotalProgressBar = (totalSeconds) => {
     performAPIRequest(
       `/rewards?type=text&language=${contributionLanguage}&source=contribute&userName=${userName}`
     ).then((data) => {
-      localStorage.setItem('nextHourGoal',data.nextHourGoal);
-      updateProgressBulb(data.nextHourGoal, totalSeconds);
+      const nextHourGoal = data.nextHourGoal ? data.nextHourGoal : 100;
+      localStorage.setItem('nextHourGoal',nextHourGoal);
+      updateProgressBulb(nextHourGoal, totalSeconds);
     })
 };
 
