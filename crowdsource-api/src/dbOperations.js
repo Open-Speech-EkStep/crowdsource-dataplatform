@@ -619,9 +619,9 @@ const getTargetInfo = async (req, res) => {
     res.status(200).send({ hasTarget, isAllContributed });
 }
 
-const getSentencesForProfanityChecking = async (username, type, language) => {
+const getSentencesForProfanityChecking = (username, type, language) => {
     currentTime = moment().utcOffset("+05:30").format()
-    return await db.any(getSentencesForProfanityCheck, [username, currentTime, type, language])
+    return db.any(getSentencesForProfanityCheck, [username, currentTime, type, language])
 }
 
 const updateProfanityStatus = async (userName, sentenceId, profanityStatus) => {
