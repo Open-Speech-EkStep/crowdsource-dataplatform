@@ -7,7 +7,7 @@
 //* Select translation language as "हिंदी"
 * Navigate to "Validate" button and click "Validate" button
 //* And User enter random Username and selects Age , Mother tongue ,gender
-* Add "Dummy User" Username for Valiadtion
+* Add "New" Username for Valiadtion
 //* When user click on Lets Go Button, user should "not" see instructions to record
 * When user click on Lets Go Button for Validate, user should "not" see instructions to record
 * "skip_button" should be enabled , "dislike_button" "like_button" buttons should be disabled
