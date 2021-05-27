@@ -539,6 +539,8 @@ const initializeComponent = function () {
   const totalItems = sunoIndiaValidator.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const audio = sunoIndiaValidator.sentences[currentIndex];
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  $('#edit-language').text(contributionLanguage)
   addListeners();
   if (audio) {
     loadAudio(`${cdn_url}/${audio.sentence}`);
