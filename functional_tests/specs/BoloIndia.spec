@@ -2,23 +2,8 @@
 
 * Open BoloIndia
 
-## Validate Validator flow
-* Select Contribution Language as "हिंदी" first time
-//* Select translation language as "हिंदी"
-* Navigate to "Validate" button and click "Validate" button
-//* And User enter random Username and selects Age , Mother tongue ,gender
-* Add "New" Username for Valiadtion
-//* When user click on Lets Go Button, user should "not" see instructions to record
-* When user click on Lets Go Button for Validate, user should "not" see instructions to record
-* "skip_button" should be enabled , "dislike_button" "like_button" buttons should be disabled
-* User plays the audio , "dislike_button","like_button" should be enabled
-* User clicks on "dislike_button" , he should see next sentence and "dislike_button" "like_button" buttons should be disabled
-* User skips the next "4" sentences user should land on Thank you page in ""
-//* User skips the next "4" sentences user should land on Thank you page in "Hindi"
-//* User should see the "अधिक प्रमाणित करें" button
-* User should see the "Validate More" button
-
 ## Validate Contributor flow
+* Select Contribution Language as "हिंदी" first time
 //* Select translation language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
@@ -41,6 +26,21 @@
 * if a user enter username and click on Not you change user button , the field should be cleared
 * If user selects Other as gender, some more gender options should be visible
 * Speaker details popup should appear and close button should close the pop up
+
+## Validate Validator flow
+//* Select translation language as "हिंदी"
+* Navigate to "Validate" button and click "Validate" button
+//* And User enter random Username and selects Age , Mother tongue ,gender
+* Add "Dummy User" Username for Valiadtion
+//* When user click on Lets Go Button, user should "not" see instructions to record
+* When user click on Lets Go Button for Validate, user should "not" see instructions to record
+* "skip_button" should be enabled , "dislike_button" "like_button" buttons should be disabled
+* User plays the audio , "dislike_button","like_button" should be enabled
+* User clicks on "dislike_button" , he should see next sentence and "dislike_button" "like_button" buttons should be disabled
+* User skips the next "4" sentences user should land on Thank you page in ""
+//* User skips the next "4" sentences user should land on Thank you page in "Hindi"
+//* User should see the "अधिक प्रमाणित करें" button
+* User should see the "Validate More" button
 
 ## Check Dashboard Page
 //* Select translation language as "English"
