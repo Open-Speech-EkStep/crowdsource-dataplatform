@@ -171,4 +171,14 @@ const validateMediaTypeInput = (req, res, next) => {
     next();
 }
 
-module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoInput, validateContributedMediaInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput }
+const validateUserInfoForProfanity = (req,res,next) => {
+    if (!(req.params && req.params.type && MEDIA_TYPES.includes(req.params.type))) {
+        return res.status(400).send("Invalid params");
+    }
+    if(!req.body && !req.body.username && !EMAIL_REGEX.test(req.body.username)){
+        return res.status(400).send("Invalid username");
+    }
+    next();
+}
+
+module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoInput, validateContributedMediaInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput,validateUserInfoForProfanity }

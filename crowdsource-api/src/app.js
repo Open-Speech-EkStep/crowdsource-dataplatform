@@ -376,8 +376,9 @@ router.get('/available-languages/:type', validateMediaTypeInput, (req, res) => g
 
 router.get('/target-info/:type/:sourceLanguage', (req, res) => getTargetInfo(req, res));
 
-require('./dashboard-api')(router);
 profanityApi(router)
+require('./dashboard-api')(router);
+
 
 app.use('/', router);
 
