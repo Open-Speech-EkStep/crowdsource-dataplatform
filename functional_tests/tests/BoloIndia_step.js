@@ -159,7 +159,8 @@ step("When user clicks on <arg0> button, <arg1> button should appear", async fun
 step("When user skips all the rest of the <count> sentences , User should see Thank you Page", async function (count) {
     const skipbutton = taiko.button({ id: 'skipBtn' })
     for (let i = 0; i < count; i++) {
-        await taiko.waitFor(300)
+        await taiko.waitFor(500)
+        console.log(await skipbutton.isDisabled());
         await click(skipbutton)
         await taiko.waitFor(700)
     }
