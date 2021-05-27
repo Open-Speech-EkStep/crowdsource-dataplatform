@@ -417,5 +417,10 @@
 	"Please type in your chosen language": "Please type in your chosen language",
 	"By proceeding ahead you agree to the <a href=\"./terms-and-conditions.html\"> Terms and Conditions": "By proceeding ahead you agree to the <a href=\"./terms-and-conditions.html\"> Terms and Conditions",
 	"By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"> Terms and Conditions": "By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"> Terms and Conditions",
-	"By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"> Terms and Conditions</a>"
+	"By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\"> Terms and Conditions</a>",
+	"recording(s) contributed": "recording(s) contributed",
+	"sentence(s) validated": "sentence(s) validated",
+	"sentence(s) contributed": "sentence(s) contributed",
+	"image(s) labels contributed": "image(s) labels contributed",
+	"image(s) labels validated": "image(s) labels validated"
 }
