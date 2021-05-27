@@ -9,12 +9,12 @@
             <div class="modal-body px-6" id="speaker-details">
                 <div class="form-group mt-3">
                     <label for="username" class="form-label">
-                        <%= __('Username') %>
-                    </label> <input class="form-control" type="email" id="username" data-toggle="tooltip" placeholder="<%= __('Enter preferred username') %>">
+                        Email
+                    </label> <input class="form-control" type="email" id="username" data-toggle="tooltip" placeholder="Enter email">
                 </div>
                 <div class="form-group">
                     <label for="preferred-language" class="form-label">
-                        <%= __('Language') %>
+                        Language
                     </label>
                     <select class="form-control" id="preferred-language">
                         <option selected="selected" value="">
@@ -26,6 +26,11 @@
                             </option>
                             <% }) %>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label mt-2">
+                        By proceeding ahead you agree to let your email address be saved in our database
+                    </label>
                 </div>
                 <div class="row justify-content-center mt-4">
                     <div class="col-12" data-toggle="tooltip" title="<%= __('Please validate any error message before proceeding')%>">
