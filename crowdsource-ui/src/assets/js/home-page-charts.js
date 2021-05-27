@@ -235,7 +235,16 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
   var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
   valueAxis.renderer.grid.template.strokeWidth = 0;
   valueAxis.renderer.labels.template.disabled = true;
-
+  if(xAxisLabel != "total_speakers") {
+    const maxValue = Math.max.apply(Math, chart.data.map(function(o) { return Number(o.total_contributions); })) + 0.05;
+    valueAxis.min = 0;
+    valueAxis.max =  maxValue > 0.1 ? maxValue : 0.1;
+  } else {
+    const maxValue = Math.max.apply(Math, chart.data.map(function(o) { return Number(o.total_speakers); })) + 20;
+    valueAxis.min = 0;
+    valueAxis.max =  maxValue > 40 ? maxValue : 40;
+  }
+  valueAxis.strictMinMax = true; 
   categoryAxis.renderer.minGridDistance = 25;
   var series = chart.series.push(new am4charts.ColumnSeries());
   series.dataFields.valueX = xAxisLabel;
