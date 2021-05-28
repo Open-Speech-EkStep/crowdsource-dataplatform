@@ -400,7 +400,7 @@ function executeOnLoad() {
     setPageContentHeight();
 
     if (!localSpeakerDataParsed) {
-      location.href = '/profanity/sunoindia';
+      location.href = '/en/profanity-home.html?type=sunoindia';
       return;
     }
 
