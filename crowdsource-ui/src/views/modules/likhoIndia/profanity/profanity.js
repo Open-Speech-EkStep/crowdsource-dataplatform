@@ -89,7 +89,7 @@ function invokeProfanityStateUpdate(state){
 
 function updateSkipAction(){
   const sentenceId = likhoIndia.sentences[currentIndex].dataset_row_id;
-  fetch(`/profanity-skip/ocr`, {
+  fetch(`/profanity-skip/parallel`, {
     method: 'PUT',
     credentials: 'include',
     mode: 'cors',

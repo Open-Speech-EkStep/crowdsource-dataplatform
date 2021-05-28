@@ -228,7 +228,7 @@ function invokeProfanityStateUpdate(state, $skipButton, $submitButton, cancelBut
 
 function updateSkipAction(){
   const sentenceId = sunoIndia.sentences[currentIndex].dataset_row_id;
-  fetch(`/profanity-skip/ocr`, {
+  fetch(`/profanity-skip/asr`, {
     method: 'PUT',
     credentials: 'include',
     mode: 'cors',
