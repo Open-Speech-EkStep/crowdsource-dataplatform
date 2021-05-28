@@ -71,7 +71,7 @@ function invokeProfanityStateUpdate(state) {
 
 function updateSkipAction(){
     const sentenceId = crowdSource.sentences[currentIndex].dataset_row_id;
-    fetch(`/profanity-skip/ocr`, {
+    fetch(`/profanity-skip/text`, {
       method: 'PUT',
       credentials: 'include',
       mode: 'cors',
