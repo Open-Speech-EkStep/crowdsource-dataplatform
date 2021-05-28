@@ -22,7 +22,7 @@
 ## Check Dashboard Page
 * Select "Dekho India"from header    
 * When user clicks on View all Details buttton user should be able to see "Progress Chart" , "State Wise distribution"
-* user should be able to see "People participated" , "Images labelled" , "Text validated" , "Languages"
+* user should be able to see "People participated" , "Images labelled" , "Images validated" , "Languages"
 * When user select "हिंदी" Language from dropdown then "languages" should not visible
 * When user clicks on back button, user should land on Dekho India home page
 
