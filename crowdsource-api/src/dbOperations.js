@@ -629,8 +629,8 @@ const updateProfanityStatus = async (userName, sentenceId, profanityStatus) => {
     await db.any(updateSentenceWithProfanity, [profanityStatus, sentenceId, userName])
 }
 
-const releaseMedia = (userName,dataset_id) =>{
-   return db.any(releaseMediaQuery,[userName,dataset_id])
+const releaseMedia = (dataset_id) =>{
+   return db.any(releaseMediaQuery,[dataset_id])
 }
 
 module.exports = {
