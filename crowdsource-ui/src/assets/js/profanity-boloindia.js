@@ -69,6 +69,23 @@ function invokeProfanityStateUpdate(state) {
         })
 }
 
+function updateSkipAction(){
+    const sentenceId = crowdSource.sentences[currentIndex].dataset_row_id;
+    fetch(`/profanity-skip/ocr`, {
+      method: 'PUT',
+      credentials: 'include',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        sentenceId: sentenceId
+      })
+    }).then(res=>{}).catch(err=>{
+      console.log(err)
+    });
+  }
+
 const initialize = () => {
     const sentences = crowdSource.sentences;
     const $notProfaneBtn = $('#startRecord');
@@ -164,6 +181,7 @@ const initialize = () => {
         } else if (event.target.id === 'skipBtn') {
             // markContributionSkipped();
             incrementSkipCount();
+            updateSkipAction();
             // $skipBtn.addClass('d-none');
         }
         if (currentIndex === totalItems - 1) {
@@ -171,6 +189,7 @@ const initialize = () => {
                 invokeProfanityStateUpdate(true)
                 goToThankYouPage()
             } else {
+                updateSkipAction();
                 goToThankYouPage()
             }
             currentIndex++;

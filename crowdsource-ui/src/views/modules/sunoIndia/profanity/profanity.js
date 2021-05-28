@@ -226,6 +226,23 @@ function invokeProfanityStateUpdate(state, $skipButton, $submitButton, cancelBut
       })
 }
 
+function updateSkipAction(){
+  const sentenceId = sunoIndia.sentences[currentIndex].dataset_row_id;
+  fetch(`/profanity-skip/ocr`, {
+    method: 'PUT',
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      sentenceId: sentenceId
+    })
+  }).then(res=>{}).catch(err=>{
+    console.log(err)
+  });
+}
+
 function addListeners() {
 
   const $skipButton = isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button');
@@ -247,6 +264,7 @@ function addListeners() {
     }
     // markContributionSkipped();
     getNextSentence();
+    updateSkipAction();
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
   })
