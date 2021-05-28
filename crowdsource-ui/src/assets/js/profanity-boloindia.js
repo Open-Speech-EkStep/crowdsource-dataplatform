@@ -282,7 +282,7 @@ function executeOnLoad() {
         setPageContentHeight();
 
         if (!localSpeakerDataParsed) {
-            location.href = '/profanity/boloindia';
+            location.href = '/en/profanity-home.html?type=boloindia';
             return;
         }
 

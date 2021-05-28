@@ -282,7 +282,7 @@ const executeOnLoad = function () {
     setPageContentHeight();
 
     if (!localSpeakerDataParsed) {
-      location.href = '/profanity/dekhoindia';
+      location.href = '/en/profanity-home.html?type=dekhoindia';
       return;
     }
 

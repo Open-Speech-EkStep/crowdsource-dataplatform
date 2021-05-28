@@ -278,7 +278,7 @@ function executeOnLoad() {
     })
 
     if (!localSpeakerDataParsed) {
-      location.href = '/profanity/likhoindia';
+      location.href = '/en/profanity-home.html?type=likhoindia';
       return;
     }
 
