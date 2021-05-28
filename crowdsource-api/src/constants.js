@@ -66,6 +66,16 @@ const SOURCES = ["contribute", "validate"];
 
 const MEDIA_TYPES = ['parallel', 'ocr', 'text', 'asr'];
 
+const SELECT_PAGE_OPTIONS_FEEDBACK = [
+  {module:'suno', pages: ['Landing Page', 'Dashboard', 'Transcibe', 'Validate', 'Thank You Page']}, 
+  {module:'bolo', pages: ['Landing Page', 'Dashboard', 'Speak', 'Validate', 'Thank You Page']},
+  {module:'likho', pages: ['Landing Page', 'Dashboard', 'Translate', 'Validate', 'Thank You Page']},
+  {module:'dekho', pages: ['Landing Page', 'Dashboard', 'Label', 'Validate', 'Thank You Page']},
+  {module:'others', pages: ['About Us', 'Terms and Conditions', 'Speak', 'Validate', 'Thank You Page']}
+];
+
+const FEEDBACK_CATEGORY = ['Suggestion', 'Error', 'Complaint', 'Compliment'];
+
 module.exports = {
   MAX_SIZE,
   VALID_FILE_TYPE,
@@ -86,5 +96,7 @@ module.exports = {
   FEEDBACK_MAX_LENGTH,
   VALIDATION_ACTIONS,
   SOURCES,
-  MEDIA_TYPES
+  MEDIA_TYPES,
+  SELECT_PAGE_OPTIONS_FEEDBACK,
+  FEEDBACK_CATEGORY
 };
