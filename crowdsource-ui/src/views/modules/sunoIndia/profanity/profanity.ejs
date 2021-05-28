@@ -29,6 +29,9 @@
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/recording-instructions.ejs %>
             <div class="modal-footer pt-3 record-btn-container position-relative" style="height:72px">
+                <div class="row position-absolute top-back-btn">
+                    <%- include('../common/back-btn.ejs',{url:"/profanity/sunoindia"}) %>
+                </div>
                 <%- include ../common/speakerTestBtn.ejs %>
             </div>
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center">
@@ -50,7 +53,7 @@
                     </p>
                     <div class="row justify-content-center mt-5">
                         <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
-                            <a class="btn btn-primary text-white btn-lg h6 w-100" href="#">
+                            <a class="btn btn-primary text-white btn-lg h6 w-100" href="/profanity/sunoindia">
                                 <%- __('Back to Suno India Home') %>
                             </a></div>
                     </div>
@@ -84,10 +87,10 @@
                 </div>
                 <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 mx-5 mt-5" id="validation-button-row">
                     <div class="col-lg-8 col-md-8 flex-lg-row flex-md-row flex-column d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2">
-                        <button class="w-100 btn align-self-start mb-2" id="cancel-edit-button">
+                        <button class="w-100 btn align-self-start mb-2" id="cancel-edit-button" disabled="disabled">
                             <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
-                                <text x="43" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">
+                                <text x="43" y="43" font-family="lato" font-size="24" fill="#343A40" disabled="disabled" style="text-align:center">
                                     Not Profane
                                 </text>
                             </svg>
@@ -108,10 +111,10 @@
                                 <%= __('Pause') %>
                             </h3>
                         </div>
-                        <button class="btn align-self-start mb-2 w-100" id="submit-edit-button">
+                        <button class="btn align-self-start mb-2 w-100" id="submit-edit-button" disabled="disabled">
                             <svg width="208" height="66" viewBox="0 0 208 66" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1 33C1 15.3269 15.3269 1 33 1H175C192.673 1 207 15.3269 207 33C207 50.6731 192.673 65 175 65H33C15.3269 65 1 50.6731 1 33Z" fill="white" stroke="#007BFF" stroke-width="2"/>
-                                <text x="65" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center">
+                                <text x="65" y="43" font-family="lato" font-size="24" fill="#343A40" style="text-align:center" disabled="disabled">
                                     Profane
                                 </text>
                             </svg>
@@ -134,7 +137,7 @@
                         <div class="col-4"></div>
                     </div>
                     <div class="row w-100 m-0 px-3">
-                        <button class="w-100 btn my-3 btn-link-primary" id="cancel-edit-button_mob">
+                        <button class="w-100 btn my-3 btn-link-primary" id="cancel-edit-button_mob" disabled="disabled">
                             Not Profane
                         </button>
                     </div>
@@ -142,7 +145,7 @@
                         <div><span class="spinner w-h-5"></span></div>
                     </div>
                     <div class="row w-100 m-0 px-3">
-                        <button class="btn my-2 w-100 btn-link-primary" id="submit-edit-button_mob">
+                        <button class="btn my-2 w-100 btn-link-primary" id="submit-edit-button_mob" disabled="disabled">
                             Profane
                         </button>
                     </div>

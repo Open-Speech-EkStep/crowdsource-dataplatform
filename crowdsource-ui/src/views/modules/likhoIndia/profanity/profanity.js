@@ -6,8 +6,7 @@ const {
   getLocaleString,
   showElement,
   hideElement,
-  fetchLocationInfo,
-  reportSentenceOrRecording
+  fetchLocationInfo
 } = require('../common/utils');
 const {LOCALE_STRINGS,CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showUserProfile} = require('../common/header');

@@ -134,7 +134,7 @@ router.get('/', function (req, res) {
 
 router.get('/profanity/:type', function (req, res) {
     const type = req.params.type;
-    if(!['sunoindia','likhoindia','dekhoindia'].includes(type)){
+    if(!['sunoindia','likhoindia','dekhoindia','boloindia'].includes(type)){
        res.redirect('/en/not-found.html');
        return; 
     }
