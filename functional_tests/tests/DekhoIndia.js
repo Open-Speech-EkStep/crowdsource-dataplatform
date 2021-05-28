@@ -25,7 +25,7 @@ step("User should see the top Language graph and other stats for Dekho India", a
     assert.ok(await text("Languages").exists());
     assert.ok(await text("People participated").exists());
     assert.ok(await text("Images labelled").exists());
-    assert.ok(await text("Text validated ").exists());
+    assert.ok(await text("Images validated ").exists());
 });
 
 step("When user clicks on back button, user should land on Dekho India home page", async function() {
