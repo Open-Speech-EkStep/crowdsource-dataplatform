@@ -199,7 +199,7 @@ const getJson = (path) => {
     })
 }
 
-module.exports = { setPageContentHeight,
+module.exports = {
   toggleFooterPosition,
   fetchLocationInfo,
   updateLocaleLanguagesDropdown,
@@ -213,5 +213,6 @@ module.exports = { setPageContentHeight,
   reportSentenceOrRecording, 
   getCookie, 
   setCookie,
-  getJson
+  getJson,
+  setPageContentHeight
 }

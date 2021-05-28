@@ -38,7 +38,11 @@ $(document).ready(function () {
         localStorage.setItem('profanityUserDetails', JSON.stringify(speakerDetails));
         localStorage.setItem('profanityCheckLanguage', language);
         localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-        location.href = `/en/${type}/profanity.html`;
+        if(type === 'boloindia'){
+            location.href = `/en/profanity-boloindia.html`;
+        } else {
+            location.href = `/en/${type}/profanity.html`;
+        }
     });
     // $(window).unload(function(){
     //     localStorage.removeItem('profanityUserDetails');

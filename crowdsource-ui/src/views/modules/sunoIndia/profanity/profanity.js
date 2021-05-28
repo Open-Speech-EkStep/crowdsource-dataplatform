@@ -9,7 +9,7 @@ const {
   hideElement,
   fetchLocationInfo,
   reportSentenceOrRecording
-} = require('../common/utils');
+} = require('../common/utils'); 
 const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showUserProfile} = require('../common/header');
@@ -46,6 +46,11 @@ function enableButton(element) {
   element.removeAttr("disabled")
 }
 
+function disableButton(button) {
+  button.children().attr("opacity", "50%");
+  button.attr("disabled", "disabled");
+}
+
 const setAudioPlayer = function () {
   const myAudio = document.getElementById('my-audio');
   const play = $(playStr);
@@ -54,12 +59,16 @@ const setAudioPlayer = function () {
   const textPlay = $('#audioplayer-text_play');
   const textReplay = $('#audioplayer-text_replay');
   const textPause = $('#audioplayer-text_pause');
+  const $submitButton = isMobileDevice() ?  $('#submit-edit-button_mob') :  $('#submit-edit-button');
+  const cancelButton = isMobileDevice() ? $('#cancel-edit-button_mob') : $('#cancel-edit-button');
 
   myAudio.addEventListener("ended", () => {
     hideElement(pause)
     showElement(replay)
     hideElement(textPause);
     showElement(textReplay);
+    enableButton($submitButton);
+    enableButton(cancelButton);
   });
 
   play.on('click', () => {
@@ -104,6 +113,10 @@ let currentIndex = localStorage.getItem(currentIndexKey) || 0;
 let progressCount = currentIndex, validationCount = 0;
 
 function getNextSentence() {
+  const $submitButton = isMobileDevice() ?  $('#submit-edit-button_mob') :  $('#submit-edit-button');
+  const cancelButton = isMobileDevice() ? $('#cancel-edit-button_mob') : $('#cancel-edit-button');
+  disableButton($submitButton);
+  disableButton(cancelButton);
   if (currentIndex < sunoIndia.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex + 1, sunoIndia.sentences.length);
@@ -457,6 +470,10 @@ if(isMobileView){
 }
 
 $(document).ready(() => {
+  const $submitButton = isMobileDevice() ?  $('#submit-edit-button_mob') :  $('#submit-edit-button');
+  const cancelButton = isMobileDevice() ? $('#cancel-edit-button_mob') : $('#cancel-edit-button');
+  disableButton($submitButton);
+  disableButton(cancelButton);
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
   getLocaleString().then(() => {
     executeOnLoad();
