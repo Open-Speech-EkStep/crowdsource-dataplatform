@@ -75,7 +75,8 @@ const {
 
 const {
     getSentencesForProfanityCheck,
-    updateSentenceWithProfanity
+    updateSentenceWithProfanity,
+    releaseMediaQuery
 } = require('./profanityCheckerQueries')
 
 const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP } = require('./constants');
@@ -628,6 +629,10 @@ const updateProfanityStatus = async (userName, sentenceId, profanityStatus) => {
     await db.any(updateSentenceWithProfanity, [profanityStatus, sentenceId, userName])
 }
 
+const releaseMedia = (userName,dataset_id) =>{
+   return db.any(releaseMediaQuery,[userName,dataset_id])
+}
+
 module.exports = {
     updateAndGetMedia,
     getContributionList,
@@ -655,5 +660,6 @@ module.exports = {
     getAvailableLanguages,
     getTargetInfo,
     getSentencesForProfanityChecking,
-    updateProfanityStatus
+    updateProfanityStatus,
+    releaseMedia
 };
