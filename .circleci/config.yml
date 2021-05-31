@@ -266,6 +266,7 @@ workflows:
           type: approval
           requires:
             - functional_tests_test
+            - uat_deployment_eks
 
       - db_migrate_aws:
           name: migrate_prod_aws
