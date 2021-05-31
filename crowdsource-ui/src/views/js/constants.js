@@ -63,6 +63,16 @@ const MODULE = {
     }},
 };
 
+const SELECT_PAGE_OPTIONS_FEEDBACK = [
+  {module:'suno', pages: ['Landing Page', 'Dashboard', 'Transcibe', 'Validate', 'Thank You Page']}, 
+  {module:'bolo', pages: ['Landing Page', 'Dashboard', 'Speak', 'Validate', 'Thank You Page']},
+  {module:'likho', pages: ['Landing Page', 'Dashboard', 'Translate', 'Validate', 'Thank You Page']},
+  {module:'dekho', pages: ['Landing Page', 'Dashboard', 'Label', 'Validate', 'Thank You Page']},
+  {module:'others', pages: ['About Us', 'Terms and Conditions', 'Speak', 'Validate', 'Thank You Page']}
+];
+
+const FEEDBACK_CATEGORY = ['Suggestion', 'Error', 'Complaint', 'Compliment'];
+
 module.exports = {
   DEFAULT_CON_LANGUAGE,
   AUDIO_DURATION,
@@ -77,5 +87,7 @@ module.exports = {
   BADGES,
   SPEAKER_DETAILS_KEY,
   SELECTED_MODULE, MODULE, CURRENT_MODULE, TO_LANGUAGE,
-  LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE
+  LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE,
+  SELECT_PAGE_OPTIONS_FEEDBACK,
+  FEEDBACK_CATEGORY
 }
