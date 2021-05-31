@@ -15,7 +15,7 @@ const updateOpinionSVGColor = () => {
         $('input[name="opinionRadio"]').click(function(){ 
             $(this).not(':checked').prop("checked", true);
         });
-        
+
         $('input[name="opinionRadio"]').on('change', function() {
             $(".opinion-label").find("path, polygon, circle").attr("stroke", "#818181");            
             if($('input[name="opinionRadio"]:checked').val() === 'very_sad')
@@ -39,21 +39,29 @@ const updateOpinionSVGColor = () => {
                 $("#very_happy_label").find("path, polygon, circle").attr("stroke", "#2A8908");
             }
         });
-        
-        // for hover effect in future
-        // $(".opinion-label").mouseenter(function() {
-        //     $(this).find("path, polygon, circle").attr("stroke", "#4ED738");
-        //     $(this).find("path, polygon, circle").attr("fill", "#fff");
-        //  });
-        // $(".opinion-label").mouseleave(function() {
-        //     $(this).find("path, polygon, circle").attr("stroke", "#959595");
-        //     $(this).find("path, polygon, circle").attr("fill", "#fff");
-        //  });
-
     });
 }
 const updateSelectPageWhenModuleChanges = () => {
+    $('input[name="moduleSelectRadio"]').on('change', function() {
+        $("#select_page_id").find('option').remove().end();
+        SELECT_PAGE_OPTIONS_FEEDBACK.forEach((data) => {
+            if($('input[name="moduleSelectRadio"]:checked').val() === data.module)
+            {
+                data.pages.forEach((item, index) => {
+                    $("#select_page_id").append($('<option>', {value: index, text: item}));
+                });
+            }
+        });
+    });
 
+    SELECT_PAGE_OPTIONS_FEEDBACK.forEach((data) => {
+        if($('input[name="moduleSelectRadio"]:checked').val() === data.module)
+        {
+            data.pages.forEach((item, index) => {
+                $("#select_page_id").append($('<option>', {value: index, text: item}));
+            });
+        }
+    });
 }
 
 const initializeFeedbackModal = () => {
