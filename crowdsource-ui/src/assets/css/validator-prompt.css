@@ -325,3 +325,9 @@ a {
         width: 100%;
     }
 }
+
+#audio-player-btn{
+    min-width: 200px;
+}
+
+

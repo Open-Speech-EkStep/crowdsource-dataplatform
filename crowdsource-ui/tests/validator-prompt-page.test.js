@@ -63,35 +63,75 @@ describe("addListeners", () => {
 
 
 describe("setAudioPlayer", () => {
+  const play = $('#play');
+  const pause = $('#pause');
+  const resume = $('#resume');
+  const replay = $('#replay');
+  const textPlay = $('#audioplayer-text_play');
+  const textReplay = $('#audioplayer-text_replay');
+  const textPause = $('#audioplayer-text_pause');
+  const textResume = $('#audioplayer-text_resume');
+
   test('should start playing audio when play button is clicked', () => {
     const myAudio = document.getElementById('my-audio');
     myAudio.play = () => {
     };
     myAudio.load = () => {
     };
-    const play = $('#play');
-    const pause = $('#pause');
 
     setAudioPlayer();
     play.click();
 
-    expect(play.hasClass("d-none")).toEqual(true);
     expect(pause.hasClass("d-none")).toEqual(false);
+    expect(play.hasClass("d-none")).toEqual(true);
+    expect(resume.hasClass("d-none")).toEqual(true);
+    expect(replay.hasClass("d-none")).toEqual(true);
+
+    expect(textPause.hasClass("d-none")).toEqual(false);
+    expect(textPlay.hasClass("d-none")).toEqual(true);
+    expect(textResume.hasClass("d-none")).toEqual(true);
+    expect(textReplay.hasClass("d-none")).toEqual(true);
   });
 
   test('should pause audio when pause button is clicked', () => {
     const myAudio = document.getElementById('my-audio');
     myAudio.pause = () => {
     };
-    const pause = $('#pause');
-    const replay = $('#replay');
 
     setAudioPlayer();
     pause.click();
 
+    expect(resume.hasClass("d-none")).toEqual(false);
     expect(pause.hasClass("d-none")).toEqual(true);
-    expect(replay.hasClass("d-none")).toEqual(false);
+    expect(replay.hasClass("d-none")).toEqual(true);
+    expect(play.hasClass("d-none")).toEqual(true);
+
+    expect(textResume.hasClass("d-none")).toEqual(false);
+    expect(textPause.hasClass("d-none")).toEqual(true);
+    expect(textPlay.hasClass("d-none")).toEqual(true);
+    expect(textReplay.hasClass("d-none")).toEqual(true);
   });
+
+
+  test('should resume audio when resume button is clicked', () => {
+    const myAudio = document.getElementById('my-audio');
+    myAudio.play = () => {
+    };
+
+    setAudioPlayer();
+    resume.click();
+
+    expect(resume.hasClass("d-none")).toEqual(true);
+    expect(pause.hasClass("d-none")).toEqual(false);
+    expect(replay.hasClass("d-none")).toEqual(true);
+    expect(play.hasClass("d-none")).toEqual(true);
+
+    expect(textResume.hasClass("d-none")).toEqual(true);
+    expect(textPause.hasClass("d-none")).toEqual(false);
+    expect(textPlay.hasClass("d-none")).toEqual(true);
+    expect(textReplay.hasClass("d-none")).toEqual(true);
+  });
+
 
   test('should replay audio when replay button is clicked', () => {
     const myAudio = document.getElementById('my-audio');
@@ -99,14 +139,19 @@ describe("setAudioPlayer", () => {
     };
     myAudio.load = () => {
     };
-    const pause = $('#pause');
-    const replay = $('#replay');
 
     setAudioPlayer();
     replay.click();
 
-    expect(replay.hasClass("d-none")).toEqual(true);
+    expect(resume.hasClass("d-none")).toEqual(true);
     expect(pause.hasClass("d-none")).toEqual(false);
+    expect(replay.hasClass("d-none")).toEqual(true);
+    expect(play.hasClass("d-none")).toEqual(true);
+
+    expect(textResume.hasClass("d-none")).toEqual(true);
+    expect(textPause.hasClass("d-none")).toEqual(false);
+    expect(textPlay.hasClass("d-none")).toEqual(true);
+    expect(textReplay.hasClass("d-none")).toEqual(true);
   });
 });
 
