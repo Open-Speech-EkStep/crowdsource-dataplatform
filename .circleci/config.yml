@@ -235,7 +235,9 @@ workflows:
           name: migrate_uat_aws
           db_name: ${UAT_DB_NAME}
           requires:
-            - functional_tests_test
+          #   - functional_tests_test
+            - dev_deployment_eks
+            - build_dev_ui
 
       - aws-ecr/build-and-push-image:
           name: push_uat_image
@@ -266,7 +268,7 @@ workflows:
           type: approval
           requires:
             - functional_tests_test
-            - uat_deployment_eks
+            # - uat_deployment_eks
 
       - db_migrate_aws:
           name: migrate_prod_aws
