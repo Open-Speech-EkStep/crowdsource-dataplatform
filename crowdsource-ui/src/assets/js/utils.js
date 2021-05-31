@@ -1,6 +1,21 @@
 const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require("./constants");
 const fetch = require('./fetch')
+const platform = require('./platform');
 
+
+function getDeviceInfo() {
+  const os = platform.os;
+  let info = os.family + " " + os.version;
+  if (platform.product) {
+      info = info + " " + platform.product;
+  }
+  return info;
+}
+
+function getBrowserInfo() {
+  let info = platform.name + " " + platform.version;
+  return info;
+}
 
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
@@ -214,5 +229,7 @@ module.exports = {
   getCookie, 
   setCookie,
   getJson,
-  setPageContentHeight
+  setPageContentHeight,
+  getDeviceInfo, 
+  getBrowserInfo
 }
