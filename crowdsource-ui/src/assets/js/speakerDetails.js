@@ -1,5 +1,5 @@
-const {DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS} = require('./constants');
-const {getLocaleString} = require('./utils');
+const { DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS } = require('./constants');
+const { getLocaleString } = require('./utils');
 
 function validateUserName($userName, $userNameError) {
     const userNameValue = $userName.val().trim();
@@ -126,15 +126,15 @@ const setUserNameOnInputFocus = function () {
         const userNameValue = $userName.val().trim();
         if (!testUserName(userNameValue)) {
             $startRecordBtn.removeAttr('disabled').removeClass('point-none');
-            if($startRecordBtnTooltip) {
+            if ($startRecordBtnTooltip) {
                 $startRecordBtnTooltip.tooltip('disable');
             }
-           
+
         } else {
             setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
             $startRecordBtn.prop('disabled', true).addClass('point-none');
-            if($startRecordBtnTooltip) {
-            $startRecordBtnTooltip.tooltip('enable');
+            if ($startRecordBtnTooltip) {
+                $startRecordBtnTooltip.tooltip('enable');
             }
         }
     });
@@ -143,7 +143,7 @@ const setUserNameOnInputFocus = function () {
 const setGenderRadioButtonOnClick = function () {
     const genderRadios = document.querySelectorAll('input[name = "gender"]');
     const selectedTransGender = document.querySelector(
-      'input[name = "trans_gender"]:checked'
+        'input[name = "trans_gender"]:checked'
     );
 
     const options = $("#transgender_options");
@@ -153,10 +153,10 @@ const setGenderRadioButtonOnClick = function () {
                 e.target.checked = false;
             }
             e.target.previous = e.target.checked;
-            if(e.target.value == 'others' && e.target.checked){
-                if(!selectedTransGender){
+            if (e.target.value == 'others' && e.target.checked) {
+                if (!selectedTransGender) {
                     const defaultOption = document.querySelector(
-                      'input[name = "trans_gender"][value="Rather Not Say"]'
+                        'input[name = "trans_gender"][value="Rather Not Say"]'
                     );
                     defaultOption.checked = true;
                     defaultOption.previous = true;
@@ -168,6 +168,25 @@ const setGenderRadioButtonOnClick = function () {
 
         });
     });
+}
+
+const verifyUser = (userName) => {
+    return fetch('/uat/verify', {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify({
+            userName: userName,
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+}
+
+const storeToLocal = (speakerDetailsKey, speakerDetails, contributionLanguage, url) => {
+    localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, contributionLanguage);
+    location.href = url;
 }
 
 const setStartRecordingBtnOnClick = function (url, module) {
@@ -200,9 +219,20 @@ const setStartRecordingBtnOnClick = function (url, module) {
             userName: userNameValue,
             language: contributionLanguage,
         };
-        localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
-        localStorage.setItem(CONTRIBUTION_LANGUAGE, contributionLanguage);
-        location.href = url;
+        if (location.host.includes('uat')) {
+            verifyUser(userNameValue).then(res => {
+                if (res.ok) {
+                    storeToLocal(speakerDetailsKey, speakerDetails, contributionLanguage, url);
+                } else {
+                    alert("User not found")
+                }
+            }).catch(err => {
+                console.log(err)
+                alert("User not found")
+            })
+        } else {
+            storeToLocal(speakerDetailsKey, speakerDetails, contributionLanguage, url);
+        }
     });
 }
 

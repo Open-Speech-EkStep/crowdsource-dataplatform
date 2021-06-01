@@ -255,7 +255,10 @@ const isAllContributedQuery = `select not exists(
 
 const getDataRowInfo = `select type, media->>'language' as language from dataset_row where dataset_row_id=$1`;
 
+const userVerifyQuery =  `select id from users where LOWER(username) = LOWER($1) and role = $2`;
+
 module.exports = {
+  userVerifyQuery,
   unassignIncompleteMedia,
   unassignIncompleteMediaWhenLanChange,
   mediaCount,
