@@ -36,6 +36,16 @@ function isLanguageAvailable(data, lang) {
     return langaugeExists;
 }
 
+const addToLanguage = function (id, list) {
+    const selectBar = document.getElementById(id);
+    let options = '';
+    options = options.concat(`<option value="">All Languages</option>`);
+    list.forEach(lang => {
+      options = options.concat(`<option value=${lang.value}>${lang.text}</option>`);
+    });
+    selectBar.innerHTML = options;
+  }
+
 function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
     const $speakersDataLoader = $speakersData.find('#loader1');
@@ -128,18 +138,22 @@ $(document).ready(function () {
         }, 5000);
     }, {passive: true});
 
-
+    addToLanguage('to-dash-language', ALL_LANGUAGES);
 
     let fromLanguage = $('#from-dash-language option:first-child').val();
     let toLanguage = $('#to-dash-language option:first-child').val();
 
     $('#from-dash-language').on('change', (e) => {
       fromLanguage = e.target.value === "" ? "" : e.target.value;
-        if(toLanguage !== "" && fromLanguage !== "") {
-            updateLanguage(fromLanguage + '-' +toLanguage);
-        } else {
-            updateLanguage("");
-        }
+      const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
+      addToLanguage('to-dash-language', languages);
+      $('#to-language option:first-child').attr("selected", "selected");
+      toLanguage = $('#to-language option:first-child').val();
+        // if(toLanguage !== "" && fromLanguage !== "") {
+        //     updateLanguage(fromLanguage + '-' +toLanguage);
+        // } else {
+        //     updateLanguage("");
+        // }
     });
 
     $('#to-dash-language').on('change', (e) => {
