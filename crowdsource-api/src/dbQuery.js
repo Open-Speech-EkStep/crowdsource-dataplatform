@@ -1,9 +1,9 @@
-const unassignIncompleteMedia = `delete from "contributions" cont using "contributors" con where \
-cont.contributed_by = con.contributor_id and cont.audio_path is null and cont.action = \'assigned\' and con.contributor_identifier = $1 and user_name!=$2;`
+const unassignIncompleteMedia = `delete from contributions cont using contributors con where 
+cont.contributed_by=con.contributor_id and cont.media is null and cont.action='assigned' and con.contributor_identifier=$1 and user_name!=$2;`
 
-const unassignIncompleteMediaWhenLanChange = `delete from "contributions" cont using "contributors" con, dataset_row sen \
-where sen."dataset_row_id" = cont."dataset_row_id" and  cont.contributed_by = con.contributor_id and cont.audio_path is null and cont.action = \'assigned\' \
-and con.contributor_identifier = $1 and user_name=$2 and sen.language != $3;`
+const unassignIncompleteMediaWhenLanChange = `delete from contributions cont using contributors con, dataset_row dr 
+where dr.dataset_row_id=cont.dataset_row_id and cont.contributed_by=con.contributor_id and cont.media is null and cont.action='assigned' 
+and con.contributor_identifier=$1 and user_name=$2;`
 
 const mediaCount = `select count(dr.*) from dataset_row dr 
 inner join "contributions" cont on dr."dataset_row_id"=cont."dataset_row_id" 
@@ -229,9 +229,9 @@ const getBadges = `select grade, reward_milestone.milestone, id from reward_cata
 and LOWER(language) = LOWER($2) order by milestone desc) 
 as reward_milestone where id=reward_milestone.rid`;
 
-const getContributionHoursForLanguage = `select COALESCE(sum(con.audio_duration::decimal/3600), 0) as hours from contributions con 
+const getContributionHoursForLanguage = `select COALESCE(sum((con.media->>'duration')::decimal/3600), 0) as hours from contributions con 
 inner join dataset_row dr on dr."dataset_row_id"=con."dataset_row_id" where LOWER(language) = LOWER($1) 
-and action = 'completed' and con.audio_duration is not null`;
+and action = 'completed' and (con.media->>'duration') is not null`;
 
 const getMultiplierForHourGoal = 'select milestone_multiplier as multiplier from language_milestones where LOWER(language) = $1;';
 
