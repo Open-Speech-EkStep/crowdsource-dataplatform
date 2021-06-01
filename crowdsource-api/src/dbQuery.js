@@ -175,12 +175,12 @@ const getPathFromContribution = `select media ->> 'data' as path from contributi
 const getPathFromMasterDataSet = `select media ->> 'data' as path from dataset_row where dataset_row_id = $1;`
 
 const saveReportQuery = `
-INSERT INTO reports (reported_by,sentence_id,report_text,language,source) \
+INSERT INTO reports (reported_by, media_id, report_text, language,source) \
 SELECT $1,$2,$3,$4,$5`;
 
-const markContributionReported = "update contributions set action='reported' where contribution_id=$3 and (select count(distinct reported_by) from reports where source='validation' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='audio_report_limit');";
+const markContributionReported = "update contributions set action='reported' where contribution_id=$3 and (select count(distinct reported_by) from reports where source='validation' and media_id=$3 group by media_id) >= (select value from configurations where config_name='audio_report_limit');";
 
-const markMediaReported = `update dataset_row set state='reported' where "dataset_row_id"=$3 and (select count(distinct reported_by) from reports where source='contribution' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='sentence_report_limit');`;
+const markMediaReported = `update dataset_row set state='reported' where "dataset_row_id"=$3 and (select count(distinct reported_by) from reports where source='contribution' and media_id=$3 group by media_id) >= (select value from configurations where config_name='sentence_report_limit');`;
 
 const markContributionSkippedQuery = `insert into contributions (action, dataset_row_id, date, contributed_by, media)
 select 'skipped', $2, now(), $1, json_build_object('language', $3);`;
