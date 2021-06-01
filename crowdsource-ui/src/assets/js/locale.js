@@ -1,5 +1,5 @@
 const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
-const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE } = require("./constants");
+const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE, CURRENT_MODULE } = require("./constants");
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');
@@ -37,7 +37,8 @@ function showLanguagePopup() {
 function redirectToLocalisedPage() {
     const locale = localStorage.getItem("i18n");
     const splitValues = location.href.split('/');
-    const currentLocale = splitValues[splitValues.length - 2];
+    const currentModule = localStorage.getItem(CURRENT_MODULE);
+    const currentLocale = currentModule == 'bolo' ?splitValues[3] : splitValues[splitValues.length - 2];
     const contribution_langugae = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     $('#home-page').attr('default-lang', contribution_langugae);
     if (currentLocale != locale) {
