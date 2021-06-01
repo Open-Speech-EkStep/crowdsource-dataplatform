@@ -370,7 +370,7 @@ const renderCoachMarks = function () {
 $(document).ready(function () {
     localStorage.setItem('module','bolo');
 
-    if (!localStorage.getItem("i18n")){
+    if (!localStorage.getItem(CONTRIBUTION_LANGUAGE)){
         showLanguagePopup();
         return;
     }

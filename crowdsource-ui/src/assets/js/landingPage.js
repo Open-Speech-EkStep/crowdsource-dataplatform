@@ -1,21 +1,5 @@
 const { onActiveNavbar } = require('./header');
 
-// const setSayListenBackground = function (){
-//   const $card1 = $(".card1");
-//   const $card2 = $(".card2");
-//   const $card3 = $(".card3");
-//   const $card4 = $(".card4");
-//   const $card1Width = $card1.outerWidth( true);
-//   const $card2Width = $card2.outerWidth(true);
-//   const $card3Width = $card3.outerWidth(true);
-//   const $card4Width = $card4.outerWidth(true);
-//   const totalWidth = $card1Width + $card2Width+$card3Width + $card4Width;
-//   $card1.css("background-size",`${totalWidth}px auto`);
-//   $card2.css("background-size",`${totalWidth}px auto`);
-//   $card3.css("background-size",`${totalWidth}px auto`);
-//   $card4.css("background-size",`${totalWidth}px auto`);
-// }
-
 const setHover = function (){
   const $card1 = $(".card1");
   const $card2 = $(".card2");

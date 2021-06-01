@@ -1,4 +1,5 @@
 const { onActiveNavbar } = require('../common/header');
+const { showLanguagePopup } = require('../common/locale');
 const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages} = require('../common/common');
 const {toggleFooterPosition, getLocaleString,updateLocaleLanguagesDropdown} = require('../common/utils');
 const {
@@ -87,6 +88,13 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
+  if (!localStorage.getItem(CONTRIBUTION_LANGUAGE)){
+    showLanguagePopup();
+    return;
+  }
+  else {
+    redirectToLocalisedPage();
+  }
   initializeFeedbackModal();
   getAvailableLanguages("ocr");
   getLocaleString().then(()=>{
