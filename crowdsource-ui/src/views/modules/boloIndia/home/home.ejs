@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<%- include('../common/header.ejs',{bolo:"./home.html", suno:"../sunoIndia/home.html",likho:"../likhoIndia/home.html",dekho:"../dekhoIndia/home.html",path:"../"}); %>
+<%- include('../common/header.ejs',{home:"../home.html", bolo:"./home.html", suno:"../sunoIndia/home.html",likho:"../likhoIndia/home.html",dekho:"../dekhoIndia/home.html",path:"../"}); %>
 <div class="container-fluid supreme-container">
     <div class="row">
         <div class="col-12 col-md-8 col-lg-10 offset-lg-1 mt-4">
@@ -154,7 +154,7 @@
             </div>
         </div>
     </div>
-    <%- include('../common/viewAllDetailBtn.ejs',{DASHBOARD:'./dashboard.html'}); %>
+    <%- include('../common/viewAllDetailBtn.ejs',{DASHBOARD:'../dashboard.html'}); %>
 </div>
 
 <div class="modal fade" id="modal-chart-wrapper" tabindex="-1" role="dialog" aria-hidden="true">

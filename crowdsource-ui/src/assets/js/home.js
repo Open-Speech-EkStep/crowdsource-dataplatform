@@ -232,13 +232,13 @@ function initializeBlock() {
     $('#start_recording').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-        setStartRecordingBtnOnClick('./record.html',MODULE.bolo.value);
+        setStartRecordingBtnOnClick('../record.html',MODULE.bolo.value);
     });
 
     $('#start_validating').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-        setLetGoBtnOnClick('./validator-page.html',MODULE.bolo.value);
+        setLetGoBtnOnClick('../validator-page.html',MODULE.bolo.value);
     });
 
     $('[name="topLanguageChart"]').on('change', (event) => {
