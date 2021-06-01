@@ -6,7 +6,7 @@ const { readFileSync } = require("fs");
 const { stringToHTML, flushPromises, mockLocalStorage } = require("./utils");
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../src/views/home.ejs`, "UTF-8") + readFileSync(`${__dirname}/../src/views/modals/say-listen-language.ejs`, "UTF-8")
+  readFileSync(`${__dirname}/../build/views/boloIndia/home.ejs`, "UTF-8") + readFileSync(`${__dirname}/../build/views/common/say-listen-language.ejs`, "UTF-8")
 );
 
 describe("updateHrsForSayAndListen", () => {

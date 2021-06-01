@@ -444,6 +444,10 @@ body.modal-open .supreme-container {
   .w-70 {
     width: 70% !important;
   }
+
+  #home-banner .img-fluid{
+    height: auto;
+  }
 }
 
 @media screen and (max-width: 767px) {
