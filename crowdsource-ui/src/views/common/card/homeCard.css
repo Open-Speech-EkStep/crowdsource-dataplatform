@@ -1,4 +1,4 @@
-@media screen and (min-width: 992px) and (max-width: 1279px) {
+@media screen and (min-width: 992px){
     .home-badge-row img {
         width: 7rem;
     }
@@ -13,6 +13,22 @@
 
     .home-heading-2{
         font-size: 30px;
+    }
+
+    .card1{
+        background-position: left bottom;
+    }
+
+    .card2{
+        background-position: bottom;
+    }
+
+    .card3 {
+        background-position: bottom;
+    }
+
+    .card4 {
+        background-position: right bottom;
     }
 }
 
@@ -32,12 +48,31 @@
     .home-heading-2{
         font-size: 30px;
     }
+    .card1{
+        background-position: left bottom;
+    }
+
+    .card2{
+        background-position: bottom;
+    }
+
+    .card3 {
+        background-position: bottom;
+    }
+
+    .card4 {
+        background-position: right bottom;
+    }
 
 }
 
 @media (max-width: 768px) {
     .home-badge-row img {
         width: 100px;
+    }
+
+    .home-badge-row  {
+        text-align: center;
     }
 
     .persuade-quote  {
@@ -51,11 +86,31 @@
     .home-heading-2{
         font-size: 28px;
     }
+
+    .card1{
+        background-position: bottom;
+    }
+
+    .card2{
+        background-position: bottom;
+    }
+
+    .card3 {
+        background-position: bottom;
+    }
+
+    .card4 {
+        background-position: bottom;
+    }
 }
 
 @media screen and (max-width: 480px) {
     .home-badge-row img {
         width: 80px;
+    }
+
+    .home-badge-row  {
+        text-align: center;
     }
 
     .persuade-quote {
@@ -68,6 +123,22 @@
 
     .home-heading-2{
         font-size: 24px;
+    }
+
+    .card1{
+        background-position: bottom;
+    }
+
+    .card2{
+        background-position: bottom;
+    }
+
+    .card3 {
+        background-position: bottom;
+    }
+
+    .card4 {
+        background-position: bottom;
     }
 }
 
@@ -80,6 +151,10 @@
         font-size: 20px;
     }
 
+    .home-badge-row  {
+        text-align: center;
+    }
+
     .home-badge-link-row {
         font-size: 20px;
     }
@@ -87,11 +162,31 @@
     .home-heading-2{
         font-size: 20px;
     }
+
+    .card1{
+        background-position: bottom;
+    }
+
+    .card2{
+        background-position: bottom;
+    }
+
+    .card3 {
+        background-position: bottom;
+    }
+
+    .card4 {
+        background-position: bottom;
+    }
 }
 
 @media screen and (max-width: 280px) {
     .home-badge-row img{
         width: 60px;
+    }
+
+    .home-badge-row  {
+        text-align: center;
     }
 
     .persuade-quote {
@@ -104,6 +199,22 @@
 
     .home-heading-2{
         font-size: 18px;
+    }
+
+    .card1{
+        background-position: bottom;
+    }
+
+    .card2{
+        background-position: bottom;
+    }
+
+    .card3 {
+        background-position: bottom;
+    }
+
+    .card4 {
+        background-position: bottom;
     }
 }
 

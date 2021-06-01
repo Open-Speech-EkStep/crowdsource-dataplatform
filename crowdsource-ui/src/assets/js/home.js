@@ -206,7 +206,7 @@ function initializeBlock() {
             top_lang = language;
             localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
             localStorage.setItem("i18n", "en");
-            window.location.href = "/";
+            window.location.href = "./home.html";
             setLangNavBar(targetedDiv, language, $languageNavBar);
             updateHrsForSayAndListen(language);
         }
@@ -225,7 +225,7 @@ function initializeBlock() {
             targetedDiv.classList.add('active');
             updateHrsForSayAndListen(language);
             localStorage.setItem("i18n", "en");
-            window.location.href = "/";
+            window.location.href = "./home.html";
         }
     });
 
