@@ -30,8 +30,8 @@
         <%- include('../common/moduleIntro.ejs',{name:'Likho India',intro:'Help your language by translating text'}); %>
     </div>
     <div class="row">
-        <div class="col-12 col-md-8 col-lg-10 offset-lg-1 mt-4">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white px-4" id="contribution_lang_navbar">
+        <div class="col-12 col-md-12 col-lg-10 offset-lg-1 mt-4">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 flex-flow-nowrap" id="contribution_lang_navbar">
                 <div class="mx-2">
                     <%= __('Select the language pair for voluntary contribution') %>:
                 </div>
@@ -39,7 +39,7 @@
                     <div class="col-5 col-lg-5 col-xl-4 d-none" id="nav-bar-loader">
                         <div><span class="spinner"></span></div>
                     </div>
-                    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 pt-2 px-0">
+                    <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 pt-2 px-0">
                         <div class="row m-0">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-0">
                                 <div class="row m-0">
@@ -65,12 +65,12 @@
         <%- include('../common/cards.ejs',{left:{h1:"Translate",h2:"Translate and type the text","p1":"",img:"../../img/translate.svg"},right:{h1:"Validate",h2:"Validate the translation","p1":"",img:"../../img/validate.svg"}}); %>
     </div>
     <div class="row">
-        <div class="col-12 col-md-11 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
+        <div class="col-12 col-md-12 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
             <h2 class="font-wt-900 site-blue lh-5">
                 <%= __('Contributions made to Likho India') %>
             </h2>
             <div class="row mt-5" id="speaker-data">
-                <div class="col-12 col-lg-11 col-md-11">
+                <div class="col-12 col-lg-11 col-md-12">
                     <div class="row justify-content-center" id="loader1">
                         <div><span class="spinner"></span></div>
                     </div>
