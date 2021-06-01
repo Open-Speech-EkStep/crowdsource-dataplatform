@@ -230,7 +230,7 @@ and LOWER(language) = LOWER($2) order by milestone desc)
 as reward_milestone where id=reward_milestone.rid`;
 
 const getContributionHoursForLanguage = `select COALESCE(sum((con.media->>'duration')::decimal/3600), 0) as hours from contributions con 
-inner join dataset_row dr on dr."dataset_row_id"=con."dataset_row_id" where LOWER(language) = LOWER($1) 
+inner join dataset_row dr on dr."dataset_row_id"=con."dataset_row_id" where LOWER(dr.media->>'language') = LOWER($1) 
 and action = 'completed' and (con.media->>'duration') is not null`;
 
 const getMultiplierForHourGoal = 'select milestone_multiplier as multiplier from language_milestones where LOWER(language) = $1;';
