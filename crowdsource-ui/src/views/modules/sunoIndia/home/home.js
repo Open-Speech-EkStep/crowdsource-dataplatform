@@ -1,4 +1,5 @@
 const { onActiveNavbar } = require('../common/header');
+const { showLanguagePopup } = require('../common/locale');
 const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages} = require('../common/common');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString} = require('../common/utils');
 const {
@@ -92,6 +93,13 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
+  if (!localStorage.getItem(CONTRIBUTION_LANGUAGE)){
+    showLanguagePopup();
+    return;
+  }
+  else {
+    redirectToLocalisedPage();
+  }
   initializeFeedbackModal();
   getAvailableLanguages("asr");
   getLocaleString().then(()=>{

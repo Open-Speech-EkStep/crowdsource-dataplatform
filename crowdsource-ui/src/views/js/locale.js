@@ -17,6 +17,7 @@ const localisationChangeHandler = e => {
     if (locale)
         changeLocale(locale);
 };
+
 const changeLocale = function (locale) {
     const splitValues = location.href.split('/');
     let currentPage = splitValues[splitValues.length - 1];
@@ -25,7 +26,9 @@ const changeLocale = function (locale) {
     }
     const module = localStorage.getItem(CURRENT_MODULE);
     localStorage.setItem("i18n", locale);
-    if(module === 'bolo'){
+    if(module == 'home'){
+        location.href = `/${locale}/${currentPage}`;
+    } else if(module === 'bolo' && currentPage != 'home.html'){
         location.href = `/${locale}/${currentPage}`;
     } else {
         location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;

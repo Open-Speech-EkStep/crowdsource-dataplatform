@@ -43,9 +43,12 @@ function showByHoursChart(type) {
 }
 
 function redirectToLocalisedPage() {
-  const locale = localStorage.getItem("i18n");
+  const localeValue = localStorage.getItem("i18n") ;
+  const locale = localeValue == 'null'  || localeValue == undefined? 'en' : localeValue;
   const splitValues = location.href.split('/');
-  const currentLocale = splitValues[splitValues.length - 2];
+  const currentModule = localStorage.getItem(CURRENT_MODULE);
+  const isModulePresent = currentModule == 'suno' || currentModule == 'dekho' || currentModule == 'bolo';
+  const currentLocale = isModulePresent ? splitValues[3] : splitValues[splitValues.length - 2];
   const contribution_langugae = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   $('#home-page').attr('default-lang', contribution_langugae);
   if (currentLocale != locale) {
