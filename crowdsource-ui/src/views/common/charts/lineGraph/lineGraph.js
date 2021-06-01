@@ -73,7 +73,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     hourAxis.renderer.minGridDistance = 50;
     hourAxis.renderer.grid.template.strokeDasharray = "3,3";
     hourAxis.renderer.labels.template.fill = '#000';
-    hourAxis.title.text = currentModule == "dekho" ? "Images" : currentModule == MODULE.likho.value ? "Number of Sentences" : 'Number of hours';
+    hourAxis.title.text = currentModule == "dekho" ? "Images" : currentModule == MODULE.likho.value ? "Sentences" : 'Number of hours';
     hourAxis.renderer.labels.template.fontSize = 12;
     hourAxis.title.fontSize = 12;
 
