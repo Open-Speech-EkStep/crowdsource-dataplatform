@@ -1,0 +1,109 @@
+@media screen and (min-width: 992px) and (max-width: 1279px) {
+    .home-badge-row img {
+        width: 7rem;
+    }
+
+    .persuade-quote  {
+        font-size: 30px;
+    }
+
+    .home-badge-link-row {
+        font-size: 30px;
+    }
+
+    .home-heading-2{
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .home-badge-row img {
+        width: 120px;
+    }
+
+    .persuade-quote  {
+        font-size: 30px;
+    }
+
+    .home-badge-link-row {
+        font-size: 30px;
+    }
+
+    .home-heading-2{
+        font-size: 30px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .home-badge-row img {
+        width: 100px;
+    }
+
+    .persuade-quote  {
+        font-size: 28px;
+    }
+
+    .home-badge-link-row {
+        font-size: 28px;
+    }
+
+    .home-heading-2{
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .home-badge-row img {
+        width: 80px;
+    }
+
+    .persuade-quote {
+        font-size: 20px;
+    }
+
+    .home-badge-link-row {
+        font-size: 24px;
+    }
+
+    .home-heading-2{
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .home-badge-row img{
+        width: 64px;
+    }
+
+    .persuade-quote  {
+        font-size: 20px;
+    }
+
+    .home-badge-link-row {
+        font-size: 20px;
+    }
+
+    .home-heading-2{
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 280px) {
+    .home-badge-row img{
+        width: 60px;
+    }
+
+    .persuade-quote {
+        font-size: 18px;
+    }
+
+    .home-badge-link-row {
+        font-size: 18px;
+    }
+
+    .home-heading-2{
+        font-size: 18px;
+    }
+}
+
