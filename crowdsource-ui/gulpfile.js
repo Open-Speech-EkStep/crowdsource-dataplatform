@@ -13,8 +13,13 @@ gulp.task('common-ejs-gen', function () {
   return gulp.src(['src/views/common/**/*.ejs']).pipe(gulpFlatten()).pipe(gulp.dest('build/views/common'));
 });
 
-gulp.task('html-gen-boloIndia', function (callback) {
+gulp.task('html-gen-common', function (callback) {
   generateLocalisedHtmlFromEjs(`${__dirname}/src/views`, `${__dirname}/target`);
+  callback();
+});
+
+gulp.task('html-gen-boloIndia', function (callback) {
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'boloIndia');
   callback();
 });
 
@@ -31,6 +36,13 @@ gulp.task('html-gen-likhoIndia', function (callback) {
 gulp.task('html-gen-dekhoIndia', function (callback) {
   generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'dekhoIndia');
   callback();
+});
+
+gulp.task('ejs-gen-boloIndia', function () {
+  return gulp
+    .src(['src/views/modules/boloIndia/**/*.ejs'])
+    .pipe(gulpFlatten())
+    .pipe(gulp.dest('build/views/boloIndia'));
 });
 
 gulp.task('ejs-gen-sunoIndia', function () {
@@ -110,6 +122,13 @@ gulp.task('js-common-flat', function () {
     .pipe(gulp.dest('build/js/common'));
 });
 
+gulp.task('js-boloIndia-flat', function () {
+  return gulp
+    .src(['src/views/modules/boloIndia/**/*.js'])
+    .pipe(gulpFlatten())
+    .pipe(gulp.dest('build/js/boloIndia'));
+});
+
 gulp.task('js-sunoIndia-flat', function () {
   return gulp
     .src(['src/views/modules/sunoIndia/**/*.js'])
@@ -164,6 +183,42 @@ gulp.task('js-common', function () {
       })
     )
     .pipe(gulp.dest('target/js/common'));
+});
+
+gulp.task('js-boloIndia', function () {
+  const env = args.env || 'local';
+
+  const filename = 'env.config.' + env + '.json';
+  const settings = JSON.parse(fs.readFileSync('src/assets/config/' + filename, 'utf8'));
+  return gulp
+    .src(['build/js/boloIndia/*.js'])
+    .pipe(gulpFlatten())
+    .pipe(
+      browserify({
+        transform: ['babelify'],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'apiUrl',
+            replacement: settings.apiUrl,
+          },
+        ],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'cdnUrl',
+            replacement: settings.cdnUrl,
+          },
+        ],
+      })
+    )
+    .pipe(gulp.dest('target/js/boloIndia'));
 });
 
 gulp.task('js-sunoIndia', function () {
@@ -286,6 +341,14 @@ gulp.task('css-common', function () {
     .pipe(gulp.dest('target/css/common'));
 });
 
+gulp.task('css-boloIndia', function () {
+  return gulp
+    .src(['src/views/modules/boloIndia/**/*.css'])
+    .pipe(gulpFlatten())
+    .pipe(cleanCss())
+    .pipe(gulp.dest('target/css/boloIndia'));
+});
+
 gulp.task('css-sunoIndia', function () {
   return gulp
     .src(['src/views/modules/sunoIndia/**/*.css'])
@@ -318,7 +381,7 @@ gulp.task('json', function () {
 });
 
 gulp.task('generateBuild',
-   gulp.parallel('common-ejs-gen','ejs-gen-sunoIndia','ejs-gen-likhoIndia','ejs-gen-dekhoIndia','js-common-flat','js-sunoIndia-flat','js-likhoIndia-flat','js-dekhoIndia-flat')
+   gulp.parallel('common-ejs-gen','ejs-gen-boloIndia','ejs-gen-sunoIndia','ejs-gen-likhoIndia','ejs-gen-dekhoIndia','js-common-flat','js-boloIndia-flat', 'js-sunoIndia-flat','js-likhoIndia-flat','js-dekhoIndia-flat')
 );
 
 gulp.task(
@@ -326,12 +389,13 @@ gulp.task(
   gulp.parallel(
     'js',
     'json',
-    gulp.series('js-common-flat', 'js-common', 'js-sunoIndia-flat', 'js-sunoIndia','js-likhoIndia-flat','js-likhoIndia','js-dekhoIndia-flat','js-dekhoIndia'),
+    gulp.series('js-common-flat', 'js-common','js-boloIndia-flat','js-boloIndia', 'js-sunoIndia-flat', 'js-sunoIndia','js-likhoIndia-flat','js-likhoIndia','js-dekhoIndia-flat','js-dekhoIndia'),
     'css',
     'css-common',
     'css-sunoIndia',
+    'css-boloIndia',
     'css-likhoIndia',
     'css-dekhoIndia',
-    gulp.series('html', 'common-ejs-gen', 'html-gen-boloIndia', 'ejs-gen-sunoIndia', 'html-gen-sunoIndia','ejs-gen-likhoIndia', 'html-gen-likhoIndia','ejs-gen-dekhoIndia', 'html-gen-dekhoIndia')
+    gulp.series('html', 'common-ejs-gen','html-gen-common','ejs-gen-boloIndia', 'html-gen-boloIndia', 'ejs-gen-sunoIndia', 'html-gen-sunoIndia','ejs-gen-likhoIndia', 'html-gen-likhoIndia','ejs-gen-dekhoIndia', 'html-gen-dekhoIndia')
   )
 );
