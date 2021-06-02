@@ -10,7 +10,8 @@ const profanityApi = require('./profanityChecker')
 const helmet = require('helmet');
 const express = require('express');
 const app = express();
-
+const morganBody = require('morgan-body');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const router = express.Router();
 
@@ -52,7 +53,11 @@ const {
 // const Ddos = require('ddos');
 // const ddos = new Ddos({ burst: 12, limit: 70 })
 // app.use(ddos.express);
-
+app.use(bodyParser.json());
+morganBody(app, {
+    logAllReqHeader: true,
+    noColors: true
+});
 
 app.enable('trust proxy');
 
