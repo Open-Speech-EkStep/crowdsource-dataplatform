@@ -197,23 +197,23 @@ function updateProfanityState(userName, sentenceId, language, state){
 }
 
 function onProfanityUpdated($skipButton, $submitButton, cancelButton){
-    hideElement(cancelButton);
-    hideElement($submitButton)
-    hideElement($(audioPlayerBtn))
-    hideElement($skipButton)
-    showElement($('#thankyou-text'));
-    showElement($('#progress-row'))
-    try {
-      setTimeout(() => {
-        hideElement($('#thankyou-text'));
-        showElement(cancelButton);
-        showElement($submitButton);
-        showElement($(audioPlayerBtn))
-        showElement($skipButton)
+    // hideElement(cancelButton);
+    // hideElement($submitButton)
+    // hideElement($(audioPlayerBtn))
+    // hideElement($skipButton)
+    // showElement($('#thankyou-text'));
+    // showElement($('#progress-row'))
+    // try {
+    //   setTimeout(() => {
+    //     hideElement($('#thankyou-text'));
+    //     showElement(cancelButton);
+    //     showElement($submitButton);
+    //     showElement($(audioPlayerBtn))
+    //     showElement($skipButton)
         getNextSentence();
-      }, 2000)
-    } catch (e) {
-    }
+    //   }, 2000)
+    // } catch (e) {
+    // }
 }
 
 function invokeProfanityStateUpdate(state, $skipButton, $submitButton, cancelButton){
@@ -300,7 +300,7 @@ function showNoSentencesMessage() {
   // hideElement($('#report_btn'));
   hideElement($("#test-mic-speakers"));
   hideElement($('#instructive-msg'));
-  hideElement($('#thankyou-text'));
+  // hideElement($('#thankyou-text'));
 }
 
 // const handleSubmitFeedback = function () {
