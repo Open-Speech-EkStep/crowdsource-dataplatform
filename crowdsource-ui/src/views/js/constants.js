@@ -71,8 +71,20 @@ const SELECT_PAGE_OPTIONS_FEEDBACK = [
   {module:'others', pages: ['About Us', 'Terms and Conditions', 'Speak', 'Validate', 'Thank You Page']}
 ];
 
-const FEEDBACK_CATEGORY = ['Suggestion', 'Error', 'Complaint', 'Compliment'];
+const FEEDBACK_CATEGORY = [
+  {text:'Suggestion', value:"suggestion"}, 
+  {text:'Error', value:"error"}, 
+  {text:'Complaint', value:"complaint"}, 
+  {text:'Compliment', value:"compliment"}
+];
 
+const OPINION_RATING_MAPPING = [
+  {opinion:"very_sad", value: 1},
+  {opinion:"sad", value: 2},
+  {opinion:"neutral", value: 3},
+  {opinion:"happy", value: 4},
+  {opinion:"very_happy", value: 5},
+]
 module.exports = {
   DEFAULT_CON_LANGUAGE,
   AUDIO_DURATION,
@@ -89,5 +101,6 @@ module.exports = {
   SELECTED_MODULE, MODULE, CURRENT_MODULE, TO_LANGUAGE,
   LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE,
   SELECT_PAGE_OPTIONS_FEEDBACK,
-  FEEDBACK_CATEGORY
+  FEEDBACK_CATEGORY,
+  OPINION_RATING_MAPPING
 }

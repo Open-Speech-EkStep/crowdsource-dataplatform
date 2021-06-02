@@ -56,7 +56,7 @@ const GENDER = ['', 'male', 'female', 'others', 'Transgender - He', 'Transgender
 const WADASNR_BIN_PATH = '/opt/binaries/WadaSNR/Exe'
 const MIN_SNR_LEVEL = 25
 
-const SUBJECT_MAX_LENGTH = 256
+const CATEGORY_MAX_LENGTH = 256
 
 const FEEDBACK_MAX_LENGTH = 1000
 
@@ -82,7 +82,7 @@ module.exports = {
   GENDER,
   WADASNR_BIN_PATH,
   MIN_SNR_LEVEL,
-  SUBJECT_MAX_LENGTH,
+  CATEGORY_MAX_LENGTH,
   FEEDBACK_MAX_LENGTH,
   VALIDATION_ACTIONS,
   SOURCES,

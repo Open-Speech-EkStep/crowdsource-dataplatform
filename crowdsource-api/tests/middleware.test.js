@@ -229,8 +229,11 @@ describe('middleware test', function () {
     });
 
     describe('validateUserInputForFeedback', function () {
+        const testCategory = 'category'
+        const longCategory = `Etiam nec aliquet ex, id molestie nisl. Mauris erat est, ornare at tristique sodales, mollis vitae quam. Donec aliquet dui ligula, pharetra finibus felis sagittis et.
+         Aliquam tempor auctor felis quis dapibus. Donec at lacus ullamcorper, tincidunt nibh non, commodo elit. Ut cursus lorem at nibh hendrerit bibendum. Nam feugiat mauris at 
+         eros varius auctor.`;
         const testFeedback = 'feedback';
-        const testSubject = 'subject';
         const longFeedback = `
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquam ultrices laoreet. Morbi at dui libero. Ut sodales maximus ante vitae tempus. Curabitur 
         scelerisque odio ut suscipit mattis. Vestibulum ultricies, libero laoreet scelerisque efficitur, diam justo posuere eros, in blandit mauris elit in massa. 
@@ -239,52 +242,92 @@ describe('middleware test', function () {
         Etiam nec aliquet ex, id molestie nisl. Mauris erat est, ornare at tristique sodales, mollis vitae quam. Donec aliquet dui ligula, pharetra finibus felis sagittis et.
          Aliquam tempor auctor felis quis dapibus. Donec at lacus ullamcorper, tincidunt nibh non, commodo elit. Ut cursus lorem at nibh hendrerit bibendum. Nam feugiat mauris at 
          eros varius auctor. Vivamus blandit turpis et dignissim tincidunt. Morbi bibendum dignissim sapien, sit amet blandit massa rhoncus a quam   .
-        `
+        `;
+        const testModule = 'bolo';
+        const testTargetPage = 'Landing Page';
+        const testOpinionRating = 4;
 
         afterEach(() => {
             jest.clearAllMocks();
         })
 
-        test('should call next() once if all params in req are valid', function () {
-            const req = { body: { feedback: testFeedback, subject: testSubject, language: motherTongue } };
+        test('should call next() once if all params in req are valid (all fields are filled)', () => {
+            const req = { body: {category: testCategory, feedback: testFeedback, language: motherTongue,
+                 module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
-
             expect(nextSpy).toHaveBeenCalledTimes(1)
             expect(res.send).toHaveBeenCalledTimes(0)
         });
 
-        test('should return 400 if feedback is null', function () {
-            const req = { body: { feedback: null, subject: testSubject, language: motherTongue } };
+        test('should call next() once if category and feedback is empty', () => {
+            const req = { body: {category: "", feedback: "", language: motherTongue, 
+                module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
+            expect(nextSpy).toHaveBeenCalledTimes(1);
+            expect(res.send).toHaveBeenCalledTimes(0);
 
+        });
+
+        test('should return 400 if category is empty but feedback is not empty',  ()  => {
+            const req = { body: {category: "", feedback: testFeedback, language: motherTongue, 
+                module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating } };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(res.send).toHaveBeenCalledTimes(1);
+        });
+
+        test('should return 400 if module is empty', () => {
+            const req = { body: { category: testCategory, feedback: testFeedback, language: motherTongue, 
+            module: "", target_page: testTargetPage, opinion_rating: testOpinionRating } };
+            validateUserInputForFeedback(req, res, nextSpy);
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
-        test('should return 400 if feedback is empty', function () {
-            const req = { body: { feedback: "", subject: testSubject, language: motherTongue } };
+        test('should return 400 if module is null', () => {
+            const req = { body: { category: testCategory, feedback: testFeedback, language: motherTongue, 
+            module: null, target_page: testTargetPage, opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
-
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
-        test('should return 400 if subject is empty', function () {
-            const req = { body: { feedback: testFeedback, subject: "", language: motherTongue } };
+        test('should return 400 if target_page is empty', () => {
+            const req = { body: {category:testCategory, feedback: testFeedback, language: motherTongue, 
+            module: testModule, target_page: "", opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
-
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
-        test('should return 400 if subject is null', function () {
-            const req = { body: { feedback: testFeedback, subject: null, language: motherTongue } };
+        test('should return 400 if target_page is null', () => {
+            const req = { body: {category:testCategory, feedback: testFeedback, language: motherTongue, 
+            module: testModule, target_page: null, opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
-
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
-        test('should return 400 if feedback is greater than 1000 char', function () {
-            const req = { body: { feedback: longFeedback, subject: testSubject, language: motherTongue } };
+        test('should return 400 if opinion_rating is not in range(1 to 5)', () => {
+            const req = { body: {category:testCategory, feedback: testFeedback, language: motherTongue, 
+            module: testModule, target_page: null, opinion_rating: 8 } };
             validateUserInputForFeedback(req, res, nextSpy);
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
 
+        test('should return 400 if opinion is null', () => {
+            const req = { body: {category:testCategory, feedback: testFeedback, language: motherTongue, 
+            module: testModule, target_page: testTargetPage, opinion_rating: null } };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if category is longer than 256 char', () => {
+            const req = { body: { category:longCategory, feedback: testFeedback, language: motherTongue, 
+                module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating } };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if feedback is greater than 1000 char', () => {
+            const req = { body: {category:testCategory, feedback: longFeedback, language: motherTongue, 
+                module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating } };
+            validateUserInputForFeedback(req, res, nextSpy);
             expect(res.send).toHaveBeenCalledTimes(1)
         });
     });
