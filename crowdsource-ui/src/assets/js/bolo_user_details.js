@@ -5,6 +5,7 @@ const fetch = require('./fetch');
 const testBoloUserName = (val) => {
   const mobileRegex = /^[6-9]\d{9}$/;
   const emailRegex = /^\S+@\S+[\.][0-9a-z]+$/;
+  if(location.host.includes('uat'))return false;
   return mobileRegex.test(val) || emailRegex.test(val);
 };
 
