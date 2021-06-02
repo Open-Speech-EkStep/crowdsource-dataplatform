@@ -1,5 +1,6 @@
 const { DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS } = require('./constants');
 const { getLocaleString } = require('./utils');
+const fetch = require('../common/fetch')
 
 function validateUserName($userName, $userNameError) {
     const userNameValue = $userName.val().trim();
