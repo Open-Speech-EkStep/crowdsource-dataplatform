@@ -180,6 +180,7 @@
 @media (max-width: 768px) {
     .home-badge-row img {
         width: 100px;
+        margin-top: 16px;
     }
 
     .home-badge-row  {
@@ -226,6 +227,7 @@
 @media screen and (max-width: 480px) {
     .home-badge-row img {
         width: 80px;
+        margin-top: 16px;
     }
 
     .home-badge-row  {
@@ -272,6 +274,7 @@
 @media screen and (max-width: 320px) {
     .home-badge-row img{
         width: 64px;
+        margin-top: 16px;
     }
 
     .persuade-quote  {
@@ -318,6 +321,7 @@
 @media screen and (max-width: 280px) {
     .home-badge-row img{
         width: 60px;
+        margin-top: 16px;
     }
 
     .home-badge-row  {
