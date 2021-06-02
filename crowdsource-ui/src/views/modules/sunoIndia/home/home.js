@@ -94,7 +94,7 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
-  landToHome();
+  // landToHome();
   initializeFeedbackModal();
   getAvailableLanguages("asr");
   getLocaleString().then(()=>{
