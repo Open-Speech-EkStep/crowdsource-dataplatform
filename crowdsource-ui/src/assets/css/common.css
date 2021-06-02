@@ -162,7 +162,6 @@ body {
    }
   .dekho-back-btn {
     left: 1px !important;
-    margin-top: -7px !important;
   }
 
   .top-back-btn .back-text {
@@ -214,4 +213,8 @@ body {
   .d-xs-block {
     display: block !important;
   }
+}
+
+.border-50 {
+  border-radius: 50px;
 }
