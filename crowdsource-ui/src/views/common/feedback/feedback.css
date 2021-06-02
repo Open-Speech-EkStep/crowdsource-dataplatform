@@ -40,12 +40,16 @@
 .submit-btn-feedback {
 	color: #FFFFFF;
 	background: #007BFF;
-	opacity: 0.4;
 	border: 1px solid #007BFF;
 	box-sizing: border-box;
-	border-radius: 40px;
+	border-radius: 48px;
 	width: 160px;
 	height: 48px;
+}
+.submit-btn-feedback:disabled{
+	background-color: #D7D7D7;
+	border: none;
+	font-weight: 700;
 }
 
 .opinion input[type="radio"] {
@@ -71,7 +75,7 @@ label .required {
 	color: #C35757;
 }
 
-#feedback_close_btn, #feedback_thank_you_close_id {
+#feedback_close_btn, #feedback_thanku_close_btn {
     position: absolute;
     right: 1rem;
     top: 0;

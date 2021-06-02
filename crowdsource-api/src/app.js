@@ -334,9 +334,13 @@ app.get('/get-locale-strings/:locale', function (req, res) {
 
 router.post('/feedback', validateUserInputForFeedback, (req, res) => {
     const feedback = req.body.feedback.trim();
-    const subject = req.body.subject.trim();
+    const category = req.body.category.trim();
     const language = req.body.language.trim();
-    insertFeedback(subject, feedback, language)
+    const module = req.body.module;
+    const target_page = req.body.target_page;
+    const opinion_rating = req.body.opinion_rating;
+
+    insertFeedback(feedback, category, language, module, target_page, opinion_rating)
         .then(() => {
             console.log('Feedback is inserted into the DB.');
             res.send({
