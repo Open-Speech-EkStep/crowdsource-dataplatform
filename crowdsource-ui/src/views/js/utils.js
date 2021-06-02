@@ -2,6 +2,14 @@ const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require("./constants");
 const fetch = require('./fetch')
 
 
+const onHover = function (btn) {
+  btn.css('background-color', 'rgba(0, 123, 255, 0.3)');
+}
+
+const afterHover = function (btn) {
+  btn.css('background-color', 'white');
+}
+
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -213,5 +221,7 @@ module.exports = { setPageContentHeight,
   reportSentenceOrRecording, 
   getCookie, 
   setCookie,
-  getJson
+  getJson,
+  onHover,
+  afterHover
 }
