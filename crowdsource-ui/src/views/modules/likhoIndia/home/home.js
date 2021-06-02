@@ -1,5 +1,5 @@
 const { onActiveNavbar } = require('../common/header');
-const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards } = require('../common/common');
+const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,landToHome } = require('../common/common');
 const {
   toggleFooterPosition,
   getLocaleString,
