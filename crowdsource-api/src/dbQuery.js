@@ -1,9 +1,9 @@
-const unassignIncompleteMedia = `delete from "contributions" cont using "contributors" con where \
-cont.contributed_by = con.contributor_id and cont.audio_path is null and cont.action = \'assigned\' and con.contributor_identifier = $1 and user_name!=$2;`
+const unassignIncompleteMedia = `delete from contributions cont using contributors con where 
+cont.contributed_by=con.contributor_id and cont.media is null and cont.action='assigned' and con.contributor_identifier=$1 and user_name!=$2;`
 
-const unassignIncompleteMediaWhenLanChange = `delete from "contributions" cont using "contributors" con, dataset_row sen \
-where sen."dataset_row_id" = cont."dataset_row_id" and  cont.contributed_by = con.contributor_id and cont.audio_path is null and cont.action = \'assigned\' \
-and con.contributor_identifier = $1 and user_name=$2 and sen.language != $3;`
+const unassignIncompleteMediaWhenLanChange = `delete from contributions cont using contributors con, dataset_row dr 
+where dr.dataset_row_id=cont.dataset_row_id and cont.contributed_by=con.contributor_id and cont.media is null and cont.action='assigned' 
+and con.contributor_identifier=$1 and user_name=$2;`
 
 const mediaCount = `select count(dr.*) from dataset_row dr 
 inner join "contributions" cont on dr."dataset_row_id"=cont."dataset_row_id" 
@@ -175,12 +175,12 @@ const getPathFromContribution = `select media ->> 'data' as path from contributi
 const getPathFromMasterDataSet = `select media ->> 'data' as path from dataset_row where dataset_row_id = $1;`
 
 const saveReportQuery = `
-INSERT INTO reports (reported_by,sentence_id,report_text,language,source) \
+INSERT INTO reports (reported_by, media_id, report_text, language,source) \
 SELECT $1,$2,$3,$4,$5`;
 
-const markContributionReported = "update contributions set action='reported' where contribution_id=$3 and (select count(distinct reported_by) from reports where source='validation' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='audio_report_limit');";
+const markContributionReported = "update contributions set action='reported' where contribution_id=$3 and (select count(distinct reported_by) from reports where source='validation' and media_id=$3 group by media_id) >= (select value from configurations where config_name='audio_report_limit');";
 
-const markMediaReported = `update dataset_row set state='reported' where "dataset_row_id"=$3 and (select count(distinct reported_by) from reports where source='contribution' and sentence_id=$3 group by sentence_id) >= (select value from configurations where config_name='sentence_report_limit');`;
+const markMediaReported = `update dataset_row set state='reported' where "dataset_row_id"=$3 and (select count(distinct reported_by) from reports where source='contribution' and media_id=$3 group by media_id) >= (select value from configurations where config_name='sentence_report_limit');`;
 
 const markContributionSkippedQuery = `insert into contributions (action, dataset_row_id, date, contributed_by, media)
 select 'skipped', $2, now(), $1, json_build_object('language', $3);`;
@@ -229,9 +229,9 @@ const getBadges = `select grade, reward_milestone.milestone, id from reward_cata
 and LOWER(language) = LOWER($2) order by milestone desc) 
 as reward_milestone where id=reward_milestone.rid`;
 
-const getContributionHoursForLanguage = `select COALESCE(sum(con.audio_duration::decimal/3600), 0) as hours from contributions con 
-inner join dataset_row dr on dr."dataset_row_id"=con."dataset_row_id" where LOWER(language) = LOWER($1) 
-and action = 'completed' and con.audio_duration is not null`;
+const getContributionHoursForLanguage = `select COALESCE(sum((con.media->>'duration')::decimal/3600), 0) as hours from contributions con 
+inner join dataset_row dr on dr."dataset_row_id"=con."dataset_row_id" where LOWER(dr.media->>'language') = LOWER($1) 
+and action = 'completed' and (con.media->>'duration') is not null`;
 
 const getMultiplierForHourGoal = 'select milestone_multiplier as multiplier from language_milestones where LOWER(language) = $1;';
 
@@ -255,7 +255,10 @@ const isAllContributedQuery = `select not exists(
 
 const getDataRowInfo = `select type, media->>'language' as language from dataset_row where dataset_row_id=$1`;
 
+const userVerifyQuery =  `select id from users where LOWER(username) = LOWER($1) and role = $2`;
+
 module.exports = {
+  userVerifyQuery,
   unassignIncompleteMedia,
   unassignIncompleteMediaWhenLanChange,
   mediaCount,

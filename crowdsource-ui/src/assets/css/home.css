@@ -382,7 +382,7 @@ body.modal-open .supreme-container {
   .mt-xs-5 {
      margin-top: 5rem;
   }
-  #languages-wrapper, #speakers-wrapper, #hours-wrapper {
+  #speakers-wrapper, #hours-wrapper {
     display: flex;
     flex-flow: row-reverse;
     justify-content: space-between;
