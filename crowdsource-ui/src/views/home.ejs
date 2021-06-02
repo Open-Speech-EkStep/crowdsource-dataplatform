@@ -45,21 +45,21 @@
     </div>
 
     <div class="m-auto justify-content-center mt-lg-4 mx-lg-5 d-flex flex-row flex-wrap flex-lg-nowrap px-5">
-        <%- include('../../build/views/common/homeCard.ejs',{MODULE:"BOLO",img:"../img/say.svg",P1:"Contribute your voice",P2:"Validate what they say", url:"./boloIndia/home.html",cardNumber:"card1"})%>
-        <%- include('../../build/views/common/homeCard.ejs',{MODULE:"SUNO",img:"../img/listen2.svg",P1:"Transcribing audio to text",P2:"Validate text as per the audio",url:"./sunoIndia/home.html",cardNumber:"card2"})%>
-        <%- include('../../build/views/common/homeCard.ejs',{MODULE:"LIKHO",img:"../img/translate2.svg",P1:"Translate and type the text",P2:"Validate the text as per image",url:"./likhoIndia/home.html",cardNumber:"card3"})%>
+        <%- include('../../build/views/common/homeCard.ejs',{MODULE:"SUNO",img:"../img/listen2.svg",P1:"Transcribing audio to text",P2:"Validate text as per the audio",url:"./sunoIndia/home.html",cardNumber:"card1"})%>
+        <%- include('../../build/views/common/homeCard.ejs',{MODULE:"BOLO",img:"../img/say.svg",P1:"Contribute your voice",P2:"Validate what they say", url:"./boloIndia/home.html",cardNumber:"card2"})%>
+        <%- include('../../build/views/common/homeCard.ejs',{MODULE:"LIKHO",img:"../img/translate2.svg",P1:"Translate and type the text",P2:"Validate the translation",url:"./likhoIndia/home.html",cardNumber:"card3"})%>
         <%- include('../../build/views/common/homeCard.ejs',{MODULE:"DEKHO",img:"../img/look2.svg",P1:"Type the text as per image",P2:"Validate the text as per image",url:"./dekhoIndia/home.html",cardNumber:"card4"})%>
     </div>
-    <div class="row mt-5 align-item-center" style="background:rgba(223,236,251,.3)">
-        <div class="my-4 my-lg-5 px-5 col-sm align-self-center home-badge-link" style="font-style:normal;font-size:30px">
+    <div class="row mt-5 align-item-center px-5" style="background:rgba(223,236,251,.3)">
+        <div class="my-4 my-lg-5 col-sm align-self-center home-badge-link" style="font-style:normal;font-size:30px">
             <div class="font-weight-light home-badge-link-row"> <%= __('Be a part of language initiative, earn badges and make a difference?') %></div>
             <div class="text-primary font-weight-bold home-badge-link-row"> <a href="./badges.html"><%= __('Know More') %></a></div>
         </div>
         <div class="my-4 my-lg-5 col-sm home-badge-row">
-            <img src="../img/bronze_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid">
-            <img src="../img/silver_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid">
-            <img src="../img/gold_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid">
-            <img src="../img/platinum_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid">
+            <img src="../img/bronze_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid mx-2">
+            <img src="../img/silver_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid mx-2">
+            <img src="../img/gold_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid mx-2">
+            <img src="../img/platinum_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid mx-2">
         </div>
     </div>
 
