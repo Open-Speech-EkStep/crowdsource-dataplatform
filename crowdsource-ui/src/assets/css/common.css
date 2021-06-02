@@ -181,7 +181,12 @@ body {
     height: 50px;
     width: 50px;
   }
-
+  .btn-recording {
+    border-radius:50px;
+    font-size:20px;
+    border:2px solid #007bff;
+    min-height: 48px;
+  }
 }
 
 @media (min-width: 767px) {
