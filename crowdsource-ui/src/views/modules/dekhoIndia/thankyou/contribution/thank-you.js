@@ -19,6 +19,7 @@ const {downloadPdf} = require('../common/downloadableBadges');
 const {showUserProfile} = require('../common/header');
 const {showByHoursChart,getContributedAndTopLanguage,setBadge} = require('../common/common');
 
+const { initializeFeedbackModal } = require('../common/feedback');
 const dekhoCountKey = 'dekhoCount';
 const CURRENT_INDEX = "dekhoCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -165,8 +166,8 @@ $(document).ready(function () {
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });
-
   localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
+  initializeFeedbackModal();
   getLocaleString()
     .then((data) => {
       executeOnLoad();

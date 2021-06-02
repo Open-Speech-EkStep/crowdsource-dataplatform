@@ -9,7 +9,6 @@ const {initializeFeedbackModal} = require('../common/feedback')
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
-
 const fetchDetail = (language) => {
     const url = language ? '/aggregate-data-count/ocr?byLanguage=true' : '/aggregate-data-count/ocr'
     return fetch(url).then((data) => {

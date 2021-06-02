@@ -25,6 +25,7 @@ const CURRENT_INDEX = "sunoValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 const sunoValidatorCountKey = 'sunoValidatorCount';
 const totalSentence = Number(localStorage.getItem(sunoValidatorCountKey));
+const {initializeFeedbackModal} = require('../common/feedback');
 
 function downloadPdf(badgeType) {
   try {
@@ -189,6 +190,7 @@ function executeOnLoad() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
+  initializeFeedbackModal();
   $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
     if (!$(this).attr("disabled")) {
       downloadPdf($(this).attr("data-badge"));
