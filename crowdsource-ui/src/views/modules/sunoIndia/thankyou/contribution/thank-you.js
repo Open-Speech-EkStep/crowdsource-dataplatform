@@ -17,7 +17,7 @@ const {
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
 const {showUserProfile} = require('../common/header');
-
+const {initializeFeedbackModal} = require('../common/feedback')
 const {constructChart} = require('../common/horizontalBarGraph');
 const {getContributedAndTopLanguage,setBadge,showByHoursChart} = require('../common/common');
 
@@ -162,7 +162,7 @@ function executeOnLoad() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
-
+  initializeFeedbackModal();
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });

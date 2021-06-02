@@ -21,6 +21,7 @@ const {
 const {downloadPdf} = require('../common/downloadableBadges');
 const { showUserProfile } = require('../common/header');
 const {showByHoursChart,getContributedAndTopLanguage,setBadge} = require('../common/common');
+const {initializeFeedbackModal} = require('../common/feedback');
 
 const CURRENT_INDEX = "likhoCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -189,7 +190,7 @@ function executeOnLoad() {
 $(document).ready(function () {
 
   localStorage.setItem(CURRENT_MODULE,MODULE.likho.value);
-
+  initializeFeedbackModal();
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });

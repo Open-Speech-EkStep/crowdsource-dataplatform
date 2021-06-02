@@ -16,7 +16,7 @@ const rowWithBadge = function (levelId, sentenceCount, badgeName, localeString) 
   }
   return `<tr><td>${localeString.Level} ${levelId}</td><td>${badgeDescription}</td><td><div><img src=${badge.imgLg} class="table-img" alt=${badgeName} id="${badgeName}-image-hover" rel="popover"></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
 }
-
+const { initializeFeedbackModal } = require('../common/feedback');
 const getCard = function (badgeName, localeString) {
   const currentModule = localStorage.getItem(CURRENT_MODULE);
   const badges = MODULE[currentModule].BADGES;
@@ -57,6 +57,7 @@ $(document).ready(function () {
   const type='asr'
   const source='contribute'
   updateLocaleLanguagesDropdown(language);
+  initializeFeedbackModal();
   getLocaleString().then(() => {
     performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then(renderBadgeDetails).catch((err) => {
       console.log(err);

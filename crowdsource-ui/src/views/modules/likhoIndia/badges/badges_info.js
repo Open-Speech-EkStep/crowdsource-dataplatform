@@ -3,6 +3,7 @@ const {
   getLocaleString,
 } = require('../common/utils');
 const {LIKHO_FROM_LANGUAGE,LIKHO_TO_LANGUAGE, LOCALE_STRINGS, MODULE, CURRENT_MODULE,ALL_LANGUAGES} = require('../common/constants');
+const {initializeFeedbackModal} = require('../common/feedback');
 
 const updateLocaleLanguagesDropdown = (language, toLanguage) => {
   const dropDown = $('#localisation_dropdown');
@@ -80,6 +81,7 @@ $(document).ready(function () {
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE) || 'hindi';
   const type='parallel'
   const source='contribute'
+  initializeFeedbackModal();
   updateLocaleLanguagesDropdown(fromLanguage,toLanguage);
   getLocaleString().then(() => {
     performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${fromLanguage}`).then(renderBadgeDetails).catch((err) => {
