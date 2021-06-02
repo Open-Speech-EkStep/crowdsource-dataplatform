@@ -1,6 +1,6 @@
 <div class="test-mic-speakers-container col-12">
     <div class="col-12 test-mic-speakers-details d-none" id="test-mic-speakers-details">
-        <div class="row justify-content-between mb-4">
+        <div class="row justify-content-between mb-2 mb-md-4 mb-lg-4">
             <div class="col-lg-4 col-md-5 test-mic-heading">
                 <p>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +23,7 @@
                     <audio controls="controls" id="test-speaker-hidden" style="display:none">
                         <source src="../../aud/sample_audio_file.mp3">
                     </audio>
-                    <div class="col-lg-3 col-7 col-md-5 col-sm-5 mb-2 mb-lg-0">
+                    <div class="col-lg-3 col-6 col-md-5 col-sm-5 mb-2 mb-lg-0 pl-0">
                         <button id="play-speaker" data-value="test-speaker" class="test-btn">
                             <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg" id="speaker-svg">
                                 <path d="M7.245 1.50469C6.9646 1.39249 6.6486 1.45309 6.431 1.66289L2.5428 5.47809C2.4744 5.54529 2.4172 5.62149 2.3848 5.71349H0.2814C0.1256 5.71349 0 5.83449 0 5.98929V10.4425C0 10.5951 0.1256 10.7183 0.2814 10.7183H2.3848C2.4172 10.8037 2.4744 10.8865 2.5428 10.9493L6.4308 14.7633C6.5788 14.9001 6.7728 14.9763 6.9644 14.9763C7.0576 14.9763 7.1518 14.9583 7.2448 14.9269C7.5206 14.8081 7.7044 14.5435 7.7044 14.2543V2.17969C7.7044 1.88229 7.5208 1.62009 7.245 1.50469Z" fill="#959595"/>
@@ -34,7 +34,7 @@
                             <span id="test-speaker-text"><%= __('Test Speakers') %></span>
                         </button>
                     </div>
-                    <div class="col-lg-9 col-10 col-md-7 col-sm-8 d-flex align-items-center">
+                    <div class="col-lg-9 col-6 col-md-7 col-sm-8 d-flex align-items-center">
                         <canvas class="w-100 test-canvas" id="speaker-canvas" style="background-color:#fff"></canvas>
                     </div>
                 </div>

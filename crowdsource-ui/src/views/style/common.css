@@ -36,10 +36,11 @@ body {
 }
 
 .report-btn-container button{
-  border: 1px solid #959595;
-  color: #959595;
-  margin-right: 1rem;
-  min-width: 107px;
+  color: #666;
+    margin-right: 1rem;
+    background: #F6F6F6;
+    border-radius: 4px;
+    min-height: 32px;
 }
 
 #report_btn svg {
@@ -100,11 +101,6 @@ body {
   #report_btn {
     margin-right: 0;
     margin-left: 1rem;
-  }
-  .report-btn-container {
-    margin-top: 1rem;
-    margin-right: .5rem;
-    margin-bottom: 1rem;
   }
   .tour-tour {
     width: 95%;
@@ -283,6 +279,13 @@ color: #4D82F7;;
 
 #module_name { 
   margin-left: 0 !important;
+}
+
+
+@media (max-width: 600px) {
+  .d-sm-none {
+    display: none;
+  }
 }
 
 

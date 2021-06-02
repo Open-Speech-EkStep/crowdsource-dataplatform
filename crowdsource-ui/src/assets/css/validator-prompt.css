@@ -156,9 +156,7 @@ a {
 
 @media (max-width: 767px) {
     .record-btn-container {
-        flex-direction: column-reverse;
         align-items: flex-end;
-        display: -webkit-box;
     }
 
     .record-btn-container .test-mic-speaker {
