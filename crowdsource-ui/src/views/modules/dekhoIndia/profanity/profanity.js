@@ -78,22 +78,22 @@ function updateProfanityState(userName, sentenceId, language, state){
 }
 
 function onProfanityUpdated(){
-  hideElement($('#cancel-edit-button'));
-  hideElement($('#submit-edit-button'))
-  hideElement($('#skip_button'))
-  showElement($('#thankyou-text'));
-  showElement($('#progress-row'))
-  try{
-    setTimeout(() => {
-      hideElement($('#thankyou-text'));
-      showElement($('#cancel-edit-button'));
-      showElement($('#submit-edit-button'))
-      showElement($('#skip_button'))
-      getNextSentence();
-    }, 2000)
-  } catch (e){
-    console.log(e)
-  }
+  getNextSentence();
+  // hideElement($('#cancel-edit-button'));
+  // hideElement($('#submit-edit-button'))
+  // hideElement($('#skip_button'))
+  // showElement($('#thankyou-text'));
+  // showElement($('#progress-row'))
+  // try{
+  //   setTimeout(() => {
+  //     hideElement($('#thankyou-text'));
+  //     showElement($('#cancel-edit-button'));
+  //     showElement($('#submit-edit-button'))
+  //     showElement($('#skip_button'))
+  //   }, 2000)
+  // } catch (e){
+  //   console.log(e)
+  // }
 }
 
 function invokeProfanityStateUpdate(state){
@@ -173,7 +173,7 @@ function showNoSentencesMessage() {
   hideElement($("#test-mic-speakers"));
   hideElement($('#instructive-msg'));
   hideElement($('#editor-row'));
-  hideElement($('#thankyou-text'));
+  // hideElement($('#thankyou-text'));
   showElement($('#no-sentences-row'));
 }
 
