@@ -150,11 +150,7 @@
                         <%= __('Please select your feedback category') %> <span>(optional)</span>
                     </label>
                     <div class="form-row">
-                        <select name="category_id" class="form-control"><option value="" disabled="disabled" selected="selected"><%= __('Select a category') %></option>
-                            <option value="suggestion">Suggestion</option>
-                            <option value="error">Error</option>
-                            <option value="complaint">Complaint</option>
-                            <option value="compliment">Compliment</option>
+                        <select id="category_id" class="form-control"><option value="category" selected="selected"><%= __('Select a category') %></option>
                         </select>
                     </div>
                 </div>
@@ -166,12 +162,32 @@
                         </label>
                     </div>
                 </div>
-                <textarea name="feedback_textarea" maxlength="1000" id="other_text" class="w-100 p-3 other-reason mb-4 label-color-feedback" rows="3" placeholder="<%= __('Type here...')%>" style="background-color:#fff;border:1px solid rgba(149,149,149,.6)"></textarea>
+                <textarea name="feedback_textarea" maxlength="1000" id="feedback_description" class="w-100 p-3 other-reason mb-4 label-color-feedback" rows="3" placeholder="<%= __('Type here...')%>" style="background-color:#fff;border:1px solid rgba(149,149,149,.6)"></textarea>
                 <div class="d-flex justify-content-center">
-                    <button id="feeback_submit_id" class="btn btn-primary submit-btn-feedback" disabled="disabled"><%= __('SUBMIT')%></button>
+                    <button id="submit_btn" class="btn btn-primary submit-btn-feedback" disabled="disabled"><%= __('SUBMIT')%></button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="feedback_thanku_modal" tabindex="-1" aria-labelledby="FeedbackThankYou" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="modal-header d-block border-0">
+                <img src="../../img/success.svg" alt="Success">
+                <h4 class="modal-title text-center">
+                    <%= __('Submitted successfully') %>
+                </h4>
+                <button type="button" id="feedback_thanku_close_btn" class="btn btn-close text-muted" data-bs-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center"><%= __('Thank you for your feedback!') %></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="../../js/common/feedback.js"></script>
