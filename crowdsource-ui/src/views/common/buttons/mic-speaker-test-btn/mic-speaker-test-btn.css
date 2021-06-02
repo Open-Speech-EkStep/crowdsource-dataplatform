@@ -8,8 +8,8 @@
   min-width: fit-content;
 }
 .test-mic-speaker button {
-  border: 1px solid #959595;
-  color: #959595;
+  color: #666;
+  background: #F6F6F6;
 }
 .test-mic-speaker svg {
   margin-right: 5px;
@@ -92,4 +92,8 @@
   .only-display {
     display: none;
   }
+}
+
+.pr-10 {
+  padding-right: 10px !important;
 }

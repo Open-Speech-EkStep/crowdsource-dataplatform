@@ -226,8 +226,14 @@ audio {
   min-width: fit-content;
 }
 .test-mic-speaker button {
-  border: 1px solid #959595;
-  color: #959595;
+  color: #666;
+  background: #F6F6F6;
+  border-radius: 4px;
+  min-height: 32px;
+}
+
+.pr-10 {
+  padding-right: 10px !important;
 }
 .test-mic-speaker svg {
   margin-right: 5px;
@@ -273,7 +279,6 @@ audio {
 .ambient-noise {
   font-size: 14px;
   color: #959595;
-  padding-top: 8px;
 }
 .ambient-noise svg {
   vertical-align: text-bottom;
@@ -471,9 +476,7 @@ audio {
   }
 
   .record-btn-container {
-    flex-direction: column-reverse;
     align-items: flex-end;
-    display: -webkit-box;
   }
 
   #cancel-edit-button > svg {
