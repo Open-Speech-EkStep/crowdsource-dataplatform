@@ -1,6 +1,7 @@
 const MAX_SIZE = 8;
 const VALID_FILE_TYPE = 'audio/wav';
 const ONE_YEAR = 31536000000;
+const ROLE_UAT = "ROLE_UAT"
 const KIDS_AGE_GROUP = 'upto 10'; //should be change when we have data for kids
 const KIDS = 'medium';
 const ADULT = 'medium';
@@ -86,5 +87,6 @@ module.exports = {
   FEEDBACK_MAX_LENGTH,
   VALIDATION_ACTIONS,
   SOURCES,
-  MEDIA_TYPES
+  MEDIA_TYPES,
+  ROLE_UAT
 };
