@@ -1,4 +1,4 @@
-const {
+  const {
   performAPIRequest,
   getLocaleString,
   updateLocaleLanguagesDropdown
@@ -8,7 +8,7 @@ const {CONTRIBUTION_LANGUAGE, BADGES, LOCALE_STRINGS} = require('./constants');
 
 const rowWithBadge = function (levelId, sentenceCount, badgeName, localeString) {
   const badge = BADGES[badgeName.toLowerCase()];
-  let badgeDescription = `<p class="text-left mb-0 ml-3">Recording: ${sentenceCount} ${localeString.Sentences}<br/>Validation: 80% of recorded ${sentenceCount} ${localeString.Sentences} need to be "correct"</p>`;
+  let badgeDescription = `<p class="text-left mb-0 ml-3">Recording: ${sentenceCount} ${localeString.Sentences}</p>`;
   if(badgeName == 'Bronze'){
     badgeDescription= `<p class="text-left mb-0 ml-3">Recording: ${sentenceCount} ${localeString.Sentences}</p>`
   }
