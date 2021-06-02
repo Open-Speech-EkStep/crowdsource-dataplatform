@@ -12,7 +12,6 @@ const {
 const {setLangNavBar} = require('../common/languageNavBar')
 const {updateHrsForCards} = require('../common/card')
 const {getStatsSummary,getDefaultLang,setDefaultLang} = require('../common/commonHome');
-
 const {
   DEFAULT_CON_LANGUAGE,
   CONTRIBUTION_LANGUAGE,

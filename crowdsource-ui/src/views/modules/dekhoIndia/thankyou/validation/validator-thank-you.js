@@ -18,7 +18,7 @@ const {
 // const {downloadPdf} = require('../common/downloadableBadges');
 const {showByHoursChart,getContributedAndTopLanguage,setBadge} = require('../common/common');
 const {showUserProfile} = require('../common/header');
-
+const { initializeFeedbackModal } = require('../common/feedback');
 const CURRENT_INDEX = "dekhoValidatorCurrentIndex";
 const dekhoValidatorCountKey = 'dekhoValidatorCount';
 const totalSentence = Number(localStorage.getItem(dekhoValidatorCountKey));
@@ -198,6 +198,7 @@ $(document).ready(function () {
   });
 
   localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
+  initializeFeedbackModal();
   getLocaleString()
     .then((data) => {
       executeOnLoad();

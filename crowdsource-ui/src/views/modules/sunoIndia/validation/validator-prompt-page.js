@@ -6,6 +6,7 @@ const { showUserProfile } = require('../common/header');
 const { isKeyboardExtensionPresent,isMobileDevice } = require('../common/common');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { cdn_url } = require('../common/env-api');
+const {initializeFeedbackModal} = require('../common/feedback');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -584,6 +585,7 @@ if(isMobileView){
 
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
+  initializeFeedbackModal();
   detectDevice();
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   setFooterPosition();
