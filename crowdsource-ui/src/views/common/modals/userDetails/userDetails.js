@@ -1,5 +1,6 @@
-const {DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS,LIKHO_TO_LANGUAGE,LIKHO_FROM_LANGUAGE,MODULE} = require('./constants');
-const {getLocaleString} = require('./utils');
+const { DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS, LIKHO_TO_LANGUAGE, LIKHO_FROM_LANGUAGE, MODULE } = require('./constants');
+const { getLocaleString } = require('./utils');
+const fetch = require('./fetch')
 
 function validateUserName($userName, $userNameError) {
   const userNameValue = $userName.val().trim();
@@ -81,7 +82,7 @@ const setUserNameOnInputFocus = function () {
     validateUserName($userName, $userNameError);
     // setUserNameTooltip($userName);
     const userNameValue = $userName.val().trim();
-    if($startRecordBtnTooltip) {
+    if ($startRecordBtnTooltip) {
       if (!testUserName(userNameValue)) {
         $startRecordBtn.removeAttr('disabled').removeClass('point-none');
         $startRecordBtnTooltip.tooltip('disable');
@@ -94,7 +95,26 @@ const setUserNameOnInputFocus = function () {
   });
 }
 
-const setStartRecordingBtnOnClick = function (url, module='') {
+const verifyUser = (userName) => {
+  return fetch('/uat/verify', {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify({
+      userName: userName,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+}
+
+const storeToLocal = (speakerDetailsKey, speakerDetails, contributionLanguage, url) => {
+  localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
+  localStorage.setItem(CONTRIBUTION_LANGUAGE, contributionLanguage);
+  location.href = url;
+}
+
+const setStartRecordingBtnOnClick = function (url, module = '') {
   const speakerDetailsKey = 'speakerDetails';
   const $startRecordBtn = $('#proceed-box');
   const $userName = $('#username');
@@ -112,11 +132,23 @@ const setStartRecordingBtnOnClick = function (url, module='') {
     const speakerDetails = {
       userName: userNameValue,
       language: userLanguage,
-      toLanguage:toLanguage || '',
+      toLanguage: toLanguage || '',
     };
-    localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, contributionLanguage);
-    location.href = url;
+
+    if (location.host.includes('uat')) {
+      verifyUser(userNameValue).then(res => {
+        if (res.ok) {
+          storeToLocal(speakerDetailsKey, speakerDetails, contributionLanguage, url);
+        } else {
+          alert("User not found")
+        }
+      }).catch(err => {
+        console.log(err)
+        alert("User not found")
+      })
+    } else {
+      storeToLocal(speakerDetailsKey, speakerDetails, contributionLanguage, url);
+    }
   });
 }
 
