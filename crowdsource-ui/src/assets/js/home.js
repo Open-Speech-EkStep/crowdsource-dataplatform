@@ -1,7 +1,7 @@
-const {showLanguagePopup, redirectToLocalisedPage} = require('./locale');
+const { showLanguagePopup, redirectToLocalisedPage } = require('./locale');
 const { onActiveNavbar } = require('./header');
-const {drawMap, getStatistics, showByHoursChart, showBySpeakersChart} = require('./home-page-charts');
-const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest} = require('./utils')
+const { drawMap, getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest } = require('./utils')
 const {
     setSpeakerDetails,
     setUserModalOnShown,
@@ -16,7 +16,7 @@ const {
     setBoloUserNameOnInputFocus,
     setLetGoBtnOnClick
 } = require('./bolo_user_details');
-const {getContributedAndTopLanguage} = require('./common');
+const { getContributedAndTopLanguage } = require('./common');
 
 const {
     DEFAULT_CON_LANGUAGE,
@@ -103,7 +103,7 @@ const setLangNavBar = (targetedDiv, top_lang, $languageNavBar) => {
     }
 }
 
-const getDefaultLang = function (){
+const getDefaultLang = function () {
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const $sayListenLanguage = $('#say-listen-language');
 
@@ -160,7 +160,7 @@ const getStatsSummary = function () {
             localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
             getStatistics(response.aggregate_data_count[0]);
             setDefaultLang();
-            if(response.top_languages_by_hours.length === 0) {
+            if (response.top_languages_by_hours.length === 0) {
                 $("#bar_charts_container").hide();
                 $("#view_all_btn").hide();
             } else {
@@ -170,14 +170,14 @@ const getStatsSummary = function () {
         });
 }
 
-const setSayListenBackground = function (){
+const setSayListenBackground = function () {
     const $say = $("#say");
     const $listen = $("#listen");
-    const $sayWidth = $say.outerWidth( true);
+    const $sayWidth = $say.outerWidth(true);
     const $listenWidth = $listen.outerWidth(true);
     const totalWidth = $sayWidth + $listenWidth;
-    $say.css("background-size",`${totalWidth}px auto`);
-    $listen.css("background-size",`${totalWidth}px auto`);
+    $say.css("background-size", `${totalWidth}px auto`);
+    $listen.css("background-size", `${totalWidth}px auto`);
 }
 
 
@@ -232,13 +232,13 @@ function initializeBlock() {
     $('#start_recording').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-        setStartRecordingBtnOnClick('../record.html',MODULE.bolo.value);
+        setStartRecordingBtnOnClick('../record.html', MODULE.bolo.value);
     });
 
     $('#start_validating').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-        setLetGoBtnOnClick('../validator-page.html',MODULE.bolo.value);
+        setLetGoBtnOnClick('../validator-page.html', MODULE.bolo.value);
     });
 
     $('[name="topLanguageChart"]').on('change', (event) => {
@@ -255,7 +255,7 @@ function initializeBlock() {
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     setBoloUserModalOnShown($boloUserName);
-    setBoloSpeakerDetails(speakerDetailsKey, $boloUserName );
+    setBoloSpeakerDetails(speakerDetailsKey, $boloUserName);
     $boloStartRecordBtnTooltip.tooltip('disable');
     setBoloUserNameOnInputFocus();
     // setStartRecordingBtnOnClick();
@@ -267,37 +267,37 @@ function initializeBlock() {
     const $say_container = $('#say_container');
     const $listen_container = $('#listen_container');
     $say.hover(() => {
-        $(".card1").css("box-shadow","0px 0px 32px rgba(66, 178, 198, 0.6)")
+        $(".card1").css("box-shadow", "0px 0px 32px rgba(66, 178, 198, 0.6)")
         $say_p_2.removeClass('d-none');
         $say_container.addClass('say-active');
     }, () => {
-        $(".card1").css("box-shadow","0px 0px 32px rgb(0 0 0 / 10%)")
+        $(".card1").css("box-shadow", "0px 0px 32px rgb(0 0 0 / 10%)")
         $say_p_2.addClass('d-none');
         $say_container.removeClass('say-active');
     });
 
     $listen.hover(() => {
-        $(".card2").css("box-shadow","0px 0px 32px rgba(166, 192, 251, 0.6)")
+        $(".card2").css("box-shadow", "0px 0px 32px rgba(166, 192, 251, 0.6)")
         $listen_p_2.removeClass('d-none');
         $listen_container.addClass('listen-active');
     }, () => {
-        $(".card2").css("box-shadow","0px 0px 32px rgb(0 0 0 / 10%)")
+        $(".card2").css("box-shadow", "0px 0px 32px rgb(0 0 0 / 10%)")
         $listen_p_2.addClass('d-none');
         $listen_container.removeClass('listen-active');
     });
 
-    $('input[name = "gender"]').on('change', function() {
+    $('input[name = "gender"]').on('change', function () {
         const selectedGender = document.querySelector(
             'input[name = "gender"]:checked'
         );
         const options = $("#transgender_options");
-        if(selectedGender.value === "others") {
+        if (selectedGender.value === "others") {
             const selectedTransGender = document.querySelector(
-              'input[name = "trans_gender"]:checked'
+                'input[name = "trans_gender"]:checked'
             );
-            if(!selectedTransGender){
+            if (!selectedTransGender) {
                 const defaultOption = document.querySelector(
-                  'input[name = "trans_gender"][value="Rather Not Say"]'
+                    'input[name = "trans_gender"][value="Rather Not Say"]'
                 );
                 defaultOption.checked = true;
                 defaultOption.previous = true;
@@ -357,8 +357,8 @@ const renderCoachMarks = function () {
         backdrop: true,
         localization: {
             buttonTexts: {
-                nextButton:localString.Next,
-                prevButton:localString.Back,
+                nextButton: localString.Next,
+                prevButton: localString.Back,
                 endTourButton: localString.SKIP,
             },
         }
@@ -368,9 +368,9 @@ const renderCoachMarks = function () {
 };
 
 $(document).ready(function () {
-    localStorage.setItem('module','bolo');
+    localStorage.setItem('module', 'bolo');
 
-    if (!localStorage.getItem(CONTRIBUTION_LANGUAGE)){
+    if (!localStorage.getItem(CONTRIBUTION_LANGUAGE)) {
         showLanguagePopup();
         return;
     }
@@ -379,15 +379,20 @@ $(document).ready(function () {
     }
     clearLocalStorage();
     onActiveNavbar('bolo');
-    getLocaleString().then(()=>{
+    getLocaleString().then(() => {
         initializeBlock();
         // renderCoachMarks();
     }).catch(err => {
         initializeBlock();
     });
+    if (location.host.includes('uat')) {
+        document.getElementById("bolo-username").maxLength = 100;
+    } else {
+        document.getElementById("bolo-username").maxLength = 12;
+    }
 });
 
-$(window).on("orientationchange",function(){
+$(window).on("orientationchange", function () {
     setSayListenBackground();
 });
 
