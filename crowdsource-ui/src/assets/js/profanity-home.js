@@ -1,4 +1,5 @@
 const { CONTRIBUTION_LANGUAGE } = require('./constants');
+const fetch = require('./fetch')
 
 function testUserName(username) {
     let mailformat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -53,8 +54,8 @@ $(document).ready(function () {
             dekhoindia: "dekhoIndia",
             likhoindia: "likhoIndia"
         }
-        // verifyUser(userNameValue).then(res => {
-        //     if (res.ok) {
+        verifyUser(userNameValue).then(res => {
+            if (res.ok) {
                 localStorage.setItem('profanityUserDetails', JSON.stringify(speakerDetails));
                 localStorage.setItem('profanityCheckLanguage', language);
                 localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
@@ -63,13 +64,13 @@ $(document).ready(function () {
                 } else {
                     location.href = `/en/${keyMap[type]}/profanity.html`;
                 }
-            // } else {
-            //     alert("User not found")
-            // }
-        // }).catch(err => {
-        //     console.log(err)
-        //     alert("User not found")
-        // })
+            } else {
+                alert("User not found")
+            }
+        }).catch(err => {
+            console.log(err)
+            alert("User not found")
+        })
     });
     // $(window).unload(function(){
     //     localStorage.removeItem('profanityUserDetails');
