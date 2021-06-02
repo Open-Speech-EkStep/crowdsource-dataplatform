@@ -18,10 +18,12 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
     remainingLanguage = type == "dekho" || type == "likho" ? remainingLanguage.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1) : remainingLanguage.sort((a, b) => Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1);
     topLanguages = remainingLanguage.slice(0, 3);
   } else {
-    if(type == "suno" || type == "bolo") {
-      topLanguageArray.push({ language: contributedLanguage,  total_contributions: "0.000" });
-    } else {
-      topLanguageArray.push({ language: contributedLanguage,  total_contribution_count: "0" });
+    if( contributedLanguage != topLanguagesData[0].language) {
+      if(type == "suno" || type == "bolo") {
+        topLanguageArray.push({ language: contributedLanguage,  total_contributions: "0.000" });
+      } else {
+        topLanguageArray.push({ language: contributedLanguage,  total_contribution_count: "0" });
+      }
     }
     topLanguages = topLanguagesResult.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1).slice(0, 3);
   }
