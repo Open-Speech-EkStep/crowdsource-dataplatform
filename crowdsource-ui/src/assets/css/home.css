@@ -405,6 +405,9 @@ body.modal-open .supreme-container {
   #speakers_hours_chart_container, #speakers_hours_chart {
     height: 220px;
  }
+ .card{
+  min-height: 190px !important;
+}
 }
 
 
