@@ -1,5 +1,6 @@
 const { onActiveNavbar } = require('../common/header');
-const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages} = require('../common/common');
+
+const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages, landToHome} = require('../common/common');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString} = require('../common/utils');
 const {
   setSpeakerDetails,
@@ -26,7 +27,7 @@ function initializeBlock() {
   const $startRecordBtnTooltip = $startRecordBtn.parent();
   const speakerDetailsKey = 'speakerDetails';
   const $userName = $('#username');
-  let sentenceLanguage= DEFAULT_CON_LANGUAGE;
+  let sentenceLanguage;
   toggleFooterPosition();
   let top_lang = getDefaultLang();
   if(top_lang){
@@ -90,8 +91,11 @@ function initializeBlock() {
   getStatsSummary('/stats/summary/asr',MODULE.suno.value, setDefaultLang);
 }
 
+
+
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
+  landToHome();
   initializeFeedbackModal();
   getAvailableLanguages("asr");
   getLocaleString().then(()=>{

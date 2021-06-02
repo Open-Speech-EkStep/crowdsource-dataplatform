@@ -152,7 +152,7 @@ const getStatsSummary = function () {
     performAPIRequest('/stats/summary/text')
         .then(response => {
             // drawMap({data: response.aggregate_data_by_state});
-            const languages = getContributedAndTopLanguage(response.top_languages_by_hours, "hours");
+            const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.bolo.value);
             localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
             showByHoursChart()
             const speakers = getContributedAndTopLanguage(response.top_languages_by_speakers, "speakers");
@@ -206,7 +206,7 @@ function initializeBlock() {
             top_lang = language;
             localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
             localStorage.setItem("i18n", "en");
-            window.location.href = "/";
+            window.location.href = "./home.html";
             setLangNavBar(targetedDiv, language, $languageNavBar);
             updateHrsForSayAndListen(language);
         }
@@ -225,20 +225,20 @@ function initializeBlock() {
             targetedDiv.classList.add('active');
             updateHrsForSayAndListen(language);
             localStorage.setItem("i18n", "en");
-            window.location.href = "/";
+            window.location.href = "./home.html";
         }
     });
 
     $('#start_recording').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-        setStartRecordingBtnOnClick('./record.html',MODULE.bolo.value);
+        setStartRecordingBtnOnClick('../record.html',MODULE.bolo.value);
     });
 
     $('#start_validating').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-        setLetGoBtnOnClick('./validator-page.html',MODULE.bolo.value);
+        setLetGoBtnOnClick('../validator-page.html',MODULE.bolo.value);
     });
 
     $('[name="topLanguageChart"]').on('change', (event) => {
@@ -370,7 +370,7 @@ const renderCoachMarks = function () {
 $(document).ready(function () {
     localStorage.setItem('module','bolo');
 
-    if (!localStorage.getItem("i18n")){
+    if (!localStorage.getItem(CONTRIBUTION_LANGUAGE)){
         showLanguagePopup();
         return;
     }

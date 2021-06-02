@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<%- include('../common/header.ejs',{bolo:"../home.html", suno:"../sunoIndia/home.html",likho:"../likhoIndia/home.html",dekho:"./home.html",path:"../"}); %>
+<%- include('../common/header.ejs',{home:"../home.html", bolo:"../boloIndia/home.html", suno:"../sunoIndia/home.html",likho:"../likhoIndia/home.html",dekho:"./home.html",path:"../"}); %>
 <div class="container-fluid supreme-container">
     <div class="row">
         <%- include('../common/moduleIntro.ejs',{name:'Dekho India',intro:'Help your language by labelling images'}); %>
@@ -36,12 +36,12 @@
         <%- include('../common/cards.ejs',{left:{h1:"Label",h2:"Type the text as per the image","p1":"",img:"../../img/look.svg"},right:{h1:"Validate",h2:"Validate the text as per the image","p1":"",img:"../../img/validate.svg"}}); %>
     </div>
     <div class="row">
-        <div class="col-12 col-md-11 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
+        <div class="col-12 col-md-12 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
             <h2 class="font-wt-900 site-blue lh-5">
                 <%= __('Contributions made to Dekho India') %>
             </h2>
             <div class="row mt-5" id="speaker-data">
-                <div class="col-12 col-lg-11 col-md-11">
+                <div class="col-12 col-lg-11 col-md-12">
                     <div class="row justify-content-center" id="loader1">
                         <div><span class="spinner"></span></div>
                     </div>
@@ -72,6 +72,8 @@
     </div>
     <%- include('../common/viewAllDetailBtn.ejs',{DASHBOARD:'./dashboard.html'}); %>
 </div>
+
+<button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
 <%- include('../common/userDetails.ejs',{path:'By proceeding ahead you agree to the <a href="../terms-and-conditions.html"> Terms and Conditions</a>'}) %>
 <%- include ../common/content-languages.ejs %>
 <%- include ../common/say-listen-language.ejs %>

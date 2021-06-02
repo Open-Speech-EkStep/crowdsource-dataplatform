@@ -1,5 +1,6 @@
 const { onActiveNavbar } = require('../common/header');
-const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages} = require('../common/common');
+const { showLanguagePopup } = require('../common/locale');
+const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,landToHome} = require('../common/common');
 const {toggleFooterPosition, getLocaleString,updateLocaleLanguagesDropdown} = require('../common/utils');
 const {
   setSpeakerDetails,
@@ -25,7 +26,7 @@ function initializeBlock() {
   const $startRecordBtnTooltip = $startRecordBtn.parent();
   const speakerDetailsKey = 'speakerDetails';
   const $userName = $('#username');
-  let sentenceLanguage = DEFAULT_CON_LANGUAGE;
+  let sentenceLanguage;
 
   toggleFooterPosition();
   let top_lang = getDefaultLang();
@@ -87,6 +88,7 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
+  landToHome();
   initializeFeedbackModal();
   getAvailableLanguages("ocr");
   getLocaleString().then(()=>{

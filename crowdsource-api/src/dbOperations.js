@@ -9,6 +9,7 @@ const {
     updateAndGetMediaQuery,
     updateAndGetUniqueMediaQuery,
     updateAndGetOrderedMediaQuery,
+    userVerifyQuery,
     getContributionListQuery,
     mediaCount,
     getCountOfTotalSpeakerAndRecordedAudio,
@@ -633,7 +634,15 @@ const releaseMedia = (dataset_id) =>{
    return db.any(releaseMediaQuery,[dataset_id])
 }
 
+const userVerify = async (userName, role) => {
+    let result = await db.any(userVerifyQuery ,[userName, role]);
+    if(result.length === 0){
+        throw new Error("No user found")
+    }
+}
+
 module.exports = {
+    userVerify,
     updateAndGetMedia,
     getContributionList,
     updateDbWithAudioPath,

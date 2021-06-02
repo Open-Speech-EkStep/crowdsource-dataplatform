@@ -54,7 +54,7 @@ function updateLanguage(language) {
                     $speakerDataLanguagesWrapper.addClass('d-none');
                     $speakerDataDetails.addClass('d-none');
                     generateIndiaMap(language, 'ocr');
-                    updateLineGraph(language, activeDurationText, 'ocr', "Images labelled","Text validated");
+                    updateLineGraph(language, activeDurationText, 'ocr', "Images labelled","Images validated");
                     setSpeakerData(data.data, language, "dekho");
                     $speakersDataLoader.addClass('d-none');
                     $speakerDataDetails.removeClass('d-none');
@@ -109,7 +109,7 @@ $(document).ready(function () {
         $durationLiActive.removeClass('active').addClass('inactive');
         const selectedDuration = e.target.dataset.value;
         const selectedLanguage = $('#language option:selected').val();
-        updateLineGraph(selectedLanguage, selectedDuration, 'ocr',"Images labelled","Text validated");
+        updateLineGraph(selectedLanguage, selectedDuration, 'ocr',"Images labelled","Images validated");
     });
 
     $("#no-data-found").on('mouseenter', (e) => {

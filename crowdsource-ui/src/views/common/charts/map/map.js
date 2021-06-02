@@ -85,7 +85,7 @@ const drawMap = function (response, moduleType) {
   });
   const sunoTooltip = `<div style="text-align: left;"><h6>{state}</h6> <div style="text-align: left;">{total_speakers} People  <label style="margin-left: 32px">Hrs transcribed: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div style="text-align: left;">Hrs validate:  <label style="margin-left: 8px">{validated_time}</label></div></div>`
   const likhoTooltip = `<div style="text-align: left;"><h6>{state}</h6> <div style="text-align: left;">{total_speakers} People  <label style="margin-left: 32px">Translations done: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div style="text-align: left;">Translations validated:  <label style="margin-left: 8px">{validated_time}</label></div></div>`
-  const dekhoTooltip = `<div style="text-align: left;"><h6>{state}</h6> <div style="text-align: left;">{total_speakers} People  <label style="margin-left: 32px">Images labelled: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div style="text-align: left;">Labels validated:  <label style="margin-left: 8px">{validated_time}</label></div></div>`
+  const dekhoTooltip = `<div style="text-align: left;"><h6>{state}</h6> <div style="text-align: left;">{total_speakers} People  <label style="margin-left: 32px">Images labelled: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div style="text-align: left;">Images validated:  <label style="margin-left: 8px">{validated_time}</label></div></div>`
   let toolTipContent = sunoTooltip;
   if(moduleType === "parallel"){
     toolTipContent = likhoTooltip;

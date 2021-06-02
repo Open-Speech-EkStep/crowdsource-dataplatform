@@ -61,16 +61,22 @@ const setAudioPlayer = function () {
     const play = $('#play');
     const pause = $('#pause');
     const replay = $('#replay');
+    const resume = $('#resume');
     const textPlay = $('#audioplayer-text_play');
     const textReplay = $('#audioplayer-text_replay');
     const textPause = $('#audioplayer-text_pause');
+    const textResume = $('#audioplayer-text_resume');
 
 
     myAudio.addEventListener("ended", () => {
         enableValidation();
         hideElement(pause)
+        hideElement(resume)
+        hideElement(play)
         showElement(replay)
         hideElement(textPause);
+        hideElement(textPlay);
+        hideElement(textResume);
         showElement(textReplay);
     });
 
@@ -87,31 +93,62 @@ const setAudioPlayer = function () {
         startVisualizer();
     });
 
+    resume.on('click', () => {
+        resumeAudio();
+        // startVisualizer();
+    });
+
     function playAudio() {
         myAudio.load();
         hideElement(play)
+        hideElement(resume)
+        hideElement(replay)
         showElement(pause)
         hideElement(textPlay);
+        hideElement(textResume);
+        hideElement(textReplay);
         showElement(textPause);
         myAudio.play();
     }
 
     function pauseAudio() {
         hideElement(pause)
-        showElement(replay)
+        hideElement(replay)
+        hideElement(play)
+        showElement(resume)
         hideElement(textPause)
-        showElement(textReplay)
-        enableValidation();
+        hideElement(textPlay)
+        hideElement(textReplay)
+        showElement(textResume)
+        // enableValidation();
         myAudio.pause();
+    }
+
+
+    function resumeAudio() {
+        showElement(pause)
+        hideElement(replay)
+        hideElement(play)
+        hideElement(resume)
+        showElement(textPause)
+        hideElement(textPlay)
+        hideElement(textReplay)
+        hideElement(textResume)
+        // enableValidation();
+        myAudio.play();
     }
 
     function replayAudio() {
         myAudio.load();
         hideElement(replay)
+        hideElement(resume)
+        hideElement(play)
         showElement(pause)
         hideElement(textReplay);
+        hideElement(textResume);
+        hideElement(textPlay);
         showElement(textPause);
-        disableValidation();
+        // disableValidation();
         myAudio.play();
     }
 
@@ -203,12 +240,15 @@ function resetValidation() {
     const textPlay = $('#audioplayer-text_play');
     const textReplay = $('#audioplayer-text_replay');
     const textPause = $('#audioplayer-text_pause');
+    const textResume = $('#audioplayer-text_resume');
     hideElement(textPause);
     hideElement(textReplay);
+    hideElement(textResume);
     showElement(textPlay);
 
     hideElement($("#replay"))
     hideElement($('#pause'))
+    hideElement($('#resume'))
     showElement($("#play"))
     showElement($('#default_line'))
 }
@@ -281,17 +321,25 @@ function addListeners() {
     });
 
     dislikeButton.on('click', () => {
+        if($('#pause').hasClass('d-none')){
+            $('#pause').trigger('click');
+        }
         recordValidation(REJECT_ACTION)
         getNextSentence();
     })
 
     likeButton.on('click', () => {
+        if($('#pause').hasClass('d-none')){
+            $('#pause').trigger('click');
+        }
         recordValidation(ACCEPT_ACTION)
         getNextSentence();
     })
 
     $skipButton.on('click', () => {
-        $('#pause').trigger('click');
+        if($('#pause').hasClass('d-none')){
+            $('#pause').trigger('click');
+        }
         recordValidation(SKIP_ACTION)
         getNextSentence();
     })

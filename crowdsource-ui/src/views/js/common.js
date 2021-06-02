@@ -1,23 +1,28 @@
 const {
-  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS, TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE
+  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS,LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE
 } = require('./constants');
 const { constructChart } = require('./horizontalBarGraph');
-const { changeLocale } = require('./locale');
+const { changeLocale,showLanguagePopup } = require('./locale');
 const fetch = require('./fetch');
 
 const getContributedAndTopLanguage = (topLanguagesData, type) => {
   topLanguagesData = topLanguagesData.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1)
   const topLanguagesResult = [...topLanguagesData];
-  const contributedLanguage = type === "likho" ? localStorage.getItem(CONTRIBUTION_LANGUAGE) + '-' + localStorage.getItem(TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const contributedLanguage = type == "likho" ? localStorage.getItem(LIKHO_FROM_LANGUAGE) + '-' + localStorage.getItem(LIKHO_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const topLanguageArray = [];
   let topLanguages = [];
   const contributedLanguageHours = topLanguagesData.find(item => item.language == contributedLanguage);
   if (contributedLanguageHours && contributedLanguageHours.language != topLanguagesData[0].language) {
-    contributedLanguageHours ? topLanguageArray.push(contributedLanguageHours) : topLanguageArray.push({ language: contributedLanguage, total_contributions: "0.000" });
+    topLanguageArray.push(contributedLanguageHours)
     let remainingLanguage = topLanguagesData.filter(item => item.language !== contributedLanguage);
     remainingLanguage = type == "dekho" || type == "likho" ? remainingLanguage.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1) : remainingLanguage.sort((a, b) => Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1);
     topLanguages = remainingLanguage.slice(0, 3);
   } else {
+    if(type == "suno" || type == "bolo") {
+      topLanguageArray.push({ language: contributedLanguage,  total_contributions: "0.000" });
+    } else {
+      topLanguageArray.push({ language: contributedLanguage,  total_contribution_count: "0" });
+    }
     topLanguages = topLanguagesResult.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1).slice(0, 3);
   }
   return topLanguageArray.concat(topLanguages).reverse();
@@ -38,9 +43,12 @@ function showByHoursChart(type) {
 }
 
 function redirectToLocalisedPage() {
-  const locale = localStorage.getItem("i18n");
+  const localeValue = localStorage.getItem("i18n") ;
+  const locale = localeValue == 'null'  || localeValue == undefined? 'en' : localeValue;
   const splitValues = location.href.split('/');
-  const currentLocale = splitValues[splitValues.length - 2];
+  const currentModule = localStorage.getItem(CURRENT_MODULE);
+  const isModulePresent = currentModule == 'suno' || currentModule == 'dekho' || currentModule == 'bolo';
+  const currentLocale = isModulePresent ? splitValues[3] : splitValues[splitValues.length - 2];
   const contribution_langugae = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   $('#home-page').attr('default-lang', contribution_langugae);
   if (currentLocale != locale) {
@@ -225,7 +233,17 @@ const isMobileDevice = () => {
   }
 }
 
+const landToHome = function (){
+  if (!localStorage.getItem(CONTRIBUTION_LANGUAGE)){
+    showLanguagePopup();
+    return;
+  }
+  else {
+    redirectToLocalisedPage();
+  }
+}
 
 
-module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton };
+
+module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome };
 

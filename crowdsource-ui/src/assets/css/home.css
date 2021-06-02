@@ -382,7 +382,7 @@ body.modal-open .supreme-container {
   .mt-xs-5 {
      margin-top: 5rem;
   }
-  #languages-wrapper, #speakers-wrapper, #hours-wrapper {
+  #speakers-wrapper, #hours-wrapper {
     display: flex;
     flex-flow: row-reverse;
     justify-content: space-between;
@@ -405,6 +405,9 @@ body.modal-open .supreme-container {
   #speakers_hours_chart_container, #speakers_hours_chart {
     height: 220px;
  }
+ .card{
+  min-height: 190px !important;
+}
 }
 
 
@@ -443,6 +446,10 @@ body.modal-open .supreme-container {
   }
   .w-70 {
     width: 70% !important;
+  }
+
+  #home-banner .img-fluid{
+    height: auto;
   }
 }
 
