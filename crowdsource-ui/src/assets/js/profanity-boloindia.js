@@ -28,7 +28,7 @@ function showNoSentencesMessage() {
     hideElement($("#test-mic-speakers"));
     hideElement($('#instructive-msg'));
     // hideElement($('#thankyou-text')); 
-  }
+}
 
 function getCurrentIndex(lastIndex) {
     const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
@@ -80,22 +80,22 @@ function invokeProfanityStateUpdate(state) {
         })
 }
 
-function updateSkipAction(){
+function updateSkipAction() {
     const sentenceId = crowdSource.sentences[currentIndex].dataset_row_id;
     fetch(`/profanity-skip/text`, {
-      method: 'PUT',
-      credentials: 'include',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        sentenceId: sentenceId
-      })
-    }).then(res=>{}).catch(err=>{
-      console.log(err)
+        method: 'PUT',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            sentenceId: sentenceId
+        })
+    }).then(res => { }).catch(err => {
+        console.log(err)
     });
-  }
+}
 
 const initialize = () => {
     const sentences = crowdSource.sentences;
@@ -126,7 +126,7 @@ const initialize = () => {
         const multiplier = 10 * (10 / totalItems);
         $progressBar.width(index * multiplier + '%');
         $progressBar.prop('aria-valuenow', index);
-        if(updateSentenceIndex)
+        if (updateSentenceIndex)
             setCurrentSentenceIndex(index);
 
         // $progressBar.width((currentIndex + 1) * 20 + '%');
@@ -137,7 +137,7 @@ const initialize = () => {
         const $sentenceLbl = $('#sentenceLbl');
         $sentenceLbl[0].innerText = sentences[index].media;
         animateCSS($sentenceLbl, 'lightSpeedIn');
-        setProgressBar(currentIndex, crowdSource.sentences.length);
+        setProgressBar(index, crowdSource.sentences.length);
     };
 
     const notyf = new Notyf({
@@ -160,8 +160,15 @@ const initialize = () => {
     setTotalSentenceIndex(totalItems);
 
     $notProfaneBtn.on('click', () => {
-        invokeProfanityStateUpdate(false)
-        incrementCurrentIndex();
+        if (currentIndex > crowdSource.sentences.length - 1) {
+            goToThankYouPage();
+        } else if(currentIndex === crowdSource.sentences.length - 1) {
+            invokeProfanityStateUpdate(false)
+            goToThankYouPage();
+        } else {
+            invokeProfanityStateUpdate(false)
+            incrementCurrentIndex();
+        }
     });
 
     const goToThankYouPage = () => {
@@ -186,7 +193,7 @@ const initialize = () => {
         btn.css('background-color', 'white');
     }
 
-    $notProfaneBtn.hover(() => { 
+    $notProfaneBtn.hover(() => {
         onHover($notProfaneBtn);
     },
         () => {
@@ -196,7 +203,7 @@ const initialize = () => {
     $profaneBtn.add($skipBtn).on('click', (event) => {
         if (event.target.id === 'nextBtn' && currentIndex < totalItems - 1) {
             invokeProfanityStateUpdate(true)
-        } else if (event.target.id === 'skipBtn') {
+        } else if (event.target.id === 'skipBtn' && currentIndex < totalItems - 1) {
             // markContributionSkipped();
             incrementSkipCount();
             updateSkipAction();
@@ -214,7 +221,7 @@ const initialize = () => {
             animateCSS($pageContent, 'zoomOut', () => {
                 $pageContent.addClass('d-none');
             });
-            setProgressBar(currentIndex,crowdSource.sentences.length, false);
+            setProgressBar(currentIndex, crowdSource.sentences.length, false);
             const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
             Object.assign(sentencesObj, { sentences: [] });
             localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
@@ -224,6 +231,8 @@ const initialize = () => {
             $('#loader').show();
         } else if (currentIndex < totalItems - 1) {
             incrementCurrentIndex();
+        } else {
+            goToThankYouPage();
         }
     });
 
@@ -312,7 +321,7 @@ function executeOnLoad() {
                     }
                 })
                 .then((sentenceData) => {
-                    if(sentenceData.data.length === 0){
+                    if (sentenceData.data.length === 0) {
                         showNoSentencesMessage();
                     }
                     $pageContent.removeClass('d-none');
