@@ -33,6 +33,10 @@ const setHover = function (){
 
 $(document).ready(function () {
   localStorage.setItem('module','home');
+  if (!localStorage.getItem('i18n')){
+    localStorage.setItem('i18n','en');
+    redirectToLocalisedPage();
+  }
   onActiveNavbar('home');
   setHover();
 });
