@@ -1,5 +1,6 @@
 const {DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS,LIKHO_TO_LANGUAGE,LIKHO_FROM_LANGUAGE,MODULE} = require('./constants');
 const {getLocaleString} = require('./utils');
+const fetch = require('./fetch');
 
 const testBoloUserName = (val) => {
   const mobileRegex = /^[6-9]\d{9}$/;
@@ -95,6 +96,25 @@ const setBoloUserNameOnInputFocus = function () {
   });
 }
 
+const verifyUser = (userName) => {
+  return fetch('/uat/verify', {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify({
+      userName: userName,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+}
+
+const storeToLocal = (speakerDetailsKey, speakerDetails, contributionLanguage, url) => {
+  localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
+  localStorage.setItem(CONTRIBUTION_LANGUAGE, contributionLanguage);
+  location.href = url;
+}
+
 const setLetGoBtnOnClick = function (url, module='') {
   const speakerDetailsKey = 'speakerDetails';
   const $startRecordBtn = $('#bolo-proceed-box');
@@ -112,9 +132,20 @@ const setLetGoBtnOnClick = function (url, module='') {
       language: contributionLanguage,
       toLanguage:'',
     };
-    localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, contributionLanguage);
-    location.href = url;
+    if (location.host.includes('uat')) {
+      verifyUser(userNameValue).then(res => {
+        if (res.ok) {
+          storeToLocal(speakerDetailsKey, speakerDetails, contributionLanguage, url);
+        } else {
+          alert("User not found")
+        }
+      }).catch(err => {
+        console.log(err)
+        alert("User not found")
+      })
+    } else {
+      storeToLocal(speakerDetailsKey, speakerDetails, contributionLanguage, url);
+    }
   });
 }
 
