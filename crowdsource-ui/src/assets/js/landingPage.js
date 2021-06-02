@@ -1,4 +1,5 @@
 const { onActiveNavbar } = require('./header');
+const { redirectToLocalisedPage} = require('./locale');
 
 const setHover = function (){
   const $card1 = $(".card1");

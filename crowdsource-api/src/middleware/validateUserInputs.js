@@ -7,7 +7,7 @@ const {
     AGE_GROUP,
     MOTHER_TONGUE,
     MAX_LENGTH,
-    SUBJECT_MAX_LENGTH,
+    CATEGORY_MAX_LENGTH,
     FEEDBACK_MAX_LENGTH,
     LANGUAGES,
     VALIDATION_ACTIONS,
@@ -77,18 +77,27 @@ const validateUserInfo = function (req, res, next) {
 
 const validateUserInputForFeedback = function (req, res, next) {
     const feedback = req.body.feedback;
-    const subject = req.body.subject;
+    const category = req.body.category;
     const language = req.body.language
+    const module = req.body.module; 
+    const target_page = req.body.target_page; 
+    const opinion_rating = parseInt(req.body.opinion_rating);
 
     const allLanguages = LANGUAGES.map(lang => lang.value)
 
     const invalidLanguage = !allLanguages.includes(language)
 
-    const invalidSubject = (!subject || !subject.trim().length || subject.trim().length > SUBJECT_MAX_LENGTH)
+    const invalidCategory = (!(category.trim().length == 0 || category.trim().length < CATEGORY_MAX_LENGTH))
+    const invalidFeedback = (!(feedback || feedback.trim().length == 0) || feedback.trim().length > FEEDBACK_MAX_LENGTH 
+    || (category.trim().length == 0 && feedback.trim().length != 0));
 
-    const invalidFeedback = (!feedback || !feedback.trim().length || feedback.trim().length > FEEDBACK_MAX_LENGTH);
+    const invalidModule = (!module || !module.trim().length)
+    
+    const invalidTargetPage = (!target_page || !target_page.trim().length)
 
-    if (invalidFeedback || invalidSubject || invalidLanguage) {
+    const invalidOpinionRating = (!opinion_rating || !(opinion_rating >= 1) || !(opinion_rating <= 5))
+
+    if (invalidFeedback || invalidCategory || invalidLanguage || invalidOpinionRating || invalidModule || invalidTargetPage) {
         return res.status(400).send("Bad request");
     }
     next()
