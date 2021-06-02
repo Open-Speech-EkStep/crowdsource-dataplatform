@@ -1,8 +1,19 @@
-const { getSentencesForProfanityChecking, updateProfanityStatus,releaseMedia } = require('./dbOperations');
+const { getSentencesForProfanityChecking, updateProfanityStatus,releaseMedia,userVerify } = require('./dbOperations');
 const {validateUserInfoForProfanity} = require('./middleware/validateUserInputs')
 
 
 const profanityCheckerApi = function (router) {
+
+    router.post('/profanity/verify', async (req, res) => {
+        const { userName } = req.body;
+        try{
+            await userVerify(userName, "ROLE_PROFANITY");
+            res.sendStatus(200);
+        }catch(err){
+            // console.log(err);
+            res.sendStatus(401);
+        }
+    })
 
     router.get('/sentences-for-profanity-check/:type',validateUserInfoForProfanity, async (req, res) => {
         const type = req.params.type;

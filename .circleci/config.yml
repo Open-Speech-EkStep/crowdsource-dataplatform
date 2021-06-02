@@ -167,7 +167,7 @@ workflows:
           repo: ${DB_REFRESHER_REPO}
           dockerfile: Dockerfile-dbRefresh
           path: ./db-refresher
-          tag: "dev,test,prod"
+          tag: "dev,test,prod,uat"
           requires:
             - migrate_dev_aws
 
@@ -229,11 +229,42 @@ workflows:
             - test_deployment_eks
             - build_test_ui
 
+      - db_migrate_aws:
+          name: migrate_uat_aws
+          db_name: ${UAT_DB_NAME}
+          requires:
+          #   - functional_tests_test
+            - dev_deployment_eks
+            - build_dev_ui
+
+      - aws-ecr/build-and-push-image:
+          name: push_uat_image
+          repo: ${REPO}
+          tag: uat
+          path: ./crowdsource-api
+          requires:
+            - migrate_uat_aws
+
+      - build_ui_push_to_s3:
+          name: build_uat_ui
+          env_name: uat
+          distributionId: ${UAT_DISTRIBUTION_ID}
+          requires:
+            - push_uat_image
+
+      - eks_fargate_deployment:
+          name: uat_deployment_eks
+          cluster-name: ${CLUSTER_NAME}
+          env-name: uat
+          requires:
+            - push_uat_image
+
       - approve_to_deploy:
           name: approve_prod_deployment_eks
           type: approval
           requires:
             - functional_tests_test
+            # - uat_deployment_eks
 
       - db_migrate_aws:
           name: migrate_prod_aws

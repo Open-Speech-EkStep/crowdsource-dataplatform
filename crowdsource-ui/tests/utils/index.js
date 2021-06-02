@@ -31,6 +31,7 @@ function mockLocation(url=""){
     Object.defineProperty(window, 'location', {
         value: {
             href: url,
+            host: url
         }
     });
 }

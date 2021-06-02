@@ -1,5 +1,5 @@
 const fetch = require('./fetch')
-const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, getLocaleString } = require('./utils');
+const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, getLocaleString, hideElement, showElement } = require('./utils');
 const { LOCALE_STRINGS } = require('./constants');
 
 const speakerDetailsKey = 'profanityUserDetails';
@@ -18,6 +18,17 @@ function getValue(number, maxValue) {
             ? maxValue
             : number;
 }
+
+function showNoSentencesMessage() {
+    $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+    hideElement($('#progress-row'))
+    hideElement($('#validation-buttons-row'))
+    showElement($('#no-sentences-row'))
+    hideElement($('#skip_btn_row'));
+    hideElement($("#test-mic-speakers"));
+    hideElement($('#instructive-msg'));
+    hideElement($('#thankyou-text'));
+  }
 
 function getCurrentIndex(lastIndex) {
     const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
@@ -168,7 +179,7 @@ const initialize = () => {
         btn.css('background-color', 'white');
     }
 
-    $notProfaneBtn.hover(() => {
+    $notProfaneBtn.hover(() => { 
         onHover($notProfaneBtn);
     },
         () => {
@@ -220,35 +231,6 @@ const initialize = () => {
     function incrementSkipCount() {
         skipCount++;
         localStorage.setItem(skipCountKey, skipCount);
-    }
-
-    function markContributionSkipped() {
-        const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-
-        const reqObj = {
-            sentenceId: crowdSource.sentences[currentIndex].dataset_row_id,
-            userName: speakerDetails.userName
-        };
-        fetch('/skip', {
-            method: 'POST',
-            credentials: 'include',
-            mode: 'cors',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(reqObj),
-        })
-            .then((res) => res.json())
-            .then((result) => {
-            })
-            .catch((err) => {
-                console.log(err); 
-            })
-            .then((finalRes) => {
-                if (cb && typeof cb === 'function') {
-                    cb();
-                }
-            });
     }
 };
 
@@ -316,12 +298,16 @@ function executeOnLoad() {
             })
                 .then((data) => {
                     if (!data.ok) {
+                        showNoSentencesMessage();
                         throw Error(data.statusText || 'HTTP error');
                     } else {
                         return data.json();
                     }
                 })
                 .then((sentenceData) => {
+                    if(sentenceData.data.length === 0){
+                        showNoSentencesMessage();
+                    }
                     $pageContent.removeClass('d-none');
                     // toggleFooterPosition();
                     console.log(sentenceData);
