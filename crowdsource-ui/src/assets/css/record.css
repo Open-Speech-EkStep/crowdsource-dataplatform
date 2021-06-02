@@ -273,7 +273,7 @@ audio {
 }
 .test-canvas {
   border: 1px solid #959595;
-  border-radius: 4px;
+  border-radius: 10px;
   height: 15px;
 }
 .ambient-noise {

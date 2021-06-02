@@ -115,6 +115,7 @@ const storeToLocal = (speakerDetailsKey, speakerDetails, contributionLanguage, u
 }
 
 const setStartRecordingBtnOnClick = function (url, module = '') {
+  console.log(url);
   const speakerDetailsKey = 'speakerDetails';
   const $startRecordBtn = $('#proceed-box');
   const $userName = $('#username');
