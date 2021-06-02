@@ -5,6 +5,7 @@ const {
 } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, MODULE, CURRENT_MODULE} = require('../common/constants');
 
+const { initializeFeedbackModal } = require('../common/feedback');
 
 const rowWithBadge = function (levelId, sentenceCount, badgeName, localeString) {
   const currentModule = localStorage.getItem(CURRENT_MODULE);
@@ -57,6 +58,7 @@ $(document).ready(function () {
   const type='ocr'
   const source='contribute'
   updateLocaleLanguagesDropdown(language);
+  initializeFeedbackModal();
   getLocaleString().then(() => {
     performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then(renderBadgeDetails).catch((err) => {
       console.log(err);

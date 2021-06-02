@@ -15,6 +15,7 @@ const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, isM
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const speakerDetailsKey = 'speakerDetails';
+const {initializeFeedbackModal} = require('../common/feedback');
 
 const currentIndexKey = 'likhoCurrentIndex';
 const sentencesKey = 'likhoSentencesKey';
@@ -488,6 +489,7 @@ function executeOnLoad() {
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   const translationLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+  initializeFeedbackModal();
   showKeyboard(translationLanguage.toLowerCase(), enableCancelButton, disableCancelButton);
   hideElement($('#keyboardBox'));
   getLocaleString().then(() => {

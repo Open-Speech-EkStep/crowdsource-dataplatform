@@ -17,6 +17,7 @@ const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton} = requ
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 
+const { initializeFeedbackModal } = require('../common/feedback');
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
@@ -564,6 +565,7 @@ const executeOnLoad = function () {
 
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
+  initializeFeedbackModal();
   hideElement($('#keyboardBox'));
   getLocaleString().then(() => {
     executeOnLoad();

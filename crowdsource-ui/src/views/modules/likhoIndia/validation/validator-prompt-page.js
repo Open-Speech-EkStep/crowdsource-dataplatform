@@ -18,6 +18,7 @@ const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
+const {initializeFeedbackModal} = require('../common/feedback');
 
 const currentIndexKey = 'likhoValidatorCurrentIndex';
 const sentencesKey = 'likhoValidatorSentencesKey';
@@ -396,6 +397,7 @@ $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+  initializeFeedbackModal();
   setFooterPosition();
   showKeyboard(toLanguage.toLowerCase());
   hideElement($('#keyboardBox'));

@@ -21,6 +21,7 @@ const {
 // const {downloadPdf} = require('../common/downloadableBadges');
 const { showUserProfile } = require('../common/header');
 const {showByHoursChart, getContributedAndTopLanguage,setBadge} = require('../common/common');
+const {initializeFeedbackModal} = require('../common/feedback');
 
 const CURRENT_INDEX = "likhoValidatorCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -216,6 +217,7 @@ function executeOnLoad() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.likho.value);
+  initializeFeedbackModal();
   $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
     if (!$(this).attr("disabled")) {
       downloadPdf($(this).attr("data-badge"));
