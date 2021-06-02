@@ -100,12 +100,13 @@ const drawMap = function (response) {
   polygonSeries.useGeodata = true;
   polygonSeries.data = statesData;
   var polygonTemplate = polygonSeries.mapPolygons.template;
-  polygonTemplate.tooltipHTML = `<div style="text-align: left;"><h6>{state}</h6> <div style="text-align: left;">{total_speakers} Speakers  <label style="margin-left: 32px">Contributed: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div style="text-align: left;">Validated:  <label style="margin-left: 8px">{validated_time}</label></div></div>`;
+  polygonTemplate.tooltipHTML = `<div style="text-align: right; overflow: scroll"><h6>{state}</h6> <div style="text-align: left;">{total_speakers} Speakers  <label style="margin-left: 32px">Contributed: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div style="text-align: left;">Validated:  <label style="margin-left: 8px">{validated_time}</label></div></div>`;
   polygonTemplate.nonScalingStroke = true;
   polygonTemplate.strokeWidth = 0.5;
   polygonTemplate.stroke = am4core.color("#929292")
   polygonTemplate.fill = am4core.color("#fff");
-
+  polygonTemplate.maxWidth=50;
+  console.log(polygonTemplate);
   // Create hover state and set alternative fill color
   var hs = polygonTemplate.states.create("hover");
   hs.properties.fill = chart.colors.getIndex(1).brighten(-0.5);
@@ -138,11 +139,11 @@ const drawMap = function (response) {
     quarterVal * 60 * 60,
     false
   );
-  const {hours: hHours, minutes: hMinuts} = calculateTime(
+  const { hours: hHours, minutes: hMinuts } = calculateTime(
     quarterVal * 2 * 60 * 60,
     false
   );
-  const {hours: tQHours, minutes: tQMinuts} = calculateTime(
+  const { hours: tQHours, minutes: tQMinuts } = calculateTime(
     quarterVal * 3 * 60 * 60,
     false
   );
@@ -198,7 +199,7 @@ function getStatistics(response) {
     Number(response.total_contributions || 0) * 60 * 60
   );
 
-  const {hours: validate_hrs, minutes: validate_min, seconds: validate_sec} = calculateTime(
+  const { hours: validate_hrs, minutes: validate_min, seconds: validate_sec } = calculateTime(
     Number(response.total_validations) * 60 * 60
   );
   $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
@@ -206,8 +207,8 @@ function getStatistics(response) {
   $speakersDataSpeakerValue.text(response.total_speakers);
   $speakersDataLanguagesValue.text(response.total_languages);
   $speakersDataLoader.addClass("d-none");
-    $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4 col-xs-6')
-    $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
+  $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4 col-xs-6')
+  $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
 }
 
 function constructChart(responseData, xAxisLabel, yAxisLabel) {
@@ -215,7 +216,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
   chartReg["chart"] = chart;
 
   let response = [...responseData];
- 
+
   if (xAxisLabel !== "total_speakers") {
     response.forEach((ele) => {
       const { hours, minutes, seconds } = calculateTime(
@@ -235,16 +236,16 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
   var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
   valueAxis.renderer.grid.template.strokeWidth = 0;
   valueAxis.renderer.labels.template.disabled = true;
-  if(xAxisLabel != "total_speakers") {
-    const maxValue = Math.max.apply(Math, chart.data.map(function(o) { return Number(o.total_contributions); })) + 0.05;
+  if (xAxisLabel != "total_speakers") {
+    const maxValue = Math.max.apply(Math, chart.data.map(function (o) { return Number(o.total_contributions); })) + 0.05;
     valueAxis.min = 0;
-    valueAxis.max =  maxValue > 0.1 ? maxValue : 0.1;
+    valueAxis.max = maxValue > 0.1 ? maxValue : 0.1;
   } else {
-    const maxValue = Math.max.apply(Math, chart.data.map(function(o) { return Number(o.total_speakers); })) + 20;
+    const maxValue = Math.max.apply(Math, chart.data.map(function (o) { return Number(o.total_speakers); })) + 20;
     valueAxis.min = 0;
-    valueAxis.max =  maxValue > 40 ? maxValue : 40;
+    valueAxis.max = maxValue > 40 ? maxValue : 40;
   }
-  valueAxis.strictMinMax = true; 
+  valueAxis.strictMinMax = true;
   categoryAxis.renderer.minGridDistance = 25;
   var series = chart.series.push(new am4charts.ColumnSeries());
   series.dataFields.valueX = xAxisLabel;
