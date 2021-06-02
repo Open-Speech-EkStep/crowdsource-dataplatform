@@ -195,7 +195,7 @@ function getStatistics(response) {
   $speakersDataLoader.removeClass("d-none");
 
   const {hours, minutes, seconds} = calculateTime(
-    Number(response.total_contributions) * 60 * 60
+    Number(response.total_contributions || 0) * 60 * 60
   );
 
   const {hours: validate_hrs, minutes: validate_min, seconds: validate_sec} = calculateTime(
