@@ -138,20 +138,20 @@ select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as 
   having count(val.*)<conf.value
   order by count(val.*) desc, con.contribution_id limit 5;`
 
-const addValidationQuery = `insert into validations (contribution_id, action, validated_by, date, state_region, country) 
-select contribution_id, $3, $1, now(), $5, $6 from contributions inner join dataset_row on dataset_row.dataset_row_id=contributions.dataset_row_id 
+const addValidationQuery = `insert into validations (contribution_id, action, validated_by, date, state_region, country, device, browser) 
+select contribution_id, $3, $1, now(), $5, $6, $7, $8 from contributions inner join dataset_row on dataset_row.dataset_row_id=contributions.dataset_row_id 
 where dataset_row.dataset_row_id=$2 and contribution_id=$4;`
 
 const updateMediaWithValidatedState = `update dataset_row set state = 
 'validated' where dataset_row_id = $1 and (select count(*) from validations where contribution_id=$2 and action!='skip') >= 
 (select value from configurations where config_name = 'validation_count');`
 
-const updateContributionDetails = `insert into contributions (action, dataset_row_id, date, contributed_by, state_region, country, media)
-select 'completed', $1, now(), $2, $6, $7, json_build_object('data', $3, 'type', 'audio', 'language', $4, 'duration', $5) where (select count(*) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') < 
+const updateContributionDetails = `insert into contributions (action, dataset_row_id, date, contributed_by, state_region, country, media, device, browser)
+select 'completed', $1, now(), $2, $6, $7, json_build_object('data', $3, 'type', 'audio', 'language', $4, 'duration', $5), $8, $9 where (select count(*) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') < 
 (select value from configurations where config_name = 'contribution_count');`;
 
-const updateContributionDetailsWithUserInput = `insert into "contributions" ("action","dataset_row_id", "date", "contributed_by", "state_region", "country", "media")
-select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4) where (select count(*) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') < 
+const updateContributionDetailsWithUserInput = `insert into "contributions" ("action","dataset_row_id", "date", "contributed_by", "state_region", "country", "media", "device", "browser")
+select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4), $7, $8 where (select count(*) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') < 
 (select value from configurations where config_name = 'contribution_count');`;
 
 const updateMaterializedViews = 'REFRESH MATERIALIZED VIEW contributions_and_demo_stats;REFRESH MATERIALIZED VIEW daily_stats_complete;REFRESH MATERIALIZED VIEW gender_group_contributions;REFRESH MATERIALIZED VIEW age_group_contributions;REFRESH MATERIALIZED VIEW language_group_contributions;REFRESH MATERIALIZED VIEW state_group_contributions;REFRESH MATERIALIZED VIEW language_and_state_group_contributions;'

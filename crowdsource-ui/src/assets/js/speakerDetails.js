@@ -190,6 +190,7 @@ const storeToLocal = (speakerDetailsKey, speakerDetails, contributionLanguage, u
     location.href = url;
 }
 
+// device-browser
 const setStartRecordingBtnOnClick = function (url, module) {
     const speakerDetailsKey = 'speakerDetails';
     const $startRecordBtn = $('#proceed-box');

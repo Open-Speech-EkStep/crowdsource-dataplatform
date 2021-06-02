@@ -231,7 +231,7 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
     const file = req.file;
     const datasetId = req.body.sentenceId;
     const { userId } = req.cookies;
-    const { speakerDetails, language, state = '', country = '' } = req.body;
+    const { speakerDetails, language, state = '', country = '', device ='', browser=''} = req.body;
     const speakerDetailsJson = JSON.parse(speakerDetails);
     const { userName, age = '', motherTongue = '', gender = '' } = speakerDetailsJson;
 
@@ -242,7 +242,7 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
         uploadFile(file.path, userName, userId, language)
             .then(() => {
                 const audioPath = `raw/landing/${language}/audio/users/${userId}/${userName}/uploads/${file.filename}`;
-                updateDbWithAudioPath(audioPath, datasetId, userId, userName, state, country, audioDuration, language, age, gender, motherTongue,
+                updateDbWithAudioPath(audioPath, datasetId, userId, userName, state, country, audioDuration, language, age, gender, motherTongue,device, browser,
                     (resStatus, resBody) => {
                         removeTempFile(file);
                         res.status(resStatus).send(resBody);
@@ -255,7 +255,7 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
     }
     else {
         const userInput = xss(req.body.userInput);
-        updateDbWithUserInput(userName, userId, language, userInput, datasetId, state, country, age, gender, motherTongue,
+        updateDbWithUserInput(userName, userId, language, userInput, datasetId, state, country, age, gender, motherTongue, device, browser,
             (resStatus, resBody) => {
                 res.status(resStatus).send(resBody);
             })
