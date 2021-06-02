@@ -29,7 +29,8 @@ const {
     getRewardsInfo,
     updateDbWithUserInput,
     getAvailableLanguages,
-    getTargetInfo
+    getTargetInfo,
+    userVerify
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
@@ -151,6 +152,17 @@ router.get('/getDetails/:language', async function (req, res) {
         res.sendStatus(500);
     }
 });
+
+router.post('/uat/verify', async (req, res) => {
+    const { userName } = req.body;
+    try{
+        await userVerify(userName, "ROLE_UAT");
+        res.sendStatus(200);
+    }catch(err){
+        // console.log(err);
+        res.sendStatus(401);
+    }
+})
 
 router.get('/getAllInfo/:language', async function (req, res) {
     try {
