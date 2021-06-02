@@ -165,6 +165,18 @@ const initialize = () => {
         } else if(currentIndex === crowdSource.sentences.length - 1) {
             invokeProfanityStateUpdate(false)
             goToThankYouPage();
+            currentIndex++;
+            animateCSS($pageContent, 'zoomOut', () => {
+                $pageContent.addClass('d-none');
+            });
+            setProgressBar(currentIndex, crowdSource.sentences.length, false);
+            const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
+            Object.assign(sentencesObj, { sentences: [] });
+            localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
+            localStorage.setItem(currentIndexKey, currentIndex);
+            const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
+            notyf.success(msg);
+            $('#loader').show();
         } else {
             invokeProfanityStateUpdate(false)
             incrementCurrentIndex();
