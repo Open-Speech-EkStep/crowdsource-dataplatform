@@ -1,5 +1,5 @@
 const { CONTRIBUTION_LANGUAGE } = require('./constants');
-const fetch = require('../common/fetch')
+const fetch = require('./fetch')
 
 function testUserName(username) {
     let mailformat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
