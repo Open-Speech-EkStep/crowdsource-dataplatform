@@ -35,7 +35,7 @@ const {
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
-const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH, MIN_SNR_LEVEL } = require('./constants');
+const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH, MIN_SNR_LEVEL,ROLE_UAT } = require('./constants');
 const {
     validateUserInputAndFile,
     validateUserInfo,
@@ -156,7 +156,7 @@ router.get('/getDetails/:language', async function (req, res) {
 router.post('/uat/verify', async (req, res) => {
     const { userName } = req.body;
     try{
-        await userVerify(userName, "ROLE_UAT");
+        await userVerify(userName, ROLE_UAT);
         res.sendStatus(200);
     }catch(err){
         // console.log(err);
