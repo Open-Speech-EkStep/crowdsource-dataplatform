@@ -27,12 +27,7 @@
 <%- include('../common/header.ejs',{home:"../home.html", bolo:"./home.html", suno:"../sunoIndia/home.html",likho:"../likhoIndia/home.html",dekho:"../dekhoIndia/home.html",path:"../"}); %>
 <div class="container-fluid supreme-container">
     <div class="row">
-        <div class="col-12 col-md-8 col-lg-10 offset-lg-1 mt-4">
-            <div class="ml-4" style="padding:20px;background:rgba(223,236,251,.3);border-left:10px solid #dfecfb">
-                <h3> <%= __('Bolo India') %></h3>
-                <p style="font-style:italic"> <%= __('Help your language by donating your voice') %></p>
-            </div>
-        </div>
+        <%- include('../common/moduleIntro.ejs',{name:'Bolo India',intro:'Help your language by donating your voice'}); %>
     </div>
     <div class="row">
         <div class="col-12 col-md-8 col-lg-10 offset-lg-1 mt-4">
