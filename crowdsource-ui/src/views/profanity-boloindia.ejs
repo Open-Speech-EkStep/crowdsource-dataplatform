@@ -19,7 +19,7 @@
 
 <body>
     <%- include('common/header/headerWithoutNavBar.ejs',{path:"./", MODULE:"Bolo India", PAGE_TITLE:""}); %>
-    <%- include('common/modals/profanity-thank-you/profanity-thank-you.ejs',{type:'boloindia'}); %>
+    <%- include('common/modals/profanity-thank-you/profanity-thank-you.ejs',{type:'boloIndia'}); %>
         <div id="loader" class="overlay__content"><span class="spinner"></span></div>
         <div id="page-content" class="d-none">
             <div class="container-fluid">
@@ -29,9 +29,24 @@
                             <%- include('common/buttons/back-btn/back-btn.ejs',{url:"/en/profanity-home.html?type=boloindia"}) %>
                         </div>
                     </div>
+                    <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-sentences-row">
+                        <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-bold">
+                                <%= __('Thank you for contributing.') %>
+                            </label><br><br>
+                            <p>
+                                <%- __('We do not have any data in <span id="spn-validation-language"></span> language. Please try again later.') %>
+                            </p>
+                            <div class="row justify-content-center mt-5">
+                                <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
+                                    <a class="btn btn-primary text-white btn-lg h6 w-100" href="/en/profanity-home.html?type=boloindia">
+                                        <%- __('Back to Bolo India Home') %>
+                                    </a></div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row mt-5">
                     </div>
-                    <div class="xs-p-16">
+                    <div class="xs-p-16" id="validation-buttons-row">
                         <div class="row justify-content-center my-5">
                             <div class="col-md-8 col-sm-10 text-center prompt"><label class="h1 font-weight-normal" id="sentenceLbl"></label></div>
                         </div>
