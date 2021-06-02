@@ -27,7 +27,7 @@ function showNoSentencesMessage() {
     hideElement($('#skip_btn_row'));
     hideElement($("#test-mic-speakers"));
     hideElement($('#instructive-msg'));
-    hideElement($('#thankyou-text'));
+    // hideElement($('#thankyou-text')); 
   }
 
 function getCurrentIndex(lastIndex) {
@@ -121,16 +121,23 @@ const initialize = () => {
         $element.on('animationend', handleAnimationEnd);
     };
 
-    const setProgressBar = (currentIndex) => {
-        $progressBar.width((currentIndex + 1) * 20 + '%');
-        $progressBar.prop('aria-valuenow', currentIndex + 1);
+    const setProgressBar = (currentIndex, totalItems, updateSentenceIndex = true) => {
+        let index = currentIndex + 1;
+        const multiplier = 10 * (10 / totalItems);
+        $progressBar.width(index * multiplier + '%');
+        $progressBar.prop('aria-valuenow', index);
+        if(updateSentenceIndex)
+            setCurrentSentenceIndex(index);
+
+        // $progressBar.width((currentIndex + 1) * 20 + '%');
+        // $progressBar.prop('aria-valuenow', currentIndex + 1);
     };
 
     const setSentenceText = (index) => {
         const $sentenceLbl = $('#sentenceLbl');
         $sentenceLbl[0].innerText = sentences[index].media;
         animateCSS($sentenceLbl, 'lightSpeedIn');
-        setProgressBar(currentIndex);
+        setProgressBar(currentIndex, crowdSource.sentences.length);
     };
 
     const notyf = new Notyf({
@@ -207,7 +214,7 @@ const initialize = () => {
             animateCSS($pageContent, 'zoomOut', () => {
                 $pageContent.addClass('d-none');
             });
-            setProgressBar(currentIndex);
+            setProgressBar(currentIndex,crowdSource.sentences.length, false);
             const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
             Object.assign(sentencesObj, { sentences: [] });
             localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
@@ -223,7 +230,7 @@ const initialize = () => {
     function incrementCurrentIndex() {
         currentIndex++;
         setSentenceText(currentIndex);
-        setCurrentSentenceIndex(currentIndex + 1);
+        // setCurrentSentenceIndex(currentIndex + 1);
         localStorage.setItem(currentIndexKey, currentIndex);
         // $skipBtn.removeClass('d-none');
     }
