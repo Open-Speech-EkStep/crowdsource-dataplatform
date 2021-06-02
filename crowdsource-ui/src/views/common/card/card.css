@@ -76,6 +76,10 @@
     background-repeat: no-repeat;
 }
 
+.min-height-190 {
+    min-height: 190px !important;
+}
+
 .card2 {
     background-position: right bottom;
 }
