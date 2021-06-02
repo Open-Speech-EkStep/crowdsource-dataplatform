@@ -25,11 +25,18 @@ const changeLocale = function (locale) {
     }
     localStorage.setItem("i18n", locale);
     const module = localStorage.getItem(CURRENT_MODULE);
-    if(module == 'home'){
+    // if(module == 'home'){
+    //     location.href = `/${locale}/${currentPage}`;
+    // }else if(module === 'bolo' && currentPage != 'home.html'){
+    //     location.href = `/${locale}/${currentPage}`;
+    // }
+    if(module == 'bolo' && currentPage == "home.html"){
+        location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
+    }
+    else if(module == 'bolo' ||module == 'home' ){
         location.href = `/${locale}/${currentPage}`;
-    }else if(module === 'bolo' && currentPage != 'home.html'){
-        location.href = `/${locale}/${currentPage}`;
-    } else {
+    }
+    else {
         location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
     }
     // location.href = `/${locale}/${currentPage}`;
@@ -43,12 +50,12 @@ function showLanguagePopup() {
     document.getElementById("toggle-content-language").click();
 }
 function redirectToLocalisedPage() {
-    const localeValue = localStorage.getItem("i18n") ;
-    const locale = localeValue == 'null' || localeValue == undefined ? 'en' : localeValue;
+    const locale = localStorage.getItem("i18n") ;
+    // const locale = localeValue == 'null' || localeValue == undefined ? 'en' : localeValue;
     const splitValues = location.href.split('/');
     const currentModule = localStorage.getItem('module');
-    console.log(currentModule)
-    const currentLocale = currentModule == 'bolo' ?splitValues[3] : splitValues[splitValues.length - 2];
+    const currentPage = splitValues[splitValues.length - 1];
+    const currentLocale = currentModule == 'bolo' && currentPage == 'home.html' ? splitValues[splitValues.length - 3] : splitValues[splitValues.length - 2];
     const contribution_langugae = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     $('#home-page').attr('default-lang', contribution_langugae);
     if (currentLocale != locale) {

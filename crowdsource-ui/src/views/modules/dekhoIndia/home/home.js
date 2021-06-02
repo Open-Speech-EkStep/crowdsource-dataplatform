@@ -88,7 +88,7 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
-  landToHome();
+  // landToHome();
   initializeFeedbackModal();
   getAvailableLanguages("ocr");
   getLocaleString().then(()=>{
