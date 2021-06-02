@@ -27,8 +27,9 @@
 <%- include('common/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
 <div class="container-fluid supreme-container">
     <div class="row">
-        <div class="col-lg-8 col-md-8 col-12 px-lg-5 mt-5">
+        <div class="col-lg-8 col-md-8 col-12 px-lg-5 mt-5 px-5">
             <h4 class="display-5 font-weight-normal lh-5 text-muted"><%= __('What is this Crowdsourcing Platform')%></h4>
+            <br>
             <p class="h4 lh-7 text-justify"><%= __('Crowdsourcing Platform is a Government Initiative to build an open data repository for all Indian languages.')%></p>
             <p class="h4 font-weight-light-lg font-weight-normal-sm lh-7 text-justify"><%= __('The participation is purely voluntary. The contributions made by you will be stored in the repo without any personal info. This data will be then made available to  technologists & language enthusiasts to help develop software and apps in Indian  languages, thus making them available to every Indian citizen.')%></p>
             <p class="h4 font-weight-light-lg font-weight-normal-sm lh-7 text-justify"><%= __('Help India build this open source platform and become atma-nirbhar in the digital space.')%></p>
@@ -38,25 +39,23 @@
         </div>
     </div>
     <div class="row mt-5 mt-lg-0">
-        <div class="col-12 justify-content-center text-center" style="border:2px solid #f0f0f7">
+        <div class="col-12 justify-content-center text-center px-5" style="border:2px solid #f0f0f7">
             <div class="text-center py-lg-3 font-weight-normal text-muted my-0 home-heading-2"><%= __('HELP US BUILD DATA FOR YOUR LANGUAGE')%></div>
         </div>
     </div>
 
-    <div class="m-auto justify-content-center mt-lg-4 mx-lg-5 d-flex flex-row flex-wrap flex-lg-nowrap">
+    <div class="m-auto justify-content-center mt-lg-4 mx-lg-5 d-flex flex-row flex-wrap flex-lg-nowrap px-5">
         <%- include('../../build/views/common/homeCard.ejs',{MODULE:"BOLO",img:"../img/say.svg",P1:"Contribute your voice",P2:"Validate what they say", url:"./boloIndia/home.html",cardNumber:"card1"})%>
         <%- include('../../build/views/common/homeCard.ejs',{MODULE:"SUNO",img:"../img/listen2.svg",P1:"Transcribing audio to text",P2:"Validate text as per the audio",url:"./sunoIndia/home.html",cardNumber:"card2"})%>
         <%- include('../../build/views/common/homeCard.ejs',{MODULE:"LIKHO",img:"../img/translate2.svg",P1:"Translate and type the text",P2:"Validate the text as per image",url:"./likhoIndia/home.html",cardNumber:"card3"})%>
         <%- include('../../build/views/common/homeCard.ejs',{MODULE:"DEKHO",img:"../img/look2.svg",P1:"Type the text as per image",P2:"Validate the text as per image",url:"./dekhoIndia/home.html",cardNumber:"card4"})%>
     </div>
     <div class="row mt-5 align-item-center" style="background:rgba(223,236,251,.3)">
-        <div class="col-12 col-lg-5 my-4 my-lg-5 mx-lg-5 align-self-center" style="font-style:normal;font-size:30px">
-            <span class="font-weight-light home-badge-link-row"> <%= __('Be a part of language initiative, earn badges and make a difference?') %></span>
-            <br>
-
+        <div class="my-4 my-lg-5 px-5 col-sm align-self-center home-badge-link" style="font-style:normal;font-size:30px">
+            <div class="font-weight-light home-badge-link-row"> <%= __('Be a part of language initiative, earn badges and make a difference?') %></div>
             <div class="text-primary font-weight-bold home-badge-link-row"> <a href="./badges.html"><%= __('Know More') %></a></div>
         </div>
-        <div class="col-12 col-lg-6 my-4 my-lg-5 home-badge-row">
+        <div class="my-4 my-lg-5 col-sm home-badge-row">
             <img src="../img/bronze_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid">
             <img src="../img/silver_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid">
             <img src="../img/gold_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid">
@@ -64,12 +63,12 @@
         </div>
     </div>
 
-    <div class="row my-5">
+    <div class="row my-5 px-5">
         <div class="col-12">
             <div class="text-center">
                 <p class="text-center persuade-quote"> <%= __('TAKE A STEP TOWARDS DIGITAL INDIA') %></p>
                 <p class="text-center persuade-quote"> <%= __('CONTRIBUTE NOW TO INDIA’S BIGGEST CROWDSOURCING INITIATIVE') %></p>
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mt-5">
                     <div>
                         <img src="../img/emblemIndia.svg" alt="home image" height="30px" width="24px" class="img-fluid">
                     </div>
