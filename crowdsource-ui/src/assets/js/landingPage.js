@@ -1,4 +1,5 @@
 const { onActiveNavbar } = require('./header');
+const { redirectToLocalisedPage} = require('./locale');
 
 const setHover = function (){
   const $card1 = $(".card1");
@@ -33,6 +34,10 @@ const setHover = function (){
 
 $(document).ready(function () {
   localStorage.setItem('module','home');
+  if (!localStorage.getItem('i18n')){
+    localStorage.setItem('i18n','en');
+    redirectToLocalisedPage();
+  }
   onActiveNavbar('home');
   setHover();
 });
