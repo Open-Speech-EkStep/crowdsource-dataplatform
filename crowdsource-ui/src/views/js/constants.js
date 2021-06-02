@@ -64,11 +64,11 @@ const MODULE = {
 };
 
 const SELECT_PAGE_OPTIONS_FEEDBACK = [
-  {module:'suno', pages: ['Landing Page', 'Dashboard', 'Transcibe', 'Validate', 'Thank You Page']}, 
-  {module:'bolo', pages: ['Landing Page', 'Dashboard', 'Speak', 'Validate', 'Thank You Page']},
-  {module:'likho', pages: ['Landing Page', 'Dashboard', 'Translate', 'Validate', 'Thank You Page']},
-  {module:'dekho', pages: ['Landing Page', 'Dashboard', 'Label', 'Validate', 'Thank You Page']},
-  {module:'others', pages: ['About Us', 'Terms and Conditions', 'Speak', 'Validate', 'Thank You Page']}
+  {module:'suno', pages: ['Badges Info', 'Dashboard', 'Suno India Home', 'Transcribe', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info']}, 
+  {module:'bolo', pages: ['Badges Info', 'Dashboard','Bolo India Home', 'Speak', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info']},
+  {module:'likho', pages: ['Badges Info', 'Dashboard', 'Likho India Home' , 'Translate', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info']},
+  {module:'dekho', pages: ['Badges Info', 'Dashboard', 'Dekho India Home', 'Label', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info']},
+  {module:'others', pages: ['About Us','Home Page', 'Terms and Conditions', 'Badges Info']}
 ];
 
 const FEEDBACK_CATEGORY = [
