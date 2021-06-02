@@ -290,3 +290,8 @@ color: #4D82F7;;
 
 
 }
+
+
+.border-50 {
+  border-radius: 50px;
+}
