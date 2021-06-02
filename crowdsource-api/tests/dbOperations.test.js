@@ -113,7 +113,7 @@ describe("Running tests for dbOperations", () => {
     describe('Update DB methods', () => {
         const testDatasetId = 1, testUserId = 123, contributor_id = 27;
         const testUserName = 'testName', testState = 'testState', testCountry = 'testCountry';
-        const age = '', gender = '', motherTongue = '';
+        const age = '', gender = '', motherTongue = '', device = '', browser = '';
         const languageOne = 'Tamil', languageTwo = 'Hindi';
         const mockCb = jest.fn();
 
@@ -136,6 +136,8 @@ describe("Running tests for dbOperations", () => {
                     testAudioDuration,
                     testState,
                     testCountry,
+                    device,
+                    browser
                 ]).mockReturnValue(Promise.resolve());
                 when(spyDBnone).calledWith(updateMediaWithContributedState, [testDatasetId]).mockReturnValue(Promise.resolve());
                 when(spyDBnone).calledWith(updateMaterializedViews).mockReturnValue(Promise.resolve());
@@ -150,7 +152,7 @@ describe("Running tests for dbOperations", () => {
                     testAudioPath, testDatasetId, testUserId,
                     testUserName, testState, testCountry,
                     testAudioDuration, languageTwo, age, gender,
-                    motherTongue, mockCb
+                    motherTongue,device, browser, mockCb
                 );
                 expect(mockCb).toBeCalledWith(400, expect.anything())
             });
@@ -161,7 +163,7 @@ describe("Running tests for dbOperations", () => {
                     testAudioPath, testDatasetId, testUserId,
                     testUserName, testState, testCountry,
                     testAudioDuration, languageOne, age, gender,
-                    motherTongue, mockCb
+                    motherTongue,device, browser, mockCb
                 );
                 expect(mockCb).toBeCalledWith(400, expect.anything())
             });
@@ -179,6 +181,7 @@ describe("Running tests for dbOperations", () => {
                     age,
                     gender,
                     motherTongue,
+                    device, browser,
                     mockCb
                 )
 
@@ -191,7 +194,9 @@ describe("Running tests for dbOperations", () => {
                         languageOne,
                         testAudioDuration,
                         testState,
-                        testCountry
+                        testCountry,
+                        device,
+                        browser
                     ]
                 );
 
@@ -215,6 +220,7 @@ describe("Running tests for dbOperations", () => {
                         expectedAudioDuration,
                         testState,
                         testCountry,
+                        device, browser
                     ]).mockReturnValue(Promise.resolve());
 
                 await dbOperations.updateDbWithAudioPath(
@@ -229,6 +235,8 @@ describe("Running tests for dbOperations", () => {
                     age,
                     gender,
                     motherTongue,
+                    device,
+                    browser,
                     mockCb
                 )
 
@@ -242,6 +250,8 @@ describe("Running tests for dbOperations", () => {
                         expectedAudioDuration,
                         testState,
                         testCountry,
+                        device,
+                        browser
                     ]
                 );
 
@@ -265,7 +275,9 @@ describe("Running tests for dbOperations", () => {
                         testUserInput,
                         languageOne,
                         testState,
-                        testCountry
+                        testCountry,
+                        device,
+                        browser
                     ]).mockReturnValue(Promise.resolve());
             })
 
@@ -279,7 +291,7 @@ describe("Running tests for dbOperations", () => {
                     testUserId, languageTwo, testUserInput,
                     testDatasetId, testState, testCountry,
                     age, gender,
-                    motherTongue, mockCb
+                    motherTongue, device, browser, mockCb
                 );
                 expect(mockCb).toBeCalledWith(400, expect.anything())
             });
@@ -291,7 +303,7 @@ describe("Running tests for dbOperations", () => {
                     testUserId, languageOne, testUserInput,
                     testDatasetId, testState, testCountry,
                     age, gender,
-                    motherTongue, mockCb
+                    motherTongue,device, browser, mockCb
                 );
                 expect(mockCb).toBeCalledWith(400, expect.anything())
             });
@@ -308,6 +320,7 @@ describe("Running tests for dbOperations", () => {
                     age,
                     gender,
                     motherTongue,
+                    device, browser,
                     mockCb
                 )
 
@@ -319,7 +332,9 @@ describe("Running tests for dbOperations", () => {
                         testUserInput,
                         languageOne,
                         testState,
-                        testCountry
+                        testCountry,
+                        device, 
+                        browser
                     ]
                 );
 
@@ -624,17 +639,19 @@ describe("Running tests for dbOperations", () => {
         const userId = 123;
         const contributorId = 1;
         const userName = 'name';
+        const device = 'mac';
+        const browser = 'chrome';
 
         test('should call addValidationQuery and updateMediaWithValidatedState if action is accept/reject', async () => {
             spyDBnone.mockReturnValue(Promise.resolve())
             when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
             const action = 'accept';
 
-            const req = { 'body': { sentenceId: datasetId, state, country, userName }, 'cookies': { userId }, params: { action, contributionId } }
+            const req = { 'body': { sentenceId: datasetId, state, country, userName,device, browser }, 'cookies': { userId }, params: { action, contributionId } }
 
             await dbOperations.updateTablesAfterValidation(req, res);
 
-            expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [contributorId, datasetId, action, contributionId, state, country]);
+            expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [contributorId, datasetId, action, contributionId, state, country, device, browser]);
             expect(spyDBnone).toHaveBeenNthCalledWith(2, updateMediaWithValidatedState, [datasetId, contributionId])
         });
 
@@ -643,11 +660,11 @@ describe("Running tests for dbOperations", () => {
             when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
             const action = 'skip';
 
-            const req = { 'body': { sentenceId: datasetId, state, country, userName }, 'cookies': { userId }, params: { action, contributionId } }
+            const req = { 'body': { sentenceId: datasetId, state, country, userName, device, browser }, 'cookies': { userId }, params: { action, contributionId } }
 
             await dbOperations.updateTablesAfterValidation(req, res);
 
-            expect(spyDBnone).toBeCalledWith(addValidationQuery, [contributorId, datasetId, action, contributionId, state, country]);
+            expect(spyDBnone).toBeCalledWith(addValidationQuery, [contributorId, datasetId, action, contributionId, state, country, device, browser]);
             expect(spyDBnone).toBeCalledTimes(1);
         })
     })

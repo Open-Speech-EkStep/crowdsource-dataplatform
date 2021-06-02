@@ -428,7 +428,7 @@ const initialize = () => {
                 }
             });
     }
-
+// device-browser
     function uploadToServer(cb) {
         const fd = new FormData();
         const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));

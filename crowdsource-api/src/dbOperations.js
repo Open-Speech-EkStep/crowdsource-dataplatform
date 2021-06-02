@@ -123,6 +123,8 @@ const updateDbWithAudioPath = async (
     age,
     gender,
     motherTongue,
+    device,
+    browser,
     cb
 ) => {
     const validLanguage = await checkLanguageValidity(datasetId, language)
@@ -142,7 +144,9 @@ const updateDbWithAudioPath = async (
         language,
         roundedAudioDuration,
         state,
-        country
+        country,
+        device,
+        browser
     ])
         .then(() => {
             db.none(updateMediaWithContributedState, [datasetId]).then();
@@ -272,10 +276,10 @@ const getMediaObject = (req, res, objectStorage) => {
 
 const updateTablesAfterValidation = async (req, res) => {
     const userId = req.cookies.userId;
-    const { sentenceId, state = "", country = "", userName = "" } = req.body;
+    const { sentenceId, state = "", country = "", userName = "", device = "", browser = "" } = req.body;
     const { action, contributionId } = req.params;
     const validatorId = await getContributorId(userId, userName);
-    return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country])
+    return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country, device, browser])
         .then(async () => {
             if (action !== 'skip') {
                 db.none(updateMediaWithValidatedState, [sentenceId, contributionId]).then()
@@ -568,6 +572,8 @@ const updateDbWithUserInput = async (
     age,
     gender,
     motherTongue,
+    device,
+    browser,
     cb) => {
     const validLanguage = await checkLanguageValidity(datasetId, language)
     if (!validLanguage) {
@@ -582,7 +588,9 @@ const updateDbWithUserInput = async (
         userInput,
         language,
         state,
-        country
+        country,
+        device,
+        browser
     ])
         .then(() => {
             db.none(updateMediaWithContributedState, [datasetId]).then();

@@ -23,7 +23,7 @@ const likhoCountKey = 'likhoCount';
 let localeStrings;
 
 window.likhoIndia = {};
-
+// device-browser
 function uploadToServer(cb) {
   const fd = new FormData();
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
