@@ -6,7 +6,8 @@ const {
   getLocaleString,
   showElement,
   hideElement,
-  fetchLocationInfo
+  onHover,
+  afterHover
 } = require('../common/utils');
 const { LOCALE_STRINGS, CURRENT_MODULE, MODULE } = require('../common/constants');
 const { showUserProfile } = require('../common/header');
@@ -276,12 +277,12 @@ function executeOnLoad() {
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   $('#from-label').text(fromLanguage);
 
-  fetchLocationInfo().then(res => {
-    return res.json()
-  }).then(response => {
-    localStorage.setItem("state_region", response.regionName);
-    localStorage.setItem("country", response.country);
-  }).catch(console.log);
+  // fetchLocationInfo().then(res => {
+  //   return res.json()
+  // }).then(response => {
+  //   localStorage.setItem("state_region", response.regionName);
+  //   localStorage.setItem("country", response.country);
+  // }).catch(console.log);
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);

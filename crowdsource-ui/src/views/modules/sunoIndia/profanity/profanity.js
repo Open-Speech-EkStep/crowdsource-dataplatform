@@ -7,8 +7,8 @@ const {
   getLocaleString,
   showElement,
   hideElement,
-  fetchLocationInfo,
-  reportSentenceOrRecording
+  onHover,
+  afterHover
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
 const { CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE } = require('../common/constants');
@@ -396,13 +396,13 @@ function executeOnLoad() {
     updateLocaleLanguagesDropdown(contributionLanguage);
   }
 
-  fetchLocationInfo().then(res => {
-    console.log(res);
-    return res.json()
-  }).then(response => {
-    localStorage.setItem("state_region", response.regionName);
-    localStorage.setItem("country", response.country);
-  }).catch(console.log);
+  // fetchLocationInfo().then(res => {
+  //   console.log(res);
+  //   return res.json()
+  // }).then(response => {
+  //   localStorage.setItem("state_region", response.regionName);
+  //   localStorage.setItem("country", response.country);
+  // }).catch(console.log);
 
 
 

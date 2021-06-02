@@ -8,8 +8,7 @@ const {
   hideElement,
   fetchLocationInfo,
   getLocaleString,
-  reportSentenceOrRecording,
-  OnHover,
+  onHover,
   afterHover
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
@@ -289,7 +288,7 @@ const executeOnLoad = function () {
     updateLocaleLanguagesDropdown(language);
   }
 
-  getLocationInfo();
+  // getLocationInfo();
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
