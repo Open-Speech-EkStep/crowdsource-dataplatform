@@ -129,8 +129,8 @@
             </div>
 
             <div id="myModal" class="modal">
-                <div class="position-relative d-flex m-auto" style="width:80%;top:103px">
-                    <span class="close">&times;</span>
+                <div class="position-relative d-flex m-auto image-modal">
+                    <span class="close-validate">&times;</span>
                     <img class="modal-content" id="img01">
                 </div>
             </div>
@@ -139,9 +139,9 @@
             <%- include ../common/virtualKeyboardBtn.ejs %>
         </div>
 
-        <script>var modal=document.getElementById("myModal"),clickExpandBtn=document.getElementById("expand-view"),img=document.getElementById("view-image"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");clickExpandBtn.onclick=function(){modal.style.display="block",modalImg.src=img.src};var span=document.getElementsByClassName("close")[0];span.onclick=function(){modal.style.display="none"}</script>
+        <script>var modal=document.getElementById("myModal"),clickExpandBtn=document.getElementById("expand-view"),img=document.getElementById("view-image"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");clickExpandBtn.onclick=function(){modal.style.display="block",modalImg.src=img.src};var span=document.getElementsByClassName("close-validate")[0];span.onclick=function(){modal.style.display="none"}</script>
 
-        <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the image labelled", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
+        <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the image labelled", reportThankYou: "Your feedback helps us keep Dekho India relevant, we appreciate you taking time to leave the feedback.", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>

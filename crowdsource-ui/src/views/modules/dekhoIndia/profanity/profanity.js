@@ -8,12 +8,13 @@ const {
   hideElement,
   fetchLocationInfo,
   getLocaleString,
-  reportSentenceOrRecording
+  onHover,
+  afterHover
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS } = require('../common/constants');
 const { showUserProfile } = require('../common/header');
-const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
+const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 
 const speakerDetailsKey = 'profanityUserDetails';
 
@@ -21,7 +22,7 @@ const dekhoCountKey = 'dekhoCount';
 const currentIndexKey = 'dekhoCurrentIndex';
 const sentencesKey = 'dekhoSentencesKey';
 
-let localeStrings; 
+let localeStrings;
 
 window.dekhoIndia = {};
 
@@ -44,7 +45,7 @@ let validationCount = 0;
 function getNextSentence() {
   if (currentIndex < dekhoIndia.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length);
+    updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length);
     setDekhoImage(`${cdn_url}/${dekhoIndia.sentences[currentIndex].media}`);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
@@ -56,7 +57,7 @@ function getNextSentence() {
   }
 }
 
-function updateProfanityState(userName, sentenceId, language, state){
+function updateProfanityState(userName, sentenceId, language, state) {
   const fd = new FormData();
   // fd.append('language', language);
   fd.append('sentenceId', sentenceId);
@@ -77,36 +78,36 @@ function updateProfanityState(userName, sentenceId, language, state){
   });
 }
 
-function onProfanityUpdated(){
-  hideElement($('#cancel-edit-button'));
-  hideElement($('#submit-edit-button'))
-  hideElement($('#skip_button'))
-  showElement($('#thankyou-text'));
-  showElement($('#progress-row'))
-  try{
-    setTimeout(() => {
-      hideElement($('#thankyou-text'));
-      showElement($('#cancel-edit-button'));
-      showElement($('#submit-edit-button'))
-      showElement($('#skip_button'))
-      getNextSentence();
-    }, 2000)
-  } catch (e){
-    console.log(e)
-  }
+function onProfanityUpdated() {
+  getNextSentence();
+  // hideElement($('#cancel-edit-button'));
+  // hideElement($('#submit-edit-button'))
+  // hideElement($('#skip_button'))
+  // showElement($('#thankyou-text'));
+  // showElement($('#progress-row'))
+  // try{
+  //   setTimeout(() => {
+  //     hideElement($('#thankyou-text'));
+  //     showElement($('#cancel-edit-button'));
+  //     showElement($('#submit-edit-button'))
+  //     showElement($('#skip_button'))
+  //   }, 2000)
+  // } catch (e){
+  //   console.log(e)
+  // }
 }
 
-function invokeProfanityStateUpdate(state){
+function invokeProfanityStateUpdate(state) {
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
-    updateProfanityState(localSpeakerDataParsed.userName, dekhoIndia.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
-      .then(res=>{
-        onProfanityUpdated();
-      }).catch(err=>{
-        console.log(err);
-      })
+  updateProfanityState(localSpeakerDataParsed.userName, dekhoIndia.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
+    .then(res => {
+      onProfanityUpdated();
+    }).catch(err => {
+      console.log(err);
+    })
 }
 
-function updateSkipAction(){
+function updateSkipAction() {
   const sentenceId = dekhoIndia.sentences[currentIndex].dataset_row_id;
   fetch(`/profanity-skip/ocr`, {
     method: 'PUT',
@@ -118,7 +119,7 @@ function updateSkipAction(){
     body: JSON.stringify({
       sentenceId: sentenceId
     })
-  }).then(res=>{}).catch(err=>{
+  }).then(res => { }).catch(err => {
     console.log(err)
   });
 }
@@ -134,6 +135,22 @@ function addListeners() {
   $('#submit-edit-button').on('click', () => {
     invokeProfanityStateUpdate(true);
   })
+
+  $('#cancel-edit-button').hover(
+    () => {
+      onHover($('#cancel-edit-button'));
+    },
+    () => {
+      afterHover($('#cancel-edit-button'))
+    });
+  
+    $('#submit-edit-button').hover(
+      () => {
+        onHover($('#submit-edit-button'));
+      },
+      () => {
+        afterHover($('#submit-edit-button'))
+      });
 
   $skipButton.on('click', () => {
     getNextSentence();
@@ -173,7 +190,7 @@ function showNoSentencesMessage() {
   hideElement($("#test-mic-speakers"));
   hideElement($('#instructive-msg'));
   hideElement($('#editor-row'));
-  hideElement($('#thankyou-text'));
+  // hideElement($('#thankyou-text'));
   showElement($('#no-sentences-row'));
 }
 
@@ -207,7 +224,6 @@ const initializeComponent = () => {
   const totalItems = dekhoIndia.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-
   // $("#start_contributing_id").on('click', function () {
   //   const data = localStorage.getItem("speakerDetails");
   //   if (data !== null) {
@@ -245,7 +261,7 @@ const initializeComponent = () => {
     setDekhoImage(`${cdn_url}/${validationData.media}`);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length)
+    updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length)
   }
 
 }
@@ -272,7 +288,7 @@ const executeOnLoad = function () {
     updateLocaleLanguagesDropdown(language);
   }
 
-  getLocationInfo();
+  // getLocationInfo();
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);

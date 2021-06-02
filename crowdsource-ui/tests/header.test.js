@@ -11,15 +11,16 @@ describe("onActiveNavbar",()=> {
   const $header = $('#module_name');
   const allDivs = $header.children();
 
-  test("should add active class to bolo nav Item in nav bar for boloIndia when no prev nav item has active", () => {
+  test("should add active class to home nav Item in nav bar for landing page when no prev nav item has active", () => {
     mockLocalStorage();
-    onActiveNavbar("bolo");
+    onActiveNavbar("home");
 
-    expect(localStorage.getItem(CURRENT_MODULE)).toEqual("bolo");
-    expect(allDivs[1].classList.contains('active')).toEqual(true);
-    expect(allDivs[0].classList.contains('active')).toEqual(false);
+    expect(localStorage.getItem(CURRENT_MODULE)).toEqual("home");
+    expect(allDivs[0].classList.contains('active')).toEqual(true);
+    expect(allDivs[1].classList.contains('active')).toEqual(false);
     expect(allDivs[2].classList.contains('active')).toEqual(false);
     expect(allDivs[3].classList.contains('active')).toEqual(false);
+    expect(allDivs[4].classList.contains('active')).toEqual(false);
 
     localStorage.clear()
 
@@ -30,10 +31,27 @@ describe("onActiveNavbar",()=> {
     onActiveNavbar("suno");
 
     expect(localStorage.getItem(CURRENT_MODULE)).toEqual("suno");
-    expect(allDivs[0].classList.contains('active')).toEqual(true);
-    expect(allDivs[1].classList.contains('active')).toEqual(false);
+    expect(allDivs[0].classList.contains('active')).toEqual(false);
+    expect(allDivs[1].classList.contains('active')).toEqual(true);
     expect(allDivs[2].classList.contains('active')).toEqual(false);
     expect(allDivs[3].classList.contains('active')).toEqual(false);
+    expect(allDivs[4].classList.contains('active')).toEqual(false);
+
+    localStorage.clear()
+
+  })
+
+  test("should add active class to bolo nav Item in nav bar for boloIndia", () => {
+    mockLocalStorage();
+    onActiveNavbar("bolo");
+
+    expect(localStorage.getItem(CURRENT_MODULE)).toEqual("bolo");
+
+    expect(allDivs[0].classList.contains('active')).toEqual(false);
+    expect(allDivs[1].classList.contains('active')).toEqual(false);
+    expect(allDivs[2].classList.contains('active')).toEqual(true);
+    expect(allDivs[3].classList.contains('active')).toEqual(false);
+    expect(allDivs[4].classList.contains('active')).toEqual(false);
 
     localStorage.clear()
 
@@ -44,10 +62,11 @@ describe("onActiveNavbar",()=> {
     onActiveNavbar("likho");
 
     expect(localStorage.getItem(CURRENT_MODULE)).toEqual("likho");
-    expect(allDivs[2].classList.contains('active')).toEqual(true);
     expect(allDivs[0].classList.contains('active')).toEqual(false);
     expect(allDivs[1].classList.contains('active')).toEqual(false);
-    expect(allDivs[3].classList.contains('active')).toEqual(false);
+    expect(allDivs[2].classList.contains('active')).toEqual(false);
+    expect(allDivs[3].classList.contains('active')).toEqual(true);
+    expect(allDivs[4].classList.contains('active')).toEqual(false);
 
     localStorage.clear()
 
@@ -58,10 +77,11 @@ describe("onActiveNavbar",()=> {
     onActiveNavbar("dekho");
 
     expect(localStorage.getItem(CURRENT_MODULE)).toEqual("dekho");
-    expect(allDivs[3].classList.contains('active')).toEqual(true);
     expect(allDivs[0].classList.contains('active')).toEqual(false);
     expect(allDivs[1].classList.contains('active')).toEqual(false);
     expect(allDivs[2].classList.contains('active')).toEqual(false);
+    expect(allDivs[3].classList.contains('active')).toEqual(false);
+    expect(allDivs[4].classList.contains('active')).toEqual(true);
 
     localStorage.clear()
 

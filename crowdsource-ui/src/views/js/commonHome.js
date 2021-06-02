@@ -87,6 +87,7 @@ const getStatsSummary = function (url, module, callBack=()=>{}) {
   performAPIRequest(url)
     .then(response => {
       const languages = getContributedAndTopLanguage(module == MODULE.likho.value || module == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, module);
+      console.log("local language", languages);
       localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
       showByHoursChart(module);
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));

@@ -10,7 +10,8 @@ const profanityApi = require('./profanityChecker')
 const helmet = require('helmet');
 const express = require('express');
 const app = express();
-
+const morganBody = require('morgan-body');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const router = express.Router();
 
@@ -29,12 +30,13 @@ const {
     getRewardsInfo,
     updateDbWithUserInput,
     getAvailableLanguages,
-    getTargetInfo
+    getTargetInfo,
+    userVerify
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
-const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH, MIN_SNR_LEVEL } = require('./constants');
+const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH, MIN_SNR_LEVEL,ROLE_UAT } = require('./constants');
 const {
     validateUserInputAndFile,
     validateUserInfo,
@@ -51,7 +53,11 @@ const {
 // const Ddos = require('ddos');
 // const ddos = new Ddos({ burst: 12, limit: 70 })
 // app.use(ddos.express);
-
+app.use(bodyParser.json());
+morganBody(app, {
+    logAllReqHeader: true,
+    noColors: true
+});
 
 app.enable('trust proxy');
 
@@ -151,6 +157,17 @@ router.get('/getDetails/:language', async function (req, res) {
         res.sendStatus(500);
     }
 });
+
+router.post('/uat/verify', async (req, res) => {
+    const { userName } = req.body;
+    try{
+        await userVerify(userName, ROLE_UAT);
+        res.sendStatus(200);
+    }catch(err){
+        // console.log(err);
+        res.sendStatus(401);
+    }
+})
 
 router.get('/getAllInfo/:language', async function (req, res) {
     try {

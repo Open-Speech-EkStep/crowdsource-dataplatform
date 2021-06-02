@@ -6,11 +6,12 @@ const {
   getLocaleString,
   showElement,
   hideElement,
-  fetchLocationInfo
+  onHover,
+  afterHover
 } = require('../common/utils');
-const {LOCALE_STRINGS,CURRENT_MODULE, MODULE} = require('../common/constants');
-const {showUserProfile} = require('../common/header');
-const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
+const { LOCALE_STRINGS, CURRENT_MODULE, MODULE } = require('../common/constants');
+const { showUserProfile } = require('../common/header');
+const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const speakerDetailsKey = 'profanityUserDetails';
 
 const currentIndexKey = 'likhoCurrentIndex';
@@ -25,7 +26,7 @@ let currentIndex;
 function getNextSentence() {
   if (currentIndex < likhoIndia.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1,likhoIndia.sentences.length);
+    updateProgressBar(currentIndex + 1, likhoIndia.sentences.length);
     setSentence(likhoIndia.sentences[currentIndex].media);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
@@ -37,7 +38,7 @@ function getNextSentence() {
   }
 }
 
-function updateProfanityState(userName, sentenceId, language, state){
+function updateProfanityState(userName, sentenceId, language, state) {
   const fd = new FormData();
   // fd.append('language', language);
   fd.append('sentenceId', sentenceId);
@@ -58,36 +59,36 @@ function updateProfanityState(userName, sentenceId, language, state){
   });
 }
 
-function onProfanityUpdated(){
-  hideElement($('#cancel-edit-button'));
-  hideElement($('#submit-edit-button'))
-  hideElement($('#skip_button'))
-  showElement($('#thankyou-text'));
-  showElement($('#progress-row'))
-  try{
-    setTimeout(() => {
-      hideElement($('#thankyou-text'));
-      showElement($('#cancel-edit-button'));
-      showElement($('#submit-edit-button'))
-      showElement($('#skip_button'))
-      getNextSentence();
-    }, 2000)
-  } catch (e){
-    console.log(e)
-  }
+function onProfanityUpdated() {
+  // hideElement($('#cancel-edit-button'));
+  // hideElement($('#submit-edit-button'))
+  // hideElement($('#skip_button'))
+  // showElement($('#thankyou-text'));
+  // showElement($('#progress-row'))
+  // try{
+  //   setTimeout(() => {
+  //     hideElement($('#thankyou-text'));
+  //     showElement($('#cancel-edit-button'));
+  //     showElement($('#submit-edit-button'))
+  //     showElement($('#skip_button'))
+  getNextSentence();
+  //   }, 2000)
+  // } catch (e){
+  //   console.log(e)
+  // }
 }
 
-function invokeProfanityStateUpdate(state){
+function invokeProfanityStateUpdate(state) {
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
-    updateProfanityState(localSpeakerDataParsed.userName, likhoIndia.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
-      .then(res=>{
-        onProfanityUpdated();
-      }).catch(err=>{
-        console.log(err);
-      })
+  updateProfanityState(localSpeakerDataParsed.userName, likhoIndia.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
+    .then(res => {
+      onProfanityUpdated();
+    }).catch(err => {
+      console.log(err);
+    })
 }
 
-function updateSkipAction(){
+function updateSkipAction() {
   const sentenceId = likhoIndia.sentences[currentIndex].dataset_row_id;
   fetch(`/profanity-skip/parallel`, {
     method: 'PUT',
@@ -99,7 +100,7 @@ function updateSkipAction(){
     body: JSON.stringify({
       sentenceId: sentenceId
     })
-  }).then(res=>{}).catch(err=>{
+  }).then(res => { }).catch(err => {
     console.log(err)
   });
 }
@@ -116,9 +117,25 @@ function addListeners() {
     invokeProfanityStateUpdate(true)
   })
 
+  $('#cancel-edit-button').hover(
+    () => {
+      onHover($('#cancel-edit-button'));
+    },
+    () => {
+      afterHover($('#cancel-edit-button'))
+    });
+
+  $('#submit-edit-button').hover(
+    () => {
+      onHover($('#submit-edit-button'));
+    },
+    () => {
+      afterHover($('#submit-edit-button'))
+    });
+
 
   $skipButton.on('click', () => {
-    if($('#pause').hasClass('d-none')){
+    if ($('#pause').hasClass('d-none')) {
       $('#pause').trigger('click');
     }
     // markContributionSkipped();
@@ -156,7 +173,7 @@ function showNoSentencesMessage() {
   hideElement($("#test-mic-speakers"));
   hideElement($('#instructive-msg'));
   hideElement($('#editor-row'));
-  hideElement($('#thankyou-text'));
+  // hideElement($('#thankyou-text'));
 }
 
 // const handleSubmitFeedback = function () {
@@ -185,7 +202,7 @@ function showNoSentencesMessage() {
 //   });
 // }
 
-const setSentence = function (text){
+const setSentence = function (text) {
   $('#captured-text').text(text);
 }
 
@@ -246,7 +263,7 @@ const initialize = function () {
     setSentence(translation.media);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1,likhoIndia.sentences.length)
+    updateProgressBar(currentIndex + 1, likhoIndia.sentences.length)
   }
 };
 
@@ -260,12 +277,12 @@ function executeOnLoad() {
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   $('#from-label').text(fromLanguage);
 
-  fetchLocationInfo().then(res => {
-    return res.json()
-  }).then(response => {
-    localStorage.setItem("state_region", response.regionName);
-    localStorage.setItem("country", response.country);
-  }).catch(console.log);
+  // fetchLocationInfo().then(res => {
+  //   return res.json()
+  // }).then(response => {
+  //   localStorage.setItem("state_region", response.regionName);
+  //   localStorage.setItem("country", response.country);
+  // }).catch(console.log);
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
@@ -326,7 +343,7 @@ function executeOnLoad() {
           setFooterPosition();
 
           likhoIndia.sentences = sentenceData.data;
-          localStorage.setItem(likhoCountKey,likhoIndia.sentences.length);
+          localStorage.setItem(likhoCountKey, likhoIndia.sentences.length);
           $loader.hide();
           localStorage.setItem(
             sentencesKey,

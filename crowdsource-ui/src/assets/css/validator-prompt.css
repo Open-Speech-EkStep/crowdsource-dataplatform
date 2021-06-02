@@ -117,7 +117,7 @@ a {
       display: none;
     }
    .top-back-btn {
-    top: 39px;
+    top: 25px;
     left: -4px;
    }
 
@@ -128,12 +128,12 @@ a {
 /* Modal Content (image) */
 #myModal .modal-content {
     height: 200px;
-    padding: 0 !important;
+    padding: 40px !important;
 }
 
 
 .close, .close-validate {
-    top: 10px !important;
+    top: -4px !important;
     right: 15px !important;
 }
 }
@@ -156,9 +156,7 @@ a {
 
 @media (max-width: 767px) {
     .record-btn-container {
-        flex-direction: column-reverse;
         align-items: flex-end;
-        display: -webkit-box;
     }
 
     .record-btn-container .test-mic-speaker {
@@ -187,6 +185,11 @@ a {
         height: 80px;
         width: 160px;
     }
+
+    #myModal .image-modal {
+        width:235% !important;
+    }
+    
 
     #like_button > svg {
         height: 80px;
@@ -258,6 +261,11 @@ a {
     padding: 2%;
 }
 
+#myModal .image-modal {
+    width:80%;
+    top:103px
+}
+
 /* Caption of Modal Image */
 #caption {
     margin: auto;
@@ -321,7 +329,17 @@ a {
 
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px) {
-    .modal-content {
+    #myModal .modal-content {
         width: 100%;
     }
+
+    #report_sentence_modal .modal-content {
+        width: 96%;
+    }
 }
+
+#audio-player-btn{
+    min-width: 200px;
+}
+
+

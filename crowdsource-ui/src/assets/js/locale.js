@@ -1,5 +1,5 @@
 const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
-const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE } = require("./constants");
+const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE } = require("./constants");
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');
@@ -24,7 +24,15 @@ const changeLocale = function (locale) {
         currentPage = "home.html";
     }
     localStorage.setItem("i18n", locale);
-    location.href = `/${locale}/${currentPage}`;
+    const module = localStorage.getItem(CURRENT_MODULE);
+    if(module == 'home'){
+        location.href = `/${locale}/${currentPage}`;
+    }else if(module === 'bolo' && currentPage != 'home.html'){
+        location.href = `/${locale}/${currentPage}`;
+    } else {
+        location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
+    }
+    // location.href = `/${locale}/${currentPage}`;
 }
 
 function checkCookie() {
@@ -35,9 +43,12 @@ function showLanguagePopup() {
     document.getElementById("toggle-content-language").click();
 }
 function redirectToLocalisedPage() {
-    const locale = localStorage.getItem("i18n");
+    const localeValue = localStorage.getItem("i18n") ;
+    const locale = localeValue == 'null' || localeValue == undefined ? 'en' : localeValue;
     const splitValues = location.href.split('/');
-    const currentLocale = splitValues[splitValues.length - 2];
+    const currentModule = localStorage.getItem('module');
+    console.log(currentModule)
+    const currentLocale = currentModule == 'bolo' ?splitValues[3] : splitValues[splitValues.length - 2];
     const contribution_langugae = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     $('#home-page').attr('default-lang', contribution_langugae);
     if (currentLocale != locale) {
