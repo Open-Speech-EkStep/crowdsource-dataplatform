@@ -1,13 +1,49 @@
 const {readFileSync} = require('fs');
 const {stringToHTML, mockLocalStorage, mockLocation} = require('../../utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,ALL_LANGUAGES} = require('../../../build/js/common/constants');
-const {redirectToLocalisedPage} = require('../../../build/js/common/common.js');
+const {redirectToLocalisedPage, landToHome} = require('../../../build/js/common/common.js');
+const locale = require('../../../build/js/common/locale.js');
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../../../build/views/sunoIndia/home.ejs`, 'UTF-8') +
   readFileSync(`${__dirname}/../../../build/views/common/languageNavBar.ejs`, 'UTF-8')+
   readFileSync(`${__dirname}/../../../build/views/common/say-listen-language.ejs`, 'UTF-8')
 );
+
+const somethingSpy = jest.spyOn(locale, 'showLanguagePopup');
+
+
+describe("landToHome",()=> {
+  test("should redirect to boloIndia home page when contribution language is present and don't language show pop-up", () => {
+    mockLocalStorage();
+    mockLocation();
+    const $contentLanguage = $("#content-language");
+    localStorage.setItem(CURRENT_MODULE, 'bolo');
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, 'hindi');
+    landToHome();
+    const localeValue = localStorage.getItem("i18n");
+    expect(location.href).toEqual("/en/boloIndia/home.html")
+    expect(localeValue).toEqual("en")
+    expect($contentLanguage.hasClass('show')).toEqual(false)
+    localStorage.clear();
+
+  })
+
+  test("should show language pop-up when contribution language is not present", () => {
+    mockLocalStorage();
+    mockLocation();
+    localStorage.setItem(CURRENT_MODULE, 'bolo');
+    landToHome();
+    const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    const $contentLanguage = $("#content-language");
+    const localeValue = localStorage.getItem("i18n");
+    // expect(location.href).toEqual("")
+    expect(language).toEqual(undefined);
+    // expect($contentLanguage.hasClass('show')).toEqual(true);
+    localStorage.clear();
+
+  })
+})
 
 describe("redirectToLocalisedPage",()=>{
   test("should redirect to boloIndia home page when no localisation and contribution is set",()=>{

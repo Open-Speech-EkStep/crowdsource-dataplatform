@@ -2,7 +2,7 @@ const {
   CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS,LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE
 } = require('./constants');
 const { constructChart } = require('./horizontalBarGraph');
-const { changeLocale } = require('./locale');
+const { changeLocale,showLanguagePopup } = require('./locale');
 const fetch = require('./fetch');
 
 const getContributedAndTopLanguage = (topLanguagesData, type) => {
@@ -233,7 +233,17 @@ const isMobileDevice = () => {
   }
 }
 
+const landToHome = function (){
+  if (!localStorage.getItem(CONTRIBUTION_LANGUAGE)){
+    showLanguagePopup();
+    return;
+  }
+  else {
+    redirectToLocalisedPage();
+  }
+}
 
 
-module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton };
+
+module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome };
 

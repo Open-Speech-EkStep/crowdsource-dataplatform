@@ -1,6 +1,14 @@
-@media screen and (min-width: 992px){
+@media screen and (min-width: 1441px){
     .home-badge-row img {
-        width: 7rem;
+        width: 160px;
+    }
+
+    .home-badge-row  {
+        text-align: right;
+    }
+
+    .home-badge-link-row{
+        line-height: 44px;
     }
 
     .persuade-quote  {
@@ -32,10 +40,113 @@
     }
 }
 
+@media screen and (max-width: 1440px) {
+    .home-badge-row img {
+        width: 120px;
+    }
+
+    .home-badge-row  {
+        text-align: right;
+    }
+
+    .home-badge-link-row{
+        line-height: 44px;
+    }
+
+    .persuade-quote  {
+        font-size: 30px;
+    }
+
+    .home-badge-link-row {
+        font-size: 30px;
+    }
+
+    .home-heading-2{
+        font-size: 30px;
+    }
+
+    .card1{
+        background-position: left bottom;
+    }
+
+    .card2{
+        background-position: bottom;
+    }
+
+    .card3 {
+        background-position: bottom;
+    }
+
+    .card4 {
+        background-position: right bottom;
+    }
+}
+
+@media screen and (max-width: 1280px){
+    .home-badge-row img {
+        width: 120px;
+    }
+
+    .home-badge-row  {
+        text-align: right;
+    }
+
+    .home-badge-link-row{
+        line-height: 44px;
+    }
+
+    .persuade-quote  {
+        font-size: 30px;
+    }
+
+    .home-badge-link-row {
+        font-size: 30px;
+    }
+
+    .home-heading-2{
+        font-size: 30px;
+    }
+
+    .card1{
+        background-position: left bottom;
+    }
+
+    .card2{
+        background-position: bottom;
+    }
+
+    .card3 {
+        background-position: bottom;
+    }
+
+    .card4 {
+        background-position: right bottom;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .home-badge-row img {
+        width: 160px;
+    }
+
+    .home-badge-row  {
+        text-align: center;
+    }
+}
+
 @media screen and (max-width: 991px) {
     .home-badge-row img {
         width: 120px;
     }
+
+    .home-badge-row  {
+        text-align: right;
+    }
+
+    .home-badge-link-row{
+        line-height: 40px;
+    }
+
 
     .persuade-quote  {
         font-size: 30px;
@@ -75,6 +186,10 @@
         text-align: center;
     }
 
+    .home-badge-link-row{
+        line-height: 36px;
+    }
+
     .persuade-quote  {
         font-size: 28px;
     }
@@ -101,6 +216,10 @@
 
     .card4 {
         background-position: bottom;
+    }
+
+    .h4{
+        font-size: 16px;
     }
 }
 
@@ -113,8 +232,12 @@
         text-align: center;
     }
 
+    .home-badge-link-row{
+        line-height: 32px;
+    }
+
     .persuade-quote {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .home-badge-link-row {
@@ -139,6 +262,10 @@
 
     .card4 {
         background-position: bottom;
+    }
+
+    .h4{
+        font-size: 16px;
     }
 }
 
@@ -151,6 +278,10 @@
         font-size: 20px;
     }
 
+    .home-badge-link-row{
+        line-height: 28px;
+    }
+
     .home-badge-row  {
         text-align: center;
     }
@@ -160,7 +291,7 @@
     }
 
     .home-heading-2{
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .card1{
@@ -177,6 +308,10 @@
 
     .card4 {
         background-position: bottom;
+    }
+
+    .h4{
+        font-size: 16px;
     }
 }
 
@@ -189,8 +324,12 @@
         text-align: center;
     }
 
+    .home-badge-link-row{
+        line-height: 24px;
+    }
+
     .persuade-quote {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .home-badge-link-row {
@@ -216,5 +355,13 @@
     .card4 {
         background-position: bottom;
     }
+
+    .h4{
+        font-size: 16px;
+    }
+}
+
+.pt-6 {
+    padding-top: 6rem;
 }
 
