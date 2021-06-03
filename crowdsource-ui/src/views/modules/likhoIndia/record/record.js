@@ -7,7 +7,9 @@ const {
   showElement,
   hideElement,
   fetchLocationInfo,
-  reportSentenceOrRecording
+  reportSentenceOrRecording,
+  getDeviceInfo,
+  getBrowserInfo
 } = require('../common/utils');
 const { LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, ALL_LANGUAGES } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
