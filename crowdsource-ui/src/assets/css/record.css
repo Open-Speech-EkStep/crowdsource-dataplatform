@@ -230,6 +230,9 @@ audio {
   background: #F6F6F6;
   border-radius: 4px;
   min-height: 32px;
+  padding: 5px 8px;
+  height: 32px;
+  font-size: 14px;
 }
 
 .pr-10 {
