@@ -63,6 +63,7 @@ function getCurrentIndex(lastIndex) {
 
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem(LIKHO_FROM_LANGUAGE));
+  hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#translation-row'));
   hideElement($('#virtualKeyBoardBtn'));
