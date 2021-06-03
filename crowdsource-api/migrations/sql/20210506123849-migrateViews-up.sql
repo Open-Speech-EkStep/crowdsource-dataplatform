@@ -40,7 +40,7 @@ AS
      LEFT JOIN validations ON contributions.contribution_id = validations.contribution_id
      JOIN dataset_row ON dataset_row.dataset_row_id = contributions.dataset_row_id
      LEFT JOIN contributors ON contributors.contributor_id = contributions.contributed_by
-  WHERE contributions.action = 'completed'::text AND contributions.date >= (CURRENT_DATE - '1 year'::interval)
+  WHERE contributions.action = 'completed'::text AND contributions.is_system=false AND contributions.date >= (CURRENT_DATE - '1 year'::interval)
   ORDER BY contributions.contributed_by;
 
 
