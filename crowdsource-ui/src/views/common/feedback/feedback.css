@@ -35,7 +35,7 @@
 
 .custom-modal {
 	max-width: 700px;
-	max-height: 867px;
+	min-height: 867px;
 }
 
 .label-color-feedback {
@@ -77,7 +77,7 @@
 }
 
 label .required {
-	color: #C35757;
+	color: #C35757 !important;
 }
 
 #feedback_close_btn, #feedback_thanku_close_btn {

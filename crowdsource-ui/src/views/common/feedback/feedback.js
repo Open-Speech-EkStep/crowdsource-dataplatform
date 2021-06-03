@@ -174,6 +174,7 @@ const initializeFeedbackModal = () => {
     $(() => {
         $("#feedback_close_btn").click(() => {
             $("#feedback_modal").modal("hide");
+            $(".modal-backdrop").removeClass("show").removeClass("modal-backdrop");
             resetFeedback();
         });
 
