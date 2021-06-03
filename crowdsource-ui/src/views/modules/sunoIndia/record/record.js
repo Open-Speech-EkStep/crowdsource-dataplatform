@@ -55,6 +55,8 @@ function uploadToServer(cb) {
   fd.append('sentenceId', sunoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
+  fd.append('device', getDeviceInfo());
+  fd.append('browser', getBrowserInfo());
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -90,7 +92,7 @@ const setAudioPlayer = function () {
   const textReplay = $('#audioplayer-text_replay');
   const textPause = $('#audioplayer-text_pause');
   const textResume = $('#audioplayer-text_resume');
-  const cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : $("#cancel-edit-button");
+  const cancelButton = $("#cancel-edit-button");
 
 
   myAudio.addEventListener("ended", () => {
@@ -240,9 +242,9 @@ function markContributionSkipped() {
 
 function addListeners() {
 
-  const $skipButton = isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button');
-  const $submitButton = isMobileDevice() ?  $('#submit-edit-button_mob') :  $('#submit-edit-button');
-  const cancelButton = isMobileDevice() ? $('#cancel-edit-button_mob') : $('#cancel-edit-button');
+  const $skipButton =  $('#skip_button');
+  const $submitButton = $('#submit-edit-button');
+  const cancelButton = $('#cancel-edit-button');
 
   $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
@@ -258,12 +260,8 @@ function addListeners() {
     showElement($('#progress-row'))
     const $cancelEditButton = cancelButton;
     $cancelEditButton.attr('disabled', true);
-    const $submitEditButton = isMobileDevice() ? $('#submit-edit-button_mob') : $('#submit-edit-button');
+    const $submitEditButton =  $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
-    if(!isMobileDevice()) {
-      const children = $submitEditButton.children().children();
-      children[0].setAttribute("fill", '#D7D7D7');
-    }
     closeEditor();
   })
 
@@ -282,10 +280,6 @@ function addListeners() {
     $(cancelButton).attr("disabled", true);
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
-    if(!isMobileDevice()) {
-      const children = $submitEditButton.children().children();
-      children[0].setAttribute("fill", '#D7D7D7');
-    }
     showElement($('#progress-row'))
     try {
       uploadToServer();
@@ -344,7 +338,7 @@ const loadAudio = function (audioLink) {
 };
 
 function disableSkipButton() {
-  const $skipButton = isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button');
+  const $skipButton = $('#skip_button');
   $skipButton.removeAttr('style');
   disableButton($skipButton)
 }
@@ -366,7 +360,7 @@ const getAudioClip = function (contributionId) {
       fileReader.onload = function (e) {
         loadAudio(e.target.result);
         showAudioRow();
-        enableButton(isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button'));
+        enableButton($('#skip_button'));
       }
       fileReader.readAsDataURL(blob);
     });
@@ -418,7 +412,7 @@ const handleSubmitFeedback = function () {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const otherText = $("#other_text").val();
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-  const $skipButton = isMobileDevice() ? $('#skip_button_mob') :  $('#skip_button');
+  const $skipButton =  $('#skip_button');
 
   const reqObj = {
     sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
@@ -614,22 +608,12 @@ function executeOnLoad() {
 }
 
 const detectDevice = () => {
-  const isMobileView = isMobileDevice();
-if(isMobileView){
-    // true for mobile device
-    playStr = "#play_mob";
-    replayStr = "#replay_mob";
-    pauseStr = "#pause_mob";
-    resumeStr = "#resume_mob";
-    audioPlayerBtn = "#audio-player-btn_mob";
-  }else{
     // false for not mobile device
     playStr = "#play";
     replayStr = "#replay";
     pauseStr = "#pause";
   resumeStr = "#resume";
     audioPlayerBtn = "#audio-player-btn";
-  }
 }
 
 $(document).ready(() => {

@@ -36,6 +36,8 @@ function uploadToServer(cb) {
   fd.append('sentenceId', likhoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
+  fd.append('device', getDeviceInfo());
+  fd.append('browser', getBrowserInfo());
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -149,8 +151,6 @@ function addListeners() {
     $cancelEditButton.attr('disabled', true);
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
-    const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#D7D7D7');
     closeEditor();
   })
 
@@ -167,8 +167,6 @@ function addListeners() {
     $("#cancel-edit-button").attr("disabled", true);
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
-    const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#progress-row'))
     try {
       uploadToServer();

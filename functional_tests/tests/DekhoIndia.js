@@ -1,7 +1,6 @@
 const taiko = require('taiko');
 const assert = require('assert');
 
-
 const {
     button,
     write,
@@ -108,4 +107,28 @@ step("User clicks on <arg0> he should see thank you page and should be able to s
 	assert.ok(await text("National Language Translation Mission").isVisible());
 	assert.ok(await text("Share it with your friends and family").isVisible());
 	assert.ok(await image({id:"reward-img"}).isVisible());
+});
+
+step("User should see add extension and watch video link", async function() {
+	assert.ok(await button('Install Now').exists())
+	assert.ok(await link('Watch the video').exists())
+});
+
+step("Clicking add extension link should redirect to <url>", async function(url) {
+	assert.ok(await button('Install Now').exists())
+	await click(button('Install Now'))
+	taiko.waitFor(100);
+	const actualUrl = await taiko.currentURL()
+	assert.strictEqual(url, actualUrl,"URL not redirected properly");
+	taiko.waitFor(200)
+	await taiko.goBack({ navigationTimeout: 4000 })
+});
+
+step("Clicking watch video link should open video", async function() {
+	assert.ok(await link('Watch the video').exists())
+	await click(link("Watch the video"))
+	taiko.waitFor(100);
+	assert.ok(await taiko.$("#extension_video").exists());
+	assert.ok(await taiko.$("#extension_video_close_btn").exists());
+	await click(taiko.$("#extension_video_close_btn"));
 });

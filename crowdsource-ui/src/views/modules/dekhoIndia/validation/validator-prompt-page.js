@@ -1,5 +1,5 @@
 const fetch = require('../common/fetch')
-const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
+const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording,getDeviceInfo, getBrowserInfo } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice } = require('../common/common');
@@ -49,13 +49,6 @@ function getCurrentIndex(lastIndex) {
 
 window.dekhoIndiaValidator = {};
 
-const updateDecisionButton = (button, colors) => {
-  const children = button.children().children();
-  children[0].setAttribute("fill", colors[0]);
-  children[1].setAttribute("fill", colors[1]);
-  children[2].setAttribute("fill", colors[2]);
-}
-
 function uploadToServer(cb) {
   const fd = new FormData();
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
@@ -68,6 +61,8 @@ function uploadToServer(cb) {
   fd.append('sentenceId', dekhoIndiaValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
+  fd.append('device', getDeviceInfo());
+  fd.append('browser', getBrowserInfo());
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -149,7 +144,9 @@ function skipValidation(action) {
       sentenceId: sentenceId,
       state: localStorage.getItem('state_region') || "",
       country: localStorage.getItem('country') || "",
-      userName: speakerDetails && speakerDetails.userName
+      userName: speakerDetails && speakerDetails.userName,
+      device: getDeviceInfo(),
+      browser: getBrowserInfo()
     }),
     headers: {
       'Content-Type': 'application/json',
@@ -191,31 +188,6 @@ function addListeners() {
   // const dislikeButton = $("#dislike_button");
   const $skipButton = $('#skip_button');
 
-  likeButton.hover(() => {
-      updateDecisionButton(likeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-    },
-    () => {
-      updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
-    });
-
-  needChangeButton.hover(() => {
-      updateDecisionButton(needChangeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-      $("#textarea-row .prompt").addClass('hover-edit');
-    },
-    () => {
-      updateDecisionButton(needChangeButton, ["white", "#007BFF", "#343A40"]);
-      $("#textarea-row .prompt").removeClass('hover-edit');
-    });
-
-  needChangeButton.mousedown(() => {
-    updateDecisionButton(needChangeButton, ["#007BFF", "white", "white"]);
-  });
-
-  likeButton.mousedown(() => {
-    updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
-  });
-
-
   needChangeButton.on('click',()=>{
     showElement($('#virtualKeyBoardBtn'));
     hideElement($('#textarea-row'));
@@ -239,8 +211,6 @@ function addListeners() {
     hideElement($('#virtualKeyBoardBtn'));
     const $submitEditButton = $("#submit-edit-button");
     $submitEditButton.attr('disabled',true);
-    const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
     setInput("");

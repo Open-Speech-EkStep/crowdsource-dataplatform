@@ -1,7 +1,6 @@
 const taiko = require('taiko');
 const assert = require('assert');
 
-
 const {
     button,
     write,
@@ -13,7 +12,7 @@ const {
 } = require('taiko');
 
 
-step("Select <SunoIndiaLink>from header", async function(SunoIndiaLink) {
+step("Select <SunoIndiaLink> from header", async function(SunoIndiaLink) {
     
     assert.ok(await link(SunoIndiaLink).exists());
     await taiko.waitFor(500);  
