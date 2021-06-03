@@ -10,7 +10,7 @@ const {
 } = require('../common/utils');
 const {LIKHO_FROM_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent} = require('../common/common');
+const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {showUserProfile} = require('../common/header');
 
@@ -366,6 +366,7 @@ const setTranslation = function (translatedText) {
 
 
 const initializeComponent = () => {
+  showOrHideExtensionCloseBtn();
   hideElement($('#virtualKeyBoardBtn'));
   const totalItems = likhoIndiaValidator.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
@@ -394,6 +395,7 @@ const getLocationInfo = () => {
 
 let selectedReportVal = '';
 $(document).ready(() => {
+  showOrHideExtensionCloseBtn();
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);

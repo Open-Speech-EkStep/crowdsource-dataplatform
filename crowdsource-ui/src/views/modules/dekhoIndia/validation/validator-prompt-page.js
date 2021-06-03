@@ -2,7 +2,7 @@ const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const { isKeyboardExtensionPresent } = require('../common/common');
+const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn } = require('../common/common');
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { cdn_url } = require('../common/env-api');
@@ -392,6 +392,7 @@ const handleSubmitFeedback = function () {
 }
 
 const initializeComponent = () => {
+  showOrHideExtensionCloseBtn();
     hideElement($('#virtualKeyBoardBtn'));
     const totalItems = dekhoIndiaValidator.sentences.length;
     currentIndex = getCurrentIndex(totalItems - 1);
@@ -420,6 +421,7 @@ const getLocationInfo = () => {
 
 let selectedReportVal = '';
 $(document).ready(() => {
+  showOrHideExtensionCloseBtn();
   localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   initializeFeedbackModal();
