@@ -8,7 +8,8 @@ const {
   showElement,
   hideElement,
   fetchLocationInfo,
-  reportSentenceOrRecording
+  reportSentenceOrRecording,
+  getDeviceInfo
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
