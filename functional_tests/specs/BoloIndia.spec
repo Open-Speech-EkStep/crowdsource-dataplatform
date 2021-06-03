@@ -3,7 +3,7 @@
 * Open Website
 
 ## Validate Contributor flow
-* Select "Bolo India"from header
+* Select "Bolo India" from header
 * Select Contribution Language as "हिंदी" first time
 //* Select translation language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
@@ -21,7 +21,7 @@
 * when user clicks on the Contribute More button, user should not see the Instructions page again
 
 ## Validate the Speaker Details pop-up in Contribute section
-* Select "Bolo India"from header
+* Select "Bolo India" from header
 //* Select translation language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
 * Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present
@@ -30,7 +30,7 @@
 * Speaker details popup should appear and close button should close the pop up
 
 ## Validate Validator flow
-* Select "Bolo India"from header
+* Select "Bolo India" from header
 //* Select translation language as "हिंदी"
 * Navigate to "Validate" button and click "Validate" button
 //* And User enter random Username and selects Age , Mother tongue ,gender
@@ -47,21 +47,21 @@
 * User should see the "Validate More" button
 
 ## Check Dashboard Page
-* Select "Bolo India"from header
+* Select "Bolo India" from header
 //* Select translation language as "English"
 * When user clicks on View all Details buttton , user shall land on Dashboard page
 * user should be able to see "Progress Chart" , "Gender Distribution" , "State Wise distribution" , "Age Group Distribution"
 * When user select "हिंदी" Language from dropdown then "languages contributed" should not visible
 
 ## Validate Feedback Page
-* Select "Bolo India"from header
+* Select "Bolo India" from header
 * When user clicks on the Feedback icon, user should see the feedback popup
 * Submit button should be disbaled, When user selects an opinion, submit button should be enabled
 * when user clicks on the submit button , user should land on the Thank you page 
 * When user clicks on the go to home page button , user should see the home page
 
 ## Validate Report feature
-* Select "Bolo India"from header
+* Select "Bolo India" from header
 //* Select translation language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
@@ -71,14 +71,14 @@
 * When user submits , Thank you pop up should come & close button should close the pop up
 
 ## Check About Us Page
-* Select "Bolo India"from header
+* Select "Bolo India" from header
 * Navigate to "About Us" button and click "About Us" button
 * Validate about us content
 * Start Recording button is disabled
 * Select Language "Hindi" enables the Start Recording button
 
 //## Validate Locale content on Home Page
-//* Select "Bolo India"from header
+//* Select "Bolo India" from header
 //* Select translation language as "हिंदी"
 //* User should see the content in "Hindi"
 //* User should see State Wise distribution and Top Languages
