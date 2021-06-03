@@ -139,7 +139,8 @@ const handleFeedbackSubmit = () => {
     .then((response) => {
         if(response.statusCode === 200){
             $("#feedback_modal").modal("hide");
-            $("#feedback_thanku_modal").modal("show");        
+            $("#feedback_thanku_modal").modal("show");  
+            resetFeedback();      
         }
         else{
             alert('there is some error');
@@ -147,10 +148,22 @@ const handleFeedbackSubmit = () => {
     });
 };
 
+const resetFeedback = () => {
+    const opinion = document.querySelector('input[name="opinionRadio"]:checked');
+    const category = document.querySelector("#category_id option[value='category']");
+    const feedback = document.querySelector("#feedback_description");
+
+    if(category) category.selected = true;
+    feedback.value = '';
+    $(".opinion-label").find("path, polygon, circle").attr("stroke", "#818181");
+    if(opinion) opinion.checked = false;
+    $("#submit_btn").attr('disabled', true);
+}
 const initializeFeedbackModal = () => {
     $(() => {
         $("#feedback_close_btn").click(() => {
             $("#feedback_modal").modal("hide");
+            resetFeedback();
         });
 
         $("#feedback_thanku_close_btn").click(() => {
