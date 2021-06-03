@@ -591,11 +591,11 @@ function executeOnLoad() {
 
         });
         $errorModal.on('hidden.bs.modal', function () {
-            location.href = './home.html#speaker-details';
+            location.href = './home.html';
         });
 
         if (!localSpeakerDataParsed) {
-            location.href = './home.html#speaker-details';
+            location.href = './home.html';
             return;
         }
 

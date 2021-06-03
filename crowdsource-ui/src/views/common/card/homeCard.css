@@ -1,4 +1,8 @@
 @media screen and (min-width: 1441px){
+    .display-6{
+        font-size: 30px;
+    }
+
     .home-badge-row img {
         width: 160px;
     }
@@ -41,6 +45,10 @@
 }
 
 @media screen and (max-width: 1440px) {
+    .display-6{
+        font-size: 30px;
+    }
+
     .home-badge-row img {
         width: 120px;
     }
@@ -83,6 +91,10 @@
 }
 
 @media screen and (max-width: 1280px){
+    .display-6{
+        font-size: 30px;
+    }
+
     .home-badge-row img {
         width: 120px;
     }
@@ -125,6 +137,10 @@
 }
 
 @media screen and (max-width: 1024px) {
+    .display-6{
+        font-size: 30px;
+    }
+
     .home-badge-row img {
         width: 160px;
     }
@@ -135,6 +151,10 @@
 }
 
 @media screen and (max-width: 991px) {
+    .display-6{
+      font-size: 30px;
+    }
+
     .home-badge-row img {
         width: 120px;
     }
@@ -219,9 +239,6 @@
         background-position: bottom;
     }
 
-    .h4{
-        font-size: 16px;
-    }
 }
 
 @media screen and (max-width: 480px) {
@@ -266,9 +283,6 @@
         background-position: bottom;
     }
 
-    .h4{
-        font-size: 16px;
-    }
 }
 
 @media screen and (max-width: 320px) {
@@ -313,9 +327,6 @@
         background-position: bottom;
     }
 
-    .h4{
-        font-size: 16px;
-    }
 }
 
 @media screen and (max-width: 280px) {
@@ -358,10 +369,6 @@
 
     .card4 {
         background-position: bottom;
-    }
-
-    .h4{
-        font-size: 16px;
     }
 }
 

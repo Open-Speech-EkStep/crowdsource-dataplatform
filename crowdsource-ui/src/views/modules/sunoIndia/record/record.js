@@ -534,7 +534,7 @@ function executeOnLoad() {
     });
 
     if (!localSpeakerDataParsed) {
-      location.href = './home.html#speaker-details';
+      location.href = './home.html';
       return;
     }
     showUserProfile(localSpeakerDataParsed.userName)
