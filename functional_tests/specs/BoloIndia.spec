@@ -3,8 +3,8 @@
 * Open Website
 
 ## Validate Contributor flow
-* Select "Bolo India" from header
 * Select Contribution Language as "हिंदी" first time
+* Select "Bolo India" from header
 //* Select translation language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
