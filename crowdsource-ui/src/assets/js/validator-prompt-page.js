@@ -229,8 +229,6 @@ function disableButton(button) {
 function disableValidation() {
     const dislikeButton = $("#dislike_button");
     const likeButton = $("#like_button");
-    updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
-    updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
     disableButton(likeButton)
     disableButton(dislikeButton)
 }
@@ -299,28 +297,6 @@ function addListeners() {
     const likeButton = $("#like_button");
     const dislikeButton = $("#dislike_button");
     const $skipButton = $('#skip_button');
-
-    likeButton.hover(() => {
-        updateDecisionButton(likeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-    },
-        () => {
-            updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
-        });
-
-    dislikeButton.hover(() => {
-        updateDecisionButton(dislikeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-    },
-        () => {
-            updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
-        });
-
-    dislikeButton.mousedown(() => {
-        updateDecisionButton(dislikeButton, ["#007BFF", "white", "white"]);
-    });
-
-    likeButton.mousedown(() => {
-        updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
-    });
 
     dislikeButton.on('click', () => {
         if($('#pause').hasClass('d-none')){

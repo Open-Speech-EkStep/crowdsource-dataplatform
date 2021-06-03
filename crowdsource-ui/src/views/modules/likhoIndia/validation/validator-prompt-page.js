@@ -163,13 +163,6 @@ function disableSkipButton() {
   disableButton($skipButton)
 }
 
-const updateDecisionButton = (button, colors) => {
-  const children = button.children().children();
-  children[0].setAttribute("fill", colors[0]);
-  children[1].setAttribute("fill", colors[1]);
-  children[2].setAttribute("fill", colors[2]);
-}
-
 function skipValidation(action) {
   if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
     validationCount++;
@@ -226,31 +219,6 @@ function addListeners() {
   const needChangeButton = $("#need_change");
   const $skipButton = $('#skip_button');
 
-  likeButton.hover(() => {
-      updateDecisionButton(likeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-    },
-    () => {
-      updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
-    });
-
-  needChangeButton.hover(() => {
-      updateDecisionButton(needChangeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-      $("#textarea-row .prompt").addClass('hover-edit');
-    },
-    () => {
-      updateDecisionButton(needChangeButton, ["white", "#007BFF", "#343A40"]);
-      $("#textarea-row .prompt").removeClass('hover-edit');
-    });
-
-  needChangeButton.mousedown(() => {
-    updateDecisionButton(needChangeButton, ["#007BFF", "white", "white"]);
-  });
-
-  likeButton.mousedown(() => {
-    updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
-  });
-
-
   needChangeButton.on('click', () => {
     showElement($('#virtualKeyBoardBtn'));
     showElement($('#editor-row'));
@@ -274,8 +242,6 @@ function addListeners() {
     hideElement($('#virtualKeyBoardBtn'));
     const $submitEditButton = $("#submit-edit-button");
     $submitEditButton.attr('disabled', true);
-    const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
     setInput("");

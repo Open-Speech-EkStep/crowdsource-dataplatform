@@ -151,8 +151,6 @@ function addListeners() {
     $cancelEditButton.attr('disabled', true);
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
-    const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#D7D7D7');
     closeEditor();
   })
 
@@ -169,8 +167,6 @@ function addListeners() {
     $("#cancel-edit-button").attr("disabled", true);
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
-    const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#progress-row'))
     try {
       uploadToServer();
