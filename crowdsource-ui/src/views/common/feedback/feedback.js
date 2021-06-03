@@ -158,8 +158,10 @@ const resetFeedback = () => {
     $(".opinion-label").find("path, polygon, circle").attr("stroke", "#818181");
     if(opinion) opinion.checked = false;
     $("#submit_btn").attr('disabled', true);
+    initializeFeedbackModal();
 }
 const initializeFeedbackModal = () => {
+    
     $(() => {
         $("#feedback_close_btn").click(() => {
             $("#feedback_modal").modal("hide");

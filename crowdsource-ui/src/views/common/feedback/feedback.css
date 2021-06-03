@@ -98,3 +98,10 @@ label .required {
 #very_happy_label:hover path, polygon, circle {
     stroke: #2A8908
 }
+
+#feedback_modal .form-check-inline .form-check-input {
+    margin-right: 0.75rem;
+}
+#feedback_modal .form-row:not(.opinion) .form-check-inline {
+    margin-right: 2.5rem;
+}
