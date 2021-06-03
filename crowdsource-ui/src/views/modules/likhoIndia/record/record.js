@@ -11,7 +11,7 @@ const {
 } = require('../common/utils');
 const { LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, ALL_LANGUAGES } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
-const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, isMobileDevice } = require('../common/common');
+const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, isMobileDevice,showOrHideExtensionCloseBtn } = require('../common/common');
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const speakerDetailsKey = 'speakerDetails';
@@ -223,6 +223,7 @@ function showThankYou() {
 
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem(LIKHO_FROM_LANGUAGE));
+  hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#virtualKeyBoardBtn'));
   hideElement($('#audio-row'))
@@ -493,6 +494,7 @@ $(document).ready(() => {
   showKeyboard(translationLanguage.toLowerCase(), enableCancelButton, disableCancelButton);
   hideElement($('#keyboardBox'));
   getLocaleString().then(() => {
+    showOrHideExtensionCloseBtn();
     executeOnLoad();
   }).catch(() => {
     executeOnLoad();
