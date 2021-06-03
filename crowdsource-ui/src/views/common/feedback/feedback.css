@@ -1,3 +1,8 @@
+.svg-size {
+	width: 52px;
+	height: 52px;
+}
+
 #feedback_button{
     color: #007BFF;
     width: 60px;
@@ -104,4 +109,17 @@ label .required {
 }
 #feedback_modal .form-row:not(.opinion) .form-check-inline {
     margin-right: 2.5rem;
+}
+
+@media (max-width: 700px) {
+	.float{
+		position:fixed;
+		right : 30px;
+		bottom : 100px;
+	}
+
+	#feedback_button{
+		height: 50px;
+		width: 50px;
+	}
 }
