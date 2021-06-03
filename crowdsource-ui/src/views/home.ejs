@@ -27,12 +27,14 @@
 <%- include('common/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
 <div class="container-fluid supreme-container">
     <div class="row">
-        <div class="col-lg-8 col-md-8 col-12 px-lg-5 mt-5 px-5">
-            <h4 class="display-5 font-weight-normal lh-5 text-muted"><%= __('What is this Crowdsourcing Platform')%></h4>
+        <div class="col-lg-7 col-md-8 col-12 px-lg-5 mt-5 px-5 ml-lg-auto">
+            <h4 class="display-5 font-weight-bolder lh-5"><%= __('What is this Crowdsourcing Platform')%></h4>
             <br>
             <p class="h5 lh-7 text-justify"><%= __('Crowdsourcing Platform is a Government Initiative to build an open data repository for all Indian languages.')%></p>
             <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 text-justify"><%= __('The participation is purely voluntary. The contributions made by you will be stored in the repo without any personal info. This data will be then made available to  technologists & language enthusiasts to help develop software and apps in Indian  languages, thus making them available to every Indian citizen.')%></p>
             <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 text-justify"><%= __('Help India build this open source platform and become atma-nirbhar in the digital space.')%></p>
+            <br>
+            <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 text-justify"><i><%= __('(This page is specifically created for User Testing)')%></i></p>
         </div>
         <div class="col-lg-4 col-md-4 col-12 align-self-center text-right p-0" id="home-banner">
             <img src="../img/home3.svg" alt="home image" height="595px" class="img-fluid">
@@ -40,22 +42,22 @@
     </div>
     <div class="row mt-5 mt-lg-0">
         <div class="col-12 justify-content-center text-center px-5" style="border:2px solid #f0f0f7">
-            <div class="text-center py-lg-3 font-weight-normal text-muted my-0 home-heading-2"><%= __('HELP US BUILD DATA FOR YOUR LANGUAGE')%></div>
+            <div class="text-center py-lg-3 font-weight-light my-0 home-heading-2" style="font-style:normal"><%= __('HELP US BUILD DATA FOR YOUR LANGUAGE')%></div>
         </div>
     </div>
 
-    <div class="m-auto justify-content-center mt-lg-4 mx-lg-5 d-flex flex-row flex-wrap flex-lg-nowrap px-5">
+    <div class="m-auto justify-content-center mt-lg-5 mx-lg-5 d-flex flex-row flex-wrap flex-lg-nowrap px-5">
         <%- include('../../build/views/common/homeCard.ejs',{MODULE:"SUNO",img:"../img/listen2.svg",P1:"Transcribing audio to text",P2:"Validate text as per the audio",url:"./sunoIndia/home.html",cardNumber:"card1"})%>
         <%- include('../../build/views/common/homeCard.ejs',{MODULE:"BOLO",img:"../img/say.svg",P1:"Contribute your voice",P2:"Validate what they say", url:"./boloIndia/home.html",cardNumber:"card2"})%>
         <%- include('../../build/views/common/homeCard.ejs',{MODULE:"LIKHO",img:"../img/translate2.svg",P1:"Translate and type the text",P2:"Validate the translation",url:"./likhoIndia/home.html",cardNumber:"card3"})%>
         <%- include('../../build/views/common/homeCard.ejs',{MODULE:"DEKHO",img:"../img/look2.svg",P1:"Type the text as per image",P2:"Validate the text as per image",url:"./dekhoIndia/home.html",cardNumber:"card4"})%>
     </div>
     <div class="row mt-5 align-item-center px-5" style="background:rgba(223,236,251,.3)">
-        <div class="my-4 my-lg-5 col-sm align-self-center home-badge-link" style="font-style:normal;font-size:30px">
+        <div class="my-4 my-lg-5 col-lg-5 ml-lg-auto col-sm align-self-center home-badge-link" style="font-style:normal;font-size:30px">
             <div class="font-weight-light home-badge-link-row"> <%= __('Be a part of language initiative, earn badges and make a difference?') %></div>
             <div class="text-primary font-weight-bold home-badge-link-row"> <a href="./badges.html"><%= __('Know More') %></a></div>
         </div>
-        <div class="my-4 my-lg-5 col-sm home-badge-row">
+        <div class="my-4 my-lg-5 col-lg-6 col-sm home-badge-row">
             <img src="../img/bronze_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid mx-2">
             <img src="../img/silver_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid mx-2">
             <img src="../img/gold_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid mx-2">
