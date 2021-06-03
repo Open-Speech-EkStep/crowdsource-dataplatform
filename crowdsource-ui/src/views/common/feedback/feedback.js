@@ -49,6 +49,7 @@ const updateOpinionSVGColor = () => {
 };
 
 const updateSelectPageWhenModuleChanges = () => {
+    $("#select_page_id").find('option').remove().end();
     $('input[name="moduleSelectRadio"]').on('change', function() {
         $("#select_page_id").find('option').remove().end();
         SELECT_PAGE_OPTIONS_FEEDBACK.forEach((data) => {
@@ -81,6 +82,7 @@ const updateSelectPageWhenModuleChanges = () => {
 };
 
 const readFeedbackCategoryFromConstantsFile = () => {
+    // $("#category_id").find('option').remove().end();
     FEEDBACK_CATEGORY.forEach((category) => {           
         $("#category_id").append($('<option>', {value: category.value, text: category.text}));
     });
@@ -122,9 +124,6 @@ const handleFeedbackSubmit = () => {
     });
 
     if(category === 'category'){
-        if($("#feedback_description").val().length > 0)
-           feedback_description = $("#feedback_description").val('');
-        
         category = '';
     } 
     if($("#feedback_description").val().length === 0){
@@ -167,7 +166,8 @@ const resetFeedback = () => {
     $(".opinion-label").find("path, polygon, circle").attr("stroke", "#818181");
     if(opinion) opinion.checked = false;
     $("#submit_btn").attr('disabled', true);
-    initializeFeedbackModal();
+    checkGivingFeedbackFor();
+    updateSelectPageWhenModuleChanges();
 }
 const initializeFeedbackModal = () => {
     

@@ -88,8 +88,7 @@ const validateUserInputForFeedback = function (req, res, next) {
     const invalidLanguage = !allLanguages.includes(language)
 
     const invalidCategory = (!(category.trim().length == 0 || category.trim().length < CATEGORY_MAX_LENGTH))
-    const invalidFeedback = (!(feedback || feedback.trim().length == 0) || feedback.trim().length > FEEDBACK_MAX_LENGTH 
-    || (category.trim().length == 0 && feedback.trim().length != 0));
+    const invalidFeedback = !(feedback || feedback.trim().length == 0) || feedback.trim().length > FEEDBACK_MAX_LENGTH;
 
     const invalidModule = (!module || !module.trim().length)
     
