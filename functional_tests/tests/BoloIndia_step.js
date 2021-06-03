@@ -41,9 +41,9 @@ gauge.screenshotFn = async function () {
     return await taiko.screenshot({ encoding: 'base64' });
 };
 
-step("Open BoloIndia", async () => {
+step("Open Website", async () => {
     await taiko.waitFor(500)
-    await goto(testUrl);
+    await goto(testUrl, { navigationTimeout:30000});
     await taiko.waitFor(500)
 });
 

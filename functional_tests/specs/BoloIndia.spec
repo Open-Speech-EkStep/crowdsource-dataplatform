@@ -1,6 +1,6 @@
 # Test BoloIndia
 
-* Open BoloIndia
+* Open Website
 
 ## Validate Contributor flow
 * Select "Bolo India"from header
