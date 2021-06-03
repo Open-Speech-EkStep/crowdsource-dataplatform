@@ -381,33 +381,35 @@ step("When user clicks on the cross button , pop up should close and user should
 
 });
 
-step("When user clicks on the Feedback link in the footer , user should land on the feedback page", async function () {
-    await click(link('Feedback'))
+step("When user clicks on the Feedback icon, user should see the feedback popup", async function () {
+    await click(taiko.button({ id: "feedback_button"}))
     await taiko.waitFor(1000)
-    assert.ok(await text("Subject").exists());
-    assert.ok(await text("Description").exists());
+    assert.ok(await text("We would like to get your feedback to improve this site").exists());
+    assert.ok(await text("Giving Feedback for?").exists());
+    assert.ok(await text("Select page").exists());
+    assert.ok(await text("What is your opinion of this page").exists());
+    assert.ok(await text("Please select your feedback category").exists());
+    assert.ok(await text("Share your feedback below").exists());
 });
 
-step("Submit button should be disbaled ,When user enters the subject and  Description submit button should be enabled", async function () {
+step("Submit button should be disbaled, When user selects an opinion, submit button should be enabled", async function () {
     await taiko.waitFor(500)
     assert.ok(await taiko.button({ id: "submit_btn" }).isDisabled());
-    const Subject = taiko.textBox({ id: 'feedback_subject' })
-    const Description = taiko.textBox({ id: 'feedback_description' })
-    await write('subject', into(Subject))
-    await write('Description', into(Description))
+    await click(taiko.$("#very_happy_label"));
     assert.ok(! await taiko.button({ id: "submit_btn" }).isDisabled());
 });
 
 step("when user clicks on the submit button , user should land on the Thank you page", async function () {
     await click(taiko.button({ id: "submit_btn" }))
     await taiko.waitFor(500)
-    assert.ok(await text("Thank You for your valuable feedback").exists());
+    assert.ok(await text("Thank you for your feedback!").exists());
+    assert.ok(await text("Submitted successfully").exists());
 });
 
 step("When user clicks on the go to home page button , user should see the home page", async function () {
-    assert.ok(await taiko.link({ id: "back_to_home_btn" }).exists());
-    await click(taiko.link({ id: "back_to_home_btn" }))
-    assert.ok(await text("Bolo India: A crowdsourcing initiative for Indian languages").exists());
+    assert.ok(await taiko.button({ id: "feedback_thanku_close_btn" }).exists());
+    await click(taiko.button({ id: "feedback_thanku_close_btn" }))
+    assert.ok(await text("Bolo India").exists());
 });
 
 step("When user clicks on Report Button, user should see Report Content Dialog Box & Submit button should be disabled", async function () {

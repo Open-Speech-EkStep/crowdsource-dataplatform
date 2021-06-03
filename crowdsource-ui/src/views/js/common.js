@@ -245,7 +245,19 @@ const landToHome = function (){
   }
 }
 
+const showOrHideExtensionCloseBtn = function (){
+  // console.log("here")
+
+  // if(!isKeyboardExtensionPresent()){
+  //   console.log("not present")
+  //   $('#extension-bar-close-btn').addClass('d-none');
+  // } else {
+  //   console.log("present")
+  //   $('#extension-bar-close-btn').removeClass('d-none');
+  // }
+}
 
 
-module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome };
+
+module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn };
 

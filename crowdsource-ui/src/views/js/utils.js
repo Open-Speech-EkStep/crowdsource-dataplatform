@@ -1,6 +1,20 @@
 const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require("./constants");
 const fetch = require('./fetch')
+const platform = require('./platform')
 
+function getDeviceInfo() {
+  const os = platform.os;
+  let info = os.family + " " + os.version;
+  if (platform.product) {
+      info = info + " " + platform.product;
+  }
+  return info;
+}
+
+function getBrowserInfo() {
+  let info = platform.name + " " + platform.version;
+  return info;
+}
 
 const onHover = function (btn) {
   btn.css('background-color', 'rgba(0, 123, 255, 0.3)');
@@ -223,5 +237,7 @@ module.exports = { setPageContentHeight,
   setCookie,
   getJson,
   onHover,
-  afterHover
+  afterHover,
+  getDeviceInfo,
+  getBrowserInfo
 }

@@ -11,7 +11,7 @@ const {
 } = require('../common/utils');
 const { LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, ALL_LANGUAGES } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
-const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, isMobileDevice } = require('../common/common');
+const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, isMobileDevice,showOrHideExtensionCloseBtn } = require('../common/common');
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const speakerDetailsKey = 'speakerDetails';
@@ -36,6 +36,8 @@ function uploadToServer(cb) {
   fd.append('sentenceId', likhoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
+  fd.append('device', getDeviceInfo());
+  fd.append('browser', getBrowserInfo());
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -219,6 +221,7 @@ function showThankYou() {
 
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem(LIKHO_FROM_LANGUAGE));
+  hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#virtualKeyBoardBtn'));
   hideElement($('#audio-row'))
@@ -483,6 +486,11 @@ function executeOnLoad() {
 }
 
 $(document).ready(() => {
+  if(isMobileDevice()){
+    hideElement($('#extension-bar'));
+  } else {
+    showOrHideExtensionCloseBtn();
+  }
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   const translationLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   initializeFeedbackModal();

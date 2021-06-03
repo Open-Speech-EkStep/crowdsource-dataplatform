@@ -1,0 +1,41 @@
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/common/extensionBar.css">
+
+<div class="row p-3 mt-3" id="extension-bar" style="background-color:#e1f0ff">
+    <p class="font-weight-normal h6 align-self-center m-0 px-lg-5"><i><%= __('Get Chrome extension to type in any language you choose')%></i></p>
+    <div class="mr-lg-5 text-center align-self-center">
+        <button class="btn rounded-pill text-primary font-wt-700 px-3 py-1" style="background-color:rgba(126,188,255,.22)"> <a href="https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab"><b><%= __('Install Now')%></b></a></button>
+    </div>
+    <div class="text-center align-self-center" style="border-left:1px solid #007bff">
+        <a id="extension_video_button" class="btn text-primary text-center ml-lg-5" type="button" data-toggle="modal" data-target="#extension_video_modal">
+            <%= __('Watch the video')%>
+        </a>
+    </div>
+    <div class="col-sm text-right">
+        <button class="btn" type="button" id="extension-bar-close-btn" style="font-size:20px">
+            &times;
+        </button>
+    </div>
+
+</div>
+
+<div class="modal fade" id="extension_video_modal" tabindex="-1" aria-labelledby="extension_video_modal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="modal-header d-block border-0">
+                <button type="button" id="extension_video_close_btn" class="btn btn-close text-dark close" data-bs-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <video width="100%" height="360px" controls id="extension_video">
+                    <source src="../../aud/phonetic_keyboard_instruction_video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../js/common/extensionBar.js"></script>
+
+
+

@@ -1,5 +1,5 @@
 const fetch = require('./fetch')
-const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording } = require('./utils');
+const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo } = require('./utils');
 const { LOCALE_STRINGS } = require('./constants');
 
 const speakerDetailsKey = 'speakerDetails';
@@ -433,6 +433,8 @@ const initialize = () => {
         fd.append('state', localStorage.getItem('state_region') || "");
         fd.append('country', localStorage.getItem('country') || "");
         fd.append('audioDuration', crowdSource.audioDuration);
+        fd.append('device', getDeviceInfo());
+        fd.append('browser', getBrowserInfo());
         fetch('/store', {
             method: 'POST',
             credentials: 'include',
@@ -579,11 +581,11 @@ function executeOnLoad() {
 
         });
         $errorModal.on('hidden.bs.modal', function () {
-            location.href = './home.html#speaker-details';
+            location.href = './home.html';
         });
 
         if (!localSpeakerDataParsed) {
-            location.href = './home.html#speaker-details';
+            location.href = './home.html';
             return;
         }
 
