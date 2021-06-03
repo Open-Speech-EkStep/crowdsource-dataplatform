@@ -586,7 +586,11 @@ if(isMobileView){
 }
 
 $(document).ready(() => {
-  showOrHideExtensionCloseBtn();
+  if(isMobileDevice()){
+    hideElement($('#extension-bar'));
+  } else {
+    showOrHideExtensionCloseBtn();
+  }
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
   initializeFeedbackModal();
   detectDevice();
