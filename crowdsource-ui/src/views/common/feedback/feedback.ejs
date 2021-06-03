@@ -33,7 +33,7 @@
                                 <%= __('Bolo') %>
                             </label>
                         </div>
-    
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="moduleSelectRadio" id="suno_id" value="suno">
                             <label class="form-check-label xs-radio-label" for="suno_id">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-4">   
+                <div class="mb-4">
                     <div class="form-row">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="moduleSelectRadio" id="dekho_id" value="dekho">
@@ -73,13 +73,13 @@
                     <div class="form-row">
                         <select class="form-control" id="select_page_id" name="select_page_id">
                         </select>
-                        <% if (typeof page !== 'undefined') { %>
+                        <% if (typeof page !=='undefined' ) { %>
                             <input type="hidden" id="target_page" value="<%-page%>">
-                        <% } %>
-                        
+                            <% } %>
+
                     </div>
                 </div>
-                
+
                 <div class="mb-4 mt-4">
                     <label class="form-check-label label-color-feedback">
                         <%= __('What is your opinion of this page') %> <span class="required">(*required)</span>
@@ -134,7 +134,7 @@
                                 </svg>
                             </label>
                         </div>
-    
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input very-happy" type="radio" name="opinionRadio" id="very_happy_id" value="very_happy">
                             <label class="form-check-label xs-radio-label opinion-label" id="very_happy_label" for="very_happy_id">
@@ -143,7 +143,7 @@
                                     <path d="M17.334 19.6073V19.3906" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
                                     <path d="M34.668 19.6073V19.3906" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
                                     <path d="M26.0007 38.9987C28.2992 38.9987 30.5036 38.0856 32.1289 36.4603C33.7542 34.835 34.6673 32.6306 34.6673 30.332H17.334C17.334 32.6306 18.2471 34.835 19.8724 36.4603C21.4977 38.0856 23.7021 38.9987 26.0007 38.9987Z" stroke="#959595" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>                                    
+                                </svg>
                             </label>
                         </div>
                     </div>
@@ -154,7 +154,10 @@
                         <%= __('Please select your feedback category') %> <span>(optional)</span>
                     </label>
                     <div class="form-row">
-                        <select id="category_id" class="form-control"><option value="category" selected="selected"><%= __('Select a category') %></option>
+                        <select id="category_id" class="form-control">
+                            <option value="category" selected="selected">
+                                <%= __('Select a category') %>
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -168,7 +171,9 @@
                 </div>
                 <textarea name="feedback_textarea" maxlength="1000" id="feedback_description" class="w-100 p-3 other-reason mb-4 label-color-feedback" rows="3" placeholder="<%= __('Type here...')%>" style="background-color:#fff;border:1px solid rgba(149,149,149,.6)"></textarea>
                 <div class="d-flex justify-content-center">
-                    <button id="submit_btn" class="btn btn-primary submit-btn-feedback" disabled="disabled"><%= __('SUBMIT')%></button>
+                    <button id="submit_btn" class="btn btn-primary submit-btn-feedback" disabled="disabled">
+                        <%= __('SUBMIT')%>
+                    </button>
                 </div>
             </div>
         </div>
@@ -179,16 +184,20 @@
     <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content p-4 border-2">
             <div class="modal-header d-block border-0">
-                <img src="../../img/success.svg" alt="Success">
-                <h4 class="modal-title text-center">
-                    <%= __('Submitted successfully') %>
-                </h4>
                 <button type="button" id="feedback_thanku_close_btn" class="btn btn-close text-muted" data-bs-dismiss="modal" aria-label="Close">
-                    &times;
+                    ×
                 </button>
             </div>
             <div class="modal-body">
-                <div class="text-center"><%= __('Thank you for your feedback!') %></div>
+                <div class="row justify-content-center py-2">
+                    <img src="../../img/success.svg" alt="Success">
+                </div>
+
+                <div class="text-center py-2" style="font-size:16px">
+                    Submitted successfully
+                </div>
+                <div class="text-center py-2 pb-5" style="font-family:Lato;font-size:20px">Thank you for your feedback!
+                </div>
             </div>
         </div>
     </div>
