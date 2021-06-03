@@ -1,5 +1,5 @@
 const fetch = require('../common/fetch')
-const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
+const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getBrowserInfo, getDeviceInfo } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE,CURRENT_MODULE,MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { showUserProfile } = require('../common/header');
@@ -55,6 +55,8 @@ function uploadToServer(cb) {
   fd.append('sentenceId', sunoIndiaValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
+  fd.append('device', getDeviceInfo());
+  fd.append('browser', getBrowserInfo());
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -264,7 +266,9 @@ function recordValidation(action) {
       sentenceId: sentenceId,
       state: localStorage.getItem('state_region') || "",
       country: localStorage.getItem('country') || "",
-      userName: speakerDetails && speakerDetails.userName
+      userName: speakerDetails && speakerDetails.userName,
+      device: getDeviceInfo(),
+      browser: getBrowserInfo()
     }),
     headers: {
       'Content-Type': 'application/json',
