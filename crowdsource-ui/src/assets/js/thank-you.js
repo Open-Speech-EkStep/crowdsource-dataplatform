@@ -347,9 +347,9 @@ function executeOnLoad() {
   );
 
   if (!localSpeakerDataParsed) {
-    location.href = "./home.html#start-record";
+    location.href = "./home.html";
   } else if (currentIndexInStorage < totalSentence) {
-    location.href = "./home.html#start-record";
+    location.href = "./home.html";
   } else {
     if(localSpeakerDataParsed.userName && localSpeakerDataParsed.userName.length > 0){
       $("#nav-user").removeClass("d-none");
