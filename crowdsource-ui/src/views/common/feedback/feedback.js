@@ -3,9 +3,14 @@ const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, FEEDBACK_CATEGORY, O
 const checkGivingFeedbackFor = () => {
         const currentModule = localStorage.getItem(CURRENT_MODULE);
         document.querySelectorAll('input[name="moduleSelectRadio"]').forEach((component) => {
-            if(component.value === MODULE[currentModule].value)
-            {
-                component.checked = true;
+            try{
+                if(component.value === MODULE[currentModule].value)
+                {
+                    component.checked = true;
+                }
+            } catch(error){
+                console.log(error);
+                document.querySelector('#others_id').checked = true;            
             }
         });
 };
@@ -50,7 +55,7 @@ const updateSelectPageWhenModuleChanges = () => {
             {
                 data.pages.forEach((item) => {
                     $("#select_page_id").append($('<option>', {value: item, text: item}));
-                });
+                });   
             }
         });
     });
@@ -61,6 +66,15 @@ const updateSelectPageWhenModuleChanges = () => {
             data.pages.forEach((item) => {
                 $("#select_page_id").append($('<option>', {value: item, text: item}));
             });
+
+            try { 
+                const page = $('#target_page').val();
+                console.log('page value: ' + page); 
+                $("#select_page_id").find('option[value="' + page + '"]').attr("selected", "selected");
+               
+            } catch (error) {
+                console.log('Page detection error: ' + error);  
+            }
         }
     });
 };
@@ -98,13 +112,15 @@ const handleFeedbackSubmit = () => {
         }
     });
 
-    if(category === 'category')
-    {
+    if(category === 'category'){
         if($("#feedback_description").val().length > 0)
            feedback_description = $("#feedback_description").val('');
         
         category = '';
     } 
+    if($("#feedback_description").val().length === 0){
+        category = '';
+    }
 
     fd.append('feedback', feedback_description);
     fd.append('category', category);

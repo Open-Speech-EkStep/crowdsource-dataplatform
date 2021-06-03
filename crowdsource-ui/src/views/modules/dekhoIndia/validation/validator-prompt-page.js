@@ -6,7 +6,7 @@ const { isKeyboardExtensionPresent } = require('../common/common');
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { cdn_url } = require('../common/env-api');
-
+const { initializeFeedbackModal } = require('../common/feedback');
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
@@ -422,6 +422,7 @@ let selectedReportVal = '';
 $(document).ready(() => {
   localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  initializeFeedbackModal();
   setFooterPosition();
   showKeyboard(contributionLanguage.toLowerCase());
   hideElement($('#keyboardBox'));
