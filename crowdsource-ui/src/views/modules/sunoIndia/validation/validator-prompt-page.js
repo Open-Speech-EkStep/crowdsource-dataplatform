@@ -3,7 +3,7 @@ const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLoca
 const {CONTRIBUTION_LANGUAGE,CURRENT_MODULE,MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { showUserProfile } = require('../common/header');
-const { isKeyboardExtensionPresent,isMobileDevice } = require('../common/common');
+const { isKeyboardExtensionPresent,isMobileDevice,showOrHideExtensionCloseBtn } = require('../common/common');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { cdn_url } = require('../common/env-api');
 const {initializeFeedbackModal} = require('../common/feedback');
@@ -486,6 +486,7 @@ function showThankYou() {
 
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+  hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#virtualKeyBoardBtn'));
   hideElement($(audioPlayerBtn))
@@ -536,6 +537,7 @@ let selectedReportVal = '';
 
 
 const initializeComponent = function () {
+  showOrHideExtensionCloseBtn();
   hideElement($('#virtualKeyBoardBtn'));
   const totalItems = sunoIndiaValidator.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
@@ -584,6 +586,7 @@ if(isMobileView){
 }
 
 $(document).ready(() => {
+  showOrHideExtensionCloseBtn();
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
   initializeFeedbackModal();
   detectDevice();
