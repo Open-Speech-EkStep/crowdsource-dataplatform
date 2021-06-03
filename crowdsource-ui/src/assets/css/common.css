@@ -285,6 +285,10 @@ body {
 
   @media (max-width: 700px) {
 
+    #content-wrapper #btn-nav{
+      padding-top: 8px !important;
+    }
+
     .btn-custom-primary {
       min-width: 320px;
       max-width: 320px;
@@ -317,6 +321,10 @@ body {
     }
     .third {
       order: 2;
+    }
+
+    .suno #report_btn {
+      margin-right: 1rem !important;
     }
 }
 
