@@ -180,6 +180,7 @@ const initializeFeedbackModal = () => {
 
         $("#feedback_thanku_close_btn").click(() => {
             $("#feedback_thanku_modal").modal("hide");
+            $(".modal-backdrop").removeClass("show").removeClass("modal-backdrop");
         });
     });
     updateOpinionSVGColor();
