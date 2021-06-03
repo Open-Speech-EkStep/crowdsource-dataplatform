@@ -487,7 +487,9 @@ function executeOnLoad() {
 }
 
 $(document).ready(() => {
-  if(isMobileDevice()){
+  const browser = getBrowserInfo();
+  const isNotChrome = !browser.includes('Chrome');
+  if(isMobileDevice() || isNotChrome){
     hideElement($('#extension-bar'));
   } else {
     showOrHideExtensionCloseBtn();
