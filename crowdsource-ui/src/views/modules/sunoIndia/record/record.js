@@ -15,7 +15,7 @@ const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require(
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {showUserProfile} = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
 const {initializeFeedbackModal} = require('../common/feedback')
 const sunoCountKey = 'sunoCount';
@@ -636,6 +636,7 @@ $(document).ready(() => {
   hideElement($('#keyboardBox'));
   initializeFeedbackModal();
   getLocaleString().then(() => {
+    showOrHideExtensionCloseBtn();
     executeOnLoad();
   }).catch(() => {
     executeOnLoad();
