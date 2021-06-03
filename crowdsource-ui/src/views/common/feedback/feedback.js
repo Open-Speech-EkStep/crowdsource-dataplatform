@@ -1,4 +1,4 @@
-const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, FEEDBACK_CATEGORY, OPINION_RATING_MAPPING} = require('./constants');
+const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, FEEDBACK_CATEGORY, OPINION_RATING_MAPPING, ALL_LANGUAGES} = require('./constants');
 const fetch = require('./fetch')
 
 const checkGivingFeedbackFor = () => {
@@ -106,6 +106,14 @@ const handleFeedbackSubmit = () => {
     var rating;
     var category = $("#category_id").val();
     var feedback_description = $("#feedback_description").val();
+    var language = localStorage.getItem("contributionLanguage");
+
+    if(language === null){
+        ALL_LANGUAGES.forEach((lang) => {
+            if(lang.id === localStorage.getItem("i18n")) { language = lang.value; }});
+    }
+        
+
     const fd = new FormData();
     OPINION_RATING_MAPPING.forEach((op) => {
         if(op.opinion === $('input[name = "opinionRadio"]:checked').val()){
@@ -125,7 +133,7 @@ const handleFeedbackSubmit = () => {
 
     fd.append('feedback', feedback_description);
     fd.append('category', category);
-    fd.append('language', localStorage.getItem("contributionLanguage"));
+    fd.append('language', language);
     fd.append('module', $('input[name = "moduleSelectRadio"]:checked').val());
     fd.append('target_page', $("#select_page_id").val());
     fd.append('opinion_rating', rating);
