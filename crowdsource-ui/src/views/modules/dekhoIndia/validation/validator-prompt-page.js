@@ -2,7 +2,7 @@ const fetch = require('../common/fetch')
 const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn } = require('../common/common');
+const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice } = require('../common/common');
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { cdn_url } = require('../common/env-api');
@@ -422,7 +422,11 @@ const getLocationInfo = () => {
 
 let selectedReportVal = '';
 $(document).ready(() => {
-  showOrHideExtensionCloseBtn();
+  if(isMobileDevice()){
+    hideElement($('#extension-bar'));
+  } else {
+    showOrHideExtensionCloseBtn();
+  }
   localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   initializeFeedbackModal();

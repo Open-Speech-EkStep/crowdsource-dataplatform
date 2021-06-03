@@ -633,11 +633,15 @@ if(isMobileView){
 }
 
 $(document).ready(() => {
+  if(isMobileDevice()){
+    hideElement($('#extension-bar'));
+  } else {
+    showOrHideExtensionCloseBtn();
+  }
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
   hideElement($('#keyboardBox'));
   initializeFeedbackModal();
   getLocaleString().then(() => {
-    showOrHideExtensionCloseBtn();
     executeOnLoad();
   }).catch(() => {
     executeOnLoad();
