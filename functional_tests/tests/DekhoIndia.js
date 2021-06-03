@@ -110,8 +110,9 @@ step("User clicks on <arg0> he should see thank you page and should be able to s
 });
 
 step("User should see add extension and watch video link", async function() {
+	await taiko.waitFor(1000)
 	assert.ok(await button('Install Now').exists())
-	assert.ok(await link('Watch the video').exists())
+	assert.ok(await link({id:"extension_video_button"}).exists());
 });
 
 step("Clicking add extension link should redirect to <url>", async function(url) {
@@ -127,7 +128,7 @@ step("Clicking add extension link should redirect to <url>", async function(url)
 step("Clicking watch video link should open video", async function() {
 	assert.ok(await link('Watch the video').exists())
 	await click(link("Watch the video"))
-	taiko.waitFor(100);
+	taiko.waitFor(2000);
 	assert.ok(await taiko.$("#extension_video").exists());
 	assert.ok(await taiko.$("#extension_video_close_btn").exists());
 	await click(taiko.$("#extension_video_close_btn"));
