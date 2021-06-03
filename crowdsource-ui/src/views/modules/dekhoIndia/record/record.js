@@ -359,6 +359,7 @@ function showThankYou() {
 
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+  hideElement($('#extension-bar'));
   hideElement($('#textarea-row'));
   hideElement($('#virtualKeyBoardBtn'));
   hideElement($('#audio-row'))
