@@ -488,13 +488,17 @@ function executeOnLoad() {
 }
 
 $(document).ready(() => {
+  if(isMobileDevice()){
+    hideElement($('#extension-bar'));
+  } else {
+    showOrHideExtensionCloseBtn();
+  }
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   const translationLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   initializeFeedbackModal();
   showKeyboard(translationLanguage.toLowerCase(), enableCancelButton, disableCancelButton);
   hideElement($('#keyboardBox'));
   getLocaleString().then(() => {
-    showOrHideExtensionCloseBtn();
     executeOnLoad();
   }).catch(() => {
     executeOnLoad();
