@@ -268,11 +268,12 @@ describe('middleware test', function () {
 
         });
 
-        test('should return 400 if category is empty but feedback is not empty',  ()  => {
+        test('should call next() once if category is empty but feedback is not empty',  ()  => {
             const req = { body: {category: "", feedback: testFeedback, language: motherTongue, 
                 module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
-            expect(res.send).toHaveBeenCalledTimes(1);
+            expect(nextSpy).toHaveBeenCalledTimes(1);
+            expect(res.send).toHaveBeenCalledTimes(0);
         });
 
         test('should return 400 if module is empty', () => {
