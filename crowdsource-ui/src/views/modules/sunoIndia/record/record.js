@@ -15,7 +15,7 @@ const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require(
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {showUserProfile} = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
 const {initializeFeedbackModal} = require('../common/feedback')
 const sunoCountKey = 'sunoCount';
@@ -396,6 +396,7 @@ function showThankYou() {
 
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
+  hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#audio-row'))
   hideElement($('#virtualKeyBoardBtn'));
@@ -636,6 +637,7 @@ $(document).ready(() => {
   hideElement($('#keyboardBox'));
   initializeFeedbackModal();
   getLocaleString().then(() => {
+    showOrHideExtensionCloseBtn();
     executeOnLoad();
   }).catch(() => {
     executeOnLoad();
