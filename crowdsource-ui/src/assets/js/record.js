@@ -11,6 +11,27 @@ const countKey = 'count';
 let currentIndex;
 let localeStrings;
 
+const hideElement = function (element){
+    element.addClass('d-none');
+}
+
+const showElement = function (element){
+    element.removeClass('d-none');
+}
+
+function showNoSentencesMessage() {
+    $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+    hideElement($('#functional-row'));
+    showElement($('#no-sentences-row'))
+    showElement($('#page-content'))
+
+    hideElement($('#validation-instruction-modal'))
+    hideElement($('#report_btn'));
+    hideElement($("#test-mic-speakers"));
+    $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
+}
+
+
 function getValue(number, maxValue) {
     return number < 0
         ? 0
@@ -624,12 +645,17 @@ function executeOnLoad() {
             })
                 .then((data) => {
                     if (!data.ok) {
+                        showNoSentencesMessage();
                         throw Error(data.statusText || 'HTTP error');
                     } else {
                         return data.json();
                     }
                 })
                 .then((sentenceData) => {
+                    if (sentenceData.data.length === 0) {
+                        showNoSentencesMessage();
+                        return;
+                    }
                     if (!isExistingUser) {
                         //$instructionModal.modal('show');
                         $validationInstructionModal.removeClass("d-none");
