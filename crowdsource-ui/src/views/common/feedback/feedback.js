@@ -1,4 +1,5 @@
-const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, FEEDBACK_CATEGORY, OPINION_RATING_MAPPING} = require('./constants.js');
+const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, FEEDBACK_CATEGORY, OPINION_RATING_MAPPING} = require('./constants');
+const fetch = require('./fetch')
 
 const checkGivingFeedbackFor = () => {
         const currentModule = localStorage.getItem(CURRENT_MODULE);
