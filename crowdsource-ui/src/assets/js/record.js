@@ -1,5 +1,5 @@
 const fetch = require('./fetch')
-const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording } = require('./utils');
+const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo } = require('./utils');
 const { LOCALE_STRINGS } = require('./constants');
 
 const speakerDetailsKey = 'speakerDetails';
@@ -165,17 +165,11 @@ const initialize = () => {
         if (duration < 2) {
             // $nextBtnToolTip.tooltip('enable');
             $nextBtn.prop('disabled', true).addClass('point-none');
-            $nextBtn.addClass('btn-secondary');
-            $nextBtn.removeClass('btn-primary');
-            $nextBtn.css('opacity',"0.3");
             $audioSmallError.removeClass('d-none');
             return false;
         } else {
             // $nextBtnToolTip.tooltip('disable');
             $nextBtn.removeAttr('disabled').removeClass('point-none');
-            $nextBtn.removeClass('btn-secondary');
-            $nextBtn.addClass('btn-primary');
-            $nextBtn.css('opacity',"1");
             $audioSmallError.addClass('d-none');
             return true;
         }
@@ -200,9 +194,6 @@ const initialize = () => {
                 $startRecordBtn.addClass('d-none');
                 $skipBtn.prop('disabled', true);
                 $nextBtn.prop('disabled', true);
-                $nextBtn.addClass('btn-secondary');
-                $nextBtn.removeClass('btn-primary');
-                $nextBtn.css('opacity',"0.3");
                 $startRecordRow.removeClass('d-none');
                 $stopRecordBtn.removeClass('d-none');
                 $recordingRow.removeClass('d-none');
@@ -313,7 +304,7 @@ const initialize = () => {
     })
 
     const onHover = function (btn){
-        btn.css('background-color','rgba(0, 123, 255, 0.3)');
+        btn.css('background-color','rgba(0, 123, 255, 0.1)');
     }
 
     const afterHover = function (btn){
@@ -377,9 +368,6 @@ const initialize = () => {
         $audioPlayer.addClass('d-none');
         $player.trigger('pause');
         $nextBtn.prop('disabled', true);
-        $nextBtn.addClass('btn-secondary');
-        $nextBtn.removeClass('btn-primary');
-        $nextBtn.css('opacity',"0.3");
         $reRecordBtn.addClass('d-none');
         $("#straight-line-row").removeClass('d-none');
         $startRecordRow.removeClass('d-none');
@@ -445,6 +433,8 @@ const initialize = () => {
         fd.append('state', localStorage.getItem('state_region') || "");
         fd.append('country', localStorage.getItem('country') || "");
         fd.append('audioDuration', crowdSource.audioDuration);
+        fd.append('device', getDeviceInfo());
+        fd.append('browser', getBrowserInfo());
         fetch('/store', {
             method: 'POST',
             credentials: 'include',

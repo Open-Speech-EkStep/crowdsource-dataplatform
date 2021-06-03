@@ -41,7 +41,7 @@ afterSuite(async () => {
 //     return await taiko.screenshot({ encoding: 'base64' });
 // };
 
-step("Open BoloIndia", async () => {
+step("Open Website", async () => {
     await taiko.waitFor(500)
     await goto(testUrl, {waitForEvents:['loadEventFired']});
     await taiko.waitFor(500)

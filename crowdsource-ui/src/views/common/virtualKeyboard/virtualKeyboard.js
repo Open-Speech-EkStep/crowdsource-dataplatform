@@ -40,21 +40,12 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
       if($cancelButton) {
         $cancelButton.removeAttr('disabled');
       }
-      if (!isMobileDevice() || currentModule != "suno") {
-        const children = $submitEditButton.children().children();
-        children[0].setAttribute("fill", '#007BFF');
-      }
-
     }
     else if(!isLanguage){
       setTimeout(() => {
         $("#wrong-language").removeClass("d-none");
       }, 200);
         $submitEditButton.attr('disabled', true);
-        if (!isMobileDevice() || currentModule != "suno") {
-        const children = $submitEditButton.children().children();
-        children[0].setAttribute("fill", '#D7D7D7');
-        }
         setTimeout(() => {
           $("#wrong-language").addClass("d-none");
         }, 2000);
@@ -65,10 +56,6 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
       if($cancelButton) {
         $cancelButton.attr('disabled', true);
       }
-      if (!isMobileDevice() || currentModule != "suno") {
-        const children = $submitEditButton.children().children();
-        children[0].setAttribute("fill", '#D7D7D7');
-      }
     }
   });
 
@@ -76,8 +63,8 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
     document.querySelector(".edit-area").value = input;
     const isLanguage = input ? lngtype(input) : true;
     const currentModule = localStorage.getItem(CURRENT_MODULE);
-    const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
-    const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
+    const $submitEditButton =  $("#submit-edit-button");
+    const $cancelButton = $("#cancel-edit-button");
     localStorage.setItem("physicalKeyboard", false);
     if (input.length > 0 && isLanguage) {
       callBack1();
@@ -85,19 +72,11 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
         $cancelButton.removeAttr('disabled');
       }
       $submitEditButton.removeAttr('disabled');
-      if (!isMobileDevice() || currentModule != "suno") {
-        const children = $submitEditButton.children().children();
-        children[0].setAttribute("fill", '#007BFF');
-      }
     } else if(!isLanguage){
       setTimeout(() => {
         $("#wrong-language").removeClass("d-none");
       }, 200);
       $submitEditButton.attr('disabled', true);
-      if (!isMobileDevice() || currentModule != "suno") {
-        const children = $submitEditButton.children().children();
-        children[0].setAttribute("fill", '#D7D7D7');
-      }
         setTimeout(() => {
           $("#wrong-language").addClass("d-none");
         }, 2000);
@@ -108,10 +87,6 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
         $cancelButton.attr('disabled', true);
       }
       $submitEditButton.attr('disabled', true);
-      if (!isMobileDevice() || currentModule != "suno") {
-        const children = $submitEditButton.children().children();
-        children[0].setAttribute("fill", '#D7D7D7');
-      }
     }
   }
 

@@ -10,6 +10,9 @@
 .test-mic-speaker button {
   color: #666;
   background: #F6F6F6;
+  padding: 5px 8px;
+  height: 32px;
+  font-size: 14px;
 }
 .test-mic-speaker svg {
   margin-right: 5px;
@@ -95,5 +98,5 @@
 }
 
 .pr-10 {
-  padding-right: 10px !important;
+  padding-right: 8px !important;
 }

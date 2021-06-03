@@ -1,5 +1,5 @@
 const fetch = require('../common/fetch')
-const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording } = require('../common/utils');
+const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getBrowserInfo, getDeviceInfo } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE,CURRENT_MODULE,MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { showUserProfile } = require('../common/header');
@@ -55,6 +55,8 @@ function uploadToServer(cb) {
   fd.append('sentenceId', sunoIndiaValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
+  fd.append('device', getDeviceInfo());
+  fd.append('browser', getBrowserInfo());
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -155,14 +157,14 @@ const setAudioPlayer = function () {
   }
 
   function enableValidation() {
-    const likeButton = isMobileDevice() ? $("#like_button_mob") : $("#like_button");
-    const needChangeButton = isMobileDevice() ? $("#need_change_mob") : $("#need_change");
+    const likeButton = $("#like_button");
+    const needChangeButton = $("#need_change");
     enableButton(likeButton)
     enableButton(needChangeButton)
   }
 
   function enableNeedChangeBtn() {
-    const needChangeButton = isMobileDevice() ? $("#need_change_mob") : $("#need_change");
+    const needChangeButton = $("#need_change");
     enableButton(needChangeButton)
   }
 }
@@ -211,25 +213,14 @@ function getNextSentence() {
   }
 }
 
-const updateDecisionButton = (button, colors) => {
-  if(!isMobileDevice()) {
-    const children = button.children().children();
-    children[0].setAttribute("fill", colors[0]);
-    children[1].setAttribute("fill", colors[1]);
-    children[2].setAttribute("fill", colors[2]);
-  }
-}
-
 function disableButton(button) {
   button.children().attr("opacity", "50%");
   button.attr("disabled", "disabled");
 }
 
 function disableValidation() {
-  const needChangeButton = isMobileDevice() ? $("#need_change_mob") : $("#need_change");
-  const likeButton = isMobileDevice() ? $("#like_button_mob") : $("#like_button");
-  updateDecisionButton(needChangeButton, ["white", "#007BFF", "#343A40"]);
-  updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
+  const needChangeButton = $("#need_change");
+  const likeButton =  $("#like_button");
   disableButton(likeButton)
   disableButton(needChangeButton)
 }
@@ -264,7 +255,9 @@ function recordValidation(action) {
       sentenceId: sentenceId,
       state: localStorage.getItem('state_region') || "",
       country: localStorage.getItem('country') || "",
-      userName: speakerDetails && speakerDetails.userName
+      userName: speakerDetails && speakerDetails.userName,
+      device: getDeviceInfo(),
+      browser: getBrowserInfo()
     }),
     headers: {
       'Content-Type': 'application/json',
@@ -308,31 +301,6 @@ function addListeners() {
   // const dislikeButton = $("#dislike_button");
   const $skipButton = $(skipButton);
 
-  likeButton.hover(() => {
-      updateDecisionButton(likeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-    },
-    () => {
-      updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
-    });
-
-  needChangeButton.hover(() => {
-      updateDecisionButton(needChangeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-      $("#sentences-row .prompt").addClass('hover-edit');
-    },
-    () => {
-      updateDecisionButton(needChangeButton, ["white", "#007BFF", "#343A40"]);
-      $("#sentences-row .prompt").removeClass('hover-edit');
-    });
-
-  needChangeButton.mousedown(() => {
-    updateDecisionButton(needChangeButton, ["#007BFF", "white", "white"]);
-  });
-
-  likeButton.mousedown(() => {
-    updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
-  });
-
-
   needChangeButton.on('click',()=>{
     showElement($('#virtualKeyBoardBtn'));
     hideElement($('#sentences-row'));
@@ -356,10 +324,6 @@ function addListeners() {
     hideElement($('#virtualKeyBoardBtn'));
     const $submitEditButton = $submitButton;
     $submitEditButton.attr('disabled',true);
-    if(!isMobileDevice()) {
-      const children = $submitEditButton.children().children();
-      children[0].setAttribute("fill", '#D7D7D7');
-    }
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
     setInput("");
@@ -557,20 +521,6 @@ const initializeComponent = function () {
 }
 
 const detectDevice = () => {
-  const isMobileView = isMobileDevice();
-if(isMobileView){
-    // true for mobile device
-    playStr = "#play_mob";
-    replayStr = "#replay_mob";
-    pauseStr = "#pause_mob";
-    resumeStr = "#resume_mob";
-    audioPlayerBtn = "#audio-player-btn_mob";
-     needChange = "#need_change_mob";
- submitButton ="#submit-edit-button_mob";
- cancelButton = "#cancel-edit-button_mob";
- likeBtn = "#like_button_mob";
- skipButton = "#skip_button_mob"
-  }else{
     // false for not mobile device
     playStr = "#play";
     replayStr = "#replay";
@@ -582,7 +532,6 @@ if(isMobileView){
     cancelButton = "#cancel-edit-button";
     likeBtn = "#like_button";
     skipButton = "#skip_button"
-  }
 }
 
 $(document).ready(() => {

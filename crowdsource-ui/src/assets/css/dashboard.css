@@ -26,10 +26,6 @@ body.modal-open .supreme-container {
     opacity: 0.2;
 }
 
-.modal-backdrop {
-    background-color: white;
-}
-
 .supreme-container .btn-outline-primary {
     -webkit-appearance: none;
     -moz-appearance: none;

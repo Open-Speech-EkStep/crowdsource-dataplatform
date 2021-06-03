@@ -5,8 +5,15 @@
 
 .back-btn a {
     color: #959595;
-   
-    font-size: 20px;
+    font-size: 16px;
+}
+
+.back-btn a .material-icon {
+  padding-top: 4px;
+}
+
+.back-btn a .back-text {
+  margin-left: 8px;
 }
 
 .btn-link:hover {
@@ -15,6 +22,11 @@
 
 
 @media (max-width: 767px) {
+
+
+.back-btn a .material-icons {
+  padding-top: 7px !important;
+}
     .mobile-view {
       display: block;
     }

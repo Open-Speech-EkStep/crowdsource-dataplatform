@@ -8,7 +8,9 @@ const {
   hideElement,
   fetchLocationInfo,
   getLocaleString,
-  reportSentenceOrRecording
+  reportSentenceOrRecording,
+  getBrowserInfo,
+  getDeviceInfo
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
@@ -99,6 +101,8 @@ function uploadToServer(cb) {
   fd.append('sentenceId', dekhoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
+  fd.append('device', getDeviceInfo());
+  fd.append('browser', getBrowserInfo());
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -141,14 +145,6 @@ function getNextSentence() {
   }
 }
 
-const updateDecisionButton = (button, colors) => {
-  const children = button.children().children();
-  children[0].setAttribute("fill", colors[0]);
-  children[1].setAttribute("fill", colors[1]);
-  children[2].setAttribute("fill", colors[2]);
-}
-
-
 function disableButton(button) {
   button.children().attr("opacity", "50%");
   button.attr("disabled", "disabled");
@@ -166,7 +162,9 @@ function skipValidation(action) {
     body: JSON.stringify({
       sentenceId: sentenceId,
       state: localStorage.getItem('state_region') || "",
-      country: localStorage.getItem('country') || ""
+      country: localStorage.getItem('country') || "",
+      device: getDeviceInfo(),
+      browser: getBrowserInfo()
     }),
     headers: {
       'Content-Type': 'application/json',
@@ -200,31 +198,6 @@ function addListeners() {
   const $skipButton = $('#skip_button');
   const likeButton = $("#like_button")
 
-  likeButton.hover(() => {
-      updateDecisionButton(likeButton, ["#bfddf5", "", "#007BFF"]);
-    },
-    () => {
-      updateDecisionButton(likeButton, ["white", "", "#343A40"]);
-    });
-
-  needChangeButton.hover(() => {
-      updateDecisionButton(needChangeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-      $("#textarea-row .prompt").addClass('hover-edit');
-    },
-    () => {
-      updateDecisionButton(needChangeButton, ["white", "#007BFF", "#343A40"]);
-      $("#textarea-row .prompt").removeClass('hover-edit');
-    });
-
-  needChangeButton.mousedown(() => {
-    updateDecisionButton(needChangeButton, ["#007BFF", "white", "white"]);
-  });
-
-  likeButton.mousedown(() => {
-    updateDecisionButton(likeButton, ["#007BFF", "", "white"]);
-  });
-
-
   needChangeButton.on('click', () => {
     hideElement($('#textarea-row'));
     openEditor();
@@ -249,8 +222,6 @@ function addListeners() {
     showElement($('#progress-row'))
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
-    const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#D7D7D7');
     closeEditor();
   })
 
@@ -265,8 +236,6 @@ function addListeners() {
     $("#cancel-edit-button").attr("disabled", true);
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
-    const children = $submitEditButton.children().children();
-    children[0].setAttribute("fill", '#D7D7D7');
     showElement($('#progress-row'))
     dekhoIndia.editedText = $("#edit").val();
     uploadToServer();

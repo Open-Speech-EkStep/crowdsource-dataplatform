@@ -3,7 +3,7 @@ const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
 const { showUserProfile } = require('../../../build/js/common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
-const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition} = require('./utils');
+const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition, getDeviceInfo, getBrowserInfo} = require('./utils');
 const { cdn_url } = require('./env-api');
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
@@ -229,8 +229,6 @@ function disableButton(button) {
 function disableValidation() {
     const dislikeButton = $("#dislike_button");
     const likeButton = $("#like_button");
-    updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
-    updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
     disableButton(likeButton)
     disableButton(dislikeButton)
 }
@@ -268,7 +266,9 @@ function recordValidation(action) {
             sentenceId: sentenceId,
             state: localStorage.getItem('state_region') || "",
             country: localStorage.getItem('country') || "",
-            userName: speakerDetails && speakerDetails.userName
+            userName: speakerDetails && speakerDetails.userName,
+            device: getDeviceInfo(),
+            browser: getBrowserInfo()
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -297,28 +297,6 @@ function addListeners() {
     const likeButton = $("#like_button");
     const dislikeButton = $("#dislike_button");
     const $skipButton = $('#skip_button');
-
-    likeButton.hover(() => {
-        updateDecisionButton(likeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-    },
-        () => {
-            updateDecisionButton(likeButton, ["white", "#007BFF", "#343A40"]);
-        });
-
-    dislikeButton.hover(() => {
-        updateDecisionButton(dislikeButton, ["#bfddf5", "#007BFF", "#007BFF"]);
-    },
-        () => {
-            updateDecisionButton(dislikeButton, ["white", "#007BFF", "#343A40"]);
-        });
-
-    dislikeButton.mousedown(() => {
-        updateDecisionButton(dislikeButton, ["#007BFF", "white", "white"]);
-    });
-
-    likeButton.mousedown(() => {
-        updateDecisionButton(likeButton, ["#007BFF", "white", "white"]);
-    });
 
     dislikeButton.on('click', () => {
         if($('#pause').hasClass('d-none')){

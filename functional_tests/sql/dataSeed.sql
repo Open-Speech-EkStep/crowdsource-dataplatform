@@ -108,7 +108,6 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
             "language": "Kannada"
             }'::jsonb, true, now(), 'completed' from dataset_row where type='asr' and media ->> 'language'='Kannada' and state='contributed';
 
-
 --OCR data
 
 insert into dataset_row 
@@ -205,7 +204,3 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
             "type": "text",
             "language": "Kannada"
             }'::jsonb, true, now(), 'completed' from dataset_row where type='ocr' and media ->> 'language'='Kannada' and state='contributed';
-
-
-
-
