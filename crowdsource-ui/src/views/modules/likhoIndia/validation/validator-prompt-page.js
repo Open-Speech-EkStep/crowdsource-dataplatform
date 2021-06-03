@@ -6,7 +6,9 @@ const {
   showElement,
   hideElement,
   fetchLocationInfo,
-  reportSentenceOrRecording
+  reportSentenceOrRecording,
+  getDeviceInfo,
+  getBrowserInfo
 } = require('../common/utils');
 const {LIKHO_FROM_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
@@ -96,6 +98,8 @@ function uploadToServer(cb) {
   fd.append('sentenceId', likhoIndiaValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
+  fd.append('device', getDeviceInfo());
+  fd.append('browser', getBrowserInfo());
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -181,7 +185,9 @@ function skipValidation(action) {
       sentenceId: sentenceId,
       state: localStorage.getItem('state_region') || "",
       country: localStorage.getItem('country') || "",
-      userName: speakerDetails && speakerDetails.userName
+      userName: speakerDetails && speakerDetails.userName,
+      device: getDeviceInfo(),
+      browser: getBrowserInfo()
     }),
     headers: {
       'Content-Type': 'application/json',

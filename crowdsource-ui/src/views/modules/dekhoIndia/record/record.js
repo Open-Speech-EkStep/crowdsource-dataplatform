@@ -8,7 +8,9 @@ const {
   hideElement,
   fetchLocationInfo,
   getLocaleString,
-  reportSentenceOrRecording
+  reportSentenceOrRecording,
+  getBrowserInfo,
+  getDeviceInfo
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
@@ -99,6 +101,8 @@ function uploadToServer(cb) {
   fd.append('sentenceId', dekhoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
+  fd.append('device', getDeviceInfo());
+  fd.append('browser', getBrowserInfo());
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -166,7 +170,9 @@ function skipValidation(action) {
     body: JSON.stringify({
       sentenceId: sentenceId,
       state: localStorage.getItem('state_region') || "",
-      country: localStorage.getItem('country') || ""
+      country: localStorage.getItem('country') || "",
+      device: getDeviceInfo(),
+      browser: getBrowserInfo()
     }),
     headers: {
       'Content-Type': 'application/json',

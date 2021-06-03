@@ -3,7 +3,7 @@ const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
 const { showUserProfile } = require('../../../build/js/common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
-const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition} = require('./utils');
+const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition, getDeviceInfo, getBrowserInfo} = require('./utils');
 const { cdn_url } = require('./env-api');
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
@@ -268,7 +268,9 @@ function recordValidation(action) {
             sentenceId: sentenceId,
             state: localStorage.getItem('state_region') || "",
             country: localStorage.getItem('country') || "",
-            userName: speakerDetails && speakerDetails.userName
+            userName: speakerDetails && speakerDetails.userName,
+            device: getDeviceInfo(),
+            browser: getBrowserInfo()
         }),
         headers: {
             'Content-Type': 'application/json',
