@@ -15,7 +15,7 @@ const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require(
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {showUserProfile} = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
 const {initializeFeedbackModal} = require('../common/feedback')
 const sunoCountKey = 'sunoCount';
@@ -55,6 +55,8 @@ function uploadToServer(cb) {
   fd.append('sentenceId', sunoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
+  fd.append('device', getDeviceInfo());
+  fd.append('browser', getBrowserInfo());
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -388,6 +390,7 @@ function showThankYou() {
 
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
+  hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#audio-row'))
   hideElement($('#virtualKeyBoardBtn'));
@@ -526,7 +529,7 @@ function executeOnLoad() {
     });
 
     if (!localSpeakerDataParsed) {
-      location.href = './home.html#speaker-details';
+      location.href = './home.html';
       return;
     }
     showUserProfile(localSpeakerDataParsed.userName)
@@ -614,6 +617,11 @@ const detectDevice = () => {
 }
 
 $(document).ready(() => {
+  if(isMobileDevice()){
+    hideElement($('#extension-bar'));
+  } else {
+    showOrHideExtensionCloseBtn();
+  }
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
   hideElement($('#keyboardBox'));
   initializeFeedbackModal();

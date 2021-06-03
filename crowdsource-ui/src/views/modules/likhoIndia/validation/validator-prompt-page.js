@@ -6,11 +6,13 @@ const {
   showElement,
   hideElement,
   fetchLocationInfo,
-  reportSentenceOrRecording
+  reportSentenceOrRecording,
+  getDeviceInfo,
+  getBrowserInfo
 } = require('../common/utils');
 const {LIKHO_FROM_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent} = require('../common/common');
+const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {showUserProfile} = require('../common/header');
 
@@ -63,6 +65,7 @@ function getCurrentIndex(lastIndex) {
 
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem(LIKHO_FROM_LANGUAGE));
+  hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#translation-row'));
   hideElement($('#virtualKeyBoardBtn'));
@@ -95,6 +98,8 @@ function uploadToServer(cb) {
   fd.append('sentenceId', likhoIndiaValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
+  fd.append('device', getDeviceInfo());
+  fd.append('browser', getBrowserInfo());
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -173,7 +178,9 @@ function skipValidation(action) {
       sentenceId: sentenceId,
       state: localStorage.getItem('state_region') || "",
       country: localStorage.getItem('country') || "",
-      userName: speakerDetails && speakerDetails.userName
+      userName: speakerDetails && speakerDetails.userName,
+      device: getDeviceInfo(),
+      browser: getBrowserInfo()
     }),
     headers: {
       'Content-Type': 'application/json',
@@ -332,6 +339,7 @@ const setTranslation = function (translatedText) {
 
 
 const initializeComponent = () => {
+  showOrHideExtensionCloseBtn();
   hideElement($('#virtualKeyBoardBtn'));
   const totalItems = likhoIndiaValidator.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
@@ -360,6 +368,11 @@ const getLocationInfo = () => {
 
 let selectedReportVal = '';
 $(document).ready(() => {
+  if(isMobileDevice()){
+    hideElement($('#extension-bar'));
+  } else {
+    showOrHideExtensionCloseBtn();
+  }
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);

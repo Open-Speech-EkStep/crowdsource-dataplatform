@@ -8,12 +8,14 @@ const {
   hideElement,
   fetchLocationInfo,
   getLocaleString,
-  reportSentenceOrRecording
+  reportSentenceOrRecording,
+  getBrowserInfo,
+  getDeviceInfo
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showOrHideExtensionCloseBtn,isMobileDevice} = require('../common/common');
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 
@@ -99,6 +101,8 @@ function uploadToServer(cb) {
   fd.append('sentenceId', dekhoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
+  fd.append('device', getDeviceInfo());
+  fd.append('browser', getBrowserInfo());
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -158,7 +162,9 @@ function skipValidation(action) {
     body: JSON.stringify({
       sentenceId: sentenceId,
       state: localStorage.getItem('state_region') || "",
-      country: localStorage.getItem('country') || ""
+      country: localStorage.getItem('country') || "",
+      device: getDeviceInfo(),
+      browser: getBrowserInfo()
     }),
     headers: {
       'Content-Type': 'application/json',
@@ -322,6 +328,7 @@ function showThankYou() {
 
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+  hideElement($('#extension-bar'));
   hideElement($('#textarea-row'));
   hideElement($('#virtualKeyBoardBtn'));
   hideElement($('#audio-row'))
@@ -527,6 +534,11 @@ const executeOnLoad = function () {
 }
 
 $(document).ready(() => {
+  if(isMobileDevice()){
+    hideElement($('#extension-bar'));
+  } else {
+    showOrHideExtensionCloseBtn();
+  }
   localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
   initializeFeedbackModal();
   hideElement($('#keyboardBox'));

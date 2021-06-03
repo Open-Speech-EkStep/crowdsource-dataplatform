@@ -1,11 +1,17 @@
-const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, FEEDBACK_CATEGORY, OPINION_RATING_MAPPING} = require('./constants.js');
+const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, FEEDBACK_CATEGORY, OPINION_RATING_MAPPING, ALL_LANGUAGES} = require('./constants');
+const fetch = require('./fetch')
 
 const checkGivingFeedbackFor = () => {
         const currentModule = localStorage.getItem(CURRENT_MODULE);
         document.querySelectorAll('input[name="moduleSelectRadio"]').forEach((component) => {
-            if(component.value === MODULE[currentModule].value)
-            {
-                component.checked = true;
+            try{
+                if(component.value === MODULE[currentModule].value)
+                {
+                    component.checked = true;
+                }
+            } catch(error){
+                console.log(error);
+                document.querySelector('#others_id').checked = true;            
             }
         });
 };
@@ -50,7 +56,7 @@ const updateSelectPageWhenModuleChanges = () => {
             {
                 data.pages.forEach((item) => {
                     $("#select_page_id").append($('<option>', {value: item, text: item}));
-                });
+                });   
             }
         });
     });
@@ -61,6 +67,15 @@ const updateSelectPageWhenModuleChanges = () => {
             data.pages.forEach((item) => {
                 $("#select_page_id").append($('<option>', {value: item, text: item}));
             });
+
+            try { 
+                const page = $('#target_page').val();
+                console.log('page value: ' + page); 
+                $("#select_page_id").find('option[value="' + page + '"]').attr("selected", "selected");
+               
+            } catch (error) {
+                console.log('Page detection error: ' + error);  
+            }
         }
     });
 };
@@ -91,6 +106,14 @@ const handleFeedbackSubmit = () => {
     var rating;
     var category = $("#category_id").val();
     var feedback_description = $("#feedback_description").val();
+    var language = localStorage.getItem("contributionLanguage");
+
+    if(language === null){
+        ALL_LANGUAGES.forEach((lang) => {
+            if(lang.id === localStorage.getItem("i18n")) { language = lang.value; }});
+    }
+        
+
     const fd = new FormData();
     OPINION_RATING_MAPPING.forEach((op) => {
         if(op.opinion === $('input[name = "opinionRadio"]:checked').val()){
@@ -98,17 +121,19 @@ const handleFeedbackSubmit = () => {
         }
     });
 
-    if(category === 'category')
-    {
+    if(category === 'category'){
         if($("#feedback_description").val().length > 0)
            feedback_description = $("#feedback_description").val('');
         
         category = '';
     } 
+    if($("#feedback_description").val().length === 0){
+        category = '';
+    }
 
     fd.append('feedback', feedback_description);
     fd.append('category', category);
-    fd.append('language', localStorage.getItem("contributionLanguage"));
+    fd.append('language', language);
     fd.append('module', $('input[name = "moduleSelectRadio"]:checked').val());
     fd.append('target_page', $("#select_page_id").val());
     fd.append('opinion_rating', rating);
@@ -123,7 +148,8 @@ const handleFeedbackSubmit = () => {
     .then((response) => {
         if(response.statusCode === 200){
             $("#feedback_modal").modal("hide");
-            $("#feedback_thanku_modal").modal("show");        
+            $("#feedback_thanku_modal").modal("show");  
+            resetFeedback();      
         }
         else{
             alert('there is some error');
@@ -131,10 +157,24 @@ const handleFeedbackSubmit = () => {
     });
 };
 
+const resetFeedback = () => {
+    const opinion = document.querySelector('input[name="opinionRadio"]:checked');
+    const category = document.querySelector("#category_id option[value='category']");
+    const feedback = document.querySelector("#feedback_description");
+
+    if(category) category.selected = true;
+    feedback.value = '';
+    $(".opinion-label").find("path, polygon, circle").attr("stroke", "#818181");
+    if(opinion) opinion.checked = false;
+    $("#submit_btn").attr('disabled', true);
+    initializeFeedbackModal();
+}
 const initializeFeedbackModal = () => {
+    
     $(() => {
         $("#feedback_close_btn").click(() => {
             $("#feedback_modal").modal("hide");
+            resetFeedback();
         });
 
         $("#feedback_thanku_close_btn").click(() => {

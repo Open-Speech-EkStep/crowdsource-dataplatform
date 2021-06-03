@@ -1,4 +1,8 @@
 @media screen and (min-width: 1441px){
+    .display-6{
+        font-size: 30px;
+    }
+
     .home-badge-row img {
         width: 160px;
     }
@@ -41,6 +45,10 @@
 }
 
 @media screen and (max-width: 1440px) {
+    .display-6{
+        font-size: 30px;
+    }
+
     .home-badge-row img {
         width: 120px;
     }
@@ -83,6 +91,10 @@
 }
 
 @media screen and (max-width: 1280px){
+    .display-6{
+        font-size: 30px;
+    }
+
     .home-badge-row img {
         width: 120px;
     }
@@ -125,6 +137,10 @@
 }
 
 @media screen and (max-width: 1024px) {
+    .display-6{
+        font-size: 30px;
+    }
+
     .home-badge-row img {
         width: 160px;
     }
@@ -135,6 +151,10 @@
 }
 
 @media screen and (max-width: 991px) {
+    .display-6{
+      font-size: 30px;
+    }
+
     .home-badge-row img {
         width: 120px;
     }
@@ -180,6 +200,7 @@
 @media (max-width: 768px) {
     .home-badge-row img {
         width: 100px;
+        margin-top: 16px;
     }
 
     .home-badge-row  {
@@ -218,14 +239,12 @@
         background-position: bottom;
     }
 
-    .h4{
-        font-size: 16px;
-    }
 }
 
 @media screen and (max-width: 480px) {
     .home-badge-row img {
         width: 80px;
+        margin-top: 16px;
     }
 
     .home-badge-row  {
@@ -264,14 +283,12 @@
         background-position: bottom;
     }
 
-    .h4{
-        font-size: 16px;
-    }
 }
 
 @media screen and (max-width: 320px) {
     .home-badge-row img{
         width: 64px;
+        margin-top: 16px;
     }
 
     .persuade-quote  {
@@ -310,14 +327,12 @@
         background-position: bottom;
     }
 
-    .h4{
-        font-size: 16px;
-    }
 }
 
 @media screen and (max-width: 280px) {
     .home-badge-row img{
         width: 60px;
+        margin-top: 16px;
     }
 
     .home-badge-row  {
@@ -354,10 +369,6 @@
 
     .card4 {
         background-position: bottom;
-    }
-
-    .h4{
-        font-size: 16px;
     }
 }
 

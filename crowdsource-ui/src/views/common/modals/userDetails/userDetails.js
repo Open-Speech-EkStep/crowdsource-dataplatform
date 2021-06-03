@@ -21,6 +21,7 @@ function resetSpeakerDetails() {
 const testUserName = (val) => {
   const mobileRegex = /^[6-9]\d{9}$/;
   const emailRegex = /^\S+@\S+[\.][0-9a-z]+$/;
+  if(location.host.includes('uat'))return false;
   return mobileRegex.test(val) || emailRegex.test(val);
 };
 
@@ -152,6 +153,14 @@ const setStartRecordingBtnOnClick = function (url, module = '') {
     }
   });
 }
+
+$(document).ready(() => {
+  if (location.host.includes('uat')) {
+    document.getElementById("username").maxLength = 100;
+  } else {
+    document.getElementById("username").maxLength = 12;
+  }
+});
 
 module.exports = {
   testUserName,
