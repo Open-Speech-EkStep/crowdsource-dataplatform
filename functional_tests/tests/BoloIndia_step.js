@@ -37,13 +37,13 @@ afterSuite(async () => {
     await closeBrowser();
 });
 
-gauge.screenshotFn = async function () {
-    return await taiko.screenshot({ encoding: 'base64' });
-};
+// gauge.screenshotFn = async function () {
+//     return await taiko.screenshot({ encoding: 'base64' });
+// };
 
 step("Open Website", async () => {
     await taiko.waitFor(500)
-    await goto(testUrl, { navigationTimeout:30000});
+    await goto(testUrl, {waitForEvents:['loadEventFired']});
     await taiko.waitFor(500)
 });
 
