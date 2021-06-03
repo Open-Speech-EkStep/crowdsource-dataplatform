@@ -12,8 +12,8 @@ const {
 } = require('taiko');
 
 
-step("Select <SunoIndiaLink> from header", async function(SunoIndiaLink) {
-    
+step("Select <SunoIndiaLink> from header", async function(SunoIndiaLink) {    
+    await taiko.waitFor(1000);  
     assert.ok(await link(SunoIndiaLink).exists());
     await taiko.waitFor(500);  
     await click(SunoIndiaLink);
