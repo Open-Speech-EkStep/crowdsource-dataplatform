@@ -363,7 +363,7 @@ const handleSubmitFeedback = function () {
 }
 
 const initializeComponent = () => {
-  showOrHideExtensionCloseBtn();
+  // showOrHideExtensionCloseBtn();
     hideElement($('#virtualKeyBoardBtn'));
     const totalItems = dekhoIndiaValidator.sentences.length;
     currentIndex = getCurrentIndex(totalItems - 1);
@@ -392,7 +392,9 @@ const getLocationInfo = () => {
 
 let selectedReportVal = '';
 $(document).ready(() => {
-  if(isMobileDevice()){
+  const browser = getBrowserInfo();
+  const isNotChrome = !browser.includes('Chrome');
+  if(isMobileDevice() || isNotChrome){
     hideElement($('#extension-bar'));
   } else {
     showOrHideExtensionCloseBtn();

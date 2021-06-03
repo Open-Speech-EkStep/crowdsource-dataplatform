@@ -25,21 +25,12 @@ const changeLocale = function (locale) {
     }
     localStorage.setItem("i18n", locale);
     const module = localStorage.getItem(CURRENT_MODULE);
-    // if(module == 'home'){
-    //     location.href = `/${locale}/${currentPage}`;
-    // }else if(module === 'bolo' && currentPage != 'home.html'){
-    //     location.href = `/${locale}/${currentPage}`;
-    // }
-    if(module == 'bolo' && currentPage == "home.html"){
-        location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
-    }
-    else if(module == 'bolo' ||module == 'home' ){
+    if(module == 'home'){
         location.href = `/${locale}/${currentPage}`;
     }
     else {
         location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
     }
-    // location.href = `/${locale}/${currentPage}`;
 }
 
 function checkCookie() {

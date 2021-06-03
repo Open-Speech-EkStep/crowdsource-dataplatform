@@ -36,15 +36,6 @@
 * if a user enter username and click on Not you change user button , the field should be cleared
 * Close button should close the pop up and user should see Dekho India Home page
 
-## Validate add extension and watch video link
-* Select Contribution Language as "ଓଡିଆ"
-* Navigate to "Label" button and click "Label" button
-* Add "T User" Username
-* When user click on Lets Go Button, user should "not" see instructions to record
-* User should see add extension and watch video link
-* Clicking add extension link should redirect to "https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab"
-* Clicking watch video link should open video
-
 ## Validate Label card should be enabled when the data is not contributed for Odia language
 * Select Contribution Language as "ଓଡିଆ"
 * Check "Label" option should be "enabled" on Home page
