@@ -4,16 +4,28 @@ const platform = require('./platform')
 
 function getDeviceInfo() {
   const os = platform.os;
-  let info = os.family + " " + os.version;
+  let info = "";
+  if(os.family){
+    info = info + os.family;
+  }
+  if(os.version){
+    info = info + " "+ os.version;
+  }
   if (platform.product) {
       info = info + " " + platform.product;
   }
-  return info;
+  return info.trim();
 }
 
 function getBrowserInfo() {
-  let info = platform.name + " " + platform.version;
-  return info;
+  let info = "";
+  if(platform.name){
+    info = info + platform.name;
+  }
+  if(platform.version){
+    info = info + " "+ platform.version;
+  }
+  return info.trim();
 }
 
 const onHover = function (btn) {
