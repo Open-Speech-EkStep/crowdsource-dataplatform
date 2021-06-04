@@ -23,7 +23,7 @@ const convertIntoMB = (fileSizeInByte) => {
 const validateUserInputAndFile = function (req, res, next) {
     const speakerDetails = req.body.speakerDetails;
     const speakerDetailsJson = JSON.parse(speakerDetails);
-    const isInvalidParams = !(speakerDetailsJson.userName != undefined && speakerDetailsJson.userName.length <= MAX_LENGTH && !MOBILE_REGEX.test(speakerDetailsJson.userName) && !EMAIL_REGEX.test(speakerDetailsJson.userName));
+    const isInvalidParams = !(speakerDetailsJson.userName != undefined && speakerDetailsJson.userName.length <= MAX_LENGTH && !MOBILE_REGEX.test(speakerDetailsJson.userName));
 
     const MIN_INPUT_LENGTH = 2;
     const allLanguages = LANGUAGES.map(lang => lang.value)
@@ -68,8 +68,7 @@ const validateUserInfo = function (req, res, next) {
 
     const isValidType = (MEDIA_TYPES.includes(type));
 
-    if (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) ||
-        EMAIL_REGEX.test(userName) || !isValidType || !language) {
+    if (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || !isValidType || !language) {
         return res.status(400).send("Bad request");
     }
     next()
@@ -186,7 +185,7 @@ const validateUserInfoForProfanity = (req, res, next) => {
     if (!(req.params && req.params.type && MEDIA_TYPES.includes(req.params.type))) {
         return res.status(400).send("Invalid params");
     }
-    if (!req.query && !req.query.username && !EMAIL_REGEX.test(req.query.username)) {
+    if (!req.query && !req.query.username) {
         return res.status(400).send("Invalid username");
     }
     if(!validLanguages.includes(req.query.language)){
