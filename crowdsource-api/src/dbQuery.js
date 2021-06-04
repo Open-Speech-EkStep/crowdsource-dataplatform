@@ -168,7 +168,7 @@ const getAgeGroupsData = 'select data."age_group", count (*) from (select con."a
 
 const getGenderData = 'select data."gender", count (*) from (select con."gender" from dataset_row s inner join "contributions" cont on s."dataset_row_id" = cont."dataset_row_id" and "action"=\'completed\' inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."gender", con.user_name, con.contributor_identifier) as data group by data."gender";'
 
-const feedbackInsertion = 'Insert into feedbacks (feedback, category, language, module, target_page, opinion_rating) values ($1,$2,$3,$4,$5,$6);'
+const feedbackInsertion = 'Insert into feedbacks (email, feedback, category, language, module, target_page, opinion_rating) values ($1,$2,$3,$4,$5,$6,$7);'
 
 const getPathFromContribution = `select media ->> 'data' as path from contributions where contribution_id = $1;`
 
@@ -182,8 +182,8 @@ const markContributionReported = "update contributions set action='reported' whe
 
 const markMediaReported = `update dataset_row set state='reported' where "dataset_row_id"=$3 and (select count(distinct reported_by) from reports where source='contribution' and media_id=$3 group by media_id) >= (select value from configurations where config_name='sentence_report_limit');`;
 
-const markContributionSkippedQuery = `insert into contributions (action, dataset_row_id, date, contributed_by, media)
-select 'skipped', $2, now(), $1, json_build_object('language', $3);`;
+const markContributionSkippedQuery = `insert into contributions (action, dataset_row_id, date, contributed_by, media, state_region, country, device, browser)
+select 'skipped', $2, now(), $1, json_build_object('language', $3), $4, $5, $6, $7;`;
 
 const rewardsInfoQuery = `select milestone as contributions, grade as badge from reward_milestones mil
 inner join reward_catalogue rew on mil.reward_catalogue_id=rew.id

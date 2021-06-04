@@ -411,10 +411,15 @@ const initialize = () => {
 
     function markContributionSkipped() {
         const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-
+        const state_region = localStorage.getItem('state_region') || "";
+        const country = localStorage.getItem('country') || "";
         const reqObj = {
             sentenceId: crowdSource.sentences[currentIndex].dataset_row_id,
-            userName: speakerDetails.userName
+            userName: speakerDetails.userName,
+            device: getDeviceInfo(),
+            browser: getBrowserInfo(),
+            state_region: state_region,
+            country: country
         };
         fetch('/skip', {
             method: 'POST',

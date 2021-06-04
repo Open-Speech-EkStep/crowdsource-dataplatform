@@ -112,6 +112,7 @@ const setAudioPlayer = function () {
     hideElement($('#default_line'))
     playAudio();
     $("#edit").removeAttr("disabled");
+    $("#virtualKeyBoardBtn").removeAttr("disabled");
     $("#edit-text-suno").addClass("edit-text");
   });
 
@@ -219,11 +220,16 @@ showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancel
 function markContributionSkipped() {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-
+  const state_region = localStorage.getItem('state_region') || "";
+  const country = localStorage.getItem('country') || "";
   const reqObj = {
     sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
     userName: speakerDetails.userName,
-    language:contributionLanguage
+    language:contributionLanguage,
+    device: getDeviceInfo(),
+    browser: getBrowserInfo(),
+    state_region: state_region,
+    country: country
   };
   fetch('/skip', {
     method: 'POST',
@@ -283,6 +289,7 @@ function addListeners() {
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
     showElement($('#progress-row'))
+    $("#virtualKeyBoardBtn").attr("disabled",true);
     try {
       uploadToServer();
       setTimeout(() => {
@@ -316,6 +323,7 @@ function addListeners() {
     $('#submit-edit-button').attr('disabled', true);
     markContributionSkipped();
     getNextSentence();
+    $("#virtualKeyBoardBtn").attr("disabled",true);
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
     cancelButton.attr("disabled", true);
@@ -489,6 +497,7 @@ const initialize = function () {
 
 function executeOnLoad() {
   hideElement($('#keyboardBox'));
+  $("#virtualKeyBoardBtn").attr("disabled",true);
   toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
