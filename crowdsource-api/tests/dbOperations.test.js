@@ -412,17 +412,18 @@ describe("Running tests for dbOperations", () => {
     });
 
     test('Insert Feedback', () => {
-        const spyDBany = jest.spyOn(mockDB, 'any')
-        const category = ''
-        const feedback = ''
-        const language = 'testLanguage'
-        const module = 'bolo'
-        const target_page = 'Landing Page'
-        const opinion_rating = 3
+        const spyDBany = jest.spyOn(mockDB, 'any');
+        const category = '';
+        const feedback = '';
+        const email = 'example@gmail.com';
+        const language = 'testLanguage';
+        const module = 'bolo';
+        const target_page = 'Landing Page';
+        const opinion_rating = 3;
 
-        dbOperations.insertFeedback(category, feedback, language, module, target_page, opinion_rating);
+        dbOperations.insertFeedback(email, feedback, category, language, module, target_page, opinion_rating);
 
-        expect(spyDBany).toHaveBeenCalledWith(feedbackInsertion, [feedback, category, language, module, target_page, opinion_rating]);
+        expect(spyDBany).toHaveBeenCalledWith(feedbackInsertion, [email, feedback, category, language, module, target_page, opinion_rating]);
     });
 
     test('Save Report', async () => {
