@@ -39,14 +39,6 @@ describe('middleware test', function () {
             expect(res.send).toHaveBeenCalledTimes(0)
         });
 
-        test('should fail and send bad request if userName is more than 12 char and age is given format', function () {
-            const req = { cookies: cookie, params: params, body: { age: validAgeGroup, userName: "moreThan12character", gender: gender, motherTongue: motherTongue, language: language } }
-            validateUserInfo(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(1)
-            expect(nextSpy).toHaveBeenCalledTimes(0)
-        });
-
         test('should fail if userName contain mobile number and age is given format', function () {
             const req = { cookies: cookie, params: params, body: { age: validAgeGroup, userName: "9411239876", gender: gender, motherTongue: motherTongue, language: language } }
             validateUserInfo(req, res, nextSpy);
@@ -55,13 +47,6 @@ describe('middleware test', function () {
             expect(nextSpy).toHaveBeenCalledTimes(0)
         });
 
-        test('should fail and send bad request if userName contain email address and age is given format', function () {
-            const req = { cookies: cookie, params: params, body: { age: validAgeGroup, userName: "testemail@123.com", gender: gender, motherTongue: motherTongue, language: language } }
-            validateUserInfo(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(1)
-            expect(nextSpy).toHaveBeenCalledTimes(0)
-        });
 
         test('should pass if type is valid', () => {
             const req = { cookies: cookie, params: params, body: { userName: validUsername, language: language } };
