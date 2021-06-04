@@ -61,16 +61,20 @@ const validateUserInfo = function (req, res, next) {
     const type = req.params.type;
     const userId = req.cookies.userId;
     const language = req.body.language;
+    console.log(userName);
+    console.log(type);
+    console.log(userId);
+    console.log(language);
 
-    if (!userId || userName === null || userName === undefined) {
-        return res.status(400).send({ error: 'required parameters missing' });
-    }
+    // if (!userId || userName === null || userName === undefined) {
+    //     return res.status(400).send({ error: 'required parameters missing' });
+    // }
 
-    const isValidType = (MEDIA_TYPES.includes(type));
+    // const isValidType = (MEDIA_TYPES.includes(type));
 
-    if (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || !isValidType || !language) {
-        return res.status(400).send("Bad request");
-    }
+    // if (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || !isValidType || !language) {
+    //     return res.status(400).send("Bad request");
+    // }
     next()
 }
 

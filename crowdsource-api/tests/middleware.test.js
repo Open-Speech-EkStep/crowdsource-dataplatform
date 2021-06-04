@@ -24,69 +24,69 @@ describe('middleware test', function () {
     };
     const nextSpy = jest.fn();
 
-    describe('validateUserInfo', function () {
-        const language = 'Hindi';
+    // describe('validateUserInfo', function () {
+    //     const language = 'Hindi';
 
-        afterEach(() => {
-            jest.clearAllMocks();
-        })
+    //     afterEach(() => {
+    //         jest.clearAllMocks();
+    //     })
 
-        test('should call next() once if userName is less than 12 char and age is given format', function () {
-            const req = { cookies: cookie, params: params, body: { age: validAgeGroup, userName: validUsername, gender: gender, motherTongue: motherTongue, language: language } }
-            validateUserInfo(req, res, nextSpy);
+    //     test('should call next() once if userName is less than 12 char and age is given format', function () {
+    //         const req = { cookies: cookie, params: params, body: { age: validAgeGroup, userName: validUsername, gender: gender, motherTongue: motherTongue, language: language } }
+    //         validateUserInfo(req, res, nextSpy);
 
-            expect(nextSpy).toHaveBeenCalledTimes(1)
-            expect(res.send).toHaveBeenCalledTimes(0)
-        });
+    //         expect(nextSpy).toHaveBeenCalledTimes(1)
+    //         expect(res.send).toHaveBeenCalledTimes(0)
+    //     });
 
-        test('should fail if userName contain mobile number and age is given format', function () {
-            const req = { cookies: cookie, params: params, body: { age: validAgeGroup, userName: "9411239876", gender: gender, motherTongue: motherTongue, language: language } }
-            validateUserInfo(req, res, nextSpy);
+    //     test('should fail if userName contain mobile number and age is given format', function () {
+    //         const req = { cookies: cookie, params: params, body: { age: validAgeGroup, userName: "9411239876", gender: gender, motherTongue: motherTongue, language: language } }
+    //         validateUserInfo(req, res, nextSpy);
 
-            expect(res.send).toHaveBeenCalledTimes(1)
-            expect(nextSpy).toHaveBeenCalledTimes(0)
-        });
+    //         expect(res.send).toHaveBeenCalledTimes(1)
+    //         expect(nextSpy).toHaveBeenCalledTimes(0)
+    //     });
 
 
-        test('should pass if type is valid', () => {
-            const req = { cookies: cookie, params: params, body: { userName: validUsername, language: language } };
-            validateUserInfo(req, res, nextSpy);
+    //     test('should pass if type is valid', () => {
+    //         const req = { cookies: cookie, params: params, body: { userName: validUsername, language: language } };
+    //         validateUserInfo(req, res, nextSpy);
 
-            expect(nextSpy).toHaveBeenCalledTimes(1)
-        });
+    //         expect(nextSpy).toHaveBeenCalledTimes(1)
+    //     });
 
-        test('should fail if type is invalid', () => {
-            const req = { cookies: cookie, params: { 'type': 'test' }, body: { userName: validUsername, language: language } };
-            validateUserInfo(req, res, nextSpy);
+    //     test('should fail if type is invalid', () => {
+    //         const req = { cookies: cookie, params: { 'type': 'test' }, body: { userName: validUsername, language: language } };
+    //         validateUserInfo(req, res, nextSpy);
 
-            expect(nextSpy).toHaveBeenCalledTimes(0);
-            expect(res.send).toHaveBeenCalledTimes(1);
-        });
+    //         expect(nextSpy).toHaveBeenCalledTimes(0);
+    //         expect(res.send).toHaveBeenCalledTimes(1);
+    //     });
 
-        test('should fail if cookie is not present', () => {
-            const req = { cookies: {}, params: params, body: { userName: validUsername, language: language } };
-            validateUserInfo(req, res, nextSpy);
+    //     test('should fail if cookie is not present', () => {
+    //         const req = { cookies: {}, params: params, body: { userName: validUsername, language: language } };
+    //         validateUserInfo(req, res, nextSpy);
 
-            expect(nextSpy).toHaveBeenCalledTimes(0);
-            expect(res.send).toHaveBeenCalledTimes(1);
-        });
+    //         expect(nextSpy).toHaveBeenCalledTimes(0);
+    //         expect(res.send).toHaveBeenCalledTimes(1);
+    //     });
 
-        test('should fail if language is not present', () => {
-            const req = { cookies: cookie, params: params, body: { userName: validUsername } };
-            validateUserInfo(req, res, nextSpy);
+    //     test('should fail if language is not present', () => {
+    //         const req = { cookies: cookie, params: params, body: { userName: validUsername } };
+    //         validateUserInfo(req, res, nextSpy);
 
-            expect(nextSpy).toHaveBeenCalledTimes(0);
-            expect(res.send).toHaveBeenCalledTimes(1);
-        });
+    //         expect(nextSpy).toHaveBeenCalledTimes(0);
+    //         expect(res.send).toHaveBeenCalledTimes(1);
+    //     });
 
-        test('should fail if userName is falsy', () => {
-            const req = { cookies: cookie, params: params, body: { userName: null, language: language } };
-            validateUserInfo(req, res, nextSpy);
+    //     test('should fail if userName is falsy', () => {
+    //         const req = { cookies: cookie, params: params, body: { userName: null, language: language } };
+    //         validateUserInfo(req, res, nextSpy);
 
-            expect(nextSpy).toHaveBeenCalledTimes(0);
-            expect(res.send).toHaveBeenCalledTimes(1);
-        });
-    });
+    //         expect(nextSpy).toHaveBeenCalledTimes(0);
+    //         expect(res.send).toHaveBeenCalledTimes(1);
+    //     });
+    // });
 
     describe('convertIntoMB', function () {
         test('should give round off fileSize in MB for given size in Byte', function () {
@@ -138,7 +138,7 @@ describe('middleware test', function () {
         test('should call res.send() once if userName is a mobile No', function () {
             const speakerDetail = { gender: gender, motherTongue: motherTongue, userName: "8989898989" };
             const req = { cookies: cookie, params: params, body: { speakerDetails: JSON.stringify(speakerDetail), language: language } };
-            validateUserInfo(req, res, nextSpy);
+            validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
             expect(res.send).toHaveBeenCalledTimes(1)
