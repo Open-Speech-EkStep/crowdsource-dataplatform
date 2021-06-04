@@ -6,11 +6,7 @@ const fetchUsername = () => {
 
     if(speakerDetails !== null)
     {
-        console.log(speakerDetails['userName']);
         $('#email').val(speakerDetails['userName']);
-    }
-    else{
-        console.log(speakerDetails);
     }
 }
 
@@ -23,7 +19,6 @@ const checkGivingFeedbackFor = () => {
                     component.checked = true;
                 }
             } catch(error){
-                console.log(error);
                 document.querySelector('#others_id').checked = true;            
             }
         });
@@ -84,11 +79,10 @@ const updateSelectPageWhenModuleChanges = () => {
 
             try { 
                 const page = $('#target_page').val();
-                console.log('page value: ' + page); 
                 $("#select_page_id").find('option[value="' + page + '"]').attr("selected", "selected");
                
             } catch (error) {
-                console.log('Page detection error: ' + error);  
+
             }
         }
     });
