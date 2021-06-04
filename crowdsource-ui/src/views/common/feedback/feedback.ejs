@@ -21,6 +21,14 @@
             <div class="border-top"></div>
             <div class="modal-body" style="padding:20px 34px 45px 32px">
                 <div class="mb-3">
+                    <label class="form-check-label label-color-feedback" for="email">
+                        <%= __('Email') %> <span class="required">(*required)</span>
+                    </label>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" name="email" id="email" type="email" required>
+                </div>
+                <div class="mb-3">
                     <label class="form-check-label label-color-feedback">
                         <%= __('Giving Feedback for?') %> <span class="required">(*required)</span>
                     </label>
