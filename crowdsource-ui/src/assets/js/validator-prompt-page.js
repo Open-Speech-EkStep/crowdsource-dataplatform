@@ -396,6 +396,7 @@ $(document).ready(() => {
     localStorage.setItem('module','bolo');
     toggleFooterPosition();
     setPageContentHeight();
+    const $errorModal = $('#errorModal');
     const language = localStorage.getItem('contributionLanguage');
     if (language) {
         updateLocaleLanguagesDropdown(language);
@@ -439,6 +440,14 @@ $(document).ready(() => {
         localStorage.setItem("country", response.country);
     }).catch(console.log);
 
+    $errorModal.on('show.bs.modal', function () {
+        setFooterPosition();
+
+    });
+    $errorModal.on('hidden.bs.modal', function () {
+        location.href = './boloIndia/home.html';
+    });
+
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
     const localSentences = localStorage.getItem(sentencesKey);
@@ -470,7 +479,6 @@ $(document).ready(() => {
     })
       .then((data) => {
         if (!data.ok) {
-          showNoSentencesMessage();
           throw Error(data.statusText || 'HTTP error');
         } else {
           return data.json();
@@ -494,7 +502,8 @@ $(document).ready(() => {
       );
       initializeComponent();
     }).catch((err) => {
-      console.log(err)
+      console.log(err);
+      $errorModal.modal('show');
     });
   }
 });
