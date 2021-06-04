@@ -217,7 +217,7 @@ router.post('/report', async (req, res) => {
 
 router.post('/skip', validateInputForSkip, (req, res) => {
     const language = req.body.language || ''
-    markContributionSkipped(req.cookies.userId, req.body.sentenceId, req.body.userName, language)
+    markContributionSkipped(req.cookies.userId, req.body.sentenceId, req.body.userName, language, req.body.state_region, req.body.country, req.body.device, req.body.browser)
         .then(() => {
             return res.send({ statusCode: 200, message: 'Skipped successfully.' });
         })
@@ -353,11 +353,12 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
     const feedback = req.body.feedback.trim();
     const category = req.body.category.trim();
     const language = req.body.language.trim();
+    const email = req.body.email.trim();
     const module = req.body.module;
     const target_page = req.body.target_page;
     const opinion_rating = req.body.opinion_rating;
 
-    insertFeedback(feedback, category, language, module, target_page, opinion_rating)
+    insertFeedback(email, feedback, category, language, module, target_page, opinion_rating)
         .then(() => {
             console.log('Feedback is inserted into the DB.');
             res.send({

@@ -412,17 +412,18 @@ describe("Running tests for dbOperations", () => {
     });
 
     test('Insert Feedback', () => {
-        const spyDBany = jest.spyOn(mockDB, 'any')
-        const category = ''
-        const feedback = ''
-        const language = 'testLanguage'
-        const module = 'bolo'
-        const target_page = 'Landing Page'
-        const opinion_rating = 3
+        const spyDBany = jest.spyOn(mockDB, 'any');
+        const category = '';
+        const feedback = '';
+        const email = 'example@gmail.com';
+        const language = 'testLanguage';
+        const module = 'bolo';
+        const target_page = 'Landing Page';
+        const opinion_rating = 3;
 
-        dbOperations.insertFeedback(category, feedback, language, module, target_page, opinion_rating);
+        dbOperations.insertFeedback(email, feedback, category, language, module, target_page, opinion_rating);
 
-        expect(spyDBany).toHaveBeenCalledWith(feedbackInsertion, [feedback, category, language, module, target_page, opinion_rating]);
+        expect(spyDBany).toHaveBeenCalledWith(feedbackInsertion, [email, feedback, category, language, module, target_page, opinion_rating]);
     });
 
     test('Save Report', async () => {
@@ -450,11 +451,15 @@ describe("Running tests for dbOperations", () => {
         const userName = 'test user'
         const contributor_id = 10
         const language = 'Hindi';
+        const country = "india";
+        const state_region = "state";
+        const device = "OSX";
+        const browser = "CHROME";
         when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
 
-        await dbOperations.markContributionSkipped(userId, datasetId, userName, language);
+        await dbOperations.markContributionSkipped(userId, datasetId, userName, language, state_region, country, device, browser);
 
-        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [contributor_id, datasetId, language])
+        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [contributor_id, datasetId, language, state_region, country, device, browser])
     });
 
     test('Get Rewards info', () => {
