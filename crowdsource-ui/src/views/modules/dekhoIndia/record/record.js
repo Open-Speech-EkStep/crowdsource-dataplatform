@@ -440,6 +440,7 @@ const executeOnLoad = function () {
   setPageContentHeight();
   setFooterPosition();
   const $validationInstructionModal = $("#validation-instruction-modal");
+  const $errorModal = $('#errorModal');
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   $('#keyboardLayoutName').text(language);
@@ -462,6 +463,14 @@ const executeOnLoad = function () {
       $validationInstructionModal.addClass("d-none");
       setFooterPosition();
     })
+
+    $errorModal.on('show.bs.modal', function () {
+      setFooterPosition();
+    });
+
+    $errorModal.on('hidden.bs.modal', function () {
+      location.href = './home.html';
+    });
 
     if (!localSpeakerDataParsed) {
       location.href = './home.html';
@@ -495,7 +504,6 @@ const executeOnLoad = function () {
         },
       }).then((data) => {
         if (!data.ok) {
-          showNoSentencesMessage();
           throw Error(data.statusText || 'HTTP error');
         } else {
           return data.json();
@@ -524,12 +532,14 @@ const executeOnLoad = function () {
         initializeComponent();
       }).catch((err) => {
         console.log(err);
+        $errorModal.modal('show');
       }).then(() => {
       });
     }
 
   } catch (err) {
     console.log(err);
+    $errorModal.modal('show');
   }
 }
 
