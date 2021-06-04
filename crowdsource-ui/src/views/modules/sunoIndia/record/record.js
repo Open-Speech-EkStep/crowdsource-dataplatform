@@ -112,6 +112,7 @@ const setAudioPlayer = function () {
     hideElement($('#default_line'))
     playAudio();
     $("#edit").removeAttr("disabled");
+    $("#virtualKeyBoardBtn").removeAttr("disabled");
     $("#edit-text-suno").addClass("edit-text");
   });
 
@@ -288,6 +289,7 @@ function addListeners() {
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
     showElement($('#progress-row'))
+    $("#virtualKeyBoardBtn").attr("disabled",true);
     try {
       uploadToServer();
       setTimeout(() => {
@@ -321,6 +323,7 @@ function addListeners() {
     $('#submit-edit-button').attr('disabled', true);
     markContributionSkipped();
     getNextSentence();
+    $("#virtualKeyBoardBtn").attr("disabled",true);
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
     cancelButton.attr("disabled", true);
@@ -494,6 +497,7 @@ const initialize = function () {
 
 function executeOnLoad() {
   hideElement($('#keyboardBox'));
+  $("#virtualKeyBoardBtn").attr("disabled",true);
   toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
