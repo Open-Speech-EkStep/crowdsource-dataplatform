@@ -83,7 +83,10 @@ $(document).ready(function () {
     $startRecordBtn.on('click', () => {
         const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
         let genderValue = checkedGender.length ? checkedGender[0].value : '';
-        const userNameValue = $userName.val().trim().substring(0, 12);
+        let userNameValue = $userName.val().trim().substring(0, 12);
+        if(location.host.includes('uat')){
+            userNameValue = $userName.val().trim();
+        }
         const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === sentenceLanguage);
         if (! selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
         if (testUserName(userNameValue)) {
