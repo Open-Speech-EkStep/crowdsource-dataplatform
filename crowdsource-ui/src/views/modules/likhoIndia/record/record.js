@@ -109,11 +109,16 @@ const openEditor = function () {
 function markContributionSkipped() {
   const contributionLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-
+  const state_region = localStorage.getItem('state_region') || "";
+  const country = localStorage.getItem('country') || "";
   const reqObj = {
     sentenceId: likhoIndia.sentences[currentIndex].dataset_row_id,
     userName: speakerDetails.userName,
-    language: contributionLanguage
+    language: contributionLanguage,
+    device: getDeviceInfo(),
+    browser: getBrowserInfo(),
+    state_region: state_region,
+    country: country
   };
   fetch('/skip', {
     method: 'POST',

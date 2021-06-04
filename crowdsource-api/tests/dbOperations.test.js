@@ -450,11 +450,15 @@ describe("Running tests for dbOperations", () => {
         const userName = 'test user'
         const contributor_id = 10
         const language = 'Hindi';
+        const country = "india";
+        const state_region = "state";
+        const device = "OSX";
+        const browser = "CHROME";
         when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
 
-        await dbOperations.markContributionSkipped(userId, datasetId, userName, language);
+        await dbOperations.markContributionSkipped(userId, datasetId, userName, language, state_region, country, device, browser);
 
-        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [contributor_id, datasetId, language])
+        expect(spyDBany).toHaveBeenCalledWith(markContributionSkippedQuery, [contributor_id, datasetId, language, state_region, country, device, browser])
     });
 
     test('Get Rewards info', () => {

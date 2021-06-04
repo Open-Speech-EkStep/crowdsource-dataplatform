@@ -449,9 +449,9 @@ const saveReport = async (userId, datasetId, reportText, language, userName, sou
     }
 }
 
-const markContributionSkipped = async (userId, datasetId, userName, language) => {
+const markContributionSkipped = async (userId, datasetId, userName, language, state_region = "", country = "", device = "", browser = "") => {
     const contributor_id = await getContributorId(userId, userName);
-    await db.any(markContributionSkippedQuery, [contributor_id, datasetId, language]);
+    await db.any(markContributionSkippedQuery, [contributor_id, datasetId, language, state_region, country, device, browser]);
 }
 
 const getContributorId = async (userId, userName, age = '', gender = '', motherTongue = '') => {
