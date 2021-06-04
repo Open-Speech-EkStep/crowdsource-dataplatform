@@ -79,15 +79,17 @@ const validateUserInfo = function (req, res, next) {
 }
 
 const validateUserInputForFeedback = function (req, res, next) {
+    const email = req.body.email;
     const feedback = req.body.feedback;
     const category = req.body.category;
-    const language = req.body.language
+    const language = req.body.language;
     const module = req.body.module; 
     const target_page = req.body.target_page; 
     const opinion_rating = parseInt(req.body.opinion_rating);
 
     const allLanguages = LANGUAGES.map(lang => lang.value)
 
+    const invalidEmail = !email || email.trim().length == 0;
     const invalidLanguage = !allLanguages.includes(language)
 
     const invalidCategory = (!(category.trim().length == 0 || category.trim().length < CATEGORY_MAX_LENGTH))
@@ -99,7 +101,7 @@ const validateUserInputForFeedback = function (req, res, next) {
 
     const invalidOpinionRating = (!opinion_rating || !(opinion_rating >= 1) || !(opinion_rating <= 5))
 
-    if (invalidFeedback || invalidCategory || invalidLanguage || invalidOpinionRating || invalidModule || invalidTargetPage) {
+    if (invalidEmail || invalidFeedback || invalidCategory || invalidLanguage || invalidOpinionRating || invalidModule || invalidTargetPage) {
         return res.status(400).send("Bad request");
     }
     next()

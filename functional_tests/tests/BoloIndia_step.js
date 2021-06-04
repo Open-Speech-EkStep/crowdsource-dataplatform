@@ -385,6 +385,7 @@ step("When user clicks on the Feedback icon, user should see the feedback popup"
     await click(taiko.button({ id: "feedback_button"}))
     await taiko.waitFor(1000)
     assert.ok(await text("We would like to get your feedback to improve this site").exists());
+    assert.ok(await text("Email").exists());
     assert.ok(await text("Giving Feedback for?").exists());
     assert.ok(await text("Select page").exists());
     assert.ok(await text("What is your opinion of this page").exists());
@@ -394,6 +395,9 @@ step("When user clicks on the Feedback icon, user should see the feedback popup"
 
 step("Submit button should be disbaled, When user selects an opinion, submit button should be enabled", async function () {
     await taiko.waitFor(500)
+    const usernameFiled = taiko.textBox({ id: 'email' })
+    await taiko.waitFor(500)
+    await write('TestUser', into(usernameFiled))
     assert.ok(await taiko.button({ id: "submit_btn" }).isDisabled());
     await click(taiko.$("#very_happy_label"));
     assert.ok(! await taiko.button({ id: "submit_btn" }).isDisabled());

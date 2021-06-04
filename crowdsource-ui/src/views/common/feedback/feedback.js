@@ -1,6 +1,19 @@
 const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, FEEDBACK_CATEGORY, OPINION_RATING_MAPPING, ALL_LANGUAGES} = require('./constants');
 const fetch = require('./fetch')
 
+const fetchUsername = () => {
+    const speakerDetails = JSON.parse(localStorage.getItem('speakerDetails'));
+
+    if(speakerDetails !== null)
+    {
+        console.log(speakerDetails['userName']);
+        $('#email').val(speakerDetails['userName']);
+    }
+    else{
+        console.log(speakerDetails);
+    }
+}
+
 const checkGivingFeedbackFor = () => {
         const currentModule = localStorage.getItem(CURRENT_MODULE);
         document.querySelectorAll('input[name="moduleSelectRadio"]').forEach((component) => {
@@ -93,7 +106,8 @@ const enableSubmit = function () {
     const target_page = $("#select_page_id");
     const opinion_rating = $("#opinionRadio");
     $('input[name="opinionRadio"]').on('change', () => {
-        if($('input[name="opinionRadio"]').is(':checked'))
+
+        if($('input[name="opinionRadio"]').is(':checked') && $('#email').val().length > 0)
         {    
             $("#submit_btn").attr('disabled', false);
         }
@@ -102,6 +116,15 @@ const enableSubmit = function () {
         }
     })    
     
+    $('#email').on('input', () => {
+        if($('input[name="opinionRadio"]').is(':checked') && $('#email').val().length > 0)
+        {    
+            $("#submit_btn").attr('disabled', false);
+        }
+        else {
+            $("#submit_btn").attr('disabled', true);
+        }
+    })
 }
 
 const handleFeedbackSubmit = () => {
@@ -109,7 +132,7 @@ const handleFeedbackSubmit = () => {
     var category = $("#category_id").val();
     var feedback_description = $("#feedback_description").val();
     var language = localStorage.getItem("contributionLanguage");
-
+    var username = $('#email').val();
     if(language === null){
         ALL_LANGUAGES.forEach((lang) => {
             if(lang.id === localStorage.getItem("i18n")) { language = lang.value; }});
@@ -130,6 +153,7 @@ const handleFeedbackSubmit = () => {
         category = '';
     }
 
+    fd.append('email', username);
     fd.append('feedback', feedback_description);
     fd.append('category', category);
     fd.append('language', language);
@@ -168,7 +192,9 @@ const resetFeedback = () => {
     $("#submit_btn").attr('disabled', true);
     checkGivingFeedbackFor();
     updateSelectPageWhenModuleChanges();
+    fetchUsername();
 }
+
 const initializeFeedbackModal = () => {
     
     $(() => {
@@ -187,7 +213,7 @@ const initializeFeedbackModal = () => {
     checkGivingFeedbackFor();
     updateSelectPageWhenModuleChanges();
     readFeedbackCategoryFromConstantsFile();
-
+    fetchUsername();
     $('#feedback_button').on('click', () => {
         enableSubmit();
     })
