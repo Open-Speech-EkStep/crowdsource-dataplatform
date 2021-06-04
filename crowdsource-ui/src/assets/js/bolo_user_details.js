@@ -54,11 +54,13 @@ const setBoloSpeakerDetails = (speakerDetailsKey, $userName) => {
   const speakerDetailsValue = localStorage.getItem(speakerDetailsKey);
   if (speakerDetailsValue) {
     const parsedSpeakerDetails = JSON.parse(speakerDetailsValue);
-    $userName.val(
-      parsedSpeakerDetails.userName
-        ? parsedSpeakerDetails.userName.trim().substring(0, 12)
-        : ''
-    );
+    let userNameTxt = '';
+        if(parsedSpeakerDetails.userName){
+            userNameTxt = location.host.includes('uat') ?
+            parsedSpeakerDetails.userName.trim() :  
+            parsedSpeakerDetails.userName.trim().substring(0, 12)
+        }
+        $userName.val(userNameTxt);
     validateBoloUserName($userName, $userName.next());
   }
 };
@@ -121,7 +123,10 @@ const setLetGoBtnOnClick = function (url, module='') {
   const $startRecordBtn = $('#bolo-proceed-box');
   const $userName = $('#bolo-username');
   $startRecordBtn.on('click', () => {
-    const userNameValue = $userName.val().trim().substring(0, 12);
+    let userNameValue = $userName.val().trim().substring(0, 12);
+        if(location.host.includes('uat')){
+            userNameValue = $userName.val().trim();
+        }
     let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const selectedLanguage = ALL_LANGUAGES.find(e => e.value === contributionLanguage);
     if (!selectedLanguage.data) contributionLanguage = DEFAULT_CON_LANGUAGE;
