@@ -231,13 +231,14 @@ describe('middleware test', function () {
         const testModule = 'bolo';
         const testTargetPage = 'Landing Page';
         const testOpinionRating = 4;
+        const testEmail = 'example@gmail.com';
 
         afterEach(() => {
             jest.clearAllMocks();
         })
 
         test('should call next() once if all params in req are valid (all fields are filled)', () => {
-            const req = { body: {category: testCategory, feedback: testFeedback, language: motherTongue,
+            const req = { body: {email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
                  module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
             expect(nextSpy).toHaveBeenCalledTimes(1)
@@ -245,7 +246,7 @@ describe('middleware test', function () {
         });
 
         test('should call next() once if category and feedback is empty', () => {
-            const req = { body: {category: "", feedback: "", language: motherTongue, 
+            const req = { body: {email: testEmail, category: "", feedback: "", language: motherTongue, 
                 module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
             expect(nextSpy).toHaveBeenCalledTimes(1);
@@ -254,7 +255,7 @@ describe('middleware test', function () {
         });
 
         test('should call next() once if category is empty but feedback is not empty',  ()  => {
-            const req = { body: {category: "", feedback: testFeedback, language: motherTongue, 
+            const req = { body: {email: testEmail, category: "", feedback: testFeedback, language: motherTongue, 
                 module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
             expect(nextSpy).toHaveBeenCalledTimes(1);
@@ -262,56 +263,68 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if module is empty', () => {
-            const req = { body: { category: testCategory, feedback: testFeedback, language: motherTongue, 
+            const req = { body: {email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue, 
             module: "", target_page: testTargetPage, opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
         test('should return 400 if module is null', () => {
-            const req = { body: { category: testCategory, feedback: testFeedback, language: motherTongue, 
+            const req = { body: {email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue, 
             module: null, target_page: testTargetPage, opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
         test('should return 400 if target_page is empty', () => {
-            const req = { body: {category:testCategory, feedback: testFeedback, language: motherTongue, 
+            const req = { body: {email: testEmail, category:testCategory, feedback: testFeedback, language: motherTongue, 
             module: testModule, target_page: "", opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
         test('should return 400 if target_page is null', () => {
-            const req = { body: {category:testCategory, feedback: testFeedback, language: motherTongue, 
+            const req = { body: {email: testEmail, category:testCategory, feedback: testFeedback, language: motherTongue, 
             module: testModule, target_page: null, opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
         test('should return 400 if opinion_rating is not in range(1 to 5)', () => {
-            const req = { body: {category:testCategory, feedback: testFeedback, language: motherTongue, 
+            const req = { body: {email: testEmail, category:testCategory, feedback: testFeedback, language: motherTongue, 
             module: testModule, target_page: null, opinion_rating: 8 } };
             validateUserInputForFeedback(req, res, nextSpy);
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
         test('should return 400 if opinion is null', () => {
-            const req = { body: {category:testCategory, feedback: testFeedback, language: motherTongue, 
+            const req = { body: {email: testEmail, category:testCategory, feedback: testFeedback, language: motherTongue, 
             module: testModule, target_page: testTargetPage, opinion_rating: null } };
             validateUserInputForFeedback(req, res, nextSpy);
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
         test('should return 400 if category is longer than 256 char', () => {
-            const req = { body: { category:longCategory, feedback: testFeedback, language: motherTongue, 
+            const req = { body: {email: testEmail, category:longCategory, feedback: testFeedback, language: motherTongue, 
                 module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
         test('should return 400 if feedback is greater than 1000 char', () => {
-            const req = { body: {category:testCategory, feedback: longFeedback, language: motherTongue, 
+            const req = { body: {email: testEmail, category:testCategory, feedback: longFeedback, language: motherTongue, 
+                module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating } };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+        test('should return 400 if email is null', () => {
+            const req = { body: {email: null, category:testCategory, feedback: testFeedback, language: motherTongue, 
+                module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating } };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+        test('should return 400 if email is empty', () => {
+            const req = { body: {email: "", category:testCategory, feedback: testFeedback, language: motherTongue, 
                 module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating } };
             validateUserInputForFeedback(req, res, nextSpy);
             expect(res.send).toHaveBeenCalledTimes(1)
