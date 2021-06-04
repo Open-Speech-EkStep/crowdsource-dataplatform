@@ -95,11 +95,13 @@ const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
         }
         age.value = parsedSpeakerDetails.age;
         motherTongue.value = parsedSpeakerDetails.motherTongue;
-        $userName.val(
-            parsedSpeakerDetails.userName
-                ? parsedSpeakerDetails.userName.trim().substring(0, 12)
-                : ''
-        );
+        let userNameTxt = '';
+        if(parsedSpeakerDetails.userName){
+            userNameTxt = location.host.includes('uat') ?
+            parsedSpeakerDetails.userName.trim() :  
+            parsedSpeakerDetails.userName.trim().substring(0, 12)
+        }
+        $userName.val(userNameTxt);
         validateUserName($userName, $userName.next());
     }
 };
@@ -208,7 +210,10 @@ const setStartRecordingBtnOnClick = function (url, module) {
             const transGender = Array.from(transGenderRadios).filter((el) => el.checked);
             genderValue = transGender.length ? transGender[0].value : '';
         }
-        const userNameValue = $userName.val().trim().substring(0, 12);
+        let userNameValue = $userName.val().trim().substring(0, 12);
+        if(location.host.includes('uat')){
+            userNameValue = $userName.val().trim();
+        }
         let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
         const selectedLanguage = ALL_LANGUAGES.find(e => e.value === contributionLanguage);
         if (!selectedLanguage.data) contributionLanguage = DEFAULT_CON_LANGUAGE;

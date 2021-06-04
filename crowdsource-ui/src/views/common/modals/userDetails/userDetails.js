@@ -53,11 +53,13 @@ const setSpeakerDetails = (speakerDetailsKey, $userName) => {
   const speakerDetailsValue = localStorage.getItem(speakerDetailsKey);
   if (speakerDetailsValue) {
     const parsedSpeakerDetails = JSON.parse(speakerDetailsValue);
-    $userName.val(
-      parsedSpeakerDetails.userName
-        ? parsedSpeakerDetails.userName.trim().substring(0, 12)
-        : ''
-    );
+    let userNameTxt = '';
+        if(parsedSpeakerDetails.userName){
+            userNameTxt = location.host.includes('uat') ?
+            parsedSpeakerDetails.userName.trim() :  
+            parsedSpeakerDetails.userName.trim().substring(0, 12)
+        }
+        $userName.val(userNameTxt);
     validateUserName($userName, $userName.next());
   }
 };
@@ -121,7 +123,10 @@ const setStartRecordingBtnOnClick = function (url, module = '') {
   const $startRecordBtn = $('#proceed-box');
   const $userName = $('#username');
   $startRecordBtn.on('click', () => {
-    const userNameValue = $userName.val().trim().substring(0, 12);
+    let userNameValue = $userName.val().trim().substring(0, 12);
+        if(location.host.includes('uat')){
+            userNameValue = $userName.val().trim();
+        }
     let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
     let fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
