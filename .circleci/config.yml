@@ -135,8 +135,6 @@ workflows:
 
       - create-workspace:
           name: create-workspace
-          requires:
-            - node/test
           filters:
             branches:
               only: master
