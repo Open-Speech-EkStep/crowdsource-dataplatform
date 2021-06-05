@@ -11,6 +11,7 @@ const {
     clear,
     listItem,
     write,
+    screenshot,
     click,
     hover,
     link,
@@ -37,9 +38,9 @@ afterSuite(async () => {
     await closeBrowser();
 });
 
-// gauge.screenshotFn = async function () {
-//     return await taiko.screenshot({ encoding: 'base64' });
-// };
+gauge.screenshotFn = async function () {
+    return await taiko.screenshot({ encoding: 'base64' });
+};
 
 step("Open Website", async () => {
     await taiko.waitFor(500)
@@ -161,7 +162,7 @@ step("When user skips all the rest of the <count> sentences , User should see Th
     for (let i = 0; i < count; i++) {
         await taiko.waitFor(500)
         await click(skipbutton)
-        await taiko.waitFor(700)
+        await taiko.waitFor(1000)
     }
     await taiko.waitFor(5000)
     assert.ok(await text('Thank you for contributing!').exists())
