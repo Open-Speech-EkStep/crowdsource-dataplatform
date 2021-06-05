@@ -81,11 +81,12 @@
 * When user clicks on Contribute more button , user should see no data available message for dekho India
 
 ## Validate Validate flow
+* Select "Dekho India" from header
+* Select Contribution Language as "ಕನ್ನಡ"
 * Navigate to "Validate" button and click "Validate" button
 * Add "V User" Username
 * When user click on Lets Go Button, user should "not" see instructions to record
 * User should see add extension and watch video link
-* Clicking add extension link should redirect to "https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab"
 * Clicking watch video link should open video
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be enabled
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
