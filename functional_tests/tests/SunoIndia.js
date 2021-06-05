@@ -11,13 +11,13 @@ const {
     into
 } = require('taiko');
 
-
 step("Select <SunoIndiaLink> from header", async function(SunoIndiaLink) {    
     await taiko.waitFor(1000);  
     assert.ok(await link(SunoIndiaLink).exists());
     await taiko.waitFor(500);  
     await click(SunoIndiaLink);
 });
+
 step("Validate Suno India content", async function() {
     assert.ok(await text('Help your language by transcribing audio into text').exists());
     assert.ok(await text('Validate').exists());
@@ -35,7 +35,6 @@ step("When user clicks on View all Details buttton user should be able to see <a
     assert.ok(await text(arg0).exists());
     assert.ok(await text(arg1).exists());
 });
-
 
 step("Add <usrnm> Username", async function (usrnm) {
     if (await taiko.text('User Details').exists()) {
@@ -60,8 +59,6 @@ step("When user clicks on the Test Speaker button, user should see <arg0>", asyn
     await click(taiko.button({ id: "test-mic-speakers-button" }))
     assert.ok(await button({ id: arg0 }).exists())
 });
-
-
 
 step("User clicks on  <arg0> button user should see <arg1> and <arg2> , <arg3> should be  enabled", async function(arg0, arg1, arg2, arg3) {
     await click(taiko.button({ id: arg0 }))
@@ -115,6 +112,7 @@ step("User click on <type> field and type <hinditext> submit and cancel button s
     assert.ok(! await button({ id: 'submit-edit-button' }).isDisabled())
     assert.ok(! await button({ id: 'cancel-edit-button' }).isDisabled())
 });
+
 step("When User clicks on <type> field and type <txt> submit and cancel button should be enabled", async function(type, txt) {
     const editfield = taiko.textBox({ id: type })
     await taiko.waitFor(500)
@@ -137,7 +135,6 @@ step("When user clicks on Play button, Pause button should appear and when user 
     await click(taiko.image({ id: "pause" }));
     await taiko.waitFor(500)
     await click(taiko.image({ id: "resume" }));
-
 });
 
 step("Once user clicks on Others Radio button in transcribe flow, Submit button should be enabled", async function() {
@@ -147,7 +144,6 @@ step("Once user clicks on Others Radio button in transcribe flow, Submit button 
     await click(taiko.text("Others"))
     await taiko.waitFor(500)
     assert.ok(! await taiko.button({ id: "report_submit_id" }).isDisabled()); 
-
 });
 
 step("When user skips the rest of the <count> sentences , User should see Thank you Page", async function (count) {
@@ -163,7 +159,6 @@ step("When user skips the rest of the <count> sentences , User should see Thank 
 step("When user click on Lets Go Button", async function() {
     await click(taiko.button({ id: 'proceed-box' }))
     await taiko.waitFor(1500)
-    
 });
 
 step("Check <card> option should be <state> on Home page", async function(card,state) {
@@ -189,25 +184,21 @@ step("Check <card> option should be <state> on Home page", async function(card,s
     if(card=="Label"&& state=="disabled")
     {
         assert.ok(await text('Not collecting contributions for selected language').isVisible());
-
     }
 
     if(card=="Label"&& state=="enabled")
     {
         assert.ok(! await text('Not collecting contributions for selected language').isVisible());
-
     }
 
     if(card=="Validate"&& state=="disabled")
     {
         assert.ok(await text('No validation data available for selected language').isVisible());
-
     }
 
     if(card=="Validate"&& state=="enabled")
     {
         assert.ok(! await text('No validation data available for selected language').isVisible());
-
     }
 
 });
