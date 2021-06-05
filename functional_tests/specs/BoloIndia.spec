@@ -2,8 +2,16 @@
 
 * Open Website
 
-## Validate Contributor flow
+## Validate the Speaker Details pop-up in Contribute section
 * Select Contribution Language as "हिंदी" first time
+* Select "Bolo India" from header
+* Navigate to "Contribute" button and click "Contribute" button
+* Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present
+* if a user enter username and click on Not you change user button , the field should be cleared
+* If user selects Other as gender, some more gender options should be visible
+* Speaker details popup should appear and close button should close the pop up
+
+## Validate Contributor flow
 * Select "Bolo India" from header
 //* Select translation language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
@@ -19,15 +27,6 @@
 * When user clicks on "Submit" button, "Skip" button should appear
 * When user skips all the rest of the "4" sentences , User should see Thank you Page
 * when user clicks on the Contribute More button, user should not see the Instructions page again
-
-## Validate the Speaker Details pop-up in Contribute section
-* Select "Bolo India" from header
-//* Select translation language as "English"
-* Navigate to "Contribute" button and click "Contribute" button
-* Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present
-* if a user enter username and click on Not you change user button , the field should be cleared
-* If user selects Other as gender, some more gender options should be visible
-* Speaker details popup should appear and close button should close the pop up
 
 ## Validate Validator flow
 * Select "Bolo India" from header
