@@ -49,7 +49,7 @@ const ingest2 = async (imageToIdDict, client, datset_base_path, language, imageT
             'completed'
         )`)
     }
-
+    console.log('values', values)
     const insert_rows = `insert into contributions 
     ( dataset_row_id, contributed_by, media, is_system , date, action) 
     values ${values} RETURNING contribution_id`
@@ -60,12 +60,16 @@ const ingest2 = async (imageToIdDict, client, datset_base_path, language, imageT
 }
 
 const parse1 = (files) => {
-    const png_paths = files.map((x, i) => `${x.split('/').slice(-2)[0]}/${x.split('/').slice(-1)}`)
+    const png_paths = files
+        .map(p => p.replace('LINE/', ''))
+        .map((x, i) => `${x.split('/').slice(-2)[0]}/${x.split('/').slice(-1)}`)
+    // TODO remove LINE replace
     return png_paths
+
 }
 
 const parse2 = (localDatasetPath, files) => {
-    const data = JSON.parse(fs.readFileSync(`${localDatasetPath}/data.json`, 'utf-8'))
+    const data = JSON.parse(fs.readFileSync(`${localDatasetPath}/data.json`))
     allKeys = data
     const imageToTextDict = {}
     for (var i = 0; i < allKeys.length; i++) {
@@ -73,7 +77,12 @@ const parse2 = (localDatasetPath, files) => {
         if (element.length == 1) {
             element = element[0]
         }
-        imageToTextDict[element.imageFilename] = element.groundTruth
+        const text = element.groundTruth
+            .split("'").join("''")
+            .split("‘").join("##")
+            .split("##").join("''")
+
+        imageToTextDict[element.imageFilename] = text
     }
 
     dict = {}
@@ -125,7 +134,7 @@ const main = () => {
     console.log(basePath, language)
 
     params = JSON.parse(fs.readFileSync(`${localDatasetPath}/params.json`, 'utf-8'))
-    start(connectionString, localDatasetPath, {}, remote_dataset_bundle_path, basePath, language, paired)
+    start(connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired)
 }
 
 main()

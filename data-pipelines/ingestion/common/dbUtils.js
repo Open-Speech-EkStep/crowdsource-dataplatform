@@ -9,7 +9,11 @@ const conn = (connectionString) => {
 }
 
 const insertMaster = async (params, location, client) => {
-    const insert_master = `insert into master_dataset (params,location) values ('${params}','${location}') RETURNING master_dataset_id`
+    console.log('params', params)
+    const paramsStr = JSON.stringify(params)
+        .split("'").join("''")
+
+    const insert_master = `insert into master_dataset (params,location) values ('${paramsStr}','${location}') RETURNING master_dataset_id`
 
     const result = await client.query(`${insert_master}`)
     const datasetId = result.rows[0].master_dataset_id;

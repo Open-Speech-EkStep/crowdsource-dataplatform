@@ -3,7 +3,7 @@ const { calculateDuration } = require('../common/audio_duration')
 const { conn, insertMaster } = require('../common/dbUtils')
 
 const MIN_DURATION = 1
-const MAX_DURATION = 6
+const MAX_DURATION = 15
 const ingest1 = async (datasetId, datasetType, client, datset_base_path, language, audio_paths_with_duration, paired) => {
 
     const values = audio_paths_with_duration
@@ -71,7 +71,8 @@ const parse1 = async (files, paired) => {
                     if (paired === 'paired') {
                         const txtFilePath = `${path.split('.')[0]}.txt`
                         const txtContent = fs.readFileSync(`${txtFilePath}`, 'utf8').split('\n')[0]
-                        const sanizedTxtContent = txtContent.replace("'", "''")
+                        const sanizedTxtContent = txtContent
+                            .split("'").join("''")
                         wav_paths_resolved.push([remote_path, duration, path, sanizedTxtContent])
                     } else {
                         wav_paths_resolved.push([remote_path, duration, path])
@@ -90,6 +91,7 @@ const parse2 = (wav_paths_resolved) => {
     console.log('wav_paths_resolved', wav_paths_resolved)
     const txt_files_content = wav_paths_resolved
         .map(x => x[3])
+    console.log('txt_files_content', txt_files_content)
     console.log('txt_files_content', txt_files_content)
     return txt_files_content
 }

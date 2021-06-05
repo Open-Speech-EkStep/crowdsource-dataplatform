@@ -14,14 +14,12 @@ const ingest1 = async (datasetId, datasetType, client, language, rows, paired) =
             return `('medium', '${datasetType}',
                 '${JSON.stringify(media)}', 
                 ${datasetId},
-                ${paired === 'paired' ? '\'contributed\'' : null},
-                '${language}',
-                '${row}'
+                ${paired === 'paired' ? '\'contributed\'' : null}
             )`
         })
     console.log('values', values)
     const insert_rows = `insert into dataset_row 
-    ( difficulty_level, type, media, master_dataset_id, state, language, sentence ) 
+    ( difficulty_level, type, media, master_dataset_id, state ) 
     values ${values} RETURNING dataset_row_id`
 
     const dataset_row_result = await client.query(`${insert_rows}`)
