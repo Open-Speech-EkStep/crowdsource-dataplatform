@@ -59,13 +59,14 @@ const ingest2 = async (datasetIds, client, language, rows) => {
 const start = async (connectionString, params, localDatasetPath, paired, remote_dataset_bundle_path, pairs) => {
     const client = conn(connectionString)
     try {
-        const csvContent = await csv().fromFile(localDatasetPath);
+        const csvContent = await csv({ delimiter: '#' }).fromFile(localDatasetPath)
         console.log('Inserting in master')
         const id = await insertMaster(params, remote_dataset_bundle_path, client)
         var count = 0
         const langTranslations = {}
-
-        for (const rows of Object.values(csvContent)) {
+        const nvalues = Object.values(csvContent)
+        console.log('nvalues', nvalues)
+        for (const rows of nvalues) {
             for (const [language1, translation1] of Object.entries(rows)) {
                 for (const [language2, translation2] of Object.entries(rows)) {
                     translationRows = langTranslations[`${language1}-${language2}`]
@@ -93,17 +94,25 @@ const start = async (connectionString, params, localDatasetPath, paired, remote_
             console.log(pair, rownum)
             console.log(rowStart, rowEnd)
             rows = langTranslations[pair]
+            if (rows == null) {
+                console.log('rows null for pair:', pair)
+                continue
+            }
             choosenRows = Object.values(Object.entries(rows).slice(rowStart - 1, rowEnd))
             choosenRows = choosenRows.map(r => r[1])
             console.log('choosenRows:', choosenRows)
 
             console.log('Inserting pair:', pair)
-            const MAX_WORD_LENGTH = 15
+            const MAX_WORD_LENGTH = 20
             var skipped = 0
             for (const row of choosenRows) {
                 const translations = Object.entries(row)
+
                 translation1 = translations[0][0]
+                    .split("'").join("''")
                 translation2 = translations[0][1]
+                    .split("'").join("''")
+
                 console.log('translation1:', translation1)
                 console.log('translation2:', translation2)
 
