@@ -11,4 +11,3 @@ insert into language_milestones (language, milestone_multiplier) values ('kannad
 insert into language_milestones (language, milestone_multiplier) values ('marati', 100);
 insert into language_milestones (language, milestone_multiplier) values ('malayalam', 100);
 insert into language_milestones (language, milestone_multiplier) values ('odia', 100);
-
