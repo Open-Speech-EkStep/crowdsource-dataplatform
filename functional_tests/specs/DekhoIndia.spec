@@ -80,7 +80,6 @@
 * When user clicks on Contribute more button , user should see no data available message for dekho India
 
 ## Validate Validate flow
-* Select Contribution Language as "ಕನ್ನಡ"
 * Navigate to "Validate" button and click "Validate" button
 * Add "V User" Username
 * When user click on Lets Go Button, user should "not" see instructions to record
