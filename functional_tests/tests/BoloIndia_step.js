@@ -371,11 +371,16 @@ step("User should be able to change to preffered Language to English again", asy
 });
 
 step("Select Contribution Language as <language>", async function (language) {
-    await taiko.waitFor(700)
-    await click(taiko.$('#Show_all_language'));
-    await taiko.waitFor(300)
+    await taiko.waitFor(500)
+    await click(taiko.$('#Show_all_language'))
+    await taiko.waitFor(500)
     await click(language);
     await taiko.waitFor(2000)
+    // if(taiko.button({ class: 'close float-right' }).isVisible())
+    // {
+    //     await click(taiko.button({ class: 'close float-right' }))
+    //     await taiko.waitFor(500)
+    // }
 });
 
 step("Select Contribution Language as <language> first time", async function (language) {

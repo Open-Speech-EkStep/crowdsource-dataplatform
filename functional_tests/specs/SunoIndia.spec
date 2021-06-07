@@ -80,6 +80,7 @@
 * User details popup should appear and close button should close the pop up
 
 ## Validate Validate flow
+* Select Contribution Language as "ಕನ್ನಡ"
 * Navigate to "Correct" button and click "Correct" button
 * Add "V User" Username
 * When user click on Lets Go Button, user should "not" see instructions to record for Dekho India flow
