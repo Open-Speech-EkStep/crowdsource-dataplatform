@@ -24,7 +24,6 @@ const {
     addValidationQuery,
     updateMediaWithValidatedState,
     getContributionHoursForLanguage,
-    getMultiplierForHourGoal,
     getOrderedMediaQuery,
     updateMaterializedViews,
     getContributionListQuery,
@@ -33,7 +32,8 @@ const {
     hasTargetQuery,
     isAllContributedQuery,
     getDataRowInfo,
-    getOrderedUniqueMediaQuery
+    getOrderedUniqueMediaQuery,
+    getLanguageGoal
 } = require('./../src/dbQuery');
 
 const mockDB = {
@@ -152,7 +152,7 @@ describe("Running tests for dbOperations", () => {
                     testAudioPath, testDatasetId, testUserId,
                     testUserName, testState, testCountry,
                     testAudioDuration, languageTwo, age, gender,
-                    motherTongue,device, browser, mockCb
+                    motherTongue, device, browser, mockCb
                 );
                 expect(mockCb).toBeCalledWith(400, expect.anything())
             });
@@ -163,7 +163,7 @@ describe("Running tests for dbOperations", () => {
                     testAudioPath, testDatasetId, testUserId,
                     testUserName, testState, testCountry,
                     testAudioDuration, languageOne, age, gender,
-                    motherTongue,device, browser, mockCb
+                    motherTongue, device, browser, mockCb
                 );
                 expect(mockCb).toBeCalledWith(400, expect.anything())
             });
@@ -303,7 +303,7 @@ describe("Running tests for dbOperations", () => {
                     testUserId, languageOne, testUserInput,
                     testDatasetId, testState, testCountry,
                     age, gender,
-                    motherTongue,device, browser, mockCb
+                    motherTongue, device, browser, mockCb
                 );
                 expect(mockCb).toBeCalledWith(400, expect.anything())
             });
@@ -333,7 +333,7 @@ describe("Running tests for dbOperations", () => {
                         languageOne,
                         testState,
                         testCountry,
-                        device, 
+                        device,
                         browser
                     ]
                 );
@@ -499,7 +499,8 @@ describe("Running tests for dbOperations", () => {
             when(spyDBany).calledWith(getTotalUserContribution, [contributor_id, language, type]).mockReturnValue([{ 'contribution_id': 1234 }]);
             when(spyDBany).calledWith(getTotalUserValidation, [contributor_id, language, type]).mockReturnValue([{ 'contribution_id': 1234 }]);
             when(spyDBone).calledWith(getContributionHoursForLanguage, [language]).mockReturnValue(10);
-            when(spyDBoneOrNone).calledWith(getMultiplierForHourGoal, [language]).mockReturnValue(100);
+            when(spyDBoneOrNone).calledWith(getLanguageGoal, [categoryContribute, type, language]).mockReturnValue(100);
+            when(spyDBoneOrNone).calledWith(getLanguageGoal, [categoryValidate, type, language]).mockReturnValue(100);
             when(spyDBany).calledWith(getBadges, [expect.anything(), language]).mockReturnValue([{ grade: 'bronze', id: 23, milestone: 5 }, { grade: 'silver', id: 24, milestone: 50 }, { grade: 'gold', id: 25, milestone: 100 }])
             when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryContribute, type]).mockReturnValue([]);
             when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryValidate, type]).mockReturnValue([]);
@@ -510,8 +511,8 @@ describe("Running tests for dbOperations", () => {
             when(spyDBoneOrNone).calledWith(checkNextMilestoneQuery, [contribution_count, language, categoryValidate, type]).mockReturnValue({ 'grade': 'silver', 'milestone': 100 });
             when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language, type, categoryContribute]).mockReturnValue({ 'milestone_id': milestoneId, 'grade': 'copper', 'milestone': 100 });
             when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language, type, categoryValidate]).mockReturnValue({ 'milestone_id': milestoneId, 'grade': 'copper', 'milestone': 100 });
-
         })
+
         afterEach(() => {
             jest.clearAllMocks();
         })
@@ -522,6 +523,7 @@ describe("Running tests for dbOperations", () => {
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, getContributorIdQuery, [userId, userName])
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkCurrentMilestoneQuery, [contribution_count, language, type, categoryContribute])
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, checkNextMilestoneQuery, [contribution_count, language, categoryContribute, type])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(4, getLanguageGoal, [categoryContribute, type, language])
             expect(spyDBany).toHaveBeenCalledWith(getTotalUserContribution, [contributor_id, language, type])
         });
 
@@ -531,6 +533,7 @@ describe("Running tests for dbOperations", () => {
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, getContributorIdQuery, [userId, userName])
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkCurrentMilestoneQuery, [contribution_count, language, type, categoryValidate])
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, checkNextMilestoneQuery, [contribution_count, language, categoryValidate, type])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(4, getLanguageGoal, [categoryValidate, type, language])
             expect(spyDBany).toHaveBeenCalledWith(getTotalUserValidation, [contributor_id, language, type])
         });
 
@@ -652,7 +655,7 @@ describe("Running tests for dbOperations", () => {
             when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
             const action = 'accept';
 
-            const req = { 'body': { sentenceId: datasetId, state, country, userName,device, browser }, 'cookies': { userId }, params: { action, contributionId } }
+            const req = { 'body': { sentenceId: datasetId, state, country, userName, device, browser }, 'cookies': { userId }, params: { action, contributionId } }
 
             await dbOperations.updateTablesAfterValidation(req, res);
 
