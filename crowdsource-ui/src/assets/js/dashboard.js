@@ -230,10 +230,8 @@ $(document).ready(function () {
         );
         const options = $("#transgender_options");
         if (selectedGender.value === "others") {
-            console.log(options);
             options.removeClass("d-none");
         } else {
-            console.log(options);
             options.addClass("d-none");
         }
     });
