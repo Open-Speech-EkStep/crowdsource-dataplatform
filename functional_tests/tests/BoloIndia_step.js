@@ -316,8 +316,8 @@ step("User plays the audio , <arg0>,<arg1> should be disabled", async function (
     assert.ok( await taiko.button({ id: arg1 }).isDisabled());
     // Once the audio is complete , then correct button should be enabled
     await taiko.waitFor(7000)
-    assert.ok( await taiko.button({ id: arg0 }).isDisabled());
-    assert.ok( await taiko.button({ id: arg1 }).isDisabled());
+    assert.ok(! await taiko.button({ id: arg0 }).isDisabled());
+    assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
 });
 
 step("<arg0> should be enabled , <arg1> <arg2> buttons should be disabled", async function (arg0, arg1, arg2) {
@@ -375,7 +375,7 @@ step("Select Contribution Language as <language>", async function (language) {
     await click(taiko.$('#Show_all_language'));
     await taiko.waitFor(300)
     await click(language);
-    await taiko.waitFor(1000)
+    await taiko.waitFor(2000)
 });
 
 step("Select Contribution Language as <language> first time", async function (language) {
