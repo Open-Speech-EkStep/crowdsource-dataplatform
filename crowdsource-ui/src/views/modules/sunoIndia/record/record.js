@@ -536,7 +536,7 @@ function executeOnLoad() {
 
     });
     $errorModal.on('hidden.bs.modal', function () {
-      location.href = './home.html#speaker-details';
+      location.href = './home.html';
     });
 
     if (!localSpeakerDataParsed) {
@@ -572,7 +572,6 @@ function executeOnLoad() {
       })
         .then((data) => {
           if (!data.ok) {
-            showNoSentencesMessage();
             throw Error(data.statusText || 'HTTP error');
           } else {
             return data.json();

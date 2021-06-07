@@ -429,6 +429,16 @@ $(document).ready(() => {
   const localSentences = localStorage.getItem(sentencesKey);
   const localSentencesParsed = JSON.parse(localSentences);
   setPageContentHeight();
+
+  const $errorModal = $('#errorModal');
+
+  $errorModal.on('show.bs.modal', function () {
+
+  });
+  $errorModal.on('hidden.bs.modal', function () {
+    location.href = './home.html';
+  });
+
   if (!localSpeakerDataParsed) {
     location.href = './home.html';
     return;
@@ -452,7 +462,6 @@ $(document).ready(() => {
     })
       .then((data) => {
         if (!data.ok) {
-          showNoSentencesMessage();
           throw Error(data.statusText || 'HTTP error');
         } else {
           return data.json();
@@ -477,6 +486,7 @@ $(document).ready(() => {
       initializeComponent();
     }).catch((err) => {
       console.log(err);
+      $errorModal.modal('show');
     })
   }
 });

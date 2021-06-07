@@ -443,7 +443,6 @@ function executeOnLoad() {
       })
         .then((data) => {
           if (!data.ok) {
-            showNoSentencesMessage();
             throw Error(data.statusText || 'HTTP error');
           } else {
             return data.json();
