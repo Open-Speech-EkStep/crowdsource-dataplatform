@@ -376,11 +376,11 @@ step("Select Contribution Language as <language>", async function (language) {
     await taiko.waitFor(500)
     await click(language);
     await taiko.waitFor(2000)
-    if(taiko.button({ class: 'close float-right' }).isVisible())
-    {
-        await click(taiko.button({ class: 'close float-right' }))
-        await taiko.waitFor(500)
-    }
+    // if(taiko.button({ class: 'close float-right' }).isVisible())
+    // {
+    //     await click(taiko.button({ class: 'close float-right' }))
+    //     await taiko.waitFor(500)
+    // }
 });
 
 step("Select Contribution Language as <language> first time", async function (language) {
