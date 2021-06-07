@@ -17,11 +17,6 @@
 * Check "Label" option should be "disabled" on Home page
 * Check "Validate" option should be "enabled" on Home page
 
-## Check Dashboard Page
-* When user clicks on View all Details buttton user should be able to see "Progress Chart" , "State Wise distribution"
-* user should be able to see "People participated" , "Images labelled" , "Images validated" , "Languages"
-* When user select "हिंदी" Language from dropdown then "languages" should not visible
-* When user clicks on back button, user should land on Dekho India home page
 
 ## Validate the User Details pop-up in Label section for Kannada language
 * Select Contribution Language as "ಕನ್ನಡ"
@@ -105,3 +100,9 @@
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
 * User clicks on "like_button" he should see thank you page and should be able to see bronze Badge
 * User should see the "Validate More" button
+
+## Check Dashboard Page
+* When user clicks on View all Details buttton user should be able to see "Progress Chart" , "State Wise distribution"
+* user should be able to see "People participated" , "Images labelled" , "Images validated" , "Languages"
+* When user select "ଓଡିଆ" Language from dropdown then "languages" should not visible
+* When user clicks on back button, user should land on Dekho India home page
