@@ -13,7 +13,6 @@
 
 ## Validate Contributor flow
 * Select "Bolo India" from header
-//* Select translation language as "English"
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
 * When user click on Lets Go Button, user should "" see instructions to record
@@ -25,7 +24,12 @@
 * When user clicks on "Re-record" button, "Stop Recording" button should appear
 * When user clicks on "Stop Recording" button, "Submit" button should appear
 * When user clicks on "Submit" button, "Skip" button should appear
-* When user skips all the rest of the "4" sentences , User should see Thank you Page
+* when user skips the sentence
+* when user skips the sentence
+* when user skips the sentence
+* when user skips the sentence
+* User waits for thank you page
+//* When user skips all the rest of the "4" sentences , User should see Thank you Page
 * when user clicks on the Contribute More button, user should not see the Instructions page again
 
 ## Validate Validator flow
