@@ -104,7 +104,7 @@ group by dataset_row.dataset_row_id, dataset_row.media->>'data'
 order by dataset_row.dataset_row_id
 limit 5`;
 
- const getOrderedUniqueMediaForParallel = `select dr.dataset_row_id, dr.media->>'data' as media_data from dataset_row dr 
+const getOrderedUniqueMediaForParallel = `select dr.dataset_row_id, dr.media->>'data' as media_data from dataset_row dr 
 left join contributors con on con.contributor_identifier=$1 and user_name=$2
 left join contributions cont on cont.dataset_row_id=dr.dataset_row_id and cont.contributed_by=con.contributor_id 
 where dr.media->>'language'=$4 and difficulty_level=$3 and type=$5 
@@ -233,7 +233,34 @@ const getContributionHoursForLanguage = `select COALESCE(sum((con.media->>'durat
 inner join dataset_row dr on dr."dataset_row_id"=con."dataset_row_id" where LOWER(dr.media->>'language') = LOWER($1) 
 and action = 'completed' and (con.media->>'duration') is not null`;
 
-const getMultiplierForHourGoal = 'select milestone_multiplier as multiplier from language_milestones where LOWER(language) = $1;';
+const getContributionAmount = `select count(*) as amount from contributions con 
+inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
+and action='completed' and type=$2`;
+
+const getContributionHoursForAsr = `select ROUND((sum(COALESCE((dr.media->>'duration')::decimal,0))/3600),3) as amount from contributions con 
+inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
+and action='completed' and type='asr'`;
+
+const getContributionHoursForText = `select ROUND((sum(COALESCE((con.media->>'duration')::decimal,0))/3600),3) as amount from contributions con 
+inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
+and action='completed' and type='text'`;
+
+const getValidationAmount = `select count(*) as amount from contributions con 
+inner join validations val on val.contribution_id=con.contribution_id and val.action!='skip'
+inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
+and con.action='completed' and type=$2`;
+
+const getValidationHoursForAsr = `select ROUND((sum(COALESCE((dr.media->>'duration')::decimal,0))/3600),3) as amount from contributions con 
+inner join validations val on val.contribution_id=con.contribution_id and val.action!='skip'
+inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
+and con.action='completed' and type='asr'`;
+
+const getValidationHoursForText = `select ROUND((sum(COALESCE((con.media->>'duration')::decimal,0))/3600),3) as amount from contributions con 
+inner join validations val on val.contribution_id=con.contribution_id and val.action!='skip'
+inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
+and con.action='completed' and type='text'`;
+
+const getLanguageGoal = `select goal from language_goals where category=$1 and type=$2 and LOWER(language)=LOWER($3)`;
 
 const getContributionLanguagesQuery = `select dr.media->>'language' as from_language,con.media->>'language' as to_language from dataset_row dr inner join 
 contributions con on con.dataset_row_id=dr.dataset_row_id and con.action='completed' where dr.type=$1 group by dr.media->>'language',con.media->>'language',dr.type`;
@@ -255,7 +282,7 @@ const isAllContributedQuery = `select not exists(
 
 const getDataRowInfo = `select type, media->>'language' as language from dataset_row where dataset_row_id=$1`;
 
-const userVerifyQuery =  `select id from users where LOWER(username) = LOWER($1) and role = $2`;
+const userVerifyQuery = `select id from users where LOWER(username) = LOWER($1) and role = $2`;
 
 module.exports = {
   userVerifyQuery,
@@ -298,7 +325,13 @@ module.exports = {
   getBadges,
   addContributorQuery,
   getContributionHoursForLanguage,
-  getMultiplierForHourGoal,
+  getContributionAmount,
+  getContributionHoursForAsr,
+  getContributionHoursForText,
+  getValidationAmount,
+  getValidationHoursForAsr,
+  getValidationHoursForText,
+  getLanguageGoal,
   updateContributionDetailsWithUserInput,
   getPathFromMasterDataSet,
   getContributionLanguagesQuery,
