@@ -31,9 +31,9 @@ step("When user clicks on back button, user should land on Dekho India home page
     if (await taiko.text('Back').exists()) {
         assert.ok('Back button exists')
         await click(taiko.text("Back"))
-        await taiko.waitFor(650)
+        await taiko.waitFor(1000)
     }
-    assert.ok(await text("Help your language by labelling images").exists());
+    assert.ok(await text("Help your language by labelling images").isVisible());
 
 });
 
