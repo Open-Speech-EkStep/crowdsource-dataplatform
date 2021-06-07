@@ -19,6 +19,7 @@ const {
     into,
     evaluate
 } = require('taiko');
+const path = require('path');
 
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
 const testUrl = process.env.test_url;
@@ -39,7 +40,9 @@ afterSuite(async () => {
 });
 
 gauge.screenshotFn = async function () {
-    return await taiko.screenshot({ encoding: 'base64' });
+    const screenshotFilePath = path.join(process.env['gauge_screenshots_dir'], `screenshot-${process.hrtime.bigint()}.png`);
+    await screenshot({ path: screenshotFilePath });
+    return await taiko.screenshot({ encoding: 'base64' ,path:screenshotFilePath});
 };
 
 step("Open Website", async () => {
@@ -152,7 +155,7 @@ step("User should be able to close the Instructions , user should see a sentence
 step("When user clicks on <arg0> button, <arg1> button should appear", async function (arg0, arg1) {
     await taiko.waitFor(async () => (await button(arg0).exists()))
     await taiko.waitFor(1000)
-    await screenshot({fullPage: true});
+    await gauge.screenshotFn();
     await evaluate(button(arg0), (elem) => elem.click())
     await taiko.waitFor(3000)
     assert.ok(await button(arg1).exists())
@@ -295,8 +298,8 @@ step("User plays the audio , <arg0>,<arg1> should be disabled", async function (
     assert.ok( await taiko.button({ id: arg1 }).isDisabled());
     // Once the audio is complete , then correct button should be enabled
     await taiko.waitFor(7000)
-    assert.ok(! await taiko.button({ id: arg0 }).isDisabled());
-    assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
+    assert.ok( await taiko.button({ id: arg0 }).isDisabled());
+    assert.ok( await taiko.button({ id: arg1 }).isDisabled());
 });
 
 step("<arg0> should be enabled , <arg1> <arg2> buttons should be disabled", async function (arg0, arg1, arg2) {
@@ -359,7 +362,7 @@ step("Select Contribution Language as <language>", async function (language) {
 
 step("Select Contribution Language as <language> first time", async function (language) {
     await taiko.waitFor(500)
-    await screenshot({fullPage: true});
+    await gauge.screenshotFn();
     await click(language);
     await taiko.waitFor(700)
 });
