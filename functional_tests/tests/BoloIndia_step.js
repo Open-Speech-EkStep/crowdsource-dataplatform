@@ -158,6 +158,7 @@ step("When user clicks on <arg0> button, <arg1> button should appear", async fun
     await gauge.screenshotFn();
     await evaluate(button(arg0), (elem) => elem.click())
     await taiko.waitFor(3000)
+    await gauge.screenshotFn();
     assert.ok(await button(arg1).exists())
 });
 
@@ -171,6 +172,23 @@ step("When user skips all the rest of the <count> sentences , User should see Th
     await taiko.waitFor(5000)
     assert.ok(await text('Thank you for contributing!').exists())
 });
+
+
+step("when user skips the sentence", async function()
+{
+    await taiko.waitFor(500)
+    const skipbutton = taiko.button({ id: 'skipBtn' })
+    await click(skipbutton)
+    await taiko.waitFor(1500)
+    await gauge.screenshotFn();
+
+});
+
+step("User waits for thank you page", async function()
+    {
+        await taiko.waitFor(5000)
+        assert.ok(await text('Thank you for contributing!').exists())
+    });
 
 step("when user clicks on the Contribute More button, user should not see the Instructions page again", async function () {
     await click(link('Contribute More'))
