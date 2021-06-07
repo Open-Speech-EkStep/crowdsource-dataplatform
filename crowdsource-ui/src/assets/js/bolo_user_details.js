@@ -156,6 +156,8 @@ const setLetGoBtnOnClick = function (url, module='') {
 }
 
 module.exports = {
+  testBoloUserName,
+  validateBoloUserName,
   setBoloSpeakerDetails,
   resetBoloSpeakerDetails,
   setBoloUserNameTooltip,
