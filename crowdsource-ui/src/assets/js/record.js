@@ -409,7 +409,7 @@ const initialize = () => {
         localStorage.setItem(skipCountKey, skipCount);
     }
 
-    function markContributionSkipped() {
+    function markContributionSkipped(cb) {
         const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
         const state_region = localStorage.getItem('state_region') || "";
         const country = localStorage.getItem('country') || "";
