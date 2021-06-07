@@ -80,10 +80,8 @@ function initializeBlock() {
   $startRecordBtnTooltip.tooltip('disable');
   setSpeakerDetails(speakerDetailsKey, $userName);
   setUserNameOnInputFocus();
-  // setStartRecordingBtnOnClick();
   setUserModalOnShown($userName);
   getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, setDefaultLang);
-
 }
 
 $(document).ready(function () {

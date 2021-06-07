@@ -65,7 +65,6 @@ function buildGraphs(language, timeframe) {
   // $.fn.popover.Constructor.Default.whiteList.tbody = [];
   // $.fn.popover.Constructor.Default.whiteList.tr = [];
   // $.fn.popover.Constructor.Default.whiteList.td = [];
-  console.log("bar graph", language, timeframe);
   Promise.all([
     fetch(`/stats/contributions/gender/text?language=${language}`),
   ]).then(function (responses) {
@@ -76,7 +75,6 @@ function buildGraphs(language, timeframe) {
     try {
       $chartLoaders.hide().removeClass('d-flex');
       $charts.removeClass('d-none');
-      console.log(data);
 
       const genderData = getGenderData(data[0]);
       // Draw gender chart
