@@ -660,8 +660,8 @@ const getSentencesForProfanityChecking = (username, type, language) => {
     return db.any(getSentencesForProfanityCheck, [username, currentTime, type, language])
 }
 
-const updateProfanityStatus = async (userName, sentenceId, profanityStatus) => {
-    await db.any(updateSentenceWithProfanity, [profanityStatus, sentenceId, userName])
+const updateProfanityStatus = (userName, sentenceId, profanityStatus) => {
+    return db.any(updateSentenceWithProfanity, [profanityStatus, sentenceId, userName])
 }
 
 const releaseMedia = (dataset_id) => {
