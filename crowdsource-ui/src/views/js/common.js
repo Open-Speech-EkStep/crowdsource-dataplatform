@@ -117,7 +117,7 @@ const showFucntionalCards = (type, from, to) => {
     });
 
   } catch (error) {
-
+    console.log(error);
   }
 }
 

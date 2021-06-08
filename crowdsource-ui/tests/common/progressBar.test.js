@@ -1,9 +1,9 @@
 const {readFileSync} = require('fs');
-const {stringToHTML} = require('./utils');
-const {setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../build/js/common/progressBar.js');
+const {stringToHTML} = require('../utils');
+const {setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../../build/js/common/progressBar.js');
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../build/views/common/progressBar.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../../build/views/common/progressBar.ejs`, 'UTF-8')
 );
 
 describe("setCurrentSentenceIndex",()=>{
