@@ -153,8 +153,8 @@ function addListeners() {
       });
 
   $skipButton.on('click', () => {
-    getNextSentence();
     updateSkipAction();
+    getNextSentence();
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
   })

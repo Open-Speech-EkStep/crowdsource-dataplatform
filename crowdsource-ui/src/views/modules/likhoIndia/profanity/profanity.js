@@ -139,8 +139,8 @@ function addListeners() {
       $('#pause').trigger('click');
     }
     // markContributionSkipped();
-    getNextSentence();
     updateSkipAction();
+    getNextSentence();
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
   })
