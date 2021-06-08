@@ -120,18 +120,18 @@ function lngtype(text) {
   //Dictionary for Unicode range of the languages
   const currentModule = localStorage.getItem(CURRENT_MODULE);
   let langdic = {
-    "Assamese": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Bengali": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
+    "Assamese": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Bengali": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
     "English": /^[\u0020-\u007F]+$/,
-    "Gujarati": /^[\u0A80-\u0AFF\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Hindi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Kannada": /^[\u0C80-\u0CFF\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Malayalam": /^[\u0D00-\u0D7F\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Odia": /^[\u0B00-\u0B7F\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Marathi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Punjabi": /^[\u0A00-\u0A7F\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Tamil": /^[\u0B80-\u0BFF\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Telugu": /^[\u0C00-\u0C7F\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
+    "Gujarati": /^[\u0A80-\u0AFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Hindi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Kannada": /^[\u0C80-\u0CFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Malayalam": /^[\u0D00-\u0D7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Odia": /^[\u0B00-\u0B7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Marathi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Punjabi": /^[\u0A00-\u0A7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Tamil": /^[\u0B80-\u0BFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Telugu": /^[\u0C00-\u0C7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
   }
 
   // if(currentModule == 'suno' ){
