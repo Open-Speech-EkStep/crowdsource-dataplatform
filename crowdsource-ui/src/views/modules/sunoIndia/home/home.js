@@ -85,7 +85,7 @@ function initializeBlock() {
   setSpeakerDetails(speakerDetailsKey, $userName);
   $startRecordBtnTooltip.tooltip('disable');
   setUserNameOnInputFocus();
-  setStartRecordingBtnOnClick();
+  // setStartRecordingBtnOnClick();
   setUserModalOnShown($userName);
   getStatsSummary('/stats/summary/asr',MODULE.suno.value, setDefaultLang);
 }
