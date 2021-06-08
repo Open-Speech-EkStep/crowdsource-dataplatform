@@ -661,7 +661,8 @@ const getSentencesForProfanityChecking = (username, type, language) => {
 }
 
 const updateProfanityStatus = (userName, sentenceId, profanityStatus) => {
-    return db.any(updateSentenceWithProfanity, [profanityStatus, sentenceId, userName])
+    currentTime = moment().utcOffset("+05:30").format()
+    return db.any(updateSentenceWithProfanity, [profanityStatus, sentenceId, userName, currentTime])
 }
 
 const releaseMedia = (dataset_id) => {
