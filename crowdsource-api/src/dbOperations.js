@@ -40,7 +40,7 @@ const {
     getBadges,
     addContributorQuery,
     getContributionHoursForLanguage,
-    getLanguageGoal,
+    getLanguageGoalQuery,
     getOrderedMediaQuery,
     getContributionLanguagesQuery,
     getDatasetLanguagesQuery,
@@ -539,7 +539,8 @@ const getRewards = async (userId, userName, language, source, type) => {
     const nextBadgeType = nextMilestoneData.grade || '';
     const currentMilestone = currentMilestoneData.milestone || 0;
     const nextMilestone = nextMilestoneData.milestone || 0;
-    const hourGoal = await getHourGoalForLanguage(language, source, type);
+    const languageGoal = await getLanguageGoal(language, source, type);
+    const currentAmount = await getCurrentAmountForLanguage(type, source, language);
     return {
         "badgeId": generatedBadgeId,
         "currentBadgeType": currentBadgeType,
@@ -549,7 +550,8 @@ const getRewards = async (userId, userName, language, source, type) => {
         "contributionCount": Number(total_count),
         "isNewBadge": isNewBadge,
         'badges': badges,
-        'hourGoal': hourGoal
+        'currentAmount': currentAmount,
+        'languageGoal': languageGoal
     }
 }
 
@@ -578,12 +580,12 @@ async function getCurrentAmountForLanguage(type, source, language) {
             query = getValidationAmount;
     }
 
-    const currentLanguageAmount = await db.one(query, [language, type]);
-    return currentLanguageAmount;
+    const currentLanguageAmount = await db.oneOrNone(query, [language, type]);
+    return parseFloat(currentLanguageAmount['amount']);
 }
 
-const getHourGoalForLanguage = async (language, source, type) => {
-    const languageGoal = await db.oneOrNone(getLanguageGoal, [source, type, language]);
+const getLanguageGoal = async (language, source, type) => {
+    const languageGoal = await db.oneOrNone(getLanguageGoalQuery, [source, type, language]);
     return languageGoal['goal'];
 }
 
