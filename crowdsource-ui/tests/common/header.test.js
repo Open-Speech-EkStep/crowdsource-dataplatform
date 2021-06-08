@@ -1,10 +1,10 @@
 const {readFileSync} = require('fs');
-const {stringToHTML, mockLocalStorage} = require('./utils');
-const {CURRENT_MODULE} = require('../build/js/common/constants');
-const {onActiveNavbar,showUserProfile} = require('../build/js/common/header.js');
+const {stringToHTML, mockLocalStorage} = require('../utils');
+const {CURRENT_MODULE} = require('../../build/js/common/constants');
+const {onActiveNavbar,showUserProfile} = require('../../build/js/common/header.js');
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../build/views/common/header.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../../build/views/common/header.ejs`, 'UTF-8')
 );
 
 describe("onActiveNavbar",()=> {

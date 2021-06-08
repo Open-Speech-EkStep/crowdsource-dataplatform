@@ -10,3 +10,4 @@ const addOnClickListener = function () {
 }
 
 addOnClickListener();
+module.exports = {addOnClickListener};
