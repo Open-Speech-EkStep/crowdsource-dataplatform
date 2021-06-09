@@ -32,7 +32,7 @@ const profanityCheckerApi = function (router) {
 
     router.put('/profanity-status/:type', async (req, res) => {
         const { profanityStatus, sentenceId } = req.body;
-        let userName = req.query.username || '';
+        let userName = req.body.userName || '';
         userName = userName.toLowerCase();
         if (userName.includes("profanity_")) {
             await updateProfanityStatusForCorrection(userName, sentenceId, profanityStatus)
@@ -44,7 +44,7 @@ const profanityCheckerApi = function (router) {
 
     router.put('/profanity-skip/:type', async (req, res) => {
         const { sentenceId } = req.body;
-        let userName = req.query.username || '';
+        let userName = req.body.userName || '';
         userName = userName.toLowerCase();
         if (userName.includes("profanity_")) {
             await releaseMediaForCorrection(sentenceId)
