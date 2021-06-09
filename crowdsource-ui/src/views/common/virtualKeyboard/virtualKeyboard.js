@@ -216,7 +216,7 @@ function dragElement(elmnt) {
 
 try {
   $("#keyboardBox").draggable({
-    containment: "body"
+    containment: "html"
   });
 } catch (e) {
   dragElement(document.getElementById("keyboardBox"));
