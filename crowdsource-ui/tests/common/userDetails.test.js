@@ -6,12 +6,12 @@ const {
   resetSpeakerDetails,
   setUserNameTooltip,
   setStartRecordingBtnOnClick
-} = require('../build/js/common/userDetails');
+} = require('../../build/js/common/userDetails');
 const {readFileSync} = require('fs');
-const {stringToHTML, flushPromises,mockLocation, mockLocalStorage} = require('./utils');
+const {stringToHTML, flushPromises,mockLocation, mockLocalStorage} = require('../utils');
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../build/views/common/userDetails.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../../build/views/common/userDetails.ejs`, 'UTF-8')
 );
 
 describe('testUserName', () => {

@@ -1,12 +1,12 @@
 const {readFileSync} = require('fs');
-const {stringToHTML, mockLocalStorage} = require('./utils');
-const {CONTRIBUTION_LANGUAGE} = require('../build/js/common/constants');
-const {getStatistics, getStatsSummary,getDefaultLang,setDefaultLang} = require('../build/js/common/commonHome.js');
+const {stringToHTML, mockLocalStorage} = require('../utils');
+const {CONTRIBUTION_LANGUAGE} = require('../../build/js/common/constants');
+const {getStatistics, getStatsSummary,getDefaultLang,setDefaultLang} = require('../../build/js/common/commonHome.js');
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../build/views/sunoIndia/home.ejs`, 'UTF-8') +
-  readFileSync(`${__dirname}/../build/views/common/languageNavBar.ejs`, 'UTF-8')+
-  readFileSync(`${__dirname}/../build/views/common/say-listen-language.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../../build/views/sunoIndia/home.ejs`, 'UTF-8') +
+  readFileSync(`${__dirname}/../../build/views/common/languageNavBar.ejs`, 'UTF-8')+
+  readFileSync(`${__dirname}/../../build/views/common/say-listen-language.ejs`, 'UTF-8')
 );
 
 

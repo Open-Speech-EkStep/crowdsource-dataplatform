@@ -127,17 +127,17 @@ const showFucntionalCards = (type, from, to) => {
     });
 
   } catch (error) {
-
+    console.log(error);
   }
 }
 
 const setBadge = function (data, localeStrings, functionalFlow) {
   localStorage.setItem('badgeId', data.badgeId);
   localStorage.setItem('badges', JSON.stringify(data.badges));
-  const nextHourGoal = data.nextHourGoal ? data.nextHourGoal : 100;
-  localStorage.setItem('nextHourGoal', nextHourGoal);
+  const hourGoal = data.hourGoal || 0;
+  localStorage.setItem('nextHourGoal', hourGoal);
   $("#user-contribution").text(data.contributionCount);
-  $("#language-hour-goal").text(nextHourGoal);
+  $("#language-hour-goal").text(hourGoal);
 
   const module = localStorage.getItem(CURRENT_MODULE);
   if (data.isNewBadge) {
@@ -270,4 +270,3 @@ const showOrHideExtensionCloseBtn = function (){
 
 
 module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn };
-

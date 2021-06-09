@@ -43,10 +43,10 @@ function setSentencesContributed() {
   ).then((data) => {
     localStorage.setItem('badgeId', data.badgeId);
     localStorage.setItem('badges', JSON.stringify(data.badges));
-    const nextHourGoal = data.nextHourGoal ? data.nextHourGoal : 100;
-    localStorage.setItem('nextHourGoal', nextHourGoal);
+    const hourGoal = data.hourGoal || 0;
+    localStorage.setItem('nextHourGoal', hourGoal);
     $("#user-contribution").text(data.contributionCount);
-    $("#language-hour-goal").text(nextHourGoal);
+    $("#language-hour-goal").text(hourGoal);
     if (data.isNewBadge) {
       $("#spree_text").removeClass("d-none");
       $("#milestone_text").removeClass("d-none");
@@ -197,9 +197,9 @@ const setTotalProgressBar = (totalSeconds) => {
     performAPIRequest(
       `/rewards?type=text&language=${contributionLanguage}&source=contribute&userName=${userName}`
     ).then((data) => {
-      const nextHourGoal = data.nextHourGoal ? data.nextHourGoal : 100;
-      localStorage.setItem('nextHourGoal',nextHourGoal);
-      updateProgressBulb(nextHourGoal, totalSeconds);
+      const hourGoal = data.hourGoal || 0;
+      localStorage.setItem('nextHourGoal',hourGoal);
+      updateProgressBulb(hourGoal, totalSeconds);
     })
 };
 
@@ -317,28 +317,6 @@ const getLanguageStats = function () {
     });
 };
 
-function setTotalHoursContributed(localSpeakerDataParsed) {
-  const $speakersDataHoursValue = $("#hour-value");
-  fetch(`/getDetails/${localSpeakerDataParsed.language}`)
-    .then((data) => {
-      if (!data.ok) {
-        throw Error(data.statusText || "HTTP error");
-      } else {
-        return data.json();
-      }
-    })
-    .then((data) => {
-      localStorage.setItem(SPEAKERS_DATA, JSON.stringify(data));
-      showSpeakersHoursData(data);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .then(() => {
-      $speakersDataHoursValue.next().addClass("d-none");
-    });
-}
-
 function executeOnLoad() {
   const currentIndexInStorage = Number(localStorage.getItem(CURRENT_INDEX));
   const localSpeakerDataParsed = JSON.parse(
@@ -357,7 +335,6 @@ function executeOnLoad() {
     }
     setPageContentHeight();
     setSentencesContributed();
-    setTotalHoursContributed(localSpeakerDataParsed);
   }
 
   toggleFooterPosition();

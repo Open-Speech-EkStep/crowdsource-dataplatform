@@ -56,8 +56,6 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
 
 
     chart.data = chartData;
-    console.log(currentModule);
-    console.log(chart.data);
 
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
     dateAxis.renderer.minGridDistance = 10;
@@ -160,8 +158,8 @@ function buildLineGraphs(language, timeframe, type, series1Name, series2Name) {
           'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'
         );
         fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
-        fetch('../css/notyf.min.css');
-        fetch('../css/record.css');
+        fetch('../../css/notyf.min.css');
+        fetch('../../css/record.css');
       }, 2000);
     } catch (error) {
       console.log(error);

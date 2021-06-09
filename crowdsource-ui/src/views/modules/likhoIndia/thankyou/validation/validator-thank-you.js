@@ -40,7 +40,6 @@ function downloadPdf(badgeType) {
     img.crossOrigin = "Anonymous";
     const currentModule = localStorage.getItem(CURRENT_MODULE);
     const badges = MODULE[currentModule].BADGES;
-    console.log(badges[badgeType].imgValJpg)
 
     img.src = badges[badgeType].imgValJpg;
     const allBadges = JSON.parse(localStorage.getItem('badges'));

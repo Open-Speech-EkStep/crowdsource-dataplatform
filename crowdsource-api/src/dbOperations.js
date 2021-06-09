@@ -40,7 +40,7 @@ const {
     getBadges,
     addContributorQuery,
     getContributionHoursForLanguage,
-    getMultiplierForHourGoal,
+    getLanguageGoal,
     getOrderedMediaQuery,
     getContributionLanguagesQuery,
     getDatasetLanguagesQuery,
@@ -49,7 +49,13 @@ const {
     getDataRowInfo,
     getOrderedUniqueMediaQuery,
     getOrderedUniqueMediaForParallel,
-    getContributionListForParallel
+    getContributionListForParallel,
+    getContributionHoursForAsr,
+    getValidationHoursForAsr,
+    getContributionHoursForText,
+    getValidationHoursForText,
+    getContributionAmount,
+    getValidationAmount
 } = require('./dbQuery');
 
 const {
@@ -524,7 +530,7 @@ const getRewards = async (userId, userName, language, source, type) => {
     const { isCurrentAvailable, currentMilestoneData } = await getCurrentMilestoneData(total_count, language, type, source);
 
     let isNewBadge = false, generatedBadgeId = '', badges = [];
-    if (isCurrentAvailable /* && contribution_count !== 0*/) {
+    if (isCurrentAvailable) {
         ({ isNewBadge, generatedBadgeId, badges } = await createBadge(contributor_id, language, currentMilestoneData, source, type));
     }
 
@@ -533,7 +539,7 @@ const getRewards = async (userId, userName, language, source, type) => {
     const nextBadgeType = nextMilestoneData.grade || '';
     const currentMilestone = currentMilestoneData.milestone || 0;
     const nextMilestone = nextMilestoneData.milestone || 0;
-    const nextHourGoal = await getHourGoalForLanguage(language);
+    const hourGoal = await getHourGoalForLanguage(language, source, type);
     return {
         "badgeId": generatedBadgeId,
         "currentBadgeType": currentBadgeType,
@@ -543,7 +549,7 @@ const getRewards = async (userId, userName, language, source, type) => {
         "contributionCount": Number(total_count),
         "isNewBadge": isNewBadge,
         'badges': badges,
-        'nextHourGoal': nextHourGoal
+        'hourGoal': hourGoal
     }
 }
 
@@ -551,14 +557,34 @@ const getRewardsInfo = (type, source, language) => {
     return db.any(rewardsInfoQuery, [type, source, language]);
 }
 
-const getHourGoalForLanguage = async (language) => {
-    const result = await db.one(getContributionHoursForLanguage, [language]);
-    const multiplierResult = await db.oneOrNone(getMultiplierForHourGoal, [language]);
-    let multiplier = 100;
-    if (multiplierResult) {
-        multiplier = multiplierResult['multiplier'];
+async function getCurrentAmountForLanguage(type, source, language) {
+    let query;
+    if (type == 'asr') {
+        if (source == 'contribute') {
+            query = getContributionHoursForAsr;
+        } else
+            query = getValidationHoursForAsr;
     }
-    return parseInt((Math.ceil(result['hours'] / parseFloat(multiplier))) * multiplier);
+    else if (type == 'text') {
+        if (source == 'contribute') {
+            query = getContributionHoursForText;
+        } else
+            query = getValidationHoursForText;
+    }
+    else {
+        if (source == 'contribute') {
+            query = getContributionAmount;
+        } else
+            query = getValidationAmount;
+    }
+
+    const currentLanguageAmount = await db.one(query, [language, type]);
+    return currentLanguageAmount;
+}
+
+const getHourGoalForLanguage = async (language, source, type) => {
+    const languageGoal = await db.oneOrNone(getLanguageGoal, [source, type, language]);
+    return languageGoal['goal'];
 }
 
 const updateDbWithUserInput = async (
@@ -634,17 +660,17 @@ const getSentencesForProfanityChecking = (username, type, language) => {
     return db.any(getSentencesForProfanityCheck, [username, currentTime, type, language])
 }
 
-const updateProfanityStatus = async (userName, sentenceId, profanityStatus) => {
-    await db.any(updateSentenceWithProfanity, [profanityStatus, sentenceId, userName])
+const updateProfanityStatus = (userName, sentenceId, profanityStatus) => {
+    return db.any(updateSentenceWithProfanity, [profanityStatus, sentenceId, userName])
 }
 
-const releaseMedia = (dataset_id) =>{
-   return db.any(releaseMediaQuery,[dataset_id])
+const releaseMedia = (dataset_id) => {
+    return db.any(releaseMediaQuery, [dataset_id])
 }
 
 const userVerify = async (userName, role) => {
-    let result = await db.any(userVerifyQuery ,[userName, role]);
-    if(result.length === 0){
+    let result = await db.any(userVerifyQuery, [userName, role]);
+    if (result.length === 0) {
         throw new Error("No user found")
     }
 }

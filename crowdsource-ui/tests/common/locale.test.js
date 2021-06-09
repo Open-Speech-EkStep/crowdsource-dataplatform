@@ -1,6 +1,6 @@
-const {mockLocalStorage, mockLocation} = require('../../utils');
-const {CURRENT_MODULE} = require('../../../build/js/common/constants');
-const {changeLocale} = require('../../../build/js/common/locale.js');
+const {mockLocalStorage, mockLocation} = require('../utils');
+const {CURRENT_MODULE} = require('../../build/js/common/constants');
+const {changeLocale} = require('../../build/js/common/locale.js');
 
 
 describe("changeLocale", () => {

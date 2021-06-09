@@ -19,6 +19,7 @@ const {
     into,
     evaluate
 } = require('taiko');
+const path = require('path');
 
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
 const testUrl = process.env.test_url;
@@ -39,7 +40,9 @@ afterSuite(async () => {
 });
 
 gauge.screenshotFn = async function () {
-    return await taiko.screenshot({ encoding: 'base64' });
+    const screenshotFilePath = path.join(process.env['gauge_screenshots_dir'], `screenshot-${process.hrtime.bigint()}.png`);
+    await screenshot({ path: screenshotFilePath });
+    return await taiko.screenshot({ encoding: 'base64' ,path:screenshotFilePath});
 };
 
 step("Open Website", async () => {
@@ -152,8 +155,10 @@ step("User should be able to close the Instructions , user should see a sentence
 step("When user clicks on <arg0> button, <arg1> button should appear", async function (arg0, arg1) {
     await taiko.waitFor(async () => (await button(arg0).exists()))
     await taiko.waitFor(1000)
+    await gauge.screenshotFn();
     await evaluate(button(arg0), (elem) => elem.click())
     await taiko.waitFor(3000)
+    await gauge.screenshotFn();
     assert.ok(await button(arg1).exists())
 });
 
@@ -167,6 +172,23 @@ step("When user skips all the rest of the <count> sentences , User should see Th
     await taiko.waitFor(5000)
     assert.ok(await text('Thank you for contributing!').exists())
 });
+
+
+step("when user skips the sentence", async function()
+{
+    await taiko.waitFor(500)
+    const skipbutton = taiko.button({ id: 'skipBtn' })
+    await click(skipbutton)
+    await taiko.waitFor(1500)
+    await gauge.screenshotFn();
+
+});
+
+step("User waits for thank you page", async function()
+    {
+        await taiko.waitFor(5000)
+        assert.ok(await text('Thank you for contributing!').exists())
+    });
 
 step("when user clicks on the Contribute More button, user should not see the Instructions page again", async function () {
     await click(link('Contribute More'))
@@ -349,15 +371,21 @@ step("User should be able to change to preffered Language to English again", asy
 });
 
 step("Select Contribution Language as <language>", async function (language) {
-    await taiko.waitFor(700)
-    await click(taiko.$('#Show_all_language'));
-    await taiko.waitFor(300)
+    await taiko.waitFor(500)
+    await click(taiko.$('#Show_all_language'))
+    await taiko.waitFor(500)
     await click(language);
-    await taiko.waitFor(1000)
+    await taiko.waitFor(2000)
+    // if(taiko.button({ class: 'close float-right' }).isVisible())
+    // {
+    //     await click(taiko.button({ class: 'close float-right' }))
+    //     await taiko.waitFor(500)
+    // }
 });
 
 step("Select Contribution Language as <language> first time", async function (language) {
     await taiko.waitFor(500)
+    await gauge.screenshotFn();
     await click(language);
     await taiko.waitFor(700)
 });

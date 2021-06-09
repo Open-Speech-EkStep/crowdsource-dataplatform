@@ -21,6 +21,10 @@ const getSpeakersData = (data, lang, moduleType) => {
         }
         return false;
       });
+
+      if(langSpeakersData.length == 0){
+        return speakersData;
+      }
       speakersData.speakers = parseInt(langSpeakersData[0].total_speakers);
       speakersData.contributions = moduleType === "likho" || moduleType === "dekho" ? parseFloat(langSpeakersData[0].total_contribution_count) : parseFloat(langSpeakersData[0].total_contributions);
       speakersData.validations = moduleType === "likho" || moduleType === "dekho" ? parseFloat(langSpeakersData[0].total_validation_count) : parseFloat(langSpeakersData[0].total_validations);
@@ -72,4 +76,4 @@ const setSpeakerData = function (data, language, moduleType) {
   }
 }
 
-module.exports = {setSpeakerData}
+module.exports = {setSpeakerData, getSpeakersData}

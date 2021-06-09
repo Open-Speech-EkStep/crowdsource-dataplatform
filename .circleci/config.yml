@@ -190,20 +190,13 @@ workflows:
           requires:
             - dev_deployment_eks
             - build_dev_ui
-            - functional_tests_dev
+            # - functional_tests_dev
 
       - db_migrate_aws:
           name: migrate_test_aws
           db_name: ${TEST_DB_NAME}
           requires:
             - approve_test_deployment_eks
-
-      - build_ui_push_to_s3:
-          name: build_test_ui
-          env_name: test
-          distributionId: ${TEST_DISTRIBUTION_ID}
-          requires:
-            - push_test_image
 
       - aws-ecr/build-and-push-image:
           name: push_test_image
@@ -212,6 +205,13 @@ workflows:
           path: ./crowdsource-api
           requires:
             - migrate_test_aws
+
+      - build_ui_push_to_s3:
+          name: build_test_ui
+          env_name: test
+          distributionId: ${TEST_DISTRIBUTION_ID}
+          requires:
+            - push_test_image
 
       - eks_fargate_deployment:
           name: test_deployment_eks
@@ -228,13 +228,20 @@ workflows:
             - test_deployment_eks
             - build_test_ui
 
+      - approve_to_deploy:
+          name: approve_uat_deployment_eks
+          type: approval
+          requires:
+            - test_deployment_eks
+            - build_test_ui
+            # - functional_tests_dev
+
       - db_migrate_aws:
           name: migrate_uat_aws
           db_name: ${UAT_DB_NAME}
           requires:
-            - functional_tests_test
-            # - dev_deployment_eks
-            # - build_dev_ui
+            # - functional_tests_test
+            - approve_uat_deployment_eks
 
       - aws-ecr/build-and-push-image:
           name: push_uat_image

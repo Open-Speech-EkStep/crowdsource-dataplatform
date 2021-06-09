@@ -107,7 +107,6 @@ const drawMap = function (response) {
   polygonTemplate.stroke = am4core.color("#929292")
   polygonTemplate.fill = am4core.color("#fff");
   polygonTemplate.maxWidth=50;
-  console.log(polygonTemplate);
   // Create hover state and set alternative fill color
   var hs = polygonTemplate.states.create("hover");
   hs.properties.fill = chart.colors.getIndex(1).brighten(-0.5);

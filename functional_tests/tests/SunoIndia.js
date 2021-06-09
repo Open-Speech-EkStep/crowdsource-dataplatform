@@ -96,9 +96,9 @@ step("User details popup should appear and close button should close the pop up"
 
 step("When user clicks on back button, user should land on home page", async function() {
     await taiko.waitFor(650)
-    if (await taiko.text('Back').exists()) {
-        assert.ok('Back button exists')
-        await click(taiko.text("Back"))
+    if (await taiko.text('Home').exists()) {
+        assert.ok('Home button exists')
+        await click(taiko.text("Home"))
         await taiko.waitFor(1500)
     }
     assert.ok(await text("Help your language by transcribing audio into text").exists());

@@ -41,7 +41,7 @@ const keyboardLayout = {
         " ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ০ - ৃ {bksp}",
         "{tab} ৌ ৈ া ী ূ ব হ গ দ জ ড ় /",
         "{lock} ো ে ্ ি ু প ৰ ক ত চ ট {enter}",
-        "{shift} ʼ ং ম ন ৱ ল স , . য {shift}",
+        "{shift}   ং ম ন ৱ ল স , . য {shift}",
         ".com @ {space}"
       ],
       "shift": [
