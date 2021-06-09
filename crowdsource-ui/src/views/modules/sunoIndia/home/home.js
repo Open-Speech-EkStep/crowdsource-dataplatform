@@ -22,8 +22,6 @@ const {
 const {initializeFeedbackModal} = require('../common/feedback');
 
 function initializeBlock() {
-  const $startRecordBtn = $('#proceed-box');
-  const $startRecordBtnTooltip = $startRecordBtn.parent();
   const speakerDetailsKey = 'speakerDetails';
   const $userName = $('#username');
   let sentenceLanguage;
@@ -83,7 +81,6 @@ function initializeBlock() {
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   showFucntionalCards('asr', language);
   setSpeakerDetails(speakerDetailsKey, $userName);
-  $startRecordBtnTooltip.tooltip('disable');
   setUserNameOnInputFocus();
   // setStartRecordingBtnOnClick();
   setUserModalOnShown($userName);
