@@ -5,7 +5,8 @@ const { validateUserInfoForProfanity } = require('./middleware/validateUserInput
 const profanityCheckerApi = function (router) {
 
     router.post('/profanity/verify', async (req, res) => {
-        const { userName } = req.body;
+        let userName = req.body.userName || '';
+        userName = userName.toLowerCase();
         try {
             await userVerify(userName, "ROLE_PROFANITY");
             res.sendStatus(200);
@@ -17,8 +18,9 @@ const profanityCheckerApi = function (router) {
 
     router.get('/sentences-for-profanity-check/:type', validateUserInfoForProfanity, async (req, res) => {
         const type = req.params.type;
-        const userName = req.query.username || '';
+        let userName = req.query.username || '';
         const language = req.query.language || '';
+        userName = userName.toLowerCase();
         let sentences = [];
         if (userName.includes("profanity_")) {
             sentences = await getSentencesForProfanityCheckingForCorrection(userName, type, language);
@@ -29,7 +31,9 @@ const profanityCheckerApi = function (router) {
     })
 
     router.put('/profanity-status/:type', async (req, res) => {
-        const { profanityStatus, userName, sentenceId } = req.body;
+        const { profanityStatus, sentenceId } = req.body;
+        let userName = req.query.username || '';
+        userName = userName.toLowerCase();
         if (userName.includes("profanity_")) {
             await updateProfanityStatusForCorrection(userName, sentenceId, profanityStatus)
         } else {
@@ -39,8 +43,9 @@ const profanityCheckerApi = function (router) {
     })
 
     router.put('/profanity-skip/:type', async (req, res) => {
-        const { sentenceId, userName } = req.body;
-        console.log(req.body);
+        const { sentenceId } = req.body;
+        let userName = req.query.username || '';
+        userName = userName.toLowerCase();
         if (userName.includes("profanity_")) {
             await releaseMediaForCorrection(sentenceId)
         } else {
