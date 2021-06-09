@@ -2,7 +2,7 @@ const { calculateTime, formatTime } = require('./utils');
 const chartReg = {};
 
 const drawTopLanguageChart = (chartData, type, dataType) => {
-  const chartColors = ['#b6f2ff', '#b6f2ff', '#b6f2ff', '#9de49f'];
+  const chartColors = ['#b7d0fe', '#b7d0fe', '#b7d0fe', '#007bff'];
   am4core.ready(function () {
     const chart = am4core.create('top-language-chart', am4charts.XYChart);
 
@@ -46,7 +46,11 @@ const drawTopLanguageChart = (chartData, type, dataType) => {
     valueAxis.renderer.grid.template.strokeWidth = 0;
     // Create series
     const series = chart.series.push(new am4charts.ColumnSeries());
-    series.dataFields.valueY = 'contributedHours';
+    if (dataType != "speaker") {
+    series.dataFields.valueY = type == "suno" || type == "bolo" ? 'total_contributions' : 'contributedHours';
+    } else {
+      series.dataFields.valueY ='contributedHours';
+    }
     series.dataFields.categoryX = 'language';
     const columnTemplate = series.columns.template;
     columnTemplate.tooltipHTML = `<div> {contributedHours}</div>`;
