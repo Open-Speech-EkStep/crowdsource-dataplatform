@@ -1,0 +1,16 @@
+.language-legend {
+    background-color:#9de49f;
+    height:15px;
+    width:15px;
+    border-radius:15px;
+    margin-right:10px;
+}
+
+.top-langauge-legend {
+    background-color:#b6f2ff;
+    height:15px;
+    width:15px;
+    border-radius:15px;
+    margin-right:10px;
+    margin-left:10px;
+}

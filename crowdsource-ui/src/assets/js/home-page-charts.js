@@ -1,6 +1,7 @@
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
 const { calculateTime, formatTime, getJson, performAPIRequest } = require('./utils');
+const { drawTopLanguageChart } = require('../../../build/js/common/verticalGraph');
 
 const statesInformation = [
   { id: 'IN-TG', state: 'Telangana', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
@@ -278,11 +279,8 @@ function showByHoursChart() {
     chartReg["chart"].dispose();
   }
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-  constructChart(
-    JSON.parse(topLanguagesByHoursData),
-    "total_contributions",
-    "language"
-  );
+  const chartData = topLanguagesByHoursData ? JSON.parse(topLanguagesByHoursData).reverse() : [];
+  drawTopLanguageChart(chartData, "bolo")
 }
 
 function showBySpeakersChart() {
@@ -292,11 +290,8 @@ function showBySpeakersChart() {
   const topLanguagesBySpeakers = localStorage.getItem(
     TOP_LANGUAGES_BY_SPEAKERS
   );
-  constructChart(
-    JSON.parse(topLanguagesBySpeakers),
-    "total_speakers",
-    "language"
-  );
+  const chartData = topLanguagesBySpeakers ? JSON.parse(topLanguagesBySpeakers).reverse() : [];
+  drawTopLanguageChart(chartData, "bolo","speaker")
 }
 
 module.exports = {

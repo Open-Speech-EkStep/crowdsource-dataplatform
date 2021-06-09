@@ -20,7 +20,7 @@ const {
 
 // const {downloadPdf} = require('../common/downloadableBadges');
 const { showUserProfile } = require('../common/header');
-const {showByHoursChart, getContributedAndTopLanguage,setBadge} = require('../common/common');
+const {showByHoursChart, showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge} = require('../common/common');
 const {initializeFeedbackModal} = require('../common/feedback');
 
 const CURRENT_INDEX = "likhoValidatorCurrentIndex";
@@ -129,7 +129,7 @@ const getLanguageStats = function () {
         const module = localStorage.getItem(CURRENT_MODULE);
         const languages = getContributedAndTopLanguage(module == MODULE.likho.value || module == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, MODULE.likho.value);
         localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChart(MODULE.likho.value);
+        showByHoursChartThankyouPage(MODULE.likho.value);
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
