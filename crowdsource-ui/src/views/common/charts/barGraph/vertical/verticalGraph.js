@@ -17,7 +17,6 @@ const drawTopLanguageChart = (chartData, type, dataType) => {
       });
     }
     chart.data = chartData ? chartData.reverse() : [];
-    console.log(chart.data);
     // Create axes
     const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'language';

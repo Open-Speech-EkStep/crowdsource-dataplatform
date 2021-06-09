@@ -253,3 +253,8 @@ step("When user click on Lets Go Button, user should <arg0> see instructions to 
     assert.ok(await text('Quick Tips').exists(), 'Not able to see instructions')
     }
 });
+
+step("Validate Thank you page content for Suno India", async function() {
+	assert.ok(await text('Thank you for contributing!').exists())
+	assert.ok(await text('100 hrs').exists())
+});

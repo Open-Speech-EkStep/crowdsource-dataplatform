@@ -196,8 +196,9 @@ function setSentenceLabel(index) {
 function getNextSentence() {
   if (currentIndex < sunoIndiaValidator.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1,sunoIndiaValidator.sentences.length)
-    loadAudio(`${cdn_url}/${sunoIndiaValidator.sentences[currentIndex].sentence}`);
+    updateProgressBar(currentIndex + 1,sunoIndiaValidator.sentences.length);
+    const encodedUrl = encodeURIComponent(sunoIndiaValidator.sentences[currentIndex].sentence);
+    loadAudio(`${cdn_url}/${encodedUrl}`);
     resetValidation();
     setSentenceLabel(currentIndex);
     localStorage.setItem(currentIndexKey,currentIndex);
@@ -510,7 +511,8 @@ const initializeComponent = function () {
   $('#edit-language').text(contributionLanguage)
   addListeners();
   if (audio) {
-    loadAudio(`${cdn_url}/${audio.sentence}`);
+    const encodedUrl = encodeURIComponent(audio.sentence);
+    loadAudio(`${cdn_url}/${encodedUrl}`);
     setSentenceLabel(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);

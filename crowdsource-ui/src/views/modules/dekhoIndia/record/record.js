@@ -134,7 +134,8 @@ function getNextSentence() {
   if (currentIndex < dekhoIndia.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length);
-    setDekhoImage(`${cdn_url}/${dekhoIndia.sentences[currentIndex].media_data}`);
+    const encodedUrl = encodeURIComponent(dekhoIndia.sentences[currentIndex].media_data);
+    setDekhoImage(`${cdn_url}/${encodedUrl}`);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
   } else {
@@ -420,7 +421,8 @@ const initializeComponent = () => {
   const validationData = dekhoIndia.sentences[currentIndex];
   addListeners();
   if (validationData) {
-    setDekhoImage(`${cdn_url}/${validationData.media_data}`);
+    const encodedUrl = encodeURIComponent(validationData.media_data);
+    setDekhoImage(`${cdn_url}/${encodedUrl}`);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length)

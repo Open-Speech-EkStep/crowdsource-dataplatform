@@ -235,32 +235,32 @@ and action = 'completed' and (con.media->>'duration') is not null`;
 
 const getContributionAmount = `select count(*) as amount from contributions con 
 inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
-and action='completed' and type=$2`;
+and action='completed' and type=$2 and con.date::date>=date_trunc('month', current_date)::date`;
 
 const getContributionHoursForAsr = `select ROUND((sum(COALESCE((dr.media->>'duration')::decimal,0))/3600),3) as amount from contributions con 
 inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
-and action='completed' and type='asr'`;
+and action='completed' and type='asr' and con.date::date>=date_trunc('month', current_date)::date`;
 
 const getContributionHoursForText = `select ROUND((sum(COALESCE((con.media->>'duration')::decimal,0))/3600),3) as amount from contributions con 
 inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
-and action='completed' and type='text'`;
+and action='completed' and type='text' and con.date::date>=date_trunc('month', current_date)::date`;
 
 const getValidationAmount = `select count(*) as amount from contributions con 
 inner join validations val on val.contribution_id=con.contribution_id and val.action!='skip'
 inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
-and con.action='completed' and type=$2`;
+and con.action='completed' and type=$2 and val.date::date>=date_trunc('month', current_date)::date`;
 
 const getValidationHoursForAsr = `select ROUND((sum(COALESCE((dr.media->>'duration')::decimal,0))/3600),3) as amount from contributions con 
 inner join validations val on val.contribution_id=con.contribution_id and val.action!='skip'
 inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
-and con.action='completed' and type='asr'`;
+and con.action='completed' and type='asr' and val.date::date>=date_trunc('month', current_date)::date`;
 
 const getValidationHoursForText = `select ROUND((sum(COALESCE((con.media->>'duration')::decimal,0))/3600),3) as amount from contributions con 
 inner join validations val on val.contribution_id=con.contribution_id and val.action!='skip'
 inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
-and con.action='completed' and type='text'`;
+and con.action='completed' and type='text' and val.date::date>=date_trunc('month', current_date)::date`;
 
-const getLanguageGoal = `select goal from language_goals where category=$1 and type=$2 and LOWER(language)=LOWER($3)`;
+const getLanguageGoalQuery = `select goal from language_goals where category=$1 and type=$2 and LOWER(language)=LOWER($3)`;
 
 const getContributionLanguagesQuery = `select dr.media->>'language' as from_language,con.media->>'language' as to_language from dataset_row dr inner join 
 contributions con on con.dataset_row_id=dr.dataset_row_id and con.action='completed' where dr.type=$1 group by dr.media->>'language',con.media->>'language',dr.type`;
@@ -331,7 +331,7 @@ module.exports = {
   getValidationAmount,
   getValidationHoursForAsr,
   getValidationHoursForText,
-  getLanguageGoal,
+  getLanguageGoalQuery,
   updateContributionDetailsWithUserInput,
   getPathFromMasterDataSet,
   getContributionLanguagesQuery,

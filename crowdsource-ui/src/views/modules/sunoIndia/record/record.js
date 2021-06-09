@@ -172,7 +172,8 @@ function getNextSentence() {
   if (currentIndex < sunoIndia.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex + 1, sunoIndia.sentences.length);
-    loadAudio(`${cdn_url}/${sunoIndia.sentences[currentIndex].media_data}`);
+    const encodedUrl = encodeURIComponent(sunoIndia.sentences[currentIndex].media_data);
+    loadAudio(`${cdn_url}/${encodedUrl}`);
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
@@ -486,7 +487,8 @@ const initialize = function () {
   addListeners();
 
   if (audio) {
-    loadAudio(`${cdn_url}/${audio.media_data}`);
+    const encodedUrl = encodeURIComponent(audio.media_data);
+    loadAudio(`${cdn_url}/${encodedUrl}`);
     resetValidation();
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);

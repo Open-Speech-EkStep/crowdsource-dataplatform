@@ -90,6 +90,7 @@ function invokeProfanityStateUpdate(state) {
 
 function updateSkipAction() {
   const sentenceId = likhoIndia.sentences[currentIndex].dataset_row_id;
+  const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
   fetch(`/profanity-skip/parallel`, {
     method: 'PUT',
     credentials: 'include',
@@ -98,7 +99,8 @@ function updateSkipAction() {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      sentenceId: sentenceId
+      sentenceId: sentenceId,
+      userName: localSpeakerDataParsed.userName
     })
   }).then(res => { }).catch(err => {
     console.log(err)
@@ -139,8 +141,8 @@ function addListeners() {
       $('#pause').trigger('click');
     }
     // markContributionSkipped();
-    getNextSentence();
     updateSkipAction();
+    getNextSentence();
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
   })

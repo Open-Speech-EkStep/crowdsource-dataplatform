@@ -46,7 +46,8 @@ function getNextSentence() {
   if (currentIndex < dekhoIndia.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length);
-    setDekhoImage(`${cdn_url}/${dekhoIndia.sentences[currentIndex].media}`);
+    const encodedUrl = encodeURIComponent(dekhoIndia.sentences[currentIndex].media);
+    setDekhoImage(`${cdn_url}/${encodedUrl}`);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
     const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
@@ -109,6 +110,7 @@ function invokeProfanityStateUpdate(state) {
 
 function updateSkipAction() {
   const sentenceId = dekhoIndia.sentences[currentIndex].dataset_row_id;
+  const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
   fetch(`/profanity-skip/ocr`, {
     method: 'PUT',
     credentials: 'include',
@@ -117,7 +119,8 @@ function updateSkipAction() {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      sentenceId: sentenceId
+      sentenceId: sentenceId,
+      userName: localSpeakerDataParsed.userName
     })
   }).then(res => { }).catch(err => {
     console.log(err)
@@ -153,8 +156,8 @@ function addListeners() {
       });
 
   $skipButton.on('click', () => {
-    getNextSentence();
     updateSkipAction();
+    getNextSentence();
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
   })
@@ -258,7 +261,8 @@ const initializeComponent = () => {
   const validationData = dekhoIndia.sentences[currentIndex];
   addListeners();
   if (validationData) {
-    setDekhoImage(`${cdn_url}/${validationData.media}`);
+    const encodedUrl = encodeURIComponent(validationData.media);
+    setDekhoImage(`${cdn_url}/${encodedUrl}`);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length)

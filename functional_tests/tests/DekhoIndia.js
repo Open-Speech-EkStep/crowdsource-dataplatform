@@ -135,3 +135,8 @@ step("Clicking watch video link should open video", async function() {
 	//await click(taiko.$("#extension_video_close_btn"));
 	//taiko.waitFor(2000);
 });
+
+step("Validate Thank you page content for Dekho India", async function() {
+	assert.ok(await text('Thank you for contributing!').exists())
+	assert.ok(await text('10000 images').exists())
+});

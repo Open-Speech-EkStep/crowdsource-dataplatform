@@ -120,7 +120,8 @@ function getNextSentence() {
   if (currentIndex < sunoIndia.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex + 1, sunoIndia.sentences.length);
-    loadAudio(`${cdn_url}/${sunoIndia.sentences[currentIndex].media}`);
+    const encodedUrl = encodeURIComponent(sunoIndia.sentences[currentIndex].media);
+    loadAudio(`${cdn_url}/${encodedUrl}`);
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
@@ -228,6 +229,7 @@ function invokeProfanityStateUpdate(state, $skipButton, $submitButton, cancelBut
 
 function updateSkipAction() {
   const sentenceId = sunoIndia.sentences[currentIndex].dataset_row_id;
+  const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
   fetch(`/profanity-skip/asr`, {
     method: 'PUT',
     credentials: 'include',
@@ -236,7 +238,8 @@ function updateSkipAction() {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      sentenceId: sentenceId
+      sentenceId: sentenceId,
+      userName: localSpeakerDataParsed.userName
     })
   }).then(res => { }).catch(err => {
     console.log(err)
@@ -279,8 +282,8 @@ function addListeners() {
       $('#pause').trigger('click');
     }
     // markContributionSkipped();
-    getNextSentence();
     updateSkipAction();
+    getNextSentence();
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
   })
@@ -376,7 +379,8 @@ const initialize = function () {
   addListeners();
 
   if (audio) {
-    loadAudio(`${cdn_url}/${audio.media}`);
+    const encodedUrl = encodeURIComponent(audio.media);
+    loadAudio(`${cdn_url}/${encodedUrl}`);
     resetValidation();
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);

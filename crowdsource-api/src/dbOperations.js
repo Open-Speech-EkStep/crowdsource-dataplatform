@@ -40,7 +40,7 @@ const {
     getBadges,
     addContributorQuery,
     getContributionHoursForLanguage,
-    getLanguageGoal,
+    getLanguageGoalQuery,
     getOrderedMediaQuery,
     getContributionLanguagesQuery,
     getDatasetLanguagesQuery,
@@ -83,7 +83,10 @@ const {
 const {
     getSentencesForProfanityCheck,
     updateSentenceWithProfanity,
-    releaseMediaQuery
+    releaseMediaQuery,
+    getSentencesForProfanityCheckForCorrection,
+    updateSentenceWithProfanityForCorrection,
+    releaseMediaQueryForCorrection
 } = require('./profanityCheckerQueries')
 
 const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP } = require('./constants');
@@ -539,7 +542,8 @@ const getRewards = async (userId, userName, language, source, type) => {
     const nextBadgeType = nextMilestoneData.grade || '';
     const currentMilestone = currentMilestoneData.milestone || 0;
     const nextMilestone = nextMilestoneData.milestone || 0;
-    const hourGoal = await getHourGoalForLanguage(language, source, type);
+    const languageGoal = await getLanguageGoal(language, source, type);
+    const currentAmount = await getCurrentAmountForLanguage(type, source, language);
     return {
         "badgeId": generatedBadgeId,
         "currentBadgeType": currentBadgeType,
@@ -549,7 +553,8 @@ const getRewards = async (userId, userName, language, source, type) => {
         "contributionCount": Number(total_count),
         "isNewBadge": isNewBadge,
         'badges': badges,
-        'hourGoal': hourGoal
+        'currentAmount': currentAmount,
+        'languageGoal': languageGoal
     }
 }
 
@@ -578,12 +583,12 @@ async function getCurrentAmountForLanguage(type, source, language) {
             query = getValidationAmount;
     }
 
-    const currentLanguageAmount = await db.one(query, [language, type]);
-    return currentLanguageAmount;
+    const currentLanguageAmount = await db.oneOrNone(query, [language, type]);
+    return parseFloat(currentLanguageAmount['amount']);
 }
 
-const getHourGoalForLanguage = async (language, source, type) => {
-    const languageGoal = await db.oneOrNone(getLanguageGoal, [source, type, language]);
+const getLanguageGoal = async (language, source, type) => {
+    const languageGoal = await db.oneOrNone(getLanguageGoalQuery, [source, type, language]);
     return languageGoal['goal'];
 }
 
@@ -656,16 +661,31 @@ const getTargetInfo = async (req, res) => {
 }
 
 const getSentencesForProfanityChecking = (username, type, language) => {
-    currentTime = moment().utcOffset("+05:30").format()
+    const currentTime = moment().utcOffset("+05:30").format()
     return db.any(getSentencesForProfanityCheck, [username, currentTime, type, language])
 }
 
+const getSentencesForProfanityCheckingForCorrection = (username, type, language) => {
+    const currentTime = moment().utcOffset("+05:30").format()
+    return db.any(getSentencesForProfanityCheckForCorrection, [username, currentTime, type, language])
+}
+
 const updateProfanityStatus = (userName, sentenceId, profanityStatus) => {
-    return db.any(updateSentenceWithProfanity, [profanityStatus, sentenceId, userName])
+    const currentTime = moment().utcOffset("+05:30").format()
+    return db.any(updateSentenceWithProfanity, [profanityStatus, sentenceId, userName, currentTime])
+}
+
+const updateProfanityStatusForCorrection = (userName, sentenceId, profanityStatus) => {
+    const currentTime = moment().utcOffset("+05:30").format()
+    return db.any(updateSentenceWithProfanityForCorrection, [profanityStatus, sentenceId, userName, currentTime])
 }
 
 const releaseMedia = (dataset_id) => {
     return db.any(releaseMediaQuery, [dataset_id])
+}
+
+const releaseMediaForCorrection = (dataset_id) => {
+    return db.any(releaseMediaQueryForCorrection, [dataset_id])
 }
 
 const userVerify = async (userName, role) => {
@@ -686,6 +706,9 @@ module.exports = {
     getMediaObject,
     getTopLanguageByHours,
     getTopLanguageByContributionCount,
+    getSentencesForProfanityCheckingForCorrection,
+    updateProfanityStatusForCorrection,
+    releaseMediaForCorrection,
     getAggregateDataCount,
     getTopLanguageBySpeakers,
     getLanguages,

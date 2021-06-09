@@ -471,3 +471,8 @@ step("When user submits , Thank you pop up should come & close button should clo
     await click(taiko.button({ id: "report_sentence_thanks_close_id" }))
     await taiko.waitFor(500);
 });
+
+step("Validate Thank you page content for Bolo India", async function() {
+	assert.ok(await text('Thank you for contributing!').exists())
+	assert.ok(await text('100 hrs').exists())
+});
