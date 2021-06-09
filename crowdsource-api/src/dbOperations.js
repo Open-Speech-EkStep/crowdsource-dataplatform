@@ -83,7 +83,10 @@ const {
 const {
     getSentencesForProfanityCheck,
     updateSentenceWithProfanity,
-    releaseMediaQuery
+    releaseMediaQuery,
+    getSentencesForProfanityCheckForCorrection,
+    updateSentenceWithProfanityForCorrection,
+    releaseMediaQueryForCorrection
 } = require('./profanityCheckerQueries')
 
 const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP } = require('./constants');
@@ -662,13 +665,27 @@ const getSentencesForProfanityChecking = (username, type, language) => {
     return db.any(getSentencesForProfanityCheck, [username, currentTime, type, language])
 }
 
+const getSentencesForProfanityCheckingForCorrection = (username, type, language) => {
+    currentTime = moment().utcOffset("+05:30").format()
+    return db.any(getSentencesForProfanityCheckForCorrection, [username, currentTime, type, language])
+}
+
 const updateProfanityStatus = (userName, sentenceId, profanityStatus) => {
     currentTime = moment().utcOffset("+05:30").format()
     return db.any(updateSentenceWithProfanity, [profanityStatus, sentenceId, userName, currentTime])
 }
 
+const updateProfanityStatusForCorrection = (userName, sentenceId, profanityStatus) => {
+    currentTime = moment().utcOffset("+05:30").format()
+    return db.any(updateSentenceWithProfanityForCorrection, [profanityStatus, sentenceId, userName, currentTime])
+}
+
 const releaseMedia = (dataset_id) => {
     return db.any(releaseMediaQuery, [dataset_id])
+}
+
+const releaseMediaForCorrection = (dataset_id) => {
+    return db.any(releaseMediaQueryForCorrection, [dataset_id])
 }
 
 const userVerify = async (userName, role) => {
@@ -689,6 +706,9 @@ module.exports = {
     getMediaObject,
     getTopLanguageByHours,
     getTopLanguageByContributionCount,
+    getSentencesForProfanityCheckingForCorrection,
+    updateProfanityStatusForCorrection,
+    releaseMediaForCorrection,
     getAggregateDataCount,
     getTopLanguageBySpeakers,
     getLanguages,
