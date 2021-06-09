@@ -476,3 +476,11 @@ step("Validate Thank you page content for Bolo India", async function() {
 	assert.ok(await text('Thank you for contributing!').exists())
 	assert.ok(await text('100 hrs').exists())
 });
+
+step("Validate terms and condition content", async function () {
+    assert.ok(await text('Terms and Conditions').exists());
+});
+
+step("Validate privacy policy content", async function () {
+    assert.ok(await text('Privacy Policy').exists());
+});
