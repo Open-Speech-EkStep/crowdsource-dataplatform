@@ -2,6 +2,7 @@ const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
 const { setStartRecordingBtnOnClick, setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown } = require('../common/userDetails');
 const { toggleFooterPosition, getLocaleString } = require('../common/utils');
+const platform = require('../common/platform')
 const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE,LIKHO_FROM_LANGUAGE,
     LIKHO_TO_LANGUAGE } = require('../common/constants');
 const fetch = require('../common/fetch');
@@ -93,6 +94,14 @@ function updateLanguage(language) {
 
 
 $(document).ready(function () {
+    console.log(platform.name);
+    if(platform.name == "Firefox") {
+        $("#from-dash-language").css('text-indent', '-25px');
+        $("#to-dash-language").css('text-indent', '-25px');
+    } else {
+        $("#from-dash-language").css('text-indent', '75px');
+        $("#to-dash-language").css('text-indent', '75px');
+    }
     localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
     initializeFeedbackModal();
     localStorage.removeItem('previousLanguage');
