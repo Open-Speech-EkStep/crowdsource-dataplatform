@@ -107,7 +107,8 @@ function getNextSentence() {
   if (currentIndex < dekhoIndiaValidator.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex + 1,dekhoIndiaValidator.sentences.length);
-    setDekhoImage(`${cdn_url}/${dekhoIndiaValidator.sentences[currentIndex].sentence}`);
+    const encodedUrl = encodeURIComponent(dekhoIndiaValidator.sentences[currentIndex].sentence);
+    setDekhoImage(`${cdn_url}/${encodedUrl}`);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
@@ -213,6 +214,8 @@ function addListeners() {
     $submitEditButton.attr('disabled',true);
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
+    hideElement($('#edit-error-row'))
+    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     setInput("");
     closeEditor();
   })
@@ -254,6 +257,8 @@ function addListeners() {
     skipValidation(SKIP_ACTION)
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
+    hideElement($('#edit-error-row'))
+    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     getNextSentence();
     closeEditor();
   })
@@ -322,6 +327,7 @@ function showNoSentencesMessage() {
   hideElement($('#dekho-image'));
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
+  hideElement($('#mic-report-row'));
   showElement($('#no-textarea-row'))
   hideElement($('#skip_btn_row'));
   showElement($('#no-sentences-row'));
@@ -373,7 +379,8 @@ const initializeComponent = () => {
     addListeners();
     const validationData = dekhoIndiaValidator.sentences[currentIndex];
     if (validationData) {
-      setDekhoImage(`${cdn_url}/${validationData.sentence}`);
+      const encodedUrl = encodeURIComponent(validationData.sentence);
+      setDekhoImage(`${cdn_url}/${encodedUrl}`);
       setCapturedText(currentIndex);
       setCurrentSentenceIndex(currentIndex + 1);
       setTotalSentenceIndex(totalItems);

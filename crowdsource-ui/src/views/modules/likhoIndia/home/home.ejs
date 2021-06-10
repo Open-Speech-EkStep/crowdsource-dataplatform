@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/likhoIndia/home.css">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/common/common.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -95,7 +95,11 @@
                 <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
                     <div><span class="spinner"></span></div>
                 </div>
-                <%- include ../common/horizontalBarGraph.ejs %>
+                <div class="row m-0">
+                    <div class="col-lg-6 col-md-6 col-12 pr-lg-3 pr-md-3 p-0">
+                        <%- include ../common/verticalGraph.ejs %>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -104,9 +108,9 @@
 <%- include ../common/userDetails.ejs %>
 <%- include ../common/content-languages.ejs %>
 <%- include ../common/say-listen-language.ejs %>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <%- include('../common/feedback.ejs', {page: "Likho India Home"}) %>
 <%- include('../common/footer.ejs',{path:"../"}) %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 

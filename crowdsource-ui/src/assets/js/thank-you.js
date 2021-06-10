@@ -15,8 +15,7 @@ const {
   getLocaleString,
   performAPIRequest,
 } = require("./utils");
-const {showByHoursChart} = require('./home-page-charts');
-const {getContributedAndTopLanguage} = require('../../../build/js/common/common');
+const {showByHoursChartThankyouPage,getContributedAndTopLanguage} = require('../../../build/js/common/common');
 
 const CURRENT_INDEX = "currentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -44,10 +43,10 @@ function setSentencesContributed() {
   ).then((data) => {
     localStorage.setItem('badgeId', data.badgeId);
     localStorage.setItem('badges', JSON.stringify(data.badges));
-    const hourGoal = data.hourGoal || 0;
-    localStorage.setItem('nextHourGoal', hourGoal);
+    const languageGoal = data.languageGoal || 0;
+    localStorage.setItem('nextHourGoal', languageGoal);
     $("#user-contribution").text(data.contributionCount);
-    $("#language-hour-goal").text(hourGoal);
+    $("#language-hour-goal").text(languageGoal);
     if (data.isNewBadge) {
       $("#spree_text").removeClass("d-none");
       $("#milestone_text").removeClass("d-none");
@@ -198,9 +197,9 @@ const setTotalProgressBar = (totalSeconds) => {
     performAPIRequest(
       `/rewards?type=text&language=${contributionLanguage}&source=contribute&userName=${userName}`
     ).then((data) => {
-      const hourGoal = data.hourGoal || 0;
-      localStorage.setItem('nextHourGoal',hourGoal);
-      updateProgressBulb(hourGoal, totalSeconds);
+      const languageGoal = data.languageGoal || 0;
+      localStorage.setItem('nextHourGoal',languageGoal);
+      updateProgressBulb(languageGoal, totalSeconds);
     })
 };
 
@@ -265,7 +264,7 @@ const getLanguageStats = function () {
         $("#did_you_know_section").show();
         const languages = getContributedAndTopLanguage(response.aggregate_data_by_language, MODULE.bolo.value);
         localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages.reverse()));
-        showByHoursChart(MODULE.bolo.value);
+        showByHoursChartThankyouPage(MODULE.bolo.value);
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );

@@ -19,7 +19,7 @@ const {
 
 // const {downloadPdf} = require('../common/downloadableBadges');
 const {showUserProfile} = require('../common/header');
-const {showByHoursChart,getContributedAndTopLanguage,setBadge} = require('../common/common');
+const {showByHoursChart,showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge} = require('../common/common');
 
 const CURRENT_INDEX = "sunoValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -102,7 +102,7 @@ const getLanguageStats = function () {
         );
         const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.suno.value);
         localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChart(MODULE.suno.value);
+        showByHoursChartThankyouPage(MODULE.suno.value);
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );

@@ -184,7 +184,8 @@ function getNextSentence() {
     if (currentIndex < boloIndiaValidator.sentences.length - 1) {
         currentIndex++;
         updateProgressBar(currentIndex + 1,boloIndiaValidator.sentences.length);
-        loadAudio(`${cdn_url}/${boloIndiaValidator.sentences[currentIndex].contribution}`)
+        const encodedUrl = encodeURIComponent(boloIndiaValidator.sentences[currentIndex].contribution);
+        loadAudio(`${cdn_url}/${encodedUrl}`)
         resetValidation();
         setSentenceLabel(currentIndex);
         localStorage.setItem(currentIndexKey,currentIndex);
@@ -356,7 +357,8 @@ function showNoSentencesMessage() {
     hideElement($('#audio-row'))
     hideElement($('#validation-button-row'))
     hideElement($('#progress-row'))
-    showElement($('#no-sentences-row'))
+    showElement($('#no-sentences-row'));
+    hideElement($('#mic-report-row'));
     hideElement($('#skip_btn_row'));
     hideElement($('#validation-container'));
     hideElement($('#report_btn'));
@@ -515,7 +517,8 @@ const initializeComponent = function () {
   hideElement($('#loader-play-btn'));
   addListeners();
   if (sentence) {
-    loadAudio(`${cdn_url}/${sentence.contribution}`);
+      const encodedUrl = encodeURIComponent(sentence.contribution);
+    loadAudio(`${cdn_url}/${encodedUrl}`);
     setSentenceLabel(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);

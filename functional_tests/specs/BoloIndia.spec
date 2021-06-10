@@ -38,6 +38,7 @@
 * And User enter random Username and selects Age , Mother tongue ,gender
 * When user click on Lets Go Button, user should "" see instructions to record
 * When user skips all the rest of the "5" sentences , User should see Thank you Page
+* Validate Thank you page content for Bolo India
 * when user clicks on the Contribute More button, user should not see the Instructions page again
 
 ## Validate Validator flow
@@ -82,6 +83,16 @@
 * Validate about us content
 * Start Recording button is disabled
 * Select Language "Hindi" enables the Start Recording button
+
+## Check Terms and Condition links from Footer
+* Select "Bolo India" from header
+* Navigate to "Terms & Conditions" button and click "Terms & Conditions" button
+* Validate terms and condition content
+
+## Check Privacy and Policy links from Footer
+* Select "Bolo India" from header
+* Navigate to "Privacy Policy" button and click "Privacy Policy" button
+* Validate Privacy Policy content
 
 //## Validate Locale content on Home Page
 //* Select "Bolo India" from header
