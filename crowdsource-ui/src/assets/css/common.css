@@ -20,6 +20,7 @@ h6,
 
 body {
   font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  height: 100vh;
 }
 
 .logo-text:hover {
