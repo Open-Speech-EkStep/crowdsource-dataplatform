@@ -120,7 +120,7 @@ select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as 
     left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' 
 	inner join configurations conf on conf.config_name='validation_count' 
     where  con.action='completed' and ds.media->>'language'=$3 
-	and con.contribution_id not in (select contribution_id from validations where validated_by=$1::text)
+	and con.contribution_id not in (select contribution_id from validations where validated_by=$1)
 	group by con.dataset_row_id, ds.media->>'data', con.contribution_id, conf.value 
 	having count(val.*)<conf.value
     order by count(val.*) desc, con.contribution_id 
@@ -133,7 +133,7 @@ select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as 
   left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' and con.media ->> 'language' = $4
   inner join configurations conf on conf.config_name='validation_count' 
   where  con.action='completed' and ds.media->>'language'=$3 
-  and con.contribution_id not in (select contribution_id from validations where validated_by=$1::text)
+  and con.contribution_id not in (select contribution_id from validations where validated_by=$1)
   group by con.dataset_row_id, ds.media->>'data', con.contribution_id, conf.value 
   having count(val.*)<conf.value
   order by count(val.*) desc, con.contribution_id limit 5;`
@@ -196,7 +196,7 @@ and action = 'completed' and con.contributed_by = $1`;
 const getTotalUserValidation = `select val.validation_id from validations val 
 inner join contributions con on val.contribution_id=con.contribution_id and val.action!='skip' 
 inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where dr.type=$3 and LOWER(dr.media->>'language')=LOWER($2) 
-and val.validated_by=$1::text`;
+and val.validated_by=$1`;
 
 const checkCurrentMilestoneQuery = `select grade, reward_milestone.milestone, reward_milestone.milestone_id from reward_catalogue, 
 (select milestone, milestone_id, reward_catalogue_id as rid from reward_milestones where milestone <= $1 
