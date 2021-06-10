@@ -182,10 +182,6 @@ const setSayListenBackground = function () {
 
 
 function initializeBlock() {
-    const $startRecordBtn = $('#proceed-box');
-    const $startRecordBtnTooltip = $startRecordBtn.parent();
-    const $boloStartRecordBtn = $('#bolo-proceed-box');
-    const $boloStartRecordBtnTooltip = $boloStartRecordBtn.parent();
     const speakerDetailsKey = 'speakerDetails';
     const age = document.getElementById('age');
     const motherTongue = document.getElementById('mother-tongue');
@@ -251,12 +247,10 @@ function initializeBlock() {
 
     setUserModalOnShown($userName);
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
-    $startRecordBtnTooltip.tooltip('disable');
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     setBoloUserModalOnShown($boloUserName);
     setBoloSpeakerDetails(speakerDetailsKey, $boloUserName);
-    $boloStartRecordBtnTooltip.tooltip('disable');
     setBoloUserNameOnInputFocus();
     // setStartRecordingBtnOnClick();
 
