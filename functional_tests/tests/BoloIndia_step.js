@@ -154,11 +154,9 @@ step("User should be able to close the Instructions , user should see a sentence
 
 step("When user clicks on <arg0> button, <arg1> button should appear", async function (arg0, arg1) {
     await taiko.waitFor(async () => (await button(arg0).exists()))
-    await taiko.waitFor(1000)
-    await gauge.screenshotFn();
+    await taiko.waitFor(1000)  
     await evaluate(button(arg0), (elem) => elem.click())
     await taiko.waitFor(3000)
-    await gauge.screenshotFn();
     assert.ok(await button(arg1).exists())
 });
 
@@ -180,7 +178,6 @@ step("when user skips the sentence", async function()
     const skipbutton = taiko.button({ id: 'skipBtn' })
     await click(skipbutton)
     await taiko.waitFor(1500)
-    await gauge.screenshotFn();
 
 });
 
@@ -385,7 +382,6 @@ step("Select Contribution Language as <language>", async function (language) {
 
 step("Select Contribution Language as <language> first time", async function (language) {
     await taiko.waitFor(500)
-    await gauge.screenshotFn();
     await click(language);
     await taiko.waitFor(700)
 });
