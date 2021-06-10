@@ -21,7 +21,7 @@ const quarterlyTimeline = "select year, quarter, language, ROUND(cumulative_cont
 const quarterlyTimelineCumulative = "SELECT year, quarter, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count  FROM quarterly_cumulative_stats_all where $1:raw;";
 
 const cumulativeCount = `select count(distinct(language)) as total_languages, 
-(select count(distinct(users)) from (SELECT contributed_by AS users FROM contributions_and_demo_stats where $1:raw UNION SELECT validated_by::integer as users FROM contributions_and_demo_stats where $1:raw) as cds) as total_speakers, 
+(select count(distinct(users)) from (SELECT contributed_by AS users FROM contributions_and_demo_stats where $1:raw UNION SELECT validated_by as users FROM contributions_and_demo_stats where $1:raw) as cds) as total_speakers, 
 ROUND((sum(contribution_audio_duration) FILTER (WHERE audio_row_num_per_contribution_id = 1 and contributions_and_demo_stats.is_system = false))::numeric/3600,3)  as total_contributions, 
 ROUND(sum(contributions_and_demo_stats.validation_audio_duration)::numeric/3600, 3)  as total_validations,
 count(distinct contribution_id) FILTER (WHERE contributions_and_demo_stats.is_system = false) as total_contribution_count,
