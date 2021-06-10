@@ -11,6 +11,18 @@ select dataset_row_id from dataset_row where (type='asr' or type='ocr') and (med
 
 delete from dataset_row where (type='asr' or type='ocr') and (media->> 'language'='Malayalam' or media->> 'language'='Telugu' or media->> 'language'='Odia' or media->> 'language'='Kannada');
 
+delete from validations where contribution_id in (
+select contribution_id from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='parallel') and (media->> 'language'='Odia'))
+);
+
+delete from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='parallel') and (media->> 'language'='Odia')
+);
+
+delete from dataset_row where (type='parallel') and (media->> 'language'='Odia');
+
+
 --ASR data
 
 insert into dataset_row 
@@ -189,7 +201,6 @@ select 'medium', 'ocr', '{
             "type": "image",
             "language": "Kannada"
             }'::jsonb, 'contributed';
-
 
 insert into contributions 
     ( dataset_row_id, contributed_by, media, is_system , date, action) 
