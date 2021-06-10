@@ -323,6 +323,7 @@ function showNoSentencesMessage() {
   hideElement($('#dekho-image'));
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
+  hideElement($('#mic-report-row'));
   showElement($('#no-textarea-row'))
   hideElement($('#skip_btn_row'));
   showElement($('#no-sentences-row'));

@@ -2,10 +2,10 @@ const {readFileSync} = require('fs');
 const {stringToHTML, mockLocalStorage} = require('../utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LIKHO_TO_LANGUAGE} = require('../../build/js/common/constants');
 
+const sunoValidatorPage = readFileSync(`${__dirname}/../../build/views/sunoIndia/validator-prompt-page.ejs`, 'UTF-8');
+const editAreaErrorPage = readFileSync(`${__dirname}/../../build/views/common/editAreaError.ejs`, 'UTF-8');
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../../build/views/common/virtualKeyboard.ejs`, 'UTF-8')+
-  readFileSync(`${__dirname}/../../build/views/sunoIndia/validator-prompt-page.ejs`, 'UTF-8')+
-  readFileSync(`${__dirname}/../../build/views/common/editAreaError.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../../build/views/common/virtualKeyboard.ejs`, 'UTF-8')
 );
 
 const {lngtype, showAndHideEditError} = require('../../build/js/common/virtualKeyboard.js');
@@ -419,6 +419,7 @@ describe("lngtype", () => {
 
 describe('showAndHideEditError',()=>{
   test('should show no error when user typed in selected language',()=>{
+    document.body = stringToHTML(sunoValidatorPage + editAreaErrorPage);
     showAndHideEditError(5, null,()=>{},()=>{});
     const $submitEditButton = document.getElementById("submit-edit-button");
     expect($submitEditButton.hasAttribute('disabled')).toEqual(false)
@@ -426,10 +427,7 @@ describe('showAndHideEditError',()=>{
   })
 
   test('should show no Text error msg when user typed empty space ',()=>{
-    document.body = stringToHTML(
-      readFileSync(`${__dirname}/../../build/views/sunoIndia/validator-prompt-page.ejs`, 'UTF-8')+
-      readFileSync(`${__dirname}/../../build/views/common/editAreaError.ejs`, 'UTF-8')
-    );
+    document.body = stringToHTML(sunoValidatorPage + editAreaErrorPage);
     const inputText = '      ';
     showAndHideEditError(inputText.trim().length, {type:'noText'},()=>{},()=>{});
     const $submitEditButton = document.getElementById("submit-edit-button");
@@ -444,10 +442,7 @@ describe('showAndHideEditError',()=>{
   })
 
   test('should show symbol error msg when error type is symbol',()=>{
-    document.body = stringToHTML(
-      readFileSync(`${__dirname}/../../build/views/sunoIndia/validator-prompt-page.ejs`, 'UTF-8')+
-      readFileSync(`${__dirname}/../../build/views/common/editAreaError.ejs`, 'UTF-8')
-    );
+    document.body = stringToHTML(sunoValidatorPage + editAreaErrorPage);
     showAndHideEditError(2, {type:'symbol'},()=>{},()=>{});
     const $submitEditButton = document.getElementById("submit-edit-button");
     const $editText = $('#edit-text');
@@ -462,10 +457,7 @@ describe('showAndHideEditError',()=>{
   })
 
   test('should show number error msg when error type is number',()=>{
-    document.body = stringToHTML(
-      readFileSync(`${__dirname}/../../build/views/sunoIndia/validator-prompt-page.ejs`, 'UTF-8')+
-      readFileSync(`${__dirname}/../../build/views/common/editAreaError.ejs`, 'UTF-8')
-    );
+    document.body = stringToHTML(sunoValidatorPage + editAreaErrorPage);
     showAndHideEditError(2, {type:'number'},()=>{},()=>{});
     const $submitEditButton = document.getElementById("submit-edit-button");
     expect($submitEditButton.hasAttribute('disabled')).toEqual(true)
@@ -479,10 +471,7 @@ describe('showAndHideEditError',()=>{
   })
 
   test('should show language error msg when error type is language',()=>{
-    document.body = stringToHTML(
-      readFileSync(`${__dirname}/../../build/views/sunoIndia/validator-prompt-page.ejs`, 'UTF-8')+
-      readFileSync(`${__dirname}/../../build/views/common/editAreaError.ejs`, 'UTF-8')
-    );
+    document.body = stringToHTML(sunoValidatorPage + editAreaErrorPage);
     showAndHideEditError(2, {type:'language'},()=>{},()=>{});
     const $submitEditButton = document.getElementById("submit-edit-button");
     expect($submitEditButton.hasAttribute('disabled')).toEqual(true)

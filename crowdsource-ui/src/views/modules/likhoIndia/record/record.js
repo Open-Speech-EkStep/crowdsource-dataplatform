@@ -233,6 +233,7 @@ function showNoSentencesMessage() {
   hideElement($('#audio-row'))
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
+  hideElement($('#mic-report-row'));
   showElement($('#no-sentences-row'))
   hideElement($('#skip_btn_row'));
   hideElement($('#validation-container'));
