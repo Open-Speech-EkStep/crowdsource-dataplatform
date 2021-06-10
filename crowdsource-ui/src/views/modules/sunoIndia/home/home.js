@@ -82,7 +82,6 @@ function initializeBlock() {
   showFucntionalCards('asr', language);
   setSpeakerDetails(speakerDetailsKey, $userName);
   setUserNameOnInputFocus();
-  // setStartRecordingBtnOnClick();
   setUserModalOnShown($userName);
   getStatsSummary('/stats/summary/asr',MODULE.suno.value, setDefaultLang);
 }

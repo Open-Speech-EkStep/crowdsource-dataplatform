@@ -72,7 +72,7 @@
 * When user skips the rest of the "3" sentences , User should see Thank you Page
 * when user clicks on the Contribute More button, user should not see the Instructions page again
 * When user skips the rest of the "1" sentences , User should see Thank you Page
-* Validate Thank you page content for Dekho India 
+* Validate Thank you page content for Dekho India
 * When user clicks on Contribute more button , user should see no data available message for dekho India
 
 ## Validate Validate flow

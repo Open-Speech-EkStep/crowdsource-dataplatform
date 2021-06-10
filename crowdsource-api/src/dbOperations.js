@@ -661,22 +661,22 @@ const getTargetInfo = async (req, res) => {
 }
 
 const getSentencesForProfanityChecking = (username, type, language) => {
-    currentTime = moment().utcOffset("+05:30").format()
+    const currentTime = moment().utcOffset("+05:30").format()
     return db.any(getSentencesForProfanityCheck, [username, currentTime, type, language])
 }
 
 const getSentencesForProfanityCheckingForCorrection = (username, type, language) => {
-    currentTime = moment().utcOffset("+05:30").format()
+    const currentTime = moment().utcOffset("+05:30").format()
     return db.any(getSentencesForProfanityCheckForCorrection, [username, currentTime, type, language])
 }
 
 const updateProfanityStatus = (userName, sentenceId, profanityStatus) => {
-    currentTime = moment().utcOffset("+05:30").format()
+    const currentTime = moment().utcOffset("+05:30").format()
     return db.any(updateSentenceWithProfanity, [profanityStatus, sentenceId, userName, currentTime])
 }
 
 const updateProfanityStatusForCorrection = (userName, sentenceId, profanityStatus) => {
-    currentTime = moment().utcOffset("+05:30").format()
+    const currentTime = moment().utcOffset("+05:30").format()
     return db.any(updateSentenceWithProfanityForCorrection, [profanityStatus, sentenceId, userName, currentTime])
 }
 

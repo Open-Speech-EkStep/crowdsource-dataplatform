@@ -84,6 +84,16 @@
 * Start Recording button is disabled
 * Select Language "Hindi" enables the Start Recording button
 
+## Check Terms and Condition links from Footer
+* Select "Bolo India" from header
+* Navigate to "Terms & Conditions" button and click "Terms & Conditions" button
+* Validate terms and condition content
+
+## Check Privacy and Policy links from Footer
+* Select "Bolo India" from header
+* Navigate to "Privacy Policy" button and click "Privacy Policy" button
+* Validate Privacy Policy content
+
 //## Validate Locale content on Home Page
 //* Select "Bolo India" from header
 //* Select translation language as "हिंदी"

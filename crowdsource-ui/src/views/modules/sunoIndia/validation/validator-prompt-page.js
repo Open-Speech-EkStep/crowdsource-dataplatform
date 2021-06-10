@@ -197,7 +197,7 @@ function getNextSentence() {
   if (currentIndex < sunoIndiaValidator.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex + 1,sunoIndiaValidator.sentences.length);
-    let encodedUrl = encodeURIComponent(sunoIndiaValidator.sentences[currentIndex].sentence);
+    const encodedUrl = encodeURIComponent(sunoIndiaValidator.sentences[currentIndex].sentence);
     loadAudio(`${cdn_url}/${encodedUrl}`);
     resetValidation();
     setSentenceLabel(currentIndex);
@@ -327,6 +327,8 @@ function addListeners() {
     $submitEditButton.attr('disabled',true);
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
+    hideElement($('#edit-error-row'))
+    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     setInput("");
     closeEditor();
   })
@@ -380,6 +382,8 @@ function addListeners() {
     getNextSentence();
     showElement($('#sentences-row'));
     showElement($('#progress-row'))
+    hideElement($('#edit-error-row'))
+    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     closeEditor();
   })
 
@@ -458,6 +462,7 @@ function showNoSentencesMessage() {
   hideElement($('#validation-button-row'))
   hideElement($('#audio-row'))
   hideElement($('#progress-row'))
+  hideElement($('#mic-report-row'))
   showElement($('#no-sentences-row'))
   hideElement($('#skip_btn_row'));
   hideElement($('#validation-container'));
@@ -511,7 +516,7 @@ const initializeComponent = function () {
   $('#edit-language').text(contributionLanguage)
   addListeners();
   if (audio) {
-    let encodedUrl = encodeURIComponent(audio.sentence);
+    const encodedUrl = encodeURIComponent(audio.sentence);
     loadAudio(`${cdn_url}/${encodedUrl}`);
     setSentenceLabel(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);

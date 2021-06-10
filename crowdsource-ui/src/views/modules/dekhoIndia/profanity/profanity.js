@@ -46,7 +46,7 @@ function getNextSentence() {
   if (currentIndex < dekhoIndia.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length);
-    let encodedUrl = encodeURIComponent(dekhoIndia.sentences[currentIndex].media);
+    const encodedUrl = encodeURIComponent(dekhoIndia.sentences[currentIndex].media);
     setDekhoImage(`${cdn_url}/${encodedUrl}`);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
@@ -261,7 +261,7 @@ const initializeComponent = () => {
   const validationData = dekhoIndia.sentences[currentIndex];
   addListeners();
   if (validationData) {
-    let encodedUrl = encodeURIComponent(validationData.media);
+    const encodedUrl = encodeURIComponent(validationData.media);
     setDekhoImage(`${cdn_url}/${encodedUrl}`);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);

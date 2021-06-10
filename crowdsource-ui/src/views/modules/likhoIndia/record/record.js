@@ -153,6 +153,8 @@ function addListeners() {
     $("#edit").val("");
     setInput("");
     showElement($('#progress-row'))
+    hideElement($('#edit-error-row'))
+    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     const $cancelEditButton = $('#cancel-edit-button');
     $cancelEditButton.attr('disabled', true);
     const $submitEditButton = $('#submit-edit-button');
@@ -200,6 +202,8 @@ function addListeners() {
     $('#edit').val("");
     setInput("");
     $('#submit-edit-button').attr('disabled', true);
+    hideElement($('#edit-error-row'))
+    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     markContributionSkipped();
     getNextSentence();
     showElement($('#sentences-row'));
@@ -233,6 +237,7 @@ function showNoSentencesMessage() {
   hideElement($('#audio-row'))
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
+  hideElement($('#mic-report-row'));
   showElement($('#no-sentences-row'))
   hideElement($('#skip_btn_row'));
   hideElement($('#validation-container'));

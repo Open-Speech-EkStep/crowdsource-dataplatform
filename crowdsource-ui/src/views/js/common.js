@@ -1,6 +1,7 @@
 const {
   CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS,LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE
 } = require('./constants');
+const { drawTopLanguageChart } = require('./verticalGraph');
 const { constructChart } = require('./horizontalBarGraph');
 const { changeLocale,showLanguagePopup } = require('./locale');
 const fetch = require('./fetch');
@@ -31,6 +32,15 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
 }
 
 function showByHoursChart(type) {
+  const chartReg = {};
+  if (chartReg["chart"]) {
+    chartReg["chart"].dispose();
+  }
+  const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
+  drawTopLanguageChart(JSON.parse(topLanguagesByHoursData), type)
+}
+
+function showByHoursChartThankyouPage(type) {
   const chartReg = {};
   if (chartReg["chart"]) {
     chartReg["chart"].dispose();
@@ -257,4 +267,6 @@ const showOrHideExtensionCloseBtn = function (){
   // }
 }
 
-module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn };
+
+
+module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn };

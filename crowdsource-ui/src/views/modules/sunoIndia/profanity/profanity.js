@@ -120,7 +120,7 @@ function getNextSentence() {
   if (currentIndex < sunoIndia.sentences.length - 1) {
     currentIndex++;
     updateProgressBar(currentIndex + 1, sunoIndia.sentences.length);
-    let encodedUrl = encodeURIComponent(sunoIndia.sentences[currentIndex].media);
+    const encodedUrl = encodeURIComponent(sunoIndia.sentences[currentIndex].media);
     loadAudio(`${cdn_url}/${encodedUrl}`);
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
@@ -379,7 +379,7 @@ const initialize = function () {
   addListeners();
 
   if (audio) {
-    let encodedUrl = encodeURIComponent(audio.media);
+    const encodedUrl = encodeURIComponent(audio.media);
     loadAudio(`${cdn_url}/${encodedUrl}`);
     resetValidation();
     setCurrentSentenceIndex(currentIndex + 1);
