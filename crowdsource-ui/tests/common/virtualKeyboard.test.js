@@ -3,10 +3,12 @@ const {stringToHTML, mockLocalStorage} = require('../utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LIKHO_TO_LANGUAGE} = require('../../build/js/common/constants');
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../../build/views/common/virtualKeyboard.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../../build/views/common/virtualKeyboard.ejs`, 'UTF-8')+
+  readFileSync(`${__dirname}/../../build/views/sunoIndia/validator-prompt-page.ejs`, 'UTF-8')+
+  readFileSync(`${__dirname}/../../build/views/common/editAreaError.ejs`, 'UTF-8')
 );
 
-const {lngtype} = require('../../build/js/common/virtualKeyboard.js');
+const {lngtype, showAndHideEditError} = require('../../build/js/common/virtualKeyboard.js');
 
 describe("lngtype", () => {
   const specialSymbols = ['!', '"', '#', '$', '%', '&',
@@ -29,123 +31,204 @@ describe("lngtype", () => {
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
   ];
 
-  test("should give true any module when character is any special symbol for Assamese", () => {
+  const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+  test("should give symbol error for suno India when given character is any special symbol for any language", () => {
+    const symbols = ['!', '"', '#', '$', '%', '&',
+      '\'',
+      '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@',
+      '[',
+      '\\',
+      ']',
+      '^',
+      '_',
+      '`',
+      '{',
+      '|',
+      '}',
+      '~',
+      '।',
+      '~',
+      '`',
+      '॥',
+    ];
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'suno');
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Assamese');
-    specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+    symbols.forEach(symbol => {
+      expect(lngtype(symbol)).toEqual({type:'symbol'});
     })
     localStorage.clear();
   })
 
-  test("should give true any module when character is any special symbol for Bengali", () => {
+  test("should give symbol error for suno India when given input text starts with any special symbol for any language", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'suno');
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Bengali');
-    specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
-    })
+    expect(lngtype('!qwerty')).toEqual({type:'symbol'});
     localStorage.clear();
   })
 
-  test("should give true any module when character is any special symbol for Gujarati", () => {
+  test("should give symbol error for suno India when given input text ends with any special symbol for any language", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'suno');
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Gujarati');
-    specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
-    })
+    expect(lngtype('qwerty;')).toEqual({type:'symbol'});
     localStorage.clear();
   })
 
-  test("should give true any module when character is any special symbol for Hindi", () => {
+  test("should give symbol error for suno India when given input text contain any special symbol for any language", () => {
+    mockLocalStorage();
+    // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
+    localStorage.setItem(CURRENT_MODULE, 'suno');
+    expect(lngtype('qwe*rty')).toEqual({type:'symbol'});
+    localStorage.clear();
+  })
+
+  test("should give language error for for any module when given input text starts with any different character set for any language", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Hindi');
-    specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+    expect(lngtype('qहिन्दी')).toEqual({type:'language'});
+    localStorage.clear();
+  })
+
+  test("should give language error for for any module when given input text ends with any different character set for any language", () => {
+    mockLocalStorage();
+    // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
+    localStorage.setItem(CURRENT_MODULE, 'dekho');
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Bengali');
+    expect(lngtype('কিন্তুu')).toEqual({type:'language'});
+    localStorage.clear();
+  })
+
+  test("should give language error for any module when given input text contains any different character set for any language", () => {
+    mockLocalStorage();
+    // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
+    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Telugu');
+    expect(lngtype('డ్డా ॐ యి')).toEqual({type:'language'});
+    localStorage.clear();
+  })
+
+  test("should give error as null for suno when character is any English numeral for any language", () => {
+    mockLocalStorage();
+    // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
+    localStorage.setItem(CURRENT_MODULE, 'suno');
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Assamese');
+    numbers.forEach(symbol => {
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
 
-  test("should give true any module when character is any special symbol for Kannada", () => {
+  test("should give error as null for dekho when character is any English numeral for any language", () => {
+    mockLocalStorage();
+    // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
+    localStorage.setItem(CURRENT_MODULE, 'dekho');
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Bengali');
+    numbers.forEach(symbol => {
+      expect(lngtype(symbol)).toEqual(null);
+    })
+    localStorage.clear();
+  })
+
+  test("should give error as null for likho when character is any English numeral for any language", () => {
+    mockLocalStorage();
+    // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
+    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Gujarati');
+    numbers.forEach(symbol => {
+      expect(lngtype(symbol)).toEqual(null);
+    })
+    localStorage.clear();
+  })
+
+  test("should give error as null any module when character is any number for Hindi", () => {
+    mockLocalStorage();
+    // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
+    localStorage.setItem(CURRENT_MODULE, 'suno');
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Hindi');
+    numbers.forEach(symbol => {
+      expect(lngtype(symbol)).toEqual(null);
+    })
+    localStorage.clear();
+  })
+
+  test("should give error as null any module when character is any number for Kannada", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Kannada');
-    specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+    numbers.forEach(symbol => {
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
 
-  test("should give true any module when character is any special symbol for Malayalam", () => {
+  test("should give error as null any module when character is any number for Malayalam", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Malayalam');
-    specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+    numbers.forEach(symbol => {
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
 
-  test("should give true any module when character is any special symbol for Marathi", () => {
+  test("should give error as null any module when character is any number for Marathi", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Marathi');
-    specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+    numbers.forEach(symbol => {
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
 
-  test("should give true any module when character is any special symbol for Odia", () => {
+  test("should give error as null any module when character is any number for Odia", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Odia');
-    specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+    numbers.forEach(symbol => {
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
 
-  test("should give true any module when character is any special symbol for Punjabi", () => {
+  test("should give erros as null any module when character is any number for Punjabi", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Punjabi');
-    specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+    numbers.forEach(symbol => {
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
 
-  test("should give true any module when character is any special symbol for Tamil", () => {
+  test("should give erros as null any module when character is any number for Tamil", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Tamil');
-    specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+    numbers.forEach(symbol => {
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
 
-  test("should give true any module when character is any special symbol for Telugu", () => {
+  test("should give error as null any module when character is any numbers for Telugu", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Telugu');
-    specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+    numbers.forEach(symbol => {
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -156,7 +239,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'likho');
     localStorage.setItem(LIKHO_TO_LANGUAGE, 'Assamese');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -167,7 +250,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'likho');
     localStorage.setItem(LIKHO_TO_LANGUAGE, 'Bengali');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -178,7 +261,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'likho');
     localStorage.setItem(LIKHO_TO_LANGUAGE, 'Gujarati');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -190,7 +273,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'likho');
     localStorage.setItem(LIKHO_TO_LANGUAGE, 'Hindi');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -202,7 +285,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'likho');
     localStorage.setItem(LIKHO_TO_LANGUAGE, 'Kannada');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -213,7 +296,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'likho');
     localStorage.setItem(LIKHO_TO_LANGUAGE, 'Malayalam');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -224,7 +307,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'likho');
     localStorage.setItem(LIKHO_TO_LANGUAGE, 'Marathi');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -235,7 +318,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'likho');
     localStorage.setItem(LIKHO_TO_LANGUAGE, 'Odia');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -246,7 +329,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'likho');
     localStorage.setItem(LIKHO_TO_LANGUAGE, 'Punjabi');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -257,7 +340,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'likho');
     localStorage.setItem(LIKHO_TO_LANGUAGE, 'Tamil');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -268,7 +351,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'likho');
     localStorage.setItem(LIKHO_TO_LANGUAGE, 'Telugu');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -279,7 +362,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'dekho');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Telugu');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -297,7 +380,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'dekho');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Assamese');
     characters.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -310,7 +393,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, 'dekho');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'English');
     characters.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(true);
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -319,8 +402,8 @@ describe("lngtype", () => {
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'dekho');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'English');
-    expect(lngtype('।')).toEqual(false);
-    expect(lngtype('॥')).toEqual(false);
+    expect(lngtype('।')).toEqual({type:'language'});
+    expect(lngtype('॥')).toEqual({type:'language'});
     localStorage.clear();
   })
 
@@ -328,7 +411,87 @@ describe("lngtype", () => {
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'dekho');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Tamil');
-    expect(lngtype('त')).toEqual(false);
+    expect(lngtype('त')).toEqual({type:'language'});
     localStorage.clear();
+  })
+})
+
+
+describe('showAndHideEditError',()=>{
+  test('should show no error when user typed in selected language',()=>{
+    showAndHideEditError(5, null,()=>{},()=>{});
+    const $submitEditButton = document.getElementById("submit-edit-button");
+    expect($submitEditButton.hasAttribute('disabled')).toEqual(false)
+    expect($("#edit-error-row").hasClass('d-none')).toEqual(true);
+  })
+
+  test('should show no Text error msg when user typed empty space ',()=>{
+    document.body = stringToHTML(
+      readFileSync(`${__dirname}/../../build/views/sunoIndia/validator-prompt-page.ejs`, 'UTF-8')+
+      readFileSync(`${__dirname}/../../build/views/common/editAreaError.ejs`, 'UTF-8')
+    );
+    const inputText = '      ';
+    showAndHideEditError(inputText.trim().length, {type:'noText'},()=>{},()=>{});
+    const $submitEditButton = document.getElementById("submit-edit-button");
+    expect($submitEditButton.hasAttribute('disabled')).toEqual(true)
+    expect($("#edit-error-row").hasClass('d-none')).toEqual(false);
+    expect($('#edit-noText-error').hasClass('d-none')).toEqual(false);
+    expect($('#edit-language-error').hasClass('d-none')).toEqual(true);
+    expect($('#edit-number-error').hasClass('d-none')).toEqual(true);
+    expect($('#edit-symbol-error').hasClass('d-none')).toEqual(true);
+    expect($('#edit-text').hasClass('edit-error-area')).toEqual(true);
+    expect($('#edit-text').hasClass('edit-text')).toEqual(false);
+  })
+
+  test('should show symbol error msg when error type is symbol',()=>{
+    document.body = stringToHTML(
+      readFileSync(`${__dirname}/../../build/views/sunoIndia/validator-prompt-page.ejs`, 'UTF-8')+
+      readFileSync(`${__dirname}/../../build/views/common/editAreaError.ejs`, 'UTF-8')
+    );
+    showAndHideEditError(2, {type:'symbol'},()=>{},()=>{});
+    const $submitEditButton = document.getElementById("submit-edit-button");
+    const $editText = $('#edit-text');
+    expect($submitEditButton.hasAttribute('disabled')).toEqual(true)
+    expect($("#edit-error-row").hasClass('d-none')).toEqual(false);
+    expect($('#edit-noText-error').hasClass('d-none')).toEqual(true);
+    expect($('#edit-language-error').hasClass('d-none')).toEqual(true);
+    expect($('#edit-number-error').hasClass('d-none')).toEqual(true);
+    expect($('#edit-symbol-error').hasClass('d-none')).toEqual(false);
+    expect($editText.hasClass('edit-error-area')).toEqual(true);
+    expect($editText.hasClass('edit-text')).toEqual(false);
+  })
+
+  test('should show number error msg when error type is number',()=>{
+    document.body = stringToHTML(
+      readFileSync(`${__dirname}/../../build/views/sunoIndia/validator-prompt-page.ejs`, 'UTF-8')+
+      readFileSync(`${__dirname}/../../build/views/common/editAreaError.ejs`, 'UTF-8')
+    );
+    showAndHideEditError(2, {type:'number'},()=>{},()=>{});
+    const $submitEditButton = document.getElementById("submit-edit-button");
+    expect($submitEditButton.hasAttribute('disabled')).toEqual(true)
+    expect($("#edit-error-row").hasClass('d-none')).toEqual(false);
+    expect($('#edit-noText-error').hasClass('d-none')).toEqual(true);
+    expect($('#edit-language-error').hasClass('d-none')).toEqual(true);
+    expect($('#edit-number-error').hasClass('d-none')).toEqual(false);
+    expect($('#edit-symbol-error').hasClass('d-none')).toEqual(true);
+    expect($('#edit-text').hasClass('edit-error-area')).toEqual(true);
+    expect($('#edit-text').hasClass('edit-text')).toEqual(false);
+  })
+
+  test('should show language error msg when error type is language',()=>{
+    document.body = stringToHTML(
+      readFileSync(`${__dirname}/../../build/views/sunoIndia/validator-prompt-page.ejs`, 'UTF-8')+
+      readFileSync(`${__dirname}/../../build/views/common/editAreaError.ejs`, 'UTF-8')
+    );
+    showAndHideEditError(2, {type:'language'},()=>{},()=>{});
+    const $submitEditButton = document.getElementById("submit-edit-button");
+    expect($submitEditButton.hasAttribute('disabled')).toEqual(true)
+    expect($("#edit-error-row").hasClass('d-none')).toEqual(false);
+    expect($('#edit-noText-error').hasClass('d-none')).toEqual(true);
+    expect($('#edit-language-error').hasClass('d-none')).toEqual(false);
+    expect($('#edit-number-error').hasClass('d-none')).toEqual(true);
+    expect($('#edit-symbol-error').hasClass('d-none')).toEqual(true);
+    expect($('#edit-text').hasClass('edit-error-area')).toEqual(true);
+    expect($('#edit-text').hasClass('edit-text')).toEqual(false);
   })
 })
