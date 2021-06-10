@@ -154,7 +154,7 @@ step("User should be able to close the Instructions , user should see a sentence
 
 step("When user clicks on <arg0> button, <arg1> button should appear", async function (arg0, arg1) {
     await taiko.waitFor(async () => (await button(arg0).exists()))
-    await taiko.waitFor(1000)  
+    await taiko.waitFor(1000)
     await evaluate(button(arg0), (elem) => elem.click())
     await taiko.waitFor(3000)
     assert.ok(await button(arg1).exists())
@@ -253,6 +253,14 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
         await click(startValidatingButton);
     }
     else if (arg0 == "Label") {
+        await taiko.waitFor(2000)
+        const startRecordingButton = taiko.image({ id: "start_recording" });
+        assert.ok(await startRecordingButton.exists());
+        await hover(startRecordingButton);
+        await taiko.waitFor(500)
+        await click(startRecordingButton);
+
+    } else if (arg0 == "Translate") {
         await taiko.waitFor(2000)
         const startRecordingButton = taiko.image({ id: "start_recording" });
         assert.ok(await startRecordingButton.exists());
