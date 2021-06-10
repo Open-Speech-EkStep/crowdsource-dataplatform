@@ -2,7 +2,7 @@
 
 ## ASR dataset Ingestion
 
-Command for ingestion:
+Command for ingestion (Non-ULCA compliant):
 
 ```sh
 sh ingest.sh <LOCAL_PATH> <DATASET_NAME> <BUCKET_NAME> <LANGUAGE> <REMOTE_BASE_PATH> <paired|unpaired> <CONNECTION_URL>
@@ -12,6 +12,22 @@ Example:
 
 ```sh
 sh ingest.sh ./CEC CEC ekstepspeechrecognition-crowdsource-dev Hindi inbound/asr paired postgres://username:password@host:port/dbname
+```
+
+Command for ingestion (ULCA compliant):
+
+```sh
+cd data-pipelines/ingestion/asr/ulca
+```
+
+```sh
+sh ingest.sh  <TAR_FILE_NAME> <AWS_BUCKET> <LANGUAGE> <GCP_REMOTE_BASE_PATH> paired $db_url $ulca_dataset_path
+```
+
+Example:
+
+```sh
+sh ingest.sh  ALL_INDIA_RADIO_BANGALORE.tar.gz <AWS_BUKCET> Kannada inbound/asr paired $db_url gs://<GCP_BUCKET>/data/audiotospeech/integration/publish/kannada
 ```
 
 ## OCR dataset Ingestion

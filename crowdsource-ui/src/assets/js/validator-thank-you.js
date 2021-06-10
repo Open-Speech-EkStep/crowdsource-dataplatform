@@ -16,7 +16,7 @@ const {
   getLocaleString,
   performAPIRequest,
 } = require("./utils");
-const {showByHoursChart,getContributedAndTopLanguage,setBadge} = require('../../../build/js/common/common');
+const {showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../../../build/js/common/common');
 
 const CURRENT_INDEX = "boloValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -103,7 +103,7 @@ const getLanguageStats = function () {
         );
         const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.bolo.value);
         localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChart(MODULE.bolo.value);
+        showByHoursChartThankyouPage(MODULE.bolo.value);
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );

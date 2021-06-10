@@ -24,7 +24,7 @@ a{
     padding: 24px;
 }
 
-.edit-text {
+#edit-text,.edit-translation-text {
     min-height:180px;
     border-top-right-radius:12px;
     border-bottom-right-radius:12px;
@@ -37,7 +37,7 @@ a{
     border-radius: 12px !important;
 }
 
-.edit-text textarea {
+#edit-text textarea, .edit-translation-text textarea {
     border: none !important;
     padding: 0;
     box-shadow: none !important;
@@ -46,7 +46,7 @@ a{
     border-color: transparent !important;
 }
 
-.original-text,.edit-text label {
+.original-text,#edit-text label, .edit-translation-text label{
     font-size: 14px;
     color: #959595;
 }
@@ -147,7 +147,7 @@ a{
         border-bottom-right-radius: 0px;
     }
     
-    .edit-text {
+    #edit-text,.edit-translation-text {
         border-bottom-right-radius:12px;
         border-bottom-left-radius:12px;
         border-top-left-radius:0px;
@@ -183,4 +183,14 @@ a{
     top: 20px;
     border-left: 8px solid #343A40;
   }
+
+.edit-text{
+    box-shadow: inset 0px 0px 8px #007BFF!important;
+    border: 2px solid #007BFF!important;
+}
+
+.edit-error-area{
+    box-shadow: inset 0px 0px 8px rgba(244, 75, 75, 0.8) !important;
+    border: 2px solid #F44B4B!important;
+}
 

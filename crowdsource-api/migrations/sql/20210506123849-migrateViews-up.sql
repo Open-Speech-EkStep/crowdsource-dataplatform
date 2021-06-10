@@ -3,6 +3,7 @@ TABLESPACE pg_default
 AS
  SELECT contributions.contributed_by,
     contributions.contribution_id,
+	validations.validated_by,
     validations.validation_id,
     contributions.date,
     COALESCE(contributors.gender, 'ANONYMOUS'::text) AS gender,
@@ -35,12 +36,13 @@ AS
 					    END
             ELSE 0::bigint::double precision
         END AS validation_audio_duration,
-    dataset_row.type
+    dataset_row.type,
+	contributions.is_system
    FROM contributions
      LEFT JOIN validations ON contributions.contribution_id = validations.contribution_id
      JOIN dataset_row ON dataset_row.dataset_row_id = contributions.dataset_row_id
      LEFT JOIN contributors ON contributors.contributor_id = contributions.contributed_by
-  WHERE contributions.action = 'completed'::text AND contributions.is_system=false AND contributions.date >= (CURRENT_DATE - '1 year'::interval)
+  WHERE contributions.action = 'completed'::text AND contributions.date >= (CURRENT_DATE - '1 year'::interval)
   ORDER BY contributions.contributed_by;
 
 
@@ -56,9 +58,9 @@ AS
     date_part('year'::text, contributions_and_demo_stats.date) AS year,
     date_part('month'::text, contributions_and_demo_stats.date) AS month,
     date_part('day'::text, contributions_and_demo_stats.date) AS day,
-    round(sum(contributions_and_demo_stats.contribution_audio_duration) FILTER (WHERE contributions_and_demo_stats.audio_row_num_per_contribution_id = 1)::numeric, 3) AS total_contribution_duration,
+    round(sum(contributions_and_demo_stats.contribution_audio_duration) FILTER (WHERE contributions_and_demo_stats.audio_row_num_per_contribution_id = 1 and contributions_and_demo_stats.is_system = false)::numeric, 3) AS total_contribution_duration,
     round(sum(contributions_and_demo_stats.validation_audio_duration)::numeric, 3) AS total_validation_duration,
-    count(DISTINCT contributions_and_demo_stats.contribution_id) AS total_contributions,
+    count(DISTINCT contributions_and_demo_stats.contribution_id) FILTER (WHERE contributions_and_demo_stats.is_system = false) AS total_contributions,
     sum(contributions_and_demo_stats.is_validated) AS total_validations,
     contributions_and_demo_stats.type
    FROM contributions_and_demo_stats_newest contributions_and_demo_stats
@@ -125,7 +127,7 @@ AS
             sum(contributions_and_demo_stats.contribution_audio_duration) FILTER (WHERE contributions_and_demo_stats.audio_row_num_per_contribution_id = 1) AS total_contributions,
             contributions_and_demo_stats.type,
             count(DISTINCT contributions_and_demo_stats.contribution_id) AS total_contribution_count
-           FROM contributions_and_demo_stats_newest contributions_and_demo_stats
+           FROM contributions_and_demo_stats_newest contributions_and_demo_stats where contributions_and_demo_stats.is_system = false
           GROUP BY contributions_and_demo_stats.type, contributions_and_demo_stats.contributions_state_region, contributions_and_demo_stats.language) cs
      FULL JOIN ( SELECT contributions_and_demo_stats.validations_state_region AS state,
             contributions_and_demo_stats.language,
@@ -146,10 +148,10 @@ TABLESPACE pg_default
 AS
  SELECT contributions_and_demo_stats.language,
     count(DISTINCT contributions_and_demo_stats.contributed_by) AS total_speakers,
-    sum(contributions_and_demo_stats.contribution_audio_duration) FILTER (WHERE contributions_and_demo_stats.audio_row_num_per_contribution_id = 1) AS total_contributions,
+    sum(contributions_and_demo_stats.contribution_audio_duration) FILTER (WHERE contributions_and_demo_stats.audio_row_num_per_contribution_id = 1 and contributions_and_demo_stats.is_system = false) AS total_contributions,
     sum(contributions_and_demo_stats.validation_audio_duration) AS total_validations,
     contributions_and_demo_stats.type,
-    count(DISTINCT contributions_and_demo_stats.contribution_id) AS total_contribution_count,
+    count(DISTINCT contributions_and_demo_stats.contribution_id) FILTER (WHERE contributions_and_demo_stats.is_system = false) AS total_contribution_count ,
     sum(contributions_and_demo_stats.is_validated) AS total_validation_count
    FROM contributions_and_demo_stats_newest contributions_and_demo_stats
   GROUP BY contributions_and_demo_stats.type, contributions_and_demo_stats.language
@@ -175,7 +177,7 @@ AS
             round(sum(contributions_and_demo_stats.contribution_audio_duration) FILTER (WHERE contributions_and_demo_stats.audio_row_num_per_contribution_id = 1)::numeric / 3600::numeric, 3) AS total_contributions,
             contributions_and_demo_stats.type,
             count(DISTINCT contributions_and_demo_stats.contribution_id) AS total_contribution_count
-           FROM contributions_and_demo_stats_newest contributions_and_demo_stats
+           FROM contributions_and_demo_stats_newest contributions_and_demo_stats where contributions_and_demo_stats.is_system = false
           GROUP BY contributions_and_demo_stats.type, contributions_and_demo_stats.contributions_state_region) contribution_by_state
      FULL JOIN ( SELECT contributions_and_demo_stats.validations_state_region AS state,
             round(sum(contributions_and_demo_stats.validation_audio_duration)::numeric / 3600::numeric, 3) AS total_validations,

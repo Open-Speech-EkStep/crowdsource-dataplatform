@@ -1,5 +1,5 @@
 #keyboardBox {
-    position: absolute;
+    position: absolute !important;
     z-index: 9;
     background-color: #f1f1f1;
     text-align: center;

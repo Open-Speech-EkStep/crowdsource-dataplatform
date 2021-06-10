@@ -72,6 +72,7 @@ function showNoSentencesMessage() {
   hideElement($('#audio-row'))
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
+  hideElement($('#mic-report-row'));
   showElement($('#no-sentences-row'))
   hideElement($('#skip_btn_row'));
   hideElement($('#validation-container'));
@@ -244,6 +245,8 @@ function addListeners() {
     $submitEditButton.attr('disabled', true);
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
+    hideElement($('#edit-error-row'))
+    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     setInput("");
     closeEditor();
   })
@@ -284,6 +287,8 @@ function addListeners() {
     skipValidation(SKIP_ACTION)
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
+    hideElement($('#edit-error-row'))
+    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     getNextSentence();
     closeEditor();
   })

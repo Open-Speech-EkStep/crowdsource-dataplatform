@@ -1,12 +1,50 @@
 /**
  * simple-keyboard documentation
  * https://github.com/hodgef/simple-keyboard
+ *
+ *
  */
-const { keyboardLayout } = require('./keyboardLayout');
-const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LIKHO_TO_LANGUAGE } = require('./constants');
-const { isMobileDevice } = require('./common');
+
+const {keyboardLayout} = require('./keyboardLayout');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LIKHO_TO_LANGUAGE} = require('./constants');
+const {isMobileDevice} = require('./common');
+
+function showAndHideEditError(inputTextLength,error, callback1=()=>{}, callback2=()=>{}) {
+  const currentModule = localStorage.getItem(CURRENT_MODULE);
+  const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
+  const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
+  if (inputTextLength > 0 && error == null) {
+    callback1();
+    $submitEditButton.removeAttr('disabled');
+    if ($cancelButton) {
+      $cancelButton.removeAttr('disabled');
+    }
+    $("#edit-error-row").addClass('d-none');
+    $("#edit-text").add($('#edit-text-suno ')).removeClass('edit-error-area').addClass('edit-text');
+  }else {
+    if(error.type == 'noText') {
+      callback2()
+
+      if ($cancelButton) {
+        $cancelButton.attr('disabled', true);
+      }
+    }
+    const $editErrorText = $("#edit-error-text");
+    const previousActiveError = $editErrorText.find('.error-active');
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
+    $("#edit-error-row").removeClass('d-none');
+    $(`#edit-${error.type}-error`).removeClass('d-none').addClass('error-active');
+    $("#edit-text").add($('#edit-text-suno ')).addClass('edit-error-area').removeClass('edit-text');
+    $submitEditButton.attr('disabled', true);
+  }
+}
+
+
 let keyboard;
-const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () => { }) {
+
+const showKeyboard = function (language, callBack1 = () => {
+}, callBack2 = () => {
+}) {
   let Keyboard = window.SimpleKeyboard.default;
 
   /**
@@ -27,67 +65,19 @@ const showKeyboard = function (language, callBack1 = () => { }, callBack2 = () =
    */
   document.querySelector(".edit-area").addEventListener("input", event => {
     keyboard.setInput(event.target.value);
-    const currentModule = localStorage.getItem(CURRENT_MODULE);
-    const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
-    const isLanguage = event.target.value ? lngtype(event.target.value) : true;
-    const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
+    const error = event.target.value ? lngtype(event.target.value) : {type : 'noText'};
     localStorage.setItem("physicalKeyboard", true);
     $('#keyboardBox').addClass('d-none');
-
-    if (event.target.value.length > 0 && isLanguage) {
-      callBack1();
-      $submitEditButton.removeAttr('disabled');
-      if($cancelButton) {
-        $cancelButton.removeAttr('disabled');
-      }
-    }
-    else if(!isLanguage){
-      setTimeout(() => {
-        $("#wrong-language").removeClass("d-none");
-      }, 200);
-        $submitEditButton.attr('disabled', true);
-        setTimeout(() => {
-          $("#wrong-language").addClass("d-none");
-        }, 2000);
-    }
-    else {
-      callBack2()
-      $submitEditButton.attr('disabled', true);
-      if($cancelButton) {
-        $cancelButton.attr('disabled', true);
-      }
-    }
+    const inputText = event.target.value && event.target.value.trim();
+    showAndHideEditError(inputText.length,error,callBack1,callBack2 )
   });
 
   function onChange(input) {
     document.querySelector(".edit-area").value = input;
-    const isLanguage = input ? lngtype(input) : true;
-    const currentModule = localStorage.getItem(CURRENT_MODULE);
-    const $submitEditButton =  $("#submit-edit-button");
-    const $cancelButton = $("#cancel-edit-button");
+    const error = input ? lngtype(input) : {type:'noText'};
     localStorage.setItem("physicalKeyboard", false);
-    if (input.length > 0 && isLanguage) {
-      callBack1();
-      if($cancelButton) {
-        $cancelButton.removeAttr('disabled');
-      }
-      $submitEditButton.removeAttr('disabled');
-    } else if(!isLanguage){
-      setTimeout(() => {
-        $("#wrong-language").removeClass("d-none");
-      }, 200);
-      $submitEditButton.attr('disabled', true);
-        setTimeout(() => {
-          $("#wrong-language").addClass("d-none");
-        }, 2000);
-    } 
-    else {
-      callBack2();
-      if($cancelButton) {
-        $cancelButton.attr('disabled', true);
-      }
-      $submitEditButton.attr('disabled', true);
-    }
+    const inputText = input && input.trim();
+    showAndHideEditError(inputText.length,error,callBack1,callBack2 )
   }
 
   function onKeyPress(button) {
@@ -120,47 +110,55 @@ function lngtype(text) {
   //Dictionary for Unicode range of the languages
   const currentModule = localStorage.getItem(CURRENT_MODULE);
   let langdic = {
-    "Assamese": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Bengali": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
+    "Assamese": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Bengali": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
     "English": /^[\u0020-\u007F]+$/,
-    "Gujarati": /^[\u0A80-\u0AFF\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Hindi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Kannada": /^[\u0C80-\u0CFF\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Malayalam": /^[\u0D00-\u0D7F\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Odia": /^[\u0B00-\u0B7F\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Marathi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Punjabi": /^[\u0A00-\u0A7F\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Tamil": /^[\u0B80-\u0BFF\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
-    "Telugu": /^[\u0C00-\u0C7F\u0020-\u0040\u005B-\u0060\u007B-\u007F]+$/,
+    "Gujarati": /^[\u0A80-\u0AFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Hindi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Kannada": /^[\u0C80-\u0CFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Malayalam": /^[\u0D00-\u0D7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Odia": /^[\u0B00-\u0B7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Marathi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Punjabi": /^[\u0A00-\u0A7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Tamil": /^[\u0B80-\u0BFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Telugu": /^[\u0C00-\u0C7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
   }
 
-  // if(currentModule == 'suno' ){
-  //    langdic = {
-  //     "Assamese": /^[\u0980-\u09FF\u0030-\u0039]+$/,
-  //     "Bengali": /^[\u0980-\u09FF\u0030-\u0039]+$/,
-  //     "English": /^[\u0020-\u007F]+$/,
-  //     "Gujarati": /^[\u0A80-\u0AFF\u0030-\u0039]+$/,
-  //     "Hindi": /^[\u0900-\u097F\u0030-\u0039]+$/,
-  //     "Kannada": /^[\u0C80-\u0CFF\u0030-\u0039]+$/,
-  //     "Malayalam": /^[\u0D00-\u0D7F\u0030-\u0039]+$/,
-  //     "Odia": /^[\u0B00-\u0B7F\u0030-\u0039]+$/,
-  //     "Marathi": /^[\u0900-\u097F\u0030-\u0039]+$/,
-  //     "Punjabi": /^[\u0A00-\u0A7F\u0030-\u0039]+$/,
-  //     "Tamil": /^[\u0B80-\u0BFF\u0030-\u0039]+$/,
-  //     "Telugu": /^[\u0C00-\u0C7F\u0030-\u0039]+$/,
-  //   }
-  // }
-  let isLanguageSelected = false;
+  if (currentModule == 'suno') {
+    langdic = {
+      "Assamese": /^[\u0980-\u09FF\u0030-\u0039]+$/,
+      "Bengali": /^[\u0980-\u09FF\u0030-\u0039]+$/,
+      "English": /^[\u0020-\u007F]+$/,
+      "Gujarati": /^[\u0A80-\u0AFF\u0030-\u0039]+$/,
+      "Hindi": /^[\u0900-\u097F\u0030-\u0039]+$/,
+      "Kannada": /^[\u0C80-\u0CFF\u0030-\u0039]+$/,
+      "Malayalam": /^[\u0D00-\u0D7F\u0030-\u0039]+$/,
+      "Odia": /^[\u0B00-\u0B7F\u0030-\u0039]+$/,
+      "Marathi": /^[\u0900-\u097F\u0030-\u0039]+$/,
+      "Punjabi": /^[\u0A00-\u0A7F\u0030-\u0039]+$/,
+      "Tamil": /^[\u0B80-\u0BFF\u0030-\u0039]+$/,
+      "Telugu": /^[\u0C00-\u0C7F\u0030-\u0039]+$/,
+    }
+  }
 
-  const contributionLanguage = currentModule === 'likho' ? localStorage.getItem(LIKHO_TO_LANGUAGE):  localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  let error = {type : 'language'};
+
+  const specialSymbols = /[\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E\u0964-\u0965]/;
+
+  if (currentModule == 'suno' && specialSymbols.test(newText) == true) {
+    return {type : 'symbol'}
+  }
+
+  const contributionLanguage = currentModule === 'likho' ? localStorage.getItem(LIKHO_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
+
   Object.entries(langdic).forEach(([key, value]) => {// loop to read all the dictionary items if not true
     if (value.test(newText) == true) {   //Check Unicode to see which one is true
       if (key.toLowerCase() == contributionLanguage.toLowerCase()) {
-        isLanguageSelected = true;
+        error = null;
       }
     }
   });
-  return isLanguageSelected;
+  return error;
 }
 
 const closeKeyboard = function () {
@@ -170,7 +168,6 @@ const closeKeyboard = function () {
 const setInput = (text) => {
   keyboard.setInput(text);
 }
-
 
 function dragElement(elmnt) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -213,7 +210,6 @@ function dragElement(elmnt) {
   }
 }
 
-
 try {
   $("#keyboardBox").draggable({
     containment: "body"
@@ -222,11 +218,9 @@ try {
   dragElement(document.getElementById("keyboardBox"));
 }
 
-
-
 $('#keyboardCloseBtn').on('click', () => {
   $('#keyboardBox').addClass('d-none');
 })
 
-module.exports = { showKeyboard, closeKeyboard, setInput,lngtype }
+module.exports = {showKeyboard, closeKeyboard, setInput, lngtype,showAndHideEditError}
 

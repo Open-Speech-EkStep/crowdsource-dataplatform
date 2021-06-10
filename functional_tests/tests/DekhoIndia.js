@@ -28,9 +28,9 @@ step("User should see the top Language graph and other stats for Dekho India", a
 });
 
 step("When user clicks on back button, user should land on Dekho India home page", async function() {
-    if (await taiko.text('Back').exists()) {
-        assert.ok('Back button exists')
-        await click(taiko.text("Back"))
+    if (await taiko.text('Home').exists()) {
+        assert.ok('Home button exists')
+        await click(taiko.text("Home"))
         await taiko.waitFor(1000)
     }
     assert.ok(await text("Help your language by labelling images").isVisible());
@@ -135,3 +135,19 @@ step("Clicking watch video link should open video", async function() {
 	//await click(taiko.$("#extension_video_close_btn"));
 	//taiko.waitFor(2000);
 });
+
+step("Validate Thank you page content for Dekho India", async function() {
+	assert.ok(await text('Thank you for contributing!').exists())
+	assert.ok(await text('10000 images').exists())
+});
+
+// step("When user select <lang> Language from dropdown then <arg0> should not visible", async function (lang, arg0) {
+// 	const selectLanguageDropDown = taiko.dropDown({ id: 'language' })
+// 	assert.ok(await selectLanguageDropDown.exists());
+// 	await selectLanguageDropDown.select(lang);
+// 	await taiko.waitFor(1000)
+// 	if (await text(arg0).exists()) {
+// 		const resp = await text(arg0).isVisible();
+// 		assert.ok(!resp)
+// 	}
+// });

@@ -32,7 +32,7 @@
                 </div>
                 <%- include ../common/report-btn.ejs %>
             </div>
-            <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center">
+            <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center" id="mic-report-row">
                 <%- include ../common/speakerTesting.ejs %>
             </div>
             <%- include('../common/assistiveText.ejs',{msg:"Is the translation correct?"}) %>
@@ -43,18 +43,23 @@
 
                     </div>
                 </div>
-                <div class="form-group col-lg-4 col-md-5 col-12 m-0 edit-text" style="box-shadow:0 0;border:1px solid #bfbfbf;pointer-events:none">
+                <div class="form-group col-lg-4 col-md-5 col-12 m-0 edit-translation-text" style="box-shadow:0 0;border:1px solid #bfbfbf;pointer-events:none">
                     <label id="to-label"><%- __('ENGLISH') %></label>
                     <div class="arrow-right"></div>
                     <textarea class="form-control" id="translate-text" rows="3" style="resize:none"></textarea>
                 </div>
             </div>
-            <div class="row m-0 justify-content-center mb-2 mb-md-5 mb-lg-0 d-none no-margin-mobile" id="editor-row">
-                <div class="form-group col-lg-8 col-md-8 col-12 m-0 p-0" id="textarea-row">
+            <div class="row m-0 justify-content-center mb-2 mb-md-2 mb-lg-2 d-none no-margin-mobile" id="editor-row">
+                <div class="row justify-content-center col-12 px-0 col-lg-8" id="textarea-row">
                     <div class="form-group col-lg-12 col-md-5 col-12 m-0 edit-text" id="edit-text" style="border-radius:12px">
                         <label><%- __('Your Edit') %> ( <span id="edit-language"></span> )</label>
                         <textarea class="form-control edit-area" maxlength="1000" id="edit" rows="3" placeholder="Start typing here..." style="resize:none"></textarea>
                     </div>
+                </div>
+            </div>
+            <div class="row m-0 justify-content-center mb-2 mb-md-5 mb-lg-0" id="edit-error-row">
+                <div class="form-group green-border-focus col-lg-8 col-md-5 col-12 m-0 px-lg-4 px-md-2 px-2" id="edit-error-text">
+                    <%- include ../common/editAreaError.ejs %>
                 </div>
             </div>
             <div class="row justify-content-center d-none" id="thank-you-row">
