@@ -228,6 +228,8 @@ function addListeners() {
     showElement($('#progress-row'))
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
+    hideElement($('#edit-error-row'))
+    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     closeEditor();
   })
 
@@ -272,6 +274,8 @@ function addListeners() {
     getNextSentence();
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
+    hideElement($('#edit-error-row'))
+    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     $("#cancel-edit-button").attr("disabled", true);
     closeEditor();
   })

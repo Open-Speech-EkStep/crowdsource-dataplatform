@@ -271,6 +271,8 @@ function addListeners() {
     $cancelEditButton.attr('disabled', true);
     const $submitEditButton =  $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
+    hideElement($('#edit-error-row'))
+    $("#edit-text-suno").removeClass('edit-error-area').addClass('edit-text');
     closeEditor();
   })
 
@@ -327,6 +329,8 @@ function addListeners() {
     $("#virtualKeyBoardBtn").attr("disabled",true);
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
+    hideElement($('#edit-error-row'))
+    $("#edit-text-suno").removeClass('edit-error-area').addClass('edit-text');
     cancelButton.attr("disabled", true);
     closeEditor();
 

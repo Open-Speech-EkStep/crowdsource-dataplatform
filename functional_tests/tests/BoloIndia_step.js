@@ -481,6 +481,6 @@ step("Validate terms and condition content", async function () {
     assert.ok(await text('Terms and Conditions').exists());
 });
 
-step("Validate privacy policy content", async function () {
+step("Validate Privacy Policy content", async function () {
     assert.ok(await text('Privacy Policy').exists());
 });

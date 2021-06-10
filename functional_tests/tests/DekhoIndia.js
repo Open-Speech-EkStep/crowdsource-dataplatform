@@ -140,3 +140,14 @@ step("Validate Thank you page content for Dekho India", async function() {
 	assert.ok(await text('Thank you for contributing!').exists())
 	assert.ok(await text('10000 images').exists())
 });
+
+// step("When user select <lang> Language from dropdown then <arg0> should not visible", async function (lang, arg0) {
+// 	const selectLanguageDropDown = taiko.dropDown({ id: 'language' })
+// 	assert.ok(await selectLanguageDropDown.exists());
+// 	await selectLanguageDropDown.select(lang);
+// 	await taiko.waitFor(1000)
+// 	if (await text(arg0).exists()) {
+// 		const resp = await text(arg0).isVisible();
+// 		assert.ok(!resp)
+// 	}
+// });
