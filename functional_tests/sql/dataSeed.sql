@@ -11,6 +11,18 @@ select dataset_row_id from dataset_row where (type='asr' or type='ocr') and (med
 
 delete from dataset_row where (type='asr' or type='ocr') and (media->> 'language'='Malayalam' or media->> 'language'='Telugu' or media->> 'language'='Odia' or media->> 'language'='Kannada');
 
+delete from validations where contribution_id in (
+select contribution_id from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='parallel') and (media->> 'language'='Odia'))
+);
+
+delete from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='parallel') and (media->> 'language'='Odia')
+);
+
+delete from dataset_row where (type='parallel') and (media->> 'language'='Odia');
+
+
 --ASR data
 
 insert into dataset_row 
@@ -190,7 +202,6 @@ select 'medium', 'ocr', '{
             "language": "Kannada"
             }'::jsonb, 'contributed';
 
-
 insert into contributions 
     ( dataset_row_id, contributed_by, media, is_system , date, action) 
 select dataset_row_id, (select contributor_id from contributors where user_name='##system##'), '{
@@ -204,3 +215,59 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
             "type": "text",
             "language": "Kannada"
             }'::jsonb, true, now(), 'completed' from dataset_row where type='ocr' and media ->> 'language'='Kannada' and state='contributed';
+
+
+
+-- delete parallel data
+
+delete from validations where contribution_id in (
+select contribution_id from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='parallel') and (media->> 'language'='Odia'))
+);
+
+delete from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='parallel') and (media->> 'language'='Odia')
+);
+
+delete from dataset_row where (type='parallel') and (media->> 'language'='Odia');
+
+
+-- parallel data
+
+insert into dataset_row 
+    ( difficulty_level, type, media, state ) 
+select 'medium', 'parallel', '{
+            "data": "କେମିତି ଅଛନ୍ତି, କେମିତି ଅଛ",
+            "type": "text",
+            "language": "Odia"
+            }'::jsonb, null
+union all
+select 'medium', 'parallel', '{
+            "data": "ଆଶାକରେ ତୁମେ ଭଲ ଅଛ",
+            "type": "text",
+            "language": "Odia"
+            }'::jsonb, null
+union all
+select 'medium', 'parallel', '{
+            "data": "ଆପଣ କେଉଁଠାରେ ବାସ କରନ୍ତି",
+            "type": "text",
+            "language": "Odia"
+            }'::jsonb, null
+union all
+select 'medium', 'parallel', '{
+            "data": "ବର୍ତ୍ତମାନ ସମୟ କ’ଣ? ",
+            "type": "text",
+            "language": "Odia"
+            }'::jsonb, null
+union all
+select 'medium', 'parallel', '{
+            "data": "ମୁଁ ଆଜି ବହୁତ ଖୁସି ",
+            "type": "text",
+            "language": "Odia"
+            }'::jsonb, null
+union all
+select 'medium', 'parallel', '{
+            "data": "କେତେବେଳେ ବର୍ଷା ହେବ ",
+            "type": "text",
+            "language": "Odia"
+            }'::jsonb, null ;
