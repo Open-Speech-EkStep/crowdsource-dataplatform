@@ -56,7 +56,7 @@
 * When user click on Lets Go Button, user should "not" see instructions to record
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be enabled
 * User should see the text "Is the translation correct?"
-* User skips the next "2" sentences user should land on Thank you page in "English"
+* User skips the next "1" sentences user should land on Thank you page in "English"
 
 ## Validate once user have skipped all sentences the same user should not be able to validate sentences again
 * Navigate to "Validate" button and click "Validate" button
