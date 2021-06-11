@@ -62,7 +62,7 @@
 //* User should be able to close the Instructions , user should see Skip button , Play Button , username , Cancel , Submit and speaker button
 * When user clicks on the Test Speaker button, user should see "play-speaker"
 * When user clicks on the cross button , pop up should close and user should see the Test Mic and speaker button
-* When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should appear
+* When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should visible
 * When User clicks on "edit" field and type ";ನೀವು ಹೇಗಿದ್ದೀರಿ" submit and cancel button should be disabled
 * User should see an error message "Special characters are not allowed"
 * User clears the edit field should disable the buttons again
