@@ -67,13 +67,13 @@
 * User should see an error message "Special characters are not allowed"
 * User clears the edit field should disable the buttons again
 * User should see an error message "Input Field can not be empty"
-* When User clicks on "edit" field and type "ನೀವು ಹೇಗಿದ್ದೀರಿ" submit and cancel button should be enabled
-* When user clicks on submit button user should see " Thank you for contributing!"
-* When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should appear
 * When User clicks on "edit" field and type "Hello Hello" submit and cancel button should be disabled
 * User should see an error message "Please type in your chosen language"
 * User clears the edit field should disable the buttons again
 * User should see an error message "Input Field can not be empty"
+* When User clicks on "edit" field and type "ನೀವು ಹೇಗಿದ್ದೀರಿ" submit and cancel button should be enabled
+* When user clicks on submit button user should see " Thank you for contributing!"
+* When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should appear
 * When User clicks on "edit" field and type "ನೀವು ಹೇಗಿದ್ದೀರಿ2" submit and cancel button should be enabled
 * When user clicks on submit button user should see " Thank you for contributing!"
 * When user skips the rest of the "3" sentences , User should see Thank you Page
