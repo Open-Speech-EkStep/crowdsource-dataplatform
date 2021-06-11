@@ -2,10 +2,17 @@
   "name": "gauge-taiko-functional-tests",
   "description": "Starter template for writing JavaScript tests for Gauge",
   "scripts": {
-    "test": "gauge run specs"
+    "test": "gauge run specs",
+    "apitest": "jest API_tests "
   },
   "dependencies": {
     "@getgauge/cli": "^1.1.7",
+    "fs": "^0.0.1-security",
+    "jest": "27.0.4",
     "taiko": "latest"
+  },
+  "devDependencies": {
+    "node-env-run": "^4.0.2",
+    "supertest": "^6.1.3"
   }
 }
