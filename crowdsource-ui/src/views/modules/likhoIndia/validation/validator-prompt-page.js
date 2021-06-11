@@ -110,9 +110,7 @@ function uploadToServer(cb) {
     .then((res) => res.json())
     .then((result) => {
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch((err) => {})
     .then((finalRes) => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -368,7 +366,7 @@ const getLocationInfo = () => {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch(console.log);
+  }).catch((err) => {});
 }
 
 let selectedReportVal = '';
@@ -490,7 +488,6 @@ $(document).ready(() => {
       );
       initializeComponent();
     }).catch((err) => {
-      console.log(err);
       $errorModal.modal('show');
     })
   }
