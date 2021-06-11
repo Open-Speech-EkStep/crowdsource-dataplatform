@@ -2,26 +2,35 @@ const fs = require('fs');
 
 const { conn, insertMaster } = require('../../common/dbUtils')
 
+const MIN_DURATION = 1
+const MAX_DURATION = 15
+
 const ingest1 = async (datasetId, datasetType, client, datset_base_path, language, wav_paths, paired, wavToDataDict) => {
-    const values = wav_paths.map(path => {
-        wavName = path.split('/').pop()
-        element = wavToDataDict[wavName]
-        const media = {
-            "data": `${datset_base_path}/${path}`,
-            "type": "audio",
-            "language": `${language}`,
-            "duration": element.duration,
-            "snr": element.snr,
-            "collectionSource": element.collectionSource,
-            "gender": element.gender,
-            "speaker": element.speaker
-        }
-        return `('medium', '${datasetType}',
+    const values = wav_paths
+        .filter(path => {
+            wavName = path.split('/').pop()
+            element = wavToDataDict[wavName]
+            element.duration >= MIN_DURATION && element.duration <= MAX_DURATION
+        })
+        .map(path => {
+            wavName = path.split('/').pop()
+            element = wavToDataDict[wavName]
+            const media = {
+                "data": `${datset_base_path}/${path}`,
+                "type": "audio",
+                "language": `${language}`,
+                "duration": element.duration,
+                "snr": element.snr,
+                "collectionSource": element.collectionSource,
+                "gender": element.gender,
+                "speaker": element.speaker
+            }
+            return `('medium', '${datasetType}',
                 '${JSON.stringify(media)}', 
                 ${datasetId},
                 ${paired === 'paired' ? '\'contributed\'' : null}
             )`
-    })
+        })
     // console.log('ingest1', values)
     const insert_rows = `insert into dataset_row 
     ( difficulty_level, type, media, master_dataset_id, state ) 
@@ -44,8 +53,12 @@ const ingest2 = async (imageToIdDict, client, datset_base_path, language, wavToD
     contributorId = result.rows[0].contributor_id
     values = []
     for (const [image, element] of Object.entries(wavToDataDict)) {
+        const text = element.text
+            .split("'").join("''")
+            .split("‘").join("##")
+            .split("##").join("''")
         const media = {
-            "data": `${element.text}`,
+            "data": `${text}`,
             "type": "text",
             "language": `${language}`
         }
@@ -80,10 +93,6 @@ const parse = (data, files) => {
         if (element.length == 1) {
             element = element[0]
         }
-        const text = element.text
-            .split("'").join("''")
-            .split("‘").join("##")
-            .split("##").join("''")
         wavToTextDict[element.audioFilename] = element
     }
 
