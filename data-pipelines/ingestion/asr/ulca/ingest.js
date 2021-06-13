@@ -10,7 +10,7 @@ const ingest1 = async (datasetId, datasetType, client, datset_base_path, languag
         .filter(path => {
             wavName = path.split('/').pop()
             element = wavToDataDict[wavName]
-            element.duration >= MIN_DURATION && element.duration <= MAX_DURATION
+            return element.duration >= MIN_DURATION && element.duration <= MAX_DURATION
         })
         .map(path => {
             wavName = path.split('/').pop()
@@ -36,6 +36,7 @@ const ingest1 = async (datasetId, datasetType, client, datset_base_path, languag
     ( difficulty_level, type, media, master_dataset_id, state ) 
     values ${values} RETURNING dataset_row_id`
 
+    console.log('insert query', insert_rows)
     const dataset_row_result = await client.query(`${insert_rows}`)
     const dataset_row_ids = dataset_row_result.rows.map(row => row.dataset_row_id)
 
