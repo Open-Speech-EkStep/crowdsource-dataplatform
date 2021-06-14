@@ -79,9 +79,9 @@ step("User clicks on profane <arg0> , he should see next sentence and <arg1> <ar
 	await taiko.waitFor(1000);
 });
 
-step("User skips the next <count> sentences user should see Thank you popup", async function (count) {
-    const skipbutton = taiko.button({ id: 'skipBtn' })
-    for (let i = 0; i < count; i++) {
+step("User skips <arg0> the next <arg1> sentences user should see Thank you popup", async function (arg0, arg1) {
+    const skipbutton = taiko.button({ id: arg0 })
+    for (let i = 0; i < arg1; i++) {
         await click(skipbutton)
         await taiko.waitFor(1200)
     }
