@@ -97,6 +97,12 @@ step("User should see the Alert for user not found", async function() {
    alert('User not found', async () => await accept())
 });
 
+step("User should see the Alert for invalid user", async function() {  
+    await taiko.waitFor(500)
+   // assert.ok(await text('User not found').exists());
+   alert('Enter valid email', async () => await accept())
+});
+
 step("Not Profane Profane button should be enabled", async function() {
     assert.ok(! await taiko.button({ id: "nextBtn" }).isDisabled());
     assert.ok(! await taiko.button({ id: "startRecord" }).isDisabled());
