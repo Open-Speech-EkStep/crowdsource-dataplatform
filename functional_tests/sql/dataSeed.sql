@@ -1,15 +1,18 @@
 --Clean all data
+update configurations set value=0 where config_name='include_profane';
+
+update dataset_row set is_profane=false where type='text' and media->>'language'='Hindi';
 
 delete from validations where contribution_id in (
 select contribution_id from contributions where dataset_row_id in (
-select dataset_row_id from dataset_row where (type='asr' or type='ocr') and (media->> 'language'='Malayalam' or media->> 'language'='Telugu' or media->> 'language'='Odia' or media->> 'language'='Kannada'))
+select dataset_row_id from dataset_row where (type='asr' or type='ocr') and (media->> 'language'='Malayalam' or media->> 'language'='Telugu' or media->> 'language'='Odia' or media->> 'language'='Kannada' or media->> 'language'='Gujarati'))
 );
 
 delete from contributions where dataset_row_id in (
-select dataset_row_id from dataset_row where (type='asr' or type='ocr') and (media->> 'language'='Malayalam' or media->> 'language'='Telugu' or media->> 'language'='Odia' or media->> 'language'='Kannada')
+select dataset_row_id from dataset_row where (type='asr' or type='ocr') and (media->> 'language'='Malayalam' or media->> 'language'='Telugu' or media->> 'language'='Odia' or media->> 'language'='Kannada' or media->> 'language'='Gujarati')
 );
 
-delete from dataset_row where (type='asr' or type='ocr') and (media->> 'language'='Malayalam' or media->> 'language'='Telugu' or media->> 'language'='Odia' or media->> 'language'='Kannada');
+delete from dataset_row where (type='asr' or type='ocr') and (media->> 'language'='Malayalam' or media->> 'language'='Telugu' or media->> 'language'='Odia' or media->> 'language'='Kannada' or media->> 'language'='Gujarati');
 
 delete from validations where contribution_id in (
 select contribution_id from contributions where dataset_row_id in (
@@ -26,84 +29,108 @@ delete from dataset_row where (type='parallel') and (media->> 'language'='Odia')
 --ASR data
 
 insert into dataset_row 
-    ( difficulty_level, type, media, state ) 
+    ( difficulty_level, type, media, state, is_profane ) 
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Odia"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Odia"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Telugu"
-            }'::jsonb, 'contributed'
+            }'::jsonb, 'contributed', false
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Telugu"
-            }'::jsonb, 'contributed'
+            }'::jsonb, 'contributed', false
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Kannada"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Kannada"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Kannada"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Kannada"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Kannada"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Kannada"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Kannada"
-            }'::jsonb, 'contributed'
+            }'::jsonb, 'contributed', false
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Kannada"
-            }'::jsonb, 'contributed'
+            }'::jsonb, 'contributed', false
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Kannada"
-            }'::jsonb, 'contributed';
+            }'::jsonb, 'contributed', false
+union all
+select 'medium', 'asr', '{
+            "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
+            "type": "audio",
+            "language": "Gujarati"
+            }'::jsonb, null, true
+            union all
+select 'medium', 'asr', '{
+            "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
+            "type": "audio",
+            "language": "Gujarati"
+            }'::jsonb, null, null
+            union all
+select 'medium', 'asr', '{
+            "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
+            "type": "audio",
+            "language": "Gujarati"
+            }'::jsonb, 'contributed', true
+            union all
+select 'medium', 'asr', '{
+            "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
+            "type": "audio",
+            "language": "Gujarati"
+            }'::jsonb, 'contributed', null;
 
 
 insert into contributions 
@@ -118,89 +145,120 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
             "data": "ಹಲೋ ನೀವು ಇಂದು ಹೇಗೆ ಮಾಡುತ್ತಿದ್ದೀರಿ",
             "type": "text",
             "language": "Kannada"
-            }'::jsonb, true, now(), 'completed' from dataset_row where type='asr' and media ->> 'language'='Kannada' and state='contributed';
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='asr' and media ->> 'language'='Kannada' and state='contributed'
+            union all
+select dataset_row_id, (select contributor_id from contributors where user_name='##system##'), '{
+            "data": "ಹಲೋ ನೀವು ಇಂದು ಹೇಗೆ ಮಾಡುತ್ತಿದ್ದೀರಿ",
+            "type": "text",
+            "language": "Gujarati"
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='asr' and media ->> 'language'='Gujarati' and state='contributed';
+
 
 --OCR data
 
 insert into dataset_row 
-    ( difficulty_level, type, media, state ) 
+    ( difficulty_level, type, media, state, is_profane ) 
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Odia"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Odia"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Telugu"
-            }'::jsonb, 'contributed'
+            }'::jsonb, 'contributed', false
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Telugu"
-            }'::jsonb, 'contributed'
+            }'::jsonb, 'contributed', false
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, 'contributed'
+            }'::jsonb, 'contributed', false
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, 'contributed'
+            }'::jsonb, 'contributed', false
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, 'contributed';
+            }'::jsonb, 'contributed', false
+union all
+select 'medium', 'ocr', '{
+            "data": "automationTestData/ocr/image2.png",
+            "type": "image",
+            "language": "Gujarati"
+            }'::jsonb, null, true
+            union all
+select 'medium', 'ocr', '{
+            "data": "automationTestData/ocr/image2.png",
+            "type": "image",
+            "language": "Gujarati"
+            }'::jsonb, null, null
+            union all
+select 'medium', 'ocr', '{
+            "data": "automationTestData/ocr/image2.png",
+            "type": "image",
+            "language": "Gujarati"
+            }'::jsonb, 'contributed', true
+            union all
+select 'medium', 'ocr', '{
+            "data": "automationTestData/ocr/image2.png",
+            "type": "image",
+            "language": "Gujarati"
+            }'::jsonb, 'contributed', null;
 
 insert into contributions 
     ( dataset_row_id, contributed_by, media, is_system , date, action) 
@@ -214,8 +272,13 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
             "data": "ಹಲೋ ನೀವು ಇಂದು ಹೇಗೆ ಮಾಡುತ್ತಿದ್ದೀರಿ",
             "type": "text",
             "language": "Kannada"
-            }'::jsonb, true, now(), 'completed' from dataset_row where type='ocr' and media ->> 'language'='Kannada' and state='contributed';
-
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='ocr' and media ->> 'language'='Kannada' and state='contributed'
+union all
+select dataset_row_id, (select contributor_id from contributors where user_name='##system##'), '{
+            "data": "ಹಲೋ ನೀವು ಇಂದು ಹೇಗೆ ಮಾಡುತ್ತಿದ್ದೀರಿ",
+            "type": "text",
+            "language": "Gujarati"
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='ocr' and media ->> 'language'='Gujarati' and state='contributed';
 
 
 -- delete parallel data
@@ -235,42 +298,42 @@ delete from dataset_row where (type='parallel') and (media->> 'language'='Odia')
 -- parallel data
 
 insert into dataset_row 
-    ( difficulty_level, type, media, state ) 
+    ( difficulty_level, type, media, state,is_profane ) 
 select 'medium', 'parallel', '{
             "data": "କେମିତି ଅଛନ୍ତି, କେମିତି ଅଛ",
             "type": "text",
             "language": "Odia"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'parallel', '{
             "data": "ଆଶାକରେ ତୁମେ ଭଲ ଅଛ",
             "type": "text",
             "language": "Odia"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'parallel', '{
             "data": "ଆପଣ କେଉଁଠାରେ ବାସ କରନ୍ତି",
             "type": "text",
             "language": "Odia"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'parallel', '{
             "data": "ବର୍ତ୍ତମାନ ସମୟ କ’ଣ? ",
             "type": "text",
             "language": "Odia"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'parallel', '{
             "data": "ମୁଁ ଆଜି ବହୁତ ଖୁସି ",
             "type": "text",
             "language": "Odia"
-            }'::jsonb, null
+            }'::jsonb, null, false
 union all
 select 'medium', 'parallel', '{
             "data": "କେତେବେଳେ ବର୍ଷା ହେବ ",
             "type": "text",
             "language": "Odia"
-            }'::jsonb, null ;
+            }'::jsonb, null, false ;
 
 
 --- Profanity Data
@@ -328,3 +391,4 @@ Union values('medium', 'text', '{
 --     "type": "audio",
 --     "language": "English"
 -- }'::jsonb, null);
+

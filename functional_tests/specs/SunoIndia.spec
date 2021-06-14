@@ -123,3 +123,8 @@
 * User click on "edit" field "submit-edit-button" should be enabled
 * User skips the next "4" sentences user should land on Thank you page in "English"
 * User should see the "Validate More" button
+
+## Validate profanity configuration
+* Select Contribution Language as "ગુજરાતી"
+* Check "Transcribe" option should be "disabled" on Home page
+* Check "Correct" option should be "disabled" on Home page
