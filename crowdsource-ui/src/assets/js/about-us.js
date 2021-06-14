@@ -6,6 +6,9 @@ const {
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick
 } = require('./speakerDetails');
+
+const { whitelisting_email } = require('./env-api');
+
 const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES,MODULE, CURRENT_MODULE} = require('./constants');
 const {updateLocaleLanguagesDropdown} = require('./utils');
 
@@ -84,7 +87,7 @@ $(document).ready(function () {
         const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
         let genderValue = checkedGender.length ? checkedGender[0].value : '';
         let userNameValue = $userName.val().trim().substring(0, 12);
-        if(location.host.includes('uat')){
+        if(whitelisting_email==='true'){
             userNameValue = $userName.val().trim();
         }
         const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === sentenceLanguage);

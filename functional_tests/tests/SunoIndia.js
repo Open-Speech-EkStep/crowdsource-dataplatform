@@ -258,3 +258,10 @@ step("Validate Thank you page content for Suno India", async function() {
 	assert.ok(await text('Thank you for contributing!').exists())
 	assert.ok(await text('100 hrs').exists())
 });
+
+step("When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should visible", async function() {
+	await taiko.waitFor(1000)
+    await click(taiko.image({ id: "play" }));
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "pause" }));
+});

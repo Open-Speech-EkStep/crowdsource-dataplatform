@@ -158,7 +158,7 @@ router.get('/getDetails/:language', async function (req, res) {
     }
 });
 
-router.post('/uat/verify', async (req, res) => {
+router.post('/verify-user', async (req, res) => {
     const { userName } = req.body;
     try{
         await userVerify(userName, ROLE_UAT);
