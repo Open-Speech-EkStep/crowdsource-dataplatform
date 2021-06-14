@@ -165,7 +165,7 @@ workflows:
           repo: ${DB_REFRESHER_REPO}
           dockerfile: Dockerfile-dbRefresh
           path: ./db-refresher
-          tag: "dev,test,prod,uat"
+          tag: "dev,test,prod,uat,cug"
           requires:
             - migrate_dev_aws
 
@@ -175,6 +175,37 @@ workflows:
           env-name: dev
           requires:
             - push_dev_image
+
+
+      - db_migrate_aws:
+          name: migrate_cug_aws
+          db_name: ${CUG_DB_NAME}
+          requires:
+            - push_dev_image
+
+      - aws-ecr/build-and-push-image:
+          name: push_cug_image
+          repo: ${REPO}
+          tag: cug
+          path: ./crowdsource-api
+          requires:
+            - migrate_cug_aws
+
+      - build_ui_push_to_s3:
+          name: build_cug_ui
+          env_name: cug
+          distributionId: ${CUG_DISTRIBUTION_ID}
+          requires:
+            - push_cug_image
+
+      - eks_fargate_deployment:
+          name: cug_deployment_eks
+          cluster-name: ${CLUSTER_NAME}
+          env-name: cug
+          requires:
+            - push_cug_image
+
+
 
       - run_functional_tests:
           name: functional_tests_dev

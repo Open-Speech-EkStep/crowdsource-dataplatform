@@ -1,5 +1,6 @@
 const { showLanguagePopup, redirectToLocalisedPage } = require('./locale');
 const { onActiveNavbar } = require('./header');
+const {whitelisting_email} = require('./env-api')
 const { drawMap, getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest } = require('./utils')
 const {
@@ -379,7 +380,7 @@ $(document).ready(function () {
     }).catch(err => {
         initializeBlock();
     });
-    if (location.host.includes('uat')) {
+    if (whitelisting_email==='true') {
         document.getElementById("bolo-username").maxLength = 100;
     } else {
         document.getElementById("bolo-username").maxLength = 12;
