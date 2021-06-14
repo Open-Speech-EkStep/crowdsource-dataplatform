@@ -8,6 +8,8 @@ const {
     overridePermissions,
     goto,
     write,
+    accept,
+    alert,
     screenshot,
     click,
     link,
@@ -16,8 +18,8 @@ const {
 } = require('taiko');
 const path = require('path');
 
-const headless = process.env.headless_chrome.toLowerCase() === 'true';
 const profanityTestUrl = process.env.profanity_test_url_boloindia;
+
 
 step("Open Profanity Website", async () => {
     await taiko.waitFor(500)
@@ -38,12 +40,12 @@ step("Email field, languge dropdown should be present", async function () {
     assert.ok(await taiko.dropDown({ id: 'preferred-language' }).exists())
 });
 
-step("And User enter random Email and select prefered langauge", async function () {
+step("When User enter <usernm> Email and select prefered langauge as <lang>", async function (usernm,lang) {
     if (await taiko.text('User Details').exists()) {
         const username = taiko.textBox({ id: 'username' })
         await taiko.waitFor(700)
-        await write('amulya.ahuja@thoughtworks.com', into(username))
-        await taiko.dropDown({ id: 'preferred-language' }).select('English');
+        await write(usernm, into(username))
+        await taiko.dropDown({ id: 'preferred-language' }).select(lang);
     }
 });
 
@@ -58,7 +60,6 @@ step("User should be able to see a sentence , Skip button, Progress bar, Not Pro
     assert.ok(await button({ id: 'skipBtn' }).exists());
     assert.ok(await taiko.$('#sentenceLbl').exists());
     assert.ok(await taiko.$('#progress-row').exists());
-    assert.ok(await text('Dummy User').exists());
     assert.ok(await button({ id: 'nextBtn' }).exists());
 });
 
@@ -88,4 +89,21 @@ step("User skips the next <count> sentences user should see Thank you popup", as
     if (await taiko.text('Thank you for contributing!').exists()) {
         assert.ok('Thank you pop-up exists');
     }
+});
+
+step("User should see the Alert for user not found", async function() {  
+    await taiko.waitFor(500)
+   // assert.ok(await text('User not found').exists());
+   alert('User not found', async () => await accept())
+});
+
+step("Not Profane Profane button should be enabled", async function() {
+    assert.ok(! await taiko.button({ id: "nextBtn" }).isDisabled());
+    assert.ok(! await taiko.button({ id: "startRecord" }).isDisabled());
+});
+
+step("When user clicks on <arg0> user should see the message <msg>", async function(arg0, msg) {
+    await click(taiko.link("Contribute More"));
+    await taiko.waitFor(1000)
+    await taiko.text(msg).isVisible();
 });

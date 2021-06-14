@@ -271,3 +271,60 @@ select 'medium', 'parallel', '{
             "type": "text",
             "language": "Odia"
             }'::jsonb, null ;
+
+
+--- Profanity Data
+
+Delete from dataset_row where media->> 'language' = 'English' and type = 'text';
+
+insert into dataset_row ( difficulty_level, type, media, state ) 
+values('medium', 'text', '{
+    "data": "I think that is what we all look for as an audience.",
+    "type": "text",
+    "language": "English"
+}'::jsonb, null)
+Union values('medium', 'text', '{
+    "data": "The Kunchikal falls is the highest waterfalls in India",
+    "type": "text",
+    "language": "English"
+}'::jsonb, null)
+
+Union values('medium', 'text', '{
+    "data": "A few cars allow users to unlock using their smartphones",
+    "type": "text",
+    "language": "English"
+}'::jsonb, null)
+Union values('medium', 'text', '{
+    "data": "A number of folk songs associated with this festival have been popularized across generations.",
+    "type": "text",
+    "language": "English"
+}'::jsonb, null)
+Union values('medium', 'text', '{
+    "data": "Himalayas are a young fold mountain range",
+    "type": "text",
+    "language": "English"
+}'::jsonb, null);
+
+
+-- insert into dataset_row ( difficulty_level, type, media, state ) 
+-- values('medium', 'parallel', '{
+--     "data": "This organisation is very helpful to students who are preparing for competitive exams",
+--     "type": "text",
+--     "language": "English"
+-- }'::jsonb, null);
+
+
+-- insert into dataset_row ( difficulty_level, type, media, state ) 
+-- values('medium', 'ocr', '{
+--     "data": "inbound/ocr/English/english/ead846f9-2f36-417e-9b37-36ba83074026.png",
+--     "type": "image",
+--     "language": "English"
+-- }'::jsonb, null);
+
+
+-- insert into dataset_row ( difficulty_level, type, media, state ) 
+-- values('medium', 'asr', '{
+--     "data": "automationTestData/asr/testing url/0_7_1481file-idQNBJvgvyfuU?;,?:@&=+$.wav",
+--     "type": "audio",
+--     "language": "English"
+-- }'::jsonb, null);
