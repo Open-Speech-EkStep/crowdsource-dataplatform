@@ -37,14 +37,23 @@ step("When user clicks on back button, user should land on Dekho India home page
 
 });
 
-step("Close button should close the pop up and user should see Dekho India Home page", async function() {
+step("Close button should close the pop up and user should see <flow> India Home page", async function(flow) {
 		if (await taiko.text('User Details').exists()) {
 			assert.ok('user details pop-up exists')
 			await taiko.waitFor(700)
 			await click(taiko.button({ class: 'close float-right' }))
 		}
+
+		if(flow=="Dekho")
+		{
+			assert.ok(await text("Help your language by labelling images").exists());
+		}
+		if(flow=="Suno")
+		{
+			assert.ok(await text("Help your language by transcribing audio into text").exists());
+		}
 	
-		assert.ok(await text("Help your language by labelling images").exists());
+		
 	});
 
 step("User clears the edit field should disable the buttons again", async function() {
@@ -67,25 +76,59 @@ step("User should see the text <text>", async function(text) {
 	 assert.ok(taiko.text(text).isVisible())
 });
 
-step("When user clicks on Contribute more button , user should see no data available message for dekho India", async function() {
+step("When user clicks on Contribute more button , user should see no data available message for <flow> India", async function(flow) {
 	await taiko.waitFor(500)
     await click(link('Contribute More'))
-    await taiko.waitFor(2000)
-    assert.ok(await text('Thank you for your enthusiasm to label the images').exists())
-});
-
-
-step("user should see the Virtual Keyboard button", async function() {
-	await taiko.waitFor(1000)
-	await click(button({id:"virtualKeyBoardBtn"}))
-	await taiko.waitFor(500)
-    assert.ok(await text("न").exists());
-	assert.ok(await text("स").exists());
+	await taiko.waitFor(2000)
 	
-	await taiko.button({id :"keyboardCloseBtn"}).exists()
-	await click(button({id:"keyboardCloseBtn"}))
-	await taiko.waitFor(300)
+	if(flow=="Dekho")
+	{
+	assert.ok(await text('Thank you for your enthusiasm to label the images').exists())
+	}
+	if(flow=="Likho")
+	{
+		assert.ok(await text('Thank you for your enthusiasm to translate the sentences.').exists())
+	}
+	if(flow=="Suno")
+	{
+		assert.ok(await text('Thank you for your enthusiasm to transcribe the recordings.').exists())
+	}
 });
+
+
+step("When user clicks on Validate more button , user should see no data available message for <flow> India", async function(flow) {
+	await taiko.waitFor(500)
+    await click(link('Validate More'))
+	await taiko.waitFor(2000)
+	
+	if(flow=="Dekho")
+	{
+	assert.ok(await text('Thank you for your enthusiasm to validate the image text.').exists())
+	}
+	if(flow=="Likho")
+	{
+		assert.ok(await text('Thank you for your enthusiasm to validate the translations.').exists())
+	}
+	if(flow=="Suno")
+	{
+		assert.ok(await text('Thank you for your enthusiasm to validate the recordings.').exists())
+	}
+});
+
+
+
+
+// step("user should see the Virtual Keyboard button", async function() {
+// 	await taiko.waitFor(1000)
+// 	await click(button({id:"virtualKeyBoardBtn"}))
+// 	await taiko.waitFor(500)
+//     assert.ok(await text("न").exists());
+// 	assert.ok(await text("स").exists());
+	
+// 	await taiko.button({id :"keyboardCloseBtn"}).exists()
+// 	await click(button({id:"keyboardCloseBtn"}))
+// 	await taiko.waitFor(300)
+// });
 
 step("User clicks on <arg0> , he should see next sentence and <arg1> <arg2> buttons should be enabled", async function (arg0, arg1, arg2) {
     await click(taiko.button({ id: arg0 }))
@@ -93,11 +136,6 @@ step("User clicks on <arg0> , he should see next sentence and <arg1> <arg2> butt
     assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
 	assert.ok(! await taiko.button({ id: arg2 }).isDisabled());
 	await taiko.waitFor(1000);
-});
-
-step("User should see no data available message", async function() {
-	await taiko.waitFor(1000)
-    assert.ok(await text('Thank you for your enthusiasm to validate the image text').exists())
 });
 
 step("User clicks on <arg0> he should see thank you page and should be able to see bronze Badge", async function(arg0) {
@@ -113,16 +151,6 @@ step("User should see add extension and watch video link", async function() {
 	await taiko.waitFor(1000)
 	assert.ok(await button('Install Now').exists())
 	assert.ok(await link({id:"extension_video_button"}).exists());
-});
-
-step("Clicking add extension link should redirect to <url>", async function(url) {
-	assert.ok(await button('Install Now').exists())
-	await click(button('Install Now'))
-	taiko.waitFor(100);
-	const actualUrl = await taiko.currentURL()
-	assert.strictEqual(url, actualUrl,"URL not redirected properly");
-	taiko.waitFor(200)
-	await taiko.goBack({ navigationTimeout: 4000 })
 });
 
 step("Clicking watch video link should open video", async function() {
@@ -141,16 +169,6 @@ step("Validate Thank you page content for Dekho India", async function() {
 	assert.ok(await text('10000 images').exists())
 });
 
-// step("When user select <lang> Language from dropdown then <arg0> should not visible", async function (lang, arg0) {
-// 	const selectLanguageDropDown = taiko.dropDown({ id: 'language' })
-// 	assert.ok(await selectLanguageDropDown.exists());
-// 	await selectLanguageDropDown.select(lang);
-// 	await taiko.waitFor(1000)
-// 	if (await text(arg0).exists()) {
-// 		const resp = await text(arg0).isVisible();
-// 		assert.ok(!resp)
-// 	}
-// });
 
 step("When User clicks on <type> field and type <txt> submit and cancel button should be disabled", async function(type, txt) {
 	const editfield = taiko.textBox({ id: type })

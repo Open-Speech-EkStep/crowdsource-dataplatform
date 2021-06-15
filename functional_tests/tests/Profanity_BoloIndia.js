@@ -4,16 +4,11 @@ const assert = require('assert');
 const {
     openBrowser,
     button,
-    closeBrowser,
-    overridePermissions,
     goto,
     write,
     accept,
     alert,
-    screenshot,
     click,
-    link,
-    text,
     into,
 } = require('taiko');
 const path = require('path');
