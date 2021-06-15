@@ -46,6 +46,9 @@ jobs:
       - store_artifacts:
           path: functional_tests/.gauge/screenshots
           destination: screenshots
+      - store_artifacts:
+          path: functional_test/reports/html-report
+          destination: reports
 
   approve_to_deploy:
     docker:
