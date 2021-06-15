@@ -71,13 +71,9 @@ function updateLanguage(language) {
                         $('#no-data-found').addClass('d-none');
                     }, 5000);
                 }
-            } catch (error) {
-                console.log(error);
-            }
+            } catch (error) {}
         })
-        .catch((err) => {
-            console.log(err);
-        });
+        .catch((err) => {});
 }
 
 $(document).ready(function () {

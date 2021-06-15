@@ -46,9 +46,7 @@ function downloadPdf(badgeType) {
     if (badge) {
       pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
     }
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 
 }
 

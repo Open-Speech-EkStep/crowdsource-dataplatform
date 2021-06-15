@@ -59,9 +59,7 @@ $(document).ready(function () {
   const source='validate'
   updateLocaleLanguagesDropdown(language);
   getLocaleString().then(() => {
-    performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then(renderBadgeDetails).catch((err) => {
-      console.log(err);
-    })
+    performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then(renderBadgeDetails).catch((err) => {})
   }).catch(() => {
     window.location.href = "./home.html";
   })
