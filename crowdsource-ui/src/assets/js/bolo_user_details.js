@@ -1,11 +1,13 @@
 const {DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS,LIKHO_TO_LANGUAGE,LIKHO_FROM_LANGUAGE,MODULE} = require('./constants');
 const {getLocaleString} = require('./utils');
 const fetch = require('./fetch');
+const { whitelisting_email } = require('./env-api');
+
 
 const testBoloUserName = (val) => {
   const mobileRegex = /^[6-9]\d{9}$/;
   const emailRegex = /^\S+@\S+[\.][0-9a-z]+$/;
-  if(location.host.includes('uat'))return false;
+  if(whitelisting_email==='true')return false;
   return mobileRegex.test(val) || emailRegex.test(val);
 };
 
@@ -56,7 +58,7 @@ const setBoloSpeakerDetails = (speakerDetailsKey, $userName) => {
     const parsedSpeakerDetails = JSON.parse(speakerDetailsValue);
     let userNameTxt = '';
         if(parsedSpeakerDetails.userName){
-            userNameTxt = location.host.includes('uat') ?
+            userNameTxt = whitelisting_email==='true' ?
             parsedSpeakerDetails.userName.trim() :  
             parsedSpeakerDetails.userName.trim().substring(0, 12)
         }
@@ -100,7 +102,7 @@ const setBoloUserNameOnInputFocus = function () {
 }
 
 const verifyUser = (userName) => {
-  return fetch('/uat/verify', {
+  return fetch('/verify-user', {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify({
@@ -124,7 +126,7 @@ const setLetGoBtnOnClick = function (url, module='') {
   const $userName = $('#bolo-username');
   $startRecordBtn.on('click', () => {
     let userNameValue = $userName.val().trim().substring(0, 12);
-        if(location.host.includes('uat')){
+        if(whitelisting_email==='true'){
             userNameValue = $userName.val().trim();
         }
     let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -138,7 +140,7 @@ const setLetGoBtnOnClick = function (url, module='') {
       language: contributionLanguage,
       toLanguage:'',
     };
-    if (location.host.includes('uat')) {
+    if (whitelisting_email==='true') {
       verifyUser(userNameValue).then(res => {
         if (res.ok) {
           storeToLocal(speakerDetailsKey, speakerDetails, contributionLanguage, url);

@@ -2,6 +2,9 @@ const { DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRIN
 const { getLocaleString } = require('./utils');
 const fetch = require('./fetch')
 
+const {whitelisting_email} = require('./env-api')
+
+
 function validateUserName($userName, $userNameError) {
   const userNameValue = $userName.val().trim();
   if (testUserName(userNameValue)) {
@@ -21,7 +24,7 @@ function resetSpeakerDetails() {
 const testUserName = (val) => {
   const mobileRegex = /^[6-9]\d{9}$/;
   const emailRegex = /^\S+@\S+[\.][0-9a-z]+$/;
-  if(location.host.includes('uat'))return false;
+  if(whitelisting_email === 'true')return false;
   return mobileRegex.test(val) || emailRegex.test(val);
 };
 
@@ -55,7 +58,7 @@ const setSpeakerDetails = (speakerDetailsKey, $userName) => {
     const parsedSpeakerDetails = JSON.parse(speakerDetailsValue);
     let userNameTxt = '';
         if(parsedSpeakerDetails.userName){
-            userNameTxt = location.host.includes('uat') ?
+            userNameTxt = whitelisting_email === 'true'?
             parsedSpeakerDetails.userName.trim() :  
             parsedSpeakerDetails.userName.trim().substring(0, 12)
         }
@@ -99,7 +102,7 @@ const setUserNameOnInputFocus = function () {
 }
 
 const verifyUser = (userName) => {
-  return fetch('/uat/verify', {
+  return fetch('/verify-user', {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify({
@@ -123,7 +126,7 @@ const setStartRecordingBtnOnClick = function (url, module = '') {
   const $userName = $('#username');
   $startRecordBtn.on('click', () => {
     let userNameValue = $userName.val().trim().substring(0, 12);
-        if(location.host.includes('uat')){
+        if(whitelisting_email === 'true'){
             userNameValue = $userName.val().trim();
         }
     let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -141,7 +144,8 @@ const setStartRecordingBtnOnClick = function (url, module = '') {
       toLanguage: toLanguage || '',
     };
 
-    if (location.host.includes('uat')) {
+
+    if (whitelisting_email === 'true') {
       verifyUser(userNameValue).then(res => {
         if (res.ok) {
           storeToLocal(speakerDetailsKey, speakerDetails, contributionLanguage, url);
@@ -159,7 +163,7 @@ const setStartRecordingBtnOnClick = function (url, module = '') {
 }
 
 $(document).ready(() => {
-  if (location.host.includes('uat')) {
+  if (whitelisting_email==='true') {
     document.getElementById("username").maxLength = 100;
   } else {
     document.getElementById("username").maxLength = 12;

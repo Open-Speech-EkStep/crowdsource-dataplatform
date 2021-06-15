@@ -151,3 +151,18 @@ step("Validate Thank you page content for Dekho India", async function() {
 // 		assert.ok(!resp)
 // 	}
 // });
+
+step("When User clicks on <type> field and type <txt> submit and cancel button should be disabled", async function(type, txt) {
+	const editfield = taiko.textBox({ id: type })
+    await taiko.waitFor(500)
+    await write(txt, into(editfield))
+    await taiko.waitFor(1000)
+    assert.ok( await button({ id: 'submit-edit-button' }).isDisabled())
+    assert.ok( await button({ id: 'cancel-edit-button' }).isDisabled())
+});
+
+step("User clears the edit field should disable the buttons again in validation", async function() {
+	await clear(taiko.textBox({id:'edit'}));
+	await taiko.waitFor(500)
+	assert.ok( await button({ id: 'submit-edit-button' }).isDisabled())
+});

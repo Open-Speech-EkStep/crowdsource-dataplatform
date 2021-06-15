@@ -1,6 +1,8 @@
 const {DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS} = require('./constants');
 const {getLocaleString} = require('./utils');
 
+const {whitelisting_email} = require('./env-api')
+
 function validateUserName($userName, $userNameError) {
     const userNameValue = $userName.val().trim();
     if (testUserName(userNameValue)) {
@@ -94,7 +96,7 @@ const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
         motherTongue.value = parsedSpeakerDetails.motherTongue;
         let userNameTxt = '';
         if(parsedSpeakerDetails.userName){
-            userNameTxt = location.host.includes('uat') ?
+            userNameTxt = whitelisting_email==='true' ?
             parsedSpeakerDetails.userName.trim() :  
             parsedSpeakerDetails.userName.trim().substring(0, 12)
         }
@@ -168,7 +170,7 @@ const setStartRecordingBtnOnClick = function () {
             genderValue = transGender.length ? transGender[0].value : '';
         }
         let userNameValue = $userName.val().trim().substring(0, 12);
-        if(location.host.includes('uat')){
+        if(whitelisting_email==='true'){
             userNameValue = $userName.val().trim();
         }
         let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);

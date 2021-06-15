@@ -4,6 +4,7 @@ const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getL
 const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES } = require('./constants');
 const fetch = require('./fetch');
 const { data } = require('jquery');
+const {whitelisting_email} = require('./env-api')
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
@@ -197,7 +198,7 @@ $(document).ready(function () {
         const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
         let genderValue = checkedGender.length ? checkedGender[0].value : '';
         let userNameValue = $userName.val().trim().substring(0, 12);
-        if(location.host.includes('uat')){
+        if(whitelisting_email==='true'){
             userNameValue = $userName.val().trim();
         }
         const selectedLanguage = ALL_LANGUAGES.find(e => e.value === sentenceLanguage);

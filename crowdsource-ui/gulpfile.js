@@ -113,6 +113,15 @@ gulp.task('js', function () {
           },
         ],
       })
+    ).pipe(
+      replace({
+        patterns: [
+          {
+            match: 'whitelistingEmail',
+            replacement: settings.whitelistingEmail,
+          },
+        ],
+      })
     )
     .pipe(gulp.dest('target/js'));
 });
@@ -166,6 +175,15 @@ function jsGulp(moduleName) {
           {
             match: 'cdnUrl',
             replacement: settings.cdnUrl,
+          },
+        ],
+      })
+    ).pipe(
+      replace({
+        patterns: [
+          {
+            match: 'whitelistingEmail',
+            replacement: settings.whitelistingEmail,
           },
         ],
       })

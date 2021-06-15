@@ -55,10 +55,7 @@ step("When User clicks on <type> field and type <txt> submit should be disabled 
     await write(txt, into(editfield))
     await taiko.waitFor(1000)
 
-    console.log("written")
-
     assert.ok( await button({ id: 'submit-edit-button' }).isDisabled())
-    console.log("submit")
     assert.ok( !await button({ id: 'cancel-edit-button' }).isDisabled())
 });
 

@@ -12,9 +12,7 @@ gsutil cp ${ulca_dataset_path}/${dataset_name}.tar.gz .
 
 export remote_bundle_path=s3://${bucket}/$remote_base_path/${language}/original/bundled/${dataset_name}.tar.gz
 
-dataset_name=$(basename ${asr_bundle_path} .tar.gz)
-
-tar -xzvf $asr_bundle_path 
+tar -xzvf $asr_bundle_path
 
 ls ${dataset_name} | grep '.wav'| awk -v path=${dataset_name}/ '{print path$1}'  > asr_files.txt
 
