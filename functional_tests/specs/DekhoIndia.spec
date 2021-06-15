@@ -115,3 +115,8 @@
 * user should be able to see "People participated" , "Images labelled" , "Images validated" , "Languages"
 * When user select "ଓଡିଆ" Language from dropdown then "languages" should not visible
 * When user clicks on back button, user should land on Dekho India home page
+
+## Validate profanity configuration
+* Select Contribution Language as "ગુજરાતી"
+* Check "Transcribe" option should be "disabled" on Home page
+* Check "Correct" option should be "disabled" on Home page
