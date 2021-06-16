@@ -31,7 +31,7 @@
 * User should see add extension and watch video link
 * When User clicks on "edit" field and type "Hello" submit and cancel button should be enabled
 * User clears the edit field should disable the buttons again
-* User should see an error message "nput Field can not be empty"
+* User should see an error message "Input Field can not be empty"
 * When User clicks on "edit" field and type "ବନମବନମହଜ" submit should be disabled and cancel button should be enabled
 * User should see an error message "Please type in your chosen language"
 * User clears the edit field should disable the buttons again
@@ -41,7 +41,7 @@
 * When user clicks on submit button user should see " Thank you for contributing!"
 * When user clicks on back button, user should land on Likho India home page
 * Check "Validate" option should be "enabled" on Home page
-* Navigate to "Validate" and add username "V User" then click Lets go
+* Navigate to "Validate" and add username "V1 User" then click Lets go
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be enabled
 * User should see the text "Is the translation correct?"
 * User skips the next "2" sentences user should land on Thank you page in "English"
