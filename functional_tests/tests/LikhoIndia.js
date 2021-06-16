@@ -53,10 +53,9 @@ step("When User clicks on <type> field and type <txt> submit should be disabled 
 	const editfield = taiko.textBox({ id: type })
     await taiko.waitFor(500)
     await write(txt, into(editfield))
-    await taiko.waitFor(1000)
-
+    await taiko.waitFor(500)
     assert.ok( await button({ id: 'submit-edit-button' }).isDisabled())
-    assert.ok( !await button({ id: 'cancel-edit-button' }).isDisabled())
+    assert.ok(! await button({ id: 'cancel-edit-button' }).isDisabled())
 });
 
 step("User should see an error message <msg>", async function(msg) {

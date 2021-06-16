@@ -1,3 +1,21 @@
+#platform_section {
+ max-width:1200px;
+ margin:auto;
+ border-radius:32px
+}
+
+#platform_section .platform_card {
+    background-image:url(../../img/NEW-WAVE.svg);
+    max-width:1200px;
+    min-height:400px;
+    background-repeat:no-repeat;
+    margin:auto;
+    border-radius:32px;
+    box-shadow:0 4px 12px rgb(0 123 255 / 20%);
+    background-position-y:center;
+    background-color: #fff;
+}
+
 #carouselExampleIndicators .carousel-indicators{
     overflow-x: auto;
     overflow-y: hidden;

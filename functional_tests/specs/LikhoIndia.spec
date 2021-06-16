@@ -31,7 +31,7 @@
 * User should see add extension and watch video link
 * When User clicks on "edit" field and type "Hello" submit and cancel button should be enabled
 * User clears the edit field should disable the buttons again
-* User should see an error message "Input Field can not be empty"
+* User should see an error message "nput Field can not be empty"
 * When User clicks on "edit" field and type "ବନମବନମହଜ" submit should be disabled and cancel button should be enabled
 * User should see an error message "Please type in your chosen language"
 * User clears the edit field should disable the buttons again
