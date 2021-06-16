@@ -1,0 +1,27 @@
+#carouselExampleIndicators .carousel-indicators{
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding:0;
+    margin:0;
+    white-space: nowrap;
+    text-align: center;
+    position: relative;
+    background:#ddd
+}
+#carouselExampleIndicators .carousel-indicators li {
+    display: table-cell;
+    width: 1%;
+    max-width:90px
+}
+#carouselExampleIndicators .carousel-indicators li.active {
+    background-color:#eee;
+    border-top:3px solid orange;
+}
+#carouselExampleIndicators .carousel-indicators button a {
+    overflow:hidden;
+    display:block;
+    font-size:10px;
+    margin-top:5px;
+    font-weight:bold;
+    color: black;
+}

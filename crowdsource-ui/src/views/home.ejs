@@ -27,64 +27,66 @@
 <%- include('common/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
 <div class="container-fluid supreme-container">
     <div class="row">
-        <div class="col-lg-7 col-md-8 col-12 px-lg-5 mt-5 px-5 ml-lg-auto">
-            <h4 class="display-5 font-weight-bolder lh-5"><%= __('What is this Crowdsourcing Platform')%></h4>
+        <div class="col-lg-6 col-md-8 col-12 mt-5 pl-lg-0 px-5 ml-lg-auto order-lg-0 order-md-0 order-sm-1 order-1">
+            <h4 class="display-5 font-weight-bolder lh-4"><%= __('[Platform Name] ')%></h4>
+            <h4 class="display-5 font-weight-bolder lh-4"><%= __('A Crowdsourcing initiative for Indian Languages')%></h4>
             <br>
-            <p class="h5 lh-7 text-justify"><%= __('Crowdsourcing Platform is a Government Initiative to build an open data repository for all Indian languages.')%></p>
-            <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 text-justify"><%= __('The participation is purely voluntary. The contributions made by you will be stored in the repo without any personal info. This data will be then made available to  technologists & language enthusiasts to help develop software and apps in Indian  languages, thus making them available to every Indian citizen.')%></p>
-            <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 text-justify"><%= __('Help India build this open source platform and become atma-nirbhar in the digital space.')%></p>
+            <p class="h6 lh-7 font-weight-normal text-justify"><%= __('[Bhaashini] wants to create collection of data in 22 Indian languages in the form of text and audio. This initiative will help in empowering technologists, language enthusiasts and language communities with a growing demand for  digital services in local Indian languages. The repository will be made available for developing software and applications in Indian languages, thus making them available to every Indian citizen.')%></p>
+            <p class="h6 font-weight-normal lh-7 text-justify"><%= __('Through Bhaashini, we are reaching out to you to contribute  for your voice contribution to create a diverse open source repository of Indian voices to this end.')%></p>
             <br>
-            <p class="h5 font-weight-light-lg font-weight-normal-sm lh-7 text-justify"><i><%= __('(This page is specifically created for User Testing)')%></i></p>
+            <br>
+            <p class="h6 font-weight-normal lh-7 text-justify"><%= __('Help India build this open source platform and become atma-nirbhar in the digital space.')%></p>
+            <br>
+            <button class="btn" style="left:calc(50% - 240px/2 - 471px);top:calc(50% - 48px/2 - 473px);width:240px;height:48px;background:#007bff;border-radius:24px"><a class="text-decoration-none text-light" href="./about-us.html"><%= __("Know More")%></a></button>
         </div>
         <div class="col-lg-4 col-md-4 col-12 align-self-center text-right p-0" id="home-banner">
             <img src="../img/home3.svg" alt="home image" height="595px" class="img-fluid">
         </div>
     </div>
     <div class="row mt-5 mt-lg-0">
-        <div class="col-12 justify-content-center text-center px-5" style="border:2px solid #f0f0f7">
-            <div class="text-center py-lg-3 font-weight-light my-0 home-heading-2" style="font-style:normal"><%= __('HELP US BUILD DATA FOR YOUR LANGUAGE')%></div>
+        <div class="col-12 justify-content-center text-center px-5" style="border:2px solid #f0f0f7;background:#dfecfb">
+            <h1 class="mt-5 display-5 font-weight-bolder lh-4"><%= __('One Platform, 4 Crowdsourcing Initiatives')%></h1>
+            <p class="mt-4"><%= __('Help create open repository of Speech Recognition data, Parallel translations and Labeled Images.')%></p>
+            <%- include ../../build/views/common/carousel.ejs %>
+            <div class="mt-3" style="background:#fff;max-width:1200px;margin:auto;border-radius:32px;border:2px solid #f0f0f7">language goal</div>
+
         </div>
     </div>
 
-    <div class="m-auto justify-content-center mt-lg-5 mx-lg-5 d-flex flex-row flex-wrap flex-lg-nowrap px-5">
-        <%- include('../../build/views/common/homeCard.ejs',{MODULE:"SUNO",img:"../img/listen2.svg",P1:"Transcribing audio to text",P2:"Validate text as per the audio",url:"./sunoIndia/home.html",cardNumber:"card1"})%>
-        <%- include('../../build/views/common/homeCard.ejs',{MODULE:"BOLO",img:"../img/say.svg",P1:"Contribute your voice",P2:"Validate what they say", url:"./boloIndia/home.html",cardNumber:"card2"})%>
-        <%- include('../../build/views/common/homeCard.ejs',{MODULE:"LIKHO",img:"../img/translate2.svg",P1:"Translate and type the text",P2:"Validate the translation",url:"./likhoIndia/home.html",cardNumber:"card3"})%>
-        <%- include('../../build/views/common/homeCard.ejs',{MODULE:"DEKHO",img:"../img/look2.svg",P1:"Type the text as per image",P2:"Validate the text as per image",url:"./dekhoIndia/home.html",cardNumber:"card4"})%>
-    </div>
-    <div class="row mt-5 align-item-center px-5" style="background:rgba(223,236,251,.3)">
-        <div class="my-4 my-lg-5 col-lg-5 ml-lg-auto col-sm align-self-center home-badge-link" style="font-style:normal;font-size:30px">
-            <div class="font-weight-light home-badge-link-row"> <%= __('Be a part of language initiative, earn badges and make a difference') %></div>
-            <div class="text-primary font-weight-bold home-badge-link-row"> <a href="./badges.html"><%= __('Know More') %></a></div>
-        </div>
-        <div class="my-4 my-lg-5 col-lg-6 col-sm home-badge-row">
-            <img src="../img/bronze_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid mx-2">
-            <img src="../img/silver_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid mx-2">
-            <img src="../img/gold_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid mx-2">
-            <img src="../img/platinum_badge.svg" alt="home image" height="160px" width="160px" class="img-fluid mx-2">
-        </div>
-    </div>
-
+    <div class="mb-5" style="max-width:1200px;margin:auto">
     <div class="row my-5 px-5">
-        <div class="col-12">
-            <div class="text-center">
-                <p class="text-center persuade-quote"> <%= __('TAKE A STEP TOWARDS DIGITAL INDIA') %></p>
-                <p class="text-center persuade-quote"> <%= __('CONTRIBUTE NOW TO INDIA’S BIGGEST CROWDSOURCING INITIATIVE') %></p>
-                <div class="row justify-content-center mt-5">
-                    <div>
-                        <img src="../img/emblemIndia.svg" alt="home image" height="30px" width="24px" class="img-fluid">
+        <div class="my-4 my-lg-5 col-sm home-badge-link p-0" style="font-style:normal;font-size:28px">
+            <div class="font-weight-normal home-badge-link-row" style="color:#666"> <%= __('Engaging with this platform will win you badges and pride for building the data in local Languages') %></div>
+            <div class="text-primary font-weight-bold home-badge-link-row mt-lg-4"> <a href="./badges.html"><%= __('Know More') %></a></div>
+        </div>
+        <div class="my-4 my-lg-5 col-sm home-badge-row">
+            <img src="../img/bronze_medal.svg" alt="home image" height="164px" width="135px">
+            <img src="../img/silver_medal.svg" alt="home image" height="164px" width="135px">
+            <img src="../img/gold_medal.svg" alt="home image" height="164px" width="135px">
+            <img src="../img/platinum_medal.svg" alt="home image" height="164px" width="135px">
+        </div>
+        </div>
+        <div class="row p-0" style="box-shadow:0 4px 12px 1px rgba(0,0,0,.08);border-radius:12px;background:#f9fbfe">
+            <div class="col-12 d-flex flex-lg-row" style="background-image:url(../../img/NEW-WAVE3.png);box-shadow:0 4px 12px 1px rgba(0,0,0,.08);border-radius:12px;background-repeat:no-repeat;background-position:right">
+                    <div class="col-lg-2 col-12">
+                        <img src="../img/bronze_medal.svg" alt="home image" height="164px" width="135px" class="img-fluid mx-2">
                     </div>
-                    <div class="ml-2" style="line-height:20px">
-                        <div class="text-left"><%= __('Ministry of Electronics & Information Technology')%>
-                        <br>
-                            <small><%= __('Government of India')%></small>
+                    <div class="col-10 text-left">
+                        <h1 class="pt-lg-4 pt-3">Win a Bronze badge</h1>
+                        <h4 class="font-weight-normal" style="color:#666">Contribute just 5 sentences in your languages</h4>
+                        <div class="py-4">
+                            <button class="btn btn-custom-outline-primary rounded-pill" style="max-width:148px;min-width:144px"><a class="text-decoration-none" href="./sunoIndia/home.html"><%= __('SUNO India')%></a></button>
+                            <button class="btn btn-custom-outline-primary rounded-pill" style="max-width:148px;min-width:144px"><a class="text-decoration-none" href="./boloIndia/home.html"><%= __('BOLO India')%></a></button>
+                            <button class="btn btn-custom-outline-primary rounded-pill" style="max-width:148px;min-width:144px"><a class="text-decoration-none" href="./likhoIndia/home.html"><%= __('LIKHO India')%></a></button>
+                            <button class="btn btn-custom-outline-primary rounded-pill" style="max-width:148px;min-width:144px"><a class="text-decoration-none" href="./dekhoIndia/home.html"><%= __('DEKHO India')%></a></button>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>
+
+
 <button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <%- include('common/feedback/feedback.ejs', {page:"Home Page"}) %>
@@ -99,6 +101,7 @@
 
 <script src="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.js"></script>
 <script src="../js/loadFeedback.js"></script>
+<script src="../js/carousel.js"></script>
 </body>
 
 </html>

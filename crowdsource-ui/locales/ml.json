@@ -519,5 +519,17 @@
 	"Input Feild can not be empty. Suggest correct edit to the text.": "Input Feild can not be empty. Suggest correct edit to the text.",
 	"Numbers are not allowed": "Numbers are not allowed",
 	"Special characters are not allowed": "Special characters are not allowed",
-	"Input Field can not be empty": "Input Field can not be empty"
+	"Input Field can not be empty": "Input Field can not be empty",
+	"[Platform Name] ": "[Platform Name] ",
+	"A Crowdsourcing initiative for Indian Languages": "A Crowdsourcing initiative for Indian Languages",
+	"[Bhaashini] wants to create collection of data in 22 Indian languages in the form of text and audio. This initiative will help in empowering technologists, language enthusiasts and language communities with a growing demand for  digital services in local Indian languages. The repository will be made available for developing software and applications in Indian languages, thus making them available to every Indian citizen.": "[Bhaashini] wants to create collection of data in 22 Indian languages in the form of text and audio. This initiative will help in empowering technologists, language enthusiasts and language communities with a growing demand for  digital services in local Indian languages. The repository will be made available for developing software and applications in Indian languages, thus making them available to every Indian citizen.",
+	"Through Bhaashini, we are reaching out to you to contribute  for your voice contribution to create a diverse open source repository of Indian voices to this end.": "Through Bhaashini, we are reaching out to you to contribute  for your voice contribution to create a diverse open source repository of Indian voices to this end.",
+	"Engaging with this platform will win you badges and pride for building the data in local Languages": "Engaging with this platform will win you badges and pride for building the data in local Languages",
+	"One Platform, 4 Crowdsourcing Initiatives": "One Platform, 4 Crowdsourcing Initiatives",
+	"Help create open repository of Speech Recognition data, Parallel translations and Labeled Images.": "Help create open repository of Speech Recognition data, Parallel translations and Labeled Images.",
+	"SUNO India": "SUNO India",
+	"BOLO India": "BOLO India",
+	"likho India": "likho India",
+	"dekho India": "dekho India",
+	"Start participating": "Start participating"
 }
