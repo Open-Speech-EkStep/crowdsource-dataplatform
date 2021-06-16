@@ -117,7 +117,7 @@ step("When user clicks on submit button user should see <thankutext>", async fun
     await click(taiko.button({ id: 'submit-edit-button'}))
     await taiko.waitFor(500)
     await taiko.text(thankutext).exists()
-    await taiko.waitFor(500)
+    await taiko.waitFor(1200)
 });
 
 step("When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should appear", async function() {
@@ -127,7 +127,7 @@ step("When user clicks on Play button, Pause button should appear and when user 
     await click(taiko.image({ id: "pause" }));
     await taiko.waitFor(500)
     await click(taiko.image({ id: "resume" }));
-    await taiko.waitFor(3500)
+    await taiko.waitFor(5500)
 });
 
 

@@ -70,7 +70,7 @@ step("<arg0> should be enabled , <arg1> <arg2> buttons should be enabled", async
 });
 
 step("User should see the text <text>", async function (text) {
-	assert.ok(taiko.text(text).exists())
+	await taiko.waitFor(500)
 	assert.ok(taiko.text(text).isVisible())
 });
 
