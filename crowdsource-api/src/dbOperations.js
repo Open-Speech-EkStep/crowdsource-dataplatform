@@ -92,25 +92,26 @@ const {
 const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP } = require('./constants');
 
 const envVars = process.env;
-const pgp = require('pg-promise')();
+// const pgp = require('pg-promise')();
 
 const showUniqueMedia = envVars.UNIQUE_SENTENCES_FOR_CONTRIBUTION == 'true';
 
-let cn = {
-    user: envVars.DB_USER,
-    password: envVars.DB_PASS,
-    database: envVars.DB_NAME,
-    host: envVars.DB_HOST,
-    logging: false,
-    dialect: 'postgres',
-    ssl: false,
-    dialectOptions: {
-        ssl: false,
-    },
-    operatorsAliases: false,
-};
+// let cn = {
+//     user: envVars.DB_USER,
+//     password: envVars.DB_PASS,
+//     database: envVars.DB_NAME,
+//     host: envVars.DB_HOST,
+//     logging: false,
+//     dialect: 'postgres',
+//     ssl: false,
+//     dialectOptions: {
+//         ssl: false,
+//     },
+//     operatorsAliases: false,
+// };
 
-const db = pgp(cn);
+// const db = pgp(cn);
+const {pgp, db} = require('./db');
 
 const checkLanguageValidity = async (datasetId, language) => {
     const dataRowInfo = await db.oneOrNone(getDataRowInfo, [datasetId]);
