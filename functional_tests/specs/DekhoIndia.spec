@@ -67,7 +67,7 @@
 * When user click on Lets Go Button, user should "not" see instructions to record
 * When User clicks on "edit" field and type "ನೀವು ಹೇಗಿದ್ದೀರಿ;" submit and cancel button should be enabled
 * When user clicks on submit button user should see " Thank you for contributing!"
-* When User clicks on "edit" field and type "Hello Hello" submit and cancel button should be disabled
+* When User clicks on "edit" field and type "Hello Hello" submit should be disabled and cancel button should be enabled
 * User should see an error message "Please type in your chosen language"
 * User clears the edit field should disable the buttons again
 * User should see an error message "Input Field can not be empty"

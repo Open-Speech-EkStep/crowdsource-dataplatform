@@ -28,6 +28,10 @@ function showAndHideEditError(inputTextLength,error, callback1=()=>{}, callback2
       if ($cancelButton) {
         $cancelButton.attr('disabled', true);
       }
+    }else {
+      if ($cancelButton) {
+        $cancelButton.removeAttr('disabled');
+      }
     }
     const $editErrorText = $("#edit-error-text");
     const previousActiveError = $editErrorText.find('.error-active');
