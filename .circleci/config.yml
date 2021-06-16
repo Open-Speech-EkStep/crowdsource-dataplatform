@@ -180,11 +180,29 @@ workflows:
             - push_dev_image
 
 
+
+
+      - run_functional_tests:
+          name: functional_tests_dev
+          env_name: dev
+          db_name: ${DEV_DB_NAME}
+          requires:
+            - dev_deployment_eks
+            - build_dev_ui
+
+      - approve_to_deploy:
+          name: approve_cug_deployment_eks
+          type: approval
+          requires:
+            - dev_deployment_eks
+            - build_dev_ui
+            # - functional_tests_dev
+
       - db_migrate_aws:
           name: migrate_cug_aws
           db_name: ${CUG_DB_NAME}
           requires:
-            - push_dev_image
+            - approve_cug_deployment_eks
 
       - aws-ecr/build-and-push-image:
           name: push_cug_image
@@ -208,15 +226,6 @@ workflows:
           requires:
             - push_cug_image
 
-
-
-      - run_functional_tests:
-          name: functional_tests_dev
-          env_name: dev
-          db_name: ${DEV_DB_NAME}
-          requires:
-            - dev_deployment_eks
-            - build_dev_ui
 
       - approve_to_deploy:
           name: approve_test_deployment_eks
