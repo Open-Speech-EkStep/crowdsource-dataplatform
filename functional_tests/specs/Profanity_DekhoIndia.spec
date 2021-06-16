@@ -1,6 +1,6 @@
 # Test Dekho India Profanity 
 
-* Open Profanity Website for Dekho India
+* Open Profanity Website for "Dekho" India
 
 
 ## User not found flow

@@ -1,6 +1,6 @@
 # Test Bolo India Profanity
 
-* Open Profanity Website
+* Open Profanity Website for "Bolo" India
 
 
 ## User not found flow
