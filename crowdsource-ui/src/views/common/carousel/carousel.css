@@ -14,6 +14,42 @@
     box-shadow:0 4px 12px rgb(0 123 255 / 20%);
     background-position-y:center;
     background-color: #fff;
+    padding: 23px 6%;
+}
+
+#platform_inner {
+    height: 300px;
+}
+
+#platform_inner p{
+  color: #666666;
+  line-height: 32px;
+  font-weight: 400;
+}
+
+.suno-cont-image {
+    border-radius:50%;
+    background-color:#42b2c6;
+    height:130px;
+    width:130px
+}
+
+.image-text {
+    padding-top: 25px;
+    margin: 0 46px;
+}
+
+.label-text {
+    margin-top: 1.2rem;
+    max-width: 58%;
+    text-align: left;
+}
+
+.suno-val-image {
+    border-radius:50%;
+    background-color:#3e6dd4;
+    height:130px;
+    width:130px
 }
 
 #carouselExampleIndicators .carousel-indicators{
@@ -26,6 +62,25 @@
     position: relative;
     background:#ddd
 }
+
+#carouselExampleIndicators .nav-tabs li a {
+    color: #666666 !important;
+    font-size: 24px;
+    line-height: 29px;
+    opacity: 0.4;
+    min-width: 160px;
+    max-width: 161px;
+}
+
+#carouselExampleIndicators .nav-tabs li a.active {
+    background: rgba(0, 123, 255, 0.1);
+    border-radius: 32px;
+    color: #007BFF !important;
+    font-weight: 700;
+    opacity: 1;
+    border-color: transparent;
+}
+
 #carouselExampleIndicators .carousel-indicators li {
     display: table-cell;
     width: 1%;
@@ -43,3 +98,5 @@
     font-weight:bold;
     color: black;
 }
+
+
