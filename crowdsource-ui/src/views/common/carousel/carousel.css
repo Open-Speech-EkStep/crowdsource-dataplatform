@@ -1,18 +1,48 @@
 #platform_section {
- max-width:1200px;
- margin:auto;
- border-radius:32px
+    max-width: 1200px;
+    margin: auto;
+    border-radius: 32px
 }
 
+#carouselExampleIndicators .nav-tabs{
+  overflow-x: auto;
+}
+
+#badge-section-card-cover {
+    box-shadow: 0 4px 12px 1px rgba(0, 0, 0, .08);
+    border-radius: 12px;
+    background: #f9fbfe;
+}
+
+#badge-section-card {
+    background-image: url(../../img/NEW-WAVE3.png);
+    box-shadow: 0 4px 12px 1px rgba(0, 0, 0, .08);
+    border-radius: 12px;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+#badge-section-card button{
+    max-width:180px;
+    min-width:180px;
+    height:48px;
+}
+
+#badge-section-card button a{
+    font-size: 18px;
+}
+
+
+
 #platform_section .platform_card {
-    background-image:url(../../img/NEW-WAVE.svg);
-    max-width:1200px;
-    min-height:400px;
-    background-repeat:no-repeat;
-    margin:auto;
-    border-radius:32px;
-    box-shadow:0 4px 12px rgb(0 123 255 / 20%);
-    background-position-y:center;
+    background-image: url(../../img/NEW-WAVE.svg);
+    max-width: 1200px;
+    min-height: 400px;
+    background-repeat: no-repeat;
+    margin: auto;
+    border-radius: 32px;
+    box-shadow: 0 4px 12px rgb(0 123 255 / 20%);
+    background-position-y: center;
     background-color: #fff;
     padding: 23px 6%;
 }
@@ -21,17 +51,17 @@
     height: 300px;
 }
 
-#platform_inner p{
-  color: #666666;
-  line-height: 32px;
-  font-weight: 400;
+#platform_inner p {
+    color: #666666;
+    line-height: 32px;
+    font-weight: 400;
 }
 
 .suno-cont-image {
-    border-radius:50%;
-    background-color:#42b2c6;
-    height:130px;
-    width:130px
+    border-radius: 50%;
+    background-color: #42b2c6;
+    height: 130px;
+    width: 130px
 }
 
 .image-text {
@@ -46,21 +76,21 @@
 }
 
 .suno-val-image {
-    border-radius:50%;
-    background-color:#3e6dd4;
-    height:130px;
-    width:130px
+    border-radius: 50%;
+    background-color: #3e6dd4;
+    height: 130px;
+    width: 130px
 }
 
-#carouselExampleIndicators .carousel-indicators{
+#carouselExampleIndicators .carousel-indicators {
     overflow-x: auto;
     overflow-y: hidden;
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
     white-space: nowrap;
     text-align: center;
     position: relative;
-    background:#ddd
+    background: #ddd
 }
 
 #carouselExampleIndicators .nav-tabs li a {
@@ -84,19 +114,74 @@
 #carouselExampleIndicators .carousel-indicators li {
     display: table-cell;
     width: 1%;
-    max-width:90px
+    max-width: 90px
 }
+
 #carouselExampleIndicators .carousel-indicators li.active {
-    background-color:#eee;
-    border-top:3px solid orange;
+    background-color: #eee;
+    border-top: 3px solid orange;
 }
+
 #carouselExampleIndicators .carousel-indicators button a {
-    overflow:hidden;
-    display:block;
-    font-size:10px;
-    margin-top:5px;
-    font-weight:bold;
+    overflow: hidden;
+    display: block;
+    font-size: 10px;
+    margin-top: 5px;
+    font-weight: bold;
     color: black;
+}
+
+.home-badge-link{
+    font-style:normal;
+    font-size:28px;
+    max-width:579px;
+}
+
+.home-badge-link-row{
+    color:#666;
+    line-height:40px;
+    padding-right: 20px;
+}
+
+#badge-section{
+    max-width:1200px;
+    margin:auto;
+}
+
+@media screen and (max-width: 768px) {
+    #badge-section-card {
+        background-image: url(../../img/mobile_wave.png) !important;
+    }
+
+    #badge-section {
+        max-width: 320px;
+        margin: auto
+    }
+
+    #badge-section-card button a{
+        font-size: 16px;
+    }
+
+    #badge-section-card button{
+        max-width: 144px;
+        min-width: 144px;
+        height: 44px;
+        font-size: 16px;
+        justify-content: center;
+        align-items: center;
+        padding: 6px 12px;
+    }
+
+    .home-badge-link-row{
+        font-size: 18px;
+        line-height: 24px;
+        text-align: center;
+    }
+
+    .home-badge-row img{
+        width: 68px;
+        height: 83px;
+    }
 }
 
 
