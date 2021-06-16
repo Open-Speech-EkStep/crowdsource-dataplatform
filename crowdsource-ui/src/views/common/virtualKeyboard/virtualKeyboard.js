@@ -9,13 +9,22 @@ const {keyboardLayout} = require('./keyboardLayout');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LIKHO_TO_LANGUAGE} = require('./constants');
 const {isMobileDevice} = require('./common');
 
-function showAndHideEditError(inputTextLength,error, callback1=()=>{}, callback2=()=>{}) {
+function showAndHideEditError(inputTextLength,error, callback1=()=>{}, callback2=()=>{},flow) {
   const currentModule = localStorage.getItem(CURRENT_MODULE);
   const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
   const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
   if (inputTextLength > 0 && error == null) {
     callback1();
-    $submitEditButton.removeAttr('disabled');
+    const isAudioPlayed = flow ? localStorage.getItem(`${flow}_audioPlayed`) : 'false';
+    if(currentModule == 'suno'){
+      if(isAudioPlayed == 'true'){
+        $submitEditButton.removeAttr('disabled');
+      } else {
+        $submitEditButton.attr('disabled', true);
+      }
+    } else {
+      $submitEditButton.removeAttr('disabled');
+    }
     if ($cancelButton) {
       $cancelButton.removeAttr('disabled');
     }
@@ -24,11 +33,11 @@ function showAndHideEditError(inputTextLength,error, callback1=()=>{}, callback2
   }else {
     if(error.type == 'noText') {
       callback2()
-
       if ($cancelButton) {
         $cancelButton.attr('disabled', true);
       }
-    }else {
+    } else {
+      callback1()
       if ($cancelButton) {
         $cancelButton.removeAttr('disabled');
       }
@@ -48,7 +57,7 @@ let keyboard;
 
 const showKeyboard = function (language, callBack1 = () => {
 }, callBack2 = () => {
-}) {
+},flow='') {
   let Keyboard = window.SimpleKeyboard.default;
 
   /**
@@ -73,7 +82,7 @@ const showKeyboard = function (language, callBack1 = () => {
     localStorage.setItem("physicalKeyboard", true);
     $('#keyboardBox').addClass('d-none');
     const inputText = event.target.value && event.target.value.trim();
-    showAndHideEditError(inputText.length,error,callBack1,callBack2 )
+    showAndHideEditError(inputText.length,error,callBack1,callBack2 ,flow)
   });
 
   function onChange(input) {
@@ -81,7 +90,7 @@ const showKeyboard = function (language, callBack1 = () => {
     const error = input ? lngtype(input) : {type:'noText'};
     localStorage.setItem("physicalKeyboard", false);
     const inputText = input && input.trim();
-    showAndHideEditError(inputText.length,error,callBack1,callBack2 )
+    showAndHideEditError(inputText.length,error,callBack1,callBack2 ,flow)
   }
 
   function onKeyPress(button) {

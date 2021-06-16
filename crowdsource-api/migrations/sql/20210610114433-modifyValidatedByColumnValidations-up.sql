@@ -52,8 +52,10 @@ AS
    FROM contributions
      LEFT JOIN validations ON contributions.contribution_id = validations.contribution_id
      JOIN dataset_row ON dataset_row.dataset_row_id = contributions.dataset_row_id
-     LEFT JOIN contributors ON contributors.contributor_id = contributions.contributed_by
+     LEFT JOIN contributors ON contributors.contributor_id = contributions.contributed_by 
+     INNER JOIN configurations conf ON conf.config_name='include_profane' 
   WHERE contributions.action = 'completed'::text AND contributions.date >= (CURRENT_DATE - '1 year'::interval)
+  AND (conf.value=1 OR is_profane=false)
   ORDER BY contributions.contributed_by;
 
 
@@ -444,7 +446,9 @@ AS
      LEFT JOIN validations ON contributions.contribution_id = validations.contribution_id
      JOIN dataset_row ON dataset_row.dataset_row_id = contributions.dataset_row_id
      LEFT JOIN contributors ON contributors.contributor_id = contributions.contributed_by
+     INNER JOIN configurations conf ON conf.config_name='include_profane' 
   WHERE contributions.action = 'completed'::text AND contributions.date >= (CURRENT_DATE - '1 year'::interval)
+  AND (conf.value=1 OR is_profane=false)
   ORDER BY contributions.contributed_by;
 
 
