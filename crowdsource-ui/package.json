@@ -30,7 +30,6 @@
         "jquery": "^3.5.1",
         "jsonwebtoken": "^8.5.1",
         "node-fetch": "^2.6.1",
-        "pm2": "^4.5.6",
         "regenerator-runtime": "^0.13.7"
     },
     "engines": {
@@ -41,6 +40,7 @@
         "babelify": "^10.0.0",
         "del": "^5.1.0",
         "fetch-mock": "^9.11.0",
+        "shell-quote": "1.6.1",
         "gulp": "^4.0.2",
         "gulp-browserify": "^0.5.1",
         "gulp-clean-css": "^4.3.0",
