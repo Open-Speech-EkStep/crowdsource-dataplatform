@@ -92,6 +92,7 @@ const setAudioPlayer = function () {
   const textPause = $('#audioplayer-text_pause');
   const textResume = $('#audioplayer-text_resume');
   const cancelButton = $("#cancel-edit-button");
+  const $submitButton = $('#submit-edit-button');
 
 
   myAudio.addEventListener("ended", () => {
@@ -101,6 +102,10 @@ const setAudioPlayer = function () {
     hideElement(textPause);
     hideElement(textResume);
     showElement(textReplay);
+    localStorage.setItem("contribution_audioPlayed",true);
+    if($("#edit").val()){
+      $submitButton.removeAttr("disabled");
+    }
     cancelButton.removeAttr("disabled");
     $("#edit").removeAttr("disabled");
   });
@@ -170,6 +175,7 @@ function getNextSentence() {
     currentIndex++;
     updateProgressBar(currentIndex + 1, sunoIndia.sentences.length);
     const encodedUrl = encodeURIComponent(sunoIndia.sentences[currentIndex].media_data);
+    localStorage.setItem("contribution_audioPlayed",false);
     loadAudio(`${cdn_url}/${encodedUrl}`);
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
@@ -213,7 +219,7 @@ const closeEditor = function () {
 }
 
 const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancelButton);
+showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancelButton,'contribution');
 
 function markContributionSkipped() {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -555,6 +561,7 @@ function executeOnLoad() {
       sunoIndia.sentences = localSentencesParsed.sentences;
       initialize();
     } else {
+      localStorage.setItem("contribution_audioPlayed",false);
       localStorage.removeItem(currentIndexKey);
       const type = 'asr';
       fetch(`/media/${type}`, {

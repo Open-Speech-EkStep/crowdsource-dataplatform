@@ -1,11 +1,22 @@
 const fetch = require('../common/fetch')
-const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getBrowserInfo, getDeviceInfo } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE,CURRENT_MODULE,MODULE} = require('../common/constants');
-const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const { showUserProfile } = require('../common/header');
-const { isKeyboardExtensionPresent,isMobileDevice,showOrHideExtensionCloseBtn } = require('../common/common');
-const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
-const { cdn_url } = require('../common/env-api');
+const {
+  setPageContentHeight,
+  toggleFooterPosition,
+  setFooterPosition,
+  updateLocaleLanguagesDropdown,
+  showElement,
+  hideElement,
+  fetchLocationInfo,
+  reportSentenceOrRecording,
+  getBrowserInfo,
+  getDeviceInfo
+} = require('../common/utils');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE} = require('../common/constants');
+const {showKeyboard, setInput} = require('../common/virtualKeyboard');
+const {showUserProfile} = require('../common/header');
+const {isKeyboardExtensionPresent, isMobileDevice, showOrHideExtensionCloseBtn} = require('../common/common');
+const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
+const {cdn_url} = require('../common/env-api');
 const {initializeFeedbackModal} = require('../common/feedback');
 
 const speakerDetailsKey = 'speakerDetails';
@@ -25,7 +36,7 @@ let replayStr = "";
 let resumeStr = "";
 let audioPlayerBtn = "";
 let needChange = "";
-let submitButton ="";
+let submitButton = "";
 let cancelButton = "";
 let likeBtn = "";
 let skipButton = "";
@@ -89,7 +100,7 @@ const setAudioPlayer = function () {
   const textReplay = $('#audioplayer-text_replay');
   const textPause = $('#audioplayer-text_pause');
   const textResume = $('#audioplayer-text_resume');
-
+  const $submitButton = $(submitButton);
 
   myAudio.addEventListener("ended", () => {
     enableValidation();
@@ -99,6 +110,11 @@ const setAudioPlayer = function () {
     hideElement(textPause);
     hideElement(textResume);
     showElement(textReplay);
+    localStorage.setItem("validation_audioPlayed", true);
+    if($("#edit").val()){
+      $submitButton.removeAttr("disabled");
+    }
+    $submitButton.removeAttr("disabled");
   });
 
   play.on('click', () => {
@@ -194,15 +210,16 @@ function setSentenceLabel(index) {
 function getNextSentence() {
   if (currentIndex < sunoIndiaValidator.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1,sunoIndiaValidator.sentences.length);
+    updateProgressBar(currentIndex + 1, sunoIndiaValidator.sentences.length);
     const encodedUrl = encodeURIComponent(sunoIndiaValidator.sentences[currentIndex].sentence);
+    localStorage.setItem("validation_audioPlayed", false);
     loadAudio(`${cdn_url}/${encodedUrl}`);
     resetValidation();
     setSentenceLabel(currentIndex);
-    localStorage.setItem(currentIndexKey,currentIndex);
+    localStorage.setItem(currentIndexKey, currentIndex);
   } else {
     const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
-    Object.assign(sentencesObj, { sentences: [] });
+    Object.assign(sentencesObj, {sentences: []});
     localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
     resetValidation();
@@ -219,7 +236,7 @@ function disableButton(button) {
 
 function disableValidation() {
   const needChangeButton = $("#need_change");
-  const likeButton =  $("#like_button");
+  const likeButton = $("#like_button");
   disableButton(likeButton)
   disableButton(needChangeButton)
 }
@@ -270,8 +287,8 @@ function recordValidation(action) {
       });
 }
 
-const openEditor = function (){
-const $editorRow = $('#editor-row');
+const openEditor = function () {
+  const $editorRow = $('#editor-row');
   $editorRow.removeClass('d-none')
   // $('#original-text').text('Original Text');
   hideElement($(needChange));
@@ -280,7 +297,7 @@ const $editorRow = $('#editor-row');
   showElement($(submitButton))
 }
 
-const closeEditor = function (){
+const closeEditor = function () {
   const $editorRow = $('#editor-row');
   hideElement($editorRow);
   showElement($(needChange));
@@ -300,7 +317,7 @@ function addListeners() {
   // const dislikeButton = $("#dislike_button");
   const $skipButton = $(skipButton);
 
-  needChangeButton.on('click',()=>{
+  needChangeButton.on('click', () => {
     showElement($('#virtualKeyBoardBtn'));
     hideElement($('#sentences-row'));
     openEditor();
@@ -309,12 +326,13 @@ function addListeners() {
     $('#edit').val('');
     $('#edit').val(originalText);
     setInput(originalText);
+    $submitButton.attr('disabled', true);
   })
 
-  $("#edit").focus(function(){
+  $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if(!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false'){
+    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false') {
       showElement($('#keyboardBox'));
     }
   });
@@ -322,7 +340,7 @@ function addListeners() {
   $cancelButton.on('click', () => {
     hideElement($('#virtualKeyBoardBtn'));
     const $submitEditButton = $submitButton;
-    $submitEditButton.attr('disabled',true);
+    $submitEditButton.attr('disabled', true);
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
     hideElement($('#edit-error-row'))
@@ -343,8 +361,8 @@ function addListeners() {
     showElement($('#progress-row'))
     sunoIndiaValidator.editedText = $("#edit").val();
     uploadToServer();
-    $("#edit").css('pointer-events','none');
-    setTimeout(()=>{
+    $("#edit").css('pointer-events', 'none');
+    setTimeout(() => {
       closeEditor();
       showElement($('#progress-row'))
       showElement($(playStr))
@@ -355,7 +373,7 @@ function addListeners() {
       showElement($(audioPlayerBtn))
       hideElement($('#thankyou-text'));
       getNextSentence();
-      $("#edit").css('pointer-events','unset');
+      $("#edit").css('pointer-events', 'unset');
     }, 2000)
   })
 
@@ -370,7 +388,7 @@ function addListeners() {
 
   $skipButton.on('click', () => {
     hideElement($('#virtualKeyBoardBtn'));
-    if($(pauseStr).hasClass('d-none')){
+    if ($(pauseStr).hasClass('d-none')) {
       $(pauseStr).trigger('click');
     }
     $(resumeStr).addClass('d-none')
@@ -417,7 +435,7 @@ const getAudioClip = function (contributionId) {
     }
   }).then((stream) => {
     stream.arrayBuffer().then((buffer) => {
-      const blob = new Blob([buffer], { type: "audio/wav" });
+      const blob = new Blob([buffer], {type: "audio/wav"});
       // loadAudio(URL.createObjectURL(blob))
       const fileReader = new FileReader();
       fileReader.onload = function (e) {
@@ -520,28 +538,28 @@ const initializeComponent = function () {
     setTotalSentenceIndex(totalItems);
     resetValidation();
     setAudioPlayer();
-    updateProgressBar(currentIndex + 1,sunoIndiaValidator.sentences.length)
+    updateProgressBar(currentIndex + 1, sunoIndiaValidator.sentences.length)
   }
 }
 
 const detectDevice = () => {
-    // false for not mobile device
-    playStr = "#play";
-    replayStr = "#replay";
-    pauseStr = "#pause";
+  // false for not mobile device
+  playStr = "#play";
+  replayStr = "#replay";
+  pauseStr = "#pause";
   resumeStr = "#resume";
-    audioPlayerBtn = "#audio-player-btn";
-    needChange = "#need_change";
-    submitButton ="#submit-edit-button";
-    cancelButton = "#cancel-edit-button";
-    likeBtn = "#like_button";
-    skipButton = "#skip_button"
+  audioPlayerBtn = "#audio-player-btn";
+  needChange = "#need_change";
+  submitButton = "#submit-edit-button";
+  cancelButton = "#cancel-edit-button";
+  likeBtn = "#like_button";
+  skipButton = "#skip_button"
 }
 
 $(document).ready(() => {
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
-  if(isMobileDevice() || isNotChrome){
+  if (isMobileDevice() || isNotChrome) {
     hideElement($('#extension-bar'));
   } else {
     showOrHideExtensionCloseBtn();
@@ -551,7 +569,9 @@ $(document).ready(() => {
   detectDevice();
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   setFooterPosition();
-  showKeyboard(contributionLanguage.toLowerCase());
+  showKeyboard(contributionLanguage.toLowerCase(), () => {
+  }, () => {
+  }, 'validation');
   hideElement($('#keyboardBox'));
   toggleFooterPosition();
   setPageContentHeight();
@@ -632,6 +652,7 @@ $(document).ready(() => {
     sunoIndiaValidator.sentences = localSentencesParsed.sentences;
     initializeComponent();
   } else {
+    localStorage.setItem("validation_audioPlayed", false);
     localStorage.removeItem(currentIndexKey);
     const type = 'asr';
     const toLanguage = '';

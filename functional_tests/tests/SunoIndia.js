@@ -127,6 +127,7 @@ step("When user clicks on Play button, Pause button should appear and when user 
     await click(taiko.image({ id: "pause" }));
     await taiko.waitFor(500)
     await click(taiko.image({ id: "resume" }));
+    await taiko.waitFor(3500)
 });
 
 
@@ -215,4 +216,10 @@ step("When user clicks on Play button, Pause button should appear and when user 
     await click(taiko.image({ id: "play" }));
     await taiko.waitFor(500)
     await click(taiko.image({ id: "pause" }));
+});
+
+step("User clicks on resume button", async function() {
+	await taiko.waitFor(500)
+    await click(taiko.image({ id: "resume" }));
+    await taiko.waitFor(4000)
 });
