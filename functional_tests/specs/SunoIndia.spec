@@ -43,11 +43,10 @@
 * When user clicks on the Test Speaker button, user should see "play-speaker"
 * When user clicks on the cross button , pop up should close and user should see the Test Mic and speaker button
 * When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should visible
-* When user clicks on Data Source button, popup should open and they should see source information
 * When User clicks on "edit" field and type ";ನೀವು ಹೇಗಿದ್ದೀರಿ" submit should be disabled and cancel button should be enabled
 * User should see an error message "Special characters are not allowed"
 * User clears the edit field should disable the buttons again
-* User should see an error message "Input field can not be empty"
+* User should see an error message "Input Field can not be empty"
 * When User clicks on "edit" field and type "Hello Hello" submit should be disabled and cancel button should be enabled
 * User should see an error message "Please type in your chosen language"
 * User clears the edit field should disable the buttons again
