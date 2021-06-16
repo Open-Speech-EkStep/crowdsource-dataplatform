@@ -45,6 +45,18 @@ gauge.screenshotFn = async function () {
     return await taiko.screenshot({ encoding: 'base64' ,path:screenshotFilePath});
 };
 
+
+beforeSpec(async () => {
+    const language = "हिंदी";
+    await goto(testUrl, {waitForEvents:['loadEventFired']});
+    await taiko.waitFor(700)
+    if(await text("Select Your Preferred Language").exists()){
+        await click(language);
+        console.log("Contribution language selected before spec");
+    }
+    await taiko.waitFor(700)
+})
+
 step("Open Website", async () => {
     await taiko.waitFor(500)
     await goto(testUrl, {waitForEvents:['loadEventFired']});
@@ -66,8 +78,8 @@ step("Select Language <language> enables the Start Recording button", async func
     assert.ok(!await taiko.button({ id: 'start_recording' }).isDisabled(), 'the start recording button is disabled')
 });
 
-step("Speaker details popup should appear and close button should close the pop up", async function () {
-    if (await taiko.text('Speaker Details').exists()) {
+step("User details popup should appear and close button should close the pop up", async function () {
+    if (await taiko.text('User Details').exists()) {
         assert.ok('speaker details pop-up exists')
         await click(taiko.button({ class: 'close float-right' }))
     }
@@ -172,21 +184,6 @@ step("When user skips all the rest of the <count> sentences , User should see Th
 });
 
 
-step("when user skips the sentence", async function()
-{
-    await taiko.waitFor(500)
-    const skipbutton = taiko.button({ id: 'skipBtn' })
-    await click(skipbutton)
-    await taiko.waitFor(1500)
-
-});
-
-step("User waits for thank you page", async function()
-    {
-        await taiko.waitFor(5000)
-        assert.ok(await text('Thank you for contributing!').exists())
-    });
-
 step("when user clicks on the Contribute More button, user should not see the Instructions page again", async function () {
     await click(link('Contribute More'))
     await taiko.waitFor(1000)
@@ -194,26 +191,6 @@ step("when user clicks on the Contribute More button, user should not see the In
         const resp = await text('Quick Tips').isVisible();
         assert.ok(!resp)
     }
-});
-
-
-step("User should see the content in <language>", async function (language) {
-    if (language == "Hindi") {
-        await taiko.waitFor(500)
-        assert.ok(await text("बोलो इंडिया: भारतीय भाषाओं के लिए एक क्राउडसोर्सिंग पहल").exists());
-    }
-});
-
-step("Select translation language as <language>", async function (language) {
-    await taiko.waitFor(500)
-    //await taiko.$("#locale_language_dropdown").exists()
-    //const localeDropDown = taiko.$("#locale_language_dropdown");
-    //await click(localeDropDown);
-
-    await click(listItem({ id: "locale_language_dropdown" }));
-    await taiko.waitFor(500);
-    await click(link(language));
-    await taiko.waitFor(500);
 });
 
 step("Navigate to <arg0> button and click <arg0> button", async function (arg0) {
@@ -300,17 +277,6 @@ step("user should be able to see <arg0> , <arg1> , <arg2> , <arg3>", async funct
     assert.ok(await text(arg1).exists());
     assert.ok(await text(arg2).exists());
     assert.ok(await text(arg3).exists());
-});
-
-
-step("User plays the audio , <arg0>,<arg1> should be enabled", async function (arg0, arg1) {
-    await taiko.waitFor(500)
-    await click(taiko.image({ id: "play" }));
-    await taiko.waitFor(1000)
-    await click(taiko.image({ id: "pause" }));
-    await taiko.waitFor(1000)
-    assert.ok(! await taiko.button({ id: arg0 }).isDisabled());
-    assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
 });
 
 step("User plays the audio , <arg0>,<arg1> should be disabled", async function (arg0, arg1) {
