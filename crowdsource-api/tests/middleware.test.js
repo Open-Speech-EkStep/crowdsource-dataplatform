@@ -550,7 +550,7 @@ describe('middleware test', function () {
         })
 
         test('should fail for invalid media type', () => {
-            const req = { query: { source: validSource }, params: { type: 'someType', language: validLanguage } };
+            const req = { params: { type: 'someType', language: validLanguage, source: validSource } };
 
             validateLanguageGoalInput(req, res, nextSpy);
 
@@ -558,15 +558,15 @@ describe('middleware test', function () {
         });
 
         test('should fail for invalid language', () => {
-            const req = { query: { source: validSource }, params: { type: validType, language: 'someLanguage' } };
+            const req = { params: { type: validType, language: 'someLanguage', source: validSource } };
 
             validateLanguageGoalInput(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1);
         });
-        
+
         test('should fail for invalid source', () => {
-            const req = { query: { source: 'someSource' }, params: { type: validType, language: validLanguage } };
+            const req = { params: { type: validType, language: validLanguage, source: 'someSource' } };
 
             validateLanguageGoalInput(req, res, nextSpy);
 
@@ -574,7 +574,7 @@ describe('middleware test', function () {
         });
 
         test('should pass if all parameters are valid', () => {
-            const req = { query: { source: validSource }, params: { type: validType, language: validLanguage } };
+            const req = { params: { type: validType, language: validLanguage, source: validSource } };
 
             validateLanguageGoalInput(req, res, nextSpy);
 

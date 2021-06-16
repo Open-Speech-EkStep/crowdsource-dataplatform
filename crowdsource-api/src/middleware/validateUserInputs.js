@@ -153,9 +153,9 @@ const validateRewardsInfoInput = (req, res, next) => {
 }
 
 const validateLanguageGoalInput = (req, res, next) => {
-    const type = req.params?.type;
-    const language = req.params?.language;
-    const source = req.query?.source;
+    const type = req.params ? req.params.type : null;
+    const language = req.params ? req.params.language : null;
+    const source = req.params ? req.params.source : null;
     const validMediaType = MEDIA_TYPES.includes(type);
     const validLanguage = isValidLanguage(language)
     const validSource = (source == 'contribute' || source == 'validate');

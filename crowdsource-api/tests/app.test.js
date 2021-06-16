@@ -89,8 +89,8 @@ describe("Test the root path", () => {
     //     // console.log(response.cookie)
     //   });
 
-    test('/language-goal should respond with status 200', async () => {
-        const response = await request(app).get('/language-goal/text/Hindi?source=contribute');
-        expect(response.status).toBe(200);
-    })
+    // test('/language-goal should respond with status 200', async () => {
+    //     const response = await request(app).get('/language-goal/text/Hindi/contribute');
+    //     expect(response.status).toBe(200);
+    // })
 });

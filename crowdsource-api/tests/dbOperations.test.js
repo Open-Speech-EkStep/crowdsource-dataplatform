@@ -659,54 +659,73 @@ describe("Running tests for dbOperations", () => {
         describe('test get current amount', () => {
 
             test('should call getContributionHoursForText for type text contribute', async () => {
-                when(spyDBoneOrNone).calledWith(getContributionHoursForText, [language, textType]).mockReturnValue({amount: 10})
+                when(spyDBoneOrNone).calledWith(getContributionHoursForText, [language, textType]).mockReturnValue({ amount: 10 })
                 await dbOperations.getRewards(userId, userName, language, categoryContribute, textType);
                 expect(spyDBoneOrNone).toBeCalledWith(getContributionHoursForText, [language, textType])
             });
 
             test('should call getContributionHoursForAsr for type asr contribute', async () => {
-                when(spyDBoneOrNone).calledWith(getContributionHoursForAsr, [language, asrType]).mockReturnValue({amount: 10})
+                when(spyDBoneOrNone).calledWith(getContributionHoursForAsr, [language, asrType]).mockReturnValue({ amount: 10 })
                 await dbOperations.getRewards(userId, userName, language, categoryContribute, asrType);
                 expect(spyDBoneOrNone).toBeCalledWith(getContributionHoursForAsr, [language, asrType])
             });
 
             test('should call getContributionAmount for type ocr contribute', async () => {
-                when(spyDBoneOrNone).calledWith(getContributionAmount, [language, ocrType]).mockReturnValue({amount: 10})
+                when(spyDBoneOrNone).calledWith(getContributionAmount, [language, ocrType]).mockReturnValue({ amount: 10 })
                 await dbOperations.getRewards(userId, userName, language, categoryContribute, ocrType);
                 expect(spyDBoneOrNone).toBeCalledWith(getContributionAmount, [language, ocrType])
             });
 
             test('should call getContributionAmount for type parallel contribute', async () => {
-                when(spyDBoneOrNone).calledWith(getContributionAmount, [language, parallelType]).mockReturnValue({amount: 10})
+                when(spyDBoneOrNone).calledWith(getContributionAmount, [language, parallelType]).mockReturnValue({ amount: 10 })
                 await dbOperations.getRewards(userId, userName, language, categoryContribute, parallelType);
                 expect(spyDBoneOrNone).toBeCalledWith(getContributionAmount, [language, parallelType])
             });
 
             test('should call getValidationAmount for type ocr validate', async () => {
-                when(spyDBoneOrNone).calledWith(getValidationAmount, [language, ocrType]).mockReturnValue({amount: 10})
+                when(spyDBoneOrNone).calledWith(getValidationAmount, [language, ocrType]).mockReturnValue({ amount: 10 })
                 await dbOperations.getRewards(userId, userName, language, categoryValidate, ocrType);
                 expect(spyDBoneOrNone).toBeCalledWith(getValidationAmount, [language, ocrType])
             });
 
             test('should call getValidationAmount for type parallel validate', async () => {
-                when(spyDBoneOrNone).calledWith(getValidationAmount, [language, parallelType]).mockReturnValue({amount: 10})
+                when(spyDBoneOrNone).calledWith(getValidationAmount, [language, parallelType]).mockReturnValue({ amount: 10 })
                 await dbOperations.getRewards(userId, userName, language, categoryValidate, parallelType);
                 expect(spyDBoneOrNone).toBeCalledWith(getValidationAmount, [language, parallelType])
             });
 
             test('should call getValidationHoursForText for type text validate', async () => {
-                when(spyDBoneOrNone).calledWith(getValidationHoursForText, [language, textType]).mockReturnValue({amount: 10})
+                when(spyDBoneOrNone).calledWith(getValidationHoursForText, [language, textType]).mockReturnValue({ amount: 10 })
                 await dbOperations.getRewards(userId, userName, language, categoryValidate, textType);
                 expect(spyDBoneOrNone).toBeCalledWith(getValidationHoursForText, [language, textType])
             });
 
             test('should call getValidationHoursForAsr for type asr validate', async () => {
-                when(spyDBoneOrNone).calledWith(getValidationHoursForAsr, [language, asrType]).mockReturnValue({amount: 10})
+                when(spyDBoneOrNone).calledWith(getValidationHoursForAsr, [language, asrType]).mockReturnValue({ amount: 10 })
                 await dbOperations.getRewards(userId, userName, language, categoryValidate, asrType);
                 expect(spyDBoneOrNone).toBeCalledWith(getValidationHoursForAsr, [language, asrType])
             });
         })
     });
+
+    describe('Test language-goal', () => {
+
+        test('should call getLanguageGoalQuery and return goal', async () => {
+            const goal = 100;
+            const type = 'text', language = 'Hindi', source = 'contribute';
+            const mockSend = { send: jest.fn() };
+            const mockStatus = { status: jest.fn().mockReturnValue(mockSend), send: jest.fn() };
+            const response = mockStatus;
+            const req = { params: { type, language, source } }
+
+            when(spyDBoneOrNone).calledWith(getLanguageGoalQuery, [source, type, language]).mockReturnValue({ goal });
+
+            await dbOperations.languageGoal(req, response);
+
+            expect(mockStatus.status).toBeCalledWith(200)
+            expect(mockSend.send).toBeCalledWith({ goal })
+        });
+    })
 
     describe('Test Update Tables after validation', () => {
         const datasetId = 1;

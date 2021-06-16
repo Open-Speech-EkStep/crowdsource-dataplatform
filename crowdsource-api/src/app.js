@@ -31,7 +31,8 @@ const {
     updateDbWithUserInput,
     getAvailableLanguages,
     getTargetInfo,
-    userVerify
+    userVerify,
+    languageGoal
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
@@ -395,7 +396,7 @@ router.get('/rewards-info', validateRewardsInfoInput, async (req, res) => {
     return res.status(404).send('Data not found');
 });
 
-router.get('/language-goal/:type/:language', validateLanguageGoalInput, (req, res) => res.sendStatus(200));
+router.get('/language-goal/:type/:language', validateLanguageGoalInput, (req, res) => languageGoal(req, res));
 
 router.get('/available-languages/:type', validateMediaTypeInput, (req, res) => getAvailableLanguages(req, res));
 
