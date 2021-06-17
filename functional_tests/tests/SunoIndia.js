@@ -130,24 +130,6 @@ step("When user clicks on Play button, Pause button should appear and when user 
     await taiko.waitFor(5500)
 });
 
-
-step("When user clicks on Play button, Pause button should appear and then one enters incorrect text and when user clicks on pause, resume should appear, Submit should not be enabled", async function() {
-    await taiko.waitFor(1000)
-    await click(taiko.image({ id: "play" }));
-    await taiko.waitFor(500)
-    await click(taiko.image({ id: "pause" }));
-    await taiko.waitFor(500)
-    await click(taiko.image({ id: "resume" }));
-    await taiko.waitFor(5500)
-
-    const editfield = taiko.textBox({ id: type })
-    await taiko.waitFor(500)
-    await write(txt, into(editfield))
-    assert.ok(! await button({ id: 'submit-edit-button' }).isDisabled())
-    assert.ok(! await button({ id: 'cancel-edit-button' }).isDisabled())
-});
-
-
 step("User clicks on Play button, and then on pause button, then clicks on <type> field and type <hinditext>, then resume, submit button should be disabled", async function(type, hinditext) {
     await taiko.waitFor(1000)
     await click(taiko.image({ id: "play" }));
