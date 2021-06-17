@@ -295,10 +295,21 @@ step("User plays the audio , <arg0>,<arg1> should be disabled", async function (
     await taiko.waitFor(1000)
     assert.ok( await taiko.button({ id: arg0 }).isDisabled());
     assert.ok( await taiko.button({ id: arg1 }).isDisabled());
+    const count = 10;
+    for(let i =0;i<=count;i++)
+    {
+        await taiko.waitFor(1000)
+        if(await taiko.image({id: "replay"}).isVisible())
+        {
+            console.log("indiside loop")
+            break;
+        }
+    }
     // Once the audio is complete , then correct button should be enabled
-    await taiko.waitFor(7000)
-    assert.ok(! await taiko.button({ id: arg0 }).isDisabled());
-    assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
+    // await taiko.waitFor( async () =>{ !(await taiko.$( "#replay").exists())});
+    //await taiko.waitFor(10000)
+    assert.ok(! (await taiko.button({ id: arg0 }).isDisabled()));
+    assert.ok(! (await taiko.button({ id: arg1 }).isDisabled()));
 });
 
 step("<arg0> should be enabled , <arg1> <arg2> buttons should be disabled", async function (arg0, arg1, arg2) {
