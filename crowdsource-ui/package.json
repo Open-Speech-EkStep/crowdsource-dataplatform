@@ -5,7 +5,8 @@
     "main": "",
     "scripts": {
         "gulp": "gulp",
-        "test": "jest"
+        "test": "jest",
+        "preinstall": "npx npm-force-resolutions"
     },
     "repository": {
         "type": "git",
@@ -30,7 +31,8 @@
         "jquery": "^3.5.1",
         "jsonwebtoken": "^8.5.1",
         "node-fetch": "^2.6.1",
-        "regenerator-runtime": "^0.13.7"
+        "regenerator-runtime": "^0.13.7",
+        "npm-force-resolutions": "0.0.10"
     },
     "engines": {
         "node": "12.16.0"
@@ -38,9 +40,10 @@
     "devDependencies": {
         "@babel/preset-env": "^7.12.11",
         "babelify": "^10.0.0",
+        "css-what": "^5.0.1",
         "del": "^5.1.0",
         "fetch-mock": "^9.11.0",
-        "shell-quote": "1.6.1",
+        "glob-parent": "^6.0.0",
         "gulp": "^4.0.2",
         "gulp-browserify": "^0.5.1",
         "gulp-clean-css": "^4.3.0",
@@ -50,11 +53,23 @@
         "gulp-minify": "^3.1.0",
         "gulp-replace-task": "^2.0.1",
         "jest": "^26.6.3",
-        "jest-when": "^3.2.1"
+        "jest-when": "^3.2.1",
+        "minimatch": "^3.0.4",
+        "normalize-url": "^6.0.1",
+        "shell-quote": "1.6.1",
+        "trim-newlines": "^4.0.2"
     },
     "jest": {
         "setupFiles": [
             "<rootDir>/test-env.js"
         ]
+    },
+    "resolutions": {
+        "shell-quote": "1.6.1",
+        "normalize-url": "5.3.1",
+        "trim-newlines": "4.0.1",
+        "css-what": "5.0.1",
+        "glob-parent": "5.1.2",
+        "minimatch": "3.0.2"
     }
 }
