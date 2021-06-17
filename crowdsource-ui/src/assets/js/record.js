@@ -257,7 +257,6 @@ const initialize = () => {
                 }, 21 * 1000);
             })
             .catch((err) => {
-                console.log(err);
                 notyf.error(
                     'Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission'
                 );
@@ -433,9 +432,7 @@ const initialize = () => {
             .then((res) => res.json())
             .then((result) => {
             })
-            .catch((err) => {
-                console.log(err);
-            })
+            .catch((err) => {})
             .then((finalRes) => {
                 if (cb && typeof cb === 'function') {
                     cb();
@@ -470,9 +467,7 @@ const initialize = () => {
             .then((res) => res.json())
             .then((result) => {
             })
-            .catch((err) => {
-                console.log(err);
-            })
+            .catch((err) => {})
             .then((finalRes) => {
                 if (cb && typeof cb === 'function') {
                     cb();
@@ -587,7 +582,7 @@ function executeOnLoad() {
     }).then(response => {
         localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);
-    }).catch(console.log);
+    }).catch((err) => {});
     try {
         const localSpeakerData = localStorage.getItem(speakerDetailsKey);
         const localSpeakerDataParsed = JSON.parse(localSpeakerData);
@@ -685,7 +680,6 @@ function executeOnLoad() {
                     initialize();
                 })
                 .catch((err) => {
-                    console.log(err);
                     $errorModal.modal('show');
                 })
                 .then(() => {
@@ -693,7 +687,6 @@ function executeOnLoad() {
                 });
         }
     } catch (err) {
-        console.log(err);
         $errorModal.modal('show');
     }
 }

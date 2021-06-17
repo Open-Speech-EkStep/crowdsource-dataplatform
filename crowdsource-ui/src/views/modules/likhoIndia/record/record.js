@@ -49,8 +49,6 @@ function uploadToServer(cb) {
     .then((result) => {
     })
     .catch((err) => {
-
-      console.log(err);
     })
     .then((finalRes) => {
       if (cb && typeof cb === 'function') {
@@ -132,9 +130,7 @@ function markContributionSkipped() {
     .then((res) => res.json())
     .then((result) => {
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch((err) => {})
 }
 
 function addListeners() {
@@ -188,9 +184,7 @@ function addListeners() {
         closeEditor();
         getNextSentence();
       }, 2000)
-    } catch (e) {
-      console.log(e)
-    }
+    } catch (e) {}
 
   })
 
@@ -391,7 +385,7 @@ function executeOnLoad() {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch(console.log);
+  }).catch((err) => {});
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
@@ -482,7 +476,6 @@ function executeOnLoad() {
           initialize();
         })
         .catch((err) => {
-          console.log(err);
           $errorModal.modal('show');
         })
         .then(() => {
@@ -490,7 +483,6 @@ function executeOnLoad() {
         });
     }
   } catch (err) {
-    console.log(err);
     $errorModal.modal('show');
   }
 }

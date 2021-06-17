@@ -20,6 +20,13 @@ const convertIntoMB = (fileSizeInByte) => {
     return Math.round(fileSizeInByte / (1024 * 1000));
 }
 
+function isValidLanguage(language) {
+    const validLanguages = LANGUAGES.map((item) =>
+        item.value
+    )
+    return validLanguages.includes(language)
+}
+
 const validateUserInputAndFile = function (req, res, next) {
     const speakerDetails = req.body.speakerDetails;
     const speakerDetailsJson = JSON.parse(speakerDetails);
@@ -83,8 +90,8 @@ const validateUserInputForFeedback = function (req, res, next) {
     const feedback = req.body.feedback;
     const category = req.body.category;
     const language = req.body.language;
-    const module = req.body.module; 
-    const target_page = req.body.target_page; 
+    const module = req.body.module;
+    const target_page = req.body.target_page;
     const opinion_rating = parseInt(req.body.opinion_rating);
 
     const allLanguages = LANGUAGES.map(lang => lang.value)
@@ -96,7 +103,7 @@ const validateUserInputForFeedback = function (req, res, next) {
     const invalidFeedback = !(feedback || feedback.trim().length == 0) || feedback.trim().length > FEEDBACK_MAX_LENGTH;
 
     const invalidModule = (!module || !module.trim().length)
-    
+
     const invalidTargetPage = (!target_page || !target_page.trim().length)
 
     const invalidOpinionRating = (!opinion_rating || !(opinion_rating >= 1) || !(opinion_rating <= 5))
@@ -145,6 +152,20 @@ const validateRewardsInfoInput = (req, res, next) => {
     next();
 }
 
+const validateLanguageGoalInput = (req, res, next) => {
+    const type = req.params ? req.params.type : null;
+    const language = req.params ? req.params.language : null;
+    const source = req.params ? req.params.source : null;
+    const validMediaType = MEDIA_TYPES.includes(type);
+    const validLanguage = isValidLanguage(language)
+    const validSource = (source == 'contribute' || source == 'validate');
+    if (!validMediaType || !validLanguage || !validSource) {
+        return res.status(400).send('Invalid params.');
+    }
+
+    next();
+}
+
 const validateContributedMediaInput = (req, res, next) => {
     if (!(req.params && req.params.entityId && req.params.source && SOURCES.includes(req.params.source))) {
         return res.status(400).send('Invalid params.');
@@ -163,13 +184,10 @@ const validateInputsForValidateEndpoint = (req, res, next) => {
 }
 
 const validateGetContributionsInput = (req, res, next) => {
-    const validLanguages = LANGUAGES.map((item) =>
-        item.value
-    )
     const validUserId = (req.cookies && req.cookies.userId);
     const validMediaType = (req.params && req.params.type && MEDIA_TYPES.includes(req.params.type));
-    const validFromLanguage = (req.query && req.query.from && validLanguages.includes(req.query.from));
-    const validToLanguage = (req.query && req.query.to && validLanguages.includes(req.query.to));
+    const validFromLanguage = (req.query && req.query.from && isValidLanguage(req.query.from));
+    const validToLanguage = (req.query && req.query.to && isValidLanguage(req.query.to));
 
     if (!(validUserId && validMediaType && validFromLanguage && (req.params.type != 'parallel' || validToLanguage))) {
         res.status(400).send('Invalid params.');
@@ -194,10 +212,10 @@ const validateUserInfoForProfanity = (req, res, next) => {
     if (!req.query && !req.query.username) {
         return res.status(400).send("Invalid username");
     }
-    if(!validLanguages.includes(req.query.language)){
+    if (!validLanguages.includes(req.query.language)) {
         return res.status(400).send("Invalid language");
     }
     next();
 }
 
-module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoInput, validateContributedMediaInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput, validateUserInfoForProfanity }
+module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoInput, validateContributedMediaInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput, validateUserInfoForProfanity, validateLanguageGoalInput }

@@ -440,7 +440,7 @@ $(document).ready(() => {
     }).then(response => {
         localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);
-    }).catch(console.log);
+    }).catch((err) => {});
 
     $errorModal.on('show.bs.modal', function () {
         setFooterPosition();
@@ -504,7 +504,6 @@ $(document).ready(() => {
       );
       initializeComponent();
     }).catch((err) => {
-      console.log(err);
       $errorModal.modal('show');
     });
   }
