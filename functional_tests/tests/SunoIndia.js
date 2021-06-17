@@ -131,6 +131,38 @@ step("When user clicks on Play button, Pause button should appear and when user 
 });
 
 
+step("When user clicks on Play button, Pause button should appear and then one enters incorrect text and when user clicks on pause, resume should appear, Submit should not be enabled", async function() {
+    await taiko.waitFor(1000)
+    await click(taiko.image({ id: "play" }));
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "pause" }));
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "resume" }));
+    await taiko.waitFor(5500)
+
+    const editfield = taiko.textBox({ id: type })
+    await taiko.waitFor(500)
+    await write(txt, into(editfield))
+    assert.ok(! await button({ id: 'submit-edit-button' }).isDisabled())
+    assert.ok(! await button({ id: 'cancel-edit-button' }).isDisabled())
+});
+
+
+step("User clicks on Play button, and then on pause button, then clicks on <type> field and type <hinditext>, then resume, submit button should be disabled", async function(type, hinditext) {
+    await taiko.waitFor(1000)
+    await click(taiko.image({ id: "play" }));
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "pause" }));
+    const editfield = taiko.textBox({ id: type })
+    await taiko.waitFor(500)
+    await write(hinditext, into(editfield));
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "resume" }));
+    await taiko.waitFor(5500)
+    assert.ok(await button({ id: 'submit-edit-button' }).isDisabled());
+    await clear(editfield)
+});
+
 step("When user skips the rest of the <count> sentences , User should see Thank you Page", async function (count) {
     const skipbutton = taiko.button({ id: 'skip_button' })
     for (let i = 0; i < count; i++) {
@@ -197,6 +229,23 @@ step("User plays the audio , <needchange> should be enabled & <arg1> should be d
     // Once the audio is complete , then correct button should be enabled
     await taiko.waitFor(5000)
     assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
+});
+
+step("User clicks on Play button, and then on pause button, then clicks on <needchange>, then clicks on <edit> field and type <hinditext>, then resume, submit button should be disabled, then skip", async function(needchange, type, hinditext) {
+    await taiko.waitFor(1000)
+    await click(taiko.image({ id: "play" }));
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "pause" }));
+    await click(taiko.button({ id: needchange }))
+    await taiko.waitFor(500)
+    const editfield = taiko.textBox({ id: type })
+    await taiko.waitFor(500)
+    await write(hinditext, into(editfield));
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "resume" }));
+    await taiko.waitFor(5500)
+    assert.ok(await button({ id: 'submit-edit-button' }).isDisabled());
+    await click(taiko.button({ id: 'skip_button' }))
 });
 
 step("Validate Thank you page content for Suno India", async function() {

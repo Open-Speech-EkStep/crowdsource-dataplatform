@@ -116,7 +116,6 @@ const setAudioPlayer = function () {
     if($("#edit").val() && !previousActiveError[0]){
       $submitButton.removeAttr("disabled");
     }
-    $submitButton.removeAttr("disabled");
   });
 
   play.on('click', () => {
