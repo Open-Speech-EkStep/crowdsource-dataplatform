@@ -394,12 +394,12 @@ step("When user clicks on the Feedback icon, user should see the feedback popup"
     await click(taiko.button({ id: "feedback_button"}))
     await taiko.waitFor(1000)
     assert.ok(await text("We would like to get your feedback to improve this site").exists());
-    assert.ok(await text("Email").exists());
-    assert.ok(await text("Giving Feedback for?").exists());
-    assert.ok(await text("Select page").exists());
-    assert.ok(await text("What is your opinion of this page").exists());
-    assert.ok(await text("Please select your feedback category").exists());
-    assert.ok(await text("Share your feedback below").exists());
+    assert.ok(!await text("Email").isVisible());
+    assert.ok(!await text("Giving Feedback for?").isVisible());
+    assert.ok(!await text("Select page").isVisible());
+    assert.ok(await text("What is your opinion of this page").isVisible());
+    assert.ok(await text("Please select your feedback category").isVisible());
+    assert.ok(await text("Share your feedback below").isVisible());
 });
 
 step("Submit button should be disbaled, When user selects an opinion, submit button should be enabled", async function () {
