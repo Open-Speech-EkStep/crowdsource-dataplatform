@@ -30,8 +30,8 @@ $(document).ready(function(ev){
 
   $('#carouselExampleIndicators').on('slide.bs.carousel', function (evt) {
     const index = +$(evt.relatedTarget).index();
-    $('#carouselExampleIndicators .nav-tabs li a.active').removeClass('active');
-    $('#carouselExampleIndicators .nav-tabs li a:eq('+$(evt.relatedTarget).index()+')').addClass('active');
+    $('#carouselExampleIndicators .nav-tabs li.active').removeClass('active');
+    $('#carouselExampleIndicators .nav-tabs li:eq('+$(evt.relatedTarget).index()+')').addClass('active');
     $('#language-count').html(moduleList[index].total_languages);
     $('#language-goal-each').html(moduleList[index].goal_value + " " +moduleList[index].goal_label);
   })

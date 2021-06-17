@@ -25,50 +25,51 @@
 
 <body>
 <%- include('common/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
-<div class="container-fluid supreme-container">
-    <div class="row pb-lg-5 pb-md-5">
-        <div class="col-lg-6 col-md-8 col-12 mt-5 pl-lg-0 px-5 ml-lg-auto order-lg-0 order-md-0 order-sm-1 order-1">
+<div class="container-fluid supreme-container p-0">
+    <div class="platform-intro-section-cover">
+    <div class="row pb-lg-5 pb-md-5 platform-intro-section">
+        <div class="col-lg-8 col-md-8 col-12 mt-lg-5 mt-md-5 pl-lg-0 px-5 order-lg-0 order-md-0 order-sm-1 order-1">
             <h4 class="display-5 font-weight-bolder lh-4"><%= __('[Platform Name] ') %></h4>
             <h4 class="display-5 font-weight-bolder lh-4"><%= __('A Crowdsourcing initiative for Indian Languages') %></h4>
-            <p class="h6 lh-7 font-weight-normal text-justify mt-lg-4 mt-md-4 pt-lg-3 pt-md-3"><%= __('[Bhaashini] aims to create open collections of data for initiatives, such as, Speech Recognition, Translations and OCR, in popular Indian languages. These initiatives will help in empowering our technologists, language enthusiasts and language communities in building world class digital applications in our own local languages.') %></p>
-            <p class="h6 font-weight-normal lh-7 text-justify mb-lg-0 mb-md-0"><%= __('Help India build their own open data repository and become atma-nirbhar in the digital space.') %></p>
-            <button class="btn mt-lg-4 mt-md-4 btn-custom-primary rounded-pill" style="height:48px">
-                <a class="text-decoration-none text-light font-weight-normal" href="./about-us.html" style="font-size:18px"><%= __("Know More") %></a></button>
+            <p class="h6 lh-7 font-weight-normal text-justify mt-lg-4 mt-md-4 pt-lg-3 pt-md-3 mt-4 pt-1"><%= __('[Bhaashini] aims to create open collections of data for initiatives, such as, Speech Recognition, Translations and OCR, in popular Indian languages. These initiatives will help in empowering our technologists, language enthusiasts and language communities in building world class digital applications in our own local languages.') %></p>
+            <p class="h6 font-weight-normal lh-7 text-justify mb-lg-0 mb-md-0 mb-1"><%= __('Help India build their own open data repository and become atma-nirbhar in the digital space.') %></p>
+            <button class="btn mt-lg-4 mt-md-4 mt-5 btn-custom-primary rounded-pill">
+                <a class="text-decoration-none text-light font-weight-normal" href="./about-us.html"><%= __("Know More") %></a></button>
         </div>
         <div class="col-lg-4 col-md-4 col-12 align-self-center text-right p-0 mt-lg-5 mt-md-5" id="home-banner">
-            <img src="../img/waveAndLang.png" alt="home image" height="595px" class="img-fluid">
+            <img src="../img/waveAndLang.png" alt="home image" height="595" class="img-fluid">
         </div>
     </div>
-    <div class="row mt-5 mt-lg-0 pb-lg-4 pb-md-4" style="border:2px solid #f0f0f7;background:rgba(223,236,251,.2)">
-        <div class="col-12 justify-content-center text-center px-5">
-            <h1 class="mt-5 display-5 font-weight-bolder lh-4"><%= __('One Platform, 4 Crowdsourcing Initiatives') %></h1>
-            <p class="mt-4 font-weight-normal" style="font-size:24px;font-style:normal;color:#666"><%= __('Help create open repository of Speech Recognition data, Parallel translations and Labeled Images.') %></p>
+    </div>
+    <div class="row mt-5 mt-lg-0 pb-lg-4 pb-md-4 mx-0" style="border:2px solid #f0f0f7;background:rgba(223,236,251,.2)">
+        <div class="col-12 justify-content-center text-center px-lg-5 px-md-5 px-4">
+            <h1 class="mt-5 display-5 font-weight-bolder lh-4 platform-card-section-heading"><%= __('One Platform, 4 Crowdsourcing Initiatives') %></h1>
+            <p class="mt-4 font-weight-normal platform-card-section-para"><%= __('Help create open repository of Speech Recognition data, Parallel translations and Labeled Images.') %></p>
             <%- include ../../build/views/common/carousel.ejs %>
-            <div class="mt-lg-4 mt-md-4 mb-lg-3 mb-md-3" style="padding:11px;background:#fff;max-width:1200px;margin:auto;border-radius:32px;border:1px solid rgba(0,123,255,.2);box-shadow:inset 0 0 12px rgba(0,123,255,.2)">
-                <p class="m-0" style="color:#666;font-size:20px;line-height:32px"><%= __('Monthly Goal* :  ') %><span id="language-count"></span><%= __(' languages') %> &nbsp; &nbsp; <span id="language-goal-each"></span> <%= __('each') %></p>
+            <div class="mt-lg-4 mt-md-4 mb-lg-3 mb-md-3 mt-3 mb-4 monthly-goal-section">
+                <span class="m-0 monthly-goal-text"><%= __('Monthly Goal :  ') %></span><span><span class="language-count-box"><span id="language-count"></span><%= __(' languages') %></span><span class="separator"></span><span class="language-goal-box"> <span id="language-goal-each"></span> <%= __('each') %></span></span>
             </div>
         </div>
     </div>
 
     <div class="mb-5" id="badge-section">
         <div class="row my-2 mx-lg-0 mx-md-0">
-            <div class="my-4 my-lg-5 col-sm home-badge-link p-0">
+            <div class="my-4 mt-lg-5 mt-md-5 mb-lg-0 mb-md-0 col-sm home-badge-link p-lg-0 p-md-0">
                 <div class="font-weight-normal home-badge-link-row"> <%= __('Engaging with this platform will win you badges and pride for building the data in local Languages') %></div>
-                <div class="text-primary font-weight-bold home-badge-link-row mt-lg-4 pt-lg-2 mt-md-4 pt-lg-2"><a href="./badges.html"><%= __('Know More') %></a></div>
             </div>
-            <div class="my-4 my-lg-5 col-sm home-badge-row">
-                <img src="../img/bronze_medal.svg" alt="bronze_medal" height="164px" width="135px">
-                <img src="../img/silver_medal.svg" alt="silver_medal" height="164px" width="135px">
-                <img src="../img/gold_medal.svg" alt="gold_medal" height="164px" width="135px">
-                <img src="../img/platinum_medal.svg" alt="platinum_medal" height="164px" width="135px">
+            <div class="my-4 mt-lg-5 mt-md-5 mb-lg-0 mb-md-0 col-sm home-badge-row text-center">
+                <img src="../img/badge_group.svg" alt="bronze_medal">
+            </div>
+            <div class="col-12 mb-lg-5 mb-md-5 mb-5 p-0">
+                <div class="text-primary text-lg-left text-md-left text-center font-weight-bold home-badge-link-row2"><a href="./badges.html"><%= __('Know More') %></a></div>
             </div>
         </div>
         <div class="row p-0 mx-0" id="badge-section-card-cover">
-            <div class="col-12 row mx-0" id="badge-section-card">
+            <div class="col-12 row mx-0 px-0" id="badge-section-card">
                 <div class="col-lg-2 col-12 text-lg-left text-md-left text-center">
                     <img src="../img/bronze_medal.svg" alt="home image" height="164px" width="135px" class="img-fluid mx-2">
                 </div>
-                <div class="col-lg-10 col-md-10 col-12 text-lg-left text-md-left text-center">
+                <div class="col-lg-10 col-md-10 col-12 text-lg-left text-md-left text-center mx-0 px-0">
                     <h2 class="pt-lg-4 pt-3"><%= __('Win a Bronze badge')%></h2>
                     <h4 class="font-weight-normal mb-lg-2 mb-mt-1" style="color:#666"><%= __('Contribute just 5 sentences in your languages')%></h4>
                     <div class="pb-4 pt-3">
