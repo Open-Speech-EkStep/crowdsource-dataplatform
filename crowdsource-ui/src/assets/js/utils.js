@@ -173,16 +173,25 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
 
 const formatTime = function (hours, minutes = 0, seconds = 0) {
   let result = "";
+  
   if (hours > 0) {
-    result += `${hours} hrs `;
+    result += `${hours}h `;
   }
   if (minutes > 0) {
-    result += `${minutes} min `;
+    result += `${minutes}m `;
   }
   if (hours === 0 && minutes === 0 && seconds > 0) {
-    result += `${seconds} sec `;
+    result += `${seconds}s `;
   }
-  return result.substr(0, result.length - 1);
+
+  if(hours === 0 && minutes === 0 && seconds === 0){
+    result += '0s ';
+  }
+
+  if(result.charAt(result.length - 1 ) !== ' ')
+    return result.substr(0, result.length);
+  else 
+    return result.substr(0, result.length - 1);
 };
 
 const setFooterPosition = () => {

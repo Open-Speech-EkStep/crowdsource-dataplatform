@@ -257,8 +257,8 @@ step("When user clicks on View all Details buttton , user shall land on Dashboar
     await taiko.waitFor(1000)
     assert.ok(await text("Languages").exists());
     assert.ok(await text("Speakers contributed").exists());
-    assert.ok(await text("Hrs recorded").exists());
-    assert.ok(await text("Hrs validated").exists());
+    assert.ok(await text("Duration contributed").exists());
+    assert.ok(await text("Duration validated").exists());
 });
 
 step("When user select <lang> Language from dropdown then <arg0> should not visible", async function (lang, arg0) {

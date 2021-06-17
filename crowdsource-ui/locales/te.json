@@ -473,5 +473,8 @@
 	"Input Feild can not be empty. Suggest correct edit to the text.": "Input Feild can not be empty. Suggest correct edit to the text.",
 	"Numbers are not allowed": "Numbers are not allowed",
 	"Special characters are not allowed": "Special characters are not allowed",
-	"Input Field can not be empty": "Input Field can not be empty"
+	"Input Field can not be empty": "Input Field can not be empty",
+	"Duration validated": "Duration validated",
+	"Duration transcribed": "Duration transcribed",
+	"Duration contributed": "Duration contributed"
 }

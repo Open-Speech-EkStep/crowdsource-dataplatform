@@ -1,5 +1,5 @@
 const fetch = require('./fetch')
-const { calculateTime } = require('./utils');
+const { calculateTime, formatTime } = require('./utils');
 const { CURRENT_MODULE, MODULE } = require('./constants');
 
 const $chartRow = $('.chart-row');
@@ -26,30 +26,30 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
       chartData[i].year = String(chartData[i].year);
       const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(chartData[i].cumulative_contributions) * 60 * 60), true);
       const { hours: vHours, minutes: vMinutes, seconds: vSeconds } = calculateTime((Number(chartData[i].cumulative_validations) * 60 * 60), true);
-      chartData[i].contributedHours = currentModule == "dekho" || currentModule == "likho" ? chartData[i].total_contribution_count :  `${cHours}hrs ${cMinutes}mins ${cSeconds}secs`;
-      chartData[i].validatedHours = currentModule == "dekho" || currentModule == "likho" ? chartData[i].total_validation_count : `${vHours}hrs ${vMinutes}mins ${vSeconds}secs`;
+      chartData[i].contributedHours = currentModule == "dekho" || currentModule == "likho" ? chartData[i].total_contribution_count :  formatTime(cHours, cMinutes, cSeconds);
+      chartData[i].validatedHours = currentModule == "dekho" || currentModule == "likho" ? chartData[i].total_validation_count : formatTime(vHours, vMinutes, vSeconds);
     }
 
     let tooltipContent
     if(currentModule == MODULE.suno.value){
-    tooltipContent = `<div>
+    tooltipContent = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div>Transcribed: <label>{contributedHours}</label></div>
                 <div style="text-align: left; font-style: italic;">Validated: <label>{validatedHours}</label></div>
             </div>`;
     }
     if(currentModule == MODULE.likho.value){
-      tooltipContent = `<div>
+      tooltipContent = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
-                <div>Translated: <label>{contributedHours}</label></div>
+                <div style="text-align: left;">Translated: <label>{contributedHours}</label></div>
                 <div style="text-align: left; font-style: italic;">Validated: <label>{validatedHours}</label></div>
             </div>`;
     }
 
     if(currentModule == MODULE.dekho.value){
-      tooltipContent = `<div>
+      tooltipContent = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
-                <div>Labelled: <label>{contributedHours}</label></div>
+                <div style="text-align: left;">Labelled: <label>{contributedHours}</label></div>
                 <div style="text-align: left; font-style: italic;">Validated: <label>{validatedHours}</label></div>
             </div>`;
     }

@@ -1,42 +1,42 @@
 const { calculateTime, formatTime, performAPIRequest } = require('./utils');
 
 const statesInformation = [
-  { id: 'IN-TG', state: 'Telangana', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-AN', state: 'Andaman and Nicobar Islands', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-AP', state: 'Andhra Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-AR', state: 'Arunachal Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-AS', state: 'Assam', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-BR', state: 'Bihar', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-CT', state: 'Chhattisgarh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-GA', state: 'Goa', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-GJ', state: 'Gujarat', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-HR', state: 'Haryana', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-HP', state: 'Himachal Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-JK', state: 'Jammu & Kashmir', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-JH', state: 'Jharkhand', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-KA', state: 'Karnataka', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-KL', state: 'Kerala', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-LD', state: 'Lakshadweep', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-MP', state: 'Madhya Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-MH', state: 'Maharashtra', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-MN', state: 'Manipur', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-CH', state: 'Chandigarh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-PY', state: 'Puducherry', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-PB', state: 'Punjab', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-RJ', state: 'Rajasthan', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-SK', state: 'Sikkim', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-TN', state: 'Tamil Nadu', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-TR', state: 'Tripura', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-UP', state: 'Uttar Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-UT', state: 'Uttarakhand', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-WB', state: 'West Bengal', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-OR', state: 'Odisha', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-DNDD', state: 'Dadra and Nagar Haveli and Daman and Diu', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-ML', state: 'Meghalaya', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-MZ', state: 'Mizoram', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-NL', state: 'Nagaland', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-DL', state: 'National Capital Territory of Delhi', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-LK', state: 'Ladakh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 }
+  { id: 'IN-TG', state: 'Telangana', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-AN', state: 'Andaman and Nicobar Islands', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-AP', state: 'Andhra Pradesh', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-AR', state: 'Arunachal Pradesh', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-AS', state: 'Assam', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-BR', state: 'Bihar', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-CT', state: 'Chhattisgarh', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-GA', state: 'Goa', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-GJ', state: 'Gujarat', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-HR', state: 'Haryana', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-HP', state: 'Himachal Pradesh', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-JK', state: 'Jammu & Kashmir', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-JH', state: 'Jharkhand', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-KA', state: 'Karnataka', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-KL', state: 'Kerala', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-LD', state: 'Lakshadweep', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-MP', state: 'Madhya Pradesh', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-MH', state: 'Maharashtra', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-MN', state: 'Manipur', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-CH', state: 'Chandigarh', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-PY', state: 'Puducherry', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-PB', state: 'Punjab', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-RJ', state: 'Rajasthan', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-SK', state: 'Sikkim', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-TN', state: 'Tamil Nadu', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-TR', state: 'Tripura', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-UP', state: 'Uttar Pradesh', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-UT', state: 'Uttarakhand', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-WB', state: 'West Bengal', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-OR', state: 'Odisha', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-DNDD', state: 'Dadra and Nagar Haveli and Daman and Diu', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-ML', state: 'Meghalaya', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-MZ', state: 'Mizoram', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-NL', state: 'Nagaland', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-DL', state: 'National Capital Territory of Delhi', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 },
+  { id: 'IN-LK', state: 'Ladakh', contributed_time: "0 s", validated_time: "0 s", total_speakers: 0 }
 ]
 
 let polygonSeries = undefined;
@@ -70,8 +70,8 @@ const drawMap = function (response, moduleType) {
         minutes: vMinutes,
         seconds: vSeconds,
       } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
-      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
-      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_validation_count) : `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
+      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : formatTime(cHours,cMinutes,cSeconds);
+      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_validation_count) : formatTime(vHours,vMinutes,vSeconds);
       st.value = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
       st.total_speakers = ele.total_speakers;
       st.id = st.id;
@@ -83,9 +83,39 @@ const drawMap = function (response, moduleType) {
       st.total_speakers = 0;
     }
   });
-  const sunoTooltip = `<div style="text-align: left;"><h6>{state}</h6> <div style="text-align: left;">{total_speakers} People  <label style="margin-left: 32px">Hrs transcribed: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div style="text-align: left;">Hrs validate:  <label style="margin-left: 8px">{validated_time}</label></div></div>`
-  const likhoTooltip = `<div style="text-align: left;"><h6>{state}</h6> <div style="text-align: left;">{total_speakers} People  <label style="margin-left: 32px">Translations done: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div style="text-align: left;">Translations validated:  <label style="margin-left: 8px">{validated_time}</label></div></div>`
-  const dekhoTooltip = `<div style="text-align: left;"><h6>{state}</h6> <div style="text-align: left;">{total_speakers} People  <label style="margin-left: 32px">Images labelled: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div style="text-align: left;">Images validated:  <label style="margin-left: 8px">{validated_time}</label></div></div>`
+  const sunoTooltip = `<div style="text-align: left;">
+                          <h6>{state}</h6> 
+                          <div style="text-align: left;">{total_speakers} People</div>
+                          <div style="text-align: left;">
+                            <label>Transcribed: </label>
+                            <label style="margin-left: 8px">{contributed_time}</label>
+                          </div>
+                          <div style="text-align: left;">
+                            Validated:  <label style="margin-left: 8px">{validated_time}</label>
+                          </div>
+                        </div>`
+  const likhoTooltip = `<div style="text-align: left;">
+                          <h6>{state}</h6> 
+                          <div style="text-align: left;">{total_speakers} People</div>
+                          <div style="text-align: left;">
+                            <label>Translations done: </label>
+                            <label style="margin-left: 8px">{contributed_time}</label>
+                          </div> 
+                          <div style="text-align: left;">Translations validated:  
+                            <label style="margin-left: 8px">{validated_time}</label>
+                          </div>
+                        </div>`
+  const dekhoTooltip = `<div style="text-align: left;">
+                          <h6>{state}</h6> 
+                          <div style="text-align: left;">{total_speakers} People</div>
+                          <div style="text-align: left;">
+                            <label>Images labelled: </label> 
+                            <label style="margin-left: 8px">{contributed_time}</label>
+                          </div> 
+                          <div style="text-align: left;">Images validated:
+                            <label style="margin-left: 8px">{validated_time}</label>
+                          </div>
+                        </div>`
   let toolTipContent = sunoTooltip;
   if(moduleType === "parallel"){
     toolTipContent = likhoTooltip;
@@ -231,7 +261,7 @@ function getStatistics(response) {
   const { hours, minutes, seconds } = calculateTime(
     Number(response.total_contributions) * 60 * 60
   );
-  $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
+  $speakersDataHoursValue.text(formatTime(hours,minutes,seconds));
   $speakersDataSpeakerValue.text(response.total_speakers);
   $speakersDataLanguagesValue.text(response.total_languages);
   $speakersDataLoader.addClass("d-none");
