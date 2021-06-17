@@ -122,6 +122,15 @@ gulp.task('js', function () {
           },
         ],
       })
+    ).pipe(
+      replace({
+        patterns: [
+          {
+            match: 'feedbackTopComponent',
+            replacement: settings.feedbackTopComponent,
+          },
+        ],
+      })
     )
     .pipe(gulp.dest('target/js'));
 });
@@ -184,6 +193,15 @@ function jsGulp(moduleName) {
           {
             match: 'whitelistingEmail',
             replacement: settings.whitelistingEmail,
+          },
+        ],
+      })
+    ).pipe(
+      replace({
+        patterns: [
+          {
+            match: 'feedbackTopComponent',
+            replacement: settings.feedbackTopComponent,
           },
         ],
       })
