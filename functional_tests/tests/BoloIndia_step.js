@@ -404,9 +404,9 @@ step("When user clicks on the Feedback icon, user should see the feedback popup"
 
 step("Submit button should be disbaled, When user selects an opinion, submit button should be enabled", async function () {
     await taiko.waitFor(500)
-    const usernameFiled = taiko.textBox({ id: 'email' })
-    await taiko.waitFor(500)
-    await write('TestUser', into(usernameFiled))
+    // const usernameFiled = taiko.textBox({ id: 'email' })
+    // await taiko.waitFor(500)
+    // await write('TestUser', into(usernameFiled))
     assert.ok(await taiko.button({ id: "submit_btn" }).isDisabled());
     await click(taiko.$("#very_happy_label"));
     assert.ok(! await taiko.button({ id: "submit_btn" }).isDisabled());
