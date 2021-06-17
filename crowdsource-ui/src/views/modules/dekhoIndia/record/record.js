@@ -87,9 +87,7 @@ function markContributionSkipped() {
     .then((res) => res.json())
     .then((result) => {
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch((err) => {})
 }
 
 
@@ -117,9 +115,7 @@ function uploadToServer(cb) {
     .then((res) => res.json())
     .then((result) => {
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch((err) => {})
     .then((finalRes) => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -327,9 +323,7 @@ const getImage = function (contributionId) {
       }
       fileReader.readAsDataURL(blob);
     });
-  }).catch((err) => {
-    console.log(err)
-  });
+  }).catch((err) => {});
 }
 
 function showThankYou() {
@@ -441,7 +435,7 @@ const getLocationInfo = () => {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch(console.log);
+  }).catch((err) => {});
 }
 
 let selectedReportVal = '';
@@ -543,14 +537,12 @@ const executeOnLoad = function () {
         );
         initializeComponent();
       }).catch((err) => {
-        console.log(err);
         $errorModal.modal('show');
       }).then(() => {
       });
     }
 
   } catch (err) {
-    console.log(err);
     $errorModal.modal('show');
   }
 }

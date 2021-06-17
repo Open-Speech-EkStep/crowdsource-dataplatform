@@ -214,9 +214,7 @@ const showSpeakersHoursData = (speakerDetailsValue) => {
 
     $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
     setTotalProgressBar(totalSeconds);
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 };
 
 const getFormattedTime = (totalSeconds) => {
