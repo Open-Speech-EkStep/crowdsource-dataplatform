@@ -112,7 +112,8 @@ const setAudioPlayer = function () {
     hideElement(textResume);
     showElement(textReplay);
     localStorage.setItem("validation_audioPlayed", true);
-    if($("#edit").val()){
+    const previousActiveError = $("#edit-error-text .error-active");
+    if($("#edit").val() && !previousActiveError[0]){
       $submitButton.removeAttr("disabled");
     }
     $submitButton.removeAttr("disabled");
@@ -346,6 +347,8 @@ function addListeners() {
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
     hideElement($('#edit-error-row'))
+    const previousActiveError = $("#edit-error-text .error-active");
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
     $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     setInput("");
     closeEditor();
@@ -401,6 +404,8 @@ function addListeners() {
     showElement($('#sentences-row'));
     showElement($('#progress-row'))
     hideElement($('#edit-error-row'))
+    const previousActiveError = $("#edit-error-text .error-active");
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
     $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     closeEditor();
   })
@@ -574,7 +579,7 @@ $(document).ready(() => {
   setFooterPosition();
   showKeyboard(contributionLanguage.toLowerCase(), () => {
   }, () => {
-  }, 'validation');
+  }, 'validation_audioPlayed');
   hideElement($('#keyboardBox'));
   toggleFooterPosition();
   setPageContentHeight();
