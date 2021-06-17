@@ -102,8 +102,8 @@ const enableSubmit = function () {
     const target_page = $("#select_page_id");
     const opinion_rating = $("#opinionRadio");
     $('input[name="opinionRadio"]').on('change', () => {
-
-        if($('input[name="opinionRadio"]').is(':checked') && $('#email').val().length > 0)
+        const isEmailValid = $('#email').val().length > 0 || feedback_top_component === 'false';
+        if($('input[name="opinionRadio"]').is(':checked') && isEmailValid)
         {    
             $("#submit_btn").attr('disabled', false);
         }
@@ -111,16 +111,17 @@ const enableSubmit = function () {
             $("#submit_btn").attr('disabled', true);
         }
     })    
-    
-    $('#email').on('input', () => {
-        if($('input[name="opinionRadio"]').is(':checked') && $('#email').val().length > 0)
-        {    
-            $("#submit_btn").attr('disabled', false);
-        }
-        else {
-            $("#submit_btn").attr('disabled', true);
-        }
-    })
+    if(feedback_top_component === 'true'){
+        $('#email').on('input', () => {
+            if($('input[name="opinionRadio"]').is(':checked') && $('#email').val().length > 0)
+            {    
+                $("#submit_btn").attr('disabled', false);
+            }
+            else {
+                $("#submit_btn").attr('disabled', true);
+            }
+        })
+    }
 }
 
 const handleFeedbackSubmit = () => {
@@ -159,7 +160,6 @@ const handleFeedbackSubmit = () => {
     fd.append('module', moduleType);
     fd.append('target_page', targetPage);
     fd.append('opinion_rating', rating);
-    
     fetch("/feedback", {
         method: "POST",
         credentials: 'include',
