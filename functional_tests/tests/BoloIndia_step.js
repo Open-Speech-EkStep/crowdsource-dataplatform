@@ -309,7 +309,7 @@ step("User skips the next <count> sentences user should land on Thank you page i
     const skipbutton = taiko.button({ id: 'skip_button' })
     for (let i = 0; i < count; i++) {
         await click(skipbutton)
-        await taiko.waitFor(1200)
+        await taiko.waitFor(2000)
     }
 
     if (lang == "Hindi") {
@@ -317,7 +317,7 @@ step("User skips the next <count> sentences user should land on Thank you page i
         assert.ok(await text('प्रमाणित करने के लिए शुक्रिया!').exists());
     }
 
-    else {
+    if (lang == "English") {
         await taiko.waitFor(3000);
         assert.ok(await text('Thank you for validating').exists());
     }

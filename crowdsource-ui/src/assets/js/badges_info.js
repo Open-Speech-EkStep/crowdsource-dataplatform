@@ -60,9 +60,7 @@ $(document).ready(function () {
   const source='contribute'
   updateLocaleLanguagesDropdown(language);
   getLocaleString().then(() => {
-    performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then(renderBadgeDetails).catch((err) => {
-      console.log(err);
-    })
+    performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then(renderBadgeDetails).catch((err) => {})
   }).catch(() => {
     window.location.href = "/";
   })

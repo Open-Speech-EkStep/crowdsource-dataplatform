@@ -44,8 +44,17 @@
 * Navigate to "Validate" and add username "V1 User" then click Lets go
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be enabled
 * User should see the text "Is the translation correct?"
-* User skips the next "2" sentences user should land on Thank you page in "English"
-* When user clicks on Validate more button , user should see no data available message for "Likho" India
+* User skips the next "1" sentences user should land on Thank you page in "English"
+
+## Validate once user have skipped all sentences the same user should not be able to validate sentences again
+* Navigate to "Validate" button and click "Validate" button
+* if a user enter username and click on Not you change user button , the field should be cleared
+* Close button should close the pop up and user should see Likho India Home page
+* Navigate to "Validate" button and click "Validate" button
+* Add "V1 User" Username
+* When user click on Lets Go Button, user should "not" see instructions to record
+* User should see no data available message for Likho India
+
 
 ## Validate Validate flow
 * Select "ଓଡିଆ" Language from "from-language"

@@ -83,18 +83,13 @@ function updateLanguage(language) {
                       $('#no-data-found').addClass('d-none');
                   }, 5000);
               }
-          } catch (error) {
-              console.log(error);
-          }
+          } catch (error) {}
       })
-      .catch((err) => {
-          console.log(err);
-      });
+      .catch((err) => {});
 }
 
 
 $(document).ready(function () {
-    console.log(platform.name);
     if(platform.name == "Firefox") {
         $("#from-dash-language").css('text-indent', '-25px');
         $("#to-dash-language").css('text-indent', '-25px');
