@@ -23,6 +23,7 @@
 * Check "Validate" option should be "disabled" on Home page
 * Navigate to "Label" and add username "T User" then click Lets go
 * User should see add extension and watch video link
+* Check Data Source button should not be visible
 * User click on "edit" field and type "ବନମବନମହଜ2" submit and cancel button should be enabled
 * User clears the edit field should disable the buttons again
 * User click on "edit" field and type ";ବନମବନମହଜ" submit and cancel button should be enabled

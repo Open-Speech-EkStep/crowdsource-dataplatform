@@ -18,6 +18,7 @@ const {isKeyboardExtensionPresent, isMobileDevice, showOrHideExtensionCloseBtn} 
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {cdn_url} = require('../common/env-api');
 const {initializeFeedbackModal} = require('../common/feedback');
+const { setDataSource } = require('../common/sourceInfo');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -214,6 +215,7 @@ function getNextSentence() {
     const encodedUrl = encodeURIComponent(sunoIndiaValidator.sentences[currentIndex].sentence);
     localStorage.setItem("validation_audioPlayed", false);
     loadAudio(`${cdn_url}/${encodedUrl}`);
+    setDataSource(sunoIndiaValidator.sentences[currentIndex].source_info);
     resetValidation();
     setSentenceLabel(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
@@ -533,6 +535,7 @@ const initializeComponent = function () {
   if (audio) {
     const encodedUrl = encodeURIComponent(audio.sentence);
     loadAudio(`${cdn_url}/${encodedUrl}`);
+    setDataSource(audio.source_info);
     setSentenceLabel(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);

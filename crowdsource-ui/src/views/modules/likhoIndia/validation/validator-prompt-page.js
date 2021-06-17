@@ -15,6 +15,7 @@ const {showKeyboard, setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {showUserProfile} = require('../common/header');
+const { setDataSource } = require('../common/sourceInfo');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -136,6 +137,7 @@ function getNextSentence() {
     currentIndex++;
     updateProgressBar(currentIndex + 1, likhoIndiaValidator.sentences.length)
     setSentence(likhoIndiaValidator.sentences[currentIndex].sentence);
+    setDataSource(likhoIndiaValidator.sentences[currentIndex].source_info);
     setTranslation(likhoIndiaValidator.sentences[currentIndex].contribution);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
@@ -352,6 +354,7 @@ const initializeComponent = () => {
   addListeners();
   if (validationData) {
     setSentence(validationData.sentence);
+    setDataSource(validationData.source_info);
     setTranslation(validationData.contribution);
     setCapturedText(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);

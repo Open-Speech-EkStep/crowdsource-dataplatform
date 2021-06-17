@@ -18,6 +18,7 @@ const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showOrHideExtensionCloseBtn,isMobileDevice} = require('../common/common');
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
+const { setDataSource } = require('../common/sourceInfo');
 
 const { initializeFeedbackModal } = require('../common/feedback');
 const speakerDetailsKey = 'speakerDetails';
@@ -132,6 +133,7 @@ function getNextSentence() {
     updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length);
     const encodedUrl = encodeURIComponent(dekhoIndia.sentences[currentIndex].media_data);
     setDekhoImage(`${cdn_url}/${encodedUrl}`);
+    setDataSource(dekhoIndia.sentences[currentIndex].source_info);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
   } else {
@@ -422,6 +424,7 @@ const initializeComponent = () => {
   if (validationData) {
     const encodedUrl = encodeURIComponent(validationData.media_data);
     setDekhoImage(`${cdn_url}/${encodedUrl}`);
+    setDataSource(validationData.source_info);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length)

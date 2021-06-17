@@ -19,7 +19,8 @@ const {showUserProfile} = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
-const {initializeFeedbackModal} = require('../common/feedback')
+const { initializeFeedbackModal } = require('../common/feedback');
+const { setDataSource } = require('../common/sourceInfo');
 const sunoCountKey = 'sunoCount';
 const currentIndexKey = 'sunoCurrentIndex';
 const sentencesKey = 'sunoSentencesKey';
@@ -177,6 +178,7 @@ function getNextSentence() {
     const encodedUrl = encodeURIComponent(sunoIndia.sentences[currentIndex].media_data);
     localStorage.setItem("contribution_audioPlayed",false);
     loadAudio(`${cdn_url}/${encodedUrl}`);
+    setDataSource(sunoIndia.sentences[currentIndex].source_info);
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
@@ -492,6 +494,7 @@ const initialize = function () {
   if (audio) {
     const encodedUrl = encodeURIComponent(audio.media_data);
     loadAudio(`${cdn_url}/${encodedUrl}`);
+    setDataSource(audio.source_info);
     resetValidation();
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
