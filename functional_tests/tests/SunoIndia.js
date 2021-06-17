@@ -135,7 +135,7 @@ step("When user skips the rest of the <count> sentences , User should see Thank 
     const skipbutton = taiko.button({ id: 'skip_button' })
     for (let i = 0; i < count; i++) {
         await click(skipbutton)
-        await taiko.waitFor(500)
+        await taiko.waitFor(1200)
     }
     await taiko.waitFor(5000)
     assert.ok(await text('Thank you for contributing!').exists())
@@ -153,17 +153,10 @@ step("Check <card> option should be <state> on Home page", async function(card,s
         assert.ok(await text('Not collecting contributions for selected language').isVisible());
 
     }
-    if(card=="Correct"&& state=="disabled")
-    {
-        assert.ok(await text('No validation data available for selected language').isVisible());
-    }
+
     if(card=="Transcribe"&& state=="enabled")
     {
         assert.ok(! await text('Not collecting contributions for selected language').isVisible());
-    }
-    if(card=="Correct"&& state=="enabled")
-    {
-        assert.ok(! await text('No validation data available for selected language').isVisible());
     }
 
     if(card=="Label"&& state=="disabled")
