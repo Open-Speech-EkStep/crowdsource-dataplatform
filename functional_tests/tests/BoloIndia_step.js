@@ -21,7 +21,7 @@ const {
 } = require('taiko');
 const path = require('path');
 
-const headless = process.env.headless_chrome.toLowerCase() === 'true';
+const headless = process.env.headless_chrome.toLowerCase() === 'false';
 const testUrl = process.env.test_url || 'http://localhost:8080';
 
 beforeSuite(async () => {
