@@ -40,10 +40,11 @@
             <img src="../img/waveAndLang.png" alt="home image" height="595" class="img-fluid">
         </div>
     </div>
-    <div class="row mt-5 mt-lg-0">
-        <div class="col-12 justify-content-center text-center px-5" style="border:2px solid #f0f0f7;background:#dfecfb">
-            <h1 class="mt-5 display-5 font-weight-bolder lh-4"><%= __('One Platform, 4 Crowdsourcing Initiatives')%></h1>
-            <p class="mt-4"><%= __('Help create open repository of Speech Recognition data, Parallel translations and Labeled Images.')%></p>
+    </div>
+    <div class="row mt-5 mt-lg-0 pb-lg-4 pb-md-4 mx-0" style="border:2px solid #f0f0f7;background:rgba(223,236,251,.2)">
+        <div class="col-12 justify-content-center text-center px-lg-5 px-md-5 px-4">
+            <h1 class="mt-5 display-5 font-weight-bolder lh-4 platform-card-section-heading"><%= __('One Platform, 4 Crowdsourcing Initiatives') %></h1>
+            <p class="mt-4 font-weight-normal platform-card-section-para"><%= __('Help create open repository of Speech Recognition data, Parallel translations and Labeled Images.') %></p>
             <%- include ../../build/views/common/carousel.ejs %>
             <div class="mt-lg-4 mt-md-4 mb-lg-3 mb-md-3 mt-3 mb-4 monthly-goal-section">
                 <span class="m-0 monthly-goal-text"><%= __('Monthly Goal :  ') %></span><span><span class="language-count-box"><span id="language-count"></span><%= __(' languages') %></span><span class="separator"></span><span class="language-goal-box"> <span id="language-goal-each"></span> <%= __('each') %></span></span>
