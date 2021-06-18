@@ -86,6 +86,7 @@
 
 #platform_section .platform_card {
     background-image: url(../../img/NEW-WAVE.svg);
+    background-size: contain;
     max-width: 1200px;
     min-height: 400px;
     background-repeat: no-repeat;
@@ -115,7 +116,8 @@
     border-radius: 50%;
     background-color: #42b2c6;
     height: 130px;
-    width: 130px
+    width: 130px;
+    box-shadow: 0px 0px 12px 8px rgb(66 178 198 / 12%);
 }
 
 .image-text {
@@ -133,7 +135,8 @@
     border-radius: 50%;
     background-color: #3e6dd4;
     height: 130px;
-    width: 130px
+    width: 130px;
+    box-shadow: 0px 0px 12px 8px rgb(102 176 255 / 12%);
 }
 
 #carouselExampleIndicators .carousel-indicators {
@@ -285,6 +288,10 @@
 }
 
 @media (min-width: 769px) and (max-width: 1199px) {
+    .home-badge-row img{
+        height: 153px;
+    }
+
     #badge-section {
         padding-right: 45px !important;
         padding-left: 45px !important;
@@ -370,16 +377,21 @@
 }
 
 @media screen and (max-width: 699px) {
+    .separator{
+        opacity: 0.1;
+    }
     #platform_section{
         /*max-width: 320px !important;*/
         margin: auto
     }
     #platform_section .platform_card {
         background-image: url(../../img/mobile_wave.png) !important;
+        background-size: contain;
     }
 
     #badge-section-card {
         background-image: url(../../img/mobile_wave.png) !important;
+        background-size: contain;
     }
 
     #badge-section {
@@ -425,6 +437,7 @@
         line-height: 24px;
         text-align: center;
         color: #666666;
+        padding-left: 20px;
     }
 
     .home-badge-row img{
