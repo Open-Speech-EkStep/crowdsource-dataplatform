@@ -295,7 +295,7 @@ step("User plays the audio , <arg0>,<arg1> should be disabled", async function (
     await taiko.waitFor(1000)
     assert.ok( await taiko.button({ id: arg0 }).isDisabled());
     assert.ok( await taiko.button({ id: arg1 }).isDisabled());
-    const count = 10;
+    const count = 20;
     for(let i =0;i<=count;i++)
     {
         await taiko.waitFor(1000)
