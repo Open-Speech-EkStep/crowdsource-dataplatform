@@ -499,5 +499,8 @@
 	"Source Name": "Source Name",
 	"URL": "URL",
 	"If you are the copyright holder of this data and believe it should not be used in the platform please send us an email to <span class=\"email\">admin-support@crowdsourceplatform.gov</span><span class=\"tooltiptext\" id=\"myDataSourceTooltip\">Copy to clipboard</span> with evidence that you are indeed the copyright holder of this data.": "If you are the copyright holder of this data and believe it should not be used in the platform please send us an email to <span class=\"email\">admin-support@crowdsourceplatform.gov</span><span class=\"tooltiptext\" id=\"myDataSourceTooltip\">Copy to clipboard</span> with evidence that you are indeed the copyright holder of this data.",
-	"We will attempt to validate the same and remove the data from our platform within 15 days on a best effort basis.": "We will attempt to validate the same and remove the data from our platform within 15 days on a best effort basis."
+	"We will attempt to validate the same and remove the data from our platform within 15 days on a best effort basis.": "We will attempt to validate the same and remove the data from our platform within 15 days on a best effort basis.",
+	"Duration validated": "Duration validated",
+	"Duration transcribed": "Duration transcribed",
+	"Duration contributed": "Duration contributed"
 }

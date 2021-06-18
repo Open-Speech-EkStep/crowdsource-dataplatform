@@ -249,8 +249,8 @@ describe("setSpeakersData",()=> {
     setSpeakerData(data, "Hindi", "suno");
 
     expect($speakerDataLanguagesWrapper.hasClass('d-none')).toEqual(true);
-    expect($speakersDataContributionValue.text()).toEqual(`1h 13m 12s`);
-    expect($speakersDataValidationValue.text()).toEqual(`2h 39m 0s`);
+    expect($speakersDataContributionValue.text()).toEqual(`1h 13m`);
+    expect($speakersDataValidationValue.text()).toEqual(`2h 39m`);
     expect($speakersDataSpeakerValue.text()).toEqual(`80`);
   })
 
@@ -261,8 +261,8 @@ describe("setSpeakersData",()=> {
 
     expect($speakerDataLanguagesWrapper.hasClass('d-none')).toEqual(false);
     expect($speakerDataLanguagesValue.text()).toEqual('3');
-    expect($speakersDataContributionValue.text()).toEqual(`1h 13m 12s`);
-    expect($speakersDataValidationValue.text()).toEqual(`2h 39m 0s`);
+    expect($speakersDataContributionValue.text()).toEqual(`1h 13m`);
+    expect($speakersDataValidationValue.text()).toEqual(`2h 39m`);
     expect($speakersDataSpeakerValue.text()).toEqual(`80`);
   })
 
@@ -272,8 +272,8 @@ describe("setSpeakersData",()=> {
     setSpeakerData(data, "Hindi", "bolo");
 
     expect($speakerDataLanguagesWrapper.hasClass('d-none')).toEqual(true);
-    expect($speakersDataContributionValue.text()).toEqual(`1h 13m 12s`);
-    expect($speakersDataValidationValue.text()).toEqual(`2h 39m 0s`);
+    expect($speakersDataContributionValue.text()).toEqual(`1h 13m`);
+    expect($speakersDataValidationValue.text()).toEqual(`2h 39m`);
     expect($speakersDataSpeakerValue.text()).toEqual(`80`);
   })
 
@@ -284,8 +284,8 @@ describe("setSpeakersData",()=> {
 
     expect($speakerDataLanguagesWrapper.hasClass('d-none')).toEqual(false);
     expect($speakerDataLanguagesValue.text()).toEqual('3');
-    expect($speakersDataContributionValue.text()).toEqual(`1h 13m 12s`);
-    expect($speakersDataValidationValue.text()).toEqual(`2h 39m 0s`);
+    expect($speakersDataContributionValue.text()).toEqual(`1h 13m`);
+    expect($speakersDataValidationValue.text()).toEqual(`2h 39m`);
     expect($speakersDataSpeakerValue.text()).toEqual(`80`);
   })
 
