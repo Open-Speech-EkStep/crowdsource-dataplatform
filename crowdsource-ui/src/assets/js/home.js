@@ -2,7 +2,7 @@ const { showLanguagePopup, redirectToLocalisedPage } = require('./locale');
 const { onActiveNavbar } = require('./header');
 const {whitelisting_email} = require('./env-api')
 const { drawMap, getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest } = require('./utils')
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest, calculateTime, formatTime } = require('./utils')
 const {
     setSpeakerDetails,
     setUserModalOnShown,
@@ -18,7 +18,6 @@ const {
     setLetGoBtnOnClick
 } = require('./bolo_user_details');
 const { getContributedAndTopLanguage } = require('./common');
-
 const {
     DEFAULT_CON_LANGUAGE,
     TOP_LANGUAGES_BY_HOURS,
@@ -34,13 +33,24 @@ const updateLocaleText = function (total_contributions, total_validations, langu
     const $say_p_3 = $("#say-p-3");
     const $listen_p_3 = $("#listen-p-3");
     const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+    const {
+        hours: cHours,
+        minutes: cMinutes,
+        seconds: cSeconds
+    } = calculateTime(parseFloat(total_contributions).toFixed(3)*60*60);
+    const {
+        hours: vHours,
+        minutes: vMinutes,
+        seconds: vSeconds
+    } = calculateTime(parseFloat(total_validations).toFixed(3)*60*60);
+
     let hrsRecordedIn = localeStrings['hrs recorded in'];
-    hrsRecordedIn = hrsRecordedIn.replace("%hours", total_contributions);
+    hrsRecordedIn = hrsRecordedIn.replace("%hours", formatTime(cHours, cMinutes, cSeconds));
     hrsRecordedIn = hrsRecordedIn.replace("%language", language);
     $say_p_3.text(hrsRecordedIn);
 
     let hrsValidatedIn = localeStrings['hrs validated in'];
-    hrsValidatedIn = hrsValidatedIn.replace("%hours", total_validations);
+    hrsValidatedIn = hrsValidatedIn.replace("%hours", formatTime(vHours, vMinutes, vSeconds));
     hrsValidatedIn = hrsValidatedIn.replace("%language", language);
     $listen_p_3.text(hrsValidatedIn);
 }

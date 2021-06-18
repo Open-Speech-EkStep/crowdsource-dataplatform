@@ -72,8 +72,8 @@ step("User should see the top Language graph and other stats", async function() 
     assert.ok(await text("Your language and top 3 most contributed languages").exists());
     assert.ok(await text("Languages").exists());
     assert.ok(await text("People participated").exists());
-    assert.ok(await text("Hrs transcribed").exists());
-    assert.ok(await text("Hrs validated").exists());
+    assert.ok(await text("Duration transcribed").exists());
+    assert.ok(await text("Duration validated").exists());
 });
 
 // step("User details popup should appear and close button should close the pop up", async function() {
