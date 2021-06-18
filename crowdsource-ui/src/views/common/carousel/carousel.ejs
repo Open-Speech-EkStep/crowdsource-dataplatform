@@ -4,40 +4,23 @@
     <div style="background-image:url(../../img/NEW-WAVE.svg);max-width:1200px;min-height:400px;background-repeat:no-repeat;margin:auto;border-radius:32px;box-shadow:0 4px 12px rgb(0 123 255 / 20%);background-position-y:center">
         <div class="container-fluid">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
-                <ul class="nav nav-tabs border-0 mb-3">
-                    <div class="row m-0 w-100">
-                        <div class="col-lg-3 col-md-3">
-                            <li class="nav-item active" data-target="#carouselExampleIndicators" data-slide-to="0">
-                                <a class="nav-link" href="#">Suno India</a>
-                            </li>
-                        </div>
-                        <div class="col-lg-3 col-md-3">
-                            <li class="nav-item" data-target="#carouselExampleIndicators" data-slide-to="1">
-                                <a class="nav-link" href="#">Bolo India</a>
-                            </li>
-                        </div>
-                        <div class="col-lg-3 col-md-3">
-                            <li class="nav-item" data-target="#carouselExampleIndicators" data-slide-to="2">
-                                <a class="nav-link" href="#">Likho India</a>
-                            </li>
-                        </div>
-                        <div class="col-lg-3 col-md-3">
-                            <li class="nav-item" data-target="#carouselExampleIndicators" data-slide-to="3">
-                                <a class="nav-link" href="#">Dekho India</a>
-                            </li>
-                        </div>
-                    </div>
-                </ul>
-                <div id="platform_inner" class="carousel-inner">
+                <ul class="nav nav-tabs border-0 mb-3" role="tablist">
+                        <li role="presentation" class="active" data-target="#carouselExampleIndicators" data-slide-to="0"><a href="#" class="text-decoration-none" aria-controls="suno" role="tab" data-toggle="tab"><%= __('Suno India')%></a></li>
+                        <li role="presentation" data-target="#carouselExampleIndicators" data-slide-to="1"><a href="#" class="text-decoration-none" aria-controls="bolo" role="tab" data-toggle="tab"><%= __('Bolo India')%></a></li>
+                        <li role="presentation" data-target="#carouselExampleIndicators" data-slide-to="2"><a href="#" class="text-decoration-none" aria-controls="likho" role="tab" data-toggle="tab"><%= __('Likho India')%></a></li>
+                        <li role="presentation" data-target="#carouselExampleIndicators" data-slide-to="3"><a href="#" class="text-decoration-none" aria-controls="dekho" role="tab" data-toggle="tab"><%= __('Dekho India')%></a></li>
+                    </ul>
+                
+                <div id="platform_inner" class="carousel-inner mt-5 mt-lg-0 mt-md-0">
                     <div class="carousel-item active">
-                        <div class="row py-5 px-lg-4 px-md-4 px-0 m-0">
+                        <div class="row py-lg-5 py-md-5 pb-0 px-lg-4 px-md-4 px-0 m-0">
                             <div class="col-lg-4 col-md-4 col-12 p-0">
                                 <div class="text-lg-left text-md-left text-center">
                                     <h2>Suno India</h2>
-                                    <p class="label-text mb-4">Help your language by transcribing audio into text</p>
+                                    <p class="label-text mb-4 mt-lg-0 mt-md-0 mt-2">Help your language by transcribing audio into text</p>
                                 </div>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-12 p-0">
+                            <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
                                 <div class="row m-0">
                                     <div class="col-6 pl-lg-5 pl-md-5 p-0">
                                         <div class="suno-cont-image m-auto">
@@ -53,20 +36,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 p-0 text-lg-left text-md-left">
-                                <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0"><a class="text-decoration-none text-light" href="./sunoIndia/home.html"><%= __('Start Participating')%></a></button>
+                            <div class="col-12 p-0 text-lg-left text-md-left mt-3 mt-lg-0 mt-md-0">
+                                <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0 text-light" onclick='location.href="./sunoIndia/home.html"'><%= __('Start Participating')%></button>
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <div class="row py-5 px-lg-4 px-md-4 px-0 m-0">
+                        <div class="row py-lg-5 py-md-5 pb-0 px-lg-4 px-md-4 px-0 m-0">
                             <div class="col-lg-4 col-md-4 col-12 p-0">
                                 <div class="text-lg-left text-md-left text-center">
                                     <h2>Bolo India</h2>
-                                    <p class="label-text mb-4">Help your language by donating your voice</p>
+                                    <p class="label-text mb-4 mt-lg-0 mt-md-0 mt-2">Help your language by donating your voice</p>
                                 </div>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-12 p-0">
+                            <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
                                 <div class="row m-0">
                                     <div class="col-6 pl-lg-5 pl-md-5 p-0">
                                         <div class="suno-cont-image m-auto">
@@ -82,21 +65,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 p-0 text-lg-left text-md-left">
-                                <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0"><a class="text-decoration-none text-light" href="./boloIndia/home.html"><%= __('Start Participating')%></a></button>
+                            <div class="col-12 p-0 text-lg-left text-md-left mt-3 mt-lg-0 mt-md-0">
+                                <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0 text-light" onclick='location.href="./boloIndia/home.html"'><%= __('Start Participating')%></button>
                             </div>
                         </div>
                     </div>
 
                     <div class="carousel-item">
-                        <div class="row py-5 px-lg-4 px-md-4 px-0 m-0">
+                        <div class="row py-lg-5 py-md-5 pb-0 px-lg-4 px-md-4 px-0 m-0">
                             <div class="col-lg-4 col-md-4 col-12 p-0">
                                 <div class="text-lg-left text-md-left text-center">
                                     <h2>Likho India</h2>
-                                    <p class="label-text mb-4">Help your language by translating text</p>
+                                    <p class="label-text mb-4 mt-lg-0 mt-md-0 mt-2">Help your language by translating text</p>
                                 </div>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-12 p-0">
+                            <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
                                 <div class="row m-0">
                                     <div class="col-6 pl-lg-5 pl-md-5 p-0">
                                         <div class="suno-cont-image m-auto">
@@ -112,20 +95,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 p-0 text-lg-left text-md-left">
-                                <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0"><a class="text-decoration-none text-light" href="./likhoIndia/home.html"><%= __('Start Participating')%></a></button>
+                            <div class="col-12 p-0 text-lg-left text-md-left mt-3 mt-lg-0 mt-md-0">
+                                <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0 text-light" onclick='location.href="./likhoIndia/home.html"'><%= __('Start Participating')%></button>
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <div class="row py-5 px-lg-4 px-md-4 px-0 m-0">
+                        <div class="row py-lg-5 py-md-5 pb-0 px-lg-4 px-md-4 px-0 m-0">
                             <div class="col-lg-4 col-md-4 col-12 p-0">
                                 <div class="text-lg-left text-md-left text-center">
                                     <h2>Dekho India</h2>
-                                    <p class="label-text mb-4">Help your language by labelling images</p>
+                                    <p class="label-text mb-4 mt-lg-0 mt-md-0 mt-2">Help your language by labelling images</p>
                                 </div>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-12 p-0">
+                            <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
                                 <div class="row m-0">
                                     <div class="col-6 pl-lg-5 pl-md-5 p-0">
                                         <div class="suno-cont-image m-auto">
@@ -141,8 +124,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 p-0 text-lg-left text-md-left">
-                                <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0"><a class="text-decoration-none text-light" href="./dekhoIndia/home.html"><%= __('Start Participating')%></a></button>
+                            <div class="col-12 p-0 text-lg-left text-md-left mt-3 mt-lg-0 mt-md-0">
+                                <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0 text-light" onclick='location.href="./dekhoIndia/home.html"'><%= __('Start Participating')%></button>
                             </div>
                         </div>
                     </div>

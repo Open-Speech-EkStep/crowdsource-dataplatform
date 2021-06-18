@@ -25,11 +25,12 @@
 
 .platform-intro-section button{
     height:48px;
-}
-
-.platform-intro-section button a{
     font-size: 18px;
 }
+
+/*.platform-intro-section button a{*/
+/*    font-size: 18px;*/
+/*}*/
 
 .monthly-goal-section{
     padding-top:11px;
@@ -50,10 +51,6 @@
     color: #666666;
 }
 
-#carouselExampleIndicators .nav-tabs{
-  overflow-x: auto;
-}
-
 #badge-section-card-cover {
     box-shadow: 0 4px 12px 1px rgba(0, 0, 0, .08);
     border-radius: 12px;
@@ -72,11 +69,12 @@
     max-width:180px;
     min-width:180px;
     height:48px;
-}
-
-#badge-section-card button a{
     font-size: 18px;
 }
+
+/*#badge-section-card button a{*/
+/*    font-size: 18px;*/
+/*}*/
 
 .home-badge-row img{
     filter: drop-shadow(0px 4px 12px rgba(0, 123, 255, 0.2));
@@ -149,25 +147,25 @@
     background: #ddd
 }
 
-#carouselExampleIndicators .nav-tabs li a {
-    color: #666666 !important;
-    font-size: 24px;
-    line-height: 29px;
-    opacity: 0.4;
-    min-width: 160px;
-    max-width: 164px;
-}
+/*#carouselExampleIndicators .nav-tabs li a {*/
+/*    color: #666666 !important;*/
+/*    font-size: 24px;*/
+/*    line-height: 29px;*/
+/*    opacity: 0.4;*/
+/*    min-width: 160px;*/
+/*    max-width: 164px;*/
+/*}*/
 
-#carouselExampleIndicators .nav-tabs li.active a {
-    background: rgba(0, 123, 255, 0.1);
-    border-radius: 32px;
-    color: #007BFF !important;
-    font-weight: 700;
-    opacity: 1;
-    border-color: transparent;
-    min-height: 52px;
-    max-width: 164px !important;
-}
+/*#carouselExampleIndicators .nav-tabs li.active a {*/
+/*    background: rgba(0, 123, 255, 0.1);*/
+/*    border-radius: 32px;*/
+/*    color: #007BFF !important;*/
+/*    font-weight: 700;*/
+/*    opacity: 1;*/
+/*    border-color: transparent;*/
+/*    min-height: 52px;*/
+/*    max-width: 164px !important;*/
+/*}*/
 
 .home-badge-link{
     font-style:normal;
@@ -188,6 +186,71 @@
 #badge-section{
     max-width:1200px;
     margin:auto;
+}
+
+
+
+#carouselExampleIndicators .nav-tabs {
+    display: inline-flex;
+    width: 100%;
+    overflow-x: auto;
+    -ms-overflow-style: none; /*// IE 10+*/
+    overflow: -moz-scrollbars-none;/*// Firefox*/}
+
+#carouselExampleIndicators .nav-tabs>li {
+    margin: 0px 80px 0px 18px;
+}
+
+#carouselExampleIndicators .nav-tabs>li.active>a,
+#carouselExampleIndicators .nav-tabs>li.active>a:focus,
+#carouselExampleIndicators .nav-tabs>li.active>a:hover {
+    border-width: 0;
+}
+#carouselExampleIndicators .nav-tabs>li>a {
+    color: #666666 !important;
+    font-size: 24px;
+    line-height: 29px;
+    opacity: 0.4;
+    min-width: 160px;
+    max-width: 164px !important;
+    min-height: 52px;
+}
+
+#carouselExampleIndicators .nav-tabs>li.active>a{
+    background: rgba(0, 123, 255, 0.1);
+    border-radius: 32px;
+    color: #007BFF !important;
+    font-weight: 700;
+    opacity: 1;
+    border-color: transparent;
+}
+#carouselExampleIndicators .nav-tabs>li>a::after {
+    content: "";
+    height: 2px;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+}
+#carouselExampleIndicators .nav-tabs>li.active>a::after,
+#carouselExampleIndicators .nav-tabs>li:hover>a::after {
+    transform: scale(1);
+}
+.tab-nav>li>a::after {
+    background: #21527d none repeat scroll 0% 0%;
+    color: #fff;
+}
+
+#carouselExampleIndicators .nav-tabs::-webkit-scrollbar {
+    display: none; /*Safari and Chrome*/
+}
+
+#carouselExampleIndicators .nav>li>a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+#carouselExampleIndicators .nav{
+    flex-wrap: inherit;
 }
 
 .monthly-goal-text{
@@ -221,9 +284,94 @@
     margin: 0px 12px;
 }
 
-@media screen and (max-width: 768px) {
+@media (min-width: 769px) and (max-width: 1199px) {
+    #badge-section {
+        padding-right: 45px !important;
+        padding-left: 45px !important;
+    }
+
+    /*#badge-section-card button a{*/
+    /*    font-size: 16px;*/
+    /*}*/
+
+    #badge-section-card button{
+        max-width: 160px;
+        min-width: 160px;
+        height: 48px;
+        font-size: 16px;
+
+    }
+    .platform-intro-section-text {
+        padding-left: 45px !important;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 768px) {
+    #badge-section {
+        padding-right: 45px !important;
+        padding-left: 45px !important;
+    }
+
+    /*#badge-section-card button a{*/
+    /*    font-size: 16px;*/
+    /*}*/
+
+    #badge-section-card button{
+        max-width: 160px;
+        min-width: 160px;
+        height: 48px;
+        font-size: 16px;
+    }
+
+    .badge-card-img-box {
+        text-align: center !important;
+    }
+
+    .badge-card-text-box{
+        margin-left: 20px !important;
+    }
+
+    .badge-card-text-box button{
+        margin-top: 12px !important;
+    }
+
+    .home-badge-link-row2{
+        text-align: center !important;
+        margin-top: 32px !important;
+    }
+
+    .image-text{
+        margin: 0px !important;
+    }
+
+    .suno-cont-image{
+        width: 100px;
+        height: 100px;
+    }
+
+    .suno-cont-image img{
+        width: 100px;
+        height: 100px;
+    }
+
+    .suno-val-image{
+        width: 100px;
+        height: 100px;
+    }
+
+    .suno-val-image img{
+        width: 100px;
+        height: 100px;
+    }
+
+    .platform-intro-section-text {
+        padding-left: 45px !important;
+    }
+}
+
+@media screen and (max-width: 699px) {
     #platform_section{
-        max-width: 320px !important;
+        /*max-width: 320px !important;*/
         margin: auto
     }
     #platform_section .platform_card {
@@ -235,13 +383,13 @@
     }
 
     #badge-section {
-        max-width: 320px;
+        /*max-width: 320px;*/
         margin: auto
     }
 
-    #badge-section-card button a{
-        font-size: 16px;
-    }
+    /*#badge-section-card button a{*/
+    /*    font-size: 16px;*/
+    /*}*/
 
     #badge-section-card button{
         max-width: 144px;
@@ -289,11 +437,12 @@
         max-width: 165px;
         height: 44px!important;
         font-size: 16px!important;
-    }
-
-    .platform-intro-section button a{
         font-size: 16px;
     }
+
+    /*.platform-intro-section button a{*/
+    /*    font-size: 16px;*/
+    /*}*/
 
     .platform-intro-section h4{
         font-size: 20px !important;
@@ -329,7 +478,7 @@
     .monthly-goal-section{
         padding-top:11px;
         margin:auto;
-        max-width: 320px;
+        /*max-width: 320px;*/
         height: 72px;
         border-radius: 12px;
     }
@@ -339,25 +488,22 @@
         line-height: 20px;
     }
 
-    #carouselExampleIndicators .nav-tabs li a {
+    #carouselExampleIndicators .nav-tabs>li>a {
         color: #666666 !important;
         font-size: 16px;
         line-height: 19px;
         opacity: 0.4;
         min-width: 106px;
-        max-width: 108px;
+        max-width: 115px !important;
+        min-height: 30px;
     }
 
-    #carouselExampleIndicators .nav-tabs li.active a {
-        background: rgba(0, 123, 255, 0.1);
-        border-radius: 32px;
-        color: #007BFF !important;
-        font-weight: 700;
-        opacity: 1;
-        min-width: 106px;
-        min-height: 30px;
-        border-color: transparent;
-        max-width: 108px !important;
+    #carouselExampleIndicators .nav-tabs>li {
+        margin: 0px 10px 0px 8px;
+    }
+
+    #carouselExampleIndicators .nav>li>a {
+        padding: 5px 10px;
     }
 
     #platform_inner p {
@@ -375,8 +521,8 @@
 
     .platform_button{
         padding: 6px 20px !important;
-        min-width: 280px;
-        max-width: 280px;
+        min-width: 240px;
+        max-width: 240px;
         height: 44px !important;
         font-size: 16px !important;
         line-height: 32px !important;
@@ -407,7 +553,8 @@
     }
 
     .image-text {
-         margin: 0px;
+        margin: 0px;
+        padding-top: 16px;
     }
 
     .monthly-goal-text{
@@ -425,5 +572,16 @@
         min-width: 280px !important;
         max-width: 280px !important;
 }
+
+}
+
+@media screen and (max-width: 320px) {
+    .platform_button{
+        height: 40px !important;
+        font-size: 12px !important;
+        line-height: 28px !important;
+        min-width: 200px !important;
+        max-width: 200px !important;
+    }
 
 }
