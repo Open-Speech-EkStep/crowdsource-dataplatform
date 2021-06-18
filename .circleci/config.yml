@@ -44,9 +44,6 @@ jobs:
             npm run functional_test -- -- --env <<parameters.env_name>>
             psql "postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@${DB_HOST_AWS}/<< parameters.db_name >>" -f functional_tests/sql/deleteSeedData.sql
       - store_artifacts:
-          path: functional_tests/.gauge/screenshots
-          destination: screenshots
-      - store_artifacts:
           path: functional_tests/reports
           destination: reports
 
