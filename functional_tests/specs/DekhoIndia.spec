@@ -41,7 +41,7 @@
 * When User clicks on "edit" field and type "Hello Hello" submit should be disabled and cancel button should be enabled
 * User should see an error message "Please type in your chosen language"
 * User clears the edit field should disable the buttons again
-* User should see an error message "Input Field can not be empty"
+* User should see an error message "Input field can not be empty"
 * When User clicks on "edit" field and type "ನೀವು ಹೇಗಿದ್ದೀರಿ3" submit and cancel button should be enabled
 * When user clicks on submit button user should see " Thank you for contributing!"
 * When user skips the rest of the "3" sentences , User should see Thank you Page
@@ -60,7 +60,7 @@
 * When User clicks on "edit" field and type "Hello" submit should be disabled and cancel button should be enabled
 * User should see an error message "Please type in your chosen language"
 * User clears the edit field should disable the buttons again in validation
-* User should see an error message "Input Field can not be empty"
+* User should see an error message "Input field can not be empty"
 * User click on "edit" field "submit-edit-button" should be enabled
 * User skips the next "4" sentences user should land on Thank you page in "English"
 * User should see the "Validate More" button
