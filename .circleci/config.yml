@@ -233,6 +233,9 @@ workflows:
             - dev_deployment_eks
             - build_dev_ui
             # - functional_tests_dev
+          filters:
+            branches:
+              only: master
 
       - db_migrate_aws:
           name: migrate_test_aws
