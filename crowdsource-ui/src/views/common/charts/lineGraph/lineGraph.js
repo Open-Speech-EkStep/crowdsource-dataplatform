@@ -35,14 +35,14 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     tooltipContent = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div>Transcribed: <label>{contributedHours}</label></div>
-                <div style="text-align: left; font-style: italic;">Validated: <label>{validatedHours}</label></div>
+                <div style="text-align: left;">Validated: <label>{validatedHours}</label></div>
             </div>`;
     }
     if(currentModule == MODULE.likho.value){
       tooltipContent = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div style="text-align: left;">Translated: <label>{contributedHours}</label></div>
-                <div style="text-align: left; font-style: italic;">Validated: <label>{validatedHours}</label></div>
+                <div style="text-align: left;">Validated: <label>{validatedHours}</label></div>
             </div>`;
     }
 
@@ -50,7 +50,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
       tooltipContent = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div style="text-align: left;">Labelled: <label>{contributedHours}</label></div>
-                <div style="text-align: left; font-style: italic;">Validated: <label>{validatedHours}</label></div>
+                <div style="text-align: left;">Validated: <label>{validatedHours}</label></div>
             </div>`;
     }
 

@@ -337,7 +337,7 @@ const drawTimelineChart = (timelineData) => {
             <div>
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div>Contributed: <label>{contributedHours}</label></div>
-                <div style="text-align: left; font-style: italic;">Validated: <label>{validatedHours}</label></div>
+                <div style="text-align: left;">Validated: <label>{validatedHours}</label></div>
             </div>`;
         series.tooltip.getFillFromObject = false;
         series.tooltip.autoTextColor = false;
