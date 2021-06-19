@@ -7,27 +7,31 @@ const dekhoType = { name: "dekho", type: "ocr", goal_value: 0, total_languages: 
 
 const moduleList = [sunoType, boloType, likhoType, dekhoType];
 
-function setLanguageGoalForModules() {
+function getLanguageGoalForModules() {
   const language = "English";
   const source = "contribute";
 
-  Promise.all(moduleList.map((module) => {
+  return Promise.all(moduleList.map((module) => {
     return Promise.all([performAPIRequest(`/language-goal/${module.type}/${language}/${source}`),
     performAPIRequest(`/available-languages/${module.type}`)
     ]).then((responses) => {
-      return Promise.all(responses.map((response) => response))
-    }).then((data) => {
-      module.goal_value = data[0].goal;
-      module.total_languages = data[1].datasetLanguages.length;
+      return Promise.resolve(responses)
     })
-  })).then(() => {
+  })).catch(() => {
     $('#language-goal-each').html(moduleList[0].goal_value + " " + moduleList[0].goal_label);
     $('#language-count').html(moduleList[0].total_languages);
   })
 }
 
 $(document).ready(function (ev) {
-  setLanguageGoalForModules();
+  getLanguageGoalForModules().then((res)=>{
+    moduleList.map((module, index) =>{
+      module.goal_value = res[index][0].goal;
+      module.total_languages = res[index][1].datasetLanguages.length;
+    })
+    $('#language-goal-each').html(moduleList[0].goal_value + " " + moduleList[0].goal_label);
+    $('#language-count').html(moduleList[0].total_languages);
+  });
 
   $('#carouselExampleIndicators').on('slide.bs.carousel', function (evt) {
     const index = +$(evt.relatedTarget).index();
@@ -38,4 +42,4 @@ $(document).ready(function (ev) {
   })
 });
 
-module.exports = { setLanguageGoalForModules }
+module.exports = { getLanguageGoalForModules }
