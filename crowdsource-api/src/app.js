@@ -100,7 +100,7 @@ const corsOptions = {
     origin: [/vakyansh\.in$/, /nplt\.in$/],
     credentials: true,
 };
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(upload.single('audio_data'));
 app.use(express.static(__dirname, { dotfiles: 'allow' }));
