@@ -5,6 +5,7 @@ const { showUserProfile } = require('../../../build/js/common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
 const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition, getDeviceInfo, getBrowserInfo} = require('./utils');
 const { cdn_url } = require('./env-api');
+const { setDataSource } = require('../../../build/js/common/sourceInfo');
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -178,6 +179,7 @@ function setSentenceLabel(index) {
     const $sentenceLabel = $('#sentenceLabel')
     $sentenceLabel[0].innerText = boloIndiaValidator.sentences[index].sentence;
     animateCSS($sentenceLabel, 'lightSpeedIn');
+    setDataSource(boloIndiaValidator.sentences[index].source_info);
 }
 
 function getNextSentence() {

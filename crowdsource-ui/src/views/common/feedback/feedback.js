@@ -1,5 +1,7 @@
 const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, FEEDBACK_CATEGORY, OPINION_RATING_MAPPING, ALL_LANGUAGES} = require('./constants');
 const fetch = require('./fetch')
+const { feedback_top_component } = require('./env-api');
+
 
 const fetchUsername = () => {
     const speakerDetails = JSON.parse(localStorage.getItem('speakerDetails'));
@@ -100,8 +102,8 @@ const enableSubmit = function () {
     const target_page = $("#select_page_id");
     const opinion_rating = $("#opinionRadio");
     $('input[name="opinionRadio"]').on('change', () => {
-
-        if($('input[name="opinionRadio"]').is(':checked') && $('#email').val().length > 0)
+        const isEmailValid = $('#email').val().length > 0 || feedback_top_component === 'false';
+        if($('input[name="opinionRadio"]').is(':checked') && isEmailValid)
         {    
             $("#submit_btn").attr('disabled', false);
         }
@@ -109,16 +111,17 @@ const enableSubmit = function () {
             $("#submit_btn").attr('disabled', true);
         }
     })    
-    
-    $('#email').on('input', () => {
-        if($('input[name="opinionRadio"]').is(':checked') && $('#email').val().length > 0)
-        {    
-            $("#submit_btn").attr('disabled', false);
-        }
-        else {
-            $("#submit_btn").attr('disabled', true);
-        }
-    })
+    if(feedback_top_component === 'true'){
+        $('#email').on('input', () => {
+            if($('input[name="opinionRadio"]').is(':checked') && $('#email').val().length > 0)
+            {    
+                $("#submit_btn").attr('disabled', false);
+            }
+            else {
+                $("#submit_btn").attr('disabled', true);
+            }
+        })
+    }
 }
 
 const handleFeedbackSubmit = () => {
@@ -126,7 +129,6 @@ const handleFeedbackSubmit = () => {
     var category = $("#category_id").val();
     var feedback_description = $("#feedback_description").val();
     var language = localStorage.getItem("contributionLanguage");
-    var username = $('#email').val();
     if(language === null){
         ALL_LANGUAGES.forEach((lang) => {
             if(lang.id === localStorage.getItem("i18n")) { language = lang.value; }});
@@ -147,14 +149,17 @@ const handleFeedbackSubmit = () => {
         category = '';
     }
 
+    const username = $('#email').val() || "Anonymous";
+    const moduleType = $('input[name = "moduleSelectRadio"]:checked').val();
+    const targetPage = $("#select_page_id").val();
+
     fd.append('email', username);
     fd.append('feedback', feedback_description);
     fd.append('category', category);
     fd.append('language', language);
-    fd.append('module', $('input[name = "moduleSelectRadio"]:checked').val());
-    fd.append('target_page', $("#select_page_id").val());
+    fd.append('module', moduleType);
+    fd.append('target_page', targetPage);
     fd.append('opinion_rating', rating);
-    
     fetch("/feedback", {
         method: "POST",
         credentials: 'include',
@@ -211,7 +216,11 @@ const initializeFeedbackModal = () => {
     $('#feedback_button').on('click', () => {
         enableSubmit();
     })
-    
+    if(feedback_top_component === 'true'){
+        $('.email-component').show()
+        $('.content-component').show()
+        $('.page-type-component').show()
+    }
     $('#submit_btn').on('click', handleFeedbackSubmit);
 };
 

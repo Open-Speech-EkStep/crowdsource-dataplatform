@@ -164,6 +164,7 @@
         <div class="row my-3 p-3" style="justify-content:flex-end">
             <%- include ../common/virtualKeyboardBtn.ejs %>
         </div>
+        <%- include('../common/sourceInfo.ejs') %>
         <%- include('../common/feedback.ejs', {page: "Validate"}) %>
         <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the sentence", reportThankYou: "Your feedback helps us keep Suno India relevant, we appreciate you taking time to leave the feedback.", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
         <%- include ../common/errorModal.ejs %>

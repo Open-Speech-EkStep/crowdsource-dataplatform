@@ -15,7 +15,7 @@ function showAndHideEditError(inputTextLength,error, callback1=()=>{}, callback2
   const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
   if (inputTextLength > 0 && error == null) {
     callback1();
-    const isAudioPlayed = flow ? localStorage.getItem(`${flow}_audioPlayed`) : 'false';
+    const isAudioPlayed = flow ? localStorage.getItem(flow) : 'false';
     if(currentModule == 'suno'){
       if(isAudioPlayed == 'true'){
         $submitEditButton.removeAttr('disabled');
@@ -28,6 +28,9 @@ function showAndHideEditError(inputTextLength,error, callback1=()=>{}, callback2
     if ($cancelButton) {
       $cancelButton.removeAttr('disabled');
     }
+
+    const previousActiveError = $("#edit-error-text .error-active");
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
     $("#edit-error-row").addClass('d-none');
     $("#edit-text").add($('#edit-text-suno ')).removeClass('edit-error-area').addClass('edit-text');
   }else {
@@ -36,7 +39,7 @@ function showAndHideEditError(inputTextLength,error, callback1=()=>{}, callback2
       if ($cancelButton) {
         $cancelButton.attr('disabled', true);
       }
-    } else {
+    }else {
       callback1()
       if ($cancelButton) {
         $cancelButton.removeAttr('disabled');

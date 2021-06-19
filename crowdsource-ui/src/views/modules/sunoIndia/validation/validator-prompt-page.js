@@ -18,6 +18,7 @@ const {isKeyboardExtensionPresent, isMobileDevice, showOrHideExtensionCloseBtn} 
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {cdn_url} = require('../common/env-api');
 const {initializeFeedbackModal} = require('../common/feedback');
+const { setDataSource } = require('../common/sourceInfo');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -111,10 +112,10 @@ const setAudioPlayer = function () {
     hideElement(textResume);
     showElement(textReplay);
     localStorage.setItem("validation_audioPlayed", true);
-    if($("#edit").val()){
+    const previousActiveError = $("#edit-error-text .error-active");
+    if($("#edit").val() && !previousActiveError[0]){
       $submitButton.removeAttr("disabled");
     }
-    $submitButton.removeAttr("disabled");
   });
 
   play.on('click', () => {
@@ -214,6 +215,7 @@ function getNextSentence() {
     const encodedUrl = encodeURIComponent(sunoIndiaValidator.sentences[currentIndex].sentence);
     localStorage.setItem("validation_audioPlayed", false);
     loadAudio(`${cdn_url}/${encodedUrl}`);
+    setDataSource(sunoIndiaValidator.sentences[currentIndex].source_info);
     resetValidation();
     setSentenceLabel(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
@@ -344,6 +346,8 @@ function addListeners() {
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
     hideElement($('#edit-error-row'))
+    const previousActiveError = $("#edit-error-text .error-active");
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
     $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     setInput("");
     closeEditor();
@@ -399,6 +403,8 @@ function addListeners() {
     showElement($('#sentences-row'));
     showElement($('#progress-row'))
     hideElement($('#edit-error-row'))
+    const previousActiveError = $("#edit-error-text .error-active");
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
     $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     closeEditor();
   })
@@ -533,6 +539,7 @@ const initializeComponent = function () {
   if (audio) {
     const encodedUrl = encodeURIComponent(audio.sentence);
     loadAudio(`${cdn_url}/${encodedUrl}`);
+    setDataSource(audio.source_info);
     setSentenceLabel(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
@@ -571,7 +578,7 @@ $(document).ready(() => {
   setFooterPosition();
   showKeyboard(contributionLanguage.toLowerCase(), () => {
   }, () => {
-  }, 'validation');
+  }, 'validation_audioPlayed');
   hideElement($('#keyboardBox'));
   toggleFooterPosition();
   setPageContentHeight();

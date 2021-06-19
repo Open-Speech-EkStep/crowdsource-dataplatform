@@ -19,7 +19,8 @@ const {showUserProfile} = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
-const {initializeFeedbackModal} = require('../common/feedback')
+const { initializeFeedbackModal } = require('../common/feedback');
+const { setDataSource } = require('../common/sourceInfo');
 const sunoCountKey = 'sunoCount';
 const currentIndexKey = 'sunoCurrentIndex';
 const sentencesKey = 'sunoSentencesKey';
@@ -103,7 +104,8 @@ const setAudioPlayer = function () {
     hideElement(textResume);
     showElement(textReplay);
     localStorage.setItem("contribution_audioPlayed",true);
-    if($("#edit").val()){
+    const previousActiveError = $("#edit-error-text .error-active");
+    if($("#edit").val() && !previousActiveError[0]){
       $submitButton.removeAttr("disabled");
     }
     cancelButton.removeAttr("disabled");
@@ -177,6 +179,7 @@ function getNextSentence() {
     const encodedUrl = encodeURIComponent(sunoIndia.sentences[currentIndex].media_data);
     localStorage.setItem("contribution_audioPlayed",false);
     loadAudio(`${cdn_url}/${encodedUrl}`);
+    setDataSource(sunoIndia.sentences[currentIndex].source_info);
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
@@ -219,7 +222,7 @@ const closeEditor = function () {
 }
 
 const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancelButton,'contribution');
+showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancelButton,'contribution_audioPlayed');
 
 function markContributionSkipped() {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -273,6 +276,8 @@ function addListeners() {
     const $submitEditButton =  $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
     hideElement($('#edit-error-row'))
+    const previousActiveError = $("#edit-error-text .error-active");
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
     $("#edit-text-suno").removeClass('edit-error-area').addClass('edit-text');
     closeEditor();
   })
@@ -329,6 +334,8 @@ function addListeners() {
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
     hideElement($('#edit-error-row'))
+    const previousActiveError = $("#edit-error-text .error-active");
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
     $("#edit-text-suno").removeClass('edit-error-area').addClass('edit-text');
     cancelButton.attr("disabled", true);
     closeEditor();
@@ -492,6 +499,7 @@ const initialize = function () {
   if (audio) {
     const encodedUrl = encodeURIComponent(audio.media_data);
     loadAudio(`${cdn_url}/${encodedUrl}`);
+    setDataSource(audio.source_info);
     resetValidation();
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);

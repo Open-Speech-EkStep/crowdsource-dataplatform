@@ -17,6 +17,7 @@ const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const speakerDetailsKey = 'speakerDetails';
 const {initializeFeedbackModal} = require('../common/feedback');
+const { setDataSource } = require('../common/sourceInfo');
 
 const currentIndexKey = 'likhoCurrentIndex';
 const sentencesKey = 'likhoSentencesKey';
@@ -80,6 +81,7 @@ function getNextSentence() {
     currentIndex++;
     updateProgressBar(currentIndex + 1, likhoIndia.sentences.length);
     setSentence(likhoIndia.sentences[currentIndex].media_data);
+    setDataSource(likhoIndia.sentences[currentIndex].source_info);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
   } else {
@@ -331,6 +333,7 @@ const initialize = function () {
 
   if (translation) {
     setSentence(translation.media_data);
+    setDataSource(translation.source_info);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     updateProgressBar(currentIndex + 1, likhoIndia.sentences.length)

@@ -1,4 +1,4 @@
-const {calculateTime} = require('./utils')
+const {calculateTime, formatTime} = require('./utils')
 
 const getSpeakersData = (data, lang, moduleType) => {
   localStorage.setItem('previousLanguage', lang);
@@ -54,8 +54,8 @@ const setSpeakerData = function (data, language, moduleType) {
       seconds: validatedSeconds
     } = calculateTime(speakersData.validations.toFixed(3) * 60 * 60);
 
-    $speakersDataContributionValue.text(`${contributedHours}h ${contributedMinutes}m ${contributedSeconds}s`);
-    $speakersDataValidationValue.text(`${validatedHours}h ${validatedMinutes}m ${validatedSeconds}s`);
+    $speakersDataContributionValue.text(formatTime(contributedHours, contributedMinutes, contributedSeconds));
+    $speakersDataValidationValue.text(formatTime(validatedHours, validatedMinutes, validatedSeconds));
   } else {
     $speakersDataContributionValue.text(speakersData.contributions);
     $speakersDataValidationValue.text(speakersData.validations);

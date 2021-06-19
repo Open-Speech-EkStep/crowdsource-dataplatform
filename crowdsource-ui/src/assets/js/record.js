@@ -1,6 +1,7 @@
 const fetch = require('./fetch')
 const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo } = require('./utils');
 const { LOCALE_STRINGS } = require('./constants');
+const { setDataSource } = require('../../../build/js/common/sourceInfo');
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
@@ -165,6 +166,7 @@ const initialize = () => {
         $sentenceLbl[0].innerText = sentences[index].media_data;
         animateCSS($sentenceLbl, 'lightSpeedIn');
         setProgressBar(currentIndex);
+        setDataSource(sentences[index].source_info);
     };
 
     const notyf = new Notyf({

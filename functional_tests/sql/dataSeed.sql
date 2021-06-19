@@ -25,112 +25,135 @@ select dataset_row_id from dataset_row where (type='parallel') and (media->> 'la
 
 delete from dataset_row where (type='parallel') and (media->> 'language'='Odia');
 
+-- master dataset info
+
+insert into master_dataset (params, location)
+select '{"collectionSource": ["some source", "https://google.com/abcd/efg/hijk/lmnop"]}', 'testMDSLocation'
+where not exists (
+	select 1 from master_dataset where location='testMDSLocation'
+);
+insert into master_dataset (params, location)
+select '{"collectionSource": null}', 'testMDSLocation2'
+where not exists (
+	select 1 from master_dataset where location='testMDSLocation2'
+);
 
 --ASR data
 
 insert into dataset_row 
-    ( difficulty_level, type, media, state, is_profane ) 
+    ( difficulty_level, type, media, state, is_profane, master_dataset_id ) 
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Odia"
-            }'::jsonb, null, false
+            }'::jsonb, null, false, (select master_dataset_id from master_dataset where location='testMDSLocation')
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Odia"
-            }'::jsonb, null, false
+            }'::jsonb, null, false, (select master_dataset_id from master_dataset where location='testMDSLocation')
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
-            "language": "Telugu"
-            }'::jsonb, 'contributed', false
+            "language": "Telugu",
+            "collectionSource": null
+            }'::jsonb, 'contributed', false, (select master_dataset_id from master_dataset where location='testMDSLocation2')
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
-            "language": "Telugu"
-            }'::jsonb, 'contributed', false
+            "language": "Telugu",
+            "collectionSource": null
+            }'::jsonb, 'contributed', false, (select master_dataset_id from master_dataset where location='testMDSLocation2')
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
-            "language": "Kannada"
-            }'::jsonb, null, false
+            "language": "Kannada",
+            "collectionSource": ["some source", "https://google.com/abcd/efg/hijk/lmnop"]
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
-            "language": "Kannada"
-            }'::jsonb, null, false
+            "language": "Kannada",
+            "collectionSource": ["some source", "https://google.com/abcd/efg/hijk/lmnop"]
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
-            "language": "Kannada"
-            }'::jsonb, null, false
+            "language": "Kannada",
+            "collectionSource": ["some source", "https://google.com/abcd/efg/hijk/lmnop"]
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
-            "language": "Kannada"
-            }'::jsonb, null, false
+            "language": "Kannada",
+            "collectionSource": ["some source", "https://google.com/abcd/efg/hijk/lmnop"]
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
-            "language": "Kannada"
-            }'::jsonb, null, false
+            "language": "Kannada",
+            "collectionSource": ["some source", "https://google.com/abcd/efg/hijk/lmnop"]
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
-            "language": "Kannada"
-            }'::jsonb, null, false
+            "language": "Kannada",
+            "collectionSource": ["some source", "https://google.com/abcd/efg/hijk/lmnop"]
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
-            "language": "Kannada"
-            }'::jsonb, 'contributed', false
+            "language": "Kannada",
+            "collectionSource": ["some source", "https://google.com/abcd/efg/hijk/lmnop"]
+            }'::jsonb, 'contributed', false, null
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
-            "language": "Kannada"
-            }'::jsonb, 'contributed', false
+            "language": "Kannada",
+            "collectionSource": ["some source", "https://google.com/abcd/efg/hijk/lmnop"]
+            }'::jsonb, 'contributed', false, null
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
-            "language": "Kannada"
-            }'::jsonb, 'contributed', false
+            "language": "Kannada",
+            "collectionSource": ["some source", "https://google.com/abcd/efg/hijk/lmnop"]
+            }'::jsonb, 'contributed', false, null
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Gujarati"
-            }'::jsonb, null, true
+            }'::jsonb, null, true, null
             union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Gujarati"
-            }'::jsonb, null, null
+            }'::jsonb, null, null, null
             union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Gujarati"
-            }'::jsonb, 'contributed', true
+            }'::jsonb, 'contributed', true, null
             union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Gujarati"
-            }'::jsonb, 'contributed', null;
+            }'::jsonb, 'contributed', null, null;
 
 
 insert into contributions 

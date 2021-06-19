@@ -4,42 +4,42 @@ const { calculateTime, formatTime, getJson, performAPIRequest } = require('./uti
 const { drawTopLanguageChart } = require('../../../build/js/common/verticalGraph');
 
 const statesInformation = [
-  { id: 'IN-TG', state: 'Telangana', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-AN', state: 'Andaman and Nicobar Islands', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-AP', state: 'Andhra Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-AR', state: 'Arunachal Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-AS', state: 'Assam', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-BR', state: 'Bihar', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-CT', state: 'Chhattisgarh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-GA', state: 'Goa', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-GJ', state: 'Gujarat', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-HR', state: 'Haryana', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-HP', state: 'Himachal Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-JK', state: 'Jammu & Kashmir', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-JH', state: 'Jharkhand', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-KA', state: 'Karnataka', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-KL', state: 'Kerala', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-LD', state: 'Lakshadweep', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-MP', state: 'Madhya Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-MH', state: 'Maharashtra', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-MN', state: 'Manipur', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-CH', state: 'Chandigarh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-PY', state: 'Puducherry', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-PB', state: 'Punjab', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-RJ', state: 'Rajasthan', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-SK', state: 'Sikkim', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-TN', state: 'Tamil Nadu', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-TR', state: 'Tripura', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-UP', state: 'Uttar Pradesh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-UT', state: 'Uttarakhand', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-WB', state: 'West Bengal', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-OR', state: 'Odisha', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-DNDD', state: 'Dadra and Nagar Haveli and Daman and Diu', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-ML', state: 'Meghalaya', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-MZ', state: 'Mizoram', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-NL', state: 'Nagaland', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-DL', state: 'National Capital Territory of Delhi', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 },
-  { id: 'IN-LK', state: 'Ladakh', contributed_time: "0 hrs", validated_time: "0 hrs", total_speakers: 0 }
+  { id: 'IN-TG', state: 'Telangana', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-AN', state: 'Andaman and Nicobar Islands', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-AP', state: 'Andhra Pradesh', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-AR', state: 'Arunachal Pradesh', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-AS', state: 'Assam', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-BR', state: 'Bihar', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-CT', state: 'Chhattisgarh', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-GA', state: 'Goa', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-GJ', state: 'Gujarat', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-HR', state: 'Haryana', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-HP', state: 'Himachal Pradesh', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-JK', state: 'Jammu & Kashmir', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-JH', state: 'Jharkhand', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-KA', state: 'Karnataka', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-KL', state: 'Kerala', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-LD', state: 'Lakshadweep', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-MP', state: 'Madhya Pradesh', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-MH', state: 'Maharashtra', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-MN', state: 'Manipur', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-CH', state: 'Chandigarh', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-PY', state: 'Puducherry', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-PB', state: 'Punjab', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-RJ', state: 'Rajasthan', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-SK', state: 'Sikkim', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-TN', state: 'Tamil Nadu', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-TR', state: 'Tripura', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-UP', state: 'Uttar Pradesh', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-UT', state: 'Uttarakhand', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-WB', state: 'West Bengal', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-OR', state: 'Odisha', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-DNDD', state: 'Dadra and Nagar Haveli and Daman and Diu', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-ML', state: 'Meghalaya', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-MZ', state: 'Mizoram', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-NL', state: 'Nagaland', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-DL', state: 'National Capital Territory of Delhi', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
+  { id: 'IN-LK', state: 'Ladakh', contributed_time: "0s", validated_time: "0s", total_speakers: 0 }
 ]
 
 var polygonSeries = undefined;
@@ -72,15 +72,15 @@ const drawMap = function (response) {
         minutes: vMinutes,
         seconds: vSeconds,
       } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
-      st.contributed_time = `${cHours}hrs ${cMinutes}mins ${cSeconds}sec`;
-      st.validated_time = `${vHours}hrs ${vMinutes}mins ${vSeconds}sec`;
+      st.contributed_time = formatTime(cHours, cMinutes, cSeconds);
+      st.validated_time = formatTime(vHours, vMinutes, vSeconds);
       st.value = Number(ele.total_contributions);
       st.total_speakers = ele.total_speakers;
       st.id = st.id;
     } else {
       st.id = st.id;
-      st.contributed_time = "0 hrs";
-      st.validated_time = "0 hrs";
+      st.contributed_time = "0s";
+      st.validated_time = "0s";
       st.value = 0;
       st.total_speakers = 0;
     }
@@ -101,7 +101,17 @@ const drawMap = function (response) {
   polygonSeries.useGeodata = true;
   polygonSeries.data = statesData;
   var polygonTemplate = polygonSeries.mapPolygons.template;
-  polygonTemplate.tooltipHTML = `<div style="text-align: right; overflow: scroll"><h6>{state}</h6> <div style="text-align: left;">{total_speakers} Speakers  <label style="margin-left: 32px">Contributed: <label style="margin-left: 8px">{contributed_time}</label></label></div> <div style="text-align: left;">Validated:  <label style="margin-left: 8px">{validated_time}</label></div></div>`;
+  polygonTemplate.tooltipHTML = `<div style="text-align: left;">
+                                      <h6>{state}</h6> 
+                                      <div style="text-align: left;">{total_speakers} Speakers </div>
+                                      <div style="text-align: left;"> 
+                                        <label>Contributed: </label>
+                                        <label style="margin-left: 8px">{contributed_time}</label>
+                                      </div> 
+                                      <div style="text-align: left;">Validated:  
+                                        <label style="margin-left: 8px">{validated_time}</label>
+                                      </div>
+                                  </div>`;
   polygonTemplate.nonScalingStroke = true;
   polygonTemplate.strokeWidth = 0.5;
   polygonTemplate.stroke = am4core.color("#929292")
@@ -202,8 +212,8 @@ function getStatistics(response) {
   const { hours: validate_hrs, minutes: validate_min, seconds: validate_sec } = calculateTime(
     Number(response.total_validations) * 60 * 60
   );
-  $speakersDataHoursValue.text(`${hours}h ${minutes}m ${seconds}s`);
-  $validatedValue.text(`${validate_hrs}h ${validate_min}m ${validate_sec}s`);
+  $speakersDataHoursValue.text(formatTime(hours, minutes,seconds));
+  $validatedValue.text(formatTime(validate_hrs,validate_min,validate_sec));
   $speakersDataSpeakerValue.text(response.total_speakers);
   $speakersDataLanguagesValue.text(response.total_languages);
   $speakersDataLoader.addClass("d-none");

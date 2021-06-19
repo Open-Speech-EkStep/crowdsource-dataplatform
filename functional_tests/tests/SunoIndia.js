@@ -72,8 +72,8 @@ step("User should see the top Language graph and other stats", async function() 
     assert.ok(await text("Your language and top 3 most contributed languages").exists());
     assert.ok(await text("Languages").exists());
     assert.ok(await text("People participated").exists());
-    assert.ok(await text("Hrs transcribed").exists());
-    assert.ok(await text("Hrs validated").exists());
+    assert.ok(await text("Duration transcribed").exists());
+    assert.ok(await text("Duration validated").exists());
 });
 
 // step("User details popup should appear and close button should close the pop up", async function() {
@@ -130,12 +130,26 @@ step("When user clicks on Play button, Pause button should appear and when user 
     await taiko.waitFor(5500)
 });
 
+step("User clicks on Play button, and then on pause button, then clicks on <type> field and type <hinditext>, then resume, submit button should be disabled", async function(type, hinditext) {
+    await taiko.waitFor(1000)
+    await click(taiko.image({ id: "play" }));
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "pause" }));
+    const editfield = taiko.textBox({ id: type })
+    await taiko.waitFor(500)
+    await write(hinditext, into(editfield));
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "resume" }));
+    await taiko.waitFor(5500)
+    assert.ok(await button({ id: 'submit-edit-button' }).isDisabled());
+    await clear(editfield)
+});
 
 step("When user skips the rest of the <count> sentences , User should see Thank you Page", async function (count) {
     const skipbutton = taiko.button({ id: 'skip_button' })
     for (let i = 0; i < count; i++) {
         await click(skipbutton)
-        await taiko.waitFor(500)
+        await taiko.waitFor(1200)
     }
     await taiko.waitFor(5000)
     assert.ok(await text('Thank you for contributing!').exists())
@@ -153,17 +167,10 @@ step("Check <card> option should be <state> on Home page", async function(card,s
         assert.ok(await text('Not collecting contributions for selected language').isVisible());
 
     }
-    if(card=="Correct"&& state=="disabled")
-    {
-        assert.ok(await text('No validation data available for selected language').isVisible());
-    }
+
     if(card=="Transcribe"&& state=="enabled")
     {
         assert.ok(! await text('Not collecting contributions for selected language').isVisible());
-    }
-    if(card=="Correct"&& state=="enabled")
-    {
-        assert.ok(! await text('No validation data available for selected language').isVisible());
     }
 
     if(card=="Label"&& state=="disabled")
@@ -204,6 +211,23 @@ step("User plays the audio , <needchange> should be enabled & <arg1> should be d
     // Once the audio is complete , then correct button should be enabled
     await taiko.waitFor(5000)
     assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
+});
+
+step("User clicks on Play button, and then on pause button, then clicks on <needchange>, then clicks on <edit> field and type <hinditext>, then resume, submit button should be disabled, then skip", async function(needchange, type, hinditext) {
+    await taiko.waitFor(1000)
+    await click(taiko.image({ id: "play" }));
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "pause" }));
+    await click(taiko.button({ id: needchange }))
+    await taiko.waitFor(500)
+    const editfield = taiko.textBox({ id: type })
+    await taiko.waitFor(500)
+    await write(hinditext, into(editfield));
+    await taiko.waitFor(500)
+    await click(taiko.image({ id: "resume" }));
+    await taiko.waitFor(5500)
+    assert.ok(await button({ id: 'submit-edit-button' }).isDisabled());
+    await click(taiko.button({ id: 'skip_button' }))
 });
 
 step("Validate Thank you page content for Suno India", async function() {
