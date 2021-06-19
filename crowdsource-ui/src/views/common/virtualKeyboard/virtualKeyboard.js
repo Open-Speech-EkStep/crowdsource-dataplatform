@@ -40,6 +40,7 @@ function showAndHideEditError(inputTextLength,error, callback1=()=>{}, callback2
         $cancelButton.attr('disabled', true);
       }
     }else {
+      callback1()
       if ($cancelButton) {
         $cancelButton.removeAttr('disabled');
       }
