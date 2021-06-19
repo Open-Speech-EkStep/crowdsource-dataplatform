@@ -6,13 +6,24 @@
 .platform-intro-section{
     max-width: 1200px;
     margin: auto;
+}
 
+.platform-intro-section-text h4{
+    color: #111111;
+}
+
+.platform-intro-section-text p{
+    color: #666666;
 }
 
 #platform_section {
     max-width: 1200px;
     margin: auto;
     border-radius: 32px
+}
+
+.platform-card-section-heading{
+    color: #111111;
 }
 
 .platform-card-section-para{
@@ -23,14 +34,10 @@
     color: #666666;
 }
 
-.platform-intro-section button{
+.platform-intro-section-text button{
     height:48px;
     font-size: 18px;
 }
-
-/*.platform-intro-section button a{*/
-/*    font-size: 18px;*/
-/*}*/
 
 .monthly-goal-section{
     padding-top:11px;
@@ -42,6 +49,7 @@
     box-sizing: border-box;
     box-shadow: inset 0px 0px 12px rgba(0, 123, 255, 0.2);
     border-radius: 20px;
+    color: #666666;
 }
 
 .monthly-goal-section span{
@@ -65,16 +73,16 @@
     background-position: right;
 }
 
+.badge-card-text-box h2{
+    color: #111111;
+}
+
 #badge-section-card button{
     max-width:180px;
     min-width:180px;
     height:48px;
     font-size: 18px;
 }
-
-/*#badge-section-card button a{*/
-/*    font-size: 18px;*/
-/*}*/
 
 .home-badge-row img{
     filter: drop-shadow(0px 4px 12px rgba(0, 123, 255, 0.2));
@@ -102,9 +110,17 @@
     min-height: 300px;
 }
 
-#platform_inner p {
+.label-text{
     color: #666666;
     line-height: 32px;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.image-text {
+    font-size: 20px;
+    line-height: 32px;
+    color: #666666;
     font-weight: 400;
 }
 
@@ -150,26 +166,6 @@
     background: #ddd
 }
 
-/*#carouselExampleIndicators .nav-tabs li a {*/
-/*    color: #666666 !important;*/
-/*    font-size: 24px;*/
-/*    line-height: 29px;*/
-/*    opacity: 0.4;*/
-/*    min-width: 160px;*/
-/*    max-width: 164px;*/
-/*}*/
-
-/*#carouselExampleIndicators .nav-tabs li.active a {*/
-/*    background: rgba(0, 123, 255, 0.1);*/
-/*    border-radius: 32px;*/
-/*    color: #007BFF !important;*/
-/*    font-weight: 700;*/
-/*    opacity: 1;*/
-/*    border-color: transparent;*/
-/*    min-height: 52px;*/
-/*    max-width: 164px !important;*/
-/*}*/
-
 .home-badge-link{
     font-style:normal;
     font-size:28px;
@@ -190,8 +186,6 @@
     max-width:1200px;
     margin:auto;
 }
-
-
 
 #carouselExampleIndicators .nav-tabs {
     display: inline-flex;
@@ -214,19 +208,21 @@
     font-size: 24px;
     line-height: 29px;
     opacity: 0.4;
-    min-width: 160px;
-    max-width: 164px !important;
-    min-height: 52px;
+    width: fit-content;
 }
 
-#carouselExampleIndicators .nav-tabs>li.active>a{
+#carouselExampleIndicators .nav-tabs>li.active{
     background: rgba(0, 123, 255, 0.1);
-    border-radius: 32px;
+    border-radius: 24px;
+    border-color: transparent;
+}
+
+#carouselExampleIndicators .nav-tabs>li.active>a {
     color: #007BFF !important;
     font-weight: 700;
     opacity: 1;
-    border-color: transparent;
 }
+
 #carouselExampleIndicators .nav-tabs>li>a::after {
     content: "";
     height: 2px;
@@ -250,8 +246,9 @@
 #carouselExampleIndicators .nav>li>a {
     position: relative;
     display: block;
-    padding: 10px 15px;
+    margin: 9px 20px 10px 20px;
 }
+
 #carouselExampleIndicators .nav{
     flex-wrap: inherit;
 }
@@ -297,10 +294,6 @@
         padding-left: 45px !important;
     }
 
-    /*#badge-section-card button a{*/
-    /*    font-size: 16px;*/
-    /*}*/
-
     #badge-section-card button{
         max-width: 160px;
         min-width: 160px;
@@ -318,10 +311,6 @@
         padding-right: 45px !important;
         padding-left: 45px !important;
     }
-
-    /*#badge-section-card button a{*/
-    /*    font-size: 16px;*/
-    /*}*/
 
     #badge-section-card button{
         max-width: 160px;
@@ -380,10 +369,11 @@
     .separator{
         opacity: 0.1;
     }
+
     #platform_section{
-        /*max-width: 320px !important;*/
         margin: auto
     }
+
     #platform_section .platform_card {
         background-image: url(../../img/mobile_wave.png) !important;
         background-size: contain;
@@ -395,13 +385,8 @@
     }
 
     #badge-section {
-        /*max-width: 320px;*/
         margin: auto
     }
-
-    /*#badge-section-card button a{*/
-    /*    font-size: 16px;*/
-    /*}*/
 
     #badge-section-card button{
         max-width: 144px;
@@ -453,17 +438,13 @@
         font-size: 16px;
     }
 
-    /*.platform-intro-section button a{*/
-    /*    font-size: 16px;*/
-    /*}*/
-
-    .platform-intro-section h4{
+    .platform-intro-section-text h4{
         font-size: 20px !important;
         line-height: 24px !important;
         color: #111111;
     }
 
-    .platform-intro-section p  {
+    .platform-intro-section-text p  {
         font-size: 16px;
         line-height: 20px;
         color: #666666;
@@ -491,7 +472,6 @@
     .monthly-goal-section{
         padding-top:11px;
         margin:auto;
-        /*max-width: 320px;*/
         height: 72px;
         border-radius: 12px;
     }
@@ -501,35 +481,38 @@
         line-height: 20px;
     }
 
+    #carouselExampleIndicators .nav>li>a {
+        margin: 6px 16px 7px 16px;
+    }
+
     #carouselExampleIndicators .nav-tabs>li>a {
         color: #666666 !important;
         font-size: 16px;
         line-height: 19px;
-        opacity: 0.4;
-        min-width: 106px;
-        max-width: 115px !important;
-        min-height: 30px;
+        width: max-content;
     }
 
     #carouselExampleIndicators .nav-tabs>li {
         margin: 0px 10px 0px 8px;
     }
 
-    #carouselExampleIndicators .nav>li>a {
-        padding: 5px 10px;
-    }
-
-    #platform_inner p {
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 20px;
-        color: #666666;
+    #carouselExampleIndicators .nav-tabs>li.active {
+        border-radius: 16px;
     }
 
     .label-text {
-         margin-top: 0;
-         max-width: 100%;
-         text-align: center;
+        font-size: 14px;
+        line-height: 20px;
+        margin-top: 0;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .image-text {
+        font-size: 14px;
+        line-height: 20px;
+        margin: 0px;
+        padding-top: 16px;
     }
 
     .platform_button{
@@ -565,11 +548,6 @@
         width: 80px
     }
 
-    .image-text {
-        margin: 0px;
-        padding-top: 16px;
-    }
-
     .monthly-goal-text{
         display: flex;
         justify-content: center;
@@ -585,6 +563,10 @@
         min-width: 280px !important;
         max-width: 280px !important;
 }
+
+    #home-banner {
+        padding-left: 20px !important;
+    }
 
 }
 

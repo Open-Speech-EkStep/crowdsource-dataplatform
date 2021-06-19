@@ -500,5 +500,9 @@
 	"LIKHO INDIA": "LIKHO INDIA",
 	"DEKHO INDIA": "DEKHO INDIA",
 	"Monthly Goal :  ": "Monthly Goal :  ",
-	"Input field can not be empty": "Input field can not be empty"
+	"Input field can not be empty": "Input field can not be empty",
+	"Help create open repository of Speech Recognition data, Parallel translations and Labelled Images.": "Help create open repository of Speech Recognition data, Parallel translations and Labelled Images.",
+	"[Bhaashini]": "[Bhaashini]",
+	"[Bhaashini] aims to create open datasets to develop Speech Recognition, Text-to-Speech, Machine Translation and Optical Character Recognition for Indian languages. This initiative will empower our technologists, language enthusiasts and language communities to build world class digital applications in our own local languages.": "[Bhaashini] aims to create open datasets to develop Speech Recognition, Text-to-Speech, Machine Translation and Optical Character Recognition for Indian languages. This initiative will empower our technologists, language enthusiasts and language communities to build world class digital applications in our own local languages.",
+	"Help Indian languages become atma-nirbhar through these datasets.": "Help Indian languages become atma-nirbhar through these datasets."
 }
