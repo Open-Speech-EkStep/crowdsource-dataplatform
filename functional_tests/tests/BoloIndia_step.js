@@ -50,7 +50,7 @@ beforeSpec(async () => {
     const language = "हिंदी";
     await goto(testUrl, { waitForEvents: ['loadEventFired'] });
     await taiko.waitFor(700)
-    if (await text("Select Your Preferred Language").exists()) {
+    if (await text("Select Your Preferred Language").isVisible()) {
         await click(language);
         console.log("Contribution language selected before spec");
     }
