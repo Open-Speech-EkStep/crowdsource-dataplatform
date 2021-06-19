@@ -42,24 +42,29 @@ afterSuite(async () => {
 gauge.screenshotFn = async function () {
     const screenshotFilePath = path.join(process.env['gauge_screenshots_dir'], `screenshot-${process.hrtime.bigint()}.png`);
     await screenshot({ path: screenshotFilePath });
-    return await taiko.screenshot({ encoding: 'base64' ,path:screenshotFilePath});
+    return await taiko.screenshot({ encoding: 'base64', path: screenshotFilePath });
 };
 
 
 beforeSpec(async () => {
     const language = "हिंदी";
-    await goto(testUrl, {waitForEvents:['loadEventFired']});
+    await goto(testUrl, { waitForEvents: ['loadEventFired'] });
     await taiko.waitFor(700)
-    if(await text("Select Your Preferred Language").exists()){
+    if (await text("Select Your Preferred Language").exists()) {
         await click(language);
         console.log("Contribution language selected before spec");
     }
     await taiko.waitFor(700)
 })
 
+beforeScenario(async () => {
+    await taiko.waitFor(10000);
+    await taiko.waitFor(10000);
+})
+
 step("Open Website", async () => {
     await taiko.waitFor(500)
-    await goto(testUrl, {waitForEvents:['loadEventFired']});
+    await goto(testUrl, { waitForEvents: ['loadEventFired'] });
     await taiko.waitFor(500)
 });
 
@@ -293,14 +298,12 @@ step("User plays the audio , <arg0>,<arg1> should be disabled", async function (
     await taiko.waitFor(500)
     await click(taiko.image({ id: "play" }));
     await taiko.waitFor(1000)
-    assert.ok( await taiko.button({ id: arg0 }).isDisabled());
-    assert.ok( await taiko.button({ id: arg1 }).isDisabled());
+    assert.ok(await taiko.button({ id: arg0 }).isDisabled());
+    assert.ok(await taiko.button({ id: arg1 }).isDisabled());
     const count = 20;
-    for(let i =0;i<=count;i++)
-    {
+    for (let i = 0; i <= count; i++) {
         await taiko.waitFor(1000)
-        if(await taiko.image({id: "replay"}).isVisible())
-        {
+        if (await taiko.image({ id: "replay" }).isVisible()) {
             console.log("indiside loop")
             break;
         }
@@ -308,8 +311,8 @@ step("User plays the audio , <arg0>,<arg1> should be disabled", async function (
     // Once the audio is complete , then correct button should be enabled
     // await taiko.waitFor( async () =>{ !(await taiko.$( "#replay").exists())});
     //await taiko.waitFor(10000)
-    assert.ok(! (await taiko.button({ id: arg0 }).isDisabled()));
-    assert.ok(! (await taiko.button({ id: arg1 }).isDisabled()));
+    assert.ok(!(await taiko.button({ id: arg0 }).isDisabled()));
+    assert.ok(!(await taiko.button({ id: arg1 }).isDisabled()));
 });
 
 step("<arg0> should be enabled , <arg1> <arg2> buttons should be disabled", async function (arg0, arg1, arg2) {
@@ -402,7 +405,7 @@ step("When user clicks on the cross button , pop up should close and user should
 });
 
 step("When user clicks on the Feedback icon, user should see the feedback popup", async function () {
-    await click(taiko.button({ id: "feedback_button"}))
+    await click(taiko.button({ id: "feedback_button" }))
     await taiko.waitFor(1000)
     assert.ok(await text("We would like to get your feedback to improve this site").exists());
     assert.ok(!await text("Email").isVisible());
@@ -463,9 +466,9 @@ step("When user submits , Thank you pop up should come & close button should clo
     await taiko.waitFor(500);
 });
 
-step("Validate Thank you page content for Bolo India", async function() {
-	assert.ok(await text('Thank you for contributing!').exists())
-	assert.ok(await text('100 hrs').exists())
+step("Validate Thank you page content for Bolo India", async function () {
+    assert.ok(await text('Thank you for contributing!').exists())
+    assert.ok(await text('100 hrs').exists())
 });
 
 step("Validate terms and condition content", async function () {
