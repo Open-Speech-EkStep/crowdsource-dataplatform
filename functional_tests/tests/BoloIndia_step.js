@@ -22,7 +22,7 @@ const {
 const path = require('path');
 
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
-const testUrl = process.env.test_url || 'http://localhost:8080';
+const testUrl = process.env.test_url || 'https://dev-nplt.vakyansh.in';
 
 beforeSuite(async () => {
     await openBrowser({
@@ -57,10 +57,10 @@ beforeSpec(async () => {
     await taiko.waitFor(700)
 })
 
-beforeScenario(async () => {
-    await taiko.waitFor(10000);
-    await taiko.waitFor(10000);
-})
+// beforeScenario(async () => {
+//     await taiko.waitFor(10000);
+//     await taiko.waitFor(10000);
+// })
 
 step("Open Website", async () => {
     await taiko.waitFor(500)
