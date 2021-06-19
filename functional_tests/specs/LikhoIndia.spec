@@ -51,7 +51,7 @@
 * Select "ଓଡିଆ" Language from "from-language"
 * Select "English" Language from "to-language"
 * Check user details for "Validate" for "Likho" India
-* Navigate to "Validate" and add username "V User" then click Lets go
+* Navigate to "Validate" and add username "V1 User" then click Lets go
 * User should see add extension and watch video link
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be enabled
 * User clicks on  "need_change" button user should see "" and "Your Edit" , "cancel-edit-button" should be  enabled
