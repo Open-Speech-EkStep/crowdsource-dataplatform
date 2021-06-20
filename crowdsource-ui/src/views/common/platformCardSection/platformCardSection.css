@@ -103,11 +103,12 @@
     box-shadow: 0 4px 12px rgb(0 123 255 / 20%);
     background-position-y: center;
     background-color: #fff;
-    padding: 23px 6%;
+    padding: 23px 0px;
 }
 
 #platform_inner {
     min-height: 300px;
+    padding: 23px 6%;
 }
 
 .label-text{
@@ -188,11 +189,14 @@
 }
 
 #carouselExampleIndicators .nav-tabs {
+    padding: 0px 6%;
     display: inline-flex;
     width: 100%;
     overflow-x: auto;
     -ms-overflow-style: none; /*// IE 10+*/
+    scrollbar-width: none; /*// Firefox */
     overflow: -moz-scrollbars-none;/*// Firefox*/}
+
 
 #carouselExampleIndicators .nav-tabs>li {
     margin: 0px 80px 0px 18px;
@@ -208,7 +212,7 @@
     font-size: 24px;
     line-height: 29px;
     opacity: 0.4;
-    width: fit-content;
+    width: max-content;
 }
 
 #carouselExampleIndicators .nav-tabs>li.active{
@@ -379,6 +383,10 @@
         background-size: contain;
     }
 
+    #platform_inner {
+        padding: 0px 6%;
+    }
+
     #badge-section-card {
         background-image: url(../../img/mobile_wave.png) !important;
         background-size: contain;
@@ -403,6 +411,7 @@
         font-weight: bold;
         font-size: 20px;
         line-height: 24px;
+        margin-bottom: 12px;
     }
 
     #badge-section-card h4{
@@ -479,6 +488,10 @@
     .monthly-goal-section span{
         font-size: 14px;
         line-height: 20px;
+    }
+
+    #carouselExampleIndicators .nav-tabs {
+        padding: 0px;
     }
 
     #carouselExampleIndicators .nav>li>a {
