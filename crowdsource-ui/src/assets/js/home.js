@@ -239,12 +239,14 @@ function initializeBlock() {
     $('#start_recording').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+        localStorage.setItem("selectedType", "contribute");
         setStartRecordingBtnOnClick('../record.html', MODULE.bolo.value);
     });
 
     $('#start_validating').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+        localStorage.setItem("selectedType", "validate");
         setLetGoBtnOnClick('../validator-page.html', MODULE.bolo.value);
     });
 

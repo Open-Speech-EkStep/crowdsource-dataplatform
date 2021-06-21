@@ -502,5 +502,14 @@
 	"Duration validated": "Duration validated",
 	"Duration transcribed": "Duration transcribed",
 	"Duration contributed": "Duration contributed",
-	"Input field can not be empty": "Input field can not be empty"
+	"Input field can not be empty": "Input field can not be empty",
+	"Choose the initiative ": "Choose the initiative ",
+	"Choose the language ": "Choose the language ",
+	"Earn badges or certificate by contributing to Bolo India. Speak a sentence in language of your choice or validate the sentence that is spoken on your desired language. Share badges in your social circle, build the hype, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e.<b>YOU.</b>": "Earn badges or certificate by contributing to Bolo India. Speak a sentence in language of your choice or validate the sentence that is spoken on your desired language. Share badges in your social circle, build the hype, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e.<b>YOU.</b>",
+	"Participation Levels": "Participation Levels",
+	"The levels are defined by an overall contributions in each initiative. To understand the criteria for earning badges, please select the initiative and language of your desire": "The levels are defined by an overall contributions in each initiative. To understand the criteria for earning badges, please select the initiative and language of your desire",
+	"Validations": "Validations",
+	"You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"badges.html\">Know more</a>": "You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"badges.html\">Know more</a>",
+	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"badges.html\">Know more</a>",
+	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"../badges.html\">Know more</a>"
 }
