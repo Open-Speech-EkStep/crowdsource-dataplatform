@@ -8,7 +8,7 @@
     "watch": "run-s gulp watch:nodemon",
     "watch:nodemon": "cd crowdsource-api && npm run watch",
     "start-cluster": "cd crowdsource-api && pm2 start src/server.js -i 2",
-    "test": "run-p test:api test:ui",
+    "test": " test:api",
     "stylelint": " stylelint \"crowdsource-ui/**/*.css\"  --fix",
     "htmllint": " htmllint \"crowdsource-ui/**/*.ejs\" ",
     "prettierlint": " prettier --write ./crowdsource-ui/* ./crowdsource-api/*",
