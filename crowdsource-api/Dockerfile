@@ -19,6 +19,10 @@ RUN mv WadaSNR /opt/binaries/
 RUN rm wada_snr.tar.gz
 RUN ls /opt/binaries/WadaSNR/
 
+ARG NODE_ENV=default
+
+ENV NODE_ENV=${NODE_ENV}
+
 EXPOSE 8080
 
 CMD [ "node", "src/server.js","aws" ]

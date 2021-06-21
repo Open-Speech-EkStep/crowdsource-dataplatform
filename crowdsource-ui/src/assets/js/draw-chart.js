@@ -345,7 +345,7 @@ const drawTimelineChart = (timelineData) => {
         series.tooltip.label.fill = am4core.color("#000000");
         series.sequencedInterpolation = true;
         series.stroke = am4core.color("#FCC232");
-        series.name = "Recorded";
+        series.name = "Contributed";
 
         // Create series
         var series2 = chart.series.push(new am4charts.LineSeries());

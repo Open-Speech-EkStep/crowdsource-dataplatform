@@ -65,12 +65,14 @@ function initializeBlock() {
   $('#start_recording').on('click', () => {
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    localStorage.setItem("selectedType", "contribute");
     setStartRecordingBtnOnClick('./record.html');
   });
 
   $('#start_validating').on('click',()=>{
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    localStorage.setItem("selectedType", "validate");
     setStartRecordingBtnOnClick('./validator-page.html');
   })
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);

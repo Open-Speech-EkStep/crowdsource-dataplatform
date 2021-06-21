@@ -97,6 +97,8 @@
 * User click on "edit" field "submit-edit-button" should be enabled
 * User skips the next "3" sentences user should land on Thank you page in "English"
 * User should see the "Validate More" button
+* Navigate to "Know more" button and click "Know more" button
+* should select "" tab, "Level", "Validations", "Badge", "Validating: 5 Images" text & "Bronze_validate","Silver_validate","Gold_validate","Platinum_validate" image exist by default
 
 ## Validate profanity configuration
 * Select Contribution Language as "ગુજરાતી"

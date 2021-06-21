@@ -124,10 +124,12 @@ function initializeBlock() {
   })
 
   $('#start_recording').on('click', () => {
+    localStorage.setItem("selectedType", "contribute");
     setStartRecordingBtnOnClick('./record.html',MODULE.likho.value);
   });
 
   $('#start_validating').on('click', () => {
+    localStorage.setItem("selectedType", "validate");
     setStartRecordingBtnOnClick('./validator-page.html',MODULE.likho.value);
   })
 

@@ -197,7 +197,7 @@ function getNextSentence() {
         localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
         localStorage.setItem(currentIndexKey, currentIndex);
         resetValidation();
-        showThankYou();
+        setTimeout(showThankYou, 1000);
     }
 }
 

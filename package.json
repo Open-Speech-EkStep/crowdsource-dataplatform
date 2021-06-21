@@ -58,6 +58,7 @@
     "yargs": "^16.2.0"
   },
   "dependencies": {
+    "config": "^3.3.6",
     "npm-force-resolutions": "0.0.10"
   },
   "resolutions": {
