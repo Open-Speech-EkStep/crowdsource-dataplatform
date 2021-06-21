@@ -18,7 +18,7 @@
 <%- include('common/headerForContributor.ejs',{path:"./",MODULE:"", PAGE_TITLE:""}); %>
 <div id="content-wrapper" class="container-fluid pt-5 pb-2 px-lg-3 px-md-3 px-4 px-md-5">
     <div class="row">
-        <%- include('../../build/views/common/back-btn.ejs',{url:"./boloIndia/home.html"}) %>
+        <%- include('../../build/views/common/back-btn.ejs',{url:"javascript:history.go(-1)"}) %>
     </div>
     <div id="badge-container" class="container-fluid p-0">
     <div class="row m-0">
@@ -64,7 +64,7 @@
             </li>
           </ul>
           <div class="tab-content w-100 mt-5" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="contribute-tab">
                 <table id="badge-table" class="table table-bordered table-striped table-responsive-xs w-100">
                     <thead>
                     <tr>
@@ -78,7 +78,7 @@
                     <tbody id="contribute-rows"></tbody>
                 </table>
             </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="validate-tab">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <table id="badge-table" class="table table-bordered table-striped table-responsive-xs w-100">
                         <thead>

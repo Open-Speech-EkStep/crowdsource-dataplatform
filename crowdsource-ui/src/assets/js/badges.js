@@ -130,8 +130,19 @@ const initialise = () => {
 
 $(document).ready(function () {
   initialise();
-  console.log(localStorage.getItem(CONTRIBUTION_LANGUAGE));
-  console.log(localStorage.getItem(CURRENT_MODULE));
+  const type = localStorage.getItem("selectedType");
+  if(type && type == "validate"){
+    $("#contribute-tab").removeClass("active");
+    $("#validate-tab").addClass("active");
+    $("#profile").addClass("active show");
+    $("#home").removeClass("active show");
+  }else{
+    $("#contribute-tab").addClass("active");
+    $("#validate-tab").removeClass("active");
+    $("#profile").removeClass("active show");
+    $("#home").addClass("active show");
+  }
+ 
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
   updateLocaleLanguagesDropdown(language);
 });

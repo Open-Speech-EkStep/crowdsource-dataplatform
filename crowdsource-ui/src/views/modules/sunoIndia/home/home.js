@@ -69,12 +69,14 @@ function initializeBlock() {
   $('#start_recording').on('click', () => {
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    localStorage.setItem("selectedType", "contribute");
     setStartRecordingBtnOnClick('./record.html',MODULE.suno.value);
   });
 
   $('#start_validating').on('click',()=>{
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    localStorage.setItem("selectedType", "validate");
     setStartRecordingBtnOnClick('./validator-page.html',MODULE.suno.value);
   })
 
