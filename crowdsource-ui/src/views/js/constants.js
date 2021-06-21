@@ -47,9 +47,6 @@ if (enabled_languages != null && !enabled_languages.includes('@@')) {
   ALL_LANGUAGES = getEnabledLanguages(enabled_languages)
 }
 
-console.log('enabled_languages:', enabled_languages)
-console.log('ALL_LANGUAGES:', ALL_LANGUAGES)
-
 const BADGES = {
   bronze: { imgLg: "../../img/bronze_badge.svg", imgSm: "../../img/bronze_contributor.jpg" },
   silver: { imgLg: "../../img/silver_badge.svg", imgSm: "../../img/silver_contributor.jpg" },
