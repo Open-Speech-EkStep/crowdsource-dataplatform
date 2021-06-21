@@ -95,12 +95,26 @@ const initialise = () => {
   ];
   addToLanguage('languages', ALL_LANGUAGES);
   addToLanguage('initiative', INITIATIVES);
-  let initiative = $('#initiative option:first-child').val();
-  let selectedLanguage = $('#languages option:first-child').val();
+  let initiative;
+  let selectedLanguage;
+
+  let type = localStorage.getItem(CURRENT_MODULE);
+  let value = type ==  'bolo' ? 'text' : type  == 'likho' ? "parallel" : type == "dekho" ? "ocr" : type == "suno" ? 'asr' : 'home';
+
+  if(value != 'home') {
+    $("#initiative").find('option[value="' + value + '"]').attr("selected", "selected");
+    $("#languages").find('option[value="' + localStorage.getItem(CONTRIBUTION_LANGUAGE) + '"]').attr("selected", "selected");
+    initiative = $('#initiative').find('option[value="' + value + '"]').val();
+    selectedLanguage = $('#languages').find('option[value="' + localStorage.getItem(CONTRIBUTION_LANGUAGE) + '"]').val();
+  }else{
+    initiative = $('#initiative option:first-child').val();
+    selectedLanguage = $('#languages option:first-child').val();
+    $('#initiative option:first-child').attr("selected", "selected");
+    $('#languages option:first-child').attr("selected", "selected");
+  }
+  
   getBadgeData(initiative, 'contribute', selectedLanguage);
   getBadgeData(initiative, 'validate', selectedLanguage);
-  $('#initiative option:first-child').attr("selected", "selected");
-  $('#languages option:first-child').attr("selected", "selected");
   $('#initiative').on('change', (e) => {
     initiative = e.target.value;
     getBadgeData(initiative, 'contribute', selectedLanguage);
@@ -116,6 +130,8 @@ const initialise = () => {
 
 $(document).ready(function () {
   initialise();
+  console.log(localStorage.getItem(CONTRIBUTION_LANGUAGE));
+  console.log(localStorage.getItem(CURRENT_MODULE));
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
   updateLocaleLanguagesDropdown(language);
 });
