@@ -130,7 +130,6 @@ const initialise = () => {
 $(document).ready(function () {
   initialise();
   let moduleType = localStorage.getItem("module");
-  console.log(moduleType);
   const type = localStorage.getItem("selectedType");
   if(type && type == "validate" && moduleType != 'home'){
     $("#contribute-tab").removeClass("active");
