@@ -5,11 +5,11 @@
  *
  */
 
-const {keyboardLayout} = require('./keyboardLayout');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LIKHO_TO_LANGUAGE} = require('./constants');
-const {isMobileDevice} = require('./common');
+const { keyboardLayout } = require('./keyboardLayout');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LIKHO_TO_LANGUAGE } = require('./constants');
+const { isMobileDevice } = require('./common');
 
-function showAndHideEditError(inputTextLength,error, callback1=()=>{}, callback2=()=>{}) {
+function showAndHideEditError(inputTextLength, error, callback1 = () => { }, callback2 = () => { }) {
   const currentModule = localStorage.getItem(CURRENT_MODULE);
   const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
   const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
@@ -21,8 +21,8 @@ function showAndHideEditError(inputTextLength,error, callback1=()=>{}, callback2
     }
     $("#edit-error-row").addClass('d-none');
     $("#edit-text").add($('#edit-text-suno ')).removeClass('edit-error-area').addClass('edit-text');
-  }else {
-    if(error.type == 'noText') {
+  } else {
+    if (error.type == 'noText') {
       callback2()
 
       if ($cancelButton) {
@@ -65,19 +65,19 @@ const showKeyboard = function (language, callBack1 = () => {
    */
   document.querySelector(".edit-area").addEventListener("input", event => {
     keyboard.setInput(event.target.value);
-    const error = event.target.value ? lngtype(event.target.value) : {type : 'noText'};
+    const error = event.target.value ? lngtype(event.target.value) : { type: 'noText' };
     localStorage.setItem("physicalKeyboard", true);
     $('#keyboardBox').addClass('d-none');
     const inputText = event.target.value && event.target.value.trim();
-    showAndHideEditError(inputText.length,error,callBack1,callBack2 )
+    showAndHideEditError(inputText.length, error, callBack1, callBack2)
   });
 
   function onChange(input) {
     document.querySelector(".edit-area").value = input;
-    const error = input ? lngtype(input) : {type:'noText'};
+    const error = input ? lngtype(input) : { type: 'noText' };
     localStorage.setItem("physicalKeyboard", false);
     const inputText = input && input.trim();
-    showAndHideEditError(inputText.length,error,callBack1,callBack2 )
+    showAndHideEditError(inputText.length, error, callBack1, callBack2)
   }
 
   function onKeyPress(button) {
@@ -122,6 +122,10 @@ function lngtype(text) {
     "Punjabi": /^[\u0A00-\u0A7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
     "Tamil": /^[\u0B80-\u0BFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
     "Telugu": /^[\u0C00-\u0C7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Sanskrit": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Kashmiri": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Sindhi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Konkani": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/
   }
 
   if (currentModule == 'suno') {
@@ -138,15 +142,19 @@ function lngtype(text) {
       "Punjabi": /^[\u0A00-\u0A7F\u0030-\u0039]+$/,
       "Tamil": /^[\u0B80-\u0BFF\u0030-\u0039]+$/,
       "Telugu": /^[\u0C00-\u0C7F\u0030-\u0039]+$/,
+      "Sanskrit": /^[\u0900-\u097F\u0030-\u0039]+$/,
+      "Kashmiri": /^[\u0900-\u097F\u0030-\u0039]+$/,
+      "Sindhi": /^[\u0900-\u097F\u0030-\u0039]+$/,
+      "Konkani": /^[\u0900-\u097F\u0030-\u0039]+$/
     }
   }
 
-  let error = {type : 'language'};
+  let error = { type: 'language' };
 
   const specialSymbols = /[\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E\u0964-\u0965]/;
 
   if (currentModule == 'suno' && specialSymbols.test(newText) == true) {
-    return {type : 'symbol'}
+    return { type: 'symbol' }
   }
 
   const contributionLanguage = currentModule === 'likho' ? localStorage.getItem(LIKHO_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -222,5 +230,5 @@ $('#keyboardCloseBtn').on('click', () => {
   $('#keyboardBox').addClass('d-none');
 })
 
-module.exports = {showKeyboard, closeKeyboard, setInput, lngtype,showAndHideEditError}
+module.exports = { showKeyboard, closeKeyboard, setInput, lngtype, showAndHideEditError }
 

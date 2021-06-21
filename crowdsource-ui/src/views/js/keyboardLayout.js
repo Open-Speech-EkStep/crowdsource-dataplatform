@@ -1,5 +1,5 @@
 const keyboardLayout = {
-  'english' : {
+  'english': {
     "layout": {
       "default": [
         "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
@@ -17,7 +17,7 @@ const keyboardLayout = {
       ]
     }
   },
-  'hindi' : {
+  'hindi': {
     "layout": {
       "default": [
         " १ २ ३ ४ ५ ६ ७ ८ ९ ० - ृ {bksp}",
@@ -35,7 +35,7 @@ const keyboardLayout = {
       ]
     }
   },
-  'assamese':{
+  'assamese': {
     "layout": {
       "default": [
         " ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ০ - ৃ {bksp}",
@@ -53,7 +53,7 @@ const keyboardLayout = {
       ]
     }
   },
-  'bengali':{
+  'bengali': {
     "layout": {
       "default": [
         "ৎ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ০ - = {bksp}",
@@ -72,7 +72,7 @@ const keyboardLayout = {
     }
   },
 
-  'gujarati':{
+  'gujarati': {
     "layout": {
       "default": [
         " ૧ ૨ ૩ ૪ ૫ ૬ ૭  ૮ ૯ ૦ - = {bksp}",
@@ -90,7 +90,7 @@ const keyboardLayout = {
       ]
     }
   },
-  'kannada':{
+  'kannada': {
     "layout": {
       "default": [
         "ೆ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯ ೦ - = {bksp}",
@@ -109,7 +109,7 @@ const keyboardLayout = {
     }
   },
 
-  'malayalam':{
+  'malayalam': {
     "layout": {
       "default": [
         "െ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ൦ - = {bksp}",
@@ -128,7 +128,7 @@ const keyboardLayout = {
     }
   },
 
-  'marathi':{
+  'marathi': {
     "layout": {
       "default": [
         " १ २ ३ ४ ५ ६ ७ ८ ९ ० - ृ {bksp}",
@@ -147,7 +147,7 @@ const keyboardLayout = {
     }
   },
 
-  'odia':{
+  'odia': {
     "layout": {
       "default": [
         " ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ୦ - = {bksp}",
@@ -166,7 +166,7 @@ const keyboardLayout = {
     }
   },
 
-  'punjabi':{
+  'punjabi': {
     "layout": {
       "default": [
         " ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ੦ - = {bksp}",
@@ -185,7 +185,7 @@ const keyboardLayout = {
     }
   },
 
-  'tamil':{
+  'tamil': {
     "layout": {
       "default": [
         "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
@@ -204,7 +204,7 @@ const keyboardLayout = {
     }
   },
 
-  'telugu':{
+  'telugu': {
     "layout": {
       "default": [
         "ె ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ౦ - = {bksp}",
@@ -221,7 +221,79 @@ const keyboardLayout = {
         ".com @ {space}"
       ]
     }
-  }
+  },
+  'sanskrit': {
+    "layout": {
+      "default": [
+        " १ २ ३ ४ ५ ६ ७ ८ ९ ० - ृ {bksp}",
+        "{tab} ौ ै ा ी ू ब ह ग द ज ड ़ ॉ",
+        "{lock} ो े ् ि ु प र क त च ट {enter}",
+        "{shift}  ं म न व ल स , . य {shift}",
+        ".com @ {space}"
+      ],
+      "shift": [
+        "~ ऍ ॅ ्र ४ ज्ञ त्र क्ष श्र ( ) ः ऋ {bksp}",
+        "{tab} औ ऐ आ ई ऊ भ ङ घ ध झ ढ ञ ऑ",
+        "{lock} ओ ए अ इ उ फ ऱ ख थ छ ठ {enter}",
+        "{shift}  ँ ण    श ष । ? {shift}",
+        ".com @ {space}"
+      ]
+    }
+  },
+  'sindhi': {
+    "layout": {
+      "default": [
+        " १ २ ३ ४ ५ ६ ७ ८ ९ ० - ृ {bksp}",
+        "{tab} ौ ै ा ी ू ब ह ग द ज ड ़ ॉ",
+        "{lock} ो े ् ि ु प र क त च ट {enter}",
+        "{shift}  ं म न व ल स , . य {shift}",
+        ".com @ {space}"
+      ],
+      "shift": [
+        "~ ऍ ॅ ्र ४ ज्ञ त्र क्ष श्र ( ) ः ऋ {bksp}",
+        "{tab} औ ऐ आ ई ऊ भ ङ घ ध झ ढ ञ ऑ",
+        "{lock} ओ ए अ इ उ फ ऱ ख थ छ ठ {enter}",
+        "{shift}  ँ ण    श ष । ? {shift}",
+        ".com @ {space}"
+      ]
+    }
+  },
+  'konkani': {
+    "layout": {
+      "default": [
+        " १ २ ३ ४ ५ ६ ७ ८ ९ ० - ृ {bksp}",
+        "{tab} ौ ै ा ी ू ब ह ग द ज ड ़ ॉ",
+        "{lock} ो े ् ि ु प र क त च ट {enter}",
+        "{shift}  ं म न व ल स , . य {shift}",
+        ".com @ {space}"
+      ],
+      "shift": [
+        "~ ऍ ॅ ्र ४ ज्ञ त्र क्ष श्र ( ) ः ऋ {bksp}",
+        "{tab} औ ऐ आ ई ऊ भ ङ घ ध झ ढ ञ ऑ",
+        "{lock} ओ ए अ इ उ फ ऱ ख थ छ ठ {enter}",
+        "{shift}  ँ ण    श ष । ? {shift}",
+        ".com @ {space}"
+      ]
+    }
+  },
+  'kashmiri': {
+    "layout": {
+      "default": [
+        " १ २ ३ ४ ५ ६ ७ ८ ९ ० - ृ {bksp}",
+        "{tab} ौ ै ा ी ू ब ह ग द ज ड ़ ॉ",
+        "{lock} ो े ् ि ु प र क त च ट {enter}",
+        "{shift}  ं म न व ल स , . य {shift}",
+        ".com @ {space}"
+      ],
+      "shift": [
+        "~ ऍ ॅ ्र ४ ज्ञ त्र क्ष श्र ( ) ः ऋ {bksp}",
+        "{tab} औ ऐ आ ई ऊ भ ङ घ ध झ ढ ञ ऑ",
+        "{lock} ओ ए अ इ उ फ ऱ ख थ छ ठ {enter}",
+        "{shift}  ँ ण    श ष । ? {shift}",
+        ".com @ {space}"
+      ]
+    }
+  },
 }
 
-module.exports = {keyboardLayout};
+module.exports = { keyboardLayout };
