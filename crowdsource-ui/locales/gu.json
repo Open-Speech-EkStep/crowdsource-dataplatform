@@ -478,5 +478,6 @@
 	"We will attempt to validate the same and remove the data from our platform within 15 days on a best effort basis.": "We will attempt to validate the same and remove the data from our platform within 15 days on a best effort basis.",
 	"Duration validated": "Duration validated",
 	"Duration transcribed": "Duration transcribed",
-	"Duration contributed": "Duration contributed"
+	"Duration contributed": "Duration contributed",
+	"Input field can not be empty": "Input field can not be empty"
 }
