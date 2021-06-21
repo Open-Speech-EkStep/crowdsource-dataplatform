@@ -35,7 +35,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-lg-4 col-md-2"></div>
+        <div class="col-lg-4 col-md-2 mt-2 mt-lg-0 mt-md-0"></div>
         <div class="col-sm p-0">
             <div class="row m-0">
                 <label class="col-4 col-lg-4 col-md-4 mt-2 px-0 pt-1"><%= __('Choose the language ') %></label>
@@ -46,7 +46,7 @@
     </div>
     <div class="row mx-0 badge-mt-36">
         <p class="col-12 p-0 text-justify font-weight-light-l p-0">
-            <%- __('Earn badges or certificate by contributing to Bolo India. Speak a sentence in language of your choice or validate the sentence that is spoken on your desired language. Share badges in your social circle, build the hype, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e. <b>YOU.</b>') %></p>
+            <%- __('Earn badges or certificate by contributing to Bolo India. Speak a sentence in language of your choice or validate the sentence that is spoken on your desired language. Share badges in your social circle, build the hype, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e.<b>YOU.</b>') %></p>
     </div>
     <div class="row mx-0 badge-mt-38">
         <h4 class="col-12 p-0"><%= __('Participation Levels') %></h4>
@@ -57,10 +57,10 @@
     <div class="row mx-0 mt-4">
         <ul class="nav nav-tabs w-100 border-0" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Contibution</a>
+              <a class="nav-link active" id="contribute-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Contibution</a>
             </li>
             <li class="nav-item pl-4">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Validation</a>
+              <a class="nav-link" id="validate-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Validation</a>
             </li>
           </ul>
           <div class="tab-content w-100 mt-5" id="myTabContent">
@@ -69,7 +69,7 @@
                     <thead>
                     <tr>
                         <th scope="col" class="pl-lg-5 pl-md-4 pl-4"><%= __('Level') %></th>
-                        <th scope="col" class="pl-4">
+                        <th scope="col" style="padding-left:1.65rem">
                             <%= __('Contributions') %>
                         </th>
                         <th scope="col" class="text-center"><%= __('Badge') %></th>
@@ -84,7 +84,7 @@
                         <thead>
                         <tr>
                             <th scope="col" class="pl-lg-5 pl-md-4 pl-4"><%= __('Level') %></th>
-                            <th scope="col" class="pl-4">
+                            <th scope="col" style="padding-left:1.65rem">
                                 <%= __('Validations') %>
                             </th>
                             <th scope="col" class="text-center"><%= __('Badge') %></th>

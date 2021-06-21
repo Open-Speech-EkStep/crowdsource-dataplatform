@@ -4,18 +4,19 @@
   updateLocaleLanguagesDropdown
 } = require('./utils');
 const {CONTRIBUTION_LANGUAGE, BOLOPAGE, LOCALE_STRINGS, ALL_LANGUAGES, DEKHOPAGE, LIKHOPAGE, SUNOPAGE} = require('./constants');
+const { CURRENT_MODULE } = require('../../../build/js/common/constants');
 
-const getRowWithBadge = function (levelId, sentenceCount, badgeName, localeString, type) {
+const getRowWithBadge = function (levelId, sentenceCount, badgeName, localeString, type, source) {
   const badge = type == 'text' ? BOLOPAGE[badgeName.toLowerCase()] : type == 'ocr' ? DEKHOPAGE[badgeName.toLowerCase()] : type =='asr' ? SUNOPAGE[badgeName.toLowerCase()] : LIKHOPAGE[badgeName.toLowerCase()];
   const badgeDescription = `<p class="text-left mb-0 ml-3">Recording: ${sentenceCount} ${localeString.Sentences}</p>`;
-  return `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-4">${localeString.Level} ${levelId}</td><td>${badgeDescription}</td><td class="text-center"><div><img src=${badge.imgLg} class="table-img" height="76" width="63" alt=${badgeName} id="${badgeName}-image-hover" rel="popover"></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
+  return `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-4">${localeString.Level} ${levelId}</td><td>${badgeDescription}</td><td class="text-center"><div><img src=${source == "contribute" ? badge.imgLg :badge.imgSm} class="table-img" height="76" width="63" alt=${badgeName} id="${badgeName}_${source}" rel="popover"></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
 }
 
-const getCard = function (badgeName, localeString, type) {
+const getCard = function (badgeName, localeString, type, source) {
   const badge = type == 'text' ? BOLOPAGE[badgeName.toLowerCase()] : type == 'ocr' ? DEKHOPAGE[badgeName.toLowerCase()] : type =='asr' ? SUNOPAGE[badgeName.toLowerCase()] : LIKHOPAGE[badgeName.toLowerCase()];
   return `<div class="text-center">
                 <div class="py-2">
-                    <img src=${badge.imgLg} alt="${badgeName.toLowerCase()}_badge" class="img-fluid">
+                    <img src=${source == "contribute" ? badge.imgLg :badge.imgSm} alt="${badgeName.toLowerCase()}_badge" class="img-fluid">
                 </div>
                 <h3>${localeString[badgeName.toLowerCase()]}</h3>
             </div>`
@@ -31,15 +32,15 @@ const renderBadgeDetails = function (data, source, type) {
     const rowId = index + 1;
     let row;
     if (badge) {
-      row = getRowWithBadge(rowId, contributions, badge, localeString, type);
+      row = getRowWithBadge(rowId, contributions, badge, localeString, type,source);
     }
     $tableRows.append(row);
-    $(`#${badge}-image-hover[rel=popover]`).popover({
+    $(`#${badge}_${source}[rel=popover]`).popover({
       html: true,
       trigger: 'hover',
       placement: 'left',
       content: function () {
-        return getCard(badge, localeString, type);
+        return getCard(badge, localeString, type, source);
       }
     });
   });
