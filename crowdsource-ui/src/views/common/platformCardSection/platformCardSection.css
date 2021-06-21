@@ -623,8 +623,8 @@
         font-size: 14px;
         line-height: 20px;
         margin: 0px;
-        padding-top: 16px;
         width: 140px;
+        padding: 16px 4px 0 4px;
     }
 
     .platform_button{
