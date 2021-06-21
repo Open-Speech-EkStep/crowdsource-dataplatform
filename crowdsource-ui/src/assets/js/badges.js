@@ -4,7 +4,6 @@
   updateLocaleLanguagesDropdown
 } = require('./utils');
 const {CONTRIBUTION_LANGUAGE, BOLOPAGE, LOCALE_STRINGS, ALL_LANGUAGES, DEKHOPAGE, LIKHOPAGE, SUNOPAGE} = require('./constants');
-const { CURRENT_MODULE } = require('../../../build/js/common/constants');
 
 const getRowWithBadge = function (levelId, sentenceCount, badgeName, localeString, type, source) {
   const badge = type == 'text' ? BOLOPAGE[badgeName.toLowerCase()] : type == 'ocr' ? DEKHOPAGE[badgeName.toLowerCase()] : type =='asr' ? SUNOPAGE[badgeName.toLowerCase()] : LIKHOPAGE[badgeName.toLowerCase()];
@@ -98,7 +97,7 @@ const initialise = () => {
   let initiative;
   let selectedLanguage;
 
-  let type = localStorage.getItem(CURRENT_MODULE);
+  let type = localStorage.getItem("module");
   let value = type ==  'bolo' ? 'text' : type  == 'likho' ? "parallel" : type == "dekho" ? "ocr" : type == "suno" ? 'asr' : 'home';
 
   if(value != 'home') {
@@ -130,8 +129,9 @@ const initialise = () => {
 
 $(document).ready(function () {
   initialise();
+  let moduleType = localStorage.getItem("module");
   const type = localStorage.getItem("selectedType");
-  if(type && type == "validate"){
+  if(type && type == "validate" && moduleType != 'home'){
     $("#contribute-tab").removeClass("active");
     $("#validate-tab").addClass("active");
     $("#profile").addClass("active show");
