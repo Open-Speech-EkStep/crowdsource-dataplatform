@@ -11,32 +11,35 @@ const generateLocalisedHtmlFromEjs = require('./locales/utils/i18n-ejs-generator
 
 const env = args.env || 'local';
 
+const filename = 'env.config.' + env + '.json';
+const settings = JSON.parse(fs.readFileSync('src/assets/config/' + filename, 'utf8'));
+
 gulp.task('common-ejs-gen', function () {
   return gulp.src(['src/views/common/**/*.ejs']).pipe(gulpFlatten()).pipe(gulp.dest('build/views/common'));
 });
 
 gulp.task('html-gen-common', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/src/views`, `${__dirname}/target`);
+  generateLocalisedHtmlFromEjs(`${__dirname}/src/views`, `${__dirname}/target`, null, settings.enabled_languages);
   callback();
 });
 
 gulp.task('html-gen-boloIndia', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'boloIndia');
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'boloIndia', settings.enabled_languages);
   callback();
 });
 
 gulp.task('html-gen-sunoIndia', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'sunoIndia');
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'sunoIndia', settings.enabled_languages);
   callback();
 });
 
 gulp.task('html-gen-likhoIndia', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'likhoIndia');
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'likhoIndia', settings.enabled_languages);
   callback();
 });
 
 gulp.task('html-gen-dekhoIndia', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'dekhoIndia');
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'dekhoIndia', settings.enabled_languages);
   callback();
 });
 
@@ -83,10 +86,6 @@ gulp.task('html', function () {
 });
 
 gulp.task('js', function () {
-  const env = args.env || 'local';
-
-  const filename = 'env.config.' + env + '.json';
-  const settings = JSON.parse(fs.readFileSync('src/assets/config/' + filename, 'utf8'));
   return gulp
     .src(['src/assets/js/*.js'])
     .pipe(

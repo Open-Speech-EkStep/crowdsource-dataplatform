@@ -1,10 +1,10 @@
 const { MOTHER_TONGUE, ALL_LANGUAGES } = require('../../src/views/js/constants');
+const { getEnabledLanguages } = require('../../src/views/js/language-filter');
 
 const fs = require('fs');
 const ejs = require('ejs');
 const { I18n } = require('i18n');
-const LANGUAGES = ALL_LANGUAGES
-console.log('LANGUAGES:', LANGUAGES)
+
 async function ejs2html(path, information, i18n, targetPath, fileName, locale) {
   fs.readFile(path, 'utf8', async function (err, data) {
     if (err) {
@@ -30,7 +30,8 @@ async function ejs2html(path, information, i18n, targetPath, fileName, locale) {
   });
 }
 
-const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName) {
+const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, enabledLanguage) {
+  const LANGUAGES = getEnabledLanguages(enabledLanguage);
   const i18n = new I18n({
     locales: [
       'as',
