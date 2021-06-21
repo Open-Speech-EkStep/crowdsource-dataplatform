@@ -59,7 +59,6 @@
   },
   "dependencies": {
     "config": "^3.3.6",
-    "load-json-file": "^6.2.0",
     "npm-force-resolutions": "0.0.10"
   },
   "resolutions": {
