@@ -1,8 +1,10 @@
-const { MOTHER_TONGUE, LANGUAGES } = require('../../../crowdsource-api/src/constants');
+const { MOTHER_TONGUE, ALL_LANGUAGES } = require('../../src/views/js/constants');
+
 const fs = require('fs');
 const ejs = require('ejs');
 const { I18n } = require('i18n');
-
+const LANGUAGES = ALL_LANGUAGES
+console.log('LANGUAGES:', LANGUAGES)
 async function ejs2html(path, information, i18n, targetPath, fileName, locale) {
   fs.readFile(path, 'utf8', async function (err, data) {
     if (err) {
@@ -88,7 +90,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName) {
     );
     await ejs2html(`${ejsPath}/feedback.ejs`, {}, i18n, outputPath, 'feedback.html', locale);
     await ejs2html(
-     `${ejsPath}/home.ejs`,
+      `${ejsPath}/home.ejs`,
       { MOTHER_TONGUE, LANGUAGES, isCookiePresent: false, defaultLang: undefined },
       i18n,
       outputPath,
@@ -100,7 +102,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName) {
     await ejs2html(
       `${ejsPath}/terms-and-conditions.ejs`,
       {},
-      i18n, 
+      i18n,
       outputPath,
       'terms-and-conditions.html',
       locale
@@ -118,7 +120,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName) {
     );
 
     await ejs2html(`${ejsPath}/profanity-boloindia.ejs`, {}, i18n, outputPath, 'profanity-boloindia.html', locale);
-    await ejs2html(`${ejsPath}/profanity-home.ejs`, {LANGUAGES}, i18n, outputPath, 'profanity-home.html', locale);
+    await ejs2html(`${ejsPath}/profanity-home.ejs`, { LANGUAGES }, i18n, outputPath, 'profanity-home.html', locale);
     await ejs2html(`${ejsPath}/profanity.ejs`, {}, i18n, outputPath, 'profanity.html', locale);
   });
 };
