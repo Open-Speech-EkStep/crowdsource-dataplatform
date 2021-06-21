@@ -176,3 +176,7 @@ step("User clears the edit field should disable the buttons again in validation"
 	await taiko.waitFor(500)
 	assert.ok(await button({ id: 'submit-edit-button' }).isDisabled())
 });
+
+step("Check Data Source button should not be visible", async () => {
+	assert.ok(! await taiko.button({ id: 'show_source_button' }).isVisible());
+});

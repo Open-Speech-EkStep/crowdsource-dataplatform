@@ -64,7 +64,7 @@
 	cursor: pointer;
 }
 
-.modal-body label span {
+#feedback_modal .modal-body label span {
 	font-family: Lato;
 	font-size: 16px;
 	font-style: italic;

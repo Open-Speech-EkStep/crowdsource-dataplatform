@@ -10,14 +10,14 @@
     "@getgauge/cli": "^1.1.7",
     "fs": "^0.0.1-security",
     "jest": "27.0.4",
-    "taiko": "latest",
-    "npm-force-resolutions": "0.0.10"
+    "npm-force-resolutions": "0.0.10",
+    "taiko": "latest"
   },
   "devDependencies": {
+    "glob-parent": "^5.1.2",
     "node-env-run": "^4.0.2",
     "supertest": "^6.1.3",
-    "trim-newlines": "^4.0.2",
-    "glob-parent": "^5.1.2"
+    "trim-newlines": "^4.0.2"
   },
   "resolutions": {
     "trim-newlines": "4.0.1",

@@ -7,6 +7,7 @@ const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { cdn_url } = require('../common/env-api');
 const { initializeFeedbackModal } = require('../common/feedback');
+const { setDataSource } = require('../common/sourceInfo');
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
@@ -107,6 +108,7 @@ function getNextSentence() {
     updateProgressBar(currentIndex + 1,dekhoIndiaValidator.sentences.length);
     const encodedUrl = encodeURIComponent(dekhoIndiaValidator.sentences[currentIndex].sentence);
     setDekhoImage(`${cdn_url}/${encodedUrl}`);
+    setDataSource(dekhoIndiaValidator.sentences[currentIndex].source_info);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
@@ -377,6 +379,7 @@ const initializeComponent = () => {
     if (validationData) {
       const encodedUrl = encodeURIComponent(validationData.sentence);
       setDekhoImage(`${cdn_url}/${encodedUrl}`);
+      setDataSource(validationData.source_info);
       setCapturedText(currentIndex);
       setCurrentSentenceIndex(currentIndex + 1);
       setTotalSentenceIndex(totalItems);

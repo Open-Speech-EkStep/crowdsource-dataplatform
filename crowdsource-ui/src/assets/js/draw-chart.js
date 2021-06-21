@@ -304,8 +304,8 @@ const drawTimelineChart = (timelineData) => {
             chartData[i].year = String(chartData[i].year);
             const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(chartData[i].cumulative_contributions) * 60 * 60), true);
             const { hours: vHours, minutes: vMinutes, seconds: vSeconds } = calculateTime((Number(chartData[i].cumulative_validations) * 60 * 60), true);
-            chartData[i].contributedHours = `${cHours}hrs ${cMinutes}mins ${cSeconds}secs`;
-            chartData[i].validatedHours = `${vHours}hrs ${vMinutes}mins ${vSeconds}secs`;
+            chartData[i].contributedHours = formatTime(cHours, cMinutes, cSeconds);
+            chartData[i].validatedHours = formatTime(vHours, vMinutes, vSeconds);
         }
 
         chart.data = chartData;
@@ -337,7 +337,7 @@ const drawTimelineChart = (timelineData) => {
             <div>
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div>Contributed: <label>{contributedHours}</label></div>
-                <div style="text-align: left; font-style: italic;">Validated: <label>{validatedHours}</label></div>
+                <div style="text-align: left;">Validated: <label>{validatedHours}</label></div>
             </div>`;
         series.tooltip.getFillFromObject = false;
         series.tooltip.autoTextColor = false;
@@ -345,7 +345,7 @@ const drawTimelineChart = (timelineData) => {
         series.tooltip.label.fill = am4core.color("#000000");
         series.sequencedInterpolation = true;
         series.stroke = am4core.color("#FCC232");
-        series.name = "Recorded";
+        series.name = "Contributed";
 
         // Create series
         var series2 = chart.series.push(new am4charts.LineSeries());

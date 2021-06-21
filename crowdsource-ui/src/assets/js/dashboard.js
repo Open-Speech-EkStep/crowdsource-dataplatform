@@ -1,6 +1,6 @@
 const { updateGraph } = require('./draw-chart');
 const { testUserName, setSpeakerDetails, setUserNameOnInputFocus, setGenderRadioButtonOnClick, setUserModalOnShown } = require('./speakerDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString, getJson } = require('./utils');
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString, getJson, formatTime } = require('./utils');
 const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES } = require('./constants');
 const fetch = require('./fetch');
 const { data } = require('jquery');
@@ -104,8 +104,8 @@ function updateLanguage(language) {
                         $speakerContributionData.addClass('col-12 col-md-4 col-lg-4 col-xl-4')
                     }
 
-                    $speakersDataContributionValue.text(`${contributedHours}h ${contributedMinutes}m ${contributedSeconds}s`);
-                    $speakersDataValidationValue.text(`${validatedHours}h ${validatedMinutes}m ${validatedSeconds}s`);
+                    $speakersDataContributionValue.text(formatTime(contributedHours, contributedMinutes, contributedSeconds));
+                    $speakersDataValidationValue.text(formatTime(validatedHours, validatedMinutes, validatedSeconds));
                     $speakersDataSpeakerValue.text(speakersData.speakers);
 
                     $speakersDataLoader.addClass('d-none');

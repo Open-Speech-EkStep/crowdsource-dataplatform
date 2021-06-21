@@ -1,3 +1,5 @@
+const config = require('config');
+
 const {
     MAX_SIZE,
     VALID_FILE_TYPE,
@@ -30,6 +32,8 @@ function isValidLanguage(language) {
 const validateUserInputAndFile = function (req, res, next) {
     const speakerDetails = req.body.speakerDetails;
     const speakerDetailsJson = JSON.parse(speakerDetails);
+    const isEmailInUserName = EMAIL_REGEX.test(speakerDetailsJson.userName)
+
     const isInvalidParams = !(speakerDetailsJson.userName != undefined && speakerDetailsJson.userName.length <= MAX_LENGTH && !MOBILE_REGEX.test(speakerDetailsJson.userName));
 
     const MIN_INPUT_LENGTH = 2;
@@ -39,6 +43,10 @@ const validateUserInputAndFile = function (req, res, next) {
     const invalidGender = (speakerDetailsJson.gender && !GENDER.includes(speakerDetailsJson.gender));
     const invalidAgeGroup = (speakerDetailsJson.age && !AGE_GROUP.includes(speakerDetailsJson.age));
     const invalidLanguage = (!req.body.language || !allLanguages.includes(req.body.language))
+
+    if (!config.get('whitelistingEmail') && isEmailInUserName){
+        return res.status(400).send("Bad request username contain email address");
+    }
 
     if (invalidAgeGroup || invalidGender || invalidMotherTongue || invalidLanguage)
         return res.status(400).send("Bad request");
@@ -68,20 +76,19 @@ const validateUserInfo = function (req, res, next) {
     const type = req.params.type;
     const userId = req.cookies.userId;
     const language = req.body.language;
-    console.log(userName);
-    console.log(type);
-    console.log(userId);
-    console.log(language);
 
-    // if (!userId || userName === null || userName === undefined) {
-    //     return res.status(400).send({ error: 'required parameters missing' });
-    // }
+    if (!userId || userName === null || userName === undefined) {
+        return res.status(400).send({ error: 'required parameters missing' });
+    }
 
-    // const isValidType = (MEDIA_TYPES.includes(type));
+    const isValidType = (MEDIA_TYPES.includes(type));
 
-    // if (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || !isValidType || !language) {
-    //     return res.status(400).send("Bad request");
-    // }
+    console.log(config.get('whitelistingEmail'),"ghchgchgchchfcg")
+
+    if (!config.get('whitelistingEmail') && (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName) || !isValidType || !language) ){
+        return res.status(400).send("Bad request");
+    }
+
     next()
 }
 

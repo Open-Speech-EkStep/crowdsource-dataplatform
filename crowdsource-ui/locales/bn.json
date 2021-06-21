@@ -390,7 +390,6 @@
 	"Your language and top 3 most contributed languages": "Your language and top 3 most contributed languages",
 	"Languages pairs": "Languages pairs",
 	"Your languageand top 3 most contributed languages": "Your languageand top 3 most contributed languages",
-	"Your language and top 3 most contributed languages": "Your language and top 3 most contributed languages",
 	"YOUR EDIT": "YOUR EDIT",
 	"Bengali": "Bengali",
 	"Urdu": "Urdu",
@@ -562,14 +561,13 @@
 	"Numbers are not allowed": "Numbers are not allowed",
 	"Special characters are not allowed": "Special characters are not allowed",
 	"Input Field can not be empty": "Input Field can not be empty",
-	"Levels de and Badging": "Levels de and Badging",
-	"Choose the initiative ": "Choose the initiative ",
-	"Choose the language ": "Choose the language ",
-	"The levels are defined by an overall contributions in each initiative. To understand the criteria for earning badges, please select the initiative and language of your desire": "The levels are defined by an overall contributions in each initiative. To understand the criteria for earning badges, please select the initiative and language of your desire",
-	"Participation Levels": "Participation Levels",
-	"Validations": "Validations",
-	"You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"badges.html\">Know more</a>": "You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"badges.html\">Know more</a>",
-	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"badges.html\">Know more</a>",
-	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"../badges.html\">Know more</a>",
-	"Earn badges or certificate by contributing to Bolo India. Speak a sentence in language of your choice or validate the sentence that is spoken on your desired language. Share badges in your social circle, build the hype, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e.<b>YOU.</b>": "Earn badges or certificate by contributing to Bolo India. Speak a sentence in language of your choice or validate the sentence that is spoken on your desired language. Share badges in your social circle, build the hype, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e.<b>YOU.</b>"
+	"Opt-out displayed data": "Opt-out displayed data",
+	"Source Name": "Source Name",
+	"URL": "URL",
+	"If you are the copyright holder of this data and believe it should not be used in the platform please send us an email to <span class=\"email\">admin-support@crowdsourceplatform.gov</span><span class=\"tooltiptext\" id=\"myDataSourceTooltip\">Copy to clipboard</span> with evidence that you are indeed the copyright holder of this data.": "If you are the copyright holder of this data and believe it should not be used in the platform please send us an email to <span class=\"email\">admin-support@crowdsourceplatform.gov</span><span class=\"tooltiptext\" id=\"myDataSourceTooltip\">Copy to clipboard</span> with evidence that you are indeed the copyright holder of this data.",
+	"We will attempt to validate the same and remove the data from our platform within 15 days on a best effort basis.": "We will attempt to validate the same and remove the data from our platform within 15 days on a best effort basis.",
+	"Duration validated": "Duration validated",
+	"Duration transcribed": "Duration transcribed",
+	"Duration contributed": "Duration contributed",
+	"Input field can not be empty": "Input field can not be empty"
 }

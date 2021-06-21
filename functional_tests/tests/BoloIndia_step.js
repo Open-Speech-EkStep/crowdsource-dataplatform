@@ -86,6 +86,16 @@ step("User details popup should appear and close button should close the pop up"
     await taiko.waitFor(500)
 });
 
+step("When user clicks on Data Source button, popup should open and they should see source information", async function () {
+    assert.ok(await taiko.button({ id: 'show_source_button' }).isVisible());
+    await click(taiko.button({ id: 'show_source_button' }));
+    await taiko.waitFor(700);
+    assert.ok(await text("Opt-out displayed data").isVisible());
+    await click(taiko.button({ id: 'datasource_close_btn' }));
+    await taiko.waitFor(700);
+    assert.ok(! await text("Opt-out displayed data").isVisible());
+});
+
 step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present", async function () {
     await taiko.waitFor(1000)
     assert.ok(await taiko.textBox({ id: 'username' }).exists())
@@ -257,8 +267,8 @@ step("When user clicks on View all Details buttton , user shall land on Dashboar
     await taiko.waitFor(1000)
     assert.ok(await text("Languages").exists());
     assert.ok(await text("Speakers contributed").exists());
-    assert.ok(await text("Hrs recorded").exists());
-    assert.ok(await text("Hrs validated").exists());
+    assert.ok(await text("Duration contributed").exists());
+    assert.ok(await text("Duration validated").exists());
 });
 
 step("When user select <lang> Language from dropdown then <arg0> should not visible", async function (lang, arg0) {
@@ -285,10 +295,21 @@ step("User plays the audio , <arg0>,<arg1> should be disabled", async function (
     await taiko.waitFor(1000)
     assert.ok( await taiko.button({ id: arg0 }).isDisabled());
     assert.ok( await taiko.button({ id: arg1 }).isDisabled());
+    const count = 20;
+    for(let i =0;i<=count;i++)
+    {
+        await taiko.waitFor(1000)
+        if(await taiko.image({id: "replay"}).isVisible())
+        {
+            console.log("indiside loop")
+            break;
+        }
+    }
     // Once the audio is complete , then correct button should be enabled
-    await taiko.waitFor(7000)
-    assert.ok(! await taiko.button({ id: arg0 }).isDisabled());
-    assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
+    // await taiko.waitFor( async () =>{ !(await taiko.$( "#replay").exists())});
+    //await taiko.waitFor(10000)
+    assert.ok(! (await taiko.button({ id: arg0 }).isDisabled()));
+    assert.ok(! (await taiko.button({ id: arg1 }).isDisabled()));
 });
 
 step("<arg0> should be enabled , <arg1> <arg2> buttons should be disabled", async function (arg0, arg1, arg2) {
@@ -384,19 +405,19 @@ step("When user clicks on the Feedback icon, user should see the feedback popup"
     await click(taiko.button({ id: "feedback_button"}))
     await taiko.waitFor(1000)
     assert.ok(await text("We would like to get your feedback to improve this site").exists());
-    assert.ok(await text("Email").exists());
-    assert.ok(await text("Giving Feedback for?").exists());
-    assert.ok(await text("Select page").exists());
-    assert.ok(await text("What is your opinion of this page").exists());
-    assert.ok(await text("Please select your feedback category").exists());
-    assert.ok(await text("Share your feedback below").exists());
+    assert.ok(!await text("Email").isVisible());
+    assert.ok(!await text("Giving Feedback for?").isVisible());
+    assert.ok(!await text("Select page").isVisible());
+    assert.ok(await text("What is your opinion of this page").isVisible());
+    assert.ok(await text("Please select your feedback category").isVisible());
+    assert.ok(await text("Share your feedback below").isVisible());
 });
 
 step("Submit button should be disbaled, When user selects an opinion, submit button should be enabled", async function () {
     await taiko.waitFor(500)
-    const usernameFiled = taiko.textBox({ id: 'email' })
-    await taiko.waitFor(500)
-    await write('TestUser', into(usernameFiled))
+    // const usernameFiled = taiko.textBox({ id: 'email' })
+    // await taiko.waitFor(500)
+    // await write('TestUser', into(usernameFiled))
     assert.ok(await taiko.button({ id: "submit_btn" }).isDisabled());
     await click(taiko.$("#very_happy_label"));
     assert.ok(! await taiko.button({ id: "submit_btn" }).isDisabled());

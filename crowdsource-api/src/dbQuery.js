@@ -95,18 +95,22 @@ group by dataset_row."dataset_row_id", dataset_row.media ->> 'data'
 order by dataset_row."dataset_row_id"
 limit 5`;
 
-const getOrderedUniqueMediaQuery = `select dataset_row.dataset_row_id, dataset_row.media->>'data' as media_data
-from dataset_row left join contributors con on con.contributor_identifier=$1 and user_name=$2 
+const getOrderedUniqueMediaQuery = `select dataset_row.dataset_row_id, dataset_row.media->>'data' as media_data, coalesce(dataset_row.media ->> 'collectionSource', mds.params ->> 'collectionSource') as source_info
+from dataset_row 
+left join master_dataset mds on dataset_row.master_dataset_id=mds.master_dataset_id
+left join contributors con on con.contributor_identifier=$1 and user_name=$2 
 left join contributions cont on cont.dataset_row_id=dataset_row.dataset_row_id and cont.contributed_by=con.contributor_id 
 inner join configurations conf on conf.config_name='include_profane' 
 where dataset_row.media->>'language'=$4 and difficulty_level=$3 and type=$5 and state is null
 and (cont.action is null or (coalesce(cont.action,'')='skipped' and cont.contributed_by!=con.contributor_id)) 
 and (conf.value=1 or is_profane=false)
-group by dataset_row.dataset_row_id, dataset_row.media->>'data' 
+group by dataset_row.dataset_row_id, dataset_row.media->>'data', mds.params 
 order by dataset_row.dataset_row_id
 limit 5`;
 
-const getOrderedUniqueMediaForParallel = `select dr.dataset_row_id, dr.media->>'data' as media_data from dataset_row dr 
+const getOrderedUniqueMediaForParallel = `select dr.dataset_row_id, dr.media->>'data' as media_data, coalesce(dr.media ->> 'collectionSource', mds.params ->> 'collectionSource') as source_info 
+from dataset_row dr 
+left join master_dataset mds on dr.master_dataset_id=mds.master_dataset_id
 left join contributors con on con.contributor_identifier=$1 and user_name=$2
 left join contributions cont on cont.dataset_row_id=dr.dataset_row_id and cont.contributed_by=con.contributor_id 
 inner join configurations conf on conf.config_name='include_profane' 
@@ -114,35 +118,37 @@ where dr.media->>'language'=$4 and difficulty_level=$3 and type=$5
 and (((state is null) or ((state='contributed' or state='validated') and not exists (select 1 from contributions where dataset_row_id=dr.dataset_row_id and contributions.media->>'language'=$6  and action='completed'))) 
   and (cont.action is null or (coalesce(cont.action,'')='skipped' and cont.contributed_by!=con.contributor_id)))
 and (conf.value=1 or is_profane=false)
- group by dr."dataset_row_id", dr.media->>'data' order by dr."dataset_row_id" limit 5`;
+ group by dr."dataset_row_id", dr.media->>'data', mds.params order by dr."dataset_row_id" limit 5`;
 
 const getContributionListQuery = `
-select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id 
+select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id, coalesce(ds.media ->> 'collectionSource', mds.params ->> 'collectionSource') as source_info
     from contributions con 
     inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and con.contributed_by!=$1
 	and ds.type=$2 and (ds.type!='parallel' or con.media->>'language'=$4)
+  left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
     left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' 
 	inner join configurations conf on conf.config_name='validation_count' 
   inner join configurations conf2 on conf2.config_name='include_profane' 
     where  con.action='completed' and ds.media->>'language'=$3 
     and (conf2.value=1 or is_profane=false)
 	and con.contribution_id not in (select contribution_id from validations where validated_by=$1)
-	group by con.dataset_row_id, ds.media->>'data', con.contribution_id, conf.value 
+	group by con.dataset_row_id, ds.media->>'data', con.contribution_id, conf.value, mds.params, ds.media 
 	having count(val.*)<conf.value
     order by count(val.*) desc, con.contribution_id 
 	limit 5;`
 
 const getContributionListForParallel = `
-select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id 
+select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id, coalesce(ds.media ->> 'collectionSource', mds.params ->> 'collectionSource') as source_info  
   from contributions con 
   inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.type=$2 and con.media->>'language'=$4 and con.contributed_by!=$1
+  left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
   left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' and con.media ->> 'language' = $4
   inner join configurations conf on conf.config_name='validation_count' 
   inner join configurations conf2 on conf2.config_name='include_profane' 
   where  con.action='completed' and ds.media->>'language'=$3
   and (conf2.value=1 or is_profane=false) 
   and con.contribution_id not in (select contribution_id from validations where validated_by=$1)
-  group by con.dataset_row_id, ds.media->>'data', con.contribution_id, conf.value 
+  group by con.dataset_row_id, ds.media->>'data', con.contribution_id, conf.value, mds.params, ds.media
   having count(val.*)<conf.value
   order by count(val.*) desc, con.contribution_id limit 5;`
 

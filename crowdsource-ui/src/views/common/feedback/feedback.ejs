@@ -20,20 +20,22 @@
             </div>
             <div class="border-top"></div>
             <div class="modal-body" style="padding:20px 34px 45px 32px">
-                <div class="mb-3">
+                
+
+                <div class="mb-3 email-component" style="display:none">
                     <label class="form-check-label label-color-feedback" for="email">
                         <%= __('Email') %> <span class="required">(*required)</span>
                     </label>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 email-component" style="display:none">
                     <input class="form-control" name="email" id="email" type="email" required>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 content-component" style="display:none">
                     <label class="form-check-label label-color-feedback">
                         <%= __('Giving Feedback for?') %> <span class="required">(*required)</span>
                     </label>
                 </div>
-                <div class="mb-4">
+                <div class="mb-4 content-component" style="display:none">
                     <div class="form-row">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="moduleSelectRadio" id="bolo_id" value="bolo">
@@ -56,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-4">
+                <div class="mb-4 content-component" style="display:none">
                     <div class="form-row">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="moduleSelectRadio" id="dekho_id" value="dekho">
@@ -72,12 +74,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 page-type-component" style="display:none">
                     <label class="form-check-label label-color-feedback" for="select_page_id">
                         <%= __('Select page') %> <span class="required">(*required)</span>
                     </label>
                 </div>
-                <div class="md-4">
+                <div class="md-4 page-type-component" style="display:none">
                     <div class="form-row">
                         <select class="form-control" id="select_page_id" name="select_page_id">
                         </select>
@@ -88,6 +90,7 @@
                     </div>
                 </div>
 
+                
                 <div class="mb-4 mt-4">
                     <label class="form-check-label label-color-feedback">
                         <%= __('What is your opinion of this page') %> <span class="required">(*required)</span>
