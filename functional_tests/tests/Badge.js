@@ -2,6 +2,9 @@ const taiko = require('taiko');
 const assert = require('assert');
 
 const {
+    text,
+    link,
+    click
 } = require('taiko');
 
 step("Validate initiative & language dropdown exist", async function () {
