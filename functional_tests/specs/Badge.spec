@@ -10,5 +10,11 @@
 * should select "contribution" tab, "Level", "Contributions", "Badge", "Recording: 5 Sentences" text & "Bronze_contribute" image exist by default
 * should select "Validation" tab, "Level", "Validations", "Badge","Validating: 5 Sentences" text & "Bronze_validate" image exist by default
 * User should select "Dekho India" initiative from dropdown
-* should select "contribution" tab, "Level", "Contributions", "Badge", "Contribute: 5 Images" text & "Bronze_contribute" image exist by default
+* should select "contribution" tab, "Level", "Contributions", "Badge", "Labelling: 5 Images" text & "Bronze_contribute" image exist by default
 * should select "Validation" tab, "Level", "Validations", "Badge","Validating: 5 Images" text & "Bronze_validate" image exist by default
+* User should select "Suno India" initiative from dropdown
+* should select "contribution" tab, "Level", "Contributions", "Badge", "Transcribing: 5 Sentences" text & "Bronze_contribute" image exist by default
+* should select "Validation" tab, "Level", "Validations", "Badge","Validating: 5 Images" text & "Bronze_validate" image exist by default
+* User should select "Likho India" initiative from dropdown
+* should select "contribution" tab, "Level", "Contributions", "Badge", "Transalating: 5 Sentences" text & "Bronze_contribute" image exist by default
+* should select "Validation" tab, "Level", "Validations", "Badge", "Validating: 5 Images" text & "Bronze_validate" image exist by default
