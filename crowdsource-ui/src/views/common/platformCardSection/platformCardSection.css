@@ -8,28 +8,40 @@
     margin: auto;
 }
 
+.platform-intro-section-text{
+    margin-top: 60px !important;
+    margin-bottom: 60px !important;
+}
+
 .platform-intro-section-text h4{
     color: #111111;
+    font-size: 32px;
 }
 
 .platform-intro-section-text p{
     color: #666666;
+    font-size: 20px;
+    line-height: 32px;
 }
 
 #platform_section {
     max-width: 1200px;
     margin: auto;
-    border-radius: 32px
+    border-radius: 32px;
+    margin-top: 40px;
+
 }
 
 .platform-card-section-heading{
     color: #111111;
+    font-size: 32px;
+    margin-top: 60px !important;
 }
 
 .platform-card-section-para{
     font-style: normal;
     font-weight: normal;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 32px;
     color: #666666;
 }
@@ -103,12 +115,17 @@
     box-shadow: 0 4px 12px rgb(0 123 255 / 20%);
     background-position-y: center;
     background-color: #fff;
-    padding: 23px 0px;
+    padding: 24px 0px 0px 0px;
 }
 
 #platform_inner {
     min-height: 300px;
-    padding: 23px 6%;
+    padding: 8px 6% 0 6%;
+}
+
+.carousel-item{
+    padding-right: 4px;
+    padding-left: 4px;
 }
 
 .label-text{
@@ -116,6 +133,9 @@
     line-height: 32px;
     font-weight: 400;
     font-size: 20px;
+    width: 300px;
+    margin-top: 20px;
+    text-align: left;
 }
 
 .image-text {
@@ -123,6 +143,10 @@
     line-height: 32px;
     color: #666666;
     font-weight: 400;
+    padding-top: 25px;
+    margin: 0 20px;
+    width: 280px;
+    text-align: center;
 }
 
 .platform_button{
@@ -135,17 +159,6 @@
     height: 130px;
     width: 130px;
     box-shadow: 0px 0px 12px 8px rgb(66 178 198 / 12%);
-}
-
-.image-text {
-    padding-top: 25px;
-    margin: 0 46px;
-}
-
-.label-text {
-    margin-top: 1.2rem;
-    max-width: 58%;
-    text-align: left;
 }
 
 .suno-val-image {
@@ -177,10 +190,16 @@
     color:#666666;;
     line-height:40px;
     padding-right: 20px;
+    font-size: 24px;
 }
 .home-badge-link-row2{
-    font-size: 28px;
+    font-size: 24px;
     line-height: 146%;
+}
+
+.badge-card-text-box h4{
+    color: #666666;
+    font-size: 20px;
 }
 
 #badge-section{
@@ -335,18 +354,88 @@
         margin-top: 12px !important;
     }
 
+    .badge-card-text-box h4{
+        color: #666666;
+        padding-left: 10px !important;
+    }
+
+    .image-text{
+        width: 240px;
+    }
+
+    .label-text {
+        width: 260px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .label-text{
+        width: 240px;
+    }
+
+    .image-text{
+        width: 240px;
+    }
+
+    .badge-card-text-box h2{
+        padding-left: 10px;
+    }
+
+    .badge-card-text-box h4{
+        padding-left: 10px;
+    }
+
+}
+
+
+@media (min-width: 700px) and (max-width: 768px) {
+    #platform_inner{
+        padding: 8px 3% 0 3%;
+    }
+
+    #badge-section {
+        padding-right: 45px !important;
+        padding-left: 45px !important;
+    }
+
+    #badge-section-card button{
+        max-width: 140px;
+        min-width: 140px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .badge-card-img-box {
+        text-align: center !important;
+    }
+
+    .badge-card-text-box{
+        margin-left: 0px !important;
+    }
+
+    .badge-card-text-box button{
+        margin-top: 12px !important;
+    }
+
     .home-badge-link-row2{
         text-align: center !important;
         margin-top: 32px !important;
     }
 
+    .label-text{
+        width: 200px;
+        font-size: 16px;
+    }
+
     .image-text{
         margin: 0px !important;
+        width: 200px;
+        font-size: 16px;
     }
 
     .suno-cont-image{
-        width: 100px;
-        height: 100px;
+        width: 100px ;
+        height: 100px ;
     }
 
     .suno-cont-image img{
@@ -445,6 +534,12 @@
         height: 44px!important;
         font-size: 16px!important;
         font-size: 16px;
+        margin-top: 52px !important;
+    }
+
+    .platform-intro-section-text{
+        margin-top: 20px !important;
+        margin-bottom: 40px!important;
     }
 
     .platform-intro-section-text h4{
@@ -460,7 +555,7 @@
     }
 
     .home-badge-link-row2{
-        font-size: 20px;
+        font-size: 18px;
         line-height: 28px;
     }
 
@@ -469,6 +564,7 @@
         font-weight: bold;
         font-size: 20px !important;
         line-height: 28px !important;
+        margin-top: 36px !important;
     }
 
     .platform-card-section-para{
@@ -476,6 +572,8 @@
         font-weight: normal;
         font-size: 16px !important;
         line-height: 20px !important;
+        margin-top: 20px !important;
+        margin-bottom: 28px;
     }
 
     .monthly-goal-section{
@@ -526,6 +624,7 @@
         line-height: 20px;
         margin: 0px;
         padding-top: 16px;
+        width: 140px;
     }
 
     .platform_button{
@@ -535,6 +634,7 @@
         height: 44px !important;
         font-size: 16px !important;
         line-height: 32px !important;
+        margin-bottom: 20px;
     }
 
     .suno-cont-image {
@@ -579,6 +679,7 @@
 
     #home-banner {
         padding-left: 20px !important;
+        margin-top: 20px !important;
     }
 
 }
