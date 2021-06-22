@@ -83,7 +83,7 @@ $(document).ready(function (ev) {
 
   $('#carouselExampleIndicators').on('slide.bs.carousel', function (evt) {
     const index = +$(evt.relatedTarget).index();
-    $($('#carouselExampleIndicators .carousel-item .active')).fadeOut(1,()=>{});
+    $('#carouselExampleIndicators .carousel-item .active').fadeOut(500);
     $('#carouselExampleIndicators .nav-tabs li.active').removeClass('active');
     $('#carouselExampleIndicators .nav-tabs li:eq('+$(evt.relatedTarget).index()+')').addClass('active');
     $('#language-count').html(moduleList[index].total_languages);
