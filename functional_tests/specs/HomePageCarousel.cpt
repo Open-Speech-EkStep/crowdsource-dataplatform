@@ -1,0 +1,4 @@
+# Validate <module> Tab and goal <value>
+* Check If Current Tab is <module>
+* Check monthly goal section for value <value>
+* Clicking "Start Participating" should navigate to <module> Page

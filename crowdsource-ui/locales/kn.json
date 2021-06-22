@@ -511,5 +511,22 @@
 	"Validations": "Validations",
 	"You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"badges.html\">Know more</a>": "You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Badge. <a href=\"badges.html\">Know more</a>",
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"badges.html\">Know more</a>",
-	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"../badges.html\">Know more</a>"
+	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span> Badge. <a href=\"../badges.html\">Know more</a>",
+	"[Bhaashini]": "[Bhaashini]",
+	"A Crowdsourcing initiative for Indian Languages": "A Crowdsourcing initiative for Indian Languages",
+	"[Bhaashini] aims to create open datasets to develop Speech Recognition, Text-to-Speech, Machine Translation and Optical Character Recognition for Indian languages. This initiative will empower our technologists, language enthusiasts and language communities to build world class digital applications in our own local languages.": "[Bhaashini] aims to create open datasets to develop Speech Recognition, Text-to-Speech, Machine Translation and Optical Character Recognition for Indian languages. This initiative will empower our technologists, language enthusiasts and language communities to build world class digital applications in our own local languages.",
+	"Help Indian languages become atma-nirbhar through these datasets.": "Help Indian languages become atma-nirbhar through these datasets.",
+	"One Platform, 4 Crowdsourcing Initiatives": "One Platform, 4 Crowdsourcing Initiatives",
+	"Help create open repository of Speech Recognition data, Parallel translations and Labeled Images.": "Help create open repository of Speech Recognition data, Parallel translations and Labeled Images.",
+	"Start Participating": "Start Participating",
+	"Monthly Goal :  ": "Monthly Goal :  ",
+	" languages": " languages",
+	"each": "each",
+	"Engaging with this platform will win you badges and pride for building the data in local Languages": "Engaging with this platform will win you badges and pride for building the data in local Languages",
+	"Win a Bronze badge": "Win a Bronze badge",
+	"Contribute just 5 sentences in your languages": "Contribute just 5 sentences in your languages",
+	"SUNO INDIA": "SUNO INDIA",
+	"BOLO INDIA": "BOLO INDIA",
+	"LIKHO INDIA": "LIKHO INDIA",
+	"DEKHO INDIA": "DEKHO INDIA"
 }
