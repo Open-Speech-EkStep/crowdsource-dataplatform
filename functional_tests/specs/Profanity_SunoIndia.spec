@@ -1,7 +1,7 @@
 # Test Suno India Profanity 
+Tags: profanity
 
 * Open Profanity Website for "Suno" India
-
 
 ## User not found flow
 * User details popup should appear

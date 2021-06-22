@@ -1,6 +1,6 @@
 # Test BoloIndia
+Tags: component
 
-* Open Website
 * Select "Bolo India" from header
 
 ## Validate the Speaker Details pop-up in Contribute section
@@ -22,7 +22,6 @@
 * When user clicks on "Re-record" button, "Stop Recording" button should appear
 * When user clicks on "Stop Recording" button, "Submit" button should appear
 * When user clicks on "Submit" button, "Skip" button should appear
-
 
 ## Validate Contributor flow Thank you page
 * Navigate to "Contribute" button and click "Contribute" button
@@ -75,3 +74,6 @@
 ## Check Privacy and Policy links from Footer
 * Navigate to "Privacy Policy" button and click "Privacy Policy" button
 * Validate Privacy Policy content
+
+___
+* User clicks back button

@@ -10,7 +10,7 @@ const {
 step("Open Profanity Website for <flow> India", async (flow) => {
     await taiko.waitFor(500)
     if(flow == "Suno") {
-        await goto(process.env.profanity_test_url_sunoindia, {waitForEvents:['loadEventFired']});
+        await goto(process.env.profanity_test_url_sunoindia||'https://dev-nplt.vakyansh.in/en/profanity-home.html?type=sunoindia', {waitForEvents:['loadEventFired']});
     }
     if(flow == "Likho") {
         await goto(process.env.profanity_test_url_likhoindia, {waitForEvents:['loadEventFired']});

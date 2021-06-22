@@ -1,6 +1,6 @@
 # Test DekhoIndia
+Tags: component
 
-* Open Website
 * Select "Dekho India" from header
 
 ## Check Dekho India Home Page
@@ -86,3 +86,6 @@
 * Select Contribution Language as "ગુજરાતી"
 * Check "Transcribe" option should be "disabled" on Home page
 * Check "Correct" option should be "disabled" on Home page
+
+___
+* User clicks back button
