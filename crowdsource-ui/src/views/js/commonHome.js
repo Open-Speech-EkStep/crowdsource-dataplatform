@@ -91,14 +91,16 @@ const getStatsSummary = function (url, module, callBack=()=>{}) {
       showByHoursChart(module);
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-      getStatistics(response.aggregate_data_count[0], null, module);
+      getStatistics(response && response.aggregate_data_count && response.aggregate_data_count.length ? response.aggregate_data_count[0] : {}, null, module);
       callBack();
       if(response.top_languages_by_hours.length === 0) {
         $("#bar_charts_container").hide();
         $("#view_all_btn").hide();
+        $("#contribution_stats").hide();
       } else {
         $("#bar_charts_container").show();
         $("#view_all_btn").show();
+        $("#contribution_stats").show();
       }
     }).catch(err=>{
     console.log(err)
