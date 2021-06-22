@@ -1,3 +1,11 @@
+
+jest.mock('@azure/storage-blob', () => ({
+    // ...jest.requireActual('@azure/storage-blob'), // keep other props as they are
+    BlobServiceClient: {
+        fromConnectionString: jest.fn().mockReturnValue({}),
+    },
+}));
+
 const routes = require("../src/app");
 import * as dbOperations from '../src/dbOperations';
 

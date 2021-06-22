@@ -1,6 +1,5 @@
 const { downloader } = require('./downloader/objDownloader')
 const moment = require('moment');
-const { uploader } = require('./uploader/objUploader')
 
 const {
     updateContributionDetails,

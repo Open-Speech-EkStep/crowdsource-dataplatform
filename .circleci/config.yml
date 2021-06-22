@@ -44,9 +44,6 @@ jobs:
             npm run functional_test -- -- --env <<parameters.env_name>>
             psql "postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@${DB_HOST_AWS}/<< parameters.db_name >>" -f functional_tests/sql/deleteSeedData.sql
       - store_artifacts:
-          path: functional_tests/.gauge/screenshots
-          destination: screenshots
-      - store_artifacts:
           path: functional_tests/reports
           destination: reports
 
@@ -75,14 +72,14 @@ jobs:
             --include "*.svg" \
             --include "*.jpeg"
           from: crowdsource-ui/target/
-          to: 's3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>'
+          to: "s3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>"
       - aws-s3/sync:
           arguments: |
             --cache-control "max-age=0, s-maxage=600" \
             --exclude "*.svg" \
             --exclude "*.jpeg"
           from: crowdsource-ui/target/
-          to: 's3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>'
+          to: "s3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>"
       - run: aws cloudfront create-invalidation --distribution-id << parameters.distributionId >> --paths '/*'
 
   db_migrate_aws:
@@ -138,6 +135,8 @@ workflows:
 
       - create-workspace:
           name: create-workspace
+          requires:
+            - node/test
           filters:
             branches:
               only: master
@@ -146,7 +145,7 @@ workflows:
           name: migrate_dev_aws
           db_name: ${DEV_DB_NAME}
           requires:
-             - create-workspace
+            - create-workspace
 
       - build_ui_push_to_s3:
           name: build_dev_ui
@@ -180,9 +179,6 @@ workflows:
           requires:
             - push_dev_image
 
-
-
-
       - run_functional_tests:
           name: functional_tests_dev
           env_name: dev
@@ -198,6 +194,9 @@ workflows:
             - dev_deployment_eks
             - build_dev_ui
             # - functional_tests_dev
+          filters:
+            branches:
+              only: master
 
       - db_migrate_aws:
           name: migrate_cug_aws
@@ -228,7 +227,6 @@ workflows:
           requires:
             - push_cug_image
 
-
       - approve_to_deploy:
           name: approve_test_deployment_eks
           type: approval
@@ -236,6 +234,9 @@ workflows:
             - dev_deployment_eks
             - build_dev_ui
             # - functional_tests_dev
+          filters:
+            branches:
+              only: master
 
       - db_migrate_aws:
           name: migrate_test_aws
@@ -349,4 +350,3 @@ workflows:
           env-name: prod
           requires:
             - push_prod_image
-            

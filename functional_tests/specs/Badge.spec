@@ -3,7 +3,8 @@
 * Open Website
 
 ## Check Know more link into home page
-* Navigate to "Know More" button and click "Know More" button
+* Click "Know More" Link
+//* Navigate to "Know More" button and click "Know More" button
 * Validate initiative & language dropdown exist
 * User should select "English" language from dropdown
 * should select "" tab, "Level", "Contributions", "Badge", "Recording: 5 Sentences" text & "Bronze_contribute","Silver_contribute","Gold_contribute","Platinum_contribute" image exist by default
