@@ -1,6 +1,6 @@
 # Test SunoIndia
+Tags: component
 
-* Open Website
 * Select "Suno India" from header
 
 ## Check Home Page
@@ -62,6 +62,7 @@
 * When user skips the rest of the "1" sentences , User should see Thank you Page
 * Validate Thank you page content for Suno India
 * When user clicks on Contribute more button , user should see no data available message for "Suno" India
+* When user clicks on back button, user should land on home page
 
 ## Validate Validate flow
 * Select Contribution Language as "ಕನ್ನಡ"
@@ -84,6 +85,7 @@
 * User skips the next "4" sentences user should land on Thank you page in "English"
 * User should see the "Validate More" button
 * When user clicks on Validate more button , user should see no data available message for "Suno" India
+* When user clicks on back button, user should land on home page
 
 ## Check the Validate flow for new user
 * Select Contribution Language as "ಕನ್ನಡ"
@@ -99,6 +101,8 @@
 * User should see the "Validate More" button
 * Navigate to "Know more" button and click "Know more" button
 * should select "" tab, "Level", "Validations", "Badge", "Validating: 5 Images" text & "Bronze_validate","Silver_validate","Gold_validate","Platinum_validate" image exist by default
+* User clicks back button
+* When user clicks on back button, user should land on home page
 
 ## Validate profanity configuration
 * Select Contribution Language as "ગુજરાતી"

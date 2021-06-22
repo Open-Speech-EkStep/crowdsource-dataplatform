@@ -1,4 +1,5 @@
 # Test Badge
+Tags: page
 
 * Open Website
 

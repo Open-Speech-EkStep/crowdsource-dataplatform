@@ -1,4 +1,5 @@
 # Test Home Page
+Tags: page
 
 ## Validate First Section
 * Click "Know More" Button
