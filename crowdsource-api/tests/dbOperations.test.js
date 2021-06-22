@@ -57,6 +57,13 @@ const mockpgp = jest.fn(() => mockDB)
 
 jest.mock('pg-promise', () => mockpgPromise);
 
+jest.mock('@azure/storage-blob', () => ({
+    ...jest.requireActual('@azure/storage-blob'), // keep other props as they are
+    BlobServiceClient: {
+        fromConnectionString: jest.fn().mockReturnValue({}),
+    },
+}));
+
 process.env.LAUNCH_IDS = '1,2';
 const dbOperations = require('../src/dbOperations');
 const { topLanguagesByHoursContributed, topLanguagesBySpeakerContributions, listLanguages } = require('../src/dashboardDbQueries');
