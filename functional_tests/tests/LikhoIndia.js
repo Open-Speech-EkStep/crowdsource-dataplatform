@@ -28,7 +28,7 @@ step("User should see the top Language graph and other stats for Likho India", a
 });
 
 step("Select <lang> Language from <dropdown_id>", async function (lang, dropdown_id) {
-  await taiko.waitFor(1000)
+  await taiko.waitFor(2000)
   const selectLanguageDropDown = taiko.dropDown({ id: dropdown_id })
   assert.ok(await selectLanguageDropDown.exists());
   await selectLanguageDropDown.select(lang);

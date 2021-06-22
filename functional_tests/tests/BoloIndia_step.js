@@ -256,6 +256,11 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
         await click(startRecordingButton);
     }
 
+    else if (arg0 == "Know More") {
+       await click(taiko.link(arg0))
+        await taiko.waitFor(500)
+    }
+
     else {
         assert.ok(await link(arg0).exists());
         await click(arg0);
