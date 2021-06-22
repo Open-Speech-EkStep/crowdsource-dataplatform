@@ -376,14 +376,6 @@ const renderCoachMarks = function () {
 
 $(document).ready(function () {
     localStorage.setItem('module', 'bolo');
-
-    if (!localStorage.getItem(CONTRIBUTION_LANGUAGE)) {
-        showLanguagePopup();
-        return;
-    }
-    else {
-        redirectToLocalisedPage();
-    }
     clearLocalStorage();
     onActiveNavbar('bolo');
     getLocaleString().then(() => {
