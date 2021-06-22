@@ -1,6 +1,6 @@
 const { onActiveNavbar } = require('../common/header');
 const { showLanguagePopup } = require('../common/locale');
-const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,landToHome} = require('../common/common');
+const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,landToHome,hasUserRegistered} = require('../common/common');
 const {toggleFooterPosition, getLocaleString,updateLocaleLanguagesDropdown} = require('../common/utils');
 const {
   setSpeakerDetails,
@@ -66,14 +66,24 @@ function initializeBlock() {
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
     localStorage.setItem("selectedType", "contribute");
-    setStartRecordingBtnOnClick('./record.html');
+    if(!hasUserRegistered()){
+      $('#userModal').modal('show');
+      setStartRecordingBtnOnClick('./record.html',MODULE.dekho.value);
+    } else {
+      location.href ='./record.html';
+    }
   });
 
   $('#start_validating').on('click',()=>{
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
     localStorage.setItem("selectedType", "validate");
-    setStartRecordingBtnOnClick('./validator-page.html');
+    if(!hasUserRegistered()){
+      $('#userModal').modal('show');
+      setStartRecordingBtnOnClick('./validator-page.html',MODULE.dekho.value);
+    } else {
+      location.href ='./validator-page.html';
+    }
   })
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   showFucntionalCards('ocr', language);

@@ -1,5 +1,5 @@
 const { onActiveNavbar } = require('../common/header');
-const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,landToHome } = require('../common/common');
+const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,landToHome,hasUserRegistered } = require('../common/common');
 const {
   toggleFooterPosition,
   getLocaleString,
@@ -125,12 +125,23 @@ function initializeBlock() {
 
   $('#start_recording').on('click', () => {
     localStorage.setItem("selectedType", "contribute");
-    setStartRecordingBtnOnClick('./record.html',MODULE.likho.value);
+    if(!hasUserRegistered()){
+      $('#userModal').modal('show');
+      setStartRecordingBtnOnClick('./record.html',MODULE.likho.value);
+    } else {
+      location.href ='./record.html';
+    }
+
   });
 
   $('#start_validating').on('click', () => {
     localStorage.setItem("selectedType", "validate");
-    setStartRecordingBtnOnClick('./validator-page.html',MODULE.likho.value);
+    if(!hasUserRegistered()){
+      $('#userModal').modal('show');
+      setStartRecordingBtnOnClick('./validator-page.html',MODULE.likho.value);
+    } else {
+      location.href ='./validator-page.html';
+    }
   })
 
   setSpeakerDetails(speakerDetailsKey, $userName);

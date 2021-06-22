@@ -1,6 +1,6 @@
 const { onActiveNavbar } = require('../common/header');
 
-const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages, landToHome} = require('../common/common');
+const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages, landToHome,hasUserRegistered} = require('../common/common');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString} = require('../common/utils');
 const {
   setSpeakerDetails,
@@ -70,14 +70,24 @@ function initializeBlock() {
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
     localStorage.setItem("selectedType", "contribute");
-    setStartRecordingBtnOnClick('./record.html',MODULE.suno.value);
+    if(!hasUserRegistered()){
+      $('#userModal').modal('show');
+      setStartRecordingBtnOnClick('./record.html',MODULE.suno.value);
+    } else {
+      location.href ='./record.html';
+    }
   });
 
   $('#start_validating').on('click',()=>{
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
     localStorage.setItem("selectedType", "validate");
-    setStartRecordingBtnOnClick('./validator-page.html',MODULE.suno.value);
+    if(!hasUserRegistered()){
+      $('#userModal').modal('show');
+      setStartRecordingBtnOnClick('./validator-page.html',MODULE.suno.value);
+    } else {
+      location.href ='./validator-page.html';
+    }
   })
 
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);

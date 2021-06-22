@@ -18,6 +18,7 @@ const {
     setLetGoBtnOnClick
 } = require('./bolo_user_details');
 const { getContributedAndTopLanguage } = require('./common');
+const { hasUserRegistered } = require('../../../build/js/common/common');
 const {
     DEFAULT_CON_LANGUAGE,
     TOP_LANGUAGES_BY_HOURS,
@@ -240,14 +241,24 @@ function initializeBlock() {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
         localStorage.setItem("selectedType", "contribute");
-        setStartRecordingBtnOnClick('../record.html', MODULE.bolo.value);
+        if(!hasUserRegistered()){
+            $('#userModal').modal('show');
+            setStartRecordingBtnOnClick('../record.html',MODULE.bolo.value);
+        } else {
+            location.href ='../record.html';
+        }
     });
 
     $('#start_validating').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
         localStorage.setItem("selectedType", "validate");
-        setLetGoBtnOnClick('../validator-page.html', MODULE.bolo.value);
+        if(!hasUserRegistered()){
+            $('#userModal').modal('show');
+            setStartRecordingBtnOnClick('../validator-page.html',MODULE.bolo.value);
+        } else {
+            location.href ='../validator-page.html';
+        }
     });
 
     $('[name="topLanguageChart"]').on('change', (event) => {
