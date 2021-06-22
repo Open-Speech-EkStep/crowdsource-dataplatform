@@ -9,15 +9,15 @@ const { keyboardLayout } = require('./keyboardLayout');
 const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LIKHO_TO_LANGUAGE } = require('./constants');
 const { isMobileDevice } = require('./common');
 
-function showAndHideEditError(inputTextLength,error, callback1=()=>{}, callback2=()=>{},flow) {
+function showAndHideEditError(inputTextLength, error, callback1 = () => { }, callback2 = () => { }, flow) {
   const currentModule = localStorage.getItem(CURRENT_MODULE);
   const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
   const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
   if (inputTextLength > 0 && error == null) {
     callback1();
     const isAudioPlayed = flow ? localStorage.getItem(flow) : 'false';
-    if(currentModule == 'suno'){
-      if(isAudioPlayed == 'true'){
+    if (currentModule == 'suno') {
+      if (isAudioPlayed == 'true') {
         $submitEditButton.removeAttr('disabled');
       } else {
         $submitEditButton.attr('disabled', true);
@@ -60,7 +60,7 @@ let keyboard;
 
 const showKeyboard = function (language, callBack1 = () => {
 }, callBack2 = () => {
-},flow='') {
+}, flow = '') {
   let Keyboard = window.SimpleKeyboard.default;
 
   /**
@@ -85,7 +85,7 @@ const showKeyboard = function (language, callBack1 = () => {
     localStorage.setItem("physicalKeyboard", true);
     $('#keyboardBox').addClass('d-none');
     const inputText = event.target.value && event.target.value.trim();
-    showAndHideEditError(inputText.length,error,callBack1,callBack2 ,flow)
+    showAndHideEditError(inputText.length, error, callBack1, callBack2, flow)
   });
 
   function onChange(input) {
@@ -93,7 +93,7 @@ const showKeyboard = function (language, callBack1 = () => {
     const error = input ? lngtype(input) : { type: 'noText' };
     localStorage.setItem("physicalKeyboard", false);
     const inputText = input && input.trim();
-    showAndHideEditError(inputText.length,error,callBack1,callBack2 ,flow)
+    showAndHideEditError(inputText.length, error, callBack1, callBack2, flow)
   }
 
   function onKeyPress(button) {
@@ -141,9 +141,13 @@ function lngtype(text) {
     "Sanskrit": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
     "Kashmiri": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
     "Sindhi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Konkani": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/
+    "Konkani": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Bodo": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Manipuri": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Dogri": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Nepali": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Santali": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/
   }
-
   if (currentModule == 'suno') {
     langdic = {
       "Assamese": /^[\u0980-\u09FF\u0030-\u0039]+$/,
@@ -161,7 +165,12 @@ function lngtype(text) {
       "Sanskrit": /^[\u0900-\u097F\u0030-\u0039]+$/,
       "Kashmiri": /^[\u0900-\u097F\u0030-\u0039]+$/,
       "Sindhi": /^[\u0900-\u097F\u0030-\u0039]+$/,
-      "Konkani": /^[\u0900-\u097F\u0030-\u0039]+$/
+      "Konkani": /^[\u0900-\u097F\u0030-\u0039]+$/,
+      "Bodo": /^[\u0900-\u097F\u0030-\u0039]+$/,
+      "Manipuri": /^[\u0900-\u097F\u0030-\u0039]+$/,
+      "Dogri": /^[\u0900-\u097F\u0030-\u0039]+$/,
+      "Nepali": /^[\u0900-\u097F\u0030-\u0039]+$/,
+      "Santali": /^[\u0900-\u097F\u0030-\u0039]+$/
     }
   }
 
