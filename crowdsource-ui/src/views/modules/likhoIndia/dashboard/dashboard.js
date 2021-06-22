@@ -1,7 +1,8 @@
 const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
-const { setStartRecordingBtnOnClick, setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown } = require('../common/userDetails');
+const { setStartRecordingBtnOnClick, setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
 const { toggleFooterPosition, getLocaleString } = require('../common/utils');
+const { hasUserRegistered } = require('../common/common');
 const platform = require('../common/platform')
 const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE,LIKHO_FROM_LANGUAGE,
     LIKHO_TO_LANGUAGE } = require('../common/constants');
@@ -105,6 +106,8 @@ $(document).ready(function () {
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
+    const age = document.getElementById('age');
+    const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
@@ -174,13 +177,21 @@ $(document).ready(function () {
         sentenceLanguage = languageToRecord;
         localStorage.setItem(LIKHO_FROM_LANGUAGE, fromLanguage);
         localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
-        setStartRecordingBtnOnClick("./record.html",MODULE.likho.value);
+        localStorage.setItem("selectedType", "contribute");
+        if(!hasUserRegistered()){
+            $('#userModal').modal('show');
+            setStartRecordingBtnOnClick('./record.html',MODULE.likho.value);
+        } else {
+            location.href ='./record.html';
+        }
     });
 
-    setSpeakerDetails(speakerDetailsKey, $userName);
-    $startRecordBtnTooltip.tooltip('disable');
-    setUserNameOnInputFocus();
     setUserModalOnShown($userName);
+    setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+    setGenderRadioButtonOnClick();
+    setUserNameOnInputFocus();
+    $startRecordBtnTooltip.tooltip('disable');
+
     toggleFooterPosition();
 
 });

@@ -6,8 +6,9 @@ const {
   setSpeakerDetails,
   setUserModalOnShown,
   setUserNameOnInputFocus,
-  setStartRecordingBtnOnClick
-} = require('../common/userDetails');
+  setStartRecordingBtnOnClick,
+  setGenderRadioButtonOnClick
+} = require('../common/speakerDetails');
 
 const {setLangNavBar} = require('../common/languageNavBar')
 const {getStatsSummary,getDefaultLang,setDefaultLang} = require('../common/commonHome');
@@ -23,6 +24,8 @@ const { initializeFeedbackModal } = require('../common/feedback');
 
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
+  const age = document.getElementById('age');
+  const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
   let sentenceLanguage;
 
@@ -87,9 +90,16 @@ function initializeBlock() {
   })
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   showFucntionalCards('ocr', language);
-  setSpeakerDetails(speakerDetailsKey, $userName);
-  setUserNameOnInputFocus();
+
+  const $startRecordBtn = $('#proceed-box');
+  const $startRecordBtnTooltip = $startRecordBtn.parent();
+
   setUserModalOnShown($userName);
+  $startRecordBtnTooltip.tooltip('disable');
+  setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+  setGenderRadioButtonOnClick();
+  setUserNameOnInputFocus();
+
   getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, setDefaultLang);
 }
 

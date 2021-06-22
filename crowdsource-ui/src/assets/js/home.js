@@ -9,7 +9,7 @@ const {
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick
-} = require('./speakerDetails');
+} = require('../../../build/js/common/speakerDetails');
 
 const {
     setBoloSpeakerDetails,
@@ -269,14 +269,17 @@ function initializeBlock() {
         }
     });
 
+    const $startRecordBtn = $('#proceed-box');
+    const $startRecordBtnTooltip = $startRecordBtn.parent();
+
     setUserModalOnShown($userName);
+    $startRecordBtnTooltip.tooltip('disable');
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
-    setBoloUserModalOnShown($boloUserName);
-    setBoloSpeakerDetails(speakerDetailsKey, $boloUserName);
-    setBoloUserNameOnInputFocus();
-    // setStartRecordingBtnOnClick();
+    // setBoloUserModalOnShown($boloUserName);
+    // setBoloSpeakerDetails(speakerDetailsKey, $boloUserName);
+    // setBoloUserNameOnInputFocus();
 
     const $say = $('#say');
     const $listen = $('#listen');
@@ -302,28 +305,6 @@ function initializeBlock() {
         $(".card2").css("box-shadow", "0px 0px 32px rgb(0 0 0 / 10%)")
         $listen_p_2.addClass('d-none');
         $listen_container.removeClass('listen-active');
-    });
-
-    $('input[name = "gender"]').on('change', function () {
-        const selectedGender = document.querySelector(
-            'input[name = "gender"]:checked'
-        );
-        const options = $("#transgender_options");
-        if (selectedGender.value === "others") {
-            const selectedTransGender = document.querySelector(
-                'input[name = "trans_gender"]:checked'
-            );
-            if (!selectedTransGender) {
-                const defaultOption = document.querySelector(
-                    'input[name = "trans_gender"][value="Rather Not Say"]'
-                );
-                defaultOption.checked = true;
-                defaultOption.previous = true;
-            }
-            options.removeClass("d-none");
-        } else {
-            options.addClass("d-none");
-        }
     });
 
     getStatsSummary();

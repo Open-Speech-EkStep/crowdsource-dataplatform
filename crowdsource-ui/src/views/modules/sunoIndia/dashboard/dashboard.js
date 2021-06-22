@@ -1,8 +1,9 @@
 const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
-const { setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown,setStartRecordingBtnOnClick } = require('../common/userDetails');
+const { setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown,setStartRecordingBtnOnClick,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
-const { CURRENT_MODULE,CONTRIBUTION_LANGUAGE } = require('../common/constants');
+const { CURRENT_MODULE,CONTRIBUTION_LANGUAGE, MODULE } = require('../common/constants');
+const { hasUserRegistered } = require('../common/common');
 const fetch = require('../common/fetch');
 
 const {setSpeakerData} = require('../common/contributionStats');
@@ -77,16 +78,18 @@ function updateLanguage(language) {
 }
 
 $(document).ready(function () {
-    localStorage.setItem(CURRENT_MODULE,'suno');
+    localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
     initializeFeedbackModal();
     localStorage.removeItem('previousLanguage');
     const speakerDetailsKey = 'speakerDetails';
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
+    const age = document.getElementById('age');
+    const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
     updateLanguage('');
-    const contributionLanguage = localStorage.getItem('contributionLanguage');
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }
@@ -130,13 +133,20 @@ $(document).ready(function () {
     $("#contribute-now").on('click', (e) => {
         localStorage.setItem("i18n", "en");
         localStorage.setItem(CONTRIBUTION_LANGUAGE, languageWithNoContribution);
-        setStartRecordingBtnOnClick('./record.html')
+        localStorage.setItem("selectedType", "contribute");
+        if(!hasUserRegistered()){
+            $('#userModal').modal('show');
+            setStartRecordingBtnOnClick('./record.html',MODULE.suno.value);
+        } else {
+            location.href ='./record.html';
+        }
     });
 
-    setSpeakerDetails(speakerDetailsKey, $userName);
-    $startRecordBtnTooltip.tooltip('disable');
-    setUserNameOnInputFocus();
     setUserModalOnShown($userName);
+    setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+    setGenderRadioButtonOnClick();
+    setUserNameOnInputFocus();
+    $startRecordBtnTooltip.tooltip('disable');
 
     toggleFooterPosition();
 

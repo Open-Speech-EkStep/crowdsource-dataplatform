@@ -8,8 +8,9 @@ const {
   setSpeakerDetails,
   setUserModalOnShown,
   setUserNameOnInputFocus,
-  setStartRecordingBtnOnClick
-} = require('../common/userDetails');
+  setStartRecordingBtnOnClick,
+  setGenderRadioButtonOnClick
+} = require('../common/speakerDetails');
 const {getStatsSummary} = require('../common/commonHome')
 
 const { updateHrsForCards } = require('../common/card')
@@ -59,6 +60,8 @@ const updateLocaleLanguagesDropdown = (language, toLanguage) => {
 
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
+  const age = document.getElementById('age');
+  const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
   toggleFooterPosition();
 
@@ -144,9 +147,14 @@ function initializeBlock() {
     }
   })
 
-  setSpeakerDetails(speakerDetailsKey, $userName);
-  setUserNameOnInputFocus();
+  const $startRecordBtn = $('#proceed-box');
+  const $startRecordBtnTooltip = $startRecordBtn.parent();
+
   setUserModalOnShown($userName);
+  $startRecordBtnTooltip.tooltip('disable');
+  setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+  setGenderRadioButtonOnClick();
+  setUserNameOnInputFocus();
   getStatsSummary('/stats/summary/parallel',MODULE.likho.value);
 
 }
