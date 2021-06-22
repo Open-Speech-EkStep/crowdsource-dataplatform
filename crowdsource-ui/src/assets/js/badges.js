@@ -15,7 +15,7 @@ const getRowWithBadge = function (levelId, sentenceCount, badgeName, localeStrin
    }
   let actionText = type == 'ocr' ? "Images": "Sentences";
   const badgeDescription = `<p class="text-left mb-0 ml-3">${text}: ${sentenceCount} ${actionText}</p>`;
-  return `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-4">${localeString.Level} ${levelId}</td><td>${badgeDescription}</td><td class="text-center"><div><img src=${source == "contribute" ? badge.imgLg :badge.imgSm} class="table-img" height="76" width="63" alt=${badgeName} id="${badgeName}_${source}" rel="popover"></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
+  return `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">${localeString.Level} ${levelId}</td><td>${badgeDescription}</td><td class="text-center"><div><img src=${source == "contribute" ? badge.imgLg :badge.imgSm} class="table-img" height="76" width="63" alt=${badgeName} id="${badgeName}_${source}" rel="popover"></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
 }
 
 const getCard = function (badgeName, localeString, type, source) {
