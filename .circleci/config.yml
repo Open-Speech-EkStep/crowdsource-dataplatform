@@ -135,9 +135,11 @@ workflows:
 
       - create-workspace:
           name: create-workspace
+          requires:
+            - node/test
           filters:
             branches:
-              only: [master, landing_page]
+              only: master
 
       - db_migrate_aws:
           name: migrate_dev_aws
