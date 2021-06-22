@@ -521,6 +521,7 @@
         text-align: center;
         color: #666666;
         padding-left: 20px;
+        padding-top: 9px;
     }
 
     .home-badge-row img{
@@ -674,7 +675,7 @@
         font-size: 16px !important;
         line-height: 32px !important;
         min-width: 280px !important;
-        max-width: 280px !important;
+        margin-top: 28px !important;
 }
 
     #home-banner {
@@ -689,8 +690,8 @@
         height: 40px !important;
         font-size: 12px !important;
         line-height: 28px !important;
-        min-width: 200px !important;
-        max-width: 200px !important;
+        min-width: 240px !important;
+        max-width: 240px !important;
     }
 
 }
