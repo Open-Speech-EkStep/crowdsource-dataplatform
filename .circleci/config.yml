@@ -163,7 +163,7 @@ workflows:
             - node/test
           filters:
             branches:
-              only: master
+              only: azure
       
       - db_migrate_azure:
           name: migrate_dev_azure
