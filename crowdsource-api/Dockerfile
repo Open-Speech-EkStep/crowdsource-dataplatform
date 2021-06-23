@@ -25,4 +25,4 @@ ENV NODE_ENV=${NODE_ENV}
 
 EXPOSE 8080
 
-CMD [ "node", "src/server.js","aws" ]
+CMD [ "node", "src/server.js","azure" ]
