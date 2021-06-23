@@ -1,6 +1,7 @@
 # Test BoloIndia
 Tags: component
 
+* Open Website
 * Select "Bolo India" from header
 
 ## Validate the Speaker Details pop-up in Contribute section
