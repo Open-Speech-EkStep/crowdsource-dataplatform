@@ -505,5 +505,10 @@
 	"SUNO INDIA": "SUNO INDIA",
 	"BOLO INDIA": "BOLO INDIA",
 	"LIKHO INDIA": "LIKHO INDIA",
-	"DEKHO INDIA": "DEKHO INDIA"
+	"DEKHO INDIA": "DEKHO INDIA",
+	"All the fields are optional but you can enrich your dataset contribution by providing the demographic details.": "All the fields are optional but you can enrich your dataset contribution by providing the demographic details.",
+	"Only 12 character allowed. (Hint: name.surname, name_surname12 etc.)": "Only 12 character allowed. (Hint: name.surname, name_surname12 etc.)",
+	"Name": "Name",
+	"Enter username": "Enter username",
+	"Done": "Done"
 }

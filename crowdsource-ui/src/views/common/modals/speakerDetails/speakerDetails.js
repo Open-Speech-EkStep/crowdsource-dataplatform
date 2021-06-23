@@ -121,7 +121,8 @@ const setUserModalOnShown = function ($userName) {
 
 const setUserNameOnInputFocus = function () {
     const $userName = $('#username');
-    const $userNameError = $userName.next();
+    // const $userNameError = $userName.next();
+    const $userNameError = $('#username-error');
     // const $tncCheckbox = $('#tnc');
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
