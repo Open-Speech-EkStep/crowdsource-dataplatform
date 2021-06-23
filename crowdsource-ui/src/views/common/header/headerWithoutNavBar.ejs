@@ -1,17 +1,23 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-lg-4 px-md-4 px-3 py-lg-0">
-    <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-    <div class="d-flex align-items-center">
-        <a class="logo-text text-dark" href="/">
-            <h2 class="mb-0">
-                <img src="../../img/BoloIndiaLogo.png" alt="Meity Logo" width="64px" height="54px">
-            </h2>
-        </a>
-        <div class="version-beta ml-4">Beta</div>
+    <div class="row m-0">
+        <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="d-flex align-items-center">
+            <a class="logo-text text-dark" href="/">
+                <h2 class="mb-0">
+                    <img src="../../img/BoloIndiaLogo.png" alt="Meity Logo" width="64px" height="54px">
+                </h2>
+            </a>
+            <div class="version-beta ml-lg-4 ml-md-4 ml-2">Beta</div>
+        </div>
     </div>
-    <div class="row ml-4 border-left d-none-mob">
-        <p class="m-0" style="padding-right:21px;padding-left:20px"><%= __(MODULE) %></p>
-        <p class="m-0" style="color:#ea913f"><%= __(PAGE_TITLE) %></p>
-    </div>
+     <div class="row ml-4 border-left d-none-mob">
+            <p class="m-0" style="padding-right:21px;padding-left:20px">
+                <%= __(MODULE) %>
+            </p>
+            <p class="m-0" style="color:#ea913f">
+                <%= __(PAGE_TITLE) %>
+            </p>
+        </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto" style="margin-right:12px">
             <li class="nav-item p-2 dropdown" id="locale_language_dropdown">
@@ -19,14 +25,17 @@
                     <%= __('Language') %>
                 </div>
                 <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton"><a id="english" class="dropdown-item" href="#" locale="en">English</a></div>
-
-            </li><li class="nav-item p-2"><a href="<%- `${path}about-us.html`%>" class="nav-link text-dark font-weight-bold">
+            </li>
+            <li class="nav-item p-2"><a href="<%- `${path}about-us.html`%>" class="nav-link text-dark font-weight-bold">
                     <%= __('About Us') %>
-                </a></li>
-            
-
-    </ul></div>
-    <ul class="navbar-nav ml-auto" style="margin-right:12px">
-    <li class="nav-item p-2"><a class="nav-link text-dark font-weight-bold d-none" id="nav-user"><span class="material-icons align-middle mx-1">account_circle</span> <span id="nav-username"></span></a></li>
-    </ul>
+                </a>
+            </li>
+        </ul>
+    </div>
+        <ul class="navbar-nav ml-auto" style="margin-right:12px">
+            <li class="nav-item p-2"><a class="nav-link text-dark font-weight-bold d-none" id="nav-user">
+                <span class="material-icons align-middle mx-1">account_circle</span> 
+                <span id="nav-username"></span></a>
+            </li>
+        </ul>
 </nav>

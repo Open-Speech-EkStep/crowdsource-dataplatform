@@ -293,6 +293,12 @@ body {
     border: 0px !important;
     }
 
+    .version-beta{
+      font-size: 12px;
+    padding: 2px 6px;
+    margin-top: 14px;
+    }
+
     #content-wrapper #btn-nav{
       padding-top: 8px !important;
     }
