@@ -1,4 +1,4 @@
-const { onActiveNavbar } = require('../common/header');
+const { onActiveNavbar,onChangeUser } = require('../common/header');
 
 const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages, landToHome,hasUserRegistered} = require('../common/common');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString} = require('../common/utils');
@@ -102,6 +102,8 @@ function initializeBlock() {
   setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
+
+  onChangeUser('./home.html',MODULE.suno.value)
   getStatsSummary('/stats/summary/asr',MODULE.suno.value, setDefaultLang);
 }
 

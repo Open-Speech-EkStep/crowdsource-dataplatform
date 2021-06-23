@@ -8,6 +8,7 @@ const {
   CURRENT_MODULE,
   MODULE
 } = require("../common/constants");
+const { onChangeUser } = require('../common/header');
 const {
   setPageContentHeight,
   toggleFooterPosition,
@@ -147,6 +148,7 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName)
+    onChangeUser('./thank-you.html', MODULE.suno.value);
 
     setPageContentHeight();
     setSentencesContributed();

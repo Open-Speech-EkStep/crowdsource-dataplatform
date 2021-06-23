@@ -11,6 +11,7 @@ const {
   getBrowserInfo,
   getDeviceInfo
 } = require('../common/utils');
+const { onChangeUser } = require('../common/header');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
 const {showUserProfile} = require('../common/header');
@@ -648,6 +649,7 @@ $(document).ready(() => {
   }
 
   showUserProfile(localSpeakerDataParsed.userName)
+  onChangeUser('./validator-page.html',MODULE.suno.value)
 
   const isExistingUser = localSentencesParsed &&
     localSentencesParsed.userName === localSpeakerDataParsed.userName

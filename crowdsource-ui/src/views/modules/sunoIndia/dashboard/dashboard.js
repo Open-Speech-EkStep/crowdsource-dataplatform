@@ -1,4 +1,5 @@
 const { updateLineGraph } = require('../common/lineGraph');
+const { onChangeUser } = require('../common/header');
 const { generateIndiaMap } = require('../common/map');
 const { setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown,setStartRecordingBtnOnClick,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
@@ -147,6 +148,8 @@ $(document).ready(function () {
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     $startRecordBtnTooltip.tooltip('disable');
+
+    onChangeUser('./dashboard.html',MODULE.suno.value)
 
     toggleFooterPosition();
 

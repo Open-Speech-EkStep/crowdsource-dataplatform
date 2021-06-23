@@ -12,6 +12,7 @@ const {
   getDeviceInfo,
   getBrowserInfo
 } = require('../common/utils');
+const { onChangeUser } = require('../common/header');
 const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
@@ -557,6 +558,7 @@ function executeOnLoad() {
       return;
     }
     showUserProfile(localSpeakerDataParsed.userName)
+    onChangeUser('./record.html',MODULE.suno.value)
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName
       &&

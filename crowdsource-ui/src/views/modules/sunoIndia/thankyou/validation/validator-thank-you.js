@@ -8,6 +8,7 @@ const {
   MODULE,
   TOP_LANGUAGES_BY_HOURS
 } = require("../common/constants");
+const { onChangeUser } = require('../common/header');
 
 const {
   setPageContentHeight,
@@ -173,6 +174,7 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName)
+    onChangeUser('./validator-thank-you.html',MODULE.suno.value)
     toggleFooterPosition();
     setPageContentHeight();
     setSentencesContributed();
