@@ -2,7 +2,9 @@ version: 2.1
 orbs:
   node: circleci/node@4.4.0
   aws-ecr: circleci/aws-ecr@6.15.3
-  aws-eks: circleci/aws-eks@1.0.3
+  # aws-eks: circleci/aws-eks@1.0.3
+  azure-aks: circleci/azure-aks@0.3.0
+
   aws-cli: circleci/aws-cli@1.4.0
   kubernetes: circleci/kubernetes@0.11.2
   aws-s3: circleci/aws-s3@2.0.0
@@ -113,38 +115,41 @@ jobs:
           name: Run DB Migrate
           command: |
             echo << parameters.db_name >>
-            export DATABASE_URL=postgresql://${DB_USER_AZURE}:${DB_PASS_AZURE}@${DB_HOST_AZURE}/<< parameters.db_name >>
+            export DATABASE_URL=postgresql://${AZURE_DB_USER}:${AZURE_DB_PASS}@${AZURE_DB_HOST}/<< parameters.db_name >>
             echo << parameters.db_name >>
             echo $DATABASE_URL
-            npm run install:api
+            # npm run install:api
             cd crowdsource-api && npx db-migrate up
 
-  # # eks_fargate_deployment:
-  #   executor: aws-eks/python3
-  #   parameters:
-  #     cluster-name:
-  #       description: |
-  #         Name of the EKS cluster
-  #       type: string
-  #     env-name:
-  #       description: |
-  #         Name of the env
-  #       type: string
+  aks_deployment:
+    executor: azure-aks/default
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+      env-name:
+        description: |
+          Name of the env
+        type: string
 
-  #   steps:
-  #     - *fast-checkout
-  #     - aws-cli/setup:
-  #         profile-name: circle-ci
-  #     - kubernetes/install
-  #     - run:
-  #         command: |
-  #           aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
-  #           ENV_IMAGE_NAME=${AWS_ECR_ACCOUNT_URL}/${REPO}:<< parameters.env-name >>
-  #           ENV_IMAGE_NAME_DB_REFRESHER=${AWS_ECR_ACCOUNT_URL}/${DB_REFRESHER_REPO}:<< parameters.env-name >>
-  #           kubectl -n << parameters.env-name >> apply  -f ${HOME}/project/crowdsource-api/k8s-deployments/autoscaler_<< parameters.env-name >>.yaml
-  #           sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
-  #           sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env-name >> apply  -f -
-  #         name: Deploy container
+    steps:
+      - *fast-checkout
+      - aws-cli/setup:
+          profile-name: circle-ci
+      - azure-aks/update-kubeconfig-with-credentials:
+          cluster-name: << parameters.cluster-name >>
+          install-kubectl: true
+          perform-login: true
+          resource-group: ${AZURE_RESOURCE_GROUP}
+      - run:
+          command: |
+            ENV_IMAGE_NAME=${AZURE_LOGIN_SERVER_NAME}/${AZURE_REPO}:<< parameters.env-name >>
+            # ENV_IMAGE_NAME_DB_REFRESHER=${AWS_ECR_ACCOUNT_URL}/${DB_REFRESHER_REPO}:<< parameters.env-name >>
+            # kubectl -n << parameters.env-name >> apply  -f ${HOME}/project/crowdsource-api/k8s-deployments/autoscaler_<< parameters.env-name >>.yaml
+            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
+            # sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env-name >> apply  -f -
+          name: Deploy container
 
 workflows:
   build_test_deploy:
@@ -159,6 +164,7 @@ workflows:
           filters:
             branches:
               only: master
+      
       - db_migrate_azure:
           name: migrate_dev_azure
           db_name: ${AZURE_DEV_DB_NAME}
@@ -178,6 +184,7 @@ workflows:
       #       - push_dev_image
 
       - azure-acr/build-and-push-image:
+          name: push_dev_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./crowdsource-api
@@ -185,6 +192,13 @@ workflows:
           repo: ${AZURE_REPO}
           tag: dev
 
+
+      - aks_deployment:
+          name: dev_deployment_eks
+          cluster-name: ${AZURE_CLUSTER_NAME}
+          env-name: dev
+          requires:
+            - push_dev_image
 
 
       # - aws-ecr/build-and-push-image:
@@ -205,12 +219,7 @@ workflows:
       #     requires:
       #       - migrate_dev_aws
 
-      # - eks_fargate_deployment:
-      #     name: dev_deployment_eks
-      #     cluster-name: ${CLUSTER_NAME}
-      #     env-name: dev
-      #     requires:
-      #       - push_dev_image
+
 
       # - run_functional_tests:
       #     name: functional_tests_dev
