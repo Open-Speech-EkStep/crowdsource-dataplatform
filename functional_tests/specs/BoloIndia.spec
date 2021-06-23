@@ -12,6 +12,7 @@ Tags: component
 * User details popup should appear and close button should close the pop up
 
 ## Validate Contributor flow
+* Select Contribution Language as "हिंदी"
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
 * When user click on Lets Go Button, user should "" see instructions to record
