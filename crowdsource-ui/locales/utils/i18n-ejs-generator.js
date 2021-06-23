@@ -99,7 +99,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       locale
     );
     await ejs2html(`${ejsPath}/not-found.ejs`, {}, i18n, outputPath, 'not-found.html', locale);
-    await ejs2html(`${ejsPath}/record.ejs`, {}, i18n, outputPath, 'record.html', locale);
+    await ejs2html(`${ejsPath}/record.ejs`, {MOTHER_TONGUE, LANGUAGES}, i18n, outputPath, 'record.html', locale);
     await ejs2html(
       `${ejsPath}/terms-and-conditions.ejs`,
       {},
