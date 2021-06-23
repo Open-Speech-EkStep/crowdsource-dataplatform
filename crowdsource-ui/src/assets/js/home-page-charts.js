@@ -206,16 +206,16 @@ function getStatistics(response) {
   $speakersDataLoader.removeClass("d-none");
 
   const {hours, minutes, seconds} = calculateTime(
-    Number(response.total_contributions || 0) * 60 * 60
+    Number(response && response.total_contributions || 0) * 60 * 60
   );
-
+    
   const { hours: validate_hrs, minutes: validate_min, seconds: validate_sec } = calculateTime(
-    Number(response.total_validations) * 60 * 60
+    Number(response && response.total_validations || 0) * 60 * 60
   );
   $speakersDataHoursValue.text(formatTime(hours, minutes,seconds));
   $validatedValue.text(formatTime(validate_hrs,validate_min,validate_sec));
-  $speakersDataSpeakerValue.text(response.total_speakers);
-  $speakersDataLanguagesValue.text(response.total_languages);
+  $speakersDataSpeakerValue.text(response && response.total_speakers || 0);
+  $speakersDataLanguagesValue.text(response && response.total_languages || 0);
   $speakersDataLoader.addClass("d-none");
   $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4 col-xs-6')
   $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
@@ -284,11 +284,11 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
 
 var chartReg = {};
 function showByHoursChart() {
-  if (chartReg["chart"]) {
-    chartReg["chart"].dispose();
-  }
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
   const chartData = topLanguagesByHoursData ? JSON.parse(topLanguagesByHoursData).reverse() : [];
+  if (chartReg["chart"] && chartData && chartData.length) {
+    chartReg["chart"].dispose();
+  }
   drawTopLanguageChart(chartData, "bolo")
 }
 

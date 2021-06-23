@@ -161,7 +161,7 @@ const clearLocalStorage = function () {
 
 const getStatsSummary = function () {
     performAPIRequest('/stats/summary/text')
-        .then(response => {
+        .then((response) => {
             // drawMap({data: response.aggregate_data_by_state});
             const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.bolo.value);
             localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
@@ -169,14 +169,16 @@ const getStatsSummary = function () {
             const speakers = getContributedAndTopLanguage(response.top_languages_by_speakers, "speakers");
             localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(speakers));
             localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-            getStatistics(response.aggregate_data_count[0]);
+            getStatistics(response && response.aggregate_data_count && response.aggregate_data_count.length ? response.aggregate_data_count[0] : {});
             setDefaultLang();
             if (response.top_languages_by_hours.length === 0) {
                 $("#bar_charts_container").hide();
                 $("#view_all_btn").hide();
+                $("#contribution_stats").hide();
             } else {
                 $("#bar_charts_container").show();
                 $("#view_all_btn").show();
+                $("#contribution_stats").show();
             }
         });
 }
@@ -399,5 +401,6 @@ $(window).on("orientationchange", function () {
 module.exports = {
     updateHrsForSayAndListen,
     getDefaultTargetedDiv,
-    setLangNavBar
+    setLangNavBar,
+    getStatsSummary
 };

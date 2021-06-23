@@ -1,6 +1,6 @@
 # Test LikhoIndia
+Tags: component
 
-* Open Website
 * Select "Likho India" from header
 
 ## Check Likho India Home Page
@@ -61,3 +61,6 @@
 * User should see an error message "Input field can not be empty"
 * When User clicks on "edit" field and type "Be positive" submit and cancel button should be enabled
 * When user clicks on submit button user should see " Thank you for contributing!"
+
+___
+* User clicks back button

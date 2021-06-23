@@ -256,7 +256,7 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
     }
 
     else if (arg0 == "Know More") {
-       await click(taiko.link(arg0))
+        await click(taiko.link(arg0))
         await taiko.waitFor(500)
     }
 
@@ -394,13 +394,11 @@ step("When user clicks on the Test Microphone Speaker button, user should see <a
     await click(taiko.button({ id: "test-mic-speakers-button" }))
     assert.ok(await button({ id: arg0 }).exists())
     assert.ok(await button({ id: arg1 }).exists())
-
 });
 
 step("When user clicks on the cross button , pop up should close and user should see the Test Mic and speaker button", async function () {
     await click(taiko.button({ id: "test-mic-close" }))
     assert.ok(await button({ id: 'test-mic-speakers-button' }).exists())
-
 });
 
 step("When user clicks on the Feedback icon, user should see the feedback popup", async function () {
@@ -422,6 +420,7 @@ step("Submit button should be disbaled, When user selects an opinion, submit but
     // await write('TestUser', into(usernameFiled))
     assert.ok(await taiko.button({ id: "submit_btn" }).isDisabled());
     await click(taiko.$("#very_happy_label"));
+    await taiko.waitFor(500)
     assert.ok(! await taiko.button({ id: "submit_btn" }).isDisabled());
 });
 
@@ -472,8 +471,15 @@ step("Validate Thank you page content for Bolo India", async function () {
 
 step("Validate terms and condition content", async function () {
     assert.ok(await text('Terms and Conditions').exists());
+    await taiko.closeTab();
 });
 
 step("Validate Privacy Policy content", async function () {
     assert.ok(await text('Privacy Policy').exists());
+});
+
+step("User clicks back button", async function () {
+    if (await button({ id: "back-btn" }).exists() && await button({ id: "back-btn" }).isVisible()) {
+        await click(button({ id: "back-btn" }));
+    }
 });
