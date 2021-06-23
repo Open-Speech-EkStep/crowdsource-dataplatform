@@ -691,6 +691,7 @@ $(document).ready(() => {
 
       initializeComponent();
     }).catch((err) => {
+      console.log(err);
       $errorModal.modal('show');
     })
   }
