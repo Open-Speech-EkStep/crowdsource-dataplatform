@@ -191,6 +191,8 @@ workflows:
           extra-build-args: --build-arg NODE_ENV=dev
           repo: ${AZURE_REPO}
           tag: dev
+          requires:
+            - migrate_dev_azure
 
 
       - aks_deployment:
