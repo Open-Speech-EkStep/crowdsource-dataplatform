@@ -85,23 +85,6 @@ jobs:
           to: "s3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>"
       - run: aws cloudfront create-invalidation --distribution-id << parameters.distributionId >> --paths '/*'
 
-  # db_migrate_aws:
-  #   parameters:
-  #     db_name:
-  #       type: string
-  #   executor:
-  #     name: node/default
-  #   steps:
-  #     - *fast-checkout
-  #     - run:
-  #         name: Run DB Migrate
-  #         command: |
-  #           echo << parameters.db_name >>
-  #           export DATABASE_URL=postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@${DB_HOST_AWS}/<< parameters.db_name >>
-  #           echo << parameters.db_name >>
-  #           echo $DATABASE_URL
-  #           npm run install:api
-  #           cd crowdsource-api && npx db-migrate up
 
   db_migrate_azure:
     parameters:
@@ -118,7 +101,7 @@ jobs:
             export DATABASE_URL=postgresql://${AZURE_DB_USER}:${AZURE_DB_PASS}@${AZURE_DB_HOST}/<< parameters.db_name >>
             echo << parameters.db_name >>
             echo $DATABASE_URL
-            # npm run install:api
+            npm run install:api
             cd crowdsource-api && npx db-migrate up
 
   aks_deployment:
