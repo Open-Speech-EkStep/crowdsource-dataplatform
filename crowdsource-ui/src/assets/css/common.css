@@ -287,6 +287,12 @@ body {
 
   @media (max-width: 700px) {
 
+    .navbar-toggler{
+    padding: 0px !important ;
+    font-size: 1rem !important;
+    border: 0px !important;
+    }
+
     #content-wrapper #btn-nav{
       padding-top: 8px !important;
     }

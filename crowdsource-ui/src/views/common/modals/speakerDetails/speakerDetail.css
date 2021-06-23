@@ -1,49 +1,28 @@
 .modal-title{
-    line-height: 38px;
     color: #111111;
 }
 
 #form-sub-heading{
     color: #666666;
-    margin-bottom: 1.25rem;
 }
 
 .user-name-hint{
     color: #666666;
-    font-size: 13px;
-    line-height: 24px;
-}
-
-.form-group {
-    margin-bottom: 1.25rem;
 }
 
 .form-label{
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    align-items: center;
     color: #666666;
 }
 
 .form-control{
-    padding: 12px 18px 12px 16px;
-    font-size: 16px;
     color: #666666 !important;
-    line-height: 1.2;
-    height: calc(1.5em + .75rem + 12px);
 }
 
 .form-check-label{
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
     color: #666666;
 }
 
 #tnc_link{
-    font-size: 16px;
-    line-height: 19px;
     color: #111111;
 }
 
@@ -64,11 +43,66 @@
       height: 500px;
       overflow: auto;
     }
+
+    .user-name-hint{
+        line-height: 12px;
+        font-size: 11px;
+    }
 }
 
 @media (min-width: 767px) {
     .speakerDetails {
       height: 700px;
       overflow: auto;
+    }
+
+    .modal-title{
+        line-height: 38px;
+    }
+
+    #form-sub-heading{
+        margin-bottom: 1.25rem;
+    }
+
+    .user-name-hint{
+        font-size: 13px;
+        line-height: 24px;
+    }
+
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+
+    .form-label{
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        align-items: center;
+    }
+
+    .form-control{
+        padding: 12px 18px 12px 16px;
+        font-size: 16px;
+        line-height: 1.2;
+        height: calc(1.5em + .75rem + 12px);
+    }
+
+    .form-check-label{
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    #tnc_link{
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    #proceed-box{
+        min-width: 240px;
+        padding: 8px 20px 8px 20px;
+        font-size: 18px;
+        line-height: 32px;
+        border-width: 0px;
     }
 }
