@@ -1,6 +1,7 @@
 # Test DekhoIndia
 Tags: component
 
+* Open Website
 * Select "Dekho India" from header
 
 ## Check Dekho India Home Page

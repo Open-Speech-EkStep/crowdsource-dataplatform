@@ -1,6 +1,7 @@
 # Test SunoIndia
 Tags: component
 
+* Open Website
 * Select "Suno India" from header
 
 ## Check Home Page

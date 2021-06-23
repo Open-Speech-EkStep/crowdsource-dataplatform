@@ -682,6 +682,7 @@ function executeOnLoad() {
                     initialize();
                 })
                 .catch((err) => {
+                    console.log(err);
                     $errorModal.modal('show');
                 })
                 .then(() => {
@@ -689,6 +690,7 @@ function executeOnLoad() {
                 });
         }
     } catch (err) {
+        console.log(err);
         $errorModal.modal('show');
     }
 }

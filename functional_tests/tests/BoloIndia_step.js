@@ -47,13 +47,7 @@ gauge.screenshotFn = async function () {
 
 
 beforeSpec(async () => {
-    const language = "हिंदी";
     await goto(testUrl, { waitForEvents: ['loadEventFired'] });
-    await taiko.waitFor(700)
-    if (await text("Select Your Preferred Language").isVisible()) {
-        await click(language);
-        console.log("Contribution language selected before spec");
-    }
     await taiko.waitFor(700)
 })
 
@@ -69,7 +63,9 @@ step("Open Website", async () => {
 });
 
 step("Validate about us content", async function () {
-    assert.ok(await text('Bolo India: A crowdsourcing initiative for Indian languages').exists());
+    
+    assert.ok(await text('A crowdsourcing initiative for Indian languages').exists());
+    assert.ok(await text('This is an effort by MeitY, Government of India, under the National Language Translation Mission (NLTM).').exists());
 });
 
 step("Start Recording button is disabled", async function () {

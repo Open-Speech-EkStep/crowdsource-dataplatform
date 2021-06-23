@@ -1,6 +1,7 @@
 # Test LikhoIndia
 Tags: component
 
+* Open Website
 * Select "Likho India" from header
 
 ## Check Likho India Home Page
