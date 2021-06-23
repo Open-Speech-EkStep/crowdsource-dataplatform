@@ -1,7 +1,7 @@
 const { getEnabledLanguages, getAllLanguages } = require('./language-filter')
 const { enabled_languages } = require('./env-api')
 
-const DEFAULT_CON_LANGUAGE = "Hindi";
+const DEFAULT_CON_LANGUAGE = "English";
 const AUDIO_DURATION = 6;
 const SIXTY = 60;
 const HOUR_IN_SECONDS = 3600;
