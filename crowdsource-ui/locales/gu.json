@@ -504,5 +504,16 @@
 	"SUNO INDIA": "SUNO INDIA",
 	"BOLO INDIA": "BOLO INDIA",
 	"LIKHO INDIA": "LIKHO INDIA",
-	"DEKHO INDIA": "DEKHO INDIA"
+	"DEKHO INDIA": "DEKHO INDIA",
+	"This is an effort by MeitY, Government of India, under the National Language Translation Mission (NLTM). This effort is supported by EkStep Foundation on a pro-bono basis and leverages its open source work under https://sunbird.org/projects/vakyansh along with various other open source frameworks.": "This is an effort by MeitY, Government of India, under the National Language Translation Mission (NLTM). This effort is supported by EkStep Foundation on a pro-bono basis and leverages its open source work under https://sunbird.org/projects/vakyansh along with various other open source frameworks.",
+	"We need to build speech recognition, text-to-speech, machine translation and OCR technologies that are tuned for your language.": "We need to build speech recognition, text-to-speech, machine translation and OCR technologies that are tuned for your language.",
+	"These technologies will transform your language to become \"digital first\" in various sectors such as: education, healthcare and media.": "These technologies will transform your language to become \"digital first\" in various sectors such as: education, healthcare and media.",
+	"The tools, utilities and models proposed to be developed in your language will rely on open source contributions through the Bhaashini crowd sourcing platform": "The tools, utilities and models proposed to be developed in your language will rely on open source contributions through the Bhaashini crowd sourcing platform",
+	"The above mentioned technologies rely on AI technology that requires large datasets in their respective fields.": "The above mentioned technologies rely on AI technology that requires large datasets in their respective fields.",
+	"[Bhaashini] currently has four crowdsoucing initiatives to create these datasets": "[Bhaashini] currently has four crowdsoucing initiatives to create these datasets",
+	"Bolo India creates a repository of diverse voices speaking Indian languages, where volunteer reads the corresponding text.": "Bolo India creates a repository of diverse voices speaking Indian languages, where volunteer reads the corresponding text.",
+	"Suno India creates an open dataset through transcription of audio files.": "Suno India creates an open dataset through transcription of audio files.",
+	"Likho India creates open parallel translation datasets between corresponding sentences in two languages.": "Likho India creates open parallel translation datasets between corresponding sentences in two languages.",
+	"Dekho India creates an open data repository of images and the corresponding text.": "Dekho India creates an open data repository of images and the corresponding text.",
+	"We are inviting you to join us and voluntarily contribute to this initiative. Contributing at one stretch can be overwhelming hence you can do this by visiting the website multiple times and commence from where you left us off.": "We are inviting you to join us and voluntarily contribute to this initiative. Contributing at one stretch can be overwhelming hence you can do this by visiting the website multiple times and commence from where you left us off."
 }
