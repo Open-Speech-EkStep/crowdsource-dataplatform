@@ -6,7 +6,7 @@ orbs:
   aws-cli: circleci/aws-cli@1.4.0
   kubernetes: circleci/kubernetes@0.11.2
   aws-s3: circleci/aws-s3@2.0.0
-  azure-acr: circleci/azure-acr@x.y.z
+  azure-acr: circleci/azure-acr@0.2.0
 
 definition:
   fast-checkout: &fast-checkout
