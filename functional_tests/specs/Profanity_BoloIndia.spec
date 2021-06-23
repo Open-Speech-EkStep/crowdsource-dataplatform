@@ -1,7 +1,7 @@
 # Test Bolo India Profanity
+Tags: profanity
 
 * Open Profanity Website for "Bolo" India
-
 
 ## User not found flow
 * User details popup should appear

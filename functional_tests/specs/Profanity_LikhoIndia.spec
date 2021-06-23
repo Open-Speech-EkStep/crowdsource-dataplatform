@@ -1,7 +1,7 @@
 # Test Likho India Profanity 
+Tags: profanity
 
 * Open Profanity Website for "Likho" India
-
 
 ## User not found flow
 * User details popup should appear
