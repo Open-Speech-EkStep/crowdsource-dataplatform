@@ -127,8 +127,8 @@ jobs:
           resource-group: ${AZURE_RESOURCE_GROUP}
       - run:
           command: |
-            ENV_IMAGE_NAME=${AZURE_REPO}:<< parameters.env-name >>
-            
+            ENV_IMAGE_NAME=${AZURE_LOGIN_SERVER_NAME}/${AZURE_REPO}:<< parameters.env-name >>
+
             # ENV_IMAGE_NAME_DB_REFRESHER=${AWS_ECR_ACCOUNT_URL}/${DB_REFRESHER_REPO}:<< parameters.env-name >>
             # kubectl -n << parameters.env-name >> apply  -f ${HOME}/project/crowdsource-api/k8s-deployments/autoscaler_<< parameters.env-name >>.yaml
 
