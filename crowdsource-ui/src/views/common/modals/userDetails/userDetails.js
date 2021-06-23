@@ -133,7 +133,9 @@ const setStartRecordingBtnOnClick = function (url, module = '') {
     let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
     let fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
     const selectedLanguage = ALL_LANGUAGES.find(e => e.value === contributionLanguage);
-    if (!selectedLanguage.data) contributionLanguage = DEFAULT_CON_LANGUAGE;
+    if(module != MODULE.likho.value){
+      if (!selectedLanguage.data) contributionLanguage = DEFAULT_CON_LANGUAGE;
+    }
     if (testUserName(userNameValue)) {
       return;
     }
@@ -143,7 +145,6 @@ const setStartRecordingBtnOnClick = function (url, module = '') {
       language: userLanguage,
       toLanguage: toLanguage || '',
     };
-
 
     if (whitelisting_email === 'true') {
       verifyUser(userNameValue).then(res => {

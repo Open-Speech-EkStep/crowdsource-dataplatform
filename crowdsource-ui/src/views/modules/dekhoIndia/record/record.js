@@ -540,12 +540,14 @@ const executeOnLoad = function () {
         );
         initializeComponent();
       }).catch((err) => {
+        console.log(err);
         $errorModal.modal('show');
       }).then(() => {
       });
     }
 
   } catch (err) {
+    console.log(err);
     $errorModal.modal('show');
   }
 }
