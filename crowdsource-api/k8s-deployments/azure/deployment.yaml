@@ -15,7 +15,7 @@ spec:
         app: vakyansh
     spec:
       containers:
-      - image: vakyansh.azurecr.io/vakyansh:latest
+      - image: IMAGE_NAME
         imagePullPolicy: Always
         name: vakyansh
         env:
