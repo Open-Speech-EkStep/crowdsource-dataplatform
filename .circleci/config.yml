@@ -85,7 +85,6 @@ jobs:
   #         to: "s3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>"
   #     - run: aws cloudfront create-invalidation --distribution-id << parameters.distributionId >> --paths '/*'
 
-
   build_ui_push_to_blob_storage:
     parameters:
       env_name:
@@ -95,9 +94,9 @@ jobs:
     steps:
       - *fast-checkout
       - node/install-packages
-      - run: 
+      - run:
           name: build_ui
-          command: | 
+          command: |
             npm run gulp -- -- --env=<< parameters.env_name >>
             sudo apt-get install wget
             sudo apt install keyutils
@@ -109,7 +108,6 @@ jobs:
             ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
 
             ./azcopy copy "crowdsource-ui/target/" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --recursive
-
 
   db_migrate_azure:
     parameters:
@@ -154,11 +152,11 @@ jobs:
           command: |
             ENV_IMAGE_NAME=${AZURE_LOGIN_SERVER_NAME}/${AZURE_REPO}:<< parameters.env-name >>
 
-            # ENV_IMAGE_NAME_DB_REFRESHER=${AWS_ECR_ACCOUNT_URL}/${DB_REFRESHER_REPO}:<< parameters.env-name >>
+            ENV_IMAGE_NAME_DB_REFRESHER=${AZURE_LOGIN_SERVER_NAME}/${DB_REFRESHER_REPO}:<< parameters.env-name >>
             # kubectl -n << parameters.env-name >> apply  -f ${HOME}/project/crowdsource-api/k8s-deployments/autoscaler_<< parameters.env-name >>.yaml
 
             sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
-            # sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env-name >> apply  -f -
+            sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env-name >> apply  -f -
           name: Deploy container
 
 workflows:
@@ -174,7 +172,7 @@ workflows:
           filters:
             branches:
               only: azure
-      
+
       - db_migrate_azure:
           name: migrate_dev_azure
           db_name: ${AZURE_DEV_DB_NAME}
@@ -198,15 +196,12 @@ workflows:
           requires:
             - migrate_dev_azure
 
-
       - aks_deployment:
           name: dev_deployment_eks
           cluster-name: ${AZURE_CLUSTER_NAME}
           env-name: dev
           requires:
             - push_dev_image
-
-
       # - aws-ecr/build-and-push-image:
       #     name: push_dev_image
       #     repo: ${REPO}
@@ -215,7 +210,6 @@ workflows:
       #     extra-build-args: --build-arg NODE_ENV=dev
       #     requires:
       #       - migrate_dev_aws
-
       # - aws-ecr/build-and-push-image:
       #     name: push_dev_db_refresher_image
       #     repo: ${DB_REFRESHER_REPO}
@@ -224,9 +218,6 @@ workflows:
       #     tag: "dev,test,prod,uat,cug"
       #     requires:
       #       - migrate_dev_aws
-
-
-
       # - run_functional_tests:
       #     name: functional_tests_dev
       #     env_name: dev
@@ -234,7 +225,6 @@ workflows:
       #     requires:
       #       - dev_deployment_eks
       #       - build_dev_ui
-
       # - approve_to_deploy:
       #     name: approve_cug_deployment_eks
       #     type: approval
@@ -245,13 +235,11 @@ workflows:
       #     filters:
       #       branches:
       #         only: master
-
       # - db_migrate_aws:
       #     name: migrate_cug_aws
       #     db_name: ${CUG_DB_NAME}
       #     requires:
       #       - approve_cug_deployment_eks
-
       # - aws-ecr/build-and-push-image:
       #     name: push_cug_image
       #     repo: ${REPO}
@@ -260,21 +248,18 @@ workflows:
       #     extra-build-args: --build-arg NODE_ENV=cug
       #     requires:
       #       - migrate_cug_aws
-
       # - build_ui_push_to_s3:
       #     name: build_cug_ui
       #     env_name: cug
       #     distributionId: ${CUG_DISTRIBUTION_ID}
       #     requires:
       #       - push_cug_image
-
       # - eks_fargate_deployment:
       #     name: cug_deployment_eks
       #     cluster-name: ${CLUSTER_NAME}
       #     env-name: cug
       #     requires:
       #       - push_cug_image
-
       # - approve_to_deploy:
       #     name: approve_test_deployment_eks
       #     type: approval
@@ -285,13 +270,11 @@ workflows:
       #     filters:
       #       branches:
       #         only: master
-
       # - db_migrate_aws:
       #     name: migrate_test_aws
       #     db_name: ${TEST_DB_NAME}
       #     requires:
       #       - approve_test_deployment_eks
-
       # - aws-ecr/build-and-push-image:
       #     name: push_test_image
       #     repo: ${REPO}
@@ -300,21 +283,18 @@ workflows:
       #     extra-build-args: --build-arg NODE_ENV=test
       #     requires:
       #       - migrate_test_aws
-
       # - build_ui_push_to_s3:
       #     name: build_test_ui
       #     env_name: test
       #     distributionId: ${TEST_DISTRIBUTION_ID}
       #     requires:
       #       - push_test_image
-
       # - eks_fargate_deployment:
       #     name: test_deployment_eks
       #     cluster-name: ${CLUSTER_NAME}
       #     env-name: test
       #     requires:
       #       - push_test_image
-
       # - run_functional_tests:
       #     name: functional_tests_test
       #     env_name: test
@@ -322,7 +302,6 @@ workflows:
       #     requires:
       #       - test_deployment_eks
       #       - build_test_ui
-
       # - approve_to_deploy:
       #     name: approve_uat_deployment_eks
       #     type: approval
@@ -330,14 +309,12 @@ workflows:
       #       - test_deployment_eks
       #       - build_test_ui
       #       # - functional_tests_dev
-
       # - db_migrate_aws:
       #     name: migrate_uat_aws
       #     db_name: ${UAT_DB_NAME}
       #     requires:
       #       # - functional_tests_test
       #       - approve_uat_deployment_eks
-
       # - aws-ecr/build-and-push-image:
       #     name: push_uat_image
       #     repo: ${REPO}
@@ -346,21 +323,18 @@ workflows:
       #     extra-build-args: --build-arg NODE_ENV=uat
       #     requires:
       #       - migrate_uat_aws
-
       # - build_ui_push_to_s3:
       #     name: build_uat_ui
       #     env_name: uat
       #     distributionId: ${UAT_DISTRIBUTION_ID}
       #     requires:
       #       - push_uat_image
-
       # - eks_fargate_deployment:
       #     name: uat_deployment_eks
       #     cluster-name: ${CLUSTER_NAME}
       #     env-name: uat
       #     requires:
       #       - push_uat_image
-
       # - approve_to_deploy:
       #     name: approve_prod_deployment_eks
       #     type: approval
@@ -369,20 +343,17 @@ workflows:
       #       - build_test_ui
       #       # - functional_tests_test
       #       - uat_deployment_eks
-
       # - db_migrate_aws:
       #     name: migrate_prod_aws
       #     db_name: ${DB_NAME}
       #     requires:
       #       - approve_prod_deployment_eks
-
       # - build_ui_push_to_s3:
       #     name: build_prod_ui
       #     env_name: prod
       #     distributionId: ${PROD_DISTRIBUTION_ID}
       #     requires:
       #       - push_prod_image
-
       # - aws-ecr/build-and-push-image:
       #     name: push_prod_image
       #     repo: ${REPO}
@@ -391,7 +362,6 @@ workflows:
       #     extra-build-args: --build-arg NODE_ENV=prod
       #     requires:
       #       - migrate_prod_aws
-
       # - eks_fargate_deployment:
       #     name: prod_deployment_eks
       #     cluster-name: ${CLUSTER_NAME}

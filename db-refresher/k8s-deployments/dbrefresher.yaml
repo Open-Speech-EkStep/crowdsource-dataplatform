@@ -6,7 +6,6 @@ metadata:
     app: CIRCLE_SHA1
 
 spec:
-
   schedule: "0 */2 * * *"
   jobTemplate:
     spec:
@@ -62,4 +61,29 @@ spec:
                     secretKeyRef:
                       name: vakyansh-secret
                       key: region
+                - name: AZURE_TENANT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AZURE_TENANT_ID
+                - name: AZURE_APP_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AZURE_APP_ID
+                - name: AZURE_ACC_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AZURE_ACC_URL
+                - name: AZURE_CONTAINER
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AZURE_CONTAINER
+                - name: AZCOPY_SPA_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AZCOPY_SPA_CLIENT_SECRET
           restartPolicy: OnFailure
