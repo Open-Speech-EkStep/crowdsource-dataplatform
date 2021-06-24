@@ -14,7 +14,7 @@ spec:
           containers:
             - name: db-refresher
               image: IMAGE_NAME_DB_REFRESHER
-              imagePullPolicy: IfNotPresent
+              imagePullPolicy: Always
               env:
                 - name: DB_HOST
                   valueFrom:
