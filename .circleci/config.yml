@@ -89,7 +89,7 @@ jobs:
       env_name:
         type: string
     docker:
-      - image: circleci/node:13.4
+      - image: circleci/postgres:latest
     steps:
       - *fast-checkout
       - node/install-packages
