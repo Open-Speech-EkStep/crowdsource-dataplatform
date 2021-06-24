@@ -93,13 +93,13 @@ jobs:
     steps:
       - *fast-checkout
       - run:
-        name: setup_machine
-        command: |
-          sudo apt-get update -y
-          sudo apt-get install nodejs
-          sudo apt-get install npm
-          sudo apt-get install -y apt-utils
-          sudo apt-get install wget
+          name: setup_machine
+          command: |
+            sudo apt-get update -y
+            sudo apt-get install nodejs
+            sudo apt-get install npm
+            sudo apt-get install -y apt-utils
+            sudo apt-get install wget
 
       - node/install-packages
       - run:
