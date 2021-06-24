@@ -44,6 +44,7 @@ const showUserProfile = function (userName) {
       if(userName.trim().length == 0){
         $userProfileName.addClass('d-none');
         $anonymousUser.removeClass('d-none');
+        $navUserName.text('');
       } else {
         $userProfileName.addClass('d-none');
         $anonymousUser.addClass('d-none');

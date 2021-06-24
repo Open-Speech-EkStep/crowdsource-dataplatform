@@ -104,7 +104,7 @@ describe("showUserProfile",()=> {
 
     expect($navUser.hasClass('d-none')).toEqual(false);
     expect($navUserName.text()).toEqual("testUser");
-    expect($userProfileName.text()).toEqual("testUser");
+    expect($userProfileName.hasClass('d-none')).toEqual(true);
     expect($anonymousUser.hasClass('d-none')).toEqual(true);
   })
 
@@ -121,6 +121,6 @@ describe("showUserProfile",()=> {
     expect($navUserName.text()).toEqual("");
     expect($userProfileName.hasClass('d-none')).toEqual(true);
     expect($anonymousUser.hasClass('d-none')).toEqual(false);
-    expect($anonymousUser.text()).toEqual("<%= __('User')%>");
+    expect($anonymousUser.text()).toEqual("<%= __('(No Username)')%>");
   })
 })

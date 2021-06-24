@@ -238,6 +238,9 @@ body {
 }
 
 @media (max-width: 767px) {
+    #header-nav-bar{
+        min-height: 56px;
+    }
 
     .footer-links {
         margin-left: 0 !important;

@@ -144,6 +144,10 @@ body {
 
 
 @media (max-width: 767px) {
+  #header-nav-bar{
+    min-height: 56px;
+  }
+
    .speakerDetails {
    height: 500px;
    overflow: auto;
