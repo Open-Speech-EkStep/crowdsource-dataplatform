@@ -39,7 +39,7 @@ function showAndHideEditError(inputTextLength, error, callback1 = () => { }, cal
       if ($cancelButton) {
         $cancelButton.attr('disabled', true);
       }
-    }else {
+    } else {
       callback1()
       if ($cancelButton) {
         $cancelButton.removeAttr('disabled');
@@ -143,10 +143,11 @@ function lngtype(text) {
     "Sindhi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
     "Konkani": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
     "Bodo": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Manipuri": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Manipuri": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
     "Dogri": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
     "Nepali": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Santali": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/
+    "Santali": /^[\u0020-\u007F]+$/,
+    "Maithili": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/
   }
   if (currentModule == 'suno') {
     langdic = {
@@ -167,10 +168,11 @@ function lngtype(text) {
       "Sindhi": /^[\u0900-\u097F\u0030-\u0039]+$/,
       "Konkani": /^[\u0900-\u097F\u0030-\u0039]+$/,
       "Bodo": /^[\u0900-\u097F\u0030-\u0039]+$/,
-      "Manipuri": /^[\u0900-\u097F\u0030-\u0039]+$/,
+      "Manipuri": /^[\u0980-\u09FF\u0030-\u0039]+$/,
       "Dogri": /^[\u0900-\u097F\u0030-\u0039]+$/,
       "Nepali": /^[\u0900-\u097F\u0030-\u0039]+$/,
-      "Santali": /^[\u0900-\u097F\u0030-\u0039]+$/
+      "Santali": /^[\u0020-\u007F]+$/,
+      "Maithili": /^[\u0900-\u097F\u0030-\u0039]+$/
     }
   }
 

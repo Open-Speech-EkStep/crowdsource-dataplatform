@@ -20,7 +20,8 @@ const LANGUAGES = [
     { value: "Nepali", id: "ne", text: "Nepali", hasLocaleText: false, data: true },
     { value: "Santali", id: "sat", text: "Santali", hasLocaleText: false, data: true },
     { value: "Sanskrit", id: "sa", text: "Sanskrit", hasLocaleText: false, data: true },
-    { value: "Urdu", id: "ur", text: "Urdu", hasLocaleText: false, data: true }
+    { value: "Urdu", id: "ur", text: "Urdu", hasLocaleText: false, data: true },
+    { value: "Maithili", id: "mai", text: "Maithili", hasLocaleText: false, data: true }
 ];
 
 function getEnabledLanguages(enabled_languages) {

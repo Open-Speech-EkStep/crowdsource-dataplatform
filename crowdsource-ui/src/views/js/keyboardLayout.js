@@ -294,6 +294,78 @@ const keyboardLayout = {
       ]
     }
   },
+  'manipuri': {
+    "layout": {
+      "default": [
+        "ৎ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ০ - = {bksp}",
+        "{tab} র্ অ ে র ত য ু ি ো প [ ] \\",
+        "{lock} া স দ ্ গ হ জ ক ল ; ' {enter}",
+        "{shift} ঙ ষ চ ড় ব ন ম  , । / {shift}",
+        ".com @ {space}"
+      ],
+      "shift": [
+        "ঽ ! @ # $ % ^ & * ( ) _ + {bksp}",
+        "{tab} র‍্ আ ৈ ৃ থ য় ূ ী ৌ ফ { } |",
+        "{lock} া শ ধ ় ঘ ঃ ঝ খ  : \" {enter}",
+        "{shift} ঁ ক্ষ ছ ঢ় ভ ণ ং < > ? {shift}",
+        ".com @ {space}"
+      ]
+    }
+  },
+  'maithili': {
+    "layout": {
+      "default": [
+        " १ २ ३ ४ ५ ६ ७ ८ ९ ० - ृ {bksp}",
+        "{tab} ौ ै ा ी ू ब ह ग द ज ड ़ ॉ",
+        "{lock} ो े ् ि ु प र क त च ट {enter}",
+        "{shift}  ं म न व ल स , . य {shift}",
+        ".com @ {space}"
+      ],
+      "shift": [
+        "~ ऍ ॅ ्र ४ ज्ञ त्र क्ष श्र ( ) ः ऋ {bksp}",
+        "{tab} औ ऐ आ ई ऊ भ ङ घ ध झ ढ ञ ऑ",
+        "{lock} ओ ए अ इ उ फ ऱ ख थ छ ठ {enter}",
+        "{shift}  ँ ण    श ष । ? {shift}",
+        ".com @ {space}"
+      ]
+    }
+  },
+  'bodo': {
+    "layout": {
+      "default": [
+        " १ २ ३ ४ ५ ६ ७ ८ ९ ० - ृ {bksp}",
+        "{tab} ौ ै ा ी ू ब ह ग द ज ड ़ ॉ",
+        "{lock} ो े ् ि ु प र क त च ट {enter}",
+        "{shift}  ं म न व ल स , . य {shift}",
+        ".com @ {space}"
+      ],
+      "shift": [
+        "~ ऍ ॅ ्र ४ ज्ञ त्र क्ष श्र ( ) ः ऋ {bksp}",
+        "{tab} औ ऐ आ ई ऊ भ ङ घ ध झ ढ ञ ऑ",
+        "{lock} ओ ए अ इ उ फ ऱ ख थ छ ठ {enter}",
+        "{shift}  ँ ण    श ष । ? {shift}",
+        ".com @ {space}"
+      ]
+    }
+  },
+  'dogri': {
+    "layout": {
+      "default": [
+        " १ २ ३ ४ ५ ६ ७ ८ ९ ० - ृ {bksp}",
+        "{tab} ौ ै ा ी ू ब ह ग द ज ड ़ ॉ",
+        "{lock} ो े ् ि ु प र क त च ट {enter}",
+        "{shift}  ं म न व ल स , . य {shift}",
+        ".com @ {space}"
+      ],
+      "shift": [
+        "~ ऍ ॅ ्र ४ ज्ञ त्र क्ष श्र ( ) ः ऋ {bksp}",
+        "{tab} औ ऐ आ ई ऊ भ ङ घ ध झ ढ ञ ऑ",
+        "{lock} ओ ए अ इ उ फ ऱ ख थ छ ठ {enter}",
+        "{shift}  ँ ण    श ष । ? {shift}",
+        ".com @ {space}"
+      ]
+    }
+  }
 }
 
 module.exports = { keyboardLayout };
