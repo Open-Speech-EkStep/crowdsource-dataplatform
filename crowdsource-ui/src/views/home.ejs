@@ -26,7 +26,7 @@
 <body>
 <%- include('common/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
 <div class="container-fluid supreme-container p-0">
-    <div class="platform-intro-section-cover mb-0 pb-0" style="margin:auto">
+    <div class="platform-intro-section-cover mb-0 pb-0" style="margin:auto;max-width:1200px">
     <div class="row platform-intro-section d-none">
         <div class="col-lg-6 col-md-8 col-12 mt-lg-5 mt-md-5 pl-lg-0 px-5 mb-lg-5 mb-md-5 mt-4 order-lg-0 order-md-0 order-sm-1 order-1 platform-intro-section-text">
             <h4 class="display-5 font-weight-bolder lh-4"><%= __('[Bhaashini]') %></h4>
@@ -40,14 +40,15 @@
             <img src="../img/mobileWaveAndLang.svg" alt="home image" height="595" width="654" class="img-fluid">
         </div>
     </div>
-    <div class="row m-0 home-banner" style="background-image:url(../../img/banner.png);background-size:cover">
+    <div class="row m-0">
+        <img src="../../img/banner.png" class="w-100 home-banner">
     </div>
     </div>
     <div style="height:4px;left:0;background:#42b2c6;opacity:.1"></div>
     <div class="row pb-5 mx-0" style="border:2px solid #f0f0f7;background:rgba(223,236,251,.2)">
         <div class="col-12 justify-content-center text-center px-lg-5 px-md-5 px-4">
             <h1 class="mt-5 display-5 font-weight-bolder lh-4 platform-card-section-heading mb-0"><%= __('One platform, multiple crowdsourcing initiatives') %></h1>
-            <p class="mt-4 font-weight-normal platform-card-section-para"><%= __('Enrich open repository of speech recognition data, parallel translations and labeled images.') %></p>
+            <p class="mt-4 font-weight-normal platform-card-section-para"><%= __('Create open repository of speech recognition data, parallel translations and labeled images.') %></p>
             <%- include ../../build/views/common/platformCardSection.ejs %>
             <div class="mt-lg-4 mt-md-4 mb-lg-3 mb-md-3 mt-3 mb-5 monthly-goal-section d-none">
                 <span class="m-0 monthly-goal-text"><%= __('Monthly Goal :  ') %></span><span><span class="language-count-box"><span id="language-count"></span><%= __(' languages') %></span><span class="separator"></span><span class="language-goal-box"> <span id="language-goal-each"></span> <%= __('each') %></span></span>

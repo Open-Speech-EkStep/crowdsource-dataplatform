@@ -236,10 +236,12 @@
     border-width: 0;
 }
 #carouselExampleIndicators .nav-tabs>li>a {
-    color: #666666 !important;
     font-size: 24px;
     line-height: 29px;
-    opacity: 0.4;
+    width: max-content;
+    color: #007bff!important;
+    opacity: .7;
+    font-weight: 700;
     width: max-content;
 }
 
