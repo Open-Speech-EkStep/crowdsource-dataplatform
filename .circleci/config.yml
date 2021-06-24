@@ -207,7 +207,7 @@ workflows:
           repo: ${AZURE_REPO}
           tag: dev
           requires:
-            - migrate_dev_aws
+            - migrate_dev_azure
 
       - aks_deployment:
           name: dev_deployment_eks
