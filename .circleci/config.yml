@@ -56,34 +56,56 @@ jobs:
     steps:
       - run: echo "Hold for approval"
 
-  build_ui_push_to_s3:
+  # build_ui_push_to_s3:
+  #   parameters:
+  #     env_name:
+  #       type: string
+  #     distributionId:
+  #       type: string
+  #   executor:
+  #     name: node/default
+  #   steps:
+  #     - *fast-checkout
+  #     - node/install-packages
+  #     - run: npm run gulp -- -- --env=<< parameters.env_name >>
+  #     - aws-s3/sync:
+  #         arguments: |
+  #           --cache-control "max-age=8387800" \
+  #           --exclude "*" \
+  #           --include "*.svg" \
+  #           --include "*.jpeg"
+  #         from: crowdsource-ui/target/
+  #         to: "s3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>"
+  #     - aws-s3/sync:
+  #         arguments: |
+  #           --cache-control "max-age=0, s-maxage=600" \
+  #           --exclude "*.svg" \
+  #           --exclude "*.jpeg"
+  #         from: crowdsource-ui/target/
+  #         to: "s3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>"
+  #     - run: aws cloudfront create-invalidation --distribution-id << parameters.distributionId >> --paths '/*'
+
+
+  build_ui_push_to_blob_storage:
     parameters:
       env_name:
-        type: string
-      distributionId:
         type: string
     executor:
       name: node/default
     steps:
       - *fast-checkout
       - node/install-packages
-      - run: npm run gulp -- -- --env=<< parameters.env_name >>
-      - aws-s3/sync:
-          arguments: |
-            --cache-control "max-age=8387800" \
-            --exclude "*" \
-            --include "*.svg" \
-            --include "*.jpeg"
-          from: crowdsource-ui/target/
-          to: "s3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>"
-      - aws-s3/sync:
-          arguments: |
-            --cache-control "max-age=0, s-maxage=600" \
-            --exclude "*.svg" \
-            --exclude "*.jpeg"
-          from: crowdsource-ui/target/
-          to: "s3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>"
-      - run: aws cloudfront create-invalidation --distribution-id << parameters.distributionId >> --paths '/*'
+      - run: 
+          name: Run DB Migrate
+          command: | 
+            npm run gulp -- -- --env=<< parameters.env_name >>
+            sudo apt-get install wget
+
+            wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xf azcopy_v10.tar.gz --strip-components=1
+
+            azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
+
+            azcopy copy "crowdsource-ui/target/" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --recursive
 
 
   db_migrate_azure:
@@ -155,18 +177,12 @@ workflows:
           db_name: ${AZURE_DEV_DB_NAME}
           requires:
             - create-workspace
-      # - db_migrate_aws:
-      #     name: migrate_dev_aws
-      #     db_name: ${DEV_DB_NAME}
-      #     requires:
-      #       - create-workspace
 
-      # - build_ui_push_to_s3:
-      #     name: build_dev_ui
-      #     env_name: dev
-      #     distributionId: ${DEV_DISTRIBUTION_ID}
-      #     requires:
-      #       - push_dev_image
+      - build_ui_push_to_blob_storage:
+          name: build_dev_ui
+          env_name: dev
+          requires:
+            - migrate_dev_azure
 
       - azure-acr/build-and-push-image:
           name: push_dev_image
