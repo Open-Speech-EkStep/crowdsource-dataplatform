@@ -3,10 +3,11 @@ const {
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
-    setStartRecordingBtnOnClick
-} = require('../../../build/js/common/speakerDetails');
+    setStartRecordingBtnOnClick,
+    hasUserRegistered
+} = require('./speakerDetails');
 
-const {hasUserRegistered} = require('../../../build/js/common/common');
+// const {hasUserRegistered} = require('../../../build/js/common/common');
 
 const {DEFAULT_CON_LANGUAGE,MODULE, CURRENT_MODULE, CONTRIBUTION_LANGUAGE} = require('../../../build/js/common/constants');
 const {updateLocaleLanguagesDropdown} = require('./utils');

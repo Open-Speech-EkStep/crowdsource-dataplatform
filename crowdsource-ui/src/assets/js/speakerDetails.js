@@ -1,4 +1,4 @@
-const { DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS } = require('./constants');
+const { DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS,LIKHO_TO_LANGUAGE, LIKHO_FROM_LANGUAGE, MODULE,SPEAKER_DETAILS_KEY } = require('./constants');
 const { getLocaleString } = require('./utils');
 const fetch = require('./fetch')
 const {whitelisting_email} = require('./env-api')
@@ -20,10 +20,10 @@ function resetSpeakerDetails() {
     const motherTongue = document.getElementById('mother-tongue');
     const userName = document.getElementById('username');
     const selectedGender = document.querySelector(
-        'input[name = "gender"]:checked'
+      'input[name = "gender"]:checked'
     );
     const transSelectedGender = document.querySelector(
-        'input[name = "trans_gender"]:checked'
+      'input[name = "trans_gender"]:checked'
     );
     if (selectedGender) selectedGender.checked = false;
     if (transSelectedGender) transSelectedGender.checked = false;
@@ -56,8 +56,8 @@ const setStartRecordBtnToolTipContent = (userName, $startRecordBtnTooltip) => {
         const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
         if (testUserName(userName)) {
             $startRecordBtnTooltip.attr(
-                'data-original-title',
-                localeString[text]
+              'data-original-title',
+              localeString[text]
             );
         }
 
@@ -69,7 +69,7 @@ const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
     if (speakerDetailsValue) {
         const parsedSpeakerDetails = JSON.parse(speakerDetailsValue);
         const genderRadio = document.querySelector(
-            'input[name = "gender"][value="' + parsedSpeakerDetails.gender + '"]'
+          'input[name = "gender"][value="' + parsedSpeakerDetails.gender + '"]'
         );
         if (['male', 'female'].indexOf(parsedSpeakerDetails.gender) > -1) {
             if (genderRadio) {
@@ -78,14 +78,14 @@ const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
             }
         } else if (parsedSpeakerDetails.gender !== "" && parsedSpeakerDetails.gender !== undefined) {
             const genderRadio = document.querySelector(
-                'input[name = "gender"][value="others"]'
+              'input[name = "gender"][value="others"]'
             );
             if (genderRadio) {
                 genderRadio.checked = true;
                 genderRadio.previous = true;
             }
             const transGenderRadio = document.querySelector(
-                'input[name = "trans_gender"][value="' + parsedSpeakerDetails.gender + '"]'
+              'input[name = "trans_gender"][value="' + parsedSpeakerDetails.gender + '"]'
             );
             if (transGenderRadio) {
                 $("#transgender_options").removeClass("d-none");
@@ -99,8 +99,8 @@ const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
         let userNameTxt = '';
         if(parsedSpeakerDetails.userName){
             userNameTxt = whitelisting_email==='true' ?
-            parsedSpeakerDetails.userName.trim() :  
-            parsedSpeakerDetails.userName.trim().substring(0, 12)
+              parsedSpeakerDetails.userName.trim() :
+              parsedSpeakerDetails.userName.trim().substring(0, 12)
         }
         $userName.val(userNameTxt);
         validateUserName($userName, $userName.next());
@@ -121,7 +121,8 @@ const setUserModalOnShown = function ($userName) {
 
 const setUserNameOnInputFocus = function () {
     const $userName = $('#username');
-    const $userNameError = $userName.next();
+    // const $userNameError = $userName.next();
+    const $userNameError = $('#username-error');
     // const $tncCheckbox = $('#tnc');
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
@@ -148,7 +149,7 @@ const setUserNameOnInputFocus = function () {
 const setGenderRadioButtonOnClick = function () {
     const genderRadios = document.querySelectorAll('input[name = "gender"]');
     const selectedTransGender = document.querySelector(
-        'input[name = "trans_gender"]:checked'
+      'input[name = "trans_gender"]:checked'
     );
 
     const options = $("#transgender_options");
@@ -161,7 +162,7 @@ const setGenderRadioButtonOnClick = function () {
             if (e.target.value == 'others' && e.target.checked) {
                 if (!selectedTransGender) {
                     const defaultOption = document.querySelector(
-                        'input[name = "trans_gender"][value="Rather Not Say"]'
+                      'input[name = "trans_gender"][value="Rather Not Say"]'
                     );
                     defaultOption.checked = true;
                     defaultOption.previous = true;
@@ -195,7 +196,7 @@ const storeToLocal = (speakerDetailsKey, speakerDetails, contributionLanguage, u
 }
 
 // device-browser
-const setStartRecordingBtnOnClick = function (url, module) {
+const setStartRecordingBtnOnClick = function (url, module = '') {
     const speakerDetailsKey = 'speakerDetails';
     const $startRecordBtn = $('#proceed-box');
     //const $tncCheckbox = $('#tnc');
@@ -216,17 +217,21 @@ const setStartRecordingBtnOnClick = function (url, module) {
             userNameValue = $userName.val().trim();
         }
         let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+        let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+        let fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
         const selectedLanguage = ALL_LANGUAGES.find(e => e.value === contributionLanguage);
         if (!selectedLanguage.data) contributionLanguage = DEFAULT_CON_LANGUAGE;
         if (testUserName(userNameValue)) {
             return;
         }
+        const userLanguage = module === MODULE.likho.value ? fromLanguage : contributionLanguage;
         const speakerDetails = {
             gender: genderValue,
             age: age.value,
             motherTongue: motherTongue.value,
             userName: userNameValue,
-            language: contributionLanguage,
+            language: userLanguage,
+            toLanguage: toLanguage || '',
         };
         if (whitelisting_email==='true') {
             verifyUser(userNameValue).then(res => {
@@ -246,12 +251,40 @@ const setStartRecordingBtnOnClick = function (url, module) {
 }
 
 $(document).ready(function () {
+    $('input[name = "gender"]').on('change', function () {
+        const selectedGender = document.querySelector(
+          'input[name = "gender"]:checked'
+        );
+        const options = $("#transgender_options");
+        if (selectedGender.value === "others") {
+            const selectedTransGender = document.querySelector(
+              'input[name = "trans_gender"]:checked'
+            );
+            if (!selectedTransGender) {
+                const defaultOption = document.querySelector(
+                  'input[name = "trans_gender"][value="Rather Not Say"]'
+                );
+                defaultOption.checked = true;
+                defaultOption.previous = true;
+            }
+            options.removeClass("d-none");
+        } else {
+            options.addClass("d-none");
+        }
+    });
+
     if (whitelisting_email==='true') {
         document.getElementById("username").maxLength = 100;
     } else {
         document.getElementById("username").maxLength = 12;
     }
 });
+
+const hasUserRegistered = function (){
+    const userDetail = localStorage.getItem(SPEAKER_DETAILS_KEY);
+    const parsedUserDetails = JSON.parse(userDetail);
+    return parsedUserDetails ? true : false;
+}
 
 module.exports = {
     testUserName,
@@ -264,5 +297,6 @@ module.exports = {
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
-    setStartRecordingBtnOnClick
+    setStartRecordingBtnOnClick,
+    hasUserRegistered
 };

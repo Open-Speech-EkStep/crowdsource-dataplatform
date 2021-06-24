@@ -286,6 +286,10 @@ body {
   }
 
   @media (max-width: 700px) {
+    .navbar-nav .dropdown-menu {
+      position: absolute !important;
+      margin-left: -140% !important;
+    }
 
     .navbar-toggler{
     padding: 0px !important ;

@@ -207,7 +207,7 @@ describe('setStartRecordingBtnOnClick', () => {
         $startRecordBtn.click();
 
         const expectedDetails = localStorage.getItem('speakerDetails');
-        expect(expectedDetails).toEqual(JSON.stringify({gender:"",age:"",motherTongue:"",userName:"",language:"Hindi"}));
+        expect(expectedDetails).toEqual(JSON.stringify({gender:"",age:"",motherTongue:"",userName:"",language:"Hindi", toLanguage:""}));
         expect(location.href).toEqual("./record.html");
         localStorage.clear();
     })

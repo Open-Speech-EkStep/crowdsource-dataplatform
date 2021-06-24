@@ -8,8 +8,9 @@ const {
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
-    setStartRecordingBtnOnClick
-} = require('../../../build/js/common/speakerDetails');
+    setStartRecordingBtnOnClick,
+    hasUserRegistered
+} = require('./speakerDetails');
 
 const {
     setBoloSpeakerDetails,
@@ -18,7 +19,7 @@ const {
     setLetGoBtnOnClick
 } = require('./bolo_user_details');
 const { getContributedAndTopLanguage } = require('./common');
-const { hasUserRegistered } = require('../../../build/js/common/common');
+// const { hasUserRegistered } = require('../../../build/js/common/common');
 const {
     DEFAULT_CON_LANGUAGE,
     TOP_LANGUAGES_BY_HOURS,

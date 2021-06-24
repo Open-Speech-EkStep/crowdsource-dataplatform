@@ -3,10 +3,11 @@ const { setSpeakerDetails,
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
-    setStartRecordingBtnOnClick } = require('../../../build/js/common/speakerDetails');
+    hasUserRegistered,
+    setStartRecordingBtnOnClick } = require('./speakerDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString, getJson, formatTime } = require('./utils');
 const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES,MODULE,CONTRIBUTION_LANGUAGE } = require('../../../build/js/common/constants');
-const { hasUserRegistered } = require('../../../build/js/common/common');
+// const { hasUserRegistered } = require('../../../build/js/common/common');
 const fetch = require('./fetch');
 const { data } = require('jquery');
 const {whitelisting_email} = require('./env-api')
