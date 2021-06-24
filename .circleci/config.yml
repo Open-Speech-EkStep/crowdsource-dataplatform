@@ -104,7 +104,7 @@ jobs:
             # --allow-downgrades            
 
 
-            keyctl session --allow-remove-essential --allow-unauthenticated 
+            keyctl session --allow-remove-essential
 
             # mkdir /usr/src/app/utils/
             wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux 
