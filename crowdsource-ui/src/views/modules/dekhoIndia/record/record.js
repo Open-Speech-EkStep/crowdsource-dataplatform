@@ -16,7 +16,7 @@ const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showOrHideExtensionCloseBtn,isMobileDevice} = require('../common/common');
-const { showUserProfile } = require('../common/header');
+const { showUserProfile, onChangeUser } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { setDataSource } = require('../common/sourceInfo');
 
@@ -487,6 +487,7 @@ const executeOnLoad = function () {
     }
 
     showUserProfile(localSpeakerDataParsed.userName);
+    onChangeUser('./record.html',MODULE.dekho.value);
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName
       &&

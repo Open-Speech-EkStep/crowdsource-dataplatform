@@ -1,4 +1,4 @@
-const { onActiveNavbar } = require('../common/header');
+const { onActiveNavbar ,onChangeUser} = require('../common/header');
 const { showLanguagePopup } = require('../common/locale');
 const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,landToHome,hasUserRegistered} = require('../common/common');
 const {toggleFooterPosition, getLocaleString,updateLocaleLanguagesDropdown} = require('../common/utils');
@@ -99,6 +99,7 @@ function initializeBlock() {
   setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
+  onChangeUser('./home.html',MODULE.dekho.value);
 
   getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, setDefaultLang);
 }

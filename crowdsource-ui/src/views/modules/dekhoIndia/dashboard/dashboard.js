@@ -7,6 +7,8 @@ const { DEFAULT_CON_LANGUAGE,CURRENT_MODULE ,CONTRIBUTION_LANGUAGE,MODULE} = req
 const fetch = require('../common/fetch');
 const {setSpeakerData} = require('../common/contributionStats');
 const {initializeFeedbackModal} = require('../common/feedback')
+const { onChangeUser } = require('../common/header');
+
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
@@ -148,6 +150,7 @@ $(document).ready(function () {
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
+    onChangeUser('./dashboard.html',MODULE.dekho.value);
 
     toggleFooterPosition();
 
