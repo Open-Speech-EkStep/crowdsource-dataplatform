@@ -90,7 +90,7 @@ jobs:
       env_name:
         type: string
     executor:
-      name: node/default
+      name: linux
     steps:
       - *fast-checkout
       - node/install-packages
