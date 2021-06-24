@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<%- include('common/headerForContributor.ejs',{path:"./",MODULE:"", PAGE_TITLE:""}); %>
+<%- include('common/headerForContributor.ejs',{path:"./",MODULE:"", PAGE_TITLE:"",img:""}); %>
 <div id="content-wrapper" class="container-fluid pt-5 pb-2 px-lg-3 px-md-3 px-4 px-md-5">
     <div class="row">
         <%- include('../../build/views/common/back-btn.ejs',{url:"javascript:history.go(-1)"}) %>
@@ -46,7 +46,7 @@
     </div>
     <div class="row mx-0 badge-mt-36">
         <p class="col-12 p-0 text-justify font-weight-light-l p-0">
-            <%- __('Earn title of bhasha samarthak by contributing to Bolo India. Speak a sentence in language of your choice or validate the sentence that is spoken on your desired language. Share titles in your social circle, build the hype, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e. YOU.</b>') %></p>
+            <%- __('Earn badges or certificates by contributing to the crowdsourcing initiatives, such as, Bolo India, Suno India, Likho India and Dekho India. Contribution to each initiative qualifies for badges and certificates as per the levels outlined below. Share badges in your social circle, your language community, and motivate your friends and family to contribute to the cause. The strength of this crowdsourcing initiative is in the diversity of the people i.e.<b>YOU.</b>') %></p>
     </div>
     <div class="row mx-0 badge-mt-38">
         <h4 class="col-12 p-0"><%= __('Participation Levels') %></h4>
@@ -97,7 +97,7 @@
           </div>
     </div>
     <div class="row mx-0 my-5">
-        <p class="col-12 p-0"><%= __('Please note that your levels and titles may take upto 48hrs to update. Your contribution does not expire, but may decrease though if it doesn’t pass the validation test. We want you to remain an active contributor to Bolo India and stand a chance to get recognised by the Ministry of Electronics and Information Technology.')%></p>
+        <p class="col-12 p-0"><%= __('Please note that your levels and badges may take upto 48hrs to update. Your contribution will need to be validated before confirming the badge/certificate. Please keep contributing actively to stand a chance to get recognised.')%></p>
     </div>
 </div>
 

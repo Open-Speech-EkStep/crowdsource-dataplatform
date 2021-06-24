@@ -1,11 +1,25 @@
  /* Web Css */
 
 @media (min-width: 767px) {
+    #module_header_logo{
+        width: 50px;
+        height: 40px;
+    }
 
+    #logo_separator{
+        width: 0px;
+        height: 46px;
+        border: 1px solid #d5d5d5;
+        margin-right: 10px;
+    }
 }
 
 /* Mobile Css */
 
 @media (max-width: 767px) {
+    #module_header_logo{
+        width: 50px;
+        height: 40px;
+    }
    
 }
