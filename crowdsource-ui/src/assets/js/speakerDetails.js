@@ -280,12 +280,6 @@ $(document).ready(function () {
     }
 });
 
-const hasUserRegistered = function (){
-    const userDetail = localStorage.getItem(SPEAKER_DETAILS_KEY);
-    const parsedUserDetails = JSON.parse(userDetail);
-    return parsedUserDetails ? true : false;
-}
-
 module.exports = {
     testUserName,
     validateUserName,
@@ -298,5 +292,4 @@ module.exports = {
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick,
-    hasUserRegistered
 };

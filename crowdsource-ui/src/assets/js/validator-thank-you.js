@@ -17,6 +17,7 @@ const {
   performAPIRequest,
 } = require("./utils");
 const {showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../../../build/js/common/common');
+const {onChangeUser} = require('./header');
 
 const CURRENT_INDEX = "boloValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -175,7 +176,9 @@ function executeOnLoad() {
   } else if (currentIndexInStorage < totalSentence - 1) {
     location.href = "./home.html";
   } else {
-    showUserProfile(localSpeakerDataParsed.userName)
+    showUserProfile(localSpeakerDataParsed.userName);
+    onChangeUser('./validator-thank-you.html',MODULE.bolo.value)
+
     toggleFooterPosition();
     setPageContentHeight();
     setSentencesContributed();

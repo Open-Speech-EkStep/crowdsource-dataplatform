@@ -1,4 +1,4 @@
-const { onActiveNavbar } = require('./header');
+const { onActiveNavbar, onChangeUser } = require('./header');
 const { redirectToLocalisedPage, changeLocale} = require('./locale');
 
 $(document).ready(function () {
@@ -11,4 +11,5 @@ else {
     redirectToLocalisedPage();
 }
   onActiveNavbar('home');
+  onChangeUser('./home.html','home');
 });

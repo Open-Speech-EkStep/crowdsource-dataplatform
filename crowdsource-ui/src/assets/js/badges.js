@@ -4,6 +4,7 @@
   updateLocaleLanguagesDropdown
 } = require('./utils');
 const {CONTRIBUTION_LANGUAGE, BOLOPAGE, LOCALE_STRINGS, ALL_LANGUAGES, DEKHOPAGE, LIKHOPAGE, SUNOPAGE} = require('./constants');
+const {onChangeUser} = require('./header');
 
 const getRowWithBadge = function (levelId, sentenceCount, badgeName, localeString, type, source) {
   const badge = type == 'text' ? BOLOPAGE[badgeName.toLowerCase()] : type == 'ocr' ? DEKHOPAGE[badgeName.toLowerCase()] : type =='asr' ? SUNOPAGE[badgeName.toLowerCase()] : LIKHOPAGE[badgeName.toLowerCase()];
@@ -142,6 +143,8 @@ $(document).ready(function () {
     $("#profile").removeClass("active show");
     $("#home").addClass("active show");
   }
+
+  onChangeUser('./badges.html',moduleType);
  
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
   updateLocaleLanguagesDropdown(language);

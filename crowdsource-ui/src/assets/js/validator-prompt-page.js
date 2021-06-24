@@ -5,6 +5,8 @@ const { showUserProfile } = require('../../../build/js/common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
 const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition, getDeviceInfo, getBrowserInfo} = require('./utils');
 const { cdn_url } = require('./env-api');
+const { onChangeUser } = require('./header');
+const { MODULE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
@@ -462,7 +464,8 @@ $(document).ready(() => {
     return;
   }
 
-  showUserProfile(localSpeakerDataParsed.userName)
+  showUserProfile(localSpeakerDataParsed.userName);
+    onChangeUser('./validator-page.html',MODULE.bolo.value)
 
   const isExistingUser = localSentencesParsed &&
     localSentencesParsed.userName === localSpeakerDataParsed.userName

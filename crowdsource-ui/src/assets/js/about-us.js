@@ -4,10 +4,11 @@ const {
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick,
-    hasUserRegistered
 } = require('./speakerDetails');
 
 // const {hasUserRegistered} = require('../../../build/js/common/common');
+const {hasUserRegistered} = require('./common');
+const {onChangeUser} = require('./header');
 
 const {DEFAULT_CON_LANGUAGE,MODULE, CURRENT_MODULE, CONTRIBUTION_LANGUAGE} = require('./constants');
 const {updateLocaleLanguagesDropdown} = require('./utils');
@@ -52,6 +53,7 @@ $(document).ready(function () {
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
+    onChangeUser('./about-us.html','home')
 
     let langTop;
     $('#languageTop').on('change', (e) => {

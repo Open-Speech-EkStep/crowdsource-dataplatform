@@ -1,5 +1,5 @@
 const {
-    CONTRIBUTION_LANGUAGE, CURRENT_MODULE
+    CONTRIBUTION_LANGUAGE, CURRENT_MODULE,SPEAKER_DETAILS_KEY, MODULE
   } = require('./constants');
 
 const getContributedAndTopLanguage = (topLanguagesData, type) => {
@@ -35,4 +35,20 @@ function onActiveNavbar(value) {
   allDivs[targetedDivIndex].classList.add('active');
 }
 
-  module.exports =  {getContributedAndTopLanguage, onActiveNavbar};
+const isMobileDevice = () => {
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    // true for mobile device
+    return true
+  } else {
+    // false for not mobile device
+    return false;
+  }
+}
+
+const hasUserRegistered = function (){
+  const userDetail = localStorage.getItem(SPEAKER_DETAILS_KEY);
+  const parsedUserDetails = JSON.parse(userDetail);
+  return parsedUserDetails ? true : false;
+}
+
+  module.exports =  {getContributedAndTopLanguage, onActiveNavbar, isMobileDevice,hasUserRegistered};

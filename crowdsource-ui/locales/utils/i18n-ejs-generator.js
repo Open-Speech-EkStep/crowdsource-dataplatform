@@ -79,8 +79,8 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       'about-us.html',
       locale
     );
-    await ejs2html(`${ejsPath}/badges.ejs`, {}, i18n, outputPath, 'badges.html', locale);
-    await ejs2html(`${ejsPath}/validatorBadgesInfo.ejs`, {}, i18n, outputPath, 'validator-badges.html', locale);
+    await ejs2html(`${ejsPath}/badges.ejs`, {MOTHER_TONGUE}, i18n, outputPath, 'badges.html', locale);
+    await ejs2html(`${ejsPath}/validatorBadgesInfo.ejs`, {MOTHER_TONGUE}, i18n, outputPath, 'validator-badges.html', locale);
     await ejs2html(
       `${ejsPath}/dashboard.ejs`,
       { MOTHER_TONGUE, LANGUAGES, isCookiePresent: false },
@@ -98,11 +98,11 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       'home.html',
       locale
     );
-    await ejs2html(`${ejsPath}/not-found.ejs`, {}, i18n, outputPath, 'not-found.html', locale);
+    await ejs2html(`${ejsPath}/not-found.ejs`, {MOTHER_TONGUE}, i18n, outputPath, 'not-found.html', locale);
     await ejs2html(`${ejsPath}/record.ejs`, {MOTHER_TONGUE, LANGUAGES}, i18n, outputPath, 'record.html', locale);
     await ejs2html(
       `${ejsPath}/terms-and-conditions.ejs`,
-      {},
+      {MOTHER_TONGUE},
       i18n,
       outputPath,
       'terms-and-conditions.html',
