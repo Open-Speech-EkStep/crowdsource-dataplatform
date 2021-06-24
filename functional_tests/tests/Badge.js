@@ -9,7 +9,7 @@ const {
 
 step("Validate initiative & language dropdown exist", async function () {
     await taiko.waitFor(1000);
-    await text("Levels and Badging").exists();
+    await text("Bhasha Samarthak Levels").exists();
     assert.ok(await taiko.dropDown({ id: 'initiative' }).exists());
     assert.ok(await taiko.dropDown({ id: 'languages' }).exists());
 });

@@ -7,13 +7,13 @@ Tags: page
 
 ## Validate Carousel Section
 * Section should have text "One Platform, multiple Crowdsourcing Initiatives"
-* Validate "Suno India" Tab and goal "100 hours each"
+* Validate "Suno India" Tab and goal ""
 * Move tab to "Bolo India"
-* Validate "Bolo India" Tab and goal "100 hours each"
+* Validate "Bolo India" Tab and goal ""
 * Move tab to "Likho India"
-* Validate "Likho India" Tab and goal "10000 translations each"
+* Validate "Likho India" Tab and goal ""
 * Move tab to "Dekho India"
-* Validate "Dekho India" Tab and goal "10000 images each"
+* Validate "Dekho India" Tab and goal ""
 
 ## Validate Badge Section
 * Click "Know More" Link
