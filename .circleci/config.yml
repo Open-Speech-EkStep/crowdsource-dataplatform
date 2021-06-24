@@ -92,7 +92,7 @@ jobs:
       - image: circleci/postgres:latest
     steps:
       - *fast-checkout
-      - node/install-packages
+      # - node/install-packages
       - run:
           name: build_ui
           command: |
