@@ -88,8 +88,8 @@ jobs:
     parameters:
       env_name:
         type: string
-    docker:
-      - image: circleci/postgres:latest
+    machine:
+      image: ubuntu-2004:202010-01
     steps:
       - *fast-checkout
       # - node/install-packages
