@@ -2,7 +2,6 @@ version: 2.1
 orbs:
   node: circleci/node@4.4.0
   aws-ecr: circleci/aws-ecr@6.15.3
-  # aws-eks: circleci/aws-eks@1.0.3
   azure-aks: circleci/azure-aks@0.3.0
 
   aws-cli: circleci/aws-cli@1.4.0
@@ -89,8 +88,8 @@ jobs:
     parameters:
       env_name:
         type: string
-    executor:
-      name: node/default
+    docker:
+      - image: circleci/node:13.4
     steps:
       - *fast-checkout
       - node/install-packages
@@ -100,18 +99,17 @@ jobs:
             npm run gulp -- -- --env=<< parameters.env_name >>
             sudo apt-get update -y
             sudo apt-get install wget
-            # sudo apt install strace
             sudo apt install keyutils
+
             keyctl session
-            HOME=/tmp/
 
-            AZCOPY_LOG_LOCATION=/tmp/
+            mkdir /usr/src/app/utils/
+            wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux 
+            tar -xf azcopy_v10.tar.gz --strip-components=1
+            cp azcopy /usr/src/app/utils/
+            /usr/src/app/utils/azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
 
-            wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xf azcopy_v10.tar.gz --strip-components=1
-
-            ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
-
-            ./azcopy copy "crowdsource-ui/target/" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --recursive
+            /usr/src/app/utils/azcopy copy "crowdsource-ui/target/" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --recursive
 
   db_migrate_azure:
     parameters:
