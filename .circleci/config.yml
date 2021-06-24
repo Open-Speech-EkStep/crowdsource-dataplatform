@@ -96,16 +96,17 @@ jobs:
       - *fast-checkout
       - node/install-packages
       - run: 
-          name: Run DB Migrate
+          name: build_ui
           command: | 
             npm run gulp -- -- --env=<< parameters.env_name >>
             sudo apt-get install wget
 
             wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xf azcopy_v10.tar.gz --strip-components=1
+            ls -al
 
-            azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
+            ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
 
-            azcopy copy "crowdsource-ui/target/" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --recursive
+            ./azcopy copy "crowdsource-ui/target/" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --recursive
 
 
   db_migrate_azure:
