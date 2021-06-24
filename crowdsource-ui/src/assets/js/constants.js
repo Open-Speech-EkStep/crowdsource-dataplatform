@@ -25,28 +25,28 @@ const BADGES = {
     platinum: { imgLg: "../img/platinum_badge.svg", imgSm: "../img/platinum_contributor.jpg" },
 }
 const BOLOPAGE = {
-    bronze : {imgLg : "../img/bolo_bronze_badge.png", imgSm:"../img/bolo_bronze_badge_val.png"},
-    silver :{imgLg:"../img/bolo_silver_badge.png",imgSm:"../img/bolo_silver_badge_val.png"},
-    gold :{imgLg:"../img/bolo_gold_badge.png",imgSm:"../img/bolo_gold_badge_val.png"},
-    platinum :{imgLg:"../img/bolo_platinum_badge.png",imgSm:"../img/bolo_platinum_badge_val.png"},
+    bronze : {imgLg : "../img/bronze_medal.svg", imgSm:"../img/bolo_bronze_badge_val.png"},
+    silver :{imgLg:"../img/silver_medal.svg",imgSm:"../img/bolo_silver_badge_val.png"},
+    gold :{imgLg:"../img/gold_medal.svg",imgSm:"../img/bolo_gold_badge_val.png"},
+    platinum :{imgLg:"../img/platinum_medal.svg",imgSm:"../img/bolo_platinum_badge_val.png"},
 }
 const SUNOPAGE = {
-    bronze : {imgLg : "../img/suno_bronze_badge.png", imgSm:"../img/suno_bronze_badge_val.png"},
-    silver :{imgLg:"../img/suno_silver_badge.png",imgSm:"../img/suno_silver_badge_val.png"},
-    gold :{imgLg:"../img/suno_gold_badge.png",imgSm:"../img/suno_gold_badge_val.png"},
-    platinum :{imgLg:"../img/suno_platinum_badge.png",imgSm:"../img/suno_platinum_badge_val.png"},
+    bronze : {imgLg : "../img/suno_bronze_medal.svg", imgSm:"../img/suno_bronze_badge_val.png"},
+    silver :{imgLg:"../img/suno_silver_medal.svg",imgSm:"../img/suno_silver_badge_val.png"},
+    gold :{imgLg:"../img/suno_gold_medal.svg",imgSm:"../img/suno_gold_badge_val.png"},
+    platinum :{imgLg:"../img/suno_platinum_medal.svg",imgSm:"../img/suno_platinum_badge_val.png"},
 }
 const DEKHOPAGE = {
-    bronze : {imgLg : "../img/dekho_bronze_badge.png", imgSm:"../img/dekho_bronze_badge_val.png"},
-    silver :{imgLg:"../img/dekho_silver_badge.png",imgSm:"../img/dekho_silver_badge_val.png"},
-    gold :{imgLg:"../img/dekho_gold_badge.png",imgSm:"../img/dekho_gold_badge_val.png"},
-    platinum :{imgLg:"../img/dekho_platinum_badge.png",imgSm:"../img/dekho_platinum_badge_val.png"},
+    bronze : {imgLg : "../img/dekho_bronze_medal.svg", imgSm:"../img/dekho_bronze_badge_val.png"},
+    silver :{imgLg:"../img/dekho_silver_medal.svg",imgSm:"../img/dekho_silver_badge_val.png"},
+    gold :{imgLg:"../img/dekho_gold_medal.svg",imgSm:"../img/dekho_gold_badge_val.png"},
+    platinum :{imgLg:"../img/dekho_platinum_medal.svg",imgSm:"../img/dekho_platinum_badge_val.png"},
 }
 const LIKHOPAGE = {
-    bronze : {imgLg : "../img/likho_bronze_badge.png", imgSm:"../img/likho_bronze_badge_val.png"},
-    silver :{imgLg:"../img/likho_silver_badge.png",imgSm:"../img/likho_silver_badge_val.png"},
-    gold :{imgLg:"../img/likho_gold_badge.png",imgSm:"../img/likho_gold_badge_val.png"},
-    platinum :{imgLg:"../img/likho_platinum_badge.png",imgSm:"../img/likho_platinum_badge_val.png"},
+    bronze : {imgLg : "../img/likho_bronze_medal.svg", imgSm:"../img/likho_bronze_badge_val.png"},
+    silver :{imgLg:"../img/likho_silver_medal.svg",imgSm:"../img/likho_silver_badge_val.png"},
+    gold :{imgLg:"../img/likho_gold_medal.svg",imgSm:"../img/likho_gold_badge_val.png"},
+    platinum :{imgLg:"../img/likho_platinum_medal.svg",imgSm:"../img/likho_platinum_badge_val.png"},
 }
 const CURRENT_MODULE = 'module';
 const MODULE = {
