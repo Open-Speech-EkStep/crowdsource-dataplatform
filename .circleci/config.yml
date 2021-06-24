@@ -89,8 +89,8 @@ jobs:
     parameters:
       env_name:
         type: string
-    docker:
-     - image: alpine
+    executor:
+      name: node/default
     steps:
       - *fast-checkout
       - node/install-packages
