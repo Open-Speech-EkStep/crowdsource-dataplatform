@@ -77,6 +77,9 @@ html {
         font-size: 12px !important;
         line-height: 20px !important;
     }
+    #badge-container h2 {
+        font-size: 26px !important;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
