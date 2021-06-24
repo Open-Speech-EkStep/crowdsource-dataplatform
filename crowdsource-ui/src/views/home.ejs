@@ -26,8 +26,8 @@
 <body>
 <%- include('common/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
 <div class="container-fluid supreme-container p-0">
-    <div class="platform-intro-section-cover mb-0 pb-0">
-    <div class="row platform-intro-section">
+    <div class="platform-intro-section-cover mb-0 pb-0" style="max-width:1200px;margin:auto">
+    <div class="row platform-intro-section d-none">
         <div class="col-lg-6 col-md-8 col-12 mt-lg-5 mt-md-5 pl-lg-0 px-5 mb-lg-5 mb-md-5 mt-4 order-lg-0 order-md-0 order-sm-1 order-1 platform-intro-section-text">
             <h4 class="display-5 font-weight-bolder lh-4"><%= __('[Bhaashini]') %></h4>
             <h4 class="display-5 font-weight-bolder lh-4 mb-0"><%= __('A Crowdsourcing initiative for Indian Languages') %></h4>
@@ -39,6 +39,9 @@
         <div class="col-lg-6 col-md-4 col-12 align-self-center text-right p-0 mt-lg-0 mt-md-5 mt-4" id="home-banner">
             <img src="../img/mobileWaveAndLang.svg" alt="home image" height="595" width="654" class="img-fluid">
         </div>
+    </div>
+    <div class="row m-0 home-banner">
+        <h2 class="w-100 m-auto">Reserved for Banner of BhashaDaan</h2>
     </div>
     </div>
     <div style="height:4px;left:0;background:#42b2c6;opacity:.1"></div>
