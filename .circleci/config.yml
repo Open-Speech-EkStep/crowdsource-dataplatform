@@ -204,7 +204,7 @@ workflows:
           dockerfile: Dockerfile-dbRefresh
           path: ./db-refresher
           extra-build-args: --build-arg NODE_ENV=dev
-          repo: ${AZURE_REPO}
+          repo: ${DB_REFRESHER_REPO}
           tag: dev
           requires:
             - migrate_dev_azure
