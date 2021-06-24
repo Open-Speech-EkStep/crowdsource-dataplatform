@@ -100,7 +100,8 @@ jobs:
             sudo apt-get update -y
             sudo apt-get install -y apt-utils
             sudo apt-get install wget
-            sudo apt install -y keyutils
+            sudo apt install keyutils --allow-downgrades --allow-remove-essential --allow-unauthenticated            
+
 
             keyctl session
 
