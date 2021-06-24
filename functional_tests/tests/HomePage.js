@@ -39,16 +39,16 @@ step("Check If Current Tab is <module>", async function (module) {
 	assert.ok(await button("Start Participating").exists())
 	switch (module) {
 		case 'Bolo India':
-			assert.ok(await text('Help your language by donating your voice').isVisible())
+			assert.ok(await text('Enrich your language by donating your voice').isVisible())
 			break;
 		case 'Suno India':
-			assert.ok(text('Help your language by transcribing audio into text').isVisible())
+			assert.ok(text('Enrich your language by transcribing audio into text').isVisible())
 			break;
 		case 'Likho India':
-			assert.ok(text('Help your language by translating text').isVisible())
+			assert.ok(text('Enrich your language by translating text').isVisible())
 			break;
 		case 'Dekho India':
-			assert.ok(text('Help your language by labelling images').isVisible())
+			assert.ok(text('Enrich your language by labelling images').isVisible())
 			break;
 		default:
 			assert.fail("Not a valid module")
