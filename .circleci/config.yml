@@ -98,6 +98,7 @@ jobs:
           name: build_ui
           command: |
             npm run gulp -- -- --env=<< parameters.env_name >>
+            sudo apt-get update -y
             sudo apt-get install wget
             sudo apt install keyutils
             keyctl session
