@@ -20,7 +20,8 @@ const {
   MODULE,
   ALL_LANGUAGES,
   LIKHO_FROM_LANGUAGE,
-  LIKHO_TO_LANGUAGE
+  LIKHO_TO_LANGUAGE,
+  SPEAKER_DETAILS_KEY
 } = require('../common/constants');
 
 const {initializeFeedbackModal} = require('../common/feedback')
@@ -156,12 +157,12 @@ function initializeBlock() {
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
 
+  if(hasUserRegistered()){
+    const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+    const localSpeakerDataParsed = JSON.parse(speakerDetails);
+    showUserProfile(localSpeakerDataParsed.userName);
+  }
   onChangeUser('./home.html',MODULE.likho.value );
-  const SPEAKER_DETAILS = "speakerDetails";
-  const localSpeakerDataParsed = JSON.parse(
-    localStorage.getItem(SPEAKER_DETAILS)
-  );
-  showUserProfile(localSpeakerDataParsed.userName);
   getStatsSummary('/stats/summary/parallel',MODULE.likho.value);
 
 }

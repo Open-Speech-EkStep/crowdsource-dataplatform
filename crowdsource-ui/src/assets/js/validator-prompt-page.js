@@ -465,7 +465,7 @@ $(document).ready(() => {
   }
 
   showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./validator-page.html',MODULE.bolo.value)
+  onChangeUser('./validator-page.html',MODULE.bolo.value)
 
   const isExistingUser = localSentencesParsed &&
     localSentencesParsed.userName === localSpeakerDataParsed.userName

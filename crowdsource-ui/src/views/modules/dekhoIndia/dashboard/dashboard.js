@@ -3,11 +3,11 @@ const { generateIndiaMap } = require('../common/map');
 const {  setSpeakerDetails, setUserNameOnInputFocus, setStartRecordingBtnOnClick, setUserModalOnShown,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
 const { hasUserRegistered } = require('../common/common');
-const { DEFAULT_CON_LANGUAGE,CURRENT_MODULE ,CONTRIBUTION_LANGUAGE,MODULE} = require('../common/constants');
+const { DEFAULT_CON_LANGUAGE,CURRENT_MODULE ,CONTRIBUTION_LANGUAGE,MODULE,SPEAKER_DETAILS_KEY} = require('../common/constants');
 const fetch = require('../common/fetch');
 const {setSpeakerData} = require('../common/contributionStats');
 const {initializeFeedbackModal} = require('../common/feedback')
-const { onChangeUser } = require('../common/header');
+const { onChangeUser, showUserProfile } = require('../common/header');
 
 const LOCALE_STRINGS = 'localeString';
 let timer;
@@ -150,6 +150,11 @@ $(document).ready(function () {
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
+    if(hasUserRegistered()){
+        const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+        const localSpeakerDataParsed = JSON.parse(speakerDetails);
+        showUserProfile(localSpeakerDataParsed.userName);
+    }
     onChangeUser('./dashboard.html',MODULE.dekho.value);
 
     toggleFooterPosition();

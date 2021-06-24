@@ -4,7 +4,8 @@ const {
   setSpeakerDetails,
   setGenderRadioButtonOnClick,
   setUserNameOnInputFocus,
-  setStartRecordingBtnOnClick
+  setStartRecordingBtnOnClick,
+  addlistenerToGenderRadios
 } = require('./speakerDetails');
 const {isMobileDevice} = require('./common');
 
@@ -29,7 +30,7 @@ const showUserProfile = function (userName) {
   const $userProfileName = $('#user_profile_name');
   const $anonymousUser = $('#anonymous_user');
   $navUser.removeClass('d-none');
-  if (userName) {
+  if (userName != undefined && userName != null) {
     if(userName.trim().length == 0){
       $userProfileName.addClass('d-none');
       $anonymousUser.removeClass('d-none');
@@ -52,9 +53,10 @@ const onChangeUser = (url, module) => {
   const $startRecordBtnTooltip = $startRecordBtn.parent();
   setUserModalOnShown($userName);
   $startRecordBtnTooltip.tooltip('disable');
-  setSpeakerDetails(SPEAKER_DETAILS_KEY, age, motherTongue, $userName);
-  setGenderRadioButtonOnClick();
+  // setSpeakerDetails(SPEAKER_DETAILS_KEY, age, motherTongue, $userName);
+  // setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
+  // addlistenerToGenderRadios();
   $('#change_user').on('click', () => {
     setStartRecordingBtnOnClick(url, module);
   })

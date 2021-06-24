@@ -27,7 +27,8 @@ const {
     CONTRIBUTION_LANGUAGE,
     LOCALE_STRINGS,
     ALL_LANGUAGES,
-    MODULE
+    MODULE,
+  SPEAKER_DETAILS_KEY
 } = require('./constants');
 const SPEAKER_DETAILS = "speakerDetails";
 const updateLocaleText = function (total_contributions, total_validations, language) {
@@ -280,11 +281,12 @@ function initializeBlock() {
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     onChangeUser('./home.html',MODULE.bolo.value);
-    const SPEAKER_DETAILS = "speakerDetails";
-    const localSpeakerDataParsed = JSON.parse(
-      localStorage.getItem(SPEAKER_DETAILS)
-    );
-    showUserProfile(localSpeakerDataParsed.userName);
+    if(hasUserRegistered()){
+        const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+        const localSpeakerDataParsed = JSON.parse(speakerDetails);
+        showUserProfile(localSpeakerDataParsed.userName);
+    }
+
     // setBoloUserModalOnShown($boloUserName);
     // setBoloSpeakerDetails(speakerDetailsKey, $boloUserName);
     // setBoloUserNameOnInputFocus();

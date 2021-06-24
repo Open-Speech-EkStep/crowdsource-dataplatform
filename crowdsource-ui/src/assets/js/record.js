@@ -2,7 +2,7 @@ const fetch = require('./fetch')
 const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo } = require('./utils');
 const { LOCALE_STRINGS,MODULE,CONTRIBUTION_LANGUAGE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
-const { onChangeUser } = require('./header');
+const { onChangeUser , showUserProfile} = require('./header');
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
@@ -613,11 +613,7 @@ function executeOnLoad() {
             return;
         }
 
-        if(localSpeakerDataParsed.userName && localSpeakerDataParsed.userName.length > 0){
-            $navUser.removeClass('d-none');
-            $('#nav-login').addClass('d-none');
-            $navUserName.text(localSpeakerDataParsed.userName);
-        }
+        showUserProfile(localSpeakerDataParsed.userName)
         onChangeUser('./record.html',MODULE.bolo.value);
         const isExistingUser = localSentencesParsed &&
             localSentencesParsed.userName === localSpeakerDataParsed.userName

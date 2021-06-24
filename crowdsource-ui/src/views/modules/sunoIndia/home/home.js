@@ -7,7 +7,8 @@ const {
   setUserModalOnShown,
   setUserNameOnInputFocus,
   setStartRecordingBtnOnClick,
-  setGenderRadioButtonOnClick
+  setGenderRadioButtonOnClick,
+  addlistenerToGenderRadios
 } = require('../common/speakerDetails');
 
 const {setLangNavBar} = require('../common/languageNavBar')
@@ -17,7 +18,8 @@ const {
   DEFAULT_CON_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
-  MODULE
+  MODULE,
+  SPEAKER_DETAILS_KEY
 } = require('../common/constants');
 
 const {initializeFeedbackModal} = require('../common/feedback');
@@ -27,7 +29,7 @@ function initializeBlock() {
   const age = document.getElementById('age');
   const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
-  let sentenceLanguage;
+  let sentenceLanguage = DEFAULT_CON_LANGUAGE;
   toggleFooterPosition();
   let top_lang = getDefaultLang();
   if(top_lang){
@@ -102,13 +104,16 @@ function initializeBlock() {
   setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
+  // addlistenerToGenderRadios();
+
+
 
   onChangeUser('./home.html',MODULE.suno.value);
-  const SPEAKER_DETAILS = "speakerDetails";
-  const localSpeakerDataParsed = JSON.parse(
-    localStorage.getItem(SPEAKER_DETAILS)
-  );
-  showUserProfile(localSpeakerDataParsed.userName);
+  if(hasUserRegistered()){
+    const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+    const localSpeakerDataParsed = JSON.parse(speakerDetails);
+    showUserProfile(localSpeakerDataParsed.userName);
+  }
   getStatsSummary('/stats/summary/asr',MODULE.suno.value, setDefaultLang);
 }
 

@@ -4,14 +4,14 @@ const { setStartRecordingBtnOnClick, setSpeakerDetails, setUserNameOnInputFocus,
 const { toggleFooterPosition, getLocaleString } = require('../common/utils');
 const { hasUserRegistered } = require('../common/common');
 const platform = require('../common/platform')
-const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE,LIKHO_FROM_LANGUAGE,
+const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE,LIKHO_FROM_LANGUAGE,SPEAKER_DETAILS_KEY,
     LIKHO_TO_LANGUAGE } = require('../common/constants');
 const fetch = require('../common/fetch');
 
 const {setSpeakerData} = require('../common/contributionStats');
 const {initializeFeedbackModal} = require('../common/feedback')
 
-const { onChangeUser } = require('../common/header');
+const { onChangeUser , showUserProfile} = require('../common/header');
 
 const LOCALE_STRINGS = 'localeString';
 let timer;
@@ -194,6 +194,11 @@ $(document).ready(function () {
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     $startRecordBtnTooltip.tooltip('disable');
+    if(hasUserRegistered()){
+        const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+        const localSpeakerDataParsed = JSON.parse(speakerDetails);
+        showUserProfile(localSpeakerDataParsed.userName);
+    }
     onChangeUser('./dashboard.html',MODULE.likho.value)
 
     toggleFooterPosition();

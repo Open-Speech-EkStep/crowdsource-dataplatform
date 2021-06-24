@@ -1,9 +1,9 @@
 const { updateLineGraph } = require('../common/lineGraph');
-const { onChangeUser } = require('../common/header');
+const { onChangeUser,showUserProfile } = require('../common/header');
 const { generateIndiaMap } = require('../common/map');
 const { setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown,setStartRecordingBtnOnClick,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
-const { CURRENT_MODULE,CONTRIBUTION_LANGUAGE, MODULE } = require('../common/constants');
+const { CURRENT_MODULE,CONTRIBUTION_LANGUAGE, MODULE,SPEAKER_DETAILS_KEY } = require('../common/constants');
 const { hasUserRegistered } = require('../common/common');
 const fetch = require('../common/fetch');
 
@@ -149,6 +149,11 @@ $(document).ready(function () {
     setUserNameOnInputFocus();
     $startRecordBtnTooltip.tooltip('disable');
 
+    if(hasUserRegistered()){
+        const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+        const localSpeakerDataParsed = JSON.parse(speakerDetails);
+        showUserProfile(localSpeakerDataParsed.userName);
+    }
     onChangeUser('./dashboard.html',MODULE.suno.value)
 
     toggleFooterPosition();

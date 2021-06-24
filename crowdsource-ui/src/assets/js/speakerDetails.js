@@ -154,7 +154,7 @@ const setGenderRadioButtonOnClick = function () {
 
     const options = $("#transgender_options");
     genderRadios.forEach((element) => {
-        element.addEventListener('click', (e) => {
+        $(element).off('click').on('click', (e) => {
             if (e.target.previous) {
                 e.target.checked = false;
             }
@@ -251,27 +251,27 @@ const setStartRecordingBtnOnClick = function (url, module = '') {
 }
 
 $(document).ready(function () {
-    $('input[name = "gender"]').on('change', function () {
-        const selectedGender = document.querySelector(
-          'input[name = "gender"]:checked'
-        );
-        const options = $("#transgender_options");
-        if (selectedGender.value === "others") {
-            const selectedTransGender = document.querySelector(
-              'input[name = "trans_gender"]:checked'
-            );
-            if (!selectedTransGender) {
-                const defaultOption = document.querySelector(
-                  'input[name = "trans_gender"][value="Rather Not Say"]'
-                );
-                defaultOption.checked = true;
-                defaultOption.previous = true;
-            }
-            options.removeClass("d-none");
-        } else {
-            options.addClass("d-none");
-        }
-    });
+    // $('input[name = "gender"]').on('change', function () {
+    //     const selectedGender = document.querySelector(
+    //       'input[name = "gender"]:checked'
+    //     );
+    //     const options = $("#transgender_options");
+    //     if (selectedGender.value === "others") {
+    //         const selectedTransGender = document.querySelector(
+    //           'input[name = "trans_gender"]:checked'
+    //         );
+    //         if (!selectedTransGender) {
+    //             const defaultOption = document.querySelector(
+    //               'input[name = "trans_gender"][value="Rather Not Say"]'
+    //             );
+    //             defaultOption.checked = true;
+    //             defaultOption.previous = true;
+    //         }
+    //         options.removeClass("d-none");
+    //     } else {
+    //         options.addClass("d-none");
+    //     }
+    // });
 
     if (whitelisting_email==='true') {
         document.getElementById("username").maxLength = 100;

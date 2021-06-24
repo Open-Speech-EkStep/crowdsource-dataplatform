@@ -10,7 +10,7 @@ const {
 const {hasUserRegistered} = require('./common');
 const { onChangeUser, showUserProfile } = require('./header');
 
-const {DEFAULT_CON_LANGUAGE,MODULE, CURRENT_MODULE, CONTRIBUTION_LANGUAGE} = require('./constants');
+const {DEFAULT_CON_LANGUAGE,MODULE, CURRENT_MODULE, CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY} = require('./constants');
 const {updateLocaleLanguagesDropdown} = require('./utils');
 
 function onActiveNavbar(value) {
@@ -53,12 +53,12 @@ $(document).ready(function () {
     setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
+    if(hasUserRegistered()){
+        const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+        const localSpeakerDataParsed = JSON.parse(speakerDetails);
+        showUserProfile(localSpeakerDataParsed.userName);
+    }
     onChangeUser('./about-us.html','home');
-    const SPEAKER_DETAILS = "speakerDetails";
-    const localSpeakerDataParsed = JSON.parse(
-      localStorage.getItem(SPEAKER_DETAILS)
-    );
-    showUserProfile(localSpeakerDataParsed.userName);
 
     let langTop;
     $('#languageTop').on('change', (e) => {

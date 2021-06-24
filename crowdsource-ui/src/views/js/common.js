@@ -261,7 +261,7 @@ const landToHome = function (){
 
 const hasUserRegistered = function (){
   const userDetail = localStorage.getItem(SPEAKER_DETAILS_KEY);
-  const parsedUserDetails = JSON.parse(userDetail);
+  const parsedUserDetails = userDetail ? JSON.parse(userDetail) : false;
   return parsedUserDetails ? true : false;
 }
 

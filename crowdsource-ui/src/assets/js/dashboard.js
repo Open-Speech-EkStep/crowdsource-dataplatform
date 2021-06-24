@@ -1,12 +1,12 @@
 const { updateGraph } = require('./draw-chart');
-const { onChangeUser } = require('./header');
+const { onChangeUser, showUserProfile } = require('./header');
 const { setSpeakerDetails,
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick } = require('./speakerDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString, getJson, formatTime } = require('./utils');
-const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES,MODULE,CONTRIBUTION_LANGUAGE } = require('../../../build/js/common/constants');
+const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES,MODULE,CONTRIBUTION_LANGUAGE ,SPEAKER_DETAILS_KEY} = require('../../../build/js/common/constants');
 // const { hasUserRegistered } = require('../../../build/js/common/common');
 const { hasUserRegistered } = require('./common');
 const fetch = require('./fetch');
@@ -204,6 +204,11 @@ $(document).ready(function () {
     $startRecordBtnTooltip.tooltip('disable');
     setUserNameOnInputFocus();
     setUserModalOnShown($userName);
+    if(hasUserRegistered()){
+        const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+        const localSpeakerDataParsed = JSON.parse(speakerDetails);
+        showUserProfile(localSpeakerDataParsed.userName);
+    }
     onChangeUser('./dashboard.html',MODULE.bolo.value);
 
     toggleFooterPosition();
