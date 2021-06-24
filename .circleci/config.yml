@@ -197,12 +197,25 @@ workflows:
           requires:
             - migrate_dev_azure
 
+      - azure-ecr/build-and-push-image:
+          name: push_dev_db_refresher_image
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          dockerfile: Dockerfile-dbRefresh
+          path: ./db-refresher
+          extra-build-args: --build-arg NODE_ENV=dev
+          repo: ${AZURE_REPO}
+          tag: dev
+          requires:
+            - migrate_dev_aws
+
       - aks_deployment:
           name: dev_deployment_eks
           cluster-name: ${AZURE_CLUSTER_NAME}
           env-name: dev
           requires:
             - push_dev_image
+            - push_dev_db_refresher_image
       # - aws-ecr/build-and-push-image:
       #     name: push_dev_image
       #     repo: ${REPO}
