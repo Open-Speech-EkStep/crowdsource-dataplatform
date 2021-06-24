@@ -98,8 +98,9 @@ jobs:
           command: |
             # npm run gulp -- -- --env=<< parameters.env_name >>
             sudo apt-get update -y
+            sudo apt-get install -y apt-utils
             sudo apt-get install wget
-            sudo apt install keyutils
+            sudo apt install -y keyutils
 
             keyctl session
 
