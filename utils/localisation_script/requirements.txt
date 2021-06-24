@@ -8,7 +8,7 @@ bleach==3.3.0
 boto==2.49.0
 cffi==1.14.4
 crcmod==1.7
-cryptography==3.3.1
+cryptography==3.3.2
 decorator==5.0.9
 defusedxml==0.7.1
 entrypoints==0.3
