@@ -100,10 +100,11 @@ jobs:
             sudo apt-get update -y
             sudo apt-get install -y apt-utils
             sudo apt-get install wget
-            sudo apt install keyutils --allow-downgrades --allow-remove-essential --allow-unauthenticated            
+            sudo apt install keyutils 
+            # --allow-downgrades --allow-remove-essential --allow-unauthenticated            
 
 
-            keyctl session
+            # keyctl session
 
             mkdir /usr/src/app/utils/
             wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux 
