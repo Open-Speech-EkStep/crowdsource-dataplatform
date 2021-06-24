@@ -197,7 +197,7 @@ workflows:
           requires:
             - migrate_dev_azure
 
-      - azure-ecr/build-and-push-image:
+      - azure-acr/build-and-push-image:
           name: push_dev_db_refresher_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
