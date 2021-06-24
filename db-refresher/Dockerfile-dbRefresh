@@ -4,7 +4,7 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y curl
 RUN apt-get install -y unzip
 RUN apt-get install -y sudo
-RUN apt-get install wget
+RUN apt-get install -y wget
 RUN apt install keyutils
 
 WORKDIR /usr/src/app
