@@ -92,24 +92,23 @@ jobs:
       image: ubuntu-1604:202104-01
     steps:
       - *fast-checkout
-      # - node/install-packages
+      - run:
+        name: setup_machine
+        command: |
+          sudo apt-get update -y
+          sudo apt-get install nodejs
+          sudo apt-get install npm
+          sudo apt-get install -y apt-utils
+          sudo apt-get install wget
+
+      - node/install-packages
       - run:
           name: build_ui
           command: |
-            # npm run gulp -- -- --env=<< parameters.env_name >>
-            sudo apt-get update -y
-            sudo apt-get install -y apt-utils
-            sudo apt-get install wget
-            sudo apt install keyutils 
-            # --allow-downgrades            
-
-
-            sudo keyctl session
-
-            # mkdir /usr/src/app/utils/
+            npm run gulp -- -- --env=<< parameters.env_name >>
             wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux 
             tar -xf azcopy_v10.tar.gz --strip-components=1
-            # cp azcopy /usr/src/app/utils/
+
             ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
 
             ./azcopy copy "crowdsource-ui/target/" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --recursive
