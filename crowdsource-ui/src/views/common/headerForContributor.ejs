@@ -33,14 +33,15 @@
         </ul>
     </div>
     <ul class="navbar-nav ml-auto" style="margin-right:12px">
-        <li class="nav-item p-2 dropdown">
+        <li class="nav-item p-2 dropdown" id="userDropDown">
             <a class="nav-link text-dark font-weight-bold d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="material-icons align-middle mx-1">account_circle</span>
+
+                <img src="../img/usericon.svg" alt="usericon" class="align-middle mx-1">
                 <span id="nav-username"></span>
             </a>
 
             <div id="user_profile_dropdown" class="dropdown-menu" aria-labelledby="nav-user">
-                <a id="user_profile_name" class="dropdown-item point-none" href="#"><%= __('User')%></a>
+                <a id="user_profile_name" class="dropdown-item point-none" href="#"><%= __('(No Username)')%></a>
                 <a id="change_user" class="dropdown-item" href="#" data-toggle="modal" data-target="#userModal"><%= __('Change User')%></a>
             </div>
         </li>

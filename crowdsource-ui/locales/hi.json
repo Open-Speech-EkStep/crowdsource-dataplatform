@@ -576,5 +576,6 @@
 	"Only 12 character allowed. (Hint: name.surname, name_surname12 etc.)": "Only 12 character allowed. (Hint: name.surname, name_surname12 etc.)",
 	"Done": "Done",
 	"User": "User",
-	"Change User": "Change User"
+	"Change User": "Change User",
+	"(No Username)": "(No Username)"
 }

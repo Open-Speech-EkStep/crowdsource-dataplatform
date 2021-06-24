@@ -1,13 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-4 py-lg-0">
-    <div class="d-flex align-items-center">
-        <a class="logo-text text-dark" href="/">
-            <h2 class="mb-0">
-                <img src="../img/BoloIndiaLogo.png" alt="Meity Logo" width="64px" height="54px">
-            </h2>
-        </a>
-        <div class="version-beta ml-4">Beta</div>
+    <div class="row m-0">
+        <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="d-flex align-items-center">
+            <a class="logo-text text-dark" href="/">
+                <h2 class="mb-0">
+                    <img src="../img/BoloIndiaLogo.png" alt="Meity Logo" width="64px" height="54px">
+                </h2>
+            </a>
+            <div class="version-beta ml-lg-4 ml-md-4 ml-2">Beta</div>
+        </div>
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-lg-5" id="module_name">
             <li class="nav-item module-item p-2" value="home"><a href="<%= home %>" class="nav-link text-dark font-weight-bold">
@@ -37,20 +39,21 @@
                     <%= __('About Us') %>
                 </a></li>
         </ul>
-        <ul class="navbar-nav" style="margin-right:12px">
-            <li class="nav-item p-2 dropdown">
-                <a class="nav-link text-dark font-weight-bold d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="material-icons align-middle mx-1">account_circle</span>
-                <span id="nav-username"></span>
-                </a>
-
-                <div id="user_profile_dropdown" class="dropdown-menu" aria-labelledby="nav-user">
-                    <a id="user_profile_name" class="dropdown-item point-none" href="#"></a>
-                    <a id="anonymous_user" class="dropdown-item point-none" href="#"><%= __('User')%></a>
-                    <a id="change_user" class="dropdown-item" href="#" data-toggle="modal" data-target="#userModal"><%= __('Change User')%></a>
-                </div>
-            </li>
-        </ul>
     </div>
+    <ul class="navbar-nav" style="margin-right:12px">
+        <li class="nav-item p-2 dropdown" id="userDropDown">
+            <a class="nav-link text-dark font-weight-bold d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                <img src="../img/usericon.svg" alt="usericon" class="align-middle mx-1">
+                <span id="nav-username"></span>
+            </a>
+
+            <div id="user_profile_dropdown" class="dropdown-menu" aria-labelledby="nav-user">
+                <a id="user_profile_name" class="dropdown-item point-none" href="#"></a>
+                <a id="anonymous_user" class="dropdown-item point-none" href="#"><%= __('(No Username)')%></a>
+                <a id="change_user" class="dropdown-item" href="#" data-toggle="modal" data-target="#userModal"><%= __('Change User')%></a>
+            </div>
+        </li>
+    </ul>
 </nav>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>

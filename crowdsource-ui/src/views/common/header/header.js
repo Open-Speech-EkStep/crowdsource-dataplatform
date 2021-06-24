@@ -31,32 +31,35 @@ const showUserProfile = function (userName) {
   const $anonymousUser = $('#anonymous_user');
   $navUser.removeClass('d-none');
   if (userName != undefined && userName != null) {
-    if(userName.trim().length == 0){
-      $userProfileName.addClass('d-none');
-      $anonymousUser.removeClass('d-none');
+    if(isMobileDevice()){
+      if(userName.trim().length == 0){
+        $userProfileName.addClass('d-none');
+        $anonymousUser.removeClass('d-none');
+      } else {
+        $userProfileName.removeClass('d-none');
+        $userProfileName.text(userName);
+        $anonymousUser.addClass('d-none');
+      }
     } else {
-      $userProfileName.removeClass('d-none');
-      $userProfileName.text(userName);
-      $anonymousUser.addClass('d-none');
-    }
-    if (!isMobileDevice()) {
-      $navUserName.text(userName);
+      if(userName.trim().length == 0){
+        $userProfileName.addClass('d-none');
+        $anonymousUser.removeClass('d-none');
+      } else {
+        $userProfileName.addClass('d-none');
+        $anonymousUser.addClass('d-none');
+        $navUserName.text(userName);
+      }
     }
   }
 }
 
 const onChangeUser = (url, module) => {
-  const age = document.getElementById('age');
-  const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
   const $startRecordBtn = $('#proceed-box');
   const $startRecordBtnTooltip = $startRecordBtn.parent();
   setUserModalOnShown($userName);
   $startRecordBtnTooltip.tooltip('disable');
-  // setSpeakerDetails(SPEAKER_DETAILS_KEY, age, motherTongue, $userName);
-  // setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
-  // addlistenerToGenderRadios();
   $('#change_user').on('click', () => {
     setStartRecordingBtnOnClick(url, module);
   })
