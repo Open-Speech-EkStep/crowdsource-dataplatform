@@ -24,14 +24,14 @@ function getLanguageGoalForModules() {
 }
 
 $(document).ready(function (ev) {
-  getLanguageGoalForModules().then((res)=>{
-    moduleList.map((module, index) =>{
-      module.goal_value = res[index][0].goal;
-      module.total_languages = res[index][1].datasetLanguages.length;
-    })
-    $('#language-goal-each').html(moduleList[0].goal_value + " " + moduleList[0].goal_label);
-    $('#language-count').html(moduleList[0].total_languages);
-  });
+  // getLanguageGoalForModules().then((res)=>{
+  //   moduleList.map((module, index) =>{
+  //     module.goal_value = res[index][0].goal;
+  //     module.total_languages = res[index][1].datasetLanguages.length;
+  //   })
+  //   $('#language-goal-each').html(moduleList[0].goal_value + " " + moduleList[0].goal_label);
+  //   $('#language-count').html(moduleList[0].total_languages);
+  // });
 
 
   const $sunoTab = $('#sunoTab');
