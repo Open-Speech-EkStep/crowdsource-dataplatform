@@ -102,6 +102,10 @@ jobs:
             sudo apt-get install wget
             # sudo apt install strace
 
+            HOME=/tmp/
+            
+            AZCOPY_LOG_LOCATION=/tmp/
+
             wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xf azcopy_v10.tar.gz --strip-components=1
 
             ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
