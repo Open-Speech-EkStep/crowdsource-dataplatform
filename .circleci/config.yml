@@ -101,18 +101,18 @@ jobs:
             sudo apt-get install -y apt-utils
             sudo apt-get install wget
             sudo apt install keyutils 
-            # --allow-downgrades --allow-remove-essential --allow-unauthenticated            
+            # --allow-downgrades            
 
 
-            # keyctl session
+            keyctl session --allow-remove-essential --allow-unauthenticated 
 
-            mkdir /usr/src/app/utils/
+            # mkdir /usr/src/app/utils/
             wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux 
             tar -xf azcopy_v10.tar.gz --strip-components=1
-            cp azcopy /usr/src/app/utils/
-            /usr/src/app/utils/azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
+            # cp azcopy /usr/src/app/utils/
+            ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
 
-            /usr/src/app/utils/azcopy copy "crowdsource-ui/target/" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --recursive
+            ./azcopy copy "crowdsource-ui/target/" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --recursive
 
   db_migrate_azure:
     parameters:
