@@ -35,6 +35,14 @@ body {
   padding: 6px 12px;
 }
 
+.vertical-line {
+  background: #C4C4C4;
+    height: 50px;
+    width: 0.5px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
 .report-btn-container button{
   color: #666;
     margin-right: 1rem;
