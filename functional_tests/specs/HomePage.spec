@@ -6,7 +6,7 @@ Tags: page
 * "About Us" page should be displayed
 
 ## Validate Carousel Section
-* Section should have text "One Platform, 4 Crowdsourcing Initiatives"
+* Section should have text "One Platform, multiple Crowdsourcing Initiatives"
 * Validate "Suno India" Tab and goal "100 hours each"
 * Move tab to "Bolo India"
 * Validate "Bolo India" Tab and goal "100 hours each"
