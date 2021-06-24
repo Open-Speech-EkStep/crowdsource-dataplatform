@@ -4,8 +4,16 @@
     .para-font {
         font-size: 12px;
     }
-}
 
+    #moduleLogo img{
+        width: 50px;
+        height: 40px;
+    }
+    .module-intro-heading{
+        font-size: 20px;
+    }
+
+}
 
 @media (min-width: 767px) {
     .para-font {
