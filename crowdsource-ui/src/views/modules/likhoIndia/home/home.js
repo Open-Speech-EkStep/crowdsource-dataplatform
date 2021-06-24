@@ -1,4 +1,4 @@
-const { onActiveNavbar } = require('../common/header');
+const { onActiveNavbar,onChangeUser } = require('../common/header');
 const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,landToHome,hasUserRegistered } = require('../common/common');
 const {
   toggleFooterPosition,
@@ -155,6 +155,8 @@ function initializeBlock() {
   setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
+
+  onChangeUser('./home.html',MODULE.likho.value )
   getStatsSummary('/stats/summary/parallel',MODULE.likho.value);
 
 }

@@ -10,6 +10,9 @@ const fetch = require('../common/fetch');
 
 const {setSpeakerData} = require('../common/contributionStats');
 const {initializeFeedbackModal} = require('../common/feedback')
+
+const { onChangeUser } = require('../common/header');
+
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
@@ -191,6 +194,7 @@ $(document).ready(function () {
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     $startRecordBtnTooltip.tooltip('disable');
+    onChangeUser('./dashboard.html',MODULE.likho.value)
 
     toggleFooterPosition();
 
