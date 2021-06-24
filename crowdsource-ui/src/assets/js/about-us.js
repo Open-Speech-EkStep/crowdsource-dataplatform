@@ -9,7 +9,7 @@ const {
 
 // const {hasUserRegistered} = require('../../../build/js/common/common');
 
-const {DEFAULT_CON_LANGUAGE,MODULE, CURRENT_MODULE, CONTRIBUTION_LANGUAGE} = require('../../../build/js/common/constants');
+const {DEFAULT_CON_LANGUAGE,MODULE, CURRENT_MODULE, CONTRIBUTION_LANGUAGE} = require('./constants');
 const {updateLocaleLanguagesDropdown} = require('./utils');
 
 function onActiveNavbar(value) {
