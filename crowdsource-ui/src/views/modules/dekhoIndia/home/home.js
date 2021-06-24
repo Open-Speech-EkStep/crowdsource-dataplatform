@@ -1,4 +1,4 @@
-const { onActiveNavbar ,onChangeUser} = require('../common/header');
+const { onActiveNavbar ,onChangeUser, showUserProfile } = require('../common/header');
 const { showLanguagePopup } = require('../common/locale');
 const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,landToHome,hasUserRegistered} = require('../common/common');
 const {toggleFooterPosition, getLocaleString,updateLocaleLanguagesDropdown} = require('../common/utils');
@@ -100,7 +100,11 @@ function initializeBlock() {
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
   onChangeUser('./home.html',MODULE.dekho.value);
-
+  const SPEAKER_DETAILS = "speakerDetails";
+  const localSpeakerDataParsed = JSON.parse(
+    localStorage.getItem(SPEAKER_DETAILS)
+  );
+  showUserProfile(localSpeakerDataParsed.userName);
   getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, setDefaultLang);
 }
 

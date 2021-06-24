@@ -1,5 +1,5 @@
 const { showLanguagePopup, redirectToLocalisedPage } = require('./locale');
-const { onActiveNavbar, onChangeUser } = require('./header');
+const { onActiveNavbar, onChangeUser, showUserProfile } = require('./header');
 const {whitelisting_email} = require('./env-api')
 const { drawMap, getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest, calculateTime, formatTime } = require('./utils')
@@ -29,7 +29,7 @@ const {
     ALL_LANGUAGES,
     MODULE
 } = require('./constants');
-
+const SPEAKER_DETAILS = "speakerDetails";
 const updateLocaleText = function (total_contributions, total_validations, language) {
     const $say_p_3 = $("#say-p-3");
     const $listen_p_3 = $("#listen-p-3");
@@ -280,6 +280,11 @@ function initializeBlock() {
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     onChangeUser('./home.html',MODULE.bolo.value);
+    const SPEAKER_DETAILS = "speakerDetails";
+    const localSpeakerDataParsed = JSON.parse(
+      localStorage.getItem(SPEAKER_DETAILS)
+    );
+    showUserProfile(localSpeakerDataParsed.userName);
     // setBoloUserModalOnShown($boloUserName);
     // setBoloSpeakerDetails(speakerDetailsKey, $boloUserName);
     // setBoloUserNameOnInputFocus();

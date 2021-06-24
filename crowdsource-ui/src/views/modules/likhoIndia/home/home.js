@@ -1,4 +1,4 @@
-const { onActiveNavbar,onChangeUser } = require('../common/header');
+const { onActiveNavbar, onChangeUser, showUserProfile } = require('../common/header');
 const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,landToHome,hasUserRegistered } = require('../common/common');
 const {
   toggleFooterPosition,
@@ -156,7 +156,12 @@ function initializeBlock() {
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
 
-  onChangeUser('./home.html',MODULE.likho.value )
+  onChangeUser('./home.html',MODULE.likho.value );
+  const SPEAKER_DETAILS = "speakerDetails";
+  const localSpeakerDataParsed = JSON.parse(
+    localStorage.getItem(SPEAKER_DETAILS)
+  );
+  showUserProfile(localSpeakerDataParsed.userName);
   getStatsSummary('/stats/summary/parallel',MODULE.likho.value);
 
 }
