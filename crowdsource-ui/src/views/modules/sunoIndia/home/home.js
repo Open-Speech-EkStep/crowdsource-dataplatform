@@ -1,4 +1,4 @@
-const { onActiveNavbar,onChangeUser, showUserProfile } = require('../common/header');
+const { onActiveNavbar,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
 
 const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages, landToHome,hasUserRegistered} = require('../common/common');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString} = require('../common/utils');
@@ -109,6 +109,7 @@ function initializeBlock() {
   setUserNameOnInputFocus();
 
   onChangeUser('./home.html',MODULE.suno.value);
+  onOpenUserDropDown();
   if(hasUserRegistered()){
     const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
     const localSpeakerDataParsed = JSON.parse(speakerDetails);

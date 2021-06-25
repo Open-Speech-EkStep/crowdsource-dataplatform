@@ -1,4 +1,4 @@
-const { onActiveNavbar ,onChangeUser, showUserProfile } = require('../common/header');
+const { onActiveNavbar ,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
 const { showLanguagePopup } = require('../common/locale');
 const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,landToHome,hasUserRegistered} = require('../common/common');
 const {toggleFooterPosition, getLocaleString,updateLocaleLanguagesDropdown} = require('../common/utils');
@@ -110,6 +110,7 @@ function initializeBlock() {
     showUserProfile(localSpeakerDataParsed.userName);
   }
   onChangeUser('./home.html',MODULE.dekho.value);
+  onOpenUserDropDown();
   getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, setDefaultLang);
 }
 

@@ -1,4 +1,4 @@
-const { onActiveNavbar, onChangeUser, showUserProfile } = require('../common/header');
+const { onActiveNavbar, onChangeUser, showUserProfile ,onOpenUserDropDown} = require('../common/header');
 const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,landToHome,hasUserRegistered } = require('../common/common');
 const {
   toggleFooterPosition,
@@ -170,6 +170,7 @@ function initializeBlock() {
     showUserProfile(localSpeakerDataParsed.userName);
   }
   onChangeUser('./home.html',MODULE.likho.value );
+  onOpenUserDropDown();
   getStatsSummary('/stats/summary/parallel',MODULE.likho.value);
 
 }

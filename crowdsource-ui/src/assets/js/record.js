@@ -2,7 +2,7 @@ const fetch = require('./fetch')
 const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo } = require('./utils');
 const { LOCALE_STRINGS,MODULE,CONTRIBUTION_LANGUAGE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
-const { onChangeUser , showUserProfile} = require('./header');
+const { onChangeUser , showUserProfile,onOpenUserDropDown} = require('./header');
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
@@ -615,6 +615,7 @@ function executeOnLoad() {
 
         showUserProfile(localSpeakerDataParsed.userName)
         onChangeUser('./record.html',MODULE.bolo.value);
+        onOpenUserDropDown();
         const isExistingUser = localSentencesParsed &&
             localSentencesParsed.userName === localSpeakerDataParsed.userName
             &&

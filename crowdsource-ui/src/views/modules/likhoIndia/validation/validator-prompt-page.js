@@ -14,7 +14,7 @@ const {LIKHO_FROM_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE, ALL_LANGU
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
-const {showUserProfile, onChangeUser} = require('../common/header');
+const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { setDataSource } = require('../common/sourceInfo');
 
 const speakerDetailsKey = 'speakerDetails';
@@ -450,7 +450,8 @@ $(document).ready(() => {
     return;
   }
   showUserProfile(localSpeakerDataParsed.userName)
-  onChangeUser('./validator-page.html',MODULE.likho.value)
+  onChangeUser('./validator-page.html',MODULE.likho.value);
+  onOpenUserDropDown();
   const isExistingUser = localSentencesParsed &&
     localSentencesParsed.userName === localSpeakerDataParsed.userName
     &&

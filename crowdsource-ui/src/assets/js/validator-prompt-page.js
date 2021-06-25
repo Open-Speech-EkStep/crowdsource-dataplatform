@@ -1,7 +1,7 @@
 const fetch = require('./fetch')
 const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
-const { showUserProfile } = require('../../../build/js/common/header');
+const { showUserProfile,onOpenUserDropDown } = require('../../../build/js/common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
 const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition, getDeviceInfo, getBrowserInfo} = require('./utils');
 const { cdn_url } = require('./env-api');
@@ -465,7 +465,8 @@ $(document).ready(() => {
   }
 
   showUserProfile(localSpeakerDataParsed.userName);
-  onChangeUser('./validator-page.html',MODULE.bolo.value)
+  onChangeUser('./validator-page.html',MODULE.bolo.value);
+    onOpenUserDropDown();
 
   const isExistingUser = localSentencesParsed &&
     localSentencesParsed.userName === localSpeakerDataParsed.userName

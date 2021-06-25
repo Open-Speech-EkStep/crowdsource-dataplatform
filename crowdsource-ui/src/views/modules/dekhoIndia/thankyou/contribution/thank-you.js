@@ -16,7 +16,7 @@ const {
   performAPIRequest,
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showUserProfile, onChangeUser} = require('../common/header');
+const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../common/common');
 
 const { initializeFeedbackModal } = require('../common/feedback');
@@ -150,6 +150,7 @@ function executeOnLoad() {
   } else {
     showUserProfile(localSpeakerDataParsed.userName)
     onChangeUser('./thank-you.html',MODULE.dekho.value);
+    onOpenUserDropDown();
     setPageContentHeight();
     setSentencesContributed();
     toggleFooterPosition();

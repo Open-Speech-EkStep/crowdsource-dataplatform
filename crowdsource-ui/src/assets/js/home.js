@@ -1,5 +1,5 @@
 const { showLanguagePopup, redirectToLocalisedPage } = require('./locale');
-const { onActiveNavbar, onChangeUser, showUserProfile } = require('./header');
+const { onActiveNavbar, onChangeUser, showUserProfile,onOpenUserDropDown } = require('./header');
 const {whitelisting_email} = require('./env-api')
 const { drawMap, getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest, calculateTime, formatTime } = require('./utils')
@@ -284,6 +284,7 @@ function initializeBlock() {
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     onChangeUser('./home.html',MODULE.bolo.value);
+    onOpenUserDropDown();
     if(hasUserRegistered()){
         const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
         const localSpeakerDataParsed = JSON.parse(speakerDetails);

@@ -1,4 +1,17 @@
- /* Web Css */
+/* common */
+
+#anonymous_user{
+    color: grey;
+    pointer-events: none;
+    cursor: none !important;
+}
+
+#userNavBar.active {
+    background: rgba(0,123,255,.1);
+    border-bottom: 2px solid #007bff;
+}
+
+/* Web Css */
 
 @media (min-width: 767px) {
     #module_header_logo{
@@ -14,6 +27,21 @@
     }
 }
 
+/*  Ipad */
+@media (max-width: 768px) {
+    #userDropDown{
+        position: absolute;
+        top: 10px;
+        right: 20px;
+    }
+
+    .navbar-nav .dropdown-menu {
+        position: absolute !important;
+        margin-left: -140% !important;
+    }
+}
+
+
 /* Mobile Css */
 
 @media (max-width: 767px) {
@@ -21,5 +49,21 @@
         width: 50px;
         height: 40px;
     }
-   
+
+    #userDropDown{
+        position: absolute;
+        top: 10px;
+        right: 20px;
+    }
+
+    .navbar-nav .dropdown-menu {
+        position: absolute !important;
+        margin-left: -140% !important;
+    }
+
+    .navbar-toggler {
+        padding: 0px !important;
+        font-size: 1rem !important;
+        border: 0px !important;
+    }
 }

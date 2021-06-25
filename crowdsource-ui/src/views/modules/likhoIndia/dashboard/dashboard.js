@@ -11,7 +11,7 @@ const fetch = require('../common/fetch');
 const {setSpeakerData} = require('../common/contributionStats');
 const {initializeFeedbackModal} = require('../common/feedback')
 
-const { onChangeUser , showUserProfile} = require('../common/header');
+const { onChangeUser , showUserProfile,onOpenUserDropDown} = require('../common/header');
 
 const LOCALE_STRINGS = 'localeString';
 let timer;
@@ -199,7 +199,8 @@ $(document).ready(function () {
         const localSpeakerDataParsed = JSON.parse(speakerDetails);
         showUserProfile(localSpeakerDataParsed.userName);
     }
-    onChangeUser('./dashboard.html',MODULE.likho.value)
+    onChangeUser('./dashboard.html',MODULE.likho.value);
+    onOpenUserDropDown();
 
     toggleFooterPosition();
 

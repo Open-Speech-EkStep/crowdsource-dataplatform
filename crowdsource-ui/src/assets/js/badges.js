@@ -4,7 +4,7 @@
   updateLocaleLanguagesDropdown
 } = require('./utils');
 const {CONTRIBUTION_LANGUAGE, BOLOPAGE, LOCALE_STRINGS, ALL_LANGUAGES, DEKHOPAGE, LIKHOPAGE, SUNOPAGE,SPEAKER_DETAILS_KEY} = require('./constants');
-const {onChangeUser, showUserProfile} = require('./header');
+const {onChangeUser, showUserProfile,onOpenUserDropDown} = require('./header');
 const {hasUserRegistered} = require('./common');
 
 const getRowWithBadge = function (levelId, sentenceCount, badgeName, localeString, type, source) {
@@ -151,6 +151,7 @@ $(document).ready(function () {
     showUserProfile(localSpeakerDataParsed.userName);
   }
   onChangeUser('./badges.html',moduleType);
+  onOpenUserDropDown();
  
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
   updateLocaleLanguagesDropdown(language);

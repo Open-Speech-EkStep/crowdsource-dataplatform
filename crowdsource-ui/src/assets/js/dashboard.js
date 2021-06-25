@@ -1,5 +1,5 @@
 const { updateGraph } = require('./draw-chart');
-const { onChangeUser, showUserProfile } = require('./header');
+const { onChangeUser, showUserProfile,onOpenUserDropDown } = require('./header');
 const { setSpeakerDetails,
     setUserModalOnShown,
     setUserNameOnInputFocus,
@@ -210,6 +210,7 @@ $(document).ready(function () {
         showUserProfile(localSpeakerDataParsed.userName);
     }
     onChangeUser('./dashboard.html',MODULE.bolo.value);
+    onOpenUserDropDown();
 
     toggleFooterPosition();
 

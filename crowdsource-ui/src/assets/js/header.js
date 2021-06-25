@@ -24,6 +24,18 @@ function onActiveNavbar(value) {
   allDivs[targetedDivIndex].classList.add('active');
 }
 
+const onOpenUserDropDown = ()=>{
+  const $userDropDown = $('#userDropDown');
+  const $userNavBar = $('#userNavBar');
+  $userDropDown.off('show.bs.dropdown').on('show.bs.dropdown',()=>{
+    $userNavBar.addClass('active')
+  })
+
+  $userDropDown.off('hide.bs.dropdown').on('hide.bs.dropdown',()=>{
+    $userNavBar.removeClass('active')
+  })
+}
+
 const showUserProfile = function (userName) {
   const $navUser = $('#nav-user');
   const $navUserName = $navUser.find('#nav-username');
@@ -73,5 +85,6 @@ const onChangeUser = (url, module) => {
 module.exports = {
   onActiveNavbar,
   onChangeUser,
-  showUserProfile
+  showUserProfile,
+  onOpenUserDropDown
 };

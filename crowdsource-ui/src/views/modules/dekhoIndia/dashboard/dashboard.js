@@ -7,7 +7,7 @@ const { DEFAULT_CON_LANGUAGE,CURRENT_MODULE ,CONTRIBUTION_LANGUAGE,MODULE,SPEAKE
 const fetch = require('../common/fetch');
 const {setSpeakerData} = require('../common/contributionStats');
 const {initializeFeedbackModal} = require('../common/feedback')
-const { onChangeUser, showUserProfile } = require('../common/header');
+const { onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
 
 const LOCALE_STRINGS = 'localeString';
 let timer;
@@ -156,6 +156,7 @@ $(document).ready(function () {
         showUserProfile(localSpeakerDataParsed.userName);
     }
     onChangeUser('./dashboard.html',MODULE.dekho.value);
+    onOpenUserDropDown();
 
     toggleFooterPosition();
 

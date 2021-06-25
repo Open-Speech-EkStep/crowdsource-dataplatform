@@ -295,45 +295,13 @@ body {
         margin-left: 0 !important;
     }
 
-    @media (max-width: 768px) {
-        #userDropDown{
-            position: absolute;
-            top: 10px;
-            right: 20px;
-        }
-
-    }
-
-    @media (max-width: 700px) {
-        .navbar-nav .dropdown-menu {
-            position: absolute !important;
-            margin-left: -140% !important;
-        }
-
-        .navbar-toggler {
-            padding: 0px !important;
-            font-size: 1rem !important;
-            border: 0px !important;
-        }
-    }
-
-
     @media (max-width: 600px) {
         .d-sm-none {
             display: none;
         }
     }
-
-
 }
-
 
 .border-50 {
     border-radius: 50px;
-}
-
-#anonymous_user{
-    color: grey;
-    pointer-events: none;
-    cursor: none !important;
 }

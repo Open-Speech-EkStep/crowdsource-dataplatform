@@ -1,4 +1,4 @@
-const { onActiveNavbar, onChangeUser, showUserProfile } = require('./header');
+const { onActiveNavbar, onChangeUser, showUserProfile,onOpenUserDropDown } = require('./header');
 const { redirectToLocalisedPage, changeLocale} = require('./locale');
 const { CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY,DEFAULT_CON_LANGUAGE } = require('./constants');
 const { hasUserRegistered} = require('./common');
@@ -20,4 +20,5 @@ else {
     showUserProfile(localSpeakerDataParsed.userName);
   }
   onChangeUser('./home.html','home');
+  onOpenUserDropDown();
 });

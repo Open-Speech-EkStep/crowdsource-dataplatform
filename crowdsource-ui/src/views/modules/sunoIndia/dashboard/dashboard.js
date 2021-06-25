@@ -1,5 +1,5 @@
 const { updateLineGraph } = require('../common/lineGraph');
-const { onChangeUser,showUserProfile } = require('../common/header');
+const { onChangeUser,showUserProfile,onOpenUserDropDown } = require('../common/header');
 const { generateIndiaMap } = require('../common/map');
 const { setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown,setStartRecordingBtnOnClick,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
@@ -154,7 +154,8 @@ $(document).ready(function () {
         const localSpeakerDataParsed = JSON.parse(speakerDetails);
         showUserProfile(localSpeakerDataParsed.userName);
     }
-    onChangeUser('./dashboard.html',MODULE.suno.value)
+    onChangeUser('./dashboard.html',MODULE.suno.value);
+    onOpenUserDropDown();
 
     toggleFooterPosition();
 

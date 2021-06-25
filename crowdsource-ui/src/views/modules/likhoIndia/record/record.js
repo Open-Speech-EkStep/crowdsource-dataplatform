@@ -13,7 +13,7 @@ const {
 const { LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, ALL_LANGUAGES } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, isMobileDevice,showOrHideExtensionCloseBtn } = require('../common/common');
-const { showUserProfile, onChangeUser } = require('../common/header');
+const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const speakerDetailsKey = 'speakerDetails';
 const {initializeFeedbackModal} = require('../common/feedback');
@@ -416,7 +416,8 @@ function executeOnLoad() {
     }
 
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./record.html',MODULE.likho.value)
+    onChangeUser('./record.html',MODULE.likho.value);
+    onOpenUserDropDown();
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName
       &&

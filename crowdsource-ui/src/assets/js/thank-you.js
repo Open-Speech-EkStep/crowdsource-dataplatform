@@ -16,7 +16,7 @@ const {
   performAPIRequest,
 } = require("./utils");
 const {showByHoursChartThankyouPage,getContributedAndTopLanguage} = require('../../../build/js/common/common');
-const {onChangeUser,showUserProfile} = require('./header');
+const {onChangeUser,showUserProfile,onOpenUserDropDown} = require('./header');
 
 const CURRENT_INDEX = "currentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -329,6 +329,7 @@ function executeOnLoad() {
   } else {
     showUserProfile(localSpeakerDataParsed.userName);
     onChangeUser('./thank-you.html', MODULE.bolo.value);
+    onOpenUserDropDown();
     setPageContentHeight();
     setSentencesContributed();
   }
