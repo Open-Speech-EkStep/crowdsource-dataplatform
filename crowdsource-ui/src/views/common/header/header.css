@@ -13,10 +13,20 @@
 
 /* Web Css */
 
+ #tilt_line {
+        transform: rotate(20deg);
+        width: 0;
+        height: 20px;
+        border: 1px solid #d5d5d5;
+        margin-right: 10px;
+        margin-top: 14px;
+ }
+
 @media (min-width: 767px) {
     #module_header_logo{
         width: 50px;
         height: 40px;
+        margin-top: 5px;
     }
 
     #logo_separator{
@@ -54,6 +64,7 @@
     #module_header_logo{
         width: 50px;
         height: 40px;
+        margin-top: 5px;
     }
 
     #userDropDown{

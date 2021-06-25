@@ -157,15 +157,15 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
     if(module == 'bolo'){
       if(functionalFlow === 'validator'){
-        $("#reward-img").attr('src', `../img/bolo_${data.currentBadgeType.toLowerCase()}_val.svg`);
+        $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_medal_val.svg`);
       } else {
-        $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_badge.svg`);
+        $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_medal.svg`);
       }
     } else {
       if(functionalFlow == 'validator'){
-        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_val.svg`);
+        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_medal_val.svg`);
       } else {
-        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_badge.svg`);
+        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_medal.svg`);
       }
     }
   } else if (data.contributionCount < 5) {
