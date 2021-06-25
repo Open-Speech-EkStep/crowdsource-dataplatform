@@ -112,8 +112,6 @@ jobs:
 
     steps:
       - *fast-checkout
-      - aws-cli/setup:
-          profile-name: circle-ci
       - azure-aks/update-kubeconfig-with-credentials:
           cluster-name: << parameters.cluster-name >>
           install-kubectl: true
