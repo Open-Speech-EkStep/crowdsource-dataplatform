@@ -602,5 +602,12 @@
 	"Thank you for your enthusiasm to validate the image labels.": "Thank you for your enthusiasm to validate the image labels.",
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> recordings to earn your Bhasha Samarthak <span id=\"next_badge_name_1\"></span> Badge. <a href=\"./badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> recordings to earn your Bhasha Samarthak <span id=\"next_badge_name_1\"></span> Badge. <a href=\"./badges.html\">Know more</a>",
 	"<span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge earned for contributing <span id=\"current_badge_count\"></span> recordings": "<span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge earned for contributing <span id=\"current_badge_count\"></span> recordings",
-	"<span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge earned for validating <span id=\"current_badge_count\"></span> recordings": "<span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge earned for validating <span id=\"current_badge_count\"></span> recordings"
+	"<span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge earned for validating <span id=\"current_badge_count\"></span> recordings": "<span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge earned for validating <span id=\"current_badge_count\"></span> recordings",
+	"(No Username)": "(No Username)",
+	"Change User": "Change User",
+	"All the fields are optional but you can enrich your dataset contribution by providing the demographic details.": "All the fields are optional but you can enrich your dataset contribution by providing the demographic details.",
+	"Name": "Name",
+	"Enter username": "Enter username",
+	"Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.)": "Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.)",
+	"Done": "Done"
 }

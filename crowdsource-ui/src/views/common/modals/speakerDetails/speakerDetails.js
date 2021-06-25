@@ -1,6 +1,6 @@
-const {DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS} = require('./constants');
-const {getLocaleString} = require('./utils');
-
+const { DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS,LIKHO_TO_LANGUAGE, LIKHO_FROM_LANGUAGE, MODULE } = require('./constants');
+const { getLocaleString } = require('./utils');
+const fetch = require('./fetch')
 const {whitelisting_email} = require('./env-api')
 
 function validateUserName($userName, $userNameError) {
@@ -20,13 +20,14 @@ function resetSpeakerDetails() {
     const motherTongue = document.getElementById('mother-tongue');
     const userName = document.getElementById('username');
     const selectedGender = document.querySelector(
-        'input[name = "gender"]:checked'
+      'input[name = "gender"]:checked'
     );
     const transSelectedGender = document.querySelector(
-        'input[name = "trans_gender"]:checked'
+      'input[name = "trans_gender"]:checked'
     );
     if (selectedGender) selectedGender.checked = false;
     if (transSelectedGender) transSelectedGender.checked = false;
+    $("#transgender_options").addClass("d-none");
     age.selectedIndex = 0;
     motherTongue.selectedIndex = 0;
     userName.value = '';
@@ -35,6 +36,7 @@ function resetSpeakerDetails() {
 const testUserName = (val) => {
     const mobileRegex = /^[6-9]\d{9}$/;
     const emailRegex = /^\S+@\S+[\.][0-9a-z]+$/;
+    if(whitelisting_email==='true') return false;
     return mobileRegex.test(val) || emailRegex.test(val);
 };
 
@@ -54,8 +56,8 @@ const setStartRecordBtnToolTipContent = (userName, $startRecordBtnTooltip) => {
         const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
         if (testUserName(userName)) {
             $startRecordBtnTooltip.attr(
-                'data-original-title',
-                localeString[text]
+              'data-original-title',
+              localeString[text]
             );
         }
 
@@ -67,23 +69,23 @@ const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
     if (speakerDetailsValue) {
         const parsedSpeakerDetails = JSON.parse(speakerDetailsValue);
         const genderRadio = document.querySelector(
-            'input[name = "gender"][value="' + parsedSpeakerDetails.gender + '"]'
+          'input[name = "gender"][value="' + parsedSpeakerDetails.gender + '"]'
         );
         if (['male', 'female'].indexOf(parsedSpeakerDetails.gender) > -1) {
             if (genderRadio) {
                 genderRadio.checked = true;
                 genderRadio.previous = true;
             }
-        } else if (parsedSpeakerDetails.gender !== "") {
+        } else if (parsedSpeakerDetails.gender !== "" && parsedSpeakerDetails.gender !== undefined) {
             const genderRadio = document.querySelector(
-                'input[name = "gender"][value="others"]'
+              'input[name = "gender"][value="others"]'
             );
             if (genderRadio) {
                 genderRadio.checked = true;
                 genderRadio.previous = true;
             }
             const transGenderRadio = document.querySelector(
-                'input[name = "trans_gender"][value="' + parsedSpeakerDetails.gender + '"]'
+              'input[name = "trans_gender"][value="' + parsedSpeakerDetails.gender + '"]'
             );
             if (transGenderRadio) {
                 $("#transgender_options").removeClass("d-none");
@@ -97,8 +99,8 @@ const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
         let userNameTxt = '';
         if(parsedSpeakerDetails.userName){
             userNameTxt = whitelisting_email==='true' ?
-            parsedSpeakerDetails.userName.trim() :  
-            parsedSpeakerDetails.userName.trim().substring(0, 12)
+              parsedSpeakerDetails.userName.trim() :
+              parsedSpeakerDetails.userName.trim().substring(0, 12)
         }
         $userName.val(userNameTxt);
         validateUserName($userName, $userName.next());
@@ -119,21 +121,25 @@ const setUserModalOnShown = function ($userName) {
 
 const setUserNameOnInputFocus = function () {
     const $userName = $('#username');
-    const $userNameError = $userName.next();
+    // const $userNameError = $userName.next();
+    const $userNameError = $('#username-error');
     // const $tncCheckbox = $('#tnc');
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
     $userName.on('input focus', () => {
         validateUserName($userName, $userNameError);
         // setUserNameTooltip($userName);
-        if($startRecordBtnTooltip) {
-            const userNameValue = $userName.val().trim();
-            if (!testUserName(userNameValue)) {
-                $startRecordBtn.removeAttr('disabled').removeClass('point-none');
+        const userNameValue = $userName.val().trim();
+        if (!testUserName(userNameValue)) {
+            $startRecordBtn.removeAttr('disabled').removeClass('point-none');
+            if ($startRecordBtnTooltip) {
                 $startRecordBtnTooltip.tooltip('disable');
-            } else {
-                setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
-                $startRecordBtn.prop('disabled', true).addClass('point-none');
+            }
+
+        } else {
+            setStartRecordBtnToolTipContent(userNameValue, $startRecordBtnTooltip);
+            $startRecordBtn.prop('disabled', true).addClass('point-none');
+            if ($startRecordBtnTooltip) {
                 $startRecordBtnTooltip.tooltip('enable');
             }
         }
@@ -142,18 +148,55 @@ const setUserNameOnInputFocus = function () {
 
 const setGenderRadioButtonOnClick = function () {
     const genderRadios = document.querySelectorAll('input[name = "gender"]');
-    genderRadios.forEach((element) => {
-        element.addEventListener('click', (e) => {
-            if (e.target.previous) {
-                e.target.checked = false;
-            }
-            e.target.previous = e.target.checked;
+    const selectedTransGender = document.querySelector(
+      'input[name = "trans_gender"]:checked'
+    );
 
+    const options = $("#transgender_options");
+    genderRadios.forEach((element) => {
+        $(element).off('click').on('click', (e) => {
+                if (e.target.previous) {
+                    e.target.checked = false;
+                }
+                e.target.previous = e.target.checked;
+                if (e.target.value == 'others' && e.target.checked) {
+                    if (!selectedTransGender) {
+                        const defaultOption = document.querySelector(
+                          'input[name = "trans_gender"][value="Rather Not Say"]'
+                        );
+                        defaultOption.checked = true;
+                        defaultOption.previous = true;
+                    }
+                    options.removeClass('d-none');
+                } else {
+                    options.addClass('d-none');
+                }
+
+            });
         });
+}
+
+const verifyUser = (userName) => {
+    return fetch('/verify-user', {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify({
+            userName: userName,
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
     });
 }
 
-const setStartRecordingBtnOnClick = function () {
+const storeToLocal = (speakerDetailsKey, speakerDetails, contributionLanguage, url) => {
+    localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, contributionLanguage);
+    location.href = url;
+}
+
+// device-browser
+const setStartRecordingBtnOnClick = function (url, module = '') {
     const speakerDetailsKey = 'speakerDetails';
     const $startRecordBtn = $('#proceed-box');
     //const $tncCheckbox = $('#tnc');
@@ -174,23 +217,48 @@ const setStartRecordingBtnOnClick = function () {
             userNameValue = $userName.val().trim();
         }
         let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+        let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+        let fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
         const selectedLanguage = ALL_LANGUAGES.find(e => e.value === contributionLanguage);
-        if (!selectedLanguage.data) contributionLanguage = DEFAULT_CON_LANGUAGE;
+        if(module != MODULE.likho.value){
+            if (!selectedLanguage.data) contributionLanguage = DEFAULT_CON_LANGUAGE;
+        }
         if (testUserName(userNameValue)) {
             return;
         }
+        const userLanguage = module === MODULE.likho.value ? fromLanguage : contributionLanguage;
         const speakerDetails = {
             gender: genderValue,
             age: age.value,
             motherTongue: motherTongue.value,
             userName: userNameValue,
-            language: contributionLanguage,
+            language: userLanguage,
+            toLanguage: toLanguage || '',
         };
-        localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
-        localStorage.setItem(CONTRIBUTION_LANGUAGE, contributionLanguage);
-        location.href = './record.html';
+        if (whitelisting_email==='true') {
+            verifyUser(userNameValue).then(res => {
+                if (res.ok) {
+                    storeToLocal(speakerDetailsKey, speakerDetails, contributionLanguage, url);
+                } else {
+                    alert("User not found")
+                }
+            }).catch(err => {
+                console.log(err)
+                alert("User not found")
+            })
+        } else {
+            storeToLocal(speakerDetailsKey, speakerDetails, contributionLanguage, url);
+        }
     });
 }
+
+$(document).ready(function () {
+    if (whitelisting_email==='true') {
+        document.getElementById("username").maxLength = 100;
+    } else {
+        document.getElementById("username").maxLength = 12;
+    }
+});
 
 module.exports = {
     testUserName,

@@ -1,5 +1,5 @@
-const { onActiveNavbar } = require('../common/header');
-const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,landToHome } = require('../common/common');
+const { onActiveNavbar, onChangeUser, showUserProfile ,onOpenUserDropDown} = require('../common/header');
+const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,landToHome,hasUserRegistered } = require('../common/common');
 const {
   toggleFooterPosition,
   getLocaleString,
@@ -8,8 +8,9 @@ const {
   setSpeakerDetails,
   setUserModalOnShown,
   setUserNameOnInputFocus,
-  setStartRecordingBtnOnClick
-} = require('../common/userDetails');
+  setStartRecordingBtnOnClick,
+  setGenderRadioButtonOnClick
+} = require('../common/speakerDetails');
 const {getStatsSummary} = require('../common/commonHome')
 
 const { updateHrsForCards } = require('../common/card')
@@ -19,7 +20,10 @@ const {
   MODULE,
   ALL_LANGUAGES,
   LIKHO_FROM_LANGUAGE,
-  LIKHO_TO_LANGUAGE
+  LIKHO_TO_LANGUAGE,
+  SPEAKER_DETAILS_KEY,
+  CONTRIBUTION_LANGUAGE,
+  DEFAULT_CON_LANGUAGE
 } = require('../common/constants');
 
 const {initializeFeedbackModal} = require('../common/feedback')
@@ -59,8 +63,15 @@ const updateLocaleLanguagesDropdown = (language, toLanguage) => {
 
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
+  const age = document.getElementById('age');
+  const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
   toggleFooterPosition();
+
+  let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  if(!contributionLanguage){
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
+  }
 
   getAvailableLanguages('parallel').then(languagePairs => {
     const { datasetLanguages, contributionLanguages } = languagePairs;
@@ -125,17 +136,41 @@ function initializeBlock() {
 
   $('#start_recording').on('click', () => {
     localStorage.setItem("selectedType", "contribute");
-    setStartRecordingBtnOnClick('./record.html',MODULE.likho.value);
+    if(!hasUserRegistered()){
+      $('#userModal').modal('show');
+      setStartRecordingBtnOnClick('./record.html',MODULE.likho.value);
+    } else {
+      location.href ='./record.html';
+    }
+
   });
 
   $('#start_validating').on('click', () => {
     localStorage.setItem("selectedType", "validate");
-    setStartRecordingBtnOnClick('./validator-page.html',MODULE.likho.value);
+    if(!hasUserRegistered()){
+      $('#userModal').modal('show');
+      setStartRecordingBtnOnClick('./validator-page.html',MODULE.likho.value);
+    } else {
+      location.href ='./validator-page.html';
+    }
   })
 
-  setSpeakerDetails(speakerDetailsKey, $userName);
-  setUserNameOnInputFocus();
+  const $startRecordBtn = $('#proceed-box');
+  const $startRecordBtnTooltip = $startRecordBtn.parent();
+
   setUserModalOnShown($userName);
+  $startRecordBtnTooltip.tooltip('disable');
+  setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+  setGenderRadioButtonOnClick();
+  setUserNameOnInputFocus();
+
+  if(hasUserRegistered()){
+    const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+    const localSpeakerDataParsed = JSON.parse(speakerDetails);
+    showUserProfile(localSpeakerDataParsed.userName);
+  }
+  onChangeUser('./home.html',MODULE.likho.value );
+  onOpenUserDropDown();
   getStatsSummary('/stats/summary/parallel',MODULE.likho.value);
 
 }

@@ -16,6 +16,7 @@ const {
   performAPIRequest,
 } = require("./utils");
 const {showByHoursChartThankyouPage,getContributedAndTopLanguage} = require('../../../build/js/common/common');
+const {onChangeUser,showUserProfile,onOpenUserDropDown} = require('./header');
 
 const CURRENT_INDEX = "currentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -326,11 +327,9 @@ function executeOnLoad() {
   } else if (currentIndexInStorage < totalSentence) {
     location.href = "./home.html";
   } else {
-    if(localSpeakerDataParsed.userName && localSpeakerDataParsed.userName.length > 0){
-      $("#nav-user").removeClass("d-none");
-      $("#nav-login").addClass("d-none");
-      $("#nav-username").text(localSpeakerDataParsed.userName);
-    }
+    showUserProfile(localSpeakerDataParsed.userName);
+    onChangeUser('./thank-you.html', MODULE.bolo.value);
+    onOpenUserDropDown();
     setPageContentHeight();
     setSentencesContributed();
   }

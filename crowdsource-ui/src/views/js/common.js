@@ -1,5 +1,5 @@
 const {
-  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS,LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE
+  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS,LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE,SPEAKER_DETAILS_KEY
 } = require('./constants');
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { constructChart } = require('./horizontalBarGraph');
@@ -259,6 +259,12 @@ const landToHome = function (){
   }
 }
 
+const hasUserRegistered = function (){
+  const userDetail = localStorage.getItem(SPEAKER_DETAILS_KEY);
+  const parsedUserDetails = userDetail ? JSON.parse(userDetail) : false;
+  return parsedUserDetails ? true : false;
+}
+
 const showOrHideExtensionCloseBtn = function (){
   // console.log("here")
 
@@ -273,4 +279,4 @@ const showOrHideExtensionCloseBtn = function (){
 
 
 
-module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn };
+module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered };

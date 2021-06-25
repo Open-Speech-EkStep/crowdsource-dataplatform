@@ -353,5 +353,12 @@
 	"<span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge earned for validating <span id=\"current_badge_count\"></span> recordings": "<span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge earned for validating <span id=\"current_badge_count\"></span> recordings",
 	"India": "India",
 	"FROM": "FROM",
-	"TO": "TO"
+	"TO": "TO",
+	"(No Username)": "(No Username)",
+	"Change User": "Change User",
+	"All the fields are optional but you can enrich your dataset contribution by providing the demographic details.": "All the fields are optional but you can enrich your dataset contribution by providing the demographic details.",
+	"Name": "Name",
+	"Enter username": "Enter username",
+	"Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.)": "Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.)",
+	"Done": "Done"
 }

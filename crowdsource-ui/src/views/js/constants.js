@@ -41,7 +41,7 @@ const MOTHER_TONGUE = [
   'Urdu',
 ];
 
-var ALL_LANGUAGES = getAllLanguages();
+let ALL_LANGUAGES = getAllLanguages();
 
 if (enabled_languages != null && !enabled_languages.includes('@@')) {
   ALL_LANGUAGES = getEnabledLanguages(enabled_languages)

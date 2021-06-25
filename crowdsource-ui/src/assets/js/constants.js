@@ -11,8 +11,10 @@ const AGGREGATED_DATA_BY_LANGUAGE = "aggregateDataCountByLanguage";
 const LOCALE_STRINGS = 'localeString';
 const CONTRIBUTION_LANGUAGE = "contributionLanguage";
 const SPEAKER_DETAILS_KEY = 'speakerDetails';
+const LIKHO_TO_LANGUAGE = "likho_to-language";
+const LIKHO_FROM_LANGUAGE = "likho_from-language";
 
-var ALL_LANGUAGES = getAllLanguages()
+let ALL_LANGUAGES = getAllLanguages()
 
 if (enabled_languages != null && !enabled_languages.includes('@@')) {
     ALL_LANGUAGES = getEnabledLanguages(enabled_languages)
@@ -103,5 +105,7 @@ module.exports = {
     BOLOPAGE,
     DEKHOPAGE,
     SUNOPAGE,
-    LIKHOPAGE
+    LIKHOPAGE,
+    LIKHO_TO_LANGUAGE,
+    LIKHO_FROM_LANGUAGE
 }

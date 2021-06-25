@@ -1,4 +1,17 @@
- /* Web Css */
+/* common */
+
+#anonymous_user{
+    color: grey;
+    pointer-events: none;
+    cursor: none !important;
+}
+
+#userNavBar.active {
+    background: rgba(0,123,255,.1);
+    border-bottom: 2px solid #007bff;
+}
+
+/* Web Css */
 
  #tilt_line {
         transform: rotate(20deg);
@@ -28,6 +41,27 @@
     }
 }
 
+/*  Ipad */
+@media (max-width: 768px) {
+    #userDropDown{
+        position: absolute;
+        top: 5px;
+        right: 20px;
+    }
+
+    .navbar-nav .dropdown-menu {
+        position: absolute !important;
+        margin-left: -140% !important;
+    }
+
+    .navbar-toggler {
+        padding: 0px !important;
+        font-size: 1rem !important;
+        border: 0px !important;
+    }
+}
+
+
 /* Mobile Css */
 
 @media (max-width: 767px) {
@@ -40,5 +74,41 @@
         height: 40px;
         margin-top: 5px;
     }
-   
+
+    #userDropDown{
+        position: absolute;
+        top: 10px;
+        right: 20px;
+    }
+
+    .navbar-nav .dropdown-menu {
+        position: absolute !important;
+        margin-left: -140% !important;
+    }
+
+    .navbar-toggler {
+        padding: 0px !important;
+        font-size: 1rem !important;
+        border: 0px !important;
+    }
+
+    #bhasini_logo img{
+        width: 50px;
+        height: 36px;
+    }
+
+    #bhashadaan_logo img{
+        height: 48px;
+        width: 100px;
+    }
+}
+
+@media (max-width: 767px) {
+    #userDropDown{
+        top: 0px;
+    }
+
+    #bhashadaan_logo img{
+        width: 60px;
+    }
 }

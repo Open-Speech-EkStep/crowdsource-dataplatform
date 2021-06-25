@@ -244,3 +244,21 @@ step("User clicks on resume button", async function () {
     await click(taiko.image({ id: "resume" }));
     await taiko.waitFor(4000)
 });
+
+step("Change user name to <usrnm>", async function(usrnm) {
+    await click(taiko.link({ id: "nav-user" }));
+    await assert.ok(await text('Change User').isVisible());
+    await click(text('Change User'));
+    await taiko.waitFor(1000);
+    assert.ok(await taiko.textBox({ id: 'username' }).isVisible())
+    if (await taiko.text('User Details').exists()) {
+        const username = taiko.textBox({ id: 'username' })
+        await taiko.waitFor(700)
+        await clear(taiko.textBox({ id: 'username' }));
+        await taiko.waitFor(300)
+        await write(usrnm, into(username))
+        await taiko.waitFor(500)
+    }
+    await click(taiko.button({ id: 'proceed-box' }))
+    await taiko.waitFor(1000)
+});

@@ -28,15 +28,15 @@ Tags: component
 ## Validate Contributor flow Thank you page
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
-* When user click on Lets Go Button, user should "" see instructions to record
+* user should "" see instructions to record
 * When user skips all the rest of the "5" sentences , User should see Thank you Page
 * Validate Thank you page content for Bolo India
 * when user clicks on the Contribute More button, user should not see the Instructions page again
 
 ## Validate Validator flow
+* Change user name to "Dummy User"
 * Navigate to "Validate" button and click "Validate" button
-* Add "Dummy User" Username for Valiadtion
-* When user click on Lets Go Button for Validate, user should "not" see instructions to record
+* user should "not" see instructions to record
 * "skip_button" should be enabled , "dislike_button" "like_button" buttons should be disabled
 * User plays the audio , "dislike_button","like_button" should be disabled
 * User clicks on "dislike_button" , he should see next sentence and "dislike_button" "like_button" buttons should be disabled
@@ -58,7 +58,7 @@ Tags: component
 ## Validate Report feature
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
-* When user click on Lets Go Button, user should "" see instructions to record
+* user should "" see instructions to record
 * When user clicks on Report Button, user should see Report Content Dialog Box & Submit button should be disabled
 * Once user clicks on Others Radio button, Submit button should be enabled
 * When user submits , Thank you pop up should come & close button should close the pop up

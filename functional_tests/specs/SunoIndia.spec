@@ -39,8 +39,8 @@ Tags: component
 
 ## Validate Transcribe flow
 * Select Contribution Language as "ಕನ್ನಡ"
-* Check user details for "Transcribe" for "Suno" India
-* Navigate to "Transcribe" and add username "T User" then click Lets go
+* Change user name to "T User"
+* Navigate to "Transcribe"
 * When user clicks on the Test Speaker button, user should see "play-speaker"
 * When user clicks on the cross button , pop up should close and user should see the Test Mic and speaker button
 * When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should visible
@@ -67,8 +67,8 @@ Tags: component
 
 ## Validate Validate flow
 * Select Contribution Language as "ಕನ್ನಡ"
-* Check user details for "Validate" for "Suno" India
-* Navigate to "Validate" and add username "V User" then click Lets go
+* Change user name to "V User"
+* Navigate to "Validate"
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be disabled
 * User plays the audio , "need_change" should be enabled & "like_button" should be disabled
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be disabled
@@ -90,7 +90,8 @@ Tags: component
 
 ## Check the Validate flow for new user
 * Select Contribution Language as "ಕನ್ನಡ"
-* Navigate to "Validate" and add username "New V User" then click Lets go
+* Change user name to "New V User"
+* Navigate to "Validate"
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be disabled
 * User plays the audio , "need_change" should be enabled & "like_button" should be disabled
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be disabled

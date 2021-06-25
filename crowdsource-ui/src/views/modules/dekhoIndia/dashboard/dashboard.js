@@ -1,11 +1,14 @@
 const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
-const {  setSpeakerDetails, setUserNameOnInputFocus, setStartRecordingBtnOnClick, setUserModalOnShown } = require('../common/userDetails');
+const {  setSpeakerDetails, setUserNameOnInputFocus, setStartRecordingBtnOnClick, setUserModalOnShown,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
 const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
-const { DEFAULT_CON_LANGUAGE,CURRENT_MODULE ,CONTRIBUTION_LANGUAGE} = require('../common/constants');
+const { hasUserRegistered } = require('../common/common');
+const { DEFAULT_CON_LANGUAGE,CURRENT_MODULE ,CONTRIBUTION_LANGUAGE,MODULE,SPEAKER_DETAILS_KEY} = require('../common/constants');
 const fetch = require('../common/fetch');
 const {setSpeakerData} = require('../common/contributionStats');
 const {initializeFeedbackModal} = require('../common/feedback')
+const { onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
+
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
@@ -77,11 +80,14 @@ $(document).ready(function () {
     initializeFeedbackModal();
     localStorage.removeItem('previousLanguage');
     const speakerDetailsKey = 'speakerDetails';
+
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
     // const $tncCheckbox = $('#tnc');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
+    const age = document.getElementById('age');
+    const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -130,13 +136,27 @@ $(document).ready(function () {
         localStorage.setItem("i18n", "en");
         sentenceLanguage = languageToRecord;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, languageWithNoContribution);
-        setStartRecordingBtnOnClick('./record.html')
+        localStorage.setItem("selectedType", "contribute");
+        if(!hasUserRegistered()){
+            $('#userModal').modal('show');
+            setStartRecordingBtnOnClick('./record.html',MODULE.dekho.value);
+        } else {
+            location.href ='./record.html';
+        }
     });
 
-    setUserModalOnShown($userName);
-    setSpeakerDetails(speakerDetailsKey, $userName);
     $startRecordBtnTooltip.tooltip('disable');
+    setUserModalOnShown($userName);
+    setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+    setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
+    if(hasUserRegistered()){
+        const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+        const localSpeakerDataParsed = JSON.parse(speakerDetails);
+        showUserProfile(localSpeakerDataParsed.userName);
+    }
+    onChangeUser('./dashboard.html',MODULE.dekho.value);
+    onOpenUserDropDown();
 
     toggleFooterPosition();
 

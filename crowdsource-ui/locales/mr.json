@@ -324,5 +324,12 @@
 	"You are just <span id=\"sentense_away_count\"></span> images away from earning your Bhasha Samarthak <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "You are just <span id=\"sentense_away_count\"></span> images away from earning your Bhasha Samarthak <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>",
 	"<span id=\"current_badge_name_1\"></span> contributor level achieved for validating <span id=\"current_badge_count\"></span> labelling images.": "<span id=\"current_badge_name_1\"></span> contributor level achieved for validating <span id=\"current_badge_count\"></span> labelling images.",
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span>  Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to unlock your <span id=\"next_badge_name_1\"></span>  Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>",
-	"Thank you for your enthusiasm to validate the image labels.": "Thank you for your enthusiasm to validate the image labels."
+	"Thank you for your enthusiasm to validate the image labels.": "Thank you for your enthusiasm to validate the image labels.",
+	"(No Username)": "(No Username)",
+	"Change User": "Change User",
+	"All the fields are optional but you can enrich your dataset contribution by providing the demographic details.": "All the fields are optional but you can enrich your dataset contribution by providing the demographic details.",
+	"Name": "Name",
+	"Enter username": "Enter username",
+	"Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.)": "Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.)",
+	"Done": "Done"
 }

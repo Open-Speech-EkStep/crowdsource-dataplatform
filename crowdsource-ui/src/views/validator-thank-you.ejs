@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<%- include('common/headerForContributor.ejs',{path:"./",MODULE:"Bolo", PAGE_TITLE:"Validate",img:"../img/en-BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
+<%- include('common/header/headerWithoutNavBar.ejs',{path:"./",MODULE:"Bolo India", PAGE_TITLE:"",img:"../img/en-BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center">
         <div class="row position-absolute top-back-btn" style="top:80px;left:35px">
@@ -116,8 +116,10 @@
         <%- include('../../build/views/common/languageGoal.ejs', {ButtonText:"Validate More",url:"./validator-page.html",TEXT:"language",TEXT2:"hrs"})%>
     </div>
 </div>
+<%- include ../../build/views/common/speakerDetails.ejs %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="../js/validator-thank-you.js"></script>
 <script src="../js/loadFeedback.js"></script>
