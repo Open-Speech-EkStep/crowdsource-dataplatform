@@ -65,7 +65,7 @@ Tags: component
 
 ## Check About Us Page
 //* Navigate to "About Us" button and click "About Us" button
-* Validate about us content
+//* Validate about us content
 * Start Recording button is disabled
 * Select Language "Hindi" enables the Start Recording button
 
