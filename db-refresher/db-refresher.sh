@@ -2,12 +2,15 @@
 echo "Db refresh Initiating...";
 cd /usr/src/app/tb_files
 
-DB_URL="postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}"
-CONNECTION_URI=$(urlencode -m "$DB_URL")
+alias urlencode='python3 -c "import sys, urllib.parse as ul; \
+    print (ul.quote_plus(sys.argv[1]))"'
 
-psql $CONNECTION_URI -f /usr/src/app/db_refresh.sql
+DB_URL="postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}"
+CONNECTION_URI=$(urlencode $DB_URL)
+
+psql "$CONNECTION_URI" -f /usr/src/app/db_refresh.sql
 echo "Db refresh Complete!"
-psql $CONNECTION_URI -f /usr/src/app/db_queries.sql
+psql "$CONNECTION_URI" -f /usr/src/app/db_queries.sql
 echo "Jsons update Complete!"
 ls -lrt
 
