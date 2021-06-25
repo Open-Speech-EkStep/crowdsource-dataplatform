@@ -64,7 +64,7 @@ Tags: component
 * When user submits , Thank you pop up should come & close button should close the pop up
 
 ## Check About Us Page
-* Navigate to "About Us" button and click "About Us" button
+//* Navigate to "About Us" button and click "About Us" button
 * Validate about us content
 * Start Recording button is disabled
 * Select Language "Hindi" enables the Start Recording button

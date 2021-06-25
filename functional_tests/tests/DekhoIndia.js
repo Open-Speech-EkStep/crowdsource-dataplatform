@@ -134,7 +134,7 @@ step("User clicks on <arg0> he should see thank you page and should be able to s
 	await click(taiko.button({ id: arg0 }))
 	await taiko.waitFor(2000)
 	assert.ok(await text("You’ve earned your Bronze Badge").isVisible());
-	assert.ok(await text("National Language Translation Mission").isVisible());
+	// assert.ok(await text("National Language Translation Mission").isVisible());
 	assert.ok(await text("Share it with your friends and family").isVisible());
 	assert.ok(await image({ id: "reward-img" }).isVisible());
 });
