@@ -63,7 +63,7 @@ Tags: component
 * Once user clicks on Others Radio button, Submit button should be enabled
 * When user submits , Thank you pop up should come & close button should close the pop up
 
-## Check About Us Page
+//## Check About Us Page
 //* Navigate to "About Us" button and click "About Us" button
 //* Validate about us content
 //* Start Recording button is disabled
