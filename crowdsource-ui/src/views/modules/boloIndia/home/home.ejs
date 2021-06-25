@@ -33,7 +33,7 @@
         <div class="col-12 col-md-12 col-lg-10 offset-lg-1 mt-4">
             <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 flex-flow-nowrap" id="contribution_lang_navbar">
                 <div class="mx-2">
-                    <%= __('Select the language for voluntary contribution') %>:
+                    <%= __('Select the language for contribution') %>:
                 </div>
                 <div class="navbar-collapse d-inherit mt-2 mt-lg-0 mt-md-0" id="navbarSupportedLanguage">
                     <div class="col-5 col-lg-5 col-xl-4" id="nav-bar-loader">
@@ -120,7 +120,7 @@
                         <div><span class="spinner"></span></div>
                     </div>
                     <div class="row text-center contribution-details" id="contribution-details">
-                        <%- include('../common/contributionStats.ejs',{labels :['Languages','Speakers contributed','Duration contributed','Duration validated']}) %>
+                        <%- include('../common/contributionStats.ejs',{labels :['Languages','Speakers contributed','Duration recorded','Duration validated']}) %>
                     </div>
                 </div>
             </div>
@@ -182,13 +182,13 @@
             </div>
             <div class="modal-body px-6" id="bolo-user-details">
                 <p class="text-muted text-center">
-                    <%= __('All the fields are optional') %>
+                    <%= __('All fields are optional but you can enhance your contribution by providing non personal demographic details.') %>
                 </p>
                 <div class="col-12 text-center text-primary" id="boloResetBtn" style="cursor:pointer">
                     <%= __('Not You? Change User') %>
                 </div>
                 <div class="form-group mt-5"><label for="bolo-username" class="form-label">
-                        <%= __('Username') %>
+                        <%= __('Enter Username') %>
                     </label> <input class="form-control" maxlength="12" id="bolo-username" data-toggle="tooltip" placeholder="<%= __('Enter preferred username') %>" title="<% __('Username cannot be more than 12 characters') %>">
                     <div class="text-danger mt-2 d-none" id="bolo-username-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px" height="18px">
                             <path d="M0 0h24v24H0z" fill="none"/>

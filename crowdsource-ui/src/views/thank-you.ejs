@@ -72,11 +72,11 @@
                 <h4 class="mb-3 thank-you-title mt-5 mt-lg-0"><%= __('You took the first important step') %></h4>
             </div>
             <div id="before_badge_content" class="d-none">
-                <h4 class="mb-3 mt-5 mt-lg-0"><%- __('You are driving the spirit of your language') %></h4>
+                <h4 class="mb-3 mt-5 mt-lg-0"><%- __('You are enriching your language') %></h4>
             </div>
             <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('recording(s) contributed') %></p>
-            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your Bhasha Samarthak <span id="next_badge_name"></span> Badge. <a href="badges.html">Know more</a>') %></p>
-            <%- include modals/badge_milestone.ejs %>
+            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> recordings away from earning your <span id="next_badge_name"></span>  Bhasha Samarthak Badge. <a href="badges.html">Know more</a>') %></p>
+            <%- include('modals/badge_milestone.ejs',{type:"recordings"})%>
             <div class="mt-5 text-center mt-lg-0">
                 <%= __('Share it with your friends and family') %>
             </div>
