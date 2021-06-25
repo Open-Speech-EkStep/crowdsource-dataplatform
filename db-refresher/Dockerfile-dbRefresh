@@ -14,9 +14,6 @@ RUN mkdir -p /usr/src/app/tb_files
 COPY db_queries.sql .
 COPY db_refresh.sql .
 COPY db-refresher.sh .
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-RUN unzip awscliv2.zip
-RUN sudo ./aws/install
 
 RUN mkdir -p /usr/src/app/utils
 RUN wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xf azcopy_v10.tar.gz --strip-components=1

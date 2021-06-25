@@ -5,12 +5,12 @@ cd /usr/src/app/tb_files
 alias urlencode='python3 -c "import sys, urllib.parse as ul; \
     print (ul.quote_plus(sys.argv[1]))"'
 
-DB_URL="postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}"
-CONNECTION_URI=$(urlencode $DB_URL)
+DB_USER=$(urlencode $DB_USER)
+DB_PASS=$(urlencode $DB_PASS)
 
-psql "$CONNECTION_URI" -f /usr/src/app/db_refresh.sql
+psql "postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}" -f /usr/src/app/db_refresh.sql
 echo "Db refresh Complete!"
-psql "$CONNECTION_URI" -f /usr/src/app/db_queries.sql
+psql "postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}" -f /usr/src/app/db_queries.sql
 echo "Jsons update Complete!"
 ls -lrt
 
