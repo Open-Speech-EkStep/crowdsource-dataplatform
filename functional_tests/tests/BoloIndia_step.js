@@ -119,7 +119,7 @@ step("if a user enter username and click on Not you change user button , the fie
 
 
 step("And User enter random Username and selects Age , Mother tongue ,gender", async function () {
-    if (await taiko.text('User Details').exists()) {
+    if (await taiko.text('User Details').isVisible()) {
         const username = taiko.textBox({ id: 'username' })
         await taiko.waitFor(700)
         await write('Dummy user', into(username))
@@ -131,6 +131,16 @@ step("And User enter random Username and selects Age , Mother tongue ,gender", a
 
 step("When user click on Lets Go Button, user should <arg0> see instructions to record", async function (arg0) {
     await click(taiko.button({ id: 'proceed-box' }))
+    await taiko.waitFor(1500)
+
+    if (arg0 == "not") {
+        assert.ok(! await text('Quick Tips').exists())
+    }
+    else {
+        assert.ok(await text('Quick Tips').exists(), 'Not able to see instructions')
+    }
+});
+step("user should <arg0> see instructions to record", async function (arg0) {
     await taiko.waitFor(1500)
 
     if (arg0 == "not") {
