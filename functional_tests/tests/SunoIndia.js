@@ -249,6 +249,7 @@ step("Change user name to <usrnm>", async function(usrnm) {
     await click(taiko.link({ id: "nav-user" }));
     await assert.ok(await text('Change User').isVisible());
     await click(text('Change User'));
+    await taiko.waitFor(1000);
     assert.ok(await taiko.textBox({ id: 'username' }).isVisible())
     if (await taiko.text('User Details').exists()) {
         const username = taiko.textBox({ id: 'username' })

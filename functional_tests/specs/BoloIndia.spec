@@ -28,7 +28,7 @@ Tags: component
 ## Validate Contributor flow Thank you page
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
-* When user click on Lets Go Button, user should "" see instructions to record
+* user should "" see instructions to record
 * When user skips all the rest of the "5" sentences , User should see Thank you Page
 * Validate Thank you page content for Bolo India
 * when user clicks on the Contribute More button, user should not see the Instructions page again
@@ -58,16 +58,10 @@ Tags: component
 ## Validate Report feature
 * Navigate to "Contribute" button and click "Contribute" button
 * And User enter random Username and selects Age , Mother tongue ,gender
-* When user click on Lets Go Button, user should "" see instructions to record
+* user should "" see instructions to record
 * When user clicks on Report Button, user should see Report Content Dialog Box & Submit button should be disabled
 * Once user clicks on Others Radio button, Submit button should be enabled
 * When user submits , Thank you pop up should come & close button should close the pop up
-
-## Check About Us Page
-* Navigate to "About Us" button and click "About Us" button
-* Validate about us content
-* Start Recording button is disabled
-* Select Language "Hindi" enables the Start Recording button
 
 ## Check Terms and Condition links from Footer
 * Navigate to "Terms & Conditions" button and click "Terms & Conditions" button
