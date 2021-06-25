@@ -1,4 +1,20 @@
+#module-intro-row-cover{
+    background-image: url(../../img/characters.svg);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: initial;
+}
 
+#module-intro-row{
+    background:linear-gradient(180deg,rgba(255,255,255,.2) 52.11%,rgba(77,130,247,.2) 97.64%);
+}
+
+@media (min-width: 769px) and  (max-width: 1024px){
+    #moduleLogo img{
+        width: 70px !important;
+        height: 80px !important;
+    }
+}
 
 @media (max-width: 767px) {
     .para-font {
