@@ -16,6 +16,7 @@ const {
   performAPIRequest,
 } = require("./utils");
 const {showByHoursChartThankyouPage,getContributedAndTopLanguage} = require('../../../build/js/common/common');
+const {onChangeUser,showUserProfile,onOpenUserDropDown} = require('./header');
 
 const CURRENT_INDEX = "currentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -50,8 +51,8 @@ function setSentencesContributed() {
     if (data.isNewBadge) {
       $("#spree_text").removeClass("d-none");
       $("#milestone_text").removeClass("d-none");
-      $("#current_badge_name").text(localeStrings[data.currentBadgeType]);
-      $("#current_badge_name_1").text(localeStrings[data.currentBadgeType]);
+      $("#current_badge_name").text(localeStrings[data.currentBadgeType.toLowerCase()]);
+      $("#current_badge_name_1").text(localeStrings[data.currentBadgeType.toLowerCase()]);
       $("#current_badge_count").text(data.currentMilestone);
       $("#next_badge_count").text(data.nextMilestone);
       $("#next_badge_name_1").text(localeStrings[data.nextBadgeType.toLowerCase()]);
@@ -326,11 +327,9 @@ function executeOnLoad() {
   } else if (currentIndexInStorage < totalSentence) {
     location.href = "./home.html";
   } else {
-    if(localSpeakerDataParsed.userName && localSpeakerDataParsed.userName.length > 0){
-      $("#nav-user").removeClass("d-none");
-      $("#nav-login").addClass("d-none");
-      $("#nav-username").text(localSpeakerDataParsed.userName);
-    }
+    showUserProfile(localSpeakerDataParsed.userName);
+    onChangeUser('./thank-you.html', MODULE.bolo.value);
+    onOpenUserDropDown();
     setPageContentHeight();
     setSentencesContributed();
   }

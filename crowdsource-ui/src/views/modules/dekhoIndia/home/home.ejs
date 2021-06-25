@@ -15,6 +15,8 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Rowdies:300,400,700,900&display=swap">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -27,13 +29,13 @@
 <%- include('../common/header.ejs',{home:"../home.html", bolo:"../boloIndia/home.html", suno:"../sunoIndia/home.html",likho:"../likhoIndia/home.html",dekho:"./home.html",path:"../"}); %>
 <div class="container-fluid supreme-container">
     <div class="row">
-        <%- include('../common/moduleIntro.ejs',{name:'Dekho India',intro:'Enrich your language by labelling images',img:"en-DekhoIndiaLogo.svg"}); %>
+        <%- include('../common/moduleIntro.ejs',{name:'Dekho',intro:'Enrich your language by labelling images',img:"en-DekhoIndiaLogo.svg"}); %>
     </div>
     <div class="row">
         <%- include ../common/languageNavBar.ejs %>
     </div>
     <div class="m-auto row justify-content-center mt-lg-4 mx-lg-5">
-        <%- include('../common/cards.ejs',{left:{h1:"Label",h2:"Type the text as per the image","p1":"",img:"../../img/look.svg"},right:{h1:"Validate",h2:"Validate the text as per the image","p1":"",img:"../../img/validate.svg"}}); %>
+        <%- include('../common/cards.ejs',{left:{h1:"Label",h2:"Type the text as per the image","p1":"",img:"../../img/look.svg"},right:{h1:"Validate",h2:"Validate the text, labelled by others, as per the image","p1":"",img:"../../img/validate.svg"}}); %>
     </div>
     <div class="row" id="contribution_stats">
         <div class="col-12 col-md-12 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
@@ -79,7 +81,7 @@
 </div>
 
 <button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
-<%- include ../common/userDetails.ejs %>
+<%- include ../common/speakerDetails.ejs %>
 <%- include ../common/content-languages.ejs %>
 <%- include ../common/say-listen-language.ejs %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

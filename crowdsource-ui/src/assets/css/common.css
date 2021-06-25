@@ -152,6 +152,10 @@ body {
 
 
 @media (max-width: 767px) {
+  #header-nav-bar{
+    min-height: 56px;
+  }
+
    .speakerDetails {
    height: 500px;
    overflow: auto;
@@ -254,6 +258,11 @@ body {
 
 @media (min-width: 768px) {
 
+  .logo{
+    width: 190px;
+    height: 48px;
+  }
+
 .btn-custom-primary {
   min-width: 240px;
   max-width: 240px;
@@ -270,9 +279,22 @@ body {
 }
 }
 
+@media (max-width: 768px) {
+  #userDropDown{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+  }
+
+}
+
 
 @media (min-width: 700px) and (max-width: 767px) {
-
+  #userDropDown{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+  }
 
   .btn-custom-primary {
     min-width: 240px;
@@ -294,6 +316,27 @@ body {
   }
 
   @media (max-width: 700px) {
+    .navbar-nav .dropdown-menu {
+      position: absolute !important;
+      margin-left: -140% !important;
+    }
+
+    .navbar-toggler{
+    padding: 0px !important ;
+    font-size: 1rem !important;
+    border: 0px !important;
+    }
+
+    .version-beta{
+      font-size: 12px;
+    padding: 2px 6px;
+    margin-top: 14px;
+    }
+
+    .logo{
+      width: 150px;
+      height: 48px;
+    }
 
     #content-wrapper #btn-nav{
       padding-top: 8px !important;
@@ -406,4 +449,10 @@ body {
     pointer-events: none;    
     opacity: 0.3 !important;
    }
+
+#anonymous_user{
+  color: grey;
+  pointer-events: none;
+  cursor: none !important;
+}
    

@@ -42,7 +42,8 @@ Tags: component
 * When user clicks on submit button user should see " Thank you for contributing!"
 * When user clicks on back button, user should land on Likho India home page
 * Check "Validate" option should be "enabled" on Home page
-* Navigate to "Validate" and add username "V User" then click Lets go
+* Change user name to "V User"
+* Navigate to "Validate"
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be enabled
 * User should see the text "Is the translation correct?"
 * User skips the next "2" sentences user should land on Thank you page in "English"
@@ -51,8 +52,8 @@ Tags: component
 ## Validate Validate flow
 * Select "ଓଡିଆ" Language from "from-language"
 * Select "English" Language from "to-language"
-* Check user details for "Validate" for "Likho" India
-* Navigate to "Validate" and add username "V1 User" then click Lets go
+* Change user name to "V1 User"
+* Navigate to "Validate"
 * User should see add extension and watch video link
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be enabled
 * User clicks on  "need_change" button user should see "" and "Your Edit" , "cancel-edit-button" should be  enabled

@@ -3,7 +3,7 @@ const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLoca
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice } = require('../common/common');
-const { showUserProfile } = require('../common/header');
+const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { cdn_url } = require('../common/env-api');
 const { initializeFeedbackModal } = require('../common/feedback');
@@ -472,6 +472,8 @@ $(document).ready(() => {
     return;
   }
   showUserProfile(localSpeakerDataParsed.userName);
+  onChangeUser('./validator-page.html',MODULE.dekho.value);
+  onOpenUserDropDown();
   const isExistingUser = localSentencesParsed &&
     localSentencesParsed.userName === localSpeakerDataParsed.userName
     &&

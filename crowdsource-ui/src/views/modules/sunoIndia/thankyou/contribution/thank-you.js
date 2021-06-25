@@ -8,6 +8,7 @@ const {
   CURRENT_MODULE,
   MODULE
 } = require("../common/constants");
+const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 const {
   setPageContentHeight,
   toggleFooterPosition,
@@ -16,7 +17,6 @@ const {
   performAPIRequest,
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showUserProfile} = require('../common/header');
 const {initializeFeedbackModal} = require('../common/feedback')
 const {constructChart} = require('../common/horizontalBarGraph');
 const {getContributedAndTopLanguage,setBadge,showByHoursChart,showByHoursChartThankyouPage} = require('../common/common');
@@ -147,6 +147,8 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName)
+    onChangeUser('./thank-you.html', MODULE.suno.value);
+    onOpenUserDropDown();
 
     setPageContentHeight();
     setSentencesContributed();

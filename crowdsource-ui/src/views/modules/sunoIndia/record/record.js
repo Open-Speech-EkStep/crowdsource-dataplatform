@@ -12,10 +12,10 @@ const {
   getDeviceInfo,
   getBrowserInfo
 } = require('../common/utils');
+const { onChangeUser,onOpenUserDropDown, showUserProfile } = require('../common/header');
 const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const {showUserProfile} = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
@@ -557,6 +557,8 @@ function executeOnLoad() {
       return;
     }
     showUserProfile(localSpeakerDataParsed.userName)
+    onChangeUser('./record.html',MODULE.suno.value);
+    onOpenUserDropDown();
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName
       &&

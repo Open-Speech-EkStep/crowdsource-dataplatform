@@ -3,7 +3,9 @@
   getLocaleString,
   updateLocaleLanguagesDropdown
 } = require('./utils');
-const {CONTRIBUTION_LANGUAGE, BOLOPAGE, LOCALE_STRINGS, ALL_LANGUAGES, DEKHOPAGE, LIKHOPAGE, SUNOPAGE} = require('./constants');
+const {CONTRIBUTION_LANGUAGE, BOLOPAGE, LOCALE_STRINGS, ALL_LANGUAGES, DEKHOPAGE, LIKHOPAGE, SUNOPAGE,SPEAKER_DETAILS_KEY} = require('./constants');
+const {onChangeUser, showUserProfile,onOpenUserDropDown} = require('./header');
+const {hasUserRegistered} = require('./common');
 
 const getRowWithBadge = function (levelId, sentenceCount, badgeName, localeString, type, source) {
   const badge = type == 'text' ? BOLOPAGE[badgeName.toLowerCase()] : type == 'ocr' ? DEKHOPAGE[badgeName.toLowerCase()] : type =='asr' ? SUNOPAGE[badgeName.toLowerCase()] : LIKHOPAGE[badgeName.toLowerCase()];
@@ -142,6 +144,14 @@ $(document).ready(function () {
     $("#profile").removeClass("active show");
     $("#home").addClass("active show");
   }
+
+  if(hasUserRegistered()){
+    const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+    const localSpeakerDataParsed = JSON.parse(speakerDetails);
+    showUserProfile(localSpeakerDataParsed.userName);
+  }
+  onChangeUser('./badges.html',moduleType);
+  onOpenUserDropDown();
  
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
   updateLocaleLanguagesDropdown(language);

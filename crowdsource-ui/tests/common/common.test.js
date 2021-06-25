@@ -1,8 +1,8 @@
 const {readFileSync} = require('fs');
 const fetchMock = require("fetch-mock");
 const {stringToHTML, mockLocalStorage} = require('../utils');
-const {CONTRIBUTION_LANGUAGE} = require('../../build/js/common/constants');
-const {showFucntionalCards} = require('../../build/js/common/common.js');
+const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY} = require('../../build/js/common/constants');
+const {showFucntionalCards, hasUserRegistered} = require('../../build/js/common/common.js');
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../../build/views/common/cards.ejs`, 'UTF-8')+
@@ -35,6 +35,27 @@ document.body = stringToHTML(
 //     console.log(error);
 //   }
 // }
+
+describe("hasUserRegistered",()=>{
+  test("should give false if user is not registered",()=>{
+    mockLocalStorage();
+    expect(hasUserRegistered()).toEqual(false);
+  })
+
+  test("should give true if user is registered",()=>{
+    mockLocalStorage();
+    localStorage.setItem(SPEAKER_DETAILS_KEY, JSON.stringify({userName:"priya"}))
+    expect(hasUserRegistered()).toEqual(true);
+    localStorage.clear();
+  })
+
+  test("should give true if user is registered",()=>{
+    mockLocalStorage();
+    localStorage.setItem(SPEAKER_DETAILS_KEY, JSON.stringify({userName:""}))
+    expect(hasUserRegistered()).toEqual(true);
+    localStorage.clear();
+  })
+})
 
 describe("showFucntionalCards",()=>{
   test("showFucntionalCards for sunoIndia",()=>{

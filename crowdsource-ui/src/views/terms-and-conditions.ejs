@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<%- include('common/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
+<%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
 <div class="container-fluid">
             <div class="row justify-content-center bg-primary">
                 <div class="col-12 col-sm-10 col-md-8 px-1 py-0 text-light text-center mt-0 mt-sm-2 mt-3">
@@ -162,10 +162,15 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <%- include('common/feedback/feedback.ejs', {page:"Terms and Conditions"}) %>
     <%- include('common/footer.ejs',{path:"./"}) %>
+<%- include ../../build/views/common/speakerDetails.ejs %>
+
     <script src="../js/loadFeedback.js"></script>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-            <script>function setupScroll() {
+            <script>
+              const {onChangeUser} = require('./header.js')
+              function setupScroll() {
                     const $navRow = $("#nav-row");
                     const navRowPosition = $navRow.offset();
                     const navRowHeight = $navRow.height();
@@ -187,6 +192,7 @@
                     navCopyright.onclick = () => {
                         scrollTo(0, $copyrightPosition.top - navRowHeight);
                     };
+
                     window.onscroll = () => {
                         if (pageYOffset > navRowPosition.top) {
                             $navRow.addClass("fixed-top");
@@ -202,7 +208,10 @@
                     };
                 };
                 document.body.querySelector('footer').classList.remove('fixed-bottom');
-                setupScroll();</script>
+                setupScroll();
+                onChangeUser('./terms-and-conditions.html','home')
+
+            </script>
 </body>
 
 </html>

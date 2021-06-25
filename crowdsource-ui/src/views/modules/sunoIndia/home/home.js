@@ -1,13 +1,14 @@
-const { onActiveNavbar } = require('../common/header');
+const { onActiveNavbar,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
 
-const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages, landToHome} = require('../common/common');
+const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages, landToHome,hasUserRegistered} = require('../common/common');
 const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString} = require('../common/utils');
 const {
   setSpeakerDetails,
   setUserModalOnShown,
   setUserNameOnInputFocus,
-  setStartRecordingBtnOnClick
-} = require('../common/userDetails');
+  setStartRecordingBtnOnClick,
+  setGenderRadioButtonOnClick,
+} = require('../common/speakerDetails');
 
 const {setLangNavBar} = require('../common/languageNavBar')
 const {updateHrsForCards} = require('../common/card')
@@ -16,20 +17,27 @@ const {
   DEFAULT_CON_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
-  MODULE
+  MODULE,
+  SPEAKER_DETAILS_KEY
 } = require('../common/constants');
 
 const {initializeFeedbackModal} = require('../common/feedback');
 
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
+  const age = document.getElementById('age');
+  const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
-  let sentenceLanguage;
-  toggleFooterPosition();
-  let top_lang = getDefaultLang();
-  if(top_lang){
-    updateLocaleLanguagesDropdown(top_lang);
+  let sentenceLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  if(!sentenceLanguage){
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
+    sentenceLanguage = DEFAULT_CON_LANGUAGE;
   }
+  toggleFooterPosition();
+  // let top_lang = getDefaultLang();
+  // if(top_lang){
+    updateLocaleLanguagesDropdown(sentenceLanguage);
+  // }
 
   const $languageNavBar = $('#language-nav-bar');
   const $sayListenLanguage = $('#say-listen-language');
@@ -38,8 +46,8 @@ function initializeBlock() {
   $sayListenLanguage.on('click', (e) => {
     const targetedDiv = e.target;
     const language = targetedDiv.getAttribute("value");
-    if (top_lang !== language) {
-      top_lang = language;
+    if (sentenceLanguage !== language) {
+      sentenceLanguage = language;
       localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
       localStorage.setItem("i18n", "en");
       setLangNavBar(targetedDiv, language, $languageNavBar);
@@ -51,9 +59,9 @@ function initializeBlock() {
   $languageNavBar.on('click', (e) => {
     const targetedDiv = e.target;
     const language = targetedDiv.getAttribute('value');
-    if (top_lang !== language) {
+    if (sentenceLanguage !== language) {
       localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-      top_lang = language;
+      sentenceLanguage = language;
       const $6th_place = $('#6th_option')
       const previousActiveDiv = $languageNavBar.find('.active') || $6th_place;
       previousActiveDiv.removeClass('active');
@@ -67,24 +75,46 @@ function initializeBlock() {
   });
 
   $('#start_recording').on('click', () => {
-    sentenceLanguage = top_lang;
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    // sentenceLanguage = top_lang;
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
     localStorage.setItem("selectedType", "contribute");
-    setStartRecordingBtnOnClick('./record.html',MODULE.suno.value);
+    if(!hasUserRegistered()){
+      $('#userModal').modal('show');
+      setStartRecordingBtnOnClick('./record.html',MODULE.suno.value);
+    } else {
+      location.href ='./record.html';
+    }
   });
 
   $('#start_validating').on('click',()=>{
-    sentenceLanguage = top_lang;
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    // sentenceLanguage = top_lang;
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
     localStorage.setItem("selectedType", "validate");
-    setStartRecordingBtnOnClick('./validator-page.html',MODULE.suno.value);
+    if(!hasUserRegistered()){
+      $('#userModal').modal('show');
+      setStartRecordingBtnOnClick('./validator-page.html',MODULE.suno.value);
+    } else {
+      location.href ='./validator-page.html';
+    }
   })
 
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const $startRecordBtn = $('#proceed-box');
+  const $startRecordBtnTooltip = $startRecordBtn.parent();
   showFucntionalCards('asr', language);
-  setSpeakerDetails(speakerDetailsKey, $userName);
-  setUserNameOnInputFocus();
   setUserModalOnShown($userName);
+  $startRecordBtnTooltip.tooltip('disable');
+  setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+  setGenderRadioButtonOnClick();
+  setUserNameOnInputFocus();
+
+  onChangeUser('./home.html',MODULE.suno.value);
+  onOpenUserDropDown();
+  if(hasUserRegistered()){
+    const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+    const localSpeakerDataParsed = JSON.parse(speakerDetails);
+    showUserProfile(localSpeakerDataParsed.userName);
+  }
   getStatsSummary('/stats/summary/asr',MODULE.suno.value, setDefaultLang);
 }
 

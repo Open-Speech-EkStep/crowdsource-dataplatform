@@ -1,7 +1,7 @@
 const { BlobServiceClient } = require('@azure/storage-blob');
 const fs = require('fs');
 
-const { AZURE_STORAGE_CONNECTION_STRING, BUCKET_NAME } = process.env;
+const { AZURE_STORAGE_CONNECTION_STRING = '', BUCKET_NAME='' } = process.env;
 
 const azureUploader = function (filename, userName, userId, language) {
     const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);

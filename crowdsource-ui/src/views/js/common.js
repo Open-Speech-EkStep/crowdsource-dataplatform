@@ -1,5 +1,5 @@
 const {
-  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS,LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE
+  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS,LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE,SPEAKER_DETAILS_KEY
 } = require('./constants');
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { constructChart } = require('./horizontalBarGraph');
@@ -157,15 +157,15 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
     if(module == 'bolo'){
       if(functionalFlow === 'validator'){
-        $("#reward-img").attr('src', `../img/bolo_${data.currentBadgeType.toLowerCase()}_val.svg`);
+        $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_medal_val.svg`);
       } else {
-        $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_badge.svg`);
+        $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_medal.svg`);
       }
     } else {
       if(functionalFlow == 'validator'){
-        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_val.svg`);
+        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_medal_val.svg`);
       } else {
-        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_badge.svg`);
+        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_medal.svg`);
       }
     }
   } else if (data.contributionCount < 5) {
@@ -259,6 +259,12 @@ const landToHome = function (){
   }
 }
 
+const hasUserRegistered = function (){
+  const userDetail = localStorage.getItem(SPEAKER_DETAILS_KEY);
+  const parsedUserDetails = userDetail ? JSON.parse(userDetail) : false;
+  return parsedUserDetails ? true : false;
+}
+
 const showOrHideExtensionCloseBtn = function (){
   // console.log("here")
 
@@ -273,4 +279,4 @@ const showOrHideExtensionCloseBtn = function (){
 
 
 
-module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn };
+module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered };

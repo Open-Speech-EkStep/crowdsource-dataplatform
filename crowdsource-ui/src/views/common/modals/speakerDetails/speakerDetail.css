@@ -1,0 +1,113 @@
+#userModal .modal-title{
+    color: #111111;
+}
+
+#userModal #form-sub-heading{
+    color: #666666;
+}
+
+#userModal .user-name-hint{
+    color: #666666;
+}
+
+#userModal .form-label{
+    color: #666666;
+}
+
+#userModal .form-control{
+    color: #666666 !important;
+}
+
+#userModal .form-check-label{
+    color: #666666;
+}
+
+#userModal #tnc_link{
+    color: #111111;
+}
+
+#userModal #tnc_link a{
+    color: #007BFF;
+}
+
+#userModal #proceed-box{
+    min-width: 240px;
+    padding: 8px 20px 8px 20px;
+    font-size: 18px;
+    line-height: 32px;
+    border-width: 0px;
+}
+
+@media (max-width: 767px) {
+    #userModal .speakerDetails {
+      height: 500px;
+      overflow: auto;
+    }
+
+    #userModal .user-name-hint{
+        line-height: 12px;
+        font-size: 11px;
+    }
+}
+
+@media (min-width: 767px) {
+    #userModal .speakerDetails {
+      height: 700px;
+      overflow: auto;
+    }
+
+    #userModal .modal-title{
+        line-height: 38px;
+    }
+
+    #userModal #form-sub-heading{
+        margin-bottom: 1.25rem;
+    }
+
+    #userModal .user-name-hint{
+        font-size: 13px;
+        line-height: 24px;
+    }
+
+    #userModal .form-group {
+        margin-bottom: 1.25rem;
+    }
+
+    #userModal .form-label{
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        align-items: center;
+    }
+
+    #userModal .form-control{
+        padding: 12px 18px 12px 16px;
+        font-size: 16px;
+        line-height: 1.2;
+        height: calc(1.5em + .75rem + 12px);
+    }
+
+    #userModal .form-check-label{
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    #userModal #tnc_link{
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    #userModal #proceed-box{
+        min-width: 240px;
+        padding: 8px 20px 8px 20px;
+        font-size: 18px;
+        line-height: 32px;
+        border-width: 0px;
+    }
+}
+
+.px-6 {
+    padding-right: 6vw!important;
+    padding-left: 6vw!important;
+}

@@ -8,6 +8,7 @@ const {
   MODULE,
   TOP_LANGUAGES_BY_HOURS
 } = require("../common/constants");
+const { onChangeUser,onOpenUserDropDown,showUserProfile } = require('../common/header');
 
 const {
   setPageContentHeight,
@@ -18,7 +19,6 @@ const {
 } = require("../common/utils");
 
 // const {downloadPdf} = require('../common/downloadableBadges');
-const {showUserProfile} = require('../common/header');
 const {showByHoursChart,showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge} = require('../common/common');
 
 const CURRENT_INDEX = "sunoValidationCurrentIndex";
@@ -173,6 +173,8 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName)
+    onChangeUser('./validator-thank-you.html',MODULE.suno.value);
+    onOpenUserDropDown();
     toggleFooterPosition();
     setPageContentHeight();
     setSentencesContributed();

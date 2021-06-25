@@ -21,7 +21,7 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho India", PAGE_TITLE:"Validate",img:"../../img/en-LikhoIndiaLogo.svg",homePath:"./home.html"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho", PAGE_TITLE:"Validate",img:"../../img/en-LikhoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
@@ -74,7 +74,7 @@
 
             <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-sentences-row">
                 <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-bold">
-                        <%= __('Thank you for your enthusiasm to validate the translations.') %>
+                        <%= __('Thank you for your effort to validate translations.') %>
                     </label><br><br>
                     <p>
                         <%- __('We do not have any data in <span id="spn-validation-language"></span> language. Please try again later.') %>
@@ -143,6 +143,7 @@
         <div class="row my-3 p-3" style="justify-content:flex-end">
             <%- include ../common/virtualKeyboardBtn.ejs %>
         </div>
+        <%- include ../common/speakerDetails.ejs %>
         <%- include('../common/sourceInfo.ejs') %>
         <%- include('../common/feedback.ejs', {page: "Validate"}) %>
         <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the sentence", reportThankYou: "Your feedback helps us keep Likho India relevant, we appreciate you taking time to leave the feedback.", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>

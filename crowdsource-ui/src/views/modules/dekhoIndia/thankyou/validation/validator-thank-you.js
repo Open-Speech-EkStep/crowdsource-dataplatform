@@ -17,7 +17,7 @@ const {
 } = require("../common/utils");
 // const {downloadPdf} = require('../common/downloadableBadges');
 const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../common/common');
-const {showUserProfile} = require('../common/header');
+const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { initializeFeedbackModal } = require('../common/feedback');
 const CURRENT_INDEX = "dekhoValidatorCurrentIndex";
 const dekhoValidatorCountKey = 'dekhoValidatorCount';
@@ -169,7 +169,8 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName);
-
+    onChangeUser('./validator-thank-you.html',MODULE.dekho.value);
+    onOpenUserDropDown();
     setPageContentHeight();
     setSentencesContributed();
     toggleFooterPosition();

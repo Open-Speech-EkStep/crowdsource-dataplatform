@@ -220,7 +220,6 @@ workflows:
             - push_dev_image
             - push_dev_db_refresher_image
 
-
       - approve_to_deploy:
           name: approve_test_deployment_aks
           type: approval
@@ -231,7 +230,6 @@ workflows:
           filters:
             branches:
               only: azure
-
 
       - db_migrate_azure:
           name: migrate_test_azure
@@ -263,8 +261,6 @@ workflows:
           requires:
             - push_test_image
 
-
-
       - approve_to_deploy:
           name: approve_uat_deployment_aks
           type: approval
@@ -275,7 +271,6 @@ workflows:
           filters:
             branches:
               only: azure
-
 
       - db_migrate_azure:
           name: migrate_uat_azure
@@ -300,15 +295,12 @@ workflows:
           requires:
             - build_uat_ui
 
-
       - aks_deployment:
           name: uat_deployment_aks
           cluster-name: ${AZURE_CLUSTER_NAME}
           env-name: uat
           requires:
             - push_uat_image
-
-
 
       - approve_to_deploy:
           name: approve_prod_deployment_aks
@@ -319,7 +311,6 @@ workflows:
           filters:
             branches:
               only: azure
-
 
       - db_migrate_azure:
           name: migrate_prod_azure
@@ -344,18 +335,12 @@ workflows:
           requires:
             - build_prod_ui
 
-
       - aks_deployment:
           name: prod_deployment_eks
           cluster-name: ${AZURE_CLUSTER_NAME}
           env-name: prod
           requires:
             - push_prod_image
-
-
-
-
-
       # - aws-ecr/build-and-push-image:
       #     name: push_dev_image
       #     repo: ${REPO}
