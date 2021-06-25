@@ -1,9 +1,13 @@
 #!/bin/bash
 echo "Db refresh Initiating...";
 cd /usr/src/app/tb_files
-psql "postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}" -f /usr/src/app/db_refresh.sql
+
+DB_URL="postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}"
+CONNECTION_URI=$(urlencode -m "$DB_URL")
+
+psql $CONNECTION_URI -f /usr/src/app/db_refresh.sql
 echo "Db refresh Complete!"
-psql "postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}" -f /usr/src/app/db_queries.sql
+psql $CONNECTION_URI -f /usr/src/app/db_queries.sql
 echo "Jsons update Complete!"
 ls -lrt
 
