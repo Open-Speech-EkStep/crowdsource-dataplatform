@@ -205,8 +205,11 @@ function initializeBlock() {
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
     setSayListenBackground();
-    let top_lang = getDefaultLang();
-
+    let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    if(!top_lang){
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
+        top_lang = DEFAULT_CON_LANGUAGE;
+    }
     const $languageNavBar = $('#language-nav-bar');
     const $sayListenLanguage = $('#say-listen-language');
 

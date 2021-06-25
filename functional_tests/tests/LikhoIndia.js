@@ -13,7 +13,7 @@ const {
 } = require('taiko');
 
 step("Validate Likho India content", async function() {
-  assert.ok(await text('Help your language by translating text').exists());
+  assert.ok(await text('Enrich your language by translating text').exists());
   assert.ok(await text('Validate').exists());
   assert.ok(await text('Translate').exists());
 });
@@ -41,7 +41,7 @@ step("Close button should close the pop up and user should see Likho India Home 
     await click(taiko.button({ class: 'close float-right' }))
   }
 
-  assert.ok(await text("Help your language by translating text").exists());
+  assert.ok(await text("Enrich your language by translating text").exists());
 });
 
 step("Validate Thank you page content for Likho India", async function() {
@@ -77,7 +77,7 @@ step("When user clicks on back button, user should land on Likho India home page
     await click(taiko.text("Home"))
     await taiko.waitFor(1000)
 }
-assert.ok(await text("Help your language by translating text").isVisible());
+assert.ok(await text("Enrich your language by translating text").isVisible());
 });
 
 step("When user clicks on Contribute more button , user should see no data available message for Likho India", async function() {

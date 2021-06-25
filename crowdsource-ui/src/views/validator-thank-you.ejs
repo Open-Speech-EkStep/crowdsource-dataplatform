@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<%- include('common/headerForContributor.ejs',{path:"./",MODULE:"Bolo India", PAGE_TITLE:""}); %>
+<%- include('common/headerForContributor.ejs',{path:"./",MODULE:"Bolo India", PAGE_TITLE:"",img:"../img/en-BoloIndiaLogo.svg"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center">
         <div class="row position-absolute top-back-btn" style="top:80px;left:35px">
@@ -75,7 +75,7 @@
                 <h4 class="mb-3 mt-5 mt-lg-0"><%- __('You are driving the spirit of your language') %></h4>
             </div>
             <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('sentence(s) validated') %></p>
-            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="badges.html">Know more</a>') %></p>
+            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your Bhasha Samarthak <span id="next_badge_name"></span> Badge. <a href="badges.html">Know more</a>') %></p>
             <div class="row d-none" id="milestone_text">
                 <div class="col-12 col-lg-5 col-md-5 mt-lg-5 justify-content-between">
                     <div>
@@ -92,7 +92,7 @@
                 <div class="col-12 col-lg-7 col-md-7 msg-box mt-5">
                     <h4 class="mb-3 mt-lg-5"><%- __('You’ve earned your <span id="current_badge_name"></span> Badge') %></h4>
                     <p><span id="user-contribution" class="text-primary"></span> <%- __('<span id="current_badge_name_1"></span> Contributor level achieved for validating <span id="current_badge_count"></span> sentences.') %></p>
-                    <p class="mt-lg-5"><%- __('Your next goal is to reach <span id="next_badge_count"></span> sentences to unlock your <span id="next_badge_name_1"></span> Badge. <a href="badges.html">Know more</a>') %></p>
+                    <p class="mt-lg-5"><%- __('Your next goal is to reach <span id="next_badge_count"></span> sentences to unlock your Bhasha Samarthak <span id="next_badge_name_1"></span> Badge. <a href="badges.html">Know more</a>') %></p>
                 </div>
             </div>
             <%- include ../../build/views/common/sharableLink.ejs %>

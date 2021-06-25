@@ -21,7 +21,9 @@ const {
   ALL_LANGUAGES,
   LIKHO_FROM_LANGUAGE,
   LIKHO_TO_LANGUAGE,
-  SPEAKER_DETAILS_KEY
+  SPEAKER_DETAILS_KEY,
+  CONTRIBUTION_LANGUAGE,
+  DEFAULT_CON_LANGUAGE
 } = require('../common/constants');
 
 const {initializeFeedbackModal} = require('../common/feedback')
@@ -65,6 +67,11 @@ function initializeBlock() {
   const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
   toggleFooterPosition();
+
+  let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  if(!contributionLanguage){
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
+  }
 
   getAvailableLanguages('parallel').then(languagePairs => {
     const { datasetLanguages, contributionLanguages } = languagePairs;

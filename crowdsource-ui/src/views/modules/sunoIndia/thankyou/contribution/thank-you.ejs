@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno India", PAGE_TITLE:"Transcribe"}); %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno India", PAGE_TITLE:"Transcribe",img:"../../img/en-SunoIndiaLogo.svg"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center">
         <div class="row position-absolute top-back-btn">
@@ -77,7 +77,7 @@
                 <h4 class="mb-3 mt-5 mt-lg-0"><%- __('You are driving the spirit of your language') %></h4>
             </div>
             <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('sentence(s) contributed') %></p>
-            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Badge. <a href="../badges.html">Know more</a>') %></p>
+            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your Bhasha Samarthak <span id="next_badge_name"></span> Badge. <a href="../badges.html">Know more</a>') %></p>
             <%- include('../common/badgesMilestone.ejs',{MODULE:"suno"}) %>
             <%- include ../common/sharableLink.ejs %>
             <div class="badges_information">

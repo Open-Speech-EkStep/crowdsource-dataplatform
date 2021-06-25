@@ -8,7 +8,6 @@ const {
   setUserNameOnInputFocus,
   setStartRecordingBtnOnClick,
   setGenderRadioButtonOnClick,
-  addlistenerToGenderRadios
 } = require('../common/speakerDetails');
 
 const {setLangNavBar} = require('../common/languageNavBar')
@@ -29,12 +28,16 @@ function initializeBlock() {
   const age = document.getElementById('age');
   const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
-  let sentenceLanguage = DEFAULT_CON_LANGUAGE;
-  toggleFooterPosition();
-  let top_lang = getDefaultLang();
-  if(top_lang){
-    updateLocaleLanguagesDropdown(top_lang);
+  let sentenceLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  if(!sentenceLanguage){
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
+    sentenceLanguage = DEFAULT_CON_LANGUAGE;
   }
+  toggleFooterPosition();
+  // let top_lang = getDefaultLang();
+  // if(top_lang){
+    updateLocaleLanguagesDropdown(sentenceLanguage);
+  // }
 
   const $languageNavBar = $('#language-nav-bar');
   const $sayListenLanguage = $('#say-listen-language');
@@ -43,8 +46,8 @@ function initializeBlock() {
   $sayListenLanguage.on('click', (e) => {
     const targetedDiv = e.target;
     const language = targetedDiv.getAttribute("value");
-    if (top_lang !== language) {
-      top_lang = language;
+    if (sentenceLanguage !== language) {
+      sentenceLanguage = language;
       localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
       localStorage.setItem("i18n", "en");
       setLangNavBar(targetedDiv, language, $languageNavBar);
@@ -56,9 +59,9 @@ function initializeBlock() {
   $languageNavBar.on('click', (e) => {
     const targetedDiv = e.target;
     const language = targetedDiv.getAttribute('value');
-    if (top_lang !== language) {
+    if (sentenceLanguage !== language) {
       localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-      top_lang = language;
+      sentenceLanguage = language;
       const $6th_place = $('#6th_option')
       const previousActiveDiv = $languageNavBar.find('.active') || $6th_place;
       previousActiveDiv.removeClass('active');
@@ -72,8 +75,8 @@ function initializeBlock() {
   });
 
   $('#start_recording').on('click', () => {
-    sentenceLanguage = top_lang;
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    // sentenceLanguage = top_lang;
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
     localStorage.setItem("selectedType", "contribute");
     if(!hasUserRegistered()){
       $('#userModal').modal('show');
@@ -84,8 +87,8 @@ function initializeBlock() {
   });
 
   $('#start_validating').on('click',()=>{
-    sentenceLanguage = top_lang;
-    localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    // sentenceLanguage = top_lang;
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
     localStorage.setItem("selectedType", "validate");
     if(!hasUserRegistered()){
       $('#userModal').modal('show');
@@ -104,9 +107,6 @@ function initializeBlock() {
   setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
-  // addlistenerToGenderRadios();
-
-
 
   onChangeUser('./home.html',MODULE.suno.value);
   if(hasUserRegistered()){

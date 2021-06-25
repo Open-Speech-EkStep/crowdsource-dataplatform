@@ -24,7 +24,7 @@ describe("getRowWithBadge for selected module and contribution type",()=>{
     test("should get row of bronze badge for contribution in bolo India with sentence count , level, badgeName",()=>{
         const localeString = {Level:'Level', bronze:'bronze',Sentences:'Sentences'}
         const badgeDescription = `<p class="text-left mb-0 ml-3">Recording: 400 Sentences</p>`;
-        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 3</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/bolo_bronze_badge.png class="table-img" height="76" width="63" alt=bronze id="bronze_contribute" rel="popover"></div><span>bronze</span></td></tr>`
+        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 3</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/bronze_medal.svg class="table-img" height="76" width="63" alt=bronze id="bronze_contribute" rel="popover"></div><span>bronze</span></td></tr>`
         const rowWithBadge = getRowWithBadge(3, 400, 'bronze', localeString, 'text', 'contribute');
         expect(rowWithBadge).toEqual(row)
     })
@@ -32,7 +32,7 @@ describe("getRowWithBadge for selected module and contribution type",()=>{
     test("should get row of silver badge for contribution in suno India with sentence count , level, badgeName",()=>{
         const localeString = {Level:'Level', silver:'silver',Sentences:'Sentences'}
         const badgeDescription = `<p class="text-left mb-0 ml-3">Transcribing: 800 Sentences</p>`;
-        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 4</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/suno_silver_badge.png class="table-img" height="76" width="63" alt=silver id="silver_contribute" rel="popover"></div><span>silver</span></td></tr>`
+        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 4</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/suno_silver_medal.svg class="table-img" height="76" width="63" alt=silver id="silver_contribute" rel="popover"></div><span>silver</span></td></tr>`
         const rowWithBadge = getRowWithBadge(4, 800, 'silver', localeString, 'asr', 'contribute');
         expect(rowWithBadge).toEqual(row)
     }) 
@@ -40,7 +40,7 @@ describe("getRowWithBadge for selected module and contribution type",()=>{
     test("should get row of gold badge for contribution in likho India with sentence count , level, badgeName",()=>{
         const localeString = {Level:'Level', gold:'gold',Sentences:'Sentences'}
         const badgeDescription = `<p class="text-left mb-0 ml-3">Translating: 900 Sentences</p>`;
-        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 2</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/likho_gold_badge.png class="table-img" height="76" width="63" alt=gold id="gold_contribute" rel="popover"></div><span>gold</span></td></tr>`
+        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 2</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/likho_gold_medal.svg class="table-img" height="76" width="63" alt=gold id="gold_contribute" rel="popover"></div><span>gold</span></td></tr>`
         const rowWithBadge = getRowWithBadge(2, 900, 'gold', localeString, 'parallel', 'contribute');
         expect(rowWithBadge).toEqual(row)
     })
@@ -48,7 +48,7 @@ describe("getRowWithBadge for selected module and contribution type",()=>{
     test("should get row of platinum badge for contribution in dekho India with sentence count , level, badgeName",()=>{
         const localeString = {Level:'Level', platinum:'platinum',Sentences:'Sentences'}
         const badgeDescription = `<p class="text-left mb-0 ml-3">Labelling: 200 Images</p>`;
-        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 1</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/dekho_platinum_badge.png class="table-img" height="76" width="63" alt=platinum id="platinum_contribute" rel="popover"></div><span>platinum</span></td></tr>`
+        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 1</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/dekho_platinum_medal.svg class="table-img" height="76" width="63" alt=platinum id="platinum_contribute" rel="popover"></div><span>platinum</span></td></tr>`
         const rowWithBadge = getRowWithBadge(1, 200, 'platinum', localeString, 'ocr', 'contribute');
         expect(rowWithBadge).toEqual(row)
     })
@@ -59,7 +59,7 @@ describe("getCard for selected module, badge and contribution type",()=> {
         const localeString = {bronze: 'bronze'}
         const bronzeCard = `<div class="text-center">
                 <div class="py-2">
-                    <img src=../img/bolo_bronze_badge.png alt="bronze_badge" class="img-fluid">
+                    <img src=../img/bronze_medal.svg alt="bronze_badge" class="img-fluid">
                 </div>
                 <h3>bronze</h3>
             </div>`
@@ -71,7 +71,7 @@ describe("getCard for selected module, badge and contribution type",()=> {
         const localeString = {gold: 'gold'}
         const goldCard = `<div class="text-center">
                 <div class="py-2">
-                    <img src=../img/suno_gold_badge.png alt="gold_badge" class="img-fluid">
+                    <img src=../img/suno_gold_medal.svg alt="gold_badge" class="img-fluid">
                 </div>
                 <h3>gold</h3>
             </div>`
@@ -83,7 +83,7 @@ describe("getCard for selected module, badge and contribution type",()=> {
         const localeString = {platinum: 'platinum'}
         const platinumCard = `<div class="text-center">
                 <div class="py-2">
-                    <img src=../img/dekho_platinum_badge.png alt="platinum_badge" class="img-fluid">
+                    <img src=../img/dekho_platinum_medal.svg alt="platinum_badge" class="img-fluid">
                 </div>
                 <h3>platinum</h3>
             </div>`
@@ -95,7 +95,7 @@ describe("getCard for selected module, badge and contribution type",()=> {
         const localeString = {silver: 'silver'}
         const platinumCard = `<div class="text-center">
                 <div class="py-2">
-                    <img src=../img/likho_silver_badge.png alt="silver_badge" class="img-fluid">
+                    <img src=../img/likho_silver_medal.svg alt="silver_badge" class="img-fluid">
                 </div>
                 <h3>silver</h3>
             </div>`
@@ -108,7 +108,7 @@ describe("getRowWithBadge for selected module and validating type",()=>{
     test("should get row of bronze badge for validation in bolo India with sentence count , level, badgeName",()=>{
         const localeString = {Level:'Level', bronze:'bronze',Sentences:'Sentences'}
         const badgeDescription = `<p class="text-left mb-0 ml-3">Validating: 400 Sentences</p>`;
-        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 3</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/bolo_bronze_badge_val.png class="table-img" height="76" width="63" alt=bronze id="bronze_validate" rel="popover"></div><span>bronze</span></td></tr>`
+        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 3</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/bronze_medal_val.svg class="table-img" height="76" width="63" alt=bronze id="bronze_validate" rel="popover"></div><span>bronze</span></td></tr>`
         const rowWithBadge = getRowWithBadge(3, 400, 'bronze', localeString, 'text', 'validate');
         expect(rowWithBadge).toEqual(row)
     })
@@ -116,7 +116,7 @@ describe("getRowWithBadge for selected module and validating type",()=>{
     test("should get row of silver badge for validation in suno India with sentence count , level, badgeName",()=>{
         const localeString = {Level:'Level', silver:'silver',Sentences:'Sentences'}
         const badgeDescription = `<p class="text-left mb-0 ml-3">Validating: 800 Sentences</p>`;
-        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 4</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/suno_silver_badge_val.png class="table-img" height="76" width="63" alt=silver id="silver_validate" rel="popover"></div><span>silver</span></td></tr>`
+        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 4</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/suno_silver_medal_val.svg class="table-img" height="76" width="63" alt=silver id="silver_validate" rel="popover"></div><span>silver</span></td></tr>`
         const rowWithBadge = getRowWithBadge(4, 800, 'silver', localeString, 'asr', 'validate');
         expect(rowWithBadge).toEqual(row)
     }) 
@@ -124,7 +124,7 @@ describe("getRowWithBadge for selected module and validating type",()=>{
     test("should get row of gold badge for validation in likho India with sentence count , level, badgeName",()=>{
         const localeString = {Level:'Level', gold:'gold',Sentences:'Sentences'}
         const badgeDescription = `<p class="text-left mb-0 ml-3">Validating: 900 Sentences</p>`;
-        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 2</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/likho_gold_badge_val.png class="table-img" height="76" width="63" alt=gold id="gold_validate" rel="popover"></div><span>gold</span></td></tr>`
+        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 2</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/likho_gold_medal_val.svg class="table-img" height="76" width="63" alt=gold id="gold_validate" rel="popover"></div><span>gold</span></td></tr>`
         const rowWithBadge = getRowWithBadge(2, 900, 'gold', localeString, 'parallel', 'validate');
         expect(rowWithBadge).toEqual(row)
     })
@@ -132,7 +132,7 @@ describe("getRowWithBadge for selected module and validating type",()=>{
     test("should get row of platinum badge for validation in dekho India with sentence count , level, badgeName",()=>{
         const localeString = {Level:'Level', platinum:'platinum',Sentences:'Sentences'}
         const badgeDescription = `<p class="text-left mb-0 ml-3">Validating: 200 Images</p>`;
-        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 1</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/dekho_platinum_badge_val.png class="table-img" height="76" width="63" alt=platinum id="platinum_validate" rel="popover"></div><span>platinum</span></td></tr>`
+        const row = `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">Level 1</td><td>${badgeDescription}</td><td class="text-center"><div><img src=../img/dekho_platinum_medal_val.svg class="table-img" height="76" width="63" alt=platinum id="platinum_validate" rel="popover"></div><span>platinum</span></td></tr>`
         const rowWithBadge = getRowWithBadge(1, 200, 'platinum', localeString, 'ocr', 'validate');
         expect(rowWithBadge).toEqual(row)
     })
@@ -143,7 +143,7 @@ describe("getCard for selected module, badge and validation type",()=> {
         const localeString = {bronze: 'bronze'}
         const bronzeCard = `<div class="text-center">
                 <div class="py-2">
-                    <img src=../img/bolo_bronze_badge_val.png alt="bronze_badge" class="img-fluid">
+                    <img src=../img/bronze_medal_val.svg alt="bronze_badge" class="img-fluid">
                 </div>
                 <h3>bronze</h3>
             </div>`
@@ -155,7 +155,7 @@ describe("getCard for selected module, badge and validation type",()=> {
         const localeString = {gold: 'gold'}
         const goldCard = `<div class="text-center">
                 <div class="py-2">
-                    <img src=../img/suno_gold_badge_val.png alt="gold_badge" class="img-fluid">
+                    <img src=../img/suno_gold_medal_val.svg alt="gold_badge" class="img-fluid">
                 </div>
                 <h3>gold</h3>
             </div>`
@@ -167,7 +167,7 @@ describe("getCard for selected module, badge and validation type",()=> {
         const localeString = {platinum: 'platinum'}
         const platinumCard = `<div class="text-center">
                 <div class="py-2">
-                    <img src=../img/dekho_platinum_badge_val.png alt="platinum_badge" class="img-fluid">
+                    <img src=../img/dekho_platinum_medal_val.svg alt="platinum_badge" class="img-fluid">
                 </div>
                 <h3>platinum</h3>
             </div>`
@@ -179,7 +179,7 @@ describe("getCard for selected module, badge and validation type",()=> {
         const localeString = {silver: 'silver'}
         const platinumCard = `<div class="text-center">
                 <div class="py-2">
-                    <img src=../img/likho_silver_badge_val.png alt="silver_badge" class="img-fluid">
+                    <img src=../img/likho_silver_medal_val.svg alt="silver_badge" class="img-fluid">
                 </div>
                 <h3>silver</h3>
             </div>`

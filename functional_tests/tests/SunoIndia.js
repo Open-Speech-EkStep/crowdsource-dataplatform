@@ -22,7 +22,7 @@ step("Select <SunoIndiaLink> from header", async function (SunoIndiaLink) {
 });
 
 step("Validate Suno India content", async function () {
-    assert.ok(await text('Help your language by transcribing audio into text').exists());
+    assert.ok(await text('Enrich your language by transcribing audio into text').exists());
     assert.ok(await text('Validate').exists());
     assert.ok(await text('Transcribe').exists());
 });
@@ -86,7 +86,7 @@ step("User should see the top Language graph and other stats", async function ()
 //         await click(taiko.button({ class: 'close float-right' }))
 //     }
 
-//     assert.ok(await text("Help your language by transcribing audio into text").exists());
+//     assert.ok(await text("Enrich your language by transcribing audio into text").exists());
 // });
 
 step("When user clicks on back button, user should land on home page", async function () {
@@ -96,7 +96,7 @@ step("When user clicks on back button, user should land on home page", async fun
         await click(taiko.text("Home"))
         await taiko.waitFor(1500)
     }
-    assert.ok(await text("Help your language by transcribing audio into text").exists());
+    assert.ok(await text("Enrich your language by transcribing audio into text").exists());
 
 });
 

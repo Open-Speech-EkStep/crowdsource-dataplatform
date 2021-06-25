@@ -1,0 +1,22 @@
+
+
+@media (max-width: 767px) {
+    .para-font {
+        font-size: 12px;
+    }
+
+    #moduleLogo img{
+        width: 55px;
+        height: 50px;
+    }
+    .module-intro-heading{
+        font-size: 20px;
+    }
+
+}
+
+@media (min-width: 767px) {
+    .para-font {
+        font-size: 20px;
+    }
+}
