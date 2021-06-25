@@ -34,9 +34,9 @@ Tags: component
 * when user clicks on the Contribute More button, user should not see the Instructions page again
 
 ## Validate Validator flow
+* Change user name to "Dummy User"
 * Navigate to "Validate" button and click "Validate" button
-* Add "Dummy User" Username for Valiadtion
-* When user click on Lets Go Button for Validate, user should "not" see instructions to record
+* user should "not" see instructions to record
 * "skip_button" should be enabled , "dislike_button" "like_button" buttons should be disabled
 * User plays the audio , "dislike_button","like_button" should be disabled
 * User clicks on "dislike_button" , he should see next sentence and "dislike_button" "like_button" buttons should be disabled
