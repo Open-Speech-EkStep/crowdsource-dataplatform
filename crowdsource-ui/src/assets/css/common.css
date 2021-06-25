@@ -258,6 +258,11 @@ body {
 
 @media (min-width: 768px) {
 
+  .logo{
+    width: 190px;
+    height: 48px;
+  }
+
 .btn-custom-primary {
   min-width: 240px;
   max-width: 240px;
@@ -326,6 +331,11 @@ body {
       font-size: 12px;
     padding: 2px 6px;
     margin-top: 14px;
+    }
+
+    .logo{
+      width: 150px;
+      height: 48px;
     }
 
     #content-wrapper #btn-nav{
