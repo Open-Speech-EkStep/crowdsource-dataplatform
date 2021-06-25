@@ -563,7 +563,6 @@ function executeOnLoad() {
     $("#report_submit_id").on('click', handleSubmitFeedback);
 
     $("#report_btn").on('click', function () {
-        console.log("click");
         $reportModal.modal('show');
     });
 
