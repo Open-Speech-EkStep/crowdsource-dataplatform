@@ -1,5 +1,0 @@
-# Check user details for <cardtype> for <flow> India
-* Navigate to <cardtype> button and click <cardtype> button
-* Username field should be present
-* if a user enter username and click on Not you change user button , the field should be cleared
-* Close button should close the pop up and user should see <flow> India Home page
