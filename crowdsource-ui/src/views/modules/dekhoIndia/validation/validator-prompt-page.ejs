@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <title>Bhashadaan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
@@ -21,7 +21,7 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Dekho India", PAGE_TITLE:"Validate",img:"../../img/en-DekhoIndiaLogo.svg"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Dekho India", PAGE_TITLE:"Validate",img:"../../img/en-DekhoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
@@ -77,7 +77,7 @@
 
             <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-sentences-row">
                 <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-bold">
-                        <%= __('Thank you for your enthusiasm to validate the image text.') %>
+                        <%= __('Thank you for your enthusiasm to validate the image labels.') %>
                     </label><br><br>
                     <p>
                         <%- __('We do not have any data in <span id="spn-validation-language"></span> language. Please try again later.') %>
@@ -147,7 +147,7 @@
         <%- include ../common/speakerDetails.ejs %>
         <%- include('../common/sourceInfo.ejs') %>
         <%- include('../common/feedback.ejs', {page: "Validate"}) %>
-        <%- include('../common/report.ejs',{reportPara: "Enrich us understand what’s wrong with the image labelled", reportThankYou: "Your feedback helps us keep Dekho India relevant, we appreciate you taking time to leave the feedback.", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
+        <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the image labelled", reportThankYou: "Your feedback helps us keep Dekho India relevant, we appreciate you taking time to leave the feedback.", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
         <%- include ../common/errorModal.ejs %>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

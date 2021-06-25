@@ -480,8 +480,7 @@ $(document).ready(() => {
     localStorage.removeItem(currentIndexKey);
     const type = 'text';
     const toLanguage = ""; //can be anything
-
-    fetch(`/contributions/${type}?from=${language}&to=${toLanguage}`, {
+    fetch(`/contributions/${type}?from=${language}&to=${toLanguage}&username=${localSpeakerDataParsed.userName}`, {
       credentials: 'include',
       mode: 'cors'
     })

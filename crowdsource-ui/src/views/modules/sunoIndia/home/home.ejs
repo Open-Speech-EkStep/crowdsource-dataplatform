@@ -2,18 +2,20 @@
 <html lang="en">
 
 <head>
-    <title>Bolo India: A crowdsourcing initiative for Indian languages (Beta)</title>
+    <title>Bhashadaan: A crowdsourcing initiative for Indian languages (Beta)</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
-    <meta name="description" content="Bolo India: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
-    <meta property="og:title" content="<%= __('Bolo India: A crowdsourcing initiative for Indian languages') %>">
+    <meta name="description" content="Bhashadaan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta property="og:title" content="<%= __('Bhashadaan: A crowdsourcing initiative for Indian languages') %>">
     <meta property="og:type" content="website">
     <meta property="og:description" content="<%= __('I\'ve contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?') %>">
     <meta property="og:site_name" content="Bolo India ">
     <meta property="og:url" content="https://boloindia.nplt.in">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Rowdies:300,400,700,900&display=swap">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.css">
@@ -27,7 +29,7 @@
 <%- include('../common/header.ejs',{home:"../home.html", bolo:"../boloIndia/home.html", suno:"./home.html",likho:"../likhoIndia/home.html",dekho:"../dekhoIndia/home.html",path:"../"}); %>
 <div class="container-fluid supreme-container">
     <div class="row">
-        <%- include('../common/moduleIntro.ejs',{name:'Suno India',intro:'Enrich your language by transcribing audio into text',img:"en-SunoIndiaLogo.svg"}); %>
+        <%- include('../common/moduleIntro.ejs',{name:'Suno',intro:'Enrich your language by transcribing audio into text',img:"en-SunoIndiaLogo.svg"}); %>
     </div>
     <div class="row">
         <%- include ../common/languageNavBar.ejs %>

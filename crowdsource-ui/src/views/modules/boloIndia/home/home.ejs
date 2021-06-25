@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <title>Bolo India: A crowdsourcing initiative for Indian languages (Beta)</title>
+    <title>Bhashadaan: A crowdsourcing initiative for Indian languages (Beta)</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
-    <meta name="description" content="Bolo India: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
-    <meta property="og:title" content="<%= __('Bolo India: A crowdsourcing initiative for Indian languages') %>">
+    <meta name="description" content="Bhashadaan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta property="og:title" content="<%= __('Bhashadaan: A crowdsourcing initiative for Indian languages') %>">
     <meta property="og:type" content="website">
     <meta property="og:description" content="<%= __('I\'ve contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?') %>">
     <meta property="og:site_name" content="Bolo India ">
@@ -15,11 +15,14 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-B5X6CXDBNP"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-B5X6CXDBNP")</script>
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Rowdies:300,400,700,900&display=swap">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/home.css">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/sunoIndia/home.css">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/common.css">
 </head>
 
@@ -27,13 +30,13 @@
 <%- include('../common/header.ejs',{home:"../home.html", bolo:"./home.html", suno:"../sunoIndia/home.html",likho:"../likhoIndia/home.html",dekho:"../dekhoIndia/home.html",path:"../"}); %>
 <div class="container-fluid supreme-container">
     <div class="row">
-        <%- include('../common/moduleIntro.ejs',{name:'Bolo India',intro:'Enrich your language by donating your voice', img:"en-BoloIndiaLogo.svg"}); %>
+        <%- include('../common/moduleIntro.ejs',{name:'Bolo',intro:'Enrich your language by donating your voice', img:"en-BoloIndiaLogo.svg"}); %>
     </div>
     <div class="row">
         <div class="col-12 col-md-12 col-lg-10 offset-lg-1 mt-4">
             <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 flex-flow-nowrap" id="contribution_lang_navbar">
                 <div class="mx-2">
-                    <%= __('Select the language for voluntary contribution') %>:
+                    <%= __('Select the language for contribution') %>:
                 </div>
                 <div class="navbar-collapse d-inherit mt-2 mt-lg-0 mt-md-0" id="navbarSupportedLanguage">
                     <div class="col-5 col-lg-5 col-xl-4" id="nav-bar-loader">
@@ -99,7 +102,7 @@
                 </div>
                 <div class="col-12 d-none position-absolute px-0" id="listen-p-2" style="bottom:1rem">
                     <div>
-                        <%= __('Enrich us by validating the recordings that others have contributed') %>
+                        <%= __('Help us by validating the recordings that others have contributed') %>
                     </div>
                     <div class="col-7 col-lg-6 col-xl-6" id="listen-loader">
                         <div><span class="spinner"></span></div>
@@ -120,7 +123,7 @@
                         <div><span class="spinner"></span></div>
                     </div>
                     <div class="row text-center contribution-details" id="contribution-details">
-                        <%- include('../common/contributionStats.ejs',{labels :['Languages','Speakers contributed','Duration contributed','Duration validated']}) %>
+                        <%- include('../common/contributionStats.ejs',{labels :['Languages','Speakers contributed','Duration recorded','Duration validated']}) %>
                     </div>
                 </div>
             </div>
@@ -182,13 +185,13 @@
             </div>
             <div class="modal-body px-6" id="bolo-user-details">
                 <p class="text-muted text-center">
-                    <%= __('All the fields are optional') %>
+                    <%= __('All fields are optional but you can enhance your contribution by providing non personal demographic details.') %>
                 </p>
                 <div class="col-12 text-center text-primary" id="boloResetBtn" style="cursor:pointer">
                     <%= __('Not You? Change User') %>
                 </div>
                 <div class="form-group mt-5"><label for="bolo-username" class="form-label">
-                        <%= __('Username') %>
+                        <%= __('Enter Username') %>
                     </label> <input class="form-control" maxlength="12" id="bolo-username" data-toggle="tooltip" placeholder="<%= __('Enter preferred username') %>" title="<% __('Username cannot be more than 12 characters') %>">
                     <div class="text-danger mt-2 d-none" id="bolo-username-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px" height="18px">
                             <path d="M0 0h24v24H0z" fill="none"/>

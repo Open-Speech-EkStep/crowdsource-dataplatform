@@ -381,8 +381,8 @@ const initialize = () => {
             Object.assign(sentencesObj, { sentences: [] });
             localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
             localStorage.setItem(currentIndexKey, currentIndex);
-            const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
-            notyf.success(msg);
+            // const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
+            // notyf.success(msg);
             $('#loader').show();
         } else if (currentIndex < totalItems - 1) {
             incrementCurrentIndex();

@@ -2,11 +2,11 @@
 
 
 <head>
-    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <title>Bhashadaan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
-    <meta name="description" content="Bolo India: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta name="description" content="Bhashadaan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<%- include('common/header/headerWithoutNavBar.ejs',{path:"./", MODULE:"Bolo India", PAGE_TITLE:"Dashboard",img:"../img/en-BoloIndiaLogo.svg"}); %>
+<%- include('common/header/headerWithoutNavBar.ejs',{path:"./", MODULE:"Bolo India", PAGE_TITLE:"Dashboard",img:"../img/en-BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
 <div class="container container-fluid supreme-container">
     <div class="row">
         <div class="col-12">
@@ -70,7 +70,7 @@
                 <div><span class="spinner"></span></div>
             </div>
             <div class="row text-center contribution-details d-none" id="contribution-details">
-                <%- include('../../build/views/common/contributionStats.ejs',{labels :['Languages','Speakers contributed','Duration contributed','Duration validated']})%>
+                <%- include('../../build/views/common/contributionStats.ejs',{labels :['Languages','Speakers contributed','Duration recorded','Duration validated']})%>
             </div>
         </div>
     </div>

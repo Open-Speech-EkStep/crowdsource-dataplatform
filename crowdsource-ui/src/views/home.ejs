@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <title>Bolo India: A crowdsourcing initiative for Indian languages (Beta)</title>
+    <title>Bhashadaan: A crowdsourcing initiative for Indian languages (Beta)</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
-    <meta name="description" content="Bolo India: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
-    <meta property="og:title" content="<%= __('Bolo India: A crowdsourcing initiative for Indian languages') %>">
+    <meta name="description" content="Bhashadaan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta property="og:title" content="<%= __('Bhashadaan: A crowdsourcing initiative for Indian languages') %>">
     <meta property="og:type" content="website">
     <meta property="og:description" content="<%= __('I\'ve contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?') %>">
     <meta property="og:site_name" content="Bolo India ">
@@ -48,7 +48,7 @@
     <div class="row pb-5 mx-0" style="border:2px solid #f0f0f7;background:rgba(223,236,251,.2)">
         <div class="col-12 justify-content-center text-center px-lg-5 px-md-5 px-4">
             <h1 class="mt-5 display-5 font-weight-bolder lh-4 platform-card-section-heading mb-0"><%= __('One platform, multiple crowdsourcing initiatives') %></h1>
-            <p class="mt-4 font-weight-normal platform-card-section-para"><%= __('Create open repository of speech recognition data, parallel translations and labeled images.') %></p>
+            <p class="mt-4 font-weight-normal platform-card-section-para"><%= __('Help to build an open repository of data to digitally enrich your language') %></p>
             <%- include ../../build/views/common/platformCardSection.ejs %>
             <div class="mt-lg-4 mt-md-4 mb-lg-3 mb-md-3 mt-3 mb-5 monthly-goal-section d-none">
                 <span class="m-0 monthly-goal-text"><%= __('Monthly Goal :  ') %></span><span><span class="language-count-box"><span id="language-count"></span><%= __(' languages') %></span><span class="separator"></span><span class="language-goal-box"> <span id="language-goal-each"></span> <%= __('each') %></span></span>
@@ -59,23 +59,21 @@
     <div class="mb-5 pb-3 mt-1" id="badge-section">
         <div class="row my-2 mx-0 justify-content-center">
             <div class="my-4 mt-lg-5 mt-md-5 mb-lg-0 mb-md-0 col-sm home-badge-link p-lg-0 p-md-0">
-                <div class="font-weight-normal home-badge-link-row text-lg-left text-md-center text-center"> <%= __('Engaging with this platform will make you Bhasha Samarthak and add to your pride of enriching data for your local languages') %></div>
+                <div class="font-weight-normal home-badge-link-row text-lg-left text-md-center text-center"> <%= __('Contribute and become a Bhasha Samarthak') %></div>
+                <div class="text-primary text-lg-left text-md-center text-center font-weight-bold home-badge-link-row2 know-more-link mt-4"><a href="./badges.html"><%= __('Know More') %></a></div>
             </div>
             <div class="my-4 mt-lg-5 mt-md-5 mb-lg-0 mb-md-0 col-sm home-badge-row text-center">
                 <img src="../img/badge_group.svg" alt="bronze_medal">
             </div>
-            <div class="col-12 mb-lg-5 mb-md-5 mb-5 p-0">
-                <div class="text-primary text-lg-left text-md-center text-center font-weight-bold home-badge-link-row2 know-more-link"><a href="./badges.html"><%= __('Know More') %></a></div>
-            </div>
         </div>
-        <div class="row p-0 mx-4 mx-lg-0 mx-md-0 mt-lg-0 mt-md-0 mt-1" id="badge-section-card-cover">
+        <div class="row p-0 mx-4 mx-lg-0 mx-md-0 mt-lg-5 mt-md-0 mt-1" id="badge-section-card-cover">
             <div class="col-12 row mx-0 px-0" id="badge-section-card">
                 <div class="col-lg-2 col-12 text-lg-left text-md-center text-center badge-card-img-box">
                     <img src="../img/bronze_medal.svg" alt="bronze image" height="164px" width="135px" class="img-fluid mx-2">
                 </div>
                 <div class="col-lg-10 col-md-12 col-12 text-lg-left text-md-center text-center mx-0 px-0 badge-card-text-box">
-                    <h2 class="pt-lg-4 pt-3 pl-lg-0 pl-md-3 mt-4 mt-lg-0 mt-md-0"><%= __('To win Bhasha Samarthak - Bronze')%></h2>
-                    <h4 class="font-weight-normal mb-lg-2 mb-md-1 pl-lg-0 pl-md-3 mb-5" style="color:#666"><%= __('Contribute just 5 sentences in your languages')%></h4>
+                    <h2 class="pt-lg-4 pt-3 pl-lg-0 pl-md-3 mt-4 mt-lg-0 mt-md-0"><%= __('Bronze Bhasha Samarthak Badge')%></h2>
+                    <h4 class="font-weight-normal mb-lg-2 mb-md-1 pl-lg-0 pl-md-3 mb-5" style="color:#666"><%= __('Contribute just 5 sentences in your language')%></h4>
                     <div class="pb-4 pt-3">
                         <button class="btn btn-custom-outline-primary rounded-pill ml-lg-0 mr-lg-3 mx-1 my-md-2" onclick='location.href="./sunoIndia/home.html"'><%= __('SUNO INDIA') %>
                         </button>

@@ -63,6 +63,12 @@ Tags: component
 * Once user clicks on Others Radio button, Submit button should be enabled
 * When user submits , Thank you pop up should come & close button should close the pop up
 
+//## Check About Us Page
+//* Navigate to "About Us" button and click "About Us" button
+//* Validate about us content
+//* Start Recording button is disabled
+//* Select Language "Hindi" enables the Start Recording button
+
 ## Check Terms and Condition links from Footer
 * Navigate to "Terms & Conditions" button and click "Terms & Conditions" button
 * Validate terms and condition content
