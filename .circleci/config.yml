@@ -163,7 +163,7 @@ workflows:
             - node/test
           filters:
             branches:
-              only: azure
+              only: master
 
       - db_migrate_azure:
           name: migrate_dev_azure
@@ -231,7 +231,7 @@ workflows:
             # - functional_tests_dev
           filters:
             branches:
-              only: azure
+              only: master
 
       - db_migrate_azure:
           name: migrate_test_azure
@@ -286,7 +286,7 @@ workflows:
             # - functional_tests_dev
           filters:
             branches:
-              only: azure
+              only: master
 
       - db_migrate_azure:
           name: migrate_uat_azure
@@ -332,7 +332,7 @@ workflows:
             # - functional_tests_dev
           filters:
             branches:
-              only: azure
+              only: master
 
       - db_migrate_azure:
           name: migrate_prod_azure
