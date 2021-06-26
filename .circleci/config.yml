@@ -116,7 +116,7 @@ jobs:
     steps:
       - azure-cli/install
       - azure-cli/login-with-user:
-          alternate-tenant: true
+          alternate-tenant: false
       - run:
           name: cdn_invalidation
           command: |
