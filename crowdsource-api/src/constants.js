@@ -7,7 +7,7 @@ const KIDS = 'medium';
 const ADULT = 'medium';
 const MAX_LENGTH = 100;
 const MOBILE_REGEX = /^[6-9]\d{9}$/;
-const EMAIL_REGEX = /^\S+@\S+[\.][0-9a-z]+$/;
+const EMAIL_REGEX = /^\S+@\S+[\.][0-9a-zA-Z]+$/;
 const MOTHER_TONGUE = [
   'Assamese',
   'Bengali',

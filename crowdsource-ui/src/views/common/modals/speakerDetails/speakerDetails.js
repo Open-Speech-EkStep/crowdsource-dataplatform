@@ -35,7 +35,7 @@ function resetSpeakerDetails() {
 
 const testUserName = (val) => {
     const mobileRegex = /^[6-9]\d{9}$/;
-    const emailRegex = /^\S+@\S+[\.][0-9a-z]+$/;
+    const emailRegex = /^\S+@\S+[\.][0-9a-zA-Z]+$/;
     if(whitelisting_email==='true') return false;
     return mobileRegex.test(val) || emailRegex.test(val);
 };
