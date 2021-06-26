@@ -26,7 +26,7 @@
 <body>
 <%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
 <div class="container-fluid supreme-container p-0">
-    <div class="platform-intro-section-cover mb-0 pb-0" style="margin:auto;max-width:1200px">
+    <div class="platform-intro-section-cover mb-0 pb-0" style="margin:auto">
     <div class="row platform-intro-section d-none">
         <div class="col-lg-6 col-md-8 col-12 mt-lg-5 mt-md-5 pl-lg-0 px-5 mb-lg-5 mb-md-5 mt-4 order-lg-0 order-md-0 order-sm-1 order-1 platform-intro-section-text">
             <h4 class="display-5 font-weight-bolder lh-4"><%= __('[Bhaashini]') %></h4>
@@ -40,8 +40,31 @@
             <img src="../img/mobileWaveAndLang.svg" alt="home image" height="595" width="654" class="img-fluid">
         </div>
     </div>
-    <div class="row m-0">
-        <img src="../../img/banner.png" class="w-100 home-banner">
+    <div class="row m-0" id="banner"> 
+        <div class="left-bg w-100">
+            <div class="right-bg">
+             <div class="container-fluid row m-0">
+                 <div class="col-md-1"></div>
+                 <div class="col-md-10 p-5">
+                     <div class="row">
+                         <div class="col-xs-12 col-sm-6">
+                             <img src="../img/mobile_banner.png" alt="" class="img-border img-responsive">
+                         </div>
+                         <div class="col-xs-12 col-sm-6">
+                             <h1 class="h1 pt-6"><%= __('Bhasha') %><span class="yellow"><%= __('Daan') %></span></h1>
+                             <div class="h6">
+                                <%= __('Your contribution can empower Bhashini to make many such stories happen.') %>
+                             </div>
+                             <div class="h2 pt-3">
+                                <%= __('Towards digital') %> <br><%= __('empowerment for all...') %>
+                             </div>
+                             <span class="h6"><%= __('Remove language barriers with') %><br><%= __('Bhasha') %><span class="yellow"><%= __('Daan') %></span></span>
+                         </div>
+                     </div>
+                 </div>
+               </div>      
+             </div>
+        </div>
     </div>
     </div>
     <div style="height:4px;left:0;background:#42b2c6;opacity:.1"></div>

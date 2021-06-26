@@ -720,3 +720,69 @@
     }
 
 }
+
+#banner {
+    font-family: 'Rowdies', cursive;
+    font-style: normal;
+    font-weight: 300;
+    background: #0F2749;
+    color: #ECF6FF;
+}
+ /* body{
+     
+ } */
+ .img-border{
+     /*border: solid 7px #3A4245;*/
+     border-radius: 23px;
+     display: block;
+    height: auto;
+    max-width: 100%;
+ }
+ .h1{    
+     font-size: 45px;
+     line-height: 48px;
+     letter-spacing: -2px;
+ }
+ .h2{
+     font-size: 40px;
+     line-height: 64px;
+     letter-spacing: -2px;
+ }
+ .h3{
+     font-size: 40px;
+     line-height: 64px;
+     letter-spacing: -2px;
+ }
+ .h4{
+     font-size: 25px;
+     line-height: 64px;
+     letter-spacing: -2px;
+ }
+ .h6{
+     font-size: 25px;
+     line-height: 36px;
+     letter-spacing: -2px;
+ }
+ .p-5{
+     padding: 3rem;
+ }
+ .pt-3{
+     padding-top: 3rem;
+ }
+ .pt-6{
+     padding-top: 6rem;
+ }
+ .yellow{
+     color: #FFBF00;
+ }
+ .bh-btn-primary{
+     background: #2961AD;
+     border-radius: 24px;
+     border: none;
+     padding: 10px 40px;
+ }
+ @media only screen and (min-width: 992px) {
+ .left-bg{ background:url("../../img/left.png") no-repeat left center;}
+ .right-bg{ background:url("../../img/right.png") no-repeat right center;}
+ }
+ @media only screen and (min-width: 768px) {.right-bg{ background:url("../../img/right.png") no-repeat right center;}}
