@@ -21,7 +21,7 @@ const {onChangeUser,showUserProfile,onOpenUserDropDown} = require('./header');
 const CURRENT_INDEX = "currentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 const SPEAKERS_DATA = "speakersData";
-const totalSentence = 5;
+const totalSentence = Number(localStorage.getItem('count'));
 
 function setSentencesContributed() {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -107,7 +107,8 @@ function setSentencesContributed() {
       $goldBadgeLink.parent().attr("disabled", false);
       $platinumBadgeLink.parent().attr("disabled", false);
       $('#next-goal').addClass('d-none');
-      $('#champion_text').removeClass('d-none');
+      $("#champion_text").removeClass("d-none");
+      $('#before_badge_content').removeClass('d-none');
       $('#sentence_away_msg').addClass('d-none');
       $('#bronze_badge_link_img').addClass('enable');
       $('#bronze_badge_link_img').removeClass('disable');
@@ -327,7 +328,7 @@ function executeOnLoad() {
 
   if (!localSpeakerDataParsed) {
     location.href = "./home.html";
-  } else if (currentIndexInStorage < totalSentence) {
+  } else if (currentIndexInStorage < totalSentence -1) {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName);
