@@ -188,7 +188,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENVIRONMENT=dev
+          extra-build-args: --build-arg NODE_ENV=dev
           repo: ${AZURE_REPO}
           tag: dev
           requires:
@@ -256,7 +256,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENVIRONMENT=test
+          extra-build-args: --build-arg NODE_ENV=test
           repo: ${AZURE_REPO}
           tag: test
           requires:
@@ -311,7 +311,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENVIRONMENT=uat
+          extra-build-args: --build-arg NODE_ENV=uat
           repo: ${AZURE_REPO}
           tag: uat
           requires:
@@ -357,7 +357,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENVIRONMENT=prod
+          extra-build-args: --build-arg NODE_ENV=prod
           repo: ${AZURE_REPO}
           tag: prod
           requires:
