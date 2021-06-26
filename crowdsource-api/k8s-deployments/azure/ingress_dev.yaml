@@ -7,20 +7,22 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     # nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
-    
+    nginx.ingress.kubernetes.io/global-rate-limit: 2000
+    nginx.ingress.kubernetes.io/global-rate-limit-window: 1m
+
 spec:
   tls:
-  - hosts:
-    - dev-api.vakyansh.in
-    secretName: aks-ingress-tls
+    - hosts:
+        - dev-api.vakyansh.in
+      secretName: aks-ingress-tls
   rules:
-  - host: dev-api.vakyansh.in
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: vakyansh-app
-            port:
-              number: 8080
+    - host: dev-api.vakyansh.in
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vakyansh-app
+                port:
+                  number: 8080
