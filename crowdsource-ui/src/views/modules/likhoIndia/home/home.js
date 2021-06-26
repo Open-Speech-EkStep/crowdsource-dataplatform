@@ -1,7 +1,7 @@
 const { onActiveNavbar, onChangeUser, showUserProfile ,onOpenUserDropDown} = require('../common/header');
 const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,landToHome,hasUserRegistered } = require('../common/common');
 const {
-  toggleFooterPosition,
+  // toggleFooterPosition,
   getLocaleString,
 } = require('../common/utils');
 const {
@@ -66,7 +66,7 @@ function initializeBlock() {
   const age = document.getElementById('age');
   const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
-  toggleFooterPosition();
+  // toggleFooterPosition();
 
   let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   if(!contributionLanguage){
@@ -120,6 +120,7 @@ function initializeBlock() {
       updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
+      showFucntionalCards('parallel', fromLanguage, toLanguage);
     });
 
     $('#to-language').on('change', (e) => {

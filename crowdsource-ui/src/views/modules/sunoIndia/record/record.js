@@ -511,7 +511,7 @@ const initialize = function () {
 function executeOnLoad() {
   hideElement($('#keyboardBox'));
   $("#virtualKeyBoardBtn").attr("disabled",true);
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
   // const $validationInstructionModal = $("#validation-instruction-modal");

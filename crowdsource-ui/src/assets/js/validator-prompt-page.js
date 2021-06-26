@@ -36,7 +36,7 @@ function getCurrentIndex(lastIndex) {
 
 const showInstructionsPopup = () => {
     hideElement($("#validator-page-content"));
-    toggleFooterPosition();
+    // toggleFooterPosition();
     showInstructions();
 }
 
@@ -296,7 +296,7 @@ function addListeners() {
 
     $validatorInstructionsModal.on('hidden.bs.modal', function () {
         showElement($("#validator-page-content"));
-        toggleFooterPosition();
+        // toggleFooterPosition();
     });
 
     const likeButton = $("#like_button");
@@ -400,7 +400,7 @@ const handleSubmitFeedback = function () {
 let selectedReportVal = '';
 $(document).ready(() => {
     localStorage.setItem('module','bolo');
-    toggleFooterPosition();
+    // toggleFooterPosition();
     setPageContentHeight();
     const $errorModal = $('#errorModal');
     const language = localStorage.getItem('contributionLanguage');

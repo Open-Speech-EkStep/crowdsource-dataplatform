@@ -172,7 +172,7 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName);
     onChangeUser('./validator-thank-you.html',MODULE.bolo.value)
     onOpenUserDropDown();
-    toggleFooterPosition();
+    // toggleFooterPosition();
     setPageContentHeight();
     setSentencesContributed();
 

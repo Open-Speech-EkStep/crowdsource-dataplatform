@@ -73,9 +73,9 @@ function setPageContentHeight() {
 }
 
 function toggleFooterPosition() {
-  const $footer = $('footer');
-  $footer.toggleClass('fixed-bottom')
-  $footer.toggleClass('bottom')
+  // const $footer = $('footer');
+  // $footer.toggleClass('fixed-bottom')
+  // $footer.toggleClass('bottom')
 }
 
 function fetchLocationInfo() {

@@ -570,7 +570,7 @@ $(document).ready(() => {
   }, () => {
   }, 'validation_audioPlayed');
   hideElement($('#keyboardBox'));
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   $('#keyboardLayoutName').text(contributionLanguage);
   const language = localStorage.getItem('contributionLanguage');

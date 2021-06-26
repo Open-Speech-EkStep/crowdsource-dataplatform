@@ -390,7 +390,7 @@ const initialize = function () {
 };
 
 function executeOnLoad() {
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
   const $loader = $('#loader');

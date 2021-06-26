@@ -158,7 +158,7 @@ $(document).ready(function () {
     onChangeUser('./dashboard.html',MODULE.dekho.value);
     onOpenUserDropDown();
 
-    toggleFooterPosition();
+    // toggleFooterPosition();
 
 });
 

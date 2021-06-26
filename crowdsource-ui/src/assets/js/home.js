@@ -325,7 +325,6 @@ function initializeBlock() {
 
 }
 
-toggleFooterPosition();
 
 const renderCoachMarks = function () {
     const localString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
