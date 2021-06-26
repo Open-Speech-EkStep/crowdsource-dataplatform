@@ -7,7 +7,7 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: vakyansh
-  minReplicas: 3
+  minReplicas: 10
   maxReplicas: 30
   metrics:
     - type: Resource
