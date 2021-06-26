@@ -20,7 +20,7 @@ const { stringToHTML, mockLocalStorage } = require('./utils');
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../src/views/validator-prompt-page.ejs`, 'UTF-8') +
-  readFileSync(`${__dirname}/../src/views/common/headerForContributor.ejs`, 'UTF-8') +
+  readFileSync(`${__dirname}/../build/views/common/headerWithoutNavBar.ejs`, 'UTF-8') +
   readFileSync(`${__dirname}/../src/views/modals/mic-speaker-testing.ejs`, 'UTF-8')+
   readFileSync(`${__dirname}/../src/views/modals/validation-report-modal.ejs`, 'UTF-8')
 
