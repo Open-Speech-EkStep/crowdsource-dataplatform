@@ -6,7 +6,6 @@ orbs:
   kubernetes: circleci/kubernetes@0.11.2
   azure-cli: circleci/azure-cli@1.2.0
 
-
 definition:
   fast-checkout: &fast-checkout
     attach_workspace:
@@ -109,9 +108,9 @@ jobs:
     executor: azure-cli/default
     parameters:
       env-name:
-       description: |
+        description: |
           Name of the env
-       type: string
+        type: string
 
     steps:
       - azure-cli/install
@@ -188,7 +187,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENV=dev
+          extra-build-args: --build-arg NODE_ENVIRONMENT=dev
           repo: ${AZURE_REPO}
           tag: dev
           requires:
@@ -250,7 +249,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENV=test
+          extra-build-args: --build-arg NODE_ENVIRONMENT=test
           repo: ${AZURE_REPO}
           tag: test
           requires:
@@ -299,7 +298,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENV=uat
+          extra-build-args: --build-arg NODE_ENVIRONMENT=uat
           repo: ${AZURE_REPO}
           tag: uat
           requires:
@@ -339,7 +338,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENV=prod
+          extra-build-args: --build-arg NODE_ENVIRONMENT=prod
           repo: ${AZURE_REPO}
           tag: prod
           requires:
