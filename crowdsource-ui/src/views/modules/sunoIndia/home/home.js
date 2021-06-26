@@ -33,7 +33,7 @@ function initializeBlock() {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
     sentenceLanguage = DEFAULT_CON_LANGUAGE;
   }
-  toggleFooterPosition();
+  // toggleFooterPosition();
   // let top_lang = getDefaultLang();
   // if(top_lang){
     updateLocaleLanguagesDropdown(sentenceLanguage);

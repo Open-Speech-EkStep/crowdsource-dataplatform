@@ -173,7 +173,7 @@ function executeOnLoad() {
     onOpenUserDropDown();
     setPageContentHeight();
     setSentencesContributed();
-    toggleFooterPosition();
+    // toggleFooterPosition();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (contributionLanguage) {

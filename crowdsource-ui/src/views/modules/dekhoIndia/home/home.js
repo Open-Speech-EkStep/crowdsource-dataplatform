@@ -30,7 +30,7 @@ function initializeBlock() {
   const $userName = $('#username');
   let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
-  toggleFooterPosition();
+  // toggleFooterPosition();
   let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   if(!top_lang){
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
@@ -52,6 +52,7 @@ function initializeBlock() {
       showFucntionalCards('ocr', language);
       // updateHrsForCards(language);
     }
+    showFucntionalCards('ocr', language);
   })
 
   $languageNavBar.on('click', (e) => {

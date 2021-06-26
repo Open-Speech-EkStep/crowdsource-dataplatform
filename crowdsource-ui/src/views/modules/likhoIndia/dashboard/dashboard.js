@@ -202,7 +202,7 @@ $(document).ready(function () {
     onChangeUser('./dashboard.html',MODULE.likho.value);
     onOpenUserDropDown();
 
-    toggleFooterPosition();
+    // toggleFooterPosition();
 
 });
 

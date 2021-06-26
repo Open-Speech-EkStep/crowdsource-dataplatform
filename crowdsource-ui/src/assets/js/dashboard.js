@@ -211,9 +211,6 @@ $(document).ready(function () {
     }
     onChangeUser('./dashboard.html',MODULE.bolo.value);
     onOpenUserDropDown();
-
-    toggleFooterPosition();
-
 });
 
 module.exports = {fetchDetail, getSpeakersData, isLanguageAvailable, updateLanguage}
