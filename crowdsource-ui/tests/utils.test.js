@@ -4,7 +4,7 @@ const fetchMock = require("fetch-mock");
 const { readFileSync } = require("fs");
 
 document.body = stringToHTML(
-    readFileSync(`${__dirname}/../src/views/common/headerForContributor.ejs`, "UTF-8")
+    readFileSync(`${__dirname}/../build/views/common/headerWithoutNavBar.ejs`, "UTF-8")
 );
 
 describe('test utils', () => {
@@ -86,33 +86,6 @@ describe('test utils', () => {
 
         test("should show 0s when hours, minutes and seconds are 0", () => {
             expect(formatTime(0, 0, 0)).toEqual("0s");
-        });
-    });
-
-    describe("updateLocaleLanguagesDropdown", () => {
-        // test("should insert 'english' and given language in dropdown menu when given language is not english", () => {
-        //     const dropDown = $('#localisation_dropdown');
-        //     updateLocaleLanguagesDropdown("Hindi");
-        //     const children = dropDown.children();
-        //     expect(children[0].getAttribute('id')).toEqual('english');
-        //     expect(children[1].getAttribute('id')).toEqual('Hindi');
-        //     expect(children[2]).toEqual(undefined);
-        // });
-
-        test("should insert 'english' in dropdown menu when given language don't have localisation", () => {
-            const dropDown = $('#localisation_dropdown');
-            updateLocaleLanguagesDropdown("Hindi");
-            const children = dropDown.children();
-            expect(children[0].getAttribute('id')).toEqual('english');
-            expect(children.length).toEqual(1);
-        });
-
-        test("should insert 'english' in dropdown menu when given language is english", () => {
-            const dropDown = $('#localisation_dropdown');
-            updateLocaleLanguagesDropdown("English");
-            const children = dropDown.children();
-            expect(children[0].getAttribute('id')).toEqual('english');
-            expect(children[1]).toEqual(undefined);
         });
     });
 

@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <title>Bhashadaan: A crowdsourcing initiative for Indian languages</title>
+    <title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta property="og:title" content="<%= __('Bhashadaan: A crowdsourcing initiative for Indian languages')%>">
+    <meta property="og:title" content="<%= __('BhashaDaan: A crowdsourcing initiative for Indian languages')%>">
     <meta property="og:type" content="website">
     <meta property="og:description" content="I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?">
     <meta property="og:site_name" content="Bolo India ">
@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho India", PAGE_TITLE:"Validate",img:"../../img/en-LikhoIndiaLogo.svg",homePath:"./home.html"}); %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho India", PAGE_TITLE:"Validate",img:"LikhoIndiaLogo.svg",homePath:"./home.html"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center">
         <div class="row position-absolute top-back-btn">
@@ -91,8 +91,8 @@
                 </div>
                 <div class="col-12 col-lg-7 col-md-7 msg-box mt-5">
                     <h4 class="mb-3 mt-lg-5"><%- __('You’ve earned your <span id="current_badge_name"></span> Bhasha Samarthak Badge') %></h4>
-                    <p><span id="user-contribution" class="text-primary"></span> <%- __('<span id="current_badge_name_1"></span> contributor level achieved for validating <span id="current_badge_count"></span> sentences.') %></p>
-                    <p class="mt-lg-5"><%- __('Your next goal is to reach <span id="next_badge_count"></span> sentences to unlock your <span id="next_badge_name_1"></span> Bhasha Samarthak  Badge. <a href="../badges.html">Know more</a>') %></p>
+                    <p><span id="user-contribution" class="text-primary"></span> <%- __(' You’ve earned a  <span id="current_badge_name_1"></span> Bhasha Samarthak Badge by validating <span id="current_badge_count"></span> sentences.') %></p>
+                    <p class="mt-lg-5"><%- __('Your next goal is to reach <span id="next_badge_count"></span> sentences to earn your <span id="next_badge_name_1"></span> Bhasha Samarthak  Badge. <a href="../badges.html">Know more</a>') %></p>
                 </div>
             </div>
             <%- include ../common/sharableLink.ejs %>

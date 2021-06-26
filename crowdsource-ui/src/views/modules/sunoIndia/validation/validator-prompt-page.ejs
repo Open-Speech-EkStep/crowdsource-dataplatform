@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Bhashadaan: A crowdsourcing initiative for Indian languages</title>
+    <title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
@@ -21,11 +21,12 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:"Validate",img:"../../img/en-SunoIndiaLogo.svg",homePath:"./home.html"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:"Validate",img:"SunoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/extensionBar.ejs %>
+            <%- include('../common/breadcrumb.ejs', {MODULE:"Suno", PAGE_TITLE:"Validate",img:"SunoIndiaLogo.svg", homePath:"./home.html"}) %>
             <div class="modal-footer py-3 px-0 record-btn-container position-relative suno">
                 <div class="row position-absolute top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
@@ -69,7 +70,7 @@
             <div class="row justify-content-center d-none" id="thankyou-text">
                 <div class="col-12 text-center mt-4">
                     <img src="../../img/tick.svg">
-                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for correcting!</label>
+                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle"> <%= __('Thank you for correcting!') %></label>
                 </div>
             </div>
             <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-sentences-row">

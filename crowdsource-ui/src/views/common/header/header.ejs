@@ -9,12 +9,10 @@
                 </h2>
             </a>
             <div class="vertical-line"></div>
-            <a class="logo-text text-dark" href="/" style="padding-top:5px" id="bhashadaan_logo">
-                <h2>
-                    <img src="../../img/bhasadaan.svg" alt="BhashaDaan" width="190px" height="48px">
-                </h2>
+            <a class="logo-text text-dark position-relative" href="/" style="padding-top:5px" id="bhashadaan_logo">
+                    <img src="<%- `../../img/${locale}-bhasadaan.svg` %>" alt="BhashaDaan" width="190px" height="48px">
+                <span class="beta-version">Beta</span>
             </a>
-            <div class="version-beta ml-4 d-none">Beta</div>
         </div>
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -37,13 +35,15 @@
         </ul>
         <ul class="navbar-nav ml-auto" id="about-us">
             <li class="nav-item p-2 module-item dropdown" id="locale_language_dropdown">
-                <div class="d-flex">
-                <img src="../../img/locale_logo.svg" alt="locale_logo">
-                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <%= __('Language') %>
+                <a class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="../../img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
+                    <span><%= __('Language') %></span>
+                </a>
+                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton">
+                    <% LANGUAGES.forEach(function(obj) { if(obj.hasLocaleText){%>
+                        <a id="<%= obj.value.toLowerCase() %>" class="dropdown-item" href="#" locale="<%= obj.id %>"><%= obj.text %></a>
+                    <%} }) %>
                 </div>
-                </div>
-                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton"><a id="english" class="dropdown-item" href="#" locale="en">English</a></div>
             </li>
             <li class="nav-item p-2 module-item d-none" value="about-us"><a href="<%- `${path}about-us.html`%>" class="nav-link text-dark font-weight-bold">
                     <%= __('About Us') %>
@@ -51,10 +51,9 @@
         </ul>
     </div>
     <ul class="navbar-nav" id="userNavBar">
-        <li class="nav-item p-2 dropdown" id="userDropDown">
+        <li class="nav-item pr-lg-4 dropdown" id="userDropDown">
             <a class="nav-link text-dark font-weight-bold d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="../../img/usericon.svg" alt="usericon" class="align-middle mx-1">
-
                 <span id="nav-username"></span>
             </a>
 

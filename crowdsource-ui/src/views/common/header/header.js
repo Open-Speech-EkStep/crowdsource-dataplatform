@@ -78,4 +78,13 @@ const onChangeUser = (url, module) => {
   })
 }
 
+const $locale_language_dropdown = $('#locale_language_dropdown');
+$locale_language_dropdown.off('show.bs.dropdown').on('show.bs.dropdown',()=>{
+  $locale_language_dropdown.addClass('active')
+})
+
+$locale_language_dropdown.off('hide.bs.dropdown').on('hide.bs.dropdown',()=>{
+  $locale_language_dropdown.removeClass('active')
+})
+
 module.exports = {onActiveNavbar, showUserProfile, onChangeUser,onOpenUserDropDown};

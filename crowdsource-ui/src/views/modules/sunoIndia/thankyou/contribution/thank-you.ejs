@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <title>Bhashadaan: A crowdsourcing initiative for Indian languages</title>
+    <title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta property="og:title" content="<%= __('Bhashadaan: A crowdsourcing initiative for Indian languages')%>">
+    <meta property="og:title" content="<%= __('BhashaDaan: A crowdsourcing initiative for Indian languages')%>">
     <meta property="og:type" content="website">
     <meta property="og:description" content="I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?">
     <meta property="og:site_name" content="Bolo India ">
@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno India", PAGE_TITLE:"Transcribe",img:"../../img/en-SunoIndiaLogo.svg",homePath:"./home.html"}); %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno India", PAGE_TITLE:"Transcribe",img:"SunoIndiaLogo.svg",homePath:"./home.html"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center">
         <div class="row position-absolute top-back-btn">
@@ -78,7 +78,7 @@
             </div>
             <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('sentence(s) contributed') %></p>
             <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your  <span id="next_badge_name"></span> Bhasha Samarthak Badge. <a href="../badges.html">Know more</a>') %></p>
-            <%- include('../common/badgesMilestone.ejs',{MODULE:"suno",text:"sentences"}) %>
+            <%- include('../common/badgesMilestone.ejs',{MODULE:"suno",type:"contributing",text:"sentences"}) %>
             <%- include ../common/sharableLink.ejs %>
             <div class="badges_information">
                 <%- include('../common/downloadableBadges.ejs', {BADGES:["bronze","silver","gold","platinum"], MODULE:"suno"})%>

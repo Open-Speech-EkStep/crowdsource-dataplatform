@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Bhashadaan: A crowdsourcing initiative for Indian languages</title>
+    <title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
@@ -21,9 +21,10 @@
 </head>
 
 <body>
-<%- include('common/header/headerWithoutNavBar.ejs',{path:"./", MODULE:"Bolo India", PAGE_TITLE:"Validate",img:"../img/en-BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
+<%- include('common/header/headerWithoutNavBar.ejs',{path:"./", MODULE:"Bolo India", PAGE_TITLE:"Validate",img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
 <div id="validator-page-content">
     <div class="container-fluid">
+        <%- include('../../build/views/common/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:"Validate",img:"BoloIndiaLogo.svg", homePath:"./boloIndia/home.html"}) %>
         <div id="content-wrapper" class="d-flex flex-column">
             <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">
                 <div class="row position-absolute bolo-back-btn top-back-btn">

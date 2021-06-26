@@ -1,5 +1,5 @@
 const {
-  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS,LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE,SPEAKER_DETAILS_KEY
+  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS,LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE,SPEAKER_DETAILS_KEY,DEFAULT_CON_LANGUAGE
 } = require('./constants');
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { constructChart } = require('./horizontalBarGraph');
@@ -60,13 +60,10 @@ function showByHoursChartThankyouPage(type) {
 
 function redirectToLocalisedPage() {
   const locale = localStorage.getItem("i18n") ;
+  const allLocales = ALL_LANGUAGES.map(language => language.id);
   // const locale = localeValue == 'null'  || localeValue == undefined? 'en' : localeValue;
   const splitValues = location.href.split('/');
-  const currentModule = localStorage.getItem(CURRENT_MODULE);
-  const isModulePresent = currentModule == 'suno' || currentModule == 'dekho' || currentModule == 'bolo';
-  const currentLocale = splitValues[splitValues.length - 2];
-  const contribution_langugae = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  $('#home-page').attr('default-lang', contribution_langugae);
+  const currentLocale = splitValues.filter(value => allLocales.includes(value))[0] || '';
   if (currentLocale != locale) {
     changeLocale(locale);
   }
@@ -79,14 +76,15 @@ function redirectToLocalisedPage() {
 }
 
 const updateLocaleLanguagesDropdown = (language) => {
-  const dropDown = $('#localisation_dropdown');
-  const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-  if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
-    dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
-  } else {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-      <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  }
+  // const dropDown = $('#localisation_dropdown');
+  // language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
+  // const localeLang = ALL_LANGUAGES.find(ele => ele.value.toLowerCase() === language.toLowerCase());
+  // if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
+  //   dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
+  // } else {
+  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+  //     <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  // }
 }
 
 const getAvailableLanguages = (type) => {

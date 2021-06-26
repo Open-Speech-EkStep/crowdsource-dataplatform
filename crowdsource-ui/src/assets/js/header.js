@@ -67,20 +67,25 @@ const showUserProfile = function (userName) {
 }
 
 const onChangeUser = (url, module) => {
-  const age = document.getElementById('age');
-  const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
   const $startRecordBtn = $('#proceed-box');
   const $startRecordBtnTooltip = $startRecordBtn.parent();
   setUserModalOnShown($userName);
   $startRecordBtnTooltip.tooltip('disable');
-  // setSpeakerDetails(SPEAKER_DETAILS_KEY, age, motherTongue, $userName);
-  // setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
   $('#change_user').on('click', () => {
     setStartRecordingBtnOnClick(url, module);
   })
 }
+
+const $locale_language_dropdown = $('#locale_language_dropdown');
+$locale_language_dropdown.off('show.bs.dropdown').on('show.bs.dropdown',()=>{
+  $locale_language_dropdown.addClass('active')
+})
+
+$locale_language_dropdown.off('hide.bs.dropdown').on('hide.bs.dropdown',()=>{
+  $locale_language_dropdown.removeClass('active')
+})
 
 module.exports = {
   onActiveNavbar,
