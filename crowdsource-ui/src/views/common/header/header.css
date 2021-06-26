@@ -38,6 +38,10 @@
         color: #007BFF;
     }
 
+    #user_profile_dropdown{
+        min-width: 8rem !important;
+    }
+
     .logo{
         width: 190px;
         height: 48px;

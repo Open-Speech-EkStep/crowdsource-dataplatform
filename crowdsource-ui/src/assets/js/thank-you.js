@@ -59,7 +59,7 @@ function setSentencesContributed() {
       $("#sentence_away_msg").addClass("d-none");
       $("#user-contribution-msg").addClass("d-none");
       $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
-      $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_badge.svg`);
+      $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_medal.svg`);
     } else if (data.contributionCount < 5) {
       $("#champion_text").removeClass("d-none");
       $("#contribution_text").removeClass("d-none");
@@ -106,6 +106,9 @@ function setSentencesContributed() {
       $silverBadgeLink.parent().attr("disabled", false);
       $goldBadgeLink.parent().attr("disabled", false);
       $platinumBadgeLink.parent().attr("disabled", false);
+      $('#next-goal').addClass('d-none');
+      $('#champion_text').removeClass('d-none');
+      $('#sentence_away_msg').addClass('d-none');
       $('#bronze_badge_link_img').addClass('enable');
       $('#bronze_badge_link_img').removeClass('disable');
       $('#silver_badge_link_img').addClass('enable');
