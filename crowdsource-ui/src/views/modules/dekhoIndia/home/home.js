@@ -49,6 +49,7 @@ function initializeBlock() {
       localStorage.setItem("i18n", "en");
       setLangNavBar(targetedDiv, language, $languageNavBar);
       redirectToLocalisedPage();
+      showFucntionalCards('ocr', language);
       // updateHrsForCards(language);
     }
   })

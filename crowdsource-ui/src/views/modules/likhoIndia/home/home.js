@@ -120,6 +120,7 @@ function initializeBlock() {
       updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
+      showFucntionalCards('parallel', fromLanguage, toLanguage);
     });
 
     $('#to-language').on('change', (e) => {
