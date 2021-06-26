@@ -147,7 +147,7 @@ $(document).ready(function () {
 
     $startRecordBtnTooltip.tooltip('disable');
     setUserModalOnShown($userName);
-    setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+    // setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     if(hasUserRegistered()){

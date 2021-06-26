@@ -72,6 +72,7 @@ const onChangeUser = (url, module) => {
   const $startRecordBtnTooltip = $startRecordBtn.parent();
   setUserModalOnShown($userName);
   $startRecordBtnTooltip.tooltip('disable');
+  setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
   $('#change_user').on('click', () => {
     setStartRecordingBtnOnClick(url, module);

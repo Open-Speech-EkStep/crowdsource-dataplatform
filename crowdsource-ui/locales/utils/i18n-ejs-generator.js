@@ -1,4 +1,3 @@
-const { MOTHER_TONGUE, ALL_LANGUAGES } = require('../../src/views/js/constants');
 const { getEnabledLanguages } = require('../../src/views/js/language-filter');
 
 const fs = require('fs');
@@ -32,6 +31,32 @@ async function ejs2html(path, information, i18n, targetPath, fileName, locale) {
 
 const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, enabledLanguage) {
   const LANGUAGES = getEnabledLanguages(enabledLanguage);
+  const MOTHER_TONGUE = [
+    { value: "Assamese", text: "অসমীয়া" },
+    { value: "Bengali",text: "বাংলা" },
+    { value: "Bodo",  text: "Bodo" },
+    { value: "Dogri",  text: "Dogri" },
+    { value: "English",  text: "English" },
+    { value: "Gujarati",  text: "ગુજરાતી" },
+    { value: "Hindi",  text: "हिंदी"},
+    { value: "Kannada", text: "ಕನ್ನಡ" },
+    { value: "Kashmiri",  text: "Kashmiri" },
+    { value: "Konkani",  text: "Konkani" },
+    { value: "Maithili",  text: "Maithili", },
+    { value: "Malayalam",  text: "മലയാളം" },
+    { value: "Manipuri",  text: "Manipuri"},
+    { value: "Marathi",  text: "मराठी" },
+    { value: "Nepali",  text: "Nepali" },
+    { value: "Odia",  text: "ଓଡିଆ" },
+    { value: "Punjabi", text: "ਪੰਜਾਬੀ" },
+    { value: "Santali",  text: "Santali" },
+    { value: "Sanskrit", text: "Sanskrit" },
+    { value: "Sindhi",  text: "Sindhi" },
+    { value: "Tamil", text: "தமிழ்" },
+    { value: "Telugu",  text: "తెలుగు" },
+    { value: "Urdu",  text: "Urdu" },
+  ];
+
   const i18n = new I18n({
     locales: [
       'as',

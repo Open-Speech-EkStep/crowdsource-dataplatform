@@ -199,7 +199,7 @@ $(document).ready(function () {
         }
     });
 
-    setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+    // setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     $startRecordBtnTooltip.tooltip('disable');
     setUserNameOnInputFocus();
