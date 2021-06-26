@@ -507,7 +507,7 @@ const executeOnLoad = function () {
         mode: 'cors',
         body: JSON.stringify({
           userName: localSpeakerDataParsed.userName,
-          language: localSpeakerDataParsed.language,
+          language: localStorage.getItem(CONTRIBUTION_LANGUAGE),
           toLanguage: '',
         }),
         headers: {
