@@ -408,16 +408,6 @@ function addListeners() {
     $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     closeEditor();
   })
-
-  $skipButton.hover(() => {
-    $skipButton.css('border-color', '#bfddf5');
-  }, () => {
-    $skipButton.removeAttr('style');
-  })
-
-  $skipButton.mousedown(() => {
-    $skipButton.css('background-color', '#bfddf5')
-  })
 }
 
 const loadAudio = function (audioLink) {
@@ -580,7 +570,7 @@ $(document).ready(() => {
   }, () => {
   }, 'validation_audioPlayed');
   hideElement($('#keyboardBox'));
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   $('#keyboardLayoutName').text(contributionLanguage);
   const language = localStorage.getItem('contributionLanguage');

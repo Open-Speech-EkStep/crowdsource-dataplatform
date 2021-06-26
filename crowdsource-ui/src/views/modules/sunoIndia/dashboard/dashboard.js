@@ -157,7 +157,7 @@ $(document).ready(function () {
     onChangeUser('./dashboard.html',MODULE.suno.value);
     onOpenUserDropDown();
 
-    toggleFooterPosition();
+    // toggleFooterPosition();
 
 });
 

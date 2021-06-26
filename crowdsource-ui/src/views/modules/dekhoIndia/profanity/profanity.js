@@ -282,7 +282,7 @@ const getLocationInfo = () => {
 let selectedReportVal = '';
 
 const executeOnLoad = function () {
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));

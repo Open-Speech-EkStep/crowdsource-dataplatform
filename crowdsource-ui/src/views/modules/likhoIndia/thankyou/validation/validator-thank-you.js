@@ -203,7 +203,7 @@ function executeOnLoad() {
     onOpenUserDropDown();
     setPageContentHeight();
     setSentencesContributed();
-    toggleFooterPosition();
+    // toggleFooterPosition();
 
     const contributionLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
     const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);

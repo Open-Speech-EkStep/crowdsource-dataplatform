@@ -175,7 +175,7 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName)
     onChangeUser('./validator-thank-you.html',MODULE.suno.value);
     onOpenUserDropDown();
-    toggleFooterPosition();
+    // toggleFooterPosition();
     setPageContentHeight();
     setSentencesContributed();
 

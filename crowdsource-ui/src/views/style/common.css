@@ -276,6 +276,11 @@ body {
         color: #42B2C6;;
     }
 
+    #con-warning-msg p {
+        font-size: 12px;
+        margin-top: 4px;
+    }
+
 
     #warning-msg {
         display: none;
@@ -289,6 +294,11 @@ body {
         border-radius: 12px;
         background: rgba(77, 130, 247, .1);
         color: #4D82F7;;
+    }
+
+    #warning-msg p {
+        font-size: 12px;
+        margin-top: 4px;
     }
 
     #module_name {

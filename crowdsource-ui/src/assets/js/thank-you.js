@@ -334,7 +334,7 @@ function executeOnLoad() {
     setSentencesContributed();
   }
 
-  toggleFooterPosition();
+  // toggleFooterPosition();
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   if (contributionLanguage) {
     updateLocaleLanguagesDropdown(contributionLanguage);
