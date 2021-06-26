@@ -420,5 +420,7 @@
 	"recording(s) validated": "recording(s) validated",
 	"You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> recordings": "You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> recordings",
 	"image label(s) contributed": "image label(s) contributed",
-	"image label(s) validated": "image label(s) validated"
+	"image label(s) validated": "image label(s) validated",
+	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> sentences.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> sentences.",
+	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by labelling <span id=\"current_badge_count\"></span> images.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by labelling <span id=\"current_badge_count\"></span> images."
 }
