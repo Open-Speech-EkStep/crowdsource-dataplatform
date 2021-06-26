@@ -159,7 +159,7 @@ workflows:
           repo: ${REPO}
           tag: dev
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENVIRONMENT=dev
+          extra-build-args: --build-arg NODE_ENV=dev
           requires:
             - migrate_dev_aws
 
@@ -209,7 +209,7 @@ workflows:
           repo: ${REPO}
           tag: cug
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENVIRONMENT=cug
+          extra-build-args: --build-arg NODE_ENV=cug
           requires:
             - migrate_cug_aws
 
@@ -249,7 +249,7 @@ workflows:
           repo: ${REPO}
           tag: test
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENVIRONMENT=test
+          extra-build-args: --build-arg NODE_ENV=test
           requires:
             - migrate_test_aws
 
@@ -295,7 +295,7 @@ workflows:
           repo: ${REPO}
           tag: uat
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENVIRONMENT=uat
+          extra-build-args: --build-arg NODE_ENV=uat
           requires:
             - migrate_uat_aws
 
@@ -340,7 +340,7 @@ workflows:
           repo: ${REPO}
           tag: prod
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENVIRONMENT=prod
+          extra-build-args: --build-arg NODE_ENV=prod
           requires:
             - migrate_prod_aws
 
