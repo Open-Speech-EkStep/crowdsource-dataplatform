@@ -96,7 +96,7 @@ function uploadToServer(cb) {
   });
   fd.append('userInput', likhoIndiaValidator.editedText);
   fd.append('speakerDetails', speakerDetails);
-  fd.append('language', localSpeakerDataParsed.toLanguage);
+  fd.append('language', localStorage.getItem(LIKHO_TO_LANGUAGE));
   fd.append('sentenceId', likhoIndiaValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
