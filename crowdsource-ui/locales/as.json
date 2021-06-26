@@ -459,5 +459,14 @@
 	"image label(s) contributed": "image label(s) contributed",
 	"image label(s) validated": "image label(s) validated",
 	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> sentences.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> sentences.",
-	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by labelling <span id=\"current_badge_count\"></span> images.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by labelling <span id=\"current_badge_count\"></span> images."
+	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by labelling <span id=\"current_badge_count\"></span> images.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by labelling <span id=\"current_badge_count\"></span> images.",
+	"You've earned a  <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings": "You've earned a  <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings",
+	"Contribute by typing what you hear on audio": "Contribute by typing what you hear on audio",
+	"Validate the texts transcribed by others": "Validate the texts transcribed by others",
+	"Contribute your voice by recording the sentence": "Contribute your voice by recording the sentence",
+	"Validate the audios recorded by others": "Validate the audios recorded by others",
+	"Contribute by translating the prompted text in your language": "Contribute by translating the prompted text in your language",
+	"Validate the translations contributed by others": "Validate the translations contributed by others",
+	"Contribute by labelling the image": "Contribute by labelling the image",
+	"Validate the images labelled by others": "Validate the images labelled by others"
 }
