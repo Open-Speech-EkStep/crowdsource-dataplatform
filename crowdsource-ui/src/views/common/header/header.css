@@ -23,6 +23,12 @@
  }
 
 @media (min-width: 769px) {
+    .beta-version {
+        position: absolute;
+    bottom: 0px;
+    right: 1px;
+    font-size: 8px;
+    }
     #locale_language_dropdown.active{
         background: rgba(0,123,255,.1);
         border-bottom: 2px solid #007bff;
@@ -53,6 +59,12 @@
 
 /*  Ipad */
 @media (max-width: 768px) {
+    .beta-version {
+        position: absolute;
+    bottom: 4px;
+    right: 1px;
+    font-size: 8px;
+    }
     #userDropDown{
         position: absolute;
         top: 5px;
