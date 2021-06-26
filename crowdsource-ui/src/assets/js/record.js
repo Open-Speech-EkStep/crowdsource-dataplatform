@@ -454,7 +454,7 @@ const initialize = () => {
         })
         fd.append('audio_data', crowdSource.audioBlob);
         fd.append('speakerDetails', speakerDetails);
-        fd.append('language', localSpeakerDataParsed.language);
+        fd.append('language', localStorage.getItem(CONTRIBUTION_LANGUAGE));
         fd.append('sentenceId', crowdSource.sentences[currentIndex].dataset_row_id);
         fd.append('state', localStorage.getItem('state_region') || "");
         fd.append('country', localStorage.getItem('country') || "");
@@ -638,7 +638,7 @@ function executeOnLoad() {
                 mode: 'cors',
                 body: JSON.stringify({
                     userName: localSpeakerDataParsed.userName,
-                    language: localSpeakerDataParsed.language,
+                    language: localStorage.getItem(CONTRIBUTION_LANGUAGE),
                 }),
                 headers: {
                     'Content-Type': 'application/json',

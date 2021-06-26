@@ -6,7 +6,7 @@ const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = re
 const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition, getDeviceInfo, getBrowserInfo} = require('./utils');
 const { cdn_url } = require('./env-api');
 const { onChangeUser } = require('./header');
-const { MODULE } = require('./constants');
+const { MODULE, CONTRIBUTION_LANGUAGE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
@@ -504,7 +504,7 @@ $(document).ready(() => {
         JSON.stringify({
           userName: localSpeakerDataParsed.userName,
           sentences: sentenceData.data,
-          language: localSpeakerDataParsed.language,
+          language: localStorage.getItem(CONTRIBUTION_LANGUAGE),
         })
       );
       initializeComponent();
