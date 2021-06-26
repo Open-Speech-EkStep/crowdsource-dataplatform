@@ -36,9 +36,9 @@
                         <option selected="selected" value="">
                             <%= __('Select Mother Tongue') %>
                         </option>
-                        <% MOTHER_TONGUE.forEach(function(lang) { %>
-                            <option value="<%= lang %>">
-                                <%= lang %>
+                        <% MOTHER_TONGUE.forEach(function(obj) { %>
+                            <option value="<%= obj.value %>">
+                                <%= obj.text %>
                             </option>
                         <% }) %>
                     </select></div>
