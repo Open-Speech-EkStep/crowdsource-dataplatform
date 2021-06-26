@@ -44,7 +44,7 @@ const validateUserInputAndFile = function (req, res, next) {
     const invalidAgeGroup = (speakerDetailsJson.age && !AGE_GROUP.includes(speakerDetailsJson.age));
     const invalidLanguage = (!req.body.language || !allLanguages.includes(req.body.language))
 
-    if (!config.get('whitelistingEmail') && isEmailInUserName){
+    if (!config.get('whitelistingEmail') == "enabled" && isEmailInUserName){
         return res.status(400).send("Bad request username contain email address");
     }
 
@@ -83,9 +83,9 @@ const validateUserInfo = function (req, res, next) {
 
     const isValidType = (MEDIA_TYPES.includes(type));
 
-    console.log(config.get('whitelistingEmail'),"ghchgchgchchfcg")
+    console.log(config.get('whitelistingEmail') == "enabled","ghchgchgchchfcg")
 
-    if (!config.get('whitelistingEmail') && (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName) || !isValidType || !language) ){
+    if (!config.get('whitelistingEmail') == "enabled" && (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName) || !isValidType || !language) ){
         return res.status(400).send("Bad request");
     }
 
