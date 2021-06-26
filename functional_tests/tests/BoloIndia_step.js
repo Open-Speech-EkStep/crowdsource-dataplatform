@@ -91,10 +91,10 @@ step("When user clicks on Data Source button, popup should open and they should 
     assert.ok(await taiko.button({ id: 'show_source_button' }).isVisible());
     await click(taiko.button({ id: 'show_source_button' }));
     await taiko.waitFor(700);
-    assert.ok(await text("Opt-out displayed data").isVisible());
+    assert.ok(await text("Opt-out Notification").isVisible());
     await click(taiko.button({ id: 'datasource_close_btn' }));
     await taiko.waitFor(700);
-    assert.ok(! await text("Opt-out displayed data").isVisible());
+    assert.ok(! await text("Opt-out Notification").isVisible());
 });
 
 step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present", async function () {
