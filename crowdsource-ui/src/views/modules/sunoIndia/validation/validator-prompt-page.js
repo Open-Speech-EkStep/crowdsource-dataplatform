@@ -63,7 +63,7 @@ function uploadToServer(cb) {
   });
   fd.append('userInput', sunoIndiaValidator.editedText);
   fd.append('speakerDetails', speakerDetails);
-  fd.append('language', localSpeakerDataParsed.language);
+  fd.append('language', localStorage.getItem(CONTRIBUTION_LANGUAGE));
   fd.append('sentenceId', sunoIndiaValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
