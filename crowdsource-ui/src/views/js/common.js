@@ -63,7 +63,7 @@ function redirectToLocalisedPage() {
   const allLocales = ALL_LANGUAGES.map(language => language.id);
   // const locale = localeValue == 'null'  || localeValue == undefined? 'en' : localeValue;
   const splitValues = location.href.split('/');
-  const currentLocale = splitValues.filter(value => allLocales.includes(value))[0] || 'en';
+  const currentLocale = splitValues.filter(value => allLocales.includes(value))[0] || '';
   if (currentLocale != locale) {
     changeLocale(locale);
   }
