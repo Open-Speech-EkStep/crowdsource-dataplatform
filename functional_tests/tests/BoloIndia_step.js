@@ -119,6 +119,7 @@ step("if a user enter username and click on Not you change user button , the fie
 
 
 step("And User enter random Username and selects Age , Mother tongue ,gender", async function () {
+    await taiko.waitFor(1000)
     if (await taiko.text('User Details').isVisible()) {
         const username = taiko.textBox({ id: 'username' })
         await taiko.waitFor(700)
@@ -180,7 +181,7 @@ step("User should be able to close the Instructions , user should see a sentence
     assert.ok(await button({ id: 'startRecord' }).exists())
     assert.ok(await button({ id: 'skipBtn' }).exists())
     assert.ok(await taiko.$('#sentenceLbl').exists())
-    assert.ok(await text('Dummy User').exists())
+    //assert.ok(await text('Dummy User').exists())
     assert.ok(await button({ id: 'test-mic-speakers-button' }).exists())
 
 });
@@ -283,8 +284,8 @@ step("When user clicks on View all Details buttton , user shall land on Dashboar
     await taiko.waitFor(1000)
     assert.ok(await text("Languages").exists());
     assert.ok(await text("Speakers contributed").exists());
-    assert.ok(await text("Duration contributed").exists());
-    assert.ok(await text("Duration validated").exists());
+    assert.ok(await text("Duration recorded").exists());
+    assert.ok(await text("Duration recorded").exists());
 });
 
 step("When user select <lang> Language from dropdown then <arg0> should not visible", async function (lang, arg0) {
@@ -416,7 +417,7 @@ step("When user clicks on the cross button , pop up should close and user should
 step("When user clicks on the Feedback icon, user should see the feedback popup", async function () {
     await click(taiko.button({ id: "feedback_button" }))
     await taiko.waitFor(1000)
-    assert.ok(await text("We would like to get your feedback to improve this site").exists());
+    assert.ok(await text("We would like to get your feedback to improve this platform").exists());
     assert.ok(!await text("Email").isVisible());
     assert.ok(!await text("Giving Feedback for?").isVisible());
     assert.ok(!await text("Select page").isVisible());
