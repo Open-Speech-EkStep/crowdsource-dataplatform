@@ -280,7 +280,7 @@ function initializeBlock() {
 
     setUserModalOnShown($userName);
     $startRecordBtnTooltip.tooltip('disable');
-    setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+    // setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     onChangeUser('./home.html',MODULE.bolo.value);

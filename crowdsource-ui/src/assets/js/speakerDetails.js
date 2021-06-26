@@ -109,7 +109,7 @@ const setSpeakerDetails = (speakerDetailsKey, age, motherTongue, $userName) => {
 
 const setUserModalOnShown = function ($userName) {
     $('#userModal').on('shown.bs.modal', function () {
-        $('#resetBtn').on('click', resetSpeakerDetails);
+        // $('#resetBtn').on('click', resetSpeakerDetails);
         $userName.tooltip({
             container: 'body',
             placement: screen.availWidth > 500 ? 'right' : 'auto',
@@ -118,6 +118,10 @@ const setUserModalOnShown = function ($userName) {
         // setUserNameTooltip($userName);
     });
 }
+
+    $('#userModal').on('hidden.bs.modal', function () {
+        resetSpeakerDetails();
+    });
 
 const setUserNameOnInputFocus = function () {
     const $userName = $('#username');
