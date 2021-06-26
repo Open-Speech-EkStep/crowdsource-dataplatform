@@ -176,6 +176,7 @@ workflows:
           env_name: dev
           requires:
             - migrate_dev_azure
+
       - cdn_invalidation:
           name: cdn_invalidation_dev
           env-name: dev
@@ -244,6 +245,12 @@ workflows:
           requires:
             - migrate_test_azure
 
+      - cdn_invalidation:
+          name: cdn_invalidation_test
+          env-name: dev
+          requires:
+            - build_test_ui
+
       - azure-acr/build-and-push-image:
           name: push_test_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
@@ -293,6 +300,12 @@ workflows:
           requires:
             - migrate_uat_azure
 
+      - cdn_invalidation:
+          name: cdn_invalidation_uat
+          env-name: dev
+          requires:
+            - build_uat_ui
+
       - azure-acr/build-and-push-image:
           name: push_uat_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
@@ -332,6 +345,12 @@ workflows:
           env_name: prod
           requires:
             - migrate_prod_azure
+
+      - cdn_invalidation:
+          name: cdn_invalidation_prod
+          env-name: dev
+          requires:
+            - build_prod_ui
 
       - azure-acr/build-and-push-image:
           name: push_prod_image
