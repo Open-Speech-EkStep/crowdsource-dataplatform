@@ -13,7 +13,7 @@ const {
 } = require('taiko');
 
 step("Validate Likho India content", async function() {
-  assert.ok(await text('Help your language by translating text').exists());
+  assert.ok(await text('Enrich your language by translating text').exists());
   assert.ok(await text('Validate').exists());
   assert.ok(await text('Translate').exists());
 });
@@ -28,7 +28,7 @@ step("User should see the top Language graph and other stats for Likho India", a
 });
 
 step("Select <lang> Language from <dropdown_id>", async function (lang, dropdown_id) {
-  await taiko.waitFor(1000)
+  await taiko.waitFor(2000)
   const selectLanguageDropDown = taiko.dropDown({ id: dropdown_id })
   assert.ok(await selectLanguageDropDown.exists());
   await selectLanguageDropDown.select(lang);
@@ -41,7 +41,7 @@ step("Close button should close the pop up and user should see Likho India Home 
     await click(taiko.button({ class: 'close float-right' }))
   }
 
-  assert.ok(await text("Help your language by translating text").exists());
+  assert.ok(await text("Enrich your language by translating text").exists());
 });
 
 step("Validate Thank you page content for Likho India", async function() {
@@ -53,10 +53,9 @@ step("When User clicks on <type> field and type <txt> submit should be disabled 
 	const editfield = taiko.textBox({ id: type })
     await taiko.waitFor(500)
     await write(txt, into(editfield))
-    await taiko.waitFor(1000)
-
+    await taiko.waitFor(500)
     assert.ok( await button({ id: 'submit-edit-button' }).isDisabled())
-    assert.ok( !await button({ id: 'cancel-edit-button' }).isDisabled())
+    assert.ok(! await button({ id: 'cancel-edit-button' }).isDisabled())
 });
 
 step("User should see an error message <msg>", async function(msg) {
@@ -78,7 +77,7 @@ step("When user clicks on back button, user should land on Likho India home page
     await click(taiko.text("Home"))
     await taiko.waitFor(1000)
 }
-assert.ok(await text("Help your language by translating text").isVisible());
+assert.ok(await text("Enrich your language by translating text").isVisible());
 });
 
 step("When user clicks on Contribute more button , user should see no data available message for Likho India", async function() {

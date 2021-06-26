@@ -16,8 +16,9 @@ const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showOrHideExtensionCloseBtn,isMobileDevice} = require('../common/common');
-const { showUserProfile } = require('../common/header');
+const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
+const { setDataSource } = require('../common/sourceInfo');
 
 const { initializeFeedbackModal } = require('../common/feedback');
 const speakerDetailsKey = 'speakerDetails';
@@ -87,9 +88,7 @@ function markContributionSkipped() {
     .then((res) => res.json())
     .then((result) => {
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch((err) => {})
 }
 
 
@@ -102,7 +101,7 @@ function uploadToServer(cb) {
   });
   fd.append('userInput', dekhoIndia.editedText);
   fd.append('speakerDetails', speakerDetails);
-  fd.append('language', localSpeakerDataParsed.language);
+  fd.append('language', localStorage.getItem(CONTRIBUTION_LANGUAGE));
   fd.append('sentenceId', dekhoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
@@ -117,9 +116,7 @@ function uploadToServer(cb) {
     .then((res) => res.json())
     .then((result) => {
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch((err) => {})
     .then((finalRes) => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -136,6 +133,7 @@ function getNextSentence() {
     updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length);
     const encodedUrl = encodeURIComponent(dekhoIndia.sentences[currentIndex].media_data);
     setDekhoImage(`${cdn_url}/${encodedUrl}`);
+    setDataSource(dekhoIndia.sentences[currentIndex].source_info);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
   } else {
@@ -327,9 +325,7 @@ const getImage = function (contributionId) {
       }
       fileReader.readAsDataURL(blob);
     });
-  }).catch((err) => {
-    console.log(err)
-  });
+  }).catch((err) => {});
 }
 
 function showThankYou() {
@@ -428,6 +424,7 @@ const initializeComponent = () => {
   if (validationData) {
     const encodedUrl = encodeURIComponent(validationData.media_data);
     setDekhoImage(`${cdn_url}/${encodedUrl}`);
+    setDataSource(validationData.source_info);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length)
@@ -441,14 +438,14 @@ const getLocationInfo = () => {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch(console.log);
+  }).catch((err) => {});
 }
 
 let selectedReportVal = '';
 
 const executeOnLoad = function () {
   hideElement($('#keyboardBox'));
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
   const $validationInstructionModal = $("#validation-instruction-modal");
@@ -490,6 +487,8 @@ const executeOnLoad = function () {
     }
 
     showUserProfile(localSpeakerDataParsed.userName);
+    onChangeUser('./record.html',MODULE.dekho.value);
+    onOpenUserDropDown();
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName
       &&
@@ -508,7 +507,7 @@ const executeOnLoad = function () {
         mode: 'cors',
         body: JSON.stringify({
           userName: localSpeakerDataParsed.userName,
-          language: localSpeakerDataParsed.language,
+          language: localStorage.getItem(CONTRIBUTION_LANGUAGE),
           toLanguage: '',
         }),
         headers: {

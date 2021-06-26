@@ -1,14 +1,14 @@
 const { showLanguagePopup, redirectToLocalisedPage } = require('./locale');
-const { onActiveNavbar } = require('./header');
+const { onActiveNavbar, onChangeUser, showUserProfile,onOpenUserDropDown } = require('./header');
 const {whitelisting_email} = require('./env-api')
 const { drawMap, getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest } = require('./utils')
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest, calculateTime, formatTime } = require('./utils')
 const {
     setSpeakerDetails,
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
-    setStartRecordingBtnOnClick
+    setStartRecordingBtnOnClick,
 } = require('./speakerDetails');
 
 const {
@@ -17,8 +17,8 @@ const {
     setBoloUserNameOnInputFocus,
     setLetGoBtnOnClick
 } = require('./bolo_user_details');
-const { getContributedAndTopLanguage } = require('./common');
-
+const { getContributedAndTopLanguage,hasUserRegistered } = require('./common');
+// const { hasUserRegistered } = require('../../../build/js/common/common');
 const {
     DEFAULT_CON_LANGUAGE,
     TOP_LANGUAGES_BY_HOURS,
@@ -27,20 +27,32 @@ const {
     CONTRIBUTION_LANGUAGE,
     LOCALE_STRINGS,
     ALL_LANGUAGES,
-    MODULE
+    MODULE,
+  SPEAKER_DETAILS_KEY
 } = require('./constants');
-
+const SPEAKER_DETAILS = "speakerDetails";
 const updateLocaleText = function (total_contributions, total_validations, language) {
     const $say_p_3 = $("#say-p-3");
     const $listen_p_3 = $("#listen-p-3");
     const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+    const {
+        hours: cHours,
+        minutes: cMinutes,
+        seconds: cSeconds
+    } = calculateTime(parseFloat(total_contributions).toFixed(3)*60*60);
+    const {
+        hours: vHours,
+        minutes: vMinutes,
+        seconds: vSeconds
+    } = calculateTime(parseFloat(total_validations).toFixed(3)*60*60);
+
     let hrsRecordedIn = localeStrings['hrs recorded in'];
-    hrsRecordedIn = hrsRecordedIn.replace("%hours", total_contributions);
+    hrsRecordedIn = hrsRecordedIn.replace("%hours", formatTime(cHours, cMinutes, cSeconds));
     hrsRecordedIn = hrsRecordedIn.replace("%language", language);
     $say_p_3.text(hrsRecordedIn);
 
     let hrsValidatedIn = localeStrings['hrs validated in'];
-    hrsValidatedIn = hrsValidatedIn.replace("%hours", total_validations);
+    hrsValidatedIn = hrsValidatedIn.replace("%hours", formatTime(vHours, vMinutes, vSeconds));
     hrsValidatedIn = hrsValidatedIn.replace("%language", language);
     $listen_p_3.text(hrsValidatedIn);
 }
@@ -151,7 +163,7 @@ const clearLocalStorage = function () {
 
 const getStatsSummary = function () {
     performAPIRequest('/stats/summary/text')
-        .then(response => {
+        .then((response) => {
             // drawMap({data: response.aggregate_data_by_state});
             const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.bolo.value);
             localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
@@ -159,14 +171,16 @@ const getStatsSummary = function () {
             const speakers = getContributedAndTopLanguage(response.top_languages_by_speakers, "speakers");
             localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(speakers));
             localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-            getStatistics(response.aggregate_data_count[0]);
+            getStatistics(response && response.aggregate_data_count && response.aggregate_data_count.length ? response.aggregate_data_count[0] : {});
             setDefaultLang();
             if (response.top_languages_by_hours.length === 0) {
                 $("#bar_charts_container").hide();
                 $("#view_all_btn").hide();
+                $("#contribution_stats").hide();
             } else {
                 $("#bar_charts_container").show();
                 $("#view_all_btn").show();
+                $("#contribution_stats").show();
             }
         });
 }
@@ -191,8 +205,11 @@ function initializeBlock() {
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
     setSayListenBackground();
-    let top_lang = getDefaultLang();
-
+    let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    if(!top_lang){
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
+        top_lang = DEFAULT_CON_LANGUAGE;
+    }
     const $languageNavBar = $('#language-nav-bar');
     const $sayListenLanguage = $('#say-listen-language');
 
@@ -229,13 +246,25 @@ function initializeBlock() {
     $('#start_recording').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-        setStartRecordingBtnOnClick('../record.html', MODULE.bolo.value);
+        localStorage.setItem("selectedType", "contribute");
+        if(!hasUserRegistered()){
+            $('#userModal').modal('show');
+            setStartRecordingBtnOnClick('../record.html',MODULE.bolo.value);
+        } else {
+            location.href ='../record.html';
+        }
     });
 
     $('#start_validating').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-        setLetGoBtnOnClick('../validator-page.html', MODULE.bolo.value);
+        localStorage.setItem("selectedType", "validate");
+        if(!hasUserRegistered()){
+            $('#userModal').modal('show');
+            setStartRecordingBtnOnClick('../validator-page.html',MODULE.bolo.value);
+        } else {
+            location.href ='../validator-page.html';
+        }
     });
 
     $('[name="topLanguageChart"]').on('change', (event) => {
@@ -246,14 +275,25 @@ function initializeBlock() {
         }
     });
 
+    const $startRecordBtn = $('#proceed-box');
+    const $startRecordBtnTooltip = $startRecordBtn.parent();
+
     setUserModalOnShown($userName);
-    setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+    $startRecordBtnTooltip.tooltip('disable');
+    // setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
-    setBoloUserModalOnShown($boloUserName);
-    setBoloSpeakerDetails(speakerDetailsKey, $boloUserName);
-    setBoloUserNameOnInputFocus();
-    // setStartRecordingBtnOnClick();
+    onChangeUser('./home.html',MODULE.bolo.value);
+    onOpenUserDropDown();
+    if(hasUserRegistered()){
+        const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+        const localSpeakerDataParsed = JSON.parse(speakerDetails);
+        showUserProfile(localSpeakerDataParsed.userName);
+    }
+
+    // setBoloUserModalOnShown($boloUserName);
+    // setBoloSpeakerDetails(speakerDetailsKey, $boloUserName);
+    // setBoloUserNameOnInputFocus();
 
     const $say = $('#say');
     const $listen = $('#listen');
@@ -281,33 +321,10 @@ function initializeBlock() {
         $listen_container.removeClass('listen-active');
     });
 
-    $('input[name = "gender"]').on('change', function () {
-        const selectedGender = document.querySelector(
-            'input[name = "gender"]:checked'
-        );
-        const options = $("#transgender_options");
-        if (selectedGender.value === "others") {
-            const selectedTransGender = document.querySelector(
-                'input[name = "trans_gender"]:checked'
-            );
-            if (!selectedTransGender) {
-                const defaultOption = document.querySelector(
-                    'input[name = "trans_gender"][value="Rather Not Say"]'
-                );
-                defaultOption.checked = true;
-                defaultOption.previous = true;
-            }
-            options.removeClass("d-none");
-        } else {
-            options.addClass("d-none");
-        }
-    });
-
     getStatsSummary();
 
 }
 
-toggleFooterPosition();
 
 const renderCoachMarks = function () {
     const localString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
@@ -364,14 +381,6 @@ const renderCoachMarks = function () {
 
 $(document).ready(function () {
     localStorage.setItem('module', 'bolo');
-
-    if (!localStorage.getItem(CONTRIBUTION_LANGUAGE)) {
-        showLanguagePopup();
-        return;
-    }
-    else {
-        redirectToLocalisedPage();
-    }
     clearLocalStorage();
     onActiveNavbar('bolo');
     getLocaleString().then(() => {
@@ -395,5 +404,6 @@ $(window).on("orientationchange", function () {
 module.exports = {
     updateHrsForSayAndListen,
     getDefaultTargetedDiv,
-    setLangNavBar
+    setLangNavBar,
+    getStatsSummary
 };

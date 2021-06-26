@@ -17,7 +17,7 @@ const {
 } = require("../common/utils");
 // const {downloadPdf} = require('../common/downloadableBadges');
 const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../common/common');
-const {showUserProfile} = require('../common/header');
+const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { initializeFeedbackModal } = require('../common/feedback');
 const CURRENT_INDEX = "dekhoValidatorCurrentIndex";
 const dekhoValidatorCountKey = 'dekhoValidatorCount';
@@ -43,9 +43,7 @@ function downloadPdf(badgeType) {
     if (badge) {
       pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
     }
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 
 }
 
@@ -171,10 +169,11 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName);
-
+    onChangeUser('./validator-thank-you.html',MODULE.dekho.value);
+    onOpenUserDropDown();
     setPageContentHeight();
     setSentencesContributed();
-    toggleFooterPosition();
+    // toggleFooterPosition();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (contributionLanguage) {

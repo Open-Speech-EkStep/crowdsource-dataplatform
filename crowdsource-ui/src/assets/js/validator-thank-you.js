@@ -17,18 +17,12 @@ const {
   performAPIRequest,
 } = require("./utils");
 const {showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../../../build/js/common/common');
+const {onChangeUser,onOpenUserDropDown,showUserProfile} = require('./header');
 
 const CURRENT_INDEX = "boloValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 const boloValidatorCountKey = 'boloValidatorCount';
 const totalSentence = Number(localStorage.getItem(boloValidatorCountKey));
-
-const showUserProfile = function (userName){
-  const $navUser = $('#nav-user');
-  const $navUserName = $navUser.find('#nav-username');
-  $navUser.removeClass('d-none');
-  $navUserName.text(userName);
-}
 
 function downloadPdf(badgeType) {
   const pdf = new jsPDF()
@@ -175,8 +169,10 @@ function executeOnLoad() {
   } else if (currentIndexInStorage < totalSentence - 1) {
     location.href = "./home.html";
   } else {
-    showUserProfile(localSpeakerDataParsed.userName)
-    toggleFooterPosition();
+    showUserProfile(localSpeakerDataParsed.userName);
+    onChangeUser('./validator-thank-you.html',MODULE.bolo.value)
+    onOpenUserDropDown();
+    // toggleFooterPosition();
     setPageContentHeight();
     setSentencesContributed();
 

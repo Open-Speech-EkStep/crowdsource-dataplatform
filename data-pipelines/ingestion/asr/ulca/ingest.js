@@ -109,7 +109,7 @@ const start = async (connectionString, localDatasetPath, params, remote_dataset_
     const client = conn(connectionString)
     try {
         const files = fs.readFileSync('./asr_files.txt', 'utf8').split('\n')
-            .filter(x => x.split('.')[1] === 'wav');
+            .filter(x => x.includes('.wav'));
 
         const id = await insertMaster(params, remote_dataset_bundle_path, client)
 

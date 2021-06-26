@@ -3,7 +3,7 @@
         <div>
             <img src="<%= `../../img/${MODULE}_bronze_badge.svg`%>" alt="Bronze Badge" id="reward-img" class="reward-img">
         </div>
-        <p class="mt-2"><%= __('National Language Translation Mission')%></p>
+        <p class="mt-2 d-none"><%= __('National Language Translation Mission')%></p>
         <button class="btn btn-outline-primary my-2" data-badge="" download id="download_pdf"><span class="mr-2"><%= __('Download')%></span>
             <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6.12766 0C6.40968 0 6.6383 0.228621 6.6383 0.510638V6.49941L8.54196 4.59575L9.19149 5.24528L6.12766 8.30911L3.06383 5.24528L3.71336 4.59575L5.61702 6.49941V0.510638C5.61702 0.228621 5.84564 0 6.12766 0Z" fill="#007BFF"/>
@@ -12,9 +12,9 @@
         </button>
     </div>
     <div class="col-12 col-lg-7 col-md-7 msg-box mt-5">
-        <h4 class="mb-3 mt-lg-5"><%- __('You’ve earned your <span id="current_badge_name"></span> Badge') %></h4>
-        <p><span id="user-contribution" class="text-primary"></span> <%- __('<span id="current_badge_name_1"></span> contributor level achieved for contributing <span id="current_badge_count"></span> sentences.') %></p>
-        <p class="mt-lg-5"><%- __('Your next goal is to reach <span id="next_badge_count"></span> sentences to unlock your <span id="next_badge_name_1"></span> Badge. <a href="./badges.html">Know more</a>') %></p>
+        <h4 class="mb-3 mt-lg-5"><%- __('You’ve earned your <span id="current_badge_name"></span> Bhasha Samarthak Badge') %></h4>
+        <p><span id="user-contribution" class="text-primary"></span> <%- __(`You earned a <span id="current_badge_name_1"></span> Bhasha Samarthak Badge by ${type} <span id="current_badge_count"></span> ${text}.`) %></p>
+        <p class="mt-lg-5"><%- __(`Your next goal is to reach <span id="next_badge_count"></span> ${text} to earn your <span id="next_badge_name_1"></span> Bhasha Samarthak Badge. <a href="./badges.html">Know more</a>`) %></p>
     </div>
 </div>
 

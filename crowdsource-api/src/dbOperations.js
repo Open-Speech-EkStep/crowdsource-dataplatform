@@ -1,6 +1,5 @@
 const { downloader } = require('./downloader/objDownloader')
 const moment = require('moment');
-const { uploader } = require('./uploader/objUploader')
 
 const {
     updateContributionDetails,
@@ -592,6 +591,17 @@ const getLanguageGoal = async (language, source, type) => {
     return languageGoal['goal'];
 }
 
+const languageGoal = async (req, res) => {
+    try {
+        const { type, language, source } = req.params;
+        const goal = await getLanguageGoal(language, source, type);
+        res.status(200).send({ goal });
+    } catch (err) {
+        console.log(err);
+        res.send(500);
+    }
+}
+
 const updateDbWithUserInput = async (
     userName,
     userId,
@@ -722,6 +732,7 @@ module.exports = {
     markContributionSkipped,
     getRewards,
     getRewardsInfo,
+    languageGoal,
     updateDbWithUserInput,
     getAvailableLanguages,
     getTargetInfo,

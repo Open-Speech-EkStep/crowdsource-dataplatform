@@ -80,9 +80,9 @@ function setPageContentHeight() {
 }
 
 function toggleFooterPosition() {
-  const $footer = $('footer');
-  $footer.toggleClass('fixed-bottom')
-  $footer.toggleClass('bottom')
+  // const $footer = $('footer');
+  // $footer.toggleClass('fixed-bottom')
+  // $footer.toggleClass('bottom')
 }
 
 function fetchLocationInfo() {
@@ -156,14 +156,14 @@ const getLocaleString = function() {
 }
 
 const updateLocaleLanguagesDropdown = (language) => {
-    const dropDown = $('#localisation_dropdown');
-    const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-    if(language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
-        dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
-    } else {
-        dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-    }
+    // const dropDown = $('#localisation_dropdown');
+    // const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+    // if(language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
+    //     dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
+    // } else {
+    //     dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+    //     <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+    // }
 }
 
 const calculateTime = function (totalSeconds, isSeconds = true) {
@@ -181,15 +181,23 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
 const formatTime = function (hours, minutes = 0, seconds = 0) {
   let result = "";
   if (hours > 0) {
-    result += `${hours} hrs `;
+    result += `${hours}h `;
   }
   if (minutes > 0) {
-    result += `${minutes} min `;
+    result += `${minutes}m `;
   }
   if (hours === 0 && minutes === 0 && seconds > 0) {
-    result += `${seconds} sec `;
+    result += `${seconds}s `;
   }
-  return result.substr(0, result.length - 1);
+
+  if(hours === 0 && minutes === 0 && seconds === 0){
+    result += '0s ';
+  }
+
+  if(result.charAt(result.length - 1 ) !== ' ')
+    return result.substr(0, result.length);
+  else 
+    return result.substr(0, result.length - 1);
 };
 
 const setFooterPosition = () => {

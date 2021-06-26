@@ -9,6 +9,5 @@ function gcpUploader(filename, userName, userId, language) {
     // const currentDate = new Date().toISOString().slice(0, 10)
     return storage.bucket(process.env.BUCKET_NAME).upload(filename, { destination: fullPath });
 }
-module.exports = {
-    gcpUploader
-}
+
+module.exports = { gcpUploader }

@@ -1,3 +1,11 @@
+
+jest.mock('@azure/storage-blob', () => ({
+    // ...jest.requireActual('@azure/storage-blob'), // keep other props as they are
+    BlobServiceClient: {
+        fromConnectionString: jest.fn().mockReturnValue({}),
+    },
+}));
+
 const routes = require("../src/app");
 import * as dbOperations from '../src/dbOperations';
 
@@ -88,4 +96,9 @@ describe("Test the root path", () => {
     //     expect(response.status).toBe(200)
     //     // console.log(response.cookie)
     //   });
+
+    // test('/language-goal should respond with status 200', async () => {
+    //     const response = await request(app).get('/language-goal/text/Hindi/contribute');
+    //     expect(response.status).toBe(200);
+    // })
 });

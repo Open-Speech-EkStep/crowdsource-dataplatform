@@ -1,10 +1,13 @@
 const fetch = require('./fetch')
 const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
-const { showUserProfile } = require('../../../build/js/common/header');
+const { showUserProfile,onOpenUserDropDown } = require('../../../build/js/common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
 const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition, getDeviceInfo, getBrowserInfo} = require('./utils');
 const { cdn_url } = require('./env-api');
+const { onChangeUser } = require('./header');
+const { MODULE } = require('./constants');
+const { setDataSource } = require('../../../build/js/common/sourceInfo');
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -33,7 +36,7 @@ function getCurrentIndex(lastIndex) {
 
 const showInstructionsPopup = () => {
     hideElement($("#validator-page-content"));
-    toggleFooterPosition();
+    // toggleFooterPosition();
     showInstructions();
 }
 
@@ -178,6 +181,7 @@ function setSentenceLabel(index) {
     const $sentenceLabel = $('#sentenceLabel')
     $sentenceLabel[0].innerText = boloIndiaValidator.sentences[index].sentence;
     animateCSS($sentenceLabel, 'lightSpeedIn');
+    setDataSource(boloIndiaValidator.sentences[index].source_info);
 }
 
 function getNextSentence() {
@@ -195,7 +199,7 @@ function getNextSentence() {
         localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
         localStorage.setItem(currentIndexKey, currentIndex);
         resetValidation();
-        showThankYou();
+        setTimeout(showThankYou, 1000);
     }
 }
 
@@ -292,7 +296,7 @@ function addListeners() {
 
     $validatorInstructionsModal.on('hidden.bs.modal', function () {
         showElement($("#validator-page-content"));
-        toggleFooterPosition();
+        // toggleFooterPosition();
     });
 
     const likeButton = $("#like_button");
@@ -396,7 +400,7 @@ const handleSubmitFeedback = function () {
 let selectedReportVal = '';
 $(document).ready(() => {
     localStorage.setItem('module','bolo');
-    toggleFooterPosition();
+    // toggleFooterPosition();
     setPageContentHeight();
     const $errorModal = $('#errorModal');
     const language = localStorage.getItem('contributionLanguage');
@@ -440,7 +444,7 @@ $(document).ready(() => {
     }).then(response => {
         localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);
-    }).catch(console.log);
+    }).catch((err) => {});
 
     $errorModal.on('show.bs.modal', function () {
         setFooterPosition();
@@ -460,7 +464,9 @@ $(document).ready(() => {
     return;
   }
 
-  showUserProfile(localSpeakerDataParsed.userName)
+  showUserProfile(localSpeakerDataParsed.userName);
+  onChangeUser('./validator-page.html',MODULE.bolo.value);
+    onOpenUserDropDown();
 
   const isExistingUser = localSentencesParsed &&
     localSentencesParsed.userName === localSpeakerDataParsed.userName
@@ -474,8 +480,7 @@ $(document).ready(() => {
     localStorage.removeItem(currentIndexKey);
     const type = 'text';
     const toLanguage = ""; //can be anything
-
-    fetch(`/contributions/${type}?from=${language}&to=${toLanguage}`, {
+    fetch(`/contributions/${type}?from=${language}&to=${toLanguage}&username=${localSpeakerDataParsed.userName}`, {
       credentials: 'include',
       mode: 'cors'
     })
@@ -504,7 +509,7 @@ $(document).ready(() => {
       );
       initializeComponent();
     }).catch((err) => {
-      console.log(err);
+        console.log(err);
       $errorModal.modal('show');
     });
   }

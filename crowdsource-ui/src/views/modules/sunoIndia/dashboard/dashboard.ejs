@@ -1,11 +1,11 @@
 <html lang="en">
 
 <head>
-    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
-    <meta name="description" content="Bolo India: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta name="description" content="BhashaDaan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno India", PAGE_TITLE:"Dashboard"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:"Dashboard",img:"SunoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div class="container container-fluid supreme-container">
     <div class="row">
         <div class="col-12">
@@ -59,7 +59,7 @@
                 <div><span class="spinner"></span></div>
             </div>
             <div class="row text-center contribution-details d-none" id="contribution-details">
-                <%- include('../common/contributionStats.ejs',{labels :['Languages','People participated','Hrs transcribed','Hrs validated']})%>
+                <%- include('../common/contributionStats.ejs',{labels :['Languages','People participated','Duration transcribed','Duration validated']})%>
 </div>
         </div>
     </div>
@@ -85,7 +85,7 @@
         </div>
     </div>
 </div>
-<%- include ../common/userDetails.ejs %>
+<%- include ../common/speakerDetails.ejs %>
 <%- include ../common/content-languages.ejs %>
 <%- include ../common/say-listen-language.ejs %>
 <%- include('../common/feedback.ejs', {page: "Dashboard"}) %>

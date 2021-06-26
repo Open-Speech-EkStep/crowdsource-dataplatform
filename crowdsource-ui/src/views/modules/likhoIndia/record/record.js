@@ -13,10 +13,11 @@ const {
 const { LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, ALL_LANGUAGES } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, isMobileDevice,showOrHideExtensionCloseBtn } = require('../common/common');
-const { showUserProfile } = require('../common/header');
+const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const speakerDetailsKey = 'speakerDetails';
 const {initializeFeedbackModal} = require('../common/feedback');
+const { setDataSource } = require('../common/sourceInfo');
 
 const currentIndexKey = 'likhoCurrentIndex';
 const sentencesKey = 'likhoSentencesKey';
@@ -33,7 +34,7 @@ function uploadToServer(cb) {
   });
   fd.append('userInput', likhoIndia.editedText);
   fd.append('speakerDetails', speakerDetails);
-  fd.append('language', localSpeakerDataParsed.toLanguage);
+  fd.append('language', localStorage.getItem(LIKHO_TO_LANGUAGE));
   fd.append('sentenceId', likhoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
@@ -49,8 +50,6 @@ function uploadToServer(cb) {
     .then((result) => {
     })
     .catch((err) => {
-
-      console.log(err);
     })
     .then((finalRes) => {
       if (cb && typeof cb === 'function') {
@@ -82,6 +81,7 @@ function getNextSentence() {
     currentIndex++;
     updateProgressBar(currentIndex + 1, likhoIndia.sentences.length);
     setSentence(likhoIndia.sentences[currentIndex].media_data);
+    setDataSource(likhoIndia.sentences[currentIndex].source_info);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
   } else {
@@ -132,9 +132,7 @@ function markContributionSkipped() {
     .then((res) => res.json())
     .then((result) => {
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch((err) => {})
 }
 
 function addListeners() {
@@ -188,9 +186,7 @@ function addListeners() {
         closeEditor();
         getNextSentence();
       }, 2000)
-    } catch (e) {
-      console.log(e)
-    }
+    } catch (e) {}
 
   })
 
@@ -337,6 +333,7 @@ const initialize = function () {
 
   if (translation) {
     setSentence(translation.media_data);
+    setDataSource(translation.source_info);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     updateProgressBar(currentIndex + 1, likhoIndia.sentences.length)
@@ -344,31 +341,31 @@ const initialize = function () {
 };
 
 const updateLocaleLanguagesDropdown = (language, toLanguage) => {
-  const dropDown = $('#localisation_dropdown');
-  const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-  const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
-  const invalidToLang = toLanguage.toLowerCase() === "english" || toLang.hasLocaleText === false;
-  const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
-  if (invalidToLang && invalidFromLang) {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
-  } else if (invalidFromLang) {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-      <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  } else if (invalidToLang) {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  } else if (toLanguage.toLowerCase() === language.toLowerCase()) {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  } else {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
-        <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  }
+  // const dropDown = $('#localisation_dropdown');
+  // const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+  // const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
+  // const invalidToLang = toLanguage.toLowerCase() === "english" || toLang.hasLocaleText === false;
+  // const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
+  // if (invalidToLang && invalidFromLang) {
+  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
+  // } else if (invalidFromLang) {
+  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+  //     <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+  // } else if (invalidToLang) {
+  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  // } else if (toLanguage.toLowerCase() === language.toLowerCase()) {
+  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  // } else {
+  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
+  //       <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+  // }
 }
 
 function executeOnLoad() {
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
   const $validationInstructionModal = $("#validation-instruction-modal");
@@ -391,7 +388,7 @@ function executeOnLoad() {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch(console.log);
+  }).catch((err) => {});
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
@@ -419,6 +416,8 @@ function executeOnLoad() {
     }
 
     showUserProfile(localSpeakerDataParsed.userName);
+    onChangeUser('./record.html',MODULE.likho.value);
+    onOpenUserDropDown();
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName
       &&

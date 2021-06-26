@@ -1,6 +1,8 @@
 const fetch = require('./fetch')
 const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo } = require('./utils');
-const { LOCALE_STRINGS } = require('./constants');
+const { LOCALE_STRINGS,MODULE,CONTRIBUTION_LANGUAGE } = require('./constants');
+const { setDataSource } = require('../../../build/js/common/sourceInfo');
+const { onChangeUser , showUserProfile,onOpenUserDropDown} = require('./header');
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
@@ -165,6 +167,7 @@ const initialize = () => {
         $sentenceLbl[0].innerText = sentences[index].media_data;
         animateCSS($sentenceLbl, 'lightSpeedIn');
         setProgressBar(currentIndex);
+        setDataSource(sentences[index].source_info);
     };
 
     const notyf = new Notyf({
@@ -257,7 +260,6 @@ const initialize = () => {
                 }, 21 * 1000);
             })
             .catch((err) => {
-                console.log(err);
                 notyf.error(
                     'Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission'
                 );
@@ -379,8 +381,8 @@ const initialize = () => {
             Object.assign(sentencesObj, { sentences: [] });
             localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
             localStorage.setItem(currentIndexKey, currentIndex);
-            const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
-            notyf.success(msg);
+            // const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
+            // notyf.success(msg);
             $('#loader').show();
         } else if (currentIndex < totalItems - 1) {
             incrementCurrentIndex();
@@ -433,9 +435,7 @@ const initialize = () => {
             .then((res) => res.json())
             .then((result) => {
             })
-            .catch((err) => {
-                console.log(err);
-            })
+            .catch((err) => {})
             .then((finalRes) => {
                 if (cb && typeof cb === 'function') {
                     cb();
@@ -470,9 +470,7 @@ const initialize = () => {
             .then((res) => res.json())
             .then((result) => {
             })
-            .catch((err) => {
-                console.log(err);
-            })
+            .catch((err) => {})
             .then((finalRes) => {
                 if (cb && typeof cb === 'function') {
                     cb();
@@ -587,7 +585,7 @@ function executeOnLoad() {
     }).then(response => {
         localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);
-    }).catch(console.log);
+    }).catch((err) => {});
     try {
         const localSpeakerData = localStorage.getItem(speakerDetailsKey);
         const localSpeakerDataParsed = JSON.parse(localSpeakerData);
@@ -615,11 +613,9 @@ function executeOnLoad() {
             return;
         }
 
-        if(localSpeakerDataParsed.userName && localSpeakerDataParsed.userName.length > 0){
-            $navUser.removeClass('d-none');
-            $('#nav-login').addClass('d-none');
-            $navUserName.text(localSpeakerDataParsed.userName);
-        }
+        showUserProfile(localSpeakerDataParsed.userName)
+        onChangeUser('./record.html',MODULE.bolo.value);
+        onOpenUserDropDown();
         const isExistingUser = localSentencesParsed &&
             localSentencesParsed.userName === localSpeakerDataParsed.userName
             &&

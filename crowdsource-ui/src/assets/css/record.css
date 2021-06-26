@@ -504,3 +504,12 @@ audio {
   font-size: 24px;
 }
 
+
+@media (max-width: 767px) {
+  #audio-row my-audio{
+    width: 240px;
+  }
+
+
+
+}

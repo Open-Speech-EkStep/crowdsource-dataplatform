@@ -1,15 +1,16 @@
 const {
-    testUserName,
     setSpeakerDetails,
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
-    setStartRecordingBtnOnClick
+    setStartRecordingBtnOnClick,
 } = require('./speakerDetails');
 
-const { whitelisting_email } = require('./env-api');
+// const {hasUserRegistered} = require('../../../build/js/common/common');
+const {hasUserRegistered} = require('./common');
+const { onChangeUser, showUserProfile } = require('./header');
 
-const {DEFAULT_CON_LANGUAGE,ALL_LANGUAGES,MODULE, CURRENT_MODULE} = require('./constants');
+const {DEFAULT_CON_LANGUAGE,MODULE, CURRENT_MODULE, CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY} = require('./constants');
 const {updateLocaleLanguagesDropdown} = require('./utils');
 
 function onActiveNavbar(value) {
@@ -33,41 +34,31 @@ $(document).ready(function () {
     const speakerDetailsKey = 'speakerDetails';
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
-    const genderRadios = document.querySelectorAll('input[name = "gender"]');
     const age = document.getElementById('age');
     const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
-    //const $tncCheckbox = $('#tnc');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
-
-    const contributionLanguage = localStorage.getItem('contributionLanguage');
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }
-
-    $('input[name = "gender"]').on('change', function() {
-        const selectedGender = document.querySelector(
-            'input[name = "gender"]:checked'
-        );
-        const options = $("#transgender_options");
-        if(selectedGender.value === "others") {
-            options.removeClass("d-none");
-        } else {
-            options.addClass("d-none");
-        }
-    });
-
-  //  $tncCheckbox.prop('checked', false);
 
     $startRecordBtnTooltip.tooltip({
         container: 'body',
         placement: screen.availWidth > 500 ? 'right' : 'auto',
     });
 
+    setUserModalOnShown($userName);
     $startRecordBtnTooltip.tooltip('disable');
-
-    setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+    // setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
+    setUserNameOnInputFocus();
+    if(hasUserRegistered()){
+        const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+        const localSpeakerDataParsed = JSON.parse(speakerDetails);
+        showUserProfile(localSpeakerDataParsed.userName);
+    }
+    onChangeUser('./about-us.html','home');
 
     let langTop;
     $('#languageTop').on('change', (e) => {
@@ -79,40 +70,13 @@ $(document).ready(function () {
     $('#start_recording').on('click', () => {
         sentenceLanguage = langTop;
         localStorage.setItem("i18n", "en");
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
+        localStorage.setItem("selectedType", "contribute");
+        if(!hasUserRegistered()){
+            $('#userModal').modal('show');
+            setStartRecordingBtnOnClick('./record.html',MODULE.bolo.value);
+        } else {
+            location.href ='./record.html';
+        }
     });
-
-    setUserNameOnInputFocus();
-
-    $startRecordBtn.on('click', () => {
-        const checkedGender = Array.from(genderRadios).filter((el) => el.checked);
-        let genderValue = checkedGender.length ? checkedGender[0].value : '';
-        let userNameValue = $userName.val().trim().substring(0, 12);
-        if(whitelisting_email==='true'){
-            userNameValue = $userName.val().trim();
-        }
-        const selectedLanguage = ALL_LANGUAGES.find(e=>e.value === sentenceLanguage);
-        if (! selectedLanguage.data) sentenceLanguage = DEFAULT_CON_LANGUAGE;
-        if (testUserName(userNameValue)) {
-            return;
-        }
-        const transGenderRadios = document.querySelectorAll('input[name = "trans_gender"]');
-        if (genderValue === "others") {
-            const transGender = Array.from(transGenderRadios).filter((el) => el.checked);
-            genderValue = transGender.length ? transGender[0].value : '';
-        }
-
-        const speakerDetails = {
-            gender: genderValue,
-            age: age.value,
-            motherTongue: motherTongue.value,
-            userName: userNameValue,
-            language: sentenceLanguage || localStorage.getItem('contributionLanguage'),
-        };
-        localStorage.setItem(speakerDetailsKey, JSON.stringify(speakerDetails));
-        localStorage.setItem("contributionLanguage", sentenceLanguage);
-        // document.cookie = `i18n=en`;
-        location.href = './record.html';
-    });
-
-    setUserModalOnShown($userName);
 });

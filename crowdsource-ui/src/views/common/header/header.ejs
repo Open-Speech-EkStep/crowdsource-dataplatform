@@ -1,17 +1,23 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/common/header.css">
-<nav class="navbar navbar-expand-lg navbar-light bg-light px-4 py-lg-0">
-    <div class="d-flex align-items-center">
-        <a class="logo-text text-dark" href="/">
-            <h2 class="mb-0">
-                <img src="../../img/BoloIndiaLogo.png" alt="Meity Logo" width="64px" height="54px">
-            </h2>
-        </a>
-        <div class="version-beta ml-4">Beta</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light pl-4 py-lg-0 py-0 pr-0" id="header-nav-bar">
+    <div class="row m-0">
+        <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="d-flex align-items-center">
+            <a class="logo-text text-dark" href="/">
+                <h2 class="mb-0" id="bhasini_logo">
+                    <img src="<%- `../../img/${locale}-logo.svg` %>" alt="Bhaashini" width="64px" height="54px">
+                </h2>
+            </a>
+            <div class="vertical-line"></div>
+            <a class="logo-text text-dark position-relative" href="/" style="padding-top:5px" id="bhashadaan_logo">
+                    <img src="<%- `../../img/${locale}-bhasadaan.svg` %>" alt="BhashaDaan" width="190px" height="48px">
+                <span class="beta-version">Beta</span>
+            </a>
+        </div>
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-lg-5" id="module_name">
-            <li class="nav-item module-item p-2" value="home"><a href="<%= home %>" class="nav-link text-dark font-weight-bold">
+            <li class="nav-item module-item p-2 d-none" value="home"><a href="<%= home %>" class="nav-link text-dark font-weight-bold">
                     <%= __('Home') %>
                 </a></li>
             <li class="nav-item module-item p-2" value="suno"><a href="<%= suno %>" class="nav-link text-dark font-weight-bold">
@@ -29,16 +35,36 @@
         </ul>
         <ul class="navbar-nav ml-auto" id="about-us">
             <li class="nav-item p-2 module-item dropdown" id="locale_language_dropdown">
-                <div href="https://inference.vakyansh.in/" class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <%= __('Language') %>
+                <a class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="../../img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
+                    <span><%= __('Language') %></span>
+                </a>
+                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton">
+                    <% LANGUAGES.forEach(function(obj) { if(obj.hasLocaleText){%>
+                        <a id="<%= obj.value.toLowerCase() %>" class="dropdown-item" href="#" locale="<%= obj.id %>"><%= obj.text %></a>
+                    <%} }) %>
                 </div>
-                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton"><a id="english" class="dropdown-item" href="#" locale="en">English</a></div>
             </li>
-            <li class="nav-item p-2 module-item" value="about-us"><a href="<%- `${path}about-us.html`%>" class="nav-link text-dark font-weight-bold">
+            <li class="nav-item p-2 module-item d-none" value="about-us"><a href="<%- `${path}about-us.html`%>" class="nav-link text-dark font-weight-bold">
                     <%= __('About Us') %>
                 </a></li>
-            <li class="nav-item p-2"><a class="nav-link text-dark font-weight-bold d-none" id="nav-user"><span class="material-icons align-middle mx-1">account_circle</span> <span id="nav-username"></span></a></li>
         </ul>
     </div>
+    <ul class="navbar-nav" id="userNavBar">
+        <li class="nav-item pr-lg-4 dropdown" id="userDropDown">
+            <a class="nav-link text-dark font-weight-bold d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="../../img/usericon.svg" alt="usericon" class="align-middle mx-1">
+                <span id="nav-username"></span>
+            </a>
+
+            <div id="user_profile_dropdown" class="dropdown-menu" aria-labelledby="nav-user">
+                <a id="user_profile_name" class="dropdown-item point-none" href="#"></a>
+                <a id="anonymous_user" class="dropdown-item point-none" href="#"><%= __('(No Username)')%></a>
+                <a id="change_user" class="dropdown-item" href="#" data-toggle="modal" data-target="#userModal"><%= __('Change User')%></a>
+            </div>
+        </li>
+    </ul>
 </nav>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
+<script src="../../js/common/header.js"></script>
+

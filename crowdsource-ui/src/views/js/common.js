@@ -1,5 +1,5 @@
 const {
-  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS,LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE
+  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS,LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE,SPEAKER_DETAILS_KEY,DEFAULT_CON_LANGUAGE
 } = require('./constants');
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { constructChart } = require('./horizontalBarGraph');
@@ -7,28 +7,32 @@ const { changeLocale,showLanguagePopup } = require('./locale');
 const fetch = require('./fetch');
 
 const getContributedAndTopLanguage = (topLanguagesData, type) => {
-  topLanguagesData = topLanguagesData.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1)
-  const topLanguagesResult = [...topLanguagesData];
-  const contributedLanguage = type == "likho" ? localStorage.getItem(LIKHO_FROM_LANGUAGE) + '-' + localStorage.getItem(LIKHO_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const topLanguageArray = [];
-  let topLanguages = [];
-  const contributedLanguageHours = topLanguagesData.find(item => item.language == contributedLanguage);
-  if (contributedLanguageHours && contributedLanguageHours.language != topLanguagesData[0].language) {
-    topLanguageArray.push(contributedLanguageHours)
-    let remainingLanguage = topLanguagesData.filter(item => item.language !== contributedLanguage);
-    remainingLanguage = type == "dekho" || type == "likho" ? remainingLanguage.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1) : remainingLanguage.sort((a, b) => Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1);
-    topLanguages = remainingLanguage.slice(0, 3);
-  } else {
-    if( contributedLanguage != topLanguagesData[0].language) {
-      if(type == "suno" || type == "bolo") {
-        topLanguageArray.push({ language: contributedLanguage,  total_contributions: "0.000" });
-      } else {
-        topLanguageArray.push({ language: contributedLanguage,  total_contribution_count: "0" });
+  if(topLanguagesData  && topLanguagesData.length) {
+    topLanguagesData = topLanguagesData.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1)
+    const topLanguagesResult = [...topLanguagesData];
+    const contributedLanguage = type == "likho" ? localStorage.getItem(LIKHO_FROM_LANGUAGE) + '-' + localStorage.getItem(LIKHO_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    const topLanguageArray = [];
+    let topLanguages = [];
+    const contributedLanguageHours = topLanguagesData.find(item => item.language == contributedLanguage);
+    if (contributedLanguageHours && contributedLanguageHours.language != topLanguagesData[0].language) {
+      topLanguageArray.push(contributedLanguageHours)
+      let remainingLanguage = topLanguagesData.filter(item => item.language !== contributedLanguage);
+      remainingLanguage = type == "dekho" || type == "likho" ? remainingLanguage.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1) : remainingLanguage.sort((a, b) => Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1);
+      topLanguages = remainingLanguage.slice(0, 3);
+    } else {
+      if( contributedLanguage != topLanguagesData[0].language) {
+        if(type == "suno" || type == "bolo") {
+          topLanguageArray.push({ language: contributedLanguage,  total_contributions: "0.000" });
+        } else {
+          topLanguageArray.push({ language: contributedLanguage,  total_contribution_count: "0" });
+        }
       }
+      topLanguages = topLanguagesResult.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1).slice(0, 3);
     }
-    topLanguages = topLanguagesResult.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1).slice(0, 3);
+    return topLanguageArray.concat(topLanguages).reverse();
+  } else {
+    return [];
   }
-  return topLanguageArray.concat(topLanguages).reverse();
 }
 
 function showByHoursChart(type) {
@@ -56,13 +60,10 @@ function showByHoursChartThankyouPage(type) {
 
 function redirectToLocalisedPage() {
   const locale = localStorage.getItem("i18n") ;
+  const allLocales = ALL_LANGUAGES.map(language => language.id);
   // const locale = localeValue == 'null'  || localeValue == undefined? 'en' : localeValue;
   const splitValues = location.href.split('/');
-  const currentModule = localStorage.getItem(CURRENT_MODULE);
-  const isModulePresent = currentModule == 'suno' || currentModule == 'dekho' || currentModule == 'bolo';
-  const currentLocale = splitValues[splitValues.length - 2];
-  const contribution_langugae = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  $('#home-page').attr('default-lang', contribution_langugae);
+  const currentLocale = splitValues.filter(value => allLocales.includes(value))[0] || '';
   if (currentLocale != locale) {
     changeLocale(locale);
   }
@@ -75,14 +76,15 @@ function redirectToLocalisedPage() {
 }
 
 const updateLocaleLanguagesDropdown = (language) => {
-  const dropDown = $('#localisation_dropdown');
-  const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-  if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
-    dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
-  } else {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-      <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  }
+  // const dropDown = $('#localisation_dropdown');
+  // language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
+  // const localeLang = ALL_LANGUAGES.find(ele => ele.value.toLowerCase() === language.toLowerCase());
+  // if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
+  //   dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
+  // } else {
+  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+  //     <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  // }
 }
 
 const getAvailableLanguages = (type) => {
@@ -153,15 +155,15 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
     if(module == 'bolo'){
       if(functionalFlow === 'validator'){
-        $("#reward-img").attr('src', `../img/bolo_${data.currentBadgeType.toLowerCase()}_val.svg`);
+        $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_medal_val.svg`);
       } else {
-        $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_badge.svg`);
+        $("#reward-img").attr('src', `../img/${data.currentBadgeType.toLowerCase()}_medal.svg`);
       }
     } else {
       if(functionalFlow == 'validator'){
-        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_val.svg`);
+        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_medal_val.svg`);
       } else {
-        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_badge.svg`);
+        $("#reward-img").attr('src', `../../img/${module}_${data.currentBadgeType.toLowerCase()}_medal.svg`);
       }
     }
   } else if (data.contributionCount < 5) {
@@ -255,6 +257,12 @@ const landToHome = function (){
   }
 }
 
+const hasUserRegistered = function (){
+  const userDetail = localStorage.getItem(SPEAKER_DETAILS_KEY);
+  const parsedUserDetails = userDetail ? JSON.parse(userDetail) : false;
+  return parsedUserDetails ? true : false;
+}
+
 const showOrHideExtensionCloseBtn = function (){
   // console.log("here")
 
@@ -269,4 +277,4 @@ const showOrHideExtensionCloseBtn = function (){
 
 
 
-module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn };
+module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered };

@@ -31,12 +31,13 @@ const {
     updateDbWithUserInput,
     getAvailableLanguages,
     getTargetInfo,
-    userVerify
+    userVerify,
+    languageGoal
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
-const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH, MIN_SNR_LEVEL,ROLE_UAT } = require('./constants');
+const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH, MIN_SNR_LEVEL, ROLE_UAT } = require('./constants');
 const {
     validateUserInputAndFile,
     validateUserInfo,
@@ -47,7 +48,8 @@ const {
     validateContributedMediaInput,
     validateInputsForValidateEndpoint,
     validateGetContributionsInput,
-    validateMediaTypeInput
+    validateMediaTypeInput,
+    validateLanguageGoalInput
 } = require('./middleware/validateUserInputs');
 
 // const Ddos = require('ddos');
@@ -140,9 +142,9 @@ router.get('/', function (req, res) {
 
 router.get('/profanity/:type', function (req, res) {
     const type = req.params.type;
-    if(!['sunoindia','likhoindia','dekhoindia','boloindia'].includes(type)){
-       res.redirect('/en/not-found.html');
-       return; 
+    if (!['sunoindia', 'likhoindia', 'dekhoindia', 'boloindia'].includes(type)) {
+        res.redirect('/en/not-found.html');
+        return;
     }
     res.redirect(`/en/profanity-home.html?type=${type}`);
 });
@@ -160,10 +162,10 @@ router.get('/getDetails/:language', async function (req, res) {
 
 router.post('/verify-user', async (req, res) => {
     const { userName } = req.body;
-    try{
+    try {
         await userVerify(userName, ROLE_UAT);
         res.sendStatus(200);
-    }catch(err){
+    } catch (err) {
         // console.log(err);
         res.sendStatus(401);
     }
@@ -231,7 +233,7 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
     const file = req.file;
     const datasetId = req.body.sentenceId;
     const { userId } = req.cookies;
-    const { speakerDetails, language, state = '', country = '', device ='', browser=''} = req.body;
+    const { speakerDetails, language, state = '', country = '', device = '', browser = '' } = req.body;
     const speakerDetailsJson = JSON.parse(speakerDetails);
     const { userName, age = '', motherTongue = '', gender = '' } = speakerDetailsJson;
 
@@ -242,7 +244,7 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
         uploadFile(file.path, userName, userId, language)
             .then(() => {
                 const audioPath = `raw/landing/${language}/audio/users/${userId}/${userName}/uploads/${file.filename}`;
-                updateDbWithAudioPath(audioPath, datasetId, userId, userName, state, country, audioDuration, language, age, gender, motherTongue,device, browser,
+                updateDbWithAudioPath(audioPath, datasetId, userId, userName, state, country, audioDuration, language, age, gender, motherTongue, device, browser,
                     (resStatus, resBody) => {
                         removeTempFile(file);
                         res.status(resStatus).send(resBody);
@@ -393,6 +395,8 @@ router.get('/rewards-info', validateRewardsInfoInput, async (req, res) => {
 
     return res.status(404).send('Data not found');
 });
+
+router.get('/language-goal/:type/:language/:source', validateLanguageGoalInput, (req, res) => languageGoal(req, res));
 
 router.get('/available-languages/:type', validateMediaTypeInput, (req, res) => getAvailableLanguages(req, res));
 

@@ -20,8 +20,10 @@ const { stringToHTML, mockLocalStorage } = require('./utils');
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../src/views/validator-prompt-page.ejs`, 'UTF-8') +
-  readFileSync(`${__dirname}/../src/views/common/headerForContributor.ejs`, 'UTF-8') +
-  readFileSync(`${__dirname}/../src/views/modals/mic-speaker-testing.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../build/views/common/headerWithoutNavBar.ejs`, 'UTF-8') +
+  readFileSync(`${__dirname}/../src/views/modals/mic-speaker-testing.ejs`, 'UTF-8')+
+  readFileSync(`${__dirname}/../src/views/modals/validation-report-modal.ejs`, 'UTF-8')
+
 );
 
 jest.mock('../src/assets/js/validator-instructions', () => ({
@@ -154,6 +156,16 @@ describe("setAudioPlayer", () => {
     expect(textReplay.hasClass("d-none")).toEqual(true);
   });
 });
+
+describe('check if report modal is present or not', () => {
+  test("should give true when report modal is present",()=>{
+    const reportModal = $('#report_recording_modal');
+    if(!reportModal.html()){
+      throw Error("NO REPORT MODAL PRESENT");
+    }
+  })
+})
+
 
 // describe('onReady prompt-page', () => {
 

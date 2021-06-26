@@ -12,14 +12,15 @@ const {
   getDeviceInfo,
   getBrowserInfo
 } = require('../common/utils');
+const { onChangeUser,onOpenUserDropDown, showUserProfile } = require('../common/header');
 const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const {showUserProfile} = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
-const {initializeFeedbackModal} = require('../common/feedback')
+const { initializeFeedbackModal } = require('../common/feedback');
+const { setDataSource } = require('../common/sourceInfo');
 const sunoCountKey = 'sunoCount';
 const currentIndexKey = 'sunoCurrentIndex';
 const sentencesKey = 'sunoSentencesKey';
@@ -53,7 +54,7 @@ function uploadToServer(cb) {
   });
   fd.append('userInput', sunoIndia.editedText);
   fd.append('speakerDetails', speakerDetails);
-  fd.append('language', localSpeakerDataParsed.language);
+  fd.append('language',localStorage.getItem(CONTRIBUTION_LANGUAGE));
   fd.append('sentenceId', sunoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
@@ -68,10 +69,7 @@ function uploadToServer(cb) {
     .then((res) => res.json())
     .then((result) => {
     })
-    .catch((err) => {
-
-      console.log(err);
-    })
+    .catch((err) => {})
     .then((finalRes) => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -95,6 +93,7 @@ const setAudioPlayer = function () {
   const textPause = $('#audioplayer-text_pause');
   const textResume = $('#audioplayer-text_resume');
   const cancelButton = $("#cancel-edit-button");
+  const $submitButton = $('#submit-edit-button');
 
 
   myAudio.addEventListener("ended", () => {
@@ -104,6 +103,11 @@ const setAudioPlayer = function () {
     hideElement(textPause);
     hideElement(textResume);
     showElement(textReplay);
+    localStorage.setItem("contribution_audioPlayed",true);
+    const previousActiveError = $("#edit-error-text .error-active");
+    if($("#edit").val() && !previousActiveError[0]){
+      $submitButton.removeAttr("disabled");
+    }
     cancelButton.removeAttr("disabled");
     $("#edit").removeAttr("disabled");
   });
@@ -173,7 +177,9 @@ function getNextSentence() {
     currentIndex++;
     updateProgressBar(currentIndex + 1, sunoIndia.sentences.length);
     const encodedUrl = encodeURIComponent(sunoIndia.sentences[currentIndex].media_data);
+    localStorage.setItem("contribution_audioPlayed",false);
     loadAudio(`${cdn_url}/${encodedUrl}`);
+    setDataSource(sunoIndia.sentences[currentIndex].source_info);
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
@@ -216,7 +222,7 @@ const closeEditor = function () {
 }
 
 const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancelButton);
+showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancelButton,'contribution_audioPlayed');
 
 function markContributionSkipped() {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -244,9 +250,7 @@ function markContributionSkipped() {
     .then((res) => res.json())
     .then((result) => {
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch((err) => {})
 }
 
 function addListeners() {
@@ -272,6 +276,8 @@ function addListeners() {
     const $submitEditButton =  $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
     hideElement($('#edit-error-row'))
+    const previousActiveError = $("#edit-error-text .error-active");
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
     $("#edit-text-suno").removeClass('edit-error-area').addClass('edit-text');
     closeEditor();
   })
@@ -306,9 +312,7 @@ function addListeners() {
         closeEditor();
         getNextSentence();
       }, 2000)
-    } catch (e) {
-      console.log(e)
-    }
+    } catch (e) {}
   })
 
   $skipButton.on('click', () => {
@@ -330,6 +334,8 @@ function addListeners() {
     showElement($('#sentences-row'));
     showElement($('#progress-row'));
     hideElement($('#edit-error-row'))
+    const previousActiveError = $("#edit-error-text .error-active");
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
     $("#edit-text-suno").removeClass('edit-error-area').addClass('edit-text');
     cancelButton.attr("disabled", true);
     closeEditor();
@@ -380,7 +386,6 @@ const getAudioClip = function (contributionId) {
       fileReader.readAsDataURL(blob);
     });
   }).catch((err) => {
-    console.log(err)
     showAudioRow();
   });
 }
@@ -494,6 +499,7 @@ const initialize = function () {
   if (audio) {
     const encodedUrl = encodeURIComponent(audio.media_data);
     loadAudio(`${cdn_url}/${encodedUrl}`);
+    setDataSource(audio.source_info);
     resetValidation();
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
@@ -505,7 +511,7 @@ const initialize = function () {
 function executeOnLoad() {
   hideElement($('#keyboardBox'));
   $("#virtualKeyBoardBtn").attr("disabled",true);
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
   // const $validationInstructionModal = $("#validation-instruction-modal");
@@ -524,7 +530,7 @@ function executeOnLoad() {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch(console.log);
+  }).catch((err) => {});
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
@@ -551,6 +557,8 @@ function executeOnLoad() {
       return;
     }
     showUserProfile(localSpeakerDataParsed.userName)
+    onChangeUser('./record.html',MODULE.suno.value);
+    onOpenUserDropDown();
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName
       &&
@@ -563,6 +571,7 @@ function executeOnLoad() {
       sunoIndia.sentences = localSentencesParsed.sentences;
       initialize();
     } else {
+      localStorage.setItem("contribution_audioPlayed",false);
       localStorage.removeItem(currentIndexKey);
       const type = 'asr';
       fetch(`/media/${type}`, {

@@ -64,7 +64,7 @@
 	cursor: pointer;
 }
 
-.modal-body label span {
+#feedback_modal .modal-body label span {
 	font-family: Lato;
 	font-size: 16px;
 	font-style: italic;
@@ -114,8 +114,9 @@ label .required {
 @media (max-width: 700px) {
 	.float{
 		position:fixed;
-		right : 30px;
-		bottom : 100px;
+		right : 20px;
+		bottom : 20px;
+		padding: 9px;
 	}
 
 	#feedback_button{

@@ -3,10 +3,11 @@ const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLoca
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice } = require('../common/common');
-const { showUserProfile } = require('../common/header');
+const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { cdn_url } = require('../common/env-api');
 const { initializeFeedbackModal } = require('../common/feedback');
+const { setDataSource } = require('../common/sourceInfo');
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
@@ -57,7 +58,7 @@ function uploadToServer(cb) {
   });
   fd.append('userInput', dekhoIndiaValidator.editedText);
   fd.append('speakerDetails', speakerDetails);
-  fd.append('language', localSpeakerDataParsed.language);
+  fd.append('language', localStorage.getItem(CONTRIBUTION_LANGUAGE));
   fd.append('sentenceId', dekhoIndiaValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
@@ -72,9 +73,7 @@ function uploadToServer(cb) {
     .then((res) => res.json())
     .then((result) => {
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch((err) => {})
     .then((finalRes) => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -109,6 +108,7 @@ function getNextSentence() {
     updateProgressBar(currentIndex + 1,dekhoIndiaValidator.sentences.length);
     const encodedUrl = encodeURIComponent(dekhoIndiaValidator.sentences[currentIndex].sentence);
     setDekhoImage(`${cdn_url}/${encodedUrl}`);
+    setDataSource(dekhoIndiaValidator.sentences[currentIndex].source_info);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
@@ -309,9 +309,7 @@ const getImage = function (contributionId) {
       }
       fileReader.readAsDataURL(blob);
     });
-  }).catch((err) => {
-    console.log(err)
-  });
+  }).catch((err) => {});
 }
 
 function showThankYou() {
@@ -381,6 +379,7 @@ const initializeComponent = () => {
     if (validationData) {
       const encodedUrl = encodeURIComponent(validationData.sentence);
       setDekhoImage(`${cdn_url}/${encodedUrl}`);
+      setDataSource(validationData.source_info);
       setCapturedText(currentIndex);
       setCurrentSentenceIndex(currentIndex + 1);
       setTotalSentenceIndex(totalItems);
@@ -394,7 +393,7 @@ const getLocationInfo = () => {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch(console.log);
+  }).catch((err) => {});
 }
 
 let selectedReportVal = '';
@@ -414,7 +413,7 @@ $(document).ready(() => {
   hideElement($('#keyboardBox'));
 
   const $errorModal = $('#errorModal');
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   $('#keyboardLayoutName').text(contributionLanguage);
   const language = localStorage.getItem('contributionLanguage');
@@ -473,6 +472,8 @@ $(document).ready(() => {
     return;
   }
   showUserProfile(localSpeakerDataParsed.userName);
+  onChangeUser('./validator-page.html',MODULE.dekho.value);
+  onOpenUserDropDown();
   const isExistingUser = localSentencesParsed &&
     localSentencesParsed.userName === localSpeakerDataParsed.userName
     &&

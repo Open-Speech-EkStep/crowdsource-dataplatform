@@ -8,6 +8,7 @@ const {
   MODULE,
   TOP_LANGUAGES_BY_HOURS
 } = require("../common/constants");
+const { onChangeUser,onOpenUserDropDown,showUserProfile } = require('../common/header');
 
 const {
   setPageContentHeight,
@@ -18,7 +19,6 @@ const {
 } = require("../common/utils");
 
 // const {downloadPdf} = require('../common/downloadableBadges');
-const {showUserProfile} = require('../common/header');
 const {showByHoursChart,showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge} = require('../common/common');
 
 const CURRENT_INDEX = "sunoValidationCurrentIndex";
@@ -46,9 +46,7 @@ function downloadPdf(badgeType) {
     if (badge) {
       pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
     }
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 
 }
 
@@ -175,7 +173,9 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName)
-    toggleFooterPosition();
+    onChangeUser('./validator-thank-you.html',MODULE.suno.value);
+    onOpenUserDropDown();
+    // toggleFooterPosition();
     setPageContentHeight();
     setSentencesContributed();
 

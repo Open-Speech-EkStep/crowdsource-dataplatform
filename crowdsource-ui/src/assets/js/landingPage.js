@@ -1,46 +1,24 @@
-const { onActiveNavbar } = require('./header');
-const { redirectToLocalisedPage, changeLocale, showLanguagePopup} = require('./locale');
-
-const setHover = function (){
-  const $card1 = $(".card1");
-  const $card2 = $(".card2");
-  const $card3 = $(".card3");
-  const $card4 = $(".card4");
-  $card1.hover(() => {
-    $card1.css("box-shadow","0px 0px 32px rgba(166, 192, 251, 0.8)")
-  }, () => {
-    $card1.css("box-shadow","0px 0px 32px rgb(0 0 0 / 10%)")
-  });
-
-  $card2.hover(() => {
-    $card2.css("box-shadow","0px 0px 32px rgba(166, 192, 251, 0.8)")
-  }, () => {
-    $card2.css("box-shadow","0px 0px 32px rgb(0 0 0 / 10%)")
-  });
-
-  $card3.hover(() => {
-    $card3.css("box-shadow","0px 0px 32px rgba(166, 192, 251, 0.8)")
-  }, () => {
-    $card3.css("box-shadow","0px 0px 32px rgb(0 0 0 / 10%)")
-  });
-
-  $card4.hover(() => {
-    $card4.css("box-shadow","0px 0px 32px rgba(166, 192, 251, 0.8)")
-  }, () => {
-    $card4.css("box-shadow","0px 0px 32px rgb(0 0 0 / 10%)")
-  });
-
-}
+const { onActiveNavbar, onChangeUser, showUserProfile,onOpenUserDropDown } = require('./header');
+const { redirectToLocalisedPage, changeLocale} = require('./locale');
+const { CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY,DEFAULT_CON_LANGUAGE } = require('./constants');
+const { hasUserRegistered} = require('./common');
 
 $(document).ready(function () {
   localStorage.setItem('module','home');
   if (!localStorage.getItem("i18n")) {
-    showLanguagePopup();
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
+    changeLocale("en");
     return;
 }
 else {
     redirectToLocalisedPage();
 }
   onActiveNavbar('home');
-  setHover();
+  if(hasUserRegistered()){
+    const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+    const localSpeakerDataParsed = JSON.parse(speakerDetails);
+    showUserProfile(localSpeakerDataParsed.userName);
+  }
+  onChangeUser('./home.html','home');
+  onOpenUserDropDown();
 });

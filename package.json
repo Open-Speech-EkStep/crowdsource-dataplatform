@@ -22,7 +22,8 @@
     "install": "run-p install:api install:ui install:ft",
     "install:api": "cd crowdsource-api && npm i",
     "install:ui": "cd crowdsource-ui && npm i",
-    "install:ft": "cd functional_tests && npm i"
+    "install:ft": "cd functional_tests && npm i",
+    "preinstall": "npx npm-force-resolutions"
   },
   "repository": {
     "type": "git",
@@ -38,9 +39,9 @@
     "node": "12.16.0"
   },
   "devDependencies": {
-    "chokidar-socket-emitter": "^0.6.0",
     "del": "^5.1.0",
     "fetch-mock": "^9.11.0",
+    "glob-parent": "^5.1.2",
     "gulp": "^4.0.2",
     "htmllint": "^0.8.0",
     "htmllint-cli": "0.0.7",
@@ -55,5 +56,12 @@
     "stylelint-config-standard": "^22.0.0",
     "supertest": "^6.1.3",
     "yargs": "^16.2.0"
+  },
+  "dependencies": {
+    "config": "^3.3.6",
+    "npm-force-resolutions": "0.0.10"
+  },
+  "resolutions": {
+    "glob-parent": "5.1.2"
   }
 }

@@ -1,13 +1,14 @@
-const { onActiveNavbar } = require('../common/header');
+const { onActiveNavbar ,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
 const { showLanguagePopup } = require('../common/locale');
-const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,landToHome} = require('../common/common');
+const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,landToHome,hasUserRegistered} = require('../common/common');
 const {toggleFooterPosition, getLocaleString,updateLocaleLanguagesDropdown} = require('../common/utils');
 const {
   setSpeakerDetails,
   setUserModalOnShown,
   setUserNameOnInputFocus,
-  setStartRecordingBtnOnClick
-} = require('../common/userDetails');
+  setStartRecordingBtnOnClick,
+  setGenderRadioButtonOnClick
+} = require('../common/speakerDetails');
 
 const {setLangNavBar} = require('../common/languageNavBar')
 const {getStatsSummary,getDefaultLang,setDefaultLang} = require('../common/commonHome');
@@ -16,18 +17,25 @@ const {
   DEFAULT_CON_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
-  MODULE
+  MODULE,
+  SPEAKER_DETAILS_KEY
 } = require('../common/constants');
 
 const { initializeFeedbackModal } = require('../common/feedback');
 
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
+  const age = document.getElementById('age');
+  const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
-  let sentenceLanguage;
+  let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
-  toggleFooterPosition();
-  let top_lang = getDefaultLang();
+  // toggleFooterPosition();
+  let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  if(!top_lang){
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
+    top_lang = DEFAULT_CON_LANGUAGE;
+  }
 
   const $languageNavBar = $('#language-nav-bar');
   const $sayListenLanguage = $('#say-listen-language');
@@ -41,8 +49,10 @@ function initializeBlock() {
       localStorage.setItem("i18n", "en");
       setLangNavBar(targetedDiv, language, $languageNavBar);
       redirectToLocalisedPage();
+      showFucntionalCards('ocr', language);
       // updateHrsForCards(language);
     }
+    showFucntionalCards('ocr', language);
   })
 
   $languageNavBar.on('click', (e) => {
@@ -65,19 +75,44 @@ function initializeBlock() {
   $('#start_recording').on('click', () => {
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-    setStartRecordingBtnOnClick('./record.html');
+    localStorage.setItem("selectedType", "contribute");
+    if(!hasUserRegistered()){
+      $('#userModal').modal('show');
+      setStartRecordingBtnOnClick('./record.html',MODULE.dekho.value);
+    } else {
+      location.href ='./record.html';
+    }
   });
 
   $('#start_validating').on('click',()=>{
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-    setStartRecordingBtnOnClick('./validator-page.html');
+    localStorage.setItem("selectedType", "validate");
+    if(!hasUserRegistered()){
+      $('#userModal').modal('show');
+      setStartRecordingBtnOnClick('./validator-page.html',MODULE.dekho.value);
+    } else {
+      location.href ='./validator-page.html';
+    }
   })
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   showFucntionalCards('ocr', language);
-  setSpeakerDetails(speakerDetailsKey, $userName);
-  setUserNameOnInputFocus();
+
+  const $startRecordBtn = $('#proceed-box');
+  const $startRecordBtnTooltip = $startRecordBtn.parent();
+
   setUserModalOnShown($userName);
+  $startRecordBtnTooltip.tooltip('disable');
+  // setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
+  setGenderRadioButtonOnClick();
+  setUserNameOnInputFocus();
+  if(hasUserRegistered()){
+    const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+    const localSpeakerDataParsed = JSON.parse(speakerDetails);
+    showUserProfile(localSpeakerDataParsed.userName);
+  }
+  onChangeUser('./home.html',MODULE.dekho.value);
+  onOpenUserDropDown();
   getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, setDefaultLang);
 }
 

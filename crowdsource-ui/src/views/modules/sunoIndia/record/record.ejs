@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Bolo India: A crowdsourcing initiative for Indian languages</title>
+    <title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
@@ -22,11 +22,12 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../", MODULE:"Suno India", PAGE_TITLE:"Transcribe"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../", MODULE:"Suno", PAGE_TITLE:"Transcribe",img:"SunoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
-            <%- include ../common/extensionBar.ejs %>
+            <%- include('../common/extensionBar.ejs',{img:"../../img/en-SunoIndiaLogo.svg"}) %>
+            <%- include('../common/breadcrumb.ejs', {MODULE:"Suno", PAGE_TITLE:"Transcribe",img:"SunoIndiaLogo.svg", homePath:"./home.html"}) %>
             <div class="modal-footer py-3 px-0 record-btn-container position-relative suno">
                 <div class="row position-absolute top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
@@ -61,7 +62,7 @@
                         contributing!</label>
                 </div>
             </div>
-            <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none" id="no-sentences-row">
+            <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none mt-5" id="no-sentences-row">
                 <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-bold">
                         <%= __('Thank you for your enthusiasm to transcribe the recordings.') %>
                     </label><br><br>
@@ -74,7 +75,7 @@
                     <div class="row justify-content-center mt-5">
                         <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
                             <a class="btn btn-primary text-white btn-lg h6 w-100" href="./home.html">
-                                <%- __('Back to Suno India Home') %>
+                                <%- __('Back to Home') %>
                             </a></div>
                     </div>
                 </div>
@@ -150,6 +151,9 @@
         <div class="row mx-0 my-3 p-3" style="justify-content:flex-end">
             <%- include ../common/virtualKeyboardBtn.ejs %>
         </div>
+
+    <%- include ../common/speakerDetails.ejs %>
+        <%- include('../common/sourceInfo.ejs') %>
         <%- include('../common/feedback.ejs', {page: "Transcribe"}) %>
         <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the sentence", reportThankYou: "Your feedback helps us keep Suno India relevant, we appreciate you taking time to leave the feedback.", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
         <%- include ../common/errorModal.ejs %>

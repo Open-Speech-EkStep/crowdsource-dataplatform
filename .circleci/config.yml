@@ -44,8 +44,8 @@ jobs:
             npm run functional_test -- -- --env <<parameters.env_name>>
             psql "postgresql://${DEV_DB_USER}:${DB_PASS_AWS}@${DB_HOST_AWS}/<< parameters.db_name >>" -f functional_tests/sql/deleteSeedData.sql
       - store_artifacts:
-          path: functional_tests/.gauge/screenshots
-          destination: screenshots
+          path: functional_tests/reports
+          destination: reports
 
   approve_to_deploy:
     docker:
@@ -72,14 +72,14 @@ jobs:
             --include "*.svg" \
             --include "*.jpeg"
           from: crowdsource-ui/target/
-          to: 's3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>'
+          to: "s3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>"
       - aws-s3/sync:
           arguments: |
             --cache-control "max-age=0, s-maxage=600" \
             --exclude "*.svg" \
             --exclude "*.jpeg"
           from: crowdsource-ui/target/
-          to: 's3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>'
+          to: "s3://${STATIC_CONTENT_BUCKET}-<< parameters.env_name >>"
       - run: aws cloudfront create-invalidation --distribution-id << parameters.distributionId >> --paths '/*'
 
   db_migrate_aws:
@@ -135,15 +135,17 @@ workflows:
 
       - create-workspace:
           name: create-workspace
+          requires:
+            - node/test
           filters:
             branches:
-              only: master
+              only: [master, centralised_username]
 
       - db_migrate_aws:
           name: migrate_dev_aws
           db_name: ${DEV_DB_NAME}
           requires:
-             - create-workspace
+            - create-workspace
 
       - build_ui_push_to_s3:
           name: build_dev_ui
@@ -157,6 +159,7 @@ workflows:
           repo: ${REPO}
           tag: dev
           path: ./crowdsource-api
+          extra-build-args: --build-arg NODE_ENV=dev
           requires:
             - migrate_dev_aws
 
@@ -176,18 +179,37 @@ workflows:
           requires:
             - push_dev_image
 
+      - run_functional_tests:
+          name: functional_tests_dev
+          env_name: dev
+          db_name: ${DEV_DB_NAME}
+          requires:
+            - dev_deployment_eks
+            - build_dev_ui
+
+      - approve_to_deploy:
+          name: approve_cug_deployment_eks
+          type: approval
+          requires:
+            - dev_deployment_eks
+            - build_dev_ui
+            # - functional_tests_dev
+          filters:
+            branches:
+              only: master
 
       - db_migrate_aws:
           name: migrate_cug_aws
           db_name: ${CUG_DB_NAME}
           requires:
-            - push_dev_image
+            - approve_cug_deployment_eks
 
       - aws-ecr/build-and-push-image:
           name: push_cug_image
           repo: ${REPO}
           tag: cug
           path: ./crowdsource-api
+          extra-build-args: --build-arg NODE_ENV=cug
           requires:
             - migrate_cug_aws
 
@@ -205,16 +227,6 @@ workflows:
           requires:
             - push_cug_image
 
-
-
-      - run_functional_tests:
-          name: functional_tests_dev
-          env_name: dev
-          db_name: ${DEV_DB_NAME}
-          requires:
-            - dev_deployment_eks
-            - build_dev_ui
-
       - approve_to_deploy:
           name: approve_test_deployment_eks
           type: approval
@@ -222,6 +234,9 @@ workflows:
             - dev_deployment_eks
             - build_dev_ui
             # - functional_tests_dev
+          filters:
+            branches:
+              only: master
 
       - db_migrate_aws:
           name: migrate_test_aws
@@ -234,6 +249,7 @@ workflows:
           repo: ${REPO}
           tag: test
           path: ./crowdsource-api
+          extra-build-args: --build-arg NODE_ENV=test
           requires:
             - migrate_test_aws
 
@@ -279,6 +295,7 @@ workflows:
           repo: ${REPO}
           tag: uat
           path: ./crowdsource-api
+          extra-build-args: --build-arg NODE_ENV=uat
           requires:
             - migrate_uat_aws
 
@@ -323,6 +340,7 @@ workflows:
           repo: ${REPO}
           tag: prod
           path: ./crowdsource-api
+          extra-build-args: --build-arg NODE_ENV=prod
           requires:
             - migrate_prod_aws
 
@@ -332,4 +350,3 @@ workflows:
           env-name: prod
           requires:
             - push_prod_image
-            

@@ -4,28 +4,14 @@ const assert = require('assert');
 const {
     openBrowser,
     button,
-    closeBrowser,
-    overridePermissions,
     goto,
     write,
     accept,
     alert,
-    screenshot,
     click,
-    link,
-    text,
     into,
 } = require('taiko');
 const path = require('path');
-
-const profanityTestUrl = process.env.profanity_test_url_boloindia;
-
-
-step("Open Profanity Website", async () => {
-    await taiko.waitFor(500)
-    await goto(profanityTestUrl, {waitForEvents:['loadEventFired']});
-    await taiko.waitFor(500)
-});
 
 step("User details popup should appear", async function () {
     if (await taiko.text('User Details').exists()) {

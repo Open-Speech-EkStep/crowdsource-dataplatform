@@ -14,7 +14,8 @@ const {LIKHO_FROM_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE, ALL_LANGU
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
-const {showUserProfile} = require('../common/header');
+const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
+const { setDataSource } = require('../common/sourceInfo');
 
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -27,27 +28,27 @@ const sentencesKey = 'likhoValidatorSentencesKey';
 const likhoValidatorCountKey = 'likhoValidatorCount';
 
 const updateLocaleLanguagesDropdown = (language, toLanguage) => {
-  const dropDown = $('#localisation_dropdown');
-  const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-  const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
-  const invalidToLang = toLanguage.toLowerCase() === "english" || toLang.hasLocaleText === false;
-  const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
-  if (invalidToLang && invalidFromLang) {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
-  } else if (invalidFromLang) {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-      <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  } else if (invalidToLang) {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  } else if (toLanguage.toLowerCase() === language.toLowerCase()) {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  } else {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
-        <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  }
+  // const dropDown = $('#localisation_dropdown');
+  // const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+  // const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
+  // const invalidToLang = toLanguage.toLowerCase() === "english" || toLang.hasLocaleText === false;
+  // const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
+  // if (invalidToLang && invalidFromLang) {
+  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
+  // } else if (invalidFromLang) {
+  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+  //     <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+  // } else if (invalidToLang) {
+  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  // } else if (toLanguage.toLowerCase() === language.toLowerCase()) {
+  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  // } else {
+  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
+  //       <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+  // }
 }
 
 function getValue(number, maxValue) {
@@ -95,7 +96,7 @@ function uploadToServer(cb) {
   });
   fd.append('userInput', likhoIndiaValidator.editedText);
   fd.append('speakerDetails', speakerDetails);
-  fd.append('language', localSpeakerDataParsed.toLanguage);
+  fd.append('language', localStorage.getItem(LIKHO_TO_LANGUAGE));
   fd.append('sentenceId', likhoIndiaValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
@@ -110,9 +111,7 @@ function uploadToServer(cb) {
     .then((res) => res.json())
     .then((result) => {
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch((err) => {})
     .then((finalRes) => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -138,6 +137,7 @@ function getNextSentence() {
     currentIndex++;
     updateProgressBar(currentIndex + 1, likhoIndiaValidator.sentences.length)
     setSentence(likhoIndiaValidator.sentences[currentIndex].sentence);
+    setDataSource(likhoIndiaValidator.sentences[currentIndex].source_info);
     setTranslation(likhoIndiaValidator.sentences[currentIndex].contribution);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
@@ -354,6 +354,7 @@ const initializeComponent = () => {
   addListeners();
   if (validationData) {
     setSentence(validationData.sentence);
+    setDataSource(validationData.source_info);
     setTranslation(validationData.contribution);
     setCapturedText(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
@@ -368,7 +369,7 @@ const getLocationInfo = () => {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch(console.log);
+  }).catch((err) => {});
 }
 
 let selectedReportVal = '';
@@ -387,7 +388,7 @@ $(document).ready(() => {
   setFooterPosition();
   showKeyboard(toLanguage.toLowerCase());
   hideElement($('#keyboardBox'));
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   $('#keyboardLayoutName').text(toLanguage);
   $('#from-label').text(fromLanguage);
@@ -449,6 +450,8 @@ $(document).ready(() => {
     return;
   }
   showUserProfile(localSpeakerDataParsed.userName)
+  onChangeUser('./validator-page.html',MODULE.likho.value);
+  onOpenUserDropDown();
   const isExistingUser = localSentencesParsed &&
     localSentencesParsed.userName === localSpeakerDataParsed.userName
     &&

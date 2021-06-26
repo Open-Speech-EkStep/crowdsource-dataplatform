@@ -4,7 +4,7 @@ const fetchMock = require("fetch-mock");
 const { readFileSync } = require("fs");
 
 document.body = stringToHTML(
-    readFileSync(`${__dirname}/../src/views/common/headerForContributor.ejs`, "UTF-8")
+    readFileSync(`${__dirname}/../build/views/common/headerWithoutNavBar.ejs`, "UTF-8")
 );
 
 describe('test utils', () => {
@@ -72,43 +72,20 @@ describe('test utils', () => {
     });
 
     describe("formatTime", () => {
-        test("should formats hrs only for given hrs", () => {
-            expect(formatTime(162)).toEqual("162 hrs");
+        test("should formats h only for given h", () => {
+            expect(formatTime(162)).toEqual("162h");
         });
 
-        test("should format hrs and min for given hrs and min", () => {
-            expect(formatTime(162, 12)).toEqual("162 hrs 12 min");
+        test("should format h and min for given h and m", () => {
+            expect(formatTime(162, 12)).toEqual("162h 12m");
         });
 
-        test("should format in sec when hours and minutes are 0", () => {
-            expect(formatTime(0, 0, 2)).toEqual("2 sec");
-        });
-    });
-
-    describe("updateLocaleLanguagesDropdown", () => {
-        // test("should insert 'english' and given language in dropdown menu when given language is not english", () => {
-        //     const dropDown = $('#localisation_dropdown');
-        //     updateLocaleLanguagesDropdown("Hindi");
-        //     const children = dropDown.children();
-        //     expect(children[0].getAttribute('id')).toEqual('english');
-        //     expect(children[1].getAttribute('id')).toEqual('Hindi');
-        //     expect(children[2]).toEqual(undefined);
-        // });
-
-        test("should insert 'english' in dropdown menu when given language don't have localisation", () => {
-            const dropDown = $('#localisation_dropdown');
-            updateLocaleLanguagesDropdown("Hindi");
-            const children = dropDown.children();
-            expect(children[0].getAttribute('id')).toEqual('english');
-            expect(children.length).toEqual(1);
+        test("should format in s when hours and minutes are 0", () => {
+            expect(formatTime(0, 0, 2)).toEqual("2s");
         });
 
-        test("should insert 'english' in dropdown menu when given language is english", () => {
-            const dropDown = $('#localisation_dropdown');
-            updateLocaleLanguagesDropdown("English");
-            const children = dropDown.children();
-            expect(children[0].getAttribute('id')).toEqual('english');
-            expect(children[1]).toEqual(undefined);
+        test("should show 0s when hours, minutes and seconds are 0", () => {
+            expect(formatTime(0, 0, 0)).toEqual("0s");
         });
     });
 

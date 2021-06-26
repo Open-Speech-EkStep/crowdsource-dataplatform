@@ -1,12 +1,20 @@
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/common/moduleIntro.css">
 <div class="col-lg-10 col-md-12 col-12 mt-4 mx-lg-auto p-5">
-        <div class="row">
-            <h1 class="col-12">
-                <%= __(name) %>
-            </h1>
-            <p class="col-12">
-                <%= __(intro) %>
-            </p>
+    <div class="p-0 m-0" id="module-intro-row-cover">
+        <div class="row m-0" id="module-intro-row">
+            <div class="col-lg-1 col-2 align-self-center" id="moduleLogo">
+                <img src="<%= `../../img/${locale}-${img}`%>" alt="logo" width="100" height="80">
+            </div>
+            <div class="col-lg-11 col-10">
+                <h1 class="col-12 module-intro-heading font-size-lg-40" style="font-family:Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747;font-weight:200"><span><%= __(name) %></span> <span style="color:#ffbf00"><%= __('India')%></span>
+                </h1>
+                <p class="col-12 para-font font-size-lg-20" style="font-family:Roboto,'Helvetica Neue',Helvetica,Arial,sans-serif;color:#000">
+                    <%= __(intro) %>
+                </p>
+            </div>
+
         </div>
+    </div>
         <div class="row" style="padding:0 15px">
             <div class="col-4" style="border-bottom:4px solid #f49608"></div>
             <div class="col-4" style="border-bottom:4px solid #4d82f7"></div>

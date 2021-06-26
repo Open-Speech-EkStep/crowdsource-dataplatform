@@ -22,7 +22,7 @@ const {
 const path = require('path');
 
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
-const testUrl = process.env.test_url || 'http://localhost:8080';
+const testUrl = process.env.test_url || 'https://dev-nplt.vakyansh.in';
 
 beforeSuite(async () => {
     await openBrowser({
@@ -42,17 +42,30 @@ afterSuite(async () => {
 gauge.screenshotFn = async function () {
     const screenshotFilePath = path.join(process.env['gauge_screenshots_dir'], `screenshot-${process.hrtime.bigint()}.png`);
     await screenshot({ path: screenshotFilePath });
-    return await taiko.screenshot({ encoding: 'base64' ,path:screenshotFilePath});
+    return await taiko.screenshot({ encoding: 'base64', path: screenshotFilePath });
 };
+
+
+beforeSpec(async () => {
+    await goto(testUrl, { waitForEvents: ['loadEventFired'] });
+    await taiko.waitFor(700)
+})
+
+// beforeScenario(async () => {
+//     await taiko.waitFor(10000);
+//     await taiko.waitFor(10000);
+// })
 
 step("Open Website", async () => {
     await taiko.waitFor(500)
-    await goto(testUrl, {waitForEvents:['loadEventFired']});
+    await goto(testUrl, { waitForEvents: ['loadEventFired'] });
     await taiko.waitFor(500)
 });
 
 step("Validate about us content", async function () {
-    assert.ok(await text('Bolo India: A crowdsourcing initiative for Indian languages').exists());
+    
+    assert.ok(await text('A crowdsourcing initiative for Indian languages').exists());
+    assert.ok(await text('This is an effort by MeitY, Government of India, under the National Language Translation Mission (NLTM).').exists());
 });
 
 step("Start Recording button is disabled", async function () {
@@ -66,12 +79,22 @@ step("Select Language <language> enables the Start Recording button", async func
     assert.ok(!await taiko.button({ id: 'start_recording' }).isDisabled(), 'the start recording button is disabled')
 });
 
-step("Speaker details popup should appear and close button should close the pop up", async function () {
-    if (await taiko.text('Speaker Details').exists()) {
+step("User details popup should appear and close button should close the pop up", async function () {
+    if (await taiko.text('User Details').exists()) {
         assert.ok('speaker details pop-up exists')
         await click(taiko.button({ class: 'close float-right' }))
     }
     await taiko.waitFor(500)
+});
+
+step("When user clicks on Data Source button, popup should open and they should see source information", async function () {
+    assert.ok(await taiko.button({ id: 'show_source_button' }).isVisible());
+    await click(taiko.button({ id: 'show_source_button' }));
+    await taiko.waitFor(700);
+    assert.ok(await text("Opt-out Notification").isVisible());
+    await click(taiko.button({ id: 'datasource_close_btn' }));
+    await taiko.waitFor(700);
+    assert.ok(! await text("Opt-out Notification").isVisible());
 });
 
 step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present", async function () {
@@ -96,7 +119,8 @@ step("if a user enter username and click on Not you change user button , the fie
 
 
 step("And User enter random Username and selects Age , Mother tongue ,gender", async function () {
-    if (await taiko.text('User Details').exists()) {
+    await taiko.waitFor(1000)
+    if (await taiko.text('User Details').isVisible()) {
         const username = taiko.textBox({ id: 'username' })
         await taiko.waitFor(700)
         await write('Dummy user', into(username))
@@ -108,6 +132,16 @@ step("And User enter random Username and selects Age , Mother tongue ,gender", a
 
 step("When user click on Lets Go Button, user should <arg0> see instructions to record", async function (arg0) {
     await click(taiko.button({ id: 'proceed-box' }))
+    await taiko.waitFor(1500)
+
+    if (arg0 == "not") {
+        assert.ok(! await text('Quick Tips').exists())
+    }
+    else {
+        assert.ok(await text('Quick Tips').exists(), 'Not able to see instructions')
+    }
+});
+step("user should <arg0> see instructions to record", async function (arg0) {
     await taiko.waitFor(1500)
 
     if (arg0 == "not") {
@@ -147,7 +181,7 @@ step("User should be able to close the Instructions , user should see a sentence
     assert.ok(await button({ id: 'startRecord' }).exists())
     assert.ok(await button({ id: 'skipBtn' }).exists())
     assert.ok(await taiko.$('#sentenceLbl').exists())
-    assert.ok(await text('Dummy User').exists())
+    //assert.ok(await text('Dummy User').exists())
     assert.ok(await button({ id: 'test-mic-speakers-button' }).exists())
 
 });
@@ -172,21 +206,6 @@ step("When user skips all the rest of the <count> sentences , User should see Th
 });
 
 
-step("when user skips the sentence", async function()
-{
-    await taiko.waitFor(500)
-    const skipbutton = taiko.button({ id: 'skipBtn' })
-    await click(skipbutton)
-    await taiko.waitFor(1500)
-
-});
-
-step("User waits for thank you page", async function()
-    {
-        await taiko.waitFor(5000)
-        assert.ok(await text('Thank you for contributing!').exists())
-    });
-
 step("when user clicks on the Contribute More button, user should not see the Instructions page again", async function () {
     await click(link('Contribute More'))
     await taiko.waitFor(1000)
@@ -194,26 +213,6 @@ step("when user clicks on the Contribute More button, user should not see the In
         const resp = await text('Quick Tips').isVisible();
         assert.ok(!resp)
     }
-});
-
-
-step("User should see the content in <language>", async function (language) {
-    if (language == "Hindi") {
-        await taiko.waitFor(500)
-        assert.ok(await text("बोलो इंडिया: भारतीय भाषाओं के लिए एक क्राउडसोर्सिंग पहल").exists());
-    }
-});
-
-step("Select translation language as <language>", async function (language) {
-    await taiko.waitFor(500)
-    //await taiko.$("#locale_language_dropdown").exists()
-    //const localeDropDown = taiko.$("#locale_language_dropdown");
-    //await click(localeDropDown);
-
-    await click(listItem({ id: "locale_language_dropdown" }));
-    await taiko.waitFor(500);
-    await click(link(language));
-    await taiko.waitFor(500);
 });
 
 step("Navigate to <arg0> button and click <arg0> button", async function (arg0) {
@@ -269,6 +268,11 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
         await click(startRecordingButton);
     }
 
+    else if (arg0 == "Know More") {
+        await click(taiko.link(arg0))
+        await taiko.waitFor(500)
+    }
+
     else {
         assert.ok(await link(arg0).exists());
         await click(arg0);
@@ -280,8 +284,8 @@ step("When user clicks on View all Details buttton , user shall land on Dashboar
     await taiko.waitFor(1000)
     assert.ok(await text("Languages").exists());
     assert.ok(await text("Speakers contributed").exists());
-    assert.ok(await text("Hrs recorded").exists());
-    assert.ok(await text("Hrs validated").exists());
+    assert.ok(await text("Duration recorded").exists());
+    assert.ok(await text("Duration recorded").exists());
 });
 
 step("When user select <lang> Language from dropdown then <arg0> should not visible", async function (lang, arg0) {
@@ -302,27 +306,25 @@ step("user should be able to see <arg0> , <arg1> , <arg2> , <arg3>", async funct
     assert.ok(await text(arg3).exists());
 });
 
-
-step("User plays the audio , <arg0>,<arg1> should be enabled", async function (arg0, arg1) {
-    await taiko.waitFor(500)
-    await click(taiko.image({ id: "play" }));
-    await taiko.waitFor(1000)
-    await click(taiko.image({ id: "pause" }));
-    await taiko.waitFor(1000)
-    assert.ok(! await taiko.button({ id: arg0 }).isDisabled());
-    assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
-});
-
 step("User plays the audio , <arg0>,<arg1> should be disabled", async function (arg0, arg1) {
     await taiko.waitFor(500)
     await click(taiko.image({ id: "play" }));
     await taiko.waitFor(1000)
-    assert.ok( await taiko.button({ id: arg0 }).isDisabled());
-    assert.ok( await taiko.button({ id: arg1 }).isDisabled());
+    assert.ok(await taiko.button({ id: arg0 }).isDisabled());
+    assert.ok(await taiko.button({ id: arg1 }).isDisabled());
+    const count = 20;
+    for (let i = 0; i <= count; i++) {
+        await taiko.waitFor(1000)
+        if (await taiko.image({ id: "replay" }).isVisible()) {
+            console.log("indiside loop")
+            break;
+        }
+    }
     // Once the audio is complete , then correct button should be enabled
-    await taiko.waitFor(7000)
-    assert.ok(! await taiko.button({ id: arg0 }).isDisabled());
-    assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
+    // await taiko.waitFor( async () =>{ !(await taiko.$( "#replay").exists())});
+    //await taiko.waitFor(10000)
+    assert.ok(!(await taiko.button({ id: arg0 }).isDisabled()));
+    assert.ok(!(await taiko.button({ id: arg1 }).isDisabled()));
 });
 
 step("<arg0> should be enabled , <arg1> <arg2> buttons should be disabled", async function (arg0, arg1, arg2) {
@@ -343,7 +345,7 @@ step("User skips the next <count> sentences user should land on Thank you page i
     const skipbutton = taiko.button({ id: 'skip_button' })
     for (let i = 0; i < count; i++) {
         await click(skipbutton)
-        await taiko.waitFor(1200)
+        await taiko.waitFor(2000)
     }
 
     if (lang == "Hindi") {
@@ -351,7 +353,7 @@ step("User skips the next <count> sentences user should land on Thank you page i
         assert.ok(await text('प्रमाणित करने के लिए शुक्रिया!').exists());
     }
 
-    else {
+    if (lang == "English") {
         await taiko.waitFor(3000);
         assert.ok(await text('Thank you for validating').exists());
     }
@@ -405,34 +407,33 @@ step("When user clicks on the Test Microphone Speaker button, user should see <a
     await click(taiko.button({ id: "test-mic-speakers-button" }))
     assert.ok(await button({ id: arg0 }).exists())
     assert.ok(await button({ id: arg1 }).exists())
-
 });
 
 step("When user clicks on the cross button , pop up should close and user should see the Test Mic and speaker button", async function () {
     await click(taiko.button({ id: "test-mic-close" }))
     assert.ok(await button({ id: 'test-mic-speakers-button' }).exists())
-
 });
 
 step("When user clicks on the Feedback icon, user should see the feedback popup", async function () {
-    await click(taiko.button({ id: "feedback_button"}))
+    await click(taiko.button({ id: "feedback_button" }))
     await taiko.waitFor(1000)
-    assert.ok(await text("We would like to get your feedback to improve this site").exists());
-    assert.ok(await text("Email").exists());
-    assert.ok(await text("Giving Feedback for?").exists());
-    assert.ok(await text("Select page").exists());
-    assert.ok(await text("What is your opinion of this page").exists());
-    assert.ok(await text("Please select your feedback category").exists());
-    assert.ok(await text("Share your feedback below").exists());
+    assert.ok(await text("We would like to get your feedback to improve this platform").exists());
+    assert.ok(!await text("Email").isVisible());
+    assert.ok(!await text("Giving Feedback for?").isVisible());
+    assert.ok(!await text("Select page").isVisible());
+    assert.ok(await text("What is your opinion of this page").isVisible());
+    assert.ok(await text("Please select your feedback category").isVisible());
+    assert.ok(await text("Share your feedback below").isVisible());
 });
 
 step("Submit button should be disbaled, When user selects an opinion, submit button should be enabled", async function () {
     await taiko.waitFor(500)
-    const usernameFiled = taiko.textBox({ id: 'email' })
-    await taiko.waitFor(500)
-    await write('TestUser', into(usernameFiled))
+    // const usernameFiled = taiko.textBox({ id: 'email' })
+    // await taiko.waitFor(500)
+    // await write('TestUser', into(usernameFiled))
     assert.ok(await taiko.button({ id: "submit_btn" }).isDisabled());
     await click(taiko.$("#very_happy_label"));
+    await taiko.waitFor(500)
     assert.ok(! await taiko.button({ id: "submit_btn" }).isDisabled());
 });
 
@@ -476,15 +477,22 @@ step("When user submits , Thank you pop up should come & close button should clo
     await taiko.waitFor(500);
 });
 
-step("Validate Thank you page content for Bolo India", async function() {
-	assert.ok(await text('Thank you for contributing!').exists())
-	assert.ok(await text('100 hrs').exists())
+step("Validate Thank you page content for Bolo India", async function () {
+    assert.ok(await text('Thank you for contributing!').exists())
+    assert.ok(await text('100 hrs').exists())
 });
 
 step("Validate terms and condition content", async function () {
     assert.ok(await text('Terms and Conditions').exists());
+    await taiko.closeTab();
 });
 
 step("Validate Privacy Policy content", async function () {
     assert.ok(await text('Privacy Policy').exists());
+});
+
+step("User clicks back button", async function () {
+    if (await button({ id: "back-btn" }).exists() && await button({ id: "back-btn" }).isVisible()) {
+        await click(button({ id: "back-btn" }));
+    }
 });

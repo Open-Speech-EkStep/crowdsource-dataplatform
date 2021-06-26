@@ -7,7 +7,6 @@
         "start": "node src/server.js",
         "watch": "nodemon src/server.js aws",
         "test": "ENCRYPTION_KEY=CjksSAhoncsuosuy68sbLd35KkcHrSuwKJerEFCEWof= jest",
-        "start-cluster": "pm2 start src/server.js -i 2",
         "db-migrate": "npx db-migrate up --config migrations/config/migration_config.json -e dev"
     },
     "repository": {
@@ -21,9 +20,11 @@
     },
     "homepage": "https://github.com/ekstep2/ektep-crowdsource-platform#readme",
     "dependencies": {
+        "@azure/storage-blob": "^12.6.0",
         "@google-cloud/storage": "^5.8.1",
         "aws-sdk": "^2.851.0",
         "compression": "^1.7.4",
+        "config": "^3.3.6",
         "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
         "crypto-js": "^4.0.0",
@@ -41,7 +42,6 @@
         "multer": "^1.4.2",
         "node-fetch": "^2.6.1",
         "pg-promise": "^10.5.2",
-        "pm2": "^4.5.6",
         "regenerator-runtime": "^0.13.7",
         "uuid": "^7.0.3",
         "xss": "^1.0.8"
