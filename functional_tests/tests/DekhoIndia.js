@@ -100,7 +100,7 @@ step("When user clicks on Validate more button , user should see no data availab
 		assert.ok(await text('Thank you for your enthusiasm to validate the image text.').exists())
 	}
 	if (flow == "Likho") {
-		assert.ok(await text('Thank you for your enthusiasm to validate the translations.').exists())
+		assert.ok(await text('Thank you for your effort to validate the translations.').exists())
 	}
 	if (flow == "Suno") {
 		assert.ok(await text('Thank you for your enthusiasm to validate the recordings.').exists())

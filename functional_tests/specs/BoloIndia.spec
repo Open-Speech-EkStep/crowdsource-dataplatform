@@ -29,7 +29,7 @@ Tags: component
 * Navigate to "Contribute" button and click "Contribute" button
 //* And User enter random Username and selects Age , Mother tongue ,gender
 * user should "" see instructions to record
-* When user skips all the rest of the "4" sentences , User should see Thank you Page
+* When user skips all the rest of the "5" sentences , User should see Thank you Page
 * Validate Thank you page content for Bolo India
 * when user clicks on the Contribute More button, user should not see the Instructions page again
 
