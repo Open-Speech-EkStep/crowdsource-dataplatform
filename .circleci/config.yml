@@ -107,11 +107,11 @@ jobs:
 
   cdn_invalidation:
     executor: azure-cli/default
-
+    parameters:
       env-name:
-        description: |
+       description: |
           Name of the env
-        type: string
+       type: string
 
     steps:
       - azure-cli/install
@@ -177,7 +177,7 @@ workflows:
             - migrate_dev_azure
       - cdn_invalidation:
           name: cdn_invalidation_dev
-          env_name: dev
+          env-name: dev
           requires:
             - build_dev_ui
 
