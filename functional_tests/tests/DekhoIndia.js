@@ -97,7 +97,7 @@ step("When user clicks on Validate more button , user should see no data availab
 	await taiko.waitFor(2000)
 
 	if (flow == "Dekho") {
-		assert.ok(await text('Thank you for your enthusiasm to validate the image text.').exists())
+		assert.ok(await text('Thank you for your enthusiasm to validate the image labels.').exists())
 	}
 	if (flow == "Likho") {
 		assert.ok(await text('Thank you for your effort to validate translations.').exists())
@@ -133,7 +133,7 @@ step("User clicks on <arg0> , he should see next sentence and <arg1> <arg2> butt
 step("User clicks on <arg0> he should see thank you page and should be able to see bronze Badge", async function (arg0) {
 	await click(taiko.button({ id: arg0 }))
 	await taiko.waitFor(2000)
-	assert.ok(await text("You’ve earned your Bronze Badge").isVisible());
+	assert.ok(await text("You’ve earned your Bronze Bhasha Samarthak Badge").isVisible());
 	// assert.ok(await text("National Language Translation Mission").isVisible());
 	assert.ok(await text("Share it with your friends and family").isVisible());
 	assert.ok(await image({ id: "reward-img" }).isVisible());
