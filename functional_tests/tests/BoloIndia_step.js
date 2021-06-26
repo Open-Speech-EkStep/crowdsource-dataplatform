@@ -21,7 +21,7 @@ const {
 } = require('taiko');
 const path = require('path');
 
-const headless = process.env.headless_chrome.toLowerCase() === 'true';
+const headless = process.env.headless_chrome.toLowerCase() === 'false';
 const testUrl = process.env.test_url || 'https://dev-nplt.vakyansh.in';
 
 beforeSuite(async () => {
@@ -63,7 +63,7 @@ step("Open Website", async () => {
 });
 
 step("Validate about us content", async function () {
-    
+
     assert.ok(await text('A crowdsourcing initiative for Indian languages').exists());
     assert.ok(await text('This is an effort by MeitY, Government of India, under the National Language Translation Mission (NLTM).').exists());
 });
