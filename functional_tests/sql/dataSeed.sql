@@ -734,7 +734,3 @@ Union values('medium', 'parallel', '{
     "type": "text",
     "language": "Hindi"
 }'::jsonb, null);
-
-
-
-
