@@ -145,6 +145,20 @@ $(document).ready(function () {
     $("#home").addClass("active show");
   }
 
+  $('#back-btn').on('click',()=>{
+      if(moduleType == 'bolo'){
+        location.href = './boloIndia/home.html';
+      } else if(moduleType == 'suno'){
+        location.href = './sunoIndia/home.html';
+      }else if(moduleType == 'likho'){
+        location.href = './likhoIndia/home.html';
+      }else if(moduleType == 'dekho'){
+        location.href = './dekhoIndia/home.html';
+      }else {
+        location.href = './home.html';
+      }
+  })
+
   if(hasUserRegistered()){
     const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
     const localSpeakerDataParsed = JSON.parse(speakerDetails);
