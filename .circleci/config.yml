@@ -4,6 +4,8 @@ orbs:
   azure-aks: circleci/azure-aks@0.3.0
   azure-acr: circleci/azure-acr@0.2.0
   kubernetes: circleci/kubernetes@0.11.2
+  azure-cli: circleci/azure-cli@1.2.0
+
 
 definition:
   fast-checkout: &fast-checkout
@@ -103,6 +105,21 @@ jobs:
             npm run install:api
             cd crowdsource-api && npx db-migrate up
 
+  cdn_invalidation:
+    executor: azure-cli/default
+
+      env-name:
+        description: |
+          Name of the env
+        type: string
+
+    steps:
+      - azure-cli/install
+      - run:
+          name: cdn_invalidation
+          command: |
+            az cdn endpoint purge -g ${AZURE_RESOURCE_GROUP} -n << parameters.env-name >>-vakyansh --profile-name ${AZURE_PROFILE_NAME} --content-paths '/'
+
   aks_deployment:
     executor: azure-aks/default
     parameters:
@@ -158,6 +175,11 @@ workflows:
           env_name: dev
           requires:
             - migrate_dev_azure
+      - cdn_invalidation:
+          name: cdn_invalidation_dev
+          env_name: dev
+          requires:
+            - build_dev_ui
 
       - azure-acr/build-and-push-image:
           name: push_dev_image

@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vakyansh
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    
+spec:
+  tls:
+  - hosts:
+    - dev-api.vakyansh.in
+    secretName: aks-ingress-tls
+  rules:
+  - host: dev-api.vakyansh.in
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: vakyansh-app
+            port:
+              number: 8080
