@@ -445,7 +445,7 @@ let selectedReportVal = '';
 
 const executeOnLoad = function () {
   hideElement($('#keyboardBox'));
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
   const $validationInstructionModal = $("#validation-instruction-modal");

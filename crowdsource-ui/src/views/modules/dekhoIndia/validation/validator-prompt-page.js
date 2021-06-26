@@ -413,7 +413,7 @@ $(document).ready(() => {
   hideElement($('#keyboardBox'));
 
   const $errorModal = $('#errorModal');
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   $('#keyboardLayoutName').text(contributionLanguage);
   const language = localStorage.getItem('contributionLanguage');

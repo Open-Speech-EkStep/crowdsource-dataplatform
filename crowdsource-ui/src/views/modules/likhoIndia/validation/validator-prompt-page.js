@@ -388,7 +388,7 @@ $(document).ready(() => {
   setFooterPosition();
   showKeyboard(toLanguage.toLowerCase());
   hideElement($('#keyboardBox'));
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   $('#keyboardLayoutName').text(toLanguage);
   $('#from-label').text(fromLanguage);

@@ -365,7 +365,7 @@ const updateLocaleLanguagesDropdown = (language, toLanguage) => {
 }
 
 function executeOnLoad() {
-  toggleFooterPosition();
+  // toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
   const $validationInstructionModal = $("#validation-instruction-modal");
