@@ -54,6 +54,7 @@ function initializeBlock() {
       // updateHrsForCards(language);
       redirectToLocalisedPage();
     }
+    showFucntionalCards('asr', language);
   })
 
   $languageNavBar.on('click', (e) => {
