@@ -316,7 +316,7 @@ body {
   }
 
   @media (max-width: 700px) {
-    .navbar-nav .dropdown-menu {
+    #userNavBar .dropdown-menu {
       position: absolute !important;
       margin-left: -140% !important;
     }
