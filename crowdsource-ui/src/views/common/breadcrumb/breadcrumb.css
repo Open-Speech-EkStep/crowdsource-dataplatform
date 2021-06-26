@@ -1,0 +1,11 @@
+@media (max-width: 769px) {
+#breadcrumb-header {
+    display: inherit;
+}
+}
+
+@media (min-width: 769px) {
+    #breadcrumb-header {
+        display: none;
+    }
+}

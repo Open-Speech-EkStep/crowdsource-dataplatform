@@ -27,6 +27,7 @@
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/extensionBar.ejs %>
+            <%- include('../common/breadcrumb.ejs', {MODULE:"Dekho", PAGE_TITLE:"Label",img:"../../img/en-DekhoIndiaLogo.svg", homePath:"./home.html"}) %>
             <div class="modal-footer py-3 px-0 record-btn-container position-relative">
                 <div class="row position-absolute dekho-back-btn top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
