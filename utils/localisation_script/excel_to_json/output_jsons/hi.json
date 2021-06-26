@@ -163,7 +163,7 @@
     "Please specify the reason (Optional)": "कृपया कारण बताएं (वैकल्पिक)",
     "SUBMIT": "सबमिट करें",
     "Back to Home": "वापिस मुख पृष्ठ पर",
-    "social sharing text without rank": "मैंने https://boloindia.nplt.in पर भारत के लिए ओपन लैंग्वेज रिपॉज़िटरी बनाने में योगदान किया है। आप और मैं हमारी आवाज़ों का योगदान करके इस पहल में काफ़ी फ़र्क डाल सकते हैं जिससे मशीन को हमारी भाषा सीखने में मदद मिलती है। अपनी भाषा को सशक्त बनाने में अपना योगदान देना चाहेंगे?",
+    "social sharing text without rank": "मैंने https://bhashini.gov.in/bhashadaan पर भारत के लिए ओपन लैंग्वेज रिपॉज़िटरी बनाने में योगदान किया है। आप और मैं हमारी आवाज़ों का योगदान करके इस पहल में काफ़ी फ़र्क डाल सकते हैं जिससे मशीन को हमारी भाषा सीखने में मदद मिलती है। अपनी भाषा को सशक्त बनाने में अपना योगदान देना चाहेंगे?",
     "Select the language for voluntary contribution": "अपना योगदान देने के लिए भाषा चुनें",
     "Please speak clearly": "कृपया साफ़-साफ़ बोलें",
     "Low/No Background Noise": "आस-पास में शोर कम/बिल्कुल नहीं है",
@@ -177,7 +177,7 @@
     "Contributions": "योगदान",
     "Badge": "बैज",
     "You are on a spree !!": "आप अच्छा कर रहे हैं !!",
-    "I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?": "मैंने https://boloindia.nplt.in पर भारत के लिए ओपन लैंग्वेज रिपॉज़िटरी बनाने में योगदान किया है। आप और मैं हमारी आवाज़ों का योगदान करके इस पहल में काफ़ी फ़र्क डाल सकते हैं जिससे मशीन को हमारी भाषा सीखने में मदद मिलती है। अपनी भाषा को सशक्त बनाने में अपना योगदान देना चाहेंगे?",
+    "I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?": "मैंने https://bhashini.gov.in/bhashadaan पर भारत के लिए ओपन लैंग्वेज रिपॉज़िटरी बनाने में योगदान किया है। आप और मैं हमारी आवाज़ों का योगदान करके इस पहल में काफ़ी फ़र्क डाल सकते हैं जिससे मशीन को हमारी भाषा सीखने में मदद मिलती है। अपनी भाषा को सशक्त बनाने में अपना योगदान देना चाहेंगे?",
     "Help your language achieve it’s goal of <span id=\"language-hour-goal\"></span> hrs. We know you can do more!": "अपनी भाषा के लिए <span id=\"language-hour-goal\"></span> घंटों का लक्ष्य हासिल करने में मदद करें। हमें पता है कि आप और भी बहुत कुछ कर सकते हैं!",
     "Bolo India": "बोलो इंडिया",
     "Suno India": "सुनो इंडिया",
@@ -375,7 +375,7 @@
     "Thank you for your enthusiasm to validate the image labels.": "पूरे उत्साह के साथ इमेज लेबलों को सत्यापित करने के लिए आपका धन्यवाद।",
     "Your next goal is to reach <span id=\"next_badge_count\"></span> recordings to earn your Bhasha Samarthak <span id=\"next_badge_name_1\"></span> Badge. <a href=\"./badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> recordings to earn your Bhasha Samarthak <span id=\"next_badge_name_1\"></span> Badge. <a href=\"./badges.html\">Know more</a>",
     "<span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge earned for contributing <span id=\"current_badge_count\"></span> recordings": "<span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge earned for contributing <span id=\"current_badge_count\"></span> recordings",
-    "Language": "Language",
+    "Language": "हिंदी",
     "<span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge earned for validating <span id=\"current_badge_count\"></span> recordings": "<span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge earned for validating <span id=\"current_badge_count\"></span> recordings",
     "India": "India",
     "FROM": "इस भाषा से",
@@ -404,5 +404,9 @@
     " You’ve earned a  <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": " You’ve earned a  <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.",
     "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak  Badge. <a href=\"../badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak  Badge. <a href=\"../badges.html\">Know more</a>",
     "You’ve earned a  <span id=\"current_badge_name_1\"></span>  Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> Images.": "You’ve earned a  <span id=\"current_badge_name_1\"></span>  Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> Images.",
-    "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to earn your <span id=\"next_badge_name_1\"></span>  Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to earn your <span id=\"next_badge_name_1\"></span>  Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>"
+    "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to earn your <span id=\"next_badge_name_1\"></span>  Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to earn your <span id=\"next_badge_name_1\"></span>  Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>",
+    "recording(s) validated": "recording(s) validated",
+    "You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> recordings": "You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> recordings",
+    "image label(s) contributed": "image label(s) contributed",
+    "image label(s) validated": "image label(s) validated"
 }
