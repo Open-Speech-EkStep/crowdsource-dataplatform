@@ -71,16 +71,8 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
     }
     fs.rmdirSync(outputPath, { recursive: true });
 
-    await ejs2html(
-      `${ejsPath}/about-us.ejs`,
-      { MOTHER_TONGUE, LANGUAGES },
-      i18n,
-      outputPath,
-      'about-us.html',
-      locale
-    );
-    await ejs2html(`${ejsPath}/badges.ejs`, {MOTHER_TONGUE}, i18n, outputPath, 'badges.html', locale);
-    await ejs2html(`${ejsPath}/validatorBadgesInfo.ejs`, {MOTHER_TONGUE}, i18n, outputPath, 'validator-badges.html', locale);
+    await ejs2html(`${ejsPath}/badges.ejs`, {MOTHER_TONGUE,LANGUAGES}, i18n, outputPath, 'badges.html', locale);
+    await ejs2html(`${ejsPath}/validatorBadgesInfo.ejs`, {MOTHER_TONGUE,LANGUAGES}, i18n, outputPath, 'validator-badges.html', locale);
     await ejs2html(
       `${ejsPath}/dashboard.ejs`,
       { MOTHER_TONGUE, LANGUAGES, isCookiePresent: false },
@@ -89,7 +81,6 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       'dashboard.html',
       locale
     );
-    await ejs2html(`${ejsPath}/feedback.ejs`, {}, i18n, outputPath, 'feedback.html', locale);
     await ejs2html(
       `${ejsPath}/home.ejs`,
       { MOTHER_TONGUE, LANGUAGES, isCookiePresent: false, defaultLang: undefined },
@@ -98,11 +89,11 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       'home.html',
       locale
     );
-    await ejs2html(`${ejsPath}/not-found.ejs`, {MOTHER_TONGUE}, i18n, outputPath, 'not-found.html', locale);
+    await ejs2html(`${ejsPath}/not-found.ejs`, {MOTHER_TONGUE,LANGUAGES}, i18n, outputPath, 'not-found.html', locale);
     await ejs2html(`${ejsPath}/record.ejs`, {MOTHER_TONGUE, LANGUAGES}, i18n, outputPath, 'record.html', locale);
     await ejs2html(
       `${ejsPath}/terms-and-conditions.ejs`,
-      {MOTHER_TONGUE},
+      {MOTHER_TONGUE,LANGUAGES},
       i18n,
       outputPath,
       'terms-and-conditions.html',
@@ -120,9 +111,9 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       locale
     );
 
-    await ejs2html(`${ejsPath}/profanity-boloindia.ejs`, {}, i18n, outputPath, 'profanity-boloindia.html', locale);
+    await ejs2html(`${ejsPath}/profanity-boloindia.ejs`, {LANGUAGES}, i18n, outputPath, 'profanity-boloindia.html', locale);
     await ejs2html(`${ejsPath}/profanity-home.ejs`, { LANGUAGES }, i18n, outputPath, 'profanity-home.html', locale);
-    await ejs2html(`${ejsPath}/profanity.ejs`, {}, i18n, outputPath, 'profanity.html', locale);
+    await ejs2html(`${ejsPath}/profanity.ejs`, {LANGUAGES}, i18n, outputPath, 'profanity.html', locale);
   });
 };
 

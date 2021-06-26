@@ -10,10 +10,9 @@
             </a>
             <div class="vertical-line"></div>
             <a class="logo-text text-dark position-relative" href="/" style="padding-top:5px" id="bhashadaan_logo">
-                    <img src="../../img/bhasadaan.svg" alt="BhashaDaan" width="190px" height="48px">
+                    <img src="../../img/${locale}-bhasadaan.svg" alt="BhashaDaan" width="190px" height="48px">
                 <span class="beta-version">Beta</span>
             </a>
-            <div class="version-beta ml-4 d-none">Beta</div>
         </div>
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -40,7 +39,11 @@
                     <img src="../../img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
                     <span><%= __('Language') %></span>
                 </a>
-                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton"><a id="english" class="dropdown-item" href="#" locale="en">English</a></div>
+                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton">
+                    <% LANGUAGES.forEach(function(obj) { if(obj.hasLocaleText){%>
+                        <a id="<%= obj.value.toLowerCase() %>" class="dropdown-item" href="#" locale="<%= obj.id %>"><%= obj.text %></a>
+                    <%} }) %>
+                </div>
             </li>
             <li class="nav-item p-2 module-item d-none" value="about-us"><a href="<%- `${path}about-us.html`%>" class="nav-link text-dark font-weight-bold">
                     <%= __('About Us') %>
