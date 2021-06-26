@@ -31,7 +31,11 @@
                     <img src="../../img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
                     <span><%= __('Language') %></span>
                 </a>
-                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton"><a id="english" class="dropdown-item" href="#" locale="en">English</a></div>
+                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton">
+                    <% LANGUAGES.forEach(function(obj) { if(obj.hasLocaleText){%>
+                        <a id="<%= obj.value.toLowerCase() %>" class="dropdown-item" href="#" locale="<%= obj.id %>"><%= obj.text %></a>
+                    <%} }) %>
+                </div>
 
             </li><li class="nav-item p-2 d-none"><a href="<%- `${path}about-us.html`%>" class="nav-link text-dark font-weight-bold">
                     <%= __('About Us') %>

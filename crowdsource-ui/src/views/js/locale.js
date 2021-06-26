@@ -50,12 +50,13 @@ function checkCookie() {
 function showLanguagePopup() {
     document.getElementById("toggle-content-language").click();
 }
+
 function redirectToLocalisedPage() {
-    const locale = localStorage.getItem("i18n");
+    const locale = localStorage.getItem("i18n") ;
+    const allLocales = ALL_LANGUAGES.map(language => language.id);
+    // const locale = localeValue == 'null'  || localeValue == undefined? 'en' : localeValue;
     const splitValues = location.href.split('/');
-    const currentLocale = splitValues[splitValues.length - 2];
-    const contribution_langugae = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    $('#home-page').attr('default-lang', contribution_langugae);
+    const currentLocale = splitValues.filter(value => allLocales.includes(value))[0] || 'en';
     if (currentLocale != locale) {
         changeLocale(locale);
     }
@@ -66,6 +67,8 @@ function redirectToLocalisedPage() {
         }
     }
 }
+
+
 $(document).ready(function () {
     registerEvents();
 })
