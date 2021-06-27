@@ -666,7 +666,7 @@ function executeOnLoad() {
                     // toggleFooterPosition();
 
                     crowdSource.sentences = sentenceData.data;
-                    crowdSource.count = Number(sentenceData.count);
+                    crowdSource.count = sentenceData.data.length;
                     $loader.hide();
                     localStorage.setItem(
                         sentencesKey,
@@ -676,7 +676,7 @@ function executeOnLoad() {
                             language: localSpeakerDataParsed.language,
                         })
                     );
-                    localStorage.setItem(countKey, sentenceData.count);
+                    localStorage.setItem(countKey, sentenceData.data.length);
                     setFooterPosition();
                     initialize();
                 })
