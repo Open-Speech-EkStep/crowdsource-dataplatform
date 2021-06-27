@@ -23,12 +23,17 @@
  }
 
 @media (min-width: 769px) {
+    .font-size-lg-40 {
+        font-size: 2.5rem;
+    }
+
     .beta-version {
         position: absolute;
-    bottom: 0px;
+    bottom: 4px;
     right: 1px;
     font-size: 8px;
     }
+
     #locale_language_dropdown.active{
         background: rgba(0,123,255,.1);
         border-bottom: 2px solid #007bff;
@@ -70,10 +75,11 @@
 @media (max-width: 768px) {
     .beta-version {
         position: absolute;
-    bottom: 4px;
-    right: 1px;
-    font-size: 8px;
+        bottom: -4px;
+        right: 1px;
+        font-size: 8px;
     }
+
     #userDropDown{
         position: absolute;
         top: 5px;
@@ -90,16 +96,25 @@
         font-size: 1rem !important;
         border: 0px !important;
     }
+
+    #bhashadaan_logo .font-size-lg-40{
+        font-size: 20px;
+    }
 }
 
 
 /* Mobile Css */
 
 @media (max-width: 767px) {
+    .font-size-lg-40 {
+        font-size: 1.5rem;
+    }
+
     .logo{
         width: 150px;
         height: 48px;
       }
+
     #module_header_logo{
         width: 50px;
         height: 40px;
@@ -127,11 +142,6 @@
         width: 50px;
         height: 36px;
     }
-
-    #bhashadaan_logo img{
-        height: 48px;
-        width: 100px;
-    }
 }
 
 @media (max-width: 320px) {
@@ -139,7 +149,7 @@
         top: 0px;
     }
 
-    #bhashadaan_logo img{
-        width: 60px;
+    #bhashadaan_logo .font-size-lg-40{
+        font-size: 16px;
     }
 }
