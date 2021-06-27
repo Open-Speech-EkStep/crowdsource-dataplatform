@@ -1,3 +1,5 @@
+const { show_data_source } = require('./env-api');
+
 $(() => {
     $("#datasource_close_btn").click(() => {
         $("#data_source_modal").modal("hide");
@@ -43,6 +45,9 @@ const setSourceUrl = (sourceUrl) => {
     }
 }
 const setDataSource = (dataSourceInfo) => {
+    if (show_data_source === 'false') {
+        return;
+    }
     const tooltip = document.getElementById("myDataSourceTooltip");
     tooltip.innerHTML = "Copy to clipboard";
     if (dataSourceInfo && dataSourceInfo.length > 0 && dataSourceInfo != "[]") {

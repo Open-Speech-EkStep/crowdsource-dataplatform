@@ -132,6 +132,10 @@ gulp.task('js', function () {
             match: 'enabled_languages',
             replacement: settings.enabled_languages,
           },
+          {
+            match: 'showDataSource',
+            replacement: settings.showDataSource,
+          }
         ],
       })
     )
@@ -210,6 +214,10 @@ function jsGulp(moduleName) {
             match: 'enabled_languages',
             replacement: settings.enabled_languages,
           },
+          {
+            match: 'showDataSource',
+            replacement: settings.showDataSource,
+          }
         ],
       })
     )
