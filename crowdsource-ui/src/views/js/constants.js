@@ -100,13 +100,6 @@ const SELECT_PAGE_OPTIONS_FEEDBACK = [
   { module: 'others', pages: ['About Us', 'Home Page', 'Terms and Conditions', 'Badges Info'] }
 ];
 
-const FEEDBACK_CATEGORY = [
-  { text: 'Suggestion', value: "suggestion" },
-  { text: 'Error', value: "error" },
-  { text: 'Complaint', value: "complaint" },
-  { text: 'Compliment', value: "compliment" }
-];
-
 const OPINION_RATING_MAPPING = [
   { opinion: "very_sad", value: 1 },
   { opinion: "sad", value: 2 },
@@ -130,7 +123,6 @@ module.exports = {
   SELECTED_MODULE, MODULE, CURRENT_MODULE, TO_LANGUAGE,
   LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE,
   SELECT_PAGE_OPTIONS_FEEDBACK,
-  FEEDBACK_CATEGORY,
   OPINION_RATING_MAPPING,
   MOTHER_TONGUE
 }
