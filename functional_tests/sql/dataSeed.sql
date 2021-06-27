@@ -734,3 +734,52 @@ Union values('medium', 'parallel', '{
     "type": "text",
     "language": "Hindi"
 }'::jsonb, null);
+
+-- Boolo India INsertions
+
+insert into dataset_row ( difficulty_level, type, media, state,is_profane ) 
+values('medium', 'text', '{
+    "data":" बल्कि मजबूरी थी 15 ", 
+    "type": "text", 
+    "language": "Hindi"
+}'::jsonb, null , FALSE)
+Union values('medium', 'text', '{
+    "data": "बल्कि मजबूरी थी 16",
+    "type": "text",
+    "language": "Hindi"
+}'::jsonb, null, FALSE)
+Union values('medium', 'text', '{
+    "data": "बल्कि मजबूरी थी 17",
+    "type": "text",
+    "language": "Hindi"
+}'::jsonb, null, FALSE)
+Union values('medium', 'text', '{
+    "data": "बल्कि मजबूरी थी 18",
+    "type": "text",
+    "language": "Hindi"
+}'::jsonb, null, FALSE)
+Union values('medium', 'text', '{
+    "data": "बल्कि मजबूरी थी 19",
+    "type": "text",
+    "language": "Hindi"
+}'::jsonb, null, FALSE)
+Union values('medium', 'text', '{
+    "data": "बल्कि मजबूरी थी 20",
+    "type": "text",
+    "language": "Hindi"
+}'::jsonb, null, FALSE)
+Union values('medium', 'text', '{
+    "data": "बल्कि मजबूरी थी 21",
+    "type": "text",
+    "language": "Hindi"
+}'::jsonb, null, FALSE)
+Union values('medium', 'text', '{
+    "data": "बल्कि मजबूरी थी 22",
+    "type": "text",
+    "language": "Hindi"
+}'::jsonb, null, FALSE)
+Union values('medium', 'text', '{
+    "data": "बल्कि मजबूरी थी 23",
+    "type": "text",
+    "language": "Hindi"
+}'::jsonb, null, FALSE);
