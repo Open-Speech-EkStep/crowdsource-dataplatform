@@ -1,5 +1,6 @@
 {
-	"social sharing text without rank": "https://boloindia.nplt.in இல் இந்தியாவுக்கான திறந்த மொழி களஞ்சியத்தை உருவாக்குவதில் நான் பங்களித்துள்ளேன். நம் குரல்கள் மூலம் பங்களித்து, மெஷின்கள் நம் மொழியைக் கற்பதற்கு உதவுவதில், நீங்களும் நானும் நிச்சயமாக ஒரு வித்தியாசத்தை உருவாக்க முடியும். உங்கள் மொழியை மேம்படுத்த, உங்கள் பங்களிப்பை தருகிறீர்களா?",
+	"social sharing text without rank": "https://bhashini.gov.in/bhashadaan இல் இந்தியாவுக்கான திறந்த மொழி களஞ்சியத்தை உருவாக்குவதில் நான் பங்களித்துள்ளேன். நம் குரல்கள் மூலம் பங்களித்து, மெஷின்கள் நம் மொழியைக் கற்பதற்கு உதவுவதில், நீங்களும் நானும் நிச்சயமாக ஒரு வித்தியாசத்தை உருவாக்க முடியும். உங்கள் மொழியை மேம்படுத்த, உங்கள் பங்களிப்பை தருகிறீர்களா?",
+	"social sharing text with rank": "I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language. Our %language language ranks %rank on Bolo India. Do your bit and empower the language?",
 	"Speech Recognition Models": "Speech Recognition Models",
 	"About Us": "எங்களைப் பற்றி",
 	"Select the language for voluntary contribution": "தன்னார்வ பங்களிப்புக்கான மொழியைத் தேர்ந்தெடுக்கவும்",
@@ -122,7 +123,7 @@
 	"Contributions": "பங்களிப்புகள்",
 	"Badge": "பேட்ஜ்",
 	"You are on a spree !!": "நீங்கள் அருமையாக செய்கிறீர்கள்!",
-	"I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?": "https://boloindia.nplt.in இல் இந்தியாவுக்கான திறந்த மொழி களஞ்சியத்தை உருவாக்குவதில் நான் பங்களித்துள்ளேன். நம் குரல்கள் மூலம் பங்களித்து, மெஷின்கள் நம் மொழியைக் கற்பதற்கு உதவுவதில், நீங்களும் நானும் நிச்சயமாக ஒரு வித்தியாசத்தை உருவாக்க முடியும். உங்கள் மொழியை மேம்படுத்த, உங்கள் பங்களிப்பை தருகிறீர்களா?",
+	"I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?": "https://bhashini.gov.in/bhashadaan இல் இந்தியாவுக்கான திறந்த மொழி களஞ்சியத்தை உருவாக்குவதில் நான் பங்களித்துள்ளேன். நம் குரல்கள் மூலம் பங்களித்து, மெஷின்கள் நம் மொழியைக் கற்பதற்கு உதவுவதில், நீங்களும் நானும் நிச்சயமாக ஒரு வித்தியாசத்தை உருவாக்க முடியும். உங்கள் மொழியை மேம்படுத்த, உங்கள் பங்களிப்பை தருகிறீர்களா?",
 	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings",
 	"Help your language achieve it’s goal of <span id=\"language-hour-goal\"></span> hrs. We know you can do more!": "உங்கள் மொழியில் <span id=\"language-hour-goal\"></span> மணிநேர இலக்கை அடைய உதவுங்கள். உங்களால் இன்னும் அதிகமாக செய்ய முடியும் என்று எங்களுக்குத் தெரியும்!",
 	"Bolo India": "போலோ இந்தியா",
@@ -372,5 +373,15 @@
 	"Your contribution can empower Bhashini to make many such stories happen.": "Your contribution can empower Bhashini to make many such stories happen.",
 	"Towards digital": "Towards digital",
 	"empowerment for all...": "empowerment for all...",
-	"Remove language barriers with": "Remove language barriers with"
+	"Remove language barriers with": "Remove language barriers with",
+	"*required": "*required",
+	"optional": "optional",
+	"Submitted successfully": "Submitted successfully",
+	"Thank you for your feedback!": "Thank you for your feedback!",
+	"upto 10 (Kid)": "upto 10 (Kid)",
+	"10 - 30 (Youth)": "10 - 30 (Youth)",
+	"30 - 60 (Adult)": "30 - 60 (Adult)",
+	"60+ (Senior)": "60+ (Senior)",
+	"Not collecting contributions for selected language": "Not collecting contributions for selected language",
+	"No validation data available for selected language": "No validation data available for selected language"
 }
