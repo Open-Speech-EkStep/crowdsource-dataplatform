@@ -24,7 +24,7 @@
 
                 <div class="mb-3 email-component" style="display:none">
                     <label class="form-check-label label-color-feedback" for="email">
-                        <%= __('Email') %> <span class="required">(*required)</span>
+                        <%= __('Email') %> <span class="required">(<%= __('*required')%>)</span>
                     </label>
                 </div>
                 <div class="mb-3 email-component" style="display:none">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="mb-3 content-component" style="display:none">
                     <label class="form-check-label label-color-feedback">
-                        <%= __('Giving Feedback for?') %> <span class="required">(*required)</span>
+                        <%= __('Giving Feedback for?') %> <span class="required">(<%= __('*required')%>)</span>
                     </label>
                 </div>
                 <div class="mb-4 content-component" style="display:none">
@@ -76,7 +76,7 @@
                 </div>
                 <div class="mb-3 page-type-component" style="display:none">
                     <label class="form-check-label label-color-feedback" for="select_page_id">
-                        <%= __('Select page') %> <span class="required">(*required)</span>
+                        <%= __('Select page') %> <span class="required">(<%= __('*required')%>)</span>
                     </label>
                 </div>
                 <div class="md-4 page-type-component" style="display:none">
@@ -93,7 +93,7 @@
                 
                 <div class="mb-4 mt-4">
                     <label class="form-check-label label-color-feedback">
-                        <%= __('What is your opinion of this page') %> <span class="required">(*required)</span>
+                        <%= __('What is your opinion of this page') %> <span class="required">(<%= __('*required')%>)</span>
                     </label>
                 </div>
                 <div class="mb-4 mt-4">
@@ -162,7 +162,7 @@
 
                 <div style="margin-bottom:16px">
                     <label class="form-check-label label-color-feedback" for="category_id">
-                        <%= __('Please select your feedback category') %> <span>(optional)</span>
+                        <%= __('Please select your feedback category') %> <span>(<%= __('optional')%>)</span>
                     </label>
                     <div class="form-row">
                         <select id="category_id" class="form-control">
@@ -176,7 +176,7 @@
                 <div class="md-4">
                     <div class="form-row">
                         <label class="form-check-label label-color-feedback" for="feedback_textarea" style="margin-top:16px;margin-bottom:5px">
-                            <%= __('Share your feedback below:') %> <span>(optional)</span>
+                            <%= __('Share your feedback below:') %> <span>(<%= __('optional')%>)</span>
                         </label>
                     </div>
                 </div>
@@ -205,9 +205,9 @@
                 </div>
 
                 <div class="text-center py-2" style="font-size:16px">
-                    Submitted successfully
+                    <%= __('Submitted successfully')%>
                 </div>
-                <div class="text-center py-2 pb-5" style="font-family:Lato;font-size:20px">Thank you for your feedback!
+                <div class="text-center py-2 pb-5" style="font-family:Lato;font-size:20px"><%= __('Thank you for your feedback!')%>
                 </div>
             </div>
         </div>
