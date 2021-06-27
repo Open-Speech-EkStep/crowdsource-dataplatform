@@ -54,10 +54,10 @@ step("Not Profane Profane button should be disbaled for suno india", async funct
 step("When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should appear in profanity suno india", async function() {
     await taiko.waitFor(1000)
     await click(taiko.image({ id: "play" }));
-    await taiko.waitFor(500)
-    await click(taiko.image({ id: "pause" }));
-    await taiko.waitFor(500)
-    await click(taiko.image({ id: "replay" }));
+    await taiko.waitFor(3500)
+    //await click(taiko.image({ id: "pause" }));
+    //await taiko.waitFor(500)
+    //await click(taiko.image({ id: "replay" }));
 });
 
 step("When user clicks on replay button and audio completes, Not Profane and profane button should be enabled", async function() {
@@ -83,5 +83,5 @@ step("User clicks on profane <arg0> , he should see next sentence and <arg1> <ar
     await taiko.waitFor(1000);
     assert.ok(await taiko.button({ id: arg1 }).isDisabled());
 	assert.ok(await taiko.button({ id: arg2 }).isDisabled());
-	await taiko.waitFor(1000);
+	await taiko.waitFor(500);
 });

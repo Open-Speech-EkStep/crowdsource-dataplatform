@@ -10,6 +10,7 @@ const {
     goto,
     clear,
     listItem,
+    setConfig,
     write,
     screenshot,
     click,
@@ -25,13 +26,21 @@ const headless = process.env.headless_chrome.toLowerCase() === 'true';
 const testUrl = process.env.test_url || 'https://dev-nplt.vakyansh.in';
 
 beforeSuite(async () => {
+    //setConfig( { waitForNavigation: false, navigationTimeout: 120000});
+    
     await openBrowser({
         headless: headless,
         args: [
-            '--node-sandbox',
             '--use-fake-ui-for-media-stream'
         ]
     })
+    setConfig({
+        waitForNavigation: false,
+        navigationTimeout: 120000,
+        observe: true,
+        observeTime: 2000,
+        retryTimeout: 5000
+    });
     await overridePermissions(testUrl, ['audioCapture']);
 });
 
@@ -88,6 +97,7 @@ step("User details popup should appear and close button should close the pop up"
 });
 
 step("When user clicks on Data Source button, popup should open and they should see source information", async function () {
+    await taiko.waitFor(650)
     assert.ok(await taiko.button({ id: 'show_source_button' }).isVisible());
     await click(taiko.button({ id: 'show_source_button' }));
     await taiko.waitFor(700);
@@ -378,7 +388,7 @@ step("User should be able to change to preffered Language to English again", asy
 });
 
 step("Select Contribution Language as <language>", async function (language) {
-    await taiko.waitFor(500)
+    await taiko.waitFor(1200)
     await click(taiko.$('#Show_all_language'))
     await taiko.waitFor(500)
     await click(language);

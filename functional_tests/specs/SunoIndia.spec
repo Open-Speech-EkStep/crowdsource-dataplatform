@@ -21,7 +21,7 @@ Tags: component
 * Check "Transcribe" option should be "enabled" on Home page
 * Check "Validate" option should be "disabled" on Home page
 * Navigate to "Transcribe" and add username "T User" then click Lets go
-* When user clicks on Data Source button, popup should open and they should see source information
+//* When user clicks on Data Source button, popup should open and they should see source information
 * When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should appear
 * User click on "edit" field and type "ହାଏ ଓଡିଆ ଓଡିଆ" submit and cancel button should be enabled
 * When user clicks on submit button user should see " Thank you for contributing!"
@@ -103,7 +103,6 @@ Tags: component
 * User should see the "Validate More" button
 * Navigate to "Know more" button and click "Know more" button
 * should select "" tab, "Level", "Validations", "Badge", "Validating: 5 Images" text & "Bronze_validate","Silver_validate","Gold_validate","Platinum_validate" image exist by default
-* User clicks back button
 * When user clicks on back button, user should land on home page
 
 ## Validate profanity configuration

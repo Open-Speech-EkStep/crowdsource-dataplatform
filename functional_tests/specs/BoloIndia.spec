@@ -26,6 +26,7 @@ Tags: component
 * When user clicks on "Submit" button, "Skip" button should appear
 
 ## Validate Contributor flow Thank you page
+* Change user name to "Dummy User1"
 * Navigate to "Contribute" button and click "Contribute" button
 //* And User enter random Username and selects Age , Mother tongue ,gender
 * user should "" see instructions to record

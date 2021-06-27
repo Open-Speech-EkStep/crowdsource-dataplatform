@@ -69,9 +69,9 @@ step("User skips <arg0> the next <arg1> sentences user should see Thank you popu
     const skipbutton = taiko.button({ id: arg0 })
     for (let i = 0; i < arg1; i++) {
         await click(skipbutton)
-        await taiko.waitFor(1200)
+        await taiko.waitFor(500)
     }
-    await taiko.waitFor(3000);
+    await taiko.waitFor(1000);
     if (await taiko.text('Thank you for contributing!').exists()) {
         assert.ok('Thank you pop-up exists');
     }
