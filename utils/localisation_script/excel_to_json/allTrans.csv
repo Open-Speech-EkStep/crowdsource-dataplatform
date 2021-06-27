@@ -1,0 +1,1495 @@
+,Hindi_key,Hindi_value,Punjabi_key,Punjabi_value
+1,Please validate any error message before proceeding,"आगे बढ़ने से पहले, कृपया किसी गड़बड़ी वाले मैसेज की पुष्टि करें",,
+2,Help us understand what’s wrong with the recording,"रिकॉर्डिंग में क्या गड़बड़ी है, यह समझने में हमारी मदद करें",,
+5,Levels and Badging @BoloIndia,लेवल और बैज @बोलो इंडिया,,
+7,Participate more to gain badges,बैज पाने के लिए और भागीदारी करें,,
+9,"Level - ""X""","लेवल - ""X""",,
+10,Contributions,योगदान,,
+11,(Recording + Validating),(रिकॉर्डिंग + पुष्टि),,
+13,"""X"" Senetences","""X"" वाक्य",,
+20,Bronze Contributor,ब्रॉन्ज योगदानकर्ता,,
+21,Silver Contributor,सिल्वर योगदानकर्ता,,
+22,Gold Contributor,गोल्ड योगदानकर्ता,,
+23,Platinum Contributor,प्लैटिनम योगदानकर्ता,,
+25,"WoaaH!! You’ve earned your  ""1st""  Badge",शाबाश! आपने अपना 'पहला' बैज जीत लिया है,,
+27,"Your next goal is to reach ""X"" sentences to unlock your ""Y"" Badge. ","अपना ""Y"" बैज जीतने के लिए आपका अगला लक्ष्य ""X"" वाक्यों तक पहुंचना है",,
+29,"""x"" Sentences contributed","""X"" वाक्यों का योगदान किया गया",,
+32,CERTIFICATE OF APPRECIATION,प्रशस्ति प्रमाणपत्र,,
+33,"This is to certify that ""X"" has contributed towards development of open source repository for Hindi language.","यह प्रमाणित किया जाता है कि ""X"" ने हिंदी भाषा के लिए ओपन सोर्स रिपॉजिटरी तैयार करने में योगदान दिया है।",,
+35,Ministry of Electronics and Information Technology,इलेक्ट्रॉनिक्स एवं सूचना प्रौद्योगिकी मंत्रालय,,
+36,Government of India,भारत सरकार,,
+38,You can select the language in which you want to participate,"आप जिस भाषा में योगदान देना चाहते हैं, उसे चुन सकते हैं",,
+39,Next,आगे बढ़ें,,
+41,You can change the language in which you want to read content,"आप जिस भाषा में कॉन्टेंट पढ़ना चाहते हैं, उस भाषा में बदल सकते हैं",,
+44,Click on the card to start contributing your voice,अपनी आवाज़ का योगदान देना शुरू करने के लिए कार्ड पर क्लिक करें,,
+45,Click on the card to validate what others have spoken,दूसरे लोगों ने जो बोला है उसकी पुष्टि करने के लिए कार्ड पर क्लिक करें,,
+3,Speak: Contribute your voice,बोलें: अपनी आवाज़ का योगदान दें,,
+4,Contribute your voice to create an open data repository of Indian languages,भारतीय भाषाओं का ओपन डेटा रिपॉज़िटरी तैयार करने के लिए अपनी आवाज़ का योगदान दें,,
+5,"“X” hrs recorded in “Y""","""y"" में ""x"" घंटे रिकॉर्ड हुए",,
+7,Listen: Validate what they say,पुष्टि करें: जो लिखा है क्या वही कहा जा रहा है,,
+8,Help us by validating the recordings that others have contributed,दूसरे लोगों ने जो आवाज़ के नमूनों का योगदान किया है उनकी पुष्टि करने में हमारी मदद करें,,
+9,"“X” hrs validated in ""Y""","""y"" में ""x"" घंटे की पुष्टि की गई",,
+11,Bolo India: A crowdsourcing initiative for Indian languages,"""बोलो इंडिया"": भारतीय भाषाओं के लिए एक क्राउडसोर्सिंग पहल",,
+12,"India needs to be Aatmanirbhar in the area of speech recognition in Indian languages. Hence, we want to create an open data repository of many Indian voices. Bolo India invites you to volunteer contribute your voice for this cause.","भारतीय भाषाओं में बोली पहचान के क्षेत्र में भारत को आत्मनिर्भर बनने की ज़रूरत है। इसलिए, हम कई प्रकार की भारतीय आवाज़ों का एक ओपन डेटा रिपॉज़िटरी बनाना चाहते हैं। इस मकसद को पूरा करने के लिए, ""बोलो इंडिया"" आपको अपनी आवाज़ का योगदान देने के लिए आमंत्रित करता है।",,
+22,by number of speakers,वक्ताओं की संख्या के हिसाब से,,
+0,Select your preferred language,अपनी पसंद की भाषा चुनें,,
+4,More Languages,और भाषाएं,,
+5,Other Languages,अन्य भाषाएं,,
+6,Select Mother Tongue,मातृभाषा चुनें,,
+16,Username cannot be more than 12 characters,उपयोगकर्ता नाम 12 वर्णों से ज़्यादा का नहीं हो सकता,,
+17,Username cannot be an email address or a mobile number,उपयोगकर्ता नाम कोई ईमेल पता या फ़ोन नंबर नहीं हो सकता,,
+18,Username should be between 4 to 20 characters,उपयोगकर्ता नाम 4 से लेकर 20 वर्णों का होना चाहिए,,
+19,This username is already taken,यह उपयोगकर्ता नाम पहले ही लिया जा चुका है,,
+10,You are just 'x' sentences away from earning the Bronze Badge.,आप ब्रॉन्ज बैज जीतने से सिर्फ़ 'x' वाक्य दूर हैं,,
+11,You are just 'x' sentences away from earning the Silver Badge.,आप सिल्वर बैज जीतने से सिर्फ़ 'x' वाक्य दूर हैं,,
+12,You are just 'x' sentences away from earning the Gold Badge.,आप गोल्ड बैज जीतने से सिर्फ़ 'x' वाक्य दूर हैं,,
+13,You are just 'x' sentences away from earning the Platinum Badge.,आप प्लैटिनम बैज जीतने से सिर्फ़ 'x' वाक्य दूर हैं,,
+18,Congratulations!!! You have completed this batch of sentences,बधाई हो!!! आपने वाक्यों के इस बैच को पूरा कर लिया है,,
+27,You've earned your Bronze badge,आपने अपना ब्रॉन्ज बैज जीत लिया है,,
+28,You've earned your Silver badge,आपने अपना सिल्वर बैज जीत लिया है,,
+29,You've earned your Gold badge,आपने अपना गोल्ड बैज जीत लिया है,,
+30,You've earned your Platinum badge,आपने अपना प्लैटिनम बैज जीत लिया है,,
+31,We love your spirit when you take the charge,"जब आप अपने कदम बढ़ाते हैं, हम आपकी भावनाओं की क़द्र करते हैं",,
+32,"You are in control, lead the way","आप अपने कंट्रोल में हैं, अगुआई करें",,
+33,Spread the word. Share it with your friends and family.,शब्द का विस्तार करें। इसे अपने दोस्तों और परिवार के साथ शेयर करें।,,
+36,You are on a spree!,आप अच्छा कर रहे हैं!,,
+66,"We do not have any data in ""Y"" language. Please try again later.","हमारे पास ""Y"" भाषा में कोई डेटा उपलब्ध नहीं है। कृपया बाद में फिर से कोशिश करें।",,
+67,Would you like to contribute your voice?,क्या आप अपनी आवाज़ का योगदान देना चाहते हैं?,,
+69,START CONTRIBUTING IN <Y>,<Y> में योगदान देना शुरू करें,,
+72,I've contributed towards building open language repository for India on http://boloindia.nplt.in. You and I can make a difference by donating our voices that can help machines learn our language. Our <x> language ranks <y> on Bolo India. Do your bit and empower the language?,"मैंने http://boloindia.nplt.in पर भारत के लिए ओपन लैंग्वेज रिपॉज़िटरी बनाने में योगदान किया है। आप और मैं हमारी आवाज़ों का योगदान करके इस पहल में काफ़ी फ़र्क डाल सकते हैं जिससे मशीन को हमारी भाषा सीखने में मदद मिलती है। ""बोलो इंडिया"" पर हमारी <x> भाषा का रैंक <y> है। अपनी भाषा को सशक्त बनाने में अपना योगदान देना चाहेंगे?",,
+4,Recorded,रिकॉर्ड किया गया,,
+7,Count,संख्या,,
+13,Speakers contributed,वक्ताओं का योगदान,,
+18,Gender Distribution,लैंगिक ब्यौरा,,
+21,Male,पुरुष,,
+22,Female,महिला,,
+24,Transgender - He,ट्रांसजेंडर - पुरुष,,
+25,Transgender - She,ट्रांसजेंडर - महिला,,
+26,Rather Not Say,बताना नहीं चाहते,,
+31,Age Group Distribution,आयु वर्ग का ब्यौरा,,
+32,Anonymous,गुमनाम,,
+33,upto 10,10 तक,,
+43,Contributed,योगदान किया गया,,
+44,Speakers,वक्ता,,
+45,hrs,घंटे,,
+46,mins,मिनट,,
+47,secs,सेकंड,,
+49,Data last updated,अंतिम बार डेटा अपडेट करने की तारीख,,
+51,"We do not have any data for this language, would you like to contribute for it?","हमारे पास इस भाषा के लिए कोई डेटा उपलब्ध नहीं है, क्या आप इसके लिए योगदान देना चाहते हैं?",,
+52,Contribute Now,अभी योगदान करें,,
+1,Quick Tips,झटपट सलाह,,
+3,Recording Instructions,रिकॉर्ड करने के निर्देश,,
+4,Please test your microphone,कृपया अपने माइक्रोफ़ोन की जांच करें,,
+6,Ensure there is no background noise,पक्का करें कि बैकग्राउंड में कोई शोर न हो,,
+7,Read once before recording it,रिकॉर्ड करने से पहले पढ़ें,,
+8,Get started by clicking on Record button,रिकॉर्ड करें' बटन पर क्लिक करके शुरू करें,,
+9,Start,शुरू करें,,
+12,Validating Instructions,पुष्टि करने के निर्देश,,
+13,Please test your speakers,कृपया अपने स्पीकर की जांच करें,,
+14,Ensure the voice is clear and audible,पक्का करें कि आवाज़ स्पष्ट और सुनने लायक हो,,
+15,Match the voice to the text accurately,आवाज़ और टेक्स्ट का सटीक मिलान करें,,
+16,"If you are unsure of the match, skip the particular voice sample","अगर आप किसी मिलान को लेकर पक्के तौर पर नहीं कह सकते, तो आवाज़ के उस नमूने को छोड़ दें",,
+0,RE-RECORD,फिर से रिकॉर्ड करें,,
+1,STOP RECORDING,रिकॉर्ड करना बंद करें,,
+4,START RECORDING,रिकॉर्ड करना शुरू करें,,
+10,Recording will automatically stop after <x> Seconds,"रिकॉर्डिंग  <span id=""counter""></span> सेकंड के बाद अपने आप बंद हो जाएगी",,
+12,Test your Microphone and Speakers,अपने माइक्रोफ़ोन और स्पीकर की जांच करें,,
+13,Test Mic,माइक की जांच करें,,
+14,Test Speaker,स्पीकर की जांच करें,,
+15,Recording,रिकॉर्ड किया जा रहा है,,
+16,Playing,प्ले हो रहा है,,
+17,Background noise detected,बैकग्राउंड में शोर सुनाई दिया,,
+18,Ambience noise detected,एंबियंस में शोर सुनाई दिया,,
+19,"Recording for ""x"" seconds","""x"" सेकंड के लिए रिकॉर्ड किया जा रहा है",,
+20,Playing back Audio,ऑडियो प्ले किया जा रहा है,,
+25,"Hurting sentiments of religion, community or abusive content etc.","धर्म, समुदाय की भावनाओं को ठेस पहुँचाने वाला या बुरे बर्ताव वाला कॉन्टेंट",,
+26,Prohibited Content,ऐसा कॉन्टेंट जिस पर पाबंदी लगी है,,
+28,Political Statement,राजनीतिक बयान,,
+29,"Hateful Political views, amplifying hate-speech etc.","नफ़रत फ़ैलाने वाली राजनीतिक सोच, नफ़रत बढ़ाने वाली बोली आदि",,
+30,Misinformation,गलत जानकारी,,
+31,"Hearsay / Rumors, deliberate falsified facts etc.","पाखंड / अफवाहें, जानबूझकर बताए गए झूठे तथ्य आदि",,
+0,PLAY,प्ले करें,,
+2,Instructions,निर्देश,,
+3,RE-PLAY,फिर से प्ले करें,,
+4,Incorrect,गलत,,
+6,Pause,रोकें,,
+9,Congratulations! You have validated a batch of recordings!,बधाई हो! आपके रिकॉर्डिंग के एक बैच की पुष्टि कर दी है।,,
+0,Looks like you have taken a wrong turn here,शायद आप यहां गलती से आ गए हैं,,
+1,Page Not Found,पेज नहीं मिला,,
+2,"Click Here ""x"" to go back to home page","होम पेज पर वापस जाने के लिए यहां ""x"" पर क्लिक करें",,
+3,An unexpected error occured while processing your request. Please try after some time.,आपके अनुरोध पर कार्रवाई करते समय एक अनपेक्षित गड़बड़ी हुई। कृपया कुछ समय बाद फिर से कोशिश करें।,,
+4,Close,बंद करें,,
+5,Error,गड़बड़ी,,
+6,Oops,ओह,,
+1,"Your feedback helps us keep Bolo India relevant, we appreciate you taking time to leave the feedback.","आपकी प्रतिक्रिया हमें ""बोलो इंडिया"" को प्रासंगिक बनाए रखने में मदद करती है, प्रतिक्रिया छोड़ने के लिए हम आपकी सराहना करते हैं।",,
+4,Thank You for your valuable feedback,आपके बहुमूल्य प्रतिक्रिया के लिए शुक्रिया,,
+5,Thank you,धन्यवाद,,
+6,Back to Home,वापिस मुख पृष्ठ पर,,
+8,Please type here,कृपया यहाँ टाइप करें,,
+9,Failed to submit the feedback. Please try again.,प्रतिक्रिया सबमिट करने में विफल। कृपया पुन: प्रयास करें।,,
+11,Subject,विषय,,
+12,Description,विवरण,,
+1,Help your language by donating your voice,अपनी आवाज़ दान करके अपनी भाषा की मदद करें,,
+3,Contributions made to Bolo India,बोलो इंडिया में किए गए योगदान,,
+4,languages,भाषाएं,,
+7,Hours validated,इतने घंटे सत्यापित किए गए,,
+9,by hours of data recorded and validated,रिकॉर्ड और सत्यापित किए गए डेटा के घंटों के हिसाब से,,
+15,number of speakers,वक्ताओं की संख्या,,
+1,"Earn badges or certificate by contributing to Bolo India. Donate your voice in language of your choice. Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e. YOU.","बोलो इंडिया में योगदान देकर बैज या सर्टिफ़िकेट जीतें। अपनी पसंद की भाषा में अपनी आवाज़ दान करें। अपने सोशल सर्कल में बैज शेयर करें, अपना भाषा समुदाय बनाएं, अपने दोस्तों और परिवार के सदस्यों को इस पहल में योगदान देने के लिए प्रेरित करें। बोलो इंडिया की ताकत आप जैसे लोगों की विविधता में निहित है। ",,
+4,The levels defined by an overall contributions on Bolo India. Please see the criteria that defines different levels below,बोलो इंडिया पर कुल योगदानों के अनुसार तय किए गए लेवल। कृपया नीचे दिए गए अलग-अलग लेवल तय करने वाला मानक देखें,,
+6,Contributions (Contributing),योगदान (योगदान),,
+9,Contributing : 5 sentences,योगदान : 5 वाक्य,,
+12,Contributing : 50 sentences,योगदान : 50 वाक्य,,
+15,Contributing : 100 sentences,योगदान : 100 वाक्य,,
+18,Contributing : 200 sentences,योगदान : 200 वाक्य,,
+21,"Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but will go through validation through Bolo crowdsourcing initiative. Please remain an active contributor to stand a chance to get recognised by the Ministry of Electronics and Information Technology.","कृपया ध्यान दें कि आपके लेवल और बैज अपडेट होने में 48 घंटे तक लग सकते हैं। आपके योगदान की समयसीमा ख़त्म नहीं होती है, लेकिन उसे बोलो इंडिया की क्राउडसोर्सिंग पहल के माध्यम से सत्यापन की प्रक्रिया से गुज़रना होता है। इलेक्ट्रॉनिकी और सूचना प्रौद्योगिकी मंत्रालय द्वारा मान्यता पाने का मौक़ा बनाए रखने के लिए, एक सक्रिय योगदानकर्ता बने रहें।",,
+25,"Earn badges or certificate by contributing to Bolo India.  Validate the audio and text in your desired language.  Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e. YOU.","बोलो इंडिया में योगदान देकर बैज या सर्टिफ़िकेट जीतें। अपनी पसंद की भाषा में ऑडियो और टेक्स्ट को सत्यापित करें। अपने सोशल सर्कल में बैज शेयर करें, अपना भाषा समुदाय बनाएं, अपने दोस्तों और परिवार के सदस्यों को इस पहल में योगदान देने के लिए प्रेरित करें। सुनो इंडिया की ताकत आप जैसे लोगों की विविधता में निहित है। ",,
+28,The levels defined by an overall validations on Bolo India. Please see the criteria that defines different levels below:,बोलो इंडिया पर कुल सत्यापनों के अनुसार तय किए गए लेवल। कृपया नीचे दिए गए अलग-अलग लेवल तय करने वाला मानक देखें:,,
+1,hours recorded,इतने घंटे रिकॉर्ड किए गए,,
+8,10 - 30 years,10 - 30 वर्ष,,
+9,30 - 60 years,30 - 60 वर्ष,,
+10,60+ years,60+ वर्ष,,
+1,Help your language by labelling images,इमेज को लेबल करके अपनी भाषा की मदद करें,,
+5,Label,लेबल,,
+6,Type the text as per the image,इमेज में दिया गया टेक्स्ट टाइप करें,,
+11,"Validate the text, labelled by others, as per the image","इमेज में दिए गए टेक्स्ट को सत्यापित करें, जिसे दूसरे लोगों ने लेबल किया है",,
+15,Contributions made to Dekho India,देखो इंडिया में किए गए योगदान,,
+18,y' Images labelled,y इमेज लेबल किए गए,,
+19,y' Images validated,y इमेज सत्यापित किए गए,,
+23,Images labelled and validated,सत्यापित और लेबल की गई इमेज,,
+24,Number of images,इमेज की संख्या,,
+8,X Images labelled,X इमेज लेबल किए गए,,
+9,X Images validated,X इमेज सत्यापित की गई,,
+17,Images labelled,लेबल की गई इमेज,,
+18,Images validated,सत्यापित की गई इमेज,,
+19,Labelled,लेबल की गई,,
+2,Captured Text,कैप्चर किया गया टेक्स्ट,,
+13,Is the text from the image captured correctly?,क्या इमेज से टेक्स्ट को सही तरीके से कैप्चर किया गया है?,,
+15,Click to open expanded view,बड़ा करके देखने के लिए क्लिक करें,,
+0,Type the text from the image,इमेज से टेक्स्ट को टाइप करें,,
+1,Thank you for contributing to Dekho India!,देखो इंडिया में योगदान देने के लिए आपका धन्यवाद!,,
+19,You’ve won a Bronze/Silver/Gold/Platinum Badge for contributing to Dekho India.,देखो इंडिया में योगदान देने के लिए आपने कांस्य/रजत/स्वर्ण/प्लैटिनम बैज जीता है,,
+20,Labelled X Images in [Language],[भाषा] में X इमेज लेबल किए गए,,
+1,"Earn badges or certificate by contributing to Dekho India. Label an image in language of your choice. Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Dekho India is in the diversity of the people i.e. YOU.","देखो इंडिया में योगदान देकर बैज या सर्टिफ़िकेट जीतें। अपनी पसंद की भाषा में इमेज को लेबल करें। अपने सोशल सर्कल में बैज शेयर करें, अपना भाषा समुदाय बनाएं, अपने दोस्तों और परिवार के सदस्यों को इस पहल में योगदान देने के लिए प्रेरित करें। देखो इंडिया की ताकत आप जैसे लोगों की विविधता में निहित है। ",,
+4,The levels defined by an overall contributions on Dekho India. Please see the criteria that defines different levels below,देखो इंडिया पर कुल योगदानों के अनुसार तय किए गए लेवल। कृपया नीचे दिए गए अलग-अलग लेवल तय करने वाला मानक देखें,,
+6,Contributions (Labelling),योगदान (लेबलिंग),,
+9,Labelling : 5 images,लेबलिंग : 5 इमेज,,
+12,Labelling : 50 images,लेबलिंग : 50 इमेज,,
+15,Labelling : 100 images,लेबलिंग : 100 इमेज,,
+18,Labelling : 200 images,लेबलिंग : 200 इमेज,,
+25,"Earn badges or certificate by contributing to Dekho India.  Validate the images and labels in your desired language.  Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Dekho India is in the diversity of the people i.e. YOU.","देखो इंडिया में योगदान देकर बैज या सर्टिफ़िकेट जीतें। अपनी पसंद की भाषा में इमेज और लेबल को सत्यापित करें। अपने सोशल सर्कल में बैज शेयर करें, अपना भाषा समुदाय बनाएं, अपने दोस्तों और परिवार के सदस्यों को इस पहल में योगदान देने के लिए प्रेरित करें। देखो इंडिया की ताकत आप जैसे लोगों की विविधता में निहित है। ",,
+28,The levels defined by an overall validations on Dekho India. Please see the criteria that defines different levels below:,देखो इंडिया पर कुल योगदानों के अनुसार तय किए गए लेवल। कृपया नीचे दिए गए अलग-अलग लेवल तय करने वाला मानक देखें:,,
+33,Validating : 5 images,सत्यापन : 5 इमेज,,
+36,Validating  : 50 images,सत्यापन : 50 इमेज,,
+39,Validating : 100 images,सत्यापन : 100 इमेज,,
+42,Validating : 200 images,सत्यापन : 200 इमेज,,
+1,(Same as About Us tab),हमारे बारे में,,
+4,"One Platform, 4 Crowdsourcing Initiatives","एक प्लैटफ़ॉर्म, 4 क्राउडसोर्सिंग पहल",,
+5,"Help create open repository of Speech Recognition data, Parallel translations and Labelled Images","बोली पहचान के डेटा, समानांतर अनुवाद और लेबल वाली इमेज की ओपन रिपॉज़िटरी बनाने में मदद करें",,
+7,<same as suno india>,सुनो इंडिया,,
+8,Contribute by typing what you hear on audio,ऑडियो पर सुनकर टाइप करें और योगदान दें,,
+9,Validate the texts transcribed by others,दूसरों के द्वारा लिप्यंतरित टेक्स्ट को सत्यापित करें,,
+15,<same as bolo india>,बोलो इंडिया,,
+16,Contribute by recording your voice on the prompted text,सामने दिख रहे टेक्स्ट पर अपनी आवाज़ रिकॉर्ड करके योगदान दें,,
+17,Validate the audio recorded by others,दूसरों के द्वारा रिकॉर्ड किए गए ऑडियो को सत्यापित करें,,
+20,100 hours each,100 घंटे प्रत्येक,,
+23,<same as Likho india>,लिखो इंडिया,,
+24,Contribute by translating the prompted text in your language,सामने दिख रहे टेक्स्ट का अपनी भाषा में अनुवाद करके योगदान दें,,
+25,Validate the translations contributed by others,दूसरों के योगदान वाले अनुवादों को सत्यापित करें,,
+28,10000 translations each,10000 घंटे प्रत्येक,,
+31,<same as Dekho india>,देखो इंडिया,,
+32,Contribute by labelling the image,इमेज को लेबल करके योगदान दें,,
+33,Validate the images labelled by others,दूसरों के द्वारा लेबल की गई इमेज को सत्यापित करें,,
+34,Monthly Goal : ,मासिक लक्ष्य:,,
+35,12 languages,12 भाषाएं,,
+36,10000 images each,10000 इमेज प्रत्येक,,
+38,Start Participating,भागीदारी करना शुरू करें,,
+40,[Bhaashini] for everyone,[भाषिणी] सभी के लिए,,
+41,"Like every Indian, be part of this initiative and make a difference in creating open data repositories for the Digital India","हर भारतीय की तरह, इस पहल का हिस्सा बनें और डिज़िटल इंडिया के लिए ओपन डेटा रिपॉज़िटरी बनाकर इस मकसद को पूरा करें",,
+43,"Engage with Bhaashini and earn badges, for helping your languages win their pride back","भाषिणी के साथ जुड़ें और बैज जीतें, ताकि आप अपनी भाषाओं की मदद करके उनका गौरव वापस ला सकें",,
+46,Win a Bronze Badge,कांस्य बैज जीतें,,
+47,Contribute just 5 sentences in your language,अपनी भाषा में सिर्फ़ 5 वाक्यों का योगदान दें,,
+0,[Bhaashini] : A crowdsourcing initiative for Indian languages,[भाषिणी] भारतीय भाषाओं के लिए क्राउडसोर्सिंग पहल,,
+1,"[Bhaashini] aims to create open datasets to develop Speech Recognition, Text-to-Speech, Machine Translation and Optical Character Recognition for Indian languages. This initiative will empower our technologists, language enthusiasts and language communities to build world class digital applications in our own local languages. ","[भाषिणी] का मकसद भारतीय भाषाओं के लिए बोली पहचान करने, टेक्स्ट को बोली में बदलने, मशीन अनुवाद और ऑप्टिकल कैरेक्टर रिकॉग्निशन (ओसीआर) की तकनीक तैयार करने के लिए ओपन डेटासेट बनाना है। इस पहल से हमारे टेक्नोलॉजी विशेषज्ञों, भाषा के जानकारों और भाषा समुदायों को हमारी अपनी स्थानीय भाषाओं में विश्व स्तरीय डिज़िटल ऐप्लिकेशन तैयार करने में मदद मिलेगी।",,
+2,Help Indian languages become atma-nirbhar through these datasets,इन डेटाबेसों के ज़रिए भारतीय भाषाओं को आत्मनिर्भर बनने में मदद करें,,
+3,"This is an effort by MeitY, Government of India, under the National Language Translation Mission (NLTM). This effort is supported by EkStep Foundation on a pro-bono basis and leverages its open source work under https://sunbird.org/projects/vakyansh along with various other open source frameworks.","यह राष्ट्रीय भाषा अनुवाद मिशन (एनएलटीएम) के तहत, भारत सरकार के इलेक्ट्रोनिक्स एवं सूचना प्रौद्योगिकी मंत्रालय (Meity) का एक प्रयास है। इस प्रयास को प्रो-बोनो आधार पर, एकस्टेप फाउंडेशन का समर्थन प्राप्त है और वह विभिन्न अन्य ओपन सोर्स फ़्रेमवर्क के साथ-साथ https://sunbird.org/projects/vakyansh के तहत इसके ओपन सोर्स वर्क का लाभ उठाता है।  ",,
+4,"India is a land of many languages, our digital strategy must reflect it.",भारत कई भाषाओं वाला देश है और हमारी डिज़िटल रणनीति में यह दिखना ज़रूरी है।,,
+5,90% of India's population uses regional languages to conduct their day-to-day activities.,भारत की 90% आबादी अपनी रोज़मर्रा की गतिविधियों के लिए क्षेत्रीय भाषाओं का इस्तेमाल करती है।,,
+6,"As more and more people use digital platforms for financial, educational and social activities, digital platforms must work seamlessly in all Indian Languages.","जैसे-जैसे ज़्यादा से ज़्यादा लोग वित्तीय, शैक्षणिक और सामाजिक गतिविधियों के लिए डिज़िटल प्लैटफ़ॉर्म का इस्तेमाल करते हैं, डिज़िटल प्लैटफ़ॉर्म को सभी भारतीय भाषाओं में निर्बाध तरीके से काम करना चाहिए।",,
+8,Help your own language,अपनी भाषा की मदद करें,,
+9,"We need to build speech recognition, text-to-speech, machine translation and OCR technologies that are tuned for your language.","हमें बोली पहचान करने, टेक्स्ट को बोली में बदलने, मशीन अनुवाद और ऑप्टिकल कैरेक्टर रिकॉग्निशन (ओसीआर) की ऐसी टेक्नोलॉजी तैयार करने की ज़रूरत है जो आपकी भाषा के हिसाब से सही हो।",,
+10,"These technologies will transform your language to become ""digital first"" in various sectors such as: education, healthcare and media.","इस तरह की टेक्नोलॉजी शिक्षा, स्वास्थ्य और मीडिया जैसे विभिन्न क्षेत्रों में आपकी भाषा को ""डिज़िटल फर्स्ट"" बना देगी।",,
+11,"The tools, utilities and models proposed to be developed in your language will rely on open source contributions through the Bhaashini crowd sourcing platform","आपकी भाषा में जिन टूल, मॉडल और उपयोगी चीज़ों को तैयार करने का प्रस्ताव किया गया है वे भाषिणी क्राउड सोर्सिंग प्लैटफ़ॉर्म के ज़रिए ओपन सोर्स योगदानों पर निर्भर करेंगी। ",,
+13,Crowd Sourcing & your contribution,क्राउड सोर्सिंग और आपका योगदान,,
+14,The above mentioned technologies rely on AI technology that requires large datasets in their respective fields. ,उक्त टेक्नोलॉजी एआई टेक्नोलॉजी पर निर्भर करती है जिसके लिए उनके संबंधित फ़ील्ड में बड़े डेटासेट की ज़रूरत होती है।,,
+15,[Bhaashini] currently has four crowdsoucing initiatives to create these datasets -,"[भाषिणी] फ़िलहाल, इन डेटाशीट को बनाने के लिए चार क्राउडसोर्सिंग पहल मौजूद हैं - ",,
+16,"1. Bolo India creates a repository of diverse voices speaking Indian languages, where volunteer reads the corresponding text. ",1. बोलो इंडिया भारतीय भाषाओं में बोली जाने वाली विभिन्न आवाज़ों की एक रिपॉज़िटरी बनाता है जहां वोलंटियर संबंधित टेक्स्ट को पढ़ते हैं।,,
+17,2. Suno India creates an open dataset through transcription of audio files.,2. सुनो इंडिया ऑडिट फ़ाइलों के लिप्यंतरण के ज़रिए ओपन डेटासेट बनाता है।,,
+18,3. Likho India creates open parallel translation datasets between corresponding sentences in two languages.,3. लिखो इंडिया दो भाषाओं में संबंधित वाक्यों के बीच ओपन समानांतर अनुवाद डेटासेट बनाता है।,,
+19,4. Dekho India creates an open data repository of images and the corresponding text.,4. देखो इंडिया इमेज और संबंधित टेक्स्ट का एक ओपन डेटा रिपॉज़िटरी बनाता है।,,
+20,This is where you come in,यहीं आपकी भूमिका शुरू होती है,,
+21,We are inviting you to join us and voluntarily contribute to this initiative. Contributing at one stretch can be overwhelming hence you can do this by visiting the website multiple times and commence from where you left us off,"हम आपको इस पहल में हमारे साथ जुड़ने और स्वेच्छा से योगदान देने के लिए आमंत्रित करते हैं। एक पहल में योगदान करना बेहतरीन हो सकता है, इसलिए आप कई बार वेबसाइट पर जाकर और पिछली बार जहां छोड़ा था वहीं से शुरू करके ऐसा कर सकते हैं",,
+22,Every minute of your contribution will make a huge difference and bring us closer to our objective,हर मिनट के आपके योगदान से काफ़ी फ़र्क पड़ेगा और यह हमें हमारे लक्ष्य के ज़्यादा करीब लाएगा,,
+23,Start Contributing,योगदान देना शुरू करें,,
+1,Bolo India,बोलो इंडिया,,
+3,Dekho India,देखो इंडिया,,
+6,Translate Page,अनुवाद पेज,,
+7,Localization,लोकलाइजेशन,,
+9,About Us,हमारे बारे में,,
+10,Terms & Conditions,नियम और शर्तें,,
+11,Privacy Policy,निजता नीति,,
+16,Feedback,प्रतिक्रिया,,
+17,Help us find more people like you,अपने जैसे ज़्यादा लोगों को ढूंढने में हमारी मदद करें,,
+18,Invite more people,ज़्यादा लोगों को बुलावा भेजें,,
+20,Konkani Roman,कोंकणी रोमन,,
+21,Konkani DV,कोंकणी डीवी,,
+22,Manipuri BN,मणिपुरी बीएन,,
+23,Manipuri MM,मणिपुरी एमएम,,
+24,Santali OL,संथाली ओएल,,
+25,Santali DV,संथाली डीवी,,
+26,English,अंग्रेज़ी,,
+27,ASSAMESE,असमिया,,
+28,BENGALI,बंगाली,,
+29,BODO,बोडो,,
+30,DOGRI,डोगरी,,
+31,GUJARATI,गुजराती,,
+32,Hindi,हिंदी,,
+33,KANNADA,कन्नड़,,
+34,KASHMIRI,कश्मीरी,,
+35,MAITHILI,मैथिली,,
+36,Malayalam,मलयालम,,
+37,MARATHI,मराठी,,
+38,ODIA,उड़िया,,
+39,NEPALI,नेपाली,,
+40,PUNJABI,पंजाबी,,
+41,SANSKRIT,संस्कृत,,
+42,SINDHI,सिंधी,,
+43,TAMIL,तमिल,,
+44,Telugu,तेलुगु,,
+45,URDU,उर्दू,,
+47,Telangana,तेलंगाना,,
+48,Andaman and Nicobar Islands,अंडमान और निकोबार द्वीपसमूह,,
+49,Andhra Pradesh,आंध्रप्रदेश,,
+50,Arunanchal Pradesh,अरुणाचल प्रदेश,,
+51,Assam,असम,,
+52,Bihar,बिहार,,
+53,Chhattisgarh,छत्तीसगढ़,,
+54,Goa,गोवा,,
+55,Gujarat,गुजरात,,
+56,Haryana,हरियाणा,,
+57,Himachal Pradesh,हिमाचल प्रदेश,,
+58,Jammu & Kashmir,जम्मू और कश्मीर,,
+59,Jharkhand,झारखंड,,
+60,Karnataka,कर्नाटक,,
+61,Kerala,केरल,,
+62,Lakshadweep,लक्षद्वीप,,
+63,Madhya Pradesh,मध्य प्रदेश,,
+64,Maharashtra,महाराष्ट्र,,
+65,Manipur,मणिपुर,,
+66,Chandigarh,चंडीगढ़,,
+67,Puducherry,पुडुचेरी,,
+68,Punjab,पंजाब,,
+69,Rajasthan,राजस्थान,,
+70,Sikkim,सिक्किम,,
+71,Tamil Nadu,तमिलनाडु,,
+72,Tripura,त्रिपुरा,,
+73,Uttar Pradesh,उत्तर प्रदेश,,
+74,Uttarakhand,उत्तराखंड,,
+75,West Bengal,पश्चिम बंगाल,,
+76,Odisha,ओडिशा,,
+77,Dadra and Nagar Haveli and Daman and Diu,दादरा और नागर हवेली और दमन और दीव,,
+78,Meghalaya,मेघालय,,
+79,Mizoram,मिज़ोरम,,
+80,Nagaland,नागालैंड,,
+81,National Capital Territory of Delhi,राष्ट्रीय राजधानी क्षेत्र दिल्ली,,
+82,Ladakh,लद्दाख,,
+1,"Earn badges or certificates by contributing to the crowdsourcing initiatives, such as, Bolo India, Suno India, Likho India and Dekho India. Contribution to each initiative qualifies for badges and certificates as per the levels outlined below. Share badges in your social circle, your language community, and motivate your friends and family to contribute to the cause. The strength of this crowdsourcing initiative is in the diversity of the people i.e. YOU.","बोलो इंडिया, सुनो इंडिया, लिखो इंडिया और देखो इंडिया जैसी क्राउडसोर्सिंग पहल में योगदान देकर बैज या सर्टिफिकेट अर्जित करें। हर पहल में योगदान करके आप नीचे बताए गए लेवल के मुताबिक बैज और सर्टिफिकेट जीतने में सक्षम हो सकते हैं। इन बीजों को अपने सर्कल और अपने भाषा समुदाय में शेयर करें और अपने परिवार के सदस्यों एवं दोस्तों को इस पहल में योगदान करने के लिए प्रेरित करें। इस क्राउडसोर्सिंग पहल की ताकत आप जैसे लोगों की विविधता में निहित है। ",,
+3,Choose the initiative,पहल को चुनें,,
+4,Choose the language,भाषा चुनें,,
+5,Participation Levels,भागीदारी के स्तर,,
+6,"The levels are defined by an overall contributions in each initiative. To understand the criteria for earning badges, please select the initiative and language of your desire ","हर पहल में किए गए कुल योगदानों के हिसाब से लेवल तय किए जाते हैं। बैज जीतने के मानदंड को समझने के लिए, कृपया अपनी पसंद की पहल और भाषा चुनें",,
+7,Contribution,योगदान,,
+8,Valiations,सत्यापन,,
+10,Contributions /Validation,योगदान / सत्यापन,,
+13,5 data records,5 डेटा रिकॉर्ड,,
+16,50 data records,50 डेटा रिकॉर्ड,,
+19,100 data records,100 डेटा रिकॉर्ड,,
+22,200 data records,200 डेटा रिकॉर्ड,,
+25,Please note that your levels and badges may take upto 48hrs to update. Your contribution will need to be validated before confirming the badge/certificate. Please keep contributing actively to stand a chance to get recognised.,"कृपया ध्यान दें कि आपके लेवल और बैज अपडेट होने में 48 घंटे लग सकते हैं। बैज या सर्टिफिकेट की पुष्टि करने से पहले आपके योगदान का सत्यापन करना ज़रूरी होगा। मान्यता पाने का मौक़ा बनाए रखने के लिए, सक्रिय रूप से योगदान करते रहें।",,
+0,Your Feedback,आपकी प्रतिक्रिया,,
+2,We would like to get your feedback to improve this platform,इस प्लैटफ़ॉर्म को बेहतर बनाने के लिए हम आपकी प्रतिक्रिया जानना चाहते हैं,,
+4,Giving Feedback for?,आप किसके लिए प्रतिक्रिया देना चाहते हैं?,,
+5,Bolo,बोलो,,
+6,Suno,सुनो,,
+7,Likho,लिखो,,
+8,Dekho,देखो,,
+11,What is your opinion of this page ,इस पेज के बारे में आपकी प्रतिक्रिया क्या है,,
+13,Please select your feedback category ,कृपया अपनी प्रतिक्रिया की श्रेणी चुनें,,
+14,Select a category,कोई श्रेणी चुनें,,
+15,Suggestion,सुझाव,,
+16,Complaint,शिकायत,,
+17,Compliment,सराहना,,
+19,Share your feedback below: ,नीचे अपना सुझाव दें,,
+20,(optional),(वैकल्पिक),,
+21,Type here...,यहां टाइप करें...,,
+1,Special characters are not allowed,विशेष वर्णों के इस्तेमाल की अनुमति नहीं है,,
+2,Input Field can not be empty,इनपुट फ़ील्ड भरना ज़रूरी है,,
+3,Numbers are not allowed,नंबरों/अंकों के इस्तेमाल की अनुमति नहीं है,,
+0,Likho India,लिखो इंडिया,,
+1,Help your language by translating text,टेक्स्ट का अनुवाद करके अपनी भाषा की मदद करें,,
+2,Select the language pair for contribution,योगदान के लिए भाषा की जोड़ी चुनें,,
+6,Translate,अनुवाद करें,,
+7,Translate and type the text,टेक्स्ट का अनुवाद करें और टाइप करें,,
+12,"Validate the translation, contributed by others",दूसरों के द्वारा किए गए अनुवाद के योगदान को सत्यापित करें,,
+16,Contributions made to Likho India,लिखो इंडिया में किए गए योगदान,,
+19,y' Translations done,y अनुवाद किए गए,,
+20,y' Translations validated,y अनुवादों को सत्यापित किया गया,,
+24,Total translations,कुल अनुवाद,,
+25,Number of translations,अनुवादों की संख्या,,
+4,From,इस भाषा से,,
+5,To,इस भाषा में,,
+6,Select a language pair,भाषा की जोड़ी चुनें,,
+10,X Language Pairs,X भाषा जोड़ियां,,
+12,X translations done,X अनुवाद किए गए,,
+13,X translations validated,X अनुवादों को सत्यापित किया गया,,
+17,Sentences,वाक्य,,
+21,Translations done,इतने अनुवाद किए गए,,
+22,Translations validated,इतने अनुवादों को सत्यापित किया गया,,
+23,Translated,अनुवाद किया गया,,
+24,Validated,सत्यापित किया गया,,
+29,People,लोग,,
+0,Type the translation of the given text,दिए गए टेक्स्ट का अनुवाद टाइप करें,,
+11,Please type in your chosen language,कृपया अपनी चुनी हुई भाषा में टाइप करें,,
+15,Recording will automatically stop after 'y' Seconds,y' सेकंड के बाद रिकॉर्डिंग अपने-आप रुक जाएगी,,
+17,Report Content,कॉन्टेंट की शिकायत करें,,
+18,Help us understand what’s wrong with the sentence,"वाक्य में क्या गलत है, इसे समझने में हमारी मदद करें",,
+19,Offensive,अपमानजनक,,
+20,"Hateful / Discriminatory / Vulgar language, drugs promotion etc.","नफ़रत फ़ैलाने वाली / भेदभाव वाली / अश्लील भाषा, नशीली दवाओं का प्रचार आदि",,
+21,Others,अन्य,,
+22,Please specify the reason (optional),कृपया कारण बताएं (वैकल्पिक),,
+25,Thank you for contributing,योगदान देने के लिए आपका धन्यवाद,,
+11,Is the translation correct?,क्या यह अनुवाद सही है?,,
+1,Thank you for contributing to Likho India!,लिखो इंडिया में योगदान देने के लिए आपका धन्यवाद!,,
+19,You’ve won a Bronze/Silver/Gold/Platinum Badge for contributing to Likho India.,लिखो इंडिया में योगदान देने के लिए आपने कांस्य/रजत/स्वर्ण/प्लैटिनम बैज जीता है,,
+20,Translated X sentences in [Language],[भाषा] में X वाक्यों का अनुवाद किया गया,,
+1,"Earn badges or certificate by contributing to Likho India. Translate a sentence in language of your choice. Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Likho India is in the diversity of the people i.e. YOU.","लिखो इंडिया में योगदान देकर बैज या सर्टिफ़िकेट जीतें। अपनी पसंद की भाषा में वाक्य का अनुवाद करें। अपने सोशल सर्कल में बैज शेयर करें, अपना भाषा समुदाय बनाएं, अपने दोस्तों और परिवार के सदस्यों को इस पहल में योगदान देने के लिए प्रेरित करें। लिखो इंडिया की ताकत आप जैसे लोगों की विविधता में निहित है। ",,
+4,The levels defined by an overall contributions on Likho India. Please see the criteria that defines different levels below,लिखो इंडिया पर कुल योगदानों के अनुसार तय किए गए लेवल। कृपया नीचे दिए गए अलग-अलग लेवल तय करने वाला मानक देखें,,
+6,Contributions (Translating),योगदान (अनुवाद),,
+9,Translating : 5 sentences,अनुवाद : 5 वाक्य,,
+12,Translating : 50 sentences,अनुवाद : 50 वाक्य,,
+15,Translating : 100 sentences,अनुवाद : 100 वाक्य,,
+18,Translating : 200 sentences,अनुवाद : 200 वाक्य,,
+21,"Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but will go through validation through Likho crowdsourcing initiative. Please remain an active contributor to stand a chance to get recognised by the Ministry of Electronics and Information Technology.","कृपया ध्यान दें कि आपके लेवल और बैज अपडेट होने में 48 घंटे तक लग सकते हैं। आपके योगदान की समयसीमा ख़त्म नहीं होती है, लेकिन उसे लिखो इंडिया की क्राउडसोर्सिंग पहल के माध्यम से सत्यापन की प्रक्रिया से गुज़रना होता है। इलेक्ट्रोनिक्स एवं सूचना प्रौद्योगिकी मंत्रालय द्वारा मान्यता पाने का मौक़ा बनाए रखने के लिए, एक सक्रिय योगदानकर्ता बने रहें।",,
+25,"Earn badges or certificate by contributing to Likho India.  Validate the sentence that is translated in your desired language.  Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Likho India is in the diversity of the people i.e. YOU.","लिखो इंडिया में योगदान देकर बैज या सर्टिफ़िकेट जीतें। अपनी पसंद की भाषा में अनुवाद किए गए वाक्य को सत्यापित करें। अपने सोशल सर्कल में बैज शेयर करें, अपना भाषा समुदाय बनाएं, अपने दोस्तों और परिवार के सदस्यों को इस पहल में योगदान देने के लिए प्रेरित करें। लिखो इंडिया की ताकत आप जैसे लोगों की विविधता में निहित है। ",,
+28,The levels defined by an overall validations on Likho India. Please see the criteria that defines different levels below:,लिखो इंडिया पर कुल योगदानों के अनुसार तय किए गए लेवल। कृपया नीचे दिए गए अलग-अलग लेवल तय करने वाला मानक देखें:,,
+0,Suno India,सुनो इंडिया,,
+1,Help your language by transcribing audio into text,ऑडियो को टेक्स्ट में लिप्यंतरित करके अपनी भाषा की मदद करें,,
+2,Select the language for contribution,योगदान देने के लिए भाषा का चयन करें,,
+3,Show All,सभी दिखाएं,,
+5,Transcribe,लिप्यंतरित करें,,
+6,Type what you hear,आप जो सुन रहे हैं उसे टाइप करें,,
+8,Not collecting contributions for selected language,चुनी गई भाषा के लिए योगदान नहीं लिया जा रहा है,,
+10,Validate,सत्यापित करें,,
+11,"Validate text, transcribed by others, as per the audio","ऑडियो के अनुसार टेक्स्ट को सत्यापित करें, जिसे दूसरे लोगों ने लिप्यंतरित किया है",,
+13,No validation data available for selected language,चुनी गई भाषा के लिए सत्यापन का डेटा उपलब्ध नहीं है,,
+15,Contributions made to Suno India,सुनो इंडिया में किए गए योगदान,,
+18,0h 0m 0s Hrs transcribed,0h 0m 0s लिप्यंतरित किए गए,,
+19,0h 0m 0s Hrs validated,0h 0m 0s सत्यापित किए गए,,
+23,Hours transcribed and validated,इतने घंटे लिप्यंतरित और सत्यापित किए गए,,
+24,x mins,x मिनट,,
+25,x hrs,x घंटे,,
+27,Your selected language,आपकी चुनी हुई भाषा,,
+28,Top languages,मुख्य भाषाएं,,
+29,VIEW ALL DETAILS,सभी जानकारी देंखें,,
+30,VIEW DASHBOARD,डैशबोर्ड देखें,,
+2,Home,होम पेज,,
+3,ALL Languages,सभी भाषाएं,,
+4,Select a language,कोई भाषा चुनें,,
+5,"Data Last Updated: dd-mm-yyyy, hh:mm:ss pm","डेटा आख़िरी बार अपडेट किया गया: dd-mm-yyyy, hh:mm:ss pm",,
+6,"Data Last Updated: dd-mm-yyyy, hh:mm:ss am","डेटा आख़िरी बार अपडेट किया गया: dd-mm-yyyy, hh:mm:ss am",,
+8,X Languages,X भाषाएं,,
+9,X People participated,X लोगों ने भाग लिया,,
+10,X Hrs transcribed,X इमेज लेबल किए गए,,
+11,X Hrs validated,X इमेज सत्यापित की गई,,
+13,Progress Chart,प्रोग्रेस चार्ट,,
+15,Number of hours,इमेज,,
+16,Time,समय,,
+17,Monthly,मासिक,,
+18,Quarterly,तिमाही,,
+19,Hrs transcribed,लेबल की गई इमेज,,
+20,Hrs validated,इतने घंटे सत्यापित किए गए,,
+21,Transcribed: X hrs  X mins  X secs,लिप्यंतरित: X घंटे  X मिनट  X सेकंड,,
+22,Validated: X hrs X mins X secs,सत्यापित: X घंटे X मिनट X सेकंड,,
+23,MMM XX,MMM XX,,
+25,State wise distribution,राज्यवार ब्यौरा,,
+27,<Name of the individual states>,<अलग-अलग राज्य के नाम>,,
+28,Hrs Validated: X,इतने घंटे सत्यापित किए गए: X,,
+29,Hrs Transcribed: X,इतने घंटे लिप्यंतरित किए गए: X,,
+30,X people,X लोग,,
+32,Data last updated on,डेटा आख़िरी बार अपडेट किया गया,,
+0,Speaker Details,वक्ता की जानकारी,,
+1,All the fields are optional,सभी फ़ील्ड वैकल्पिक हैं,,
+2,Not You? Change User,क्या ये आप नहीं हैं? उपयोगकर्ता बदलें,,
+3,Username,उपयोगकर्ता नाम,,
+4,Enter preferred Username,पसंदीदा उपयोगकर्ता नाम डालें,,
+5,Please enter a username that is within 12 characters,ऐसा उपयोगकर्ता नाम डालें जो 12 वर्णों से अधिक न हो,,
+8,LET'S GO,आइए शुरू करें,,
+1,Thank you for contributing to Suno India!,सुनो इंडिया में योगदान देने के लिए आपका धन्यवाद!,,
+12,Contribute/Validate x sentences to unlock your 1st Badge.,अपना पहला बैज पाने के लिए x वाक्यों का योगदान दें / सत्यापित करें,,
+19,You’ve won a Bronze/Silver/Gold/Platinum Badge for contributing to Suno India.,सुनो इंडिया में योगदान देने के लिए आपने कांस्य/रजत/स्वर्ण/प्लैटिनम बैज जीता है,,
+20,Transcribed X sentences in [Language],[भाषा] में X वाक्य लिप्यंतरित किए गए,,
+0,Type the text as you hear the audio,ऑडियो सुनते हुए टेक्स्ट को टाइप करें,,
+2,Add Text,टेक्स्ट जोड़ें,,
+3,Start Typing here,यहां टाइप करना शुरू करें,,
+14,Audio recording is too small. Please Re-record,ऑडियो रिकॉर्डिंग बहुत छोटी है। कृपया फिर से रिकॉर्ड करें,,
+16,Congratulations! You have contributed a batch of your voice!,आवाज़!,,
+18,Recording will automatically stop after y Seconds,y सेकंड के बाद रिकॉर्डिंग अपने-आप रुक जाएगी,,
+0,Back,वापस जाएं,,
+1,Report,रिपोर्ट / शिकायत करें,,
+2,Test your Speaker,अपने स्पीकर की जांच करें,,
+3,Needs change,बदलाव ज़रूरी है,,
+4,Correct,सही / ठीक करें,,
+5,Play / Pause / Resume / Replay,चलाएं / रोकें / फिर से शुरू करें / फिर से चलाएं,,
+6,Skip,छोड़ें,,
+8,Get Chrome extension to type in any language you choose,अपनी चुनी हुई किसी भी भाषा में टाइप करने के लिए Chrome एक्सटेंशन डाउनलोड करें,,
+9,Install Now,अभी इंस्टॉल करें,,
+10,Watch the Video,वीडियो देखें,,
+11,Watch the Phonetic Keyboard installation instructions,फ़ोनेटिक कीबोर्ड इंस्टॉल करने के निर्देश देखें,,
+13,Does the audio match the text?,क्या ऑडियो टेक्स्ट से मेल खाता है?,,
+15,Original Text,मूल टेक्स्ट,,
+16,Your Edit,आपका बदलाव,,
+17,Virtual Keyboard,वर्चुअल कीबोर्ड,,
+18,Cancel,रद्द करें,,
+19,Submit,सबमिट करें,,
+1,"Earn badges or certificate by contributing to Suno India. Transcribe a sentence in language of your choice. Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Suno India is in the diversity of the people i.e. YOU.","सुनो इंडिया में योगदान देकर बैज या सर्टिफ़िकेट जीतें। अपनी पसंद की भाषा में वाक्य को लिप्यंतरित करें। अपने सोशल सर्कल में बैज शेयर करें, अपना भाषा समुदाय बनाएं, अपने दोस्तों और परिवार के सदस्यों को इस पहल में योगदान देने के लिए प्रेरित करें। सुनो इंडिया की ताकत आप जैसे लोगों की विविधता में निहित है। ",,
+4,The levels defined by an overall contributions on Suno India. Please see the criteria that defines different levels below,सुनो इंडिया पर कुल योगदानों के अनुसार तय किए गए लेवल। कृपया नीचे दिए गए अलग-अलग लेवल तय करने वाला मानक देखें,,
+6,Contributions (Transcribing),योगदान (लिप्यंतरण),,
+9,Transcribing : 5 sentences,लिप्यंतरण : 5 वाक्य,,
+12,Transcribing : 50 sentences,लिप्यंतरण : 50 वाक्य,,
+15,Transcribing : 100 sentences,लिप्यंतरण : 100 वाक्य,,
+18,Transcribing : 200 sentences,लिप्यंतरण : 200 वाक्य,,
+21,"Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but will go through validation through Dekho crowdsourcing initiative. Please remain an active contributor to stand a chance to get recognised by the Ministry of Electronics and Information Technology.","कृपया ध्यान दें कि आपके लेवल और बैज अपडेट होने में 48 घंटे तक लग सकते हैं। आपके योगदान की समयसीमा ख़त्म नहीं होती है, लेकिन उसे देखो/सुनो इंडिया की क्राउडसोर्सिंग पहल के माध्यम से सत्यापन की प्रक्रिया से गुज़रना होता है। इलेक्ट्रॉनिकी और सूचना प्रौद्योगिकी मंत्रालय द्वारा मान्यता पाने का मौक़ा बनाए रखने के लिए, एक सक्रिय योगदानकर्ता बने रहें।",,
+24,Levels and Badging,लेवल और बैज,,
+25,"Earn badges or certificate by contributing to Suno India.  Validate the sentence that is transcibed in your desired language.  Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Suno India is in the diversity of the people i.e. YOU.","सुनो इंडिया में योगदान देकर बैज या सर्टिफ़िकेट जीतें। अपनी पसंद की भाषा में लिप्यंतरित वाक्य को सत्यापित करें। अपने सोशल सर्कल में बैज शेयर करें, अपना भाषा समुदाय बनाएं, अपने दोस्तों और परिवार के सदस्यों को इस पहल में योगदान देने के लिए प्रेरित करें। सुनो इंडिया की ताकत आप जैसे लोगों की विविधता में निहित है। ",,
+27,Contributor Levels,योगदानकर्ता के लेवल,,
+28,The levels defined by an overall validations on Suno India. Please see the criteria that defines different levels below:,सुनो इंडिया पर कुल सत्यापनों के अनुसार तय किए गए लेवल। कृपया नीचे दिए गए अलग-अलग लेवल तय करने वाला मानक देखें:,,
+29,Level,लेवल,,
+30,Contributions (Validating),योगदान (सत्यापन),,
+31,Badge,बैज,,
+32,Level 1,लेवल 1,,
+33,Validating : 5 sentences,सत्यापन : 5 वाक्य,,
+35,Level 2,लेवल 2,,
+36,Validating  : 50 sentences,सत्यापन : 50 वाक्य,,
+38,Level 3,लेवल 3,,
+39,Validating : 100 sentences,सत्यापन : 100 वाक्य,,
+41,Level 4,लेवल 4,,
+42,Validating : 200 sentences,सत्यापन : 200 वाक्य,,
+45,"Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but will be validated. Please remain an active contributor to stand a chance to get recognised by the Ministry of Electronics and Information Technology.","कृपया ध्यान दें कि आपके लेवल और बैज अपडेट होने में 48 घंटे तक लग सकते हैं। आपके योगदान की समयसीमा ख़त्म नहीं होती है, लेकिन उनका सत्यापन किया जाएगा। इलेक्ट्रॉनिकी और सूचना प्रौद्योगिकी मंत्रालय द्वारा मान्यता पाने का मौक़ा बनाए रखने के लिए, एक सक्रिय योगदानकर्ता बने रहें।",,
+13,You’ve earned your Badge,आपने अपना बैज जीत लिया है,,
+15,Your next goal is to reach x sentences to unlock your Silver Badge.,अपना रजत/सिल्वर बैज जीतने के लिए आपका अगला लक्ष्य x वाक्यों तक पहुंचना है,,
+16,Your next goal is to reach x sentences to unlock your Gold Badge.,अपना स्वर्ण/गोल्ड बैज जीतने के लिए आपका अगला लक्ष्य x वाक्यों तक पहुंचना है,,
+17,Your next goal is to reach x sentences to unlock your Platinum Badge.,अपना प्लैटिनम बैज जीतने के लिए आपका अगला लक्ष्य x वाक्यों तक पहुंचना है,,
+21,Badge ID,बैज आईडी,,
+30,You’ve earned your Bronze Badge,आपने कांस्य/ब्रोंज बैज जीत लिया है,,
+31,You’ve earned your Silver Badge,आपने रजत/सिल्वर बैज जीत लिया है,,
+32,You’ve earned your Gold Badge,आपने स्वर्ण/गोल्ड बैज जीत लिया है,,
+33,You’ve earned your Platinum Badge,आपने प्लैटिनम बैज जीत लिया है,,
+44,Contribute for your language!,अपनी भाषा के लिए योगदान दें!,,
+45,Thank you for contributing to Bolo India!,बोलो इंडिया में योगदान देने के लिए आपका धन्यवाद!,,
+47,You have got us 2 contributions closer to our monthly goal,आपने हमें हमारे मासिक लक्ष्य के 2 योगदान करीब ला दिया है,,
+48,X to go!,X योगदान बाकी है!,,
+50,Participate to see [language] in top 3,[भाषा] को मुख्य 3 भाषाओं में देखने के लिए भागीदारी करें,,
+51,Participations,भागीदारियां,,
+52,Language vs top 3 languages,भाषा बनाम मुख्य 3 भाषाएं,,
+54,Register to save and track your progress with your account,अपने खाते में अपनी प्रोग्रेस सेव और ट्रैक करने के लिए रजिस्टर करें,,
+56,Contribute/Validate x hours to unlock your 1st Badge.,अपना पहला बैज जीतने के लिए x घंटों का योगदान दें / सत्यापन करें,,
+57,More Details,अधिक जानकारी,,
+63,You’ve won a Bronze/Silver/Gold/Platinum Badge for contributing to Bolo India.,आपने बोलो इंडिया में योगदान देकर ब्रोंज/सिल्वर/गोल्ड/प्लैटिनम बैज जीता है।,,
+64,Recorded X Hours/mins in [Language],[भाषा] में X घंटे/मिनट रिकॉर्ड किए गए,,
+65,One step closer to building a world class <dataset> for Indian languages,भारतीय भाषाओं के लिए विश्व स्तरीय <डेटासेट> बनाने के एक कदम नज़दीक,,
+70,your badges,आपके बैज,,
+71,you are a [bronze/silver/gold/platinum] contributer,आप एक [ब्रोंज/सिल्वर/गोल्ड/प्लैटिनम] योगदानकर्ता हैं,,
+7,You are just x images away from earning your Bronze Badge.,आप अपना कांस्य/ब्रोंज बैज जीतने से सिर्फ़ x इमेज दूर हैं।,,
+8,You are just x images away from earning your Silver Badge.,आप अपना रजत/सिल्वर बैज जीतने से सिर्फ़ x इमेज दूर हैं।,,
+9,You are just x images away from earning your Gold Badge.,आप अपना स्वर्ण/गोल्ड बैज जीतने से सिर्फ़ x इमेज दूर हैं।,,
+10,You are just x images away from earning your Platinum Badge.,आप अपना प्लैटिनम बैज जीतने से सिर्फ़ x इमेज दूर हैं।,,
+14,Help your language pair achieve it’s goal of 10000 translations. We know you can do more!,अपनी भाषा के लिए 10000 अनुवादों का लक्ष्य हासिल करने में मदद करें।  हम जानते हैं कि आप और भी बहुत कुछ कर सकते हैं!,,
+8,You are just x sentences away from earning your Bronze Badge.,आप अपना कांस्य/ब्रोंज बैज जीतने से सिर्फ़ x वाक्य दूर हैं।,,
+9,You are just x sentences away from earning your Silver Badge.,आप अपना रजत/सिल्वर बैज जीतने से सिर्फ़ x वाक्य दूर हैं।,,
+10,You are just x sentences away from earning your Gold Badge.,आप अपना स्वर्ण/गोल्ड बैज जीतने से सिर्फ़ x वाक्य दूर हैं।,,
+11,You are just x sentences away from earning your Platinum Badge.,आप अपना प्लैटिनम बैज जीतने से सिर्फ़ x वाक्य दूर हैं।,,
+3,seconds,सेकंड,,
+8,x recording(s) contributed,x रिकॉर्डिंग का योगदान दिया गया,,
+13,You’ve earned your Bhasha Samarthak title,आपने अपना भाषा समर्थक टाइटल जीत लिया है,,
+14,Contributor level achieved for contributing 5 sentences.,5 वाक्यों का योगदान देकर योगदानकर्ता लेवल हासिल किया गया।,,
+15,Your next goal is to reach x sentences to unlock your Silver Bhasha Samarthak title.,अपना सिल्वर/रजत भाषा समर्थक टाइटल जीतने के लिए आपका अगला लक्ष्य x वाक्यों तक पहुंचना है।,,
+16,Your next goal is to reach x sentences to unlock your Gold Bhasha Samarthak title.,अपना गोल्ड/स्वर्ण भाषा समर्थक टाइटल जीतने के लिए आपका अगला लक्ष्य x वाक्यों तक पहुंचना है।,,
+17,Your next goal is to reach x sentences to unlock your Platinum Bhasha Samarthak title.,अपना प्लैटिनम भाषा समर्थक टाइटल जीतने के लिए आपका अगला लक्ष्य x वाक्यों तक पहुंचना है।,,
+18,National Language Translation Mission,राष्ट्रीय भाषा अनुवाद मिशन,,
+20,Share,शेयर करें,,
+21,Bhasha Samarthak ID,भाषा समर्थक आईडी,,
+23,You are driving the spirit of your language,आप अपनी भाषा को बढ़ाने में मदद कर रहे हैं,,
+30,You’ve earned your Bronze Bhasha Samarthak title,आपने अपना ब्रोंज/कांस्य भाषा समर्थक टाइटल जीत लिया है,,
+31,You’ve earned your Silver Bhasha Samarthak title,आपने अपना सिल्वर/रजत भाषा समर्थक टाइटल जीत लिया है,,
+32,You’ve earned your Gold Bhasha Samarthak title,आपने अपना गोल्ड/स्वर्ण भाषा समर्थक टाइटल जीत लिया है,,
+33,You’ve earned your Platinum Bhasha Samarthak title,आपने अपना प्लैटिनम भाषा समर्थक टाइटल जीत लिया है,,
+34,Bronze Contributor level achieved for validating x sentences.,x वाक्यों का सत्यापन कर ब्रोंज/कांस्य योगदानकर्ता लेवल हासिल किया गया।,,
+35,Silver Contributor level achieved for validating x sentences.,x वाक्यों का सत्यापन कर सिल्वर/रजत योगदानकर्ता लेवल हासिल किया गया।,,
+36,Gold Contributor level achieved for validating x sentences.,x वाक्यों का सत्यापन कर गोल्ड/स्वर्ण योगदानकर्ता लेवल हासिल किया गया।,,
+37,Platinum Contributor level achieved for validating x sentences.,x वाक्यों का सत्यापन कर प्लैटिनम योगदानकर्ता लेवल हासिल किया गया।,,
+41,Thank you for your enthusiasm to contribute your voice.,पूरे उत्साह के साथ अपनी आवाज़ का योगदान देने के लिए आपका धन्यवाद।,,
+45,Contribute/Validate x hours to unlock your 1st Bhasha Samarthak title.,अपना पहला भाषा समर्थक टाइटल जीतने के लिए x घंटों का योगदान/सत्यापन करें।,,
+47,Enrich your language by donating your voice,अपनी आवाज़ का योगदान देकर अपनी भाषा को समृद्ध बनाएं,,
+49,Low/No Ambience noise,कम/कोई एंबियंस नॉइज़ नहीं,,
+50,Low/No Background noise,कम/कोई बैकग्राउंड नॉइज़ नहीं,,
+51,Please speak clearly,कृपया साफ़-साफ़ बोलें,,
+53,"""x"" Contributor level achieved for contributing ""y"" sentences","""y"" वाक्यों का योगदान देकर ""x"" योगदानकर्ता लेवल हासिल किया गया",,
+54,Download,डाउनलोड करें,,
+33,Mother Tongue,मातृभाषा,,
+34,Select Mothertongue,मातृभाषा चुनें,,
+36,Age Group,आयु वर्ग,,
+37,Select age group,आयु वर्ग चुनें,,
+39,Gender,लिंग,,
+40,"Male / Female / Others  (Transgender - He, Transgender - She, Rather Not Say)","पुरुष / महिला / अन्य (ट्रांसजेंडर - पुरुष, ट्रांसजेंडर - महिला, बताना नहीं चाहते)",,
+2,Data Source,डेटा स्रोत,,
+3,Source :,स्रोत :,,
+4,"If you are the copyright holder of this data and believe it should not be used in the platform, please send us an email to <email> with evidence that you are indeed the copyright holder of this data.
+
+We will attempt to validate the same and remove the data from our platform within 15 days on a best effort basis.","अगर आप इस डेटा के कॉपीराइट धारक हैं और आपको लगता है कि इसका इस्तेमाल इस प्लैटफ़ॉर्म पर नहीं किया जाना चाहिए, तो कृपया इस साक्ष्य के साथ <ईमेल> पर हमें एक ईमेल भेजें कि आप वाकई इस डेटा के कॉपीराइट धारक हैं।
+हम इसका सत्यापन करने की कोशिश करेंगे और अपने सर्वोत्तम प्रयास के आधार पर 15 दिनों के भीतर हमारे प्लैटफ़ॉर्म से इस डेटा को हटा देंगे। ",,
+6,Bhasha Samarthak Levels,भाषा समर्थक लेवल,,
+7,"Earn title of Bhasha Samarthak by contributing to Bolo India. Speak a sentence in language of your choice or validate the sentence that is spoken on your desired language. Share titles in your social circle, build the hype, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e. YOU.","बोलो इंडिया में योगदान देकर भाषा समर्थक का टाइटल जीतें। अपनी पसंद की भाषा में कोई वाक्य बोलें या अपनी पसंद की भाषा में बोले गए किसी वाक्य को सत्यापित करें। अपने सोशल सर्कल में टाइटल शेयर करें, अपने समर्थकों का दायरा बढ़ाएं, अपने दोस्तों और परिवार के सदस्यों को इस पहल में योगदान देने के लिए प्रेरित करें। बोलो इंडिया की ताकत आप जैसे लोगों की विविधता में निहित है। ",,
+9,"The levels are defined by an overall contributions in each initiative. To understand the criteria for earning title, please select the initiative and language of your desire","हर पहल में कुल योगदानों के अनुसार लेवल तय किए जाते हैं। टाइटल जीतने के मानदंड को समाझने के लिए, कृपया अपनी पसंद की भाषा और पहल को चुनें",,
+10,Title,टाइटल,,
+11,"Please note that your levels and titles may take upto 48hrs to update. Your contribution does not expire, but may decrease though if it doesn’t pass the validation test. We want you to remain an active contributor to Bolo India and stand a chance to get recognised by the Ministry of Electronics and Information Technology.","कृपया ध्यान दें कि आपके लेवल और बैज अपडेट होने में 48 घंटे तक लग सकते हैं। आपके योगदान की समयसीमा ख़त्म नहीं होती है, लेकिन सत्यापन की जांच में पास नहीं होने पर उसमें कमी आ सकती है। हम चाहते हैं कि आप बोलो इंडिया के लिए एक सक्रिय योगदानकर्ता बने रहें और इलेक्ट्रॉनिकी एवं सूचना प्रौद्योगिकी मंत्रालय द्वारा मान्यता पाने का मौक़ा बनाए रखें।",,
+14,"Recording : 5 Sentences/
+Labelling: 5 Images
+Translating: 5 Sentences
+Transcribing: 5 Sentences
+
+Validating: 5 Sentences
+","रिकॉर्डिंग: 5 वाक्य/
+लेबलिंग: 5 इमेज
+अनुवाद: 5 वाक्य
+लिप्यंतरण: 5 वाक्य
+
+सत्यापन: 5 वाक्य ",,
+15,Bronze,कांस्य/ब्रोंज,,
+17,"Recording : 50 Sentences/
+Labelling: 50 Images
+Translating: 50 Sentences
+Transcribing: 50 Sentences
+
+Validating: 50 Sentences
+","रिकॉर्डिंग: 50 वाक्य/
+लेबलिंग: 50 इमेज
+अनुवाद: 50 वाक्य
+लिप्यंतरण: 50 वाक्य
+
+सत्यापन: 50 वाक्य ",,
+18,Silver,सिल्वर,,
+20,"Recording : 100 Sentences/
+Labelling: 100 Images
+Translating: 100 Sentences
+Transcribing: 100 Sentences
+
+Validating: 100 Sentences","रिकॉर्डिंग: 100 वाक्य/
+लेबलिंग: 100 इमेज
+अनुवाद: 100 वाक्य
+लिप्यंतरण: 100 वाक्य
+
+सत्यापन: 100 वाक्य ",,
+21,Gold,स्वर्ण/गोल्ड,,
+22,4,4,,
+23,"Recording : 200 Sentences/
+Labelling: 200 Images
+Translating: 200 Sentences
+Transcribing: 200 Sentences
+
+Validating: 200 Sentences
+
+","रिकॉर्डिंग: 200 वाक्य/
+लेबलिंग: 200 इमेज
+अनुवाद: 200 वाक्य
+लिप्यंतरण: 200 वाक्य
+
+सत्यापन: 200 वाक्य ",,
+24,Platinum,प्लैटिनम,,
+26,User Details,उपयोगकर्ता की जानकारी,,
+28,All the fields are optional but you can enrich your dataset contribution by providing the demographic details.,"सभी फ़ील्ड वैकल्पिक हैं, लेकिन आप अपनी जनसांख्यिकीय जानकारी देकर अपने डेटासेट के योगदान को बढ़ा सकते हैं।",,
+29,By proceeding ahead you agree to the Terms and Conditions,आगे बढ़ने का मतलब है कि आप इन नियमों और शर्तों से सहमत हैं,,
+31,Done,हो गया,,
+33,Name,नाम,,
+34,Enter Username,उपयोगकर्ता नाम डालें,,
+35,"Only 12 character allowed. (Hint: name.surname, name_surname12 etc.)","सिर्फ़ 12 वर्णों की अनुमति है। (सुझाव: name.surname, name_surname12 आदि)",,
+38,Change User,उपयोगकर्ता बदलें,,
+40,"One platform, multiple crowdsourcing initiatives","एक प्लैटफ़ॉर्म, एक से ज़्यादा क्राउडसोर्सिंग पहल",,
+41,"Enrich open repository of Speech Recognition data, Parallel translations and Labeled Images.","बोली पहचान के डेटा, समानांतर अनुवाद और लेबल की गई इमेज की ओपन रिपॉज़िटरी को समृद्ध करें। ",,
+45,Engaging with this platform will make you bhasha samarthak and add to your pride of enriching data for your local languages,इस प्लैटफ़ॉर्म से जुड़कर आप भाषा समर्थक बन जाएंगे और अपनी स्थानीय भाषाओं के लिए डेटा को समृद्ध करने का अपना गौरव बढ़ाएं,,
+46,To win bhasha samarthak - bronze,भाषा समर्थक - ब्रोंज/कांस्य जीतने के लिए,,
+2,images,इमेज,,
+6,x image label(s) contributed,x इमेज लेबल का योगदान दिया गया,,
+7,You are just x images away from earning your Bronze Bhasha Samarthak title.,आप अपना ब्रोंज/कांस्य भाषा समर्थक टाइटल जीतने से सिर्फ़ x इमेज दूर हैं।,,
+8,You are just x images away from earning your Silver Bhasha Samarthak title.,आप अपना सिल्वर/रजत भाषा समर्थक टाइटल जीतने से सिर्फ़ x इमेज दूर हैं।,,
+9,You are just x images away from earning your Gold Bhasha Samarthak title.,आप अपना गोल्ड/स्वर्ण भाषा समर्थक टाइटल जीतने से सिर्फ़ x इमेज दूर हैं।,,
+10,You are just x images away from earning your Platinum Bhasha Samarthak title.,आप अपना प्लैटिनम भाषा समर्थक टाइटल जीतने से सिर्फ़ x इमेज दूर हैं।,,
+14,Help your language achieve it’s goal of 10000 images. We know you can do more!,अपनी भाषा के लिए 10000 इमेज का लक्ष्य हासिल करने में मदद करें। हम जानते हैं कि आप और भी बहुत कुछ कर सकते हैं!,,
+19,x image label(s) validated,x इमेज लेबल सत्यापित किए गए,,
+22,Thank you for your enthusiasm to label the images.,पूरे उत्साह के साथ इमेज को लेबल करने के लिए आपका धन्यवाद।,,
+24,Back to Dekho India Home,देखो इंडिया के होम पेज पर वापस जाएं,,
+26,Thank you for your enthusiasm to validate the image labels.,पूरे उत्साह के साथ इमेज लेबलों को सत्यापित करने के लिए आपका धन्यवाद।,,
+28,Enrich your language by labelling images,इमेज को लेबल करके अपनी भाषा को समृद्ध बनाएं,,
+30,Contribute/Validate x sentences to unlock your 1st Bhasha Samarthak title.,अपना पहला भाषा समर्थक टाइटल जीतने के लिए x वाक्यों का योगदान/सत्यापन करें।,,
+32,You’ve won a Bronze/Silver/Gold/Platinum Bhasha Samarthak title for contributing to Dekho India.,देखो इंडिया में योगदान देकर आपने ब्रोंज/सिल्वर/गोल्ड/प्लैटिनम भाषा समर्थक टाइटल जीता है।,,
+34,your Bhasha Samarthak titles,आपके भाषा समर्थक टाइटल,,
+2,translations,अनुवाद,,
+7,You are just 'x' sentences away from earning your Bronze Bhasha Samarthak title.,आप अपना ब्रोंज/कांस्य भाषा समर्थक टाइटल जीतने से सिर्फ़ x वाक्य दूर हैं।,,
+8,You are just 'x' sentences away from earning your Silver Bhasha Samarthak title.,आप अपना सिल्वर/रजत भाषा समर्थक टाइटल जीतने से सिर्फ़ x वाक्य दूर हैं।,,
+9,You are just 'x' sentences away from earning your Gold Bhasha Samarthak title.,आप अपना गोल्ड/स्वर्ण भाषा समर्थक टाइटल जीतने से सिर्फ़ x वाक्य दूर हैं।,,
+10,You are just 'x' sentences away from earning your Platinum Bhasha Samarthak title.,आप अपना प्लैटिनम भाषा समर्थक टाइटल जीतने से सिर्फ़ x वाक्य दूर हैं।,,
+14,Enrich your language achieve it’s goal of 10000 translations. We know you can do more!,अपनी भाषा के लिए 10000 अनुवाद का लक्ष्य हासिल करने में मदद करें। हम जानते हैं कि आप और भी बहुत कुछ कर सकते हैं!,,
+19,x' sentence(s) validated,x वाक्य/वाक्यों का सत्यापन किया गया,,
+22,Thank you for your enthusiasm to translate the sentences.,पूरे उत्साह के साथ वाक्यों का अनुवाद करने के लिए आपका धन्यवाद।,,
+24,Back to Likho India Home,लिखो इंडिया के होम पेज पर वापस जाएं,,
+26,Thank you for your enthusiasm to validate the translations.,पूरे उत्साह के साथ अनुवादों को सत्यापित करने के लिए आपका धन्यवाद।,,
+28,Enrich your language by translating text,टेक्स्ट का अनुवाद करके अपनी भाषा को समृद्ध बनाएं,,
+0,Thank you for contributing!,योगदान देने के लिए आपका धन्यवाद!,,
+1,Your language and top 3 most contributed languages,आपकी भाषा और सबसे अधिक योगदान वाली मुख्य 3 भाषाएं,,
+2,hours,घंटे,,
+3,minutes,मिनट,,
+5,You are a champion,आप एक चैंपियन हैं,,
+6,You took the first important step,आपने पहला महत्वपूर्ण कदम उठा लिया है,,
+7,x sentence(s) contributed,x वाक्य/वाक्यों का योगदान दिया गया,,
+8,You are just x sentences away from earning your Bronze Bhasha Samarthak title.,आप अपना ब्रोंज/कांस्य भाषा समर्थक टाइटल जीतने से सिर्फ़ x वाक्य दूर हैं।,,
+9,You are just x sentences away from earning your Silver Bhasha Samarthak title.,आप अपना सिल्वर/रजत भाषा समर्थक टाइटल जीतने से सिर्फ़ x वाक्य दूर हैं।,,
+10,You are just x sentences away from earning your Gold Bhasha Samarthak title.,आप अपना गोल्ड/स्वर्ण भाषा समर्थक टाइटल जीतने से सिर्फ़ x वाक्य दूर हैं।,,
+11,You are just x sentences away from earning your Platinum Bhasha Samarthak title.,आप अपना प्लैटिनम भाषा समर्थक टाइटल जीतने से सिर्फ़ x वाक्य दूर हैं।,,
+12,Know More,अधिक जानें,,
+13,Share it with your friends and family,इसे अपने दोस्तों और परिवार के सदस्यों के साथ शेयर करें,,
+15,Help your language achieve it’s goal of 100 hrs. We know you can do more!,अपनी भाषा के लिए 100 घंटों का लक्ष्य हासिल करने में मदद करें। हम जानते हैं कि आप और भी बहुत कुछ कर सकते हैं!,,
+16,Contribute More,और योगदान करें,,
+18,Come back again to hit your goal post,अपने लक्ष्य को साधने के लिए फिर से वापस आएं,,
+19,away from reaching your goal!,आप अपने लक्ष्य तक पहुंचने से बस इतनी दूर हैं!,,
+21,Thank you for validating!,सत्यापन करने के लिए आपका धन्यवाद!,,
+23,x sentence(s) validated,x वाक्य/वाक्यों का सत्यापन किया गया,,
+24,Validate More,और सत्यापन करें,,
+26,Thank you for your enthusiasm to transcribe the recordings.,पूरे उत्साह के साथ रिकॉर्डिंग को लिप्यंतरित करने के लिए आपका धन्यवाद।,,
+27,We do not have any data in <y> language. Please try again later.,हमारे पास <y> भाषा में कोई डेटा उपलब्ध नहीं है। कृपया बाद में फिर से कोशिश करें।,,
+28,Back to Suno India Home,सुनो इंडिया के होम पेज पर वापस जाएं,,
+30,Thank you for your enthusiasm to validate the recordings.,पूरे उत्साह के साथ रिकॉर्डिंग को सत्यापित करने के लिए आपका धन्यवाद।,,
+32,Enrich your language by transcribing audio into text,ऑडियो को टेक्स्ट में लिप्यंतरित करके अपनी भाषा को समृद्ध बनाएं,,
+34,Thank you for your enthusiasm to contribute,पूरे उत्साह के साथ योगदान देने के लिए आपका धन्यवाद।,,
+1,,,Help us by validating the recordings that others have contributed,home page
+1,,,Please validate any error message before proceeding,ਜਾਰੀ ਰੱਖਣ ਤੋਂ ਪਹਿਲਾਂ ਕਿਸੇ ਵੀ ਗ਼ਲਤੀ ਸੁਨੇਹੇ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ
+2,,,Help us understand what’s wrong with the recording,ਸਾਨੂੰ ਸਮਝਣ ਲਈ ਮਦਦ ਕਰੋ ਕਿ ਰਿਕਾਰਡਿੰਗ ਵਿੱਚ ਕੀ ਗਲਤ ਹੈ
+5,,,Levels and Badging @BoloIndia,ਪੱਧਰ ਤੇ ਬਿੱਲੇ  @BoloIndia
+7,,,Participate more to gain badges,ਹੋਰ ਬਿੱਲੇ ਲੈਣ ਲਈ ਹਿੱਸਾ ਲਵੋ
+9,,,"Level - ""X""","ਪੱਧਰ - ""X"""
+10,,,Contributions,ਯੋਗਦਾਨੀ
+11,,,(Recording + Validating),(ਰਿਕਾਰਡਿੰਗ + ਪ੍ਰਮਾਣਿਤ)
+13,,,"""X"" Senetences","""X"" ਵਾਕ"
+20,,,Bronze Contributor,ਕਾਂਸੀ ਲਈ ਯੋਗਦਾਨੀ
+21,,,Silver Contributor,ਚਾਂਦੀ ਲਈ ਯੋਗਦਾਨੀ
+22,,,Gold Contributor,ਸੋਨੇ ਲਈ ਯੋਗਦਾਨੀ
+23,,,Platinum Contributor,ਪਲੈਟੀਨਮ ਲਈ ਯੋਗਦਾਨੀ
+25,,,"WoaaH!! You’ve earned your  ""1st""  Badge","ਬੱਲੇ! ਤੁਸੀਂ ਆਪਣਾ ""1ਲਾਂ"" ਬਿੱਲਾ ਖੱਟ ਲਿਆ"
+27,,,"Your next goal is to reach ""X"" sentences to unlock your ""Y"" Badge. ","ਤੁਹਾਡਾ ਅਗਲਾ ਟੀਚਾ ""X"" ਵਾਕ ਪੂਰੇ ਕਰਕੇ ਆਪਣਾ ""Y"" ਬਿੱਲਾ ਲੈਣਾ ਹੈ।"
+29,,,"""x"" Sentences contributed","""x"" ਵਾਕਾਂ ਲਈ ਯੋਗਦਾਨ ਪਾਇਆ"
+32,,,CERTIFICATE OF APPRECIATION,ਸਨਮਾਣ ਪੱਤਰ
+33,,,"This is to certify that ""X"" has contributed towards development of open source repository for Hindi language.","ਇਹ ਤਸਦੀਕ ਕੀਤਾ ਜਾਂਦਾ ਹੈ ""X"" ਨੇ ਹਿੰਦੀ ਭਾਸ਼ਾ ਲਈ ਆਜ਼ਾਦ ਸਰੋਤ ਦੇ ਵਿਕਾਸ ਲਈ ਯੋਗਦਾਨ ਪਾਇਆ ਹੈ।"
+35,,,Ministry of Electronics and Information Technology,ਇਲੈਕਟ੍ਰੋਨਿਕ ਤੇ ਸੂਚਨਾ ਤਕਨੀਕ ਮੰਤਰਾਲਾ
+36,,,Government of India,ਭਾਰਤ ਸਰਕਾਰ
+38,,,You can select the language in which you want to participate,"ਤੁਸੀਂ ਭਾਸ਼ਾ ਚੁਣ ਸਕਦੇ ਹੋ, ਜਿਸ ਵਾਸਤੇ ਤੁਸੀਂ ਯੋਗਦਾਨ ਪਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ"
+41,,,You can change the language in which you want to read content,"ਤੁਸੀਂ ਭਾਸ਼ਾ ਚੁਣ ਸਕਦੇ ਹੋ, ਜਿਸ ਵਾਸਤੇ ਤੁਸੀਂ ਸਮੱਗਰੀ ਪੜ੍ਹਨੀ ਚਾਹੁੰਦੇ ਹੋ"
+44,,,Click on the card to start contributing your voice,ਆਪਣੀ ਆਵਾਜ਼ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣਾ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਕਾਰਡ ਉੱਤੇ ਕਲਿੱਕ ਕਰੋ
+45,,,Click on the card to validate what others have spoken,ਹੋਰਾਂ ਵਲੋਂ ਬੋਲੇ ਗਏ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਕਾਰਡ ਉੱਤੇ ਕਲਿੱਕ ਕਰੋ
+0,,,"Your feedback helps us keep Bolo India relevant, we appreciate you taking time to leave the feedback.","ਤੁਹਾਡੇ ਸੁਝਾਅ ਬੋਲੋ ਇੰਡੀਆ ਨੂੰ ਢੁੱਕਵਾਂ ਬਣਾਉਣ ਲਈ ਮਦਦ ਕਰਦੇ ਹਨ, ਅਸੀਂ ਸੁਝਾਅ ਦੇਣ ਲਈ ਤੁਹਾਡੇ ਟਾਈਮ ਕੱਢਣ ਦੀ ਸ਼ਲਾਘਾ ਕਰਦੇ ਹਾਂ।"
+3,,,Thank You for your valuable feedback,ਤੁਹਾਡੇ ਕੀਮਤੀ ਸੁਝਾਅ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ ਹੈ
+4,,,Thank you,ਤੁਹਾਡਾ ਧੰਨਵਾਦ ਹੈ
+5,,,Back to Home,ਵਾਪਸ ਹੋਮ ਤੇ ਜਾਓ
+8,,,Please type here,ਇੱਥੇ ਲਿਖੋ ਜੀ
+9,,,Failed to submit the feedback. Please try again.,ਸੁਝਾਅ ਭੇਜਣ ਲਈ ਅਸਫ਼ਲ ਹੈ। ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ।
+11,,,Subject,ਵਿਸ਼ਾ
+12,,,Description,ਵਰਣਨ
+14,,,Low/No Ambience noise,ਮਾਹੌਲ ਦਾ ਰੌਲਾ ਘੱਟ /ਨਹੀਂ ਹੈ
+15,,,Low/No Background noise,ਬੈਕਗਰਾਊਂਡ ਰੌਲਾ ਘੱਟ/ਨਹੀਂ ਹੈ
+16,,,Please speak clearly,ਸਪਸ਼ਟ ਬੋਲੋ ਜੀ
+18,,,Select the language for Voluntary contribution,ਵਲੰਟੀਅਰ ਯੋਗਦਾਨ ਲਈ ਭਾਸ਼ਾ ਚੁਣੋ
+20,,,voluntary contribution,ਵਲੰਟੀਅਰ ਯੋਗਦਾਨ
+23,,,"India needs to be Atma Nirbhar in the area of speech recognition in Indian languages. Hence, we want to create an open data repository of many Indian voices. This is an effort by MeitY, Government of India, under the National Language Translation Mission (NLTM). This effort is supported by EkStep Foundation on a pro-bono basis and leverages its open source work under https://sunbird.org/projects/vakyansh along with various other open source frameworks.","ਭਾਰਤ ਨੂੰ ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਬੋਲੀ ਪਛਾਣ ਦੇ ਖੇਤਰ ਵਿੱਚ ਆਤਮ ਨਿਰਭਰ ਹੋਣ ਦੀ ਲੋੜ ਹੈ। ਇਸਕਰਕੇ ਅਸੀਂ ਕਈ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਆਵਾਜ਼ ਦਾ ਆਜ਼ਾਦ ਡਾਟਾ ਭੰਡਾਰ ਬਣਾਉਣਾ ਚਾਹੁੰਦੇ ਹਾਂ। ਕੌਮੀ ਭਾਸ਼ਾ ਅਨੁਵਾਦ ਮਿਸ਼ਨ (NLTM) ਅਧੀਨ MeitY, ਭਾਰਤ ਸਰਕਾਰ ਵਲੋਂ ਇਹ ਯਤਨ ਕੀਤਾ ਹੈ। ਇਹ ਯਤਨ ਨੂੰ ਏਕਸਟੈਪ ਫਾਊਂਡੇਸ਼ਨ ਰਾਹੀਂ ਪ੍ਰੋ-ਬੋਨੋ ਪੱਧਰ ਉੱਤੇ ਸਹਾਇਤਾ ਪ੍ਰਾਪਤ ਹੈ ਅਤੇ ਇਹ https://sunbird.org/projects/vakyansh along ਦੇ ਨਾਲ ਨਾਲ ਕਈ ਹੋਰ ਆਜ਼ਾਦ ਸਰੋਤ ਫਰੇਮਵਰਕ ਅਧੀਨ ਆਜ਼ਾਦ ਸਰੋਤ ਨੂੰ ਵਰਤਦਾ ਹੈ।"
+25,,,"Bolo India invites you to volunteer and contribute your voice for this cause. All your contributions are automatically processed and made available as open data in a useful fashion back to the community. Such data then can be used by all language enthusiasts and technologists to develop world class speech recognition applications.""",ਬੋਲੋ ਇੰਡੀਆ ਤੁਹਾਨੂੰ ਵਲੰਟੀਅਰ ਵਜੋਂ ਅਤੇ ਇਸ ਮਕਸਦ ਵਾਸਤੇ ਆਪਣੀ ਆਵਾਜ਼ ਦੇਣ ਲਈ ਸੱਦਾ ਦਿੰਦਾ ਹੈ। ਤੁਹਾਡੇ ਸਾਰੇ ਯੋਗਦਾਨਾਂ ਉੱਤੇ ਆਪਣੇ-ਆਪ ਕਾਰਵਾਈ ਕੀਤੀ ਜਾਵੇਗੀ ਅਤੇ ਸਮਾਜ ਨੂੰ ਫਾਇਦੇਮੰਦ ਢੰਗ ਨਾਲ ਆਜ਼ਾਦ ਡਾਟੇ ਵਜੋਂ ਉਪਲੱਬਧ ਕਰਵਾਇਆ ਜਾਵੇਗਾ। ਇੰਝ ਡਾਟੇ ਨੂੰ ਸਾਰੇ ਭਾਸ਼ਾ ਉਤਸੁਕਾ ਅਤੇ ਤਕਨੀਕੀ ਮਾਹਰ ਵਲੋਂ ਸੰਸਾਰ ਭਰ ਵਿੱਚ ਸ਼ਾਨਦਾਰ ਬੋਲੀ ਪਛਾਣ ਐਪਲੀਕੇਸ਼ਨਾਂ ਬਣਾਉਣ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕੇਗਾ।
+28,,,"""x"" Contributor level achieved for contributing ""y"" sentences","""Y"" ਵਾਕਾਂ ਦਾ ਯੋਗਦਾਨ ਪਾਉਣ ਨਾਲ ""x"" ਯੋਗਦਾਨੀ ਪੱਧਰ ਪ੍ਰਾਪਤ ਹੁੰਦਾ ਹੈ"
+30,,,"Your next goal is to reach ""x"" sentences to unlock your ""y"" Badge. ""Know more""","ਤੁਹਾਡਾ ਅਗਲਾ ਟੀਚਾ ਆਪਣਾ ""y"" ਬਿੱਲਾ ਅਣ-ਲਾਕ ਕਰਨ ਲਈ ""x"" ਵਾਕੂ ਪੂਰੇ ਕਰਨਾ ਹੈ। ""ਹੋਰ ਜਾਣੋ"""
+3,,,Contribute your voice to create an open data repository of Indian languages,ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਦੇ ਇੱਕ ਖੁੱਲ੍ਹੇ ਡਾਟਾ ਭੰਡਾਰ ਨੂੰ ਸਿਰਜਣ ਲਈ ਆਪਣੀ ਅਵਾਜ਼ ਦਾ ਯੋਗਦਾਨ ਪਾਓ
+4,,,"“X” hrs recorded  in “Y""","Y ਭਾਸ਼ਾ ਵਿੱਚ ""X"" ਘੰਟੇ ਰਿਕਾਰਡ ਕੀਤੇ ਗਏ"
+6,,,Listen: Validate what they say,ਸੁਣੋ: ਉਹਨਾਂ ਦੇ ਬੋਲਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ
+8,,,"“X” hrs validated  in ""Y""","""Y"" ਭਾਸ਼ਾ ਵਿੱਚ ""X"" ਘੰਟੇ ਪ੍ਰਮਾਣਿਤ ਕੀਤੇ ਗਏ"
+14,,,We rely on your contributions,ਅਸੀਂ ਤੁਹਾਡੇ ਯੋਗਦਾਨਾਂ 'ਤੇ ਨਿਰਭਰ ਕਰਦੇ ਹਾਂ
+15,,,"The key to building speech recognition models, lies in the diversity of the data that you provide by contributing across states, dialects, accents, gender and age group. The magnitude of this diversity across the nation, gives us collective strength in empowering our languages.","ਇੱਕ ਬੋਲੀ ਪਛਾਣ ਮਾਡਲ ਵਿਕਸਿਤ ਕਰਨ ਲਈ ਸਭ ਤੋਂ ਮਹੱਤਵਪੂਰਨ ਹੈ ਵੱਖ-ਵੱਖ ਰਾਜਾਂ, ਉਪ-ਭਾਸ਼ਾਵਾਂ, ਲਹਿਜ਼ਿਆਂ, ਲਿੰਗ ਅਤੇ ਉਮਰ ਸਮੂਹਾਂ ਤੋਂ ਤੁਹਾਡੇ ਵੱਲੋਂ ਯੋਗਦਾਨ ਕੀਤਾ ਗਿਆ ਬਹੁ-ਭਾਂਤੀ ਡਾਟਾ। ਪੂਰੇ ਦੇਸ਼ ਵਿਚਲੀ ਇਸ ਵਿਭਿੰਨਤਾ ਦੀ ਮਹੱਤਤਾ, ਸਾਨੂੰ ਸਾਡੀਆਂ ਭਾਸ਼ਾਵਾਂ ਨੂੰ ਮਜ਼ਬੂਤ ਕਰਨ ਦੀ ਸਮੂਹਿਕ ਸਮਰੱਥਾ ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ। "
+20,,,by hours of data contributed,ਯੋਗਦਾਨ ਕੀਤੇ ਗਏ ਘੰਟਿਆਂ ਮੁਤਾਬਕ
+21,,,by number of speakers,ਸਪੀਕਰਾਂ ਦੀ ਗਿਣਤੀ ਮੁਤਾਬਕ
+22,,,Contribution Trend,ਯੋਗਦਾਨ ਸੰਬੰਧੀ ਰੁਝਾਨ
+23,,,Contribution Pattern,ਯੋਗਦਾਨ ਦਾ ਪੈਟਰਨ
+24,,,Data last updated,ਡਾਟਾ ਅੱਪਡੇਟ ਹੋਣ ਦੀ ਪਿਛਲੀ ਤਾਰੀਖ਼
+27,,,contributed data,ਯੋਗਦਾਨ ਕੀਤਾ ਗਿਆ ਡਾਟਾ
+30,,,months,ਮਹੀਨੇ
+31,,,years,ਸਾਲ
+33,,,Hide Details,ਵੇਰਵੇ ਲੁਕਾਓ
+38,,,hrs validated in,ਵਿੱਚ ਪ੍ਰਮਾਣਿਤ ਕੀਤੇ ਘੰਟੇ
+39,,,hrs recorded in,ਵਿੱਚ ਰਿਕਾਰਡ ਕੀਤੇ ਘੰਟੇ
+40,,,Help us by validating the voice samples that others have contributed,"ਸਾਨੂੰ ਭਾਸ਼ਾਵਾਂ ਨਮੂਨਿਆਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਸਾਡੀ ਮਦਦ ਕਰੋ, ਜਿਨਾਂ ਲਈ ਹੋਰਾਂ ਨੇ ਯੋਗਦਾਨ ਪਾਇਆ ਹੈ"
+0,,,Bolo India: A crowdsourcing initiative for Indian languages,ਬੋਲੋ ਇੰਡੀਆ: ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਲਈ ਇੱਕ ਕਰਾਊਡਸੋਰਸਿੰਗ ਪਹਿਲ
+1,,,"For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Bolo India invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.",ਭਾਰਤ ਨੂੰ ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਬੋਲੀ ਪਛਾਣ ਦੇ ਖੇਤਰ ਵਿੱਚ ਆਤਮ ਨਿਰਭਰ ਹੋਣ ਦੀ ਲੋੜ ਹੈ। ਇਸਕਰਕੇ ਅਸੀਂ ਕਈ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਆਵਾਜ਼ ਦਾ ਆਜ਼ਾਦ ਡਾਟਾ ਭੰਡਾਰ ਬਣਾਉਣਾ ਚਾਹੁੰਦੇ ਹਾਂ। ਬੋਲੋ ਇੰਡੀਆ ਤੁਹਾਨੂੰ ਇਸ ਮਕਸਦ ਲਈ ਆਪਣੀ ਆਵਾਜ਼ ਲਈ ਵਲੰਟੀਅਰ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਸੱਦਾ ਦਿੰਦਾ ਹੈ।
+2,,,"An open data strategy will enable the various language communities, individuals and technologists, who are passionate about their language, to develop speech recognition applications, and integrate them in various domains for the good of the community.",ਇਹ ਆਜ਼ਾਦ ਡਾਟੇ ਨੂੰ ਸਾਰੇ ਭਾਸ਼ਾ ਉਤਸੁਕਾ ਅਤੇ ਤਕਨੀਕੀ ਮਾਹਰ ਵਲੋਂ ਸੰਸਾਰ ਭਰ ਵਿੱਚ ਸ਼ਾਨਦਾਰ ਬੋਲੀ ਪਛਾਣ ਐਪਲੀਕੇਸ਼ਨਾਂ ਬਣਾਉਣ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕੇਗਾ।
+4,,,Our multilingual DNA is still a missing piece in digital first strategy,"ਭਾਰਤ ਕਈ ਭਾਸ਼ਾਵਾਂ ਦੀ ਧਰਤੀ ਹੈ, ਸਾਡੀ ਡਿਜ਼ਿਟਲ ਕਾਰਜਨੀਤੀ ਇਹ ਦਰਸਾਉਂਦੀ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ।"
+5,,,"India being a vast multilingual country, 90% of India’s population relies on regional languages to conduct their educational, social & digital activities.",ਭਾਰਤੀ ਆਬਾਦੀ ਦਾ 90% ਆਪਣੇ ਰੋਜ਼ਾਨਾ ਦੇ ਕੰਮਕਾਰ ਕਰਨ ਲਈ ਖੇਤਰੀ ਭਾਸ਼ਾਵਾਂ ਵਰਤਦੀ ਹੈ।
+6,,,"As the volume of internet users multiplies and there is a demand to access digital platforms for financial, educational and economic activities, there is a need to start thinking Indian languages first.","ਵਿੱਤੀ, ਸਿੱਖਿਆ ਤੇ ਸਮਾਜਿਕ ਸਰਗਰਮੀਆਂ ਲਈ ਵੱਧ ਤੋਂ ਵੱਧ ਲੋਕ ਡਿਜ਼ਿਟਲ ਮੰਚ ਵਰਤ ਰਹੇ ਹਨ, ਇਸਕਰਕੇ ਜ਼ਰੂਰੀ ਹੈ ਕਿ ਡਿਜ਼ਿਟਲ ਮੰਚ ਸਰਲ ਢੰਗ ਨਾਲ ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਕੰਮ ਕਰਨ।"
+9,,,"There is a felt need for a speech recognition technology that specializes in Indian languages, that meets a high accuracy bar and is closer to the daily language and communication functions of users of diverse Indian languages.","ਸਾਨੂੰ ਬੋਲੀ ਪਛਾਣ ਤਕਨੀਕਾਂ ਬਣਾਉਣ ਦੀ ਲੋੜ ਹੈ, ਜੋ ਕਿ ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਲਈ ਮੁਨਾਸਬ ਹੋਵੇ। ਇਸ ਵਿੱਚ ਬਹੁਤ ਜ਼ਿਆਦਾ ਸ਼ੁੱਧਤਾ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ ਅਤੇ ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਵਿੱਚ ਲੋਕਾਂ ਦੀ ਰੋਜ਼ਾਨਾਂ ਦੀ ਭਾਸ਼ਾ ਅਤੇ ਗੱਲਬਾਤ ਦੀ ਸਮਝ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ।"
+10,,,"Speech recognition is a technology that converts speech to real-time text. Such a model for Indian languages has the potential to become a building block to a digital first model, in various sectors, such as, education, healthcare and media.","ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਵਿੱਚ ਸੰਸਾਰ ਪੱਧਰੀ ਬੋਲੀ ਪਛਾਣ ਨਾਲ ਕਈ ਖੇਤਰਾਂ ਵਿੱਚ ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਵਿੱਚ ਪਹਿਲੇ ਡਿਜ਼ਿਟਲ ਮਾਡਲ ਨੂੰ ਸਮਰੱਥ ਕਰੇਗਾ, ਜਿਵੇਂ ਕਿ ਸਿੱਖਿਆ, ਸਿਹਤ-ਦੇਖਭਾਲ ਅਤੇ ਮੀਡੀਆ।"
+11,,,"The tools, utilities and models  proposed to be developed will rely on open source contributions through Bolo India crowd sourcing platform","ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਵਿੱਚ ਵਿਕਸਤ ਕਰਨ ਲਈ ਪੇਸ਼ ਕੀਤੇ ਗਏ ਟੂਲ, ਸਹੂਲਤਾਂ ਅਤੇ ਮਾਡਲ ਬੋਲੋ ਇੰਡੀਆ ਦੇ ਕਰਾਉਡ ਸੋਰਸ ਮੰਚ ਰਾਹੀਂ ਆਜ਼ਾਦ ਸਰੋਤ ਯੋਗਦਾਨ ਉੱਤੇ ਨਿਰਭਰ ਕਰਨਗੇ।"
+14,,,"Speech recognition relies on ""machine-learning"" technology that requires huge collections of datasets that include diversified Indian voices and the corresponding text. Through Bolo India, we want to create a diverse open repository of Indian voice speaking Indian language which can be used for this initiative","ਬੋਲੀ ਪਛਾਣ ""ਮਸ਼ੀਨ ਸਿਖਲਾਈ"" ਤਕਨੀਕ ਉੱਤੇ ਨਿਰਭਰ ਹੈ, ਜਿਸ ਲਈ ਵੱਡੀ ਮਾਤਰਾ ਵਿੱਚ ਡਾਟਾ-ਸਮੂਹ ਚਹੀਦੇ ਹਨ, ਜਿਸ ਵਿੱਚ ਵੱਖ-ਵੱਖ ਆਵਾਜ਼ਾਂ ਅਤੇ ਉਹਨਾਂ ਨਾਲ ਸੰਬੰਧਿਤ ਲਿਖਤ ਚਾਹੀਦੀ ਹੈ। ਬੋਲੋ ਇੰਡਿਆ ਰਾਹੀਂ ਅਸੀਂ ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਭਾਰਤੀ ਆਵਾਜ਼ਾਂ ਦਾ ਵਿਭਿੰਨ ਆਜ਼ਾਦ ਭੰਡਾਰ ਬਣਾਉਣਾ ਚਾਹੁੰਦੇ ਹਾਂ, ਜੋ ਕਿ ਇਸ ਸ਼ੁਰੂਆਤ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ।"
+16,,,"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off","ਅਸੀਂ ਤੁਹਾਨੂੰ ਇਸ ਸ਼ੁਰੂਆਤੀ ਲਈ ਤੁਹਾਡੀ ਆਵਾਜ਼ ਰਾਹੀਂ ਸਾਡਾ ਵਲੰਟੀਅਰ ਤੌਰ ਉੱਤੇ ਸਾਥ ਦੇਣ ਲਈ ਸੱਦਾ ਦੇ ਰਹੇ ਹਨ। ਲਗਾਤਾਰ ਆਪਣੀ ਆਵਾਜ਼ ਰਿਕਾਰਡ ਕਰਨਾ ਅਕਾਉ ਹੋ ਸਕਦਾ ਹੈ, ਇਸਕਰਕੇ ਤੁਸੀਂ ਇਹ ਕਈ ਵਾਰ ਵੈੱਬਸਾਈਟ ਉੱਤੇ ਆ ਕੇ ਜਿੱਥੇ ਤੁਸੀਂ ਛੱਡਿਆ ਹੋਵੇ, ਉਥੋਂ ਕਰਨ ਸਕਦੇ ਹੋ।"
+21,,,ABOUT THE ORGANISATION,ਸੰਸਥਾ ਬਾਰੇ
+22,,,EkStep Foundation,ਏਕਸਟੈਪ ਫ਼ਾਉਂਡੇਸ਼ਸ਼ਨ
+23,,,"EkStep Foundation gathers partners and creates open infrastructure, tools and frameworks to solve complex societal problems at scale. We do this by leveraging the open source digital infrastructure we have created called Sunbird and by following a way of thinking and doing called the Societal Platform Approach","ਏਕਸਟੈਪ ਫ਼ਾਉਂਡੇਸ਼ਸ਼ਨ ਜਟਿਲ ਸਮਾਜਿਕ ਸਮੱਸਿਆਵਾਂ ਦਾ ਵੱਡੇ ਪੈਮਾਨੇ 'ਤੇ ਹੱਲ ਕਰਨ ਲਈ ਭਾਗੀਦਾਰਾਂ ਨੂੰ ਇਕੱਠਾ ਕਰਕੇ ਖੁੱਲੇ ਇੰਫਰਾਸਟ੍ਰਕਚਰ, ਟੂਲ ਅਤੇ ਫਰੇਮਵਰਕ ਦਾ ਨਿਰਮਾਣ ਕਰਦੀ ਹੈ। ਅਸੀਂ ਇੰਝ ਕਰਨ ਲਈ ਸਾਡੇ ਵੱਲੋਂ ਬਣਾਏ ਗਏ ""ਸਨਬਰਡ"" ਨਾਮਕ ਖੁੱਲ੍ਹੇ ਸਰੋਤ ਦੇ ਡਿਜੀਟਲ ਇੰਫਰਾਸਟ੍ਰਕਚਰ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹਾਂ ਅਤੇ ""ਸਮਾਜਿਕ ਪਲੇਟਫਾਰਮ ਪਹੁੰਚ"" ਨਾਮਕ ਇੱਕ ਸੋਚਣ ਅਤੇ ਕਰਨ ਦੇ ਢੰਗ ਦੀ ਪਾਲਣਾ ਕਰਦੇ ਹਾਂ।"
+24,,,EkStep is a not-for-profit organization founded by Rohini and Nandan Nilekani and Shankar Maruwada.,"ਏਕਸਟੈਪ, ਰੋਹਿਨੀ ਅਤੇ ਨੰਦਨ ਨਿਲੇਕਾਨੀ ਅਤੇ ਸ਼ੰਕਰ ਮਾਰੂਵਾੜਾ ਵੱਲੋਂ ਸਥਾਪਿਤ ਇੱਕ ਗੈਰ-ਮੁਨਾਫ਼ਾ ਸੰਸਥਾ ਹੈ।"
+0,,,Select your preferred language,ਆਪਣੀ ਤਰਜੀਹੀ ਭਾਸ਼ਾ ਚੁਣੋ
+4,,,More Languages,ਹੋਰ ਭਾਸ਼ਾਵਾਂ
+5,,,Other Languages,ਦੂਜੀਆਂ ਭਾਸ਼ਾਵਾਂ
+12,,,"© EkStep Foundation, 2021","© EkStep Foundation, 2021"
+13,,,Supported by EkStep Foundation (built on sunbird.org/ai),EkStep Foundation ਦੇ ਸਹਿਯੋਗ ਨਾਲ ( sunbird.org/ai ਉੱਤੇ ਬਣਾਇਆ)
+5,,,Mother Tongue,ਮਾਂ-ਬੋਲੀ
+6,,,Select Mother Tongue,ਮਾਂ-ਬੋਲੀ ਚੁਣੋ
+7,,,Age Group,ਉਮਰ ਸਮੂਹ
+8,,,Select Age Group,ਉਮਰ ਸਮੂਹ ਚੁਣੋ
+9,,,Gender,ਲਿੰਗ
+16,,,Username cannot be more than 12 characters,ਵਰਤੋਂਕਾਰ ਨਾਂ ਵਿੱਚ 12 ਤੋਂ ਜ਼ਿਆਦਾ ਅੱਖਰ ਨਹੀਂ ਹੋ ਸਕਦੇ
+17,,,Username cannot be an email address or a mobile number,"ਵਰਤੋਂਕਾਰ ਨਾਂ, ਇੱਕ ਈਮੇਲ ਪਤਾ ਜਾਂ ਮੋਬਾਈਲ ਨੰਬਰ ਨਹੀਂ ਹੋ ਸਕਦਾ"
+18,,,Username should be between 4 to 20 characters,ਵਰਤੋਂਕਾਰ ਨਾਂ ਦੀ ਲੰਬਾਈ 4 ਤੋਂ 20 ਅੱਖਰਾਂ ਵਿਚਾਲੇ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ
+19,,,This username is already taken,ਇਹ ਵਰਤੋਂਕਾਰ ਨਾਂ ਪਹਿਲਾਂ ਤੋਂ ਹੀ ਇਸਤੇਮਾਲ ਵਿੱਚ ਹੈ
+23,,,Please agree to the Terms and Conditions before proceeding,ਜਾਰੀ ਰੱਖਣ ਤੋਂ ਪਹਿਲਾਂ ਸ਼ਰਤਾਂ ਅਤੇ ਨਿਯਮਾਂ ਨਾਲ ਸਹਿਮਤ ਹੋਵੋ
+1,,,Your contribution has got us “x” seconds closer to our goal!,"ਤੁਹਾਡੇ ਯੋਗਦਾਨ ਕਰਕੇ ਅਸੀਂ ਆਪਣੇ ਟੀਚੇ ਦੇ ""x"" ਸਕਿੰਟ ਹੋਰ ਨੇੜੇ ਪਹੁੰਚ ਗਏ ਹਾਂ!"
+9,,,Thank you for trying,ਯਤਨ ਕਰਨ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ ਹੈ
+10,,,"You have contributed ""x"" recording(s) of your voice","ਤੁਸੀਂ ਆਪਣੀ ਆਵਾਜ਼ ਵਿੱਚ ""x"" ਰਿਕਾਰਡਿੰਗਾਂ ਦਾ ਯੋਗਦਾਨ ਪਾ ਚੁੱਕੇ ਹੋ"
+12,,,Congratulations!!! You have completed this batch of sentences,ਵਧਾਈਆਂ!!! ਤੁਸੀਂ ਵਾਕਾਂ ਦਾ ਇਹ ਸਮੂਹ ਪੂਰਾ ਕਰ ਲਿਆ ਹੈ
+14,,,Most Contributed - <x>,ਸਭ ਤੋਂ ਵੱਧ ਯੋਗਦਾਨ - <x>
+15,,,Data recorded for <x>,<x> ਲਈ ਰਿਕਾਰਡ ਕੀਤਾ ਡਾਟਾ
+16,,,Help your language achieve it’s goal of `x` hrs. We know you can do more!,ਆਪਣੀ ਭਾਸ਼ਾਂ ਨੂੰ ਇਸ ਦੇ 'x' ਘੰਟਿਆਂ ਦੇ ਟੀਚੇ ਨੂੰ ਪੂਰਨ ਲਈ ਮਦਦ ਕਰੋ। ਸਾਨੂੰ ਪਤਾ ਹੈ ਕਿ ਤੁਸੀਂ ਕਰ ਸਕਦੇ ਹੋ!
+17,,,Did you know?,ਕੀ ਤੁਹਾਨੂੰ ਪਤਾ ਹੈ?
+19,,,WooHoo!! You took the first important step,ਬੱਲੇ! ਤੁਸੀਂ ਪਹਿਲਾਂ ਜ਼ਰੂਰੀ ਕਦਮ ਚੁੱਕਿਆ
+20,,,'x' Recordings contributed,x' ਰਿਕਾਰਡਿੰਗਾਂ ਦਾ ਯੋਗਦਾਨ ਪਾਇਆ
+21,,,You are just 'x' sentences away from earning the Bronze Badge.,ਤੁਸੀਂ ਕਾਂਸੇ ਦਾ ਬਿੱਲਾ ਹਾਸਲ ਕਰਨ ਤੋਂ 'x' ਵਾਕ ਦੂਰ ਹੋ
+22,,,You are just 'x' sentences away from earning the Silver Badge.,ਤੁਸੀਂ ਚਾਂਦੀ ਦਾ ਬਿੱਲਾ ਹਾਸਲ ਕਰਨ ਤੋਂ 'x' ਵਾਕ ਦੂਰ ਹੋ
+23,,,You are just 'x' sentences away from earning the Gold Badge.,ਤੁਸੀਂ ਸੋਨੇ ਦਾ ਬਿੱਲਾ ਹਾਸਲ ਕਰਨ ਤੋਂ 'x' ਵਾਕ ਦੂਰ ਹੋ
+24,,,You are just 'x' sentences away from earning the Platinum Badge.,ਤੁਸੀਂ ਪਲਾਟੀਨਮ ਦਾ ਬਿੱਲਾ ਹਾਸਲ ਕਰਨ ਤੋਂ 'x' ਵਾਕ ਦੂਰ ਹੋ
+31,,,You are on a spree!,ਤੁਸੀਂ ਤਾਂ ਮਨੋਰੰਜਨ ਕਰ ਰਹੇ ਹੋ!
+33,,,Woaah! You've earned your Bronze badge,ਬੱਲੇ! ਤੁਸੀਂ ਆਪਣਾ ਕਾਂਸੀ ਦਾ ਬਿੱਲਾ ਲੈ ਲਿਆ
+34,,,Woaah! You've earned your Silver badge,ਬੱਲੇ! ਤੁਸੀਂ ਆਪਣਾ ਚਾਂਦੀ ਦਾ ਬਿੱਲਾ ਲੈ ਲਿਆ
+35,,,Woaah! You've earned your Gold badge,ਬੱਲੇ! ਤੁਸੀਂ ਆਪਣਾ ਸੋਨੇ ਦਾ ਬਿੱਲਾ ਲੈ ਲਿਆ
+36,,,Woaah! You've earned your Platinum badge,ਬੱਲੇ! ਤੁਸੀਂ ਆਪਣਾ ਪਲਾਟੀਨਮ ਦਾ ਬਿੱਲਾ ਲੈ ਲਿਆ
+37,,,We love your spirit when you take the charge,"ਅਸੀਂ ਤੁਹਾਡੀ ਭਾਵਨਾ ਨੂੰ ਸਹਰਾਉਦੇ ਹਾਂ, ਜਦੋਂ ਤੁਸੀਂ ਮੋਰਚਾ ਸੰਭਾਲ ਲਿਆ"
+38,,,"You are in control, lead the way","ਤੁਸੀਂ ਕਾਬੂ ਪਾ ਲਿਆ ਹੈ, ਅਗਵਾਈ ਜਾਰੀ ਰੱਖੋ"
+39,,,Spread the word. Share it with your friends and family. ,ਦੁਨੀਆਂ ਵਿੱਚ ਫੈਲਾਓ। ਆਪਣੇ ਦੋਸਤਾਂ ਤੇ ਟੱਬਰ ਨਾਲ ਇਹ ਸਾਂਝਾ ਕਰੋ
+42,,,"You have helped us validate ""x"" recordings",ਤੁਸੀਂ 'x' ਰਿਕਾਰਡਿੰਗਾਂ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਸਾਡੀ ਮਦਦ ਕਰ ਚੁੱਕੇ ਹੋ
+43,,,"Thank you for validating ""x"" recordings",x' ਰਿਕਾਰਡਿੰਗਾਂ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ ਹੈ
+44,,,Total recordings validated,ਕੁੱਲ ਰਿਕਾਰਡਿੰਗਾਂ ਪ੍ਰਮਾਣਿਤ ਹੋਈਆਂ
+45,,,Total validated,ਕੁੱਲ ਪ੍ਰਮਾਣਿਤ ਕੀਤੀਆਂ
+46,,,Total contributed,ਕੁੱਲ ਯੋਗਦਾਨ ਪਾਇਆ
+47,,,Total recordings contributed,ਕੁੱਲ ਰਿਕਾਰਡਿੰਗਾਂ ਲਈ ਯੋਗਦਾਨ ਪਾਇਆ
+51,,,"We do not have any data in ""Y"" language. Please try again later.","ਸਾਡੇ ਕੋਲ ""Y"" ਭਾਸ਼ਾ ਲਈ ਕੋਈ ਡਾਟਾ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਬਾਅਦ 'ਚ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+52,,,Would you like to contribute your voice? ,ਕੀ ਤੁਸੀਂ ਆਪਣੀ ਆਵਾਜ਼ ਰਾਹੀਂ ਯੋਗਦਾਨ ਪਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
+54,,,START CONTRIBUTING IN <Y>,"""Y"" ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣਾ ਸ਼ੁਰੂ ਕਰੋ"
+57,,,I've contributed towards building open language repository for India on http://boloindia.nplt.in. You and I can make a difference by donating our voices that can help machines learn our language. Our <x> language ranks <y> on Bolo India. Do your bit and empower the language?,ਮੈਂ http://boloindia.nplt.in ਰਾਹੀਂ ਭਾਰਤ ਲਈ ਆਜ਼ਾਦ ਭਾਸ਼ਾ ਭੰਡਾਰ ਬਣਾਉਣ ਵਾਸਤੇ ਯੋਗਦਾਨ ਪਾਇਆ ਹੈ। ਤੁਸੀਂ ਤੇ ਮੈਂ ਰਲ ਕੇ ਆਪਣੀਆਂ ਆਵਾਜ਼ਾਂ ਦਾ ਦਾਨ ਦੇ ਕੇ ਮਦਦ ਕਰ ਸਕਦੇ ਹਾਂ ਤਾਂ ਕਿ ਸਾਡੀ ਭਾਸ਼ਾਂ ਵਿੱਚ ਮਸ਼ੀਨ ਸਿਖਲਾਈ ਵਾਸਤੇ ਮਦਦ ਹੋਵੇ। ਬੋਲੋ ਇੰਡੀਆ ਉੱਤੇ ਸਾਡਾ <x> ਭਾਸ਼ਾ ਦਰਜਾ <y> ਹੈ। ਆਪਣਾ ਹਿੱਸਾ ਪਾਉਣਾ ਤੇ ਭਾਸ਼ਾ ਨੂੰ ਮਜ਼ਬੂਤ ਕਰਨਾ ਹੈ?
+3,,,Progress Timeline,ਤਰੱਕੀ ਸਮਾਂ-ਰੇਖਾ
+5,,,Recorded ,ਰਿਕਾਰਡ ਕੀਤੀ
+8,,,Count,ਗਿਣਤੀ
+14,,,Speakers contributed,ਯੋਗਦਾਨ ਕਰਨ ਵਾਲੇ ਸਪੀਕਰ
+15,,,hours contributed,ਯੋਗਦਾਨ ਪਾਏ ਗਏ ਘੰਟੇ
+17,,,Languages contributed,ਯੋਗਦਾਨ ਪਾਈਆਂ ਭਾਸ਼ਾਵਾਂ
+19,,,Gender Distribution,ਲਿੰਗ ਮੁਤਾਬਕ ਵੰਡ
+22,,,Male,ਪੁਰਸ਼
+23,,,Female,ਇਸਤਰੀ
+25,,,Transgender - He,ਟਰਾਂਸਜੈਂਡਰ - ਸ੍ਰੀਮਾਨ
+26,,,Transgender - She,ਟਰਾਂਸਜੈਂਡਰ - ਸ੍ਰੀਮਤੀ
+27,,,Rather Not Say,ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ
+32,,,Age Group Distribution,ਉਮਰ ਸਮੂਹ ਮੁਤਾਬਕ ਵੰਡ
+33,,,Anonymous,ਅਗਿਆਤ
+34,,,upto 10,10 ਤੱਕ
+35,,,30 years,30 ਸਾਲ
+41,,,Contributed,ਯੋਗਦਾਨ ਪਾਏ
+42,,,Speakers,ਸਪੀਕਰ
+43,,,hrs,ਘੰਟੇ
+44,,,mins,ਮਿੰਟ
+45,,,secs,ਸਕਿੰਟ
+49,,,"We do not have any data for this language, would you like to contribute for it?","ਸਾਡੇ ਕੋਲ ਇਸ ਭਾਸ਼ਾ ਲਈ ਕੋਈ ਡਾਟਾ ਨਹੀਂ ਹੈ, ਕੀ ਤੁਸੀਂ ਇਸ ਵਾਸਤੇ ਯੋਗਦਾਨ ਪਾਉਣਾ ਚਾਹੋਗੇ?"
+50,,,Contribute Now,ਹੁਣੇ ਯੋਗਦਾਨ ਪਾਓ
+1,,,Quick Tips,ਫੌਰੀ ਗੁਰ
+3,,,Recording Instructions,ਰਿਕਾਰਡਿੰਗ ਸੰਬੰਧੀ ਹਿਦਾਇਤਾਂ
+4,,,Please test your microphone,ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ ਮਾਈਕਰੋਫ਼ੋਨ ਦੀ ਜਾਂਚ ਕਰੋ
+6,,,Ensure there is no background noise,ਪੱਕਾ ਕਰੋ ਕਿ ਪਿੱਛੇ ਕੋਈ ਰੌਲਾ ਨਾ ਪੈਂਦਾ ਹੋਵੇ
+7,,,Read once before recording it,ਇਹ ਰਿਕਾਰਡ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਇੱਕ ਵਾਰ ਪੜ੍ਹੋ
+8,,,Get started by clicking on Record button,'ਰਿਕਾਰਡ ਕਰੋ' ਬਟਨ 'ਤੇ ਕਲਿੱਕ ਕਰਕੇ ਸ਼ੁਰੂ ਕਰੋ 
+9,,,Start,ਸ਼ੁਰੂ ਕਰੋ
+12,,,Validating Instructions,ਪ੍ਰਮਾਣੀਕਰਨ ਸੰਬੰਧੀ ਹਿਦਾਇਤਾਂ
+13,,,Please test your speakers,ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ ਸਪੀਕਰਾਂ ਦੀ ਜਾਂਚ ਕਰੋ
+14,,,Ensure the voice is clear and audible,ਪੱਕਾ ਕਰੋ ਕਿ ਅਵਾਜ਼ ਸਾਫ਼ ਅਤੇ ਸੁਣਨਯੋਗ ਹੋਵੇ
+15,,,Match the voice to the text accurately,ਅਵਾਜ਼ ਨੂੰ ਲਿਖਤ ਨਾਂ ਚੰਗੀ ਤਰ੍ਹਾਂ ਮਿਲਾਓ
+16,,,"If you are unsure of the match, skip the particular voice sample","ਜੇ ਤੁਹਾਨੂੰ ਮਿਲਾਨ ਚੰਗੀ ਤਰ੍ਹਾਂ ਨਾਲ ਸਮਝ ਨਹੀਂ ਆਇਆ ਜਾਂ ਤੁਹਾਨੂੰ ਇਸ ਬਾਰੇ ਪੱਕਾ ਪਤਾ ਨਹੀਂ ਹੈ, ਤਾਂ ਉਹ ਅਵਾਜ਼ੀ ਨਮੂਨਾ ਛੱਡ ਦਿਓ"
+0,,,RE-RECORD,ਮੁੜ-ਰਿਕਾਰਡ ਕਰੋ
+1,,,STOP RECORDING,ਰਿਕਾਰਡਿੰਗ ਬੰਦ ਕਰੋ
+2,,,NEXT,ਅੱਗੇ
+4,,,START RECORDING,ਰਿਕਾਰਡਿੰਗ ਸ਼ੁਰੂ ਕਰੋ
+7,,,Let's get started,ਆਓ ਸ਼ੁਰੂ ਕਰੀਏ
+8,,,We know you can do more!,ਸਾਨੂੰ ਵਿਸ਼ਵਾਸ ਹੈ ਕਿ ਤੁਸੀਂ ਹੋਰ ਯੋਗਦਾਨ ਕਰ ਸਕਦੇ ਹੋ!
+9,,,You are halfway there. Keep going!,ਤੁਸੀਂ ਆਪਣੇ ਟੀਚੇ ਦੇ ਬਹੁਤ ਨੇੜੇ ਹੋ। ਲੱਗੇ ਰਹੋ!
+10,,,"Just few more steps to go!
+",ਬਸ ਕੁਝ ਹੀ ਹੋਰ ਕਦਮ!
+11,,,"Nine dead, one more to go!","ਨੌਂ ਤੀਰ ਨਿਸ਼ਾਨੇ 'ਤੇ ਲੱਗੇ, ਬਸ ਇੱਕ ਹੋਰ!"
+12,,,Yay! Done & Dusted!,ਬੱਲੇ! ਚੱਕ ਤੇ ਫੱਟੇ!
+19,,,Recording will automatically stop after 04 Seconds,04 ਸਕਿੰਟ ਬਾਅਦ ਰਿਕਾਰਡਿੰਗ ਆਪਣੇ-ਆਪ ਰੁਕ ਜਾਏਗੀ
+21,,,Test your Microphone and Speakers,ਆਪਣੇ ਮਾਈਕਰੋਫੋਨ ਅਤੇ ਸਪੀਕਰਾਂ ਦੀ ਜਾਂਚ ਕਰੋ
+22,,,Test Mic,ਮਾਈਕ ਦੀ ਜਾਂਚ ਕਰੋ
+23,,,Test Speaker,ਸਪੀਕਰਾਂ ਦੀ ਜਾਂਚ ਕਰੋ
+24,,,Recording,ਰਿਕਾਰਡਿੰਗ
+25,,,Playing,ਚੱਲ ਰਿਹਾ ਹੈ
+26,,,Background noise detected,ਬੈਕਗਰਾਊਂਡ ਵਿੱਚ ਰੌਲਾ ਖੋਜਿਆ ਗਿਆ
+27,,,Ambience noise detected,ਮਾਹੌਲ ਵਿੱਚ ਰੌਲਾ ਖੋਜਿਆ ਗਿਆ
+28,,,"Recording for ""x"" seconds",x' ਸਕਿੰਟ ਲਈ ਰਿਕਾਰਡਿੰਗ
+29,,,Playing back Audio,ਪਿੱਛੇ ਆਡੀਓ ਚੱਲ ਰਹੀ ਹੈ
+34,,,"Hurting sentiments of religion, community or abusive content etc.","ਧਰਮ, ਸਮਾਜ ਦੀਆਂ ਭਾਵਨਾਵਾਂ ਨੂੰ ਸੱਟ ਮਾਰਦੇ ਜਾਂ ਨਿੰਦਾਪੂਰਨ ਸਮੱਗਰੀ ਆਦਿ"
+35,,,Prohibited Content,ਪਾਬੰਦੀਸ਼ੁਦਾ ਸਮੱਗਰੀ
+37,,,Political Statement,ਰਾਜਨੀਤਿਕ ਬਿਆਨ
+38,,,"Hateful Political views, amplifying hate-speech etc.","ਨਫ਼ਰਤ ਭਰੇ ਰਾਜਨੀਤਿਕ ਪੱਖ, ਪੱਖਪਾਤੀ ਨਫ਼ਰਤੀ-ਭਾਸ਼ਣ ਆਦਿ"
+39,,,Misinformation,ਗ਼ਲਤ ਜਾਣਕਾਰੀ
+0,,,PLAY,ਚਲਾਓ
+2,,,Instructions,ਹਿਦਾਇਤਾਂ
+3,,,RE-PLAY,ਮੁੜ-ਚਲਾਓ
+4,,,Incorrect,ਗ਼ਲਤ
+6,,,Pause,ਵਿਰਾਮ
+9,,,Congratulations! You have validated a batch of recordings!,ਵਧਾਈਆਂ! ਤੁਸੀਂ ਅਵਾਜ਼ੀ ਨਮੂਨਿਆਂ ਦੇ ਇੱਕ ਬੈਚ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕੀਤਾ!
+0,,,Looks like you have taken a wrong turn here,ਲੱਗਦਾ ਹੈ ਕਿ ਤੁਸੀਂ ਕਿਸੇ ਗਲਤ ਥਾਂ 'ਤੇ ਆ ਗਏ ਹੋ
+1,,,Page Not Found,ਪੰਨਾ ਨਹੀਂ ਮਿਲਿਆ
+2,,,"Click Here ""x"" to go back to home page","ਹੋਮ ਪੰਨੇ 'ਤੇ ਜਾਣ ਲਈ ""x"" 'ਤੇ ਕਲਿੱਕ ਕਰੋ"
+3,,,An unexpected error occured while processing your request. Please try after some time.,ਤੁਹਾਡੀ ਬੇਨਤੀ 'ਤੇ ਪ੍ਰਕਿਰਿਆ ਕਰਨ ਦੌਰਾਨ ਕੋਈ ਅਗਿਆਤ ਗ਼ਲਤੀ ਹੋ ਗਈ। ਕਿਰਪਾ ਕਰਕੇ ਕੁਝ ਸਮੇਂ ਬਾਅਦ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।
+4,,,Close,ਬੰਦ ਕਰੋ
+6,,,Oops,ਓਹ ਹੋ
+1,,,Help your language by donating your voice,ਆਪਣੀ ਆਵਾਜ਼ ਦਾਨ ਕਰਕੇ ਆਪਣੀ ਭਾਸ਼ਾ ਦੀ ਸਹਾਇਤਾ ਕਰੋ
+3,,,Contributions made to Bolo India,ਬੋਲੋ ਇੰਡੀਆ ਵਿਚ ਯੋਗਦਾਨ ਪਾਇਆ
+4,,,languages,ਬੋਲੀਆਂ
+7,,,Hours validated,ਘੰਟੇ ਪ੍ਰਮਾਣਿਤ ਕੀਤੇ ਗਏ
+9,,,by hours of data recorded and validated,ਦਰਜ ਕੀਤੇ ਡੇਟਾ ਅਤੇ ਵੈਧਤਾ ਦੇ ਘੰਟਿਆਂ ਦੁਆਰਾ
+15,,,number of speakers,ਬੋਲਣ ਵਾਲਿਆਂ ਦੀ ਗਿਣਤੀ
+1,,,"Earn badges or certificate by contributing to Bolo India. Donate your voice in language of your choice. Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e. YOU.","ਬੋਲੋ ਇੰਡੀਆ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਕੇ ਬੈਜ ਜਾਂ ਸਰਟੀਫਿਕੇਟ ਕਮਾਓ । ਆਪਣੀ ਅਵਾਜ਼ ਨੂੰ ਆਪਣੀ ਪਸੰਦ ਦੀ ਭਾਸ਼ਾ ਵਿਚ ਦਾਨ ਕਰੋ। ਆਪਣੇ ਸਮਾਜਿਕ ਚੱਕਰ ਵਿੱਚ ਬੈਜਾਂ ਨੂੰ ਸਾਂਝਾ ਕਰੋ, ਆਪਣੀ ਭਾਸ਼ਾ ਕਮਿਊਨੀਟੀ ਦਾ ਨਿਰਮਾਣ ਕਰੋ, ਆਪਣੇ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰ ਨੂੰ ਇਸਦੇ ਲਈ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਪ੍ਰੇਰਿਤ ਕਰੋ । ਬੋਲੋ ਇੰਡੀਆ ਦੀ ਤਾਕਤ ਲੋਕਾਂ ਦੀ ਵਿਭਿੰਨਤਾ ਵਿੱਚ ਹੈ ਅਰਥਾਤ ਤੁਸੀਂ ।"
+4,,,The levels defined by an overall contributions on Bolo India. Please see the criteria that defines different levels below,ਬੋਲੋ ਇੰਡੀਆ ਦੇ ਸਮੁੱਚੇ ਯੋਗਦਾਨ ਦੁਆਰਾ ਨਿਰਧਾਰਤ ਪੱਧਰ । ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਮਾਪਦੰਡ ਵੇਖੋ ਜੋ ਹੇਠਾਂ ਵੱਖੋ ਵੱਖਰੇ ਪੱਧਰਾਂ ਨੂੰ ਪਰਿਭਾਸ਼ਤ ਕਰਦਾ ਹੈ
+6,,,Contributions (Contributing),ਯੋਗਦਾਨ (ਯੋਗਦਾਨ)
+9,,,Contributing : 5 sentences,ਯੋਗਦਾਨ: 5 ਵਾਕ
+12,,,Contributing : 50 sentences,ਯੋਗਦਾਨ: 50 ਵਾਕ
+15,,,Contributing : 100 sentences,ਯੋਗਦਾਨ: 100 ਵਾਕ
+18,,,Contributing : 200 sentences,ਯੋਗਦਾਨ: 200 ਵਾਕ
+21,,,"Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but will go through validation through Bolo crowdsourcing initiative. Please remain an active contributor to stand a chance to get recognised by the Ministry of Electronics and Information Technology.","ਕਿਰਪਾ ਕਰਕੇ ਯਾਦ ਰੱਖੋ ਕਿ ਤੁਹਾਡੇ ਪੱਧਰਾਂ ਅਤੇ ਬੈਜ ਨੂੰ ਅਪਡੇਟ ਕਰਨ ਲਈ 48 ਘੰਟੇ ਲੱਗ ਸਕਦੇ ਹਨ । ਤੁਹਾਡੇ ਯੋਗਦਾਨ ਦੀ ਮਿਆਦ ਖਤਮ ਨਹੀਂ ਹੋਈ, ਪਰ ਬੋਲੋ ਕ੍ਰਾਊਡਸੋਰਸਿੰਗ ਪਹਿਲਕਦਮੀ ਦੇ ਜ਼ਰੀਏ ਪ੍ਰਮਾਣਿਕਤਾ ਦੁਆਰਾ ਕੀਤੀ ਜਾਵੇਗੀ ।  ਕਿਰਪਾ ਕਰਕੇ ਇਲੈਕਟ੍ਰਾਨਿਕਸ ਅਤੇ ਸੂਚਨਾ ਟੈਕਨਾਲੋਜੀ ਮੰਤਰਾਲੇ ਦੁਆਰਾ ਮਾਨਤਾ ਪ੍ਰਾਪਤ ਕਰਨ ਦਾ ਮੌਕਾ ਖੜਾ ਕਰਨ ਲਈ ਇੱਕ ਸਰਗਰਮ ਯੋਗਦਾਨ ਪਾਉਣ ਵਾਲੇ ਬਣੋ। "
+25,,,"Earn badges or certificate by contributing to Bolo India.  Validate the audio and text in your desired language.  Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Bolo India is in the diversity of the people i.e. YOU.","ਬੋਲੋ ਇੰਡੀਆ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਕੇ ਬੈਜ ਜਾਂ ਸਰਟੀਫਿਕੇਟ ਕਮਾਓ । ਆਪਣੀ ਲੋੜੀਦੀ ਭਾਸ਼ਾ ਵਿੱਚ ਆਡੀਓ ਅਤੇ ਟੈਕਸਟ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ । ਆਪਣੇ ਸਮਾਜਿਕ ਚੱਕਰ ਵਿੱਚ ਬੈਜਾਂ ਨੂੰ ਸਾਂਝਾ ਕਰੋ, ਆਪਣੀ ਭਾਸ਼ਾ ਕਮਿਊਨੀਟੀ ਦਾ ਨਿਰਮਾਣ ਕਰੋ, ਆਪਣੇ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰ ਨੂੰ ਇਸਦੇ ਲਈ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਪ੍ਰੇਰਿਤ ਕਰੋ । ਬੋਲੋ ਇੰਡੀਆ ਦੀ ਤਾਕਤ ਲੋਕਾਂ ਦੀ ਵਿਭਿੰਨਤਾ ਵਿੱਚ ਹੈ ਅਰਥਾਤ ਤੁਸੀਂ ।"
+28,,,The levels defined by an overall validations on Bolo India. Please see the criteria that defines different levels below:,ਬੋਲੋ ਇੰਡੀਆ 'ਤੇ ਸਮੁੱਚੀ ਪ੍ਰਮਾਣਿਕਤਾ ਦੁਆਰਾ ਦਰਸਾਏ ਗਏ ਪੱਧਰ ।  ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਮਾਪਦੰਡ ਵੇਖੋ ਜੋ ਹੇਠਾਂ ਵੱਖੋ ਵੱਖਰੇ ਪੱਧਰਾਂ ਨੂੰ ਪ੍ਰਭਾਸ਼ਿਤ ਕਰਦੇ ਹਨ:
+1,,,hours recorded,ਘੰਟੇ ਦਰਜ ਕੀਤੇ
+8,,,10 - 30 years,10 - 30 ਸਾਲ
+9,,,30 - 60 years,30 - 60 ਸਾਲ
+10,,,60+ years,60+ ਸਾਲ
+1,,,Help your language by labelling images,ਚਿੱਤਰਾਂ ਨੂੰ ਲੇਬਲ ਦੇ ਕੇ ਆਪਣੀ ਭਾਸ਼ਾ ਦੀ ਸਹਾਇਤਾ ਕਰੋ
+5,,,Label,ਲੇਬਲ
+6,,,Type the text as per the image,ਚਿੱਤਰ ਦੇ ਅਨੁਸਾਰ ਟੈਕਸਟ ਟਾਈਪ ਕਰੋ
+11,,,"Validate the text, labelled by others, as per the image","ਚਿੱਤਰ ਦੇ ਅਨੁਸਾਰ, ਹੋਰਾਂ ਦੁਆਰਾ ਲੇਬਲ ਕੀਤੇ ਟੈਕਸਟ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ"
+15,,,Contributions made to Dekho India,ਦੇਖੋ ਇੰਡੀਆ ਨੂੰ ਯੋਗਦਾਨ ਪਾਇਆ
+18,,,y' Images labelled,y 'ਤਸਵੀਰਾਂ ਦਾ ਲੇਬਲ ਲਗਾਇਆ ਗਿਆ
+19,,,y' Images validated,y 'ਚਿੱਤਰ ਪ੍ਰਮਾਣਿਤ ਕੀਤੇ ਗਏ
+23,,,Images labelled and validated,ਚਿੱਤਰ ਲੇਬਲ ਅਤੇ ਪ੍ਰਮਾਣਿਤ ਕੀਤੇ ਗਏ
+24,,,Number of images,ਚਿੱਤਰਾਂ ਦੀ ਗਿਣਤੀ
+8,,,X Images labelled,ਐਕਸ ਚਿੱਤਰਾਂ ਦਾ ਲੇਬਲ ਲਗਾਇਆ ਗਿਆ
+9,,,X Images validated,ਐਕਸ ਚਿੱਤਰ ਪ੍ਰਮਾਣਿਤ ਕੀਤੇ 
+17,,,Images labelled,ਚਿੱਤਰ ਲੇਬਲ ਕੀਤੇ
+18,,,Images validated,ਚਿੱਤਰ ਪ੍ਰਮਾਣਿਤ ਕੀਤੇ 
+19,,,Labelled,ਲੇਬਲ ਲਗਾਇਆ
+2,,,Captured Text,ਕੈਪਚਰ ਕੀਤਾ ਟੈਕਸਟ
+13,,,Is the text from the image captured correctly?,ਕੀ ਚਿੱਤਰ ਦਾ ਪਾਠ ਸਹੀ ਤਰ੍ਹਾਂ ਕੈਪਚਰ ਕੀਤਾ ਗਿਆ ਹੈ?
+15,,,Click to open expanded view,ਵਿਸਤ੍ਰਿਤ ਦ੍ਰਿਸ਼ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਕਲਿੱਕ ਕਰੋ
+0,,,Type the text from the image,ਚਿੱਤਰ ਤੋਂ ਟੈਕਸਟ ਟਾਈਪ ਕਰੋ
+1,,,Thank you for contributing to Dekho India!,ਦੇਖੋ ਇੰਡੀਆ ਵਿਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ!
+19,,,You’ve won a Bronze/Silver/Gold/Platinum Badge for contributing to Dekho India.,ਤੁਸੀਂ ਦੇਖੋ ਇੰਡੀਆ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਇੱਕ ਕਾਂਸੀ / ਸਿਲਵਰ / ਗੋਲਡ / ਪਲੈਟੀਨਮ ਬੈਜ ਜਿੱਤਿਆ ਹੈ।
+20,,,Labelled X Images in [Language],[ਭਾਸ਼ਾ] ਵਿਚ ਲੇਬਲ ਕੀਤੇ ਐਕਸ ਚਿੱਤਰ
+1,,,"Earn badges or certificate by contributing to Dekho India. Label an image in language of your choice. Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Dekho India is in the diversity of the people i.e. YOU.","ਦੇਖੋ ਇੰਡੀਆ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਕੇ ਬੈਜ ਜਾਂ ਸਰਟੀਫਿਕੇਟ ਕਮਾਓ। ਆਪਣੀ ਪਸੰਦ ਦੀ ਭਾਸ਼ਾ ਵਿੱਚ ਇੱਕ ਚਿੱਤਰ ਲੇਬਲ ਕਰੋ।ਆਪਣੇ ਸਮਾਜਿਕ ਚੱਕਰ ਵਿੱਚ ਬੈਜਾਂ ਨੂੰ ਸਾਂਝਾ ਕਰੋ, ਆਪਣੀ ਭਾਸ਼ਾ ਕਮਿਉਨਿਟੀ ਦਾ ਨਿਰਮਾਣ ਕਰੋ, ਆਪਣੇ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰ ਨੂੰ ਇਸਦੇ ਲਈ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਪ੍ਰੇਰਿਤ ਕਰੋ। ਦੇਖੋ ਇੰਡੀਆ ਦੀ ਤਾਕਤ ਲੋਕਾਂ ਦੀ ਵੰਨ-ਸੁਵੰਨਤਾ ਵਿੱਚ ਹੈ ਅਰਥਾਤ ਤੁਸੀਂ।"
+4,,,The levels defined by an overall contributions on Dekho India. Please see the criteria that defines different levels below,ਦੇਖੋ ਇੰਡੀਆ ਦੇ ਸਮੁੱਚੇ ਯੋਗਦਾਨ ਦੁਆਰਾ ਨਿਰਧਾਰਤ ਪੱਧਰ। ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਮਾਪਦੰਡ ਵੇਖੋ ਜੋ ਹੇਠਾਂ ਵੱਖੋ ਵੱਖਰੇ ਪੱਧਰਾਂ ਨੂੰ ਪਰਿਭਾਸ਼ਤ ਕਰਦਾ ਹੈ
+6,,,Contributions (Labelling),ਯੋਗਦਾਨ (ਲੇਬਲਿੰਗ)
+9,,,Labelling : 5 images,ਲੇਬਲਿੰਗ: 5 ਚਿੱਤਰ
+12,,,Labelling : 50 images,ਲੇਬਲਿੰਗ: 50 ਚਿੱਤਰ
+15,,,Labelling : 100 images,ਲੇਬਲਿੰਗ: 100 ਚਿੱਤਰ
+18,,,Labelling : 200 images,ਲੇਬਲਿੰਗ: 200 ਚਿੱਤਰ
+25,,,"Earn badges or certificate by contributing to Dekho India.  Validate the images and labels in your desired language.  Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Dekho India is in the diversity of the people i.e. YOU.","ਦੇਖੋ ਇੰਡੀਆ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਕੇ ਬੈਜ ਜਾਂ ਸਰਟੀਫਿਕੇਟ ਕਮਾਓ ਆਪਣੀ ਲੋੜੀਦੀ ਭਾਸ਼ਾ ਵਿੱਚ ਚਿੱਤਰਾਂ ਅਤੇ ਲੇਬਲ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ। ਆਪਣੇ ਸਮਾਜਿਕ ਚੱਕਰ ਵਿੱਚ ਬੈਜਾਂ ਨੂੰ ਸਾਂਝਾ ਕਰੋ, ਆਪਣੀ ਭਾਸ਼ਾ ਕਮਿਊਨੀਟੀ ਦਾ ਨਿਰਮਾਣ ਕਰੋ, ਆਪਣੇ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰ ਨੂੰ ਇਸਦੇ ਲਈ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਪ੍ਰੇਰਿਤ ਕਰੋ। ਦੇਖੋ ਇੰਡੀਆ ਦੀ ਤਾਕਤ ਲੋਕਾਂ ਦੀ ਵੰਨ-ਸੁਵੰਨਤਾ ਵਿੱਚ ਹੈ ਅਰਥਾਤ ਤੁਸੀਂ।"
+28,,,The levels defined by an overall validations on Dekho India. Please see the criteria that defines different levels below:,ਦੇਖੋ ਇੰਡੀਆ 'ਤੇ ਸਮੁੱਚੀ ਪ੍ਰਮਾਣਿਕਤਾ ਦੁਆਰਾ ਦਰਸਾਏ ਗਏ ਪੱਧਰ ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਮਾਪਦੰਡ ਵੇਖੋ ਜੋ ਹੇਠਾਂ ਵੱਖੋ ਵੱਖਰੇ ਪੱਧਰਾਂ ਨੂੰ ਪ੍ਰਭਾਸ਼ਿਤ ਕਰਦੇ ਹਨ:
+33,,,Validating : 5 images,ਪ੍ਰਮਾਣਿਤ ਕਰ ਰਿਹਾ ਹੈ: 5 ਚਿੱਤਰ
+36,,,Validating  : 50 images,ਪ੍ਰਮਾਣਿਤ ਕਰ ਰਿਹਾ ਹੈ: 50 ਚਿੱਤਰ
+39,,,Validating : 100 images,ਪ੍ਰਮਾਣਿਤ ਕਰ ਰਿਹਾ ਹੈ: 100 ਚਿੱਤਰ
+42,,,Validating : 200 images,ਪ੍ਰਮਾਣਿਤ ਕਰ ਰਿਹਾ ਹੈ: 200 ਚਿੱਤਰ
+1,,,(Same as About Us tab),(ਸਾਡੇ ਬਾਰੇ ਟੈਬ ਵਾਂਗ ਹੀ)
+4,,,"One Platform, 4 Crowdsourcing Initiatives","ਇੱਕ ਪਲੇਟਫਾਰਮ, 4 ਕ੍ਰਾਊਡਸੋਰਸਿੰਗ ਪਹਿਲ"
+5,,,"Help create open repository of Speech Recognition data, Parallel translations and Labelled Images","ਸਪੀਚ ਰੀਕੋਗਨੀਸ਼ਨ ਡੇਟਾ, ਪੈਰਲਲ ਟਰਾਂਸਲੇਸ਼ਨ ਅਤੇ ਲੇਬਲਡ ਚਿੱਤਰਾਂ ਦਾ ਖੁੱਲਾ ਭੰਡਾਰ ਬਣਾਉਣ ਵਿੱਚ ਸਹਾਇਤਾ ਕਰੋ"
+7,,,<same as suno india>,<ਸੁਨੋ ਇੰਡੀਆ ਵਾਂਗ ਹੀ>
+8,,,Contribute by typing what you hear on audio,ਜੋ ਤੁਸੀਂ ਆਡੀਓ ਤੇ ਸੁਣਦੇ ਹੋ ਉਸਨੂੰ ਲਿਖ ਕੇ ਯੋਗਦਾਨ ਦਿਓ
+9,,,Validate the texts transcribed by others,ਦੂਜਿਆਂ ਦੁਆਰਾ ਲਿਖੀਆਂ ਲਿਖਤਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ
+15,,,<same as bolo india>,<ਬੋਲੋ ਇੰਡੀਆ ਵਾਂਗ ਹੀ>
+16,,,Contribute by recording your voice on the prompted text,ਪੁੱਛੇ ਪਾਠ ਤੇ ਆਪਣੀ ਅਵਾਜ਼ ਨੂੰ ਰਿਕਾਰਡ ਕਰਕੇ ਯੋਗਦਾਨ ਦਿਓ
+17,,,Validate the audio recorded by others,ਹੋਰਾਂ ਦੁਆਰਾ ਰਿਕਾਰਡ ਕੀਤੀ ਆਡੀਓ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ
+20,,,100 hours each,100 ਘੰਟੇ ਹਰ
+23,,,<same as Likho india>,<ਲਿਖੋ ਇੰਡੀਆ ਵਾਂਗ ਹੀ>
+24,,,Contribute by translating the prompted text in your language,ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਪੁੱਛੇ ਪਾਠ ਦਾ ਅਨੁਵਾਦ ਕਰਕੇ ਯੋਗਦਾਨ ਦਿਓ
+25,,,Validate the translations contributed by others,ਦੂਜਿਆਂ ਦੁਆਰਾ ਦਿੱਤੇ ਗਏ ਅਨੁਵਾਦਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ
+28,,,10000 translations each,ਹਰ 10000 ਅਨੁਵਾਦ
+31,,,<same as Dekho india>,<ਉਸੇ ਤਰ੍ਹਾਂ ਦੇਖੋ ਇੰਡੀਆ>
+32,,,Contribute by labelling the image,ਚਿੱਤਰ ਨੂੰ ਲੇਬਲ ਦੇ ਕੇ ਯੋਗਦਾਨ ਦਿਓ
+33,,,Validate the images labelled by others,ਦੂਜੇ ਦੁਆਰਾ ਲੇਬਲ ਕੀਤੇ ਚਿੱਤਰਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ
+35,,,12 languages,12 ਭਾਸ਼ਾਵਾਂ
+36,,,10000 images each,ਹਰ 10000 ਚਿੱਤਰ
+38,,,Start Participating,ਹਿੱਸਾ ਲੈਣਾ ਸ਼ੁਰੂ ਕਰੋ
+40,,,[Bhaashini] for everyone,[ਭਾਸ਼ਿਨੀ] ਹਰੇਕ ਲਈ
+41,,,"Like every Indian, be part of this initiative and make a difference in creating open data repositories for the Digital India","ਹਰ ਭਾਰਤੀ ਦੀ ਤਰ੍ਹਾਂ, ਇਸ ਪਹਿਲ ਦਾ ਹਿੱਸਾ ਬਣੋ ਅਤੇ ਡਿਜੀਟਲ ਇੰਡੀਆ ਲਈ ਖੁੱਲੇ ਡਾਟਾ ਰਿਪੋਜ਼ਟਰੀਆਂ ਬਣਾਉਣ ਵਿਚ ਫਰਕ ਲਿਆਓ"
+43,,,"Engage with Bhaashini and earn badges, for helping your languages win their pride back","ਭਾਸ਼ਿਨੀ ਨਾਲ ਜੁੜੇ ਰਹੋ ਅਤੇ ਬੈਜ ਕਮਾਓ, ਤਾਂ ਜੋ ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਨੂੰ ਉਨ੍ਹਾਂ ਦਾ ਮਾਣ ਵਾਪਸ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਸਹਾਇਤਾ ਮਿਲੇ"
+46,,,Win a Bronze Badge,ਪਿੱਤਲ ਦਾ ਬੈਜ ਜਿੱਤੋ
+47,,,Contribute just 5 sentences in your language,ਆਪਣੀ ਭਾਸ਼ਾ ਵਿਚ ਸਿਰਫ਼ 5 ਵਾਕਾਂ ਦਾ ਯੋਗਦਾਨ ਦਿਓ
+0,,,[Bhaashini] : A crowdsourcing initiative for Indian languages,[ਭਾਸ਼ੀਨੀ]: ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਲਈ ਕ੍ਰਾਊਡਸੋਰਸਿੰਗ ਕਰਨ ਵਾਲੀ ਪਹਿਲ
+1,,,"[Bhaashini] aims to create open datasets to develop Speech Recognition, Text-to-Speech, Machine Translation and Optical Character Recognition for Indian languages. This initiative will empower our technologists, language enthusiasts and language communities to build world class digital applications in our own local languages. ","[ਭਾਸ਼ੀਨੀ] ਦਾ ਉਦੇਸ਼ ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਲਈ ਸਪੀਚ ਰੀਕੋਗਨੀਸ਼ਨ, ਟੈਕਸਟ-ਟੂ-ਸਪੀਚ, ਮਸ਼ੀਨ ਟ੍ਰਾਂਸਲੇਸ਼ਨ ਅਤੇ ਆਪਟੀਕਲ ਕਰੈਕਟਰ ਰੀਕੋਗਨੀਸ਼ਨ ਵਿਕਸਤ ਕਰਨ ਲਈ ਓਪਨ ਡੇਟਾਸੇਟ ਤਿਆਰ ਕਰਨਾ ਹੈ। ਇਹ ਪਹਿਲ ਸਾਡੇ ਟੈਕਨੋਲੋਜਿਸਟ, ਭਾਸ਼ਾ ਪ੍ਰੇਮੀ ਅਤੇ ਭਾਸ਼ਾ ਭਾਈਚਾਰਿਆਂ ਨੂੰ ਸਾਡੀਆਂ ਸਥਾਨਕ ਭਾਸ਼ਾਵਾਂ ਵਿਚ ਵਿਸ਼ਵ ਪੱਧਰੀ ਡਿਜੀਟਲ ਐਪਲੀਕੇਸ਼ਨਾਂ ਬਣਾਉਣ ਲਈ ਤਾਕਤ ਦੇਵੇਗੀ।"
+2,,,Help Indian languages become atma-nirbhar through these datasets,ਇਨ੍ਹਾਂ ਡੇਟਾਸੇਟਾਂ ਰਾਹੀਂ ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਨੂੰ ਆਤਮਾ-ਨਿਰਭਰ ਬਣਨ ਵਿੱਚ ਸਹਾਇਤਾ ਕਰੋ
+3,,,"This is an effort by MeitY, Government of India, under the National Language Translation Mission (NLTM). This effort is supported by EkStep Foundation on a pro-bono basis and leverages its open source work under https://sunbird.org/projects/vakyansh along with various other open source frameworks.","ਇਹ ਰਾਸ਼ਟਰੀ ਭਾਸ਼ਾ ਅਨੁਵਾਦ ਮਿਸ਼ਨ (ਐਨ ਐਲ ਟੀ ਐਮ) ਦੇ ਤਹਿਤ ਮਾਈਟੀ, ਭਾਰਤ ਸਰਕਾਰ ਦੁਆਰਾ ਇੱਕ ਕੋਸ਼ਿਸ਼ ਹੈI ਇਸ ਕੋਸ਼ਿਸ਼ ਨੂੰ ਇਕ-ਸਟੈਪ ਫਾਊਂਡੇਸ਼ਨ ਦੁਆਰਾ ਇੱਕ ਪ੍ਰੋ-ਬੋਨੋ ਅਧਾਰ ਤੇ ਸਮਰਥਤ ਕੀਤਾ ਗਿਆ ਹੈ ਅਤੇ ਇਸ ਦੇ ਓਪਨ ਸੋਰਸ ਕਾਰਜ ਨੂੰ https://sunbird.org/projects /vakyansh ਦੇ ਨਾਲ ਵੱਖ-ਵੱਖ ਹੋਰ ਓਪਨ ਸੋਰਸ ਫਰੇਮਵਰਕ ਦੇ ਨਾਲ ਲਾਭ ਦਿੰਦਾ ਹੈI"
+4,,,"India is a land of many languages, our digital strategy must reflect it.","ਭਾਰਤ ਬਹੁਤ ਸਾਰੀਆਂ ਭਾਸ਼ਾਵਾਂ ਦੀ ਧਰਤੀ ਹੈ, ਸਾਡੀ ਡਿਜੀਟਲ ਰਣਨੀਤੀ ਇਸ ਨੂੰ ਦਰਸਾਉਂਦੀ ਹੈI"
+5,,,90% of India's population uses regional languages to conduct their day-to-day activities.,ਭਾਰਤ ਦੀ 90% ਆਬਾਦੀ ਖੇਤਰੀ ਭਾਸ਼ਾਵਾਂ ਨੂੰ ਆਪਣੀ ਰੋਜ਼ਮਰ੍ਹਾ ਦੀਆਂ ਗਤੀਵਿਧੀਆਂ ਲਈ ਵਰਤਦੀ ਹੈI
+6,,,"As more and more people use digital platforms for financial, educational and social activities, digital platforms must work seamlessly in all Indian Languages.","ਜਿਵੇਂ ਕਿ ਜ਼ਿਆਦਾ ਤੋਂ ਜ਼ਿਆਦਾ ਲੋਕ ਵਿੱਤੀ, ਵਿਦਿਅਕ ਅਤੇ ਸਮਾਜਕ ਗਤੀਵਿਧੀਆਂ ਲਈ ਡਿਜੀਟਲ ਪਲੇਟਫਾਰਮ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹਨ, ਡਿਜੀਟਲ ਪਲੇਟਫਾਰਮ ਨੂੰ ਸਾਰੀਆਂ ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਨਿਰਵਿਘਨ ਕੰਮ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ I"
+8,,,Help your own language,ਆਪਣੀ ਭਾਸ਼ਾ ਦੀ ਮਦਦ ਕਰੋ
+9,,,"We need to build speech recognition, text-to-speech, machine translation and OCR technologies that are tuned for your language.","ਸਾਨੂੰ ਬੋਲੀ ਦੀ ਪਛਾਣ, ਟੈਕਸਟ-ਟੂ-ਸਪੀਚ, ਮਸ਼ੀਨ ਅਨੁਵਾਦ ਅਤੇ  ਓ ਸੀ ਆਰ ਤਕਨਾਲੋਜੀ ਬਣਾਉਣ ਦੀ ਜ਼ਰੂਰਤ ਹੈ ਜੋ ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਲਈ ਤਿਆਰ ਹਨ I"
+10,,,"These technologies will transform your language to become ""digital first"" in various sectors such as: education, healthcare and media.","ਇਹ ਤਕਨਾਲੋਜੀ ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਨੂੰ ਵੱਖ-ਵੱਖ ਸੈਕਟਰਾਂ ਜਿਵੇਂ ਕਿ ਸਿੱਖਿਆ, ਸਿਹਤ ਸੰਭਾਲ ਅਤੇ ਮੀਡੀਆ ਵਿਚ ""ਡਿਜੀਟਲ ਪਹਿਲ"" ਬਣਨ ਲਈ ਬਦਲ ਦੇਵੇਗਾ I"
+11,,,"The tools, utilities and models proposed to be developed in your language will rely on open source contributions through the Bhaashini crowd sourcing platform","ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਵਿੱਚ ਵਿਕਸਿਤ ਕੀਤੇ ਗਏ ਸਾਧਨ, ਸਹੂਲਤਾਂ ਅਤੇ ਨਮੂਨੇ ਭਾਸ਼ੀਨੀ ਕ੍ਰਾਊਡਸੋਰਸਿੰਗ ਪਲੇਟਫਾਰਮ ਦੁਆਰਾ ਖੁੱਲੇ ਸਰੋਤ ਯੋਗਦਾਨਾਂ 'ਤੇ ਨਿਰਭਰ ਕਰਨਗੇ"
+13,,,Crowd Sourcing & your contribution,ਕ੍ਰਾਊਡਸੋਰਸਿੰਗ  ਅਤੇ ਤੁਹਾਡਾ ਯੋਗਦਾਨ
+14,,,The above mentioned technologies rely on AI technology that requires large datasets in their respective fields. ,"ਉਪਰੋਕਤ ਜ਼ਿਕਰ ਕੀਤੀਆਂ ਤਕਨਾਲੋਜੀਆਂ ਏ ਆਈ ਤਕਨਾਲੋਜੀ ਤੇ ਨਿਰਭਰ ਕਰਦੀਆਂ ਹਨ, ਜਿਹਨਾਂ ਨੂੰ ਉਹਨਾਂ ਦੇ ਖੇਤਰਾਂ ਵਿੱਚ ਵੱਡੇ ਡੇਟਾਸੇਟ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ I"
+15,,,[Bhaashini] currently has four crowdsoucing initiatives to create these datasets -,[ਭਾਸ਼ੀਨੀ] ਕੋਲ ਫਿਲਹਾਲ ਇਹ ਡੇਟਾਸੇਟ ਬਣਾਉਣ ਲਈ ਚਾਰ ਕ੍ਰਾਊਡਸੋਰਸਿੰਗ ਪਹਿਲਕਦਮੀਆਂ ਹਨ -
+16,,,"1. Bolo India creates a repository of diverse voices speaking Indian languages, where volunteer reads the corresponding text. ","1. ਬੋਲੋ ਇੰਡੀਆ ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਬੋਲਣ ਵਾਲੀਆਂ ਵੱਖ ਵੱਖ ਆਵਾਜ਼ਾਂ ਦਾ ਭੰਡਾਰ ਤਿਆਰ ਕਰਦਾ ਹੈ, ਜਿਥੇ ਵਲੰਟੀਅਰ ਸੰਬੰਧਿਤ ਪਾਠ ਪੜ੍ਹਦਾ ਹੈ I"
+17,,,2. Suno India creates an open dataset through transcription of audio files.,2. ਸੁਨੋ ਇੰਡੀਆ ਆਡੀਓ ਫਾਈਲਾਂ ਦੇ ਟ੍ਰਾਂਸਕ੍ਰਿਪਸ਼ਨ ਦੁਆਰਾ ਇੱਕ ਓਪਨ ਡੇਟਾਸੇਟ ਤਿਆਰ ਕਰਦਾ ਹੈ I
+18,,,3. Likho India creates open parallel translation datasets between corresponding sentences in two languages.,3. ਲਿਖੋ ਇੰਡੀਆ ਦੋ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਅਨੁਸਾਰੀ ਵਾਕਾਂ ਵਿਚਕਾਰ ਖੁਲ੍ਹੇ ਪੈਰਲਲ ਅਨੁਵਾਦ ਡੇਟਾਸੇਟ ਤਿਆਰ ਕਰਦਾ ਹੈ I
+19,,,4. Dekho India creates an open data repository of images and the corresponding text.,4.ਦੇਖੋ ਇੰਡੀਆ ਚਿੱਤਰਾਂ ਅਤੇ ਇਸਦੇ ਨਾਲ ਸੰਬੰਧਿਤ ਟੈਕਸਟ ਦਾ ਖੁੱਲਾ ਡੇਟਾ ਰਿਪੋਜ਼ਟਰੀ ਬਣਾਉਂਦਾ ਹੈI
+20,,,This is where you come in,ਇਹ ਉਹ ਥਾਂ ਹੈ ਜਿੱਥੇ ਤੁਸੀਂ ਅੰਦਰ ਆਉਂਦੇ ਹੋ
+21,,,We are inviting you to join us and voluntarily contribute to this initiative. Contributing at one stretch can be overwhelming hence you can do this by visiting the website multiple times and commence from where you left us off,ਅਸੀਂ ਤੁਹਾਨੂੰ ਸਾਡੇ ਨਾਲ ਜੁੜਨ ਲਈ ਸੱਦਾ ਦੇ ਰਹੇ ਹਾਂ ਅਤੇ ਸਵੈਇੱਛੁਕ ਤੌਰ 'ਤੇ ਇਸ ਪਹਿਲ ਵਿਚ ਯੋਗਦਾਨ ਪਾ ਰਹੇ ਹਾਂ I ਇਕ ਹਿੱਸੇ 'ਤੇ ਯੋਗਦਾਨ ਪਾਉਣਾ ਭਾਰੀ ਹੋ ਸਕਦਾ ਹੈ ਇਸ ਲਈ ਤੁਸੀਂ ਕਈ ਵਾਰ ਵੈਬਸਾਈਟ' ਤੇ ਜਾ ਕੇ ਅਤੇ ਜਿੱਥੋਂ ਤੁਸੀਂ ਸਾਨੂੰ ਛੱਡ ਦਿੱਤਾ ਸੀ ਤੋਂ ਸ਼ੁਰੂ ਕਰ ਸਕਦੇ ਹੋ I
+22,,,Every minute of your contribution will make a huge difference and bring us closer to our objective,ਤੁਹਾਡੇ ਯੋਗਦਾਨ ਦਾ ਹਰ ਮਿੰਟ ਇੱਕ ਵੱਡਾ ਫਰਕ ਲਿਆਏਗਾ ਅਤੇ ਸਾਨੂੰ ਸਾਡੇ ਉਦੇਸ਼ ਦੇ ਨੇੜੇ ਲੈ ਜਾਵੇਗਾ
+23,,,Start Contributing,ਯੋਗਦਾਨ ਦੇਣਾ ਅਰੰਭ ਕਰੋ
+1,,,Bolo India,ਬੋਲੋ ਇੰਡੀਆ
+3,,,Dekho India,ਦੇਖੋ ਇੰਡੀਆ
+6,,,Translate Page,ਅਨੁਵਾਦ ਪੰਨਾ
+7,,,Localization,ਸਥਾਨਕ ਕਰਨ
+9,,,About Us,ਸਾਡੇ ਬਾਰੇ
+10,,,Terms & Conditions,ਨਿਯਮ ਅਤੇ ਸ਼ਰਤਾਂ
+11,,,Privacy Policy,ਪਰਾਈਵੇਟ ਨੀਤੀ
+16,,,Feedback,ਸੁਝਾਅ
+17,,,Help us find more people like you,ਤੁਹਾਡੇ ਵਰਗੇ ਹੋਰ ਲੋਕਾਂ ਨੂੰ ਲੱਭਣ ਵਿਚ ਸਾਡੀ ਮਦਦ ਕਰੋ
+18,,,Invite more people,ਹੋਰ ਲੋਕਾਂ ਨੂੰ ਸੱਦਾ ਦਿਓ
+20,,,Konkani Roman,ਕੋਂਕਣੀ ਰੋਮਨ
+21,,,Konkani DV,ਕੋਂਕਣੀ ਡੀ.ਵੀ.
+22,,,Manipuri BN,ਮਨੀਪੁਰੀ ਬੀ.ਐੱਨ
+23,,,Manipuri MM,ਮਨੀਪੁਰੀ ਐਮ.ਐਮ.
+24,,,Santali OL,ਸੰਤਾਲੀ ਓ.ਐਲ.
+25,,,Santali DV,ਸੰਤਾਲੀ ਡੀ.ਵੀ.
+26,,,English,ਅੰਗਰੇਜ਼ੀ
+27,,,ASSAMESE,ਅਸਾਮੀ
+28,,,BENGALI,ਬੰਗਾਲੀ
+29,,,BODO,ਬੋਡੋ
+30,,,DOGRI,ਡੋਗਰੀ
+31,,,GUJARATI,ਗੁਜਰਾਤੀ
+32,,,Hindi,ਹਿੰਦੀ
+33,,,KANNADA,ਕੰਨੜ
+34,,,KASHMIRI,ਕਸ਼ਮੀਰੀ
+35,,,MAITHILI,ਮੈਥਲੀ
+36,,,Malayalam,ਮਲਿਆਲਮ
+37,,,MARATHI,ਮਰਾਠੀ
+38,,,ODIA,ਉੜੀਆ
+39,,,NEPALI,ਨੇਪਾਲੀ
+40,,,PUNJABI,ਪੰਜਾਬੀ
+41,,,SANSKRIT,ਸੰਸਕ੍ਰਿਤ
+42,,,SINDHI,ਸਿੰਧੀ
+43,,,TAMIL,ਤਾਮਿਲ
+44,,,Telugu,ਤੇਲਗੂ
+45,,,URDU,ਉਰਦੂ
+47,,,Telangana,ਤੇਲੰਗਾਨਾ
+48,,,Andaman and Nicobar Islands,ਅੰਡੇਮਾਨ ਅਤੇ ਨਿਕੋਬਾਰ ਟਾਪੂ
+49,,,Andhra Pradesh,ਆਂਧਰਾ ਪ੍ਰਦੇਸ਼
+50,,,Arunanchal Pradesh,ਅਰੁਣਾਂਚਲ ਪ੍ਰਦੇਸ਼
+51,,,Assam,ਅਸਾਮ
+52,,,Bihar,ਬਿਹਾਰ
+53,,,Chhattisgarh,ਛੱਤੀਸਗੜ
+54,,,Goa,ਗੋਆ
+55,,,Gujarat,ਗੁਜਰਾਤ
+56,,,Haryana,ਹਰਿਆਣਾ
+57,,,Himachal Pradesh,ਹਿਮਾਚਲ ਪ੍ਰਦੇਸ਼
+58,,,Jammu & Kashmir,ਜੰਮੂ ਅਤੇ ਕਸ਼ਮੀਰ
+59,,,Jharkhand,ਝਾਰਖੰਡ
+60,,,Karnataka,ਕਰਨਾਟਕ
+61,,,Kerala,ਕੇਰਲਾ
+62,,,Lakshadweep,ਲਕਸ਼ਦਵੀਪ
+63,,,Madhya Pradesh,ਮੱਧ ਪ੍ਰਦੇਸ਼
+64,,,Maharashtra,ਮਹਾਰਾਸ਼ਟਰ
+65,,,Manipur,ਮਨੀਪੁਰ
+66,,,Chandigarh,ਚੰਡੀਗੜ੍ਹ
+67,,,Puducherry,ਪੁਡੂਚੇਰੀ
+68,,,Punjab,ਪੰਜਾਬ
+69,,,Rajasthan,ਰਾਜਸਥਾਨ
+70,,,Sikkim,ਸਿੱਕਮ
+71,,,Tamil Nadu,ਤਾਮਿਲਨਾਡੂ
+72,,,Tripura,ਤ੍ਰਿਪੁਰਾ
+73,,,Uttar Pradesh,ਉੱਤਰ ਪ੍ਰਦੇਸ਼
+74,,,Uttarakhand,ਉਤਰਾਖੰਡ
+75,,,West Bengal,ਪੱਛਮੀ ਬੰਗਾਲ
+76,,,Odisha,ਓਡੀਸ਼ਾ
+77,,,Dadra and Nagar Haveli and Daman and Diu,ਦਾਦਰਾ ਅਤੇ ਨਗਰ ਹਵੇਲੀ ਅਤੇ ਦਮਨ ਅਤੇ ਦਿਉ
+78,,,Meghalaya,ਮੇਘਾਲਿਆ
+79,,,Mizoram,ਮਿਜ਼ੋਰਮ
+80,,,Nagaland,ਨਾਗਾਲੈਂਡ
+81,,,National Capital Territory of Delhi,ਰਾਸ਼ਟਰੀ ਰਾਜਧਾਨੀ ਪ੍ਰਦੇਸ਼ ਦਿੱਲੀ
+82,,,Ladakh,ਲੱਦਾਖ
+1,,,"Earn badges or certificates by contributing to the crowdsourcing initiatives, such as, Bolo India, Suno India, Likho India and Dekho India. Contribution to each initiative qualifies for badges and certificates as per the levels outlined below. Share badges in your social circle, your language community, and motivate your friends and family to contribute to the cause. The strength of this crowdsourcing initiative is in the diversity of the people i.e. YOU.","ਕ੍ਰਾਊਡਸੋਰਸਿੰਗ ਕਰਨ ਦੀਆਂ ਪਹਿਲਕਦਮੀਆਂ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਕੇ ਬੈਜ ਜਾਂ ਸਰਟੀਫਿਕੇਟ ਕਮਾਓ, ਜਿਵੇਂ ਕਿ, ਬੋਲੋ ਇੰਡੀਆ, ਸੁਨੋ ਇੰਡੀਆ, ਲਿਖੋ ਇੰਡੀਆ ਅਤੇ ਦੇਖੋ ਇੰਡੀਆ । ਹਰ ਪਹਿਲ ਵਿਚ ਯੋਗਦਾਨ ਹੇਠਾਂ ਦੱਸੇ ਗਏ ਪੱਧਰ ਅਨੁਸਾਰ ਬੈਜਾਂ ਅਤੇ ਸਰਟੀਫਿਕੇਟ ਲਈ ਯੋਗਤਾ ਪੂਰੀ ਕਰਦਾ ਹੈ। ਆਪਣੇ ਸਮਾਜਿਕ ਚੱਕਰ ਵਿੱਚ, ਆਪਣੀ ਭਾਸ਼ਾ ਦੇ ਭਾਈਚਾਰੇ ਵਿੱਚ ਬੈਜ ਸਾਂਝੇ ਕਰੋ ਅਤੇ ਆਪਣੇ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰ ਨੂੰ ਉਦੇਸ਼ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਪ੍ਰੇਰਿਤ ਕਰੋ। ਕ੍ਰਾਊਡਸੋਰਸਿੰਗ ਪਹਿਲ ਦੀ ਤਾਕਤ ਲੋਕਾਂ ਦੀ ਵਿਭਿੰਨਤਾ ਵਿੱਚ ਹੈ ਅਰਥਾਤ ਤੁਸੀਂ।"
+5,,,Participation Levels,ਭਾਗੀਦਾਰੀ ਦੇ ਪੱਧਰ
+6,,,"The levels are defined by an overall contributions in each initiative. To understand the criteria for earning badges, please select the initiative and language of your desire ","ਪੱਧਰ ਨੂੰ ਹਰੇਕ ਪਹਿਲ ਦੇ ਇੱਕ ਸਮੁੱਚੇ ਯੋਗਦਾਨ ਦੁਆਰਾ ਪਰਿਭਾਸ਼ਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਬੈਜ ਕਮਾਉਣ ਦੇ ਮਾਪਦੰਡਾਂ ਨੂੰ ਸਮਝਣ ਲਈ, ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਇੱਛਾ ਦੀ ਪਹਿਲ ਅਤੇ ਭਾਸ਼ਾ ਦੀ ਚੋਣ ਕਰੋ।"
+7,,,Contribution,ਯੋਗਦਾਨ
+8,,,Valiations,ਤਬਦੀਲੀਆਂ
+10,,,Contributions /Validation,ਯੋਗਦਾਨ / ਪ੍ਰਮਾਣਿਕਤਾ
+13,,,5 data records,5 ਡਾਟਾ ਰਿਕਾਰਡ
+16,,,50 data records,50 ਡਾਟਾ ਰਿਕਾਰਡ
+19,,,100 data records,100 ਡਾਟਾ ਰਿਕਾਰਡ
+22,,,200 data records,200 ਡਾਟਾ ਰਿਕਾਰਡ
+25,,,Please note that your levels and badges may take upto 48hrs to update. Your contribution will need to be validated before confirming the badge/certificate. Please keep contributing actively to stand a chance to get recognised.,ਕਿਰਪਾ ਕਰਕੇ ਯਾਦ ਰੱਖੋ ਕਿ ਤੁਹਾਡੇ ਪੱਧਰਾਂ ਅਤੇ ਬੈਜ ਨੂੰ ਅਪਡੇਟ ਕਰਨ ਲਈ 48 ਘੰਟੇ ਲੱਗ ਸਕਦੇ ਹਨI ਬੈਜ / ਸਰਟੀਫਿਕੇਟ ਦੀ ਪੁਸ਼ਟੀ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਤੁਹਾਡੇ ਯੋਗਦਾਨ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਦੀ ਜ਼ਰੂਰਤ ਹੋਵੇਗੀI ਕਿਰਪਾ ਕਰਕੇ ਮਾਨਤਾ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਇੱਕ ਮੌਕਾ ਬਣਨ ਲਈ ਸਰਗਰਮੀ ਨਾਲ ਯੋਗਦਾਨ ਪਾਉਂਦੇ ਰਹੋI
+0,,,Your Feedback,ਤੁਹਾਡਾ ਸੁਝਾਅ
+2,,,We would like to get your feedback to improve this platform,ਅਸੀਂ ਇਸ ਪਲੇਟਫਾਰਮ ਨੂੰ ਬਿਹਤਰ ਬਣਾਉਣ ਲਈ ਤੁਹਾਡੇ ਸੁਝਾਅ ਪ੍ਰਾਪਤ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹਾਂ
+4,,,Giving Feedback for?,ਲਈ ਫੀਡਬੈਕ ਦੇਣਾ ਹੈ?
+5,,,Bolo,ਬੋਲੋ
+6,,,Suno,ਸੁਣੋ
+7,,,Likho,ਲਿਖੋ
+8,,,Dekho,ਦੇਖੋ
+11,,,What is your opinion of this page ,ਇਸ ਪੇਜ ਬਾਰੇ ਤੁਹਾਡੀ ਕੀ ਰਾਇ ਹੈ
+14,,,Select a category,ਇੱਕ ਸ਼੍ਰੇਣੀ ਚੁਣੋ
+15,,,Suggestion,ਸੁਝਾਅ
+16,,,Complaint,ਸ਼ਿਕਾਇਤ
+17,,,Compliment,ਤਾਰੀਫ
+20,,,(optional),(ਵਿਕਲਪਿਕ)
+21,,,Type here...,ਇੱਥੇ ਟਾਈਪ ਕਰੋ ...
+1,,,Special characters are not allowed,ਵਿਸ਼ੇਸ਼ ਪਾਤਰਾਂ ਦੀ ਆਗਿਆ ਨਹੀਂ ਹੈ
+2,,,Input Field can not be empty,ਇਨਪੁਟ ਖੇਤਰ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦਾ
+3,,,Numbers are not allowed,ਨੰਬਰਾਂ ਦੀ ਆਗਿਆ ਨਹੀਂ ਹੈ
+0,,,Likho India,ਲਿਖੋ ਇੰਡੀਆ
+1,,,Help your language by translating text,ਟੈਕਸਟ ਦਾ ਅਨੁਵਾਦ ਕਰਕੇ ਆਪਣੀ ਭਾਸ਼ਾ ਦੀ ਮਦਦ ਕਰੋ
+2,,,Select the language pair for contribution,ਯੋਗਦਾਨ ਲਈ ਭਾਸ਼ਾ ਜੋੜੀ ਦੀ ਚੋਣ ਕਰੋ
+6,,,Translate,ਅਨੁਵਾਦ
+7,,,Translate and type the text,ਟੈਕਸਟ ਦਾ ਅਨੁਵਾਦ ਕਰੋ ਅਤੇ ਟਾਈਪ ਕਰੋ
+12,,,"Validate the translation, contributed by others",ਦੂਸਰੇ ਦੁਆਰਾ ਯੋਗਦਾਨ ਕੀਤਾ ਅਨੁਵਾਦ ਪ੍ਰਮਾਣਿਤ ਕਰੋ
+16,,,Contributions made to Likho India,ਲਿਖੋ ਇੰਡੀਆ ਵਿਚ ਯੋਗਦਾਨ ਪਾਇਆ
+19,,,y' Translations done,y 'ਅਨੁਵਾਦ ਹੋ ਗਏ
+20,,,y' Translations validated,y 'ਅਨੁਵਾਦ ਪ੍ਰਮਾਣਿਤ ਹਨ
+24,,,Total translations,ਕੁੱਲ ਅਨੁਵਾਦ
+25,,,Number of translations,ਅਨੁਵਾਦ ਦੀ ਗਿਣਤੀ
+4,,,From,ਤੋਂ
+5,,,To,ਨੂੰ
+6,,,Select a language pair,ਇੱਕ ਭਾਸ਼ਾ ਜੋੜਾ ਚੁਣੋ
+10,,,X Language Pairs,ਐਕਸ ਭਾਸ਼ਾ ਜੋੜੀ
+12,,,X translations done,ਐਕਸ ਅਨੁਵਾਦ ਹੋ ਗਏ
+13,,,X translations validated,ਐਕਸ ਅਨੁਵਾਦ ਪ੍ਰਮਾਣਿਤ
+17,,,Sentences,ਵਾਕ
+21,,,Translations done,ਅਨੁਵਾਦ ਹੋ ਗਏ
+22,,,Translations validated,ਅਨੁਵਾਦ ਪ੍ਰਮਾਣਿਤ
+23,,,Translated,ਅਨੁਵਾਦ
+24,,,Validated,ਪ੍ਰਮਾਣਿਤ
+29,,,People,ਲੋਕ
+0,,,Type the translation of the given text,ਦਿੱਤੇ ਪਾਠ ਦਾ ਅਨੁਵਾਦ ਟਾਈਪ ਕਰੋ
+11,,,Please type in your chosen language,ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਚੁਣੀ ਹੋਈ ਭਾਸ਼ਾ ਟਾਈਪ ਕਰੋ
+15,,,Recording will automatically stop after 'y' Seconds,ਰਿਕਾਰਡਿੰਗ ਆਪਣੇ ਆਪ 'y' ਸਕਿੰਟ ਬਾਅਦ ਬੰਦ ਹੋ ਜਾਵੇਗੀ
+17,,,Report Content,ਸਮੱਗਰੀ ਦੀ ਰਿਪੋਰਟ ਕਰੋ
+18,,,Help us understand what’s wrong with the sentence,ਸਾਡੀ ਇਹ ਸਮਝਣ ਵਿਚ ਸਹਾਇਤਾ ਕਰੋ ਕਿ ਵਾਕ ਵਿਚ ਕੀ ਗ਼ਲਤ ਹੈ
+19,,,Offensive,ਅਪਮਾਨਜਨਕ
+20,,,"Hateful / Discriminatory / Vulgar language, drugs promotion etc.","ਨਫ਼ਰਤ ਭਰੀ / ਵਿਤਕਰੇ ਵਾਲੀ / ਅਸ਼ੁੱਧ ਭਾਸ਼ਾ, ਨਸ਼ਿਆਂ ਨੂੰ ਉਤਸ਼ਾਹਿਤ ਕਰਨ ਆਦਿ."
+21,,,Others,ਹੋਰ
+22,,,Please specify the reason (optional),ਕ੍ਰਿਪਾ ਕਰਕੇ ਕਾਰਨ ਦੱਸੋ (ਵਿਕਲਪਿਕ)
+25,,,Thank you for contributing,ਯੋਗਦਾਨ ਲਈ ਧੰਨਵਾਦ
+11,,,Is the translation correct?,ਕੀ ਅਨੁਵਾਦ ਸਹੀ ਹੈ?
+1,,,Thank you for contributing to Likho India!,ਲਿਖੋ ਇੰਡੀਆ ਵਿਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ!
+19,,,You’ve won a Bronze/Silver/Gold/Platinum Badge for contributing to Likho India.,ਲਿਖੋ ਇੰਡੀਆ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਤੁਸੀਂ ਇੱਕ ਕਾਂਸੀ / ਸਿਲਵਰ / ਗੋਲਡ / ਪਲੈਟੀਨਮ ਬੈਜ ਜਿੱਤਿਆ ਹੈ।
+20,,,Translated X sentences in [Language],[ਭਾਸ਼ਾ] ਵਿਚ ਅਨੁਵਾਦਿਤ X ਵਾਕ
+1,,,"Earn badges or certificate by contributing to Likho India. Translate a sentence in language of your choice. Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Likho India is in the diversity of the people i.e. YOU.","ਲਿਖੋ ਇੰਡੀਆ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਕੇ ਬੈਜ ਜਾਂ ਸਰਟੀਫਿਕੇਟ ਕਮਾਓ। ਆਪਣੀ ਪਸੰਦ ਦੀ ਭਾਸ਼ਾ ਵਿੱਚ ਇੱਕ ਵਾਕ ਦਾ ਅਨੁਵਾਦ ਕਰੋ । ਆਪਣੇ ਸਮਾਜਿਕ ਚੱਕਰ ਵਿੱਚ ਬੈਜਾਂ ਨੂੰ ਸਾਂਝਾ ਕਰੋ, ਆਪਣੀ ਭਾਸ਼ਾ ਕਮਿਊਨੀਟੀ ਦਾ ਨਿਰਮਾਣ ਕਰੋ, ਆਪਣੇ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰ ਨੂੰ ਇਸਦੇ ਲਈ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਪ੍ਰੇਰਿਤ ਕਰੋ। ਲਿਖੋ ਇੰਡੀਆ ਦੀ ਤਾਕਤ ਲੋਕਾਂ ਦੀ ਵਿਭਿੰਨਤਾ ਵਿੱਚ ਹੈ ਅਰਥਾਤ ਤੁਸੀਂ।"
+4,,,The levels defined by an overall contributions on Likho India. Please see the criteria that defines different levels below,ਲਿਖੋ ਇੰਡੀਆ ਦੇ ਸਮੁੱਚੇ ਯੋਗਦਾਨ ਦੁਆਰਾ ਨਿਰਧਾਰਤ ਪੱਧਰ। ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਮਾਪਦੰਡ ਵੇਖੋ ਜੋ ਹੇਠਾਂ ਵੱਖੋ ਵੱਖਰੇ ਪੱਧਰਾਂ ਨੂੰ ਪਰਿਭਾਸ਼ਤ ਕਰਦਾ ਹੈ
+6,,,Contributions (Translating),ਯੋਗਦਾਨ (ਅਨੁਵਾਦ)
+9,,,Translating : 5 sentences,ਅਨੁਵਾਦ: 5 ਵਾਕ
+12,,,Translating : 50 sentences,ਅਨੁਵਾਦ: 50 ਵਾਕ
+15,,,Translating : 100 sentences,ਅਨੁਵਾਦ: 100 ਵਾਕ
+18,,,Translating : 200 sentences,ਅਨੁਵਾਦ: 200 ਵਾਕ
+21,,,"Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but will go through validation through Likho crowdsourcing initiative. Please remain an active contributor to stand a chance to get recognised by the Ministry of Electronics and Information Technology.","ਕਿਰਪਾ ਕਰਕੇ ਯਾਦ ਰੱਖੋ ਕਿ ਤੁਹਾਡੇ ਪੱਧਰਾਂ ਅਤੇ ਬੈਜ ਨੂੰ ਅਪਡੇਟ ਕਰਨ ਲਈ 48 ਘੰਟੇ ਲੱਗ ਸਕਦੇ ਹਨ। ਤੁਹਾਡੇ ਯੋਗਦਾਨ ਦੀ ਮਿਆਦ ਖਤਮ ਨਹੀਂ ਹੋਈ, ਪਰ ਕ੍ਰਾਊਡਸੋਰਸਿੰਗ ਪਹਿਲਕਦਮੀ ਦੁਆਰਾ ਪ੍ਰਮਾਣਿਕਤਾ ਦੁਆਰਾ ਲੰਘੇਗੀ। ਕਿਰਪਾ ਕਰਕੇ ਇਲੈਕਟ੍ਰਾਨਿਕਸ ਅਤੇ ਸੂਚਨਾ ਟੈਕਨਾਲੋਜੀ ਮੰਤਰਾਲੇ ਦੁਆਰਾ ਮਾਨਤਾ ਪ੍ਰਾਪਤ ਕਰਨ ਦਾ ਮੌਕਾ ਖੜਾ ਕਰਨ ਲਈ ਇੱਕ ਸਰਗਰਮ ਯੋਗਦਾਨ ਪਾਉਣ ਵਾਲੇ ਬਣੋ।"
+25,,,"Earn badges or certificate by contributing to Likho India.  Validate the sentence that is translated in your desired language.  Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Likho India is in the diversity of the people i.e. YOU.","ਲਿਖੋ ਇੰਡੀਆ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਕੇ ਬੈਜ ਜਾਂ ਸਰਟੀਫਿਕੇਟ ਕਮਾਓ। ਆਪਣੀ ਮਨਭਾਉਂਦੀ ਭਾਸ਼ਾ ਵਿੱਚ ਅਨੁਵਾਦ ਕੀਤੇ ਗਏ ਵਾਕ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ। ਆਪਣੇ ਸਮਾਜਿਕ ਚੱਕਰ ਵਿੱਚ ਬੈਜਾਂ ਨੂੰ ਸਾਂਝਾ ਕਰੋ, ਆਪਣੀ ਭਾਸ਼ਾ ਕਮਿਊਨੀਟੀ  ਦਾ ਨਿਰਮਾਣ ਕਰੋ, ਆਪਣੇ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰ ਨੂੰ ਇਸਦੇ ਲਈ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਪ੍ਰੇਰਿਤ ਕਰੋ। ਲਿਖੋ  ਇੰਡੀਆ ਦੀ ਤਾਕਤ ਲੋਕਾਂ ਦੀ ਵਿਭਿੰਨਤਾ ਵਿੱਚ ਹੈ ਅਰਥਾਤ ਤੁਸੀਂ।"
+28,,,The levels defined by an overall validations on Likho India. Please see the criteria that defines different levels below:,ਲਿਖੋ ਇੰਡੀਆ 'ਤੇ ਸਮੁੱਚੀ ਪ੍ਰਮਾਣਿਕਤਾ ਦੁਆਰਾ ਦਰਸਾਏ ਗਏ ਪੱਧਰ। ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਮਾਪਦੰਡ ਵੇਖੋ ਜੋ ਹੇਠਾਂ ਵੱਖੋ ਵੱਖਰੇ ਪੱਧਰਾਂ ਨੂੰ ਪ੍ਰਭਾਸ਼ਿਤ ਕਰਦੇ ਹਨ:
+0,,,Suno India,ਸੁਨੋ ਇੰਡੀਆ
+1,,,Help your language by transcribing audio into text,ਆਡੀਓ ਨੂੰ ਟੈਕਸਟ ਵਿੱਚ ਲਿਖ ਕੇ ਆਪਣੀ ਭਾਸ਼ਾ ਦੀ ਸਹਾਇਤਾ ਕਰੋ
+2,,,Select the language for contribution,ਯੋਗਦਾਨ ਲਈ ਭਾਸ਼ਾ ਦੀ ਚੋਣ ਕਰੋ
+3,,,Show All,ਸਾਰੇ ਦਿਖਾਓ
+5,,,Transcribe,ਪ੍ਰਤੀਲਿਪੀ
+6,,,Type what you hear,ਜੋ ਤੁਸੀਂ ਸੁਣਦੇ ਹੋ ਉਹ ਟਾਈਪ ਕਰੋ
+8,,,Not collecting contributions for selected language,ਚੁਣੀ ਗਈ ਭਾਸ਼ਾ ਲਈ ਯੋਗਦਾਨ ਇਕੱਤਰ ਨਹੀਂ ਕਰਨਾ
+10,,,Validate,ਪੜਤਾਲ
+11,,,"Validate text, transcribed by others, as per the audio","ਆਡੀਓ ਦੇ ਅਨੁਸਾਰ, ਟੈਕਸਟ ਨੂੰ ਦੂਜਿਆਂ ਦੁਆਰਾ ਪ੍ਰਤੀਲਿਖਤ ਕਰੋ"
+13,,,No validation data available for selected language,ਚੁਣੀ ਭਾਸ਼ਾ ਲਈ ਕੋਈ ਪ੍ਰਮਾਣਿਕਤਾ ਡੇਟਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ
+15,,,Contributions made to Suno India,ਸੁਨੋ ਇੰਡੀਆ ਲਈ ਯੋਗਦਾਨ
+18,,,0h 0m 0s Hrs transcribed,0 ਘੰਟੇ 0 ਮੀ 0 ਸ ਘੰਟਾ ਪ੍ਰਤੀਲਿਪੀ
+19,,,0h 0m 0s Hrs validated,0 ਘੰਟੇ 0 ਮੀ 0 ਸ ਘੰਟਾ ਪ੍ਰਮਾਣਿਤ
+23,,,Hours transcribed and validated,ਘੰਟੇ ਪ੍ਰਤੀਲਿਪੀ ਅਤੇ ਪ੍ਰਮਾਣਿਤ
+24,,,x mins,x ਮਿੰਟ
+25,,,x hrs,x ਘੰਟੇ
+27,,,Your selected language,ਤੁਹਾਡੀ ਚੁਣੀ ਹੋਈ ਭਾਸ਼ਾ
+28,,,Top languages,ਚੋਟੀ ਦੀਆਂ ਭਾਸ਼ਾਵਾਂ
+29,,,VIEW ALL DETAILS,ਸਾਰੇ ਵੇਰਵੇ ਵੇਖੋ
+30,,,VIEW DASHBOARD,ਡੈਸ਼ਬੋਰਡ ਵੇਖੋ
+2,,,Home,ਘਰ
+3,,,ALL Languages,ਸਾਰੀਆਂ ਭਾਸ਼ਾਵਾਂ
+4,,,Select a language,ਇੱਕ ਭਾਸ਼ਾ ਚੁਣੋ
+5,,,"Data Last Updated: dd-mm-yyyy, hh:mm:ss pm","ਡੇਟਾ ਆਖਰੀ ਵਾਰ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ: dd-mm-yyy, hh: mm: ss pm"
+6,,,"Data Last Updated: dd-mm-yyyy, hh:mm:ss am","ਡੇਟਾ ਆਖਰੀ ਵਾਰ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ: dd-mm-yyy, hh: mm: ss am"
+8,,,X Languages,ਐਕਸ ਭਾਸ਼ਾ
+9,,,X People participated,ਐਕਸ ਲੋਕਾਂ ਨੇ ਹਿੱਸਾ ਲਿਆ
+10,,,X Hrs transcribed,ਐਕਸ ਘੰਟਾ ਪ੍ਰਤੀਲਿਪੀ
+11,,,X Hrs validated,ਐਕਸ ਘੰਟੇ ਪ੍ਰਮਾਣਿਤ
+13,,,Progress Chart,ਪ੍ਰਗਤੀ ਚਾਰਟ
+15,,,Number of hours,ਘੰਟੇ ਦੀ ਗਿਣਤੀ
+16,,,Time,ਸਮਾਂ
+17,,,Monthly,ਮਾਸਿਕ
+18,,,Quarterly,ਤਿਮਾਹੀ
+19,,,Hrs transcribed,ਘੰਟਾ
+20,,,Hrs validated,ਘੰਟੇ ਪ੍ਰਮਾਣਿਤ
+21,,,Transcribed: X hrs  X mins  X secs,ਪ੍ਰਤੀਲਿਪੀ: ਐਕਸ ਘੰਟਾ ਐਕਸ ਮਿੰਟ ਐਕਸ ਸਕਿੰਟ
+22,,,Validated: X hrs X mins X secs,ਪ੍ਰਮਾਣਿਤ: ਐਕਸ ਘੰਟਾ ਐਕਸ ਮਿੰਟ ਐਕਸ ਸਕਿੰਟ
+23,,,MMM XX,ਐਮ ਐਮ ਐਮ ਐਕਸ ਐਕਸ
+25,,,State wise distribution,ਰਾਜ ਦੀ ਵੰਡ
+27,,,<Name of the individual states>,<ਵਿਅਕਤੀਗਤ ਰਾਜਾਂ ਦਾ ਨਾਮ>
+28,,,Hrs Validated: X,ਘੰਟੇ ਪ੍ਰਮਾਣਿਤ: ਐਕਸ
+29,,,Hrs Transcribed: X,ਘੰਟਿਆਂ ਦਾ ਹਵਾਲਾ: ਐਕਸ
+30,,,X people,ਐਕਸ ਲੋਕ
+32,,,Data last updated on,ਡੇਟਾ ਨੂੰ ਆਖਰੀ ਵਾਰ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ
+0,,,Speaker Details,ਸਪੀਕਰ ਦਾ ਵੇਰਵਾ
+1,,,All the fields are optional,ਸਾਰੇ ਖੇਤਰ ਵਿਕਲਪਿਕ ਹਨ
+2,,,Not You? Change User,ਤੁਸੀਂ ਨਹੀ? ਉਪਯੋਗਕਰਤਾ ਬਦਲੋ
+3,,,Username,ਉਪਯੋਗਕਰਤਾ ਨਾਮ
+4,,,Enter preferred Username,ਪਸੰਦੀਦਾ ਉਪਯੋਗਕਰਤਾ ਨਾਮ ਦਰਜ ਕਰੋ
+5,,,Please enter a username that is within 12 characters,ਕਿਰਪਾ ਕਰਕੇ ਉਪਯੋਗਕਰਤਾ ਨਾਮ ਦਾਖਲ ਕਰੋ ਜੋ 12 ਅੱਖਰਾਂ ਦੇ ਵਿੱਚਕਾਰ ਹੋਵੇ
+7,,,By proceeding ahead you agree to the Terms and Conditions,ਅੱਗੇ ਵਧਦਿਆਂ ਤੁਸੀਂ ਨਿਯਮਾਂ ਅਤੇ ਸ਼ਰਤਾਂ ਨਾਲ ਸਹਿਮਤ ਹੋ
+8,,,LET'S GO,ਅੱਗੇ ਚਲਦੇ ਹਾਂ
+1,,,Thank you for contributing to Suno India!,ਸੁਨੋ ਇੰਡੀਆ ਵਿਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ!
+12,,,Contribute/Validate x sentences to unlock your 1st Badge.,ਆਪਣੇ ਪਹਿਲੇ ਬੈਜ ਨੂੰ ਅਨਲੌਕ ਕਰਨ ਲਈ x ਵਾਕਾਂ ਦਾ ਯੋਗਦਾਨ/ਪੜਤਾਲ ਦਿਓ ।
+19,,,You’ve won a Bronze/Silver/Gold/Platinum Badge for contributing to Suno India.,ਸੁਨੋ ਇੰਡੀਆ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਤੁਸੀਂ ਇੱਕ ਕਾਂਸੀ / ਸਿਲਵਰ / ਗੋਲਡ / ਪਲੈਟੀਨਮ ਬੈਜ ਜਿੱਤਿਆ ਹੈ।
+20,,,Transcribed X sentences in [Language],[ਭਾਸ਼ਾ] ਵਿਚ ਲਿਖਤੀ X ਵਾਕ
+0,,,Type the text as you hear the audio,ਜਦੋਂ ਤੁਸੀਂ ਆਡੀਓ ਸੁਣਦੇ ਹੋ ਤਾਂ ਟੈਕਸਟ ਟਾਈਪ ਕਰੋ
+2,,,Add Text,ਟੈਕਸਟ ਸ਼ਾਮਲ ਕਰੋ
+3,,,Start Typing here,ਇਥੇ ਟਾਈਪਿੰਗ ਸ਼ੁਰੂ ਕਰੋ
+14,,,Audio recording is too small. Please Re-record,ਆਡੀਓ ਰਿਕਾਰਡਿੰਗ ਬਹੁਤ ਛੋਟੀ ਹੈ। ਦੁਬਾਰਾ ਰਿਕਾਰਡ ਕਰੋ ਜੀ
+16,,,Congratulations! You have contributed a batch of your voice!,ਵਧਾਈਆਂ! ਤੁਸੀਂ ਆਪਣੀ ਆਵਾਜ਼ ਦੇ ਸਮੂਹ ਦਾ ਯੋਗਦਾਨ ਦਿੱਤਾ ਹੈ!
+18,,,Recording will automatically stop after y Seconds,ਰਿਕਾਰਡਿੰਗ ਆਪਣੇ ਆਪ ਵਿੱਚ y ਸਕਿੰਟ ਬਾਅਦ ਬੰਦ ਹੋ ਜਾਵੇਗੀ
+0,,,Back,ਵਾਪਸ
+1,,,Report,ਰਿਪੋਰਟ
+2,,,Test your Speaker,ਆਪਣੇ ਸਪੀਕਰ ਦੀ ਜਾਂਚ ਕਰੋ
+3,,,Needs change,ਤਬਦੀਲੀ ਦੀ ਜ਼ਰੂਰਤ ਹੈ
+4,,,Correct,ਸਹੀ
+5,,,Play / Pause / Resume / Replay,ਚਲਾਓ / ਰੋਕੋ / ਮੁੜ ਚਾਲੂ / ਦੁਬਾਰਾ ਚਲਾਓ
+6,,,Skip,ਛੱਡੋ
+8,,,Get Chrome extension to type in any language you choose,ਆਪਣੀ ਪਸੰਦ ਦੀ ਕਿਸੇ ਵੀ ਭਾਸ਼ਾ ਵਿੱਚ ਟਾਈਪ ਕਰਨ ਲਈ ਕਰੋਮ ਐਕਸਟੈਂਸ਼ਨ ਪ੍ਰਾਪਤ ਕਰੋ
+9,,,Install Now,ਹੁਣੇ ਸਥਾਪਿਤ ਕਰੋ
+10,,,Watch the Video,ਵੀਡੀਓ ਦੇਖੋ
+11,,,Watch the Phonetic Keyboard installation instructions,ਫੋਨੈਟਿਕ ਕੀਬੋਰਡ ਇੰਸਟਾਲੇਸ਼ਨ ਨਿਰਦੇਸ਼ ਦੇਖੋ
+13,,,Does the audio match the text?,ਕੀ ਆਡੀਓ ਟੈਕਸਟ ਨਾਲ ਮੇਲ ਖਾਂਦਾ ਹੈ?
+15,,,Original Text,ਅਸਲ ਟੈਕਸਟ
+16,,,Your Edit,ਤੁਹਾਡਾ ਸੋਧ
+17,,,Virtual Keyboard,ਵਰਚੁਅਲ ਕੀਬੋਰਡ
+18,,,Cancel,ਰੱਦ ਕਰੋ
+19,,,Submit,ਜਮ੍ਹਾਂ ਕਰੋ
+1,,,"Earn badges or certificate by contributing to Suno India. Transcribe a sentence in language of your choice. Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Suno India is in the diversity of the people i.e. YOU.","ਸੁਨੋ ਇੰਡੀਆ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਕੇ ਬੈਜ ਜਾਂ ਸਰਟੀਫਿਕੇਟ ਕਮਾਓ। ਆਪਣੀ ਪਸੰਦ ਦੀ ਭਾਸ਼ਾ ਵਿੱਚ ਇੱਕ ਵਾਕ ਦਾ ਅਨੁਵਾਦ ਕਰੋ। ਆਪਣੇ ਸਮਾਜਿਕ ਚੱਕਰ ਵਿੱਚ ਬੈਜਾਂ ਨੂੰ ਸਾਂਝਾ ਕਰੋ, ਆਪਣੀ ਭਾਸ਼ਾ ਕਮਿਉਨਿਟੀ ਦਾ ਨਿਰਮਾਣ ਕਰੋ, ਆਪਣੇ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰ ਨੂੰ ਇਸਦੇ ਲਈ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਪ੍ਰੇਰਿਤ ਕਰੋ। ਸੁਨੋ ਇੰਡੀਆ ਦੀ ਤਾਕਤ ਲੋਕਾਂ ਦੀ ਵੰਨ-ਸੁਵੰਨਤਾ ਵਿੱਚ ਹੈ ਅਰਥਾਤ ਤੁਸੀਂ।"
+4,,,The levels defined by an overall contributions on Suno India. Please see the criteria that defines different levels below,ਸੁਨੋ ਇੰਡੀਆ ਦੇ ਸਮੁੱਚੇ ਯੋਗਦਾਨ ਦੁਆਰਾ ਨਿਰਧਾਰਤ ਪੱਧਰ। ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਮਾਪਦੰਡ ਵੇਖੋ ਜੋ ਹੇਠਾਂ ਵੱਖੋ ਵੱਖਰੇ ਪੱਧਰਾਂ ਨੂੰ ਪਰਿਭਾਸ਼ਤ ਕਰਦਾ ਹੈ
+6,,,Contributions (Transcribing),ਯੋਗਦਾਨ (ਲਿਖਣਾ)
+9,,,Transcribing : 5 sentences,ਪ੍ਰਤੀਲਿਪੀ: 5 ਵਾਕ
+12,,,Transcribing : 50 sentences,ਪ੍ਰਤੀਲਿਪੀ: 50 ਵਾਕ
+15,,,Transcribing : 100 sentences,ਪ੍ਰਤੀਲਿਪੀ: 100 ਵਾਕ
+18,,,Transcribing : 200 sentences,ਪ੍ਰਤੀਲਿਪੀ: 200 ਵਾਕ
+21,,,"Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but will go through validation through Dekho crowdsourcing initiative. Please remain an active contributor to stand a chance to get recognised by the Ministry of Electronics and Information Technology.","ਕਿਰਪਾ ਕਰਕੇ ਯਾਦ ਰੱਖੋ ਕਿ ਤੁਹਾਡੇ ਪੱਧਰਾਂ ਅਤੇ ਬੈਜ ਨੂੰ ਅਪਡੇਟ ਕਰਨ ਲਈ 48 ਘੰਟੇ ਲੱਗ ਸਕਦੇ ਹਨ । ਤੁਹਾਡੇ ਯੋਗਦਾਨ ਦੀ ਮਿਆਦ ਖਤਮ ਨਹੀਂ ਹੋਈ, ਲੇਕਿਨ ਦੇਖੋ ਕ੍ਰਾਊਡਸੋਰਸਿੰਗ ਪਹਿਲਕਦਮੀ ਦੁਆਰਾ ਪ੍ਰਮਾਣਿਕਤਾ ਦੁਆਰਾ ਲੰਘੇਗੀ। ਕਿਰਪਾ ਕਰਕੇ ਇਲੈਕਟ੍ਰਾਨਿਕਸ ਅਤੇ ਸੂਚਨਾ ਟੈਕਨਾਲੋਜੀ ਮੰਤਰਾਲੇ ਦੁਆਰਾ ਮਾਨਤਾ ਪ੍ਰਾਪਤ ਕਰਨ ਦਾ ਮੌਕਾ ਖੜਾ ਕਰਨ ਲਈ ਇੱਕ ਸਰਗਰਮ ਯੋਗਦਾਨ ਪਾਉਣ ਵਾਲੇ ਬਣੋ।"
+24,,,Levels and Badging,ਪੱਧਰ ਅਤੇ ਬੈਜਿੰਗ
+25,,,"Earn badges or certificate by contributing to Suno India.  Validate the sentence that is transcibed in your desired language.  Share badges in your social circle, build your language community, motivate your friends and family to contribute towards the cause. The strength of Suno India is in the diversity of the people i.e. YOU.","ਸੁਨੋ ਇੰਡੀਆ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਕੇ ਬੈਜ ਜਾਂ ਸਰਟੀਫਿਕੇਟ ਕਮਾਓ। ਉਹ ਵਾਕ ਪ੍ਰਮਾਣਿਤ ਕਰੋ ਜੋ ਤੁਹਾਡੀ ਲੋੜੀਂਦੀ ਭਾਸ਼ਾ ਵਿੱਚ ਅਨੁਵਾਦ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਆਪਣੇ ਸਮਾਜਿਕ ਚੱਕਰ ਵਿੱਚ ਬੈਜਾਂ ਨੂੰ ਸਾਂਝਾ ਕਰੋ, ਆਪਣੀ ਭਾਸ਼ਾ ਕਮਿਉਨਿਟੀ ਦਾ ਨਿਰਮਾਣ ਕਰੋ, ਆਪਣੇ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰ ਨੂੰ ਇਸ ਮਕਸਦ ਲਈ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਪ੍ਰੇਰਿਤ ਕਰੋ। ਸੁਨੋ ਇੰਡੀਆ ਦੀ ਤਾਕਤ ਲੋਕਾਂ ਦੀ ਵੰਨ-ਸੁਵੰਨਤਾ ਵਿੱਚ ਹੈ ਅਰਥਾਤ ਤੁਸੀਂ।"
+27,,,Contributor Levels,ਸਹਿਯੋਗੀ ਪੱਧਰ
+28,,,The levels defined by an overall validations on Suno India. Please see the criteria that defines different levels below:,ਸੁਨੋ ਇੰਡੀਆ 'ਤੇ ਸਮੁੱਚੀ ਪ੍ਰਮਾਣਿਕਤਾ ਦੁਆਰਾ ਦਰਸਾਏ ਗਏ ਪੱਧਰ। ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਮਾਪਦੰਡ ਵੇਖੋ ਜੋ ਹੇਠਾਂ ਵੱਖੋ ਵੱਖਰੇ ਪੱਧਰਾਂ ਨੂੰ ਪ੍ਰਭਾਸ਼ਿਤ ਕਰਦੇ ਹਨ:
+29,,,Level,ਪੱਧਰ
+30,,,Contributions (Validating),ਯੋਗਦਾਨ (ਪ੍ਰਮਾਣਿਤ)
+31,,,Badge,ਬੈਜ
+32,,,Level 1,ਪੱਧਰ 1
+33,,,Validating : 5 sentences,ਪ੍ਰਮਾਣਿਤ: 5 ਵਾਕ
+35,,,Level 2,ਪੱਧਰ 2
+36,,,Validating  : 50 sentences,ਪ੍ਰਮਾਣਿਤ: 50 ਵਾਕ
+38,,,Level 3,ਪੱਧਰ 3
+39,,,Validating : 100 sentences,ਪ੍ਰਮਾਣਿਤ ਕਰ ਰਿਹਾ ਹੈ: 100 ਵਾਕ
+41,,,Level 4,ਪੱਧਰ 4
+42,,,Validating : 200 sentences,ਪ੍ਰਮਾਣਿਤ ਕਰ ਰਿਹਾ ਹੈ: 200 ਵਾਕ
+45,,,"Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but will be validated. Please remain an active contributor to stand a chance to get recognised by the Ministry of Electronics and Information Technology.","ਕਿਰਪਾ ਕਰਕੇ ਯਾਦ ਰੱਖੋ ਕਿ ਤੁਹਾਡੇ ਪੱਧਰਾਂ ਅਤੇ ਬੈਜ ਨੂੰ ਅਪਡੇਟ ਕਰਨ ਲਈ 48 ਘੰਟੇ ਲੱਗ ਸਕਦੇ ਹਨ।ਤੁਹਾਡੇ ਯੋਗਦਾਨ ਦੀ ਮਿਆਦ ਖਤਮ ਨਹੀਂ ਹੋਈ, ਪਰ ਜਾਇਜ਼ ਹੋਵੇਗੀ। ਕਿਰਪਾ ਕਰਕੇ ਇਲੈਕਟ੍ਰਾਨਿਕਸ ਅਤੇ ਸੂਚਨਾ ਟੈਕਨਾਲੋਜੀ ਮੰਤਰਾਲੇ ਦੁਆਰਾ ਮਾਨਤਾ ਪ੍ਰਾਪਤ ਕਰਨ ਦਾ ਮੌਕਾ ਖੜਾ ਕਰਨ ਲਈ ਇੱਕ ਸਰਗਰਮ ਯੋਗਦਾਨ ਪਾਉਣ ਵਾਲੇ ਬਣੋ।"
+3,,,seconds,ਸਕਿੰਟ
+8,,,x recording(s) contributed,ਐਕਸ ਰਿਕਾਰਡਿੰਗ ਨੇ ਯੋਗਦਾਨ ਪਾਇਆ
+13,,,You’ve earned your Badge,ਤੁਸੀਂ ਆਪਣਾ ਬੈਜ ਕਮਾਇਆ ਹੈ
+14,,,Contributor level achieved for contributing 5 sentences.,ਯੋਗਦਾਨ ਪਾਉਣ ਵਾਲਾ ਪੱਧਰ 5 ਵਾਕਾਂ ਨੂੰ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਪ੍ਰਾਪਤ ਕੀਤਾ।
+15,,,Your next goal is to reach x sentences to unlock your Silver Badge.,ਤੁਹਾਡਾ ਅਗਲਾ ਟੀਚਾ ਆਪਣੇ ਸਿਲਵਰ ਬੈਜ ਨੂੰ ਅਨਲੌਕ ਕਰਨ ਲਈ x ਵਾਕਾਂ ਤੱਕ ਪਹੁੰਚਣਾ ਹੈ।
+16,,,Your next goal is to reach x sentences to unlock your Gold Badge.,ਤੁਹਾਡਾ ਅਗਲਾ ਟੀਚਾ ਆਪਣੇ ਗੋਲਡ ਬੈਜ ਨੂੰ ਅਨਲੌਕ ਕਰਨ ਲਈ x ਵਾਕਾਂ ਤੱਕ ਪਹੁੰਚਣਾ ਹੈ।
+17,,,Your next goal is to reach x sentences to unlock your Platinum Badge.,ਤੁਹਾਡਾ ਅਗਲਾ ਟੀਚਾ ਆਪਣੇ ਪਲਾਟੀਨਮ ਬੈਜ ਨੂੰ ਅਨਲੌਕ ਕਰਨ ਲਈ x ਵਾਕਾਂ ਤੱਕ ਪਹੁੰਚਣਾ ਹੈ।
+18,,,National Language Translation Mission,ਰਾਸ਼ਟਰੀ ਭਾਸ਼ਾ ਅਨੁਵਾਦ ਮਿਸ਼ਨ
+21,,,Badge ID,ਬੈਜ ਆਈ ਡੀ
+23,,,You are driving the spirit of your language,ਤੁਸੀਂ ਆਪਣੀ ਭਾਸ਼ਾ ਦੀ ਭਾਵਨਾ ਨੂੰ ਚਲਾ ਰਹੇ ਹੋ
+27,,,x' sentence(s) validated,x 'ਵਾਕਾਂ ਦੀ ਪੁਸ਼ਟੀ ਕੀਤੀ
+30,,,You’ve earned your Bronze Badge,ਤੁਸੀਂ ਆਪਣਾ ਕਾਂਸੀ ਦਾ ਬੈਜ ਕਮਾਇਆ ਹੈ
+31,,,You’ve earned your Silver Badge,ਤੁਸੀਂ ਆਪਣਾ ਸਿਲਵਰ ਬੈਜ ਕਮਾਇਆ ਹੈ
+32,,,You’ve earned your Gold Badge,ਤੁਸੀਂ ਆਪਣਾ ਗੋਲਡ ਬੈਜ ਕਮਾਇਆ ਹੈ
+33,,,You’ve earned your Platinum Badge,ਤੁਸੀਂ ਆਪਣਾ ਪਲੈਟੀਨਮ ਬੈਜ ਕਮਾਇਆ ਹੈ
+34,,,Bronze Contributor level achieved for validating x sentences.,ਕਾਂ ਨੂੰ ਯੋਗਦਾਨ ਪਾਉਣ ਵਾਲਾ ਪੱਧਰ x ਵਾਕਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਪ੍ਰਾਪਤ ਕੀਤਾ।
+35,,,Silver Contributor level achieved for validating x sentences.,X ਵਾਕਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਸਿਲਵਰ ਕੰਟਰੀਬਿਊਟਰ ਪੱਧਰ।
+36,,,Gold Contributor level achieved for validating x sentences.,X ਵਾਕਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਸੋਨੇ ਦਾ ਯੋਗਦਾਨ ਕਰਨ ਵਾਲਾ ਪੱਧਰ ਪ੍ਰਾਪਤ ਕੀਤਾ।
+37,,,Platinum Contributor level achieved for validating x sentences.,X ਵਾਕਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਪਲੇਟਿਨਮ ਸਹਿਯੋਗੀ ਪੱਧਰ ਪ੍ਰਾਪਤ ਕੀਤਾ।
+41,,,Thank you for your enthusiasm to contribute your voice.,ਆਪਣੀ ਆਵਾਜ਼ ਵਿਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਤੁਹਾਡੇ ਉਤਸ਼ਾਹ ਲਈ ਧੰਨਵਾਦ।
+44,,,Contribute for your language!,ਆਪਣੀ ਭਾਸ਼ਾ ਲਈ ਯੋਗਦਾਨ ਦਿਓ!
+45,,,Thank you for contributing to Bolo India!,ਬੋਲੋ ਇੰਡੀਆ ਵਿਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ!
+47,,,You have got us 2 contributions closer to our monthly goal,ਤੁਸੀਂ ਸਾਡੇ ਮਾਸਿਕ ਟੀਚੇ ਦੇ ਨੇੜੇ ਸਾਡੇ ਲਈ 2 ਯੋਗਦਾਨ ਪਾਏ ਹਨ
+48,,,X to go!,ਐਕਸ ਜਾਣ ਲਈ!
+50,,,Participate to see [language] in top 3,ਚੋਟੀ ਦੇ 3 ਵਿੱਚ [ਭਾਸ਼ਾ] ਨੂੰ ਵੇਖਣ ਲਈ ਭਾਗ ਲਓ
+51,,,Participations,ਭਾਗੀਦਾਰੀ
+52,,,Language vs top 3 languages,ਭਾਸ਼ਾ ਬਨਾਮ ਚੋਟੀ ਦੀਆਂ 3 ਭਾਸ਼ਾਵਾਂ
+54,,,Register to save and track your progress with your account,ਆਪਣੇ ਖਾਤੇ ਨਾਲ ਆਪਣੀ ਪ੍ਰਗਤੀ ਨੂੰ ਬਚਾਉਣ ਅਤੇ ਟਰੈਕ ਕਰਨ ਲਈ ਰਜਿਸਟਰ ਹੋਵੋ
+56,,,Contribute/Validate x hours to unlock your 1st Badge.,ਆਪਣੇ ਪਹਿਲੇ ਬੈਜ ਨੂੰ ਅਨਲੌਕ ਕਰਨ ਲਈ x ਘੰਟੇ ਯੋਗਦਾਨ ਦਿਓ / ਪ੍ਰਮਾਣਿਤ ਕਰੋ।
+57,,,More Details,ਹੋਰ ਜਾਣਕਾਰੀ
+63,,,You’ve won a Bronze/Silver/Gold/Platinum Badge for contributing to Bolo India.,ਬੋਲੋ ਇੰਡੀਆ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਤੁਸੀਂ ਇੱਕ ਕਾਂਸੀ / ਸਿਲਵਰ / ਗੋਲਡ / ਪਲੈਟੀਨਮ ਬੈਜ ਜਿੱਤਿਆ ਹੈ।
+64,,,Recorded X Hours/mins in [Language],[ਭਾਸ਼ਾ] ਵਿਚ X ਘੰਟੇ / ਮਿੰਟ ਰਿਕਾਰਡ ਕੀਤੇ
+65,,,One step closer to building a world class <dataset> for Indian languages,ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਲਈ ਵਿਸ਼ਵ ਪੱਧਰੀ <ਡੈਟਾਸੇਟ> ਬਣਾਉਣ ਦੇ ਇਕ ਕਦਮ ਦੇ ਨੇੜੇ
+67,,,Download,ਡਾਊਨਲੋਡ
+70,,,your badges,ਤੁਹਾਡੇ ਬੈਜ
+71,,,you are a [bronze/silver/gold/platinum] contributer,ਤੁਸੀਂ ਇੱਕ [ਕਾਂਸੀ / ਚਾਂਦੀ / ਸੋਨੇ / ਪਲੈਟੀਨਮ] ਦੇ ਯੋਗਦਾਨ ਹੋ
+72,,,Share,ਸਾਂਝਾ ਕਰੋ
+2,,,images,ਚਿੱਤਰ
+6,,,x image label(s) contributed,x ਚਿੱਤਰ ਲੇਬਲ ਦਾ ਯੋਗਦਾਨ
+7,,,You are just x images away from earning your Bronze Badge.,ਤੁਸੀਂ ਆਪਣੇ ਕਾਂਸੀ ਦੇ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਸਿਰਫ x ਚਿੱਤਰਾਂ ਤੋਂ ਦੂਰ ਹੋ।
+8,,,You are just x images away from earning your Silver Badge.,ਤੁਸੀਂ ਆਪਣੇ ਸਿਲਵਰ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਸਿਰਫ x ਚਿੱਤਰਾਂ ਤੋਂ ਦੂਰ ਹੋ।
+9,,,You are just x images away from earning your Gold Badge.,ਤੁਸੀਂ ਆਪਣੇ ਗੋਲਡ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਸਿਰਫ x ਚਿੱਤਰਾਂ ਤੋਂ ਦੂਰ ਹੋ।
+10,,,You are just x images away from earning your Platinum Badge.,ਤੁਸੀਂ ਆਪਣੇ ਪਲੈਟੀਨਮ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਸਿਰਫ x ਚਿੱਤਰਾਂ ਤੋਂ ਦੂਰ ਹੋ।
+14,,,Help your language achieve it’s goal of 10000 images. We know you can do more!,ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਦੀ 10000 ਪ੍ਰਤੀਬਿੰਬਾਂ ਦਾ ਟੀਚਾ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਸਹਾਇਤਾ ਕਰੋ।ਅਸੀਂ ਜਾਣਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਹੋਰ ਵੀ ਕਰ ਸਕਦੇ ਹੋ!
+19,,,x image label(s) validated,x ਚਿੱਤਰ ਲੇਬਲ ਪ੍ਰਮਾਣਿਤ
+22,,,Thank you for your enthusiasm to label the images.,ਚਿੱਤਰਾਂ ਨੂੰ ਲੇਬਲ ਕਰਨ ਲਈ ਤੁਹਾਡੇ ਉਤਸ਼ਾਹ ਲਈ ਧੰਨਵਾਦ।
+24,,,Back to Dekho India Home,ਵਾਪਸ ਦੇਖੋ ਇੰਡੀਆ ਹੋਮ ਤੇ ਵਾਪਸ ਜਾਓ
+26,,,Thank you for your enthusiasm to validate the image labels.,ਚਿੱਤਰ ਲੇਬਲ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਤੁਹਾਡੇ ਉਤਸ਼ਾਹ ਲਈ ਧੰਨਵਾਦ।
+2,,,Data Source,ਡਾਟਾ ਸਰੋਤ
+3,,,Source :,ਸਰੋਤ :
+4,,,"If you are the copyright holder of this data and believe it should not be used in the platform, please send us an email to <email> with evidence that you are indeed the copyright holder of this data.
+
+We will attempt to validate the same and remove the data from our platform within 15 days on a best effort basis.","“ਜੇ ਤੁਸੀਂ ਇਸ ਡੇਟਾ ਦੇ ਕਾਪੀਰਾਈਟ ਧਾਰਕ ਹੋ ਅਤੇ ਵਿਸ਼ਵਾਸ ਕਰਦੇ ਹੋ ਕਿ ਇਸ ਦੀ ਵਰਤੋਂ ਪਲੇਟਫਾਰਮ ਵਿੱਚ ਨਹੀਂ ਕੀਤੀ ਜਾਣੀ ਚਾਹੀਦੀ, ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਸਾਨੂੰ ਇੱਕ ਈਮੇਲ << ਈਮੇਲ> ਨੂੰ ਇਸ ਗੱਲ ਦੇ ਸਬੂਤ ਦੇ ਨਾਲ ਭੇਜੋ ਕਿ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਡੇਟਾ ਦੇ ਕਾਪੀਰਾਈਟ ਧਾਰਕ ਹੋ।"
+10,,,"Recording : 5 Sentences/
+Labelling: 5 Images
+Translating: 5 Sentences
+Transcribing: 5 Sentences
+
+Validating: 5 Sentences
+","ਰਿਕਾਰਡਿੰਗ: 5 ਸ਼ਬਦ /
+ਲੇਬਲਿੰਗ: 5 ਚਿੱਤਰ
+ਅਨੁਵਾਦ: 5 ਵਾਕ
+ਪ੍ਰਤੀਲਿਪੀ: 5 ਸ਼ਬਦ
+
+ਪ੍ਰਮਾਣਿਤ ਕਰ ਰਿਹਾ ਹੈ: 5 ਵਾਕ
+"
+11,,,Bronze,ਕਾਂਸੀ
+13,,,"Recording : 50 Sentences/
+Labelling: 50 Images
+Translating: 50 Sentences
+Transcribing: 50 Sentences
+
+Validating: 50 Sentences
+","ਰਿਕਾਰਡਿੰਗ: 50 ਸ਼ਬਦ /
+ਲੇਬਲਿੰਗ: 50 ਚਿੱਤਰ
+ਅਨੁਵਾਦ: 50 ਵਾਕ
+ਪ੍ਰਤੀਲਿਪੀ: 50 ਵਾਕ
+
+ਪ੍ਰਮਾਣਿਤ ਕਰਨਾ: 50 ਵਾਕ
+"
+14,,,Silver,ਸਿਲਵਰ
+16,,,"Recording : 100 Sentences/
+Labelling: 100 Images
+Translating: 100 Sentences
+Transcribing: 100 Sentences
+
+Validating: 100 Sentences","ਰਿਕਾਰਡਿੰਗ: 100 ਸ਼ਬਦ /
+ਲੇਬਲਿੰਗ: 100 ਚਿੱਤਰ
+ਅਨੁਵਾਦ: 100 ਵਾਕ
+ਪ੍ਰਤੀਲਿਪੀ: 100 ਵਾਕ
+
+ਪ੍ਰਮਾਣਿਤ ਕਰ ਰਿਹਾ ਹੈ: 100 ਵਾਕ "
+17,,,Gold,ਸੋਨਾ
+18,,,4,4
+19,,,"Recording : 200 Sentences/
+Labelling: 200 Images
+Translating: 200 Sentences
+Transcribing: 200 Sentences
+
+Validating: 200 Sentences
+
+","ਰਿਕਾਰਡਿੰਗ: 200 ਵਾਕ
+ਲੇਬਲਿੰਗ: 200 ਚਿੱਤਰ
+ਅਨੁਵਾਦ: 200 ਵਾਕ
+ਪ੍ਰਤੀਲਿਪੀ: 200 ਵਾਕ
+
+ਪ੍ਰਮਾਣਿਤ ਕਰਨਾ: 200 ਵਾਕ
+
+"
+20,,,Platinum,ਪਲੈਟੀਨਮ
+2,,,translations,ਅਨੁਵਾਦ
+14,,,Help your language pair achieve it’s goal of 10000 translations. We know you can do more!,ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਦੀ ਜੋੜੀ ਦੀ 10000 ਅਨੁਵਾਦਾਂ ਦਾ ਟੀਚਾ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਸਹਾਇਤਾ ਕਰੋ।ਅਸੀਂ ਜਾਣਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਹੋਰ ਵੀ ਕਰ ਸਕਦੇ ਹੋ!
+22,,,Thank you for your enthusiasm to translate the sentences.,ਵਾਕਾਂ ਦਾ ਅਨੁਵਾਦ ਕਰਨ ਲਈ ਤੁਹਾਡੇ ਉਤਸ਼ਾਹ ਲਈ ਧੰਨਵਾਦ।
+24,,,Back to Likho India Home,ਵਾਪਸ ਲੀਖੋ ਇੰਡੀਆ ਹੋਮ
+26,,,Thank you for your enthusiasm to validate the translations.,ਅਨੁਵਾਦਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਤੁਹਾਡੇ ਉਤਸ਼ਾਹ ਲਈ ਧੰਨਵਾਦ।
+0,,,Thank you for contributing!,ਯੋਗਦਾਨ ਲਈ ਧੰਨਵਾਦ!
+1,,,Your language and top 3 most contributed languages,ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਅਤੇ ਚੋਟੀ ਦੀਆਂ 3 ਸਭ ਤੋਂ ਵੱਧ ਯੋਗਦਾਨ ਵਾਲੀਆਂ ਭਾਸ਼ਾਵਾਂ
+2,,,hours,ਘੰਟੇ
+3,,,minutes,ਮਿੰਟ
+5,,,You are a champion,ਤੁਸੀਂ ਇੱਕ ਚੈਂਪੀਅਨ ਹੋ
+6,,,You took the first important step,ਤੁਸੀਂ ਪਹਿਲਾ ਮਹੱਤਵਪੂਰਣ ਕਦਮ ਚੁੱਕਿਆ
+7,,,x sentence(s) contributed,x ਵਾਕਾਂ ਨੇ ਯੋਗਦਾਨ ਪਾਇਆ
+8,,,You are just x sentences away from earning your Bronze Badge.,ਤੁਸੀਂ ਆਪਣੇ ਕਾਂਸੀ ਦਾ ਬੈਜ ਕਮਾਉਣ ਤੋਂ ਸਿਰਫ x ਵਾਕਾਂ ਤੋਂ ਦੂਰ ਹੋ।
+9,,,You are just x sentences away from earning your Silver Badge.,ਤੁਸੀਂ ਆਪਣੇ ਸਿਲਵਰ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਤੋਂ ਸਿਰਫ x ਵਾਕਾਂ ਤੋਂ ਦੂਰ ਹੋ।
+10,,,You are just x sentences away from earning your Gold Badge.,ਤੁਸੀਂ ਆਪਣਾ ਗੋਲਡ ਬੈਜ ਕਮਾਉਣ ਤੋਂ ਸਿਰਫ x ਵਾਕਾਂ ਤੋਂ ਦੂਰ ਹੋ।
+11,,,You are just x sentences away from earning your Platinum Badge.,ਤੁਸੀਂ ਆਪਣੇ ਪਲੈਟੀਨਮ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਸਿਰਫ x ਵਾਕਾਂ ਤੋਂ ਦੂਰ ਹੋ।
+12,,,Know More,ਹੋਰ ਜਾਣੋ
+13,,,Share it with your friends and family,ਇਸਨੂੰ ਆਪਣੇ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰ ਨਾਲ ਸਾਂਝਾ ਕਰੋ
+15,,,Help your language achieve it’s goal of 100 hrs. We know you can do more!,ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਦੀ 100 ਘੰਟੇ ਦਾ ਟੀਚਾ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਸਹਾਇਤਾ ਕਰੋ।ਅਸੀਂ ਜਾਣਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਹੋਰ ਵੀ ਕਰ ਸਕਦੇ ਹੋ!
+16,,,Contribute More,ਹੋਰ ਯੋਗਦਾਨ ਦਿਓ
+18,,,Come back again to hit your goal post,ਆਪਣੀ ਗੋਲ ਪੋਸਟ ਨੂੰ ਮਾਰਨ ਲਈ ਦੁਬਾਰਾ ਵਾਪਸ ਆਓ
+19,,,away from reaching your goal!,ਆਪਣੇ ਟੀਚੇ ਤੇ ਪਹੁੰਚਣ ਤੋਂ ਦੂਰ!
+21,,,Thank you for validating!,ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ!
+23,,,x sentence(s) validated,x ਵਾਕ ਪ੍ਰਮਾਣਿਤ
+24,,,Validate More,ਹੋਰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ
+26,,,Thank you for your enthusiasm to transcribe the recordings.,ਰਿਕਾਰਡਿੰਗਾਂ ਨੂੰ ਲਿਖਣ ਲਈ ਤੁਹਾਡੇ ਉਤਸ਼ਾਹ ਲਈ ਧੰਨਵਾਦ।
+27,,,We do not have any data in <y> language. Please try again later.,ਸਾਡੇ ਕੋਲ <y> ਭਾਸ਼ਾ ਵਿੱਚ ਕੋਈ ਡੇਟਾ ਨਹੀਂ ਹੈ। ਬਾਅਦ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ।
+28,,,Back to Suno India Home,ਸੁਨੋ ਇੰਡੀਆ ਹੋਮ ਵਾਪਸ
+30,,,Thank you for your enthusiasm to validate the recordings.,ਰਿਕਾਰਡਿੰਗ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਤੁਹਾਡੇ ਉਤਸ਼ਾਹ ਲਈ ਧੰਨਵਾਦ।
+0,,,Languages pairs,ਭਾਸ਼ਾਵਾਂ ਦੇ ਜੋੜ
+1,,,Your language pair and top 3 most contributed language pairs,ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਦੀ ਜੋੜੀ ਅਤੇ ਚੋਟੀ ਦੇ 3 ਸਭ ਤੋਂ ਵੱਧ ਯੋਗਦਾਨ ਪਾਉਣ ਵਾਲੀਆਂ ਭਾਸ਼ਾ ਜੋੜੀ
+2,,,Help us understand what’s wrong with the image labelled,ਸਾਡੀ ਇਹ ਸਮਝਣ ਵਿੱਚ ਸਹਾਇਤਾ ਕਰੋ ਕਿ ਲੇਬਲ ਵਾਲੇ ਚਿੱਤਰ ਵਿੱਚ ਕੀ ਗਲਤ ਹੈ
+3,,,Validate text as per the audio,ਆਡੀਓ ਦੇ ਅਨੁਸਾਰ ਟੈਕਸਟ ਨੂੰ ਪੜਤਾਲ ਕਰੋ
+4,,,Please select your feedback category,ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਫੀਡਬੈਕ ਸ਼੍ਰੇਣੀ ਦੀ ਚੋਣ ਕਰੋ
+5,,,Share your feedback below:,ਆਪਣੀ ਫੀਡਬੈਕ ਹੇਠਾਂ ਸਾਂਝਾ ਕਰੋ:
+6,,,You’ve earned your Bronze Bhasha Samarthak Badge,ਤੁਸੀਂ ਆਪਣਾ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕੀਤਾ ਹੈ
+7,,,You've earned your Silver Bhasha Samarthak Badge,ਤੁਸੀਂ ਆਪਣਾ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਕਮਾਇਆ ਹੈ
+8,,,You've earned your Gold Bhasha Samarthak Badge,ਤੁਸੀਂ ਆਪਣਾ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਕਮਾਇਆ ਹੈ
+9,,,You've earned your Platinum Bhasha Samarthak Badge,ਤੁਸੀਂ ਆਪਣਾ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਕਮਾਇਆ ਹੈ
+10,,,Help your language pair achieve it’s goal of <x> translations. We know you can do more!,"ਆਪਣੀ ਭਾਸ਼ਾ ਦੀ ਜੋੜੀ ਦੀ <span id=""language-hour-goal""></span> ਅਨੁਵਾਦਾਂ ਦਾ ਟੀਚਾ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਸਹਾਇਤਾ ਕਰੋ। ਅਸੀਂ ਜਾਣਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਹੋਰ ਵੀ ਕਰ ਸਕਦੇ ਹੋ!"
+11,,,Help your language achieve it’s goal of <x> images. We know you can do more!,"ਆਪਣੀ ਭਾਸ਼ਾ ਨੂੰ <span id=""language-hour-goal""></span> ਚਿੱਤਰਾਂ ਦਾ ਟੀਚਾ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਸਹਾਇਤਾ ਕਰੋ।ਅਸੀਂ ਜਾਣਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਹੋਰ ਵੀ ਕਰ ਸਕਦੇ ਹੋ!"
+12,,,Thank you for contributing.,ਯੋਗਦਾਨ ਲਈ ਧੰਨਵਾਦ।
+13,,,Test,ਟੈਸਟ
+14,,,Email,ਈ - ਮੇਲ
+15,,,Opt-out Notification,ਓਪਟ-ਆਊਟ ਨੋਟੀਫਿਕੇਸ਼ਨ
+16,,,Duration validated,ਅਵਧੀ ਪ੍ਰਮਾਣਿਤ
+17,,,Duration transcribed,ਅਵਧੀ ਪ੍ਰਤੀਲਿਪੀ
+18,,,Choose the initiative,ਪਹਿਲ ਦੀ ਚੋਣ ਕਰੋ
+19,,,Choose the language,ਭਾਸ਼ਾ ਚੁਣੋ
+20,,,Validations,ਪ੍ਰਮਾਣਿਕਤਾ
+21,,,Monthly Goal :,ਮਾਸਿਕ ਟੀਚਾ:
+22,,,Enrich your own language, ਆਪਣੀ ਭਾਸ਼ਾ ਨੂੰ ਭਰਪੂਰ ਬਣਾਓ
+23,,,"One platform, multiple crowdsourcing initiatives","ਇਕ ਪਲੇਟਫਾਰਮ, ਕਈ ਕਰਾਊਡ ਸੋਰਸ ਪਹਿਲ"
+24,,,Enrich your language by donating your voice,ਆਪਣੀ ਆਵਾਜ਼ ਦਾਨ ਕਰਕੇ ਆਪਣੀ ਭਾਸ਼ਾ ਨੂੰ ਭਰਪੂਰ ਬਣਾਓ
+25,,,Enrich your language by transcribing audio into text,ਆਡੀਓ ਨੂੰ ਟੈਕਸਟ ਵਿਚ ਤਬਦੀਲ ਕਰਕੇ ਆਪਣੀ ਭਾਸ਼ਾ ਨੂੰ ਭਰਪੂਰ ਬਣਾਓ
+26,,,Enrich your language by translating text,ਟੈਕਸਟ ਦਾ ਅਨੁਵਾਦ ਕਰਕੇ ਆਪਣੀ ਭਾਸ਼ਾ ਨੂੰ  ਭਰਪੂਰ ਬਣਾਓ
+27,,,Enrich your language by labelling images,ਚਿੱਤਰ ਲਗਾਉਣ ਨਾਲ ਆਪਣੀ ਭਾਸ਼ਾ ਨੂੰ ਭਰਪੂਰ ਬਣਾਓ
+28,,,Bhasha Samarthak Levels,ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਪੱਧਰ
+29,,,BhashaDaan: A crowdsourcing initiative for Indian languages,ਭਾਸ਼ਦਾਨ: ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਲਈ ਕਰਾਊਡ ਸੋਰਸ ਕਰਨ ਵਾਲੀ ਪਹਿਲ
+30,,,"Become a Bhasha Samarthak by contributing to Bolo India, Suno India, Likho India or Dekho India. Earn Bronze/Silver/Gold/Platinum Bhasha Samarthak Badges based on your contributions. Share them in your social circle, your language community, and motivate your friends and family to contribute to the cause.","ਬੋਲੋ ਇੰਡੀਆ, ਸੁਨੋ ਇੰਡੀਆ, ਲੀਖੋ ਇੰਡੀਆ ਜਾਂ ਦੇਖੋ ਇੰਡੀਆ ਵਿਚ ਯੋਗਦਾਨ ਪਾ ਕੇ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬਣੋ। ਆਪਣੇ ਯੋਗਦਾਨ ਦੇ ਅਧਾਰ ਤੇ ਕਾਂਸੀ / ਸਿਲਵਰ / ਗੋਲਡ / ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਕਮਾਓ. ਉਨ੍ਹਾਂ ਨੂੰ ਆਪਣੇ ਸਮਾਜਿਕ ਚੱਕਰ ਵਿੱਚ, ਆਪਣੀ ਭਾਸ਼ਾ ਦੇ ਭਾਈਚਾਰੇ ਵਿੱਚ ਸਾਂਝਾ ਕਰੋ ਅਤੇ ਆਪਣੇ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰ ਨੂੰ ਉਦੇਸ਼ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਪ੍ਰੇਰਿਤ ਕਰੋ।"
+31,,,"Become a Bhasha Samarthak by contributing to these initiatives. For details on how to earn Bhasha Samarthak Badges, please select the initiative and language of your choice.","ਇਨ੍ਹਾਂ ਪਹਿਲਕਦਮੀਆਂ ਵਿਚ ਯੋਗਦਾਨ ਪਾ ਕੇ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬਣੋ। ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜਾਂ ਨੂੰ ਕਿਵੇਂ ਕਮਾਉਣਾ ਹੈ ਇਸ ਬਾਰੇ ਜਾਣਕਾਰੀ ਲਈ, ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਪਸੰਦ ਦੀ ਪਹਿਲ ਅਤੇ ਭਾਸ਼ਾ ਦੀ ਚੋਣ ਕਰੋ।"
+32,,,Levels,ਪੱਧਰ
+33,,,Levels and badges may take upto 48 hours to update. Your contribution will be validated before confirming the badge. Please keep contributing actively to stand a chance to get recognised.,ਪੱਧਰ ਅਤੇ ਬੈਜ ਨੂੰ ਅਪਡੇਟ ਕਰਨ ਲਈ 48 ਘੰਟੇ ਲੱਗ ਸਕਦੇ ਹਨ। ਬੈਜ ਦੀ ਪੁਸ਼ਟੀ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਤੁਹਾਡਾ ਯੋਗਦਾਨ ਪ੍ਰਮਾਣਿਤ ਹੋਵੇਗਾ। ਕਿਰਪਾ ਕਰਕੇ ਮਾਨਤਾ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਇੱਕ ਮੌਕਾ ਬਣਨ ਲਈ ਸਰਗਰਮੀ ਨਾਲ ਯੋਗਦਾਨ ਦਿੰਦੇ ਰਹੋ।
+34,,,Duration recorded,ਅਵਧੀ ਦਰਜ ਕੀਤੀ ਗਈ
+35,,,Help to build an open repository of data to digitally enrich your language,ਆਪਣੀ ਭਾਸ਼ਾ ਨੂੰ ਡਿਜੀਟਲ ਰੂਪ ਨਾਲ ਭਰਪੂਰ ਕਰਨ ਲਈ ਡੈਟਾ ਦਾ ਖੁੱਲਾ ਭੰਡਾਰ ਬਣਾਉਣ ਵਿਚ ਸਹਾਇਤਾ ਕਰੋ
+36,,,Contribute and become a Bhasha Samarthak,ਯੋਗਦਾਨ ਪਾਓ ਅਤੇ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬਣੋ
+37,,,Bronze Bhasha Samarthak Badge,ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ
+38,,,Silver Bhasha Samarthak Badge,ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ
+39,,,Gold Bhasha Samarthak Badge,ਸੋਨਾ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ
+40,,,Platinum Bhasha Samarthak Badge,ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ
+41,,,You are enriching your language,ਤੁਸੀਂ ਆਪਣੀ ਭਾਸ਼ਾ ਨੂੰ ਭਰਪੂਰ ਬਣਾ ਰਹੇ ਹੋ
+42,,,You are just <x> recordings away from earning your Bronze Bhasha Samarthak Badge.,"ਤੁਸੀਂ ਸਿਰਫ <span id=""sentense_away_count""></span> ਰਿਕਾਰਡਿੰਗਜ਼ ਦੂਰ ਹੋ ਆਪਣਾ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਕਮਾਉਣ ਤੋਂ।"
+43,,,You are just <x> recordings away from earning your Gold Bhasha Samarthak Badge.,ਤੁਸੀਂ ਆਪਣੇ ਸੋਨਾ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਸਿਰਫ <x> ਰਿਕਾਰਡਿੰਗਜ਼ ਤੋਂ ਦੂਰ ਹੋ।
+44,,,You are just <x> recordings away from earning your Silver Bhasha Samarthak Badge.,ਤੁਸੀਂ ਆਪਣੇ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਤੋਂ ਸਿਰਫ <x> ਰਿਕਾਰਡਿੰਗਜ਼ ਤੋਂ ਦੂਰ ਹੋ।
+45,,,You are just <x> recordings away from earning your Platinum Bhasha Samarthak Badge.,ਤੁਸੀਂ ਆਪਣੇ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਸਿਰਫ <x> ਰਿਕਾਰਡਿੰਗਜ਼ ਦੂਰ ਹੋ।
+46,,,Bronze Bhasha Samarthak Badge earned for contributing <y> sentences.,"ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਨੇ <span id=""current_badge_count""></span> ਵਾਕਾਂ ਦਾ ਯੋਗਦਾਨ ਪਾਇਆ।"
+47,,,Gold Bhasha Samarthak Badge earned for contributing <y> sentences.,<y> ਵਾਕਾਂ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੇ ਕਮਾਈ ਕੀਤੀ।
+48,,,Silver Bhasha Samarthak Badge earned for contributing <y> sentences.,ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੇ <y> ਵਾਕਾਂ ਦੇ ਯੋਗਦਾਨ ਪਾਇਆ ।
+49,,,Platinum Bhasha Samarthak Badge earned for contributing <y> sentences.,ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੇ <y> ਵਾਕਾਂ ਦਾ ਯੋਗਦਾਨ ਪਾਇਆ।
+50,,,Your next goal is to reach <x> sentences to earn your Bronze Bhasha Samarthak Badge.,"ਤੁਹਾਡਾ ਅਗਲਾ ਟੀਚਾ ਹੈ <span id=""next_badge_count""></span> ਵਾਕਾਂ ਤੱਕ ਪਹੁੰਚਣਾ ਤੁਹਾਡੇ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ।"
+51,,,Your next goal is to reach <x> sentences to earn your Gold Bhasha Samarthak Badge. ,ਤੁਹਾਡਾ ਅਗਲਾ ਟੀਚਾ ਹੈ <x> ਵਾਕਾਂ ਤੱਕ ਪਹੁੰਚਣਾ ਤੁਹਾਡੇ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ।
+52,,,Your next goal is to reach <x> sentences to earn your Silver Bhasha Samarthak Badge. ,ਤੁਹਾਡਾ ਅਗਲਾ ਟੀਚਾ ਹੈ ਆਪਣੇ ਚਾਂਦੀ ਦੀ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ <x> ਵਾਕਾਂ ਤੱਕ ਪਹੁੰਚਣਾ।
+53,,,Your next goal is to reach <x> sentences to earn your Platinum Bhasha Samarthak Badge. ,ਤੁਹਾਡਾ ਅਗਲਾ ਟੀਚਾ ਹੈ <x> ਵਾਕਾਂ ਤੱਕ ਪਹੁੰਚਣਾ ਤੁਹਾਡੇ ਪਲੇਟਿਨਮ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ।
+54,,,Bronze Bhasha Samarthak Badge earned for contributing <y> recordings,"ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਨੇ <span id=""current_badge_count""></span> ਰਿਕਾਰਡਿੰਗਾਂ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਕਮਾਈ ਕੀਤੀ"
+55,,,Gold Bhasha Samarthak Badge earned for contributing <y> recordings.,<y> ਰਿਕਾਰਡਿੰਗਾਂ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੇ ਕਮਾਈ ਕੀਤੀ।
+56,,,Silver Bhasha Samarthak Badge earned for contributing <y> recordings.,ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੇ <y> ਰਿਕਾਰਡਿੰਗਾਂ ਦੇ ਯੋਗਦਾਨ ਲਈ ਕਮਾਈ ਕੀਤੀ।
+57,,,Platinum Bhasha Samarthak Badge earned for contributing <y> recordings.,ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ <y> ਰਿਕਾਰਡਿੰਗਾਂ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਕਮਾਈ ਕੀਤੀ।
+58,,,All fields are optional but you can enhance your contribution by providing non personal demographic details.,ਸਾਰੇ ਖੇਤਰ ਵਿਕਲਪਿਕ ਹਨ ਪਰ ਤੁਸੀਂ ਗੈਰ ਨਿੱਜੀ ਜਨਸੰਖਿਆ ਵੇਰਵੇ ਪ੍ਰਦਾਨ ਕਰਕੇ ਆਪਣੇ ਯੋਗਦਾਨ ਨੂੰ ਵਧਾ ਸਕਦੇ ਹੋ।
+59,,,Enter Username,ਯੂਜ਼ਰ ਨਾਮ ਦਰਜ ਕਰੋ
+60,,,You are just <x> sentences away from earning your Bronze Bhasha Samarthak Badge.,"ਤੁਸੀਂ ਸਿਰਫ <span id=""sentense_away_count""></span> ਵਾਕਾਂ ਨੂੰ ਆਪਣੇ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਦੂਰ ਹੋ।"
+61,,,You are just <x> sentences away from earning your Silver Bhasha Samarthak Badge. ,"ਤੁਸੀਂ ਆਪਣੇ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਸਿਰਫ <span id=""sentense_away_count""></span> ਵਾਕ ਦੂਰ ਹੋ।"
+62,,,You are just <x> sentences away from earning your Gold Bhasha Samarthak Badge.,"ਤੁਸੀਂ ਆਪਣੇ ਸੋਨੇ ਦੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਸਿਰਫ <span id=""sentense_away_count""></span> ਵਾਕ ਦੂਰ ਹੋ।"
+63,,,You are just <x> sentences away from earning your Platinum Bhasha Samarthak Badge. ,"ਤੁਸੀਂ ਆਪਣੇ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਸਿਰਫ <span id=""sentense_away_count""></span> ਵਾਕ ਦੂਰ ਹੋ।"
+64,,,Validate the translation contributed by others,ਦੂਜਿਆਂ ਦੁਆਰਾ ਦਿੱਤੇ ਗਏ ਅਨੁਵਾਦ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ
+65,,,Thank you for your for translation efforts,ਅਨੁਵਾਦ ਦੀਆਂ ਕੋਸ਼ਿਸ਼ਾਂ ਲਈ ਤੁਹਾਡਾ ਧੰਨਵਾਦ
+66,,,Thank you for your effort to validate translations.,ਅਨੁਵਾਦਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਤੁਹਾਡੀ ਕੋਸ਼ਿਸ਼ ਲਈ ਧੰਨਵਾਦ।
+67,,,You are just <x> images away from earning your Silver Bhasha Samarthak Badge. ,"ਤੁਸੀਂ ਆਪਣੇ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਸਿਰਫ <span id=""sentense_away_count""></span> ਚਿੱਤਰ ਦੂਰ ਹੋ।"
+68,,,You are just <x> images away from earning your Bronze Bhasha Samarthak Badge.,"ਤੁਸੀਂ ਸਿਰਫ <span id=""sentense_away_count""></span> ਚਿੱਤਰ ਆਪਣੇ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਦੂਰ ਹੋ।"
+69,,,You are just <x> images away from earning your Gold Bhasha Samarthak Badge.,ਤੁਸੀਂ ਸਿਰਫ <x> ਚਿੱਤਰ ਆਪਣੇ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਦੂਰ ਹੋ।
+70,,,You are just <x> images away from earning your Platinum Bhasha Samarthak Badge.,ਤੁਸੀਂ ਸਿਰਫ <x> ਚਿੱਤਰ ਆਪਣੇ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਦੂਰ ਹੋ।
+71,,,Your next goal is to reach <x> recordings to earn your Bronze Bhasha Samarthak Badge.,"ਤੁਹਾਡਾ ਅਗਲਾ ਟੀਚਾ ਆਪਣੇ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ <span id=""next_badge_count""></span> ਰਿਕਾਰਡਿੰਗਾਂ ਤੱਕ ਪਹੁੰਚਣਾ ਹੈ।"
+72,,,Your next goal is to reach <x> recordings to earn your Platinum Bhasha Samarthak Badge.,ਤੁਹਾਡਾ ਅਗਲਾ ਟੀਚਾ ਹੈ ਆਪਣੇ ਪਲੇਟਿਨਮ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ <x> ਰਿਕਾਰਡਿੰਗਾਂ ਤੱਕ ਪਹੁੰਚਣਾ।
+73,,,Your next goal is to reach <x> recordings to earn your Gold Bhasha Samarthak Badge. ,ਤੁਹਾਡਾ ਅਗਲਾ ਟੀਚਾ ਹੈ ਆਪਣੇ ਸੋਨੇ ਦੀ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ <x> ਰਿਕਾਰਡਿੰਗਾਂ ਤੱਕ ਪਹੁੰਚਣਾ।
+74,,,Your next goal is to reach <x> recordings to earn your Silver Bhasha Samarthak Badge.,ਤੁਹਾਡਾ ਅਗਲਾ ਟੀਚਾ ਹੈ ਆਪਣੇ ਚਾਂਦੀ ਦੀ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ <x> ਰਿਕਾਰਡਿੰਗਾਂ ਤੱਕ ਪਹੁੰਚਣਾ।
+75,,,BhashaDaan,ਭਾਸ਼ਾਦਾਨ
+76,,,What is your opinion of this page (*required),ਇਸ ਪੰਨੇ ਬਾਰੇ ਤੁਹਾਡੀ ਕੀ ਰਾਏ ਹੈ (* ਲੋੜੀਂਦਾ)
+77,,,Error,ਗਲਤੀ
+78,,,"Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.)","ਸਿਰਫ 12 ਅੱਖਰਾਂ ਦੀ ਆਗਿਆ ਹੈ। (ਸੰਕੇਤ: ਨਾਮ.ਉਪਨਾਮ, ਨਾਮ_ਉਪਨਾਮ 12 ਆਦਿ)"
+79,,,Done,ਹੋ ਗਿਆ
+80,,,Thank you for correcting!,ਠੀਕ ਕਰਨ ਲਈ ਧੰਨਵਾਦ!
+81,,,Contribute 5 sentences to earn your Bronze Bhasha Samarthak Badge.,ਆਪਣਾ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਕਮਾਉਣ ਲਈ 5 ਵਾਕਾਂ ਦਾ ਯੋਗਦਾਨ ਦਿਓ।
+82,,,Contribute 50 sentences to earn your Silver Bhasha Samarthak Badge.,ਆਪਣਾ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਕਮਾਉਣ ਲਈ 50 ਵਾਕਾਂ ਦਾ ਯੋਗਦਾਨ ਦਿਓ।
+83,,,Contribute 100 sentences to earn your Gold Bhasha Samarthak Badge.,ਆਪਣਾ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਕਮਾਉਣ ਲਈ 100 ਵਾਕਾਂ ਦਾ ਯੋਗਦਾਨ ਦਿਓ।
+84,,,Contribute 200 sentences to earn your Platinum Bhasha Samarthak Badge.,ਆਪਣੇ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ 200 ਵਾਕਾਂ ਦਾ ਯੋਗਦਾਨ ਦਿਓ।
+85,,,Validate 50 sentences to earn your Silver Bhasha Samarthak Badge.,ਆਪਣੇ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ 50 ਵਾਕਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ।
+86,,,Validate 100 sentences to earn your Gold Bhasha Samarthak Badge.,ਆਪਣੇ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ 100 ਵਾਕਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ।
+87,,,Validate 5 sentences to earn your Bronze Bhasha Samarthak Badge,ਆਪਣੇ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ 5 ਵਾਕਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ
+88,,,Validate 200 sentences to earn your Platinum Bhasha Samarthak Badge,ਆਪਣੇ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ 200 ਵਾਕਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ
+89,,,"“X” h contributed in “Y""",“ਐਕਸ” ਐਚ ਨੇ “ਵਾਈ” ਵਿਚ ਯੋਗਦਾਨ ਪਾਇਆ
+90,,,"“X” m contributed in “Y""",“ਐਕਸ” ਐਮ ਨੇ “ਵਾਈ” ਵਿਚ ਯੋਗਦਾਨ ਪਾਇਆ
+91,,,"“X” s contributed in “Y""",“ਐਕਸ” ਨੇ “ਵਾਈ” ਵਿਚ ਯੋਗਦਾਨ ਪਾਇਆ
+92,,,"“X” m validated in “Y""",“ਐਕਸ” ਮੀਟਰ “ਵਾਈ” ਵਿਚ ਪ੍ਰਮਾਣਿਤ
+93,,,"“X” s validated in “Y""",“ਐਕਸ” s “ਵਾਈ” ਵਿਚ ਪ੍ਰਮਾਣਿਤ
+94,,,Contribute 5 recordings to earn your Bronze Bhasha Samarthak Badge.,ਆਪਣੇ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ 5 ਰਿਕਾਰਡਿੰਗਾਂ ਦਾ ਯੋਗਦਾਨ ਦਿਓ।
+95,,,Contribute x recordings to earn your Silver Bhasha Samarthak Badge.,ਆਪਣੇ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ ਐਕਸ ਰਿਕਾਰਡਿੰਗਜ਼ ਦਾ ਯੋਗਦਾਨ।
+96,,,Contribute x recordings to earn your Gold Bhasha Samarthak Badge.,ਆਪਣੇ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ ਐਕਸ ਰਿਕਾਰਡਿੰਗਜ਼ ਦਾ ਯੋਗਦਾਨ।
+97,,,Contribute x recordings to earn your Platinum Bhasha Samarthak Badge.,ਆਪਣੇ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ ਐਕਸ ਰਿਕਾਰਡਿੰਗਜ਼ ਦਾ ਯੋਗਦਾਨ।
+98,,,Validate x recordings to earn your Bronze Bhasha Samarthak Badge.,ਆਪਣੇ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ ਐਕਸ ਰਿਕਾਰਡਿੰਗਜ਼ ਨੂੰ ਵੈਧ ਕਰੋ।
+99,,,Validate 50 recordings to earn your Silver Bhasha Samarthak Badge.,ਆਪਣੇ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ 50 ਰਿਕਾਰਡਿੰਗਾਂ ਨੂੰ ਵੈਧ ਕਰੋ।
+100,,,Validate 100 recordings to earn your Gold Bhasha Samarthak Badge.,ਆਪਣੇ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ 100 ਰਿਕਾਰਡਿੰਗਾਂ ਨੂੰ ਵੈਧ ਕਰੋ।
+101,,,Validate 200 recordings to earn your Platinum Bhasha Samarthak Badge.,ਆਪਣੇ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਨੂੰ ਕਮਾਉਣ ਲਈ 200 ਰਿਕਾਰਡਿੰਗਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ।
+102,,,You've earned a Bronze Bhasha Samarthak Badge by labelling 5 Images.,ਤੁਸੀਂ 5 ਚਿੱਤਰਾਂ ਦਾ ਲੇਬਲ ਦੇ ਕੇ ਇੱਕ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕੀਤਾ ਹੈ।
+103,,,You've earned a Silver Bhasha Samarthak Badge by labelling 50 Images.,ਤੁਸੀਂ 50 ਚਿੱਤਰਾਂ ਦਾ ਲੇਬਲ ਲਗਾ ਕੇ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਕੀਤੀ ਹੈ।
+104,,,You've earned a Gold Bhasha Samarthak Badge by labelling 100 Images.,ਤੁਸੀਂ 100 ਚਿੱਤਰਾਂ ਦਾ ਲੇਬਲ ਲਗਾ ਕੇ ਗੋਲਡ ਭਾਸ਼ ਸਮਰੱਥਕ ਬੈਜ ਹਾਸਲ ਕੀਤਾ ਹੈ.
+105,,,You've earned a Platinum Bhasha Samarthak Badge by labelling 200 Images.,ਤੁਸੀਂ 200 ਚਿੱਤਰਾਂ ਦਾ ਲੇਬਲ ਲਗਾ ਕੇ ਇੱਕ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕੀਤਾ ਹੈ।
+106,,,You've earned a Bronze Bhasha Samarthak Badge by validating 5 Images.,ਤੁਸੀਂ 5 ਚਿੱਤਰਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਦਿਆਂ ਇੱਕ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕੀਤਾ ਹੈ।
+107,,,You've earned a Silver Bhasha Samarthak Badge by validating 50 Images.,ਤੁਸੀਂ 50 ਚਿੱਤਰਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਕੇ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਕੀਤੀ ਹੈ।
+108,,,You've earned a Gold Bhasha Samarthak Badge by validating 100 Images.,ਤੁਸੀਂ 100 ਚਿੱਤਰਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਕੇ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਹਾਸਲ ਕੀਤਾ ਹੈ।
+109,,,You've earned a Platinum Bhasha Samarthak Badge by validating 200 Images.,ਤੁਸੀਂ 200 ਚਿੱਤਰਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਕੇ ਇੱਕ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕੀਤਾ ਹੈ।
+110,,,Back to Bolo India Home,ਬੋਲੋ ਇੰਡੀਆ ਹੋਮ ਵਾਪਸੀ
+111,,,You've earned a Bronze Bhasha Samarthak Badge by validating 5 sentences.,ਤੁਸੀਂ 5 ਵਾਕਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਦਿਆਂ ਇੱਕ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕੀਤਾ ਹੈ।
+112,,,You've earned a Silver Bhasha Samarthak Badge by validating 50 sentences.,ਤੁਸੀਂ 50 ਵਾਕਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਦਿਆਂ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਕੀਤੀ ਹੈ।
+113,,,You've earned a Gold Bhasha Samarthak Badge by validating 100 sentences.,ਤੁਸੀਂ 100 ਵਾਕਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਦਿਆਂ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਹਾਸਲ ਕੀਤਾ ਹੈ।
+114,,,You've earned a Platinum Bhasha Samarthak Badge by validating 200 sentences.,ਤੁਸੀਂ 200 ਵਾਕਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਕੇ ਇੱਕ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕੀਤਾ ਹੈ।
+115,,,You've earned a Bronze Bhasha Samarthak Badge by contributing 5 sentences.,ਤੁਸੀਂ 5 ਵਾਕਾਂ ਦਾ ਯੋਗਦਾਨ ਦੇ ਕੇ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕੀਤਾ ਹੈ।
+116,,,You've earned a Silver Bhasha Samarthak Badge by contributing 50 sentences.,ਤੁਸੀਂ 50 ਵਾਕਾਂ ਦਾ ਯੋਗਦਾਨ ਦੇ ਕੇ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਕੀਤੀ ਹੈ।
+117,,,You've earned a Gold Bhasha Samarthak Badge by contributing 100 sentences.,ਤੁਸੀਂ 100 ਵਾਕਾਂ ਦਾ ਯੋਗਦਾਨ ਦੇ ਕੇ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਹਾਸਲ ਕੀਤਾ ਹੈ।
+118,,,You've earned a Platinum Bhasha Samarthak Badge by contributing 200 sentences.,ਤੁਸੀਂ 200 ਵਾਕਾਂ ਦਾ ਯੋਗਦਾਨ ਦੇ ਕੇ ਇੱਕ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕੀਤਾ ਹੈ।
+119,,,You've earned a Bronze Bhasha Samarthak Badge by contributing 5 recordings.,ਤੁਸੀਂ 5 ਰਿਕਾਰਡਿੰਗਾਂ ਦਾ ਯੋਗਦਾਨ ਦੇ ਕੇ ਕਾਂਸੀ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਹਾਸਲ ਕੀਤਾ ਹੈ।
+120,,,You've earned a Silver Bhasha Samarthak Badge by contributing 50 recordings.,ਤੁਸੀਂ 50 ਰਿਕਾਰਡਿੰਗਾਂ ਦਾ ਯੋਗਦਾਨ ਦੇ ਕੇ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਕੀਤੀ ਹੈ।
+121,,,You've earned a Gold Bhasha Samarthak Badge by contributing 100 recordings.,ਤੁਸੀਂ 100 ਰਿਕਾਰਡਿੰਗਾਂ ਦਾ ਯੋਗਦਾਨ ਦੇ ਕੇ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਕੀਤੀ ਹੈ।
+122,,,You've earned a Platinum Bhasha Samarthak Badge by contributing 200 recordings.,ਤੁਸੀਂ 200 ਰਿਕਾਰਡਿੰਗਾਂ ਦਾ ਯੋਗਦਾਨ ਦੇ ਕੇ ਇੱਕ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕੀਤਾ ਹੈ।
+123,,,You've earned a Bronze Bhasha Samarthak Badge by validating 5 recordings.,ਤੁਸੀਂ 5 ਰਿਕਾਰਡਿੰਗਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਕੇ ਇੱਕ ਕਾਂਸੀ ਦੀ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਹਾਸਲ ਕੀਤਾ ਹੈ।
+124,,,You've earned a Silver Bhasha Samarthak Badge by validating 50 recordings.,ਤੁਸੀਂ 50 ਰਿਕਾਰਡਿੰਗ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਕੇ ਸਿਲਵਰ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਕੀਤੀ ਹੈ।
+125,,,You've earned a Gold Bhasha Samarthak Badge by validating 100 recordings.,ਤੁਸੀਂ 100 ਰਿਕਾਰਡਿੰਗਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਦਿਆਂ ਗੋਲਡ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਕੀਤੀ ਹੈ।
+126,,,You've earned a Platinum Bhasha Samarthak Badge by validating 200 recordings.,ਤੁਸੀਂ 200 ਰਿਕਾਰਡਿੰਗਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਕੇ ਇੱਕ ਪਲੈਟੀਨਮ ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕੀਤਾ ਹੈ।
+127,,,Thank you for your translation efforts,ਤੁਹਾਡੇ ਅਨੁਵਾਦ ਦੇ ਕੋਸ਼ਿਸ਼ ਲਈ ਧੰਨਵਾਦ
+128,,,your Bhasha Samarthak Badges,ਤੁਹਾਡੇ ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ
