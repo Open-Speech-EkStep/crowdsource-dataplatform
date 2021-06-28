@@ -228,7 +228,7 @@ workflows:
           requires:
             - dev_deployment_aks
             - build_dev_ui
-            - functional_tests_dev
+            # - functional_tests_dev
           filters:
             branches:
               only: master
