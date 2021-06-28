@@ -1,6 +1,6 @@
 {
-	"hrs recorded in": "%hours மணிநேரம் %language இல் பதிவு செய்யப்பட்டுள்ளது",
-	"hrs validated in": "%hours மணிநேரம் %language இல் சரிபார்க்கப்பட்டது",
+	"hrs recorded in": "%hours %language இல் பதிவு செய்யப்பட்டுள்ளது",
+	"hrs validated in": "%hours %language இல் சரிபார்க்கப்பட்டது",
 	"hours": "மணிநேரங்கள்",
 	"minutes": "நிமிடங்கள்",
 	"seconds": "",
@@ -218,11 +218,11 @@
     "Suno India": "சுனோ இந்தியா",
     "Likho India": "லிக்கோ இந்தியா",
     "Dekho India": "தேக்கோ இந்தியா",
-	"User Details": "User Details",
-	"Labelling":"Labelling",
-	"Recording": "Recording",
-    "Transcribing":"Transcribing",
-    "Translating":"Translating",
-	"Images":"Images",
-	"Validating": "Validating"
+	"User Details": "பயனர் விவரங்கள்",
+	"Labelling":"லேபிளிடுதல்",
+	"Recording": "பதிவுசெய்தல்",
+    "Transcribing":"ட்ரான்ஸ்க்ரைபிங்க்",
+    "Translating":"மொழிபெயர்த்தல்",
+	"Images":"படங்கள்",
+	"Validating": "சரிபார்த்தல்"
 }

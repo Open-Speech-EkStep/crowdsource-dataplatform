@@ -1,6 +1,6 @@
 {
-	"hrs recorded in": "%language ನಲ್ಲಿ %hours ಗಂಟೆಗಳನ್ನು ದಾಖಲಿಸಲಾಗಿದೆ",
-	"hrs validated in": "%hours ಗಂಟೆಗಳ %language ನಲ್ಲಿ ಮೌಲ್ಯೀಕರಿಸಲಾಗಿದೆ",
+	"hrs recorded in": "%language ನಲ್ಲಿ %hours ದಾಖಲಿಸಲಾಗಿದೆ",
+	"hrs validated in": "%hours %language ನಲ್ಲಿ ಮೌಲ್ಯೀಕರಿಸಲಾಗಿದೆ",
 	"Konkani Roman": "ಕೊಂಕಣಿ ರೋಮನ್",
 	"Konkani DV": "ಕೊಂಕಣಿ ಡಿವಿ",
 	"Manipuri BN": "ಮಣಿಪುರಿ ಬಿಎನ್",
@@ -245,11 +245,11 @@
 	"Suno India": "ಸುನೋ ಇಂಡಿಯಾ",
 	"Likho India": "ಲಿಖೋ ಇಂಡಿಯಾ",
 	"Dekho India": "ದೇಖೋ ಇಂಡಿಯಾ",
-	"User Details": "User Details",
-	"Recording": "Recording",
-    "Labelling":"Labelling",
-    "Transcribing":"Transcribing",
-    "Translating":"Translating",
-	"Images":"Images",
-	"Validating": "Validating"
+	"User Details": "ಬಳಕೆದಾರರ ವಿವರಗಳು",
+	"Recording": "ರೆಕಾರ್ಡಿಂಗ್",
+    "Labelling":"ಲೇಬಲಿಂಗ್",
+    "Transcribing":"ಲಿಪ್ಯಂತರ",
+    "Translating":"ಅನುವಾದ",
+	"Images":"ಚಿತ್ರಗಳ",
+	"Validating": "ಮೌಲ್ಯೀಕರಣ"
 }

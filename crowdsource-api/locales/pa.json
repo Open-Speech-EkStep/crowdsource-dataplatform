@@ -138,8 +138,8 @@
 	"Looks like you have taken a wrong turn here": "ਲੱਗਦਾ ਹੈ ਕਿ ਤੁਸੀਂ ਕਿਸੇ ਗਲਤ ਥਾਂ 'ਤੇ ਆ ਗਏ ਹੋ",
 	"Click Here": "ਕਲਿਕ ਕਰੋ",
 	"to go back to home page": "ਹੋਮ ਪੇਜ ਤੇ ਵਾਪਸ ਜਾਣ ਲਈ ਇੱਥੇ",
-	"hrs recorded in": "%language ਭਾਸ਼ਾ ਵਿੱਚ %hours ਘੰਟੇ ਰਿਕਾਰਡ ਕੀਤੇ ਗਏ",
-	"hrs validated in": "%language ਭਾਸ਼ਾ ਵਿੱਚ %hours ਘੰਟੇ ਪ੍ਰਮਾਣਿਤ ਕੀਤੇ ਗਏ",
+	"hrs recorded in": "%language ਭਾਸ਼ਾ ਵਿੱਚ %hours ਰਿਕਾਰਡ ਕੀਤੇ ਗਏ",
+	"hrs validated in": "%language ਭਾਸ਼ਾ ਵਿੱਚ %hours ਪ੍ਰਮਾਣਿਤ ਕੀਤੇ ਗਏ",
 	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "<span id=\"counter\"></span> ਸਕਿੰਟ ਬਾਅਦ ਰਿਕਾਰਡਿੰਗ ਆਪਣੇ-ਆਪ ਰੁਕ ਜਾਏਗੀ",
 	"Incorrect": "ਗ਼ਲਤ",
 	"Replay": "ਮੁੜ-ਚਲਾਓ",
@@ -306,10 +306,10 @@
 	"Suno India": "ਸੁਨੋ ਇੰਡੀਆ",
 	"Likho India": "ਲਿਖੋ ਇੰਡੀਆ",
 	"Dekho India": "ਦੇਖੋ ਇੰਡੀਆ",
-	"User Details": "User Details",
-    "Labelling":"Labelling",
-    "Transcribing":"Transcribing",
-    "Translating":"Translating",
-	"Images":"Images",
-	"Validating": "Validating"
+	"User Details": "ਯੂਜ਼ਰ ਵੇਰਵਾ",
+    "Labelling":"ਲੇਬਲਿੰਗ",
+    "Transcribing":"ਪ੍ਰਤੀਲਿਪੀ",
+    "Translating":"ਅਨੁਵਾਦ",
+	"Images":"ਚਿੱਤਰ",
+	"Validating": "ਪ੍ਰਮਾਣਿਤ ਕਰ ਰਿਹਾ ਹੈ"
 }

@@ -1,6 +1,6 @@
 {
-	"hrs recorded in": "%language માં %hours કલાકો રેકોર્ડ કર્યા",
-	"hrs validated in": "%language માં %hours કલાકો માન્ય કર્યા",
+	"hrs recorded in": "%language માં %hours રેકોર્ડ કર્યા",
+	"hrs validated in": "%language માં %hours માન્ય કર્યા",
 	"hours": "કલાકો",
 	"minutes": "મિનિટો",
 	"seconds": "સેકન્ડ્સ",
@@ -219,11 +219,11 @@
 	"Suno India": "સુનો ઇન્ડિયા",
 	"Likho India": "લિખો ઇન્ડિયા",
 	"Dekho India": "દેખો ઇન્ડિયા",
-	"User Details": "User Details",
-	"Recording": "Recording",
-    "Labelling":"Labelling",
-    "Transcribing":"Transcribing",
-    "Translating":"Translating",
-	"Images":"Images",
-	"Validating": "Validating"
+	"User Details": "યુઝરની વિગતો",
+	"Recording": "રેકોર્ડિંગ",
+    "Labelling":"લેબલિંગ",
+    "Transcribing":"ટ્રાન્સક્રાઇબ",
+    "Translating":"અનુવાદ",
+	"Images":"ઇમેજિસ",
+	"Validating": "માન્ય"
 }
