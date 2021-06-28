@@ -38,7 +38,7 @@ beforeSuite(async () => {
         waitForNavigation: false,
         navigationTimeout: 120000,
         observe: true,
-        observeTime: 1500,
+        observeTime: 2000,
         retryTimeout: 5000
     });
     await overridePermissions(testUrl, ['audioCapture']);
@@ -303,7 +303,7 @@ step("When user select <lang> Language from dropdown then <arg0> should not visi
     const selectLanguageDropDown = taiko.dropDown({ id: 'language' })
     assert.ok(await selectLanguageDropDown.exists());
     await selectLanguageDropDown.select(lang);
-    await taiko.waitFor(1000)
+    await taiko.waitFor(2000)
     if (await text(arg0).exists()) {
         const resp = await text(arg0).isVisible();
         assert.ok(!resp)

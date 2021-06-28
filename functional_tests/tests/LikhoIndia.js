@@ -64,7 +64,7 @@ step("User should see an error message <msg>", async function(msg) {
 });
 
 step("<arg0> should not visible", async function(arg0) {
-	await taiko.waitFor(1000)
+	await taiko.waitFor(2000)
     if (await text(arg0).exists()) {
         const resp = await text(arg0).isVisible();
         assert.ok(!resp)
