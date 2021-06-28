@@ -18,7 +18,7 @@ const {
   performAPIRequest,
 } = require("../common/utils");
 
-// const {downloadPdf} = require('../common/downloadableBadges');
+const {downloadPdf} = require('../common/downloadableBadges');
 const { showUserProfile,onChangeUser,onOpenUserDropDown } = require('../common/header');
 const {showByHoursChart, showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge} = require('../common/common');
 const {initializeFeedbackModal} = require('../common/feedback');
@@ -27,30 +27,6 @@ const CURRENT_INDEX = "likhoValidatorCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 const likhoValidatorCountKey = 'likhoValidatorCount';
 const totalSentence = Number(localStorage.getItem(likhoValidatorCountKey));
-
-function downloadPdf(badgeType) {
-  try {
-    const pdf = new jsPDF()
-    const img = new Image();
-    img.onload = function () {
-      pdf.addImage(this, 36, 10, 128, 128);
-      pdf.save(`${badgeType}-badge.pdf`);
-    };
-
-    img.crossOrigin = "Anonymous";
-    const currentModule = localStorage.getItem(CURRENT_MODULE);
-    const badges = MODULE[currentModule].BADGES;
-
-    img.src = badges[badgeType].imgValJpg;
-    const allBadges = JSON.parse(localStorage.getItem('badges'));
-    const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
-    if (badge) {
-      pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
-    }
-  } catch (error) {}
-
-}
-
 
 const updateLocaleLanguagesDropdown = (language, toLanguage) => {
   // const dropDown = $('#localisation_dropdown');

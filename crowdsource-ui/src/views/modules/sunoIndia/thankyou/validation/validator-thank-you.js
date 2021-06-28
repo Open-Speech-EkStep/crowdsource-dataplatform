@@ -18,7 +18,7 @@ const {
   performAPIRequest,
 } = require("../common/utils");
 
-// const {downloadPdf} = require('../common/downloadableBadges');
+const {downloadPdf} = require('../common/downloadableBadges');
 const {showByHoursChart,showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge} = require('../common/common');
 
 const CURRENT_INDEX = "sunoValidationCurrentIndex";
@@ -26,32 +26,6 @@ const SPEAKER_DETAILS = "speakerDetails";
 const sunoValidatorCountKey = 'sunoValidatorCount';
 const totalSentence = Number(localStorage.getItem(sunoValidatorCountKey));
 const {initializeFeedbackModal} = require('../common/feedback');
-
-function downloadPdf(badgeType) {
-  try {
-    const pdf = new jsPDF()
-    const img = new Image();
-    img.onload = function () {
-      pdf.addImage(this, 36, 10, 128, 128);
-      pdf.save(`${badgeType}-badge.pdf`);
-    };
-
-    img.crossOrigin = "Anonymous";
-    const currentModule = localStorage.getItem(CURRENT_MODULE);
-    const badges = MODULE[currentModule].BADGES;
-
-    img.src = badges[badgeType].imgValJpg;
-    const allBadges = JSON.parse(localStorage.getItem('badges'));
-    const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
-    if (badge) {
-      pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
-    }
-  } catch (error) {}
-
-}
-
-
-
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
