@@ -271,7 +271,7 @@ workflows:
 
       - run_functional_tests:
           name: functional_tests_test
-          env_name: dev
+          env_name: test
           db_name: ${AZURE_TEST_DB_NAME}
           requires:
             - test_deployment_aks
