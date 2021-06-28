@@ -31,7 +31,6 @@ const changeLocale = function (locale) {
     // } else if(module === 'bolo' && currentPage != 'home.html'){
     //     location.href = `/${locale}/${currentPage}`;
     // }
-
     if(module == 'bolo' && currentPage == "home.html"){
         location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
     }

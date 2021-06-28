@@ -40,6 +40,11 @@
             <div class="row m-0">
                 <label class="col-4 col-lg-4 col-md-4 mt-2 px-0 pt-1"><%= __('Choose the language ') %></label>
                 <select class="col-lg-7 col-md-8 col-8 btn dropdown-toggle h6 w-90 rounded" id="languages" style="height:40px;padding:0;padding:0 10px;border-color:#959595;color:#959595">
+                    <% LANGUAGES.forEach(function(lang) { %>
+                        <option value="<%= lang.value %>">
+                            <%= lang.text %>
+                        </option>
+                    <% }) %>
                 </select>
             </div>
         </div>
@@ -57,10 +62,10 @@
     <div class="row mx-0 mt-4">
         <ul class="nav nav-tabs w-100 border-0" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="contribute-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Contributions</a>
+              <a class="nav-link active" id="contribute-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"> <%= __('Contributions')</a>
             </li>
             <li class="nav-item pl-4">
-              <a class="nav-link" id="validate-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Validations</a>
+              <a class="nav-link" id="validate-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"> <%= __('Validations')</a>
             </li>
           </ul>
           <div class="tab-content w-100 mt-5" id="myTabContent">
