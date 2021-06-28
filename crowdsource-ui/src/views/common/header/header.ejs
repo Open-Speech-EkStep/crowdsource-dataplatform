@@ -1,11 +1,11 @@
-<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/common/header.css">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/header.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light pl-4 py-lg-0 py-0 pr-0" id="header-nav-bar">
     <div class="row m-0">
         <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="d-flex align-items-center">
             <a class="logo-text text-dark" href="/">
                 <h2 class="mb-0" id="bhasini_logo">
-                    <img src="<%- `../../img/${locale}-logo.svg` %>" alt="Bhaashini" width="64px" height="54px">
+                    <img src="<%- `/img/${locale}-logo.svg` %>" alt="Bhaashini" width="64px" height="54px">
                 </h2>
             </a>
             <div class="vertical-line"></div>
@@ -33,7 +33,7 @@
         <ul class="navbar-nav ml-auto" id="about-us">
             <li class="nav-item p-2 module-item dropdown" id="locale_language_dropdown">
                 <a class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="../../img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
+                    <img src="/img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
                     <span><%= __('Language') %></span>
                 </a>
                 <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton">
@@ -50,7 +50,7 @@
     <ul class="navbar-nav" id="userNavBar">
         <li class="nav-item pr-lg-4 dropdown" id="userDropDown">
             <a class="nav-link text-dark font-weight-bold d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="../../img/usericon.svg" alt="usericon" class="align-middle mx-1">
+                <img src="/img/usericon.svg" alt="usericon" class="align-middle mx-1">
                 <span id="nav-username"></span>
             </a>
 
@@ -63,5 +63,5 @@
     </ul>
 </nav>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="../../js/common/header.js"></script>
+<script src="/js/common/header.js"></script>
 
