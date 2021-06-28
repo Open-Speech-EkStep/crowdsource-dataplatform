@@ -359,8 +359,8 @@
 	"Validate the translations contributed by others": "ఇతరులు అందించిన అనువాదాలను ధృవీకరించండి",
 	"Contribute by labelling the image": "చిత్రాన్ని లేబుల్ చేయడం ద్వారా సహకరించండి",
 	"Validate the images labelled by others": "ఇతరులు లేబుల్ చేసిన చిత్రాలను ధృవీకరించండి",
-	"Bhasha": "Bhasha",
-	"Daan": "Daan",
+	"Bhasha": "భాషా",
+	"Daan": "విరాళం",
 	"Your contribution can empower Bhashini to make many such stories happen.": "Your contribution can empower Bhashini to make many such stories happen.",
 	"Towards digital": "Towards digital",
 	"empowerment for all...": "empowerment for all...",
@@ -377,5 +377,6 @@
 	"No validation data available for selected language": "ఎంచుకున్న భాషకు ధృవీకరణ డేటా అందుబాటులో లేదు",
 	"Beta": "Beta",
 	"You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "మీరు మీ భాషా సమర్తక్ <span id=\"next_badge_name\"></span> బ్యాడ్జ్ సంపాదించడానికి కేవలం <span id=\"sentense_away_count\"></span> వాక్యాలు దూరంలో ఉన్నారు. <a href=\"../badges.html\">మరింత తెలుసుకోండి</a>",
-	"You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "మీరు <span id=\"current_badge_count\"></span> వాక్యాలను ధృవీకరించడం ద్వారా భాషా సమర్తక్ <span id=\"current_badge_name_1\"></span> బ్యాడ్జ్ సంపాదించారు."
+	"You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "మీరు <span id=\"current_badge_count\"></span> వాక్యాలను ధృవీకరించడం ద్వారా భాషా సమర్తక్ <span id=\"current_badge_name_1\"></span> బ్యాడ్జ్ సంపాదించారు.",
+	"Your next goal is to reach <span id=\"next_badge_count\"></span> images to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge. <a href=\"./badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> images to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge. <a href=\"./badges.html\">Know more</a>"
 }
