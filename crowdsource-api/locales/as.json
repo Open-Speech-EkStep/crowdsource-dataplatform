@@ -323,11 +323,11 @@
 	"Suno India": "শুনো ইণ্ডিয়া",
 	"Likho India": "লিখো ইণ্ডিয়া",
 	"Dekho India": "দেখো ইণ্ডিয়া",
-	"User Details": "User Details",
-	"Recording": "Recording",
-    "Labelling":"Labelling",
-    "Transcribing":"Transcribing",
-    "Translating":"Translating",
-	"Images":"Images",
-	"Validating": "Validating"
+	"User Details": "ব্যৱহাৰকাৰীৰ বিৱৰণ",
+	"Recording": "বাণীবদ্ধকৰণ",
+    "Labelling":"লেবেলযুক্ত",
+    "Transcribing":"প্ৰতিলিপিবদ্ধ",
+    "Translating":"অনুৱাদ",
+	"Images":"ছৱিসমূহ",
+	"Validating": "বৈধকৰণ"
 }

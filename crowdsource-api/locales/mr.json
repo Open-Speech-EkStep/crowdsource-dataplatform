@@ -219,11 +219,11 @@
 	"Suno India": "सुनो इंडिया",
 	"Likho India": "लिखो इंडिया",
 	"Dekho India": "देखो इंडिया",
-	"User Details": "User Details",
-	"Recording": "Recording",
-    "Labelling":"Labelling",
-    "Transcribing":"Transcribing",
-    "Translating":"Translating",
-	"Images":"Images",
-	"Validating": "Validating"
+	"User Details": "वापरकर्त्याचा तपशील",
+	"Recording": "ध्वनी मुद्रण",
+    "Labelling":"नावे देणे",
+    "Transcribing":"लिप्यंतर",
+    "Translating":"अनुवाद",
+	"Images":"प्रतिमा",
+	"Validating": "वैधांकन"
 }
