@@ -397,5 +397,9 @@
     "Beta": "Beta",
     "You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "ನಿಮ್ಮ <span id=\"next_badge_name_1\"></span> ಭಾಷಾ ಸಮರ್ಥಕ ಬ್ಯಾಜ್ ಗಳಿಸಲು ನೀವು ಕೇವಲ <span id=\"sentense_away_count\"></span> ವಾಕ್ಯಗಳಷ್ಟು ದೂರವಿರುವಿರಿ.",
     "You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_count\"></span> ಚಿತ್ರಗಳನ್ನು ಮೌಲ್ಯೀಕರಿಸುವ ಮೂಲಕ ನೀವು <span id=\"current_badge_name_1\"></span> ಭಾಷಾ ಸಮರ್ಥಕ ಬ್ಯಾಜ್ ಅನ್ನು ಗಳಿಸಿದ್ದೀರಿ.",
-    "You are just <span id=\"sentense_away_count\"></span> images away from earning your Bhasha Samarthak <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "ನಿಮ್ಮ <span id=\"next_badge_name_1\"></span> ಭಾಷಾ ಸಮರ್ಥಕ ಬ್ಯಾಜ್ ಗಳಿಸಲು ನೀವು ಕೇವಲ <span id=\"sentense_away_count\"></span> ಚಿತ್ರಗಳಷ್ಟು ದೂರವಿರುವಿರಿ."
+    "You are just <span id=\"sentense_away_count\"></span> images away from earning your Bhasha Samarthak <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "ನಿಮ್ಮ <span id=\"next_badge_name_1\"></span> ಭಾಷಾ ಸಮರ್ಥಕ ಬ್ಯಾಜ್ ಗಳಿಸಲು ನೀವು ಕೇವಲ <span id=\"sentense_away_count\"></span> ಚಿತ್ರಗಳಷ್ಟು ದೂರವಿರುವಿರಿ.",
+    "Bronze": "ಕಂಚಿನ",
+	"Silver": "ಬೆಳ್ಳಿಯ",
+	"Gold": "ಚಿನ್ನದ",
+	"Platinum": "ಪ್ಲಾಟಿನಮ್"
 }
