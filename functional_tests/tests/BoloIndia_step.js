@@ -304,7 +304,7 @@ step("When user select <lang> Language from dropdown then <arg0> should not visi
     assert.ok(await selectLanguageDropDown.exists());
     await selectLanguageDropDown.select(lang);
     await taiko.waitFor(2000)
-    if (await text(arg0).exists()) {
+    if (await text(arg0).isVisible()) {
         const resp = await text(arg0).isVisible();
         assert.ok(!resp)
     }

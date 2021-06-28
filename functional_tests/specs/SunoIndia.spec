@@ -34,7 +34,7 @@ Tags: component
 ## Check Dashboard Page
 * When user clicks on View all Details buttton user should be able to see "Progress Chart" , "State Wise distribution"
 * user should be able to see "People participated" , "Duration transcribed" , "Duration validated" , "Languages"
-* When user select "ଓଡିଆ" Language from dropdown then "languages" should not visible
+* When user select "ଓଡିଆ" Language from dropdown then "Languages" should not visible
 * When user clicks on back button, user should land on home page
 
 ## Validate Transcribe flow
