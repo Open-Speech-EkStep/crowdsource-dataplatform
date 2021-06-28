@@ -341,6 +341,16 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'gold',
             'platinum',
             'N/A',
+            'Bolo India',
+            'Suno India',
+            'Dekho India',
+            'Likho India',
+            'Recording',
+            'Labelling',
+            'Transcribing',
+            'Translating',
+            'Images',
+            'Validating'
         ];
 
         const langSttr = {};

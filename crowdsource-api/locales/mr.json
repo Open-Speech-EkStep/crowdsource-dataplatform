@@ -215,9 +215,15 @@
 	"The levels defined by an overall mix of contributions and validations on Bolo India. Please see the criteria that defines different levels below:": "The levels defined by an overall mix of contributions and validations on Bolo India. Please see the criteria that defines different levels below:",
 	"Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but may decrease though if it doesn’t pass the validation test. We want you to remain an active contributor to Bolo India and stand a chance to get recognised by the Ministry of Electronics and Information Technology.": "Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but may decrease though if it doesn’t pass the validation test. We want you to remain an active contributor to Bolo India and stand a chance to get recognised by the Ministry of Electronics and Information Technology.",
 	"Help your language achieve it’s goal of <span id=\"language-hour-goal\"></span> hrs. We know you can do more!": "आपल्या भाषेसाठी <span id=\"language-hour-goal\"></span> तासांचे लक्ष्य पूर्ण करण्यासाठी सहयोग करा. आम्हाला माहित आहे की तुम्ही खूप काही करू शकता!",
-	"Bolo India": "Bolo India",
-	"Suno India": "Suno India",
-	"Likho India": "Likho India",
-	"Dekho India": "Dekho India",
-	"User Details": "User Details"
+	"Bolo India": "बोलो इंडिया",
+	"Suno India": "सुनो इंडिया",
+	"Likho India": "लिखो इंडिया",
+	"Dekho India": "देखो इंडिया",
+	"User Details": "User Details",
+	"Recording": "Recording",
+    "Labelling":"Labelling",
+    "Transcribing":"Transcribing",
+    "Translating":"Translating",
+	"Images":"Images",
+	"Validating": "Validating"
 }

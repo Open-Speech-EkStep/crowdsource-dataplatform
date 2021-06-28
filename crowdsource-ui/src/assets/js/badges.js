@@ -16,7 +16,7 @@ const getRowWithBadge = function (levelId, sentenceCount, badgeName, localeStrin
     text = "Validating";
    }
   let actionText = type == 'ocr' ? "Images": "Sentences";
-  const badgeDescription = `<p class="text-left mb-0 ml-3">${text}: ${sentenceCount} ${actionText}</p>`;
+  const badgeDescription = `<p class="text-left mb-0 ml-3">${localeString[text]}: ${sentenceCount} ${localeString[actionText]}</p>`;
   return `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">${localeString.Level} ${levelId}</td><td>${badgeDescription}</td><td class="text-center"><div><img src=${source == "contribute" ? badge.imgLg :badge.imgSm} class="table-img" height="76" width="63" alt=${badgeName} id="${badgeName}_${source}" rel="popover"></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
 }
 
@@ -55,18 +55,15 @@ const renderBadgeDetails = function (data, source, type) {
 }
 
 const getBadgeData = (type, source, language) => {
-  getLocaleString().then(() => {
-    performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then((data) => renderBadgeDetails(data, source, type)).catch((err) => {})
-  }).catch(() => {
-    window.location.href = "/";
-  })
+  performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then((data) => renderBadgeDetails(data, source, type)).catch((err) => {})
 }
 
 const addToLanguage = function (id, list) {
   const selectBar = document.getElementById(id);
   let options = '';
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   list.forEach(lang => {
-    options = options.concat(`<option value=${lang.value}>${lang.text}</option>`);
+    options = options.concat(`<option value=${lang.value}>${localeStrings[lang.text]}</option>`);
   })
   selectBar.innerHTML = options;
 }
@@ -94,7 +91,7 @@ const initialise = () => {
       text: "Suno India",
     }
   ];
-  addToLanguage('languages', ALL_LANGUAGES);
+  // addToLanguage('languages', ALL_LANGUAGES);
   addToLanguage('initiative', INITIATIVES);
   let initiative;
   let selectedLanguage;
@@ -130,7 +127,11 @@ const initialise = () => {
 }
 
 $(document).ready(function () {
+  getLocaleString().then(() => {
   initialise();
+}).catch(() => {
+  window.location.href = "/";
+})
   let moduleType = localStorage.getItem("module");
   const type = localStorage.getItem("selectedType");
   if(type && type == "validate" && moduleType != 'home'){

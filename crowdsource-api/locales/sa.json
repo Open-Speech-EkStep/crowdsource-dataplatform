@@ -219,5 +219,10 @@
 	"Suno India": "Suno India",
 	"Likho India": "Likho India",
 	"Dekho India": "Dekho India",
-	"User Details": "User Details"
+	"User Details": "User Details",
+	"Labelling":"Labelling",
+    "Transcribing":"Transcribing",
+    "Translating":"Translating",
+	"Images":"Images",
+	"Validating": "Validating"
 }
