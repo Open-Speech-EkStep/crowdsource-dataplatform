@@ -441,5 +441,7 @@
 	"You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.",
 	"You are just <span id=\"sentense_away_count\"></span> images away from earning your Bhasha Samarthak <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "You are just <span id=\"sentense_away_count\"></span> images away from earning your Bhasha Samarthak <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>",
 	"Towards digital empowerment for all...": "Towards digital empowerment for all...",
-	"Remove language barriers with BhashaDaan": "Remove language barriers with BhashaDaan"
+	"Remove language barriers with BhashaDaan": "Remove language barriers with BhashaDaan",
+	"Your selected language": "Your selected language",
+	"Top languages": "Top languages"
 }

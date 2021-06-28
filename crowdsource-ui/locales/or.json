@@ -709,5 +709,7 @@
 	"You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "ଆପଣ <span id=\"current_badge_count\"></span> ବାକ୍ୟକୁ ବୈଧ କରି ଏକ <span id=\"current_badge_name_1\"></span> ଭାଷା ସମର୍ଥକ ବ୍ୟାଜ୍ ଅର୍ଜନ କରିଛନ୍ତି ",
 	"You are just <span id=\"sentense_away_count\"></span> images away from earning your Bhasha Samarthak <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "ତୁମର <span id=\"next_badge_name\"></span> ଭାଷା ସମର୍ଥକ ବ୍ୟାଜ୍ ଅର୍ଜନ କରିବାଠାରୁ ତୁମେ କେବଳ <span id=\"sentense_away_count\"></span> ପ୍ରତିଛବି ",
 	"Towards digital empowerment for all...": "ସମସ୍ତଙ୍କ ଡିଜିଟାଲ ସଶକ୍ତିକରଣ ଦିଗରେ ...",
-	"Remove language barriers with BhashaDaan": "ଭାଷାଦାନ ଜରିଆରେ ଭାଷାର ପ୍ରତିବନ୍ଧକ ଦୂର କରନ୍ତୁ"
+	"Remove language barriers with BhashaDaan": "ଭାଷାଦାନ ଜରିଆରେ ଭାଷାର ପ୍ରତିବନ୍ଧକ ଦୂର କରନ୍ତୁ",
+	"Your selected language": "ତୁମର ମନୋନୀତ ଭାଷା",
+    "Top languages": "ଶୀର୍ଷ ଭାଷା"
 }

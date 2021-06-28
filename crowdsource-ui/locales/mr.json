@@ -375,5 +375,7 @@
 	"You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_count\"></span> वाक्यांची शुद्धता तपासून आपण <span id=\"current_badge_name_1\"></span> भाषा समर्थक बिल्ला मिळवला आहे.",
 	"You are just <span id=\"sentense_away_count\"></span> images away from earning your Bhasha Samarthak <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "You are just <span id=\"sentense_away_count\"></span> images away from earning your Bhasha Samarthak <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">अधिक जाणून घ्या</a>",
 	"Towards digital empowerment for all...": "सर्वांची डिजिटल सशक्तीकरणाकडे वाटचाल. ..",
-	"Remove language barriers with BhashaDaan": "भाषादानाने भाषेच्या अडथळ्यांना दूर करा"
+	"Remove language barriers with BhashaDaan": "भाषादानाने भाषेच्या अडथळ्यांना दूर करा",
+	"Your selected language": "तुम्ही निवडलेली भाषा",
+    "Top languages": "सर्वोच्च भाषा"
 }
