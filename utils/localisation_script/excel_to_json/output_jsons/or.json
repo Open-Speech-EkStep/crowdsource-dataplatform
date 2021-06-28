@@ -188,7 +188,7 @@
     "social sharing text without rank": "ମୁଁ https://bhashini.gov.in/bhashadaan ରେ ଭାରତ ପାଇଁ ଉନ୍ମୁକ୍ତ ଭାଷା ସଂଗ୍ରହାଳୟ ନିର୍ମାଣ ଦିଗରେ ସହଯୋଗ କରିଛି। ଆପଣ ଏବଂ ମୁଁ ଆମର ସ୍ୱର ପ୍ରଦାନ କରି ଏକ ପାର୍ଥକ୍ୟ ସୃଷ୍ଟିକରିବା ଯାହା ମେସିନକୁ ଆମ ଭାଷା ବୁଝିବାରେ ସହାୟକ ହେବ। ଆପଣ ଆପଣଙ୍କ ବିଟ୍ ଏବଂ ଭାଷାକୁ ସଶକ୍ତ କରିବାକୁ ଚାହାନ୍ତି କି?",
     "Select the language for voluntary contribution": "ସ୍ୱେଚ୍ଛାକୃତ ପ୍ରଦାନ  ପାଇଁ ଭାଷା ଚୟନ କରନ୍ତୁ",
     "Speak": "କୁହନ୍ତୁ",
-    "Validate What They Say": "ସେମାନେ ଯାହା କହୁଛନ୍ତି ତାହାକୁ ବୈଧ କରନ୍ତୁ",
+    "Validate What They Say": "ସେମାନେ ଯାହା କୁହନ୍ତି ତାହା ବୈଧ କରନ୍ତୁ",
     "Help us by validating the recordings that others have contributed": "ଅନ୍ୟମାନେ ପ୍ରଦାନ କରିଥିବା ସ୍ୱର ନମୁନାକୁ ବୈଧ କରିବାରେ ଆମକୁ ସାହାଯ୍ୟ କରନ୍ତୁ।",
     "Bolo India: A crowdsourcing initiative for Indian languages": "ବୋଲୋ ଇଣ୍ଡିଆ : ଭାରତୀୟ ଭାଷା ପାଇଁ ଏକ କ୍ରାଉଡ ସୋର୍ସିଂ ପଦକ୍ଷେପ।",
     "India needs to be Aatmanirbhar in the area of speech recognition in Indian languages.  Hence, we want to create an open data repository of many Indian voices. Bolo India invites you to volunteer contribute your voice for this cause.": "ଭାରତୀୟ ଭାଷାରେ ସ୍ୱୀକୃତି ମଡେଲଗୁଡ଼ିକର ବିକାଶ ପାଇଁ, ବିବିଧ ଭାରତୀୟ ସ୍ୱରର ଏକ ଉନ୍ମୁକ୍ତ ଡାଟା ସଂଗ୍ରହାଳୟର ଆବଶ୍ୟକତା ରହିଛି। ବୋଲୋ ଇଣ୍ଡିଆ ଆପଣଙ୍କୁ ଭାରତୀୟ ସ୍ୱରର ଏକ ବିବିଧ ଉନ୍ମୁକ୍ତ ଡାଟା ସଂଗ୍ରହାଳୟ ସୃଷ୍ଟି କରିବାକୁ ଆପଣଙ୍କ ସ୍ୱରରେ ଯୋଗଦାନ କରିବାକୁ ଆମନ୍ତ୍ରଣ କରୁଛି।",
@@ -466,7 +466,7 @@
     "Back to Bolo India Home": "ବୋଲୋ ଇଣ୍ଡିଆ ଘରକୁ ଫେରନ୍ତୁ",
     "<span id=\"current_badge_name_1\"></span> contributor level achieved for validating <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_name_1\"></span> contributor level achieved for validating <span id=\"current_badge_count\"></span> sentences.",
     "Contribute your voice": "Contribute your voice",
-    "Validate what they say": "Validate what they say",
+    "Validate what they say": "ସେମାନେ ଯାହା କୁହନ୍ତି ତାହା ବୈଧ କରନ୍ତୁ",
     "By proceeding ahead you agree to the <a href=\"../Terms and Conditions\"</a>": "By proceeding ahead you agree to the <a href=\"../Terms and Conditions\"</a>",
     "By proceeding ahead you agree to the <a href=\"../Terms and Conditions\"</a> Terms and Conditions": "By proceeding ahead you agree to the <a href=\"../Terms and Conditions\"</a> Terms and Conditions",
     "By proceeding ahead you agree to the <a href=\"../Terms and Conditions\"</a>Terms and Conditions": "By proceeding ahead you agree to the <a href=\"../Terms and Conditions\"</a>Terms and Conditions",
@@ -711,5 +711,5 @@
     "Towards digital empowerment for all...": "ସମସ୍ତଙ୍କ ଡିଜିଟାଲ ସଶକ୍ତିକରଣ ଦିଗରେ ...",
     "Remove language barriers with BhashaDaan": "ଭାଷାଦାନ ଜରିଆରେ ଭାଷାର ପ୍ରତିବନ୍ଧକ ଦୂର କରନ୍ତୁ",
     "Your selected language": "ତୁମର ମନୋନୀତ ଭାଷା",
-    " Top languages": "ଶୀର୍ଷ ଭାଷା"
+    "Top languages": "ଶୀର୍ଷ ଭାଷା"
 }
