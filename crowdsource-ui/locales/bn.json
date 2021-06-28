@@ -464,5 +464,7 @@
 	"Beta": "Beta",
 	"You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "আপনি আপনার <span id=\"next_badge_name\"></span> ভাষা সমর্থক ব্যাজ অর্জন থেকে ঠিক <span id=\"sentense_away_count\"></span> বাক্য দূরে রয়েছেন। <a href=\"../badges.html\">অধিক জানক </a>",
 	"You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.",
-	"You are just <span id=\"sentense_away_count\"></span> images away from earning your Bhasha Samarthak <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "আপনি আপনার <span id=\"next_badge_name\"></span> ভাষা সমর্থক ব্যাজ অর্জন থেকে ঠিক <span id=\"sentense_away_count\"></span> চিত্র দূরে রয়েছেন। <a href=\"../badges.html\">অধিক জানক</a>"
+	"You are just <span id=\"sentense_away_count\"></span> images away from earning your Bhasha Samarthak <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "আপনি আপনার <span id=\"next_badge_name\"></span> ভাষা সমর্থক ব্যাজ অর্জন থেকে ঠিক <span id=\"sentense_away_count\"></span> চিত্র দূরে রয়েছেন। <a href=\"../badges.html\">অধিক জানক</a>",
+	"Towards digital empowerment for all...": "সবার জন্য ডিজিটাল ক্ষমতায়নের দিকে ...",
+	"Remove language barriers with BhashaDaan": "ভাষাদানের সাহায্যে ভাষার বাধা মুছে ফেলুন"
 }
