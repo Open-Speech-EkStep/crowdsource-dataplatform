@@ -84,7 +84,7 @@ jobs:
 
             ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
 
-            ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --recursive
+            ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --cache-control "max-age=1200" --recursive
 
   db_migrate_azure:
     parameters:
