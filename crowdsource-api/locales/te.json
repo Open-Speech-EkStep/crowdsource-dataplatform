@@ -1,6 +1,6 @@
 {
-	"hrs recorded in": "%hours గంటలు %language లో నమోదు చేయబడ్డాయి",
-	"hrs validated in": "%hours గంటలు %language లో ధృవీకరించబడ్డాయి",
+	"hrs recorded in": "%hours %language లో నమోదు చేయబడ్డాయి",
+	"hrs validated in": "%hours %language లో ధృవీకరించబడ్డాయి",
 	"hours": "గంటలు",
 	"minutes": "నిమిషాలు",
 	"seconds": "సెకన్ల",
