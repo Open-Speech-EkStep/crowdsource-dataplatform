@@ -165,11 +165,11 @@ $(document).ready(function () {
     downloadPdf($(this).attr("data-badge"));
   });
 
-  $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
-    if (!$(this).attr("disabled")) {
-      downloadPdf($(this).attr("data-badge"));
-    }
-  });
+  // $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
+  //   if (!$(this).attr("disabled")) {
+  //     downloadPdf($(this).attr("data-badge"));
+  //   }
+  // });
 
   localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
   initializeFeedbackModal();
