@@ -80,7 +80,6 @@ const updateLocaleLanguagesDropdown = (language) => {
   const dropDown = $('#localisation_dropdown');
   language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
   const localeLang = ALL_LANGUAGES.find(ele => ele.value.toLowerCase() === language.toLowerCase());
-  console.log(localeLang);
   if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
     dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
   } else {
