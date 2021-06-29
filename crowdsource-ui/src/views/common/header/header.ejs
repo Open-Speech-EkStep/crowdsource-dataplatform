@@ -37,9 +37,7 @@
                     <span><%= __('Language') %></span>
                 </a>
                 <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton">
-                    <% LANGUAGES.forEach(function(obj) { if(obj.hasLocaleText){%>
-                        <a id="<%= obj.value.toLowerCase() %>" class="dropdown-item" href="#" locale="<%= obj.id %>"><%= obj.text %></a>
-                    <%} }) %>
+                   
                 </div>
             </li>
             <li class="nav-item p-2 module-item d-none" value="about-us"><a href="<%- `${path}about-us.html`%>" class="nav-link text-dark font-weight-bold">

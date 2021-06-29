@@ -1,5 +1,5 @@
 const { onActiveNavbar, onChangeUser, showUserProfile ,onOpenUserDropDown} = require('../common/header');
-const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,landToHome,hasUserRegistered } = require('../common/common');
+const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,landToHome,hasUserRegistered,updateLikhoLocaleLanguagesDropdown } = require('../common/common');
 const {
   // toggleFooterPosition,
   getLocaleString,
@@ -37,29 +37,6 @@ const addToLanguage = function (id, list) {
   selectBar.innerHTML = options;
 }
 
-const updateLocaleLanguagesDropdown = (language, toLanguage) => {
-  // const dropDown = $('#localisation_dropdown');
-  // const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-  // const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
-  // const invalidToLang = toLanguage.toLowerCase() === "english" || toLang.hasLocaleText === false;
-  // const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
-  // if (invalidToLang && invalidFromLang) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
-  // } else if (invalidFromLang) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //     <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  // } else if (invalidToLang) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  // } else if (toLanguage.toLowerCase() === language.toLowerCase()) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  // } else {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
-  //       <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  // }
-}
 
 function initializeBlock() {
   const speakerDetailsKey = 'speakerDetails';
@@ -91,7 +68,7 @@ function initializeBlock() {
     if (fromLanguage && toLanguage) {
       const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
       addToLanguage('to-language', languages);
-      updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
+      updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
       showFucntionalCards('parallel', fromLanguage, toLanguage);
       localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
       $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
@@ -103,7 +80,7 @@ function initializeBlock() {
       addToLanguage('to-language', languages);
       $('#to-language option:first-child').attr("selected", "selected");
       toLanguage = $('#to-language option:first-child').val();
-      updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
+      updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
       showFucntionalCards('parallel', fromLanguage, toLanguage);
       localStorage.setItem(LIKHO_FROM_LANGUAGE, fromLanguage);
       localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
@@ -112,12 +89,13 @@ function initializeBlock() {
     $('#from-language').on('change', (e) => {
       fromLanguage = e.target.value;
       localStorage.setItem(LIKHO_FROM_LANGUAGE, fromLanguage);
+      localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
       const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
       addToLanguage('to-language', languages);
       $('#to-language option:first-child').attr("selected", "selected");
       toLanguage = $('#to-language option:first-child').val();
       localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
-      updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
+      updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
       showFucntionalCards('parallel', fromLanguage, toLanguage);
@@ -127,7 +105,7 @@ function initializeBlock() {
       toLanguage = e.target.value;
       const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
       localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
-      updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
+      updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
       showFucntionalCards('parallel', fromLanguage, toLanguage);

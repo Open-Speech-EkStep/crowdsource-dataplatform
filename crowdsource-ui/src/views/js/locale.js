@@ -1,5 +1,5 @@
 const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
-const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE ,CURRENT_MODULE,MODULE} = require("./constants");
+const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE ,CURRENT_MODULE,MODULE, DEFAULT_CON_LANGUAGE} = require("./constants");
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');
@@ -14,6 +14,13 @@ const registerEvents = function () {
 const localisationChangeHandler = e => {
     const targetedLang = e.target;
     const locale = targetedLang.getAttribute('locale');
+    const module = localStorage.getItem(CURRENT_MODULE);
+    const splitValues = location.href.split('/');
+    let currentPage = splitValues[splitValues.length - 1];
+    const selectedLanguage = ALL_LANGUAGES.find(item => item.id == locale);
+    if(module == "home" && currentPage == "home.html") {
+       localStorage.setItem(CONTRIBUTION_LANGUAGE, selectedLanguage ? selectedLanguage.value : DEFAULT_CON_LANGUAGE);
+    }
     if (locale)
         changeLocale(locale);
 };
