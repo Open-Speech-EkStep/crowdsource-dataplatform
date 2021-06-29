@@ -28,7 +28,7 @@ function downloadPdf(badgeType) {
   const pdf = new jsPDF()
   const img = new Image();
   img.onload = function () {
-    pdf.addImage(this, 36, 10, 128, 148);
+    pdf.addImage(this, 50, 10, 108, 130);
     pdf.save(`${badgeType}-badge.pdf`);
   };
 
