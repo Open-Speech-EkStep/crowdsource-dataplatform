@@ -323,7 +323,7 @@ step("user should be able to see <arg0> , <arg1> , <arg2> , <arg3>", async funct
 step("User plays the audio , <arg0>,<arg1> should be disabled", async function (arg0, arg1) {
     await taiko.waitFor(500)
     await click(taiko.image({ id: "play" }));
-    await taiko.waitFor(1000)
+    await taiko.waitFor(100)
     assert.ok(await taiko.button({ id: arg0 }).isDisabled());
     assert.ok(await taiko.button({ id: arg1 }).isDisabled());
     const count = 20;

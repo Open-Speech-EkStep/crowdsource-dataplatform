@@ -695,7 +695,7 @@
     "Towards digital": "ସମସ୍ତଙ୍କ ଡିଜିଟାଲ",
     "empowerment for all...": "ସଶକ୍ତିକରଣ ଦିଗରେ...",
     "Remove language barriers with": "ଜରିଆରେ ଭାଷାର ପ୍ରତିବନ୍ଧକ ଦୂର କରନ୍ତୁ ",
-    "*required": "*required",
+    "*required": "*ଆବଶ୍ୟକ",
     "optional": "ଇଚ୍ଛାଧିନ",
     "upto 10 (Kid)": "upto 10 (Kid)",
     "10 - 30 (Youth)": "10 - 30 (Youth)",
@@ -711,5 +711,18 @@
     "Towards digital empowerment for all...": "ସମସ୍ତଙ୍କ ଡିଜିଟାଲ ସଶକ୍ତିକରଣ ଦିଗରେ ...",
     "Remove language barriers with BhashaDaan": "ଭାଷାଦାନ ଜରିଆରେ ଭାଷାର ପ୍ରତିବନ୍ଧକ ଦୂର କରନ୍ତୁ",
     "Your selected language": "ତୁମର ମନୋନୀତ ଭାଷା",
-    "Top languages": "ଶୀର୍ଷ ଭାଷା"
+    "Top languages": "ଶୀର୍ଷ ଭାଷା",
+    "Suggestion": "Suggestion",
+    "Complaint": "Complaint",
+    "Compliment": "Compliment",
+    "Error": "Error",
+    "Telugu": "ତେଲୁଗୁ",
+    "Marathi": "ମରାଠୀ",
+    "Tamil": "ତାମିଲ୍‌",
+    "Kannada": "କନ୍ନଡ",
+    "Malayalam": "ମାଲାୟାଲମ୍",
+    "Odia": "ଓଡ଼ିଆ",
+    "Assamese": "ଆସାମିଜ୍‌",
+    "Punjabi": "ପୁଞ୍ଜାବୀ",
+    "Gujarati": "ଗୁଜରାଟୀ"
 }

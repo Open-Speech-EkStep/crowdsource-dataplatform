@@ -445,7 +445,19 @@
 	"Your selected language": "Your selected language",
 	"Top languages": "Top languages",
 	"Suggestion": "Suggestion",
-	"Error": "Error",
 	"Complaint": "Complaint",
-	"Compliment": "Compliment"
+	"Compliment": "Compliment",
+	"Error": "Error",
+	"Telugu": "Telugu",
+	"Hindi": "Hindi",
+	"Marathi": "Marathi",
+	"Tamil": "Tamil",
+	"Kannada": "Kannada",
+	"Malayalam": "Malayalam",
+	"Bengali": "Bengali",
+	"Odia": "Odia",
+	"Assamese": "Assamese",
+	"Punjabi": "Punjabi",
+	"Gujarati": "Gujarati",
+	"Start typing here...": "Start typing here..."
 }
