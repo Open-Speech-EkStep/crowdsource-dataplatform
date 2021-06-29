@@ -139,6 +139,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
     await ejs2html(`${ejsPath}/profanity-boloindia.ejs`, {LANGUAGES}, i18n, outputPath, 'profanity-boloindia.html', locale);
     await ejs2html(`${ejsPath}/profanity-home.ejs`, { LANGUAGES }, i18n, outputPath, 'profanity-home.html', locale);
     await ejs2html(`${ejsPath}/profanity.ejs`, {LANGUAGES}, i18n, outputPath, 'profanity.html', locale);
+    await ejs2html(`${ejsPath}/key_gen.ejs`, {}, i18n, outputPath, 'key_gen.html', locale);
   });
 };
 
