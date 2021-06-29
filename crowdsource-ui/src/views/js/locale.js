@@ -41,7 +41,7 @@ const changeLocale = function (locale) {
     if(module == 'bolo' && currentPage == "home.html"){
         location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
     }
-    else if(module == 'bolo' || module == 'home') {
+    else if(module == 'bolo' || module == 'home' || currentPage == "badges.html") {
         location.href = `/${locale}/${currentPage}`;
     }
     else {
