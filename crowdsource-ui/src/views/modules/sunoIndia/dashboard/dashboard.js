@@ -154,7 +154,7 @@ $(document).ready(function () {
         const localSpeakerDataParsed = JSON.parse(speakerDetails);
         showUserProfile(localSpeakerDataParsed.userName);
     }
-    onChangeUser('./dashboard.html',MODULE.suno.value);
+    onChangeUser('./home.html',MODULE.suno.value);
     onOpenUserDropDown();
 
     // toggleFooterPosition();

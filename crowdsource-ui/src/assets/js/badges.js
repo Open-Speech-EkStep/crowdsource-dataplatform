@@ -165,7 +165,7 @@ $(document).ready(function () {
     const localSpeakerDataParsed = JSON.parse(speakerDetails);
     showUserProfile(localSpeakerDataParsed.userName);
   }
-  onChangeUser('./badges.html',moduleType);
+  onChangeUser('./home.html',moduleType);
   onOpenUserDropDown();
  
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';

@@ -110,3 +110,17 @@ Tags: component
 * Select Contribution Language as "ગુજરાતી"
 * Check "Transcribe" option should be "disabled" on Home page
 * Check "Validate" option should be "disabled" on Home page
+
+## Validate redirection url after change user 
+* Select Contribution Language as "ಕನ್ನಡ"
+* When user clicks on View all Details buttton user should be able to see "Progress Chart" , "State Wise distribution"
+* After changing username, user should land on home page
+* Validate Suno India content
+* click on platform landing page logo
+* After changing username, user should land on home page
+* Validate platform landing page
+* Click "Know More" Link
+* After changing username, user should land on home page
+* Validate platform landing page
+
+

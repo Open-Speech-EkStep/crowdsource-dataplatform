@@ -199,7 +199,7 @@ $(document).ready(function () {
         const localSpeakerDataParsed = JSON.parse(speakerDetails);
         showUserProfile(localSpeakerDataParsed.userName);
     }
-    onChangeUser('./dashboard.html',MODULE.likho.value);
+    onChangeUser('./home.html',MODULE.likho.value);
     onOpenUserDropDown();
 
     // toggleFooterPosition();

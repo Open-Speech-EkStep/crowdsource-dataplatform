@@ -332,7 +332,7 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./thank-you.html', MODULE.bolo.value);
+    onChangeUser('./boloIndia/home.html', MODULE.bolo.value);
     onOpenUserDropDown();
     setPageContentHeight();
     setSentencesContributed();

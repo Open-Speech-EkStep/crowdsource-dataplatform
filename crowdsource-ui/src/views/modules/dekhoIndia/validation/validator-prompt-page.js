@@ -472,7 +472,7 @@ $(document).ready(() => {
     return;
   }
   showUserProfile(localSpeakerDataParsed.userName);
-  onChangeUser('./validator-page.html',MODULE.dekho.value);
+  onChangeUser('./home.html',MODULE.dekho.value);
   onOpenUserDropDown();
   const isExistingUser = localSentencesParsed &&
     localSentencesParsed.userName === localSpeakerDataParsed.userName

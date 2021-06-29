@@ -173,7 +173,7 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName)
-    onChangeUser('./validator-thank-you.html',MODULE.suno.value);
+    onChangeUser('./home.html',MODULE.suno.value);
     onOpenUserDropDown();
     // toggleFooterPosition();
     setPageContentHeight();

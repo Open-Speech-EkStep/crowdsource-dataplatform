@@ -614,7 +614,7 @@ function executeOnLoad() {
         }
 
         showUserProfile(localSpeakerDataParsed.userName)
-        onChangeUser('./record.html',MODULE.bolo.value);
+        onChangeUser('./boloIndia/home.html',MODULE.bolo.value);
         onOpenUserDropDown();
         const isExistingUser = localSentencesParsed &&
             localSentencesParsed.userName === localSpeakerDataParsed.userName

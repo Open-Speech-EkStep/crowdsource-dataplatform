@@ -262,3 +262,13 @@ step("Change user name to <usrnm>", async function(usrnm) {
     await click(taiko.button({ id: 'proceed-box' }))
     await taiko.waitFor(1000)
 });
+
+
+step("After changing username, user should land on home page", async function() {
+	await click(taiko.link({ id: "nav-user" }));
+    await assert.ok(await text('Change User').isVisible());
+    await click(text('Change User'));
+    await taiko.waitFor(1000);
+    await click(taiko.button({ id: 'proceed-box' }))
+    await taiko.waitFor(1000)
+});

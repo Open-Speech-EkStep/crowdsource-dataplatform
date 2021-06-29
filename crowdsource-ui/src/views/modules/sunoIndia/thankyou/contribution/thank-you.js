@@ -147,7 +147,7 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName)
-    onChangeUser('./thank-you.html', MODULE.suno.value);
+    onChangeUser('./home.html', MODULE.suno.value);
     onOpenUserDropDown();
 
     setPageContentHeight();

@@ -465,7 +465,7 @@ $(document).ready(() => {
   }
 
   showUserProfile(localSpeakerDataParsed.userName);
-  onChangeUser('./validator-page.html',MODULE.bolo.value);
+  onChangeUser('./boloIndia/home.html',MODULE.bolo.value);
     onOpenUserDropDown();
 
   const isExistingUser = localSentencesParsed &&

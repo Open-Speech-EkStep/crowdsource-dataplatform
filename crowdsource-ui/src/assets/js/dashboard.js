@@ -209,7 +209,7 @@ $(document).ready(function () {
         const localSpeakerDataParsed = JSON.parse(speakerDetails);
         showUserProfile(localSpeakerDataParsed.userName);
     }
-    onChangeUser('./dashboard.html',MODULE.bolo.value);
+    onChangeUser('./boloIndia/home.html',MODULE.bolo.value);
     onOpenUserDropDown();
 });
 

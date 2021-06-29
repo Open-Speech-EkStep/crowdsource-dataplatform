@@ -58,7 +58,7 @@ $(document).ready(function () {
         const localSpeakerDataParsed = JSON.parse(speakerDetails);
         showUserProfile(localSpeakerDataParsed.userName);
     }
-    onChangeUser('./about-us.html','home');
+    onChangeUser('./home.html','home');
 
     let langTop;
     $('#languageTop').on('change', (e) => {

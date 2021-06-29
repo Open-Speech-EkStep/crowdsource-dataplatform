@@ -173,7 +173,7 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName)
-    onChangeUser('./thank-you.html', MODULE.likho.value);
+    onChangeUser('./home.html', MODULE.likho.value);
     onOpenUserDropDown();
     setPageContentHeight();
     setSentencesContributed();

@@ -450,7 +450,7 @@ $(document).ready(() => {
     return;
   }
   showUserProfile(localSpeakerDataParsed.userName)
-  onChangeUser('./validator-page.html',MODULE.likho.value);
+  onChangeUser('./home.html',MODULE.likho.value);
   onOpenUserDropDown();
   const isExistingUser = localSentencesParsed &&
     localSentencesParsed.userName === localSpeakerDataParsed.userName

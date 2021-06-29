@@ -638,7 +638,7 @@ $(document).ready(() => {
   }
 
   showUserProfile(localSpeakerDataParsed.userName)
-  onChangeUser('./validator-page.html',MODULE.suno.value);
+  onChangeUser('./home.html',MODULE.suno.value);
   onOpenUserDropDown();
 
   const isExistingUser = localSentencesParsed &&

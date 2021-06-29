@@ -416,7 +416,7 @@ function executeOnLoad() {
     }
 
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./record.html',MODULE.likho.value);
+    onChangeUser('./home.html',MODULE.likho.value);
     onOpenUserDropDown();
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName

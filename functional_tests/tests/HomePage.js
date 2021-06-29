@@ -87,3 +87,14 @@ step("Click <name> Link", async function(name) {
 	assert.ok(await link(name).exists());
 	await click(link(name));
 });
+
+step("Validate platform landing page", async function() {
+	assert.ok(await text("Your contribution can empower Bhashini to make many such stories happen.").isVisible());
+	assert.ok(await text("One platform, multiple crowdsourcing initiatives").isVisible());
+	assert.ok(await text("Contribute and become a Bhasha Samarthak").isVisible());
+});
+
+step("click on platform landing page logo", async function() {
+	assert.ok(await id('bhashadaan_logo').exists());
+	await click(id('bhashadaan_logo'));
+});

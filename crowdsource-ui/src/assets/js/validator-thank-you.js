@@ -170,7 +170,7 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./validator-thank-you.html',MODULE.bolo.value)
+    onChangeUser('./boloIndia/home.html',MODULE.bolo.value)
     onOpenUserDropDown();
     // toggleFooterPosition();
     setPageContentHeight();

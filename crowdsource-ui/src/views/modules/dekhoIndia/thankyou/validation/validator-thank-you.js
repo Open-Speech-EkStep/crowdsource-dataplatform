@@ -169,7 +169,7 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./validator-thank-you.html',MODULE.dekho.value);
+    onChangeUser('./home.html',MODULE.dekho.value);
     onOpenUserDropDown();
     setPageContentHeight();
     setSentencesContributed();

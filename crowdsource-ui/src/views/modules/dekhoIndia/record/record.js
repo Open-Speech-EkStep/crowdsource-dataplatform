@@ -487,7 +487,7 @@ const executeOnLoad = function () {
     }
 
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./record.html',MODULE.dekho.value);
+    onChangeUser('./home.html',MODULE.dekho.value);
     onOpenUserDropDown();
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName

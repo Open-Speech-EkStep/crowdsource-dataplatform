@@ -557,7 +557,7 @@ function executeOnLoad() {
       return;
     }
     showUserProfile(localSpeakerDataParsed.userName)
-    onChangeUser('./record.html',MODULE.suno.value);
+    onChangeUser('./home.html',MODULE.suno.value);
     onOpenUserDropDown();
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName
