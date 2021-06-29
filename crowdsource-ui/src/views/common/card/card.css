@@ -4,6 +4,12 @@
     }
 }
 
+@media screen and (max-width: 400px) {
+    .warning-mesg p{
+        font-size: 11px !important;
+    }
+}
+
 @media screen and (max-width: 991px) {
     #start_recording, #start_validating {
         width: 120px;

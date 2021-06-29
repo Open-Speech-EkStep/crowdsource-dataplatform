@@ -270,7 +270,7 @@ body {
         border: 1px solid #42B2C6;
         width: 95%;
         padding: 8px 15px;
-        height: 38px;
+        min-height: 38px;
         border-radius: 12px;
         background: rgba(66, 178, 198, 0.1);
         color: #42B2C6;;
@@ -290,7 +290,7 @@ body {
         border: 1px solid #4d82f7;
         width: 95%;
         padding: 8px 15px;
-        height: 38px;
+        min-height: 38px;
         border-radius: 12px;
         background: rgba(77, 130, 247, .1);
         color: #4D82F7;;

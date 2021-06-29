@@ -1,6 +1,6 @@
 {
-	"hrs recorded in": "%language માં %hours કલાકો રેકોર્ડ કર્યા",
-	"hrs validated in": "%language માં %hours કલાકો માન્ય કર્યા",
+	"hrs recorded in": "%language માં %hours રેકોર્ડ કર્યા",
+	"hrs validated in": "%language માં %hours માન્ય કર્યા",
 	"hours": "કલાકો",
 	"minutes": "મિનિટો",
 	"seconds": "સેકન્ડ્સ",
@@ -215,9 +215,15 @@
 	"The levels defined by an overall mix of contributions and validations on Bolo India. Please see the criteria that defines different levels below:": "The levels defined by an overall mix of contributions and validations on Bolo India. Please see the criteria that defines different levels below:",
 	"Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but may decrease though if it doesn’t pass the validation test. We want you to remain an active contributor to Bolo India and stand a chance to get recognised by the Ministry of Electronics and Information Technology.": "Please note that your levels and badges may take upto 48hrs to update. Your contribution does not expire, but may decrease though if it doesn’t pass the validation test. We want you to remain an active contributor to Bolo India and stand a chance to get recognised by the Ministry of Electronics and Information Technology.",
 	"Help your language achieve it’s goal of <span id=\"language-hour-goal\"></span> hrs. We know you can do more!": "તમારી ભાષાને <span id=\"language-hour-goal\"></span> કલાકનું લક્ષ્ય પ્રાપ્ત કરવામાં મદદ કરો. અમે જાણીએ છીએ કે તમે વધુ કરી શકો છો!",
-	"Bolo India": "Bolo India",
-	"Suno India": "Suno India",
-	"Likho India": "Likho India",
-	"Dekho India": "Dekho India",
-	"User Details": "User Details"
+	"Bolo India": "બોલો ઇન્ડિયા",
+	"Suno India": "સાંભળો ઇન્ડિયા",
+	"Likho India": "લખો ઇન્ડિયા",
+	"Dekho India": "જુઓ ઇન્ડિયા",
+	"User Details": "યુઝરની વિગતો",
+	"Recording": "રેકોર્ડિંગ",
+    "Labelling":"લેબલિંગ",
+    "Transcribing":"ટ્રાન્સક્રાઇબ",
+    "Translating":"અનુવાદ",
+	"Images":"ઇમેજિસ",
+	"Validating": "માન્ય"
 }

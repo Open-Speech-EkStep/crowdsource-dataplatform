@@ -99,7 +99,6 @@
 }
 
 #badge-section-card button{
-    max-width:180px;
     min-width:180px;
     height:48px;
     font-size: 18px;
@@ -741,27 +740,32 @@
  .h1{    
      font-size: 45px;
      line-height: 48px;
-     letter-spacing: -2px;
+     font-weight: 500;
+     font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
  }
  .h2{
      font-size: 40px;
-     line-height: 64px;
-     letter-spacing: -2px;
+     font-weight: 500;
+     line-height: 50px;
+     font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
  }
  .h3{
      font-size: 40px;
      line-height: 64px;
-     letter-spacing: -2px;
+     font-weight: 500;
+     font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
  }
  .h4{
      font-size: 25px;
      line-height: 64px;
-     letter-spacing: -2px;
+     font-weight: 500;
+     font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
  }
  .h6{
      font-size: 25px;
      line-height: 36px;
-     letter-spacing: -2px;
+     font-weight: 500;
+     font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
  }
  .p-5{
      padding: 3rem;
@@ -782,7 +786,8 @@
      padding: 10px 40px;
  }
  @media only screen and (min-width: 992px) {
- .left-bg{ background:url("../../img/left.png") no-repeat left center;}
- .right-bg{ background:url("../../img/right.png") no-repeat right center;}
+ .left-bg{ background:url("/img/left.png") no-repeat left center; 
  }
- @media only screen and (min-width: 768px) {.right-bg{ background:url("../../img/right.png") no-repeat right center;}}
+ .right-bg{ background:url("/img/right.png") no-repeat right center;}
+ }
+ @media only screen and (min-width: 768px) {.right-bg{ background:url("/img/right.png") no-repeat right center;}}

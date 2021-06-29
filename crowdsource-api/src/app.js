@@ -97,7 +97,7 @@ const multerStorage = multer.diskStorage({
 });
 const upload = multer({ storage: multerStorage });
 const corsOptions = {
-    origin: [/vakyansh\.in$/, /nplt\.in$/, /azureedge\.net$/],
+    origin: [/vakyansh\.in$/, /nplt\.in$/, /azureedge\.net$/, /azurefd\.net$/, /gov\.in$/],
     credentials: true,
 };
 app.use(cors(corsOptions));
@@ -341,6 +341,16 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'gold',
             'platinum',
             'N/A',
+            'Bolo India',
+            'Suno India',
+            'Dekho India',
+            'Likho India',
+            'Recording',
+            'Labelling',
+            'Transcribing',
+            'Translating',
+            'Images',
+            'Validating'
         ];
 
         const langSttr = {};

@@ -114,8 +114,8 @@
 	"Ensure the voice is <b>clear and audible</b>": "Tuzo tallo nivoll ani aikunk ieta tachi khatri kor",
 	"Match the voice to the text <b>accurately</b>": "Mozkura vixim tuzo tallo ochukponnim zulloi",
 	"If you are unsure of the match, skip the particular voice sample": "Tuka zor zullpachi khatri na, omuk talleacho nomuno vogllai",
-	"hrs recorded in": "%hours hrs recorded in %language",
-	"hrs validated in": "%hours hrs validated in %language",
+	"hrs recorded in": "%hours recorded in %language",
+	"hrs validated in": "%hours validated in %language",
 	"By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions</a>",
 	"Help your own language": "Help your own language",
 	"Congratulations!!! You have completed this batch of sentences": "Congratulations!!! You have completed this batch of sentences",
@@ -216,5 +216,11 @@
 	"Suno India": "Suno India",
 	"Likho India": "Likho India",
 	"Dekho India": "Dekho India",
-	"User Details": "User Details"
+	"User Details": "User Details",
+	"Recording": "Recording",
+    "Labelling":"Labelling",
+    "Transcribing":"Transcribing",
+    "Translating":"Translating",
+	"Images":"Images",
+	"Validating": "Validating"
 }

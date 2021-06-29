@@ -67,16 +67,27 @@ const showUserProfile = function (userName) {
 }
 
 const onChangeUser = (url, module) => {
-  const $userName = $('#username');
+  try {
+    const $userName = $('#username');
   const $startRecordBtn = $('#proceed-box');
-  const $startRecordBtnTooltip = $startRecordBtn.parent();
+  let $startRecordBtnTooltip;
+  if($startRecordBtn)   {
+    $startRecordBtnTooltip = $startRecordBtn.parent();
+  }
+
   setUserModalOnShown($userName);
-  $startRecordBtnTooltip.tooltip('disable');
+
+  if($startRecordBtnTooltip) {
+    $startRecordBtnTooltip.tooltip('disable');
+  }
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
   $('#change_user').on('click', () => {
     setStartRecordingBtnOnClick(url, module);
   })
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 const $locale_language_dropdown = $('#locale_language_dropdown');
