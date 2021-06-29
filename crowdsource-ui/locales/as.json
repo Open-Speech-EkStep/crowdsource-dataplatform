@@ -227,10 +227,10 @@
 	"You are on a spree !!": "আপুনি এক উল্লাখত আছে!",
 	"I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?": " ভাৰতীয় ভাষাৰ মুক্ত উৎস সৃষ্টি কৰাৰ বাবে মই https://bhashini.gov.in/bhashadaan- ত অৱদান আগবঢ়াইছোঁ, ডাভৰ ডাঙৰ লিংগুষ্টিক এপ্লিকেচন বোৰৰ সৈতে আমাৰ ভাষাত কথা পাতিবলৈ আৰু মেচিন লাৰ্নিঙৰ  বাবে আপুনি আৰু মই আমাৰ কন্ঠ দান কৰি এক বৃহৎ পাৰ্থক্য আনি দিব পাৰোঁ। আপুনি ভাষাটো আৰু অলপ শক্তিশালী হোৱাটো বিচাৰে নেকি?",
 	"Help your language achieve it’s goal of <span id=\"language-hour-goal\"></span> hrs. We know you can do more!": "<span id=\"language-hour-goal\"></span> ঘন্টা ৰেকৰ্ড কৰি আপোনাৰ ভাষাক নিৰ্দিষ্ট লক্ষ্যত উপনীত হবলৈ সহায় কৰক, আমি জানো আপুনি এই কাম কৰিব পাৰিব",
-	"Bolo India": "কোৱা ইণ্ডিয়া",
-	"Suno India": "শুনা ইণ্ডিয়া",
-	"Likho India": "লিখা ইণ্ডিয়া",
-	"Dekho India": "চ‍োৱা ইণ্ডিয়া",
+	"Bolo India": "কোৱা দেখো",
+	"Suno India": "শুনা দেখো",
+	"Likho India": "লিখা দেখো",
+	"Dekho India": "চ‍োৱা দেখো",
 	"User Details": "ব্যৱহাৰকাৰীৰ বিৱৰণ",
 	"Type what you hear": "আপুনি যি শুনিছে টাইপ কৰক",
 	"Validate": "বৈধকৰণ",
@@ -476,8 +476,7 @@
 	"You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.",
 	"You are just <span id=\"sentense_away_count\"></span> images away from earning your Bhasha Samarthak <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "<span id=\"next_badge_name\"></span> ভাষা সমৰ্থক বেজ অৰ্জন কৰাৰ পৰা আপুনি কেৱল <span id=\"sentense_away_count\"></span>  খন ছৱিৰ দূৰত্বত আছে। <a href=\"../badges.html\">অধিক জানক</a>",
 	"Towards digital empowerment for all...": "Towards digital empowerment for all...",
-	"Remove language barriers with Bhasha": "Remove language barriers with Bhasha",
 	"Remove language barriers with BhashaDaan": "Remove language barriers with BhashaDaan",
-	"Your selected language": "Your selected language",
-	" Top languages": " Top languages"
+	"Your selected language": "আপোনাৰ বাছনি কৰা ভাষা",
+    "Top languages": "শীৰ্ষ ভাষাসমূহ"
 }

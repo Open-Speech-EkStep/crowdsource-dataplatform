@@ -452,9 +452,8 @@
 	"You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "ਤੁਸੀਂ <span id=\"current_badge_count\"></span> ਵਾਕਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਕੇ ਇੱਕ <span id=\"current_badge_name_1\"></span> ਭਾਸ਼ਾ ਸਮਰੱਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕੀਤਾ ਹੈ।",
 	"You are just <span id=\"sentense_away_count\"></span> images away from earning your Bhasha Samarthak <span id=\"next_badge_name\"></span> Badge. <a href=\"../badges.html\">Know more</a>": "ਤੁਸੀਂ ਸਿਰਫ <span id=\"sentense_away_count\"></span> ਚਿੱਤਰ ਆਪਣੇ <span id=\"next_badge_name\"></span> ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਦੀ ਕਮਾਈ ਤੋਂ ਦੂਰ ਹੋ।",
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> recordings to earn your  <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge. <a href=\"./badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> recordings to earn your  <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge. <a href=\"./badges.html\">Know more</a>",
-	"Towards digital empowerment for all...": "Towards digital empowerment for all...",
-	"Remove language barriers with Bhasha": "Remove language barriers with Bhasha",
-	"Remove language barriers with BhashaDaan": "Remove language barriers with BhashaDaan",
-	"Your selected language": "Your selected language",
-	" Top languages": " Top languages"
+	"Towards digital empowerment for all...": "ਸਾਰਿਆਂ ਦੇ ਲਈ ਡਿਜੀਟਲ ਸਸ਼ਕਤੀਕਰਨ ਵੱਲ...",
+	"Remove language barriers with BhashaDaan": "ਭਾਸ਼ਦਾਨ ਨਾਲ ਭਾਸ਼ਾ ਦੀਆਂ ਰੁਕਾਵਟਾਂ ਨੂੰ ਦੂਰ ਕਰੋ",
+	"Your selected language": "ਤੁਹਾਡੀ ਚੁਣੀ ਹੋਈ ਭਾਸ਼ਾ",
+    "Top languages": "ਚੋਟੀ ਦੀਆਂ ਭਾਸ਼ਾਵਾਂ"
 }

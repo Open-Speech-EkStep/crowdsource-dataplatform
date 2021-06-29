@@ -4,6 +4,7 @@ const {
   HOUR_IN_SECONDS,
   LOCALE_STRINGS,
   BADGES,
+  CURRENT_MODULE,
   CONTRIBUTION_LANGUAGE,
   MODULE,
   TOP_LANGUAGES_BY_HOURS
@@ -350,16 +351,20 @@ function downloadPdf(badgeType) {
   const pdf = new jsPDF()
   const img = new Image();
   img.onload = function () {
-    pdf.addImage(this, 36, 10, 128, 128);
+    pdf.addImage(this, 50, 10, 108, 130);
     pdf.save(`${badgeType}-badge.pdf`);
   };
 
   img.crossOrigin = "Anonymous";
-  img.src = BADGES[badgeType].imgSm;
+
+  const currentModule = localStorage.getItem(CURRENT_MODULE);
+  const badges = MODULE[currentModule].BADGES;
+
+  img.src = badges[badgeType].imgSm;
   const allBadges = JSON.parse(localStorage.getItem('badges'));
   const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
   if (badge) {
-    pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
+    pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 190);
   }
 }
 

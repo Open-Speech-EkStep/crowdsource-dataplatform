@@ -107,5 +107,5 @@ module.exports = {
     SUNOPAGE,
     LIKHOPAGE,
     LIKHO_TO_LANGUAGE,
-    LIKHO_FROM_LANGUAGE
+    LIKHO_FROM_LANGUAGE,
 }

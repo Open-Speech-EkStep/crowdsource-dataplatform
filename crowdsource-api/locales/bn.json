@@ -1,6 +1,6 @@
 {
-	"hrs recorded in": "%language এ %hours ঘণ্টা রেকডিং হয়েছে",
-	"hrs validated in": "%language এ %hours ঘণ্টা যাচাই হয়েছে",
+	"hrs recorded in": "%language এ %hours রেকডিং হয়েছে",
+	"hrs validated in": "%language এ %hours যাচাই হয়েছে",
 	"hours": "ঘন্টা",
 	"minutes": "মিনিট",
 	"seconds": "সেকেন্ডের",
@@ -312,11 +312,11 @@
 	"Suno India": "শোনো ইন্ডিয়া",
 	"Likho India": "লেখো ইন্ডিয়া",
 	"Dekho India": "দেখো ইন্ডিয়া",
-	"User Details": "User Details",
-	"Recording": "Recording",
-    "Labelling":"Labelling",
-    "Transcribing":"Transcribing",
-    "Translating":"Translating",
-	"Images":"Images",
-	"Validating": "Validating"
+	"User Details": "ব্যবহারকারীর বিশদ বিবরণ",
+	"Recording": "রেকর্ড হচ্ছে",
+    "Labelling":"লেবেলিং",
+    "Transcribing":"প্রতিলিপি",
+    "Translating":"অনুবাদ করা",
+	"Images":"চিত্রগুলি",
+	"Validating": "যাচাই করা হচ্ছে"
 }

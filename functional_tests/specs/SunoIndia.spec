@@ -31,12 +31,6 @@ Tags: component
 * When user clicks on back button, user should land on home page
 * Check "Validate" option should be "enabled" on Home page
 
-## Check Dashboard Page
-* When user clicks on View all Details buttton user should be able to see "Progress Chart" , "State Wise distribution"
-* user should be able to see "People participated" , "Duration transcribed" , "Duration validated" , "Languages"
-* When user select "ଓଡିଆ" Language from dropdown then "languages" should not visible
-* When user clicks on back button, user should land on home page
-
 ## Validate Transcribe flow
 * Select Contribution Language as "ಕನ್ನಡ"
 * Change user name to "T User"
@@ -103,6 +97,13 @@ Tags: component
 * User should see the "Validate More" button
 * Navigate to "Know more" button and click "Know more" button
 * should select "" tab, "Level", "Validations", "Badge", "Validating: 5 Images" text & "Bronze_validate","Silver_validate","Gold_validate","Platinum_validate" image exist by default
+* When user clicks on back button, user should land on home page
+
+
+## Check Dashboard Page
+* When user clicks on View all Details buttton user should be able to see "Progress Chart" , "State Wise distribution"
+* user should be able to see "People participated" , "Duration transcribed" , "Duration validated" , "Languages"
+* When user select "ಕನ್ನಡ" Language from dropdown then "Languages" should not visible
 * When user clicks on back button, user should land on home page
 
 ## Validate profanity configuration

@@ -28,7 +28,7 @@ function downloadPdf(badgeType) {
   const pdf = new jsPDF()
   const img = new Image();
   img.onload = function () {
-    pdf.addImage(this, 36, 10, 128, 128);
+    pdf.addImage(this, 50, 10, 108, 130);
     pdf.save(`${badgeType}-badge.pdf`);
   };
 
@@ -40,7 +40,7 @@ function downloadPdf(badgeType) {
   const allBadges = JSON.parse(localStorage.getItem('badges'));
   const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
   if (badge) {
-    pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 150);
+    pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 190);
   }
 }
 
