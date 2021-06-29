@@ -210,6 +210,7 @@ function initializeBlock() {
         localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
         top_lang = DEFAULT_CON_LANGUAGE;
     }
+    updateLocaleLanguagesDropdown(sentenceLanguage);
     const $languageNavBar = $('#language-nav-bar');
     const $sayListenLanguage = $('#say-listen-language');
 
@@ -223,6 +224,7 @@ function initializeBlock() {
             window.location.href = "./home.html";
             setLangNavBar(targetedDiv, language, $languageNavBar);
             updateHrsForSayAndListen(language);
+            redirectToLocalisedPage();
         }
     })
 
@@ -240,6 +242,7 @@ function initializeBlock() {
             updateHrsForSayAndListen(language);
             localStorage.setItem("i18n", "en");
             window.location.href = "./home.html";
+            redirectToLocalisedPage();
         }
     });
 

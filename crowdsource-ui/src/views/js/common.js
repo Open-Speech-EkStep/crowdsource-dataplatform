@@ -60,6 +60,7 @@ function showByHoursChartThankyouPage(type) {
 
 function redirectToLocalisedPage() {
   const locale = localStorage.getItem("i18n") ;
+  const module = localStorage.getItem(CURRENT_MODULE);
   const allLocales = ALL_LANGUAGES.map(language => language.id);
   // const locale = localeValue == 'null'  || localeValue == undefined? 'en' : localeValue;
   const splitValues = location.href.split('/');
@@ -69,22 +70,23 @@ function redirectToLocalisedPage() {
   }
   else {
     const language = ALL_LANGUAGES.find(ele => ele.id === locale);
-    if (language) {
+    if (language && module != 'likho') {
       updateLocaleLanguagesDropdown(language.value);
     }
   }
 }
 
 const updateLocaleLanguagesDropdown = (language) => {
-  // const dropDown = $('#localisation_dropdown');
-  // language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
-  // const localeLang = ALL_LANGUAGES.find(ele => ele.value.toLowerCase() === language.toLowerCase());
-  // if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
-  //   dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
-  // } else {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //     <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  // }
+  const dropDown = $('#localisation_dropdown');
+  language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
+  const localeLang = ALL_LANGUAGES.find(ele => ele.value.toLowerCase() === language.toLowerCase());
+  console.log(localeLang);
+  if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
+    dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
+  } else {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+      <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  }
 }
 
 const getAvailableLanguages = (type) => {
@@ -280,5 +282,26 @@ const showOrHideExtensionCloseBtn = function (){
 }
 
 
+const updateLikhoLocaleLanguagesDropdown = (language, toLanguage) => {
+  const dropDown = $('#localisation_dropdown');
+  const localeLang = ALL_LANGUAGES.find(ele => ele.value == language);
+  const toLang = ALL_LANGUAGES.find(ele => ele.value == toLanguage);
+  const invalidFromLang = language.toLowerCase() == "english" || localeLang.hasLocaleText == false;
+  const invalidToLang = toLanguage.toLowerCase() == "english" || toLang.hasLocaleText == false;
+  if (invalidToLang && invalidFromLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
+  } else if (invalidFromLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+      <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
+  } else if (invalidToLang) {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  } else {
+    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
+        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  }
+}
 
-module.exports = { isMobileDevice, getContributedAndTopLanguage, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered };
+
+
+module.exports = { isMobileDevice, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered };

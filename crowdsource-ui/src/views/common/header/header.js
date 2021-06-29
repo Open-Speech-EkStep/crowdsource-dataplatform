@@ -1,4 +1,4 @@
-const {CURRENT_MODULE, SPEAKER_DETAILS_KEY} = require('./constants');
+const {CURRENT_MODULE, SPEAKER_DETAILS_KEY, ALL_LANGUAGES} = require('./constants');
 const {
   setUserModalOnShown,
   setSpeakerDetails,
@@ -90,6 +90,15 @@ const onChangeUser = (url, module) => {
   }
 }
 
+const setDropdownValues = ()  => {
+  const dropDown = $('#localisation_dropdown');
+  document.getElementById('localisation_dropdown').innerHTML = '';
+  ALL_LANGUAGES.forEach(localeLang => {
+    if(localeLang.hasLocaleText)
+    dropDown.append(`<a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  });
+}
+
 const $locale_language_dropdown = $('#locale_language_dropdown');
 $locale_language_dropdown.off('show.bs.dropdown').on('show.bs.dropdown',()=>{
   $locale_language_dropdown.addClass('active')
@@ -99,4 +108,4 @@ $locale_language_dropdown.off('hide.bs.dropdown').on('hide.bs.dropdown',()=>{
   $locale_language_dropdown.removeClass('active')
 })
 
-module.exports = {onActiveNavbar, showUserProfile, onChangeUser,onOpenUserDropDown};
+module.exports = {onActiveNavbar, showUserProfile, onChangeUser,onOpenUserDropDown, setDropdownValues};

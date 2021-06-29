@@ -1,7 +1,7 @@
 const { onActiveNavbar,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
 
-const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages, landToHome,hasUserRegistered} = require('../common/common');
-const {toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString} = require('../common/utils');
+const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,updateLocaleLanguagesDropdown, landToHome,hasUserRegistered} = require('../common/common');
+const {toggleFooterPosition, getLocaleString} = require('../common/utils');
 const {
   setSpeakerDetails,
   setUserModalOnShown,

@@ -458,3 +458,6 @@ body {
   cursor: none !important;
 }
 
+#localisation_dropdown {
+  min-width: 8rem !important;
+}

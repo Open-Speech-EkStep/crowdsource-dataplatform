@@ -40,6 +40,7 @@ const statesInformation = [
 ]
 
 let polygonSeries = undefined;
+var chartReg = {};
 const $mapLoader = $('#map-loader');
 const $mapChart = $('#map');
 const drawMap = function (response, moduleType) {
@@ -224,6 +225,13 @@ function getLanguageSpecificData(data, lang) {
   return stateData;
 }
 
+// const disposeLineChart = (chartDiv) => {
+//   if (chartReg[chartDiv]) {
+//       chartReg[chartDiv].dispose();
+//       delete chartReg[chartDiv];
+//   }
+// }
+
 const generateIndiaMap = function (language="", moduleType) {
   $mapLoader.show().addClass('d-flex');
   $mapChart.addClass('d-none');
@@ -231,6 +239,7 @@ const generateIndiaMap = function (language="", moduleType) {
   performAPIRequest(url)
     .then((data) => {
       const result = language !== "" ? getLanguageSpecificData(data, language) : data;
+      // disposeLineChart('indiaMapChart')
       drawMap(result, moduleType);
       $mapLoader.hide().removeClass('d-flex');
       $mapChart.removeClass('d-none');
