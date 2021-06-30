@@ -20,8 +20,8 @@
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/sunoIndia/home.css">
-    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/common/common.css">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/sunoIndia/home.css">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/common.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -35,7 +35,7 @@
         <%- include ../common/languageNavBar.ejs %>
     </div>
     <div class="m-auto row justify-content-center mt-lg-4 mx-lg-5">
-        <%- include('../common/cards.ejs',{left:{h1:"Transcribe",h2:"Type what you hear","p1":"",img:"../../img/listen2.svg"},right:{h1:"Validate",h2:"Validate text as per the audio","p1":"",img:"../../img/validate.svg"}}); %>
+        <%- include('../common/cards.ejs',{left:{h1:"Transcribe",h2:"Type what you hear","p1":"",img:"/img/listen2.svg"},right:{h1:"Validate",h2:"Validate text as per the audio","p1":"",img:"/img/validate.svg"}}); %>
     </div>
     <div class="row" id="contribution_stats">
         <div class="col-12 col-md-12 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
@@ -89,7 +89,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<script src="../../js/sunoIndia/home.js" id="home-page"></script>
+<script src="/js/sunoIndia/home.js" id="home-page"></script>
 <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
 <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
 <script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>

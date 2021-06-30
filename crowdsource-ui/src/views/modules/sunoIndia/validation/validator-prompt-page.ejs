@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../../css/validator-prompt.css">
-    <link rel="stylesheet" type="text/css" href="../../css/common.css">
-    <link rel="stylesheet" type="text/css" href="../../css/mic-speaker-testing.css">
+    <link rel="stylesheet" type="text/css" href="/css/validator-prompt.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/mic-speaker-testing.css">
     <style>.btn.focus,.btn:focus{outline:0;box-shadow:0 0}</style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -57,7 +57,7 @@
                 <div class="form-group green-border-focus col-lg-4 col-md-5 col-12 m-0 edit-text" id="edit-text">
                     <label><%- __('Your Edit') %> (<span id="edit-language"></span>)</label>
                     <div class="arrow-right"></div>
-                    <textarea class="form-control edit-area" id="edit" rows="3" maxlength="1000" placeholder="Start typing here..." style="resize:none"></textarea>
+                    <textarea class="form-control edit-area" id="edit" rows="3" maxlength="1000" placeholder="<%= __('Start typing here...')%>" style="resize:none"></textarea>
                 </div>
             </div>
             <div class="row m-0 justify-content-center mb-2 mb-md-5 mb-lg-0" id="edit-error-row">
@@ -69,7 +69,7 @@
             </div>
             <div class="row justify-content-center d-none" id="thankyou-text">
                 <div class="col-12 text-center mt-4">
-                    <img src="../../img/tick.svg">
+                    <img src="/img/tick.svg">
                     <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle"> <%= __('Thank you for correcting!') %></label>
                 </div>
             </div>
@@ -107,17 +107,17 @@
             <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 mx-5 mt-5" id="validation-button-row">
                 <div class="flex-lg-row flex-md-row flex-column d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2">
                     <button class="btn btn-custom-outline-primary rounded-pill mt-3 mt-lg-2 mt-md-2 third" disabled="disabled" id="need_change">
-                        <img src="../../img/pencil.svg" class="pr-2" style="margin-top:-3px"> <%= __('Needs Change') %>
+                        <img src="/img/pencil.svg" class="pr-2" style="margin-top:-3px"> <%= __('Needs Change') %>
                     </button>
                     <button class="btn btn-custom-outline-primary rounded-pill mr-lg-4 mr-md-4 p-2 mt-3 mt-lg-2 mt-md-2 d-none third" id="cancel-edit-button">
                         <%= __('Cancel') %>
                     </button>
                     <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn">
                         <div class="audioplayer d-flex justify-content-center align-items-center">
-                            <img src="../../img/play.svg" alt="play" id="play" class="cursor-pointer" height="60" width="60">
-                            <img src="../../img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer" height="60" width="60">
-                            <img src="../../img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer" height="60" width="60">
-                            <img src="../../img/play.svg" alt="resume" id="resume" class="d-none justify-self-center cursor-pointer" height="60" width="60">
+                            <img src="/img/play.svg" alt="play" id="play" class="cursor-pointer" height="60" width="60">
+                            <img src="/img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer" height="60" width="60">
+                            <img src="/img/replay.svg" alt="replay" id="replay" class="d-none justify-self-center cursor-pointer" height="60" width="60">
+                            <img src="/img/play.svg" alt="resume" id="resume" class="d-none justify-self-center cursor-pointer" height="60" width="60">
                         </div>
                         <h5 class="font-wt-800 text-center mt-2 d-xs-none" id="audioplayer-text_play">
                             <%= __('Play') %>
@@ -133,7 +133,7 @@
                         </h5>
                     </div>
                     <button class="btn mb-0 mb-lg-2 mb-md-2 w-100 btn-custom-outline-primary rounded-pill second mt-3 mt-lg-2 mt-md-2" disabled="disabled" id="like_button">
-                        <img src="../../img/right.svg" class="pr-2" style="margin-top:-3px">  <%= __('Correct') %>
+                        <img src="/img/right.svg" class="pr-2" style="margin-top:-3px">  <%= __('Correct') %>
                     </button>
                     <button class="btn p-2 btn-custom-primary rounded-pill ml-lg-4 mt-3 mt-lg-0 ml-md-4 mt-md-0 d-none second" disabled="disabled" id="submit-edit-button">
                         <%= __('Submit') %>
@@ -178,8 +178,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
 
-        <script src="../../js/sunoIndia/validator-prompt-page.js"></script>
-        <script src="../../js/common/speakerTesting.js"></script>
+        <script src="/js/sunoIndia/validator-prompt-page.js"></script>
+        <script src="/js/common/speakerTesting.js"></script>
     </div>
 </div>
 </body>

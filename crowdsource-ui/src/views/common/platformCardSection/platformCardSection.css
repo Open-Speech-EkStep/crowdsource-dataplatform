@@ -87,7 +87,7 @@
 }
 
 #badge-section-card {
-    background-image: url(../../img/NEW-WAVE3.png);
+    background-image: url(/img/NEW-WAVE3.png);
     box-shadow: 0 4px 12px 1px rgba(0, 0, 0, .08);
     border-radius: 12px;
     background-repeat: no-repeat;
@@ -113,7 +113,7 @@
 }
 
 #platform_section .platform_card {
-    background-image: url(../../img/NEW-WAVE.svg);
+    background-image: url(/img/NEW-WAVE.svg);
     background-size: contain;
     max-width: 1200px;
     min-height: 400px;
@@ -490,7 +490,7 @@
     }
 
     #platform_section .platform_card {
-        background-image: url(../../img/mobile_wave.png) !important;
+        background-image: url(/img/mobile_wave.png) !important;
         background-size: contain;
     }
 
@@ -499,7 +499,7 @@
     }
 
     #badge-section-card {
-        background-image: url(../../img/mobile_wave.png) !important;
+        background-image: url(/img/mobile_wave.png) !important;
         background-size: contain;
     }
 
