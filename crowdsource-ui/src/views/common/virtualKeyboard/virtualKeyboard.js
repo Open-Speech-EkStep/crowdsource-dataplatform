@@ -85,7 +85,12 @@ const showKeyboard = function (language, callBack1 = () => {
     localStorage.setItem("physicalKeyboard", true);
     $('#keyboardBox').addClass('d-none');
     const inputText = event.target.value && event.target.value.trim();
-    showAndHideEditError(inputText.length, error, callBack1, callBack2, flow)
+    if(inputText.length < 3) {
+      const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
+      $submitEditButton.attr('disabled', true);
+    } else {
+      showAndHideEditError(inputText.length, error, callBack1, callBack2, flow)
+    }
   });
 
   function onChange(input) {
@@ -93,7 +98,12 @@ const showKeyboard = function (language, callBack1 = () => {
     const error = input ? lngtype(input) : { type: 'noText' };
     localStorage.setItem("physicalKeyboard", false);
     const inputText = input && input.trim();
+    if(inputText.length < 3) {
+      const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
+      $submitEditButton.attr('disabled', true);
+    } else {
     showAndHideEditError(inputText.length, error, callBack1, callBack2, flow)
+    }
   }
 
   function onKeyPress(button) {
