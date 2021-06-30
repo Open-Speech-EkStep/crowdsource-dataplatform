@@ -107,6 +107,16 @@ gulp.task('js', function () {
       replace({
         patterns: [
           {
+            match: 'bhashadaanLogoUrl',
+            replacement: settings.bhashadaanLogoUrl,
+          },
+        ],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
             match: 'cdnUrl',
             replacement: settings.cdnUrl,
           },
@@ -181,6 +191,16 @@ function jsGulp(moduleName) {
           {
             match: 'apiUrl',
             replacement: settings.apiUrl,
+          },
+        ],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'bhashadaanLogoUrl',
+            replacement: settings.bhashadaanLogoUrl,
           },
         ],
       })
