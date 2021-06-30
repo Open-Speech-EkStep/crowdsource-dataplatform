@@ -225,5 +225,17 @@
     "Transcribing":"Transcribing",
     "Translating":"Translating",
 	"Images":"Images",
-	"Validating": "Validating"
+	"Validating": "Validating",
+	"Telugu": "Telugu",
+	"Marathi": "Marathi",
+	"Tamil": "Tamil",
+	"Kannada": "Kannada",
+	"Malayalam": "Malayalam",
+	"Odia": "Odia",
+	"Assamese": "Assamese",
+	"Punjabi": "Punjabi",
+	"Gujarati": "Gujarati",
+	"Hindi": "Hindi",
+	"English": "English",
+	"Bengali": "Bengali"
 }

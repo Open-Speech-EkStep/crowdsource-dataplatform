@@ -461,7 +461,11 @@ const initialize = function () {
   const totalItems = sunoIndia.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  $('#edit-language').text(language)
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const localeLanguage = localeStrings[language];
+  $('#edit-language').text(localeLanguage);
+  $('#keyboardLayoutName').text(localeLanguage);
+
   if (language) {
     updateLocaleLanguagesDropdown(language);
   }
@@ -519,8 +523,10 @@ function executeOnLoad() {
   const $loader = $('#loader');
   const $pageContent = $('#page-content');
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  $('#keyboardLayoutName').text(contributionLanguage);
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const localeLanguage = localeStrings[contributionLanguage];
+  $('#keyboardLayoutName').text(localeLanguage);
+
   if (contributionLanguage) {
     updateLocaleLanguagesDropdown(contributionLanguage);
   }

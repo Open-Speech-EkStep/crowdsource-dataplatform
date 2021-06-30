@@ -6,10 +6,10 @@ const {
   CONTRIBUTION_LANGUAGE,
   MODULE
 } = require('./constants');
-const {performAPIRequest,updateLocaleLanguagesDropdown} = require('../common/utils');
+const {performAPIRequest} = require('../common/utils');
 const {setLangNavBar} = require('../common/languageNavBar')
 
-const {getContributedAndTopLanguage,showByHoursChart} = require('./common');
+const {getContributedAndTopLanguage,showByHoursChart, updateLocaleLanguagesDropdown} = require('./common');
 const {setSpeakerData} = require('./contributionStats');
 
 function getStatistics(response, language, module) {

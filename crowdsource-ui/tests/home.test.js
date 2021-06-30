@@ -21,7 +21,7 @@ describe("updateHrsForSayAndListen", () => {
   test("should show 0 hrs in both say and listen component when there is empty aggregateDataCountByLanguage", (done) => {
     mockLocalStorage();
 
-    localStorage.setItem("localeString", JSON.stringify({'hrs recorded in': '%hours recorded in %language', 'hrs validated in' :'%hours validated in %language'}));
+    localStorage.setItem("localeString", JSON.stringify({'hrs recorded in': '%hours recorded in %language', 'hrs validated in' :'%hours validated in %language', "Hindi" :"Hindi"}));
     localStorage.setItem("aggregateDataCountByLanguage", JSON.stringify([]));
 
     updateHrsForSayAndListen(language);
@@ -41,7 +41,7 @@ describe("updateHrsForSayAndListen", () => {
   test("should show hrs except 0 in both say and listen component when there is empty aggregateDataCountByLanguage", (done) => {
     mockLocalStorage();
 
-    localStorage.setItem("localeString", JSON.stringify({'hrs recorded in': '%hours recorded in %language', 'hrs validated in' :'%hours validated in %language'}));
+    localStorage.setItem("localeString", JSON.stringify({'hrs recorded in': '%hours recorded in %language', 'hrs validated in' :'%hours validated in %language',"Hindi" :"Hindi"}));
     localStorage.setItem("aggregateDataCountByLanguage", JSON.stringify([{language:"Hindi",total_contributions:20, total_validations:30},{language: "Odia"}]));
 
     updateHrsForSayAndListen(language);

@@ -4,7 +4,8 @@ const env_vars = {
      whitelisting_email: '@@whitelistingEmail',
      feedback_top_component: '@@feedbackTopComponent',
      enabled_languages: '@@enabled_languages',
-     show_data_source: '@@showDataSource'
+     show_data_source: '@@showDataSource',
+     base_url: '@@bhashadaanLogoUrl'
 };
 
 module.exports = env_vars;

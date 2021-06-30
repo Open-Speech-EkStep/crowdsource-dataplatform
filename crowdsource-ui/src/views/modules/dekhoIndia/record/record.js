@@ -385,8 +385,10 @@ const initializeComponent = () => {
   const totalItems = dekhoIndia.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-
-  $('#edit-language').text(language)
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const localeLanguage = localeStrings[language];
+  $('#edit-language').text(localeLanguage);
+  $('#keyboardLayoutName').text(localeLanguage);
 
   $("#start_contributing_id").on('click', function () {
     const data = localStorage.getItem("speakerDetails");
@@ -450,9 +452,10 @@ const executeOnLoad = function () {
   setFooterPosition();
   const $validationInstructionModal = $("#validation-instruction-modal");
   const $errorModal = $('#errorModal');
-  localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  $('#keyboardLayoutName').text(language);
+  const localeLanguage = localeStrings[language];
+  $('#keyboardLayoutName').text(localeLanguage);
   showKeyboard(language.toLowerCase(),enableCancelButton,disableCancelButton);
   hideElement($('#keyboardBox'));
 

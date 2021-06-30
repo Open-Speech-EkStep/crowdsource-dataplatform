@@ -1,4 +1,4 @@
-const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, FEEDBACK_CATEGORY, OPINION_RATING_MAPPING, ALL_LANGUAGES} = require('./constants');
+const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, OPINION_RATING_MAPPING, ALL_LANGUAGES} = require('./constants');
 const fetch = require('./fetch')
 const { feedback_top_component } = require('./env-api');
 
@@ -87,13 +87,6 @@ const updateSelectPageWhenModuleChanges = () => {
 
             }
         }
-    });
-};
-
-const readFeedbackCategoryFromConstantsFile = () => {
-    // $("#category_id").find('option').remove().end();
-    FEEDBACK_CATEGORY.forEach((category) => {           
-        $("#category_id").append($('<option>', {value: category.value, text: category.text}));
     });
 };
 
@@ -211,7 +204,6 @@ const initializeFeedbackModal = () => {
     updateOpinionSVGColor();
     checkGivingFeedbackFor();
     updateSelectPageWhenModuleChanges();
-    readFeedbackCategoryFromConstantsFile();
     fetchUsername();
     $('#feedback_button').on('click', () => {
         enableSubmit();

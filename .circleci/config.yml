@@ -147,7 +147,14 @@ jobs:
             ENV_IMAGE_NAME_DB_REFRESHER=${AZURE_LOGIN_SERVER_NAME}/${DB_REFRESHER_REPO}:<< parameters.env-name >>
             kubectl -n << parameters.env-name >> apply  -f ${HOME}/project/crowdsource-api/k8s-deployments/autoscaler_<< parameters.env-name >>.yaml
 
-            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
+            if [ << parameters.env-name >> == 'prod' ]
+            then
+              echo "Deploying to prod"
+              sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment_prod.yaml | kubectl -n << parameters.env-name >> apply  -f -
+            else
+              sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
+            fi           
+            
             sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env-name >> apply  -f -
           name: Deploy container
 
