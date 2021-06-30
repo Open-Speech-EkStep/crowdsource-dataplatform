@@ -295,7 +295,18 @@ let selectedReportVal = '';
 const initialize = function () {
   const totalItems = likhoIndia.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+
   const language = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+  const fromLanguage = language;
+
+  const localeToLanguage = localeStrings[toLanguage];
+  const localeFromLanguage = localeStrings[fromLanguage];
+
+  $('#keyboardLayoutName').text(localeToLanguage);
+  $('#from-label').text(localeFromLanguage);
+  $('#to-label').text(localeToLanguage);
 
   $("#start_contributing_id").on('click', function () {
     const data = localStorage.getItem("speakerDetails");
@@ -351,9 +362,12 @@ function executeOnLoad() {
   const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-  $('#keyboardLayoutName').text(toLanguage);
-  $('#from-label').text(fromLanguage);
-  $('#to-label').text(toLanguage);
+  const localeToLanguage = localeStrings[toLanguage];
+  const localeFromLanguage = localeStrings[fromLanguage];
+
+  $('#keyboardLayoutName').text(localeToLanguage);
+  $('#from-label').text(localeFromLanguage);
+  $('#to-label').text(localeToLanguage);
 
   if (fromLanguage && toLanguage) {
     updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);

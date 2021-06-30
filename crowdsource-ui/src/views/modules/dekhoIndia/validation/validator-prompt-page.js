@@ -1,6 +1,6 @@
 const fetch = require('../common/fetch')
-const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording,getDeviceInfo, getBrowserInfo } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE} = require('../common/constants');
+const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording,getDeviceInfo, getBrowserInfo,getLocaleString } = require('../common/utils');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice } = require('../common/common');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
@@ -372,7 +372,11 @@ const initializeComponent = () => {
     const totalItems = dekhoIndiaValidator.sentences.length;
     currentIndex = getCurrentIndex(totalItems - 1);
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    $('#edit-language').text(contributionLanguage)
+
+    const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+    const localeLanguage = localeStrings[contributionLanguage];
+    $('#edit-language').text(localeLanguage);
+    $('#keyboardLayoutName').text(localeLanguage);
 
     addListeners();
     const validationData = dekhoIndiaValidator.sentences[currentIndex];
@@ -397,7 +401,7 @@ const getLocationInfo = () => {
 }
 
 let selectedReportVal = '';
-$(document).ready(() => {
+const executeOnLoad = function () {
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
   if(isMobileDevice() || isNotChrome){
@@ -415,7 +419,10 @@ $(document).ready(() => {
   const $errorModal = $('#errorModal');
   // toggleFooterPosition();
   setPageContentHeight();
-  $('#keyboardLayoutName').text(contributionLanguage);
+
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const localeLanguage = localeStrings[contributionLanguage];
+  $('#keyboardLayoutName').text(localeLanguage);
   const language = localStorage.getItem('contributionLanguage');
   if (language) {
     updateLocaleLanguagesDropdown(language);
@@ -518,7 +525,15 @@ $(document).ready(() => {
       $errorModal.modal('show');
     })
   }
-});
+};
+
+$(document).ready(() => {
+  getLocaleString().then(() => {
+    executeOnLoad();
+  }).catch(() => {
+    executeOnLoad();
+  });
+})
 
 module.exports = {
   setCapturedText,

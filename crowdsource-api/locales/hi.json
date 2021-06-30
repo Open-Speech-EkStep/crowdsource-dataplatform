@@ -279,5 +279,17 @@
     "Transcribing":"लिप्यंतरण",
     "Translating":"अनुवाद",
 	"Images":"इमेज",
-	"Validating": "सत्यापन"
+	"Validating": "सत्यापन",
+	"Telugu": "तेलुगु",
+    "Hindi": "हिंदी",
+    "Marathi": "मराठी",
+    "Tamil": "तमिल",
+    "Kannada": "कन्नड़",
+    "Malayalam": "मलयालम",
+    "Bengali": "बंगाली",
+    "Odia": "उड़िया",
+    "Assamese": "असमिया",
+    "Punjabi": "पंजाबी",
+    "Gujarati": "गुजराती",
+	"English": "अंग्रेज़ी"
 }

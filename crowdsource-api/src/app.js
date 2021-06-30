@@ -350,7 +350,19 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'Transcribing',
             'Translating',
             'Images',
-            'Validating'
+            'Validating',
+            'Telugu',
+          'Marathi',
+          'Tamil',
+          'Kannada',
+          'Malayalam',
+          'Odia',
+          'Assamese',
+          'Punjabi',
+          'Gujarati',
+          'Hindi',
+          'English',
+          'Bengali',
         ];
 
         const langSttr = {};
