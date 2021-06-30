@@ -8,9 +8,10 @@ const {
   fetchLocationInfo,
   reportSentenceOrRecording,
   getDeviceInfo,
-  getBrowserInfo
+  getBrowserInfo,
+  getLocaleString
 } = require('../common/utils');
-const {LIKHO_FROM_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES} = require('../common/constants');
+const {LIKHO_FROM_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice, updateLikhoLocaleLanguagesDropdown} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
@@ -326,8 +327,19 @@ const initializeComponent = () => {
   currentIndex = getCurrentIndex(totalItems - 1);
   const validationData = likhoIndiaValidator.sentences[currentIndex];
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
-  $('#edit-language').text(toLanguage)
+  const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+
+  const localeToLanguage = localeStrings[toLanguage];
+  const localeFromLanguage = localeStrings[fromLanguage];
+
+  $('#keyboardLayoutName').text(localeToLanguage);
+  $('#from-label').text(localeFromLanguage);
+  $('#to-label').text(localeToLanguage);
+  $('#edit-language').text(localeToLanguage);
+
   addListeners();
+
   if (validationData) {
     setSentence(validationData.sentence);
     setDataSource(validationData.source_info);
@@ -349,7 +361,7 @@ const getLocationInfo = () => {
 }
 
 let selectedReportVal = '';
-$(document).ready(() => {
+const executeOnLoad = function () {
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
   if(isMobileDevice() || isNotChrome){
@@ -366,9 +378,12 @@ $(document).ready(() => {
   hideElement($('#keyboardBox'));
   // toggleFooterPosition();
   setPageContentHeight();
-  $('#keyboardLayoutName').text(toLanguage);
-  $('#from-label').text(fromLanguage);
-  $('#to-label').text(toLanguage);
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const localeToLanguage = localeStrings[toLanguage];
+  const localeFromLanguage = localeStrings[fromLanguage];
+  $('#keyboardLayoutName').text(localeToLanguage);
+  $('#from-label').text(localeFromLanguage);
+  $('#to-label').text(localeToLanguage);
 
   if (fromLanguage && toLanguage) {
     updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
@@ -473,7 +488,15 @@ $(document).ready(() => {
       $errorModal.modal('show');
     })
   }
-});
+};
+
+$(document).ready(() => {
+  getLocaleString().then(() => {
+    executeOnLoad();
+  }).catch(() => {
+    executeOnLoad();
+  });
+})
 
 module.exports = {
   setCapturedText,
