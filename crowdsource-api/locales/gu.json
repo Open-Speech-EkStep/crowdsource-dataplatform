@@ -225,5 +225,17 @@
     "Transcribing":"ટ્રાન્સક્રાઇબ",
     "Translating":"અનુવાદ",
 	"Images":"ઇમેજિસ",
-	"Validating": "માન્ય"
+	"Validating": "માન્ય",
+	"Telugu": "તેલુગુ",
+    "Marathi": "મરાઠી",
+    "Tamil": "તામિલ",
+    "Kannada": "કન્નડા",
+    "Malayalam": "મલયાલમ",
+    "Odia": "ઓડિયા",
+    "Assamese": "અસામી",
+    "Punjabi": "પંજાબી",
+    "Gujarati": "ગુજરાતી",
+	"Hindi": "હિંદી",
+	"English": "અંગ્રેજી",
+	"Bengali": "બંગાળી"
 }

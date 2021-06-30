@@ -274,5 +274,17 @@
     "Transcribing":"പക൪ത്തുന്നു",
     "Translating":"വിവ൪ത്തനം",
 	"Images":"ചിത്രങ്ങൾ",
-	"Validating": "മൂല്യനി൪ണ്ണയം"
+	"Validating": "മൂല്യനി൪ണ്ണയം",
+	"Telugu": "തെലുങ്ക്",
+    "Hindi": "ഹിന്ദി",
+    "Marathi": "മറാത്തി",
+    "Tamil": "തമിഴ്",
+    "Kannada": "കന്നഡ",
+    "Malayalam": "മലയാളം",
+    "Bengali": "ബംഗാളി",
+    "Odia": "ഒഡിയ",
+    "Assamese": "ആസാമീസ്",
+    "Punjabi": "പഞ്ചാബി",
+    "Gujarati": "ഗുജറാത്തി",
+	"English": "ഇംഗ്ലീഷ്"
 }

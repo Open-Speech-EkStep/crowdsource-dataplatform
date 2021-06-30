@@ -228,5 +228,17 @@
     "Transcribing":"లిప్యంతరీకరించడం",
     "Translating":"అనువదించడం",
 	"Images":"చిత్రాలు",
-	"Validating": "ధ్రువీకరిస్తోంది"
+	"Validating": "ధ్రువీకరిస్తోంది",
+	"Telugu": "తెలుగు",
+    "Hindi": "హిందీ",
+    "Marathi": "మరాఠి",
+    "Tamil": "తమిళం",
+    "Kannada": "కన్నడ",
+    "Malayalam": "మళయాళం",
+    "Bengali": "బెంగాలీ",
+    "Odia": "ఒడియా",
+    "Assamese": "అస్సామీస్",
+    "Punjabi": "పంజాబీ",
+    "Gujarati": "గుజరాతీ",
+	"English": "ఇంగ్లీష్"
 }
