@@ -363,6 +363,7 @@ app.get('/get-locale-strings/:locale', function (req, res) {
           'Hindi',
           'English',
           'Bengali',
+          'All Languages'
         ];
 
         const langSttr = {};
