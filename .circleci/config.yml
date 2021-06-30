@@ -149,6 +149,7 @@ jobs:
 
             if [ << parameters.env-name >> == 'prod' ]
             then
+              echo "Deploying to prod"
               sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment_prod.yaml | kubectl -n << parameters.env-name >> apply  -f -
             else
               sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
