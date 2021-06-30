@@ -47,7 +47,6 @@ $(document).ready(function () {
     localStorage.setItem("module", "home");
     document.body.querySelector('footer').classList.remove('fixed-bottom');
     setupScroll();
-    onChangeUser('./terms-and-conditions.html', 'home');
     const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
   updateLocaleLanguagesDropdown(language);
 });
