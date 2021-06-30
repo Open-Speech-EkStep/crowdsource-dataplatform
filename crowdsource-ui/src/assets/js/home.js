@@ -228,6 +228,7 @@ function initializeBlock() {
             updateHrsForSayAndListen(language);
             redirectToLocalisedPage();
         }
+        getStatsSummary();
     })
 
     $languageNavBar.on('click', (e) => {
@@ -246,6 +247,7 @@ function initializeBlock() {
             window.location.href = "./home.html";
             redirectToLocalisedPage();
         }
+        getStatsSummary();
     });
 
     $('#start_recording').on('click', () => {

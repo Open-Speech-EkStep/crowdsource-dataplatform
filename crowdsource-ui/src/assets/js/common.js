@@ -15,6 +15,9 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
     remainingLanguage = type == "speakers" ?  remainingLanguage.sort((a, b) => Number(a.total_speakers) > Number(b.total_speakers) ? -1 : 1) : remainingLanguage.sort((a, b) => Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1);
     topLanguages = remainingLanguage.slice(0, 3);
   } else {
+    if( contributedLanguage != topLanguagesData[0].language) {
+        topLanguageArray.push({ language: contributedLanguage,  total_contributions: "0.000" });
+    }
     topLanguages =type == "speakers" ?  topLanguagesResult.sort((a, b) => Number(a.total_speakers) > Number(b.total_speakers) ? -1 : 1).slice(0, 3) : topLanguagesResult.sort((a, b) => Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1).slice(0, 3);
   }
   return topLanguageArray.concat(topLanguages);

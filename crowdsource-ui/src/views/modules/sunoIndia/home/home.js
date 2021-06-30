@@ -54,6 +54,7 @@ function initializeBlock() {
       // updateHrsForCards(language);
       redirectToLocalisedPage();
     }
+    getStatsSummary('/stats/summary/asr',MODULE.suno.value, setDefaultLang);
     showFucntionalCards('asr', language);
   })
 
@@ -72,6 +73,7 @@ function initializeBlock() {
       // updateHrsForCards(language);
       redirectToLocalisedPage();
     }
+    getStatsSummary('/stats/summary/asr',MODULE.suno.value, setDefaultLang);
     showFucntionalCards('asr', language);
   });
 

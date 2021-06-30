@@ -52,6 +52,7 @@ function initializeBlock() {
       showFucntionalCards('ocr', language);
       // updateHrsForCards(language);
     }
+    getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, setDefaultLang);
     showFucntionalCards('ocr', language);
   })
 
@@ -69,6 +70,7 @@ function initializeBlock() {
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
     }
+    getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, setDefaultLang);
     showFucntionalCards('ocr', language);
   });
 
