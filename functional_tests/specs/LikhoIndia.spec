@@ -9,7 +9,7 @@ Tags: component
 * User should see the top Language graph and other stats for Likho India
 
 ## Check Dashboard Page
-* When user clicks on View all Details buttton user should be able to see "Progress Chart" , "State Wise distribution"
+* When user clicks on View all Details buttton user should be able to see "Timeline Chart" , "State Wise distribution"
 * user should be able to see "Language pairs" , "People participated" , "Translations done" , "Translations validated"
 * Select "English" Language from "from-dash-language"
 * Select "বাংলা" Language from "to-dash-language"

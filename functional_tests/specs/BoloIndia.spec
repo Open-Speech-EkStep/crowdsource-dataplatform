@@ -46,7 +46,7 @@ Tags: component
 
 ## Check Dashboard Page
 * When user clicks on View all Details buttton , user shall land on Dashboard page
-* user should be able to see "Progress Chart" , "Gender Distribution" , "State Wise distribution" , "Age Group Distribution"
+* user should be able to see "Timeline Chart" , "Gender Distribution" , "State Wise distribution" , "Age Group Distribution"
 * When user select "हिंदी" Language from dropdown then "Languages" should not visible
 
 ## Validate Feedback Page
