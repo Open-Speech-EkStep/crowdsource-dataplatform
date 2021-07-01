@@ -172,7 +172,6 @@
 	"Transcribe": "Transcribe",
 	"": "",
 	"Thank you for your enthusiasm to transcribe the recordings.": "Thank you for your enthusiasm to transcribe the recordings.",
-	"Back to SunoIndia Home": "Back to SunoIndia Home",
 	"People participated": "People participated",
 	"Languages": "Languages",
 	"Language pairs": "Language pairs",
@@ -188,7 +187,6 @@
 	"Languages pairs": "Languages pairs",
 	"FROM: ": "FROM: ",
 	"TO: ": "TO: ",
-	"Back to LikhoIndia Home": "Back to LikhoIndia Home",
 	"FROM ": "FROM ",
 	"TO ": "TO ",
 	"Contributions made to Likho India": "Contributions made to Likho India",
@@ -466,5 +464,6 @@
 	"Translating": "Translating",
 	"Images": "Images",
 	"Validating": "Validating",
-	"English": "English"
+	"English": "English",
+	"Back to Dekho India Home": "Back to Dekho India Home"
 }

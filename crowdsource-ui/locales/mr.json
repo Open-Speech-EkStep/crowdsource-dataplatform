@@ -111,7 +111,6 @@
 	"Transcribe": "लिप्यंतर करा",
 	"": "",
 	"Thank you for your enthusiasm to transcribe the recordings.": "तुम्ही ध्वनीमुद्रणांचे लिप्यंतर करण्यासाठी दाखवलेल्या उत्साहाबद्दल तुमचे आभार",
-	"Back to SunoIndia Home": "Back to SunoIndia Home",
 	"People participated": "लोक सहभागी झाले",
 	"Languages": "भाषा",
 	"Language pairs": "भाषा जोड्या",
@@ -124,7 +123,6 @@
 	"HINDI": "हिंदी",
 	"Is the translation correct?": "अनुवाद बरोबर आहे का?",
 	"Your language and top 3 most contributed languages": "तुमची भाषा व 3 सर्वोच्च योगदान दिल्या जाणाऱ्या भाषा",
-	"Back to LikhoIndia Home": "Back to LikhoIndia Home",
 	"FROM ": "यामधून",
 	"TO ": "यामध्ये",
 	"Contributions made to Likho India": "लिहा इंडियामध्ये देण्यात आलेले योगदान",
@@ -345,5 +343,8 @@
 	"Translating": "अनुवाद",
 	"Images": "प्रतिमा",
 	"Validating": "वैधांकन",
-	"English": "इंग्रजी"
+	"English": "इंग्रजी",
+	"Back to Suno India Home": "पुन्हा ऐका इंडियाच्या गृह पृष्ठावर जा",
+	"Back to Likho India Home": "पुन्हा लिहा इंडियाच्या गृह पृष्ठावर जा",
+	"Back to Dekho India Home": "पुन्हा पहा इंडियाच्या गृह पृष्ठावर जा"
 }

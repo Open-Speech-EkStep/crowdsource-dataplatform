@@ -16,8 +16,6 @@
 	"BOLO INDIA": "பேசு இந்தியா",
 	"Back to Bolo India Home": "பேசு இந்தியாவிற்கு செல்",
 	"Back to Home": "மீண்டும் முகப்புப் பக்கத்திற்கு",
-	"Back to LikhoIndia Home": "Back to LikhoIndia Home",
-	"Back to SunoIndia Home": "Back to SunoIndia Home",
 	"Background Noise Detected": "பின்னணி இரைச்சல் கண்டறியப்பட்டது",
 	"Badge": "பேட்ஜ்",
 	"Become a Bhasha Samarthak by contributing to Bolo India, Suno India, Likho India or Dekho India. Earn Bronze/Silver/Gold/Platinum Bhasha Samarthak Badges based on your contributions. Share them in your social circle, your language community, and motivate your friends and family to contribute to the cause.": "போலோ இந்தியா, சுனோ இந்தியா, லிக்கோ இந்தியா அல்லது தேக்கோ இந்தியா ஆகியவற்றில் பங்களிப்பதன் மூலம் பாஷா சமர்த்தகராக ஆகுங்கள். உங்கள் பங்களிப்புகளின் அடிப்படையில் வெண்கலம் / வெள்ளி / தங்கம் / பிளாட்டினம் பாஷா சமர்த்தக் பேட்ஜ்கள் சம்பாதிக்கவும். உங்கள் சமூக வட்டத்தில், உங்கள் மொழி சமூகத்தில் அவற்றைப் பகிரவும், உங்கள் நண்பர்கள் மற்றும் குடும்பத்தினரை இந்த நோக்கத்திற்குப் பங்களிக்க ஊக்குவிக்கவும்.",
@@ -345,5 +343,8 @@
 	"Translating": "மொழிபெயர்த்தல்",
 	"Images": "படங்கள்",
 	"Validating": "சரிபார்த்தல்",
-	"English": "ஆங்கிலம்"
+	"English": "ஆங்கிலம்",
+	"Back to Likho India Home": "எழுது இந்தியா முகப்பிற்குச் செல்",
+	"Back to Suno India Home": "கேள் இந்தியா முகப்பிற்குச் செல்",
+	"Back to Dekho India Home": "பார் இந்தியா முகப்பிற்குச் செல்க"
 }

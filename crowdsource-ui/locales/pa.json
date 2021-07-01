@@ -113,7 +113,6 @@
 	"Transcribe": "ਪ੍ਰਤੀਲਿਪੀ",
 	"": "",
 	"Thank you for your enthusiasm to transcribe the recordings.": "ਰਿਕਾਰਡਿੰਗਾਂ ਨੂੰ ਲਿਖਣ ਲਈ ਤੁਹਾਡੇ ਉਤਸ਼ਾਹ ਲਈ ਧੰਨਵਾਦ।",
-	"Back to SunoIndia Home": "Back to SunoIndia Home",
 	"People participated": "ਲੋਕਾਂ ਨੇ ਹਿੱਸਾ ਲਿਆ",
 	"Languages": "ਬੋਲੀਆਂ",
 	"Language pairs": "ਭਾਸ਼ਾ ਜੋੜੀ",
@@ -126,7 +125,6 @@
 	"HINDI": "ਹਿੰਦੀ",
 	"Is the translation correct?": "ਕੀ ਅਨੁਵਾਦ ਸਹੀ ਹੈ?",
 	"Your language and top 3 most contributed languages": "ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਅਤੇ ਚੋਟੀ ਦੀਆਂ 3 ਸਭ ਤੋਂ ਵੱਧ ਯੋਗਦਾਨ ਵਾਲੀਆਂ ਭਾਸ਼ਾਵਾਂ",
-	"Back to LikhoIndia Home": "Back to LikhoIndia Home",
 	"FROM ": "ਤੋਂ",
 	"TO ": "ਨੂੰ",
 	"Contributions made to Likho India": "ਲਿਖੋ ਇੰਡੀਆ ਵਿਚ ਯੋਗਦਾਨ ਪਾਇਆ",
@@ -345,5 +343,8 @@
 	"Translating": "ਅਨੁਵਾਦ",
 	"Images": "ਚਿੱਤਰ",
 	"Validating": "ਪ੍ਰਮਾਣਿਤ ਕਰ ਰਿਹਾ ਹੈ",
-	"English": "ਅੰਗਰੇਜ਼ੀ"
+	"English": "ਅੰਗਰੇਜ਼ੀ",
+	"Back to Suno India Home": "ਸੁਣੋ ਇੰਡੀਆ ਹੋਮ ਵਾਪਸ",
+	"Back to Likho India Home": "ਵਾਪਸ ਲੀਖੋ ਇੰਡੀਆ ਹੋਮ",
+	"Back to Dekho India Home": "ਵਾਪਸ ਦੇਖੋ ਇੰਡੀਆ ਹੋਮ ਤੇ ਵਾਪਸ ਜਾਓ"
 }

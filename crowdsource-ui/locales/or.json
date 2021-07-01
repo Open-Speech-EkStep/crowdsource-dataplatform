@@ -133,7 +133,6 @@
 	"Transcribe": "ନକଲ କରନ୍ତୁ",
 	"": "",
 	"Thank you for your enthusiasm to transcribe the recordings.": "ରେକର୍ଡିଂଗୁଡ଼ିକୁ ନକଲ କରିବାକୁ ଆପଣଙ୍କର ଉତ୍ସାହ ପାଇଁ ଧନ୍ୟବାଦ",
-	"Back to SunoIndia Home": "Back to SunoIndia Home",
 	"People participated": "ଲୋକମାନେ ଅଂଶଗ୍ରହଣ କରିଥିଲେ",
 	"Languages": "ଭାଷା",
 	"Language pairs": "ଭାଷାଯୋଡି",
@@ -151,8 +150,6 @@
 	"Hindi": "ହିନ୍ଦୀ",
 	"English": "ଇଂରାଜୀ",
 	"Bengali": "ବେଙ୍ଗଲୀ",
-	"Back to LikhoIndia Home": "Back to LikhoIndia Home",
-	"Back to dekhoIndia Home": "Back to dekhoIndia Home",
 	"FROM ": "ଠାରୁ",
 	"TO ": "କୁ",
 	"Contributions made to Likho India": "ଲେଖ ଇଣ୍ଡିଆକୁ ଅବଦାନ",
@@ -346,5 +343,8 @@
 	"Transcribing": "ଟ୍ରାନ୍ସକ୍ରିପସନ୍",
 	"Translating": "ଅନୁବାଦ",
 	"Images": "ଛବିଗୁଡିକ",
-	"Validating": "ବୈଧ"
+	"Validating": "ବୈଧ",
+	"Back to Suno India Home": "ସୁନୋ ଇଣ୍ଡିଆ ଘରକୁ ଫେରନ୍ତୁ",
+	"Back to Likho India Home": "ଲିଖୋ ଇଣ୍ଡିଆ ଘରକୁ ଫେରନ୍ତୁ",
+	"Back to Dekho India Home": "ଦେଖ ଇଣ୍ଡିଆ ଘରକୁ ଫେରନ୍ତୁ"
 }

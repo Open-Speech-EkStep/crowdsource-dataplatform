@@ -112,7 +112,6 @@
 	"Transcribe": "లిప్యంతరీకరించండి",
 	"": "",
 	"Thank you for your enthusiasm to transcribe the recordings.": "రికార్డంర్ లు లిప్యంతరీకరించడంలో మీ ఉత్సాహానికి ధన్యవాదాలు.",
-	"Back to SunoIndia Home": "Back to SunoIndia Home",
 	"People participated": "పాల్గొన్న వ్యక్తులు",
 	"Languages": "భాషలు",
 	"Language pairs": "భాషా జంటలు",
@@ -125,7 +124,6 @@
 	"HINDI": "హిందీ",
 	"Is the translation correct?": "అనువాదం సరయైనదేనా ?",
 	"Your language and top 3 most contributed languages": "మీ భాష మరియు 3 ప్రఖ్యాతి భాషలు",
-	"Back to LikhoIndia Home": "Back to LikhoIndia Home",
 	"FROM ": "నుండి",
 	"TO ": "కు",
 	"Contributions made to Likho India": "వ్రాయి ఇన్డియా చేసిన రచనలు",
@@ -345,5 +343,8 @@
 	"Translating": "అనువదించడం",
 	"Images": "చిత్రాలు",
 	"Validating": "ధ్రువీకరిస్తోంది",
-	"English": "ఇంగ్లీష్"
+	"English": "ఇంగ్లీష్",
+	"Back to Suno India Home": "తిరిగి విను ఇండియా స్వస్థానం (హోమ్)",
+	"Back to Likho India Home": "తిరిగి వ్రాయి ఇండియా స్వస్థానం (హోమ్)",
+	"Back to Dekho India Home": "తిరిగి చూడు ఇండియా స్వస్థానం (హోమ్)"
 }

@@ -16,8 +16,6 @@
 	"BOLO INDIA": "बोलो इंडिया",
 	"Back to Bolo India Home": "बोलो इंडिया के होम पेज पर वापस जाएं",
 	"Back to Home": "वापिस मुख पृष्ठ पर",
-	"Back to LikhoIndia Home": "लिखो इंडिया के होम पेज पर वापस जाएं",
-	"Back to SunoIndia Home": "सुनो इंडिया के होम पेज पर वापस जाएं",
 	"Background Noise Detected": "बैकग्राउंड में शोर सुनाई दिया",
 	"Badge": "बैज",
 	"Become a Bhasha Samarthak by contributing to Bolo India, Suno India, Likho India or Dekho India. Earn Bronze/Silver/Gold/Platinum Bhasha Samarthak Badges based on your contributions. Share them in your social circle, your language community, and motivate your friends and family to contribute to the cause.": "बोलो इंडिया, सुनो इंडिया, लिखो इंडिया या देखो इंडिया में योगदान देकर एक भाषा समर्थक बनें। अपने योगदानों के आधार पर ब्रोंज/सिल्वर/गोल्ड/प्लैटिनम भाषा समर्थक बैज जीतें। इन्हें अपने सोशल सर्कल और अपने भाषा समुदाय में शेयर करें; इस पहल में योगदान देने के लिए अपने दोस्तों और परिवार के सदस्यों को प्रेरित करें।",
@@ -345,5 +343,8 @@
 	"Translating": "अनुवाद",
 	"Images": "इमेज",
 	"Validating": "सत्यापन",
-	"English": "अंग्रेज़ी"
+	"English": "अंग्रेज़ी",
+	"Back to Likho India Home": "लिखो इंडिया के होम पेज पर वापस जाएं",
+	"Back to Suno India Home": "सुनो इंडिया के होम पेज पर वापस जाएं",
+	"Back to Dekho India Home": "देखो इंडिया के होम पेज पर वापस जाएं"
 }

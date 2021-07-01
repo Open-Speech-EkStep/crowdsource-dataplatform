@@ -260,7 +260,6 @@
 	"Help your language by transcribing audio into text": "Help your language by transcribing audio into text",
 	"": "",
 	"Thank you for your enthusiasm to transcribe the recordings.": "Thank you for your enthusiasm to transcribe the recordings.",
-	"Back to SunoIndia Home": "Back to SunoIndia Home",
 	"language pairs": "language pairs",
 	"People participated": "People participated",
 	"Hrs transcribed": "Hrs transcribed",
@@ -308,10 +307,8 @@
 	"Select the language pair": "Select the language pair",
 	"Click to open expand view": "Click to open expand view",
 	"Thank you for your enthusiasm to translate the sentences.": "Thank you for your enthusiasm to translate the sentences.",
-	"Back to LikhoIndia Home": "Back to LikhoIndia Home",
 	"Thank you for your enthusiasm to validate the translations.": "Thank you for your enthusiasm to validate the translations.",
 	"Thank you for your enthusiasm to transcribe the sentences.": "Thank you for your enthusiasm to transcribe the sentences.",
-	"Back to dekhoIndia Home": "Back to dekhoIndia Home",
 	"Thank you for your enthusiasm to validate the image text.": "Thank you for your enthusiasm to validate the image text.",
 	"Select the language pair for voluntary contribution": "Select the language pair for voluntary contribution",
 	"FROM ": "FROM ",
@@ -702,5 +699,6 @@
 	"Transcribing": "Transcribing",
 	"Translating": "Translating",
 	"Images": "Images",
-	"Validating": "Validating"
+	"Validating": "Validating",
+	"Back to Dekho India Home": "Back to Dekho India Home"
 }

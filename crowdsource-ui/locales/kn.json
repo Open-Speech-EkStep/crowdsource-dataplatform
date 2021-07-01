@@ -127,7 +127,6 @@
 	"Transcribe": "ಲಿಪ್ಯಂತರ(ನಕಲು)",
 	"": "",
 	"Thank you for your enthusiasm to transcribe the recordings.": "ರೆಕಾರ್ಡಿಂಗ್ ಗಳನ್ನು ಲಿಪ್ಯಂತರ ಮಾಡುವಲ್ಲಿನ ನಿಮ್ಮ ಉತ್ಸಾಹಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು.",
-	"Back to SunoIndia Home": "Back to SunoIndia Home",
 	"People participated": " ಭಾಗವಹಿಸಿದ ಜನರು",
 	"Languages": "ಭಾಷೆಗಳು",
 	"Language pairs": " ಭಾಷಾ ಜೋಡಿಗಳು",
@@ -140,7 +139,6 @@
 	"HINDI": "ಹಿಂದಿ",
 	"Is the translation correct?": "ಅನುವಾದ ಸರಿಯಾಗಿದೆಯೇ?",
 	"Your language and top 3 most contributed languages": "ನಿಮ್ಮ ಭಾಷೆ ಮತ್ತು ಹೆಚ್ಚು ಕೊಡುಗೆ ನೀಡಲಾದ 3 ಭಾಷೆಗಳು",
-	"Back to LikhoIndia Home": "Back to LikhoIndia Home",
 	"FROM ": "ದಿಂದ",
 	"TO ": "ಗೆ",
 	"Contributions made to Likho India": "ಲಿಖೋ ಇಂಡಿಯಾದಲ್ಲಿ ಮಾಡಲಾದ ಕೊಡುಗೆಗಳು",
@@ -345,5 +343,8 @@
 	"Translating": "ಅನುವಾದ",
 	"Images": "ಚಿತ್ರಗಳ",
 	"Validating": "ಮೌಲ್ಯೀಕರಣ",
-	"English": "ಇಂಗ್ಲೀಷ್"
+	"English": "ಇಂಗ್ಲೀಷ್",
+	"Back to Suno India Home": "ಕೇಳಿ ಸುನೋ ಇಂಡಿಯಾ ಮುಖಪುಟಕ್ಕೆ",
+	"Back to Likho India Home": "ಬರೆಯಿರಿ ಲಿಖೋ ಇಂಡಿಯಾ ಮುಖಪುಟಕ್ಕೆ",
+	"Back to Dekho India Home": "ಮರಳಿ ನೋಡಿ ಇಂಡಿಯಾ ಮುಖಪುಟಕ್ಕೆ"
 }
