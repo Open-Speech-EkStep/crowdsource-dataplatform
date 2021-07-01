@@ -482,5 +482,7 @@
     "Assamese": "অসমীয়া",
     "Punjabi": "পাঞ্জাবি",
     "Gujarati": "গুজরাটি",
-    "Start typing here...": "এখানে টাইপিং শুরু করুন"
+    "Start typing here...": "এখানে টাইপিং শুরু করুন",
+	"By proceeding ahead you agree to the <a href=\"./terms-and-conditions.html\" target=\"_blank\"> Terms and Conditions</a>": "এগিয়ে চলার জন্য আপনি<a href=\"./terms-and-conditions.html\" target=\"_blank\"> শর্ত এবং শর্তাবলীতে</a> সম্মত হন"
+
 }
