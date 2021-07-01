@@ -42,9 +42,15 @@ function isLanguageAvailable(data, lang) {
 }
 
 const addToLanguage = function (id, list) {
+    const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+    let defaultText = 'All Languages';
+    if(localeStrings){
+        defaultText = localeStrings['All Languages'];
+    }
+
     const selectBar = document.getElementById(id);
     let options = '';
-    options = options.concat(`<option value="">All Languages</option>`);
+    options = options.concat(`<option value="">${defaultText}</option>`);
     list.forEach(lang => {
       options = options.concat(`<option value=${lang.value}>${lang.text}</option>`);
     });
@@ -93,7 +99,7 @@ function updateLanguage(language) {
 }
 
 
-$(document).ready(function () {
+const executeOnLoad = function () {
     if(platform.name == "Firefox") {
         $("#from-dash-language").css('text-indent', '-25px');
         $("#to-dash-language").css('text-indent', '-25px');
@@ -204,6 +210,16 @@ $(document).ready(function () {
 
     // toggleFooterPosition();
 
-});
+};
+
+$(document).ready(() => {
+    getLocaleString().then(() => {
+        executeOnLoad();
+    }).catch(() => {
+        executeOnLoad();
+    });
+})
+
+
 
 module.exports = {fetchDetail, isLanguageAvailable, updateLanguage}

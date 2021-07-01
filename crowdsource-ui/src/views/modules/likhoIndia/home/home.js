@@ -99,6 +99,7 @@ function initializeBlock() {
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
       showFucntionalCards('parallel', fromLanguage, toLanguage);
+      getStatsSummary('/stats/summary/parallel',MODULE.likho.value);
     });
 
     $('#to-language').on('change', (e) => {

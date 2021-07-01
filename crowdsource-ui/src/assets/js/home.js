@@ -46,14 +46,16 @@ const updateLocaleText = function (total_contributions, total_validations, langu
         seconds: vSeconds
     } = calculateTime(parseFloat(total_validations).toFixed(3)*60*60);
 
+    const localeLanguage = localeStrings[language];
+
     let hrsRecordedIn = localeStrings['hrs recorded in'];
     hrsRecordedIn = hrsRecordedIn.replace("%hours", formatTime(cHours, cMinutes, cSeconds));
-    hrsRecordedIn = hrsRecordedIn.replace("%language", language);
+    hrsRecordedIn = hrsRecordedIn.replace("%language", localeLanguage);
     $say_p_3.text(hrsRecordedIn);
 
     let hrsValidatedIn = localeStrings['hrs validated in'];
     hrsValidatedIn = hrsValidatedIn.replace("%hours", formatTime(vHours, vMinutes, vSeconds));
-    hrsValidatedIn = hrsValidatedIn.replace("%language", language);
+    hrsValidatedIn = hrsValidatedIn.replace("%language", localeLanguage);
     $listen_p_3.text(hrsValidatedIn);
 }
 
@@ -226,6 +228,7 @@ function initializeBlock() {
             updateHrsForSayAndListen(language);
             redirectToLocalisedPage();
         }
+        getStatsSummary();
     })
 
     $languageNavBar.on('click', (e) => {
@@ -244,6 +247,7 @@ function initializeBlock() {
             window.location.href = "./home.html";
             redirectToLocalisedPage();
         }
+        getStatsSummary();
     });
 
     $('#start_recording').on('click', () => {
