@@ -1,24 +1,16 @@
-const { showLanguagePopup, redirectToLocalisedPage } = require('./locale');
+const { redirectToLocalisedPage } = require('./locale');
 const { onActiveNavbar, onChangeUser, showUserProfile,onOpenUserDropDown } = require('./header');
 const {whitelisting_email} = require('./env-api')
-const { drawMap, getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest, calculateTime, formatTime } = require('./utils')
+const { getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
+const { updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest, calculateTime, formatTime } = require('./utils')
 const {
-    setSpeakerDetails,
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick,
 } = require('./speakerDetails');
 
-const {
-    setBoloSpeakerDetails,
-    setBoloUserModalOnShown,
-    setBoloUserNameOnInputFocus,
-    setLetGoBtnOnClick
-} = require('./bolo_user_details');
 const { getContributedAndTopLanguage,hasUserRegistered } = require('./common');
-// const { hasUserRegistered } = require('../../../build/js/common/common');
 const {
     DEFAULT_CON_LANGUAGE,
     TOP_LANGUAGES_BY_HOURS,
@@ -28,7 +20,8 @@ const {
     LOCALE_STRINGS,
     ALL_LANGUAGES,
     MODULE,
-  SPEAKER_DETAILS_KEY
+  SPEAKER_DETAILS_KEY,
+  LIKHO_FROM_LANGUAGE
 } = require('./constants');
 const SPEAKER_DETAILS = "speakerDetails";
 const updateLocaleText = function (total_contributions, total_validations, language) {
@@ -118,21 +111,6 @@ const setLangNavBar = (targetedDiv, top_lang, $languageNavBar) => {
     }
 }
 
-const getDefaultLang = function () {
-    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    const $sayListenLanguage = $('#say-listen-language');
-
-    if (!contributionLanguage) {
-        const $homePage = document.getElementById('home-page');
-        const defaultLangId = $homePage.getAttribute('default-lang');
-        const targetedDiv = getDefaultTargetedDiv('id', defaultLangId, $sayListenLanguage);
-        const language = targetedDiv.getAttribute("value");
-        localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-        return language;
-    }
-    return contributionLanguage;
-}
-
 const setDefaultLang = function () {
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const $sayListenLanguage = $('#say-listen-language');
@@ -147,6 +125,7 @@ const setDefaultLang = function () {
         const targetedDiv = getDefaultTargetedDiv('id', defaultLangId, $sayListenLanguage);
         const language = targetedDiv.getAttribute("value");
         localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
+        localStorage.setItem(LIKHO_FROM_LANGUAGE, language);
         updateHrsForSayAndListen(language);
         setLangNavBar(targetedDiv, language, $languageNavBar);
         return;
@@ -210,6 +189,7 @@ function initializeBlock() {
     let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if(!top_lang){
         localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
+        localStorage.setItem(LIKHO_FROM_LANGUAGE, DEFAULT_CON_LANGUAGE);
         top_lang = DEFAULT_CON_LANGUAGE;
     }
     updateLocaleLanguagesDropdown(sentenceLanguage);
@@ -222,6 +202,7 @@ function initializeBlock() {
         if (top_lang !== language) {
             top_lang = language;
             localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
+            localStorage.setItem(LIKHO_FROM_LANGUAGE, language);
             localStorage.setItem("i18n", "en");
             window.location.href = "./home.html";
             setLangNavBar(targetedDiv, language, $languageNavBar);
@@ -236,6 +217,7 @@ function initializeBlock() {
         const language = targetedDiv.getAttribute('value');
         if (top_lang !== language) {
             localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
+            localStorage.setItem(LIKHO_FROM_LANGUAGE, language);
             top_lang = language;
             const $6th_place = $('#6th_option')
             const previousActiveDiv = $languageNavBar.find('.active') || $6th_place;
@@ -253,6 +235,7 @@ function initializeBlock() {
     $('#start_recording').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+        localStorage.setItem(LIKHO_FROM_LANGUAGE, top_lang);
         localStorage.setItem("selectedType", "contribute");
         if(!hasUserRegistered()){
             $('#userModal').modal('show');
@@ -265,6 +248,7 @@ function initializeBlock() {
     $('#start_validating').on('click', () => {
         sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+        localStorage.setItem(LIKHO_FROM_LANGUAGE, top_lang);
         localStorage.setItem("selectedType", "validate");
         if(!hasUserRegistered()){
             $('#userModal').modal('show');

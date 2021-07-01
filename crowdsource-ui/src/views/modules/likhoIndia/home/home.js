@@ -1,5 +1,5 @@
-const { onActiveNavbar, onChangeUser, showUserProfile ,onOpenUserDropDown} = require('../common/header');
-const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,landToHome,hasUserRegistered,updateLikhoLocaleLanguagesDropdown } = require('../common/common');
+const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
+const { redirectToLocalisedPage, getAvailableLanguages, showFucntionalCards, landToHome, hasUserRegistered, updateLikhoLocaleLanguagesDropdown } = require('../common/common');
 const {
   // toggleFooterPosition,
   getLocaleString,
@@ -11,7 +11,7 @@ const {
   setStartRecordingBtnOnClick,
   setGenderRadioButtonOnClick
 } = require('../common/speakerDetails');
-const {getStatsSummary} = require('../common/commonHome')
+const { getStatsSummary } = require('../common/commonHome')
 
 const { updateHrsForCards } = require('../common/card')
 
@@ -26,7 +26,7 @@ const {
   DEFAULT_CON_LANGUAGE
 } = require('../common/constants');
 
-const {initializeFeedbackModal} = require('../common/feedback')
+const { initializeFeedbackModal } = require('../common/feedback')
 
 const addToLanguage = function (id, list) {
   const selectBar = document.getElementById(id);
@@ -35,6 +35,11 @@ const addToLanguage = function (id, list) {
     options = options.concat(`<option value=${lang.value}>${lang.text}</option>`);
   })
   selectBar.innerHTML = options;
+}
+
+const updatePage = (fromLanguage, toLanguage) => {
+  showFucntionalCards('parallel', fromLanguage, toLanguage);
+  getStatsSummary('/stats/summary/parallel', MODULE.likho.value);
 }
 
 
@@ -46,7 +51,7 @@ function initializeBlock() {
   // toggleFooterPosition();
 
   let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  if(!contributionLanguage){
+  if (!contributionLanguage) {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
   }
 
@@ -55,16 +60,15 @@ function initializeBlock() {
     let fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
     let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
 
-    let nativeLanguage  = [];
+    let nativeLanguage = [];
     datasetLanguages.forEach((item) => {
-        const data = ALL_LANGUAGES.find(ele => ele.value == item);
-        if(data) {
-          nativeLanguage.push(data);
-        }
-     }
+      const data = ALL_LANGUAGES.find(ele => ele.value == item);
+      if (data) {
+        nativeLanguage.push(data);
+      }
+    }
     );
-    addToLanguage('from-language', nativeLanguage);
-    
+    addToLanguage('from-language', ALL_LANGUAGES);
     if (fromLanguage && toLanguage) {
       const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
       addToLanguage('to-language', languages);
@@ -74,8 +78,13 @@ function initializeBlock() {
       $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
       $(`#to-language option[value=${toLanguage}]`).attr("selected", "selected");
     } else {
-      $('#from-language option:first-child').attr("selected", "selected");
-      fromLanguage = $('#from-language option:first-child').val();
+      fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+      if(fromLanguage) {
+        $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
+      } else {
+        $('#from-language option:first-child').attr("selected", "selected");
+        fromLanguage = $('#from-language option:first-child').val();
+      }
       const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
       addToLanguage('to-language', languages);
       $('#to-language option:first-child').attr("selected", "selected");
@@ -98,40 +107,35 @@ function initializeBlock() {
       updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
       localStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
-      showFucntionalCards('parallel', fromLanguage, toLanguage);
-      getStatsSummary('/stats/summary/parallel',MODULE.likho.value);
+      updatePage(fromLanguage, toLanguage);
     });
 
     $('#to-language').on('change', (e) => {
       toLanguage = e.target.value;
       const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
       localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
-      updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
-      localStorage.setItem("i18n", "en");
-      redirectToLocalisedPage();
-      showFucntionalCards('parallel', fromLanguage, toLanguage);
-      getStatsSummary('/stats/summary/parallel',MODULE.likho.value);
+      updatePage(fromLanguage, toLanguage);
     });
-  })
+  });
 
   $('#start_recording').on('click', () => {
     localStorage.setItem("selectedType", "contribute");
-    if(!hasUserRegistered()){
+    if (!hasUserRegistered()) {
       $('#userModal').modal('show');
-      setStartRecordingBtnOnClick('./record.html',MODULE.likho.value);
+      setStartRecordingBtnOnClick('./record.html', MODULE.likho.value);
     } else {
-      location.href ='./record.html';
+      location.href = './record.html';
     }
 
   });
 
   $('#start_validating').on('click', () => {
     localStorage.setItem("selectedType", "validate");
-    if(!hasUserRegistered()){
+    if (!hasUserRegistered()) {
       $('#userModal').modal('show');
-      setStartRecordingBtnOnClick('./validator-page.html',MODULE.likho.value);
+      setStartRecordingBtnOnClick('./validator-page.html', MODULE.likho.value);
     } else {
-      location.href ='./validator-page.html';
+      location.href = './validator-page.html';
     }
   })
 
@@ -144,14 +148,14 @@ function initializeBlock() {
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
 
-  if(hasUserRegistered()){
+  if (hasUserRegistered()) {
     const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
     const localSpeakerDataParsed = JSON.parse(speakerDetails);
     showUserProfile(localSpeakerDataParsed.userName);
   }
-  onChangeUser('./home.html',MODULE.likho.value );
+  onChangeUser('./home.html', MODULE.likho.value);
   onOpenUserDropDown();
-  getStatsSummary('/stats/summary/parallel',MODULE.likho.value);
+  getStatsSummary('/stats/summary/parallel', MODULE.likho.value);
 
 }
 

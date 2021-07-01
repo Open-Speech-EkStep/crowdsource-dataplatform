@@ -80,10 +80,40 @@ step("Move tab to <tabName>", async function (tabName) {
 step("Check monthly goal section for value <value>", async function (value) {
 	assert.ok(await text("monthly goal").isVisible());
 	await taiko.scrollTo(text("monthly goal"));
-	assert.ok(await text(value,taiko.toRightOf(text("monthly goal"))).isVisible());
+	assert.ok(await text(value, taiko.toRightOf(text("monthly goal"))).isVisible());
 });
 
-step("Click <name> Link", async function(name) {
+step("Click <name> Link", async function (name) {
 	assert.ok(await link(name).exists());
 	await click(link(name));
+});
+
+step("Should select <lang> from localisation dropdown <id>", async function (lang, id) {
+	await taiko.waitFor(2000)
+	await click(taiko.link({ id: id }));
+	await click(text(lang));
+	await taiko.waitFor(1000);
+});
+
+step("Validate contribution language should be selected <lang> from <dropdown_id>", async function (lang, dropdown_id) {
+	await taiko.waitFor(2000)
+	const selectLanguageDropDown = taiko.dropDown({ id: dropdown_id })
+	assert.ok(await selectLanguageDropDown.exists());
+	// Need to check the selected value in dropdown
+
+	
+	// const selectedValue = await taiko.dropDown(dropdown_id).value();
+	// console.log(selectedValue);
+	// if(selectedValue == lang) {
+	// 	assert.ok(true);
+	// } else {
+	// 	assert.fail();
+	// }
+});
+
+step("Localisation <id> dropdown should have <lang1> & <lang2> value", async function (id, lang1, lang2) {
+	await taiko.waitFor(2000)
+	await click(taiko.link({ id: id }));
+	assert.ok(await text(lang1).exists());
+	assert.ok(await text(lang2).exists());
 });

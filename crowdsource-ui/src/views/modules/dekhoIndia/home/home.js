@@ -18,7 +18,8 @@ const {
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
-  SPEAKER_DETAILS_KEY
+  SPEAKER_DETAILS_KEY,
+  LIKHO_FROM_LANGUAGE
 } = require('../common/constants');
 
 const { initializeFeedbackModal } = require('../common/feedback');
@@ -34,6 +35,7 @@ function initializeBlock() {
   let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   if(!top_lang){
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
+    localStorage.setItem(LIKHO_FROM_LANGUAGE, DEFAULT_CON_LANGUAGE);
     top_lang = DEFAULT_CON_LANGUAGE;
   }
 
@@ -46,6 +48,7 @@ function initializeBlock() {
     if (top_lang !== language) {
       top_lang = language;
       localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
+      localStorage.setItem(LIKHO_FROM_LANGUAGE, language);
       localStorage.setItem("i18n", "en");
       setLangNavBar(targetedDiv, language, $languageNavBar);
       redirectToLocalisedPage();
@@ -61,6 +64,7 @@ function initializeBlock() {
     const language = targetedDiv.getAttribute('value');
     if (top_lang !== language) {
       localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
+      localStorage.setItem(LIKHO_FROM_LANGUAGE, language);
       top_lang = language;
       const $6th_place = $('#6th_option')
       const previousActiveDiv = $languageNavBar.find('.active') || $6th_place;
@@ -77,6 +81,7 @@ function initializeBlock() {
   $('#start_recording').on('click', () => {
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    localStorage.setItem(LIKHO_FROM_LANGUAGE, top_lang);
     localStorage.setItem("selectedType", "contribute");
     if(!hasUserRegistered()){
       $('#userModal').modal('show');
@@ -89,6 +94,7 @@ function initializeBlock() {
   $('#start_validating').on('click',()=>{
     sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
+    localStorage.setItem(LIKHO_FROM_LANGUAGE, top_lang);
     localStorage.setItem("selectedType", "validate");
     if(!hasUserRegistered()){
       $('#userModal').modal('show');

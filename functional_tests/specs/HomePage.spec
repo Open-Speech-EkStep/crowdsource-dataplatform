@@ -22,3 +22,10 @@ Tags: page
 * Clicking "Bolo India" should navigate to "Bolo India" Page
 * Clicking "Likho India" should navigate to "Likho India" Page
 * Clicking "Dekho India" should navigate to "Dekho India" Page
+
+## Validate Localisation
+* Should select "हिंदी" from localisation dropdown "localeDropdownMenuButton"
+* Clicking "देखो इंडिया" should navigate to "Dekho India" Page
+* Select "लिखो इंडिया" from header
+//* Validate contribution language should be selected "हिंदी" from "from-language"
+* Localisation "localeDropdownMenuButton" dropdown should have "English" & "हिंदी" value

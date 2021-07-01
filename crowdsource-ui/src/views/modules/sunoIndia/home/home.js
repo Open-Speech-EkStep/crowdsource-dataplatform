@@ -18,7 +18,8 @@ const {
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
-  SPEAKER_DETAILS_KEY
+  SPEAKER_DETAILS_KEY,
+  LIKHO_FROM_LANGUAGE
 } = require('../common/constants');
 
 const {initializeFeedbackModal} = require('../common/feedback');
@@ -49,6 +50,7 @@ function initializeBlock() {
     if (sentenceLanguage !== language) {
       sentenceLanguage = language;
       localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
+      localStorage.setItem(LIKHO_FROM_LANGUAGE, language);
       localStorage.setItem("i18n", "en");
       setLangNavBar(targetedDiv, language, $languageNavBar);
       // updateHrsForCards(language);
@@ -63,6 +65,7 @@ function initializeBlock() {
     const language = targetedDiv.getAttribute('value');
     if (sentenceLanguage !== language) {
       localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
+      localStorage.setItem(LIKHO_FROM_LANGUAGE, language);
       sentenceLanguage = language;
       const $6th_place = $('#6th_option')
       const previousActiveDiv = $languageNavBar.find('.active') || $6th_place;
