@@ -55,7 +55,7 @@
     "Bronze Bhasha Samarthak Badge": "வெண்கல பாஷா சமர்த்தக் பேட்ஜ்",
     "By hours of data recorded and validated": "மணிநேரங்களின் மூலம் பதிவு செய்யப்பட்டு சரிபார்க்கப்பட்ட தரவு",
     "By number of speakers": "பேசியவர்களின் எண்ணிக்கையின்படி",
-    "By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\" target=\"_blank\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\" target=\"_blank\"> Terms and Conditions</a>",
+    "By proceeding ahead you agree to the <a href=\"../terms-and-conditions.html\" target=\"_blank\"> Terms and Conditions</a>": "தொடர்ந்து மேலே செல்வதன் மூலம் நீங்கள் <a href=\"../terms-and-conditions.html\" target=\"_blank\"> விதிமுறைகளையும் நிபந்தனைகளையும் </a> ஒப்புக்கொள்கிறீர்கள்",
     "Cancel": "ரத்துசெய்",
     "Captured Text": "எழுத்துவடிவக் கவர்வு",
     "Change User": "மாற்று பயனர்",
@@ -413,5 +413,7 @@
     "NEPALI": "நேபாளி",
     "SANSKRIT": "சமஸ்கிருதம்",
     "SINDHI": "சிந்தி",
-    "URDU": "உருது"
+    "URDU": "உருது",
+	"By proceeding ahead you agree to the <a href=\"./terms-and-conditions.html\" target=\"_blank\"> Terms and Conditions</a>": "தொடர்ந்து மேலே செல்வதன் மூலம் நீங்கள் <a href=\"./terms-and-conditions.html\" target=\"_blank\"> விதிமுறைகளையும் நிபந்தனைகளையும் </a> ஒப்புக்கொள்கிறீர்கள்"
+
 }
