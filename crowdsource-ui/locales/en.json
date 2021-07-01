@@ -298,10 +298,7 @@
 	"Needs Change": "Needs Change",
 	"Select a language pair": "Select a language pair",
 	"FROM": "FROM",
-	"Back to LikhoIndia Home": "Back to LikhoIndia Home",
 	"Back to Bolo India Home": "Back to Bolo India Home",
-	"Back to SunoIndia Home": "Back to SunoIndia Home",
-	"Back to dekhoIndia Home": "Back to dekhoIndia Home",
 	"TO": "TO",
 	"Language pairs": "Language pairs",
 	"Translations done": "Translations done",
@@ -346,5 +343,8 @@
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to earn your <span id=\"next_badge_name_1\"></span>  Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to earn your <span id=\"next_badge_name_1\"></span>  Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>",
 	"Is the text from the image captured correctly?": "Is the text from the image captured correctly?",
 	"Captured Text": "Captured Text",
-	"Thank you for your enthusiasm to validate the image labels.": "Thank you for your enthusiasm to validate the image labels."
+	"Thank you for your enthusiasm to validate the image labels.": "Thank you for your enthusiasm to validate the image labels.",
+	"Back to Suno India Home": "Back to Suno India Home",
+	"Back to Likho India Home": "Back to Likho India Home",
+	"Back to Dekho India Home": "Back to Dekho India Home"
 }
