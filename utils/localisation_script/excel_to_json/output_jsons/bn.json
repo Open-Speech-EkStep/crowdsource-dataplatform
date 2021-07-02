@@ -195,7 +195,7 @@
     "Share it with your friends and family": "আপনার বন্ধু এবং পরিবারের সাথে ভাগ করুন",
     "Come Back again to<br />hit your goalpost": "আপনার লক্ষ্য বস্তু  আঘাত করতে আবার ফিরে আসুন",
     "social sharing text without rank": "আমি https://bhashini.gov.in/bhashadaan তে ভারতের জন্য ওপেন ভাষা ভাণ্ডার তৈরি করতে অবদান রেখেছি। আপনি ও আমি মিলে আমাদের স্বরের অবদান রেখে আমাদের ভাষাকে মেশিনে বুঝতে সাহায্য করার জন্য অনেক তফাৎ তৈরি করতে পারি। আপনার ভাষাকে ক্ষমতায়ন করতে অবদান করতে চান?",
-    "social sharing text with rank": "I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language. Our %language language ranks %rank on Bolo India. Do your bit and empower the language?",
+    "social sharing text with rank": "I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language. Our <x> language ranks %rank on Bolo India. Do your bit and empower the language?",
     "Back to Home": "হোমপেজ-এ ফিরে যান",
     "Thank you for your enthusiasm to validate the recordings.": "রেকর্ডিংগুলি যাচাই করতে আপনার উৎসাহের জন্য আপনাকে ধন্যবাদ।",
     "We do not have any data in <span id=\"spn-validation-language\"></span> language. Please try again later.": "আমাদের কাছে <span id=\"spn-validation-language\"></span> ভাষার কোনো ডেটা নেই। পরে আবার চেষ্টা করুন।",
