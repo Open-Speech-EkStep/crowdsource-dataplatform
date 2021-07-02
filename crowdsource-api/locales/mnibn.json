@@ -1,7 +1,7 @@
 {
 	"Language": "Manipuri BN",
-	"hrs recorded in": "%language দা পুং %hours রেকোর্দ তৌরে",
-	"hrs validated in": "%language দা পুং %hours ভেলিদেট তৌরে",
+	"hrs recorded in": "<y> দা পুং <x> রেকোর্দ তৌরে",
+	"hrs validated in": "<y> দা পুং <x> ভেলিদেট তৌরে",
 	"As a team, we are inviting you to join us and contribute your voice to this initiative. Recording your voice at one stretch might be overwhelming and hence, we have created leaner measures on our website, for you to visit us multiple times and commence from where you left us off": "টিম অমা ওইনা, ঐখোয়না অদোম্বু ইনিসিএটিব অসিদা জোইন তৌবীনবা অমসুং অদোমগী ভোইসকী মিনট 30 ফাউবা কন্ত্রিব্যুট তৌবীনবা হায়জরি। অদোমগী ভোইসপু অমুক্তংদা লেপ্তনা রেকোর্দ তৌবসি ৱানা থোকপা য়াই, মরমদুনা ঐখোয়গী ৱেবসাইটতা অদোম্না কয়ারক হন্না চঙদুনা, অদোম্না লেপখিবা মফমদুদগী অমুক হৌবা য়াগদবা লিনর মিজরশিং ঐখোয়না শেম্লে",
 	"Speech Recognition Models": "Speech Recognition Models",
 	"About Us": "ঐখোয়গী মরমদা",

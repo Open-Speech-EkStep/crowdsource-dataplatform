@@ -1,6 +1,6 @@
 {
-	"hrs recorded in": "%hours ध्वनिमुद्रिता: %language भाषायाम्",
-	"hrs validated in": "%hours प्रमाणीकृता: %language भाषायाम्",
+	"hrs recorded in": "<x> ध्वनिमुद्रिता: <y> भाषायाम्",
+	"hrs validated in": "<x> प्रमाणीकृता: <y> भाषायाम्",
 	"hours": "घण्टाः",
 	"minutes": "निमेषा:",
 	"seconds": "seconds",

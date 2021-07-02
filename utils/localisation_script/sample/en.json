@@ -137,7 +137,7 @@
 	"Playingback Audio": "Playingback Audio",
 	"Playing": "Playing",
 	"Congratulations!!! You have completed this batch of sentences": "Congratulations!!! You have completed this batch of sentences",
-	"social sharing text with rank": "I've contributed towards building open language repository for India on http://boloindia.nplt.in. You and I can make a difference by donating our voices that can help machines learn our language. Our <x> language ranks %rank on Bolo India. Do your bit and empower the language?",
+	"social sharing text with rank": "I've contributed towards building open language repository for India on http://boloindia.nplt.in. You and I can make a difference by donating our voices that can help machines learn our language. Our <x> language ranks <y> on Bolo India. Do your bit and empower the language?",
 	"social sharing text without rank": "I've contributed towards building open language repository for India on http://boloindia.nplt.in. You and I can make a difference by donating our voices that can help machines learn our language. Do your bit and empower the language?",
 	"Next": "Next",
 	"Back": "Back",

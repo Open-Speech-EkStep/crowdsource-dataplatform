@@ -1,6 +1,6 @@
 {
-	"hrs recorded in": "%hours टाड़ाङ: ध्वनिमुद्रिता: %language रे बाताव एम",
-	"hrs validated in": "%hours टाड़ाङ: प्रमाणीकृता: %language रे बाताव एमाकाना",
+	"hrs recorded in": "<x> टाड़ाङ: ध्वनिमुद्रिता: <y> रे बाताव एम",
+	"hrs validated in": "<x> टाड़ाङ: प्रमाणीकृता: <y> रे बाताव एमाकाना",
 	"Language": "Santali DV",
 	"Speech Recognition Models": "Speech Recognition Models",
 	"About Us": "आले बाबोत ते",

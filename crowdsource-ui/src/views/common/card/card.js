@@ -13,13 +13,13 @@ const updateLocaleText = function (total_contributions, total_validations, langu
   const $right_p_3 = $("#right-p-3");
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   let hrsRecordedIn = localeStrings['hrs recorded in'];
-  hrsRecordedIn = hrsRecordedIn.replace("%hours", total_contributions);
-  hrsRecordedIn = hrsRecordedIn.replace("%language", language);
+  hrsRecordedIn = hrsRecordedIn.replace("<x>", total_contributions);
+  hrsRecordedIn = hrsRecordedIn.replace("<y>", language);
   $left_p_3.text(hrsRecordedIn);
 
   let hrsValidatedIn = localeStrings['hrs validated in'];
-  hrsValidatedIn = hrsValidatedIn.replace("%hours", total_validations);
-  hrsValidatedIn = hrsValidatedIn.replace("%language", language);
+  hrsValidatedIn = hrsValidatedIn.replace("<x>", total_validations);
+  hrsValidatedIn = hrsValidatedIn.replace("<y>", language);
   $right_p_3.text(hrsValidatedIn);
 }
 
