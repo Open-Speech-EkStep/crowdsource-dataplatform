@@ -354,7 +354,8 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'Hindi',
             'English',
             'Bengali',
-            'All Languages'
+            'All Languages',
+            'BhashaDaan: A crowdsourcing initiative for Indian languages'
         ];
 
         const langSttr = {};

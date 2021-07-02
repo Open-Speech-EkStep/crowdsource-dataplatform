@@ -134,17 +134,12 @@ function updateLanguage(language) {
 
 $(document).ready(function () {
     localStorage.removeItem('previousLanguage');
-    const speakerDetailsKey = 'speakerDetails';
     localStorage.setItem('module','bolo');
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
-    // const $tncCheckbox = $('#tnc');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
-    const genderRadios = document.querySelectorAll('input[name = "gender"]');
     const $userName = $('#username');
-    const motherTongue = document.getElementById('mother-tongue');
-    const age = document.getElementById('age');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem('contributionLanguage');
     if (contributionLanguage) {
@@ -199,7 +194,6 @@ $(document).ready(function () {
         }
     });
 
-    // setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     $startRecordBtnTooltip.tooltip('disable');
     setUserNameOnInputFocus();

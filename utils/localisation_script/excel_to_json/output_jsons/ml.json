@@ -414,7 +414,7 @@
     "recording(s) validated": "റെക്കോ൪ഡിംഗ്(കൾ) സംഭാവന ചെയ്തു",
     "sentence(s) contributed": "വാക്യം(കൾ) സംഭാവന ചെയ്തു",
     "sentence(s) validated": "വാക്യം(കൾ) സാധൂകരിച്ചു",
-    "social sharing text with rank": "I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language. Our %language language ranks %rank on Bolo India. Do your bit and empower the language?",
+    "social sharing text with rank": "I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language. Our <x> language ranks %rank on Bolo India. Do your bit and empower the language?",
     "social sharing text without rank": " https://bhashini.gov.in/bhashadaan യിൽ സ്വതന്ത്ര ഭാഷാ ശേഖരം നി൪മ്മിക്കുന്നതിന് ഞാൻ സംഭാവന നൽകി.മെഷീനുകൾ നമ്മുടെ ഭാഷ മനസ്സിലാക്കുന്നതിനായി നമ്മുടെ ശബ്ദം സംഭാവന ചെയ്യുന്നതിലൂടെ എനിക്കും നിങ്ങൾക്കും ഒരു മാറ്റം കൊണ്ടുവരുന്നതിന് സാധ്യമാണ്. പറയൂ ഇന്ത്യയിൽ നമ്മുടെ <x> ഭാഷയുടെ റാങ്ക് <y> ആണ്.നിങ്ങളുടേതായ ഭാഗം സംഭാവന ചെയ്ത് ഭാഷയെ ശക്തിപ്പെടുത്തുക",
     "to go back to home page": "ഹോം പേജിലേക്ക് തിരികെ പോകാൻ",
     "total hours contributed": "ആകെ സംഭാവന ചെയ്തത്",

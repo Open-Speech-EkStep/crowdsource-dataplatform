@@ -190,7 +190,7 @@
     "Low/No Background Noise": "পিছফালৰ কোলাহল নিম্ন/নাই",
     "Background Noise Detected": "পিছৰফালে কোলাহল শুনা গৈছে",
     "social sharing text without rank": "মই https://bhashini.gov.in/bhashadaan ত ভাৰতৰ বাবে মুক্ত ভাষাৰ ভাণ্ডাৰ নিৰ্মাণত অবদান আগবঢ়াইছো৷ আপুনি আৰু মই আমাৰ কণ্ঠদান কৰি এটা পাৰ্থক্য সৃষ্টি কৰিব পাৰোঁ যিয়ে যন্ত্ৰবোৰক আমাৰ ভাষা শিকিবলৈ সহায় কৰিব পাৰে। আপোনাৰ অংশটো কৰি ভাষাটো শক্তিশালী কৰক?",
-    "social sharing text with rank": "I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language. Our %language language ranks %rank on Bolo India. Do your bit and empower the language?",
+    "social sharing text with rank": "I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language. Our <x> language ranks %rank on Bolo India. Do your bit and empower the language?",
     "Select the language for voluntary contribution": "স্ব-ইচ্ছাই অৱদান কৰাৰ বাবে ভাষা বাছনি কৰক",
     "Speak": "কওঁক",
     "Help us by validating the recordings that others have contributed": "আনসকলে অৱদান দিয়া কণ্ঠৰ নমুনাবোৰ মূল্যাংকন কৰি আমাক সহায় কৰক",
