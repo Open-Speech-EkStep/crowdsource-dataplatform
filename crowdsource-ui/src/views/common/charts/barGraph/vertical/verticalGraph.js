@@ -37,9 +37,9 @@ const drawTopLanguageChart = (chartData, type, dataType) => {
     valueAxis.renderer.grid.template.strokeDasharray = "3,3";
     valueAxis.renderer.labels.template.fontSize = 12;
     if (dataType != "speaker") {
-      valueAxis.title.text = type == "suno" || type == "bolo" ? "Contribution (in hours)" : type == "dekho" ? "Contribution (Number of images)" : 'Contribution (Number of translations)';
+      valueAxis.title.text = type == "suno" || type == "bolo" ? "Contribution (in hours)" : type == "dekho" ? "Contribution (no. of images)" : 'Contribution (no. of translations)';
     } else {
-      valueAxis.title.text = type == "bolo" ? "Number of speakers" : "";
+      valueAxis.title.text = type == "bolo" ? "Contribution (no. of speakers)" : "";
     }
 
     valueAxis.title.fontSize = 12;
