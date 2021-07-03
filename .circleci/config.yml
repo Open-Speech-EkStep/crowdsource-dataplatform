@@ -193,6 +193,8 @@ workflows:
             - build_dev_ui
 
       - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
           name: push_dev_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
@@ -200,6 +202,7 @@ workflows:
           extra-build-args: --build-arg NODE_ENV=dev
           repo: ${AZURE_REPO}
           tag: dev
+          checkout: false
           requires:
             - build_dev_ui
 
