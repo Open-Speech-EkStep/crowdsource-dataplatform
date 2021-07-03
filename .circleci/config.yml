@@ -17,6 +17,8 @@ jobs:
     steps:
       - checkout
       - run: rm -rf .git
+      - run: mkdir crowdsource-api/locales
+      - run: cp -v -R crowdsource-ui/locales/ crowdsource-api/locales/
       - persist_to_workspace:
           root: .
           paths:
