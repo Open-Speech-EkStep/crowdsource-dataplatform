@@ -62,6 +62,7 @@
 }
 .opinion label {
 	cursor: pointer;
+	border-radius: 50%;
 }
 
 #feedback_modal .modal-body label span {
@@ -89,19 +90,19 @@ label .required {
 }
 
 #very_sad_label:hover path, polygon, circle {
-    stroke: #E30606
+    stroke: #E30606;
 }
 #sad_label:hover path, polygon, circle {
-    stroke: #EA913F
+    stroke: #EA913F;
 }
 #neutral_label:hover path, polygon, circle {
-    stroke: #007BFF
+    stroke: #007BFF;
 }
 #happy_label:hover path, polygon, circle {
-    stroke: #4ED738
+    stroke: #4ED738;
 }
 #very_happy_label:hover path, polygon, circle {
-    stroke: #2A8908
+    stroke: #2A8908;
 }
 
 #feedback_modal .form-check-inline .form-check-input {
