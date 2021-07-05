@@ -61,38 +61,38 @@ const updateOpinionSVGColor = () => {
             if($('input[name="opinionRadio"]:checked').val() === 'very_sad')
             {
                 $("#very_sad_label").find("path, polygon, circle").attr("stroke", "#E30606");
-                $('#very_sad_label').css('-webkit-box-shadow', "0px 4px 12px #FCE6E6");
-                $('#very_sad_label').css('-moz-box-shadow', "0px 4px 12px #FCE6E6");
+                $('#very_sad_label').css('-webkit-box-shadow', "0px 4px 12px rgba(227, 6, 6, 0.2)");
+                $('#very_sad_label').css('-moz-box-shadow', "0px 4px 12px rgba(227, 6, 6, 0.2)");
                 $('#very_sad_label').css('filter', "drop-shadow(0px 4px 12px rgba(227, 6, 6, 0.2))");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'sad')
             {
                 $("#sad_label").find("path, polygon, circle").attr("stroke", "#EA913F");
-                $('#sad_label').css('-webkit-box-shadow', "0px 4px 12px #FDF4EC");
-                $('#sad_label').css('-moz-box-shadow', "0px 4px 12px #FDF4EC");
+                $('#sad_label').css('-webkit-box-shadow', "0px 4px 12px rgba(234, 145, 63, 0.2)");
+                $('#sad_label').css('-moz-box-shadow', "0px 4px 12px rgba(234, 145, 63, 0.2)");
                 $('#sad_label').css('filter', "drop-shadow(0px 4px 12px rgba(234, 145, 63, 0.2))");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'neutral')
             {
                 $("#neutral_label").find("path, polygon, circle").attr("stroke", "#007BFF");
-                $('#neutral_label').css('-webkit-box-shadow', "0px 4px 12px #E6F2FF");
-                $('#neutral_label').css('-moz-box-shadow', "0px 4px 12px #E6F2FF");
+                $('#neutral_label').css('-webkit-box-shadow', "0px 4px 12px rgba(0, 123, 255, 0.2)");
+                $('#neutral_label').css('-moz-box-shadow', "0px 4px 12px rgba(0, 123, 255, 0.2)");
                 $('#neutral_label').css('filter', "drop-shadow(0px 4px 12px rgba(0, 123, 255, 0.2))");
                 
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'happy')
             {
                 $("#happy_label").find("path, polygon, circle").attr("stroke", "#4ED738");
-                $('#happy_label').css('-webkit-box-shadow', "0px 4px 12px #EDFBEB");
-                $('#happy_label').css('-moz-box-shadow', "0px 4px 12px #EDFBEB");
+                $('#happy_label').css('-webkit-box-shadow', "0px 4px 12px rgba(78, 215, 56, 0.2)");
+                $('#happy_label').css('-moz-box-shadow', "0px 4px 12px rgba(78, 215, 56, 0.2)");
                 $('#happy_label').css('filter', "drop-shadow(0px 4px 12px rgba(78, 215, 56, 0.2))");
                 
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'very_happy')
             {
                 $("#very_happy_label").find("path, polygon, circle").attr("stroke", "#2A8908");
-                $('#very_happy_label').css('-webkit-box-shadow', "0px 4px 12px #EAF3E6");
-                $('#very_happy_label').css('-moz-box-shadow', "0px 4px 12px #EAF3E6");
+                $('#very_happy_label').css('-webkit-box-shadow', "0px 4px 12px rgba(42, 137, 8, 0.2)");
+                $('#very_happy_label').css('-moz-box-shadow', "0px 4px 12px rgba(42, 137, 8, 0.2)");
                 $('#very_happy_label').css('filter', "drop-shadow(0px 4px 12px rgba(42, 137, 8, 0.2))");
             }
         });
