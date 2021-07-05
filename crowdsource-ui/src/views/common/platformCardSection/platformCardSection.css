@@ -113,8 +113,8 @@
 }
 
 #platform_section .platform_card {
-    background-image: url(/img/NEW-WAVE.svg);
-    background-size: contain;
+    background-image: url(/img/tri_color.svg);
+    background-size: auto;
     max-width: 1200px;
     min-height: 400px;
     background-repeat: no-repeat;
@@ -490,8 +490,8 @@
     }
 
     #platform_section .platform_card {
-        background-image: url(/img/mobile_wave.png) !important;
-        background-size: contain;
+        background-image: url(/img/tri_color.svg) !important;
+        background-size: auto;
     }
 
     #platform_inner {
