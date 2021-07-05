@@ -1,4 +1,5 @@
 $primary-color: #142745;
+$bg-secondary-color : #EFF5FF;
 $primary-btn-color: #0F2749;
 $text-white: #fff;
 $text-secondary:#D8D8D8;
@@ -7,6 +8,10 @@ $text-secondary:#D8D8D8;
 .bg-app-primary {
     background-color: $primary-color !important;
     color: $text-white !important;
+}
+
+.bg-app-secondary {
+  background-color: $bg-secondary-color!important;
 }
 
 .text-primary {
