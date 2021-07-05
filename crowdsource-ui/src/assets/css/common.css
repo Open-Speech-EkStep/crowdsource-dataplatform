@@ -137,8 +137,13 @@ body {
   border-bottom: 2px solid#4DBAF7;
 }
 
+.module-item.active > a span:nth-child(2) {
+  color: #ffbf00 !important;
+}
+
 .module-item.active > a {
-  color: #007BFF !important;
+  color: #fff !important;
+  opacity: 1 !important;
 }
 
 @media (min-width: 768px) and (max-width: 961px) { 

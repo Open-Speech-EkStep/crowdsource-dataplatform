@@ -246,7 +246,6 @@
     font-size: 24px;
     line-height: 29px;
     width: max-content;
-    color: #007bff!important;
     opacity: .7;
     font-weight: 700;
     width: max-content;
@@ -259,7 +258,6 @@
 }
 
 #carouselExampleIndicators .nav-tabs>li.active>a {
-    color: #007BFF !important;
     font-weight: 700;
     opacity: 1;
 }

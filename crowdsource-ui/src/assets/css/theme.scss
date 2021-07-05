@@ -3,6 +3,8 @@ $primary-btn-color: #0F2749;
 $text-white: #fff;
 $text-secondary:#D8D8D8;
 
+// rgba(37, 70, 105, 1)
+
 
 .bg-app-primary {
     background-color: $primary-color !important;
@@ -44,7 +46,7 @@ $text-secondary:#D8D8D8;
 .btn-custom-primary {
     background-color:$primary-btn-color;
     color: $text-white;
-  }
+}
 
   .btn-custom-primary:hover {
     color: $text-white;
@@ -59,7 +61,7 @@ $text-secondary:#D8D8D8;
 
   .btn-transparent:hover {
     background-color: $primary-btn-color;
-    color: $primary-btn-color;
+    color: $text-white;
   }
 
   .btn-transparent:active {
@@ -90,4 +92,4 @@ $text-secondary:#D8D8D8;
     background-color: $text-secondary;
     color: $text-white;
     border: 1px solid $text-secondary;
-   }
+  }

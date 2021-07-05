@@ -132,8 +132,13 @@ body {
     border-bottom: 2px solid #4DBAF7;
 }
 
+.module-item.active > a span:nth-child(2) {
+    color: #ffbf00 !important;
+}
+
 .module-item.active > a {
     color: #fff !important;
+    opacity: 1 !important;
 }
 
 .validate-disabled {
