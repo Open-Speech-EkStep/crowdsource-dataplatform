@@ -13,6 +13,10 @@ $text-secondary:#D8D8D8;
     color: $primary-color !important;
 }
 
+.text-btn-primary {
+    color: $primary-btn-color;
+}
+
 .text-muted-white {
     color: $text-white !important;
     opacity: 0.8 !important;

@@ -52,7 +52,7 @@
 .platform-card-section-heading{
     color: #111111;
     font-size: 32px;
-    margin-top: 60px !important;
+    margin-top: 40px !important;
 }
 
 .platform-card-section-para{
@@ -203,10 +203,10 @@
 }
 
 .home-badge-link-row{
-    color:#666666;;
-    line-height:40px;
+    line-height:50px;
+    font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
     padding-right: 20px;
-    font-size: 24px;
+    font-size: 40px;
 }
 .home-badge-link-row2{
     font-size: 24px;
