@@ -133,8 +133,8 @@ body {
 }
 
 .module-item.active {
-  background: rgba(0, 123, 255, 0.1);
-  border-bottom: 2px solid#007BFF;
+  background: rgba(37, 70, 105, 1);
+  border-bottom: 2px solid#4DBAF7;
 }
 
 .module-item.active > a {

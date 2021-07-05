@@ -1,0 +1,89 @@
+$primary-color: #142745;
+$primary-btn-color: #0F2749;
+$text-white: #fff;
+$text-secondary:#D8D8D8;
+
+
+.bg-app-primary {
+    background-color: $primary-color !important;
+    color: $text-white !important;
+}
+
+.text-primary {
+    color: $primary-color !important;
+}
+
+.text-muted-white {
+    color: $text-white !important;
+    opacity: 0.8 !important;
+}
+
+.btn-outline-primary {
+    color: $primary-color !important;
+    border-color: $primary-color !important;
+
+    &:hover {
+        background-color: $primary-color !important;
+        color: $text-white !important;
+    }
+}
+
+.btn-primary {
+    background-color: $primary-btn-color !important;
+    color: $text-white !important;
+
+    &:hover {
+        background-color: $primary-color;
+    }
+}
+
+.btn-custom-primary {
+    background-color:$primary-btn-color;
+    color: $text-white;
+  }
+
+  .btn-custom-primary:hover {
+    color: $text-white;
+    background-color:$primary-color;
+  }
+
+
+  .btn-transparent {
+    background: transparent;
+    color: $primary-btn-color;
+  }
+
+  .btn-transparent:hover {
+    background-color: $primary-btn-color;
+    color: $primary-btn-color;
+  }
+
+  .btn-transparent:active {
+    color: $primary-btn-color !important;
+    border: 1px solid $primary-btn-color;
+  }
+ 
+  .btn-custom-outline-primary {
+   background-color:$text-white;
+   border: 1px solid $primary-btn-color;
+   color: $primary-btn-color;
+  }
+
+  .btn-custom-outline-primary:hover {
+    background-color: $primary-btn-color;
+    color: $text-white;
+  }
+
+  .btn-custom-outline-primary:focus {
+    background-color:$primary-btn-color;
+  }
+
+  .btn-transparent:disabled {
+    color: $text-secondary;
+  }
+
+  .btn-custom-primary:disabled {
+    background-color: $text-secondary;
+    color: $text-white;
+    border: 1px solid $text-secondary;
+   }
