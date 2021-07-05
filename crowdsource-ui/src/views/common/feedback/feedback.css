@@ -86,18 +86,23 @@ label .required {
 
 #very_sad_label:hover path, polygon, circle {
     stroke: #E30606;
+	stroke-width: 2;
 }
 #sad_label:hover path, polygon, circle {
     stroke: #EA913F;
+	stroke-width: 2;
 }
 #neutral_label:hover path, polygon, circle {
     stroke: #007BFF;
+	stroke-width: 2;
 }
 #happy_label:hover path, polygon, circle {
     stroke: #4ED738;
+	stroke-width: 2;
 }
 #very_happy_label:hover path, polygon, circle {
     stroke: #2A8908;
+	stroke-width: 2;
 }
 
 #feedback_modal .form-check-inline .form-check-input {

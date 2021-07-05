@@ -26,14 +26,15 @@ const checkGivingFeedbackFor = () => {
         });
 };
 
+const addColorPathSVG = (element, color) => {
+    $(element).attr("stroke", color);            
+};
+
 const removeShadowSVG = (element) => {
     $(element).css('-webkit-box-shadow', 'none');
     $(element).css('-moz-box-shadow', 'none');
     $(element).css('box-shadow', 'none');
-};
-
-const addColorPathSVG = (element, color) => {
-    $(element).attr("stroke", color);            
+    $(element).css('stroke-width', 1);
 };
 
 const resetSVG = () => {
@@ -49,6 +50,16 @@ const resetSVG = () => {
     removeShadowSVG('#happy_label');
     removeShadowSVG('#very_happy_label');
 }
+
+const selectEmoji = (element, stroke, rgba) => {
+    $(element).find("path, polygon, circle").attr("stroke", stroke);
+    $(element).css('-webkit-box-shadow', `0px 4px 12px ${rgba}`);
+    $(element).css('-moz-box-shadow', `0px 4px 12px ${rgba}`);
+    $(element).css('box-shadow', `0px 4px 12px ${rgba}`);
+    $(element).css('stroke-width', 2);
+}
+
+
 const updateOpinionSVGColor = () => {
     $(document).ready(() => {
         $('input[name="opinionRadio"]').click(function(){ 
@@ -60,40 +71,23 @@ const updateOpinionSVGColor = () => {
 
             if($('input[name="opinionRadio"]:checked').val() === 'very_sad')
             {
-                $("#very_sad_label").find("path, polygon, circle").attr("stroke", "#E30606");
-                $('#very_sad_label').css('-webkit-box-shadow', "0px 4px 12px rgba(227, 6, 6, 0.2)");
-                $('#very_sad_label').css('-moz-box-shadow', "0px 4px 12px rgba(227, 6, 6, 0.2)");
-                $('#very_sad_label').css('filter', "drop-shadow(0px 4px 12px rgba(227, 6, 6, 0.2))");
+                selectEmoji("#very_sad_label", "#E30606", "rgba(227, 6, 6, 0.2)");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'sad')
             {
-                $("#sad_label").find("path, polygon, circle").attr("stroke", "#EA913F");
-                $('#sad_label').css('-webkit-box-shadow', "0px 4px 12px rgba(234, 145, 63, 0.2)");
-                $('#sad_label').css('-moz-box-shadow', "0px 4px 12px rgba(234, 145, 63, 0.2)");
-                $('#sad_label').css('filter', "drop-shadow(0px 4px 12px rgba(234, 145, 63, 0.2))");
+                selectEmoji("#sad_label", "#EA913F", "rgba(234, 145, 63, 0.2)");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'neutral')
             {
-                $("#neutral_label").find("path, polygon, circle").attr("stroke", "#007BFF");
-                $('#neutral_label').css('-webkit-box-shadow', "0px 4px 12px rgba(0, 123, 255, 0.2)");
-                $('#neutral_label').css('-moz-box-shadow', "0px 4px 12px rgba(0, 123, 255, 0.2)");
-                $('#neutral_label').css('filter', "drop-shadow(0px 4px 12px rgba(0, 123, 255, 0.2))");
-                
+                selectEmoji("#neutral_label", "#007BFF", "rgba(0, 123, 255, 0.2)");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'happy')
             {
-                $("#happy_label").find("path, polygon, circle").attr("stroke", "#4ED738");
-                $('#happy_label').css('-webkit-box-shadow', "0px 4px 12px rgba(78, 215, 56, 0.2)");
-                $('#happy_label').css('-moz-box-shadow', "0px 4px 12px rgba(78, 215, 56, 0.2)");
-                $('#happy_label').css('filter', "drop-shadow(0px 4px 12px rgba(78, 215, 56, 0.2))");
-                
+                selectEmoji("#happy_label", "#4ED738", "rgba(78, 215, 56, 0.2)")
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'very_happy')
             {
-                $("#very_happy_label").find("path, polygon, circle").attr("stroke", "#2A8908");
-                $('#very_happy_label').css('-webkit-box-shadow', "0px 4px 12px rgba(42, 137, 8, 0.2)");
-                $('#very_happy_label').css('-moz-box-shadow', "0px 4px 12px rgba(42, 137, 8, 0.2)");
-                $('#very_happy_label').css('filter', "drop-shadow(0px 4px 12px rgba(42, 137, 8, 0.2))");
+                selectEmoji("#very_happy_label", "#2A8908", "rgba(42, 137, 8, 0.2)")
             }
         });
     });
