@@ -164,22 +164,10 @@ const getStatsSummary = function () {
         });
 }
 
-const setSayListenBackground = function () {
-    const $say = $("#say");
-    const $listen = $("#listen");
-    const $sayWidth = $say.outerWidth(true);
-    const $listenWidth = $listen.outerWidth(true);
-    const totalWidth = $sayWidth + $listenWidth;
-    $say.css("background-size", `${totalWidth}px auto`);
-    $listen.css("background-size", `${totalWidth}px auto`);
-}
-
-
 function initializeBlock() {
     const $userName = $('#username');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
-    setSayListenBackground();
     let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if(!top_lang){
         localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
@@ -308,10 +296,6 @@ $(document).ready(function () {
     }).catch(err => {
         initializeBlock();
     });
-});
-
-$(window).on("orientationchange", function () {
-    setSayListenBackground();
 });
 
 

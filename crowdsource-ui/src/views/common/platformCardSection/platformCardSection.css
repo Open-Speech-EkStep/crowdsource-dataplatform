@@ -1,6 +1,14 @@
+.font-size-lg-32{
+    font-size: 2rem;
+}
+
+
+
 .platform-intro-section-cover{
     background-repeat: no-repeat;
-    background-position: right;
+    background-position: center;
+    background-image: url(/img/top_half_banner.svg);
+    background-size: cover;
 }
 
 .platform-intro-section{
@@ -473,6 +481,10 @@
 }
 
 @media screen and (max-width: 699px) {
+    #banner .h1{
+        font-size: 32px;
+    }
+
     .separator{
         opacity: 0.1;
     }
@@ -724,7 +736,6 @@
     font-family: 'Rowdies', cursive;
     font-style: normal;
     font-weight: 300;
-    background: #0F2749;
     color: #ECF6FF;
 }
  /* body{
@@ -785,9 +796,9 @@
      border: none;
      padding: 10px 40px;
  }
- @media only screen and (min-width: 992px) {
- .left-bg{ background:url("/img/left.png") no-repeat left center; 
- }
- .right-bg{ background:url("/img/right.png") no-repeat right center;}
- }
- @media only screen and (min-width: 768px) {.right-bg{ background:url("/img/right.png") no-repeat right center;}}
+ /*@media only screen and (min-width: 992px) {*/
+ /*.left-bg{ background:url("/img/left.png") no-repeat left center; */
+ /*}*/
+ /*.right-bg{ background:url("/img/right.png") no-repeat right center;}*/
+ /*}*/
+ /*@media only screen and (min-width: 768px) {.right-bg{ background:url("/img/right.png") no-repeat right center;}}*/

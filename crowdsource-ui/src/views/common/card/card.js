@@ -39,22 +39,6 @@ function updateHrsForCards(language) {
   $rightLoader.addClass('d-none');
 }
 
-const setCardsBackground = function (){
-  const $left = $("#left");
-  const $right = $("#right");
-  const $leftWidth = $left.outerWidth( true);
-  const $rightWidth = $right.outerWidth(true);
-  const totalWidth = $leftWidth + $rightWidth;
-  $left.css("background-size",`${totalWidth}px auto`);
-  $right.css("background-size",`${totalWidth}px auto`);
-}
-
-$(window).on("orientationchange",function(){
-  setCardsBackground();
-});
-
-setCardsBackground();
-
 $left.hover(() => {
   $(".card1").css("box-shadow","0px 0px 32px rgba(66, 178, 198, 0.6)")
   $left_p_2.removeClass('d-none');
