@@ -61,7 +61,7 @@ $primary-color-shade4: rgba(37, 70, 105, 0.4);
 .btn-custom-primary {
     background-color:$primary-color;
     color: $text-white;
-    filter: drop-shadow(1px 8px 24px rgba(0, 123, 255, 0.2));
+    filter: drop-shadow(1px 8px 24px $primary-color-shade2);
 }
 
 .btn-custom-primary {
