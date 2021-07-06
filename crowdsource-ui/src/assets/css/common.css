@@ -14,13 +14,18 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 700;
 }
 
 body {
   font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   height: 100vh;
+}
+
+.font-family-Rowdies{
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 400 !important;
 }
 
 .logo-text:hover {
