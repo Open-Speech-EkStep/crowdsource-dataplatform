@@ -2,7 +2,9 @@
     font-size: 2rem;
 }
 
-
+.platform_section .nav-tabs{
+    font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
 .platform-intro-section-cover{
     background-repeat: no-repeat;

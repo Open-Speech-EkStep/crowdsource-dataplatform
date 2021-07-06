@@ -12,7 +12,6 @@ const drawTopLanguageChart = (chartData, type, dataType) => {
         item.contributedHours = type == "suno" || type == "bolo" ? formatTime(cHours, cMinutes, cSeconds) : type == "dekho" ? ((item.total_contribution_count).toString() + " images") : ((item.total_contribution_count).toString() + " translations");
       });
     } else {
-      console.log(chartData, "speakers");
       chartData.forEach(item => {
         item.contributedHours = ((item.total_speakers).toString() + " speakers");
       });
