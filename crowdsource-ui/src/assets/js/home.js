@@ -265,21 +265,21 @@ function initializeBlock() {
     const $say_container = $('#say_container');
     const $listen_container = $('#listen_container');
     $say.hover(() => {
-        $(".card1").css("box-shadow", "0px 0px 32px rgba(66, 178, 198, 0.6)")
+        $(".card1").css("box-shadow","0 8px 0 #43c0d7,0 0 32px #43c0d7")
         $say_p_2.removeClass('d-none');
         $say_container.addClass('say-active');
     }, () => {
-        $(".card1").css("box-shadow", "0px 0px 32px rgb(0 0 0 / 10%)")
+        $(".card1").css("box-shadow","0 8px 0 #43c0d7, 0px 0px 32px rgb(0 0 0 / 10%)")
         $say_p_2.addClass('d-none');
         $say_container.removeClass('say-active');
     });
 
     $listen.hover(() => {
-        $(".card2").css("box-shadow", "0px 0px 32px rgba(166, 192, 251, 0.6)")
+        $(".card2").css("box-shadow","0 8px 0 #43c0d7,0 0 32px #43c0d7")
         $listen_p_2.removeClass('d-none');
         $listen_container.addClass('listen-active');
     }, () => {
-        $(".card2").css("box-shadow", "0px 0px 32px rgb(0 0 0 / 10%)")
+        $(".card2").css("box-shadow","0 8px 0 #43c0d7, 0px 0px 32px rgb(0 0 0 / 10%)")
         $listen_p_2.addClass('d-none');
         $listen_container.removeClass('listen-active');
     });
