@@ -31,10 +31,11 @@ const addColorPathSVG = (element, color) => {
 };
 
 const removeShadowSVG = (element) => {
-    $(element).css('-webkit-box-shadow', 'none');
-    $(element).css('-moz-box-shadow', 'none');
-    $(element).css('box-shadow', 'none');
+    $(element).css('-webkit-box-shadow', '');
+    $(element).css('-moz-box-shadow', '');
+    $(element).css('box-shadow', '');
     $(element).css('stroke-width', 1);
+    $(element).find('.double-stroke').css('stroke-width', 2);
 };
 
 const resetSVG = () => {
@@ -42,7 +43,7 @@ const resetSVG = () => {
     addColorPathSVG("#sad_svg_boundary", "#FDF4EC");
     addColorPathSVG("#neutral_svg_boundary", "#E6F2FF");
     addColorPathSVG("#happy_svg_boundary", "#EDFBEB");
-    addColorPathSVG("#very_happy_svg_boundary", "#EAF3E6");
+    addColorPathSVG("#very_happy_svg_boundary", "#DFEDDA");
 
     removeShadowSVG('#very_sad_label');
     removeShadowSVG('#sad_label');
@@ -57,6 +58,7 @@ const selectEmoji = (element, stroke, rgba) => {
     $(element).css('-moz-box-shadow', `0px 4px 12px ${rgba}`);
     $(element).css('box-shadow', `0px 4px 12px ${rgba}`);
     $(element).css('stroke-width', 2);
+    $(element).find('.double-stroke').css('stroke-width', 4);
 }
 
 
@@ -71,23 +73,23 @@ const updateOpinionSVGColor = () => {
 
             if($('input[name="opinionRadio"]:checked').val() === 'very_sad')
             {
-                selectEmoji("#very_sad_label", "#E30606", "rgba(227, 6, 6, 0.2)");
+                selectEmoji("#very_sad_label", "#E30606", "rgba(227, 6, 6, 0.5)");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'sad')
             {
-                selectEmoji("#sad_label", "#EA913F", "rgba(234, 145, 63, 0.2)");
+                selectEmoji("#sad_label", "#EA913F", "rgba(234, 145, 63, 0.5)");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'neutral')
             {
-                selectEmoji("#neutral_label", "#007BFF", "rgba(0, 123, 255, 0.2)");
+                selectEmoji("#neutral_label", "#007BFF", "rgba(0, 123, 255, 0.5)");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'happy')
             {
-                selectEmoji("#happy_label", "#4ED738", "rgba(78, 215, 56, 0.2)")
+                selectEmoji("#happy_label", "#4ED738", "rgba(78, 215, 56, 0.5)")
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'very_happy')
             {
-                selectEmoji("#very_happy_label", "#2A8908", "rgba(42, 137, 8, 0.2)")
+                selectEmoji("#very_happy_label", "#2A8908", "rgba(42, 137, 8, 0.5)")
             }
         });
     });
@@ -214,8 +216,8 @@ const resetFeedback = () => {
 
     if(category) category.selected = true;
     feedback.value = '';
-    $(".opinion-label").find("path, polygon, circle").attr("stroke", "#818181");
     if(opinion) opinion.checked = false;
+    resetSVG();
     $("#submit_btn").attr('disabled', true);
     checkGivingFeedbackFor();
     updateSelectPageWhenModuleChanges();

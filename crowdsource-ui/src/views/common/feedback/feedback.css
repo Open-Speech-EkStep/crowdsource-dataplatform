@@ -60,6 +60,10 @@
 	border-radius: 50%;
 }
 
+.opinion label svg {
+	border-radius: 50%;
+}
+
 #feedback_modal .modal-body label span {
 	font-family: Lato;
 	font-size: 16px;
@@ -84,25 +88,52 @@ label .required {
     padding: 0;
 }
 
-#very_sad_label:hover path, polygon, circle {
-    stroke: #E30606;
-	stroke-width: 2;
+#very_sad_label:hover {
+	-webkit-box-shadow: 0px 4px 12px rgba(227, 6, 6, 0.5);
+	-moz-box-shadow:  0px 4px 12px rgba(227, 6, 6, 0.5);
+	box-shadow: 0px 4px 12px rgba(227, 6, 6, 0.5);	
 }
-#sad_label:hover path, polygon, circle {
-    stroke: #EA913F;
-	stroke-width: 2;
+
+#sad_label:hover {
+	-webkit-box-shadow: 0px 4px 12px rgba(234, 145, 63, 0.5);
+	-moz-box-shadow:  0px 4px 12px rgba(234, 145, 63, 0.5);
+	box-shadow: 0px 4px 12px rgba(234, 145, 63, 0.5);
 }
-#neutral_label:hover path, polygon, circle {
-    stroke: #007BFF;
-	stroke-width: 2;
+
+#neutral_label:hover {
+	-webkit-box-shadow: 0px 4px 12px rgba(0, 123, 255, 0.5);
+	-moz-box-shadow:  0px 4px 12px rgba(0, 123, 255, 0.5);
+	box-shadow: 0px 4px 12px rgba(0, 123, 255, 0.5);
 }
-#happy_label:hover path, polygon, circle {
-    stroke: #4ED738;
-	stroke-width: 2;
+#happy_label:hover {
+	-webkit-box-shadow: 0px 4px 12px rgba(78, 215, 56, 0.5);
+	-moz-box-shadow:  0px 4px 12px rgba(78, 215, 56, 0.5);
+	box-shadow: 0px 4px 12px rgba(78, 215, 56, 0.5);
 }
-#very_happy_label:hover path, polygon, circle {
-    stroke: #2A8908;
-	stroke-width: 2;
+
+#very_happy_label:hover{
+	-webkit-box-shadow: 0px 4px 12px rgba(42, 137, 8, 0.5);
+	-moz-box-shadow:  0px 4px 12px rgba(42, 137, 8, 0.5);
+	box-shadow: 0px 4px 12px rgba(42, 137, 8, 0.5);
+}
+
+#very_sad-svg {
+	background-color: #FCE6E6;
+}
+
+#sad-svg {
+	background-color: #FDF4EC;
+}
+
+#neutral-svg {
+	background-color: #E6F2FF;
+}
+#happy-svg{
+	background-color: #EDFBEB;
+}
+
+#very-happy-svg{
+	background-color: #DFEDDA;
 }
 
 #feedback_modal .form-check-inline .form-check-input {
