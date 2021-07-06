@@ -1,84 +1,55 @@
 const { onActiveNavbar,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
 
 const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,updateLocaleLanguagesDropdown, landToHome,hasUserRegistered} = require('../common/common');
-const {toggleFooterPosition, getLocaleString} = require('../common/utils');
+const {getLocaleString} = require('../common/utils');
 const {
-  setSpeakerDetails,
   setUserModalOnShown,
   setUserNameOnInputFocus,
   setStartRecordingBtnOnClick,
   setGenderRadioButtonOnClick,
 } = require('../common/speakerDetails');
 
-const {setLangNavBar} = require('../common/languageNavBar')
-const {updateHrsForCards} = require('../common/card')
-const {getStatsSummary,getDefaultLang,setDefaultLang} = require('../common/commonHome');
+const {addToLanguage} = require('../common/languageNavBar')
+const {getStatsSummary} = require('../common/commonHome');
 const {
   DEFAULT_CON_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
-  SPEAKER_DETAILS_KEY
+  SPEAKER_DETAILS_KEY,
+  ALL_LANGUAGES
 } = require('../common/constants');
 
 const {initializeFeedbackModal} = require('../common/feedback');
 
 function initializeBlock() {
-  const speakerDetailsKey = 'speakerDetails';
-  const age = document.getElementById('age');
-  const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
   let sentenceLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   if(!sentenceLanguage){
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
     sentenceLanguage = DEFAULT_CON_LANGUAGE;
   }
-  // toggleFooterPosition();
-  // let top_lang = getDefaultLang();
-  // if(top_lang){
-    updateLocaleLanguagesDropdown(sentenceLanguage);
-  // }
+  updateLocaleLanguagesDropdown(sentenceLanguage);
 
-  const $languageNavBar = $('#language-nav-bar');
-  const $sayListenLanguage = $('#say-listen-language');
-  // updateHrsForCards(top_lang);
+  addToLanguage('from-language', ALL_LANGUAGES);
+  let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
-  $sayListenLanguage.on('click', (e) => {
-    const targetedDiv = e.target;
-    const language = targetedDiv.getAttribute("value");
-    if (sentenceLanguage !== language) {
-      sentenceLanguage = language;
-      localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-      localStorage.setItem("i18n", "en");
-      setLangNavBar(targetedDiv, language, $languageNavBar);
-      // updateHrsForCards(language);
-      redirectToLocalisedPage();
-    }
-    getStatsSummary('/stats/summary/asr',MODULE.suno.value, setDefaultLang);
-    showFucntionalCards('asr', language);
-  })
+  if (fromLanguage) {
+    $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
+  }
 
-  $languageNavBar.on('click', (e) => {
-    const targetedDiv = e.target;
-    const language = targetedDiv.getAttribute('value');
-    if (sentenceLanguage !== language) {
-      localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-      sentenceLanguage = language;
-      const $6th_place = $('#6th_option')
-      const previousActiveDiv = $languageNavBar.find('.active') || $6th_place;
-      previousActiveDiv.removeClass('active');
-      $6th_place.addClass('d-none');
-      targetedDiv.classList.add('active');
-      localStorage.setItem("i18n", "en");
-      // updateHrsForCards(language);
-      redirectToLocalisedPage();
-    }
-    getStatsSummary('/stats/summary/asr',MODULE.suno.value, setDefaultLang);
+  $('#from-language').on('change', (e) => {
+    fromLanguage = e.target.value;
+    sentenceLanguage = fromLanguage
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
+    const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
+    localStorage.setItem("i18n", "en");
+    redirectToLocalisedPage();
+    getStatsSummary('/stats/summary/asr',MODULE.suno.value, ()=>{});
     showFucntionalCards('asr', language);
   });
 
   $('#start_recording').on('click', () => {
-    // sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
     localStorage.setItem("selectedType", "contribute");
     if(!hasUserRegistered()){
@@ -90,7 +61,6 @@ function initializeBlock() {
   });
 
   $('#start_validating').on('click',()=>{
-    // sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
     localStorage.setItem("selectedType", "validate");
     if(!hasUserRegistered()){
@@ -107,7 +77,6 @@ function initializeBlock() {
   showFucntionalCards('asr', language);
   setUserModalOnShown($userName);
   $startRecordBtnTooltip.tooltip('disable');
-  // setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
 
@@ -118,14 +87,13 @@ function initializeBlock() {
     const localSpeakerDataParsed = JSON.parse(speakerDetails);
     showUserProfile(localSpeakerDataParsed.userName);
   }
-  getStatsSummary('/stats/summary/asr',MODULE.suno.value, setDefaultLang);
+  getStatsSummary('/stats/summary/asr',MODULE.suno.value, ()=>{});
 }
 
 
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
-  // landToHome();
   initializeFeedbackModal();
   getAvailableLanguages("asr");
   getLocaleString().then(()=>{

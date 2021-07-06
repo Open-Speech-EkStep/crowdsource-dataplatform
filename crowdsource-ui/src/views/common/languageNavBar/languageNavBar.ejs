@@ -1,30 +1,18 @@
-<div class="col-12 col-md-12 col-lg-10 offset-lg-1 mt-4">
-    <nav class="navbar navbar-expand-lg navbar-light text-white px-4 flex-flow-nowrap" id="contribution_lang_navbar">
-        <div class="mx-2">
-            <%= __('Select the language for contribution') %>:
-        </div>
-        
-        <div class="navbar-collapse d-inherit mt-2 mt-lg-0 mt-md-0" id="navbarSupportedLanguage">
-            <div class="col-5 col-lg-5 col-xl-4" id="nav-bar-loader">
-                <div><span class="spinner"></span></div>
+<div class="row">
+    <div class="col-12 col-md-12 col-lg-10 offset-lg-1 mt-4">
+        <div class="row m-0">
+            <div class="mx-2 col-12 col-lg-3 col-md-4 col-sm-6 mt-lg-1 mt-md-1 text-white">
+                <%= __('Select the language for contribution') %>:
             </div>
-            <ul class="navbar-nav text-primary cursor-pointer d-none flex-direction-row" id="language-nav-bar">
-                <li class="nav-item px-lg-4 px-md-4 px-2 options text-white" value="Hindi">हिंदी</li>
-                <li class="nav-item px-lg-4 px-md-4 px-2 options text-white" value="Marathi">मराठी</li>
-                <li class="nav-item px-lg-4 px-md-4 px-2 options text-white" value="Bengali">বাংলা</li>
-                <li class="nav-item px-lg-4 px-md-4 px-2 options text-white" value="Tamil">தமிழ்</li>
-                <li class="nav-item px-lg-4 px-md-4 px-2 options text-white" value="Telugu">తెలుగు</li>
-            </ul>
-            <ul class="navbar-nav text-primary cursor-pointer">
-                <li class="nav-item mx-2 mx-lg-4 options d-none text-white" id="6th_option"></li>
-            </ul>
-            <ul class="navbar-nav text-primary cursor-pointer">
-                <li class="nav-item mx-2 mx-lg-4 options text-white">
-                    <div id="Show_all_language" data-toggle="modal" data-target="#language-pop-up-wrapper" class="cursor-pointer"><%= __('Show All') %></div>
-                </li>
-            </ul>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-lg-0 px-md-0 px-4 mt-lg-0 mt-md-0 mt-3">
+                <div class="row m-0">
+                    <select class="btn dropdown-toggle h6 w-90 rounded text-white" id="from-language" style="height:40px;padding:0;padding:0 10px;border-color:#959595;color:#959595">
+
+                    </select>
+                </div>
+            </div>
         </div>
-    </nav>
+    </div>
 </div>
 
 <script src="/js/common/languageNavBar.js"></script>

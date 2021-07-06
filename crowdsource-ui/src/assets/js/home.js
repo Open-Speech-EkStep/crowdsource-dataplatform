@@ -1,6 +1,5 @@
 const { redirectToLocalisedPage } = require('./locale');
 const { onActiveNavbar, onChangeUser, showUserProfile,onOpenUserDropDown } = require('./header');
-const {whitelisting_email} = require('./env-api')
 const {  getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
 const {  updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest, calculateTime, formatTime } = require('./utils')
 const {
@@ -11,6 +10,7 @@ const {
 } = require('./speakerDetails');
 
 const { getContributedAndTopLanguage,hasUserRegistered } = require('./common');
+const { addToLanguage } = require('../../views/common/languageNavBar/languageNavBar');
 const {
     DEFAULT_CON_LANGUAGE,
     TOP_LANGUAGES_BY_HOURS,
@@ -22,7 +22,7 @@ const {
     MODULE,
   SPEAKER_DETAILS_KEY
 } = require('./constants');
-const SPEAKER_DETAILS = "speakerDetails";
+
 const updateLocaleText = function (total_contributions, total_validations, language) {
     const $say_p_3 = $("#say-p-3");
     const $listen_p_3 = $("#listen-p-3");
@@ -68,71 +68,6 @@ function updateHrsForSayAndListen(language) {
     updateLocaleLanguagesDropdown(language);
 }
 
-const getDefaultTargetedDiv = function (key, value, $sayListenLanguage) {
-    let targetIndex = 0;
-    const $sayListenLanguageItems = $sayListenLanguage.children();
-    $sayListenLanguageItems.each(function (index, element) {
-        if (element.getAttribute('value') === DEFAULT_CON_LANGUAGE) {
-            targetIndex = index;
-        }
-    });
-    $sayListenLanguageItems.each(function (index, element) {
-        if (element.getAttribute(key) === value) {
-            targetIndex = index;
-        }
-    });
-
-    return $sayListenLanguageItems[targetIndex];
-}
-
-const setLangNavBar = (targetedDiv, top_lang, $languageNavBar) => {
-    const allDivs = $languageNavBar.children();
-    let targetedDivIndex = -1
-    allDivs.each(function (index, element) {
-        if (element.getAttribute('value') === top_lang) {
-            targetedDivIndex = index;
-        }
-    });
-
-    const previousActiveDiv = $languageNavBar.find('.active');
-    previousActiveDiv.removeClass('active');
-    const $6th_place = document.getElementById('6th_option');
-    const lang = ALL_LANGUAGES.find(ele => ele.value === top_lang);
-    $6th_place.innerText = lang.text;
-    if (targetedDivIndex < 0) {
-        $6th_place.classList.remove('d-none');
-        $6th_place.classList.add('active');
-        $6th_place.setAttribute('value', top_lang);
-    } else {
-        allDivs[targetedDivIndex].classList.add('active');
-        $6th_place.classList.remove('active');
-        $6th_place.classList.add('d-none');
-    }
-}
-
-const setDefaultLang = function () {
-    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    const $sayListenLanguage = $('#say-listen-language');
-    const $languageNavBar = $('#language-nav-bar')
-    const $navBarLoader = $('#nav-bar-loader');
-    $navBarLoader.addClass('d-none');
-    $languageNavBar.removeClass('d-none');
-
-    if (!contributionLanguage) {
-        const $homePage = document.getElementById('home-page');
-        const defaultLangId = $homePage.getAttribute('default-lang');
-        const targetedDiv = getDefaultTargetedDiv('id', defaultLangId, $sayListenLanguage);
-        const language = targetedDiv.getAttribute("value");
-        localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-        updateHrsForSayAndListen(language);
-        setLangNavBar(targetedDiv, language, $languageNavBar);
-        return;
-    }
-    const targetedDiv = getDefaultTargetedDiv('value', contributionLanguage, $sayListenLanguage);
-    updateHrsForSayAndListen(contributionLanguage);
-    setLangNavBar(targetedDiv, contributionLanguage, $languageNavBar);
-}
-
 const clearLocalStorage = function () {
     localStorage.removeItem(TOP_LANGUAGES_BY_HOURS);
     localStorage.removeItem(TOP_LANGUAGES_BY_SPEAKERS);
@@ -143,7 +78,6 @@ const clearLocalStorage = function () {
 const getStatsSummary = function () {
     performAPIRequest('/stats/summary/text')
         .then((response) => {
-            // drawMap({data: response.aggregate_data_by_state});
             const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.bolo.value);
             localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
             showByHoursChart()
@@ -151,7 +85,8 @@ const getStatsSummary = function () {
             localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(speakers));
             localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
             getStatistics(response && response.aggregate_data_count && response.aggregate_data_count.length ? response.aggregate_data_count[0] : {});
-            setDefaultLang();
+            const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
+            updateHrsForSayAndListen(contributionLanguage);
             if (response.top_languages_by_hours.length === 0) {
                 $("#bar_charts_container").hide();
                 $("#view_all_btn").hide();
@@ -164,6 +99,7 @@ const getStatsSummary = function () {
         });
 }
 
+
 function initializeBlock() {
     const $userName = $('#username');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
@@ -174,40 +110,21 @@ function initializeBlock() {
         top_lang = DEFAULT_CON_LANGUAGE;
     }
     updateLocaleLanguagesDropdown(sentenceLanguage);
-    const $languageNavBar = $('#language-nav-bar');
-    const $sayListenLanguage = $('#say-listen-language');
 
-    $sayListenLanguage.on('click', (e) => {
-        const targetedDiv = e.target;
-        const language = targetedDiv.getAttribute("value");
-        if (top_lang !== language) {
-            top_lang = language;
-            localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-            localStorage.setItem("i18n", "en");
-            window.location.href = "./home.html";
-            setLangNavBar(targetedDiv, language, $languageNavBar);
-            updateHrsForSayAndListen(language);
-            redirectToLocalisedPage();
-        }
-        getStatsSummary();
-    })
+    addToLanguage('from-language', ALL_LANGUAGES);
+    let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
-    $languageNavBar.on('click', (e) => {
-        const targetedDiv = e.target;
-        const language = targetedDiv.getAttribute('value');
-        if (top_lang !== language) {
-            localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-            top_lang = language;
-            const $6th_place = $('#6th_option')
-            const previousActiveDiv = $languageNavBar.find('.active') || $6th_place;
-            previousActiveDiv.removeClass('active');
-            $6th_place.addClass('d-none');
-            targetedDiv.classList.add('active');
-            updateHrsForSayAndListen(language);
-            localStorage.setItem("i18n", "en");
-            window.location.href = "./home.html";
-            redirectToLocalisedPage();
-        }
+    if (fromLanguage) {
+        $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
+    }
+
+    $('#from-language').on('change', (e) => {
+        fromLanguage = e.target.value;
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
+        const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
+        localStorage.setItem("i18n", "en");
+        updateHrsForSayAndListen(languages.value);
+        redirectToLocalisedPage();
         getStatsSummary();
     });
 
@@ -301,7 +218,5 @@ $(document).ready(function () {
 
 module.exports = {
     updateHrsForSayAndListen,
-    getDefaultTargetedDiv,
-    setLangNavBar,
     getStatsSummary
 };
