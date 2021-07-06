@@ -252,12 +252,6 @@
     width: max-content;
 }
 
-#carouselExampleIndicators .nav-tabs>li.active{
-    background: rgba(0, 123, 255, 0.1);
-    border-radius: 24px;
-    border-color: transparent;
-}
-
 #carouselExampleIndicators .nav-tabs>li.active>a {
     font-weight: 700;
     opacity: 1;

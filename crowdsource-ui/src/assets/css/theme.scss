@@ -3,6 +3,11 @@ $bg-secondary-color : #EFF5FF;
 $primary-btn-color: #0F2749;
 $text-white: #fff;
 $text-secondary:#D8D8D8;
+$primary-color-shade1: rgba(37, 70, 105, 0.1);
+$primary-color-shade2: rgba(37, 70, 105, 0.2);
+$primary-color-shade3: rgba(37, 70, 105, 0.3);
+$primary-color-shade4: rgba(37, 70, 105, 0.4);
+
 
 // rgba(37, 70, 105, 1)
 
@@ -65,8 +70,8 @@ $text-secondary:#D8D8D8;
   }
 
   .btn-transparent:hover {
-    background-color: $primary-btn-color;
-    color: $text-white;
+    background-color: $primary-color-shade1 !important;
+    border-color: $primary-color-shade4 !important;
   }
 
   .btn-transparent:active {
@@ -81,8 +86,8 @@ $text-secondary:#D8D8D8;
   }
 
   .btn-custom-outline-primary:hover {
-    background-color: $primary-btn-color;
-    color: $text-white;
+    background-color: $primary-color-shade2;
+    color: $primary-btn-color;
   }
 
   .btn-custom-outline-primary:focus {
@@ -94,7 +99,36 @@ $text-secondary:#D8D8D8;
   }
 
   .btn-custom-primary:disabled {
-    background-color: $text-secondary;
+    background-color: $primary-color-shade4;
     color: $text-white;
-    border: 1px solid $text-secondary;
+    border: 1px solid $primary-color-shade1;
   }
+
+  .edit-text {
+    box-shadow: inset 0 0 8px $primary-btn-color!important;
+    border: 2px solid $primary-btn-color !important;
+}
+
+.progress-bar {
+  background-color: $primary-btn-color !important;
+}
+
+#carouselExampleIndicators {
+	.nav-tabs {
+		& > li {
+			&.active {
+        border-bottom: 2px solid $primary-btn-color;
+        a {
+          &:hover {
+            color: $primary-btn-color;
+          }
+        }
+      }
+      a {
+        &:hover {
+          color: $primary-btn-color;
+        }
+      }
+		}
+	}
+}

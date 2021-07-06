@@ -10,8 +10,9 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
     const topLanguageArray = [];
     let topLanguages = [];
     const contributedLanguageHours = topLanguagesData.find(item => item.language == contributedLanguage);
+    console.log(contributedLanguageHours);
     if (contributedLanguageHours && contributedLanguageHours.language != topLanguagesData[0].language) {
-      contributedLanguageHours ? topLanguageArray.push(contributedLanguageHours) : topLanguageArray.push({ language: contributedLanguage, total_contributions: "0.000" });
+      contributedLanguageHours ? topLanguageArray.push(contributedLanguageHours) : type == "speakers" ? topLanguageArray.push({ language: contributedLanguage, total_speakers: "0.000" }): topLanguageArray.push({ language: contributedLanguage, total_contributions: "0.000" });
       let remainingLanguage = topLanguagesData.filter(item => item.language !== contributedLanguage);
       remainingLanguage = type == "speakers" ?  remainingLanguage.sort((a, b) => Number(a.total_speakers) > Number(b.total_speakers) ? -1 : 1) : remainingLanguage.sort((a, b) => Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1);
       topLanguages = remainingLanguage.slice(0, 3);
@@ -21,6 +22,7 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
       }
       topLanguages =type == "speakers" ?  topLanguagesResult.sort((a, b) => Number(a.total_speakers) > Number(b.total_speakers) ? -1 : 1).slice(0, 3) : topLanguagesResult.sort((a, b) => Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1).slice(0, 3);
     }
+    console.log(topLanguageArray);
     return topLanguageArray.concat(topLanguages);
   }
   else {
