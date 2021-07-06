@@ -1,7 +1,14 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/verticalBarGraph.css">
-<div class="row mx-0 mb-3 float-right"> 
-    <div class="language-legend mt-lg-1 mt-md-1"></div> <%= __('Your selected language') %>
-    <div class="top-langauge-legend mt-lg-1 mt-md-1"></div> <%= __('Top languages') %>
+<div class="row mx-0 mb-3">
+    <div class="col-6">
+        <div class="mt-lg-1 mt-md-1"></div> <%= __(text) %>
+    </div>
+    <div class="col-6">
+        <div class="row">
+            <div class="language-legend mt-lg-1 mt-md-1"></div> <%= __('Your selected language') %>
+            <div class="top-langauge-legend mt-lg-1 mt-md-1"></div> <%= __('Top languages') %>
+        </div>
+    </div>
 </div>
-<div id="top-language-chart" class="w-100 py-4" style="height:350px"></div>
+<div id="top-language-chart" class="w-100" style="height:350px"></div>
 <script src="/js/common/verticalGraph.js"></script>

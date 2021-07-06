@@ -2,7 +2,7 @@ const { calculateTime, formatTime } = require('./utils');
 const chartReg = {};
 
 const drawTopLanguageChart = (chartData, type, dataType) => {
-  const chartColors = ['#b7d0fe', '#b7d0fe', '#b7d0fe', '#007bff'];
+  const chartColors = ['#F7CC56', '#F7CC56', '#F7CC56', '#EF8537'];
   am4core.ready(function () {
     const chart = am4core.create('top-language-chart', am4charts.XYChart);
 
