@@ -43,6 +43,7 @@ const LANGUAGES = [{ value: "Assamese", id: "as", text: "অসমীয়া" 
 { value: "Odia", id: "or", text: "ଓଡିଆ" },
 { value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ" },
 { value: "Tamil", id: "ta", text: "தமிழ்" },
+{ value: "Sanskrit", id: "sa", text: "Sanskrit" },
 { value: "Telugu", id: "te", text: "తెలుగు" }];
 
 const AGE_GROUP = [

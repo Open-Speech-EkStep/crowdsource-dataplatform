@@ -139,7 +139,7 @@ workflows:
             - node/test
           filters:
             branches:
-              only: [master, centralised_username]
+              only: [AWS]
 
       - db_migrate_aws:
           name: migrate_dev_aws
@@ -196,7 +196,7 @@ workflows:
             # - functional_tests_dev
           filters:
             branches:
-              only: master
+              only: [AWS]
 
       - db_migrate_aws:
           name: migrate_cug_aws
@@ -236,7 +236,7 @@ workflows:
             # - functional_tests_dev
           filters:
             branches:
-              only: master
+              only: AWS
 
       - db_migrate_aws:
           name: migrate_test_aws
