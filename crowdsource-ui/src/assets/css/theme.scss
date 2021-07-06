@@ -1,17 +1,37 @@
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+
+/// Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+
+//  Color Pallet
+
 $primary-color: #0F2749;
 $bg-light-color : #EFF5FF;
 $bg-header-primary: #142745;
 $text-white: #fff;
 $text-secondary:#D8D8D8;
-$primary-color-shade1: rgba(37, 70, 105, 0.1);
-$primary-color-shade2: rgba(37, 70, 105, 0.2);
-$primary-color-shade3: rgba(37, 70, 105, 0.3);
-$primary-color-shade4: rgba(37, 70, 105, 0.4);
-
-
-// rgba(37, 70, 105, 1)
-// 142745
-
+$btn-dark-primary: shade($primary-color, 10%);
+$primary-color-shade1: tint($primary-color, 90%);
+$primary-color-shade2: tint($primary-color, 80%);
+$primary-color-shade3:tint($primary-color, 70%);
+$primary-color-shade4: tint($primary-color, 60%);
 
 .bg-app-primary {
     background-color: $bg-header-primary !important;
@@ -71,9 +91,11 @@ $primary-color-shade4: rgba(37, 70, 105, 0.4);
   }
 }
 
-  .btn-custom-primary:hover {
-    color: $text-white;
-    background-color:$primary-color;
+  .btn-custom-primary {
+    &:hover {
+      color: $text-white;
+      background-color:$btn-dark-primary;
+    }
   }
 
 
@@ -82,14 +104,18 @@ $primary-color-shade4: rgba(37, 70, 105, 0.4);
     color: $primary-color;
   }
 
-  .btn-transparent:hover {
-    background-color: $primary-color-shade1 !important;
-    border-color: $primary-color-shade4 !important;
+  .btn-transparent {
+    &:hover {
+      background-color: $primary-color-shade1 !important;
+      border-color: $primary-color-shade4 !important;
+    }
   }
 
-  .btn-transparent:active {
-    color: $primary-color !important;
-    border: 1px solid $primary-color;
+  .btn-transparent {
+    &:active {
+      color: $primary-color !important;
+      border: 1px solid $primary-color;
+    }
   }
  
   .btn-custom-outline-primary {
@@ -98,13 +124,17 @@ $primary-color-shade4: rgba(37, 70, 105, 0.4);
    color: $primary-color;
   }
 
-  .btn-custom-outline-primary:hover {
-    background-color: $primary-color-shade2;
-    color: $primary-color;
+  .btn-custom-outline-primary {
+    &:hover {
+      background-color: $primary-color-shade2;
+      color: $primary-color;
+    }
   }
 
-  .btn-custom-outline-primary:focus {
-    background-color: $primary-color-shade2;
+  .btn-custom-outline-primary {
+    &:focus {
+      background-color: $primary-color-shade2;
+    }
   }
 
   .btn-transparent:disabled {
