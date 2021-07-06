@@ -1,5 +1,6 @@
 $primary-color: #142745;
 $bg-secondary-color : #EFF5FF;
+$bg-primary-color : #0F2749;
 $primary-btn-color: #0F2749;
 $text-white: #fff;
 $text-secondary:#D8D8D8;
@@ -17,7 +18,11 @@ $primary-color-shade4: rgba(37, 70, 105, 0.4);
     color: $text-white !important;
 }
 
-.bg-app-secondary {
+.bg-primary{
+  background-color: $bg-primary-color!important;
+}
+
+.bg-secondary {
   background-color: $bg-secondary-color!important;
 }
 
