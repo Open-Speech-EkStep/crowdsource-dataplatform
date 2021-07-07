@@ -21,12 +21,12 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:"Validate",img:"SunoIndiaLogo.svg",homePath:"./home.html"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:__('Validate'),img:"SunoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/extensionBar.ejs %>
-            <%- include('../common/breadcrumb.ejs', {MODULE:"Suno", PAGE_TITLE:"Validate",img:"SunoIndiaLogo.svg", homePath:"./home.html"}) %>
+            <%- include('../common/breadcrumb.ejs', {MODULE:"Suno", PAGE_TITLE:__('Validate'),img:"SunoIndiaLogo.svg", homePath:"./home.html"}) %>
             <div class="modal-footer py-3 px-0 record-btn-container position-relative suno">
                 <div class="row position-absolute top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
@@ -37,7 +37,7 @@
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center" id="mic-report-row">
                 <%- include ../common/speakerTesting.ejs %>
             </div>
-            <%- include('../common/assistiveText.ejs',{msg:"Does the audio match the text?"}) %>
+            <%- include('../common/assistiveText.ejs',{msg:__('Does the audio match the text?')}) %>
             <div class="row justify-content-center mt-lg-3 mt-1" id="audio-row">
                 <div class="col-12 justify-content-center text-center" style="pointer-events:none">
                     <audio id="my-audio" controls tabindex="-1" src="" type="audio/wav" controlslist="nodownload" crossorigin="anonymous" class="pointer-event"></audio>
@@ -168,7 +168,7 @@
         <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
         <%- include('../common/sourceInfo.ejs') %>
         <%- include('../common/feedback.ejs', {page: "Validate"}) %>
-        <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the sentence", reportThankYou: "Your feedback helps us keep Suno India relevant, we appreciate you taking time to leave the feedback.", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
+        <%- include('../common/report.ejs',{reportPara: __('Help us understand what’s wrong with the sentence'), reportThankYou: __('Your feedback helps us keep Suno India relevant, we appreciate you taking time to leave the feedback.'), "REPORT":[{h1:__('Offensive'),p1:__('Hateful / Discriminatory / Vulgar language, drugs promotion etc.')}]}); %>
         <%- include ../common/errorModal.ejs %>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

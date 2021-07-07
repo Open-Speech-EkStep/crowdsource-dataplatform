@@ -11,18 +11,18 @@
             </div>
             <div class="modal-body">
                 <div class="mb-4">
-                    <%= __(reportPara) %>
+                    <%= reportPara %>
                 </div>
                 <% REPORT.forEach(option =>{ %>
                     <div class="mb-4">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="reportRadio" id="<%= `${option.h1}_id` %>" value="<%= option.h1 %>">
                             <label class="form-check-label xs-radio-label" for="<%= `${option.h1}_id` %>">
-                                <%= __(option.h1) %>
+                                <%= option.h1 %>
                             </label>
                         </div>
                         <div class="option-text">
-                            <%= __(`${option.p1}`) %>
+                            <%= option.p1 %>
                         </div>
                     </div>
                 <% }) %>
@@ -55,7 +55,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="text-center"><%= __(reportThankYou) %></div>
+                <div class="text-center"><%= reportThankYou %></div>
             </div>
         </div>
     </div>

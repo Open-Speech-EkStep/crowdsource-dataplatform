@@ -64,7 +64,7 @@
         </div>
     </div>
     <div class="m-auto row justify-content-center mt-lg-4 mx-lg-5">
-        <%- include('../common/cards.ejs',{left:{h1:"Translate",h2:"Translate and type the text","p1":"",img:"/img/translate.svg"},right:{h1:"Validate",h2:"Validate the translation contributed by others","p1":"",img:"/img/validate.svg"}}); %>
+        <%- include('../common/cards.ejs',{left:{h1:__('Translate'),h2:__('Translate and type the text'),"p1":"",img:"/img/translate.svg"},right:{h1:__('Validate'),h2:__('Validate the translation contributed by others'),"p1":"",img:"/img/validate.svg"}}); %>
     </div>
     <div class="row" id="contribution_stats">
         <div class="col-12 col-md-12 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
@@ -77,7 +77,7 @@
                         <div><span class="spinner"></span></div>
                     </div>
                     <div class="row text-center contribution-details" id="contribution-details">
-                        <%- include('../common/contributionStats.ejs',{labels :['Language pairs','People participated','Translations done','Translations validated']}) %>
+                        <%- include('../common/contributionStats.ejs',{labels :[__('Language pairs'),__('People participated'),__('Translations done'),__('Translations validated')]}) %>
                     </div>
                 </div>
             </div>

@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:"Transcribe",img:"SunoIndiaLogo.svg",homePath:"./home.html"}); %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:__('Transcribe'),img:"SunoIndiaLogo.svg",homePath:"./home.html"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center pt-5 pt-lg-0 pt-md-0">
         <div class="row position-absolute top-back-btn">
@@ -81,13 +81,13 @@
             <%- include('../common/badgesMilestone.ejs',{MODULE:"suno",type:"contributing",text:"sentences"}) %>
             <%- include ../common/sharableLink.ejs %>
             <div class="badges_information">
-                <%- include('../common/downloadableBadges.ejs', {BADGES:["bronze","silver","gold","platinum"], MODULE:"suno"})%>
+                <%- include('../common/downloadableBadges.ejs', {BADGES:[__('bronze'),__('silver'),__('gold'),__('platinum')], MODULE:"suno"})%>
             </div>
         </div>
     </div>
     <%- include('../common/feedback.ejs', {page: 'Contribution Thank You Page'}) %>
     <div class="row justify-content-center mt-5">
-        <%- include('../common/languageGoal.ejs', {ButtonText:"Contribute More",url:"./record.html",TEXT:"language",TEXT2:"hrs"})%>
+        <%- include('../common/languageGoal.ejs', {ButtonText:__('Contribute More'),url:"./record.html",TEXT:"language",TEXT2:"hrs"})%>
     </div>
 
 </div>

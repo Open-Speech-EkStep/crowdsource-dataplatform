@@ -22,12 +22,12 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho", PAGE_TITLE:"Translate",img:"LikhoIndiaLogo.svg",homePath:"./home.html"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho", PAGE_TITLE:__('Translate'),img:"LikhoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/extensionBar.ejs %>
-            <%- include('../common/breadcrumb.ejs', {MODULE:"Likho", PAGE_TITLE:"Translate",img:"LikhoIndiaLogo.svg", homePath:"./home.html"}) %>
+            <%- include('../common/breadcrumb.ejs', {MODULE:"Likho", PAGE_TITLE:__('Translate'),img:"LikhoIndiaLogo.svg", homePath:"./home.html"}) %>
             <div id="btn-nav" class="modal-footer py-3 px-0 position-relative">
                 <div class="row position-absolute top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
@@ -37,7 +37,7 @@
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center" id="mic-report-row">
                 <%- include ../common/speakerTesting.ejs %>
             </div>
-            <%- include('../common/assistiveText.ejs',{msg:"Type the translation of the given text"}) %>
+            <%- include('../common/assistiveText.ejs',{msg:__('Type the translation of the given text')}) %>
             <div class="row justify-content-center mb-2 mb-lg-2 mb-md-2 mt-5 mx-1" id="editor-row">
                 <div class="col-lg-4 col-md-5 col-12 original-text">
                     <label id="from-label"><%- __('English')%></label>
@@ -130,7 +130,7 @@
         <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
         <%- include('../common/sourceInfo.ejs') %>
         <%- include('../common/feedback.ejs', {page: "Translate"}) %>
-        <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the sentence", reportThankYou: "Your feedback helps us keep Likho India relevant, we appreciate you taking time to leave the feedback.", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
+        <%- include('../common/report.ejs',{reportPara: __('Help us understand what’s wrong with the sentence'), reportThankYou: __('Your feedback helps us keep Likho India relevant, we appreciate you taking time to leave the feedback.'), "REPORT":[{h1:__('Offensive'),p1:__('Hateful / Discriminatory / Vulgar language, drugs promotion etc.')}]}); %>
         <%- include ../common/errorModal.ejs %>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho", PAGE_TITLE:"Validate",img:"LikhoIndiaLogo.svg",homePath:"./home.html"}); %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho", PAGE_TITLE:__('Validate'),img:"LikhoIndiaLogo.svg",homePath:"./home.html"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center pt-5 pt-lg-0 pt-md-0">
         <div class="row position-absolute top-back-btn">
@@ -117,7 +117,7 @@
     </div>
     <%- include('../common/feedback.ejs', {page: "Validation Thank You Page"}) %>
     <div class="row justify-content-center mt-5">
-        <%- include('../common/languageGoal.ejs', {ButtonText:"Validate More",url:"./validator-page.html", TEXT:"language pair",TEXT2:"translations"})%>
+        <%- include('../common/languageGoal.ejs', {ButtonText:__('Validate More'),url:"./validator-page.html", TEXT:"language pair",TEXT2:"translations"})%>
     </div>
 
 </div>

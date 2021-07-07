@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Dekho", PAGE_TITLE:"Dashboard" ,img:"DekhoIndiaLogo.svg",homePath:"./home.html"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Dekho", PAGE_TITLE:__('Dashboard') ,img:"DekhoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div class="container container-fluid supreme-container">
     <div class="row">
         <div class="col-12">
@@ -59,7 +59,7 @@
                 <div><span class="spinner"></span></div>
             </div>
             <div class="row text-center contribution-details d-none" id="contribution-details">
-                <%- include('../common/contributionStats.ejs',{labels :['Languages','People participated','Images labelled','Images validated']})%>
+                <%- include('../common/contributionStats.ejs',{labels :[__('Languages'),__('People participated'),__('Images labelled'),__('Images validated')]})%>
             </div>
         </div>
     </div>

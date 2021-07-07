@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<%- include('common/header/headerWithoutNavBar.ejs',{path:"./",MODULE:"Bolo", PAGE_TITLE:"Validate",img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
+<%- include('common/header/headerWithoutNavBar.ejs',{path:"./",MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center pt-5 pt-lg-0 pt-md-0">
         <div class="row position-absolute top-back-btn" style="top:80px;left:35px">
@@ -113,7 +113,7 @@
     </div>
     <%- include('common/feedback/feedback.ejs', {page: "Validation Thank You Page"}) %>
     <div class="row justify-content-center mt-5">
-        <%- include('../../build/views/common/languageGoal.ejs', {ButtonText:"Validate More",url:"./validator-page.html",TEXT:"language",TEXT2:"hrs"})%>
+        <%- include('../../build/views/common/languageGoal.ejs', {ButtonText:__('Validate More'),url:"./validator-page.html",TEXT:"language",TEXT2:"hrs"})%>
     </div>
 </div>
 <%- include('../../build/views/common/speakerDetails.ejs',{path:"./"}) %>
