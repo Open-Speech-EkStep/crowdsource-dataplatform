@@ -25,7 +25,7 @@
 <%- include('common/header/headerWithoutNavBar.ejs',{path:"./", MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
 <div id="validator-page-content">
     <div class="container-fluid">
-        <%- include('../../build/views/common/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg", homePath:"./boloIndia/home.html"}) %>
+        <%- include('common/breadcrumb/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg", homePath:"./boloIndia/home.html"}) %>
         <div id="content-wrapper" class="d-flex flex-column">
             <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">
                 <div class="row position-absolute bolo-back-btn top-back-btn">
@@ -40,10 +40,10 @@
                     </button>
                 </div>
                 <%- include components/report-btn.ejs %>
-                <%- include ../../build/views/common/speakerTestBtn.ejs %>
+                <%- include common/buttons/speakerTestBtn/speakerTestBtn.ejs %>
             </div>
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center" id="mic-report-row">
-                <%- include ../../build/views/common/speakerTesting.ejs %>
+                <%- include common/modals/speakerTesting/speakerTesting.ejs %>
             </div>
             <div class="row justify-content-center" id="instructions-row">
                 <div id="instructions-link" class="d-flex justify-content-end align-items-center d-none">
@@ -149,13 +149,13 @@
             </div>
 
         </div>
-        <%- include('../../build/views/common/speakerDetails.ejs',{path:"./"}) %>
+        <%- include('common/modals/speakerDetails/speakerDetails.ejs',{path:"./"}) %>
         <%- include('common/sourceInfo/sourceInfo.ejs') %>
         <%- include('common/feedback/feedback.ejs', {page: "Validate"}) %>
         <%- include modals/validator-instructions.ejs %>
         <%- include modals/validation-report-modal.ejs %>
 
-        <%- include ../../build/views/common/errorModal.ejs %>
+        <%- include common/errorModal/errorModal.ejs %>
 
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
