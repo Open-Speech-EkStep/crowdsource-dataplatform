@@ -443,7 +443,19 @@ function executeOnLoad() {
           }
         })
         .then((sentenceData) => {
-          if (sentenceData.data.length === 0) {
+          likhoIndia.sentences = sentenceData.data ? sentenceData.data : [];
+          localStorage.setItem(likhoCountKey, likhoIndia.sentences.length);
+          $loader.hide();
+          localStorage.setItem(
+            sentencesKey,
+            JSON.stringify({
+              userName: localSpeakerDataParsed.userName,
+              sentences: likhoIndia.sentences,
+              language: fromLanguage,
+              toLanguage: toLanguage
+            })
+          );
+          if (likhoIndia.sentences.length === 0) {
             showNoSentencesMessage();
             return;
           }
@@ -455,18 +467,7 @@ function executeOnLoad() {
           $pageContent.removeClass('d-none');
           setFooterPosition();
 
-          likhoIndia.sentences = sentenceData.data;
-          localStorage.setItem(likhoCountKey, likhoIndia.sentences.length);
-          $loader.hide();
-          localStorage.setItem(
-            sentencesKey,
-            JSON.stringify({
-              userName: localSpeakerDataParsed.userName,
-              sentences: sentenceData.data,
-              language: fromLanguage,
-              toLanguage: toLanguage
-            })
-          );
+
           setFooterPosition();
           initialize();
         })

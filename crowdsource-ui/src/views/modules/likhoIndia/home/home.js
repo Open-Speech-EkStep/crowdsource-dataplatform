@@ -1,11 +1,9 @@
 const { onActiveNavbar, onChangeUser, showUserProfile ,onOpenUserDropDown} = require('../common/header');
 const {  redirectToLocalisedPage,getAvailableLanguages, showFucntionalCards,landToHome,hasUserRegistered,updateLikhoLocaleLanguagesDropdown } = require('../common/common');
 const {
-  // toggleFooterPosition,
   getLocaleString,
 } = require('../common/utils');
 const {
-  setSpeakerDetails,
   setUserModalOnShown,
   setUserNameOnInputFocus,
   setStartRecordingBtnOnClick,
@@ -13,7 +11,6 @@ const {
 } = require('../common/speakerDetails');
 const {getStatsSummary} = require('../common/commonHome')
 
-const { updateHrsForCards } = require('../common/card')
 
 const {
   CURRENT_MODULE,
@@ -39,11 +36,7 @@ const addToLanguage = function (id, list) {
 
 
 function initializeBlock() {
-  const speakerDetailsKey = 'speakerDetails';
-  const age = document.getElementById('age');
-  const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
-  // toggleFooterPosition();
 
   let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   if(!contributionLanguage){
@@ -140,7 +133,6 @@ function initializeBlock() {
 
   setUserModalOnShown($userName);
   $startRecordBtnTooltip.tooltip('disable');
-  // setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
 

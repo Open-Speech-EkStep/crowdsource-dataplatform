@@ -1,8 +1,8 @@
 .contribution-details {
-    padding: 1rem 0;
+    padding: 2rem 0;
     background-color: #F8F9FA;
     margin: 0;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 .contribution-data > p:first-child {
