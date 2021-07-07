@@ -1,0 +1,908 @@
+<html lang="en">
+
+
+<head>
+    <title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
+    <meta name="description" content="BhashaDaan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+</head>
+
+<body>
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/header.css">
+<nav class="navbar navbar-expand-lg navbar-light bg-light pl-lg-4 pl-md-4 pl-3 py-lg-0 py-0 pr-0" id="header-nav-bar">
+    <div class="row m-0">
+        <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="d-flex align-items-center">
+            <a class="logo-text text-dark" href="/">
+                <h2 class="mb-0" id="bhasini_logo">
+                    <img src="/img/en-logo.svg" alt="Bhaashini" width="64px" height="54px">
+                </h2>
+            </a>
+            <div class="vertical-line"></div>
+            <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/header.css">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Rowdies:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Bhai 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Bhaina 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Chettan 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Da 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Paaji 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Tamma 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Tammudu 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Thambi 2:300,400,700,900&display=swap">
+
+<a class="logo-text text-dark position-relative" href="/" style="padding-top:5px" id="bhashadaan_logo">
+    
+            <span class="font-size-lg-40" style="font-family:Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747">__(Bhasha)__</span><span class="font-size-lg-40" style="color:#ffbf00;font-family:Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif">__(Daan)__</span>
+    
+    <span class="beta-version">__(Beta)__</span>
+</a>
+        </div>
+    </div>
+    <div id="logo_separator" class="ml-2"></div>
+    <div class="row ml-1 d-none-mob">
+        <img src="/img/en-BoloIndiaLogo.svg" alt="module_logo" width="50" height="40" id="module_header_logo">
+        <a class="m-0 align-self-center text-decoration-none font-weight-bold" style="padding-right:10px;padding-left:10px;color:#142747;font-size:20px" href="./boloIndia/home.html">__(Bolo)__ <span style="color:#ffbf00">__(India)__</span></a>
+        <div id="tilt_line"></div>
+        <p class="m-0 align-self-center" style="color:#111">__(Dashboard)__</p>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item p-2 dropdown" id="locale_language_dropdown">
+                <a class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="/img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
+                    <span>__(Language)__</span>
+                </a>
+                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton">
+                    
+                        <a id="assamese" class="dropdown-item" href="#" locale="as">অসমীয়া</a>
+                    
+                        <a id="bengali" class="dropdown-item" href="#" locale="bn">বাংলা</a>
+                    
+                        <a id="english" class="dropdown-item" href="#" locale="en">English</a>
+                    
+                        <a id="gujarati" class="dropdown-item" href="#" locale="gu">ગુજરાતી</a>
+                    
+                        <a id="hindi" class="dropdown-item" href="#" locale="hi">हिंदी</a>
+                    
+                        <a id="kannada" class="dropdown-item" href="#" locale="kn">ಕನ್ನಡ</a>
+                    
+                        <a id="malayalam" class="dropdown-item" href="#" locale="ml">മലയാളം</a>
+                    
+                        <a id="marathi" class="dropdown-item" href="#" locale="mr">मराठी</a>
+                    
+                        <a id="odia" class="dropdown-item" href="#" locale="or">ଓଡିଆ</a>
+                    
+                        <a id="punjabi" class="dropdown-item" href="#" locale="pa">ਪੰਜਾਬੀ</a>
+                    
+                        <a id="tamil" class="dropdown-item" href="#" locale="ta">தமிழ்</a>
+                    
+                        <a id="telugu" class="dropdown-item" href="#" locale="te">తెలుగు</a>
+                    
+                </div>
+
+            </li><li class="nav-item p-2 d-none"><a href="./about-us.html" class="nav-link text-dark font-weight-bold">
+                    About Us
+                </a>
+            </li>
+        </ul>
+    </div>
+        <ul class="navbar-nav ml-auto" id="userNavBar">
+            <li class="nav-item pr-lg-4 dropdown" id="userDropDown">
+                <a class="nav-link text-dark font-weight-bold d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="/img/usericon.svg" alt="usericon" class="align-middle mx-1">
+
+                <span id="nav-username"></span>
+                </a>
+                <div id="user_profile_dropdown" class="dropdown-menu" aria-labelledby="nav-user">
+                    <a id="user_profile_name" class="dropdown-item point-none" href="#"></a>
+                    <a id="anonymous_user" class="dropdown-item point-none" href="#">__((No Username))__</a>
+                    <a id="my_profile" class="dropdown-item" href="./profile.html">__(My Badges)__</a>
+                    <a id="change_user" class="dropdown-item" href="#" data-toggle="modal" data-target="#userModal">__(Change User)__</a>
+                </div>
+            </li>
+        </ul>
+</nav>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/common/header.js"></script>
+<div class="container container-fluid supreme-container">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/back-btn.css">
+<button class="btn btn-link p-0 back-btn" id="back-btn">
+    <a href="./boloIndia/home.html" class="nav-link d-lg-inline-flex">
+        <span class="material-icons" style="vertical-align:sub">
+arrow_back
+</span>
+        <span class="back-text">__(Home)__</span>
+
+    </a>
+</button>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-7 col-lg-6">
+                    <div class="text-muted mb-2">
+                        __(Select a language)__:
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-5 all-languages">
+                    <div class="mt-2"><select class="btn dropdown-toggle h6 w-100 rounded mb-4 p-3" id="language" style="border-color:#959595">
+                            <option selected="selected" class="pointer" id="language_button" value="">
+                                __(All Languages)__
+                            </option>
+                            
+                                <option value="Assamese">
+                                    অসমীয়া
+                                </option>
+                            
+                                <option value="Bengali">
+                                    বাংলা
+                                </option>
+                            
+                                <option value="English">
+                                    English
+                                </option>
+                            
+                                <option value="Gujarati">
+                                    ગુજરાતી
+                                </option>
+                            
+                                <option value="Hindi">
+                                    हिंदी
+                                </option>
+                            
+                                <option value="Kannada">
+                                    ಕನ್ನಡ
+                                </option>
+                            
+                                <option value="Malayalam">
+                                    മലയാളം
+                                </option>
+                            
+                                <option value="Marathi">
+                                    मराठी
+                                </option>
+                            
+                                <option value="Odia">
+                                    ଓଡିଆ
+                                </option>
+                            
+                                <option value="Punjabi">
+                                    ਪੰਜਾਬੀ
+                                </option>
+                            
+                                <option value="Tamil">
+                                    தமிழ்
+                                </option>
+                            
+                                <option value="Telugu">
+                                    తెలుగు
+                                </option>
+                            
+                        </select></div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 data-updated">
+                    <div><span>
+                                    __(Data Last Updated)__:
+                                </span><span id="data-updated"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row no-data-found justify-content-center d-none" id="no-data-found">
+        <div class="col-12 col-md-12 col-lg-8">
+            <div class="row d-flex justify-content-center">
+                <div class="col-11 col-md-9 col-lg-9 no-data-found-text"><span>
+                                __(We do not have any data for this language, would you like to contribute for it?)__
+                            </span></div>
+                <div class="col-11 col-md-3 col-lg-3 text-center contribute-now d-flex align-items-center justify-content-center" id="contribute-now" data-toggle="modal" data-target="#userModal">
+                    __(Contribute Now)__
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="speaker-data">
+        <div class="col-12">
+            <div class="row justify-content-center" id="loader1">
+                <div><span class="spinner"></span></div>
+            </div>
+            <div class="row text-center contribution-details d-none" id="contribution-details">
+                <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/contributionStats.css">
+<div class="contribution-data" id="languages-wrapper">
+    <p class="mb-1" id="languages-value"></p>
+    <p class="mb-0">
+        __(Languages)__
+    </p>
+</div>
+<div class="contribution-data">
+    <p class="mb-1" id="speaker-value"></p>
+    <p class="mb-0">
+        __(Speakers contributed)__
+    </p>
+</div>
+<div class="contribution-data">
+    <p class="mb-1" id="contributed-value"></p>
+    <p class="mb-0">
+        __(Duration recorded)__
+    </p>
+</div>
+<div class="contribution-data border-0">
+    <p class="mb-1" id="validated-value"></p>
+    <p class="mb-0">
+        __(Duration validated)__
+    </p>
+</div>
+<script src="/js/common/contributionStats.js"></script>
+            </div>
+        </div>
+    </div>
+    <div class="row chart-row">
+        <div class="col-12">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+            </div>
+            <div class="row justify-content-center chart-container">
+                <div class="col-12 col-lg-5 text-center chart d-none timeline-chart-container">
+                    <div class="row">
+                        <div class="text-left col-12 col-md-6 col-lg-6 pb-3 chart-title">
+                            __(Progress Chart)__
+                        </div>
+                        <ul class="text-right col-12 col-md-6 col-lg-6 duration" id="duration">
+                            <li class="tab-left active" data-value="monthly">
+                                __(Monthly)__
+                            </li>
+                            <li class="tab-right inactive" data-value="quarterly">
+                                __(Quarterly)__
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="text-center justify-content-center d-none align-items-center chart-spinner" id="timeline-loader"><span class="spinner"></span></div>
+                    <div id="timeline-chart" class="h-100 pb-4"></div>
+                </div>
+                <div class="col-12 col-lg-5 text-center chart d-none">
+                    <div class="text-left pb-3 chart-title">
+                        __(Gender Distribution)__
+                    </div>
+                    <div id="gender-chart" class="h-100 pb-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row chart-row">
+        <div class="col-12">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+                <div class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center loader chart-spinner"><span class="spinner"></span></div>
+            </div>
+            <div class="row justify-content-center chart-container">
+                <div class="col-12 col-lg-5 mb-3 text-center chart state-chart text-dark p-4">
+                    <div class="text-left px-3 pb-3 state-chart-text">
+                        __(State Wise distribution)__
+                    </div>
+                    <div id="indiaMapChart" style="width:100%"></div>
+                    <div id="legendDiv" class="justify-content-evenly mb-5 d-none">
+                        <div id="quarter" class="quarter">
+                            <div class="legend-val">0 - 1hr</div>
+                        </div>
+                        <div id="half" class="half">
+                            <div class="legend-val">1 - 2hrs</div>
+                        </div>
+                        <div id="threeQuarter" class="threeQuarter">
+                            <div class="legend-val">2 - 4hrs</div>
+                        </div>
+                        <div id="full" class="full">
+                            <div class="legend-val">4+ hrs</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 mb-3 text-center chart age-group-chart d-none p-4">
+                    <div class="text-left px-3 pb-3">
+                        __(Age Group Distribution)__
+                    </div>
+                    <div id="age-group-chart" class="h-100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/speakerDetail.css">
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-3 border-primary border-2">
+            <button style="right:25px;font-size:35px;top:30px" class="close float-right position-absolute" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-header d-block border-0 py-0">
+                <h2 class="modal-title text-center my-4">
+                    __(User Details)__
+                </h2>
+            </div>
+            <div class="modal-body px-6 p-0" id="speaker-details">
+                <p class="text-center font-weight-light" id="form-sub-heading">
+                    __(All the fields are optional but you can enrich your dataset contribution by providing the demographic details.)__
+                </p>
+                <div class="col-12 text-center text-primary d-none" id="resetBtn" style="cursor:pointer">
+                    Not You? Change User
+                </div>
+                <div class="form-group mt-3"><label for="username" class="form-label">
+                        __(Name)__
+                    </label> <input class="form-control font-weight-normal" maxlength="12" id="username" data-toggle="tooltip" placeholder="__(Enter username)__">
+                    <div class="user-name-hint font-weight-light">
+                        <span class="align-middle">
+                            __(Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.))__
+                        </span>
+                    </div>
+                    <div class="text-danger mt-2 d-none" id="username-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px" height="18px">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg> <span class="align-middle">
+                            __(Please don&#39;t use email or mobile number as user name)__
+                        </span></div>
+                </div>
+                <div class="form-group"><label for="mother-tongue" class="form-label">
+                        __(Mother Tongue)__
+                    </label> <select class="form-control font-weight-normal" id="mother-tongue">
+                        <option selected="selected" value="">
+                            __(Select Mother Tongue)__
+                        </option>
+                        
+                            <option value="Assamese">
+                                অসমীয়া
+                            </option>
+                        
+                            <option value="Bengali">
+                                বাংলা
+                            </option>
+                        
+                            <option value="Bodo">
+                                Bodo
+                            </option>
+                        
+                            <option value="Dogri">
+                                Dogri
+                            </option>
+                        
+                            <option value="English">
+                                English
+                            </option>
+                        
+                            <option value="Gujarati">
+                                ગુજરાતી
+                            </option>
+                        
+                            <option value="Hindi">
+                                हिंदी
+                            </option>
+                        
+                            <option value="Kannada">
+                                ಕನ್ನಡ
+                            </option>
+                        
+                            <option value="Kashmiri">
+                                Kashmiri
+                            </option>
+                        
+                            <option value="Konkani">
+                                Konkani
+                            </option>
+                        
+                            <option value="Maithili">
+                                Maithili
+                            </option>
+                        
+                            <option value="Malayalam">
+                                മലയാളം
+                            </option>
+                        
+                            <option value="Manipuri">
+                                Manipuri
+                            </option>
+                        
+                            <option value="Marathi">
+                                मराठी
+                            </option>
+                        
+                            <option value="Nepali">
+                                Nepali
+                            </option>
+                        
+                            <option value="Odia">
+                                ଓଡିଆ
+                            </option>
+                        
+                            <option value="Punjabi">
+                                ਪੰਜਾਬੀ
+                            </option>
+                        
+                            <option value="Santali">
+                                Santali
+                            </option>
+                        
+                            <option value="Sanskrit">
+                                Sanskrit
+                            </option>
+                        
+                            <option value="Sindhi">
+                                Sindhi
+                            </option>
+                        
+                            <option value="Tamil">
+                                தமிழ்
+                            </option>
+                        
+                            <option value="Telugu">
+                                తెలుగు
+                            </option>
+                        
+                            <option value="Urdu">
+                                Urdu
+                            </option>
+                        
+                    </select></div>
+                <div class="form-group"><label for="age" class="form-label">
+                        __(Age Group)__
+                    </label> <select class="form-control font-weight-normal" id="age">
+                        <option selected="selected" value="">
+                            __(Select Age Group)__
+                        </option>
+                        <option value="upto 10">__(upto 10 (Kid))__</option>
+                        <option value="10 - 30">__(10 - 30 (Youth))__</option>
+                        <option value="30 - 60">__(30 - 60 (Adult))__</option>
+                        <option value="60+">__(60+ (Senior))__</option>
+                    </select></div>
+                <div class="form-group mb-4"><label for="gender" class="form-label">
+                        __(Gender)__
+                    </label>
+                    <div class="justify-content-between">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="male-check" value="male">
+                            <label class="form-check-label m-2" for="male-check">
+                                __(Male)__
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="female-check" value="female">
+                            <label class="form-check-label m-2" for="female-check">
+                                __(Female)__
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="other-check" value="others">
+                            <label class="form-check-label m-2" for="other-check">
+                                __(Others)__
+                            </label>
+                        </div>
+                    </div>
+                    <div id="transgender_options" class="justify-content-between d-none">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="trans-he-check" value="Transgender - He">
+                            <label class="form-check-label m-2" for="trans-he-check">
+                                __(Transgender - He)__
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="trans-she-check" value="Transgender - She">
+                            <label class="form-check-label m-2" for="trans-she-check">
+                                __(Transgender - She)__
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="not-say-check" value="Rather Not Say" checked="checked">
+                            <label class="form-check-label m-2" for="not-say-check">
+                                __(Rather Not Say)__
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label my-3 font-weight-normal" id="tnc_link">
+                        __(By proceeding ahead you agree to the <a href="./terms-and-conditions.html" target="_blank"> Terms and Conditions</a>)__
+                    </label>
+                </div>
+                <div class="row justify-content-center my-4">
+                    <div class="col-12 text-center" data-toggle="tooltip" title="__(Please validate any error message before proceeding)__"><button type="button" id="proceed-box" class="btn btn-primary h6 rounded-pill m-0" data-toggle="modal" data-target="#languageModal">
+                            __(Done)__
+                        </button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/common/speakerDetails.js"></script>
+
+<div class="modal fade" id="content-language" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="modal-header d-block border-0">
+                <h6 class="modal-title text-center">
+                    Select Your Preferred Language
+                </h6>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer">
+                    
+                        <a id="Assamese" class="p-2" href="#" locale="as">অসমীয়া</a>
+                    
+                        <a id="Bengali" class="p-2" href="#" locale="bn">বাংলা</a>
+                    
+                        <a id="English" class="p-2" href="#" locale="en">English</a>
+                    
+                        <a id="Gujarati" class="p-2" href="#" locale="gu">ગુજરાતી</a>
+                    
+                        <a id="Hindi" class="p-2" href="#" locale="hi">हिंदी</a>
+                    
+                        <a id="Kannada" class="p-2" href="#" locale="kn">ಕನ್ನಡ</a>
+                    
+                        <a id="Malayalam" class="p-2" href="#" locale="ml">മലയാളം</a>
+                    
+                        <a id="Marathi" class="p-2" href="#" locale="mr">मराठी</a>
+                    
+                        <a id="Odia" class="p-2" href="#" locale="or">ଓଡିଆ</a>
+                    
+                        <a id="Punjabi" class="p-2" href="#" locale="pa">ਪੰਜਾਬੀ</a>
+                    
+                        <a id="Tamil" class="p-2" href="#" locale="ta">தமிழ்</a>
+                    
+                        <a id="Telugu" class="p-2" href="#" locale="te">తెలుగు</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="language-pop-up-wrapper" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="margin-left-auto">
+                <button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span>
+                </button>
+            </div>
+            <div class="modal-header d-block border-0"><h6 class="modal-title text-center text-muted">__(Select the language for contribution)__
+                    :</h6>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="row justify-content-center d-flex flex-row-wrap text-primary cursor-pointer" id="say-listen-language">
+                
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Assamese" id="as">অসমীয়া</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Bengali" id="bn">বাংলা</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="English" id="en">English</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Gujarati" id="gu">ગુજરાતી</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Hindi" id="hi">हिंदी</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Kannada" id="kn">ಕನ್ನಡ</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Malayalam" id="ml">മലയാളം</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Marathi" id="mr">मराठी</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Odia" id="or">ଓଡିଆ</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Punjabi" id="pa">ਪੰਜਾਬੀ</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Tamil" id="ta">தமிழ்</div>
+                    
+                        <div class="p-2 options" aria-hidden="true" data-dismiss="modal" aria-label="Close" value="Telugu" id="te">తెలుగు</div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/feedback.css">
+
+<button id="feedback_button" class="btn float" type="button" data-toggle="modal" data-target="#feedback_modal">
+    <img src="/img/feedbackIcon.svg" class="my-float" alt="feedback button">
+</button>
+
+<div class="modal fade" id="feedback_modal" tabindex="-1" aria-labelledby="FeedbackModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div id="modal_feeback" class="modal-dialog modal-md modal-dialog-centered custom-modal">
+        <div class="modal-content border-2" style="padding-top:12px">
+            <div class="modal-header d-block border-0">
+                <h4 class="modal-title text-center">
+                    __(Your Feedback)__
+                </h4>
+                <div class="text-center" style="color:#8b8b8b;margin-top:9px;margin-bottom:24px">
+                    __(We would like to get your feedback to improve this platform)__
+                </div>
+                <button type="button" id="feedback_close_btn" class="btn btn-close text-muted" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="border-top"></div>
+            <div class="modal-body" style="padding:20px 34px 45px 32px">
+                
+
+                <div class="mb-3 email-component" style="display:none">
+                    <label class="form-check-label label-color-feedback" for="email">
+                        __(Email)__ <span class="required">(__(*required)__)</span>
+                    </label>
+                </div>
+                <div class="mb-3 email-component" style="display:none">
+                    <input class="form-control" name="email" id="email" type="email" required>
+                </div>
+                <div class="mb-3 content-component" style="display:none">
+                    <label class="form-check-label label-color-feedback">
+                        __(Giving Feedback for?)__ <span class="required">(__(*required)__)</span>
+                    </label>
+                </div>
+                <div class="mb-4 content-component" style="display:none">
+                    <div class="form-row">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="bolo_id" value="bolo">
+                            <label class="form-check-label xs-radio-label" for="bolo_id">
+                                __(Bolo)__
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="suno_id" value="suno">
+                            <label class="form-check-label xs-radio-label" for="suno_id">
+                                __(Suno)__
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="likho_id" value="likho">
+                            <label class="form-check-label xs-radio-label" for="likho_id">
+                                __(Likho)__
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4 content-component" style="display:none">
+                    <div class="form-row">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="dekho_id" value="dekho">
+                            <label class="form-check-label xs-radio-label" for="dekho_id">
+                                __(Dekho)__
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="others_id" value="others">
+                            <label class="form-check-label xs-radio-label" for="others_id">
+                                __(Others)__
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 page-type-component" style="display:none">
+                    <label class="form-check-label label-color-feedback" for="select_page_id">
+                        Select page <span class="required">(*required)</span>
+                    </label>
+                </div>
+                <div class="md-4 page-type-component" style="display:none">
+                    <div class="form-row">
+                        <select class="form-control" id="select_page_id" name="select_page_id">
+                        </select>
+                        
+                            <input type="hidden" id="target_page" value="Dashboard">
+                        
+
+                    </div>
+                </div>
+
+                
+                <div class="mb-4 mt-4">
+                    <label class="form-check-label label-color-feedback">
+                        __(What is your opinion of this page)__ <span class="required">(__(*required)__)</span>
+                    </label>
+                </div>
+                <div class="mb-4 mt-4">
+                    <div class="form-row opinion">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input very_sad" type="radio" name="opinionRadio" id="very_sad_id" value="very_sad">
+                            <label class="form-check-label xs-radio-label opinion-label" id="very_sad_label" for="very_sad_id">
+                                <svg class="very_sad-svg svg-size" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M25.9987 47.6693C37.9649 47.6693 47.6654 37.9688 47.6654 26.0026C47.6654 14.0364 37.9649 4.33594 25.9987 4.33594C14.0325 4.33594 4.33203 14.0364 4.33203 26.0026C4.33203 37.9688 14.0325 47.6693 25.9987 47.6693Z" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17.332 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.6641 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.6654 34.6719C33.582 31.4219 30.787 28.1719 25.9987 28.1719C21.2104 28.1719 18.4154 31.4219 17.332 34.6719" stroke="#959595" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input sad" type="radio" name="opinionRadio" id="sad_id" value="sad">
+                            <label class="form-check-label xs-radio-label opinion-label" id="sad_label" for="sad_id">
+                                <svg class="sad-svg svg-size" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M25.9987 47.6693C37.9649 47.6693 47.6654 37.9688 47.6654 26.0026C47.6654 14.0364 37.9649 4.33594 25.9987 4.33594C14.0325 4.33594 4.33203 14.0364 4.33203 26.0026C4.33203 37.9688 14.0325 47.6693 25.9987 47.6693Z" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17.332 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.6641 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M18.416 34.6693L33.5827 30.3359" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input neutral" type="radio" name="opinionRadio" id="neutral_id" value="neutral">
+                            <label class="form-check-label xs-radio-label opinion-label" id="neutral_label" for="neutral_id">
+                                <svg class="neutral-svg svg-size" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M25.9987 47.6693C37.9649 47.6693 47.6654 37.9688 47.6654 26.0026C47.6654 14.0364 37.9649 4.33594 25.9987 4.33594C14.0325 4.33594 4.33203 14.0364 4.33203 26.0026C4.33203 37.9688 14.0325 47.6693 25.9987 47.6693Z" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17.332 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.6641 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17.332 30.3359H34.6654" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input happy" type="radio" name="opinionRadio" id="happy_id" value="happy">
+                            <label class="form-check-label xs-radio-label opinion-label" id="happy_label" for="happy_id">
+                                <svg class="happy-svg svg-size" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M25.9987 47.6693C37.9649 47.6693 47.6654 37.9688 47.6654 26.0026C47.6654 14.0364 37.9649 4.33594 25.9987 4.33594C14.0325 4.33594 4.33203 14.0364 4.33203 26.0026C4.33203 37.9688 14.0325 47.6693 25.9987 47.6693Z" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17.332 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.6641 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.6654 30.3359C33.582 33.5859 30.787 36.8359 25.9987 36.8359C21.2104 36.8359 18.4154 33.5859 17.332 30.3359" stroke="#959595" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input very-happy" type="radio" name="opinionRadio" id="very_happy_id" value="very_happy">
+                            <label class="form-check-label xs-radio-label opinion-label" id="very_happy_label" for="very_happy_id">
+                                <svg class="very-happy-svg svg-size" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M26.0006 47.6654C37.9668 47.6654 47.6673 37.9649 47.6673 25.9987C47.6673 14.0325 37.9668 4.33203 26.0006 4.33203C14.0345 4.33203 4.33398 14.0325 4.33398 25.9987C4.33398 37.9649 14.0345 47.6654 26.0006 47.6654Z" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17.334 19.6073V19.3906" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.668 19.6073V19.3906" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M26.0007 38.9987C28.2992 38.9987 30.5036 38.0856 32.1289 36.4603C33.7542 34.835 34.6673 32.6306 34.6673 30.332H17.334C17.334 32.6306 18.2471 34.835 19.8724 36.4603C21.4977 38.0856 23.7021 38.9987 26.0007 38.9987Z" stroke="#959595" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom:16px">
+                    <label class="form-check-label label-color-feedback" for="category_id">
+                        __(Please select your feedback category)__ <span>(__(optional)__)</span>
+                    </label>
+                    <div class="form-row">
+                        <select id="category_id" class="form-control">
+                            <option value="category" selected="selected">
+                                __(Select a category)__
+                            </option>
+                            <option value="suggestion">
+                                __(Suggestion)__
+                            </option>
+                            <option value="error">
+                                __(Error)__
+                            </option>
+                            <option value="complaint">
+                                __(Complaint)__
+                            </option>
+                            <option value="compliment">
+                                __(Compliment)__
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="md-4">
+                    <div class="form-row">
+                        <label class="form-check-label label-color-feedback" for="feedback_textarea" style="margin-top:16px;margin-bottom:5px">
+                            __(Share your feedback below:)__ <span>(__(optional)__)</span>
+                        </label>
+                    </div>
+                </div>
+                <textarea name="feedback_textarea" maxlength="1000" id="feedback_description" class="w-100 p-3 other-reason mb-4 label-color-feedback" rows="3" placeholder="__(Type here...)__" style="background-color:#fff;border:1px solid rgba(149,149,149,.6)"></textarea>
+                <div class="d-flex justify-content-center">
+                    <button id="submit_btn" class="btn btn-primary submit-btn-feedback" disabled="disabled">
+                        __(SUBMIT)__
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="feedback_thanku_modal" tabindex="-1" aria-labelledby="FeedbackThankYou" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content p-4 border-2">
+            <div class="modal-header d-block border-0">
+                <button type="button" id="feedback_thanku_close_btn" class="btn btn-close text-muted" data-bs-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center py-2">
+                    <img src="/img/success.svg" alt="Success">
+                </div>
+
+                <div class="text-center py-2" style="font-size:16px">
+                    __(Submitted successfully)__
+                </div>
+                <div class="text-center py-2 pb-5" style="font-family:Lato;font-size:20px">__(Thank you for your feedback!)__
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/common/feedback.js"></script>
+
+<footer class="bottom bg-light pt-3 border-top w-100">
+    <div class="container-fluid">
+        <div class="d-flex flex-column-reverse flex-lg-row justify-content-lg-around align-items-sm-center align-items-md-center text-center">
+            <div class="d-none">
+                <p class="text-muted">Supported by EkStep Foundation (built on <a href="https://sunbird.org/ai">sunbird.org/ai</a>)</p>
+            </div>
+            <div class="d-lg-inline-flex justify-content-around mb-2 footer-links">
+                <div class="py-2 px-16 d-none">
+                    <a href="./about-us.html">
+                        About Us
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html" target="_blank">
+                        __(Terms &amp; Conditions)__
+                    </a>
+                </div>
+                <div class="py-2 px-16">
+                    <a href="./terms-and-conditions.html#privacy-policy" target="_blank">
+                        __(Privacy Policy)__
+                    </a>
+                </div>
+            </div>
+            <div class="row mx-0 mb-3" id="social-links">
+                <script>
+                    $(document).ready(function () {
+                        const url = window.location.href;
+                        if (url.includes('uat-nplt.vakyansh.in')) {
+                            const links = $('#social-links')
+                            links.addClass('d-none');
+                        }
+                    })
+                </script>
+                <div class="col-12 mt-3 mt-lg-0 mt-md-0 pb-2 pb-lg-0 pb-md-0 text-center">
+                    __(Share it with your friends and family)__
+                </div>
+                <div class="col-12 pb-3 pb-lg-0 pb-md-0 text-center">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://bhashini.gov.in/bhashadaan/" target="_blank" rel="noopener noreferrer" class="text-decoration-none mr-1 ml-1">
+                        <img src="/img/fb-icon.svg" width="24px" alt="Share on Facebook">
+                    </a><span>&sdot;</span>
+                    <a id="linkedin_share" href="https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/&title=BhashaDaan: A crowdsourcing initiative for Indian languages.&summary=I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?/&source=" target="_blank" rel="noopener noreferrer" class="text-decoration-none mr-1 ml-1">
+                        <img src="/img/linkedin-icon.svg" width="24px" alt="Share on LinkedIn">
+                    </a><span>&sdot;</span>
+                    <a id="twitter_share" href="https://twitter.com/intent/tweet?text=I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?" target="_blank" rel="noopener noreferrer" class="mr-1 ml-1">
+                        <img src="/img/twitter-icon.svg" width="24px" alt="Share on Twitter">
+                    </a><span>&sdot;</span>
+                    <a id="whatsapp_share" href="https://api.whatsapp.com/send?text=I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?" target="_blank" rel="noopener noreferrer" class="mr-1 ml-1">
+                        <img src="/img/whatsapp.svg" width="32px" alt="Share on Whatsapp">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script async src="/js/common/locale.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="../js/dashboard.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/themes/animated.js"></script>
+<script src="/js/draw-chart.js"></script>
+<script src="/js/loadFeedback.js"></script>
+</body>
+
+</html>

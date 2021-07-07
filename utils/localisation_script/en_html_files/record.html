@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html>
+<head><title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/record.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <style>.btn.focus,.btn:focus{outline:0;box-shadow:0 0}</style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body> <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/header.css">
+<nav class="navbar navbar-expand-lg navbar-light bg-light pl-lg-4 pl-md-4 pl-3 py-lg-0 py-0 pr-0" id="header-nav-bar">
+    <div class="row m-0">
+        <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="d-flex align-items-center">
+            <a class="logo-text text-dark" href="/">
+                <h2 class="mb-0" id="bhasini_logo">
+                    <img src="/img/en-logo.svg" alt="Bhaashini" width="64px" height="54px">
+                </h2>
+            </a>
+            <div class="vertical-line"></div>
+            <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/header.css">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Rowdies:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Bhai 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Bhaina 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Chettan 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Da 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Paaji 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Tamma 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Tammudu 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Thambi 2:300,400,700,900&display=swap">
+
+<a class="logo-text text-dark position-relative" href="/" style="padding-top:5px" id="bhashadaan_logo">
+    
+            <span class="font-size-lg-40" style="font-family:Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747">__(Bhasha)__</span><span class="font-size-lg-40" style="color:#ffbf00;font-family:Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif">__(Daan)__</span>
+    
+    <span class="beta-version">__(Beta)__</span>
+</a>
+        </div>
+    </div>
+    <div id="logo_separator" class="ml-2"></div>
+    <div class="row ml-1 d-none-mob">
+        <img src="/img/en-BoloIndiaLogo.svg" alt="module_logo" width="50" height="40" id="module_header_logo">
+        <a class="m-0 align-self-center text-decoration-none font-weight-bold" style="padding-right:10px;padding-left:10px;color:#142747;font-size:20px" href="./boloIndia/home.html">__(Bolo)__ <span style="color:#ffbf00">__(India)__</span></a>
+        <div id="tilt_line"></div>
+        <p class="m-0 align-self-center" style="color:#111">__(Speak)__</p>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item p-2 dropdown" id="locale_language_dropdown">
+                <a class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="/img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
+                    <span>__(Language)__</span>
+                </a>
+                <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton">
+                    
+                        <a id="assamese" class="dropdown-item" href="#" locale="as">অসমীয়া</a>
+                    
+                        <a id="bengali" class="dropdown-item" href="#" locale="bn">বাংলা</a>
+                    
+                        <a id="english" class="dropdown-item" href="#" locale="en">English</a>
+                    
+                        <a id="gujarati" class="dropdown-item" href="#" locale="gu">ગુજરાતી</a>
+                    
+                        <a id="hindi" class="dropdown-item" href="#" locale="hi">हिंदी</a>
+                    
+                        <a id="kannada" class="dropdown-item" href="#" locale="kn">ಕನ್ನಡ</a>
+                    
+                        <a id="malayalam" class="dropdown-item" href="#" locale="ml">മലയാളം</a>
+                    
+                        <a id="marathi" class="dropdown-item" href="#" locale="mr">मराठी</a>
+                    
+                        <a id="odia" class="dropdown-item" href="#" locale="or">ଓଡିଆ</a>
+                    
+                        <a id="punjabi" class="dropdown-item" href="#" locale="pa">ਪੰਜਾਬੀ</a>
+                    
+                        <a id="tamil" class="dropdown-item" href="#" locale="ta">தமிழ்</a>
+                    
+                        <a id="telugu" class="dropdown-item" href="#" locale="te">తెలుగు</a>
+                    
+                </div>
+
+            </li><li class="nav-item p-2 d-none"><a href="./boloIndia/home.htmlabout-us.html" class="nav-link text-dark font-weight-bold">
+                    About Us
+                </a>
+            </li>
+        </ul>
+    </div>
+        <ul class="navbar-nav ml-auto" id="userNavBar">
+            <li class="nav-item pr-lg-4 dropdown" id="userDropDown">
+                <a class="nav-link text-dark font-weight-bold d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="/img/usericon.svg" alt="usericon" class="align-middle mx-1">
+
+                <span id="nav-username"></span>
+                </a>
+                <div id="user_profile_dropdown" class="dropdown-menu" aria-labelledby="nav-user">
+                    <a id="user_profile_name" class="dropdown-item point-none" href="#"></a>
+                    <a id="anonymous_user" class="dropdown-item point-none" href="#">__((No Username))__</a>
+                    <a id="my_profile" class="dropdown-item" href="./profile.html">__(My Badges)__</a>
+                    <a id="change_user" class="dropdown-item" href="#" data-toggle="modal" data-target="#userModal">__(Change User)__</a>
+                </div>
+            </li>
+        </ul>
+</nav>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/common/header.js"></script>
+<div id="loader" class="overlay__content"><span class="spinner"></span></div>
+<div id="page-content" class="d-none">
+    <div id="content-wrapper" class="container-fluid d-flex flex-column">
+        <div class="row m-0 px-4">
+            <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/breadcrumb.css">
+<div class="row mx-0 mt-2" id="breadcrumb-header">
+    <img src="/img/en-BoloIndiaLogo.svg" alt="module_logo" width="30" height="30" style="margin-top:5px">
+    <a class="m-0 align-self-center text-decoration-none font-weight-bold" style="padding-right:10px;padding-left:10px;color:#142747;font-size:14px;font-family:Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif">__(Bolo)__ <span style="color:#ffbf00">__(India)__</span></a>
+    <div id="tilt_line" style="height:14px;margin-top:12px"></div>
+    <p class="m-0 align-self-center" style="color:#111;font-size:12px;font-family:Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif">__(Speak)__</p>
+</div>
+        </div>
+        
+<div id="validation-instruction-modal" class="d-none">
+    <div class="validation-instruction d-flex justify-content-between position-relative">
+        <div class="quick-tips-container d-flex flex-column justify-content-center align-items-center">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.6255 9.63106C20.125 9.58306 20.125 10.3511 19.6255 10.3991C18.6501 10.4952 17.651 10.6152 16.7233 10.7112C16.2237 10.7592 16.2237 9.9911 16.7233 9.9431C17.651 9.82308 18.6501 9.72707 19.6255 9.63106Z" fill="#F7F7F7"/>
+                <path d="M16.4378 3.17488C16.7471 2.76683 17.4131 3.17488 17.1039 3.58292C16.533 4.399 15.9383 5.16707 15.3198 5.98316C15.0105 6.3912 14.3444 5.98316 14.6537 5.57512C15.296 4.75903 15.8669 3.94295 16.4378 3.17488Z" fill="#F7F7F7"/>
+                <path d="M7.99273 16.064C8.08788 16.616 8.13546 17.1441 8.13546 17.6481V17.7441C8.13546 18.5122 8.75396 19.1363 9.51518 19.1363H10.324C10.9901 19.1363 11.5848 18.6322 11.7037 17.9602C11.6561 17.9602 11.6561 17.9602 11.6085 17.9602C10.7997 17.9602 10.0385 17.9602 9.22972 17.9602C8.73017 17.9602 8.73017 17.1921 9.22972 17.1921C10.0385 17.1921 10.7997 17.1921 11.6085 17.1921C11.6561 17.1921 11.7037 17.1921 11.7513 17.2401C11.7989 16.112 12.0605 14.6718 12.4174 14.1678L12.4649 14.1198C12.4649 14.1198 12.679 13.8558 12.7266 13.8558C13.6306 13.0877 14.0587 12.0556 14.0587 10.7834C14.0587 8.52722 12.227 6.67904 9.99095 6.67904C7.75485 6.67904 5.92315 8.52722 5.92315 10.7834C5.92315 12.0556 6.4227 13.0877 7.30287 13.8558L7.35045 13.9038L7.56454 14.1678C7.70727 14.3838 7.87379 14.8399 7.96894 15.3439C8.01652 15.3439 8.06409 15.2959 8.11167 15.2959C8.92047 15.2959 9.6817 15.2959 10.4905 15.2959C10.9901 15.2959 10.9901 16.064 10.4905 16.064C9.53897 16.064 8.77774 16.064 7.99273 16.064ZM14.8913 10.7114C14.8913 12.2476 14.3442 13.5197 13.2737 14.4078L13.0834 14.6238C12.8931 14.9839 12.5839 16.424 12.5839 17.6001V17.6961C12.5839 18.9683 11.561 20.0004 10.3002 20.0004H9.49139C8.23061 20.0004 7.20772 18.9683 7.20772 17.6961V17.6001C7.20772 16.424 6.89847 14.9839 6.70816 14.6238L6.54164 14.4798C5.47117 13.5197 4.87646 12.2716 4.87646 10.7354C4.87646 7.97517 7.11256 5.71894 9.84822 5.71894C12.6314 5.69494 14.8913 7.92716 14.8913 10.7114Z" fill="#F7F7F7"/>
+                <path d="M10.229 0.414041C10.229 1.39814 10.229 2.40624 10.229 3.39034C10.229 3.89439 9.46777 3.89439 9.46777 3.39034C9.46777 2.40624 9.46777 1.39814 9.46777 0.414041C9.46777 -0.138014 10.229 -0.138014 10.229 0.414041Z" fill="#F7F7F7"/>
+                <path d="M5.30492 5.57512C5.61417 5.98316 4.9481 6.34319 4.63885 5.98316C4.06793 5.21508 3.47323 4.399 2.85473 3.58292C2.59306 3.17488 3.25913 2.76683 3.5208 3.17488C4.1393 3.94295 4.71022 4.75903 5.30492 5.57512Z" fill="#F7F7F7"/>
+                <path d="M3.28278 9.9431C3.78234 9.9911 3.78234 10.8072 3.28278 10.7112C2.28368 10.6392 1.30836 10.4952 0.356824 10.3991C-0.118941 10.3511 -0.118941 9.58306 0.356824 9.63106C1.35593 9.72707 2.28368 9.82308 3.28278 9.9431Z" fill="#F7F7F7"/>
+                </svg>
+            <span class="quick-tips-text mt-2">__(Quick Tips)__</span>            
+        </div>
+        <div class="instructions d-flex flex-grow-1 justify-content-around">
+            <div class="d-flex flex-column instruction-box first">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">settings_voice</i>
+                <span class="text-center mt-2">__(Please test your <b>Microphone</b>)__</span>            
+            </div>          
+            <div class="d-flex flex-column instruction-box second">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">speaker</i>
+                <span class="text-center mt-2">__(Please test your <b>Speakers</b>)__</span>            
+            </div>          
+            <div class="d-flex flex-column instruction-box third">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">equalizer</i>
+                <span class="text-center mt-2">__(Ensure there is <b>no background noise</b>)__</span>            
+            </div>          
+            <div class="d-flex flex-column instruction-box fourth">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">record_voice_over</i>
+                <span class="text-center mt-2">__(Read once <b>before recording it</b>)__</span>            
+            </div>          
+            <div class="d-flex flex-column instruction-box last">
+                <i class="material-icons instruction-icon rounded-circle instruction-icon-border">play_circle_filled</i>
+                <span class="text-center mt-2">__(Get started by clicking on <b>Record</b> button)__</span>            
+            </div>
+        </div>  
+        <div>
+            <button id="instructions_close_btn" class="btn p-0 close-btn">&times;</button>
+        </div>        
+    </div>
+</div>
+
+        <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">
+            <div class="row position-absolute bolo-back-btn top-back-btn">
+            <button class="btn btn-link p-0 back-btn" id="back-btn">
+                <a href="./boloIndia/home.html" class="nav-link d-lg-inline-flex" style="color:#959595;font-size:16px">
+                    <span class="material-icons" style="vertical-align:sub">
+            arrow_back
+            </span>
+                    <span class="back-text" style="margin-left:8px">__(Home)__</span>
+
+                </a>
+            </button>
+        </div>
+            <div class="report-btn-container">
+    <button class="btn mr-3" id="report_btn" type="button">
+        <img src="../img/report.svg" class="pr-0 pr-md-2 pr-lg-2">
+        <span class="d-xs-none d-inherit"> __(Report)__</span>
+    </button>
+</div>
+            <div class="test-mic-speaker pl-lg-0 pl-md-0 pr-4 pr-md-2 pr-lg-2 px-md-0 px-lg-0 mr-lg-2" id="test-mic-speakers">
+    <button class="w-100 btn align-items-center d-flex justify-content-center" id="test-mic-speakers-button">
+        <img src="../img/mic.svg" style="border-right:1px solid #dbdbdb;padding-right:6px;margin-right:8px">
+        <img src="../img/speaker.svg" class="pr-10">
+        <span class="d-xs-none d-block"> __(Test your Microphone and Speakers)__</span>
+        <span class="d-xs-block d-none"> __(Test)__ </span>
+    </button>
+</div>
+        </div>
+        <div class="test-mic-speakers-container">
+    <div class="col-12 test-mic-speakers-details d-none" id="test-mic-speakers-details">
+        <div class="row justify-content-between mb-2 mb-md-4 mb-lg-4">
+            <div class="col-lg-4 col-md-5 test-mic-heading">
+                <p>
+                    __(Test your Microphone and Speakers)__
+                </p>
+            </div>
+            <div class="col-lg-1 col-md-1">
+                <button class="test-mic-close" id="test-mic-close">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#343A40"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center">
+            <div class="col-lg-5 col-md-10 px-0 mb-2 mb-lg-0">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5 col-6 col-md-5 col-sm-5 mb-2 mb-lg-0">
+                        <button id="test-mic-button" data-value="test-mic" class="test-btn rounded-pill">
+                            <img src="/img/mic.svg" class="pr-10">
+                            <span id="test-mic-text">__(Test Mic)__</span>
+                        </button>
+                    </div>
+                    <div class="col-lg-7 col-6 col-md-7 col-sm-8 d-flex align-items-center">
+                        <canvas class="w-100 test-canvas" id="mic-canvas" style="background-color:#fff"></canvas>
+                    </div>
+                </div>
+                <div class="row text-right m-0">
+                    <div class="offset-lg-5 offset-md-5 col-lg-7 col-12 col-md-7 ambient-noise pt-0 pt-md-2 pt-lg-2 invisible" id="mic-msg">
+                        __(Please speak clearly)__
+                    </div>
+                    <div class="offset-lg-5 offset-md-5 col-lg-7 col-12 col-md-7 ambient-noise d-none" id="no-noise">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C12.4183 16 16 12.4183 16 8C16 6.61372 15.6474 5.3098 15.027 4.17302L7.20059 11.9994L2.72059 7.51941L3.84059 6.39941L7.20059 9.75941L14.1166 2.84342C12.6491 1.1045 10.4535 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z" fill="#83E661"/>
+                        </svg>
+                        __(Low/No Background Noise)__
+                    </div>
+                    <div class="offset-lg-5 offset-md-5 col-lg-7 col-12 col-md-7 d-none ambient-noise" id="noise">
+                        <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.23868 0.427299L0.131952 12.0734C-0.230716 12.6677 0.197039 13.4298 0.893274 13.4298H15.1067C15.803 13.4298 16.2307 12.6677 15.868 12.0734L8.76132 0.427298C8.41366 -0.142434 7.58634 -0.142432 7.23868 0.427299ZM7.33109 3.86204H9.11485V9.21329H7.33109V3.86204ZM8.22297 11.8889C8.71554 11.8889 9.11485 11.4896 9.11485 10.997C9.11485 10.5045 8.71554 10.1052 8.22297 10.1052C7.7304 10.1052 7.33109 10.5045 7.33109 10.997C7.33109 11.4896 7.7304 11.8889 8.22297 11.8889Z" fill="#FCC232"/>
+                        </svg>
+                        __(Background Noise Detected)__
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-10 px-0 mt-2 mt-lg-0">
+                <div class="row justify-content-center">
+                    <audio controls="controls" id="test-speaker-hidden" style="display:none">
+                        <source src="/aud/sample_audio_file.mp3">
+                    </audio>
+                    <div class="col-lg-5 col-6 col-md-5 col-sm-5 mb-2 mb-lg-0">
+                        <button id="play-speaker" data-value="test-speaker" class="test-btn rounded-pill">
+                            <img src="/img/speaker.svg" class="pr-10">
+                            <span id="test-speaker-text">__(Test Speakers)__</span>
+                        </button>
+                    </div>
+                    <div class="col-lg-7 col-6 col-md-7 col-sm-8 d-flex align-items-center">
+                        <canvas class="w-100 test-canvas" id="speaker-canvas" style="background-color:#fff"></canvas>
+                    </div>
+                </div>
+                <div class="row noise-container only-display">
+                    <div class="offset-lg-5 offset-md-5 col-lg-7 col-12 col-md-7 ambient-noise invisible">
+                        __(Please speak clearly)__
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="xs-p-16" id="functional-row">
+            <div class="row justify-content-center my-5">
+                <div class="col-md-8 col-sm-10 text-center prompt"><label class="h1 font-weight-normal" id="sentenceLbl"></label></div>
+            </div>
+
+            <div class="recording-container">
+                <div class="row justify-content-center d-none">
+                    <div class="col-8 text-muted h-1r" id="get-started"> Let's get started! </div>
+                </div>
+
+                <div class="row justify-content-center d-none" id="recording-row" style="min-height:130px">
+                    <div class="col-md-1 col-2 my-auto">
+                        <div id="recording-sign" class="recorder-container ml-auto align-middle d-none">
+                            <div class="outer"></div>
+                            <div class="outer-2"></div>
+                            <div class="icon-microphone"><i class="material-icons md-48">mic</i></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-8 text-center">
+                        <canvas id="visualizer"></canvas>
+                    </div>
+                </div>
+                <div class="row justify-content-center" id="straight-line-row" style="min-height:130px">
+                    <div class="col-lg-7 col-8 text-center" style="height:3px;background-color:#007bff;border-radius:2px;margin-top:15px">
+                    </div>
+                </div>
+                <div class="row justify-content-center d-none count-down" id="count-down"><span class="align-middle" id="cont-down-span"> __(Recording will automatically stop after <span id="counter"></span> seconds)__ </span>
+                </div>
+                <div class="row justify-content-center d-none" id="audio-controller" style="min-height:130px">
+                    <div class="col-lg-4 col-md-6 col-sm-8 col-12 text-center mb-5">
+                        <audio id="player" controls tabindex="-1"></audio>
+                        <div class="text-danger mt-2 d-none" id="audio-small-error"><i class="material-icons align-middle">error</i>
+                            <span class="align-middle"> __(Audio recording is too small. Please Re-record)__ </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mb-3 mb-lg-5 mb-md-5 mt-lg-5" id="startRecordRow">
+                    <button type="button" class="btn text-primary p-2 btn-custom-outline-primary rounded-pill mr-lg-4 mr-md-4" id="startRecord"> __(Start Recording)__ </button>
+                    <button type="button" id="stopRecord" class="d-none text-primary p-2 btn-custom-outline-primary rounded-pill mr-lg-4 mr-md-4"> __(Stop Recording)__ </button>
+                    <button type="button" id="reRecord" class="d-none text-primary p-2 btn-custom-outline-primary rounded-pill mr-lg-4 mr-md-4"> __(Re-record)__ </button>
+                    <button id="nextBtn" class="btn p-2 point-none btn-custom-primary rounded-pill ml-lg-4 mt-3 mt-lg-0 ml-md-4 mt-md-0" disabled="disabled"> __(Submit)__ </button>
+            </div>
+            <div class="text-center">
+                    <button type="button" tabindex="-1" id="skipBtn" class="btn text-primary mb-5 mb-lg-2 mb-md-2 px-3 py-2 btn-transparent" style="font-size:24px"> __(Skip)__ </button>
+            </div>
+            <div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
+                <div class="col-10 col-sm-8 col-lg-7">
+                    <div class="progress mt-1">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress_bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
+                    </div>
+                    <div class="mt-4 text-muted h-1r d-none" id="get-started">
+                        Let's get started!
+                    </div>
+                </div>
+                <div class="px-3">
+                    <div class="row justify-content-center">
+                        <span class="" id="currentSentenceLbl"></span><span class="">/</span><span class="" id="totalSentencesLbl"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none mt-5 mx-lg-0" id="no-sentences-row">
+    <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-bold">
+            __(Thank you for your enthusiasm to contribute your voice.)__
+        </label><br><br>
+        <p>
+            __(We do not have any data in <span id="spn-validation-language"></span> language. Please try again later.)__
+        </p>
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
+                <a class="btn btn-primary text-white btn-lg h6 w-100" href="./boloIndia/home.html">
+                    __(Back to Bolo India Home)__
+                </a></div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="modal fade" id="report_sentence_modal" tabindex="-1" aria-labelledby="ReportSentence" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="modal-header d-block border-0">
+                <h4 class="modal-title text-center">
+                    __(Report Content)__
+                </h4>
+                <button type="button" id="report_close_btn" class="btn btn-close text-muted" data-bs-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-4">
+                    __(Help us understand what’s wrong with the sentence)__
+                </div>
+                <div class="mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reportRadio" id="offensive_id" value="Offensive">
+                        <label class="form-check-label xs-radio-label" for="offensive_id">
+                            __(Offensive)__
+                        </label>
+                    </div>
+                    <div class="option-text">
+                        __(Hurting sentiments of religion, community or abusive content etc.)__
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reportRadio" id="prohibitedContent_id" value="Prohibited Content">
+                        <label class="form-check-label xs-radio-label" for="prohibitedContent_id">
+                            __(Prohibited Content)__
+                        </label>
+                    </div>
+                    <div class="option-text">
+                        __(Hateful / Discriminatory / Vulgar language, drugs promotion etc.)__
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reportRadio" id="politicalStatement_id" value="Political Statement">
+                        <label class="form-check-label xs-radio-label" for="politicalStatement_id">
+                            __(Political Statement)__
+                        </label>
+                    </div>
+                    <div class="option-text">
+                        __(Hateful Political views, amplifying hate-speech etc.)__
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reportRadio" id="misinformation_id" value="Misinformation">
+                        <label class="form-check-label xs-radio-label" for="misinformation_id">
+                            __(Misinformation)__
+                        </label>
+                    </div>
+                    <div class="option-text">
+                        __(Hearsay / Rumors, deliberate falsified facts etc.)__
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="reportRadio" id="others_id" value="Others">
+                        <label class="form-check-label xs-radio-label" for="others_id">
+                            __(Others)__
+                        </label>
+                    </div>
+                </div>
+                <textarea maxlength="1000" id="other_text" class="w-100 p-3 other-reason mb-4" rows="3" placeholder="__(Please specify the reason (Optional))__"></textarea>
+                <div class="d-flex justify-content-center">
+                    <button id="report_submit_id" class="btn btn-primary w-75 border-50" disabled="disabled">__(SUBMIT)__</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="report_sentence_thanks_modal" tabindex="-1" aria-labelledby="ReportSentenceThankYou" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="modal-header d-block border-0">
+                <h4 class="modal-title text-center">
+                    __(Thank You)__
+                </h4>
+                <button type="button" id="report_sentence_thanks_close_id" class="btn btn-close text-muted" data-bs-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">__(Your feedback helps us keep Bolo India relevant, we appreciate you taking time to leave the feedback.)__</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-danger"><h5 class="modal-title h2" id="errorModalLabel"><span class="material-icons md-48 align-middle">error </span> __(Error!!!)__ </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"> __(An unexpected error occured while processing your request. Please try after some time.)__ </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> __(Close)__ </button>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/speakerDetail.css">
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-3 border-primary border-2">
+            <button style="right:25px;font-size:35px;top:30px" class="close float-right position-absolute" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-header d-block border-0 py-0">
+                <h2 class="modal-title text-center my-4">
+                    __(User Details)__
+                </h2>
+            </div>
+            <div class="modal-body px-6 p-0" id="speaker-details">
+                <p class="text-center font-weight-light" id="form-sub-heading">
+                    __(All the fields are optional but you can enrich your dataset contribution by providing the demographic details.)__
+                </p>
+                <div class="col-12 text-center text-primary d-none" id="resetBtn" style="cursor:pointer">
+                    Not You? Change User
+                </div>
+                <div class="form-group mt-3"><label for="username" class="form-label">
+                        __(Name)__
+                    </label> <input class="form-control font-weight-normal" maxlength="12" id="username" data-toggle="tooltip" placeholder="__(Enter username)__">
+                    <div class="user-name-hint font-weight-light">
+                        <span class="align-middle">
+                            __(Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.))__
+                        </span>
+                    </div>
+                    <div class="text-danger mt-2 d-none" id="username-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px" height="18px">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg> <span class="align-middle">
+                            __(Please don&#39;t use email or mobile number as user name)__
+                        </span></div>
+                </div>
+                <div class="form-group"><label for="mother-tongue" class="form-label">
+                        __(Mother Tongue)__
+                    </label> <select class="form-control font-weight-normal" id="mother-tongue">
+                        <option selected="selected" value="">
+                            __(Select Mother Tongue)__
+                        </option>
+                        
+                            <option value="Assamese">
+                                অসমীয়া
+                            </option>
+                        
+                            <option value="Bengali">
+                                বাংলা
+                            </option>
+                        
+                            <option value="Bodo">
+                                Bodo
+                            </option>
+                        
+                            <option value="Dogri">
+                                Dogri
+                            </option>
+                        
+                            <option value="English">
+                                English
+                            </option>
+                        
+                            <option value="Gujarati">
+                                ગુજરાતી
+                            </option>
+                        
+                            <option value="Hindi">
+                                हिंदी
+                            </option>
+                        
+                            <option value="Kannada">
+                                ಕನ್ನಡ
+                            </option>
+                        
+                            <option value="Kashmiri">
+                                Kashmiri
+                            </option>
+                        
+                            <option value="Konkani">
+                                Konkani
+                            </option>
+                        
+                            <option value="Maithili">
+                                Maithili
+                            </option>
+                        
+                            <option value="Malayalam">
+                                മലയാളം
+                            </option>
+                        
+                            <option value="Manipuri">
+                                Manipuri
+                            </option>
+                        
+                            <option value="Marathi">
+                                मराठी
+                            </option>
+                        
+                            <option value="Nepali">
+                                Nepali
+                            </option>
+                        
+                            <option value="Odia">
+                                ଓଡିଆ
+                            </option>
+                        
+                            <option value="Punjabi">
+                                ਪੰਜਾਬੀ
+                            </option>
+                        
+                            <option value="Santali">
+                                Santali
+                            </option>
+                        
+                            <option value="Sanskrit">
+                                Sanskrit
+                            </option>
+                        
+                            <option value="Sindhi">
+                                Sindhi
+                            </option>
+                        
+                            <option value="Tamil">
+                                தமிழ்
+                            </option>
+                        
+                            <option value="Telugu">
+                                తెలుగు
+                            </option>
+                        
+                            <option value="Urdu">
+                                Urdu
+                            </option>
+                        
+                    </select></div>
+                <div class="form-group"><label for="age" class="form-label">
+                        __(Age Group)__
+                    </label> <select class="form-control font-weight-normal" id="age">
+                        <option selected="selected" value="">
+                            __(Select Age Group)__
+                        </option>
+                        <option value="upto 10">__(upto 10 (Kid))__</option>
+                        <option value="10 - 30">__(10 - 30 (Youth))__</option>
+                        <option value="30 - 60">__(30 - 60 (Adult))__</option>
+                        <option value="60+">__(60+ (Senior))__</option>
+                    </select></div>
+                <div class="form-group mb-4"><label for="gender" class="form-label">
+                        __(Gender)__
+                    </label>
+                    <div class="justify-content-between">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="male-check" value="male">
+                            <label class="form-check-label m-2" for="male-check">
+                                __(Male)__
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="female-check" value="female">
+                            <label class="form-check-label m-2" for="female-check">
+                                __(Female)__
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="other-check" value="others">
+                            <label class="form-check-label m-2" for="other-check">
+                                __(Others)__
+                            </label>
+                        </div>
+                    </div>
+                    <div id="transgender_options" class="justify-content-between d-none">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="trans-he-check" value="Transgender - He">
+                            <label class="form-check-label m-2" for="trans-he-check">
+                                __(Transgender - He)__
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="trans-she-check" value="Transgender - She">
+                            <label class="form-check-label m-2" for="trans-she-check">
+                                __(Transgender - She)__
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trans_gender" id="not-say-check" value="Rather Not Say" checked="checked">
+                            <label class="form-check-label m-2" for="not-say-check">
+                                __(Rather Not Say)__
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label my-3 font-weight-normal" id="tnc_link">
+                        __(By proceeding ahead you agree to the <a href="./terms-and-conditions.html" target="_blank"> Terms and Conditions</a>)__
+                    </label>
+                </div>
+                <div class="row justify-content-center my-4">
+                    <div class="col-12 text-center" data-toggle="tooltip" title="__(Please validate any error message before proceeding)__"><button type="button" id="proceed-box" class="btn btn-primary h6 rounded-pill m-0" data-toggle="modal" data-target="#languageModal">
+                            __(Done)__
+                        </button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/common/speakerDetails.js"></script>
+
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/sourceInfo.css">
+
+<button id="show_source_button" class="btn ds-float d-none" type="button" data-toggle="modal" data-target="#data_source_modal">
+    <img src="/img/data-source.svg" class="my-ds-float" alt="data source button"> <span class="hide-on-mobile">Data Source</span>
+</button>
+
+<div class="modal fade" id="data_source_modal" tabindex="-1" aria-labelledby="DataSourceModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div id="modal_data_source" class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content border-2" style="padding:5% 2% 2% 2%">
+            <div class="modal-header d-block border-0">
+                <h4 class="modal-title text-center">
+                    __(Opt-out Notification)__
+                </h4>
+                <button type="button" id="datasource_close_btn" class="btn btn-close text-muted" data-bs-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body" style="padding:20px 34px 45px 32px">
+                <div class="mb-4">
+                    <div id="div-ds-source-name">
+                        <label class="form-check-label label-color-feedback">
+                            __(Source)__: <a class="spn-source-info"></a>
+                        </label>
+                    </div>
+                </div>                
+                <div class="md-4">
+                    <div class="form-row">
+                        <label class="form-check-label label-color-feedback">
+                            __(If you are the copyright holder of this data and believe it should not be used on the platform, please send us an email to <span class="email">optout@bhashini.gov.in</span><span class="tooltiptext" id="myDataSourceTooltip">Copy to clipboard</span> with evidence that you are indeed the copyright holder of this data.)__
+                        </label>
+                    </div>
+                </div>
+                <div class="md-4 mt-4">
+                    <div class="form-row">
+                        <label class="form-check-label label-color-feedback">
+                            __(We will attempt to validate the same and remove the data from our platform within 15 days on a best effort basis.)__
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/common/sourceInfo.js"></script>
+
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/feedback.css">
+
+<button id="feedback_button" class="btn float" type="button" data-toggle="modal" data-target="#feedback_modal">
+    <img src="/img/feedbackIcon.svg" class="my-float" alt="feedback button">
+</button>
+
+<div class="modal fade" id="feedback_modal" tabindex="-1" aria-labelledby="FeedbackModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div id="modal_feeback" class="modal-dialog modal-md modal-dialog-centered custom-modal">
+        <div class="modal-content border-2" style="padding-top:12px">
+            <div class="modal-header d-block border-0">
+                <h4 class="modal-title text-center">
+                    __(Your Feedback)__
+                </h4>
+                <div class="text-center" style="color:#8b8b8b;margin-top:9px;margin-bottom:24px">
+                    __(We would like to get your feedback to improve this platform)__
+                </div>
+                <button type="button" id="feedback_close_btn" class="btn btn-close text-muted" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="border-top"></div>
+            <div class="modal-body" style="padding:20px 34px 45px 32px">
+                
+
+                <div class="mb-3 email-component" style="display:none">
+                    <label class="form-check-label label-color-feedback" for="email">
+                        __(Email)__ <span class="required">(__(*required)__)</span>
+                    </label>
+                </div>
+                <div class="mb-3 email-component" style="display:none">
+                    <input class="form-control" name="email" id="email" type="email" required>
+                </div>
+                <div class="mb-3 content-component" style="display:none">
+                    <label class="form-check-label label-color-feedback">
+                        __(Giving Feedback for?)__ <span class="required">(__(*required)__)</span>
+                    </label>
+                </div>
+                <div class="mb-4 content-component" style="display:none">
+                    <div class="form-row">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="bolo_id" value="bolo">
+                            <label class="form-check-label xs-radio-label" for="bolo_id">
+                                __(Bolo)__
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="suno_id" value="suno">
+                            <label class="form-check-label xs-radio-label" for="suno_id">
+                                __(Suno)__
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="likho_id" value="likho">
+                            <label class="form-check-label xs-radio-label" for="likho_id">
+                                __(Likho)__
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4 content-component" style="display:none">
+                    <div class="form-row">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="dekho_id" value="dekho">
+                            <label class="form-check-label xs-radio-label" for="dekho_id">
+                                __(Dekho)__
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="others_id" value="others">
+                            <label class="form-check-label xs-radio-label" for="others_id">
+                                __(Others)__
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 page-type-component" style="display:none">
+                    <label class="form-check-label label-color-feedback" for="select_page_id">
+                        Select page <span class="required">(*required)</span>
+                    </label>
+                </div>
+                <div class="md-4 page-type-component" style="display:none">
+                    <div class="form-row">
+                        <select class="form-control" id="select_page_id" name="select_page_id">
+                        </select>
+                        
+                            <input type="hidden" id="target_page" value="Speak">
+                        
+
+                    </div>
+                </div>
+
+                
+                <div class="mb-4 mt-4">
+                    <label class="form-check-label label-color-feedback">
+                        __(What is your opinion of this page)__ <span class="required">(__(*required)__)</span>
+                    </label>
+                </div>
+                <div class="mb-4 mt-4">
+                    <div class="form-row opinion">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input very_sad" type="radio" name="opinionRadio" id="very_sad_id" value="very_sad">
+                            <label class="form-check-label xs-radio-label opinion-label" id="very_sad_label" for="very_sad_id">
+                                <svg class="very_sad-svg svg-size" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M25.9987 47.6693C37.9649 47.6693 47.6654 37.9688 47.6654 26.0026C47.6654 14.0364 37.9649 4.33594 25.9987 4.33594C14.0325 4.33594 4.33203 14.0364 4.33203 26.0026C4.33203 37.9688 14.0325 47.6693 25.9987 47.6693Z" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17.332 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.6641 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.6654 34.6719C33.582 31.4219 30.787 28.1719 25.9987 28.1719C21.2104 28.1719 18.4154 31.4219 17.332 34.6719" stroke="#959595" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input sad" type="radio" name="opinionRadio" id="sad_id" value="sad">
+                            <label class="form-check-label xs-radio-label opinion-label" id="sad_label" for="sad_id">
+                                <svg class="sad-svg svg-size" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M25.9987 47.6693C37.9649 47.6693 47.6654 37.9688 47.6654 26.0026C47.6654 14.0364 37.9649 4.33594 25.9987 4.33594C14.0325 4.33594 4.33203 14.0364 4.33203 26.0026C4.33203 37.9688 14.0325 47.6693 25.9987 47.6693Z" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17.332 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.6641 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M18.416 34.6693L33.5827 30.3359" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input neutral" type="radio" name="opinionRadio" id="neutral_id" value="neutral">
+                            <label class="form-check-label xs-radio-label opinion-label" id="neutral_label" for="neutral_id">
+                                <svg class="neutral-svg svg-size" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M25.9987 47.6693C37.9649 47.6693 47.6654 37.9688 47.6654 26.0026C47.6654 14.0364 37.9649 4.33594 25.9987 4.33594C14.0325 4.33594 4.33203 14.0364 4.33203 26.0026C4.33203 37.9688 14.0325 47.6693 25.9987 47.6693Z" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17.332 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.6641 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17.332 30.3359H34.6654" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input happy" type="radio" name="opinionRadio" id="happy_id" value="happy">
+                            <label class="form-check-label xs-radio-label opinion-label" id="happy_label" for="happy_id">
+                                <svg class="happy-svg svg-size" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M25.9987 47.6693C37.9649 47.6693 47.6654 37.9688 47.6654 26.0026C47.6654 14.0364 37.9649 4.33594 25.9987 4.33594C14.0325 4.33594 4.33203 14.0364 4.33203 26.0026C4.33203 37.9688 14.0325 47.6693 25.9987 47.6693Z" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17.332 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.6641 19.6112V19.3945" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.6654 30.3359C33.582 33.5859 30.787 36.8359 25.9987 36.8359C21.2104 36.8359 18.4154 33.5859 17.332 30.3359" stroke="#959595" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input very-happy" type="radio" name="opinionRadio" id="very_happy_id" value="very_happy">
+                            <label class="form-check-label xs-radio-label opinion-label" id="very_happy_label" for="very_happy_id">
+                                <svg class="very-happy-svg svg-size" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M26.0006 47.6654C37.9668 47.6654 47.6673 37.9649 47.6673 25.9987C47.6673 14.0325 37.9668 4.33203 26.0006 4.33203C14.0345 4.33203 4.33398 14.0325 4.33398 25.9987C4.33398 37.9649 14.0345 47.6654 26.0006 47.6654Z" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17.334 19.6073V19.3906" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M34.668 19.6073V19.3906" stroke="#959595" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M26.0007 38.9987C28.2992 38.9987 30.5036 38.0856 32.1289 36.4603C33.7542 34.835 34.6673 32.6306 34.6673 30.332H17.334C17.334 32.6306 18.2471 34.835 19.8724 36.4603C21.4977 38.0856 23.7021 38.9987 26.0007 38.9987Z" stroke="#959595" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom:16px">
+                    <label class="form-check-label label-color-feedback" for="category_id">
+                        __(Please select your feedback category)__ <span>(__(optional)__)</span>
+                    </label>
+                    <div class="form-row">
+                        <select id="category_id" class="form-control">
+                            <option value="category" selected="selected">
+                                __(Select a category)__
+                            </option>
+                            <option value="suggestion">
+                                __(Suggestion)__
+                            </option>
+                            <option value="error">
+                                __(Error)__
+                            </option>
+                            <option value="complaint">
+                                __(Complaint)__
+                            </option>
+                            <option value="compliment">
+                                __(Compliment)__
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="md-4">
+                    <div class="form-row">
+                        <label class="form-check-label label-color-feedback" for="feedback_textarea" style="margin-top:16px;margin-bottom:5px">
+                            __(Share your feedback below:)__ <span>(__(optional)__)</span>
+                        </label>
+                    </div>
+                </div>
+                <textarea name="feedback_textarea" maxlength="1000" id="feedback_description" class="w-100 p-3 other-reason mb-4 label-color-feedback" rows="3" placeholder="__(Type here...)__" style="background-color:#fff;border:1px solid rgba(149,149,149,.6)"></textarea>
+                <div class="d-flex justify-content-center">
+                    <button id="submit_btn" class="btn btn-primary submit-btn-feedback" disabled="disabled">
+                        __(SUBMIT)__
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="feedback_thanku_modal" tabindex="-1" aria-labelledby="FeedbackThankYou" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content p-4 border-2">
+            <div class="modal-header d-block border-0">
+                <button type="button" id="feedback_thanku_close_btn" class="btn btn-close text-muted" data-bs-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center py-2">
+                    <img src="/img/success.svg" alt="Success">
+                </div>
+
+                <div class="text-center py-2" style="font-size:16px">
+                    __(Submitted successfully)__
+                </div>
+                <div class="text-center py-2 pb-5" style="font-family:Lato;font-size:20px">__(Thank you for your feedback!)__
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/common/feedback.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="/js/record.js"></script>
+<script src="/js/mic-speaker-testing.js"></script>
+<script src="/js/loadFeedback.js"></script>
+</body>
+</html>

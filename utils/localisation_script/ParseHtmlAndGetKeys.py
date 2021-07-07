@@ -343,10 +343,17 @@ def get_keys_with_path():
      "dekhoIndia/validator-thank-you.html":'modules/dekhoIndia/thankyou/validation/validator-thank-you.ejs',
      "likhoIndia/record.html":'modules/likhoIndia/record/record.ejs'}
 
-    base_path = os.getcwd().replace('utils/localisation_script', 'crowdsource-ui/src/views')
-
+    cwd = os.getcwd()
+    base_path = cwd[:cwd.index('utils/localisation_script')]+'crowdsource-ui/src/views'
+    print(base_path)
     kf_map = get_key_map(base_path, main_files_map)
-    return kf_map
+    out_map = {}
+    for k,path in kf_map.items():
+        path = path[path.index("views/")+6:]
+        for html_path, ejs_path in main_files_map.items():
+            if ejs_path == path:
+                out_map[k] = html_path
+    return out_map
 
 # In[10]:
 
@@ -357,6 +364,6 @@ def get_keys_with_path():
 
 # In[11]:
 
-
-main()
+if __name__ == "__main__":
+    get_keys_with_path()
 

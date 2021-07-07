@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>BhashaDaan: A crowdsourcing initiative for Indian languages (Beta)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
+    <meta name="description" content="BhashaDaan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta property="og:title" content="__(BhashaDaan: A crowdsourcing initiative for Indian languages)__">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="__(I&#39;ve contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?)__">
+    <meta property="og:site_name" content="BhashaDaan">
+    <meta property="og:url" content="https://bhashini.gov.in/bhashadaan">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/profanity.css">
+</head>
+
+<body>
+
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="profanityUserModal" tabindex="-1" role="dialog" aria-labelledby="profanityUserModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content p-4 border-primary border-2">
+            <div class="modal-header d-block border-0">
+                <h1 class="modal-title text-center">
+                    __(User Details)__
+                </h1>
+            </div>
+            <div class="modal-body px-6" id="speaker-details">
+                <div class="form-group mt-3">
+                    <label for="username" class="form-label">
+                        Email
+                    </label> <input class="form-control" type="email" id="username" data-toggle="tooltip" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="preferred-language" class="form-label">
+                        Language
+                    </label>
+                    <select class="form-control" id="preferred-language">
+                        <option selected="selected" value="">
+                            Select Your Preferred Language
+                        </option>
+                        
+                            <option value="Assamese">
+                                অসমীয়া
+                            </option>
+                            
+                            <option value="Bengali">
+                                বাংলা
+                            </option>
+                            
+                            <option value="English">
+                                English
+                            </option>
+                            
+                            <option value="Gujarati">
+                                ગુજરાતી
+                            </option>
+                            
+                            <option value="Hindi">
+                                हिंदी
+                            </option>
+                            
+                            <option value="Kannada">
+                                ಕನ್ನಡ
+                            </option>
+                            
+                            <option value="Malayalam">
+                                മലയാളം
+                            </option>
+                            
+                            <option value="Marathi">
+                                मराठी
+                            </option>
+                            
+                            <option value="Odia">
+                                ଓଡିଆ
+                            </option>
+                            
+                            <option value="Punjabi">
+                                ਪੰਜਾਬੀ
+                            </option>
+                            
+                            <option value="Tamil">
+                                தமிழ்
+                            </option>
+                            
+                            <option value="Telugu">
+                                తెలుగు
+                            </option>
+                            
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label mt-2">
+                        By proceeding ahead you agree to let your email address be saved in our database
+                    </label>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-12" data-toggle="tooltip" title="__(Please validate any error message before proceeding)__">
+                        <button type="button" id="proceed-box" class="btn btn-primary h6 shadow w-100 rounded p-2" data-toggle="modal" data-target="#languageModal">
+                            __(Let&#39;s Go)__
+                        </button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="/js/profanity-home.js" id="home-page" default-lang=""></script>
+
+</body>
+
+</html>
