@@ -42,11 +42,10 @@ function initializeBlock() {
     fromLanguage = e.target.value;
     top_lang = fromLanguage;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-    const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
     localStorage.setItem("i18n", "en");
     redirectToLocalisedPage();
     getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, ()=>{});
-    showFucntionalCards('ocr', language);
+    showFucntionalCards('ocr', fromLanguage);
   });
 
   $('#start_recording').on('click', () => {
@@ -72,6 +71,7 @@ function initializeBlock() {
   })
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   showFucntionalCards('ocr', language);
+  getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, ()=>{});
 
   const $startRecordBtn = $('#proceed-box');
   const $startRecordBtnTooltip = $startRecordBtn.parent();

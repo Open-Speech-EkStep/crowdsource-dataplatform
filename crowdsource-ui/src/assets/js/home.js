@@ -121,9 +121,8 @@ function initializeBlock() {
     $('#from-language').on('change', (e) => {
         fromLanguage = e.target.value;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-        const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
         localStorage.setItem("i18n", "en");
-        updateHrsForSayAndListen(languages.value);
+        updateHrsForSayAndListen(fromLanguage);
         redirectToLocalisedPage();
         getStatsSummary();
     });

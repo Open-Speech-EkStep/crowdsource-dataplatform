@@ -42,11 +42,10 @@ function initializeBlock() {
     fromLanguage = e.target.value;
     sentenceLanguage = fromLanguage
     localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-    const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
     localStorage.setItem("i18n", "en");
     redirectToLocalisedPage();
     getStatsSummary('/stats/summary/asr',MODULE.suno.value, ()=>{});
-    showFucntionalCards('asr', language);
+    showFucntionalCards('asr',fromLanguage);
   });
 
   $('#start_recording').on('click', () => {
