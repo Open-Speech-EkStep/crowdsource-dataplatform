@@ -1,5 +1,5 @@
 const { onActiveNavbar ,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
-const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,hasUserRegistered} = require('../common/common');
+const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,hasUserRegistered,updateLocaleLanguagesDropdown} = require('../common/common');
 const { getLocaleString} = require('../common/utils');
 const {
   setUserModalOnShown,
@@ -30,6 +30,8 @@ function initializeBlock() {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
     top_lang = DEFAULT_CON_LANGUAGE;
   }
+
+  updateLocaleLanguagesDropdown(top_lang)
 
   addToLanguage('from-language', ALL_LANGUAGES);
   let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
