@@ -491,23 +491,24 @@ $(document).ready(() => {
           return data.json();
         }
       }).then((sentenceData) => {
-        boloIndiaValidator.sentences = sentenceData.data ? sentenceData.data : []; [].length || {}.length
+
+        boloIndiaValidator.sentences = sentenceData.data ? sentenceData.data : [];
         localStorage.setItem(boloValidatorCountKey, boloIndiaValidator.sentences.length);
         localStorage.setItem(
           sentencesKey,
           JSON.stringify({
-            userName: localSpeakerDataParsed.userName,
-            sentences: boloIndiaValidator.sentences,
-            language: localStorage.getItem(CONTRIBUTION_LANGUAGE),
+              userName: localSpeakerDataParsed.userName,
+              sentences: boloIndiaValidator.sentences,
+              language: localStorage.getItem(CONTRIBUTION_LANGUAGE),
           })
         );
-      if (!sentenceData.data || sentenceData.data.length == 0) {
+      if (boloIndiaValidator.sentences.length === 0) {
         showNoSentencesMessage();
         return;
       }
       // validationSentences = sentenceData.data
       // const sentence = validationSentences[currentIndex];
-     
+
       initializeComponent();
     }).catch((err) => {
         console.log(err);
