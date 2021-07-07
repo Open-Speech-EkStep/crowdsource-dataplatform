@@ -21,7 +21,7 @@
 <div id="page-content" class="d-none">
     <div id="content-wrapper" class="container-fluid d-flex flex-column">
         <div class="row m-0 px-4">
-            <%- include('../../build/views/common/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg", homePath:"./boloIndia/home.html"}) %>
+            <%- include('common/breadcrumb/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg", homePath:"./boloIndia/home.html"}) %>
         </div>
         <%- include modals/recording-instructions.ejs %>
         <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">
@@ -135,7 +135,7 @@
         </div>
     </div>
 </div>
-<%- include('../../build/views/common/speakerDetails.ejs',{path:"./"}) %>
+<%- include('common/modals/speakerDetails/speakerDetails.ejs',{path:"./"}) %>
 <%- include('common/sourceInfo/sourceInfo.ejs') %>
 <%- include('common/feedback/feedback.ejs', {page:"Speak"}) %>
 <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>

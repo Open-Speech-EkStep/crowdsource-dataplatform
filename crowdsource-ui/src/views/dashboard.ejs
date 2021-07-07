@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-12">
             <div class="row">
-                <%- include('../../build/views/common/back-btn.ejs',{url:"./boloIndia/home.html"}) %>
+                <%- include('common/buttons/back-btn/back-btn.ejs',{url:"./boloIndia/home.html"}) %>
             </div>
             <div class="row">
                 <div class="col-12 col-md-7 col-lg-6">
@@ -71,7 +71,7 @@
                 <div><span class="spinner"></span></div>
             </div>
             <div class="row text-center contribution-details d-none" id="contribution-details">
-                <%- include('../../build/views/common/contributionStats.ejs',{labels :[__('Languages'),__('Speakers contributed'),__('Duration recorded'),__('Duration validated')]})%>
+                <%- include('common/contributionStats/contributionStats.ejs',{labels :['Languages','Speakers contributed','Duration recorded','Duration validated']})%>
             </div>
         </div>
     </div>
