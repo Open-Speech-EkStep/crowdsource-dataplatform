@@ -2,11 +2,11 @@
 
 
 <head>
-    <title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
+    <title>Bhasha Daan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
-    <meta name="description" content="BhashaDaan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta name="description" content="Bhasha Daan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-12">
             <div class="row">
-                <%- include('../../build/views/common/back-btn.ejs',{url:"./boloIndia/home.html"}) %>
+                <%- include('common/buttons/back-btn/back-btn.ejs',{url:"./boloIndia/home.html"}) %>
             </div>
             <div class="row">
                 <div class="col-12 col-md-7 col-lg-6">
@@ -70,7 +70,7 @@
                 <div><span class="spinner"></span></div>
             </div>
             <div class="row text-center contribution-details d-none" id="contribution-details">
-                <%- include('../../build/views/common/contributionStats.ejs',{labels :['Languages','Speakers contributed','Duration recorded','Duration validated']})%>
+                <%- include('common/contributionStats/contributionStats.ejs',{labels :['Languages','Speakers contributed','Duration recorded','Duration validated']})%>
             </div>
         </div>
     </div>
@@ -144,17 +144,8 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modal-chart-wrapper" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg w-75 mw-100 h-75 mx-auto">
-        <div class="modal-content border-primary border-2 h-100 p-lg-5 px-2 py-4">
-            <div class="text-right" aria-label="Close"><a href="#" aria-hidden="true" data-dismiss="modal">
-                    Hide details &lt;
-                </a></div>
-            <div id="modal-chart" class="h-100"></div>
-        </div>
-    </div>
-</div><button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
-<%- include('../../build/views/common/speakerDetails.ejs',{path:"./"}) %>
+<button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
+<%- include('common/modals/speakerDetails/speakerDetails.ejs',{path:"./"}) %>
 <%- include modals/content-languages.ejs %>
 <%- include modals/say-listen-language.ejs%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
