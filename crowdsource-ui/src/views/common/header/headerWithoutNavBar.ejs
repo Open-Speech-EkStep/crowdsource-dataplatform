@@ -1,5 +1,6 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/header.css">
-<nav class="navbar navbar-expand-lg navbar-light bg-light pl-lg-4 pl-md-4 pl-3 py-lg-0 py-0 pr-0" id="header-nav-bar">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/theme.css">
+<nav class="navbar navbar-expand-lg navbar-dark bg-app-primary pl-lg-4 pl-md-4 pl-3 py-lg-0 py-0 pr-0 font-family-Rowdies" id="header-nav-bar">
     <div class="row m-0">
         <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="d-flex align-items-center">
@@ -15,14 +16,14 @@
     <div id="logo_separator" class="ml-2"></div>
     <div class="row ml-1 d-none-mob">
         <img src="<%= `/img/${locale}-${img}`%>" alt="module_logo" width="50" height="40" id="module_header_logo">
-        <a class="m-0 align-self-center text-decoration-none font-weight-bold" style="padding-right:10px;padding-left:10px;color:#142747;font-size:20px" href="<%= homePath %>"><%= __(MODULE) %> <span style="color:#ffbf00"><%= __('India')%></span></a>
+        <a class="m-0 align-self-center text-decoration-none text-white" style="padding-right:10px;padding-left:10px;font-size:20px" href="<%= homePath %>"><%= __(MODULE) %> <span style="color:#ffbf00"><%= __('India')%></span></a>
         <div id="tilt_line"></div>
-        <p class="m-0 align-self-center" style="color:#111"><%= __(PAGE_TITLE) %></p>
+        <p class="m-0 align-self-center text-white"><%= __(PAGE_TITLE) %></p>
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item p-2 dropdown" id="locale_language_dropdown">
-                <a class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link text-muted-white dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="/img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
                     <span><%= __('Language') %></span>
                 </a>
@@ -32,7 +33,7 @@
                     <%} }) %>
                 </div>
 
-            </li><li class="nav-item p-2 d-none"><a href="<%- `${path}about-us.html`%>" class="nav-link text-dark font-weight-bold">
+            </li><li class="nav-item p-2 d-none"><a href="<%- `${path}about-us.html`%>" class="nav-link text-muted-white">
                     About Us
                 </a>
             </li>
@@ -40,12 +41,12 @@
     </div>
         <ul class="navbar-nav ml-auto" id="userNavBar">
             <li class="nav-item pr-lg-4 dropdown" id="userDropDown">
-                <a class="nav-link text-dark font-weight-bold d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link d-none dropdown-toggle cursor-pointer text-muted-white" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="/img/usericon.svg" alt="usericon" class="align-middle mx-1">
 
                 <span id="nav-username"></span>
                 </a>
-                <div id="user_profile_dropdown" class="dropdown-menu" aria-labelledby="nav-user">
+                <div id="user_profile_dropdown" class="dropdown-menu text-muted-white" aria-labelledby="nav-user">
                     <a id="user_profile_name" class="dropdown-item point-none" href="#"></a>
                     <a id="anonymous_user" class="dropdown-item point-none" href="#"><%= __('(No Username)')%></a>
                     <a id="change_user" class="dropdown-item" href="#" data-toggle="modal" data-target="#userModal"><%= __('Change User')%></a>

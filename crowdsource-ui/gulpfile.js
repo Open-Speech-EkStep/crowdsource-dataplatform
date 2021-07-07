@@ -3,6 +3,7 @@ const minify = require('gulp-minify');
 const gulpFlatten = require('gulp-flatten');
 const cleanCss = require('gulp-clean-css');
 const htmlmin = require('gulp-htmlmin');
+const sass = require('gulp-sass')(require('sass'));
 const browserify = require('gulp-browserify');
 const replace = require('gulp-replace-task');
 const args = require('yargs').argv;
@@ -258,6 +259,10 @@ gulp.task('css', function () {
   return gulp.src(['src/assets/css/*.css']).pipe(gulpFlatten()).pipe(cleanCss()).pipe(gulp.dest('target/css'));
 });
 
+gulp.task('scss', function () {
+  return gulp.src(['src/assets/css/*.scss']).pipe(gulpFlatten()).pipe(sass().on('error', sass.logError)).pipe(cleanCss()).pipe(gulp.dest('target/css'));
+});
+
 gulp.task('css-common', function () {
   return gulp
     .src(['src/views/common/**/*.css', 'src/views/style/common.css'])
@@ -265,6 +270,7 @@ gulp.task('css-common', function () {
     .pipe(cleanCss())
     .pipe(gulp.dest('target/css/common'));
 });
+
 
 function cssClean(moduleName) {
   return gulp
@@ -300,6 +306,7 @@ gulp.task(
     'json',
     gulp.series('js-common-flat', 'js-common', 'js-boloIndia-flat', 'js-boloIndia', 'js-sunoIndia-flat', 'js-sunoIndia', 'js-likhoIndia-flat', 'js-likhoIndia', 'js-dekhoIndia-flat', 'js-dekhoIndia'),
     'css',
+    'scss',
     'css-common',
     'css-sunoIndia',
     'css-boloIndia',

@@ -600,7 +600,18 @@ function executeOnLoad() {
           }
         })
         .then((sentenceData) => {
-          if (sentenceData.data.length === 0) {
+          sunoIndia.sentences = sentenceData.data ? sentenceData.data : [];
+          localStorage.setItem(sunoCountKey, sunoIndia.sentences.length);
+          $loader.hide();
+          localStorage.setItem(
+            sentencesKey,
+            JSON.stringify({
+              userName: localSpeakerDataParsed.userName,
+              sentences: sunoIndia.sentences,
+              language: localSpeakerDataParsed.language,
+            })
+          );
+          if (sunoIndia.sentences.length === 0) {
             showNoSentencesMessage();
             return;
           }
@@ -611,17 +622,7 @@ function executeOnLoad() {
             // toggleFooterPosition();
           }
           $pageContent.removeClass('d-none');
-          sunoIndia.sentences = sentenceData.data;
-          localStorage.setItem(sunoCountKey, sunoIndia.sentences.length);
-          $loader.hide();
-          localStorage.setItem(
-            sentencesKey,
-            JSON.stringify({
-              userName: localSpeakerDataParsed.userName,
-              sentences: sentenceData.data,
-              language: localSpeakerDataParsed.language,
-            })
-          );
+
           setFooterPosition();
           initialize();
         })

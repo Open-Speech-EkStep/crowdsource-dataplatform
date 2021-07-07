@@ -14,13 +14,18 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 700;
 }
 
 body {
   font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   height: 100vh;
+}
+
+.font-family-Rowdies{
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 400 !important;
 }
 
 .logo-text:hover {
@@ -132,13 +137,10 @@ body {
   cursor: pointer;
 }
 
-.module-item.active {
-  background: rgba(0, 123, 255, 0.1);
-  border-bottom: 2px solid#007BFF;
-}
 
 .module-item.active > a {
-  color: #007BFF !important;
+  color: #fff !important;
+  opacity: 1 !important;
 }
 
 @media (min-width: 768px) and (max-width: 961px) { 
