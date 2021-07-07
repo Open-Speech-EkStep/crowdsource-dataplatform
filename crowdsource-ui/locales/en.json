@@ -327,6 +327,5 @@
 	"You are just <span id=\"sentense_away_count\"></span> recordings away from earning your <span id=\"next_badge_name\"></span> Bhasha Samarthak Badge.": "You are just <span id=\"sentense_away_count\"></span> recordings away from earning your <span id=\"next_badge_name\"></span> Bhasha Samarthak Badge.",
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> recordings to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge.": "Your next goal is to reach <span id=\"next_badge_count\"></span> recordings to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge.",
 	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings",
-	"Please don't use email or mobile number as user name": "Please don't use email or mobile number as user name",
-	"": ""
+	"Please don't use email or mobile number as user name": "Please don't use email or mobile number as user name"
 }
