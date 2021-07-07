@@ -1,24 +1,16 @@
-const { showLanguagePopup, redirectToLocalisedPage } = require('./locale');
+const { redirectToLocalisedPage } = require('./locale');
 const { onActiveNavbar, onChangeUser, showUserProfile,onOpenUserDropDown } = require('./header');
 const {whitelisting_email} = require('./env-api')
-const { drawMap, getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest, calculateTime, formatTime } = require('./utils')
+const {  getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
+const {  updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest, calculateTime, formatTime } = require('./utils')
 const {
-    setSpeakerDetails,
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick,
 } = require('./speakerDetails');
 
-const {
-    setBoloSpeakerDetails,
-    setBoloUserModalOnShown,
-    setBoloUserNameOnInputFocus,
-    setLetGoBtnOnClick
-} = require('./bolo_user_details');
 const { getContributedAndTopLanguage,hasUserRegistered } = require('./common');
-// const { hasUserRegistered } = require('../../../build/js/common/common');
 const {
     DEFAULT_CON_LANGUAGE,
     TOP_LANGUAGES_BY_HOURS,
@@ -118,21 +110,6 @@ const setLangNavBar = (targetedDiv, top_lang, $languageNavBar) => {
     }
 }
 
-const getDefaultLang = function () {
-    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    const $sayListenLanguage = $('#say-listen-language');
-
-    if (!contributionLanguage) {
-        const $homePage = document.getElementById('home-page');
-        const defaultLangId = $homePage.getAttribute('default-lang');
-        const targetedDiv = getDefaultTargetedDiv('id', defaultLangId, $sayListenLanguage);
-        const language = targetedDiv.getAttribute("value");
-        localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-        return language;
-    }
-    return contributionLanguage;
-}
-
 const setDefaultLang = function () {
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const $sayListenLanguage = $('#say-listen-language');
@@ -199,11 +176,7 @@ const setSayListenBackground = function () {
 
 
 function initializeBlock() {
-    const speakerDetailsKey = 'speakerDetails';
-    const age = document.getElementById('age');
-    const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
-    const $boloUserName = $('#bolo-username');
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
     setSayListenBackground();
@@ -287,7 +260,6 @@ function initializeBlock() {
 
     setUserModalOnShown($userName);
     $startRecordBtnTooltip.tooltip('disable');
-    // setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     onChangeUser('./home.html',MODULE.bolo.value);
@@ -297,10 +269,6 @@ function initializeBlock() {
         const localSpeakerDataParsed = JSON.parse(speakerDetails);
         showUserProfile(localSpeakerDataParsed.userName);
     }
-
-    // setBoloUserModalOnShown($boloUserName);
-    // setBoloSpeakerDetails(speakerDetailsKey, $boloUserName);
-    // setBoloUserNameOnInputFocus();
 
     const $say = $('#say');
     const $listen = $('#listen');
@@ -327,64 +295,9 @@ function initializeBlock() {
         $listen_p_2.addClass('d-none');
         $listen_container.removeClass('listen-active');
     });
-
     getStatsSummary();
 
 }
-
-
-const renderCoachMarks = function () {
-    const localString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-    const step1 = 'You can select the language in which you want to participate';
-    const step2 = 'You can change the language in which you want to read content';
-    const step3 = 'Click on the card to start contributing your voice';
-    const step4 = 'Click on the card to validate what others have spoken';
-    const tourSteps = [
-        {
-            element: '#contribution_lang_navbar',
-            title: '',
-            preventInteraction: true,
-            placement: "bottom",
-            content: localString[step1]
-        },
-        {
-            element: '#locale_language_dropdown',
-            title: '',
-            preventInteraction: true,
-            placement: "bottom",
-            content: localString[step2]
-        },
-        {
-            element: '#say',
-            title: '',
-            preventInteraction: true,
-            placement: "bottom",
-            content: localString[step3]
-        },
-        {
-            element: '#listen',
-            title: '',
-            preventInteraction: true,
-            placement: "bottom",
-            content: localString[step4]
-        }
-    ];
-
-    const homePageTour = new Tour({
-        steps: tourSteps,
-        framework: "bootstrap4",
-        backdrop: true,
-        localization: {
-            buttonTexts: {
-                nextButton: localString.Next,
-                prevButton: localString.Back,
-                endTourButton: localString.SKIP,
-            },
-        }
-    });
-
-    // homePageTour.start();
-};
 
 $(document).ready(function () {
     localStorage.setItem('module', 'bolo');
@@ -392,15 +305,9 @@ $(document).ready(function () {
     onActiveNavbar('bolo');
     getLocaleString().then(() => {
         initializeBlock();
-        // renderCoachMarks();
     }).catch(err => {
         initializeBlock();
     });
-    if (whitelisting_email==='true') {
-        document.getElementById("bolo-username").maxLength = 100;
-    } else {
-        document.getElementById("bolo-username").maxLength = 12;
-    }
 });
 
 $(window).on("orientationchange", function () {

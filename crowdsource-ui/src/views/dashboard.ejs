@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-12">
             <div class="row">
-                <%- include('common/buttons/back-btn/back-btn.ejs',{url:"./boloIndia/home.html"}) %>
+                <%- include('../../build/views/common/back-btn.ejs',{url:"./boloIndia/home.html"}) %>
             </div>
             <div class="row">
                 <div class="col-12 col-md-7 col-lg-6">
@@ -70,7 +70,7 @@
                 <div><span class="spinner"></span></div>
             </div>
             <div class="row text-center contribution-details d-none" id="contribution-details">
-                <%- include('common/contributionStats/contributionStats.ejs',{labels :['Languages','Speakers contributed','Duration recorded','Duration validated']})%>
+                <%- include('../../build/views/common/contributionStats.ejs',{labels :['Languages','Speakers contributed','Duration recorded','Duration validated']})%>
             </div>
         </div>
     </div>
@@ -145,7 +145,7 @@
     </div>
 </div>
 <button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
-<%- include('common/modals/speakerDetails/speakerDetails.ejs',{path:"./"}) %>
+<%- include('../../build/views/common/speakerDetails.ejs',{path:"./"}) %>
 <%- include modals/content-languages.ejs %>
 <%- include modals/say-listen-language.ejs%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

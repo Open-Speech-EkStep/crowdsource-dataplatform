@@ -2,15 +2,15 @@
 <html lang="en">
 
 <head>
-    <title>BhashaDaan: A crowdsourcing initiative for Indian languages (Beta)</title>
+    <title>Bhasha Daan: A crowdsourcing initiative for Indian languages (Beta)</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
-    <meta name="description" content="BhashaDaan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
-    <meta property="og:title" content="<%= __('BhashaDaan: A crowdsourcing initiative for Indian languages') %>">
+    <meta name="description" content="Bhasha Daan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta property="og:title" content="Bhasha Daan: A crowdsourcing initiative for Indian languages">
     <meta property="og:type" content="website">
-    <meta property="og:description" content="<%= __('I\'ve contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?') %>">
-    <meta property="og:site_name" content="BhashaDaan">
+    <meta property="og:description" content="I\'ve contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?">
+    <meta property="og:site_name" content="Bhasha Daan">
     <meta property="og:url" content="https://bhashini.gov.in/bhashadaan">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-B5X6CXDBNP"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-B5X6CXDBNP")</script>
@@ -156,17 +156,6 @@
     </div>
     <%- include('../common/viewAllDetailBtn.ejs',{DASHBOARD:'../dashboard.html'}); %>
 </div>
-
-<div class="modal fade" id="modal-chart-wrapper" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg w-75 mw-100 h-75 mx-auto">
-        <div class="modal-content border-primary border-2 h-100 p-lg-5 px-2 py-4">
-            <div class="text-right" aria-label="Close"><a href="#" aria-hidden="true" data-dismiss="modal">
-                    Hide details &lt;
-                </a></div>
-            <div id="modal-chart" class="h-100"></div>
-        </div>
-    </div>
-</div>
 <button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
 
 
@@ -174,46 +163,6 @@
 <%- include ../common/content-languages.ejs %>
 <%- include ../common/say-listen-language.ejs %>
 
-<div class="modal fade" id="boloUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content p-4 border-primary border-2">
-            <div class="margin-left-auto"><button class="close float-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
-            <div class="modal-header d-block border-0">
-                <h1 class="modal-title text-center">
-                    <%= __('User Details') %>
-                </h1>
-            </div>
-            <div class="modal-body px-6" id="bolo-user-details">
-                <p class="text-muted text-center">
-                    All fields are optional but you can enhance your contribution by providing non personal demographic details.
-                </p>
-                <div class="col-12 text-center text-primary" id="boloResetBtn" style="cursor:pointer">
-                    Not You? Change User
-                </div>
-                <div class="form-group mt-5"><label for="bolo-username" class="form-label">
-                        Enter Username
-                    </label> <input class="form-control" maxlength="12" id="bolo-username" data-toggle="tooltip" placeholder="Enter preferred username" title="Username cannot be more than 12 characters">
-                    <div class="text-danger mt-2 d-none" id="bolo-username-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px" height="18px">
-                            <path d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                        </svg> <span class="align-middle">
-                            Please don't use email or mobile number as user name
-                        </span></div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label mt-2">
-                        <%- __('By proceeding ahead you agree to the <a href="../terms-and-conditions.html" target="_blank"> Terms and Conditions</a>') %>
-                    </label>
-                </div>
-                <div class="row justify-content-center mt-3">
-                    <div class="col-12" data-toggle="tooltip" title="<%= __('Please validate any error message before proceeding')%>"><button type="button" id="bolo-proceed-box" class="btn btn-primary rounded-pill h6 shadow w-100 rounded p-3">
-                            Let's Go'
-                        </button></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <%- include('../common/feedback.ejs', {page:"Bolo India Home"}) %>
 <%- include('../common/footer.ejs',{path:"../"}) %>

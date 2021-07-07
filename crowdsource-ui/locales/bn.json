@@ -264,7 +264,7 @@
 	"Thank you for correcting!": "সংশোধন করার জন্য আপনাকে ধন্যবাদ!",
 	"You are just <span id=\"sentense_away_count\"></span> images away from earning your <span id=\"next_badge_name\"></span> Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "আপনি আপনার <span id=\"next_badge_name\"></span> ভাষা সমর্থক ব্যাজ অর্জন থেকে ঠিক <span id=\"sentense_away_count\"></span> চিত্র দূরে রয়েছেন। <a href=\"../badges.html\">অধিক জানক</a>",
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> images to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge. <a href=\"./badges.html\">Know more</a>": "আপনার পরবর্তী লক্ষ্য আপনার <span id=\"next_badge_name_1\"></span> ভাষা সমর্থক ব্যাজ অর্জনের জন্য <span id=\"next_badge_count\"></span> চিত্রে পৌঁছানো। <a href=\"./badges.html\">অধিক জানক</a>",
-	"You’ve earned a  <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "You’ve earned a  <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.",
+	"You’ve earned a  <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "আপনি <span id=\"current_badge_count\"></span> টি বাক্য বৈধ করে একটি <span id=\"current_badge_name_1\"></span> ভাষা সমর্থক ব্যাজ অর্জন করেছেন।",
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "আপনার পরবর্তী লক্ষ্য আপনার <span id=\"next_badge_name_1\"></span> ভাষা সমর্থক ব্যাজ অর্জনের জন্য <span id=\"next_badge_count\"></span> বাক্যে পৌঁছানো। <a href=\"../badges.html\">অধিক জানক</a>",
 	"You’ve earned a  <span id=\"current_badge_name_1\"></span>  Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> Images.": "আপনি <span id=\"current_badge_count\"></span> টি চিত্র বৈধ করে একটি <span id=\"current_badge_name_1\"></span> ভাষা সমর্থক ব্যাজ অর্জন করেছেন।",
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to earn your <span id=\"next_badge_name_1\"></span>  Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "আপনার পরবর্তী লক্ষ্য আপনার <span id=\"next_badge_name_1\"></span> ভাষা সমর্থক ব্যাজ অর্জনের জন্য <span id=\"next_badge_count\"></span> বাক্যে পৌঁছানো। <a href=\"../badges.html\">অধিক জানক</a>",
@@ -346,5 +346,6 @@
 	"English": "ইংরেজি",
 	"Back to Suno India Home": "শোনো ইন্ডিয়া হোম-এ ফিরে আসুন",
 	"Back to Likho India Home": "লেখো ইন্ডিয়া হোম-এ ফিরে আসুন",
-	"Back to Dekho India Home": "দেখো ইন্ডিয়া হোম-এ ফিরে আসুন"
+	"Back to Dekho India Home": "দেখো ইন্ডিয়া হোম-এ ফিরে আসুন",
+	"Bhasha Daan: A crowdsourcing initiative for Indian languages": "ভাষা দান: ভারতীয় ভাষাগুলির জন্য জনসমাগমের উদ্যোগ"
 }

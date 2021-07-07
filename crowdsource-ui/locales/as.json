@@ -264,12 +264,12 @@
 	"Thank you for correcting!": "সংশোধন কৰাৰ বাবে আপোনাক ধন্যবাদ!",
 	"You are just <span id=\"sentense_away_count\"></span> images away from earning your <span id=\"next_badge_name\"></span> Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "<span id=\"next_badge_name\"></span> ভাষা সমৰ্থক বেজ অৰ্জন কৰাৰ পৰা আপুনি কেৱল <span id=\"sentense_away_count\"></span>  খন ছৱিৰ দূৰত্বত আছে। <a href=\"../badges.html\">অধিক জানক</a>",
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> images to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge. <a href=\"./badges.html\">Know more</a>": "আপোনাৰ পৰৱৰ্তী লক্ষ্য হৈছে <span id=\"next_badge_count\"></span> ছবিত উপনীত হৈ আপোনাৰ <span id=\"next_badge_name_1\"></span> ভাষা সমৰ্থক বেজ অৰ্জন কৰা। <a href=\"./badges.html\">অধিক জানক</a>",
-	"You’ve earned a  <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "You’ve earned a  <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.",
+	"You’ve earned a  <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_count\"></span> টা বাক্য বৈধকৰণ কৰাৰ বাবে আপুনি <span id=\"current_badge_name_1\"></span> ভাষা সমৰ্থক বেজ অৰ্জন কৰিছে।",
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "আপোনাৰ পৰৱৰ্তী লক্ষ্য হৈছে <span id=\"next_badge_count\"></span> বাক্যত উপনীত হৈ আপোনাৰ <span id=\"next_badge_name_1\"></span> ভাষা সমৰ্থক বেজ অৰ্জন কৰা। <a href=\"../badges.html\">অধিক জানক</a>",
-	"You’ve earned a  <span id=\"current_badge_name_1\"></span>  Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> Images.": "You’ve earned a  <span id=\"current_badge_name_1\"></span>  Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> Images.",
+	"You’ve earned a  <span id=\"current_badge_name_1\"></span>  Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> Images.": "<span id=\"current_badge_count\"></span> খন লেবেল্ যুক্ত ছৱি বৈধকৰণ কৰাৰ বাবে আপুনি <span id=\"current_badge_name_1\"></span> ভাষা সমৰ্থক বেজ অৰ্জন কৰিছে।",
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> sentences to earn your <span id=\"next_badge_name_1\"></span>  Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "আপোনাৰ পৰৱৰ্তী লক্ষ্য হৈছে <span id=\"next_badge_count\"></span> বাক্যত উপনীত হৈ আপোনাৰ <span id=\"next_badge_name_1\"></span> ভাষা সমৰ্থক বেজ অৰ্জন কৰা। <a href=\"../badges.html\">অধিক জানক</a>",
 	"recording(s) validated": "ৰেকৰ্ডিংৰ বৈধকৰণ কৰা হৈছে",
-	"You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> recordings": "You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> recordings",
+	"You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> recordings": "<span id=\"current_badge_count\"></span> টা ৰেকৰ্ডিং বৈধকৰণ কৰাৰ বাবে আপুনি <span id=\"current_badge_name_1\"></span> ভাষা সমৰ্থক বেজ অৰ্জন কৰিছে।",
 	"image label(s) contributed": "ছৱি লেবেলযুক্ত কৰি অৱদান দিছে",
 	"image label(s) validated": "খন লেবেলযুক্ত ছৱিৰ বৈধকৰণ কৰা হৈছে",
 	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_count\"></span> টা বাক্যৰ অৱদান কৰাৰ বাবে আপুনি <span id=\"current_badge_name_1\"></span> ভাষা সমৰ্থক বেজ অৰ্জন কৰিছে।",
@@ -298,7 +298,7 @@
 	"No validation data available for selected language": "নিৰ্বাচিত ভাষাৰ বাবে বৈধকৰণ হোৱা তথ্য নাই",
 	"Beta": "Beta",
 	"You are just <span id=\"sentense_away_count\"></span> sentences away from earning your <span id=\"next_badge_name\"></span> Bhasha Samarthak Badge. <a href=\"../badges.html\">Know more</a>": "<span id=\"next_badge_name\"></span> ভাষা সমৰ্থক বেজ অৰ্জন কৰাৰ পৰা আপুনি কেৱল <span id=\"sentense_away_count\"></span>  টা বাক্যৰ দূৰত্বত আছে। <a href=\"../badges.html\">অধিক জানক</a>",
-	"You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.",
+	"You’ve earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by validating <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_count\"></span> টা বাক্য বৈধকৰণ কৰাৰ বাবে আপুনি <span id=\"current_badge_name_1\"></span> ভাষা সমৰ্থক বেজ অৰ্জন কৰিছে।",
 	"Towards digital empowerment for all...": "সকলোৰে বাবে ডিজিটেল সশক্তিকৰণৰ দিশত...",
 	"Remove language barriers with BhashaDaan": "ভাষাৰ বাধাবোৰ ভাষাদানৰ সৈতে আঁতৰাওক",
 	"Your selected language": "আপোনাৰ বাছনি কৰা ভাষা",
@@ -346,5 +346,6 @@
 	"English": "ইংৰাজী",
 	"Back to Suno India Home": "শুনো ইণ্ডিয়াৰ মূখ্য পৃষ্ঠালৈ ঘূৰি যাওঁক",
 	"Back to Likho India Home": "লিখো ইণ্ডিয়াৰ মূখ্য পৃষ্ঠালৈ ঘূৰি যাওঁক",
-	"Back to Dekho India Home": "দেখো ইণ্ডিয়াৰ মূখ্য পৃষ্ঠালৈ ঘূৰি যাওঁক"
+	"Back to Dekho India Home": "দেখো ইণ্ডিয়াৰ মূখ্য পৃষ্ঠালৈ ঘূৰি যাওঁক",
+	"Bhasha Daan: A crowdsourcing initiative for Indian languages": "ভাষা দান: ভাৰতীয় ভাষাৰ বাবে এক বহুব্যক্তিকেন্দ্ৰিক উৎসৰ পদক্ষেপ"
 }

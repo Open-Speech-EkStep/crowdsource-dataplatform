@@ -24,7 +24,7 @@
     "Telugu": "ತೆಲುಗು",
     "URDU": "ಉರ್ದು",
     "social sharing text without rank": "https://bhashini.gov.in/bhashadaan  ನಲ್ಲಿ ಭಾರತಕ್ಕಾಗಿ ಮುಕ್ತ ಭಾಷಾ ಭಂಡಾರವನ್ನು ನಿರ್ಮಿಸಲು ನಾನು ಕೊಡುಗೆಯನ್ನು ನೀಡಿದ್ದೇನೆ. ನೀವು ಮತ್ತು ನಾನು ನಮ್ಮ ಧ್ವನಿಗಳನ್ನು ದಾನ ಮಾಡುವ ಮೂಲಕ ಯಂತ್ರಗಳಿಗೆ ನಮ್ಮ ಭಾಷೆಯನ್ನು ಕಲಿಯಲು ಸಹಾಯ ಮಾಡುವಲ್ಲಿ   ಒಂದು ವ್ಯತ್ಯಾಸವನ್ನು ಮಾಡಬಹುದು. ನಿಮ್ಮ ಚಿಕ್ಕ ಕೊಡುಗೆಯನ್ನು ನೀಡಿ ಮತ್ತು ಭಾಷೆಯನ್ನು ಸಮೃದ್ಧಗೊಳಿಸುವಿರಾ?",
-    "social sharing text with rank": "I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language. Our %language language ranks %rank on Bolo India. Do your bit and empower the language?",
+    "social sharing text with rank": "I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language. Our <x> language ranks %rank on Bolo India. Do your bit and empower the language?",
     "Speech Recognition Models": "Speech Recognition Models",
     "About Us": "ನಮ್ಮ ಬಗ್ಗೆ",
     "Select the language for voluntary contribution": "ಸ್ವಯಂಪ್ರೇರಿತ ಕೊಡುಗೆಗಾಗಿ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
