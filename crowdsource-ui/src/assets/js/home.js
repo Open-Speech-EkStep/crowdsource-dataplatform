@@ -102,14 +102,12 @@ const getStatsSummary = function () {
 
 function initializeBlock() {
     const $userName = $('#username');
-    let sentenceLanguage = DEFAULT_CON_LANGUAGE;
-
     let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if(!top_lang){
         localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
         top_lang = DEFAULT_CON_LANGUAGE;
     }
-    updateLocaleLanguagesDropdown(sentenceLanguage);
+    updateLocaleLanguagesDropdown(top_lang);
 
     addToLanguage('from-language', ALL_LANGUAGES);
     let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -120,6 +118,7 @@ function initializeBlock() {
 
     $('#from-language').on('change', (e) => {
         fromLanguage = e.target.value;
+        top_lang = fromLanguage;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
         localStorage.setItem("i18n", "en");
         updateHrsForSayAndListen(fromLanguage);
@@ -128,7 +127,6 @@ function initializeBlock() {
     });
 
     $('#start_recording').on('click', () => {
-        sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
         localStorage.setItem("selectedType", "contribute");
         if(!hasUserRegistered()){
@@ -140,7 +138,6 @@ function initializeBlock() {
     });
 
     $('#start_validating').on('click', () => {
-        sentenceLanguage = top_lang;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
         localStorage.setItem("selectedType", "validate");
         if(!hasUserRegistered()){
