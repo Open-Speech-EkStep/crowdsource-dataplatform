@@ -70,7 +70,7 @@
                 <div><span class="spinner"></span></div>
             </div>
             <div class="row text-center contribution-details d-none" id="contribution-details">
-                <%- include('../../build/views/common/contributionStats.ejs',{labels :['Languages','Speakers contributed','Duration recorded','Duration validated']})%>
+                <%- include('common/contributionStats/contributionStats.ejs',{labels :['Languages','Speakers contributed','Duration recorded','Duration validated']})%>
             </div>
         </div>
     </div>
@@ -145,7 +145,7 @@
     </div>
 </div>
 <button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
-<%- include('../../build/views/common/speakerDetails.ejs',{path:"./"}) %>
+<%- include('common/modals/speakerDetails/speakerDetails.ejs',{path:"./"}) %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <%- include('common/feedback/feedback.ejs', {page:"Dashboard"}) %>
 <%- include('common/footer.ejs',{path:"./"}) %>

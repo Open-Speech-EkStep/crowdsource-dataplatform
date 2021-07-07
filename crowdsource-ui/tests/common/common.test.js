@@ -6,8 +6,7 @@ const {showFucntionalCards, hasUserRegistered} = require('../../build/js/common/
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../../build/views/common/cards.ejs`, 'UTF-8')+
-  readFileSync(`${__dirname}/../../build/views/common/languageNavBar.ejs`, 'UTF-8')+
-  readFileSync(`${__dirname}/../../build/views/common/say-listen-language.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../../build/views/common/languageNavBar.ejs`, 'UTF-8')
 );
 
 // const showFucntionalCards = (type, from, to) => {
