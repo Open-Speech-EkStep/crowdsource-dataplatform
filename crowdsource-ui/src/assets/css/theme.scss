@@ -25,6 +25,8 @@ $bg-light-color: #eff5ff;
 $bg-header-primary: #142745;
 $text-white: #fff;
 $text-secondary: #d8d8d8;
+$text-yellow:  #ffbf00;
+$text-dark: #000;
 
 
 // Color Shades
@@ -176,6 +178,45 @@ $primary-color-shade4: tint($primary-color, 60%);
           color: $primary-color;
         }
       }
+    }
+  }
+}
+
+.module-item {
+	&.active {
+    background: rgba(37, 70, 105, 1) !important;
+    border-bottom: 2px solid#4DBAF7 !important;
+		& > a {
+			span {
+        &:nth-child(1) {
+          color: $text-white !important;
+				}
+				&:nth-child(2) {
+          color: $text-yellow !important;
+				}
+			}
+		}
+	}
+}
+
+.light {
+  span {
+    &:nth-child(1) {
+      color: $text-dark !important;
+    }
+    &:nth-child(2) {
+      color: $text-yellow !important;
+    }
+  }
+}
+
+.dark {
+  span {
+    &:nth-child(1) {
+      color: $text-white !important;
+    }
+    &:nth-child(2) {
+      color: $text-yellow !important;
     }
   }
 }

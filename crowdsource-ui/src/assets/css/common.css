@@ -137,14 +137,6 @@ body {
   cursor: pointer;
 }
 
-.module-item.active {
-  background: rgba(37, 70, 105, 1) !important;
-  border-bottom: 2px solid#4DBAF7 !important;
-}
-
-.module-item.active > a span:nth-child(2) {
-  color: #ffbf00 !important;
-}
 
 .module-item.active > a {
   color: #fff !important;
