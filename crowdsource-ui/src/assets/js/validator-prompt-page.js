@@ -472,7 +472,7 @@ $(document).ready(() => {
     localSentencesParsed.userName === localSpeakerDataParsed.userName
     &&
     localSentencesParsed.language === localSpeakerDataParsed.language;
-  if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === language) {
+  if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language == language) {
     setFooterPosition();
     boloIndiaValidator.sentences = localSentencesParsed.sentences;
     initializeComponent();
@@ -491,22 +491,24 @@ $(document).ready(() => {
           return data.json();
         }
       }).then((sentenceData) => {
-      if (sentenceData.data.length === 0) {
+
+        boloIndiaValidator.sentences = sentenceData.data ? sentenceData.data : [];
+        localStorage.setItem(boloValidatorCountKey, boloIndiaValidator.sentences.length);
+        localStorage.setItem(
+          sentencesKey,
+          JSON.stringify({
+              userName: localSpeakerDataParsed.userName,
+              sentences: boloIndiaValidator.sentences,
+              language: localStorage.getItem(CONTRIBUTION_LANGUAGE),
+          })
+        );
+      if (boloIndiaValidator.sentences.length === 0) {
         showNoSentencesMessage();
         return;
       }
       // validationSentences = sentenceData.data
       // const sentence = validationSentences[currentIndex];
-      boloIndiaValidator.sentences = sentenceData.data;
-      localStorage.setItem(boloValidatorCountKey, boloIndiaValidator.sentences.length);
-      localStorage.setItem(
-        sentencesKey,
-        JSON.stringify({
-          userName: localSpeakerDataParsed.userName,
-          sentences: sentenceData.data,
-          language: localStorage.getItem(CONTRIBUTION_LANGUAGE),
-        })
-      );
+
       initializeComponent();
     }).catch((err) => {
         console.log(err);

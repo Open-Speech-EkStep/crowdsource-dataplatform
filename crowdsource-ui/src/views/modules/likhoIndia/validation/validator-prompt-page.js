@@ -466,22 +466,23 @@ const executeOnLoad = function () {
           return data.json();
         }
       }).then(result => {
-      if (result.data.length == 0) {
-        showNoSentencesMessage();
-        return;
-      }
-      setFooterPosition();
-      likhoIndiaValidator.sentences = result.data;
+      likhoIndiaValidator.sentences = result.data ? result.data : [];
       localStorage.setItem(likhoValidatorCountKey, likhoIndiaValidator.sentences.length);
       localStorage.setItem(
         sentencesKey,
         JSON.stringify({
           userName: localSpeakerDataParsed.userName,
-          sentences: result.data,
+          sentences: likhoIndiaValidator.sentences,
           language: fromLanguage,
           toLanguage: toLanguage
         })
       );
+      if (likhoIndiaValidator.sentences.length == 0) {
+        showNoSentencesMessage();
+        return;
+      }
+      setFooterPosition();
+
       initializeComponent();
     }).catch((err) => {
       console.log(err);

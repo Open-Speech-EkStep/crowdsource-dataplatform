@@ -2,7 +2,7 @@ const { calculateTime, formatTime } = require('./utils');
 const chartReg = {};
 
 const drawTopLanguageChart = (chartData, type, dataType) => {
-  const chartColors = ['#b7d0fe', '#b7d0fe', '#b7d0fe', '#007bff'];
+  const chartColors = ['#F7CC56', '#F7CC56', '#F7CC56', '#EF8537'];
   am4core.ready(function () {
     const chart = am4core.create('top-language-chart', am4charts.XYChart);
 
@@ -37,9 +37,9 @@ const drawTopLanguageChart = (chartData, type, dataType) => {
     valueAxis.renderer.grid.template.strokeDasharray = "3,3";
     valueAxis.renderer.labels.template.fontSize = 12;
     if (dataType != "speaker") {
-      valueAxis.title.text = type == "suno" || type == "bolo" ? "Contribution (in hours)" : type == "dekho" ? "Contribution (no. of images)" : 'Contribution (no. of translations)';
+      valueAxis.title.text = type == "suno" || type == "bolo" ? "Contributions (in hours)" : type == "dekho" ? "Contributions (No of images)" : 'Contributions (No of translations)';
     } else {
-      valueAxis.title.text = type == "bolo" ? "Contribution (no. of speakers)" : "";
+      valueAxis.title.text = type == "bolo" ? "Contributions (No of speakers)" : "";
     }
 
     valueAxis.title.fontSize = 12;

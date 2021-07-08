@@ -503,22 +503,23 @@ const executeOnLoad = function () {
         return data.json();
       }
     }).then(result => {
-      if(result.data.length === 0){
-        showNoSentencesMessage();
-        return;
-      }
-      setFooterPosition();
-      dekhoIndiaValidator.sentences = result.data;
+      dekhoIndiaValidator.sentences = result.data ? result.data : [];
       localStorage.setItem(dekhoValidatorCountKey, dekhoIndiaValidator.sentences.length);
       localStorage.setItem(
         sentencesKey,
         JSON.stringify({
           userName: localSpeakerDataParsed.userName,
-          sentences: result.data,
+          sentences: dekhoIndiaValidator.sentences,
           language: language,
           toLanguage: ''
         })
       );
+      if(dekhoIndiaValidator.sentences.length === 0){
+        showNoSentencesMessage();
+        return;
+      }
+      setFooterPosition();
+
       initializeComponent();
     }).catch((err) => {
       console.log(err);

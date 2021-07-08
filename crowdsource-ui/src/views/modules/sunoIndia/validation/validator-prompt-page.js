@@ -674,21 +674,22 @@ const executeOnLoad = function () {
         return data.json();
       }
     }).then((result) => {
-      if (result.data.length === 0) {
-        showNoSentencesMessage();
-        return;
-      }
-      setFooterPosition();
-      sunoIndiaValidator.sentences = result.data;
+      sunoIndiaValidator.sentences = result.data ? result.data : [];
       localStorage.setItem(sunoValidatorCountKey, sunoIndiaValidator.sentences.length);
       localStorage.setItem(
         sentencesKey,
         JSON.stringify({
           userName: localSpeakerDataParsed.userName,
-          sentences: result.data,
+          sentences: sunoIndiaValidator.sentences,
           language: localSpeakerDataParsed.language,
         })
       );
+      if (sunoIndiaValidator.sentences.length === 0) {
+        showNoSentencesMessage();
+        return;
+      }
+      setFooterPosition();
+
 
       initializeComponent();
     }).catch((err) => {

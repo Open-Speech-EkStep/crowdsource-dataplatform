@@ -2,7 +2,7 @@
 Tags: component
 
 * Open Website
-* Select "Dekho India" from header
+* Select "dekho_india_tab" from header
 
 ## Check Dekho India Home Page
 * Validate Dekho India content

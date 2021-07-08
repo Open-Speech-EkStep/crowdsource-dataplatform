@@ -282,7 +282,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel) {
   });
 }
 
-var chartReg = {};
+let chartReg = {};
 function showByHoursChart() {
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
   const chartData = topLanguagesByHoursData ? JSON.parse(topLanguagesByHoursData).reverse() : [];
