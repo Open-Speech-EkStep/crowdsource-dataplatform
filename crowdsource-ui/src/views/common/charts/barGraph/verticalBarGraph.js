@@ -37,7 +37,7 @@ const drawGenderChart = (chartData) => {
     valueAxis.renderer.labels.template.fill = '#000';
     valueAxis.renderer.grid.template.strokeDasharray = "3,3";
     valueAxis.renderer.labels.template.fontSize = 12;
-    valueAxis.title.text = 'Number of hours';
+    valueAxis.title.text = 'Contribution (in hours)';
     valueAxis.title.fontSize = 12;
     // Create series
     const series = chart.series.push(new am4charts.ColumnSeries());

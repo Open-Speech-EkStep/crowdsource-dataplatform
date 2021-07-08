@@ -2,7 +2,7 @@
 Tags: component
 
 * Open Website
-* Select "Bolo India" from header
+* Select "bolo_india_tab" from header
 
 ## Validate the Speaker Details pop-up
 * Navigate to "Contribute" button and click "Contribute" button

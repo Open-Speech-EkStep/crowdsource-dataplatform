@@ -2,7 +2,7 @@
 Tags: component
 
 * Open Website
-* Select "Likho India" from header
+* Select "likho_india_tab" from header
 
 ## Check Likho India Home Page
 * Validate Likho India content

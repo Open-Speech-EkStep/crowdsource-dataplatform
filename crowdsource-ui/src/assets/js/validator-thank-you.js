@@ -60,7 +60,7 @@ const getFormattedTime = (totalSeconds) => {
 
 const updateShareContent = function (language, rank) {
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-  const boloIndiaTitle = "BhashaDaan: A crowdsourcing initiative for Indian languages";
+  const boloIndiaTitle = "Bhasha Daan: A crowdsourcing initiative for Indian languages";
   let localeText = "";
   if (rank === 0) {
     localeText = localeStrings["social sharing text without rank"];

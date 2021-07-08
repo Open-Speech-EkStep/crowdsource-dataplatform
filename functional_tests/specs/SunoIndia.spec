@@ -2,7 +2,7 @@
 Tags: component
 
 * Open Website
-* Select "Suno India" from header
+* Select "suno_india_tab" from header
 
 ## Check Home Page
 * Validate Suno India content

@@ -2,20 +2,20 @@
 <html lang="en">
 
 <head>
-    <title>BhashaDaan: A crowdsourcing initiative for Indian languages (Beta)</title>
+    <title>Bhasha Daan: A crowdsourcing initiative for Indian languages (Beta)</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
-    <meta name="description" content="BhashaDaan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
-    <meta property="og:title" content="<%= __('BhashaDaan: A crowdsourcing initiative for Indian languages') %>">
+    <meta name="description" content="Bhasha Daan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta property="og:title" content="Bhasha Daan: A crowdsourcing initiative for Indian languages">
     <meta property="og:type" content="website">
-    <meta property="og:description" content="<%= __('I\'ve contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?') %>">
-    <meta property="og:site_name" content="BhashaDaan">
+    <meta property="og:description" content="I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?">
+    <meta property="og:site_name" content="Bhasha Daan">
     <meta property="og:url" content="https://bhashini.gov.in/bhashadaan">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
-    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap">
-    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Rowdies:300,400,700,900&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css2?family=Rowdies&display=swap">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://vakyansh-json-data.s3.ap-south-1.amazonaws.com/bootstrap-tourist.css">
@@ -25,21 +25,23 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body>
+<body class="bg-secondary">
 <%- include('../common/header.ejs',{home:"../home.html", bolo:"../boloIndia/home.html", suno:"./home.html",likho:"../likhoIndia/home.html",dekho:"../dekhoIndia/home.html",path:"../"}); %>
-<div class="container-fluid supreme-container">
+<div class="container-fluid supreme-container bg-body-primary">
     <div class="row">
         <%- include('../common/moduleIntro.ejs',{name:'Suno',intro:'Enrich your language by transcribing audio into text',img:"SunoIndiaLogo.svg"}); %>
     </div>
-    <div class="row">
         <%- include ../common/languageNavBar.ejs %>
     </div>
     <div class="m-auto row justify-content-center mt-lg-4 mx-lg-5">
         <%- include('../common/cards.ejs',{left:{h1:__('Transcribe'),h2:__('Type what you hear'),"p1":"",img:"/img/listen2.svg"},right:{h1:__('Validate'),h2:__('Validate text as per the audio'),"p1":"",img:"/img/validate.svg"}}); %>
     </div>
+</div>
+<div class="mx-5" style="background:#43c0d7;height:8px;border-radius:0 0 32px 32px"></div>
+<div class="container-fluid supreme-container bg-secondary">
     <div class="row" id="contribution_stats">
         <div class="col-12 col-md-12 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
-            <h2 class="font-wt-900 site-blue lh-5">
+            <h2 class="font-wt-900 site-blue lh-5 font-family-Rowdies">
                 <%= __('Contributions made to Suno India') %>
             </h2>
             <div class="row mt-5" id="speaker-data">
@@ -50,14 +52,15 @@
                     <div class="row text-center contribution-details" id="contribution-details">
                         <%- include('../common/contributionStats.ejs',{labels :[__('Languages'),__('People participated'),__('Duration transcribed'),__('Duration validated')]}) %>
                     </div>
+                    <%- include ../common/horizontal_tri_color_line.ejs %>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row mb-5 lazy">
+    <div class="row pb-5 lazy">
         <div class="col-12 col-md-12 col-lg-11 p-5 ml-lg-auto">
             <div id="bar_charts_container">
-                <h4 class="h4 mb-4">
+                <h4 class="h4 mb-4 font-family-Rowdies">
                     <%= __('Your language and top 3 most contributed languages') %>
                 </h4>
                 <div class="d-flex mb-3">
@@ -69,8 +72,8 @@
                     <div><span class="spinner"></span></div>
                 </div>
                 <div class="row m-0">
-                    <div class="col-lg-6 col-md-6 col-12 pr-lg-3 pr-md-3 p-0">
-                <%- include ../common/verticalGraph.ejs %>
+                    <div class="col-lg-8 col-md-8 col-12 p-4 bg-white">
+                <%- include('../common/verticalGraph.ejs',{text:"Total sentences"}) %>
                 </div>
                 </div>
             </div>
@@ -81,8 +84,6 @@
 
 <button data-toggle="modal" data-target="#content-language" class="d-none" id="toggle-content-language"></button>
 <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
-<%- include ../common/content-languages.ejs %>
-<%- include ../common/say-listen-language.ejs %>
 <%- include('../common/feedback.ejs', {page:"Suno India Home"}) %>
 <%- include('../common/footer.ejs',{path:"../"}) %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
