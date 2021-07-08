@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<%- include('common/header/headerWithoutNavBar.ejs',{path:"./",MODULE:"Bolo", PAGE_TITLE:"Validate",img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
+<%- include('common/header/headerWithoutNavBar.ejs',{path:"./",MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center pt-5 pt-lg-0 pt-md-0">
         <div class="row position-absolute top-back-btn" style="top:80px;left:35px">
@@ -75,7 +75,7 @@
                 <h4 class="mb-3 mt-5 mt-lg-0"><%- __('You are enriching your language') %></h4>
             </div>
             <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('recording(s) validated') %></p>
-            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> recordings away from earning your <span id="next_badge_name"></span>  Bhasha Samarthak Badge. <a href="badges.html">Know more</a>') %></p>
+            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> recordings away from earning your <span id="next_badge_name"></span> Bhasha Samarthak Badge.') %> <a href="badges.html"><%= __('Know More') %></a></p>
             <div class="row d-none" id="milestone_text">
                 <div class="col-12 col-lg-5 col-md-5 mt-lg-5 justify-content-between">
                     <div>
@@ -91,7 +91,7 @@
                 <div class="col-12 col-lg-7 col-md-7 msg-box mt-5">
                     <h4 class="mb-3 mt-lg-5"><%- __('You’ve earned your <span id="current_badge_name"></span> Bhasha Samarthak Badge') %></h4>
                     <p><span id="user-contribution" class="text-primary"></span> <%- __('You’ve earned a <span id="current_badge_name_1"></span> Bhasha Samarthak Badge by validating <span id="current_badge_count"></span> recordings') %></p>
-                    <p class="mt-lg-5" id="next-goal"><%- __('Your next goal is to reach <span id="next_badge_count"></span> recordings to earn your <span id="next_badge_name_1"></span>  Bhasha Samarthak Badge. <a href="badges.html">Know more</a>') %></p>
+                    <p class="mt-lg-5" id="next-goal"><%- __('Your next goal is to reach <span id="next_badge_count"></span> recordings to earn your <span id="next_badge_name_1"></span> Bhasha Samarthak Badge.') %> <a href="badges.html"><%= __('Know More') %></a></p>
                 </div>
             </div>
             <%- include common/sharableLinks/sharableLink.ejs %>
@@ -113,7 +113,7 @@
     </div>
     <%- include('common/feedback/feedback.ejs', {page: "Validation Thank You Page"}) %>
     <div class="row justify-content-center mt-5">
-        <%- include('common/languageGoal.ejs', {ButtonText:"Validate More",url:"./validator-page.html",TEXT:"language",TEXT2:"hrs"})%>
+        <%- include('common/languageGoal.ejs', {ButtonText:__('Validate More'),url:"./validator-page.html",TEXT:"language",TEXT2:"hrs"})%>
     </div>
 </div>
 <%- include('common/modals/speakerDetails/speakerDetails.ejs',{path:"./"}) %>

@@ -33,7 +33,7 @@
     </div>
         <%- include ../common/languageNavBar.ejs %>
     <div class="m-auto row justify-content-center mt-lg-4 mx-lg-5 pb-5">
-        <%- include('../common/cards.ejs',{left:{h1:"Transcribe",h2:"Type what you hear","p1":"",img:"/img/listen2.svg"},right:{h1:"Validate",h2:"Validate text as per the audio","p1":"",img:"/img/validate.svg"}}); %>
+        <%- include('../common/cards.ejs',{left:{h1:__('Transcribe'),h2:__('Type what you hear'),"p1":"",img:"/img/listen2.svg"},right:{h1:__('Validate'),h2:__('Validate text as per the audio'),"p1":"",img:"/img/validate.svg"}}); %>
     </div>
 </div>
 <div class="mx-5" style="background:#43c0d7;height:8px;border-radius:0 0 32px 32px"></div>
@@ -48,8 +48,8 @@
                     <div class="row justify-content-center" id="loader1">
                         <div><span class="spinner"></span></div>
                     </div>
-                    <div class="row text-center contribution-details bg-white" id="contribution-details">
-                        <%- include('../common/contributionStats.ejs',{labels :['Languages','People participated','Duration transcribed','Duration validated']}) %>
+                    <div class="row text-center contribution-details" id="contribution-details">
+                        <%- include('../common/contributionStats.ejs',{labels :[__('Languages'),__('People participated'),__('Duration transcribed'),__('Duration validated')]}) %>
                     </div>
                     <%- include ../common/horizontal_tri_color_line.ejs %>
                 </div>

@@ -15,12 +15,12 @@
     <style>.btn.focus,.btn:focus{outline:0;box-shadow:0 0}</style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body> <%- include('common/header/headerWithoutNavBar.ejs',{path:"./boloIndia/home.html", MODULE:"Bolo", PAGE_TITLE:"Speak",img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
+<body> <%- include('common/header/headerWithoutNavBar.ejs',{path:"./boloIndia/home.html", MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
 <div id="loader" class="overlay__content"><span class="spinner"></span></div>
 <div id="page-content" class="d-none">
     <div id="content-wrapper" class="container-fluid d-flex flex-column">
         <div class="row m-0 px-4">
-            <%- include('common/breadcrumb/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:"Speak",img:"BoloIndiaLogo.svg", homePath:"./boloIndia/home.html"}) %>
+            <%- include('common/breadcrumb/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg", homePath:"./boloIndia/home.html"}) %>
         </div>
         <%- include modals/recording-instructions.ejs %>
         <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">

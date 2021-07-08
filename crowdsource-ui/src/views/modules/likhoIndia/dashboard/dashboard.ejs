@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho", PAGE_TITLE:"Dashboard",img:"LikhoIndiaLogo.svg",homePath:"./home.html"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho", PAGE_TITLE:__('Dashboard'),img:"LikhoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div class="container container-fluid supreme-container">
     <div class="row">
         <div class="col-12">
@@ -69,7 +69,7 @@
                 <div><span class="spinner"></span></div>
             </div>
             <div class="row text-center contribution-details d-none" id="contribution-details">
-                <%- include('../common/contributionStats.ejs',{labels :['Language pairs','People participated','Translations done','Translations validated']})%>
+                <%- include('../common/contributionStats.ejs',{labels :[__('Language pairs'),__('People participated'),__('Translations done'),__('Translations validated')]})%>
             </div>
         </div>
     </div>

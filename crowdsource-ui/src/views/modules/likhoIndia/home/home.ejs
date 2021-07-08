@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-0">
                                 <div class="row m-0">
-                                    <label class="col-4 mt-2 from-label text-white"><%= __('TO ') %>:</label>
+                                    <label class="col-4 mt-2 from-label text-white"><%= __('TO') %> :</label>
                                     <select class="col-8 btn dropdown-toggle h6 w-90 rounded text-white" id="to-language" style="height:40px;padding:0;padding:0 10px;border-color:#959595;color:#959595">
                                     </select>
                                 </div>
@@ -64,7 +64,7 @@
         </div>
     </div>
     <div class="m-auto row justify-content-center mt-lg-4 mx-lg-5 pb-5">
-        <%- include('../common/cards.ejs',{left:{h1:"Translate",h2:"Translate and type the text","p1":"",img:"/img/translate.svg"},right:{h1:"Validate",h2:"Validate the translation contributed by others","p1":"",img:"/img/validate.svg"}}); %>
+        <%- include('../common/cards.ejs',{left:{h1:__('Translate'),h2:__('Translate and type the text'),"p1":"",img:"/img/translate.svg"},right:{h1:__('Validate'),h2:__('Validate the translation contributed by others'),"p1":"",img:"/img/validate.svg"}}); %>
     </div>
 </div>
 <div class="mx-5" style="background:#43c0d7;height:8px;border-radius:0 0 32px 32px"></div>
@@ -79,8 +79,8 @@
                     <div class="row justify-content-center" id="loader1">
                         <div><span class="spinner"></span></div>
                     </div>
-                    <div class="row text-center contribution-details bg-white" id="contribution-details">
-                        <%- include('../common/contributionStats.ejs',{labels :['Language pairs','People participated','Translations done','Translations validated']}) %>
+                    <div class="row text-center contribution-details" id="contribution-details">
+                        <%- include('../common/contributionStats.ejs',{labels :[__('Language pairs'),__('People participated'),__('Translations done'),__('Translations validated')]}) %>
                     </div>
                     <%- include ../common/horizontal_tri_color_line.ejs %>
                 </div>

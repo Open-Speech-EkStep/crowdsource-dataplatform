@@ -21,12 +21,12 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho", PAGE_TITLE:"Validate",img:"LikhoIndiaLogo.svg",homePath:"./home.html"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho", PAGE_TITLE:__('Validate'),img:"LikhoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/extensionBar.ejs %>
-            <%- include('../common/breadcrumb.ejs', {MODULE:"Likho", PAGE_TITLE:"Validate",img:"LikhoIndiaLogo.svg", homePath:"./home.html"}) %>
+            <%- include('../common/breadcrumb.ejs', {MODULE:"Likho", PAGE_TITLE:__('Validate'),img:"LikhoIndiaLogo.svg", homePath:"./home.html"}) %>
             <div id="btn-nav" class="modal-footer py-3 px-0 position-relative">
                 <div class="row position-absolute top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
@@ -36,16 +36,16 @@
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center" id="mic-report-row">
                 <%- include ../common/speakerTesting.ejs %>
             </div>
-            <%- include('../common/assistiveText.ejs',{msg:"Is the translation correct?"}) %>
+            <%- include('../common/assistiveText.ejs',{msg:__('Is the translation correct?')}) %>
             <div class="row m-0 justify-content-center mb-2 mb-md-5 mb-lg-0 mt-5" id="translation-row">
                 <div class="col-lg-4 col-md-5 col-12 original-text">
-                    <label id="from-label"><%- __('HINDI') %></label>
+                    <label id="from-label"><%- __('Hindi') %></label>
                     <div id="original-text">
 
                     </div>
                 </div>
                 <div class="form-group col-lg-4 col-md-5 col-12 m-0 edit-translation-text" style="box-shadow:0 0;border:1px solid #bfbfbf;pointer-events:none">
-                    <label id="to-label"><%- __('ENGLISH') %></label>
+                    <label id="to-label"><%- __('English') %></label>
                     <div class="arrow-right"></div>
                     <textarea class="form-control" id="translate-text" rows="3" style="resize:none"></textarea>
                 </div>
@@ -146,7 +146,7 @@
         <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
         <%- include('../common/sourceInfo.ejs') %>
         <%- include('../common/feedback.ejs', {page: "Validate"}) %>
-        <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the sentence", reportThankYou: "Your feedback helps us keep Likho India relevant, we appreciate you taking time to leave the feedback.", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
+        <%- include('../common/report.ejs',{reportPara: __('Help us understand what’s wrong with the sentence'), reportThankYou: __('Your feedback helps us keep Likho India relevant, we appreciate you taking time to leave the feedback.'), "REPORT":[{h1:__('Offensive'),p1:__('Hateful / Discriminatory / Vulgar language, drugs promotion etc.')}]}); %>
         <%- include ../common/errorModal.ejs %>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

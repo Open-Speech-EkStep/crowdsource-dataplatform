@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:"Transcribe",img:"SunoIndiaLogo.svg",homePath:"./home.html"}); %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:__('Transcribe'),img:"SunoIndiaLogo.svg",homePath:"./home.html"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center pt-5 pt-lg-0 pt-md-0">
         <div class="row position-absolute top-back-btn">
@@ -77,17 +77,17 @@
                 <h4 class="mb-3 mt-5 mt-lg-0"><%- __('You are enriching your language') %></h4>
             </div>
             <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('sentence(s) contributed') %></p>
-            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Bhasha Samarthak Badge. <a href="../badges.html">Know more</a>') %></p>
+            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> sentences away from earning your <span id="next_badge_name"></span> Bhasha Samarthak Badge.') %> <a href="../badges.html"><%= __('Know More') %></a></p>
             <%- include('../common/badgesMilestone.ejs',{MODULE:"suno",type:"contributing",text:"sentences"}) %>
             <%- include ../common/sharableLink.ejs %>
             <div class="badges_information">
-                <%- include('../common/downloadableBadges.ejs', {BADGES:["bronze","silver","gold","platinum"], MODULE:"suno"})%>
+                <%- include('../common/downloadableBadges.ejs', {BADGES:[__('bronze'),__('silver'),__('gold'),__('platinum')], MODULE:"suno"})%>
             </div>
         </div>
     </div>
     <%- include('../common/feedback.ejs', {page: 'Contribution Thank You Page'}) %>
     <div class="row justify-content-center mt-5">
-        <%- include('../common/languageGoal.ejs', {ButtonText:"Contribute More",url:"./record.html",TEXT:"language",TEXT2:"hrs"})%>
+        <%- include('../common/languageGoal.ejs', {ButtonText:__('Contribute More'),url:"./record.html",TEXT:"language",TEXT2:"hrs"})%>
     </div>
 
 </div>

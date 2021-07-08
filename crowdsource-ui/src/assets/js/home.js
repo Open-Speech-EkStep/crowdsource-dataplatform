@@ -41,13 +41,13 @@ const updateLocaleText = function (total_contributions, total_validations, langu
     const localeLanguage = localeStrings[language];
 
     let hrsRecordedIn = localeStrings['hrs recorded in'];
-    hrsRecordedIn = hrsRecordedIn.replace("%hours", formatTime(cHours, cMinutes, cSeconds));
-    hrsRecordedIn = hrsRecordedIn.replace("%language", localeLanguage);
+    hrsRecordedIn = hrsRecordedIn.replace("<x>", formatTime(cHours, cMinutes, cSeconds));
+    hrsRecordedIn = hrsRecordedIn.replace("<y>", localeLanguage);
     $say_p_3.text(hrsRecordedIn);
 
     let hrsValidatedIn = localeStrings['hrs validated in'];
-    hrsValidatedIn = hrsValidatedIn.replace("%hours", formatTime(vHours, vMinutes, vSeconds));
-    hrsValidatedIn = hrsValidatedIn.replace("%language", localeLanguage);
+    hrsValidatedIn = hrsValidatedIn.replace("<x>", formatTime(vHours, vMinutes, vSeconds));
+    hrsValidatedIn = hrsValidatedIn.replace("<y>", localeLanguage);
     $listen_p_3.text(hrsValidatedIn);
 }
 

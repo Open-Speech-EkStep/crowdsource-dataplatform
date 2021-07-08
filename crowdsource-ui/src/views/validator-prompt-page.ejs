@@ -21,10 +21,10 @@
 </head>
 
 <body>
-<%- include('common/header/headerWithoutNavBar.ejs',{path:"./", MODULE:"Bolo", PAGE_TITLE:"Validate",img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
+<%- include('common/header/headerWithoutNavBar.ejs',{path:"./", MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
 <div id="validator-page-content">
     <div class="container-fluid">
-        <%- include('common/breadcrumb/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:"Validate",img:"BoloIndiaLogo.svg", homePath:"./boloIndia/home.html"}) %>
+        <%- include('common/breadcrumb/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg", homePath:"./boloIndia/home.html"}) %>
         <div id="content-wrapper" class="d-flex flex-column">
             <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">
                 <div class="row position-absolute bolo-back-btn top-back-btn">

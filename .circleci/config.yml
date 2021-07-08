@@ -17,6 +17,8 @@ jobs:
     steps:
       - checkout
       - run: rm -rf .git
+      - run: mkdir ${HOME}/project/crowdsource-api/locales
+      - run: cp -v -R crowdsource-ui/locales/ ${HOME}/project/crowdsource-api/
       - persist_to_workspace:
           root: .
           paths:
@@ -170,7 +172,7 @@ workflows:
             - node/test
           filters:
             branches:
-              only: master
+              only: [master, test_translation_scripts]
 
       - db_migrate_azure:
           name: migrate_dev_azure
@@ -191,6 +193,8 @@ workflows:
             - build_dev_ui
 
       - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
           name: push_dev_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
@@ -198,6 +202,7 @@ workflows:
           extra-build-args: --build-arg NODE_ENV=dev
           repo: ${AZURE_REPO}
           tag: dev
+          checkout: false
           requires:
             - build_dev_ui
 

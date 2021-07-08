@@ -1,1 +1,14 @@
 .ipynb_checkpoints/
+validator.ipynb
+**/__pycache__/*
+clean_unused_keys/*.json
+all_keys_generator/en/
+delta_generation/out-meta/
+delta_generation/out-sme/
+delta_generation/excel_files
+locale_generation/input_excel_files_old
+locale_generation/input_excel_files
+locale_generation/output_json_files
+en_html_files
+locale_generation/excel_to_json.ipynb
+
