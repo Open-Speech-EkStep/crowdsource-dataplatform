@@ -652,7 +652,20 @@ function executeOnLoad() {
                     }
                 })
                 .then((sentenceData) => {
-                    if (sentenceData.data.length === 0) {
+                    crowdSource.sentences = sentenceData.data ? sentenceData.data : [];
+                    crowdSource.count = sentenceData.data.length;
+                    $loader.hide();
+                    localStorage.setItem(
+                      sentencesKey,
+                      JSON.stringify({
+                          userName: localSpeakerDataParsed.userName,
+                          sentences: crowdSource.sentences,
+                          language: localSpeakerDataParsed.language,
+                      })
+                    );
+                    localStorage.setItem(countKey, sentenceData.data.length);
+
+                    if (crowdSource.sentences.length === 0) {
                         showNoSentencesMessage();
                         return;
                     }
@@ -665,18 +678,6 @@ function executeOnLoad() {
                     $pageContent.removeClass('d-none');
                     // toggleFooterPosition();
 
-                    crowdSource.sentences = sentenceData.data;
-                    crowdSource.count = sentenceData.data.length;
-                    $loader.hide();
-                    localStorage.setItem(
-                        sentencesKey,
-                        JSON.stringify({
-                            userName: localSpeakerDataParsed.userName,
-                            sentences: sentenceData.data,
-                            language: localSpeakerDataParsed.language,
-                        })
-                    );
-                    localStorage.setItem(countKey, sentenceData.data.length);
                     setFooterPosition();
                     initialize();
                 })

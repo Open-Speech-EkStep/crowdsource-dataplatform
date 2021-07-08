@@ -1,1 +1,4 @@
 .ipynb_checkpoints/
+validator.ipynb
+__pycache__/
+clean_unused_keys/*.json

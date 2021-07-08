@@ -1,17 +1,15 @@
 const { onActiveNavbar ,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
-const { showLanguagePopup } = require('../common/locale');
-const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,landToHome,hasUserRegistered} = require('../common/common');
-const {toggleFooterPosition, getLocaleString,updateLocaleLanguagesDropdown} = require('../common/utils');
+const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,hasUserRegistered,updateLocaleLanguagesDropdown} = require('../common/common');
+const { getLocaleString} = require('../common/utils');
 const {
-  setSpeakerDetails,
   setUserModalOnShown,
   setUserNameOnInputFocus,
   setStartRecordingBtnOnClick,
   setGenderRadioButtonOnClick
 } = require('../common/speakerDetails');
 
-const {setLangNavBar} = require('../common/languageNavBar')
-const {getStatsSummary,getDefaultLang,setDefaultLang} = require('../common/commonHome');
+const {addToLanguage} = require('../common/languageNavBar')
+const {getStatsSummary} = require('../common/commonHome');
 
 const {
   DEFAULT_CON_LANGUAGE,
@@ -19,19 +17,14 @@ const {
   CURRENT_MODULE,
   MODULE,
   SPEAKER_DETAILS_KEY,
-  LIKHO_FROM_LANGUAGE
+  ALL_LANGUAGES
 } = require('../common/constants');
 
 const { initializeFeedbackModal } = require('../common/feedback');
 
 function initializeBlock() {
-  const speakerDetailsKey = 'speakerDetails';
-  const age = document.getElementById('age');
-  const motherTongue = document.getElementById('mother-tongue');
   const $userName = $('#username');
-  let sentenceLanguage = DEFAULT_CON_LANGUAGE;
 
-  // toggleFooterPosition();
   let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   if(!top_lang){
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
@@ -39,47 +32,26 @@ function initializeBlock() {
     top_lang = DEFAULT_CON_LANGUAGE;
   }
 
-  const $languageNavBar = $('#language-nav-bar');
-  const $sayListenLanguage = $('#say-listen-language');
+  updateLocaleLanguagesDropdown(top_lang)
 
-  $sayListenLanguage.on('click', (e) => {
-    const targetedDiv = e.target;
-    const language = targetedDiv.getAttribute("value");
-    if (top_lang !== language) {
-      top_lang = language;
-      localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-      localStorage.setItem(LIKHO_FROM_LANGUAGE, language);
-      localStorage.setItem("i18n", "en");
-      setLangNavBar(targetedDiv, language, $languageNavBar);
-      redirectToLocalisedPage();
-      showFucntionalCards('ocr', language);
-      // updateHrsForCards(language);
-    }
-    getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, setDefaultLang);
-    showFucntionalCards('ocr', language);
-  })
+  addToLanguage('from-language', ALL_LANGUAGES);
+  let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
-  $languageNavBar.on('click', (e) => {
-    const targetedDiv = e.target;
-    const language = targetedDiv.getAttribute('value');
-    if (top_lang !== language) {
-      localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-      localStorage.setItem(LIKHO_FROM_LANGUAGE, language);
-      top_lang = language;
-      const $6th_place = $('#6th_option')
-      const previousActiveDiv = $languageNavBar.find('.active') || $6th_place;
-      previousActiveDiv.removeClass('active');
-      $6th_place.addClass('d-none');
-      targetedDiv.classList.add('active');
-      localStorage.setItem("i18n", "en");
-      redirectToLocalisedPage();
-    }
-    getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, setDefaultLang);
-    showFucntionalCards('ocr', language);
+  if (fromLanguage) {
+    $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
+  }
+
+  $('#from-language').on('change', (e) => {
+    fromLanguage = e.target.value;
+    top_lang = fromLanguage;
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
+    localStorage.setItem("i18n", "en");
+    redirectToLocalisedPage();
+    getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, ()=>{});
+    showFucntionalCards('ocr', fromLanguage);
   });
 
   $('#start_recording').on('click', () => {
-    sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
     localStorage.setItem(LIKHO_FROM_LANGUAGE, top_lang);
     localStorage.setItem("selectedType", "contribute");
@@ -92,7 +64,6 @@ function initializeBlock() {
   });
 
   $('#start_validating').on('click',()=>{
-    sentenceLanguage = top_lang;
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
     localStorage.setItem(LIKHO_FROM_LANGUAGE, top_lang);
     localStorage.setItem("selectedType", "validate");
@@ -105,13 +76,13 @@ function initializeBlock() {
   })
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   showFucntionalCards('ocr', language);
+  getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, ()=>{});
 
   const $startRecordBtn = $('#proceed-box');
   const $startRecordBtnTooltip = $startRecordBtn.parent();
 
   setUserModalOnShown($userName);
   $startRecordBtnTooltip.tooltip('disable');
-  // setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
   if(hasUserRegistered()){
@@ -121,12 +92,10 @@ function initializeBlock() {
   }
   onChangeUser('./home.html',MODULE.dekho.value);
   onOpenUserDropDown();
-  getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, setDefaultLang);
 }
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
-  // landToHome();
   initializeFeedbackModal();
   getAvailableLanguages("ocr");
   getLocaleString().then(()=>{

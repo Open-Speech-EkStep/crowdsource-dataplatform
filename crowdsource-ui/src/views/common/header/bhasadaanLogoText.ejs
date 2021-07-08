@@ -1,38 +1,30 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/header.css">
-<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Rowdies:300,400,700,900&display=swap">
-<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo 2:300,400,700,900&display=swap">
-<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Bhai 2:300,400,700,900&display=swap">
-<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Bhaina 2:300,400,700,900&display=swap">
-<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Chettan 2:300,400,700,900&display=swap">
-<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Da 2:300,400,700,900&display=swap">
-<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Paaji 2:300,400,700,900&display=swap">
-<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Tamma 2:300,400,700,900&display=swap">
-<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Tammudu 2:300,400,700,900&display=swap">
-<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Baloo Thambi 2:300,400,700,900&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css2?family=Rowdies&display=swap">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Baloo+Bhai+2&family=Baloo+Bhaina+2&family=Baloo+Chettan+2&family=Baloo+Da+2&Baloo+Paaji+2&family=Baloo+Tamma+2&family=Baloo+Tammudu+2&Baloo+Thambi+2&display=swap">
 
-<a class="logo-text text-dark position-relative" href="/" style="padding-top:5px" id="bhashadaan_logo">
+<a class="logo-text text-white position-relative" href="/" style="padding-top:5px" id="bhashadaan_logo">
     <% if(locale == 'hi' || locale == 'mr'){ %>
-        <span class="font-size-lg-40" style="font-family:'Baloo 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747"><%= __('Bhasha') %></span><span class="font-size-lg-40" style="color:#ffbf00;font-family:'Baloo 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Daan') %></span>
+        <span class="font-size-lg-40" style="font-family:'Baloo 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Bhasha') %></span>&nbsp<span class="font-size-lg-40" style="color:#ffbf00;font-family:'Baloo 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Daan') %></span>
         <% } else if (locale == 'gu'){ %>
-            <span class="font-size-lg-40" style="font-family:'Baloo Bhai 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747"><%= __('Bhasha') %></span><span class="font-size-lg-40" style="color:#ffbf00;font-family:'Baloo Bhai 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Daan') %></span>
+            <span class="font-size-lg-40" style="font-family:'Baloo Bhai 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Bhasha') %></span>&nbsp<span class="font-size-lg-40" style="color:#ffbf00;font-family:'Baloo Bhai 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Daan') %></span>
         <% } else if(locale == 'or'){ %>
-            <span class="font-size-lg-40" style="font-family:'Baloo Bhaina 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747"><%= __('Bhasha') %></span><span class="font-size-lg-40" style="color:#ffbf00;font-family:'Baloo Bhaina 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Daan') %></span>
+            <span class="font-size-lg-40" style="font-family:'Baloo Bhaina 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Bhasha') %></span>&nbsp<span class="font-size-lg-40" style="color:#ffbf00;font-family:'Baloo Bhaina 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Daan') %></span>
         <% } else if(locale == 'ml'){ %>
-            <span class="font-size-lg-40" style="font-family:'Baloo Chettan 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747"><%= __('Bhasha') %></span><span class="font-size-lg-40" style="color:#ffbf00;font-family:'Baloo Chettan 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Daan') %></span>
+            <span class="font-size-lg-40" style="font-family:'Baloo Chettan 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Bhasha') %></span>&nbsp<span class="font-size-lg-40" style="color:#ffbf00;font-family:'Baloo Chettan 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Daan') %></span>
         <% } else if(locale == 'bn'){ %>
-            <span class="font-size-lg-40" style="font-family:'Baloo Da 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747"><%= __('Bhasha') %></span><span class="font-size-lg-40" style="font-family:'Baloo Da 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffbf00"><%= __('Daan') %></span>
+            <span class="font-size-lg-40" style="font-family:'Baloo Da 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Bhasha') %></span>&nbsp<span class="font-size-lg-40" style="font-family:'Baloo Da 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffbf00"><%= __('Daan') %></span>
         <% } else if(locale == 'as'){ %>
-            <span class="font-size-lg-40" style="font-family:'Baloo Da 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747"><%= __('Bhasha') %></span><span class="font-size-lg-40" style="font-family:'Baloo Da 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffbf00"><%= __('Daan') %></span>
+            <span class="font-size-lg-40" style="font-family:'Baloo Da 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Bhasha') %></span>&nbsp<span class="font-size-lg-40" style="font-family:'Baloo Da 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffbf00"><%= __('Daan') %></span>
         <% } else if (locale == 'pa'){ %>
-            <span class="font-size-lg-40" style="font-family:'Baloo Paaji 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747"><%= __('Bhasha') %></span><span class="font-size-lg-40" style="font-family:'Baloo Paaji 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffbf00"><%= __('Daan') %></span>
+            <span class="font-size-lg-40" style="font-family:'Baloo Paaji 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Bhasha') %></span>&nbsp<span class="font-size-lg-40" style="font-family:'Baloo Paaji 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffbf00"><%= __('Daan') %></span>
         <% } else if (locale == 'kn'){ %>
-            <span class="font-size-lg-40" style="font-family:'Baloo Tamma 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747"><%= __('Bhasha') %></span><span class="font-size-lg-40" style="font-family:'Baloo Tamma 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffbf00"><%= __('Daan') %></span>
+            <span class="font-size-lg-40" style="font-family:'Baloo Tamma 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Bhasha') %></span>&nbsp<span class="font-size-lg-40" style="font-family:'Baloo Tamma 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffbf00"><%= __('Daan') %></span>
         <% } else if (locale == 'te'){ %>
-            <span class="font-size-lg-40" style="font-family:'Baloo Tammudu 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747"><%= __('Bhasha') %></span><span class="font-size-lg-40" style="font-family:'Baloo Tammudu 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffbf00"><%= __('Daan') %></span>
+            <span class="font-size-lg-40" style="font-family:'Baloo Tammudu 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Bhasha') %></span>&nbsp<span class="font-size-lg-40" style="font-family:'Baloo Tammudu 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffbf00"><%= __('Daan') %></span>
         <% } else if (locale == 'ta'){ %>
-            <span class="font-size-lg-40" style="font-family:'Baloo Thambi 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747"><%= __('Bhasha') %></span><span class="font-size-lg-40" style="font-family:'Baloo Thambi 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffbf00;font-family:'Baloo Thambi 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Daan') %></span>
+            <span class="font-size-lg-40" style="font-family:'Baloo Thambi 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Bhasha') %></span>&nbsp<span class="font-size-lg-40" style="font-family:'Baloo Thambi 2','Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffbf00;font-family:'Baloo Thambi 2','Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Daan') %></span>
         <% } else { %>
-            <span class="font-size-lg-40" style="font-family:Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747"><%= __('Bhasha') %></span><span class="font-size-lg-40" style="color:#ffbf00;font-family:Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Daan') %></span>
+            <span class="font-size-lg-40" style="font-family:Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Bhasha') %></span>&nbsp<span class="font-size-lg-40" style="color:#ffbf00;font-family:Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif"><%= __('Daan') %></span>
     <% } %>
-    <span class="beta-version"><%= __('Beta')%></span>
+    <span class="beta-version">Beta</span>
 </a>

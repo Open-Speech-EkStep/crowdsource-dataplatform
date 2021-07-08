@@ -523,7 +523,18 @@ const executeOnLoad = function () {
           return data.json();
         }
       }).then((sentenceData) => {
-        if (sentenceData.data.length === 0) {
+        dekhoIndia.sentences = sentenceData.data ? sentenceData.data : [];
+        localStorage.setItem(dekhoCountKey, dekhoIndia.sentences.length);
+        localStorage.setItem(
+          sentencesKey,
+          JSON.stringify({
+            userName: localSpeakerDataParsed.userName,
+            sentences: dekhoIndia.sentences,
+            language: localSpeakerDataParsed.language,
+            toLanguage: ''
+          })
+        );
+        if (dekhoIndia.sentences.length === 0) {
           showNoSentencesMessage();
           return;
         }
@@ -532,17 +543,7 @@ const executeOnLoad = function () {
           setFooterPosition();
         }
         setFooterPosition();
-        dekhoIndia.sentences = sentenceData.data;
-        localStorage.setItem(dekhoCountKey, dekhoIndia.sentences.length);
-        localStorage.setItem(
-          sentencesKey,
-          JSON.stringify({
-            userName: localSpeakerDataParsed.userName,
-            sentences: sentenceData.data,
-            language: localSpeakerDataParsed.language,
-            toLanguage: ''
-          })
-        );
+
         initializeComponent();
       }).catch((err) => {
         console.log(err);

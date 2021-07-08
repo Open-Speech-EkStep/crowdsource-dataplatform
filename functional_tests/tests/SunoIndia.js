@@ -16,9 +16,8 @@ step("Select <SunoIndiaLink> from header", async function (SunoIndiaLink) {
     if (await text('Error!!!').exists()) {
         await click(button("Close"));
     }
-    assert.ok(await link(SunoIndiaLink).exists());
     await taiko.waitFor(500);
-    await click(SunoIndiaLink);
+    await click(taiko.link({id: SunoIndiaLink}));
 });
 
 step("Validate Suno India content", async function () {

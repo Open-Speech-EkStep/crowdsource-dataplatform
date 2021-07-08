@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
+<head><title>Bhasha Daan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
@@ -15,12 +15,12 @@
     <style>.btn.focus,.btn:focus{outline:0;box-shadow:0 0}</style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body> <%- include('common/header/headerWithoutNavBar.ejs',{path:"./boloIndia/home.html", MODULE:"Bolo", PAGE_TITLE:"Speak",img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
+<body> <%- include('common/header/headerWithoutNavBar.ejs',{path:"./boloIndia/home.html", MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
 <div id="loader" class="overlay__content"><span class="spinner"></span></div>
 <div id="page-content" class="d-none">
     <div id="content-wrapper" class="container-fluid d-flex flex-column">
         <div class="row m-0 px-4">
-            <%- include('../../build/views/common/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:"Speak",img:"BoloIndiaLogo.svg", homePath:"./boloIndia/home.html"}) %>
+            <%- include('../../build/views/common/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg", homePath:"./boloIndia/home.html"}) %>
         </div>
         <%- include modals/recording-instructions.ejs %>
         <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">
@@ -46,7 +46,7 @@
 
             <div class="recording-container">
                 <div class="row justify-content-center d-none">
-                    <div class="col-8 text-muted h-1r" id="get-started"> <%= __('Let\'s get started!') %> </div>
+                    <div class="col-8 text-muted h-1r" id="get-started"> Let's get started! </div>
                 </div>
 
                 <div class="row justify-content-center d-none" id="recording-row" style="min-height:130px">
@@ -91,7 +91,7 @@
                         <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress_bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
                     </div>
                     <div class="mt-4 text-muted h-1r d-none" id="get-started">
-                        <%= __('Let\'s get started!') %>
+                        Let's get started!
                     </div>
                 </div>
                 <div class="px-3">
@@ -113,7 +113,7 @@
         <div class="row justify-content-center mt-5">
             <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
                 <a class="btn btn-primary text-white btn-lg h6 w-100" href="./boloIndia/home.html">
-                    <%- __('Back to Home') %>
+                    <%- __('Back to Bolo India Home') %>
                 </a></div>
         </div>
     </div>

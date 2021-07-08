@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
+    <title>Bhasha Daan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta property="og:title" content="<%= __('BhashaDaan: A crowdsourcing initiative for Indian languages')%>">
+    <meta property="og:title" content="Bhasha Daan: A crowdsourcing initiative for Indian languages">
     <meta property="og:type" content="website">
     <meta property="og:description" content="I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?">
-    <meta property="og:site_name" content="BhashaDaan">
+    <meta property="og:site_name" content="Bhasha Daan">
     <meta property="og:url" content="https://bhashini.gov.in/bhashadaan">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
     <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<%- include('common/header/headerWithoutNavBar.ejs',{path:"./", MODULE:"Bolo", PAGE_TITLE:"Speak",img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
+<%- include('common/header/headerWithoutNavBar.ejs',{path:"./", MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center pt-5 pt-lg-0 pt-md-0">
         <div class="row position-absolute top-back-btn" style="top:80px;left:35px">
@@ -75,7 +75,7 @@
                 <h4 class="mb-3 mt-5 mt-lg-0"><%- __('You are enriching your language') %></h4>
             </div>
             <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('recording(s) contributed') %></p>
-            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> recordings away from earning your <span id="next_badge_name"></span>  Bhasha Samarthak Badge. <a href="badges.html">Know more</a>') %></p>
+            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> recordings away from earning your <span id="next_badge_name"></span> Bhasha Samarthak Badge.') %> <a href="./badges.html"><%= __('Know More') %></a></p>
             <%- include('modals/badge_milestone.ejs',{text:"recordings"})%>
             <div class="mt-5 text-center mt-lg-0">
                 <%= __('Share it with your friends and family') %>
@@ -117,7 +117,7 @@
             <div class="mb-3">
                 <span><%- __('Help your language achieve it’s goal of <span id="language-hour-goal"></span> hrs. We know you can do more!') %></span>
             </div>
-            <a href="./record.html" class="btn rounded-pill btn-primary btn-lg h6 w-100">
+            <a href="./record.html" class="btn rounded-pill btn-custom-primary btn-lg h6 w-100">
                 <%= __('Contribute More') %>
             </a>
         </div>

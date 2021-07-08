@@ -1,9 +1,10 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/header.css">
-<nav class="navbar navbar-expand-lg navbar-light bg-light pl-4 py-lg-0 py-0 pr-0" id="header-nav-bar">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/theme.css">
+<nav class="navbar navbar-expand-lg navbar-dark bg-app-primary pl-4 py-lg-0 py-0 pr-0 text-white font-family-Rowdies" id="header-nav-bar">
     <div class="row m-0">
         <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="d-flex align-items-center">
-            <a class="logo-text text-dark" href="/">
+            <a class="logo-text text-muted-white" href="/">
                 <h2 class="mb-0" id="bhasini_logo">
                     <img src="<%- `/img/${locale}-logo.svg` %>" alt="Bhaashini" width="64px" height="54px">
                 </h2>
@@ -14,40 +15,55 @@
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-lg-5" id="module_name">
-            <li class="nav-item module-item p-2 d-none" value="home"><a href="<%= home %>" class="nav-link text-dark font-weight-bold">
+            <li class="nav-item module-item p-2 d-none" value="home"><a href="<%= home %>" class="nav-link text-muted-white">
                     <%= __('Home') %>
                 </a></li>
-            <li class="nav-item module-item p-2" value="suno"><a href="<%= suno %>" class="nav-link text-dark font-weight-bold">
-                    <%= __('Suno India') %>
+            <li class="nav-item module-item p-2" value="suno"><a id="suno_india_tab" href="<%= suno %>" class="nav-link text-muted-white">
+                    <span>
+                        <%= __('Suno') %>
+                    </span> <span>
+                        <%= __('India') %>
+                    </span>
                 </a></li>
-            <li class="nav-item module-item p-2" value="bolo"><a href="<%= bolo %>" class="nav-link text-dark font-weight-bold">
-                    <%= __('Bolo India') %>
+            <li class="nav-item module-item p-2" value="bolo"><a id="bolo_india_tab" href="<%= bolo %>" class="nav-link text-muted-white">
+                    <span>
+                        <%= __('Bolo') %>
+                    </span> <span>
+                        <%= __('India') %>
+                    </span>
                 </a></li>
-            <li class="nav-item module-item p-2" value="likho"><a href="<%= likho %>" class="nav-link text-dark font-weight-bold">
-                    <%= __('Likho India') %>
+            <li class="nav-item module-item p-2" value="likho"><a id="likho_india_tab" href="<%= likho %>" class="nav-link text-muted-white">
+                    <span>
+                        <%= __('Likho') %>
+                    </span> <span>
+                        <%= __('India') %>
+                    </span>
                 </a></li>
-                <li class="nav-item module-item p-2" value="dekho"><a href="<%= dekho %>" class="nav-link text-dark font-weight-bold">
-                    <%= __('Dekho India') %>
+            <li class="nav-item module-item p-2" value="dekho"><a id="dekho_india_tab" href="<%= dekho %>" class="nav-link text-muted-white">
+                    <span>
+                        <%= __('Dekho') %>
+                    </span> <span>
+                        <%= __('India') %>
+                    </span>
                 </a></li>
         </ul>
         <ul class="navbar-nav ml-auto" id="about-us">
             <li class="nav-item p-2 module-item dropdown" id="locale_language_dropdown">
-                <a class="nav-link text-dark font-weight-bold dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle cursor-pointer text-muted-white" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="/img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
-                    <span><%= __('Language') %></span>
+                    <span>
+                        <%= __('Language') %>
+                    </span>
                 </a>
                 <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton">
-                   
+
                 </div>
             </li>
-            <li class="nav-item p-2 module-item d-none" value="about-us"><a href="<%- `${path}about-us.html`%>" class="nav-link text-dark font-weight-bold">
-                    <%= __('About Us') %>
-                </a></li>
         </ul>
     </div>
     <ul class="navbar-nav" id="userNavBar">
-        <li class="nav-item pr-lg-4 dropdown" id="userDropDown">
-            <a class="nav-link text-dark font-weight-bold d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item pr-lg-4 module-item dropdown" id="userDropDown">
+            <a class="nav-link text-muted-white d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="/img/usericon.svg" alt="usericon" class="align-middle mx-1">
                 <span id="nav-username"></span>
             </a>
@@ -55,11 +71,12 @@
             <div id="user_profile_dropdown" class="dropdown-menu" aria-labelledby="nav-user">
                 <a id="user_profile_name" class="dropdown-item point-none" href="#"></a>
                 <a id="anonymous_user" class="dropdown-item point-none" href="#"><%= __('(No Username)')%></a>
-                <a id="change_user" class="dropdown-item" href="#" data-toggle="modal" data-target="#userModal"><%= __('Change User')%></a>
+                <a id="change_user" class="dropdown-item" href="#" data-toggle="modal" data-target="#userModal">
+                    <%= __('Change User')%>
+                </a>
             </div>
         </li>
     </ul>
 </nav>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/common/header.js"></script>
-

@@ -1,6 +1,12 @@
+.font-size-lg-32{
+    font-size: 2rem;
+}
+
 .platform-intro-section-cover{
     background-repeat: no-repeat;
-    background-position: right;
+    background-position: center;
+    background-image: url(/img/top_half_banner.svg);
+    background-size: cover;
 }
 
 .platform-intro-section{
@@ -44,7 +50,7 @@
 .platform-card-section-heading{
     color: #111111;
     font-size: 32px;
-    margin-top: 60px !important;
+    margin-top: 40px !important;
 }
 
 .platform-card-section-para{
@@ -83,7 +89,7 @@
 #badge-section-card-cover {
     box-shadow: 0 4px 12px 1px rgba(0, 0, 0, .08);
     border-radius: 12px;
-    background: #f9fbfe;
+    background: white;
 }
 
 #badge-section-card {
@@ -113,8 +119,8 @@
 }
 
 #platform_section .platform_card {
-    background-image: url(/img/NEW-WAVE.svg);
-    background-size: contain;
+    background-image: url(/img/tri_color.svg);
+    background-size: auto;
     max-width: 1200px;
     min-height: 400px;
     background-repeat: no-repeat;
@@ -124,6 +130,7 @@
     background-position-y: center;
     background-color: #fff;
     padding: 24px 0px 0px 0px;
+    box-shadow: 0px 8px 0px #43c0d7;
 }
 
 #platform_inner {
@@ -195,10 +202,10 @@
 }
 
 .home-badge-link-row{
-    color:#666666;;
-    line-height:40px;
+    line-height:50px;
+    font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
     padding-right: 20px;
-    font-size: 24px;
+    font-size: 40px;
 }
 .home-badge-link-row2{
     font-size: 24px;
@@ -216,6 +223,8 @@
 }
 
 #carouselExampleIndicators .nav-tabs {
+    font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 300 !important;
     padding: 0px 6%;
     display: inline-flex;
     width: 100%;
@@ -238,21 +247,13 @@
     font-size: 24px;
     line-height: 29px;
     width: max-content;
-    color: #007bff!important;
     opacity: .7;
-    font-weight: 700;
+    font-weight: 400;
     width: max-content;
 }
 
-#carouselExampleIndicators .nav-tabs>li.active{
-    background: rgba(0, 123, 255, 0.1);
-    border-radius: 24px;
-    border-color: transparent;
-}
-
 #carouselExampleIndicators .nav-tabs>li.active>a {
-    color: #007BFF !important;
-    font-weight: 700;
+    font-weight: 400;
     opacity: 1;
 }
 
@@ -473,6 +474,10 @@
 }
 
 @media screen and (max-width: 699px) {
+    #banner .h1{
+        font-size: 32px;
+    }
+
     .separator{
         opacity: 0.1;
     }
@@ -490,8 +495,8 @@
     }
 
     #platform_section .platform_card {
-        background-image: url(/img/mobile_wave.png) !important;
-        background-size: contain;
+        background-image: url(/img/tri_color.svg) !important;
+        background-size: auto;
     }
 
     #platform_inner {
@@ -724,7 +729,6 @@
     font-family: 'Rowdies', cursive;
     font-style: normal;
     font-weight: 300;
-    background: #0F2749;
     color: #ECF6FF;
 }
  /* body{
@@ -785,9 +789,9 @@
      border: none;
      padding: 10px 40px;
  }
- @media only screen and (min-width: 992px) {
- .left-bg{ background:url("/img/left.png") no-repeat left center; 
- }
- .right-bg{ background:url("/img/right.png") no-repeat right center;}
- }
- @media only screen and (min-width: 768px) {.right-bg{ background:url("/img/right.png") no-repeat right center;}}
+ /*@media only screen and (min-width: 992px) {*/
+ /*.left-bg{ background:url("/img/left.png") no-repeat left center; */
+ /*}*/
+ /*.right-bg{ background:url("/img/right.png") no-repeat right center;}*/
+ /*}*/
+ /*@media only screen and (min-width: 768px) {.right-bg{ background:url("/img/right.png") no-repeat right center;}}*/

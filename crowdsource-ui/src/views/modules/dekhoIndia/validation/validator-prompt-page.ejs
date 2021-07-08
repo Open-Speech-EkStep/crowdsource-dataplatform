@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
+    <title>Bhasha Daan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
@@ -21,12 +21,12 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Dekho", PAGE_TITLE:"Validate",img:"DekhoIndiaLogo.svg",homePath:"./home.html"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Dekho", PAGE_TITLE:__('Validate'),img:"DekhoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div id="validator-page-content">
     <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/extensionBar.ejs %>
-            <%- include('../common/breadcrumb.ejs', {MODULE:"Dekho", PAGE_TITLE:"Validate",img:"DekhoIndiaLogo.svg", homePath:"./home.html"}) %>
+            <%- include('../common/breadcrumb.ejs', {MODULE:"Dekho", PAGE_TITLE:__('Validate'),img:"DekhoIndiaLogo.svg", homePath:"./home.html"}) %>
             <div class="modal-footer pt-3 px-0 record-btn-container position-relative">
                 <div class="row position-absolute top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
@@ -36,7 +36,7 @@
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center" id="mic-report-row">
                 <%- include ../common/speakerTesting.ejs %>
             </div>
-            <%- include('../common/assistiveText.ejs',{msg:"Is the text from the image captured correctly?"}) %>
+            <%- include('../common/assistiveText.ejs',{msg:__('Is the text from the image captured correctly?')}) %>
             <div class="row justify-content-center" id="dekho-image">
                 <div class="col-lg-8 col-md-5 col-12">
                     <%- include ../common/image.ejs %>
@@ -82,13 +82,10 @@
                     <p>
                         <%- __('We do not have any data in <span id="spn-validation-language"></span> language. Please try again later.') %>
                     </p>
-                    <p class="d-none">
-                        <%= __('Would you also like to contribute your voice?') %>
-                    </p>
                     <div class="row justify-content-center mt-5">
                         <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
                             <a class="btn btn-primary text-white btn-lg h6 w-100" href="./home.html">
-                                <%- __('Back to Home') %>
+                                <%- __('Back to Dekho India Home') %>
                             </a></div>
                     </div>
                 </div>
@@ -122,7 +119,7 @@
                         <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress_bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
                     </div>
                     <div class="mt-4 text-muted h-1r d-none" id="get-started">
-                        <%= __('Let\'s get started!') %>
+                        Let's get started!
                     </div>
                 </div>
                 <div class="px-3">
@@ -147,7 +144,7 @@
         <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
         <%- include('../common/sourceInfo.ejs') %>
         <%- include('../common/feedback.ejs', {page: "Validate"}) %>
-        <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the image labelled", reportThankYou: "Your feedback helps us keep Dekho India relevant, we appreciate you taking time to leave the feedback.", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
+        <%- include('../common/report.ejs',{reportPara: __('Help us understand what’s wrong with the image labelled'), reportThankYou: __('Your feedback helps us keep Dekho India relevant, we appreciate you taking time to leave the feedback.'), "REPORT":[{h1:__('Offensive'),p1:__('Hateful / Discriminatory / Vulgar language, drugs promotion etc.')}]}); %>
         <%- include ../common/errorModal.ejs %>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
