@@ -20,8 +20,7 @@ const {
     LOCALE_STRINGS,
     ALL_LANGUAGES,
     MODULE,
-  SPEAKER_DETAILS_KEY,
-  LIKHO_FROM_LANGUAGE
+  SPEAKER_DETAILS_KEY
 } = require('./constants');
 
 const updateLocaleText = function (total_contributions, total_validations, language) {
@@ -106,7 +105,6 @@ function initializeBlock() {
     let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if(!top_lang){
         localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
-        localStorage.setItem(LIKHO_FROM_LANGUAGE, DEFAULT_CON_LANGUAGE);
         top_lang = DEFAULT_CON_LANGUAGE;
     }
     updateLocaleLanguagesDropdown(top_lang);
@@ -130,7 +128,6 @@ function initializeBlock() {
 
     $('#start_recording').on('click', () => {
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-        localStorage.setItem(LIKHO_FROM_LANGUAGE, top_lang);
         localStorage.setItem("selectedType", "contribute");
         if(!hasUserRegistered()){
             $('#userModal').modal('show');
@@ -142,7 +139,6 @@ function initializeBlock() {
 
     $('#start_validating').on('click', () => {
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-        localStorage.setItem(LIKHO_FROM_LANGUAGE, top_lang);
         localStorage.setItem("selectedType", "validate");
         if(!hasUserRegistered()){
             $('#userModal').modal('show');

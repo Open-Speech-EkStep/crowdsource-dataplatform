@@ -28,7 +28,6 @@ function initializeBlock() {
   let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   if(!top_lang){
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
-    localStorage.setItem(LIKHO_FROM_LANGUAGE, DEFAULT_CON_LANGUAGE);
     top_lang = DEFAULT_CON_LANGUAGE;
   }
 
@@ -53,7 +52,6 @@ function initializeBlock() {
 
   $('#start_recording').on('click', () => {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-    localStorage.setItem(LIKHO_FROM_LANGUAGE, top_lang);
     localStorage.setItem("selectedType", "contribute");
     if(!hasUserRegistered()){
       $('#userModal').modal('show');
@@ -65,7 +63,6 @@ function initializeBlock() {
 
   $('#start_validating').on('click',()=>{
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
-    localStorage.setItem(LIKHO_FROM_LANGUAGE, top_lang);
     localStorage.setItem("selectedType", "validate");
     if(!hasUserRegistered()){
       $('#userModal').modal('show');

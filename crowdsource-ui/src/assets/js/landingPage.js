@@ -1,7 +1,7 @@
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('./header');
 const { redirectToLocalisedPage, changeLocale } = require('./locale');
 const { setDropdownValues } = require('../../../build/js/common/header');
-const { CONTRIBUTION_LANGUAGE, SPEAKER_DETAILS_KEY, DEFAULT_CON_LANGUAGE, LIKHO_FROM_LANGUAGE } = require('./constants');
+const { CONTRIBUTION_LANGUAGE, SPEAKER_DETAILS_KEY, DEFAULT_CON_LANGUAGE } = require('./constants');
 const { hasUserRegistered } = require('./common');
 
 $(document).ready(function () {
@@ -9,7 +9,6 @@ $(document).ready(function () {
 
   if (!localStorage.getItem("i18n")) {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
-    localStorage.setItem(LIKHO_FROM_LANGUAGE, DEFAULT_CON_LANGUAGE);
     changeLocale("en");
     return;
   } else {

@@ -1,5 +1,5 @@
 const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
-const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_FROM_LANGUAGE } = require("./constants");
+const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE } = require("./constants");
 const { base_url } = require('./env-api');
 
 const registerEvents = function () {
@@ -8,7 +8,6 @@ const registerEvents = function () {
     localisation_popup.on("click", (e)=>{
         const value = e.target.getAttribute('id');
         localStorage.setItem(CONTRIBUTION_LANGUAGE,value);
-        localStorage.setItem(LIKHO_FROM_LANGUAGE,value);
         changeLocale('en');
     });
     localisation_dropdown.on("click", localisationChangeHandler);

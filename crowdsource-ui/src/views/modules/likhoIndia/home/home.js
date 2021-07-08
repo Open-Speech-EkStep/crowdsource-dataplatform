@@ -16,7 +16,6 @@ const {
   CURRENT_MODULE,
   MODULE,
   ALL_LANGUAGES,
-  LIKHO_FROM_LANGUAGE,
   LIKHO_TO_LANGUAGE,
   SPEAKER_DETAILS_KEY,
   CONTRIBUTION_LANGUAGE,
@@ -50,7 +49,7 @@ function initializeBlock() {
 
   getAvailableLanguages('parallel').then(languagePairs => {
     const { datasetLanguages, contributionLanguages } = languagePairs;
-    let fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+    let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
 
     let nativeLanguage = [];
@@ -71,7 +70,7 @@ function initializeBlock() {
       $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
       $(`#to-language option[value=${toLanguage}]`).attr("selected", "selected");
     } else {
-      fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+      fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
       if(fromLanguage) {
         $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
       } else {
@@ -84,13 +83,12 @@ function initializeBlock() {
       toLanguage = $('#to-language option:first-child').val();
       updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
       showFucntionalCards('parallel', fromLanguage, toLanguage);
-      localStorage.setItem(LIKHO_FROM_LANGUAGE, fromLanguage);
+      localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
       localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
     }
 
     $('#from-language').on('change', (e) => {
       fromLanguage = e.target.value;
-      localStorage.setItem(LIKHO_FROM_LANGUAGE, fromLanguage);
       localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
       const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
       addToLanguage('to-language', languages);
@@ -105,7 +103,7 @@ function initializeBlock() {
 
     $('#to-language').on('change', (e) => {
       toLanguage = e.target.value;
-      const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+      const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
       localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
       updatePage(fromLanguage, toLanguage);
     });
