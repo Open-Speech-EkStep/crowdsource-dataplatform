@@ -11,28 +11,27 @@
     <meta property="og:site_name" content="Bhasha Daan">
     <meta property="og:url" content="https://bhashini.gov.in/bhashadaan">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
+    <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+    <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
-    <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/home.css">
-    <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/thank-you.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="icon" type="image/png" href="/img/favicon.ico">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-<%- include('common/header/headerWithoutNavBar.ejs',{path:"./",MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../", MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg",homePath:"./home.html"}); %>
 <div id="content-wrapper" class="container-fluid mt-5 pb-2 px-3 px-md-5 bg-thank-you h-100">
     <div class="text-center pt-5 pt-lg-0 pt-md-0">
         <div class="row position-absolute top-back-btn" style="top:80px;left:35px">
-            <%- include('common/buttons/back-btn/back-btn.ejs',{url:"./boloIndia/home.html"}) %>
+            <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
         </div>
         <h1 class="display-5 font-wt-900 site-blue">
-            <%= __('Thank you for validating!') %>
+            <%= __('Thank you for contributing!') %>
         </h1>
     </div>
     <div class="row lazy">
@@ -54,14 +53,15 @@
                         <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
                             <div><span class="spinner"></span></div>
                         </div>
-                        <%- include common/charts/barGraph/horizontal/horizontalBarGraph.ejs %>
+                        <%- include ../common/horizontalBarGraph.ejs %>
                     </div>
                 </div>
                 <div class="col-1"></div>
             </div>
         </div>
     </div>
-    <div class="row mt-5 mt-lg-0">
+
+    <div class="row mt-5">
         <div class="col-lg-8 offset-lg-2 border border-primary p-4-5 text-center overflow-hidden contribuion-info">
             <div id="champion_text" class="champion-ribbon d-none">
                 <span class="marquee"><%= __('You are a champion') %></span>
@@ -75,54 +75,47 @@
             <div id="before_badge_content" class="d-none">
                 <h4 class="mb-3 mt-5 mt-lg-0"><%- __('You are enriching your language') %></h4>
             </div>
-            <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('recording(s) validated') %></p>
-            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> recordings away from earning your <span id="next_badge_name"></span> Bhasha Samarthak Badge.') %> <a href="badges.html"><%= __('Know More') %></a></p>
-            <div class="row d-none" id="milestone_text">
-                <div class="col-12 col-lg-5 col-md-5 mt-lg-5 justify-content-between">
-                    <div>
-                        <img src="/img/bronze_medal_val.svg" alt="Bronze Badge" id="reward-img" class="reward-img">
-                    </div>
-                    <button class="btn btn-outline-primary my-2" data-badge="" download id="download_pdf"><span class="mr-2"><%= __('Download')%></span>
-                        <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6.12766 0C6.40968 0 6.6383 0.228621 6.6383 0.510638V6.49941L8.54196 4.59575L9.19149 5.24528L6.12766 8.30911L3.06383 5.24528L3.71336 4.59575L5.61702 6.49941V0.510638C5.61702 0.228621 5.84564 0 6.12766 0Z" fill="#007BFF"/>
-                            <path d="M1.02128 6.12766C1.02128 5.84564 0.792656 5.61702 0.510638 5.61702C0.228621 5.61702 0 5.84564 0 6.12766V9.95745C0 10.2395 0.228621 10.4681 0.510638 10.4681H11.4894C11.7714 10.4681 12 10.2395 12 9.95745V6.12766C12 5.84564 11.7714 5.61702 11.4894 5.61702C11.2073 5.61702 10.9787 5.84564 10.9787 6.12766V9.44681H1.02128V6.12766Z" fill="#007BFF"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="col-12 col-lg-7 col-md-7 msg-box mt-5">
-                    <h4 class="mb-3 mt-lg-5"><%- __('You’ve earned your <span id="current_badge_name"></span> Bhasha Samarthak Badge') %></h4>
-                    <p><span id="user-contribution" class="text-primary"></span> <%- __('You’ve earned a <span id="current_badge_name_1"></span> Bhasha Samarthak Badge by validating <span id="current_badge_count"></span> recordings') %></p>
-                    <p class="mt-lg-5" id="next-goal"><%- __('Your next goal is to reach <span id="next_badge_count"></span> recordings to earn your <span id="next_badge_name_1"></span> Bhasha Samarthak Badge.') %> <a href="badges.html"><%= __('Know More') %></a></p>
-                </div>
-            </div>
-            <%- include common/sharableLinks/sharableLink.ejs %>
+            <p id="user-contribution-msg"><span id="user-contribution" class="text-primary"></span> <%= __('recording(s) contributed') %></p>
+            <p id="sentence_away_msg"><%- __('You are just <span id="sentense_away_count"></span> recordings away from earning your <span id="next_badge_name"></span> Bhasha Samarthak Badge.') %> <a href="../badges.html"><%= __('Know More') %></a></p>
+            <%- include('../common/badgesMilestone.ejs',{MODULE:"bolo",type:"contributing", text:"recordings"}) %>
+            <%- include ../common/sharableLink.ejs %>
             <div class="badges_information">
-                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="bronze" href="#" id="<%= `bronze_badge_link` %>">
-                    <img title="<%= `Download bronze badge`%>" src="<%= `../img/bronze_medal_val.svg`%>" alt="" width="36px" class="disable" id="<%= `bronze_badge_link_img`%>">
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="bronze" href="#" id="bronze_badge_link">
+                    <img title="Download Bronze Badge" src="/img/bronze_medal.svg" alt="" width="36px" class="disable" id="bronze_badge_link_img">
                 </button>
-                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="silver" href="#" id="<%= `silver_badge_link` %>">
-                    <img title="<%= `Download silver badge`%>" src="<%= `../img/silver_medal_val.svg`%>" alt="" width="36px" class="disable" id="<%= `silver_badge_link_img`%>">
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="silver" href="#" id="silver_badge_link">
+                    <img title="Download Silver Badge" src="/img/silver_medal.svg" alt="" width="36px" class="disable" id="silver_badge_link_img">
                 </button>
-                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="gold" href="#" id="<%= `gold_badge_link` %>">
-                    <img title="<%= `Download gold badge`%>" src="<%= `../img/gold_medal_val.svg`%>" alt="" width="36px" class="disable" id="<%= `gold_badge_link_img`%>">
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="gold" href="#" id="gold_badge_link">
+                    <img title="Download Gold Badge" src="/img/gold_medal.svg" alt="" width="36px" class="disable" id="gold_badge_link_img">
                 </button>
-                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="platinum" href="#" id="<%= `platinum_badge_link` %>">
-                    <img title="<%= `Download platinum badge`%>" src="<%= `../img/platinum_medal_val.svg`%>" alt="" width="36px" class="disable" id="<%= `platinum_badge_link_img`%>">
+                <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="platinum" href="#" id="platinum_badge_link">
+                    <img title="Download Platinum Badge" src="/img/platinum_medal.svg" alt="" width="36px" class="disable" id="platinum_badge_link_img">
                 </button>
             </div>
         </div>
     </div>
-    <%- include('common/feedback/feedback.ejs', {page: "Validation Thank You Page"}) %>
     <div class="row justify-content-center mt-5">
-        <%- include('common/languageGoal.ejs', {ButtonText:__('Validate More'),url:"./validator-page.html",TEXT:"language",TEXT2:"hrs"})%>
+        <div class="col-lg-3 col-md-6 col-8 text-center">
+            <div class="mb-3">
+                <span><%- __('Help your language achieve it’s goal of <span id="language-hour-goal"></span> hrs. We know you can do more!') %></span>
+            </div>
+            <a href="./record.html" class="btn rounded-pill btn-custom-primary btn-lg h6 w-100">
+                <%= __('Contribute More') %>
+            </a>
+        </div>
     </div>
+    <%- include('../common/feedback.ejs', {page: "Contribution Thank You Page"}) %>
 </div>
-<%- include('common/modals/speakerDetails/speakerDetails.ejs',{path:"./"}) %>
+
+<%- include('../common/speakerDetails.ejs',{path:"../"}) %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="/js/validator-thank-you.js"></script>
+<script src="/js/thank-you.js"></script>
 <script src="/js/loadFeedback.js"></script>
 </body>
+
 </html>
+

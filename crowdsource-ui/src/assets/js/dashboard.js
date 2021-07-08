@@ -133,7 +133,7 @@ const initializeBlock = function () {
     localStorage.setItem('module','bolo');
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
-    const $startRecordBtnTooltip = $startRecordBtn.parent();
+            const $startRecordBtnTooltip = $startRecordBtn.parent();
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
     const $userName = $('#username');
     updateLanguage('');
