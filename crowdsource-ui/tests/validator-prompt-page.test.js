@@ -14,21 +14,17 @@ window.AudioContext = jest.fn().mockImplementation(() => {
   }
 });
 
-const { showInstructions } = require('../src/assets/js/validator-instructions');
 const { readFileSync } = require('fs');
 const { stringToHTML, mockLocalStorage } = require('./utils');
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../src/views/validator-prompt-page.ejs`, 'UTF-8') +
+  readFileSync(`${__dirname}/../build/views/boloIndia/validator-prompt-page.ejs`, 'UTF-8') +
   readFileSync(`${__dirname}/../build/views/common/headerWithoutNavBar.ejs`, 'UTF-8') +
   readFileSync(`${__dirname}/../src/views/modals/mic-speaker-testing.ejs`, 'UTF-8')+
   readFileSync(`${__dirname}/../src/views/modals/validation-report-modal.ejs`, 'UTF-8')
 
 );
 
-jest.mock('../src/assets/js/validator-instructions', () => ({
-  showInstructions: jest.fn()
-}))
 
 const Visualizer = require('../src/assets/js/visualizer');
 jest.mock('../src/assets/js/visualizer');
@@ -39,19 +35,7 @@ const {
   setAudioPlayer,
 } = require('../src/assets/js/validator-prompt-page');
 
-describe("addListeners", () => {
-  describe('onClick instructions-link', () => {
-    test('should show Instructions pop-up', () => {
-      require('../src/assets/js/validator-prompt-page')
-      addListeners();
-      document.getElementById('instructions-link').click();
-      expect($("#validator-page-content").hasClass("d-none")).toEqual(true);
 
-      expect(showInstructions).toHaveBeenCalled();
-      jest.clearAllMocks();
-    });
-  });
-});
 
 // describe("startVisualizer",()=>{
 //   test("should start visualiser",()=>{
