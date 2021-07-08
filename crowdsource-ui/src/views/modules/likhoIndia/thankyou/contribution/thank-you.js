@@ -7,8 +7,8 @@ const {
   MODULE,
   TOP_LANGUAGES_BY_HOURS,
   ALL_LANGUAGES,
-  LIKHO_FROM_LANGUAGE,
-  LIKHO_TO_LANGUAGE
+  LIKHO_TO_LANGUAGE,
+  CONTRIBUTION_LANGUAGE
 } = require("../common/constants");
 
 const {
@@ -71,7 +71,7 @@ const getLanguageStats = function () {
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
         const contributionLanguage = localStorage.getItem(
-          LIKHO_FROM_LANGUAGE
+          CONTRIBUTION_LANGUAGE
         );
         const module = localStorage.getItem(CURRENT_MODULE);
         const languages = getContributedAndTopLanguage(module == MODULE.likho.value || module == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, MODULE.likho.value);
@@ -115,7 +115,7 @@ const getLanguageStats = function () {
 };
 
 function setSentencesContributed() {
-  const contributionLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const speakerDetails = localStorage.getItem("speakerDetails");
   let userName = "";
   if (speakerDetails) {
@@ -155,7 +155,7 @@ function executeOnLoad() {
     setSentencesContributed();
     // toggleFooterPosition();
 
-    const contributionLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
     if (contributionLanguage && toLanguage) {
       updateLikhoLocaleLanguagesDropdown(contributionLanguage, toLanguage);

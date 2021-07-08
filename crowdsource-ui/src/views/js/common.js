@@ -1,5 +1,5 @@
 const {
-  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS,LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE,SPEAKER_DETAILS_KEY,DEFAULT_CON_LANGUAGE
+  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE,SPEAKER_DETAILS_KEY,DEFAULT_CON_LANGUAGE
 } = require('./constants');
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { constructChart } = require('./horizontalBarGraph');
@@ -10,7 +10,7 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
   if(topLanguagesData  && topLanguagesData.length) {
     topLanguagesData = topLanguagesData.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1)
     const topLanguagesResult = [...topLanguagesData];
-    const contributedLanguage = type == "likho" ? localStorage.getItem(LIKHO_FROM_LANGUAGE) + '-' + localStorage.getItem(LIKHO_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    const contributedLanguage = type == "likho" ? localStorage.getItem(CONTRIBUTION_LANGUAGE) + '-' + localStorage.getItem(LIKHO_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const topLanguageArray = [];
     let topLanguages = [];
     const contributedLanguageHours = topLanguagesData.find(item => item.language == contributedLanguage);
@@ -280,24 +280,14 @@ const showOrHideExtensionCloseBtn = function (){
   // }
 }
 
-
 const updateLikhoLocaleLanguagesDropdown = (language, toLanguage) => {
   const dropDown = $('#localisation_dropdown');
   const localeLang = ALL_LANGUAGES.find(ele => ele.value == language);
-  const toLang = ALL_LANGUAGES.find(ele => ele.value == toLanguage);
-  const invalidFromLang = language.toLowerCase() == "english" || localeLang.hasLocaleText == false;
-  const invalidToLang = toLanguage.toLowerCase() == "english" || toLang.hasLocaleText == false;
-  if (invalidToLang && invalidFromLang) {
+  if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
     dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
-  } else if (invalidFromLang) {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-      <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  } else if (invalidToLang) {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
   } else {
     dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+    <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
   }
 }
 
