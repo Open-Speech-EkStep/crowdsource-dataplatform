@@ -305,8 +305,8 @@ def get_key_map(base_path, main_files_map):
                     break
             if not found:
                 un_matched_keys.append(key)
-        
-    print(len(key_file_map.keys()), len(en_data_keys), len(un_matched_keys))
+#     print(un_matched_keys)
+#     print(len(key_file_map.keys()), len(en_data_keys), len(un_matched_keys))
     return key_file_map
 
 
@@ -345,7 +345,7 @@ def get_keys_with_path():
 
     cwd = os.getcwd()
     base_path = cwd[:cwd.index('utils/localisation_script')]+'crowdsource-ui/src/views'
-    print(base_path)
+#     print(base_path)
     kf_map = get_key_map(base_path, main_files_map)
     out_map = {}
     for k,path in kf_map.items():
