@@ -32,7 +32,8 @@ const {
     getAvailableLanguages,
     getTargetInfo,
     userVerify,
-    languageGoal
+    languageGoal,
+    getUserRewards
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
@@ -409,6 +410,18 @@ router.get('/rewards-info', validateRewardsInfoInput, async (req, res) => {
     }
 
     return res.status(404).send('Data not found');
+});
+
+router.get('/user-rewards/:username?', async (req, res) => {
+    const userId = req.cookies.userId ?? '';
+    const userName = req.params.username ?? '';
+    try {
+        const rewardData = await getUserRewards(userId, userName);
+        return res.send(rewardData);
+    } catch (error) {
+        console.log(error);
+        res.status(502).send({ statusCode: 502, message: error.message });
+    }
 });
 
 router.get('/language-goal/:type/:language/:source', validateLanguageGoalInput, (req, res) => languageGoal(req, res));
