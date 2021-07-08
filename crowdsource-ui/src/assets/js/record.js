@@ -1,5 +1,5 @@
 const fetch = require('./fetch')
-const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo } = require('./utils');
+const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo,reloadPageOnActiveTab } = require('./utils');
 const { LOCALE_STRINGS,MODULE,CONTRIBUTION_LANGUAGE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
 const { onChangeUser , showUserProfile,onOpenUserDropDown} = require('./header');
@@ -697,6 +697,7 @@ function executeOnLoad() {
 
 $(document).ready(() => {
     localStorage.setItem('module','bolo');
+    reloadPageOnActiveTab();
     getLocaleString().then(() => {
         executeOnLoad();
     }).catch(() => {

@@ -1,5 +1,6 @@
 const { onActiveNavbar, onChangeUser, showUserProfile,onOpenUserDropDown} = require('./header');
 const { redirectToLocalisedPage, changeLocale} = require('./locale');
+const { reloadPageOnActiveTab} = require('./utils');
 const {setDropdownValues} = require('../../../build/js/common/header');
 const { CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY,DEFAULT_CON_LANGUAGE } = require('./constants');
 const { hasUserRegistered} = require('./common');
@@ -23,4 +24,6 @@ $(document).ready(function () {
   }
   onChangeUser('./home.html','home');
   onOpenUserDropDown();
+  reloadPageOnActiveTab();
+
 });

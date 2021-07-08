@@ -15,6 +15,7 @@ const {
   updateLocaleLanguagesDropdown,
   getLocaleString,
   performAPIRequest,
+  reloadPageOnActiveTab
 } = require("./utils");
 const {showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../../../build/js/common/common');
 const {onChangeUser,onOpenUserDropDown,showUserProfile} = require('./header');
@@ -186,6 +187,7 @@ function executeOnLoad() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.bolo.value);
+  reloadPageOnActiveTab();
 
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));

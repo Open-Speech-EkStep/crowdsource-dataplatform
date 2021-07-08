@@ -5,7 +5,7 @@ const { setSpeakerDetails,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick } = require('./speakerDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString, getJson, formatTime } = require('./utils');
+const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString, getJson, formatTime, reloadPageOnActiveTab } = require('./utils');
 const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES,MODULE,CONTRIBUTION_LANGUAGE ,SPEAKER_DETAILS_KEY} = require('../../../build/js/common/constants');
 // const { hasUserRegistered } = require('../../../build/js/common/common');
 const { hasUserRegistered } = require('./common');
@@ -133,6 +133,7 @@ function updateLanguage(language) {
 }
 
 $(document).ready(function () {
+    reloadPageOnActiveTab();
     localStorage.removeItem('previousLanguage');
     localStorage.setItem('module','bolo');
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();

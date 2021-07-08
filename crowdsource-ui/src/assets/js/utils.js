@@ -29,19 +29,29 @@ function getBrowserInfo() {
   return info.trim();
 }
 
+const reloadPageOnActiveTab = function (){
+  $(window).focus(function() {
+    alert(
+      'This page was inactive for sometime !!! Need to Reload Website'
+    );
+    const locale = localStorage.getItem("i18n");
+    location.href = `/${locale}/home.html`;
+  });
+}
+
 function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
+    const d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toGMTString();
+    const expires = "expires=" + d.toGMTString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
+    const name = cname + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
         }
@@ -253,5 +263,6 @@ module.exports = {
   getJson,
   setPageContentHeight,
   getDeviceInfo, 
-  getBrowserInfo
+  getBrowserInfo,
+  reloadPageOnActiveTab
 }
