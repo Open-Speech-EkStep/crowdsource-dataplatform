@@ -284,7 +284,7 @@ def get_key_map(base_path, main_files_map):
     fileExt = r"**/*.ejs"
     common_folder_ejs_files = list(pathlib.Path(base_path+'/common').glob(fileExt))
     i_key_path_map = get_identified_key_path_map(key_map, common_folder_ejs_files)
-    with open('./../../crowdsource-ui/locales/en.json') as f:
+    with open(base_path.replace("/src/views","")+'/locales/en.json') as f:
         en_data = json.load(f)
     en_data_keys = set(en_data.keys())
     key_gen_tags = read_key_gen(base_path+'/key_gen.ejs', base_path)
