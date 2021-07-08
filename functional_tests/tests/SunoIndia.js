@@ -165,28 +165,28 @@ step("When user click on Lets Go Button", async function () {
 step("Check <card> option should be <state> on Home page", async function (card, state) {
 
     if (card == "Transcribe" && state == "disabled") {
-        assert.ok(await text('Not collecting contributions for selected language').isVisible());
+        assert.ok(await text('Only validations invited for the selected language').isVisible());
 
     }
 
     if (card == "Transcribe" && state == "enabled") {
-        assert.ok(! await text('Not collecting contributions for selected language').isVisible());
+        assert.ok(! await text('Only validations invited for the selected language').isVisible());
     }
 
     if (card == "Label" && state == "disabled") {
-        assert.ok(await text('Not collecting contributions for selected language').isVisible());
+        assert.ok(await text('Only validations invited for the selected language').isVisible());
     }
 
     if (card == "Label" && state == "enabled") {
-        assert.ok(! await text('Not collecting contributions for selected language').isVisible());
+        assert.ok(! await text('Only validations invited for the selected language').isVisible());
     }
 
     if (card == "Validate" && state == "disabled") {
-        assert.ok(await text('No validation data available for selected language').isVisible());
+        assert.ok(await text('Only contributions invited for the selected language').isVisible());
     }
 
     if (card == "Validate" && state == "enabled") {
-        assert.ok(! await text('No validation data available for selected language').isVisible());
+        assert.ok(! await text('Only contributions invited for the selected language').isVisible());
     }
 
 });

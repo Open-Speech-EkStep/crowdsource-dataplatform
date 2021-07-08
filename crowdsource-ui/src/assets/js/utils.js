@@ -176,17 +176,17 @@ const formatTime = function (hours, minutes = 0, seconds = 0) {
   let result = "";
   
   if (hours > 0) {
-    result += `${hours}h `;
+    result += `${hours} hours `;
   }
   if (minutes > 0) {
-    result += `${minutes}m `;
+    result += `${minutes} minutes `;
   }
   if (hours === 0 && minutes === 0 && seconds > 0) {
-    result += `${seconds}s `;
+    result += `${seconds} seconds `;
   }
 
   if(hours === 0 && minutes === 0 && seconds === 0){
-    result += '0s ';
+    result += '0 seconds ';
   }
 
   if(result.charAt(result.length - 1 ) !== ' ')

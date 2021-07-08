@@ -12,7 +12,7 @@ const chartReg = {};
 
 function getOrderedGenderData(formattedGenderData) {
     const orderedGenderData = [];
-    const order = ['Female', 'Male', 'Others', 'Anonymous'];
+    const order = ['Female', 'Male', 'Others', 'Not Specified'];
     order.forEach((gender) => {
         formattedGenderData.forEach((data) => {
             if (gender.toLowerCase() === data.gender.toLowerCase()) {
@@ -34,19 +34,19 @@ function getAgeGroupData(data, key) {
     const years = 'years';
     let formattedData = [];
     data.forEach(item => {
-        item[key] === "" ? item[key] = 'Anonymous' : item[key] = `${item[key]} ${years}`;
+        item[key] === "" ? item[key] = 'Not Specified' : item[key] = `${item[key]} ${years}`;
         formattedData.push(item);
     });
     return formattedData;
 }
 
 const getGenderData = (genderData) => {
-    const genderOrder = ['male', 'female', 'anonymous', 'transgender'];
+    const genderOrder = ['male', 'female', 'not Specified', 'transgender'];
     const formattedGenderData = [];
     genderOrder.forEach(gender => {
         genderData.data.forEach(item => {
             let gType = item.gender;
-            if (item.gender === "") item.gender = 'anonymous';
+            if (item.gender === "") item.gender = 'not Specified';
             if (item.gender.toLowerCase().indexOf('transgender') > -1 || item.gender.toLowerCase().indexOf('rather') > -1) gType = "transgender";
             if (gender === gType) {
                 const genderType = gType.charAt(0).toUpperCase() + gType.slice(1);
