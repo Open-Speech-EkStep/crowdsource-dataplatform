@@ -249,8 +249,8 @@ describe("setSpeakersData",()=> {
     setSpeakerData(data, "Hindi", "suno");
 
     expect($speakerDataLanguagesWrapper.hasClass('d-none')).toEqual(true);
-    expect($speakersDataContributionValue.text()).toEqual(`1h 13m`);
-    expect($speakersDataValidationValue.text()).toEqual(`2h 39m`);
+    expect($speakersDataContributionValue.text()).toEqual(`1 hours 13 minutes`);
+    expect($speakersDataValidationValue.text()).toEqual(`2 hours 39 minutes`);
     expect($speakersDataSpeakerValue.text()).toEqual(`80`);
   })
 
@@ -261,8 +261,8 @@ describe("setSpeakersData",()=> {
 
     expect($speakerDataLanguagesWrapper.hasClass('d-none')).toEqual(false);
     expect($speakerDataLanguagesValue.text()).toEqual('3');
-    expect($speakersDataContributionValue.text()).toEqual(`1h 13m`);
-    expect($speakersDataValidationValue.text()).toEqual(`2h 39m`);
+    expect($speakersDataContributionValue.text()).toEqual(`1 hours 13 minutes`);
+    expect($speakersDataValidationValue.text()).toEqual(`2 hours 39 minutes`);
     expect($speakersDataSpeakerValue.text()).toEqual(`80`);
   })
 
@@ -272,8 +272,8 @@ describe("setSpeakersData",()=> {
     setSpeakerData(data, "Hindi", "bolo");
 
     expect($speakerDataLanguagesWrapper.hasClass('d-none')).toEqual(true);
-    expect($speakersDataContributionValue.text()).toEqual(`1h 13m`);
-    expect($speakersDataValidationValue.text()).toEqual(`2h 39m`);
+    expect($speakersDataContributionValue.text()).toEqual(`1 hours 13 minutes`);
+    expect($speakersDataValidationValue.text()).toEqual(`2 hours 39 minutes`);
     expect($speakersDataSpeakerValue.text()).toEqual(`80`);
   })
 
@@ -284,8 +284,8 @@ describe("setSpeakersData",()=> {
 
     expect($speakerDataLanguagesWrapper.hasClass('d-none')).toEqual(false);
     expect($speakerDataLanguagesValue.text()).toEqual('3');
-    expect($speakersDataContributionValue.text()).toEqual(`1h 13m`);
-    expect($speakersDataValidationValue.text()).toEqual(`2h 39m`);
+    expect($speakersDataContributionValue.text()).toEqual(`1 hours 13 minutes`);
+    expect($speakersDataValidationValue.text()).toEqual(`2 hours 39 minutes`);
     expect($speakersDataSpeakerValue.text()).toEqual(`80`);
   })
 
