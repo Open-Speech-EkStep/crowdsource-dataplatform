@@ -131,9 +131,9 @@ function initializeBlock() {
         localStorage.setItem("selectedType", "contribute");
         if(!hasUserRegistered()){
             $('#userModal').modal('show');
-            setStartRecordingBtnOnClick('../record.html',MODULE.bolo.value);
+            setStartRecordingBtnOnClick('./record.html',MODULE.bolo.value);
         } else {
-            location.href ='../record.html';
+            location.href ='./record.html';
         }
     });
 
@@ -142,9 +142,9 @@ function initializeBlock() {
         localStorage.setItem("selectedType", "validate");
         if(!hasUserRegistered()){
             $('#userModal').modal('show');
-            setStartRecordingBtnOnClick('../validator-page.html',MODULE.bolo.value);
+            setStartRecordingBtnOnClick('./validator-page.html',MODULE.bolo.value);
         } else {
-            location.href ='../validator-page.html';
+            location.href ='./validator-page.html';
         }
     });
 
