@@ -15,18 +15,18 @@
     <style>.btn.focus,.btn:focus{outline:0;box-shadow:0 0}</style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body> <%- include('common/header/headerWithoutNavBar.ejs',{path:"./boloIndia/home.html", MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
+<body> <%- include('../common/headerWithoutNavBar.ejs',{path:"../home.html", MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg",homePath:"./home.html"}); %>
 <div id="loader" class="overlay__content"><span class="spinner"></span></div>
 <div id="page-content" class="d-none">
     <div id="content-wrapper" class="container-fluid d-flex flex-column">
         <div class="row m-0 px-4">
-            <%- include('common/breadcrumb/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg", homePath:"./boloIndia/home.html"}) %>
+            <%- include('../common/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg", homePath:"./home.html"}) %>
         </div>
-        <%- include modals/recording-instructions.ejs %>
+        <%- include ../../../src/views/modals/recording-instructions.ejs %>
         <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">
             <div class="row position-absolute bolo-back-btn top-back-btn">
             <button class="btn btn-link p-0 back-btn" id="back-btn">
-                <a href="./boloIndia/home.html" class="nav-link d-lg-inline-flex" style="color:#959595;font-size:16px">
+                <a href="./home.html" class="nav-link d-lg-inline-flex" style="color:#959595;font-size:16px">
                     <span class="material-icons" style="vertical-align:sub">
             arrow_back
             </span>
@@ -35,10 +35,10 @@
                 </a>
             </button>
         </div>
-            <%- include components/report-btn.ejs %>
-            <%- include components/mic-speaker-test-btn.ejs %>
+            <%- include ../../../src/views/components/report-btn.ejs %>
+            <%- include ../../../src/views/components/mic-speaker-test-btn.ejs %>
         </div>
-        <%- include modals/mic-speaker-testing.ejs %>
+        <%- include ../../../src/views/modals/mic-speaker-testing.ejs %>
         <div class="xs-p-16" id="functional-row">
             <div class="row justify-content-center my-5">
                 <div class="col-md-8 col-sm-10 text-center prompt"><label class="h1 font-weight-normal" id="sentenceLbl"></label></div>
@@ -112,31 +112,18 @@
         </p>
         <div class="row justify-content-center mt-5">
             <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
-                <a class="btn btn-primary text-white btn-lg h6 w-100" href="./boloIndia/home.html">
+                <a class="btn btn-primary text-white btn-lg h6 w-100" href="./home.html">
                     <%- __('Back to Bolo India Home') %>
                 </a></div>
         </div>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%- include modals/report-modal.ejs %>
-<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-danger"><h5 class="modal-title h2" id="errorModalLabel"><span class="material-icons md-48 align-middle">error </span> <%= __('Error!!!') %> </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body"> <%= __('An unexpected error occured while processing your request. Please try after some time.') %> </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"> <%= __('Close') %> </button>
-            </div>
-        </div>
-    </div>
-</div>
-<%- include('common/modals/speakerDetails/speakerDetails.ejs',{path:"./"}) %>
-<%- include('common/sourceInfo/sourceInfo.ejs') %>
-<%- include('common/feedback/feedback.ejs', {page:"Speak"}) %>
+<%- include ../../../src/views/modals/report-modal.ejs %>
+<%- include ../common/errorModal.ejs %>
+<%- include('../common/speakerDetails.ejs',{path:"../"}) %>
+<%- include('../common/sourceInfo.ejs') %>
+<%- include('../common/feedback.ejs', {page:"Speak"}) %>
 <script src="https://cdn.jsdelivr.net/gh/mattdiamond/Recorderjs@08e7abd99739be6946f19f6806ccb368138f2dd3/dist/recorder.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js" integrity="sha256-22tRfnWCd6VIZ8O39ATlPY3pctqfFp9tFsyl4swl+VQ=" crossorigin="anonymous"></script>
 

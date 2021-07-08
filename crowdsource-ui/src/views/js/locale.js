@@ -34,15 +34,11 @@ const changeLocale = function (locale) {
     }
     const module = localStorage.getItem(CURRENT_MODULE);
     localStorage.setItem("i18n", locale);
-    // if(module == 'home'){
-    //     location.href = `/${locale}/${currentPage}`;
-    // } else if(module === 'bolo' && currentPage != 'home.html'){
-    //     location.href = `/${locale}/${currentPage}`;
+    // if(module == 'bolo' && currentPage == "home.html"){
+    //     location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
     // }
-    if(module == 'bolo' && currentPage == "home.html"){
-        location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
-    }
-    else if(module == 'bolo' || module == 'home' || currentPage == "badges.html") {
+    // else
+        if(module == 'home' || currentPage == "badges.html") {
         location.href = `/${locale}/${currentPage}`;
     }
     else {

@@ -485,5 +485,6 @@
 	"By duration of hours": "By duration of hours",
 	"Total recordings": "Total recordings",
 	"Total sentences": "Total sentences",
-	"Total images": "Total images"
+	"Total images": "Total images",
+	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings."
 }
