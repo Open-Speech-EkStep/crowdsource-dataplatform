@@ -27,8 +27,8 @@ describe("updateHrsForSayAndListen", () => {
     updateHrsForSayAndListen(language);
 
     flushPromises().then(() => {
-      expect($say_p_3.innerHTML).toEqual("0s recorded in Hindi");
-      expect($listen_p_3.innerHTML).toEqual("0s validated in Hindi");
+      expect($say_p_3.innerHTML).toEqual("0 seconds recorded in Hindi");
+      expect($listen_p_3.innerHTML).toEqual("0 seconds validated in Hindi");
       expect($sayLoader.hasClass('d-none')).toEqual(true);
       expect($listenLoader.hasClass('d-none')).toEqual(true);
       fetchMock.reset();
@@ -47,8 +47,8 @@ describe("updateHrsForSayAndListen", () => {
     updateHrsForSayAndListen(language);
 
     flushPromises().then(() => {
-      expect($say_p_3.innerHTML).toEqual("20h recorded in Hindi");
-      expect($listen_p_3.innerHTML).toEqual("30h validated in Hindi");
+      expect($say_p_3.innerHTML).toEqual("20 hours recorded in Hindi");
+      expect($listen_p_3.innerHTML).toEqual("30 hours validated in Hindi");
       expect($sayLoader.hasClass('d-none')).toEqual(true);
       expect($listenLoader.hasClass('d-none')).toEqual(true);
       fetchMock.reset();

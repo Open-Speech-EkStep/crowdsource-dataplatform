@@ -73,19 +73,19 @@ describe('test utils', () => {
 
     describe("formatTime", () => {
         test("should formats h only for given h", () => {
-            expect(formatTime(162)).toEqual("162h");
+            expect(formatTime(162)).toEqual("162 hours");
         });
 
         test("should format h and min for given h and m", () => {
-            expect(formatTime(162, 12)).toEqual("162h 12m");
+            expect(formatTime(162, 12)).toEqual("162 hours 12 minutes");
         });
 
         test("should format in s when hours and minutes are 0", () => {
-            expect(formatTime(0, 0, 2)).toEqual("2s");
+            expect(formatTime(0, 0, 2)).toEqual("2 seconds");
         });
 
         test("should show 0s when hours, minutes and seconds are 0", () => {
-            expect(formatTime(0, 0, 0)).toEqual("0s");
+            expect(formatTime(0, 0, 0)).toEqual("0 seconds");
         });
     });
 
