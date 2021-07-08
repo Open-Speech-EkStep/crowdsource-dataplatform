@@ -110,15 +110,24 @@ group by dataset_row.dataset_row_id, dataset_row.media->>'data', mds.params
 order by dataset_row.dataset_row_id
 limit 5`;
 
-const getOrderedUniqueMediaForParallel = `select dr.dataset_row_id, dr.media->>'data' as media_data, coalesce(dr.media ->> 'collectionSource', mds.params ->> 'collectionSource') as source_info 
-from dataset_row dr 
+const getOrderedUniqueMediaForParallel = `with existingData as 
+(select con.dataset_row_id from contributions con 
+ inner join dataset_row ds on con.dataset_Row_id=ds.dataset_row_id 
+ where ds.type=$5 and ds.media->>'language'=$4 and con.media->>'language'=$6 and con.action='completed'),
+ filteredDatasetRow as 
+ (
+ select * from dataset_row dr where dr.media->>'language'=$4 and difficulty_level=$3 and type=$5
+ )
+ 
+select dr.dataset_row_id, dr.media->>'data' as media_data, null as source_info 
+from filteredDatasetRow dr 
 left join master_dataset mds on dr.master_dataset_id=mds.master_dataset_id
 left join contributors con on con.contributor_identifier=$1 and user_name=$2
 left join contributions cont on cont.dataset_row_id=dr.dataset_row_id and cont.contributed_by=con.contributor_id 
-inner join configurations conf on conf.config_name='include_profane' 
-inner join configurations conf2 on conf2.config_name='show_demo_data'
-where dr.media->>'language'=$4 and difficulty_level=$3 and type=$5 
-and (((state is null) or ((state='contributed' or state='validated') and not exists (select 1 from contributions where dataset_row_id=dr.dataset_row_id and contributions.media->>'language'=$6  and action='completed'))) 
+left join configurations conf on conf.config_name='include_profane' 
+left join configurations conf2 on conf2.config_name='show_demo_data'
+left join existingData ed on ed.dataset_row_id=dr.dataset_row_id
+where (((state is null) or ((state='contributed' or state='validated') and ed.dataset_row_id is null)) 
   and (cont.action is null or (coalesce(cont.action,'')='skipped' and cont.contributed_by!=con.contributor_id)))
 and (conf.value=1 or is_profane=false)
 and (conf2.value=0 or for_demo=true)
