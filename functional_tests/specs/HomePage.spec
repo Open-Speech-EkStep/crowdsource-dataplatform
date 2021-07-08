@@ -26,6 +26,6 @@ Tags: page
 ## Validate Localisation
 * Should select "हिंदी" from localisation dropdown "localeDropdownMenuButton"
 * Clicking "देखो इंडिया" should navigate to "Dekho India" Page
-* Select "लिखो इंडिया" from header
+* Select "likho_india_tab" from header
 //* Validate contribution language should be selected "हिंदी" from "from-language"
 * Localisation "localeDropdownMenuButton" dropdown should have "English" & "हिंदी" value
