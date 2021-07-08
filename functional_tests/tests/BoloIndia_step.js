@@ -22,7 +22,7 @@ const {
 } = require('taiko');
 const path = require('path');
 
-const headless = process.env.headless_chrome.toLowerCase() === 'false';
+const headless = process.env.headless_chrome.toLowerCase() === 'true';
 const testUrl = process.env.test_url || 'https://dev-nplt.vakyansh.in';
 
 beforeSuite(async () => {
