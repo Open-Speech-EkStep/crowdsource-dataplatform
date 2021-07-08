@@ -299,19 +299,25 @@ gulp.task('generateBuild',
   gulp.parallel('common-ejs-gen', 'ejs-gen-boloIndia', 'ejs-gen-sunoIndia', 'ejs-gen-likhoIndia', 'ejs-gen-dekhoIndia', 'js-common-flat', 'js-boloIndia-flat', 'js-sunoIndia-flat', 'js-likhoIndia-flat', 'js-dekhoIndia-flat')
 );
 
+gulp.task('copy locales', () =>
+  gulp.src(['locales/*.json'])
+    .pipe(gulp.dest('./../crowdsource-api/locales'))
+);
+
 gulp.task(
   'default',
-  gulp.parallel(
-    'js',
-    'json',
-    gulp.series('js-common-flat', 'js-common', 'js-boloIndia-flat', 'js-boloIndia', 'js-sunoIndia-flat', 'js-sunoIndia', 'js-likhoIndia-flat', 'js-likhoIndia', 'js-dekhoIndia-flat', 'js-dekhoIndia'),
-    'css',
-    'scss',
-    'css-common',
-    'css-sunoIndia',
-    'css-boloIndia',
-    'css-likhoIndia',
-    'css-dekhoIndia',
-    gulp.series('html', 'common-ejs-gen', 'html-gen-common', 'ejs-gen-boloIndia', 'html-gen-boloIndia', 'ejs-gen-sunoIndia', 'html-gen-sunoIndia', 'ejs-gen-likhoIndia', 'html-gen-likhoIndia', 'ejs-gen-dekhoIndia', 'html-gen-dekhoIndia')
-  )
+  gulp.series('copy locales',
+    gulp.parallel(
+      'js',
+      'json',
+      gulp.series('js-common-flat', 'js-common', 'js-boloIndia-flat', 'js-boloIndia', 'js-sunoIndia-flat', 'js-sunoIndia', 'js-likhoIndia-flat', 'js-likhoIndia', 'js-dekhoIndia-flat', 'js-dekhoIndia'),
+      'css',
+      'scss',
+      'css-common',
+      'css-sunoIndia',
+      'css-boloIndia',
+      'css-likhoIndia',
+      'css-dekhoIndia',
+      gulp.series('html', 'common-ejs-gen', 'html-gen-common', 'ejs-gen-boloIndia', 'html-gen-boloIndia', 'ejs-gen-sunoIndia', 'html-gen-sunoIndia', 'ejs-gen-likhoIndia', 'html-gen-likhoIndia', 'ejs-gen-dekhoIndia', 'html-gen-dekhoIndia')
+    ))
 );

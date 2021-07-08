@@ -134,6 +134,8 @@ crowdsource-ui/target/*
 crowdsource-api/.env
 # ignore the upload files
 crowdsource-api/uploads
+# ignore api locales folder
+crowdsource-api/locales
 
 public 
 build
