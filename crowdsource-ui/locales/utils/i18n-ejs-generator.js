@@ -21,9 +21,9 @@ async function ejs2html(path, information, i18n, targetPath, fileName, locale,co
 
     let html = ejs.render(data, info);
 
-    html = html.replaceAll('"\/img\/',`"${contextRoot}/img/`)
-    html = html.replaceAll('"\/js\/',`"${contextRoot}/js/`)
-    html = html.replaceAll('"\/css\/',`"${contextRoot}/css/`)
+    html = html.replace(/"\/img\//g,`"${contextRoot}/img/`)
+    html = html.replace(/"\/js\//g,`"${contextRoot}/js/`)
+    html = html.replace(/"\/css\//g,`"${contextRoot}/css/`)
 
     fs.mkdirSync(targetPath, { recursive: true });
     fs.writeFile(targetPath + '/' + fileName, html, function (err2) {
