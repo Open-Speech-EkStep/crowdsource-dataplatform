@@ -117,6 +117,7 @@ app.use(function (req, res, next) {
             maxAge: ONE_YEAR,
             httpOnly: true,
             secure: true,
+            sameSite:'none'
         });
     }
     next();

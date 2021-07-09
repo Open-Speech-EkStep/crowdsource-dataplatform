@@ -6,6 +6,7 @@ const htmlmin = require('gulp-htmlmin');
 const sass = require('gulp-sass')(require('sass'));
 const browserify = require('gulp-browserify');
 const replace = require('gulp-replace-task');
+const replace_sting = require('gulp-replace');
 const args = require('yargs').argv;
 const fs = require('fs');
 const generateLocalisedHtmlFromEjs = require('./locales/utils/i18n-ejs-generator');
@@ -20,27 +21,27 @@ gulp.task('common-ejs-gen', function () {
 });
 
 gulp.task('html-gen-common', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/src/views`, `${__dirname}/target`, null, settings.enabled_languages);
+  generateLocalisedHtmlFromEjs(`${__dirname}/src/views`, `${__dirname}/target`, null, settings.enabled_languages,settings.contextRoot);
   callback();
 });
 
 gulp.task('html-gen-boloIndia', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'boloIndia', settings.enabled_languages);
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'boloIndia', settings.enabled_languages,settings.contextRoot);
   callback();
 });
 
 gulp.task('html-gen-sunoIndia', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'sunoIndia', settings.enabled_languages);
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'sunoIndia', settings.enabled_languages,settings.contextRoot);
   callback();
 });
 
 gulp.task('html-gen-likhoIndia', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'likhoIndia', settings.enabled_languages);
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'likhoIndia', settings.enabled_languages,settings.contextRoot);
   callback();
 });
 
 gulp.task('html-gen-dekhoIndia', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'dekhoIndia', settings.enabled_languages);
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'dekhoIndia', settings.enabled_languages,settings.contextRoot);
   callback();
 });
 
@@ -118,6 +119,16 @@ gulp.task('js', function () {
       replace({
         patterns: [
           {
+            match: 'contextRoot',
+            replacement: settings.contextRoot,
+          },
+        ],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
             match: 'cdnUrl',
             replacement: settings.cdnUrl,
           },
@@ -132,6 +143,7 @@ gulp.task('js', function () {
           },
         ],
       })
+    ).pipe(replace_sting('"\/img\/', `"${settings.contextRoot}/img/`)
     ).pipe(
       replace({
         patterns: [
@@ -157,6 +169,16 @@ gulp.task('js-common-flat', function () {
   return gulp
     .src(['src/views/common/**/*.js', 'src/views/js/*.js'])
     .pipe(gulpFlatten())
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'contextRoot',
+            replacement: settings.contextRoot,
+          },
+        ],
+      })
+    )
     .pipe(gulp.dest('build/js/common'));
 });
 
@@ -164,6 +186,16 @@ function jsFlatten(moduleName) {
   return gulp
     .src([`src/views/modules/${moduleName}/**/*.js`])
     .pipe(gulpFlatten())
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'contextRoot',
+            replacement: settings.contextRoot,
+          },
+        ],
+      })
+    )
     .pipe(gulp.dest(`build/js/${moduleName}`));
 }
 
@@ -210,11 +242,22 @@ function jsGulp(moduleName) {
       replace({
         patterns: [
           {
+            match: 'contextRoot',
+            replacement: settings.contextRoot,
+          },
+        ],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
             match: 'cdnUrl',
             replacement: settings.cdnUrl,
           },
         ],
       })
+    ).pipe(replace_sting('"\/img\/', `"${settings.contextRoot}/img/`)
     ).pipe(
       replace({
         patterns: [
@@ -256,7 +299,7 @@ gulp.task('js-likhoIndia', () => { return jsGulp('likhoIndia') });
 gulp.task('js-dekhoIndia', () => { return jsGulp('dekhoIndia') });
 
 gulp.task('css', function () {
-  return gulp.src(['src/assets/css/*.css']).pipe(gulpFlatten()).pipe(cleanCss()).pipe(gulp.dest('target/css'));
+  return gulp.src(['src/assets/css/*.css']).pipe(gulpFlatten()).pipe(cleanCss()).pipe(replace_sting('\/img\/', `${settings.contextRoot}/img/`)).pipe(gulp.dest('target/css'));
 });
 
 gulp.task('scss', function () {
@@ -268,6 +311,7 @@ gulp.task('css-common', function () {
     .src(['src/views/common/**/*.css', 'src/views/style/common.css'])
     .pipe(gulpFlatten())
     .pipe(cleanCss())
+    .pipe(replace_sting('\/img\/', `${settings.contextRoot}/img/`))
     .pipe(gulp.dest('target/css/common'));
 });
 
@@ -277,6 +321,7 @@ function cssClean(moduleName) {
     .src([`src/views/modules/${moduleName}/**/*.css`])
     .pipe(gulpFlatten())
     .pipe(cleanCss())
+    .pipe(replace_sting('\/img\/', `${settings.contextRoot}/img/`))
     .pipe(gulp.dest(`target/css/${moduleName}`));
 }
 
