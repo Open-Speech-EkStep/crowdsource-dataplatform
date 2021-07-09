@@ -279,6 +279,7 @@ workflows:
           extra-build-args: --build-arg NODE_ENV=test
           repo: ${AZURE_REPO}
           tag: test
+          checkout: false
           requires:
             - build_test_ui
 
@@ -336,6 +337,7 @@ workflows:
           extra-build-args: --build-arg NODE_ENV=uat
           repo: ${AZURE_REPO}
           tag: uat
+          checkout: false
           requires:
             - build_uat_ui
 
@@ -383,6 +385,7 @@ workflows:
           extra-build-args: --build-arg NODE_ENV=prod
           repo: ${AZURE_REPO}
           tag: prod
+          checkout: false
           requires:
             - build_prod_ui
 
