@@ -86,7 +86,13 @@ jobs:
 
             ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
 
-            ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --cache-control "max-age=1200" --recursive
+            if [ << parameters.env_name >> == 'prod' ]
+            then
+              echo "Deploying to prod"
+              ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/bhashadaan/" --cache-control "max-age=1200" --recursive
+            else
+              ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --cache-control "max-age=1200" --recursive
+            fi 
 
   db_migrate_azure:
     parameters:
