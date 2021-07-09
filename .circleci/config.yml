@@ -270,6 +270,8 @@ workflows:
             - build_test_ui
 
       - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
           name: push_test_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
@@ -325,6 +327,8 @@ workflows:
             - build_uat_ui
 
       - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
           name: push_uat_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
@@ -370,6 +374,8 @@ workflows:
             - build_prod_ui
 
       - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
           name: push_prod_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
