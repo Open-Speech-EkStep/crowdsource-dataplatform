@@ -1,56 +1,11 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# ###### Validation:
-# 1. Generate all keys into excel - summary report (Read from code base - ejs files).
-# 2. From figma extract keys ( Add / remove keys in excel based on new designs.(for dynamic keys - communicate with UI/UX) - is export from figma possible??? (value updation, new key,value)   )
-# 3. Send to meity (Updation, deletion, Addition will be done).
-# 4. Read excel from meity and generate json and summary report.
-# 5. Update the current html files in case of deletion, addition.
-# 6. Keys in other locale files(hi,pa,ta,te) will be automatically updated.
-# 
-# ###### Translation:
-# 7. Translation excel files for other locales will be generated.
-# 8. Send to sme's(Update translation).
-# 9. Read excel from sme's and generate json and summary report for the respective locales.
-# 10. Ingest into the project.
-# 
-
-# 1. Can string names from design can be exported in figma?
-# 2. Already present keys + new keys that might come up (excel).
-# 3. hash in the next phase.
-
-# *** Current Types of keys: ***
-# 1. Exact string as keys.
-# 2. Keys contain html tags like span, a ,b tags.
-# 3. Dynamic key generation ```(eg: ${text} variable which is replaced by string while running gulp and then matched with json) , ${path} variable```
-# 4. Static keys. ```(eg: Language: English)```
-# 5. special characters in keys. ```(eg: { recordings(s) contributed: '', Transgender - He: '', "(No Username)": "(No Username)",
-# 	"*required": "*required" })```
-# 6. Mix of uppercased, lowercased, camelcased keys.
-# 7. Duplicate Keys differing just by spaces in between.
-# 8. Empty keys.
-# 9. Unused keys.
-# 10. Keys differing by just one word. 
-# (
-#       Eg: {
-#           "Back to Bolo India Home": "Back to Bolo India Home",
-#           "Back to Dekho India Home": "Back to Dekho India Home"
-#       }
-# )
-
-# In[1]:
-
-
 import pandas as pd
 import openpyxl
 import json
 import re
-import pathlib
 import os
 import pathlib
 from ParseHtmlAndGetKeys import get_keys_with_path
-import xlsxwriter
+import argparse
 
 
 # In[2]:
@@ -152,15 +107,28 @@ def generate_keys(input_json_path, output_excel_path, keys_with_path_map):
 
 
 # In[9]:
+if __name__ == '__main__':
+
+    example = '''
+            Example commands:
+
+            python AllKeysExcelGenerator.py -j ./../../../crowdsource-ui/locales/en.json -o ./en/out/en.xlsx
+        '''
+
+    parser = argparse.ArgumentParser(epilog=example,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("-j", "--input-json-path", required=True, help = "Path of json file with en keys present")
+    parser.add_argument("-o","--output-excel-path", required=True, help = "Output path")
 
 
-cwd = os.getcwd()
-input_json_path = cwd[:cwd.index('utils')] + 'crowdsource-ui/locales/en.json'
-output_excel_path = './en/out/en.xlsx'
+    args = parser.parse_args()
 
-if '/' in output_excel_path:
-    os.makedirs(output_excel_path[:output_excel_path.rindex("/")], exist_ok=True)
+    input_json_path = args.input_json_path
+    output_excel_path = args.output_excel_path
 
-keys_with_path_map = get_keys_with_path()
-generate_keys(input_json_path, output_excel_path, keys_with_path_map)
+    if '/' in output_excel_path:
+        os.makedirs(output_excel_path[:output_excel_path.rindex("/")], exist_ok=True)
+
+    keys_with_path_map = get_keys_with_path()
+    generate_keys(input_json_path, output_excel_path, keys_with_path_map)
 

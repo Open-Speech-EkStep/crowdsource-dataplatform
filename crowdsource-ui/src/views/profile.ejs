@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bhasha Daan: A crowdsourcing initiative for Indian languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/badges.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+</head>
+
+<body>
+<%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
+<div id="content-wrapper" class="container-fluid pt-5 pb-2 px-lg-3 px-md-3 px-4 px-md-5">
+    <div class="row">
+        <%- include('../../build/views/common/back-btn.ejs',{url:"#"}) %>
+    </div>
+    <div id="badge-container" class="container-fluid p-0">
+    <div class="row m-0">
+        <div class="col-12 p-0" style="background-color:#eff5ff">
+            header 
+        </div>
+    </div>
+    <div class="row mx-0 badge-mt-34">
+        <div class="col-sm p-0">
+            <div class="row m-0">
+                <div class="bd-example">
+                    <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-toggle="tab" href="#suno" type="button" role="tab" aria-controls="home" aria-selected="true">Suno India</button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-toggle="tab" href="#bolo" type="button" role="tab" aria-controls="profile" aria-selected="false">Bolo India</button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contact-tab" data-toggle="tab" href="#likho" type="button" role="tab" aria-controls="contact" aria-selected="false">Likho India</button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contact-tab" data-toggle="tab" href="#dekho" type="button" role="tab" aria-controls="contact" aria-selected="false">Dekho India</button>
+                      </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade active show" id="suno" role="tabpanel" aria-labelledby="home-tab">
+                        <p><strong>This is some placeholder content the Home tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+                      </div>
+                      <div class="tab-pane fade" id="bolo" role="tabpanel" aria-labelledby="profile-tab">
+                        <p><strong>This is some placeholder content the Profile tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+                      </div>
+                      <div class="tab-pane fade" id="likho" role="tabpanel" aria-labelledby="contact-tab">
+                        <p><strong>This is some placeholder content the Contact tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+                      </div>
+                      <div class="tab-pane fade" id="dekho" role="tabpanel" aria-labelledby="contact-tab">
+                        <p><strong>dekho This is some placeholder content the Contact tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-2 mt-2 mt-lg-0 mt-md-0"></div>
+    </div>
+    <div class="row mx-0 badge-mt-38">
+        <h4 class="col-12 p-0"><%= __('Participation Levels') %></h4>
+    </div>
+    <div class="row mx-0 mt-2">
+        <p class="col-12 p-0"><%= __('Become a Bhasha Samarthak by contributing to these initiatives. For details on how to earn Bhasha Samarthak Badges, please select the initiative and language of your choice.') %></p>
+    </div>
+    <div class="row mx-0 my-5">
+        <p class="col-12 p-0"><%= __('Levels and badges may take upto 48 hours to update. Your contribution will be validated before confirming the badge. Please keep contributing actively to stand a chance to get recognised.')%></p>
+    </div>
+
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<%- include('common/feedback/feedback.ejs', {page:"My Badges"}) %>
+<%- include('common/footer.ejs',{path:"./"}) %>
+
+<%- include('../../build/views/common/speakerDetails.ejs',{path:"./"}) %>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>$("footer").removeClass("fixed-bottom").addClass("bottom")</script>
+<script src="../js/my-badges.js"></script>>
+<script src="../js/loadFeedback.js"></script>
+</body>
+</html>

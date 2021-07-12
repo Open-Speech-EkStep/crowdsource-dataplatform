@@ -38,7 +38,7 @@ beforeSuite(async () => {
         waitForNavigation: false,
         navigationTimeout: 120000,
         observe: true,
-        observeTime: 2000,
+        observeTime: 1600,
         retryTimeout: 5000
     });
     await overridePermissions(testUrl, ['audioCapture']);
@@ -66,7 +66,7 @@ beforeSpec(async () => {
 // })
 
 step("Open Website", async () => {
-    await taiko.waitFor(500)
+    //await taiko.waitFor(500)
     await goto(testUrl, { waitForEvents: ['loadEventFired'] });
     await taiko.waitFor(500)
 });

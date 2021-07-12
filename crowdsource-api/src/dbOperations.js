@@ -54,7 +54,8 @@ const {
     getContributionHoursForText,
     getValidationHoursForText,
     getContributionAmount,
-    getValidationAmount
+    getValidationAmount,
+    getUserRewardsQuery
 } = require('./dbQuery');
 
 const {
@@ -705,6 +706,11 @@ const userVerify = async (userName, role) => {
     }
 }
 
+const getUserRewards = async (userId, userName) => {
+    const contributor_id = await getContributorId(userId, userName);
+    return db.any(getUserRewardsQuery, [contributor_id]);
+}
+
 module.exports = {
     userVerify,
     updateAndGetMedia,
@@ -738,5 +744,6 @@ module.exports = {
     getTargetInfo,
     getSentencesForProfanityChecking,
     updateProfanityStatus,
-    releaseMedia
+    releaseMedia,
+    getUserRewards
 };

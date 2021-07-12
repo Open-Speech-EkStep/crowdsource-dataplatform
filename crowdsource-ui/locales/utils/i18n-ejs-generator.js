@@ -4,7 +4,7 @@ const fs = require('fs');
 const ejs = require('ejs');
 const { I18n } = require('i18n');
 
-async function ejs2html(path, information, i18n, targetPath, fileName, locale) {
+async function ejs2html(path, information, i18n, targetPath, fileName, locale,contextRoot) {
   fs.readFile(path, 'utf8', async function (err, data) {
     if (err) {
       return false;
@@ -17,7 +17,13 @@ async function ejs2html(path, information, i18n, targetPath, fileName, locale) {
     i18n.init(info);
     info.setLocale(locale);
 
-    const html = ejs.render(data, info);
+
+
+    let html = ejs.render(data, info);
+
+    html = html.replace(/"\/img\//g,`"${contextRoot}/img/`)
+    html = html.replace(/"\/js\//g,`"${contextRoot}/js/`)
+    html = html.replace(/"\/css\//g,`"${contextRoot}/css/`)
 
     fs.mkdirSync(targetPath, { recursive: true });
     fs.writeFile(targetPath + '/' + fileName, html, function (err2) {
@@ -29,7 +35,7 @@ async function ejs2html(path, information, i18n, targetPath, fileName, locale) {
   });
 }
 
-const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, enabledLanguage) {
+const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, enabledLanguage,contextRoot) {
   const LANGUAGES = getEnabledLanguages(enabledLanguage);
   const MOTHER_TONGUE = [
     { value: "Assamese", text: "অসমীয়া" },
@@ -96,15 +102,16 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
     }
     fs.rmdirSync(outputPath, { recursive: true });
 
-    await ejs2html(`${ejsPath}/badges.ejs`, {MOTHER_TONGUE,LANGUAGES}, i18n, outputPath, 'badges.html', locale);
-    await ejs2html(`${ejsPath}/validatorBadgesInfo.ejs`, {MOTHER_TONGUE,LANGUAGES}, i18n, outputPath, 'validator-badges.html', locale);
+    await ejs2html(`${ejsPath}/badges.ejs`, {MOTHER_TONGUE,LANGUAGES}, i18n, outputPath, 'badges.html', locale,contextRoot);
+    await ejs2html(`${ejsPath}/validatorBadgesInfo.ejs`, {MOTHER_TONGUE,LANGUAGES}, i18n, outputPath, 'validator-badges.html', locale,contextRoot);
     await ejs2html(
       `${ejsPath}/dashboard.ejs`,
       { MOTHER_TONGUE, LANGUAGES, isCookiePresent: false },
       i18n,
       outputPath,
       'dashboard.html',
-      locale
+      locale,
+      contextRoot
     );
     await ejs2html(
       `${ejsPath}/home.ejs`,
@@ -112,20 +119,22 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       i18n,
       outputPath,
       'home.html',
-      locale
+      locale,
+      contextRoot
     );
-    await ejs2html(`${ejsPath}/not-found.ejs`, {MOTHER_TONGUE,LANGUAGES}, i18n, outputPath, 'not-found.html', locale);
-    await ejs2html(`${ejsPath}/record.ejs`, {MOTHER_TONGUE, LANGUAGES}, i18n, outputPath, 'record.html', locale);
+    await ejs2html(`${ejsPath}/not-found.ejs`, {MOTHER_TONGUE,LANGUAGES}, i18n, outputPath, 'not-found.html', locale,contextRoot);
+    await ejs2html(`${ejsPath}/record.ejs`, {MOTHER_TONGUE, LANGUAGES}, i18n, outputPath, 'record.html', locale,contextRoot);
     await ejs2html(
       `${ejsPath}/terms-and-conditions.ejs`,
       {MOTHER_TONGUE,LANGUAGES},
       i18n,
       outputPath,
       'terms-and-conditions.html',
-      locale
+      locale,
+      contextRoot
     );
-    await ejs2html(`${ejsPath}/thank-you.ejs`, {MOTHER_TONGUE, LANGUAGES}, i18n, outputPath, 'thank-you.html', locale);
-    await ejs2html(`${ejsPath}/validator-thank-you.ejs`, {MOTHER_TONGUE, LANGUAGES}, i18n, outputPath, 'validator-thank-you.html', locale);
+    await ejs2html(`${ejsPath}/thank-you.ejs`, {MOTHER_TONGUE, LANGUAGES}, i18n, outputPath, 'thank-you.html', locale,contextRoot);
+    await ejs2html(`${ejsPath}/validator-thank-you.ejs`, {MOTHER_TONGUE, LANGUAGES}, i18n, outputPath, 'validator-thank-you.html', locale,contextRoot);
 
     await ejs2html(
       `${ejsPath}/validator-prompt-page.ejs`,
@@ -133,13 +142,14 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       i18n,
       outputPath,
       'validator-page.html',
-      locale
+      locale,
+      contextRoot
     );
 
-    await ejs2html(`${ejsPath}/profanity-boloindia.ejs`, {LANGUAGES}, i18n, outputPath, 'profanity-boloindia.html', locale);
-    await ejs2html(`${ejsPath}/profanity-home.ejs`, { LANGUAGES }, i18n, outputPath, 'profanity-home.html', locale);
-    await ejs2html(`${ejsPath}/profanity.ejs`, {LANGUAGES}, i18n, outputPath, 'profanity.html', locale);
-    await ejs2html(`${ejsPath}/key_gen.ejs`, {}, i18n, outputPath, 'key_gen.html', locale);
+    await ejs2html(`${ejsPath}/profanity-boloindia.ejs`, {LANGUAGES}, i18n, outputPath, 'profanity-boloindia.html', locale,contextRoot);
+    await ejs2html(`${ejsPath}/profanity-home.ejs`, { LANGUAGES }, i18n, outputPath, 'profanity-home.html', locale,contextRoot);
+    await ejs2html(`${ejsPath}/profanity.ejs`, {LANGUAGES}, i18n, outputPath, 'profanity.html', locale,contextRoot);
+    await ejs2html(`${ejsPath}/key_gen.ejs`, {}, i18n, outputPath, 'key_gen.html', locale,contextRoot);
   });
 };
 
