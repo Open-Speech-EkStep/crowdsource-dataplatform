@@ -178,12 +178,6 @@ function lngtype(text) {
 
   let error = { type: 'language' };
 
-  const specialSymbols = /[\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E\u0964-\u0965]/;
-
-  if (currentModule == 'suno' && specialSymbols.test(newText) == true) {
-    return { type: 'symbol' }
-  }
-
   const contributionLanguage = currentModule === 'likho' ? localStorage.getItem(LIKHO_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
   Object.entries(langdic).forEach(([key, value]) => {// loop to read all the dictionary items if not true

@@ -33,58 +33,6 @@ describe("lngtype", () => {
 
   const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-  test("should give symbol error for suno India when given character is any special symbol for any language", () => {
-    const symbols = ['!', '"', '#', '$', '%', '&',
-      '\'',
-      '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@',
-      '[',
-      '\\',
-      ']',
-      '^',
-      '_',
-      '`',
-      '{',
-      '|',
-      '}',
-      '~',
-      '।',
-      '~',
-      '`',
-      '॥',
-    ];
-    mockLocalStorage();
-    // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'suno');
-    symbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({type:'symbol'});
-    })
-    localStorage.clear();
-  })
-
-  test("should give symbol error for suno India when given input text starts with any special symbol for any language", () => {
-    mockLocalStorage();
-    // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'suno');
-    expect(lngtype('!qwerty')).toEqual({type:'symbol'});
-    localStorage.clear();
-  })
-
-  test("should give symbol error for suno India when given input text ends with any special symbol for any language", () => {
-    mockLocalStorage();
-    // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'suno');
-    expect(lngtype('qwerty;')).toEqual({type:'symbol'});
-    localStorage.clear();
-  })
-
-  test("should give symbol error for suno India when given input text contain any special symbol for any language", () => {
-    mockLocalStorage();
-    // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'suno');
-    expect(lngtype('qwe*rty')).toEqual({type:'symbol'});
-    localStorage.clear();
-  })
-
   test("should give language error for for any module when given input text starts with any different character set for any language", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
