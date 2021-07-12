@@ -11,13 +11,13 @@ const {
     into
 } = require('taiko');
 
-step("Select <SunoIndiaLink> from header", async function (SunoIndiaLink) {
+step("Select <HeaderLink> from header", async function (HeaderLink) {
     await taiko.waitFor(500);
     if (await text('Error!!!').exists()) {
         await click(button("Close"));
     }
-    await taiko.waitFor(500);
-    await click(taiko.link({id: SunoIndiaLink}));
+    //await taiko.waitFor(500);
+    await click(taiko.link({id: HeaderLink}));
 });
 
 step("Validate Suno India content", async function () {
