@@ -78,8 +78,8 @@ const drawMap = function (response, moduleType) {
       st.id = st.id;
     } else {
       st.id = st.id;
-      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : '0 seconds';
-      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : '0 seconds';
+      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0,0,0);
+      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0,0,0);
       st.value = 0;
       st.total_speakers = 0;
     }

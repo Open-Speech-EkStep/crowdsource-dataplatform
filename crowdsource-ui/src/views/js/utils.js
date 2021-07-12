@@ -179,19 +179,23 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
 };
 
 const formatTime = function (hours, minutes = 0, seconds = 0) {
+  const localsStrings = JSON.parse(localStorage.getItem('localeString'));
+  const hrStr = localsStrings['hours'];
+  const minStr = localsStrings['minutes'];
+  const secStr = localsStrings['seconds'];
   let result = "";
   if (hours > 0) {
-    result += `${hours} hours `;
+    result += `${hours} ${hrStr} `;
   }
   if (minutes > 0) {
-    result += `${minutes} minutes `;
+    result += `${minutes} ${minStr} `;
   }
   if (hours === 0 && minutes === 0 && seconds > 0) {
-    result += `${seconds} seconds `;
+    result += `${seconds} ${secStr} `;
   }
 
   if(hours === 0 && minutes === 0 && seconds === 0){
-    result += '0 seconds ';
+    result += `0 ${secStr} `;
   }
 
   if(result.charAt(result.length - 1 ) !== ' ')
@@ -202,14 +206,18 @@ const formatTime = function (hours, minutes = 0, seconds = 0) {
 
 
 const formatTimeForLegends = function (hours, minutes = 0, seconds = 0, isLabelRequired=true) {
+  const localsStrings = JSON.parse(localStorage.getItem('localeString'));
+  const hrStr = localsStrings['hours'];
+  const minStr = localsStrings['minutes'];
+  const secStr = localsStrings['seconds'];
   if (hours && minutes) {
-    return isLabelRequired ? `${hours}.${minutes} hours` : `${hours}.${minutes}`;
+    return isLabelRequired ? `${hours}.${minutes} ${hrStr}` : `${hours}.${minutes}`;
   }
   if (hours == 0 && minutes == 0) {
-    return isLabelRequired ? `${seconds} seconds` : `${seconds}`;
+    return isLabelRequired ? `${seconds} ${secStr}` : `${seconds}`;
   }
-  const hoursStr = hours ? (isLabelRequired ? `${hours} hours` : `${hours}`) : '';
-  const minutesStr = minutes ? (isLabelRequired ? `${minutes} minutes` : `${minutes}`) : '';
+  const hoursStr = hours ? (isLabelRequired ? `${hours} ${hrStr}` : `${hours}`) : '';
+  const minutesStr = minutes ? (isLabelRequired ? `${minutes} ${minStr}` : `${minutes}`) : '';
   return `${hoursStr} ${minutesStr}`.trim();
 }
 

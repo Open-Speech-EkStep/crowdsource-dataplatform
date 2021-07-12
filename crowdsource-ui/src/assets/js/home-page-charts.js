@@ -79,8 +79,8 @@ const drawMap = function (response) {
       st.id = st.id;
     } else {
       st.id = st.id;
-      st.contributed_time = "0 seconds";
-      st.validated_time = "0 seconds";
+      st.contributed_time = formatTime(0,0,0);
+      st.validated_time = formatTime(0,0,0);
       st.value = 0;
       st.total_speakers = 0;
     }

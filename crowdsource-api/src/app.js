@@ -311,8 +311,6 @@ app.get('/get-locale-strings/:locale', function (req, res) {
         }
         const data = JSON.parse(body);
         const list = [
-            'hrs recorded in',
-            'hrs validated in',
             'hours',
             'minutes',
             'seconds',
@@ -357,7 +355,9 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'English',
             'Bengali',
             'All Languages',
-            'Bhasha Daan: A crowdsourcing initiative for Indian languages'
+            'Bhasha Daan: A crowdsourcing initiative for Indian languages',
+            'Validation so far in <y> - <x>',
+            'Contribution so far in <y> - <x>'
         ];
 
         const langSttr = {};

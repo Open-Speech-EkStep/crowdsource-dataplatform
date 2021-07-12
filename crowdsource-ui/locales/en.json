@@ -307,8 +307,6 @@
 	"bronze": "bronze",
 	"gold": "gold",
 	"hours": "hours",
-	"hrs recorded in": "Contribution so far in <y> - <x>",
-	"hrs validated in": "Validation so far in <y> - <x>",
 	"image label(s) contributed": "image label(s) contributed",
 	"image label(s) validated": "image label(s) validated",
 	"Bhasha Daan: A crowdsourcing initiative for Indian languages": "Bhasha Daan: A crowdsourcing initiative for Indian languages",
@@ -338,4 +336,6 @@
 	"Total images": "Total images",
 	"Only validations invited for the selected language": "Only validations invited for the selected language",
 	"Only contributions invited for the selected language": "Only contributions invited for the selected language",
+	"Contribution so far in <y> - <x>": "Contribution so far in <y> - <x>",
+	"Validation so far in <y> - <x>": "Validation so far in <y> - <x>"
 }

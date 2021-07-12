@@ -11,6 +11,8 @@ document.body = stringToHTML(
 
 describe("getStatistics",()=>{
   test("should setLoaders and show details after setting speaker details",()=>{
+    mockLocalStorage();
+    localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
     const $speakersData = $("#speaker-data");
     const $speakersDataLoader = $speakersData.find('#loader1');
     const $speakerDataDetails = $speakersData.find('#contribution-details');
@@ -19,22 +21,10 @@ describe("getStatistics",()=>{
 
     expect($speakersDataLoader.hasClass('d-none')).toEqual(true);
     expect($speakerDataDetails.hasClass('d-none')).toEqual(false);
+    localStorage.clear()
+
   })
 })
-
-describe("getDefaultLang",()=>{
-  test("should give language added in localStorage as default language",()=>{
-    mockLocalStorage();
-    localStorage.setItem(CONTRIBUTION_LANGUAGE,"hindi");
-    const $homePage = document.getElementById('home-page');
-    $homePage.setAttribute('default-lang',"hindi")
-
-    const language = getDefaultLang();
-
-    expect(language).toEqual("hindi");
-    localStorage.clear();
-  })
-});
 
 describe("getSummaryApi",()=>{
   const $contributionDiv = $('#contribution_stats');

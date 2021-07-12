@@ -132,7 +132,7 @@ function updateLanguage(language) {
         .catch((err) => {});
 }
 
-$(document).ready(function () {
+const initializeBlock = function () {
     localStorage.removeItem('previousLanguage');
     localStorage.setItem('module','bolo');
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
@@ -205,6 +205,14 @@ $(document).ready(function () {
     }
     onChangeUser('./dashboard.html',MODULE.bolo.value);
     onOpenUserDropDown();
+};
+
+$(document).ready(function () {
+    getLocaleString().then(()=>{
+        initializeBlock();
+    }).catch(err => {
+        initializeBlock();
+    });
 });
 
 module.exports = {fetchDetail, getSpeakersData, isLanguageAvailable, updateLanguage}

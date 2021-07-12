@@ -307,7 +307,7 @@
 	"hrs validated in": "<x> <y> இல் சரிபார்க்கப்பட்டது",
 	"hours": "மணிநேரங்கள்",
 	"minutes": "நிமிடங்கள்",
-	"seconds": "",
+	"seconds": "seconds",
 	"Recording for 5 seconds": "5 விநாடிகளுக்கு பதிவு செய்யப்ப்டுகிறது",
 	"Recording for 4 seconds": "4 விநாடிகளுக்கு பதிவு செய்யப்ப்டுகிறது",
 	"Recording for 3 seconds": "3 விநாடிகளுக்கு பதிவு செய்யப்ப்டுகிறது",
@@ -338,5 +338,6 @@
 	"Total images": "Total images",
 	"Only validations invited for the selected language": "Only validations invited for the selected language",
 	"Only contributions invited for the selected language": "Only contributions invited for the selected language",
-	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings."
+	"Contribution so far in <y> - <x>": "Contribution so far in <y> - <x>",
+	"Validation so far in <y> - <x>": "Validation so far in <y> - <x>"
 }
