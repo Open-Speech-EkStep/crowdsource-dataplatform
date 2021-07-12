@@ -1,4 +1,4 @@
-const { calculateTime, formatTime, performAPIRequest } = require('./utils');
+const { calculateTime, formatTime, performAPIRequest, formatTimeForLegends } = require('./utils');
 
 const statesInformation = [
   { id: 'IN-TG', state: 'Telangana', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
@@ -200,12 +200,12 @@ const drawMap = function (response, moduleType) {
     quarterVal * 3 * 60 * 60,
     false
   );
-  $quarter.text(moduleType == "parallel" || moduleType == "ocr" ? `0 - 100` : `0 - ${formatTime(qHours, qMinuts)}`);
-  $half.text(moduleType == "parallel" || moduleType == "ocr" ? `100 - 200` : `${formatTime(qHours, qMinuts)} - ${formatTime(hHours, hMinuts)}`);
+  $quarter.text(moduleType == "parallel" || moduleType == "ocr" ? `0 - 100` : `0 - ${formatTimeForLegends(qHours, qMinuts,0, true)}`);
+  $half.text(moduleType == "parallel" || moduleType == "ocr" ? `100 - 200` : `${formatTimeForLegends(qHours, qMinuts,0, false)} - ${formatTimeForLegends(hHours, hMinuts,0,true)}`);
   $threeQuarter.text( moduleType == "parallel" || moduleType == "ocr" ? `200 - 500` :
-    `${formatTime(hHours, hMinuts)} - ${formatTime(tQHours, tQMinuts)}`
+    `${formatTimeForLegends(hHours, hMinuts,0, false)} - ${formatTimeForLegends(tQHours, tQMinuts,0,true)}`
   );
-  $full.text(moduleType == "parallel" || moduleType == "ocr" ? `> 500` : `> ${formatTime(tQHours, tQMinuts)}`);
+  $full.text(moduleType == "parallel" || moduleType == "ocr" ? `> 500` : `> ${formatTimeForLegends(tQHours, tQMinuts,0, true)}`);
   $legendDiv.removeClass("d-none").addClass("d-flex");
 };
 

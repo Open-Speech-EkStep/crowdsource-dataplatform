@@ -1,6 +1,6 @@
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
-const { calculateTime, formatTime, getJson, performAPIRequest } = require('./utils');
+const { calculateTime, formatTime, getJson, performAPIRequest, formatTimeForLegends } = require('./utils');
 const { drawTopLanguageChart } = require('../../../build/js/common/verticalGraph');
 
 const statesInformation = [
@@ -157,12 +157,12 @@ const drawMap = function (response) {
     quarterVal * 3 * 60 * 60,
     false
   );
-  $quarter.text(`0 - ${formatTime(qHours, qMinuts)}`);
-  $half.text(`${formatTime(qHours, qMinuts)} - ${formatTime(hHours, hMinuts)}`);
+  $quarter.text(`0 - ${formatTimeForLegends(qHours, qMinuts, 0, true)}`);
+  $half.text(`${formatTimeForLegends(qHours, qMinuts, 0 , false)} - ${formatTimeForLegends(hHours, hMinuts, 0, true)}`);
   $threeQuarter.text(
-    `${formatTime(hHours, hMinuts)} - ${formatTime(tQHours, tQMinuts)}`
+    `${formatTimeForLegends(hHours, hMinuts, 0, false)} - ${formatTimeForLegends(tQHours, tQMinuts, 0 , true)}`
   );
-  $full.text(`> ${formatTime(tQHours, tQMinuts)}`);
+  $full.text(`> ${formatTimeForLegends(tQHours, tQMinuts, 0, true)}`);
   $legendDiv.removeClass("d-none").addClass("d-flex");
 };
 

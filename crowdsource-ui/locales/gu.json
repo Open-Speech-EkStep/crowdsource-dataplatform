@@ -273,8 +273,8 @@
 	"bronze": "બ્રોન્ઝ",
 	"gold": "ગોલ્ડ",
 	"hours": "કલાકો",
-	"hrs recorded in": "<y> માં <x> રેકોર્ડ કર્યા",
-	"hrs validated in": "<y> માં <x> માન્ય કર્યા",
+	"hrs recorded in": "Contribution so far in <y> - <x>",
+	"hrs validated in": "Validation so far in <y> - <x>",
 	"image label(s) contributed": "ઇમેજ લેબલ(લો)નું યોગદાન આપવામાં આવ્યું",
 	"image label(s) validated": "ઇમેજના લેબલ(લો)ને માન્ય કરવામાં આવી",
 	"minutes": "મિનિટો",
@@ -336,7 +336,7 @@
 	"Total recordings": "Total recordings",
 	"Total sentences": "Total sentences",
 	"Total images": "Total images",
-	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.",
 	"Only validations invited for the selected language": "Only validations invited for the selected language",
-	"Only contributions invited for the selected language": "Only contributions invited for the selected language"
+	"Only contributions invited for the selected language": "Only contributions invited for the selected language",
+	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings."
 }

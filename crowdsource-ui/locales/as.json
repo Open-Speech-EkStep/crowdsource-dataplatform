@@ -300,8 +300,8 @@
 	"Gujarati": "গুজৰাটি",
 	"Start typing here...": "ইয়াত টাইপ কৰা আৰম্ভ কৰক",
 	"By proceeding ahead you agree to the <a href=\"./terms-and-conditions.html\" target=\"_blank\"> Terms and Conditions</a>": "আগবাঢ়ি গৈ আপুনি <a href=\"./terms-and-conditions.html\" target=\"_blank\"> চৰ্তাৱলী আৰু নিয়মাৱলীৰ</a> সৈতে সন্মত হৈছে",
-	"hrs recorded in": "<x> <y> ৰেকৰ্ডিংৰ সময়",
-	"hrs validated in": "<x> <y> সময়ৰ বৈধতা",
+	"hrs recorded in": "Contribution so far in <y> - <x>",
+	"hrs validated in": "Validation so far in <y> - <x>",
 	"hours": "ঘন্টা",
 	"minutes": "মিনিট",
 	"seconds": "ছেকেণ্ড",
@@ -336,7 +336,7 @@
 	"Total recordings": "Total recordings",
 	"Total sentences": "Total sentences",
 	"Total images": "Total images",
-	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.",
 	"Only validations invited for the selected language": "Only validations invited for the selected language",
-	"Only contributions invited for the selected language": "Only contributions invited for the selected language"
+	"Only contributions invited for the selected language": "Only contributions invited for the selected language",
+	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings."
 }
