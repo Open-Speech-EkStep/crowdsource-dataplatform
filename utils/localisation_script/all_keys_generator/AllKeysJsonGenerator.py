@@ -9,6 +9,7 @@ import openpyxl
 import json
 import os
 import re
+import argparse
 
 
 # In[2]:
@@ -132,14 +133,29 @@ def generate(input_excel_path,input_json_path, output_json_path):
 
 
 # In[11]:
+if __name__ == '__main__':
+
+    example = '''
+            Example commands:
+
+                python AllKeysJsonGenerator.py -j ./../../../crowdsource-ui/locales/en.json -e ./en/out/en.xlsx -o ./en/out/en.json
+        '''
+
+    parser = argparse.ArgumentParser(epilog=example,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("-j", "--input-json-path", required=True, help = "Path of json file with en keys present")
+    parser.add_argument("-e", "--input-excel-path", required=True, help = "Path of excel file")
+    parser.add_argument("-o","--output-json-path", required=True, help = "Output path")
 
 
-cwd = os.getcwd()
-input_json_path = cwd[:cwd.index('utils')] + 'crowdsource-ui/locales/en.json'
-input_excel_path = "./en/out/en.xlsx"
-output_json_path = "./en/out/en.json"
-if "/" in output_json_path:
-    os.makedirs(output_json_path[:output_json_path.rindex("/")], exist_ok=True)
+    args = parser.parse_args()
 
-generate(input_excel_path,input_json_path, output_json_path)
+    input_json_path = args.input_json_path
+    input_excel_path = args.input_excel_path
+    output_json_path = args.output_json_path
+
+    if "/" in output_json_path:
+        os.makedirs(output_json_path[:output_json_path.rindex("/")], exist_ok=True)
+
+    generate(input_excel_path,input_json_path, output_json_path)
 
