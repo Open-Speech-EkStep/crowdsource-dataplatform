@@ -332,6 +332,9 @@ body.modal-open .supreme-container {
 }
 
 @media screen and (max-width: 767px) {
+    .legend-val{
+        font-size: 11px;
+    }
     .contribution-details {
         padding: 0 3rem;
     }
