@@ -126,7 +126,7 @@ function lngtype(text) {
   //Dictionary for Unicode range of the languages
   const currentModule = localStorage.getItem(CURRENT_MODULE);
   let langdic = {
-    "Assamese": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    "Assamese": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965\u0027]+$/,
     "Bengali": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
     "English": /^[\u0020-\u007F]+$/,
     "Gujarati": /^[\u0A80-\u0AFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
@@ -151,7 +151,7 @@ function lngtype(text) {
   }
   if (currentModule == 'suno') {
     langdic = {
-      "Assamese": /^[\u0980-\u09FF\u0030-\u0039]+$/,
+      "Assamese": /^[\u0980-\u09FF\u0030-\u0039\u0027]+$/,
       "Bengali": /^[\u0980-\u09FF\u0030-\u0039]+$/,
       "English": /^[\u0020-\u007F]+$/,
       "Gujarati": /^[\u0A80-\u0AFF\u0030-\u0039]+$/,
