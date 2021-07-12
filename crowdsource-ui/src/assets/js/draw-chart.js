@@ -266,7 +266,7 @@ const drawGenderChart = (chartData) => {
         valueAxis.renderer.labels.template.fill = '#000';
         valueAxis.renderer.grid.template.strokeDasharray = "3,3";
         valueAxis.renderer.labels.template.fontSize = 12;
-        valueAxis.title.text = 'Contributions (in hours)';
+        valueAxis.title.text = 'Contribution (in hours)';
         valueAxis.title.fontSize = 12;
         // Create series
         const series = chart.series.push(new am4charts.ColumnSeries());
@@ -323,7 +323,7 @@ const drawTimelineChart = (timelineData) => {
         hourAxis.renderer.minGridDistance = 50;
         hourAxis.renderer.grid.template.strokeDasharray = "3,3";
         hourAxis.renderer.labels.template.fill = '#000';
-        hourAxis.title.text = 'Contributions (in hours)';
+        hourAxis.title.text = 'Contribution (in hours)';
         hourAxis.renderer.labels.template.fontSize = 12;
         hourAxis.title.fontSize = 12;
 

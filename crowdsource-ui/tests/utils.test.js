@@ -1,4 +1,4 @@
-const { calculateTime, formatTime,updateLocaleLanguagesDropdown, showElement,hideElement,performAPIRequest} = require("../src/assets/js/utils");
+const { calculateTime, formatTime,updateLocaleLanguagesDropdown, showElement,hideElement,performAPIRequest, formatTimeForLegends} = require("../src/assets/js/utils");
 const { stringToHTML} = require("./utils");
 const fetchMock = require("fetch-mock");
 const { readFileSync } = require("fs");
@@ -86,6 +86,49 @@ describe('test utils', () => {
 
         test("should show 0s when hours, minutes and seconds are 0", () => {
             expect(formatTime(0, 0, 0)).toEqual("0 seconds");
+        });
+    });
+
+    describe("formatTimeForLegends", () => {
+        test("should formats hours only for given hours when labels are allowed", () => {
+            expect(formatTimeForLegends(162, 0, 0, true)).toEqual("162 hours");
+        });
+
+        test("should formats hours only for given hours when labels are not allowed", () => {
+            expect(formatTimeForLegends(162, 0, 0, false)).toEqual("162");
+        });
+
+        test("should format hours for given hours and minutes when labels are allowed", () => {
+            expect(formatTimeForLegends(162, 12 , 0, true)).toEqual("162.12 hours");
+        });
+
+        test("should format hours for given hours and minutes when labels are not allowed", () => {
+            expect(formatTimeForLegends(162, 12 , 0, false)).toEqual("162.12");
+        });
+
+        test("should format in s when hours and minutes are 0 when labels are allowed", () => {
+            expect(formatTimeForLegends(0, 0, 2, true)).toEqual("2 seconds");
+        });
+
+        test("should format in s when hours and minutes are 0 when labels are not allowed", () => {
+            expect(formatTimeForLegends(0, 0, 2, false)).toEqual("2");
+        });
+
+        test("should format in minutes  when hours, minutes and seconds are 0  when labels are allowed", () => {
+            expect(formatTimeForLegends(0, 20, 0, true)).toEqual("20 minutes");
+        });
+
+        test("should format in minutes  when hours, minutes and seconds are 0  when labels are allowed", () => {
+            expect(formatTimeForLegends(0, 20, 0, false)).toEqual("20");
+        });
+
+
+        test("should show 0s when hours, minutes and seconds are 0  when labels are allowed", () => {
+            expect(formatTimeForLegends(0, 0, 0, true)).toEqual("0 seconds");
+        });
+
+        test("should show 0s when hours, minutes and seconds are 0  when labels are not allowed", () => {
+            expect(formatTimeForLegends(0, 0, 0, false)).toEqual("0");
         });
     });
 

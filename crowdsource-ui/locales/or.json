@@ -44,8 +44,8 @@
 	"Quarterly": "ତ୍ରୈମାସିକ",
 	"State Wise distribution": "ରାଜ୍ୟସ୍ତରୀୟ ବଣ୍ଟନ",
 	"Age Group Distribution": "ବୟସ ଗ୍ରୁପ ବଣ୍ଟନ",
-	"hrs recorded in": "<y> <x> ରେ ରେକର୍ଡ ହୋଇଛି",
-	"hrs validated in": "<y> <x> ରେ ବୈଧ ହୋଇଛି",
+	"hrs recorded in": "Contribution so far in <y> - <x>",
+	"hrs validated in": "Validation so far in <y> - <x>",
 	"Recording will automatically stop after <span id=\"counter\"></span> seconds": "<span id=\"counter\"></span> ସେକେଣ୍ଡ ପରେ ରେକର୍ଡିଂ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ବନ୍ଦ ହୋଇଯିବ ",
 	"Incorrect": "ଭୁଲ",
 	"Replay": "ପୁନର୍ବାର ପ୍ଲେ କରନ୍ତୁ",
@@ -336,7 +336,7 @@
 	"Total recordings": "Total recordings",
 	"Total sentences": "Total sentences",
 	"Total images": "Total images",
-	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.",
 	"Only validations invited for the selected language": "Only validations invited for the selected language",
-	"Only contributions invited for the selected language": "Only contributions invited for the selected language"
+	"Only contributions invited for the selected language": "Only contributions invited for the selected language",
+	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings."
 }

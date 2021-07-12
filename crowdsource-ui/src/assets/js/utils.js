@@ -174,7 +174,7 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
 
 const formatTime = function (hours, minutes = 0, seconds = 0) {
   let result = "";
-  
+
   if (hours > 0) {
     result += `${hours} hours `;
   }
@@ -191,9 +191,21 @@ const formatTime = function (hours, minutes = 0, seconds = 0) {
 
   if(result.charAt(result.length - 1 ) !== ' ')
     return result.substr(0, result.length);
-  else 
+  else
     return result.substr(0, result.length - 1);
 };
+
+const formatTimeForLegends = function (hours, minutes = 0, seconds = 0, isLabelRequired=true) {
+  if (hours && minutes) {
+    return isLabelRequired ? `${hours}.${minutes} hours` : `${hours}.${minutes}`;
+  }
+  if (hours == 0 && minutes == 0) {
+    return isLabelRequired ? `${seconds} seconds` : `${seconds}`;
+  }
+  const hoursStr = hours ? (isLabelRequired ? `${hours} hours` : `${hours}`) : '';
+  const minutesStr = minutes ? (isLabelRequired ? `${minutes} minutes` : `${minutes}`) : '';
+  return `${hoursStr} ${minutesStr}`.trim();
+}
 
 const setFooterPosition = () => {
   const contentHeight = $('#page-content').outerHeight();
@@ -247,11 +259,12 @@ module.exports = {
   showElement,
   hideElement,
   setFooterPosition,
-  reportSentenceOrRecording, 
-  getCookie, 
+  reportSentenceOrRecording,
+  getCookie,
   setCookie,
   getJson,
   setPageContentHeight,
-  getDeviceInfo, 
-  getBrowserInfo
+  getDeviceInfo,
+  getBrowserInfo,
+  formatTimeForLegends
 }
