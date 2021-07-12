@@ -141,68 +141,30 @@ workflows:
             branches:
               only: [AWS]
 
-      - db_migrate_aws:
-          name: migrate_dev_aws
-          db_name: ${DEV_DB_NAME}
+      - aws-ecr/build-and-push-image:
+          name: push_cug_image
+          repo: ${REPO}
+          tag: cug
+          path: ./crowdsource-api
+          extra-build-args: --build-arg NODE_ENV=cug
           requires:
             - create-workspace
 
-      - build_ui_push_to_s3:
-          name: build_dev_ui
-          env_name: dev
-          distributionId: ${DEV_DISTRIBUTION_ID}
-          requires:
-            - push_dev_image
-
       - aws-ecr/build-and-push-image:
-          name: push_dev_image
-          repo: ${REPO}
-          tag: dev
-          path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENV=dev
-          requires:
-            - migrate_dev_aws
-
-      - aws-ecr/build-and-push-image:
-          name: push_dev_db_refresher_image
+          name: push_db_refresher_image
           repo: ${DB_REFRESHER_REPO}
           dockerfile: Dockerfile-dbRefresh
           path: ./db-refresher
-          tag: "dev,test,prod,uat,cug"
+          tag: "cug"
           requires:
-            - migrate_dev_aws
-
-      - eks_fargate_deployment:
-          name: dev_deployment_eks
-          cluster-name: ${CLUSTER_NAME}
-          env-name: dev
-          requires:
-            - push_dev_image
-
-      - run_functional_tests:
-          name: functional_tests_dev
-          env_name: dev
-          db_name: ${DEV_DB_NAME}
-          requires:
-            - dev_deployment_eks
-            - build_dev_ui
-
-      - approve_to_deploy:
-          name: approve_cug_deployment_eks
-          type: approval
-          requires:
-            - dev_deployment_eks
-            - build_dev_ui
-            # - functional_tests_dev
-          filters:
-            branches:
-              only: [AWS]
+            - create-workspace
 
       - db_migrate_aws:
           name: migrate_cug_aws
           db_name: ${CUG_DB_NAME}
           requires:
-            - approve_cug_deployment_eks
+            - push_db_refresher_image
+            - push_cug_image
 
       - aws-ecr/build-and-push-image:
           name: push_cug_image
@@ -226,127 +188,3 @@ workflows:
           env-name: cug
           requires:
             - push_cug_image
-
-      - approve_to_deploy:
-          name: approve_test_deployment_eks
-          type: approval
-          requires:
-            - dev_deployment_eks
-            - build_dev_ui
-            # - functional_tests_dev
-          filters:
-            branches:
-              only: AWS
-
-      - db_migrate_aws:
-          name: migrate_test_aws
-          db_name: ${TEST_DB_NAME}
-          requires:
-            - approve_test_deployment_eks
-
-      - aws-ecr/build-and-push-image:
-          name: push_test_image
-          repo: ${REPO}
-          tag: test
-          path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENV=test
-          requires:
-            - migrate_test_aws
-
-      - build_ui_push_to_s3:
-          name: build_test_ui
-          env_name: test
-          distributionId: ${TEST_DISTRIBUTION_ID}
-          requires:
-            - push_test_image
-
-      - eks_fargate_deployment:
-          name: test_deployment_eks
-          cluster-name: ${CLUSTER_NAME}
-          env-name: test
-          requires:
-            - push_test_image
-
-      - run_functional_tests:
-          name: functional_tests_test
-          env_name: test
-          db_name: ${TEST_DB_NAME}
-          requires:
-            - test_deployment_eks
-            - build_test_ui
-
-      - approve_to_deploy:
-          name: approve_uat_deployment_eks
-          type: approval
-          requires:
-            - test_deployment_eks
-            - build_test_ui
-            # - functional_tests_dev
-
-      - db_migrate_aws:
-          name: migrate_uat_aws
-          db_name: ${UAT_DB_NAME}
-          requires:
-            # - functional_tests_test
-            - approve_uat_deployment_eks
-
-      - aws-ecr/build-and-push-image:
-          name: push_uat_image
-          repo: ${REPO}
-          tag: uat
-          path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENV=uat
-          requires:
-            - migrate_uat_aws
-
-      - build_ui_push_to_s3:
-          name: build_uat_ui
-          env_name: uat
-          distributionId: ${UAT_DISTRIBUTION_ID}
-          requires:
-            - push_uat_image
-
-      - eks_fargate_deployment:
-          name: uat_deployment_eks
-          cluster-name: ${CLUSTER_NAME}
-          env-name: uat
-          requires:
-            - push_uat_image
-
-      - approve_to_deploy:
-          name: approve_prod_deployment_eks
-          type: approval
-          requires:
-            - test_deployment_eks
-            - build_test_ui
-            # - functional_tests_test
-            - uat_deployment_eks
-
-      - db_migrate_aws:
-          name: migrate_prod_aws
-          db_name: ${DB_NAME}
-          requires:
-            - approve_prod_deployment_eks
-
-      - build_ui_push_to_s3:
-          name: build_prod_ui
-          env_name: prod
-          distributionId: ${PROD_DISTRIBUTION_ID}
-          requires:
-            - push_prod_image
-
-      - aws-ecr/build-and-push-image:
-          name: push_prod_image
-          repo: ${REPO}
-          tag: prod
-          path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENV=prod
-          requires:
-            - migrate_prod_aws
-
-      - eks_fargate_deployment:
-          name: prod_deployment_eks
-          cluster-name: ${CLUSTER_NAME}
-          env-name: prod
-          requires:
-            - push_prod_image
