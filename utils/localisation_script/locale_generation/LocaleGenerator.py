@@ -277,10 +277,10 @@ if __name__ == "__main__":
         Example commands:
         
         For specific languages:
-            python LocaleGenerator.py -j ./../../../crowdsource-ui/locales -e ./input_excel_files -m ./../delta_generation/out-meta -o . -l gu pa
+            python LocaleGenerator.py -j ./../../../crowdsource-ui/locales -e ./input_excel_files -m ./../delta_generation/out-meta -o ./output_json_files -l gu pa
         
         For all languages:
-            python LocaleGenerator.py -j ./../../../crowdsource-ui/locales -e ./input_excel_files -m ./../delta_generation/out-meta -o . -a
+            python LocaleGenerator.py -j ./../../../crowdsource-ui/locales -e ./input_excel_files -m ./../delta_generation/out-meta -o ./output_json_files -a
     '''
 
     LANGUAGES = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta':"Tamil",
@@ -315,7 +315,7 @@ if __name__ == "__main__":
     input_base_path = args.excel_folder_path
     input_json_path = args.json_folder_path
     meta_input_path = args.meta_folder_path
-    output_base_path = os.path.join(args.output_folder_path, "./output_json_files")
+    output_base_path = args.output_folder_path
 
     gen_locales(languages.items(), input_base_path,input_json_path, meta_input_path, output_base_path)
 
