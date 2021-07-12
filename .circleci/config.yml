@@ -142,15 +142,6 @@ workflows:
               only: [AWS]
 
       - aws-ecr/build-and-push-image:
-          name: push_cug_image
-          repo: ${REPO}
-          tag: cug
-          path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENV=cug
-          requires:
-            - create-workspace
-
-      - aws-ecr/build-and-push-image:
           name: push_db_refresher_image
           repo: ${DB_REFRESHER_REPO}
           dockerfile: Dockerfile-dbRefresh
@@ -164,7 +155,6 @@ workflows:
           db_name: ${CUG_DB_NAME}
           requires:
             - push_db_refresher_image
-            - push_cug_image
 
       - aws-ecr/build-and-push-image:
           name: push_cug_image
