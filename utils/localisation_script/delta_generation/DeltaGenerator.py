@@ -151,11 +151,22 @@ def gen_delta(languages, input_base_path, meta_out_base_path, sme_out_base_path)
 
 
 if __name__ == "__main__":
+    example = '''
+        Example commands:
+        
+        For specific languages:
+            python DeltaGenerator.py -i ./../../../crowdsource-ui/locales -o . -l gu pa
+        
+        For all languages:
+            python DeltaGenerator.py -i ./../../../crowdsource-ui/locales -o . -a
+    '''
+    
     LANGUAGES = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta':"Tamil",
                  'te':"Telugu",'mr':"Marathi",'pa':"Punjabi",'ml':"Malayalam",'or':"Odia",'kn':"Kannada"}
 
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(epilog=example,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("-a", "--all-languages", action="store_true", help = "Generate delta for all languages")
     group.add_argument("-l", "--languages", nargs="+", help = "Generate delta for the languages mentioned by language codes(space separated)", choices=list(LANGUAGES.keys()))
