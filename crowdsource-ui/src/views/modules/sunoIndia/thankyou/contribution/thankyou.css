@@ -1,3 +1,13 @@
+.bar_charts_container .float-right{
+    font-size: 13px;
+}
+
+#language-goal{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px 4px rgba(0, 123, 255, 0.13);
+    border-radius: 12px;
+}
+
 .bg-thank-you {
     background-size: cover;
 }
@@ -81,13 +91,13 @@
 }
 
 .badges_information {
-    bottom: 36px;
+    /*bottom: 36px;*/
 }
 
 @media screen and (min-width: 599px) {
     .badges_information {
-        position: absolute;
-        bottom: 36px;
+        /*position: absolute;*/
+        /*bottom: 36px;*/
     }
 }
 
@@ -96,19 +106,19 @@
         width: 150px;
         height: auto;
     }
-  
+
     .top-back-btn {
         top: 80px;
         left: 20px;
-       }
+    }
 }
 
 @media screen and (min-width: 768px) {
-  
+
     .top-back-btn {
         top: 100px !important;
         left: 35px !important;
-       }
+    }
 }
 
 @media screen and (max-width: 599px) {

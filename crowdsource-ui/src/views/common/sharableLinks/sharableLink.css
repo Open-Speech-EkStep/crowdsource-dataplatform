@@ -1,0 +1,8 @@
+.social-share-block{
+    border: 1px solid rgba(0, 123, 255, 0.5);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 12px rgba(0, 123, 255, 0.2);
+    border-radius: 20px;
+    position: absolute;
+    bottom: 36px;
+}
