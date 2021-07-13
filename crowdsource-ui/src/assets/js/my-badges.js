@@ -30,7 +30,7 @@ const getCard = function (badgeName, source, initiativeType) {
 }
 
 const setPopover = (badgeType, type, initiativeType) => {
-  $(`#${badgeType}_${type}_badge[rel=popover]`).popover({
+  $(`#${badgeType}_${type}_badge`).popover({
     html: true,
     trigger: 'hover',
     placement: 'left',
@@ -165,8 +165,8 @@ const getBadgesForUser = () => {
             const type = element.initiativeType == 'text' ? 'bolo' : element.initiativeType == 'ocr' ? 'dekho' : element.initiativeType == 'asr' ? 'suno' : 'likho'
             getBadgeRow(element, id, type);
           });
+          resolve(result);
       });
-      resolve(result);
   })
 }
 
