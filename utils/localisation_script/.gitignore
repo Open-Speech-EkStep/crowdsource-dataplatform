@@ -1,6 +1,7 @@
 .ipynb_checkpoints/
 validator.ipynb
 **/__pycache__/*
+**/reports
 clean_unused_keys/**/*.json
 all_keys_generator/en/
 delta_generation/out-meta/

@@ -12,6 +12,8 @@ import json
 import re
 import os
 import argparse
+from datetime import datetime
+import json
 
 
 # In[2]:
@@ -104,6 +106,7 @@ def get_data_without_translation(language_name, json_data, allowed_replacements,
         keys_list = list(json_data.keys())
     else:
         keys_list = find_keys_without_translation(json_data)
+        keys_without_translation[language_name] = keys_list
         
     for key in keys_list:
         en_value = en_data[key]
@@ -154,48 +157,71 @@ def gen_delta(languages, input_base_path, meta_out_base_path, sme_out_base_path,
         to_smes.to_excel(output_sme_excel_path, index = False)
 
 
-if __name__ == "__main__":
+# In[11]:
 
 
-    LANGUAGES = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta':"Tamil",
-                 'te':"Telugu",'mr':"Marathi",'pa':"Punjabi",'ml':"Malayalam",'or':"Odia",'kn':"Kannada"}
-    example = '''
-            Example commands:
-
-            For specific languages:
-                python DeltaGenerator.py -i ./../../../crowdsource-ui/locales -o . -l gu pa
-
-            For all languages:
-                python DeltaGenerator.py -i ./../../../crowdsource-ui/locales -o . -a
-                
-            To include all keys:
-                python DeltaGenerator.py -i ./../../../crowdsource-ui/locales -o . -a --all-keys
-        '''
-
-    parser = argparse.ArgumentParser(epilog=example,
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("-a", "--all-languages", action="store_true", help = "Generate delta for all languages")
-    group.add_argument("-l", "--languages", nargs="+", help = "Generate delta for the languages mentioned by language codes(space separated)", choices=list(LANGUAGES.keys()))
-    parser.add_argument("-i", "--input-folder-path", required=True, help = "Input folder path with json files present")
-    parser.add_argument("-o", "--output-folder-path", required=True, help = "Output folder path where excels are generated")
-    parser.add_argument("--all-keys", action="store_true", help = "Consider all keys while generating excel")
+def export_report(report_json, report_type):
+    now = datetime.now()
+    report_json['last_run_timestamp'] = str(now)
+    os.makedirs('reports',exist_ok=True)
+    with open('{}/report_{}_{}.json'.format('reports', report_type, now), 'w') as f:
+        f.write(json.dumps(report_json, indent = 4, ensure_ascii=False))
 
 
-    args = parser.parse_args()
-    languages = {}
-    all_keys = args.all_keys
-    if args.all_languages:
-        languages = LANGUAGES.copy()
-    else:
-        language_codes = args.languages
-        for code in language_codes:
-            languages[code] = LANGUAGES[code]
+# In[14]:
 
-    input_base_path = args.input_folder_path
-    output_base_path = args.output_folder_path
 
-    meta_out_base_path = os.path.join(output_base_path, 'out-meta/')
-    sme_out_base_path = os.path.join(output_base_path, 'out-sme/')
+def generate_report():
+    report = {}
+    report['keys_without_translation'] = keys_without_translation
+    
+    export_report(report, 'delta')
 
-    gen_delta(languages.items(), input_base_path, meta_out_base_path, sme_out_base_path, all_keys)
+
+# ## MAIN CELL TO GENERATE DELTA
+
+# In[15]:
+
+
+LANGUAGES = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta':"Tamil",
+             'te':"Telugu",'mr':"Marathi",'pa':"Punjabi",'ml':"Malayalam",'or':"Odia",'kn':"Kannada"}
+
+keys_without_translation = {}
+example = '''
+        Example commands:
+        
+        For specific languages:
+            python DeltaGenerator.py -i ./../../../crowdsource-ui/locales -o . -l gu pa
+        
+        For all languages:
+            python DeltaGenerator.py -i ./../../../crowdsource-ui/locales -o . -a
+    '''
+
+parser = argparse.ArgumentParser(epilog=example,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+group = parser.add_mutually_exclusive_group(required=True)
+group.add_argument("-a", "--all-languages", action="store_true", help = "Generate delta for all languages")
+group.add_argument("-l", "--languages", nargs="+", help = "Generate delta for the languages mentioned by language codes(space separated)", choices=list(LANGUAGES.keys()))
+parser.add_argument("-i", "--input-folder-path", required=True, help = "Input folder path with json files present")
+parser.add_argument("-o", "--output-folder-path", required=True, help = "Output folder path where excels are generated")
+parser.add_argument("--all-keys", action="store_true", help = "Consider all keys while generating excel")
+
+
+args = parser.parse_args()
+languages = {}
+all_keys = args.all_keys
+if args.all_languages:
+    languages = LANGUAGES.copy()
+else:
+    language_codes = args.languages
+    for code in language_codes:
+        languages[code] = LANGUAGES[code]
+
+input_base_path = args.input_folder_path
+output_base_path = args.output_folder_path
+        
+meta_out_base_path = os.path.join(output_base_path, 'out-meta/')
+sme_out_base_path = os.path.join(output_base_path, 'out-sme/')
+
+gen_delta(languages.items(), input_base_path, meta_out_base_path, sme_out_base_path, all_keys)
+generate_report()

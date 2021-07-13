@@ -6,10 +6,11 @@
 
 import pandas as pd
 import openpyxl
-import json
 import os
 import re
 import argparse
+from datetime import datetime
+import json
 
 
 # In[2]:
@@ -127,13 +128,57 @@ def clean_old_translations(modified_content_keys, languages, base_path, output_p
 
 
 def get_modified_content(excel_df, json_df):
-    changed_content = pd.concat([excel_df,json_df]).drop_duplicates(subset=[english_col],keep=False)
-    changed_content = changed_content.drop_duplicates(subset=[key_column],keep='first')
-    changed_content_keys = list(changed_content[key_column])
-    return changed_content_keys
+    jsonFile = json_df.to_json(orient='values')
+    json_string = json.loads(jsonFile)
+
+    reformatted_json = reformat_json(json_string)
+    
+    changed_content = {}
+    for i,row in excel_df.iterrows():
+        key = row[key_column]
+        if row[english_col] != reformatted_json[key]:
+            changed_content[key] = {'old': reformatted_json[key],'new': row[english_col]}
+    return changed_content
 
 
 # In[12]:
+
+
+def get_removed_keys(excel_df, json_df):
+    s = set(json_df[key_column])
+    f = set(excel_df[key_column])
+
+    difference = list(s - f)
+    return difference
+
+
+# In[13]:
+
+
+def export_report(report_json, report_type):
+    now = datetime.now()
+    report_json['last_run_timestamp'] = str(now)
+    os.makedirs('reports',exist_ok=True)
+    with open('{}/report_{}_{}.json'.format('reports', report_type, now), 'w') as f:
+        f.write(json.dumps(report_json, indent = 4, ensure_ascii=False))
+
+
+# In[14]:
+
+
+def generate_report(json_df, excel_df, modified_content_keys):
+    report = {}
+    removed_keys = get_removed_keys(excel_df, json_df)
+    report['total_keys_in_json'] = int(json_df[key_column].count())
+    report['total_keys_received_in_excel'] = int(excel_df[key_column].count())
+    report['total_content_updated'] = len(modified_content_keys)
+    report['total_content_removed'] = len(removed_keys)
+    report['removed_keys'] = removed_keys
+    report['updated_content'] = modified_content_keys
+    export_report(report, 'json')
+
+
+# In[15]:
 
 
 key_column = 'Key'
@@ -164,13 +209,13 @@ def generate(input_excel_path,input_json_path, output_json_path):
     
 
 
-# In[13]:
+# In[16]:
 
 
 example = '''
         Example commands:
 
-            python AllKeysJsonGenerator.py -j ./../../../crowdsource-ui/locales/en.json -e ./en/out/en.xlsx -o ./out/
+            python AllKeysJsonGenerator.py -j ./../../../crowdsource-ui/locales/en.json -e ./en/out/en.xlsx -o ./en/out/en.json
     '''
 
 parser = argparse.ArgumentParser(epilog=example,
@@ -191,6 +236,8 @@ input_base_path = args.input_base_path
 os.makedirs(output_json_path, exist_ok=True)
 
 excel_df, json_df = generate(input_excel_path,input_json_path, output_json_path)
-modified_content_keys = get_modified_content(excel_df, json_df)
-clean_old_translations(modified_content_keys, languages, input_base_path, output_json_path)
+modified_content = get_modified_content(excel_df, json_df)
+clean_old_translations(list(modified_content.keys()), languages, input_base_path, output_json_path)
+os.system('python ./../clean_unused_keys/CleanLocaleJsons.py -i ./out -o ./out -a')
+generate_report(json_df, excel_df, modified_content)
 
