@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bhasha Daan: A crowdsourcing initiative for Indian languages</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../css/badges.css">
+  <link rel="stylesheet" type="text/css" href="../css/common.css">
+</head>
+
+<body>
+  <%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html",
+    suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
+    <div id="content-wrapper" class="container-fluid pt-5 pb-2 px-lg-3 px-md-3 px-4 px-md-5">
+      <div class="row">
+        <%- include('../../build/views/common/back-btn.ejs',{url:"/"}) %>
+      </div>
+      <div id="badge-container" class="container-fluid p-0">
+        <div class="row m-0 bg-secondary position-relative">
+          <div class="header"></div>
+          <div class="col-12 p-0 text-center position-absolute">
+            <h1 class="light active mt-3"><span> Congratulations,</span><span> username!</span></h1>
+            <h2>Your Medal Gallery</h2>
+          </div>
+        </div>
+        <div class="row mx-0 badge-mt-34">
+          <div class="col-12 p-0">
+            <div class="row m-0">
+              <ul class="nav nav-tabs w-100 border-0" id="myTab" role="tablist">
+                <li class="nav-item col-3 p-0 text-center">
+                  <a class="nav-link border-0 active light-bg font-family-Rowdies" style="font-size:24px" id="suno-tab" data-toggle="tab" href="#suno" role="tab" aria-controls="suno" aria-selected="true">
+                    <span>
+                      <%= __('Suno')%>
+                    </span>
+                    <span>
+                      <%= __('India')%>
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item col-3 p-0 text-center">
+                  <a class="nav-link border-0 light-bg font-family-Rowdies" style="font-size:24px" id="bolo-tab" data-toggle="tab" href="#bolo" role="tab" aria-controls="bolo" aria-selected="true">
+                    <span>
+                      <%= __('Bolo')%>
+                    </span>
+                    <span>
+                      <%= __('India')%>
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item col-3 p-0 text-center">
+                  <a class="nav-link border-0 light-bg font-family-Rowdies" style="font-size:24px" id="likho-tab" data-toggle="tab" href="#likho" role="tab" aria-controls="likho" aria-selected="true">
+                    <span>
+                      <%= __('Likho')%>
+                    </span>
+                    <span>
+                      <%= __('India')%>
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item col-3 p-0 text-center">
+                  <a class="nav-link border-0 light-bg font-family-Rowdies" style="font-size:24px" id="dekho-tab" data-toggle="tab" href="#dekho" role="tab" aria-controls="dekho" aria-selected="true">
+                    <span>
+                      <%= __('Dekho')%>
+                    </span>
+                    <span>
+                      <%= __('India')%>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+              <div class="tab-content w-100" id="badge-profile-content">
+                <div class="tab-pane fade active show" id="suno" role="tabpanel" aria-labelledby="suno-tab">
+                  <div class="row mx-0 my-4">
+                    <div class="col-2"></div>
+                    <div class="col-5">
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">Contribution</h6>
+                    </div>
+                    <div class="col-5">
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">Validation</h6>
+                    </div>
+                  </div>
+                  <div class="row m-0 badge-section" id="suno-badge">
+                   
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="bolo" role="tabpanel" aria-labelledby="bolo-tab">
+                  <div class="row mx-0 my-4">
+                    <div class="col-2"></div>
+                    <div class="col-5">
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">Contribution</h6>
+                    </div>
+                    <div class="col-5">
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">Validation</h6>
+                    </div>
+                  </div>
+                  <div class="row m-0 badge-section" id="bolo-badge">
+                   
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="likho" role="tabpanel" aria-labelledby="likho-tab">
+                  <div class="row mx-0 my-4">
+                    <div class="col-2"></div>
+                    <div class="col-5">
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">Contribution</h6>
+                    </div>
+                    <div class="col-5">
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">Validation</h6>
+                    </div>
+                  </div>
+                  <div class="row m-0 badge-section" id="likho-badge">
+                   
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="dekho" role="tabpanel" aria-labelledby="dekho-tab">
+                  <div class="row mx-0 my-4">
+                    <div class="col-2"></div>
+                    <div class="col-5">
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">Contribution</h6>
+                    </div>
+                    <div class="col-5">
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">Validation</h6>
+                    </div>
+                  </div>
+                  <div class="row m-0 badge-section" id="dekho-badge">
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mx-0 my-5">
+          <ul>
+            <li>
+              Please keep contributing actively to stand a chance to get recognised.
+            </li>
+            <li>
+              Your contribution will be validated before confirming the badge.
+            </li>
+            <li>
+              Levels and badges may take upto 48 hours to update.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <%- include('common/feedback/feedback.ejs', {page:"My Badges"}) %>
+      <%- include('common/footer.ejs',{path:"./"}) %>
+
+        <%- include('../../build/views/common/speakerDetails.ejs',{path:"./"}) %>
+
+          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+          <script>$("footer").removeClass("fixed-bottom").addClass("bottom")</script>
+          <script src="../js/my-badges.js"></script>
+          <script src="../js/loadFeedback.js"></script>
+</body>
+
+</html>

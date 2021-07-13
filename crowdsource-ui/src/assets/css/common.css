@@ -463,3 +463,36 @@ body {
 #localisation_dropdown {
   min-width: 8rem !important;
 }
+
+.header {
+  background-image: url(/img/my-badge-tri.svg);
+  height: 133px;
+    width: 410px;
+    margin: auto;
+}
+
+.badge-widget {
+  height: 120px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+#badge-profile-content h6{
+  font-size: 18px;
+}
+
+#badge-profile-content p {
+  font-weight: 300 !important;
+}
+
+.badge-widget-placeholder {
+  opacity: 0.5;
+  height: 120px;
+  border-radius: 8px;
+}
+
+.badge-section {
+  height: 500px;
+  overflow: auto;
+}
+
