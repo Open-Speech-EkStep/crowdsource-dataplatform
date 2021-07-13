@@ -52,11 +52,11 @@ def set_variables(df_row):
             pass
     try:
         if pd.notna(df_row['a-tag-replacement']):
-            start_index = df_row[lang].find('<a')+2
-            end_index = df_row[lang].find('>')
-            df_row[english_col] = df_row[english_col][:start_index] + df_row[english_col] + df_row[english_col][end_index:]
-    except:
-        pass
+            start_index = df_row[english_col].find('<a')+2
+            end_index = df_row[english_col].find('>')
+            df_row[english_col] = df_row[english_col][:start_index] + df_row['a-tag-replacement'] + df_row[english_col][end_index:]
+    except Exception as e:
+        print(e)
         
     return df_row
 
@@ -110,9 +110,38 @@ def read_excel_as_df(excel_file):
 # In[10]:
 
 
+def clean_old_translations(modified_content_keys, languages, base_path, output_path):
+    
+    for language_code in languages.keys():
+        input_json_path = os.path.join(base_path,'{language_code}.json'.format(language_code=language_code))
+        language_data = read_json(input_json_path)
+        for key in modified_content_keys:
+            language_data[key] = key
+        output_json_path = os.path.join(output_path,'{language_code}.json'.format(language_code=language_code))
+        with open(output_json_path, 'w') as f:
+            f.write(json.dumps(language_data, indent = 4, ensure_ascii=False))
+    
+
+
+# In[11]:
+
+
+def get_modified_content(excel_df, json_df):
+    changed_content = pd.concat([excel_df,json_df]).drop_duplicates(subset=[english_col],keep=False)
+    changed_content = changed_content.drop_duplicates(subset=[key_column],keep='first')
+    changed_content_keys = list(changed_content[key_column])
+    return changed_content_keys
+
+
+# In[12]:
+
+
 key_column = 'Key'
 english_col = 'English copy'
 allowed_values = ['x','y','z','u','v','w']    
+languages = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta':"Tamil",
+             'te':"Telugu",'mr':"Marathi",'pa':"Punjabi",'ml':"Malayalam",'or':"Odia",'kn':"Kannada"}
+
 
 def generate(input_excel_path,input_json_path, output_json_path):    
     excel_df = read_excel_as_df(input_excel_path)
@@ -129,33 +158,39 @@ def generate(input_excel_path,input_json_path, output_json_path):
 
     final_df = filtered_df.drop_duplicates(subset=[key_column], keep='first', inplace=False)
 
-    write_df_to_json(final_df, output_json_path)
+    write_df_to_json(final_df, os.path.join(output_json_path,'en.json'))
+    
+    return clean_excel_df, clean_json_df
+    
 
 
-# In[11]:
-if __name__ == '__main__':
-
-    example = '''
-            Example commands:
-
-                python AllKeysJsonGenerator.py -j ./../../../crowdsource-ui/locales/en.json -e ./en/out/en.xlsx -o ./en/out/en.json
-        '''
-
-    parser = argparse.ArgumentParser(epilog=example,
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("-j", "--input-json-path", required=True, help = "Path of json file with en keys present")
-    parser.add_argument("-e", "--input-excel-path", required=True, help = "Path of excel file")
-    parser.add_argument("-o","--output-json-path", required=True, help = "Output path")
+# In[13]:
 
 
-    args = parser.parse_args()
+example = '''
+        Example commands:
 
-    input_json_path = args.input_json_path
-    input_excel_path = args.input_excel_path
-    output_json_path = args.output_json_path
+            python AllKeysJsonGenerator.py -j ./../../../crowdsource-ui/locales/en.json -e ./en/out/en.xlsx -o ./out/
+    '''
 
-    if "/" in output_json_path:
-        os.makedirs(output_json_path[:output_json_path.rindex("/")], exist_ok=True)
+parser = argparse.ArgumentParser(epilog=example,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+parser.add_argument("-j", "--input-json-path", required=True, help = "Path of json file with en keys present")
+parser.add_argument("-i", "--input-base-path", required=True, help = "Path of folder with all jsons present")
+parser.add_argument("-e", "--input-excel-path", required=True, help = "Path of excel file")
+parser.add_argument("-o","--output-json-path", required=True, help = "Output path")
 
-    generate(input_excel_path,input_json_path, output_json_path)
+
+args = parser.parse_args()
+
+input_json_path = args.input_json_path
+input_excel_path = args.input_excel_path
+output_json_path = args.output_json_path
+input_base_path = args.input_base_path
+
+os.makedirs(output_json_path, exist_ok=True)
+
+excel_df, json_df = generate(input_excel_path,input_json_path, output_json_path)
+modified_content_keys = get_modified_content(excel_df, json_df)
+clean_old_translations(modified_content_keys, languages, input_base_path, output_json_path)
 
