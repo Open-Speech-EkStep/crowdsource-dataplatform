@@ -7,24 +7,24 @@ const {
 const {showUserProfile} = require('./header');
 const {hasUserRegistered} = require('./common');
 
-const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type, localeString) => {
+const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type, localeString, language) => {
   setPopover(badgeType, type, initiativeType);
   return `
-  <div class="badge-widget text-center" rel="popover" id="${badgeType}_${type}_badge">
-  <img src=${imgPath} class="my-badge-image" height="74" width="60">
+  <div class="badge-widget text-center" id="${badgeType}_${type}_${initiativeType}_${language}_badge">
+  <img src=${imgPath} class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover" >
   <h6 class="mt-2 font-family-Rowdies">${badgeType}</h6>
 </div>`
 }
 
-const getWidgetWithoutBadge = (badgeType, type, localeString) => {
-  return ` <div class="badge-widget-placeholder m-auto text-center" id="${badgeType}_${type}_placeholder">
+const getWidgetWithoutBadge = (badgeType, type, localeString,initiativeType, language) => {
+  return ` <div class="badge-widget-placeholder m-auto text-center" id="${badgeType}_${type}_${language}_placeholder">
                  <p>${badgeType}</p>
  </div>`
 }
 
 const getCard = function (badgeName, source, initiativeType) {
   const badge = initiativeType == 'text' ? BOLOPAGE[badgeName.toLowerCase()] : initiativeType == 'ocr' ? DEKHOPAGE[badgeName.toLowerCase()] : initiativeType == 'asr' ? SUNOPAGE[badgeName.toLowerCase()] : LIKHOPAGE[badgeName.toLowerCase()];
-  return `<div class="text-center">
+  return `<div class="text-center tooltiptext">
                 <div class="py-2">
                     <img src=${source == "contribution" ? badge.imgLg : badge.imgSm} alt="${badgeName.toLowerCase()}_badge" class="img-fluid">
                 </div>
@@ -32,10 +32,10 @@ const getCard = function (badgeName, source, initiativeType) {
 }
 
 const setPopover = (badgeType, type, initiativeType) => {
-  $(`#${badgeType}_${type}_badge`).popover({
+  $(`#${badgeType}_${type}_${initiativeType}_badge`).popover({
     html: true,
-    trigger: 'hover',
-    placement: 'left',
+    trigger: 'click',
+    placement: 'bottom',
     content: function () {
       return getCard(badgeType, type, initiativeType);
     }
@@ -58,16 +58,17 @@ const getBadgeRow = (result, id, type) => {
                    </div>
                  <div class="row m-0">
                    <div class="col-3 pl-0">
-                   ${item.contribute[0] && item.contribute[0].grade == 'Bronze' ? getWidgetWithBadge(`/img/${type}_bronze_medal.svg`, 'Bronze', type, 'contribution', localeString) : getWidgetWithoutBadge('Bronze', 'contribution', localeString)}
+                   ${item.contribute[0] && item.contribute[0].grade == 'Bronze' ? getWidgetWithBadge(`/img/${type}_bronze_medal.svg`, 'Bronze', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('Bronze', 'contribution', localeString, type, item.name)}
+                  
                    </div>
                    <div class="col-3 pl-0">
-                     ${item.contribute[1] && item.contribute[1].grade == 'Silver' ? getWidgetWithBadge(`/img/${type}_silver_medal.svg`, 'Silver', type, 'contribution', localeString) : getWidgetWithoutBadge('Silver', 'contribution', localeString)}
+                     ${item.contribute[1] && item.contribute[1].grade == 'Silver' ? getWidgetWithBadge(`/img/${type}_silver_medal.svg`, 'Silver', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('Silver', 'contribution', localeString,type, item.name)}
                    </div>
                    <div class="col-3 pl-0">
-                     ${item.contribute[2] && item.contribute[2].grade == 'Gold' ? getWidgetWithBadge(`/img/${type}_gold_medal.svg`, 'Gold', type, 'contribution', localeString) : getWidgetWithoutBadge('Gold', 'contribution', localeString)}
+                     ${item.contribute[2] && item.contribute[2].grade == 'Gold' ? getWidgetWithBadge(`/img/${type}_gold_medal.svg`, 'Gold', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('Gold', 'contribution', localeString,type, item.name)}
                    </div>
                    <div class="col-3 pl-0">
-                   ${item.contribute[3] && item.contribute[3].grade == 'Platinum' ? getWidgetWithBadge(`/img/${type}_platinum_medal.svg`, 'Platinum', type, 'contribution', localeString) : getWidgetWithoutBadge('Platinum', 'contribution', localeString)}
+                   ${item.contribute[3] && item.contribute[3].grade == 'Platinum' ? getWidgetWithBadge(`/img/${type}_platinum_medal.svg`, 'Platinum', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('Platinum', 'contribution', localeString,type, item.name)}
                    </div>
                  </div>
                </div>`: `<div class="col-5"></div>`}
@@ -77,16 +78,16 @@ const getBadgeRow = (result, id, type) => {
                </div>
                <div class="row m-0">
                  <div class="col-3 pl-0">
-                 ${item.validate[0] && item.validate[0].grade == 'Bronze' ? getWidgetWithBadge(`/img/${type}_bronze_val.svg`, 'Bronze', type, 'validation', localeString) : getWidgetWithoutBadge('Bronze', 'validation', localeString)}
+                 ${item.validate[0] && item.validate[0].grade == 'Bronze' ? getWidgetWithBadge(type == "bolo" ? `/img/${type}_bronze_val.svg` : `/img/${type}_bronze_medal_val.svg`, 'Bronze', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('Bronze', 'validation', localeString,type, item.name)}
                  </div>
                  <div class="col-3 pl-0">
-                     ${item.validate[1] && item.validate[1].grade == 'Silver' ? getWidgetWithBadge(`/img/${type}_silver_medal_val.svg`, 'Silver', type, 'validation', localeString) : getWidgetWithoutBadge('Silver', 'validation', localeString)}
+                     ${item.validate[1] && item.validate[1].grade == 'Silver' ? getWidgetWithBadge(`/img/${type}_silver_medal_val.svg`, 'Silver', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('Silver', 'validation', localeString,type,item.name)}
                    </div>
                    <div class="col-3 pl-0">
-                     ${item.validate[2] && item.validate[2].grade == 'Gold' ? getWidgetWithBadge(`/img/${type}_gold_medal_val.svg`, 'Gold', type, 'validation', localeString) : getWidgetWithoutBadge('Gold', 'validation', localeString)}
+                     ${item.validate[2] && item.validate[2].grade == 'Gold' ? getWidgetWithBadge(`/img/${type}_gold_medal_val.svg`, 'Gold', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('Gold', 'validation', localeString,type, item.name)}
                    </div>
                    <div class="col-3 pl-0">
-                   ${item.validate[3] && item.validate[3].grade == 'Platinum' ? getWidgetWithBadge(`/img/${type}_platinum_medal_val.svg`, 'Platinum', type, 'validation', localeString) : getWidgetWithoutBadge('Platinum', 'validation', localeString)}
+                   ${item.validate[3] && item.validate[3].grade == 'Platinum' ? getWidgetWithBadge(`/img/${type}_platinum_medal_val.svg`, 'Platinum', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('Platinum', 'validation', localeString,type, item.name)}
                    </div>
                </div>
              </div>` : ` <div class="col-5"></div>`}
@@ -104,11 +105,21 @@ const getBadgeRow = (result, id, type) => {
     `
     $tableRows.append(row);
   }
-
+  $('.badge-widget').off('click').on('click', ($event) => {
+    var offset = $($event.currentTarget).offset();
+    const image = $($event.currentTarget).find("img").attr('src');
+    $("#tooltiptext").find("img").attr('src', image);
+    $('#tooltiptext').css({top:offset.top - 180, left:offset.left - 200, visibility: 'visible'});
+  });
+  $(document).on('click', (event) => {
+    if (!$(event.target).closest(".badge-widget").length) {
+      $('#tooltiptext').css({visibility: 'hidden'});
+  }
+  });
 }
 
-const groupBy = (result, column) => {
-  return result.reduce((r, a) => {
+const groupBy = (data, column) => {
+  return data.reduce((r, a) => {
     r[a[column]] = [...r[a[column]] || [], a];
     return r;
   }, {});
@@ -126,6 +137,7 @@ const getBadgesForUser = () => {
   return new Promise((resolve, reject) => {
     const details = localStorage.getItem("speakerDetails");
     const username = details.userName ?? 'Badge User';
+    $('#username').text(', ' + username);
     fetch(`/user-rewards/${username}`, {
       method: 'GET',
       credentials: 'include',
@@ -195,6 +207,7 @@ $(document).ready(() => {
     const localSpeakerDataParsed = JSON.parse(speakerDetails);
     showUserProfile(localSpeakerDataParsed.userName);
   }
+
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
   updateLocaleLanguagesDropdown(language);
 });

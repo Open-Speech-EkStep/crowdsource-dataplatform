@@ -255,6 +255,9 @@ body {
 }
 
 @media (min-width: 768px) {
+  .badge-img-fluid {
+    height: 200px;
+  }
   .logo {
     width: 190px;
     height: 48px;
@@ -341,6 +344,10 @@ body {
 }
 
 @media (max-width: 700px) {
+  .badge-img-fluid {
+    height: 100px;
+  }
+
   #badge-container .nav-tabs .nav-link {
     font-size: 14px;
   }
@@ -537,4 +544,36 @@ body {
 .badge-section {
   height: 500px;
   overflow: auto;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 140px;
+  background-color: #fff;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px solid #C4C4C4;;
+  position: absolute;
+  z-index: 1;
+  bottom: 60%;
+  left: 50%;
+  margin-left: -75px;
+  /* opacity: 0; */
+  transition: opacity 0.3s;
+  width: 390px;
+  height: 262px;
+  border-radius: 20px;
+  background-image: url(/img/my-badge-tri.svg);
+}
+
+.tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 10%;
+  margin-left: -5px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent orange transparent;
 }

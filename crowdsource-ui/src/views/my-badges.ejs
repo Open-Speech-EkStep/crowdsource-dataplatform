@@ -25,8 +25,12 @@
         <div class="row m-0 bg-secondary position-relative">
           <div class="header"></div>
           <div class="col-12 p-0 text-center position-absolute">
-            <h1 class="light active mt-lg-3 mt-md-3 mt-4"><span> <%= __('Congratulations')%></span><span id="username">, <%= __('username!')%></span></h1>
-            <h2 class="mt-4 mt-lg-2 mt-md-2"><%= __('Your Medal Gallery')%></h2>
+            <h1 class="light active mt-lg-3 mt-md-3 mt-4"><span>
+                <%= __('Congratulations')%>
+              </span><span id="username" class="d-none">,</span></h1>
+            <h2 class="mt-4 mt-lg-2 mt-md-2">
+              <%= __('Your Medal Gallery')%>
+            </h2>
           </div>
         </div>
         <div class="row mx-0 badge-mt-34">
@@ -75,66 +79,88 @@
                 </li>
               </ul>
               <div class="tab-content w-100" id="badge-profile-content">
+                <div class="text-center tooltiptext" id="tooltiptext">
+                  <div class="">
+                    <img src="/img/suno_bronze_medal.svg" alt="" class="badge-img-fluid">
+                  </div>
+                </div>
                 <div class="tab-pane fade active show" id="suno" role="tabpanel" aria-labelledby="suno-tab">
                   <div class="row mx-0 my-4 d-xs-none" id="suno-type">
                     <div class="col-2"></div>
                     <div class="col-5">
-                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies"> <%= __('Contribution')%></h6>
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">
+                        <%= __('Contribution')%>
+                      </h6>
                     </div>
                     <div class="col-5">
-                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies"> <%= __('Validation')%></h6>
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">
+                        <%= __('Validation')%>
+                      </h6>
                     </div>
                   </div>
                   <div class="row m-0 badge-section" id="suno-badge">
-                   
+
                   </div>
                 </div>
                 <div class="tab-pane fade" id="bolo" role="tabpanel" aria-labelledby="bolo-tab">
                   <div class="row mx-0 my-4 d-xs-none" id="bolo-type">
                     <div class="col-2"></div>
                     <div class="col-5">
-                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies"><%= __('Contribution')%></h6>
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">
+                        <%= __('Contribution')%>
+                      </h6>
                     </div>
                     <div class="col-5">
-                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies"><%= __('Validation')%></h6>
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">
+                        <%= __('Validation')%>
+                      </h6>
                     </div>
                   </div>
                   <div class="row m-0 badge-section" id="bolo-badge">
-                   
+
                   </div>
                 </div>
                 <div class="tab-pane fade" id="likho" role="tabpanel" aria-labelledby="likho-tab">
                   <div class="row mx-0 my-4 d-xs-none" id="likho-type">
                     <div class="col-2"></div>
                     <div class="col-5">
-                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies"><%= __('Contribution')%></h6>
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">
+                        <%= __('Contribution')%>
+                      </h6>
                     </div>
                     <div class="col-5">
-                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies"><%= __('Validation')%></h6>
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">
+                        <%= __('Validation')%>
+                      </h6>
                     </div>
                   </div>
                   <div class="row m-0 badge-section" id="likho-badge">
-                   
+
                   </div>
                 </div>
                 <div class="tab-pane fade" id="dekho" role="tabpanel" aria-labelledby="dekho-tab">
                   <div class="row mx-0 my-4 d-xs-none" id="dekho-type">
                     <div class="col-2"></div>
                     <div class="col-5">
-                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies"><%= __('Contribution')%></h6>
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">
+                        <%= __('Contribution')%>
+                      </h6>
                     </div>
                     <div class="col-5">
-                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies"><%= __('Validation')%></h6>
+                      <h6 class="text-custom-muted font-weight-normal font-family-Rowdies">
+                        <%= __('Validation')%>
+                      </h6>
                     </div>
                   </div>
                   <div class="row m-0 badge-section" id="dekho-badge">
-                   
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+       
         <div class="row mx-0 my-5">
           <ul style="padding-inline-start:20px">
             <li>
