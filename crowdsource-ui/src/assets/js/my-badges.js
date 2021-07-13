@@ -1,10 +1,13 @@
 const fetch = require('./fetch');
-const { BOLOPAGE, DEKHOPAGE, LIKHOPAGE, SUNOPAGE , CONTRIBUTION_LANGUAGE} = require('./constants');
+const { BOLOPAGE, DEKHOPAGE, LIKHOPAGE, SUNOPAGE , CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, SPEAKER_DETAILS_KEY} = require('./constants');
 const {
-  updateLocaleLanguagesDropdown
+  updateLocaleLanguagesDropdown,
+  getLocaleString
 } = require('./utils');
+const {showUserProfile} = require('./header');
+const {hasUserRegistered} = require('./common');
 
-const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type) => {
+const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type, localeString) => {
   setPopover(badgeType, type, initiativeType);
   return `
   <div class="badge-widget text-center" rel="popover" id="${badgeType}_${type}_badge">
@@ -13,14 +16,14 @@ const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type) => {
 </div>`
 }
 
-const getWidgetWithoutBadge = (badgeType, type) => {
+const getWidgetWithoutBadge = (badgeType, type, localeString) => {
   return ` <div class="badge-widget-placeholder m-auto text-center" id="${badgeType}_${type}_placeholder">
                  <p>${badgeType}</p>
  </div>`
 }
 
 const getCard = function (badgeName, source, initiativeType) {
-  console.log("popover", badgeName);
+  console.log("popover", badgeName, initiativeType);
   const badge = initiativeType == 'text' ? BOLOPAGE[badgeName.toLowerCase()] : initiativeType == 'ocr' ? DEKHOPAGE[badgeName.toLowerCase()] : initiativeType == 'asr' ? SUNOPAGE[badgeName.toLowerCase()] : LIKHOPAGE[badgeName.toLowerCase()];
   return `<div class="text-center">
                 <div class="py-2">
@@ -30,6 +33,7 @@ const getCard = function (badgeName, source, initiativeType) {
 }
 
 const setPopover = (badgeType, type, initiativeType) => {
+  console.log(`#${badgeType}_${type}_badge`);
   $(`#${badgeType}_${type}_badge`).popover({
     html: true,
     trigger: 'hover',
@@ -42,12 +46,13 @@ const setPopover = (badgeType, type, initiativeType) => {
 
 const getBadgeRow = (result, id, type) => {
   let $tableRows = $(`#${id}`);
+  const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   if (result && result.language && result.language.length > 0) {
     result.language.forEach(item => {
       const row = ` <div class="col-12 p-0">
               <div class="row m-0">
                 <div class="col-lg-2 col-md-3 col-12 m-auto">
-                  <h4 class="font-family-Rowdies my-4 my-lg-0 my-md-0">${item.name}</h4> 
+                  <h4 class="font-family-Rowdies my-4 my-lg-0 my-md-0">${localeString[item.name]}</h4> 
                  </div>
                  ${item.contribute && item.contribute.length ? ` <div class="col-lg-5 col-md-5 col-12">
                  <div class="row mx-0 mb-2 d-lg-none">
@@ -55,16 +60,16 @@ const getBadgeRow = (result, id, type) => {
                    </div>
                  <div class="row m-0">
                    <div class="col-3 pl-0">
-                   ${item.contribute[0] && item.contribute[0].grade == 'Bronze' ? getWidgetWithBadge(`/img/${type}_bronze_medal.svg`, 'Bronze', type, 'contribution') : getWidgetWithoutBadge('Bronze', 'contribution')}
+                   ${item.contribute[0] && item.contribute[0].grade == 'Bronze' ? getWidgetWithBadge(`/img/${type}_bronze_medal.svg`, 'Bronze', type, 'contribution', localeString) : getWidgetWithoutBadge('Bronze', 'contribution', localeString)}
                    </div>
                    <div class="col-3 pl-0">
-                     ${item.contribute[1] && item.contribute[1].grade == 'Silver' ? getWidgetWithBadge(`/img/${type}_silver_medal.svg`, 'Silver', type, 'contribution') : getWidgetWithoutBadge('Silver', 'contribution')}
+                     ${item.contribute[1] && item.contribute[1].grade == 'Silver' ? getWidgetWithBadge(`/img/${type}_silver_medal.svg`, 'Silver', type, 'contribution', localeString) : getWidgetWithoutBadge('Silver', 'contribution', localeString)}
                    </div>
                    <div class="col-3 pl-0">
-                     ${item.contribute[2] && item.contribute[2].grade == 'Gold' ? getWidgetWithBadge(`/img/${type}_gold_medal.svg`, 'Gold', type, 'contribution') : getWidgetWithoutBadge('Gold', 'contribution')}
+                     ${item.contribute[2] && item.contribute[2].grade == 'Gold' ? getWidgetWithBadge(`/img/${type}_gold_medal.svg`, 'Gold', type, 'contribution', localeString) : getWidgetWithoutBadge('Gold', 'contribution', localeString)}
                    </div>
                    <div class="col-3 pl-0">
-                   ${item.contribute[3] && item.contribute[3].grade == 'Platinum' ? getWidgetWithBadge(`/img/${type}_platinum_medal.svg`, 'Platinum', type, 'contribution') : getWidgetWithoutBadge('Platinum', 'contribution')}
+                   ${item.contribute[3] && item.contribute[3].grade == 'Platinum' ? getWidgetWithBadge(`/img/${type}_platinum_medal.svg`, 'Platinum', type, 'contribution', localeString) : getWidgetWithoutBadge('Platinum', 'contribution', localeString)}
                    </div>
                  </div>
                </div>`: `<div class="col-5"></div>`}
@@ -74,16 +79,16 @@ const getBadgeRow = (result, id, type) => {
                </div>
                <div class="row m-0">
                  <div class="col-3 pl-0">
-                 ${item.contribute[0] && item.contribute[0].grade == 'Bronze' ? getWidgetWithBadge(`/img/${type}_bronze_val.svg`, 'Bronze', type, 'validation') : getWidgetWithoutBadge('Bronze', 'validation')}
+                 ${item.contribute[0] && item.contribute[0].grade == 'Bronze' ? getWidgetWithBadge(`/img/${type}_bronze_val.svg`, 'Bronze', type, 'validation', localeString) : getWidgetWithoutBadge('Bronze', 'validation', localeString)}
                  </div>
                  <div class="col-3 pl-0">
-                     ${item.contribute[1] && item.contribute[1].grade == 'Silver' ? getWidgetWithBadge(`/img/${type}_silver_medal_val.svg`, 'Silver', type, 'validation') : getWidgetWithoutBadge('Silver', 'validation')}
+                     ${item.contribute[1] && item.contribute[1].grade == 'Silver' ? getWidgetWithBadge(`/img/${type}_silver_medal_val.svg`, 'Silver', type, 'validation', localeString) : getWidgetWithoutBadge('Silver', 'validation', localeString)}
                    </div>
                    <div class="col-3 pl-0">
-                     ${item.contribute[2] && item.contribute[2].grade == 'Gold' ? getWidgetWithBadge(`/img/${type}_gold_medal_val.svg`, 'Gold', type, 'validation') : getWidgetWithoutBadge('Gold', 'validation')}
+                     ${item.contribute[2] && item.contribute[2].grade == 'Gold' ? getWidgetWithBadge(`/img/${type}_gold_medal_val.svg`, 'Gold', type, 'validation', localeString) : getWidgetWithoutBadge('Gold', 'validation', localeString)}
                    </div>
                    <div class="col-3 pl-0">
-                   ${item.contribute[3] && item.contribute[3].grade == 'Platinum' ? getWidgetWithBadge(`/img/${type}_platinum_medal_val.svg`, 'Platinum', type, 'validation') : getWidgetWithoutBadge('Platinum', 'validation')}
+                   ${item.contribute[3] && item.contribute[3].grade == 'Platinum' ? getWidgetWithBadge(`/img/${type}_platinum_medal_val.svg`, 'Platinum', type, 'validation', localeString) : getWidgetWithoutBadge('Platinum', 'validation', localeString)}
                    </div>
                </div>
              </div>` : ` <div class="col-5"></div>`}
@@ -162,7 +167,7 @@ const getBadgesForUser = () => {
         }
           mappedData.forEach(element => {
             const id = element.initiativeType == 'text' ? 'bolo-badge' : element.initiativeType == 'ocr' ? 'dekho-badge' : element.initiativeType == 'asr' ? 'suno-badge' : 'likho-badge';
-            const type = element.initiativeType == 'text' ? 'bolo' : element.initiativeType == 'ocr' ? 'dekho' : element.initiativeType == 'asr' ? 'suno' : 'likho'
+            const type = element.initiativeType == 'text' ? 'bolo' : element.initiativeType == 'ocr' ? 'dekho' : element.initiativeType == 'asr' ? 'suno' : 'likho';
             getBadgeRow(element, id, type);
           });
           resolve(result);
@@ -171,9 +176,18 @@ const getBadgesForUser = () => {
 }
 
 $(document).ready(() => {
+  getLocaleString().then(() => {
+    getBadgesForUser();
+  }).catch(() => {
+    window.location.href = "/";
+  });
+  if(hasUserRegistered()){
+    const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+    const localSpeakerDataParsed = JSON.parse(speakerDetails);
+    showUserProfile(localSpeakerDataParsed.userName);
+  }
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
   updateLocaleLanguagesDropdown(language);
-  getBadgesForUser();
 });
 
-module.exports = {getBadgesForUser};
+module.exports = {getBadgesForUser, getBadgeRow};

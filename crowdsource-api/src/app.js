@@ -357,7 +357,11 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'All Languages',
             'Bhasha Daan: A crowdsourcing initiative for Indian languages',
             'Validation so far in <y> - <x>',
-            'Contribution so far in <y> - <x>'
+            'Contribution so far in <y> - <x>',
+            'Bronze',
+            'Silver',
+            'Gold',
+            'Platinum'
         ];
 
         const langSttr = {};
