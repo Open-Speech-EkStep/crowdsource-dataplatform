@@ -418,8 +418,8 @@ router.get('/rewards-info', validateRewardsInfoInput, async (req, res) => {
 });
 
 router.get('/user-rewards/:username?', async (req, res) => {
-    const userId = 'ca98ca35-3025-478d-b08d-bd65cdc1e2b8';
-    const userName = req.params.username || 'newUser';
+    const userId = '789456123abcde';
+    const userName = req.params.username || 'Badge User';
     try {
         const rewardData = await getUserRewards(userId, userName);
         return res.send(rewardData);

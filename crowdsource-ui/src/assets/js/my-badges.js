@@ -79,16 +79,16 @@ const getBadgeRow = (result, id, type) => {
                </div>
                <div class="row m-0">
                  <div class="col-3 pl-0">
-                 ${item.contribute[0] && item.contribute[0].grade == 'Bronze' ? getWidgetWithBadge(`/img/${type}_bronze_val.svg`, 'Bronze', type, 'validation', localeString) : getWidgetWithoutBadge('Bronze', 'validation', localeString)}
+                 ${item.validate[0] && item.validate[0].grade == 'Bronze' ? getWidgetWithBadge(`/img/${type}_bronze_val.svg`, 'Bronze', type, 'validation', localeString) : getWidgetWithoutBadge('Bronze', 'validation', localeString)}
                  </div>
                  <div class="col-3 pl-0">
-                     ${item.contribute[1] && item.contribute[1].grade == 'Silver' ? getWidgetWithBadge(`/img/${type}_silver_medal_val.svg`, 'Silver', type, 'validation', localeString) : getWidgetWithoutBadge('Silver', 'validation', localeString)}
+                     ${item.validate[1] && item.validate[1].grade == 'Silver' ? getWidgetWithBadge(`/img/${type}_silver_medal_val.svg`, 'Silver', type, 'validation', localeString) : getWidgetWithoutBadge('Silver', 'validation', localeString)}
                    </div>
                    <div class="col-3 pl-0">
-                     ${item.contribute[2] && item.contribute[2].grade == 'Gold' ? getWidgetWithBadge(`/img/${type}_gold_medal_val.svg`, 'Gold', type, 'validation', localeString) : getWidgetWithoutBadge('Gold', 'validation', localeString)}
+                     ${item.validate[2] && item.validate[2].grade == 'Gold' ? getWidgetWithBadge(`/img/${type}_gold_medal_val.svg`, 'Gold', type, 'validation', localeString) : getWidgetWithoutBadge('Gold', 'validation', localeString)}
                    </div>
                    <div class="col-3 pl-0">
-                   ${item.contribute[3] && item.contribute[3].grade == 'Platinum' ? getWidgetWithBadge(`/img/${type}_platinum_medal_val.svg`, 'Platinum', type, 'validation', localeString) : getWidgetWithoutBadge('Platinum', 'validation', localeString)}
+                   ${item.validate[3] && item.validate[3].grade == 'Platinum' ? getWidgetWithBadge(`/img/${type}_platinum_medal_val.svg`, 'Platinum', type, 'validation', localeString) : getWidgetWithoutBadge('Platinum', 'validation', localeString)}
                    </div>
                </div>
              </div>` : ` <div class="col-5"></div>`}
@@ -126,7 +126,7 @@ const bindData = (initiativekey, langaugeArray, mappedData) => {
 const getBadgesForUser = () => {
   return new Promise((resolve, reject) => {
     const details = localStorage.getItem("speakerDetails");
-    const username = details.userName ?? '';
+    const username = details.userName ?? 'Badge User';
     fetch(`/user-rewards/${username}`, {
       method: 'GET',
       credentials: 'include',
@@ -146,8 +146,8 @@ const getBadgesForUser = () => {
               let langaugeArray = [];
               langaugeKeys.forEach(elem => {
                 let result = groupByLanguage[elem];
-                const contribution = result.filter(initiativekey => initiativekey.category == 'contribute');
-                const validate = result.filter(initiativekey => initiativekey.category == 'validate');
+                const contribution = result.filter(initiativekey => initiativekey.category == 'contribute').sort((a, b) => Number(a.milestone) < Number(b.milestone) ? -1 : 1);;
+                const validate = result.filter(initiativekey => initiativekey.category == 'validate').sort((a, b) => Number(a.milestone) < Number(b.milestone) ? -1 : 1);
                 let languageObj = {
                   name: elem,
                   contribute: contribution,
@@ -165,6 +165,7 @@ const getBadgesForUser = () => {
               bindData(initiativekey, [], mappedData);
           });
         }
+        console.log(mappedData);
           mappedData.forEach(element => {
             const id = element.initiativeType == 'text' ? 'bolo-badge' : element.initiativeType == 'ocr' ? 'dekho-badge' : element.initiativeType == 'asr' ? 'suno-badge' : 'likho-badge';
             const type = element.initiativeType == 'text' ? 'bolo' : element.initiativeType == 'ocr' ? 'dekho' : element.initiativeType == 'asr' ? 'suno' : 'likho';
