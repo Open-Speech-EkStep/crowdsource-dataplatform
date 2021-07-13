@@ -8,7 +8,6 @@ const {showUserProfile} = require('./header');
 const {hasUserRegistered} = require('./common');
 
 const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type, localeString, language) => {
-  setPopover(badgeType, type, initiativeType);
   return `
   <div class="badge-widget text-center" id="${badgeType}_${type}_${initiativeType}_${language}_badge">
   <img src=${imgPath} class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover" >
@@ -22,29 +21,9 @@ const getWidgetWithoutBadge = (badgeType, type, localeString,initiativeType, lan
  </div>`
 }
 
-const getCard = function (badgeName, source, initiativeType) {
-  const badge = initiativeType == 'text' ? BOLOPAGE[badgeName.toLowerCase()] : initiativeType == 'ocr' ? DEKHOPAGE[badgeName.toLowerCase()] : initiativeType == 'asr' ? SUNOPAGE[badgeName.toLowerCase()] : LIKHOPAGE[badgeName.toLowerCase()];
-  return `<div class="text-center tooltiptext">
-                <div class="py-2">
-                    <img src=${source == "contribution" ? badge.imgLg : badge.imgSm} alt="${badgeName.toLowerCase()}_badge" class="img-fluid">
-                </div>
-            </div>`
-}
-
-const setPopover = (badgeType, type, initiativeType) => {
-  $(`#${badgeType}_${type}_${initiativeType}_badge`).popover({
-    html: true,
-    trigger: 'click',
-    placement: 'bottom',
-    content: function () {
-      return getCard(badgeType, type, initiativeType);
-    }
-  })
-}
-
-const getBadgeRow = (result, id, type) => {
+const getBadgeRow = (result, id, type, localeString) => {
   let $tableRows = $(`#${id}`);
-  const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+ 
   if (result && result.language && result.language.length > 0) {
     result.language.forEach(item => {
       const row = ` <div class="col-12 p-0">
@@ -133,12 +112,15 @@ const bindData = (initiativekey, langaugeArray, mappedData) => {
   mappedData.push(initiativeData);
 }
 
-const getBadgesForUser = () => {
+const getBadgesForUser = (userName) => {
   return new Promise((resolve, reject) => {
-    const details = localStorage.getItem("speakerDetails");
-    const username = details.userName ?? 'Badge User';
-    $('#username').text(', ' + username);
-    fetch(`/user-rewards/${username}`, {
+    if(userName) {
+      $('#username').removeClass('d-none');
+      $('#username').text(userName);
+    } else  {
+      $('#username').addClass('d-none');
+    }
+    fetch(`/user-rewards/${userName}`, {
       method: 'GET',
       credentials: 'include',
       mode: 'cors'
@@ -189,7 +171,8 @@ const getBadgesForUser = () => {
           mappedData.forEach(element => {
             const id = element.initiativeType == 'text' ? 'bolo-badge' : element.initiativeType == 'ocr' ? 'dekho-badge' : element.initiativeType == 'asr' ? 'suno-badge' : 'likho-badge';
             const type = element.initiativeType == 'text' ? 'bolo' : element.initiativeType == 'ocr' ? 'dekho' : element.initiativeType == 'asr' ? 'suno' : 'likho';
-            getBadgeRow(element, id, type);
+            const localeString =  JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+            getBadgeRow(element, id, type, localeString);
           });
           resolve(result);
       });
@@ -197,8 +180,10 @@ const getBadgesForUser = () => {
 }
 
 $(document).ready(() => {
+  const details = JSON.parse(localStorage.getItem("speakerDetails"));
+  const username = details && details.userName ? details.userName: 'Badge User';
   getLocaleString().then(() => {
-    getBadgesForUser();
+    getBadgesForUser(username);
   }).catch(() => {
     window.location.href = "/";
   });

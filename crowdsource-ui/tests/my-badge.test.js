@@ -34,7 +34,7 @@ describe('fetch user badge', () => {
         }]
         );
 
-        getBadgesForUser().then((an) => {
+        getBadgesForUser('myUser').then((an) => {
             expect(an).toEqual([{
                 category: "validate",
                 contributor_id: 6660,
