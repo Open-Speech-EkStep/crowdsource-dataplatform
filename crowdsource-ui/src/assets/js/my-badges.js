@@ -17,7 +17,7 @@ const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type, localeStri
 }
 
 const getWidgetWithoutBadge = (badgeType, type, localeString,initiativeType, language) => {
-  return ` <div class="badge-widget-placeholder m-auto text-center" id="${badgeType}_${type}_${language}_placeholder">
+  return ` <div class="badge-widget-placeholder m-auto text-center" id="${badgeType}_${type}_${language}_${initiativeType}_placeholder">
                  <p>${badgeType}</p>
  </div>`
 }
