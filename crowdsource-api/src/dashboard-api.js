@@ -1,5 +1,6 @@
-const { getLastUpdatedAt, getTopLanguageByHours, getTopLanguageByContributionCount, getTopLanguageBySpeakers, getAggregateDataCount, getLanguages, getTimeline, getGenderGroupData, getAgeGroupData } = require('./dbOperations');
+const { getLastUpdatedAt, getTopLanguageByHours, getTopLanguageByContributionCount, getTopLanguageBySpeakers, getAggregateDataCount, getLanguages, getTimeline, getGenderGroupData, getAgeGroupData, addRemainingGenders } = require('./dbOperations');
 const { validateMediaTypeInput } = require("./middleware/validateUserInputs")
+const { GENDER } = require("./constants")
 let isFieldsMentioned = (fieldsArray) => {
     for (let key in fieldsArray) {
         if (fieldsArray[key] !== null && fieldsArray[key] === 'true') {
@@ -216,7 +217,9 @@ const dashboardRoutes = (router) => {
         const language = req.query.language || '';
         const type = req.params.type;
 
-        const genderGroupData = await getGenderGroupData(type, language);
+        let genderGroupData = await getGenderGroupData(type, language);
+        genderGroupData = addRemainingGenders(genderGroupData, GENDER);
+        
         const lastUpdatedDateTime = await getLastUpdatedAt();
         res.send({ "data": genderGroupData, last_updated_at: lastUpdatedDateTime });
     });

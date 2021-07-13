@@ -859,5 +859,35 @@ describe("Running tests for dbOperations", () => {
             expect(spyStatus).toBeCalledWith(200);
             expect(spySend).toBeCalledWith({ hasTarget: true, isAllContributed: true });
         })
+    });
+
+    describe('add remaining genders to data', () => {
+
+        test('should add data to returned', async () => {
+            const genderData = [];
+            const allGenders = ['male', 'female', 'others'];
+
+            const result = dbOperations.addRemainingGenders(genderData, allGenders);
+
+            expect(result.length).toBe(3)
+        });
+        
+        test('should not replace existing data to returned', async () => {
+            const genderData = [{ gender: 'male' }];
+            const allGenders = ['male', 'female', 'others'];
+
+            const result = dbOperations.addRemainingGenders(genderData, allGenders);
+
+            expect(result.length).toBe(3)
+        });
+
+        test('should not delete existing data to returned', async () => {
+            const genderData = [{ gender: 'male' }];
+            const allGenders = [];
+
+            const result = dbOperations.addRemainingGenders(genderData, allGenders);
+
+            expect(result.length).toBe(1)
+        });
     })
 });
