@@ -16,19 +16,18 @@ describe("updateHrsForSayAndListen", () => {
   const $sayLoader = $('#say-loader');
   const $listenLoader = $('#listen-loader');
   const language = "Hindi";
- 
 
   test("should show 0 hrs in both say and listen component when there is empty aggregateDataCountByLanguage", (done) => {
     mockLocalStorage();
 
-    localStorage.setItem("localeString", JSON.stringify({'hrs recorded in': '<x> recorded in <y>', 'hrs validated in' :'<x> validated in <y>', "Hindi" :"Hindi"}));
+    localStorage.setItem("localeString", JSON.stringify({'Validation so far in <y> - <x>': 'Validation so far in <y> - <x>', 'Contribution so far in <y> - <x>' :'Contribution so far in <y> - <x>', "Hindi" :"Hindi",hours:"hours", seconds: "seconds", minutes:"minutes"}));
     localStorage.setItem("aggregateDataCountByLanguage", JSON.stringify([]));
 
     updateHrsForSayAndListen(language);
 
     flushPromises().then(() => {
-      expect($say_p_3.innerHTML).toEqual("0s recorded in Hindi");
-      expect($listen_p_3.innerHTML).toEqual("0s validated in Hindi");
+      expect($say_p_3.innerHTML).toEqual("Contribution so far in Hindi - 0 seconds");
+      expect($listen_p_3.innerHTML).toEqual("Validation so far in Hindi - 0 seconds");
       expect($sayLoader.hasClass('d-none')).toEqual(true);
       expect($listenLoader.hasClass('d-none')).toEqual(true);
       fetchMock.reset();
@@ -41,14 +40,14 @@ describe("updateHrsForSayAndListen", () => {
   test("should show hrs except 0 in both say and listen component when there is empty aggregateDataCountByLanguage", (done) => {
     mockLocalStorage();
 
-    localStorage.setItem("localeString", JSON.stringify({'hrs recorded in': '<x> recorded in <y>', 'hrs validated in' :'<x> validated in <y>',"Hindi" :"Hindi"}));
+    localStorage.setItem("localeString", JSON.stringify({'Contribution so far in <y> - <x>': 'Contribution so far in <y> - <x>', 'Validation so far in <y> - <x>' :'Validation so far in <y> - <x>',"Hindi" :"Hindi",hours:"hours", seconds: "seconds", minutes:"minutes"}));
     localStorage.setItem("aggregateDataCountByLanguage", JSON.stringify([{language:"Hindi",total_contributions:20, total_validations:30},{language: "Odia"}]));
 
     updateHrsForSayAndListen(language);
 
     flushPromises().then(() => {
-      expect($say_p_3.innerHTML).toEqual("20h recorded in Hindi");
-      expect($listen_p_3.innerHTML).toEqual("30h validated in Hindi");
+      expect($say_p_3.innerHTML).toEqual("Contribution so far in Hindi - 20 hours");
+      expect($listen_p_3.innerHTML).toEqual("Validation so far in Hindi - 30 hours");
       expect($sayLoader.hasClass('d-none')).toEqual(true);
       expect($listenLoader.hasClass('d-none')).toEqual(true);
       fetchMock.reset();

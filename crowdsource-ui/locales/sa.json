@@ -720,5 +720,9 @@
 	"By duration of hours": "By duration of hours",
 	"Total recordings": "Total recordings",
 	"Total sentences": "Total sentences",
-	"Total images": "Total images"
+	"Total images": "Total images",
+	"Only validations invited for the selected language": "Only validations invited for the selected language",
+	"Only contributions invited for the selected language": "Only contributions invited for the selected language",
+	"Contribution so far in <y> - <x>": "Contribution so far in <y> - <x>",
+	"Validation so far in <y> - <x>": "Validation so far in <y> - <x>"
 }

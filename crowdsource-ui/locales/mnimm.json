@@ -405,8 +405,8 @@
 	"SINDHI": "SINDHI",
 	"URDU": "URDU",
 	"By proceeding ahead you agree to the <a href=\"./terms-and-conditions.html\" target=\"_blank\"> Terms and Conditions</a>": "By proceeding ahead you agree to the <a href=\"./terms-and-conditions.html\" target=\"_blank\"> Terms and Conditions</a>",
-	"hrs recorded in": "hrs recorded in",
-	"hrs validated in": "hrs validated in",
+	"hrs recorded in": "Contribution so far in <y> - <x>",
+	"hrs validated in": "Validation so far in <y> - <x>",
 	"hours": "hours",
 	"minutes": "minutes",
 	"seconds": "seconds",
@@ -453,5 +453,9 @@
 	"By duration of hours": "By duration of hours",
 	"Total recordings": "Total recordings",
 	"Total sentences": "Total sentences",
-	"Total images": "Total images"
+	"Total images": "Total images",
+	"Only validations invited for the selected language": "Only validations invited for the selected language",
+	"Only contributions invited for the selected language": "Only contributions invited for the selected language",
+	"Contribution so far in <y> - <x>": "Contribution so far in <y> - <x>",
+	"Validation so far in <y> - <x>": "Validation so far in <y> - <x>"
 }

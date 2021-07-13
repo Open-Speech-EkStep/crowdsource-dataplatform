@@ -40,12 +40,12 @@ const updateLocaleText = function (total_contributions, total_validations, langu
 
     const localeLanguage = localeStrings[language];
 
-    let hrsRecordedIn = localeStrings['hrs recorded in'];
+    let hrsRecordedIn = localeStrings['Contribution so far in <y> - <x>'];
     hrsRecordedIn = hrsRecordedIn.replace("<x>", formatTime(cHours, cMinutes, cSeconds));
     hrsRecordedIn = hrsRecordedIn.replace("<y>", localeLanguage);
     $say_p_3.text(hrsRecordedIn);
 
-    let hrsValidatedIn = localeStrings['hrs validated in'];
+    let hrsValidatedIn = localeStrings['Validation so far in <y> - <x>'];
     hrsValidatedIn = hrsValidatedIn.replace("<x>", formatTime(vHours, vMinutes, vSeconds));
     hrsValidatedIn = hrsValidatedIn.replace("<y>", localeLanguage);
     $listen_p_3.text(hrsValidatedIn);

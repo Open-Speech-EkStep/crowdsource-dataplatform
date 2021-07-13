@@ -78,7 +78,7 @@ function updateLanguage(language) {
         .catch((err) => {});
 }
 
-$(document).ready(function () {
+const initializeBlock = function () {
     localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
     initializeFeedbackModal();
     localStorage.removeItem('previousLanguage');
@@ -159,6 +159,14 @@ $(document).ready(function () {
 
     // toggleFooterPosition();
 
+};
+
+$(document).ready(function () {
+    getLocaleString().then(()=>{
+        initializeBlock();
+    }).catch(err => {
+        initializeBlock();
+    });
 });
 
 module.exports = {fetchDetail, isLanguageAvailable, updateLanguage}

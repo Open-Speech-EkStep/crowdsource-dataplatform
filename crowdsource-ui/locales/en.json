@@ -307,8 +307,6 @@
 	"bronze": "bronze",
 	"gold": "gold",
 	"hours": "hours",
-	"hrs recorded in": "<x> contributed in <y>",
-	"hrs validated in": "<x> validated in <y>",
 	"image label(s) contributed": "image label(s) contributed",
 	"image label(s) validated": "image label(s) validated",
 	"Bhasha Daan: A crowdsourcing initiative for Indian languages": "Bhasha Daan: A crowdsourcing initiative for Indian languages",
@@ -328,12 +326,16 @@
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> images to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge.": "Your next goal is to reach <span id=\"next_badge_count\"></span> images to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge.",
 	"You are just <span id=\"sentense_away_count\"></span> recordings away from earning your <span id=\"next_badge_name\"></span> Bhasha Samarthak Badge.": "You are just <span id=\"sentense_away_count\"></span> recordings away from earning your <span id=\"next_badge_name\"></span> Bhasha Samarthak Badge.",
 	"Your next goal is to reach <span id=\"next_badge_count\"></span> recordings to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge.": "Your next goal is to reach <span id=\"next_badge_count\"></span> recordings to earn your <span id=\"next_badge_name_1\"></span> Bhasha Samarthak Badge.",
-	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings",
+	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.",
 	"Please don't use email or mobile number as user name": "Please don't use email or mobile number as user name",
 	"Language Tracker": "Language Tracker",
 	"Your language and top 3 contributed languages": "Your language and top 3 contributed languages",
 	"By duration of hours": "By duration of hours",
 	"Total recordings": "Total recordings",
 	"Total sentences": "Total sentences",
-	"Total images": "Total images"
+	"Total images": "Total images",
+	"Only validations invited for the selected language": "Only validations invited for the selected language",
+	"Only contributions invited for the selected language": "Only contributions invited for the selected language",
+	"Contribution so far in <y> - <x>": "Contribution so far in <y> - <x>",
+	"Validation so far in <y> - <x>": "Validation so far in <y> - <x>"
 }

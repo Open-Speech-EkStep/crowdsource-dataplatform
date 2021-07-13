@@ -173,27 +173,46 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
 };
 
 const formatTime = function (hours, minutes = 0, seconds = 0) {
+  const localsStrings = JSON.parse(localStorage.getItem('localeString'));
+  const hrStr = localsStrings['hours'];
+  const minStr = localsStrings['minutes'];
+  const secStr = localsStrings['seconds'];
   let result = "";
-  
   if (hours > 0) {
-    result += `${hours}h `;
+    result += `${hours} ${hrStr} `;
   }
   if (minutes > 0) {
-    result += `${minutes}m `;
+    result += `${minutes} ${minStr} `;
   }
   if (hours === 0 && minutes === 0 && seconds > 0) {
-    result += `${seconds}s `;
+    result += `${seconds} ${secStr} `;
   }
 
   if(hours === 0 && minutes === 0 && seconds === 0){
-    result += '0s ';
+    result += `0 ${secStr} `;
   }
 
   if(result.charAt(result.length - 1 ) !== ' ')
     return result.substr(0, result.length);
-  else 
+  else
     return result.substr(0, result.length - 1);
 };
+
+const formatTimeForLegends = function (hours, minutes = 0, seconds = 0, isLabelRequired=true) {
+  const localsStrings = JSON.parse(localStorage.getItem('localeString'));
+  const hrStr = localsStrings['hours'];
+  const minStr = localsStrings['minutes'];
+  const secStr = localsStrings['seconds'];
+  if (hours && minutes) {
+    return isLabelRequired ? `${hours}.${minutes} ${hrStr}` : `${hours}.${minutes}`;
+  }
+  if (hours == 0 && minutes == 0) {
+    return isLabelRequired ? `${seconds} ${secStr}` : `${seconds}`;
+  }
+  const hoursStr = hours ? (isLabelRequired ? `${hours} ${hrStr}` : `${hours}`) : '';
+  const minutesStr = minutes ? (isLabelRequired ? `${minutes} ${minStr}` : `${minutes}`) : '';
+  return `${hoursStr} ${minutesStr}`.trim();
+}
 
 const setFooterPosition = () => {
   const contentHeight = $('#page-content').outerHeight();
@@ -247,11 +266,12 @@ module.exports = {
   showElement,
   hideElement,
   setFooterPosition,
-  reportSentenceOrRecording, 
-  getCookie, 
+  reportSentenceOrRecording,
+  getCookie,
   setCookie,
   getJson,
   setPageContentHeight,
-  getDeviceInfo, 
-  getBrowserInfo
+  getDeviceInfo,
+  getBrowserInfo,
+  formatTimeForLegends
 }

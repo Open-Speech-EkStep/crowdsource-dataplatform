@@ -1,5 +1,5 @@
-const { calculateTime, formatTime,updateLocaleLanguagesDropdown, showElement,hideElement,performAPIRequest} = require("../src/assets/js/utils");
-const { stringToHTML} = require("./utils");
+const { calculateTime, formatTime,updateLocaleLanguagesDropdown, showElement,hideElement,performAPIRequest, formatTimeForLegends} = require("../src/assets/js/utils");
+const { stringToHTML, mockLocalStorage} = require("./utils");
 const fetchMock = require("fetch-mock");
 const { readFileSync } = require("fs");
 
@@ -73,20 +73,108 @@ describe('test utils', () => {
 
     describe("formatTime", () => {
         test("should formats h only for given h", () => {
-            expect(formatTime(162)).toEqual("162h");
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTime(162)).toEqual("162 hours");
+            localStorage.clear();
         });
 
         test("should format h and min for given h and m", () => {
-            expect(formatTime(162, 12)).toEqual("162h 12m");
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTime(162, 12)).toEqual("162 hours 12 minutes");
+            localStorage.clear()
         });
 
         test("should format in s when hours and minutes are 0", () => {
-            expect(formatTime(0, 0, 2)).toEqual("2s");
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTime(0, 0, 2)).toEqual("2 seconds");
+            localStorage.clear();
         });
 
         test("should show 0s when hours, minutes and seconds are 0", () => {
-            expect(formatTime(0, 0, 0)).toEqual("0s");
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTime(0, 0, 0)).toEqual("0 seconds");
+            localStorage.clear();
         });
+
+    });
+
+    describe("formatTimeForLegends", () => {
+        test("should formats hours only for given hours when labels are allowed", () => {
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTimeForLegends(162, 0, 0, true)).toEqual("162 hours");
+            localStorage.clear()
+        });
+
+        test("should formats hours only for given hours when labels are not allowed", () => {
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTimeForLegends(162, 0, 0, false)).toEqual("162");
+            localStorage.clear();
+        });
+
+        test("should format hours for given hours and minutes when labels are allowed", () => {
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTimeForLegends(162, 12 , 0, true)).toEqual("162.12 hours");
+            localStorage.clear();
+        });
+
+        test("should format hours for given hours and minutes when labels are not allowed", () => {
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTimeForLegends(162, 12 , 0, false)).toEqual("162.12");
+            localStorage.clear();
+        });
+
+        test("should format in s when hours and minutes are 0 when labels are allowed", () => {
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTimeForLegends(0, 0, 2, true)).toEqual("2 seconds");
+            localStorage.clear();
+        });
+
+        test("should format in s when hours and minutes are 0 when labels are not allowed", () => {
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTimeForLegends(0, 0, 2, false)).toEqual("2");
+            localStorage.clear();
+        });
+
+        test("should format in minutes  when hours, minutes and seconds are 0  when labels are allowed", () => {
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTimeForLegends(0, 20, 0, true)).toEqual("20 minutes");
+            localStorage.clear();
+        });
+
+        test("should format in minutes  when hours, minutes and seconds are 0  when labels are allowed", () => {
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTimeForLegends(0, 20, 0, false)).toEqual("20");
+            localStorage.clear();
+        });
+
+
+        test("should show 0s when hours, minutes and seconds are 0  when labels are allowed", () => {
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTimeForLegends(0, 0, 0, true)).toEqual("0 seconds");
+            localStorage.clear();
+        });
+
+        test("should show 0s when hours, minutes and seconds are 0  when labels are not allowed", () => {
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            expect(formatTimeForLegends(0, 0, 0, false)).toEqual("0");
+            localStorage.clear();
+        });
+
+
     });
 
     describe("showElement", () => {
