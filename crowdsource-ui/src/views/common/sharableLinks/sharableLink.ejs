@@ -1,3 +1,4 @@
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/sharableLink.css">
 <div id="social-links">
     <script>
       $(document).ready(function () {
@@ -8,11 +9,9 @@
         }
       })
     </script>
-    <div class="mt-5 text-center mt-lg-0">
-        <%= __('Share it with your friends and family') %>
-    </div>
-    <div class="row justify-content-center my-2">
-        <div class="col-12 text-center bg-white">
+    <div class="my-2">
+        <div class="text-center bg-white social-share-block px-2 py-1">
+            <span><%= __('Share on') %></span>
             <a href="https://www.facebook.com/sharer/sharer.php?u=https://bhashini.gov.in/bhashadaan/" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
                 <img src="/img/fb-icon.svg" width="24px" alt="Share on Facebook">
             </a><span>&sdot;</span>
@@ -23,7 +22,7 @@
                 <img src="/img/twitter-icon.svg" width="24px" alt="Share on Twitter">
             </a><span>&sdot;</span>
             <a id="whatsapp_share" href="https://api.whatsapp.com/send?text=I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?" target="_blank" rel="noopener noreferrer">
-                <img src="/img/whatsapp.svg" width="32px" alt="Share on Whatsapp">
+                <img src="/img/whatsapp.svg" width="24px" alt="Share on Whatsapp">
             </a>
         </div>
     </div>
