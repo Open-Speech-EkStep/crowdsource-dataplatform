@@ -23,7 +23,6 @@ const getWidgetWithoutBadge = (badgeType, type, localeString) => {
 }
 
 const getCard = function (badgeName, source, initiativeType) {
-  console.log("popover", badgeName, initiativeType);
   const badge = initiativeType == 'text' ? BOLOPAGE[badgeName.toLowerCase()] : initiativeType == 'ocr' ? DEKHOPAGE[badgeName.toLowerCase()] : initiativeType == 'asr' ? SUNOPAGE[badgeName.toLowerCase()] : LIKHOPAGE[badgeName.toLowerCase()];
   return `<div class="text-center">
                 <div class="py-2">
@@ -33,7 +32,6 @@ const getCard = function (badgeName, source, initiativeType) {
 }
 
 const setPopover = (badgeType, type, initiativeType) => {
-  console.log(`#${badgeType}_${type}_badge`);
   $(`#${badgeType}_${type}_badge`).popover({
     html: true,
     trigger: 'hover',
@@ -97,8 +95,9 @@ const getBadgeRow = (result, id, type) => {
       $tableRows.append(row);
     });
   } else {
+    $(`#${type}-type`).addClass('d-none');
     const row = ` <div class="col-12 p-0">
-    <div class="row m-0 text-center">
+    <div class="row mx-0 text-center mt-5">
       <h4 class="text-custom-muted w-100"> No badge earned for ${type} india</h4>
     </div>
     </div>
@@ -137,6 +136,10 @@ const getBadgesForUser = () => {
         let mappedData = [];
         let initiativekeys = ['text', 'ocr', 'parallel', 'asr'];
         if (result && result.length) {
+          $('#suno-type').removeClass('d-none');
+          $('#bolo-type').removeClass('d-none');
+          $('#likho-type').removeClass('d-none');
+          $('#dekho-type').removeClass('d-none');
           let groupByInitiative = groupBy(result, 'type');
           initiativekeys.forEach(initiativekey => {
             if (groupByInitiative && groupByInitiative[initiativekey]) {
@@ -157,10 +160,15 @@ const getBadgesForUser = () => {
               });
               bindData(initiativekey, langaugeArray, mappedData)
             } else {
-              bindData(initiativekey, [], mappedData)
+           
+              bindData(initiativekey, [], mappedData);
             }
           });
         }  else {
+          $('#suno-type').addClass('d-none');
+          $('#bolo-type').addClass('d-none');
+          $('#likho-type').addClass('d-none');
+          $('#dekho-type').addClass('d-none');
           initiativekeys.forEach(initiativekey => {
               bindData(initiativekey, [], mappedData);
           });
