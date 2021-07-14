@@ -1,3 +1,5 @@
+/* mobile */
+
 .social-share-block{
     border: 1px solid rgba(0, 123, 255, 0.5);
     box-sizing: border-box;
@@ -5,4 +7,16 @@
     border-radius: 20px;
     position: absolute;
     bottom: 36px;
+    width: max-content;
 }
+
+/* mobile */
+
+@media (max-width: 767px) {
+    .social-share-block{
+        position: inherit;
+        bottom: 0px;
+        width: 100%;
+    }
+}
+
