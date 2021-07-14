@@ -26,8 +26,9 @@ const checkGivingFeedbackFor = () => {
         });
 };
 
-const addColorPathSVG = (element, color) => {
-    $(element).attr("stroke", color);            
+const addColorPathSVG = (element, color, svg) => {
+    $(element).attr("stroke", color);   
+    $(svg).css("background-color",color);         
 };
 
 const removeShadowSVG = (element) => {
@@ -39,11 +40,11 @@ const removeShadowSVG = (element) => {
 };
 
 const resetSVG = () => {
-    addColorPathSVG("#very_sad_svg_boundary", "#FCE6E6");
-    addColorPathSVG("#sad_svg_boundary", "#FDF4EC");
-    addColorPathSVG("#neutral_svg_boundary", "#E6F2FF");
-    addColorPathSVG("#happy_svg_boundary", "#EDFBEB");
-    addColorPathSVG("#very_happy_svg_boundary", "#DFEDDA");
+    addColorPathSVG("#very_sad_svg_boundary", "#FCE6E6", "#very_sad-svg");
+    addColorPathSVG("#sad_svg_boundary", "#FDF4EC", "#sad-svg");
+    addColorPathSVG("#neutral_svg_boundary", "#E6F2FF", "#neutral-svg");
+    addColorPathSVG("#happy_svg_boundary", "#EDFBEB", "#happy-svg");
+    addColorPathSVG("#very_happy_svg_boundary", "#DFEDDA", "#very-happy-svg");
 
     removeShadowSVG('#very_sad_label');
     removeShadowSVG('#sad_label');
@@ -52,7 +53,8 @@ const resetSVG = () => {
     removeShadowSVG('#very_happy_label');
 }
 
-const selectEmoji = (element, stroke, rgba) => {
+const selectEmoji = (element, stroke, rgba, svg) => {
+    $(svg).css("background-color",stroke);
     $(element).find("path, polygon, circle").attr("stroke", stroke);
     $(element).css('-webkit-box-shadow', `0px 4px 12px ${rgba}`);
     $(element).css('-moz-box-shadow', `0px 4px 12px ${rgba}`);
@@ -73,23 +75,23 @@ const updateOpinionSVGColor = () => {
 
             if($('input[name="opinionRadio"]:checked').val() === 'very_sad')
             {
-                selectEmoji("#very_sad_label", "#E30606", "rgba(227, 6, 6, 0.5)");
+                selectEmoji("#very_sad_label", "#E30606", "rgba(227, 6, 6, 0.5)","#very_sad-svg");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'sad')
             {
-                selectEmoji("#sad_label", "#EA913F", "rgba(234, 145, 63, 0.5)");
+                selectEmoji("#sad_label", "#EA913F", "rgba(234, 145, 63, 0.5)","#sad-svg");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'neutral')
             {
-                selectEmoji("#neutral_label", "#007BFF", "rgba(0, 123, 255, 0.5)");
+                selectEmoji("#neutral_label", "#007BFF", "rgba(0, 123, 255, 0.5)","#neutral-svg");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'happy')
             {
-                selectEmoji("#happy_label", "#4ED738", "rgba(78, 215, 56, 0.5)")
+                selectEmoji("#happy_label", "#4ED738", "rgba(78, 215, 56, 0.5)","#happy-svg")
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'very_happy')
             {
-                selectEmoji("#very_happy_label", "#2A8908", "rgba(42, 137, 8, 0.5)")
+                selectEmoji("#very_happy_label", "#2A8908", "rgba(42, 137, 8, 0.5)","#very-happy-svg")
             }
         });
     });
