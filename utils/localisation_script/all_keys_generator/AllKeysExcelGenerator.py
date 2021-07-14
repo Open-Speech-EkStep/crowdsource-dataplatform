@@ -79,7 +79,7 @@ def get_dict_for_data(key, processed_text, replacement_mapping_dict, key_path_li
     out_dict["Key"] = key
     out_dict["English copy"] = [processed_text]
     out_dict["PATH"] = [key_path_list[key]]
-    for replacement in sorted (replacement_mapping_dict.keys()):
+    for replacement in sorted(replacement_mapping_dict.keys()):
         out_dict[replacement] = [replacement_mapping_dict[replacement]]
     return out_dict
 
@@ -98,16 +98,16 @@ def extract_and_replace_tags(text, allowed_replacements):
         if "<b>" in matched_tag:
             continue
         elif "<a" in matched_tag:
-            attributes_part_string = matched_tag[matched_tag.find('<a')+2: matched_tag.find('>')]
+            attributes_part_string = matched_tag[matched_tag.find('<a') + 2: matched_tag.find('>')]
             replacement_mapping_dict['a-tag-replacement'] = attributes_part_string
-            matched_tag_replacement = matched_tag.replace(attributes_part_string,"")
+            matched_tag_replacement = matched_tag.replace(attributes_part_string, "")
             out_txt = out_txt.replace(matched_tag, matched_tag_replacement)
         else:
             replacement = allowed_replacements[replacement_identifier_index]
             replacement_mapping_dict[replacement] = matched_tag
-            replacement_identifier_index+=1
+            replacement_identifier_index += 1
             out_txt = out_txt.replace(matched_tag, '<{}>'.format(replacement))
-    return out_txt , replacement_mapping_dict
+    return out_txt, replacement_mapping_dict
 
 
 # In[6]:
@@ -131,7 +131,7 @@ def get_processed_data(json_data, allowed_replacements, key_path_list):
 
 def get_path(key, keys_with_path_map):
     for k, path in keys_with_path_map.items():
-        if key == k: 
+        if key == k:
             return path
     return None
 
@@ -140,16 +140,14 @@ def get_path(key, keys_with_path_map):
 
 
 def generate_keys(input_json_path, output_excel_path, keys_with_path_map):
-
-    allowed_replacements = ["u","v","w","x", "y", "z"]
+    allowed_replacements = ["u", "v", "w", "x", "y", "z"]
     en_data = read_json(input_json_path)
     language_code = 'en'
     key_path_list = {key: get_path(key, keys_with_path_map) for key in en_data.keys()}
 
-
     language_df = get_processed_data(en_data, allowed_replacements, key_path_list)
 
-    language_df.to_excel(output_excel_path, index = False)
+    language_df.to_excel(output_excel_path, index=False)
 
 
 # In[9]:
@@ -158,9 +156,9 @@ def generate_keys(input_json_path, output_excel_path, keys_with_path_map):
 def export_report(report_json, report_type):
     now = datetime.now()
     report_json['last_run_timestamp'] = str(now)
-    os.makedirs('reports',exist_ok=True)
+    os.makedirs('reports', exist_ok=True)
     with open('{}/report_{}_{}.json'.format('reports', report_type, now), 'w') as f:
-        f.write(json.dumps(report_json, indent = 4, ensure_ascii=False))
+        f.write(json.dumps(report_json, indent=4, ensure_ascii=False))
 
 
 # In[10]:
@@ -184,8 +182,8 @@ example = '''
 
 parser = argparse.ArgumentParser(epilog=example,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-parser.add_argument("-j", "--input-json-path", required=True, help = "Path of json file with en keys present")
-parser.add_argument("-o","--output-excel-path", required=True, help = "Output path")
+parser.add_argument("-j", "--input-json-path", required=True, help="Path of json file with en keys present")
+parser.add_argument("-o", "--output-excel-path", required=True, help="Output path")
 
 args = parser.parse_args()
 
@@ -198,4 +196,3 @@ if '/' in output_excel_path:
 keys_with_path_map = get_keys_with_path()
 generate_keys(input_json_path, output_excel_path, keys_with_path_map)
 generate_report()
-
