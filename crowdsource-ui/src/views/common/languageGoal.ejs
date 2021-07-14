@@ -1,8 +1,10 @@
-<div class="col-lg-10 col-md-6 col-8" id="language-goal">
-    <span class="col-3">Validate 5 sentences to earn your 1st Badge. </span>
+<div class="col-lg-10 col-md-10 col-10 p-lg-3 p-md-3 p-4" id="language-goal">
+    <span class="badges_information col-4 d-none">
+    </span>
+    <span class="col-3" id="sentence_away_msg">Validate <span id="sentense_away_count">3</span> sentences to earn your <span id="next_badge_name">Ist</span> Badge. </span>
     <span class="badges_information col-4">
-        <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="bronze" href="#" id="<%= `bronze_badge_link` %>">
-            <img title="<%= `Download bronze badge`%>" src="<%= `/img/suno_bronze_medal_val.svg`%>" alt="" width="36px" class="disable" id="<%= `bronze_badge_link_img`%>">
+        <button class="m-0 p-0 btn border-0" data-badge="bronze" href="#" id="<%= `bronze_badge_link` %>">
+            <img title="<%= `Download bronze badge`%>" src="<%= `/img/suno_bronze_medal_val.svg`%>" alt="" width="36px" id="<%= `bronze_badge_link_img`%>">
         </button>
         <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="silver" href="#" id="<%= `silver_badge_link` %>">
             <img title="<%= `Download silver badge`%>" src="<%= `/img/suno_silver_medal_val.svg`%>" alt="" width="36px" class="disable" id="<%= `silver_badge_link_img`%>">
@@ -14,8 +16,8 @@
             <img title="<%= `Download platinum badge`%>" src="<%= `/img/suno_platinum_medal_val.svg`%>" alt="" width="36px" class="disable" id="<%= `platinum_badge_link_img`%>">
         </button>
     </span>
-    <span><%= __('Know More')%></span>
-    <a href="<%= url %> " class="btn btn-custom-primary rounded-pill btn-lg h6 col-2 float-right my-2">
+    <a href="../badges.html" class="col-2"><%= __('Know More') %></a>
+    <a href="<%= url %> " class="btn btn-custom-primary rounded-pill btn-lg h6 float-right my-0">
         <%= ButtonText %>
     </a>
 </div>

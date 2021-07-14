@@ -145,9 +145,16 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   localStorage.setItem('nextHourGoal', languageGoal);
   $("#user-contribution").text(data.contributionCount);
   $("#language-hour-goal").text(languageGoal);
+  const topLanguages = JSON.parse(localStorage.getItem(TOP_LANGUAGES_BY_HOURS));
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const isInTopLanguage = topLanguages.some((ele) => ele.language.toLowerCase() === contributionLanguage.toLowerCase())
 
   const module = localStorage.getItem(CURRENT_MODULE);
   if (data.isNewBadge) {
+    $(".new-badge-msg").removeClass("d-none");
+    $(".thankyou-page-heading").addClass("d-none");
+    $(".user-contribution-msg").addClass("d-none");
+    $("#cardWithoutBadge").addClass("d-none");
     $("#spree_text").removeClass("d-none");
     $("#milestone_text").removeClass("d-none");
     $("#current_badge_name").text(localeStrings[data.currentBadgeType.toLowerCase()]);
@@ -155,8 +162,6 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#current_badge_count").text(data.currentMilestone);
     $("#next_badge_count").text(data.nextMilestone);
     $("#next_badge_name_1").text(localeStrings[data.nextBadgeType.toLowerCase()]);
-    $("#sentence_away_msg").addClass("d-none");
-    $("#user-contribution-msg").addClass("d-none");
     $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
     if(module == 'bolo'){
       if(functionalFlow === 'validator'){
@@ -171,14 +176,43 @@ const setBadge = function (data, localeStrings, functionalFlow) {
         $("#reward-img").attr('src', `/img/${module}_${data.currentBadgeType.toLowerCase()}_medal.svg`);
       }
     }
-  } else if (data.contributionCount < 5) {
+  } else if (data.badges.length !== 0) {
+
+  }
+  else if (data.contributionCount === 0) {
+    if(isInTopLanguage){
+      $("#languageInTopWeb").removeClass("d-none");
+      $("#languageInTopMob").removeClass("d-none");
+      $("#languageNotInTopMob").addClass("d-none");
+      $("#languageNotInTopWeb").addClass("d-none");
+    }  else {
+      $("#languageNotInTopMob").removeClass("d-none");
+      $("#languageNotInTopWeb").removeClass("d-none");
+      $("#languageInTopWeb").addClass("d-none");
+      $("#languageInTopMob").addClass("d-none");
+    }
+
     $("#champion_text").removeClass("d-none");
     $("#contribution_text").removeClass("d-none");
     $("#sentence_away_msg").removeClass("d-none");
-    $("#user-contribution-msg").removeClass("d-none");
+    // $("#user-contribution-msg").removeClass("d-none");
     $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
     $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
   } else if ((Number(data.contributionCount) >= Number(data.currentMilestone)) && (Number(data.contributionCount) <= Number(data.nextMilestone))) {
+    if(isInTopLanguage){
+      $("#languageInTopWeb").removeClass("d-none");
+      $("#languageInTopMob").removeClass("d-none");
+      $("#languageNotInTopMob").addClass("d-none");
+      $("#languageNotInTopWeb").addClass("d-none");
+      alert("no")
+    }  else {
+      $("#languageNotInTopMob").removeClass("d-none");
+      $("#languageNotInTopWeb").removeClass("d-none");
+      $("#languageInTopWeb").addClass("d-none");
+      $("#languageInTopMob").addClass("d-none");
+    }
+    $(".thankyou-page-heading").addClass('d-none');
+    $(".user-contribution-msg").removeClass("d-none");
     $("#spree_text").removeClass("d-none");
     $("#before_badge_content").removeClass("d-none");
     $("#sentence_away_msg").removeClass("d-none");

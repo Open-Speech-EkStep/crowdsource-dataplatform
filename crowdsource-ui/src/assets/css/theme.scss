@@ -54,6 +54,13 @@ $primary-color-shade10: tint($primary-color, 100%);
   background-color: $bg-header-primary !important;
 }
 
+.bg-tri-color{
+  background-image: url(/img/tri_color_lg.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .bg-secondary {
   background-color: $bg-light-color !important;
 }
@@ -98,6 +105,7 @@ $primary-color-shade10: tint($primary-color, 100%);
   background-color: $primary-color;
   color: $text-white;
   filter: drop-shadow(1px 8px 24px $primary-color-shade2);
+  width: max-content;
 }
 
 .btn-custom-primary {
