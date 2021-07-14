@@ -43,8 +43,19 @@ const LANGUAGES = [{ value: "Assamese", id: "as", text: "অসমীয়া" 
 { value: "Odia", id: "or", text: "ଓଡିଆ" },
 { value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ" },
 { value: "Tamil", id: "ta", text: "தமிழ்" },
+{ value: "Telugu", id: "te", text: "తెలుగు" },
+{ value: "Kashmiri", id: "kas", text: "Kashmiri" },
+{ value: "Sindhi", id: "sd", text: "Sindhi" },
+{ value: "Konkani", id: "kok", text: "Konkani" },
+{ value: "Bodo", id: "bo", text: "Bodo" },
+{ value: "Manipuri", id: "mni", text: "Manipuri" },
+{ value: "Dogri", id: "doi", text: "Dogri" },
+{ value: "Nepali", id: "ne", text: "Nepali" },
+{ value: "Santali", id: "sat", text: "Santali" },
 { value: "Sanskrit", id: "sa", text: "Sanskrit" },
-{ value: "Telugu", id: "te", text: "తెలుగు" }];
+{ value: "Urdu", id: "ur", text: "Urdu" },
+{ value: "Maithili", id: "mai", text: "Maithili" },
+];
 
 const AGE_GROUP = [
   '',
