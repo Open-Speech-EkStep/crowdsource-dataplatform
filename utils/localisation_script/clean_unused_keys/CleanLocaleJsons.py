@@ -1,10 +1,22 @@
 import json
 import argparse
 import os
+from datetime import datetime
+import json
 
 def read_json(json_path):
     with open(json_path, 'r') as f:
         return json.load(f)
+   
+def generate_report():
+    now = datetime.now()
+
+    report = {}
+    report['last_run_timestamp'] = str(now)
+    report['keys_removed_from_all_files'] = list(set(removed_keys))
+
+    with open('report.json', 'w') as f:
+        f.write(json.dumps(report, indent = 4, ensure_ascii=False))
 
 def clean_locale_jsons(languages, input_base_path, output_base_path):
 
@@ -16,9 +28,12 @@ def clean_locale_jsons(languages, input_base_path, output_base_path):
         locale_path = '{input_base_path}/{language_code}.json'.format(input_base_path=input_base_path, language_code=language_code)
         data = read_json(locale_path)
 
-        for key, value in data.items():
+        data_copy = data.copy()
+
+        for key, value in data_copy.items():
             if key not in en_data.keys():
                 del data[key]
+                removed_keys.append(key)
 
         output_file_path = '{output_base_path}/{language_code}.json'.format(output_base_path=output_base_path, language_code=language_code)
 
@@ -30,6 +45,8 @@ if __name__ == '__main__':
     
     LANGUAGES = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta':"Tamil",
              'te':"Telugu",'mr':"Marathi",'pa':"Punjabi",'ml':"Malayalam",'or':"Odia",'kn':"Kannada"}
+    
+    removed_keys = []
     
     example = '''
             Example commands:
@@ -64,4 +81,4 @@ if __name__ == '__main__':
     os.makedirs(output_base_path, exist_ok=True)
     
     clean_locale_jsons(languages.items(), input_base_path, output_base_path)
-
+    generate_report()

@@ -711,6 +711,23 @@ const getUserRewards = async (userId, userName) => {
     return db.any(getUserRewardsQuery, [contributor_id]);
 }
 
+const addRemainingGenders = (genderGroupData, allGenders) => {
+    const haveDataForGenders = genderGroupData.map(gd => gd.gender);
+
+    allGenders.forEach((gender) => {
+        if (!haveDataForGenders.includes(gender)) {
+            genderGroupData.push({
+                gender: gender,
+                contributions: '0',
+                hours_contributed: '0',
+                hours_validated: '0',
+                speakers: '0'
+            });
+        }
+    });
+    return genderGroupData;
+}
+
 module.exports = {
     userVerify,
     updateAndGetMedia,
@@ -745,5 +762,6 @@ module.exports = {
     getSentencesForProfanityChecking,
     updateProfanityStatus,
     releaseMedia,
-    getUserRewards
+    getUserRewards,
+    addRemainingGenders
 };
