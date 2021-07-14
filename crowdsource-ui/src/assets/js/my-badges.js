@@ -26,7 +26,7 @@ const getBadgeRow = (result, id, type, localeString) => {
  
   if (result && result.language && result.language.length > 0) {
     result.language.forEach(item => {
-      const row = ` <div class="col-12 p-0">
+      const row = ` <div class="col-12 p-0 my-2">
               <div class="row m-0">
                 <div class="col-lg-2 col-md-3 p-0 p-lg-3 p-md-3 col-12 m-auto">
                   <h4 class="font-family-Rowdies my-4 my-lg-0 my-md-0">${localeString[item.name]}</h4> 
@@ -75,7 +75,7 @@ const getBadgeRow = (result, id, type, localeString) => {
                </div>
                <div class="row m-0">
                  <div class="col-3 pl-0">
-                 ${item.validate[0] && item.validate[0].grade == 'Bronze' ? getWidgetWithBadge(type == "bolo" ? `/img/${type}_bronze_val.svg` : `/img/${type}_bronze_medal_val.svg`, 'bronze', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('bronze', 'validation', localeString,type, item.name)}
+                 ${item.validate[0] && item.validate[0].grade == 'Bronze' ? getWidgetWithBadge(`/img/${type}_bronze_medal_val.svg`, 'bronze', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('bronze', 'validation', localeString,type, item.name)}
                  </div>
                  <div class="col-3 pl-0">
                      ${item.validate[1] && item.validate[1].grade == 'Silver' ? getWidgetWithBadge(`/img/${type}_silver_medal_val.svg`, 'silver', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('silver', 'validation', localeString,type,item.name)}
@@ -128,12 +128,6 @@ const getBadgeRow = (result, id, type, localeString) => {
     const image = $($event.currentTarget).find("img").attr('src');
     $("#badge-popover").find("img").attr('src', image);
     $('#badge-popover').css({top:offset.top - 180, left:isMobileDevice() ? offset.left+ 60: offset.left - 200, visibility: 'visible'});
-  //   var tooltip_rect = $('#badge-popover').getBoundingClientRect();
-  // // Corrections if out of window
-  // if ((tooltip_rect.x + tooltip_rect.width) > window.innerWidth) // Out on the right
-  //   tipX = -tooltip_rect.width - 5;
-
-  //   $('#badge-popover').css({top:offset.top - 180, left:isMobileDevice() ? offset.left+ 60: offset.left - tipX, visibility: 'visible'});
   });
   $(document).on('click', (event) => {
     if (!$(event.target).closest(".badge-widget").length) {
@@ -226,7 +220,7 @@ const getBadgesForUser = (userName) => {
 
 $(document).ready(() => {
   const details = JSON.parse(localStorage.getItem("speakerDetails"));
-  const username = details && details.userName ? details.userName: 'Badge User';
+  const username = details && details.userName ? details.userName: '';
   getLocaleString().then(() => {
     getBadgesForUser(username);
   }).catch(() => {
