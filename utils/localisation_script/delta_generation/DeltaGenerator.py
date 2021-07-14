@@ -14,6 +14,7 @@ import os
 import argparse
 from datetime import datetime
 import json
+from ParseHtmlAndGetKeys import get_keys_with_path
 
 
 # In[2]:
@@ -46,10 +47,14 @@ def load_en_key_values(input_base_path):
 # In[5]:
 
 
-def get_dict_for_data(key, processed_text, replacement_mapping_dict):
+def get_dict_for_data(key, processed_text, replacement_mapping_dict, keys_with_path_map):
     out_dict = {}
     out_dict["Key"] = key
     out_dict["English copy"] = [processed_text]
+    path = ""
+    if key in keys_with_path_map:
+        path = keys_with_path_map[key]
+    out_dict["Url path"] = [path]
     for replacement in sorted (replacement_mapping_dict.keys()):
         out_dict[replacement] = [replacement_mapping_dict[replacement]]
     return out_dict
@@ -99,7 +104,7 @@ def extract_and_replace_tags(text, allowed_replacements):
 # In[8]:
 
 
-def get_data_without_translation(language_name, json_data, allowed_replacements, en_data, all_keys):
+def get_data_without_translation(language_name, json_data, allowed_replacements, en_data, all_keys, keys_with_path_map):
     language_df = pd.DataFrame([], columns=[])
     keys_list = []
     if all_keys:
@@ -111,7 +116,7 @@ def get_data_without_translation(language_name, json_data, allowed_replacements,
     for key in keys_list:
         en_value = en_data[key]
         processed_text, replacement_mapping_dict = extract_and_replace_tags(en_value, allowed_replacements)
-        data_dict = get_dict_for_data(key, processed_text, replacement_mapping_dict)
+        data_dict = get_dict_for_data(key, processed_text, replacement_mapping_dict, keys_with_path_map)
         try:
             tmp_df = pd.DataFrame.from_dict(data_dict, orient='columns')
             language_df = language_df.append(tmp_df, ignore_index=True)
@@ -142,17 +147,18 @@ def gen_delta(languages, input_base_path, meta_out_base_path, sme_out_base_path,
 
     allowed_replacements = ["u","v","w","x", "y", "z"]
     en_data = load_en_key_values(input_base_path)
+    keys_with_path_map = get_keys_with_path()
 
     for language_code, language_name in languages:
         input_json_path = '{base_path}/{language}.json'.format(base_path=input_base_path, language=language_code)
         json_data = read_json(input_json_path)
 
-        language_df = get_data_without_translation(language_name, json_data, allowed_replacements, en_data, all_keys)
+        language_df = get_data_without_translation(language_name, json_data, allowed_replacements, en_data, all_keys, keys_with_path_map)
 
         output_excel_path = '{base_path}/{language}.xlsx'.format(base_path=meta_out_base_path, language=language_code)
         language_df.to_excel(output_excel_path, index = False)
         output_sme_excel_path = '{base_path}/{language}.xlsx'.format(base_path=sme_out_base_path, language=language_code)
-        to_smes = language_df[["English copy", language_name]]
+        to_smes = language_df[["English copy", language_name, "Url path"]]
         to_smes = to_smes.drop_duplicates(subset=["English copy"], keep="first")
         to_smes.to_excel(output_sme_excel_path, index = False)
 
@@ -168,7 +174,7 @@ def export_report(report_json, report_type):
         f.write(json.dumps(report_json, indent = 4, ensure_ascii=False))
 
 
-# In[14]:
+# In[12]:
 
 
 def generate_report():
@@ -180,7 +186,7 @@ def generate_report():
 
 # ## MAIN CELL TO GENERATE DELTA
 
-# In[15]:
+# In[13]:
 
 
 LANGUAGES = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta':"Tamil",

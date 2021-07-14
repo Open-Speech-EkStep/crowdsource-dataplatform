@@ -49,8 +49,11 @@ def reformat_json(json_obj):
 
 
 def set_values(df_row):
-    if pd.notnull(df_row[lang]):
-        df_row['value'] = df_row[lang]
+    try:
+        if pd.notnull(df_row[lang]) and len(str(df_row[lang]).strip()) != 0:
+            df_row['value'] = df_row[lang]
+    except:
+        print(df_row[lang])
     return df_row
 
 
@@ -134,7 +137,7 @@ def clean_read_excel_df(df, language_name):
         if value in df.columns:
             FORMAT.append(value)
     filtered_sheet = df[FORMAT]
-    sheet_no_na = filtered_sheet.dropna(subset = [english_col, language_name], inplace=False)
+    sheet_no_na = filtered_sheet.dropna(subset = [english_col], inplace=False)
     sheet_new = sheet_no_na.rename(columns = {english_col: 'English value'}, inplace=False)
     return sheet_new
 
@@ -145,11 +148,12 @@ def clean_read_excel_df(df, language_name):
 def clean_excel_df(df, language_name):
     excel_df = df.copy()
     try:
-        excel_df[language_name] = excel_df[language_name].str.strip()
+        for i, row in excel_df.iterrows():
+            if pd.notna(row[language_name]):
+                row[language_name] = str(row[language_name]).strip()
     except:
         pass
     excel_df = excel_df.drop_duplicates(subset=['English value'], keep='last')
-    excel_df[language_name]=excel_df[language_name].apply(lambda x: re.sub(r' -$','',re.sub(r'^X ','',re.sub(r'^x ','',str(x)))))
     return excel_df
 
 
@@ -209,7 +213,7 @@ def read_excels(input_base_path, language_code, language_name, meta_excel_df):
     excel_df = clean_read_excel_df(excel_df, language_name)
     
     merged_excel_df = pd.merge(excel_df, meta_excel_df, left_on="English value", right_on="English copy", how='outer')
-    del merged_excel_df["English copy"]
+    del merged_excel_df[english_col]
 
     merged_excel_df = merged_excel_df.apply(set_variables, axis=1)
 
@@ -229,19 +233,16 @@ def get_locale_data(input_base_path,input_json_path, language_code, language_nam
 
     excelDf_dropped = clean_excel_df(excel_df, language_name)
     out_df_dropped = clean_json_df(out_df)
-    
-    merged_df = pd.merge(excelDf_dropped, out_df_dropped, left_on="Key", right_on="Key", how='right')
 
+    merged_df = pd.merge(excelDf_dropped, out_df_dropped, left_on="Key", right_on="Key", how='right')
+    
     merged_df = merged_df.apply(set_values, axis = 1)
     
     select_columns = ['Key', 'value']
 
     filtered_merged_df = merged_df[select_columns]
-
+    
     final_df = filtered_merged_df.drop_duplicates(subset='Key', keep='first', inplace=False)
-
-    
-    
     return excelDf_dropped, final_df, merged_df
 
 
@@ -260,64 +261,55 @@ def gen_locales(languages, input_base_path, input_json_path, meta_input_path, ou
 
         excelDf_dropped, final_df, merged_df = get_locale_data(input_base_path,input_json_path, language_code, language_name, meta_excel_df)
 
-#         print("****** LOCALE = {} **********".format(language_name))
-#         print("Final Number of Keys(WithoutDuplicates/WithDuplicates) = {}/{}".format(final_df['Key'].nunique(), final_df['Key'].count()))
-#         print("Matched Keys => {}/{}".format(get_matched_count(excelDf_dropped, merged_df), excelDf_dropped['Key'].count()))
-#         print("****************")
         output_json_path = '{base_path}/{language}.json'.format(base_path=output_base_path, language=language_code)
         write_df_to_json(final_df, output_json_path)
 
 
 # ## MAIN CELL TO RUN LOCALE GENERATION
 
-# In[23]:
-if __name__ == "__main__":
-    
-    example = '''
+# In[20]:
+
+
+LANGUAGES = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta':"Tamil",
+             'te':"Telugu",'mr':"Marathi",'pa':"Punjabi",'ml':"Malayalam",'or':"Odia",'kn':"Kannada"}
+
+example = '''
         Example commands:
         
         For specific languages:
-            python LocaleGenerator.py -j ./../../../crowdsource-ui/locales -e ./input_excel_files -m ./../delta_generation/out-meta -o ./output_json_files -l gu pa
+            python LocaleGenerator.py -j ./../all_keys_generator/out -e ./input_excel_files -m ./../delta_generation/out-meta -o ./output_json_files -l gu pa
         
         For all languages:
-            python LocaleGenerator.py -j ./../../../crowdsource-ui/locales -e ./input_excel_files -m ./../delta_generation/out-meta -o ./output_json_files -a
+            python LocaleGenerator.py -j ./../all_keys_generator/out -e ./input_excel_files -m ./../delta_generation/out-meta -o ./output_json_files -a
     '''
 
-    LANGUAGES = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta':"Tamil",
-                 'te':"Telugu",'mr':"Marathi",'pa':"Punjabi",'ml':"Malayalam",'or':"Odia",'kn':"Kannada"}
-
-
-    parser = argparse.ArgumentParser(
-                                 epilog=example,
+parser = argparse.ArgumentParser(epilog=example,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("-a", "--all-languages", action="store_true", help = "Generate delta for all languages")
-    group.add_argument("-l", "--languages", nargs="+", help = "Generate delta for the languages mentioned by language codes(space separated)", choices=list(LANGUAGES.keys()))
+group = parser.add_mutually_exclusive_group(required=True)
+group.add_argument("-a", "--all-languages", action="store_true", help = "Generate delta for all languages")
+group.add_argument("-l", "--languages", nargs="+", help = "Generate delta for the languages mentioned by language codes(space separated)", choices=list(LANGUAGES.keys()))
 
-    parser.add_argument("-e", "--excel-folder-path", required=True, help = "Input folder path with excel files present")
-    parser.add_argument("-j", "--json-folder-path", required=True, help = "Input folder path with json files present")
-    parser.add_argument("-m", "--meta-folder-path", required=True, help = "Input folder path with meta files for the excels present")
+parser.add_argument("-e", "--excel-folder-path", required=True, help = "Input folder path with excel files present")
+parser.add_argument("-j", "--json-folder-path", required=True, help = "Input folder path with json files present")
+parser.add_argument("-m", "--meta-folder-path", required=True, help = "Input folder path with meta files for the excels present")
 
-    parser.add_argument("-o", "--output-folder-path", required=True, help = "Output folder path where excels are generated")
-
-
-
-    args = parser.parse_args()
-
-    languages = {}
-    if args.all_languages:
-        languages = LANGUAGES.copy()
-    else:
-        language_codes = args.languages
-        for code in language_codes:
-            languages[code] = LANGUAGES[code]
-
-    input_base_path = args.excel_folder_path
-    input_json_path = args.json_folder_path
-    meta_input_path = args.meta_folder_path
-    output_base_path = args.output_folder_path
-
-    gen_locales(languages.items(), input_base_path,input_json_path, meta_input_path, output_base_path)
+parser.add_argument("-o", "--output-folder-path", required=True, help = "Output folder path where excels are generated")
 
 
 
+args = parser.parse_args()
+
+languages = {}
+if args.all_languages:
+    languages = LANGUAGES.copy()
+else:
+    language_codes = args.languages
+    for code in language_codes:
+        languages[code] = LANGUAGES[code]
+
+input_base_path = args.excel_folder_path
+input_json_path = args.json_folder_path
+meta_input_path = args.meta_folder_path
+output_base_path = args.output_folder_path
+
+gen_locales(languages.items(), input_base_path,input_json_path, meta_input_path, output_base_path)
