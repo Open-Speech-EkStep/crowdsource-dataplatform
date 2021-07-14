@@ -3,7 +3,7 @@
 * Open Website
 * Select "suno_india_tab" from header
 
-## Validate Transcribe card should be enabled when the data is not contributed for Odia language
+## Validate My Badge flow and check Badges
 * Select Contribution Language as "ಕನ್ನಡ"
 * Navigate to "Transcribe" and add username "Badge User" then click Lets go
 * Select MyBadges from the dropdown

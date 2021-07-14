@@ -34,37 +34,42 @@ step("<congratstext> text should be visible", async function(congratstext) {
 
 step("when user navigates to <tab> tab user should see badges", async function(tab) {
     
-    if(tab="dekho-tab")
+    if(tab=="dekho-tab")
     {
         await click(link({id:tab}))
         await taiko.waitFor(1000)
-        assert.ok(assert.ok(await text('Odia').isVisible()))
-        assert.ok( await taiko.$('#Bronze_validation_dekho_Odia_badge').isVisible())
-        assert.ok( await taiko.$('#Silver_validation_dekho_Odia_badge').isVisible())
-        assert.ok(await taiko.$('#Gold_validation_dekho_Odia_badge').isVisible())
-        assert.ok(assert.ok(await taiko.$('Assamese').isVisible()))
-        assert.ok(await taiko.$('#Bronze_contribution_dekho_Assamese_badge').isVisible())
-        assert.ok( await taiko.$({id :'Silver_contribution_dekho_Assamese_badge'}).isVisible())
+        assert.ok(await text('Odia').isVisible())
+        assert.ok( await taiko.$('#bronze_validation_dekho_Odia_badge').isVisible())
+        assert.ok( await taiko.$('#silver_validation_dekho_Odia_badge').isVisible())
+        assert.ok(await taiko.$('#gold_validation_dekho_Odia_badge').isVisible())
+        assert.ok(await text('Assamese').isVisible())
+        assert.ok(await taiko.$('#bronze_contribution_dekho_Assamese_badge').isVisible())
+        assert.ok(await taiko.$('#silver_contribution_dekho_Assamese_badge').isVisible())
         // Bronze_validation_badge
 
-        assert.ok(await $('#Platinum_contribution_dekho_Assamese_placeholder').isVisible())
-        assert.ok(await $('#Platinum_validation_dekho_Odia_placeholder').isVisible())
-        assert.ok(await $('#Gold_contribution_dekho_Assamese_placeholder').isVisible())
+        assert.ok(await taiko.$('#platinum_contribution_Assamese_dekho_placeholder').isVisible())
+        assert.ok(await taiko.$('#platinum_validation_Odia_dekho_placeholder').isVisible())
+        assert.ok(await taiko.$('#gold_contribution_Assamese_dekho_placeholder').isVisible())
+
+
+        await click(taiko.$('#silver_contribution_dekho_Assamese_badge'));
+        assert.ok( await taiko.$('#badge-popover').isVisible())
 
     }
-    else if(tab == "likho-tab")
+    else if(tab== "likho-tab")
     {
-        assert.ok(await taiko.$('#Bronze_validation_likho_Bengali_badge').isVisible())
-        assert.ok(await taiko.$('#Silver_validation_likho_Bengali_badge').isVisible())
-        assert.ok(await taiko.$('#Gold_validation_likho_Bengali_badge').isVisible())
-        assert.ok(await taiko.$('#Platinum_validation_blikho_Bengali_adge').isVisible())
-        assert.ok(! await taiko.$('#Platinum_contribution_likho_Bengali_placeholder').isVisible())
-
         await click(link({id:tab}))
         await taiko.waitFor(300)
+        assert.ok(await taiko.$('#bronze_validation_likho_Bengali_badge').isVisible())
+        assert.ok(await taiko.$('#silver_validation_likho_Bengali_badge').isVisible())
+        assert.ok(await taiko.$('#gold_validation_likho_Bengali_badge').isVisible())
+        assert.ok(await taiko.$('#platinum_validation_likho_Bengali_badge').isVisible())
+        assert.ok(await taiko.$('#platinum_contribution_Bengali_likho_placeholder').isVisible())
+
+       
 
     }
-    else if(tab == "suno-tab")
+    else if(tab== "suno-tab")
     {   
         await click(link({id:tab}))
         await taiko.waitFor(300)
