@@ -22,15 +22,15 @@
 </head>
 
 <body>
-<%- include('common/header/headerWithoutNavBar.ejs',{path:"./", MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg",homePath:"./boloIndia/home.html"}); %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../", MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg",homePath:"./home.html"}); %>
 <div id="validator-page-content">
     <div class="container-fluid">
-        <%- include('../../build/views/common/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg", homePath:"./boloIndia/home.html"}) %>
+        <%- include('../common/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg", homePath:"./home.html"}) %>
         <div id="content-wrapper" class="d-flex flex-column">
             <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">
                 <div class="row position-absolute bolo-back-btn top-back-btn">
                     <button class="btn btn-link p-0 back-btn" id="back-btn">
-                        <a href="./boloIndia/home.html" class="nav-link d-lg-inline-flex" style="color:#959595;font-size:16px">
+                        <a href="./home.html" class="nav-link d-lg-inline-flex" style="color:#959595;font-size:16px">
                             <span class="material-icons" style="vertical-align:sub">
                     arrow_back
                     </span>
@@ -39,11 +39,11 @@
                         </a>
                     </button>
                 </div>
-                <%- include components/report-btn.ejs %>
-                <%- include ../../build/views/common/speakerTestBtn.ejs %>
+                <%- include ../common/report-btn.ejs %>
+                <%- include ../common/speakerTestBtn.ejs %>
             </div>
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center" id="mic-report-row">
-                <%- include ../../build/views/common/speakerTesting.ejs %>
+                <%- include ../common/speakerTesting.ejs %>
             </div>
             <div class="row justify-content-center" id="instructions-row">
                 <div id="instructions-link" class="d-flex justify-content-end align-items-center d-none">
@@ -75,7 +75,7 @@
                     </p>
                     <div class="row justify-content-center mt-5">
                         <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
-                            <a class="btn btn-primary text-white btn-lg h6 w-100" href="./boloIndia/home.html">
+                            <a class="btn btn-primary text-white btn-lg h6 w-100" href="./home.html">
                                 <%- __('Back to Bolo India Home') %>
                             </a></div>
                     </div>
@@ -149,13 +149,12 @@
             </div>
 
         </div>
-        <%- include('../../build/views/common/speakerDetails.ejs',{path:"./"}) %>
-        <%- include('common/sourceInfo/sourceInfo.ejs') %>
-        <%- include('common/feedback/feedback.ejs', {page: "Validate"}) %>
-        <%- include modals/validator-instructions.ejs %>
-        <%- include modals/validation-report-modal.ejs %>
+        <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
+        <%- include('../common/sourceInfo.ejs') %>
+        <%- include('../common/feedback.ejs', {page: "Validate"}) %>
+        <%- include ../../../src/views/modals/validation-report-modal.ejs %>
 
-        <%- include ../../build/views/common/errorModal.ejs %>
+        <%- include ../common/errorModal.ejs %>
 
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

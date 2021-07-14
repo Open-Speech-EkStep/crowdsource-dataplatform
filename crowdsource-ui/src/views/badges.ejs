@@ -19,7 +19,7 @@
 <%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
 <div id="content-wrapper" class="container-fluid pt-5 pb-2 px-lg-3 px-md-3 px-4 px-md-5">
     <div class="row">
-        <%- include('../../build/views/common/back-btn.ejs',{url:"#"}) %>
+        <%- include('common/buttons/back-btn/back-btn.ejs',{url:"#"}) %>
     </div>
     <div id="badge-container" class="container-fluid p-0">
     <div class="row m-0">
@@ -122,12 +122,12 @@
 <%- include('common/feedback/feedback.ejs', {page:"Badges Info"}) %>
 <%- include('common/footer.ejs',{path:"./"}) %>
 
-<%- include('../../build/views/common/speakerDetails.ejs',{path:"./"}) %>
+<%- include('common/modals/speakerDetails/speakerDetails.ejs',{path:"./"}) %>
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>$("footer").removeClass("fixed-bottom").addClass("bottom")</script>
-<script src="../js/badges.js"></script>
-<script src="../js/loadFeedback.js"></script>
+<script src="/js/badges.js"></script>
+<script src="/js/loadFeedback.js"></script>
 </body>
 </html>

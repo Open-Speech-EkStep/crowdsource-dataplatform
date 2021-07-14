@@ -238,7 +238,7 @@
 	"You are on a spree !!": "நீங்கள் அருமையாக செய்கிறீர்கள்!",
 	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings",
 	"You took the first important step": "நீங்கள் முதல் முக்கிய முயற்சி எடுத்தீர்கள்",
-	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings": "<span id=\"current_badge_count\"></span> பதிவுகளை வழங்கியதன் மூலம் <span id=\"current_badge_name_1\"></span> பாஷா சமர்த்தக் பேட்ஜைப் பெற்றுள்ளீர்கள்.",
+	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "<span id=\"current_badge_count\"></span> பதிவுகளை வழங்கியதன் மூலம் <span id=\"current_badge_name_1\"></span> பாஷா சமர்த்தக் பேட்ஜைப் பெற்றுள்ளீர்கள்.",
 	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_count\"></span> வாக்கியங்கள் வழங்கியதன் மூலம் ஒரு <span id=\"current_badge_name_1\"></span> பாஷா சமர்த்தக் பேட்ஜைப் பெற்றுள்ளீர்கள்.",
 	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by labelling <span id=\"current_badge_count\"></span> images.": "<span id=\"current_badge_count\"></span> படங்களை லேபலிட்டதன் மூலம் <span id=\"current_badge_name_1\"></span> பாஷா சமர்த்தக் பேட்ஜைப் பெற்றுள்ளீர்கள்.",
 	"Your Edit": "உங்கள் திருத்தம்",

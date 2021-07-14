@@ -1,23 +1,19 @@
 const { updateGraph } = require('./draw-chart');
 const { onChangeUser, showUserProfile,onOpenUserDropDown } = require('./header');
-const { setSpeakerDetails,
+const {
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick } = require('./speakerDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, calculateTime, getLocaleString, getJson, formatTime } = require('./utils');
+const {  updateLocaleLanguagesDropdown, calculateTime, getLocaleString, formatTime } = require('./utils');
 const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES,MODULE,CONTRIBUTION_LANGUAGE ,SPEAKER_DETAILS_KEY} = require('../../../build/js/common/constants');
-// const { hasUserRegistered } = require('../../../build/js/common/common');
 const { hasUserRegistered } = require('./common');
 const fetch = require('./fetch');
-const { data } = require('jquery');
-const {whitelisting_email} = require('./env-api')
 const LOCALE_STRINGS = 'localeString';
 let timer;
 let languageToRecord = '';
 
 const fetchDetail = (language) => {
-    const byLanguage = language ? true : false;
     const url = language ? '/aggregate-data-count/text?byLanguage=true' : '/aggregate-data-count/text'
     return fetch(url).then((data) => {
         if (!data.ok) {
@@ -137,7 +133,7 @@ const initializeBlock = function () {
     localStorage.setItem('module','bolo');
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
-    const $startRecordBtnTooltip = $startRecordBtn.parent();
+            const $startRecordBtnTooltip = $startRecordBtn.parent();
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
     const $userName = $('#username');
     updateLanguage('');
