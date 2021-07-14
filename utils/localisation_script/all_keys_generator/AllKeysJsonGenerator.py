@@ -92,8 +92,9 @@ def get_matched_count(excel_df, merged_df):
 
 
 def clean_df(df):
-    df_no_na = df.dropna(subset = [key_column, english_col], inplace=False)
-    df_no_duplicates = df_no_na.drop_duplicates(subset=df.columns, keep='last')
+    df_no_na = df.dropna(subset = [key_column], inplace=False)
+    df_fill_na = df.fillna(value="")
+    df_no_duplicates = df_fill_na.drop_duplicates(subset=[key_column], keep='last')
     return df_no_duplicates
 
 
@@ -104,11 +105,51 @@ def read_excel_as_df(excel_file):
     excel = pd.ExcelFile(excel_file)
     if len(excel.sheet_names) == 0:
         return None
-    sheet = excel.parse(sheet_name = excel.sheet_names[0], header=0)
+    sheet = excel.parse(sheet_name = excel.sheet_names[0], header=1)
     return sheet
 
 
 # In[10]:
+
+
+def read_excels_as_df(file):
+    excel = pd.ExcelFile(file)
+    sheets_df_list = []
+    for sheet_name in excel.sheet_names:
+        sheet = excel.parse(sheet_name = sheet_name, header=1)
+        if(len(sheet.columns) == 0):
+            continue
+        sheet = sheet.dropna(how='all')
+        sheet = sheet.dropna(axis=1, how='all')
+        sheets_df_list.append(sheet)
+    return sheets_df_list
+
+
+# In[11]:
+
+
+def read_manually_generated_excel_file(excel_file):
+    sheet_df_list = read_excels_as_df(excel_file)
+    main_columns = ['Suno India', 'Likho India', 'Bolo India', 'Dekho India', 'English Content']
+
+    final_df = pd.DataFrame([], columns=[key_column, english_col])
+
+    for sheet_df in sheet_df_list:
+        columns = [column_name.rstrip().lstrip() for column_name in list(sheet_df.columns)]
+        for main_column in main_columns:
+            if main_column in columns:
+                try:
+                    filtered_sheet = sheet_df[[main_column+" Key", main_column]]
+                except Exception as e:
+                    continue
+                renamed_df = filtered_sheet.rename(columns={main_column+" Key": key_column, main_column: english_col})
+                renamed_df = renamed_df.dropna(subset=[key_column])
+                final_df = pd.concat([final_df, renamed_df],ignore_index = True)
+    return final_df
+            
+
+
+# In[12]:
 
 
 def clean_old_translations(modified_content_keys, languages, base_path, output_path):
@@ -124,7 +165,7 @@ def clean_old_translations(modified_content_keys, languages, base_path, output_p
     
 
 
-# In[11]:
+# In[13]:
 
 
 def get_modified_content(excel_df, json_df):
@@ -136,12 +177,12 @@ def get_modified_content(excel_df, json_df):
     changed_content = {}
     for i,row in excel_df.iterrows():
         key = row[key_column]
-        if row[english_col] != reformatted_json[key]:
+        if key in reformatted_json and (row[english_col] != reformatted_json[key]):
             changed_content[key] = {'old': reformatted_json[key],'new': row[english_col]}
     return changed_content
 
 
-# In[12]:
+# In[14]:
 
 
 def get_removed_keys(excel_df, json_df):
@@ -152,7 +193,7 @@ def get_removed_keys(excel_df, json_df):
     return difference
 
 
-# In[13]:
+# In[15]:
 
 
 def export_report(report_json, report_type):
@@ -163,7 +204,7 @@ def export_report(report_json, report_type):
         f.write(json.dumps(report_json, indent = 4, ensure_ascii=False))
 
 
-# In[14]:
+# In[16]:
 
 
 def generate_report(json_df, excel_df, modified_content_keys):
@@ -178,7 +219,7 @@ def generate_report(json_df, excel_df, modified_content_keys):
     export_report(report, 'json')
 
 
-# In[15]:
+# In[17]:
 
 
 key_column = 'Key'
@@ -188,16 +229,19 @@ languages = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta'
              'te':"Telugu",'mr':"Marathi",'pa':"Punjabi",'ml':"Malayalam",'or':"Odia",'kn':"Kannada"}
 
 
-def generate(input_excel_path,input_json_path, output_json_path):    
-    excel_df = read_excel_as_df(input_excel_path)
-    excel_df = excel_df.apply(set_variables, axis = 1)
+def generate(input_excel_path,input_json_path, output_json_path, input_category):    
+    if input_category == 'auto-generated':
+        excel_df = read_excel_as_df(input_excel_path)
+        excel_df = excel_df.apply(set_variables, axis = 1)
+    else:
+        excel_df = read_manually_generated_excel_file(input_excel_path)
     existing_locale_json_data = read_json(input_json_path)
     json_df = load_json_as_df(existing_locale_json_data)
 
     clean_excel_df = clean_df(excel_df)
     clean_json_df = clean_df(json_df)
     
-    merged_df = pd.merge(clean_excel_df, clean_json_df[[key_column]], on=key_column, how='inner')
+    merged_df = pd.merge(clean_excel_df, clean_json_df[[key_column]], on=key_column, how='left')
     
     filtered_df = merged_df[[key_column, english_col]]
 
@@ -209,18 +253,23 @@ def generate(input_excel_path,input_json_path, output_json_path):
     
 
 
-# In[16]:
+# In[18]:
 
 
 example = '''
         Example commands:
-
-            python AllKeysJsonGenerator.py -j ./../../../crowdsource-ui/locales/en.json -e ./en/out/en.xlsx -o ./en/out/en.json
+        
+        To run with auto-generated excel from AllKeysExcelGenerator.py:
+            python AllKeysJsonGenerator.py -i ./../../../crowdsource-ui/locales -e ./en/out/en.xlsx -o ./out/
+        
+        To run with manually generated excel with the 4 categories('Suno India', 'Bolo India', 'Likho India', 'Dekho India'):
+            python AllKeysJsonGenerator.py -i ./../../../crowdsource-ui/locales -e ./../test-data/read-data-from-table/English_content.xlsx  -o ./out/ -c manual
+    
     '''
 
 parser = argparse.ArgumentParser(epilog=example,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-parser.add_argument("-j", "--input-json-path", required=True, help = "Path of json file with en keys present")
+parser.add_argument("-c", "--input-category", default= 'auto-generated',help = "Format of the input used", choices=['auto-generated','manual'])
 parser.add_argument("-i", "--input-base-path", required=True, help = "Path of folder with all jsons present")
 parser.add_argument("-e", "--input-excel-path", required=True, help = "Path of excel file")
 parser.add_argument("-o","--output-json-path", required=True, help = "Output path")
@@ -228,14 +277,16 @@ parser.add_argument("-o","--output-json-path", required=True, help = "Output pat
 
 args = parser.parse_args()
 
-input_json_path = args.input_json_path
 input_excel_path = args.input_excel_path
-output_json_path = args.output_json_path
 input_base_path = args.input_base_path
+input_json_path = os.path.join(input_base_path, 'en.json')
+output_json_path = args.output_json_path
+input_category = args.input_category
 
 os.makedirs(output_json_path, exist_ok=True)
 
-excel_df, json_df = generate(input_excel_path,input_json_path, output_json_path)
+excel_df, json_df = generate(input_excel_path, input_json_path, output_json_path, input_category)
+
 modified_content = get_modified_content(excel_df, json_df)
 clean_old_translations(list(modified_content.keys()), languages, input_base_path, output_json_path)
 os.system('python ./../clean_unused_keys/CleanLocaleJsons.py -i ./out -o ./out -a')

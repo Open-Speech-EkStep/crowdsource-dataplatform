@@ -12,4 +12,4 @@ locale_generation/input_excel_files
 locale_generation/output_json_files
 en_html_files
 locale_generation/excel_to_json.ipynb
-
+**/out
