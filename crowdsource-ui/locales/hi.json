@@ -238,7 +238,7 @@
 	"You are on a spree !!": "आप अच्छा कर रहे हैं !!",
 	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "आपने <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> आवाज़ों के नमूनों को प्रमाणित करने में मदद की है।",
 	"You took the first important step": "आपने पहला महत्वपूर्ण कदम उठा लिया है",
-	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings": "आपने <span id=\"current_badge_count\"></span> रिकॉर्डिंग का योगदान करके एक <span id=\"current_badge_name_1\"></span> भाषा समर्थक बैज जीता है।",
+	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "आपने <span id=\"current_badge_count\"></span> रिकॉर्डिंग का योगदान करके एक <span id=\"current_badge_name_1\"></span> भाषा समर्थक बैज जीता है।",
 	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> sentences.": "आपने <span id=\"current_badge_count\"></span> वाक्यों का योगदान करके एक <span id=\"current_badge_name_1\"></span> भाषा समर्थक बैज जीता है।",
 	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by labelling <span id=\"current_badge_count\"></span> images.": "आपने <span id=\"current_badge_count\"></span> इमेज को लेबल करके एक <span id=\"current_badge_name_1\"></span> भाषा समर्थक बैज जीता है। ",
 	"Your Edit": "आपका बदलाव",

@@ -76,12 +76,12 @@ describe("changeLocale", () => {
   test("should redirect to boloIndia previous page when previous page is not homepage", () => {
     mockLocalStorage();
     mockLocation();
-    location.href = '/en/dashboard.html'
+    location.href = '/en/boloIndia/dashboard.html'
     localStorage.setItem(CURRENT_MODULE, 'bolo');
     localStorage.setItem('i18n', 'hi');
     changeLocale('hi');
     const localeValue = localStorage.getItem("i18n");
-    expect(location.href).toEqual("/hi/dashboard.html")
+    expect(location.href).toEqual("/hi/boloIndia/dashboard.html")
     expect(localeValue).toEqual("hi")
     localStorage.clear();
   })
