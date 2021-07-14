@@ -160,7 +160,7 @@ const getBadgesForUser = (userName) => {
     } else  {
       $('#badge_username').addClass('d-none');
     }
-    fetch(`/user-rewards/Badge User`, {
+    fetch(`/user-rewards/${userName}`, {
       method: 'GET',
       credentials: 'include',
       mode: 'cors'
