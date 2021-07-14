@@ -338,7 +338,6 @@
 	"Only contributions invited for the selected language": "Only contributions invited for the selected language",
 	"Contribution so far in <y> - <x>": "Contribution so far in <y> - <x>",
 	"Validation so far in <y> - <x>": "Validation so far in <y> - <x>",
-	"My Badge": "My Badge",
 	"My Badges": "My Badges",
 	"Contribution": "Contribution",
 	"Validation": "Validation",
@@ -346,7 +345,5 @@
 	"Your contribution will be validated before confirming the badge.": "Your contribution will be validated before confirming the badge.",
 	"Levels and badges may take upto 48 hours to update.": "Levels and badges may take upto 48 hours to update.",
 	"Congratulations": "Congratulations",
-	"username!": "username!",
-	"Your Medal Gallery": "Your Medal Gallery",
-	"Congratulations, ": "Congratulations, "
+	"Your Medal Gallery": "Your Medal Gallery"
 }

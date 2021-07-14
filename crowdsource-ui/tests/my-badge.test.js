@@ -62,7 +62,7 @@ describe('fetch user badge', () => {
 
     test("validate suno badge data", () => {
         mockLocalStorage();
-        localStorage.setItem(LOCALE_STRINGS, "{'Kannada' : 'Kannada'}");
+        localStorage.setItem(LOCALE_STRINGS, "{'Kannada' : 'Kannada','Validation': 'Validation', 'Contribution': 'Contribution'}");
         let sunoItem = {
             initiativeType: "asr",
             language: [
@@ -123,6 +123,7 @@ describe('fetch user badge', () => {
         </div>
       </div>`;
       const localString = localStorage.getItem(LOCALE_STRINGS);
+      console.log("localStorage + Ayush",localString);
         getBadgeRow(sunoItem, 'suno-badge', 'suno', localString);
 
         setTimeout(() => {
@@ -136,7 +137,7 @@ describe('fetch user badge', () => {
 
     test("validate bolo badge data", () => {
         mockLocalStorage();
-        localStorage.setItem(LOCALE_STRINGS, "{'Hindi' : 'Hindi'}");
+        localStorage.setItem(LOCALE_STRINGS, "{'Hindi' : 'Hindi', 'Validation': 'Validation', 'Contribution': 'Contribution'}");
         let boloItem = {
             initiativeType: "text",
             language: [
