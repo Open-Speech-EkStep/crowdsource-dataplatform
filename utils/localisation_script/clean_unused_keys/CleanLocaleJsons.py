@@ -15,7 +15,7 @@ def generate_report():
     report['last_run_timestamp'] = str(now)
     report['keys_removed_from_all_files'] = list(set(removed_keys))
 
-    with open('report.json', 'w') as f:
+    with open('reports/report_clean_locale_{}.json'.format(now), 'w') as f:
         f.write(json.dumps(report, indent = 4, ensure_ascii=False))
 
 def clean_locale_jsons(languages, input_base_path, output_base_path):

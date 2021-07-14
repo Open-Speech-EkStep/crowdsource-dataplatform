@@ -147,7 +147,7 @@ def generate_keys(input_json_path, output_excel_path, keys_with_path_map):
 
     language_df = get_processed_data(en_data, allowed_replacements, key_path_list)
 
-    language_df.to_excel(output_excel_path, index=False)
+    language_df.to_excel(output_excel_path, index=False, startrow = 1)
 
 
 # In[9]:

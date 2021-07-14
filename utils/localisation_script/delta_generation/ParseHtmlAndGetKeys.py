@@ -1,110 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# ### Steps:
-# 1. Collect keys for all ejs files.
-# 2. Keep Main files(html files) and combine the keys of components included with the main keys.
-# 3. Give the keys and path of the respective main files.
-# 4. Parse js files and find the rest of the keys.
-# 5. Map the respective js files with ejs files.
-# 
-# 
-# 
-# 1. Read all ejs files and get the keys in them.
-# 2. Recursively iterate through the includes of main files only and append the keys.
-# 3. Create a dict/df with path as a column.
-# 4. Read all js files for the keys.
-# 5. Map js files with respective html/ejs files.
-# 6. Add their path in the df.
-
-# ##### ISSUES
-# 
-# 1. Passed as parameters to components and used as keys:
-#     - contributionStats.ejs
-#         * Language pairs
-#         * People participated
-#         * Translations validated
-#         * Translations done
-#         * Duration validated
-#         * Languages
-#         * Duration transcribed
-#         * Speakers contributed
-#         * Duration recorded
-#         * Images validated
-#         * Images labelled
-#     - assistiveText.ejs
-#         * Type the text from the image
-#         * Is the text from the image captured correctly?
-#         * Type the translation of the given text
-#         * Is the translation correct?
-#         * Type the text as you hear the audio
-#         * Does the audio match the text?
-#     - cards.ejs
-#         * Validate the text, labelled by others, as per the image
-#         * Type the text as per the image
-#         * Type what you hear
-#         * Transcribe
-#         * Validate the translation contributed by others
-#         * Validate text as per the audio
-#         * Label
-#         * Translate
-#         * Translate and type the text
-#     - report.ejs
-#         * Help us understand what’s wrong with the image labelled
-#         * Your feedback helps us keep Suno India relevant, we appreciate you taking time to leave the feedback.
-#         * Your feedback helps us keep Likho India relevant, we appreciate you taking time to leave the feedback.
-#         * Your feedback helps us keep Dekho India relevant, we appreciate you taking time to leave the feedback.
-#     - headerWithoutNavBar.ejs
-#         * Dashboard
-#         * Transcribe
-#         * Label
-#         * Translate
-#     - breadcrumbs.ejs
-#         * Label
-#     - downloadableBadges.ejs
-#         * bronze
-#         * gold
-#         * platinum
-#         * silver
-# 2. Unused keys (Done):
-#     - Remove language barriers with BhashaDaan
-#     - Your contribution can empower Bhashini to make many such stories happen.
-#     - Towards digital empowerment for all...
-#     - Beta
-#     - Back to Home
-#     
-# 3. special characters in key (DONE):
-#     - Let\'s Go
-#     - I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?
-#     - Please don't use email or mobile number as user name
-# 
-# 4. Recursive includes (DONE):
-#     - bhasadaanLogoText.ejs
-#         * Bhasha
-#         * Daan
-# 5. \$ variables (DONE):
-#     - speakerDetails.ejs
-#         * By proceeding ahead you agree to the \<a href="../terms-and-conditions.html" target="_blank"> Terms and Conditions \</a>   - \${path}
-#         * By proceeding ahead you agree to the \<a href="./terms-and-conditions.html" target="_blank"> Terms and Conditions\</a> 
-#     - badge_milestone.ejs
-#         * You've earned a \<span id="current_badge_name_1">\</span> Bhasha Samarthak Badge by contributing \<span id="current_badge_count">\</span> recordings  - \${text}
-#         * You've earned a <span id="current_badge_name_1"></span> Bhasha Samarthak Badge by contributing <span id="current_badge_count"></span> sentences. - \${text}
-#         * Your next goal is to reach \<span id="next_badge_count">\</span> images to earn your \<span id="next_badge_name_1">\</span> Bhasha Samarthak Badge. - \${text}
-#     - languageGoal.ejs
-#         * Help your language achieve it’s goal of \<span id="language-hour-goal">\</span> images. We know you can do more! - \${text}
-#         * Help your language pair achieve it’s goal of <span id="language-hour-goal"></span> translations. We know you can do more! - \${text}
-#     - badgeMilestone.ejs
-#         * You've earned a \<span id="current_badge_name_1">\</span> Bhasha Samarthak Badge by labelling \<span id="current_badge_count">\</span> images. - \\${text}, \${text}
-# 
-
-# ### Issues
-# 
-# 1. In assistiveText.ejs , there is a dynamic template, <%= __(msg) %>, contributionStats.ejs - <%= __(labels[0]) %>
-# 2. In few templates, there is {text} , {path}
-# 3. common folder accessed in ejs is not proper.eg()
-# 4. verticalGraph.ejs is duplicate in common folder.
-# 5. Level - key is not identified in badges.ejs
-
 # In[1]:
 
 
@@ -115,7 +8,10 @@ import pathlib
 
 
 # In[2]:
-
+def read_json(json_file_path):
+    with open(json_file_path) as f:
+        data = json.load(f)
+    return data
 
 def get_keys_from_ejs(filelist):
     ejs_keys_map = {}
@@ -284,8 +180,7 @@ def get_key_map(base_path, main_files_map):
     fileExt = r"**/*.ejs"
     common_folder_ejs_files = list(pathlib.Path(base_path+'/common').glob(fileExt))
     i_key_path_map = get_identified_key_path_map(key_map, common_folder_ejs_files)
-    with open(base_path.replace("/src/views","")+'/locales/en.json') as f:
-        en_data = json.load(f)
+    en_data = read_json(base_path.replace("/src/views","")+'/locales/en.json')
     en_data_keys = set(en_data.keys())
     key_gen_tags = read_key_gen(base_path+'/key_gen.ejs', base_path)
     un_matched_keys = []
@@ -314,34 +209,7 @@ def get_key_map(base_path, main_files_map):
 
 
 def get_keys_with_path():
-    main_files_map = {"likhoIndia/dashboard.html":'modules/likhoIndia/dashboard/dashboard.ejs',
-     "boloIndia/home.html":'modules/boloIndia/home/home.ejs',
-     "sunoIndia/record.html":'modules/sunoIndia/record/record.ejs',
-     "terms-and-conditions.html":'terms-and-conditions.ejs',
-     "record.html":'record.ejs',
-     "dekhoIndia/thank-you.html":'modules/dekhoIndia/thankyou/contribution/thank-you.ejs',
-     "dekhoIndia/validator-page.html":'modules/dekhoIndia/validation/validator-prompt-page.ejs',
-     "likhoIndia/validator-thank-you.html":'modules/likhoIndia/thankyou/validation/validator-thank-you.ejs',
-     "likhoIndia/thank-you.html":'modules/likhoIndia/thankyou/contribution/thank-you.ejs',
-     "home.html":'home.ejs',
-     "validator-page.html":'validator-prompt-page.ejs',
-     "sunoIndia/home.html":'modules/sunoIndia/home/home.ejs',
-     "sunoIndia/thank-you.html":'modules/sunoIndia/thankyou/contribution/thank-you.ejs',
-     "dekhoIndia/dashboard.html":'modules/dekhoIndia/dashboard/dashboard.ejs',
-     "validator-thank-you.html":'validator-thank-you.ejs',
-     "not-found.html":'not-found.ejs',
-     "thank-you.html":'thank-you.ejs',
-     "sunoIndia/validator-page.html":'modules/sunoIndia/validation/validator-prompt-page.ejs',
-     "sunoIndia/validator-thank-you.html":'modules/sunoIndia/thankyou/validation/validator-thank-you.ejs',
-     "sunoIndia/dashboard.html":'modules/sunoIndia/dashboard/dashboard.ejs',
-     "dekhoIndia/home.html":'modules/dekhoIndia/home/home.ejs',
-     "badges.html":'badges.ejs',
-     "likhoIndia/validator-page.html":'modules/likhoIndia/validation/validator-prompt-page.ejs',
-     "dekhoIndia/record.html":'modules/dekhoIndia/record/record.ejs',
-     "dashboard.html":'dashboard.ejs',
-     "likhoIndia/home.html":'modules/likhoIndia/home/home.ejs',
-     "dekhoIndia/validator-thank-you.html":'modules/dekhoIndia/thankyou/validation/validator-thank-you.ejs',
-     "likhoIndia/record.html":'modules/likhoIndia/record/record.ejs'}
+    main_files_map = read_json('./../html_ejs_mapping.json')
 
     cwd = os.getcwd()
     base_path = cwd[:cwd.index('utils/localisation_script')]+'crowdsource-ui/src/views'
