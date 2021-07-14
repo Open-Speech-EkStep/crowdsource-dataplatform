@@ -149,14 +149,24 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName)
     onChangeUser('./validator-thank-you.html',MODULE.suno.value);
     onOpenUserDropDown();
-    // toggleFooterPosition();
-    setPageContentHeight();
     setSentencesContributed();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (contributionLanguage) {
       updateLocaleLanguagesDropdown(contributionLanguage);
     }
+
+    const localStrings = JSON.parse(
+      localStorage.getItem(LOCALE_STRINGS)
+    );
+
+    const localeLanguageStr = localStrings[contributionLanguage];
+    $("#contributionLanguage5").html(localeLanguageStr);
+    $("#contributionLanguage1").html(localeLanguageStr);
+    $("#contributionLanguage2").html(localeLanguageStr);
+    $("#contributionLanguage3").html(localeLanguageStr);
+    $("#contributionLanguage4").html(localeLanguageStr);
+    $("#contributedLanguage").html(localeLanguageStr);
     getLanguageStats();
   }
 }

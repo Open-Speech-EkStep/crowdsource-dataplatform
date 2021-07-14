@@ -38,6 +38,11 @@ h6,
   font-size: 1.5rem;
 }
 
+#top-language-chart{
+  min-height: 350px;
+  max-height: 350px;
+}
+
 @media (min-width: 321px) {
   html {
     font-size: 12px;
