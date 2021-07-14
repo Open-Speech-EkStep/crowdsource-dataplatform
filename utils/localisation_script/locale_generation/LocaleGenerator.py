@@ -270,8 +270,8 @@ def gen_locales(languages, input_base_path, input_json_path, meta_input_path, ou
 # In[20]:
 
 
-LANGUAGES = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta':"Tamil",
-             'te':"Telugu",'mr':"Marathi",'pa':"Punjabi",'ml':"Malayalam",'or':"Odia",'kn':"Kannada"}
+LANGUAGES = read_json('./../languages.json')
+
 
 example = '''
         Example commands:

@@ -225,8 +225,7 @@ def generate_report(json_df, excel_df, modified_content_keys):
 key_column = 'Key'
 english_col = 'English copy'
 allowed_values = ['x','y','z','u','v','w']    
-languages = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta':"Tamil",
-             'te':"Telugu",'mr':"Marathi",'pa':"Punjabi",'ml':"Malayalam",'or':"Odia",'kn':"Kannada"}
+languages = read_json('./../languages.json')
 
 
 def generate(input_excel_path,input_json_path, output_json_path, input_category):    

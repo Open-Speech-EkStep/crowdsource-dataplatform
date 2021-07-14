@@ -189,8 +189,8 @@ def generate_report():
 # In[13]:
 
 
-LANGUAGES = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta':"Tamil",
-             'te':"Telugu",'mr':"Marathi",'pa':"Punjabi",'ml':"Malayalam",'or':"Odia",'kn':"Kannada"}
+LANGUAGES = read_json('./../languages.json')
+
 
 keys_without_translation = {}
 example = '''

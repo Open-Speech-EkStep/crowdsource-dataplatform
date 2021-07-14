@@ -10,6 +10,12 @@ This utility allows users to generate excel file(with all keys / delta keys) fro
 
 1. Run the following command to install python libraries:  `pip install -r requirements.txt`
 
+2. `languages.json` has list of all languages to be considered.If you want to add a new languages, add it in this json file.
+    ```
+    eg: {"<language-code>":"<language-name>"}
+    ```
+
+
 #### All Keys excel file generation:
 
 1. Run the following command: `cd all_keys_generator`

@@ -43,8 +43,8 @@ def clean_locale_jsons(languages, input_base_path, output_base_path):
         
 if __name__ == '__main__':
     
-    LANGUAGES = {'hi': "Hindi",'gu': "Gujarati",'as': "Assamese",'bn':'Bengali','ta':"Tamil",
-             'te':"Telugu",'mr':"Marathi",'pa':"Punjabi",'ml':"Malayalam",'or':"Odia",'kn':"Kannada"}
+    LANGUAGES = read_json('./../languages.json')
+
     
     removed_keys = []
     
