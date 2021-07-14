@@ -167,6 +167,7 @@ function executeOnLoad() {
     $("#contributionLanguage3").html(localeLanguageStr);
     $("#contributionLanguage4").html(localeLanguageStr);
     $("#contributedLanguage").html(localeLanguageStr);
+    $("#conLanWhenGetBadge").html(localeLanguageStr)
     getLanguageStats();
   }
 }
