@@ -103,6 +103,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
     fs.rmdirSync(outputPath, { recursive: true });
 
     await ejs2html(`${ejsPath}/badges.ejs`, {MOTHER_TONGUE,LANGUAGES}, i18n, outputPath, 'badges.html', locale,contextRoot);
+    await ejs2html(`${ejsPath}/my-badges.ejs`, {MOTHER_TONGUE,LANGUAGES}, i18n, outputPath, 'my-badges.html', locale,contextRoot);
     await ejs2html(`${ejsPath}/validatorBadgesInfo.ejs`, {MOTHER_TONGUE,LANGUAGES}, i18n, outputPath, 'validator-badges.html', locale,contextRoot);
     await ejs2html(
       `${ejsPath}/dashboard.ejs`,

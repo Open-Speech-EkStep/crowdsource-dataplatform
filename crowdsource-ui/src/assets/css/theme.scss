@@ -25,9 +25,10 @@ $bg-light-color: #eff5ff;
 $bg-header-primary: #142745;
 $text-white: #fff;
 $text-secondary: #d8d8d8;
-$text-yellow:  #ffbf00;
+$text-yellow: #ffbf00;
 $text-dark: #000;
-
+$text-muted: #8c8c8c;
+$text-offWhite: #E2E2E2;
 
 // Color Shades
 
@@ -37,7 +38,12 @@ $primary-color-shade1: tint($primary-color, 90%);
 $primary-color-shade2: tint($primary-color, 80%);
 $primary-color-shade3: tint($primary-color, 70%);
 $primary-color-shade4: tint($primary-color, 60%);
-
+$primary-color-shade5: tint($primary-color, 50%);
+$primary-color-shade6: tint($primary-color, 40%);
+$primary-color-shade7: tint($primary-color, 30%);
+$primary-color-shade8: tint($primary-color, 20%);
+$primary-color-shade9: tint($primary-color, 10%);
+$primary-color-shade10: tint($primary-color, 100%);
 
 .bg-app-primary {
   background-color: $bg-dark-primary !important;
@@ -58,6 +64,10 @@ $primary-color-shade4: tint($primary-color, 60%);
 
 .text-btn-primary {
   color: $primary-color;
+}
+
+.text-custom-muted {
+  color: $text-muted;
 }
 
 .text-muted-white {
@@ -183,20 +193,35 @@ $primary-color-shade4: tint($primary-color, 60%);
 }
 
 .module-item {
-	&.active {
+  &.active {
     background: rgba(37, 70, 105, 1) !important;
     border-bottom: 2px solid#4DBAF7 !important;
-		& > a {
-			span {
+    & > a {
+      span {
         &:nth-child(1) {
           color: $text-white !important;
-				}
-				&:nth-child(2) {
+        }
+        &:nth-child(2) {
           color: $text-yellow !important;
-				}
-			}
-		}
-	}
+        }
+      }
+    }
+  }
+}
+
+.light-bg {
+  &.active {
+    border-bottom: 2px solid $primary-color !important;
+    background-color: $text-white !important;
+    span {
+      &:nth-child(1) {
+        color: $text-dark !important;
+      }
+      &:nth-child(2) {
+        color: $text-yellow !important;
+      }
+    }
+  }
 }
 
 .light {
@@ -219,4 +244,29 @@ $primary-color-shade4: tint($primary-color, 60%);
       color: $text-yellow !important;
     }
   }
+}
+
+.dark-bg {
+  &.active {
+    border-bottom: 2px solid#4DBAF7 !important;
+    span {
+      &:nth-child(1) {
+        color: $text-white !important;
+      }
+      &:nth-child(2) {
+        color: $text-yellow !important;
+      }
+    }
+  }
+}
+
+.badge-widget {
+  border: 1px solid $text-offWhite;
+}
+.badge-widget-placeholder {
+  border: 1px dashed $primary-color;
+}
+
+#badge-container .nav-tabs .nav-link {
+  color: $primary-color !important;
 }

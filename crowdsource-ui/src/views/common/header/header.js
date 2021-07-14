@@ -1,13 +1,10 @@
-const {CURRENT_MODULE, SPEAKER_DETAILS_KEY, ALL_LANGUAGES} = require('./constants');
+const {CURRENT_MODULE, ALL_LANGUAGES} = require('./constants');
 const {
   setUserModalOnShown,
-  setSpeakerDetails,
   setGenderRadioButtonOnClick,
   setUserNameOnInputFocus,
   setStartRecordingBtnOnClick,
-  addlistenerToGenderRadios
 } = require('./speakerDetails');
-const {isMobileDevice} = require('./common');
 
 function onActiveNavbar(value) {
   const $header = $('#module_name');
@@ -35,6 +32,17 @@ const onOpenUserDropDown = ()=>{
     $userNavBar.removeClass('active')
   })
 }
+
+const isMobileDevice = () => {
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    // true for mobile device
+    return true
+  } else {
+    // false for not mobile device
+    return false;
+  }
+}
+
 
 const showUserProfile = function (userName) {
   const $navUser = $('#nav-user');
