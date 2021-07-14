@@ -18,17 +18,19 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
     line-height: 40px;
 }
 
-.contribution-info-inner #top-language-chart{
+.contribution-info-inner #top-language-chart, #chartRowWithoutCard #top-language-chart{
     min-height: 200px !important;
     max-width: 400px !important;
+}
+
+#chartRowWithoutCard{
+    max-width: 800px;
 }
 
 #language-goal{
     background: #FFFFFF;
     box-shadow: 0px 0px 16px 4px rgba(0, 123, 255, 0.13);
     border-radius: 12px;
-    /*position: fixed;*/
-    bottom: 60px;
     max-width: 1024px;
 }
 

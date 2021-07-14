@@ -146,11 +146,35 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   const isInTopLanguage = topLanguages.some((ele) => ele.language.toLowerCase() === contributionLanguage.toLowerCase())
 
   const module = localStorage.getItem(CURRENT_MODULE);
+
+  if(isInTopLanguage){
+    $("#languageInTopWeb").removeClass("d-none");
+    $("#languageInTopMob").removeClass("d-none");
+    $("#languageNotInTopMob").addClass("d-none");
+    $("#languageNotInTopWeb").addClass("d-none");
+  }  else {
+    $("#languageNotInTopMob").removeClass("d-none");
+    $("#languageNotInTopWeb").removeClass("d-none");
+    $("#languageInTopWeb").addClass("d-none");
+    $("#languageInTopMob").addClass("d-none");
+  }
+
   if (data.isNewBadge) {
     $(".new-badge-msg").removeClass("d-none");
     $(".thankyou-page-heading").addClass("d-none");
     $(".user-contribution-msg").addClass("d-none");
-    $("#cardWithoutBadge").addClass("d-none");
+
+    const cardWithoutBadge = $('#cardWithoutBadge');
+    $(cardWithoutBadge.parent()).remove(cardWithoutBadge);
+    $("#chartRowWithoutCard").html(cardWithoutBadge);
+    const activeBadgeId = `#${data.currentBadgeType.toLowerCase()}_badge_link`;
+    const activeBadge = $(activeBadgeId);
+    activeBadge.attr("disabled", false);
+    $(".downloadable_badges").append(activeBadge);
+    const nextBadgeLink = $(`#${data.nextBadgeType.toLowerCase()}_badge_link_img`);
+    nextBadgeLink.addClass('enable');
+    nextBadgeLink.removeClass('disable');
+
     $("#spree_text").removeClass("d-none");
     $("#milestone_text").removeClass("d-none");
     $("#current_badge_name").text(localeStrings[data.currentBadgeType.toLowerCase()]);
@@ -172,41 +196,14 @@ const setBadge = function (data, localeStrings, functionalFlow) {
         $("#reward-img").attr('src', `/img/${module}_${data.currentBadgeType.toLowerCase()}_medal.svg`);
       }
     }
-  } else if (data.badges.length !== 0) {
-
-  }
-  else if (data.contributionCount === 0) {
-    if(isInTopLanguage){
-      $("#languageInTopWeb").removeClass("d-none");
-      $("#languageInTopMob").removeClass("d-none");
-      $("#languageNotInTopMob").addClass("d-none");
-      $("#languageNotInTopWeb").addClass("d-none");
-    }  else {
-      $("#languageNotInTopMob").removeClass("d-none");
-      $("#languageNotInTopWeb").removeClass("d-none");
-      $("#languageInTopWeb").addClass("d-none");
-      $("#languageInTopMob").addClass("d-none");
-    }
-
+  } else if (data.contributionCount === 0) {
     $("#champion_text").removeClass("d-none");
     $("#contribution_text").removeClass("d-none");
     $("#sentence_away_msg").removeClass("d-none");
     // $("#user-contribution-msg").removeClass("d-none");
     $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
     $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
-  } else if ((Number(data.contributionCount) >= Number(data.currentMilestone)) && (Number(data.contributionCount) <= Number(data.nextMilestone))) {
-    if(isInTopLanguage){
-      $("#languageInTopWeb").removeClass("d-none");
-      $("#languageInTopMob").removeClass("d-none");
-      $("#languageNotInTopMob").addClass("d-none");
-      $("#languageNotInTopWeb").addClass("d-none");
-      alert("no")
-    }  else {
-      $("#languageNotInTopMob").removeClass("d-none");
-      $("#languageNotInTopWeb").removeClass("d-none");
-      $("#languageInTopWeb").addClass("d-none");
-      $("#languageInTopMob").addClass("d-none");
-    }
+  } else {
     $(".thankyou-page-heading").addClass('d-none');
     $(".user-contribution-msg").removeClass("d-none");
     $("#spree_text").removeClass("d-none");

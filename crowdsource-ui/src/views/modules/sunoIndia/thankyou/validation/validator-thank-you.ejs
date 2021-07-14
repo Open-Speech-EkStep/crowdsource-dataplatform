@@ -46,7 +46,7 @@
     <div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
         <div class="col-10 col-sm-8 col-lg-8 p-0" style="max-width:800px">
             <span class="progress-average-metric font-weight-light">
-                <span id="currentAverage">25%</span> of <span id="contributionLanguage5" class="contributionLanguageTag"></span>&nbsp<span>Suno India</span> Target Achieved
+                <span id="currentAverage">25%</span> of <span id="contributionLanguage5"></span>&nbsp<span id="thankyou-initiative">Suno India</span> Target Achieved
             </span>
             <span class="float-right progress-metric"><span class="" id="currentSentenceLbl">25</span>/<span class="" id="totalSentencesLbl">100</span> Hours</span>
             <div class="progress mt-1">
@@ -108,6 +108,12 @@
         </div>
     </div>
     </div>
+
+<div class="row mt-3 mt-lg-2 md-lg-3 lazy">
+    <div class="col-lg-8 text-center overflow-hidden m-auto" id="chartRowWithoutCard">
+
+    </div>
+</div>
     <%- include('../common/feedback.ejs', {page: "Validation Thank You Page"}) %>
     <div class="row justify-content-center mt-5">
         <%- include('../common/languageGoal.ejs', {ButtonText:__('Validate More'),url:"./validator-page.html",TEXT:"language",TEXT2:"hrs"})%>
