@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="../css/badges.css">
   <link rel="stylesheet" type="text/css" href="../css/common.css">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
 </head>
 
 <body>
@@ -27,7 +28,7 @@
           <div class="col-12 p-0 text-center position-absolute">
             <h1 class="light active mt-lg-3 mt-md-3 mt-4"><span>
                 <%= __('Congratulations, ')%>
-              </span><span id="username" class="d-none"></span></h1>
+              </span><span id="badge_username" class="d-none"></span></h1>
             <h2 class="mt-4 mt-lg-2 mt-md-2">
               <%= __('Your Medal Gallery')%>
             </h2>
@@ -79,7 +80,7 @@
                 </li>
               </ul>
               <div class="tab-content w-100" id="badge-profile-content">
-                <div class="text-center tooltiptext" id="tooltiptext">
+                <div class="text-center badge-popover" id="badge-popover">
                   <div class="">
                     <img src="/img/suno_bronze_medal.svg" alt="" class="badge-img-fluid">
                   </div>
@@ -162,7 +163,7 @@
         </div>
        
         <div class="row mx-0 my-5">
-          <ul style="padding-inline-start:20px">
+          <ul style="padding-inline-start:10px;list-style-type:none">
             <li>
               <%= __('Please keep contributing actively to stand a chance to get recognised.')%>
             </li>

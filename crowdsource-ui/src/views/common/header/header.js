@@ -1,13 +1,11 @@
-const {CURRENT_MODULE, SPEAKER_DETAILS_KEY, ALL_LANGUAGES} = require('./constants');
+const {CURRENT_MODULE, ALL_LANGUAGES} = require('./constants');
 const {
   setUserModalOnShown,
-  setSpeakerDetails,
   setGenderRadioButtonOnClick,
   setUserNameOnInputFocus,
   setStartRecordingBtnOnClick,
-  addlistenerToGenderRadios
 } = require('./speakerDetails');
-const {isMobileDevice} = require('./common');
+const { isMobileDevice } = require('./common');
 
 function onActiveNavbar(value) {
   const $header = $('#module_name');

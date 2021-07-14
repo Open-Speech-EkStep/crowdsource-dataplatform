@@ -255,8 +255,15 @@ body {
 }
 
 @media (min-width: 768px) {
+  .badge-popover  {
+    width: 320px;
+    height: 262px;
+  }
+  .badge-popover::after  {
+    left: 26%;
+  }
   .badge-img-fluid {
-    height: 200px;
+    height: 230px;
   }
   .logo {
     width: 190px;
@@ -344,12 +351,21 @@ body {
 }
 
 @media (max-width: 700px) {
+  .badge-popover  {
+    width: 180px;
+    height: 150px;
+   
+  }
+  .badge-popover::after {
+    left: 15%;
+  }
   .badge-img-fluid {
-    height: 100px;
+    height: 130px;
   }
 
   #badge-container .nav-tabs .nav-link {
     font-size: 14px;
+    width: max-content;
   }
   .badge-widget {
     height: 88px;
@@ -546,9 +562,8 @@ body {
   overflow: auto;
 }
 
-.tooltiptext {
+.badge-popover {
   visibility: hidden;
-  width: 140px;
   background-color: #fff;
   color: #fff;
   text-align: center;
@@ -561,19 +576,24 @@ body {
   margin-left: -75px;
   /* opacity: 0; */
   transition: opacity 0.3s;
-  width: 390px;
-  height: 262px;
   border-radius: 20px;
-  background-image: url(/img/my-badge-tri.svg);
+  background-image: url(/img/tri-color-dark.svg);
 }
 
-.tooltiptext::after {
+.badge-popover::after {
   content: "";
   position: absolute;
-  top: -20px;
-  left: 10%;
+  top: -19px;
   margin-left: -5px;
   border-width: 10px;
   border-style: solid;
-  border-color: transparent transparent orange transparent;
+  border-color: transparent transparent #FDECD9 transparent;
+}
+
+.cursor-pointer {
+  cursor:  pointer !important;
+}
+
+.light-blue {
+  background-color: #EFF5FF;
 }

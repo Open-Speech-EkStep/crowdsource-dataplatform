@@ -38,6 +38,12 @@ $primary-color-shade1: tint($primary-color, 90%);
 $primary-color-shade2: tint($primary-color, 80%);
 $primary-color-shade3: tint($primary-color, 70%);
 $primary-color-shade4: tint($primary-color, 60%);
+$primary-color-shade5: tint($primary-color, 50%);
+$primary-color-shade6: tint($primary-color, 40%);
+$primary-color-shade7: tint($primary-color, 30%);
+$primary-color-shade8: tint($primary-color, 20%);
+$primary-color-shade9: tint($primary-color, 10%);
+$primary-color-shade10: tint($primary-color, 100%);
 
 .bg-app-primary {
   background-color: $bg-dark-primary !important;

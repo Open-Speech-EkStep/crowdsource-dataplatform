@@ -637,10 +637,6 @@
         margin: 0px 10px 0px 8px;
     }
 
-    #carouselExampleIndicators .nav-tabs>li.active {
-        border-radius: 16px;
-    }
-
     .label-text {
         font-size: 14px;
         line-height: 20px;

@@ -5,6 +5,10 @@ const { drawTopLanguageChart } = require('./verticalGraph');
 const { constructChart } = require('./horizontalBarGraph');
 const { changeLocale,showLanguagePopup } = require('./locale');
 const fetch = require('./fetch');
+const {onChangeUser, onOpenUserDropDown, showUserProfile} = require('./header');
+const { setUserModalOnShown,
+  setUserNameOnInputFocus,
+  setGenderRadioButtonOnClick}  = require("./speakerDetails");
 
 const getContributedAndTopLanguage = (topLanguagesData, type) => {
   if(topLanguagesData  && topLanguagesData.length) {
@@ -291,6 +295,26 @@ const updateLikhoLocaleLanguagesDropdown = (language, toLanguage) => {
   }
 }
 
+const setLocalisationAndProfile = (path, module) => {
+  const $startRecordBtn = $('#proceed-box');
+  const $startRecordBtnTooltip = $startRecordBtn.parent();
+  const $userName = $('#username');
+  onChangeUser(path, module);
+  setUserModalOnShown($userName);
+  $startRecordBtnTooltip.tooltip('disable');
+  setGenderRadioButtonOnClick();
+  setUserNameOnInputFocus();
+  onOpenUserDropDown();
+  if(hasUserRegistered()){
+    const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+    const localSpeakerDataParsed = JSON.parse(speakerDetails);
+    showUserProfile(localSpeakerDataParsed.userName);
+  }
+
+  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
+  updateLocaleLanguagesDropdown(language);
+}
 
 
-module.exports = { isMobileDevice, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered };
+
+module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered };
