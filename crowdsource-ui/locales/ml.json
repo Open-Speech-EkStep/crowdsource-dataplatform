@@ -238,7 +238,7 @@
 	"You are on a spree !!": "നിങ്ങൾ ഒരു പരിശ്രമത്തിൽ മുഴുകിയിരിക്കുകയാണ്",
 	"You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings": "<span id=\"spn-validation-count\"></span> റെക്കോർഡിംഗുകൾ സാധൂകരിക്കാൻ നിങ്ങൾ ഞങ്ങളെ സഹായിച്ചു",
 	"You took the first important step": "നിങ്ങൾ ആദ്യത്തെ പ്രധാന ചുവട് എടുത്തു കഴിഞ്ഞിരിക്കുന്നു",
-	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings": "<span id=\"current_badge_count\"></span> റെക്കോ൪ഡിംഗുകൾ സംഭാവന ചെയ്തുകൊണ്ട് നിങ്ങൾ <span id=\"current_badge_name_1\"></span> ഭാഷാ സമ൪ത്ഥക് ബാഡ്ജ് നേടി",
+	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "<span id=\"current_badge_count\"></span> റെക്കോ൪ഡിംഗുകൾ സംഭാവന ചെയ്തുകൊണ്ട് നിങ്ങൾ <span id=\"current_badge_name_1\"></span> ഭാഷാ സമ൪ത്ഥക് ബാഡ്ജ് നേടി",
 	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> sentences.": "<span id=\"current_badge_count\"></span> വാക്യങ്ങൾ സംഭാവന ചെയ്തുകൊണ്ട് നിങ്ങൾ <span id=\"current_badge_name_1\"></span> ഭാഷാ സമ൪ത്ഥക് ബാഡ്ജ് നേടി",
 	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by labelling <span id=\"current_badge_count\"></span> images.": "<span id=\"current_badge_count\"></span> ചിത്രങ്ങൾ ലേബൽ ചെയ്തുകൊണ്ട് നിങ്ങൾ <span id=\"current_badge_name_1\"></span> ഭാഷാ സമ൪ത്ഥക് ബാഡ്ജ് നേടി",
 	"Your Edit": "നിങ്ങളുടെ എഡിറ്റ്",
