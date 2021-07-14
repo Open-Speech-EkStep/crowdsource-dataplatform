@@ -418,7 +418,7 @@ router.get('/rewards-info', validateRewardsInfoInput, async (req, res) => {
 });
 
 router.get('/user-rewards/:username?', async (req, res) => {
-    const userId = req.cookies.userId;
+    const userId = req.cookies.userId || '';
     const userName = req.params.username || '';
     try {
         const rewardData = await getUserRewards(userId, userName);
