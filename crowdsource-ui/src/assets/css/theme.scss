@@ -88,6 +88,7 @@ $primary-color-shade10: tint($primary-color, 100%);
 .btn-primary {
   background-color: $primary-color !important;
   color: $text-white !important;
+  border-color: $primary-color !important;
 
   &:hover {
     background-color: $primary-color;

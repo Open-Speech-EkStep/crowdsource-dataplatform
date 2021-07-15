@@ -161,6 +161,13 @@ const handleFeedbackSubmit = () => {
     var category = $("#category_id").val();
     var feedback_description = $("#feedback_description").val();
     var language = localStorage.getItem("contributionLanguage");
+    const recommenedRadioBtn = document.querySelectorAll('input[name = "recommend"]');
+    const checkedStatus = Array.from(recommenedRadioBtn).filter((el) => el.checked);
+    let recommended = checkedStatus.length ? checkedStatus[0].value : '';
+
+    const revisitRadioBtn = document.querySelectorAll('input[name = "revisit"]');
+    const revisitStatus = Array.from(revisitRadioBtn).filter((el) => el.checked);
+    let revisit = revisitStatus.length ? revisitStatus[0].value : '';
     if(language === null){
         ALL_LANGUAGES.forEach((lang) => {
             if(lang.id === localStorage.getItem("i18n")) { language = lang.value; }});
@@ -192,6 +199,8 @@ const handleFeedbackSubmit = () => {
     fd.append('module', moduleType);
     fd.append('target_page', targetPage);
     fd.append('opinion_rating', rating);
+    fd.append('recommended', recommended);
+    fd.append('revisit', revisit);
     fetch("/feedback", {
         method: "POST",
         credentials: 'include',
@@ -200,7 +209,7 @@ const handleFeedbackSubmit = () => {
     })
     .then((res) => res.json())
     .then((response) => {
-        if(response.statusCode === 200){
+        if(response.statusCode == 200){
             $("#feedback_modal").modal("hide");
             $("#feedback_thanku_modal").modal("show");  
             resetFeedback();      
@@ -215,6 +224,14 @@ const resetFeedback = () => {
     const opinion = document.querySelector('input[name="opinionRadio"]:checked');
     const category = document.querySelector("#category_id option[value='category']");
     const feedback = document.querySelector("#feedback_description");
+    const recommendedFeedback = document.querySelector(
+        'input[name = "recommend"]:checked'
+      );
+      const revisitFeedback = document.querySelector(
+        'input[name = "revisit"]:checked'
+      );
+      if (recommendedFeedback) recommendedFeedback.checked = false;
+      if (revisitFeedback) revisitFeedback.checked = false;
 
     if(category) category.selected = true;
     feedback.value = '';

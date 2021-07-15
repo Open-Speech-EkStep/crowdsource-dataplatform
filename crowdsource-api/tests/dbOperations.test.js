@@ -427,10 +427,12 @@ describe("Running tests for dbOperations", () => {
         const module = 'bolo';
         const target_page = 'Landing Page';
         const opinion_rating = 3;
+        const recommended = 'yes';
+        const revisit = 'no'
 
-        dbOperations.insertFeedback(email, feedback, category, language, module, target_page, opinion_rating);
+        dbOperations.insertFeedback(email, feedback, category, language, module, target_page, opinion_rating, recommended, revisit);
 
-        expect(spyDBany).toHaveBeenCalledWith(feedbackInsertion, [email, feedback, category, language, module, target_page, opinion_rating]);
+        expect(spyDBany).toHaveBeenCalledWith(feedbackInsertion, [email, feedback, category, language, module, target_page, opinion_rating, recommended, revisit]);
     });
 
     test('Save Report', async () => {

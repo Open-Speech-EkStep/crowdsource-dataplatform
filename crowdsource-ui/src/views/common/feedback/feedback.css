@@ -156,4 +156,7 @@ label .required {
 		height: 50px;
 		width: 50px;
 	}
+	#feedback_modal .modal-body label span {
+		font-size: 12px !important;
+	}
 }

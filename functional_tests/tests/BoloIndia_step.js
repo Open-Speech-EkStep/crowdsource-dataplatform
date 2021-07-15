@@ -435,6 +435,8 @@ step("When user clicks on the Feedback icon, user should see the feedback popup"
     assert.ok(await text("What is your opinion of this page").isVisible());
     assert.ok(await text("Please select your feedback category").isVisible());
     assert.ok(await text("Share your feedback below").isVisible());
+    assert.ok(await text("Would you recommend Bhasha Daan to your friends & family?").isVisible());
+    assert.ok(await text("Would you revisit Bhasha Daan?").isVisible());
 });
 
 step("Submit button should be disbaled, When user selects an opinion, submit button should be enabled", async function () {
@@ -444,11 +446,22 @@ step("Submit button should be disbaled, When user selects an opinion, submit but
     // await write('TestUser', into(usernameFiled))
     assert.ok(await taiko.button({ id: "submit_btn" }).isDisabled());
     await click(taiko.$("#very_happy_label"));
+    assert.ok(! await taiko.radioButton({ id: "yes-check" }).isSelected());
+    assert.ok(! await taiko.radioButton({ id: "no-check" }).isSelected());
+    assert.ok(! await taiko.radioButton({ id: "maybe-check" }).isSelected());
+    assert.ok(! await taiko.radioButton({ id: "revisit-yes-check" }).isSelected());
+    assert.ok(! await taiko.radioButton({ id: "revisit-no-check" }).isSelected());
+    assert.ok(! await taiko.radioButton({ id: "revisit-maybe-check" }).isSelected());
     await taiko.waitFor(500)
     assert.ok(! await taiko.button({ id: "submit_btn" }).isDisabled());
 });
 
 step("when user clicks on the submit button , user should land on the Thank you page", async function () {
+    await click(taiko.radioButton({ id: "yes-check" }));
+    await click(taiko.radioButton({ id: "revisit-maybe-check" }));
+    await taiko.waitFor(200);
+    assert.ok(await taiko.radioButton({ id: "yes-check" }).isSelected());
+    assert.ok(await taiko.radioButton({ id: "revisit-maybe-check" }).isSelected());
     await click(taiko.button({ id: "submit_btn" }))
     await taiko.waitFor(500)
     assert.ok(await text("Thank you for your feedback!").exists());

@@ -443,8 +443,8 @@ const getLastUpdatedAt = async () => {
     return lastUpdatedDateTime;
 }
 
-const insertFeedback = (email, feedback, category, language, module, target_page, opinion_rating) => {
-    return db.any(feedbackInsertion, [email, feedback, category, language, module, target_page, opinion_rating]);
+const insertFeedback = (email, feedback, category, language, module, target_page, opinion_rating, recommended, revisit) => {
+    return db.any(feedbackInsertion, [email, feedback, category, language, module, target_page, opinion_rating, recommended, revisit]);
 }
 
 const saveReport = async (userId, datasetId, reportText, language, userName, source) => {

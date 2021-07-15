@@ -378,8 +378,10 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
     const module = req.body.module;
     const target_page = req.body.target_page;
     const opinion_rating = req.body.opinion_rating;
+    const recommended = req.body.recommended;
+    const revisit = req.body.revisit;
 
-    insertFeedback(email, feedback, category, language, module, target_page, opinion_rating)
+    insertFeedback(email, feedback, category, language, module, target_page, opinion_rating, recommended, revisit)
         .then(() => {
             console.log('Feedback is inserted into the DB.');
             res.send({
