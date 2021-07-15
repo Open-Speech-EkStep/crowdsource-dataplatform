@@ -180,8 +180,8 @@ function buildGraphs(language, timeframe) {
                     'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'
                 );
                 fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
-                fetch('../css/notyf.min.css');
-                fetch('../css/record.css');
+                fetch('/css/notyf.min.css');
+                fetch('/css/record.css');
             }, 2000);
         } catch (error) {
             console.log(error);
@@ -260,6 +260,9 @@ const drawGenderChart = (chartData) => {
         categoryAxis.renderer.grid.template.disabled = true;
         categoryAxis.renderer.labels.template.fontSize = 12;
         categoryAxis.renderer.grid.template.location = 0;
+        let label = categoryAxis.renderer.labels.template;
+        label.truncate = true;
+        label.maxWidth = 120;
 
         const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
         valueAxis.min = 0;
@@ -285,6 +288,21 @@ const drawGenderChart = (chartData) => {
         });
 
         chartReg['gender-chart'] = chart;
+
+        categoryAxis.events.on("sizechanged", function (ev) {
+            var axis = ev.target;
+            var cellWidth = axis.pixelWidth / (axis.endIndex - axis.startIndex);
+            if (cellWidth < axis.renderer.labels.template.maxWidth) {
+              axis.renderer.labels.template.rotation = -45;
+              axis.renderer.labels.template.horizontalCenter = "right";
+              axis.renderer.labels.template.verticalCenter = "middle";
+            }
+            else {
+              axis.renderer.labels.template.rotation = 0;
+              axis.renderer.labels.template.horizontalCenter = "middle";
+              axis.renderer.labels.template.verticalCenter = "top";
+            }
+          });
     });
 };
 
