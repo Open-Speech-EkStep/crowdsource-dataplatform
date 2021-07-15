@@ -115,6 +115,9 @@ body {
         margin-right: 0;
         margin-left: 1rem;
     }
+    .padding-top-65 {
+        padding-top: 56px !important;
+      }
 
     .tour-tour {
         width: 95%;
@@ -203,10 +206,18 @@ body {
     }
 }
 
+@media(min-width: 700px){
+    .padding-top-65 {
+        padding-top: 65px !important;
+      }
+    
+}
+
 @media (min-width: 768px) and (max-width: 961px) {
     .flex-direction-row {
         flex-direction: row !important;
     }
+
 
     #cont-warning-msg {
         display: none;
@@ -316,3 +327,9 @@ body {
 .border-50 {
     border-radius: 50px;
 }
+
+
+
+  .padding-top-115 {
+    padding-top: 115px !important;
+  }

@@ -9,7 +9,7 @@ html {
 }
 
 .container {
-    padding-top: 50px;
+    padding-top: 118px;
     padding-bottom: 50px;
 }
 
@@ -415,4 +415,6 @@ body.modal-open .supreme-container {
     #indiaMapChart {
         height: 380px;
     }
+
+
 }
