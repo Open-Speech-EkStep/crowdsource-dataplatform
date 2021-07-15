@@ -15,7 +15,7 @@ const {
 const path = require('path');
 
 step("Select MyBadges from the dropdown", async function() {
-    await setCookie("userId","789456123abcde", {url: process.env.test_url})
+    await setCookie("userId","789456123abcde", {url: process.env.api_test_url})
 	await click(taiko.link({ id: "nav-user" }));
     assert.ok(await text('My Badges').isVisible());
     await click(text('My Badges'));
@@ -82,7 +82,7 @@ step("When user clicks on back button, user should land on Bhasha Daan home page
 	if (await taiko.text('Home').exists()) {
         assert.ok('Home button exists')
         await click(taiko.text("Home"))
-        await taiko.waitFor(1000)
+        await taiko.waitFor(1500)
     }
     assert.ok(await text("Contribute and become a Bhasha Samarthak").isVisible());
-    });
+});
