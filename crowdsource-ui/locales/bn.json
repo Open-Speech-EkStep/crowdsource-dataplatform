@@ -259,7 +259,7 @@
 	"image label(s) validated": "চিত্রের লেবেল(গুলি) যাচাই করা হয়েছে",
 	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> sentences.": "আপনি <span id=\"current_badge_count\"></span>টি বাক্য অবদান রেখে একটি <span id=\"current_badge_name_1\"></span> ভাষা সমর্থক ব্যাজ অর্জন করেছেন।",
 	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by labelling <span id=\"current_badge_count\"></span> images.": "আপনি <span id=\"current_badge_count\"></span>টি চিত্র লেবেল করে একটি <span id=\"current_badge_name_1\"></span> ভাষা সমর্থক ব্যাজ অর্জন করেছেন।",
-	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "আপনি <span id=\"current_badge_count\"></span>টি রেকর্ডিং অবদান রেখে একটি <span id=\"current_badge_name_1\"></span> ভাষা সমর্থক ব্যাজ অর্জন করেছেন।",
+	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.",
 	"Contribute by typing what you hear on audio": "আপনি অডিওতে যা শুনছেন তা টাইপ করে অবদান রাখুন",
 	"Validate the texts transcribed by others": "অন্যদের দ্বারা লিখিত পাঠ্যগুলি বৈধ করুন",
 	"Contribute your voice by recording the sentence": "বাক্যটি রেকর্ড করে আপনার কন্ঠস্বরে অবদান রাখুন",
@@ -341,7 +341,6 @@
 	"Contribution so far in <y> - <x>": "Contribution so far in <y> - <x>",
 	"Validation so far in <y> - <x>": "Validation so far in <y> - <x>",
 	"Share on": "Share on",
-	"You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.": "You've earned a <span id=\"current_badge_name_1\"></span> Bhasha Samarthak Badge by contributing <span id=\"current_badge_count\"></span> recordings.",
 	"Contribute for your language!": "Contribute for your language!",
 	"": ""
 }

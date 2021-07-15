@@ -76,7 +76,7 @@ const getLanguageStats = function () {
         const module = localStorage.getItem(CURRENT_MODULE);
         const languages = getContributedAndTopLanguage(module == MODULE.likho.value || module == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, MODULE.likho.value);
         localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChartThankyouPage(MODULE.likho.value);
+        showByHoursChart(MODULE.likho.value, "thankyou");
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
@@ -151,7 +151,7 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName)
     onChangeUser('./thank-you.html', MODULE.likho.value);
     onOpenUserDropDown();
-    setPageContentHeight();
+    // setPageContentHeight();
     setSentencesContributed();
     // toggleFooterPosition();
 
@@ -160,6 +160,21 @@ function executeOnLoad() {
     if (contributionLanguage && toLanguage) {
       updateLikhoLocaleLanguagesDropdown(contributionLanguage, toLanguage);
     }
+
+    const localStrings = JSON.parse(
+      localStorage.getItem(LOCALE_STRINGS)
+    );
+
+    const localeLanguageStr = localStrings[contributionLanguage];
+    const localeToLanguageStr = localStrings[toLanguage];
+    $("#contributionLanguage5").html(`${localeLanguageStr}-${localeToLanguageStr}`);
+    $("#contributionLanguage1").html(`${localeLanguageStr}-${localeToLanguageStr}`);
+    $("#contributionLanguage2").html(`${localeLanguageStr}-${localeToLanguageStr}`);
+    $("#contributionLanguage3").html(`${localeLanguageStr}-${localeToLanguageStr}`);
+    $("#contributionLanguage4").html(`${localeLanguageStr}-${localeToLanguageStr}`);
+    $("#contributedLanguage").html(`${localeLanguageStr}-${localeToLanguageStr}`);
+    $("#conLanWhenGetBadge").html(`${localeLanguageStr}-${localeToLanguageStr}`)
+
     getLanguageStats();
   }
 }
