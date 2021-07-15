@@ -81,6 +81,7 @@ def get_text_from_html_tag(tag):
 def extract_and_replace_tags(text, allowed_replacements):
     tag_identification_regex = r"<(\S*?)[^>]*>.*?<\/\1>|<.*?\/>"
     out_txt = text
+    print('*****', out_txt)
     matched_tags = re.finditer(tag_identification_regex, out_txt, re.MULTILINE)
     replacement_identifier_index = 0
     replacement_mapping_dict = {}
@@ -197,10 +198,10 @@ example = '''
         Example commands:
         
         For specific languages:
-            python DeltaGenerator.py -i ./../../../crowdsource-ui/locales -o . -l gu pa
+            python DeltaGenerator.py -i ./../all_keys_generator/out -o . -l gu pa
         
         For all languages:
-            python DeltaGenerator.py -i ./../../../crowdsource-ui/locales -o . -a
+            python DeltaGenerator.py -i ./../all_keys_generator/out -o . -a
     '''
 
 parser = argparse.ArgumentParser(epilog=example,
@@ -231,3 +232,6 @@ sme_out_base_path = os.path.join(output_base_path, 'out-sme/')
 
 gen_delta(languages.items(), input_base_path, meta_out_base_path, sme_out_base_path, all_keys)
 generate_report()
+
+
+
