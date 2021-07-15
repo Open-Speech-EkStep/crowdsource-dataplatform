@@ -39,27 +39,13 @@ step("When user clicks on View all Details buttton user should be able to see <a
 });
 
 step("Add <usrnm> Username", async function (usrnm) {
-    if (await taiko.text('User Details').isVisible()) {
+    if (await taiko.text('User Details').exists()) {
         const username = taiko.textBox({ id: 'username' })
         await taiko.waitFor(700)
         await clear(taiko.textBox({ id: 'username' }));
         await taiko.waitFor(500)
         await write(usrnm, into(username))
         await taiko.waitFor(500)
-    }
-    else
-    {
-        await click(taiko.link({ id: "nav-user" }));
-        assert.ok(await text('Change User').isVisible());
-        await click(text('Change User'));
-        await taiko.waitFor(1000);
-        assert.ok(await taiko.textBox({ id: 'username' }).isVisible())
-            const username = taiko.textBox({ id: 'username' })
-            await clear(taiko.textBox({ id: 'username' }));
-            await taiko.waitFor(300)
-            await write(usrnm, into(username))
-            await taiko.waitFor(500)
-        
     }
 });
 
@@ -172,11 +158,8 @@ step("When user skips the rest of the <count> sentences , User should see Thank 
 });
 
 step("When user click on Lets Go Button", async function () {
-    if(taiko.button({ id: 'proceed-box' }).exists())
-    {
     await click(taiko.button({ id: 'proceed-box' }))
     await taiko.waitFor(1200)
-    }
 });
 
 step("Check <card> option should be <state> on Home page", async function (card, state) {
