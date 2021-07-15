@@ -313,3 +313,5 @@ meta_input_path = args.meta_folder_path
 output_base_path = args.output_folder_path
 
 gen_locales(languages.items(), input_base_path,input_json_path, meta_input_path, output_base_path)
+
+

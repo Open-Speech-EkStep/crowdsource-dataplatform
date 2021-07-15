@@ -45,6 +45,17 @@ const topLanguagesByContributionCount = "select language,(ROUND(total_contributi
 
 const lastUpdatedAtQuery = "select max(lastupdated) AT TIME ZONE 'Asia/Kolkata' from audit_load_log;";
 
+const languageGoalQuery = `select sum(goal) as goal from language_goals where $1:raw`;
+
+const currentProgressQuery = `select 
+ROUND((sum(contribution_audio_duration) FILTER (WHERE audio_row_num_per_contribution_id = 1 and contributions_and_demo_stats.is_system = false))::numeric/3600,3)  as total_contributions, 
+ROUND(sum(contributions_and_demo_stats.validation_audio_duration)::numeric/3600, 3)  as total_validations,
+count(distinct contribution_id) FILTER (WHERE contributions_and_demo_stats.is_system = false) as total_contribution_count,
+sum(contributions_and_demo_stats.is_validated) total_validation_count
+from contributions_and_demo_stats where $1:raw
+group by contributions_and_demo_stats.type;
+`;
+
 module.exports = {
     listLanguages,
     topLanguagesBySpeakerContributions,
@@ -64,5 +75,7 @@ module.exports = {
     quarterlyTimeline,
     quarterlyTimelineCumulative,
     lastUpdatedAtQuery,
-    topLanguagesByContributionCount
+    topLanguagesByContributionCount,
+    languageGoalQuery,
+    currentProgressQuery
 };

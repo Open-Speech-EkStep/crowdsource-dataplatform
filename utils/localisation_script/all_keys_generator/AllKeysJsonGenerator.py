@@ -231,6 +231,22 @@ def generate_report(json_df, excel_df, modified_content_keys):
 # In[17]:
 
 
+def set_values(df_row):
+    df_row_x = df_row[english_col+'_x']
+    df_row_y = df_row[english_col+'_y']
+    if pd.notnull(df_row_x) and len(str(df_row_x).strip()) != 0:
+        df_row[english_col] = df_row_x
+    elif pd.notnull(df_row_y) and len(str(df_row_y).strip()) != 0:
+        df_row[english_col] = df_row_y
+    else: 
+        df_row[english_col] = ""
+    
+    return df_row
+
+
+# In[18]:
+
+
 key_column = 'Key'
 english_col = 'English copy'
 allowed_values = ['x','y','z','u','v','w']    
@@ -249,7 +265,9 @@ def generate(input_excel_path,input_json_path, output_json_path, input_category)
     clean_excel_df = clean_df(excel_df)
     clean_json_df = clean_df(json_df)
     
-    merged_df = pd.merge(clean_excel_df, clean_json_df[[key_column]], on=key_column, how='left')
+    merged_df = pd.merge(clean_excel_df, clean_json_df, on=key_column, how='outer')
+    merged_df.to_excel('validate.xlsx')
+    merged_df = merged_df.apply(set_values, axis = 1)
     
     filtered_df = merged_df[[key_column, english_col]]
 
@@ -261,7 +279,7 @@ def generate(input_excel_path,input_json_path, output_json_path, input_category)
     
 
 
-# In[18]:
+# In[19]:
 
 
 example = '''

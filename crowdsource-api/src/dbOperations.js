@@ -77,7 +77,9 @@ const {
     quarterlyTimeline,
     quarterlyTimelineCumulative,
     lastUpdatedAtQuery,
-    topLanguagesByContributionCount
+    topLanguagesByContributionCount,
+    languageGoalQuery,
+    currentProgressQuery
 } = require('./dashboardDbQueries');
 
 const {
@@ -728,6 +730,63 @@ const addRemainingGenders = (genderGroupData, allGenders) => {
     return genderGroupData;
 }
 
+const getContributionProgress = async (type, language, source) => {
+    let goalFilter = `1=1`;
+    let progressFilter = `1=1`;
+    if (type.length !== 0) {
+        goalFilter += ` and type = '${type}'`
+        progressFilter += ` and type = '${type}'`
+    }
+    if (language.length !== 0) {
+        goalFilter += ` and LOWER(language) = LOWER('${language}')`;
+        progressFilter +=` and LOWER(language) = LOWER('${language}')`;
+    }
+    if (source.length !== 0) {
+        goalFilter += ` and category = '${source}'`
+    }
+    
+    let filter = pgp.as.format('$1:raw', [goalFilter]);
+    const goalResult = await db.any(languageGoalQuery, filter);
+    let goal = goalResult[0].goal;
+
+    let filter2 = pgp.as.format('$1:raw', [progressFilter]);
+    console.log(currentProgressQuery);
+    console.log(filter2)
+    console.log(progressFilter)
+    const progressResult = await db.any(currentProgressQuery, filter2);
+    console.log(progressResult)
+    let progress = 0;
+    if (progressResult.length != 0) {
+        if (type in ['text', 'asr']) {
+            if (source == 'contribute') {
+                progress = progressResult[0].total_contributions;
+            }
+            else if (source == 'validate') {
+                progress = progressResult[0].total_validations;
+            }
+            else {
+                progress = progressResult[0].total_contributions + progressResult[0].total_validations;
+            }
+        }
+        else {
+            if (source == 'contribute') {
+                progress = progressResult[0].total_contribution_count;
+            }
+            else if (source == 'validate') {
+                progress = progressResult[0].total_validation_count;
+            }
+            else {
+                progress = progressResult[0].total_contribution_count + progressResult[0].total_validation_count;
+            }
+        }
+    }
+
+    return {
+        'goal': goal,
+        'currentProgress': progress
+    }
+}
+
 module.exports = {
     userVerify,
     updateAndGetMedia,
@@ -763,5 +822,6 @@ module.exports = {
     updateProfanityStatus,
     releaseMedia,
     getUserRewards,
-    addRemainingGenders
+    addRemainingGenders,
+    getContributionProgress
 };
