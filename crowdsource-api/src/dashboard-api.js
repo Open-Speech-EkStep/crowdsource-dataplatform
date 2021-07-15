@@ -1,4 +1,4 @@
-const { getLastUpdatedAt, getTopLanguageByHours, getTopLanguageByContributionCount, getTopLanguageBySpeakers, getAggregateDataCount, getLanguages, getTimeline, getGenderGroupData, getAgeGroupData, addRemainingGenders } = require('./dbOperations');
+const { getLastUpdatedAt, getTopLanguageByHours, getTopLanguageByContributionCount, getTopLanguageBySpeakers, getAggregateDataCount, getLanguages, getTimeline, getGenderGroupData, getAgeGroupData, addRemainingGenders, getContributionProgress } = require('./dbOperations');
 const { validateMediaTypeInput } = require("./middleware/validateUserInputs")
 const { GENDER } = require("./constants")
 let isFieldsMentioned = (fieldsArray) => {
@@ -249,6 +249,16 @@ const dashboardRoutes = (router) => {
             'total-hours-contributed': hoursContributed,
             'total-hours-validated': hoursValidated,
             "data": timelineData,
+            last_updated_at: lastUpdatedDateTime
+        });
+    });
+
+    router.get('/progress/:type/:language/:source', validateMediaTypeInput, async (req, res) => {
+        const progressData = await getContributionProgress(req.params.type, req.params.language, req.params.source);
+        const lastUpdatedDateTime = await getLastUpdatedAt();
+        res.send({
+            'current-progress': progressData.currentProgress,
+            'goal': progressData.goal,
             last_updated_at: lastUpdatedDateTime
         });
     });
