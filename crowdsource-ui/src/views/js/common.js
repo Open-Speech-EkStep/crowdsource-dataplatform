@@ -45,7 +45,7 @@ function showByHoursChart(type, page) {
     chartReg["chart"].dispose();
   }
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-  drawTopLanguageChart(JSON.parse(topLanguagesByHoursData), type, page)
+  drawTopLanguageChart(JSON.parse(topLanguagesByHoursData), type,"", page)
 }
 
 function showByHoursChartThankyouPage(type) {
@@ -163,14 +163,17 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#languageInTopMob").addClass("d-none");
   }
 
+  $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
+  $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
+
   if (data.isNewBadge) {
     $(".new-badge-msg").removeClass("d-none");
     $(".thankyou-page-heading").addClass("d-none");
     $(".user-contribution-msg").addClass("d-none");
 
-    const cardWithoutBadge = $('#cardWithoutBadge');
-    $(cardWithoutBadge.parent()).remove(cardWithoutBadge);
-    $("#chartRowWithoutCard").html(cardWithoutBadge);
+    // const cardWithoutBadge = $('#cardWithoutBadge');
+    // $(cardWithoutBadge.parent()).remove(cardWithoutBadge);
+    // $("#chartRowWithoutCard").html(cardWithoutBadge);
     const activeBadgeId = `#${data.currentBadgeType.toLowerCase()}_badge_link`;
     const activeBadge = $(activeBadgeId);
     activeBadge.attr("disabled", false);
@@ -179,8 +182,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     nextBadgeLink.addClass('enable');
     nextBadgeLink.removeClass('disable');
 
-    $("#spree_text").removeClass("d-none");
-    $("#milestone_text").removeClass("d-none");
+    // $("#milestone_text").removeClass("d-none");
     $("#current_badge_name").text(localeStrings[data.currentBadgeType.toLowerCase()]);
     $("#current_badge_name_1").text(localeStrings[data.currentBadgeType.toLowerCase()]);
     $("#current_badge_count").text(data.currentMilestone);
@@ -203,62 +205,78 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   } else if (data.contributionCount === 0) {
     $("#champion_text").removeClass("d-none");
     $("#contribution_text").removeClass("d-none");
-    $("#sentence_away_msg").removeClass("d-none");
     // $("#user-contribution-msg").removeClass("d-none");
-    $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-    $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
   } else {
     $(".thankyou-page-heading").addClass('d-none');
     $(".user-contribution-msg").removeClass("d-none");
     $("#spree_text").removeClass("d-none");
     $("#before_badge_content").removeClass("d-none");
-    $("#sentence_away_msg").removeClass("d-none");
     $("#user-contribution-msg").removeClass("d-none");
-    $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-    $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
   }
-  const $bronzeBadgeLink = $("#bronze_badge_link img");
-  const $silverBadgeLink = $("#silver_badge_link img");
-  const $goldBadgeLink = $("#gold_badge_link img");
-  const $platinumBadgeLink = $("#platinum_badge_link img");
+  const $bronzeBadgeLink = $("#bronze_badge_link_img");
+  const $bronzeBadge = $("#bronze_badge_link");
+  const $silverBadgeLink = $("#silver_badge_link_img");
+  const $silverBadge = $("#silver_badge_link");
+  const $goldBadgeLink = $("#gold_badge_link_img");
+  const $goldBadge = $("#gold_badge_link");
+  const $platinumBadgeLink = $("#platinum_badge_link_img");
+  const $platinumBadge = $("#platinum_badge_link");
   if (data.currentBadgeType.toLowerCase() == "bronze") {
-    $bronzeBadgeLink.parent().attr("disabled", false);
-    $('#bronze_badge_link_img').addClass('enable');
-    $('#bronze_badge_link_img').removeClass('disable');
+    $bronzeBadge.attr("disabled", false);
+    $(".downloadable_badges").append($bronzeBadge);
+
+    $silverBadgeLink.addClass('enable');
+    $silverBadgeLink.removeClass('disable');
+    $bronzeBadgeLink.addClass('enable');
+    $bronzeBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "silver") {
-    $bronzeBadgeLink.parent().attr("disabled", false);
-    $silverBadgeLink.parent().attr("disabled", false);
-    $('#bronze_badge_link_img').addClass('enable');
-    $('#bronze_badge_link_img').removeClass('disable');
-    $('#silver_badge_link_img').addClass('enable');
-    $('#silver_badge_link_img').removeClass('disable');
+    $bronzeBadge.attr("disabled", false);
+    $silverBadge.attr("disabled", false);
+    $(".downloadable_badges").append($bronzeBadge);
+    $(".downloadable_badges").append($silverBadge);
+
+    $bronzeBadgeLink.addClass('enable');
+    $bronzeBadgeLink.removeClass('disable');
+    $silverBadgeLink.addClass('enable');
+    $silverBadgeLink.removeClass('disable');
+    $goldBadgeLink.removeClass('disable');
+    $goldBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "gold") {
-    $bronzeBadgeLink.parent().attr("disabled", false);
-    $silverBadgeLink.parent().attr("disabled", false);
-    $goldBadgeLink.parent().attr("disabled", false);
-    $('#bronze_badge_link_img').addClass('enable');
-    $('#bronze_badge_link_img').removeClass('disable');
-    $('#silver_badge_link_img').addClass('enable');
-    $('#silver_badge_link_img').removeClass('disable');
-    $('#gold_badge_link_img').addClass('enable');
-    $('#gold_badge_link_img').removeClass('disable');
+    $bronzeBadge.attr("disabled", false);
+    $silverBadge.attr("disabled", false);
+    $goldBadge.attr("disabled", false);
+    $(".downloadable_badges").append($bronzeBadge);
+    $(".downloadable_badges").append($silverBadge);
+    $(".downloadable_badges").append($goldBadge);
+
+    $bronzeBadgeLink.addClass('enable');
+    $bronzeBadgeLink.removeClass('disable');
+    $silverBadgeLink.addClass('enable');
+    $silverBadgeLink.removeClass('disable');
+    $goldBadgeLink.addClass('enable');
+    $goldBadgeLink.removeClass('disable');
+    $platinumBadgeLink.removeClass('disable');
+    $platinumBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "platinum") {
-    $bronzeBadgeLink.parent().attr("disabled", false);
-    $silverBadgeLink.parent().attr("disabled", false);
-    $goldBadgeLink.parent().attr("disabled", false);
-    $platinumBadgeLink.parent().attr("disabled", false);
+    $bronzeBadge.attr("disabled", false);
+    $silverBadge.attr("disabled", false);
+    $goldBadge.attr("disabled", false);
+    $platinumBadge.attr("disabled", false);
+    $(".downloadable_badges").append($bronzeBadge);
+    $(".downloadable_badges").append($silverBadge);
+    $(".downloadable_badges").append($goldBadge);
+    $(".downloadable_badges").append($platinumBadge);
+
     $('#next-goal').addClass('d-none');
-    $("#champion_text").removeClass("d-none");
     $('#before_badge_content').removeClass('d-none');
-    $('#sentence_away_msg').addClass('d-none');
-    $('#bronze_badge_link_img').addClass('enable');
-    $('#bronze_badge_link_img').removeClass('disable');
-    $('#silver_badge_link_img').addClass('enable');
-    $('#silver_badge_link_img').removeClass('disable');
-    $('#gold_badge_link_img').addClass('enable');
-    $('#gold_badge_link_img').removeClass('disable');
-    $('#platinum_badge_link_img').addClass('enable');
-    $('#platinum_badge_link_img').removeClass('disable');
+    $bronzeBadgeLink.addClass('enable');
+    $bronzeBadgeLink.removeClass('disable');
+    $silverBadgeLink.addClass('enable');
+    $silverBadgeLink.removeClass('disable');
+    $goldBadgeLink.addClass('enable');
+    $goldBadgeLink.removeClass('disable');
+    $platinumBadgeLink.addClass('enable');
+    $platinumBadgeLink.removeClass('disable');
   }
 }
 
@@ -345,7 +363,5 @@ const setLocalisationAndProfile = (path, module) => {
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
   updateLocaleLanguagesDropdown(language);
 }
-
-
 
 module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered };
