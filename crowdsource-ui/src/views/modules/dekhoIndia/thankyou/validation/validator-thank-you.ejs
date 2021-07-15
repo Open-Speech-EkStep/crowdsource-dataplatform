@@ -31,7 +31,7 @@
         <div class="row position-absolute top-back-btn">
             <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
         </div>
-        <%- include ../common/thankyouPageHeading.ejs %>
+        <%- include('../common/thankyouPageHeading.ejs',{text:"language",text1:"validated", text2:"image label(s)"}) %>
     </div>
     <%- include('../common/thankyouPageProgressBar.ejs', {module: __('Dekho'), text:__('Image(s)')}) %>
 
@@ -50,7 +50,7 @@
                                 <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
                                     <div><span class="spinner"></span></div>
                                 </div>
-                                <%- include('../common/verticalGraphForThankyouPage.ejs') %>
+                                <%- include('../common/verticalGraphForThankyouPage.ejs',{text:"languages"}) %>
                             </div>
                         </div>
                     </div>

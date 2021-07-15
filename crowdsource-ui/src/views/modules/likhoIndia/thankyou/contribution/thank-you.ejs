@@ -30,7 +30,7 @@
     <div class="row position-absolute top-back-btn">
         <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
     </div>
-    <%- include ../common/thankyouPageHeading.ejs %>
+    <%- include('../common/thankyouPageHeading.ejs',{text:"language pair",text1:"contributed",text2:"sentence(s)"}) %>
 
     <%- include('../common/thankyouPageProgressBar.ejs', {module: __('Likho'),text:__('Sentence(s)')}) %>
     <div class="row mt-3 mt-lg-5 md-lg-4 lazy">
@@ -48,7 +48,7 @@
                                 <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
                                     <div><span class="spinner"></span></div>
                                 </div>
-                                <%- include('../common/verticalGraphForThankyouPage.ejs') %>
+                                <%- include('../common/verticalGraphForThankyouPage.ejs',{text:"language pairs"}) %>
                             </div>
                         </div>
                     </div>
