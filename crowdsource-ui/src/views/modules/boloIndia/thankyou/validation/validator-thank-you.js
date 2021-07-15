@@ -1,4 +1,4 @@
-const fetch = require('./fetch')
+const fetch = require('../common/fetch')
 const {
   SIXTY,
   HOUR_IN_SECONDS,
@@ -7,7 +7,7 @@ const {
   CURRENT_MODULE,
   MODULE,
   TOP_LANGUAGES_BY_HOURS
-} = require("./constants");
+} = require("../common/constants");
 
 const {
   setPageContentHeight,
@@ -15,40 +15,25 @@ const {
   updateLocaleLanguagesDropdown,
   getLocaleString,
   performAPIRequest,
-} = require("./utils");
-const {showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../../../build/js/common/common');
-const {onChangeUser,onOpenUserDropDown,showUserProfile} = require('./header');
+} = require("../common/utils");
+
+const {downloadPdf} = require('../common/downloadableBadges');
+
+const {showByHoursChart, showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../common/common');
+const {onChangeUser,onOpenUserDropDown,showUserProfile} = require('../common/header');
+
+const {initializeFeedbackModal} = require('../common/feedback');
 
 const CURRENT_INDEX = "boloValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 const boloValidatorCountKey = 'boloValidatorCount';
 const totalSentence = Number(localStorage.getItem(boloValidatorCountKey));
 
-function downloadPdf(badgeType) {
-  const pdf = new jsPDF()
-  const img = new Image();
-  img.onload = function () {
-    pdf.addImage(this, 50, 10, 108, 130);
-    pdf.save(`${badgeType}-badge.pdf`);
-  };
-
-  img.crossOrigin = "Anonymous";
-  const currentModule = localStorage.getItem(CURRENT_MODULE);
-  const badges = MODULE[currentModule].BADGES;
-
-  img.src = badges[badgeType].imgValJpg;
-  const allBadges = JSON.parse(localStorage.getItem('badges'));
-  const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
-  if (badge) {
-    pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 190);
-  }
-}
-
-$("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
-  if (!$(this).attr("disabled")) {
-    downloadPdf($(this).attr("data-badge"));
-  }
-});
+// $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
+//   if (!$(this).attr("disabled")) {
+//     downloadPdf($(this).attr("data-badge"));
+//   }
+// });
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -97,7 +82,7 @@ const getLanguageStats = function () {
         );
         const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.bolo.value);
         localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChartThankyouPage(MODULE.bolo.value);
+        showByHoursChart(MODULE.bolo.value, "thankyou");
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
@@ -172,20 +157,33 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName);
     onChangeUser('./validator-thank-you.html',MODULE.bolo.value)
     onOpenUserDropDown();
-    // toggleFooterPosition();
-    setPageContentHeight();
     setSentencesContributed();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (contributionLanguage) {
       updateLocaleLanguagesDropdown(contributionLanguage);
     }
+
+    const localStrings = JSON.parse(
+      localStorage.getItem(LOCALE_STRINGS)
+    );
+
+    const localeLanguageStr = localStrings[contributionLanguage];
+    $("#contributionLanguage5").html(localeLanguageStr);
+    $("#contributionLanguage1").html(localeLanguageStr);
+    $("#contributionLanguage2").html(localeLanguageStr);
+    $("#contributionLanguage3").html(localeLanguageStr);
+    $("#contributionLanguage4").html(localeLanguageStr);
+    $("#contributedLanguage").html(localeLanguageStr);
+    $("#conLanWhenGetBadge").html(localeLanguageStr)
+
     getLanguageStats();
   }
 }
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.bolo.value);
+  initializeFeedbackModal();
 
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
