@@ -31,93 +31,41 @@
         <div class="row position-absolute top-back-btn">
             <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
         </div>
-        <h1 class="display-5 font-wt-900 site-blue thankyou-page-heading">
-            <%= __('Contribute for your language!') %>
-        </h1>
-        <h1 class="display-5 font-wt-900 site-blue user-contribution-msg d-none">
-            You validated <span id="user-contribution" class="text-primary">2</span> sentences for your language!
-        </h1>
-        <h1 class="display-5 font-wt-900 site-blue new-badge-msg d-none">
-            <%= __('Congratulations on winning a new badge!')%>
-        </h1>
-
+        <%- include ../common/thankyouPageHeading.ejs %>
     </div>
 
-    <div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
-        <div class="col-10 col-sm-8 col-lg-8 p-0" style="max-width:800px">
-            <span class="progress-average-metric font-weight-light">
-                <span id="currentAverage">25%</span> of <span id="contributionLanguage5"></span>&nbsp<span id="thankyou-initiative">Suno India</span> Target Achieved
-            </span>
-            <span class="float-right progress-metric"><span class="" id="currentSentenceLbl">25</span>/<span class="" id="totalSentencesLbl">100</span> Hours</span>
-            <div class="progress mt-1">
-                <div class="progress-bar progress-bar-animated" id="progress_bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
-            </div>
-        </div>
-    </div>
+    <%- include('../common/thankyouPageProgressBar.ejs', {module: __('Suno')}) %>
 
     <div class="row mt-3 mt-lg-5 md-lg-4 lazy">
         <div class="col-lg-8 border text-center overflow-hidden contribution-info">
             <div class="bg-white m-0 p-4-5 contribution-info-inner">
-            <div class="col-lg-12 col-md-11 col-lg-11 thankyou-page ml-lg-auto">
-                <div class="row d-none" id="milestone_text">
-                    <div class="col-12 col-lg-5 col-md-5 mt-lg-5 justify-content-between">
-                        <div>
-                            <img src="<%= `/img/suno_bronze_badge.svg`%>" alt="Bronze Badge" id="reward-img" class="reward-img">
-                        </div>
-                        <button class="btn btn-outline-primary my-2" data-badge="" download id="download_pdf"><span class="mr-2"><%= __('Download')%></span>
-                            <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.12766 0C6.40968 0 6.6383 0.228621 6.6383 0.510638V6.49941L8.54196 4.59575L9.19149 5.24528L6.12766 8.30911L3.06383 5.24528L3.71336 4.59575L5.61702 6.49941V0.510638C5.61702 0.228621 5.84564 0 6.12766 0Z" fill="#007BFF"/>
-                                <path d="M1.02128 6.12766C1.02128 5.84564 0.792656 5.61702 0.510638 5.61702C0.228621 5.61702 0 5.84564 0 6.12766V9.95745C0 10.2395 0.228621 10.4681 0.510638 10.4681H11.4894C11.7714 10.4681 12 10.2395 12 9.95745V6.12766C12 5.84564 11.7714 5.61702 11.4894 5.61702C11.2073 5.61702 10.9787 5.84564 10.9787 6.12766V9.44681H1.02128V6.12766Z" fill="#007BFF"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="col-12 col-lg-7 col-md-7 msg-box mt-5">
-                        <h4 class="mb-3 mt-lg-5"><%- __('You’ve earned your Suno India <span id="current_badge_name"></span> Bhasha Samarthak Badge') %></h4>
-                        <p><span id="user-contribution" class="text-primary"></span> <%- __(`validated <span id="current_badge_count"></span> sentences in <span id="conLanWhenGetBadge"></span>.`) %></p>
-                    </div>
-                </div>
-                <div class="row m-0" id="cardWithoutBadge">
-                    <div class="col-lg-4 col-md-3 col-sm-6 pl-0 web-view">
-                        <h4 class="h4 my-3 font-weight-normal" id="languageNotInTopWeb">
-                            <%- __('Participate to see <span id="contributionLanguage4" class="contributionLanguageTag"></span> in top 3') %>
-                        </h4>
-                        <h4 class="h4 my-3 font-weight-normal d-none" id="languageInTopWeb">
-                            <%- __('Participate to keep <span id="contributionLanguage3" class="contributionLanguageTag"></span> in top 3') %>
-                        </h4>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 pl-0 mobile-view">
-                        <h4 class="h4 my-3 font-weight-normal text-center" id="languageNotInTopMob">
-                            <%- __('Participate to see <span id="contributionLanguage1" class="contributionLanguageTag"></span> in top 3') %>
-                        </h4>
-                        <h4 class="h4 my-3 font-weight-normal text-center d-none" id="languageInTopMob">
-                            <%- __('Participate to keep <span id="contributionLanguage2" class="contributionLanguageTag"></span> in top 3') %>
-                        </h4>
-                    </div>
-                    <div class="col-lg-8 col-md-9 col-sm-6 thankyou-bar-graph">
-                        <div id="bar_charts_container">
-                            <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
-                                <div><span class="spinner"></span></div>
+                <div class="col-lg-12 col-md-11 col-lg-11 thankyou-page ml-lg-auto">
+                    <%- include ../common/badgesMilestone.ejs %>
+                    <div class="row m-0" id="cardWithoutBadge">
+                        <%- include ../common/thankyouPageParticipationMsg.ejs %>
+                        <div class="col-lg-8 col-md-9 col-sm-6 thankyou-bar-graph">
+                            <div id="bar_charts_container">
+                                <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
+                                    <div><span class="spinner"></span></div>
+                                </div>
+                                <%- include('../common/verticalGraphForThankyouPage.ejs') %>
                             </div>
-                            <%- include('../common/verticalGraphForThankyouPage.ejs') %>
                         </div>
                     </div>
+                    <%- include ../common/sharableLink.ejs %>
                 </div>
-                <%- include ../common/sharableLink.ejs %>
-            </div>
             </div>
         </div>
     </div>
-    </div>
 
-<div class="row mt-3 mt-lg-2 md-lg-3 lazy">
-    <div class="col-lg-8 text-center overflow-hidden m-auto" id="chartRowWithoutCard">
 
-    </div>
+<%- include ../common/thankyouPageBottomGraph.ejs %>
+
+<%- include('../common/feedback.ejs', {page: "Validation Thank You Page"}) %>
+<div class="row justify-content-center mt-5">
+    <%- include('../common/languageGoal.ejs', {ButtonText:__('Validate More'),url:"./validator-page.html",TEXT:"Validate",TEXT2:"sentences"}) %>
 </div>
-    <%- include('../common/feedback.ejs', {page: "Validation Thank You Page"}) %>
-    <div class="row justify-content-center mt-5">
-        <%- include('../common/languageGoal.ejs', {ButtonText:__('Validate More'),url:"./validator-page.html",TEXT:"language",TEXT2:"hrs"})%>
-    </div>
+</div>
 <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
