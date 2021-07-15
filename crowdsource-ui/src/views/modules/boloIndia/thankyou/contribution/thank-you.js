@@ -3,29 +3,48 @@ const {
   SIXTY,
   HOUR_IN_SECONDS,
   LOCALE_STRINGS,
-  CONTRIBUTION_LANGUAGE,
-  TOP_LANGUAGES_BY_HOURS,
   CURRENT_MODULE,
-  MODULE
+  CONTRIBUTION_LANGUAGE,
+  MODULE,
+  TOP_LANGUAGES_BY_HOURS
 } = require("../common/constants");
-const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 const {
-  setPageContentHeight,
-  toggleFooterPosition,
   updateLocaleLanguagesDropdown,
   getLocaleString,
   performAPIRequest,
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
 const {initializeFeedbackModal} = require('../common/feedback')
-const {constructChart} = require('../common/horizontalBarGraph');
-const {getContributedAndTopLanguage,setBadge,showByHoursChart,showByHoursChartThankyouPage} = require('../common/common');
 
-const sunoCountKey = 'sunoCount';
-const CURRENT_INDEX = "sunoCurrentIndex";
+const {getContributedAndTopLanguage,setBadge,showByHoursChart} = require('../common/common');
+const {onChangeUser,showUserProfile,onOpenUserDropDown} = require('../common/header');
+
+const CURRENT_INDEX = "currentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
-const totalSentence = Number(localStorage.getItem(sunoCountKey));
+const totalSentence = Number(localStorage.getItem('count'));
 
+function setSentencesContributed() {
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const speakerDetails = localStorage.getItem("speakerDetails");
+  let userName = "";
+  if (speakerDetails) {
+    userName = JSON.parse(speakerDetails).userName;
+  }
+
+  let rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
+  if (!rawLocaleString) {
+    getLocaleString().then(() => {
+      rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
+    })
+  }
+
+  const localeStrings = JSON.parse(rawLocaleString);
+  performAPIRequest(
+    `/rewards?type=text&language=${contributionLanguage}&source=contribute&userName=${userName}`
+  ).then((data) => {
+    setBadge(data,localeStrings);
+  });
+}
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -65,18 +84,29 @@ const updateShareContent = function (language, rank) {
 };
 
 const getLanguageStats = function () {
-  fetch("/stats/summary/asr")
+  fetch("/stats/summary/text?aggregateDataByLanguage=true")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
-        const contributionLanguage = localStorage.getItem(
-          CONTRIBUTION_LANGUAGE
-        );
-        const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.suno.value);
-        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChart(MODULE.suno.value,'thankyou');
+        const languages = getContributedAndTopLanguage(response.aggregate_data_by_language, MODULE.bolo.value);
+        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages.reverse()));
+        showByHoursChart(MODULE.bolo.value, "thankyou");
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
+        );
+        const {hours, minutes, seconds} = getFormattedTime(
+          Number(data[0].total_contributions) * 3600
+        );
+        const $highestLangTime = $("#highest_language_time");
+        $highestLangTime.text(`${hours}hrs ${minutes}min ${seconds}sec`);
+
+        const $highestLanguageProgress = $("#highest_language_progress");
+        const hlh = Number(data[0].total_contributions) * 3600;
+        const hlp = (hlh / (100 * 3600)) * 100;
+        $highestLanguageProgress.css("width", `${hlp}%`);
+
+        const contributionLanguage = localStorage.getItem(
+          CONTRIBUTION_LANGUAGE
         );
         const rank = data.findIndex(
           (x) => x.language.toLowerCase() === contributionLanguage.toLowerCase()
@@ -112,29 +142,6 @@ const getLanguageStats = function () {
     });
 };
 
-function setSentencesContributed() {
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const speakerDetails = localStorage.getItem("speakerDetails");
-  let userName = "";
-  if (speakerDetails) {
-    userName = JSON.parse(speakerDetails).userName;
-  }
-
-  let rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
-  if (!rawLocaleString) {
-    getLocaleString().then(() => {
-      rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
-    })
-  }
-
-  const localeStrings = JSON.parse(rawLocaleString);
-  performAPIRequest(
-    `/rewards?type=asr&language=${contributionLanguage}&source=contribute&userName=${userName}`
-  ).then((data) => {
-    setBadge(data,localeStrings);
-  });
-}
-
 function executeOnLoad() {
   const currentIndexInStorage = Number(localStorage.getItem(CURRENT_INDEX));
   const localSpeakerDataParsed = JSON.parse(
@@ -143,41 +150,38 @@ function executeOnLoad() {
 
   if (!localSpeakerDataParsed) {
     location.href = "./home.html";
-  } else if (currentIndexInStorage < totalSentence - 1) {
+  } else if (currentIndexInStorage < totalSentence -1) {
     location.href = "./home.html";
   } else {
-    showUserProfile(localSpeakerDataParsed.userName)
-    onChangeUser('./thank-you.html', MODULE.suno.value);
+    showUserProfile(localSpeakerDataParsed.userName);
+    onChangeUser('./thank-you.html', MODULE.bolo.value);
     onOpenUserDropDown();
-
-    // setPageContentHeight();
     setSentencesContributed();
-    // toggleFooterPosition();
-
-    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    if (contributionLanguage) {
-      updateLocaleLanguagesDropdown(contributionLanguage);
-    }
-
-    const localStrings = JSON.parse(
-      localStorage.getItem(LOCALE_STRINGS)
-    );
-
-    const localeLanguageStr = localStrings[contributionLanguage];
-    $("#contributionLanguage5").html(localeLanguageStr);
-    $("#contributionLanguage1").html(localeLanguageStr);
-    $("#contributionLanguage2").html(localeLanguageStr);
-    $("#contributionLanguage3").html(localeLanguageStr);
-    $("#contributionLanguage4").html(localeLanguageStr);
-    $("#contributedLanguage").html(localeLanguageStr);
-    $("#conLanWhenGetBadge").html(localeLanguageStr)
-
-    getLanguageStats();
   }
+
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  if (contributionLanguage) {
+    updateLocaleLanguagesDropdown(contributionLanguage);
+  }
+  const localStrings = JSON.parse(
+    localStorage.getItem(LOCALE_STRINGS)
+  );
+
+  const localeLanguageStr = localStrings[contributionLanguage];
+  $("#contributionLanguage5").html(localeLanguageStr);
+  $("#contributionLanguage1").html(localeLanguageStr);
+  $("#contributionLanguage2").html(localeLanguageStr);
+  $("#contributionLanguage3").html(localeLanguageStr);
+  $("#contributionLanguage4").html(localeLanguageStr);
+  $("#contributedLanguage").html(localeLanguageStr);
+  $("#conLanWhenGetBadge").html(localeLanguageStr)
+
+  getLanguageStats();
 }
 
+
 $(document).ready(function () {
-  localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
+  localStorage.setItem(CURRENT_MODULE,'bolo');
   initializeFeedbackModal();
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
