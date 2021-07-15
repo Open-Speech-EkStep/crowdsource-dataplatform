@@ -152,14 +152,16 @@ def read_manually_generated_excel_file(excel_file):
 # In[12]:
 
 
-def clean_old_translations(modified_content_keys, languages, base_path, output_path):
+def clean_old_translations(modified_content_keys, added_content_keys, languages, base_path, output_path):
     
     for language_code in languages.keys():
         input_json_path = os.path.join(base_path,'{language_code}.json'.format(language_code=language_code))
         language_data = read_json(input_json_path)
+        output_json_path = os.path.join(output_path,'{language_code}.json'.format(language_code=language_code))
         for key in modified_content_keys:
             language_data[key] = key
-        output_json_path = os.path.join(output_path,'{language_code}.json'.format(language_code=language_code))
+        for key in added_content_keys:
+            language_data[key] = key
         with open(output_json_path, 'w') as f:
             f.write(json.dumps(language_data, indent = 4, ensure_ascii=False))
     
@@ -177,7 +179,7 @@ def get_modified_content(excel_df, json_df):
     changed_content = {}
     for i,row in excel_df.iterrows():
         key = row[key_column]
-        if key in reformatted_json and (row[english_col] != reformatted_json[key]):
+        if key in reformatted_json and (row[english_col].lower() != reformatted_json[key].lower()):
             changed_content[key] = {'old': reformatted_json[key],'new': row[english_col]}
     return changed_content
 
@@ -185,11 +187,15 @@ def get_modified_content(excel_df, json_df):
 # In[14]:
 
 
-def get_removed_keys(excel_df, json_df):
+def get_keys_by_action(excel_df, json_df, action):
     s = set(json_df[key_column])
     f = set(excel_df[key_column])
-
-    difference = list(s - f)
+    if action == 'removal':
+        difference = list(s - f)
+    elif action == 'addition':
+        difference = list(f - s)
+    else:
+        raise ValueError("Invalid action taken as input")
     return difference
 
 
@@ -209,13 +215,16 @@ def export_report(report_json, report_type):
 
 def generate_report(json_df, excel_df, modified_content_keys):
     report = {}
-    removed_keys = get_removed_keys(excel_df, json_df)
+    removed_keys = get_keys_by_action(excel_df, json_df, 'removal')
+    newly_added_keys = get_keys_by_action(excel_df, json_df, 'addition')
     report['total_keys_in_json'] = int(json_df[key_column].count())
     report['total_keys_received_in_excel'] = int(excel_df[key_column].count())
+    report['total_content_newly_added'] = len(newly_added_keys)
     report['total_content_updated'] = len(modified_content_keys)
     report['total_content_removed'] = len(removed_keys)
     report['removed_keys'] = removed_keys
     report['updated_content'] = modified_content_keys
+    report['newly_added_content'] = newly_added_keys
     export_report(report, 'json')
 
 
@@ -287,7 +296,8 @@ os.makedirs(output_json_path, exist_ok=True)
 excel_df, json_df = generate(input_excel_path, input_json_path, output_json_path, input_category)
 
 modified_content = get_modified_content(excel_df, json_df)
-clean_old_translations(list(modified_content.keys()), languages, input_base_path, output_json_path)
+added_content_keys = get_keys_by_action(excel_df, json_df, 'addition')
+clean_old_translations(list(modified_content.keys()),added_content_keys, languages, input_base_path, output_json_path)
 os.system('python ./../clean_unused_keys/CleanLocaleJsons.py -i ./out -o ./out -a')
 generate_report(json_df, excel_df, modified_content)
 
