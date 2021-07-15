@@ -43,6 +43,10 @@ const {
     getValidationHoursForAsr
 } = require('./../src/dbQuery');
 
+const {
+    languageGoalQuery
+} = require('./../src/dashboardDbQueries');
+
 const mockDB = {
     many: jest.fn(() => Promise.resolve()),
     one: jest.fn(() => Promise.resolve()),
@@ -891,5 +895,134 @@ describe("Running tests for dbOperations", () => {
 
             expect(result.length).toBe(1)
         });
-    })
+    });
+
+    describe('getContributionProgress', () => {
+        const textType = 'text';
+        const asrType = 'asr';
+        const ocrType = 'ocr';
+        const parallelType = 'parallel';
+        const hindiLanguage = 'Hindi';
+        const targetLanguage = 'English';
+        const contributeSource = 'contribute';
+        const validateSource = 'validate';
+        
+        test('should call queries with type, language and category filters', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage}) and category=${contributeSource}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage, contributeSource);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with type, language and null category filters', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage})`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage, null);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with type, language and undefined category filters', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage})`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with type, language and blank category filters', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage})`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage, '');
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with type, and null language filters', async () => {
+            const filter = `1=1 and type=${textType}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, null);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with type, and blank language filters', async () => {
+            const filter = `1=1 and type=${textType}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, '');
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with type, and undefined language filters', async () => {
+            const filter = `1=1 and type=${textType}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with null type filters', async () => {
+            const filter = `1=1`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(null);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with blank type filters', async () => {
+            const filter = `1=1`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress('');
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with undefined type filters', async () => {
+            const filter = `1=1`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress();
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should return 0 if no records from db', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage}) and category=${contributeSource}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue(null);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage, contributeSource);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(0);
+        });
+        test('should return 0 if no records from db 2', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage}) and category=${contributeSource}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage, contributeSource);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(0);
+        });
+        test('should return 0 if column is removed from db', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage}) and category=${contributeSource}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ somethingElse: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage, contributeSource);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(0);
+        });
+    });
 });

@@ -730,25 +730,35 @@ const addRemainingGenders = (genderGroupData, allGenders) => {
     return genderGroupData;
 }
 
-const getContributionProgress = async (type, language, source) => {
+const getGoalForContributionProgress = async(type, language, source) => {
     let goalFilter = `1=1`;
-    let progressFilter = `1=1`;
-    if (type.length !== 0) {
+    if (type && type.length !== 0) {
         goalFilter += ` and type = '${type}'`
-        progressFilter += ` and type = '${type}'`
     }
-    if (language.length !== 0) {
+    if (language && language.length !== 0) {
         goalFilter += ` and LOWER(language) = LOWER('${language}')`;
-        progressFilter +=` and LOWER(language) = LOWER('${language}')`;
     }
-    if (source.length !== 0) {
+    if (source && source.length !== 0) {
         goalFilter += ` and category = '${source}'`
     }
     
     let filter = pgp.as.format('$1:raw', [goalFilter]);
     const goalResult = await db.any(languageGoalQuery, filter);
-    let goal = goalResult[0].goal;
+    
+    return goalResult && goalResult[0] && goalResult[0].goal ? goalResult[0].goal : 0;
+}
 
+const getContributionProgress = async (type, language, source) => {
+    let progressFilter = `1=1`;
+    if (type.length !== 0) {
+        progressFilter += ` and type = '${type}'`
+    }
+    if (language.length !== 0) {
+        progressFilter +=` and LOWER(language) = LOWER('${language}')`;
+    }
+    
+    let goal = await getGoalForContributionProgress(type, language, source);
+    
     let filter2 = pgp.as.format('$1:raw', [progressFilter]);
     console.log(currentProgressQuery);
     console.log(filter2)
@@ -823,5 +833,6 @@ module.exports = {
     releaseMedia,
     getUserRewards,
     addRemainingGenders,
-    getContributionProgress
+    getContributionProgress,
+    getGoalForContributionProgress
 };
