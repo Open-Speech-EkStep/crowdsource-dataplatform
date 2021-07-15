@@ -74,7 +74,7 @@ const getLanguageStats = function () {
         const module = localStorage.getItem(CURRENT_MODULE);
         const languages = getContributedAndTopLanguage(module == MODULE.likho.value || module == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, MODULE.dekho.value);
         localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChartThankyouPage(MODULE.dekho.value);
+        showByHoursChart(MODULE.dekho.value, "thankyou");
 
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
@@ -159,6 +159,20 @@ function executeOnLoad() {
     if (contributionLanguage) {
       updateLocaleLanguagesDropdown(contributionLanguage);
     }
+
+    const localStrings = JSON.parse(
+      localStorage.getItem(LOCALE_STRINGS)
+    );
+
+    const localeLanguageStr = localStrings[contributionLanguage];
+    $("#contributionLanguage5").html(localeLanguageStr);
+    $("#contributionLanguage1").html(localeLanguageStr);
+    $("#contributionLanguage2").html(localeLanguageStr);
+    $("#contributionLanguage3").html(localeLanguageStr);
+    $("#contributionLanguage4").html(localeLanguageStr);
+    $("#contributedLanguage").html(localeLanguageStr);
+    $("#conLanWhenGetBadge").html(localeLanguageStr)
+
     getLanguageStats();
   }
 }

@@ -1,7 +1,7 @@
 const { calculateTime, formatTime } = require('./utils');
 const chartReg = {};
 
-const drawTopLanguageChart = (chartData, type, dataType) => {
+const drawTopLanguageChart = (chartData, type, dataType, page) => {
   const chartColors = ['#F7CC56', '#F7CC56', '#F7CC56', '#EF8537'];
   am4core.ready(function () {
     const chart = am4core.create('top-language-chart', am4charts.XYChart);
@@ -36,16 +36,21 @@ const drawTopLanguageChart = (chartData, type, dataType) => {
     valueAxis.renderer.labels.template.fill = '#000';
     valueAxis.renderer.grid.template.strokeDasharray = "3,3";
     valueAxis.renderer.labels.template.fontSize = 12;
-    if (dataType != "speaker") {
-      valueAxis.title.text = type == "suno" || type == "bolo" ? "Contribution (in hours)" : type == "dekho" ? "Contribution (no. of images)" : 'Contribution (no. of translations)';
+    if(page === 'thankyou'){
+      valueAxis.title.text = type == "suno" || type == "likho" ? 'Contributions (in sentences)' : type == "dekho" ? 'Contributions (in image labels)' : 'Contributions (in recordings)';
     } else {
-      valueAxis.title.text = type == "bolo" ? "Contribution (no. of speakers)" : "";
+      if (dataType != "speaker") {
+        valueAxis.title.text = type == "suno" || type == "bolo" ? "Contribution (in hours)" : type == "dekho" ? "Contribution (no. of images)" : 'Contribution (no. of translations)';
+      } else {
+        valueAxis.title.text = type == "bolo" ? "Contribution (no. of speakers)" : "";
+      }
     }
 
     valueAxis.title.fontSize = 12;
     valueAxis.renderer.grid.template.strokeWidth = 0;
     // Create series
     const series = chart.series.push(new am4charts.ColumnSeries());
+
     if (dataType != "speaker") {
     series.dataFields.valueY = type == "suno" || type == "bolo" ? 'total_contributions' : 'contributedHours';
     } else {
