@@ -1,13 +1,137 @@
 const {readFileSync} = require('fs');
+jest.mock('node-fetch');
 const fetchMock = require("fetch-mock");
 const {stringToHTML, mockLocalStorage} = require('../utils');
-const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY} = require('../../build/js/common/constants');
-const {showFucntionalCards, hasUserRegistered} = require('../../build/js/common/common.js');
+const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY, CURRENT_MODULE,TOP_LANGUAGES_BY_HOURS} = require('../../build/js/common/constants');
+const {showFucntionalCards, hasUserRegistered, setBadge,updateProgressBar} = require('../../build/js/common/common.js');
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../../build/views/common/cards.ejs`, 'UTF-8')+
-  readFileSync(`${__dirname}/../../build/views/common/languageNavBar.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../../build/views/common/languageNavBar.ejs`, 'UTF-8')+
+  readFileSync(`${__dirname}/../../build/views/common/thankyouPageParticipationMsg.ejs`, 'UTF-8')+
+  readFileSync(`${__dirname}/../../build/views/common/thankyouPageHeading.ejs`, 'UTF-8')+
+  readFileSync(`${__dirname}/../../build/views/common/thankyouPageProgressBar.ejs`, 'UTF-8')
 );
+
+describe("setBadge", ()=>{
+  test("should show card without badge when user skip all sentences for contribution flow when language is in top", ()=>{
+    mockLocalStorage();
+    localStorage.setItem(CURRENT_MODULE, 'bolo');
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, 'hindi');
+    localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    const data = {isNewBadge : false, contributionCount : 0,nextBadgeType: "Bronze", currentBadgeType:""};
+    const localeStrings = {Bronze:"Bronze"};
+    setBadge(data, localeStrings, 'contribute');
+
+    expect($("#languageInTopWeb").hasClass("d-none")).toEqual(false);
+    expect($("#languageInTopMob").hasClass("d-none")).toEqual(false);
+    expect($("#languageNotInTopMob").hasClass("d-none")).toEqual(true);
+    expect($("#languageNotInTopWeb").hasClass("d-none")).toEqual(true);
+    expect($(".new-badge-msg").hasClass("d-none")).toEqual(true);
+    expect($(".thankyou-page-heading").hasClass("d-none")).toEqual(false);
+    expect($(".user-contribution-msg").hasClass("d-none")).toEqual(true);
+    localStorage.clear();
+
+  })
+
+  test("should show card without badge when user skip all sentences for contribution flow when language is not in top", ()=>{
+    mockLocalStorage();
+    localStorage.setItem(CURRENT_MODULE, 'suno');
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
+    localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    const data = {isNewBadge : false, contributionCount : 0,nextBadgeType: "Bronze", currentBadgeType:""};
+    const localeStrings = {Bronze:"Bronze"};
+    setBadge(data, localeStrings, 'contribute');
+
+    expect($("#languageInTopWeb").hasClass("d-none")).toEqual(true);
+    expect($("#languageInTopMob").hasClass("d-none")).toEqual(true);
+    expect($("#languageNotInTopMob").hasClass("d-none")).toEqual(false);
+    expect($("#languageNotInTopWeb").hasClass("d-none")).toEqual(false);
+    expect($(".new-badge-msg").hasClass("d-none")).toEqual(true);
+    expect($(".thankyou-page-heading").hasClass("d-none")).toEqual(false);
+    expect($(".user-contribution-msg").hasClass("d-none")).toEqual(true);
+    localStorage.clear();
+
+  })
+
+  test("should show card without badge when user contribute very few sentences when language is not in top", ()=>{
+    mockLocalStorage();
+    localStorage.setItem(CURRENT_MODULE, 'suno');
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
+    localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    const data = {isNewBadge : false, contributionCount : 2,nextBadgeType: "Bronze", currentBadgeType:""};
+    const localeStrings = {Bronze:"Bronze"};
+    setBadge(data, localeStrings, 'contribute');
+
+    expect($("#languageInTopWeb").hasClass("d-none")).toEqual(true);
+    expect($("#languageInTopMob").hasClass("d-none")).toEqual(true);
+    expect($("#languageNotInTopMob").hasClass("d-none")).toEqual(false);
+    expect($("#languageNotInTopWeb").hasClass("d-none")).toEqual(false);
+    expect($(".new-badge-msg").hasClass("d-none")).toEqual(true);
+    expect($(".thankyou-page-heading").hasClass("d-none")).toEqual(true);
+    expect($(".user-contribution-msg").hasClass("d-none")).toEqual(false);
+    localStorage.clear();
+  })
+
+  test("should show card with badge when user achieved a badge for the language that is not in top", ()=>{
+    mockLocalStorage();
+    localStorage.setItem(CURRENT_MODULE, 'suno');
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
+    localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    const data = {isNewBadge : true, contributionCount : 5,nextBadgeType: "Silver", currentBadgeType:"Bronze"};
+    const localeStrings = {Bronze:"Bronze"};
+    setBadge(data, localeStrings, 'contribute');
+
+    expect($("#languageInTopWeb").hasClass("d-none")).toEqual(true);
+    expect($("#languageInTopMob").hasClass("d-none")).toEqual(true);
+    expect($("#languageNotInTopMob").hasClass("d-none")).toEqual(false);
+    expect($("#languageNotInTopWeb").hasClass("d-none")).toEqual(false);
+    expect($(".new-badge-msg").hasClass("d-none")).toEqual(false);
+    expect($(".thankyou-page-heading").hasClass("d-none")).toEqual(true);
+    expect($(".user-contribution-msg").hasClass("d-none")).toEqual(true);
+    localStorage.clear();
+  })
+
+  test("should show card with badge after user achieved a badge for the language that is not in top", ()=>{
+    mockLocalStorage();
+    localStorage.setItem(CURRENT_MODULE, 'suno');
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
+    localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    const data = {isNewBadge : false, contributionCount : 7,nextBadgeType: "Silver", currentBadgeType:"Bronze"};
+    const localeStrings = {Bronze:"Bronze"};
+    setBadge(data, localeStrings, 'contribute');
+
+    expect($("#languageInTopWeb").hasClass("d-none")).toEqual(true);
+    expect($("#languageInTopMob").hasClass("d-none")).toEqual(true);
+    expect($("#languageNotInTopMob").hasClass("d-none")).toEqual(false);
+    expect($("#languageNotInTopWeb").hasClass("d-none")).toEqual(false);
+    expect($(".new-badge-msg").hasClass("d-none")).toEqual(true);
+    expect($(".thankyou-page-heading").hasClass("d-none")).toEqual(true);
+    expect($(".user-contribution-msg").hasClass("d-none")).toEqual(false);
+    localStorage.clear();
+  })
+
+})
+
+describe("updateProgressBar", ()=>{
+  test("should set average language metric and goals in progress bar", ()=>{
+    const origFetch = require('node-fetch');
+    origFetch.mockImplementation(cb => {
+      const res = {};
+      res.ok = true;
+      res.json = ()=> ({goal:100,'current-progress':50 });
+      return Promise.resolve(res);
+    });
+
+    updateProgressBar('/parallel').then(()=>{
+      expect($("#totalSentencesLbl").html()).toEqual("100");
+      expect($("#currentSentenceLbl").html()).toEqual("50");
+      expect($("#currentAverage").html()).toEqual("50%");
+      const $progressBar = $("#progress_bar");
+      expect($progressBar.css("width")).toEqual("50%")
+    })
+  })
+})
 
 // const showFucntionalCards = (type, from, to) => {
 //   try {

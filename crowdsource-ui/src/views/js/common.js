@@ -369,7 +369,7 @@ const setLocalisationAndProfile = (path, module) => {
 }
 
 const updateProgressBar = function (url){
-  performAPIRequest(url).then(data=>{
+  return performAPIRequest(url).then(data=>{
     const maxValue = data.goal;
     const currentValue = data['current-progress']
     $("#totalSentencesLbl").html(maxValue);
