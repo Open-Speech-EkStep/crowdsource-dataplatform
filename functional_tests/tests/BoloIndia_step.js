@@ -213,7 +213,7 @@ step("When user skips all the rest of the <count> sentences , User should see Th
         console.log(i)
     }
     await taiko.waitFor(3000)
-    assert.ok(await text('Thank you for contributing!').exists())
+    assert.ok(await text('Contribute for your language!').exists()) 
 });
 
 
@@ -367,7 +367,7 @@ step("User skips the next <count> sentences user should land on Thank you page i
 
     if (lang == "English") {
         await taiko.waitFor(3000);
-        assert.ok(await text('Thank you for validating').exists());
+        assert.ok(await text('You validated').isVisible());
     }
 });
 
@@ -502,8 +502,10 @@ step("When user submits , Thank you pop up should come & close button should clo
 });
 
 step("Validate Thank you page content for Bolo India", async function () {
-    assert.ok(await text('Thank you for contributing!').exists())
-    assert.ok(await text('100 hrs').exists())
+    assert.ok(await text('Bolo India Target Achieved').isVisible())
+    assert.ok(await text('Contribution (in hours)').isVisible())
+    assert.ok(await text('Contribute 5 sentence(s) to earn your bronze Badge.').isVisible())
+    assert.ok(await text('Hour(s)').isVisible())
 });
 
 step("Validate terms and condition content", async function () {

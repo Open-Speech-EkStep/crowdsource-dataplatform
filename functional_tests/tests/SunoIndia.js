@@ -154,7 +154,7 @@ step("When user skips the rest of the <count> sentences , User should see Thank 
         await taiko.waitFor(1200)
     }
     await taiko.waitFor(5000)
-    assert.ok(await text('Thank you for contributing!').exists())
+    assert.ok(await text('You contributed').exists())
 });
 
 step("When user click on Lets Go Button", async function () {
@@ -227,8 +227,9 @@ step("User clicks on Play button, and then on pause button, then clicks on <need
 });
 
 step("Validate Thank you page content for Suno India", async function () {
-    assert.ok(await text('Thank you for contributing!').exists())
-    assert.ok(await text('100 hrs').exists())
+    assert.ok(await text('Suno India Target Achieved').isVisible())
+    assert.ok(await text('Contribution (in hours)').isVisible())
+    assert.ok(await text('Hour(s)').isVisible())
 });
 
 step("When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should visible", async function () {
