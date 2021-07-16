@@ -37,7 +37,7 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
     valueAxis.renderer.grid.template.strokeDasharray = "3,3";
     valueAxis.renderer.labels.template.fontSize = 12;
     if(page === 'thankyou'){
-      valueAxis.title.text = type == "suno" || type == "likho" ? 'Contributions (in sentences)' : type == "dekho" ? 'Contributions (in image labels)' : 'Contributions (in recordings)';
+      valueAxis.title.text = type == "suno" || type == "bolo" ? 'Contribution (in hours)' : type == "dekho" ? 'Contributions (in images)' : 'Contribution (in sentences)';
     } else {
       if (dataType != "speaker") {
         valueAxis.title.text = type == "suno" || type == "bolo" ? "Contribution (in hours)" : type == "dekho" ? "Contribution (no. of images)" : 'Contribution (no. of translations)';
@@ -47,6 +47,8 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
     }
 
     valueAxis.title.fontSize = 12;
+    valueAxis.title.opacity = 0.6;
+    valueAxis.title.color = '#142745';
     valueAxis.renderer.grid.template.strokeWidth = 0;
     // Create series
     const series = chart.series.push(new am4charts.ColumnSeries());

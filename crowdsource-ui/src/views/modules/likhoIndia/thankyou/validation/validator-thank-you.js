@@ -20,7 +20,7 @@ const {
 
 const {downloadPdf} = require('../common/downloadableBadges');
 const { showUserProfile,onChangeUser,onOpenUserDropDown } = require('../common/header');
-const {showByHoursChart, showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge,  updateLikhoLocaleLanguagesDropdown,updateProgressBar} = require('../common/common');
+const {showByHoursChart, showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge,  updateLikhoLocaleLanguagesDropdown,updateGoalProgressBar} = require('../common/common');
 const {initializeFeedbackModal} = require('../common/feedback');
 
 const CURRENT_INDEX = "likhoValidatorCurrentIndex";
@@ -176,7 +176,7 @@ function executeOnLoad() {
     $("#conLanWhenGetBadge").html(`${localeLanguageStr}-${localeToLanguageStr}`)
 
     getLanguageStats();
-    updateProgressBar(`/progress/parallel/${contributionLanguage}/validate`)
+    updateGoalProgressBar(`/progress/parallel/${contributionLanguage}/validate`)
   }
 }
 

@@ -19,7 +19,7 @@ const {
 } = require("../common/utils");
 
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showByHoursChart,showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge,updateProgressBar} = require('../common/common');
+const {showByHoursChart,showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge,updateGoalProgressBar} = require('../common/common');
 
 const CURRENT_INDEX = "sunoValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -169,7 +169,7 @@ function executeOnLoad() {
     $("#contributedLanguage").html(localeLanguageStr);
     $("#conLanWhenGetBadge").html(localeLanguageStr)
     getLanguageStats();
-    updateProgressBar(`/progress/asr/${contributionLanguage}/validate`)
+    updateGoalProgressBar(`/progress/asr/${contributionLanguage}/validate`)
   }
 }
 

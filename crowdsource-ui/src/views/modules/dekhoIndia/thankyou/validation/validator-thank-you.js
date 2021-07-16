@@ -16,7 +16,7 @@ const {
   performAPIRequest,
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateProgressBar} = require('../common/common');
+const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateGoalProgressBar} = require('../common/common');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { initializeFeedbackModal } = require('../common/feedback');
 const CURRENT_INDEX = "dekhoValidatorCurrentIndex";
@@ -169,7 +169,7 @@ function executeOnLoad() {
     $("#conLanWhenGetBadge").html(localeLanguageStr)
 
     getLanguageStats();
-    updateProgressBar(`/progress/ocr/${contributionLanguage}/validate`)
+    updateGoalProgressBar(`/progress/ocr/${contributionLanguage}/validate`)
   }
 }
 

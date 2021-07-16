@@ -27,6 +27,19 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
     max-width: 800px;
 }
 
+.share-on{
+    font-size: 14px;
+    line-height: 17px;
+    color: #666666;
+    margin-right: 3px;
+}
+
+.x-axis-label{
+    font-size: 12px;
+    color: #142745;
+    opacity: 0.6;
+}
+
 #language-goal{
     background: #FFFFFF;
     box-shadow: 0px 0px 16px 4px rgba(0, 123, 255, 0.13);

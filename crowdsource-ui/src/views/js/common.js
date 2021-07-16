@@ -189,6 +189,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#current_badge_count").text(data.currentMilestone);
     $("#next_badge_count").text(data.nextMilestone);
     $("#next_badge_name_1").text(localeStrings[data.nextBadgeType.toLowerCase()]);
+    $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
     $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
     if(module == 'bolo'){
       if(functionalFlow === 'validator'){
@@ -368,7 +369,7 @@ const setLocalisationAndProfile = (path, module) => {
   updateLocaleLanguagesDropdown(language);
 }
 
-const updateProgressBar = function (url){
+const updateGoalProgressBar = function (url){
   return performAPIRequest(url).then(data=>{
     const maxValue = data.goal;
     const currentValue = data['current-progress']
@@ -381,4 +382,10 @@ const updateProgressBar = function (url){
   })
 }
 
-module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateProgressBar };
+const replaceSubStr = function (element , to ,from){
+  const originalText = element.text();
+  const newText = originalText.replace(to, from);
+  element.html(newText);
+}
+
+module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateProgressBar: updateGoalProgressBar,replaceSubStr };
