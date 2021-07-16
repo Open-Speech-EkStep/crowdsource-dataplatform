@@ -1,8 +1,8 @@
-<div class="col-lg-10 col-md-10 col-10 p-lg-3 p-md-3 p-4" id="language-goal">
+<div class="col-lg-10 col-md-12 col-10 p-lg-3 p-md-3 p-4 d-flex flex-column flex-lg-row flex-md-row align-items-center" id="language-goal">
     <span class="downloadable_badges">
     </span>
-    <span class="col-3" id="sentence_away_msg"><%= TEXT%> <span id="sentense_away_count">3</span> <%= TEXT2%> to earn your <span id="next_badge_name">Ist</span> Badge. </span>
-    <span class="badges_information col-4">
+    <span class="" id="sentence_away_msg"><%= TEXT%> <span id="sentense_away_count">3</span> <%= TEXT2%> to earn your <span id="next_badge_name">Ist</span> Badge. </span>
+    <span class="badges_information mt-2 mt-lg-0 mt-md-0">
         <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="bronze" href="#" id="<%= `bronze_badge_link` %>">
             <img title="<%= `Download bronze badge`%>" src="<%= `/img/${MODULE}_bronze_medal${PAGE}.svg`%>" alt="" width="36px" id="<%= `bronze_badge_link_img`%>">
         </button>
@@ -16,8 +16,8 @@
             <img title="<%= `Download platinum badge`%>" src="<%= `/img/${MODULE}_platinum_medal${PAGE}.svg`%>" alt="" width="36px" class="disable" id="<%= `platinum_badge_link_img`%>">
         </button>
     </span>
-    <a href="../badges.html" class="col-2"><%= __('Know More') %></a>
-    <a href="<%= url %> " class="btn btn-custom-primary rounded-pill btn-lg h6 float-right my-0">
+    <a href="../badges.html" class="thankyou-Know-More mt-2 mt-lg-0 mt-md-0"><%= __('Know More') %> > </a>
+    <a href="<%= url %> " class="btn btn-custom-primary rounded-pill btn-lg h6 float-right mb-0 mt-2 mt-lg-0 mt-md-0">
         <%= ButtonText %>
     </a>
 </div>

@@ -1,11 +1,13 @@
-<div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1" id="progress-row">
-    <div class="col-10 col-sm-8 col-lg-8 p-0" style="max-width:800px">
-            <span class="progress-average-metric font-weight-light">
-                <span id="currentAverage">25%</span> of <span id="contributionLanguage5"></span>&nbsp<span id="thankyou-initiative"><%- module%> India</span> Target Achieved
+<div class="row justify-content-center mb-3 mt-lg-5 mt-md-5 mt-sm-1 mt-5" id="progress-row">
+    <div class="col-10 col-sm-8 col-lg-8 col-md-12 p-0" style="max-width:800px">
+        <div class="row">
+            <span class="progress-average-metric font-weight-light col-lg-8 col-md-8 col-12">
+                <span id="currentAverage"></span> of <span id="contributionLanguage5"></span>&nbsp<span id="thankyou-initiative"><%- module%> India</span> Target Achieved
             </span>
-        <span class="float-right progress-metric"><span class="" id="currentSentenceLbl">25</span>/<span class="" id="totalSentencesLbl">100</span> <%- text%></span>
+        <span class="progress-metric col-lg-4 col-md-4 col-12 text-right"><span class="" id="currentSentenceLbl"></span>/<span class="" id="totalSentencesLbl"></span> <%- text%></span>
+        </div>
         <div class="progress mt-1">
-            <div class="progress-bar progress-bar-animated" id="progress_bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
+            <div class="progress-bar progress-bar-animated" id="progress_bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:.5%"></div>
         </div>
     </div>
 </div>

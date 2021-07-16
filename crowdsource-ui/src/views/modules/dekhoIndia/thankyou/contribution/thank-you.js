@@ -17,7 +17,7 @@ const {
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
-const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../common/common');
+const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateProgressBar} = require('../common/common');
 
 const { initializeFeedbackModal } = require('../common/feedback');
 const dekhoCountKey = 'dekhoCount';
@@ -174,6 +174,7 @@ function executeOnLoad() {
     $("#conLanWhenGetBadge").html(localeLanguageStr)
 
     getLanguageStats();
+    updateProgressBar(`/progress/ocr/${contributionLanguage}/contribute`)
   }
 }
 

@@ -19,7 +19,7 @@ const {
 } = require("../common/utils");
 
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showByHoursChart,showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge} = require('../common/common');
+const {showByHoursChart,showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge,updateProgressBar} = require('../common/common');
 
 const CURRENT_INDEX = "sunoValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -169,17 +169,13 @@ function executeOnLoad() {
     $("#contributedLanguage").html(localeLanguageStr);
     $("#conLanWhenGetBadge").html(localeLanguageStr)
     getLanguageStats();
+    updateProgressBar(`/progress/asr/${contributionLanguage}/validate`)
   }
 }
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
   initializeFeedbackModal();
-  // $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
-  //   if (!$(this).attr("disabled")) {
-  //     downloadPdf($(this).attr("data-badge"));
-  //   }
-  // });
 
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));

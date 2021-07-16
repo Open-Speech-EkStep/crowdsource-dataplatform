@@ -16,7 +16,7 @@ const {
   performAPIRequest,
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../common/common');
+const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateProgressBar} = require('../common/common');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { initializeFeedbackModal } = require('../common/feedback');
 const CURRENT_INDEX = "dekhoValidatorCurrentIndex";
@@ -169,6 +169,7 @@ function executeOnLoad() {
     $("#conLanWhenGetBadge").html(localeLanguageStr)
 
     getLanguageStats();
+    updateProgressBar(`/progress/ocr/${contributionLanguage}/validate`)
   }
 }
 
@@ -177,12 +178,6 @@ $(document).ready(function () {
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });
-
-  // $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
-  //   if (!$(this).attr("disabled")) {
-  //     downloadPdf($(this).attr("data-badge"));
-  //   }
-  // });
 
   localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
   initializeFeedbackModal();
