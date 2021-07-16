@@ -19,7 +19,7 @@ const {
 
 const {downloadPdf} = require('../common/downloadableBadges');
 
-const {showByHoursChart, showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../common/common');
+const {showByHoursChart, showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateProgressBar} = require('../common/common');
 const {onChangeUser,onOpenUserDropDown,showUserProfile} = require('../common/header');
 
 const {initializeFeedbackModal} = require('../common/feedback');
@@ -178,6 +178,7 @@ function executeOnLoad() {
     $("#conLanWhenGetBadge").html(localeLanguageStr)
 
     getLanguageStats();
+    updateProgressBar(`/progress/text/${contributionLanguage}/validate`);
   }
 }
 

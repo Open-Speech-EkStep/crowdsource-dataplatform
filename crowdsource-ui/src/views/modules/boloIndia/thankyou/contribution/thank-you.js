@@ -16,7 +16,7 @@ const {
 const {downloadPdf} = require('../common/downloadableBadges');
 const {initializeFeedbackModal} = require('../common/feedback')
 
-const {getContributedAndTopLanguage,setBadge,showByHoursChart} = require('../common/common');
+const {getContributedAndTopLanguage,setBadge,showByHoursChart,updateProgressBar} = require('../common/common');
 const {onChangeUser,showUserProfile,onOpenUserDropDown} = require('../common/header');
 
 const CURRENT_INDEX = "currentIndex";
@@ -177,6 +177,7 @@ function executeOnLoad() {
   $("#conLanWhenGetBadge").html(localeLanguageStr)
 
   getLanguageStats();
+  updateProgressBar(`/progress/text/${contributionLanguage}/contribute`);
 }
 
 

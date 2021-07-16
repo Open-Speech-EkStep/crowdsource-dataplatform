@@ -19,7 +19,7 @@ const {
 const {downloadPdf} = require('../common/downloadableBadges');
 const {initializeFeedbackModal} = require('../common/feedback')
 const {constructChart} = require('../common/horizontalBarGraph');
-const {getContributedAndTopLanguage,setBadge,showByHoursChart,showByHoursChartThankyouPage} = require('../common/common');
+const {getContributedAndTopLanguage,setBadge,showByHoursChart,showByHoursChartThankyouPage,updateProgressBar} = require('../common/common');
 
 const sunoCountKey = 'sunoCount';
 const CURRENT_INDEX = "sunoCurrentIndex";
@@ -173,6 +173,7 @@ function executeOnLoad() {
     $("#conLanWhenGetBadge").html(localeLanguageStr)
 
     getLanguageStats();
+    updateProgressBar(`/progress/asr/${contributionLanguage}/contribute`)
   }
 }
 

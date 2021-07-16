@@ -5,6 +5,7 @@ const { drawTopLanguageChart } = require('./verticalGraph');
 const { constructChart } = require('./horizontalBarGraph');
 const { changeLocale,showLanguagePopup } = require('./locale');
 const fetch = require('./fetch');
+const {performAPIRequest} = require('./utils');
 const {onChangeUser, onOpenUserDropDown, showUserProfile} = require('./header');
 const { setUserModalOnShown,
   setUserNameOnInputFocus,
@@ -203,10 +204,13 @@ const setBadge = function (data, localeStrings, functionalFlow) {
       }
     }
   } else if (data.contributionCount === 0) {
-    $("#champion_text").removeClass("d-none");
+    $(".new-badge-msg").addClass("d-none");
+    $(".thankyou-page-heading").removeClass("d-none");
+    $(".user-contribution-msg").addClass("d-none");
     $("#contribution_text").removeClass("d-none");
     // $("#user-contribution-msg").removeClass("d-none");
   } else {
+    $(".new-badge-msg").addClass("d-none");
     $(".thankyou-page-heading").addClass('d-none');
     $(".user-contribution-msg").removeClass("d-none");
     $("#spree_text").removeClass("d-none");
@@ -364,4 +368,17 @@ const setLocalisationAndProfile = (path, module) => {
   updateLocaleLanguagesDropdown(language);
 }
 
-module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered };
+const updateProgressBar = function (url){
+  performAPIRequest(url).then(data=>{
+    const maxValue = data.goal;
+    const currentValue = data['current-progress']
+    $("#totalSentencesLbl").html(maxValue);
+    $("#currentSentenceLbl").html(currentValue);
+    const average = Math.round((currentValue/maxValue) * 100);
+    $("#currentAverage").html(average+"%");
+    const $progressBar = $("#progress_bar");
+    $progressBar.width(average + '%');
+  })
+}
+
+module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateProgressBar };
