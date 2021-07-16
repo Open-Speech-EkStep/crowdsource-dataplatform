@@ -786,12 +786,22 @@ const getProgressResultBasedOnTypeAndSource = (progressResult, type, source) => 
     return progress;
 }
 
+const increaseGoalIfLessThanCurrentProgress = (progress, goal) => {
+    if (goal === 0) return goal;
+    while(goal - 5 < progress) {
+        goal *= 2;
+    }
+    return goal;
+}
+
 const getContributionProgress = async (type, language, source) => {
     let goal = await getGoalForContributionProgress(type, language, source);
     
-    let progressResult = await getProgressForContributionProgress(type, language);
+    const progressResult = await getProgressForContributionProgress(type, language);
     
     const progress = getProgressResultBasedOnTypeAndSource(progressResult, type, source);
+
+    goal = increaseGoalIfLessThanCurrentProgress(progress, goal);
 
     return {
         'goal': goal,
@@ -838,5 +848,6 @@ module.exports = {
     getContributionProgress,
     getGoalForContributionProgress,
     getProgressForContributionProgress,
-    getProgressResultBasedOnTypeAndSource
+    getProgressResultBasedOnTypeAndSource,
+    increaseGoalIfLessThanCurrentProgress
 };

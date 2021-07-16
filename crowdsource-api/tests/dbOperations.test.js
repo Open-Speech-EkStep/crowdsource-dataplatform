@@ -1162,5 +1162,21 @@ describe("Running tests for dbOperations", () => {
             const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, parallelType);
             expect(result).toStrictEqual(progressResult.total_validation_count + progressResult.total_contribution_count);
         });
+        test('increaseGoalIfLessThanCurrentProgress should return same goal if progress is less', async () => {            
+            const result = await dbOperations.increaseGoalIfLessThanCurrentProgress(10, 100);
+            expect(result).toBe(100);
+        });
+        test('increaseGoalIfLessThanCurrentProgress should return return twice goal if progress is nearby', async () => {            
+            const result = await dbOperations.increaseGoalIfLessThanCurrentProgress(96, 100);
+            expect(result).toBe(200);
+        });
+        test('increaseGoalIfLessThanCurrentProgress should return return four time goal if progress is double of goal', async () => {            
+            const result = await dbOperations.increaseGoalIfLessThanCurrentProgress(200, 100);
+            expect(result).toBe(400);
+        });
+        test('increaseGoalIfLessThanCurrentProgress should return return 0 goal if goal is 0', async () => {            
+            const result = await dbOperations.increaseGoalIfLessThanCurrentProgress(200, 0);
+            expect(result).toBe(0);
+        });
     });
 });
