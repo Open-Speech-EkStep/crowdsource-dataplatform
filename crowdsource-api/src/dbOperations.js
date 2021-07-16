@@ -91,7 +91,7 @@ const {
     releaseMediaQueryForCorrection
 } = require('./profanityCheckerQueries')
 
-const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP } = require('./constants');
+const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP, BADGE_SEQUENCE } = require('./constants');
 
 const envVars = process.env;
 const pgp = require('pg-promise')();
@@ -542,6 +542,7 @@ const getRewards = async (userId, userName, language, source, type) => {
     const nextMilestoneData = await getNextMilestoneData(total_count, language, source, type);
     const currentBadgeType = currentMilestoneData.grade || '';
     const nextBadgeType = nextMilestoneData.grade || '';
+    const sequence = BADGE_SEQUENCE[nextBadgeType] || '';
     const currentMilestone = currentMilestoneData.milestone || 0;
     const nextMilestone = nextMilestoneData.milestone || 0;
     const languageGoal = await getLanguageGoal(language, source, type);
@@ -550,6 +551,7 @@ const getRewards = async (userId, userName, language, source, type) => {
         "badgeId": generatedBadgeId,
         "currentBadgeType": currentBadgeType,
         "nextBadgeType": nextBadgeType,
+        "sequence": sequence,   
         "currentMilestone": currentMilestone,
         "nextMilestone": nextMilestone,
         "contributionCount": Number(total_count),
