@@ -747,49 +747,51 @@ const getGoalForContributionProgress = async(type, language, source) => {
     
     return goalResult && goalResult[0] && goalResult[0].goal ? goalResult[0].goal : 0;
 }
-
-const getContributionProgress = async (type, language, source) => {
+const getProgressForContributionProgress = async (type, language) => {
     let progressFilter = `1=1`;
-    if (type.length !== 0) {
+    if (type && type.length !== 0) {
         progressFilter += ` and type = '${type}'`
     }
-    if (language.length !== 0) {
+    if (language && language.length !== 0) {
         progressFilter +=` and LOWER(language) = LOWER('${language}')`;
     }
-    
-    let goal = await getGoalForContributionProgress(type, language, source);
-    
-    let filter2 = pgp.as.format('$1:raw', [progressFilter]);
-    console.log(currentProgressQuery);
-    console.log(filter2)
-    console.log(progressFilter)
-    const progressResult = await db.any(currentProgressQuery, filter2);
-    console.log(progressResult)
+    let filter = pgp.as.format('$1:raw', [progressFilter]);
+
+    const progressResult = await db.any(currentProgressQuery, filter);
+
+    return progressResult && progressResult[0] ? progressResult[0] : { total_contributions: 0, total_validations: 0, total_contribution_count: 0, total_validation_count: 0 };
+}
+const getProgressResultBasedOnTypeAndSource = (progressResult, type, source) => {
     let progress = 0;
     if (progressResult.length != 0) {
+
+        let resultObj = { contribute: 0, validate: 0 };
+
         if (type in ['text', 'asr']) {
-            if (source == 'contribute') {
-                progress = progressResult[0].total_contributions;
-            }
-            else if (source == 'validate') {
-                progress = progressResult[0].total_validations;
-            }
-            else {
-                progress = progressResult[0].total_contributions + progressResult[0].total_validations;
-            }
+            resultObj.contribute = progressResult.total_contributions;
+            resultObj.validate = progressResult.total_validations;
         }
         else {
-            if (source == 'contribute') {
-                progress = progressResult[0].total_contribution_count;
-            }
-            else if (source == 'validate') {
-                progress = progressResult[0].total_validation_count;
-            }
-            else {
-                progress = progressResult[0].total_contribution_count + progressResult[0].total_validation_count;
-            }
+            resultObj.contribute = progressResult.total_contribution_count;
+            resultObj.validate = progressResult.total_validation_count;
+        }
+
+        if (source && source.length > 0) {
+            progress = resultObj[source] || 0;
+        }
+        else {
+            progress = (resultObj['contribute'] + resultObj['validate']) || 0;
         }
     }
+    return progress;
+}
+
+const getContributionProgress = async (type, language, source) => {
+    let goal = await getGoalForContributionProgress(type, language, source);
+    
+    let progressResult = await getProgressForContributionProgress(type, language);
+        
+    const progress = getProgressResultBasedOnTypeAndSource(progressResult, type, source);
 
     return {
         'goal': goal,
@@ -834,5 +836,6 @@ module.exports = {
     getUserRewards,
     addRemainingGenders,
     getContributionProgress,
-    getGoalForContributionProgress
+    getGoalForContributionProgress,
+    getProgressForContributionProgress
 };
