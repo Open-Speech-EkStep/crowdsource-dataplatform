@@ -763,7 +763,7 @@ const getProgressForContributionProgress = async (type, language) => {
 }
 const getProgressResultBasedOnTypeAndSource = (progressResult, type, source) => {
     let progress = 0;
-    if (progressResult.length != 0) {
+    if (progressResult && progressResult.length != 0) {
 
         let resultObj = { contribute: 0, validate: 0 };
 
@@ -790,7 +790,7 @@ const getContributionProgress = async (type, language, source) => {
     let goal = await getGoalForContributionProgress(type, language, source);
     
     let progressResult = await getProgressForContributionProgress(type, language);
-        
+    
     const progress = getProgressResultBasedOnTypeAndSource(progressResult, type, source);
 
     return {
@@ -837,5 +837,6 @@ module.exports = {
     addRemainingGenders,
     getContributionProgress,
     getGoalForContributionProgress,
-    getProgressForContributionProgress
+    getProgressForContributionProgress,
+    getProgressResultBasedOnTypeAndSource
 };

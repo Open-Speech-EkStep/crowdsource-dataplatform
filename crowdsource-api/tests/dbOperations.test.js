@@ -1106,5 +1106,61 @@ describe("Running tests for dbOperations", () => {
             expect(spyDBany).toBeCalledWith(currentProgressQuery, filter);
             expect(result).toStrictEqual({ total_contributions: 0, total_validations: 0, total_contribution_count: 0, total_validation_count: 0 });
         });
+        test('getProgressResultBasedOnTypeAndSource should return 0 if null is passed', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(null, textType, contributeSource);
+            expect(result).toStrictEqual(0);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return 0 if undefined is passed', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(undefined, textType, contributeSource);
+            expect(result).toStrictEqual(0);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for text and contribute', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, textType, contributeSource);
+            expect(result).toStrictEqual(progressResult.total_contributions);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for text and validate', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, textType, validateSource);
+            expect(result).toStrictEqual(progressResult.total_validations);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for asr and contribute', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, asrType, contributeSource);
+            expect(result).toStrictEqual(progressResult.total_contributions);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for asr and validate', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, asrType, validateSource);
+            expect(result).toStrictEqual(progressResult.total_validations);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for ocr and contribute', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, ocrType, contributeSource);
+            expect(result).toStrictEqual(progressResult.total_contribution_count);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for ocr and validate', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, ocrType, validateSource);
+            expect(result).toStrictEqual(progressResult.total_validation_count);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for parallel and contribute', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, parallelType, contributeSource);
+            expect(result).toStrictEqual(progressResult.total_contribution_count);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for parallel and validate', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, parallelType, validateSource);
+            expect(result).toStrictEqual(progressResult.total_validation_count);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for text and no source', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, textType);
+            expect(result).toStrictEqual(progressResult.total_validations + progressResult.total_contributions);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for asr and no source', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, asrType);
+            expect(result).toStrictEqual(progressResult.total_validations + progressResult.total_contributions);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for ocr and no source', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, ocrType);
+            expect(result).toStrictEqual(progressResult.total_validation_count + progressResult.total_contribution_count);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for parallel and no source', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, parallelType);
+            expect(result).toStrictEqual(progressResult.total_validation_count + progressResult.total_contribution_count);
+        });
     });
 });
