@@ -144,7 +144,8 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   localStorage.setItem('badges', JSON.stringify(data.badges));
   const languageGoal = data.languageGoal || 0;
   localStorage.setItem('nextHourGoal', languageGoal);
-  $("#user-contribution").text(data.contributionCount);
+
+  replaceSubStr($(".user-contribution-msg"), '<contribution-count>', data.contributionCount );
   $("#language-hour-goal").text(languageGoal);
   const topLanguages = JSON.parse(localStorage.getItem(TOP_LANGUAGES_BY_HOURS));
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -164,8 +165,8 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#languageInTopMob").addClass("d-none");
   }
 
-  $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-  $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
+  replaceSubStr($("#sentence_away_msg"), '<contribution-count>', Number(data.nextMilestone) - Number(data.contributionCount) );
+  replaceSubStr($("#sentence_away_msg"), '<badge-color>', localeStrings[data.nextBadgeType.toLowerCase()] );
 
   if (data.isNewBadge) {
     $(".new-badge-msg").removeClass("d-none");
@@ -209,12 +210,10 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $(".thankyou-page-heading").removeClass("d-none");
     $(".user-contribution-msg").addClass("d-none");
     $("#contribution_text").removeClass("d-none");
-    // $("#user-contribution-msg").removeClass("d-none");
   } else {
     $(".new-badge-msg").addClass("d-none");
     $(".thankyou-page-heading").addClass('d-none');
     $(".user-contribution-msg").removeClass("d-none");
-    $("#spree_text").removeClass("d-none");
     $("#before_badge_content").removeClass("d-none");
     $("#user-contribution-msg").removeClass("d-none");
   }
@@ -373,10 +372,10 @@ const updateGoalProgressBar = function (url){
   return performAPIRequest(url).then(data=>{
     const maxValue = data.goal;
     const currentValue = data['current-progress']
-    $("#totalSentencesLbl").html(maxValue);
-    $("#currentSentenceLbl").html(currentValue);
+    replaceSubStr($(".progress-metric"), "<contribution-done>", currentValue);
+    replaceSubStr($(".progress-metric"), "<contribution-goal>", maxValue);
     const average = Math.round((currentValue/maxValue) * 100);
-    $("#currentAverage").html(average+"%");
+    replaceSubStr($(".progress-average-metric"), "<average>", average);
     const $progressBar = $("#progress_bar");
     $progressBar.width(average + '%');
   })
@@ -385,7 +384,7 @@ const updateGoalProgressBar = function (url){
 const replaceSubStr = function (element , to ,from){
   const originalText = element.text();
   const newText = originalText.replace(to, from);
-  element.html(newText);
+  element.text(newText.toString());
 }
 
-module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateProgressBar: updateGoalProgressBar,replaceSubStr };
+module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateGoalProgressBar,replaceSubStr };

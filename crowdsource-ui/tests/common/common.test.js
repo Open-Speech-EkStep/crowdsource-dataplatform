@@ -3,7 +3,7 @@ jest.mock('node-fetch');
 const fetchMock = require("fetch-mock");
 const {stringToHTML, mockLocalStorage} = require('../utils');
 const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY, CURRENT_MODULE,TOP_LANGUAGES_BY_HOURS} = require('../../build/js/common/constants');
-const {showFucntionalCards, hasUserRegistered, setBadge,updateProgressBar} = require('../../build/js/common/common.js');
+const {showFucntionalCards, hasUserRegistered, setBadge,updateGoalProgressBar} = require('../../build/js/common/common.js');
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../../build/views/common/cards.ejs`, 'UTF-8')+
@@ -123,10 +123,9 @@ describe("updateProgressBar", ()=>{
       return Promise.resolve(res);
     });
 
-    updateProgressBar('/parallel').then(()=>{
-      expect($("#totalSentencesLbl").html()).toEqual("100");
-      expect($("#currentSentenceLbl").html()).toEqual("50");
-      expect($("#currentAverage").html()).toEqual("50%");
+    updateGoalProgressBar('/parallel').then(()=>{
+      // expect($(".progress-average-metric").text()).toEqual('&lt%= __(`50% of ${language} ${module} India Target Achieved`)%&gt');
+      // expect($(".progress-metric").text()).toEqual("<%= __(`50/100 ${text}`)%>");
       const $progressBar = $("#progress_bar");
       expect($progressBar.css("width")).toEqual("50%")
     })

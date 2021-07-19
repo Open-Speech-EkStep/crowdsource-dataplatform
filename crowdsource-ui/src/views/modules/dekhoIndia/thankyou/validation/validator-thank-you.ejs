@@ -33,7 +33,7 @@
         </div>
         <%- include('../common/thankyouPageHeading.ejs',{text:"language",text1:"validated", text2:"image label(s)"}) %>
     </div>
-    <%- include('../common/thankyouPageProgressBar.ejs', {module: __('Dekho'), text:__('Image(s)')}) %>
+    <%- include('../common/thankyouPageProgressBar.ejs', {module: 'Dekho', text:'Image(s)',language:'<language>'}) %>
 
     <div class="row mt-3 mt-lg-5 md-lg-4 lazy">
         <div class="col-lg-8 border overflow-hidden contribution-info">
@@ -42,7 +42,7 @@
                     <%- include ../common/badgesMilestone.ejs %>
                     <div class="row m-0" id="cardWithoutBadge">
                         <div class="col-lg-4 col-md-5 col-sm-6 pl-0">
-                            <%- include ../common/thankyouPageParticipationMsg.ejs %>
+                            <%- include('../common/thankyouPageParticipationMsg.ejs',{language:'<language>'}) %>
                             <%- include ../common/sharableLink.ejs %>
                         </div>
                         <div class="col-lg-8 col-md-7 col-sm-6 thankyou-bar-graph">
@@ -50,7 +50,7 @@
                                 <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
                                     <div><span class="spinner"></span></div>
                                 </div>
-                                <%- include('../common/verticalGraphForThankyouPage.ejs',{text:"languages"}) %>
+                                <%- include('../common/verticalGraphForThankyouPage.ejs',{text:"languages",language:'<language>'}) %>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
     </div>
 
     <div class="row justify-content-center mt-5">
-        <%- include('../common/languageGoal.ejs', {ButtonText:__('Validate More'),url:"./validator-page.html",TEXT:"Validate",TEXT2:__('image label(s)'), MODULE:"dekho", PAGE:"_val"})%>
+        <%- include('../common/languageGoal.ejs', {ButtonText:__('Validate More'),url:"./validator-page.html",TEXT:"Validate",TEXT2:'image label(s)', MODULE:"dekho", PAGE:"_val"})%>
     </div>
     <%- include('../common/feedback.ejs', {page: "Validation Thank You Page"}) %>
 </div>

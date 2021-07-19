@@ -16,7 +16,7 @@ const {
 const {downloadPdf} = require('../common/downloadableBadges');
 const {initializeFeedbackModal} = require('../common/feedback')
 
-const {getContributedAndTopLanguage,setBadge,showByHoursChart, updateGoalProgressBar} = require('../common/common');
+const {getContributedAndTopLanguage,setBadge,showByHoursChart, updateGoalProgressBar,replaceSubStr} = require('../common/common');
 const {onChangeUser,showUserProfile,onOpenUserDropDown} = require('../common/header');
 
 const CURRENT_INDEX = "currentIndex";
@@ -168,12 +168,12 @@ function executeOnLoad() {
   );
 
   const localeLanguageStr = localStrings[contributionLanguage];
-  $("#contributionLanguage5").html(localeLanguageStr);
-  $("#contributionLanguage1").html(localeLanguageStr);
-  $("#contributionLanguage2").html(localeLanguageStr);
-  $("#contributionLanguage3").html(localeLanguageStr);
-  $("#contributionLanguage4").html(localeLanguageStr);
-  $("#contributedLanguage").html(localeLanguageStr);
+  replaceSubStr($(".progress-average-metric"), "<language>", localeLanguageStr);
+  replaceSubStr($("#languageNotInTopWeb"), "<language>", localeLanguageStr);
+  replaceSubStr($("#languageInTopWeb"), "<language>", localeLanguageStr);
+  replaceSubStr($("#languageNotInTopMob"), "<language>", localeLanguageStr);
+  replaceSubStr($("#languageInTopMob"), "<language>", localeLanguageStr);
+  replaceSubStr($(".x-axis-label"), "<language>", localeLanguageStr);
   $("#conLanWhenGetBadge").html(localeLanguageStr)
 
   updateGoalProgressBar(`/progress/text/${contributionLanguage}/contribute`);

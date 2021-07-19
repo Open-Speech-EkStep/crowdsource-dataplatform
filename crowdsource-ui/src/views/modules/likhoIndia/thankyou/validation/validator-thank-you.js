@@ -20,7 +20,7 @@ const {
 
 const {downloadPdf} = require('../common/downloadableBadges');
 const { showUserProfile,onChangeUser,onOpenUserDropDown } = require('../common/header');
-const {showByHoursChart, showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge,  updateLikhoLocaleLanguagesDropdown,updateGoalProgressBar} = require('../common/common');
+const {showByHoursChart, showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge,  updateLikhoLocaleLanguagesDropdown,updateGoalProgressBar,replaceSubStr} = require('../common/common');
 const {initializeFeedbackModal} = require('../common/feedback');
 
 const CURRENT_INDEX = "likhoValidatorCurrentIndex";
@@ -167,12 +167,18 @@ function executeOnLoad() {
 
     const localeLanguageStr = localStrings[contributionLanguage];
     const localeToLanguageStr = localStrings[toLanguage];
-    $("#contributionLanguage5").html(`${localeLanguageStr}-${localeToLanguageStr}`);
-    $("#contributionLanguage1").html(`${localeLanguageStr}-${localeToLanguageStr}`);
-    $("#contributionLanguage2").html(`${localeLanguageStr}-${localeToLanguageStr}`);
-    $("#contributionLanguage3").html(`${localeLanguageStr}-${localeToLanguageStr}`);
-    $("#contributionLanguage4").html(`${localeLanguageStr}-${localeToLanguageStr}`);
-    $("#contributedLanguage").html(`${localeLanguageStr}-${localeToLanguageStr}`);
+    replaceSubStr($(".progress-average-metric"), "<from-language>", localeLanguageStr);
+    replaceSubStr($(".progress-average-metric"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($("#languageNotInTopWeb"), "<from-language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopWeb"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($("#languageInTopWeb"), "<from-language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopWeb"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($("#languageNotInTopMob"), "<from-language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopMob"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($("#languageInTopMob"), "<from-language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopMob"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($(".x-axis-label"), "<from-language>", localeLanguageStr);
+    replaceSubStr($(".x-axis-label"), "<to-language>", localeToLanguageStr);
     $("#conLanWhenGetBadge").html(`${localeLanguageStr}-${localeToLanguageStr}`)
 
     getLanguageStats();

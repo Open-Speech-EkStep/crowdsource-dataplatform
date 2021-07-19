@@ -16,7 +16,7 @@ const {
   performAPIRequest,
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateGoalProgressBar} = require('../common/common');
+const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateGoalProgressBar,replaceSubStr} = require('../common/common');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { initializeFeedbackModal } = require('../common/feedback');
 const CURRENT_INDEX = "dekhoValidatorCurrentIndex";
@@ -160,12 +160,12 @@ function executeOnLoad() {
     );
 
     const localeLanguageStr = localStrings[contributionLanguage];
-    $("#contributionLanguage5").html(localeLanguageStr);
-    $("#contributionLanguage1").html(localeLanguageStr);
-    $("#contributionLanguage2").html(localeLanguageStr);
-    $("#contributionLanguage3").html(localeLanguageStr);
-    $("#contributionLanguage4").html(localeLanguageStr);
-    $("#contributedLanguage").html(localeLanguageStr);
+    replaceSubStr($(".progress-average-metric"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopWeb"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopWeb"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopMob"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopMob"), "<language>", localeLanguageStr);
+    replaceSubStr($(".x-axis-label"), "<language>", localeLanguageStr);
     $("#conLanWhenGetBadge").html(localeLanguageStr)
 
     getLanguageStats();

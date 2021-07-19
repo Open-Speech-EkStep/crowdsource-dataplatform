@@ -34,7 +34,7 @@
         <%- include('../common/thankyouPageHeading.ejs',{text:"language",text1:"validated", text2:"sentence(s)"}) %>
     </div>
 
-    <%- include('../common/thankyouPageProgressBar.ejs', {module: __('Suno'),text:__('Hour(s)')}) %>
+    <%- include('../common/thankyouPageProgressBar.ejs', {module: 'Suno',text:'Hour(s)',language:'<language>'}) %>
 
     <div class="row mt-3 mt-lg-5 md-lg-4 lazy">
         <div class="col-lg-8 border overflow-hidden contribution-info">
@@ -43,7 +43,7 @@
                     <%- include ../common/badgesMilestone.ejs %>
                     <div class="row m-0" id="cardWithoutBadge">
                         <div class="col-lg-4 col-md-5 col-sm-6 pl-0">
-                            <%- include ../common/thankyouPageParticipationMsg.ejs %>
+                            <%- include('../common/thankyouPageParticipationMsg.ejs',{language:'<language>'}) %>
                             <%- include ../common/sharableLink.ejs %>
                         </div>
                         <div class="col-lg-8 col-md-7 col-sm-6 thankyou-bar-graph">
@@ -51,7 +51,7 @@
                                 <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
                                     <div><span class="spinner"></span></div>
                                 </div>
-                                <%- include('../common/verticalGraphForThankyouPage.ejs',{text:"languages"}) %>
+                                <%- include('../common/verticalGraphForThankyouPage.ejs',{text:"languages",language:'<language>'}) %>
                             </div>
                         </div>
                     </div>
