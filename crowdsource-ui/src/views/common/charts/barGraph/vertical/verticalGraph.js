@@ -21,7 +21,6 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
           item.total_contribution_count = item.total_contribution_count ? item.total_contribution_count : 0;
           const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(item.total_contributions)  * 60 * 60), true);
           item.contributedHours = type == "suno" || type == "bolo" ? formatTime(cHours, cMinutes, cSeconds) : type == "dekho" ? ((item.total_contribution_count ).toString() + " images") : ((item.total_contribution_count ).toString() + " translations");
-          console.log(item.contributedHours)
         });
       }
 
@@ -68,7 +67,7 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
           valueAxis.title.text = 'Transcription (in sentences)';
         } else if(type == "bolo"){
           valueAxis.title.text = 'Recordings (in hours)';
-        } else if(type == "dekho"){
+        } else if(type == "likho"){
           valueAxis.title.text = 'Translation (in sentences)';
         } else {
           valueAxis.title.text = 'Labelled (in images)';

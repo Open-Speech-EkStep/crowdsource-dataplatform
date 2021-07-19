@@ -172,7 +172,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
 
   replaceSubStr($(".user-contribution-msg"), '<contribution-count>', data.contributionCount );
   $("#language-hour-goal").text(languageGoal);
-  const topLanguages = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_TOP_LANGUAGE));
+  const topLanguages = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_TOP_LANGUAGE)) || [];
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const isInTopLanguage = topLanguages.some((ele) => ele.language.toLowerCase() === contributionLanguage.toLowerCase())
 

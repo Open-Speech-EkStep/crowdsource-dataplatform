@@ -160,7 +160,7 @@ step("Clicking watch video link should open video", async function () {
 step("Validate Thank you page content for Dekho India", async function () {
 	assert.ok(await text('Dekho India Target Achieved').exists())
 	assert.ok(await text('Image(s)').exists())
-	assert.ok(await text('Validation (in image labels)').isVisible())
+	assert.ok(await text('Labelled (in images)').isVisible())
 });
 
 

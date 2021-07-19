@@ -2,6 +2,10 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
     font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
+.user-contribution-msg span{
+    color: #007BFF;
+}
+
 .progress-average-metric{
     font-size: 20px;
     line-height: 25px;
@@ -19,7 +23,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
 }
 
 .contribution-info-inner #top-language-chart, #chartRowWithoutCard #top-language-chart{
-    min-height: 200px !important;
+    min-height: 250px !important;
     max-width: 400px !important;
 }
 
