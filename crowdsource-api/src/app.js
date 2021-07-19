@@ -359,7 +359,11 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'Validation so far in <y> - <x>',
             'Contribution so far in <y> - <x>',
             'Validation',
-            'Contribution'
+            'Contribution',
+            '1st',
+            '2nd',
+            '3rd',
+            '4th'
         ];
 
         const langSttr = {};

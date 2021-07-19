@@ -166,12 +166,13 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   }
 
   replaceSubStr($("#sentence_away_msg"), '<contribution-count>', Number(data.nextMilestone) - Number(data.contributionCount) );
-  replaceSubStr($("#sentence_away_msg"), '<badge-color>', localeStrings[data.nextBadgeType.toLowerCase()] );
+  replaceSubStr($("#sentence_away_msg"), '<badge-color>', localeStrings[data.sequence] );
 
   if (data.isNewBadge) {
     $(".new-badge-msg").removeClass("d-none");
     $(".thankyou-page-heading").addClass("d-none");
     $(".user-contribution-msg").addClass("d-none");
+    $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
 
     // const cardWithoutBadge = $('#cardWithoutBadge');
     // $(cardWithoutBadge.parent()).remove(cardWithoutBadge);

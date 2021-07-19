@@ -504,7 +504,7 @@ step("When user submits , Thank you pop up should come & close button should clo
 step("Validate Thank you page content for Bolo India", async function () {
     assert.ok(await text('Bolo India Target Achieved').isVisible())
     assert.ok(await text('Contribution (in hours)').isVisible())
-    assert.ok(await text('Contribute 5 sentence(s) to earn your bronze Badge.').isVisible())
+    assert.ok(await text('Contribute 5 sentence(s) to earn your 1st Badge.').isVisible())
     assert.ok(await text('Hour(s)').isVisible())
 });
 
