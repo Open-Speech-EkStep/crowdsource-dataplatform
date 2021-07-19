@@ -113,7 +113,7 @@ describe("setBadge", ()=>{
 
 })
 
-describe("updateProgressBar", ()=>{
+describe("updateGoalProgressBar", ()=>{
   test("should set average language metric and goals in progress bar", ()=>{
     const origFetch = require('node-fetch');
     origFetch.mockImplementation(cb => {
@@ -124,8 +124,9 @@ describe("updateProgressBar", ()=>{
     });
 
     updateGoalProgressBar('/parallel').then(()=>{
-      // expect($(".progress-average-metric").text()).toEqual('&lt%= __(`50% of ${language} ${module} India Target Achieved`)%&gt');
-      // expect($(".progress-metric").text()).toEqual("<%= __(`50/100 ${text}`)%>");
+      // expect($("#totalSentencesLbl").html()).toEqual("100");
+      // expect($("#currentSentenceLbl").html()).toEqual("50");
+      expect($("#totalAverage").html()).toEqual("50%");
       const $progressBar = $("#progress_bar");
       expect($progressBar.css("width")).toEqual("50%")
     })

@@ -169,7 +169,8 @@ function executeOnLoad() {
   );
 
   const localeLanguageStr = localStrings[contributionLanguage];
-  replaceSubStr($(".progress-average-metric"), "<language>", localeLanguageStr);
+  // replaceSubStr($(".progress-average-metric"), "<language>", localeLanguageStr);
+  $("#metric-language").text(localeLanguageStr);
   replaceSubStr($("#languageNotInTopWeb"), "<language>", localeLanguageStr);
   replaceSubStr($("#languageInTopWeb"), "<language>", localeLanguageStr);
   replaceSubStr($("#languageNotInTopMob"), "<language>", localeLanguageStr);

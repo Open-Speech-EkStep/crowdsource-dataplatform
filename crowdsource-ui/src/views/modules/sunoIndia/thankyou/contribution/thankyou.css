@@ -11,7 +11,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
     line-height: 25px;
 }
 
-#currentAverage{
+#totalAverage{
     color:#EF8537;
     font-size: 40px;
     line-height: 20px;
@@ -157,6 +157,18 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
         width: 100%;
         text-align: center;
     }
+
+    .progress-average-metric{
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    #totalAverage{
+        font-size: 20px;
+        line-height: 25px;
+    }
+
+
 
     .reward-img {
         width: 150px;

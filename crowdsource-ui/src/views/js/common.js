@@ -170,8 +170,9 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   const languageGoal = data.languageGoal || 0;
   localStorage.setItem('nextHourGoal', languageGoal);
 
-  replaceSubStr($(".user-contribution-msg"), '<contribution-count>', data.contributionCount );
+  // replaceSubStr($(".user-contribution-msg"), '<contribution-count>', data.contributionCount );
   $("#language-hour-goal").text(languageGoal);
+  $("#user-contribution-count").text(data.contributionCount);
   const topLanguages = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_TOP_LANGUAGE)) || [];
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const isInTopLanguage = topLanguages.some((ele) => ele.language.toLowerCase() === contributionLanguage.toLowerCase())
@@ -401,7 +402,8 @@ const updateGoalProgressBar = function (url){
     replaceSubStr($(".progress-metric"), "<contribution-done>", currentValue);
     replaceSubStr($(".progress-metric"), "<contribution-goal>", maxValue);
     const average = Math.round((currentValue/maxValue) * 100);
-    replaceSubStr($(".progress-average-metric"), "<average>", average);
+    $("#totalAverage").text(average + '%');
+    // replaceSubStr($(".progress-average-metric"), "<average>", average);
     const $progressBar = $("#progress_bar");
     $progressBar.width(average + '%');
   })
