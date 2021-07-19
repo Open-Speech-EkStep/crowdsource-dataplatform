@@ -2,7 +2,7 @@ const {readFileSync} = require('fs');
 jest.mock('node-fetch');
 const fetchMock = require("fetch-mock");
 const {stringToHTML, mockLocalStorage} = require('../utils');
-const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY, CURRENT_MODULE,TOP_LANGUAGES_BY_HOURS} = require('../../build/js/common/constants');
+const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY, CURRENT_MODULE,TOP_LANGUAGES_BY_HOURS, AGGREGATED_DATA_BY_TOP_LANGUAGE} = require('../../build/js/common/constants');
 const {showFucntionalCards, hasUserRegistered, setBadge,updateGoalProgressBar} = require('../../build/js/common/common.js');
 
 document.body = stringToHTML(
@@ -18,7 +18,7 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'bolo');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'hindi');
-    localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : false, contributionCount : 0,nextBadgeType: "Bronze", currentBadgeType:""};
     const localeStrings = {Bronze:"Bronze"};
     setBadge(data, localeStrings, 'contribute');
@@ -38,7 +38,7 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
-    localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : false, contributionCount : 0,nextBadgeType: "Bronze", currentBadgeType:""};
     const localeStrings = {Bronze:"Bronze"};
     setBadge(data, localeStrings, 'contribute');
@@ -58,7 +58,7 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
-    localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : false, contributionCount : 2,nextBadgeType: "Bronze", currentBadgeType:""};
     const localeStrings = {Bronze:"Bronze"};
     setBadge(data, localeStrings, 'contribute');
@@ -77,7 +77,7 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
-    localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : true, contributionCount : 5,nextBadgeType: "Silver", currentBadgeType:"Bronze"};
     const localeStrings = {Bronze:"Bronze"};
     setBadge(data, localeStrings, 'contribute');
@@ -96,7 +96,7 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
-    localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : false, contributionCount : 7,nextBadgeType: "Silver", currentBadgeType:"Bronze"};
     const localeStrings = {Bronze:"Bronze"};
     setBadge(data, localeStrings, 'contribute');

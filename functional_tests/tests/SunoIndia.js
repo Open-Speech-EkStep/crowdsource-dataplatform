@@ -228,7 +228,7 @@ step("User clicks on Play button, and then on pause button, then clicks on <need
 
 step("Validate Thank you page content for Suno India", async function () {
     assert.ok(await text('Suno India Target Achieved').isVisible())
-    assert.ok(await text('Contribution (in hours)').isVisible())
+    assert.ok(await text('Transcription (in sentences)').isVisible())
     assert.ok(await text('Hour(s)').isVisible())
 });
 

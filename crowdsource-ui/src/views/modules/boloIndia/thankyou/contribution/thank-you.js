@@ -6,7 +6,8 @@ const {
   CURRENT_MODULE,
   CONTRIBUTION_LANGUAGE,
   MODULE,
-  TOP_LANGUAGES_BY_HOURS
+  TOP_LANGUAGES_BY_HOURS,
+  AGGREGATED_DATA_BY_TOP_LANGUAGE
 } = require("../common/constants");
 const {
   updateLocaleLanguagesDropdown,
@@ -16,7 +17,7 @@ const {
 const {downloadPdf} = require('../common/downloadableBadges');
 const {initializeFeedbackModal} = require('../common/feedback')
 
-const {getContributedAndTopLanguage,setBadge,showByHoursChart, updateGoalProgressBar,replaceSubStr} = require('../common/common');
+const {getContributedAndTopLanguage,setBadge,showByHoursChart,showByHoursChartThankyouPage, updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 const {onChangeUser,showUserProfile,onOpenUserDropDown} = require('../common/header');
 
 const CURRENT_INDEX = "currentIndex";
@@ -84,13 +85,13 @@ const updateShareContent = function (language, rank) {
 };
 
 const getLanguageStats = function () {
-  fetch("/stats/summary/text?aggregateDataByLanguage=true")
+  fetch("/stats/summary/text")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
-        const languages = getContributedAndTopLanguage(response.aggregate_data_by_language, MODULE.bolo.value);
-        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages.reverse()));
-        showByHoursChart(MODULE.bolo.value, "thankyou");
+        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.bolo.value, 'total_contribution_count','total_contributions');
+        localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
+        showByHoursChartThankyouPage(MODULE.bolo.value, "thankyou");
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
@@ -183,6 +184,7 @@ function executeOnLoad() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,'bolo');
+  localStorage.setItem("selectedType","contribute");
   initializeFeedbackModal();
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));

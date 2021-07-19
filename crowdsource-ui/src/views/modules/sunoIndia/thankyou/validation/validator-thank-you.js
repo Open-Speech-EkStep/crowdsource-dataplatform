@@ -6,7 +6,8 @@ const {
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
-  TOP_LANGUAGES_BY_HOURS
+  TOP_LANGUAGES_BY_HOURS,
+  AGGREGATED_DATA_BY_TOP_LANGUAGE
 } = require("../common/constants");
 const { onChangeUser,onOpenUserDropDown,showUserProfile } = require('../common/header');
 
@@ -19,7 +20,7 @@ const {
 } = require("../common/utils");
 
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showByHoursChart,showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge,updateGoalProgressBar,replaceSubStr} = require('../common/common');
+const {showByHoursChart,showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 
 const CURRENT_INDEX = "sunoValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -72,9 +73,9 @@ const getLanguageStats = function () {
         const contributionLanguage = localStorage.getItem(
           CONTRIBUTION_LANGUAGE
         );
-        const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.suno.value);
-        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChart(MODULE.suno.value, "thankyou");
+        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.suno.value, 'total_validation_count','total_validations');
+        localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
+        showByHoursChartThankyouPage(MODULE.suno.value, "thankyou");
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
@@ -175,6 +176,7 @@ function executeOnLoad() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
+  localStorage.setItem("selectedType","validate");
   initializeFeedbackModal();
 
   $("#download_pdf").on('click', function () {

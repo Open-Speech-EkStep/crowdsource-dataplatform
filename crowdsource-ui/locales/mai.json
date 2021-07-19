@@ -824,8 +824,5 @@
 	"Contribute <contribution-count> image label(s) to earn your <badge-color> Badge.": "Contribute <contribution-count> image label(s) to earn your <badge-color> Badge.",
 	"You validated <contribution-count> image label(s) for your language!": "You validated <contribution-count> image label(s) for your language!",
 	"Validate <contribution-count> image label(s) to earn your <badge-color> Badge.": "Validate <contribution-count> image label(s) to earn your <badge-color> Badge.",
-	"1st": "1st",
-	"2nd": "2nd",
-	"3rd": "3rd",
-	"4th": "4th"
+	"Contribute <contribution-count> recording(s) to earn your <badge-color> Badge.": "Contribute <contribution-count> recording(s) to earn your <badge-color> Badge."
 }
