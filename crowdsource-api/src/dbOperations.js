@@ -91,7 +91,7 @@ const {
     releaseMediaQueryForCorrection
 } = require('./profanityCheckerQueries')
 
-const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP } = require('./constants');
+const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP, BADGE_SEQUENCE } = require('./constants');
 
 const envVars = process.env;
 const pgp = require('pg-promise')();
@@ -542,6 +542,7 @@ const getRewards = async (userId, userName, language, source, type) => {
     const nextMilestoneData = await getNextMilestoneData(total_count, language, source, type);
     const currentBadgeType = currentMilestoneData.grade || '';
     const nextBadgeType = nextMilestoneData.grade || '';
+    const sequence = BADGE_SEQUENCE[nextBadgeType] || '';
     const currentMilestone = currentMilestoneData.milestone || 0;
     const nextMilestone = nextMilestoneData.milestone || 0;
     const languageGoal = await getLanguageGoal(language, source, type);
@@ -550,6 +551,7 @@ const getRewards = async (userId, userName, language, source, type) => {
         "badgeId": generatedBadgeId,
         "currentBadgeType": currentBadgeType,
         "nextBadgeType": nextBadgeType,
+        "sequence": sequence,   
         "currentMilestone": currentMilestone,
         "nextMilestone": nextMilestone,
         "contributionCount": Number(total_count),
@@ -747,49 +749,61 @@ const getGoalForContributionProgress = async(type, language, source) => {
     
     return goalResult && goalResult[0] && goalResult[0].goal ? goalResult[0].goal : 0;
 }
-
-const getContributionProgress = async (type, language, source) => {
+const getProgressForContributionProgress = async (type, language) => {
     let progressFilter = `1=1`;
-    if (type.length !== 0) {
+    if (type && type.length !== 0) {
         progressFilter += ` and type = '${type}'`
     }
-    if (language.length !== 0) {
+    if (language && language.length !== 0) {
         progressFilter +=` and LOWER(language) = LOWER('${language}')`;
     }
-    
-    let goal = await getGoalForContributionProgress(type, language, source);
-    
-    let filter2 = pgp.as.format('$1:raw', [progressFilter]);
-    console.log(currentProgressQuery);
-    console.log(filter2)
-    console.log(progressFilter)
-    const progressResult = await db.any(currentProgressQuery, filter2);
-    console.log(progressResult)
+    let filter = pgp.as.format('$1:raw', [progressFilter]);
+
+    const progressResult = await db.any(currentProgressQuery, filter);
+
+    return progressResult && progressResult[0] ? progressResult[0] : { total_contributions: 0, total_validations: 0, total_contribution_count: 0, total_validation_count: 0 };
+}
+const getProgressResultBasedOnTypeAndSource = (progressResult, type, source) => {
     let progress = 0;
-    if (progressResult.length != 0) {
+    if (progressResult && progressResult.length != 0) {
+
+        let resultObj = { contribute: 0, validate: 0 };
+
         if (type in ['text', 'asr']) {
-            if (source == 'contribute') {
-                progress = progressResult[0].total_contributions;
-            }
-            else if (source == 'validate') {
-                progress = progressResult[0].total_validations;
-            }
-            else {
-                progress = progressResult[0].total_contributions + progressResult[0].total_validations;
-            }
+            resultObj.contribute = progressResult.total_contributions;
+            resultObj.validate = progressResult.total_validations;
         }
         else {
-            if (source == 'contribute') {
-                progress = progressResult[0].total_contribution_count;
-            }
-            else if (source == 'validate') {
-                progress = progressResult[0].total_validation_count;
-            }
-            else {
-                progress = progressResult[0].total_contribution_count + progressResult[0].total_validation_count;
-            }
+            resultObj.contribute = progressResult.total_contribution_count;
+            resultObj.validate = progressResult.total_validation_count;
+        }
+
+        if (source && source.length > 0) {
+            progress = resultObj[source] || 0;
+        }
+        else {
+            progress = (resultObj['contribute'] + resultObj['validate']) || 0;
         }
     }
+    return progress;
+}
+
+const increaseGoalIfLessThanCurrentProgress = (progress, goal) => {
+    if (goal === 0) return goal;
+    while(goal - 5 < progress) {
+        goal *= 2;
+    }
+    return goal;
+}
+
+const getContributionProgress = async (type, language, source) => {
+    let goal = await getGoalForContributionProgress(type, language, source);
+    
+    const progressResult = await getProgressForContributionProgress(type, language);
+    
+    const progress = getProgressResultBasedOnTypeAndSource(progressResult, type, source);
+
+    goal = increaseGoalIfLessThanCurrentProgress(progress, goal);
 
     return {
         'goal': goal,
@@ -834,5 +848,8 @@ module.exports = {
     getUserRewards,
     addRemainingGenders,
     getContributionProgress,
-    getGoalForContributionProgress
+    getGoalForContributionProgress,
+    getProgressForContributionProgress,
+    getProgressResultBasedOnTypeAndSource,
+    increaseGoalIfLessThanCurrentProgress
 };
