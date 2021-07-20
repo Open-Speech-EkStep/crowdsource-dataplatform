@@ -1,11 +1,11 @@
 .instructive-msg-div{
-    color:black;
-    font-style:italic;
-    font-size: 18px;
+  color: #000000;
+  font-style:italic;
+  font-size: 18px;
 }
 
 @media (max-width: 768px) {
-    .instructive-msg-div{
-        font-size: 16px;
-    }
+  .instructive-msg-div{
+    font-size: 16px;
+  }
 }

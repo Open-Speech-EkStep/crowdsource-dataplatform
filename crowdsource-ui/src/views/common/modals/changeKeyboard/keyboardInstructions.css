@@ -1,41 +1,41 @@
 #keyboardInstructions .modal-dialog {
-        max-width: 920px;
-        margin: 1.75rem auto;
-    }
+  max-width: 920px;
+  margin: 1.75rem auto;
+}
 
-    #keyboardInstructions .modal-header .close {
-        font-size: 3rem;
-        font-weight: 400;
-        color: #000;
-    }
+#keyboardInstructions .modal-header .close {
+  font-size: 3rem;
+  font-weight: 400;
+  color: #000000;
+}
     
-    #keyboardInstructions  .modal-body {
-        margin-top: -28px;
-        font-weight: 400;
-        color: #343A40;
-        padding: 15px 50px;
-    }
+#keyboardInstructions  .modal-body {
+  margin-top: -28px;
+  font-weight: 400;
+  color: #343a40;
+  padding: 15px 50px;
+}
 
-    #keyboardInstructions  .modal-body h3 {
-        font-size: 24px;
-        font-weight: 400;
-    }
+#keyboardInstructions  .modal-body h3 {
+  font-size: 24px;
+  font-weight: 400;
+}
     
-    .layout-btn {
-        background-color: #E9ECEF;
-        color: #007BFF;
-    }
+.layout-btn {
+  background-color: #e9ecef;
+  color: #007bff;
+}
 
-    #keyboardInstructions .modal-footer {
-        justify-content: flex-start;
-    }
+#keyboardInstructions .modal-footer {
+  justify-content: flex-start;
+}
    
-    .close {
-        color : #000;
-        opacity: 1;
-    }
+.close {
+  color : #000000;
+  opacity: 1;
+}
 
-    .btn-link:hover {
-        text-decoration: none;
-    }
+.btn-link:hover {
+  text-decoration: none;
+}
 

@@ -28,7 +28,7 @@
   display: inline-block;
   border-width: 0.2rem;
   border-color: #007bff;
-  border-top-color: #fff;
+  border-top-color: #ffffff;
   animation: spin 1s infinite linear;
   border-radius: 100%;
   border-style: solid;
@@ -42,7 +42,7 @@
 .contribuion-info,
 .stats-container {
   border-radius: 34px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .champion-ribbon{
@@ -53,7 +53,7 @@
   background: linear-gradient(49.38deg, #007bff -227.24%, #89d6e3 169.12%);
   padding: 1rem;
   font-size: 14px;
-  color: #fff;
+  color: #ffffff;
 }
 
 .spree-ribbon{
@@ -66,7 +66,7 @@
   background: linear-gradient(49.38deg, #007bff -227.24%, #89d6e3 169.12%);
   padding: 1rem;
   font-size: 14px;
-  color: #fff;
+  color: #ffffff;
 }
 
 .w-80 {
@@ -206,7 +206,7 @@
   white-space: nowrap;
   text-align: right;
   width: 100%;
-  -webkit-animation: rightThenLeft 15s linear infinite;
+  -webkit-animation: rightthenleft 15s linear infinite;
 }
 
 @-webkit-keyframes rightThenLeft {

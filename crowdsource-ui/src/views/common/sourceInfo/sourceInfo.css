@@ -1,149 +1,147 @@
 .svg-size {
-	width: 52px;
-	height: 52px;
+  width: 52px;
+  height: 52px;
 }
 .spn-source-info {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .ds-float {
-    padding: 6px 8px;
-    position: fixed;
-    bottom: 55px;
-    left: 26px;
-    background-color: #f6f6f6;
-    color: #666;
-    border-radius: 4px;
-    text-align: center;
-    box-sizing: border-box;
-    box-shadow: #007bff;
-    font-size: 14px;
+  padding: 6px 8px;
+  position: fixed;
+  bottom: 55px;
+  left: 26px;
+  background-color: #f6f6f6;
+  color: #666666;
+  border-radius: 4px;
+  text-align: center;
+  box-sizing: border-box;
+  box-shadow: #007bff;
+  font-size: 14px;
 }
 
 .my-ds-float{
-	right: 8.33%;
-	left: 25%;
-	top: 25%;
-	bottom: 9.31%;
-    margin-right: 8px;
+  right: 8.33%;
+  left: 25%;
+  top: 25%;
+  bottom: 9.31%;
+  margin-right: 8px;
 }
 div#modal_data_source {
-    font-size: 16px;
-}
-#data_source_modal .email {
-	color: #057da5;
-	cursor: copy;
+  font-size: 16px;
 }
 
 .custom-ds-modal {
-	max-width: 700px;
-	min-height: 867px;
+  max-width: 700px;
+  min-height: 867px;
 }
 
 .label-color-feedback {
-	color: #494A4A !important;
+  color: #494a4a !important;
 }
 
 .submit-btn-feedback {
-	color: #FFFFFF;
-	background: #007BFF;
-	border: 1px solid #007BFF;
-	box-sizing: border-box;
-	border-radius: 48px;
-	width: 160px;
-	height: 48px;
+  color: #ffffff;
+  background: #007bff;
+  border: 1px solid #007bff;
+  box-sizing: border-box;
+  border-radius: 48px;
+  width: 160px;
+  height: 48px;
 }
 .submit-btn-feedback:disabled{
-	background-color: #D7D7D7;
-	border: none;
-	font-weight: 700;
+  background-color: #d7d7d7;
+  border: none;
+  font-weight: 700;
 }
 
-.opinion input[type="radio"] {
-    display: none;
+.opinion input[type='radio'] {
+  display: none;
 }
 .opinion label {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .modal-body label span {
-	font-family: Lato;
-	font-size: 16px;
-	line-height: 32px;
+  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 32px;
 }
 
 label .required {
-	color: #C35757 !important;
+  color: #c35757 !important;
 }
 
 #datasource_close_btn {
-    position: absolute;
-    right: 1rem;
-    top: 0;
-    font-size: 2.5rem;
-    padding: 0;
+  position: absolute;
+  right: 1rem;
+  top: 0;
+  font-size: 2.5rem;
+  padding: 0;
 }
 
 #data_source_modal .email {
-    position: relative;
-    display: inline-block;
+  color: #057da5;
+  cursor: copy;
+  position: relative;
+  display: inline-block;
 }
 
 #data_source_modal .email + .tooltiptext {
-    visibility: hidden;
-    width: 140px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 60%;
-    left: 50%;
-    margin-left: -75px;
-    opacity: 0;
-    transition: opacity 0.3s;
+  visibility: hidden;
+  width: 140px;
+  background-color: #555555;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 60%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-#data_source_modal .email + .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
+#data_source_modal .email + .tooltiptext:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555555 transparent transparent transparent;
 }
 
 #data_source_modal .email:hover + .tooltiptext {
-    visibility: visible;
-    opacity: 0.9;
+  visibility: visible;
+  opacity: 0.9;
 }
 
 @media (max-width: 700px) {
-    #show_source_button .hide-on-mobile {
-        display: none;
-    }
-	.float{
-		position:fixed;
-		right : 30px;
-		bottom : 100px;
-	}
-    .ds-float {
-        font-size: 10px;
-        position: relative;
-        margin-bottom: 55px;
-        margin-left: 26px;
-        bottom: 0;
-        left: 0;
-    }
-    .my-ds-float {
-        margin-right: 0px;
-    }
-	#feedback_button{
-		height: 50px;
-		width: 50px;
-	}
+  #show_source_button .hide-on-mobile {
+    display: none;
+  }
+  .float{
+    position:fixed;
+    right : 30px;
+    bottom : 100px;
+  }
+  .ds-float {
+    font-size: 10px;
+    position: relative;
+    margin-bottom: 55px;
+    margin-left: 26px;
+    bottom: 0;
+    left: 0;
+  }
+  .my-ds-float {
+    margin-right: 0;
+  }
+  #feedback_button{
+    height: 50px;
+    width: 50px;
+  }
 }

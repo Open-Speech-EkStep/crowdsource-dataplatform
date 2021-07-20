@@ -1,22 +1,22 @@
 /* mobile */
 
 .social-share-block{
-    border: 1px solid rgba(0, 123, 255, 0.5);
-    box-sizing: border-box;
-    box-shadow: 0px 4px 12px rgba(0, 123, 255, 0.2);
-    position: absolute;
-    bottom: 0px;
-    border-radius: 20px;
-    width: max-content;
+  border: 1px solid rgba(0, 123, 255, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+  position: absolute;
+  bottom: 0;
+  border-radius: 20px;
+  width: max-content;
 }
 
 /* mobile */
 
 @media (max-width: 767px) {
-    .social-share-block{
-        position: inherit;
-        bottom: 0px;
-        width: 100%;
-    }
+  .social-share-block{
+    position: inherit;
+    bottom: 0;
+    width: 100%;
+  }
 }
 
