@@ -257,65 +257,65 @@ describe("setSpeakersData",()=> {
 
   test("should set no of contribution, validation and speaker for given data and language for sunoIndia", () => {
     mockLocalStorage();
-    localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+    localStorage.setItem('localeString', JSON.stringify({'hour(s)':"hour(s)", 'second(s)': "second(s)", 'minute(s)':"minute(s)"}))
     const data = [{language:"Hindi",total_speakers: "80",total_contributions: "1.22",total_validations: "2.65"},{language:"English",total_speakers: "90",total_contributions: "0.8",total_validations: "0.75"}];
 
     setSpeakerData(data, "Hindi", "suno");
 
     expect($speakerDataLanguagesWrapper.hasClass('d-none')).toEqual(true);
-    expect($speakersDataContributionValue.text()).toEqual(`1 hours 13 minutes`);
-    expect($speakersDataValidationValue.text()).toEqual(`2 hours 39 minutes`);
+    expect($speakersDataContributionValue.text()).toEqual(`1 hour(s) 13 minute(s)`);
+    expect($speakersDataValidationValue.text()).toEqual(`2 hour(s) 39 minute(s)`);
     expect($speakersDataSpeakerValue.text()).toEqual(`80`);
     localStorage.clear();
   })
 
   test("should set no of contribution, validation and speaker for given data and no language for sunoIndia", () => {
     mockLocalStorage();
-    localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+    localStorage.setItem('localeString', JSON.stringify({'hour(s)':"hour(s)", 'second(s)': "second(s)", 'minute(s)':"minute(s)"}))
     const data = [{total_languages:"3",total_speakers: "80",total_contributions: "1.22",total_validations: "2.65"}];
 
     setSpeakerData(data, '', "suno");
 
     expect($speakerDataLanguagesWrapper.hasClass('d-none')).toEqual(false);
     expect($speakerDataLanguagesValue.text()).toEqual('3');
-    expect($speakersDataContributionValue.text()).toEqual(`1 hours 13 minutes`);
-    expect($speakersDataValidationValue.text()).toEqual(`2 hours 39 minutes`);
+    expect($speakersDataContributionValue.text()).toEqual(`1 hour(s) 13 minute(s)`);
+    expect($speakersDataValidationValue.text()).toEqual(`2 hour(s) 39 minute(s)`);
     expect($speakersDataSpeakerValue.text()).toEqual(`80`);
     localStorage.clear()
   })
 
   test("should set no of contribution, validation and speaker for given data and language for boloIndia", () => {
     mockLocalStorage();
-    localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+    localStorage.setItem('localeString', JSON.stringify({'hour(s)':"hour(s)", 'second(s)': "second(s)", 'minute(s)':"minute(s)"}))
     const data = [{language:"Hindi",total_speakers: "80",total_contributions: "1.22",total_validations: "2.65"},{language:"English",total_speakers: "90",total_contributions: "0.8",total_validations: "0.75"}];
 
     setSpeakerData(data, "Hindi", "bolo");
 
     expect($speakerDataLanguagesWrapper.hasClass('d-none')).toEqual(true);
-    expect($speakersDataContributionValue.text()).toEqual(`1 hours 13 minutes`);
-    expect($speakersDataValidationValue.text()).toEqual(`2 hours 39 minutes`);
+    expect($speakersDataContributionValue.text()).toEqual(`1 hour(s) 13 minute(s)`);
+    expect($speakersDataValidationValue.text()).toEqual(`2 hour(s) 39 minute(s)`);
     expect($speakersDataSpeakerValue.text()).toEqual(`80`);
     localStorage.clear()
   })
 
   test("should set no of contribution, validation and speaker for given data and no language for boloIndia", () => {
     mockLocalStorage();
-    localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+    localStorage.setItem('localeString', JSON.stringify({'hour(s)':"hour(s)", 'second(s)': "second(s)", 'minute(s)':"minute(s)"}))
     const data = [{total_languages:"3",total_speakers: "80",total_contributions: "1.22",total_validations: "2.65"}];
 
     setSpeakerData(data, '', "bolo");
 
     expect($speakerDataLanguagesWrapper.hasClass('d-none')).toEqual(false);
     expect($speakerDataLanguagesValue.text()).toEqual('3');
-    expect($speakersDataContributionValue.text()).toEqual(`1 hours 13 minutes`);
-    expect($speakersDataValidationValue.text()).toEqual(`2 hours 39 minutes`);
+    expect($speakersDataContributionValue.text()).toEqual(`1 hour(s) 13 minute(s)`);
+    expect($speakersDataValidationValue.text()).toEqual(`2 hour(s) 39 minute(s)`);
     expect($speakersDataSpeakerValue.text()).toEqual(`80`);
     localStorage.clear()
   })
 
   test("should set no of contribution, validation and speaker for given data and language for likhoIndia", () => {
     mockLocalStorage();
-    localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+    localStorage.setItem('localeString', JSON.stringify({'hour(s)':"hour(s)", 'second(s)': "second(s)", 'minute(s)':"minute(s)"}))
     const data = [{language:"English-Hindi",total_speakers: "80",total_contribution_count: "22",total_validation_count: "65"},{language:"Tamil-English",total_speakers: "90",total_contribution_count: "8",total_validation_count: "75"}];
 
     setSpeakerData(data, "Tamil-English", "likho");
@@ -329,7 +329,7 @@ describe("setSpeakersData",()=> {
 
   test("should set no of contribution, validation, languages and speaker for given data and no language for likhoIndia", () => {
     mockLocalStorage();
-    localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+    localStorage.setItem('localeString', JSON.stringify({'hour(s)':"hour(s)", 'second(s)': "second(s)", 'minute(s)':"minute(s)"}))
     const data = [{total_languages:"6",total_speakers: "80",total_contribution_count: "22",total_validation_count: "65"}];
 
     setSpeakerData(data, "", "likho");
