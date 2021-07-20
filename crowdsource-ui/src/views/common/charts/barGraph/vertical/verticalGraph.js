@@ -1,10 +1,18 @@
 const { calculateTime, formatTime } = require('./utils');
+const { LOCALE_STRINGS } = require('./constants');
 const chartReg = {};
 
 const drawTopLanguageChart = (chartData, type, dataType, page) => {
   const chartColors = ['#F7CC56', '#F7CC56', '#F7CC56', '#EF8537'];
+  const localStrings = JSON.parse(
+    localStorage.getItem(LOCALE_STRINGS)
+  );
+  const dekhoToolTipStr = localStrings["Images"].toLowerCase();
+  const likhoToolTipStr = localStrings["translations"];
+  const boloSpeakerToolTipStr = localStrings["speakers"];
   am4core.ready(function () {
     const chart = am4core.create('top-language-chart', am4charts.XYChart);
+
 
     if(page === 'thankyou'){
       const currentFunctionalPage = localStorage.getItem("selectedType");
@@ -13,14 +21,14 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
           item.total_validation_count = item.total_validation_count ? item.total_validation_count : 0;
           item.total_validations = item.total_validations ? item.total_validations : 0.000;
           const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(item.total_validations) * 60 * 60), true);
-          item.contributedHours = type == "suno" || type == "bolo" ? formatTime(cHours, cMinutes, cSeconds) : type == "dekho" ? ((item.total_validation_count).toString() + " images") : ((item.total_validation_count).toString() + " translations");
+          item.contributedHours = type == "suno" || type == "bolo" ? formatTime(cHours, cMinutes, cSeconds) : type == "dekho" ? ((item.total_validation_count).toString() + " "+ dekhoToolTipStr) : ((item.total_validation_count).toString() + " " + likhoToolTipStr);
         });
       } else {
         chartData.forEach(item => {
           item.total_contributions = item.total_contributions ? item.total_contributions : 0.000;
           item.total_contribution_count = item.total_contribution_count ? item.total_contribution_count : 0;
           const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(item.total_contributions)  * 60 * 60), true);
-          item.contributedHours = type == "suno" || type == "bolo" ? formatTime(cHours, cMinutes, cSeconds) : type == "dekho" ? ((item.total_contribution_count ).toString() + " images") : ((item.total_contribution_count ).toString() + " translations");
+          item.contributedHours = type == "suno" || type == "bolo" ? formatTime(cHours, cMinutes, cSeconds) : type == "dekho" ? ((item.total_contribution_count ).toString() + " "+ dekhoToolTipStr) : ((item.total_contribution_count ).toString() + " " + likhoToolTipStr);
         });
       }
 
@@ -30,11 +38,11 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
           item.total_contributions = item.total_contributions ? item.total_contributions : 0.000;
           item.total_contribution_count = item.total_contribution_count ? item.total_contribution_count : 0;
           const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(item.total_contributions ) * 60 * 60), true);
-          item.contributedHours = type == "suno" || type == "bolo" ? formatTime(cHours, cMinutes, cSeconds) : type == "dekho" ? ((item.total_contribution_count ).toString() + " images") : ((item.total_contribution_count).toString() + " translations");
+          item.contributedHours = type == "suno" || type == "bolo" ? formatTime(cHours, cMinutes, cSeconds) : type == "dekho" ? ((item.total_contribution_count ).toString() + " "+ dekhoToolTipStr) : ((item.total_contribution_count).toString() + " " + likhoToolTipStr);
         });
       } else {
         chartData.forEach(item => {
-          item.contributedHours = ((item.total_speakers).toString() + " speakers");
+          item.contributedHours = ((item.total_speakers).toString() + " " + boloSpeakerToolTipStr);
         });
       }
     }
@@ -61,23 +69,23 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
     if(page === 'thankyou'){
       const currentFunctionalPage = localStorage.getItem("selectedType");
       if(currentFunctionalPage == "validate"){
-        valueAxis.title.text = type == "suno" || type == "bolo" || type == "likho" ? "Validation (in sentences)" : 'Validation (in image labels)';
+        valueAxis.title.text = type == "suno" || type == "bolo" || type == "likho" ? localStrings["Validation (in sentences)"] : localStrings['Validation (in image labels)'];
       }else {
         if(type == "suno"){
-          valueAxis.title.text = 'Transcription (in sentences)';
+          valueAxis.title.text = localStrings['Transcription (in sentences)'];
         } else if(type == "bolo"){
-          valueAxis.title.text = 'Recordings (in hours)';
+          valueAxis.title.text = localStrings['Recordings (in hours)'];
         } else if(type == "likho"){
-          valueAxis.title.text = 'Translation (in sentences)';
+          valueAxis.title.text = localStrings['Translation (in sentences)'];
         } else {
-          valueAxis.title.text = 'Labelled (in images)';
+          valueAxis.title.text = localStrings['Labelled (in images)'];
         }
       }
     } else {
       if (dataType !== "speaker") {
-        valueAxis.title.text = type == "suno" || type == "bolo" ? "Contribution (in hours)" : type == "dekho" ? "Contribution (no. of images)" : 'Contribution (no. of translations)';
+        valueAxis.title.text = type == "suno" || type == "bolo" ? localStrings["Contribution (in hours)"] : type == "dekho" ? localStrings["Contribution (no. of images)"] : localStrings['Contribution (no. of translations)'];
       } else {
-        valueAxis.title.text = type == "bolo" ? "Contribution (no. of speakers)" : "";
+        valueAxis.title.text = type == "bolo" ? localStrings["Contribution (no. of speakers)"] : "";
       }
     }
 

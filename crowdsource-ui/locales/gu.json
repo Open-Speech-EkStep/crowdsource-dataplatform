@@ -395,5 +395,17 @@
 	"You validated <span id=\"user-contribution-count\"></span> <span>sentence(s)</span> for your language pair!": "You validated <span id=\"user-contribution-count\"></span> <span>sentence(s)</span> for your language pair!",
 	"You contributed <span id=\"user-contribution-count\"></span> <span>image label(s)</span> for your language!": "You contributed <span id=\"user-contribution-count\"></span> <span>image label(s)</span> for your language!",
 	"<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Dekho India Target Achieved": "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Dekho India Target Achieved",
-	"You validated <span id=\"user-contribution-count\"></span> <span>image label(s)</span> for your language!": "You validated <span id=\"user-contribution-count\"></span> <span>image label(s)</span> for your language!"
+	"You validated <span id=\"user-contribution-count\"></span> <span>image label(s)</span> for your language!": "You validated <span id=\"user-contribution-count\"></span> <span>image label(s)</span> for your language!",
+	"Transcription (in sentences)": "Transcription (in sentences)",
+	"Recordings (in hours)": "Recordings (in hours)",
+	"Translation (in sentences)": "Translation (in sentences)",
+	"Labelled (in images)": "Labelled (in images)",
+	"Validation (in sentences)": "Validation (in sentences)",
+	"Validation (in image labels)": "Validation (in image labels)",
+	"Contribution (in hours)": "Contribution (in hours)",
+	"Contribution (no. of images)": "Contribution (no. of images)",
+	"Contribution (no. of translations)": "Contribution (no. of translations)",
+	"Contribution (no. of speakers)": "Contribution (no. of speakers)",
+	"translations": "translations",
+	"speakers": "speakers"
 }

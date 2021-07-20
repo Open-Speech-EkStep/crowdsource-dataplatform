@@ -174,10 +174,15 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   $("#language-hour-goal").text(languageGoal);
   $("#user-contribution-count").text(data.contributionCount);
   const topLanguages = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_TOP_LANGUAGE)) || [];
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const isInTopLanguage = topLanguages.some((ele) => ele.language.toLowerCase() === contributionLanguage.toLowerCase())
-
+  let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const module = localStorage.getItem(CURRENT_MODULE);
+
+  if(module === 'likho'){
+    const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+    const likhoPairLanguage = contributionLanguage + '-' + toLanguage;
+    contributionLanguage = likhoPairLanguage
+  }
+  const isInTopLanguage = topLanguages.some((ele) => ele.language.toLowerCase() === contributionLanguage.toLowerCase())
 
   if(isInTopLanguage){
     $("#languageInTopWeb").removeClass("d-none");
