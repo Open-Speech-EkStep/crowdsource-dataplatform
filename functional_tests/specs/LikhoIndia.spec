@@ -46,7 +46,7 @@ Tags: component
 * Navigate to "Validate"
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be enabled
 * User should see the text "Is the translation correct?"
-* User skips the next "2" sentences user should land on Thank you page in "English"
+* User skips all "2" sentences user should land on Likho India Thank you page
 * When user clicks on Validate more button , user should see no data available message for "Likho" India
 
 ## Validate Validate flow

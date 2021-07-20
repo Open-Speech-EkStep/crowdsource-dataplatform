@@ -6,7 +6,8 @@ const {
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
-  TOP_LANGUAGES_BY_HOURS
+  TOP_LANGUAGES_BY_HOURS,
+  AGGREGATED_DATA_BY_TOP_LANGUAGE
 } = require("../common/constants");
 const { onChangeUser,onOpenUserDropDown,showUserProfile } = require('../common/header');
 
@@ -19,7 +20,7 @@ const {
 } = require("../common/utils");
 
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showByHoursChart,showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge} = require('../common/common');
+const {showByHoursChart,showByHoursChartThankyouPage, getContributedAndTopLanguage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 
 const CURRENT_INDEX = "sunoValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -72,9 +73,9 @@ const getLanguageStats = function () {
         const contributionLanguage = localStorage.getItem(
           CONTRIBUTION_LANGUAGE
         );
-        const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.suno.value);
-        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChartThankyouPage(MODULE.suno.value);
+        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.suno.value, 'total_validation_count','total_validations');
+        localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
+        showByHoursChartThankyouPage(MODULE.suno.value, "thankyou");
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
@@ -149,26 +150,35 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName)
     onChangeUser('./validator-thank-you.html',MODULE.suno.value);
     onOpenUserDropDown();
-    // toggleFooterPosition();
-    setPageContentHeight();
     setSentencesContributed();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (contributionLanguage) {
       updateLocaleLanguagesDropdown(contributionLanguage);
     }
+
+    const localStrings = JSON.parse(
+      localStorage.getItem(LOCALE_STRINGS)
+    );
+
+    const localeLanguageStr = localStrings[contributionLanguage];
+    $("#metric-language").text(localeLanguageStr);
+    // replaceSubStr($(".progress-average-metric"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopWeb"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopWeb"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopMob"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopMob"), "<language>", localeLanguageStr);
+    replaceSubStr($(".x-axis-label"), "<language>", localeLanguageStr);
+    $("#conLanWhenGetBadge").html(localeLanguageStr)
     getLanguageStats();
+    updateGoalProgressBar(`/progress/asr/${contributionLanguage}/validate`)
   }
 }
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
+  localStorage.setItem("selectedType","validate");
   initializeFeedbackModal();
-  // $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
-  //   if (!$(this).attr("disabled")) {
-  //     downloadPdf($(this).attr("data-badge"));
-  //   }
-  // });
 
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));

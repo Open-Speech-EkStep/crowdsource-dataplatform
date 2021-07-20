@@ -1,4 +1,4 @@
-const fetch = require('./fetch')
+const fetch = require('../common/fetch')
 const {
   SIXTY,
   HOUR_IN_SECONDS,
@@ -6,8 +6,9 @@ const {
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
-  TOP_LANGUAGES_BY_HOURS
-} = require("./constants");
+  TOP_LANGUAGES_BY_HOURS,
+  AGGREGATED_DATA_BY_TOP_LANGUAGE
+} = require("../common/constants");
 
 const {
   setPageContentHeight,
@@ -15,40 +16,25 @@ const {
   updateLocaleLanguagesDropdown,
   getLocaleString,
   performAPIRequest,
-} = require("./utils");
-const {showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../../../build/js/common/common');
-const {onChangeUser,onOpenUserDropDown,showUserProfile} = require('./header');
+} = require("../common/utils");
+
+const {downloadPdf} = require('../common/downloadableBadges');
+
+const {showByHoursChart, showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
+const {onChangeUser,onOpenUserDropDown,showUserProfile} = require('../common/header');
+
+const {initializeFeedbackModal} = require('../common/feedback');
 
 const CURRENT_INDEX = "boloValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 const boloValidatorCountKey = 'boloValidatorCount';
 const totalSentence = Number(localStorage.getItem(boloValidatorCountKey));
 
-function downloadPdf(badgeType) {
-  const pdf = new jsPDF()
-  const img = new Image();
-  img.onload = function () {
-    pdf.addImage(this, 50, 10, 108, 130);
-    pdf.save(`${badgeType}-badge.pdf`);
-  };
-
-  img.crossOrigin = "Anonymous";
-  const currentModule = localStorage.getItem(CURRENT_MODULE);
-  const badges = MODULE[currentModule].BADGES;
-
-  img.src = badges[badgeType].imgValJpg;
-  const allBadges = JSON.parse(localStorage.getItem('badges'));
-  const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
-  if (badge) {
-    pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 190);
-  }
-}
-
-$("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
-  if (!$(this).attr("disabled")) {
-    downloadPdf($(this).attr("data-badge"));
-  }
-});
+// $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
+//   if (!$(this).attr("disabled")) {
+//     downloadPdf($(this).attr("data-badge"));
+//   }
+// });
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -95,9 +81,13 @@ const getLanguageStats = function () {
         const contributionLanguage = localStorage.getItem(
           CONTRIBUTION_LANGUAGE
         );
-        const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.bolo.value);
-        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChartThankyouPage(MODULE.bolo.value);
+
+        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.bolo.value, 'total_validation_count','total_validations');
+        localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
+        showByHoursChartThankyouPage(MODULE.bolo.value, "thankyou");
+        // const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.bolo.value);
+        // localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
+        // showByHoursChart(MODULE.bolo.value, "thankyou");
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
@@ -172,20 +162,36 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName);
     onChangeUser('./validator-thank-you.html',MODULE.bolo.value)
     onOpenUserDropDown();
-    // toggleFooterPosition();
-    setPageContentHeight();
     setSentencesContributed();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (contributionLanguage) {
       updateLocaleLanguagesDropdown(contributionLanguage);
     }
+
+    const localStrings = JSON.parse(
+      localStorage.getItem(LOCALE_STRINGS)
+    );
+
+    const localeLanguageStr = localStrings[contributionLanguage];
+    $("#metric-language").text(localeLanguageStr);
+    // replaceSubStr($(".progress-average-metric"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopWeb"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopWeb"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopMob"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopMob"), "<language>", localeLanguageStr);
+    replaceSubStr($(".x-axis-label"), "<language>", localeLanguageStr);
+    $("#conLanWhenGetBadge").html(localeLanguageStr)
+
     getLanguageStats();
+    updateGoalProgressBar(`/progress/text/${contributionLanguage}/validate`);
   }
 }
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.bolo.value);
+  localStorage.setItem("selectedType","validate");
+  initializeFeedbackModal();
 
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));

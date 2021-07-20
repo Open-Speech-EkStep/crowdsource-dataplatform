@@ -54,6 +54,12 @@ $primary-color-shade10: tint($primary-color, 100%);
   background-color: $bg-header-primary !important;
 }
 
+.bg-tri-color{
+  background-image: url(/img/orange_bg.svg), url(/img/green_bg.svg),linear-gradient(180.52deg, #FF9A1C -33.42%, #FFBA3F -19.59%, #FFDE66 -5.75%, #FFEA9C 5.15%, #FFFFFF 19.03%, #FFFFFF 81.54%, #EAF6E0 87.7%, #99E090 99.7%, #00BA06 118.97%) ;
+  background-position: top center, bottom center;
+  background-repeat: no-repeat, no-repeat;
+}
+
 .bg-secondary {
   background-color: $bg-light-color !important;
 }
@@ -99,6 +105,7 @@ $primary-color-shade10: tint($primary-color, 100%);
   background-color: $primary-color;
   color: $text-white;
   filter: drop-shadow(1px 8px 24px $primary-color-shade2);
+  width: max-content;
 }
 
 .btn-custom-primary {
@@ -169,7 +176,7 @@ $primary-color-shade10: tint($primary-color, 100%);
   border: 2px solid $primary-color !important;
 }
 
-.progress-bar {
+.progress-bar-striped {
   background-color: $primary-color !important;
 }
 
@@ -271,3 +278,5 @@ $primary-color-shade10: tint($primary-color, 100%);
 #badge-container .nav-tabs .nav-link {
   color: $primary-color !important;
 }
+
+

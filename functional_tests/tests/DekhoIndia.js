@@ -133,10 +133,11 @@ step("User clicks on <arg0> , he should see next sentence and <arg1> <arg2> butt
 step("User clicks on <arg0> he should see thank you page and should be able to see bronze Badge", async function (arg0) {
 	await click(taiko.button({ id: arg0 }))
 	await taiko.waitFor(2000)
-	assert.ok(await text("You’ve earned your Bronze Bhasha Samarthak Badge").isVisible());
-	// assert.ok(await text("National Language Translation Mission").isVisible());
-	assert.ok(await text("Share it with your friends and family").isVisible());
-	assert.ok(await image({ id: "reward-img" }).isVisible());
+	// assert.ok(await text("You’ve earned your Bronze Bhasha Samarthak Badge").isVisible());
+	assert.ok(await text("Congratulations on winning a new badge!").isVisible());
+	assert.ok(await text("Share on").isVisible());
+	// assert.ok(await image({ id: "reward-img" }).isVisible());
+	assert.ok(! await image({ id: "bronze_badge_link_img" }).isDisabled());
 });
 
 step("User should see add extension and watch video link", async function () {
@@ -157,8 +158,9 @@ step("Clicking watch video link should open video", async function () {
 });
 
 step("Validate Thank you page content for Dekho India", async function () {
-	assert.ok(await text('Thank you for contributing!').exists())
-	assert.ok(await text('10000 images').exists())
+	assert.ok(await text('Dekho India Target Achieved').exists())
+	assert.ok(await text('Image(s)').exists())
+	assert.ok(await text('Labelled (in images)').isVisible())
 });
 
 

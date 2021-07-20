@@ -359,7 +359,19 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'Validation so far in <y> - <x>',
             'Contribution so far in <y> - <x>',
             'Validation',
-            'Contribution'
+            'Contribution',
+            'Transcription (in sentences)',
+            'Recordings (in hours)',
+            'Translation (in sentences)',
+            'Labelled (in images)',
+            'Validation (in sentences)',
+            'Validation (in image labels)',
+            'Contribution (in hours)',
+            'Contribution (no. of images)',
+            'Contribution (no. of translations)',
+            'Contribution (no. of speakers)',
+            'translations',
+            'speakers',
         ];
 
         const langSttr = {};

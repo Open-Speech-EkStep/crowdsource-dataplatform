@@ -7,6 +7,7 @@ const {
   MODULE,
   TOP_LANGUAGES_BY_HOURS,
   ALL_LANGUAGES,
+  AGGREGATED_DATA_BY_TOP_LANGUAGE,
   LIKHO_TO_LANGUAGE,
   CONTRIBUTION_LANGUAGE
 } = require("../common/constants");
@@ -20,7 +21,7 @@ const {
 
 const {downloadPdf} = require('../common/downloadableBadges');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
-const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge, updateLikhoLocaleLanguagesDropdown} = require('../common/common');
+const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge, updateLikhoLocaleLanguagesDropdown,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 const {initializeFeedbackModal} = require('../common/feedback');
 
 const CURRENT_INDEX = "likhoCurrentIndex";
@@ -74,9 +75,9 @@ const getLanguageStats = function () {
           CONTRIBUTION_LANGUAGE
         );
         const module = localStorage.getItem(CURRENT_MODULE);
-        const languages = getContributedAndTopLanguage(module == MODULE.likho.value || module == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, MODULE.likho.value);
-        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChartThankyouPage(MODULE.likho.value);
+        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.likho.value, 'total_contribution_count','total_contributions');
+        localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
+        showByHoursChartThankyouPage(MODULE.likho.value, "thankyou");
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
@@ -151,7 +152,7 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName)
     onChangeUser('./thank-you.html', MODULE.likho.value);
     onOpenUserDropDown();
-    setPageContentHeight();
+    // setPageContentHeight();
     setSentencesContributed();
     // toggleFooterPosition();
 
@@ -160,13 +161,37 @@ function executeOnLoad() {
     if (contributionLanguage && toLanguage) {
       updateLikhoLocaleLanguagesDropdown(contributionLanguage, toLanguage);
     }
+
+    const localStrings = JSON.parse(
+      localStorage.getItem(LOCALE_STRINGS)
+    );
+
+    const localeLanguageStr = localStrings[contributionLanguage];
+    const localeToLanguageStr = localStrings[toLanguage];
+    $("#metric-language").text(localeLanguageStr+"-"+localeToLanguageStr);
+    // replaceSubStr($(".progress-average-metric"), "<from-language>", localeLanguageStr);
+    // replaceSubStr($(".progress-average-metric"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($("#languageNotInTopWeb"), "<from-language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopWeb"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($("#languageInTopWeb"), "<from-language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopWeb"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($("#languageNotInTopMob"), "<from-language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopMob"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($("#languageInTopMob"), "<from-language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopMob"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($(".x-axis-label"), "<from-language>", localeLanguageStr);
+    replaceSubStr($(".x-axis-label"), "<to-language>", localeToLanguageStr);
+    $("#conLanWhenGetBadge").html(`${localeLanguageStr}-${localeToLanguageStr}`)
+
     getLanguageStats();
+    updateGoalProgressBar(`/progress/parallel/${contributionLanguage}/contribute`)
   }
 }
 
 $(document).ready(function () {
 
   localStorage.setItem(CURRENT_MODULE,MODULE.likho.value);
+  localStorage.setItem("selectedType","contribute");
   initializeFeedbackModal();
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));

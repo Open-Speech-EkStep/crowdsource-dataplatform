@@ -3,29 +3,49 @@ const {
   SIXTY,
   HOUR_IN_SECONDS,
   LOCALE_STRINGS,
-  CONTRIBUTION_LANGUAGE,
-  TOP_LANGUAGES_BY_HOURS,
-  AGGREGATED_DATA_BY_TOP_LANGUAGE,
   CURRENT_MODULE,
-  MODULE
+  CONTRIBUTION_LANGUAGE,
+  MODULE,
+  TOP_LANGUAGES_BY_HOURS,
+  AGGREGATED_DATA_BY_TOP_LANGUAGE
 } = require("../common/constants");
 const {
-  setPageContentHeight,
-  toggleFooterPosition,
   updateLocaleLanguagesDropdown,
   getLocaleString,
   performAPIRequest,
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
-const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
+const {initializeFeedbackModal} = require('../common/feedback')
 
-const { initializeFeedbackModal } = require('../common/feedback');
-const dekhoCountKey = 'dekhoCount';
-const CURRENT_INDEX = "dekhoCurrentIndex";
+const {getContributedAndTopLanguage,setBadge,showByHoursChart,showByHoursChartThankyouPage, updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
+const {onChangeUser,showUserProfile,onOpenUserDropDown} = require('../common/header');
+
+const CURRENT_INDEX = "currentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
+const totalSentence = Number(localStorage.getItem('count'));
 
-const totalSentence = Number(localStorage.getItem(dekhoCountKey));
+function setSentencesContributed() {
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const speakerDetails = localStorage.getItem("speakerDetails");
+  let userName = "";
+  if (speakerDetails) {
+    userName = JSON.parse(speakerDetails).userName;
+  }
+
+  let rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
+  if (!rawLocaleString) {
+    getLocaleString().then(() => {
+      rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
+    })
+  }
+
+  const localeStrings = JSON.parse(rawLocaleString);
+  performAPIRequest(
+    `/rewards?type=text&language=${contributionLanguage}&source=contribute&userName=${userName}`
+  ).then((data) => {
+    setBadge(data,localeStrings);
+  });
+}
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -65,22 +85,30 @@ const updateShareContent = function (language, rank) {
 };
 
 const getLanguageStats = function () {
-  fetch("/stats/summary/ocr")
+  fetch("/stats/summary/text")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
-        const contributionLanguage = localStorage.getItem(
-          CONTRIBUTION_LANGUAGE
-        );
-        const module = localStorage.getItem(CURRENT_MODULE);
-        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.dekho.value, 'total_contribution_count','total_contributions');
+        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.bolo.value, 'total_contribution_count','total_contributions');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
-        showByHoursChartThankyouPage(MODULE.dekho.value, "thankyou");
-
+        showByHoursChartThankyouPage(MODULE.bolo.value, "thankyou");
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
+        const {hours, minutes, seconds} = getFormattedTime(
+          Number(data[0].total_contributions) * 3600
+        );
+        const $highestLangTime = $("#highest_language_time");
+        $highestLangTime.text(`${hours}hrs ${minutes}min ${seconds}sec`);
 
+        const $highestLanguageProgress = $("#highest_language_progress");
+        const hlh = Number(data[0].total_contributions) * 3600;
+        const hlp = (hlh / (100 * 3600)) * 100;
+        $highestLanguageProgress.css("width", `${hlp}%`);
+
+        const contributionLanguage = localStorage.getItem(
+          CONTRIBUTION_LANGUAGE
+        );
         const rank = data.findIndex(
           (x) => x.language.toLowerCase() === contributionLanguage.toLowerCase()
         );
@@ -115,29 +143,6 @@ const getLanguageStats = function () {
     });
 };
 
-function setSentencesContributed() {
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const speakerDetails = localStorage.getItem("speakerDetails");
-  let userName = "";
-  if (speakerDetails) {
-    userName = JSON.parse(speakerDetails).userName;
-  }
-
-  let rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
-  if (!rawLocaleString) {
-    getLocaleString().then(() => {
-      rawLocaleString = localStorage.getItem(LOCALE_STRINGS);
-    })
-  }
-
-  const localeStrings = JSON.parse(rawLocaleString);
-  performAPIRequest(
-    `/rewards?type=ocr&language=${contributionLanguage}&source=contribute&userName=${userName}`
-  ).then((data) => {
-    setBadge(data,localeStrings);
-  });
-}
-
 function executeOnLoad() {
   const currentIndexInStorage = Number(localStorage.getItem(CURRENT_INDEX));
   const localSpeakerDataParsed = JSON.parse(
@@ -146,48 +151,46 @@ function executeOnLoad() {
 
   if (!localSpeakerDataParsed) {
     location.href = "./home.html";
-  } else if (currentIndexInStorage < totalSentence - 1) {
+  } else if (currentIndexInStorage < totalSentence -1) {
     location.href = "./home.html";
   } else {
-    showUserProfile(localSpeakerDataParsed.userName)
-    onChangeUser('./thank-you.html',MODULE.dekho.value);
+    showUserProfile(localSpeakerDataParsed.userName);
+    onChangeUser('./thank-you.html', MODULE.bolo.value);
     onOpenUserDropDown();
-    setPageContentHeight();
     setSentencesContributed();
-    // toggleFooterPosition();
-
-    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    if (contributionLanguage) {
-      updateLocaleLanguagesDropdown(contributionLanguage);
-    }
-
-    const localStrings = JSON.parse(
-      localStorage.getItem(LOCALE_STRINGS)
-    );
-
-    const localeLanguageStr = localStrings[contributionLanguage];
-    $("#metric-language").text(localeLanguageStr);
-    // replaceSubStr($(".progress-average-metric"), "<language>", localeLanguageStr);
-    replaceSubStr($("#languageNotInTopWeb"), "<language>", localeLanguageStr);
-    replaceSubStr($("#languageInTopWeb"), "<language>", localeLanguageStr);
-    replaceSubStr($("#languageNotInTopMob"), "<language>", localeLanguageStr);
-    replaceSubStr($("#languageInTopMob"), "<language>", localeLanguageStr);
-    replaceSubStr($(".x-axis-label"), "<language>", localeLanguageStr);
-    $("#conLanWhenGetBadge").html(localeLanguageStr)
-
-    getLanguageStats();
-    updateGoalProgressBar(`/progress/ocr/${contributionLanguage}/contribute`)
   }
+
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  if (contributionLanguage) {
+    updateLocaleLanguagesDropdown(contributionLanguage);
+  }
+  const localStrings = JSON.parse(
+    localStorage.getItem(LOCALE_STRINGS)
+  );
+
+  const localeLanguageStr = localStrings[contributionLanguage];
+  // replaceSubStr($(".progress-average-metric"), "<language>", localeLanguageStr);
+  $("#metric-language").text(localeLanguageStr);
+  replaceSubStr($("#languageNotInTopWeb"), "<language>", localeLanguageStr);
+  replaceSubStr($("#languageInTopWeb"), "<language>", localeLanguageStr);
+  replaceSubStr($("#languageNotInTopMob"), "<language>", localeLanguageStr);
+  replaceSubStr($("#languageInTopMob"), "<language>", localeLanguageStr);
+  replaceSubStr($(".x-axis-label"), "<language>", localeLanguageStr);
+  $("#conLanWhenGetBadge").html(localeLanguageStr)
+
+  updateGoalProgressBar(`/progress/text/${contributionLanguage}/contribute`);
+  getLanguageStats();
 }
 
 
 $(document).ready(function () {
+  localStorage.setItem(CURRENT_MODULE,'bolo');
+  localStorage.setItem("selectedType","contribute");
+  initializeFeedbackModal();
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });
-  localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
-  localStorage.setItem("selectedType","contribute");
-  initializeFeedbackModal();
+
   getLocaleString()
     .then((data) => {
       executeOnLoad();

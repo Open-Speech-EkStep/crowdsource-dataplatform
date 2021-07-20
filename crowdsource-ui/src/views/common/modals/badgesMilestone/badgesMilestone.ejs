@@ -1,7 +1,7 @@
 <div class="row d-none" id="milestone_text">
     <div class="col-12 col-lg-5 col-md-5 mt-lg-5 justify-content-between">
         <div>
-            <img src="<%= `/img/${MODULE}_bronze_badge.svg`%>" alt="Bronze Badge" id="reward-img" class="reward-img">
+            <img src="<%= `/img/suno_bronze_badge.svg`%>" alt="Bronze Badge" id="reward-img" class="reward-img">
         </div>
         <button class="btn btn-outline-primary my-2" data-badge="" download id="download_pdf"><span class="mr-2"><%= __('Download')%></span>
             <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -11,9 +11,8 @@
         </button>
     </div>
     <div class="col-12 col-lg-7 col-md-7 msg-box mt-5">
-        <h4 class="mb-3 mt-lg-5"><%- __('You’ve earned your <span id="current_badge_name"></span> Bhasha Samarthak Badge') %></h4>
-        <p><span id="user-contribution" class="text-primary"></span> <%- __(`You've earned a <span id="current_badge_name_1"></span> Bhasha Samarthak Badge by ${type} <span id="current_badge_count"></span> ${text}.`) %></p>
-        <p class="mt-lg-5" id="next-goal"><%- __(`Your next goal is to reach <span id="next_badge_count"></span> ${text} to earn your <span id="next_badge_name_1"></span> Bhasha Samarthak Badge.`) %> <a href="./badges.html"><%= __('Know More') %></a></p>
+        <h4 class="mb-3 mt-lg-5">You’ve earned your Suno India <span id="current_badge_name"></span> Bhasha Samarthak Badge'</h4>
+        <p><span id="user-contribution" class="text-primary"></span>validated <span id="current_badge_count"></span> sentences in <span id="conLanWhenGetBadge"></span>.</p>
     </div>
 </div>
 
