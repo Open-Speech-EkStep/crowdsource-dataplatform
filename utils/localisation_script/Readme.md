@@ -21,11 +21,21 @@ This utility allows users to generate excel file(with all keys / delta keys) fro
 1. Run the following command: `cd all_keys_generator`
 2. To generate from 'en' locale file, run from the following:
    ```
-   python AllKeysExcelGenerator.py -j ./../../../crowdsource-ui/locales/en.json -o ./en/out/en.xlsx
+   python AllKeysExcelGenerator.py -j ./../../../crowdsource-ui/locales -o ./out/en.xlsx --only-en
    ```
 
+   This `./out/en.xlsx` obtained from the above step will have all keys from en locale file and can be shared with people for corrections in values.
+
+   Or
+
+   To generate for all languages, run from the following:
+   ```
+   python AllKeysExcelGenerator.py -j ./../../../crowdsource-ui/locales -o ./out/out.xlsx
+   ```
+
+   The `./out/out_sme.xlsx` obtained from the above step will have all language content from locale files and can be shared with people for corrections in values.
+
 (For more info on above command, use -h for help)
-This `./en/out/en.xlsx` obtained from the above step will have all keys from en locale file and can be shared with people for corrections in values.
 
 #### After correction is done:
 
