@@ -253,8 +253,11 @@ const dashboardRoutes = (router) => {
         });
     });
 
-    router.get('/progress/:type/:language/:source', validateMediaTypeInput, async (req, res) => {
-        const progressData = await getContributionProgress(req.params.type, req.params.language, req.params.source);
+    router.get('/progress/:type/:language?/:source?', validateMediaTypeInput, async (req, res) => {
+        const type = req.params.type || '';
+        const language = req.params.language || '';
+        const source = req.params.source || '';
+        const progressData = await getContributionProgress(type, language, source);
         const lastUpdatedDateTime = await getLastUpdatedAt();
         res.send({
             'current-progress': progressData.currentProgress,
