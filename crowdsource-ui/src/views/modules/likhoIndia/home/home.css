@@ -3,8 +3,6 @@ body {
 }
 html {
   scroll-behavior: smooth;
-}
-html {
   font-size: 10px;
 }
 .display-5 {
@@ -117,10 +115,10 @@ h6,
     width: 7rem;
   }
   #say-p-2 {
-    bottom: 0rem !important;
+    bottom: 0 !important;
   }
   #listen-p-2 {
-    bottom: 0rem !important;
+    bottom: 0 !important;
   }
 }
 @media (min-width: 1200px) {
@@ -205,7 +203,7 @@ h6,
   width: 90% !important;
 }
 
-[data-toggle='popover']::after {
+[data-toggle='popover']:after {
   display: inline-block;
   margin-left: 0.255em;
   vertical-align: middle;
@@ -236,7 +234,7 @@ h6,
   display: inline-block;
   border-width: 0.2rem !important;
   border-color: #007bff;
-  border-top-color: #fff;
+  border-top-color: #ffffff;
   animation: spin 1s infinite linear;
   border-radius: 100%;
   border-style: solid;
@@ -255,7 +253,7 @@ body.modal-open .supreme-container {
 }
 
 #language-top-row .col-lg-5 {
-  padding-left: 0px;
+  padding-left: 0;
 }
 
 .supreme-container .btn-outline-primary {
@@ -273,7 +271,7 @@ body.modal-open .supreme-container {
 }
 
 .supreme-container .btn-outline-primary:hover {
-  color: #fff;
+  color: #ffffff;
   background-color: #007bff;
   background-image: url("data:image/svg+xml;utf8,<svg fill='white' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M16.003 18.626l7.081-7.081L25 13.46l-8.997 8.998-9.003-9 1.917-1.916z'/></svg>");
 }
@@ -288,18 +286,18 @@ body.modal-open .supreme-container {
   color: #444444;
 }
 .say-logo{
-  background-color: #42B2C6;
+  background-color: #42b2c6;
   border-radius: 50%;
-  box-shadow: 0px 0px 12px 8px rgb(105 203 220 / 40%);
+  box-shadow: 0 0 12px 8px rgb(105 203 220 / 40%);
   justify-self: right;
   width: 120px;
   height: auto;
 }
 
 .listen-logo{
-  background: #4D82F7;
+  background: #4d82f7;
   border-radius: 50%;
-  box-shadow: 0px 0px 12px 8px rgba(102, 176, 255, 0.4);
+  box-shadow: 0 0 12px 8px rgba(102, 176, 255, 0.4);
   justify-self: right;
   width: 120px;
   height: auto;
@@ -313,9 +311,9 @@ body.modal-open .supreme-container {
 }
 
 .card{
-  background-image: url(/img/NEW-WAVE.svg);
+  background-image: url('/img/NEW-WAVE.svg');
   mix-blend-mode: normal;
-  box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   min-height: 190px;
   background-repeat: no-repeat;
@@ -340,19 +338,19 @@ body.modal-open .supreme-container {
 }
 
 .quarter {
-  background-color: #CDD8F6;
+  background-color: #cdd8f6;
 }
 
 .half {
-  background-color: #92A8E8;
+  background-color: #92a8e8;
 }
 
 .threeQuarter {
-  background-color: #6B85CE;
+  background-color: #6b85ce;
 }
 
 .full {
-  background-color: #4061BF;
+  background-color: #4061bf;
 }
 
 .legend-val {
@@ -366,7 +364,7 @@ body.modal-open .supreme-container {
 }
 
 #viewAllDetailsBtn:hover {
-  color: #fff !important;
+  color: #ffffff !important;
 }
 
 .options:hover{
@@ -375,11 +373,11 @@ body.modal-open .supreme-container {
 
 .active{
   font-weight: 900;
-  color: black;
+  color: #000000;
 }
 
 #indiaMapChart {
- height: 500px;
+  height: 500px;
 }
 
 .validate-disabled {
@@ -419,7 +417,7 @@ body.modal-open .supreme-container {
     margin-top: 2rem;
   }
   .mt-xs-5 {
-     margin-top: 5rem;
+    margin-top: 5rem;
   }
   .fs-h4 {
     font-size: 1.5rem;
@@ -433,7 +431,7 @@ body.modal-open .supreme-container {
   }
   #speakers_hours_chart_container, #speakers_hours_chart {
     height: 220px;
- }
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -451,7 +449,7 @@ body.modal-open .supreme-container {
 @media (max-width: 767px) {
   .from-label {
     text-align: left;
-    padding-left: 0px !important;
+    padding-left: 0 !important;
   }
   .w-70 {
     width: 100% !important;
@@ -471,5 +469,5 @@ body.modal-open .supreme-container {
   text-decoration: none;
   background-color: #007bff;
   border-color: #007bff;
-  color: white;
+  color: #ffffff;
 }

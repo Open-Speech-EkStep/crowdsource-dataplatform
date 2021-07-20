@@ -1,202 +1,202 @@
 html {
-    scroll-behavior: smooth;
-    font-size: 10px;
+  scroll-behavior: smooth;
+  font-size: 10px;
 }
 @media (min-width: 321px) {
-    html {
-        font-size: 12px;
-    }
+  html {
+    font-size: 12px;
+  }
 }
 
 @media (min-width: 448px) {
-    html {
-        font-size: 13px;
-    }
+  html {
+    font-size: 13px;
+  }
 }
 @media (min-width: 576px) {
-    html {
-        font-size: 14px;
-    }
+  html {
+    font-size: 14px;
+  }
 }
 
 @media (min-width: 992px) {
-    html {
-        font-size: 15px;
-    }
+  html {
+    font-size: 15px;
+  }
 }
 
 @media (min-width: 1200px) {
-    html {
-        font-size: 16px;
-    }
+  html {
+    font-size: 16px;
+  }
 }
 
 @media (min-width: 768px) {
-    .font-weight-light-lg {
-        font-weight: 300 !important;
-        line-height: 32px;
-    }
+  .font-weight-light-lg {
+    font-weight: 300 !important;
+    line-height: 32px;
+  }
 
-    .table tbody td{
-        font-weight: normal;
-        line-height: 20px;
-        font-size: 14px;
-    }
+  .table tbody td{
+    font-weight: normal;
+    line-height: 20px;
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 767px) {
-    .font-weight-light-lg {
-        font-weight: 400 !important;
-        line-height: 32px;
-    }
+  .font-weight-light-lg {
+    font-weight: 400 !important;
+    line-height: 32px;
+  }
 }
 
 .table-img{
-  filter: drop-shadow(0px 4px 12px rgba(0, 123, 255, 0.2));;
+  filter: drop-shadow(0 4px 12px rgba(0, 123, 255, 0.2));;
 }
 
 @media (max-width: 767px) {
-    .font-weight-normal-sm {
-        font-weight: 400 !important;
-    }
-    .mt-xs-5{
-        margin-top: 5rem;
-    }
-    .popover {
-        width: 180px;
-    }
+  .font-weight-normal-sm {
+    font-weight: 400 !important;
+  }
+  .mt-xs-5{
+    margin-top: 5rem;
+  }
+  .popover {
+    width: 180px;
+  }
 
 
 }
 
 @media (max-width: 500px) {
-    #badge-container table tbody {
-        font-size: 12px !important;
-    }
-    #badge-container p {
-        font-size: 12px !important;
-        line-height: 20px !important;
-    }
-    #badge-container h2 {
-        font-size: 26px !important;
-    }
+  #badge-container table tbody {
+    font-size: 12px !important;
+  }
+  #badge-container p {
+    font-size: 12px !important;
+    line-height: 20px !important;
+  }
+  #badge-container h2 {
+    font-size: 26px !important;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-    .popover {
-        width: 200px;
-    }
+  .popover {
+    width: 200px;
+  }
 }
 
 @media (min-width: 768px) {
-    .font-weight-light-lg {
-        font-weight: 300 !important;
-    }
+  .font-weight-light-lg {
+    font-weight: 300 !important;
+  }
 }
 
 @media (max-width: 320px) {
-    h1{
-        font-size: 32px;
-        justify-content: center;
-    }
-    .table-responsive-xs {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        -ms-overflow-style: -ms-autohiding-scrollbar;
-    }
-    .table-responsive-xs > .table-bordered {
-        border: 0;
-    }
+  h1{
+    font-size: 32px;
+    justify-content: center;
+  }
+  .table-responsive-xs {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .table-responsive-xs > .table-bordered {
+    border: 0;
+  }
 }
 
 @media (max-width: 1240px) {
-    .card img {
-        width: 150px;
-        height: auto;
-    }
+  .card img {
+    width: 150px;
+    height: auto;
+  }
 }
 
 .table thead th {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 .table tbody td {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 
 #badge-container {
-    max-width: 1200px;
+  max-width: 1200px;
 }
 
 #badge-container h2 {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 #badge-container label {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 #badge-container p {
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 28px;  
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 28px;  
 }
 
 .badge-mt-34 {
-    margin-top: 34px;
+  margin-top: 34px;
 }
 
 .badge-mt-36 {
-    margin-top: 36px;
+  margin-top: 36px;
 }
 
 .badge-mt-38 {
-    margin-top: 38px;
+  margin-top: 38px;
 }
 
 #badge-container .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-    border-color:  #F8F9FA;
-    background: #F8F9FA;
-    color: #007BFF !important;
-    border-radius: 0;
+  border-color:  #f8f9fa;
+  background: #f8f9fa;
+  color: #007bff !important;
+  border-radius: 0;
    
 }
 
 #badge-container .nav-tabs {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 #badge-container .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
-    border-color: transparent;
+  border-color: transparent;
 }
 
 #badge-container .nav-tabs .nav-item {
-    border-bottom: 1px solid #717171;
+  border-bottom: 1px solid #717171;
 }
 
 #badge-container .nav-tabs .nav-link {
-    color:  #959595;
+  color:  #959595;
 }
 
 #badge-container table thead{
-    height: 88px;
-    background-color: #717171;
-    color: #fff;
-    font-weight: 700;
+  height: 88px;
+  background-color: #717171;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 #badge-container .table-bordered th {
-    border: none !important;
+  border: none !important;
 }
 
 #badge-container .table-bordered td {
-    border: 1px solid #959595;
+  border: 1px solid #959595;
 }
 
 #badge-table p {
-    font-size: 14px;
-    font-weight: 400;
+  font-size: 14px;
+  font-weight: 400;
 }

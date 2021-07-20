@@ -14,17 +14,17 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 700;
 }
 
 body {
-  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   height: 100vh;
 }
 
 .font-family-Rowdies {
-  font-family: Rowdies, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   font-weight: 400 !important;
 }
 
@@ -50,7 +50,7 @@ body {
 }
 
 .report-btn-container button {
-  color: #666;
+  color: #666666;
   margin-right: 1rem;
   background: #f6f6f6;
   border-radius: 4px;
@@ -71,7 +71,7 @@ body {
 #report_sentence_thanks_close_id {
   position: absolute;
   right: 1rem;
-  top: 0rem;
+  top: 0;
   font-size: 2.5rem;
   padding: 0;
 }
@@ -137,7 +137,7 @@ body {
 }
 
 .module-item.active > a {
-  color: #fff !important;
+  color: #ffffff !important;
   opacity: 1 !important;
 }
 
@@ -262,7 +262,7 @@ body {
   .padding-top-65 {
     padding-top: 65px !important;
   }
-  .badge-popover::after  {
+  .badge-popover:after  {
     left: 26%;
   }
   .badge-img-fluid {
@@ -363,7 +363,7 @@ body {
     height: 150px;
    
   }
-  .badge-popover::after {
+  .badge-popover:after {
     left: 15%;
   }
   .badge-img-fluid {
@@ -389,9 +389,9 @@ body {
   }
 
   .navbar-toggler {
-    padding: 0px !important ;
+    padding: 0 !important ;
     font-size: 1rem !important;
-    border: 0px !important;
+    border: 0 !important;
   }
 
   .version-beta {
@@ -471,14 +471,14 @@ body {
 
 .btn-custom-primary {
   background-color: #007bff;
-  color: #fff;
+  color: #ffffff;
   max-height: 48px;
   font-size: 18px;
   font-weight: 700;
 }
 
 .btn-custom-primary:hover {
-  color: #fff;
+  color: #ffffff;
   background-color: #0676ec;
 }
 
@@ -499,7 +499,7 @@ body {
 }
 
 .btn-custom-outline-primary {
-  background-color: #fff;
+  background-color: #ffffff;
   border: 1px solid #007bff;
   color: #007bff;
   max-height: 48px;
@@ -523,7 +523,7 @@ body {
 
 .btn-custom-primary:disabled {
   background-color: #d8d8d8;
-  color: #fff;
+  color: #ffffff;
   font-weight: 700;
   border: 1px solid #dbdbdb;
   opacity: 1 !important;
@@ -535,7 +535,7 @@ body {
 }
 
 #anonymous_user {
-  color: grey;
+  color: #808080;
   pointer-events: none;
   cursor: none !important;
 }
@@ -545,7 +545,7 @@ body {
 }
 
 .header {
-  background-image: url(/img/my-badge-tri.svg);
+  background-image: url('/img/my-badge-tri.svg');
   width: 410px;
   margin: auto;
 }
@@ -571,30 +571,30 @@ body {
 
 .badge-popover {
   visibility: hidden;
-  background-color: #fff;
-  color: #fff;
+  background-color: #ffffff;
+  color: #ffffff;
   text-align: center;
-  border-radius: 6px;
-  border: 1px solid #C4C4C4;;
+  border: 1px solid #c4c4c4;;
   position: absolute;
   z-index: 1;
   bottom: 60%;
   left: 50%;
   margin-left: -75px;
+
   /* opacity: 0; */
   transition: opacity 0.3s;
   border-radius: 20px;
-  background-image: url(/img/tri-color-dark.svg);
+  background-image: url('/img/tri-color-dark.svg');
 }
 
-.badge-popover::after {
-  content: "";
+.badge-popover:after {
+  content: '';
   position: absolute;
   top: -19px;
   margin-left: -5px;
   border-width: 10px;
   border-style: solid;
-  border-color: transparent transparent #FDECD9 transparent;
+  border-color: transparent transparent #fdecd9 transparent;
 }
 
 .cursor-pointer {
@@ -602,7 +602,7 @@ body {
 }
 
 .light-blue {
-  background-color: #EFF5FF;
+  background-color: #eff5ff;
 }
 
 .header-fixed {

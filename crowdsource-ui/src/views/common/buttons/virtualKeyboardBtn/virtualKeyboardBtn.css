@@ -1,22 +1,22 @@
 .virtual-keyboard-btn {
-    background-color:#e9ecef;
-    position: absolute;;
-    bottom:  15px;
-    right:   15px;
-    padding: 0px 8px 3px
+  background-color:#e9ecef;
+  position: absolute;;
+  bottom:  15px;
+  right:   15px;
+  padding: 0 8px 3px
 }
 
 
 @media (max-width: 767px) {
-    .virtual-keyboard-btn {
-        border-radius: 50%;
+  .virtual-keyboard-btn {
+    border-radius: 50%;
     height: 50px;
     width: 50px;
     right: 20px;
     bottom: 80px;
     padding: 11px !important;
-    }
-    .virtual-keyboard-btn span {
-        display: none;
-    }
+  }
+  .virtual-keyboard-btn span {
+    display: none;
+  }
 }
