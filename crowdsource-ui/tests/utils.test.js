@@ -74,29 +74,29 @@ describe('test utils', () => {
     describe("formatTime", () => {
         test("should formats h only for given h", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
-            expect(formatTime(162)).toEqual("162 hours");
+            localStorage.setItem('localeString', JSON.stringify({"hour(s)":"hour(s)", "second(s)": "second(s)", "minute(s)":"minute(s)"}))
+            expect(formatTime(162)).toEqual("162 hour(s)");
             localStorage.clear();
         });
 
         test("should format h and min for given h and m", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
-            expect(formatTime(162, 12)).toEqual("162 hours 12 minutes");
+            localStorage.setItem('localeString', JSON.stringify({"hour(s)":"hour(s)", "second(s)": "second(s)", "minute(s)":"minute(s)"}))
+            expect(formatTime(162, 12)).toEqual("162 hour(s) 12 minute(s)");
             localStorage.clear()
         });
 
         test("should format in s when hours and minutes are 0", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
-            expect(formatTime(0, 0, 2)).toEqual("2 seconds");
+            localStorage.setItem('localeString', JSON.stringify({"hour(s)":"hour(s)", "second(s)": "second(s)", "minute(s)":"minute(s)"}))
+            expect(formatTime(0, 0, 2)).toEqual("2 second(s)");
             localStorage.clear();
         });
 
         test("should show 0s when hours, minutes and seconds are 0", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
-            expect(formatTime(0, 0, 0)).toEqual("0 seconds");
+            localStorage.setItem('localeString', JSON.stringify({"hour(s)":"hour(s)", "second(s)": "second(s)", "minute(s)":"minute(s)"}))
+            expect(formatTime(0, 0, 0)).toEqual("0 second(s)");
             localStorage.clear();
         });
 

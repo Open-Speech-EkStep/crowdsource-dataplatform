@@ -174,9 +174,9 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
 
 const formatTime = function (hours, minutes = 0, seconds = 0) {
   const localsStrings = JSON.parse(localStorage.getItem('localeString'));
-  const hrStr = localsStrings['hours'];
-  const minStr = localsStrings['minutes'];
-  const secStr = localsStrings['seconds'];
+  const hrStr = localsStrings['hour(s)'];
+  const minStr = localsStrings['minute(s)'];
+  const secStr = localsStrings['second(s)'];
   let result = "";
   if (hours > 0) {
     result += `${hours} ${hrStr} `;

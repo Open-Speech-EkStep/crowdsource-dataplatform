@@ -3,12 +3,16 @@ const { LOCALE_STRINGS } = require('./constants');
 const chartReg = {};
 
 const drawTopLanguageChart = (chartData, type, dataType, page) => {
+  if (chartReg["top-language-chart"]) {
+    chartReg["top-language-chart"].dispose();
+  }
   const chartColors = ['#F7CC56', '#F7CC56', '#F7CC56', '#EF8537'];
   const localStrings = JSON.parse(
     localStorage.getItem(LOCALE_STRINGS)
   );
   const dekhoToolTipStr = localStrings["Images"].toLowerCase();
   const likhoToolTipStr = localStrings["translations"];
+  const sunoToolTipStr = localStrings["Sentences"].toLowerCase();
   const boloSpeakerToolTipStr = localStrings["speakers"];
   am4core.ready(function () {
     const chart = am4core.create('top-language-chart', am4charts.XYChart);
@@ -38,7 +42,7 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
           item.total_contributions = item.total_contributions ? item.total_contributions : 0.000;
           item.total_contribution_count = item.total_contribution_count ? item.total_contribution_count : 0;
           const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(item.total_contributions ) * 60 * 60), true);
-          item.contributedHours = type == "suno" || type == "bolo" ? formatTime(cHours, cMinutes, cSeconds) : type == "dekho" ? ((item.total_contribution_count ).toString() + " "+ dekhoToolTipStr) : ((item.total_contribution_count).toString() + " " + likhoToolTipStr);
+          item.contributedHours = type == "suno" || type == "bolo" ? (dataType === "sentences" ? ((item.total_contribution_count || 0).toString() + " " + sunoToolTipStr) : formatTime(cHours, cMinutes, cSeconds)) : type == "dekho" ? ((item.total_contribution_count).toString() + " " + dekhoToolTipStr) : ((item.total_contribution_count).toString() + " " + likhoToolTipStr);
         });
       } else {
         chartData.forEach(item => {
@@ -83,7 +87,7 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
       }
     } else {
       if (dataType !== "speaker") {
-        valueAxis.title.text = type == "suno" || type == "bolo" ? localStrings["Contribution (in hours)"] : type == "dekho" ? localStrings["Contribution (no. of images)"] : localStrings['Contribution (no. of translations)'];
+        valueAxis.title.text = type == "suno" || type == "bolo" ? (dataType == "sentences" ? localStrings["Contribution (no. of sentences)"] : localStrings["Contribution (in hours)"]) : type == "dekho" ? localStrings["Contribution (no. of images)"] : localStrings['Contribution (no. of translations)'];
       } else {
         valueAxis.title.text = type == "bolo" ? localStrings["Contribution (no. of speakers)"] : "";
       }
@@ -97,7 +101,7 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
     const series = chart.series.push(new am4charts.ColumnSeries());
 
     if (dataType != "speaker") {
-    series.dataFields.valueY = type == "suno" || type == "bolo" ? 'total_contributions' : 'contributedHours';
+      series.dataFields.valueY = type == "suno" || type == "bolo" ? (dataType === "sentences" ? 'total_contribution_count' : 'total_contributions') : 'contributedHours';
     } else {
       series.dataFields.valueY ='contributedHours';
     }

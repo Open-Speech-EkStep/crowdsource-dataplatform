@@ -1,4 +1,4 @@
-const { calculateTime, formatTime, performAPIRequest, formatTimeForLegends } = require('./utils');
+const { calculateTime, formatTime, performAPIRequest, formatTimeForLegends, formatTransAndImages } = require('./utils');
 
 const statesInformation = [
   { id: 'IN-TG', state: 'Telangana', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
@@ -49,15 +49,15 @@ const drawMap = function (response, moduleType) {
   const maxContribution = Math.max.apply(
     Math,
     response.data.map(function (ele) {
-      return moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) :  Number(ele.total_contributions);
+      return moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
     })
   );
   let quarterVal;
-    if (maxContribution > 1) {
-      quarterVal = maxContribution / 4;
-    } else {
-      quarterVal = 0.25;
-    }
+  if (maxContribution > 1) {
+    quarterVal = maxContribution / 4;
+  } else {
+    quarterVal = 0.25;
+  }
   statesData.forEach(st => {
     const ele = response.data.find(s => st.state === s.state);
     if (ele) {
@@ -71,15 +71,15 @@ const drawMap = function (response, moduleType) {
         minutes: vMinutes,
         seconds: vSeconds,
       } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
-      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : formatTime(cHours,cMinutes,cSeconds);
-      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_validation_count) : formatTime(vHours,vMinutes,vSeconds);
+      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : formatTime(cHours, cMinutes, cSeconds);
+      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_validation_count) : formatTime(vHours, vMinutes, vSeconds);
       st.value = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
       st.total_speakers = ele.total_speakers;
       st.id = st.id;
     } else {
       st.id = st.id;
-      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0,0,0);
-      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0,0,0);
+      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0, 0, 0);
+      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0, 0, 0);
       st.value = 0;
       st.total_speakers = 0;
     }
@@ -118,10 +118,10 @@ const drawMap = function (response, moduleType) {
                           </div>
                         </div>`
   let toolTipContent = sunoTooltip;
-  if(moduleType === "parallel"){
+  if (moduleType === "parallel") {
     toolTipContent = likhoTooltip;
   }
-  if(moduleType === "ocr"){
+  if (moduleType === "ocr") {
     toolTipContent = dekhoTooltip;
   }
   var chart = am4core.create("indiaMapChart", am4maps.MapChart);
@@ -153,7 +153,7 @@ const drawMap = function (response, moduleType) {
     "fill",
     function (fill, target) {
       if (target.dataItem) {
-        if(moduleType == "bolo" || moduleType == "suno") {
+        if (moduleType == "bolo" || moduleType == "suno") {
           if (target.dataItem.value >= quarterVal * 3) {
             return am4core.color("#4061BF");
           } else if (target.dataItem.value >= quarterVal * 2) {
@@ -178,7 +178,7 @@ const drawMap = function (response, moduleType) {
             return am4core.color("#E9E9E9");
           }
         }
-       
+
       }
       return fill;
     }
@@ -200,12 +200,12 @@ const drawMap = function (response, moduleType) {
     quarterVal * 3 * 60 * 60,
     false
   );
-  $quarter.text(moduleType == "parallel" || moduleType == "ocr" ? `0 - 100` : `0 - ${formatTimeForLegends(qHours, qMinuts,0, true)}`);
-  $half.text(moduleType == "parallel" || moduleType == "ocr" ? `100 - 200` : `${formatTimeForLegends(qHours, qMinuts,0, false)} - ${formatTimeForLegends(hHours, hMinuts,0,true)}`);
-  $threeQuarter.text( moduleType == "parallel" || moduleType == "ocr" ? `200 - 500` :
-    `${formatTimeForLegends(hHours, hMinuts,0, false)} - ${formatTimeForLegends(tQHours, tQMinuts,0,true)}`
+  $quarter.text(moduleType == "parallel" ? formatTransAndImages(0, 100, 'translations') : moduleType == "ocr" ? formatTransAndImages(0, 100, 'images') : `0 - ${formatTimeForLegends(qHours, qMinuts, 0, true)}`);
+  $half.text(moduleType == "parallel" ? formatTransAndImages(100, 200, 'translations') : moduleType == "ocr" ? formatTransAndImages(100, 200, 'images')  : `${formatTimeForLegends(qHours, qMinuts, 0, false)} - ${formatTimeForLegends(hHours, hMinuts, 0, true)}`);
+  $threeQuarter.text(moduleType == "parallel" ? formatTransAndImages(200, 500, 'translations') : moduleType == "ocr" ? formatTransAndImages(200, 500, 'images'):
+    `${formatTimeForLegends(hHours, hMinuts, 0, false)} - ${formatTimeForLegends(tQHours, tQMinuts, 0, true)}`
   );
-  $full.text(moduleType == "parallel" || moduleType == "ocr" ? `> 500` : `> ${formatTimeForLegends(tQHours, tQMinuts,0, true)}`);
+  $full.text(moduleType == "parallel" ? formatTransAndImages('', '> 500', 'translations') :  moduleType == "ocr"  ? formatTransAndImages('', '> 500', 'images'):  `> ${formatTimeForLegends(tQHours, tQMinuts, 0, true)}`);
   $legendDiv.removeClass("d-none").addClass("d-flex");
 };
 
@@ -214,12 +214,12 @@ function getLanguageSpecificData(data, lang) {
     data: [],
   };
   data.data.forEach(item => {
-    if(item.language) {
+    if (item.language) {
       if (item.language.toLowerCase() === lang.toLowerCase()
-      && item.state !== ''
-      && item.state.toLowerCase() !== 'anonymous') {
-      stateData.data.push(item);
-    }
+        && item.state !== ''
+        && item.state.toLowerCase() !== 'anonymous') {
+        stateData.data.push(item);
+      }
     }
   });
   return stateData;
@@ -232,7 +232,7 @@ function getLanguageSpecificData(data, lang) {
 //   }
 // }
 
-const generateIndiaMap = function (language="", moduleType) {
+const generateIndiaMap = function (language = "", moduleType) {
   $mapLoader.show().addClass('d-flex');
   $mapChart.addClass('d-none');
   const url = language !== "" ? `/aggregate-data-count/${moduleType}?byState=true&byLanguage=true` : `/aggregate-data-count/${moduleType}?byState=true`;
@@ -270,7 +270,7 @@ function getStatistics(response) {
   const { hours, minutes, seconds } = calculateTime(
     Number(response.total_contributions) * 60 * 60
   );
-  $speakersDataHoursValue.text(formatTime(hours,minutes,seconds));
+  $speakersDataHoursValue.text(formatTime(hours, minutes, seconds));
   $speakersDataSpeakerValue.text(response.total_speakers);
   $speakersDataLanguagesValue.text(response.total_languages);
   $speakersDataLoader.addClass("d-none");

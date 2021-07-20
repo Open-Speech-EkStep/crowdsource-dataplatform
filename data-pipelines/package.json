@@ -9,7 +9,8 @@
   "author": "Rajat Singhal",
   "license": "ISC",
   "dependencies": {
-    "pg": "^7.8.2",
-    "csvtojson": "2.0.10"
+    "pg": "^8.3.2",
+    "csvtojson": "2.0.10",
+    "xlsx": "0.17.0"
   }
 }

@@ -69,13 +69,13 @@ const getTopLanguage = (topLanguagesData, type, keyInSentence,keyInHrs) => {
   }
 }
 
-function showByHoursChart(type, page) {
+function showByHoursChart(type, page, dataType) {
   const chartReg = {};
   if (chartReg["chart"]) {
     chartReg["chart"].dispose();
   }
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-  drawTopLanguageChart(JSON.parse(topLanguagesByHoursData), type,"", page)
+  drawTopLanguageChart(JSON.parse(topLanguagesByHoursData), type, dataType, page)
 }
 
 function showByHoursChartThankyouPage(type, page) {
@@ -258,6 +258,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   const $platinumBadgeLink = $("#platinum_badge_link_img");
   const $platinumBadge = $("#platinum_badge_link");
   if (data.currentBadgeType.toLowerCase() == "bronze") {
+    $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
     $bronzeBadge.attr("disabled", false);
     $(".downloadable_badges").append($bronzeBadge);
 
@@ -266,6 +267,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $bronzeBadgeLink.addClass('enable');
     $bronzeBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "silver") {
+    $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
     $bronzeBadge.attr("disabled", false);
     $silverBadge.attr("disabled", false);
     $(".downloadable_badges").append($bronzeBadge);
@@ -278,6 +280,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $goldBadgeLink.removeClass('disable');
     $goldBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "gold") {
+    $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
     $bronzeBadge.attr("disabled", false);
     $silverBadge.attr("disabled", false);
     $goldBadge.attr("disabled", false);
@@ -294,6 +297,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $platinumBadgeLink.removeClass('disable');
     $platinumBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "platinum") {
+    $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
     $bronzeBadge.attr("disabled", false);
     $silverBadge.attr("disabled", false);
     $goldBadge.attr("disabled", false);

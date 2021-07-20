@@ -53,9 +53,10 @@
             </div>
             <div class="row m-0 justify-content-center mb-2 mb-md-2 mb-lg-2 d-none no-margin-mobile" id="editor-row">
                 <div class="row justify-content-center col-12 px-0 col-lg-8" id="textarea-row">
-                    <div class="form-group col-lg-12 col-md-5 col-12 m-0 edit-text" id="edit-text" style="border-radius:12px">
+                    <div class="form-group col-lg-12 col-md-5 col-12 m-0 edit-text position-relative" id="edit-text" style="border-radius:12px">
                         <label><%- __('Your Edit') %> ( <span id="edit-language"></span> )</label>
                         <textarea class="form-control edit-area" maxlength="1000" id="edit" rows="3" placeholder="<%= __('Start typing here...')%>" style="resize:none"></textarea>
+                        <%- include ../common/virtualKeyboardBtn.ejs %>
                     </div>
                 </div>
             </div>
@@ -140,9 +141,6 @@
                 </div>
             </div>
 
-        </div>
-        <div class="row my-3 p-3" style="justify-content:flex-end">
-            <%- include ../common/virtualKeyboardBtn.ejs %>
         </div>
         <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
         <%- include('../common/sourceInfo.ejs') %>

@@ -1,6 +1,6 @@
 const { onActiveNavbar,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
 
-const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,updateLocaleLanguagesDropdown, landToHome,hasUserRegistered} = require('../common/common');
+const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,updateLocaleLanguagesDropdown, landToHome,hasUserRegistered, showByHoursChart} = require('../common/common');
 const {getLocaleString} = require('../common/utils');
 const {
   setUserModalOnShown,
@@ -86,6 +86,9 @@ function initializeBlock() {
     const localSpeakerDataParsed = JSON.parse(speakerDetails);
     showUserProfile(localSpeakerDataParsed.userName);
   }
+  $('[name="topLanguageChart"]').on('change', (event) => {    
+    showByHoursChart('suno', 'home', event.target.value);
+});
   getStatsSummary('/stats/summary/asr',MODULE.suno.value, ()=>{});
 }
 

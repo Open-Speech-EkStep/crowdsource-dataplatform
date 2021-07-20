@@ -98,7 +98,7 @@ const SELECT_PAGE_OPTIONS_FEEDBACK = [
   { module: 'bolo', pages: ['Badges Info', 'Dashboard', 'Bolo India Home', 'Speak', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
   { module: 'likho', pages: ['Badges Info', 'Dashboard', 'Likho India Home', 'Translate', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
   { module: 'dekho', pages: ['Badges Info', 'Dashboard', 'Dekho India Home', 'Label', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
-  { module: 'others', pages: ['About Us', 'Home Page', 'Terms and Conditions', 'Badges Info'] }
+  { module: 'others', pages: [{value :'About Us', text: 'About Us'}, {value: 'Home Page', text: 'Home Page'} ,{value: 'Terms and Conditions', text: 'Terms and Conditions'},{value: 'Badges Info', text: 'Badges Info'}, {value: 'My Badges', text: 'My Badges'}] }
 ];
 
 const FEEDBACK_CATEGORY = [

@@ -227,6 +227,7 @@ step("User clicks on Play button, and then on pause button, then clicks on <need
 });
 
 step("Validate Thank you page content for Suno India", async function () {
+    await taiko.waitFor(1000)
     assert.ok(await text('Suno India Target Achieved').isVisible())
     assert.ok(await text('Transcription (in sentences)').isVisible())
     assert.ok(await text('Hour(s)').isVisible())

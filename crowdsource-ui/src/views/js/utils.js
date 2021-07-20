@@ -43,6 +43,14 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+const formatTransAndImages= (source,target,type) =>{
+  const localsStrings = JSON.parse(localStorage.getItem('localeString'));
+  const translations = localsStrings['translations'];
+  const images = localsStrings['images'];
+  const sourceType = type == 'images' ? images : translations;
+  return `${source} - ${target} ${sourceType}`
+}
+
 function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -180,9 +188,9 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
 
 const formatTime = function (hours, minutes = 0, seconds = 0) {
   const localsStrings = JSON.parse(localStorage.getItem('localeString'));
-  const hrStr = localsStrings['hours'];
-  const minStr = localsStrings['minutes'];
-  const secStr = localsStrings['seconds'];
+  const hrStr = localsStrings['hour(s)'];
+  const minStr = localsStrings['minute(s)'];
+  const secStr = localsStrings['second(s)'];
   let result = "";
   if (hours > 0) {
     result += `${hours} ${hrStr} `;
@@ -281,5 +289,6 @@ module.exports = { setPageContentHeight,
   afterHover,
   getDeviceInfo,
   getBrowserInfo,
-  formatTimeForLegends
+  formatTimeForLegends,
+  formatTransAndImages
 }

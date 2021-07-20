@@ -769,7 +769,7 @@ const getProgressResultBasedOnTypeAndSource = (progressResult, type, source) => 
 
         let resultObj = { contribute: 0, validate: 0 };
 
-        if (type in ['text', 'asr']) {
+        if (['text', 'asr'].includes(type)) {
             resultObj.contribute = progressResult.total_contributions;
             resultObj.validate = progressResult.total_validations;
         }

@@ -262,7 +262,7 @@ function addListeners() {
   $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if(!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false'){
+    if(!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false' && !isMobileDevice()){
       showElement($('#keyboardBox'));
     }
   });
@@ -654,6 +654,7 @@ $(document).ready(() => {
   const isNotChrome = !browser.includes('Chrome');
   if(isMobileDevice() || isNotChrome){
     hideElement($('#extension-bar'));
+    hideElement($('#virtualKeyBoardBtn'));
   } else {
     showOrHideExtensionCloseBtn();
   }

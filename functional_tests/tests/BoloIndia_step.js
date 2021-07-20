@@ -502,6 +502,7 @@ step("When user submits , Thank you pop up should come & close button should clo
 });
 
 step("Validate Thank you page content for Bolo India", async function () {
+    await taiko.waitFor(1000)
     assert.ok(await text('Bolo India Target Achieved').isVisible())
     assert.ok(await text('Recordings (in hours)').isVisible())
     assert.ok(await text('Contribute 5 recording(s) to earn your bronze Badge.').isVisible())

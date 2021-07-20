@@ -198,7 +198,9 @@ function addListeners() {
   const $skipButton = $('#skip_button');
 
   needChangeButton.on('click', () => {
-    showElement($('#virtualKeyBoardBtn'));
+    if(!isMobileDevice()) {
+      showElement($('#virtualKeyBoardBtn'));
+    }
     showElement($('#editor-row'));
     openEditor();
     const originalText = likhoIndiaValidator.sentences[currentIndex].contribution;
@@ -211,7 +213,7 @@ function addListeners() {
   $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false') {
+    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false' && !isMobileDevice()) {
       showElement($('#keyboardBox'));
     }
   });
@@ -366,6 +368,7 @@ const executeOnLoad = function () {
   const isNotChrome = !browser.includes('Chrome');
   if(isMobileDevice() || isNotChrome){
     hideElement($('#extension-bar'));
+    hideElement($('#virtualKeyBoardBtn'));
   } else {
     showOrHideExtensionCloseBtn();
   }

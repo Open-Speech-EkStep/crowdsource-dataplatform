@@ -548,5 +548,10 @@
 	"Contribution (no. of translations)": "Contribution (no. of translations)",
 	"Contribution (no. of speakers)": "Contribution (no. of speakers)",
 	"translations": "translations",
-	"speakers": "speakers"
+	"speakers": "speakers",
+	"hour(s)": "hour(s)",
+	"minute(s)": "minute(s)",
+	"second(s)": "second(s)",
+	"Contribution (no. of sentences)": "Contribution (no. of sentences)",
+	"By number of sentences": "By number of sentences"
 }
