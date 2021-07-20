@@ -56,10 +56,11 @@
                     <div id="captured-text">
                     </div>
                 </div>
-                <div class="form-group green-border-focus col-lg-4 col-md-5 col-12 m-0" id="edit-text">
+                <div class="form-group green-border-focus col-lg-4 col-md-5 col-12 m-0 position-relative" id="edit-text">
                     <label><%- __('Your Edit') %> ( <span id="edit-language"></span> )</label>
                     <div class="arrow-right"></div>
                     <textarea class="form-control edit-area" maxlength="1000" id="edit" rows="3" placeholder="<%= __('Start typing here...')%>" style="resize:none"></textarea>
+                    <%- include ../common/virtualKeyboardBtn.ejs %>
                 </div>
             </div>
             <div class="row m-0 justify-content-center mb-2 mb-md-5 mb-lg-0" id="edit-error-row">
@@ -135,9 +136,6 @@
                 </div>
             </div>
 
-        </div>
-        <div class="row my-3 p-3" style="justify-content:flex-end">
-            <%- include ../common/virtualKeyboardBtn.ejs %>
         </div>
 
         <script>var modal=document.getElementById("myModal"),clickExpandBtn=document.getElementById("expand-view"),img=document.getElementById("view-image"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");clickExpandBtn.onclick=function(){modal.style.display="block",modalImg.src=img.src};var span=document.getElementsByClassName("close-validate")[0];span.onclick=function(){modal.style.display="none"}</script>

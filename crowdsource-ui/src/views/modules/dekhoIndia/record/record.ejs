@@ -45,10 +45,11 @@
                     <span id="expand-view" class="position-absolute text-muted" style="cursor:pointer;right:16px;font-size:14px;margin-top:5px"> <%= __('Click to open expanded view') %></span>
                 </div>
             </div>
-            <div class="row m-0 justify-content-center mb-2 mb-lg-2 mb-md-2 mt-5" id="textarea-row">
+            <div class="row m-0 justify-content-center mb-2 mb-lg-2 mb-md-2 mt-5 position-relative" id="textarea-row">
                 <div class="form-group green-border-focus col-lg-8 col-md-5 col-12 m-0" id="edit-text" style="border-radius:12px">
                     <label><%- __('Add Text') %> ( <span id="edit-language"></span> )</label>
                     <textarea class="form-control edit-area" maxlength="1000" id="edit" rows="3" placeholder="<%= __('Start typing here...')%>" style="resize:none"></textarea>
+                    <%- include ../common/virtualKeyboardBtn.ejs %>
                 </div>
             </div>
             <div class="row m-0 justify-content-center mb-2 mb-md-5 mb-lg-0" id="edit-error-row">
@@ -130,9 +131,6 @@
                     <img class="modal-content" id="img01">
                 </div>
             </div>
-        </div>
-        <div class="row my-3 p-3" style="justify-content:flex-end">
-            <%- include ../common/virtualKeyboardBtn.ejs %>
         </div>
 
         <script>var modal=document.getElementById("myModal"),clickExpandBtn=document.getElementById("expand-view"),img=document.getElementById("view-image"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");clickExpandBtn.onclick=function(){modal.style.display="block",modalImg.src=img.src};var span=document.getElementsByClassName("close-validate")[0];span.onclick=function(){modal.style.display="none"}</script>

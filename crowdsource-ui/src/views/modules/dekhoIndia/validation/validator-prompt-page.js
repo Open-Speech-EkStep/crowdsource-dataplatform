@@ -190,7 +190,9 @@ function addListeners() {
   const $skipButton = $('#skip_button');
 
   needChangeButton.on('click',()=>{
-    showElement($('#virtualKeyBoardBtn'));
+    if(!isMobileDevice()) {
+      showElement($('#virtualKeyBoardBtn'));
+    }
     hideElement($('#textarea-row'));
     openEditor();
     const originalText = dekhoIndiaValidator.sentences[currentIndex].contribution;
@@ -406,6 +408,7 @@ const executeOnLoad = function () {
   const isNotChrome = !browser.includes('Chrome');
   if(isMobileDevice() || isNotChrome){
     hideElement($('#extension-bar'));
+    hideElement($('#virtualKeyBoardBtn'));
   } else {
     showOrHideExtensionCloseBtn();
   }
