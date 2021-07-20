@@ -75,7 +75,7 @@ const getLanguageStats = function () {
         );
         const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.suno.value, 'total_validation_count','total_validations');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
-        showByHoursChartThankyouPage(MODULE.suno.value, "thankyou");
+        showByHoursChartThankyouPage(MODULE.suno.value, "thankyou",'sentences');
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );

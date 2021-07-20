@@ -78,13 +78,13 @@ function showByHoursChart(type, page, dataType) {
   drawTopLanguageChart(JSON.parse(topLanguagesByHoursData), type, dataType, page)
 }
 
-function showByHoursChartThankyouPage(type, page) {
+function showByHoursChartThankyouPage(type, page, dataType='') {
   const chartReg = {};
   if (chartReg["chart"]) {
     chartReg["chart"].dispose();
   }
   const topLanguagesByHoursData = localStorage.getItem(AGGREGATED_DATA_BY_TOP_LANGUAGE);
-  drawTopLanguageChart(JSON.parse(topLanguagesByHoursData), type,"", page)
+  drawTopLanguageChart(JSON.parse(topLanguagesByHoursData), type,dataType, page)
 
 }
 

@@ -84,10 +84,7 @@ const getLanguageStats = function () {
 
         const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.bolo.value, 'total_validation_count','total_validations');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
-        showByHoursChartThankyouPage(MODULE.bolo.value, "thankyou");
-        // const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.bolo.value);
-        // localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        // showByHoursChart(MODULE.bolo.value, "thankyou");
+        showByHoursChartThankyouPage(MODULE.bolo.value,"thankyou",'sentences');
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );

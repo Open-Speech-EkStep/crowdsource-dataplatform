@@ -23,16 +23,18 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
       if(currentFunctionalPage == "validate"){
         chartData.forEach(item => {
           item.total_validation_count = item.total_validation_count ? item.total_validation_count : 0;
-          item.total_validations = item.total_validations ? item.total_validations : 0.000;
-          const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(item.total_validations) * 60 * 60), true);
-          item.contributedHours = type == "suno" || type == "bolo" ? formatTime(cHours, cMinutes, cSeconds) : type == "dekho" ? ((item.total_validation_count).toString() + " "+ dekhoToolTipStr) : ((item.total_validation_count).toString() + " " + likhoToolTipStr);
+          item.contributedHours = type == "suno" || type == "bolo" ? ((item.total_validation_count).toString() + " "+ sunoToolTipStr) : type == "dekho" ? ((item.total_validation_count).toString() + " "+ dekhoToolTipStr) : ((item.total_validation_count).toString() + " " + likhoToolTipStr);
         });
       } else {
         chartData.forEach(item => {
           item.total_contributions = item.total_contributions ? item.total_contributions : 0.000;
           item.total_contribution_count = item.total_contribution_count ? item.total_contribution_count : 0;
           const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(item.total_contributions)  * 60 * 60), true);
-          item.contributedHours = type == "suno" || type == "bolo" ? formatTime(cHours, cMinutes, cSeconds) : type == "dekho" ? ((item.total_contribution_count ).toString() + " "+ dekhoToolTipStr) : ((item.total_contribution_count ).toString() + " " + likhoToolTipStr);
+          if(type == "bolo"){
+            item.contributedHours = formatTime(cHours, cMinutes, cSeconds);
+          } else {
+            item.contributedHours = type == "suno" ? ((item.total_contribution_count ).toString() + " "+ sunoToolTipStr) : type == "dekho" ? ((item.total_contribution_count ).toString() + " "+ dekhoToolTipStr) : ((item.total_contribution_count ).toString() + " " + likhoToolTipStr);
+          }
         });
       }
 
@@ -100,10 +102,19 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
     // Create series
     const series = chart.series.push(new am4charts.ColumnSeries());
 
-    if (dataType != "speaker") {
-      series.dataFields.valueY = type == "suno" || type == "bolo" ? (dataType === "sentences" ? 'total_contribution_count' : 'total_contributions') : 'contributedHours';
-    } else {
-      series.dataFields.valueY ='contributedHours';
+    if(page === 'thankyou'){
+      const currentFunctionalPage = localStorage.getItem("selectedType");
+      if(currentFunctionalPage == "validate"){
+        series.dataFields.valueY = 'total_validation_count';
+      } else {
+        series.dataFields.valueY = type == "bolo" ? 'total_contributions' : 'total_contribution_count';
+      }
+    } else{
+      if (dataType != "speaker") {
+        series.dataFields.valueY = type == "suno" || type == "bolo" ? (dataType === "sentences" ? 'total_contribution_count' : 'total_contributions') : 'contributedHours';
+      } else {
+        series.dataFields.valueY ='contributedHours';
+      }
     }
     series.dataFields.categoryX = 'language';
     const columnTemplate = series.columns.template;
@@ -135,7 +146,6 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
         axis.renderer.labels.template.verticalCenter = "top";
       }
     });
-
   });
 };
 

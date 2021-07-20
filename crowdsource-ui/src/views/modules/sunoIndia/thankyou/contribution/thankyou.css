@@ -65,7 +65,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
 
 .contribution-info-inner #top-language-chart, #chartRowWithoutCard #top-language-chart{
     min-height: 250px !important;
-    max-width: 400px !important;
+    min-height: 400px !important;
 }
 
 #chartRowWithoutCard{
@@ -94,8 +94,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
     max-width: 1024px;
     position: fixed;
     bottom: 32px;
-    padding-left: 23px;
-    padding-right: 23px;
+    padding: 16px 23px;
 }
 
 .bg-thank-you {
