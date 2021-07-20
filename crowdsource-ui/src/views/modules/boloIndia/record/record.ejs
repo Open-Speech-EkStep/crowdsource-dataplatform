@@ -23,7 +23,7 @@
         <div class="row m-0 px-4">
             <%- include('../common/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg", homePath:"./home.html"}) %>
         </div>
-        <%- include ../../../src/views/modals/recording-instructions.ejs %>
+        <%- include ../common/recording-instructions.ejs %>
         <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">
             <div class="row position-absolute bolo-back-btn top-back-btn">
             <button class="btn btn-link p-0 back-btn" id="back-btn">
@@ -36,10 +36,10 @@
                 </a>
             </button>
         </div>
-            <%- include ../../../src/views/components/report-btn.ejs %>
-            <%- include ../../../src/views/components/mic-speaker-test-btn.ejs %>
+            <%- include ../common/bolo-report-btn.ejs %>
+            <%- include ../common/bolo-mic-speaker-test-btn.ejs %>
         </div>
-        <%- include ../../../src/views/modals/mic-speaker-testing.ejs %>
+        <%- include ../common/bolo-mic-speaker-testing.ejs %>
         <div class="xs-p-16" id="functional-row">
             <div class="row justify-content-center my-5">
                 <div class="col-md-8 col-sm-10 text-center prompt"><label class="h1 font-weight-normal" id="sentenceLbl"></label></div>
@@ -120,7 +120,7 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%- include ../../../src/views/modals/report-modal.ejs %>
+<%- include ../common/report-modal.ejs %>
 <%- include ../common/errorModal.ejs %>
 <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
 <%- include('../common/sourceInfo.ejs') %>
