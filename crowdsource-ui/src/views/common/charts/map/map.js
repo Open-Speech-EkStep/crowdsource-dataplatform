@@ -200,9 +200,9 @@ const drawMap = function (response, moduleType) {
     quarterVal * 3 * 60 * 60,
     false
   );
-  $quarter.text(moduleType == "parallel" ? formatTransAndImages(0, 100, 'translations') : moduleType == "ocr" ? formatTransAndImages(0, 100, 'images') : `0 - ${formatTimeForLegends(qHours, qMinuts, 0, true)}`);
-  $half.text(moduleType == "parallel" ? formatTransAndImages(100, 200, 'translations') : moduleType == "ocr" ? formatTransAndImages(100, 200, 'images')  : `${formatTimeForLegends(qHours, qMinuts, 0, false)} - ${formatTimeForLegends(hHours, hMinuts, 0, true)}`);
-  $threeQuarter.text(moduleType == "parallel" ? formatTransAndImages(200, 500, 'translations') : moduleType == "ocr" ? formatTransAndImages(200, 500, 'images'):
+  $quarter.text(moduleType == "parallel" ? formatTransAndImages('0', 100, 'translations') : moduleType == "ocr" ? formatTransAndImages('0', 100, 'images') : `0 - ${formatTimeForLegends(qHours, qMinuts, 0, true)}`);
+  $half.text(moduleType == "parallel" ? formatTransAndImages('100', 200, 'translations') : moduleType == "ocr" ? formatTransAndImages('100', 200, 'images')  : `${formatTimeForLegends(qHours, qMinuts, 0, false)} - ${formatTimeForLegends(hHours, hMinuts, 0, true)}`);
+  $threeQuarter.text(moduleType == "parallel" ? formatTransAndImages('200', 500, 'translations') : moduleType == "ocr" ? formatTransAndImages('200', 500, 'images'):
     `${formatTimeForLegends(hHours, hMinuts, 0, false)} - ${formatTimeForLegends(tQHours, tQMinuts, 0, true)}`
   );
   $full.text(moduleType == "parallel" ? formatTransAndImages('', '> 500', 'translations') :  moduleType == "ocr"  ? formatTransAndImages('', '> 500', 'images'):  `> ${formatTimeForLegends(tQHours, tQMinuts, 0, true)}`);

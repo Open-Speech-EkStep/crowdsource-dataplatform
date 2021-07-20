@@ -195,9 +195,9 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#languageInTopWeb").addClass("d-none");
     $("#languageInTopMob").addClass("d-none");
   }
-
+  const nextBadgeName = localeStrings[data.nextBadgeType.toLowerCase()]
   replaceSubStr($("#sentence_away_msg"), '<contribution-count>', Number(data.nextMilestone) - Number(data.contributionCount) );
-  replaceSubStr($("#sentence_away_msg"), '<badge-color>', localeStrings[data.nextBadgeType.toLowerCase()] );
+  replaceSubStr($("#sentence_away_msg"), '<badge-color>', nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1) );
 
   if (data.isNewBadge) {
     $(".new-badge-msg").removeClass("d-none");
@@ -213,7 +213,6 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     activeBadge.attr("disabled", false);
     $(".downloadable_badges").append(activeBadge);
     const nextBadgeLink = $(`#${data.nextBadgeType.toLowerCase()}_badge_link_img`);
-    nextBadgeLink.addClass('enable');
     nextBadgeLink.removeClass('disable');
 
     // $("#milestone_text").removeClass("d-none");
@@ -260,16 +259,18 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   if (data.currentBadgeType.toLowerCase() == "bronze") {
     $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
     $bronzeBadge.attr("disabled", false);
+    $bronzeBadgeLink.attr("title", 'Download bronze badge');
     $(".downloadable_badges").append($bronzeBadge);
 
-    $silverBadgeLink.addClass('enable');
     $silverBadgeLink.removeClass('disable');
     $bronzeBadgeLink.addClass('enable');
     $bronzeBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "silver") {
     $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
     $bronzeBadge.attr("disabled", false);
+    $bronzeBadgeLink.attr("title", 'Download bronze badge');
     $silverBadge.attr("disabled", false);
+    $silverBadgeLink.attr("title", 'Download silver badge');
     $(".downloadable_badges").append($bronzeBadge);
     $(".downloadable_badges").append($silverBadge);
 
@@ -278,12 +279,14 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $silverBadgeLink.addClass('enable');
     $silverBadgeLink.removeClass('disable');
     $goldBadgeLink.removeClass('disable');
-    $goldBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "gold") {
     $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
     $bronzeBadge.attr("disabled", false);
     $silverBadge.attr("disabled", false);
     $goldBadge.attr("disabled", false);
+    $bronzeBadgeLink.attr("title", 'Download bronze badge');
+    $silverBadgeLink.attr("title", 'Download silver badge');
+    $goldBadgeLink.attr("title", 'Download gold badge');
     $(".downloadable_badges").append($bronzeBadge);
     $(".downloadable_badges").append($silverBadge);
     $(".downloadable_badges").append($goldBadge);
@@ -295,13 +298,16 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $goldBadgeLink.addClass('enable');
     $goldBadgeLink.removeClass('disable');
     $platinumBadgeLink.removeClass('disable');
-    $platinumBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "platinum") {
     $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
     $bronzeBadge.attr("disabled", false);
     $silverBadge.attr("disabled", false);
     $goldBadge.attr("disabled", false);
     $platinumBadge.attr("disabled", false);
+    $platinumBadgeLink.attr("title", 'Download platinum badge');
+    $goldBadgeLink.attr("title", 'Download gold badge');
+    $bronzeBadgeLink.attr("title", 'Download bronze badge');
+    $silverBadgeLink.attr("title", 'Download silver badge');
     $(".downloadable_badges").append($bronzeBadge);
     $(".downloadable_badges").append($silverBadge);
     $(".downloadable_badges").append($goldBadge);

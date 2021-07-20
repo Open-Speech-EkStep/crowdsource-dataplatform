@@ -20,7 +20,7 @@ describe("setBadge", ()=>{
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'hindi');
     localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : false, contributionCount : 0,nextBadgeType: "Bronze", currentBadgeType:""};
-    const localeStrings = {Bronze:"Bronze"};
+    const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
 
     expect($("#languageInTopWeb").hasClass("d-none")).toEqual(false);
@@ -40,7 +40,7 @@ describe("setBadge", ()=>{
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
     localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : false, contributionCount : 0,nextBadgeType: "Bronze", currentBadgeType:""};
-    const localeStrings = {Bronze:"Bronze"};
+    const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
 
     expect($("#languageInTopWeb").hasClass("d-none")).toEqual(true);
@@ -60,7 +60,7 @@ describe("setBadge", ()=>{
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
     localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : false, contributionCount : 2,nextBadgeType: "Bronze", currentBadgeType:""};
-    const localeStrings = {Bronze:"Bronze"};
+    const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
 
     expect($("#languageInTopWeb").hasClass("d-none")).toEqual(true);
@@ -79,7 +79,7 @@ describe("setBadge", ()=>{
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
     localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : true, contributionCount : 5,nextBadgeType: "Silver", currentBadgeType:"Bronze"};
-    const localeStrings = {Bronze:"Bronze"};
+    const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
 
     expect($("#languageInTopWeb").hasClass("d-none")).toEqual(true);
@@ -98,7 +98,7 @@ describe("setBadge", ()=>{
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
     localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : false, contributionCount : 7,nextBadgeType: "Silver", currentBadgeType:"Bronze"};
-    const localeStrings = {Bronze:"Bronze"};
+    const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
 
     expect($("#languageInTopWeb").hasClass("d-none")).toEqual(true);

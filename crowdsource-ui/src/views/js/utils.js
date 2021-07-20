@@ -48,7 +48,7 @@ const formatTransAndImages= (source,target,type) =>{
   const translations = localsStrings['translations'];
   const images = localsStrings['images'];
   const sourceType = type == 'images' ? images : translations;
-  return `${source} - ${target} ${sourceType}`
+  return source && source.length ? `${source} - ${target} ${sourceType}` : `${target} ${sourceType}`
 }
 
 function getCookie(cname) {
