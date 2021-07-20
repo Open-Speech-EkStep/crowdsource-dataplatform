@@ -8,7 +8,7 @@ spec:
     kind: Deployment
     name: vakyansh
   minReplicas: 3
-  maxReplicas: 6
+  maxReplicas: 4
   metrics:
     - type: Resource
       resource:
