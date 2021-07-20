@@ -782,10 +782,10 @@ const getProgressResultBasedOnTypeAndSource = (progressResult, type, source) => 
             progress = resultObj[source] || 0;
         }
         else {
-            progress = (resultObj['contribute'] + resultObj['validate']) || 0;
+            progress = (Number(resultObj['contribute'] || 0) + Number(resultObj['validate']) || 0) || 0;
         }
     }
-    return progress;
+    return progress.toFixed(3);
 }
 
 const increaseGoalIfLessThanCurrentProgress = (progress, goal) => {
@@ -800,9 +800,9 @@ const getContributionProgress = async (type, language, source) => {
     let goal = await getGoalForContributionProgress(type, language, source);
     
     const progressResult = await getProgressForContributionProgress(type, language);
-    
+    console.log(progressResult)
     const progress = getProgressResultBasedOnTypeAndSource(progressResult, type, source);
-
+    console.log(progress);
     goal = increaseGoalIfLessThanCurrentProgress(progress, goal);
 
     return {
