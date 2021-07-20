@@ -373,6 +373,7 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'Contribution (no. of images)',
             'Contribution (no. of translations)',
             'Contribution (no. of speakers)',
+            'Contribution (no. of sentences)',
             'translations',
             'speakers',
             'images'

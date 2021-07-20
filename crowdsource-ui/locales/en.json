@@ -400,5 +400,7 @@
 	"images": "images",
 	"second(s)": "second(s)",
 	"minute(s)": "minute(s)",
-	"hour(s)": "hour(s)"
+	"hour(s)": "hour(s)",
+	"Contribution (no. of sentences)": "Contribution (no. of sentences)",
+	"By number of sentences": "By number of sentences"
 }

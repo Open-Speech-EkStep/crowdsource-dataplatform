@@ -554,5 +554,7 @@
 	"speakers": "speakers",
 	"hour(s)": "hour(s)",
 	"minute(s)": "minute(s)",
-	"second(s)": "second(s)"
+	"second(s)": "second(s)",
+	"Contribution (no. of sentences)": "Contribution (no. of sentences)",
+	"By number of sentences": "By number of sentences"
 }
