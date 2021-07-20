@@ -205,7 +205,7 @@ function addListeners() {
   $("#edit").focus(function(){
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if(!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false'){
+    if(!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false' && !isMobileDevice()){
       showElement($('#keyboardBox'));
     }
   });
