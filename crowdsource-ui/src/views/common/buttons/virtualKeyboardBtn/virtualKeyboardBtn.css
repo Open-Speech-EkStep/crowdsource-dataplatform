@@ -1,9 +1,9 @@
 .virtual-keyboard-btn {
     background-color:#e9ecef;
-    position:fixed;
-    bottom:20px;
-    right:45px;
-    padding: 5px 15px;
+    position: absolute;;
+    bottom:  15px;
+    right:   15px;
+    padding: 0px 6px 4px
 }
 
 

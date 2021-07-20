@@ -396,5 +396,9 @@
 	"Contribution (no. of translations)": "Contribution (no. of translations)",
 	"Contribution (no. of speakers)": "Contribution (no. of speakers)",
 	"translations": "translations",
-	"speakers": "speakers"
+	"speakers": "speakers",
+	"images": "images",
+	"second(s)": "second(s)",
+	"minute(s)": "minute(s)",
+	"hour(s)": "hour(s)"
 }

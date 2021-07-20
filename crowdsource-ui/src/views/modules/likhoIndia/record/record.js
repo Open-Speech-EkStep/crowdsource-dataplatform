@@ -490,6 +490,7 @@ $(document).ready(() => {
   const isNotChrome = !browser.includes('Chrome');
   if(isMobileDevice() || isNotChrome){
     hideElement($('#extension-bar'));
+    hideElement($('#virtualKeyBoardBtn'));
   } else {
     showOrHideExtensionCloseBtn();
   }

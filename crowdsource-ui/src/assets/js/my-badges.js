@@ -219,6 +219,7 @@ const getBadgesForUser = (userName) => {
 }
 
 $(document).ready(() => {
+  localStorage.setItem("module","others");
   const details = JSON.parse(localStorage.getItem("speakerDetails"));
   const username = details && details.userName ? details.userName: '';
   getLocaleString().then(() => {

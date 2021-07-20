@@ -102,20 +102,20 @@ const updateSelectPageWhenModuleChanges = () => {
     $('input[name="moduleSelectRadio"]').on('change', function() {
         $("#select_page_id").find('option').remove().end();
         SELECT_PAGE_OPTIONS_FEEDBACK.forEach((data) => {
-            if($('input[name="moduleSelectRadio"]:checked').val() === data.module)
+            if($('input[name="moduleSelectRadio"]:checked').val() == data.module)
             {
                 data.pages.forEach((item) => {
-                    $("#select_page_id").append($('<option>', {value: item, text: item}));
+                    $("#select_page_id").append($('<option>', {value: item.value, text: item.text}));
                 });   
             }
         });
     });
 
     SELECT_PAGE_OPTIONS_FEEDBACK.forEach((data) => {
-        if($('input[name="moduleSelectRadio"]:checked').val() === data.module)
+        if($('input[name="moduleSelectRadio"]:checked').val() == data.module)
         {
             data.pages.forEach((item) => {
-                $("#select_page_id").append($('<option>', {value: item, text: item}));
+                $("#select_page_id").append($('<option>', {value: item.value, text: item.text}));
             });
 
             try { 
