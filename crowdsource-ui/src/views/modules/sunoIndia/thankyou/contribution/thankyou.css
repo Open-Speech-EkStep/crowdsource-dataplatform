@@ -8,7 +8,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
 }
 
 .user-contribution-msg span{
-  color: #007BFF;
+  color: #007bff;
 }
 
 .thankyou-page-heading, .user-contribution-msg, .new-badge-msg{
@@ -336,9 +336,9 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   }
 }
 
-  .disable{
+.disable{
   opacity: 0.2;
-  }
+}
 
 .enable{
   cursor: pointer;
