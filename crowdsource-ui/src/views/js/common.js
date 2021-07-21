@@ -207,19 +207,27 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $(".thankyou-page-heading").addClass("d-none");
     $(".user-contribution-msg").addClass("d-none");
     $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
+    $("#language-goal").addClass('position-relative')
 
-    // const cardWithoutBadge = $('#cardWithoutBadge');
-    // $(cardWithoutBadge.parent()).remove(cardWithoutBadge);
-    // $("#chartRowWithoutCard").html(cardWithoutBadge);
+    const cardWithoutBadge = $('#cardWithoutBadge');
+    cardWithoutBadge.remove();
+    $("#chartRowWithoutCard").append(cardWithoutBadge);
+    const $socialLink = $("#social-links");
+    $(".download-row").append($socialLink);
     const activeBadgeId = `#${data.currentBadgeType.toLowerCase()}_badge_link`;
     const activeBadge = $(activeBadgeId);
     activeBadge.attr("disabled", false);
+    activeBadge.remove();
     $(".downloadable_badges").append(activeBadge);
     const nextBadgeLink = $(`#${data.nextBadgeType.toLowerCase()}_badge_link_img`);
     nextBadgeLink.removeClass('disable');
 
-    // $("#milestone_text").removeClass("d-none");
-    $("#current_badge_name").text(localeStrings[data.currentBadgeType.toLowerCase()]);
+
+    $(".participation-msg-section").addClass('d-flex align-items-center');
+
+    $("#milestone_text").removeClass("d-none");
+    const currentBadgeName = localeStrings[data.currentBadgeType.toLowerCase()];
+    $("#current_badge_name").text(currentBadgeName.charAt(0).toUpperCase() + currentBadgeName.slice(1));
     $("#current_badge_name_1").text(localeStrings[data.currentBadgeType.toLowerCase()]);
     $("#current_badge_count").text(data.currentMilestone);
     $("#next_badge_count").text(data.nextMilestone);

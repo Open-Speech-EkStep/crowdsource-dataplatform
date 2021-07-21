@@ -107,9 +107,6 @@ step("When user clicks on Validate more button , user should see no data availab
 	}
 });
 
-
-
-
 // step("user should see the Virtual Keyboard button", async function() {
 // 	await taiko.waitFor(1000)
 // 	await click(button({id:"virtualKeyBoardBtn"}))
@@ -133,10 +130,12 @@ step("User clicks on <arg0> , he should see next sentence and <arg1> <arg2> butt
 step("User clicks on <arg0> he should see thank you page and should be able to see bronze Badge", async function (arg0) {
 	await click(taiko.button({ id: arg0 }))
 	await taiko.waitFor(2000)
-	// assert.ok(await text("You’ve earned your Bronze Bhasha Samarthak Badge").isVisible());
 	assert.ok(await text("Congratulations on winning a new badge!").isVisible());
+	assert.ok(await text("You’ve earned your Dekho India Bronze Bhasha Samarthak Badge").isVisible());
+	assert.ok(await text("Validated 5 image(s) in Kannada").isVisible());
 	assert.ok(await text("Share on").isVisible());
-	// assert.ok(await image({ id: "reward-img" }).isVisible());
+	assert.ok(await text("Download").isVisible());
+	assert.ok(await image({ id: "reward-img" }).isVisible());
 	assert.ok(! await image({ id: "bronze_badge_link_img" }).isDisabled());
 });
 
