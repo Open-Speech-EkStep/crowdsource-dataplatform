@@ -105,7 +105,7 @@ const updateSelectPageWhenModuleChanges = () => {
             if($('input[name="moduleSelectRadio"]:checked').val() == data.module)
             {
                 data.pages.forEach((item) => {
-                    $("#select_page_id").append($('<option>', {value: item.value, text: item.text}));
+                    $("#select_page_id").append($('<option>', {value: item, text: item}));
                 });   
             }
         });
@@ -115,7 +115,7 @@ const updateSelectPageWhenModuleChanges = () => {
         if($('input[name="moduleSelectRadio"]:checked').val() == data.module)
         {
             data.pages.forEach((item) => {
-                $("#select_page_id").append($('<option>', {value: item.value, text: item.text}));
+                $("#select_page_id").append($('<option>', {value: item, text: item}));
             });
 
             try { 
