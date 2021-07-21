@@ -733,6 +733,9 @@ const addRemainingGenders = (genderGroupData, allGenders) => {
 }
 
 const getGoalForContributionProgress = async(type, language, source) => {
+    if(type === 'parallel'){
+        language = language.split('-')[0];
+    }
     let goalFilter = `1=1`;
     if (type && type.length !== 0) {
         goalFilter += ` and type = '${type}'`

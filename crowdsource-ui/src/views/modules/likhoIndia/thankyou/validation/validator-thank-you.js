@@ -187,7 +187,7 @@ function executeOnLoad() {
     $("#conLanWhenGetBadge").html(`${localeLanguageStr}-${localeToLanguageStr}`)
 
     getLanguageStats();
-    updateGoalProgressBar(`/progress/parallel/${contributionLanguage}/validate`)
+    updateGoalProgressBar(`/progress/parallel/${contributionLanguage}-${toLanguage}/validate`)
   }
 }
 
