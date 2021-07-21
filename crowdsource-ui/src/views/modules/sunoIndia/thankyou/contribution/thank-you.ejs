@@ -40,11 +40,11 @@
     </div>
     <div class="row mt-3 mt-lg-4 md-lg-4 lazy">
         <div class="col-lg-8 border overflow-hidden contribution-info">
-            <div class="bg-white m-0 p-4-5 contribution-info-inner">
-                <div class="col-lg-12 col-md-11 col-lg-11 thankyou-page ml-lg-auto">
-                    <%- include ../common/badgesMilestone.ejs %>
+            <div class="bg-white m-0 contribution-info-inner">
+                <div class="col-lg-12 col-md-11 col-lg-11 pt-5 thankyou-page ml-lg-auto">
+                    <%- include('../common/badgesMilestone.ejs',{module:'Suno',text1:'Transcribed', text2:'sentence(s)'}) %>
                     <div class="row m-0" id="cardWithoutBadge">
-                        <div class="col-lg-4 col-md-5 col-sm-6 pl-0 pr-lg-3 pr-md-2 pr-0">
+                        <div class="col-lg-4 col-md-5 col-sm-6 pl-0 pr-lg-3 pr-md-2 pr-0 pt-5 participation-msg-section">
                             <%- include('../common/thankyouPageParticipationMsg.ejs',{language:'<language>'}) %>
                             <%- include ../common/sharableLink.ejs %>
                         </div>
