@@ -800,3 +800,11 @@ union
 select (select contributor_id from contributors where user_name = 'Badge User'),milestone_id from reward_milestones where language = 'Odia' and type = 'ocr' and milestone in (5,50,100) and category = 'validate'
 union
 select (select contributor_id from contributors where user_name = 'Badge User'),milestone_id from reward_milestones where language in('Bengali') and type = 'parallel' and milestone in (5,50,100,200) and category = 'validate' ;
+
+REFRESH MATERIALIZED VIEW contributions_and_demo_stats;
+REFRESH MATERIALIZED VIEW daily_stats_complete;
+REFRESH MATERIALIZED VIEW gender_group_contributions;
+REFRESH MATERIALIZED VIEW age_group_contributions;
+REFRESH MATERIALIZED VIEW language_group_contributions;
+REFRESH MATERIALIZED VIEW state_group_contributions;
+REFRESH MATERIALIZED VIEW language_and_state_group_contributions;
