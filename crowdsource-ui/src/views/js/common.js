@@ -423,8 +423,9 @@ const setLocalisationAndProfile = (path, module) => {
 
 const updateGoalProgressBar = function (url){
   return performAPIRequest(url).then(data=>{
+    const currentModule = localStorage.getItem(CURRENT_MODULE);
     const maxValue = data.goal;
-    const currentValue = data['current-progress']
+    const currentValue = currentModule == 'dekho' || currentModule == 'likho' ? Number(data['current-progress']) : data['current-progress'];
     replaceSubStr($(".progress-metric"), "<contribution-done>", currentValue);
     replaceSubStr($(".progress-metric"), "<contribution-goal>", maxValue);
     const average = Math.round((currentValue/maxValue) * 100);

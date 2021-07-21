@@ -52,8 +52,8 @@ Tags: component
 ## Validate Feedback Page
 * When user clicks on the Feedback icon, user should see the feedback popup
 * Submit button should be disbaled, When user selects an opinion, submit button should be enabled
-* when user clicks on the submit button , user should land on the Thank you page 
-* When user clicks on the go to home page button , user should see the home page
+* when user clicks on the submit button , user should see thankyou popup 
+* When user clicks on the close button , user should see the home page
 
 ## Validate Report feature
 * Navigate to "Contribute" button and click "Contribute" button
