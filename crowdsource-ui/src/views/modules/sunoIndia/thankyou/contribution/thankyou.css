@@ -97,6 +97,10 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   padding: 16px 23px;
 }
 
+#language-goal img{
+  filter: drop-shadow(0 4px 12px rgba(0, 123, 255, 0.2));
+}
+
 .bg-thank-you {
   background-size: cover;
 }
@@ -149,6 +153,10 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   font-size: 18px;
   line-height: 22px;
   color: #666666;
+}
+
+.sentence_away_msg b{
+  color: #142745;
 }
 
 .stats-container {

@@ -779,13 +779,16 @@ const getProgressResultBasedOnTypeAndSource = (progressResult, type, source) => 
         }
 
         if (source && source.length > 0) {
-            progress = resultObj[source] || 0;
+            progress = Number(resultObj[source] || 0);
         }
         else {
             progress = (Number(resultObj['contribute'] || 0) + Number(resultObj['validate']) || 0) || 0;
         }
     }
-    return progress.toFixed(3);
+    if (['text', 'asr'].includes(type)) {
+        return progress.toFixed(3);
+    }
+    return progress;
 }
 
 const increaseGoalIfLessThanCurrentProgress = (progress, goal) => {

@@ -195,9 +195,12 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#languageInTopWeb").addClass("d-none");
     $("#languageInTopMob").addClass("d-none");
   }
-  const nextBadgeName = localeStrings[data.nextBadgeType.toLowerCase()]
-  replaceSubStr($("#sentence_away_msg"), '<contribution-count>', Number(data.nextMilestone) - Number(data.contributionCount) );
-  replaceSubStr($("#sentence_away_msg"), '<badge-color>', nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1) );
+  const nextBadgeName = localeStrings[data.nextBadgeType.toLowerCase()];
+  $("#sentence-away-count").text(Number(data.nextMilestone) - Number(data.contributionCount))
+  $("#sentence_away_badge").text(nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1))
+
+  // replaceSubStr($("#sentence_away_msg"), '<contribution-count>', Number(data.nextMilestone) - Number(data.contributionCount) );
+  // replaceSubStr($("#sentence_away_msg"), '<badge-color>', nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1) );
 
   if (data.isNewBadge) {
     $(".new-badge-msg").removeClass("d-none");
@@ -421,7 +424,7 @@ const updateGoalProgressBar = function (url){
     // replaceSubStr($(".progress-average-metric"), "<average>", average);
     const $progressBar = $("#progress_bar");
     $progressBar.width(average + '%');
-  })
+  }).catch(e=>console.log)
 }
 
 const replaceSubStr = function (element , to ,from){

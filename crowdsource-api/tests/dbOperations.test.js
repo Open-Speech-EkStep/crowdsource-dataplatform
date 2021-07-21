@@ -1132,19 +1132,19 @@ describe("Running tests for dbOperations", () => {
         });
         test('getProgressResultBasedOnTypeAndSource should return correct for ocr and contribute', async () => {            
             const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, ocrType, contributeSource);
-            expect(result).toStrictEqual(progressResult.total_contribution_count.toFixed(3));
+            expect(result).toStrictEqual(progressResult.total_contribution_count);
         });
         test('getProgressResultBasedOnTypeAndSource should return correct for ocr and validate', async () => {            
             const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, ocrType, validateSource);
-            expect(result).toStrictEqual(progressResult.total_validation_count.toFixed(3));
+            expect(result).toStrictEqual(progressResult.total_validation_count);
         });
         test('getProgressResultBasedOnTypeAndSource should return correct for parallel and contribute', async () => {            
             const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, parallelType, contributeSource);
-            expect(result).toStrictEqual(progressResult.total_contribution_count.toFixed(3));
+            expect(result).toStrictEqual(progressResult.total_contribution_count);
         });
         test('getProgressResultBasedOnTypeAndSource should return correct for parallel and validate', async () => {            
             const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, parallelType, validateSource);
-            expect(result).toStrictEqual(progressResult.total_validation_count.toFixed(3));
+            expect(result).toStrictEqual(progressResult.total_validation_count);
         });
         test('getProgressResultBasedOnTypeAndSource should return correct for text and no source', async () => {            
             const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, textType);
@@ -1156,11 +1156,11 @@ describe("Running tests for dbOperations", () => {
         });
         test('getProgressResultBasedOnTypeAndSource should return correct for ocr and no source', async () => {            
             const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, ocrType);
-            expect(result).toStrictEqual((progressResult.total_validation_count + progressResult.total_contribution_count).toFixed(3));
+            expect(result).toStrictEqual((progressResult.total_validation_count + progressResult.total_contribution_count));
         });
         test('getProgressResultBasedOnTypeAndSource should return correct for parallel and no source', async () => {            
             const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, parallelType);
-            expect(result).toStrictEqual((progressResult.total_validation_count + progressResult.total_contribution_count).toFixed(3));
+            expect(result).toStrictEqual((progressResult.total_validation_count + progressResult.total_contribution_count));
         });
         test('increaseGoalIfLessThanCurrentProgress should return same goal if progress is less', async () => {            
             const result = await dbOperations.increaseGoalIfLessThanCurrentProgress(10, 100);
