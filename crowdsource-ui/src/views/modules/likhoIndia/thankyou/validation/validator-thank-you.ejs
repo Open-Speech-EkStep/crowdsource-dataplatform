@@ -14,6 +14,7 @@
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
     <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
@@ -26,7 +27,7 @@
 
 <body class="d-flex h-100 flex-column">
 <%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho", PAGE_TITLE:__('Validate'),img:"LikhoIndiaLogo.svg",homePath:"./home.html"}); %>
-<div id="content-wrapper" class="container-fluid padding-top-115 pb-4 pb-lg-2 pb-md-2 px-3 px-md-5 flex-grow-1 bg-tri-color">
+<div id="content-wrapper" class="container-fluid thankyou-content-wrapper pb-4 pb-lg-2 pb-md-2 px-3 px-md-5 flex-grow-1 bg-tri-color">
     <div class="text-center pt-5 pt-lg-0 pt-md-0">
         <div class="row position-absolute top-back-btn">
             <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
@@ -38,7 +39,7 @@
     <%- include('../common/thankyouPageProgressBar.ejs', {module: 'Likho',text:'Sentence(s)',language:'<from-language>-<to-language>'}) %>
         </div>
     </div>
-    <div class="row mt-3 mt-lg-4 md-lg-4 lazy pt-5 pt-lg-0 pt-md-0">
+    <div class="row mt-3 mt-lg-4 md-lg-4 lazy pt-5 pt-lg-2 pt-md-2">
         <div class="col-lg-8 border overflow-hidden contribution-info">
             <div class="bg-white m-0 contribution-info-inner">
                 <div class="col-lg-12 col-md-11 col-lg-11 thankyou-page ml-lg-auto">
