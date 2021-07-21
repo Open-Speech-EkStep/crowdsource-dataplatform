@@ -1,0 +1,72 @@
+h1,
+h2,
+h3,
+h4,
+.progress-metric,
+.progress-average-metric {
+  font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.user-contribution-msg span {
+  color: #4d82f7;
+}
+
+.progress {
+  filter: drop-shadow(0 4px 12px rgba(15, 39, 73, 0.12));
+  background: #fcfdff;
+  border: 1px solid #4d82f7;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.progress-row {
+  margin-top: 41px;
+  margin-bottom: 23px;
+  font-weight: 300;
+}
+
+.progress-bar-section {
+  max-width: 800px;
+}
+
+.progress-bar {
+  background: #4d82f7 !important;
+  border-radius: 10px;
+}
+
+.progress-metric {
+  font-size: 20px;
+  line-height: 25px;
+  color: #142747;
+  font-weight: 300;
+}
+
+.progress-average-metric {
+  font-size: 20px;
+  line-height: 25px;
+  margin-bottom: 8px;
+}
+
+#totalAverage {
+  color: #ef8537;
+  font-size: 40px;
+  line-height: 20px;
+}
+
+@media (max-width: 700px) {
+  .progress-average-metric {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  #totalAverage {
+    font-size: 28px;
+  }
+
+  .progress-metric {
+    position: absolute;
+    bottom: -27px;
+    right: -14px;
+    font-size: 14px;
+  }
+}

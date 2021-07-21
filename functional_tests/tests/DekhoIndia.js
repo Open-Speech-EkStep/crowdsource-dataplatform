@@ -12,6 +12,8 @@ const {
 	into
 } = require('taiko');
 
+var initialProgressValue;
+
 step("Validate Dekho India content", async function () {
 	assert.ok(await text('Enrich your language by labelling images').exists());
 	assert.ok(await text('Validate').exists());
@@ -145,6 +147,29 @@ step("User should see add extension and watch video link", async function () {
 	assert.ok(await button('Install Now').exists())
 	assert.ok(await link({ id: "extension_video_button" }).exists());
 });
+
+step("Validate the updated progress bar value with <contributedValue> for <initiative>", async function (contributedValue,  initiative) {
+   await taiko.waitFor(2000);
+   const updatedContributionMade = await taiko.$("#contribution-made").text();
+   const updatedContributedValue = updatedContributionMade.split('/');
+   const updatedValue = Number(updatedContributedValue[0]);
+   const aggregatedValue = Number(initialProgressValue) + Number(contributedValue);
+	if (initiative == "Dekho India") {
+		assert.ok(updatedValue == aggregatedValue);
+	} else if (initialProgressValue != updatedValue) {
+		assert.ok(true);
+	}
+   assert.ok(await text(`${initiative} Target Achieved`).isVisible());
+});
+
+step("User should store the progress bar for <initiative>", async function (initiative) {
+	await taiko.waitFor(2000);
+	await taiko.$("#progress_bar").exists();
+	const contributionMade = await taiko.$("#contribution-made").text();
+	const contributedValue = contributionMade.split('/');
+	initialProgressValue = contributedValue[0];
+	assert.ok(await text(`${initiative} Target Achieved`).isVisible());
+ });
 
 step("Clicking watch video link should open video", async function () {
 	assert.ok(await link('Watch the video').exists())

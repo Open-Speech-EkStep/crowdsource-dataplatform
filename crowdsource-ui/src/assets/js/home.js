@@ -11,6 +11,7 @@ const {
 
 const { getContributedAndTopLanguage,hasUserRegistered } = require('./common');
 const { addToLanguage } = require('../../views/common/languageNavBar/languageNavBar');
+const { updateGoalProgressBar } = require('../../../build/js/common/common');
 const {
     DEFAULT_CON_LANGUAGE,
     TOP_LANGUAGES_BY_HOURS,
@@ -196,6 +197,7 @@ function initializeBlock() {
         $listen_p_2.addClass('d-none');
         $listen_container.removeClass('listen-active');
     });
+    updateGoalProgressBar(`/progress/text`);
     getStatsSummary();
 
 }
