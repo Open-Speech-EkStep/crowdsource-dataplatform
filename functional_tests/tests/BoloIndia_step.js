@@ -456,7 +456,7 @@ step("Submit button should be disbaled, When user selects an opinion, submit but
     assert.ok(! await taiko.button({ id: "submit_btn" }).isDisabled());
 });
 
-step("when user clicks on the submit button , user should land on the Thank you page", async function () {
+step("when user clicks on the submit button , user should see thankyou popup", async function () {
     await click(taiko.radioButton({ id: "yes-check" }));
     await click(taiko.radioButton({ id: "revisit-maybe-check" }));
     await taiko.waitFor(200);
@@ -468,7 +468,7 @@ step("when user clicks on the submit button , user should land on the Thank you 
     assert.ok(await text("Submitted successfully").exists());
 });
 
-step("When user clicks on the go to home page button , user should see the home page", async function () {
+step("When user clicks on the close button , user should see the home page", async function () {
     assert.ok(await taiko.button({ id: "feedback_thanku_close_btn" }).exists());
     await click(taiko.button({ id: "feedback_thanku_close_btn" }))
     assert.ok(await text("Bolo India").exists());

@@ -5,7 +5,8 @@
 
 .back-btn a {
   color: #959595;
-  font-size: 16px;
+  font-size: 20px;
+  line-height: 29px;
 }
 
 .back-btn a .material-icon {

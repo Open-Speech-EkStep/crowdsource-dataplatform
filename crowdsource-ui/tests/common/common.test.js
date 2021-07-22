@@ -10,7 +10,9 @@ document.body = stringToHTML(
   readFileSync(`${__dirname}/../../build/views/common/languageNavBar.ejs`, 'UTF-8')+
   readFileSync(`${__dirname}/../../build/views/common/thankyouPageParticipationMsg.ejs`, 'UTF-8')+
   readFileSync(`${__dirname}/../../build/views/common/thankyouPageHeading.ejs`, 'UTF-8')+
-  readFileSync(`${__dirname}/../../build/views/common/thankyouPageProgressBar.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../../build/views/common/thankyouPageProgressBar.ejs`, 'UTF-8')+
+  readFileSync(`${__dirname}/../../build/views/common/badgesMilestone.ejs`, 'UTF-8')+
+  readFileSync(`${__dirname}/../../build/views/common/languageGoal.ejs`, 'UTF-8')
 );
 
 describe("setBadge", ()=>{
@@ -89,8 +91,11 @@ describe("setBadge", ()=>{
     expect($(".new-badge-msg").hasClass("d-none")).toEqual(false);
     expect($(".thankyou-page-heading").hasClass("d-none")).toEqual(true);
     expect($(".user-contribution-msg").hasClass("d-none")).toEqual(true);
+    expect($("#milestone_text").hasClass("d-none")).toEqual(false);
+    expect($("#language-goal").hasClass('position-relative')).toEqual(true);
     localStorage.clear();
   })
+
 
   test("should show card with badge after user achieved a badge for the language that is not in top", ()=>{
     mockLocalStorage();

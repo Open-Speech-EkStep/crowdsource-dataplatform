@@ -1,5 +1,5 @@
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
-const { redirectToLocalisedPage, getAvailableLanguages, showFucntionalCards, landToHome, hasUserRegistered, updateLikhoLocaleLanguagesDropdown } = require('../common/common');
+const { redirectToLocalisedPage, getAvailableLanguages, showFucntionalCards, updateGoalProgressBar, hasUserRegistered, updateLikhoLocaleLanguagesDropdown } = require('../common/common');
 const {
   getLocaleString,
 } = require('../common/utils');
@@ -145,6 +145,7 @@ function initializeBlock() {
   }
   onChangeUser('./home.html', MODULE.likho.value);
   onOpenUserDropDown();
+  updateGoalProgressBar(`/progress/parallel`);
   getStatsSummary('/stats/summary/parallel', MODULE.likho.value);
 
 }

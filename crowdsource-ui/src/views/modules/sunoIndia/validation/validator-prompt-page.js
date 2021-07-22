@@ -564,9 +564,11 @@ const detectDevice = () => {
 const executeOnLoad = function () {
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
+  if(isMobileDevice()) {
+    hideElement($('#virtualKeyBoardBtn'));
+  }
   if (isMobileDevice() || isNotChrome) {
     hideElement($('#extension-bar'));
-    hideElement($('#virtualKeyBoardBtn'));
   } else {
     showOrHideExtensionCloseBtn();
   }

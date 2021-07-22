@@ -12,6 +12,8 @@ const {
 	into
 } = require('taiko');
 
+var initialProgressValue;
+
 step("Validate Dekho India content", async function () {
 	assert.ok(await text('Enrich your language by labelling images').exists());
 	assert.ok(await text('Validate').exists());
@@ -107,9 +109,6 @@ step("When user clicks on Validate more button , user should see no data availab
 	}
 });
 
-
-
-
 // step("user should see the Virtual Keyboard button", async function() {
 // 	await taiko.waitFor(1000)
 // 	await click(button({id:"virtualKeyBoardBtn"}))
@@ -133,10 +132,12 @@ step("User clicks on <arg0> , he should see next sentence and <arg1> <arg2> butt
 step("User clicks on <arg0> he should see thank you page and should be able to see bronze Badge", async function (arg0) {
 	await click(taiko.button({ id: arg0 }))
 	await taiko.waitFor(2000)
-	// assert.ok(await text("You’ve earned your Bronze Bhasha Samarthak Badge").isVisible());
 	assert.ok(await text("Congratulations on winning a new badge!").isVisible());
+	assert.ok(await text("You’ve earned your Dekho India Bronze Bhasha Samarthak Badge").isVisible());
+	assert.ok(await text("Validated 5 image(s) in Kannada").isVisible());
 	assert.ok(await text("Share on").isVisible());
-	// assert.ok(await image({ id: "reward-img" }).isVisible());
+	assert.ok(await text("Download").isVisible());
+	assert.ok(await image({ id: "reward-img" }).isVisible());
 	assert.ok(! await image({ id: "bronze_badge_link_img" }).isDisabled());
 });
 
@@ -145,6 +146,29 @@ step("User should see add extension and watch video link", async function () {
 	assert.ok(await button('Install Now').exists())
 	assert.ok(await link({ id: "extension_video_button" }).exists());
 });
+
+step("Validate the updated progress bar value with <contributedValue> for <initiative>", async function (contributedValue,  initiative) {
+   await taiko.waitFor(2000);
+   const updatedContributionMade = await taiko.$("#contribution-made").text();
+   const updatedContributedValue = updatedContributionMade.split('/');
+   const updatedValue = Number(updatedContributedValue[0]);
+   const aggregatedValue = Number(initialProgressValue) + Number(contributedValue);
+	if (initiative == "Dekho India") {
+		assert.ok(updatedValue == aggregatedValue);
+	} else if (initialProgressValue != updatedValue) {
+		assert.ok(true);
+	}
+   assert.ok(await text(`${initiative} Target Achieved`).isVisible());
+});
+
+step("User should store the progress bar for <initiative>", async function (initiative) {
+	await taiko.waitFor(2000);
+	await taiko.$("#progress_bar").exists();
+	const contributionMade = await taiko.$("#contribution-made").text();
+	const contributedValue = contributionMade.split('/');
+	initialProgressValue = contributedValue[0];
+	assert.ok(await text(`${initiative} Target Achieved`).isVisible());
+ });
 
 step("Clicking watch video link should open video", async function () {
 	assert.ok(await link('Watch the video').exists())

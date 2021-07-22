@@ -195,24 +195,28 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#languageInTopWeb").addClass("d-none");
     $("#languageInTopMob").addClass("d-none");
   }
+  const nextBadgeName = localeStrings[data.nextBadgeType.toLowerCase()];
+  $("#sentence-away-count").text(Number(data.nextMilestone) - Number(data.contributionCount))
+  $("#sentence_away_badge").text(nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1))
 
-  const nextBadgeName = localeStrings[data.nextBadgeType.toLowerCase()]
-  replaceSubStr($("#sentence_away_msg"), '<contribution-count>', Number(data.nextMilestone) - Number(data.contributionCount) );
-  replaceSubStr($("#sentence_away_msg"), '<badge-color>', nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1) );
-
+  // replaceSubStr($("#sentence_away_msg"), '<contribution-count>', Number(data.nextMilestone) - Number(data.contributionCount) );
+  // replaceSubStr($("#sentence_away_msg"), '<badge-color>', nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1) );
   if (data.isNewBadge) {
     $(".new-badge-msg").removeClass("d-none");
     $(".thankyou-page-heading").addClass("d-none");
     $(".user-contribution-msg").addClass("d-none");
-    $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
+    $(".downloadable_badges").addClass('mr-0 mr-lg-3 mr-md-2');
     $("#language-goal").addClass('position-relative')
 
     const cardWithoutBadge = $('#cardWithoutBadge');
+    cardWithoutBadge.remove();
     $("#chartRowWithoutCard").append(cardWithoutBadge);
-    $(".download-row").append($("#social-links"))
+    const $socialLink = $("#social-links");
+    $(".download-row").append($socialLink);
     const activeBadgeId = `#${data.currentBadgeType.toLowerCase()}_badge_link`;
     const activeBadge = $(activeBadgeId);
     activeBadge.attr("disabled", false);
+    activeBadge.remove();
     $(".downloadable_badges").append(activeBadge);
     const nextBadgeLink = $(`#${data.nextBadgeType.toLowerCase()}_badge_link_img`);
     nextBadgeLink.removeClass('disable');
@@ -263,7 +267,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   const $platinumBadgeLink = $("#platinum_badge_link_img");
   const $platinumBadge = $("#platinum_badge_link");
   if (data.currentBadgeType.toLowerCase() == "bronze") {
-    $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
+    $(".downloadable_badges").addClass('mr-0 mr-lg-3 mr-md-2');
     $bronzeBadge.attr("disabled", false);
     $bronzeBadgeLink.attr("title", 'Download bronze badge');
     $(".downloadable_badges").append($bronzeBadge);
@@ -272,7 +276,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $bronzeBadgeLink.addClass('enable');
     $bronzeBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "silver") {
-    $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
+    $(".downloadable_badges").addClass('mr-0 mr-lg-3 mr-md-2');
     $bronzeBadge.attr("disabled", false);
     $bronzeBadgeLink.attr("title", 'Download bronze badge');
     $silverBadge.attr("disabled", false);
@@ -286,7 +290,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $silverBadgeLink.removeClass('disable');
     $goldBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "gold") {
-    $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
+    $(".downloadable_badges").addClass('mr-0 mr-lg-3 mr-md-2');
     $bronzeBadge.attr("disabled", false);
     $silverBadge.attr("disabled", false);
     $goldBadge.attr("disabled", false);
@@ -305,7 +309,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $goldBadgeLink.removeClass('disable');
     $platinumBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "platinum") {
-    $(".downloadable_badges").addClass('mr-0 mr-lg-2 mr-md-2');
+    $(".downloadable_badges").addClass('mr-0 mr-lg-3 mr-md-2');
     $bronzeBadge.attr("disabled", false);
     $silverBadge.attr("disabled", false);
     $goldBadge.attr("disabled", false);
@@ -418,8 +422,9 @@ const setLocalisationAndProfile = (path, module) => {
 
 const updateGoalProgressBar = function (url){
   return performAPIRequest(url).then(data=>{
+    const currentModule = localStorage.getItem(CURRENT_MODULE);
     const maxValue = data.goal;
-    const currentValue = data['current-progress']
+    const currentValue = currentModule == 'dekho' || currentModule == 'likho' ? Number(data['current-progress']) : data['current-progress'];
     replaceSubStr($(".progress-metric"), "<contribution-done>", currentValue);
     replaceSubStr($(".progress-metric"), "<contribution-goal>", maxValue);
     const average = Math.round((currentValue/maxValue) * 100);
@@ -427,7 +432,7 @@ const updateGoalProgressBar = function (url){
     // replaceSubStr($(".progress-average-metric"), "<average>", average);
     const $progressBar = $("#progress_bar");
     $progressBar.width(average + '%');
-  })
+  }).catch(e=>console.log)
 }
 
 const replaceSubStr = function (element , to ,from){
