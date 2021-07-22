@@ -218,67 +218,6 @@ function getStatistics(response) {
   $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
 }
 
-// function constructChart(responseData, xAxisLabel, yAxisLabel) {
-//   var chart = am4core.create("speakers_hours_chart", am4charts.XYChart);
-//   chartReg["chart"] = chart;
-//
-//   let response = [...responseData];
-//
-//   if (xAxisLabel !== "total_speakers") {
-//     response.forEach((ele) => {
-//       const { hours, minutes, seconds } = calculateTime(
-//         Number(ele.total_contributions) * 60 * 60,
-//         true
-//       );
-//       ele.total_contributions_text = formatTime(hours, minutes, seconds);
-//     });
-//   }
-//   chart.data = response.reverse();
-//   var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
-//   categoryAxis.dataFields.category = yAxisLabel;
-//   categoryAxis.renderer.grid.template.location = 0;
-//   categoryAxis.renderer.cellStartLocation = 0.2;
-//   categoryAxis.renderer.cellEndLocation = 0.8;
-//   categoryAxis.renderer.grid.template.strokeWidth = 0;
-//   var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
-//   valueAxis.renderer.grid.template.strokeWidth = 0;
-//   valueAxis.renderer.labels.template.disabled = true;
-//   if (xAxisLabel != "total_speakers") {
-//     const maxValue = Math.max.apply(Math, chart.data.map(function (o) { return Number(o.total_contributions); })) + 0.05;
-//     valueAxis.min = 0;
-//     valueAxis.max = maxValue > 0.1 ? maxValue : 0.1;
-//   } else {
-//     const maxValue = Math.max.apply(Math, chart.data.map(function (o) { return Number(o.total_speakers); })) + 20;
-//     valueAxis.min = 0;
-//     valueAxis.max = maxValue > 40 ? maxValue : 40;
-//   }
-//   valueAxis.strictMinMax = true;
-//   categoryAxis.renderer.minGridDistance = 25;
-//   var series = chart.series.push(new am4charts.ColumnSeries());
-//   series.dataFields.valueX = xAxisLabel;
-//   series.dataFields.categoryY = yAxisLabel;
-//
-//   var valueLabel = series.bullets.push(new am4charts.LabelBullet());
-//   valueLabel.label.text =
-//     xAxisLabel === "total_speakers"
-//       ? "{total_speakers}"
-//       : "{total_contributions_text}";
-//   valueLabel.label.fontSize = 14;
-//   valueLabel.label.horizontalCenter = "left";
-//   valueLabel.label.dx = 10;
-//   valueLabel.label.truncate = false;
-//   valueLabel.label.hideOversized = false;
-//
-//   var cellSize = 35;
-//   chart.events.on("datavalidated", function (ev) {
-//     var chart = ev.target;
-//     var categoryAxis = chart.yAxes.getIndex(0);
-//     var adjustHeight = chart.data.length * cellSize - categoryAxis.pixelHeight;
-//     var targetHeight = chart.pixelHeight + adjustHeight;
-//     chart.svgContainer.htmlElement.style.height = targetHeight + "px";
-//   });
-// }
-
 let chartReg = {};
 function showByHoursChart() {
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);

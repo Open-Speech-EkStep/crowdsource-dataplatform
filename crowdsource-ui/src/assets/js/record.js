@@ -88,7 +88,6 @@ const initialize = () => {
     const $player = $('#player');
     const $audioPlayer = $('#audio-controller');
     const $nextBtn = $('#nextBtn');
-    // const $nextBtnToolTip = $nextBtn.parent();
     const $getStarted = $('#get-started');
     const $skipBtn = $('#skipBtn');
     const $recordingRow = $('#recording-row');
@@ -265,7 +264,6 @@ const initialize = () => {
                 notyf.error(
                     'Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission'
                 );
-                // $startRecordRow.removeClass('d-none');
                 $stopRecordBtn.addClass('d-none');
                 $nextBtn.addClass('d-none');
                 $reRecordBtn.addClass('d-none');
@@ -279,13 +277,10 @@ const initialize = () => {
     });
 
     $stopRecordBtn.on('click', () => {
-        // const $startRecordRow = $('#startRecordRow');
         clearTimeout(cleartTimeoutKey);
         clearTimeout(timerTimeoutKey)
         $autoStopWarning.classList.add('d-none');
-        // $startRecordRow.addClass('d-none');
         $stopRecordBtn.addClass('d-none');
-        // $nextBtn.removeClass('d-none');
         $skipBtn.prop('disabled', false);
         $reRecordBtn.removeClass('d-none');
         $recordingSign.addClass('d-none');
@@ -555,8 +550,6 @@ function executeOnLoad() {
     const $reportModal = $("#report_sentence_modal");
     const $loader = $('#loader');
     const $pageContent = $('#page-content');
-    // const $navUser = $('#nav-user');
-    // const $navUserName = $navUser.find('#nav-username');
     const contributionLanguage = localStorage.getItem('contributionLanguage');
     localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
     if (contributionLanguage) {

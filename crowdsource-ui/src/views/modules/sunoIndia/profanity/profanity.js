@@ -146,35 +146,6 @@ function resetValidation() {
   showElement($(playStr))
 }
 
-// const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-// showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancelButton);
-
-// function markContributionSkipped() {
-//   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-//   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-//
-//   const reqObj = {
-//     sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
-//     userName: speakerDetails.userName,
-//     language: contributionLanguage
-//   };
-//   fetch('/skip', {
-//     method: 'POST',
-//     credentials: 'include',
-//     mode: 'cors',
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(reqObj),
-//   })
-//     .then((res) => res.json())
-//     .then((result) => {
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     })
-// }
-
 function updateProfanityState(userName, sentenceId, language, state) {
   const fd = new FormData();
   // fd.append('language', language);
@@ -280,7 +251,6 @@ function addListeners() {
     if ($('#pause').hasClass('d-none')) {
       $('#pause').trigger('click');
     }
-    // markContributionSkipped();
     updateSkipAction();
     getNextSentence();
     showElement($('#sentences-row'));

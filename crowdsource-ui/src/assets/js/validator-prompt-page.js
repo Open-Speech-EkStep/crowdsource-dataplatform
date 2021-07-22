@@ -204,29 +204,6 @@ function getNextSentence() {
     }
 }
 
-// const updateDecisionButton = (button, colors) => {
-//     const children = button.children().children();
-//     children[0].setAttribute("fill", colors[0]);
-//     children[1].setAttribute("fill", colors[1]);
-//     children[2].setAttribute("fill", colors[2]);
-// }
-
-// const updateValidationCount = () => {
-//     const currentSentenceLbl = document.getElementById('currentSentenceLbl');
-//     currentSentenceLbl.innerText = progressCount;
-//     const totalSentencesLbl = document.getElementById('totalSentencesLbl');
-//     totalSentencesLbl.innerText = validationSentences.length;
-// }
-
-// const updateProgressBar = () => {
-//     const $progressBar = $("#progress_bar");
-//     progressCount++;
-//     const multiplier = 10 * (10 / boloIndiaValidator.sentences.length);
-//     $progressBar.width(progressCount * multiplier + '%');
-//     $progressBar.prop('aria-valuenow', progressCount);
-//     updateValidationCount();
-// }
-
 function disableButton(button) {
     button.children().attr("opacity", "50%");
     button.attr("disabled", "disabled");
@@ -339,17 +316,9 @@ function addListeners() {
     })
 }
 
-// let validationSentences = [{ sentence: '' }]
-
 const loadAudio = function (audioLink) {
     $('#my-audio').attr('src', audioLink)
 };
-
-// function disableSkipButton() {
-//     const $skipButton = $('#skip_button');
-//     $skipButton.removeAttr('style');
-//     disableButton($skipButton)
-// }
 
 function showThankYou() {
     window.location.href = './validator-thank-you.html'
@@ -507,8 +476,6 @@ $(document).ready(() => {
         showNoSentencesMessage();
         return;
       }
-      // validationSentences = sentenceData.data
-      // const sentence = validationSentences[currentIndex];
 
       initializeComponent();
     }).catch((err) => {

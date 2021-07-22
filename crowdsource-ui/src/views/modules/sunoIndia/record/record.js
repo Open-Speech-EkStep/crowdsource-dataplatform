@@ -362,46 +362,6 @@ function disableSkipButton() {
   disableButton($skipButton)
 }
 
-// const getAudioClip = function (contributionId) {
-//   hideAudioRow();
-//   disableSkipButton();
-//   const source = 'contribute';
-//   fetch(`/media-object/${source}/${contributionId}`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     }
-//   }).then((stream) => {
-//     stream.arrayBuffer().then((buffer) => {
-//       const blob = new Blob([buffer], {type: "audio/wav"});
-//       // loadAudio(URL.createObjectURL(blob))
-//       const fileReader = new FileReader();
-//       fileReader.onload = function (e) {
-//         loadAudio(e.target.result);
-//         showAudioRow();
-//         enableButton($('#skip_button'));
-//       }
-//       fileReader.readAsDataURL(blob);
-//     });
-//   }).catch((err) => {
-//     showAudioRow();
-//   });
-// }
-
-// function hideAudioRow() {
-//   showElement($('#loader-audio-row'));
-//   hideElement($('#audio-row'))
-//   showElement($('#loader-play-btn'));
-//   hideElement($(audioPlayerBtn))
-// }
-
-// function showAudioRow() {
-//   hideElement($('#loader-audio-row'));
-//   showElement($('#audio-row'));
-//   hideElement($('#loader-play-btn'));
-//   showElement($(audioPlayerBtn))
-// }
-
 function showThankYou() {
   window.location.href = './thank-you.html';
 }

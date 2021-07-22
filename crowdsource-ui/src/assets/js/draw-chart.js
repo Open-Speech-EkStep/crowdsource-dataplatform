@@ -103,14 +103,6 @@ const disposeChart = (chartDiv) => {
         delete chartReg[chartDiv];
     }
 }
-// const getTimelinenUrl = (language, timeframe = "weekly") => {
-//     let url = "../aggregated-json/" + timeframe + "Timeline";
-//     if (!language) {
-//         url += "Cumulative"
-//     }
-//     url += ".json";
-//     return url;
-// }
 
 const buildTimelineGraph = (language, timeframe) => {
     fetch(`/timeline/text?language=${language}&timeframe=${timeframe}`)
@@ -129,15 +121,6 @@ const buildTimelineGraph = (language, timeframe) => {
         console.log(err);
     });
 }
-
-// function showChartLoaders() {
-//     $chartLoaders.hide().removeClass('d-flex');
-//     $charts.removeClass('d-none');
-// }
-// function hideChartLoaders() {
-//     $chartLoaders.show().addClass('d-flex');
-//     $charts.addClass('d-none');
-// }
 
 function buildGraphs(language, timeframe) {
     // $.fn.popover.Constructor.Default.whiteList.table = [];

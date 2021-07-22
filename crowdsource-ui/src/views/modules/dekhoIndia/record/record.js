@@ -30,23 +30,6 @@ const currentIndexKey = 'dekhoCurrentIndex';
 const sentencesKey = 'dekhoSentencesKey';
 
 
-// const notyf = new Notyf({
-//   position: { x: 'center', y: 'top' },
-//   types: [
-//       {
-//           type: 'success',
-//           className: 'fnt-1-5',
-//       },
-//       {
-//           type: 'error',
-//           duration: 3500,
-//           className: 'fnt-1-5',
-//       },
-//   ],
-// });
-
-// let localeStrings;
-
 window.dekhoIndia = {};
 
 function getValue(number, maxValue) {
@@ -145,8 +128,6 @@ function getNextSentence() {
     // showThankYou();
     disableSkipButton();
     setTimeout(showThankYou, 1000);
-    // const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
-    // notyf.success(msg);
   }
 }
 
@@ -304,30 +285,6 @@ function enableButton(element) {
   element.children().removeAttr("opacity")
   element.removeAttr("disabled")
 }
-
-
-// const getImage = function (contributionId) {
-//   // hideAudioRow();
-//   disableSkipButton();
-//   const source = 'contribute';
-//   fetch(`/media-object/${source}/${contributionId}`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     }
-//   }).then((stream) => {
-//     stream.arrayBuffer().then((buffer) => {
-//       const blob = new Blob([buffer], {type: "audio/wav"});
-//       // loadAudio(URL.createObjectURL(blob))
-//       const fileReader = new FileReader();
-//       fileReader.onload = function (e) {
-//         setDekhoImage(e.target.result);
-//         enableButton($('#skip_button'))
-//       }
-//       fileReader.readAsDataURL(blob);
-//     });
-//   }).catch((err) => {console.log(err)});
-// }
 
 function showThankYou() {
   window.location.href = './thank-you.html';
