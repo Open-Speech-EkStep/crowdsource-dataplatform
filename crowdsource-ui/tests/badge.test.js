@@ -1,7 +1,7 @@
-const fetchMock = require("fetch-mock");
-const {getRowWithBadge , getCard } = require("../src/assets/js/badges");
+// const fetchMock = require("fetch-mock");
+// const {getRowWithBadge , getCard } = require("../src/assets/js/badges");
 const { readFileSync } = require("fs");
-const { stringToHTML, flushPromises, mockLocalStorage } = require("./utils");
+const { stringToHTML } = require("./utils");
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../src/views/badges.ejs`, "UTF-8")

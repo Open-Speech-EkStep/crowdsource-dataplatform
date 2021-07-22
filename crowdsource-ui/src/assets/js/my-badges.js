@@ -153,7 +153,7 @@ const bindData = (initiativekey, langaugeArray, mappedData) => {
 }
 
 const getBadgesForUser = (userName) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     if(userName) {
       $('#badge_username').removeClass('d-none');
       $('#badge_username').text(userName);
@@ -183,7 +183,7 @@ const getBadgesForUser = (userName) => {
               let langaugeArray = [];
               langaugeKeys.forEach(elem => {
                 let result = groupByLanguage[elem];
-                const contribution = result.filter(initiativekey => initiativekey.category == 'contribute').sort((a, b) => Number(a.milestone) < Number(b.milestone) ? -1 : 1);;
+                const contribution = result.filter(initiativekey => initiativekey.category == 'contribute').sort((a, b) => Number(a.milestone) < Number(b.milestone) ? -1 : 1);
                 const validate = result.filter(initiativekey => initiativekey.category == 'validate').sort((a, b) => Number(a.milestone) < Number(b.milestone) ? -1 : 1);
                 let languageObj = {
                   name: elem,

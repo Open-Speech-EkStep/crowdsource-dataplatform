@@ -40,7 +40,7 @@ const statesInformation = [
 ]
 
 let polygonSeries = undefined;
-var chartReg = {};
+// var chartReg = {};
 const $mapLoader = $('#map-loader');
 const $mapChart = $('#map');
 const drawMap = function (response, moduleType) {
@@ -75,9 +75,7 @@ const drawMap = function (response, moduleType) {
       st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_validation_count) : formatTime(vHours, vMinutes, vSeconds);
       st.value = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
       st.total_speakers = ele.total_speakers;
-      st.id = st.id;
     } else {
-      st.id = st.id;
       st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0, 0, 0);
       st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0, 0, 0);
       st.value = 0;

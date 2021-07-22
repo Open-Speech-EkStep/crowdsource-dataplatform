@@ -1,7 +1,7 @@
 const fetch = require('../common/fetch')
 const {
   setPageContentHeight,
-  toggleFooterPosition,
+  // toggleFooterPosition,
   setFooterPosition,
   updateLocaleLanguagesDropdown,
   showElement,
@@ -77,10 +77,10 @@ function uploadToServer(cb) {
     body: fd,
   })
     .then((res) => res.json())
-    .then((result) => {
+    .then(() => {
     })
-    .catch((err) => {})
-    .then((finalRes) => {
+    .catch(() => {})
+    .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
       }
@@ -186,7 +186,8 @@ const setAudioPlayer = function () {
 }
 
 let currentIndex = localStorage.getItem(currentIndexKey) || 0;
-let progressCount = currentIndex, validationCount = 0;
+// eslint-disable-next-line no-unused-vars
+let validationCount = 0;
 
 const animateCSS = ($element, animationName, callback) => {
   $element.addClass(`animated ${animationName}`);
@@ -423,45 +424,45 @@ function disableSkipButton() {
   disableButton($skipButton)
 }
 
-const getAudioClip = function (contributionId) {
-  hideAudioRow();
-  disableSkipButton();
-  const source = 'contribute';
-  fetch(`/media-object/${source}/${contributionId}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  }).then((stream) => {
-    stream.arrayBuffer().then((buffer) => {
-      const blob = new Blob([buffer], {type: "audio/wav"});
-      // loadAudio(URL.createObjectURL(blob))
-      const fileReader = new FileReader();
-      fileReader.onload = function (e) {
-        loadAudio(e.target.result);
-        showAudioRow();
-        enableButton($(skipButton))
-      }
-      fileReader.readAsDataURL(blob);
-    });
-  }).catch((err) => {
-    showAudioRow();
-  });
-}
+// const getAudioClip = function (contributionId) {
+//   hideAudioRow();
+//   disableSkipButton();
+//   const source = 'contribute';
+//   fetch(`/media-object/${source}/${contributionId}`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     }
+//   }).then((stream) => {
+//     stream.arrayBuffer().then((buffer) => {
+//       const blob = new Blob([buffer], {type: "audio/wav"});
+//       // loadAudio(URL.createObjectURL(blob))
+//       const fileReader = new FileReader();
+//       fileReader.onload = function (e) {
+//         loadAudio(e.target.result);
+//         showAudioRow();
+//         enableButton($(skipButton))
+//       }
+//       fileReader.readAsDataURL(blob);
+//     });
+//   }).catch((err) => {
+//     showAudioRow();
+//   });
+// }
 
-function hideAudioRow() {
-  showElement($('#loader-audio-row'));
-  hideElement($('#audio-row'))
-  showElement($('#loader-play-btn'));
-  hideElement($(audioPlayerBtn))
-}
+// function hideAudioRow() {
+//   showElement($('#loader-audio-row'));
+//   hideElement($('#audio-row'))
+//   showElement($('#loader-play-btn'));
+//   hideElement($(audioPlayerBtn))
+// }
 
-function showAudioRow() {
-  hideElement($('#loader-audio-row'));
-  showElement($('#audio-row'));
-  hideElement($('#loader-play-btn'));
-  showElement($(audioPlayerBtn))
-}
+// function showAudioRow() {
+//   hideElement($('#loader-audio-row'));
+//   showElement($('#audio-row'));
+//   hideElement($('#loader-play-btn'));
+//   showElement($(audioPlayerBtn))
+// }
 
 function showThankYou() {
   window.location.href = './validator-thank-you.html'
@@ -628,7 +629,7 @@ const executeOnLoad = function () {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch((err) => {});
+  }).catch((err) => {console.log(err)});
 
   const localSpeakerData = localStorage.getItem(speakerDetailsKey);
   const localSpeakerDataParsed = JSON.parse(localSpeakerData);

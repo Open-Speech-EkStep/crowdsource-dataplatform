@@ -1,4 +1,4 @@
-const { calculateTime, formatTime,updateLocaleLanguagesDropdown, showElement,hideElement,performAPIRequest, formatTimeForLegends} = require("../src/assets/js/utils");
+const { calculateTime, formatTime, showElement,hideElement,performAPIRequest, formatTimeForLegends} = require("../src/assets/js/utils");
 const { stringToHTML, mockLocalStorage} = require("./utils");
 const fetchMock = require("fetch-mock");
 const { readFileSync } = require("fs");

@@ -6,7 +6,7 @@ const fetch = require('../../build/js/common/fetch');
 describe("fetch", ()=> {
   test("should fetch data with api_url when given url starts with /",  () => {
     const origFetch = require('node-fetch');
-    origFetch.mockImplementation(cb => {
+    origFetch.mockImplementation(() => {
       const res = {};
       res.ok = true;
       return Promise.resolve(res);
@@ -22,7 +22,7 @@ describe("fetch", ()=> {
 
   test("should fetch data without api_url when given url do not starts with /",  () => {
     const origFetch = require('node-fetch');
-    origFetch.mockImplementation(cb => {
+    origFetch.mockImplementation(() => {
       const res = {};
       res.ok = true;
       return Promise.resolve(res);
@@ -38,7 +38,7 @@ describe("fetch", ()=> {
 
   test("should give error if mocked function produce error",  () => {
     const origFetch = require('node-fetch');
-    origFetch.mockImplementation(cb => {
+    origFetch.mockImplementation(() => {
       const res = {};
       res.ok = false;
       return Promise.reject(res);

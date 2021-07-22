@@ -18,7 +18,7 @@ const notyf = new Notyf({
     ]
 });
 
-submitQueryBtn.addEventListener("click", event => {
+submitQueryBtn.addEventListener("click", () => {
     if (!email.value || !query.value) {
         notyf.error({ message: 'Please fill out all the required fields' });
         return;

@@ -1,5 +1,3 @@
-import origFetch from "node-fetch";
-
 const {readFileSync} = require('fs');
 const {stringToHTML, mockLocalStorage} = require('../utils');
 const {CURRENT_MODULE} = require('../../build/js/common/constants');

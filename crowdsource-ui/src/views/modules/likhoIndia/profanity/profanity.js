@@ -1,7 +1,7 @@
 const fetch = require('../common/fetch')
 const {
   setPageContentHeight,
-  toggleFooterPosition,
+  // toggleFooterPosition,
   setFooterPosition,
   getLocaleString,
   showElement,
@@ -17,6 +17,7 @@ const speakerDetailsKey = 'profanityUserDetails';
 const currentIndexKey = 'likhoCurrentIndex';
 const sentencesKey = 'likhoSentencesKey';
 const likhoCountKey = 'likhoCount';
+// eslint-disable-next-line no-unused-vars
 let localeStrings;
 
 window.likhoIndia = {};
@@ -81,7 +82,7 @@ function onProfanityUpdated() {
 function invokeProfanityStateUpdate(state) {
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
   updateProfanityState(localSpeakerDataParsed.userName, likhoIndia.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
-    .then(res => {
+    .then(() => {
       onProfanityUpdated();
     }).catch(err => {
       console.log(err);
@@ -102,7 +103,7 @@ function updateSkipAction() {
       sentenceId: sentenceId,
       userName: localSpeakerDataParsed.userName
     })
-  }).then(res => { }).catch(err => {
+  }).then(() => { }).catch(err => {
     console.log(err)
   });
 }
@@ -221,11 +222,10 @@ function getCurrentIndex(lastIndex) {
   return getValue(currentIndexInStorage, lastIndex);
 }
 
-let selectedReportVal = '';
+// let selectedReportVal = '';
 const initialize = function () {
   const totalItems = likhoIndia.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
-  const language = localStorage.getItem('contributionLanguage');
 
   // $("#start_contributing_id").on('click', function () {
   //   const data = localStorage.getItem("speakerDetails");

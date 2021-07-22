@@ -1,12 +1,12 @@
 const fetch = require('../common/fetch')
 const {
   setPageContentHeight,
-  toggleFooterPosition,
+  // toggleFooterPosition,
   setFooterPosition,
   updateLocaleLanguagesDropdown,
   showElement,
   hideElement,
-  fetchLocationInfo,
+  // fetchLocationInfo,
   getLocaleString,
   onHover,
   afterHover
@@ -22,6 +22,7 @@ const dekhoCountKey = 'dekhoCount';
 const currentIndexKey = 'dekhoCurrentIndex';
 const sentencesKey = 'dekhoSentencesKey';
 
+// eslint-disable-next-line no-unused-vars
 let localeStrings;
 
 window.dekhoIndia = {};
@@ -40,7 +41,6 @@ function getCurrentIndex(lastIndex) {
 }
 
 let currentIndex;
-let validationCount = 0;
 
 function getNextSentence() {
   if (currentIndex < dekhoIndia.sentences.length - 1) {
@@ -101,7 +101,7 @@ function onProfanityUpdated() {
 function invokeProfanityStateUpdate(state) {
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
   updateProfanityState(localSpeakerDataParsed.userName, dekhoIndia.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
-    .then(res => {
+    .then(() => {
       onProfanityUpdated();
     }).catch(err => {
       console.log(err);
@@ -122,7 +122,7 @@ function updateSkipAction() {
       sentenceId: sentenceId,
       userName: localSpeakerDataParsed.userName
     })
-  }).then(res => { }).catch(err => {
+  }).then(() => { }).catch(err => {
     console.log(err)
   });
 }
@@ -226,7 +226,7 @@ function showNoSentencesMessage() {
 const initializeComponent = () => {
   const totalItems = dekhoIndia.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
-  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  // const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   // $("#start_contributing_id").on('click', function () {
   //   const data = localStorage.getItem("speakerDetails");
   //   if (data !== null) {
@@ -270,16 +270,16 @@ const initializeComponent = () => {
 
 }
 
-const getLocationInfo = () => {
-  fetchLocationInfo().then(res => {
-    return res.json()
-  }).then(response => {
-    localStorage.setItem("state_region", response.regionName);
-    localStorage.setItem("country", response.country);
-  }).catch(console.log);
-}
+// const getLocationInfo = () => {
+//   fetchLocationInfo().then(res => {
+//     return res.json()
+//   }).then(response => {
+//     localStorage.setItem("state_region", response.regionName);
+//     localStorage.setItem("country", response.country);
+//   }).catch(console.log);
+// }
 
-let selectedReportVal = '';
+// let selectedReportVal = '';
 
 const executeOnLoad = function () {
   // toggleFooterPosition();

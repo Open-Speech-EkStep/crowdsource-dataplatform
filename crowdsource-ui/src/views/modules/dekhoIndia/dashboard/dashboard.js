@@ -1,7 +1,7 @@
 const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
-const {  setSpeakerDetails, setUserNameOnInputFocus, setStartRecordingBtnOnClick, setUserModalOnShown,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
+const { setUserNameOnInputFocus, setStartRecordingBtnOnClick, setUserModalOnShown,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
+const { updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
 const { hasUserRegistered } = require('../common/common');
 const { DEFAULT_CON_LANGUAGE,CURRENT_MODULE ,CONTRIBUTION_LANGUAGE,MODULE,SPEAKER_DETAILS_KEY} = require('../common/constants');
 const fetch = require('../common/fetch');
@@ -70,24 +70,25 @@ function updateLanguage(language) {
                         $('#no-data-found').addClass('d-none');
                     }, 5000);
                 }
-            } catch (error) {}
+            } catch (error) {console.log(error)}
         })
-        .catch((err) => {});
+        .catch((err) => {console.log(err)});
 }
 
 const initializeBlock = function () {
     localStorage.setItem(CURRENT_MODULE,'dekho');
     initializeFeedbackModal();
     localStorage.removeItem('previousLanguage');
-    const speakerDetailsKey = 'speakerDetails';
+    // const speakerDetailsKey = 'speakerDetails';
 
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
     // const $tncCheckbox = $('#tnc');
+    // eslint-disable-next-line no-unused-vars
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
-    const age = document.getElementById('age');
-    const motherTongue = document.getElementById('mother-tongue');
+    // const age = document.getElementById('age');
+    // const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -113,10 +114,10 @@ const initializeBlock = function () {
         updateLineGraph(selectedLanguage, selectedDuration, 'ocr',"Images labelled","Images validated");
     });
 
-    $("#no-data-found").on('mouseenter', (e) => {
+    $("#no-data-found").on('mouseenter', () => {
         clearTimeout(timer);
     });
-    $("#no-data-found").on('mouseleave', (e) => {
+    $("#no-data-found").on('mouseleave', () => {
         timer = setTimeout(() => {
             $('#no-data-found').addClass('d-none');
         }, 5000);
@@ -132,7 +133,7 @@ const initializeBlock = function () {
         }, 5000);
     }, {passive: true});
 
-    $("#contribute-now").on('click', (e) => {
+    $("#contribute-now").on('click', () => {
         localStorage.setItem("i18n", "en");
         sentenceLanguage = languageToRecord;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, languageWithNoContribution);
@@ -165,7 +166,7 @@ const initializeBlock = function () {
 $(document).ready(function () {
     getLocaleString().then(()=>{
         initializeBlock();
-    }).catch(err => {
+    }).catch(() => {
         initializeBlock();
     });
 });

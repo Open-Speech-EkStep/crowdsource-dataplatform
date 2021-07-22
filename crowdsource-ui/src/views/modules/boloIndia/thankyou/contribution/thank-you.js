@@ -6,7 +6,6 @@ const {
   CURRENT_MODULE,
   CONTRIBUTION_LANGUAGE,
   MODULE,
-  TOP_LANGUAGES_BY_HOURS,
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
   AGGREGATED_DATA_BY_LANGUAGE
 } = require("../common/constants");
@@ -18,7 +17,7 @@ const {
 const {downloadPdf} = require('../common/downloadableBadges');
 const {initializeFeedbackModal} = require('../common/feedback')
 
-const {getContributedAndTopLanguage,setBadge,showByHoursChart,showByHoursChartThankyouPage, updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
+const {setBadge, showByHoursChartThankyouPage, updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 const {onChangeUser,showUserProfile,onOpenUserDropDown} = require('../common/header');
 
 const CURRENT_INDEX = "currentIndex";
@@ -195,10 +194,10 @@ $(document).ready(function () {
   });
 
   getLocaleString()
-    .then((data) => {
+    .then(() => {
       executeOnLoad();
     })
-    .catch((err) => {
+    .catch(() => {
       executeOnLoad();
     });
 });

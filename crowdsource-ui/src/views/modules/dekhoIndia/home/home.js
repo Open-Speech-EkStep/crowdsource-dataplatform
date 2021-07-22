@@ -97,7 +97,7 @@ $(document).ready(function () {
   getAvailableLanguages("ocr");
   getLocaleString().then(()=>{
     initializeBlock();
-  }).catch(err => {
+  }).catch(() => {
     initializeBlock();
   });
   onActiveNavbar(MODULE.dekho.value);

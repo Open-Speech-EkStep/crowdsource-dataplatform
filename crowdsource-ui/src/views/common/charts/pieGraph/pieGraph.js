@@ -23,7 +23,7 @@ function getAgeGroupData(data, key) {
   return formattedData;
 }
 
-function buildGraphs(language, timeframe) {
+function buildGraphs(language) {
   Promise.all([
     fetch(`/stats/contributions/age/text?language=${language}`)
   ]).then(function (responses) {

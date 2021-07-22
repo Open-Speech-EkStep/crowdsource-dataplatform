@@ -1,5 +1,8 @@
 const fetch = require('../common/fetch')
-const { setPageContentHeight, toggleFooterPosition,setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording,getDeviceInfo, getBrowserInfo,getLocaleString } = require('../common/utils');
+const {
+  setPageContentHeight,
+  // toggleFooterPosition,
+  setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording,getDeviceInfo, getBrowserInfo,getLocaleString } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice } = require('../common/common');
@@ -14,26 +17,27 @@ const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
 let currentIndex ;
-let localeStrings;
+// let localeStrings;
+// eslint-disable-next-line no-unused-vars
 let validationCount = 0;
 
 const currentIndexKey = 'dekhoValidatorCurrentIndex';
 const sentencesKey = 'dekhoValidatorSentencesKey';
 const dekhoValidatorCountKey = 'dekhoValidatorCount';
-const notyf = new Notyf({
-  position: { x: 'center', y: 'top' },
-  types: [
-      {
-          type: 'success',
-          className: 'fnt-1-5',
-      },
-      {
-          type: 'error',
-          duration: 3500,
-          className: 'fnt-1-5',
-      },
-  ],
-});
+// const notyf = new Notyf({
+//   position: { x: 'center', y: 'top' },
+//   types: [
+//       {
+//           type: 'success',
+//           className: 'fnt-1-5',
+//       },
+//       {
+//           type: 'error',
+//           duration: 3500,
+//           className: 'fnt-1-5',
+//       },
+//   ],
+// });
 
 function getValue(number, maxValue) {
   return number < 0
@@ -71,10 +75,10 @@ function uploadToServer(cb) {
     body: fd,
   })
     .then((res) => res.json())
-    .then((result) => {
+    .then(() => {
     })
-    .catch((err) => {})
-    .then((finalRes) => {
+    .catch(() => {})
+    .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
       }
@@ -291,28 +295,28 @@ function enableButton(element) {
   element.removeAttr("disabled")
 }
 
-const getImage = function (contributionId) {
-  // hideAudioRow();
-  disableSkipButton();
-  const source = 'contribute';
-  fetch(`/media-object/${source}/${contributionId}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  }).then((stream) => {
-    stream.arrayBuffer().then((buffer) => {
-      const blob = new Blob([buffer], { type: "audio/wav" });
-      // loadAudio(URL.createObjectURL(blob))
-      const fileReader = new FileReader();
-      fileReader.onload = function (e) {
-        setDekhoImage(e.target.result);
-        enableButton($('#skip_button'))
-      }
-      fileReader.readAsDataURL(blob);
-    });
-  }).catch((err) => {});
-}
+// const getImage = function (contributionId) {
+//   // hideAudioRow();
+//   disableSkipButton();
+//   const source = 'contribute';
+//   fetch(`/media-object/${source}/${contributionId}`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     }
+//   }).then((stream) => {
+//     stream.arrayBuffer().then((buffer) => {
+//       const blob = new Blob([buffer], { type: "audio/wav" });
+//       // loadAudio(URL.createObjectURL(blob))
+//       const fileReader = new FileReader();
+//       fileReader.onload = function (e) {
+//         setDekhoImage(e.target.result);
+//         enableButton($('#skip_button'))
+//       }
+//       fileReader.readAsDataURL(blob);
+//     });
+//   }).catch((err) => {console.log(err)});
+// }
 
 function showThankYou() {
   window.location.href = './validator-thank-you.html'
@@ -399,7 +403,7 @@ const getLocationInfo = () => {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch((err) => {});
+  }).catch((err) => {console.log(err)});
 }
 
 let selectedReportVal = '';

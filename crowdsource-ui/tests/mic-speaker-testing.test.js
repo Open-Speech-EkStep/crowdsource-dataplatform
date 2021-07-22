@@ -1,5 +1,5 @@
 const {readFileSync} = require("fs");
-const {stringToHTML, flushPromises} = require("./utils");
+const {stringToHTML} = require("./utils");
 const {addOnClickListener, showAmbientNoise, writeUTFBytes} = require('../src/assets/js/mic-speaker-testing')
 
 document.body = stringToHTML(
@@ -48,7 +48,7 @@ describe("showAmbientNoise", () => {
 describe("writeUTFBytes", () => {
   test("", () => {
     const views = {
-      setUint8: (a, b) => {
+      setUint8: () => {
       }
     };
     jest.spyOn(views, 'setUint8');

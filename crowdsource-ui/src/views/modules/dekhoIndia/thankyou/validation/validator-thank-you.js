@@ -16,7 +16,11 @@ const {
   performAPIRequest,
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
+const {
+  // showByHoursChart,
+  showByHoursChartThankyouPage,
+  // getContributedAndTopLanguage,
+  setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { initializeFeedbackModal } = require('../common/feedback');
 const CURRENT_INDEX = "dekhoValidatorCurrentIndex";
@@ -184,10 +188,10 @@ $(document).ready(function () {
   localStorage.setItem("selectedType","validate");
   initializeFeedbackModal();
   getLocaleString()
-    .then((data) => {
+    .then(() => {
       executeOnLoad();
     })
-    .catch((err) => {
+    .catch(() => {
       executeOnLoad();
     });
 });

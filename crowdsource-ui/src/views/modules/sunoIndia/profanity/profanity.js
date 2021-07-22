@@ -1,7 +1,6 @@
 const fetch = require('../common/fetch')
 const {
   setPageContentHeight,
-  toggleFooterPosition,
   setFooterPosition,
   updateLocaleLanguagesDropdown,
   getLocaleString,
@@ -11,7 +10,7 @@ const {
   afterHover
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
-const { CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE } = require('../common/constants');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE } = require('../common/constants');
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const { isMobileDevice } = require('../common/common');
@@ -26,6 +25,7 @@ window.sunoIndia = {};
 let playStr = "";
 let pauseStr = "";
 let replayStr = "";
+// eslint-disable-next-line no-unused-vars
 let audioPlayerBtn = "";
 
 function getValue(number, maxValue) {
@@ -110,7 +110,6 @@ const setAudioPlayer = function () {
 }
 
 let currentIndex = localStorage.getItem(currentIndexKey) || 0;
-let progressCount = currentIndex, validationCount = 0;
 
 function getNextSentence() {
   const $submitButton = isMobileDevice() ? $('#submit-edit-button_mob') : $('#submit-edit-button');
@@ -150,31 +149,31 @@ function resetValidation() {
 // const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 // showKeyboard(contributionLanguage.toLowerCase(),enableCancelButton,disableCancelButton);
 
-function markContributionSkipped() {
-  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-
-  const reqObj = {
-    sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
-    userName: speakerDetails.userName,
-    language: contributionLanguage
-  };
-  fetch('/skip', {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(reqObj),
-  })
-    .then((res) => res.json())
-    .then((result) => {
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-}
+// function markContributionSkipped() {
+//   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+//   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
+//
+//   const reqObj = {
+//     sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
+//     userName: speakerDetails.userName,
+//     language: contributionLanguage
+//   };
+//   fetch('/skip', {
+//     method: 'POST',
+//     credentials: 'include',
+//     mode: 'cors',
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(reqObj),
+//   })
+//     .then((res) => res.json())
+//     .then((result) => {
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     })
+// }
 
 function updateProfanityState(userName, sentenceId, language, state) {
   const fd = new FormData();
@@ -197,7 +196,7 @@ function updateProfanityState(userName, sentenceId, language, state) {
   });
 }
 
-function onProfanityUpdated($skipButton, $submitButton, cancelButton) {
+function onProfanityUpdated() {
   // hideElement(cancelButton);
   // hideElement($submitButton)
   // hideElement($(audioPlayerBtn))
@@ -220,7 +219,7 @@ function onProfanityUpdated($skipButton, $submitButton, cancelButton) {
 function invokeProfanityStateUpdate(state, $skipButton, $submitButton, cancelButton) {
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
   updateProfanityState(localSpeakerDataParsed.userName, sunoIndia.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
-    .then(res => {
+    .then(() => {
       onProfanityUpdated($skipButton, $submitButton, cancelButton);
     }).catch(err => {
       console.log(err);
@@ -241,7 +240,7 @@ function updateSkipAction() {
       sentenceId: sentenceId,
       userName: localSpeakerDataParsed.userName
     })
-  }).then(res => { }).catch(err => {
+  }).then(() => { }).catch(err => {
     console.log(err)
   });
 }
@@ -349,7 +348,7 @@ function showNoSentencesMessage() {
 //   });
 // }
 
-let selectedReportVal = '';
+// let selectedReportVal = '';
 const initialize = function () {
   const totalItems = sunoIndia.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);

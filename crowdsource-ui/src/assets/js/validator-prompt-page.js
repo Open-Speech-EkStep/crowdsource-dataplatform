@@ -3,7 +3,7 @@ const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
 const { showUserProfile,onOpenUserDropDown } = require('../../../build/js/common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
-const { setPageContentHeight, toggleFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition, getDeviceInfo, getBrowserInfo} = require('./utils');
+const { setPageContentHeight, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition, getDeviceInfo, getBrowserInfo} = require('./utils');
 const { cdn_url } = require('./env-api');
 const { onChangeUser } = require('./header');
 const { MODULE, CONTRIBUTION_LANGUAGE } = require('./constants');
@@ -163,7 +163,8 @@ const setAudioPlayer = function () {
     }
 }
 
-let currentIndex = 0, progressCount = 0, validationCount = 0;
+// eslint-disable-next-line no-unused-vars
+let currentIndex = 0, validationCount = 0;
 
 const animateCSS = ($element, animationName, callback) => {
     $element.addClass(`animated ${animationName}`);
@@ -203,12 +204,12 @@ function getNextSentence() {
     }
 }
 
-const updateDecisionButton = (button, colors) => {
-    const children = button.children().children();
-    children[0].setAttribute("fill", colors[0]);
-    children[1].setAttribute("fill", colors[1]);
-    children[2].setAttribute("fill", colors[2]);
-}
+// const updateDecisionButton = (button, colors) => {
+//     const children = button.children().children();
+//     children[0].setAttribute("fill", colors[0]);
+//     children[1].setAttribute("fill", colors[1]);
+//     children[2].setAttribute("fill", colors[2]);
+// }
 
 // const updateValidationCount = () => {
 //     const currentSentenceLbl = document.getElementById('currentSentenceLbl');
@@ -338,17 +339,17 @@ function addListeners() {
     })
 }
 
-let validationSentences = [{ sentence: '' }]
+// let validationSentences = [{ sentence: '' }]
 
 const loadAudio = function (audioLink) {
     $('#my-audio').attr('src', audioLink)
 };
 
-function disableSkipButton() {
-    const $skipButton = $('#skip_button');
-    $skipButton.removeAttr('style');
-    disableButton($skipButton)
-}
+// function disableSkipButton() {
+//     const $skipButton = $('#skip_button');
+//     $skipButton.removeAttr('style');
+//     disableButton($skipButton)
+// }
 
 function showThankYou() {
     window.location.href = './validator-thank-you.html'
@@ -444,7 +445,7 @@ $(document).ready(() => {
     }).then(response => {
         localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);
-    }).catch((err) => {});
+    }).catch((err) => {console.log(err)});
 
     $errorModal.on('show.bs.modal', function () {
         setFooterPosition();

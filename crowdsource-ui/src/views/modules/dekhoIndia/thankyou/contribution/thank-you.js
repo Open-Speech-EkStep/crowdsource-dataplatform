@@ -4,7 +4,6 @@ const {
   HOUR_IN_SECONDS,
   LOCALE_STRINGS,
   CONTRIBUTION_LANGUAGE,
-  TOP_LANGUAGES_BY_HOURS,
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
@@ -12,14 +11,14 @@ const {
 } = require("../common/constants");
 const {
   setPageContentHeight,
-  toggleFooterPosition,
+  // toggleFooterPosition,
   updateLocaleLanguagesDropdown,
   getLocaleString,
   performAPIRequest,
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
-const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
+const {showByHoursChartThankyouPage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 
 const { initializeFeedbackModal } = require('../common/feedback');
 const dekhoCountKey = 'dekhoCount';
@@ -190,10 +189,10 @@ $(document).ready(function () {
   localStorage.setItem("selectedType","contribute");
   initializeFeedbackModal();
   getLocaleString()
-    .then((data) => {
+    .then(() => {
       executeOnLoad();
     })
-    .catch((err) => {
+    .catch(() => {
       executeOnLoad();
     });
 });
