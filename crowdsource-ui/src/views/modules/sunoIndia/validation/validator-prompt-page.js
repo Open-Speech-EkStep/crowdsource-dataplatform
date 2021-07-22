@@ -9,10 +9,11 @@ const {
   fetchLocationInfo,
   reportSentenceOrRecording,
   getBrowserInfo,
-  getDeviceInfo
+  getDeviceInfo,
+  getLocaleString
 } = require('../common/utils');
 const { onChangeUser,onOpenUserDropDown, showUserProfile } = require('../common/header');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent, isMobileDevice, showOrHideExtensionCloseBtn} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
@@ -320,7 +321,9 @@ function addListeners() {
   const $skipButton = $(skipButton);
 
   needChangeButton.on('click', () => {
-    showElement($('#virtualKeyBoardBtn'));
+    if(!isMobileDevice())  {
+      showElement($('#virtualKeyBoardBtn'));
+    }
     hideElement($('#sentences-row'));
     openEditor();
     const originalText = sunoIndiaValidator.sentences[currentIndex].contribution;
@@ -334,7 +337,7 @@ function addListeners() {
   $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false') {
+    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false' && !isMobileDevice()) {
       showElement($('#keyboardBox'));
     }
   });
@@ -524,7 +527,12 @@ const initializeComponent = function () {
   currentIndex = getCurrentIndex(totalItems - 1);
   const audio = sunoIndiaValidator.sentences[currentIndex];
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  $('#edit-language').text(contributionLanguage)
+
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const localeLanguage = localeStrings[contributionLanguage];
+  $('#edit-language').text(localeLanguage);
+  $('#keyboardLayoutName').text(localeLanguage);
+
   addListeners();
   if (audio) {
     const encodedUrl = encodeURIComponent(audio.sentence);
@@ -553,9 +561,12 @@ const detectDevice = () => {
   skipButton = "#skip_button"
 }
 
-$(document).ready(() => {
+const executeOnLoad = function () {
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
+  if(isMobileDevice()) {
+    hideElement($('#virtualKeyBoardBtn'));
+  }
   if (isMobileDevice() || isNotChrome) {
     hideElement($('#extension-bar'));
   } else {
@@ -572,7 +583,10 @@ $(document).ready(() => {
   hideElement($('#keyboardBox'));
   // toggleFooterPosition();
   setPageContentHeight();
-  $('#keyboardLayoutName').text(contributionLanguage);
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const localeLanguage = localeStrings[contributionLanguage];
+
+  $('#keyboardLayoutName').text(localeLanguage);
   const language = localStorage.getItem('contributionLanguage');
   if (language) {
     updateLocaleLanguagesDropdown(language);
@@ -665,21 +679,22 @@ $(document).ready(() => {
         return data.json();
       }
     }).then((result) => {
-      if (result.data.length === 0) {
-        showNoSentencesMessage();
-        return;
-      }
-      setFooterPosition();
-      sunoIndiaValidator.sentences = result.data;
+      sunoIndiaValidator.sentences = result.data ? result.data : [];
       localStorage.setItem(sunoValidatorCountKey, sunoIndiaValidator.sentences.length);
       localStorage.setItem(
         sentencesKey,
         JSON.stringify({
           userName: localSpeakerDataParsed.userName,
-          sentences: result.data,
+          sentences: sunoIndiaValidator.sentences,
           language: localSpeakerDataParsed.language,
         })
       );
+      if (sunoIndiaValidator.sentences.length === 0) {
+        showNoSentencesMessage();
+        return;
+      }
+      setFooterPosition();
+
 
       initializeComponent();
     }).catch((err) => {
@@ -687,6 +702,14 @@ $(document).ready(() => {
       $errorModal.modal('show');
     })
   }
+}
+
+$(document).ready(() => {
+  getLocaleString().then(() => {
+    executeOnLoad();
+  }).catch(() => {
+    executeOnLoad();
+  });
 })
 
 module.exports = {

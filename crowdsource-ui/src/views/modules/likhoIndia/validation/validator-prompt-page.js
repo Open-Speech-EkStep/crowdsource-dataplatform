@@ -8,11 +8,12 @@ const {
   fetchLocationInfo,
   reportSentenceOrRecording,
   getDeviceInfo,
-  getBrowserInfo
+  getBrowserInfo,
+  getLocaleString
 } = require('../common/utils');
-const {LIKHO_FROM_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice} = require('../common/common');
+const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice, updateLikhoLocaleLanguagesDropdown} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { setDataSource } = require('../common/sourceInfo');
@@ -26,30 +27,6 @@ const {initializeFeedbackModal} = require('../common/feedback');
 const currentIndexKey = 'likhoValidatorCurrentIndex';
 const sentencesKey = 'likhoValidatorSentencesKey';
 const likhoValidatorCountKey = 'likhoValidatorCount';
-
-const updateLocaleLanguagesDropdown = (language, toLanguage) => {
-  // const dropDown = $('#localisation_dropdown');
-  // const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-  // const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
-  // const invalidToLang = toLanguage.toLowerCase() === "english" || toLang.hasLocaleText === false;
-  // const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
-  // if (invalidToLang && invalidFromLang) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
-  // } else if (invalidFromLang) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //     <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  // } else if (invalidToLang) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  // } else if (toLanguage.toLowerCase() === language.toLowerCase()) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  // } else {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
-  //       <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  // }
-}
 
 function getValue(number, maxValue) {
   return number < 0
@@ -65,7 +42,7 @@ function getCurrentIndex(lastIndex) {
 }
 
 function showNoSentencesMessage() {
-  $('#spn-validation-language').html(localStorage.getItem(LIKHO_FROM_LANGUAGE));
+  $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
   hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#translation-row'));
@@ -221,7 +198,9 @@ function addListeners() {
   const $skipButton = $('#skip_button');
 
   needChangeButton.on('click', () => {
-    showElement($('#virtualKeyBoardBtn'));
+    if(!isMobileDevice()) {
+      showElement($('#virtualKeyBoardBtn'));
+    }
     showElement($('#editor-row'));
     openEditor();
     const originalText = likhoIndiaValidator.sentences[currentIndex].contribution;
@@ -234,7 +213,7 @@ function addListeners() {
   $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false') {
+    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false' && !isMobileDevice()) {
       showElement($('#keyboardBox'));
     }
   });
@@ -309,7 +288,7 @@ function showThankYou() {
 }
 
 const handleSubmitFeedback = function () {
-  const contributionLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const otherText = $("#other_text").val();
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
@@ -350,8 +329,19 @@ const initializeComponent = () => {
   currentIndex = getCurrentIndex(totalItems - 1);
   const validationData = likhoIndiaValidator.sentences[currentIndex];
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
-  $('#edit-language').text(toLanguage)
+  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+
+  const localeToLanguage = localeStrings[toLanguage];
+  const localeFromLanguage = localeStrings[fromLanguage];
+
+  $('#keyboardLayoutName').text(localeToLanguage);
+  $('#from-label').text(localeFromLanguage);
+  $('#to-label').text(localeToLanguage);
+  $('#edit-language').text(localeToLanguage);
+
   addListeners();
+
   if (validationData) {
     setSentence(validationData.sentence);
     setDataSource(validationData.source_info);
@@ -373,16 +363,19 @@ const getLocationInfo = () => {
 }
 
 let selectedReportVal = '';
-$(document).ready(() => {
+const executeOnLoad = function () {
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
+  if(isMobileDevice()) {
+    hideElement($('#virtualKeyBoardBtn'));
+  }
   if(isMobileDevice() || isNotChrome){
     hideElement($('#extension-bar'));
   } else {
     showOrHideExtensionCloseBtn();
   }
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
-  const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   initializeFeedbackModal();
   setFooterPosition();
@@ -390,12 +383,15 @@ $(document).ready(() => {
   hideElement($('#keyboardBox'));
   // toggleFooterPosition();
   setPageContentHeight();
-  $('#keyboardLayoutName').text(toLanguage);
-  $('#from-label').text(fromLanguage);
-  $('#to-label').text(toLanguage);
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const localeToLanguage = localeStrings[toLanguage];
+  const localeFromLanguage = localeStrings[fromLanguage];
+  $('#keyboardLayoutName').text(localeToLanguage);
+  $('#from-label').text(localeFromLanguage);
+  $('#to-label').text(localeToLanguage);
 
   if (fromLanguage && toLanguage) {
-    updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
+    updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
   }
 
   $("#start_contributing_id").on('click', function () {
@@ -475,29 +471,38 @@ $(document).ready(() => {
           return data.json();
         }
       }).then(result => {
-      if (result.data.length == 0) {
-        showNoSentencesMessage();
-        return;
-      }
-      setFooterPosition();
-      likhoIndiaValidator.sentences = result.data;
+      likhoIndiaValidator.sentences = result.data ? result.data : [];
       localStorage.setItem(likhoValidatorCountKey, likhoIndiaValidator.sentences.length);
       localStorage.setItem(
         sentencesKey,
         JSON.stringify({
           userName: localSpeakerDataParsed.userName,
-          sentences: result.data,
+          sentences: likhoIndiaValidator.sentences,
           language: fromLanguage,
           toLanguage: toLanguage
         })
       );
+      if (likhoIndiaValidator.sentences.length == 0) {
+        showNoSentencesMessage();
+        return;
+      }
+      setFooterPosition();
+
       initializeComponent();
     }).catch((err) => {
       console.log(err);
       $errorModal.modal('show');
     })
   }
-});
+};
+
+$(document).ready(() => {
+  getLocaleString().then(() => {
+    executeOnLoad();
+  }).catch(() => {
+    executeOnLoad();
+  });
+})
 
 module.exports = {
   setCapturedText,

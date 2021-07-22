@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
+    <title>Bhasha Daan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
@@ -13,21 +13,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" integrity="sha256-1T9PQaTbbUusCVH72ahoGVZ1axGmU5uAOgSb4/GNXj8=" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../../css/validator-prompt.css">
-    <link rel="stylesheet" type="text/css" href="../../css/record.css">
-    <link rel="stylesheet" type="text/css" href="../../css/common.css">
-    <link rel="stylesheet" type="text/css" href="../../css/mic-speaker-testing.css">
+    <link rel="stylesheet" type="text/css" href="/css/validator-prompt.css">
+    <link rel="stylesheet" type="text/css" href="/css/record.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/mic-speaker-testing.css">
+    <link rel="icon" type="image/png" href="/img/favicon.ico">
     <style>.btn.focus,.btn:focus{outline:0;box-shadow:0 0}</style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Dekho", PAGE_TITLE:"Label",img:"DekhoIndiaLogo.svg",homePath:"./home.html"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Dekho", PAGE_TITLE:__('Label'),img:"DekhoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div id="validator-page-content">
-    <div class="container-fluid">
+    <div class="container-fluid padding-top-65">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/extensionBar.ejs %>
-            <%- include('../common/breadcrumb.ejs', {MODULE:"Dekho", PAGE_TITLE:"Label",img:"DekhoIndiaLogo.svg", homePath:"./home.html"}) %>
+            <%- include('../common/breadcrumb.ejs', {MODULE:"Dekho", PAGE_TITLE:__('Label'),img:"DekhoIndiaLogo.svg", homePath:"./home.html"}) %>
             <div class="modal-footer py-3 px-0 record-btn-container position-relative">
                 <div class="row position-absolute dekho-back-btn top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
@@ -37,17 +38,18 @@
             <div class="row justify-content-around mx-3 mx-lg-0 mx-xl-5 mb-2 align-items-center" id="mic-report-row">
                 <%- include ../common/speakerTesting.ejs %>
             </div>
-            <%- include('../common/assistiveText.ejs',{msg:"Type the text from the image"}) %>
+            <%- include('../common/assistiveText.ejs',{msg:__('Type the text from the image')}) %>
             <div class="row justify-content-center" id="dekho-image">
                 <div class="col-lg-8 col-md-5 col-12">
                     <%- include ../common/image.ejs %>
                     <span id="expand-view" class="position-absolute text-muted" style="cursor:pointer;right:16px;font-size:14px;margin-top:5px"> <%= __('Click to open expanded view') %></span>
                 </div>
             </div>
-            <div class="row m-0 justify-content-center mb-2 mb-lg-2 mb-md-2 mt-5" id="textarea-row">
+            <div class="row m-0 justify-content-center mb-2 mb-lg-2 mb-md-2 mt-5 position-relative" id="textarea-row">
                 <div class="form-group green-border-focus col-lg-8 col-md-5 col-12 m-0" id="edit-text" style="border-radius:12px">
                     <label><%- __('Add Text') %> ( <span id="edit-language"></span> )</label>
-                    <textarea class="form-control edit-area" maxlength="1000" id="edit" rows="3" placeholder="Start typing here..." style="resize:none"></textarea>
+                    <textarea class="form-control edit-area" maxlength="1000" id="edit" rows="3" placeholder="<%= __('Start typing here...')%>" style="resize:none"></textarea>
+                    <%- include ../common/virtualKeyboardBtn.ejs %>
                 </div>
             </div>
             <div class="row m-0 justify-content-center mb-2 mb-md-5 mb-lg-0" id="edit-error-row">
@@ -57,9 +59,8 @@
             </div>
             <div class="row justify-content-center d-none" id="thankyou-text">
                 <div class="col-12 text-center mt-4">
-                    <img src="../../img/tick.svg">
-                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle">Thank you for
-                        contributing!</label>
+                    <img src="/img/tick.svg">
+                    <label class="text-primary ml-2" style="font-size:28px;vertical-align:middle"><%= __('Thank you for contributing!') %></label>
                 </div>
             </div>
             <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none mt-5" id="no-sentences-row">
@@ -72,7 +73,7 @@
                     <div class="row justify-content-center mt-5">
                         <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
                             <a class="btn btn-primary text-white btn-lg h6 w-100" href="./home.html">
-                                <%- __('Back to Home') %>
+                                <%- __('Back to Dekho India Home') %>
                             </a></div>
                     </div>
                 </div>
@@ -116,7 +117,7 @@
                         <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress_bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width:.5%"></div>
                     </div>
                     <div class="mt-4 text-muted h-1r d-none" id="get-started">
-                        <%= __('Let\'s get started!') %>
+                        Let's get started!
                     </div>
                 </div>
                 <div class="px-3">
@@ -131,16 +132,13 @@
                 </div>
             </div>
         </div>
-        <div class="row my-3 p-3" style="justify-content:flex-end">
-            <%- include ../common/virtualKeyboardBtn.ejs %>
-        </div>
 
         <script>var modal=document.getElementById("myModal"),clickExpandBtn=document.getElementById("expand-view"),img=document.getElementById("view-image"),modalImg=document.getElementById("img01"),captionText=document.getElementById("caption");clickExpandBtn.onclick=function(){modal.style.display="block",modalImg.src=img.src};var span=document.getElementsByClassName("close-validate")[0];span.onclick=function(){modal.style.display="none"}</script>
 
-        <%- include ../common/speakerDetails.ejs %>
+        <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
         <%- include('../common/sourceInfo.ejs') %>
         <%- include('../common/feedback.ejs', {page: "Label"}) %>
-        <%- include('../common/report.ejs',{reportPara: "Help us understand what’s wrong with the image labelled", reportThankYou: "Your feedback helps us keep Dekho India relevant, we appreciate you taking time to leave the feedback.", "REPORT":[{h1:"Offensive",p1:"Hateful / Discriminatory / Vulgar language, drugs promotion etc."}]}); %>
+        <%- include('../common/report.ejs',{reportPara: __('Help us understand what’s wrong with the image labelled'), reportThankYou: __('Your feedback helps us keep Dekho India relevant, we appreciate you taking time to leave the feedback.'), "REPORT":[{h1:__('Offensive'),p1:__('Hateful / Discriminatory / Vulgar language, drugs promotion etc.')}]}); %>
         <%- include ../common/errorModal.ejs %>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -150,8 +148,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
 
-        <script src="../../js/dekhoIndia/record.js"></script>
-        <script src="../../js/common/speakerTesting.js"></script>
+        <script src="/js/dekhoIndia/record.js"></script>
+        <script src="/js/common/speakerTesting.js"></script>
     </div>
 </div>
 </body>

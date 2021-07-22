@@ -11,14 +11,13 @@ const {
     into
 } = require('taiko');
 
-step("Select <SunoIndiaLink> from header", async function (SunoIndiaLink) {
+step("Select <HeaderLink> from header", async function (HeaderLink) {
     await taiko.waitFor(500);
     if (await text('Error!!!').exists()) {
         await click(button("Close"));
     }
-    assert.ok(await link(SunoIndiaLink).exists());
-    await taiko.waitFor(500);
-    await click(SunoIndiaLink);
+    //await taiko.waitFor(500);
+    await click(taiko.link({id: HeaderLink}));
 });
 
 step("Validate Suno India content", async function () {
@@ -72,7 +71,7 @@ step("User click on <textfield> field <submitbtn> should be enabled", async func
 });
 
 step("User should see the top Language graph and other stats", async function () {
-    assert.ok(await text("Your language and top 3 most contributed languages").exists());
+    assert.ok(await text("Language Tracker").exists());
     assert.ok(await text("Languages").exists());
     assert.ok(await text("People participated").exists());
     assert.ok(await text("Duration transcribed").exists());
@@ -155,7 +154,7 @@ step("When user skips the rest of the <count> sentences , User should see Thank 
         await taiko.waitFor(1200)
     }
     await taiko.waitFor(5000)
-    assert.ok(await text('Thank you for contributing!').exists())
+    assert.ok(await text('You contributed').exists())
 });
 
 step("When user click on Lets Go Button", async function () {
@@ -166,28 +165,28 @@ step("When user click on Lets Go Button", async function () {
 step("Check <card> option should be <state> on Home page", async function (card, state) {
 
     if (card == "Transcribe" && state == "disabled") {
-        assert.ok(await text('Not collecting contributions for selected language').isVisible());
+        assert.ok(await text('Only validations invited for the selected language').isVisible());
 
     }
 
     if (card == "Transcribe" && state == "enabled") {
-        assert.ok(! await text('Not collecting contributions for selected language').isVisible());
+        assert.ok(! await text('Only validations invited for the selected language').isVisible());
     }
 
     if (card == "Label" && state == "disabled") {
-        assert.ok(await text('Not collecting contributions for selected language').isVisible());
+        assert.ok(await text('Only validations invited for the selected language').isVisible());
     }
 
     if (card == "Label" && state == "enabled") {
-        assert.ok(! await text('Not collecting contributions for selected language').isVisible());
+        assert.ok(! await text('Only validations invited for the selected language').isVisible());
     }
 
     if (card == "Validate" && state == "disabled") {
-        assert.ok(await text('No validation data available for selected language').isVisible());
+        assert.ok(await text('Only contributions invited for the selected language').isVisible());
     }
 
     if (card == "Validate" && state == "enabled") {
-        assert.ok(! await text('No validation data available for selected language').isVisible());
+        assert.ok(! await text('Only contributions invited for the selected language').isVisible());
     }
 
 });
@@ -228,8 +227,10 @@ step("User clicks on Play button, and then on pause button, then clicks on <need
 });
 
 step("Validate Thank you page content for Suno India", async function () {
-    assert.ok(await text('Thank you for contributing!').exists())
-    assert.ok(await text('100 hrs').exists())
+    await taiko.waitFor(1000)
+    assert.ok(await text('Suno India Target Achieved').isVisible())
+    assert.ok(await text('Transcription (in sentences)').isVisible())
+    assert.ok(await text('Hour(s)').isVisible())
 });
 
 step("When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should visible", async function () {
@@ -247,7 +248,7 @@ step("User clicks on resume button", async function () {
 
 step("Change user name to <usrnm>", async function(usrnm) {
     await click(taiko.link({ id: "nav-user" }));
-    await assert.ok(await text('Change User').isVisible());
+    assert.ok(await text('Change User').isVisible());
     await click(text('Change User'));
     await taiko.waitFor(1000);
     assert.ok(await taiko.textBox({ id: 'username' }).isVisible())

@@ -1,23 +1,24 @@
 <html lang="en">
 
 <head>
-    <title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
+    <title>Bhasha Daan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
-    <meta name="description" content="BhashaDaan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta name="description" content="Bhasha Daan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../../css/sunoIndia/dashboard.css">
-    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/sunoIndia/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="icon" type="image/png" href="/img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:"Dashboard",img:"SunoIndiaLogo.svg",homePath:"./home.html"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:__('Dashboard'),img:"SunoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div class="container container-fluid supreme-container">
     <div class="row">
         <div class="col-12">
@@ -59,7 +60,7 @@
                 <div><span class="spinner"></span></div>
             </div>
             <div class="row text-center contribution-details d-none" id="contribution-details">
-                <%- include('../common/contributionStats.ejs',{labels :['Languages','People participated','Duration transcribed','Duration validated']})%>
+                <%- include('../common/contributionStats.ejs',{labels :[__('Languages'),__('People participated'),__('Duration transcribed'),__('Duration validated')]})%>
 </div>
         </div>
     </div>
@@ -85,15 +86,13 @@
         </div>
     </div>
 </div>
-<%- include ../common/speakerDetails.ejs %>
-<%- include ../common/content-languages.ejs %>
-<%- include ../common/say-listen-language.ejs %>
+<%- include('../common/speakerDetails.ejs',{path:"../"}) %>
 <%- include('../common/feedback.ejs', {page: "Dashboard"}) %>
 <%- include('../common/footer.ejs',{path:"../"}) %>
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="../../js/sunoIndia/dashboard.js"></script>
+<script src="/js/sunoIndia/dashboard.js"></script>
 <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
 <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
 <script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>

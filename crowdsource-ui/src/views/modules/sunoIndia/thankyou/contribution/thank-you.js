@@ -5,6 +5,7 @@ const {
   LOCALE_STRINGS,
   CONTRIBUTION_LANGUAGE,
   TOP_LANGUAGES_BY_HOURS,
+  AGGREGATED_DATA_BY_TOP_LANGUAGE,
   CURRENT_MODULE,
   MODULE
 } = require("../common/constants");
@@ -19,7 +20,7 @@ const {
 const {downloadPdf} = require('../common/downloadableBadges');
 const {initializeFeedbackModal} = require('../common/feedback')
 const {constructChart} = require('../common/horizontalBarGraph');
-const {getContributedAndTopLanguage,setBadge,showByHoursChart,showByHoursChartThankyouPage} = require('../common/common');
+const {getContributedAndTopLanguage,setBadge,showByHoursChart,showByHoursChartThankyouPage,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 
 const sunoCountKey = 'sunoCount';
 const CURRENT_INDEX = "sunoCurrentIndex";
@@ -37,14 +38,14 @@ const getFormattedTime = (totalSeconds) => {
 
 const updateShareContent = function (language, rank) {
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-  const boloIndiaTitle = "BhashaDaan: A crowdsourcing initiative for Indian languages";
+  const boloIndiaTitle = "Bhasha Daan: A crowdsourcing initiative for Indian languages";
   let localeText = "";
   if (rank === 0) {
     localeText = localeStrings["social sharing text without rank"];
   } else {
     localeText = localeStrings["social sharing text with rank"];
-    localeText = localeText.replace("%language", language);
-    localeText = localeText.replace("%rank", rank);
+    localeText = localeText.replace("<x>", language);
+    localeText = localeText.replace("<y>", rank);
   }
   //const text = `I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Our ${language} language ranks ${rank} on BoloIndia. Do your bit and empower the language?`;
   const $whatsappShare = $("#whatsapp_share");
@@ -72,9 +73,9 @@ const getLanguageStats = function () {
         const contributionLanguage = localStorage.getItem(
           CONTRIBUTION_LANGUAGE
         );
-        const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.suno.value);
-        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChartThankyouPage(MODULE.suno.value);
+        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.suno.value, 'total_contribution_count','total_contributions');
+        localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
+        showByHoursChartThankyouPage(MODULE.suno.value,'thankyou','sentences');
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
@@ -150,7 +151,7 @@ function executeOnLoad() {
     onChangeUser('./home.html', MODULE.suno.value);
     onOpenUserDropDown();
 
-    setPageContentHeight();
+    // setPageContentHeight();
     setSentencesContributed();
     // toggleFooterPosition();
 
@@ -158,12 +159,29 @@ function executeOnLoad() {
     if (contributionLanguage) {
       updateLocaleLanguagesDropdown(contributionLanguage);
     }
+
+    const localStrings = JSON.parse(
+      localStorage.getItem(LOCALE_STRINGS)
+    );
+
+    const localeLanguageStr = localStrings[contributionLanguage];
+    $("#metric-language").text(localeLanguageStr);
+    // replaceSubStr($(".progress-average-metric"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopWeb"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopWeb"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopMob"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopMob"), "<language>", localeLanguageStr);
+    replaceSubStr($(".x-axis-label"), "<language>", localeLanguageStr);
+    $("#conLanWhenGetBadge").html(localeLanguageStr)
+
     getLanguageStats();
+    updateGoalProgressBar(`/progress/asr/${contributionLanguage}/contribute`)
   }
 }
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
+  localStorage.setItem("selectedType","contribute");
   initializeFeedbackModal();
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));

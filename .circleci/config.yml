@@ -17,6 +17,8 @@ jobs:
     steps:
       - checkout
       - run: rm -rf .git
+      - run: mkdir ${HOME}/project/crowdsource-api/locales
+      - run: cp -v -R crowdsource-ui/locales/ ${HOME}/project/crowdsource-api/
       - persist_to_workspace:
           root: .
           paths:
@@ -84,7 +86,13 @@ jobs:
 
             ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
 
-            ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --cache-control "max-age=1200" --recursive
+            if [ << parameters.env_name >> == 'prod' ]
+            then
+              echo "Deploying to prod"
+              ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/bhashadaan/" --cache-control "max-age=1200" --recursive
+            else
+              ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --cache-control "max-age=1200" --recursive
+            fi 
 
   db_migrate_azure:
     parameters:
@@ -147,7 +155,14 @@ jobs:
             ENV_IMAGE_NAME_DB_REFRESHER=${AZURE_LOGIN_SERVER_NAME}/${DB_REFRESHER_REPO}:<< parameters.env-name >>
             kubectl -n << parameters.env-name >> apply  -f ${HOME}/project/crowdsource-api/k8s-deployments/autoscaler_<< parameters.env-name >>.yaml
 
-            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
+            if [ << parameters.env-name >> == 'prod' ]
+            then
+              echo "Deploying to prod"
+              sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment_prod.yaml | kubectl -n << parameters.env-name >> apply  -f -
+            else
+              sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
+            fi           
+            
             sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env-name >> apply  -f -
           name: Deploy container
 
@@ -163,7 +178,7 @@ workflows:
             - node/test
           filters:
             branches:
-              only: master
+              only: [master, test_translation_scripts]
 
       - db_migrate_azure:
           name: migrate_dev_azure
@@ -184,6 +199,8 @@ workflows:
             - build_dev_ui
 
       - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
           name: push_dev_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
@@ -191,6 +208,7 @@ workflows:
           extra-build-args: --build-arg NODE_ENV=dev
           repo: ${AZURE_REPO}
           tag: dev
+          checkout: false
           requires:
             - build_dev_ui
 
@@ -252,6 +270,8 @@ workflows:
             - build_test_ui
 
       - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
           name: push_test_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
@@ -259,6 +279,7 @@ workflows:
           extra-build-args: --build-arg NODE_ENV=test
           repo: ${AZURE_REPO}
           tag: test
+          checkout: false
           requires:
             - build_test_ui
 
@@ -307,6 +328,8 @@ workflows:
             - build_uat_ui
 
       - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
           name: push_uat_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
@@ -314,6 +337,7 @@ workflows:
           extra-build-args: --build-arg NODE_ENV=uat
           repo: ${AZURE_REPO}
           tag: uat
+          checkout: false
           requires:
             - build_uat_ui
 
@@ -352,6 +376,8 @@ workflows:
             - build_prod_ui
 
       - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
           name: push_prod_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
@@ -359,6 +385,7 @@ workflows:
           extra-build-args: --build-arg NODE_ENV=prod
           repo: ${AZURE_REPO}
           tag: prod
+          checkout: false
           requires:
             - build_prod_ui
 

@@ -1,4 +1,4 @@
-const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, FEEDBACK_CATEGORY, OPINION_RATING_MAPPING, ALL_LANGUAGES} = require('./constants');
+const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, OPINION_RATING_MAPPING, ALL_LANGUAGES} = require('./constants');
 const fetch = require('./fetch')
 const { feedback_top_component } = require('./env-api');
 
@@ -26,6 +26,44 @@ const checkGivingFeedbackFor = () => {
         });
 };
 
+const addColorPathSVG = (element, color, svg) => {
+    $(element).attr("stroke", color);   
+    $(svg).css("background-color",color);         
+};
+
+const removeShadowSVG = (element) => {
+    $(element).css('-webkit-box-shadow', '');
+    $(element).css('-moz-box-shadow', '');
+    $(element).css('box-shadow', '');
+    $(element).css('stroke-width', 1);
+    $(element).find('.double-stroke').css('stroke-width', 2);
+};
+
+const resetSVG = () => {
+    addColorPathSVG("#very_sad_svg_boundary", "#FCE6E6", "#very_sad-svg");
+    addColorPathSVG("#sad_svg_boundary", "#FDF4EC", "#sad-svg");
+    addColorPathSVG("#neutral_svg_boundary", "#E6F2FF", "#neutral-svg");
+    addColorPathSVG("#happy_svg_boundary", "#EDFBEB", "#happy-svg");
+    addColorPathSVG("#very_happy_svg_boundary", "#DFEDDA", "#very-happy-svg");
+
+    removeShadowSVG('#very_sad_label');
+    removeShadowSVG('#sad_label');
+    removeShadowSVG('#neutral_label');
+    removeShadowSVG('#happy_label');
+    removeShadowSVG('#very_happy_label');
+}
+
+const selectEmoji = (element, stroke, rgba, svg) => {
+    $(svg).css("background-color",stroke);
+    $(element).find("path, polygon, circle").attr("stroke", stroke);
+    $(element).css('-webkit-box-shadow', `0px 4px 12px ${rgba}`);
+    $(element).css('-moz-box-shadow', `0px 4px 12px ${rgba}`);
+    $(element).css('box-shadow', `0px 4px 12px ${rgba}`);
+    $(element).css('stroke-width', 2);
+    $(element).find('.double-stroke').css('stroke-width', 4);
+}
+
+
 const updateOpinionSVGColor = () => {
     $(document).ready(() => {
         $('input[name="opinionRadio"]').click(function(){ 
@@ -33,26 +71,27 @@ const updateOpinionSVGColor = () => {
         });
 
         $('input[name="opinionRadio"]').on('change', function() {
-            $(".opinion-label").find("path, polygon, circle").attr("stroke", "#818181");            
+            resetSVG();
+
             if($('input[name="opinionRadio"]:checked').val() === 'very_sad')
             {
-                $("#very_sad_label").find("path, polygon, circle").attr("stroke", "#E30606");
+                selectEmoji("#very_sad_label", "#E30606", "rgba(227, 6, 6, 0.5)","#very_sad-svg");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'sad')
             {
-                $("#sad_label").find("path, polygon, circle").attr("stroke", "#EA913F");
+                selectEmoji("#sad_label", "#EA913F", "rgba(234, 145, 63, 0.5)","#sad-svg");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'neutral')
             {
-                $("#neutral_label").find("path, polygon, circle").attr("stroke", "#007BFF");
+                selectEmoji("#neutral_label", "#007BFF", "rgba(0, 123, 255, 0.5)","#neutral-svg");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'happy')
             {
-                $("#happy_label").find("path, polygon, circle").attr("stroke", "#4ED738");
+                selectEmoji("#happy_label", "#4ED738", "rgba(78, 215, 56, 0.5)","#happy-svg")
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'very_happy')
             {
-                $("#very_happy_label").find("path, polygon, circle").attr("stroke", "#2A8908");
+                selectEmoji("#very_happy_label", "#2A8908", "rgba(42, 137, 8, 0.5)","#very-happy-svg")
             }
         });
     });
@@ -63,7 +102,7 @@ const updateSelectPageWhenModuleChanges = () => {
     $('input[name="moduleSelectRadio"]').on('change', function() {
         $("#select_page_id").find('option').remove().end();
         SELECT_PAGE_OPTIONS_FEEDBACK.forEach((data) => {
-            if($('input[name="moduleSelectRadio"]:checked').val() === data.module)
+            if($('input[name="moduleSelectRadio"]:checked').val() == data.module)
             {
                 data.pages.forEach((item) => {
                     $("#select_page_id").append($('<option>', {value: item, text: item}));
@@ -73,7 +112,7 @@ const updateSelectPageWhenModuleChanges = () => {
     });
 
     SELECT_PAGE_OPTIONS_FEEDBACK.forEach((data) => {
-        if($('input[name="moduleSelectRadio"]:checked').val() === data.module)
+        if($('input[name="moduleSelectRadio"]:checked').val() == data.module)
         {
             data.pages.forEach((item) => {
                 $("#select_page_id").append($('<option>', {value: item, text: item}));
@@ -87,13 +126,6 @@ const updateSelectPageWhenModuleChanges = () => {
 
             }
         }
-    });
-};
-
-const readFeedbackCategoryFromConstantsFile = () => {
-    // $("#category_id").find('option').remove().end();
-    FEEDBACK_CATEGORY.forEach((category) => {           
-        $("#category_id").append($('<option>', {value: category.value, text: category.text}));
     });
 };
 
@@ -129,6 +161,13 @@ const handleFeedbackSubmit = () => {
     var category = $("#category_id").val();
     var feedback_description = $("#feedback_description").val();
     var language = localStorage.getItem("contributionLanguage");
+    const recommenedRadioBtn = document.querySelectorAll('input[name = "recommend"]');
+    const checkedStatus = Array.from(recommenedRadioBtn).filter((el) => el.checked);
+    let recommended = checkedStatus.length ? checkedStatus[0].value : '';
+
+    const revisitRadioBtn = document.querySelectorAll('input[name = "revisit"]');
+    const revisitStatus = Array.from(revisitRadioBtn).filter((el) => el.checked);
+    let revisit = revisitStatus.length ? revisitStatus[0].value : '';
     if(language === null){
         ALL_LANGUAGES.forEach((lang) => {
             if(lang.id === localStorage.getItem("i18n")) { language = lang.value; }});
@@ -160,6 +199,8 @@ const handleFeedbackSubmit = () => {
     fd.append('module', moduleType);
     fd.append('target_page', targetPage);
     fd.append('opinion_rating', rating);
+    fd.append('recommended', recommended);
+    fd.append('revisit', revisit);
     fetch("/feedback", {
         method: "POST",
         credentials: 'include',
@@ -168,7 +209,7 @@ const handleFeedbackSubmit = () => {
     })
     .then((res) => res.json())
     .then((response) => {
-        if(response.statusCode === 200){
+        if(response.statusCode == 200){
             $("#feedback_modal").modal("hide");
             $("#feedback_thanku_modal").modal("show");  
             resetFeedback();      
@@ -183,11 +224,19 @@ const resetFeedback = () => {
     const opinion = document.querySelector('input[name="opinionRadio"]:checked');
     const category = document.querySelector("#category_id option[value='category']");
     const feedback = document.querySelector("#feedback_description");
+    const recommendedFeedback = document.querySelector(
+        'input[name = "recommend"]:checked'
+      );
+      const revisitFeedback = document.querySelector(
+        'input[name = "revisit"]:checked'
+      );
+      if (recommendedFeedback) recommendedFeedback.checked = false;
+      if (revisitFeedback) revisitFeedback.checked = false;
 
     if(category) category.selected = true;
     feedback.value = '';
-    $(".opinion-label").find("path, polygon, circle").attr("stroke", "#818181");
     if(opinion) opinion.checked = false;
+    resetSVG();
     $("#submit_btn").attr('disabled', true);
     checkGivingFeedbackFor();
     updateSelectPageWhenModuleChanges();
@@ -211,7 +260,6 @@ const initializeFeedbackModal = () => {
     updateOpinionSVGColor();
     checkGivingFeedbackFor();
     updateSelectPageWhenModuleChanges();
-    readFeedbackCategoryFromConstantsFile();
     fetchUsername();
     $('#feedback_button').on('click', () => {
         enableSubmit();

@@ -13,7 +13,7 @@ function showAndHideEditError(inputTextLength, error, callback1 = () => { }, cal
   const currentModule = localStorage.getItem(CURRENT_MODULE);
   const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
   const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
-  if (inputTextLength > 0 && error == null) {
+  if (inputTextLength > 2 && error == null) {
     callback1();
     const isAudioPlayed = flow ? localStorage.getItem(flow) : 'false';
     if (currentModule == 'suno') {
@@ -34,7 +34,7 @@ function showAndHideEditError(inputTextLength, error, callback1 = () => { }, cal
     $("#edit-error-row").addClass('d-none');
     $("#edit-text").add($('#edit-text-suno ')).removeClass('edit-error-area').addClass('edit-text');
   } else {
-    if (error.type == 'noText') {
+    if (error && error.type == 'noText') {
       callback2()
       if ($cancelButton) {
         $cancelButton.attr('disabled', true);
@@ -45,13 +45,15 @@ function showAndHideEditError(inputTextLength, error, callback1 = () => { }, cal
         $cancelButton.removeAttr('disabled');
       }
     }
-    const $editErrorText = $("#edit-error-text");
-    const previousActiveError = $editErrorText.find('.error-active');
-    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
-    $("#edit-error-row").removeClass('d-none');
-    $(`#edit-${error.type}-error`).removeClass('d-none').addClass('error-active');
-    $("#edit-text").add($('#edit-text-suno ')).addClass('edit-error-area').removeClass('edit-text');
-    $submitEditButton.attr('disabled', true);
+      $submitEditButton.attr('disabled', true);
+      const $editErrorText = $("#edit-error-text");
+      const previousActiveError = $editErrorText.find('.error-active');
+      previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
+      $("#edit-error-row").removeClass('d-none');
+    if(error && error.type) {
+      $(`#edit-${error.type}-error`).removeClass('d-none').addClass('error-active');
+      $("#edit-text").add($('#edit-text-suno')).addClass('edit-error-area').removeClass('edit-text');
+    }
   }
 }
 

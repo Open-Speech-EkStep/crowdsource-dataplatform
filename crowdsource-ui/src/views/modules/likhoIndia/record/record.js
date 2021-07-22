@@ -10,9 +10,9 @@ const {
   reportSentenceOrRecording,
   getDeviceInfo, getBrowserInfo
 } = require('../common/utils');
-const { LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, ALL_LANGUAGES } = require('../common/constants');
+const {LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, ALL_LANGUAGES, CONTRIBUTION_LANGUAGE } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
-const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, isMobileDevice,showOrHideExtensionCloseBtn } = require('../common/common');
+const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, isMobileDevice, updateLikhoLocaleLanguagesDropdown, showOrHideExtensionCloseBtn } = require('../common/common');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const speakerDetailsKey = 'speakerDetails';
@@ -142,7 +142,7 @@ function addListeners() {
   $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false') {
+    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false' && !isMobileDevice()) {
       showElement($('#keyboardBox'));
     }
   });
@@ -226,7 +226,7 @@ function showThankYou() {
 }
 
 function showNoSentencesMessage() {
-  $('#spn-validation-language').html(localStorage.getItem(LIKHO_FROM_LANGUAGE));
+  $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
   hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#virtualKeyBoardBtn'));
@@ -295,7 +295,18 @@ let selectedReportVal = '';
 const initialize = function () {
   const totalItems = likhoIndia.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
-  const language = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+
+  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+  const fromLanguage = language;
+
+  const localeToLanguage = localeStrings[toLanguage];
+  const localeFromLanguage = localeStrings[fromLanguage];
+
+  $('#keyboardLayoutName').text(localeToLanguage);
+  $('#from-label').text(localeFromLanguage);
+  $('#to-label').text(localeToLanguage);
 
   $("#start_contributing_id").on('click', function () {
     const data = localStorage.getItem("speakerDetails");
@@ -340,30 +351,6 @@ const initialize = function () {
   }
 };
 
-const updateLocaleLanguagesDropdown = (language, toLanguage) => {
-  // const dropDown = $('#localisation_dropdown');
-  // const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-  // const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
-  // const invalidToLang = toLanguage.toLowerCase() === "english" || toLang.hasLocaleText === false;
-  // const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
-  // if (invalidToLang && invalidFromLang) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
-  // } else if (invalidFromLang) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //     <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  // } else if (invalidToLang) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  // } else if (toLanguage.toLowerCase() === language.toLowerCase()) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  // } else {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
-  //       <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  // }
-}
-
 function executeOnLoad() {
   // toggleFooterPosition();
   setPageContentHeight();
@@ -372,15 +359,18 @@ function executeOnLoad() {
   const $errorModal = $('#errorModal');
   const $loader = $('#loader');
   const $pageContent = $('#page-content');
-  const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-  $('#keyboardLayoutName').text(toLanguage);
-  $('#from-label').text(fromLanguage);
-  $('#to-label').text(toLanguage);
+  const localeToLanguage = localeStrings[toLanguage];
+  const localeFromLanguage = localeStrings[fromLanguage];
+
+  $('#keyboardLayoutName').text(localeToLanguage);
+  $('#from-label').text(localeFromLanguage);
+  $('#to-label').text(localeToLanguage);
 
   if (fromLanguage && toLanguage) {
-    updateLocaleLanguagesDropdown(fromLanguage, toLanguage);
+    updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
   }
 
   fetchLocationInfo().then(res => {
@@ -453,7 +443,19 @@ function executeOnLoad() {
           }
         })
         .then((sentenceData) => {
-          if (sentenceData.data.length === 0) {
+          likhoIndia.sentences = sentenceData.data ? sentenceData.data : [];
+          localStorage.setItem(likhoCountKey, likhoIndia.sentences.length);
+          $loader.hide();
+          localStorage.setItem(
+            sentencesKey,
+            JSON.stringify({
+              userName: localSpeakerDataParsed.userName,
+              sentences: likhoIndia.sentences,
+              language: fromLanguage,
+              toLanguage: toLanguage
+            })
+          );
+          if (likhoIndia.sentences.length === 0) {
             showNoSentencesMessage();
             return;
           }
@@ -465,18 +467,7 @@ function executeOnLoad() {
           $pageContent.removeClass('d-none');
           setFooterPosition();
 
-          likhoIndia.sentences = sentenceData.data;
-          localStorage.setItem(likhoCountKey, likhoIndia.sentences.length);
-          $loader.hide();
-          localStorage.setItem(
-            sentencesKey,
-            JSON.stringify({
-              userName: localSpeakerDataParsed.userName,
-              sentences: sentenceData.data,
-              language: fromLanguage,
-              toLanguage: toLanguage
-            })
-          );
+
           setFooterPosition();
           initialize();
         })
@@ -497,6 +488,9 @@ function executeOnLoad() {
 $(document).ready(() => {
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
+  if(isMobileDevice()) {
+    hideElement($('#virtualKeyBoardBtn'));
+  }
   if(isMobileDevice() || isNotChrome){
     hideElement($('#extension-bar'));
   } else {

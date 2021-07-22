@@ -1,4 +1,4 @@
-<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="../../css/common/card.css">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/card.css">
 <div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card1 mr-lg-3 mr-md-4 justify-content-center align-items-center py-3" id="left" style="min-height:190px!important">
     <div class="row position-absolute" id="cont-warning-msg">
         <div class="warning-mesg d-flex align-items-center">
@@ -7,16 +7,16 @@
                 <path d="M11 7H13V14H11V7ZM11 15H13V17H11V15Z" fill="#42B2C6"/>
                 </svg>
                 
-             <p class="pl-2 m-0"><%= __('Not collecting contributions for selected language')%></p>
+             <p class="pl-2 m-0"><%= __('Only validations invited for the selected language')%></p>
         </div>
      </div>
     <div id="left_container" class="row align-items-center py-lg-5 position-relative col-10 card_container px-0" style="height:100%">
         <div class="col-8 px-0">
             <h1 class="display-5">
-                <%= __(left.h1) %>
+                <%= left.h1 %>
             </h1>
             <div class="mt-3 font-weight-normal">
-                <%= __(left.h2) %>
+                <%= left.h2 %>
             </div>
         </div>
         <div class="col-4 text-right px-0">
@@ -25,7 +25,7 @@
 
         <div id="left-p-2" class="col-12 d-none position-absolute px-0" style="bottom:1rem">
             <div>
-                <%= __(left.p1) %>
+                <%= left.p1 %>
             </div>
             <div class="col-5 col-lg-5 col-xl-4 d-none" id="left-loader">
                 <div><span class="spinner"></span></div>
@@ -41,16 +41,16 @@
             <path d="M11.953 2C6.465 2 2 6.486 2 12C2 17.514 6.486 22 12 22C17.514 22 22 17.514 22 12C22 6.486 17.493 2 11.953 2ZM12 20C7.589 20 4 16.411 4 12C4 7.589 7.567 4 11.953 4C16.391 4 20 7.589 20 12C20 16.411 16.411 20 12 20Z" fill="#4D82F7"/>
             <path d="M11 7H13V14H11V7ZM11 15H13V17H11V15Z" fill="#4D82F7"/>
             </svg>
-            <p class="pl-2 m-0"><%= __('No validation data available for selected language')%></p>
+            <p class="pl-2 m-0"><%= __('Only contributions invited for the selected language')%></p>
        </div>
     </div>
     <div id="right_container" class="row position-relative align-items-center py-lg-5 col-10 card_container px-0" style="height:100%">
         <div class="col-8 px-0">
             <h1 class="display-5">
-                <%= __(right.h1) %>
+                <%= right.h1 %>
             </h1>
             <div class="mt-3 font-weight-normal">
-                <%= __(right.h2) %>
+                <%= right.h2 %>
             </div>
         </div>
         <div class="col-4 text-right px-0">
@@ -58,7 +58,7 @@
         </div>
         <div class="col-12 d-none position-absolute px-0" id="right-p-2" style="bottom:1rem">
             <div>
-                <%= __(right.p1) %>
+                <%= right.p1 %>
             </div>
             <div class="col-7 col-lg-6 col-xl-6 d-none" id="right-loader">
                 <div><span class="spinner"></span></div>
@@ -67,4 +67,4 @@
         </div>
     </div>
 </div>
-<script src="../../js/common/card.js"></script>
+<script src="/js/common/card.js"></script>

@@ -2,7 +2,7 @@
 Tags: component
 
 * Open Website
-* Select "Likho India" from header
+* Select "likho_india_tab" from header
 
 ## Check Likho India Home Page
 * Validate Likho India content
@@ -25,6 +25,7 @@ Tags: component
 * Close button should close the pop up and user should see Likho India Home page
 
 ## Validate Translate card should be enabled when the data is not contributed for Odia language
+* User should store the progress bar for "Likho India"
 * Select "ଓଡିଆ" Language from "from-language"
 * Select "English" Language from "to-language"
 * Navigate to "Translate" and add username "T User" then click Lets go
@@ -41,12 +42,13 @@ Tags: component
 * User click on "edit" field and type "Be together always" submit and cancel button should be enabled
 * When user clicks on submit button user should see " Thank you for contributing!"
 * When user clicks on back button, user should land on Likho India home page
+* Validate the updated progress bar value with "2" for "Likho India"
 * Check "Validate" option should be "enabled" on Home page
 * Change user name to "V User"
 * Navigate to "Validate"
 * "skip_button" should be enabled , "like_button" "need_change" buttons should be enabled
 * User should see the text "Is the translation correct?"
-* User skips the next "2" sentences user should land on Thank you page in "English"
+* User skips all "2" sentences user should land on Likho India Thank you page
 * When user clicks on Validate more button , user should see no data available message for "Likho" India
 
 ## Validate Validate flow

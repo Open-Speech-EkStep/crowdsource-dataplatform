@@ -62,7 +62,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     dateAxis.renderer.grid.template.disabled = true;
     dateAxis.renderer.baseGrid.disabled = false;
     dateAxis.renderer.labels.template.fill = '#000';
-    dateAxis.title.text = 'Time';
+    dateAxis.title.text = 'Month';
     dateAxis.renderer.labels.template.fontSize = 12;
     dateAxis.title.fontSize = 12;
 
@@ -71,7 +71,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     hourAxis.renderer.minGridDistance = 50;
     hourAxis.renderer.grid.template.strokeDasharray = "3,3";
     hourAxis.renderer.labels.template.fill = '#000';
-    hourAxis.title.text = currentModule == "dekho" ? "Images" : currentModule == MODULE.likho.value ? "Sentences" : 'Number of hours';
+    hourAxis.title.text = currentModule == "dekho" ? "Images" : currentModule == MODULE.likho.value ? "Sentences" : 'Contribution (in hours)';
     hourAxis.renderer.labels.template.fontSize = 12;
     hourAxis.title.fontSize = 12;
 
@@ -158,8 +158,8 @@ function buildLineGraphs(language, timeframe, type, series1Name, series2Name) {
           'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'
         );
         fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
-        fetch('../../css/notyf.min.css');
-        fetch('../../css/record.css');
+        fetch('https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css');
+        fetch('/css/record.css');
       }, 2000);
     } catch (error) {
       console.log(error);

@@ -1,5 +1,6 @@
 const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
-const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE ,CURRENT_MODULE,MODULE} = require("./constants");
+const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE ,CURRENT_MODULE,MODULE, DEFAULT_CON_LANGUAGE} = require("./constants");
+const { base_url, context_root } = require('./env-api');
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');
@@ -14,6 +15,13 @@ const registerEvents = function () {
 const localisationChangeHandler = e => {
     const targetedLang = e.target;
     const locale = targetedLang.getAttribute('locale');
+    const module = localStorage.getItem(CURRENT_MODULE);
+    const splitValues = location.href.split('/');
+    let currentPage = splitValues[splitValues.length - 1];
+    const selectedLanguage = ALL_LANGUAGES.find(item => item.id == locale);
+    if(module == "home" && currentPage == "home.html") {
+       localStorage.setItem(CONTRIBUTION_LANGUAGE, selectedLanguage ? selectedLanguage.value : DEFAULT_CON_LANGUAGE);
+    }
     if (locale)
         changeLocale(locale);
 };
@@ -26,19 +34,16 @@ const changeLocale = function (locale) {
     }
     const module = localStorage.getItem(CURRENT_MODULE);
     localStorage.setItem("i18n", locale);
-    // if(module == 'home'){
-    //     location.href = `/${locale}/${currentPage}`;
-    // } else if(module === 'bolo' && currentPage != 'home.html'){
-    //     location.href = `/${locale}/${currentPage}`;
+    // if(module == 'bolo' && currentPage == "home.html"){
+    //     location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
     // }
-    if(module == 'bolo' && currentPage == "home.html"){
-        location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
-    }
-    else if(module == 'bolo' || module == 'home') {
-        location.href = `/${locale}/${currentPage}`;
+    // else
+
+    if(module == 'home' || currentPage == "badges.html") {
+        location.href = `${context_root}/${locale}/${currentPage}`;
     }
     else {
-        location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
+        location.href = `${context_root}/${locale}/${MODULE[module].url}/${currentPage}`;
     }
 }
 
@@ -69,6 +74,7 @@ function redirectToLocalisedPage() {
 
 
 $(document).ready(function () {
+    $("#bhashadaan_logo").attr('href', base_url);
     registerEvents();
 })
 

@@ -43,6 +43,10 @@ const {
     getValidationHoursForAsr
 } = require('./../src/dbQuery');
 
+const {
+    languageGoalQuery, currentProgressQuery
+} = require('./../src/dashboardDbQueries');
+
 const mockDB = {
     many: jest.fn(() => Promise.resolve()),
     one: jest.fn(() => Promise.resolve()),
@@ -427,10 +431,12 @@ describe("Running tests for dbOperations", () => {
         const module = 'bolo';
         const target_page = 'Landing Page';
         const opinion_rating = 3;
+        const recommended = 'yes';
+        const revisit = 'no'
 
-        dbOperations.insertFeedback(email, feedback, category, language, module, target_page, opinion_rating);
+        dbOperations.insertFeedback(email, feedback, category, language, module, target_page, opinion_rating, recommended, revisit);
 
-        expect(spyDBany).toHaveBeenCalledWith(feedbackInsertion, [email, feedback, category, language, module, target_page, opinion_rating]);
+        expect(spyDBany).toHaveBeenCalledWith(feedbackInsertion, [email, feedback, category, language, module, target_page, opinion_rating, recommended, revisit]);
     });
 
     test('Save Report', async () => {
@@ -859,5 +865,318 @@ describe("Running tests for dbOperations", () => {
             expect(spyStatus).toBeCalledWith(200);
             expect(spySend).toBeCalledWith({ hasTarget: true, isAllContributed: true });
         })
-    })
+    });
+
+    describe('add remaining genders to data', () => {
+
+        test('should add data to returned', async () => {
+            const genderData = [];
+            const allGenders = ['male', 'female', 'others'];
+
+            const result = dbOperations.addRemainingGenders(genderData, allGenders);
+
+            expect(result.length).toBe(3)
+        });
+        
+        test('should not replace existing data to returned', async () => {
+            const genderData = [{ gender: 'male' }];
+            const allGenders = ['male', 'female', 'others'];
+
+            const result = dbOperations.addRemainingGenders(genderData, allGenders);
+
+            expect(result.length).toBe(3)
+        });
+
+        test('should not delete existing data to returned', async () => {
+            const genderData = [{ gender: 'male' }];
+            const allGenders = [];
+
+            const result = dbOperations.addRemainingGenders(genderData, allGenders);
+
+            expect(result.length).toBe(1)
+        });
+    });
+
+    describe('getContributionProgress', () => {
+        const textType = 'text';
+        const asrType = 'asr';
+        const ocrType = 'ocr';
+        const parallelType = 'parallel';
+        const hindiLanguage = 'Hindi';
+        const targetLanguage = 'English';
+        const contributeSource = 'contribute';
+        const validateSource = 'validate';
+        let progressResult = { total_contributions: 100, total_validations: 100, total_contribution_count: 100, total_validation_count: 100 };
+        test('should call queries with type, language and category filters', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage}) and category=${contributeSource}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage, contributeSource);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with type, language and null category filters', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage})`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage, null);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with type, language and undefined category filters', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage})`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with type, language and blank category filters', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage})`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage, '');
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with type, and null language filters', async () => {
+            const filter = `1=1 and type=${textType}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, null);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with type, and blank language filters', async () => {
+            const filter = `1=1 and type=${textType}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, '');
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with type, and undefined language filters', async () => {
+            const filter = `1=1 and type=${textType}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with null type filters', async () => {
+            const filter = `1=1`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(null);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with blank type filters', async () => {
+            const filter = `1=1`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress('');
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should call queries with undefined type filters', async () => {
+            const filter = `1=1`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ goal: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress();
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(100);
+        });
+        test('should return 0 if no records from db', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage}) and category=${contributeSource}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue(null);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage, contributeSource);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(0);
+        });
+        test('should return 0 if no records from db 2', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage}) and category=${contributeSource}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage, contributeSource);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(0);
+        });
+        test('should return 0 if column is removed from db', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage}) and category=${contributeSource}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(languageGoalQuery, filter).mockReturnValue([{ somethingElse: 100 }]);
+            const result = await dbOperations.getGoalForContributionProgress(textType, hindiLanguage, contributeSource);
+
+            expect(spyDBany).toBeCalledWith(languageGoalQuery, filter);
+            expect(result).toBe(0);
+        });
+
+        test('getProgressForContributionProgress should call queries with type, language filters', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage})`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(currentProgressQuery, filter).mockReturnValue([progressResult]);
+            const result = await dbOperations.getProgressForContributionProgress(textType, hindiLanguage);
+
+            expect(spyDBany).toBeCalledWith(currentProgressQuery, filter);
+            expect(result).toBe(progressResult);
+        });
+        test('getProgressForContributionProgress should call queries with type, and null language filters', async () => {
+            const filter = `1=1 and type=${textType}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(currentProgressQuery, filter).mockReturnValue([progressResult]);
+            const result = await dbOperations.getProgressForContributionProgress(textType, null);
+
+            expect(spyDBany).toBeCalledWith(currentProgressQuery, filter);
+            expect(result).toBe(progressResult);
+        });
+        test('getProgressForContributionProgress should call queries with type, and blank language filters', async () => {
+            const filter = `1=1 and type=${textType}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(currentProgressQuery, filter).mockReturnValue([progressResult]);
+            const result = await dbOperations.getProgressForContributionProgress(textType, '');
+
+            expect(spyDBany).toBeCalledWith(currentProgressQuery, filter);
+            expect(result).toBe(progressResult);
+        });
+        test('getProgressForContributionProgress should call queries with type, and undefined language filters', async () => {
+            const filter = `1=1 and type=${textType}`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(currentProgressQuery, filter).mockReturnValue([progressResult]);
+            const result = await dbOperations.getProgressForContributionProgress(textType);
+
+            expect(spyDBany).toBeCalledWith(currentProgressQuery, filter);
+            expect(result).toBe(progressResult);
+        });
+        test('getProgressForContributionProgress should call queries with null type filters', async () => {
+            const filter = `1=1`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(currentProgressQuery, filter).mockReturnValue([progressResult]);
+            const result = await dbOperations.getProgressForContributionProgress(null);
+
+            expect(spyDBany).toBeCalledWith(currentProgressQuery, filter);
+            expect(result).toBe(progressResult);
+        });
+        test('getProgressForContributionProgress should call queries with blank type filters', async () => {
+            const filter = `1=1`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(currentProgressQuery, filter).mockReturnValue([progressResult]);
+            const result = await dbOperations.getProgressForContributionProgress('');
+
+            expect(spyDBany).toBeCalledWith(currentProgressQuery, filter);
+            expect(result).toBe(progressResult);
+        });
+        test('getProgressForContributionProgress should call queries with undefined type filters', async () => {
+            const filter = `1=1`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(currentProgressQuery, filter).mockReturnValue([progressResult]);
+            const result = await dbOperations.getProgressForContributionProgress();
+
+            expect(spyDBany).toBeCalledWith(currentProgressQuery, filter);
+            expect(result).toBe(progressResult);
+        });
+        test('getProgressForContributionProgress should return 0 if no records from db', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage})`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(currentProgressQuery, filter).mockReturnValue(null);
+            const result = await dbOperations.getProgressForContributionProgress(textType, hindiLanguage);
+
+            expect(spyDBany).toBeCalledWith(currentProgressQuery, filter);
+            expect(result).toStrictEqual({ total_contributions: 0, total_validations: 0, total_contribution_count: 0, total_validation_count: 0 });
+        });
+        test('getProgressForContributionProgress should return 0 if no records from db 2', async () => {
+            const filter = `1=1 and type=${textType} and LOWER(language)=LOWER(${hindiLanguage})`;
+            mockpgp.as.format = jest.fn().mockReturnValue(filter);
+            when(spyDBany).calledWith(currentProgressQuery, filter).mockReturnValue([]);
+            const result = await dbOperations.getProgressForContributionProgress(textType, hindiLanguage, contributeSource);
+
+            expect(spyDBany).toBeCalledWith(currentProgressQuery, filter);
+            expect(result).toStrictEqual({ total_contributions: 0, total_validations: 0, total_contribution_count: 0, total_validation_count: 0 });
+        });
+        test('getProgressResultBasedOnTypeAndSource should return 0 if null is passed', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(null, textType, contributeSource);
+            expect(result).toStrictEqual("0.000");
+        });
+        test('getProgressResultBasedOnTypeAndSource should return 0 if undefined is passed', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(undefined, textType, contributeSource);
+            expect(result).toStrictEqual("0.000");
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for text and contribute', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, textType, contributeSource);
+            expect(result).toStrictEqual(progressResult.total_contributions.toFixed(3));
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for text and validate', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, textType, validateSource);
+            expect(result).toStrictEqual(progressResult.total_validations.toFixed(3));
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for asr and contribute', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, asrType, contributeSource);
+            expect(result).toStrictEqual(progressResult.total_contributions.toFixed(3));
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for asr and validate', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, asrType, validateSource);
+            expect(result).toStrictEqual(progressResult.total_validations.toFixed(3));
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for ocr and contribute', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, ocrType, contributeSource);
+            expect(result).toStrictEqual(progressResult.total_contribution_count);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for ocr and validate', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, ocrType, validateSource);
+            expect(result).toStrictEqual(progressResult.total_validation_count);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for parallel and contribute', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, parallelType, contributeSource);
+            expect(result).toStrictEqual(progressResult.total_contribution_count);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for parallel and validate', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, parallelType, validateSource);
+            expect(result).toStrictEqual(progressResult.total_validation_count);
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for text and no source', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, textType);
+            expect(result).toStrictEqual((progressResult.total_validations + progressResult.total_contributions).toFixed(3));
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for asr and no source', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, asrType);
+            expect(result).toStrictEqual((progressResult.total_validations + progressResult.total_contributions).toFixed(3));
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for ocr and no source', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, ocrType);
+            expect(result).toStrictEqual((progressResult.total_validation_count + progressResult.total_contribution_count));
+        });
+        test('getProgressResultBasedOnTypeAndSource should return correct for parallel and no source', async () => {            
+            const result = await dbOperations.getProgressResultBasedOnTypeAndSource(progressResult, parallelType);
+            expect(result).toStrictEqual((progressResult.total_validation_count + progressResult.total_contribution_count));
+        });
+        test('increaseGoalIfLessThanCurrentProgress should return same goal if progress is less', async () => {            
+            const result = await dbOperations.increaseGoalIfLessThanCurrentProgress(10, 100);
+            expect(result).toBe(100);
+        });
+        test('increaseGoalIfLessThanCurrentProgress should return return twice goal if progress is nearby', async () => {            
+            const result = await dbOperations.increaseGoalIfLessThanCurrentProgress(96, 100);
+            expect(result).toBe(200);
+        });
+        test('increaseGoalIfLessThanCurrentProgress should return return four time goal if progress is double of goal', async () => {            
+            const result = await dbOperations.increaseGoalIfLessThanCurrentProgress(200, 100);
+            expect(result).toBe(400);
+        });
+        test('increaseGoalIfLessThanCurrentProgress should return return 0 goal if goal is 0', async () => {            
+            const result = await dbOperations.increaseGoalIfLessThanCurrentProgress(200, 0);
+            expect(result).toBe(0);
+        });
+    });
 });

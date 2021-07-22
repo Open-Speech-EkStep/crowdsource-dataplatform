@@ -45,6 +45,14 @@ const LANGUAGES = [{ value: "Assamese", id: "as", text: "অসমীয়া" 
 { value: "Tamil", id: "ta", text: "தமிழ்" },
 { value: "Telugu", id: "te", text: "తెలుగు" }];
 
+const BADGE_SEQUENCE = {
+  '': '',
+  'Bronze': '1st',
+  'Silver': '2nd',
+  'Gold': '3rd',
+  'Platinum': '4th'
+};
+
 const AGE_GROUP = [
   '',
   'upto 10',
@@ -88,5 +96,6 @@ module.exports = {
   VALIDATION_ACTIONS,
   SOURCES,
   MEDIA_TYPES,
-  ROLE_UAT
+  ROLE_UAT,
+  BADGE_SEQUENCE
 };

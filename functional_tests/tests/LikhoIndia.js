@@ -96,3 +96,18 @@ step("User should see no data available message for Likho India", async function
 	await taiko.waitFor(1000)
       assert.ok(await text('Thank you for your enthusiasm to validate the translations').exists())
 });
+
+step("User skips all <count> sentences user should land on Likho India Thank you page", async function(count) {
+  const skipbutton = taiko.button({ id: 'skip_button' })
+  for (let i = 0; i < count; i++) {
+    await click(skipbutton)
+    await taiko.waitFor(2000)
+  }
+    await taiko.waitFor(1000)
+	  assert.ok(await text('Contribute for your language pair!').isVisible())
+	  assert.ok(await text('Odia-English Likho India Target Achieved').isVisible())
+    assert.ok(await text('Validation (in sentences)').isVisible())
+    assert.ok(await text('Validate 5 sentence(s) to earn your bronze Badge.').isVisible())
+    assert.ok(await text('Share on').isVisible())
+    assert.ok(await link('Know More').isVisible())
+});

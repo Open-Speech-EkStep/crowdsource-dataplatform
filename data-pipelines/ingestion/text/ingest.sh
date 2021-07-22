@@ -7,7 +7,8 @@ export connection=$6
 export language=$7
 
 export pub_path=${dataset_path}
-export bundle_path=s3://${bucket}/$remote_base_path/${language}/original/bundled/$dataset_name.txt
-aws s3 cp $dataset_path $bundle_path
+export bundle_path=${AZURE_ACC_URL}/${bucket}/$remote_base_path/${language}/original/bundled/$dataset_name.txt
 
 node ingest.js $dataset_path $paired $connection $bundle_path {} $language
+
+azcopy copy $dataset_path $bundle_path

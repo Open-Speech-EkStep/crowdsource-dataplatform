@@ -1,28 +1,11 @@
-const {ALL_LANGUAGES} = require('./constants')
-
-const setLangNavBar = (targetedDiv, top_lang, $languageNavBar) => {
-  const allDivs = $languageNavBar.children();
-  let targetedDivIndex = -1
-  allDivs.each(function (index, element) {
-    if (element.getAttribute('value') === top_lang) {
-      targetedDivIndex = index;
-    }
-  });
-
-  const previousActiveDiv = $languageNavBar.find('.active');
-  previousActiveDiv.removeClass('active');
-  const $6th_place = document.getElementById('6th_option');
-  const lang = ALL_LANGUAGES.find(ele => ele.value === top_lang);
-  $6th_place.innerText = lang.text;
-  if (targetedDivIndex < 0) {
-    $6th_place.classList.remove('d-none');
-    $6th_place.classList.add('active');
-    $6th_place.setAttribute('value', top_lang);
-  } else {
-    allDivs[targetedDivIndex].classList.add('active');
-    $6th_place.classList.remove('active');
-    $6th_place.classList.add('d-none');
-  }
+const addToLanguage = function (id, list) {
+  const selectBar = document.getElementById(id);
+  let options = '';
+  list.forEach(lang => {
+    options = options.concat(`<option value=${lang.value}>${lang.text}</option>`);
+  })
+  selectBar.innerHTML = options;
 }
 
-module.exports = {setLangNavBar}
+
+module.exports = {addToLanguage}

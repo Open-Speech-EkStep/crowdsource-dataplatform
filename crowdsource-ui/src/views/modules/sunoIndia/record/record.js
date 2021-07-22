@@ -262,7 +262,7 @@ function addListeners() {
   $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if(!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false'){
+    if(!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false' && !isMobileDevice()){
       showElement($('#keyboardBox'));
     }
   });
@@ -461,7 +461,11 @@ const initialize = function () {
   const totalItems = sunoIndia.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  $('#edit-language').text(language)
+  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const localeLanguage = localeStrings[language];
+  $('#edit-language').text(localeLanguage);
+  $('#keyboardLayoutName').text(localeLanguage);
+
   if (language) {
     updateLocaleLanguagesDropdown(language);
   }
@@ -519,8 +523,10 @@ function executeOnLoad() {
   const $loader = $('#loader');
   const $pageContent = $('#page-content');
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  $('#keyboardLayoutName').text(contributionLanguage);
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const localeLanguage = localeStrings[contributionLanguage];
+  $('#keyboardLayoutName').text(localeLanguage);
+
   if (contributionLanguage) {
     updateLocaleLanguagesDropdown(contributionLanguage);
   }
@@ -594,7 +600,18 @@ function executeOnLoad() {
           }
         })
         .then((sentenceData) => {
-          if (sentenceData.data.length === 0) {
+          sunoIndia.sentences = sentenceData.data ? sentenceData.data : [];
+          localStorage.setItem(sunoCountKey, sunoIndia.sentences.length);
+          $loader.hide();
+          localStorage.setItem(
+            sentencesKey,
+            JSON.stringify({
+              userName: localSpeakerDataParsed.userName,
+              sentences: sunoIndia.sentences,
+              language: localSpeakerDataParsed.language,
+            })
+          );
+          if (sunoIndia.sentences.length === 0) {
             showNoSentencesMessage();
             return;
           }
@@ -605,17 +622,7 @@ function executeOnLoad() {
             // toggleFooterPosition();
           }
           $pageContent.removeClass('d-none');
-          sunoIndia.sentences = sentenceData.data;
-          localStorage.setItem(sunoCountKey, sunoIndia.sentences.length);
-          $loader.hide();
-          localStorage.setItem(
-            sentencesKey,
-            JSON.stringify({
-              userName: localSpeakerDataParsed.userName,
-              sentences: sentenceData.data,
-              language: localSpeakerDataParsed.language,
-            })
-          );
+
           setFooterPosition();
           initialize();
         })
@@ -645,6 +652,9 @@ const detectDevice = () => {
 $(document).ready(() => {
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
+  if(isMobileDevice()) {
+    hideElement($('#virtualKeyBoardBtn'));
+  }
   if(isMobileDevice() || isNotChrome){
     hideElement($('#extension-bar'));
   } else {

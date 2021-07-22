@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>BhashaDaan: A crowdsourcing initiative for Indian languages</title>
+    <title>Bhasha Daan: A crowdsourcing initiative for Indian languages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
@@ -10,22 +10,23 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/home.css">
-    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="icon" type="image/png" href="/img/favicon.ico">
 </head>
 
 <body>
     <%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html",
         suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
         <div class="container-fluid">
-            <div class="row justify-content-center bg-primary">
+            <div class="row justify-content-center bg-body-primary">
                 <div class="col-12 col-sm-10 col-md-8 px-1 py-0 text-light text-center mt-0 mt-sm-2 mt-3">
                     <h1 class="display-5 font-wt-900">
                         Terms and Conditions
                     </h1>
                 </div>
             </div>
-            <div class="row justify-content-center align-items-center bg-primary py-2" id="nav-row"><a id="nav-terms-of-use" class="text-white h6 p-3 badge-pill border mx-3 cursor-pointer">
+            <div class="row justify-content-center align-items-center bg-body-primary py-2" id="nav-row"><a id="nav-terms-of-use" class="text-white h6 p-3 badge-pill border mx-3 cursor-pointer">
                     Terms of Use
                 </a><a id="nav-privacy-policy" class="text-white h6 p-3 badge-pill border mx-3 cursor-pointer">
                     Privacy Policy
@@ -310,13 +311,12 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <%- include('common/feedback/feedback.ejs', {page:"Terms and Conditions"}) %>
             <%- include('common/footer.ejs',{path:"./"}) %>
-                <%- include ../../build/views/common/speakerDetails.ejs %>
 
-                    <script src="../js/loadFeedback.js"></script>
+                    <script src="/js/loadFeedback.js"></script>
                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-                    <script src="../js/terms-and-condition.js"></script>
+                    <script src="/js/terms-and-condition.js"></script>
 </body>
 
 </html>

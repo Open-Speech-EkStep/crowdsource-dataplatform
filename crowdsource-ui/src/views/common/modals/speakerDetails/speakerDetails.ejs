@@ -13,11 +13,11 @@
                     <%= __('All the fields are optional but you can enrich your dataset contribution by providing the demographic details.') %>
                 </p>
                 <div class="col-12 text-center text-primary d-none" id="resetBtn" style="cursor:pointer">
-                    <%= __('Not You? Change User') %>
+                    Not You? Change User
                 </div>
                 <div class="form-group mt-3"><label for="username" class="form-label">
                         <%= __('Name') %>
-                    </label> <input class="form-control font-weight-normal" maxlength="12" id="username" data-toggle="tooltip" placeholder="<%= __('Enter username') %>" title="<% __('Username cannot be more than 12 characters') %>">
+                    </label> <input class="form-control font-weight-normal" maxlength="12" id="username" data-toggle="tooltip" placeholder="<%= __('Enter username') %>">
                     <div class="user-name-hint font-weight-light">
                         <span class="align-middle">
                             <%= __('Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.)') %>
@@ -53,7 +53,8 @@
                         <option value="30 - 60"><%= __('30 - 60 (Adult)')%></option>
                         <option value="60+"><%= __('60+ (Senior)')%></option>
                     </select></div>
-                <div class="form-group mb-4"><label for="gender" class="form-label">
+                <div class="form-group mb-4">
+                    <label for="gender" class="form-label">
                         <%= __('Gender') %>
                     </label>
                     <div class="justify-content-between">
@@ -99,11 +100,11 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label my-3 font-weight-normal" id="tnc_link">
-                        <%- __('By proceeding ahead you agree to the <a href="../terms-and-conditions.html" target="_blank"> Terms and Conditions</a>') %>
+                        <%- __(`By proceeding ahead you agree to the <a href="${path}terms-and-conditions.html" target="_blank"> Terms and Conditions</a>`) %>
                     </label>
                 </div>
                 <div class="row justify-content-center my-4">
-                    <div class="col-12 text-center" data-toggle="tooltip" title="<%= __('Please validate any error message before proceeding')%>"><button type="button" id="proceed-box" class="btn btn-primary h6 rounded-pill m-0" data-toggle="modal" data-target="#languageModal">
+                    <div class="col-12 text-center" data-toggle="tooltip" title="<%= __('Please validate any error message before proceeding')%>"><button type="button" id="proceed-box" class="btn btn-custom-primary h6 rounded-pill m-0" data-toggle="modal" data-target="#languageModal">
                             <%= __('Done') %>
                         </button></div>
                 </div>

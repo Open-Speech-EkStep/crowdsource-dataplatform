@@ -1,13 +1,10 @@
-const {CURRENT_MODULE, SPEAKER_DETAILS_KEY} = require('./constants');
+const {CURRENT_MODULE, ALL_LANGUAGES} = require('./constants');
 const {
   setUserModalOnShown,
-  setSpeakerDetails,
   setGenderRadioButtonOnClick,
   setUserNameOnInputFocus,
   setStartRecordingBtnOnClick,
-  addlistenerToGenderRadios
 } = require('./speakerDetails');
-const {isMobileDevice} = require('./common');
 
 function onActiveNavbar(value) {
   const $header = $('#module_name');
@@ -35,6 +32,17 @@ const onOpenUserDropDown = ()=>{
     $userNavBar.removeClass('active')
   })
 }
+
+const isMobileDevice = () => {
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    // true for mobile device
+    return true
+  } else {
+    // false for not mobile device
+    return false;
+  }
+}
+
 
 const showUserProfile = function (userName) {
   const $navUser = $('#nav-user');
@@ -90,6 +98,15 @@ const onChangeUser = (url, module) => {
   }
 }
 
+const setDropdownValues = ()  => {
+  const dropDown = $('#localisation_dropdown');
+  document.getElementById('localisation_dropdown').innerHTML = '';
+  ALL_LANGUAGES.forEach(localeLang => {
+    if(localeLang.hasLocaleText)
+    dropDown.append(`<a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+  });
+}
+
 const $locale_language_dropdown = $('#locale_language_dropdown');
 $locale_language_dropdown.off('show.bs.dropdown').on('show.bs.dropdown',()=>{
   $locale_language_dropdown.addClass('active')
@@ -99,4 +116,4 @@ $locale_language_dropdown.off('hide.bs.dropdown').on('hide.bs.dropdown',()=>{
   $locale_language_dropdown.removeClass('active')
 })
 
-module.exports = {onActiveNavbar, showUserProfile, onChangeUser,onOpenUserDropDown};
+module.exports = {onActiveNavbar, showUserProfile, onChangeUser,onOpenUserDropDown, setDropdownValues};

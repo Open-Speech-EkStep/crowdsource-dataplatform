@@ -7,8 +7,9 @@ const {
   MODULE,
   TOP_LANGUAGES_BY_HOURS,
   ALL_LANGUAGES,
-  LIKHO_FROM_LANGUAGE,
-  LIKHO_TO_LANGUAGE
+  AGGREGATED_DATA_BY_TOP_LANGUAGE,
+  LIKHO_TO_LANGUAGE,
+  CONTRIBUTION_LANGUAGE
 } = require("../common/constants");
 
 const {
@@ -20,37 +21,13 @@ const {
 
 const {downloadPdf} = require('../common/downloadableBadges');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
-const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../common/common');
+const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge, updateLikhoLocaleLanguagesDropdown,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 const {initializeFeedbackModal} = require('../common/feedback');
 
 const CURRENT_INDEX = "likhoCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 const likhoCountKey = 'likhoCount';
 const totalSentence = Number(localStorage.getItem(likhoCountKey));
-
-const updateLocaleLanguagesDropdown = (language, toLanguage) => {
-  // const dropDown = $('#localisation_dropdown');
-  // const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-  // const toLang = ALL_LANGUAGES.find(ele => ele.value === toLanguage);
-  // const invalidToLang = toLanguage.toLowerCase() === "english" || toLang.hasLocaleText === false;
-  // const invalidFromLang = language.toLowerCase() === "english" || localeLang.hasLocaleText === false;
-  // if (invalidToLang && invalidFromLang) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
-  // } else if (invalidFromLang) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //     <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  // } else if (invalidToLang) {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  // } else if (toLanguage.toLowerCase() === language.toLowerCase()){
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-  // }else {
-  //   dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-  //       <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>
-  //       <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  // }
-}
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -62,14 +39,14 @@ const getFormattedTime = (totalSeconds) => {
 
 const updateShareContent = function (language, rank) {
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-  const boloIndiaTitle = "BhashaDaan: A crowdsourcing initiative for Indian languages";
+  const boloIndiaTitle = "Bhasha Daan: A crowdsourcing initiative for Indian languages";
   let localeText = "";
   if (rank === 0) {
     localeText = localeStrings["social sharing text without rank"];
   } else {
     localeText = localeStrings["social sharing text with rank"];
-    localeText = localeText.replace("%language", language);
-    localeText = localeText.replace("%rank", rank);
+    localeText = localeText.replace("<x>", language);
+    localeText = localeText.replace("<y>", rank);
   }
   //const text = `I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Our ${language} language ranks ${rank} on BoloIndia. Do your bit and empower the language?`;
   const $whatsappShare = $("#whatsapp_share");
@@ -95,12 +72,12 @@ const getLanguageStats = function () {
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
         const contributionLanguage = localStorage.getItem(
-          LIKHO_FROM_LANGUAGE
+          CONTRIBUTION_LANGUAGE
         );
         const module = localStorage.getItem(CURRENT_MODULE);
-        const languages = getContributedAndTopLanguage(module == MODULE.likho.value || module == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, MODULE.likho.value);
-        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChartThankyouPage(MODULE.likho.value);
+        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.likho.value, 'total_contribution_count','total_contributions');
+        localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
+        showByHoursChartThankyouPage(MODULE.likho.value, "thankyou");
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
@@ -139,7 +116,7 @@ const getLanguageStats = function () {
 };
 
 function setSentencesContributed() {
-  const contributionLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const speakerDetails = localStorage.getItem("speakerDetails");
   let userName = "";
   if (speakerDetails) {
@@ -175,22 +152,46 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName)
     onChangeUser('./home.html', MODULE.likho.value);
     onOpenUserDropDown();
-    setPageContentHeight();
+    // setPageContentHeight();
     setSentencesContributed();
     // toggleFooterPosition();
 
-    const contributionLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
     if (contributionLanguage && toLanguage) {
-      updateLocaleLanguagesDropdown(contributionLanguage, toLanguage);
+      updateLikhoLocaleLanguagesDropdown(contributionLanguage, toLanguage);
     }
+
+    const localStrings = JSON.parse(
+      localStorage.getItem(LOCALE_STRINGS)
+    );
+
+    const localeLanguageStr = localStrings[contributionLanguage];
+    const localeToLanguageStr = localStrings[toLanguage];
+    $("#metric-language").text(localeLanguageStr+"-"+localeToLanguageStr);
+    // replaceSubStr($(".progress-average-metric"), "<from-language>", localeLanguageStr);
+    // replaceSubStr($(".progress-average-metric"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($("#languageNotInTopWeb"), "<from-language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopWeb"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($("#languageInTopWeb"), "<from-language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopWeb"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($("#languageNotInTopMob"), "<from-language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopMob"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($("#languageInTopMob"), "<from-language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopMob"), "<to-language>", localeToLanguageStr);
+    replaceSubStr($(".x-axis-label"), "<from-language>", localeLanguageStr);
+    replaceSubStr($(".x-axis-label"), "<to-language>", localeToLanguageStr);
+    $("#conLanWhenGetBadge").html(`${localeLanguageStr}-${localeToLanguageStr}`)
+
     getLanguageStats();
+    updateGoalProgressBar(`/progress/parallel/${contributionLanguage}-${toLanguage}/contribute`)
   }
 }
 
 $(document).ready(function () {
 
   localStorage.setItem(CURRENT_MODULE,MODULE.likho.value);
+  localStorage.setItem("selectedType","contribute");
   initializeFeedbackModal();
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));

@@ -1,4 +1,8 @@
 const { onChangeUser } = require('./header.js');
+const {CONTRIBUTION_LANGUAGE} = require('./constants');
+const {
+    updateLocaleLanguagesDropdown
+  } = require('./utils');
 
 function setupScroll() {
     const $navRow = $("#nav-row");
@@ -43,5 +47,6 @@ $(document).ready(function () {
     localStorage.setItem("module", "home");
     document.body.querySelector('footer').classList.remove('fixed-bottom');
     setupScroll();
-    onChangeUser('./home.html', 'home')
+    const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
+  updateLocaleLanguagesDropdown(language);
 });

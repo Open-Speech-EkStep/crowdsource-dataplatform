@@ -54,7 +54,8 @@ const {
     getContributionHoursForText,
     getValidationHoursForText,
     getContributionAmount,
-    getValidationAmount
+    getValidationAmount,
+    getUserRewardsQuery
 } = require('./dbQuery');
 
 const {
@@ -76,7 +77,9 @@ const {
     quarterlyTimeline,
     quarterlyTimelineCumulative,
     lastUpdatedAtQuery,
-    topLanguagesByContributionCount
+    topLanguagesByContributionCount,
+    languageGoalQuery,
+    currentProgressQuery
 } = require('./dashboardDbQueries');
 
 const {
@@ -88,7 +91,7 @@ const {
     releaseMediaQueryForCorrection
 } = require('./profanityCheckerQueries')
 
-const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP } = require('./constants');
+const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP, BADGE_SEQUENCE } = require('./constants');
 
 const envVars = process.env;
 const pgp = require('pg-promise')();
@@ -442,8 +445,8 @@ const getLastUpdatedAt = async () => {
     return lastUpdatedDateTime;
 }
 
-const insertFeedback = (email, feedback, category, language, module, target_page, opinion_rating) => {
-    return db.any(feedbackInsertion, [email, feedback, category, language, module, target_page, opinion_rating]);
+const insertFeedback = (email, feedback, category, language, module, target_page, opinion_rating, recommended, revisit) => {
+    return db.any(feedbackInsertion, [email, feedback, category, language, module, target_page, opinion_rating, recommended, revisit]);
 }
 
 const saveReport = async (userId, datasetId, reportText, language, userName, source) => {
@@ -539,6 +542,7 @@ const getRewards = async (userId, userName, language, source, type) => {
     const nextMilestoneData = await getNextMilestoneData(total_count, language, source, type);
     const currentBadgeType = currentMilestoneData.grade || '';
     const nextBadgeType = nextMilestoneData.grade || '';
+    const sequence = BADGE_SEQUENCE[nextBadgeType] || '';
     const currentMilestone = currentMilestoneData.milestone || 0;
     const nextMilestone = nextMilestoneData.milestone || 0;
     const languageGoal = await getLanguageGoal(language, source, type);
@@ -547,6 +551,7 @@ const getRewards = async (userId, userName, language, source, type) => {
         "badgeId": generatedBadgeId,
         "currentBadgeType": currentBadgeType,
         "nextBadgeType": nextBadgeType,
+        "sequence": sequence,   
         "currentMilestone": currentMilestone,
         "nextMilestone": nextMilestone,
         "contributionCount": Number(total_count),
@@ -705,6 +710,113 @@ const userVerify = async (userName, role) => {
     }
 }
 
+const getUserRewards = async (userId, userName) => {
+    const contributor_id = await getContributorId(userId, userName);
+    return db.any(getUserRewardsQuery, [contributor_id]);
+}
+
+const addRemainingGenders = (genderGroupData, allGenders) => {
+    const haveDataForGenders = genderGroupData.map(gd => gd.gender);
+
+    allGenders.forEach((gender) => {
+        if (!haveDataForGenders.includes(gender)) {
+            genderGroupData.push({
+                gender: gender,
+                contributions: '0',
+                hours_contributed: '0',
+                hours_validated: '0',
+                speakers: '0'
+            });
+        }
+    });
+    return genderGroupData;
+}
+
+const getGoalForContributionProgress = async(type, language, source) => {
+    if(type === 'parallel'){
+        language = language.split('-')[0];
+    }
+    let goalFilter = `1=1`;
+    if (type && type.length !== 0) {
+        goalFilter += ` and type = '${type}'`
+    }
+    if (language && language.length !== 0) {
+        goalFilter += ` and LOWER(language) = LOWER('${language}')`;
+    }
+    if (source && source.length !== 0) {
+        goalFilter += ` and category = '${source}'`
+    }
+    
+    let filter = pgp.as.format('$1:raw', [goalFilter]);
+    const goalResult = await db.any(languageGoalQuery, filter);
+    
+    return goalResult && goalResult[0] && goalResult[0].goal ? goalResult[0].goal : 0;
+}
+const getProgressForContributionProgress = async (type, language) => {
+    let progressFilter = `1=1`;
+    if (type && type.length !== 0) {
+        progressFilter += ` and type = '${type}'`
+    }
+    if (language && language.length !== 0) {
+        progressFilter +=` and LOWER(language) = LOWER('${language}')`;
+    }
+    let filter = pgp.as.format('$1:raw', [progressFilter]);
+
+    const progressResult = await db.any(currentProgressQuery, filter);
+
+    return progressResult && progressResult[0] ? progressResult[0] : { total_contributions: 0, total_validations: 0, total_contribution_count: 0, total_validation_count: 0 };
+}
+const getProgressResultBasedOnTypeAndSource = (progressResult, type, source) => {
+    let progress = 0;
+    if (progressResult && progressResult.length != 0) {
+
+        let resultObj = { contribute: 0, validate: 0 };
+
+        if (['text', 'asr'].includes(type)) {
+            resultObj.contribute = progressResult.total_contributions;
+            resultObj.validate = progressResult.total_validations;
+        }
+        else {
+            resultObj.contribute = progressResult.total_contribution_count;
+            resultObj.validate = progressResult.total_validation_count;
+        }
+
+        if (source && source.length > 0) {
+            progress = Number(resultObj[source] || 0);
+        }
+        else {
+            progress = (Number(resultObj['contribute'] || 0) + Number(resultObj['validate']) || 0) || 0;
+        }
+    }
+    if (['text', 'asr'].includes(type)) {
+        return progress.toFixed(3);
+    }
+    return progress;
+}
+
+const increaseGoalIfLessThanCurrentProgress = (progress, goal) => {
+    if (goal === 0) return goal;
+    while(goal - 5 < progress) {
+        goal *= 2;
+    }
+    return goal;
+}
+
+const getContributionProgress = async (type, language, source) => {
+    let goal = await getGoalForContributionProgress(type, language, source);
+    
+    const progressResult = await getProgressForContributionProgress(type, language);
+    console.log(progressResult)
+    const progress = getProgressResultBasedOnTypeAndSource(progressResult, type, source);
+    console.log(progress);
+    goal = increaseGoalIfLessThanCurrentProgress(progress, goal);
+
+    return {
+        'goal': goal,
+        'currentProgress': progress
+    }
+}
+
 module.exports = {
     userVerify,
     updateAndGetMedia,
@@ -738,5 +850,12 @@ module.exports = {
     getTargetInfo,
     getSentencesForProfanityChecking,
     updateProfanityStatus,
-    releaseMedia
+    releaseMedia,
+    getUserRewards,
+    addRemainingGenders,
+    getContributionProgress,
+    getGoalForContributionProgress,
+    getProgressForContributionProgress,
+    getProgressResultBasedOnTypeAndSource,
+    increaseGoalIfLessThanCurrentProgress
 };
