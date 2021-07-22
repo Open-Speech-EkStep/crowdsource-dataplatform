@@ -69,9 +69,9 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
 
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.min = 0;
-    valueAxis.renderer.labels.template.fill = '#000';
+    valueAxis.renderer.labels.template.fill = '#142745';
     valueAxis.renderer.grid.template.strokeDasharray = "3,3";
-    valueAxis.renderer.labels.template.fontSize = 12;
+    valueAxis.renderer.labels.template.fontSize = 14;
     if(page === 'thankyou'){
       const currentFunctionalPage = localStorage.getItem("selectedType");
       if(currentFunctionalPage == "validate"){
@@ -95,9 +95,10 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
       }
     }
 
-    valueAxis.title.fontSize = 12;
+    valueAxis.title.fill = '#142745';
+    valueAxis.title.fontSize = 14;
+    valueAxis.title.lineHeight = 17;
     valueAxis.title.opacity = 0.6;
-    valueAxis.title.color = '#142745';
     valueAxis.renderer.grid.template.strokeWidth = 0;
     // Create series
     const series = chart.series.push(new am4charts.ColumnSeries());

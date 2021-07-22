@@ -2,51 +2,13 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
+.thankyou-content-wrapper{
+  margin-top: 65px;
+  padding-top: 57px;
+}
+
 .user-contribution-msg span{
-  color: #4d82f7;
-}
-
-.progress{
-  filter: drop-shadow(0 4px 12px rgba(15, 39, 73, 0.12));
-  background: #fcfdff;
-  border: 1px solid #4d82f7;
-  box-sizing: border-box;
-  border-radius: 10px;
-}
-
-.progress-row{
-  margin-top: 41px;
-  margin-bottom: 23px;
-  font-weight: 300;
-}
-
-.progress-bar-section {
-  max-width:800px;
-}
-
-.progress-bar{
-  background: #4d82f7 !important;
-  border-radius: 10px;
-}
-
-
-.progress-metric{
-  font-size:20px ;
-  line-height: 25px;
-  color: #142747;
-  font-weight: 300;
-}
-
-.progress-average-metric{
-  font-size: 20px;
-  line-height: 25px;
-  margin-bottom: 8px;
-}
-
-#totalAverage{
-  color:#ef8537;
-  font-size: 40px;
-  line-height: 20px;
+  color: #007bff;
 }
 
 .thankyou-page-heading, .user-contribution-msg, .new-badge-msg{
@@ -61,6 +23,10 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   font-size: 24px;
   line-height: 30px;
   color: #142745;
+}
+
+.web-view h4, .mobile-view h4{
+  line-height: 30px;
 }
 
 .contribution-info-inner #top-language-chart, #chartRowWithoutCard #top-language-chart{
@@ -142,6 +108,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
 
 .contribution-info-inner{
   border-radius: 20px;
+  padding: 0 1.5rem 1.5rem 1.5rem;
 }
 
 #sentence_away_msg{
@@ -183,12 +150,55 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   background-color: #83e661;
 }
 
+.download-badge-btn{
+  background: #ffffff;
+  border: 1px solid rgba(0, 123, 255, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+  border-radius: 20px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 8px 15px;
+}
+
 .msg-box{
   text-align: left;
 }
 
+.msg-box h4{
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 32px;
+  color: #142745;
+}
+
+.msg-box h4 span{
+  color: #ef8537 !important;
+}
+
+.msg-box p{
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 26px;
+}
+
+.msg-box p span{
+  color: #142745;
+  font-weight: 400;
+}
+
 .badges_information {
   width: 40%;
+}
+
+.badges_information .disable{
+  opacity: 0.5;
+}
+
+.badges_information .btn.disabled,.badges_information .btn:disabled {
+  opacity: 1;
 }
 
 .thankyou-Know-More{
@@ -207,6 +217,15 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
 }
 
 @media screen and (max-width: 768px) {
+  .thankyou-content-wrapper{
+    margin-top: 55px;
+    padding-top: 57px;
+  }
+
+  .msg-box p{
+    font-size: 14px;
+  }
+
   .x-axis-label{
     font-size: 12px;
   }
@@ -241,7 +260,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
     bottom: 32px;
     margin-bottom: 32px;
     width: 100%;
-    padding: 16px 0;
+    padding: 16px 4px;
   }
 
 }

@@ -609,5 +609,15 @@
 	"Contribute <b id=\"sentence-away-count\"></b> <b>sentence(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.": "Contribute <b id=\"sentence-away-count\"></b> <b>sentence(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.",
 	"Contribute <b id=\"sentence-away-count\"></b> <b>image label(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.": "Contribute <b id=\"sentence-away-count\"></b> <b>image label(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.",
 	"Validate <b id=\"sentence-away-count\"></b> <b>image label(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.": "Validate <b id=\"sentence-away-count\"></b> <b>image label(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.",
-	"Total Participation": "Total Participation"
+	"Total Participation": "Total Participation",
+	"You’ve earned your Bolo India <span id=\"current_badge_name\"></span> <span>Bhasha Samarthak</span> Badge": "You’ve earned your Bolo India <span id=\"current_badge_name\"></span> <span>Bhasha Samarthak</span> Badge",
+	"Recorded <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Recorded <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
+	"Validated <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Validated <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
+	"You’ve earned your Suno India <span id=\"current_badge_name\"></span> <span>Bhasha Samarthak</span> Badge": "You’ve earned your Suno India <span id=\"current_badge_name\"></span> <span>Bhasha Samarthak</span> Badge",
+	"Transcribed <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Transcribed <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
+	"You’ve earned your Likho India <span id=\"current_badge_name\"></span> <span>Bhasha Samarthak</span> Badge": "You’ve earned your Likho India <span id=\"current_badge_name\"></span> <span>Bhasha Samarthak</span> Badge",
+	"Translated <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Translated <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
+	"You’ve earned your Dekho India <span id=\"current_badge_name\"></span> <span>Bhasha Samarthak</span> Badge": "You’ve earned your Dekho India <span id=\"current_badge_name\"></span> <span>Bhasha Samarthak</span> Badge",
+	"Labelled <span id=\"current_badge_count\"></span> <span>image(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Labelled <span id=\"current_badge_count\"></span> <span>image(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
+	"Validated <span id=\"current_badge_count\"></span> <span>image(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Validated <span id=\"current_badge_count\"></span> <span>image(s)</span> in <span id=\"conLanWhenGetBadge\"></span>"
 }
