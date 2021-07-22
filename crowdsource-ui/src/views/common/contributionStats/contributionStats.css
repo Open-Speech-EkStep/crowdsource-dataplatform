@@ -3,6 +3,7 @@
   background-color: #f8f9fa;
   margin: 0;
   border-radius: 4px;
+  box-shadow: 0 4px 12px 1px rgba(0, 0, 0, .08);
 }
 
 .contribution-data > p:first-child {
@@ -14,7 +15,6 @@
   .contribution-data {
     border-right: 1px solid #c4c4c4;
     text-align: left;
-    padding-left: 40px;
   }
   .contribution-data:last-child {
     border: none;

@@ -541,6 +541,7 @@
 	"Contribute <b id=\"sentence-away-count\"></b> <b>sentence(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.": "Contribute <b id=\"sentence-away-count\"></b> <b>sentence(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.",
 	"Contribute <b id=\"sentence-away-count\"></b> <b>image label(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.": "Contribute <b id=\"sentence-away-count\"></b> <b>image label(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.",
 	"Validate <b id=\"sentence-away-count\"></b> <b>image label(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.": "Validate <b id=\"sentence-away-count\"></b> <b>image label(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.",
+	"Total Participation": "Total Participation",
 	"You’ve earned your Bolo India <span id=\"current_badge_name\"></span> <span>Bhasha Samarthak</span> Badge": "You’ve earned your Bolo India <span id=\"current_badge_name\"></span> <span>Bhasha Samarthak</span> Badge",
 	"Recorded <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Recorded <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
 	"Validated <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Validated <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",

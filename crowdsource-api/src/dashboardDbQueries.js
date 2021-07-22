@@ -56,6 +56,8 @@ from contributions_and_demo_stats where $1:raw
 group by contributions_and_demo_stats.type;
 `;
 
+const participationStatsQuery = `select type, count(*) from (SELECT contributed_by AS users, type FROM contributions_and_demo_stats UNION SELECT validated_by as users, type FROM contributions_and_demo_stats) as cds where cds.users is not null group by cds.type`
+
 module.exports = {
     listLanguages,
     topLanguagesBySpeakerContributions,
@@ -77,5 +79,6 @@ module.exports = {
     lastUpdatedAtQuery,
     topLanguagesByContributionCount,
     languageGoalQuery,
-    currentProgressQuery
+    currentProgressQuery,
+    participationStatsQuery
 };

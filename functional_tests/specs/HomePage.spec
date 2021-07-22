@@ -15,6 +15,9 @@ Tags: page
 * Move tab to "Dekho India"
 * Validate "Dekho India" Tab and goal ""
 
+## Validate Total Participation section
+* Validate participation section content
+
 ## Validate Badge Section
 * Click "Know More" Link
 * "Badges" page should be displayed

@@ -117,3 +117,17 @@ step("Localisation <id> dropdown should have <lang1> & <lang2> value", async fun
 	assert.ok(await text(lang1).exists());
 	assert.ok(await text(lang2).exists());
 });
+
+step("Validate participation section content", async function() {
+	const titleText = 'Total Participation'
+	const sunoText = text('SUNO INDIA',taiko.below(titleText))
+	const boloText = text('BOLO INDIA',taiko.toRightOf(sunoText))
+	const likhoText = text('LIKHO INDIA',taiko.toRightOf(boloText))
+	const dekhoText = text('DEKHO INDIA',taiko.toRightOf(likhoText))
+	
+	assert.ok(await text(titleText).exists())
+	assert.ok(await boloText.exists())
+	assert.ok(await likhoText.exists())
+	assert.ok(await sunoText.exists())
+	assert.ok(await dekhoText.exists())
+});

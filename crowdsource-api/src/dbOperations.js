@@ -79,7 +79,8 @@ const {
     lastUpdatedAtQuery,
     topLanguagesByContributionCount,
     languageGoalQuery,
-    currentProgressQuery
+    currentProgressQuery,
+    participationStatsQuery
 } = require('./dashboardDbQueries');
 
 const {
@@ -817,6 +818,10 @@ const getContributionProgress = async (type, language, source) => {
     }
 }
 
+const getParticipationStats = () => {
+    return db.many(participationStatsQuery);
+}
+
 module.exports = {
     userVerify,
     updateAndGetMedia,
@@ -857,5 +862,6 @@ module.exports = {
     getGoalForContributionProgress,
     getProgressForContributionProgress,
     getProgressResultBasedOnTypeAndSource,
-    increaseGoalIfLessThanCurrentProgress
+    increaseGoalIfLessThanCurrentProgress,
+    getParticipationStats
 };
