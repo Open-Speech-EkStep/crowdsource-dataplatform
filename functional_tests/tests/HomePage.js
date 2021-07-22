@@ -120,10 +120,10 @@ step("Localisation <id> dropdown should have <lang1> & <lang2> value", async fun
 
 step("Validate participation section content", async function() {
 	const titleText = 'Total Participation'
-	const boloText = text('BOLO INDIA',taiko.below(titleText))
+	const sunoText = text('SUNO INDIA',taiko.below(titleText))
+	const boloText = text('BOLO INDIA',taiko.toRightOf(sunoText))
 	const likhoText = text('LIKHO INDIA',taiko.toRightOf(boloText))
-	const sunoText = text('SUNO INDIA',taiko.toRightOf(likhoText))
-	const dekhoText = text('DEKHO INDIA',taiko.toRightOf(sunoText))
+	const dekhoText = text('DEKHO INDIA',taiko.toRightOf(likhoText))
 	
 	assert.ok(await text(titleText).exists())
 	assert.ok(await boloText.exists())
