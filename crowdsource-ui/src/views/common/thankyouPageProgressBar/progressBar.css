@@ -1,7 +1,4 @@
-h1,
-h2,
-h3,
-h4 {
+.progress-average-metric, .progress-metric, h1, h2, h3, h4 {
   font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
@@ -24,7 +21,7 @@ h4 {
 }
 
 .progress-bar-section {
-  max-width: 800px;
+  max-width: 785px;
 }
 
 .progress-bar {

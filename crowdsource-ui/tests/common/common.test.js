@@ -92,7 +92,6 @@ describe("setBadge", ()=>{
     expect($(".thankyou-page-heading").hasClass("d-none")).toEqual(true);
     expect($(".user-contribution-msg").hasClass("d-none")).toEqual(true);
     expect($("#milestone_text").hasClass("d-none")).toEqual(false);
-    expect($("#language-goal").hasClass('position-relative')).toEqual(true);
     localStorage.clear();
   })
 

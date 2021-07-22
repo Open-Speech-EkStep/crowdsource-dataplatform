@@ -9,8 +9,8 @@
   line-height: 29px;
 }
 
-.back-btn a .material-icon {
-  padding-top: 4px;
+.back-btn a .material-icons {
+  padding-top: 3px;
 }
 
 .back-btn a .back-text {
@@ -70,7 +70,7 @@
     left: 35px;
   }
   .thankyou-bar-graph {
-    border-left: 1px dotted #cccccc;;
+    border-left: 1px dashed #007bff;
   }
   .thankyou-page {
     padding: 0 0 0 0 !important;
@@ -81,4 +81,8 @@
   .no-margin-mobile {
     margin-top: 3rem !important;
   }
+}
+
+.pb-7 {
+  padding-bottom: 7rem !important;
 }

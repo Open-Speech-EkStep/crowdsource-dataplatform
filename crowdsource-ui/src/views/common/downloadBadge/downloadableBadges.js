@@ -2,7 +2,7 @@ const {CURRENT_MODULE,MODULE} = require('./constants.js');
 
 function downloadPdf(badgeType) {
   try {
-    const pdf = new jsPDF()
+    const pdf = new jsPDF();
     const img = new Image();
     img.onload = function () {
       pdf.addImage(this, 50, 10, 108, 130);

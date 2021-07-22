@@ -30,7 +30,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
 }
 
 .contribution-info-inner #top-language-chart, #chartRowWithoutCard #top-language-chart{
-  min-height: 250px !important;
+  min-height: 200px !important;
   max-height: 400px !important;
 }
 
@@ -55,12 +55,12 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
 
 #language-goal{
   background: #ffffff;
-  box-shadow: 0 0 16px 4px rgba(0, 123, 255, 0.13);
+  box-shadow: 0 4px 12px 4px rgb(0 123 255 / 24%);
   border-radius: 12px;
   max-width: 1024px;
   position: fixed;
-  bottom: 32px;
-  padding: 16px 23px;
+  bottom: 8px;
+  padding: 14px 20px;
 }
 
 #language-goal img{
@@ -108,7 +108,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
 
 .contribution-info-inner{
   border-radius: 20px;
-  padding: 0 1.5rem 1.5rem 1.5rem;
+  padding: 0 1.5rem 2rem 1.5rem;
 }
 
 #sentence_away_msg{
@@ -190,7 +190,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
 }
 
 .badges_information {
-  width: 40%;
+  width: 47%;
 }
 
 .badges_information .disable{
@@ -206,6 +206,10 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   font-size: 16px;
   line-height: 19px;
   color: #007bff;
+}
+
+#cardWithoutBadge {
+  padding-top: 32px;
 }
 
 @media screen and (min-width: 599px) {
@@ -352,3 +356,4 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   text-align: center;
   color: #ffffff;
 }
+

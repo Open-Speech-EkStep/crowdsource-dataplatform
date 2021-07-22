@@ -2,23 +2,26 @@
     <span class="downloadable_badges">
     </span>
     <span class="mt-3 mt-lg-0 mt-md-0 sentence_away_msg" id="sentence_away_msg">
-        <%- __(`${TEXT} <b id="sentence-away-count"></b> <b>${TEXT2}</b> to earn your <span id="sentence_away_badge"></span> Badge.`)%>
+        <%- __(`${TEXT} <b id="sentence-away-count"></b> <b>${TEXT2}</b> to earn your <span
+                id="sentence_away_badge"></span> Badge.`)%>
     </span>
     <span class="badges_information mt-3 mt-lg-0 mt-md-0">
         <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="bronze" href="#" id="<%= `bronze_badge_link` %>">
-            <img src="<%= `/img/${MODULE}_bronze_medal${PAGE}.svg`%>" alt="" width="36px" id="<%= `bronze_badge_link_img`%>">
+            <img src="<%= `/img/${MODULE}_bronze_medal${PAGE}.svg`%>" class="mr-lg-1 mr-md-1" alt="" height="52" width="42" id="<%= `bronze_badge_link_img`%>">
         </button>
         <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="silver" href="#" id="<%= `silver_badge_link` %>">
-            <img src="<%= `/img/${MODULE}_silver_medal${PAGE}.svg`%>" alt="" width="36px" class="disable" id="<%= `silver_badge_link_img`%>">
+            <img src="<%= `/img/${MODULE}_silver_medal${PAGE}.svg`%>" alt="" height="52" width="42" class="disable mr-lg-1 mr-md-1" id="<%= `silver_badge_link_img`%>">
         </button>
         <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="gold" href="#" id="<%= `gold_badge_link` %>">
-            <img src="<%= `/img/${MODULE}_gold_medal${PAGE}.svg`%>" alt="" width="36px" class="disable" id="<%= `gold_badge_link_img`%>">
+            <img src="<%= `/img/${MODULE}_gold_medal${PAGE}.svg`%>" alt="" height="52" width="42" class="disable mr-lg-1 mr-md-1" id="<%= `gold_badge_link_img`%>">
         </button>
         <button class="m-0 p-0 btn border-0" disabled="disabled" data-badge="platinum" href="#" id="<%= `platinum_badge_link` %>">
-            <img src="<%= `/img/${MODULE}_platinum_medal${PAGE}.svg`%>" alt="" width="36px" class="disable" id="<%= `platinum_badge_link_img`%>">
+            <img src="<%= `/img/${MODULE}_platinum_medal${PAGE}.svg`%>" alt="" height="52" width="42" class="disable mr-lg-1 mr-md-1" id="<%= `platinum_badge_link_img`%>">
         </button>
     </span>
-    <a href="../badges.html" class="thankyou-Know-More mt-3 mt-lg-0 mt-md-0"><%= __('Know More') %> </a>
+    <a href="../badges.html" class="thankyou-Know-More mt-3 mt-lg-0 mt-md-0 pl-lg-2 pl-md-2">
+        <%= __('Know More') %>
+    </a>
     <a href="<%= url %> " class="btn btn-custom-primary rounded-pill btn-lg h6 float-right mb-0 mt-3 mt-lg-0 mt-md-0">
         <%= ButtonText %>
     </a>

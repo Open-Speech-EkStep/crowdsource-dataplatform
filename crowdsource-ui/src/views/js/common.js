@@ -206,7 +206,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $(".thankyou-page-heading").addClass("d-none");
     $(".user-contribution-msg").addClass("d-none");
     $(".downloadable_badges").addClass('mr-0 mr-lg-3 mr-md-2');
-    $("#language-goal").addClass('position-relative')
+    // $("#language-goal").addClass('position-relative')
 
     const cardWithoutBadge = $('#cardWithoutBadge');
     cardWithoutBadge.remove();
@@ -216,7 +216,6 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     const activeBadgeId = `#${data.currentBadgeType.toLowerCase()}_badge_link`;
     const activeBadge = $(activeBadgeId);
     activeBadge.attr("disabled", false);
-    activeBadge.remove();
     $(".downloadable_badges").append(activeBadge);
     const nextBadgeLink = $(`#${data.nextBadgeType.toLowerCase()}_badge_link_img`);
     nextBadgeLink.removeClass('disable');
@@ -269,7 +268,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   if (data.currentBadgeType.toLowerCase() == "bronze") {
     $(".downloadable_badges").addClass('mr-0 mr-lg-3 mr-md-2');
     $bronzeBadge.attr("disabled", false);
-    $bronzeBadgeLink.attr("title", 'Download bronze badge');
+    $bronzeBadgeLink.attr("title", 'Download Bronze Badge');
     $(".downloadable_badges").append($bronzeBadge);
 
     $silverBadgeLink.removeClass('disable');
@@ -278,9 +277,9 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   } else if (data.currentBadgeType.toLowerCase() === "silver") {
     $(".downloadable_badges").addClass('mr-0 mr-lg-3 mr-md-2');
     $bronzeBadge.attr("disabled", false);
-    $bronzeBadgeLink.attr("title", 'Download bronze badge');
+    $bronzeBadgeLink.attr("title", 'Download Bronze Badge');
     $silverBadge.attr("disabled", false);
-    $silverBadgeLink.attr("title", 'Download silver badge');
+    $silverBadgeLink.attr("title", 'Download Silver Badge');
     $(".downloadable_badges").append($bronzeBadge);
     $(".downloadable_badges").append($silverBadge);
 
@@ -294,9 +293,9 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $bronzeBadge.attr("disabled", false);
     $silverBadge.attr("disabled", false);
     $goldBadge.attr("disabled", false);
-    $bronzeBadgeLink.attr("title", 'Download bronze badge');
-    $silverBadgeLink.attr("title", 'Download silver badge');
-    $goldBadgeLink.attr("title", 'Download gold badge');
+    $bronzeBadgeLink.attr("title", 'Download Bronze Badge');
+    $silverBadgeLink.attr("title", 'Download Silver Badge');
+    $goldBadgeLink.attr("title", 'Download Gold Badge');
     $(".downloadable_badges").append($bronzeBadge);
     $(".downloadable_badges").append($silverBadge);
     $(".downloadable_badges").append($goldBadge);
@@ -314,10 +313,10 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $silverBadge.attr("disabled", false);
     $goldBadge.attr("disabled", false);
     $platinumBadge.attr("disabled", false);
-    $platinumBadgeLink.attr("title", 'Download platinum badge');
-    $goldBadgeLink.attr("title", 'Download gold badge');
-    $bronzeBadgeLink.attr("title", 'Download bronze badge');
-    $silverBadgeLink.attr("title", 'Download silver badge');
+    $platinumBadgeLink.attr("title", 'Download Platinum Badge');
+    $goldBadgeLink.attr("title", 'Download Gold Badge');
+    $bronzeBadgeLink.attr("title", 'Download Bronze Badge');
+    $silverBadgeLink.attr("title", 'Download Silver Badge');
     $(".downloadable_badges").append($bronzeBadge);
     $(".downloadable_badges").append($silverBadge);
     $(".downloadable_badges").append($goldBadge);
@@ -422,12 +421,11 @@ const setLocalisationAndProfile = (path, module) => {
 
 const updateGoalProgressBar = function (url){
   return performAPIRequest(url).then(data=>{
-    const currentModule = localStorage.getItem(CURRENT_MODULE);
-    const maxValue = data.goal;
-    const currentValue = currentModule == 'dekho' || currentModule == 'likho' ? Number(data['current-progress']) : data['current-progress'];
+    const maxValue = Number(data.goal);
+    const currentValue =  Number(data['current-progress']);
     replaceSubStr($(".progress-metric"), "<contribution-done>", currentValue);
     replaceSubStr($(".progress-metric"), "<contribution-goal>", maxValue);
-    const average = Math.round((currentValue/maxValue) * 100);
+    const average = Math.floor((currentValue/maxValue) * 100);
     $("#totalAverage").text(average + '%');
     // replaceSubStr($(".progress-average-metric"), "<average>", average);
     const $progressBar = $("#progress_bar");
