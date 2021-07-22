@@ -1,5 +1,5 @@
 const { onActiveNavbar ,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
-const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,hasUserRegistered,updateLocaleLanguagesDropdown} = require('../common/common');
+const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,hasUserRegistered,updateLocaleLanguagesDropdown, updateGoalProgressBar} = require('../common/common');
 const { getLocaleString} = require('../common/utils');
 const {
   setUserModalOnShown,
@@ -73,8 +73,8 @@ function initializeBlock() {
   })
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   showFucntionalCards('ocr', language);
+  updateGoalProgressBar(`/progress/ocr`);
   getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, ()=>{});
-
   const $startRecordBtn = $('#proceed-box');
   const $startRecordBtnTooltip = $startRecordBtn.parent();
 

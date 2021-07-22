@@ -17,6 +17,7 @@ Tags: component
 * Check "Validate" option should be "enabled" on Home page
 
 ## Validate Transcribe card should be enabled when the data is not contributed for Odia language
+* User should store the progress bar for "Suno India"
 * Select Contribution Language as "ଓଡିଆ"
 * Check "Transcribe" option should be "enabled" on Home page
 * Check "Validate" option should be "disabled" on Home page
@@ -29,6 +30,7 @@ Tags: component
 * User click on "edit" field and type "ହାଏ ଓଡିଆ ଓଡିଆ" submit and cancel button should be enabled
 * When user clicks on submit button for Odia language user should see "Thank you for contributing!"
 * When user clicks on back button, user should land on home page
+* Validate the updated progress bar value with "2" for "Suno India"
 * Check "Validate" option should be "enabled" on Home page
 
 ## Validate Transcribe flow
@@ -110,3 +112,14 @@ Tags: component
 * Select Contribution Language as "ગુજરાતી"
 * Check "Transcribe" option should be "disabled" on Home page
 * Check "Validate" option should be "disabled" on Home page
+
+
+## Validate My Badge flow and check Badges
+* Change user name to "Badge User"
+* Select MyBadges from the dropdown
+* "Congratulations" text should be visible
+* "Badge User" text should be visible
+* when user navigates to "dekho-tab" tab user should see badges 
+* when user navigates to "suno-tab" tab user should see badges 
+* when user navigates to "likho-tab" tab user should see badges 
+* When user clicks on back button, user should land on Bhasha Daan home page

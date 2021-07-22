@@ -7,8 +7,8 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     # nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/global-rate-limit: 2000
-    nginx.ingress.kubernetes.io/global-rate-limit-window: 1m
+    nginx.ingress.kubernetes.io/limit-rps: '2000'
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 
 spec:
   tls:

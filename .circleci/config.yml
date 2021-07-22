@@ -86,7 +86,13 @@ jobs:
 
             ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
 
-            ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --cache-control "max-age=1200" --recursive
+            if [ << parameters.env_name >> == 'prod' ]
+            then
+              echo "Deploying to prod"
+              ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/bhashadaan/" --cache-control "max-age=1200" --recursive
+            else
+              ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --cache-control "max-age=1200" --recursive
+            fi 
 
   db_migrate_azure:
     parameters:
@@ -264,6 +270,8 @@ workflows:
             - build_test_ui
 
       - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
           name: push_test_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
@@ -271,6 +279,7 @@ workflows:
           extra-build-args: --build-arg NODE_ENV=test
           repo: ${AZURE_REPO}
           tag: test
+          checkout: false
           requires:
             - build_test_ui
 
@@ -319,6 +328,8 @@ workflows:
             - build_uat_ui
 
       - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
           name: push_uat_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
@@ -326,6 +337,7 @@ workflows:
           extra-build-args: --build-arg NODE_ENV=uat
           repo: ${AZURE_REPO}
           tag: uat
+          checkout: false
           requires:
             - build_uat_ui
 
@@ -364,6 +376,8 @@ workflows:
             - build_prod_ui
 
       - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
           name: push_prod_image
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
@@ -371,6 +385,7 @@ workflows:
           extra-build-args: --build-arg NODE_ENV=prod
           repo: ${AZURE_REPO}
           tag: prod
+          checkout: false
           requires:
             - build_prod_ui
 

@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/css/likhoIndia/validator-prompt.css">
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/mic-speaker-testing.css">
+    <link rel="icon" type="image/png" href="/img/favicon.ico">
     <style>.btn.focus,.btn:focus{outline:0;box-shadow:0 0}</style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -23,7 +24,7 @@
 <body>
 <%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho", PAGE_TITLE:__('Validate'),img:"LikhoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div id="validator-page-content">
-    <div class="container-fluid">
+    <div class="container-fluid padding-top-65">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/extensionBar.ejs %>
             <%- include('../common/breadcrumb.ejs', {MODULE:"Likho", PAGE_TITLE:__('Validate'),img:"LikhoIndiaLogo.svg", homePath:"./home.html"}) %>
@@ -52,9 +53,10 @@
             </div>
             <div class="row m-0 justify-content-center mb-2 mb-md-2 mb-lg-2 d-none no-margin-mobile" id="editor-row">
                 <div class="row justify-content-center col-12 px-0 col-lg-8" id="textarea-row">
-                    <div class="form-group col-lg-12 col-md-5 col-12 m-0 edit-text" id="edit-text" style="border-radius:12px">
+                    <div class="form-group col-lg-12 col-md-5 col-12 m-0 edit-text position-relative" id="edit-text" style="border-radius:12px">
                         <label><%- __('Your Edit') %> ( <span id="edit-language"></span> )</label>
                         <textarea class="form-control edit-area" maxlength="1000" id="edit" rows="3" placeholder="<%= __('Start typing here...')%>" style="resize:none"></textarea>
+                        <%- include ../common/virtualKeyboardBtn.ejs %>
                     </div>
                 </div>
             </div>
@@ -139,9 +141,6 @@
                 </div>
             </div>
 
-        </div>
-        <div class="row my-3 p-3" style="justify-content:flex-end">
-            <%- include ../common/virtualKeyboardBtn.ejs %>
         </div>
         <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
         <%- include('../common/sourceInfo.ejs') %>

@@ -32,7 +32,8 @@ const {
     getAvailableLanguages,
     getTargetInfo,
     userVerify,
-    languageGoal
+    languageGoal,
+    getUserRewards
 } = require('./dbOperations');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
@@ -116,6 +117,7 @@ app.use(function (req, res, next) {
             maxAge: ONE_YEAR,
             httpOnly: true,
             secure: true,
+            sameSite:'none'
         });
     }
     next();
@@ -309,8 +311,6 @@ app.get('/get-locale-strings/:locale', function (req, res) {
         }
         const data = JSON.parse(body);
         const list = [
-            'hrs recorded in',
-            'hrs validated in',
             'hours',
             'minutes',
             'seconds',
@@ -355,7 +355,28 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'English',
             'Bengali',
             'All Languages',
-            'Bhasha Daan: A crowdsourcing initiative for Indian languages'
+            'Bhasha Daan: A crowdsourcing initiative for Indian languages',
+            'Validation so far in <y> - <x>',
+            'Contribution so far in <y> - <x>',
+            'minute(s)',
+            'second(s)',
+            'hour(s)',
+            'Validation',
+            'Contribution',
+            'Transcription (in sentences)',
+            'Recordings (in hours)',
+            'Translation (in sentences)',
+            'Labelled (in images)',
+            'Validation (in sentences)',
+            'Validation (in image labels)',
+            'Contribution (in hours)',
+            'Contribution (no. of images)',
+            'Contribution (no. of translations)',
+            'Contribution (no. of speakers)',
+            'Contribution (no. of sentences)',
+            'translations',
+            'speakers',
+            'images'
         ];
 
         const langSttr = {};
@@ -374,8 +395,10 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
     const module = req.body.module;
     const target_page = req.body.target_page;
     const opinion_rating = req.body.opinion_rating;
+    const recommended = req.body.recommended;
+    const revisit = req.body.revisit;
 
-    insertFeedback(email, feedback, category, language, module, target_page, opinion_rating)
+    insertFeedback(email, feedback, category, language, module, target_page, opinion_rating, recommended, revisit)
         .then(() => {
             console.log('Feedback is inserted into the DB.');
             res.send({
@@ -409,6 +432,18 @@ router.get('/rewards-info', validateRewardsInfoInput, async (req, res) => {
     }
 
     return res.status(404).send('Data not found');
+});
+
+router.get('/user-rewards/:username?', async (req, res) => {
+    const userId = req.cookies.userId || '';
+    const userName = req.params.username || '';
+    try {
+        const rewardData = await getUserRewards(userId, userName);
+        return res.send(rewardData);
+    } catch (error) {
+        console.log(error);
+        res.status(502).send({ statusCode: 502, message: error.message });
+    }
 });
 
 router.get('/language-goal/:type/:language/:source', validateLanguageGoalInput, (req, res) => languageGoal(req, res));

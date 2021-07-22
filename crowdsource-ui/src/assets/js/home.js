@@ -11,6 +11,7 @@ const {
 
 const { getContributedAndTopLanguage,hasUserRegistered } = require('./common');
 const { addToLanguage } = require('../../views/common/languageNavBar/languageNavBar');
+const { updateGoalProgressBar } = require('../../../build/js/common/common');
 const {
     DEFAULT_CON_LANGUAGE,
     TOP_LANGUAGES_BY_HOURS,
@@ -40,12 +41,12 @@ const updateLocaleText = function (total_contributions, total_validations, langu
 
     const localeLanguage = localeStrings[language];
 
-    let hrsRecordedIn = localeStrings['hrs recorded in'];
+    let hrsRecordedIn = localeStrings['Contribution so far in <y> - <x>'];
     hrsRecordedIn = hrsRecordedIn.replace("<x>", formatTime(cHours, cMinutes, cSeconds));
     hrsRecordedIn = hrsRecordedIn.replace("<y>", localeLanguage);
     $say_p_3.text(hrsRecordedIn);
 
-    let hrsValidatedIn = localeStrings['hrs validated in'];
+    let hrsValidatedIn = localeStrings['Validation so far in <y> - <x>'];
     hrsValidatedIn = hrsValidatedIn.replace("<x>", formatTime(vHours, vMinutes, vSeconds));
     hrsValidatedIn = hrsValidatedIn.replace("<y>", localeLanguage);
     $listen_p_3.text(hrsValidatedIn);
@@ -131,9 +132,9 @@ function initializeBlock() {
         localStorage.setItem("selectedType", "contribute");
         if(!hasUserRegistered()){
             $('#userModal').modal('show');
-            setStartRecordingBtnOnClick('../record.html',MODULE.bolo.value);
+            setStartRecordingBtnOnClick('./record.html',MODULE.bolo.value);
         } else {
-            location.href ='../record.html';
+            location.href ='./record.html';
         }
     });
 
@@ -142,9 +143,9 @@ function initializeBlock() {
         localStorage.setItem("selectedType", "validate");
         if(!hasUserRegistered()){
             $('#userModal').modal('show');
-            setStartRecordingBtnOnClick('../validator-page.html',MODULE.bolo.value);
+            setStartRecordingBtnOnClick('./validator-page.html',MODULE.bolo.value);
         } else {
-            location.href ='../validator-page.html';
+            location.href ='./validator-page.html';
         }
     });
 
@@ -196,6 +197,7 @@ function initializeBlock() {
         $listen_p_2.addClass('d-none');
         $listen_container.removeClass('listen-active');
     });
+    updateGoalProgressBar(`/progress/text`);
     getStatsSummary();
 
 }

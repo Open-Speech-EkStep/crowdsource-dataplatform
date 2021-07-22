@@ -22,22 +22,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/sunoIndia/home.css">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/common.css">
+    <link rel="icon" type="image/png" href="/img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="bg-secondary">
 <%- include('../common/header.ejs',{home:"../home.html", bolo:"../boloIndia/home.html", suno:"./home.html",likho:"../likhoIndia/home.html",dekho:"../dekhoIndia/home.html",path:"../"}); %>
-<div class="container-fluid supreme-container bg-body-primary">
+<div class="container-fluid supreme-container bg-body-primary padding-top-65">
     <div class="row">
         <%- include('../common/moduleIntro.ejs',{name:'Suno',intro:'Enrich your language by transcribing audio into text',img:"SunoIndiaLogo.svg"}); %>
     </div>
         <%- include ../common/languageNavBar.ejs %>
-    <div class="m-auto row justify-content-center mt-lg-4 mx-lg-5">
+    <div class="m-auto row justify-content-center mt-lg-4 mx-lg-5 pb-5">
         <%- include('../common/cards.ejs',{left:{h1:__('Transcribe'),h2:__('Type what you hear'),"p1":"",img:"/img/listen2.svg"},right:{h1:__('Validate'),h2:__('Validate text as per the audio'),"p1":"",img:"/img/validate.svg"}}); %>
     </div>
 </div>
 <div class="mx-5" style="background:#43c0d7;height:8px;border-radius:0 0 32px 32px"></div>
 <div class="container-fluid supreme-container bg-secondary">
+    <div class="row mx-0 mt-4">
+        <div class="col-12 col-md-12 col-lg-11 ml-lg-auto pt-5 px-5">
+            <div class="row">
+                <div class="col-lg-11 p-0">
+                    <%- include('../common/thankyouPageProgressBar.ejs', {module: 'Suno' , text:'Hour(s)',language:''}) %>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row" id="contribution_stats">
         <div class="col-12 col-md-12 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
             <h2 class="font-wt-900 site-blue lh-5 font-family-Rowdies">
@@ -59,12 +69,24 @@
     <div class="row pb-5 lazy">
         <div class="col-12 col-md-12 col-lg-11 p-5 ml-lg-auto">
             <div id="bar_charts_container">
-                <h4 class="h4 mb-4 font-family-Rowdies">
-                    <%= __('Your language and top 3 most contributed languages') %>
-                </h4>
-                <div class="d-flex mb-3">
-                    <div name="topLanguageChart" id="hours_chart" value="hours">
-                        <%= __('Hours transcribed and validated') %>
+                <h2 class="h4 mb-4 font-family-Rowdies">
+                    <%= __('Language Tracker') %>
+                </h2>
+                <div class="row mx-0 mb-2">
+                    <div class="col-lg-4 pl-0 col-md-4 col-12">
+                        <div class="font-family-Rowdies">
+                            <h5> <%= __('Your language and top 3 contributed languages') %></h5>
+                         </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 pr-0 col-12 text-right">
+                    <label class="form-check-label mr-5" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" name="topLanguageChart" id="hours_chart" value="hours" checked="checked">
+                            <%= __('By duration of hours') %>
+                        </label>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                        <input class="form-check-input" type="radio" name="topLanguageChart" id="sentences_chart" value="sentences">
+                            <%= __('By number of sentences') %>
+                        </label>
                     </div>
                 </div>
                 <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
@@ -72,7 +94,7 @@
                 </div>
                 <div class="row m-0">
                     <div class="col-lg-8 col-md-8 col-12 p-4 bg-white">
-                <%- include('../common/verticalGraph.ejs',{text:"Total sentences"}) %>
+                <%- include('../common/verticalGraph.ejs',{text: __('Total sentences')}) %>
                 </div>
                 </div>
             </div>

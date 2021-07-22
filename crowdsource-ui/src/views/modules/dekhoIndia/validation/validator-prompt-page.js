@@ -190,7 +190,9 @@ function addListeners() {
   const $skipButton = $('#skip_button');
 
   needChangeButton.on('click',()=>{
-    showElement($('#virtualKeyBoardBtn'));
+    if(!isMobileDevice()) {
+      showElement($('#virtualKeyBoardBtn'));
+    }
     hideElement($('#textarea-row'));
     openEditor();
     const originalText = dekhoIndiaValidator.sentences[currentIndex].contribution;
@@ -203,7 +205,7 @@ function addListeners() {
   $("#edit").focus(function(){
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if(!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false'){
+    if(!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false' && !isMobileDevice()){
       showElement($('#keyboardBox'));
     }
   });
@@ -404,6 +406,9 @@ let selectedReportVal = '';
 const executeOnLoad = function () {
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
+  if(isMobileDevice()) {
+    hideElement($('#virtualKeyBoardBtn'));
+  }
   if(isMobileDevice() || isNotChrome){
     hideElement($('#extension-bar'));
   } else {

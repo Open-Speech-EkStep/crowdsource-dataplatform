@@ -21,7 +21,7 @@ spec:
           value: "prod"
           effect: "NoSchedule"
       containers:
-        - image: vakyansh.azurecr.io/vakyansh:prod
+        - image: IMAGE_NAME
           imagePullPolicy: Always
           name: vakyansh
           env:

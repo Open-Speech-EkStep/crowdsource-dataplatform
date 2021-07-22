@@ -12,7 +12,7 @@ const chartReg = {};
 
 function getOrderedGenderData(formattedGenderData) {
     const orderedGenderData = [];
-    const order = ['Female', 'Male', 'Others', 'Anonymous'];
+    const order = ['Female', 'Male', 'Others', 'Not Specified'];
     order.forEach((gender) => {
         formattedGenderData.forEach((data) => {
             if (gender.toLowerCase() === data.gender.toLowerCase()) {
@@ -34,19 +34,19 @@ function getAgeGroupData(data, key) {
     const years = 'years';
     let formattedData = [];
     data.forEach(item => {
-        item[key] === "" ? item[key] = 'Anonymous' : item[key] = `${item[key]} ${years}`;
+        item[key] === "" ? item[key] = 'Not Specified' : item[key] = `${item[key]} ${years}`;
         formattedData.push(item);
     });
     return formattedData;
 }
 
 const getGenderData = (genderData) => {
-    const genderOrder = ['male', 'female', 'anonymous', 'transgender'];
+    const genderOrder = ['male', 'female', 'not Specified', 'transgender'];
     const formattedGenderData = [];
     genderOrder.forEach(gender => {
         genderData.data.forEach(item => {
             let gType = item.gender;
-            if (item.gender === "") item.gender = 'anonymous';
+            if (item.gender === "") item.gender = 'not Specified';
             if (item.gender.toLowerCase().indexOf('transgender') > -1 || item.gender.toLowerCase().indexOf('rather') > -1) gType = "transgender";
             if (gender === gType) {
                 const genderType = gType.charAt(0).toUpperCase() + gType.slice(1);
@@ -180,8 +180,8 @@ function buildGraphs(language, timeframe) {
                     'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'
                 );
                 fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
-                fetch('../css/notyf.min.css');
-                fetch('../css/record.css');
+                fetch('https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css');
+                fetch('/css/record.css');
             }, 2000);
         } catch (error) {
             console.log(error);
@@ -260,13 +260,16 @@ const drawGenderChart = (chartData) => {
         categoryAxis.renderer.grid.template.disabled = true;
         categoryAxis.renderer.labels.template.fontSize = 12;
         categoryAxis.renderer.grid.template.location = 0;
+        let label = categoryAxis.renderer.labels.template;
+        label.truncate = true;
+        label.maxWidth = 120;
 
         const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
         valueAxis.min = 0;
         valueAxis.renderer.labels.template.fill = '#000';
         valueAxis.renderer.grid.template.strokeDasharray = "3,3";
         valueAxis.renderer.labels.template.fontSize = 12;
-        valueAxis.title.text = 'Contributions (in hours)';
+        valueAxis.title.text = 'Contribution (in hours)';
         valueAxis.title.fontSize = 12;
         // Create series
         const series = chart.series.push(new am4charts.ColumnSeries());
@@ -285,6 +288,21 @@ const drawGenderChart = (chartData) => {
         });
 
         chartReg['gender-chart'] = chart;
+
+        categoryAxis.events.on("sizechanged", function (ev) {
+            var axis = ev.target;
+            var cellWidth = axis.pixelWidth / (axis.endIndex - axis.startIndex);
+            if (cellWidth < axis.renderer.labels.template.maxWidth) {
+              axis.renderer.labels.template.rotation = -45;
+              axis.renderer.labels.template.horizontalCenter = "right";
+              axis.renderer.labels.template.verticalCenter = "middle";
+            }
+            else {
+              axis.renderer.labels.template.rotation = 0;
+              axis.renderer.labels.template.horizontalCenter = "middle";
+              axis.renderer.labels.template.verticalCenter = "top";
+            }
+          });
     });
 };
 
@@ -323,7 +341,7 @@ const drawTimelineChart = (timelineData) => {
         hourAxis.renderer.minGridDistance = 50;
         hourAxis.renderer.grid.template.strokeDasharray = "3,3";
         hourAxis.renderer.labels.template.fill = '#000';
-        hourAxis.title.text = 'Contributions (in hours)';
+        hourAxis.title.text = 'Contribution (in hours)';
         hourAxis.renderer.labels.template.fontSize = 12;
         hourAxis.title.fontSize = 12;
 

@@ -11,7 +11,7 @@ const {
   getBrowserInfo,
   getLocaleString
 } = require('../common/utils');
-const {LIKHO_FROM_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES,LOCALE_STRINGS} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice, updateLikhoLocaleLanguagesDropdown} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
@@ -42,7 +42,7 @@ function getCurrentIndex(lastIndex) {
 }
 
 function showNoSentencesMessage() {
-  $('#spn-validation-language').html(localStorage.getItem(LIKHO_FROM_LANGUAGE));
+  $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
   hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#translation-row'));
@@ -198,7 +198,9 @@ function addListeners() {
   const $skipButton = $('#skip_button');
 
   needChangeButton.on('click', () => {
-    showElement($('#virtualKeyBoardBtn'));
+    if(!isMobileDevice()) {
+      showElement($('#virtualKeyBoardBtn'));
+    }
     showElement($('#editor-row'));
     openEditor();
     const originalText = likhoIndiaValidator.sentences[currentIndex].contribution;
@@ -211,7 +213,7 @@ function addListeners() {
   $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false') {
+    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false' && !isMobileDevice()) {
       showElement($('#keyboardBox'));
     }
   });
@@ -286,7 +288,7 @@ function showThankYou() {
 }
 
 const handleSubmitFeedback = function () {
-  const contributionLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const otherText = $("#other_text").val();
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
@@ -327,7 +329,7 @@ const initializeComponent = () => {
   currentIndex = getCurrentIndex(totalItems - 1);
   const validationData = likhoIndiaValidator.sentences[currentIndex];
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
-  const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
 
   const localeToLanguage = localeStrings[toLanguage];
@@ -364,13 +366,16 @@ let selectedReportVal = '';
 const executeOnLoad = function () {
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
+  if(isMobileDevice()) {
+    hideElement($('#virtualKeyBoardBtn'));
+  }
   if(isMobileDevice() || isNotChrome){
     hideElement($('#extension-bar'));
   } else {
     showOrHideExtensionCloseBtn();
   }
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
-  const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   initializeFeedbackModal();
   setFooterPosition();

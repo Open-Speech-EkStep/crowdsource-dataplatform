@@ -5,6 +5,7 @@ const {
   LOCALE_STRINGS,
   CONTRIBUTION_LANGUAGE,
   TOP_LANGUAGES_BY_HOURS,
+  AGGREGATED_DATA_BY_TOP_LANGUAGE,
   CURRENT_MODULE,
   MODULE
 } = require("../common/constants");
@@ -17,7 +18,7 @@ const {
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
-const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge} = require('../common/common');
+const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 
 const { initializeFeedbackModal } = require('../common/feedback');
 const dekhoCountKey = 'dekhoCount';
@@ -72,9 +73,9 @@ const getLanguageStats = function () {
           CONTRIBUTION_LANGUAGE
         );
         const module = localStorage.getItem(CURRENT_MODULE);
-        const languages = getContributedAndTopLanguage(module == MODULE.likho.value || module == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, MODULE.dekho.value);
-        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        showByHoursChartThankyouPage(MODULE.dekho.value);
+        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.dekho.value, 'total_contribution_count','total_contributions');
+        localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
+        showByHoursChartThankyouPage(MODULE.dekho.value, "thankyou");
 
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
@@ -159,7 +160,23 @@ function executeOnLoad() {
     if (contributionLanguage) {
       updateLocaleLanguagesDropdown(contributionLanguage);
     }
+
+    const localStrings = JSON.parse(
+      localStorage.getItem(LOCALE_STRINGS)
+    );
+
+    const localeLanguageStr = localStrings[contributionLanguage];
+    $("#metric-language").text(localeLanguageStr);
+    // replaceSubStr($(".progress-average-metric"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopWeb"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopWeb"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageNotInTopMob"), "<language>", localeLanguageStr);
+    replaceSubStr($("#languageInTopMob"), "<language>", localeLanguageStr);
+    replaceSubStr($(".x-axis-label"), "<language>", localeLanguageStr);
+    $("#conLanWhenGetBadge").html(localeLanguageStr)
+
     getLanguageStats();
+    updateGoalProgressBar(`/progress/ocr/${contributionLanguage}/contribute`)
   }
 }
 
@@ -169,6 +186,7 @@ $(document).ready(function () {
     downloadPdf($(this).attr("data-badge"));
   });
   localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
+  localStorage.setItem("selectedType","contribute");
   initializeFeedbackModal();
   getLocaleString()
     .then((data) => {

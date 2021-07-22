@@ -26,8 +26,9 @@ const checkGivingFeedbackFor = () => {
         });
 };
 
-const addColorPathSVG = (element, color) => {
-    $(element).attr("stroke", color);            
+const addColorPathSVG = (element, color, svg) => {
+    $(element).attr("stroke", color);   
+    $(svg).css("background-color",color);         
 };
 
 const removeShadowSVG = (element) => {
@@ -39,11 +40,11 @@ const removeShadowSVG = (element) => {
 };
 
 const resetSVG = () => {
-    addColorPathSVG("#very_sad_svg_boundary", "#FCE6E6");
-    addColorPathSVG("#sad_svg_boundary", "#FDF4EC");
-    addColorPathSVG("#neutral_svg_boundary", "#E6F2FF");
-    addColorPathSVG("#happy_svg_boundary", "#EDFBEB");
-    addColorPathSVG("#very_happy_svg_boundary", "#DFEDDA");
+    addColorPathSVG("#very_sad_svg_boundary", "#FCE6E6", "#very_sad-svg");
+    addColorPathSVG("#sad_svg_boundary", "#FDF4EC", "#sad-svg");
+    addColorPathSVG("#neutral_svg_boundary", "#E6F2FF", "#neutral-svg");
+    addColorPathSVG("#happy_svg_boundary", "#EDFBEB", "#happy-svg");
+    addColorPathSVG("#very_happy_svg_boundary", "#DFEDDA", "#very-happy-svg");
 
     removeShadowSVG('#very_sad_label');
     removeShadowSVG('#sad_label');
@@ -52,7 +53,8 @@ const resetSVG = () => {
     removeShadowSVG('#very_happy_label');
 }
 
-const selectEmoji = (element, stroke, rgba) => {
+const selectEmoji = (element, stroke, rgba, svg) => {
+    $(svg).css("background-color",stroke);
     $(element).find("path, polygon, circle").attr("stroke", stroke);
     $(element).css('-webkit-box-shadow', `0px 4px 12px ${rgba}`);
     $(element).css('-moz-box-shadow', `0px 4px 12px ${rgba}`);
@@ -73,23 +75,23 @@ const updateOpinionSVGColor = () => {
 
             if($('input[name="opinionRadio"]:checked').val() === 'very_sad')
             {
-                selectEmoji("#very_sad_label", "#E30606", "rgba(227, 6, 6, 0.5)");
+                selectEmoji("#very_sad_label", "#E30606", "rgba(227, 6, 6, 0.5)","#very_sad-svg");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'sad')
             {
-                selectEmoji("#sad_label", "#EA913F", "rgba(234, 145, 63, 0.5)");
+                selectEmoji("#sad_label", "#EA913F", "rgba(234, 145, 63, 0.5)","#sad-svg");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'neutral')
             {
-                selectEmoji("#neutral_label", "#007BFF", "rgba(0, 123, 255, 0.5)");
+                selectEmoji("#neutral_label", "#007BFF", "rgba(0, 123, 255, 0.5)","#neutral-svg");
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'happy')
             {
-                selectEmoji("#happy_label", "#4ED738", "rgba(78, 215, 56, 0.5)")
+                selectEmoji("#happy_label", "#4ED738", "rgba(78, 215, 56, 0.5)","#happy-svg")
             }
             else if($('input[name="opinionRadio"]:checked').val() === 'very_happy')
             {
-                selectEmoji("#very_happy_label", "#2A8908", "rgba(42, 137, 8, 0.5)")
+                selectEmoji("#very_happy_label", "#2A8908", "rgba(42, 137, 8, 0.5)","#very-happy-svg")
             }
         });
     });
@@ -100,7 +102,7 @@ const updateSelectPageWhenModuleChanges = () => {
     $('input[name="moduleSelectRadio"]').on('change', function() {
         $("#select_page_id").find('option').remove().end();
         SELECT_PAGE_OPTIONS_FEEDBACK.forEach((data) => {
-            if($('input[name="moduleSelectRadio"]:checked').val() === data.module)
+            if($('input[name="moduleSelectRadio"]:checked').val() == data.module)
             {
                 data.pages.forEach((item) => {
                     $("#select_page_id").append($('<option>', {value: item, text: item}));
@@ -110,7 +112,7 @@ const updateSelectPageWhenModuleChanges = () => {
     });
 
     SELECT_PAGE_OPTIONS_FEEDBACK.forEach((data) => {
-        if($('input[name="moduleSelectRadio"]:checked').val() === data.module)
+        if($('input[name="moduleSelectRadio"]:checked').val() == data.module)
         {
             data.pages.forEach((item) => {
                 $("#select_page_id").append($('<option>', {value: item, text: item}));
@@ -159,6 +161,13 @@ const handleFeedbackSubmit = () => {
     var category = $("#category_id").val();
     var feedback_description = $("#feedback_description").val();
     var language = localStorage.getItem("contributionLanguage");
+    const recommenedRadioBtn = document.querySelectorAll('input[name = "recommend"]');
+    const checkedStatus = Array.from(recommenedRadioBtn).filter((el) => el.checked);
+    let recommended = checkedStatus.length ? checkedStatus[0].value : '';
+
+    const revisitRadioBtn = document.querySelectorAll('input[name = "revisit"]');
+    const revisitStatus = Array.from(revisitRadioBtn).filter((el) => el.checked);
+    let revisit = revisitStatus.length ? revisitStatus[0].value : '';
     if(language === null){
         ALL_LANGUAGES.forEach((lang) => {
             if(lang.id === localStorage.getItem("i18n")) { language = lang.value; }});
@@ -190,6 +199,8 @@ const handleFeedbackSubmit = () => {
     fd.append('module', moduleType);
     fd.append('target_page', targetPage);
     fd.append('opinion_rating', rating);
+    fd.append('recommended', recommended);
+    fd.append('revisit', revisit);
     fetch("/feedback", {
         method: "POST",
         credentials: 'include',
@@ -198,7 +209,7 @@ const handleFeedbackSubmit = () => {
     })
     .then((res) => res.json())
     .then((response) => {
-        if(response.statusCode === 200){
+        if(response.statusCode == 200){
             $("#feedback_modal").modal("hide");
             $("#feedback_thanku_modal").modal("show");  
             resetFeedback();      
@@ -213,6 +224,14 @@ const resetFeedback = () => {
     const opinion = document.querySelector('input[name="opinionRadio"]:checked');
     const category = document.querySelector("#category_id option[value='category']");
     const feedback = document.querySelector("#feedback_description");
+    const recommendedFeedback = document.querySelector(
+        'input[name = "recommend"]:checked'
+      );
+      const revisitFeedback = document.querySelector(
+        'input[name = "revisit"]:checked'
+      );
+      if (recommendedFeedback) recommendedFeedback.checked = false;
+      if (revisitFeedback) revisitFeedback.checked = false;
 
     if(category) category.selected = true;
     feedback.value = '';

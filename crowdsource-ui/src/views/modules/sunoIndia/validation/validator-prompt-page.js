@@ -321,7 +321,9 @@ function addListeners() {
   const $skipButton = $(skipButton);
 
   needChangeButton.on('click', () => {
-    showElement($('#virtualKeyBoardBtn'));
+    if(!isMobileDevice())  {
+      showElement($('#virtualKeyBoardBtn'));
+    }
     hideElement($('#sentences-row'));
     openEditor();
     const originalText = sunoIndiaValidator.sentences[currentIndex].contribution;
@@ -335,7 +337,7 @@ function addListeners() {
   $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false') {
+    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false' && !isMobileDevice()) {
       showElement($('#keyboardBox'));
     }
   });
@@ -562,6 +564,9 @@ const detectDevice = () => {
 const executeOnLoad = function () {
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
+  if(isMobileDevice()) {
+    hideElement($('#virtualKeyBoardBtn'));
+  }
   if (isMobileDevice() || isNotChrome) {
     hideElement($('#extension-bar'));
   } else {

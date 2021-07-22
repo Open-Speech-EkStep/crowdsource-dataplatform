@@ -199,7 +199,7 @@ const getAgeGroupsData = 'select data."age_group", count (*) from (select con."a
 
 const getGenderData = 'select data."gender", count (*) from (select con."gender" from dataset_row s inner join "contributions" cont on s."dataset_row_id" = cont."dataset_row_id" and "action"=\'completed\' inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."gender", con.user_name, con.contributor_identifier) as data group by data."gender";'
 
-const feedbackInsertion = 'Insert into feedbacks (email, feedback, category, language, module, target_page, opinion_rating) values ($1,$2,$3,$4,$5,$6,$7);'
+const feedbackInsertion = 'Insert into feedbacks (email, feedback, category, language, module, target_page, opinion_rating, recommended, revisit) values ($1,$2,$3,$4,$5,$6,$7,$8,$9);'
 
 const getPathFromContribution = `select media ->> 'data' as path from contributions where contribution_id = $1;`
 
@@ -323,6 +323,12 @@ const getDataRowInfo = `select type, media->>'language' as language from dataset
 
 const userVerifyQuery = `select id from users where LOWER(username) = LOWER($1) and role = $2`;
 
+const getUserRewardsQuery = `select r.generated_at, r.generated_badge_id, r.contributor_id, rm.language, rm.milestone, rm.type, rm.category, rc.grade 
+  from rewards r
+  inner join reward_milestones rm on r.milestone_id = rm.milestone_id
+  inner join reward_catalogue rc on rm.reward_catalogue_id=rc.id
+  where contributor_id=$1`;
+
 module.exports = {
   userVerifyQuery,
   unassignIncompleteMedia,
@@ -377,5 +383,6 @@ module.exports = {
   getDatasetLanguagesQuery,
   hasTargetQuery,
   isAllContributedQuery,
-  getDataRowInfo
+  getDataRowInfo,
+  getUserRewardsQuery
 }

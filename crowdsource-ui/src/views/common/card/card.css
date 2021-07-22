@@ -1,124 +1,117 @@
 @media screen and (max-width: 1024px) {
-    .warning-mesg p{
-        font-size: 12px;
-    }
+  .warning-mesg p{
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 400px) {
-    .warning-mesg p{
-        font-size: 11px !important;
-    }
+  .warning-mesg p{
+    font-size: 11px !important;
+  }
 }
 
 @media screen and (max-width: 991px) {
-    #start_recording, #start_validating {
-        width: 120px;
-    }
+  #start_recording, #start_validating {
+    width: 120px;
+  }
 
-    .left-active #left-p-2, .right-active #right-p-2 {
-        position: relative !important;
-        margin-top: 2rem;
-    }
+  .left-active #left-p-2, .right-active #right-p-2 {
+    position: relative !important;
+    margin-top: 2rem;
+  }
 }
 
 @media screen and (max-width: 768px) {
-    #start_recording, #start_validating {
-        width: 100px;
-    }
-    .left-active #left-p-2, .right-active #right-p-2 {
-        position: relative !important;
-        margin-top: 2rem;
-    }
-    .card {
-        min-height: 190px !important;
-    }
+  #start_recording, #start_validating {
+    width: 100px;
+  }
+  .left-active #left-p-2, .right-active #right-p-2 {
+    position: relative !important;
+    margin-top: 2rem;
+  }
+  .card {
+    min-height: 190px !important;
+  }
 }
 
 @media (min-width: 992px) {
-    .card{
-        height: 400px;
-    }
+  .card{
+    height: 400px;
+  }
 }
 @media screen and (min-width: 992px) and (max-width: 1279px) {
-    .card img {
-        width: 7rem;
-    }
-    #left-p-2 {
-        bottom: 0rem !important;
-    }
-    #right-p-2 {
-        bottom: 0rem !important;
-    }
+  .card img {
+    width: 7rem;
+  }
+  #left-p-2 {
+    bottom: 0 !important;
+  }
+  #right-p-2 {
+    bottom: 0 !important;
+  }
 }
 
 .cursor-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 @keyframes spin {
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .left-logo{
-    background-color: #42B2C6;
-    border-radius: 50%;
-    box-shadow: 0px 0px 12px 8px rgb(105 203 220 / 40%);
-    justify-self: right;
-    width: 120px;
-    height: auto;
+  background-color: #42b2c6;
+  border-radius: 50%;
+  box-shadow: 0 0 12px 8px rgb(105 203 220 / 40%);
+  justify-self: right;
+  width: 120px;
+  height: auto;
 }
 
 .right-logo{
-    background:#3e6dd4;
-    border-radius: 50%;
-    box-shadow: 0px 0px 12px 8px rgba(102, 176, 255, 0.4);
-    justify-self: right;
-    width: 120px;
-    height: auto;
+  background:#3e6dd4;
+  border-radius: 50%;
+  box-shadow: 0 0 12px 8px rgba(102, 176, 255, 0.4);
+  justify-self: right;
+  width: 120px;
+  height: auto;
 }
 
 .card{
-    background-position: center;
-    background-size: auto;
-    background-image: url(/img/tri_color.svg) !important;
-    mix-blend-mode: normal;
-    box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    min-height: 190px;
-    background-repeat: no-repeat;
-    box-shadow: rgb(67 192 215) 0px 8px 0px, rgb(0 0 0 / 10%) 0px 0px 32px;
+  background-position: center;
+  background-size: auto;
+  background-image: url('/img/tri_color.svg') !important;
+  mix-blend-mode: normal;
+  border-radius: 20px;
+  min-height: 190px;
+  background-repeat: no-repeat;
+  box-shadow: rgb(67 192 215) 0 8px 0, rgb(0 0 0 / 10%) 0 0 32px;
 }
 
 .min-height-190 {
-    min-height: 190px !important;
+  min-height: 190px !important;
 }
 
 @media screen and (max-width: 480px) {
-    #start_recording, #start_validating {
-        width: 85px;
-    }
-    .left-active #left-p-2, .right-active #right-p-2 {
-        position: relative !important;
-        margin-top: 2rem;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    warning-mesg p {
-        font-size: 10px;
-    }
+  #start_recording, #start_validating {
+    width: 85px;
+  }
+  .left-active #left-p-2, .right-active #right-p-2 {
+    position: relative !important;
+    margin-top: 2rem;
+  }
 }
 
 @media screen and (max-width: 320px) {
-    #start_recording, #start_validating {
-        width: 64px;
-    }
+  #start_recording, #start_validating {
+    width: 64px;
+  }
 }
 
 .card_container.col-10{
-    flex: 0 0 90%;
-    max-width: 90%;
+  flex: 0 0 90%;
+  max-width: 90%;
 }
 

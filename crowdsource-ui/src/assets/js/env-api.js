@@ -5,7 +5,8 @@ const env_vars = {
      feedback_top_component: '@@feedbackTopComponent',
      enabled_languages: '@@enabled_languages',
      show_data_source: '@@showDataSource',
-     base_url: '@@bhashadaanLogoUrl'
+     base_url: '@@bhashadaanLogoUrl',
+     context_root: '@@contextRoot'
 };
 
 module.exports = env_vars;

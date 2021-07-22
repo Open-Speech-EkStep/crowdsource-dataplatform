@@ -193,7 +193,59 @@
                     </div>
                 </div>
                 <textarea name="feedback_textarea" maxlength="1000" id="feedback_description" class="w-100 p-3 other-reason mb-4 label-color-feedback" rows="3" placeholder="<%= __('Type here...')%>" style="background-color:#fff;border:1px solid rgba(149,149,149,.6)"></textarea>
-                <div class="d-flex justify-content-center">
+
+                <div class="form-group mb-4">
+                    <label for="recommend" class="form-label label-color-feedback">
+                        <%= __('Would you recommend Bhasha Daan to your friends & family?') %>  <span>(<%= __('optional')%>)</span>
+                    </label>
+                    <div class="justify-content-between">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="recommend" id="yes-check" value="yes">
+                            <label class="form-check-label mx-2" for="yes-check">
+                                <%= __('Yes') %>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="recommend" id="no-check" value="no">
+                            <label class="form-check-label mx-2" for="no-check">
+                                <%= __('No') %>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="recommend" id="maybe-check" value="maybe">
+                            <label class="form-check-label mx-2" for="maybe-check">
+                                <%= __('Maybe') %>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="revisit" class="form-label label-color-feedback">
+                        <%= __('Would you revisit Bhasha Daan?') %>  <span>(<%= __('optional')%>)</span>
+                    </label>
+                    <div class="justify-content-between">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="revisit" id="revisit-yes-check" value="yes">
+                            <label class="form-check-label mx-2" for="yes-check">
+                                <%= __('Yes') %>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="revisit" id="revisit-no-check" value="no">
+                            <label class="form-check-label mx-2" for="no-check">
+                                <%= __('No') %>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="revisit" id="revisit-maybe-check" value="maybe">
+                            <label class="form-check-label mx-2" for="maybe-check">
+                                <%= __('Maybe') %>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-5">
                     <button id="submit_btn" class="btn btn-primary submit-btn-feedback" disabled="disabled">
                         <%= __('Submit')%>
                     </button>
@@ -202,6 +254,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="feedback_thanku_modal" tabindex="-1" aria-labelledby="FeedbackThankYou" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-md modal-dialog-centered">

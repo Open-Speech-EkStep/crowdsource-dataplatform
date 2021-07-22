@@ -22,22 +22,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/sunoIndia/home.css">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/common.css">
+    <link rel="icon" type="image/png" href="/img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="bg-secondary">
 <%- include('../common/header.ejs',{home:"../home.html", bolo:"../boloIndia/home.html", suno:"../sunoIndia/home.html",likho:"../likhoIndia/home.html",dekho:"./home.html",path:"../"}); %>
-<div class="container-fluid supreme-container bg-body-primary">
+<div class="container-fluid supreme-container bg-body-primary padding-top-65">
     <div class="row">
         <%- include('../common/moduleIntro.ejs',{name:'Dekho',intro:'Enrich your language by labelling images',img:"DekhoIndiaLogo.svg"}); %>
     </div>
         <%- include ../common/languageNavBar.ejs %>
-    <div class="m-auto row justify-content-center mt-lg-4 mx-lg-5">
+    <div class="m-auto row justify-content-center mt-lg-4 mx-lg-5 pb-5">
         <%- include('../common/cards.ejs',{left:{h1:__('Label'),h2:__('Type the text as per the image'),"p1":"",img:"/img/look.svg"},right:{h1:__('Validate'),h2:__('Validate the text, labelled by others, as per the image'),"p1":"",img:"/img/validate.svg"}}); %>
     </div>
 </div>
 <div class="mx-5" style="background:#43c0d7;height:8px;border-radius:0 0 32px 32px"></div>
 <div class="container-fluid supreme-container bg-secondary">
+    <div class="row mx-0 mt-4">
+        <div class="col-12 col-md-12 col-lg-11 ml-lg-auto pt-5 px-5">
+            <div class="row">
+                <div class="col-lg-11 p-0">
+                    <%- include('../common/thankyouPageProgressBar.ejs', {module: 'Dekho' , text:'Image(s)',language:''}) %>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row" id="contribution_stats">
         <div class="col-12 col-md-12 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
             <h2 class="font-wt-900 site-blue lh-5 font-family-Rowdies">
@@ -72,7 +82,7 @@
                 </div>
                 <div class="row m-0">
                     <div class="col-lg-8 col-md-8 col-12 p-4 bg-white">
-                        <%- include('../common/verticalGraph.ejs',{text:"Total images"}) %>
+                        <%- include('../common/verticalGraph.ejs',{text: __('Total images')}) %>
                     </div>
                 </div>
 

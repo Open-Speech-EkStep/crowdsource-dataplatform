@@ -10,7 +10,7 @@ const {
   reportSentenceOrRecording,
   getDeviceInfo, getBrowserInfo
 } = require('../common/utils');
-const { LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, ALL_LANGUAGES } = require('../common/constants');
+const {LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, ALL_LANGUAGES, CONTRIBUTION_LANGUAGE } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, isMobileDevice, updateLikhoLocaleLanguagesDropdown, showOrHideExtensionCloseBtn } = require('../common/common');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
@@ -142,7 +142,7 @@ function addListeners() {
   $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false') {
+    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false' && !isMobileDevice()) {
       showElement($('#keyboardBox'));
     }
   });
@@ -226,7 +226,7 @@ function showThankYou() {
 }
 
 function showNoSentencesMessage() {
-  $('#spn-validation-language').html(localStorage.getItem(LIKHO_FROM_LANGUAGE));
+  $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
   hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#virtualKeyBoardBtn'));
@@ -297,7 +297,7 @@ const initialize = function () {
   currentIndex = getCurrentIndex(totalItems - 1);
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
 
-  const language = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   const fromLanguage = language;
 
@@ -359,7 +359,7 @@ function executeOnLoad() {
   const $errorModal = $('#errorModal');
   const $loader = $('#loader');
   const $pageContent = $('#page-content');
-  const fromLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const localeToLanguage = localeStrings[toLanguage];
@@ -488,6 +488,9 @@ function executeOnLoad() {
 $(document).ready(() => {
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
+  if(isMobileDevice()) {
+    hideElement($('#virtualKeyBoardBtn'));
+  }
   if(isMobileDevice() || isNotChrome){
     hideElement($('#extension-bar'));
   } else {

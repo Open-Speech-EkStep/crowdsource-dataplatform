@@ -1,34 +1,34 @@
 #module-intro-row-cover{
-    background-image: url(/img/characters.svg);
-    background-position: right;
-    background-repeat: no-repeat;
-    background-size: initial;
+  background-image: url('/img/characters.svg');
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: initial;
 }
 
 @media (min-width: 769px) and  (max-width: 1024px){
-    #moduleLogo img{
-        width: 70px !important;
-        height: 80px !important;
-    }
+  #moduleLogo img{
+    width: 70px !important;
+    height: 80px !important;
+  }
 }
 
 @media (max-width: 767px) {
-    .para-font {
-        font-size: 12px;
-    }
+  .para-font {
+    font-size: 12px;
+  }
 
-    #moduleLogo img{
-        width: 55px;
-        height: 50px;
-    }
-    .module-intro-heading{
-        font-size: 20px;
-    }
+  #moduleLogo img{
+    width: 55px;
+    height: 50px;
+  }
+  .module-intro-heading{
+    font-size: 20px;
+  }
 
 }
 
 @media (min-width: 767px) {
-    .para-font {
-        font-size: 20px;
-    }
+  .para-font {
+    font-size: 20px;
+  }
 }

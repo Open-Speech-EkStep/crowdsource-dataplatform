@@ -4,7 +4,7 @@ const { setStartRecordingBtnOnClick, setSpeakerDetails, setUserNameOnInputFocus,
 const { toggleFooterPosition, getLocaleString } = require('../common/utils');
 const { hasUserRegistered , updateLikhoLocaleLanguagesDropdown} = require('../common/common');
 const platform = require('../common/platform')
-const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE,LIKHO_FROM_LANGUAGE,SPEAKER_DETAILS_KEY,
+const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE,SPEAKER_DETAILS_KEY,CONTRIBUTION_LANGUAGE,
     LIKHO_TO_LANGUAGE } = require('../common/constants');
 const fetch = require('../common/fetch');
 
@@ -119,7 +119,7 @@ const executeOnLoad = function () {
     const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
     updateLanguage('');
-    const contributionLanguage = localStorage.getItem(LIKHO_FROM_LANGUAGE);
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const contributionLanguage2 = localStorage.getItem(LIKHO_TO_LANGUAGE);
     if(contributionLanguage) {
         updateLikhoLocaleLanguagesDropdown(contributionLanguage, contributionLanguage2);
@@ -184,7 +184,7 @@ const executeOnLoad = function () {
     $("#contribute-now").on('click', (e) => {
         localStorage.setItem("i18n", "en");
         sentenceLanguage = languageToRecord;
-        localStorage.setItem(LIKHO_FROM_LANGUAGE, fromLanguage);
+        localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
         localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
         localStorage.setItem("selectedType", "contribute");
         if(!hasUserRegistered()){

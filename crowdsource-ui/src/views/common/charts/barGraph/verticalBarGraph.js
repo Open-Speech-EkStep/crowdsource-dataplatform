@@ -56,6 +56,21 @@ const drawGenderChart = (chartData) => {
     });
 
     chartReg['gender-chart'] = chart;
+
+    categoryAxis.events.on("sizechanged", function (ev) {
+      var axis = ev.target;
+      var cellWidth = axis.pixelWidth / (axis.endIndex - axis.startIndex);
+      if (cellWidth < axis.renderer.labels.template.maxWidth) {
+        axis.renderer.labels.template.rotation = -45;
+        axis.renderer.labels.template.horizontalCenter = "right";
+        axis.renderer.labels.template.verticalCenter = "middle";
+      }
+      else {
+        axis.renderer.labels.template.rotation = 0;
+        axis.renderer.labels.template.horizontalCenter = "middle";
+        axis.renderer.labels.template.verticalCenter = "top";
+      }
+    });
   });
 };
 
@@ -85,7 +100,7 @@ function buildGraphs(language, timeframe) {
           'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'
         );
         fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
-        fetch('/css/notyf.min.css');
+        fetch('https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css');
         fetch('/css/record.css');
       }, 2000);
     } catch (error) {
@@ -99,12 +114,12 @@ function buildGraphs(language, timeframe) {
 }
 
 const getGenderData = (genderData) => {
-  const genderOrder = ['male', 'female', 'anonymous', 'transgender'];
+  const genderOrder = ['male', 'female', 'not Specified', 'transgender'];
   const formattedGenderData = [];
   genderOrder.forEach(gender => {
       genderData.data.forEach(item => {
           let gType = item.gender;
-          if (item.gender === "") item.gender = 'anonymous';
+            if (item.gender === "") item.gender = 'not Specified';
           if (item.gender.toLowerCase().indexOf('transgender') > -1 || item.gender.toLowerCase().indexOf('rather') > -1) gType = "transgender";
           if (gender === gType) {
               const genderType = gType.charAt(0).toUpperCase() + gType.slice(1);

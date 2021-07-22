@@ -4,7 +4,7 @@ const {stringToHTML, flushPromises} = require('./utils');
 const {fetchDetail, getSpeakersData,isLanguageAvailable,updateLanguage} = require('../src/assets/js/dashboard');
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../src/views/dashboard.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../build/views/boloIndia/dashboard.ejs`, 'UTF-8')
 );
 
 const charts = require('../src/assets/js/draw-chart');

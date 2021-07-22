@@ -44,7 +44,7 @@ function buildGraphs(language, timeframe) {
           'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'
         );
         fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
-        fetch('../css/notyf.min.css');
+        fetch('https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css');
         fetch('../css/record.css');
       }, 2000);
     } catch (error) {

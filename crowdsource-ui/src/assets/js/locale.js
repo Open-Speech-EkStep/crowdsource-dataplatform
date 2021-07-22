@@ -1,6 +1,6 @@
 const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
 const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE } = require("./constants");
-const { base_url } = require('./env-api');
+const { base_url,context_root } = require('./env-api');
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');
@@ -27,10 +27,10 @@ const changeLocale = function (locale) {
     localStorage.setItem("i18n", locale);
     const module = localStorage.getItem(CURRENT_MODULE);
     if(module == 'home'){
-        location.href = `/${locale}/${currentPage}`;
+        location.href = `${context_root}/${locale}/${currentPage}`;
     }
     else {
-        location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
+        location.href = `${context_root}/${locale}/${MODULE[module].url}/${currentPage}`;
     }
 }
 

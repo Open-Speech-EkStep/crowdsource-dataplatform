@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const { conn, insertMaster } = require('../common/dbUtils')
 
-const ingest1 = async (datasetId, datasetType, client, datset_base_path, language, png_paths, paired) => {
+const ingest1 = async (datasetId, datasetType, client, datset_base_path, language, png_paths, paired, profanity_check_required) => {
     const values = png_paths.map(path => {
         const media = {
             "data": `${datset_base_path}/${path}`,
@@ -12,12 +12,13 @@ const ingest1 = async (datasetId, datasetType, client, datset_base_path, languag
         return `('medium', '${datasetType}',
                 '${JSON.stringify(media)}', 
                 ${datasetId},
-                ${paired === 'paired' ? '\'contributed\'' : null}
+                ${paired === 'paired' ? '\'contributed\'' : null},
+                ${profanity_check_required == 'false' ? false : null}
             )`
     })
     // console.log('ingest1', values)
     const insert_rows = `insert into dataset_row 
-    ( difficulty_level, type, media, master_dataset_id, state ) 
+    ( difficulty_level, type, media, master_dataset_id, state, is_profane) 
     values ${values} RETURNING dataset_row_id`
 
     const dataset_row_result = await client.query(`${insert_rows}`)
@@ -93,7 +94,8 @@ const parse2 = (localDatasetPath, files) => {
     return dict
 }
 
-const start = async (connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired) => {
+const start = async (connectionString, localDatasetPath, params,
+    remote_dataset_bundle_path, basePath, language, paired, profanity_check_required) => {
     const client = conn(connectionString)
     try {
         const files = fs.readFileSync('./ocr_files.txt', 'utf8').split('\n')
@@ -104,7 +106,7 @@ const start = async (connectionString, localDatasetPath, params, remote_dataset_
         console.log('Inserting in dataset_rows')
 
         png_paths = parse1(files)
-        const imageToIdDict = await ingest1(id, 'ocr', client, `${basePath}/${language}`, language, png_paths, paired)
+        const imageToIdDict = await ingest1(id, 'ocr', client, `${basePath}/${language}`, language, png_paths, paired, profanity_check_required)
         // console.log('Total dataset rows:', imageToIdDict.size())
 
         if (paired === 'paired') {
@@ -130,11 +132,12 @@ const main = () => {
 
     const paired = process.argv[6]
     const connectionString = process.argv[7]
+    const profanity_check_required = process.argv[8]
 
     console.log(basePath, language)
 
     params = JSON.parse(fs.readFileSync(`${localDatasetPath}/params.json`, 'utf-8'))
-    start(connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired)
+    start(connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired, profanity_check_required)
 }
 
 main()

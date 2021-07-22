@@ -1,16 +1,21 @@
 const {
-  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS,LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE,SPEAKER_DETAILS_KEY,DEFAULT_CON_LANGUAGE
+  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE,SPEAKER_DETAILS_KEY,DEFAULT_CON_LANGUAGE,AGGREGATED_DATA_BY_TOP_LANGUAGE
 } = require('./constants');
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { constructChart } = require('./horizontalBarGraph');
 const { changeLocale,showLanguagePopup } = require('./locale');
 const fetch = require('./fetch');
+const {performAPIRequest} = require('./utils');
+const {onChangeUser, onOpenUserDropDown, showUserProfile} = require('./header');
+const { setUserModalOnShown,
+  setUserNameOnInputFocus,
+  setGenderRadioButtonOnClick}  = require("./speakerDetails");
 
 const getContributedAndTopLanguage = (topLanguagesData, type) => {
   if(topLanguagesData  && topLanguagesData.length) {
     topLanguagesData = topLanguagesData.sort((a, b) => Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1)
     const topLanguagesResult = [...topLanguagesData];
-    const contributedLanguage = type == "likho" ? localStorage.getItem(LIKHO_FROM_LANGUAGE) + '-' + localStorage.getItem(LIKHO_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    const contributedLanguage = type == "likho" ? localStorage.getItem(CONTRIBUTION_LANGUAGE) + '-' + localStorage.getItem(LIKHO_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const topLanguageArray = [];
     let topLanguages = [];
     const contributedLanguageHours = topLanguagesData.find(item => item.language == contributedLanguage);
@@ -35,27 +40,52 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
   }
 }
 
-function showByHoursChart(type) {
-  const chartReg = {};
-  if (chartReg["chart"]) {
-    chartReg["chart"].dispose();
+const getTopLanguage = (topLanguagesData, type, keyInSentence,keyInHrs) => {
+  if(topLanguagesData  && topLanguagesData.length) {
+    topLanguagesData = topLanguagesData.sort((a, b) => Number(a[keyInSentence]) > Number(b[keyInSentence]) ? -1 : 1)
+    const topLanguagesResult = [...topLanguagesData];
+    const contributedLanguage = type == "likho" ? localStorage.getItem(CONTRIBUTION_LANGUAGE) + '-' + localStorage.getItem(LIKHO_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    const topLanguageArray = [];
+    let topLanguages = [];
+    const contributedLanguageHours = topLanguagesData.find(item => item.language == contributedLanguage);
+    if (contributedLanguageHours && contributedLanguageHours.language != topLanguagesData[0].language) {
+      topLanguageArray.push(contributedLanguageHours)
+      let remainingLanguage = topLanguagesData.filter(item => item.language !== contributedLanguage);
+      remainingLanguage = type == "dekho" || type == "likho" ? remainingLanguage.sort((a, b) => Number(a[keyInSentence]) > Number(b[keyInSentence]) ? -1 : 1) : remainingLanguage.sort((a, b) => Number(a[keyInHrs]) > Number(b[keyInHrs]) ? -1 : 1);
+      topLanguages = remainingLanguage.slice(0, 3);
+    } else {
+      if( contributedLanguage != topLanguagesData[0].language) {
+        if(type == "suno" || type == "bolo") {
+          topLanguageArray.push({ language: contributedLanguage,  [keyInHrs]: "0.000" });
+        } else {
+          topLanguageArray.push({ language: contributedLanguage,  [keyInSentence]: "0" });
+        }
+      }
+      topLanguages = topLanguagesResult.sort((a, b) => Number(a[keyInSentence]) > Number(b[keyInSentence]) ? -1 : 1).slice(0, 3);
+    }
+    return topLanguageArray.concat(topLanguages).reverse();
+  } else {
+    return [];
   }
-  const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-  drawTopLanguageChart(JSON.parse(topLanguagesByHoursData), type)
 }
 
-function showByHoursChartThankyouPage(type) {
+function showByHoursChart(type, page, dataType) {
   const chartReg = {};
   if (chartReg["chart"]) {
     chartReg["chart"].dispose();
   }
   const topLanguagesByHoursData = localStorage.getItem(TOP_LANGUAGES_BY_HOURS);
-  constructChart(
-    JSON.parse(topLanguagesByHoursData),
-    type == "suno" || type == "bolo" ? "total_contributions" : "total_contribution_count",
-    "language",
-    type
-  );
+  drawTopLanguageChart(JSON.parse(topLanguagesByHoursData), type, dataType, page)
+}
+
+function showByHoursChartThankyouPage(type, page, dataType='') {
+  const chartReg = {};
+  if (chartReg["chart"]) {
+    chartReg["chart"].dispose();
+  }
+  const topLanguagesByHoursData = localStorage.getItem(AGGREGATED_DATA_BY_TOP_LANGUAGE);
+  drawTopLanguageChart(JSON.parse(topLanguagesByHoursData), type,dataType, page)
+
 }
 
 function redirectToLocalisedPage() {
@@ -139,20 +169,69 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   localStorage.setItem('badges', JSON.stringify(data.badges));
   const languageGoal = data.languageGoal || 0;
   localStorage.setItem('nextHourGoal', languageGoal);
-  $("#user-contribution").text(data.contributionCount);
-  $("#language-hour-goal").text(languageGoal);
 
+  // replaceSubStr($(".user-contribution-msg"), '<contribution-count>', data.contributionCount );
+  $("#language-hour-goal").text(languageGoal);
+  $("#user-contribution-count").text(data.contributionCount);
+  const topLanguages = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_TOP_LANGUAGE)) || [];
+  let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const module = localStorage.getItem(CURRENT_MODULE);
+
+  if(module === 'likho'){
+    const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+    const likhoPairLanguage = contributionLanguage + '-' + toLanguage;
+    contributionLanguage = likhoPairLanguage
+  }
+  const isInTopLanguage = topLanguages.some((ele) => ele.language.toLowerCase() === contributionLanguage.toLowerCase())
+
+  if(isInTopLanguage){
+    $("#languageInTopWeb").removeClass("d-none");
+    $("#languageInTopMob").removeClass("d-none");
+    $("#languageNotInTopMob").addClass("d-none");
+    $("#languageNotInTopWeb").addClass("d-none");
+  }  else {
+    $("#languageNotInTopMob").removeClass("d-none");
+    $("#languageNotInTopWeb").removeClass("d-none");
+    $("#languageInTopWeb").addClass("d-none");
+    $("#languageInTopMob").addClass("d-none");
+  }
+  const nextBadgeName = localeStrings[data.nextBadgeType.toLowerCase()];
+  $("#sentence-away-count").text(Number(data.nextMilestone) - Number(data.contributionCount))
+  $("#sentence_away_badge").text(nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1))
+
+  // replaceSubStr($("#sentence_away_msg"), '<contribution-count>', Number(data.nextMilestone) - Number(data.contributionCount) );
+  // replaceSubStr($("#sentence_away_msg"), '<badge-color>', nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1) );
   if (data.isNewBadge) {
-    $("#spree_text").removeClass("d-none");
+    $(".new-badge-msg").removeClass("d-none");
+    $(".thankyou-page-heading").addClass("d-none");
+    $(".user-contribution-msg").addClass("d-none");
+    $(".downloadable_badges").addClass('mr-0 mr-lg-3 mr-md-2');
+    $("#language-goal").addClass('position-relative')
+
+    const cardWithoutBadge = $('#cardWithoutBadge');
+    cardWithoutBadge.remove();
+    $("#chartRowWithoutCard").append(cardWithoutBadge);
+    const $socialLink = $("#social-links");
+    $(".download-row").append($socialLink);
+    const activeBadgeId = `#${data.currentBadgeType.toLowerCase()}_badge_link`;
+    const activeBadge = $(activeBadgeId);
+    activeBadge.attr("disabled", false);
+    activeBadge.remove();
+    $(".downloadable_badges").append(activeBadge);
+    const nextBadgeLink = $(`#${data.nextBadgeType.toLowerCase()}_badge_link_img`);
+    nextBadgeLink.removeClass('disable');
+
+
+    $(".participation-msg-section").addClass('d-flex align-items-center');
+
     $("#milestone_text").removeClass("d-none");
-    $("#current_badge_name").text(localeStrings[data.currentBadgeType.toLowerCase()]);
+    const currentBadgeName = localeStrings[data.currentBadgeType.toLowerCase()];
+    $("#current_badge_name").text(currentBadgeName.charAt(0).toUpperCase() + currentBadgeName.slice(1));
     $("#current_badge_name_1").text(localeStrings[data.currentBadgeType.toLowerCase()]);
     $("#current_badge_count").text(data.currentMilestone);
     $("#next_badge_count").text(data.nextMilestone);
     $("#next_badge_name_1").text(localeStrings[data.nextBadgeType.toLowerCase()]);
-    $("#sentence_away_msg").addClass("d-none");
-    $("#user-contribution-msg").addClass("d-none");
+    $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
     $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
     if(module == 'bolo'){
       if(functionalFlow === 'validator'){
@@ -167,63 +246,93 @@ const setBadge = function (data, localeStrings, functionalFlow) {
         $("#reward-img").attr('src', `/img/${module}_${data.currentBadgeType.toLowerCase()}_medal.svg`);
       }
     }
-  } else if (data.contributionCount < 5) {
-    $("#champion_text").removeClass("d-none");
+  } else if (data.contributionCount === 0) {
+    $(".new-badge-msg").addClass("d-none");
+    $(".thankyou-page-heading").removeClass("d-none");
+    $(".user-contribution-msg").addClass("d-none");
     $("#contribution_text").removeClass("d-none");
-    $("#sentence_away_msg").removeClass("d-none");
-    $("#user-contribution-msg").removeClass("d-none");
-    $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-    $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
-  } else if ((Number(data.contributionCount) >= Number(data.currentMilestone)) && (Number(data.contributionCount) <= Number(data.nextMilestone))) {
-    $("#spree_text").removeClass("d-none");
+  } else {
+    $(".new-badge-msg").addClass("d-none");
+    $(".thankyou-page-heading").addClass('d-none');
+    $(".user-contribution-msg").removeClass("d-none");
     $("#before_badge_content").removeClass("d-none");
-    $("#sentence_away_msg").removeClass("d-none");
     $("#user-contribution-msg").removeClass("d-none");
-    $("#sentense_away_count").text(Number(data.nextMilestone) - Number(data.contributionCount));
-    $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
   }
-  const $bronzeBadgeLink = $("#bronze_badge_link img");
-  const $silverBadgeLink = $("#silver_badge_link img");
-  const $goldBadgeLink = $("#gold_badge_link img");
-  const $platinumBadgeLink = $("#platinum_badge_link img");
+  const $bronzeBadgeLink = $("#bronze_badge_link_img");
+  const $bronzeBadge = $("#bronze_badge_link");
+  const $silverBadgeLink = $("#silver_badge_link_img");
+  const $silverBadge = $("#silver_badge_link");
+  const $goldBadgeLink = $("#gold_badge_link_img");
+  const $goldBadge = $("#gold_badge_link");
+  const $platinumBadgeLink = $("#platinum_badge_link_img");
+  const $platinumBadge = $("#platinum_badge_link");
   if (data.currentBadgeType.toLowerCase() == "bronze") {
-    $bronzeBadgeLink.parent().attr("disabled", false);
-    $('#bronze_badge_link_img').addClass('enable');
-    $('#bronze_badge_link_img').removeClass('disable');
+    $(".downloadable_badges").addClass('mr-0 mr-lg-3 mr-md-2');
+    $bronzeBadge.attr("disabled", false);
+    $bronzeBadgeLink.attr("title", 'Download bronze badge');
+    $(".downloadable_badges").append($bronzeBadge);
+
+    $silverBadgeLink.removeClass('disable');
+    $bronzeBadgeLink.addClass('enable');
+    $bronzeBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "silver") {
-    $bronzeBadgeLink.parent().attr("disabled", false);
-    $silverBadgeLink.parent().attr("disabled", false);
-    $('#bronze_badge_link_img').addClass('enable');
-    $('#bronze_badge_link_img').removeClass('disable');
-    $('#silver_badge_link_img').addClass('enable');
-    $('#silver_badge_link_img').removeClass('disable');
+    $(".downloadable_badges").addClass('mr-0 mr-lg-3 mr-md-2');
+    $bronzeBadge.attr("disabled", false);
+    $bronzeBadgeLink.attr("title", 'Download bronze badge');
+    $silverBadge.attr("disabled", false);
+    $silverBadgeLink.attr("title", 'Download silver badge');
+    $(".downloadable_badges").append($bronzeBadge);
+    $(".downloadable_badges").append($silverBadge);
+
+    $bronzeBadgeLink.addClass('enable');
+    $bronzeBadgeLink.removeClass('disable');
+    $silverBadgeLink.addClass('enable');
+    $silverBadgeLink.removeClass('disable');
+    $goldBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "gold") {
-    $bronzeBadgeLink.parent().attr("disabled", false);
-    $silverBadgeLink.parent().attr("disabled", false);
-    $goldBadgeLink.parent().attr("disabled", false);
-    $('#bronze_badge_link_img').addClass('enable');
-    $('#bronze_badge_link_img').removeClass('disable');
-    $('#silver_badge_link_img').addClass('enable');
-    $('#silver_badge_link_img').removeClass('disable');
-    $('#gold_badge_link_img').addClass('enable');
-    $('#gold_badge_link_img').removeClass('disable');
+    $(".downloadable_badges").addClass('mr-0 mr-lg-3 mr-md-2');
+    $bronzeBadge.attr("disabled", false);
+    $silverBadge.attr("disabled", false);
+    $goldBadge.attr("disabled", false);
+    $bronzeBadgeLink.attr("title", 'Download bronze badge');
+    $silverBadgeLink.attr("title", 'Download silver badge');
+    $goldBadgeLink.attr("title", 'Download gold badge');
+    $(".downloadable_badges").append($bronzeBadge);
+    $(".downloadable_badges").append($silverBadge);
+    $(".downloadable_badges").append($goldBadge);
+
+    $bronzeBadgeLink.addClass('enable');
+    $bronzeBadgeLink.removeClass('disable');
+    $silverBadgeLink.addClass('enable');
+    $silverBadgeLink.removeClass('disable');
+    $goldBadgeLink.addClass('enable');
+    $goldBadgeLink.removeClass('disable');
+    $platinumBadgeLink.removeClass('disable');
   } else if (data.currentBadgeType.toLowerCase() === "platinum") {
-    $bronzeBadgeLink.parent().attr("disabled", false);
-    $silverBadgeLink.parent().attr("disabled", false);
-    $goldBadgeLink.parent().attr("disabled", false);
-    $platinumBadgeLink.parent().attr("disabled", false);
+    $(".downloadable_badges").addClass('mr-0 mr-lg-3 mr-md-2');
+    $bronzeBadge.attr("disabled", false);
+    $silverBadge.attr("disabled", false);
+    $goldBadge.attr("disabled", false);
+    $platinumBadge.attr("disabled", false);
+    $platinumBadgeLink.attr("title", 'Download platinum badge');
+    $goldBadgeLink.attr("title", 'Download gold badge');
+    $bronzeBadgeLink.attr("title", 'Download bronze badge');
+    $silverBadgeLink.attr("title", 'Download silver badge');
+    $(".downloadable_badges").append($bronzeBadge);
+    $(".downloadable_badges").append($silverBadge);
+    $(".downloadable_badges").append($goldBadge);
+    $(".downloadable_badges").append($platinumBadge);
+
     $('#next-goal').addClass('d-none');
-    $("#champion_text").removeClass("d-none");
     $('#before_badge_content').removeClass('d-none');
-    $('#sentence_away_msg').addClass('d-none');
-    $('#bronze_badge_link_img').addClass('enable');
-    $('#bronze_badge_link_img').removeClass('disable');
-    $('#silver_badge_link_img').addClass('enable');
-    $('#silver_badge_link_img').removeClass('disable');
-    $('#gold_badge_link_img').addClass('enable');
-    $('#gold_badge_link_img').removeClass('disable');
-    $('#platinum_badge_link_img').addClass('enable');
-    $('#platinum_badge_link_img').removeClass('disable');
+    $bronzeBadgeLink.addClass('enable');
+    $bronzeBadgeLink.removeClass('disable');
+    $silverBadgeLink.addClass('enable');
+    $silverBadgeLink.removeClass('disable');
+    $goldBadgeLink.addClass('enable');
+    $goldBadgeLink.removeClass('disable');
+    $platinumBadgeLink.addClass('enable');
+    $platinumBadgeLink.removeClass('disable');
   }
 }
 
@@ -280,27 +389,56 @@ const showOrHideExtensionCloseBtn = function (){
   // }
 }
 
-
 const updateLikhoLocaleLanguagesDropdown = (language, toLanguage) => {
   const dropDown = $('#localisation_dropdown');
   const localeLang = ALL_LANGUAGES.find(ele => ele.value == language);
-  const toLang = ALL_LANGUAGES.find(ele => ele.value == toLanguage);
-  const invalidFromLang = language.toLowerCase() == "english" || localeLang.hasLocaleText == false;
-  const invalidToLang = toLanguage.toLowerCase() == "english" || toLang.hasLocaleText == false;
-  if (invalidToLang && invalidFromLang) {
+  if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
     dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
-  } else if (invalidFromLang) {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-      <a id=${toLang.value} class="dropdown-item" href="#" locale="${toLang.id}">${toLang.text}</a>`);
-  } else if (invalidToLang) {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
   } else {
     dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-        <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+    <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
   }
 }
 
+const setLocalisationAndProfile = (path, module) => {
+  const $startRecordBtn = $('#proceed-box');
+  const $startRecordBtnTooltip = $startRecordBtn.parent();
+  const $userName = $('#username');
+  onChangeUser(path, module);
+  setUserModalOnShown($userName);
+  $startRecordBtnTooltip.tooltip('disable');
+  setGenderRadioButtonOnClick();
+  setUserNameOnInputFocus();
+  onOpenUserDropDown();
+  if(hasUserRegistered()){
+    const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
+    const localSpeakerDataParsed = JSON.parse(speakerDetails);
+    showUserProfile(localSpeakerDataParsed.userName);
+  }
 
+  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
+  updateLocaleLanguagesDropdown(language);
+}
 
-module.exports = { isMobileDevice, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered };
+const updateGoalProgressBar = function (url){
+  return performAPIRequest(url).then(data=>{
+    const currentModule = localStorage.getItem(CURRENT_MODULE);
+    const maxValue = data.goal;
+    const currentValue = currentModule == 'dekho' || currentModule == 'likho' ? Number(data['current-progress']) : data['current-progress'];
+    replaceSubStr($(".progress-metric"), "<contribution-done>", currentValue);
+    replaceSubStr($(".progress-metric"), "<contribution-goal>", maxValue);
+    const average = Math.round((currentValue/maxValue) * 100);
+    $("#totalAverage").text(average + '%');
+    // replaceSubStr($(".progress-average-metric"), "<average>", average);
+    const $progressBar = $("#progress_bar");
+    $progressBar.width(average + '%');
+  }).catch(e=>console.log)
+}
+
+const replaceSubStr = function (element , to ,from){
+  const originalText = element.text();
+  const newText = originalText.replace(to, from);
+  element.text(newText.toString());
+}
+
+module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateGoalProgressBar,replaceSubStr,getTopLanguage };
