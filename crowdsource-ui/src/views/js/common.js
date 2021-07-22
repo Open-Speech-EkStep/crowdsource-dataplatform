@@ -182,8 +182,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     const likhoPairLanguage = contributionLanguage + '-' + toLanguage;
     contributionLanguage = likhoPairLanguage
   }
-  const isInTopLanguage = topLanguages.some((ele) => ele.language.toLowerCase() === contributionLanguage.toLowerCase())
-
+  const isInTopLanguage = topLanguages.some((ele) => ele.language.toLowerCase() === contributionLanguage.toLowerCase());
   if(isInTopLanguage){
     $("#languageInTopWeb").removeClass("d-none");
     $("#languageInTopMob").removeClass("d-none");
@@ -425,11 +424,11 @@ const updateGoalProgressBar = function (url){
     const currentValue =  Number(data['current-progress']);
     replaceSubStr($(".progress-metric"), "<contribution-done>", currentValue);
     replaceSubStr($(".progress-metric"), "<contribution-goal>", maxValue);
-    const average = Math.floor((currentValue/maxValue) * 100);
-    $("#totalAverage").text(average + '%');
-    // replaceSubStr($(".progress-average-metric"), "<average>", average);
+    const average = (currentValue/maxValue) * 100;
+    const actualValue = average > 1 ? average.toFixed(2) : average.toFixed(3);
+    $("#totalAverage").text(actualValue + '%');
     const $progressBar = $("#progress_bar");
-    $progressBar.width(average + '%');
+    $progressBar.width(actualValue + '%');
   }).catch(e=>console.log)
 }
 
