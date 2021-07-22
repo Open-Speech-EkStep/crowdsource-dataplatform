@@ -428,7 +428,6 @@ body.modal-open .supreme-container {
   .contribution-data {
     border-right: 1px solid #c4c4c4;
     text-align: left;
-    padding-left: 40px;
   }
   .contribution-data:last-child {
     border: none;
@@ -459,5 +458,7 @@ body.modal-open .supreme-container {
     width: 100% !important;
   }
 }
-
-
+#contribution-section{
+  max-width:1200px;
+  margin:auto;
+}

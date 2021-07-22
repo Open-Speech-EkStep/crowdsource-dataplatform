@@ -54,6 +54,24 @@
             <%- include common/platformCardSection/platformCardSection.ejs %>
         </div>
     </div>
+    <div class="row" id="contribution_stats">
+        <div class="col-12 p-5 mt-5 text-dark">
+            <div id="contribution-section">
+                <h2 class="font-wt-700 site-blue lh-5 font-family-Rowdies">
+                    <%= __('Total Participation') %>
+                </h2>
+                <div class="row mt-3" id="participation-data">
+                    <div class="col-12 col-lg-12 col-md-12">
+                        <div class="row text-center contribution-details" id="contribution-details">
+                            <%- include('common/contributionStats/contributionStats.ejs', {labels :[ __('Suno India').toUpperCase(), __('Bolo India').toUpperCase(), __('Likho India').toUpperCase(), __('Dekho India').toUpperCase()]}) %>
+                        </div>
+                        <%- include common/horizontal_tri_color_line.ejs %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="col-12 justify-content-center text-center px-lg-5 px-md-5 px-4 mt-5">
     <div class="mb-5 pb-3 mt-1" id="badge-section">
         <div class="row my-2 mx-0 justify-content-center">

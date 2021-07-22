@@ -1,6 +1,6 @@
-const { getLastUpdatedAt, getTopLanguageByHours, getTopLanguageByContributionCount, getTopLanguageBySpeakers, getAggregateDataCount, getLanguages, getTimeline, getGenderGroupData, getAgeGroupData, addRemainingGenders, getContributionProgress } = require('./dbOperations');
+const { getLastUpdatedAt, getTopLanguageByHours, getTopLanguageByContributionCount, getTopLanguageBySpeakers, getAggregateDataCount, getLanguages, getTimeline, getGenderGroupData, getAgeGroupData, addRemainingGenders, getContributionProgress, getParticipationStats } = require('./dbOperations');
 const { validateMediaTypeInput } = require("./middleware/validateUserInputs")
-const { GENDER } = require("./constants")
+const { GENDER } = require("./constants");
 let isFieldsMentioned = (fieldsArray) => {
     for (let key in fieldsArray) {
         if (fieldsArray[key] !== null && fieldsArray[key] === 'true') {
@@ -219,7 +219,7 @@ const dashboardRoutes = (router) => {
 
         let genderGroupData = await getGenderGroupData(type, language);
         genderGroupData = addRemainingGenders(genderGroupData, GENDER);
-        
+
         const lastUpdatedDateTime = await getLastUpdatedAt();
         res.send({ "data": genderGroupData, last_updated_at: lastUpdatedDateTime });
     });
@@ -266,6 +266,23 @@ const dashboardRoutes = (router) => {
         });
     });
 
+    router.get('/participation-stats', async (req, res) => {
+        const participationData = await getParticipationStats();
+        const intitativeProperties = {
+            'parallel': 'likho_india_participation', 'ocr': 'dekho_india_participation',
+            'asr': 'suno_india_participation', 'text': 'bolo_india_participation'
+        }
+        const result = {
+            bolo_india_participation: 0,
+            likho_india_participation: 0,
+            dekho_india_participation: 0,
+            suno_india_participation: 0
+        }
+        participationData.forEach(data => {
+            result[intitativeProperties[data['type']]] = data['count']
+        });
+        res.send(result)
+    })
 };
 
 module.exports = dashboardRoutes;

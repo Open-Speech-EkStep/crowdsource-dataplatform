@@ -1,4 +1,4 @@
-const {calculateTime, formatTime} = require('./utils')
+const { calculateTime, formatTime } = require('./utils')
 
 const getSpeakersData = (data, lang, moduleType) => {
   localStorage.setItem('previousLanguage', lang);
@@ -8,11 +8,11 @@ const getSpeakersData = (data, lang, moduleType) => {
     contributions: 0,
     validations: 0
   }
-  if(data && data.length) {
+  if (data && data.length) {
     if (!lang) {
       speakersData.languages = parseInt(data[0].total_languages);
       speakersData.speakers = parseInt(data[0].total_speakers);
-      speakersData.contributions = moduleType === "likho" || moduleType === "dekho" ? parseFloat(data[0].total_contribution_count ? data[0].total_contribution_count : '0') : parseFloat(data[0].total_contributions ? data[0].total_contributions: '0');
+      speakersData.contributions = moduleType === "likho" || moduleType === "dekho" ? parseFloat(data[0].total_contribution_count ? data[0].total_contribution_count : '0') : parseFloat(data[0].total_contributions ? data[0].total_contributions : '0');
       speakersData.validations = moduleType === "likho" || moduleType === "dekho" ? parseFloat(data[0].total_validation_count ? data[0].total_validation_count : '0') : parseFloat(data[0].total_validations ? data[0].total_validations : '0');
     } else {
       const langSpeakersData = data.filter(item => {
@@ -22,7 +22,7 @@ const getSpeakersData = (data, lang, moduleType) => {
         return false;
       });
 
-      if(langSpeakersData.length == 0){
+      if (langSpeakersData.length == 0) {
         return speakersData;
       }
       speakersData.speakers = parseInt(langSpeakersData[0].total_speakers);
@@ -31,6 +31,20 @@ const getSpeakersData = (data, lang, moduleType) => {
     }
   }
   return speakersData;
+}
+
+const setParticipationData = (data) => {
+  const $sunoIndiaParticipation = $('#languages-value');
+  const $boloIndiaParticipation = $('#speaker-value');
+  const $likhoIndiaParticipation = $('#contributed-value');
+  const $dekhoIndiaParticipation = $('#validated-value');
+  const $participationData = $('#participation-data');
+  const $contributionData = $participationData.find('.contribution-data');
+  $boloIndiaParticipation.text(data.bolo_india_participation);
+  $likhoIndiaParticipation.text(data.likho_india_participation);
+  $sunoIndiaParticipation.text(data.suno_india_participation);
+  $dekhoIndiaParticipation.text(data.dekho_india_participation);
+  $contributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
 }
 
 const setSpeakerData = function (data, language, moduleType) {
@@ -63,7 +77,6 @@ const setSpeakerData = function (data, language, moduleType) {
 
   $speakersDataSpeakerValue.text(speakersData.speakers);
 
-
   if (language) {
     $speakerDataLanguagesWrapper.addClass('d-none');
     $speakerContributionData.addClass('col-12 col-md-4 col-lg-4 col-xl-4 col-xs-6')
@@ -76,4 +89,4 @@ const setSpeakerData = function (data, language, moduleType) {
   }
 }
 
-module.exports = {setSpeakerData, getSpeakersData}
+module.exports = { setSpeakerData, getSpeakersData, setParticipationData }
