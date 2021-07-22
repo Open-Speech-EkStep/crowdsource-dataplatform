@@ -11,8 +11,8 @@ const { isMobileDevice } = require('./common');
 
 function showAndHideEditError(inputTextLength, error, callback1 = () => { }, callback2 = () => { }, flow) {
   const currentModule = localStorage.getItem(CURRENT_MODULE);
-  const $submitEditButton = isMobileDevice() && currentModule == "suno" ? $("#submit-edit-button_mob") : $("#submit-edit-button");
-  const $cancelButton = isMobileDevice() ? $("#cancel-edit-button_mob") : null;
+  const $submitEditButton = $("#submit-edit-button");
+  const $cancelButton = isMobileDevice() ? $("#cancel-edit-button") : null;
   if (inputTextLength > 2 && error == null) {
     callback1();
     const isAudioPlayed = flow ? localStorage.getItem(flow) : 'false';
