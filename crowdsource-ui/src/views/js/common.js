@@ -174,6 +174,10 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   $("#language-hour-goal").text(languageGoal);
   $("#user-contribution-count").text(data.contributionCount);
   const topLanguages = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_TOP_LANGUAGE)) || [];
+  const currentModule = localStorage.getItem(CURRENT_MODULE);
+
+  const sortingKey = functionalFlow == 'validator'  ? 'total_validation_count' : currentModule == 'bolo' ? 'total_contribution' :   'total_contribution_count';  
+  const sortingLanguages = currentModule == 'dekho' || currentModule == "likho" ? topLanguages.sort((a, b) => Number(a[sortingKey]) > Number(b[sortingKey]) ? -1 : 1).slice(0, 3) :topLanguages.sort((a, b) => Number(a[sortingKey]) > Number(b[sortingKey]) ? -1 : 1).slice(0, 3)
   let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const module = localStorage.getItem(CURRENT_MODULE);
 
@@ -182,7 +186,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     const likhoPairLanguage = contributionLanguage + '-' + toLanguage;
     contributionLanguage = likhoPairLanguage
   }
-  const isInTopLanguage = topLanguages.some((ele) => ele.language.toLowerCase() === contributionLanguage.toLowerCase());
+  const isInTopLanguage = sortingLanguages.some((ele) => ele.language.toLowerCase() === contributionLanguage.toLowerCase());
   if(isInTopLanguage){
     $("#languageInTopWeb").removeClass("d-none");
     $("#languageInTopMob").removeClass("d-none");
@@ -226,7 +230,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     const currentBadgeName = localeStrings[data.currentBadgeType.toLowerCase()];
     $("#current_badge_name").text(currentBadgeName.charAt(0).toUpperCase() + currentBadgeName.slice(1));
     $("#current_badge_name_1").text(localeStrings[data.currentBadgeType.toLowerCase()]);
-    $("#current_badge_count").text(data.currentMilestone);
+    $("#current_badge_count").text(data.contributionCount);
     $("#next_badge_count").text(data.nextMilestone);
     $("#next_badge_name_1").text(localeStrings[data.nextBadgeType.toLowerCase()]);
     $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
