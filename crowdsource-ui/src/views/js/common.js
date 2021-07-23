@@ -1,5 +1,5 @@
 const {
-  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE,SPEAKER_DETAILS_KEY,DEFAULT_CON_LANGUAGE,AGGREGATED_DATA_BY_TOP_LANGUAGE
+  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE,SPEAKER_DETAILS_KEY,DEFAULT_CON_LANGUAGE,AGGREGATED_DATA_BY_TOP_LANGUAGE,AGGREGATED_DATA_BY_LANGUAGE
 } = require('./constants');
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { constructChart } = require('./horizontalBarGraph');
@@ -173,10 +173,10 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   // replaceSubStr($(".user-contribution-msg"), '<contribution-count>', data.contributionCount );
   $("#language-hour-goal").text(languageGoal);
   $("#user-contribution-count").text(data.contributionCount);
-  const topLanguages = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_TOP_LANGUAGE)) || [];
+  const topLanguages = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE)) || [];
   const currentModule = localStorage.getItem(CURRENT_MODULE);
 
-  const sortingKey = functionalFlow == 'validator'  ? 'total_validation_count' : currentModule == 'bolo' ? 'total_contribution' :   'total_contribution_count';  
+  const sortingKey = functionalFlow == 'validator'  ? 'total_validation_count' : currentModule == 'bolo' ? 'total_contributions' :   'total_contribution_count';
   const sortingLanguages = currentModule == 'dekho' || currentModule == "likho" ? topLanguages.sort((a, b) => Number(a[sortingKey]) > Number(b[sortingKey]) ? -1 : 1).slice(0, 3) :topLanguages.sort((a, b) => Number(a[sortingKey]) > Number(b[sortingKey]) ? -1 : 1).slice(0, 3)
   let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const module = localStorage.getItem(CURRENT_MODULE);

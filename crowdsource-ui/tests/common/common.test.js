@@ -2,7 +2,7 @@ const {readFileSync} = require('fs');
 jest.mock('node-fetch');
 const fetchMock = require("fetch-mock");
 const {stringToHTML, mockLocalStorage} = require('../utils');
-const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY, CURRENT_MODULE,TOP_LANGUAGES_BY_HOURS, AGGREGATED_DATA_BY_TOP_LANGUAGE} = require('../../build/js/common/constants');
+const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY, CURRENT_MODULE,TOP_LANGUAGES_BY_HOURS, AGGREGATED_DATA_BY_TOP_LANGUAGE,AGGREGATED_DATA_BY_LANGUAGE} = require('../../build/js/common/constants');
 const {showFucntionalCards, hasUserRegistered, setBadge,updateGoalProgressBar} = require('../../build/js/common/common.js');
 
 document.body = stringToHTML(
@@ -20,7 +20,7 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'bolo');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'hindi');
-    localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : false, contributionCount : 0,nextBadgeType: "Bronze", currentBadgeType:""};
     const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
@@ -40,7 +40,7 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
-    localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : false, contributionCount : 0,nextBadgeType: "Bronze", currentBadgeType:""};
     const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
@@ -60,7 +60,7 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
-    localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : false, contributionCount : 2,nextBadgeType: "Bronze", currentBadgeType:""};
     const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
@@ -79,7 +79,7 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
-    localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : true, contributionCount : 5,nextBadgeType: "Silver", currentBadgeType:"Bronze"};
     const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
@@ -100,7 +100,7 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
-    localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
     const data = {isNewBadge : false, contributionCount : 7,nextBadgeType: "Silver", currentBadgeType:"Bronze"};
     const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
@@ -130,7 +130,7 @@ describe("updateGoalProgressBar", ()=>{
     updateGoalProgressBar('/parallel').then(()=>{
       // expect($("#totalSentencesLbl").html()).toEqual("100");
       // expect($("#currentSentenceLbl").html()).toEqual("50");
-      expect($("#totalAverage").html()).toEqual("50%");
+      expect($("#totalAverage").html()).toEqual("50.00%");
       const $progressBar = $("#progress_bar");
       expect($progressBar.css("width")).toEqual("50%")
     })
@@ -184,24 +184,3 @@ describe("hasUserRegistered",()=>{
   })
 })
 
-describe("showFucntionalCards",()=>{
-  test("showFucntionalCards for sunoIndia",()=>{
-    const contributeCard = $("#left");
-    const validateCard = $("#right");
-    console.log(document.body)
-
-    console.log(contributeCard,validateCard)
-    fetchMock.get("/target-info/asr/Hindi?targetLanguage=`", {
-      data: [
-        {
-          hasTarget: true,
-          isAllContributed: true,
-        },
-      ],
-    });
-
-    // showFucntionalCards('asr', 'Hindi');
-    // expect(contributeCard.hasClass('cont-validate-disabled')).toEqual(true);
-    // expect(validateCard.hasClass('validate-disabled')).toEqual(false);
-  })
-})
