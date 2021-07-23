@@ -186,7 +186,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     const likhoPairLanguage = contributionLanguage + '-' + toLanguage;
     contributionLanguage = likhoPairLanguage
   }
-  const isInTopLanguage = sortingLanguages.some((ele) => ele.language.toLowerCase() === contributionLanguage.toLowerCase());
+  const isInTopLanguage = sortingLanguages[0].language.toLowerCase() === contributionLanguage.toLowerCase()  ?  true  : false;
   if(isInTopLanguage){
     $("#languageInTopWeb").removeClass("d-none");
     $("#languageInTopMob").removeClass("d-none");
