@@ -1,5 +1,5 @@
 from unittest import TestCase
-from modules.locale_generator.LocaleGenerator import load_json_as_df, reformat_json
+from modules.locale_generator.LocaleProcessor import load_json_as_df, reformat_json
 
 import pandas as pd
 from pandas._testing import assert_frame_equal
