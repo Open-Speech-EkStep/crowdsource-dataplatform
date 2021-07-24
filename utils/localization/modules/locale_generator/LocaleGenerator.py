@@ -99,7 +99,7 @@ class LocaleGenerator:
     def __init__(self, language_code, language_name):
         self.language_code = language_code
         self.language_name = language_name
-        self.english_col = 'English copy'
+        self.english_column_name = 'English copy'
         self.allowed_values = ['x', 'y', 'z', 'u', 'v', 'w']
 
     def set_values(self, df_row):
@@ -117,7 +117,7 @@ class LocaleGenerator:
             try:
                 if pd.notna(df_row[value]):
                     df_row[self.language_name] = df_row[self.language_name].replace('<' + value + '>', df_row[value])
-                    df_row['English value'] = df_row['English value'].replace('<' + value + '>', df_row[value])
+                    df_row[self.english_column_name] = df_row[self.english_column_name].replace('<' + value + '>', df_row[value])
             except:
                 pass
         try:
@@ -126,53 +126,48 @@ class LocaleGenerator:
                 end_index = df_row[self.language_name].find('>')
                 df_row[self.language_name] = df_row[self.language_name][:start_index] + df_row['a-tag-replacement'] + \
                                              df_row[self.language_name][end_index:]
-                df_row['English value'] = df_row['English value'][:start_index] + df_row['a-tag-replacement'] + df_row[
-                                                                                                                    'English value'][
-                                                                                                                end_index:]
+                df_row[self.english_column_name] = df_row[self.english_column_name][:start_index] + df_row['a-tag-replacement'] + \
+                                                   df_row[self.english_column_name][end_index:]
         except:
             pass
 
         return df_row
 
     def clean_read_excel_df(self, df, language_name):
-        FORMAT = [self.english_col, language_name]
+        columns = [self.english_column_name, language_name]
         for value in self.allowed_values:
             if value in df.columns:
-                FORMAT.append(value)
-        filtered_sheet = df[FORMAT]
-        sheet_no_na = filtered_sheet.dropna(subset=[self.english_col], inplace=False)
-        sheet_new = sheet_no_na.rename(columns={self.english_col: 'English value'}, inplace=False)
-        return sheet_new
+                columns.append(value)
+        filtered_sheet = df[columns]
+        sheet_no_na = filtered_sheet.dropna(subset=[self.english_column_name], inplace=False)
+        return sheet_no_na
 
     # In[12]:
 
     def clean_excel_df(self, df, language_name):
         excel_df = df.copy()
-        try:
-            for i, row in excel_df.iterrows():
-                if pd.notna(row[language_name]):
-                    row[language_name] = str(row[language_name]).strip()
-        except:
-            pass
-        excel_df = excel_df.drop_duplicates(subset=['English value'], keep='last')
+        for i, row in excel_df.iterrows():
+            if pd.notna(row[language_name]):
+                row[language_name] = str(row[language_name]).strip()
+        excel_df = excel_df.drop_duplicates(subset=['Key', self.english_column_name], keep='last')
         return excel_df
 
     def read_excels(self, input_base_path):
         path_to_excels = '{}/{}'.format(input_base_path, self.language_code)
 
         translation_excel_files = get_excel_files(path_to_excels)
-        excel_df = read_excels_as_df(translation_excel_files, columns=[self.english_col, self.language_name])
+        excel_df = read_excels_as_df(translation_excel_files, columns=[self.english_column_name, self.language_name])
         move_files(path_to_excels, translation_excel_files)
 
         return excel_df
 
     def process_with_meta_info(self, excel_df, meta_excel_df):
+        del meta_excel_df[self.language_name]
         excel_df = self.clean_read_excel_df(excel_df, self.language_name)
-
-        merged_excel_df = pd.merge(excel_df, meta_excel_df, left_on="English value", right_on="English copy",
+        merged_excel_df = pd.merge(excel_df, meta_excel_df, on=self.english_column_name,
                                    how='inner')
-        del merged_excel_df[self.english_col]
         merged_excel_df = merged_excel_df.apply(self.set_variables, axis=1)
+        merged_excel_df = self.clean_excel_df(merged_excel_df, self.language_name)
         return merged_excel_df
 
     # In[18]:
@@ -184,9 +179,8 @@ class LocaleGenerator:
         out_df = load_json_as_df(existing_locale_json_data)
 
         excel_df = self.process_with_meta_info(excel_df, meta_excel_df)
-        excel_df_dropped = self.clean_excel_df(excel_df, self.language_name)
 
-        merged_df = pd.merge(excel_df_dropped, out_df, left_on="Key", right_on="Key", how='right')
+        merged_df = pd.merge(excel_df, out_df, on="Key", how='right')
 
         merged_df = merged_df.apply(self.set_values, axis=1)
 
@@ -194,19 +188,17 @@ class LocaleGenerator:
 
         filtered_merged_df = merged_df[select_columns]
 
-        final_df = filtered_merged_df.drop_duplicates(subset='Key', keep='first', inplace=False)
+        final_df = filtered_merged_df.drop_duplicates(subset=['Key'], keep='first', inplace=False)
         return final_df
 
     def gen_locales(self, input_base_path, input_json_path, meta_input_path, file_type):
         if file_type == 'seperate':
             meta_excel_path = meta_input_path + "/" + self.language_code + ".xlsx"
-            meta_excel_df = read_excel_as_df(meta_excel_path, [self.english_col, self.language_name])
-            del meta_excel_df[self.language_name]
+            meta_excel_df = read_excel_as_df(meta_excel_path, [self.english_column_name, self.language_name])
             final_df = self.get_locale_data(input_base_path, input_json_path, meta_excel_df)
         else:
             meta_excel_path = meta_input_path
-            meta_excel_df = read_excel_as_df(meta_excel_path, [self.english_col])
-            del meta_excel_df[self.language_name]
+            meta_excel_df = read_excel_as_df(meta_excel_path, [self.english_column_name])
             final_df = self.get_locale_data(input_base_path, input_json_path, meta_excel_df)
         return final_df
 
