@@ -50,7 +50,7 @@ class SingleExcelInput(ExcelInput):
         return read_excel_as_df(self.meta_input_path, columns)
 
     def read_translation_file(self, language_code, columns):
-        pass
+        return read_excel_as_df(self.input_excel_path, columns)
 
 
 class MultiExcelInput(ExcelInput):
@@ -58,7 +58,7 @@ class MultiExcelInput(ExcelInput):
     def __init__(self, input_json_path, input_base_path, meta_input_path):
         super().__init__(input_json_path, meta_input_path)
         self.input_json_path = input_json_path
-        # folder path - should be changed to file path
+        # folder path
         self.input_base_path = input_base_path
         # file path
         self.meta_input_path = meta_input_path
