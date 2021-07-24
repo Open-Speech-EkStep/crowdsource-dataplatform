@@ -1,5 +1,5 @@
 from unittest import TestCase
-from modules.content_extractor.parser.json_parser import TagParser
+from helper.parser.json_parser import TagParser
 
 
 class TestTagParser(TestCase):
@@ -43,10 +43,9 @@ class TestTagParser(TestCase):
         expected_text = 'test <a>content</a>'
 
         self.assertEqual(result_text, expected_text)
-        self.assertEqual(self.tag_parser.allowed_replacements[self.tag_parser.a_tag_replacement], ' href=\'./../test\'')
 
-    def test_get_dict_for_data(self):
-        self.tag_parser.
-
-    def test_parse(self):
-        self.fail()
+    # def test_get_dict_for_data(self):
+    #     self.fail()
+    #
+    # def test_parse(self):
+    #     self.fail()

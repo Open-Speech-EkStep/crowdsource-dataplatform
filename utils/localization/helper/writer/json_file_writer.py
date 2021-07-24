@@ -1,6 +1,5 @@
-import json
-from modules.content_extractor.writer.writer import Writer
-from modules.content_extractor.writer.operations import create_dirs
+from helper.writer.writer import Writer
+from helper.writer.operations import create_dirs
 
 
 class JsonWriter(Writer):

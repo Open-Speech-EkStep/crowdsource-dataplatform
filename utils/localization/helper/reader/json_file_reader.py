@@ -1,5 +1,5 @@
 import json
-from modules.content_extractor.reader.reader import Reader
+from helper.reader.reader import Reader
 
 
 class JsonReader(Reader):
