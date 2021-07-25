@@ -5,15 +5,16 @@
 
 # Read file in added data order.
 
-# In[1]:
+import argparse
+import os
+import pkg_resources
+import pandas as pd
+
 from abc import ABC, abstractmethod
 
-import pandas as pd
-import pkg_resources
-import json
-import os
-import glob
-import argparse
+from helper.reader.excel_file_reader import ExcelReader
+from helper.reader.json_file_reader import JsonReader
+from helper.utils.utils import get_excel_files, write_df_to_json
 
 
 class ExcelInput(ABC):
@@ -21,6 +22,8 @@ class ExcelInput(ABC):
     def __init__(self, input_json_path, meta_input_path):
         self.input_json_path = input_json_path
         self.meta_input_path = meta_input_path
+        self.json_reader = JsonReader()
+        self.excel_reader = ExcelReader()
 
     @abstractmethod
     def read_translation_file(self, language_code, columns):
@@ -31,9 +34,8 @@ class ExcelInput(ABC):
         pass
 
     def read_json_file(self, language_code):
-        json_data = read_json(
-            '{input_json_path}/{locale}.json'.format(input_json_path=self.input_json_path, locale=language_code))
-        return load_json_as_df(json_data)
+        json_path = '{input_json_path}/{locale}.json'.format(input_json_path=self.input_json_path, locale=language_code)
+        return self.json_reader.read_as_df(json_path)
 
 
 class SingleExcelInput(ExcelInput):
@@ -47,10 +49,10 @@ class SingleExcelInput(ExcelInput):
         self.meta_input_path = meta_input_path
 
     def read_meta_file(self, language_code, columns):
-        return read_excel_as_df(self.meta_input_path, columns)
+        return self.excel_reader.read_as_df(self.meta_input_path, columns)
 
     def read_translation_file(self, language_code, columns):
-        return read_excel_as_df(self.input_excel_path, columns)
+        return self.excel_reader.read_as_df(self.input_excel_path, columns)
 
 
 class MultiExcelInput(ExcelInput):
@@ -64,102 +66,24 @@ class MultiExcelInput(ExcelInput):
         self.meta_input_path = meta_input_path
 
     def read_meta_file(self, language_code, columns):
-        return read_excel_as_df(os.path.join(self.meta_input_path, language_code + ".xlsx"), columns)
+        return self.excel_reader.read_as_df(os.path.join(self.meta_input_path, language_code + ".xlsx"), columns)
 
     def read_translation_file(self, language_code, columns=None):
         if columns is None:
             columns = []
         path_to_excels = os.path.join(self.input_base_path, language_code)
         translation_excel_files = get_excel_files(path_to_excels)
-        excel_df = read_excels_as_df(translation_excel_files, columns=columns)
+        excel_df = self.excel_reader.read_files(translation_excel_files, columns=columns)
         return excel_df
 
 
-def read_json(json_file_path):
-    with open(json_file_path) as f:
-        data = json.load(f)
-    return data
-
-
-def reformat_json(json_obj):
-    json_dict = {}
-    for key, value in json_obj:
-        json_dict[key] = value
-    return json_dict
-
-
-def write_df_to_json(df, output_json_path):
-    json_file = df.to_json(orient='values')
-    json_string = json.loads(json_file)
-
-    reformatted_json = reformat_json(json_string)
-
-    with open(output_json_path, 'w') as f:
-        f.write(json.dumps(reformatted_json, indent=4, ensure_ascii=False))
-
-
-def load_json_as_df(json_data):
-    out_df = pd.DataFrame(list(json_data.items()),
-                          columns=['Key', 'value'])
-    return out_df
-
-
-# unused
-def get_matched_count(excel_df, merged_df):
-    count = 0
-    for key in excel_df['Key']:
-        for k_key in merged_df['Key']:
-            if key == k_key:
-                count += 1
-                break
-    return count
-
-
-def read_excel_as_df(filename, columns: list):
-    excel_df = pd.DataFrame([], columns=columns)
-    excel = pd.ExcelFile(filename)
-    for sheet_name in excel.sheet_names:
-        sheet = excel.parse(sheet_name=sheet_name, header=1)
-        if len(sheet.columns) == 0:
-            continue
-        excel_df = pd.concat([excel_df, sheet], axis=0)
-    return excel_df
-
-
-def read_excels_as_df(filenames, columns: list):
-    excel_df = pd.DataFrame([], columns=columns)
-    for excel_file_name in filenames:
-        excel_file_df = read_excel_as_df(excel_file_name, columns)
-        excel_df = pd.concat([excel_df, excel_file_df], axis=0)
-    return excel_df
-
-
-def excel_filter(excel_file_name):
-    return os.path.isfile(excel_file_name) and excel_file_name.endswith('.xlsx') and not excel_file_name.split('/')[
-        -1].startswith('~')
-
-
-def get_excel_files(dir_name):
-    list_of_files = filter(excel_filter, glob.glob(dir_name + '/*'))
-    list_of_files = sorted(list_of_files, key=os.path.getmtime)
-    return list_of_files
-
-
-def move_files(base_path, filenames):
-    done_folder = base_path + "/done"
-    os.makedirs(done_folder, exist_ok=True)
-    for file_name in filenames:
-        os.system('mv {} {}'.format(file_name, done_folder))
-
-
-# In[2]:
 class LocaleProcessor:
 
-    def __init__(self, language_code, language_name):
-        self.language_code = language_code
+    def __init__(self, language_name, english_column_name):
         self.language_name = language_name
-        self.english_column_name = 'English copy'
+        self.english_column_name = english_column_name
         self.allowed_values = ['x', 'y', 'z', 'u', 'v', 'w']
+        self.a_tag_replacement = 'a-tag-replacement'
 
     def add_translation_if_present(self, df_row):
         if self.language_name in list(df_row.index):
@@ -167,32 +91,28 @@ class LocaleProcessor:
                 df_row['value'] = df_row[self.language_name]
         return df_row
 
-    # In[6]:
-
     def restructure_extracted_tags(self, df_row):
         column_names = list(df_row.index)
         for value in self.allowed_values:
-            if value in column_names:
-                if pd.notna(df_row[value]):
-                    if self.language_name in column_names and pd.notna(df_row[self.language_name]):
-                        df_row[self.language_name] = df_row[self.language_name].replace('<' + value + '>',
-                                                                                        df_row[value])
-                    df_row[self.english_column_name] = df_row[self.english_column_name].replace('<' + value + '>',
-                                                                                                df_row[value])
+            if value in column_names and pd.notna(df_row[value]):
+                if self.language_name in column_names and pd.notna(df_row[self.language_name]):
+                    df_row[self.language_name] = df_row[self.language_name].replace('<' + value + '>',
+                                                                                    df_row[value])
+                df_row[self.english_column_name] = df_row[self.english_column_name].replace('<' + value + '>',
+                                                                                            df_row[value])
 
-        a_tag_replacement = 'a-tag-replacement'
-        if a_tag_replacement in column_names and self.language_name in column_names:
-            if pd.notna(df_row[a_tag_replacement]):
+        if self.a_tag_replacement in column_names and self.language_name in column_names:
+            if pd.notna(df_row[self.a_tag_replacement]):
                 start_index = df_row[self.language_name].find('<a') + 2
                 end_index = df_row[self.language_name].find('>')
 
                 if self.language_name in column_names and pd.notna(df_row[self.language_name]):
-                    df_row[self.language_name] = df_row[self.language_name][:start_index] + df_row[a_tag_replacement] + \
+                    df_row[self.language_name] = df_row[self.language_name][:start_index] + df_row[
+                        self.a_tag_replacement] + \
                                                  df_row[self.language_name][end_index:]
 
                 df_row[self.english_column_name] = df_row[self.english_column_name][:start_index] + df_row[
-                    a_tag_replacement] + \
-                                                   df_row[self.english_column_name][end_index:]
+                    self.a_tag_replacement] + df_row[self.english_column_name][end_index:]
 
         return df_row
 
@@ -205,8 +125,6 @@ class LocaleProcessor:
         sheet_no_na = filtered_sheet.dropna(subset=[self.english_column_name], inplace=False)
         return sheet_no_na
 
-    # In[12]:
-
     def clean_merged_excel(self, df, language_name):
         excel_df = df.copy()
         for i, row in excel_df.iterrows():
@@ -215,26 +133,14 @@ class LocaleProcessor:
         excel_df = excel_df.drop_duplicates(subset=['Key', self.english_column_name], keep='last')
         return excel_df
 
-    def read_excels(self, input_base_path):
-        path_to_excels = '{}/{}'.format(input_base_path, self.language_code)
-
-        translation_excel_files = get_excel_files(path_to_excels)
-        excel_df = read_excels_as_df(translation_excel_files, columns=[self.english_column_name, self.language_name])
-        move_files(path_to_excels, translation_excel_files)
-
-        return excel_df
-
     def process_with_meta_info(self, excel_df, meta_excel_df):
         del meta_excel_df[self.language_name]
         excel_df = self.clean_translation_excel(excel_df, self.language_name)
         merged_excel_df = pd.merge(excel_df, meta_excel_df, on=self.english_column_name,
                                    how='inner')
-        merged_excel_df.to_excel("tesst.xlsx")
         merged_excel_df = merged_excel_df.apply(self.restructure_extracted_tags, axis=1)
         merged_excel_df = self.clean_merged_excel(merged_excel_df, self.language_name)
         return merged_excel_df
-
-    # In[18]:
 
     def merge_excel_and_json(self, excel_df, json_df):
         merged_df = pd.merge(excel_df, json_df, on="Key", how='right')
@@ -244,14 +150,8 @@ class LocaleProcessor:
         final_df = filtered_merged_df.drop_duplicates(subset=['Key'], keep='first', inplace=False)
         return final_df
 
-    def generate_locale(self, excel_input: ExcelInput):
-        meta_excel_df = excel_input.read_meta_file(self.language_code,
-                                                   columns=[self.english_column_name, self.language_name])
-        input_excel_df = excel_input.read_translation_file(self.language_code,
-                                                           columns=[self.english_column_name, self.language_name])
+    def process(self, meta_excel_df, input_excel_df, json_df):
         excel_df = self.process_with_meta_info(input_excel_df, meta_excel_df)
-
-        json_df = excel_input.read_json_file(self.language_code)
 
         final_df = self.merge_excel_and_json(excel_df, json_df)
 
@@ -263,19 +163,26 @@ class LocaleGenerator:
     def __init__(self, excel_input: ExcelInput, languages):
         self.languages = languages
         self.excel_input = excel_input
+        self.english_column_name = 'English copy'
 
     def generate(self):
         languages_output_map = {}
         for language_code, language_name in self.languages.items():
-            locale_processor = LocaleProcessor(language_code, language_name)
-            language_final_df = locale_processor.generate_locale(self.excel_input)
+            locale_processor = LocaleProcessor(language_name, self.english_column_name)
+            meta_excel_df = self.excel_input.read_meta_file(language_code,
+                                                            columns=[self.english_column_name, language_name])
+            input_excel_df = self.excel_input.read_translation_file(language_code, columns=[self.english_column_name,
+                                                                                            language_name])
+            json_df = self.excel_input.read_json_file(language_code)
+
+            language_final_df = locale_processor.process(meta_excel_df, input_excel_df, json_df)
             languages_output_map[language_code] = language_final_df
         return languages_output_map
 
 
 def main():
     languages_file_name = pkg_resources.resource_filename('resources', resource_name='languages.json')
-    languages_to_be_considered = read_json(languages_file_name)
+    languages_to_be_considered = JsonReader().read(languages_file_name)
 
     example = '''
             Example commands:
@@ -286,9 +193,9 @@ def main():
             For all languages:
                 python LocaleGenerator.py -j ./../all_keys_generator/out -e ./input_excel_files -m ./../delta_generation/out-meta -o ./output_json_files -a
         
--j /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localisation_script/delta_generation/cleaned_jsons
--e /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/sme-input
--m /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/out-meta
+-j /crowdsource-dataplatform/test_utils/localisation_script/delta_generation/cleaned_jsons
+-e /crowdsource-dataplatform/test_utils/ofiles/sme-input
+-m /crowdsource-dataplatform/test_utils/ofiles/out-meta
 -o ./output_json_files 
 -t seperate
 -l hi
@@ -314,11 +221,11 @@ def main():
 
     args = parser.parse_args(
         "\
-        -j /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localisation_script/delta_generation/cleaned_jsons \
-        -e /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/sme-input \
-        -m /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/out-meta \
-        -o ./output_json_files \
-        -t seperate \
+        -j /crowdsource-dataplatform/utils/localisation_script/all_keys_generator/out \
+        -e /crowdsource-dataplatform/utils/localization/resources/out_sme_5_20.xlsx \
+        -m /crowdsource-dataplatform/utils/localization/resources/out_meta_5_20.xlsx \
+        -o ./output \
+        -t combined \
         -l hi \
         ".split())
 
@@ -336,8 +243,8 @@ def main():
     output_base_path = args.output_folder_path
 
     file_type = args.type
-
     if file_type == 'combined' and not os.path.isfile(meta_input_path):
+        print('Invalid arguments')
         exit()
 
     if file_type == 'combined':

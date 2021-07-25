@@ -9,3 +9,6 @@ class Test(TestCase):
         create_dirs(test_file_path)
         self.assertTrue(os.path.isdir(test_file_path))
         # os.remove(test_file_path)
+
+    def tearDown(self):
+        os.removedirs('./../test/folder1/')
