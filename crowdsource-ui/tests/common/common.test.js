@@ -1,8 +1,7 @@
 const {readFileSync} = require('fs');
 jest.mock('node-fetch');
-const fetchMock = require("fetch-mock");
 const {stringToHTML, mockLocalStorage} = require('../utils');
-const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY, CURRENT_MODULE, AGGREGATED_DATA_BY_TOP_LANGUAGE,AGGREGATED_DATA_BY_LANGUAGE} = require('../../build/js/common/constants');
+const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY, CURRENT_MODULE,AGGREGATED_DATA_BY_LANGUAGE} = require('../../build/js/common/constants');
 const {hasUserRegistered, setBadge,updateGoalProgressBar,isInTopLanguage} = require('../../build/js/common/common.js');
 
 document.body = stringToHTML(

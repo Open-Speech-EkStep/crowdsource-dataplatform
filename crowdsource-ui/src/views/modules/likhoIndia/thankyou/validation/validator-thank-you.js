@@ -12,7 +12,6 @@ const {
 } = require("../common/constants");
 
 const {
-  setPageContentHeight,
   getLocaleString,
   performAPIRequest,
 } = require("../common/utils");

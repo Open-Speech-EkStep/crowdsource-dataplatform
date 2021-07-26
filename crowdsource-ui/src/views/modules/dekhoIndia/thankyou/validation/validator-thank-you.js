@@ -10,7 +10,6 @@ const {
   AGGREGATED_DATA_BY_LANGUAGE
 } = require("../common/constants");
 const {
-  setPageContentHeight,
   updateLocaleLanguagesDropdown,
   getLocaleString,
   performAPIRequest,
@@ -74,7 +73,6 @@ const getLanguageStats = function () {
           CONTRIBUTION_LANGUAGE
         );
         localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-        const module = localStorage.getItem(CURRENT_MODULE);
         const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.dekho.value, 'total_validation_count','total_validations');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
         showByHoursChartThankyouPage(MODULE.dekho.value, "thankyou");
