@@ -48,12 +48,12 @@ const lastUpdatedAtQuery = "select max(lastupdated) AT TIME ZONE 'Asia/Kolkata' 
 const languageGoalQuery = `select sum(goal) as goal from language_goals where $1:raw`;
 
 const currentProgressQuery = `select 
-ROUND((sum(contribution_audio_duration) FILTER (WHERE audio_row_num_per_contribution_id = 1 and contributions_and_demo_stats.is_system = false))::numeric/3600,3)  as total_contributions, 
-ROUND(sum(contributions_and_demo_stats.validation_audio_duration)::numeric/3600, 3)  as total_validations,
-count(distinct contribution_id) FILTER (WHERE contributions_and_demo_stats.is_system = false) as total_contribution_count,
-sum(contributions_and_demo_stats.is_validated) total_validation_count
-from contributions_and_demo_stats where $1:raw
-group by contributions_and_demo_stats.type;
+ROUND((sum(contribution_audio_duration) FILTER (WHERE audio_row_num_per_contribution_id = 1 and cds.is_system = false))::numeric/3600,3)  as total_contributions, 
+ROUND(sum(cds.validation_audio_duration)::numeric/3600, 3)  as total_validations,
+count(distinct contribution_id) FILTER (WHERE cds.is_system = false) as total_contribution_count,
+sum(cds.is_validated) total_validation_count
+from dashboard_stats cds where $1:raw
+group by cds.type;
 `;
 
 const participationStatsQuery = `select type, count(*) from (SELECT contributed_by AS users, type FROM contributions_and_demo_stats UNION SELECT validated_by as users, type FROM contributions_and_demo_stats) as cds where cds.users is not null group by cds.type`
