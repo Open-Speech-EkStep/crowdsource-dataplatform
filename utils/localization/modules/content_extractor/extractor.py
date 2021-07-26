@@ -1,9 +1,9 @@
 import pandas as pd
 import os
 import argparse
-from modules.content_extractor.reader.json_file_reader import JsonReader
-from modules.content_extractor.writer.json_file_writer import JsonWriter
-from modules.content_extractor.parser.json_parser import TagParser
+from helper.reader.json_file_reader import JsonReader
+from helper.writer.json_file_writer import JsonWriter
+from helper.parser.json_parser import TagParser
 from helper.ParseHtmlAndGetKeys import get_keys_with_path
 
 
