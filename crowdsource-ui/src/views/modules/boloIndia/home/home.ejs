@@ -27,7 +27,7 @@
     <link rel="icon" type="image/png" href="/img/favicon.ico">
 </head>
 
-<body class="bg-secondary">
+<body class="bg-white">
 <%- include('../common/header.ejs',{home:"../home.html", bolo:"./home.html", suno:"../sunoIndia/home.html",likho:"../likhoIndia/home.html",dekho:"../dekhoIndia/home.html",path:"../"}); %>
 <div class="container-fluid supreme-container bg-body-primary padding-top-65">
     <div class="row">
@@ -87,7 +87,7 @@
     </div>
 </div>
 <div class="mx-5" style="background:#43c0d7;height:8px;border-radius:0 0 32px 32px"></div>
-<div class="container-fluid supreme-container bg-secondary">
+<div class="container-fluid supreme-container bg-white">
     <div class="row mx-0 mt-4">
         <div class="col-12 col-md-12 col-lg-11 ml-lg-auto pt-5 px-5">
             <div class="row">
@@ -108,10 +108,9 @@
                     <div class="row justify-content-center" id="loader1">
                         <div><span class="spinner"></span></div>
                     </div>
-                    <div class="row text-center contribution-details" id="contribution-details">
+                    <div class="row text-center contribution-details contribution-stats" id="contribution-details">
                         <%- include('../common/contributionStats.ejs',{labels :[__('Languages'),__('Speakers contributed'),__('Duration recorded'),__('Duration validated')]}) %>
                     </div>
-                    <%- include ../common/horizontal_tri_color_line.ejs %>
                 </div>
             </div>
         </div>
@@ -143,7 +142,7 @@
                     <div><span class="spinner"></span></div>
                 </div>
                 <div class="row m-0">
-                    <div class="col-lg-8 col-md-8 col-12 p-4 bg-white">
+                    <div class="col-lg-8 col-md-8 col-12 p-4 bg-secondary">
                         <%- include('../common/verticalGraph.ejs',{text: __('Total recordings')})%>
                     </div>
                 </div>

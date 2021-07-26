@@ -26,7 +26,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body class="bg-secondary">
+<body class="bg-white">
 <%- include('../common/header.ejs',{home:"../home.html", bolo:"../boloIndia/home.html", suno:"../sunoIndia/home.html",likho:"./home.html",dekho:"../dekhoIndia/home.html",path:"../"}); %>
 <div class="container-fluid supreme-container bg-body-primary padding-top-65">
     <div class="row">
@@ -35,7 +35,7 @@
     <div class="row">
         <div class="col-12 col-md-12 col-lg-10 offset-lg-1 mt-4">
             <nav class="navbar navbar-expand-lg navbar-light px-4 flex-flow-nowrap" id="contribution_lang_navbar">
-                <div class="mx-2 text-white">
+                <div class="mx-2 text-primary">
                     <%= __('Select the language pair for contribution') %>:
                 </div>
                 <div class="navbar-collapse" id="navbarSupportedLanguage">
@@ -46,16 +46,16 @@
                         <div class="row m-0">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-0">
                                 <div class="row m-0">
-                                    <label class="col-4 mt-2 from-label text-white"><%= __('FROM ') %>:</label>
-                                    <select class="col-8 btn dropdown-toggle h6 w-90 rounded text-white" id="from-language" style="height:40px;padding:0;padding:0 10px;border-color:#959595;color:#959595">
+                                    <label class="col-4 mt-2 from-label text-primary"><%= __('FROM ') %>:</label>
+                                    <select class="col-8 btn dropdown-toggle h6 w-90 rounded text-primary" id="from-language" style="height:40px;padding:0;padding:0 10px;border-color:#959595;color:#959595">
             
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-0">
                                 <div class="row m-0">
-                                    <label class="col-4 mt-2 from-label text-white"><%= __('TO') %> :</label>
-                                    <select class="col-8 btn dropdown-toggle h6 w-90 rounded text-white" id="to-language" style="height:40px;padding:0;padding:0 10px;border-color:#959595;color:#959595">
+                                    <label class="col-4 mt-2 from-label text-primary"><%= __('TO') %> :</label>
+                                    <select class="col-8 btn dropdown-toggle h6 w-90 rounded text-primary" id="to-language" style="height:40px;padding:0;padding:0 10px;border-color:#959595;color:#959595">
                                     </select>
                                 </div>
                             </div>
@@ -68,8 +68,7 @@
         <%- include('../common/cards.ejs',{left:{h1:__('Translate'),h2:__('Translate and type the text'),"p1":"",img:"/img/translate.svg"},right:{h1:__('Validate'),h2:__('Validate the translation contributed by others'),"p1":"",img:"/img/validate.svg"}}); %>
     </div>
 </div>
-<div class="mx-5" style="background:#43c0d7;height:8px;border-radius:0 0 32px 32px"></div>
-<div class="container-fluid supreme-container bg-secondary">
+<div class="container-fluid supreme-container bg-white">
     <div class="row mx-0 mt-4">
         <div class="col-12 col-md-12 col-lg-11 ml-lg-auto pt-5 px-5">
             <div class="row">
@@ -90,10 +89,9 @@
                     <div class="row justify-content-center" id="loader1">
                         <div><span class="spinner"></span></div>
                     </div>
-                    <div class="row text-center contribution-details" id="contribution-details">
+                    <div class="row text-center contribution-details contribution-stats" id="contribution-details">
                         <%- include('../common/contributionStats.ejs',{labels :[__('Language pairs'),__('People participated'),__('Translations done'),__('Translations validated')]}) %>
                     </div>
-                    <%- include ../common/horizontal_tri_color_line.ejs %>
                 </div>
             </div>
         </div>
@@ -113,7 +111,7 @@
                     <div><span class="spinner"></span></div>
                 </div>
                 <div class="row m-0">
-                    <div class="col-lg-8 col-md-8 col-12 p-4 bg-white">
+                    <div class="col-lg-8 col-md-8 col-12 p-4 bg-secondary">
                         <%- include('../common/verticalGraph.ejs',{text: __('Total translations')}) %>
                     </div>
                 </div>

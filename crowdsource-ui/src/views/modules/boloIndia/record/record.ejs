@@ -16,10 +16,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="icon" type="image/png" href="/img/favicon.ico">
 </head>
-<body> <%- include('../common/headerWithoutNavBar.ejs',{path:"../", MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg",homePath:"./home.html"}); %>
+<body class="bg-secondary"> <%- include('../common/headerWithoutNavBar.ejs',{path:"../", MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg",homePath:"./home.html"}); %>
 <div id="loader" class="overlay__content"><span class="spinner"></span></div>
-<div id="page-content" class="d-none">
-    <div id="content-wrapper" class="container-fluid d-flex flex-column padding-top-65">
+<div id="page-content" class="d-none h-100">
+    <div id="content-wrapper" class="container-fluid functional-page-bg d-flex flex-column padding-top-65">
         <div class="row m-0 px-4">
             <%- include('../common/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Speak'),img:"BoloIndiaLogo.svg", homePath:"./home.html"}) %>
         </div>
@@ -27,8 +27,8 @@
         <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">
             <div class="row position-absolute bolo-back-btn top-back-btn">
             <button class="btn btn-link p-0 back-btn" id="back-btn">
-                <a href="./home.html" class="nav-link d-lg-inline-flex" style="color:#959595;font-size:16px">
-                    <span class="material-icons" style="vertical-align:sub">
+                <a href="./home.html" class="nav-link d-lg-inline-flex" style="color:#0f2749;font-size:20px">
+                    <span class="material-icons" style="vertical-align:sub;padding-top:4px">
             arrow_back
             </span>
                     <span class="back-text" style="margin-left:8px"><%= __('Home') %></span>
@@ -45,6 +45,7 @@
                 <div class="col-md-8 col-sm-10 text-center prompt"><label class="h1 font-weight-normal" id="sentenceLbl"></label></div>
             </div>
 
+           
             <div class="recording-container">
                 <div class="row justify-content-center d-none">
                     <div class="col-8 text-muted h-1r" id="get-started"> Let's get started! </div>
@@ -101,24 +102,24 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none mt-5 mx-lg-0" id="no-sentences-row">
-    <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-bold">
-            <%= __('Thank you for your enthusiasm to contribute your voice.') %>
-        </label><br><br>
-        <p>
-            <%- __('We do not have any data in <span id="spn-validation-language"></span> language. Please try again later.') %>
-        </p>
-        <div class="row justify-content-center mt-5">
-            <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
-                <a class="btn btn-primary text-white btn-lg h6 w-100" href="./home.html">
-                    <%- __('Back to Bolo India Home') %>
-                </a></div>
+        <div class="row justify-content-center mb-5 mb-lg-0 mt-lg-5 d-none mt-5 mx-lg-0" id="no-sentences-row">
+            <div class="col-md-8 col-sm-10 text-center"><label class="h1 font-weight-bold">
+                    <%= __('Thank you for your enthusiasm to contribute your voice.') %>
+                </label><br><br>
+                <p>
+                    <%- __('We do not have any data in <span id="spn-validation-language"></span> language. Please try again later.') %>
+                </p>
+                <div class="row justify-content-center mt-5">
+                    <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
+                        <a class="btn btn-primary text-white btn-lg h6 w-100" href="./home.html">
+                            <%- __('Back to Bolo India Home') %>
+                        </a></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <%- include ../common/report-modal.ejs %>
 <%- include ../common/errorModal.ejs %>
