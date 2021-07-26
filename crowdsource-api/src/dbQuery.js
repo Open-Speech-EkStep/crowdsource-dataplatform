@@ -104,7 +104,7 @@ inner join configurations conf on conf.config_name='include_profane'
 inner join configurations conf2 on conf2.config_name='show_demo_data'
 where dataset_row.media->>'language'=$4 and difficulty_level=$3 and type=$5 and state is null
 and (cont.action is null or (coalesce(cont.action,'')='skipped' and cont.contributed_by!=con.contributor_id)) 
-and mds.is_active = true
+and coalesce(mds.is_active, true) = true
 and (conf.value=1 or is_profane=false)
 and (conf2.value=0 or for_demo=true)
 group by dataset_row.dataset_row_id, dataset_row.media->>'data', mds.params 
@@ -129,7 +129,7 @@ left join configurations conf on conf.config_name='include_profane'
 left join configurations conf2 on conf2.config_name='show_demo_data'
 left join existingData ed on ed.dataset_row_id=dr.dataset_row_id
 where (((state is null) or ((state='contributed' or state='validated') and ed.dataset_row_id is null)) 
-and mds.is_active = true
+and coalesce(mds.is_active, true) = true
   and (cont.action is null or (coalesce(cont.action,'')='skipped' and cont.contributed_by!=con.contributor_id)))
 and (conf.value=1 or is_profane=false)
 and (conf2.value=0 or for_demo=true)
@@ -146,7 +146,7 @@ select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as 
   inner join configurations conf2 on conf2.config_name='include_profane' 
   inner join configurations conf3 on conf3.config_name='show_demo_data'
     where  con.action='completed' and ds.media->>'language'=$3
-    and mds.is_active = true
+    and coalesce(mds.is_active, true) = true
     and (conf2.value=1 or is_profane=false)
     and (conf3.value=0 or for_demo=true)
 	and con.contribution_id not in (select contribution_id from validations where validated_by=$1)
@@ -165,7 +165,7 @@ select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as 
   inner join configurations conf2 on conf2.config_name='include_profane' 
   inner join configurations conf3 on conf3.config_name='show_demo_data'
   where  con.action='completed' and ds.media->>'language'=$3
-  and mds.is_active = true
+  and coalesce(mds.is_active, true) = true
   and (conf2.value=1 or is_profane=false) 
   and (conf3.value=0 or for_demo=true)
   and con.contribution_id not in (select contribution_id from validations where validated_by=$1)
