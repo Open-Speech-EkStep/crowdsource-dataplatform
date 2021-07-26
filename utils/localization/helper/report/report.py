@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-class LocaleGenerationReport:
+class LocaleReportGenerator:
 
     def __init__(self, language_name, excel_df: pd.DataFrame, json_df: pd.DataFrame, final_df: pd.DataFrame):
         self.language = language_name
@@ -83,16 +83,16 @@ class LocaleGenerationReport:
         translation_remaining_content = self.find_translation_needed_content(self.final_df)
         translation_remaining_keys = translation_remaining_content.keys()
 
-        report = {'total_keys_translation_needed': len(translation_needed_keys),
-                  'total_keys_in_existing_locale_json': len(self.json_df['Key']),
-                  'total_keys_in_translation_excel': len(self.excel_df['Key']),
-                  'total_keys_in_newly_created_locale': len(self.final_df['Key']),
-                  'total_keys_translation_added': len(new_translations_content_keys),
-                  'total_keys_translation_updated': len(updated_translations_content_keys),
-                  'total_keys_translation_remaining': len(translation_remaining_keys),
-                  'keys_translation_needed': list(translation_needed_keys),
-                  'keys_translations_added': list(new_translations_content_keys),
-                  'keys_translations_updated': list(updated_translations_content),
-                  'keys_translations_remaining': list(translation_remaining_keys)}
-
-        return report
+        return {
+            'total_keys_translation_needed': len(translation_needed_keys),
+            'total_keys_in_existing_locale_json': len(self.json_df['Key']),
+            'total_keys_in_translation_excel': len(self.excel_df['Key']),
+            'total_keys_in_newly_created_locale': len(self.final_df['Key']),
+            'total_keys_translation_added': len(new_translations_content_keys),
+            'total_keys_translation_updated': len(updated_translations_content_keys),
+            'total_keys_translation_remaining': len(translation_remaining_keys),
+            'keys_translation_needed': list(translation_needed_keys),
+            'keys_translations_added': list(new_translations_content_keys),
+            'keys_translations_updated': list(updated_translations_content),
+            'keys_translations_remaining': list(translation_remaining_keys)
+        }

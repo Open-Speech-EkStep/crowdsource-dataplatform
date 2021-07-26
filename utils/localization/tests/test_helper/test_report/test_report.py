@@ -1,5 +1,5 @@
 from unittest import TestCase
-from helper.report.report import LocaleGenerationReport
+from helper.report.report import LocaleReportGenerator
 import pandas as pd
 import numpy as np
 
@@ -9,7 +9,7 @@ class TestLocaleGenerationReport(TestCase):
         expected = {"Maybe": "Maybe"}
         df = pd.DataFrame([{'Key': 'Maybe', 'value': 'Maybe'}, {'Key': 'upto 10 years', 'value': '10 वर्ष तक'}],
                           columns=['Key', 'value'])
-        locale_generation_report = LocaleGenerationReport('Hindi', pd.DataFrame(), df, pd.DataFrame())
+        locale_generation_report = LocaleReportGenerator('Hindi', pd.DataFrame(), df, pd.DataFrame())
 
         translation_needed_content = locale_generation_report.find_translation_needed_content(df)
 
@@ -27,7 +27,7 @@ class TestLocaleGenerationReport(TestCase):
             ],
             columns=['Key', 'English copy', 'Hindi']
         )
-        locale_generation_report = LocaleGenerationReport('Hindi', excel_df, pd.DataFrame(), pd.DataFrame())
+        locale_generation_report = LocaleReportGenerator('Hindi', excel_df, pd.DataFrame(), pd.DataFrame())
 
         excel_content = locale_generation_report.convert_excel_df_to_dict()
 
@@ -38,7 +38,7 @@ class TestLocaleGenerationReport(TestCase):
         json_df = pd.DataFrame([{'Key': 'Maybe', 'value': 'Maybe'},
                                 {'Key': 'upto 10 years', 'value': '10 वर्ष तक'}],
                                columns=['Key', 'value'])
-        locale_generation_report = LocaleGenerationReport('Hindi', pd.DataFrame(), json_df, pd.DataFrame())
+        locale_generation_report = LocaleReportGenerator('Hindi', pd.DataFrame(), json_df, pd.DataFrame())
 
         translation_not_needed_content = locale_generation_report.find_translation_not_needed_content()
 
@@ -54,7 +54,7 @@ class TestLocaleGenerationReport(TestCase):
              {'Key': 'May be', 'English copy': 'May be', 'Hindi': np.NAN},
              {'Key': 'upto 10 years', 'English copy': 'upto 10 years', 'Hindi': '10 वर्ष तक'}],
             columns=['Key', 'English copy', 'Hindi'])
-        locale_generation_report = LocaleGenerationReport('Hindi', excel_df, json_df, pd.DataFrame())
+        locale_generation_report = LocaleReportGenerator('Hindi', excel_df, json_df, pd.DataFrame())
 
         new_translation_content = locale_generation_report.find_new_translations_content()
 
@@ -70,7 +70,7 @@ class TestLocaleGenerationReport(TestCase):
              {'Key': 'May be', 'English copy': 'May be', 'Hindi': np.NAN},
              {'Key': 'upto 10 years', 'English copy': 'upto 10 years', 'Hindi': '10 वर्ष'}],
             columns=['Key', 'English copy', 'Hindi'])
-        locale_generation_report = LocaleGenerationReport('Hindi', excel_df, json_df, pd.DataFrame())
+        locale_generation_report = LocaleReportGenerator('Hindi', excel_df, json_df, pd.DataFrame())
 
         new_translation_content = locale_generation_report.find_updated_translations_content()
 

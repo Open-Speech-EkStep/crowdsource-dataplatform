@@ -37,16 +37,6 @@ def reformat_json(json_obj):
     return json_dict
 
 
-def write_df_to_json(df, output_json_path):
-    json_file = df.to_json(orient='values')
-    json_string = json.loads(json_file)
-
-    reformatted_json = reformat_json(json_string)
-
-    with open(output_json_path, 'w') as f:
-        f.write(json.dumps(reformatted_json, indent=4, ensure_ascii=False))
-
-
 def load_json_as_df(json_data):
     out_df = pd.DataFrame(list(json_data.items()),
                           columns=['Key', 'value'])

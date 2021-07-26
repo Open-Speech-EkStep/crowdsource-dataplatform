@@ -1,6 +1,7 @@
 import glob
 import json
 import os
+from datetime import datetime
 
 import pandas as pd
 
@@ -79,3 +80,13 @@ def get_matched_count(excel_df, merged_df):
                 count += 1
                 break
     return count
+
+
+def write_report(report, report_type):
+    now = datetime.now()
+    report_folder = 'reports'
+    os.makedirs('%s' % report_folder, exist_ok=True)
+    JsonWriter().write(
+        '{folder_name}/report_{report_type}_{timestamp}.json'.format(folder_name=report_folder, report_type=report_type,
+                                                                     timestamp=now),
+        report)
