@@ -48,7 +48,7 @@ function initializeBlock() {
   }
 
   getAvailableLanguages('parallel').then(languagePairs => {
-    const { datasetLanguages, contributionLanguages } = languagePairs;
+    const { datasetLanguages } = languagePairs;
     let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
 
@@ -155,7 +155,7 @@ $(document).ready(function () {
   initializeFeedbackModal();
   getLocaleString().then(() => {
     initializeBlock();
-  }).catch(err => {
+  }).catch(() => {
     initializeBlock();
   });
   onActiveNavbar(MODULE.likho.value);

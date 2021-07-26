@@ -1,5 +1,5 @@
 
-$(document).ready(function (ev) {
+$(document).ready(function () {
   const $sunoTab = $('#sunoTab');
   const $boloTab = $('#boloTab');
   const $likhoTab = $('#likhoTab');

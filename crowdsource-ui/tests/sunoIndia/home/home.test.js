@@ -1,8 +1,5 @@
 const {readFileSync} = require('fs');
-const fetchMock = require("fetch-mock");
-const {stringToHTML, mockLocalStorage} = require('../../utils');
-const {CURRENT_MODULE,CONTRIBUTION_LANGUAGE} = require('../../../build/js/common/constants');
-const {initializeBlock} = require('../../../build/js/sunoIndia/home.js');
+const {stringToHTML} = require('../../utils');
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../../../build/views/sunoIndia/home.ejs`, 'UTF-8') +
@@ -13,7 +10,7 @@ const utils = require('../../../build/js/common/utils');
 const commonHome = require('../../../build/js/common/commonHome');
 const languageNavBar = require('../../../build/js/common/languageNavBar')
 
-utils.updateLocaleLanguagesDropdown = jest.fn().mockImplementation((a) => {
+utils.updateLocaleLanguagesDropdown = jest.fn().mockImplementation(() => {
 });
 utils.toggleFooterPosition = jest.fn().mockImplementation(() => {
 });
@@ -22,7 +19,7 @@ utils.performAPIRequest = jest.fn().mockImplementation(() => {});
 
 commonHome.getStatsSummary
   =
-  jest.fn().mockImplementation((a, b, c) => {
+  jest.fn().mockImplementation(() => {
   });
 commonHome.getDefaultLang = jest.fn().mockReturnValue("Hindi");
 commonHome.setDefaultLang
@@ -32,7 +29,7 @@ commonHome.setDefaultLang
 
 languageNavBar.setLangNavBar
   =
-  jest.fn().mockImplementation((a, b) => {
+  jest.fn().mockImplementation(() => {
   });
 
 describe("initializeBlock", () => {

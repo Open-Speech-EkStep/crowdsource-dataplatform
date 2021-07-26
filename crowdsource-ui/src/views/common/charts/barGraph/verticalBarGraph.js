@@ -75,7 +75,7 @@ const drawGenderChart = (chartData) => {
 };
 
 
-function buildGraphs(language, timeframe) {
+function buildGraphs(language) {
   // $.fn.popover.Constructor.Default.whiteList.table = [];
   // $.fn.popover.Constructor.Default.whiteList.tbody = [];
   // $.fn.popover.Constructor.Default.whiteList.tr = [];

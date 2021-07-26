@@ -10,13 +10,16 @@ const {
   AGGREGATED_DATA_BY_LANGUAGE
 } = require("../common/constants");
 const {
-  setPageContentHeight,
   updateLocaleLanguagesDropdown,
   getLocaleString,
   performAPIRequest,
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
+const {
+  // showByHoursChart,
+  showByHoursChartThankyouPage,
+  // getContributedAndTopLanguage,
+  setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { initializeFeedbackModal } = require('../common/feedback');
 const CURRENT_INDEX = "dekhoValidatorCurrentIndex";
@@ -70,7 +73,6 @@ const getLanguageStats = function () {
           CONTRIBUTION_LANGUAGE
         );
         localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-        const module = localStorage.getItem(CURRENT_MODULE);
         const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.dekho.value, 'total_validation_count','total_validations');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
         showByHoursChartThankyouPage(MODULE.dekho.value, "thankyou");
@@ -184,10 +186,10 @@ $(document).ready(function () {
   localStorage.setItem("selectedType","validate");
   initializeFeedbackModal();
   getLocaleString()
-    .then((data) => {
+    .then(() => {
       executeOnLoad();
     })
-    .catch((err) => {
+    .catch(() => {
       executeOnLoad();
     });
 });

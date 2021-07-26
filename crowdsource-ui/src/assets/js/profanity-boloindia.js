@@ -74,7 +74,7 @@ function updateProfanityState(userName, sentenceId, language, state) {
 function invokeProfanityStateUpdate(state) {
     const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
     updateProfanityState(localSpeakerDataParsed.userName, crowdSource.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
-        .then(res => {
+        .then(() => {
         }).catch(err => {
             console.log(err);
         })
@@ -94,7 +94,7 @@ function updateSkipAction() {
             sentenceId: sentenceId,
             userName: localSpeakerDataParsed.userName
         })
-    }).then(res => { }).catch(err => {
+    }).then(() => { }).catch(err => {
         console.log(err)
     });
 }

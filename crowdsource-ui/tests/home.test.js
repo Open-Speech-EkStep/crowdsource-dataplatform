@@ -4,7 +4,7 @@ const {
   getStatsSummary
 } = require("../src/assets/js/home");
 const { readFileSync } = require("fs");
-const { stringToHTML, flushPromises, mockLocalStorage, performAPIRequest } = require("./utils");
+const { stringToHTML, flushPromises, mockLocalStorage } = require("./utils");
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../build/views/boloIndia/home.ejs`, "UTF-8")

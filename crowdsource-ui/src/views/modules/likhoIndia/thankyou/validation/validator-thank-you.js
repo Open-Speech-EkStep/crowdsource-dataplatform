@@ -12,14 +12,13 @@ const {
 } = require("../common/constants");
 
 const {
-  setPageContentHeight,
   getLocaleString,
   performAPIRequest,
 } = require("../common/utils");
 
 const {downloadPdf} = require('../common/downloadableBadges');
 const { showUserProfile,onChangeUser,onOpenUserDropDown } = require('../common/header');
-const {showByHoursChartThankyouPage,setBadge,  updateLikhoLocaleLanguagesDropdown,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
+const {showByHoursChartThankyouPage, setBadge, updateLikhoLocaleLanguagesDropdown,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 const {initializeFeedbackModal} = require('../common/feedback');
 
 const CURRENT_INDEX = "likhoValidatorCurrentIndex";
@@ -194,10 +193,10 @@ $(document).ready(function () {
     downloadPdf($(this).attr("data-badge"));
   });
   getLocaleString()
-    .then((data) => {
+    .then(() => {
       executeOnLoad();
     })
-    .catch((err) => {
+    .catch(() => {
       executeOnLoad();
     });
 });

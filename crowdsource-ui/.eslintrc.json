@@ -1,0 +1,38 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true,
+    "node": true,
+    "jquery": true,
+    "jest": true
+  },
+  "extends": "eslint:recommended",
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "allowImportExportEverywhere": true,
+    "requireConfigFile": false
+  },
+  "globals": {
+    "am4core": false,
+    "am4charts": false,
+    "am4maps": false,
+    "am4themes_animated": false,
+    "Notyf": false,
+    "crowdSource": false,
+    "sunoIndiaValidator": false,
+    "likhoIndiaValidator": false,
+    "dekhoIndiaValidator": false,
+    "boloIndiaValidator": false,
+    "likhoIndia": false,
+    "dekhoIndia": false,
+    "sunoIndia": false,
+    "jsPDF": false,
+    "Recorder": false
+  },
+  "rules": {
+    "no-useless-escape": "off"
+  }
+}

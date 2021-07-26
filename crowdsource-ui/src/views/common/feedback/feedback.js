@@ -123,16 +123,13 @@ const updateSelectPageWhenModuleChanges = () => {
                 $("#select_page_id").find('option[value="' + page + '"]').attr("selected", "selected");
                
             } catch (error) {
-
+                console.log(error);
             }
         }
     });
 };
 
 const enableSubmit = function () {
-    const module = $("#moduleSelectRadio");
-    const target_page = $("#select_page_id");
-    const opinion_rating = $("#opinionRadio");
     $('input[name="opinionRadio"]').on('change', () => {
         const isEmailValid = $('#email').val().length > 0 || feedback_top_component === 'false';
         if($('input[name="opinionRadio"]').is(':checked') && isEmailValid)

@@ -1,7 +1,7 @@
 const fetch = require('../common/fetch')
 const {
   setPageContentHeight,
-  toggleFooterPosition,
+  // toggleFooterPosition,
   setFooterPosition,
   getLocaleString,
   showElement,
@@ -10,7 +10,7 @@ const {
   reportSentenceOrRecording,
   getDeviceInfo, getBrowserInfo
 } = require('../common/utils');
-const {LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, ALL_LANGUAGES, CONTRIBUTION_LANGUAGE } = require('../common/constants');
+const {LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, CONTRIBUTION_LANGUAGE } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, isMobileDevice, updateLikhoLocaleLanguagesDropdown, showOrHideExtensionCloseBtn } = require('../common/common');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
@@ -47,11 +47,11 @@ function uploadToServer(cb) {
     body: fd,
   })
     .then((res) => res.json())
-    .then((result) => {
+    .then(() => {
     })
-    .catch((err) => {
+    .catch(() => {
     })
-    .then((finalRes) => {
+    .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
       }
@@ -99,13 +99,6 @@ const closeEditor = function () {
   hideElement($('#keyboardBox'));
 }
 
-const openEditor = function () {
-  showElement($('#keyboardBox'));
-}
-
-
-
-
 function markContributionSkipped() {
   const contributionLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
@@ -130,9 +123,9 @@ function markContributionSkipped() {
     body: JSON.stringify(reqObj),
   })
     .then((res) => res.json())
-    .then((result) => {
+    .then(() => {
     })
-    .catch((err) => {})
+    .catch((err) => {console.log(err)})
 }
 
 function addListeners() {
@@ -186,7 +179,7 @@ function addListeners() {
         closeEditor();
         getNextSentence();
       }, 2000)
-    } catch (e) {}
+    } catch (e) {console.log(e)}
 
   })
 
@@ -378,7 +371,7 @@ function executeOnLoad() {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch((err) => {});
+  }).catch((err) => {console.log(err)});
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);

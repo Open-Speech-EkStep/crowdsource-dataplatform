@@ -6,11 +6,13 @@ const {
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick } = require('./speakerDetails');
 const {  updateLocaleLanguagesDropdown, calculateTime, getLocaleString, formatTime } = require('./utils');
-const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES,MODULE,CONTRIBUTION_LANGUAGE ,SPEAKER_DETAILS_KEY} = require('../../../build/js/common/constants');
+const { DEFAULT_CON_LANGUAGE,MODULE,CONTRIBUTION_LANGUAGE ,SPEAKER_DETAILS_KEY} = require('../../../build/js/common/constants');
 const { hasUserRegistered } = require('./common');
 const fetch = require('./fetch');
 const LOCALE_STRINGS = 'localeString';
 let timer;
+
+// eslint-disable-next-line no-unused-vars
 let languageToRecord = '';
 
 const fetchDetail = (language) => {
@@ -123,9 +125,11 @@ function updateLanguage(language) {
                         $('#no-data-found').addClass('d-none');
                     }, 5000);
                 }
-            } catch (error) {}
+            } catch (error) {
+                console.log(error);
+            }
         })
-        .catch((err) => {});
+        .catch((err) => {console.log(err)});
 }
 
 const initializeBlock = function () {
@@ -159,10 +163,10 @@ const initializeBlock = function () {
         updateGraph(selectedLanguage, selectedDuration, true);
     });
 
-    $("#no-data-found").on('mouseenter', (e) => {
+    $("#no-data-found").on('mouseenter', () => {
         clearTimeout(timer);
     });
-    $("#no-data-found").on('mouseleave', (e) => {
+    $("#no-data-found").on('mouseleave', () => {
         timer = setTimeout(() => {
             $('#no-data-found').addClass('d-none');
         }, 5000);
@@ -178,7 +182,7 @@ const initializeBlock = function () {
         }, 5000);
     }, {passive: true});
 
-    $("#contribute-now").on('click', (e) => {
+    $("#contribute-now").on('click', () => {
         localStorage.setItem("i18n", "en");
         localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
         localStorage.setItem("selectedType", "contribute");
@@ -206,7 +210,7 @@ const initializeBlock = function () {
 $(document).ready(function () {
     getLocaleString().then(()=>{
         initializeBlock();
-    }).catch(err => {
+    }).catch(() => {
         initializeBlock();
     });
 });

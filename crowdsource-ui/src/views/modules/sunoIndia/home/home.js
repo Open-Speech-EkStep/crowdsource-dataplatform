@@ -101,7 +101,7 @@ $(document).ready(function () {
   getAvailableLanguages("asr");
   getLocaleString().then(()=>{
     initializeBlock();
-  }).catch(err => {
+  }).catch(() => {
     initializeBlock();
   });
   onActiveNavbar(MODULE.suno.value);
