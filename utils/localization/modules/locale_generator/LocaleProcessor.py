@@ -212,12 +212,25 @@ def main():
                         help="Output folder path where excels are generated")
 
     args = parser.parse_args(
-        "-j /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localisation_script/delta_generation/cleaned_jsons \
-            -e /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/sme-input \
-            -m /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/out-meta \
-            -o ./output_json_files \
-            -t seperate \
-            -l hi".split())
+        "\
+        -j crowdsource-dataplatform/utils/localisation_script/all_keys_generator/out \
+        -e crowdsource-dataplatform/utils/localization/resources/out_sme_5_20.xlsx \
+        -m crowdsource-dataplatform/utils/localization/resources/out_meta_5_20.xlsx \
+        -o ./output \
+        -t combined \
+        -a \
+        ".split())
+
+    # for test
+    # args = parser.parse_args(
+    #     "\
+    #     -j crowdsource-dataplatform/utils/localization/resources/test_data/input_jsons \
+    #     -e crowdsource-dataplatform/utils/localization/resources/test_data/test-out-sme/hi.xlsx \
+    #     -m crowdsource-dataplatform/utils/localization/resources/test_data/test-out-meta/out_meta_5_20.xlsx \
+    #     -o ./output \
+    #     -t combined \
+    #     -l hi \
+    #     ".split())
 
     languages = get_selected_languages(all_languages_list, args.all_languages, args.languages)
 
