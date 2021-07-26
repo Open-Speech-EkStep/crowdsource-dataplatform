@@ -1,7 +1,7 @@
 const fetch = require('../common/fetch')
 const {
   setPageContentHeight,
-  toggleFooterPosition,
+  // toggleFooterPosition,
   setFooterPosition,
   showElement,
   hideElement,
@@ -11,7 +11,7 @@ const {
   getBrowserInfo,
   getLocaleString
 } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE, ALL_LANGUAGES,LOCALE_STRINGS} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
 const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice, updateLikhoLocaleLanguagesDropdown} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
@@ -86,10 +86,10 @@ function uploadToServer(cb) {
     body: fd,
   })
     .then((res) => res.json())
-    .then((result) => {
+    .then(() => {
     })
-    .catch((err) => {})
-    .then((finalRes) => {
+    .catch(() => {})
+    .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
       }
@@ -97,6 +97,7 @@ function uploadToServer(cb) {
 }
 
 let currentIndex;
+// eslint-disable-next-line no-unused-vars
 let validationCount = 0;
 
 function setCapturedText(index) {
@@ -359,7 +360,7 @@ const getLocationInfo = () => {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch((err) => {});
+  }).catch((err) => {console.log(err)});
 }
 
 let selectedReportVal = '';

@@ -11,6 +11,7 @@ const skipCountKey = 'skipCount';
 const countKey = 'count';
 
 let currentIndex;
+// eslint-disable-next-line no-unused-vars
 let localeStrings;
 
 const hideElement = function (element){
@@ -87,7 +88,6 @@ const initialize = () => {
     const $player = $('#player');
     const $audioPlayer = $('#audio-controller');
     const $nextBtn = $('#nextBtn');
-    const $nextBtnToolTip = $nextBtn.parent();
     const $getStarted = $('#get-started');
     const $skipBtn = $('#skipBtn');
     const $recordingRow = $('#recording-row');
@@ -241,6 +241,7 @@ const initialize = () => {
                 //new audio context to help us record
                 input = audioCtx.createMediaStreamSource(stream);
                 input.connect(audioAnalyser);
+                // eslint-disable-next-line no-undef
                 visualize(visualizer, audioAnalyser);
                 /* Create the Recorder object and configure to record mono sound (1 channel) Recording 2 channels will double the file size */
                 rec = new Recorder(input, {
@@ -259,11 +260,10 @@ const initialize = () => {
                     $stopRecordBtn.click();
                 }, 21 * 1000);
             })
-            .catch((err) => {
+            .catch(() => {
                 notyf.error(
                     'Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission'
                 );
-                // $startRecordRow.removeClass('d-none');
                 $stopRecordBtn.addClass('d-none');
                 $nextBtn.addClass('d-none');
                 $reRecordBtn.addClass('d-none');
@@ -277,13 +277,10 @@ const initialize = () => {
     });
 
     $stopRecordBtn.on('click', () => {
-        const $startRecordRow = $('#startRecordRow');
         clearTimeout(cleartTimeoutKey);
         clearTimeout(timerTimeoutKey)
         $autoStopWarning.classList.add('d-none');
-        // $startRecordRow.addClass('d-none');
         $stopRecordBtn.addClass('d-none');
-        // $nextBtn.removeClass('d-none');
         $skipBtn.prop('disabled', false);
         $reRecordBtn.removeClass('d-none');
         $recordingSign.addClass('d-none');
@@ -433,10 +430,10 @@ const initialize = () => {
             body: JSON.stringify(reqObj),
         })
             .then((res) => res.json())
-            .then((result) => {
+            .then(() => {
             })
-            .catch((err) => {})
-            .then((finalRes) => {
+            .catch(() => {})
+            .then(() => {
                 if (cb && typeof cb === 'function') {
                     cb();
                 }
@@ -468,10 +465,10 @@ const initialize = () => {
             body: fd,
         })
             .then((res) => res.json())
-            .then((result) => {
+            .then(() => {
             })
-            .catch((err) => {})
-            .then((finalRes) => {
+            .catch(() => {})
+            .then(() => {
                 if (cb && typeof cb === 'function') {
                     cb();
                 }
@@ -553,8 +550,6 @@ function executeOnLoad() {
     const $reportModal = $("#report_sentence_modal");
     const $loader = $('#loader');
     const $pageContent = $('#page-content');
-    const $navUser = $('#nav-user');
-    const $navUserName = $navUser.find('#nav-username');
     const contributionLanguage = localStorage.getItem('contributionLanguage');
     localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
     if (contributionLanguage) {
@@ -585,7 +580,7 @@ function executeOnLoad() {
     }).then(response => {
         localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);
-    }).catch((err) => {});
+    }).catch((err) => {console.log(err)});
     try {
         const localSpeakerData = localStorage.getItem(speakerDetailsKey);
         const localSpeakerDataParsed = JSON.parse(localSpeakerData);

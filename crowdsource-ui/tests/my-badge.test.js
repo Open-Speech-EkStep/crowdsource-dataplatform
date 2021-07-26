@@ -1,7 +1,7 @@
 const fetchMock = require("fetch-mock");
 const { readFileSync } = require("fs");
 const { getBadgesForUser, getBadgeRow } = require("../src/assets/js/my-badges");
-const { stringToHTML, flushPromises, mockLocalStorage } = require("./utils");
+const { stringToHTML, mockLocalStorage } = require("./utils");
 const {LOCALE_STRINGS} = require("../src/assets/js/constants")
 
 document.body = stringToHTML(

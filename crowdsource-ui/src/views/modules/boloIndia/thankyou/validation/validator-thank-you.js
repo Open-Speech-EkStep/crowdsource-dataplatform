@@ -18,7 +18,7 @@ const {
 
 const {downloadPdf} = require('../common/downloadableBadges');
 
-const {showByHoursChart, showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
+const {showByHoursChartThankyouPage, setBadge,updateGoalProgressBar, replaceSubStr, getTopLanguage} = require('../common/common');
 const {onChangeUser,onOpenUserDropDown,showUserProfile} = require('../common/header');
 
 const {initializeFeedbackModal} = require('../common/feedback');
@@ -189,10 +189,10 @@ $(document).ready(function () {
     downloadPdf($(this).attr("data-badge"));
   });
   getLocaleString()
-    .then((data) => {
+    .then(() => {
       executeOnLoad();
     })
-    .catch((err) => {
+    .catch(() => {
       executeOnLoad();
     });
 });

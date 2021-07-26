@@ -2,7 +2,6 @@ const {
   CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE,SPEAKER_DETAILS_KEY,DEFAULT_CON_LANGUAGE,AGGREGATED_DATA_BY_TOP_LANGUAGE,AGGREGATED_DATA_BY_LANGUAGE
 } = require('./constants');
 const { drawTopLanguageChart } = require('./verticalGraph');
-const { constructChart } = require('./horizontalBarGraph');
 const { changeLocale,showLanguagePopup } = require('./locale');
 const fetch = require('./fetch');
 const {performAPIRequest} = require('./utils');
@@ -409,7 +408,7 @@ const showOrHideExtensionCloseBtn = function (){
   // }
 }
 
-const updateLikhoLocaleLanguagesDropdown = (language, toLanguage) => {
+const updateLikhoLocaleLanguagesDropdown = (language) => {
   const dropDown = $('#localisation_dropdown');
   const localeLang = ALL_LANGUAGES.find(ele => ele.value == language);
   if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
@@ -451,7 +450,7 @@ const updateGoalProgressBar = function (url){
     $("#totalAverage").text(actualValue + '%');
     const $progressBar = $("#progress_bar");
     $progressBar.width(actualValue + '%');
-  }).catch(e=>console.log)
+  }).catch(e=>console.log(e))
 }
 
 const replaceSubStr = function (element , to ,from){

@@ -3,7 +3,7 @@
   getLocaleString,
   updateLocaleLanguagesDropdown
 } = require('./utils');
-const {CONTRIBUTION_LANGUAGE, BOLOPAGE, LOCALE_STRINGS, ALL_LANGUAGES, DEKHOPAGE, LIKHOPAGE, SUNOPAGE,SPEAKER_DETAILS_KEY} = require('./constants');
+const {CONTRIBUTION_LANGUAGE, BOLOPAGE, LOCALE_STRINGS, DEKHOPAGE, LIKHOPAGE, SUNOPAGE,SPEAKER_DETAILS_KEY} = require('./constants');
 const {onChangeUser, showUserProfile,onOpenUserDropDown} = require('./header');
 const {hasUserRegistered} = require('./common');
 
@@ -55,7 +55,7 @@ const renderBadgeDetails = function (data, source, type) {
 }
 
 const getBadgeData = (type, source, language) => {
-  performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then((data) => renderBadgeDetails(data, source, type)).catch((err) => {})
+  performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then((data) => renderBadgeDetails(data, source, type)).catch(() => {})
 }
 
 const addToLanguage = function (id, list) {

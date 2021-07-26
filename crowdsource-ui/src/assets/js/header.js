@@ -1,7 +1,5 @@
-const {SPEAKER_DETAILS_KEY} = require('./constants');
 const {
   setUserModalOnShown,
-  setSpeakerDetails,
   setGenderRadioButtonOnClick,
   setUserNameOnInputFocus,
   setStartRecordingBtnOnClick

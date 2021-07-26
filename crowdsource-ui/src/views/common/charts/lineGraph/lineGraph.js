@@ -2,7 +2,6 @@ const fetch = require('./fetch')
 const { calculateTime, formatTime } = require('./utils');
 const { CURRENT_MODULE, MODULE } = require('./constants');
 
-const $chartRow = $('.chart-row');
 const $timelineLoader = $('#timeline-loader');
 const $timelineChart = $('#timeline');
 

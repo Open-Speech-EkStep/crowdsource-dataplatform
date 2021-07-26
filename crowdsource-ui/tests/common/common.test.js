@@ -1,9 +1,8 @@
 const {readFileSync} = require('fs');
 jest.mock('node-fetch');
-const fetchMock = require("fetch-mock");
 const {stringToHTML, mockLocalStorage} = require('../utils');
-const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY, CURRENT_MODULE,TOP_LANGUAGES_BY_HOURS, AGGREGATED_DATA_BY_TOP_LANGUAGE,AGGREGATED_DATA_BY_LANGUAGE} = require('../../build/js/common/constants');
-const {showFucntionalCards, hasUserRegistered, setBadge,updateGoalProgressBar,isInTopLanguage} = require('../../build/js/common/common.js');
+const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY, CURRENT_MODULE,AGGREGATED_DATA_BY_LANGUAGE} = require('../../build/js/common/constants');
+const {hasUserRegistered, setBadge,updateGoalProgressBar,isInTopLanguage} = require('../../build/js/common/common.js');
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../../build/views/common/cards.ejs`, 'UTF-8')+
@@ -246,7 +245,7 @@ describe("setBadge", ()=>{
 describe("updateGoalProgressBar", ()=>{
   test("should set average language metric and goals in progress bar", ()=>{
     const origFetch = require('node-fetch');
-    origFetch.mockImplementation(cb => {
+    origFetch.mockImplementation(() => {
       const res = {};
       res.ok = true;
       res.json = ()=> ({goal:100,'current-progress':50 });

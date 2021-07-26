@@ -23,7 +23,7 @@ $(document).ready(function () {
     localStorage.removeItem('profanityUserDetails');
     localStorage.removeItem('profanityCheckLanguage');
     $("#profanityUserModal").modal('show');
-    $('#proceed-box').on('click', (e) => {
+    $('#proceed-box').on('click', () => {
 
         const params = new URLSearchParams(location.search);
         const type = params.get('type');

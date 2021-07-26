@@ -1,4 +1,3 @@
-const { onChangeUser } = require('./header.js');
 const {CONTRIBUTION_LANGUAGE} = require('./constants');
 const {
     updateLocaleLanguagesDropdown
@@ -40,7 +39,7 @@ function setupScroll() {
             });
         }
     };
-};
+}
 
 
 $(document).ready(function () {

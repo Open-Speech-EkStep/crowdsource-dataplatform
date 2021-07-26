@@ -1,7 +1,6 @@
 const fetch = require('../common/fetch')
 const {
   setPageContentHeight,
-  toggleFooterPosition,
   setFooterPosition,
   updateLocaleLanguagesDropdown,
   getLocaleString,
@@ -67,10 +66,10 @@ function uploadToServer(cb) {
     body: fd,
   })
     .then((res) => res.json())
-    .then((result) => {
+    .then(() => {
     })
-    .catch((err) => {})
-    .then((finalRes) => {
+    .catch(() => {})
+    .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
       }
@@ -170,7 +169,6 @@ const setAudioPlayer = function () {
 }
 
 let currentIndex = localStorage.getItem(currentIndexKey) || 0;
-let progressCount = currentIndex, validationCount = 0;
 
 function getNextSentence() {
   if (currentIndex < sunoIndia.sentences.length - 1) {
@@ -248,9 +246,9 @@ function markContributionSkipped() {
     body: JSON.stringify(reqObj),
   })
     .then((res) => res.json())
-    .then((result) => {
+    .then(() => {
     })
-    .catch((err) => {})
+    .catch((err) => {console.log(err)})
 }
 
 function addListeners() {
@@ -312,7 +310,7 @@ function addListeners() {
         closeEditor();
         getNextSentence();
       }, 2000)
-    } catch (e) {}
+    } catch (e) {console.log(e)}
   })
 
   $skipButton.on('click', () => {
@@ -362,46 +360,6 @@ function disableSkipButton() {
   const $skipButton = $('#skip_button');
   $skipButton.removeAttr('style');
   disableButton($skipButton)
-}
-
-const getAudioClip = function (contributionId) {
-  hideAudioRow();
-  disableSkipButton();
-  const source = 'contribute';
-  fetch(`/media-object/${source}/${contributionId}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  }).then((stream) => {
-    stream.arrayBuffer().then((buffer) => {
-      const blob = new Blob([buffer], {type: "audio/wav"});
-      // loadAudio(URL.createObjectURL(blob))
-      const fileReader = new FileReader();
-      fileReader.onload = function (e) {
-        loadAudio(e.target.result);
-        showAudioRow();
-        enableButton($('#skip_button'));
-      }
-      fileReader.readAsDataURL(blob);
-    });
-  }).catch((err) => {
-    showAudioRow();
-  });
-}
-
-function hideAudioRow() {
-  showElement($('#loader-audio-row'));
-  hideElement($('#audio-row'))
-  showElement($('#loader-play-btn'));
-  hideElement($(audioPlayerBtn))
-}
-
-function showAudioRow() {
-  hideElement($('#loader-audio-row'));
-  showElement($('#audio-row'));
-  hideElement($('#loader-play-btn'));
-  showElement($(audioPlayerBtn))
 }
 
 function showThankYou() {
@@ -536,7 +494,7 @@ function executeOnLoad() {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch((err) => {});
+  }).catch((err) => {console.log(err)});
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);

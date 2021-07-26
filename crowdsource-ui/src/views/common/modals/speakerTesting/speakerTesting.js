@@ -2,7 +2,9 @@ const { LOCALE_STRINGS } = require("./constants");
 
 const { getLocaleString } = require("./utils");
 const executeOnReady = function () {
+  // eslint-disable-next-line no-unused-vars
   let audioData = [];
+  // eslint-disable-next-line no-unused-vars
   let recordingLength = 0;
   let context;
   let analyser;
