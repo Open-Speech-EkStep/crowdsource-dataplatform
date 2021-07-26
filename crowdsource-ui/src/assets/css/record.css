@@ -164,7 +164,6 @@ html {
 }
 canvas#visualizer {
   width: 100%;
-  border: 1px solid #ffffff;
   height: 120px;
 }
 audio {
@@ -223,7 +222,7 @@ audio {
 }
 .test-mic-speaker button {
   color: #666666;
-  background: #f6f6f6;
+  background: #fff;
   border-radius: 4px;
   min-height: 32px;
   padding: 5px 8px;

@@ -21,17 +21,17 @@
     <style>.btn.focus,.btn:focus{outline:0;box-shadow:0 0}</style>
 </head>
 
-<body>
+<body class="bg-secondary">
 <%- include('../common/headerWithoutNavBar.ejs',{path:"../", MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg",homePath:"./home.html"}); %>
-<div id="validator-page-content">
-    <div class="container-fluid padding-top-65">
+<div id="validator-page-content" class="h-100">
+    <div class="container-fluid padding-top-65 functional-page-bg">
         <%- include('../common/breadcrumb.ejs', {MODULE:"Bolo", PAGE_TITLE:__('Validate'),img:"BoloIndiaLogo.svg", homePath:"./home.html"}) %>
         <div id="content-wrapper" class="d-flex flex-column">
             <div class="d-flex justify-content-end pt-3 record-btn-container position-relative">
                 <div class="row position-absolute bolo-back-btn top-back-btn">
                     <button class="btn btn-link p-0 back-btn" id="back-btn">
-                        <a href="./home.html" class="nav-link d-lg-inline-flex" style="color:#959595;font-size:16px">
-                            <span class="material-icons" style="vertical-align:sub">
+                        <a href="./home.html" class="nav-link d-lg-inline-flex" style="color:#0f2749;font-size:20px">
+                            <span class="material-icons" style="vertical-align:sub;padding-top:4px">
                     arrow_back
                     </span>
                             <span class="back-text"><%= __('Home') %></span>

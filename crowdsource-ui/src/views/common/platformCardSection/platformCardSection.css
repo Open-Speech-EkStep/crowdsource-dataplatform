@@ -5,7 +5,7 @@
 .platform-intro-section-cover{
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('/img/top_half_banner.svg');
+  background-image: url('/img/landing_bg.svg');
   background-size: cover;
 }
 
@@ -89,7 +89,7 @@
 #badge-section-card-cover {
   box-shadow: 0 4px 12px 1px rgba(0, 0, 0, .08);
   border-radius: 12px;
-  background: #ffffff;
+  background:#EFF5FF;;
 }
 
 #badge-section-card {
@@ -722,7 +722,6 @@
   font-family: 'Rowdies', cursive;
   font-style: normal;
   font-weight: 300;
-  color: #ecf6ff;
 }
 
 /* body{

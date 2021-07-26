@@ -159,7 +159,6 @@ html {
 }
 canvas#visualizer {
   width: 100%;
-  border: 1px solid #ffffff;
   height: 120px;
 }
 audio {

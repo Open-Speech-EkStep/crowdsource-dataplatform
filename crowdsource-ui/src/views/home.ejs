@@ -25,11 +25,11 @@
     <link rel="icon" type="image/png" href="/img/favicon.ico">
 </head>
 
-<body class="bg-secondary">
+<body class="bg-white">
 <%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
 <div class="container-fluid supreme-container px-0 padding-top-65">
     <div class="platform-intro-section-cover mb-0 pb-0" style="margin:auto">
-    <div class="row m-0" id="banner">
+    <div class="row m-0 text-btn-primary" id="banner">
         <div class="left-bg w-100">
             <div class="right-bg">
              <div class="container-fluid row m-0 text-center justify-content-center">
@@ -62,10 +62,9 @@
                 </h2>
                 <div class="row mt-3" id="participation-data">
                     <div class="col-12 col-lg-12 col-md-12">
-                        <div class="row text-center contribution-details" id="contribution-details">
+                        <div class="row text-center contribution-details contribution-stats" id="contribution-details">
                             <%- include('common/contributionStats/contributionStats.ejs', {labels :[ __('Suno India').toUpperCase(), __('Bolo India').toUpperCase(), __('Likho India').toUpperCase(), __('Dekho India').toUpperCase()]}) %>
                         </div>
-                        <%- include common/horizontal_tri_color_line.ejs %>
                     </div>
                 </div>
             </div>

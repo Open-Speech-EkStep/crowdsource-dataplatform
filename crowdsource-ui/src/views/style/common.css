@@ -51,7 +51,7 @@ body {
 .report-btn-container button{
   color: #666666;
   margin-right: 1rem;
-  background: #f6f6f6;
+  background: #fff;
   border-radius: 4px;
   min-height: 32px;
 }
@@ -192,13 +192,11 @@ body {
     top: 25px;
     left: 7%;
     font-style: italic;
-    border: 1px solid #4d82f7;
     width: 89%;
     padding: 8px 15px;
     height: 44px;
     border-radius: 12px;
     background: rgba(77, 130, 247, .1);
-    color: #4d82f7;;
   }
 
   .footer-links {
@@ -239,13 +237,11 @@ body {
     top: 5px;
     left: 10%;
     font-style: italic;
-    border: 1px solid #4d82f7;
     width: 89%;
     padding: 0 10px;
     height: 44px;
     border-radius: 12px;
     background: rgba(77, 130, 247, .1);
-    color: #4d82f7;;
   }
 
   .d-inherit {
@@ -299,13 +295,11 @@ body {
     top: 5px;
     left: 7%;
     font-style: italic;
-    border: 1px solid #4d82f7;
     width: 95%;
     padding: 8px 15px;
     min-height: 38px;
     border-radius: 12px;
     background: rgba(77, 130, 247, .1);
-    color: #4d82f7;;
   }
 
   #warning-msg p {

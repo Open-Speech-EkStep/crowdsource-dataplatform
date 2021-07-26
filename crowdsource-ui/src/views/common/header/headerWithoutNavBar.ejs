@@ -1,6 +1,6 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/header.css">
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/theme.css">
-<nav class="navbar header-fixed navbar-expand-lg navbar-dark bg-app-primary pl-lg-4 pl-md-4 pl-3 py-lg-0 py-0 pr-0 font-family-Rowdies" id="header-nav-bar">
+<nav class="navbar header-fixed navbar-expand-lg navbar-light bg-app-primary pl-lg-4 pl-md-4 pl-3 py-lg-0 py-0 pr-0 font-family-Rowdies" id="header-nav-bar">
     <div class="row m-0">
         <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="d-flex align-items-center">
@@ -16,9 +16,9 @@
     <div id="logo_separator" class="ml-2"></div>
     <div class="row ml-1 d-none-mob">
         <img src="<%= `/img/${locale}-${img}`%>" alt="module_logo" width="50" height="40" id="module_header_logo">
-        <a class="m-0 align-self-center text-decoration-none text-white" style="padding-right:10px;padding-left:10px;font-size:20px" href="<%= homePath %>"><%= __(MODULE) %> <span style="color:#ffbf00"><%= __('India')%></span></a>
+        <a class="m-0 align-self-center text-decoration-none text-primary" style="padding-right:10px;padding-left:10px;font-size:20px" href="<%= homePath %>"><%= __(MODULE) %> <span style="color:#ffbf00"><%= __('India')%></span></a>
         <div id="tilt_line"></div>
-        <p class="m-0 align-self-center text-white"><%= PAGE_TITLE %></p>
+        <p class="m-0 align-self-center text-primary"><%= PAGE_TITLE %></p>
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
