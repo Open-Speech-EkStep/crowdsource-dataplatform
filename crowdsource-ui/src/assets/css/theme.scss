@@ -28,8 +28,8 @@ $text-secondary: #d8d8d8;
 $text-yellow: #ffbf00;
 $text-dark: #000;
 $text-muted: #8c8c8c;
-$text-offWhite: #E2E2E2;
-$text-light: #EFF5FF;
+$text-offWhite: #e2e2e2;
+$text-light: #eff5ff;
 
 // Color Shades
 
@@ -49,14 +49,13 @@ $primary-color-shade10: tint($primary-color, 100%);
 .bg-app-primary {
   background-color: $text-white !important;
   color: $primary-color !important;
-  filter: drop-shadow(0px 4px 4px #9FC8FF);
+  filter: drop-shadow(0px 4px 4px #9fc8ff);
 }
 
-.bg-footer-primary{
-  background-color: #EFF5FF !important;
+.bg-footer-primary {
+  background-color: #eff5ff !important;
   color: $primary-color !important;
 }
-
 
 .bg-body-primary {
   background-color: $text-light !important;
@@ -65,8 +64,8 @@ $primary-color-shade10: tint($primary-color, 100%);
   background-size: cover;
 }
 
-.bg-tri-color{
-  background-image: url(/img/orange_bg.svg), url(/img/green_bg.svg), url(/img/thankyou_bg.svg) ;
+.bg-tri-color {
+  background-image: url(/img/orange_bg.svg), url(/img/green_bg.svg), url(/img/thankyou_bg.svg);
   background-position: top center, bottom center, top center;
   background-repeat: no-repeat, no-repeat, no-repeat;
   background-color: $text-light;
@@ -84,12 +83,13 @@ $primary-color-shade10: tint($primary-color, 100%);
   }
 }
 
-#warning-msg{
-  border:1px solid $primary-color;
-  color:$primary-color;
+#warning-msg {
+  border: 1px solid $primary-color;
+  color: $primary-color;
 }
 
-a.text-primary:focus, a.text-primary:hover{
+a.text-primary:focus,
+a.text-primary:hover {
   color: $bg-header-primary !important;
 }
 
@@ -305,26 +305,19 @@ a.text-primary:focus, a.text-primary:hover{
   color: $primary-color !important;
 }
 
-
-.contribution-stats{
-  background-color: #2961AD;
-  filter: drop-shadow(0px 8px 0px $text-yellow);
-  .stats{
+.contribution-stats {
+  background-color: #2961ad;
+  box-shadow: rgb(255, 191, 0) 0 8px 0;
+  .stats {
     color: $text-yellow;
   }
-  .stats-label{
+  .stats-label {
     color: $text-white;
   }
 }
 
-audio{
+audio {
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2));
-}
-
-@media  screen and (min-width:767px) {
-  .functional-page-bg  {
-    height: 100%;
-  }
 }
 
 .functional-page-bg {
@@ -337,4 +330,22 @@ audio{
 
 .back-btn a {
   color: $primary-color;
+}
+
+@media screen and (min-width: 767px) {
+  .functional-page-bg {
+    height: 100%;
+  }
+  #navbarSupportedContent ul li {
+    height: 65px;
+  }
+  #navbarSupportedContent ul li a {
+    padding-top: 12px;
+  }
+}
+
+@media screen and (max-width: 766px) {
+  #navbarSupportedContent ul li {
+    height: 45px;
+  }
 }
