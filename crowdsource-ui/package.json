@@ -6,7 +6,8 @@
     "scripts": {
         "gulp": "gulp",
         "test": "jest",
-        "preinstall": "npx npm-force-resolutions"
+        "preingststall": "npx npm-force-resolutions",
+        "eslint": "eslint  \"**/*.js\" --fix"
     },
     "repository": {
         "type": "git",
@@ -19,11 +20,13 @@
     },
     "homepage": "https://github.com/ekstep2/ektep-crowdsource-platform#readme",
     "dependencies": {
+        "@babel/eslint-parser": "^7.14.7",
         "compression": "^1.7.4",
         "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "ejs": "2.5.5",
+        "eslint": "^7.31.0",
         "express": "^4.17.1",
         "express-session": "^1.17.1",
         "helmet": "^3.22.0",

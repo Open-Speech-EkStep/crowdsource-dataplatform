@@ -12,7 +12,7 @@
     "stylelint": " stylelint \"crowdsource-ui/**/*.css\"  --fix",
     "htmllint": " htmllint \"crowdsource-ui/**/*.ejs\" ",
     "prettierlint": " prettier --write ./crowdsource-ui/* ./crowdsource-api/*",
-    "eslint": "eslint  \"crowdsource-ui/**/*.js\" --fix",
+    "eslint": "cd crowdsource-ui && npm run eslint",
     "ci-lint": "npm run stylelint && npm run htmllint && npm run prettier",
     "test:api": "cd crowdsource-api && npm run test",
     "test:ui": "cd crowdsource-ui && gulp generateBuild && npm run test",
@@ -40,11 +40,7 @@
     "node": "12.16.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.14.7",
     "del": "^5.1.0",
-    "eslint": "^7.31.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0",
     "fetch-mock": "^9.11.0",
     "glob-parent": "^5.1.2",
     "gulp": "^4.0.2",
