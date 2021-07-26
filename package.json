@@ -39,6 +39,14 @@
   "engines": {
     "node": "12.16.0"
   },
+  "lint-staged": {
+    "crowdsource-ui/**/*.css": [
+      "npm run stylelint"
+    ],
+    "crowdsource-ui/**/*.js": [
+      "npm run eslint"
+    ]
+  },
   "devDependencies": {
     "del": "^5.1.0",
     "fetch-mock": "^9.11.0",
