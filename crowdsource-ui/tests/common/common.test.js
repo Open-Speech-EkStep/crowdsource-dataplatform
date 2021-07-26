@@ -3,7 +3,7 @@ jest.mock('node-fetch');
 const fetchMock = require("fetch-mock");
 const {stringToHTML, mockLocalStorage} = require('../utils');
 const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY, CURRENT_MODULE,TOP_LANGUAGES_BY_HOURS, AGGREGATED_DATA_BY_TOP_LANGUAGE,AGGREGATED_DATA_BY_LANGUAGE} = require('../../build/js/common/constants');
-const {showFucntionalCards, hasUserRegistered, setBadge,updateGoalProgressBar} = require('../../build/js/common/common.js');
+const {showFucntionalCards, hasUserRegistered, setBadge,updateGoalProgressBar,isInTopLanguage} = require('../../build/js/common/common.js');
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../../build/views/common/cards.ejs`, 'UTF-8')+
@@ -14,6 +14,132 @@ document.body = stringToHTML(
   readFileSync(`${__dirname}/../../build/views/common/badgesMilestone.ejs`, 'UTF-8')+
   readFileSync(`${__dirname}/../../build/views/common/languageGoal.ejs`, 'UTF-8')
 );
+
+describe("isInTopLanguage",()=>{
+  test("should give true when contribution language is the top language",()=>{
+    const sortedLanguageStats = [
+      {
+        language: "Assamese-Bengali",
+        "total_speakers": "3",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "4"
+      },{
+        language: "Assamese-Gujarati",
+        "total_speakers": "2",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "2",
+        "total_validation_count": "1"
+      },{
+        language: "Assamese-English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "1",
+        "total_validation_count": "0"
+      }
+    ]
+
+    const result = isInTopLanguage(sortedLanguageStats, "Assamese-Bengali","total_contribution_count" );
+    expect(result).toEqual(true);
+
+  })
+
+  test("should give true when contribution language and top language have same stats",()=>{
+    const sortedLanguageStats = [
+      {
+        language: "Assamese-Bengali",
+        "total_speakers": "3",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "4"
+      },{
+        language: "Assamese-Gujarati",
+        "total_speakers": "2",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "1"
+      },{
+        language: "Assamese-English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "1",
+        "total_validation_count": "0"
+      }
+    ]
+
+    const result = isInTopLanguage(sortedLanguageStats, "Assamese-Gujarati","total_contribution_count" );
+    expect(result).toEqual(true);
+
+  })
+
+  test("should give false when contribution language is not the top language",()=>{
+    const sortedLanguageStats = [
+      {
+        language: "Assamese-Bengali",
+        "total_speakers": "3",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "4"
+      },{
+        language: "Assamese-Gujarati",
+        "total_speakers": "2",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "2",
+        "total_validation_count": "1"
+      },{
+        language: "Assamese-English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "1",
+        "total_validation_count": "0"
+      }
+    ]
+
+    const result = isInTopLanguage(sortedLanguageStats, "Assamese-Hindi","total_contribution_count" );
+    expect(result).toEqual(false);
+
+  })
+
+  test("should give true when contribution language is the top language with stats 0",()=>{
+    const sortedLanguageStats = [
+      {
+        language: "Assamese-Bengali",
+        "total_speakers": "3",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "4"
+      },{
+        language: "Assamese-Gujarati",
+        "total_speakers": "2",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "2",
+        "total_validation_count": "1"
+      },{
+        language: "Assamese-English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "1",
+        "total_validation_count": "0"
+      }
+    ]
+
+    const result = isInTopLanguage(sortedLanguageStats, "Assamese-Bengali","total_contribution_count" );
+    expect(result).toEqual(true);
+
+  })
+})
 
 describe("setBadge", ()=>{
   test("should show card without badge when user skip all sentences for contribution flow when language is in top", ()=>{

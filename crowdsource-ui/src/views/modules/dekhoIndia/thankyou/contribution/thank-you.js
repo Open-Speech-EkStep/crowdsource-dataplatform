@@ -7,7 +7,8 @@ const {
   TOP_LANGUAGES_BY_HOURS,
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
   CURRENT_MODULE,
-  MODULE
+  MODULE,
+  AGGREGATED_DATA_BY_LANGUAGE
 } = require("../common/constants");
 const {
   setPageContentHeight,
@@ -65,13 +66,14 @@ const updateShareContent = function (language, rank) {
 };
 
 const getLanguageStats = function () {
-  fetch("/stats/summary/ocr")
+  return fetch("/stats/summary/ocr")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
         const contributionLanguage = localStorage.getItem(
           CONTRIBUTION_LANGUAGE
         );
+        localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
         const module = localStorage.getItem(CURRENT_MODULE);
         const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.dekho.value, 'total_contribution_count','total_contributions');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
@@ -152,9 +154,6 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName)
     onChangeUser('./thank-you.html',MODULE.dekho.value);
     onOpenUserDropDown();
-    setPageContentHeight();
-    setSentencesContributed();
-    // toggleFooterPosition();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (contributionLanguage) {
@@ -175,7 +174,9 @@ function executeOnLoad() {
     replaceSubStr($(".x-axis-label"), "<language>", localeLanguageStr);
     $("#conLanWhenGetBadge").html(localeLanguageStr)
 
-    getLanguageStats();
+    getLanguageStats().then(()=>{
+      setSentencesContributed();
+    });
     updateGoalProgressBar(`/progress/ocr/${contributionLanguage}/contribute`)
   }
 }

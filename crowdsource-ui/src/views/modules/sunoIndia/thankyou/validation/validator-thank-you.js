@@ -6,14 +6,12 @@ const {
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
-  TOP_LANGUAGES_BY_HOURS,
+  AGGREGATED_DATA_BY_LANGUAGE,
   AGGREGATED_DATA_BY_TOP_LANGUAGE
 } = require("../common/constants");
 const { onChangeUser,onOpenUserDropDown,showUserProfile } = require('../common/header');
 
 const {
-  setPageContentHeight,
-  toggleFooterPosition,
   updateLocaleLanguagesDropdown,
   getLocaleString,
   performAPIRequest,
@@ -66,13 +64,14 @@ const updateShareContent = function (language, rank) {
 };
 
 const getLanguageStats = function () {
-  fetch("/stats/summary/asr")
+  return fetch("/stats/summary/asr")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
         const contributionLanguage = localStorage.getItem(
           CONTRIBUTION_LANGUAGE
         );
+        localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
         const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.suno.value, 'total_validation_count','total_validations');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
         showByHoursChartThankyouPage(MODULE.suno.value, "thankyou",'sentences');
@@ -150,7 +149,6 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName)
     onChangeUser('./validator-thank-you.html',MODULE.suno.value);
     onOpenUserDropDown();
-    setSentencesContributed();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (contributionLanguage) {
@@ -170,7 +168,9 @@ function executeOnLoad() {
     replaceSubStr($("#languageInTopMob"), "<language>", localeLanguageStr);
     replaceSubStr($(".x-axis-label"), "<language>", localeLanguageStr);
     $("#conLanWhenGetBadge").html(localeLanguageStr)
-    getLanguageStats();
+    getLanguageStats().then(()=>{
+      setSentencesContributed();
+    });
     updateGoalProgressBar(`/progress/asr/${contributionLanguage}/validate`)
   }
 }

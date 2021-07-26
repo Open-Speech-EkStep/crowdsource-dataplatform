@@ -164,6 +164,25 @@ const showFucntionalCards = (type, from, to) => {
   }
 }
 
+const isInTopLanguage = function (sortingLanguages=[], contributionLanguage, statsKey){
+  const topLanguage = sortingLanguages[0].language.toLowerCase();
+  const contributedLanguage = contributionLanguage.toLowerCase();
+  if(topLanguage === contributedLanguage){
+    return true;
+  }
+  const topLanguageStats = sortingLanguages[0][statsKey];
+  const contributedLanguageInList = sortingLanguages.find(element => {
+    return element.language.toLowerCase() === contributedLanguage
+  });
+  const contributedLanguageStats = contributedLanguageInList && contributedLanguageInList[statsKey] ? contributedLanguageInList[statsKey] : 0;
+
+  if(topLanguageStats === contributedLanguageStats){
+    return true;
+  }
+
+  return false;
+}
+
 const setBadge = function (data, localeStrings, functionalFlow) {
   localStorage.setItem('badgeId', data.badgeId);
   localStorage.setItem('badges', JSON.stringify(data.badges));
@@ -186,8 +205,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     const likhoPairLanguage = contributionLanguage + '-' + toLanguage;
     contributionLanguage = likhoPairLanguage
   }
-  const isInTopLanguage = sortingLanguages[0].language.toLowerCase() === contributionLanguage.toLowerCase()  ?  true  : false;
-  if(isInTopLanguage){
+  if(isInTopLanguage(sortingLanguages,contributionLanguage, sortingKey )){
     $("#languageInTopWeb").removeClass("d-none");
     $("#languageInTopMob").removeClass("d-none");
     $("#languageNotInTopMob").addClass("d-none");
@@ -442,4 +460,4 @@ const replaceSubStr = function (element , to ,from){
   element.text(newText.toString());
 }
 
-module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateGoalProgressBar,replaceSubStr,getTopLanguage };
+module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateGoalProgressBar,replaceSubStr,getTopLanguage,isInTopLanguage };
