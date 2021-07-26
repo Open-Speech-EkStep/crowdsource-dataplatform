@@ -762,7 +762,7 @@ const getProgressForContributionProgress = async (type, language) => {
         progressFilter +=` and LOWER(language) = LOWER('${language}')`;
     }
     let filter = pgp.as.format('$1:raw', [progressFilter]);
-
+    
     const progressResult = await db.any(currentProgressQuery, filter);
 
     return progressResult && progressResult[0] ? progressResult[0] : { total_contributions: 0, total_validations: 0, total_contribution_count: 0, total_validation_count: 0 };
@@ -807,9 +807,9 @@ const getContributionProgress = async (type, language, source) => {
     let goal = await getGoalForContributionProgress(type, language, source);
     
     const progressResult = await getProgressForContributionProgress(type, language);
-    console.log(progressResult)
+    
     const progress = getProgressResultBasedOnTypeAndSource(progressResult, type, source);
-    console.log(progress);
+    
     goal = increaseGoalIfLessThanCurrentProgress(progress, goal);
 
     return {
