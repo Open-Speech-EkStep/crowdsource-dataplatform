@@ -391,7 +391,7 @@ workflows:
 
       - aks_deployment:
           name: prod_deployment_eks
-          cluster-name: ${AZURE_CLUSTER_NAME}
+          cluster-name: ${AZURE_PROD_CLUSTER_NAME}
           env-name: prod
           requires:
             - push_prod_image
