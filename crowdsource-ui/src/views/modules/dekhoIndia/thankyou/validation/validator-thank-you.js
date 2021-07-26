@@ -4,20 +4,22 @@ const {
   HOUR_IN_SECONDS,
   LOCALE_STRINGS,
   CONTRIBUTION_LANGUAGE,
-  TOP_LANGUAGES_BY_HOURS,
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
   CURRENT_MODULE,
-  MODULE
+  MODULE,
+  AGGREGATED_DATA_BY_LANGUAGE
 } = require("../common/constants");
 const {
-  setPageContentHeight,
-  toggleFooterPosition,
   updateLocaleLanguagesDropdown,
   getLocaleString,
   performAPIRequest,
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
-const {showByHoursChart,showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
+const {
+  // showByHoursChart,
+  showByHoursChartThankyouPage,
+  // getContributedAndTopLanguage,
+  setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { initializeFeedbackModal } = require('../common/feedback');
 const CURRENT_INDEX = "dekhoValidatorCurrentIndex";
@@ -63,20 +65,17 @@ const updateShareContent = function (language, rank) {
 };
 
 const getLanguageStats = function () {
-  fetch("/stats/summary/ocr")
+  return fetch("/stats/summary/ocr")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
         const contributionLanguage = localStorage.getItem(
           CONTRIBUTION_LANGUAGE
         );
-        const module = localStorage.getItem(CURRENT_MODULE);
+        localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
         const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.dekho.value, 'total_validation_count','total_validations');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
         showByHoursChartThankyouPage(MODULE.dekho.value, "thankyou");
-        // const languages = getContributedAndTopLanguage(module == MODULE.likho.value || module == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, MODULE.dekho.value);
-        // localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-        // showByHoursChart(MODULE.dekho.value, "thankyou");
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
@@ -151,9 +150,6 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName);
     onChangeUser('./validator-thank-you.html',MODULE.dekho.value);
     onOpenUserDropDown();
-    setPageContentHeight();
-    setSentencesContributed();
-    // toggleFooterPosition();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (contributionLanguage) {
@@ -173,7 +169,9 @@ function executeOnLoad() {
     replaceSubStr($(".x-axis-label"), "<language>", localeLanguageStr);
     $("#conLanWhenGetBadge").html(localeLanguageStr)
 
-    getLanguageStats();
+    getLanguageStats().then(()=>{
+      setSentencesContributed();
+    });
     updateGoalProgressBar(`/progress/ocr/${contributionLanguage}/validate`)
   }
 }
@@ -188,10 +186,10 @@ $(document).ready(function () {
   localStorage.setItem("selectedType","validate");
   initializeFeedbackModal();
   getLocaleString()
-    .then((data) => {
+    .then(() => {
       executeOnLoad();
     })
-    .catch((err) => {
+    .catch(() => {
       executeOnLoad();
     });
 });

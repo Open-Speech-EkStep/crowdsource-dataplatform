@@ -209,6 +209,7 @@ $(document).ready(function () {
     getLocaleString().then(() => {
         initializeBlock();
     }).catch(err => {
+        console.log(err);
         initializeBlock();
     });
 });

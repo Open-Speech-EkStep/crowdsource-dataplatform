@@ -1,4 +1,4 @@
-const { DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS,LIKHO_TO_LANGUAGE, MODULE,SPEAKER_DETAILS_KEY } = require('./constants');
+const { DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS,LIKHO_TO_LANGUAGE, MODULE } = require('./constants');
 const { getLocaleString } = require('./utils');
 const fetch = require('./fetch')
 const {whitelisting_email} = require('./env-api')

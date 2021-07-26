@@ -1,13 +1,13 @@
 window.AudioContext = jest.fn().mockImplementation(() => {
   return {
-    createMediaElementSource: (e) => {
+    createMediaElementSource: () => {
       return {
-        connect: (a) => {
+        connect: () => {
         }
       }
     }, createAnalyser: () => {
       return {
-        connect: (a) => {
+        connect: () => {
         }
       }
     }, destination: ""
@@ -15,7 +15,7 @@ window.AudioContext = jest.fn().mockImplementation(() => {
 });
 
 const { readFileSync } = require('fs');
-const { stringToHTML, mockLocalStorage } = require('./utils');
+const { stringToHTML } = require('./utils');
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../build/views/boloIndia/validator-prompt-page.ejs`, 'UTF-8') +
@@ -26,12 +26,10 @@ document.body = stringToHTML(
 );
 
 
-const Visualizer = require('../src/assets/js/visualizer');
+// const Visualizer = require('../src/assets/js/visualizer');
 jest.mock('../src/assets/js/visualizer');
 
 const {
-  addListeners,
-  setSentenceLabel,
   setAudioPlayer,
 } = require('../src/assets/js/validator-prompt-page');
 

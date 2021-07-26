@@ -139,7 +139,7 @@ describe("setUserNameTooltip",()=>{
     $userName.val = function (){
       return {length:12};
     };
-    $userName.tooltip = (e)=>{};
+    $userName.tooltip = ()=>{};
     jest.spyOn($userName,'tooltip');
     setUserNameTooltip($userName);
     expect($userName.tooltip).toHaveBeenCalledTimes(2);
@@ -153,7 +153,7 @@ describe("setUserNameTooltip",()=>{
     $userName.val = function (){
       return {length:10};
     };
-    $userName.tooltip = (e)=>{};
+    $userName.tooltip = ()=>{};
     jest.spyOn($userName,'tooltip');
     setUserNameTooltip($userName);
     expect($userName.tooltip).toHaveBeenCalledTimes(2);
@@ -167,7 +167,7 @@ describe("setUserNameTooltip",()=>{
     $userName.val = function (){
       return {length:11};
     };
-    $userName.tooltip = (e)=>{};
+    $userName.tooltip = ()=>{};
     jest.spyOn($userName,'tooltip');
     setUserNameTooltip($userName);
     expect($userName.tooltip).toHaveBeenCalledTimes(2);

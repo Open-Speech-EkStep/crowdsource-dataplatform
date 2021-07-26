@@ -2,7 +2,6 @@ const {
   CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE,SPEAKER_DETAILS_KEY,DEFAULT_CON_LANGUAGE,AGGREGATED_DATA_BY_TOP_LANGUAGE,AGGREGATED_DATA_BY_LANGUAGE
 } = require('./constants');
 const { drawTopLanguageChart } = require('./verticalGraph');
-const { constructChart } = require('./horizontalBarGraph');
 const { changeLocale,showLanguagePopup } = require('./locale');
 const fetch = require('./fetch');
 const {performAPIRequest} = require('./utils');
@@ -164,6 +163,25 @@ const showFucntionalCards = (type, from, to) => {
   }
 }
 
+const isInTopLanguage = function (sortingLanguages=[], contributionLanguage, statsKey){
+  const topLanguage = sortingLanguages[0].language.toLowerCase();
+  const contributedLanguage = contributionLanguage.toLowerCase();
+  if(topLanguage === contributedLanguage){
+    return true;
+  }
+  const topLanguageStats = sortingLanguages[0][statsKey];
+  const contributedLanguageInList = sortingLanguages.find(element => {
+    return element.language.toLowerCase() === contributedLanguage
+  });
+  const contributedLanguageStats = contributedLanguageInList && contributedLanguageInList[statsKey] ? contributedLanguageInList[statsKey] : 0;
+
+  if(topLanguageStats === contributedLanguageStats){
+    return true;
+  }
+
+  return false;
+}
+
 const setBadge = function (data, localeStrings, functionalFlow) {
   localStorage.setItem('badgeId', data.badgeId);
   localStorage.setItem('badges', JSON.stringify(data.badges));
@@ -186,8 +204,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     const likhoPairLanguage = contributionLanguage + '-' + toLanguage;
     contributionLanguage = likhoPairLanguage
   }
-  const isInTopLanguage = sortingLanguages[0].language.toLowerCase() === contributionLanguage.toLowerCase()  ?  true  : false;
-  if(isInTopLanguage){
+  if(isInTopLanguage(sortingLanguages,contributionLanguage, sortingKey )){
     $("#languageInTopWeb").removeClass("d-none");
     $("#languageInTopMob").removeClass("d-none");
     $("#languageNotInTopMob").addClass("d-none");
@@ -391,7 +408,7 @@ const showOrHideExtensionCloseBtn = function (){
   // }
 }
 
-const updateLikhoLocaleLanguagesDropdown = (language, toLanguage) => {
+const updateLikhoLocaleLanguagesDropdown = (language) => {
   const dropDown = $('#localisation_dropdown');
   const localeLang = ALL_LANGUAGES.find(ele => ele.value == language);
   if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
@@ -433,7 +450,7 @@ const updateGoalProgressBar = function (url){
     $("#totalAverage").text(actualValue + '%');
     const $progressBar = $("#progress_bar");
     $progressBar.width(actualValue + '%');
-  }).catch(e=>console.log)
+  }).catch(e=>console.log(e))
 }
 
 const replaceSubStr = function (element , to ,from){
@@ -442,4 +459,4 @@ const replaceSubStr = function (element , to ,from){
   element.text(newText.toString());
 }
 
-module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateGoalProgressBar,replaceSubStr,getTopLanguage };
+module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateGoalProgressBar,replaceSubStr,getTopLanguage,isInTopLanguage };

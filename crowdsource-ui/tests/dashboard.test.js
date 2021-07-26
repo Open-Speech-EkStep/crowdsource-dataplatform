@@ -1,16 +1,14 @@
 const {readFileSync} = require('fs');
 const fetchMock = require("fetch-mock");
-const {stringToHTML, flushPromises} = require('./utils');
-const {fetchDetail, getSpeakersData,isLanguageAvailable,updateLanguage} = require('../src/assets/js/dashboard');
+const {stringToHTML} = require('./utils');
+const {fetchDetail, getSpeakersData,isLanguageAvailable} = require('../src/assets/js/dashboard');
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../build/views/boloIndia/dashboard.ejs`, 'UTF-8')
 );
 
-const charts = require('../src/assets/js/draw-chart');
-
 jest.mock('../src/assets/js/draw-chart', () => ({
-  updateGraph: jest.fn().mockImplementation((a,b,)=>{}),
+  updateGraph: jest.fn().mockImplementation(()=>{}),
 }))
 
 describe("fetchDetail",()=>{

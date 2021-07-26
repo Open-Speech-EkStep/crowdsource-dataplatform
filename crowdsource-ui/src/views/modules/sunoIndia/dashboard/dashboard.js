@@ -1,8 +1,8 @@
 const { updateLineGraph } = require('../common/lineGraph');
 const { onChangeUser,showUserProfile,onOpenUserDropDown } = require('../common/header');
 const { generateIndiaMap } = require('../common/map');
-const { setSpeakerDetails, setUserNameOnInputFocus, setUserModalOnShown,setStartRecordingBtnOnClick,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
-const { toggleFooterPosition, updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
+const { setUserNameOnInputFocus, setUserModalOnShown,setStartRecordingBtnOnClick,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
+const { updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
 const { CURRENT_MODULE,CONTRIBUTION_LANGUAGE, MODULE,SPEAKER_DETAILS_KEY } = require('../common/constants');
 const { hasUserRegistered } = require('../common/common');
 const fetch = require('../common/fetch');
@@ -11,6 +11,7 @@ const {setSpeakerData} = require('../common/contributionStats');
 const {initializeFeedbackModal} = require('../common/feedback')
 const LOCALE_STRINGS = 'localeString';
 let timer;
+// eslint-disable-next-line no-unused-vars
 let languageToRecord = '';
 
 const fetchDetail = (language) => {
@@ -73,21 +74,21 @@ function updateLanguage(language) {
                         $('#no-data-found').addClass('d-none');
                     }, 5000);
                 }
-            } catch (error) {}
+            } catch (error) {console.log(error)}
         })
-        .catch((err) => {});
+        .catch((err) => {console.log(err)});
 }
 
 const initializeBlock = function () {
     localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
     initializeFeedbackModal();
     localStorage.removeItem('previousLanguage');
-    const speakerDetailsKey = 'speakerDetails';
+    // const speakerDetailsKey = 'speakerDetails';
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
-    const age = document.getElementById('age');
-    const motherTongue = document.getElementById('mother-tongue');
+    // const age = document.getElementById('age');
+    // const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -112,10 +113,10 @@ const initializeBlock = function () {
         updateLineGraph(selectedLanguage, selectedDuration, 'asr',"Transcribed","Validated");
     });
 
-    $("#no-data-found").on('mouseenter', (e) => {
+    $("#no-data-found").on('mouseenter', () => {
         clearTimeout(timer);
     });
-    $("#no-data-found").on('mouseleave', (e) => {
+    $("#no-data-found").on('mouseleave', () => {
         timer = setTimeout(() => {
             $('#no-data-found').addClass('d-none');
         }, 5000);
@@ -131,7 +132,7 @@ const initializeBlock = function () {
         }, 5000);
     }, {passive: true});
 
-    $("#contribute-now").on('click', (e) => {
+    $("#contribute-now").on('click', () => {
         localStorage.setItem("i18n", "en");
         localStorage.setItem(CONTRIBUTION_LANGUAGE, languageWithNoContribution);
         localStorage.setItem("selectedType", "contribute");
@@ -164,7 +165,7 @@ const initializeBlock = function () {
 $(document).ready(function () {
     getLocaleString().then(()=>{
         initializeBlock();
-    }).catch(err => {
+    }).catch(() => {
         initializeBlock();
     });
 });

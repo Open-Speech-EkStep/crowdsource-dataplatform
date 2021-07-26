@@ -6,13 +6,11 @@ const {
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
-  TOP_LANGUAGES_BY_HOURS,
-  AGGREGATED_DATA_BY_TOP_LANGUAGE
+  AGGREGATED_DATA_BY_TOP_LANGUAGE,
+  AGGREGATED_DATA_BY_LANGUAGE
 } = require("../common/constants");
 
 const {
-  setPageContentHeight,
-  toggleFooterPosition,
   updateLocaleLanguagesDropdown,
   getLocaleString,
   performAPIRequest,
@@ -20,7 +18,7 @@ const {
 
 const {downloadPdf} = require('../common/downloadableBadges');
 
-const {showByHoursChart, showByHoursChartThankyouPage,getContributedAndTopLanguage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
+const {showByHoursChartThankyouPage, setBadge,updateGoalProgressBar, replaceSubStr, getTopLanguage} = require('../common/common');
 const {onChangeUser,onOpenUserDropDown,showUserProfile} = require('../common/header');
 
 const {initializeFeedbackModal} = require('../common/feedback');
@@ -30,11 +28,6 @@ const SPEAKER_DETAILS = "speakerDetails";
 const boloValidatorCountKey = 'boloValidatorCount';
 const totalSentence = Number(localStorage.getItem(boloValidatorCountKey));
 
-// $("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
-//   if (!$(this).attr("disabled")) {
-//     downloadPdf($(this).attr("data-badge"));
-//   }
-// });
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -74,13 +67,14 @@ const updateShareContent = function (language, rank) {
 };
 
 const getLanguageStats = function () {
-  fetch("/stats/summary/text")
+  return fetch("/stats/summary/text")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
         const contributionLanguage = localStorage.getItem(
           CONTRIBUTION_LANGUAGE
         );
+        localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
 
         const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.bolo.value, 'total_validation_count','total_validations');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
@@ -159,7 +153,6 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName);
     onChangeUser('./validator-thank-you.html',MODULE.bolo.value)
     onOpenUserDropDown();
-    setSentencesContributed();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (contributionLanguage) {
@@ -180,7 +173,9 @@ function executeOnLoad() {
     replaceSubStr($(".x-axis-label"), "<language>", localeLanguageStr);
     $("#conLanWhenGetBadge").html(localeLanguageStr)
 
-    getLanguageStats();
+    getLanguageStats().then(()=>{
+      setSentencesContributed();
+    });
     updateGoalProgressBar(`/progress/text/${contributionLanguage}/validate`);
   }
 }
@@ -194,10 +189,10 @@ $(document).ready(function () {
     downloadPdf($(this).attr("data-badge"));
   });
   getLocaleString()
-    .then((data) => {
+    .then(() => {
       executeOnLoad();
     })
-    .catch((err) => {
+    .catch(() => {
       executeOnLoad();
     });
 });

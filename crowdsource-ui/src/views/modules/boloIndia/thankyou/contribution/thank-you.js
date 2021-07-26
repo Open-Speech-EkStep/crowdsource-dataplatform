@@ -6,8 +6,8 @@ const {
   CURRENT_MODULE,
   CONTRIBUTION_LANGUAGE,
   MODULE,
-  TOP_LANGUAGES_BY_HOURS,
-  AGGREGATED_DATA_BY_TOP_LANGUAGE
+  AGGREGATED_DATA_BY_TOP_LANGUAGE,
+  AGGREGATED_DATA_BY_LANGUAGE
 } = require("../common/constants");
 const {
   updateLocaleLanguagesDropdown,
@@ -17,7 +17,7 @@ const {
 const {downloadPdf} = require('../common/downloadableBadges');
 const {initializeFeedbackModal} = require('../common/feedback')
 
-const {getContributedAndTopLanguage,setBadge,showByHoursChart,showByHoursChartThankyouPage, updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
+const {setBadge, showByHoursChartThankyouPage, updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
 const {onChangeUser,showUserProfile,onOpenUserDropDown} = require('../common/header');
 
 const CURRENT_INDEX = "currentIndex";
@@ -85,10 +85,11 @@ const updateShareContent = function (language, rank) {
 };
 
 const getLanguageStats = function () {
-  fetch("/stats/summary/text")
+  return fetch("/stats/summary/text")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
+        localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
         const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.bolo.value, 'total_contribution_count','total_contributions');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
         showByHoursChartThankyouPage(MODULE.bolo.value, "thankyou");
@@ -157,7 +158,6 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName);
     onChangeUser('./thank-you.html', MODULE.bolo.value);
     onOpenUserDropDown();
-    setSentencesContributed();
   }
 
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -179,7 +179,9 @@ function executeOnLoad() {
   $("#conLanWhenGetBadge").html(localeLanguageStr)
 
   updateGoalProgressBar(`/progress/text/${contributionLanguage}/contribute`);
-  getLanguageStats();
+  getLanguageStats().then(()=>{
+    setSentencesContributed();
+  });
 }
 
 
@@ -192,10 +194,10 @@ $(document).ready(function () {
   });
 
   getLocaleString()
-    .then((data) => {
+    .then(() => {
       executeOnLoad();
     })
-    .catch((err) => {
+    .catch(() => {
       executeOnLoad();
     });
 });

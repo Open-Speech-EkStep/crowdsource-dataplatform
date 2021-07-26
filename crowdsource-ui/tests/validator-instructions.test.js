@@ -9,7 +9,7 @@ document.body = stringToHTML(
 describe('showInstructions', () => {
     test('should show Instructions pop-up and hide background content', () => {
         const $instructionModal = $('#validator-instructions-modal');
-        $instructionModal.modal = (e) => {};
+        $instructionModal.modal = () => {};
         jest.spyOn($instructionModal, 'modal');
 
         showInstructions($instructionModal);

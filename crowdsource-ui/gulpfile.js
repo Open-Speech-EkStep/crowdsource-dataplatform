@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-const minify = require('gulp-minify');
 const gulpFlatten = require('gulp-flatten');
 const cleanCss = require('gulp-clean-css');
 const htmlmin = require('gulp-htmlmin');
