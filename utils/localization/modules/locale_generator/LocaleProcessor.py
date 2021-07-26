@@ -1,20 +1,14 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Generate local files with the received delta translated excel files
-
-# Read file in added data order.
-
 import argparse
 import os
-import pkg_resources
-import pandas as pd
-
 from abc import ABC, abstractmethod
+
+import pandas as pd
 
 from helper.reader.excel_file_reader import ExcelReader
 from helper.reader.json_file_reader import JsonReader
-from helper.utils.utils import get_excel_files, write_df_to_json
+from helper.utils.utils import get_excel_files
+from modules.locale_generator.utils import get_excel_files, \
+    write_df_to_json, get_selected_languages, read_language_list
 
 
 class ExcelInput(ABC):
@@ -181,9 +175,7 @@ class LocaleGenerator:
 
 
 def main():
-    languages_file_name = pkg_resources.resource_filename('resources', resource_name='languages.json')
-    languages_to_be_considered = JsonReader().read(languages_file_name)
-
+    all_languages_list = read_language_list()
     example = '''
             Example commands:
             
@@ -193,12 +185,12 @@ def main():
             For all languages:
                 python LocaleGenerator.py -j ./../all_keys_generator/out -e ./input_excel_files -m ./../delta_generation/out-meta -o ./output_json_files -a
         
--j /crowdsource-dataplatform/test_utils/localisation_script/delta_generation/cleaned_jsons
--e /crowdsource-dataplatform/test_utils/ofiles/sme-input
--m /crowdsource-dataplatform/test_utils/ofiles/out-meta
--o ./output_json_files 
--t seperate
--l hi
+            -j /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localisation_script/delta_generation/cleaned_jsons
+            -e /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/sme-input
+            -m /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/out-meta
+            -o ./output_json_files 
+            -t seperate
+            -l hi
         
         '''
 
@@ -208,7 +200,7 @@ def main():
     group.add_argument("-a", "--all-languages", action="store_true", help="Generate delta for all languages")
     group.add_argument("-l", "--languages", nargs="+",
                        help="Generate delta for the languages mentioned by language codes(space separated)",
-                       choices=list(languages_to_be_considered.keys()))
+                       choices=list(all_languages_list.keys()))
 
     parser.add_argument("-e", "--excel-path", required=True, help="Input folder path with excel files present")
     parser.add_argument("-j", "--json-folder-path", required=True, help="Input folder path with json files present")
@@ -220,22 +212,14 @@ def main():
                         help="Output folder path where excels are generated")
 
     args = parser.parse_args(
-        "\
-        -j /crowdsource-dataplatform/utils/localisation_script/all_keys_generator/out \
-        -e /crowdsource-dataplatform/utils/localization/resources/out_sme_5_20.xlsx \
-        -m /crowdsource-dataplatform/utils/localization/resources/out_meta_5_20.xlsx \
-        -o ./output \
-        -t combined \
-        -l hi \
-        ".split())
+        "-j /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localisation_script/delta_generation/cleaned_jsons \
+            -e /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/sme-input \
+            -m /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/out-meta \
+            -o ./output_json_files \
+            -t seperate \
+            -l hi".split())
 
-    languages = {}
-    if args.all_languages:
-        languages = languages_to_be_considered.copy()
-    else:
-        language_codes = args.languages
-        for code in language_codes:
-            languages[code] = languages_to_be_considered[code]
+    languages = get_selected_languages(all_languages_list, args.all_languages, args.languages)
 
     input_base_path = args.excel_path
     input_json_path = args.json_folder_path
