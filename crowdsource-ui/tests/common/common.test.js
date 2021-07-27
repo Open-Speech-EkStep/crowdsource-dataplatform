@@ -2,7 +2,7 @@ const {readFileSync} = require('fs');
 jest.mock('node-fetch');
 const {stringToHTML, mockLocalStorage} = require('../utils');
 const {CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY, CURRENT_MODULE,AGGREGATED_DATA_BY_LANGUAGE} = require('../../build/js/common/constants');
-const {hasUserRegistered, setBadge,updateGoalProgressBar,isInTopLanguage} = require('../../build/js/common/common.js');
+const {hasUserRegistered, setBadge,updateGoalProgressBar,isInTopLanguage,getTop3Languages} = require('../../build/js/common/common.js');
 
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../../build/views/common/cards.ejs`, 'UTF-8')+
@@ -13,6 +13,194 @@ document.body = stringToHTML(
   readFileSync(`${__dirname}/../../build/views/common/badgesMilestone.ejs`, 'UTF-8')+
   readFileSync(`${__dirname}/../../build/views/common/languageGoal.ejs`, 'UTF-8')
 );
+
+describe("getTop3Languages",()=> {
+  test("should give top 3 for suno India based on contribution count", () => {
+    const languagList = [
+      {
+        language: "Assamese",
+        "total_speakers": "3",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "4"
+      }, {
+        language: "Gujarati",
+        "total_speakers": "2",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "28",
+        "total_validation_count": "1"
+      }, {
+        language: "English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "6",
+        "total_validation_count": "0"
+      },
+      {
+        language: "Hindi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "9",
+        "total_validation_count": "0"
+      }
+
+    ]
+
+    mockLocalStorage();
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(languagList));
+
+    const sortedLanguageStats = [
+      {
+        language: "Gujarati",
+        "total_speakers": "2",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "28",
+        "total_validation_count": "1"
+      }, {
+        language: "Hindi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "9",
+        "total_validation_count": "0"
+      }, {
+        language: "English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "6",
+        "total_validation_count": "0"
+      }
+    ]
+
+    const result = getTop3Languages('contribute', 'suno', 'Hindi');
+    expect(result).toEqual(sortedLanguageStats);
+    localStorage.clear()
+
+  })
+
+  test("should give top 2 for suno India based on contribution count", () => {
+    const languageList = [
+        {
+        language: "English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "6",
+        "total_validation_count": "0"
+      },
+      {
+        language: "Hindi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "9",
+        "total_validation_count": "0"
+      }
+
+    ]
+
+    mockLocalStorage();
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(languageList));
+
+    const sortedLanguageStats = [
+         {
+        language: "Hindi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "9",
+        "total_validation_count": "0"
+      }, {
+        language: "English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "6",
+        "total_validation_count": "0"
+      }
+    ]
+
+    const result = getTop3Languages('contribute', 'suno', 'Hindi');
+    expect(result).toEqual(sortedLanguageStats);
+    localStorage.clear()
+
+  })
+
+  test("should repalce bottom language with contribution language when their stats are same", () => {
+    const languagList = [
+      {
+        language: "Assamese",
+        "total_speakers": "3",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "4"
+      }, {
+        language: "Gujarati",
+        "total_speakers": "2",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "28",
+        "total_validation_count": "1"
+      }, {
+        language: "English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "6",
+        "total_validation_count": "0"
+      },
+      {
+        language: "Hindi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "0"
+      }
+    ]
+
+    mockLocalStorage();
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(languagList));
+
+    const sortedLanguageStats = [
+      {
+        language: "Gujarati",
+        "total_speakers": "2",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "28",
+        "total_validation_count": "1"
+      },  {
+        language: "English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "6",
+        "total_validation_count": "0"
+      },
+      {
+        language: "Hindi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "0"
+      }
+    ]
+
+    const result = getTop3Languages('contribute', 'suno', 'Hindi');
+    expect(result).toEqual(sortedLanguageStats);
+    localStorage.clear()
+
+  })
+})
 
 describe("isInTopLanguage",()=>{
   test("should give true when contribution language is the top language",()=>{
@@ -77,7 +265,7 @@ describe("isInTopLanguage",()=>{
 
   })
 
-  test("should give false when contribution language is not the top language",()=>{
+  test("should give false when contribution language is not in the top 3 language",()=>{
     const sortedLanguageStats = [
       {
         language: "Assamese-Bengali",
@@ -108,7 +296,7 @@ describe("isInTopLanguage",()=>{
 
   })
 
-  test("should give true when contribution language is the top language with stats 0",()=>{
+  test("should give true when contribution language is the top 3 language with stats 0",()=>{
     const sortedLanguageStats = [
       {
         language: "Assamese-Bengali",
@@ -138,6 +326,24 @@ describe("isInTopLanguage",()=>{
     expect(result).toEqual(true);
 
   })
+
+  test("should give true when contribution language is the top language",()=>{
+    const sortedLanguageStats = [
+      {
+        language: "Assamese-Bengali",
+        "total_speakers": "3",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "4"
+      }
+    ]
+
+    const result = isInTopLanguage(sortedLanguageStats, "Assamese-Bengali","total_contribution_count" );
+    expect(result).toEqual(true);
+
+  })
+
 })
 
 describe("setBadge", ()=>{
@@ -145,7 +351,32 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'bolo');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'hindi');
-    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    const sortedLanguageStats = [
+      {
+        language: "Gujarati",
+        "total_speakers": "2",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "28",
+        "total_validation_count": "1"
+      },  {
+        language: "English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "6",
+        "total_validation_count": "0"
+      },
+      {
+        language: "Hindi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "0"
+      }
+    ]
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(sortedLanguageStats));
     const data = {isNewBadge : false, contributionCount : 0,nextBadgeType: "Bronze", currentBadgeType:""};
     const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
@@ -165,7 +396,40 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
-    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    const sortedLanguageStats = [
+      {
+        language: "Gujarati",
+        "total_speakers": "2",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "28",
+        "total_validation_count": "1"
+      },  {
+        language: "English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "6",
+        "total_validation_count": "0"
+      },
+      {
+        language: "Hindi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "0"
+      },
+      {
+        language: "Punjabi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "0",
+        "total_validation_count": "0"
+      }
+    ]
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(sortedLanguageStats));
     const data = {isNewBadge : false, contributionCount : 0,nextBadgeType: "Bronze", currentBadgeType:""};
     const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
@@ -185,7 +449,40 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
-    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    const sortedLanguageStats = [
+      {
+        language: "Gujarati",
+        "total_speakers": "2",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "28",
+        "total_validation_count": "1"
+      },  {
+        language: "English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "6",
+        "total_validation_count": "0"
+      },
+      {
+        language: "Hindi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "0"
+      },
+      {
+        language: "Punjabi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "2",
+        "total_validation_count": "0"
+      }
+    ]
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(sortedLanguageStats));
     const data = {isNewBadge : false, contributionCount : 2,nextBadgeType: "Bronze", currentBadgeType:""};
     const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
@@ -204,7 +501,40 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
-    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    const sortedLanguageStats = [
+      {
+        language: "Gujarati",
+        "total_speakers": "2",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "28",
+        "total_validation_count": "1"
+      },  {
+        language: "English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "6",
+        "total_validation_count": "0"
+      },
+      {
+        language: "Hindi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "0"
+      },
+      {
+        language: "Punjabi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "2",
+        "total_validation_count": "0"
+      }
+    ]
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(sortedLanguageStats));
     const data = {isNewBadge : true, contributionCount : 5,nextBadgeType: "Silver", currentBadgeType:"Bronze"};
     const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
@@ -225,7 +555,40 @@ describe("setBadge", ()=>{
     mockLocalStorage();
     localStorage.setItem(CURRENT_MODULE, 'suno');
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
-    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify([{language:"Hindi"},{language:"English"}]));
+    const sortedLanguageStats = [
+      {
+        language: "Gujarati",
+        "total_speakers": "2",
+        "total_contributions": "0.000",
+        "total_validations": "0.000",
+        "total_contribution_count": "28",
+        "total_validation_count": "1"
+      },  {
+        language: "English",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "6",
+        "total_validation_count": "0"
+      },
+      {
+        language: "Hindi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "4",
+        "total_validation_count": "0"
+      },
+      {
+        language: "Punjabi",
+        "total_speakers": "1",
+        "total_contributions": null,
+        "total_validations": "0.000",
+        "total_contribution_count": "2",
+        "total_validation_count": "0"
+      }
+    ]
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(sortedLanguageStats));
     const data = {isNewBadge : false, contributionCount : 7,nextBadgeType: "Silver", currentBadgeType:"Bronze"};
     const localeStrings = {bronze:"Bronze",silver:"Silver"};
     setBadge(data, localeStrings, 'contribute');
