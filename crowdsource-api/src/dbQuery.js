@@ -189,7 +189,9 @@ const updateContributionDetailsWithUserInput = `insert into "contributions" ("ac
 select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4), $7, $8 where (select count(*) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') < 
 (select value from configurations where config_name = 'contribution_count');`;
 
-const updateMaterializedViews = 'CALL update_view_data();'
+const updateMaterializedViews = 'REFRESH MATERIALIZED VIEW contributions_and_demo_stats;REFRESH MATERIALIZED VIEW daily_stats_complete;REFRESH MATERIALIZED VIEW gender_group_contributions;REFRESH MATERIALIZED VIEW age_group_contributions;REFRESH MATERIALIZED VIEW language_group_contributions;REFRESH MATERIALIZED VIEW state_group_contributions;REFRESH MATERIALIZED VIEW language_and_state_group_contributions;'
+
+const updateViews = 'CALL update_view_data();';
 
 const updateMediaWithContributedState = `update dataset_row set state='contributed' where "dataset_row_id"=$1 and state is null`;
 
@@ -370,6 +372,7 @@ module.exports = {
   markMediaReported,
   markContributionReported,
   updateMaterializedViews,
+  updateViews,
   getValidationCountQuery,
   getBadges,
   addContributorQuery,
