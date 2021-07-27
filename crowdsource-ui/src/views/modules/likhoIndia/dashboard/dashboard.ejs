@@ -19,6 +19,8 @@
 
 <body>
 <%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Likho", PAGE_TITLE:__('Dashboard'),img:"LikhoIndiaLogo.svg",homePath:"./home.html"}) %>
+<div class="padding-top-65">
+    <div class="dashboard-bg">
 <div class="container container-fluid supreme-container">
     <div class="row">
         <div class="col-12">
@@ -27,7 +29,7 @@
             </div>
             <div class="row">
                 <div class="col-12 col-md-7 col-lg-6">
-                    <div class="mb-3">
+                    <div class="mb-3 text-primary font-family-Rowdies" style="font-weight:300!important">
                         <%= __('Select a language pair') %>:
                     </div>
                 </div>
@@ -36,8 +38,8 @@
                 <div class="col-12 col-md-6 col-lg-7 all-languages mb-4">
                         <div class="row m-0">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-0">
-                                <label class="position-absolute text-muted" style="left:15px;margin-top:13px;font-size:14px"><%= __('FROM') %>:</label>
-                                <select class="col-lg-10 col-md-10 col-sm-12 col-xs-12 btn dropdown-toggle h6 w-90 rounded" id="from-dash-language" style="height:48px;border-color:#959595;color:#959595">
+                                <label class="position-absolute text-primary" style="left:15px;margin-top:13px;font-size:14px;z-index:9"><%= __('FROM') %>:</label>
+                                <select class="col-lg-10 bg-white col-md-10 col-sm-12 col-xs-12 btn dropdown-toggle h6 w-90 rounded" id="from-dash-language" style="height:48px;border-color:#959595;color:#959595">
                                     <option selected="selected" class="pointer" id="language_button" value="">
                                         <%= __('All Languages') %>
                                     </option>
@@ -49,8 +51,8 @@
                                 </select>
                             </div>
                         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 p-0">
-                            <label class="position-absolute text-muted" style="left:15px;margin-top:13px;font-size:14px"><%= __('TO') %>:</label>
-                            <select class="col-12 btn dropdown-toggle h6 w-90 rounded" id="to-dash-language" style="height:48px;text-indent:75px;border-color:#959595;color:#959595">
+                            <label class="position-absolute text-primary" style="left:15px;margin-top:13px;font-size:14px;z-index:9"><%= __('TO') %>:</label>
+                            <select class="col-12 btn dropdown-toggle h6 w-90 rounded bg-white" id="to-dash-language" style="height:48px;text-indent:75px;border-color:#959595;color:#959595">
                             </select>
                            </div>
                         </div>
@@ -93,6 +95,8 @@
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
 <%- include('../common/feedback.ejs', {page: "Dashboard"}) %>

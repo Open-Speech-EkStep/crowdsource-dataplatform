@@ -53,8 +53,8 @@ $primary-color-shade10: tint($primary-color, 100%);
 }
 
 .bg-footer-primary {
-  background-color: #eff5ff !important;
   color: $primary-color !important;
+  box-shadow: 0 -4px 12px 0 rgb(0, 0, 0, 0.12);
 }
 
 .bg-body-primary {
@@ -86,6 +86,20 @@ $primary-color-shade10: tint($primary-color, 100%);
 #warning-msg {
   border: 1px solid $primary-color;
   color: $primary-color;
+  background-color: #fff;
+  font-weight: 700;
+}
+
+.data-updated > div {
+  color: $primary-color;
+  font-size: 16px;
+}
+
+#cont-warning-msg {
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  background-color: #fff;
+  font-weight: 700;
 }
 
 a.text-primary:focus,
@@ -322,10 +336,17 @@ audio {
 
 .functional-page-bg {
   background-color: $text-light;
-  background-image: url(/img/functional_bg.svg);
+  background-image: url(/img/dashboard_bg.svg);
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position-y: center;
+  background-size: contain;
+  background-attachment: fixed;
+}
+
+.dashboard-bg {
+  background-image: url(/img/dashboard_bg.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: $text-light;
 }
 
 .back-btn a {

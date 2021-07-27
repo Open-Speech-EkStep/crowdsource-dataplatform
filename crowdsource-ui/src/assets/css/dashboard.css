@@ -7,7 +7,7 @@ html {
 }
 
 .container {
-  padding-top: 118px;
+  padding-top: 50px;
   padding-bottom: 50px;
 }
 
@@ -250,7 +250,6 @@ body.modal-open .supreme-container {
 .data-updated > div {
   margin-top: .5rem;
   padding-top: 1rem;
-  color: #959595;
   font-size: 0.75rem;
 }
 

@@ -24,8 +24,9 @@
 
 <body class="bg-secondary">
 <%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Dekho", PAGE_TITLE:__('Label'),img:"DekhoIndiaLogo.svg",homePath:"./home.html"}) %>
-<div id="validator-page-content" class="h-100">
-    <div class="container-fluid padding-top-65 functional-page-bg">
+<div id="validator-page-content" class="h-100 padding-top-65">
+    <div class="functional-page-bg">
+    <div class="container-fluid">
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/extensionBar.ejs %>
             <%- include('../common/breadcrumb.ejs', {MODULE:"Dekho", PAGE_TITLE:__('Label'),img:"DekhoIndiaLogo.svg", homePath:"./home.html"}) %>
@@ -150,6 +151,7 @@
 
         <script src="/js/dekhoIndia/record.js"></script>
         <script src="/js/common/speakerTesting.js"></script>
+    </div>
     </div>
 </div>
 </body>
