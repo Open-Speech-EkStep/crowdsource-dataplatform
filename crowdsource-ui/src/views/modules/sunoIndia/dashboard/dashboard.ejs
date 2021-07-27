@@ -19,6 +19,8 @@
 
 <body>
 <%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:__('Dashboard'),img:"SunoIndiaLogo.svg",homePath:"./home.html"}) %>
+<div class="padding-top-65">
+<div class="dashboard-bg">
 <div class="container container-fluid supreme-container">
     <div class="row">
         <div class="col-12">
@@ -27,14 +29,14 @@
             </div>
             <div class="row">
                 <div class="col-12 col-md-7 col-lg-6">
-                    <div class="text-muted mb-2">
+                    <div class="text-primary mb-2 font-family-Rowdies" style="font-weight:300!important">
                         <%= __('Select a language') %>:
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-5 all-languages">
-                    <div class="mt-2"><select class="btn dropdown-toggle h6 w-100 rounded mb-4 p-3" id="language" style="border-color:#959595">
+                    <div class="mt-2"><select class="btn bg-white dropdown-toggle h6 w-100 rounded mb-4 p-3" id="language" style="border-color:#959595">
                             <option selected="selected" class="pointer" id="language_button" value="">
                                 <%= __('All Languages') %>
                             </option>
@@ -85,6 +87,8 @@
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
 <%- include('../common/feedback.ejs', {page: "Dashboard"}) %>
