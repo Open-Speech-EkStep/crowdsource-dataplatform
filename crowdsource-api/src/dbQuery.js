@@ -308,19 +308,23 @@ and ((state is null) or (state='contributed'))`;
 const hasTargetQuery = `select exists(select 1 from contributions con inner join dataset_row dr on con.dataset_row_id=dr.dataset_row_id left join validations val on 
   con.contribution_id=val.contribution_id and val.action!='skip' inner join configurations conf on conf.config_name='validation_count'
   inner join configurations conf2 on conf2.config_name='include_profane' 
-  inner join configurations conf3 on conf3.config_name='show_demo_data' 
+  inner join configurations conf3 on conf3.config_name='show_demo_data'
+  left join master_dataset mds on dr.master_dataset_id=mds.master_dataset_id
 where type=$1 and dr.media->>'language'=$2 and con.media->>'language'=$3 and con.action='completed'
 and (conf2.value=1 or is_profane=false) 
 and (conf3.value=0 or for_demo=true)
+and coalesce(mds.is_active, true) = true
 group by val.contribution_id,conf.value having count(val.*)<conf.value) as result`;
 
 const isAllContributedQuery = `select not exists(
 	select dataset_row_id from dataset_row
   inner join configurations conf2 on conf2.config_name='include_profane'
   inner join configurations conf3 on conf3.config_name='show_demo_data' 
+  left join master_dataset mds on dataset_row.master_dataset_id=mds.master_dataset_id
   where type=$1 and media->>'language'=$2
-  and (conf2.value=1 or is_profane=false) 
+  and (conf2.value=1 or is_profane=false)
   and (conf3.value=0 or for_demo=true)
+  and coalesce(mds.is_active, true) = true
 	EXCEPT
 	select dr.dataset_row_id from contributions con inner join dataset_row dr on con.dataset_row_id=dr.dataset_row_id 
 	where type=$1 and dr.media->>'language'=$2 and con.media->>'language'=$3 and action='completed') as result`;
