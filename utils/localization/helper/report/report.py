@@ -1,3 +1,5 @@
+import re
+
 import pandas as pd
 
 
@@ -59,6 +61,45 @@ class LocaleReportGenerator:
 
         return updated_translation_content
 
+    @staticmethod
+    def find_content_not_present(keys_to_find_in, keys_to_be_found):
+        keys_not_present = []
+        for json_key in keys_to_be_found:
+            if json_key not in keys_to_find_in:
+                keys_not_present.append(json_key)
+        return keys_not_present
+
+    @staticmethod
+    def find_remaining_needed_in_json(translation_remaining_keys, keys_missing_in_excel):
+        keys = []
+        for key in translation_remaining_keys:
+            if key in keys_missing_in_excel:
+                keys.append(key)
+        return keys
+
+    @staticmethod
+    def extract_and_replace_tags(text):
+        tag_identification_regex = r"<(\S*?)[^>]*>.*?<\/\1>|<.*?\/>"
+        out_txt = text
+        matched_tags = re.finditer(tag_identification_regex, out_txt, re.MULTILINE)
+        matched_tags_list = []
+        for match in matched_tags:
+            matched_tag = match.group()
+            if "<b" in matched_tag:
+                pass
+            else:
+                out_txt = out_txt.replace(matched_tag, '<{}>')
+            matched_tags_list.append(matched_tag)
+        return out_txt, matched_tags_list
+
+    @staticmethod
+    def find_ones_with_span_tag(keys):
+        for key in keys:
+            if "<span" in key:
+                pass
+            elif "<b" in key:
+                pass
+
     def generate_report(self):
         # total_keys in sent json
         # total_keys from sme
@@ -83,6 +124,16 @@ class LocaleReportGenerator:
         translation_remaining_content = self.find_translation_needed_content(self.final_df)
         translation_remaining_keys = translation_remaining_content.keys()
 
+        excel_df_keys = list(self.excel_df['Key'])
+        json_df_keys = list(self.json_df['Key'])
+
+        keys_missing_in_excel = self.find_content_not_present(excel_df_keys, json_df_keys)
+
+        remaining_needed_and_not_in_delta = self.find_remaining_needed_in_json(translation_remaining_keys,
+                                                                               keys_missing_in_excel)
+
+        keys_missing_in_json = self.find_content_not_present(json_df_keys, excel_df_keys)
+
         return {
             'total_keys_translation_needed': len(translation_needed_keys),
             'total_keys_in_existing_locale_json': len(self.json_df['Key']),
@@ -91,8 +142,12 @@ class LocaleReportGenerator:
             'total_keys_translation_added': len(new_translations_content_keys),
             'total_keys_translation_updated': len(updated_translations_content),
             'total_keys_translation_remaining': len(translation_remaining_keys),
+            'total_remaining_needed_and_not_in_delta': len(remaining_needed_and_not_in_delta),
             'keys_translation_needed': list(translation_needed_keys),
             'keys_translations_added': list(new_translations_content_keys),
             'translations_updated': updated_translations_content,
-            'keys_translations_remaining': list(translation_remaining_keys)
+            'keys_translations_remaining': list(translation_remaining_keys),
+            'keys_missing_in_excel': keys_missing_in_excel,
+            'keys_missing_in_json': keys_missing_in_json,
+            'remaining_needed_and_not_in_delta': remaining_needed_and_not_in_delta
         }

@@ -46,12 +46,12 @@ def main():
                         help="Output folder path where excels are generated")
 
     args = parser.parse_args(
-        "-j /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localisation_script/delta_generation/cleaned_jsons \
-            -e /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/sme-input \
-            -m /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/out-meta \
+        "-j /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/crowdsource-ui/locales \
+            -e /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localization/resources/Bhasha_Daan_All_Content_July_16.xlsx \
+            -m /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localization/resources/out_meta_5_20.xlsx \
             -o ./output_json_files \
-            -t seperate \
-            -l hi \
+            -t combined \
+            -a \
         ".split())
 
     # for test
