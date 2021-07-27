@@ -65,6 +65,7 @@ const {
     cumulativeCount,
     cumulativeDataByState,
     cumulativeDataByLanguage,
+    cumulativeDataByLanguageV2,
     cumulativeDataByLanguageAndState,
     listLanguages,
     dailyTimeline,
@@ -362,6 +363,28 @@ const getAggregateDataCount = (language, state, type) => {
         query = cumulativeDataByState;
     } else {
         query = cumulativeCount;
+    }
+    return db.any(query, filter);
+}
+
+const getAggregateDataCountV2 = (language, state, type) => {
+    const typeFilter = `type='${type}'`;
+    let filter = pgp.as.format('$1:raw', [typeFilter])
+    let query = "select 1";
+    if (typeof language !== "boolean") {
+        language = language === 'true' ? true : false;
+    }
+    if (typeof state !== "boolean") {
+        state = state === 'true' ? true : false;
+    }
+    if (language && state && language === true && state === true) {
+        // query = cumulativeDataByLanguageAndState;
+    } else if (language && language === true) {
+        query = cumulativeDataByLanguageV2;
+    } else if (state && state === true) {
+        // query = cumulativeDataByState;
+    } else {
+        // query = cumulativeCount;
     }
     return db.any(query, filter);
 }
@@ -841,6 +864,7 @@ module.exports = {
     updateProfanityStatusForCorrection,
     releaseMediaForCorrection,
     getAggregateDataCount,
+    getAggregateDataCountV2,
     getTopLanguageBySpeakers,
     getLanguages,
     getTimeline,
