@@ -298,9 +298,15 @@ a.text-primary:hover {
   }
 }
 
+.badge-detail-widget{
+  border: 1px solid #cbcbcb;
+  background: $text-light;
+}
+
 .badge-widget {
   border: 1px solid $text-offWhite;
 }
+
 .badge-widget-placeholder {
   border: 1px dashed $primary-color;
 }

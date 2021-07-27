@@ -6,11 +6,7 @@ const {
 } = require('./utils');
 const {
   CONTRIBUTION_LANGUAGE,
-  BOLOPAGE,
   LOCALE_STRINGS,
-  DEKHOPAGE,
-  LIKHOPAGE,
-  SUNOPAGE,
   SPEAKER_DETAILS_KEY,
   MODULE,
   DEFAULT_CON_LANGUAGE
@@ -18,53 +14,31 @@ const {
 const {onChangeUser, showUserProfile, onOpenUserDropDown} = require('./header');
 const {hasUserRegistered} = require('./common');
 
-const getRowWithBadge = function (levelId, sentenceCount, badgeName, localeString, type, source) {
-  const badge = type == 'text' ? BOLOPAGE[badgeName.toLowerCase()] : type == 'ocr' ? DEKHOPAGE[badgeName.toLowerCase()] : type == 'asr' ? SUNOPAGE[badgeName.toLowerCase()] : LIKHOPAGE[badgeName.toLowerCase()];
-  let text;
-  if (source == "contribute") {
-    text = type == 'text' ? "Recording" : type == 'ocr' ? "Labelling" : type == 'asr' ? "Transcribing" : "Translating";
-  } else {
-    text = "Validating";
-  }
-  let actionText = type == 'ocr' ? "Images" : "Sentences";
-  const badgeDescription = `<p class="text-left mb-0 ml-3">${localeString[text]}: ${sentenceCount} ${localeString[actionText]}</p>`;
-  return `<tr id="level"><td class="pl-lg-5 pl-md-4 pl-3">${localeString.Level} ${levelId}</td><td>${badgeDescription}</td><td class="text-center"><div><img src=${source == "contribute" ? badge.imgLg : badge.imgSm} class="table-img" height="76" width="63" alt=${badgeName} id="${badgeName}_${source}" rel="popover"></div><span>${localeString[badgeName.toLowerCase()]}</span></td></tr>`
-}
-
-const getCard = function (badgeName, localeString, type, source) {
-  const badge = type == 'text' ? BOLOPAGE[badgeName.toLowerCase()] : type == 'ocr' ? DEKHOPAGE[badgeName.toLowerCase()] : type == 'asr' ? SUNOPAGE[badgeName.toLowerCase()] : LIKHOPAGE[badgeName.toLowerCase()];
-  return `<div class="text-center">
-                <div class="py-2">
-                    <img src=${source == "contribute" ? badge.imgLg : badge.imgSm} alt="${badgeName.toLowerCase()}_badge" class="img-fluid">
-                </div>
-                <h3>${localeString[badgeName.toLowerCase()]}</h3>
-            </div>`
-}
 
 const getBadgeLevels = function (language, initiative, source) {
   const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   return `
     <div class="col-3 pl-lg-2 pr-lg-5 pl-0">
-                                <div class="badge-widget cursor-pointer text-center bg-white" id="bronze_participation_badge">
-                                    <img src="${getLanguageBadge(language,'bronze',source, initiative)}" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
+                                <div class="badge-widget badge-detail-widget cursor-pointer text-center bg-white" id="bronze_participation_badge">
+                                    <img src="${getLanguageBadge(language,'bronze',source, initiative)}" class="my-badge-image" id="bronze" height="74" width="60" rel="popover" data-toggle="popover">
                                     <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString.bronze}</h6>
                                 </div>
                             </div>
                             <div class="col-3 pl-lg-2 pr-lg-5 pl-0">
-                                <div class="badge-widget cursor-pointer text-center bg-white" id="silver_participation_badge">
-                                    <img src="${getLanguageBadge(language,'silver',source, initiative)}" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
+                                <div class="badge-widget badge-detail-widget cursor-pointer text-center" id="silver_participation_badge">
+                                    <img src="${getLanguageBadge(language,'silver',source, initiative)}" class="my-badge-image" id="silver" height="74" width="60" rel="popover" data-toggle="popover">
                                     <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString.silver}</h6>
                                 </div>
                             </div>
                             <div class="col-3 pl-lg-2 pr-lg-5 pl-0">
-                                <div class="badge-widget cursor-pointer text-center bg-white" id="gold_participation_badge">
-                                    <img src="${getLanguageBadge(language,'gold',source, initiative)}" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
+                                <div class="badge-widget badge-detail-widget cursor-pointer text-center" id="gold_participation_badge">
+                                    <img src="${getLanguageBadge(language,'gold',source, initiative)}" class="my-badge-image" id="gold" height="74" width="60" rel="popover" data-toggle="popover">
                                     <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString.gold}</h6>
                                 </div>
                             </div>
                             <div class="col-3 pl-lg-2 pr-lg-5 pl-0">
-                                <div class="badge-widget cursor-pointer text-center bg-white" id="platinum_participation_badge">
-                                    <img src="${getLanguageBadge(language,'platinum',source, initiative)}" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
+                                <div class="badge-widget badge-detail-widget cursor-pointer text-center" id="platinum_participation_badge">
+                                    <img src="${getLanguageBadge(language,'platinum',source, initiative)}" class="my-badge-image" id="platinum" height="74" width="60" rel="popover" data-toggle="popover">
                                     <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString.platinum}</h6>
                                 </div>
                             </div>
@@ -82,7 +56,9 @@ const renderCard = function (data, initiative, badge_color, source, language) {
 
   const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const localeLanguageStr = localeString[language];
-  const localeInitiativeStr = initiative[`${initiative.charAt(0).toUpperCase() +  initiative.slice(1)} India}`];
+
+
+  const localeInitiativeStr = localeString[`${initiative.charAt(0).toUpperCase() +  initiative.slice(1)} India`];
 
   const $selectedBadgeCardImg = $('.selected-badge-card img');
   $selectedBadgeCardImg.attr('src',getLanguageBadge(language,badge_color,source, initiative));
@@ -98,6 +74,12 @@ const renderBadgeDetails = function (data, source, type, initiative, language, b
   const badgeLevels = getBadgeLevels(language, initiative, source)
   const $badgeLevelSection = $('.badge-level-section');
   $badgeLevelSection.html(badgeLevels);
+  $('#bronze_participation_badge, #silver_participation_badge ,#gold_participation_badge, #platinum_participation_badge').off('click').on('click',(e)=>{
+    $('.badge-level-section').find('.bg-white').removeClass('bg-white');
+    $(e.currentTarget).addClass('bg-white');
+    renderCard(data, initiative, e.target.id, source, language);
+
+  })
   renderCard(data, initiative, badge_color, source, language);
 }
 
@@ -113,11 +95,18 @@ const initialise = () => {
   let type = localStorage.getItem("module");
   let initiativeValue = type === 'home' ? 'asr' : MODULE[type]["api-type"];
 
-  if (initiativeValue != 'home') {
-    $("#initiative").find('a[value="' + type + '"]').attr("aria-selected", true);
-    // initiativeValue = type;
+  if (type != 'home') {
+    const selectedLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    initiative = type;
+
+    $("#initiative").find('.active').attr("aria-selected", false);
+    $("#initiative").find('.active').removeClass('active');
+    $("#initiative").find('a[id="' + type + '"]').attr("aria-selected", true);
+    $("#initiative").find('a[id="' + type + '"]').addClass('active');
     source = localStorage.getItem('selectedType');
-    selectedLanguage = $('#languages').find('option[value="' + localStorage.getItem(CONTRIBUTION_LANGUAGE) + '"]').val();
+    $("#languages").find('option[value="' + selectedLanguage + '"]').attr("selected", "selected");
+    $("#participation-radios").find('input[value="' + source + '"]').attr("checked", "checked");
+
   } else {
     $("#languages").find('option[value="' + DEFAULT_CON_LANGUAGE + '"]').attr("selected", "selected");
     selectedLanguage = $('#languages').find('option[value="' + DEFAULT_CON_LANGUAGE + '"]').val();
@@ -135,9 +124,7 @@ const initialise = () => {
     getBadgeData(initiativeValue, source, selectedLanguage,initiative,badge_color);
   });
 
-  $('.badge-widget').off('click').on('click',()=>{
-    getBadgeData(initiativeValue, source, selectedLanguage,initiative,badge_color);
-  })
+
 
   $('#participation-radios').on('change', (e) => {
 
@@ -155,20 +142,15 @@ const initialise = () => {
 $(document).ready(function () {
   getLocaleString().then(() => {
     initialise();
-  }).catch((e) => {
-    alert(e)
+  }).catch(() => {
     window.location.href = "/";
   })
   let moduleType = localStorage.getItem("module");
   const type = localStorage.getItem("selectedType");
   if (type && type == "validate" && moduleType != 'home') {
-    $("#contribute-tab").removeClass("active");
-    $("#validate-tab").addClass("active");
     $("#profile").addClass("active show");
     $("#home").removeClass("active show");
   } else {
-    $("#contribute-tab").addClass("active");
-    $("#validate-tab").removeClass("active");
     $("#profile").removeClass("active show");
     $("#home").addClass("active show");
   }
@@ -199,4 +181,4 @@ $(document).ready(function () {
   updateLocaleLanguagesDropdown(language);
 });
 
-module.exports = {getRowWithBadge, getCard}
+module.exports = {renderCard, getBadgeLevels}
