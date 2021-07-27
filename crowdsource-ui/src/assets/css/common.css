@@ -290,6 +290,7 @@ body {
   .my-badge-image {
     height: 74px;
     width: 60px;
+    margin-top: 10px;
   }
   .badge-widget {
     height: 120px;
@@ -354,6 +355,13 @@ body {
 }
 
 @media (max-width: 700px) {
+  .badge-img {
+    height: 200px;
+    width: 155px;
+  }
+  .badge-image-detail {
+    text-align: center;
+  }
   .padding-top-65 {
     padding-top: 56px !important;
   }
@@ -449,6 +457,7 @@ body {
   .my-badge-image {
     height: 44px;
     width: 44px;
+    margin-top: 10px;
   }
 
   #badge-profile-content h6 {
@@ -531,7 +540,7 @@ body {
 
 .btn-custom-outline-primary:disabled {
   pointer-events: none;
-  opacity: 0.8 !important;
+  opacity: 0.7 !important;
 }
 
 #anonymous_user {

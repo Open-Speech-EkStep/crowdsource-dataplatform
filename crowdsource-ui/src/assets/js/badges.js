@@ -44,25 +44,25 @@ const getCard = function (badgeName, localeString, type, source) {
 const getBadgeLevels = function (language, initiative, source) {
   const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   return `
-    <div class="col-3 pl-lg-2 pr-lg-5">
+    <div class="col-3 pl-lg-2 pr-lg-5 pl-0">
                                 <div class="badge-widget cursor-pointer text-center bg-white" id="bronze_participation_badge">
                                     <img src="${getLanguageBadge(language,'bronze',source, initiative)}" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
                                     <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString.bronze}</h6>
                                 </div>
                             </div>
-                            <div class="col-3 pl-lg-2 pr-lg-5">
+                            <div class="col-3 pl-lg-2 pr-lg-5 pl-0">
                                 <div class="badge-widget cursor-pointer text-center bg-white" id="silver_participation_badge">
                                     <img src="${getLanguageBadge(language,'silver',source, initiative)}" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
                                     <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString.silver}</h6>
                                 </div>
                             </div>
-                            <div class="col-3 pl-lg-2 pr-lg-5">
+                            <div class="col-3 pl-lg-2 pr-lg-5 pl-0">
                                 <div class="badge-widget cursor-pointer text-center bg-white" id="gold_participation_badge">
                                     <img src="${getLanguageBadge(language,'gold',source, initiative)}" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
                                     <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString.gold}</h6>
                                 </div>
                             </div>
-                            <div class="col-3 pl-lg-2 pr-lg-5">
+                            <div class="col-3 pl-lg-2 pr-lg-5 pl-0">
                                 <div class="badge-widget cursor-pointer text-center bg-white" id="platinum_participation_badge">
                                     <img src="${getLanguageBadge(language,'platinum',source, initiative)}" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
                                     <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString.platinum}</h6>

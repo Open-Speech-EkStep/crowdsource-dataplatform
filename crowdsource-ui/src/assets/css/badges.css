@@ -42,6 +42,11 @@ html {
     line-height: 20px;
     font-size: 14px;
   }
+
+
+  .badge-detail-container .nav-link{
+    font-size: 24px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -65,11 +70,26 @@ html {
   .popover {
     width: 180px;
   }
+
+  .badges-detail-heading{
+    font-size: 18px !important;
+    line-height: 24px !important;
+  }
+
+  .text-order {
+    order: 12;
+  }
+
+
+  .badge-detail-container .nav-link{
+    font-size: 14px;
+    padding: 2px;
+  }
 }
+
 
 .badge-detail-container .nav-link{
   font-weight: 400;
-  font-size: 24px;
   line-height: 30px;
   align-items: center;
   color: #0f2749;
@@ -92,14 +112,6 @@ html {
   background-color: #ffffff;
 }
 
-.selected-badge-card{
-  max-width: 1200px;
-  background: #ffffff;
-  box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
-  border-radius: 20px;
-  height: 400px;
-  padding: 40px 80px;
-}
 
 @media (max-width: 500px) {
   #badge-container table tbody {
@@ -111,6 +123,23 @@ html {
   }
   #badge-container h2 {
     font-size: 26px !important;
+  }
+
+
+  .selected-badge-card{
+    max-width: 1200px;
+    background: #ffffff;
+    box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .your-language-label {
+    font-size: 14px;
+  }
+
+  .selected-badge-card h1 {
+    font-size: 20px;
   }
 }
 
@@ -127,6 +156,19 @@ html {
   .badge-img {
     height: 320px;
     width: 250px;
+  }
+
+  .your-language-label {
+    font-size: 24px;
+  }
+
+  .selected-badge-card{
+    max-width: 1200px;
+    background: #ffffff;
+    box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
+    border-radius: 20px;
+    height: 400px;
+    padding: 40px 80px;
   }
 }
 

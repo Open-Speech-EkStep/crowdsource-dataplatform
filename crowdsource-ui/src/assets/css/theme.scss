@@ -72,6 +72,10 @@ $primary-color-shade10: tint($primary-color, 100%);
   background-size: auto, auto, cover;
 }
 
+.text-yellow {
+  color: $text-yellow;
+}
+
 .bg-secondary {
   background-color: $bg-light-color !important;
 }

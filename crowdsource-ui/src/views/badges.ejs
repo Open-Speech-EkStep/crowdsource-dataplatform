@@ -34,7 +34,7 @@
                 <div class="row mx-0 mt-5">
                     <div class="col-sm p-0">
                         <div class="row m-0">
-                            <label class="col-4 col-lg-4 col-md-4 px-0" style="font-size:24px">
+                            <label class="col-4 col-lg-4 col-md-4 px-0 your-language-label mt-2 mt-lg-0 mt-md-0">
                                 <%= __('Your Language') %>
                             </label>
                             <select class="col-lg-5 col-md-8 col-8 btn dropdown-toggle h6 w-90 rounded badge-language-dropdown" id="languages">
@@ -54,22 +54,22 @@
                         <div class="row m-0">
                             <ul class="nav nav-tabs w-100 border-0 bg-white" id="initiative" role="tablist">
                                 <li class="nav-item col-3 p-0 text-center">
-                                    <a class="nav-link border-0 active light-bg font-family-Rowdies" id="suno" data-toggle="tab" href="#suno" role="tab" aria-controls="suno" aria-selected="true">
+                                    <a style="height:64px;padding-top:15px" class="nav-link border-0 active light-bg font-family-Rowdies" id="suno" data-toggle="tab" href="#suno" role="tab" aria-controls="suno" aria-selected="true">
                                             <%= __('Suno India')%>
                                     </a>
                                 </li>
                                 <li class="nav-item col-3 p-0 text-center">
-                                    <a class="nav-link border-0 light-bg font-family-Rowdies" id="bolo" data-toggle="tab" href="#bolo" role="tab" aria-controls="bolo" aria-selected="true">
+                                    <a style="height:64px;padding-top:15px" class="nav-link border-0 light-bg font-family-Rowdies" id="bolo" data-toggle="tab" href="#bolo" role="tab" aria-controls="bolo" aria-selected="true">
                                             <%= __('Bolo India')%>
                                     </a>
                                 </li>
                                 <li class="nav-item col-3 p-0 text-center">
-                                    <a class="nav-link border-0 light-bg font-family-Rowdies" id="likho" data-toggle="tab" href="#likho" role="tab" aria-controls="likho" aria-selected="true">
+                                    <a style="height:64px;padding-top:15px" class="nav-link border-0 light-bg font-family-Rowdies" id="likho" data-toggle="tab" href="#likho" role="tab" aria-controls="likho" aria-selected="true">
                                             <%= __('Likho India')%>
                                     </a>
                                 </li>
                                 <li class="nav-item col-3 p-0 text-center">
-                                    <a class="nav-link border-0 light-bg font-family-Rowdies" id="dekho" data-toggle="tab" href="#dekho" role="tab" aria-controls="dekho" aria-selected="true">
+                                    <a style="height:64px;padding-top:15px" class="nav-link border-0 light-bg font-family-Rowdies" id="dekho" data-toggle="tab" href="#dekho" role="tab" aria-controls="dekho" aria-selected="true">
                                             <%= __('Dekho India')%>
 
                                     </a>
@@ -80,10 +80,10 @@
                 </div>
 
                 <div class="row mx-0 mt-5">
-                    <label class="col-3 m-auto font-family-Rowdies" style="font-weight:300!important">
+                    <label class="col-lg-3 col-md-3 col-12 m-auto font-family-Rowdies" style="font-weight:300!important">
                       <h5> <%= __('Select Badge level')%></h5>
                     </label>
-                    <div class="col-7">
+                    <div class="col-md-7 col-12 col-md-7">
                         <div class="row m-0 badge-level-section">
 
                         </div>
@@ -92,10 +92,10 @@
                 </div>
 
                 <div class="row mx-0 mt-5">
-                    <label class="col-3" style="font-weight:300!important">
+                    <label class="col-lg-3 col-12 col-md-3" style="font-weight:300!important">
                        <h5> <%= __('Participation')%> </h5>
                     </label>
-                    <ul class="nav nav-tabs w-100 border-0 col-8 pl-5" id="participation-radios" role="tablist">
+                    <ul class="nav nav-tabs w-100 border-0 col-lg-8 col-md-8 col-12 pl-5" id="participation-radios" role="tablist">
                         <li class="nav-item">
                             <input type="radio" class="form-check-input mt-2" value="contribute" checked="checked" id="contribute-radio" name="participation">
                            <h4 class="font-family-Rowdies" style="font-weight:300!important;padding-left:14px"> <%= __('Contributions')%> </h4>
@@ -107,13 +107,13 @@
                     </ul>
                 </div>
                 <div class="row mx-0 my-5 selected-badge-card">
-                        <div class="col-7 pt-4">
+                        <div class="col-lg-7 col-12 col-md-7 pt-4 text-order">
                             <h1>
-                                <%- __(`<span id="participation-type"></span> <span id="milestone"></span> <span id="text-type"></span> in <span id="contribution-language"></span> and earn <span id="initiative-name"></span> India <span id="badge-color"></span> Bhasha Samarthak badge`)%>
+                                <%- __(`<span id="participation-type"></span> <span id="milestone" class="text-yellow"></span> <span id="text-type" class="text-yellow"></span> in <span id="contribution-language"></span> and earn <span id="initiative-name"></span> India <span id="badge-color"></span> Bhasha Samarthak badge`)%>
                             </h1>
                         </div>
                         <div class="col-1"></div>
-                        <div class="col-4">
+                        <div class="col-lg-4 col-12 col-md-4 pt-4 pt-lg-0 badge-image-detail pt-md-0">
                             <img src="" class="badge-img" alt="badge" height="320" width="250">
                         </div>
                 </div>
