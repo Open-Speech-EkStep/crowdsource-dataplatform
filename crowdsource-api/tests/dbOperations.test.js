@@ -25,6 +25,7 @@ const {
     updateMediaWithValidatedState,
     getContributionHoursForLanguage,
     getOrderedMediaQuery,
+    updateViews,
     updateMaterializedViews,
     getContributionListQuery,
     getDatasetLanguagesQuery,
@@ -216,7 +217,8 @@ describe("Running tests for dbOperations", () => {
                     [testDatasetId]
                 );
 
-                expect(spyDBnone).toHaveBeenCalledWith(updateMaterializedViews);
+                expect(spyDBnone).toHaveBeenCalledWith(updateViews);
+                //expect(spyDBnone).toHaveBeenCalledWith(updateMaterializedViews);
             });
 
             test('call query with rounded audio duration', async () => {
