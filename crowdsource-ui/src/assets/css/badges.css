@@ -42,6 +42,11 @@ html {
     line-height: 20px;
     font-size: 14px;
   }
+
+
+  .badge-detail-container .nav-link{
+    font-size: 24px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -66,8 +71,47 @@ html {
     width: 180px;
   }
 
+  .badges-detail-heading{
+    font-size: 18px !important;
+    line-height: 24px !important;
+  }
+
+  .text-order {
+    order: 12;
+  }
+
+
+  .badge-detail-container .nav-link{
+    font-size: 14px;
+    padding: 2px;
+  }
+}
+
+
+.badge-detail-container .nav-link{
+  font-weight: 400;
+  line-height: 30px;
+  align-items: center;
+  color: #0f2749;
+}
+
+.badges-detail-heading{
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 50px;
+  color: #000000;
 
 }
+
+.badge-language-dropdown{
+  height:40px;
+  padding:0 10px;
+  border-color:#959595;
+  color:#959595;
+  background-color: #ffffff;
+}
+
 
 @media (max-width: 500px) {
   #badge-container table tbody {
@@ -80,6 +124,23 @@ html {
   #badge-container h2 {
     font-size: 26px !important;
   }
+
+
+  .selected-badge-card{
+    max-width: 1200px;
+    background: #ffffff;
+    box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .your-language-label {
+    font-size: 14px;
+  }
+
+  .selected-badge-card h1 {
+    font-size: 20px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -91,6 +152,23 @@ html {
 @media (min-width: 768px) {
   .font-weight-light-lg {
     font-weight: 300 !important;
+  }
+  .badge-img {
+    height: 320px;
+    width: 250px;
+  }
+
+  .your-language-label {
+    font-size: 24px;
+  }
+
+  .selected-badge-card{
+    max-width: 1200px;
+    background: #ffffff;
+    box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
+    border-radius: 20px;
+    height: 400px;
+    padding: 40px 80px;
   }
 }
 
@@ -127,7 +205,7 @@ html {
 }
 
 
-#badge-container {
+#badge-container, .badge-detail-container {
   max-width: 1200px;
 }
 
@@ -146,7 +224,7 @@ html {
 }
 
 .badge-mt-34 {
-  margin-top: 34px;
+  margin-top: 38px;
 }
 
 .badge-mt-36 {
@@ -160,7 +238,7 @@ html {
 #badge-container .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
   border-color:  #f8f9fa;
   background: #f8f9fa;
-  color: #007bff !important;
+  color: #0f2749 !important;
   border-radius: 0;
    
 }

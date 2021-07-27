@@ -72,6 +72,10 @@ $primary-color-shade10: tint($primary-color, 100%);
   background-size: auto, auto, cover;
 }
 
+.text-yellow {
+  color: $text-yellow;
+}
+
 .bg-secondary {
   background-color: $bg-light-color !important;
 }
@@ -308,9 +312,15 @@ a.text-primary:hover {
   }
 }
 
+.badge-detail-widget{
+  border: 1px solid #cbcbcb;
+  background: $text-light;
+}
+
 .badge-widget {
   border: 1px solid $text-offWhite;
 }
+
 .badge-widget-placeholder {
   border: 1px dashed $primary-color;
 }
