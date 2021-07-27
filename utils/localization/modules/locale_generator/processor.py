@@ -2,6 +2,7 @@ import pandas as pd
 
 from helper.reader.excel_file_reader import ExcelReader
 from modules.locale_generator.data import LocaleOutData
+from modules.locale_generator.utils import read_replacer_file
 
 
 class LocaleProcessor:
@@ -11,12 +12,28 @@ class LocaleProcessor:
         self.english_column_name = english_column_name
         self.allowed_values = ['x', 'y', 'z', 'u', 'v', 'w']
         self.a_tag_replacement = 'a-tag-replacement'
+        self.additional_replacer_list = read_replacer_file()
 
     def add_translation_if_present(self, df_row):
         if self.language_name in list(df_row.index):
             if pd.notnull(df_row[self.language_name]) and len(str(df_row[self.language_name]).strip()) != 0:
                 df_row['value'] = df_row[self.language_name]
         return df_row
+
+    def replace_tags_in_df(self, df):
+        for i, df_row in df.iterrows():
+            for replacer in self.additional_replacer_list:
+                if len(replacer['excel_key']) == 0:
+                    continue
+                if replacer['excel_key'] == df_row['Key']:
+                    df_row['Key'] = replacer['json_key']
+                    replacements_ = replacer['replacements']
+                    for replacer_key in replacements_.keys():
+                        if pd.notnull(df_row[self.language_name]) and len(str(df_row[self.language_name]).strip()) != 0:
+                            df_row[self.language_name] = df_row[self.language_name].replace(replacer_key,
+                                                                                            replacements_[replacer_key])
+                    break
+        return df
 
     def restructure_extracted_tags(self, df_row):
         column_names = list(df_row.index)
@@ -82,6 +99,7 @@ class LocaleProcessor:
 
     def process(self, meta_excel_df, input_excel_df, json_df):
         excel_df = self.process_with_meta_info(input_excel_df, meta_excel_df)
+        excel_df = self.replace_tags_in_df(excel_df)
 
         final_df = self.merge_excel_and_json(excel_df, json_df)
 

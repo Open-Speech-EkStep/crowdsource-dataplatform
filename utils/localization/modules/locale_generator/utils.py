@@ -12,6 +12,12 @@ def read_language_list():
     return languages_to_be_considered
 
 
+def read_replacer_file():
+    replacer_file = pkg_resources.resource_filename('resources', resource_name='replacer.json')
+    replacements = read_json(replacer_file)
+    return replacements
+
+
 def get_selected_languages(languages_to_be_considered, select_all_flag, selected_languages: list):
     languages = {}
     if select_all_flag:

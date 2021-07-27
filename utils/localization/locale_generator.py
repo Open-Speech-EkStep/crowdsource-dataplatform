@@ -19,7 +19,7 @@ def main():
             For all languages:
                 python LocaleGenerator.py -j ./../all_keys_generator/out -e ./input_excel_files -m ./../delta_generation/out-meta -o ./output_json_files -a
 
-            -j /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localisation_script/delta_generation/cleaned_jsons
+            -j /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localization/helper/cleaned_jsons
             -e /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/sme-input
             -m /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/out-meta
             -o ./output_json_files 
@@ -46,7 +46,7 @@ def main():
                         help="Output folder path where excels are generated")
 
     args = parser.parse_args(
-        "-j /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/crowdsource-ui/locales \
+        "-j /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localization/helper/cleaned_jsons \
             -e /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localization/resources/Bhasha_Daan_All_Content_July_16.xlsx \
             -m /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localization/resources/out_meta_5_20.xlsx \
             -o ./output_json_files \
