@@ -135,7 +135,7 @@ def insert_extracted_tags(text, tags, allowed_replacements):
 # In[7]:
 
 
-def extract_and_replace_tags_for_lang(text, allowed_replacements, replacement_dict):
+def extract_and_replace_tags_for_lang(text, allowed_replacements, replacement_dict, en_key):
     tag_identification_regex = r"<(\S*?)[^>]*>.*?<\/\1>|<.*?\/>"
     out_txt = text
     matched_tags = re.finditer(tag_identification_regex, out_txt, re.MULTILINE)
@@ -150,11 +150,16 @@ def extract_and_replace_tags_for_lang(text, allowed_replacements, replacement_di
             matched_tag_replacement = matched_tag.replace(attributes_part_string,"")
             out_txt = out_txt.replace(matched_tag, matched_tag_replacement)
         else:
+            flag = False
             for replacement_tag, match in replacement_dict.items():
                 if (matched_tag == match):     
                     replacement = replacement_tag
                     out_txt = out_txt.replace(matched_tag, '<{}>'.format(replacement))
+                    flag = True
                     break
+            if not flag:
+                print(text)
+                print(matched_tag, en_key)
     return out_txt
 
 
@@ -181,8 +186,8 @@ def get_processed_data_for_lang(en_json_data, json_data, allowed_replacements, k
     language_df = pd.DataFrame([], columns=[])
     for key, value in json_data.items():
         processed_en_text, replacement_mapping_dict = extract_and_replace_tags(en_json_data[key], allowed_replacements)
-        processed_lang_text = extract_and_replace_tags_for_lang(value, allowed_replacements, replacement_mapping_dict)
-        data_dict = get_dict_for_data(key, processed_lang_text, replacement_mapping_dict, key_path_list)
+        processed_lang_text = extract_and_replace_tags_for_lang(value, allowed_replacements, replacement_mapping_dict, en_json_data[key])
+        data_dict = get_dict_for_data(key, processed_lang_text, {}, key_path_list)
         try:
             tmp_df = pd.DataFrame.from_dict(data_dict, orient='columns')
             language_df = language_df.append(tmp_df, ignore_index=True)

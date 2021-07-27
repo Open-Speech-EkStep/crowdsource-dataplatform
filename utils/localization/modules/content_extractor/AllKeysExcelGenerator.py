@@ -64,7 +64,7 @@ def read_json(json_file_path):
 
 def get_dict_for_data(key, processed_text, replacement_mapping_dict, key_path_list):
     out_dict = {"Key": key, "English copy": [processed_text], "PATH": [key_path_list[key]]}
-    for replacement in sorted (replacement_mapping_dict.keys()):
+    for replacement in sorted(replacement_mapping_dict.keys()):
         out_dict[replacement] = [replacement_mapping_dict[replacement]]
     return out_dict
 
@@ -80,14 +80,14 @@ def extract_and_replace_tags(text, allowed_replacements):
         if "<b>" in matched_tag:
             continue
         elif "<a" in matched_tag:
-            attributes_part_string = matched_tag[matched_tag.find('<a')+2: matched_tag.find('>')]
+            attributes_part_string = matched_tag[matched_tag.find('<a') + 2: matched_tag.find('>')]
             replacement_mapping_dict['a-tag-replacement'] = attributes_part_string
-            matched_tag_replacement = matched_tag.replace(attributes_part_string,"")
+            matched_tag_replacement = matched_tag.replace(attributes_part_string, "")
             out_txt = out_txt.replace(matched_tag, matched_tag_replacement)
         else:
             replacement = allowed_replacements[replacement_identifier_index]
             replacement_mapping_dict[replacement] = matched_tag
-            replacement_identifier_index+=1
+            replacement_identifier_index += 1
             out_txt = out_txt.replace(matched_tag, '<{}>'.format(replacement))
     return out_txt, replacement_mapping_dict
 
@@ -101,8 +101,8 @@ def insert_extracted_tags(text, tags):
         if "<b>" in matched_tag:
             continue
         if "<a" in matched_tag:
-            attrs = matched_tag[matched_tag.find('<a')+2: matched_tag.find('>')]
-            matched_tag_replacement = matched_tag.replace(attrs,"")
+            attrs = matched_tag[matched_tag.find('<a') + 2: matched_tag.find('>')]
+            matched_tag_replacement = matched_tag.replace(attrs, "")
             out_txt = out_txt.replace(matched_tag, matched_tag_replacement)
         else:
             for key, value in tags.items():
@@ -121,20 +121,17 @@ def extract_and_replace_tags_for_lang(text, replacement_dict):
         if "<b>" in matched_tag:
             continue
         elif "<a" in matched_tag:
-            attributes_part_string = matched_tag[matched_tag.find('<a')+2: matched_tag.find('>')]
+            attributes_part_string = matched_tag[matched_tag.find('<a') + 2: matched_tag.find('>')]
             replacement_mapping_dict['a-tag-replacement'] = attributes_part_string
-            matched_tag_replacement = matched_tag.replace(attributes_part_string,"")
+            matched_tag_replacement = matched_tag.replace(attributes_part_string, "")
             out_txt = out_txt.replace(matched_tag, matched_tag_replacement)
         else:
             for replacement_tag, match in replacement_dict.items():
-                if (matched_tag == match):     
+                if matched_tag == match:
                     replacement = replacement_tag
                     out_txt = out_txt.replace(matched_tag, '<{}>'.format(replacement))
                     break
     return out_txt
-
-
-# In[8]:
 
 
 def get_processed_data_for_en(json_data, allowed_replacements, key_path_list):
@@ -150,10 +147,7 @@ def get_processed_data_for_en(json_data, allowed_replacements, key_path_list):
     return language_df
 
 
-# In[9]:
-
-
-def get_processed_data_for_lang(en_json_data, json_data, allowed_replacements, key_path_list):    
+def get_processed_data_for_lang(en_json_data, json_data, allowed_replacements, key_path_list):
     language_df = pd.DataFrame([], columns=[])
     for key, value in json_data.items():
         processed_en_text, replacement_mapping_dict = extract_and_replace_tags(en_json_data[key], allowed_replacements)
@@ -167,36 +161,26 @@ def get_processed_data_for_lang(en_json_data, json_data, allowed_replacements, k
     return language_df
 
 
-# In[10]:
-
-
 def get_path(key, keys_with_path_map):
     for k, path in keys_with_path_map.items():
-        if key == k: 
+        if key == k:
             return path
     return None
 
 
-# In[11]:
-
-
 def generate_keys(en_json_path, input_json_path, keys_with_path_map, language_code):
-    allowed_replacements = ["u","v","w","x", "y", "z"]
+    allowed_replacements = ["u", "v", "w", "x", "y", "z"]
     en_json_data = read_json(en_json_path)
     key_path_list = {key: get_path(key, keys_with_path_map) for key in en_json_data.keys()}
-    
-    if (language_code =='en'):
+
+    if language_code == 'en':
         language_df = get_processed_data_for_en(en_json_data, allowed_replacements, key_path_list)
-       
+
     else:
         language_data = read_json(input_json_path)
         language_df = get_processed_data_for_lang(en_json_data, language_data, allowed_replacements, key_path_list)
 
     return language_df
-        
-
-
-# In[12]:
 
 
 def replace_non_translations(df_row):
@@ -209,23 +193,17 @@ def replace_non_translations(df_row):
     return df_row
 
 
-# In[13]:
-
-
 def export_report(report_json, report_type, important_dict_keys):
     now = datetime.now()
     report_json['last_run_timestamp'] = str(now)
     all_dict_keys = list(report_json.keys())
     sort_order = important_dict_keys + [k for k in all_dict_keys if k not in important_dict_keys]
     sort_def = lambda item: sort_order.index(item[0])
-    report_json = OrderedDict(sorted(report_json.items(), key = sort_def))
-    os.makedirs('reports',exist_ok=True)
-    json_data = json.dumps(report_json, indent = 4, ensure_ascii=False)
+    report_json = OrderedDict(sorted(report_json.items(), key=sort_def))
+    os.makedirs('reports', exist_ok=True)
+    json_data = json.dumps(report_json, indent=4, ensure_ascii=False)
     with open('{}/report_{}_{}.json'.format('reports', report_type, now), 'w') as f:
         f.write(json_data)
-
-
-# In[14]:
 
 
 def generate_report(content_keys):
@@ -236,12 +214,9 @@ def generate_report(content_keys):
     return report
 
 
-# In[15]:
-
-
 def generate_output_for_sme(all_df, output_excel_path):
     all_df_copy = all_df.copy()
-    allowed_replacements = ['PATH', "u","v","w","x", "y", "z", "a-tag-replacement"]
+    allowed_replacements = ['PATH', "u", "v", "w", "x", "y", "z", "a-tag-replacement"]
     for col in allowed_replacements:
         try:
             del all_df_copy[col]
@@ -250,19 +225,17 @@ def generate_output_for_sme(all_df, output_excel_path):
     all_df_copy = all_df_copy.apply(replace_non_translations, axis=1)
     del all_df_copy['Key']
     all_df_copy = all_df_copy.drop_duplicates(subset=['English copy'], keep='first')
-    all_df_copy.to_excel(output_excel_path.replace('.xlsx','_sme.xlsx'), index = False, startrow=1)
+    all_df_copy.to_excel(output_excel_path.replace('.xlsx', '_sme.xlsx'), index=False, startrow=1)
     return all_df_copy
-
-# In[16]:
 
 # def main():
 #     example = '''
 #             Example commands:
-            
+
 #             For only english content:
 #                 python AllKeysExcelGenerator.py -j ./../../../crowdsource-ui/locales -o ./out/en.xlsx --only-en
-                
-                
+
+
 #             For All language content:
 #                 python AllKeysExcelGenerator.py -j ./../../../crowdsource-ui/locales -o ./out/out.xlsx
 #         '''
