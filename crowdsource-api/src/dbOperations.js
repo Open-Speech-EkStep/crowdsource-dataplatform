@@ -36,6 +36,7 @@ const {
     markMediaReported,
     markContributionReported,
     updateMaterializedViews,
+    updateViews,
     getBadges,
     addContributorQuery,
     getContributionHoursForLanguage,
@@ -162,6 +163,7 @@ const updateDbWithAudioPath = async (
     ])
         .then(() => {
             db.none(updateMediaWithContributedState, [datasetId]).then();
+            db.none(updateViews).then();
             db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
@@ -299,6 +301,7 @@ const updateTablesAfterValidation = async (req, res) => {
                         console.log(err);
                         res.sendStatus(500);
                     });
+                db.none(updateViews).then();
                 db.none(updateMaterializedViews).then();
                 res.sendStatus(200);
             }
@@ -641,6 +644,7 @@ const updateDbWithUserInput = async (
     ])
         .then(() => {
             db.none(updateMediaWithContributedState, [datasetId]).then();
+            db.none(updateViews).then();
             db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
