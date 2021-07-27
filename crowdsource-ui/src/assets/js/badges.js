@@ -14,12 +14,19 @@ const {
 const {onChangeUser, showUserProfile, onOpenUserDropDown} = require('./header');
 const {hasUserRegistered} = require('./common');
 
+let badgeLevel = 'bronze_participation_badge';
+
+const selectBadgeLevel = function (id){
+  $('.badge-level-section').find('.bg-white').removeClass('bg-white');
+  $(`#${id}`).addClass('bg-white');
+}
+
 
 const getBadgeLevels = function (language, initiative, source) {
   const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   return `
     <div class="col-3 pl-lg-2 pr-lg-5 pl-0">
-                                <div class="badge-widget badge-detail-widget cursor-pointer text-center bg-white" id="bronze_participation_badge">
+                                <div class="badge-widget badge-detail-widget cursor-pointer text-center" id="bronze_participation_badge">
                                     <img src="${getLanguageBadge(language,'bronze',source, initiative)}" class="my-badge-image" id="bronze" height="74" width="60" rel="popover" data-toggle="popover">
                                     <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString.bronze}</h6>
                                 </div>
@@ -77,9 +84,12 @@ const renderBadgeDetails = function (data, source, type, initiative, language, b
   $('#bronze_participation_badge, #silver_participation_badge ,#gold_participation_badge, #platinum_participation_badge').off('click').on('click',(e)=>{
     $('.badge-level-section').find('.bg-white').removeClass('bg-white');
     $(e.currentTarget).addClass('bg-white');
-    renderCard(data, initiative, e.target.id, source, language);
+    const badgeColor = e.currentTarget.id.replace('_participation_badge','');
+    badgeLevel = e.currentTarget.id;
+    renderCard(data, initiative, badgeColor, source, language);
 
   })
+  selectBadgeLevel(badgeLevel);
   renderCard(data, initiative, badge_color, source, language);
 }
 
@@ -113,6 +123,7 @@ const initialise = () => {
   }
 
   getBadgeData(initiativeValue, source, selectedLanguage,initiative,badge_color);
+  selectBadgeLevel('bronze_participation_badge');
   $('#initiative').on('click', (e) => {
     initiative = e.target.id;
     initiativeValue = MODULE[e.target.id]["api-type"];
