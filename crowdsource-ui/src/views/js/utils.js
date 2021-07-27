@@ -252,8 +252,9 @@ const getJson = (path) => {
     })
 }
 
-const getLanguageBadge = (langaugeId, badgeType, isContribute, initiativeType) => {
-  return isContribute ? `/img/${langaugeId}_${initiativeType}_${badgeType}_medal_.svg` : `/img/${langaugeId}_${initiativeType}_${badgeType}_medal_val.svg`;
+const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType) => {
+  const language = ALL_LANGUAGES.find(language=>language.value.toLowerCase() === contibutedLanguage.toLowerCase());
+  return `/img/${language.id}_${initiativeType}_${badgeType}_${source}.svg`;
 }
 
 module.exports = { setPageContentHeight,
