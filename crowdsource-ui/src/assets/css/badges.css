@@ -65,8 +65,39 @@ html {
   .popover {
     width: 180px;
   }
+}
 
+.badge-detail-container .nav-link{
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 30px;
+  align-items: center;
+  color: #0f2749;
+}
 
+.badges-detail-heading{
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 50px;
+  color: #000000;
+
+}
+
+.badge-language-dropdown{
+  height:40px;
+  padding:0 10px;
+  border-color:#959595;
+  color:#959595;
+  background-color: #ffffff;
+}
+
+.selected-badge-card{
+  max-width: 1200px;
+  background: #ffffff;
+  box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
+  border-radius: 20px;
+  height: 200px;
 }
 
 @media (max-width: 500px) {
@@ -127,7 +158,7 @@ html {
 }
 
 
-#badge-container {
+#badge-container, .badge-detail-container {
   max-width: 1200px;
 }
 
@@ -160,7 +191,7 @@ html {
 #badge-container .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
   border-color:  #f8f9fa;
   background: #f8f9fa;
-  color: #007bff !important;
+  color: #0f2749 !important;
   border-radius: 0;
    
 }

@@ -3,9 +3,17 @@
   getLocaleString,
   updateLocaleLanguagesDropdown
 } = require('./utils');
-const {CONTRIBUTION_LANGUAGE, BOLOPAGE, LOCALE_STRINGS, DEKHOPAGE, LIKHOPAGE, SUNOPAGE,SPEAKER_DETAILS_KEY} = require('./constants');
+const {CONTRIBUTION_LANGUAGE, BOLOPAGE, LOCALE_STRINGS, DEKHOPAGE, LIKHOPAGE, SUNOPAGE,SPEAKER_DETAILS_KEY,MODULE, DEFAULT_CON_LANGUAGE} = require('./constants');
 const {onChangeUser, showUserProfile,onOpenUserDropDown} = require('./header');
 const {hasUserRegistered} = require('./common');
+
+  const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type, localeString, language) => {
+    return `
+  <div class="badge-widget cursor-pointer text-center" id="${badgeType}_${type}_${initiativeType}_${language}_badge">
+  <img src=${imgPath} class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover" >
+  <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString[badgeType]}</h6>
+</div>`
+  }
 
 const getRowWithBadge = function (levelId, sentenceCount, badgeName, localeString, type, source) {
   const badge = type == 'text' ? BOLOPAGE[badgeName.toLowerCase()] : type == 'ocr' ? DEKHOPAGE[badgeName.toLowerCase()] : type =='asr' ? SUNOPAGE[badgeName.toLowerCase()] : LIKHOPAGE[badgeName.toLowerCase()];
@@ -33,15 +41,16 @@ const getCard = function (badgeName, localeString, type, source) {
 const renderBadgeDetails = function (data, source, type) {
   const id = source == 'validate' ? 'validate-rows' : 'contribute-rows';
   document.getElementById(id).innerHTML = '';
-  let $tableRows = source == 'validate' ? $('#validate-rows'):  $('#contribute-rows');
+  let $tableRows = $('#myTab');
   const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-  data.forEach((element, index) => {
-    const {contributions, badge} = element;
-    const rowId = index + 1;
+  data.forEach((element) => {
+    const { badge} = element;
     let row;
     if (badge) {
-      row = getRowWithBadge(rowId, contributions, badge, localeString, type,source);
+      row = getWidgetWithBadge("/img/bolo_bronze_medal.svg", "Bronze", "bolo", "validate", localeString, "english");
     }
+
+    console.log(row)
     $tableRows.append(row);
     $(`#${badge}_${source}[rel=popover]`).popover({
       html: true,
@@ -58,61 +67,27 @@ const getBadgeData = (type, source, language) => {
   performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then((data) => renderBadgeDetails(data, source, type)).catch(() => {})
 }
 
-const addToLanguage = function (id, list) {
-  const selectBar = document.getElementById(id);
-  let options = '';
-  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-  list.forEach(lang => {
-    options = options.concat(`<option value=${lang.value}>${localeStrings[lang.text]}</option>`);
-  })
-  selectBar.innerHTML = options;
-}
-
 const initialise = () => {
-  let INITIATIVES = [
-    {
-      id: 1,
-      value: "text",
-      text: "Bolo India",
-    },
-    {
-      id: 2,
-      value: "ocr",
-      text: "Dekho India",
-    },
-    {
-      id: 3,
-      value: "parallel",
-      text: "Likho India",
-    },
-    {
-      id: 4,
-      value: "asr",
-      text: "Suno India",
-    }
-  ];
-  // addToLanguage('languages', ALL_LANGUAGES);
-  addToLanguage('initiative', INITIATIVES);
-  let initiative;
-  let selectedLanguage;
-
+  let initiative = 'home';
+  let selectedLanguage = DEFAULT_CON_LANGUAGE;
+  let source = 'contribute'
   let type = localStorage.getItem("module");
-  let value = type ==  'bolo' ? 'text' : type  == 'likho' ? "parallel" : type == "dekho" ? "ocr" : type == "suno" ? 'asr' : 'home';
+  let value = type === 'home' ? 'home' : MODULE[type]["api-type"];
+  console.log(type, value, "_______");
 
   if(value != 'home') {
-    $("#initiative").find('option[value="' + value + '"]').attr("selected", "selected");
+    // $("#initiative").find('option[value="' + value + '"]').attr("selected", "selected");
     $("#languages").find('option[value="' + localStorage.getItem(CONTRIBUTION_LANGUAGE) + '"]').attr("selected", "selected");
-    initiative = $('#initiative').find('option[value="' + value + '"]').val();
+    console.log(MODULE, type)
+    initiative= type;
+    source = localStorage.getItem('selectedType');
     selectedLanguage = $('#languages').find('option[value="' + localStorage.getItem(CONTRIBUTION_LANGUAGE) + '"]').val();
-  }else{
-    initiative = $('#initiative option:first-child').val();
-    selectedLanguage = $('#languages option:first-child').val();
-    $('#initiative option:first-child').attr("selected", "selected");
-    $('#languages option:first-child').attr("selected", "selected");
+  } else {
+    $("#languages").find('option[value="' + DEFAULT_CON_LANGUAGE + '"]').attr("selected", "selected");
+    selectedLanguage = $('#languages').find('option[value="' + DEFAULT_CON_LANGUAGE + '"]').val();
   }
   
-  getBadgeData(initiative, 'contribute', selectedLanguage);
-  getBadgeData(initiative, 'validate', selectedLanguage);
+  // getBadgeData(initiative, source, selectedLanguage);
   $('#initiative').on('change', (e) => {
     initiative = e.target.value;
     getBadgeData(initiative, 'contribute', selectedLanguage);
@@ -124,12 +99,18 @@ const initialise = () => {
     getBadgeData(initiative, 'contribute', selectedLanguage);
     getBadgeData(initiative, 'validate', selectedLanguage);
   });
+
+  $('#participation-radios').on('change',(e)=>{
+    source = e.target.value;
+    console.log(source);
+  })
 }
 
 $(document).ready(function () {
   getLocaleString().then(() => {
   initialise();
-}).catch(() => {
+}).catch((e) => {
+  alert(e)
   window.location.href = "/";
 })
   let moduleType = localStorage.getItem("module");
