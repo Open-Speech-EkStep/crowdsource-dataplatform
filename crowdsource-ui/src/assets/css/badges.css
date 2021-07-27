@@ -97,7 +97,8 @@ html {
   background: #ffffff;
   box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
   border-radius: 20px;
-  height: 200px;
+  height: 400px;
+  padding: 40px 80px;
 }
 
 @media (max-width: 500px) {
@@ -122,6 +123,10 @@ html {
 @media (min-width: 768px) {
   .font-weight-light-lg {
     font-weight: 300 !important;
+  }
+  .badge-img {
+    height: 320px;
+    width: 250px;
   }
 }
 
@@ -177,7 +182,7 @@ html {
 }
 
 .badge-mt-34 {
-  margin-top: 34px;
+  margin-top: 38px;
 }
 
 .badge-mt-36 {

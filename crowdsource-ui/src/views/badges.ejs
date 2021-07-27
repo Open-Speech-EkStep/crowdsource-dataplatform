@@ -17,154 +17,178 @@
 </head>
 
 <body class="bg-secondary">
-<%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
-<div id="content-wrapper" class="content-wrapper container-fluid padding-top-115 bg-tri-color pb-2 px-lg-3 px-md-3 px-4 px-md-5">
-    <div class="row">
-        <%- include('common/buttons/back-btn/back-btn.ejs',{url:"#"}) %>
-    </div>
-    <div id="badge-detail-container" class="container-fluid p-0 badge-detail-container">
-    <div class="row m-0">
-        <div class="col-12 p-0">
-            <h2 class="mb-0 badges-detail-heading"><%= __('How can you win Bhasha Samarthak Badges') %></h2>
-        </div>
-    </div>
-    <div class="row mx-0 badge-mt-34">
-        <div class="col-sm p-0">
-            <div class="row m-0">
-                <label class="col-4 col-lg-4 col-md-4 mt-2 px-0 pt-1"><%= __('Your Language') %> </label>
-                <select class="col-lg-7 col-md-8 col-8 btn dropdown-toggle h6 w-90 rounded badge-language-dropdown" id="languages">
-                    <% LANGUAGES.forEach(function(lang) { %>
-                        <option value="<%= lang.value %>">
-                            <%= lang.text %>
-                        </option>
-                    <% }) %>
-                </select>
+    <%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html",
+        suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
+        <div id="content-wrapper" class="content-wrapper container-fluid padding-top-115 bg-tri-color pb-2 px-lg-3 px-md-3 px-4 px-md-5">
+            <div class="row">
+                <%- include('common/buttons/back-btn/back-btn.ejs',{url:"#"}) %>
             </div>
-        </div>
+            <div id="badge-detail-container" class="container-fluid p-0 badge-detail-container">
+                <div class="row m-0 pb-4">
+                    <div class="col-12 p-0">
+                        <h2 class="mb-0 badges-detail-heading">
+                            <%= __('How can you win Bhasha Samarthak Badges') %>
+                        </h2>
+                    </div>
+                </div>
+                <div class="row mx-0 mt-5">
+                    <div class="col-sm p-0">
+                        <div class="row m-0">
+                            <label class="col-4 col-lg-4 col-md-4 px-0" style="font-size:24px">
+                                <%= __('Your Language') %>
+                            </label>
+                            <select class="col-lg-5 col-md-8 col-8 btn dropdown-toggle h6 w-90 rounded badge-language-dropdown" id="languages">
+                                <% LANGUAGES.forEach(function(lang) { %>
+                                    <option value="<%= lang.value %>">
+                                        <%= lang.text %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm p-0">
+                    </div>
+                </div>
+                <div class="row mx-0 badge-mt-34 pb-2">
+                    <div class="col-12 p-0">
+                        <div class="row m-0">
+                            <ul class="nav nav-tabs w-100 border-0 bg-white" id="initiative" role="tablist">
+                                <li class="nav-item col-3 p-0 text-center">
+                                    <a class="nav-link border-0 active light-bg font-family-Rowdies" id="suno-tab" data-toggle="tab" href="#suno" role="tab" aria-controls="suno" aria-selected="true">
+                                        <span>
+                                            <%= __('Suno')%>
+                                        </span>
+                                        <span>
+                                            <%= __('India')%>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item col-3 p-0 text-center">
+                                    <a class="nav-link border-0 light-bg font-family-Rowdies" id="bolo-tab" data-toggle="tab" href="#bolo" role="tab" aria-controls="bolo" aria-selected="true">
+                                        <span>
+                                            <%= __('Bolo')%>
+                                        </span>
+                                        <span>
+                                            <%= __('India')%>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item col-3 p-0 text-center">
+                                    <a class="nav-link border-0 light-bg font-family-Rowdies" id="likho-tab" data-toggle="tab" href="#likho" role="tab" aria-controls="likho" aria-selected="true">
+                                        <span>
+                                            <%= __('Likho')%>
+                                        </span>
+                                        <span>
+                                            <%= __('India')%>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item col-3 p-0 text-center">
+                                    <a class="nav-link border-0 light-bg font-family-Rowdies" id="dekho-tab" data-toggle="tab" href="#dekho" role="tab" aria-controls="dekho" aria-selected="true">
+                                        <span>
+                                            <%= __('Dekho')%>
+                                        </span>
+                                        <span>
+                                            <%= __('India')%>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="col-lg-4 col-md-2 mt-2 mt-lg-0 mt-md-0"></div>
-        <div class="col-sm p-0">
-        </div>
+                <div class="row mx-0 mt-5">
+                    <label class="col-3 m-auto font-family-Rowdies" style="font-weight:300!important">
+                      <h5> <%= __('Select Badge level')%></h5>
+                    </label>
+                    <div class="col-7">
+                        <div class="row m-0">
+                            <div class="col-3 pl-lg-2 pr-lg-5">
+                                <div class="badge-widget cursor-pointer text-center bg-white" id="english_suno_bronze_contribution_badge">
+                                    <img src="/img/bolo_bronze_medal.svg" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
+                                    <h6 class="mt-2 font-family-Rowdies text-capitalize">Bronze</h6>
+                                </div>
+                            </div>
+                            <div class="col-3 pl-lg-2 pr-lg-5">
+                                <div class="badge-widget cursor-pointer text-center bg-white" id="english_suno_bronze_contribution_badge">
+                                    <img src="/img/bolo_bronze_medal.svg" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
+                                    <h6 class="mt-2 font-family-Rowdies text-capitalize">Bronze</h6>
+                                </div>
+                            </div>
+                            <div class="col-3 pl-lg-2 pr-lg-5">
+                                <div class="badge-widget cursor-pointer text-center bg-white" id="english_suno_bronze_contribution_badge">
+                                    <img src="/img/bolo_bronze_medal.svg" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
+                                    <h6 class="mt-2 font-family-Rowdies text-capitalize">Bronze</h6>
+                                </div>
+                            </div>
+                            <div class="col-3 pl-lg-2 pr-lg-5">
+                                <div class="badge-widget cursor-pointer text-center bg-white" id="english_suno_bronze_contribution_badge">
+                                    <img src="/img/bolo_bronze_medal.svg" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
+                                    <h6 class="mt-2 font-family-Rowdies text-capitalize">Bronze</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
 
-    </div>
-        <div class="row mx-0 badge-mt-34">
-            <div class="col-12 p-0">
-                <div class="row m-0">
-                    <ul class="nav nav-tabs w-100 border-0 bg-white" id="initiative" role="tablist">
-                        <li class="nav-item col-3 p-0 text-center">
-                            <a class="nav-link border-0 active light-bg font-family-Rowdies" id="suno-tab" data-toggle="tab" href="#suno" role="tab" aria-controls="suno" aria-selected="true">
-                    <span>
-                      <%= __('Suno')%>
-                    </span>
-                                <span>
-                      <%= __('India')%>
-                    </span>
-                            </a>
+                <div class="row mx-0 mt-5">
+                    <label class="col-3" style="font-weight:300!important">
+                       <h5> <%= __('Participation')%> </h5>
+                    </label>
+                    <ul class="nav nav-tabs w-100 border-0 col-8 pl-5" id="participation-radios" role="tablist">
+                        <li class="nav-item">
+                            <input type="radio" class="form-check-input mt-2" checked="checked" id="contribute-radio" name="Contributions">
+                           <h4 class="font-family-Rowdies" style="font-weight:300!important;padding-left:14px"> <%= __('Contributions')%> </h4>
                         </li>
-                        <li class="nav-item col-3 p-0 text-center">
-                            <a class="nav-link border-0 light-bg font-family-Rowdies" id="bolo-tab" data-toggle="tab" href="#bolo" role="tab" aria-controls="bolo" aria-selected="true">
-                    <span>
-                      <%= __('Bolo')%>
-                    </span>
-                                <span>
-                      <%= __('India')%>
-                    </span>
-                            </a>
+                        <li class="nav-item pl-4 ml-5">
+                            <input type="radio" id="validate-tab" class="form-check-input mt-2" name="Validations">
+                            <h4 class="font-family-Rowdies" style="font-weight:300!important;padding-left:14px"><%= __('Validations')%> </h4>
                         </li>
-                        <li class="nav-item col-3 p-0 text-center">
-                            <a class="nav-link border-0 light-bg font-family-Rowdies" id="likho-tab" data-toggle="tab" href="#likho" role="tab" aria-controls="likho" aria-selected="true">
-                    <span>
-                      <%= __('Likho')%>
-                    </span>
-                                <span>
-                      <%= __('India')%>
-                    </span>
-                            </a>
+                    </ul>
+                </div>
+                <div class="row mx-0 my-5 selected-badge-card">
+                        <div class="col-7 pt-4">
+                            <h1>
+                                Contribute 5 sentence(s) in English and earn Suno India Bronze Bhasha Samarthak badge
+                            </h1>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col-4">
+                            <img src="/img/bolo_bronze_medal.svg" class="badge-img" height="320" width="250">
+                        </div>
+                </div>
+
+                <div class="row mx-0 my-5">
+                    <ul style="padding-inline-start:10px;list-style-type:none">
+                        <li>
+                            <%= __('Please keep contributing actively to stand a chance to get recognised.')%>
                         </li>
-                        <li class="nav-item col-3 p-0 text-center">
-                            <a class="nav-link border-0 light-bg font-family-Rowdies" id="dekho-tab" data-toggle="tab" href="#dekho" role="tab" aria-controls="dekho" aria-selected="true">
-                    <span>
-                      <%= __('Dekho')%>
-                    </span>
-                                <span>
-                      <%= __('India')%>
-                    </span>
-                            </a>
+                        <li>
+                            <%= __('Your contribution will be validated before confirming the badge.')%>
+                        </li>
+                        <li>
+                            <%= __('Levels and badges may take upto 48 hours to update.')%>
                         </li>
                     </ul>
                 </div>
             </div>
+
         </div>
 
-        <div class="row mx-0 mt-4">
-            <label class="col-4"><%= __('Select Badge level')%></label>
-            <ul class="nav nav-tabs w-100 border-0 col-8" id="myTab" role="tablist">
-                <div class="badge-widget cursor-pointer text-center" id="english_suno_bronze_contribution_badge">
-                    <img src="/img/bolo_bronze_medal.svg" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
-                    <h6 class="mt-2 font-family-Rowdies text-capitalize">Bronze</h6>
-                </div>
-                <div class="badge-widget cursor-pointer text-center" id="english_suno_silver_contribution_badge">
-                    <img src="/img/bolo_silver_medal.svg" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
-                    <h6 class="mt-2 font-family-Rowdies text-capitalize">Silver</h6>
-                </div>
-                <div class="badge-widget cursor-pointer text-center" id="english_suno_gold_contribution_badge">
-                    <img src="/img/bolo_gold_medal.svg" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
-                    <h6 class="mt-2 font-family-Rowdies text-capitalize">Gold</h6>
-                </div>
-                <div class="badge-widget cursor-pointer text-center" id="english_suno_platinum_contribution_badge">
-                    <img src="/img/bolo_platinum_medal.svg" class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover">
-                    <h6 class="mt-2 font-family-Rowdies text-capitalize">Platinum</h6>
-                </div>
-            </ul>
-        </div>
 
-    <div class="row mx-0 mt-4">
-        <label class="col-4"><%= __('Participation')%></label>
-        <ul class="nav nav-tabs w-100 border-0 col-8" id="participation-radios" role="tablist">
-            <li class="nav-item">
-                <input type="radio" class="form-check-input" checked="checked" id="contribute-radio" name="Contributions">
-               <%= __('Contributions')%>
-            </li>
-            <li class="nav-item pl-4">
-                <input type="radio" id="validate-tab" class="form-check-input" name="Validations">
-               <%= __('Validations')%>
-            </li>
-          </ul>
-    </div>
-        <div class="row mx-0 my-5">
-            <div class="col-lg-12 selected-badge-card">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <%- include('common/feedback/feedback.ejs', {page:"Badges Info"}) %>
+            <%- include('common/footer.ejs',{path:"./"}) %>
 
-            </div>
-        </div>
+                <%- include('common/modals/speakerDetails/speakerDetails.ejs',{path:"./"}) %>
 
-        <div class="row mx-0 my-5">
-            <ul style="padding-inline-start:10px;list-style-type:none">
-                <li>
-                    <%= __('Please keep contributing actively to stand a chance to get recognised.')%>
-                </li>
-                <li>
-                    <%= __('Your contribution will be validated before confirming the badge.')%>
-                </li>
-                <li>
-                    <%= __('Levels and badges may take upto 48 hours to update.')%>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-</div>
-
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<%- include('common/feedback/feedback.ejs', {page:"Badges Info"}) %>
-<%- include('common/footer.ejs',{path:"./"}) %>
-
-<%- include('common/modals/speakerDetails/speakerDetails.ejs',{path:"./"}) %>
-
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script>$("footer").removeClass("fixed-bottom").addClass("bottom")</script>
-<script src="/js/badges.js"></script>
-<script src="/js/loadFeedback.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                    <script>$("footer").removeClass("fixed-bottom").addClass("bottom")</script>
+                    <script src="/js/badges.js"></script>
+                    <script src="/js/loadFeedback.js"></script>
 </body>
+
 </html>
