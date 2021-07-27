@@ -237,6 +237,12 @@ const getJson = (path) => {
     })
 }
 
+const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType) => {
+  const language = ALL_LANGUAGES.find(language=>language.value.toLowerCase() === contibutedLanguage.toLowerCase());
+  return `/img/${language.id}_${initiativeType}_${badgeType}_${source}.svg`;
+}
+
+
 module.exports = {
   toggleFooterPosition,
   fetchLocationInfo,
@@ -255,5 +261,6 @@ module.exports = {
   setPageContentHeight,
   getDeviceInfo,
   getBrowserInfo,
-  formatTimeForLegends
+  formatTimeForLegends,
+  getLanguageBadge
 }
