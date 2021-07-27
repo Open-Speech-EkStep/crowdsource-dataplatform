@@ -1,4 +1,4 @@
-const { getLastUpdatedAt, getTopLanguageByHours, getTopLanguageByContributionCount, getTopLanguageBySpeakers, getAggregateDataCount, getLanguages, getTimeline, getGenderGroupData, getAgeGroupData, addRemainingGenders, getContributionProgress, getParticipationStats } = require('./dbOperations');
+const { getLastUpdatedAt, getTopLanguageByHours, getTopLanguageByContributionCount, getTopLanguageBySpeakers, getAggregateDataCount, getAggregateDataCountV2, getLanguages, getTimeline, getGenderGroupData, getAgeGroupData, addRemainingGenders, getContributionProgress, getParticipationStats } = require('./dbOperations');
 const { validateMediaTypeInput } = require("./middleware/validateUserInputs")
 const { GENDER } = require("./constants");
 let isFieldsMentioned = (fieldsArray) => {
@@ -113,6 +113,44 @@ const dashboardRoutes = (router) => {
         res.send({ "data": languagesData.map(data => data.language), last_updated_at: lastUpdatedDateTime });
     });
 
+    router.get('/v2/stats/summary/:type', validateMediaTypeInput, async (req, res) => {
+
+        const resultFields = Object.keys(validateAndReturnRequiredStatsFields(req.query));
+        const type = req.params.type;
+
+        let result = {};
+        if (type === 'ocr' || type === 'parallel') {
+            if (resultFields.includes('top_language_by_contribution_count')) {
+                result['top_languages_by_contribution_count'] = [];
+            }
+        }
+        if (resultFields.includes('top_language_by_hours')) {
+            result['top_languages_by_hours'] = [];
+        }
+        if (resultFields.includes('top_language_by_speakers')) {
+            result['top_languages_by_speakers'] = [];
+        }
+        if (resultFields.includes('languages')) {
+            result['languages'] = [];
+        }
+        if (resultFields.includes('aggregate_data_by_state')) {
+            result['aggregate_data_by_state'] = [];
+        }
+        if (resultFields.includes('aggregate_data_by_language')) {
+            const aggregateDataByLanguage = await getAggregateDataCountV2(true, false, type);
+            result['aggregate_data_by_language'] = aggregateDataByLanguage;
+        }
+        if (resultFields.includes('aggregate_data_by_state_and_language')) {
+            result['aggregate_data_by_state_and_language'] = [];
+        }
+        if (resultFields.includes('aggregate_data_count')) {
+            result['aggregate_data_count'] = [];
+        }
+
+        const lastUpdatedDateTime = await getLastUpdatedAt();
+        result['last_updated_at'] = lastUpdatedDateTime;
+        res.send(result);
+    });
 
     router.get('/stats/summary/:type', validateMediaTypeInput, async (req, res) => {
 
