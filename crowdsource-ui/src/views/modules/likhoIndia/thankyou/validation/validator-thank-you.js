@@ -64,7 +64,7 @@ const updateShareContent = function (language, rank) {
 };
 
 const getLanguageStats = function () {
-  return fetch("/stats/summary/parallel")
+  return fetch("/v2/stats/summary/parallel")
     .then((res) => res.json())
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
@@ -162,7 +162,7 @@ function executeOnLoad() {
 
     const localeLanguageStr = localStrings[contributionLanguage];
     const localeToLanguageStr = localStrings[toLanguage];
-    $("#metric-language").text(localeLanguageStr+"-"+localeToLanguageStr);
+    $("#metric-language").text(localeLanguageStr);
     // replaceSubStr($(".progress-average-metric"), "<from-language>", localeLanguageStr);
     // replaceSubStr($(".progress-average-metric"), "<to-language>", localeToLanguageStr);
     replaceSubStr($("#languageNotInTopWeb"), "<from-language>", localeLanguageStr);
@@ -175,8 +175,9 @@ function executeOnLoad() {
     replaceSubStr($("#languageInTopMob"), "<to-language>", localeToLanguageStr);
     replaceSubStr($(".x-axis-label"), "<from-language>", localeLanguageStr);
     replaceSubStr($(".x-axis-label"), "<to-language>", localeToLanguageStr);
-    $("#conLanWhenGetBadge").html(`${localeLanguageStr}-${localeToLanguageStr}`)
-
+    $("#likhoLanguages").html(`${localeLanguageStr}`);
+    $("#translated-text").addClass("d-none");
+    $("#translated-likho-text").addClass("d-block");
     getLanguageStats().then(()=>{
       setSentencesContributed();
     });

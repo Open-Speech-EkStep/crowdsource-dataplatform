@@ -163,23 +163,43 @@ const showFucntionalCards = (type, from, to) => {
   }
 }
 
-const isInTopLanguage = function (sortingLanguages=[], contributionLanguage, statsKey){
-  const topLanguage = sortingLanguages[0].language.toLowerCase();
+const isInTopLanguage = function (sortingLanguages=[], contributionLanguage){
+
   const contributedLanguage = contributionLanguage.toLowerCase();
-  if(topLanguage === contributedLanguage){
-    return true;
-  }
-  const topLanguageStats = sortingLanguages[0][statsKey];
-  const contributedLanguageInList = sortingLanguages.find(element => {
+
+  const isContributedLanguageInList = sortingLanguages.some(element => {
     return element.language.toLowerCase() === contributedLanguage
   });
-  const contributedLanguageStats = contributedLanguageInList && contributedLanguageInList[statsKey] ? contributedLanguageInList[statsKey] : 0;
 
-  if(topLanguageStats === contributedLanguageStats){
+  if(isContributedLanguageInList){
     return true;
   }
-
   return false;
+}
+
+const getTop3Languages = function (functionalFlow, currentModule, contributionLanguage){
+  const topLanguages = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE)) || [];
+  const sortingKey = functionalFlow == 'validator'  ? 'total_validation_count' : currentModule == 'bolo' ? 'total_contributions' :   'total_contribution_count';
+  const sortingLanguages = currentModule == 'dekho' || currentModule == "likho" ? topLanguages.sort((a, b) => Number(a[sortingKey]) > Number(b[sortingKey]) ? -1 : 1).slice(0, 3) :topLanguages.sort((a, b) => Number(a[sortingKey]) > Number(b[sortingKey]) ? -1 : 1).slice(0, 3);
+
+  const contributedLanguageIndexFromTop3List = sortingLanguages.findIndex(element => {
+    return element.language.toLowerCase() === contributionLanguage.toLowerCase();
+  });
+
+  if(contributedLanguageIndexFromTop3List === -1){
+    const contributedLanguageIndex = topLanguages.findIndex(element => {
+      return element.language.toLowerCase() === contributionLanguage.toLowerCase();
+    });
+
+    const bottomLanguageStats = sortingLanguages[2] && sortingLanguages[2][sortingKey];
+    const contributedLanguageStats = topLanguages[contributedLanguageIndex][sortingKey] ? topLanguages[contributedLanguageIndex][sortingKey] : 0;
+
+    if(bottomLanguageStats === contributedLanguageStats){
+      sortingLanguages[2] = topLanguages[contributedLanguageIndex];
+    }
+  }
+
+  return sortingLanguages;
 }
 
 const setBadge = function (data, localeStrings, functionalFlow) {
@@ -191,20 +211,19 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   // replaceSubStr($(".user-contribution-msg"), '<contribution-count>', data.contributionCount );
   $("#language-hour-goal").text(languageGoal);
   $("#user-contribution-count").text(data.contributionCount);
-  const topLanguages = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE)) || [];
-  const currentModule = localStorage.getItem(CURRENT_MODULE);
 
-  const sortingKey = functionalFlow == 'validator'  ? 'total_validation_count' : currentModule == 'bolo' ? 'total_contributions' :   'total_contribution_count';
-  const sortingLanguages = currentModule == 'dekho' || currentModule == "likho" ? topLanguages.sort((a, b) => Number(a[sortingKey]) > Number(b[sortingKey]) ? -1 : 1).slice(0, 3) :topLanguages.sort((a, b) => Number(a[sortingKey]) > Number(b[sortingKey]) ? -1 : 1).slice(0, 3)
   let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const module = localStorage.getItem(CURRENT_MODULE);
+
+  const top3Languages = getTop3Languages(functionalFlow, module, contributionLanguage)
+
 
   if(module === 'likho'){
     const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
     const likhoPairLanguage = contributionLanguage + '-' + toLanguage;
     contributionLanguage = likhoPairLanguage
   }
-  if(isInTopLanguage(sortingLanguages,contributionLanguage, sortingKey )){
+  if(isInTopLanguage(top3Languages,contributionLanguage )){
     $("#languageInTopWeb").removeClass("d-none");
     $("#languageInTopMob").removeClass("d-none");
     $("#languageNotInTopMob").addClass("d-none");
@@ -247,7 +266,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     const currentBadgeName = localeStrings[data.currentBadgeType.toLowerCase()];
     $("#current_badge_name").text(currentBadgeName.charAt(0).toUpperCase() + currentBadgeName.slice(1));
     $("#current_badge_name_1").text(localeStrings[data.currentBadgeType.toLowerCase()]);
-    $("#current_badge_count").text(data.contributionCount);
+     module === 'likho' ? $("#current_badge_count_likho").text(data.contributionCount) : $("#current_badge_count").text(data.contributionCount);
     $("#next_badge_count").text(data.nextMilestone);
     $("#next_badge_name_1").text(localeStrings[data.nextBadgeType.toLowerCase()]);
     $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
@@ -467,4 +486,4 @@ const replaceSubStr = function (element , to ,from){
   element.text(newText.toString());
 }
 
-module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateGoalProgressBar,replaceSubStr,getTopLanguage,isInTopLanguage };
+module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateGoalProgressBar,replaceSubStr,getTopLanguage,isInTopLanguage,getTop3Languages };
