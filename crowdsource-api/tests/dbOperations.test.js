@@ -152,7 +152,7 @@ describe("Running tests for dbOperations", () => {
                     browser
                 ]).mockReturnValue(Promise.resolve());
                 when(spyDBnone).calledWith(updateMediaWithContributedState, [testDatasetId]).mockReturnValue(Promise.resolve());
-                when(spyDBnone).calledWith(updateMaterializedViews).mockReturnValue(Promise.resolve());
+                // when(spyDBnone).calledWith(updateMaterializedViews).mockReturnValue(Promise.resolve());
             })
 
             afterEach(() => {
