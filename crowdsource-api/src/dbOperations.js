@@ -165,7 +165,7 @@ const updateDbWithAudioPath = async (
         .then(() => {
             db.none(updateMediaWithContributedState, [datasetId]).then();
             db.none(updateViews).then();
-            db.none(updateMaterializedViews).then();
+            // db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
         .catch((err) => {
@@ -303,7 +303,7 @@ const updateTablesAfterValidation = async (req, res) => {
                         res.sendStatus(500);
                     });
                 db.none(updateViews).then();
-                db.none(updateMaterializedViews).then();
+                // db.none(updateMaterializedViews).then();
                 res.sendStatus(200);
             }
             else res.sendStatus(200);
@@ -668,7 +668,7 @@ const updateDbWithUserInput = async (
         .then(() => {
             db.none(updateMediaWithContributedState, [datasetId]).then();
             db.none(updateViews).then();
-            db.none(updateMaterializedViews).then();
+            // db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
         .catch((err) => {
