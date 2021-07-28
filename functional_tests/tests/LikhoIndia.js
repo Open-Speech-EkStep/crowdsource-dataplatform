@@ -104,10 +104,10 @@ step("User skips all <count> sentences user should land on Likho India Thank you
     await taiko.waitFor(2000)
   }
     await taiko.waitFor(1000)
-	  assert.ok(await text('Contribute for your language pair!').isVisible())
-	  assert.ok(await text('Odia-English Likho India Target Achieved').isVisible())
+	  assert.ok(await text('Contribute to your language!').isVisible())
+	  assert.ok(await text('Odia Likho India Target Achieved').isVisible())
     assert.ok(await text('Validation (in sentences)').isVisible())
-    assert.ok(await text('Validate 5 sentence(s) to earn your bronze Badge.').isVisible())
+    assert.ok(await text('Validate 5 sentence(s) to earn your Bronze Badge.').isVisible())
     assert.ok(await text('Share on').isVisible())
     assert.ok(await link('Know More').isVisible())
 });

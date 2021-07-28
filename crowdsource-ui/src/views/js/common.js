@@ -177,9 +177,10 @@ const isInTopLanguage = function (sortingLanguages=[], contributionLanguage){
   return false;
 }
 
-const getTop3Languages = function (functionalFlow, currentModule, contributionLanguage){
+const getTop3Languages = function (functionalFlow='', currentModule='', contributionLanguage=''){
   const topLanguages = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE)) || [];
   const sortingKey = functionalFlow == 'validator'  ? 'total_validation_count' : currentModule == 'bolo' ? 'total_contributions' :   'total_contribution_count';
+
   const sortingLanguages = currentModule == 'dekho' || currentModule == "likho" ? topLanguages.sort((a, b) => Number(a[sortingKey]) > Number(b[sortingKey]) ? -1 : 1).slice(0, 3) :topLanguages.sort((a, b) => Number(a[sortingKey]) > Number(b[sortingKey]) ? -1 : 1).slice(0, 3);
 
   const contributedLanguageIndexFromTop3List = sortingLanguages.findIndex(element => {
@@ -192,6 +193,11 @@ const getTop3Languages = function (functionalFlow, currentModule, contributionLa
     });
 
     const bottomLanguageStats = sortingLanguages[2] && sortingLanguages[2][sortingKey];
+
+    if(contributedLanguageIndex === -1){
+      return sortingLanguages;
+    }
+
     const contributedLanguageStats = topLanguages[contributedLanguageIndex][sortingKey] ? topLanguages[contributedLanguageIndex][sortingKey] : 0;
 
     if(bottomLanguageStats === contributedLanguageStats){
@@ -215,14 +221,13 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const module = localStorage.getItem(CURRENT_MODULE);
 
-  const top3Languages = getTop3Languages(functionalFlow, module, contributionLanguage)
-
-
   if(module === 'likho'){
     const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
     const likhoPairLanguage = contributionLanguage + '-' + toLanguage;
     contributionLanguage = likhoPairLanguage
   }
+
+  const top3Languages = getTop3Languages(functionalFlow, module, contributionLanguage)
   if(isInTopLanguage(top3Languages,contributionLanguage )){
     $("#languageInTopWeb").removeClass("d-none");
     $("#languageInTopMob").removeClass("d-none");
