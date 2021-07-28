@@ -1,6 +1,7 @@
 import glob
 import json
 import os
+import re
 from datetime import datetime
 
 import pandas as pd
@@ -84,14 +85,20 @@ def get_matched_count(excel_df, merged_df):
     return count
 
 
+def get_root_folder():
+    return os.path.join(os.path.dirname(__file__), '../..')
+
+
 def write_report(report, report_type):
     now = datetime.now()
-    report_folder = 'reports'
-    os.makedirs('%s' % report_folder, exist_ok=True)
+    report_folder = os.path.join(get_root_folder(), 'reports')
+    os.makedirs(report_folder, exist_ok=True)
     JsonWriter().write(
-        '{folder_name}/report_{report_type}_{timestamp}.json'.format(folder_name=report_folder, report_type=report_type,
-                                                                     timestamp=now),
-        report)
+        '{folder_name}/{timestamp}_{report_type}_report.json'.format(
+            folder_name=report_folder,
+            report_type=report_type,
+            timestamp=now
+        ), report)
 
 
 def read_language_list():
@@ -122,3 +129,59 @@ def get_selected_languages(languages_to_be_considered, select_all_flag, selected
             languages[code] = languages_to_be_considered[code]
 
     return languages
+
+
+def extract_and_replace_tags(text, allowed_replacements):
+    tag_identification_regex = r"<(\S*?)[^>]*>.*?<\/\1>|<.*?\/>"
+    out_txt = text
+    matched_tags = re.finditer(tag_identification_regex, out_txt, re.MULTILINE)
+    replacement_identifier_index = 0
+    replacement_mapping_dict = {}
+    for match in matched_tags:
+        matched_tag = match.group()
+        if "<b>" in matched_tag:
+            continue
+        elif "<span>" in matched_tag:
+            replaced_matched_tag = matched_tag.replace("<span>", "<s>").replace("</span>", "</s>")
+            out_txt = out_txt.replace(matched_tag, replaced_matched_tag)
+        elif "<a" in matched_tag:
+            attributes_part_string = matched_tag[matched_tag.find('<a') + 2: matched_tag.find('>')]
+            replacement_mapping_dict['a-tag-replacement'] = attributes_part_string
+            matched_tag_replacement = matched_tag.replace(attributes_part_string, "")
+            out_txt = out_txt.replace(matched_tag, matched_tag_replacement)
+        else:
+            replacement = allowed_replacements[replacement_identifier_index]
+            replacement_mapping_dict[replacement] = matched_tag
+            replacement_identifier_index += 1
+            out_txt = out_txt.replace(matched_tag, '<{}>'.format(replacement))
+    return out_txt, replacement_mapping_dict
+
+
+def extract_and_replace_tags_for_lang(text, replacement_dict):
+    tag_identification_regex = r"<(\S*?)[^>]*>.*?<\/\1>|<.*?\/>"
+    out_txt = text
+    matched_tags = re.finditer(tag_identification_regex, out_txt, re.MULTILINE)
+    replacement_mapping_dict = {}
+    for match in matched_tags:
+        matched_tag = match.group()
+        if "<b>" in matched_tag or "</b>" in matched_tag:
+            continue
+        elif "<span>" in matched_tag:
+            replaced_matched_tag = matched_tag.replace("<span>", "<s>").replace("</span>", "</s>")
+            out_txt = out_txt.replace(matched_tag, replaced_matched_tag)
+        elif "<a" in matched_tag:
+            attributes_part_string = matched_tag[matched_tag.find('<a') + 2: matched_tag.find('>')]
+            replacement_mapping_dict['a-tag-replacement'] = attributes_part_string
+            matched_tag_replacement = matched_tag.replace(attributes_part_string, "")
+            out_txt = out_txt.replace(matched_tag, matched_tag_replacement)
+        else:
+            flag = False
+            for replacement_tag, match_present in replacement_dict.items():
+                if matched_tag == match_present:
+                    replacement = replacement_tag
+                    out_txt = out_txt.replace(matched_tag, '<{}>'.format(replacement))
+                    flag = True
+                    break
+            if not flag:
+                raise ValueError(out_txt + " -> " + matched_tag + " -> Replacement not found")
+    return out_txt

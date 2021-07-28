@@ -1,19 +1,22 @@
 import argparse
 import os
 
-from modules.content_extractor.AllKeysJsonGenerator import generate, get_modified_content, get_keys_by_action, \
-    clean_old_translations, languages, generate_report
+from helper.unused_keys_cleaner import clean_locale_jsons
+from modules.content_extractor.all_keys_json_generation import generate, get_modified_content, get_keys_by_action, \
+    clean_old_translations, generate_report
+from helper.utils.utils import read_language_list
 
 
 def main():
+    languages = read_language_list()
     example = '''
             Example commands:
 
-            To run with auto-generated excel from AllKeysExcelGenerator.py:
-                python AllKeysJsonGenerator.py -i ./../../../crowdsource-ui/locales -e ./en/out/en.xlsx -o ./out/
+            To run with auto-generated excel from all_keys_excel_generation.py:
+                python all_keys_json_generation.py -i ./../../../crowdsource-ui/locales -e ./en/out/en.xlsx -o ./out/
 
             To run with manually generated excel with the 4 categories('Suno India', 'Bolo India', 'Likho India', 'Dekho India'):
-                python AllKeysJsonGenerator.py -i ./../../../crowdsource-ui/locales -e ./../test-data/read-data-from-table/English_content.xlsx  -o ./out/ -c manual
+                python all_keys_json_generation.py -i ./../../../crowdsource-ui/locales -e ./../test-data/read-data-from-table/English_content.xlsx  -o ./out/ -c manual
 
         '''
 
@@ -41,7 +44,8 @@ def main():
     added_content_keys = get_keys_by_action(excel_df, json_df, 'addition')
     clean_old_translations(list(modified_content.keys()), added_content_keys, languages, input_base_path,
                            output_json_path)
-    os.system('python ./../clean_unused_keys/CleanLocaleJsons.py -i ./out -o ./out -a')
+    clean_locale_jsons(languages.items(), output_json_path, output_json_path)
+
     generate_report(json_df, excel_df, modified_content)
 
 

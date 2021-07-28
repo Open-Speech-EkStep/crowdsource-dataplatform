@@ -37,6 +37,18 @@ class LocaleProcessor:
 
     def restructure_extracted_tags(self, df_row):
         column_names = list(df_row.index)
+
+        if self.language_name in column_names and pd.notna(df_row[self.language_name]):
+            if "<s>" in df_row[self.language_name]:
+                df_row[self.language_name] = df_row[self.language_name].replace("<s>", "<span>")
+            if "</s>" in df_row[self.language_name]:
+                df_row[self.language_name] = df_row[self.language_name].replace("</s>", "<span>")
+        if self.english_column_name in column_names and pd.notna(df_row[self.language_name]):
+            if "<s>" in df_row[self.english_column_name]:
+                df_row[self.english_column_name] = df_row[self.english_column_name].replace("<s>", "<span>")
+            if "</s>" in df_row[self.english_column_name]:
+                df_row[self.english_column_name] = df_row[self.english_column_name].replace("</s>", "<span>")
+
         for value in self.allowed_values:
             if value in column_names and pd.notna(df_row[value]):
                 if self.language_name in column_names and pd.notna(df_row[self.language_name]):

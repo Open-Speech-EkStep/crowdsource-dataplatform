@@ -78,21 +78,6 @@ class LocaleReportGenerator:
         return keys
 
     @staticmethod
-    def extract_and_replace_tags(text):
-        tag_identification_regex = r"<(\S*?)[^>]*>.*?<\/\1>|<.*?\/>"
-        out_txt = text
-        matched_tags = re.finditer(tag_identification_regex, out_txt, re.MULTILINE)
-        matched_tags_list = []
-        for match in matched_tags:
-            matched_tag = match.group()
-            if "<b" in matched_tag:
-                pass
-            else:
-                out_txt = out_txt.replace(matched_tag, '<{}>')
-            matched_tags_list.append(matched_tag)
-        return out_txt, matched_tags_list
-
-    @staticmethod
     def find_ones_with_span_tag(keys):
         for key in keys:
             if "<span" in key:
