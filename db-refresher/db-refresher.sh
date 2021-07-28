@@ -20,4 +20,10 @@ ls -al /usr/src/app/utils/
 
 /usr/src/app/utils/azcopy login --tenant-id ${AZURE_TENANT_ID} --service-principal --application-id ${AZURE_APP_ID}
 
-/usr/src/app/utils/azcopy copy "./*" "${AZURE_ACC_URL}/${BUCKET_NAME}/aggregated-json/" --recursive --include-pattern "*json"
+if [ $ENVIRONEMENT == 'prod' ]
+then
+   /usr/src/app/utils/azcopy copy "./*" "${AZURE_ACC_URL}/${BUCKET_NAME}/bhashadaan/aggregated-json/" --recursive --include-pattern "*json"
+else
+   /usr/src/app/utils/azcopy copy "./*" "${AZURE_ACC_URL}/${BUCKET_NAME}/aggregated-json/" --recursive --include-pattern "*json"
+fi
+
