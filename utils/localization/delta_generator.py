@@ -1,9 +1,9 @@
 import argparse
 import os
 
-from helper.unused_keys_cleaner import clean_locale_jsons
+from helper.unused_keys_cleaner import clean_locale_keys
 from modules.delta_generator.generator import gen_delta, generate_report
-from helper.utils.utils import read_language_list, get_selected_languages
+from helper.utils.utils import read_language_list, get_selected_languages, get_root_folder
 
 if __name__ == '__main__':
     all_languages_list = read_language_list()
@@ -33,11 +33,14 @@ if __name__ == '__main__':
                              "keys in source code")
     parser.add_argument("-o", "--output-folder-path", required=True,
                         help="Output folder path where excels are generated")
+    parser.add_argument("--output-type", default='SEPARATE_SHEETS', help="Type of output excel file(s) for languages",
+                        choices=['SEPARATE_SHEETS', 'SINGLE_SHEET'])
     parser.add_argument("--all-keys", action="store_true", default=False,
                         help="Consider all keys while generating excel")
 
     args = parser.parse_args()
     all_keys = args.all_keys
+    output_type = args.output_type
     ejs_files_base_path = args.views_folder_path
 
     languages = get_selected_languages(all_languages_list, args.all_languages, args.languages)
@@ -49,11 +52,12 @@ if __name__ == '__main__':
     sme_out_base_path = os.path.join(output_base_path, 'out-sme/')
 
     tmp_cleaned_json_path = "cleaned_json_locales_for_delta_generation"
-    clean_locale_jsons(languages, input_base_path, tmp_cleaned_json_path)
+    clean_locale_keys(languages, input_base_path, tmp_cleaned_json_path)
     input_base_path = tmp_cleaned_json_path
 
-    gen_delta(languages.items(), input_base_path, meta_out_base_path, sme_out_base_path, all_keys,
-              keys_without_translation, ejs_files_base_path)
+    gen_delta(languages, input_base_path, meta_out_base_path, sme_out_base_path, all_keys,
+              keys_without_translation, ejs_files_base_path, output_type)
+
     generate_report(keys_without_translation)
 
     if os.path.isdir(tmp_cleaned_json_path):

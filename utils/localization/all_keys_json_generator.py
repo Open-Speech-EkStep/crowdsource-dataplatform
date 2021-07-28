@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from helper.unused_keys_cleaner import clean_locale_jsons
+from helper.unused_keys_cleaner import clean_locale_keys
 from modules.content_extractor.all_keys_json_generation import generate, get_modified_content, get_keys_by_action, \
     clean_old_translations, generate_report
 from helper.utils.utils import read_language_list
@@ -44,7 +44,7 @@ def main():
     added_content_keys = get_keys_by_action(excel_df, json_df, 'addition')
     clean_old_translations(list(modified_content.keys()), added_content_keys, languages, input_base_path,
                            output_json_path)
-    clean_locale_jsons(languages.items(), output_json_path, output_json_path)
+    clean_locale_keys(languages, output_json_path, output_json_path)
 
     generate_report(json_df, excel_df, modified_content)
 

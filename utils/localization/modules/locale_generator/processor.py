@@ -95,7 +95,8 @@ class LocaleProcessor:
         excel_df = self.clean_translation_excel(excel_df, self.language_name)
         merged_excel_df = pd.merge(excel_df, meta_excel_df, on=self.english_column_name,
                                    how='inner')
-        self.compare_and_update_extracted_tags(tmp_df, merged_excel_df)
+
+        # self.compare_and_update_extracted_tags(tmp_df, merged_excel_df)
 
         merged_excel_df = merged_excel_df.apply(self.restructure_extracted_tags, axis=1)
         merged_excel_df = self.clean_merged_excel(merged_excel_df, self.language_name)
@@ -118,33 +119,14 @@ class LocaleProcessor:
         return LocaleOutData(json_df, excel_df, final_df)
 
     def compare_and_update_extracted_tags(self, tmp_df, merged_excel_df):
-        count = 0
         excel_reader = ExcelReader()
         new_meta = excel_reader.read_as_df(
-            '/Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localization/resources/out_meta_meta'
-            '.xlsx',
+            '/Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localization/resources/backup'
+            '/out_meta_meta.xlsx',
             [])
         for index, o_row in tmp_df.iterrows():
             n_row = new_meta[new_meta['Key'] == o_row['Key']].iloc[0]
             merged_excel_df_row = merged_excel_df[merged_excel_df['Key'] == o_row['Key']].iloc[0]
             name = self.language_name
             if o_row[name] != n_row[name]:
-                # if o_row[name] != merged_excel_df_row[name]:
-                #     continue
-                # else:
-                #     o_row_tmp = o_row[name]
-                #     n_row_tmp = n_row[name]
-                #     m_row_tmp = merged_excel_df_row[name]
-                #
-                #     o_row_tmp = o_row_tmp.replace('<u>', '<x>').replace('<v>', '<x>')
-                #     n_row_tmp = n_row_tmp.replace('<u>', '<x>').replace('<v>', '<x>')
-                #
-                #
-                #
-                # # n_u_index = n_row[name].index("<u>")
-                # # n_v_index = n_row[name].index("<u>")
-                # # m_u_index = merged_excel_df_row[name].index("<u>")
-                # # m_v_index = merged_excel_df_row[name].index("<u>")
-                # # count += 1
                 print(name, "\n\t", o_row[name], "\n\t", n_row[name], "\n\t", merged_excel_df_row[name] + "\n")
-        # print(count)

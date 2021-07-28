@@ -3,7 +3,7 @@ import os
 
 import pandas as pd
 
-from helper.unused_keys_cleaner import clean_locale_jsons
+from helper.unused_keys_cleaner import clean_locale_keys
 from helper.ejs_keys_parser import get_keys_with_path
 from modules.content_extractor.all_keys_excel_generation import generate_keys, generate_report, generate_output_for_sme, \
     export_report
@@ -47,7 +47,7 @@ def main():
 
     if not only_en:
         languages = read_language_list()
-        clean_locale_jsons(languages, input_json_path, tmp_cleaned_json_path)
+        clean_locale_keys(languages, input_json_path, tmp_cleaned_json_path)
 
     input_json_path = tmp_cleaned_json_path
 

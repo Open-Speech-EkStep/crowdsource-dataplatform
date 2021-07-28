@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from helper.unused_keys_cleaner import clean_locale_jsons
+from helper.unused_keys_cleaner import clean_locale_keys
 from helper.report.report import LocaleReportGenerator
 from helper.utils.utils import write_df_to_json, write_report, read_language_list, get_selected_languages
 from modules.locale_generator.generator import LocaleGenerator
@@ -78,7 +78,7 @@ def main():
         exit()
 
     tmp_cleaned_json_path = "cleaned_json_locales_for_locale_generation"
-    clean_locale_jsons(languages, input_json_path, tmp_cleaned_json_path)
+    clean_locale_keys(languages, input_json_path, tmp_cleaned_json_path)
     input_json_path = tmp_cleaned_json_path
 
     if file_type == 'combined':
@@ -101,6 +101,7 @@ def main():
         all_languages_report[languages[language_code]] = report
 
     write_report(all_languages_report, 'locale_generation')
+    os.system("cp {} {}".format(os.path.join(input_json_path, 'en.json'), output_base_path))
 
     if os.path.isdir(tmp_cleaned_json_path):
         os.system("rm -rf " + tmp_cleaned_json_path)

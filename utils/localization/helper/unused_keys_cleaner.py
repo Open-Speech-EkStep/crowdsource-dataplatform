@@ -11,7 +11,7 @@ def read_json(json_path):
         return json.load(f)
 
 
-def generate_report():
+def generate_report(removed_keys):
     now = datetime.now()
 
     report = {'last_run_timestamp': str(now), 'keys_removed_from_all_files': list(set(removed_keys))}
@@ -19,11 +19,14 @@ def generate_report():
     write_report(report, 'locale_cleaning')
 
 
-def clean_locale_jsons(languages, input_base_path, output_base_path):
+def clean_locale_keys(languages, input_base_path, output_base_path):
+    os.makedirs(output_base_path, exist_ok=True)
+    removed_keys = []
     en_json_path = '{}/en.json'.format(input_base_path)
+    os.system("cp {} {}".format(en_json_path, output_base_path))
     en_data = read_json(en_json_path)
 
-    for language_code, lang_name in languages:
+    for language_code, lang_name in languages.items():
 
         locale_path = '{input_base_path}/{language_code}.json'.format(input_base_path=input_base_path,
                                                                       language_code=language_code)
@@ -41,23 +44,21 @@ def clean_locale_jsons(languages, input_base_path, output_base_path):
 
         with open(output_file_path, 'w') as f:
             f.write(json.dumps(data, indent=4, ensure_ascii=False))
+    return removed_keys
 
 
-if __name__ == '__main__':
-
+def main():
     LANGUAGES = read_language_list()
 
-    removed_keys = []
-
     example = '''
-            Example commands:
+                Example commands:
 
-            For specific languages:
-                python unused_keys_cleaner.py -i ./../../../crowdsource-ui/locales -o . -l gu pa
+                For specific languages:
+                    python unused_keys_cleaner.py -i ./../../../crowdsource-ui/locales -o . -l gu pa
 
-            For all languages:
-                python unused_keys_cleaner.py -i ./../../../crowdsource-ui/locales -o . -a
-        '''
+                For all languages:
+                    python unused_keys_cleaner.py -i ./../../../crowdsource-ui/locales -o . -a
+            '''
 
     parser = argparse.ArgumentParser(epilog=example,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -84,5 +85,9 @@ if __name__ == '__main__':
     output_base_path = args.output_folder_path
     os.makedirs(output_base_path, exist_ok=True)
 
-    clean_locale_jsons(languages.items(), input_base_path, output_base_path)
-    generate_report()
+    removed_keys = clean_locale_keys(languages, input_base_path, output_base_path)
+    generate_report(removed_keys)
+
+
+if __name__ == '__main__':
+    main()

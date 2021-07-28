@@ -164,7 +164,7 @@ def extract_and_replace_tags_for_lang(text, replacement_dict):
     replacement_mapping_dict = {}
     for match in matched_tags:
         matched_tag = match.group()
-        if "<b>" in matched_tag or "</b>" in matched_tag:
+        if "<b>" in matched_tag or "<b >" in matched_tag:
             continue
         elif "<span>" in matched_tag:
             replaced_matched_tag = matched_tag.replace("<span>", "<s>").replace("</span>", "</s>")

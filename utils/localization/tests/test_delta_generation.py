@@ -16,13 +16,14 @@ def read_excel_as_df(file):
 class TestDeltaGenerator(unittest.TestCase):
 
     def test_fetch_only_non_translated(self):
-        languages = [('hi', "Hindi")]
+        languages = {'hi': "Hindi"}
         input_base_path = os.path.join(get_resource_path(), 'delta_dummy_data', 'fetch-only-non-translated')
         meta_out_base_path = input_base_path + "/out-meta"
         sme_out_base_path = input_base_path + "/out-sme"
         ejs_files_base_path = input_base_path + "/ejs_files"
         k = {}
-        gen_delta(languages, input_base_path, meta_out_base_path, sme_out_base_path, False, k, ejs_files_base_path)
+        gen_delta(languages, input_base_path, meta_out_base_path, sme_out_base_path, False, k, ejs_files_base_path,
+                  "SEPARATE_SHEETS")
 
         meta_xl = read_excel_as_df(meta_out_base_path + '/hi.xlsx')
         sme_xl = read_excel_as_df(sme_out_base_path + '/hi.xlsx')
@@ -38,13 +39,14 @@ class TestDeltaGenerator(unittest.TestCase):
         os.system("rm -rf " + sme_out_base_path)
 
     def test_success_path(self):
-        languages = [('hi', "Hindi")]
+        languages = {'hi': "Hindi"}
         input_base_path = os.path.join(get_resource_path(), 'delta_dummy_data', 'proper-success-case-check')
         meta_out_base_path = input_base_path + "/out-meta"
         sme_out_base_path = input_base_path + "/out-sme"
         ejs_files_base_path = input_base_path + "/ejs_files"
 
-        gen_delta(languages, input_base_path, meta_out_base_path, sme_out_base_path, False, {}, ejs_files_base_path)
+        gen_delta(languages, input_base_path, meta_out_base_path, sme_out_base_path, False, {}, ejs_files_base_path,
+                  "SEPARATE_SHEETS")
 
         meta_xl = read_excel_as_df(meta_out_base_path + '/hi.xlsx')
         sme_xl = read_excel_as_df(sme_out_base_path + '/hi.xlsx')
