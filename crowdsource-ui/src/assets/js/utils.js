@@ -237,9 +237,19 @@ const getJson = (path) => {
     })
 }
 
+
+
+const covertStringToCapitalised = (tempStr) => {
+  if (tempStr) {
+    return tempStr.substr(0, 1).toUpperCase() + tempStr.substr(1);
+  } else {
+    return tempStr;
+  }
+}
+
 const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType) => {
-  const language = ALL_LANGUAGES.find(language=>language.value.toLowerCase() === contibutedLanguage.toLowerCase());
-  return `/img/${language.id}_${initiativeType}_${badgeType}_${source}.svg`;
+   ALL_LANGUAGES.find(language=>language.value.toLowerCase() === contibutedLanguage.toLowerCase());
+  return `/img/en_${initiativeType}_${badgeType}_${source}.svg`;
 }
 
 
@@ -248,6 +258,7 @@ module.exports = {
   fetchLocationInfo,
   updateLocaleLanguagesDropdown,
   calculateTime,
+  covertStringToCapitalised,
   formatTime,
   getLocaleString,
   performAPIRequest,

@@ -4,7 +4,7 @@ const {
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { changeLocale,showLanguagePopup } = require('./locale');
 const fetch = require('./fetch');
-const {performAPIRequest} = require('./utils');
+const {performAPIRequest, getLanguageBadge} = require('./utils');
 const {onChangeUser, onOpenUserDropDown, showUserProfile} = require('./header');
 const { setUserModalOnShown,
   setUserNameOnInputFocus,
@@ -236,7 +236,13 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   }
   const nextBadgeName = localeStrings[data.nextBadgeType.toLowerCase()];
   $("#sentence-away-count").text(Number(data.nextMilestone) - Number(data.contributionCount))
-  $("#sentence_away_badge").text(nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1))
+  $("#sentence_away_badge").text(nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1));
+ 
+  const source = functionalFlow === 'validator' ? 'validate' : 'contribute';
+  $("#bronze_badge_link_img").attr('src', getLanguageBadge(contributionLanguage, 'bronze',source, module));
+  $("#silver_badge_link_img").attr('src', getLanguageBadge(contributionLanguage, 'silver',source, module));
+  $("#gold_badge_link_img").attr('src', getLanguageBadge(contributionLanguage, 'gold',source, module));
+  $("#platinum_badge_link_img").attr('src', getLanguageBadge(contributionLanguage, 'platinum',source, module));
 
   // replaceSubStr($("#sentence_away_msg"), '<contribution-count>', Number(data.nextMilestone) - Number(data.contributionCount) );
   // replaceSubStr($("#sentence_away_msg"), '<badge-color>', nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1) );
@@ -271,19 +277,12 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#next_badge_name_1").text(localeStrings[data.nextBadgeType.toLowerCase()]);
     $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
     $("#download_pdf").attr("data-badge", data.currentBadgeType.toLowerCase());
-    if(module == 'bolo'){
       if(functionalFlow === 'validator'){
-        $("#reward-img").attr('src', `/img/${data.currentBadgeType.toLowerCase()}_medal_val.svg`);
+        $("#reward-img").attr('src', getLanguageBadge(contributionLanguage, data.currentBadgeType.toLowerCase(), 'validate', module));
+       
       } else {
-        $("#reward-img").attr('src', `/img/${data.currentBadgeType.toLowerCase()}_medal.svg`);
+        $("#reward-img").attr('src', getLanguageBadge(contributionLanguage, data.currentBadgeType.toLowerCase(), 'contribute', module));
       }
-    } else {
-      if(functionalFlow == 'validator'){
-        $("#reward-img").attr('src', `/img/${module}_${data.currentBadgeType.toLowerCase()}_medal_val.svg`);
-      } else {
-        $("#reward-img").attr('src', `/img/${module}_${data.currentBadgeType.toLowerCase()}_medal.svg`);
-      }
-    }
   } else if (data.contributionCount === 0) {
     $(".new-badge-msg").addClass("d-none");
     $(".thankyou-page-heading").removeClass("d-none");

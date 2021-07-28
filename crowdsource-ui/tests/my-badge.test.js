@@ -98,7 +98,7 @@ describe('fetch user badge', () => {
              <div class="col-3 pl-0">
              
 <div class="badge-widget text-center" rel="popover" id="Bronze_contribution_suno_badge">
-<img src="/img/suno_bronze_medal.svg" class="my-badge-image" height="74" width="60">
+<img src="/img/en_suno_bronze_contribute.svg" class="my-badge-image" height="74" width="60">
 <h6 class="mt-2 font-family-Rowdies">Bronze</h6>
 </div>
              </div>
@@ -124,7 +124,7 @@ describe('fetch user badge', () => {
       </div>`;
       const localString = localStorage.getItem(LOCALE_STRINGS);
       console.log("localStorage + Ayush",localString);
-        getBadgeRow(sunoItem, 'suno-badge', 'suno', localString);
+        getBadgeRow(sunoItem, 'suno-badge', 'suno', localString, "English");
 
         setTimeout(() => {
             $tableRows.append(sunoRow);
@@ -184,7 +184,7 @@ describe('fetch user badge', () => {
              <div class="col-3 pl-0">
              
 <div class="badge-widget text-center" rel="popover" id="Bronze_contribution_bolo_badge">
-<img src="/img/bolo_bronze_medal.svg" class="my-badge-image" height="74" width="60">
+<img src="/img/en_bolo_bronze_contribute.svg" class="my-badge-image" height="74" width="60">
 <h6 class="mt-2 font-family-Rowdies">Bronze</h6>
 </div>
              </div>
@@ -213,7 +213,7 @@ describe('fetch user badge', () => {
            <div class="col-3 pl-0">
            
 <div class="badge-widget text-center" rel="popover" id="Bronze_validation_bolo_badge">
-<img src="/img/bolo_bronze_val.svg" class="my-badge-image" height="74" width="60">
+<img src="/img/en_bolo_bronze_validate.svg" class="my-badge-image" height="74" width="60">
 <h6 class="mt-2 font-family-Rowdies">Bronze</h6>
 </div>
            </div>
@@ -237,7 +237,7 @@ describe('fetch user badge', () => {
         </div>
       </div>`;
       const localString = localStorage.getItem(LOCALE_STRINGS);
-        getBadgeRow(boloItem, 'bolo-badge', 'bolo', localString);
+        getBadgeRow(boloItem, 'bolo-badge', 'bolo', localString, "English");
 
         setTimeout(() => {
             $boloTableRows.append(boloRow);

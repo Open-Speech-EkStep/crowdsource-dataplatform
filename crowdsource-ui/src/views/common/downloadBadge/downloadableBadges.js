@@ -1,4 +1,5 @@
-const {CURRENT_MODULE,MODULE} = require('./constants.js');
+const { getLanguageBadge } = require('./utils.js');
+const {CURRENT_MODULE,CONTRIBUTION_LANGUAGE} = require('./constants.js');
 
 function downloadPdf(badgeType) {
   try {
@@ -11,14 +12,10 @@ function downloadPdf(badgeType) {
   
     img.crossOrigin = "Anonymous";
     const currentModule = localStorage.getItem(CURRENT_MODULE);
-    const badges = MODULE[currentModule].BADGES;
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
     const currentFunctionalPage = localStorage.getItem("selectedType");
-    if(currentFunctionalPage == "validate"){
-      img.src = badges[badgeType].imgValJpg;
-    } else {
-      img.src = badges[badgeType].imgSm;
-    }
+    img.src = getLanguageBadge(contributionLanguage,badgeType, currentFunctionalPage, currentModule);
     const allBadges = JSON.parse(localStorage.getItem('badges'));
     const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
     if (badge) {

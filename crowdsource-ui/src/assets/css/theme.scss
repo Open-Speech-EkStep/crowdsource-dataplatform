@@ -57,20 +57,9 @@ $primary-color-shade10: tint($primary-color, 100%);
   box-shadow: 0 -4px 12px 0 rgb(0, 0, 0, 0.12);
 }
 
-.bg-body-primary {
-  background-color: $text-light !important;
-  background-image: url(/img/home_bg.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
-.bg-tri-color {
-  background-image: url(/img/orange_bg.svg), url(/img/green_bg.svg), url(/img/thankyou_bg.svg);
-  background-position: top center, bottom center, top center;
-  background-repeat: no-repeat, no-repeat, no-repeat;
-  background-color: $text-light;
-  background-size: auto, auto, cover;
-}
+
+
 
 .text-yellow {
   color: $text-yellow;
@@ -312,7 +301,7 @@ a.text-primary:hover {
   }
 }
 
-.badge-detail-widget{
+.badge-detail-widget {
   border: 1px solid #cbcbcb;
   background: $text-light;
 }
@@ -373,10 +362,54 @@ audio {
   #navbarSupportedContent ul li a {
     padding-top: 12px;
   }
+
+  .dashboard-bg {
+    background-image: url(/img/dashboard_bg.svg);
+  }
+
+  .bg-tri-color {
+    background-image: url(/img/thankyou_bg.svg);
+    background-size: cover;
+  }
+
+  .bg-body-primary {
+    background-image: url(/img/home_bg.svg);
+  }
 }
 
 @media screen and (max-width: 766px) {
   #navbarSupportedContent ul li {
     height: 45px;
   }
+  .dashboard-bg {
+    background-image: url(/img/dashboard_bg_fn.svg);
+  }
+
+  .bg-tri-color {
+    background-position: top center;
+    background-size: contain;
+    background-image: url(/img/thankyou_bg_fn.svg);
+  }
+
+  .bg-body-primary {
+    background-image: url(/img/home_bg_sm.svg);
+  }
+}
+
+
+.bg-tri-color {
+  background-repeat: no-repeat;
+  background-color: $text-light;
+} 
+
+.dashboard-bg {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: $text-light;
+}
+
+.bg-body-primary {
+  background-color: $text-light !important;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
