@@ -46,7 +46,7 @@ sh ingest.sh ./sample/8_2019_6_1506_13125_Judgement_12-Mar-2019_HIN/LINE 8_2019_
 
 ## Parallel dataset Ingestion
 
-Command:
+Command for samanantar:
 
 ```sh
 sh ingest.sh <LOCAL_PATH> <NAME> <BUCKET> <REMOTE_BASE_PATH> <paired|unpaired> <CONNECTION_URL> <PAIRS>
@@ -56,4 +56,15 @@ Example:
 
 ```sh
 sh ingest.sh ./sample/parallel_3.csv parallel_1 ekstepspeechrecognition-crowdsource-dev inbound/parallel paired postgres://username:password@host:port/dbname '{"English-Malayalam":"1-10","English-Hindi":"1-10"}'
+```
+
+Command for xls:
+
+```sh
+sh ingest_parallel.sh <LOCAL_PATH> <NAME> <BUCKET> <REMOTE_BASE_PATh> <paired|unpaired> <CONNECTION_URL> <pair> <profanity_check_required> <format:xlsx|csv>
+
+```
+Example
+```sh
+sh ingest_parallel.sh /Users/rajats/Downloads/education_domain/parallel/xlsx/parallel_en_pa.xlsx en_pa_edu $bucket inbound/parallel paired $db_url 'English:Punjabi' 'false' 'xlsx'
 ```

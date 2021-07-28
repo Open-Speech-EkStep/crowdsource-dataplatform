@@ -13,7 +13,7 @@ const insertMaster = async (params, location, client) => {
     const paramsStr = JSON.stringify(params)
         .split("'").join("''")
 
-    const insert_master = `insert into master_dataset (params,location) values ('${paramsStr}','${location}') RETURNING master_dataset_id`
+    const insert_master = `insert into master_dataset (params,location, dataset_type, ingested_by) values ('${paramsStr}','${location}', 'parallel', 'srajat@thoughtworks.com') RETURNING master_dataset_id`
 
     const result = await client.query(`${insert_master}`)
     const datasetId = result.rows[0].master_dataset_id;

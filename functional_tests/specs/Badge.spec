@@ -5,17 +5,21 @@ Tags: page
 
 ## Check Know more link into home page
 * Click "Know More" Link
-//* Navigate to "Know More" button and click "Know More" button
-* Validate initiative & language dropdown exist
-* User should select "English" language from dropdown
-* should select "" tab, "Level", "Contributions", "Badge", "Recording: 5 Sentences" text & "Bronze_contribute","Silver_contribute","Gold_contribute","Platinum_contribute" image exist by default
-* should select "Validation" tab, "Level", "Validations", "Badge", "Validating: 5 Sentences" text & "Bronze_validate","Silver_validate","Gold_validate","Platinum_validate" image exist by default
-* User should select "Dekho India" initiative from dropdown
-* should select "Contribution" tab, "Level", "Contributions", "Badge", "Labelling: 5 Images" text & "Bronze_contribute","Silver_contribute","Gold_contribute","Platinum_contribute" image exist by default
-* should select "Validation" tab, "Level", "Validations", "Badge", "Validating: 5 Images" text & "Bronze_validate","Silver_validate","Gold_validate","Platinum_validate" image exist by default
-* User should select "Suno India" initiative from dropdown
-* should select "Contribution" tab, "Level", "Contributions", "Badge", "Transcribing: 5 Sentences" text & "Bronze_contribute","Silver_contribute","Gold_contribute","Platinum_contribute" image exist by default
-* should select "Validation" tab, "Level", "Validations", "Badge", "Validating: 5 Images" text & "Bronze_validate","Silver_validate","Gold_validate","Platinum_validate" image exist by default
-* User should select "Likho India" initiative from dropdown
-* should select "Contribution" tab, "Level", "Contributions", "Badge", "Translating: 5 Sentences" text & "Bronze_contribute","Silver_contribute","Gold_contribute","Platinum_contribute" image exist by default
-* should select "Validation" tab, "Level", "Validations", "Badge", "Validating: 5 Images" text & "Bronze_validate","Silver_validate","Gold_validate","Platinum_validate" image exist by default
+* Validate language dropdown, initiative tab, badges level & participation radios exist
+* Validate default selected values
+* User should select "Marathi" language from dropdown
+* should select "" radio button, "Contribute 5 sentences(s) in Marathi and earn Suno India Bronze Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
+* User should select "Hindi" language from dropdown
+* should select "validate-radio" radio button, "Validate 5 sentences(s) in Hindi and earn Suno India Bronze Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
+* User should select "bolo" initiative from tab
+* User select "silver_participation_badge" badge level
+* should select "contribute-radio" radio button, "Contribute 50 recording(s) in Hindi and earn Bolo India Silver Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
+* should select "validate-radio" radio button, "Validate 50 recording(s) in Hindi and earn Bolo India Silver Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
+* User should select "dekho" initiative from tab
+* User select "gold_participation_badge" badge level
+* should select "contribute-radio" radio button, "Contribute 100 image label(s) in Hindi and earn Dekho India Gold Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
+* should select "validate-radio" radio button, "Validate 100 image label(s) in Hindi and earn Dekho India Gold Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
+* User should select "likho" initiative from tab
+* User select "platinum_participation_badge" badge level
+* should select "contribute-radio" radio button, "Contribute 200 translation(s) in Hindi and earn Likho India Platinum Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
+* should select "validate-radio" radio button, "Validate 200 translation(s) in Hindi and earn Likho India Platinum Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default

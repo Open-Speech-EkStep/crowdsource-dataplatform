@@ -58,7 +58,6 @@
 	"Get comfortable with the prompted text, before recording, by <b>reading it aloud</b>": "Mudravche adim,mottean vach ani suchit mozkura vixim somadhan za",
 	"Get started by clicking on <b>Record</b> button": "Record butanv klik korun suru kor",
 	"START": "START",
-	"Error!!!": "Chuk!!!",
 	"An unexpected error occured while processing your request. Please try after some time.": "Ek onopekxit chuk tuji magnneacher kareo kortana ghoddli. Upkar korun thoddea vellan porot proiotn kor",
 	"Close": "Bond kor",
 	"An open data strategy will enable the various language communities, individuals and technologists, who are passionate about their language, to develop speech recognition applications, and integrate them in various domains for the good of the community.": "Ek ugti mullave mhaitechi hikmot vegllea bhsanchea somudaiek, veoktink ani tontrvidneanank, zankam aple bhaxecho nad asa, tankam mozot korunk pavtoli ulovpachi vollokh korunk ani tem vegvegllea kxetramni vilin korunk jea vorvim somazak boreponn mellunk favo zatolem. ",
@@ -841,5 +840,10 @@
 	"Transcribed <span id=\"current_badge_count_likho\"></span> <span id=\"likhoLanguages\"></span> <span>sentence(s)</span>": "Transcribed <span id=\"current_badge_count_likho\"></span> <span id=\"likhoLanguages\"></span> <span>sentence(s)</span>",
 	"Translated <span id=\"current_badge_count_likho\"></span> <span id=\"likhoLanguages\"></span> <span>sentence(s)</span>": "Translated <span id=\"current_badge_count_likho\"></span> <span id=\"likhoLanguages\"></span> <span>sentence(s)</span>",
 	"Labelled <span id=\"current_badge_count_likho\"></span> <span id=\"likhoLanguages\"></span> <span>image(s)</span>": "Labelled <span id=\"current_badge_count_likho\"></span> <span id=\"likhoLanguages\"></span> <span>image(s)</span>",
-	"Validated <span id=\"current_badge_count_likho\"></span> <span id=\"likhoLanguages\"></span> <span>image(s)</span>": "Validated <span id=\"current_badge_count_likho\"></span> <span id=\"likhoLanguages\"></span> <span>image(s)</span>"
+	"Validated <span id=\"current_badge_count_likho\"></span> <span id=\"likhoLanguages\"></span> <span>image(s)</span>": "Validated <span id=\"current_badge_count_likho\"></span> <span id=\"likhoLanguages\"></span> <span>image(s)</span>",
+	"How can you win Bhasha Samarthak Badges": "How can you win Bhasha Samarthak Badges",
+	"Your Language": "Your Language",
+	"Select Badge level": "Select Badge level",
+	"Participation": "Participation",
+	"<span id=\"participation-type\"></span> <span id=\"milestone\" class=\"text-yellow\"></span> <span id=\"text-type\" class=\"text-yellow\"></span> in <span id=\"contribution-language\"></span> and earn <span id=\"initiative-name\"></span> <span id=\"badge-color\"></span> Bhasha Samarthak badge": "<span id=\"participation-type\"></span> <span id=\"milestone\" class=\"text-yellow\"></span> <span id=\"text-type\" class=\"text-yellow\"></span> in <span id=\"contribution-language\"></span> and earn <span id=\"initiative-name\"></span> <span id=\"badge-color\"></span> Bhasha Samarthak badge"
 }

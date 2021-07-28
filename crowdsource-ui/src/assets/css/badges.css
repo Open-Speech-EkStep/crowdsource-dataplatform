@@ -25,6 +25,10 @@ html {
   }
 }
 
+.bg-tri-color{
+  background-size: auto,auto,contain !important;
+}
+
 @media (min-width: 1200px) {
   html {
     font-size: 16px;
@@ -85,7 +89,12 @@ html {
     font-size: 14px;
     padding: 2px;
   }
+
+  .bg-tri-color{
+    background-size: auto,auto,cover !important;
+  }
 }
+
 
 
 .badge-detail-container .nav-link{
