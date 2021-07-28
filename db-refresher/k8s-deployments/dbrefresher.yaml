@@ -86,9 +86,9 @@ spec:
                     secretKeyRef:
                       name: vakyansh-secret
                       key: AZCOPY_SPA_CLIENT_SECRET
-                - name: ENVIRONEMENT
+                - name: ENVIRONMENT
                   valueFrom:
                     secretKeyRef:
                       name: vakyansh-secret
-                      key: ENVIRONEMENT
+                      key: ENVIRONMENT
           restartPolicy: OnFailure
