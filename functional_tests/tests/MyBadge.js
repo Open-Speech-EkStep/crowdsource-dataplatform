@@ -66,14 +66,12 @@ step("when user navigates to <tab> tab user should see badges", async function(t
         assert.ok(await taiko.$('#platinum_validation_likho_Bengali_badge').isVisible())
         assert.ok(await taiko.$('#platinum_contribution_Bengali_likho_placeholder').isVisible())
 
-       
-
     }
     else if(tab== "suno-tab")
     {   
         await click(link({id:tab}))
         await taiko.waitFor(300)
-        assert.ok(await text('No badge earned for suno india').isVisible())
+        assert.ok(await text('No badge earned for Suno India').isVisible())
 
     }
 });

@@ -87,7 +87,7 @@ const getBadgeRow = (result, id, type, localeString, language) => {
                      ${item.validate[2] && item.validate[2].grade == 'Gold' ? getWidgetWithBadge(getLanguageBadge(language, 'gold', 'validate', type), 'gold', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('gold', 'validation', localeString,type, item.name)}
                    </div>
                    <div class="col-3 pl-0">
-                   ${item.validate[3] && item.validate[3].grade == 'Platinum' ? getWidgetWithBadge(getLanguageBadge(language, 'platinum', 'validate', type), type, 'validation', localeString, item.name) : getWidgetWithoutBadge('platinum', 'validation', localeString,type, item.name)}
+                   ${item.validate[3] && item.validate[3].grade == 'Platinum' ? getWidgetWithBadge(getLanguageBadge(language, 'platinum', 'validate', type),'platinum', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('platinum', 'validation', localeString,type, item.name)}
                    </div>
                </div>
              </div>` : `<div class="col-lg-5 col-md-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
