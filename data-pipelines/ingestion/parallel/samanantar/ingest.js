@@ -1,10 +1,9 @@
-const { head } = require('fetch-mock');
 const fs = require('fs');
 const csv = require("csvtojson");
 
 const { conn, insertMaster } = require('../common/dbUtils')
 
-const ingest1 = async (datasetId, datasetType, client, language, rows, paired) => {
+const ingest1 = async (datasetId, datasetType, client, language, rows, paired, profanity_check_required) => {
     const values = rows.map(row => {
         const media = {
             "data": `${row}`,
@@ -14,11 +13,12 @@ const ingest1 = async (datasetId, datasetType, client, language, rows, paired) =
         return `('medium', '${datasetType}',
                 '${JSON.stringify(media)}', 
                 ${datasetId},
-                ${paired === 'paired' ? '\'contributed\'' : null}
+                ${paired === 'paired' ? '\'contributed\'' : null},
+                ${profanity_check_required === 'false' ? false : null}
             )`
     })
     const insert_rows = `insert into dataset_row 
-    ( difficulty_level, type, media, master_dataset_id, state ) 
+    ( difficulty_level, type, media, master_dataset_id, state , is_profane) 
     values ${values} RETURNING dataset_row_id`
 
     const dataset_row_result = await client.query(`${insert_rows}`)
@@ -120,7 +120,7 @@ const start = async (connectionString, params, localDatasetPath, paired, remote_
                     count++
                     var datasetRowIds = []
                     if (textToId[translation1] == null) {
-                        datasetRowIds = await ingest1(id, 'parallel', client, language1, [translation1], paired)
+                        datasetRowIds = await ingest1(id, 'parallel', client, language1, [translation1], paired, profanity_check_required)
                         textToId[translation1] = datasetRowIds
                     } else {
                         datasetRowIds = textToId[translation1]
