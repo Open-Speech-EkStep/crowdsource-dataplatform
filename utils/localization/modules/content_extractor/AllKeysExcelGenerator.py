@@ -42,18 +42,27 @@
 # In[1]:
 
 
-import json
-import os
-import re
-from collections import OrderedDict
-from datetime import datetime
-
 import pandas as pd
+import openpyxl
+import json
+import re
+import os
+import pathlib
+from ParseHtmlAndGetKeys import get_keys_with_path
+import argparse
+from datetime import datetime
+from collections import OrderedDict
+
+
+# In[2]:
 
 
 def move_column(dataframe, column_name, index):
     popped_column = dataframe.pop(column_name)
     dataframe.insert(index, column_name, popped_column)
+
+
+# In[3]:
 
 
 def read_json(json_file_path):
@@ -62,11 +71,20 @@ def read_json(json_file_path):
     return data
 
 
+# In[4]:
+
+
 def get_dict_for_data(key, processed_text, replacement_mapping_dict, key_path_list):
-    out_dict = {"Key": key, "English copy": [processed_text], "PATH": [key_path_list[key]]}
+    out_dict = {}
+    out_dict["Key"] = key
+    out_dict["English copy"] = [processed_text]
+    out_dict["PATH"] = [key_path_list[key]]
     for replacement in sorted(replacement_mapping_dict.keys()):
         out_dict[replacement] = [replacement_mapping_dict[replacement]]
     return out_dict
+
+
+# In[5]:
 
 
 def extract_and_replace_tags(text, allowed_replacements):
@@ -92,7 +110,10 @@ def extract_and_replace_tags(text, allowed_replacements):
     return out_txt, replacement_mapping_dict
 
 
-def insert_extracted_tags(text, tags):
+# In[6]:
+
+
+def insert_extracted_tags(text, tags, allowed_replacements):
     regex = r"<(\S*?)[^>]*>.*?<\/\1>|<.*?\/>"
     out_txt = text
     matches = re.finditer(regex, out_txt, re.MULTILINE)
@@ -111,7 +132,10 @@ def insert_extracted_tags(text, tags):
     return out_txt
 
 
-def extract_and_replace_tags_for_lang(text, replacement_dict):
+# In[7]:
+
+
+def extract_and_replace_tags_for_lang(text, replacement_dict, en_key):
     tag_identification_regex = r"<(\S*?)[^>]*>.*?<\/\1>|<.*?\/>"
     out_txt = text
     matched_tags = re.finditer(tag_identification_regex, out_txt, re.MULTILINE)
@@ -126,12 +150,20 @@ def extract_and_replace_tags_for_lang(text, replacement_dict):
             matched_tag_replacement = matched_tag.replace(attributes_part_string, "")
             out_txt = out_txt.replace(matched_tag, matched_tag_replacement)
         else:
+            flag = False
             for replacement_tag, match in replacement_dict.items():
-                if matched_tag == match:
+                if (matched_tag == match):
                     replacement = replacement_tag
                     out_txt = out_txt.replace(matched_tag, '<{}>'.format(replacement))
+                    flag = True
                     break
+            if not flag:
+                print(text)
+                print(matched_tag, en_key)
     return out_txt
+
+
+# In[8]:
 
 
 def get_processed_data_for_en(json_data, allowed_replacements, key_path_list):
@@ -147,18 +179,25 @@ def get_processed_data_for_en(json_data, allowed_replacements, key_path_list):
     return language_df
 
 
+# In[9]:
+
+
 def get_processed_data_for_lang(en_json_data, json_data, allowed_replacements, key_path_list):
     language_df = pd.DataFrame([], columns=[])
     for key, value in json_data.items():
         processed_en_text, replacement_mapping_dict = extract_and_replace_tags(en_json_data[key], allowed_replacements)
-        processed_lang_text = extract_and_replace_tags_for_lang(value, replacement_mapping_dict)
-        data_dict = get_dict_for_data(key, processed_lang_text, replacement_mapping_dict, key_path_list)
+        processed_lang_text = extract_and_replace_tags_for_lang(value, replacement_mapping_dict,
+                                                                en_json_data[key])
+        data_dict = get_dict_for_data(key, processed_lang_text, {}, key_path_list)
         try:
             tmp_df = pd.DataFrame.from_dict(data_dict, orient='columns')
             language_df = language_df.append(tmp_df, ignore_index=True)
         except Exception as e:
             print(e, "\n", data_dict, "\n\n")
     return language_df
+
+
+# In[10]:
 
 
 def get_path(key, keys_with_path_map):
@@ -168,12 +207,15 @@ def get_path(key, keys_with_path_map):
     return None
 
 
+# In[11]:
+
+
 def generate_keys(en_json_path, input_json_path, keys_with_path_map, language_code):
     allowed_replacements = ["u", "v", "w", "x", "y", "z"]
     en_json_data = read_json(en_json_path)
     key_path_list = {key: get_path(key, keys_with_path_map) for key in en_json_data.keys()}
 
-    if language_code == 'en':
+    if (language_code == 'en'):
         language_df = get_processed_data_for_en(en_json_data, allowed_replacements, key_path_list)
 
     else:
@@ -181,6 +223,9 @@ def generate_keys(en_json_path, input_json_path, keys_with_path_map, language_co
         language_df = get_processed_data_for_lang(en_json_data, language_data, allowed_replacements, key_path_list)
 
     return language_df
+
+
+# In[12]:
 
 
 def replace_non_translations(df_row):
@@ -191,6 +236,9 @@ def replace_non_translations(df_row):
         if df_row[col] == df_row['Key']:
             df_row[col] = ""
     return df_row
+
+
+# In[13]:
 
 
 def export_report(report_json, report_type, important_dict_keys):
@@ -206,12 +254,18 @@ def export_report(report_json, report_type, important_dict_keys):
         f.write(json_data)
 
 
+# In[14]:
+
+
 def generate_report(content_keys):
     report = {}
     total_keys = len(content_keys)
     report['total_keys_in_input_json'] = total_keys
     report['content_keys'] = content_keys
     return report
+
+
+# In[15]:
 
 
 def generate_output_for_sme(all_df, output_excel_path):
@@ -228,62 +282,5 @@ def generate_output_for_sme(all_df, output_excel_path):
     all_df_copy.to_excel(output_excel_path.replace('.xlsx', '_sme.xlsx'), index=False, startrow=1)
     return all_df_copy
 
-# def main():
-#     example = '''
-#             Example commands:
 
-#             For only english content:
-#                 python AllKeysExcelGenerator.py -j ./../../../crowdsource-ui/locales -o ./out/en.xlsx --only-en
-
-
-#             For All language content:
-#                 python AllKeysExcelGenerator.py -j ./../../../crowdsource-ui/locales -o ./out/out.xlsx
-#         '''
-
-#     parser = argparse.ArgumentParser(epilog=example,
-#                                     formatter_class=argparse.RawDescriptionHelpFormatter)
-#     parser.add_argument("-j", "--input-json-path", required=True, help = "Path of json folder with en keys present")
-#     parser.add_argument("-o","--output-excel-path", required=True, help = "Output path")
-#     parser.add_argument("--only-en", action="store_true", help = "Include only keys in en.json")
-
-#     args = parser.parse_args()
-
-#     input_json_path = args.input_json_path
-#     output_excel_path = args.output_excel_path
-#     only_en = args.only_en
-
-#     if '/' in output_excel_path:
-#         os.makedirs(output_excel_path[:output_excel_path.rindex("/")], exist_ok=True)
-
-#     keys_with_path_map = get_keys_with_path()
-#     allowed_replacements = ["u","v","w","x", "y", "z"]
-
-#     en_json_path = os.path.join(input_json_path,'en.json')
-
-#     all_df = generate_keys(en_json_path, en_json_path, keys_with_path_map, 'en')
-
-#     overall_report = {}
-#     overall_report['args'] = vars(args)
-#     overall_report['English'] = generate_report(list(all_df['Key']))
-#     important_dict_keys = ['last_run_timestamp', 'args']
-
-#     if not only_en:
-#         languages = read_json('./../languages.json')
-#         for language_code, language_name in languages.items(): 
-#             language_json_path = os.path.join(input_json_path,'{}.json'.format(language_code))
-#             language_df = generate_keys(en_json_path, language_json_path, keys_with_path_map, language_code)
-#             language_df = language_df.rename(columns={'English copy':language_name})
-#             language_df = language_df[['Key', language_name]]
-#             all_df = pd.merge(all_df, language_df, on='Key', how='outer')
-#             overall_report[language_name] = generate_report(list(language_df['Key']))
-#         output_excel_path = output_excel_path.replace('.xlsx','_meta.xlsx')
-#     all_df.to_excel(output_excel_path, index = False, startrow=1)
-
-#     if not only_en:
-#         cleaned_all_df = generate_output_for_sme(all_df, args.output_excel_path)
-#         overall_report['metrics'] = {'total_actual_content': len(all_df['English copy']), 'total_unique_content': len(cleaned_all_df['English copy'])}
-#         important_dict_keys.append('metrics')
-#     export_report(overall_report, 'excel', important_dict_keys)
-
-# if __name__=='__main__':
-#     main()
+# In[16]:

@@ -1,20 +1,22 @@
 import argparse
 import os
+
 import pandas as pd
 
 from helper.ParseHtmlAndGetKeys import get_keys_with_path
-from modules.content_extractor.AllKeysExcelGenerator import generate_keys, generate_report, read_json, \
-    generate_output_for_sme, export_report
+from modules.content_extractor.AllKeysExcelGenerator import generate_keys, generate_report, generate_output_for_sme, \
+    export_report
+from modules.locale_generator.utils import read_language_list
 
 
 def main():
     example = '''
             Example commands:
-            
+
             For only english content:
                 python AllKeysExcelGenerator.py -j ./../../../crowdsource-ui/locales -o ./out/en.xlsx --only-en
-                
-                
+
+
             For All language content:
                 python AllKeysExcelGenerator.py -j ./../../../crowdsource-ui/locales -o ./out/out.xlsx
         '''
@@ -45,7 +47,7 @@ def main():
     important_dict_keys = ['last_run_timestamp', 'args']
 
     if not only_en:
-        languages = read_json('./../languages.json')
+        languages = read_language_list()
         for language_code, language_name in languages.items():
             language_json_path = os.path.join(input_json_path, '{}.json'.format(language_code))
             language_df = generate_keys(en_json_path, language_json_path, keys_with_path_map, language_code)
