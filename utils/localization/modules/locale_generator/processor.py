@@ -2,7 +2,7 @@ import pandas as pd
 
 from helper.reader.excel_file_reader import ExcelReader
 from modules.locale_generator.data import LocaleOutData
-from modules.locale_generator.utils import read_replacer_file
+from helper.utils.utils import read_replacer_file
 
 
 class LocaleProcessor:

@@ -2,10 +2,9 @@ import argparse
 import os
 
 from helper.report.report import LocaleReportGenerator
-from helper.utils.utils import write_df_to_json, write_report
+from helper.utils.utils import write_df_to_json, write_report, read_language_list, get_selected_languages
 from modules.locale_generator.generator import LocaleGenerator
 from modules.locale_generator.excel_input import SingleExcelInput, MultiExcelInput
-from modules.locale_generator.utils import read_language_list, get_selected_languages
 
 
 def main():

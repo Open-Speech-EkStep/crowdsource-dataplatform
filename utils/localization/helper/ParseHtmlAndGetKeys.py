@@ -2,8 +2,10 @@ import json
 import pathlib
 import re
 
-
 # In[2]:
+from helper.utils.utils import read_html_ejs_mapping_file
+
+
 def read_json(json_file_path):
     with open(json_file_path) as f:
         data = json.load(f)
@@ -204,7 +206,7 @@ def get_key_map(base_path, main_files_map):
 
 
 def get_keys_with_path(base_path):
-    main_files_map = read_json('./../html_ejs_mapping.json')
+    main_files_map = read_html_ejs_mapping_file()
 
     kf_map = get_key_map(base_path, main_files_map)
     out_map = {}

@@ -4,8 +4,10 @@ import os
 from datetime import datetime
 
 import pandas as pd
+import pkg_resources
 
 from helper.writer.json_file_writer import JsonWriter
+from modules.locale_generator.utils import read_json
 
 
 def reformat_json(json_obj):
@@ -90,3 +92,33 @@ def write_report(report, report_type):
         '{folder_name}/report_{report_type}_{timestamp}.json'.format(folder_name=report_folder, report_type=report_type,
                                                                      timestamp=now),
         report)
+
+
+def read_language_list():
+    languages_file_name = pkg_resources.resource_filename('resources', resource_name='languages.json')
+    languages_to_be_considered = read_json(languages_file_name)
+    return languages_to_be_considered
+
+
+def read_html_ejs_mapping_file():
+    html_ejs_mapping_file_name = pkg_resources.resource_filename('resources', resource_name='html_ejs_mapping.json')
+    html_ejs_mapping = read_json(html_ejs_mapping_file_name)
+    return html_ejs_mapping
+
+
+def read_replacer_file():
+    replacer_file = pkg_resources.resource_filename('resources', resource_name='replacer.json')
+    replacements = read_json(replacer_file)
+    return replacements
+
+
+def get_selected_languages(languages_to_be_considered, select_all_flag, selected_languages: list):
+    languages = {}
+    if select_all_flag:
+        languages = languages_to_be_considered.copy()
+    else:
+        language_codes = selected_languages
+        for code in language_codes:
+            languages[code] = languages_to_be_considered[code]
+
+    return languages

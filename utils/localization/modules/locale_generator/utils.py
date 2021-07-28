@@ -3,32 +3,6 @@ import pandas as pd
 import glob
 import os
 
-import pkg_resources
-
-
-def read_language_list():
-    languages_file_name = pkg_resources.resource_filename('resources', resource_name='languages.json')
-    languages_to_be_considered = read_json(languages_file_name)
-    return languages_to_be_considered
-
-
-def read_replacer_file():
-    replacer_file = pkg_resources.resource_filename('resources', resource_name='replacer.json')
-    replacements = read_json(replacer_file)
-    return replacements
-
-
-def get_selected_languages(languages_to_be_considered, select_all_flag, selected_languages: list):
-    languages = {}
-    if select_all_flag:
-        languages = languages_to_be_considered.copy()
-    else:
-        language_codes = selected_languages
-        for code in language_codes:
-            languages[code] = languages_to_be_considered[code]
-
-    return languages
-
 
 def read_json(json_file_path):
     with open(json_file_path) as f:

@@ -6,7 +6,7 @@ import pandas as pd
 from helper.ParseHtmlAndGetKeys import get_keys_with_path
 from modules.content_extractor.AllKeysExcelGenerator import generate_keys, generate_report, generate_output_for_sme, \
     export_report
-from modules.locale_generator.utils import read_language_list
+from helper.utils.utils import read_language_list
 
 
 def main():

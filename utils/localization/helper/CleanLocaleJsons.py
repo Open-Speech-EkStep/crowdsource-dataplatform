@@ -3,7 +3,7 @@ import json
 import os
 from datetime import datetime
 
-from modules.locale_generator.utils import read_language_list
+from helper.utils.utils import read_language_list
 
 
 def read_json(json_path):
