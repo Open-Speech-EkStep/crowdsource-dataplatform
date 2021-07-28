@@ -155,14 +155,32 @@ def gen_delta(languages, input_base_path, meta_out_base_path, sme_out_base_path,
             language_df = language_dfs[language_code]
             output_excel_path = '{base_path}/{language}.xlsx'.format(base_path=meta_out_base_path,
                                                                      language=language_code)
-            language_df.to_excel(output_excel_path, index=False, startrow=1)
             output_sme_excel_path = '{base_path}/{language}.xlsx'.format(base_path=sme_out_base_path,
                                                                          language=language_code)
-            to_smes = language_df[["English copy", language_name, "Url path"]]
-            to_smes = to_smes.drop_duplicates(subset=["English copy"], keep="first")
-            to_smes.to_excel(output_sme_excel_path, index=False, startrow=1)
+            cols_to_include_in_sme = ["English copy", language_name, "Url path"]
+            export_delta(language_df, cols_to_include_in_sme, output_excel_path, output_sme_excel_path)
     else:
-        pass
+        items = list(languages.items())
+        all_df = language_dfs[items[0][0]]
+        language_name_list = []
+        for language_code, language_name in items[1:]:
+            df = language_dfs[language_code]
+            cols_to_include = ['Key', 'English copy', languages[language_code]]
+            language_name_list.append(language_name)
+            all_df = pd.merge(all_df, df[cols_to_include], how='inner',
+                              on=['Key', 'English copy'])
+        now = datetime.now()
+        output_excel_path = '{base_path}/{timestamp}_meta.xlsx'.format(base_path=meta_out_base_path, timestamp=now)
+        output_sme_excel_path = '{base_path}/{timestamp}_sme.xlsx'.format(base_path=sme_out_base_path, timestamp=now)
+        cols_to_include_in_sme = ['Key', 'English copy'] + language_name_list
+        export_delta(all_df, cols_to_include_in_sme, output_excel_path, output_sme_excel_path)
+
+
+def export_delta(language_df, cols_to_include_in_sme, output_excel_path, output_sme_excel_path):
+    language_df.to_excel(output_excel_path, index=False, startrow=1)
+    to_smes = language_df[cols_to_include_in_sme]
+    to_smes = to_smes.drop_duplicates(subset=["English copy"], keep="first")
+    to_smes.to_excel(output_sme_excel_path, index=False, startrow=1)
 
 
 def export_report(report_json, report_type):
