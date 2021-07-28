@@ -6,6 +6,7 @@ const sass = require('gulp-sass')(require('sass'));
 const browserify = require('gulp-browserify');
 const replace = require('gulp-replace-task');
 const replace_sting = require('gulp-replace');
+var uglify = require('gulp-uglify');
 const args = require('yargs').argv;
 const fs = require('fs');
 const generateLocalisedHtmlFromEjs = require('./locales/utils/i18n-ejs-generator');
@@ -161,6 +162,7 @@ gulp.task('js', function () {
         ],
       })
     )
+    .pipe(uglify())
     .pipe(gulp.dest('target/js'));
 });
 
@@ -284,6 +286,7 @@ function jsGulp(moduleName) {
         ],
       })
     )
+    .pipe(uglify())
     .pipe(gulp.dest(`target/js/${moduleName}`));
 }
 
