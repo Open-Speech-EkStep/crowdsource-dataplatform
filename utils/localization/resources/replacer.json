@@ -10,7 +10,7 @@
     "json_key": "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Bolo India Target Achieved",
     "excel_key": "<average>% of <language> Bolo India Target Achieved",
     "replacements": {
-      "<average>": "<span id=\"totalAverage\"></span>",
+      "<average>%": "<span id=\"totalAverage\"></span>",
       "<language>": "<span id=\"metric-language\"></span>"
     }
   },
@@ -32,7 +32,7 @@
     "json_key": "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Suno India Target Achieved",
     "excel_key": "<average>% of <language> Suno India Target Achieved",
     "replacements": {
-      "<average>": "<span id=\"totalAverage\"></span>",
+      "<average>%": "<span id=\"totalAverage\"></span>",
       "<language>": "<span id=\"metric-language\"></span>"
     }
   },
@@ -40,7 +40,7 @@
     "json_key": "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Likho India Target Achieved",
     "excel_key": "<average>% of <from-language>-<to-language> Likho India Target Achieved",
     "replacements": {
-      "<average>": "<span id=\"totalAverage\"></span>",
+      "<average>%": "<span id=\"totalAverage\"></span>",
       "<from-language>-<to-language>": "<span id=\"metric-language\"></span>"
     }
   },
@@ -62,7 +62,7 @@
     "json_key": "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Dekho India Target Achieved",
     "excel_key": "<average>% of <language> Dekho India Target Achieved",
     "replacements": {
-      "<average>": "<span id=\"totalAverage\"></span>",
+      "<average>%": "<span id=\"totalAverage\"></span>",
       "<language>": "<span id=\"metric-language\"></span>"
     }
   },

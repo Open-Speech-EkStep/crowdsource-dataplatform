@@ -170,32 +170,33 @@ def get_identified_key_path_map(key_map, common_folder_ejs_files):
 
 
 def get_key_map(base_path, main_files_map):
-    key_map = get_keys_from_ejs([base_path + "/" + main_ejs_file for _, main_ejs_file in main_files_map.items()])
-    fileExt = r"**/*.ejs"
-    common_folder_ejs_files = list(pathlib.Path(base_path + '/common').glob(fileExt))
-    i_key_path_map = get_identified_key_path_map(key_map, common_folder_ejs_files)
-    en_data = read_json(base_path.replace("/src/views", "") + '/locales/en.json')
-    en_data_keys = set(en_data.keys())
-    key_gen_tags = read_key_gen(base_path + '/key_gen.ejs', base_path)
-    un_matched_keys = []
     key_file_map = {}
-    for key in en_data_keys:
-        found = False
-        for k in set(i_key_path_map.keys()):
-            if key == k or is_templated_key_present(k, key):
-                found = True
-                key_file_map[key] = i_key_path_map[k]
-                break
-        if not found:
-            for kg_key, kg_path in key_gen_tags.items():
-                if key == kg_key:
+    try:
+        key_map = get_keys_from_ejs([base_path + "/" + main_ejs_file for _, main_ejs_file in main_files_map.items()])
+        fileExt = r"**/*.ejs"
+        common_folder_ejs_files = list(pathlib.Path(base_path + '/common').glob(fileExt))
+        i_key_path_map = get_identified_key_path_map(key_map, common_folder_ejs_files)
+        en_data = read_json(base_path.replace("/src/views", "") + '/locales/en.json')
+        en_data_keys = set(en_data.keys())
+        key_gen_tags = read_key_gen(base_path + '/key_gen.ejs', base_path)
+        un_matched_keys = []
+        for key in en_data_keys:
+            found = False
+            for k in set(i_key_path_map.keys()):
+                if key == k or is_templated_key_present(k, key):
                     found = True
-                    key_file_map[key] = kg_path
+                    key_file_map[key] = i_key_path_map[k]
                     break
             if not found:
-                un_matched_keys.append(key)
-    #     print(un_matched_keys)
-    #     print(len(key_file_map.keys()), len(en_data_keys), len(un_matched_keys))
+                for kg_key, kg_path in key_gen_tags.items():
+                    if key == kg_key:
+                        found = True
+                        key_file_map[key] = kg_path
+                        break
+                if not found:
+                    un_matched_keys.append(key)
+    except:
+        pass
     return key_file_map
 
 
