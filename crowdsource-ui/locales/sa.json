@@ -856,5 +856,10 @@
 	"translation(s)": "translation(s)",
 	"image label(s)": "image label(s)",
 	"Contribute to your language!": "Contribute to your language!",
-	"Speakers": "Speakers"
+	"Speakers": "Speakers",
+	"Translations": "Translations",
+	"<span id=\"totalAverage\"></span> of Bolo India Target Achieved": "<span id=\"totalAverage\"></span> of Bolo India Target Achieved",
+	"<span id=\"totalAverage\"></span> of Suno India Target Achieved": "<span id=\"totalAverage\"></span> of Suno India Target Achieved",
+	"<span id=\"totalAverage\"></span> of Likho India Target Achieved": "<span id=\"totalAverage\"></span> of Likho India Target Achieved",
+	"<span id=\"totalAverage\"></span> of Dekho India Target Achieved": "<span id=\"totalAverage\"></span> of Dekho India Target Achieved"
 }
