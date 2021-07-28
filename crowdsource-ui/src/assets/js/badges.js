@@ -66,6 +66,7 @@ const renderCard = function (data, initiative, badge_color, source, language) {
 
 
   const localeInitiativeStr = localeString[`${initiative.charAt(0).toUpperCase() +  initiative.slice(1)} India`];
+  const localeBadgeColorStr = localeString[badge_color.toLowerCase()];
 
   const $selectedBadgeCardImg = $('.selected-badge-card img');
   $selectedBadgeCardImg.attr('src',getLanguageBadge(language,badge_color,source, initiative));
@@ -75,6 +76,7 @@ const renderCard = function (data, initiative, badge_color, source, language) {
   $('#text-type').html(moduleDetail[initiative]['text-type']);
   $('#contribution-language').html(localeLanguageStr);
   $('#initiative-name').html(localeInitiativeStr);
+  $('#badge-color').html(localeBadgeColorStr.charAt(0).toUpperCase() + localeBadgeColorStr.slice(1));
 }
 
 const renderBadgeDetails = function (data, source, type, initiative, language, badge_color) {
@@ -101,7 +103,7 @@ const initialise = () => {
   let initiative = 'suno';
   let selectedLanguage = DEFAULT_CON_LANGUAGE;
   let source = 'contribute';
-  let badge_color = 'bronze';
+  let badge_color = badgeLevel.replace('_participation_badge','');
   let type = localStorage.getItem("module");
   let initiativeValue = type === 'home' ? 'asr' : MODULE[type]["api-type"];
 
@@ -119,19 +121,21 @@ const initialise = () => {
 
   } else {
     $("#languages").find('option[value="' + DEFAULT_CON_LANGUAGE + '"]').attr("selected", "selected");
-    selectedLanguage = $('#languages').find('option[value="' + DEFAULT_CON_LANGUAGE + '"]').val();
+    selectedLanguage = DEFAULT_CON_LANGUAGE;
   }
 
   getBadgeData(initiativeValue, source, selectedLanguage,initiative,badge_color);
-  selectBadgeLevel('bronze_participation_badge');
+  selectBadgeLevel(badgeLevel);
   $('#initiative').on('click', (e) => {
     initiative = e.target.id;
     initiativeValue = MODULE[e.target.id]["api-type"];
+    badge_color = badgeLevel.replace('_participation_badge','');
     getBadgeData(initiativeValue, source, selectedLanguage, initiative,badge_color);
   });
 
   $('#languages').on('change', (e) => {
     selectedLanguage = e.target.value;
+    badge_color = badgeLevel.replace('_participation_badge','');
     getBadgeData(initiativeValue, source, selectedLanguage,initiative,badge_color);
   });
 
@@ -146,6 +150,7 @@ const initialise = () => {
 
     if (selectedParticipation) selectedParticipation.checked = false;
     e.target.checked = true;
+    badge_color = badgeLevel.replace('_participation_badge','');
     getBadgeData(initiativeValue, source, selectedLanguage,initiative,badge_color);
   })
 }
