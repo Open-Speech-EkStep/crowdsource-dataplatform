@@ -50,7 +50,7 @@ from datetime import datetime
 import pandas as pd
 
 # In[2]:
-from helper.utils.utils import extract_and_replace_tags, extract_and_replace_tags_for_lang
+from helper.utils.utils import extract_and_replace_tags, extract_and_replace_tags_for_lang, write_report
 
 
 def move_column(dataframe, column_name, index):
@@ -105,14 +105,18 @@ def get_processed_data_for_en(json_data, allowed_replacements, key_path_list):
 def get_processed_data_for_lang(en_json_data, json_data, allowed_replacements, key_path_list):
     language_df = pd.DataFrame([], columns=[])
     for key, value in json_data.items():
-        processed_en_text, replacement_mapping_dict = extract_and_replace_tags(en_json_data[key], allowed_replacements)
-        processed_lang_text = extract_and_replace_tags_for_lang(value, replacement_mapping_dict)
-        data_dict = get_dict_for_data(key, processed_lang_text, {}, key_path_list)
-        try:
-            tmp_df = pd.DataFrame.from_dict(data_dict, orient='columns')
-            language_df = language_df.append(tmp_df, ignore_index=True)
-        except Exception as e:
-            print(e, "\n", data_dict, "\n\n")
+        if key in en_json_data:
+            processed_en_text, replacement_mapping_dict = extract_and_replace_tags(en_json_data[key],
+                                                                                   allowed_replacements)
+            processed_lang_text = extract_and_replace_tags_for_lang(value, replacement_mapping_dict)
+            data_dict = get_dict_for_data(key, processed_lang_text, {}, key_path_list)
+            try:
+                tmp_df = pd.DataFrame.from_dict(data_dict, orient='columns')
+                language_df = language_df.append(tmp_df, ignore_index=True)
+            except Exception as e:
+                print(e, "\n", data_dict, "\n\n")
+        else:
+            print(key, "not in en json file")
     return language_df
 
 
@@ -134,7 +138,7 @@ def generate_keys(en_json_path, input_json_path, keys_with_path_map, language_co
     en_json_data = read_json(en_json_path)
     key_path_list = {key: get_path(key, keys_with_path_map) for key in en_json_data.keys()}
 
-    if (language_code == 'en'):
+    if language_code == 'en':
         language_df = get_processed_data_for_en(en_json_data, allowed_replacements, key_path_list)
 
     else:
@@ -167,10 +171,8 @@ def export_report(report_json, report_type, important_dict_keys):
     sort_order = important_dict_keys + [k for k in all_dict_keys if k not in important_dict_keys]
     sort_def = lambda item: sort_order.index(item[0])
     report_json = OrderedDict(sorted(report_json.items(), key=sort_def))
-    os.makedirs('reports', exist_ok=True)
-    json_data = json.dumps(report_json, indent=4, ensure_ascii=False)
-    with open('{}/report_{}_{}.json'.format('reports', report_type, now), 'w') as f:
-        f.write(json_data)
+
+    write_report(report_json, report_type)
 
 
 # In[14]:

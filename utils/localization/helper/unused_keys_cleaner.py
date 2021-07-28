@@ -3,7 +3,7 @@ import json
 import os
 from datetime import datetime
 
-from helper.utils.utils import read_language_list
+from helper.utils.utils import read_language_list, write_report
 
 
 def read_json(json_path):
@@ -14,12 +14,9 @@ def read_json(json_path):
 def generate_report():
     now = datetime.now()
 
-    report = {}
-    report['last_run_timestamp'] = str(now)
-    report['keys_removed_from_all_files'] = list(set(removed_keys))
+    report = {'last_run_timestamp': str(now), 'keys_removed_from_all_files': list(set(removed_keys))}
 
-    with open('reports/report_clean_locale_{}.json'.format(now), 'w') as f:
-        f.write(json.dumps(report, indent=4, ensure_ascii=False))
+    write_report(report, 'locale_cleaning')
 
 
 def clean_locale_jsons(languages, input_base_path, output_base_path):
@@ -56,10 +53,10 @@ if __name__ == '__main__':
             Example commands:
 
             For specific languages:
-                python CleanLocaleJsons.py -i ./../../../crowdsource-ui/locales -o . -l gu pa
+                python unused_keys_cleaner.py -i ./../../../crowdsource-ui/locales -o . -l gu pa
 
             For all languages:
-                python CleanLocaleJsons.py -i ./../../../crowdsource-ui/locales -o . -a
+                python unused_keys_cleaner.py -i ./../../../crowdsource-ui/locales -o . -a
         '''
 
     parser = argparse.ArgumentParser(epilog=example,

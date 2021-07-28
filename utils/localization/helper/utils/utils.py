@@ -85,14 +85,20 @@ def get_matched_count(excel_df, merged_df):
     return count
 
 
+def get_root_folder():
+    return os.path.join(os.path.dirname(__file__), '../..')
+
+
 def write_report(report, report_type):
     now = datetime.now()
-    report_folder = 'reports'
-    os.makedirs('%s' % report_folder, exist_ok=True)
+    report_folder = os.path.join(get_root_folder(), 'reports')
+    os.makedirs(report_folder, exist_ok=True)
     JsonWriter().write(
-        '{folder_name}/report_{report_type}_{timestamp}.json'.format(folder_name=report_folder, report_type=report_type,
-                                                                     timestamp=now),
-        report)
+        '{folder_name}/{timestamp}_{report_type}_report.json'.format(
+            folder_name=report_folder,
+            report_type=report_type,
+            timestamp=now
+        ), report)
 
 
 def read_language_list():
@@ -158,7 +164,7 @@ def extract_and_replace_tags_for_lang(text, replacement_dict):
     replacement_mapping_dict = {}
     for match in matched_tags:
         matched_tag = match.group()
-        if "<b>" in matched_tag:
+        if "<b>" in matched_tag or "</b>" in matched_tag:
             continue
         elif "<span>" in matched_tag:
             replaced_matched_tag = matched_tag.replace("<span>", "<s>").replace("</span>", "</s>")
@@ -177,5 +183,5 @@ def extract_and_replace_tags_for_lang(text, replacement_dict):
                     flag = True
                     break
             if not flag:
-                raise ValueError(matched_tag + " - Replacement not found")
+                raise ValueError(out_txt + " -> " + matched_tag + " -> Replacement not found")
     return out_txt

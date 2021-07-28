@@ -5,6 +5,8 @@ from datetime import datetime
 
 import pandas as pd
 
+from helper.utils.utils import write_report
+
 
 def load_json_as_df(json_data):
     out_df = pd.DataFrame(list(json_data.items()),
@@ -154,9 +156,7 @@ def get_keys_by_action(excel_df, json_df, action):
 def export_report(report_json, report_type):
     now = datetime.now()
     report_json['last_run_timestamp'] = str(now)
-    os.makedirs('reports', exist_ok=True)
-    with open('{}/report_{}_{}.json'.format('reports', report_type, now), 'w') as f:
-        f.write(json.dumps(report_json, indent=4, ensure_ascii=False))
+    write_report(report_json, report_type)
 
 
 def generate_report(json_df, excel_df, modified_content_keys):
@@ -171,7 +171,7 @@ def generate_report(json_df, excel_df, modified_content_keys):
     report['removed_keys'] = removed_keys
     report['updated_content'] = modified_content_keys
     report['newly_added_content'] = newly_added_keys
-    export_report(report, 'json')
+    export_report(report, 'all_keys_json_generation')
 
 
 def set_values(df_row):
@@ -190,7 +190,6 @@ def set_values(df_row):
 key_column = 'Key'
 english_col = 'English copy'
 allowed_values = ['x', 'y', 'z', 'u', 'v', 'w']
-languages = read_json('./../languages.json')
 
 
 def generate(input_excel_path, input_json_path, output_json_path, input_category):
@@ -217,16 +216,15 @@ def generate(input_excel_path, input_json_path, output_json_path, input_category
 
     return clean_excel_df, clean_json_df
 
-
 # def main():
 #     example = '''
 #             Example commands:
 #
-#             To run with auto-generated excel from AllKeysExcelGenerator.py:
-#                 python AllKeysJsonGenerator.py -i ./../../../crowdsource-ui/locales -e ./en/out/en.xlsx -o ./out/
+#             To run with auto-generated excel from all_keys_excel_generation.py:
+#                 python all_keys_json_generation.py -i ./../../../crowdsource-ui/locales -e ./en/out/en.xlsx -o ./out/
 #
 #             To run with manually generated excel with the 4 categories('Suno India', 'Bolo India', 'Likho India', 'Dekho India'):
-#                 python AllKeysJsonGenerator.py -i ./../../../crowdsource-ui/locales -e ./../test-data/read-data-from-table/English_content.xlsx  -o ./out/ -c manual
+#                 python all_keys_json_generation.py -i ./../../../crowdsource-ui/locales -e ./../test-data/read-data-from-table/English_content.xlsx  -o ./out/ -c manual
 #
 #         '''
 #
@@ -254,7 +252,7 @@ def generate(input_excel_path, input_json_path, output_json_path, input_category
 #     added_content_keys = get_keys_by_action(excel_df, json_df, 'addition')
 #     clean_old_translations(list(modified_content.keys()), added_content_keys, languages, input_base_path,
 #                            output_json_path)
-#     os.system('python ./../clean_unused_keys/CleanLocaleJsons.py -i ./out -o ./out -a')
+#     os.system('python ./../clean_unused_keys/unused_keys_cleaner.py -i ./out -o ./out -a')
 #     generate_report(json_df, excel_df, modified_content)
 #
 #

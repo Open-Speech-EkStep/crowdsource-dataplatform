@@ -1,6 +1,7 @@
 import argparse
 import os
 
+from helper.unused_keys_cleaner import clean_locale_jsons
 from helper.report.report import LocaleReportGenerator
 from helper.utils.utils import write_df_to_json, write_report, read_language_list, get_selected_languages
 from modules.locale_generator.generator import LocaleGenerator
@@ -12,19 +13,37 @@ def main():
     example = '''
             Example commands:
 
-            For specific languages:
-                python LocaleGenerator.py -j ./../all_keys_generator/out -e ./input_excel_files -m ./../delta_generation/out-meta -o ./output_json_files -l gu pa
+            For specific languages taking single translation file that has all languages as input:
+                python locale_generator.py -j ./../../crowdsource_ui/locales 
+                                           -e ./translation_excel_files 
+                                           -m ./translation_meta_files 
+                                           -o ./locale_output 
+                                           -t combined
+                                           -l gu pa
+            
+            For specific languages taking separate translation files for each language as input:
+                python locale_generator.py -j ./../../crowdsource_ui/locales 
+                                               -e ./translation_excel_files 
+                                               -m ./translation_meta_files 
+                                               -o ./locale_output 
+                                               -t separate
+                                               -l gu pa 
 
-            For all languages:
-                python LocaleGenerator.py -j ./../all_keys_generator/out -e ./input_excel_files -m ./../delta_generation/out-meta -o ./output_json_files -a
-
-            -j /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localization/helper/cleaned_jsons
-            -e /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/sme-input
-            -m /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/ofiles/out-meta
-            -o ./output_json_files 
-            -t seperate
-            -l hi
-
+            For all languages taking single translation file that has all languages as input:
+                python locale_generator.py -j ./../../crowdsource_ui/locales 
+                                               -e ./translation_excel_files 
+                                               -m ./translation_meta_files 
+                                               -o ./locale_output 
+                                               -t combined
+                                               -a
+                                               
+            For all languages taking separate translation files for each language as input:
+                python locale_generator.py -j ./../../crowdsource_ui/locales 
+                                               -e ./translation_excel_files 
+                                               -m ./translation_meta_files 
+                                               -o ./locale_output 
+                                               -t separate
+                                               -a
         '''
 
     parser = argparse.ArgumentParser(epilog=example,
@@ -39,30 +58,12 @@ def main():
     parser.add_argument("-j", "--json-folder-path", required=True, help="Input folder path with json files present")
     parser.add_argument("-m", "--meta-folder-path", required=True,
                         help="Input folder path with meta files for the excels present")
-    parser.add_argument("-t", "--type", default='seperate', help="Type of input excel file(s)",
-                        choices=['seperate', 'combined'])
+    parser.add_argument("-t", "--type", default='separate', help="Type of input excel file(s)",
+                        choices=['separate', 'combined'])
     parser.add_argument("-o", "--output-folder-path", required=True,
                         help="Output folder path where excels are generated")
 
-    args = parser.parse_args(
-        "-j /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localization/helper/cleaned_jsons \
-            -e /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localization/resources/Bhasha_Daan_All_Content_July_16.xlsx \
-            -m /Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localization/resources/out_meta_5_20.xlsx \
-            -o ./output_json_files \
-            -t combined \
-            -a \
-        ".split())
-
-    # for test
-    # args = parser.parse_args(
-    #     "\
-    #     -j crowdsource-dataplatform/utils/localization/resources/test_data/input_jsons \
-    #     -e crowdsource-dataplatform/utils/localization/resources/test_data/test-out-sme/hi.xlsx \
-    #     -m crowdsource-dataplatform/utils/localization/resources/test_data/test-out-meta/out_meta_5_20.xlsx \
-    #     -o ./output \
-    #     -t combined \
-    #     -l hi \
-    #     ".split())
+    args = parser.parse_args()
 
     languages = get_selected_languages(all_languages_list, args.all_languages, args.languages)
 
@@ -75,6 +76,10 @@ def main():
     if file_type == 'combined' and not os.path.isfile(meta_input_path):
         print('Invalid arguments')
         exit()
+
+    tmp_cleaned_json_path = "cleaned_json_locales_for_locale_generation"
+    clean_locale_jsons(languages, input_json_path, tmp_cleaned_json_path)
+    input_json_path = tmp_cleaned_json_path
 
     if file_type == 'combined':
         excel_input = SingleExcelInput(input_json_path, input_base_path, meta_input_path)
@@ -95,12 +100,25 @@ def main():
         report = locale_report_generator.generate_report()
         all_languages_report[languages[language_code]] = report
 
-    write_report(all_languages_report, 'locale')
+    write_report(all_languages_report, 'locale_generation')
+
+    if os.path.isdir(tmp_cleaned_json_path):
+        os.system("rm -rf " + tmp_cleaned_json_path)
 
     # move_files(path_to_excels, translation_excel_files)
 
 
 if __name__ == '__main__':
+    # for test
+    # args_list = "\
+    # -j crowdsource-dataplatform/utils/localization/resources/test_data/input_jsons \
+    # -e crowdsource-dataplatform/utils/localization/resources/test_data/test-out-sme/hi.xlsx \
+    # -m crowdsource-dataplatform/utils/localization/resources/test_data/test-out-meta/out_meta_5_20.xlsx \
+    # -o ./output \
+    # -t combined \
+    # -l hi \
+    # ".split()
+
     main()
 
 # read json

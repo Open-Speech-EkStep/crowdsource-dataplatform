@@ -14,8 +14,8 @@ from datetime import datetime
 import pandas as pd
 
 # In[2]:
-from helper.ParseHtmlAndGetKeys import get_keys_with_path
-from helper.utils.utils import extract_and_replace_tags
+from helper.ejs_keys_parser import get_keys_with_path
+from helper.utils.utils import extract_and_replace_tags, write_report
 
 
 def move_column(dataframe, column_name, index):
@@ -141,16 +141,13 @@ def gen_delta(languages, input_base_path, meta_out_base_path, sme_out_base_path,
 def export_report(report_json, report_type):
     now = datetime.now()
     report_json['last_run_timestamp'] = str(now)
-    os.makedirs('reports', exist_ok=True)
-    with open('{}/report_{}_{}.json'.format('reports', report_type, now), 'w') as f:
-        f.write(json.dumps(report_json, indent=4, ensure_ascii=False))
+    write_report(report_json, report_type)
 
 
 # In[12]:
 
 
 def generate_report(keys_without_translation):
-    report = {}
-    report['keys_without_translation'] = keys_without_translation
+    report = {'keys_without_translation': keys_without_translation}
 
-    export_report(report, 'delta')
+    export_report(report, 'delta_generation')
