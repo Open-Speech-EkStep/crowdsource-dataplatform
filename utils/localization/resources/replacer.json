@@ -37,6 +37,34 @@
     }
   },
   {
+    "json_key": "<span id=\"totalAverage\"></span> of Dekho India Target Achieved",
+    "excel_key": "<average>% of Dekho India Target Achieved",
+    "replacements": {
+      "<average>%": "<span id=\"totalAverage\"></span>"
+    }
+  },
+  {
+    "json_key": "<span id=\"totalAverage\"></span> of Suno India Target Achieved",
+    "excel_key": "<average>% of Suno India Target Achieved",
+    "replacements": {
+      "<average>%": "<span id=\"totalAverage\"></span>"
+    }
+  },
+  {
+    "json_key": "<span id=\"totalAverage\"></span> of Bolo India Target Achieved",
+    "excel_key": "<average>% of Bolo India Target Achieved",
+    "replacements": {
+      "<average>%": "<span id=\"totalAverage\"></span>"
+    }
+  },
+  {
+    "json_key": "<span id=\"totalAverage\"></span> of Likho India Target Achieved",
+    "excel_key": "<average>% of Likho India Target Achieved",
+    "replacements": {
+      "<average>%": "<span id=\"totalAverage\"></span>"
+    }
+  },
+  {
     "json_key": "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Likho India Target Achieved",
     "excel_key": "<average>% of <from-language>-<to-language> Likho India Target Achieved",
     "replacements": {
@@ -160,6 +188,22 @@
   {
     "json_key": "Validated <span id=\"current_badge_count\"></span> <span>image(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
     "excel_key": "Validated <contribution-count> image label(s) in <language>",
+    "replacements": {
+      "<contribution-count>": "<span id=\"current_badge_count\"></span>",
+      "<language>": "<span id=\"conLanWhenGetBadge\"></span>"
+    }
+  },
+  {
+    "json_key": "Transcribed <span id=\"current_badge_count\"></span> <span>image label(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
+    "excel_key": "Transcribed <contribution-count> image label(s) in <language>",
+    "replacements": {
+      "<contribution-count>": "<span id=\"current_badge_count\"></span>",
+      "<language>": "<span id=\"conLanWhenGetBadge\"></span>"
+    }
+  },
+  {
+    "json_key": "Contributed <span id=\"current_badge_count\"></span> <span>recording(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
+    "excel_key": "Contributed <contribution-count> recording(s) in <language>",
     "replacements": {
       "<contribution-count>": "<span id=\"current_badge_count\"></span>",
       "<language>": "<span id=\"conLanWhenGetBadge\"></span>"
