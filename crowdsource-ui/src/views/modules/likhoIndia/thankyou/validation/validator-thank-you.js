@@ -175,9 +175,7 @@ function executeOnLoad() {
     replaceSubStr($("#languageInTopMob"), "<to-language>", localeToLanguageStr);
     replaceSubStr($(".x-axis-label"), "<from-language>", localeLanguageStr);
     replaceSubStr($(".x-axis-label"), "<to-language>", localeToLanguageStr);
-    $("#likhoLanguages").html(`${localeLanguageStr}`);
-    $("#translated-text").addClass("d-none");
-    $("#translated-likho-text").addClass("d-block");
+    $("#conLanWhenGetBadge").html(localeLanguageStr)
     getLanguageStats().then(()=>{
       setSentencesContributed();
     });
