@@ -370,12 +370,12 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'Validation (in sentences)',
             'Validation (in image labels)',
             'Contribution (in hours)',
-            'Contribution (no. of images)',
-            'Contribution (no. of translations)',
-            'Contribution (no. of speakers)',
-            'Contribution (no. of sentences)',
-            'translations',
-            'speakers',
+            'Contribution (total images)',
+            'Contribution (total translations)',
+            'Contribution (total speakers)',
+            'Contribution (total sentences)',
+            'Translations',
+            'Speakers',
             'images'
         ];
 

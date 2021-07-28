@@ -11,9 +11,9 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
     localStorage.getItem(LOCALE_STRINGS)
   );
   const dekhoToolTipStr = localStrings["Images"].toLowerCase();
-  const likhoToolTipStr = localStrings["translations"];
+  const likhoToolTipStr = localStrings["Translations"].toLowerCase();
   const sunoToolTipStr = localStrings["Sentences"].toLowerCase();
-  const boloSpeakerToolTipStr = localStrings["speakers"];
+  const boloSpeakerToolTipStr = localStrings["Speakers"].toLowerCase();
   am4core.ready(function () {
     const chart = am4core.create('top-language-chart', am4charts.XYChart);
 
@@ -89,9 +89,9 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
       }
     } else {
       if (dataType !== "speaker") {
-        valueAxis.title.text = type == "suno" || type == "bolo" ? (dataType == "sentences" ? localStrings["Contribution (no. of sentences)"] : localStrings["Contribution (in hours)"]) : type == "dekho" ? localStrings["Contribution (no. of images)"] : localStrings['Contribution (no. of translations)'];
+        valueAxis.title.text = type == "suno" || type == "bolo" ? (dataType == "sentences" ? localStrings["Contribution (total sentences)"] : localStrings["Contribution (in hours)"]) : type == "dekho" ? localStrings["Contribution (total images)"] : localStrings['Contribution (total translations)'];
       } else {
-        valueAxis.title.text = type == "bolo" ? localStrings["Contribution (no. of speakers)"] : "";
+        valueAxis.title.text = type == "bolo" ? localStrings["Contribution (total speakers)"] : "";
       }
     }
 
