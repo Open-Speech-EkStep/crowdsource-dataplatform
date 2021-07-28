@@ -20,7 +20,7 @@ ls -al /usr/src/app/utils/
 
 /usr/src/app/utils/azcopy login --tenant-id ${AZURE_TENANT_ID} --service-principal --application-id ${AZURE_APP_ID}
 
-if [ $ENVIRONMENT == 'prod' ]
+if [ $ENVIRONMENT == prod ]
 then
    /usr/src/app/utils/azcopy copy "./*" "${AZURE_ACC_URL}/${BUCKET_NAME}/bhashadaan/aggregated-json/" --recursive --include-pattern "*json"
 else
