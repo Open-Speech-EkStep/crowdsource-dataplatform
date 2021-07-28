@@ -210,6 +210,42 @@
     }
   },
   {
+    "json_key": "Translated <span id=\"current_badge_count\"></span> <span id=\"conLanWhenGetBadge\"></span> <span>sentence(s)</span>",
+    "excel_key": "Translated <contribution-count> <language> <s>sentence(s)</s>",
+    "replacements": {
+      "<contribution-count>": "<span id=\"current_badge_count\"></span>",
+      "<language>": "<span id=\"conLanWhenGetBadge\"></span>"
+    }
+  },
+  {
+    "json_key": "Validated <span id=\"current_badge_count\"></span> <span id=\"conLanWhenGetBadge\"></span> <span>sentence(s)</span>",
+    "excel_key": "Validated <validation-count> <language> <s>sentence(s)</s>",
+    "replacements": {
+      "<validation-count>": "<span id=\"current_badge_count\"></span>",
+      "<language>": "<span id=\"conLanWhenGetBadge\"></span>"
+    }
+  },
+  {
+    "json_key": "Translated <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
+    "excel_key": "Translated <contribution-count> <s>sentence(s)</s> in <language> ",
+    "replacements": {
+      "<contribution-count>": "<span id=\"current_badge_count\"></span>",
+      "<language>": "<span id=\"conLanWhenGetBadge\"></span>"
+    }
+  },
+  {
+    "json_key": "<span id=\"participation-type\"></span> <span id=\"milestone\" class=\"text-yellow\"></span> <span id=\"text-type\" class=\"text-yellow\"></span> in <span id=\"contribution-language\"></span> and earn <span id=\"initiative-name\"></span> <span id=\"badge-color\"></span> Bhasha Samarthak badge",
+    "excel_key": "<participation-type> <milestone> <text-type> in <language> and earn <initiative> <badge-color> Bhasha Samarthak badge",
+    "replacements": {
+      "<participation-type>": "<span id=\"participation-type\"></span>",
+      "<milestone>": "<span id=\"milestone\" class=\"text-yellow\"></span>",
+      "<text-type>": "<span id=\"text-type\" class=\"text-yellow\"></span>",
+      "<language>": "<span id=\"contribution-language\"></span>",
+      "<initiative>": "<span id=\"initiative-name\"></span>",
+      "<badge-color>": "<span id=\"badge-color\"></span>"
+    }
+  },
+  {
     "json_key": "You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings",
     "excel_key": ""
   },
