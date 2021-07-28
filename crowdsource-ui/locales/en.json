@@ -341,7 +341,6 @@
 	"You contributed <span id=\"user-contribution-count\"></span> <span>sentence(s)</span> for your language pair!": "You contributed <span id=\"user-contribution-count\"></span> <span>sentence(s)</span> for your language pair!",
 	"You’ve earned your Likho India <span id=\"current_badge_name\"></span> <span>Bhasha Samarthak</span> Badge": "You’ve earned your Likho India <span id=\"current_badge_name\"></span> <span>Bhasha Samarthak</span> Badge",
 	"Translated <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Translated <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
-	"Translated <span id=\"current_badge_count_likho\"></span> <span id=\"likhoLanguages\"></span> <span>sentence(s)</span>": "Translated <span id=\"current_badge_count_likho\"></span> <span id=\"likhoLanguages\"></span> <span>sentence(s)</span>",
 	"Participate to see <from-language>-<to-language> in top 3": "Participate to see <from-language>-<to-language> in top 3",
 	"Participate to keep <from-language>-<to-language> in top 3": "Participate to keep <from-language>-<to-language> in top 3",
 	"<from-language>-<to-language> vs Top contributed language pairs": "<from-language>-<to-language> vs Top contributed language pairs",
