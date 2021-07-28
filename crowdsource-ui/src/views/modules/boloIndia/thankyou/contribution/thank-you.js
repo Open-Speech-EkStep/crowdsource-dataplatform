@@ -43,7 +43,7 @@ function setSentencesContributed() {
   performAPIRequest(
     `/rewards?type=text&language=${contributionLanguage}&source=contribute&userName=${userName}`
   ).then((data) => {
-    setBadge(data,localeStrings);
+    setBadge(data,localeStrings,'contribute');
   });
 }
 

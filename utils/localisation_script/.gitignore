@@ -11,5 +11,7 @@ locale_generation/input_excel_files_old
 locale_generation/input_excel_files
 locale_generation/output_json_files
 en_html_files
+delta_generation/cleaned_jsons
 locale_generation/excel_to_json.ipynb
 **/out
+!all_keys_generator/out

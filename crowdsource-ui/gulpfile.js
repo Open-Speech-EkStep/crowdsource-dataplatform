@@ -302,7 +302,7 @@ gulp.task('css', function () {
 });
 
 gulp.task('scss', function () {
-  return gulp.src(['src/assets/css/*.scss']).pipe(gulpFlatten()).pipe(sass().on('error', sass.logError)).pipe(cleanCss()).pipe(gulp.dest('target/css'));
+  return gulp.src(['src/assets/css/*.scss']).pipe(gulpFlatten()).pipe(sass().on('error', sass.logError)).pipe(replace_sting('\/img\/', `${settings.contextRoot}/img/`)).pipe(cleanCss()).pipe(gulp.dest('target/css'));
 });
 
 gulp.task('css-common', function () {
