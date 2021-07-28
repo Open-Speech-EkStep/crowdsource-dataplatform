@@ -161,7 +161,8 @@
     "json_key": "Validated <span id=\"current_badge_count\"></span> <span>image(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
     "excel_key": "Validated <contribution-count> image label(s) in <language>",
     "replacements": {
-      "<contribution-count>": "<span id=\"current_badge_count\"></span>"
+      "<contribution-count>": "<span id=\"current_badge_count\"></span>",
+      "<language>": "<span id=\"conLanWhenGetBadge\"></span>"
     }
   },
   {
