@@ -15,6 +15,7 @@ import pandas as pd
 
 # In[2]:
 from helper.ParseHtmlAndGetKeys import get_keys_with_path
+from helper.utils.utils import extract_and_replace_tags
 
 
 def move_column(dataframe, column_name, index):
@@ -70,35 +71,6 @@ def get_text_from_html_tag(tag):
         if match_group_length > 1 and len(match.group(2)) != 0:
             string_matches.add(match.group(2).strip())
     return string_matches
-
-
-# In[7]:
-
-
-def extract_and_replace_tags(text, allowed_replacements):
-    tag_identification_regex = r"<(\S*?)[^>]*>.*?<\/\1>|<.*?\/>"
-    out_txt = text
-    matched_tags = re.finditer(tag_identification_regex, out_txt, re.MULTILINE)
-    replacement_identifier_index = 0
-    replacement_mapping_dict = {}
-    for match in matched_tags:
-        matched_tag = match.group()
-        if "<b>" in matched_tag:
-            continue
-        elif "<a" in matched_tag:
-            attributes_part_string = matched_tag[matched_tag.find('<a') + 2: matched_tag.find('>')]
-            replacement_mapping_dict['a-tag-replacement'] = attributes_part_string
-            matched_tag_replacement = matched_tag.replace(attributes_part_string, "")
-            out_txt = out_txt.replace(matched_tag, matched_tag_replacement)
-        else:
-            replacement = allowed_replacements[replacement_identifier_index]
-            replacement_mapping_dict[replacement] = matched_tag
-            replacement_identifier_index += 1
-            out_txt = out_txt.replace(matched_tag, '<{}>'.format(replacement))
-    return out_txt, replacement_mapping_dict
-
-
-# In[8]:
 
 
 def get_data_without_translation(language_name, json_data, allowed_replacements, en_data, all_keys, keys_with_path_map,
