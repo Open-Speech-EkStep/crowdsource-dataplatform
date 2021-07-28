@@ -55,3 +55,6 @@ SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select language,ROUND(to
 
 \o lastUpdatedAtQuery.json 
 SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  max(lastupdated) AT TIME ZONE 'Asia/Kolkata' from audit_load_log)t;
+
+\o participationStats.json
+SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select count(distinct(users)) as count, type from (SELECT contributed_by AS users, type FROM contributions_and_demo_stats UNION SELECT validated_by as users, type FROM contributions_and_demo_stats) as cds group by type)t;

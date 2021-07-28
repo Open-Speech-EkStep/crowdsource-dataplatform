@@ -1,17 +1,15 @@
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('./header');
 const { redirectToLocalisedPage, changeLocale } = require('./locale');
 const { setDropdownValues } = require('../../../build/js/common/header');
-const { setParticipationData } = require('../../../build/js/common/contributionStats.js');
+const { setParticipationDataFromJson } = require('../../../build/js/common/contributionStats.js');
 const { CONTRIBUTION_LANGUAGE, SPEAKER_DETAILS_KEY, DEFAULT_CON_LANGUAGE } = require('./constants');
 const { hasUserRegistered } = require('./common');
-const { performAPIRequest } = require('./utils')
 
 $(document).ready(function () {
-  performAPIRequest('/participation-stats')
-    .then(data => {
-      setParticipationData(data)
-    }).catch(console.log)
-    
+  $.getJSON("../aggregated-json/participationStats.json", (jsonData) => {
+    setParticipationDataFromJson(jsonData);
+  });
+
   localStorage.setItem('module', 'home');
 
   if (!localStorage.getItem("i18n")) {

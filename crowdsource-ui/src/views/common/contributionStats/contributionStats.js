@@ -47,6 +47,28 @@ const setParticipationData = (data) => {
   $contributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
 }
 
+const getCountOrZero = (obj) => {
+  return obj && obj.count ? obj.count : 0;
+}
+
+const setParticipationDataFromJson = (data) => {
+  const bData = data.find(d => d.type == 'text');
+  const sData = data.find(d => d.type == 'asr');
+  const lData = data.find(d => d.type == 'parallel');
+  const dData = data.find(d => d.type == 'ocr');
+  const $sunoIndiaParticipation = $('#languages-value');
+  const $boloIndiaParticipation = $('#speaker-value');
+  const $likhoIndiaParticipation = $('#contributed-value');
+  const $dekhoIndiaParticipation = $('#validated-value');
+  const $participationData = $('#participation-data');
+  const $contributionData = $participationData.find('.contribution-data');
+  $boloIndiaParticipation.text(getCountOrZero(bData));
+  $likhoIndiaParticipation.text(getCountOrZero(lData));
+  $sunoIndiaParticipation.text(getCountOrZero(sData));
+  $dekhoIndiaParticipation.text(getCountOrZero(dData));
+  $contributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
+}
+
 const setSpeakerData = function (data, language, moduleType) {
   const speakersData = getSpeakersData(data, language, moduleType);
   const $speakerDataLanguagesValue = $('#languages-value');
@@ -89,4 +111,4 @@ const setSpeakerData = function (data, language, moduleType) {
   }
 }
 
-module.exports = { setSpeakerData, getSpeakersData, setParticipationData }
+module.exports = { setSpeakerData, getSpeakersData, setParticipationData, setParticipationDataFromJson }
