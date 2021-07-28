@@ -44,8 +44,7 @@ body {
   background: #c4c4c4;
   height: 50px;
   width: 0.5px;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-right: 15px;
 }
 
 .report-btn-container button{
@@ -123,7 +122,9 @@ body {
     width: 95%;
     left: 1rem;
   }
-
+  .vertical-line {
+    margin-right: 8px !important;
+  }
 }
 
 .px-16 {

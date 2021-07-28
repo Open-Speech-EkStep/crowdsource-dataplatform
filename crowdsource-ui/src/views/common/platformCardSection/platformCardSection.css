@@ -472,6 +472,12 @@
 }
 
 @media screen and (max-width: 699px) {
+  .platform-intro-section-cover{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('/img/landingpage_bg_sm.svg') !important;
+    background-size: cover;
+  }
   #banner .h1{
     font-size: 32px;
   }

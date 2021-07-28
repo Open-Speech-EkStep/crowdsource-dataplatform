@@ -24,12 +24,12 @@
 
 @media (min-width: 769px) {
   .font-size-lg-40 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .beta-version {
     position: absolute;
-    bottom: 4px;
+    bottom: 0;
     right: 1px;
     font-size: 8px;
   }
@@ -98,7 +98,7 @@
   }
 
   #bhashadaan_logo .font-size-lg-40{
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
@@ -139,7 +139,7 @@
   }
 
   #bhasini_logo img{
-    width: 50px;
+    width: 100px;
     height: 36px;
   }
 }

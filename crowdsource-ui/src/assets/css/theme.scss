@@ -57,12 +57,12 @@ $primary-color-shade10: tint($primary-color, 100%);
   box-shadow: 0 -4px 12px 0 rgb(0, 0, 0, 0.12);
 }
 
-
-
-
-
 .text-yellow {
   color: $text-yellow;
+}
+
+.bg-light {
+ background-color: $text-light !important;
 }
 
 .bg-secondary {
@@ -333,14 +333,6 @@ audio {
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2));
 }
 
-.functional-page-bg {
-  background-color: $text-light;
-  background-image: url(/img/dashboard_bg.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-attachment: fixed;
-}
-
 .dashboard-bg {
   background-image: url(/img/dashboard_bg.svg);
   background-repeat: no-repeat;
@@ -375,6 +367,12 @@ audio {
   .bg-body-primary {
     background-image: url(/img/home_bg.svg);
   }
+  .functional-page-bg {
+    background-image: url(/img/dashboard_bg.svg);
+  }
+  .bg-badge {
+    background-image: url(/img/my-badge-bg.svg);
+  }
 }
 
 @media screen and (max-width: 766px) {
@@ -394,13 +392,18 @@ audio {
   .bg-body-primary {
     background-image: url(/img/home_bg_sm.svg);
   }
+  .functional-page-bg {
+    background-image: url(/img/functional_bg_sm.svg);
+  }
+  .bg-badge {
+    background-image: url(/img/my-badge-bg-sm.svg);
+  }
 }
-
 
 .bg-tri-color {
   background-repeat: no-repeat;
   background-color: $text-light;
-} 
+}
 
 .dashboard-bg {
   background-repeat: no-repeat;
@@ -412,4 +415,17 @@ audio {
   background-color: $text-light !important;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.bg-badge {
+  background-color: $text-light !important;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.functional-page-bg {
+  background-color: $text-light;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-attachment: fixed;
 }
