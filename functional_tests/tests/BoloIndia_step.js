@@ -213,7 +213,7 @@ step("When user skips all the rest of the <count> sentences , User should see Th
         console.log(i)
     }
     await taiko.waitFor(3000)
-    assert.ok(await text('Contribute for your language!').exists()) 
+    assert.ok(await text('Contribute to your language!').exists()) 
 });
 
 
