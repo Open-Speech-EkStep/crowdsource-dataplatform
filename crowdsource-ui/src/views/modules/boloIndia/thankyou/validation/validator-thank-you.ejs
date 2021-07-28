@@ -36,7 +36,7 @@
     </div>
     <div class="row justify-content-center progress-row mb-3" id="progress-row">
         <div class="col-10 col-sm-8 col-lg-8 col-md-12 p-0 progress-bar-section">
-    <%- include('../common/thankyouPageProgressBar.ejs', {module: 'Bolo',text:'Hour(s)',language:'<language>'}) %>
+    <%- include('../common/thankyouPageProgressBar.ejs', {text:'Hour(s)',progressBarStats: __(`<span id="totalAverage"></span> of <span id="metric-language"></span> Bolo India Target Achieved`)}) %>
         </div>
     </div>
 
@@ -44,7 +44,7 @@
         <div class="col-lg-8 border overflow-hidden contribution-info">
             <div class="bg-white m-0 contribution-info-inner">
                 <div class="col-lg-12 col-md-11 col-lg-11 thankyou-page ml-lg-auto">
-                    <%- include('../common/badgesMilestone.ejs',{module:'Bolo',text1:'Validated', text2:'sentence(s)'}) %>
+                    <%- include('../common/badgesMilestone.ejs',{module:'Bolo',badgeMilestoneMessage: __('Validated <span id="current_badge_count"></span> <span>sentence(s)</span> in <span id="conLanWhenGetBadge"></span>')}) %>
                     <div class="row m-0" id="cardWithoutBadge">
                         <div class="col-lg-4 col-md-5 col-sm-6 pl-0 pr-lg-3 pr-md-2 pr-0 pt-3 text-left participation-msg-section">
                             <%- include('../common/thankyouPageParticipationMsg.ejs',{language:'<language>'}) %>

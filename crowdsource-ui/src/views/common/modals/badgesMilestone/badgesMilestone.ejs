@@ -6,8 +6,7 @@
     </div>
     <div class="col-12 col-lg-8 col-md-7 msg-box mt-lg-4 pt-lg-2">
         <h4 class="mb-lg-5 mb-md-4 mb-3"><%- __(`You’ve earned your ${module} India <span id="current_badge_name"></span> <span>Bhasha Samarthak</span> Badge`)%></h4>
-        <p id="translated-text"><%- __(`${text1} <span id="current_badge_count"></span> <span>${text2}</span> in <span id="conLanWhenGetBadge"></span>`)%>.</p>
-        <p id="translated-likho-text" class="d-none"><%- __(`${text1} <span id="current_badge_count_likho"></span> <span id="likhoLanguages"></span> <span>${text2}</span>`)%>.</p>
+        <p id="translated-text"><%- badgeMilestoneMessage %></p>
     </div>
     <div class="col-12 download-row d-flex flex-column flex-lg-row mt-4 pt-3">
         <button class="btn download-badge-btn mr-lg-3 mr-md-3" data-badge="" download id="download_pdf"><span class="mr-2"><%= __('Download')%></span>

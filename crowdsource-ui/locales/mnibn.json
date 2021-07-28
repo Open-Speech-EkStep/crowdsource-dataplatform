@@ -607,5 +607,16 @@
 	"Your Language": "Your Language",
 	"Select Badge level": "Select Badge level",
 	"Participation": "Participation",
-	"<span id=\"participation-type\"></span> <span id=\"milestone\" class=\"text-yellow\"></span> <span id=\"text-type\" class=\"text-yellow\"></span> in <span id=\"contribution-language\"></span> and earn <span id=\"initiative-name\"></span> <span id=\"badge-color\"></span> Bhasha Samarthak badge": "<span id=\"participation-type\"></span> <span id=\"milestone\" class=\"text-yellow\"></span> <span id=\"text-type\" class=\"text-yellow\"></span> in <span id=\"contribution-language\"></span> and earn <span id=\"initiative-name\"></span> <span id=\"badge-color\"></span> Bhasha Samarthak badge"
+	"<span id=\"participation-type\"></span> <span id=\"milestone\" class=\"text-yellow\"></span> <span id=\"text-type\" class=\"text-yellow\"></span> in <span id=\"contribution-language\"></span> and earn <span id=\"initiative-name\"></span> <span id=\"badge-color\"></span> Bhasha Samarthak badge": "<span id=\"participation-type\"></span> <span id=\"milestone\" class=\"text-yellow\"></span> <span id=\"text-type\" class=\"text-yellow\"></span> in <span id=\"contribution-language\"></span> and earn <span id=\"initiative-name\"></span> <span id=\"badge-color\"></span> Bhasha Samarthak badge",
+	"Contribute": "Contribute",
+	"sentence(s)": "sentence(s)",
+	"recording(s)": "recording(s)",
+	"translation(s)": "translation(s)",
+	"image label(s)": "image label(s)",
+	"Contribute to your language!": "Contribute to your language!",
+	"Contributed <span id=\"current_badge_count\"></span> <span>recording(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Contributed <span id=\"current_badge_count\"></span> <span>recording(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
+	"<span id=\"totalAverage\"></span> of Bolo India Target Achieved": "<span id=\"totalAverage\"></span> of Bolo India Target Achieved",
+	"<span id=\"totalAverage\"></span> of Suno India Target Achieved": "<span id=\"totalAverage\"></span> of Suno India Target Achieved",
+	"<span id=\"totalAverage\"></span> of Likho India Target Achieved": "<span id=\"totalAverage\"></span> of Likho India Target Achieved",
+	"<span id=\"totalAverage\"></span> of Dekho India Target Achieved": "<span id=\"totalAverage\"></span> of Dekho India Target Achieved"
 }

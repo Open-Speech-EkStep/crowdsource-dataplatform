@@ -277,7 +277,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     const currentBadgeName = localeStrings[data.currentBadgeType.toLowerCase()];
     $("#current_badge_name").text(currentBadgeName.charAt(0).toUpperCase() + currentBadgeName.slice(1));
     $("#current_badge_name_1").text(localeStrings[data.currentBadgeType.toLowerCase()]);
-     module === 'likho' ? $("#current_badge_count_likho").text(data.contributionCount) : $("#current_badge_count").text(data.contributionCount);
+    $("#current_badge_count").text(data.contributionCount);
     $("#next_badge_count").text(data.nextMilestone);
     $("#next_badge_name_1").text(localeStrings[data.nextBadgeType.toLowerCase()]);
     $("#next_badge_name").text(localeStrings[data.nextBadgeType.toLowerCase()]);
