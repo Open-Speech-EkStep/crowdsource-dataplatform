@@ -404,5 +404,6 @@
 	"<span id=\"totalAverage\"></span> of Likho India Target Achieved": "<span id=\"totalAverage\"></span> of Likho India Target Achieved",
 	"<span id=\"totalAverage\"></span> of Dekho India Target Achieved": "<span id=\"totalAverage\"></span> of Dekho India Target Achieved",
 	"Speakers": "Speakers",
-	"Translations": "Translations"
+	"Translations": "Translations",
+	"Transcribed <span id=\"current_badge_count\"></span> <span>image label(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Transcribed <span id=\"current_badge_count\"></span> <span>image label(s)</span> in <span id=\"conLanWhenGetBadge\"></span>"
 }
