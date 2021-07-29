@@ -108,7 +108,6 @@ and coalesce(mds.is_active, true) = true
 and (conf.value=1 or is_profane=false)
 and (conf2.value=0 or for_demo=true)
 group by dataset_row.dataset_row_id, dataset_row.media->>'data', mds.params 
-order by dataset_row.dataset_row_id
 limit 5`;
 
 const getOrderedUniqueMediaForParallel = `with existingData as 
@@ -133,7 +132,7 @@ and coalesce(mds.is_active, true) = true
   and (cont.action is null or (coalesce(cont.action,'')='skipped' and cont.contributed_by!=con.contributor_id)))
 and (conf.value=1 or is_profane=false)
 and (conf2.value=0 or for_demo=true)
- group by dr."dataset_row_id", dr.media->>'data', mds.params order by dr."dataset_row_id" limit 5`;
+ group by dr."dataset_row_id", dr.media->>'data', mds.params limit 5`;
 
 const getContributionListQuery = `
 select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id, coalesce(ds.media ->> 'collectionSource', mds.params ->> 'collectionSource') as source_info
