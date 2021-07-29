@@ -523,3 +523,14 @@ step("User clicks back button", async function () {
         await click(button({ id: "back-btn" }));
     }
 });
+
+step("Validate Bolo India content", async function() {
+    assert.ok(await text('Enrich your language by donating your voice').exists());
+    assert.ok(await text('Speak').exists());
+    assert.ok(await text('Validate').exists());
+    assert.ok(await text('Contribution Tracker').isVisible());
+    assert.ok(await text('Overall Summary').isVisible());
+    assert.ok(await text('Contributions made to Bolo India').isVisible());
+    assert.ok(await text('Your language and top 3 contributed languages').isVisible());
+    assert.ok(await text('Total recordings').isVisible());
+});

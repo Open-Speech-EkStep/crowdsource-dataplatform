@@ -77,5 +77,8 @@ Tags: component
 * Navigate to "Privacy Policy" button and click "Privacy Policy" button
 * Validate Privacy Policy content
 
+## Validate Home page content
+* Validate Bolo India content
+
 ___
 * User clicks back button

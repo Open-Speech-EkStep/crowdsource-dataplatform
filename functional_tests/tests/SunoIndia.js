@@ -24,6 +24,10 @@ step("Validate Suno India content", async function () {
     assert.ok(await text('Enrich your language by transcribing audio into text').exists());
     assert.ok(await text('Validate').exists());
     assert.ok(await text('Transcribe').exists());
+    assert.ok(await text('Contribution Tracker').isVisible());
+    assert.ok(await text('Overall Summary').isVisible());
+    assert.ok(await text('Contributions made to Suno India').isVisible());
+    assert.ok(await text('Your language and top 3 contributed languages').isVisible());
 });
 
 step("Username field should be present", async function () {
