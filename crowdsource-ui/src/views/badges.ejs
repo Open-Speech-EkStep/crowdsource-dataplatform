@@ -19,25 +19,25 @@
 <body class="bg-secondary">
     <%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html",
         suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
-        <div id="content-wrapper" class="content-wrapper container-fluid padding-top-115 bg-tri-color pb-2 px-lg-3 px-md-3 px-4 px-md-5">
-            <div class="row">
+        <div id="content-wrapper" class="content-wrapper container-fluid padding-top-107 bg-tri-color pb-2 px-lg-3 px-md-3 px-0">
+            <div class="row px-0 m-0">
                 <%- include('common/buttons/back-btn/back-btn.ejs',{url:"#"}) %>
             </div>
             <div id="badge-detail-container" class="container-fluid p-0 badge-detail-container">
-                <div class="row m-0 pb-4">
+                <div class="row m-0 pb-4 p-l-r-20 px-lg-0 px-md-0">
                     <div class="col-12 p-0">
                         <h2 class="mb-0 badges-detail-heading">
                             <%= __('How can you win Bhasha Samarthak Badges') %>
                         </h2>
                     </div>
                 </div>
-                <div class="row mx-0 mt-5">
+                <div class="row mx-0 mt-lg-5 mt-md-5 mt-2 p-l-r-20 px-lg-0 px-md-0">
                     <div class="col-sm p-0">
                         <div class="row m-0">
-                            <label class="col-4 col-lg-4 col-md-4 px-0 your-language-label mt-2 mt-lg-0 mt-md-0">
+                            <label class="col-4 col-lg-4 col-md-4 px-0 your-language-label mt-2 mt-lg-0 mt-md-0 mb-lg-0 mb-md-0">
                                 <%= __('Your Language') %>
                             </label>
-                            <select class="col-lg-5 col-md-8 col-8 btn dropdown-toggle h6 w-90 rounded badge-language-dropdown" id="languages">
+                            <select class="col-lg-5 col-md-8 col-8 btn dropdown-toggle h6 w-90 rounded badge-language-dropdown mb-lg-0 mb-md-0" id="languages">
                                 <% LANGUAGES.forEach(function(lang) { %>
                                     <option value="<%= lang.value %>">
                                         <%= lang.text %>
@@ -49,29 +49,28 @@
                     <div class="col-sm p-0">
                     </div>
                 </div>
-                <div class="row mx-0 badge-mt-34 pb-2">
+                <div class="row mx-0 badge-mt-34 pb-2 pb-lg-1 pb-md-1">
                     <div class="col-12 p-0">
                         <div class="row m-0">
-                            <ul class="nav nav-tabs w-100 border-0 bg-white" id="initiative" role="tablist">
-                                <li class="nav-item col-3 p-0 text-center">
-                                    <a style="height:64px;padding-top:15px" class="nav-link border-0 active light-bg font-family-Rowdies" id="suno" data-toggle="tab" href="#suno" role="tab" aria-controls="suno" aria-selected="true">
+                            <ul class="nav nav-tabs w-100 bg-white" id="initiative" role="tablist">
+                                <li class="nav-item col-lg-3 col-md-3 p-0 text-center" id="sunoTab">
+                                    <a class="nav-link border-0 active light-bg font-family-Rowdies active ml-4 ml-lg-0 ml-md-0 pl-4" id="suno" data-toggle="tab" href="#suno" role="tab" aria-controls="suno" aria-selected="true">
                                             <%= __('Suno India')%>
                                     </a>
                                 </li>
-                                <li class="nav-item col-3 p-0 text-center">
-                                    <a style="height:64px;padding-top:15px" class="nav-link border-0 light-bg font-family-Rowdies" id="bolo" data-toggle="tab" href="#bolo" role="tab" aria-controls="bolo" aria-selected="true">
+                                <li class="nav-item col-lg-3 col-md-3 p-0 text-center" id="boloTab">
+                                    <a class="nav-link border-0 light-bg font-family-Rowdies" id="bolo" data-toggle="tab" href="#bolo" role="tab" aria-controls="bolo" aria-selected="true">
                                             <%= __('Bolo India')%>
                                     </a>
                                 </li>
-                                <li class="nav-item col-3 p-0 text-center">
-                                    <a style="height:64px;padding-top:15px" class="nav-link border-0 light-bg font-family-Rowdies" id="likho" data-toggle="tab" href="#likho" role="tab" aria-controls="likho" aria-selected="true">
+                                <li class="nav-item col-lg-3 col-md-3 p-0 text-center" id="likhoTab">
+                                    <a class="nav-link border-0 light-bg font-family-Rowdies" id="likho" data-toggle="tab" href="#likho" role="tab" aria-controls="likho" aria-selected="true">
                                             <%= __('Likho India')%>
                                     </a>
                                 </li>
-                                <li class="nav-item col-3 p-0 text-center">
-                                    <a style="height:64px;padding-top:15px" class="nav-link border-0 light-bg font-family-Rowdies" id="dekho" data-toggle="tab" href="#dekho" role="tab" aria-controls="dekho" aria-selected="true">
+                                <li class="nav-item col-lg-3 col-md-3 p-0 text-center" id="dekhoTab">
+                                    <a class="nav-link border-0 light-bg font-family-Rowdies mr-4 ml-lg-0 ml-md-0 pr-4" id="dekho" data-toggle="tab" href="#dekho" role="tab" aria-controls="dekho" aria-selected="true">
                                             <%= __('Dekho India')%>
-
                                     </a>
                                 </li>
                             </ul>
@@ -79,11 +78,11 @@
                     </div>
                 </div>
 
-                <div class="row mx-0 mt-5">
-                    <label class="col-lg-3 col-md-3 col-12 m-auto font-family-Rowdies" style="font-weight:300!important">
-                      <h5> <%= __('Select Badge level')%></h5>
+                <div class="row mx-0 mt-lg-5 mt-md-5 mt-4 pt-3 pt-lg-0 pt-md-0 px-lg-0 px-md-0 p-l-r-20 px-lg-0 px-md-0">
+                    <label class="col-lg-3 col-md-3 col-12 m-auto font-family-Rowdies pb-2 px-0" style="font-weight:300!important">
+                      <h5 class="mb-3 badge-level-heading"> <%= __('Select Badge level')%></h5>
                     </label>
-                    <div class="col-md-7 col-12 col-md-7">
+                    <div class="col-md-7 col-12 col-md-7 px-0">
                         <div class="row m-0 badge-level-section">
 
                         </div>
@@ -91,35 +90,37 @@
                     <div class="col-2"></div>
                 </div>
 
-                <div class="row mx-0 mt-5">
-                    <label class="col-lg-3 col-12 col-md-3" style="font-weight:300!important">
-                       <h5> <%= __('Participation')%> </h5>
+                <div class="row mx-0 mt-5 pt-2 pt-lg-1 pt-md-1 p-l-r-20 px-lg-0 px-md-0">
+                    <label class="col-lg-3 col-12 col-md-3 px-1 px-lg-0 px-md-0 m-0" style="font-weight:300!important">
+                       <h5 class="badge-level-heading"> <%= __('Participation')%> </h5>
                     </label>
-                    <ul class="nav nav-tabs w-100 border-0 col-lg-8 col-md-8 col-12 pl-5" id="participation-radios" role="tablist">
+                    <ul class="nav nav-tabs w-100 border-0 col-lg-8 col-md-8 col-12 p-l-r-20" id="participation-radios" role="tablist">
                         <li class="nav-item">
                             <input type="radio" class="form-check-input mt-2" value="contribute" checked="checked" id="contribute-radio" name="participation">
-                           <h4 class="font-family-Rowdies" style="font-weight:300!important;padding-left:14px"> <%= __('Contributions')%> </h4>
+                           <h4 class="font-family-Rowdies badge-participation-radio"> <%= __('Contributions')%> </h4>
                         </li>
                         <li class="nav-item pl-4 ml-5">
                             <input type="radio" id="validate-radio" value="validate" class="form-check-input mt-2" name="participation">
-                            <h4 class="font-family-Rowdies" style="font-weight:300!important;padding-left:14px"><%= __('Validations')%> </h4>
+                            <h4 class="font-family-Rowdies badge-participation-radio"><%= __('Validations')%> </h4>
                         </li>
                     </ul>
                 </div>
-                <div class="row mx-0 my-5 selected-badge-card">
+                <div class="selected-badge-card-border">
+                <div class="row mx-0 selected-badge-card">
                         <div class="col-lg-7 col-12 col-md-7 pt-4 text-order">
                             <h1 class="font-family-Rowdies">
                                 <%- __(`<span id="participation-type"></span> <span id="milestone" class="text-yellow"></span> <span id="text-type" class="text-yellow"></span> in <span id="contribution-language"></span> and earn <span id="initiative-name"></span> <span id="badge-color"></span> Bhasha Samarthak badge`)%>
                             </h1>
                         </div>
                         <div class="col-1"></div>
-                        <div class="col-lg-4 col-12 col-md-4 pt-4 pt-lg-0 badge-image-detail pt-md-0">
+                        <div class="col-lg-4 col-12 col-md-4 pt-0 pt-lg-0 badge-image-detail pt-md-0">
                             <img src="" class="badge-img" alt="badge" height="320" width="250">
                         </div>
+                    </div>
                 </div>
 
-                <div class="row mx-0 my-5">
-                    <ul style="padding-inline-start:10px;list-style-type:none">
+                <div class="row mx-0 my-4 py-4 p-l-r-20 px-lg-0 px-md-0">
+                    <ul class="badge-details-notes px-0">
                         <li>
                             <%= __('Please keep contributing actively to stand a chance to get recognised.')%>
                         </li>

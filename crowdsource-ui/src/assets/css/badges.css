@@ -29,6 +29,24 @@ html {
   background-size: contain !important;
 }
 
+#initiative .light-bg.active{
+  border-bottom: 4px solid #0f2749 !important;
+}
+
+.your-language-label{
+  font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.your-language-label select{
+  background: #ffffff;
+  border: 1px solid #222222;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
 @media (min-width: 1200px) {
   html {
     font-size: 16px;
@@ -51,33 +69,208 @@ html {
   .badge-detail-container .nav-link{
     font-size: 24px;
   }
-}
 
-@media (max-width: 767px) {
-  .font-weight-light-lg {
-    font-weight: 400 !important;
-    line-height: 32px;
-  }
 }
 
 .table-img{
   filter: drop-shadow(0 4px 12px rgba(0, 123, 255, 0.2));;
 }
 
+.padding-top-107{
+  padding-top: 107px !important;
+}
+
+#initiative{
+  border-bottom: 1px solid #0f2749;
+}
+#initiative a{
+  opacity: 0.8;
+  height: 64px;
+  padding-top: 15px;
+}
+
+#initiative a.active{
+  opacity: 1;
+}
+
+.badge-detail-widget {
+  box-sizing: border-box;
+  border: 1px solid #cbcbcb;
+  background: #eff5ff;
+  border-radius: 8px;
+  padding-bottom: 4px;
+}
+
+.badge-detail-widget.bg-white{
+  box-shadow: 0 4px 12px rgba(15, 39, 73, 0.25);
+  border: 1px solid #142747;
+  border-radius: 8px;
+}
+
+.selected-badge-card-border{
+  box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(to right,#ffa345,#76bdff,#439908);
+  margin-top: 39px;
+}
+
+.badge-details-notes{
+  list-style-type: none;
+  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  color: #000000;
+}
+
+.badge-level-heading{
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.badge-detail-widget .badge-level-heading{
+  font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.badge-detail-widget .my-badge-image {
+  width: 56px;
+  height: 72px;
+  margin-top: 12px;
+}
+
+.badge-participation-radio{
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400 !important;
+  padding-left: 14px;
+  font-size: 24px;
+  line-height: 30px;
+  color: #0f2749;
+}
+
+#initiative .nav-tabs > li > a.active {
+  border-bottom: 4px solid #0f2749;
+}
+
 @media (max-width: 767px) {
+  .p-l-r-20{
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .p-r-8{
+    margin-right: 8px;
+  }
+
+  #initiative a{
+    height: 52px;
+    padding: 16px 32px 12px 32px;
+  }
+
+  .badge-detail-container .nav-tabs {
+    flex-wrap: nowrap;
+    padding: 0;
+    display: inline-flex;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  #initiative .nav-tabs > li > a.active {
+    border-bottom: 4px solid #0f2749;
+  }
+
+  .badge-detail-container .nav-tabs > li > a {
+    width: max-content;
+    position: relative;
+    display: block;
+    line-height: 17px;
+  }
+
+  .badge-details-notes {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .selected-badge-card-border {
+    margin-top: 22px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .selected-badge-card{
+    padding: 22px 20px;
+  }
+
+  .badge-detail-widget {
+    height: 89px;
+    padding-bottom: 0;
+  }
+
+  .badge-detail-widget .my-badge-image {
+    height: 52px;
+    width: 40px;
+    margin-top: 12px;
+  }
+
+  .badge-level-heading {
+    font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 300 !important;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    margin-bottom: 16px;
+  }
+
+  .badge-detail-widget .badge-level-heading {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .badge-participation-radio {
+    font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400 !important;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    padding-left: 14px;
+    margin-top: 3px;
+  }
+
+  .font-weight-light-lg {
+    font-weight: 400 !important;
+    line-height: 32px;
+  }
+
+  .padding-top-107 {
+    padding-top: 78px !important;
+  }
+
+
+  .badge-detail-container .badge-mt-34 {
+    margin-top: 25px;
+  }
+
   .font-weight-normal-sm {
     font-weight: 400 !important;
   }
-  .mt-xs-5{
+
+  .mt-xs-5 {
     margin-top: 5rem;
   }
+
   .popover {
     width: 180px;
   }
 
-  .badges-detail-heading{
+  .badges-detail-heading {
     font-size: 18px !important;
-    line-height: 24px !important;
+    line-height: 22px !important;
   }
 
   .text-order {
@@ -88,6 +281,11 @@ html {
   .badge-detail-container .nav-link{
     font-size: 14px;
     padding: 2px;
+  }
+
+  .your-language-label {
+    font-size: 14px;
+    line-height: 17px;
   }
 }
 
@@ -111,8 +309,8 @@ html {
 .badge-language-dropdown{
   height:40px;
   padding:0 10px;
-  border-color:#959595;
-  color:#959595;
+  border-color:#222222;
+  color:#000000;
   background-color: #ffffff;
 }
 
@@ -144,6 +342,9 @@ html {
 
   .selected-badge-card h1 {
     font-size: 20px;
+    line-height: 25px;
+    padding-top: 24px;
+    padding-bottom: 15px;
   }
 }
 
@@ -172,7 +373,7 @@ html {
     box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
     border-radius: 20px;
     height: 400px;
-    padding: 40px 80px;
+    padding: 40px 82px;
   }
 }
 
@@ -230,6 +431,11 @@ html {
 .badge-mt-34 {
   margin-top: 38px;
 }
+
+.badge-detail-container .badge-mt-34 {
+  margin-top: 37px;
+}
+
 
 .badge-mt-36 {
   margin-top: 36px;
