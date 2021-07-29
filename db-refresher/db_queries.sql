@@ -32,7 +32,7 @@ SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  year, quarter, R
 
 \o cumulativeCount.json 
 SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  count(distinct(language)) as total_languages,
-count(distinct(contributed_by)) as total_speakers,ROUND((sum(contribution_audio_duration) FILTER (WHERE audio_row_num_per_contribution_id = 1 ))::numeric/3600,3)  as total_contributions,ROUND(sum(contributions_and_demo_stats.validation_audio_duration)::numeric/3600, 3)  as total_validations, count(distinct contribution_id) total_contribution_count, sum(contributions_and_demo_stats.is_validated) total_validation_count, contributions_and_demo_stats.type from contributions_and_demo_stats group by contributions_and_demo_stats.type)t;
+count(distinct(contributed_by)) as total_speakers,ROUND((sum(contribution_audio_duration) FILTER (WHERE audio_row_num_per_contribution_id = 1 and is_system = false))::numeric/3600,3)  as total_contributions,ROUND(sum(contributions_and_demo_stats.validation_audio_duration)::numeric/3600, 3)  as total_validations, count(distinct contribution_id) FILTER (WHERE contributions_and_demo_stats.is_system = false) total_contribution_count, sum(contributions_and_demo_stats.is_validated) total_validation_count, contributions_and_demo_stats.type from contributions_and_demo_stats group by contributions_and_demo_stats.type)t;
 
 \o cumulativeDataByState.json 
 SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select state, total_speakers, total_contributions, total_validations, total_contribution_count, total_validation_count, type from state_group_contributions)t;
