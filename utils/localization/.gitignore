@@ -2,3 +2,5 @@
 **/reports
 **/out
 **/cleaned_json_locales
+**/locale_generation_out
+**/delta_generation_out
