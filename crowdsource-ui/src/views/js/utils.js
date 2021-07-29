@@ -1,6 +1,7 @@
-const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require("./constants");
+const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES, CURRENT_MODULE, MODULE } = require("./constants");
 const fetch = require('./fetch')
 const platform = require('./platform')
+const { context_root } = require('./env-api');
 
 function getDeviceInfo() {
   const os = platform.os;
@@ -257,6 +258,25 @@ const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType)
   return `/img/${language.id}_${initiativeType}_${badgeType}_${source}.svg`;
 }
 
+function reloadOnWebsiteLocaleChange() {
+  window.addEventListener("focus", function() {
+      const locale = localStorage.getItem("i18n") ;
+      const allLocales = ALL_LANGUAGES.map(language => language.id);
+      const splitValues = location.href.split('/');
+      const currentLocale = splitValues.filter(value => allLocales.includes(value))[0] || '';
+      console.log('locale: ', locale, currentLocale);
+      if (currentLocale != locale) {
+          let currentPage = "home.html";
+          const module = localStorage.getItem(CURRENT_MODULE);
+          if(module == 'home'){
+              location.href = `${context_root}/${locale}/${currentPage}`;
+          } else {
+              location.href = `${context_root}/${locale}/${MODULE[module].url}/${currentPage}`;
+          }
+      }
+  }, false);
+}
+
 module.exports = { setPageContentHeight,
   toggleFooterPosition,
   fetchLocationInfo,
@@ -278,5 +298,6 @@ module.exports = { setPageContentHeight,
   getDeviceInfo,
   getBrowserInfo,
   formatTimeForLegends,
-  formatTransAndImages
+  formatTransAndImages,
+  reloadOnWebsiteLocaleChange
 }

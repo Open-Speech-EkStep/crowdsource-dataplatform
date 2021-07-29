@@ -1,6 +1,6 @@
 const { onActiveNavbar ,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
 const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,hasUserRegistered,updateLocaleLanguagesDropdown, updateGoalProgressBar} = require('../common/common');
-const { getLocaleString} = require('../common/utils');
+const { getLocaleString, reloadOnWebsiteLocaleChange } = require('../common/utils');
 const {
   setUserModalOnShown,
   setUserNameOnInputFocus,
@@ -93,6 +93,7 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
+  reloadOnWebsiteLocaleChange();
   initializeFeedbackModal();
   getAvailableLanguages("ocr");
   getLocaleString().then(()=>{

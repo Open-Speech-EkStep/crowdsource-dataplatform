@@ -10,7 +10,8 @@ const {
   reportSentenceOrRecording,
   getBrowserInfo,
   getDeviceInfo,
-  getLocaleString
+  getLocaleString,
+  reloadOnWebsiteLocaleChange
 } = require('../common/utils');
 const { onChangeUser,onOpenUserDropDown, showUserProfile } = require('../common/header');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE,LOCALE_STRINGS} = require('../common/constants');
@@ -666,6 +667,7 @@ const executeOnLoad = function () {
 }
 
 $(document).ready(() => {
+  reloadOnWebsiteLocaleChange();
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {

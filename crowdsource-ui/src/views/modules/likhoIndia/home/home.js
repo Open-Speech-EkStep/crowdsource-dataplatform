@@ -2,6 +2,7 @@ const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = re
 const { redirectToLocalisedPage, getAvailableLanguages, showFucntionalCards, updateGoalProgressBar, hasUserRegistered, updateLikhoLocaleLanguagesDropdown } = require('../common/common');
 const {
   getLocaleString,
+  reloadOnWebsiteLocaleChange,
 } = require('../common/utils');
 const {
   setUserModalOnShown,
@@ -152,6 +153,7 @@ function initializeBlock() {
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
+  reloadOnWebsiteLocaleChange();
   initializeFeedbackModal();
   getLocaleString().then(() => {
     initializeBlock();

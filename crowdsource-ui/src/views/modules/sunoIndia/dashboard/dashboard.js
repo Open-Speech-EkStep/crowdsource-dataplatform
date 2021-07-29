@@ -2,7 +2,7 @@ const { updateLineGraph } = require('../common/lineGraph');
 const { onChangeUser,showUserProfile,onOpenUserDropDown } = require('../common/header');
 const { generateIndiaMap } = require('../common/map');
 const { setUserNameOnInputFocus, setUserModalOnShown,setStartRecordingBtnOnClick,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
-const { updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
+const { updateLocaleLanguagesDropdown, getLocaleString, reloadOnWebsiteLocaleChange } = require('../common/utils');
 const { CURRENT_MODULE,CONTRIBUTION_LANGUAGE, MODULE,SPEAKER_DETAILS_KEY } = require('../common/constants');
 const { hasUserRegistered } = require('../common/common');
 const fetch = require('../common/fetch');
@@ -163,6 +163,7 @@ const initializeBlock = function () {
 };
 
 $(document).ready(function () {
+    reloadOnWebsiteLocaleChange();
     getLocaleString().then(()=>{
         initializeBlock();
     }).catch(() => {

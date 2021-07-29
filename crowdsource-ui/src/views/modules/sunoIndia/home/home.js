@@ -1,7 +1,7 @@
 const { onActiveNavbar,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
 
 const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,updateLocaleLanguagesDropdown, updateGoalProgressBar,hasUserRegistered, showByHoursChart} = require('../common/common');
-const {getLocaleString} = require('../common/utils');
+const { getLocaleString, reloadOnWebsiteLocaleChange } = require('../common/utils');
 const {
   setUserModalOnShown,
   setUserNameOnInputFocus,
@@ -97,6 +97,7 @@ updateGoalProgressBar(`/progress/asr`);
 
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
+  reloadOnWebsiteLocaleChange();
   initializeFeedbackModal();
   getAvailableLanguages("asr");
   getLocaleString().then(()=>{

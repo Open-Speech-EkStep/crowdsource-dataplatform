@@ -8,7 +8,8 @@ const {
   hideElement,
   fetchLocationInfo,
   reportSentenceOrRecording,
-  getDeviceInfo, getBrowserInfo
+  getDeviceInfo, getBrowserInfo,
+  reloadOnWebsiteLocaleChange,
 } = require('../common/utils');
 const {LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, CONTRIBUTION_LANGUAGE } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
@@ -490,6 +491,7 @@ $(document).ready(() => {
     showOrHideExtensionCloseBtn();
   }
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
+  reloadOnWebsiteLocaleChange();
   const translationLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
   initializeFeedbackModal();
   showKeyboard(translationLanguage.toLowerCase(), enableCancelButton, disableCancelButton);

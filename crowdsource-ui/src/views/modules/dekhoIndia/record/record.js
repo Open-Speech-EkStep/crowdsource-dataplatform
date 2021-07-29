@@ -10,7 +10,8 @@ const {
   getLocaleString,
   reportSentenceOrRecording,
   getBrowserInfo,
-  getDeviceInfo
+  getDeviceInfo,
+  reloadOnWebsiteLocaleChange,
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
@@ -528,6 +529,7 @@ $(document).ready(() => {
     showOrHideExtensionCloseBtn();
   }
   localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
+  reloadOnWebsiteLocaleChange();
   initializeFeedbackModal();
   hideElement($('#keyboardBox'));
   getLocaleString().then(() => {

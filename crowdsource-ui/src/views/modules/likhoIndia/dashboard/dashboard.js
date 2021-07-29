@@ -9,7 +9,8 @@ const {
 } = require('../common/speakerDetails');
 const {
     // toggleFooterPosition,
-    getLocaleString
+    getLocaleString,
+    reloadOnWebsiteLocaleChange,
 } = require('../common/utils');
 const { hasUserRegistered , updateLikhoLocaleLanguagesDropdown} = require('../common/common');
 const platform = require('../common/platform')
@@ -223,6 +224,7 @@ const executeOnLoad = function () {
 };
 
 $(document).ready(() => {
+    reloadOnWebsiteLocaleChange();
     getLocaleString().then(() => {
         executeOnLoad();
     }).catch(() => {

@@ -1,7 +1,7 @@
 const { redirectToLocalisedPage } = require('./locale');
 const { onActiveNavbar, onChangeUser, showUserProfile,onOpenUserDropDown } = require('./header');
 const {  getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
-const {  updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest, calculateTime, formatTime } = require('./utils')
+const {  updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest, calculateTime, formatTime, reloadOnWebsiteLocaleChange } = require('./utils')
 const {
     setUserModalOnShown,
     setUserNameOnInputFocus,
@@ -206,6 +206,7 @@ $(document).ready(function () {
     localStorage.setItem('module', 'bolo');
     clearLocalStorage();
     onActiveNavbar('bolo');
+    reloadOnWebsiteLocaleChange();
     getLocaleString().then(() => {
         initializeBlock();
     }).catch(err => {

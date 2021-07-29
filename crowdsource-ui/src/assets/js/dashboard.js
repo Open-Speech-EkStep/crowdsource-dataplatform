@@ -5,7 +5,7 @@ const {
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick } = require('./speakerDetails');
-const {  updateLocaleLanguagesDropdown, calculateTime, getLocaleString, formatTime } = require('./utils');
+const {  updateLocaleLanguagesDropdown, calculateTime, getLocaleString, formatTime, reloadOnWebsiteLocaleChange } = require('./utils');
 const { DEFAULT_CON_LANGUAGE,MODULE,CONTRIBUTION_LANGUAGE ,SPEAKER_DETAILS_KEY} = require('../../../build/js/common/constants');
 const { hasUserRegistered } = require('./common');
 const fetch = require('./fetch');
@@ -208,6 +208,7 @@ const initializeBlock = function () {
 };
 
 $(document).ready(function () {
+    reloadOnWebsiteLocaleChange();
     getLocaleString().then(()=>{
         initializeBlock();
     }).catch(() => {

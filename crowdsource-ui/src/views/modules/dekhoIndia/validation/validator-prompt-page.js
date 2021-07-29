@@ -2,7 +2,7 @@ const fetch = require('../common/fetch')
 const {
   setPageContentHeight,
   // toggleFooterPosition,
-  setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording,getDeviceInfo, getBrowserInfo,getLocaleString } = require('../common/utils');
+  setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording,getDeviceInfo, getBrowserInfo,getLocaleString, reloadOnWebsiteLocaleChange } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice } = require('../common/common');
@@ -499,6 +499,7 @@ const executeOnLoad = function () {
 };
 
 $(document).ready(() => {
+  reloadOnWebsiteLocaleChange();
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {

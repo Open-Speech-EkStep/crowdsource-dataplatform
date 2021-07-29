@@ -9,7 +9,8 @@ const {
   fetchLocationInfo,
   reportSentenceOrRecording,
   getDeviceInfo,
-  getBrowserInfo
+  getBrowserInfo,
+  reloadOnWebsiteLocaleChange,
 } = require('../common/utils');
 const { onChangeUser,onOpenUserDropDown, showUserProfile } = require('../common/header');
 const { cdn_url } = require('../common/env-api');
@@ -619,6 +620,7 @@ $(document).ready(() => {
     showOrHideExtensionCloseBtn();
   }
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
+  reloadOnWebsiteLocaleChange();
   hideElement($('#keyboardBox'));
   initializeFeedbackModal();
   getLocaleString().then(() => {

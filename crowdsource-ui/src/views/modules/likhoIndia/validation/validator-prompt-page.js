@@ -9,7 +9,8 @@ const {
   reportSentenceOrRecording,
   getDeviceInfo,
   getBrowserInfo,
-  getLocaleString
+  getLocaleString,
+  reloadOnWebsiteLocaleChange,
 } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
@@ -498,6 +499,7 @@ const executeOnLoad = function () {
 };
 
 $(document).ready(() => {
+  reloadOnWebsiteLocaleChange();
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {
