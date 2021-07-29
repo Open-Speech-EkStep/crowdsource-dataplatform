@@ -173,10 +173,6 @@
 	"Contribution (total sentences)": "Contribution (total sentences)",
 	"Contribute": "Contribute",
 	"Validate": "Validate",
-	"sentence(s)": "sentence(s)",
-	"recording(s)": "recording(s)",
-	"translation(s)": "translation(s)",
-	"image label(s)": "image label(s)",
 	"Dashboard": "Dashboard",
 	"Select a language": "Select a language",
 	"Data Last Updated": "Data Last Updated",
@@ -362,5 +358,9 @@
 	"Validate <b id=\"sentence-away-count\"></b> <b>image label(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.": "Validate <b id=\"sentence-away-count\"></b> <b>image label(s)</b> to earn your <span id=\"sentence_away_badge\"></span> Badge.",
 	"Is the text from the image captured correctly?": "Is the text from the image captured correctly?",
 	"Captured Text": "Captured Text",
-	"Thank you for your enthusiasm to validate the image labels.": "Thank you for your enthusiasm to validate the image labels."
+	"Thank you for your enthusiasm to validate the image labels.": "Thank you for your enthusiasm to validate the image labels.",
+	"sentences": "sentences",
+	"recordings": "recordings",
+	"translations": "translations",
+	"image labels": "image labels"
 }
