@@ -626,5 +626,7 @@
 	"<span id=\"totalAverage\"></span> of Bolo India Target Achieved": "<span id=\"totalAverage\"></span> of Bolo India Target Achieved",
 	"<span id=\"totalAverage\"></span> of Suno India Target Achieved": "<span id=\"totalAverage\"></span> of Suno India Target Achieved",
 	"<span id=\"totalAverage\"></span> of Likho India Target Achieved": "<span id=\"totalAverage\"></span> of Likho India Target Achieved",
-	"<span id=\"totalAverage\"></span> of Dekho India Target Achieved": "<span id=\"totalAverage\"></span> of Dekho India Target Achieved"
+	"<span id=\"totalAverage\"></span> of Dekho India Target Achieved": "<span id=\"totalAverage\"></span> of Dekho India Target Achieved",
+	"Contributed <span id=\"current_badge_count\"></span> <span>recording(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Contributed <span id=\"current_badge_count\"></span> <span>recording(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
+	"Transcribed <span id=\"current_badge_count\"></span> <span>image label(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Transcribed <span id=\"current_badge_count\"></span> <span>image label(s)</span> in <span id=\"conLanWhenGetBadge\"></span>"
 }

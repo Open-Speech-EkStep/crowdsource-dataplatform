@@ -227,7 +227,7 @@
   },
   {
     "json_key": "Translated <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
-    "excel_key": "Translated <contribution-count> <s>sentence(s)</s> in <language> ",
+    "excel_key": "Translated <contribution-count> <s>sentence(s)</s> in <language>",
     "replacements": {
       "<contribution-count>": "<span id=\"current_badge_count\"></span>",
       "<language>": "<span id=\"conLanWhenGetBadge\"></span>"
