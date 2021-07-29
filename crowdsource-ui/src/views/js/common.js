@@ -463,15 +463,8 @@ const setLocalisationAndProfile = (path, module) => {
 }
 
 const updateGoalProgressBar = function (url){
-  const loader = `<div class="spinner-border text-primary text-right" role="status">
-            <span class="sr-only">Loading...</span>
-    </div>`
-  const content = $("#contribution-made").html()
-  $("#contribution-made").html(loader);
-  $("#totalAverage").html(loader);
-  $("#contribution-made").removeClass('d-none');
+
   return performAPIRequest(url).then(data=>{
-    $("#contribution-made").html(content);
     const maxValue = Number(data.goal);
     const currentValue =  Number(data['current-progress']);
     replaceSubStr($(".progress-metric"), "<contribution-done>", currentValue);
@@ -481,6 +474,8 @@ const updateGoalProgressBar = function (url){
     $("#totalAverage").html(actualValue + '%');
     const $progressBar = $("#progress_bar");
     $progressBar.width(actualValue + '%');
+    $(".progress-bar-loader").addClass('d-none')
+    $("#progress-bar-content").removeClass('d-none');
   }).catch(e=>console.log(e))
 }
 
