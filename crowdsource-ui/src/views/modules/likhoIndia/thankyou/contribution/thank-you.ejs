@@ -32,27 +32,31 @@
         <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
     </div>
     <%- include('../common/thankyouPageHeading.ejs',{text:"language",text1:"contributed",text2:"sentence(s)"}) %>
-    <div class="row justify-content-center progress-row mb-3" id="progress-row">
-        <div class="col-10 col-sm-8 col-lg-8 col-md-12 p-0 progress-bar-section">
-    <%- include('../common/thankyouPageProgressBar.ejs', {text:'Sentence(s)',progressBarStats: __(`<span id="totalAverage"></span> of <span id="metric-language"></span> Likho India Target Achieved`)}) %>
+
+    <div id="loader" class="overlay__content"><span class="spinner"></span></div>
+    <div id="data-wrapper" class="d-none">
+        <div class="row justify-content-center progress-row mb-3" id="progress-row">
+            <div class="col-10 col-sm-8 col-lg-8 col-md-12 p-0 progress-bar-section">
+        <%- include('../common/thankyouPageProgressBar.ejs', {text:'Sentence(s)',progressBarStats: __(`<span id="totalAverage"></span> of <span id="metric-language"></span> Likho India Target Achieved`)}) %>
+            </div>
         </div>
-    </div>
-    <div class="row mt-3 mt-lg-4 md-lg-4 lazy pt-5 pt-lg-2 pt-md-2">
-        <div class="col-lg-8 border overflow-hidden contribution-info">
-            <div class="bg-white m-0 contribution-info-inner">
-                <div class="col-lg-12 col-md-11 col-lg-11 thankyou-page ml-lg-auto">
-                    <%- include('../common/badgesMilestone.ejs',{module:'Likho', badgeMilestoneMessage: __('Translated <span id="current_badge_count"></span> <span id="conLanWhenGetBadge"></span> <span>sentence(s)</span>')}) %>
-                    <div class="row m-0" id="cardWithoutBadge">
-                        <div class="col-lg-4 col-md-5 col-sm-6 pl-0 pr-lg-3 pr-md-2 pr-0 pt-3 text-left participation-msg-section">
-                            <%- include('../common/thankyouPageParticipationMsg.ejs',{language:'<from-language>-<to-language>'}) %>
-                            <%- include ../common/sharableLink.ejs %>
-                        </div>
-                        <div class="col-lg-8 col-md-7 col-sm-6 pt-3 thankyou-bar-graph">
-                            <div id="bar_charts_container">
-                                <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
-                                    <div><span class="spinner"></span></div>
+        <div class="row mt-3 mt-lg-4 md-lg-4 lazy pt-5 pt-lg-2 pt-md-2">
+            <div class="col-lg-8 border overflow-hidden contribution-info">
+                <div class="bg-white m-0 contribution-info-inner">
+                    <div class="col-lg-12 col-md-11 col-lg-11 thankyou-page ml-lg-auto">
+                        <%- include('../common/badgesMilestone.ejs',{module:'Likho', badgeMilestoneMessage: __('Translated <span id="current_badge_count"></span> <span id="conLanWhenGetBadge"></span> <span>sentence(s)</span>')}) %>
+                        <div class="row m-0" id="cardWithoutBadge">
+                            <div class="col-lg-4 col-md-5 col-sm-6 pl-0 pr-lg-3 pr-md-2 pr-0 pt-3 text-left participation-msg-section">
+                                <%- include('../common/thankyouPageParticipationMsg.ejs',{language:'<from-language>-<to-language>'}) %>
+                                <%- include ../common/sharableLink.ejs %>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-6 pt-3 thankyou-bar-graph">
+                                <div id="bar_charts_container">
+                                    <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
+                                        <div><span class="spinner"></span></div>
+                                    </div>
+                                    <%- include('../common/verticalGraphForThankyouPage.ejs',{text:"language pairs",language:'<from-language>-<to-language>'}) %>
                                 </div>
-                                <%- include('../common/verticalGraphForThankyouPage.ejs',{text:"language pairs",language:'<from-language>-<to-language>'}) %>
                             </div>
                         </div>
                     </div>

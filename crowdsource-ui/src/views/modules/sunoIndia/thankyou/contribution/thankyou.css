@@ -79,6 +79,13 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   top:100px
 }
 
+.overlay__content {
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .spinner {
   width: 1.5rem;
   height: 1.5rem;
