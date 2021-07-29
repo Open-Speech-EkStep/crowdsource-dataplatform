@@ -17,7 +17,7 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db) {
-  const filePath = path.join(__dirname, 'sql', '20210217094030-sentences.sql')
+  const filePath = path.join(__dirname, 'sqls', '20210217094030-sentences.sql')
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, { encoding: 'utf-8' }, (err, data) => {
       if (err) return reject(err)
