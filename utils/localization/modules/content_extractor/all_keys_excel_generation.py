@@ -39,17 +39,13 @@
 #       }
 # )
 
-# In[1]:
-
 
 import json
-import os
 from collections import OrderedDict
 from datetime import datetime
 
 import pandas as pd
 
-# In[2]:
 from helper.utils.utils import extract_and_replace_tags, extract_and_replace_tags_for_lang, write_report
 
 
@@ -58,16 +54,10 @@ def move_column(dataframe, column_name, index):
     dataframe.insert(index, column_name, popped_column)
 
 
-# In[3]:
-
-
 def read_json(json_file_path):
     with open(json_file_path) as f:
         data = json.load(f)
     return data
-
-
-# In[4]:
 
 
 def get_dict_for_data(key, processed_text, replacement_mapping_dict, key_path_list):
@@ -78,12 +68,6 @@ def get_dict_for_data(key, processed_text, replacement_mapping_dict, key_path_li
     for replacement in sorted(replacement_mapping_dict.keys()):
         out_dict[replacement] = [replacement_mapping_dict[replacement]]
     return out_dict
-
-
-# In[5]:
-
-
-# In[8]:
 
 
 def get_processed_data_for_en(json_data, allowed_replacements, key_path_list):
@@ -97,9 +81,6 @@ def get_processed_data_for_en(json_data, allowed_replacements, key_path_list):
         except Exception as e:
             print(e, "\n", data_dict, "\n\n")
     return language_df
-
-
-# In[9]:
 
 
 def get_processed_data_for_lang(en_json_data, json_data, allowed_replacements, key_path_list):
@@ -120,17 +101,11 @@ def get_processed_data_for_lang(en_json_data, json_data, allowed_replacements, k
     return language_df
 
 
-# In[10]:
-
-
 def get_path(key, keys_with_path_map):
     for k, path in keys_with_path_map.items():
         if key == k:
             return path
     return None
-
-
-# In[11]:
 
 
 def generate_keys(en_json_path, input_json_path, keys_with_path_map, language_code):
@@ -148,9 +123,6 @@ def generate_keys(en_json_path, input_json_path, keys_with_path_map, language_co
     return language_df
 
 
-# In[12]:
-
-
 def replace_non_translations(df_row):
     cols = list(df_row.index)
     cols.remove('Key')
@@ -159,9 +131,6 @@ def replace_non_translations(df_row):
         if df_row[col] == df_row['Key']:
             df_row[col] = ""
     return df_row
-
-
-# In[13]:
 
 
 def export_report(report_json, report_type, important_dict_keys):
@@ -175,18 +144,12 @@ def export_report(report_json, report_type, important_dict_keys):
     write_report(report_json, report_type)
 
 
-# In[14]:
-
-
 def generate_report(content_keys):
     report = {}
     total_keys = len(content_keys)
     report['total_keys_in_input_json'] = total_keys
     report['content_keys'] = content_keys
     return report
-
-
-# In[15]:
 
 
 def generate_output_for_sme(all_df, output_excel_path):
@@ -202,5 +165,3 @@ def generate_output_for_sme(all_df, output_excel_path):
     all_df_copy = all_df_copy.drop_duplicates(subset=['English copy'], keep='first')
     all_df_copy.to_excel(output_excel_path.replace('.xlsx', '_sme.xlsx'), index=False, startrow=1)
     return all_df_copy
-
-# In[16]:
