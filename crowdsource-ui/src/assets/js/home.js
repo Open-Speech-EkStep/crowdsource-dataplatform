@@ -86,26 +86,32 @@ const getStatsSummary = function () {
             getStatistics(bData || {});
         });
     });
+    $.getJSON(`${context_root}/aggregated-json/topLanguagesByHoursContributed.json`, (jsonData) => {
+        const top_languages_by_hours = jsonData.filter(d => d.type == "text");
+        const languages = getContributedAndTopLanguage(top_languages_by_hours, MODULE.bolo.value);
+        localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
+        showByHoursChart();
+        if (top_languages_by_hours.length === 0) {
+            $("#bar_charts_container").hide();
+            $("#view_all_btn").hide();
+            $("#contribution_stats").hide();
+        } else {
+            $("#bar_charts_container").show();
+            $("#view_all_btn").show();
+            $("#contribution_stats").show();
+        }
+
+        const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
+        updateHrsForSayAndListen(contributionLanguage);
+    });
+    $.getJSON(`${context_root}/aggregated-json/topLanguagesBySpeakerContributions.json`, (jsonData) => {
+        const top_languages_by_speakers = jsonData.filter(d => d.type == "text");
+        const speakers = getContributedAndTopLanguage(top_languages_by_speakers, "speakers");
+        localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(speakers));
+    });
     performAPIRequest('/stats/summary/text')
-        .then((response) => {
-            const languages = getContributedAndTopLanguage(response.top_languages_by_hours, MODULE.bolo.value);
-            localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-            showByHoursChart()
-            const speakers = getContributedAndTopLanguage(response.top_languages_by_speakers, "speakers");
-            localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(speakers));
+        .then((response) => {            
             localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-            
-            const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
-            updateHrsForSayAndListen(contributionLanguage);
-            if (response.top_languages_by_hours.length === 0) {
-                $("#bar_charts_container").hide();
-                $("#view_all_btn").hide();
-                $("#contribution_stats").hide();
-            } else {
-                $("#bar_charts_container").show();
-                $("#view_all_btn").show();
-                $("#contribution_stats").show();
-            }
         });
 }
 
