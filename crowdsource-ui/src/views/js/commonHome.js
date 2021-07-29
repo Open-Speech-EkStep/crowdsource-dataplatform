@@ -11,6 +11,7 @@ const {setLangNavBar} = require('../common/languageNavBar')
 
 const {getContributedAndTopLanguage,showByHoursChart, updateLocaleLanguagesDropdown} = require('./common');
 const {setSpeakerData} = require('./contributionStats');
+const { context_root } = require('./env-api');
 
 function getStatistics(response, language, module) {
   const $speakersData = $("#speaker-data");
@@ -82,16 +83,25 @@ const setDefaultLang = function () {
   updateLocaleLanguagesDropdown(contributionLanguage);
   setLangNavBar(targetedDiv, contributionLanguage, $languageNavBar);
 }
-
+const getStats = (module) => {
+  $.getJSON(`${context_root}/aggregated-json/cumulativeCount.json`, (jsonData) => {
+    $.getJSON(`${context_root}/aggregated-json/participationStats.json`, (jsonData2) => {
+        const bData2 = jsonData2.find(d => d.type == module["api-type"]) || {};
+        const bData = jsonData.find(d => d.type == module["api-type"]) || {};
+        bData.total_speakers = bData2.count || 0;
+        getStatistics(bData || {}, null, module.value);
+    });
+});
+}
 const getStatsSummary = function (url, module, callBack=()=>{}) {
+  getStats(module);
   performAPIRequest(url)
     .then(response => {
-      const languages = getContributedAndTopLanguage(module == MODULE.likho.value || module == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, module);
+      const languages = getContributedAndTopLanguage(module.value == MODULE.likho.value || module.value == MODULE.dekho.value ? response.top_languages_by_contribution_count : response.top_languages_by_hours, module.value);
       localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-      showByHoursChart(module);
+      showByHoursChart(module.value);
       localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(response.top_languages_by_speakers));
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-      getStatistics(response && response.aggregate_data_count && response.aggregate_data_count.length ? response.aggregate_data_count[0] : {}, null, module);
       callBack();
       if(response.top_languages_by_hours.length === 0) {
         $("#bar_charts_container").hide();
