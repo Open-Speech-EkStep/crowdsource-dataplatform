@@ -86,7 +86,10 @@
             <h2 class="font-wt-900 site-blue lh-5 font-family-Rowdies" style="line-height:28px">
                 <%= __('Contributions made to Likho India') %>
             </h2>
-            <div class="row mt-lg-5 mt-md-5 mt-4" id="speaker-data">
+            <div class="font-family-Rowdies mt-3">
+                <%= __('Overall Summary') %>
+            </div>
+            <div class="row mt-4" id="speaker-data">
                 <div class="col-12 col-lg-11 col-md-12">
                     <div class="row justify-content-center" id="loader1">
                         <div><span class="spinner"></span></div>
@@ -101,12 +104,14 @@
     <div class="row mb-5 lazy">
         <div class="col-12 col-md-11 col-lg-11 p-5 ml-lg-auto">
             <div id="bar_charts_container">
-                <h4 class="h4 mb-4 font-family-Rowdies">
-                    <%= __('Your language pair and top 3 most contributed language pairs') %>
-                </h4>
-                <div class="d-flex mb-3">
-                    <div name="topLanguageChart" id="hours_chart" value="hours">
-                        <%= __('Total translations') %>
+                <h2 class="h4 mb-4 font-family-Rowdies">
+                    <%= __('Contribution Tracker') %>
+                </h2>
+                <div class="row mx-0 mb-2">
+                    <div class="pl-0 col-12">
+                        <div class="font-family-Rowdies">
+                            <h5> <%= __('Your language pair and top 3 most contributed language pairs') %></h5>
+                         </div>
                     </div>
                 </div>
                 <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
