@@ -13,13 +13,13 @@ if __name__ == '__main__':
             Example commands:
             
             For only keys without translations on multiple excel sheets for each language:
-                python delta_generator.py -i ./../all_keys_generator/out -o ./delta_out -v ./../../../crowdsource-ui/src/views -a --output-type SEPARATE_SHEETS
+                python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -a --output-type SEPARATE_SHEETS
 
             For all keys, all languages on a single excel sheet:
-                python delta_generator.py -i ./../all_keys_generator/out -o ./delta_out -v ./../../../crowdsource-ui/src/views -a --all-keys --output-type SINGLE_SHEET
+                python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -a --all-keys --output-type SINGLE_SHEET
             
             For all keys, but specific languages on a single excel sheet:
-                python delta_generator.py -i ./../all_keys_generator/out -o ./delta_out -v ./../../../crowdsource-ui/src/views -l gu pa --all-keys --output-type SINGLE_SHEET
+                python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -l gu pa --all-keys --output-type SINGLE_SHEET
         '''
 
     parser = argparse.ArgumentParser(epilog=example,

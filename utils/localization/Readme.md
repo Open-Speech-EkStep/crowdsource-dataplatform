@@ -64,18 +64,18 @@ In `./out/` folder all locale files are generated after the above command is ran
    - For multiple excel sheets for each language:
     
    ```
-   python delta_generator.py -i ./../all_keys_generator/out -o ./delta_out -v ./../../../crowdsource-ui/src/views -a --output-type SEPARATE_SHEETS
+   python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -a --output-type SEPARATE_SHEETS
    ```
          
    - For all keys, but specific languages on a single excel sheet:
    ```
-   python delta_generator.py -i ./../all_keys_generator/out -o ./delta_out -v ./../../../crowdsource-ui/src/views -l gu pa --all-keys --output-type SINGLE_SHEET
+   python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -l gu pa --all-keys --output-type SINGLE_SHEET
    ```
    
    - For all keys, all languages on a single excel sheet:
    
    ```
-   python delta_generator.py -i ./../all_keys_generator/out -o ./delta_out -v ./../../../crowdsource-ui/src/views -a --all-keys --output-type SINGLE_SHEET
+   python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -a --all-keys --output-type SINGLE_SHEET
    ```
    
 2. This will provide `out-meta` folder and `out-sme` folder inside /delta_out. Copy these to another location for later use(** Mandatory **).
@@ -85,7 +85,7 @@ In `./out/` folder all locale files are generated after the above command is ran
 
 1. Put the translation excel files received from sme's in the following directory structure for each language as input:
     ```
-    input_excel_files/<language code>/<excel_file_name>.xlsx  (eg: input_excel_files/hi/delta_24thJune.xlsx )
+    translation_excel_files/<language code>/<excel_file_name>.xlsx  (eg: input_excel_files/hi/delta_24thJune.xlsx )
     ```
 2. Make sure you have the corresponding meta files in `out-meta` folder generated in the delta generation process.
 3. To generate locale json files , run one of the following:
