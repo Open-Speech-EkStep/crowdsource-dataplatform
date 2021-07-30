@@ -9,7 +9,7 @@ describe("changeLocale", () => {
     mockLocation();
     localStorage.setItem(CURRENT_MODULE, 'bolo');
     changeLocale('en');
-    const localeValue = localStorage.getItem("i18n");
+    const localeValue = sessionStorage.getItem("i18n");
     expect(location.href).toEqual("/en/boloIndia/home.html")
     expect(localeValue).toEqual("en")
     localStorage.clear();
@@ -21,7 +21,7 @@ describe("changeLocale", () => {
     mockLocation();
     localStorage.setItem(CURRENT_MODULE, 'suno');
     changeLocale('en');
-    const localeValue = localStorage.getItem("i18n");
+    const localeValue = sessionStorage.getItem("i18n");
     expect(location.href).toEqual("/en/sunoIndia/home.html")
     expect(localeValue).toEqual("en")
     localStorage.clear();
@@ -32,7 +32,7 @@ describe("changeLocale", () => {
     mockLocation();
     localStorage.setItem(CURRENT_MODULE, 'dekho');
     changeLocale('en');
-    const localeValue = localStorage.getItem("i18n");
+    const localeValue = sessionStorage.getItem("i18n");
     expect(location.href).toEqual("/en/dekhoIndia/home.html")
     expect(localeValue).toEqual("en")
     localStorage.clear();
@@ -43,7 +43,7 @@ describe("changeLocale", () => {
     mockLocation();
     localStorage.setItem(CURRENT_MODULE, 'likho');
     changeLocale('en');
-    const localeValue = localStorage.getItem("i18n");
+    const localeValue = sessionStorage.getItem("i18n");
     expect(location.href).toEqual("/en/likhoIndia/home.html")
     expect(localeValue).toEqual("en")
     localStorage.clear();
@@ -54,7 +54,7 @@ describe("changeLocale", () => {
     mockLocation();
     localStorage.setItem(CURRENT_MODULE, 'home');
     changeLocale('en');
-    const localeValue = localStorage.getItem("i18n");
+    const localeValue = sessionStorage.getItem("i18n");
     expect(location.href).toEqual("/en/home.html")
     expect(localeValue).toEqual("en")
     localStorage.clear();
@@ -67,7 +67,7 @@ describe("changeLocale", () => {
     localStorage.setItem(CURRENT_MODULE, 'bolo');
     localStorage.setItem('i18n', 'hi');
     changeLocale('hi');
-    const localeValue = localStorage.getItem("i18n");
+    const localeValue = sessionStorage.getItem("i18n");
     expect(location.href).toEqual("/hi/boloIndia/home.html")
     expect(localeValue).toEqual("hi")
     localStorage.clear();
@@ -80,7 +80,7 @@ describe("changeLocale", () => {
     localStorage.setItem(CURRENT_MODULE, 'bolo');
     localStorage.setItem('i18n', 'hi');
     changeLocale('hi');
-    const localeValue = localStorage.getItem("i18n");
+    const localeValue = sessionStorage.getItem("i18n");
     expect(location.href).toEqual("/hi/boloIndia/dashboard.html")
     expect(localeValue).toEqual("hi")
     localStorage.clear();

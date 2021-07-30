@@ -136,7 +136,7 @@ function initializeBlock() {
         fromLanguage = e.target.value;
         top_lang = fromLanguage;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-        localStorage.setItem("i18n", "en");
+        sessionStorage.setItem("i18n", "en");
         updateHrsForSayAndListen(fromLanguage);
         redirectToLocalisedPage();
         getStatsSummary();

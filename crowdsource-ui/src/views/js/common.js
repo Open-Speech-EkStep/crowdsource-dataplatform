@@ -88,7 +88,7 @@ function showByHoursChartThankyouPage(type, page, dataType='') {
 }
 
 function redirectToLocalisedPage() {
-  const locale = localStorage.getItem("i18n") ;
+  const locale = sessionStorage.getItem("i18n") ;
   const module = localStorage.getItem(CURRENT_MODULE);
   const allLocales = ALL_LANGUAGES.map(language => language.id);
   // const locale = localeValue == 'null'  || localeValue == undefined? 'en' : localeValue;

@@ -192,7 +192,7 @@ const executeOnLoad = function () {
     });
 
     $("#contribute-now").on('click', () => {
-        localStorage.setItem("i18n", "en");
+        sessionStorage.setItem("i18n", "en");
         sentenceLanguage = languageToRecord;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
         localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);

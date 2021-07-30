@@ -24,7 +24,7 @@ const changeLocale = function (locale) {
     if (!currentPage) {
         currentPage = "home.html";
     }
-    localStorage.setItem("i18n", locale);
+    sessionStorage.setItem("i18n", locale);
     const module = localStorage.getItem(CURRENT_MODULE);
     if(module == 'home'){
         location.href = `${context_root}/${locale}/${currentPage}`;
@@ -43,7 +43,7 @@ function showLanguagePopup() {
 }
 
 function redirectToLocalisedPage() {
-    const locale = localStorage.getItem("i18n") ;
+    const locale = sessionStorage.getItem("i18n") ;
     const allLocales = ALL_LANGUAGES.map(language => language.id);
     // const locale = localeValue == 'null'  || localeValue == undefined? 'en' : localeValue;
     const splitValues = location.href.split('/');
