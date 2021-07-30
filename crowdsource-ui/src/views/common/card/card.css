@@ -31,6 +31,8 @@
   }
   .card {
     min-height: 190px !important;
+    background-image: url('/img/card_bg_sm.svg') !important;
+    background-size: cover !important;
   }
 }
 
@@ -82,7 +84,7 @@
 .card{
   background-position: center;
   background-size: auto;
-  background-image: url('/img/tri_color.svg') !important;
+  background-image: url('/img/tri_color.svg');
   mix-blend-mode: normal;
   border-radius: 20px;
   min-height: 190px;

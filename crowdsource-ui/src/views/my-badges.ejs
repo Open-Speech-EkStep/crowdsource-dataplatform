@@ -18,12 +18,13 @@
 <body>
   <%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html",
     suno:"./sunoIndia/home.html",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
-    <div id="content-wrapper" class="container-fluid padding-top-115 pb-2 px-lg-3 px-md-3 px-4 px-md-5">
+    <div id="content-wrapper" class="container-fluid padding-top-65 pb-2 p-0 bg-light">
+      <div class="bg-badge px-lg-3 px-md-3 px-4 pt-5">
       <div class="row">
         <%- include('../../build/views/common/back-btn.ejs',{url:"/"}) %>
       </div>
       <div id="badge-container" class="container-fluid p-0">
-        <div class="row m-0 bg-secondary position-relative">
+        <div class="row m-0 position-relative">
           <div class="header"></div>
           <div class="col-12 p-0 text-center position-absolute">
             <h1 class="light active mt-lg-3 mt-md-3 mt-4"><span>
@@ -37,7 +38,7 @@
         <div class="row mx-0 badge-mt-34">
           <div class="col-12 p-0">
             <div class="row m-0">
-              <ul class="nav nav-tabs w-100 border-0" id="myTab" role="tablist">
+              <ul class="nav nav-tabs w-100 border-0 bg-white" id="myTab" role="tablist">
                 <li class="nav-item col-3 p-0 text-center">
                   <a class="nav-link border-0 active light-bg font-family-Rowdies" id="suno-tab" data-toggle="tab" href="#suno" role="tab" aria-controls="suno" aria-selected="true">
                     <span>
@@ -176,6 +177,7 @@
           </ul>
         </div>
       </div>
+    </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

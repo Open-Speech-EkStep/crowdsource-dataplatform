@@ -335,6 +335,10 @@ body.modal-open .supreme-container {
     padding: 0 3rem;
   }
 
+  .container {
+    padding-top: 25px;
+  }
+
   .contribution-data.col-md-3 {
     flex: 0 0 100%;
     max-width: 100%;

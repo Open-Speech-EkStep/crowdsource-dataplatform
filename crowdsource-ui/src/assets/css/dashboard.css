@@ -334,6 +334,9 @@ body.modal-open .supreme-container {
 }
 
 @media screen and (max-width: 767px) {
+  .container {
+    padding-top: 25px;
+  }
   .legend-val {
     font-size: 11px;
   }

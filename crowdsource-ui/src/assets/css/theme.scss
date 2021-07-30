@@ -52,6 +52,10 @@ $primary-color-shade10: tint($primary-color, 100%);
   filter: drop-shadow(0px 4px 4px #9fc8ff);
 }
 
+body {
+  color: $primary-color !important;
+}
+
 .bg-footer-primary {
   color: $primary-color !important;
   box-shadow: 0 -4px 12px 0 rgb(0, 0, 0, 0.12);
@@ -62,7 +66,7 @@ $primary-color-shade10: tint($primary-color, 100%);
 }
 
 .bg-light {
- background-color: $text-light !important;
+  background-color: $text-light !important;
 }
 
 .bg-secondary {
@@ -70,9 +74,9 @@ $primary-color-shade10: tint($primary-color, 100%);
 }
 
 .text-primary {
-  color: $bg-header-primary !important;
+  color: $primary-color !important;
   &:hover {
-    color: $bg-header-primary !important;
+    color: $primary-color !important;
   }
 }
 
@@ -97,7 +101,7 @@ $primary-color-shade10: tint($primary-color, 100%);
 
 a.text-primary:focus,
 a.text-primary:hover {
-  color: $bg-header-primary !important;
+  color: $primary-color !important;
 }
 
 .text-btn-primary {
@@ -175,7 +179,7 @@ a.text-primary:hover {
 
 .btn-custom-outline-primary {
   background-color: $text-white;
-  border: 1px solid $primary-color;
+  border: 1px solid $text-white;
   color: $primary-color;
   filter: drop-shadow(1px 8px 24px rgba(15, 39, 73, 0.2));
 }
@@ -243,7 +247,7 @@ a.text-primary:hover {
           color: $primary-color !important;
         }
         &:nth-child(2) {
-          color: $text-yellow !important;
+          color: $primary-color !important;
         }
       }
     }
@@ -259,7 +263,7 @@ a.text-primary:hover {
         color: $text-dark !important;
       }
       &:nth-child(2) {
-        color: $text-yellow !important;
+        color: $primary-color !important;
       }
     }
   }
@@ -311,6 +315,8 @@ a.text-primary:hover {
 }
 
 .badge-widget-placeholder {
+  background: $text-white;
+  opacity: 0.5;
   border: 1px dashed $primary-color;
 }
 
@@ -376,6 +382,9 @@ audio {
 }
 
 @media screen and (max-width: 766px) {
+  .data-updated > div {
+    font-size: 14px;
+  }
   #navbarSupportedContent ul li {
     height: 45px;
   }
@@ -397,6 +406,10 @@ audio {
   }
   .bg-badge {
     background-image: url(/img/my-badge-bg-sm.svg);
+  }
+
+  #carouselExampleIndicators .nav-tabs > li.active {
+    border-bottom: 4px solid $primary-color !important;
   }
 }
 
@@ -428,4 +441,42 @@ audio {
   background-repeat: no-repeat;
   background-size: contain;
   background-attachment: fixed;
+}
+
+.badge-widget {
+  &.active {
+    border: 1px solid $primary-color !important;
+  }
+}
+
+#badge-container .nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  color: $primary-color;
+}
+
+.h5 {
+  font-size: 20px !important;
+}
+
+.active,
+.site-blue,
+.image-text,
+.label-text {
+  color: $primary-color;
+}
+
+select {
+  border-color: $primary-color !important;
+}
+
+.form-control {
+  border: 1px solid $primary-color;
+}
+
+.border-primary {
+  border-color: $primary-color !important;
+}
+
+.modal-lg, .modal-xl {
+  width: 700px !important;
 }

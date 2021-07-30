@@ -41,8 +41,9 @@ body {
 }
 
 .vertical-line {
-  background: #c4c4c4;
+  background: #000000;
   height: 50px;
+  opacity: 10%;
   width: 0.5px;
   margin-right: 15px;
 }
@@ -124,6 +125,7 @@ body {
   }
   .vertical-line {
     margin-right: 8px !important;
+    height: 24px !important;
   }
 }
 

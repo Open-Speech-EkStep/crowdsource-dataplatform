@@ -1,30 +1,3 @@
-#userModal .modal-title{
-  color: #111111;
-}
-
-#userModal #form-sub-heading{
-  color: #666666;
-}
-
-#userModal .user-name-hint{
-  color: #666666;
-}
-
-#userModal .form-label{
-  color: #666666;
-}
-
-#userModal .form-control{
-  color: #666666 !important;
-}
-
-#userModal .form-check-label{
-  color: #666666;
-}
-
-#userModal #tnc_link{
-  color: #111111;
-}
 
 #userModal #tnc_link a{
   color: #007bff;

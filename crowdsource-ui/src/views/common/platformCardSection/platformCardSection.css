@@ -14,6 +14,11 @@
   margin: auto;
 }
 
+.landing-img-logo {
+  width: 119px;
+  height: 107px;
+}
+
 .home-banner {
   text-align: center;
   height: 600px;
@@ -100,10 +105,6 @@
   background-position: right;
 }
 
-.badge-card-text-box h2{
-  color: #111111;
-}
-
 #badge-section-card button{
   min-width:180px;
   height:48px;
@@ -143,19 +144,19 @@
 }
 
 .label-text{
-  color: #666666;
   line-height: 32px;
   font-weight: 400;
   font-size: 20px;
   width: 300px;
   margin-top: 20px;
   text-align: left;
+  padding-top: 0;
+  padding-left: 10px;
 }
 
 .image-text {
   font-size: 20px;
   line-height: 32px;
-  color: #666666;
   font-weight: 400;
   padding-top: 25px;
   margin: 0 20px;
@@ -474,12 +475,16 @@
 @media screen and (max-width: 699px) {
   .platform-intro-section-cover{
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: inherit;
     background-image: url('/img/landingpage_bg_sm.svg') !important;
     background-size: cover;
   }
   #banner .h1{
     font-size: 32px;
+  }
+
+  .font-size-lg-32{
+    font-size: 22px !important;
   }
 
   .separator{
@@ -495,11 +500,11 @@
   }
 
   #platform_section{
-    margin: auto
+    margin-top: 46px;
   }
 
   #platform_section .platform_card {
-    background-image: url('/img/tri_color.svg') !important;
+    background-image: url('/img/tri_color_sm.svg') !important;
     background-size: cover;
   }
 
@@ -514,6 +519,11 @@
 
   #badge-section {
     margin: auto
+  }
+
+  .landing-img-logo {
+    width: 60px !important;
+    height: 55px !important;
   }
 
   #badge-section-card button{
@@ -550,7 +560,6 @@
     font-size: 18px;
     line-height: 24px;
     text-align: center;
-    color: #666666;
     padding-left: 20px;
     padding-top: 9px;
   }
@@ -630,7 +639,6 @@
   }
 
   #carouselExampleIndicators .nav-tabs>li>a {
-    color: #666666 !important;
     font-size: 16px;
     line-height: 19px;
     width: max-content;
@@ -643,9 +651,11 @@
   .label-text {
     font-size: 14px;
     line-height: 20px;
-    margin-top: 0;
     max-width: 100%;
-    text-align: center;
+    text-align: left;
+    padding-top: 0;
+    padding-left: 20px;
+    margin-top: 5px !important;
   }
 
   .image-text {

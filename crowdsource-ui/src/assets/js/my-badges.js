@@ -11,7 +11,7 @@ const {isMobileDevice, hasUserRegistered} = require('./common');
 
 const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type, localeString, language) => {
   return `
-  <div class="badge-widget cursor-pointer text-center" id="${badgeType}_${type}_${initiativeType}_${language}_badge">
+  <div class="badge-widget cursor-pointer text-center bg-white" id="${badgeType}_${type}_${initiativeType}_${language}_badge">
   <img src=${imgPath} class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover" >
   <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString[badgeType]}</h6>
 </div>`
@@ -124,9 +124,9 @@ const getBadgeRow = (result, id, type, localeString, language) => {
     $tableRows.append(row);
   }
   $('.badge-widget').off('click').on('click', ($event) => {
-    $('.badge-widget').removeClass('light-blue');
+    $('.badge-widget').removeClass('active');
     const badgeId = $($event.currentTarget).attr('id');
-    $(`#${badgeId}`).addClass('light-blue');
+    $(`#${badgeId}`).addClass('active');
     var offset = $($event.currentTarget).offset();
     const image = $($event.currentTarget).find("img").attr('src');
     $("#badge-popover").find("img").attr('src', image);
@@ -134,7 +134,7 @@ const getBadgeRow = (result, id, type, localeString, language) => {
   });
   $(document).on('click', (event) => {
     if (!$(event.target).closest(".badge-widget").length) {
-      $('.badge-widget').removeClass('light-blue');
+      $('.badge-widget').removeClass('active');
       $('#badge-popover').css({visibility: 'hidden'});
   }
   });

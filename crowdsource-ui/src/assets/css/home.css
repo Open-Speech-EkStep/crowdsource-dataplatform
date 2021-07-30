@@ -151,9 +151,7 @@ h6,
 .font-wt-900 {
   font-weight: 900;
 }
-.site-blue {
-  color: #11223f;
-}
+
 .border-3 {
   border: 3px solid #007bff;
 }
@@ -182,7 +180,7 @@ h6,
   overflow-x: hidden;
 }
 .w-90 {
-  width: 90% !important;
+  width: 67% !important;
 }
 
 [data-toggle='popover']:after {
@@ -349,7 +347,6 @@ body.modal-open .supreme-container {
 
 .active{
   font-weight: 900;
-  color: #000000;
 }
 
 #speakers_hours_chart_container, #speakers_hours_chart {
@@ -444,6 +441,10 @@ body.modal-open .supreme-container {
 @media screen and (max-width: 767px) {
   .contribution-details {
     padding: 0 3rem;
+  }
+  .card{
+    background-image: url('/img/card_bg_sm.svg') !important;
+    background-size: cover !important;
   }
   .contribution-data.col-md-3 {
     flex: 0 0 100%;
