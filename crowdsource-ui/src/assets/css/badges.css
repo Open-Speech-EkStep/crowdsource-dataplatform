@@ -65,7 +65,6 @@ html {
     font-size: 14px;
   }
 
-
   .badge-detail-container .nav-link{
     font-size: 24px;
   }
@@ -175,6 +174,7 @@ ul#initiative {
   }
 
   .badge-language-dropdown{
+    max-width: 203px !important;
     height: 35px !important;
   }
 
@@ -325,10 +325,6 @@ ul#initiative {
     font-size: 14px;
     line-height: 17px;
   }
-
-  select.col-8{
-    width: 203px !important;
-  }
 }
 
 
@@ -348,6 +344,7 @@ ul#initiative {
 }
 
 .badge-language-dropdown{
+  max-width: 225px;
   height:40px;
   padding:0 10px;
   border-color:#222222;
