@@ -25,25 +25,25 @@ const selectBadgeLevel = function (id){
 const getBadgeLevels = function (language, initiative, source) {
   const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   return `
-    <div class="col-3 pl-lg-2 pr-lg-5 pl-1 pr-2">
+    <div class="col-3 pl-lg-4 pr-lg-5 pl-1 pl-md-2 pr-2 card1">
                                 <div class="badge-detail-widget cursor-pointer text-center" id="bronze_participation_badge">
                                     <img src="${getLanguageBadge(language,'bronze',source, initiative)}" class="my-badge-image" id="bronze" height="74" width="60" rel="popover" data-toggle="popover">
                                     <h6 class="mt-0 text-capitalize badge-level-heading">${localeString.bronze}</h6>
                                 </div>
                             </div>
-                            <div class="col-3 pl-lg-2 pr-lg-5 pl-1 pr-2">
+                            <div class="col-3 pl-lg-4 pr-lg-5 pl-1 pl-md-2 pr-2 card2">
                                 <div class="badge-detail-widget cursor-pointer text-center" id="silver_participation_badge">
                                     <img src="${getLanguageBadge(language,'silver',source, initiative)}" class="my-badge-image" id="silver" height="74" width="60" rel="popover" data-toggle="popover">
                                     <h6 class="mt-0 text-capitalize badge-level-heading">${localeString.silver}</h6>
                                 </div>
                             </div>
-                            <div class="col-3 pl-lg-2 pr-lg-5 pl-1 pr-2">
+                            <div class="col-3 pr-lg-5 pl-1 pl-lg-4 pl-md-2 pr-2 card3">
                                 <div class="badge-detail-widget cursor-pointer text-center" id="gold_participation_badge">
                                     <img src="${getLanguageBadge(language,'gold',source, initiative)}" class="my-badge-image" id="gold" height="74" width="60" rel="popover" data-toggle="popover">
                                     <h6 class="mt-0 text-capitalize badge-level-heading">${localeString.gold}</h6>
                                 </div>
                             </div>
-                            <div class="col-3 pl-lg-2 pr-lg-5 pl-1 pr-2">
+                            <div class="col-3 pr-lg-5 pl-1 pl-lg-4 pl-md-2 pr-2 card4">
                                 <div class="badge-detail-widget cursor-pointer text-center" id="platinum_participation_badge">
                                     <img src="${getLanguageBadge(language,'platinum',source, initiative)}" class="my-badge-image" id="platinum" height="74" width="60" rel="popover" data-toggle="popover">
                                     <h6 class="mt-0 text-capitalize badge-level-heading">${localeString.platinum}</h6>
@@ -60,10 +60,10 @@ const renderCard = function (data, initiative, badge_color, source, language) {
     dekho: {"text-type": "image labels"}
   }
 
-
   const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const localeLanguageStr = localeString[language];
-
+  const localeTextTypeStr = localeString[moduleDetail[initiative]['text-type']];
+  const localeSourceStr = localeString[source.charAt(0).toUpperCase() +  source.slice(1)];
 
   const localeInitiativeStr = localeString[`${initiative.charAt(0).toUpperCase() +  initiative.slice(1)} India`];
   const localeBadgeColorStr = localeString[badge_color.toLowerCase()];
@@ -71,9 +71,9 @@ const renderCard = function (data, initiative, badge_color, source, language) {
   const $selectedBadgeCardImg = $('.selected-badge-card img');
   $selectedBadgeCardImg.attr('src',getLanguageBadge(language,badge_color,source, initiative));
   const currentBadge = data.find((element) => element.badge.toLowerCase() === badge_color.toLowerCase());
-  $('#participation-type').html(source.charAt(0).toUpperCase() + source.slice(1));
+  $('#participation-type').html(localeSourceStr);
   $('#milestone').html(currentBadge.contributions);
-  $('#text-type').html(moduleDetail[initiative]['text-type']);
+  $('#text-type').html(localeTextTypeStr);
   $('#contribution-language').html(localeLanguageStr);
   $('#initiative-name').html(localeInitiativeStr);
   $('#badge-color').html(localeBadgeColorStr.charAt(0).toUpperCase() + localeBadgeColorStr.slice(1));
