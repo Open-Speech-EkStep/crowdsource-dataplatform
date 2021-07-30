@@ -16,6 +16,9 @@ step("Validate Likho India content", async function() {
   assert.ok(await text('Enrich your language by translating text').exists());
   assert.ok(await text('Validate').exists());
   assert.ok(await text('Translate').exists());
+  assert.ok(await text('Contribution Tracker').isVisible());
+  assert.ok(await text('Overall Summary').isVisible());
+  assert.ok(await text('Contributions made to Likho India').isVisible());
 });
 
 step("User should see the top Language graph and other stats for Likho India", async function() {

@@ -366,5 +366,7 @@
 	"sentences": "sentences",
 	"recordings": "recordings",
 	"translations": "translations",
-	"image labels": "image labels"
+	"image labels": "image labels",
+	"Overall Summary": "Overall Summary",
+	"Contribution Tracker": "Contribution Tracker"
 }

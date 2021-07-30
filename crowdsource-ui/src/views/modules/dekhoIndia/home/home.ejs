@@ -54,7 +54,10 @@
             <h2 class="font-wt-900 site-blue lh-5 font-family-Rowdies" style="line-height:28px">
                 <%= __('Contributions made to Dekho India') %>
             </h2>
-            <div class="row mt-lg-5 mt-md-5 mt-4" id="speaker-data">
+            <div class="font-family-Rowdies mt-3">
+                <%= __('Overall Summary') %>
+            </div>
+            <div class="row mt-4" id="speaker-data">
                 <div class="col-12 col-lg-11 col-md-12">
                     <div class="row justify-content-center" id="loader1">
                         <div><span class="spinner"></span></div>
@@ -69,12 +72,14 @@
     <div class="row mb-5 lazy">
         <div class="col-12 col-md-11 col-lg-11 p-5 ml-lg-auto">
             <div id="bar_charts_container">
-                <h4 class="h4 mb-4 font-family-Rowdies">
-                    <%= __('Your language and top 3 most contributed languages') %>
-                </h4>
-                <div class="d-flex mb-3">
-                    <div name="topLanguageChart" id="hours_chart" value="hours">
-                        <%= __('Images labelled and validated') %>
+                <h2 class="h4 mb-4 font-family-Rowdies">
+                    <%= __('Contribution Tracker') %>
+                </h2>
+                <div class="row mx-0 mb-2">
+                    <div class="pl-0 col-12">
+                        <div class="font-family-Rowdies">
+                            <h5> <%= __('Your language and top 3 most contributed languages') %></h5>
+                         </div>
                     </div>
                 </div>
                 <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
@@ -82,7 +87,7 @@
                 </div>
                 <div class="row m-0">
                     <div class="col-lg-8 col-md-8 col-12 p-4 bg-secondary">
-                        <%- include('../common/verticalGraph.ejs',{text: __('Total images')}) %>
+                        <%- include('../common/verticalGraph.ejs',{text: __('Images labelled and validated')}) %>
                     </div>
                 </div>
 
