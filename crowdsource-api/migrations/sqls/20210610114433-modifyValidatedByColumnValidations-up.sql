@@ -448,7 +448,7 @@ AS
      LEFT JOIN master_dataset ON dataset_row.master_dataset_id = master_dataset.master_dataset_id
      LEFT JOIN contributors ON contributors.contributor_id = contributions.contributed_by
      INNER JOIN configurations conf ON conf.config_name='include_profane' 
-  WHERE master_dataset.is_active = true AND contributions.action = 'completed'::text AND contributions.date >= (CURRENT_DATE - '1 year'::interval)
+  WHERE COALESCE(master_dataset.is_active, true) = true AND contributions.action = 'completed'::text AND contributions.date >= (CURRENT_DATE - '1 year'::interval)
   AND (conf.value=1 OR is_profane=false)
   ORDER BY contributions.contributed_by;
 
