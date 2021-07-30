@@ -42,7 +42,7 @@ Tags: component
 * User click on "edit" field and type "Be together always" submit and cancel button should be enabled
 * When user clicks on submit button user should see " Thank you for contributing!"
 * When user clicks on back button, user should land on Likho India home page
-* Validate the updated progress bar value with "2" for "Likho India"
+//* Validate the updated progress bar value with "2" for "Likho India"
 * Check "Validate" option should be "enabled" on Home page
 * Change user name to "V User"
 * Navigate to "Validate"

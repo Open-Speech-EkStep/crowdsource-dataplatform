@@ -379,6 +379,11 @@ audio {
   .bg-badge {
     background-image: url(/img/my-badge-bg.svg);
   }
+
+  .modal-lg,
+  .modal-xl {
+    width: 700px !important;
+  }
 }
 
 @media screen and (max-width: 766px) {
@@ -410,6 +415,10 @@ audio {
 
   #carouselExampleIndicators .nav-tabs > li.active {
     border-bottom: 4px solid $primary-color !important;
+  }
+
+  .font-s-12 {
+    font-size: 12px !important;
   }
 }
 
@@ -475,8 +484,4 @@ select {
 
 .border-primary {
   border-color: $primary-color !important;
-}
-
-.modal-lg, .modal-xl {
-  width: 700px !important;
 }
