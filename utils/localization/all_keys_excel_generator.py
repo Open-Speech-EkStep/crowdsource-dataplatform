@@ -14,13 +14,14 @@ def main():
     example = '''
             Example commands:
 
-            For only english content:
-                python all_keys_excel_generator.py -j ./../../../crowdsource-ui/locales -o ./out/en.xlsx --only-en
+            For only english content: 
+                python all_keys_excel_generator.py -j ./../../crowdsource-ui/locales -o 
+            ./out/en.xlsx --only-en -v ./../../crowdsource-ui/src/views 
 
 
-            For All language content:
-                python all_keys_excel_generator.py -j ./../../../crowdsource-ui/locales -o ./out/out.xlsx
-        '''
+            For All language content: 
+                python all_keys_excel_generator.py -j ./../../crowdsource-ui/locales -o 
+            ./out/out.xlsx -v ./../../crowdsource-ui/src/views '''
 
     parser = argparse.ArgumentParser(epilog=example,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -44,12 +45,11 @@ def main():
     keys_with_path_map = get_keys_with_path(ejs_files_base_path)
 
     tmp_cleaned_json_path = "cleaned_json_locales_for_all_keys_excel"
-
+    languages = {}
     if not only_en:
         languages = read_language_list()
         clean_locale_keys(languages, input_json_path, tmp_cleaned_json_path)
-
-    input_json_path = tmp_cleaned_json_path
+        input_json_path = tmp_cleaned_json_path
 
     en_json_path = os.path.join(input_json_path, 'en.json')
 

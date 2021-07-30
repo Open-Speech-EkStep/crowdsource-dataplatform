@@ -10,16 +10,22 @@ This utility allows users to generate excel file(with all keys / delta keys) fro
 
 1. Run the following command to install python libraries:  `pip install -r requirements.txt`
 
-2. `languages.json` has list of all languages to be considered. If you want to add a new languages, add it in this json file.
+2. `resources/languages.json` has list of all languages to be considered. If you want to add a new languages, add it in this json file.
     ```
     eg: {"<language-code>":"<language-name>"}
+    ```
+   
+3. `resources/html_ejs_mapping.json` has list of all main ejs to html file mapping. This is used for finding where the keys are used in the source code.
+    ```
+    eg: {"<html-file-name>":"<ejs-file-name>"}
     ```
 
 #### All Keys excel file generation:
 
 1. To generate from 'en' locale file, run from the following:
    ```
-   python all_keys_excel_generator.py -j ./../../crowdsource-ui/locales -o ./out/en.xlsx --only-en
+   python all_keys_excel_generator.py -j ./../../crowdsource-ui/locales -o 
+            ./out/en.xlsx --only-en -v ./../../crowdsource-ui/src/views
    ```
 
    This `./out/en.xlsx` obtained from the above step will have all keys from en locale file and can be shared with people for corrections in values.
@@ -28,7 +34,8 @@ This utility allows users to generate excel file(with all keys / delta keys) fro
 
    To generate for all languages, run from the following:
    ```
-   python all_keys_excel_generator.py -j ./../../crowdsource-ui/locales -o ./out/out.xlsx
+   python all_keys_excel_generator.py -j ./../../crowdsource-ui/locales -o 
+            ./out/out.xlsx -v ./../../crowdsource-ui/src/views
    ```
 
    The `./out/out_sme.xlsx` obtained from the above step will have all language content from locale files and can be shared with people for corrections in values.
