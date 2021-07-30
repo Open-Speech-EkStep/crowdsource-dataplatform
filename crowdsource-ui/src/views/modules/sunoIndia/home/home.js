@@ -42,7 +42,7 @@ function initializeBlock() {
     fromLanguage = e.target.value;
     sentenceLanguage = fromLanguage
     localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-    localStorage.setItem("i18n", "en");
+    sessionStorage.setItem("i18n", "en");
     redirectToLocalisedPage();
     getStatsSummary('/stats/summary/asr',MODULE.suno, ()=>{});
     showFucntionalCards('asr',fromLanguage);

@@ -13,7 +13,7 @@ $(document).ready(function () {
 
   localStorage.setItem('module', 'home');
 
-  if (!localStorage.getItem("i18n")) {
+  if (!sessionStorage.getItem("i18n")) {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
     changeLocale("en");
     return;

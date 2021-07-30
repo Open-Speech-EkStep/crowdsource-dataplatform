@@ -134,7 +134,7 @@ const initializeBlock = function () {
     }, {passive: true});
 
     $("#contribute-now").on('click', () => {
-        localStorage.setItem("i18n", "en");
+        sessionStorage.setItem("i18n", "en");
         sentenceLanguage = languageToRecord;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, languageWithNoContribution);
         localStorage.setItem("selectedType", "contribute");
