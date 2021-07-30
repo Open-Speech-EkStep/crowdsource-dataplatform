@@ -55,8 +55,8 @@ const getBadgeLevels = function (language, initiative, source) {
 const renderCard = function (data, initiative, badge_color, source, language) {
   const moduleDetail = {
     bolo: {"text-type": "recordings"},
-    suno: {"text-type": "sentences"},
-    likho: {"text-type": "translations"},
+    suno: {"text-type": "Sentences"},
+    likho: {"text-type": "Translations"},
     dekho: {"text-type": "image labels"}
   }
 
@@ -73,7 +73,7 @@ const renderCard = function (data, initiative, badge_color, source, language) {
   const currentBadge = data.find((element) => element.badge.toLowerCase() === badge_color.toLowerCase());
   $('#participation-type').html(localeSourceStr);
   $('#milestone').html(currentBadge.contributions);
-  $('#text-type').html(localeTextTypeStr);
+  $('#text-type').html(localeTextTypeStr.toLowerCase());
   $('#contribution-language').html(localeLanguageStr);
   $('#initiative-name').html(localeInitiativeStr);
   $('#badge-color').html(localeBadgeColorStr.charAt(0).toUpperCase() + localeBadgeColorStr.slice(1));

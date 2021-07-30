@@ -56,7 +56,7 @@ step("should select <radioButton> radio button, <contributionMsg> text & <bronze
         await taiko.waitFor(1000);
     }
 
-    await taiko.text(contributionMsg).exists();
+    assert.ok(await taiko.text(contributionMsg).isVisible());
     const bronzeBadge = taiko.image({ id: bronzeImg });
     assert.ok(await bronzeBadge.exists());
     const silverBadge = taiko.image({ id: silverImg });
