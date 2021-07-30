@@ -13,6 +13,8 @@ const {
   updateLocaleLanguagesDropdown,
   getLocaleString,
   performAPIRequest,
+  showElement,
+  hideElement
 } = require("../common/utils");
 const {downloadPdf} = require('../common/downloadableBadges');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
@@ -169,6 +171,9 @@ function executeOnLoad() {
     replaceSubStr($("#languageInTopMob"), "<language>", localeLanguageStr);
     replaceSubStr($(".x-axis-label"), "<language>", localeLanguageStr);
     $("#conLanWhenGetBadge").html(localeLanguageStr)
+
+    hideElement($("#loader"))
+    showElement($("#data-wrapper"))
 
     getLanguageStats().then(()=>{
       setSentencesContributed();

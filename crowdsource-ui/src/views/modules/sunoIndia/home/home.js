@@ -44,7 +44,7 @@ function initializeBlock() {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
     localStorage.setItem("i18n", "en");
     redirectToLocalisedPage();
-    getStatsSummary('/stats/summary/asr',MODULE.suno.value, ()=>{});
+    getStatsSummary('/stats/summary/asr',MODULE.suno, ()=>{});
     showFucntionalCards('asr',fromLanguage);
   });
 
@@ -86,11 +86,11 @@ function initializeBlock() {
     const localSpeakerDataParsed = JSON.parse(speakerDetails);
     showUserProfile(localSpeakerDataParsed.userName);
   }
-  $('[name="topLanguageChart"]').on('change', (event) => {    
+  $('[name="topLanguageChart"]').on('change', (event) => {
     showByHoursChart('suno', 'home', event.target.value);
-});
-updateGoalProgressBar(`/progress/asr`);
-  getStatsSummary('/stats/summary/asr',MODULE.suno.value, ()=>{});
+  });
+  updateGoalProgressBar(`/progress/asr`);
+  getStatsSummary('/stats/summary/asr', MODULE.suno, () => { });
 }
 
 

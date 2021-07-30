@@ -22,14 +22,14 @@
 
 
 @media (max-width: 767px) {
-
+  .back-btn a {
+    line-height: 17px;
+    font-size: 16px;
+  }
 
   .back-btn a .material-icons {
+    font-size: 18px !important;
     padding-top: 7px !important;
-    font-size: 19px !important;
-  }
-  .back-btn a {
-    font-size: 16px;
   }
   .mobile-view {
     display: block;

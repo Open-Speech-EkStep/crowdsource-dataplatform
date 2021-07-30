@@ -669,5 +669,9 @@
 	"Contribution (total speakers)": "Contribution (total speakers)",
 	"Translations": "Translations",
 	"Speakers": "Speakers",
-	"Contribution (total sentences)": "Contribution (total sentences)"
+	"Contribution (total sentences)": "Contribution (total sentences)",
+	"Transcribed <span id=\"current_badge_count\"></span> <span>image label(s)</span> in <span id=\"conLanWhenGetBadge\"></span>": "Transcribed <span id=\"current_badge_count\"></span> <span>image label(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
+	"sentences": "sentences",
+	"recordings": "recordings",
+	"image labels": "image labels"
 }

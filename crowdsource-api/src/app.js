@@ -376,7 +376,12 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'Contribution (total sentences)',
             'Translations',
             'Speakers',
-            'images'
+            'images',
+          'recordings',
+          'image labels',
+          'Contribute',
+          'Validate'
+
         ];
 
         const langSttr = {};

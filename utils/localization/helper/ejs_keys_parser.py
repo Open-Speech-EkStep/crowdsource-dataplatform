@@ -2,7 +2,6 @@ import json
 import pathlib
 import re
 
-# In[2]:
 from helper.utils.utils import read_html_ejs_mapping_file
 
 
@@ -64,9 +63,6 @@ def get_keys_from_ejs(filelist):
     return ejs_keys_map
 
 
-# In[3]:
-
-
 def extract_key_from_template(text):
     keys_list = []
     regex = r"<%(-|=) __(.*?)\s*%>"
@@ -78,9 +74,6 @@ def extract_key_from_template(text):
         k = k.replace("\\", "")
         keys_list.append(k)
     return keys_list
-
-
-# In[4]:
 
 
 def fetch_keys_in_includes(includes_file_name, common_folder_ejs_files):
@@ -105,9 +98,6 @@ def fetch_keys_in_includes(includes_file_name, common_folder_ejs_files):
     return keys
 
 
-# In[5]:
-
-
 def read_key_gen(file_path, base_path):
     with open(file_path, 'r') as f:
         readfile = f.read()
@@ -125,9 +115,6 @@ def read_key_gen(file_path, base_path):
     return k_path_map
 
 
-# In[6]:
-
-
 def is_templated_key_present(templated_key, actual_key):
     regex = re.sub('\${.*}', '(.*)', templated_key)
     if "(.*)" not in regex or len(regex.replace('(.*)', '').strip()) == 0:
@@ -139,9 +126,6 @@ def is_templated_key_present(templated_key, actual_key):
         return True
 
     return False
-
-
-# In[7]:
 
 
 def get_identified_key_path_map(key_map, common_folder_ejs_files):
@@ -166,9 +150,6 @@ def get_identified_key_path_map(key_map, common_folder_ejs_files):
             if mk not in i_key_path_map:
                 i_key_path_map[mk] = path
     return i_key_path_map
-
-
-# In[8]:
 
 
 def get_key_map(base_path, main_files_map):
@@ -202,9 +183,6 @@ def get_key_map(base_path, main_files_map):
     return key_file_map
 
 
-# In[9]:
-
-
 def get_keys_with_path(base_path):
     main_files_map = read_html_ejs_mapping_file()
 
@@ -218,14 +196,8 @@ def get_keys_with_path(base_path):
     return out_map
 
 
-# In[10]:
-
-
 # to_find_in_js = set(un_matched_keys).difference(set(ignore_keys))
 # un_matched_keys
-
-
-# In[11]:
 
 if __name__ == "__main__":
     get_keys_with_path()

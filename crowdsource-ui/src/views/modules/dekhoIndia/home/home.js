@@ -46,7 +46,7 @@ function initializeBlock() {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
     localStorage.setItem("i18n", "en");
     redirectToLocalisedPage();
-    getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, ()=>{});
+    getStatsSummary('/stats/summary/ocr',MODULE.dekho, ()=>{});
     showFucntionalCards('ocr', fromLanguage);
   });
 
@@ -74,7 +74,7 @@ function initializeBlock() {
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   showFucntionalCards('ocr', language);
   updateGoalProgressBar(`/progress/ocr`);
-  getStatsSummary('/stats/summary/ocr',MODULE.dekho.value, ()=>{});
+  getStatsSummary('/stats/summary/ocr',MODULE.dekho, ()=>{});
   const $startRecordBtn = $('#proceed-box');
   const $startRecordBtnTooltip = $startRecordBtn.parent();
 

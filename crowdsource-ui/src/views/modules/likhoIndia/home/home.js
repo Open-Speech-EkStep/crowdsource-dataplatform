@@ -35,7 +35,7 @@ const addToLanguage = function (id, list) {
 
 const updatePage = (fromLanguage, toLanguage) => {
   showFucntionalCards('parallel', fromLanguage, toLanguage);
-  getStatsSummary('/stats/summary/parallel', MODULE.likho.value);
+  getStatsSummary('/stats/summary/parallel', MODULE.likho);
 }
 
 
@@ -146,7 +146,7 @@ function initializeBlock() {
   onChangeUser('./home.html', MODULE.likho.value);
   onOpenUserDropDown();
   updateGoalProgressBar(`/progress/parallel`);
-  getStatsSummary('/stats/summary/parallel', MODULE.likho.value);
+  getStatsSummary('/stats/summary/parallel', MODULE.likho);
 
 }
 

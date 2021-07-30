@@ -14,6 +14,8 @@ const {
 const {
   getLocaleString,
   performAPIRequest,
+  showElement,
+  hideElement
 } = require("../common/utils");
 
 const {downloadPdf} = require('../common/downloadableBadges');
@@ -176,6 +178,10 @@ function executeOnLoad() {
     replaceSubStr($(".x-axis-label"), "<from-language>", localeLanguageStr);
     replaceSubStr($(".x-axis-label"), "<to-language>", localeToLanguageStr);
     $("#conLanWhenGetBadge").html(localeLanguageStr);
+
+    hideElement($("#loader"))
+    showElement($("#data-wrapper"))
+
     updateGoalProgressBar(`/progress/parallel/${contributionLanguage}-${toLanguage}/contribute`)
     getLanguageStats().then(()=>{
     setSentencesContributed();
