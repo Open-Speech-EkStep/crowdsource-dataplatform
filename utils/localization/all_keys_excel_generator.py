@@ -15,11 +15,11 @@ def main():
             Example commands:
 
             For only english content:
-                python all_keys_excel_generation.py -j ./../../../crowdsource-ui/locales -o ./out/en.xlsx --only-en
+                python all_keys_excel_generator.py -j ./../../../crowdsource-ui/locales -o ./out/en.xlsx --only-en
 
 
             For All language content:
-                python all_keys_excel_generation.py -j ./../../../crowdsource-ui/locales -o ./out/out.xlsx
+                python all_keys_excel_generator.py -j ./../../../crowdsource-ui/locales -o ./out/out.xlsx
         '''
 
     parser = argparse.ArgumentParser(epilog=example,
@@ -31,7 +31,7 @@ def main():
                         help="Source code path(views folder) to identify the location of "
                              "keys in source code")
 
-    args = parser.parse_args("-j ./../../crowdsource-ui/locales -o ./out/en.xlsx".split())
+    args = parser.parse_args()
 
     input_json_path = args.input_json_path
     output_excel_path = args.output_excel_path

@@ -13,10 +13,10 @@ def main():
             Example commands:
 
             To run with auto-generated excel from all_keys_excel_generation.py:
-                python all_keys_json_generation.py -i ./../../../crowdsource-ui/locales -e ./en/out/en.xlsx -o ./out/
+                python all_keys_json_generator.py -i ./../../../crowdsource-ui/locales -e /out/en.xlsx -o ./out/
 
             To run with manually generated excel with the 4 categories('Suno India', 'Bolo India', 'Likho India', 'Dekho India'):
-                python all_keys_json_generation.py -i ./../../../crowdsource-ui/locales -e ./../test-data/read-data-from-table/English_content.xlsx  -o ./out/ -c manual
+                python all_keys_json_generator.py -i ./../../../crowdsource-ui/locales -e ./resources/test-data/read-data-from-table/English_content.xlsx  -o ./out -c manual
 
         '''
 
