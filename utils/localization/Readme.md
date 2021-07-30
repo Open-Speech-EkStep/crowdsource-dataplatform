@@ -47,11 +47,11 @@ This utility allows users to generate excel file(with all keys / delta keys) fro
 1. Run the following command to repopulate the 'en' locale file and update all other locale files
    - To run with auto-generated excel from AllKeysExcelGenerator.py:
    ```
-   python all_keys_json_generator.py -i ./../../crowdsource-ui/locales -e /out/en.xlsx -o ./out/
+   python all_keys_json_generator.py -i ./../../crowdsource-ui/locales -e ./out/en.xlsx -o ./all_keys_json_out
    ```
    - To run with manually generated excel with the 4 categories('Suno India', 'Bolo India', 'Likho India', 'Dekho India'):
    ```
-   python all_keys_json_generator.py -i ./../../crowdsource-ui/locales -e ./resources/test-data/read-data-from-table/English_content.xlsx  -o ./out -c manual
+   python all_keys_json_generator.py -i ./../../crowdsource-ui/locales -e resources/test_data/all_keys_json_input/English_content.xlsx -o ./all_keys_json_out -c manual
    ```
 
 (For more info on above command, use -h for help)
