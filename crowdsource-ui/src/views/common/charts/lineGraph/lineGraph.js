@@ -1,11 +1,20 @@
 const fetch = require('./fetch')
-const { calculateTime, formatTime } = require('./utils');
+const { calculateTime, formatTime, getJson } = require('./utils');
 const { CURRENT_MODULE, MODULE } = require('./constants');
 
 const $timelineLoader = $('#timeline-loader');
 const $timelineChart = $('#timeline');
 
 const chartReg = {};
+
+const getTimelineUrl = (language, timeframe = "weekly") => {
+  let url = "/aggregated-json/" + timeframe + "Timeline";
+  if (!language) {
+      url += "Cumulative"
+  }
+  url += ".json";
+  return url;
+}
 
 const drawTimelineChart = (timelineData, series1Name, series2Name) => {
   am4core.ready(function () {
@@ -14,7 +23,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     // Create chart instance
     const chart = am4core.create("timeline-chart", am4charts.XYChart);
     
-    const chartData = timelineData.data;
+    const chartData = timelineData;
    
     const currentModule = localStorage.getItem(CURRENT_MODULE);
     for (let i = 0; i < chartData.length; i++) {
@@ -127,29 +136,23 @@ const disposeLineChart = (chartDiv) => {
   }
 }
 
-function updateLineGraph(language, timeframe, type,series1Name, series2Name) {
+function updateLineGraph(language, timeframe, module,series1Name, series2Name) {
     disposeLineChart('timeline-chart');
     $timelineLoader.show().addClass('d-flex');
     $timelineChart.addClass('d-none');
-    buildLineGraphs(language, timeframe, type,series1Name, series2Name);
+    buildLineGraphs(language, timeframe, module,series1Name, series2Name);
 }
 
-function buildLineGraphs(language, timeframe, type, series1Name, series2Name) {
-  // $.fn.popover.Constructor.Default.whiteList.table = [];
-  // $.fn.popover.Constructor.Default.whiteList.tbody = [];
-  // $.fn.popover.Constructor.Default.whiteList.tr = [];
-  // $.fn.popover.Constructor.Default.whiteList.td = [];
-  Promise.all([
-    fetch(`/timeline/${type}?language=${language}&timeframe=${timeframe}`),
-  ]).then(function (responses) {
-    return Promise.all(responses.map(function (response) {
-        return response.json();
-    }));
-}).then((data) => {
+function buildLineGraphs(language, timeframe, module, series1Name, series2Name) {
+  const url = getTimelineUrl(language, timeframe);
+  
+  getJson(url)
+  .then((data) => {
     try {
+      data = data.filter(d => d.type == module["api-type"]) || [];
       $timelineLoader.hide().removeClass('d-flex');
       $timelineChart.removeClass('d-none');
-      drawTimelineChart(data[0],series1Name, series2Name);
+      drawTimelineChart(data,series1Name, series2Name);
 
       //lazy load other css
       setTimeout(() => {

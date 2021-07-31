@@ -1,6 +1,6 @@
 const fetch = require('./fetch')
 const { generateIndiaMap } = require('./home-page-charts');
-const { calculateTime, formatTime } = require('./utils');
+const { calculateTime, formatTime, getJson } = require('./utils');
 const $chartRow = $('.chart-row');
 const $chartLoaders = $chartRow.find('.loader');
 const $charts = $chartRow.find('.chart');
@@ -104,18 +104,33 @@ const disposeChart = (chartDiv) => {
     }
 }
 
+const getTimelineUrl = (language, timeframe = "weekly") => {
+    let url = "/aggregated-json/" + timeframe + "Timeline";
+    if (!language) {
+        url += "Cumulative"
+    }
+    url += ".json";
+    return url;
+  }
+  
+  function getLanguageSpecificData(data, lang) {
+    const returnData = [];
+    data.forEach(item => {
+      if (item.language.toLowerCase() === lang.toLowerCase()) {
+        returnData.push(item);
+      }
+    });
+    return returnData;
+  }
+
 const buildTimelineGraph = (language, timeframe) => {
-    fetch(`/timeline/text?language=${language}&timeframe=${timeframe}`)
+    const url = getTimelineUrl(language, timeframe);
+    getJson(url)
     .then((data) => {
-        if (!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
-        } else {
-            return data.json();
-        }
-    }).then((data) => {
         $timelineLoader.hide().removeClass('d-flex');
         $timelineChart.removeClass('d-none');
-
+        data = data.filter(d => d.type == "text") || [];
+        data = language !== "" ? getLanguageSpecificData(data, language) : data;
         drawTimelineChart(data);
     }).catch((err) => {
         console.log(err);
@@ -123,13 +138,20 @@ const buildTimelineGraph = (language, timeframe) => {
 }
 
 function buildGraphs(language, timeframe) {
-    // $.fn.popover.Constructor.Default.whiteList.table = [];
-    // $.fn.popover.Constructor.Default.whiteList.tbody = [];
-    // $.fn.popover.Constructor.Default.whiteList.tr = [];
-    // $.fn.popover.Constructor.Default.whiteList.td = [];
+   
+    const url = getTimelineUrl(language, timeframe);
+    getJson(url)
+        .then(timelineData => {
+            timelineData = timelineData.filter(d => d.type == "text") || [];
+            timelineData = language !== "" ? getLanguageSpecificData(timelineData, language) : timelineData;
+            drawTimelineChart(timelineData);
+        }).catch((err) => {
+            console.log(err);
+            $chartLoaders.show().addClass('d-flex');
+            $charts.addClass('d-none');
+        });
 
     Promise.all([
-        fetch(`/timeline/text?language=${language}&timeframe=${timeframe}`),
         fetch(`/stats/contributions/gender/text?language=${language}`),
         fetch(`/stats/contributions/age/text?language=${language}`)
     ]).then(function (responses) {
@@ -141,11 +163,8 @@ function buildGraphs(language, timeframe) {
             $chartLoaders.hide().removeClass('d-flex');
             $charts.removeClass('d-none');
 
-            const genderData = getGenderData(data[1]);
-            const ageGroupData = getAgeGroupData(data[2].data, 'age_group').sort((a, b) => Number(a.speakers) - Number(b.speakers));
-
-            // Draw timeline chart
-            drawTimelineChart(data[0]);
+            const genderData = getGenderData(data[0]);
+            const ageGroupData = getAgeGroupData(data[1].data, 'age_group').sort((a, b) => Number(a.speakers) - Number(b.speakers));
 
             // Draw gender chart
             drawGenderChart(genderData);
@@ -295,7 +314,7 @@ const drawTimelineChart = (timelineData) => {
         // Create chart instance
         const chart = am4core.create("timeline-chart", am4charts.XYChart);
 
-        const chartData = timelineData.data;
+        const chartData = timelineData;
         for (let i = 0; i < chartData.length; i++) {
             if (!chartData[i].month) {
                 chartData[i].month = chartData[i].quarter * 3;

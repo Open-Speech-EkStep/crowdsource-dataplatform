@@ -6,6 +6,8 @@ const { updateLocaleLanguagesDropdown, getLocaleString } = require('../common/ut
 const { CURRENT_MODULE,CONTRIBUTION_LANGUAGE, MODULE,SPEAKER_DETAILS_KEY } = require('../common/constants');
 const { hasUserRegistered } = require('../common/common');
 const fetch = require('../common/fetch');
+const { getJson } = require('../common/utils');
+const moment = require('moment');
 
 const {setSpeakerData} = require('../common/contributionStats');
 const {initializeFeedbackModal} = require('../common/feedback')
@@ -44,39 +46,53 @@ function updateLanguage(language) {
     const $speakerDataDetails = $speakersData.find('#contribution-details');
     const $speakerDataLanguagesWrapper = $('#languages-wrapper');
     const activeDurationText = $('#duration').find('.active')[0].dataset.value;
+    getJson("/aggregated-json/lastUpdatedAtQuery.json")
+        .then(res => {
+            const lastUpdatedAt = moment(res['timezone']).format('DD-MM-YYYY, h:mm:ss a')
+            if (lastUpdatedAt) {
+                $('#data-updated').text(` ${lastUpdatedAt}`);
+                $('#data-updated').removeClass('d-none');
+            } else {
+                $('#data-updated').addClass('d-none');
+            }
+        });
+    getJson('/aggregated-json/participationStats.json')
+        .then((participationData) => {
+            const url = language ? '/aggregated-json/cumulativeDataByLanguage.json' : '/aggregated-json/cumulativeCount.json';
+            getJson(url)
+                .then((data) => {
+                    try {
+                        participationData = participationData.find(d => d.type == MODULE.suno["api-type"]);
+                        const sData = data.filter(d => d.type == MODULE.suno["api-type"]) || [];
+                        if (language == "") {
+                            sData[0].total_speakers = participationData.count || 0;
+                        }
+                        const langaugeExists = isLanguageAvailable(sData, language);
 
-    fetchDetail(language)
-        .then((data) => {
-            try {
-                const langaugeExists = isLanguageAvailable(data.data, language);
-                if (data.last_updated_at) {
-                    $('#data-updated').text(` ${data.last_updated_at}`);
-                    $('#data-updated').removeClass('d-none');
-                } else {
-                    $('#data-updated').addClass('d-none');
-                }
-                if (langaugeExists) {
-                    $speakersDataLoader.removeClass('d-none');
-                    $speakerDataLanguagesWrapper.addClass('d-none');
-                    $speakerDataDetails.addClass('d-none');
-                    generateIndiaMap(language, 'asr');
-                    updateLineGraph(language, activeDurationText, 'asr',"Transcribed","Validated");
-                    setSpeakerData(data.data, language);
-                    $speakersDataLoader.addClass('d-none');
-                    $speakerDataDetails.removeClass('d-none');
-                } else {
-                    const previousLanguage = localStorage.getItem('previousLanguage');
-                    languageToRecord = language;
-                    $("#language").val(previousLanguage);
-                    $("#languageSelected").text(` ${language}, `);
-                    $("#no-data-found").removeClass('d-none');
-                    timer = setTimeout(() => {
-                        $('#no-data-found').addClass('d-none');
-                    }, 5000);
-                }
-            } catch (error) {console.log(error)}
-        })
-        .catch((err) => {console.log(err)});
+                        if (langaugeExists) {
+                            $speakersDataLoader.removeClass('d-none');
+                            $speakerDataLanguagesWrapper.addClass('d-none');
+                            $speakerDataDetails.addClass('d-none');
+                            generateIndiaMap(language, MODULE.suno);
+                            updateLineGraph(language, activeDurationText, MODULE.suno, "Transcribed", "Validated");
+                            setSpeakerData(sData, language);
+                            $speakersDataLoader.addClass('d-none');
+                            $speakerDataDetails.removeClass('d-none');
+                        } else {
+                            const previousLanguage = localStorage.getItem('previousLanguage');
+                            languageToRecord = language;
+                            $("#language").val(previousLanguage);
+                            $("#languageSelected").text(` ${language}, `);
+                            $("#no-data-found").removeClass('d-none');
+                            timer = setTimeout(() => {
+                                $('#no-data-found').addClass('d-none');
+                            }, 5000);
+                        }
+                    } catch (error) { console.log(error) }
+                })
+                .catch((err) => { console.log(err) });
+        });
+    
 }
 
 const initializeBlock = function () {
@@ -110,7 +126,7 @@ const initializeBlock = function () {
         $durationLiActive.removeClass('active').addClass('inactive');
         const selectedDuration = e.target.dataset.value;
         const selectedLanguage = $('#language option:selected').val();
-        updateLineGraph(selectedLanguage, selectedDuration, 'asr',"Transcribed","Validated");
+        updateLineGraph(selectedLanguage, selectedDuration, MODULE.suno, "Transcribed","Validated");
     });
 
     $("#no-data-found").on('mouseenter', () => {
