@@ -15,7 +15,15 @@ const getTimelineUrl = (language, timeframe = "weekly") => {
   url += ".json";
   return url;
 }
-
+function getLanguageSpecificData(data, lang) {
+  const returnData = [];
+  data.forEach(item => {
+    if (item.language.toLowerCase() === lang.toLowerCase()) {
+      returnData.push(item);
+    }
+  });
+  return returnData;
+}
 const drawTimelineChart = (timelineData, series1Name, series2Name) => {
   am4core.ready(function () {
     am4core.useTheme(am4themes_animated);
@@ -150,6 +158,7 @@ function buildLineGraphs(language, timeframe, module, series1Name, series2Name) 
   .then((data) => {
     try {
       data = data.filter(d => d.type == module["api-type"]) || [];
+      data = language !== "" ? getLanguageSpecificData(data, language) : data;
       $timelineLoader.hide().removeClass('d-flex');
       $timelineChart.removeClass('d-none');
       drawTimelineChart(data,series1Name, series2Name);
