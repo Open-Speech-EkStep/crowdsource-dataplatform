@@ -49,15 +49,15 @@ ALTER TABLE public.contributions_and_demo_stats_newest
     OWNER TO postgres;
 
 
-CREATE INDEX cds_issystem_index
+CREATE INDEX IF NOT EXISTS cds_issystem_index
     ON public.contributions_and_demo_stats_newest USING btree
     (is_system)
     TABLESPACE pg_default;
-CREATE INDEX cds_language_index
+CREATE INDEX IF NOT EXISTS cds_language_index
     ON public.contributions_and_demo_stats_newest USING btree
     (language COLLATE pg_catalog."default")
     TABLESPACE pg_default;
-CREATE INDEX cds_type_index
+CREATE INDEX IF NOT EXISTS cds_type_index
     ON public.contributions_and_demo_stats_newest USING btree
     (type COLLATE pg_catalog."default")
     TABLESPACE pg_default;
