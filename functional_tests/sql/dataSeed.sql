@@ -1,4 +1,4 @@
---Clean all data
+----Clean all data
 update configurations set value=0 where config_name='include_profane';
 
 update dataset_row set is_profane=false where type='text' and media->>'language'='Hindi';
@@ -268,109 +268,109 @@ select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Odia"
-            }'::jsonb, null, false, null
+            }'::jsonb, null, false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Odia"
-            }'::jsonb, null, false, null
+            }'::jsonb, null, false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Telugu"
-            }'::jsonb, 'contributed', false, null
+            }'::jsonb, 'contributed', false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Telugu"
-            }'::jsonb, 'contributed', false, null
+            }'::jsonb, 'contributed', false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null, false, null
+            }'::jsonb, null, false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null, false, null
+            }'::jsonb, null, false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null, false, null
+            }'::jsonb, null, false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null, false, null
+            }'::jsonb, null, false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null, false, null
+            }'::jsonb, null, false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null, false, null
+            }'::jsonb, null, false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, 'contributed', false, null
+            }'::jsonb, 'contributed', false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, 'contributed', false, null
+            }'::jsonb, 'contributed', false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, 'contributed', false, null
+            }'::jsonb, 'contributed', false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Gujarati"
-            }'::jsonb, null, true, null
+            }'::jsonb, null, true, CAST(NULL AS INTEGER)
             union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Gujarati"
-            }'::jsonb, null, null, null
+            }'::jsonb, null, null, CAST(NULL AS INTEGER)
             union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Gujarati"
-            }'::jsonb, 'contributed', true, null
+            }'::jsonb, 'contributed', true, CAST(NULL AS INTEGER)
             union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Gujarati"
-            }'::jsonb, 'contributed', true, (select master_dataset_id from master_dataset where location='testMDSLocation')
+            }'::jsonb, 'contributed', true, (select master_dataset_id from master_dataset where location='testMDSLocation')::integer
             union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Gujarati"
-            }'::jsonb, 'contributed', null, null;
+            }'::jsonb, 'contributed', null, CAST(NULL AS INTEGER);
 
 insert into contributions 
     ( dataset_row_id, contributed_by, media, is_system , date, action) 
@@ -450,7 +450,16 @@ select 'medium', 'parallel', '{
 
 --- Profanity Data
 
+delete from validations where contribution_id in (
+select contribution_id from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='text') and (media->> 'language'='English'))
+);
+
+delete from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='text') and (media->> 'language'='English')
+);
 Delete from dataset_row where media->> 'language' = 'English' and type = 'text';
+
 
 insert into dataset_row ( difficulty_level, type, media, state ) 
 values('medium', 'text', '{
@@ -483,7 +492,18 @@ Union values('medium', 'text', '{
 
 --- Profanity Data for dekho india
 
+
+delete from validations where contribution_id in (
+select contribution_id from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='ocr') and (media->> 'language'='English'))
+);
+
+delete from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='ocr') and (media->> 'language'='English')
+);
+
 Delete from dataset_row where media->> 'language' = 'English' and type = 'ocr';
+
 
 
 insert into dataset_row ( difficulty_level, type, media, state ) 
@@ -590,6 +610,15 @@ Union values('medium', 'ocr', '{
 
 
 -- Profanity data for Suno India
+
+delete from validations where contribution_id in (
+select contribution_id from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='asr') and (media->> 'language'='Hindi'))
+);
+
+delete from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='asr') and (media->> 'language'='Hindi')
+);
 
 Delete from dataset_row where media->> 'language' = 'Hindi' and type = 'asr';
 
@@ -718,6 +747,15 @@ Union values('medium', 'asr', '{
 
 
 -- Profanity data for Likho india
+
+delete from validations where contribution_id in (
+select contribution_id from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='parallel') and (media->> 'language'='Hindi'))
+);
+
+delete from contributions where dataset_row_id in (
+select dataset_row_id from dataset_row where (type='parallel') and (media->> 'language'='Hindi')
+);
 
 Delete from dataset_row where media->> 'language' = 'Hindi' and type = 'parallel';
 
@@ -897,3 +935,4 @@ REFRESH MATERIALIZED VIEW age_group_contributions;
 REFRESH MATERIALIZED VIEW language_group_contributions;
 REFRESH MATERIALIZED VIEW state_group_contributions;
 REFRESH MATERIALIZED VIEW language_and_state_group_contributions;
+
