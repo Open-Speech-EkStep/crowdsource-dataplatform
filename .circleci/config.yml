@@ -98,6 +98,10 @@ jobs:
     parameters:
       db_name:
         type: string
+      db_host:
+        type: string
+      db_user:
+        type: string
     executor:
       name: node/default
     steps:
@@ -106,7 +110,7 @@ jobs:
           name: Run DB Migrate
           command: |
             echo << parameters.db_name >>
-            export DATABASE_URL=postgresql://${AZURE_DB_USER}:${AZURE_DB_PASS}@${AZURE_DB_HOST}/<< parameters.db_name >>
+            export DATABASE_URL=postgresql://<< parameters.db_user >>:${AZURE_DB_PASS}@<< parameters.db_host >>/<< parameters.db_name >>
             echo << parameters.db_name >>
             echo $DATABASE_URL
             npm run install:api
@@ -183,6 +187,8 @@ workflows:
       - db_migrate_azure:
           name: migrate_dev_azure
           db_name: ${AZURE_DEV_DB_NAME}
+          db_host: ${AZURE_DB_HOST}
+          db_user: ${AZURE_DB_USER}
           requires:
             - create-workspace
 
@@ -254,6 +260,8 @@ workflows:
       - db_migrate_azure:
           name: migrate_test_azure
           db_name: ${AZURE_TEST_DB_NAME}
+          db_host: ${AZURE_DB_HOST}
+          db_user: ${AZURE_DB_USER}
           requires:
             - approve_test_deployment_aks
 
@@ -312,6 +320,8 @@ workflows:
       - db_migrate_azure:
           name: migrate_uat_azure
           db_name: ${AZURE_UAT_DB_NAME}
+          db_host: ${AZURE_DB_HOST}
+          db_user: ${AZURE_DB_USER}
           requires:
             - approve_uat_deployment_aks
 
@@ -360,6 +370,8 @@ workflows:
       - db_migrate_azure:
           name: migrate_prod_azure
           db_name: ${AZURE_PROD_DB_NAME}
+          db_host: ${AZURE_PROD_DB_HOST}
+          db_user: ${AZURE_PROD_DB_USER}
           requires:
             - approve_prod_deployment_aks
 

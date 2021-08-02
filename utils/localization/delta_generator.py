@@ -11,12 +11,15 @@ if __name__ == '__main__':
     keys_without_translation = {}
     example = '''
             Example commands:
+            
+            For only keys without translations on multiple excel sheets for each language:
+                python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -a --output-type SEPARATE_SHEETS
 
-            For specific languages:
-                python DeltaGenerator.py -i ./../all_keys_generator/out -o . -l gu pa
-
-            For all languages:
-                python DeltaGenerator.py -i ./../all_keys_generator/out -o . -a
+            For all keys, all languages on a single excel sheet:
+                python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -a --all-keys --output-type SINGLE_SHEET
+            
+            For all keys, but specific languages on a single excel sheet:
+                python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -l gu pa --all-keys --output-type SINGLE_SHEET
         '''
 
     parser = argparse.ArgumentParser(epilog=example,

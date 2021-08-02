@@ -61,10 +61,7 @@ def read_json(json_file_path):
 
 
 def get_dict_for_data(key, processed_text, replacement_mapping_dict, key_path_list):
-    out_dict = {}
-    out_dict["Key"] = key
-    out_dict["English copy"] = [processed_text]
-    out_dict["PATH"] = [key_path_list[key]]
+    out_dict = {"Key": key, "English copy": [processed_text], "PATH": [key_path_list[key]]}
     for replacement in sorted(replacement_mapping_dict.keys()):
         out_dict[replacement] = [replacement_mapping_dict[replacement]]
     return out_dict

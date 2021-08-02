@@ -1,6 +1,6 @@
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
-const { calculateTime, formatTime, performAPIRequest, formatTimeForLegends } = require('./utils');
+const { calculateTime, formatTime, formatTimeForLegends, getJson } = require('./utils');
 const { drawTopLanguageChart } = require('../../../build/js/common/verticalGraph');
 
 const statesInformation = [
@@ -48,7 +48,7 @@ const drawMap = function (response) {
   const $legendDiv = $("#legendDiv");
   const maxContribution = Math.max.apply(
     Math,
-    response.data.map(function (ele) {
+    response.map(function (ele) {
       return Number(ele.total_contributions);
     })
   );
@@ -60,7 +60,7 @@ const drawMap = function (response) {
   }
 
   statesData.forEach(st => {
-    const ele = response.data.find(s => st.state === s.state);
+    const ele = response.find(s => st.state === s.state);
     if (ele) {
       const {
         hours: cHours,
@@ -165,23 +165,22 @@ const drawMap = function (response) {
 };
 
 function getLanguageSpecificData(data, lang) {
-  const stateData = {
-    data: [],
-  };
-  data.data.forEach(item => {
+  const stateData = [];
+  data.forEach(item => {
     if (item.language.toLowerCase() === lang.toLowerCase()
       && item.state !== ''
       && item.state.toLowerCase() !== 'anonymous') {
-      stateData.data.push(item);
+      stateData.push(item);
     }
   });
   return stateData;
 }
 
 const generateIndiaMap = function (language = "") {
-  const url = language !== "" ? '/aggregate-data-count/text?byState=true&byLanguage=true' : '/aggregate-data-count/text?byState=true';
-  performAPIRequest(url)
+  const url = language !== "" ? '/aggregated-json/cumulativeDataByLanguageAndState.json' : '/aggregated-json/cumulativeDataByState.json';
+  getJson(url)
     .then((data) => {
+      data = data.filter(d => d.type == "text") || [];
       const response = language !== "" ? getLanguageSpecificData(data, language) : data;
       drawMap(response);
     })

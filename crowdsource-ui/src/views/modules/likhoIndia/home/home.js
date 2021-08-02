@@ -96,7 +96,7 @@ function initializeBlock() {
       toLanguage = $('#to-language option:first-child').val();
       localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
       updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
-      localStorage.setItem("i18n", "en");
+      sessionStorage.setItem("i18n", "en");
       redirectToLocalisedPage();
       updatePage(fromLanguage, toLanguage);
     });

@@ -33,7 +33,7 @@ const changeLocale = function (locale) {
         currentPage = "home.html";
     }
     const module = localStorage.getItem(CURRENT_MODULE);
-    localStorage.setItem("i18n", locale);
+    sessionStorage.setItem("i18n", locale);
     // if(module == 'bolo' && currentPage == "home.html"){
     //     location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
     // }
@@ -56,7 +56,7 @@ function showLanguagePopup() {
 }
 
 function redirectToLocalisedPage() {
-    const locale = localStorage.getItem("i18n") ;
+    const locale = sessionStorage.getItem("i18n") ;
     const allLocales = ALL_LANGUAGES.map(language => language.id);
     // const locale = localeValue == 'null'  || localeValue == undefined? 'en' : localeValue;
     const splitValues = location.href.split('/');
@@ -74,6 +74,9 @@ function redirectToLocalisedPage() {
 
 
 $(document).ready(function () {
+    if (sessionStorage.getItem('i18n') == null) {
+        sessionStorage.setItem('i18n', location.href.split('/')[3]);
+    }
     $("#bhashadaan_logo").attr('href', base_url);
     registerEvents();
 })

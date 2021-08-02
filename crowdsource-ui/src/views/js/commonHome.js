@@ -5,7 +5,6 @@ const {
   DEFAULT_CON_LANGUAGE,
   CONTRIBUTION_LANGUAGE
 } = require('./constants');
-const {performAPIRequest} = require('../common/utils');
 const {setLangNavBar} = require('../common/languageNavBar')
 
 const {getContributedAndTopLanguage,showByHoursChart, updateLocaleLanguagesDropdown} = require('./common');
@@ -95,6 +94,7 @@ const getStats = (module) => {
 const getChartStats = (module) => {
   $.getJSON(`${context_root}/aggregated-json/topLanguagesByHoursContributed.json`, (jsonData) => {
     const top_languages_by_hours = jsonData.filter(d => d.type == module["api-type"]);
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
     const languages = getContributedAndTopLanguage(top_languages_by_hours, module.value);
     localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
     showByHoursChart(module.value);
@@ -120,13 +120,7 @@ const getStatsSummary = function (url, module, callBack=()=>{}) {
   getStats(module);
   getChartStats(module);
   getSpeakerChartStats(module);
-  performAPIRequest(url)
-    .then(response => {      
-      localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-      callBack();      
-    }).catch(err=>{
-    console.log(err)
-  });
+  callBack();
 }
 
 

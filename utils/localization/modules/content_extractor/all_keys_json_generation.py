@@ -205,7 +205,6 @@ def generate(input_excel_path, input_json_path, output_json_path, input_category
     clean_json_df = clean_df(json_df)
 
     merged_df = pd.merge(clean_excel_df, clean_json_df, on=key_column, how='outer')
-    merged_df.to_excel('validate.xlsx')
     merged_df = merged_df.apply(set_values, axis=1)
 
     filtered_df = merged_df[[key_column, english_col]]

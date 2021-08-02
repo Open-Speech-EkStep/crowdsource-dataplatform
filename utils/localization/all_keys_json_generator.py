@@ -12,11 +12,14 @@ def main():
     example = '''
             Example commands:
 
-            To run with auto-generated excel from all_keys_excel_generation.py:
-                python all_keys_json_generation.py -i ./../../../crowdsource-ui/locales -e ./en/out/en.xlsx -o ./out/
+            To run with auto-generated excel from all_keys_excel_generation.py: 
+                python all_keys_json_generator.py -i ./../../crowdsource-ui/locales 
+                -e ./out/en.xlsx -o ./all_keys_json_out 
 
-            To run with manually generated excel with the 4 categories('Suno India', 'Bolo India', 'Likho India', 'Dekho India'):
-                python all_keys_json_generation.py -i ./../../../crowdsource-ui/locales -e ./../test-data/read-data-from-table/English_content.xlsx  -o ./out/ -c manual
+            To run with manually generated excel with the 4 categories('Suno India', 'Bolo India', 'Likho India', 
+            'Dekho India'): 
+                python all_keys_json_generator.py -i ./../../crowdsource-ui/locales
+                -e resources/test_data/all_keys_json_input/English_content.xlsx -o ./all_keys_json_out -c manual 
 
         '''
 

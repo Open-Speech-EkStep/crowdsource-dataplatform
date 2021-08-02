@@ -256,10 +256,15 @@ const setStartRecordingBtnOnClick = function (url, module = '') {
 }
 
 $(document).ready(function () {
+    const userName = document.getElementById("username");
     if (whitelisting_email==='true') {
-        document.getElementById("username").maxLength = 100;
+        if (userName !== null && userName !== undefined) {
+            userName.maxLength = 100;
+        }
     } else {
-        document.getElementById("username").maxLength = 12;
+        if (userName !== null && userName !== undefined) {
+            userName.maxLength = 12;
+        }
     }
 });
 

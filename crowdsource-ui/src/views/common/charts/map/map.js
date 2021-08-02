@@ -1,4 +1,4 @@
-const { calculateTime, formatTime, performAPIRequest, formatTimeForLegends, formatTransAndImages } = require('./utils');
+const { calculateTime, formatTime, formatTimeForLegends, formatTransAndImages, getJson } = require('./utils');
 
 const statesInformation = [
   { id: 'IN-TG', state: 'Telangana', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
@@ -48,7 +48,7 @@ const drawMap = function (response, moduleType) {
   const $legendDiv = $("#legendDiv");
   const maxContribution = Math.max.apply(
     Math,
-    response.data.map(function (ele) {
+    response.map(function (ele) {
       return moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
     })
   );
@@ -59,7 +59,7 @@ const drawMap = function (response, moduleType) {
     quarterVal = 0.25;
   }
   statesData.forEach(st => {
-    const ele = response.data.find(s => st.state === s.state);
+    const ele = response.find(s => st.state === s.state);
     if (ele) {
       const {
         hours: cHours,
@@ -208,15 +208,13 @@ const drawMap = function (response, moduleType) {
 };
 
 function getLanguageSpecificData(data, lang) {
-  const stateData = {
-    data: [],
-  };
-  data.data.forEach(item => {
+  const stateData = [];
+  data.forEach(item => {
     if (item.language) {
       if (item.language.toLowerCase() === lang.toLowerCase()
         && item.state !== ''
         && item.state.toLowerCase() !== 'anonymous') {
-        stateData.data.push(item);
+        stateData.push(item);
       }
     }
   });
@@ -230,15 +228,17 @@ function getLanguageSpecificData(data, lang) {
 //   }
 // }
 
-const generateIndiaMap = function (language = "", moduleType) {
+const generateIndiaMap = function (language = "", module) {
   $mapLoader.show().addClass('d-flex');
   $mapChart.addClass('d-none');
-  const url = language !== "" ? `/aggregate-data-count/${moduleType}?byState=true&byLanguage=true` : `/aggregate-data-count/${moduleType}?byState=true`;
-  performAPIRequest(url)
+  // const url = language !== "" ? `/aggregate-data-count/${moduleType}?byState=true&byLanguage=true` : `/aggregate-data-count/${moduleType}?byState=true`;
+  const url = language !== "" ? '/aggregated-json/cumulativeDataByLanguageAndState.json' : '/aggregated-json/cumulativeDataByState.json';
+  getJson(url)
     .then((data) => {
+      data = data.filter(d => d.type == module["api-type"]) || [];
       const result = language !== "" ? getLanguageSpecificData(data, language) : data;
       // disposeLineChart('indiaMapChart')
-      drawMap(result, moduleType);
+      drawMap(result, module["api-type"]);
       $mapLoader.hide().removeClass('d-flex');
       $mapChart.removeClass('d-none');
     })

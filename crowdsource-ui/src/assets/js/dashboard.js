@@ -5,10 +5,11 @@ const {
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick } = require('./speakerDetails');
-const {  updateLocaleLanguagesDropdown, calculateTime, getLocaleString, formatTime } = require('./utils');
+const {  updateLocaleLanguagesDropdown, calculateTime, getLocaleString, formatTime, getJson } = require('./utils');
 const { DEFAULT_CON_LANGUAGE,MODULE,CONTRIBUTION_LANGUAGE ,SPEAKER_DETAILS_KEY} = require('../../../build/js/common/constants');
 const { hasUserRegistered } = require('./common');
 const fetch = require('./fetch');
+const moment = require('moment');
 const LOCALE_STRINGS = 'localeString';
 let timer;
 
@@ -71,65 +72,81 @@ function updateLanguage(language) {
     const $speakersDataValidationValue = $('#validated-value');
     const activeDurationText = $('#duration').find('.active')[0].dataset.value;
 
-    fetchDetail(language)
-        .then((data) => {
-            try {
-                const langaugeExists = isLanguageAvailable(data.data, language);
-                if (data.last_updated_at) {
-                    $('#data-updated').text(` ${data.last_updated_at}`);
-                    $('#data-updated').removeClass('d-none');
-                } else {
-                    $('#data-updated').addClass('d-none');
-                }
-                if (langaugeExists) {
-                    $speakersDataLoader.removeClass('d-none');
-                    $speakerDataLanguagesWrapper.addClass('d-none');
-                    $speakerDataDetails.addClass('d-none');
-                    updateGraph(language, activeDurationText);
-                    const speakersData = getSpeakersData(data.data, language);
-                    const {
-                        hours: contributedHours,
-                        minutes: contributedMinutes,
-                        seconds: contributedSeconds
-                    } = calculateTime(speakersData.contributions.toFixed(3)*60*60);
-                    const {
-                        hours: validatedHours,
-                        minutes: validatedMinutes,
-                        seconds: validatedSeconds
-                    } = calculateTime(speakersData.validations.toFixed(3)*60*60);
-
-                    if (speakersData.languages) {
-                        $speakerDataLanguagesValue.text(speakersData.languages);
-                        $speakerDataLanguagesWrapper.removeClass('d-none');
-                        $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4')
-                        $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xl-3');
-                    } else {
-                        $speakerDataLanguagesWrapper.addClass('d-none');
-                        $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xl-3');
-                        $speakerContributionData.addClass('col-12 col-md-4 col-lg-4 col-xl-4')
-                    }
-
-                    $speakersDataContributionValue.text(formatTime(contributedHours, contributedMinutes, contributedSeconds));
-                    $speakersDataValidationValue.text(formatTime(validatedHours, validatedMinutes, validatedSeconds));
-                    $speakersDataSpeakerValue.text(speakersData.speakers);
-
-                    $speakersDataLoader.addClass('d-none');
-                    $speakerDataDetails.removeClass('d-none');
-                } else {
-                    const previousLanguage = localStorage.getItem('previousLanguage');
-                    languageToRecord = language;
-                    $("#language").val(previousLanguage);
-                    $("#languageSelected").text(` ${language}, `);
-                    $("#no-data-found").removeClass('d-none');
-                    timer = setTimeout(() => {
-                        $('#no-data-found').addClass('d-none');
-                    }, 5000);
-                }
-            } catch (error) {
-                console.log(error);
+    getJson("/aggregated-json/lastUpdatedAtQuery.json")
+        .then(res => {
+            const lastUpdatedAt = moment(res['timezone']).format('DD-MM-YYYY, h:mm:ss a')
+            if (lastUpdatedAt) {
+                $('#data-updated').text(` ${lastUpdatedAt}`);
+                $('#data-updated').removeClass('d-none');
+            } else {
+                $('#data-updated').addClass('d-none');
             }
-        })
-        .catch((err) => {console.log(err)});
+        });
+
+    const url = language ? '/aggregated-json/cumulativeDataByLanguage.json' : '/aggregated-json/cumulativeCount.json';
+    getJson('/aggregated-json/participationStats.json')
+        .then((participationData) => {
+            getJson(url)
+                .then((data) => {
+                    try {
+                        participationData = participationData.find(d => d.type == MODULE.bolo["api-type"]);
+                        const bData = data.filter(d => d.type == MODULE.bolo["api-type"]) || [];
+                        if (language == "") {
+                            bData[0].total_speakers = participationData.count || 0;
+                        }
+                        const langaugeExists = isLanguageAvailable(bData, language);
+
+                        if (langaugeExists) {
+                            $speakersDataLoader.removeClass('d-none');
+                            $speakerDataLanguagesWrapper.addClass('d-none');
+                            $speakerDataDetails.addClass('d-none');
+                            updateGraph(language, activeDurationText);
+                            const speakersData = getSpeakersData(bData, language);
+                            const {
+                                hours: contributedHours,
+                                minutes: contributedMinutes,
+                                seconds: contributedSeconds
+                            } = calculateTime(speakersData.contributions.toFixed(3) * 60 * 60);
+                            const {
+                                hours: validatedHours,
+                                minutes: validatedMinutes,
+                                seconds: validatedSeconds
+                            } = calculateTime(speakersData.validations.toFixed(3) * 60 * 60);
+
+                            if (speakersData.languages) {
+                                $speakerDataLanguagesValue.text(speakersData.languages);
+                                $speakerDataLanguagesWrapper.removeClass('d-none');
+                                $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4')
+                                $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xl-3');
+                            } else {
+                                $speakerDataLanguagesWrapper.addClass('d-none');
+                                $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xl-3');
+                                $speakerContributionData.addClass('col-12 col-md-4 col-lg-4 col-xl-4')
+                            }
+
+                            $speakersDataContributionValue.text(formatTime(contributedHours, contributedMinutes, contributedSeconds));
+                            $speakersDataValidationValue.text(formatTime(validatedHours, validatedMinutes, validatedSeconds));
+                            $speakersDataSpeakerValue.text(speakersData.speakers);
+
+                            $speakersDataLoader.addClass('d-none');
+                            $speakerDataDetails.removeClass('d-none');
+                        } else {
+                            const previousLanguage = localStorage.getItem('previousLanguage');
+                            languageToRecord = language;
+                            $("#language").val(previousLanguage);
+                            $("#languageSelected").text(` ${language}, `);
+                            $("#no-data-found").removeClass('d-none');
+                            timer = setTimeout(() => {
+                                $('#no-data-found').addClass('d-none');
+                            }, 5000);
+                        }
+                    } catch (error) {
+                        console.log(error);
+                    }
+                })
+                .catch((err) => { console.log(err) });
+        });
+    
 }
 
 const initializeBlock = function () {
@@ -183,7 +200,7 @@ const initializeBlock = function () {
     }, {passive: true});
 
     $("#contribute-now").on('click', () => {
-        localStorage.setItem("i18n", "en");
+        sessionStorage.setItem("i18n", "en");
         localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
         localStorage.setItem("selectedType", "contribute");
         if(!hasUserRegistered()){

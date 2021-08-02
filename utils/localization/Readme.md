@@ -10,18 +10,22 @@ This utility allows users to generate excel file(with all keys / delta keys) fro
 
 1. Run the following command to install python libraries:  `pip install -r requirements.txt`
 
-2. `languages.json` has list of all languages to be considered.If you want to add a new languages, add it in this json file.
+2. `resources/languages.json` has list of all languages to be considered. If you want to add a new languages, add it in this json file.
     ```
     eg: {"<language-code>":"<language-name>"}
     ```
-
+   
+3. `resources/html_ejs_mapping.json` has list of all main ejs to html file mapping. This is used for finding where the keys are used in the source code.
+    ```
+    eg: {"<html-file-name>":"<ejs-file-name>"}
+    ```
 
 #### All Keys excel file generation:
 
-1. Run the following command: `cd all_keys_generator`
-2. To generate from 'en' locale file, run from the following:
+1. To generate from 'en' locale file, run from the following:
    ```
-   python AllKeysExcelGenerator.py -j ./../../../crowdsource-ui/locales -o ./out/en.xlsx --only-en
+   python all_keys_excel_generator.py -j ./../../crowdsource-ui/locales -o 
+            ./out/en.xlsx --only-en -v ./../../crowdsource-ui/src/views
    ```
 
    This `./out/en.xlsx` obtained from the above step will have all keys from en locale file and can be shared with people for corrections in values.
@@ -30,7 +34,8 @@ This utility allows users to generate excel file(with all keys / delta keys) fro
 
    To generate for all languages, run from the following:
    ```
-   python AllKeysExcelGenerator.py -j ./../../../crowdsource-ui/locales -o ./out/out.xlsx
+   python all_keys_excel_generator.py -j ./../../crowdsource-ui/locales -o 
+            ./out/out.xlsx -v ./../../crowdsource-ui/src/views
    ```
 
    The `./out/out_sme.xlsx` obtained from the above step will have all language content from locale files and can be shared with people for corrections in values.
@@ -39,15 +44,14 @@ This utility allows users to generate excel file(with all keys / delta keys) fro
 
 #### After correction is done:
 
-1. Run the following command: `cd all_keys_generator`
-2. Run the following command to repopulate the 'en' locale file and update all other locale files
+1. Run the following command to repopulate the 'en' locale file and update all other locale files
    - To run with auto-generated excel from AllKeysExcelGenerator.py:
    ```
-   python AllKeysJsonGenerator.py -i ./../../../crowdsource-ui/locales -e ./en/out/en.xlsx -o ./out/
+   python all_keys_json_generator.py -i ./../../crowdsource-ui/locales -e ./out/en.xlsx -o ./all_keys_json_out
    ```
    - To run with manually generated excel with the 4 categories('Suno India', 'Bolo India', 'Likho India', 'Dekho India'):
    ```
-   python AllKeysJsonGenerator.py -i ./../../../crowdsource-ui/locales -e ./../test-data/read-data-from-table/English_content.xlsx  -o ./out/ -c manual
+   python all_keys_json_generator.py -i ./../../crowdsource-ui/locales -e resources/test_data/all_keys_json_input/English_content.xlsx -o ./all_keys_json_out -c manual
    ```
 
 (For more info on above command, use -h for help)
@@ -55,65 +59,74 @@ In `./out/` folder all locale files are generated after the above command is ran
 
 #### Generation of delta files for all the locales:
 
-1. Run the following command: `cd delta_generation`
-2. To generate delta , run one of the following:
+1. To generate delta , run one of the following:
 
-   - For specific languages:
-
+   - For multiple excel sheets for each language:
+    
    ```
-   python DeltaGenerator.py -i ./../all_keys_generator/out -o . -l gu pa
+   python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -a --output-type SEPARATE_SHEETS
    ```
-
-   - For all languages:
-
+         
+   - For all keys, but specific languages on a single excel sheet:
    ```
-   python DeltaGenerator.py -i ./../all_keys_generator/out -o . -a
+   python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -l gu pa --all-keys --output-type SINGLE_SHEET
    ```
-
-   - To include all keys in delta:
-
+   
+   - For all keys, all languages on a single excel sheet:
+   
    ```
-   python DeltaGenerator.py -i ./../all_keys_generator/out -o . -a --all-keys
+   python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -a --all-keys --output-type SINGLE_SHEET
    ```
-3. This will provide `out-meta` folder and `out-sme` folder. Copy these to another location for later use(** Mandatory **).
-4. The excel files in out-sme can be shared with others to collect translations.
+   
+2. This will provide `out-meta` folder and `out-sme` folder inside /delta_out. Copy these to another location for later use(** Mandatory **).
+3. The excel files in out-sme can be shared with others to collect translations.
 
 #### Generation of locale files from the received translation excel files:
 
-1. Run the following command: `cd locale_generation`
-2. Put the translation excel files received from sme's in the following directory structure for each language as input:
+1. Put the translation excel files received from sme's in the following directory structure for each language as input:
     ```
-    input_excel_files/<language code>/<excel_file_name>.xlsx  (eg: input_excel_files/hi/delta_24thJune.xlsx )
+    translation_excel_files/<language code>/<excel_file_name>.xlsx  (eg: input_excel_files/hi/delta_24thJune.xlsx )
     ```
-3. Make sure you have the corresponding meta files in `out-meta` folder generated in the delta generation process.
-4. To generate locale json files , run one of the following:
+2. Make sure you have the corresponding meta files in `out-meta` folder generated in the delta generation process.
+3. To generate locale json files , run one of the following:
 
-   - For specific languages:
-
+   - For specific languages taking single translation file that has all languages as input:
    ```
-   python LocaleGenerator.py -j ./../all_keys_generator/out -e ./input_excel_files -m ./../delta_generation/out-meta -o . -l gu pa
+   python locale_generator.py -j ./../../crowdsource_ui/locales 
+                               -e ./translation_excel_files 
+                               -m ./translation_meta_files 
+                               -o ./locale_output 
+                               -t combined
+                               -l gu pa
    ```
-
-   - For all languages:
-
+            
+   - For specific languages taking separate translation files for each language as input:
    ```
-   python LocaleGenerator.py -j ./../all_keys_generator/out -e ./input_excel_files -m ./../delta_generation/out-meta -o . -a
-   ```
-5. This will provide locale json files in output folder mentioned in the command.
+   python locale_generator.py -j ./../../crowdsource_ui/locales 
+                                   -e ./translation_excel_files 
+                                   -m ./translation_meta_files 
+                                   -o ./locale_output 
+                                   -t separate
+                                   -l gu pa
+   ``` 
 
-#### To clean the locale files of all languages(except en) with respect to keys in en locale file:
-
-1. Run the following command: `cd clean_unused_keys`
-2. Run the following command to clean:
-
-   - For specific languages:
-
+   - For all languages taking single translation file that has all languages as input:
    ```
-   python CleanLocaleJsons.py -i ./../../../crowdsource-ui/locales -o . -l gu pa
+   python locale_generator.py -j ./../../crowdsource_ui/locales 
+                               -e ./translation_excel_files 
+                               -m ./translation_meta_files 
+                               -o ./locale_output 
+                               -t combined
+                               -a
    ```
-   - For all languages:
-
+                                               
+   - For all languages taking separate translation files for each language as input:
+    ```
+    python locale_generator.py -j ./../../crowdsource_ui/locales 
+                               -e ./translation_excel_files 
+                               -m ./translation_meta_files 
+                               -o ./locale_output 
+                               -t separate
+                               -a
    ```
-   python CleanLocaleJsons.py -i ./../../../crowdsource-ui/locales -o . -a 
-   ```
-3. This will give cleaned json files in the mentioned output folder.
+4. This will provide locale json files in output folder mentioned in the command.

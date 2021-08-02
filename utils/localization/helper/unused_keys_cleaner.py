@@ -23,7 +23,8 @@ def clean_locale_keys(languages, input_base_path, output_base_path):
     os.makedirs(output_base_path, exist_ok=True)
     removed_keys = []
     en_json_path = '{}/en.json'.format(input_base_path)
-    os.system("cp {} {}".format(en_json_path, output_base_path))
+    if not os.path.exists(output_base_path + "/en.json"):
+        os.system("cp {} {}".format(en_json_path, output_base_path))
     en_data = read_json(en_json_path)
 
     for language_code, lang_name in languages.items():

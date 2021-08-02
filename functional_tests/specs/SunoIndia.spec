@@ -98,7 +98,7 @@ Tags: component
 * User skips the next "3" sentences user should land on Thank you page in "English"
 * User should see the "Validate More" button
 * Navigate to "Know more" button and click "Know more" button
-* should select "" radio button, "Validate 5 sentences(s) in Kannada and earn Suno India Bronze Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
+* should select "" radio button, "Validate 5 sentences in Kannada and earn Suno India Bronze Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
 * When user clicks on back button, user should land on home page
 
 

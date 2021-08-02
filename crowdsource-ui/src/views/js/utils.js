@@ -1,6 +1,7 @@
 const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require("./constants");
 const fetch = require('./fetch')
-const platform = require('./platform')
+const platform = require('./platform');
+const { context_root } = require('./env-api');
 
 function getDeviceInfo() {
   const os = platform.os;
@@ -136,7 +137,7 @@ const performAPIRequest = (url) => {
 
 const getLocaleString = function() {
     return new Promise(function(resolve, reject) {
-        const locale = localStorage.getItem("i18n") ?? "en";
+        const locale = sessionStorage.getItem("i18n") ?? "en";
         performAPIRequest(`/get-locale-strings/${locale}`)
         .then((response) => {
             localStorage.setItem('localeString', JSON.stringify(response));
@@ -246,7 +247,7 @@ const reportSentenceOrRecording = (reqObj) => {
 
 const getJson = (path) => {
     return new Promise((resolve) => {
-      $.getJSON(path, (data) => {
+      $.getJSON(`${context_root}${path}`, (data) => {
         resolve(data);
       });
     })

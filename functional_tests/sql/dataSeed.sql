@@ -37,6 +37,89 @@ select '{"collectionSource": null}', 'testMDSLocation2'
 where not exists (
 	select 1 from master_dataset where location='testMDSLocation2'
 );
+insert into master_dataset (params, location, is_active)
+select '{"collectionSource": null}', 'testMDSLocation3', false
+where not exists (
+	select 1 from master_dataset where location='testMDSLocation3'
+);
+
+--Dummy data for stats and charts
+
+delete from validations where contribution_id in
+(
+    select c.contribution_id from contributions c
+    inner join dataset_row d on c.dataset_row_id=d.dataset_row_id
+    where d.media->>'language'='testLang'
+);
+
+delete from contributions where contribution_id in
+(
+    select c.contribution_id from contributions c
+    inner join dataset_row d on c.dataset_row_id=d.dataset_row_id
+    where d.media->>'language'='testLang'
+);
+
+delete from dataset_row where media->>'language'='testLang';
+
+insert into dataset_row 
+    ( difficulty_level, type, media, state, is_profane, master_dataset_id ) 
+select 'medium', 'asr', '{
+            "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
+            "type": "audio",
+            "language": "testLang"
+            }'::jsonb, 'contributed', false, (select master_dataset_id from master_dataset where location='testMDSLocation');
+insert into contributions 
+    ( dataset_row_id, contributed_by, media, is_system , date, action) 
+select dataset_row_id, (select contributor_id from contributors where user_name='##system##'), '{
+            "data": "హలో మీరు ఈ రోజు ఎలా ఉన్నారు",
+            "type": "text",
+            "language": "testLang"
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='asr' and media ->> 'language'='testLang';
+
+insert into dataset_row 
+    ( difficulty_level, type, media, state, is_profane ) 
+select 'medium', 'ocr', '{
+            "data": "automationTestData/ocr/image1.png",
+            "type": "image",
+            "language": "testLang"
+            }'::jsonb, 'contributed', false;
+insert into contributions 
+    ( dataset_row_id, contributed_by, media, is_system , date, action) 
+select dataset_row_id, (select contributor_id from contributors where user_name='##system##'), '{
+            "data": "హలో మీరు ఈ రోజు ఎలా ఉన్నారు",
+            "type": "text",
+            "language": "testLang"
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='ocr' and media ->> 'language'='testLang';
+
+insert into dataset_row 
+    ( difficulty_level, type, media, state,is_profane ) 
+select 'medium', 'parallel', '{
+            "data": "କେମିତି ଅଛନ୍ତି, କେମିତି ଅଛ",
+            "type": "text",
+            "language": "testLang"
+            }'::jsonb, 'contributed', false;
+insert into contributions 
+    ( dataset_row_id, contributed_by, media, is_system , date, action) 
+select dataset_row_id, (select contributor_id from contributors where user_name='##system##'), '{
+            "data": "హలో మీరు ఈ రోజు ఎలా ఉన్నారు",
+            "type": "text",
+            "language": "testLang2"
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='parallel' and media ->> 'language'='testLang';
+
+insert into dataset_row ( difficulty_level, type, media, state,is_profane ) 
+values('medium', 'text', '{
+    "data":" बल्कि मजबूरी थी 15 ", 
+    "type": "text", 
+    "language": "testLang"
+}'::jsonb, 'contributed' , FALSE);
+insert into contributions 
+    ( dataset_row_id, contributed_by, media, is_system , date, action) 
+select dataset_row_id, (select contributor_id from contributors where user_name='##system##'), '{
+            "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
+            "type": "audio",
+            "language": "testLang2"
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='text' and media ->> 'language'='testLang';
+
 
 --ASR data
 
@@ -180,108 +263,114 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
 --OCR data
 
 insert into dataset_row 
-    ( difficulty_level, type, media, state, is_profane ) 
+    ( difficulty_level, type, media, state, is_profane, master_dataset_id ) 
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Odia"
-            }'::jsonb, null, false
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Odia"
-            }'::jsonb, null, false
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Telugu"
-            }'::jsonb, 'contributed', false
+            }'::jsonb, 'contributed', false, null
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Telugu"
-            }'::jsonb, 'contributed', false
+            }'::jsonb, 'contributed', false, null
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null, false
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null, false
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null, false
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null, false
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null, false
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, null, false
+            }'::jsonb, null, false, null
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, 'contributed', false
+            }'::jsonb, 'contributed', false, null
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, 'contributed', false
+            }'::jsonb, 'contributed', false, null
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Kannada"
-            }'::jsonb, 'contributed', false
+            }'::jsonb, 'contributed', false, null
 union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Gujarati"
-            }'::jsonb, null, true
+            }'::jsonb, null, true, null
             union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Gujarati"
-            }'::jsonb, null, null
+            }'::jsonb, null, null, null
             union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Gujarati"
-            }'::jsonb, 'contributed', true
+            }'::jsonb, 'contributed', true, null
             union all
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image2.png",
             "type": "image",
             "language": "Gujarati"
-            }'::jsonb, 'contributed', null;
+            }'::jsonb, 'contributed', true, (select master_dataset_id from master_dataset where location='testMDSLocation')
+            union all
+select 'medium', 'ocr', '{
+            "data": "automationTestData/ocr/image2.png",
+            "type": "image",
+            "language": "Gujarati"
+            }'::jsonb, 'contributed', null, null;
 
 insert into contributions 
     ( dataset_row_id, contributed_by, media, is_system , date, action) 

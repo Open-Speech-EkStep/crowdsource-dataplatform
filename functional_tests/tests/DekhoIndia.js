@@ -18,6 +18,9 @@ step("Validate Dekho India content", async function () {
 	assert.ok(await text('Enrich your language by labelling images').exists());
 	assert.ok(await text('Validate').exists());
 	assert.ok(await text('Label').exists());
+	assert.ok(await text('Contribution Tracker').isVisible());
+    assert.ok(await text('Overall Summary').isVisible());
+    assert.ok(await text('Contributions made to Dekho India').isVisible());
 });
 
 step("User should see the top Language graph and other stats for Dekho India", async function () {

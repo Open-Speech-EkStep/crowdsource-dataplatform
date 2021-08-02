@@ -54,6 +54,7 @@ const mockDB = {
     none: jest.fn(() => Promise.resolve()),
     any: jest.fn(() => Promise.resolve()),
     oneOrNone: jest.fn(() => Promise.resolve()),
+    result: jest.fn(() => Promise.resolve()),
 }
 
 const mockpgPromise = jest.fn(() => mockpgp)
@@ -76,6 +77,7 @@ describe("Running tests for dbOperations", () => {
     const spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone');
     const spyDBmany = jest.spyOn(mockDB, 'many');
     const spyDBone = jest.spyOn(mockDB, 'one');
+    const spyDBresult = jest.spyOn(mockDB, 'result');
 
     beforeEach(() => {
         mockpgp.as = jest.fn()
@@ -151,7 +153,7 @@ describe("Running tests for dbOperations", () => {
                     device,
                     browser
                 ]).mockReturnValue(Promise.resolve());
-                when(spyDBnone).calledWith(updateMediaWithContributedState, [testDatasetId]).mockReturnValue(Promise.resolve());
+                when(spyDBresult).calledWith(updateMediaWithContributedState, [testDatasetId]).mockReturnValue(Promise.resolve());
                 // when(spyDBnone).calledWith(updateMaterializedViews).mockReturnValue(Promise.resolve());
             })
 
@@ -212,7 +214,7 @@ describe("Running tests for dbOperations", () => {
                     ]
                 );
 
-                expect(spyDBnone).toHaveBeenCalledWith(
+                expect(spyDBresult).toHaveBeenCalledWith(
                     updateMediaWithContributedState,
                     [testDatasetId]
                 );
@@ -268,7 +270,7 @@ describe("Running tests for dbOperations", () => {
                     ]
                 );
 
-                expect(spyDBnone).toHaveBeenCalledWith(
+                expect(spyDBresult).toHaveBeenCalledWith(
                     updateMediaWithContributedState,
                     [testDatasetId]
                 )
@@ -351,7 +353,7 @@ describe("Running tests for dbOperations", () => {
                     ]
                 );
 
-                expect(spyDBnone).toHaveBeenCalledWith(
+                expect(spyDBresult).toHaveBeenCalledWith(
                     updateMediaWithContributedState,
                     [testDatasetId]
                 )
@@ -756,7 +758,7 @@ describe("Running tests for dbOperations", () => {
             await dbOperations.updateTablesAfterValidation(req, res);
 
             expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [contributorId, datasetId, action, contributionId, state, country, device, browser]);
-            expect(spyDBnone).toHaveBeenNthCalledWith(2, updateMediaWithValidatedState, [datasetId, contributionId])
+            expect(spyDBresult).toHaveBeenNthCalledWith(1, updateMediaWithValidatedState, [datasetId, contributionId])
         });
 
         test('should only call addValidationQuery if action is skip', async () => {

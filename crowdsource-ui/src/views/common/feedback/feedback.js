@@ -167,7 +167,7 @@ const handleFeedbackSubmit = () => {
     let revisit = revisitStatus.length ? revisitStatus[0].value : '';
     if(language === null){
         ALL_LANGUAGES.forEach((lang) => {
-            if(lang.id === localStorage.getItem("i18n")) { language = lang.value; }});
+            if(lang.id === sessionStorage.getItem("i18n")) { language = lang.value; }});
     }
         
 

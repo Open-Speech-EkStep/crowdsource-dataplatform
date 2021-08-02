@@ -65,7 +65,6 @@ html {
     font-size: 14px;
   }
 
-
   .badge-detail-container .nav-link{
     font-size: 24px;
   }
@@ -93,12 +92,23 @@ html {
   opacity: 1;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+ul#initiative::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+ul#initiative {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .badge-detail-widget {
   box-sizing: border-box;
   border: 1px solid #cbcbcb;
   background: #eff5ff;
   border-radius: 8px;
-  padding-bottom: 4px;
+  padding-bottom: 1px;
 }
 
 .badge-detail-widget.bg-white{
@@ -112,13 +122,13 @@ html {
   border-radius: 20px;
   padding: 2px;
   background: linear-gradient(to right,#ffa345,#76bdff,#439908);
-  margin-top: 39px;
+  margin-top: 38px;
 }
 
 .badge-details-notes{
   list-style-type: none;
   font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 18px;
   line-height: 28px;
   color: #000000;
@@ -158,6 +168,33 @@ html {
 }
 
 @media (max-width: 767px) {
+  .back-btn a {
+    line-height: 17px;
+    font-size: 14px !important;
+  }
+
+  .badge-language-dropdown{
+    max-width: 203px !important;
+    height: 35px !important;
+  }
+
+  .card1{
+    padding-left: 0 !important;
+    padding-right: 6px !important;
+  }
+  .card2{
+    padding-left: 2px !important;
+    padding-right: 4px !important;
+  }
+  .card3{
+    padding-left: 4px !important;
+    padding-right: 2px !important;
+  }
+  .card4{
+    padding-left: 6px !important;
+    padding-right: 0 !important;
+  }
+
   .p-l-r-20{
     padding-left: 20px !important;
     padding-right: 20px !important;
@@ -198,7 +235,7 @@ html {
   }
 
   .selected-badge-card-border {
-    margin-top: 22px;
+    margin-top: 18px;
     margin-left: 20px;
     margin-right: 20px;
   }
@@ -253,7 +290,7 @@ html {
 
 
   .badge-detail-container .badge-mt-34 {
-    margin-top: 25px;
+    margin-top: 19px !important;
   }
 
   .font-weight-normal-sm {
@@ -284,6 +321,7 @@ html {
   }
 
   .your-language-label {
+    padding-top: 2px;
     font-size: 14px;
     line-height: 17px;
   }
@@ -306,6 +344,7 @@ html {
 }
 
 .badge-language-dropdown{
+  max-width: 225px;
   height:40px;
   padding:0 10px;
   border-color:#222222;
@@ -332,7 +371,7 @@ html {
     background: #ffffff;
     box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
     border-radius: 20px;
-    padding: 20px;
+    padding: 24px 20px 35px 20px;
   }
 
   .your-language-label {
@@ -342,8 +381,9 @@ html {
   .selected-badge-card h1 {
     font-size: 20px;
     line-height: 25px;
-    padding-top: 24px;
-    padding-bottom: 15px;
+    padding-top: 6px;
+    padding-bottom: 0;
+    margin: 0;
   }
 }
 
@@ -372,7 +412,7 @@ html {
     box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
     border-radius: 20px;
     height: 400px;
-    padding: 40px 82px;
+    padding: 40px 42px 40px 82px;
   }
 }
 

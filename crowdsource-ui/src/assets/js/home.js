@@ -1,7 +1,7 @@
 const { redirectToLocalisedPage } = require('./locale');
 const { onActiveNavbar, onChangeUser, showUserProfile,onOpenUserDropDown } = require('./header');
 const {  getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
-const {  updateLocaleLanguagesDropdown, getLocaleString, performAPIRequest, calculateTime, formatTime } = require('./utils')
+const {  updateLocaleLanguagesDropdown, getLocaleString, calculateTime, formatTime } = require('./utils')
 const {
     setUserModalOnShown,
     setUserNameOnInputFocus,
@@ -88,6 +88,7 @@ const getStatsSummary = function () {
     });
     $.getJSON(`${context_root}/aggregated-json/topLanguagesByHoursContributed.json`, (jsonData) => {
         const top_languages_by_hours = jsonData.filter(d => d.type == "text");
+        localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
         const languages = getContributedAndTopLanguage(top_languages_by_hours, MODULE.bolo.value);
         localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
         showByHoursChart();
@@ -109,10 +110,6 @@ const getStatsSummary = function () {
         const speakers = getContributedAndTopLanguage(top_languages_by_speakers, "speakers");
         localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(speakers));
     });
-    performAPIRequest('/stats/summary/text')
-        .then((response) => {            
-            localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-        });
 }
 
 
@@ -136,7 +133,7 @@ function initializeBlock() {
         fromLanguage = e.target.value;
         top_lang = fromLanguage;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-        localStorage.setItem("i18n", "en");
+        sessionStorage.setItem("i18n", "en");
         updateHrsForSayAndListen(fromLanguage);
         redirectToLocalisedPage();
         getStatsSummary();
