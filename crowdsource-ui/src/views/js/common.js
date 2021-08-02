@@ -294,12 +294,30 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $(".user-contribution-msg").addClass("d-none");
     $("#contribution_text").removeClass("d-none");
   } else {
+    if(data.badges && data.badges.length) {
+      $("#showAfterBadge").removeClass('d-none');
+      $(".participation-msg-section").removeClass("pt-lg-3").removeClass("pt-md-3").addClass("pt-0");
+      const participateMsgWeb = $(".web-view");
+      const participateMsgMob = $(".mobile-view");
+      $("#languageInTopWeb").removeClass("my-3").removeClass("font-weight-normal").addClass("font-weight-normal-Rowdies").addClass("mb-3");
+      $("#languageNotInTopWeb").removeClass("my-3").removeClass("font-weight-normal").addClass("font-weight-normal-Rowdies").addClass("mb-3");
+      participateMsgWeb.remove();
+      participateMsgMob.remove();
+      $("#showParticipateMsg").removeClass("d-none");
+      $("#showParticipateMsg").append(participateMsgWeb);
+      $("#showParticipateMsg").append(participateMsgMob);
+      const badgeType = data.currentBadgeType;
+      $("#thankyou-last-badge").attr('src', getLanguageBadge(contributionLanguage, data.currentBadgeType.toLowerCase(), 'contribute', module));
+      $("#last-bagde-earned").html(badgeType + " Contributor");
+    } 
     $(".new-badge-msg").addClass("d-none");
     $(".thankyou-page-heading").addClass('d-none');
     $(".user-contribution-msg").removeClass("d-none");
     $("#before_badge_content").removeClass("d-none");
     $("#user-contribution-msg").removeClass("d-none");
   }
+
+  
   const $bronzeBadgeLink = $("#bronze_badge_link_img");
   const $bronzeBadge = $("#bronze_badge_link");
   const $silverBadgeLink = $("#silver_badge_link_img");

@@ -65,7 +65,8 @@ Tags: component
 * User should see an error message "Input field can not be empty"
 * User click on "edit" field "submit-edit-button" should be enabled
 * User skips the next "4" sentences user should land on Thank you page in "English"
-* User should see the "Validate More" button
+* When user clicks on Validate more button
+* User skips the next "1" sentences user should land on Thank you page in "English"
 * When user clicks on Validate more button , user should see no data available message for "Dekho" India
 
 ## Check the Validate flow for new user . New user should see the sentences to validate
@@ -77,7 +78,10 @@ Tags: component
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
 * User clicks on "like_button" , he should see next sentence and "need_change" "like_button" buttons should be enabled
 * User clicks on "like_button" he should see thank you page and should be able to see bronze Badge
-* User should see the "Validate More" button
+* When user clicks on Validate more button
+* "skip_button" should be enabled , "like_button" "need_change" buttons should be enabled
+* User clicks on "like_button" , he should see thank you page with heading "6" "image label(s)" contributed
+* User should be able to see bronze Badge after winning with "44" "image label(s)" contribution left
 
 ## Check Dashboard Page
 * When user clicks on View all Details buttton user should be able to see "Progress Chart" , "State Wise distribution"

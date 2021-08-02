@@ -108,6 +108,12 @@ step("When user clicks on Validate more button , user should see no data availab
 		assert.ok(await text('Thank you for your enthusiasm to validate the recordings.').exists())
 	}
 });
+step("When user clicks on Validate more button", async function () {
+	await taiko.waitFor(500)
+	await click(link('Validate More'))
+	await taiko.waitFor(2000);
+});
+
 
 // step("user should see the Virtual Keyboard button", async function() {
 // 	await taiko.waitFor(1000)
@@ -205,4 +211,18 @@ step("User clears the edit field should disable the buttons again in validation"
 
 step("Check Data Source button should not be visible", async () => {
 	assert.ok(! await taiko.button({ id: 'show_source_button' }).isVisible());
+});
+
+step("User should be able to see bronze Badge after winning with <contributionLeft> <label> contribution left", async function(contributionLeft, label) {
+	assert.ok(await text("Your are a Bronze Contributor").isVisible());
+	assert.ok(await text("Your Badge").isVisible());
+	assert.ok(await text("Share on").isVisible());
+	assert.ok(await text(`Validate ${contributionLeft} ${label} to earn your Silver Badge.`).isVisible());
+	assert.ok(await image({ id: "thankyou-last-badge" }).isVisible());
+});
+
+step("User clicks on <arg0> , he should see thank you page with heading <contributed> <label> contributed", async function(arg0, contributed, label) {
+	await click(taiko.button({ id: arg0 }))
+	await taiko.waitFor(2000)
+	assert.ok(await text(`You validated ${contributed} ${label} for your language!`).isVisible());
 });

@@ -11,7 +11,6 @@
   background-color:#ffffff;
   color:#ffffff;
   border-radius:50px;
-  border: 1px solid rgba(0, 123, 255, 0.2);
   text-align:center;
   box-sizing: border-box;
   box-shadow: #007bff;
@@ -32,10 +31,6 @@
 .custom-modal {
   max-width: 700px;
   min-height: 867px;
-}
-
-.label-color-feedback {
-  color: #494a4a !important;
 }
 
 .submit-btn-feedback {
@@ -73,7 +68,6 @@
   line-height: 32px;
   letter-spacing: 0;
   text-align: left;
-  color: #959595;
   margin-left: 3px;
 }
 
@@ -154,10 +148,14 @@ label .required {
   }
 
   #feedback_button{
-    height: 50px;
-    width: 50px;
+    height: 48px;
+    width: 48px;
   }
   #feedback_modal .modal-body label span {
     font-size: 12px !important;
+  }
+  .my-float{
+    height: 28px;
+    width: 28px;
   }
 }

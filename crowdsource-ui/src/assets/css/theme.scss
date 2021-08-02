@@ -30,6 +30,7 @@ $text-dark: #000;
 $text-muted: #8c8c8c;
 $text-offWhite: #e2e2e2;
 $text-light: #eff5ff;
+$text-orange: #EF8537;
 
 // Color Shades
 
@@ -240,7 +241,7 @@ a.text-primary:hover {
 .module-item {
   &.active {
     background: rgba(159, 200, 255, 0.39) !important;
-    border-bottom: 2px solid #142745 !important;
+    border-bottom: 2px solid $primary-color !important;
     & > a {
       span {
         &:nth-child(1) {
@@ -484,4 +485,43 @@ select {
 
 .border-primary {
   border-color: $primary-color !important;
+}
+
+.text-orange {
+  color: $text-orange;
+}
+
+.font-weight-normal-Rowdies {
+  font-weight: 300 !important;
+}
+
+.social-share-block  {
+  border : 1px solid rgba(20, 39, 69, 0.5);
+  box-shadow: 0 4px 12px rgb(20, 39, 69, 0.2) ;
+}
+
+.font-family-Rowdies-light {
+  font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif!important;
+  font-weight: 300 !important;
+}
+
+.form-control {
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(20, 39, 69,0.5);
+    border-color: $primary-color;
+  }
+}
+
+
+.btn.focus, .btn:focus {
+  box-shadow: 0 0 0 0.2rem rgb(20, 39, 69,0.25)  !important;
+}
+
+.download-badge-btn {
+  border: 1px solid rgba(20, 39, 69,.5);
+  box-shadow: 0 4px 12px rgb(20, 39, 69,0.2);
+}
+
+.float{
+  border: 1px solid rgba(20, 39, 69, 0.2);
 }

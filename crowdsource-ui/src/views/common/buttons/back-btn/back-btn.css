@@ -45,10 +45,7 @@
     display: none;
   }
   .thankyou-bar-graph {
-    border: none;;
-  }
-  .thankyou-page {
-    padding: 0;
+    border-top: 1px dashed #007bff;
   }
   .lazy {
     margin: 0 !important;
@@ -61,6 +58,10 @@
 @media (min-width: 767px) {
   .mobile-view {
     display: none;
+  }
+
+  .pb-lg-7,.pb-md-7 {
+    padding-bottom: 7rem !important;
   }
   .web-view {
     display: flex;
@@ -84,8 +85,4 @@
   .no-margin-mobile {
     margin-top: 3rem !important;
   }
-}
-
-.pb-7 {
-  padding-bottom: 7rem !important;
 }

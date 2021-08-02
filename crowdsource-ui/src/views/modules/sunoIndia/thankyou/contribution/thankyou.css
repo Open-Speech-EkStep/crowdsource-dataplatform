@@ -1,51 +1,60 @@
-h1, h2,h3, h4, .progress-metric,.progress-average-metric{
+h1,
+h2,
+h3,
+h4,
+.progress-metric,
+.progress-average-metric {
   font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
-.thankyou-content-wrapper{
+.thankyou-content-wrapper {
   margin-top: 58px;
   padding-top: 57px;
 }
 
-.user-contribution-msg span{
+.user-contribution-msg span {
   color: #007bff;
 }
 
-.thankyou-page-heading, .user-contribution-msg, .new-badge-msg{
+.thankyou-page-heading,
+.user-contribution-msg,
+.new-badge-msg {
   font-size: 36px !important;
   line-height: 40px !important;
   font-weight: 400 !important;
 }
 
-.web-view{
-  font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
+.web-view {
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 400;
   font-size: 24px;
   line-height: 30px;
   color: #142745;
 }
 
-.web-view h4, .mobile-view h4{
+.web-view h4,
+.mobile-view h4 {
   line-height: 30px;
 }
 
-.contribution-info-inner #top-language-chart, #chartRowWithoutCard #top-language-chart{
+.contribution-info-inner #top-language-chart,
+#chartRowWithoutCard #top-language-chart {
   min-height: 200px !important;
   max-height: 400px !important;
 }
 
-#chartRowWithoutCard{
+#chartRowWithoutCard {
   max-width: 800px;
 }
 
-.share-on{
+.share-on {
   font-size: 14px;
   line-height: 17px;
   color: #666666;
   margin-right: 3px;
 }
 
-.x-axis-label{
+.x-axis-label {
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
@@ -53,7 +62,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   opacity: 0.6;
 }
 
-#language-goal{
+#language-goal {
   background: #ffffff;
   box-shadow: 0 4px 12px 4px rgb(0 123 255 / 24%);
   border-radius: 12px;
@@ -63,7 +72,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   padding: 14px 20px;
 }
 
-#language-goal img{
+#language-goal img {
   filter: drop-shadow(0 4px 12px rgba(0, 123, 255, 0.2));
 }
 
@@ -75,8 +84,8 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   width: 85%;
   margin: 0 auto;
 }
-.top-back-btn{
-  top:100px
+.top-back-btn {
+  top: 100px;
 }
 
 .overlay__content {
@@ -103,8 +112,8 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   }
 }
 
-.contribution-info{
-  background: linear-gradient(to right, #ffa345,#76bdff,#439908);
+.contribution-info {
+  background: linear-gradient(to right, #ffa345, #76bdff, #439908);
   box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
   border-radius: 20px;
   padding: 2px;
@@ -113,25 +122,21 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   margin: auto;
 }
 
-.contribution-info-inner{
+.contribution-info-inner {
   border-radius: 20px;
-  padding: 0 1.5rem 2rem 1.5rem;
+  padding: 0 1.5rem 1.5rem 1.5rem;
 }
 
-#sentence_away_msg{
+#sentence_away_msg {
   width: 100%;
 }
 
-.sentence_away_msg{
+.sentence_away_msg {
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  color: #666666;
 }
 
-.sentence_away_msg b{
-  color: #142745;
-}
 
 .stats-container {
   border-radius: 34px;
@@ -157,11 +162,9 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   background-color: #83e661;
 }
 
-.download-badge-btn{
+.download-badge-btn {
   background: #ffffff;
-  border: 1px solid rgba(0, 123, 255, 0.5);
   box-sizing: border-box;
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
   border-radius: 20px;
   color: #666666;
   font-weight: 400;
@@ -170,28 +173,28 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   padding: 8px 15px;
 }
 
-.msg-box{
+.msg-box {
   text-align: left;
 }
 
-.msg-box h4{
+.msg-box h4 {
   font-weight: 300;
   font-size: 22px;
   line-height: 32px;
   color: #142745;
 }
 
-.msg-box h4 span{
+.msg-box h4 span {
   color: #ef8537 !important;
 }
 
-.msg-box p{
+.msg-box p {
   font-weight: 300;
   font-size: 22px;
   line-height: 26px;
 }
 
-.msg-box p span{
+.msg-box p span {
   color: #142745;
   font-weight: 400;
 }
@@ -200,15 +203,16 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   width: 47%;
 }
 
-.badges_information .disable{
+.badges_information .disable {
   opacity: 0.5;
 }
 
-.badges_information .btn.disabled,.badges_information .btn:disabled {
+.badges_information .btn.disabled,
+.badges_information .btn:disabled {
   opacity: 1;
 }
 
-.thankyou-Know-More{
+.thankyou-Know-More {
   width: 40%;
   font-size: 16px;
   line-height: 19px;
@@ -216,7 +220,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
 }
 
 #cardWithoutBadge {
-  padding-top: 32px;
+  padding-top: 24px;
 }
 
 @media screen and (min-width: 599px) {
@@ -228,30 +232,50 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
 }
 
 @media screen and (max-width: 768px) {
-  .thankyou-content-wrapper{
+  .thankyou-content-wrapper {
     margin-top: 55px;
     padding-top: 57px;
   }
 
-  .msg-box p{
+  .download-badge-btn {
+    text-align: center !important;
+    margin-bottom: 15px !important;
+  }
+
+  .web-view h4,
+  .mobile-view h4 {
+    line-height: 24px !important;
+  }
+
+  .thankyou-page-heading,
+  .user-contribution-msg,
+  .new-badge-msg {
+    font-size: 26px !important;
+    line-height: 32px !important;
+  }
+
+  .msg-box p {
     font-size: 14px;
   }
 
-  .x-axis-label{
+  .x-axis-label {
     font-size: 12px;
   }
 
-  #sentence_away_msg, .badges_information, .thankyou-Know-More{
+  #sentence_away_msg,
+  .badges_information,
+  .thankyou-Know-More {
     width: 100%;
     text-align: center;
   }
 
-  .progress-average-metric, .progress-metric{
+  .progress-average-metric,
+  .progress-metric {
     font-size: 14px;
     line-height: 18px;
   }
 
-  #totalAverage{
+  #totalAverage {
     font-size: 20px;
     line-height: 25px;
   }
@@ -266,18 +290,17 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
     left: 20px;
   }
 
-  #language-goal{
+  #language-goal {
     position: initial;
     bottom: 32px;
     margin-bottom: 32px;
     width: 100%;
-    padding: 16px 4px;
+    padding: 20px;
+    min-width: 320px;
   }
-
 }
 
 @media screen and (min-width: 768px) {
-
   .top-back-btn {
     top: 100px !important;
     left: 35px !important;
@@ -289,7 +312,19 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
     margin: 8px;
   }
 
-  .msg-box{
+  .msg-box h4 {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+
+  .thankyou-page {
+    padding-top: 24px !important;
+  }
+
+  #cardWithoutBadge {
+    padding-top: 0 !important;
+  }
+  .msg-box {
     text-align: center;
   }
 
@@ -326,10 +361,7 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
     margin-top: 45px;
     width: 75%;
   }
-
-
 }
-
 
 @media screen and (max-width: 375px) {
   .reward-img {
@@ -338,8 +370,6 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   }
 }
 
-
-
 @media screen and (max-width: 280px) {
   .reward-img {
     width: 80px;
@@ -347,11 +377,11 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   }
 }
 
-.disable{
+.disable {
   opacity: 0.2;
 }
 
-.enable{
+.enable {
   cursor: pointer;
 }
 
@@ -364,3 +394,8 @@ h1, h2,h3, h4, .progress-metric,.progress-average-metric{
   color: #ffffff;
 }
 
+#showParticipateMsg .chart-badge-header {
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+}
