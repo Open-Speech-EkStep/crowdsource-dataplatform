@@ -163,8 +163,12 @@ const updateDbWithAudioPath = async (
         browser
     ])
         .then(() => {
-            db.none(updateMediaWithContributedState, [datasetId]).then();
-            db.none(updateViews).then();
+            db.result(updateMediaWithContributedState, [datasetId]).then(result=>{
+                if(result.rowCount == 0){
+                    console.log(`Update Query Failure: Dataset with id = ${datasetId} , failed to be updated by contributor with id = ${contributor_id}`)
+                }
+            }).catch(console.log);
+            db.none(updateViews).then().catch(console.log);
             // db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
@@ -297,12 +301,16 @@ const updateTablesAfterValidation = async (req, res) => {
     return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country, device, browser])
         .then(async () => {
             if (action !== 'skip') {
-                db.none(updateMediaWithValidatedState, [sentenceId, contributionId]).then()
+                db.result(updateMediaWithValidatedState, [sentenceId, contributionId]).then(result=>{
+                    if(result.rowCount == 0){
+                        console.log(`Update Query Failure: Sentence with id = ${sentenceId} , failed to be updated by contributor with id = ${contributionId}`)
+                    }
+                })
                     .catch((err) => {
                         console.log(err);
                         res.sendStatus(500);
                     });
-                db.none(updateViews).then();
+                db.none(updateViews).then().catch(console.log);
                 // db.none(updateMaterializedViews).then();
                 res.sendStatus(200);
             }
@@ -666,8 +674,12 @@ const updateDbWithUserInput = async (
         browser
     ])
         .then(() => {
-            db.none(updateMediaWithContributedState, [datasetId]).then();
-            db.none(updateViews).then();
+            db.result(updateMediaWithContributedState, [datasetId]).then(result=>{
+                if(result.rowCount == 0){
+                    console.log(`Update Query Failure: Dataset with id = ${datasetId} , failed to be updated by contributor with id = ${contributor_id}`)
+                }
+            }).catch(console.log);
+            db.none(updateViews).then().catch(console.log);
             // db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
