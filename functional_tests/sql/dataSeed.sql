@@ -74,7 +74,7 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
             "data": "హలో మీరు ఈ రోజు ఎలా ఉన్నారు",
             "type": "text",
             "language": "testLang"
-            }'::jsonb, true, now(), 'completed' from dataset_row where type='asr' and media ->> 'language'='testLang';
+            }'::jsonb, false, now(), 'completed' from dataset_row where type='asr' and media ->> 'language'='testLang';
 
 insert into dataset_row 
     ( difficulty_level, type, media, state, is_profane ) 
@@ -89,7 +89,7 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
             "data": "హలో మీరు ఈ రోజు ఎలా ఉన్నారు",
             "type": "text",
             "language": "testLang"
-            }'::jsonb, true, now(), 'completed' from dataset_row where type='ocr' and media ->> 'language'='testLang';
+            }'::jsonb, false, now(), 'completed' from dataset_row where type='ocr' and media ->> 'language'='testLang';
 
 insert into dataset_row 
     ( difficulty_level, type, media, state,is_profane ) 
@@ -104,7 +104,7 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
             "data": "హలో మీరు ఈ రోజు ఎలా ఉన్నారు",
             "type": "text",
             "language": "testLang2"
-            }'::jsonb, true, now(), 'completed' from dataset_row where type='parallel' and media ->> 'language'='testLang';
+            }'::jsonb, false, now(), 'completed' from dataset_row where type='parallel' and media ->> 'language'='testLang';
 
 insert into dataset_row ( difficulty_level, type, media, state,is_profane ) 
 values('medium', 'text', '{
@@ -118,7 +118,7 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "testLang2"
-            }'::jsonb, true, now(), 'completed' from dataset_row where type='text' and media ->> 'language'='testLang';
+            }'::jsonb, false, now(), 'completed' from dataset_row where type='text' and media ->> 'language'='testLang';
 
 
 --ASR data
