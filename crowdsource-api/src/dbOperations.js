@@ -167,8 +167,8 @@ const updateDbWithAudioPath = async (
                 if(result.rowCount == 0){
                     console.log(`Update Query Failure: Dataset with id = ${datasetId} , failed to be updated by contributor with id = ${contributor_id}`)
                 }
-            }).catch(console.log);
-            db.none(updateViews).then().catch(console.log);
+            });
+            db.none(updateViews).then();
             // db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
@@ -678,8 +678,8 @@ const updateDbWithUserInput = async (
                 if(result.rowCount == 0){
                     console.log(`Update Query Failure: Dataset with id = ${datasetId} , failed to be updated by contributor with id = ${contributor_id}`)
                 }
-            }).catch(console.log);
-            db.none(updateViews).then().catch(console.log);
+            });
+            db.none(updateViews).then();
             // db.none(updateMaterializedViews).then();
             cb(200, { success: true });
         })
