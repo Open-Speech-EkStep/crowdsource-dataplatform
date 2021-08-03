@@ -331,6 +331,12 @@ select 'medium', 'ocr', '{
             }'::jsonb, 'contributed', false, CAST(NULL AS INTEGER)
 union all
 select 'medium', 'ocr', '{
+            "data": "automationTestData/ocr/image2.png",
+            "type": "image",
+            "language": "Kannada"
+            }'::jsonb, 'contributed', false, CAST(NULL AS INTEGER)
+union all         
+select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
             "language": "Kannada"
@@ -935,4 +941,3 @@ REFRESH MATERIALIZED VIEW age_group_contributions;
 REFRESH MATERIALIZED VIEW language_group_contributions;
 REFRESH MATERIALIZED VIEW state_group_contributions;
 REFRESH MATERIALIZED VIEW language_and_state_group_contributions;
-
