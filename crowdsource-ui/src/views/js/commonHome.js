@@ -89,36 +89,37 @@ const getStats = (module) => {
       bData.total_speakers = bData2.count || 0;
       getStatistics(bData || {}, null, module.value);
     });
+  }).fail(() => {
+    showErrorPopup();
   });
 }
 const getChartStats = (module) => {
-  try {
-    $.getJSON(`${context_root}/aggregated-json/topLanguagesByHoursContributed.json`, (jsonData) => {
-      const top_languages_by_hours = jsonData.filter(d => d.type == module["api-type"]);
-      localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
-      const languages = getContributedAndTopLanguage(top_languages_by_hours, module.value);
-      localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
-      showByHoursChart(module.value);
+  $.getJSON(`${context_root}/aggregated-json/topLanguagesByHoursContributed.json`, (jsonData) => {
+    const top_languages_by_hours = jsonData.filter(d => d.type == module["api-type"]);
+    localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
+    const languages = getContributedAndTopLanguage(top_languages_by_hours, module.value);
+    localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
+    showByHoursChart(module.value);
 
-      if (top_languages_by_hours.length === 0) {
-        $("#bar_charts_container").hide();
-        $("#view_all_btn").hide();
-        $("#contribution_stats").hide();
-      } else {
-        $("#bar_charts_container").show();
-        $("#view_all_btn").show();
-        $("#contribution_stats").show();
-      }
-    });
-  } catch (error) {
-    console.log(error, "error");
+    if (top_languages_by_hours.length === 0) {
+      $("#bar_charts_container").hide();
+      $("#view_all_btn").hide();
+      $("#contribution_stats").hide();
+    } else {
+      $("#bar_charts_container").show();
+      $("#view_all_btn").show();
+      $("#contribution_stats").show();
+    }
+  }).fail(() => {
     showErrorPopup();
-  }
+  });
 }
 const getSpeakerChartStats = (module) => {
   $.getJSON(`${context_root}/aggregated-json/topLanguagesBySpeakerContributions.json`, (jsonData) => {
     const top_languages_by_speakers = jsonData.filter(d => d.type == module["api-type"]);
     localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(top_languages_by_speakers));
+  }).fail(() => {
+    showErrorPopup();
   });
 }
 const getStatsSummary = function (url, module, callBack = () => { }) {
