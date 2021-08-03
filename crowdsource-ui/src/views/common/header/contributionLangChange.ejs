@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body"> 
-                <div><%= __('You have changed the contribution language from Hindi to Kannada, we will be redirecting you to homepage to start participating again.') %></div>
+                <div><%- __('You have changed the contribution language from <span id="from_language"></span> to <span id="to_language"></span>, we will be redirecting you to homepage to start participating again.') %></div>
                 <div class="text-center">
                     <button id="proceed_btn" type="button" class="btn btn-secondary proceed-btn" data-dismiss="modal"> <%= __('Proceed') %> </button>
                 </div>

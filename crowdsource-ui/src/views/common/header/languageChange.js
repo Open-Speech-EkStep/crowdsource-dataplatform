@@ -1,19 +1,27 @@
-const { CONTRIBUTION_LANGUAGE } = require('./constants');
+const { CONTRIBUTION_LANGUAGE, ALL_MODULES, LOCALE_STRINGS } = require('./constants');
 const { context_root } = require('./env-api');
+
+function getCurrentModule() {
+    const splitValues = location.href.split('/');
+    return splitValues.filter(value => ALL_MODULES.includes(value))[0] || '';
+}
 
 function redirectToHomePage() {
     const locale = sessionStorage.getItem('i18n');
-    const addresses = location.href.split("/");
-    const module = addresses[addresses.length-2];
+    const module = getCurrentModule();
     location.href = `${context_root}/${locale}/${module}/home.html`;
 }
 
 function handleContributionLanguageChange() {
     window.addEventListener('storage', (event) => {
-        if (event.key === CONTRIBUTION_LANGUAGE && event.oldValue  !== event.newValue) {
+        const module = getCurrentModule();
+        if (event.key === CONTRIBUTION_LANGUAGE && event.oldValue  !== event.newValue && module !== '') {
+            const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+            $('#from_language').html(localeString[event.oldValue]);
+            $('#to_language').html(localeString[event.newValue]);
             const $dialog = $('#contributionLangChange');
             $dialog.modal('show');
-        } 
+        }
     });
 }
 
