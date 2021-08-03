@@ -367,5 +367,7 @@
 	"sentences": "sentences",
 	"recordings": "recordings",
 	"translations": "translations",
-	"image labels": "image labels"
+	"image labels": "image labels",
+	"You have changed the contribution language from Hindi to Kannada, we will be redirecting you to homepage to start participating again.": "You have changed the contribution language from Hindi to Kannada, we will be redirecting you to homepage to start participating again.",
+	"Proceed": "Proceed"
 }
