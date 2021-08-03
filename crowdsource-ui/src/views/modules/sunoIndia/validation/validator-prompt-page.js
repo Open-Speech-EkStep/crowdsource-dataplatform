@@ -15,7 +15,7 @@ const {
 const { onChangeUser,onOpenUserDropDown, showUserProfile } = require('../common/header');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent, isMobileDevice, showOrHideExtensionCloseBtn} = require('../common/common');
+const {isKeyboardExtensionPresent, isMobileDevice, showOrHideExtensionCloseBtn, showErrorPopup} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {cdn_url} = require('../common/env-api');
 const {initializeFeedbackModal} = require('../common/feedback');
@@ -79,7 +79,7 @@ function uploadToServer(cb) {
     .then((res) => res.json())
     .then(() => {
     })
-    .catch(() => {})
+    .catch(() => {showErrorPopup()})
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -597,16 +597,6 @@ const executeOnLoad = function () {
   const localSentencesParsed = JSON.parse(localSentences);
   setPageContentHeight();
 
-  const $errorModal = $('#errorModal');
-
-  $errorModal.on('show.bs.modal', function () {
-    // $validationInstructionModal.addClass("d-none");
-  });
-
-  $errorModal.on('hidden.bs.modal', function () {
-    location.href = './home.html';
-  });
-
   if (!localSpeakerDataParsed) {
     location.href = './home.html';
     return;
@@ -658,9 +648,8 @@ const executeOnLoad = function () {
 
 
       initializeComponent();
-    }).catch((err) => {
-      console.log(err);
-      $errorModal.modal('show');
+    }).catch(() => {
+      showErrorPopup();
     })
   }
 }

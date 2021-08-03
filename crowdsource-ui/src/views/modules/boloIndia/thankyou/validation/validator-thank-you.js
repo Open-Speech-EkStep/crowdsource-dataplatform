@@ -20,7 +20,7 @@ const {
 
 const {downloadPdf} = require('../common/downloadableBadges');
 
-const {showByHoursChartThankyouPage, setBadge,updateGoalProgressBar, replaceSubStr, getTopLanguage} = require('../common/common');
+const {showByHoursChartThankyouPage, setBadge,updateGoalProgressBar, replaceSubStr, getTopLanguage, showErrorPopup} = require('../common/common');
 const {onChangeUser,onOpenUserDropDown,showUserProfile} = require('../common/header');
 
 const {initializeFeedbackModal} = require('../common/feedback');
@@ -115,7 +115,8 @@ const getLanguageStats = function () {
       } else {
         updateShareContent("", 0);
       }
-    });
+    })
+    .catch(()  => {showErrorPopup()});
 };
 
 function setSentencesContributed() {

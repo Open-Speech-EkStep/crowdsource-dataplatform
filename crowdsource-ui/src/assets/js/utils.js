@@ -1,6 +1,7 @@
 const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES,CONTRIBUTION_LANGUAGE,DEFAULT_CON_LANGUAGE } = require("./constants");
 const fetch = require('./fetch')
 const platform = require('./platform');
+const {showErrorPopup}  =  require("./common");
 
 
 function getDeviceInfo() {
@@ -116,7 +117,8 @@ const performAPIRequest = (url) => {
     } else {
       return Promise.resolve(data.json());
     }
-  });
+  })
+  .catch(()=> {showErrorPopup()});
 }
 
 const getLocaleString = function() {

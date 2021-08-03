@@ -15,7 +15,7 @@ const {
 const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showOrHideExtensionCloseBtn,isMobileDevice} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showOrHideExtensionCloseBtn,isMobileDevice,  showErrorPopup} = require('../common/common');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { setDataSource } = require('../common/sourceInfo');
@@ -71,7 +71,7 @@ function markContributionSkipped() {
     .then((res) => res.json())
     .then(() => {
     })
-    .catch((err) => {console.log(err)})
+    .catch(() => { showErrorPopup()})
 }
 
 
@@ -99,7 +99,7 @@ function uploadToServer(cb) {
     .then((res) => res.json())
     .then(() => {
     })
-    .catch(() => {})
+    .catch(() => {showErrorPopup()})
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -161,7 +161,7 @@ function skipValidation(action) {
         if (!data.ok) {
           throw Error(data.statusText || 'HTTP error');
         }
-      });
+      }).catch(() =>  {showErrorPopup()});
 }
 
 const openEditor = function () {
@@ -409,7 +409,6 @@ const executeOnLoad = function () {
   setPageContentHeight();
   setFooterPosition();
   const $validationInstructionModal = $("#validation-instruction-modal");
-  const $errorModal = $('#errorModal');
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const localeLanguage = localeStrings[language];
@@ -433,14 +432,6 @@ const executeOnLoad = function () {
       $validationInstructionModal.addClass("d-none");
       setFooterPosition();
     })
-
-    $errorModal.on('show.bs.modal', function () {
-      setFooterPosition();
-    });
-
-    $errorModal.on('hidden.bs.modal', function () {
-      location.href = './home.html';
-    });
 
     if (!localSpeakerDataParsed) {
       location.href = './home.html';
@@ -503,16 +494,14 @@ const executeOnLoad = function () {
         setFooterPosition();
 
         initializeComponent();
-      }).catch((err) => {
-        console.log(err);
-        $errorModal.modal('show');
+      }).catch(() => {
+        showErrorPopup();
       }).then(() => {
       });
     }
 
   } catch (err) {
-    console.log(err);
-    $errorModal.modal('show');
+    showErrorPopup();
   }
 }
 
