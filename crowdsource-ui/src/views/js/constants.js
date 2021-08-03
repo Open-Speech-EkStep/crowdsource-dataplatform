@@ -114,7 +114,15 @@ const OPINION_RATING_MAPPING = [
   { opinion: "neutral", value: 3 },
   { opinion: "happy", value: 4 },
   { opinion: "very_happy", value: 5 },
-]
+];
+
+const ALL_MODULES = [
+  'boloIndia',
+  'sunoIndia',
+  'likhoIndia',
+  'dekhoIndia',
+];
+
 module.exports = {
   DEFAULT_CON_LANGUAGE,
   AUDIO_DURATION,
@@ -128,7 +136,7 @@ module.exports = {
   CONTRIBUTION_LANGUAGE,
   BADGES,
   SPEAKER_DETAILS_KEY,
-  SELECTED_MODULE, MODULE, CURRENT_MODULE, TO_LANGUAGE,
+  SELECTED_MODULE, MODULE, CURRENT_MODULE, TO_LANGUAGE, ALL_MODULES,
   LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE,
   SELECT_PAGE_OPTIONS_FEEDBACK,
   FEEDBACK_CATEGORY,

@@ -367,5 +367,7 @@
 	"sentences": "sentences",
 	"recordings": "recordings",
 	"translations": "translations",
-	"image labels": "image labels"
+	"image labels": "image labels",
+	"Proceed": "Proceed",
+	"You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again.": "You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again."
 }
