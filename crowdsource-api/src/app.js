@@ -115,9 +115,9 @@ app.use(function (req, res, next) {
     if (cookie === undefined) {
         res.cookie('userId', uuidv4(), {
             maxAge: ONE_YEAR,
-            // httpOnly: true,
-            // secure: true,
-            // sameSite:'none'
+            httpOnly: true,
+            secure: true,
+            sameSite:'none'
         });
     }
     next();
