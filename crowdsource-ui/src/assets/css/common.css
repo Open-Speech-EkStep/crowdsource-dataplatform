@@ -623,3 +623,20 @@ body {
 .padding-top-115 {
   padding-top: 115px !important;
 }
+
+.audio-wrapper {
+  width: 266px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 50px;
+  background-color: #f0f3f4;
+  box-shadow: 1px 5px 18px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 25px;
+}
+
+.audio-wrapper audio {
+  position: relative;
+  left: -32px;
+}
