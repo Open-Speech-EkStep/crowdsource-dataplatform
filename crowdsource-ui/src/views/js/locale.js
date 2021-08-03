@@ -72,10 +72,12 @@ function redirectToLocalisedPage() {
     }
 }
 
-
 $(document).ready(function () {
     if (sessionStorage.getItem('i18n') == null) {
-        sessionStorage.setItem('i18n', location.href.split('/')[3]);
+        const allLocales = ALL_LANGUAGES.map(language => language.id);
+        const splitValues = location.href.split('/');
+        const currentLocale = splitValues.filter(value => allLocales.includes(value))[0] || 'en';
+        sessionStorage.setItem('i18n', currentLocale);
     }
     $("#bhashadaan_logo").attr('href', base_url);
     registerEvents();
