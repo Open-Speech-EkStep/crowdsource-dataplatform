@@ -151,7 +151,7 @@ select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as 
 	and con.contribution_id not in (select contribution_id from validations where validated_by=$1)
 	group by con.dataset_row_id, ds.media->>'data', con.contribution_id, conf.value, mds.params, ds.media 
 	having count(val.*)<conf.value
-    order by count(val.*) desc, con.contribution_id 
+    order by count(val.*) desc 
 	limit 5;`
 
 const getContributionListForParallel = `
@@ -170,7 +170,7 @@ select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as 
   and con.contribution_id not in (select contribution_id from validations where validated_by=$1)
   group by con.dataset_row_id, ds.media->>'data', con.contribution_id, conf.value, mds.params, ds.media
   having count(val.*)<conf.value
-  order by count(val.*) desc, con.contribution_id limit 5;`
+  order by count(val.*) desc limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, action, validated_by, date, state_region, country, device, browser) 
 select contribution_id, $3, $1, now(), $5, $6, $7, $8 from contributions inner join dataset_row on dataset_row.dataset_row_id=contributions.dataset_row_id 
