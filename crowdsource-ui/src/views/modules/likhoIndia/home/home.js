@@ -147,7 +147,6 @@ function initializeBlock() {
   onOpenUserDropDown();
   updateGoalProgressBar(`/progress/parallel`);
   getStatsSummary('/stats/summary/parallel', MODULE.likho);
-
 }
 
 $(document).ready(function () {
