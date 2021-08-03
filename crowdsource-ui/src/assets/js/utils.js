@@ -235,6 +235,9 @@ const getJson = (path) => {
     return new Promise((resolve) => {
       $.getJSON(path, (data) => {
         resolve(data);
+      }).fail(() => {
+        const $errorDialog = $('#errorPopup');
+        $errorDialog.modal('show');
       });
     })
 }
