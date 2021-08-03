@@ -3,6 +3,7 @@ const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, 
 const { LOCALE_STRINGS,MODULE,CONTRIBUTION_LANGUAGE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
 const { onChangeUser , showUserProfile,onOpenUserDropDown} = require('./header');
+const { showErrorPopup } = require('./common');
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
@@ -467,7 +468,9 @@ const initialize = () => {
             .then((res) => res.json())
             .then(() => {
             })
-            .catch(() => {})
+            .catch(() => {
+                showErrorPopup();
+            })
             .then(() => {
                 if (cb && typeof cb === 'function') {
                     cb();

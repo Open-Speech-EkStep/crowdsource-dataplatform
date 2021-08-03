@@ -53,10 +53,15 @@ const isMobileDevice = () => {
   }
 }
 
+const showErrorPopup = () => {
+  const $errorDialog = $('#errorPopup');
+  $errorDialog.modal('show');
+}
+
 const hasUserRegistered = function (){
   const userDetail = localStorage.getItem(SPEAKER_DETAILS_KEY);
   const parsedUserDetails = JSON.parse(userDetail);
   return parsedUserDetails ? true : false;
 }
 
-  module.exports =  {getContributedAndTopLanguage, onActiveNavbar, isMobileDevice,hasUserRegistered};
+  module.exports =  {showErrorPopup,  getContributedAndTopLanguage, onActiveNavbar, isMobileDevice,hasUserRegistered};

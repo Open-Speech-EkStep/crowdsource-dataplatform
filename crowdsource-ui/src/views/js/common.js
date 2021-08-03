@@ -497,10 +497,15 @@ const updateGoalProgressBar = function (url){
   }).catch(e=>console.log(e))
 }
 
+const showErrorPopup = () => {
+  const $errorDialog = $('#errorPopup');
+  $errorDialog.modal('show');
+}
+
 const replaceSubStr = function (element , to ,from){
   const originalText = element.text();
   const newText = originalText.replace(to, from);
   element.text(newText.toString());
 }
 
-module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateGoalProgressBar,replaceSubStr,getTopLanguage,isInTopLanguage,getTop3Languages };
+module.exports = { isMobileDevice, showErrorPopup, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton,landToHome,showOrHideExtensionCloseBtn,hasUserRegistered,updateGoalProgressBar,replaceSubStr,getTopLanguage,isInTopLanguage,getTop3Languages };

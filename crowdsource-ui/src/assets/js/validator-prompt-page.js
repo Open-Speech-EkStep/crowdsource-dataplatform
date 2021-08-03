@@ -8,6 +8,7 @@ const { cdn_url } = require('./env-api');
 const { onChangeUser } = require('./header');
 const { MODULE, CONTRIBUTION_LANGUAGE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
+const { showErrorPopup } = require('./common');
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -480,6 +481,7 @@ $(document).ready(() => {
       initializeComponent();
     }).catch((err) => {
         console.log(err);
+        showErrorPopup();
       $errorModal.modal('show');
     });
   }

@@ -604,5 +604,7 @@
 	"recordings": "recordings",
 	"image labels": "image labels",
 	"Overall Summary": "Overall Summary",
-	"Contribution Tracker": "Contribution Tracker"
+	"Contribution Tracker": "Contribution Tracker",
+	"Something went wrong, please try again later": "Something went wrong, please try again later",
+	"An unexpected error has occurred.": "An unexpected error has occurred."
 }

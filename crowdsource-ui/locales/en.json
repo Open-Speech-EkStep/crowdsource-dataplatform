@@ -367,5 +367,7 @@
 	"sentences": "sentences",
 	"recordings": "recordings",
 	"translations": "translations",
-	"image labels": "image labels"
+	"image labels": "image labels",
+	"Something went wrong, please try again later": "Something went wrong, please try again later",
+	"An unexpected error has occurred.": "An unexpected error has occurred."
 }
