@@ -10,8 +10,8 @@ const getSpeakersData = (data, lang, moduleType) => {
   }
   if (data && data.length) {
     if (!lang) {
-      speakersData.languages = parseInt(data[0].total_languages);
-      speakersData.speakers = parseInt(data[0].total_speakers);
+      speakersData.languages = parseInt(data[0].total_languages) || 0;
+      speakersData.speakers = parseInt(data[0].total_speakers) || 0;
       speakersData.contributions = moduleType === "likho" || moduleType === "dekho" ? parseFloat(data[0].total_contribution_count ? data[0].total_contribution_count : '0') : parseFloat(data[0].total_contributions ? data[0].total_contributions : '0');
       speakersData.validations = moduleType === "likho" || moduleType === "dekho" ? parseFloat(data[0].total_validation_count ? data[0].total_validation_count : '0') : parseFloat(data[0].total_validations ? data[0].total_validations : '0');
     } else {

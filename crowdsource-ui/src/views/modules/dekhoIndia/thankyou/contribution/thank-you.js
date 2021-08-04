@@ -16,9 +16,9 @@ const {
   showElement,
   hideElement
 } = require("../common/utils");
-const {downloadPdf} = require('../common/downloadableBadges');
-const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
-const {showByHoursChartThankyouPage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage, showErrorPopup} = require('../common/common');
+const { downloadPdf } = require('../common/downloadableBadges');
+const { showUserProfile, onChangeUser, onOpenUserDropDown } = require('../common/header');
+const { showByHoursChartThankyouPage, setBadge, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage, showErrorPopup } = require('../common/common');
 
 const { initializeFeedbackModal } = require('../common/feedback');
 const dekhoCountKey = 'dekhoCount';
@@ -32,7 +32,7 @@ const getFormattedTime = (totalSeconds) => {
   const remainingAfterHours = totalSeconds % HOUR_IN_SECONDS;
   const minutes = Math.floor(remainingAfterHours / SIXTY);
   const seconds = Math.ceil(remainingAfterHours % SIXTY);
-  return {hours, minutes, seconds};
+  return { hours, minutes, seconds };
 };
 
 const updateShareContent = function (language, rank) {
@@ -73,7 +73,7 @@ const getLanguageStats = function () {
           CONTRIBUTION_LANGUAGE
         );
         localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.dekho.value, 'total_contribution_count','total_contributions');
+        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.dekho.value, 'total_contribution_count', 'total_contributions');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
         showByHoursChartThankyouPage(MODULE.dekho.value, "thankyou");
 
@@ -88,7 +88,7 @@ const getLanguageStats = function () {
         const $contributeLanguageProgress = $("#contribute_language_progress");
         if (rank > -1) {
           const tc = data[rank].total_contributions;
-          const {hours: hr, minutes: min, seconds: sec} = getFormattedTime(
+          const { hours: hr, minutes: min, seconds: sec } = getFormattedTime(
             Number(tc) * 3600
           );
           $contributedLangTime.text(`${hr}hrs ${min}min ${sec}sec`);
@@ -113,7 +113,7 @@ const getLanguageStats = function () {
         updateShareContent("", 0);
       }
     })
-    .catch(() => {showErrorPopup()});
+    .catch(() => { showErrorPopup() });
 };
 
 function setSentencesContributed() {
@@ -135,7 +135,7 @@ function setSentencesContributed() {
   performAPIRequest(
     `/rewards?type=ocr&language=${contributionLanguage}&source=contribute&userName=${userName}`
   ).then((data) => {
-    setBadge(data,localeStrings,'contribute');
+    setBadge(data, localeStrings, 'contribute');
   });
 }
 
@@ -151,7 +151,7 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName)
-    onChangeUser('./thank-you.html',MODULE.dekho.value);
+    onChangeUser('./thank-you.html', MODULE.dekho.value);
     onOpenUserDropDown();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -176,10 +176,10 @@ function executeOnLoad() {
     hideElement($("#loader"))
     showElement($("#data-wrapper"))
 
-    getLanguageStats().then(()=>{
+    getLanguageStats().then(() => {
       setSentencesContributed();
     });
-    updateGoalProgressBar(`/progress/ocr/${contributionLanguage}/contribute`)
+    updateGoalProgressBarFromJson(MODULE.dekho['api-type'], 'contribute', contributionLanguage)
   }
 }
 
@@ -188,8 +188,8 @@ $(document).ready(function () {
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
   });
-  localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
-  localStorage.setItem("selectedType","contribute");
+  localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
+  localStorage.setItem("selectedType", "contribute");
   initializeFeedbackModal();
   getLocaleString()
     .then(() => {
@@ -200,4 +200,4 @@ $(document).ready(function () {
     });
 });
 
-module.exports = {setSentencesContributed};
+module.exports = { setSentencesContributed };

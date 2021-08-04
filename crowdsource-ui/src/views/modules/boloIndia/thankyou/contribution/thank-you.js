@@ -16,11 +16,11 @@ const {
   showElement,
   hideElement
 } = require("../common/utils");
-const {downloadPdf} = require('../common/downloadableBadges');
-const {initializeFeedbackModal} = require('../common/feedback')
+const { downloadPdf } = require('../common/downloadableBadges');
+const { initializeFeedbackModal } = require('../common/feedback')
 
-const {setBadge, showByHoursChartThankyouPage, updateGoalProgressBar,replaceSubStr,getTopLanguage,showErrorPopup} = require('../common/common');
-const {onChangeUser,showUserProfile,onOpenUserDropDown} = require('../common/header');
+const { setBadge, showByHoursChartThankyouPage, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage, showErrorPopup } = require('../common/common');
+const { onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
 
 const CURRENT_INDEX = "currentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -45,7 +45,7 @@ function setSentencesContributed() {
   performAPIRequest(
     `/rewards?type=text&language=${contributionLanguage}&source=contribute&userName=${userName}`
   ).then((data) => {
-    setBadge(data,localeStrings,'contribute');
+    setBadge(data, localeStrings, 'contribute');
   });
 }
 
@@ -54,7 +54,7 @@ const getFormattedTime = (totalSeconds) => {
   const remainingAfterHours = totalSeconds % HOUR_IN_SECONDS;
   const minutes = Math.floor(remainingAfterHours / SIXTY);
   const seconds = Math.ceil(remainingAfterHours % SIXTY);
-  return {hours, minutes, seconds};
+  return { hours, minutes, seconds };
 };
 
 const updateShareContent = function (language, rank) {
@@ -92,13 +92,13 @@ const getLanguageStats = function () {
     .then((response) => {
       if (response.aggregate_data_by_language.length > 0) {
         localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.bolo.value, 'total_contribution_count','total_contributions');
+        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.bolo.value, 'total_contribution_count', 'total_contributions');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
         showByHoursChartThankyouPage(MODULE.bolo.value, "thankyou");
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
-        const {hours, minutes, seconds} = getFormattedTime(
+        const { hours, minutes, seconds } = getFormattedTime(
           Number(data[0].total_contributions) * 3600
         );
         const $highestLangTime = $("#highest_language_time");
@@ -119,7 +119,7 @@ const getLanguageStats = function () {
         const $contributeLanguageProgress = $("#contribute_language_progress");
         if (rank > -1) {
           const tc = data[rank].total_contributions;
-          const {hours: hr, minutes: min, seconds: sec} = getFormattedTime(
+          const { hours: hr, minutes: min, seconds: sec } = getFormattedTime(
             Number(tc) * 3600
           );
           $contributedLangTime.text(`${hr}hrs ${min}min ${sec}sec`);
@@ -144,7 +144,7 @@ const getLanguageStats = function () {
         updateShareContent("", 0);
       }
     })
-    .catch(() => {showErrorPopup()});
+    .catch(() => { showErrorPopup() });
 };
 
 function executeOnLoad() {
@@ -155,7 +155,7 @@ function executeOnLoad() {
 
   if (!localSpeakerDataParsed) {
     location.href = "./home.html";
-  } else if (currentIndexInStorage < totalSentence -1) {
+  } else if (currentIndexInStorage < totalSentence - 1) {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName);
@@ -184,16 +184,16 @@ function executeOnLoad() {
   hideElement($("#loader"))
   showElement($("#data-wrapper"))
 
-  updateGoalProgressBar(`/progress/text/${contributionLanguage}/contribute`);
-  getLanguageStats().then(()=>{
+  updateGoalProgressBarFromJson(MODULE.bolo['api-type'], 'contribute', contributionLanguage);
+  getLanguageStats().then(() => {
     setSentencesContributed();
   });
 }
 
 
 $(document).ready(function () {
-  localStorage.setItem(CURRENT_MODULE,'bolo');
-  localStorage.setItem("selectedType","contribute");
+  localStorage.setItem(CURRENT_MODULE, 'bolo');
+  localStorage.setItem("selectedType", "contribute");
   initializeFeedbackModal();
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
@@ -208,4 +208,4 @@ $(document).ready(function () {
     });
 });
 
-module.exports = {setSentencesContributed};
+module.exports = { setSentencesContributed };

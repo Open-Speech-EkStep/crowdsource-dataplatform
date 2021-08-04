@@ -9,7 +9,7 @@ const {
   AGGREGATED_DATA_BY_LANGUAGE,
   AGGREGATED_DATA_BY_TOP_LANGUAGE
 } = require("../common/constants");
-const { onChangeUser,onOpenUserDropDown,showUserProfile } = require('../common/header');
+const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 
 const {
   updateLocaleLanguagesDropdown,
@@ -19,21 +19,21 @@ const {
   hideElement
 } = require("../common/utils");
 
-const {downloadPdf} = require('../common/downloadableBadges');
-const {showByHoursChartThankyouPage,setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage, showErrorPopup} = require('../common/common');
+const { downloadPdf } = require('../common/downloadableBadges');
+const { showByHoursChartThankyouPage, setBadge, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage, showErrorPopup } = require('../common/common');
 
 const CURRENT_INDEX = "sunoValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
 const sunoValidatorCountKey = 'sunoValidatorCount';
 const totalSentence = Number(localStorage.getItem(sunoValidatorCountKey));
-const {initializeFeedbackModal} = require('../common/feedback');
+const { initializeFeedbackModal } = require('../common/feedback');
 
 const getFormattedTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
   const remainingAfterHours = totalSeconds % HOUR_IN_SECONDS;
   const minutes = Math.floor(remainingAfterHours / SIXTY);
   const seconds = Math.ceil(remainingAfterHours % SIXTY);
-  return {hours, minutes, seconds};
+  return { hours, minutes, seconds };
 };
 
 const updateShareContent = function (language, rank) {
@@ -74,9 +74,9 @@ const getLanguageStats = function () {
           CONTRIBUTION_LANGUAGE
         );
         localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.suno.value, 'total_validation_count','total_validations');
+        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.suno.value, 'total_validation_count', 'total_validations');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
-        showByHoursChartThankyouPage(MODULE.suno.value, "thankyou",'sentences');
+        showByHoursChartThankyouPage(MODULE.suno.value, "thankyou", 'sentences');
         const data = response.aggregate_data_by_language.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
@@ -87,7 +87,7 @@ const getLanguageStats = function () {
         const $contributeLanguageProgress = $("#contribute_language_progress");
         if (rank > -1) {
           const tc = data[rank].total_contributions;
-          const {hours: hr, minutes: min, seconds: sec} = getFormattedTime(
+          const { hours: hr, minutes: min, seconds: sec } = getFormattedTime(
             Number(tc) * 3600
           );
           $contributedLangTime.text(`${hr}hrs ${min}min ${sec}sec`);
@@ -112,7 +112,7 @@ const getLanguageStats = function () {
         updateShareContent("", 0);
       }
     })
-    .catch(() => {showErrorPopup()});
+    .catch(() => { showErrorPopup() });
 };
 
 function setSentencesContributed() {
@@ -134,7 +134,7 @@ function setSentencesContributed() {
   performAPIRequest(
     `/rewards?type=asr&language=${contributionLanguage}&source=validate&userName=${userName}`
   ).then((data) => {
-    setBadge(data,localeStrings,"validator");
+    setBadge(data, localeStrings, "validator");
   });
 }
 
@@ -150,7 +150,7 @@ function executeOnLoad() {
     location.href = "./home.html";
   } else {
     showUserProfile(localSpeakerDataParsed.userName)
-    onChangeUser('./validator-thank-you.html',MODULE.suno.value);
+    onChangeUser('./validator-thank-you.html', MODULE.suno.value);
     onOpenUserDropDown();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -175,16 +175,16 @@ function executeOnLoad() {
     hideElement($("#loader"))
     showElement($("#data-wrapper"))
 
-    getLanguageStats().then(()=>{
+    getLanguageStats().then(() => {
       setSentencesContributed();
     });
-    updateGoalProgressBar(`/progress/asr/${contributionLanguage}/validate`)
+    updateGoalProgressBarFromJson(MODULE.suno['api-type'], 'validate', contributionLanguage)
   }
 }
 
 $(document).ready(function () {
-  localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
-  localStorage.setItem("selectedType","validate");
+  localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
+  localStorage.setItem("selectedType", "validate");
   initializeFeedbackModal();
 
   $("#download_pdf").on('click', function () {
@@ -199,4 +199,4 @@ $(document).ready(function () {
     });
 });
 
-module.exports = {setSentencesContributed};
+module.exports = { setSentencesContributed };

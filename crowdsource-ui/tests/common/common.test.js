@@ -2,7 +2,7 @@ const { readFileSync } = require('fs');
 jest.mock('node-fetch');
 const { stringToHTML, mockLocalStorage } = require('../utils');
 const { CONTRIBUTION_LANGUAGE, SPEAKER_DETAILS_KEY, CURRENT_MODULE, AGGREGATED_DATA_BY_LANGUAGE } = require('../../build/js/common/constants');
-const { hasUserRegistered, setBadge, updateGoalProgressBar, isInTopLanguage, getTop3Languages, countTotalProgress } = require('../../build/js/common/common.js');
+const { hasUserRegistered, setBadge, updateGoalProgressBar, isInTopLanguage, getTop3Languages, getCountBasedOnSource, languageFilter } = require('../../build/js/common/common.js');
 
 describe('test common js', () => {
 
@@ -683,21 +683,42 @@ describe('test common js', () => {
     })
   })
 
-  describe('test countTotalProgress', () => {
+  describe('test getCountBasedOnSource', () => {
 
     test('should give contribution value for source contribute', () => {
-      const result = countTotalProgress('contribute', 2, 3)
+      const result = getCountBasedOnSource('contribute', 2, 3)
       expect(result).toEqual(2)
     })
 
     test('should give contribution value for source validate', () => {
-      const result = countTotalProgress('validate', 2, 3)
+      const result = getCountBasedOnSource('validate', 2, 3)
       expect(result).toEqual(3)
     })
 
     test('should give total value for source not specified', () => {
-      const result = countTotalProgress('', 2, 3)
+      const result = getCountBasedOnSource('', 2, 3)
       expect(result).toEqual(5)
+    })
+  })
+
+  describe('test languageFilter', () => {
+    const data = [{ language: 'Hindi', type: 'text' }, { language: 'Tamil', type: 'text' }]
+    test('should return filtered list if language present', () => {
+      const language = "Hindi";
+      const result = languageFilter(data, language)
+      expect(result).toEqual([{ language, type: 'text' }])
+    })
+
+    test('should return actual list if language empty', () => {
+      const language = "";
+      const result = languageFilter(data, language)
+      expect(result).toEqual(data)
+    })
+
+    test('should return empty list if language not present', () => {
+      const language = "someLanguage";
+      const result = languageFilter(data, language)
+      expect(result).toEqual([])
     })
   })
 })

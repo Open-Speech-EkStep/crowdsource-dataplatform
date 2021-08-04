@@ -18,10 +18,10 @@ const {
   hideElement
 } = require("../common/utils");
 
-const {downloadPdf} = require('../common/downloadableBadges');
-const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
-const {showByHoursChartThankyouPage, setBadge, updateLikhoLocaleLanguagesDropdown,showErrorPopup,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
-const {initializeFeedbackModal} = require('../common/feedback');
+const { downloadPdf } = require('../common/downloadableBadges');
+const { showUserProfile, onChangeUser, onOpenUserDropDown } = require('../common/header');
+const { showByHoursChartThankyouPage, setBadge, updateLikhoLocaleLanguagesDropdown, showErrorPopup, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage } = require('../common/common');
+const { initializeFeedbackModal } = require('../common/feedback');
 
 const CURRENT_INDEX = "likhoCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -33,7 +33,7 @@ const getFormattedTime = (totalSeconds) => {
   const remainingAfterHours = totalSeconds % HOUR_IN_SECONDS;
   const minutes = Math.floor(remainingAfterHours / SIXTY);
   const seconds = Math.ceil(remainingAfterHours % SIXTY);
-  return {hours, minutes, seconds};
+  return { hours, minutes, seconds };
 };
 
 const updateShareContent = function (language, rank) {
@@ -74,7 +74,7 @@ const getLanguageStats = function () {
           CONTRIBUTION_LANGUAGE
         );
         localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.likho.value, 'total_contribution_count','total_contributions');
+        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.likho.value, 'total_contribution_count', 'total_contributions');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
         showByHoursChartThankyouPage(MODULE.likho.value, "thankyou");
         const data = response.aggregate_data_by_language.sort((a, b) =>
@@ -87,7 +87,7 @@ const getLanguageStats = function () {
         const $contributeLanguageProgress = $("#contribute_language_progress");
         if (rank > -1) {
           const tc = data[rank].total_contributions;
-          const {hours: hr, minutes: min, seconds: sec} = getFormattedTime(
+          const { hours: hr, minutes: min, seconds: sec } = getFormattedTime(
             Number(tc) * 3600
           );
           $contributedLangTime.text(`${hr}hrs ${min}min ${sec}sec`);
@@ -112,7 +112,7 @@ const getLanguageStats = function () {
         updateShareContent("", 0);
       }
     })
-    .catch(() => showErrorPopup() );
+    .catch(() => showErrorPopup());
 };
 
 function setSentencesContributed() {
@@ -134,7 +134,7 @@ function setSentencesContributed() {
   performAPIRequest(
     `/rewards?type=parallel&language=${contributionLanguage}&source=contribute&userName=${userName}`
   ).then((data) => {
-    setBadge(data,localeStrings, 'contribute');
+    setBadge(data, localeStrings, 'contribute');
   });
 }
 
@@ -183,17 +183,17 @@ function executeOnLoad() {
     hideElement($("#loader"))
     showElement($("#data-wrapper"))
 
-    updateGoalProgressBar(`/progress/parallel/${contributionLanguage}-${toLanguage}/contribute`)
-    getLanguageStats().then(()=>{
-    setSentencesContributed();
+    updateGoalProgressBarFromJson(MODULE.likho['api-type'], 'contribute', contributionLanguage)
+    getLanguageStats().then(() => {
+      setSentencesContributed();
     });
   }
 }
 
 $(document).ready(function () {
 
-  localStorage.setItem(CURRENT_MODULE,MODULE.likho.value);
-  localStorage.setItem("selectedType","contribute");
+  localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
+  localStorage.setItem("selectedType", "contribute");
   initializeFeedbackModal();
   $("#download_pdf").on('click', function () {
     downloadPdf($(this).attr("data-badge"));
@@ -208,4 +208,4 @@ $(document).ready(function () {
     });
 });
 
-module.exports = {setSentencesContributed};
+module.exports = { setSentencesContributed };

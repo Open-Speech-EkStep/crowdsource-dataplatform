@@ -60,4 +60,7 @@ SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  max(lastupdated)
 SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select count(distinct(users)) as count, type from (SELECT contributed_by AS users, type FROM contributions_and_demo_stats UNION SELECT validated_by as users, type FROM contributions_and_demo_stats) as cds group by type)t;
 
 \o initiativeGoals.json
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select sum(goal) as goal, type from language_goals group by type )t;
+SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select sum(goal) FILTER (WHERE category = 'contribute') as contribution_goal, sum(goal) FILTER (WHERE category = 'validate') as validation_goal, type from language_goals group by type )t;
+
+\o initiativeGoalsByLanguage.json
+SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select sum(goal) FILTER (WHERE category = 'contribute') as contribution_goal, sum(goal) FILTER (WHERE category = 'validate') as validation_goal, type, language from language_goals group by type, language )t;
