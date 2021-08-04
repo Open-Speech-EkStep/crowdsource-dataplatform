@@ -640,3 +640,20 @@ body {
   position: relative;
   left: -32px;
 }
+
+.modal.show {
+  z-index: 1047;
+}
+
+.functional-page-bg .modal.show, 
+#validator-page-content .modal.show {
+  z-index: 1045;
+}
+
+.modal-backdrop.show  + .modal-backdrop.show {
+  z-index: 1045;
+}
+
+.modal-backdrop.show {
+  z-index: 1043;
+}

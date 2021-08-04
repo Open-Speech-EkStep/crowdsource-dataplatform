@@ -321,3 +321,19 @@ body {
 .padding-top-115 {
   padding-top: 115px !important;
 }
+
+.modal.show ~ .modal.show {
+  z-index: 1043;
+}
+
+.modal.show {
+  z-index: 1045;
+}
+
+.modal-backdrop.show  + .modal-backdrop.show {
+  z-index: 1042;
+}
+
+.modal-backdrop.show {
+  z-index: 1043;
+}
