@@ -149,6 +149,7 @@ step("When user click on Lets Go Button, user should <arg0> see instructions to 
         assert.ok(! await text('Quick Tips').exists())
     }
     else {
+        await scrollUp(5000);
         assert.ok(await text('Quick Tips').exists(), 'Not able to see instructions')
     }
 });
