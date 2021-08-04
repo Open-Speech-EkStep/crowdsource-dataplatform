@@ -134,7 +134,6 @@ const performAPIRequest = (url) => {
     }
   })
   .catch(() => {
-    console.log("Perform Request");
     const $errorDialog = $('#errorPopup');
     $errorDialog.modal('show');
   });
