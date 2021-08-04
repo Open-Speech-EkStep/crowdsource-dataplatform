@@ -6,6 +6,7 @@ const {
 	write,
 	click,
 	image,
+	below,
 	link,
 	clear,
 	text,
@@ -74,20 +75,19 @@ step("Clicking <btnName> should navigate to <module> Page", async function (btnN
 
 step("Move tab to <tabName>", async function (tabName) {
 	assert.ok(await button("Start Participating").exists())
-	await click(link(tabName, taiko.above(button("Start Participating"))));
+	await taiko.waitFor(1200);
+	//await click(taiko.$({id : tabName}))
+	await click(taiko.$('#'+tabName));
+
+	//await click(taiko.$('#'+tabName, taiko.below(text('Help to build an open repository of data to digitally enrich your language '))));
 	await taiko.waitFor(500);
 });
 
-step("Check monthly goal section for value <value>", async function (value) {
-	assert.ok(await text("monthly goal").isVisible());
-	await taiko.scrollTo(text("monthly goal"));
-	assert.ok(await text(value, taiko.toRightOf(text("monthly goal"))).isVisible());
-});
 
 step("Click <name> Link", async function (name) {
 	await taiko.waitFor(1500)
-	assert.ok(await link(name).exists());
-	await click(link(name));
+		assert.ok(await link(name).exists());
+		await click(link(name));
 });
 
 step("Should select <lang> from localisation dropdown <id>", async function (lang, id) {
@@ -113,12 +113,12 @@ step("Validate contribution language should be selected <lang> from <dropdown_id
 	// }
 });
 
-step("Localisation <id> dropdown should have <lang1> & <lang2> value", async function (id, lang1, lang2) {
-	await taiko.waitFor(2000)
-	await click(taiko.link({ id: id }));
-	assert.ok(await text(lang1).exists());
-	assert.ok(await text(lang2).exists());
-});
+// step("Localisation <id> dropdown should have <lang1> & <lang2> value", async function (id, lang1, lang2) {
+// 	await taiko.waitFor(2000)
+// 	await click(taiko.link({ id: id }));
+// 	assert.ok(await text(lang1).exists());
+// 	assert.ok(await text(lang2).exists());
+// });
 
 step("Validate participation section content", async function() {
 	await taiko.waitFor(1500)
@@ -127,7 +127,7 @@ step("Validate participation section content", async function() {
 	const boloText = text('BOLO INDIA',taiko.toRightOf(sunoText))
 	const likhoText = text('LIKHO INDIA',taiko.toRightOf(boloText))
 	const dekhoText = text('DEKHO INDIA',taiko.toRightOf(likhoText))
-	
+	await taiko.waitFor(1500)
 	assert.ok(await text(titleText).exists())
 	assert.ok(await boloText.exists())
 	assert.ok(await likhoText.exists())

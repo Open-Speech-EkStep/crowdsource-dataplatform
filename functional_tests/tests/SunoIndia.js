@@ -75,7 +75,7 @@ step("User click on <textfield> field <submitbtn> should be enabled", async func
 });
 
 step("User should see the top Language graph and other stats", async function () {
-    assert.ok(await text("Language Tracker").exists());
+    assert.ok(await text("Contribution Tracker").exists());
     assert.ok(await text("Languages").exists());
     assert.ok(await text("People participated").exists());
     assert.ok(await text("Duration transcribed").exists());

@@ -8,11 +8,11 @@ Tags: page
 ## Validate Carousel Section
 * Section should have text "One Platform, multiple Crowdsourcing Initiatives"
 * Validate "Suno India" Tab and goal ""
-* Move tab to "Bolo India"
+* Move tab to "boloTab"
 * Validate "Bolo India" Tab and goal ""
-* Move tab to "Likho India"
+* Move tab to "likhoTab"
 * Validate "Likho India" Tab and goal ""
-* Move tab to "Dekho India"
+* Move tab to "dekhoTab"
 * Validate "Dekho India" Tab and goal ""
 
 ## Validate Total Participation section

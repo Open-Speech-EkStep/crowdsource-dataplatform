@@ -3,7 +3,7 @@ Tags: page
 
 * Open Website
 
-## Check Know more link into home page
+## Check Badge Info Page
 * Click "Know More" Link
 * Validate language dropdown, initiative tab, badges level & participation radios exist
 * Validate default selected values

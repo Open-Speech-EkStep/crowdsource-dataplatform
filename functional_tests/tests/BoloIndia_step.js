@@ -142,7 +142,7 @@ step("And User enter random Username and selects Age , Mother tongue ,gender", a
 
 step("When user click on Lets Go Button, user should <arg0> see instructions to record", async function (arg0) {
     await click(taiko.button({ id: 'proceed-box' }))
-    await taiko.waitFor(1500)
+    await taiko.waitFor(2500)
 
     if (arg0 == "not") {
         assert.ok(! await text('Quick Tips').exists())
@@ -187,6 +187,7 @@ step("Add <usrnm> Username for Valiadtion", async function (usrnm) {
 
 
 step("User should be able to close the Instructions , user should see a sentence , Skip button , Start Recording Button , username,Test Mic and speaker button", async function () {
+    await taiko.waitFor(1200)
     await click(button({ id: "instructions_close_btn" }))
     assert.ok(await button({ id: 'startRecord' }).exists())
     assert.ok(await button({ id: 'skipBtn' }).exists())
