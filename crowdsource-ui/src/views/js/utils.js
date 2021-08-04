@@ -132,6 +132,10 @@ const performAPIRequest = (url) => {
     } else {
       return Promise.resolve(data.json());
     }
+  })
+  .catch(() => {
+    const $errorDialog = $('#errorPopup');
+    $errorDialog.modal('show');
   });
 }
 
@@ -249,6 +253,9 @@ const getJson = (path) => {
     return new Promise((resolve) => {
       $.getJSON(`${context_root}${path}`, (data) => {
         resolve(data);
+      }).fail(() => {
+        const $errorDialog = $('#errorPopup');
+        $errorDialog.modal('show');
       });
     })
 }

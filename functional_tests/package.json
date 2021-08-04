@@ -2,7 +2,7 @@
   "name": "gauge-taiko-functional-tests",
   "description": "Starter template for writing JavaScript tests for Gauge",
   "scripts": {
-    "test": "gauge run specs --verbose",
+    "test": "gauge run specs --verbose -p -n=6",
     "apitest": "jest API_tests ",
     "preinstall": "npx npm-force-resolutions"
   },

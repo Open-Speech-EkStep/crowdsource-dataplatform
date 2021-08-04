@@ -1,0 +1,38 @@
+#errorPopup .modal-dialog {
+  height: calc(100% - 60px);
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+}
+
+#errorPopup .modal-body {
+  background: #ffffff;
+  box-shadow: 0 4px 16px 4px rgba(0, 123, 255, 0.2);
+  border-radius: 12px;
+}
+
+#errorPopup .modal-content {
+  max-width: 400px;
+  border-radius: 12px;
+}
+
+#errorPopup .modal-content .modal-body {
+  padding: 30px 1.5rem 24px;
+}
+
+.proceed-btn {
+  border-radius: 48px;
+  max-width: 200px;
+  min-width: 200px;
+  margin-top: 25px;
+  padding: 11px;
+}
+
+
+@media (max-width: 768px){
+  #errorPopup .modal-dialog{
+    margin: 20px;
+  }
+
+ 
+}

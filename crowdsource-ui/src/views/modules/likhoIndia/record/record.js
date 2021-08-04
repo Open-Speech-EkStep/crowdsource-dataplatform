@@ -12,7 +12,7 @@ const {
 } = require('../common/utils');
 const {LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, CONTRIBUTION_LANGUAGE } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
-const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, isMobileDevice, updateLikhoLocaleLanguagesDropdown, showOrHideExtensionCloseBtn } = require('../common/common');
+const { isKeyboardExtensionPresent,showErrorPopup, enableCancelButton, disableCancelButton, isMobileDevice, updateLikhoLocaleLanguagesDropdown, showOrHideExtensionCloseBtn } = require('../common/common');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const speakerDetailsKey = 'speakerDetails';
@@ -50,6 +50,7 @@ function uploadToServer(cb) {
     .then(() => {
     })
     .catch(() => {
+      showErrorPopup();
     })
     .then(() => {
       if (cb && typeof cb === 'function') {
@@ -125,7 +126,7 @@ function markContributionSkipped() {
     .then((res) => res.json())
     .then(() => {
     })
-    .catch((err) => {console.log(err)})
+    .catch(() => {showErrorPopup();})
 }
 
 function addListeners() {
@@ -261,8 +262,10 @@ const handleSubmitFeedback = function () {
         $(this).prop("checked", false);
       });
       $("#other_text").val("");
-    }
-  });
+    }else {
+      $("#report_sentence_modal").modal('hide'); showErrorPopup();
+  }
+  }).catch(()=> { $("#report_sentence_modal").modal('hide'); showErrorPopup()});
 }
 
 const setSentence = function (text) {
@@ -349,7 +352,6 @@ function executeOnLoad() {
   setPageContentHeight();
   setFooterPosition();
   const $validationInstructionModal = $("#validation-instruction-modal");
-  const $errorModal = $('#errorModal');
   const $loader = $('#loader');
   const $pageContent = $('#page-content');
   const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -383,15 +385,6 @@ function executeOnLoad() {
       $validationInstructionModal.addClass("d-none");
       setFooterPosition();
     })
-
-    $errorModal.on('show.bs.modal', function () {
-      $validationInstructionModal.addClass("d-none");
-      setFooterPosition();
-
-    });
-    $errorModal.on('hidden.bs.modal', function () {
-      location.href = './home.html';
-    });
 
     if (!localSpeakerDataParsed) {
       location.href = './home.html';
@@ -464,17 +457,15 @@ function executeOnLoad() {
           setFooterPosition();
           initialize();
         })
-        .catch((err) => {
-          console.log(err);
-          $errorModal.modal('show');
+        .catch(() => {
+          showErrorPopup();
         })
         .then(() => {
           $loader.hide();
         });
     }
   } catch (err) {
-    console.log(err);
-    $errorModal.modal('show');
+    showErrorPopup();
   }
 }
 

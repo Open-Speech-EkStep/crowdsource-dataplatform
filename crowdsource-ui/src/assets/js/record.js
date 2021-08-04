@@ -3,6 +3,7 @@ const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, 
 const { LOCALE_STRINGS,MODULE,CONTRIBUTION_LANGUAGE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
 const { onChangeUser , showUserProfile,onOpenUserDropDown} = require('./header');
+const { showErrorPopup } = require('./common');
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
@@ -467,7 +468,9 @@ const initialize = () => {
             .then((res) => res.json())
             .then(() => {
             })
-            .catch(() => {})
+            .catch(() => {
+                showErrorPopup();
+            })
             .then(() => {
                 if (cb && typeof cb === 'function') {
                     cb();
@@ -535,8 +538,10 @@ const handleSubmitFeedback = function () {
                 $(this).prop("checked", false);
             });
             $("#other_text").val("");
+        } else {
+            $("#report_sentence_modal").modal('hide'); showErrorPopup();
         }
-    });
+    }).catch(()=> { $("#report_sentence_modal").modal('hide'); showErrorPopup()});
 }
 
 let selectedReportVal = '';
@@ -546,7 +551,6 @@ function executeOnLoad() {
     setPageContentHeight();
     window.crowdSource = {};
     const $validationInstructionModal = $("#validation-instruction-modal");
-    const $errorModal = $('#errorModal');
     const $reportModal = $("#report_sentence_modal");
     const $loader = $('#loader');
     const $pageContent = $('#page-content');
@@ -593,15 +597,6 @@ function executeOnLoad() {
             $validationInstructionModal.addClass("d-none");
             setFooterPosition();
         })
-
-        $errorModal.on('show.bs.modal', function () {
-            $validationInstructionModal.addClass("d-none");
-            setFooterPosition();
-
-        });
-        $errorModal.on('hidden.bs.modal', function () {
-            location.href = './home.html';
-        });
 
         if (!localSpeakerDataParsed) {
             location.href = './home.html';
@@ -678,7 +673,7 @@ function executeOnLoad() {
                 })
                 .catch((err) => {
                     console.log(err);
-                    $errorModal.modal('show');
+                    showErrorPopup();
                 })
                 .then(() => {
                     $loader.hide();
@@ -686,7 +681,7 @@ function executeOnLoad() {
         }
     } catch (err) {
         console.log(err);
-        $errorModal.modal('show');
+        showErrorPopup();
     }
 }
 

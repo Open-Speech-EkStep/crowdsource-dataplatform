@@ -13,7 +13,7 @@ const {
 } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice, updateLikhoLocaleLanguagesDropdown} = require('../common/common');
+const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup, updateLikhoLocaleLanguagesDropdown} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { setDataSource } = require('../common/sourceInfo');
@@ -88,7 +88,7 @@ function uploadToServer(cb) {
     .then((res) => res.json())
     .then(() => {
     })
-    .catch(() => {})
+    .catch(() => {showErrorPopup()})
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -170,7 +170,7 @@ function skipValidation(action) {
         if (!data.ok) {
           throw Error(data.statusText || 'HTTP error');
         }
-      });
+      }).catch(() => {showErrorPopup()});
 }
 
 const openEditor = function () {
@@ -310,8 +310,10 @@ const handleSubmitFeedback = function () {
         $(this).prop("checked", false);
       });
       $("#other_text").val("");
-    }
-  });
+    }else {
+      $("#report_sentence_modal").modal('hide'); showErrorPopup();
+  }
+  }).catch(()=> { $("#report_sentence_modal").modal('hide'); showErrorPopup()});
 }
 
 const setSentence = function (sentence) {
@@ -433,15 +435,6 @@ const executeOnLoad = function () {
   const localSentencesParsed = JSON.parse(localSentences);
   setPageContentHeight();
 
-  const $errorModal = $('#errorModal');
-
-  $errorModal.on('show.bs.modal', function () {
-
-  });
-  $errorModal.on('hidden.bs.modal', function () {
-    location.href = './home.html';
-  });
-
   if (!localSpeakerDataParsed) {
     location.href = './home.html';
     return;
@@ -490,9 +483,8 @@ const executeOnLoad = function () {
       setFooterPosition();
 
       initializeComponent();
-    }).catch((err) => {
-      console.log(err);
-      $errorModal.modal('show');
+    }).catch(() => {
+      showErrorPopup();
     })
   }
 };

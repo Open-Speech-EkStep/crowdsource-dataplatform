@@ -8,6 +8,7 @@ const { cdn_url } = require('./env-api');
 const { onChangeUser } = require('./header');
 const { MODULE, CONTRIBUTION_LANGUAGE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
+const { showErrorPopup } = require('./common');
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -363,8 +364,10 @@ const handleSubmitFeedback = function () {
                 $(this).prop("checked", false);
             });
             $("#other_text").val("");
+        }else {
+            $("#report_recording_modal").modal('hide'); showErrorPopup();
         }
-    });
+    }).catch(()=> { $("#report_recording_modal").modal('hide'); showErrorPopup()});
 }
 
 let selectedReportVal = '';
@@ -480,6 +483,7 @@ $(document).ready(() => {
       initializeComponent();
     }).catch((err) => {
         console.log(err);
+        showErrorPopup();
       $errorModal.modal('show');
     });
   }

@@ -5,10 +5,10 @@ const {
   DEFAULT_CON_LANGUAGE,
   CONTRIBUTION_LANGUAGE
 } = require('./constants');
-const {setLangNavBar} = require('../common/languageNavBar')
+const { setLangNavBar } = require('../common/languageNavBar')
 
-const {getContributedAndTopLanguage,showByHoursChart, updateLocaleLanguagesDropdown} = require('./common');
-const {setSpeakerData} = require('./contributionStats');
+const { getContributedAndTopLanguage, showByHoursChart, updateLocaleLanguagesDropdown, showErrorPopup } = require('./common');
+const { setSpeakerData } = require('./contributionStats');
 const { context_root } = require('./env-api');
 
 function getStatistics(response, language, module) {
@@ -42,7 +42,7 @@ const getDefaultTargetedDiv = function (key, value, $sayListenLanguage) {
   return $sayListenLanguageItems[targetIndex];
 }
 
-const getDefaultLang = function (){
+const getDefaultLang = function () {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const $sayListenLanguage = $('#say-listen-language');
 
@@ -89,6 +89,8 @@ const getStats = (module) => {
       bData.total_speakers = bData2.count || 0;
       getStatistics(bData || {}, null, module.value);
     });
+  }).fail(() => {
+    showErrorPopup();
   });
 }
 const getChartStats = (module) => {
@@ -108,20 +110,26 @@ const getChartStats = (module) => {
       $("#view_all_btn").show();
       $("#contribution_stats").show();
     }
+  }).fail(() => {
+    showErrorPopup();
   });
 }
 const getSpeakerChartStats = (module) => {
   $.getJSON(`${context_root}/aggregated-json/topLanguagesBySpeakerContributions.json`, (jsonData) => {
     const top_languages_by_speakers = jsonData.filter(d => d.type == module["api-type"]);
     localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(top_languages_by_speakers));
+  }).fail(() => {
+    showErrorPopup();
   });
 }
-const getStatsSummary = function (url, module, callBack=()=>{}) {
+const getStatsSummary = function (url, module, callBack = () => { }) {
+
   getStats(module);
   getChartStats(module);
   getSpeakerChartStats(module);
   callBack();
+
 }
 
 
-module.exports = {getStatistics, getStatsSummary,getDefaultLang,setDefaultLang}
+module.exports = { getStatistics, getStatsSummary, getDefaultLang, setDefaultLang }

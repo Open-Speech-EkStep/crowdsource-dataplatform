@@ -16,7 +16,7 @@ const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showErrorPopup, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
 const { initializeFeedbackModal } = require('../common/feedback');
 const { setDataSource } = require('../common/sourceInfo');
@@ -68,7 +68,7 @@ function uploadToServer(cb) {
     .then((res) => res.json())
     .then(() => {
     })
-    .catch(() => {})
+    .catch(() => {showErrorPopup()})
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -248,7 +248,7 @@ function markContributionSkipped() {
     .then((res) => res.json())
     .then(() => {
     })
-    .catch((err) => {console.log(err)})
+    .catch(() => {showErrorPopup()})
 }
 
 function addListeners() {
@@ -410,8 +410,10 @@ const handleSubmitFeedback = function () {
         $(this).prop("checked", false);
       });
       $("#other_text").val("");
-    }
-  });
+    }else {
+      $("#report_sentence_modal").modal('hide'); showErrorPopup();
+  }
+  }).catch(()=> { $("#report_sentence_modal").modal('hide'); showErrorPopup()});
 }
 
 let selectedReportVal = '';
@@ -477,7 +479,6 @@ function executeOnLoad() {
   setPageContentHeight();
   setFooterPosition();
   // const $validationInstructionModal = $("#validation-instruction-modal");
-  const $errorModal = $('#errorModal');
   const $loader = $('#loader');
   const $pageContent = $('#page-content');
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -506,16 +507,6 @@ function executeOnLoad() {
     //   $validationInstructionModal.addClass("d-none");
     //   setFooterPosition();
     // })
-
-    $errorModal.on('show.bs.modal', function () {
-      // $validationInstructionModal.addClass("d-none");
-      setFooterPosition();
-
-    });
-    $errorModal.on('hidden.bs.modal', function () {
-      location.href = './home.html';
-    });
-
     if (!localSpeakerDataParsed) {
       location.href = './home.html';
       return;
@@ -584,17 +575,15 @@ function executeOnLoad() {
           setFooterPosition();
           initialize();
         })
-        .catch((err) => {
-          console.log(err);
-          $errorModal.modal('show');
+        .catch(() => {
+          showErrorPopup()
         })
         .then(() => {
           $loader.hide();
         });
     }
   } catch (err) {
-    console.log(err);
-    $errorModal.modal('show');
+    showErrorPopup()
   }
 }
 

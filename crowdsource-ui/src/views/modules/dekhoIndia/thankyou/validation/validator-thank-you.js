@@ -21,7 +21,7 @@ const {
   // showByHoursChart,
   showByHoursChartThankyouPage,
   // getContributedAndTopLanguage,
-  setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage} = require('../common/common');
+  setBadge,updateGoalProgressBar,replaceSubStr,getTopLanguage,showErrorPopup} = require('../common/common');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { initializeFeedbackModal } = require('../common/feedback');
 const CURRENT_INDEX = "dekhoValidatorCurrentIndex";
@@ -112,7 +112,8 @@ const getLanguageStats = function () {
       } else {
         updateShareContent("", 0);
       }
-    });
+    })
+    .catch(()=>{showErrorPopup()});
 };
 
 function setSentencesContributed() {
