@@ -1,7 +1,7 @@
-const { onActiveNavbar,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
+const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
 
-const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,updateLocaleLanguagesDropdown, updateGoalProgressBar,hasUserRegistered, showByHoursChart} = require('../common/common');
-const {getLocaleString} = require('../common/utils');
+const { redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages, updateLocaleLanguagesDropdown, updateGoalProgressBarFromJson, hasUserRegistered, showByHoursChart } = require('../common/common');
+const { getLocaleString } = require('../common/utils');
 const {
   setUserModalOnShown,
   setUserNameOnInputFocus,
@@ -9,8 +9,8 @@ const {
   setGenderRadioButtonOnClick,
 } = require('../common/speakerDetails');
 
-const {addToLanguage} = require('../common/languageNavBar')
-const {getStatsSummary} = require('../common/commonHome');
+const { addToLanguage } = require('../common/languageNavBar')
+const { getStatsSummary } = require('../common/commonHome');
 const {
   DEFAULT_CON_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
@@ -20,12 +20,12 @@ const {
   ALL_LANGUAGES
 } = require('../common/constants');
 
-const {initializeFeedbackModal} = require('../common/feedback');
+const { initializeFeedbackModal } = require('../common/feedback');
 
 function initializeBlock() {
   const $userName = $('#username');
   let sentenceLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  if(!sentenceLanguage){
+  if (!sentenceLanguage) {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
     sentenceLanguage = DEFAULT_CON_LANGUAGE;
   }
@@ -44,29 +44,29 @@ function initializeBlock() {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
     sessionStorage.setItem("i18n", "en");
     redirectToLocalisedPage();
-    getStatsSummary('/stats/summary/asr',MODULE.suno, ()=>{});
-    showFucntionalCards('asr',fromLanguage);
+    getStatsSummary('/stats/summary/asr', MODULE.suno, () => { });
+    showFucntionalCards('asr', fromLanguage);
   });
 
   $('#start_recording').on('click', () => {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
     localStorage.setItem("selectedType", "contribute");
-    if(!hasUserRegistered()){
+    if (!hasUserRegistered()) {
       $('#userModal').modal('show');
-      setStartRecordingBtnOnClick('./record.html',MODULE.suno.value);
+      setStartRecordingBtnOnClick('./record.html', MODULE.suno.value);
     } else {
-      location.href ='./record.html';
+      location.href = './record.html';
     }
   });
 
-  $('#start_validating').on('click',()=>{
+  $('#start_validating').on('click', () => {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
     localStorage.setItem("selectedType", "validate");
-    if(!hasUserRegistered()){
+    if (!hasUserRegistered()) {
       $('#userModal').modal('show');
-      setStartRecordingBtnOnClick('./validator-page.html',MODULE.suno.value);
+      setStartRecordingBtnOnClick('./validator-page.html', MODULE.suno.value);
     } else {
-      location.href ='./validator-page.html';
+      location.href = './validator-page.html';
     }
   })
 
@@ -79,9 +79,9 @@ function initializeBlock() {
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
 
-  onChangeUser('./home.html',MODULE.suno.value);
+  onChangeUser('./home.html', MODULE.suno.value);
   onOpenUserDropDown();
-  if(hasUserRegistered()){
+  if (hasUserRegistered()) {
     const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
     const localSpeakerDataParsed = JSON.parse(speakerDetails);
     showUserProfile(localSpeakerDataParsed.userName);
@@ -89,24 +89,21 @@ function initializeBlock() {
   $('[name="topLanguageChart"]').on('change', (event) => {
     showByHoursChart('suno', 'home', event.target.value);
   });
-  updateGoalProgressBar(`/progress/asr`);
+  updateGoalProgressBarFromJson(MODULE.suno['api-type']);
   getStatsSummary('/stats/summary/asr', MODULE.suno, () => { });
 }
 
-
-
 $(document).ready(function () {
-  localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
+  localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
   initializeFeedbackModal();
   getAvailableLanguages("asr");
-  getLocaleString().then(()=>{
+  getLocaleString().then(() => {
     initializeBlock();
   }).catch(() => {
     initializeBlock();
   });
   onActiveNavbar(MODULE.suno.value);
 });
-
 
 module.exports = {
   initializeBlock

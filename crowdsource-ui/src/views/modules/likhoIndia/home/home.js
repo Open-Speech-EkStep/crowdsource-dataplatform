@@ -1,5 +1,5 @@
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
-const { redirectToLocalisedPage, getAvailableLanguages, showFucntionalCards, updateGoalProgressBar, hasUserRegistered, updateLikhoLocaleLanguagesDropdown } = require('../common/common');
+const { redirectToLocalisedPage, getAvailableLanguages, showFucntionalCards, updateGoalProgressBarFromJson, hasUserRegistered, updateLikhoLocaleLanguagesDropdown } = require('../common/common');
 const {
   getLocaleString,
 } = require('../common/utils');
@@ -22,7 +22,7 @@ const {
   DEFAULT_CON_LANGUAGE
 } = require('../common/constants');
 
-const { initializeFeedbackModal } = require('../common/feedback')
+const { initializeFeedbackModal } = require('../common/feedback');
 
 const addToLanguage = function (id, list) {
   const selectBar = document.getElementById(id);
@@ -71,7 +71,7 @@ function initializeBlock() {
       $(`#to-language option[value=${toLanguage}]`).attr("selected", "selected");
     } else {
       fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-      if(fromLanguage) {
+      if (fromLanguage) {
         $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
       } else {
         $('#from-language option:first-child').attr("selected", "selected");
@@ -145,7 +145,7 @@ function initializeBlock() {
   }
   onChangeUser('./home.html', MODULE.likho.value);
   onOpenUserDropDown();
-  updateGoalProgressBar(`/progress/parallel`);
+  updateGoalProgressBarFromJson(MODULE.likho['api-type']);
   getStatsSummary('/stats/summary/parallel', MODULE.likho);
 }
 

@@ -1,10 +1,10 @@
 const {
-  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, SPEAKER_DETAILS_KEY, DEFAULT_CON_LANGUAGE, AGGREGATED_DATA_BY_TOP_LANGUAGE, AGGREGATED_DATA_BY_LANGUAGE
+  CONTRIBUTION_LANGUAGE, TOP_LANGUAGES_BY_HOURS, LIKHO_TO_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, SPEAKER_DETAILS_KEY, DEFAULT_CON_LANGUAGE, AGGREGATED_DATA_BY_TOP_LANGUAGE, AGGREGATED_DATA_BY_LANGUAGE, MODULE
 } = require('./constants');
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { changeLocale, showLanguagePopup } = require('./locale');
 const fetch = require('./fetch');
-const { performAPIRequest, getLanguageBadge, calculateTime, formatTime } = require('./utils');
+const { performAPIRequest, getLanguageBadge, calculateTime, formatTime, getJson } = require('./utils');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('./header');
 const { setUserModalOnShown,
   setUserNameOnInputFocus,
@@ -233,13 +233,11 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#languageInTopMob").removeClass("d-none");
     $("#languageNotInTopMob").addClass("d-none");
     $("#languageNotInTopWeb").addClass("d-none");
-    console.log("in top 3");
   } else {
     $("#languageNotInTopMob").removeClass("d-none");
     $("#languageNotInTopWeb").removeClass("d-none");
     $("#languageInTopWeb").addClass("d-none");
     $("#languageInTopMob").addClass("d-none");
-    console.log("not in top 3");
   }
   const nextBadgeName = localeStrings[data.nextBadgeType.toLowerCase()];
   $("#sentence-away-count").text(Number(data.nextMilestone) - Number(data.contributionCount))
@@ -296,7 +294,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $(".user-contribution-msg").addClass("d-none");
     $("#contribution_text").removeClass("d-none");
   } else {
-    if(data.badges && data.badges.length) {
+    if (data.badges && data.badges.length) {
       $("#showAfterBadge").removeClass('d-none');
       $(".participation-msg-section").removeClass("pt-lg-3").removeClass("pt-md-3").addClass("pt-0");
       const participateMsgWeb = $(".web-view");
@@ -311,7 +309,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
       const badgeType = data.currentBadgeType;
       $("#thankyou-last-badge").attr('src', getLanguageBadge(contributionLanguage, data.currentBadgeType.toLowerCase(), 'contribute', module));
       $("#last-bagde-earned").html(badgeType + " Contributor");
-    } 
+    }
     $(".new-badge-msg").addClass("d-none");
     $(".thankyou-page-heading").addClass('d-none');
     $(".user-contribution-msg").removeClass("d-none");
@@ -319,7 +317,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#user-contribution-msg").removeClass("d-none");
   }
 
-  
+
   const $bronzeBadgeLink = $("#bronze_badge_link_img");
   const $bronzeBadge = $("#bronze_badge_link");
   const $silverBadgeLink = $("#silver_badge_link_img");
@@ -492,6 +490,63 @@ function formatProgressAverage(average) {
   return formattedAverage
 }
 
+const countTotalProgress = function (source, contrubutions, validations) {
+  if (source == 'contribute') {
+    return contrubutions
+  }
+  else if (source == 'validate') {
+    return validations
+  }
+  return contrubutions + validations
+}
+
+function setCurrentProgress(type, source = "", language = "") {
+  const url = language ? '/aggregated-json/cumulativeDataByLanguage.json' : '/aggregated-json/cumulativeCount.json';
+  return getJson(url)
+    .then(data => {
+      const progressData = data.filter(d => d.type == type)[0] || {};
+      var totalProgress = 0
+      if (type == MODULE.bolo['api-type'] || type == MODULE.suno['api-type']) {
+
+        totalProgress = countTotalProgress(source, progressData.total_contributions, progressData.total_validations)
+
+        const { hours, minutes, seconds } = calculateTime(totalProgress * 60 * 60);
+
+        const formattedCurrentProgress = formatTime(hours, minutes, seconds);
+        replaceSubStr($(".progress-metric"), "<contribution-done>", formattedCurrentProgress);
+      }
+      else {
+        totalProgress = countTotalProgress(source, progressData.total_contribution_count, progressData.total_validation_count)
+        replaceSubStr($(".progress-metric"), "<contribution-done>", totalProgress)
+      }
+      return totalProgress;
+    })
+}
+
+function setProgressGoal(type) {
+  const url = '/aggregated-json/initiativeGoals.json'
+  return getJson(url).then(data => {
+    const goalData = data.filter(d => d.type == type)[0]['goal'] || 1;
+    replaceSubStr($(".progress-metric"), "<contribution-goal>", goalData);
+    return goalData
+  })
+}
+
+const updateGoalProgressBarFromJson = function (type, source = "", language = "") {
+  setCurrentProgress(type, source, language).then(currentProgress => {
+    setProgressGoal(type).then((goal) => {
+      const average = (currentProgress / goal) * 100;
+      const formattedAverage = formatProgressAverage(average);
+      const averageText = formattedAverage + '%';
+      $("#totalAverage").html(averageText);
+      const $progressBar = $("#progress_bar");
+      $progressBar.width(averageText);
+      $(".progress-bar-loader").addClass('d-none')
+      $("#progress-bar-content").removeClass('d-none');
+    })
+  })
+}
+
 const updateGoalProgressBar = function (url) {
   const moduleType = localStorage.getItem(CURRENT_MODULE);
   return performAPIRequest(url).then(data => {
@@ -524,4 +579,4 @@ const replaceSubStr = function (element, to, from) {
   element.text(newText.toString());
 }
 
-module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, landToHome, showOrHideExtensionCloseBtn, hasUserRegistered, updateGoalProgressBar, replaceSubStr, getTopLanguage, isInTopLanguage, getTop3Languages };
+module.exports = { isMobileDevice, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, landToHome, showOrHideExtensionCloseBtn, hasUserRegistered, updateGoalProgressBar, replaceSubStr, getTopLanguage, isInTopLanguage, getTop3Languages, setCurrentProgress, countTotalProgress, updateGoalProgressBarFromJson };

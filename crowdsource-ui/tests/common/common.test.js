@@ -2,8 +2,7 @@ const { readFileSync } = require('fs');
 jest.mock('node-fetch');
 const { stringToHTML, mockLocalStorage } = require('../utils');
 const { CONTRIBUTION_LANGUAGE, SPEAKER_DETAILS_KEY, CURRENT_MODULE, AGGREGATED_DATA_BY_LANGUAGE } = require('../../build/js/common/constants');
-const { hasUserRegistered, setBadge, updateGoalProgressBar, isInTopLanguage, getTop3Languages } = require('../../build/js/common/common.js');
-
+const { hasUserRegistered, setBadge, updateGoalProgressBar, isInTopLanguage, getTop3Languages, countTotalProgress } = require('../../build/js/common/common.js');
 
 describe('test common js', () => {
 
@@ -681,6 +680,24 @@ describe('test common js', () => {
     test("should give true if user is registered", () => {
       localStorage.setItem(SPEAKER_DETAILS_KEY, JSON.stringify({ userName: "" }))
       expect(hasUserRegistered()).toEqual(true);
+    })
+  })
+
+  describe('test countTotalProgress', () => {
+
+    test('should give contribution value for source contribute', () => {
+      const result = countTotalProgress('contribute', 2, 3)
+      expect(result).toEqual(2)
+    })
+
+    test('should give contribution value for source validate', () => {
+      const result = countTotalProgress('validate', 2, 3)
+      expect(result).toEqual(3)
+    })
+
+    test('should give total value for source not specified', () => {
+      const result = countTotalProgress('', 2, 3)
+      expect(result).toEqual(5)
     })
   })
 })
