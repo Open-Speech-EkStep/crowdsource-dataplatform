@@ -57,7 +57,7 @@
 }
 
 .instruction-icon-border {
-  border: 3px solid rgba(196, 196, 196, .2);
+  border: 3px solid rgba(196, 196, 196, 0.2);
 }
 
 .close-btn {
@@ -149,9 +149,9 @@
   }
 }
 
-
 @media screen and (min-width: 768px) and (max-width: 991px) {
-  .instruction-box:not(.first):before, .instruction-box:not(.last):after {
+  .instruction-box:not(.first):before,
+  .instruction-box:not(.last):after {
     width: 35%;
     top: 24px;
   }
@@ -162,22 +162,24 @@
 }
 
 @media screen and (min-width: 992px) and (max-width: 1280px) {
-  .instruction-box:not(.first):before, .instruction-box:not(.last):after {
+  .instruction-box:not(.first):before,
+  .instruction-box:not(.last):after {
     width: 65%;
     top: 24px;
   }
-
 }
 
 @media (max-width: 767px) {
   .only-display {
     display: none;
   }
+
+  #edit-text-suno label {
+    font-size: 10px !important;
+  }
 }
 
-#edit-text-suno label{
+#edit-text-suno label {
   font-size: 14px;
   color: #959595;
 }
-
-

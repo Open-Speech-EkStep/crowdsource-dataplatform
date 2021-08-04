@@ -29,7 +29,7 @@
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/extensionBar.ejs %>
             <%- include('../common/breadcrumb.ejs', {MODULE:"Suno", PAGE_TITLE:__('Validate'),img:"SunoIndiaLogo.svg", homePath:"./home.html"}) %>
-            <div class="modal-footer py-3 px-0 record-btn-container position-relative suno">
+            <div class="modal-footer pb-lg-3 pb-md-3 pb-0 pt-3 px-0 record-btn-container position-relative suno">
                 <div class="row position-absolute top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
                 </div>
@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center mb-5 mb-lg-0 mt-5" id="sentences-row">
+            <div class="row justify-content-center mb-0 mt-lg-5 mt-md-5 mt-4 pt-lg-0 pt-md-0 pt-2" id="sentences-row">
                 <div class="col-md-8 col-sm-10 text-center prompt"><label class="h1 font-weight-normal" id="sentenceLabel"></label></div>
             </div>
             <div class="row m-0 justify-content-center mb-2 mb-lg-2 mb-md-2 mt-5 d-none" id="editor-row">
@@ -109,8 +109,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 mx-5 mt-5" id="validation-button-row">
-                <div class="flex-lg-row flex-md-row flex-column d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2">
+            <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 mx-5 mt-lg-5 mt-md-5 mt-2" id="validation-button-row">
+                <div class="flex-lg-row flex-md-row flex-column d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-0 mt-lg-0 mt-md-0">
                     <button class="btn btn-custom-outline-primary rounded-pill mt-3 mt-lg-2 mt-md-2 third" disabled="disabled" id="need_change">
                         <img src="/img/pencil.svg" class="pr-2" style="margin-top:-3px"> <%= __('Needs Change') %>
                     </button>

@@ -29,7 +29,7 @@
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/extensionBar.ejs %>
             <%- include('../common/breadcrumb.ejs', {MODULE:"Likho", PAGE_TITLE:__('Validate'),img:"LikhoIndiaLogo.svg", homePath:"./home.html"}) %>
-            <div id="btn-nav" class="modal-footer py-3 px-0 position-relative">
+            <div id="btn-nav" class="modal-footer pt-3 pb-lg-3 pb-md-0 pb-0 px-0 position-relative">
                 <div class="row position-absolute top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
                 </div>
@@ -39,7 +39,7 @@
                 <%- include ../common/speakerTesting.ejs %>
             </div>
             <%- include('../common/assistiveText.ejs',{msg:__('Is the translation correct?')}) %>
-            <div class="row m-0 justify-content-center mb-2 mb-md-5 mb-lg-0 mt-5" id="translation-row">
+            <div class="row m-0 justify-content-center mb-2 mb-md-5 mb-lg-0 mt-4 mt-lg-5 mt-md-5 pt-2 pt-lg-0 pt-md-0" id="translation-row">
                 <div class="col-lg-4 col-md-5 col-12 original-text">
                     <label id="from-label"><%- __('Hindi') %></label>
                     <div id="original-text">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="form-group col-lg-4 col-md-5 col-12 m-0 edit-translation-text" style="box-shadow:0 0;border:1px solid #bfbfbf;pointer-events:none">
-                    <label id="to-label"><%- __('English') %></label>
+                    <label id="to-label" class="mb-0 mb-lg-2 mb-md-2"><%- __('English') %></label>
                     <div class="arrow-right"></div>
                     <textarea class="form-control" id="translate-text" rows="3" style="resize:none"></textarea>
                 </div>
@@ -106,7 +106,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-5 justify-content-center mx-0" id="validation-button-row">
+            <div class="row mt-4 mt-lg-5 mt-md-5 justify-content-center mx-0" id="validation-button-row">
                 <button class="btn btn-custom-outline-primary rounded-pill mr-lg-4 mr-md-4 p-2" id="need_change">
                     <img src="/img/pencil.svg" class="pr-2" style="margin-top:-3px"><%= __('Needs Change') %>
                 </button>

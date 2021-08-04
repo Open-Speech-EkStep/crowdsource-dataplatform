@@ -92,14 +92,12 @@
 }
 
 #badge-section-card-cover {
-  box-shadow: 0 4px 12px 1px rgba(0, 0, 0, .08);
   border-radius: 12px;
   background:#eff5ff;;
 }
 
 #badge-section-card {
   background-image: url('/img/NEW-WAVE3.png');
-  box-shadow: 0 4px 12px 1px rgba(0, 0, 0, .08);
   border-radius: 12px;
   background-repeat: no-repeat;
   background-position: right;

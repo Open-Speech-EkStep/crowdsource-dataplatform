@@ -29,7 +29,7 @@
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include ../common/extensionBar.ejs %>
             <%- include('../common/breadcrumb.ejs', {MODULE:"Dekho", PAGE_TITLE:__('Validate'),img:"DekhoIndiaLogo.svg", homePath:"./home.html"}) %>
-            <div class="modal-footer pt-3 px-0 record-btn-container position-relative">
+            <div class="modal-footer pt-3 pb-0 pb-lg-3 pb-md-3 px-0 record-btn-container position-relative">
                 <div class="row position-absolute top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
                 </div>
@@ -93,7 +93,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-5 justify-content-center mx-0" id="validation-button-row">
+            <div class="row mt-4 mt-lg-5 mt-md-5 justify-content-center mx-0" id="validation-button-row">
                 <button class="btn btn-custom-outline-primary rounded-pill mr-lg-4 mr-md-4 p-2" id="need_change">
                     <img src="/img/pencil.svg" class="pr-2" style="margin-top:-3px"><%= __('Needs Change') %>
                 </button>

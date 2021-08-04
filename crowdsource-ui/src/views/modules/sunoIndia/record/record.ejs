@@ -30,7 +30,7 @@
         <div id="content-wrapper" class="d-flex flex-column position-relative">
             <%- include('../common/extensionBar.ejs',{img:"/img/en-SunoIndiaLogo.svg"}) %>
             <%- include('../common/breadcrumb.ejs', {MODULE:"Suno", PAGE_TITLE:__('Transcribe'),img:"SunoIndiaLogo.svg", homePath:"./home.html"}) %>
-            <div class="modal-footer py-3 px-0 record-btn-container position-relative suno">
+            <div class="modal-footer pb-lg-3 pb-md-3 pb-0 pt-3 px-0 record-btn-container position-relative suno">
                 <div class="row position-absolute top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
                 </div>
@@ -48,10 +48,10 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center mb-2 mb-lg-2 mb-md-2 mt-5 mx-1 position-relative" id="editor-row">
+            <div class="row justify-content-center mb-2 mb-lg-2 mb-md-2 mt-4 mt-lg-5 mt-md-5 pt-lg-0 pt-md-0 pt-2 mx-1 position-relative" id="editor-row">
                 <div class="form-group green-border-focus col-lg-8 col-md-5 col-12 m-0 text-area" id="edit-text-suno">
-                    <label><%- __('Add Text') %> (<span id="edit-language"></span>)</label>
-                    <textarea disabled="disabled" class="form-control edit-area" id="edit" rows="3" placeholder="<%= __('Start typing here...')%>" style="font-size:24px;resize:none"></textarea>
+                    <label class="mb-lg-2 mb-md-2 mb-0"><%- __('Add Text') %> (<span id="edit-language"></span>)</label>
+                    <textarea disabled="disabled" class="form-control edit-area" id="edit" rows="3" placeholder="<%= __('Start typing here...')%>" style="resize:none"></textarea>
                     <%- include ../common/virtualKeyboardBtn.ejs %>
                 </div>
             </div>

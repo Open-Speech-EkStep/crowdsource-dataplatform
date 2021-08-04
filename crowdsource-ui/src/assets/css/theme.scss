@@ -59,7 +59,7 @@ body {
 
 .bg-footer-primary {
   color: $primary-color !important;
-  box-shadow: 0 -4px 12px 0 rgb(0, 0, 0, 0.12);
+  box-shadow: 0 -4px 12px 0 rgba(159, 200, 255, 0.6);
 }
 
 .text-yellow {
@@ -222,7 +222,7 @@ a.text-primary:hover {
   .nav-tabs {
     & > li {
       &.active {
-        border-bottom: 2px solid $primary-color;
+        border-bottom: 4px solid $primary-color;
         a {
           &:hover {
             color: $primary-color;
@@ -385,9 +385,18 @@ audio {
   .modal-xl {
     width: 700px !important;
   }
+  #straight-line-row {
+    min-height: 130px;
+  }
 }
 
 @media screen and (max-width: 766px) {
+  #straight-line-row {
+    min-height: 90px;
+  }
+  #sentenceLabel {
+    font-size: 24px !important;
+  }
   .data-updated > div {
     font-size: 14px;
   }

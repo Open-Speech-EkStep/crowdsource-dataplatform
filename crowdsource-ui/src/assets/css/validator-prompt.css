@@ -22,6 +22,7 @@ a {
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
   padding: 24px;
+  border-radius: 12px 12px 0 0;
 }
 
 #edit-text {
@@ -109,6 +110,9 @@ a {
   .mobile-view {
     display: block;
   }
+  #edit-text textarea, #edit-text-suno textarea {
+    font-size: 16px;
+  }
   .btn-link-primary {
     border: 2px solid #007bff;
     background: transparent;
@@ -143,6 +147,7 @@ a {
 }
 
 @media (min-width: 767px) {
+  
   .mobile-view {
     display: none;
   }
@@ -159,6 +164,10 @@ a {
 }
 
 @media (max-width: 767px) {
+  #edit-text-suno {
+    min-height: 120px !important;
+    padding: 16px !important;
+  }
   .record-btn-container {
     align-items: flex-end;
     padding-top: 8px !important;
@@ -199,10 +208,6 @@ a {
   #like_button > svg {
     height: 80px;
     width: 160px;
-  }
-
-  .original-text {
-    border-radius: 12px 12px 0 0;
   }
 
   #edit-text {
@@ -334,6 +339,17 @@ a {
 
   #report_sentence_modal .modal-content {
     width: 96%;
+  }
+  .original-text {
+    padding: 16px !important;
+    min-height: 120px !important;
+  }
+  #captured-text {
+    font-size: 16px !important;
+  }
+  #edit-text{
+    min-height: 120px !important;
+    padding: 16px !important;
   }
 }
 
