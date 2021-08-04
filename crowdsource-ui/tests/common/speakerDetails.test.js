@@ -53,7 +53,7 @@ describe('validateUserName', () => {
   test('should show username when username is valid', () => {
     const $userName = $('#username');
     $userName.val = () => "abc@gmail.com";
-    const $userNameError = $userName.next();
+    const $userNameError = $('#username-error');
     // const $tncCheckbox = $('#tnc');
     validateUserName($userName, $userNameError);
 
@@ -63,7 +63,7 @@ describe('validateUserName', () => {
 
   test('should show error when username is not valid', () => {
     const $userName = $('#username');
-    const $userNameError = $userName.next();
+    const $userNameError = $('#username-error');
     //const $tncCheckbox = $('#tnc');
     validateUserName($userName, $userNameError);
 

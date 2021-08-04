@@ -18,12 +18,12 @@
                 <div class="user-name-wrapper form-group mt-3 position-relative"><label for="username" class="form-label">
                         <%= __('Name') %>
                     </label> <input class="form-control font-weight-normal" maxlength="12" id="username" data-toggle="tooltip" placeholder="<%= __('Enter username') %>">
-                    <div class="user-name-hint font-weight-light">
+                    <div class="user-name-hint font-weight-light" id="user-name-hint">
                         <span class="align-middle">
                             <%= __('Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.)') %>
                         </span>
                     </div>
-                    <div class="username-error d-none position-absolute w-100" id="username-error">
+                    <div class="username-error d-none w-100" id="username-error">
                         <span class="align-middle">
                             <%= __('Please don\'t use email or mobile number as user name') %>
                         </span>

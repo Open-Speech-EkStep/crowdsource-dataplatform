@@ -6,12 +6,15 @@ const {showErrorPopup} = require('./common');
 
 function validateUserName($userName, $userNameError) {
     const userNameValue = $userName.val().trim();
+    const userHint = $('#user-name-hint');
     if (testUserName(userNameValue)) {
         $userName.addClass('is-invalid');
         $userNameError.removeClass('d-none');
+        userHint.addClass('d-none')
     } else {
         $userName.removeClass('is-invalid');
         $userNameError.addClass('d-none');
+        userHint.removeClass('d-none');
     }
     // $tncCheckbox.trigger('change');
 }

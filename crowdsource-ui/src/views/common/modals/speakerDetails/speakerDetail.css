@@ -89,15 +89,21 @@
   padding-left: 6vw !important;
 }
 
-.user-name-wrapper {
-  padding-bottom: 1rem;
+.user-name-hint {
+  height: 28px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
 }
 
 .username-error {
-  bottom: 0;
   background-color: #ffffff;
   font-style: italic;
   color: #f44b4b;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1;
+  height: 28px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
 }
