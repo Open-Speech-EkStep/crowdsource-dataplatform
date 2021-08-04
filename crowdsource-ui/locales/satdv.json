@@ -11,7 +11,7 @@
 	"For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.": "भारोतीय पा़रसी कोरे रोड़ चिनहा़व मोडेल को रेयाक् लाहानती ला़गित्, भेनेगार भारोतीय साडे को रेयाक् मित् झिज डाटा भांडार लागित् ला़कतीया। बाकयांस आम भारोतीय साडे को रेयाक् भेनेगार झिज डाटा भांडार तेयार ला़गित् आमाक् साडे आड़ाङ हा़बिज सेटेर आर एनेम ला़गित् नेवता येत् मेया।",
 	"Know More": "बा़ड़ती बाडाय मे",
 	"By number of speakers": "रोरोड़ कोवाक् लेखा लेकाते ",
-	"VIEW ALL DETAILS": "जोतो बिबरोन को ञेल",
+	"View all details": "जोतो बिबरोन को ञेल",
 	"All the fields are optional": "जोतो जायगा को आपनार मोने तेयाक्",
 	"Not You? Change User": "आम दो बाङ?  बोभारिज बोदोल",
 	"Username": "बेभारिजाक् ञुतुम",
@@ -637,6 +637,5 @@
 	"Something went wrong, please try again later": "Something went wrong, please try again later",
 	"An unexpected error has occurred.": "An unexpected error has occurred.",
 	"You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again.": "You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again.",
-	"Proceed": "Proceed",
-	"View all details": "View all details"
+	"Proceed": "Proceed"
 }

@@ -95,7 +95,7 @@
 	"The tools, utilities and models proposed to be developed will rely on open source contributions through Vakyansh crowd sourcing platform.": "The tools, utilities and models proposed to be developed will rely on open source contributions through Vakyansh crowd sourcing platform.",
 	"By hours of data recorded": "گھنٹے کی تعداد",
 	"By number of speakers": "مقررین کی تعداد کے مطابق",
-	"VIEW ALL DETAILS": "تمام معلومات دیکھیں",
+	"View all details": "تمام معلومات دیکھیں",
 	"Oops": "Oops",
 	"Page Not Found": "صفحہ نہیں مل رہا",
 	"Looks like you have taken a wrong turn here": "ایسا لگتا ہے کہ آپ نے غلط طریقے کا انتخاب کیا ہے",
@@ -673,6 +673,5 @@
 	"Something went wrong, please try again later": "Something went wrong, please try again later",
 	"An unexpected error has occurred.": "An unexpected error has occurred.",
 	"You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again.": "You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again.",
-	"Proceed": "Proceed",
-	"View all details": "View all details"
+	"Proceed": "Proceed"
 }

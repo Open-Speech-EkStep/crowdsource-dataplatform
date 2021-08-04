@@ -12,7 +12,7 @@
 	"For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.": "ভারতকী লোলশিংদা স্পিচ রিকগনিসন মোদেলশিং শেমগৎনবগীদমক্তা,দাইভর্সিফাইদ ইন্দিয়ান ভোইসশিংগী ওপন দেটা রিপোজিটরি অমা মথৌ তাই। বাক্যাংশনা অদোম্বু ইন্দিয়ান ভোইসশিংগী দাইভর্স ওপন দেটা রিপোজিটরি অমা শেম্নবগীদমক্তা অদোমগী ভোইস কন্ট্রিব্যুট তৌবীনবা পাউজেল পীজরি।",
 	"Know More": "অহেনবা খঙবীয়ু",
 	"By number of speakers": "স্পিকরশিংগী মশিং মতুংইন্না",
-	"VIEW ALL DETAILS": "অকুপ্পা মরোল পুম্নমক য়েংবীয়ু",
+	"View all details": "অকুপ্পা মরোল পুম্নমক য়েংবীয়ু",
 	"All the fields are optional": "ফিল্ড পুম্নমক ওপসনেলনি",
 	"Not You? Change User": "অদোম নত্তবরা? য়ুজর হোংদোকপীয়ু",
 	"Username": "য়ুজরনেম",
@@ -634,6 +634,5 @@
 	"Something went wrong, please try again later": "Something went wrong, please try again later",
 	"An unexpected error has occurred.": "An unexpected error has occurred.",
 	"You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again.": "You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again.",
-	"Proceed": "Proceed",
-	"View all details": "View all details"
+	"Proceed": "Proceed"
 }

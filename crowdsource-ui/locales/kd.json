@@ -11,7 +11,7 @@
 	"For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.": "भारतीय भासांभीतर उलोवप वळखुपी नमुने विकसित करपाखातीर, विंगडविंगड भारतीय आवाजांचो मुक्त माहितीसाठो गरजेचो आसा. वाक्यांश तुमका भारतीय आवाजांचो व्यापक मुक्त माहितीसाठो तयार करपाखातीर मुखार सरून तुमच्या आवाजाचे योगदान दिवपाखातीर निमंत्रित करता.भारतीय भासांभीतर उलोवप वळखुपी नमुने विकसित करपाखातीर, विंगडविंगड भारतीय आवाजांचो मुक्त माहितीसाठो गरजेचो आसा. वाक्यांश तुमका भारतीय आवाजांचो व्यापक मुक्त माहितीसाठो तयार करपाखातीर मुखार सरून तुमच्या आवाजाचे योगदान दिवपाखातीर निमंत्रित करता.",
 	"Know More": "अदिक जाणून घेयात",
 	"By number of speakers": "उलोवप्यांच्या संख्येप्रमाण",
-	"VIEW ALL DETAILS": "सगळो तपशील पळयात",
+	"View all details": "सगळो तपशील पळयात",
 	"All the fields are optional": "सगळे जागे वैकल्पिक आसात",
 	"Not You? Change User": "तुम्ही न्ही? वापरपी बदलात",
 	"Username": "वापरपी",
@@ -634,6 +634,5 @@
 	"Something went wrong, please try again later": "Something went wrong, please try again later",
 	"An unexpected error has occurred.": "An unexpected error has occurred.",
 	"You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again.": "You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again.",
-	"Proceed": "Proceed",
-	"View all details": "View all details"
+	"Proceed": "Proceed"
 }

@@ -95,7 +95,7 @@
 	"Vakyansh: A crowdsourcing initiative for Indian languages": "वाक्यांश : भारती भाशाएं आस्तै  इक क्राउडसोर्सिङ पैह्‌‌ल ",
 	"For the development of speech recognition models in Indian languages, there is a need for an open data repository of diversified Indian voices. Vakyansh invites you to reach out and contribute your voice to create a diverse open data repository of Indian voices.": " भारती भाशाएं च वाणी पन्छान  माडल तेआर करने आस्तै, बक्ख-बक्ख किसमें दी भारती अवाज़ें दे खु'ल्ले डेटा संग्रैह् दी लोड़ ऐ ।  वाक्यांश भारती भाशाएं दे  खु'ल्ले डेटा संग्रैह् आस्तै  अपनी अवाज़ दा जोगदान देने लेई तुसेंगी साद्दा दिंदा ऐ ।  भारती भाशाएं च वाणी पन्छान  माडल तेआर करने आस्तै, बक्ख-बक्ख किसमें दी भारती अवाज़ें दे खु'ल्ले डेटा संग्रैह् दी लोड़ ऐ ।  वाक्यांश भारती भाशाएं दे  खु'ल्ले डेटा संग्रैह् आस्तै  अपनी अवाज़ दा जोगदान देने लेई तुसेंगी साद्दा दिंदा ऐ । ",
 	"By number of speakers": "वक्ताएं दी गिनती दे मताबक",
-	"VIEW ALL DETAILS": "सब तफसीलां दिक्खो",
+	"View all details": "सब तफसीलां दिक्खो",
 	"Enter preferred username": "अपना पसंदीदा यूज़रनेम पाओ",
 	"Select Age Group": "વય જૂથ પસંદ કરો",
 	"I have read and agree to the <a href=\"/terms-and-conditions\"> Terms and Conditions </a>": "મેં <a href=\"/terms-and-conditions\">નિયમો અને શરતો</a> વાંચ્યાં છે અને એની સાથે હું સંમત છું",
@@ -679,6 +679,5 @@
 	"Something went wrong, please try again later": "Something went wrong, please try again later",
 	"An unexpected error has occurred.": "An unexpected error has occurred.",
 	"You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again.": "You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again.",
-	"Proceed": "Proceed",
-	"View all details": "View all details"
+	"Proceed": "Proceed"
 }

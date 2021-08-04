@@ -123,7 +123,7 @@
 	"Top Languages": "शीर्ष भाषा",
 	"By hours of data recorded": "By hours of data recorded",
 	"By number of speakers": "वाणी-प्रदाताक संख्याक हिसाबसँ",
-	"VIEW ALL DETAILS": "सभटाक विस्तृत विवरण देखू",
+	"View all details": "सभटाक विस्तृत विवरण देखू",
 	"Oops": "Oops",
 	"Page Not Found": "पृष्ठ नहिं भेटल",
 	"Looks like you have taken a wrong turn here": "बुझाइछ जे अहाँ एतए गलत दिशामे मुड़ि गेलहुँ",
@@ -922,6 +922,5 @@
 	"Something went wrong, please try again later": "Something went wrong, please try again later",
 	"An unexpected error has occurred.": "An unexpected error has occurred.",
 	"You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again.": "You have changed the contribution language from <span id=\"from_language\"></span> to <span id=\"to_language\"></span>, we will be redirecting you to homepage to start participating again.",
-	"Proceed": "Proceed",
-	"View all details": "View all details"
+	"Proceed": "Proceed"
 }
