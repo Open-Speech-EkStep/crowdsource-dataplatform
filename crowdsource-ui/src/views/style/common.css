@@ -326,12 +326,14 @@ body {
   z-index: 1043;
 }
 
-.modal.show {
+.functional-page-bg .modal.show, 
+#validator-page-content .modal.show,
+#content-wrapper .modal.show {
   z-index: 1045;
 }
 
 .modal-backdrop.show  + .modal-backdrop.show {
-  z-index: 1042;
+  z-index: 1045;
 }
 
 .modal-backdrop.show {

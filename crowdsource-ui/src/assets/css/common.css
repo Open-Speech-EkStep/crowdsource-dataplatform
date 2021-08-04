@@ -645,8 +645,13 @@ body {
   z-index: 1047;
 }
 
+.modal.show ~ .modal.show {
+  z-index: 1045;
+}
+
 .functional-page-bg .modal.show, 
-#validator-page-content .modal.show {
+#validator-page-content .modal.show,
+#content-wrapper .modal.show {
   z-index: 1045;
 }
 
