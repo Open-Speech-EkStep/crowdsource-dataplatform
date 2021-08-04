@@ -96,7 +96,7 @@ class LocaleProcessor:
         merged_excel_df = pd.merge(excel_df, meta_excel_df, on=self.english_column_name,
                                    how='inner')
 
-        # self.compare_and_update_extracted_tags(tmp_df, merged_excel_df)
+        self.compare_and_update_extracted_tags(tmp_df, merged_excel_df)
 
         merged_excel_df = merged_excel_df.apply(self.restructure_extracted_tags, axis=1)
         merged_excel_df = self.clean_merged_excel(merged_excel_df, self.language_name)
@@ -129,4 +129,4 @@ class LocaleProcessor:
             merged_excel_df_row = merged_excel_df[merged_excel_df['Key'] == o_row['Key']].iloc[0]
             name = self.language_name
             if o_row[name] != n_row[name]:
-                print(name, "\n\t", o_row[name], "\n\t", n_row[name], "\n\t", merged_excel_df_row[name] + "\n")
+                print(name, "\n\t", o_row[name], "\n\t", n_row[name], "\n\t", merged_excel_df_row[name], "\n")
