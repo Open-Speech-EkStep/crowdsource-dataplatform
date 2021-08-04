@@ -80,7 +80,8 @@ step("when user navigates to <tab> tab user should see badges", async function(t
 });
 
 step("When user clicks on back button, user should land on Bhasha Daan home page", async function() {
-	if (await taiko.text('Home').exists()) {
+    await scrollUp(5000);
+    if (await taiko.text('Home').exists()) {
         assert.ok('Home button exists')
         await click(taiko.text("Home"))
         await taiko.waitFor(1500)

@@ -189,7 +189,7 @@ step("Add <usrnm> Username for Valiadtion", async function (usrnm) {
 
 step("User should be able to close the Instructions , user should see a sentence , Skip button , Start Recording Button , username,Test Mic and speaker button", async function () {
     await taiko.waitFor(1200)
-    await scrollUp(5000);
+    await scrollUp(10000);
     await click(button({ id: "instructions_close_btn" }))
     assert.ok(await button({ id: 'startRecord' }).exists())
     assert.ok(await button({ id: 'skipBtn' }).exists())
