@@ -6,6 +6,7 @@ const {
     button,
     click,
     hover,
+    scrollUp,
     link,
     setCookie,
     text,
@@ -36,6 +37,7 @@ step("when user navigates to <tab> tab user should see badges", async function(t
     
     if(tab=="dekho-tab")
     {
+        await scrollUp(5000);
         await click(link({id:tab}))
         await taiko.waitFor(1000)
         assert.ok(await text('Odia').isVisible())
@@ -58,6 +60,7 @@ step("when user navigates to <tab> tab user should see badges", async function(t
     }
     else if(tab== "likho-tab")
     {
+        await scrollUp(5000);
         await click(link({id:tab}))
         await taiko.waitFor(300)
         assert.ok(await taiko.$('#bronze_validation_likho_Bengali_badge').isVisible())
@@ -68,7 +71,7 @@ step("when user navigates to <tab> tab user should see badges", async function(t
 
     }
     else if(tab== "suno-tab")
-    {   
+    {   await scrollUp(5000);
         await click(link({id:tab}))
         await taiko.waitFor(300)
         assert.ok(await text('No badge earned for Suno India').isVisible())

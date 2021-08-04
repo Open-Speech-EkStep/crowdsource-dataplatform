@@ -5,6 +5,7 @@ const {
 	button,
 	write,
 	click,
+	scrollUp,
 	image,
 	below,
 	link,
@@ -76,6 +77,7 @@ step("Clicking <btnName> should navigate to <module> Page", async function (btnN
 step("Move tab to <tabName>", async function (tabName) {
 	assert.ok(await button("Start Participating").exists())
 	await taiko.waitFor(1200);
+	await scrollUp(5000);
 	//await click(taiko.$({id : tabName}))
 	await click(taiko.$('#'+tabName));
 

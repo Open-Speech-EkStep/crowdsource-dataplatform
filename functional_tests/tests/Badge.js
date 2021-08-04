@@ -5,6 +5,7 @@ const {
     text,
     link,
     scrollTo,
+    scrollUp,
     click,
 } = require('taiko');
 
@@ -46,7 +47,9 @@ step("User should select <arg> language from dropdown", async function (arg) {
 
 step("User should select <arg> initiative from tab", async function (arg) {
     await taiko.waitFor(2000)
-    await scrollTo(link({ id: arg }))
+    await scrollUp(5000);
+   // await scrollTo(taiko.link({ id: arg }),{ alignments: { block: 'center', inline: 'center' }})
+    //await scrollTo(taiko.link({ id: arg }))
     await click(taiko.link({ id: arg }));
 });
 step("should select <radioButton> radio button, <contributionMsg> text & <bronzeImg>,<silverImg>,<goldImg>,<platinumImg> image exist by default", async function(radioButton, contributionMsg, bronzeImg, silverImg, goldImg, platinumImg) {
