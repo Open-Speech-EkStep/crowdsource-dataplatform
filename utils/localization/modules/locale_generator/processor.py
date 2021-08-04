@@ -125,8 +125,12 @@ class LocaleProcessor:
             '/out_meta_meta.xlsx',
             [])
         for index, o_row in tmp_df.iterrows():
-            n_row = new_meta[new_meta['Key'] == o_row['Key']].iloc[0]
-            merged_excel_df_row = merged_excel_df[merged_excel_df['Key'] == o_row['Key']].iloc[0]
-            name = self.language_name
-            if o_row[name] != n_row[name]:
-                print(name, "\n\t", o_row[name], "\n\t", n_row[name], "\n\t", merged_excel_df_row[name], "\n")
+            try:
+                n_row = new_meta[new_meta['Key'] == o_row['Key']].iloc[0]
+                merged_excel_df_row = merged_excel_df[merged_excel_df['Key'] == o_row['Key']].iloc[0]
+                name = self.language_name
+                # if o_row[name] != n_row[name]:
+                #     print(name, "\n\t", o_row[name], "\n\t", n_row[name], "\n\t", merged_excel_df_row[name], "\n")
+            except Exception as e:
+                print(n_row['Key'])
+                print(e)
