@@ -516,7 +516,7 @@ function setCurrentProgress(type, source = "", language = "") {
     .then(data => {
       const progressDataList = data.filter(d => d.type == type) || [];
       var totalProgress;
-      const progressData = languageFilter(progressDataList)[0] || {};
+      const progressData = languageFilter(progressDataList, language)[0] || {};
       if (type == MODULE.bolo['api-type'] || type == MODULE.suno['api-type']) {
 
         totalProgress = getCountBasedOnSource(source, progressData.total_contributions, progressData.total_validations) || 0
