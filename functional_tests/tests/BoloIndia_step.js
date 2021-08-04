@@ -231,60 +231,63 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
         await taiko.waitFor(2000)
         const startRecordingButton = taiko.image({ id: "start_recording" });
         assert.ok(await startRecordingButton.exists());
-        await hover(startRecordingButton);
-        await taiko.waitFor(500)
+        // await hover(startRecordingButton);
+        await taiko.waitFor(1500)
         await click(startRecordingButton);
+        
     }
 
     else if (arg0 == "Validate") {
         await taiko.waitFor(2000)
         const startValidatingButton = taiko.image({ id: "start_validating" });
         assert.ok(await startValidatingButton.exists());
-        await taiko.waitFor(500);
-        await hover(startValidatingButton);
-        await taiko.waitFor(500)
+        // await taiko.waitFor(500);
+        // await hover(startValidatingButton);
+        await taiko.waitFor(1500)
         await click(startValidatingButton);
     }
     else if (arg0 == "Transcribe") {
         await taiko.waitFor(2000)
         const startRecordingButton = taiko.image({ id: "start_recording" });
         assert.ok(await startRecordingButton.exists());
-        await hover(startRecordingButton);
-        await taiko.waitFor(500)
+        // await hover(startRecordingButton);
+        await taiko.waitFor(1500)
         await click(startRecordingButton);
     }
     else if (arg0 == "Correct") {
         await taiko.waitFor(2000)
         const startValidatingButton = taiko.image({ id: "start_validating" });
         assert.ok(await startValidatingButton.exists());
-        await taiko.waitFor(500);
-        await hover(startValidatingButton);
-        await taiko.waitFor(500)
+        // await taiko.waitFor(500);
+        // await hover(startValidatingButton);
+        await taiko.waitFor(1500)
         await click(startValidatingButton);
     }
     else if (arg0 == "Label") {
         await taiko.waitFor(2000)
         const startRecordingButton = taiko.image({ id: "start_recording" });
         assert.ok(await startRecordingButton.exists());
-        await hover(startRecordingButton);
-        await taiko.waitFor(500)
+        // await hover(startRecordingButton);
+         await taiko.waitFor(1500)
         await click(startRecordingButton);
 
     } else if (arg0 == "Translate") {
         await taiko.waitFor(2000)
         const startRecordingButton = taiko.image({ id: "start_recording" });
         assert.ok(await startRecordingButton.exists());
-        await hover(startRecordingButton);
-        await taiko.waitFor(500)
+        //await hover(startRecordingButton);
+        await taiko.waitFor(1500)
         await click(startRecordingButton);
     }
 
     else if (arg0 == "Know More") {
+        await taiko.waitFor(1500)
         await click(taiko.link(arg0))
         await taiko.waitFor(500)
     }
 
     else {
+        await taiko.waitFor(1500)
         assert.ok(await link(arg0).exists());
         await click(arg0);
     }

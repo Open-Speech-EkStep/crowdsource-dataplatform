@@ -36,6 +36,7 @@ step("<navlink> link must be active", async function (navlink) {
 });
 
 step("Check If Current Tab is <module>", async function (module) {
+	await taiko.waitFor(1500)
 	assert.ok(await button("Start Participating").exists())
 	switch (module) {
 		case 'Bolo India':
@@ -84,6 +85,7 @@ step("Check monthly goal section for value <value>", async function (value) {
 });
 
 step("Click <name> Link", async function (name) {
+	await taiko.waitFor(1500)
 	assert.ok(await link(name).exists());
 	await click(link(name));
 });
@@ -119,6 +121,7 @@ step("Localisation <id> dropdown should have <lang1> & <lang2> value", async fun
 });
 
 step("Validate participation section content", async function() {
+	await taiko.waitFor(1500)
 	const titleText = 'Total Participation'
 	const sunoText = text('SUNO INDIA',taiko.below(titleText))
 	const boloText = text('BOLO INDIA',taiko.toRightOf(sunoText))

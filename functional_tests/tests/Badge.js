@@ -44,6 +44,7 @@ step("User should select <arg> language from dropdown", async function (arg) {
 });
 
 step("User should select <arg> initiative from tab", async function (arg) {
+    await taiko.waitFor(1200)
     await click(taiko.link({ id: arg }));
 });
 step("should select <radioButton> radio button, <contributionMsg> text & <bronzeImg>,<silverImg>,<goldImg>,<platinumImg> image exist by default", async function(radioButton, contributionMsg, bronzeImg, silverImg, goldImg, platinumImg) {
