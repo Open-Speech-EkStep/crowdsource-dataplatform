@@ -1,0 +1,21 @@
+#contributionLangChange .modal-dialog {
+  height: calc(100% - 60px);
+  display: flex;
+  align-items: center;
+}
+
+#contributionLangChange .modal-content .modal-body {
+  padding: 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.proceed-btn {
+  background: #0f2749;
+  border: 1px solid #0f2749;
+  border-radius: 48px;
+  width: 200px;
+  margin-top: 24px;
+}

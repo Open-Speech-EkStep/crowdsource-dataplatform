@@ -1,6 +1,7 @@
 const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, OPINION_RATING_MAPPING, ALL_LANGUAGES} = require('./constants');
 const fetch = require('./fetch')
 const { feedback_top_component } = require('./env-api');
+const { showErrorPopup } = require('./common');
 
 
 const fetchUsername = () => {
@@ -212,9 +213,11 @@ const handleFeedbackSubmit = () => {
             resetFeedback();      
         }
         else{
-            alert('there is some error');
+            $("#feedback_modal").modal("hide");
+            showErrorPopup();
         }
-    });
+    })
+    .catch(() => { $("#feedback_modal").modal("hide");showErrorPopup();});
 };
 
 const resetFeedback = () => {

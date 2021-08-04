@@ -112,7 +112,7 @@ const getLanguageStats = function () {
         updateShareContent("", 0);
       }
     })
-    .catch(showErrorPopup());
+    .catch(() => showErrorPopup() );
 };
 
 function setSentencesContributed() {

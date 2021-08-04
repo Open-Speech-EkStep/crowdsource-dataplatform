@@ -2,6 +2,7 @@
   height: calc(100% - 60px);
   display: flex;
   align-items: center;
+  max-width: 400px;
 }
 
 #errorPopup .modal-body {
@@ -32,4 +33,6 @@
   #errorPopup .modal-dialog{
     margin: 20px;
   }
+
+ 
 }

@@ -42,8 +42,10 @@
             </div>
             <%- include('../common/assistiveText.ejs',{msg:__('Type the text as you hear the audio')}) %>
             <div class="row justify-content-center mt-lg-3 mt-1" id="audio-row">
-                <div class="col-12 justify-content-center text-center" style="pointer-events:none">
-                    <audio id="my-audio" controls tabindex="-1" src="" type="audio/wav" controlslist="nodownload" crossorigin="anonymous" class="pointer-event"></audio>
+                <div class="col-12 justify-content-center text-center">
+                    <div class="audio-wrapper">
+                        <audio id="my-audio" controls tabindex="-1" src="" type="audio/wav" controlslist="nodownload" crossorigin="anonymous"></audio>
+                    </div>
                 </div>
             </div>
             <div class="row justify-content-center mb-2 mb-lg-2 mb-md-2 mt-5 mx-1 position-relative" id="editor-row">

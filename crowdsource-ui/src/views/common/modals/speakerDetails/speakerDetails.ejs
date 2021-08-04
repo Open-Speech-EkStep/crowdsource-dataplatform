@@ -15,7 +15,7 @@
                 <div class="col-12 text-center text-primary d-none" id="resetBtn" style="cursor:pointer">
                     Not You? Change User
                 </div>
-                <div class="form-group mt-3"><label for="username" class="form-label">
+                <div class="user-name-wrapper form-group mt-3 position-relative"><label for="username" class="form-label">
                         <%= __('Name') %>
                     </label> <input class="form-control font-weight-normal" maxlength="12" id="username" data-toggle="tooltip" placeholder="<%= __('Enter username') %>">
                     <div class="user-name-hint font-weight-light">
@@ -23,12 +23,11 @@
                             <%= __('Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.)') %>
                         </span>
                     </div>
-                    <div class="text-danger mt-2 d-none" id="username-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="18px" height="18px">
-                            <path d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                        </svg> <span class="align-middle">
+                    <div class="username-error d-none position-absolute w-100" id="username-error">
+                        <span class="align-middle">
                             <%= __('Please don\'t use email or mobile number as user name') %>
-                        </span></div>
+                        </span>
+                    </div>
                 </div>
                 <div class="form-group"><label for="mother-tongue" class="form-label">
                         <%= __('Mother Tongue') %>

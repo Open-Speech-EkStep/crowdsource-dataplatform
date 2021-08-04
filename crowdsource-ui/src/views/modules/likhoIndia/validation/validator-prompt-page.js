@@ -310,8 +310,10 @@ const handleSubmitFeedback = function () {
         $(this).prop("checked", false);
       });
       $("#other_text").val("");
-    }
-  });
+    }else {
+      $("#report_sentence_modal").modal('hide'); showErrorPopup();
+  }
+  }).catch(()=> { $("#report_sentence_modal").modal('hide'); showErrorPopup()});
 }
 
 const setSentence = function (sentence) {

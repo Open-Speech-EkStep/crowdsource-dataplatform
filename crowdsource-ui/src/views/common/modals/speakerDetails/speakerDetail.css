@@ -39,7 +39,11 @@
 
   #userModal .user-name-hint{
     font-size: 13px;
-    line-height: 24px;
+    line-height: 1;
+  }
+
+  #userModal .username-error {
+    font-size: 13px;
   }
 
   #userModal .form-group {
@@ -83,4 +87,17 @@
 .px-6 {
   padding-right: 6vw !important;
   padding-left: 6vw !important;
+}
+
+.user-name-wrapper {
+  padding-bottom: 1rem;
+}
+
+.username-error {
+  bottom: 0;
+  background-color: #ffffff;
+  font-style: italic;
+  color: #f44b4b;
+  font-size: 12px;
+  line-height: 1;
 }

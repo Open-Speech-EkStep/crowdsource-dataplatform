@@ -1,6 +1,6 @@
-const { onActiveNavbar ,onChangeUser, showUserProfile,onOpenUserDropDown } = require('../common/header');
-const {redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages,hasUserRegistered,updateLocaleLanguagesDropdown, updateGoalProgressBar} = require('../common/common');
-const { getLocaleString} = require('../common/utils');
+const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
+const { redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages, hasUserRegistered, updateLocaleLanguagesDropdown, updateGoalProgressBarFromJson } = require('../common/common');
+const { getLocaleString } = require('../common/utils');
 const {
   setUserModalOnShown,
   setUserNameOnInputFocus,
@@ -8,8 +8,8 @@ const {
   setGenderRadioButtonOnClick
 } = require('../common/speakerDetails');
 
-const {addToLanguage} = require('../common/languageNavBar')
-const {getStatsSummary} = require('../common/commonHome');
+const { addToLanguage } = require('../common/languageNavBar')
+const { getStatsSummary } = require('../common/commonHome');
 
 const {
   DEFAULT_CON_LANGUAGE,
@@ -26,7 +26,7 @@ function initializeBlock() {
   const $userName = $('#username');
 
   let top_lang = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  if(!top_lang){
+  if (!top_lang) {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
     top_lang = DEFAULT_CON_LANGUAGE;
   }
@@ -46,35 +46,35 @@ function initializeBlock() {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
     sessionStorage.setItem("i18n", "en");
     redirectToLocalisedPage();
-    getStatsSummary('/stats/summary/ocr',MODULE.dekho, ()=>{});
+    getStatsSummary('/stats/summary/ocr', MODULE.dekho, () => { });
     showFucntionalCards('ocr', fromLanguage);
   });
 
   $('#start_recording').on('click', () => {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
     localStorage.setItem("selectedType", "contribute");
-    if(!hasUserRegistered()){
+    if (!hasUserRegistered()) {
       $('#userModal').modal('show');
-      setStartRecordingBtnOnClick('./record.html',MODULE.dekho.value);
+      setStartRecordingBtnOnClick('./record.html', MODULE.dekho.value);
     } else {
-      location.href ='./record.html';
+      location.href = './record.html';
     }
   });
 
-  $('#start_validating').on('click',()=>{
+  $('#start_validating').on('click', () => {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
     localStorage.setItem("selectedType", "validate");
-    if(!hasUserRegistered()){
+    if (!hasUserRegistered()) {
       $('#userModal').modal('show');
-      setStartRecordingBtnOnClick('./validator-page.html',MODULE.dekho.value);
+      setStartRecordingBtnOnClick('./validator-page.html', MODULE.dekho.value);
     } else {
-      location.href ='./validator-page.html';
+      location.href = './validator-page.html';
     }
   })
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   showFucntionalCards('ocr', language);
-  updateGoalProgressBar(`/progress/ocr`);
-  getStatsSummary('/stats/summary/ocr',MODULE.dekho, ()=>{});
+  updateGoalProgressBarFromJson(MODULE.dekho['api-type']);
+  getStatsSummary('/stats/summary/ocr', MODULE.dekho, () => { });
   const $startRecordBtn = $('#proceed-box');
   const $startRecordBtnTooltip = $startRecordBtn.parent();
 
@@ -82,20 +82,20 @@ function initializeBlock() {
   $startRecordBtnTooltip.tooltip('disable');
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
-  if(hasUserRegistered()){
+  if (hasUserRegistered()) {
     const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
     const localSpeakerDataParsed = JSON.parse(speakerDetails);
     showUserProfile(localSpeakerDataParsed.userName);
   }
-  onChangeUser('./home.html',MODULE.dekho.value);
+  onChangeUser('./home.html', MODULE.dekho.value);
   onOpenUserDropDown();
 }
 
 $(document).ready(function () {
-  localStorage.setItem(CURRENT_MODULE,MODULE.dekho.value);
+  localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
   initializeFeedbackModal();
   getAvailableLanguages("ocr");
-  getLocaleString().then(()=>{
+  getLocaleString().then(() => {
     initializeBlock();
   }).catch(() => {
     initializeBlock();
