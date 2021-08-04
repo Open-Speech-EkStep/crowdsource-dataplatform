@@ -46,8 +46,8 @@ function setCookie(cname, cvalue, exdays) {
 
 const formatTransAndImages= (source,target,type) =>{
   const localsStrings = JSON.parse(localStorage.getItem('localeString'));
-  const translations = localsStrings['translations'];
-  const images = localsStrings['images'];
+  const translations = localsStrings['Translations'];
+  const images = localsStrings['Images'];
   const sourceType = type == 'images' ? images : translations;
   return source && source.length ? `${source} - ${target} ${sourceType}` : `${target} ${sourceType}`
 }
@@ -173,11 +173,11 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
   }
 };
 
-const formatTime = function (hours, minutes = 0, seconds = 0) {
+const formatTime = function (hours, minutes = 0, seconds = 0, translate = true) {
   const localsStrings = JSON.parse(localStorage.getItem('localeString'));
-  const hrStr = localsStrings['hour(s)'];
-  const minStr = localsStrings['minute(s)'];
-  const secStr = localsStrings['second(s)'];
+  const hrStr = translate ? localsStrings['hour(s)']: 'hour(s)';
+  const minStr = translate ? localsStrings['minute(s)']: 'minute(s)';
+  const secStr = translate ? localsStrings['second(s)']: 'second(s)';
   let result = "";
   if (hours > 0) {
     result += `${hours} ${hrStr} `;

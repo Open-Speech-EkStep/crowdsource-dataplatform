@@ -71,13 +71,13 @@ const drawMap = function (response, moduleType) {
         minutes: vMinutes,
         seconds: vSeconds,
       } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
-      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : formatTime(cHours, cMinutes, cSeconds);
-      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_validation_count) : formatTime(vHours, vMinutes, vSeconds);
+      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : formatTime(cHours, cMinutes, cSeconds, false);
+      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_validation_count) : formatTime(vHours, vMinutes, vSeconds, false);
       st.value = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
       st.total_speakers = ele.total_speakers;
     } else {
-      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0, 0, 0);
-      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0, 0, 0);
+      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0, 0, 0, false);
+      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0, 0, 0, false);
       st.value = 0;
       st.total_speakers = 0;
     }
@@ -268,7 +268,7 @@ function getStatistics(response) {
   const { hours, minutes, seconds } = calculateTime(
     Number(response.total_contributions) * 60 * 60
   );
-  $speakersDataHoursValue.text(formatTime(hours, minutes, seconds));
+  $speakersDataHoursValue.text(formatTime(hours, minutes, seconds, false));
   $speakersDataSpeakerValue.text(response.total_speakers);
   $speakersDataLanguagesValue.text(response.total_languages);
   $speakersDataLoader.addClass("d-none");

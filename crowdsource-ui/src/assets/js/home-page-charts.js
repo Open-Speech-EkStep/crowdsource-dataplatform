@@ -72,13 +72,13 @@ const drawMap = function (response) {
         minutes: vMinutes,
         seconds: vSeconds,
       } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
-      st.contributed_time = formatTime(cHours, cMinutes, cSeconds);
-      st.validated_time = formatTime(vHours, vMinutes, vSeconds);
+      st.contributed_time = formatTime(cHours, cMinutes, cSeconds, false);
+      st.validated_time = formatTime(vHours, vMinutes, vSeconds, false);
       st.value = Number(ele.total_contributions);
       st.total_speakers = ele.total_speakers;
     } else {
-      st.contributed_time = formatTime(0,0,0);
-      st.validated_time = formatTime(0,0,0);
+      st.contributed_time = formatTime(0,0,0, false);
+      st.validated_time = formatTime(0,0,0, false);
       st.value = 0;
       st.total_speakers = 0;
     }
@@ -208,8 +208,8 @@ function getStatistics(response) {
   const { hours: validate_hrs, minutes: validate_min, seconds: validate_sec } = calculateTime(
     Number(response && response.total_validations || 0) * 60 * 60
   );
-  $speakersDataHoursValue.text(formatTime(hours, minutes,seconds));
-  $validatedValue.text(formatTime(validate_hrs,validate_min,validate_sec));
+  $speakersDataHoursValue.text(formatTime(hours, minutes,seconds, false));
+  $validatedValue.text(formatTime(validate_hrs,validate_min,validate_sec, false));
   $speakersDataSpeakerValue.text(response && response.total_speakers || 0);
   $speakersDataLanguagesValue.text(response && response.total_languages || 0);
   $speakersDataLoader.addClass("d-none");
