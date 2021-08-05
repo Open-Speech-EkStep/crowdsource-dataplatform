@@ -49,7 +49,7 @@
   margin: auto;
   border-radius: 32px;
   margin-top: 40px;
-
+  box-shadow: 0 0 32px rgb(0 123 255 / 40%);
 }
 
 .platform-card-section-heading{

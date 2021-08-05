@@ -141,7 +141,6 @@ body {
 }
 
 .module-item.active > a {
-  color: #ffffff !important;
   opacity: 1 !important;
 }
 
@@ -179,8 +178,12 @@ body {
     left: -4px;
   }
   .bolo-back-btn {
-    left: 20px !important;
+    left: 28px !important;
     top: 12px !important;
+  }
+  .bolo-validate-back-btn {
+    left: 15px !important;
+    top: 8px !important;
   }
   .dekho-back-btn {
     left: 1px !important;
@@ -212,6 +215,14 @@ body {
 }
 
 @media (min-width: 767px) {
+  .bolo-back-btn {
+    left: 35px !important;
+    top: 5px !important;
+  }
+  .bolo-validate-back-btn {
+    left: 35px !important;
+    top: 5px !important;
+  }
   .d-none-mob {
     display: flex;
   }

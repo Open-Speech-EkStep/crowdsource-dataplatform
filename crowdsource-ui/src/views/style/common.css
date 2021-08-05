@@ -200,10 +200,6 @@ body {
     border-radius: 12px;
     background: rgba(77, 130, 247, .1);
   }
-
-  .footer-links {
-    margin-left: 3rem !important;
-  }
 }
 
 @media (min-width: 700px){

@@ -314,14 +314,8 @@ const initialize = () => {
         location.href = './thank-you.html';
     };
 
-    $skipBtn.hover(() => {
-        $skipBtn.css('border-color', '#bfddf5');
-    }, () => {
-        $skipBtn.css('border-color', 'transparent');
-    })
-
     $skipBtn.mousedown(() => {
-        $skipBtn.css('background-color', 'white')
+        $skipBtn.css('background-color', 'transparent')
     })
 
     const onHover = function (btn){

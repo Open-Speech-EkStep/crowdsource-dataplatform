@@ -31,6 +31,7 @@ $text-muted: #8c8c8c;
 $text-offWhite: #e2e2e2;
 $text-light: #eff5ff;
 $text-orange: #EF8537;
+$btn-disabled:  #F7FAFF;
 
 // Color Shades
 
@@ -50,7 +51,7 @@ $primary-color-shade10: tint($primary-color, 100%);
 .bg-app-primary {
   background-color: $text-white !important;
   color: $primary-color !important;
-  filter: drop-shadow(0px 4px 4px #9fc8ff);
+  filter: drop-shadow(0 2px 12px #9fc8ff)
 }
 
 body {
@@ -59,7 +60,7 @@ body {
 
 .bg-footer-primary {
   color: $primary-color !important;
-  box-shadow: 0 -4px 12px 0 rgba(159, 200, 255, 0.6);
+  box-shadow: 0 -2px 12px 0  #9fc8ff;
 }
 
 .text-yellow {
@@ -128,6 +129,11 @@ a.text-primary:hover {
   }
 }
 
+.btn-custom-outline-primary:disabled {
+  background: #F7FAFF;
+  box-shadow: 0px 8px 24px rgba(15, 39, 73, 0.1);
+}
+
 .btn-primary {
   background-color: $primary-color !important;
   color: $text-white !important;
@@ -141,7 +147,8 @@ a.text-primary:hover {
 .btn-custom-primary {
   background-color: $primary-color;
   color: $text-white;
-  filter: drop-shadow(1px 8px 24px $primary-color-shade2);
+  border-radius: 40px;
+  box-shadow: 0px 8px 24px rgba(15, 39, 73, 0.2);
   width: max-content;
 }
 
@@ -156,6 +163,7 @@ a.text-primary:hover {
   &:hover {
     color: $text-white;
     background-color: $btn-dark-primary;
+    box-shadow: 0px 8px 24px rgba(15, 39, 73, 0.4);
   }
 }
 
@@ -166,8 +174,7 @@ a.text-primary:hover {
 
 .btn-transparent {
   &:hover {
-    background-color: $primary-color-shade1 !important;
-    border-color: $primary-color-shade4 !important;
+    background-color: rgba(15, 39, 73, 0.1) !important;
   }
 }
 
@@ -182,13 +189,15 @@ a.text-primary:hover {
   background-color: $text-white;
   border: 1px solid $text-white;
   color: $primary-color;
-  filter: drop-shadow(1px 8px 24px rgba(15, 39, 73, 0.2));
+  box-shadow: 0px 8px 24px rgba(15, 39, 73, 0.2);
 }
 
 .btn-custom-outline-primary {
   &:hover {
-    background-color: $primary-color-shade2 !important;
+    background-color: $primary-color-shade1 !important;
+    border: 1px solid  $text-white;
     color: $primary-color !important;
+    box-shadow: 0px 8px 24px rgba(15, 39, 73, 0.4);
   }
 }
 
@@ -204,8 +213,9 @@ a.text-primary:hover {
 
 .btn-custom-primary:disabled {
   background-color: $primary-color-shade4;
-  color: $text-white;
-  border: 1px solid $primary-color-shade1;
+  color:$text-white;
+  border-color: $primary-color-shade4;
+  box-shadow: 0px 8px 24px rgba(15, 39, 73, 0.1) !important;
 }
 
 .edit-text,
@@ -357,9 +367,6 @@ audio {
   }
   #navbarSupportedContent ul li {
     height: 65px;
-  }
-  #navbarSupportedContent ul li a {
-    padding-top: 12px;
   }
 
   .dashboard-bg {
@@ -533,4 +540,16 @@ select {
 
 .float{
   border: 1px solid rgba(20, 39, 69, 0.2);
+}
+
+#locale_language_dropdown.active{ 
+  border-bottom: 2px solid $primary-color;
+}
+
+#feedback_button:hover {
+  background-color: $primary-color-shade1;
+}
+
+button:focus{
+  outline: none  !important;
 }

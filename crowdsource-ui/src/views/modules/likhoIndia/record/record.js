@@ -203,11 +203,6 @@ function addListeners() {
 
   })
 
-  $skipButton.hover(() => {
-    $skipButton.css('border-color', '#bfddf5');
-  }, () => {
-    $skipButton.removeAttr('style');
-  })
 
   $skipButton.mousedown(() => {
     $skipButton.css('background-color', '#bfddf5')

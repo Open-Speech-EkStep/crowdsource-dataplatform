@@ -23,14 +23,14 @@
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item p-2 dropdown" id="locale_language_dropdown">
-                <a class="nav-link text-muted-white dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item p-2 d-flex align-items-center dropdown" id="locale_language_dropdown">
+                <a class="nav-link dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="/img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
-                    <span><%= __('Language') %></span>
+                    <span class="text-muted-white"><%= __('Language') %></span>
                 </a>
                 <div id="localisation_dropdown" class="dropdown-menu" aria-labelledby="localeDropdownMenuButton">
                     <% LANGUAGES.forEach(function(obj) { if(obj.hasLocaleText){%>
-                        <a id="<%= obj.value.toLowerCase() %>" class="dropdown-item" href="#" locale="<%= obj.id %>"><%= obj.text %></a>
+                        <a id="<%= obj.value.toLowerCase() %>" class="dropdown-item d-flex align-items-center" href="#" locale="<%= obj.id %>"><%= obj.text %></a>
                     <%} }) %>
                 </div>
 
@@ -41,17 +41,17 @@
         </ul>
     </div>
         <ul class="navbar-nav ml-auto" id="userNavBar">
-            <li class="nav-item pr-lg-4 dropdown" id="userDropDown">
-                <a class="nav-link d-none dropdown-toggle cursor-pointer text-muted-white" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item pr-lg-2 dropdown d-flex align-items-center" id="userDropDown">
+                <a class="nav-link d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="/img/usericon.svg" alt="usericon" class="align-middle mx-1">
 
-                <span id="nav-username"></span>
+                <span id="nav-username" class="text-muted-white"></span>
                 </a>
-                <div id="user_profile_dropdown" class="dropdown-menu text-muted-white" aria-labelledby="nav-user">
-                    <a id="user_profile_name" class="dropdown-item point-none" href="#"></a>
-                    <a id="anonymous_user" class="dropdown-item point-none" href="#"><%= __('(No Username)')%></a>
-                    <a id="change_user" class="dropdown-item" href="#" data-toggle="modal" data-target="#userModal"><%= __('Change User')%></a>
-                    <a id="profile_user" class="dropdown-item" href="<%- `${path}my-badges.html`%>"><%= __('My Badges')%></a>
+                <div id="user_profile_dropdown" class="dropdown-menu" aria-labelledby="nav-user">
+                    <a id="user_profile_name" class="dropdown-item align-items-center point-none" href="#"></a>
+                    <a id="anonymous_user" class="dropdown-item d-flex align-items-center point-none" href="#"><%= __('(No Username)')%></a>
+                    <a id="change_user" class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal" data-target="#userModal"><%= __('Change User')%></a>
+                    <a id="profile_user" class="dropdown-item d-flex align-items-center" href="<%- `${path}my-badges.html`%>"><%= __('My Badges')%></a>
                 </div>
             </li>
         </ul>

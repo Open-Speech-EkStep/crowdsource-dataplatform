@@ -24,10 +24,6 @@
   bottom: 9.31%;
 }
 
-#feedback_button:hover {
-  background-color: #c5dffb;
-}
-
 .custom-modal {
   max-width: 700px;
   min-height: 867px;
