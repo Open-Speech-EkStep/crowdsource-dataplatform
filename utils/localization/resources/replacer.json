@@ -211,7 +211,7 @@
   },
   {
     "json_key": "Translated <span id=\"current_badge_count\"></span> <span id=\"conLanWhenGetBadge\"></span> <span>sentence(s)</span>",
-    "excel_key": "Translated <contribution-count> <language> <s>sentence(s)</s>",
+    "excel_key": "Translated <contribution-count> <language> sentence(s)",
     "replacements": {
       "<contribution-count>": "<span id=\"current_badge_count\"></span>",
       "<language>": "<span id=\"conLanWhenGetBadge\"></span>"
@@ -219,7 +219,7 @@
   },
   {
     "json_key": "Validated <span id=\"current_badge_count\"></span> <span id=\"conLanWhenGetBadge\"></span> <span>sentence(s)</span>",
-    "excel_key": "Validated <validation-count> <language> <s>sentence(s)</s>",
+    "excel_key": "Validated <validation-count> <language> sentence(s)",
     "replacements": {
       "<validation-count>": "<span id=\"current_badge_count\"></span>",
       "<language>": "<span id=\"conLanWhenGetBadge\"></span>"
@@ -227,7 +227,7 @@
   },
   {
     "json_key": "Translated <span id=\"current_badge_count\"></span> <span>sentence(s)</span> in <span id=\"conLanWhenGetBadge\"></span>",
-    "excel_key": "Translated <contribution-count> <s>sentence(s)</s> in <language>",
+    "excel_key": "Translated <contribution-count> sentence(s) in <language>",
     "replacements": {
       "<contribution-count>": "<span id=\"current_badge_count\"></span>",
       "<language>": "<span id=\"conLanWhenGetBadge\"></span>"

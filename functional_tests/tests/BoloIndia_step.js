@@ -194,7 +194,7 @@ step("User should be able to close the Instructions , user should see a sentence
     await scrollUp(10000);
     assert.ok(await button({ id: "instructions_close_btn" }).exists())
     await scrollUp(5000);
-    await click(button({ id: "instructions_close_btn" }))
+    // await click(button({ id: "instructions_close_btn" }))
     assert.ok(await button({ id: 'startRecord' }).exists())
     assert.ok(await button({ id: 'skipBtn' }).exists())
     assert.ok(await taiko.$('#sentenceLbl').exists())
