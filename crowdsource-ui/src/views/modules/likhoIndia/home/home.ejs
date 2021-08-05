@@ -35,35 +35,26 @@
     </div>
     <div class="row">
         <div class="col-12 col-md-12 col-lg-10 offset-lg-1 mt-4">
-            <nav class="navbar navbar-expand-lg navbar-light px-4 flex-flow-nowrap" id="contribution_lang_navbar">
-                <div class="mx-lg-2 mx-md-2 text-primary">
+            <nav class="row d-flex justify-content-start navbar navbar-expand-lg navbar-light px-4 flex-flow-nowrap" id="contribution_lang_navbar">
+                <div class="col-12 col-md-auto">
                     <%= __('Select the language pair for contribution') %>:
                 </div>
-                <div class="navbar-collapse" id="navbarSupportedLanguage">
-                    <div class="col-5 col-lg-5 col-xl-4 d-none" id="nav-bar-loader">
-                        <div><span class="spinner"></span></div>
-                    </div>
-                    <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 pt-2 px-0">
-                        <div class="row m-0">
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-0">
-                                <div class="row m-0">
-                                    <label class="col-4 mt-2 from-label text-primary"><%= __('FROM') %> &nbsp; :</label>
-                                    <select class="col-lg-6 col-md-6 col-8 btn dropdown-toggle h6 w-90 rounded text-primary" id="from-language" style="height:40px;padding:0;padding:0 10px;color:#959595">
-            
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-0">
-                                <div class="row m-0">
-                                    <label class="col-lg-2 col-md-2 col-4 mt-2 from-label text-primary"><%= __('TO') %> :</label>
-                                    <select class="col-lg-6 col-md-6 col-8 btn dropdown-toggle h6 w-90 rounded text-primary" id="to-language" style="height:40px;padding:0;padding:0 10px;color:#959595">
-                                    </select>
-                                </div>
-                            </div>
+                <div class="col-12 col-md-auto">
+                    <div class="row language-dropdown-wrapper">
+                        <div class="col d-flex align-items-center">
+                            <select class="language-dropdown btn dropdown-toggle h6 mb-0 rounded text-primary" id="from-language" style="height:40px;padding:0;padding:0 10px;color:#959595">
+                            </select>
+                        </div>
+                        <div class="col-auto d-flex align-items-center">
+                            <img src="/img/arrow_right.svg" alt="arrow right">
+                        </div>
+                        <div class="col d-flex align-items-center">
+                            <select class="language-dropdown btn dropdown-toggle h6 mb-0 rounded text-primary" id="to-language" style="height:40px;padding:0;padding:0 10px;color:#959595">
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div></nav>
-        </div>
+            </nav></div>
     </div>
     <div class="m-auto row justify-content-center mt-lg-4 mx-lg-5 pb-5">
         <%- include('../common/cards.ejs',{left:{h1:__('Translate'),h2:__('Translate and type the text'),"p1":"",img:"/img/translate.svg"},right:{h1:__('Validate'),h2:__('Validate the translation contributed by others'),"p1":"",img:"/img/validate.svg"}}); %>

@@ -471,3 +471,27 @@ body.modal-open .supreme-container {
   border-color: #007bff;
   color: #ffffff;
 }
+
+.language-dropdown-wrapper {
+  margin-top: 10px;
+}
+
+.language-dropdown {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .language-dropdown-wrapper {
+    margin-top: 0;
+  }
+
+  .language-dropdown {
+    width: 150px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .language-dropdown {
+    width: 225px;
+  }
+}
