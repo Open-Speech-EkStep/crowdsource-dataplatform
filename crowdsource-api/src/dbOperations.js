@@ -708,11 +708,13 @@ const getAvailableLanguages = async (req, res) => {
 const getTargetInfo = async (req, res) => {
     const { type, sourceLanguage } = req.params;
     const { targetLanguage = '' } = req.query;
-    let hasTarget = false, isAllContributed = false;
     const toLanguage = type == 'parallel' ? targetLanguage : sourceLanguage;
-    hasTarget = (await db.one(hasTargetQuery, [type, sourceLanguage, toLanguage])).result;
-    isAllContributed = (await db.one(isAllContributedQuery, [type, sourceLanguage, toLanguage])).result;
-    res.status(200).send({ hasTarget, isAllContributed });
+    const hasTargetQ = db.one(hasTargetQuery, [type, sourceLanguage, toLanguage]);
+    const isAllContributedQ = db.one(isAllContributedQuery, [type, sourceLanguage, toLanguage]);
+    Promise.all([hasTargetQ, isAllContributedQ])
+    .then(response => {
+        res.status(200).send({ hasTarget: response[0].result, isAllContributed: response[1].result });
+    })    
 }
 
 const getSentencesForProfanityChecking = (username, type, language) => {

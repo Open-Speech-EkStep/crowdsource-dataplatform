@@ -135,42 +135,52 @@ and (conf2.value=0 or for_demo=true)
  group by dr."dataset_row_id", dr.media->>'data', mds.params limit 5`;
 
 const getContributionListQuery = `
-select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id, coalesce(ds.media ->> 'collectionSource', mds.params ->> 'collectionSource') as source_info
-    from contributions con 
-    inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and con.contributed_by!=$1
-	and ds.type=$2 and (ds.type!='parallel' or con.media->>'language'=$4)
-  left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
-    left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' 
-	inner join configurations conf on conf.config_name='validation_count' 
-  inner join configurations conf2 on conf2.config_name='include_profane' 
-  inner join configurations conf3 on conf3.config_name='show_demo_data'
-    where  con.action='completed' and ds.media->>'language'=$3
-    and coalesce(mds.is_active, true) = true
-    and (conf2.value=1 or is_profane=false)
-    and (conf3.value=0 or for_demo=true)
-	and con.contribution_id not in (select contribution_id from validations where validated_by=$1)
-	group by con.dataset_row_id, ds.media->>'data', con.contribution_id, conf.value, mds.params, ds.media 
-	having count(val.*)<conf.value
-    order by count(val.*) desc 
-	limit 5;`
+with conval as (
+  select c.contribution_id, count(v.validation_id) count from contributions c
+  left join validations v on c.contribution_id=v.contribution_id and v.action!='skip'
+  where c.action='completed' and c.media->>'language'=$3 
+  group by c.contribution_id
+  having count(v.*)<5
+  )  
+  select distinct con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info, c.count
+  from conval c
+    inner join contributions con on c.contribution_id=con.contribution_id
+      inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and con.contributed_by!=$1 and ds.type=$2
+      left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
+    inner join configurations conf on conf.config_name='validation_count' 
+      inner join configurations conf2 on conf2.config_name='include_profane' 
+      inner join configurations conf3 on conf3.config_name='show_demo_data'
+      where ds.media->>'language'=$3
+        and coalesce(mds.is_active, true) = true
+        and (conf2.value=1 or is_profane=false)
+        and (conf3.value=0 or for_demo=true)
+        and con.contribution_id not in (select contribution_id from validations where validated_by=$1) 			
+    order by c.count desc
+    limit 5;`
 
 const getContributionListForParallel = `
-select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id, coalesce(ds.media ->> 'collectionSource', mds.params ->> 'collectionSource') as source_info  
-  from contributions con 
-  inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.type=$2 and con.media->>'language'=$4 and con.contributed_by!=$1
-  left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
-  left join validations val on val.contribution_id=con.contribution_id and val.action!='skip' and con.media ->> 'language' = $4
-  inner join configurations conf on conf.config_name='validation_count' 
-  inner join configurations conf2 on conf2.config_name='include_profane' 
-  inner join configurations conf3 on conf3.config_name='show_demo_data'
-  where  con.action='completed' and ds.media->>'language'=$3
-  and coalesce(mds.is_active, true) = true
-  and (conf2.value=1 or is_profane=false) 
-  and (conf3.value=0 or for_demo=true)
-  and con.contribution_id not in (select contribution_id from validations where validated_by=$1)
-  group by con.dataset_row_id, ds.media->>'data', con.contribution_id, conf.value, mds.params, ds.media
-  having count(val.*)<conf.value
-  order by count(val.*) desc limit 5;`
+with conval as (
+  select c.contribution_id, count(v.validation_id) count from contributions c
+  left join validations v on c.contribution_id=v.contribution_id and v.action!='skip'
+  where c.action='completed' and c.media->>'language'=$4
+  group by c.contribution_id
+  having count(v.*)<5
+  )
+  select distinct con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info, c.count
+  from conval c
+    inner join contributions con on c.contribution_id=con.contribution_id
+      inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and con.contributed_by!=$1 and ds.type=$2
+      left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
+    inner join configurations conf on conf.config_name='validation_count'
+      inner join configurations conf2 on conf2.config_name='include_profane'
+      inner join configurations conf3 on conf3.config_name='show_demo_data'
+      where ds.media->>'language'=$3
+        and coalesce(mds.is_active, true) = true
+        and (conf2.value=1 or is_profane=false)
+        and (conf3.value=0 or for_demo=true)
+        and con.contribution_id not in (select contribution_id from validations where validated_by=$1)	
+    order by c.count desc
+    limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, action, validated_by, date, state_region, country, device, browser) 
 select contribution_id, $3, $1, now(), $5, $6, $7, $8 from contributions inner join dataset_row on dataset_row.dataset_row_id=contributions.dataset_row_id 
@@ -316,17 +326,16 @@ and coalesce(mds.is_active, true) = true
 group by val.contribution_id,conf.value having count(val.*)<conf.value) as result`;
 
 const isAllContributedQuery = `select not exists(
-	select dataset_row_id from dataset_row
+	select dataset_row.dataset_row_id from dataset_row
+	left join contributions con on con.dataset_row_id=dataset_row.dataset_row_id and action='completed' and (type!='parallel' or con.media->>'language'=$3)
   inner join configurations conf2 on conf2.config_name='include_profane'
   inner join configurations conf3 on conf3.config_name='show_demo_data' 
   left join master_dataset mds on dataset_row.master_dataset_id=mds.master_dataset_id
-  where type=$1 and media->>'language'=$2
+  where type=$1 and dataset_row.media->>'language'=$2 and con.contribution_id is null
   and (conf2.value=1 or is_profane=false)
   and (conf3.value=0 or for_demo=true)
   and coalesce(mds.is_active, true) = true
-	EXCEPT
-	select dr.dataset_row_id from contributions con inner join dataset_row dr on con.dataset_row_id=dr.dataset_row_id 
-	where type=$1 and dr.media->>'language'=$2 and con.media->>'language'=$3 and action='completed') as result`;
+	) as result`;
 
 const getDataRowInfo = `select type, media->>'language' as language from dataset_row where dataset_row_id=$1`;
 
