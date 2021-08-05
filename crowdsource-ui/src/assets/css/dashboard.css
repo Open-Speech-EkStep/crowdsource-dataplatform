@@ -416,3 +416,13 @@ body.modal-open .supreme-container {
 
 
 }
+
+.language-dropdown {
+  width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .language-dropdown {
+    width: 225px;
+  }
+}

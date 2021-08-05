@@ -12,7 +12,6 @@ const {
     getLocaleString
 } = require('../common/utils');
 const { hasUserRegistered , updateLikhoLocaleLanguagesDropdown} = require('../common/common');
-const platform = require('../common/platform')
 const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE,SPEAKER_DETAILS_KEY,CONTRIBUTION_LANGUAGE,
     LIKHO_TO_LANGUAGE } = require('../common/constants');
 const fetch = require('../common/fetch');
@@ -124,13 +123,6 @@ function updateLanguage(language) {
 
 
 const executeOnLoad = function () {
-    if(platform.name == "Firefox") {
-        $("#from-dash-language").css('text-indent', '-25px');
-        $("#to-dash-language").css('text-indent', '-25px');
-    } else {
-        $("#from-dash-language").css('text-indent', '75px');
-        $("#to-dash-language").css('text-indent', '75px');
-    }
     localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
     initializeFeedbackModal();
     localStorage.removeItem('previousLanguage');
