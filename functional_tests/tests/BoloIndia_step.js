@@ -23,16 +23,17 @@ const {
 } = require('taiko');
 const path = require('path');
 
-const headless = process.env.headless_chrome.toLowerCase() === 'true';
+const headless = process.env.headless_chrome.toLowerCase() === 'false';
 const testUrl = process.env.test_url || 'https://dev-nplt.vakyansh.in';
 
 beforeSuite(async () => {
     //setConfig( { waitForNavigation: false, navigationTimeout: 120000});
-    
+    //await openBrowser({args:['--window-size=1440,900']})
     await openBrowser({
         headless: headless,
         args: [
-            '--use-fake-ui-for-media-stream'
+            '--use-fake-ui-for-media-stream',
+            '--start-fullscreen'
         ]
     })
     setConfig({
