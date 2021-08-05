@@ -381,13 +381,14 @@ body.modal-open .supreme-container {
 }
 
 .validate-disabled {
-  opacity: 0.6;
+  background-color: rgb(230 230 230 / 50%);
   cursor: no-drop;
 }
 
 .validate-disabled #left_container,
 .validate-disabled #right_container {
   pointer-events: none;
+  opacity: 0.6;
 }
 
 .validate-disabled #warning-msg {
@@ -395,13 +396,14 @@ body.modal-open .supreme-container {
 }
 
 .cont-validate-disabled {
-  opacity: 0.6;
+  background-color:  rgb(230 230 230 / 50%);
   cursor: no-drop;
 }
 
 .cont-validate-disabled #left_container,
 .cont-validate-disabled #right_container {
   pointer-events: none;
+  opacity: 0.6;
 }
 
 .cont-validate-disabled #warning-msg {

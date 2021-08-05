@@ -117,7 +117,9 @@ const initialise = () => {
     $("#languages").find('option[value="' + selectedLanguage + '"]').attr("selected", "selected");
     $("#participation-radios").find('input[value="' + source + '"]').attr("checked", "checked");
   } else {
-    $("#languages").find('option[value="' + DEFAULT_CON_LANGUAGE + '"]').attr("selected", "selected");
+    const selectedOption = $("#languages").find('option[value="' + DEFAULT_CON_LANGUAGE + '"]');
+    $(selectedOption).prop("selected", true);
+    $(selectedOption).attr("selected", "selected");
     selectedLanguage = DEFAULT_CON_LANGUAGE;
   }
 
