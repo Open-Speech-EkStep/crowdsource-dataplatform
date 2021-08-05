@@ -94,6 +94,25 @@ const setAudioPlayer = function () {
   const cancelButton = $("#cancel-edit-button");
   const $submitButton = $('#submit-edit-button');
 
+  myAudio.addEventListener('play', () => {
+    hideElement(play);
+    hideElement(resume);
+    showElement(pause);
+    hideElement(textPlay);
+    hideElement(textResume);
+    hideElement(replay);
+    hideElement(textReplay);
+    showElement(textPause);
+  })
+
+  myAudio.addEventListener('pause', () => {
+    hideElement(pause);
+    showElement(resume);
+    hideElement(textPause);
+    showElement(textResume);
+    hideElement(replay);
+    hideElement(textReplay);
+  })
 
   myAudio.addEventListener("ended", () => {
     hideElement(pause)
