@@ -2,7 +2,7 @@ const { readFileSync } = require('fs');
 jest.mock('node-fetch');
 const { stringToHTML, mockLocalStorage } = require('../utils');
 const { CONTRIBUTION_LANGUAGE, SPEAKER_DETAILS_KEY, CURRENT_MODULE, AGGREGATED_DATA_BY_LANGUAGE } = require('../../build/js/common/constants');
-const { hasUserRegistered, setBadge, updateGoalProgressBar, isInTopLanguage, getTop3Languages, getCountBasedOnSource, languageFilter } = require('../../build/js/common/common.js');
+const { hasUserRegistered, setBadge, updateGoalProgressBar, isInTopLanguage, getTop3Languages, getCountBasedOnSource, languageFilter, reduceList } = require('../../build/js/common/common.js');
 
 describe('test common js', () => {
 
@@ -705,20 +705,57 @@ describe('test common js', () => {
     const data = [{ language: 'Hindi', type: 'text' }, { language: 'Tamil', type: 'text' }]
     test('should return filtered list if language present', () => {
       const language = "Hindi";
-      const result = languageFilter(data, language)
+      const result = languageFilter(data, 'text', language)
       expect(result).toEqual([{ language, type: 'text' }])
     })
 
     test('should return actual list if language empty', () => {
       const language = "";
-      const result = languageFilter(data, language)
+      const result = languageFilter(data, 'text', language)
       expect(result).toEqual(data)
     })
 
     test('should return empty list if language not present', () => {
       const language = "someLanguage";
-      const result = languageFilter(data, language)
+      const result = languageFilter(data, 'text', language)
       expect(result).toEqual([])
+    })
+
+    test('should return list with starting language for language pairs data', () => {
+      const data = [{ language: 'Hindi-language2', type: 'text' }, { language: 'Tamil', type: 'text' }]
+      const language = "Hindi";
+      const result = languageFilter(data, 'text', language)
+      expect(result).toEqual([{ language: 'Hindi-language2', type: 'text' }])
+    })
+
+    test('should return list with starting language for language pairs data and input', () => {
+      const data = [{ language: 'Hindi-language2', type: 'text' }, { language: 'Tamil-Odia', type: 'parallel' }, { language: 'Tamil-English', type: 'parallel' }]
+      const language = "Tamil-Bengali";
+      const result = languageFilter(data, 'parallel', language)
+      expect(result).toEqual([{ language: 'Tamil-Odia', type: 'parallel' }, { language: 'Tamil-English', type: 'parallel' }])
+    })
+  })
+
+  describe('test reduceList', () => {
+    
+    test('should return totaled contribution_goal and validation goal as an object', () => {
+      const language = 'Odia'
+      const type = 'text'
+      const dataList = [{ "contribution_goal": 10, "validation_goal": 10, type, language }, { "contribution_goal": 5, "validation_goal": 5, type, language }]
+      const result = reduceList(dataList)
+      expect(result).toEqual({ contribution_goal: 15, validation_goal: 15 })
+    })
+
+    test('should return empty object for empty data', () => {
+      const dataList = [];
+      const result = reduceList(dataList)
+      expect(result).toEqual({})
+    })
+
+    test('should return empty object for data without numbers', () => {
+      const dataList = [{ 'key1': 'string1', 'key2': 'string2' }];
+      const result = reduceList(dataList)
+      expect(result).toEqual({})
     })
   })
 })

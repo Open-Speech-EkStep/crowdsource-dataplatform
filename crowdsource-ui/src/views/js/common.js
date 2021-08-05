@@ -505,19 +505,33 @@ function getCumulativeJsonUrl(language) {
   return language ? '/aggregated-json/cumulativeDataByLanguage.json' : '/aggregated-json/cumulativeCount.json';
 }
 
-function languageFilter(data, language) {
+function languageFilter(data, type, language) {
+  if (type == MODULE.likho['api-type']) {
+    language = language.split('-')[0]
+  }
   if (language)
-    return data.filter(d => d.language == language)
+    return data.filter(d => d.language.split('-')[0] == language)
   return data
+}
+
+function reduceList(dataList) {
+  return dataList.reduce((accumulator, item) => {
+    Object.keys(item).forEach(key => {
+      if (typeof item[key] === "string") return;
+      accumulator[key] = (accumulator[key] || 0) + item[key];
+    });
+    return accumulator;
+  }, {});
 }
 
 function setCurrentProgress(type, source = "", language = "") {
   const url = getCumulativeJsonUrl(language)
   return getJson(url)
     .then(data => {
-      const progressDataList = data.filter(d => d.type == type) || [];
+      var progressDataList = data.filter(d => d.type == type) || [];
+      progressDataList = languageFilter(progressDataList, type, language);
+      const progressData = reduceList(progressDataList)
       var totalProgress;
-      const progressData = languageFilter(progressDataList, language)[0] || {};
       if (type == MODULE.bolo['api-type'] || type == MODULE.suno['api-type']) {
 
         totalProgress = getCountBasedOnSource(source, progressData.total_contributions, progressData.total_validations) || 0
@@ -544,11 +558,9 @@ function getProgressGoalJsonUrl(language) {
 function setProgressGoal(type, source = "", language = "") {
   const url = getProgressGoalJsonUrl(language)
   return getJson(url).then(data => {
-    const goalDataList = data.filter(d => d.type == type) || [];
-    if (type === MODULE.likho['api-type']) {
-      language = language.split('-')[0];
-    }
-    const goalData = languageFilter(goalDataList, language)[0] || {}
+    var goalDataList = data.filter(d => d.type == type) || [];
+    goalDataList = languageFilter(goalDataList, type, language)
+    const goalData = reduceList(goalDataList)
     const totalGoal = getCountBasedOnSource(source, goalData.contribution_goal, goalData.validation_goal) || 1
     replaceSubStr($(".progress-metric"), "<contribution-goal>", totalGoal);
     if (!totalGoal) {
@@ -610,4 +622,4 @@ const showErrorPopup = () => {
   $errorDialog.modal('show');
 }
 
-module.exports = { isMobileDevice, showErrorPopup, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, landToHome, showOrHideExtensionCloseBtn, hasUserRegistered, updateGoalProgressBar, replaceSubStr, getTopLanguage, isInTopLanguage, getTop3Languages, setCurrentProgress, getCountBasedOnSource, updateGoalProgressBarFromJson, languageFilter };
+module.exports = { isMobileDevice, showErrorPopup, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, landToHome, showOrHideExtensionCloseBtn, hasUserRegistered, updateGoalProgressBar, replaceSubStr, getTopLanguage, isInTopLanguage, getTop3Languages, setCurrentProgress, getCountBasedOnSource, updateGoalProgressBarFromJson, languageFilter, reduceList };
