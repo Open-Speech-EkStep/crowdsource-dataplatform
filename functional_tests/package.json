@@ -7,7 +7,7 @@
     "preinstall": "npx npm-force-resolutions"
   },
   "dependencies": {
-    "@getgauge/cli": "^1.1.7",
+    "@getgauge/cli": "^1.4.0",
     "fs": "^0.0.1-security",
     "jest": "27.0.4",
     "npm-force-resolutions": "0.0.10",
