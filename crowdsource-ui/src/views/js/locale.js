@@ -38,8 +38,7 @@ const changeLocale = function (locale) {
     //     location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
     // }
     // else
-
-    if(module == 'home' || currentPage == "badges.html") {
+    if(module == 'home' || currentPage == "badges.html" || currentPage == "my-badges.html") {
         location.href = `${context_root}/${locale}/${currentPage}`;
     }
     else {

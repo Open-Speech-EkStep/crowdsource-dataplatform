@@ -219,16 +219,17 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   $("#user-contribution-count").text(data.contributionCount);
 
   let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  let likhoContributionLanguage;
   const module = localStorage.getItem(CURRENT_MODULE);
 
   if (module === 'likho') {
     const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
     const likhoPairLanguage = contributionLanguage + '-' + toLanguage;
-    contributionLanguage = likhoPairLanguage
+    likhoContributionLanguage = likhoPairLanguage;
   }
 
-  const top3Languages = getTop3Languages(functionalFlow, module, contributionLanguage)
-  if (isInTopLanguage(top3Languages, contributionLanguage)) {
+  const top3Languages = getTop3Languages(functionalFlow, module, module === 'likho' ? likhoContributionLanguage : contributionLanguage)
+  if (isInTopLanguage(top3Languages, module === 'likho' ? likhoContributionLanguage : contributionLanguage)) {
     $("#languageInTopWeb").removeClass("d-none");
     $("#languageInTopMob").removeClass("d-none");
     $("#languageNotInTopMob").addClass("d-none");

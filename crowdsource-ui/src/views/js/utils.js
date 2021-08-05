@@ -261,8 +261,9 @@ const getJson = (path) => {
 }
 
 const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType) => {
-  ALL_LANGUAGES.find(language=>language.value.toLowerCase() === contibutedLanguage.toLowerCase());
-  return `/img/en_${initiativeType}_${badgeType}_${source}.svg`;
+  const language = ALL_LANGUAGES.find(language => language.value.toLowerCase() === contibutedLanguage.toLowerCase());
+  const langaugePrefix = language ? language.id : 'en';
+  return `/img/${langaugePrefix}_${initiativeType}_${badgeType}_${source}.svg`;
 }
 
 

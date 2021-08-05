@@ -22,7 +22,6 @@ a {
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
   padding: 24px;
-  border-radius: 12px 12px 0 0;
 }
 
 #edit-text {
@@ -343,6 +342,7 @@ a {
   .original-text {
     padding: 16px !important;
     min-height: 120px !important;
+    border-radius: 12px 12px 0 0;
   }
   #captured-text {
     font-size: 16px !important;
