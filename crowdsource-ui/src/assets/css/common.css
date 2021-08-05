@@ -555,7 +555,6 @@ body {
 
 .btn-custom-outline-primary:disabled {
   pointer-events: none;
-  opacity: 0.7 !important;
 }
 
 #anonymous_user {
