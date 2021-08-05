@@ -1,4 +1,3 @@
-const fetch = require('../common/fetch')
 const {
   SIXTY,
   HOUR_IN_SECONDS,
@@ -14,7 +13,8 @@ const {
   getLocaleString,
   performAPIRequest,
   showElement,
-  hideElement
+  hideElement,
+  getJson
 } = require("../common/utils");
 const { downloadPdf } = require('../common/downloadableBadges');
 const {
@@ -67,18 +67,18 @@ const updateShareContent = function (language, rank) {
 };
 
 const getLanguageStats = function () {
-  return fetch("/v2/stats/summary/ocr")
-    .then((res) => res.json())
-    .then((response) => {
-      if (response.aggregate_data_by_language.length > 0) {
+  return getJson('/aggregated-json/cumulativeDataByLanguage.json')
+    .then(jsonData => {
+      const top_languages_by_hours = jsonData.filter(d => d.type == MODULE.dekho['api-type']);
+      if (top_languages_by_hours.length > 0) {
         const contributionLanguage = localStorage.getItem(
           CONTRIBUTION_LANGUAGE
         );
-        localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(response.aggregate_data_by_language));
-        const languages = getTopLanguage(response.aggregate_data_by_language, MODULE.dekho.value, 'total_validation_count', 'total_validations');
+        localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
+        const languages = getTopLanguage(top_languages_by_hours, MODULE.dekho.value, 'total_validation_count', 'total_validations');
         localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
         showByHoursChartThankyouPage(MODULE.dekho.value, "thankyou");
-        const data = response.aggregate_data_by_language.sort((a, b) =>
+        const data = top_languages_by_hours.sort((a, b) =>
           Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
         );
         const rank = data.findIndex(
