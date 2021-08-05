@@ -22,7 +22,7 @@ step("Validate Likho India content", async function() {
 });
 
 step("User should see the top Language graph and other stats for Likho India", async function() {
-  assert.ok(await text("Your language pair and top 3 most contributed language pairs").exists());
+  assert.ok(await text("Your language pair and top 3 contributed language pairs").exists());
   assert.ok(await text("Total translations").exists());
   assert.ok(await text("Language pairs").exists());
   assert.ok(await text("People participated").exists());

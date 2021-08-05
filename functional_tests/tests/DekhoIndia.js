@@ -15,7 +15,7 @@ const {
 var initialProgressValue;
 
 step("Validate Dekho India content", async function () {
-	assert.ok(await text('Enrich your language by labelling images').exists());
+	assert.ok(await text('Enrich your language by typing the text you see').exists());
 	assert.ok(await text('Validate').exists());
 	assert.ok(await text('Label').exists());
 	assert.ok(await text('Contribution Tracker').isVisible());
@@ -38,7 +38,7 @@ step("When user clicks on back button, user should land on Dekho India home page
 		await click(taiko.text("Home"))
 		await taiko.waitFor(1000)
 	}
-	assert.ok(await text("Enrich your language by labelling images").isVisible());
+	assert.ok(await text("Enrich your language by typing the text you see").isVisible());
 
 });
 
@@ -50,7 +50,7 @@ step("Close button should close the pop up and user should see <flow> India Home
 	}
 
 	if (flow == "Dekho") {
-		assert.ok(await text("Enrich your language by labelling images").exists());
+		assert.ok(await text("Enrich your language by typing the text you see").exists());
 	}
 	if (flow == "Suno") {
 		assert.ok(await text("Enrich your language by transcribing audio into text").exists());

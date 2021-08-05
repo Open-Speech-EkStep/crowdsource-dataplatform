@@ -97,16 +97,16 @@ step("User details popup should appear and close button should close the pop up"
     await taiko.waitFor(500)
 });
 
-step("When user clicks on Data Source button, popup should open and they should see source information", async function () {
-    await taiko.waitFor(650)
-    assert.ok(await taiko.button({ id: 'show_source_button' }).isVisible());
-    await click(taiko.button({ id: 'show_source_button' }));
-    await taiko.waitFor(700);
-    assert.ok(await text("Opt-out Notification").isVisible());
-    await click(taiko.button({ id: 'datasource_close_btn' }));
-    await taiko.waitFor(700);
-    assert.ok(! await text("Opt-out Notification").isVisible());
-});
+// step("When user clicks on Data Source button, popup should open and they should see source information", async function () {
+//     await taiko.waitFor(650)
+//     assert.ok(await taiko.button({ id: 'show_source_button' }).isVisible());
+//     await click(taiko.button({ id: 'show_source_button' }));
+//     await taiko.waitFor(700);
+//     assert.ok(await text("Opt-out Notification").isVisible());
+//     await click(taiko.button({ id: 'datasource_close_btn' }));
+//     await taiko.waitFor(700);
+//     assert.ok(! await text("Opt-out Notification").isVisible());
+// });
 
 step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present", async function () {
     await taiko.waitFor(1000)
@@ -191,6 +191,8 @@ step("Add <usrnm> Username for Valiadtion", async function (usrnm) {
 step("User should be able to close the Instructions , user should see a sentence , Skip button , Start Recording Button , username,Test Mic and speaker button", async function () {
     await taiko.waitFor(1200)
     await scrollUp(10000);
+    assert.ok(await button({ id: "instructions_close_btn" }).exists())
+    await scrollUp(5000);
     await click(button({ id: "instructions_close_btn" }))
     assert.ok(await button({ id: 'startRecord' }).exists())
     assert.ok(await button({ id: 'skipBtn' }).exists())

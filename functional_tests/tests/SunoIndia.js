@@ -21,7 +21,7 @@ step("Select <HeaderLink> from header", async function (HeaderLink) {
 });
 
 step("Validate Suno India content", async function () {
-    assert.ok(await text('Enrich your language by transcribing audio into text').exists());
+    assert.ok(await text('Enrich your language by typing the audio that you hear').exists());
     assert.ok(await text('Validate').exists());
     assert.ok(await text('Transcribe').exists());
     assert.ok(await text('Contribution Tracker').isVisible());
@@ -99,7 +99,7 @@ step("When user clicks on back button, user should land on home page", async fun
         await click(taiko.text("Home"))
         await taiko.waitFor(1500)
     }
-    assert.ok(await text("Enrich your language by transcribing audio into text").exists());
+    assert.ok(await text("Enrich your language by typing the audio that you hear").exists());
 
 });
 
