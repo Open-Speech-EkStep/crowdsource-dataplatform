@@ -42,8 +42,8 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
       chartData[i].year = String(chartData[i].year);
       const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(chartData[i].cumulative_contributions) * 60 * 60), true);
       const { hours: vHours, minutes: vMinutes, seconds: vSeconds } = calculateTime((Number(chartData[i].cumulative_validations) * 60 * 60), true);
-      chartData[i].contributedHours = currentModule == "dekho" || currentModule == "likho" ? chartData[i].total_contribution_count :  formatTime(cHours, cMinutes, cSeconds);
-      chartData[i].validatedHours = currentModule == "dekho" || currentModule == "likho" ? chartData[i].total_validation_count : formatTime(vHours, vMinutes, vSeconds);
+      chartData[i].contributedHours = currentModule == "dekho" || currentModule == "likho" ? chartData[i].total_contribution_count :  formatTime(cHours, cMinutes, cSeconds, false);
+      chartData[i].validatedHours = currentModule == "dekho" || currentModule == "likho" ? chartData[i].total_validation_count : formatTime(vHours, vMinutes, vSeconds, false);
     }
 
     let tooltipContent

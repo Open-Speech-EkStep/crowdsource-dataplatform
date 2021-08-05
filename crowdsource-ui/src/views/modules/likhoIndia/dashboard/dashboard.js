@@ -150,13 +150,25 @@ const executeOnLoad = function () {
         updateLikhoLocaleLanguagesDropdown(contributionLanguage, contributionLanguage2);
     }
 
+    function checkAndReturnLanguage(fromLanguage, toLanguage){
+        if(!fromLanguage || fromLanguage === ""){
+            return "";
+        }
+        if(!toLanguage || toLanguage === ""){
+            return "";
+        }
+        return fromLanguage+"-"+toLanguage;
+    }
+
     $('#duration').on('click', (e) => {
         const $durationLiInactive = $('#duration').find('li.inactive');
         const $durationLiActive = $('#duration').find('li.active');
         $durationLiInactive.removeClass('inactive').addClass('active');
         $durationLiActive.removeClass('active').addClass('inactive');
         const selectedDuration = e.target.dataset.value;
-        const selectedLanguage = $('#language option:selected').val();
+        const fromLanguage = $('#from-dash-language option:selected').val() || "";
+        const toLanguage = $('#to-dash-language option:selected').val() || "";
+        const selectedLanguage = checkAndReturnLanguage(fromLanguage, toLanguage);
         updateLineGraph(selectedLanguage, selectedDuration, MODULE.likho, "Translations done","Translations validated");
     });
 
