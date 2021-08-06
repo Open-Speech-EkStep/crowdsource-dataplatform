@@ -101,13 +101,13 @@ const drawMap = function (response) {
   polygonSeries.data = statesData;
   var polygonTemplate = polygonSeries.mapPolygons.template;
   polygonTemplate.tooltipHTML = `<div style="text-align: left;">
-                                      <h6>{state}</h6> 
+                                      <h6>{state}</h6>
                                       <div style="text-align: left;">{total_speakers} ${translate('Speakers')} </div>
-                                      <div style="text-align: left;"> 
+                                      <div style="text-align: left;">
                                         <label>${translate('Contributed')}: </label>
                                         <label style="margin-left: 8px">{contributed_time}</label>
-                                      </div> 
-                                      <div style="text-align: left;">${translate('Validated')}:  
+                                      </div>
+                                      <div style="text-align: left;">${translate('Validated')}:
                                         <label style="margin-left: 8px">{validated_time}</label>
                                       </div>
                                   </div>`;
@@ -191,21 +191,15 @@ const generateIndiaMap = function (language = "") {
 };
 
 function getStatistics(response) {
-  const $speakersData = $("#speaker-data");
-  const $speakersDataLoader = $speakersData.find(
-    "#loader1"
-  );
   const $speakersDataSpeakerValue = $("#speaker-value");
   const $speakersDataHoursValue = $("#contributed-value");
   const $speakersDataLanguagesValue = $("#languages-value");
-  const $speakerContributionData = $speakersData.find('.contribution-data');
   const $validatedValue = $("#validated-value");
-  $speakersDataLoader.removeClass("d-none");
 
   const {hours, minutes, seconds} = calculateTime(
     Number(response && response.total_contributions || 0) * 60 * 60
   );
-    
+
   const { hours: validate_hrs, minutes: validate_min, seconds: validate_sec } = calculateTime(
     Number(response && response.total_validations || 0) * 60 * 60
   );
@@ -213,9 +207,6 @@ function getStatistics(response) {
   $validatedValue.text(formatTime(validate_hrs,validate_min,validate_sec));
   $speakersDataSpeakerValue.text(response && response.total_speakers || 0);
   $speakersDataLanguagesValue.text(response && response.total_languages || 0);
-  $speakersDataLoader.addClass("d-none");
-  $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4 col-xs-6')
-  $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
 }
 
 let chartReg = {};

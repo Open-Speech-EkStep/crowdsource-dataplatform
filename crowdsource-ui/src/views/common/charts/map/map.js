@@ -84,7 +84,7 @@ const drawMap = function (response, moduleType) {
     st.state = translate(st.state);
   });
   const sunoTooltip = `<div style="text-align: left;">
-                          <h6>{state}</h6> 
+                          <h6>{state}</h6>
                           <div style="text-align: left;">{total_speakers} ${translate('People')}</div>
                           <div style="text-align: left;">
                             <label>${translate('Transcribed')}: </label>
@@ -95,23 +95,23 @@ const drawMap = function (response, moduleType) {
                           </div>
                         </div>`
   const likhoTooltip = `<div style="text-align: left;">
-                          <h6>{state}</h6> 
+                          <h6>{state}</h6>
                           <div style="text-align: left;">{total_speakers} ${translate('People')}</div>
                           <div style="text-align: left;">
                             <label>${translate('Translations done')}: </label>
                             <label style="margin-left: 8px">{contributed_time}</label>
-                          </div> 
-                          <div style="text-align: left;">${translate('Translations validated')}:  
+                          </div>
+                          <div style="text-align: left;">${translate('Translations validated')}:
                             <label style="margin-left: 8px">{validated_time}</label>
                           </div>
                         </div>`
   const dekhoTooltip = `<div style="text-align: left;">
-                          <h6>{state}</h6> 
+                          <h6>{state}</h6>
                           <div style="text-align: left;">{total_speakers} ${translate('People')}</div>
                           <div style="text-align: left;">
-                            <label>${translate('Images labelled')}: </label> 
+                            <label>${translate('Images labelled')}: </label>
                             <label style="margin-left: 8px">{contributed_time}</label>
-                          </div> 
+                          </div>
                           <div style="text-align: left;">${translate('Images validated')}:
                             <label style="margin-left: 8px">{validated_time}</label>
                           </div>
@@ -251,17 +251,12 @@ const generateIndiaMap = function (language = "", module) {
 };
 
 function getStatistics(response) {
-  const $speakersData = $("#speaker-data");
-  const $speakersDataLoader = $speakersData.find(
-    "#loader1, #loader2, #loader3"
-  );
   const $speakersDataSpeakerWrapper = $("#speakers-wrapper");
   const $speakersDataSpeakerValue = $("#speaker-value");
   const $speakersDataHoursWrapper = $("#hours-wrapper");
   const $speakersDataHoursValue = $("#hour-value");
   const $speakersDataLanguagesWrapper = $("#languages-wrapper");
   const $speakersDataLanguagesValue = $("#languages-value");
-  $speakersDataLoader.removeClass("d-none");
   $speakersDataHoursWrapper.addClass("d-none");
   $speakersDataSpeakerWrapper.addClass("d-none");
   $speakersDataLanguagesWrapper.addClass("d-none");
@@ -272,7 +267,6 @@ function getStatistics(response) {
   $speakersDataHoursValue.text(formatTime(hours, minutes, seconds));
   $speakersDataSpeakerValue.text(response.total_speakers);
   $speakersDataLanguagesValue.text(response.total_languages);
-  $speakersDataLoader.addClass("d-none");
   $speakersDataHoursWrapper.removeClass("d-none");
   $speakersDataSpeakerWrapper.removeClass("d-none");
   $speakersDataLanguagesWrapper.removeClass("d-none");

@@ -12,12 +12,10 @@ describe("getStatistics",()=>{
     mockLocalStorage();
     localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
     const $speakersData = $("#speaker-data");
-    const $speakersDataLoader = $speakersData.find('#loader1');
     const $speakerDataDetails = $speakersData.find('#contribution-details');
 
     getStatistics({},null, "");
 
-    expect($speakersDataLoader.hasClass('d-none')).toEqual(true);
     expect($speakerDataDetails.hasClass('d-none')).toEqual(false);
     localStorage.clear()
 

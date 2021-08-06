@@ -13,14 +13,11 @@ const { context_root } = require('./env-api');
 
 function getStatistics(response, language, module) {
   const $speakersData = $("#speaker-data");
-  const $speakersDataLoader = $speakersData.find('#loader1');
   const $speakerDataDetails = $speakersData.find('#contribution-details');
 
-  $speakersDataLoader.removeClass('d-none');
   $speakerDataDetails.addClass('d-none');
   setSpeakerData(response ? [response] : null, language, module);
 
-  $speakersDataLoader.addClass('d-none');
   $speakerDataDetails.removeClass('d-none');
 
 }

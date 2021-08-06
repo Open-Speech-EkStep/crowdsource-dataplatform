@@ -38,7 +38,6 @@ function isLanguageAvailable(data, lang) {
 
 function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
-    const $speakersDataLoader = $speakersData.find('#loader1');
     const $speakerDataDetails = $speakersData.find('#contribution-details');
     const $speakerDataLanguagesWrapper = $('#languages-wrapper');
     const activeDurationText = $('#duration').find('.active')[0].dataset.value;
@@ -67,13 +66,11 @@ function updateLanguage(language) {
                         const langaugeExists = isLanguageAvailable(dData, language);
 
                         if (langaugeExists) {
-                            $speakersDataLoader.removeClass('d-none');
                             $speakerDataLanguagesWrapper.addClass('d-none');
                             $speakerDataDetails.addClass('d-none');
                             generateIndiaMap(language, MODULE.dekho);
                             updateLineGraph(language, activeDurationText, MODULE.dekho, "Images labelled", "Images validated");
                             setSpeakerData(dData, language, "dekho");
-                            $speakersDataLoader.addClass('d-none');
                             $speakerDataDetails.removeClass('d-none');
                         } else {
                             const previousLanguage = localStorage.getItem('previousLanguage');

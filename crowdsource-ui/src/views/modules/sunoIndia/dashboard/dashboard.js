@@ -42,7 +42,6 @@ function isLanguageAvailable(data, lang) {
 
 function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
-    const $speakersDataLoader = $speakersData.find('#loader1');
     const $speakerDataDetails = $speakersData.find('#contribution-details');
     const $speakerDataLanguagesWrapper = $('#languages-wrapper');
     const activeDurationText = $('#duration').find('.active')[0].dataset.value;
@@ -70,13 +69,11 @@ function updateLanguage(language) {
                         const langaugeExists = isLanguageAvailable(sData, language);
 
                         if (langaugeExists) {
-                            $speakersDataLoader.removeClass('d-none');
                             $speakerDataLanguagesWrapper.addClass('d-none');
                             $speakerDataDetails.addClass('d-none');
                             generateIndiaMap(language, MODULE.suno);
                             updateLineGraph(language, activeDurationText, MODULE.suno, "Transcribed", "Validated");
                             setSpeakerData(sData, language);
-                            $speakersDataLoader.addClass('d-none');
                             $speakerDataDetails.removeClass('d-none');
                         } else {
                             const previousLanguage = localStorage.getItem('previousLanguage');
@@ -92,7 +89,7 @@ function updateLanguage(language) {
                 })
                 .catch((err) => { console.log(err) });
         });
-    
+
 }
 
 const initializeBlock = function () {

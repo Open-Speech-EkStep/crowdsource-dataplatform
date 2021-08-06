@@ -62,9 +62,7 @@ function isLanguageAvailable(data, lang) {
 
 function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
-    const $speakersDataLoader = $speakersData.find('#loader1');
     const $speakerDataDetails = $speakersData.find('#contribution-details');
-    const $speakerContributionData = $speakersData.find('.contribution-data');
     const $speakerDataLanguagesWrapper = $('#languages-wrapper');
     const $speakerDataLanguagesValue = $('#languages-value');
     const $speakersDataSpeakerValue = $('#speaker-value');
@@ -97,7 +95,6 @@ function updateLanguage(language) {
                         const langaugeExists = isLanguageAvailable(bData, language);
 
                         if (langaugeExists) {
-                            $speakersDataLoader.removeClass('d-none');
                             $speakerDataLanguagesWrapper.addClass('d-none');
                             $speakerDataDetails.addClass('d-none');
                             updateGraph(language, activeDurationText);
@@ -116,19 +113,14 @@ function updateLanguage(language) {
                             if (speakersData.languages) {
                                 $speakerDataLanguagesValue.text(speakersData.languages);
                                 $speakerDataLanguagesWrapper.removeClass('d-none');
-                                $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4')
-                                $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xl-3');
                             } else {
                                 $speakerDataLanguagesWrapper.addClass('d-none');
-                                $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xl-3');
-                                $speakerContributionData.addClass('col-12 col-md-4 col-lg-4 col-xl-4')
                             }
 
                             $speakersDataContributionValue.text(formatTime(contributedHours, contributedMinutes, contributedSeconds));
                             $speakersDataValidationValue.text(formatTime(validatedHours, validatedMinutes, validatedSeconds));
                             $speakersDataSpeakerValue.text(speakersData.speakers);
 
-                            $speakersDataLoader.addClass('d-none');
                             $speakerDataDetails.removeClass('d-none');
                         } else {
                             const previousLanguage = localStorage.getItem('previousLanguage');
@@ -146,7 +138,7 @@ function updateLanguage(language) {
                 })
                 .catch((err) => { console.log(err) });
         });
-    
+
 }
 
 const initializeBlock = function () {
