@@ -64,4 +64,16 @@ const hasUserRegistered = function (){
   return parsedUserDetails ? true : false;
 }
 
-  module.exports =  {showErrorPopup,  getContributedAndTopLanguage, onActiveNavbar, isMobileDevice,hasUserRegistered};
+const safeErrorHandling = (data) => {
+  if (data && !data.ok) 
+    showErrorPopup();
+  return data;
+}
+
+const safeJqueryErrorHandling = (e) => {
+  if(e && e.statusText !== "error")
+  showErrorPopup();
+}
+
+
+module.exports =  {safeJqueryErrorHandling, showErrorPopup, safeErrorHandling, getContributedAndTopLanguage, onActiveNavbar, isMobileDevice,hasUserRegistered};

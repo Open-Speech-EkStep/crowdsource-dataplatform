@@ -9,7 +9,7 @@ const {
     setStartRecordingBtnOnClick,
 } = require('./speakerDetails');
 
-const { getContributedAndTopLanguage,hasUserRegistered, showErrorPopup } = require('./common');
+const { getContributedAndTopLanguage,hasUserRegistered,safeJqueryErrorHandling } = require('./common');
 const { addToLanguage } = require('../../views/common/languageNavBar/languageNavBar');
 const { updateGoalProgressBarFromJson } = require('../../../build/js/common/common')
 
@@ -86,8 +86,8 @@ const getStatsSummary = function () {
             bData.total_speakers = bData2.count || 0;
             getStatistics(bData || {});
         });
-    }).fail(() => {
-        showErrorPopup();
+    }).fail((e) => {
+        safeJqueryErrorHandling(e);
     });
     $.getJSON(`${context_root}/aggregated-json/topLanguagesByHoursContributed.json`, (jsonData) => {
         const top_languages_by_hours = jsonData.filter(d => d.type == "text");
@@ -107,15 +107,15 @@ const getStatsSummary = function () {
 
         const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
         updateHrsForSayAndListen(contributionLanguage);
-    }).fail(() => {
-        showErrorPopup();
+    }).fail((e) => {
+        safeJqueryErrorHandling(e);
     });
     $.getJSON(`${context_root}/aggregated-json/topLanguagesBySpeakerContributions.json`, (jsonData) => {
         const top_languages_by_speakers = jsonData.filter(d => d.type == "text");
         const speakers = getContributedAndTopLanguage(top_languages_by_speakers, "speakers");
         localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(speakers));
-    }).fail(() => {
-        showErrorPopup();
+    }).fail((e) => {
+        safeJqueryErrorHandling(e); 
     });
 }
 

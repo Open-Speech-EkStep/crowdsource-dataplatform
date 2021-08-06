@@ -8,7 +8,7 @@ const { cdn_url } = require('./env-api');
 const { onChangeUser } = require('./header');
 const { MODULE, CONTRIBUTION_LANGUAGE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
-const { showErrorPopup } = require('./common');
+const { showErrorPopup, safeErrorHandling } = require('./common');
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -442,6 +442,7 @@ $(document).ready(() => {
       credentials: 'include',
       mode: 'cors'
     })
+    .then(safeErrorHandling)
       .then((data) => {
         if (!data.ok) {
           throw Error(data.statusText || 'HTTP error');
@@ -466,8 +467,6 @@ $(document).ready(() => {
       }
 
       initializeComponent();
-    }).catch(() => {
-        showErrorPopup();
     });
   }
 });

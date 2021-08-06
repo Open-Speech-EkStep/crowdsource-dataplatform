@@ -7,7 +7,7 @@ const {
 } = require('./constants');
 const { setLangNavBar } = require('../common/languageNavBar')
 
-const { getContributedAndTopLanguage, showByHoursChart, updateLocaleLanguagesDropdown, showErrorPopup } = require('./common');
+const { getContributedAndTopLanguage, showByHoursChart, updateLocaleLanguagesDropdown, safeJqueryErrorHandling } = require('./common');
 const { setSpeakerData } = require('./contributionStats');
 const { context_root } = require('./env-api');
 
@@ -89,8 +89,8 @@ const getStats = (module) => {
       bData.total_speakers = bData2.count || 0;
       getStatistics(bData || {}, null, module.value);
     });
-  }).fail(() => {
-    showErrorPopup();
+  }).fail((e) => {
+    safeJqueryErrorHandling(e);
   });
 }
 const getChartStats = (module) => {
@@ -110,16 +110,16 @@ const getChartStats = (module) => {
       $("#view_all_btn").show();
       $("#contribution_stats").show();
     }
-  }).fail(() => {
-    showErrorPopup();
+  }).fail((e) => {
+    safeJqueryErrorHandling(e);
   });
 }
 const getSpeakerChartStats = (module) => {
   $.getJSON(`${context_root}/aggregated-json/topLanguagesBySpeakerContributions.json`, (jsonData) => {
     const top_languages_by_speakers = jsonData.filter(d => d.type == module["api-type"]);
     localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(top_languages_by_speakers));
-  }).fail(() => {
-    showErrorPopup();
+  }).fail((e) => {
+    safeJqueryErrorHandling(e);
   });
 }
 const getStatsSummary = function (url, module, callBack = () => { }) {

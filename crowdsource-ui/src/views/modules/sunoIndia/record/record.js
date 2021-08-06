@@ -16,7 +16,7 @@ const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showErrorPopup, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showErrorPopup,safeErrorHandling, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
 const { initializeFeedbackModal } = require('../common/feedback');
 const { setDataSource } = require('../common/sourceInfo');
@@ -65,10 +65,10 @@ function uploadToServer(cb) {
     mode: 'cors',
     body: fd,
   })
+   .then(safeErrorHandling)
     .then((res) => res.json())
     .then(() => {
     })
-    .catch(() => {showErrorPopup()})
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -267,10 +267,10 @@ function markContributionSkipped() {
     },
     body: JSON.stringify(reqObj),
   })
+  .then(safeErrorHandling)
     .then((res) => res.json())
     .then(() => {
-    })
-    .catch(() => {showErrorPopup()})
+    });
 }
 
 function addListeners() {
@@ -557,6 +557,7 @@ function executeOnLoad() {
           'Content-Type': 'application/json',
         },
       })
+      .then(safeErrorHandling)
         .then((data) => {
           if (!data.ok) {
             throw Error(data.statusText || 'HTTP error');
@@ -591,15 +592,12 @@ function executeOnLoad() {
           setFooterPosition();
           initialize();
         })
-        .catch(() => {
-          showErrorPopup()
-        })
         .then(() => {
           $loader.hide();
         });
     }
   } catch (err) {
-    showErrorPopup()
+    console.log(err);
   }
 }
 

@@ -20,7 +20,7 @@ const {
 
 const { downloadPdf } = require('../common/downloadableBadges');
 const { showUserProfile, onChangeUser, onOpenUserDropDown } = require('../common/header');
-const { showByHoursChartThankyouPage, setBadge, updateLikhoLocaleLanguagesDropdown, showErrorPopup, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage } = require('../common/common');
+const { showByHoursChartThankyouPage, setBadge, updateLikhoLocaleLanguagesDropdown, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage } = require('../common/common');
 const { initializeFeedbackModal } = require('../common/feedback');
 
 const CURRENT_INDEX = "likhoCurrentIndex";
@@ -112,7 +112,6 @@ const getLanguageStats = function () {
         updateShareContent("", 0);
       }
     })
-    .catch(() => showErrorPopup());
 };
 
 function setSentencesContributed() {

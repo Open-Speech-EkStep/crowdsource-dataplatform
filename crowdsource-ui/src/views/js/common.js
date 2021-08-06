@@ -128,7 +128,7 @@ const getAvailableLanguages = (type) => {
 };
 
 const getLanguageTargetInfo = (type, sourceLanguage, targetLanguage) => {
-  return fetch(`/target-info/${type}/${sourceLanguage}?targetLanguage=${targetLanguage}`).then((data) => {
+  return fetch(`/target-info/${type}/${sourceLanguage}?targetLanguage=${targetLanguage}`).then(safeErrorHandling).then((data)=>{
     if (!data.ok) {
       throw Error(data.statusText || 'HTTP error');
     } else {
@@ -136,6 +136,12 @@ const getLanguageTargetInfo = (type, sourceLanguage, targetLanguage) => {
     }
   });
 };
+
+const safeErrorHandling = (data) => {
+  if (data && !data.ok) 
+    showErrorPopup();
+  return data;
+}
 
 const showFucntionalCards = (type, from, to) => {
   try {
@@ -622,4 +628,9 @@ const showErrorPopup = () => {
   $errorDialog.modal('show');
 }
 
-module.exports = { isMobileDevice, showErrorPopup, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, landToHome, showOrHideExtensionCloseBtn, hasUserRegistered, updateGoalProgressBar, replaceSubStr, getTopLanguage, isInTopLanguage, getTop3Languages, setCurrentProgress, getCountBasedOnSource, updateGoalProgressBarFromJson, languageFilter, reduceList };
+const safeJqueryErrorHandling = (e) => {
+  if(e && e.statusText !== "error")
+  showErrorPopup();
+}
+
+module.exports = {safeJqueryErrorHandling, isMobileDevice, safeErrorHandling, showErrorPopup, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, landToHome, showOrHideExtensionCloseBtn, hasUserRegistered, updateGoalProgressBar, replaceSubStr, getTopLanguage, isInTopLanguage, getTop3Languages, setCurrentProgress, getCountBasedOnSource, updateGoalProgressBarFromJson, languageFilter, reduceList };
