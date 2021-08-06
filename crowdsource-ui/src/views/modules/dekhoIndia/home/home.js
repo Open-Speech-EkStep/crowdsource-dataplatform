@@ -1,5 +1,5 @@
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
-const { redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages, hasUserRegistered, updateLocaleLanguagesDropdown, updateGoalProgressBarFromJson } = require('../common/common');
+const { redirectToLocalisedPage, showFucntionalCards, hasUserRegistered, updateLocaleLanguagesDropdown, updateGoalProgressBarFromJson } = require('../common/common');
 const { getLocaleString } = require('../common/utils');
 const {
   setUserModalOnShown,
@@ -94,7 +94,6 @@ function initializeBlock() {
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
   initializeFeedbackModal();
-  getAvailableLanguages("ocr");
   getLocaleString().then(() => {
     initializeBlock();
   }).catch(() => {

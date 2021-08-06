@@ -1,6 +1,6 @@
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
 
-const { redirectToLocalisedPage, showFucntionalCards, getAvailableLanguages, updateLocaleLanguagesDropdown, updateGoalProgressBarFromJson, hasUserRegistered, showByHoursChart } = require('../common/common');
+const { redirectToLocalisedPage, showFucntionalCards, updateLocaleLanguagesDropdown, updateGoalProgressBarFromJson, hasUserRegistered, showByHoursChart } = require('../common/common');
 const { getLocaleString } = require('../common/utils');
 const {
   setUserModalOnShown,
@@ -96,7 +96,6 @@ function initializeBlock() {
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
   initializeFeedbackModal();
-  getAvailableLanguages("asr");
   getLocaleString().then(() => {
     initializeBlock();
   }).catch(() => {

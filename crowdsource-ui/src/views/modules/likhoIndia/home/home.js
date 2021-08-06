@@ -1,5 +1,5 @@
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
-const { redirectToLocalisedPage, getAvailableLanguages, showFucntionalCards, updateGoalProgressBarFromJson, hasUserRegistered, updateLikhoLocaleLanguagesDropdown } = require('../common/common');
+const { redirectToLocalisedPage, showFucntionalCards, updateGoalProgressBarFromJson, hasUserRegistered, updateLikhoLocaleLanguagesDropdown } = require('../common/common');
 const {
   getLocaleString,
 } = require('../common/utils');
@@ -47,66 +47,55 @@ function initializeBlock() {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);
   }
 
-  getAvailableLanguages('parallel').then(languagePairs => {
-    const { datasetLanguages } = languagePairs;
-    let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+  let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
 
-    let nativeLanguage = [];
-    datasetLanguages.forEach((item) => {
-      const data = ALL_LANGUAGES.find(ele => ele.value == item);
-      if (data) {
-        nativeLanguage.push(data);
-      }
-    }
-    );
-    addToLanguage('from-language', ALL_LANGUAGES);
-    if (fromLanguage && toLanguage) {
-      const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
-      addToLanguage('to-language', languages);
-      updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
-      showFucntionalCards('parallel', fromLanguage, toLanguage);
-      localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
+  addToLanguage('from-language', ALL_LANGUAGES);
+  if (fromLanguage && toLanguage) {
+    const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
+    addToLanguage('to-language', languages);
+    updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
+    showFucntionalCards('parallel', fromLanguage, toLanguage);
+    localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
+    $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
+    $(`#to-language option[value=${toLanguage}]`).attr("selected", "selected");
+  } else {
+    fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    if (fromLanguage) {
       $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
-      $(`#to-language option[value=${toLanguage}]`).attr("selected", "selected");
     } else {
-      fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-      if (fromLanguage) {
-        $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
-      } else {
-        $('#from-language option:first-child').attr("selected", "selected");
-        fromLanguage = $('#from-language option:first-child').val();
-      }
-      const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
-      addToLanguage('to-language', languages);
-      $('#to-language option:first-child').attr("selected", "selected");
-      toLanguage = $('#to-language option:first-child').val();
-      updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
-      showFucntionalCards('parallel', fromLanguage, toLanguage);
-      localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-      localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
+      $('#from-language option:first-child').attr("selected", "selected");
+      fromLanguage = $('#from-language option:first-child').val();
     }
+    const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
+    addToLanguage('to-language', languages);
+    $('#to-language option:first-child').attr("selected", "selected");
+    toLanguage = $('#to-language option:first-child').val();
+    updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
+    showFucntionalCards('parallel', fromLanguage, toLanguage);
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
+    localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
+  }
 
-    $('#from-language').on('change', (e) => {
-      fromLanguage = e.target.value;
-      localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-      const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
-      addToLanguage('to-language', languages);
-      $('#to-language option:first-child').attr("selected", "selected");
-      toLanguage = $('#to-language option:first-child').val();
-      localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
-      updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
-      sessionStorage.setItem("i18n", "en");
-      redirectToLocalisedPage();
-      updatePage(fromLanguage, toLanguage);
-    });
+  $('#from-language').on('change', (e) => {
+    fromLanguage = e.target.value;
+    localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
+    const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
+    addToLanguage('to-language', languages);
+    $('#to-language option:first-child').attr("selected", "selected");
+    toLanguage = $('#to-language option:first-child').val();
+    localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
+    updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
+    sessionStorage.setItem("i18n", "en");
+    redirectToLocalisedPage();
+    updatePage(fromLanguage, toLanguage);
+  });
 
-    $('#to-language').on('change', (e) => {
-      toLanguage = e.target.value;
-      const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-      localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
-      updatePage(fromLanguage, toLanguage);
-    });
+  $('#to-language').on('change', (e) => {
+    toLanguage = e.target.value;
+    const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
+    updatePage(fromLanguage, toLanguage);
   });
 
   $('#start_recording').on('click', () => {
