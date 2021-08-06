@@ -1,4 +1,4 @@
-const { calculateTime, formatTime } = require('./utils');
+const { calculateTime, formatTime, translate } = require('./utils');
 const { LOCALE_STRINGS } = require('./constants');
 const chartReg = {};
 
@@ -52,6 +52,8 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
         });
       }
     }
+
+    chartData.forEach(data=> data.language = translate(data.language))
     chart.data = chartData ? chartData.reverse() : [];
     // Create axes
     const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());

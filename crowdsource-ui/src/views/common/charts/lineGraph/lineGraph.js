@@ -1,5 +1,5 @@
 const fetch = require('./fetch')
-const { calculateTime, formatTime, getJson } = require('./utils');
+const { calculateTime, formatTime, getJson, translate } = require('./utils');
 const { CURRENT_MODULE, MODULE } = require('./constants');
 
 const $timelineLoader = $('#timeline-loader');
@@ -78,7 +78,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     dateAxis.renderer.grid.template.disabled = true;
     dateAxis.renderer.baseGrid.disabled = false;
     dateAxis.renderer.labels.template.fill = '#000';
-    dateAxis.title.text = 'Month';
+    dateAxis.title.text = translate('Month');
     dateAxis.renderer.labels.template.fontSize = 12;
     dateAxis.title.fontSize = 12;
 
@@ -87,7 +87,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     hourAxis.renderer.minGridDistance = 50;
     hourAxis.renderer.grid.template.strokeDasharray = "3,3";
     hourAxis.renderer.labels.template.fill = '#000';
-    hourAxis.title.text = currentModule == "dekho" ? "Images" : currentModule == MODULE.likho.value ? "Sentences" : 'Contribution (in hours)';
+    hourAxis.title.text = currentModule == "dekho" ? translate("Images") : currentModule == MODULE.likho.value ? translate("Sentences") : translate('Contribution (in hours)');
     hourAxis.renderer.labels.template.fontSize = 12;
     hourAxis.title.fontSize = 12;
 

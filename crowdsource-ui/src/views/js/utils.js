@@ -173,6 +173,11 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
   }
 };
 
+const translate = function(state) {
+  const localeStrings = JSON.parse(localStorage.getItem('localeString'));
+  return localeStrings[state] || state;
+}
+
 const formatTime = function (hours, minutes = 0, seconds = 0, translate = true) {
   const localsStrings = JSON.parse(localStorage.getItem('localeString'));
   const hrStr = translate ? localsStrings['hour(s)']: 'hour(s)';
@@ -290,5 +295,6 @@ module.exports = { setPageContentHeight,
   getDeviceInfo,
   getBrowserInfo,
   formatTimeForLegends,
-  formatTransAndImages
+  formatTransAndImages,
+  translate
 }
