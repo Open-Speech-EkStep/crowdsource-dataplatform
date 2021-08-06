@@ -146,7 +146,8 @@ from contributions con
 			and (is_profane=false)
 			--and (conf3.value=0 or for_demo=true)
  			and con.contribution_id not in 
-			(select contribution_id from validations where validated_by=$1 and action!='skip' group by contribution_id having count(1) > 4)
+			(select contribution_id from validations where action!='skip' group by contribution_id having count(1) > 4)
+      and con.contribution_id not in (select contribution_id from validations where validated_by=$1)
 	limit 5;`
 
 const getContributionListForParallel = `
@@ -161,7 +162,8 @@ from contributions con
 			and (is_profane=false)
 			--and (conf3.value=0 or for_demo=true)
  			and con.contribution_id not in 
-			(select contribution_id from validations where validated_by=$1 and action!='skip' group by contribution_id having count(1) > 4)
+			(select contribution_id from validations where action!='skip' group by contribution_id having count(1) > 4)
+      and con.contribution_id not in (select contribution_id from validations where validated_by=$1)
 	limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, action, validated_by, date, state_region, country, device, browser) 
