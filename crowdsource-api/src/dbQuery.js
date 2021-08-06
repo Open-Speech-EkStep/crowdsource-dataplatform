@@ -135,52 +135,34 @@ and (conf2.value=0 or for_demo=true)
  group by dr."dataset_row_id", dr.media->>'data', mds.params limit 5`;
 
 const getContributionListQuery = `
-with conval as (
-  select c.contribution_id, count(v.validation_id) count from contributions c
-  left join validations v on c.contribution_id=v.contribution_id and v.action!='skip'
-  where c.action='completed' and c.media->>'language'=$3 
-  group by c.contribution_id
-  having count(v.*)<5
-  )  
-  select distinct con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info, c.count
-  from conval c
-    inner join contributions con on c.contribution_id=con.contribution_id
-      inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and con.contributed_by!=$1 and ds.type=$2
-      left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
-    inner join configurations conf on conf.config_name='validation_count' 
-      inner join configurations conf2 on conf2.config_name='include_profane' 
-      inner join configurations conf3 on conf3.config_name='show_demo_data'
-      where ds.media->>'language'=$3
-        and coalesce(mds.is_active, true) = true
-        and (conf2.value=1 or is_profane=false)
-        and (conf3.value=0 or for_demo=true)
-        and con.contribution_id not in (select contribution_id from validations where validated_by=$1) 			
-    order by c.count desc
-    limit 5;`
+select con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info
+from contributions con 
+    inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and con.contributed_by!=$1
+	and ds.type=$2
+    left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
+    where  con.action='completed' 
+			and ds.media->>'language'=$3
+			and coalesce(mds.is_active, true) = true
+			and (is_profane=false)
+			--and (conf3.value=0 or for_demo=true)
+ 			and con.contribution_id not in 
+			(select contribution_id from validations where validated_by=$1 and action!='skip' group by contribution_id having count(1) > 4)
+	limit 5;`
 
 const getContributionListForParallel = `
-with conval as (
-  select c.contribution_id, count(v.validation_id) count from contributions c
-  left join validations v on c.contribution_id=v.contribution_id and v.action!='skip'
-  where c.action='completed' and c.media->>'language'=$4
-  group by c.contribution_id
-  having count(v.*)<5
-  )
-  select distinct con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info, c.count
-  from conval c
-    inner join contributions con on c.contribution_id=con.contribution_id
-      inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and con.contributed_by!=$1 and ds.type=$2
-      left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
-    inner join configurations conf on conf.config_name='validation_count'
-      inner join configurations conf2 on conf2.config_name='include_profane'
-      inner join configurations conf3 on conf3.config_name='show_demo_data'
-      where ds.media->>'language'=$3
-        and coalesce(mds.is_active, true) = true
-        and (conf2.value=1 or is_profane=false)
-        and (conf3.value=0 or for_demo=true)
-        and con.contribution_id not in (select contribution_id from validations where validated_by=$1)	
-    order by c.count desc
-    limit 5;`
+select con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info
+from contributions con 
+    inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and con.contributed_by!=$1
+	and ds.type=$2 and con.media->>'language'=$4
+    left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
+    where  con.action='completed' 
+			and ds.media->>'language'=$3
+			and coalesce(mds.is_active, true) = true
+			and (is_profane=false)
+			--and (conf3.value=0 or for_demo=true)
+ 			and con.contribution_id not in 
+			(select contribution_id from validations where validated_by=$1 and action!='skip' group by contribution_id having count(1) > 4)
+	limit 5;`
 
 const addValidationQuery = `insert into validations (contribution_id, action, validated_by, date, state_region, country, device, browser) 
 select contribution_id, $3, $1, now(), $5, $6, $7, $8 from contributions inner join dataset_row on dataset_row.dataset_row_id=contributions.dataset_row_id 
