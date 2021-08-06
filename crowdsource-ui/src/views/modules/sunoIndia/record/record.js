@@ -95,6 +95,9 @@ const setAudioPlayer = function () {
   const $submitButton = $('#submit-edit-button');
 
   myAudio.addEventListener('play', () => {
+    $("#edit").removeAttr("disabled");
+    $("#virtualKeyBoardBtn").removeAttr("disabled");
+    $("#edit-text-suno").addClass("edit-text");
     hideElement(play);
     hideElement(resume);
     showElement(pause);
