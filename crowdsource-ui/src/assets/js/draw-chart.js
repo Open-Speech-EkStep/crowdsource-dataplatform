@@ -333,7 +333,7 @@ const drawTimelineChart = (timelineData) => {
         dateAxis.renderer.grid.template.disabled = true;
         dateAxis.renderer.baseGrid.disabled = false;
         dateAxis.renderer.labels.template.fill = '#000';
-        dateAxis.title.text = 'Time';
+        dateAxis.title.text = 'Month';
         dateAxis.renderer.labels.template.fontSize = 12;
         dateAxis.title.fontSize = 12;
 
