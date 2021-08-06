@@ -11,15 +11,15 @@ const {
     // toggleFooterPosition,
     getLocaleString
 } = require('../common/utils');
-const { hasUserRegistered , updateLikhoLocaleLanguagesDropdown} = require('../common/common');
-const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE,SPEAKER_DETAILS_KEY,CONTRIBUTION_LANGUAGE,
+const { hasUserRegistered, updateLikhoLocaleLanguagesDropdown } = require('../common/common');
+const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE, SPEAKER_DETAILS_KEY, CONTRIBUTION_LANGUAGE,
     LIKHO_TO_LANGUAGE } = require('../common/constants');
 const fetch = require('../common/fetch');
 
-const {setSpeakerData} = require('../common/contributionStats');
-const {initializeFeedbackModal} = require('../common/feedback')
+const { setSpeakerData } = require('../common/contributionStats');
+const { initializeFeedbackModal } = require('../common/feedback')
 
-const { onChangeUser , showUserProfile,onOpenUserDropDown} = require('../common/header');
+const { onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
 const { getJson } = require('../common/utils');
 const moment = require('moment');
 
@@ -42,7 +42,7 @@ function isLanguageAvailable(data, lang) {
     let langaugeExists = false;
     if (!lang) return true;
     data.forEach(item => {
-        if(item.language) {
+        if (item.language) {
             if (item.language.toLowerCase() === lang.toLowerCase()) {
                 langaugeExists = true;
             }
@@ -54,7 +54,7 @@ function isLanguageAvailable(data, lang) {
 const addToLanguage = function (id, list) {
     const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
     let defaultText = 'All Languages';
-    if(localeStrings){
+    if (localeStrings) {
         defaultText = localeStrings['All Languages'];
     }
 
@@ -62,10 +62,10 @@ const addToLanguage = function (id, list) {
     let options = '';
     options = options.concat(`<option value="">${defaultText}</option>`);
     list.forEach(lang => {
-      options = options.concat(`<option value=${lang.value}>${lang.text}</option>`);
+        options = options.concat(`<option value=${lang.value}>${lang.text}</option>`);
     });
     selectBar.innerHTML = options;
-  }
+}
 
 function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
@@ -74,15 +74,15 @@ function updateLanguage(language) {
     const $speakerDataLanguagesWrapper = $('#languages-wrapper');
     const activeDurationText = $('#duration').find('.active')[0].dataset.value;
     getJson("/aggregated-json/lastUpdatedAtQuery.json")
-    .then(res => {
-        const lastUpdatedAt = moment(res['timezone']).format('DD-MM-YYYY, h:mm:ss a')
-        if (lastUpdatedAt) {
-            $('#data-updated').text(` ${lastUpdatedAt}`);
-            $('#data-updated').removeClass('d-none');
-        } else {
-            $('#data-updated').addClass('d-none');
-        }
-    });
+        .then(res => {
+            const lastUpdatedAt = moment(res['timezone']).format('DD-MM-YYYY, h:mm:ss a')
+            if (lastUpdatedAt) {
+                $('#data-updated').text(` ${lastUpdatedAt}`);
+                $('#data-updated').removeClass('d-none');
+            } else {
+                $('#data-updated').addClass('d-none');
+            }
+        });
     getJson('/aggregated-json/participationStats.json')
         .then((participationData) => {
             const url = language ? '/aggregated-json/cumulativeDataByLanguage.json' : '/aggregated-json/cumulativeCount.json'
@@ -108,7 +108,8 @@ function updateLanguage(language) {
                         } else {
                             const previousLanguage = localStorage.getItem('previousLanguage');
                             languageToRecord = language;
-                            $("#language").val(previousLanguage);
+                            $("#from-dash-language").val(previousLanguage.split('-')[0]);
+                            $("#to-dash-language").val(previousLanguage.split('-')[1]);
                             $("#languageSelected").text(` ${language}, `);
                             $("#no-data-found").removeClass('d-none');
                             timer = setTimeout(() => {
@@ -118,7 +119,7 @@ function updateLanguage(language) {
                     } catch (error) { console.log(error) }
                 })
                 .catch((err) => { console.log(err) });
-        });    
+        });
 }
 
 
@@ -138,18 +139,18 @@ const executeOnLoad = function () {
     updateLanguage('');
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const contributionLanguage2 = localStorage.getItem(LIKHO_TO_LANGUAGE);
-    if(contributionLanguage) {
+    if (contributionLanguage) {
         updateLikhoLocaleLanguagesDropdown(contributionLanguage, contributionLanguage2);
     }
 
-    function checkAndReturnLanguage(fromLanguage, toLanguage){
-        if(!fromLanguage || fromLanguage === ""){
+    function checkAndReturnLanguage(fromLanguage, toLanguage) {
+        if (!fromLanguage || fromLanguage === "") {
             return "";
         }
-        if(!toLanguage || toLanguage === ""){
+        if (!toLanguage || toLanguage === "") {
             return "";
         }
-        return fromLanguage+"-"+toLanguage;
+        return fromLanguage + "-" + toLanguage;
     }
 
     $('#duration').on('click', (e) => {
@@ -161,7 +162,7 @@ const executeOnLoad = function () {
         const fromLanguage = $('#from-dash-language option:selected').val() || "";
         const toLanguage = $('#to-dash-language option:selected').val() || "";
         const selectedLanguage = checkAndReturnLanguage(fromLanguage, toLanguage);
-        updateLineGraph(selectedLanguage, selectedDuration, MODULE.likho, "Translations done","Translations validated");
+        updateLineGraph(selectedLanguage, selectedDuration, MODULE.likho, "Translations done", "Translations validated");
     });
 
     $("#no-data-found").on('mouseenter', () => {
@@ -176,12 +177,12 @@ const executeOnLoad = function () {
     const noDataFoundEl = document.getElementById('no-data-found');
     noDataFoundEl.addEventListener('touchstart', function () {
         clearTimeout(timer);
-    }, {passive: true});
+    }, { passive: true });
     noDataFoundEl.addEventListener('touchend', function () {
         timer = setTimeout(() => {
             $('#no-data-found').addClass('d-none');
         }, 5000);
-    }, {passive: true});
+    }, { passive: true });
 
     addToLanguage('to-dash-language', ALL_LANGUAGES);
 
@@ -189,25 +190,22 @@ const executeOnLoad = function () {
     let toLanguage = $('#to-dash-language option:first-child').val();
 
     $('#from-dash-language').on('change', (e) => {
-      fromLanguage = e.target.value === "" ? "" : e.target.value;
-      const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
-      addToLanguage('to-dash-language', languages);
-      $('#to-language option:first-child').attr("selected", "selected");
-      toLanguage = $('#to-language option:first-child').val();
-        // if(toLanguage !== "" && fromLanguage !== "") {
-        //     updateLanguage(fromLanguage + '-' +toLanguage);
-        // } else {
-        //     updateLanguage("");
-        // }
+        fromLanguage = e.target.value === "" ? "" : e.target.value;
+        const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
+        addToLanguage('to-dash-language', languages);
+        $('#to-language option:first-child').attr("selected", "selected");
+        toLanguage = $('#to-language option:first-child').val();
+        updateLanguage("");
     });
 
     $('#to-dash-language').on('change', (e) => {
-      toLanguage = e.target.value === "" ? "" : e.target.value;
-      if(toLanguage !== "" && fromLanguage !== "") {
-        updateLanguage(fromLanguage + '-' +toLanguage);
-      } else {
-        updateLanguage("");
-      }
+        toLanguage = e.target.value === "" ? "" : e.target.value;
+        if (toLanguage == "" && fromLanguage == "") {
+            updateLanguage("");
+        }
+        else {
+            updateLanguage(fromLanguage + '-' + toLanguage);
+        }
     });
 
     $("#contribute-now").on('click', () => {
@@ -216,11 +214,11 @@ const executeOnLoad = function () {
         localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
         localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
         localStorage.setItem("selectedType", "contribute");
-        if(!hasUserRegistered()){
+        if (!hasUserRegistered()) {
             $('#userModal').modal('show');
-            setStartRecordingBtnOnClick('./record.html',MODULE.likho.value);
+            setStartRecordingBtnOnClick('./record.html', MODULE.likho.value);
         } else {
-            location.href ='./record.html';
+            location.href = './record.html';
         }
     });
 
@@ -229,12 +227,12 @@ const executeOnLoad = function () {
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     $startRecordBtnTooltip.tooltip('disable');
-    if(hasUserRegistered()){
+    if (hasUserRegistered()) {
         const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
         const localSpeakerDataParsed = JSON.parse(speakerDetails);
         showUserProfile(localSpeakerDataParsed.userName);
     }
-    onChangeUser('./dashboard.html',MODULE.likho.value);
+    onChangeUser('./dashboard.html', MODULE.likho.value);
     onOpenUserDropDown();
 
     // toggleFooterPosition();
@@ -251,4 +249,4 @@ $(document).ready(() => {
 
 
 
-module.exports = {fetchDetail, isLanguageAvailable, updateLanguage}
+module.exports = { fetchDetail, isLanguageAvailable, updateLanguage }
