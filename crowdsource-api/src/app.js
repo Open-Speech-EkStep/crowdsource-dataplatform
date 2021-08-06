@@ -433,7 +433,12 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             '10 - 30 years',
             '30 - 60 years',
             '60+ years',
-            'Month'
+            'Month',
+            'People',
+            'Labelled',
+            'Translated',
+            'Images labelled',
+            'Images validated'
         ];
 
         const langSttr = {};

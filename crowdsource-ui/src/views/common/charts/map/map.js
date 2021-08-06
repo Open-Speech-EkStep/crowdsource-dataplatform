@@ -85,34 +85,34 @@ const drawMap = function (response, moduleType) {
   });
   const sunoTooltip = `<div style="text-align: left;">
                           <h6>{state}</h6> 
-                          <div style="text-align: left;">{total_speakers} People</div>
+                          <div style="text-align: left;">{total_speakers} ${translate('People')}</div>
                           <div style="text-align: left;">
-                            <label>Transcribed: </label>
+                            <label>${translate('Transcribed')}: </label>
                             <label style="margin-left: 8px">{contributed_time}</label>
                           </div>
                           <div style="text-align: left;">
-                            Validated:  <label style="margin-left: 8px">{validated_time}</label>
+                            ${translate('Validated')}:  <label style="margin-left: 8px">{validated_time}</label>
                           </div>
                         </div>`
   const likhoTooltip = `<div style="text-align: left;">
                           <h6>{state}</h6> 
-                          <div style="text-align: left;">{total_speakers} People</div>
+                          <div style="text-align: left;">{total_speakers} ${translate('People')}</div>
                           <div style="text-align: left;">
-                            <label>Translations done: </label>
+                            <label>${translate('Translations done')}: </label>
                             <label style="margin-left: 8px">{contributed_time}</label>
                           </div> 
-                          <div style="text-align: left;">Translations validated:  
+                          <div style="text-align: left;">${translate('Translations validated')}:  
                             <label style="margin-left: 8px">{validated_time}</label>
                           </div>
                         </div>`
   const dekhoTooltip = `<div style="text-align: left;">
                           <h6>{state}</h6> 
-                          <div style="text-align: left;">{total_speakers} People</div>
+                          <div style="text-align: left;">{total_speakers} ${translate('People')}</div>
                           <div style="text-align: left;">
-                            <label>Images labelled: </label> 
+                            <label>${translate('Images labelled')}: </label> 
                             <label style="margin-left: 8px">{contributed_time}</label>
                           </div> 
-                          <div style="text-align: left;">Images validated:
+                          <div style="text-align: left;">${translate('Images validated')}:
                             <label style="margin-left: 8px">{validated_time}</label>
                           </div>
                         </div>`

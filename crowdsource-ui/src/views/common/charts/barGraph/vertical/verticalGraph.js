@@ -53,7 +53,16 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
       }
     }
 
-    chartData.forEach(data=> data.language = translate(data.language))
+    chartData.forEach(data=> {
+      if(type === 'likho'){
+        let languages = data.language.split("-")
+        let fromLanguage = translate(languages[0]);
+        let toLanguage = translate(languages[1]);
+        data.language = `${fromLanguage}-${toLanguage}`;
+      } else {
+        data.language = translate(data.language);
+      }
+    });
     chart.data = chartData ? chartData.reverse() : [];
     // Create axes
     const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
