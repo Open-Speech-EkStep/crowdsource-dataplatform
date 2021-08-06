@@ -377,8 +377,6 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'Translations',
             'Speakers',
             'images',
-            'recordings',
-            'image labels',
             'Contribute',
             'Validate',
             'Telangana',
@@ -416,7 +414,23 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'Mizoram',
             'Nagaland',
             'National Capital Territory of Delhi',
-            'Ladakh'
+            'Ladakh',
+            'recordings',
+            'image labels',
+            'Contributed',
+            'Validated',
+            'Transcribed',
+            'Translations done',
+            'Translations validated',
+            'Male',
+            'Female',
+            'Others',
+            'Not Specified',
+            'upto 10 years',
+            '10 - 30 years',
+            '30 - 60 years',
+            '60+ years',
+            'Month'
         ];
 
         const langSttr = {};
