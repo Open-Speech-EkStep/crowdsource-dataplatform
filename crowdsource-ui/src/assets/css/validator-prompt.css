@@ -109,6 +109,10 @@ a {
   .mobile-view {
     display: block;
   }
+
+  .original-text, #edit-text label {
+    font-size: 12px;
+  }
   #edit-text textarea, #edit-text-suno textarea {
     font-size: 16px;
   }
