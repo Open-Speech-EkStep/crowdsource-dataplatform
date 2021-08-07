@@ -52,6 +52,7 @@ const {
     validateMediaTypeInput,
     validateLanguageGoalInput
 } = require('./middleware/validateUserInputs');
+const { markContributionSkippedInCache } = require('./middleware/cacheMiddleware')
 
 // const Ddos = require('ddos');
 // const ddos = new Ddos({ burst: 12, limit: 70 })
@@ -84,6 +85,7 @@ const currentDateAndTime = () => {
 
 const multer = require('multer');
 const xss = require('xss');
+
 const multerStorage = multer.diskStorage({
     destination: function (req, file, cb) {
         if (!fs.existsSync('uploads')) {
@@ -219,7 +221,7 @@ router.post('/report', async (req, res) => {
     return res.send({ statusCode: 200, message: 'Reported successfully.' });
 });
 
-router.post('/skip', validateInputForSkip, (req, res) => {
+router.post('/skip', validateInputForSkip, markContributionSkippedInCache, (req, res) => {
     const language = req.body.language || ''
     markContributionSkipped(req.cookies.userId, req.body.sentenceId, req.body.userName, language, req.body.state_region, req.body.country, req.body.device, req.body.browser)
         .then(() => {
@@ -235,7 +237,7 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
     const file = req.file;
     const datasetId = req.body.sentenceId;
     const { userId } = req.cookies;
-    const { speakerDetails, language, state = '', country = '', device = '', browser = '' } = req.body;
+    const { speakerDetails, language, state = '', country = '', device = '', browser = '', type } = req.body;
     const speakerDetailsJson = JSON.parse(speakerDetails);
     const { userName, age = '', motherTongue = '', gender = '' } = speakerDetailsJson;
 
@@ -246,7 +248,7 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
         uploadFile(file.path, userName, userId, language)
             .then(() => {
                 const audioPath = `raw/landing/${language}/audio/users/${userId}/${userName}/uploads/${file.filename}`;
-                updateDbWithAudioPath(audioPath, datasetId, userId, userName, state, country, audioDuration, language, age, gender, motherTongue, device, browser,
+                updateDbWithAudioPath(audioPath, datasetId, userId, userName, state, country, audioDuration, language, age, gender, motherTongue, device, browser, type,
                     (resStatus, resBody) => {
                         removeTempFile(file);
                         res.status(resStatus).send(resBody);
@@ -259,7 +261,7 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
     }
     else {
         const userInput = xss(req.body.userInput);
-        updateDbWithUserInput(userName, userId, language, userInput, datasetId, state, country, age, gender, motherTongue, device, browser,
+        updateDbWithUserInput(userName, userId, language, userInput, datasetId, state, country, age, gender, motherTongue, device, browser, type,
             (resStatus, resBody) => {
                 res.status(resStatus).send(resBody);
             })

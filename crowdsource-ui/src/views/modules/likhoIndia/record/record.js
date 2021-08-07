@@ -40,6 +40,7 @@ function uploadToServer(cb) {
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
   fd.append('browser', getBrowserInfo());
+  fd.append('type', MODULE.likho["api-type"]);
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -112,7 +113,9 @@ function markContributionSkipped() {
     device: getDeviceInfo(),
     browser: getBrowserInfo(),
     state_region: state_region,
-    country: country
+    country: country,
+    type: MODULE.likho["api-type"],
+    fromLanguage: localStorage.getItem(CONTRIBUTION_LANGUAGE)
   };
   fetch('/skip', {
     method: 'POST',

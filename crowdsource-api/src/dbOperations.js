@@ -56,7 +56,8 @@ const {
     getValidationHoursForText,
     getContributionAmount,
     getValidationAmount,
-    getUserRewardsQuery
+    getUserRewardsQuery,
+    getContributionDataForCaching
 } = require('./dbQuery');
 
 const {
@@ -95,6 +96,8 @@ const {
 } = require('./profanityCheckerQueries')
 
 const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP, BADGE_SEQUENCE } = require('./constants');
+
+const cacheOperation = require('./cache/cacheOperations')
 
 const envVars = process.env;
 const pgp = require('pg-promise')();
@@ -139,6 +142,7 @@ const updateDbWithAudioPath = async (
     motherTongue,
     device,
     browser,
+    type,
     cb
 ) => {
     const validLanguage = await checkLanguageValidity(datasetId, language)
@@ -169,8 +173,8 @@ const updateDbWithAudioPath = async (
                 }
             });
             db.none(updateViews).then();
-            // db.none(updateMaterializedViews).then();
             cb(200, { success: true });
+            cacheOperation.removeItemFromCache(datasetId, type, language, '');
         })
         .catch((err) => {
             console.log(err);
@@ -214,7 +218,7 @@ const getMediaBasedOnAge = function (
     return (db.any(query, params));
 };
 
-const updateAndGetMedia = function (req, res) {
+const updateAndGetMedia = async (req, res) => {
     const userId = req.cookies.userId;
     const userName = req.body.userName;
     const language = req.body.language;
@@ -222,6 +226,12 @@ const updateAndGetMedia = function (req, res) {
     const type = req.params.type;
 
     const ageGroup = req.body.age;
+    const cacheResponse = await cacheOperation.getDataForContribution(type, language, toLanguage, userId, userName);
+    if (cacheResponse && cacheResponse.length > 0) {
+        res.status(200).send({ data: cacheResponse });
+        return;
+    }
+
     const media = getMediaBasedOnAge(
         ageGroup,
         userId,
@@ -230,18 +240,10 @@ const updateAndGetMedia = function (req, res) {
         type,
         toLanguage
     );
-    const count = db.one(mediaCount, [userId, userName, language]);
-    const unAssign = db.any(unassignIncompleteMedia, [
-        userId,
-        userName,
-    ]);
-    const unAssignWhenLanChange = db.any(
-        unassignIncompleteMediaWhenLanChange,
-        [userId, userName, language]
-    );
-    Promise.all([media, count, unAssign, unAssignWhenLanChange])
+    Promise.all([media])
         .then((response) => {
-            res.status(200).send({ data: response[0], count: response[1].count });
+            res.status(200).send({ data: response[0] });
+            cacheOperation.setContributionDataForCaching(db, type, language, toLanguage);
         })
         .catch((err) => {
             console.log(err);
@@ -655,6 +657,7 @@ const updateDbWithUserInput = async (
     motherTongue,
     device,
     browser,
+    type,
     cb) => {
     const validLanguage = await checkLanguageValidity(datasetId, language)
     if (!validLanguage) {
@@ -680,7 +683,7 @@ const updateDbWithUserInput = async (
                 }
             });
             db.none(updateViews).then();
-            // db.none(updateMaterializedViews).then();
+            cacheOperation.removeItemFromCache(datasetId, type, language, '');
             cb(200, { success: true });
         })
         .catch((err) => {
