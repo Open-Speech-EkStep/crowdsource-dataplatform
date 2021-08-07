@@ -1,3 +1,5 @@
 { 
-    "whitelistingEmail":"disabled"
+    "whitelistingEmail":"disabled",
+    "envName": "test",
+    "caching": "enabled"
 }

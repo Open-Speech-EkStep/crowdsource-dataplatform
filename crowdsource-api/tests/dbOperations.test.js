@@ -127,7 +127,7 @@ describe("Running tests for dbOperations", () => {
     describe('Update DB methods', () => {
         const testDatasetId = 1, testUserId = 123, contributor_id = 27;
         const testUserName = 'testName', testState = 'testState', testCountry = 'testCountry';
-        const age = '', gender = '', motherTongue = '', device = '', browser = '';
+        const age = '', gender = '', motherTongue = '', device = '', browser = '', type = 'asr';
         const languageOne = 'Tamil', languageTwo = 'Hindi';
         const mockCb = jest.fn();
 
@@ -166,7 +166,7 @@ describe("Running tests for dbOperations", () => {
                     testAudioPath, testDatasetId, testUserId,
                     testUserName, testState, testCountry,
                     testAudioDuration, languageTwo, age, gender,
-                    motherTongue, device, browser, mockCb
+                    motherTongue, device, browser, type, mockCb
                 );
                 expect(mockCb).toBeCalledWith(400, expect.anything())
             });
@@ -177,7 +177,7 @@ describe("Running tests for dbOperations", () => {
                     testAudioPath, testDatasetId, testUserId,
                     testUserName, testState, testCountry,
                     testAudioDuration, languageOne, age, gender,
-                    motherTongue, device, browser, mockCb
+                    motherTongue, device, browser, type, mockCb
                 );
                 expect(mockCb).toBeCalledWith(400, expect.anything())
             });
@@ -306,7 +306,7 @@ describe("Running tests for dbOperations", () => {
                     testUserId, languageTwo, testUserInput,
                     testDatasetId, testState, testCountry,
                     age, gender,
-                    motherTongue, device, browser, mockCb
+                    motherTongue, device, browser, type, mockCb
                 );
                 expect(mockCb).toBeCalledWith(400, expect.anything())
             });
@@ -318,7 +318,7 @@ describe("Running tests for dbOperations", () => {
                     testUserId, languageOne, testUserInput,
                     testDatasetId, testState, testCountry,
                     age, gender,
-                    motherTongue, device, browser, mockCb
+                    motherTongue, device, browser, type, mockCb
                 );
                 expect(mockCb).toBeCalledWith(400, expect.anything())
             });

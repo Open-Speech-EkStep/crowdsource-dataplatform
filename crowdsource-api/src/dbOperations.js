@@ -227,7 +227,8 @@ const updateAndGetMedia = async (req, res) => {
 
     const ageGroup = req.body.age;
     const cacheResponse = await cacheOperation.getDataForContribution(type, language, toLanguage, userId, userName);
-    if (cacheResponse && cacheResponse.length > 0) {
+    if (cacheResponse) {// && cacheResponse.length > 0
+        console.log("from cache")
         res.status(200).send({ data: cacheResponse });
         return;
     }
