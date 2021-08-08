@@ -237,7 +237,7 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
     const file = req.file;
     const datasetId = req.body.sentenceId;
     const { userId } = req.cookies;
-    const { speakerDetails, language, state = '', country = '', device = '', browser = '', type } = req.body;
+    const { speakerDetails, language, state = '', country = '', device = '', browser = '', type, fromLanguage = '' } = req.body;
     const speakerDetailsJson = JSON.parse(speakerDetails);
     const { userName, age = '', motherTongue = '', gender = '' } = speakerDetailsJson;
 
@@ -261,7 +261,7 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
     }
     else {
         const userInput = xss(req.body.userInput);
-        updateDbWithUserInput(userName, userId, language, userInput, datasetId, state, country, age, gender, motherTongue, device, browser, type,
+        updateDbWithUserInput(userName, userId, language, userInput, datasetId, state, country, age, gender, motherTongue, device, browser, type, fromLanguage,
             (resStatus, resBody) => {
                 res.status(resStatus).send(resBody);
             })

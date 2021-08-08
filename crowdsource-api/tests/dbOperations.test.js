@@ -306,7 +306,7 @@ describe("Running tests for dbOperations", () => {
                     testUserId, languageTwo, testUserInput,
                     testDatasetId, testState, testCountry,
                     age, gender,
-                    motherTongue, device, browser, type, mockCb
+                    motherTongue, device, browser, type, '', mockCb
                 );
                 expect(mockCb).toBeCalledWith(400, expect.anything())
             });
@@ -318,7 +318,7 @@ describe("Running tests for dbOperations", () => {
                     testUserId, languageOne, testUserInput,
                     testDatasetId, testState, testCountry,
                     age, gender,
-                    motherTongue, device, browser, type, mockCb
+                    motherTongue, device, browser, type, languageTwo, mockCb
                 );
                 expect(mockCb).toBeCalledWith(400, expect.anything())
             });

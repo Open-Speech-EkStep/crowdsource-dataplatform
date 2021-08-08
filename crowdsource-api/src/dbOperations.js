@@ -659,6 +659,7 @@ const updateDbWithUserInput = async (
     device,
     browser,
     type,
+    fromLanguage,
     cb) => {
     const validLanguage = await checkLanguageValidity(datasetId, language)
     if (!validLanguage) {
@@ -684,7 +685,12 @@ const updateDbWithUserInput = async (
                 }
             });
             db.none(updateViews).then();
-            cacheOperation.removeItemFromCache(datasetId, type, language, '');
+            
+            if (type != 'parallel') {
+                fromLanguage = language;
+                language = '';
+            }
+            cacheOperation.removeItemFromCache(datasetId, type, fromLanguage, language);
             cb(200, { success: true });
         })
         .catch((err) => {
