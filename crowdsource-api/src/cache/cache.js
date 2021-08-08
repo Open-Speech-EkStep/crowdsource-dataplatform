@@ -19,9 +19,9 @@ client.on("end", function (err) {
 
 module.exports = {
     setAsync: (key, value, expiry) => {
-        return client.setAsync(prefix + key, value, 'EX', expiry);
+        return client.setAsync(prefix + "_" + key, value, 'EX', expiry);
     },
     getAsync: (key) => {
-        return client.getAsync(prefix + key);
+        return client.getAsync(prefix + "_" + key);
     }
 }

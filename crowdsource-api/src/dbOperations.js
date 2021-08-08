@@ -259,10 +259,17 @@ const getContributionList = async function (req, res) {
     const userId = req.cookies.userId;
     const userName = req.query.username || '';
     const contributorId = await getContributorId(userId, userName);
+    const cacheResponse = await cacheOperation.getDataForValidation(type, fromLanguage, toLanguage, userId, userName);
+    if (cacheResponse) {// && cacheResponse.length > 0
+        console.log("from cache")
+        res.status(200).send({ data: cacheResponse });
+        return;
+    }
     const query = type == 'parallel' ? getContributionListForParallel : getContributionListQuery
     db.any(query, [contributorId, type, fromLanguage, toLanguage])
         .then((response) => {
-            res.status(200).send({ data: response })
+            res.status(200).send({ data: response });
+            cacheOperation.setValidationDataForCaching(db, type, fromLanguage, toLanguage);
         })
         .catch((err) => {
             console.log(err);
@@ -298,7 +305,7 @@ const getMediaObject = (req, res, objectStorage) => {
 
 const updateTablesAfterValidation = async (req, res) => {
     const userId = req.cookies.userId;
-    const { sentenceId, state = "", country = "", userName = "", device = "", browser = "" } = req.body;
+    const { sentenceId, state = "", country = "", userName = "", device = "", browser = "", type, fromLanguage, language = "" } = req.body;
     const { action, contributionId } = req.params;
     const validatorId = await getContributorId(userId, userName);
     return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country, device, browser])
@@ -314,10 +321,11 @@ const updateTablesAfterValidation = async (req, res) => {
                         res.sendStatus(500);
                     });
                 db.none(updateViews).then().catch(console.log);
-                // db.none(updateMaterializedViews).then();
                 res.sendStatus(200);
             }
             else res.sendStatus(200);
+
+            cacheOperation.updateCacheAfterValidation(contributionId, type, fromLanguage, language, action, userId, userName);
         })
         .catch((err) => {
             console.log(err);

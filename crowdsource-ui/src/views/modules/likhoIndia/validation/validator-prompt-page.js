@@ -161,7 +161,10 @@ function skipValidation(action) {
       country: localStorage.getItem('country') || "",
       userName: speakerDetails && speakerDetails.userName,
       device: getDeviceInfo(),
-      browser: getBrowserInfo()
+      browser: getBrowserInfo(),
+      type: MODULE.likho["api-type"],
+      fromLanguage: localStorage.getItem("contributionLanguage"),
+      language: localStorage.getItem(LIKHO_TO_LANGUAGE)
     }),
     headers: {
       'Content-Type': 'application/json',
