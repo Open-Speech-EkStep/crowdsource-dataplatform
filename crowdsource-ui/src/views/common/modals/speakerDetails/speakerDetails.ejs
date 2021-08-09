@@ -2,17 +2,17 @@
 <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content border-primary border-2">
-            <div class="speakerdetails px-4 pb-3">
+            <div class="speakerdetails-popup px-4 pb-3">
                 <button class="close float-right position-absolute" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <div class="modal-header d-block border-0 py-0">
+                <div class="modal-header px-0 px-lg-3 px-md-3 d-block border-0 py-0">
                     <h2 class="modal-title text-center mt-4 mb-2 font-family-Rowdies">
                         <%= __('User Details') %>
                     </h2>
-                    <p class="text-center border-bottom font-weight-light" id="form-sub-heading">
+                    <p class="text-center border-bottom font-weight-light para-dash" id="form-sub-heading">
                         <%= __('All the fields are optional but you can enrich your dataset contribution by providing the demographic details.') %>
                     </p>
                 </div>
-                <div class="modal-body pt-0" id="speaker-details">
+                <div class="modal-body px-0 px-lg-3 px-md-3 pt-0" id="speaker-details">
                     <div class="col-12 text-center text-primary d-none" id="resetBtn" style="cursor:pointer">
                         Not You? Change User
                     </div>
@@ -53,7 +53,7 @@
                             <option value="30 - 60"><%= __('30 - 60 (Adult)')%></option>
                             <option value="60+"><%= __('60+ (Senior)')%></option>
                         </select></div>
-                    <div class="form-group mb-4">
+                    <div class="form-group m-0">
                         <label for="gender" class="form-label">
                             <%= __('Gender') %>
                         </label>
@@ -98,16 +98,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group m-0">
                         <label class="form-label my-3 font-weight-normal" id="tnc_link">
                             <%- __(`By proceeding ahead you agree to the <a href="${path}terms-and-conditions.html" target="_blank"> Terms and Conditions</a>`) %>
                         </label>
                     </div>
                   
                 </div>
-                <div class="modal-footer border-0 p-0">
-                    <div class="row m-0 w-100 justify-content-center my-4">
-                        <div class="col-12 text-center" data-toggle="tooltip" title="<%= __('Please validate any error message before proceeding')%>"><button type="button" id="proceed-box" class="btn btn-custom-primary rounded-pill m-0" data-toggle="modal" data-target="#languageModal">
+                <div class="modal-footer text-center border-0 p-0">
+                    <div class="row m-0 w-100 justify-content-center mt-4">
+                        <div class="col-12 p-0 text-center" data-toggle="tooltip" title="<%= __('Please validate any error message before proceeding')%>"><button type="button" id="proceed-box" class="btn btn-custom-primary rounded-pill m-0" data-toggle="modal" data-target="#languageModal">
                                 <%= __('Done') %>
                             </button></div>
                     </div>

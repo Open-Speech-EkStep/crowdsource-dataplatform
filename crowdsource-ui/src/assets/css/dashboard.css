@@ -381,7 +381,10 @@ body.modal-open .supreme-container {
     padding: 0.75rem;
   }
   .modal-title {
-    font-size: 2rem;
+    font-size: 20px;
+  }
+  .para-dash{
+    font-size: 12px;
   }
   .modal-body {
     padding-top: 0.75rem;

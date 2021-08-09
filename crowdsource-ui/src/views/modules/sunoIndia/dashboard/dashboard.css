@@ -387,7 +387,11 @@ body.modal-open .supreme-container {
   }
 
   .modal-title {
-    font-size: 2rem;
+    font-size: 20px;
+  }
+
+  .para-dash{
+    font-size: 12px;
   }
 
   .modal-body {

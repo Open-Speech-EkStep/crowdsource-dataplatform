@@ -17,11 +17,6 @@
 }
 
 @media (max-width: 767px) {
-  #userModal .speakerDetails {
-    height: 500px;
-    overflow: auto;
-  }
-
   #userModal .close{
     right: 20px;
     top: 12px;
@@ -58,12 +53,12 @@
     font-size: 30px !important;
   }
   
-  #userModal .speakerDetails {
-    height: 700px;
+  #userModal .speakerdetails-popup {
+    height: 670px;
     overflow: auto;
   }
 
-  #userModal .modal-content , #userModal .speakerdetails{
+  #userModal .modal-content , #userModal .speakerdetails-popup{
     max-height: 670px;
   }
 

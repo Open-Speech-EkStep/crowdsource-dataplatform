@@ -79,9 +79,9 @@ label .required {
 
 #feedback_close_btn, #feedback_thanku_close_btn {
   position: absolute;
-  right: 1rem;
+  right: 16px;
   top: 0;
-  font-size: 2.5rem;
+  font-size: 30px;
   padding: 0;
 }
 
@@ -142,13 +142,25 @@ label .required {
 }
 
 @media (max-width: 700px) {
+  #feedback_close_btn, #feedback_thanku_close_btn{
+    right: 16px;
+    top: 5px !important;
+    font-size: 20px !important;
+  }
+  .paragraph {
+    font-size: 12px !important;
+  }
   .float{
     position:fixed;
     right : 20px;
     bottom : 20px;
     padding: 9px;
   }
-
+  #modal_feeback .btn-custom-primary {
+    height: 44px !important;
+    min-width: 290px !important;
+    max-width: 290px !important;
+  }
   #feedback_button{
     height: 48px;
     width: 48px;
@@ -187,6 +199,7 @@ label .required {
   }
   #modal_feeback .btn-custom-primary {
     height: 48px !important;
+    width: 240px !important;
   }
 
   .success-feedback {
