@@ -64,6 +64,7 @@ function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
     const $speakerDataDetails = $speakersData.find('#contribution-details');
     const $speakerDataLanguagesWrapper = $('#languages-wrapper');
+    const $speakerContributionData = $speakersData.find('.contribution-data');
     const $speakerDataLanguagesValue = $('#languages-value');
     const $speakersDataSpeakerValue = $('#speaker-value');
     const $speakersDataContributionValue = $('#contributed-value');
@@ -113,8 +114,12 @@ function updateLanguage(language) {
                             if (speakersData.languages) {
                                 $speakerDataLanguagesValue.text(speakersData.languages);
                                 $speakerDataLanguagesWrapper.removeClass('d-none');
+                                $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4');
+                                $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xl-3');
                             } else {
                                 $speakerDataLanguagesWrapper.addClass('d-none');
+                                $speakerContributionData.removeClass('col-12 col-md-3 col-lg-3 col-xl-3');
+                                $speakerContributionData.addClass('col-12 col-md-4 col-lg-4 col-xl-4');
                             }
 
                             $speakersDataContributionValue.text(formatTime(contributedHours, contributedMinutes, contributedSeconds));

@@ -191,9 +191,11 @@ const generateIndiaMap = function (language = "") {
 };
 
 function getStatistics(response) {
+  const $speakersData = $("#speaker-data");
   const $speakersDataSpeakerValue = $("#speaker-value");
   const $speakersDataHoursValue = $("#contributed-value");
   const $speakersDataLanguagesValue = $("#languages-value");
+  const $speakerContributionData = $speakersData.find('.contribution-data');
   const $validatedValue = $("#validated-value");
 
   const {hours, minutes, seconds} = calculateTime(
@@ -207,6 +209,8 @@ function getStatistics(response) {
   $validatedValue.text(formatTime(validate_hrs,validate_min,validate_sec));
   $speakersDataSpeakerValue.text(response && response.total_speakers || 0);
   $speakersDataLanguagesValue.text(response && response.total_languages || 0);
+  $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4 col-xs-6');
+  $speakerContributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
 }
 
 let chartReg = {};
