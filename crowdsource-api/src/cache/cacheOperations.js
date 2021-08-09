@@ -29,14 +29,22 @@ const generateResponse = (data, desiredCount, userId, userName) => {
 	const itemLength = randomItems.length;
 	let i = 0;
 	let skipCount = 0;
+	let includedIds = [];
 	while (response.length < itemLength && skipCount < (data.length - response.length)) {
 		if (randomItems[i].skipped_by && randomItems[i].skipped_by.includes(`${userId}-${userName}`)) {
 			skipCount++;
-			randomItems[i] = getRandom(data, 1)[0];
+			 let obj = getRandom(data, 1)[0];
+			 if (includedIds.includes(obj.dataset_row_id)) {
+				randomItems.splice(i, 1);
+			 }
+			 else {
+				randomItems[i] = obj;
+			 }
 		}
 		else {
 			delete randomItems[i]["skipped_by"];
 			response.push(randomItems[i]);
+			includedIds.push(randomItems[i].dataset_row_id)
 			i++;
 		}
 	}
