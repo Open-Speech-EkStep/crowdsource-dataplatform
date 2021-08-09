@@ -26,6 +26,7 @@ const {
     SPEAKER_DETAILS_KEY
 } = require('./constants');
 const { context_root } = require('./env-api');
+const { updateHrsForCards } = require('../../../build/js/common/card');
 
 const clearLocalStorage = function () {
     localStorage.removeItem(TOP_LANGUAGES_BY_HOURS);
@@ -61,8 +62,8 @@ const getStatsSummary = function () {
             $("#contribution_stats").show();
         }
 
-        // const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
-        // updateHrsForSayAndListen(contributionLanguage);
+        const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
+        updateHrsForCards(contributionLanguage);
     }).fail((e) => {
         safeJqueryErrorHandling(e);
     });
@@ -97,7 +98,7 @@ function initializeBlock() {
         top_lang = fromLanguage;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
         sessionStorage.setItem("i18n", "en");
-        // updateHrsForSayAndListen(fromLanguage);
+        updateHrsForCards(fromLanguage);
         showFucntionalCards('text', fromLanguage);
         redirectToLocalisedPage();
         getStatsSummary();
