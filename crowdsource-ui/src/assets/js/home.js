@@ -11,7 +11,7 @@ const {
 
 const { getContributedAndTopLanguage,hasUserRegistered,safeJqueryErrorHandling } = require('./common');
 const { addToLanguage } = require('../../views/common/languageNavBar/languageNavBar');
-const { updateGoalProgressBarFromJson, showFucntionalCards } = require('../../../build/js/common/common')
+const { updateGoalProgressBarFromJson, showFunctionalCards } = require('../../../build/js/common/common')
 
 
 const {
@@ -99,7 +99,7 @@ function initializeBlock() {
         localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
         sessionStorage.setItem("i18n", "en");
         updateHrsForCards(fromLanguage);
-        showFucntionalCards('text', fromLanguage);
+        showFunctionalCards('text', fromLanguage);
         redirectToLocalisedPage();
         getStatsSummary();
     });
@@ -134,7 +134,7 @@ function initializeBlock() {
         }
     });
     const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    showFucntionalCards('text', language);
+    showFunctionalCards('text', language);
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
 
