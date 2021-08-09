@@ -116,6 +116,7 @@ body {
   display: none;
 }
 
+
 @media screen and (max-width: 767px) {
   #report_btn {
     margin-right: 0;
@@ -144,12 +145,66 @@ body {
   opacity: 1 !important;
 }
 
+.validate-disabled {
+  background-color: rgb(230 230 230 / 50%);
+  cursor: no-drop;
+}
+
+.validate-disabled #left_container,
+.validate-disabled #right_container {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+
+.validate-disabled #warning-msg {
+  display: block !important;
+}
+
+.cont-validate-disabled {
+  background-color: rgb(230 230 230 / 50%);
+  cursor: no-drop;
+}
+
+.cont-validate-disabled #left_container,
+.cont-validate-disabled #right_container {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.cont-validate-disabled #cont-warning-msg {
+  display: block !important;
+}
+
 @media (min-width: 768px) and (max-width: 961px) {
   .flex-direction-row {
     flex-direction: row !important;
   }
   .flex-flow-nowrap {
     flex-flow: nowrap;
+  }
+  #cont-warning-msg {
+    display: none;
+    top: 5px;
+    left: 10%;
+    font-style: italic;
+    width: 89%;
+    padding: 0 10px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+
+  #warning-msg {
+    display: none;
+    top: 5px;
+    left: 10%;
+    font-style: italic;
+    width: 89%;
+    padding: 0 10px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(77, 130, 247, .1);
   }
 }
 
@@ -211,6 +266,21 @@ body {
     font-size: 20px;
     border: 2px solid #007bff;
     min-height: 48px;
+  }
+  #cont-warning-msg {
+    display: none;
+    top: 5px;
+    left: 7%;
+    font-style: italic;
+    width: 95%;
+    padding: 8px 15px;
+    min-height: 38px;
+    border-radius: 12px;
+  }
+
+  #con-warning-msg p {
+    font-size: 12px;
+    margin-top: 4px;
   }
 }
 
@@ -367,6 +437,32 @@ body {
 @media (max-width: 500px) {
   .d-sm-none {
     display: none;
+  }
+}
+
+@media (min-width: 962px) {
+  #cont-warning-msg {
+    display: none;
+    top: 25px;
+    left: 7%;
+    font-style: italic;
+    width: 89%;
+    padding: 8px 15px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+
+  #warning-msg {
+    display: none;
+    top: 25px;
+    left: 7%;
+    font-style: italic;
+    width: 89%;
+    padding: 8px 15px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(77, 130, 247, .1);
   }
 }
 
