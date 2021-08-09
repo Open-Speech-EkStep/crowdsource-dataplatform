@@ -566,3 +566,7 @@ button:focus{
   font-size:14px;
   margin-top:5px
 }
+
+.dropdown-item.active, .dropdown-item:active {
+  color: #16181b;
+}
