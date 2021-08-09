@@ -8,19 +8,19 @@ Tags: component
 * Validate Dekho India content
 * User should see the top Language graph and other stats for Dekho India
 
-## Label & Validate cards should be disabled when there is no data for Malayalam /Label card should be disabled & Validate should be enabled when data is contributed for Telugu
-* Select Contribution Language as "മലയാളം"
-* Check "Label" option should be "disabled" on Home page
-* Check "Validate" option should be "disabled" on Home page
-* Select Contribution Language as "తెలుగు"
-* Check "Label" option should be "disabled" on Home page
-* Check "Validate" option should be "enabled" on Home page
+//## Label & Validate cards should be disabled when there is no data for Malayalam /Label card should be disabled & Validate should be enabled when data is contributed for Telugu
+/* Select Contribution Language as "മലയാളം"
+/* Check "Label" option should be "disabled" on Home page
+/* Check "Validate" option should be "disabled" on Home page
+/* Select Contribution Language as "తెలుగు"
+/* Check "Label" option should be "disabled" on Home page
+/* Check "Validate" option should be "enabled" on Home page
 
 ## Validate Label card should be enabled when the data is not contributed for Odia language
 * User should store the progress bar for "Dekho India"
 * Select Contribution Language as "ଓଡିଆ"
-* Check "Label" option should be "enabled" on Home page
-* Check "Validate" option should be "disabled" on Home page
+/* Check "Label" option should be "enabled" on Home page
+/* Check "Validate" option should be "disabled" on Home page
 * Navigate to "Label" and add username "T User" then click Lets go
 * User should see add extension and watch video link
 * Check Data Source button should not be visible
@@ -32,7 +32,7 @@ Tags: component
 * When user clicks on submit button user should see " Thank you for contributing!"
 * When user clicks on back button, user should land on Dekho India home page
 //* Validate the updated progress bar value with "2" for "Dekho India"
-* Check "Validate" option should be "enabled" on Home page
+/* Check "Validate" option should be "enabled" on Home page
 
 ## Validate Label flow
 * Select Contribution Language as "ಕನ್ನಡ"
@@ -89,10 +89,10 @@ Tags: component
 * When user select "ಕನ್ನಡ" Language from dropdown then "Languages" should not visible
 * When user clicks on back button, user should land on Dekho India home page
 
-## Validate profanity configuration
-* Select Contribution Language as "ગુજરાતી"
-* Check "Transcribe" option should be "disabled" on Home page
-* Check "Correct" option should be "disabled" on Home page
+/## Validate profanity configuration
+/* Select Contribution Language as "ગુજરાતી"
+/* Check "Transcribe" option should be "disabled" on Home page
+/* Check "Correct" option should be "disabled" on Home page
 
 ___
 * User clicks back button

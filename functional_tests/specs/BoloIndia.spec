@@ -5,6 +5,7 @@ Tags: component
 * Select "bolo_india_tab" from header
 
 ## Validate the Speaker Details pop-up
+* Select Contribution Language as "हिंदी"
 * Navigate to "Contribute" button and click "Contribute" button
 * Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present
 * if a user enter username and click on Not you change user button , the field should be cleared

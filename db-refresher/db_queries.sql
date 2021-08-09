@@ -64,3 +64,42 @@ SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select sum(goal) FILTER 
 
 \o initiativeGoalsByLanguage.json
 SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select sum(goal) FILTER (WHERE category = 'contribute') as contribution_goal, sum(goal) FILTER (WHERE category = 'validate') as validation_goal, type, language from language_goals group by type, language )t;
+
+\o languagesWithData.json
+SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select type, media->>'language' as language from dataset_row group by type, language )t;
+
+\o enableDisableCards.json
+SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select coalesce(has_target.type,all_contributed.type) as type, coalesce(has_target.language,all_contributed.language) as language, coalesce(has_target.hasTarget,false) as hasTarget, coalesce(all_contributed.isAllContributed,false) as isAllContributed 
+from
+(select type,
+CASE
+	WHEN type = 'parallel'::text THEN ((dr.media->>'language') || '-' || (con.media->>'language'))
+	ELSE dr.media->>'language'
+END AS language, true as hasTarget from contributions con inner join dataset_row dr on con.dataset_row_id=dr.dataset_row_id left join validations val on 
+  con.contribution_id=val.contribution_id and val.action!='skip' inner join configurations conf on conf.config_name='validation_count'
+  inner join configurations conf2 on conf2.config_name='include_profane' 
+  inner join configurations conf3 on conf3.config_name='show_demo_data'
+  left join master_dataset mds on dr.master_dataset_id=mds.master_dataset_id
+where con.action='completed'
+and (conf2.value=1 or is_profane=false) 
+and (conf3.value=0 or for_demo=true)
+and coalesce(mds.is_active, true) = true
+group by val.contribution_id, conf.value, type, language having count(val.*)<conf.value) as has_target
+full outer join (
+with typelanggrp as (select type, dr.media->>'language' as fromLanguage, con.media->>'language' as toLanguage from dataset_row dr 
+left join contributions con on con.dataset_row_id=dr.dataset_row_id
+inner join configurations conf2 on conf2.config_name='include_profane' and (conf2.value=1 or is_profane=false)
+inner join configurations conf3 on conf3.config_name='show_demo_data'  and (conf3.value=0 or for_demo=true)
+left join master_dataset mds on dr.master_dataset_id=mds.master_dataset_id and coalesce(mds.is_active, true) = true
+group by type,fromLanguage,toLanguage)
+select type, 
+	CASE
+	WHEN type = 'parallel'::text THEN ((l.fromLanguage) || '-' || (l.toLanguage))
+	ELSE l.fromLanguage END AS language, true as isAllContributed from typelanggrp l
+	where not exists ( select 1 from dataset_row
+	where dataset_row.type=l.type and dataset_row.media->>'language'=l.fromLanguage
+		and not exists (
+		select 1 from contributions where contributions.dataset_row_id=dataset_row.dataset_row_id 
+			and (dataset_row.type!='parallel' or contributions.media->>'language'=l.toLanguage) and contributions.action='completed'))
+group by type,language) as all_contributed on has_target.type=all_contributed.type and has_target.language=all_contributed.language
+group by has_target.type,all_contributed.type, has_target.language,all_contributed.language, has_target.hasTarget, all_contributed.isAllContributed )t

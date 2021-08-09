@@ -1,5 +1,5 @@
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
-const { redirectToLocalisedPage, showFucntionalCards, updateGoalProgressBarFromJson, hasUserRegistered, updateLikhoLocaleLanguagesDropdown } = require('../common/common');
+const { redirectToLocalisedPage, showFunctionalCards, updateGoalProgressBarFromJson, hasUserRegistered, updateLikhoLocaleLanguagesDropdown } = require('../common/common');
 const {
   getLocaleString,
 } = require('../common/utils');
@@ -34,7 +34,7 @@ const addToLanguage = function (id, list) {
 }
 
 const updatePage = (fromLanguage, toLanguage) => {
-  showFucntionalCards('parallel', fromLanguage, toLanguage);
+  showFunctionalCards('parallel', fromLanguage, toLanguage);
   getStatsSummary('/stats/summary/parallel', MODULE.likho);
 }
 
@@ -55,7 +55,7 @@ function initializeBlock() {
     const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
     addToLanguage('to-language', languages);
     updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
-    showFucntionalCards('parallel', fromLanguage, toLanguage);
+    showFunctionalCards('parallel', fromLanguage, toLanguage);
     localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
     $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
     $(`#to-language option[value=${toLanguage}]`).attr("selected", "selected");
@@ -72,7 +72,7 @@ function initializeBlock() {
     $('#to-language option:first-child').attr("selected", "selected");
     toLanguage = $('#to-language option:first-child').val();
     updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
-    showFucntionalCards('parallel', fromLanguage, toLanguage);
+    showFunctionalCards('parallel', fromLanguage, toLanguage);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
     localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
   }
