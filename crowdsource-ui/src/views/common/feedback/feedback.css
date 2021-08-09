@@ -17,16 +17,26 @@
   filter: drop-shadow(0 4px 12px rgba(15, 39, 73, 0.32));
 }
 
+#modal_feeback.modal-dialog, #modal_feeback  .feedbacks {
+  max-width: 600px;
+  max-height: 670px;
+}
+
+.paragraph {
+  padding-bottom: 1.25rem;
+}
+
+
+#modal_feeback .modal-content{
+  border-radius: 12px;
+  border: 1px solid #0f2749;
+}
+
 .my-float{
   left: 8.33%;
   right: 25%;
   top: 25%;
   bottom: 9.31%;
-}
-
-.custom-modal {
-  max-width: 700px;
-  min-height: 867px;
 }
 
 .submit-btn-feedback {
@@ -38,11 +48,7 @@
   width: 160px;
   height: 48px;
 }
-.submit-btn-feedback:disabled{
-  background-color: #d7d7d7;
-  border: none;
-  font-weight: 700;
-}
+
 
 .opinion input[type='radio'] {
   display: none;
@@ -154,4 +160,54 @@ label .required {
     height: 28px;
     width: 28px;
   }
+  #modal_feeback .modal-body {
+    max-height: 300px;
+    overflow: auto;
+  }
+  .success-feedback {
+    font-size: 14px;
+  }
+  .thanks-feedback {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 767px) {
+  #feedback_thanku_modal .modal-dialog {
+    max-width: 400px !important;
+  }
+  #modal_feeback #feedback_close_btn{
+    right:25px;
+    top:5px;
+    font-size: 30px !important;
+  }
+  #feedback_modal .modal-title{
+    font-size: 28px !important;
+    line-height: 38px;
+  }
+  #modal_feeback .btn-custom-primary {
+    height: 48px !important;
+  }
+
+  .success-feedback {
+    font-size: 16px;
+  }
+
+  .thanks-feedback {
+    font-size: 16px;
+  }
+
+  #modal_feeback .modal-body  {
+    height: 410px;
+    overflow: auto;
+  }
+}
+
+#feedback_close_btn {
+  box-shadow: none !important;
+}
+
+.text-primary-muted {
+  color: #0f2749;
+  opacity: 0.4;
 }

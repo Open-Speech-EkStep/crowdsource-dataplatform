@@ -1,16 +1,16 @@
 <div class="modal fade" id="report_sentence_modal" tabindex="-1" aria-labelledby="ReportSentence" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-md modal-dialog-centered">
-        <div class="modal-content p-4 border-primary border-2">
-            <div class="modal-header d-block border-0">
-                <h4 class="modal-title text-center">
+    <div class="modal-dialog modal-md modal-dialog-centered" style="max-width: 600px">
+        <div class="modal-content p-lg-4 p-md-4 p-3 border-primary border-2" style="border-radius: 12px;">
+            <div class="modal-header py-0 d-block border-0">
+                <h4 class="modal-title text-center font-family-Rowdies">
                     <%= __('Report Content') %>
                 </h4>
                 <button type="button" id="report_close_btn" class="btn btn-close text-muted" data-bs-dismiss="modal" aria-label="Close">
                     &times;
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="mb-4">
+            <div class="modal-body px-0 pt-1 px-md-3 px-lg-3 pb-lg-3 pb-md-3 pt-lg-1 pt-md-1">
+                <div class="mb-3 pb-3 text-center border-bottom report_para">
                     <%= reportPara %>
                 </div>
                 <% REPORT.forEach(option =>{ %>
@@ -45,7 +45,7 @@
 
 <div class="modal fade" id="report_sentence_thanks_modal" tabindex="-1" aria-labelledby="ReportSentenceThankYou" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-md modal-dialog-centered">
-        <div class="modal-content p-4 border-primary border-2">
+        <div class="modal-content p-4 border-primary border-2" style="border-radius:12px">
             <div class="modal-header d-block border-0">
                 <h4 class="modal-title text-center">
                     <%= __('Thank You') %>

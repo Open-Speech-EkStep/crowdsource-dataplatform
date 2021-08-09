@@ -4,11 +4,16 @@
 }
 
 #userModal #proceed-box{
-  min-width: 240px;
   padding: 8px 20px 8px 20px;
-  font-size: 18px;
-  line-height: 32px;
-  border-width: 0;
+}
+
+#userModal .close{
+  font-size:20px;
+  font-weight: 400;
+}
+
+#userModal .modal-content{
+  border-radius: 12px;
 }
 
 @media (max-width: 767px) {
@@ -17,24 +22,68 @@
     overflow: auto;
   }
 
+  #userModal .close{
+    right: 20px;
+    top: 12px;
+  }
+
+  #userModal #proceed-box{
+    min-width: 290px;
+    max-width: 290px;
+    font-size: 16px;
+    height: 44px;
+  }
+
   #userModal .user-name-hint{
     line-height: 12px;
     font-size: 11px;
   }
+
+  #userModal #form-sub-heading{
+    padding-bottom: 16px;
+  }
+
+
+  #userModal .modal-body  {
+    height: 300px;
+    overflow: auto;
+  }
 }
 
 @media (min-width: 767px) {
+ 
+  #userModal .close{
+    right:25px;
+    top:16px;
+    font-size: 30px !important;
+  }
+  
   #userModal .speakerDetails {
     height: 700px;
     overflow: auto;
   }
 
+  #userModal .modal-content , #userModal .speakerdetails{
+    max-height: 670px;
+  }
+
+  #userModal .modal-body  {
+    height: 410px;
+    overflow: auto;
+  }
+
   #userModal .modal-title{
+    font-size: 28px !important;
     line-height: 38px;
+  }
+
+  #userModal .modal-lg, #userModal .modal-xl{
+    max-width: 600px !important;
   }
 
   #userModal #form-sub-heading{
     margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
   }
 
   #userModal .user-name-hint{
@@ -81,12 +130,13 @@
     font-size: 18px;
     line-height: 32px;
     border-width: 0;
+    height: 48px;
   }
 }
 
 .px-6 {
-  padding-right: 6vw !important;
-  padding-left: 6vw !important;
+  padding-right: 2vw !important;
+  padding-left: 2vw !important;
 }
 
 .user-name-hint {

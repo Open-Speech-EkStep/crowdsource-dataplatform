@@ -70,9 +70,9 @@ body {
 #report_close_btn,
 #report_sentence_thanks_close_id {
   position: absolute;
-  right: 1rem;
-  top: 0;
-  font-size: 2.5rem;
+  right: 25px;
+  top: 5px;
+  font-size: 30px;
   padding: 0;
 }
 
@@ -213,6 +213,45 @@ body {
     min-height: 56px;
   }
 
+  
+  #report_close_btn,
+  #report_sentence_thanks_close_id {
+    right: 20px;
+    top: 3px;
+    font-size: 25px;
+  }
+
+
+  .report-modal-body {
+    max-height: 300px;
+    overflow: auto;
+  }
+
+
+  .option-text {
+    font-size: 12px;
+  }
+
+  .xs-radio-label {
+    font-size: 14px;
+  }
+
+  .report_para {
+    font-size: 14px;
+  }
+
+  #report_sentence_modal .form-check-input {
+    margin-top: 0.4rem;
+  }
+
+  #report_sentence_modal .report-modal-body .form-check-input {
+    margin-top: 0.5rem;
+  }
+
+  #report_sentence_modal .modal-title {
+    font-size: 20px;
+  }
+
   .speakerDetails {
     height: 500px;
     overflow: auto;
@@ -285,6 +324,13 @@ body {
 }
 
 @media (min-width: 767px) {
+  #report_sentence_modal .report-modal-body .form-check-input {
+    margin-top: 0.4rem;
+  }
+  .report-modal-body {
+    max-height: 490px;
+    overflow: auto;
+  }
   .bolo-back-btn {
     left: 35px !important;
     top: 5px !important;
@@ -592,7 +638,7 @@ body {
 
 .btn-custom-primary {
   color: #ffffff;
-  max-height: 48px;
+  height: 48px;
   font-size: 18px;
   font-weight: 700;
 }

@@ -119,6 +119,22 @@ body {
     padding-top: 56px !important;
   }
 
+  .option-text {
+    font-size: 12px;
+  }
+
+  .xs-radio-label {
+    font-size: 14px;
+  }
+
+  .report_para {
+    font-size: 14px;
+  }
+
+  #report_sentence_modal .modal-title {
+    font-size: 20px;
+  }
+
   .tour-tour {
     width: 95%;
     left: 1rem;
@@ -206,7 +222,10 @@ body {
   .padding-top-65 {
     padding-top: 68px !important;
   }
-    
+  #report_sentence_modal  .modal-body {
+    height: 410px;
+    overflow: auto;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 961px) {

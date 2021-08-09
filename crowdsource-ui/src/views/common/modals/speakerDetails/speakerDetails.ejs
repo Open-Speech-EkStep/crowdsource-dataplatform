@@ -1,113 +1,119 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/speakerDetail.css">
 <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content p-3 border-primary border-2">
-            <button style="right:25px;font-size:35px;top:30px" class="close float-right position-absolute" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <div class="modal-header d-block border-0 py-0">
-                <h2 class="modal-title text-center my-4">
-                    <%= __('User Details') %>
-                </h2>
-            </div>
-            <div class="modal-body px-6 p-0" id="speaker-details">
-                <p class="text-center font-weight-light" id="form-sub-heading">
-                    <%= __('All the fields are optional but you can enrich your dataset contribution by providing the demographic details.') %>
-                </p>
-                <div class="col-12 text-center text-primary d-none" id="resetBtn" style="cursor:pointer">
-                    Not You? Change User
+        <div class="modal-content border-primary border-2">
+            <div class="speakerdetails px-4 pb-3">
+                <button class="close float-right position-absolute" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="modal-header d-block border-0 py-0">
+                    <h2 class="modal-title text-center mt-4 mb-2 font-family-Rowdies">
+                        <%= __('User Details') %>
+                    </h2>
+                    <p class="text-center border-bottom font-weight-light" id="form-sub-heading">
+                        <%= __('All the fields are optional but you can enrich your dataset contribution by providing the demographic details.') %>
+                    </p>
                 </div>
-                <div class="form-group mt-3"><label for="username" class="form-label">
-                        <%= __('Name') %>
-                    </label> <input class="form-control font-weight-normal" maxlength="12" id="username" data-toggle="tooltip" placeholder="<%= __('Enter username') %>">
-                    <div class="user-name-hint font-weight-light" id="user-name-hint">
-                        <span class="align-middle">
-                            <%= __('Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.)') %>
-                        </span>
+                <div class="modal-body pt-0" id="speaker-details">
+                    <div class="col-12 text-center text-primary d-none" id="resetBtn" style="cursor:pointer">
+                        Not You? Change User
                     </div>
-                    <div class="username-error d-none w-100" id="username-error">
-                        <span class="align-middle">
-                            <%= __('Please don\'t use email or mobile number as user name') %>
-                        </span>
+                    <div class="form-group"><label for="username" class="form-label">
+                            <%= __('Name') %>
+                        </label> <input class="form-control font-weight-normal" maxlength="12" id="username" data-toggle="tooltip" placeholder="<%= __('Enter username') %>">
+                        <div class="user-name-hint font-weight-light" id="user-name-hint">
+                            <span class="align-middle">
+                                <%= __('Only 12 characters allowed. (Hint: name.surname, name_surname12 etc.)') %>
+                            </span>
+                        </div>
+                        <div class="username-error d-none w-100" id="username-error">
+                            <span class="align-middle">
+                                <%= __('Please don\'t use email or mobile number as user name') %>
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group"><label for="mother-tongue" class="form-label">
-                        <%= __('Mother Tongue') %>
-                    </label> <select class="form-control font-weight-normal" id="mother-tongue">
-                        <option selected="selected" value="">
-                            <%= __('Select Mother Tongue') %>
-                        </option>
-                        <% MOTHER_TONGUE.forEach(function(obj) { %>
-                            <option value="<%= obj.value %>">
-                                <%= obj.text %>
+                    <div class="form-group"><label for="mother-tongue" class="form-label">
+                            <%= __('Mother Tongue') %>
+                        </label> <select class="form-control font-weight-normal" id="mother-tongue">
+                            <option selected="selected" value="">
+                                <%= __('Select Mother Tongue') %>
                             </option>
-                        <% }) %>
-                    </select></div>
-                <div class="form-group"><label for="age" class="form-label">
-                        <%= __('Age Group') %>
-                    </label> <select class="form-control font-weight-normal" id="age">
-                        <option selected="selected" value="">
-                            <%= __('Select Age Group') %>
-                        </option>
-                        <option value="upto 10"><%= __('upto 10 (Kid)')%></option>
-                        <option value="10 - 30"><%= __('10 - 30 (Youth)')%></option>
-                        <option value="30 - 60"><%= __('30 - 60 (Adult)')%></option>
-                        <option value="60+"><%= __('60+ (Senior)')%></option>
-                    </select></div>
-                <div class="form-group mb-4">
-                    <label for="gender" class="form-label">
-                        <%= __('Gender') %>
-                    </label>
-                    <div class="justify-content-between">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="male-check" value="male">
-                            <label class="form-check-label m-2" for="male-check">
-                                <%= __('Male') %>
-                            </label>
+                            <% MOTHER_TONGUE.forEach(function(obj) { %>
+                                <option value="<%= obj.value %>">
+                                    <%= obj.text %>
+                                </option>
+                            <% }) %>
+                        </select></div>
+                    <div class="form-group"><label for="age" class="form-label">
+                            <%= __('Age Group') %>
+                        </label> <select class="form-control font-weight-normal" id="age">
+                            <option selected="selected" value="">
+                                <%= __('Select Age Group') %>
+                            </option>
+                            <option value="upto 10"><%= __('upto 10 (Kid)')%></option>
+                            <option value="10 - 30"><%= __('10 - 30 (Youth)')%></option>
+                            <option value="30 - 60"><%= __('30 - 60 (Adult)')%></option>
+                            <option value="60+"><%= __('60+ (Senior)')%></option>
+                        </select></div>
+                    <div class="form-group mb-4">
+                        <label for="gender" class="form-label">
+                            <%= __('Gender') %>
+                        </label>
+                        <div class="justify-content-between">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="male-check" value="male">
+                                <label class="form-check-label m-2" for="male-check">
+                                    <%= __('Male') %>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="female-check" value="female">
+                                <label class="form-check-label m-2" for="female-check">
+                                    <%= __('Female') %>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="other-check" value="others">
+                                <label class="form-check-label m-2" for="other-check">
+                                    <%= __('Others') %>
+                                </label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="female-check" value="female">
-                            <label class="form-check-label m-2" for="female-check">
-                                <%= __('Female') %>
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="other-check" value="others">
-                            <label class="form-check-label m-2" for="other-check">
-                                <%= __('Others') %>
-                            </label>
+                        <div id="transgender_options" class="justify-content-between d-none">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="trans_gender" id="trans-he-check" value="Transgender - He">
+                                <label class="form-check-label m-2" for="trans-he-check">
+                                    <%= __('Transgender - He') %>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="trans_gender" id="trans-she-check" value="Transgender - She">
+                                <label class="form-check-label m-2" for="trans-she-check">
+                                    <%= __('Transgender - She') %>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="trans_gender" id="not-say-check" value="Rather Not Say" checked="checked">
+                                <label class="form-check-label m-2" for="not-say-check">
+                                    <%= __('Rather Not Say') %>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    <div id="transgender_options" class="justify-content-between d-none">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="trans_gender" id="trans-he-check" value="Transgender - He">
-                            <label class="form-check-label m-2" for="trans-he-check">
-                                <%= __('Transgender - He') %>
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="trans_gender" id="trans-she-check" value="Transgender - She">
-                            <label class="form-check-label m-2" for="trans-she-check">
-                                <%= __('Transgender - She') %>
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="trans_gender" id="not-say-check" value="Rather Not Say" checked="checked">
-                            <label class="form-check-label m-2" for="not-say-check">
-                                <%= __('Rather Not Say') %>
-                            </label>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-label my-3 font-weight-normal" id="tnc_link">
+                            <%- __(`By proceeding ahead you agree to the <a href="${path}terms-and-conditions.html" target="_blank"> Terms and Conditions</a>`) %>
+                        </label>
                     </div>
+                  
                 </div>
-                <div class="form-group">
-                    <label class="form-label my-3 font-weight-normal" id="tnc_link">
-                        <%- __(`By proceeding ahead you agree to the <a href="${path}terms-and-conditions.html" target="_blank"> Terms and Conditions</a>`) %>
-                    </label>
-                </div>
-                <div class="row justify-content-center my-4">
-                    <div class="col-12 text-center" data-toggle="tooltip" title="<%= __('Please validate any error message before proceeding')%>"><button type="button" id="proceed-box" class="btn btn-custom-primary h6 rounded-pill m-0" data-toggle="modal" data-target="#languageModal">
-                            <%= __('Done') %>
-                        </button></div>
+                <div class="modal-footer border-0 p-0">
+                    <div class="row m-0 w-100 justify-content-center my-4">
+                        <div class="col-12 text-center" data-toggle="tooltip" title="<%= __('Please validate any error message before proceeding')%>"><button type="button" id="proceed-box" class="btn btn-custom-primary rounded-pill m-0" data-toggle="modal" data-target="#languageModal">
+                                <%= __('Done') %>
+                            </button></div>
+                    </div>
                 </div>
             </div>
+          
         </div>
     </div>
 </div>
