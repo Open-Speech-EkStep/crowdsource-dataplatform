@@ -176,6 +176,31 @@ body {
   display: block !important;
 }
 
+@media (min-width: 962px) {
+  #cont-warning-msg {
+    display: none;
+    top: 25px;
+    left: 7%;
+    font-style: italic;
+    width: 89%;
+    padding: 8px 15px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  #warning-msg {
+    display: none;
+    top: 25px;
+    left: 7%;
+    font-style: italic;
+    width: 89%;
+    padding: 8px 15px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(77, 130, 247, .1);
+  }
+}
+
 @media (min-width: 768px) and (max-width: 961px) {
   .flex-direction-row {
     flex-direction: row !important;
@@ -318,6 +343,23 @@ body {
   }
 
   #con-warning-msg p {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  #warning-msg {
+    display: none;
+    top: 5px;
+    left: 7%;
+    font-style: italic;
+    width: 95%;
+    padding: 8px 15px;
+    min-height: 38px;
+    border-radius: 12px;
+    background: rgba(77, 130, 247, .1);
+  }
+
+  #warning-msg p {
     font-size: 12px;
     margin-top: 4px;
   }

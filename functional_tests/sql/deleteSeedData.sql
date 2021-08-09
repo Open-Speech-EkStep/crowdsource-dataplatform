@@ -27,10 +27,10 @@ delete from dataset_row where (type='parallel') and (media->> 'language'='Odia')
 
 -- Code for handling enable/disbable of functional cards
 
-insert into master_dataset (params, location)
-select '{"collectionSource": null}', 'testMDSLocation2'
+insert into master_dataset (params, location, is_active)
+select '{"collectionSource": null}', 'testMDSLocation5', true
 where not exists (
-	select 1 from master_dataset where location='testMDSLocation2'
+	select 1 from master_dataset where location='testMDSLocation5'
 );
 
 insert into dataset_row 
@@ -39,13 +39,13 @@ select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Odia"
-            }'::jsonb, 'contributed', false, (select master_dataset_id from master_dataset where location='testMDSLocation')
+            }'::jsonb, 'contributed', false, (select master_dataset_id from master_dataset where location='testMDSLocation5')
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
             "type": "audio",
             "language": "Odia"
-            }'::jsonb, null, false, (select master_dataset_id from master_dataset where location='testMDSLocation')
+            }'::jsonb, null, false, (select master_dataset_id from master_dataset where location='testMDSLocation5')
 union all
 select 'medium', 'asr', '{
             "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
