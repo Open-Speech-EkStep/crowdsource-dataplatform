@@ -6,7 +6,7 @@ const {
 } = require('./cacheDbQueries');
 const cache = require('./cache');
 const config = require('config');
-
+console.log(config);
 const cachingEnabled = config.caching ? config.caching == "enabled" : false;
 const validation_count = config.validation_count ? Number(config.validation_count) : 5; 
 
