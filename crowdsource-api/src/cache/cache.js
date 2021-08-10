@@ -5,10 +5,11 @@ var bluebird = require("bluebird");
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
-const prefix = config["envName"]
+const prefix = config["envName"];
+const cachingEnabled = config.caching ? config.caching == "enabled" : false;
 
-var client = redis.createClient(6380, process.env.REDISCACHEHOSTNAME,
-    { auth_pass: process.env.REDISCACHEKEY, tls: { servername: process.env.REDISCACHEHOSTNAME } });
+var client = cachingEnabled ? redis.createClient(6380, process.env.REDISCACHEHOSTNAME,
+    { auth_pass: process.env.REDISCACHEKEY, tls: { servername: process.env.REDISCACHEHOSTNAME } }) : {};
 
 client.on("error", function (err) {
     setTimeout(connect, 15000);
