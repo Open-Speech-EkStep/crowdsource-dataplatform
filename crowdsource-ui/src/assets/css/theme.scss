@@ -132,6 +132,8 @@ a.text-primary:hover {
 .btn-custom-outline-primary:disabled {
   background: #F7FAFF;
   box-shadow: 0px 8px 24px rgba(15, 39, 73, 0.1);
+  opacity: 0.9;
+  color: #7F8EA4;
 }
 
 .btn-primary {
@@ -150,12 +152,14 @@ a.text-primary:hover {
   border-radius: 40px;
   box-shadow: 0px 8px 24px rgba(15, 39, 73, 0.2);
   width: max-content;
+  border: 2px solid #0f2749;
 }
 
 .btn-custom-primary {
   &:focus {
     background-color: $primary-color !important;
     border-color: $primary-color !important;
+    box-shadow: 0 8px 24px rgb(15 39 73 / 40%) !important;
   }
 }
 
@@ -164,6 +168,7 @@ a.text-primary:hover {
     color: $text-white;
     background-color: $btn-dark-primary;
     box-shadow: 0px 8px 24px rgba(15, 39, 73, 0.4);
+    border-color:  #006aff;
   }
 }
 
@@ -175,6 +180,7 @@ a.text-primary:hover {
 .btn-transparent {
   &:hover {
     background-color: rgba(15, 39, 73, 0.1) !important;
+    box-shadow:  rgba(15, 39, 73, 0.1) !important;
   }
 }
 
@@ -204,17 +210,18 @@ a.text-primary:hover {
 .btn-custom-outline-primary {
   &:focus {
     background-color: $primary-color-shade2;
+    box-shadow: 0 8px 24px rgb(15 39 73 / 40%) !important;
   }
 }
 
 .btn-transparent:disabled {
-  color: $text-secondary;
+  color: #7F8EA4;
 }
 
 .btn-custom-primary:disabled {
-  background-color: $primary-color-shade4;
-  color:$text-white;
-  border-color: $primary-color-shade4;
+  background-color: #7F8EA4;
+  color:#C7CFDA;
+  border-color: #7f8ea4;
   box-shadow: 0px 8px 24px rgba(15, 39, 73, 0.1) !important;
 }
 
@@ -398,6 +405,10 @@ audio {
 }
 
 @media screen and (max-width: 766px) {
+  .expand-view-text {
+    font-size: 13px !important;
+    margin-top: 4px !important;
+  }
   #straight-line-row {
     min-height: 90px;
   }
@@ -528,11 +539,6 @@ select {
   }
 }
 
-
-.btn.focus, .btn:focus {
-  box-shadow: 0 0 0 0.2rem rgb(20, 39, 69,0.25)  !important;
-}
-
 .download-badge-btn {
   border: 1px solid rgba(20, 39, 69,.5);
   box-shadow: 0 4px 12px rgb(20, 39, 69,0.2);
@@ -552,4 +558,15 @@ select {
 
 button:focus{
   outline: none  !important;
+}
+
+.expand-view-text {
+  cursor:pointer;
+  right:16px;
+  font-size:14px;
+  margin-top:5px
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  color: #16181b;
 }

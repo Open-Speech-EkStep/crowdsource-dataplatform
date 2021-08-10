@@ -128,7 +128,7 @@ const getAvailableLanguages = (type) => {
 };
 
 const getLanguageTargetInfo = (type, sourceLanguage, targetLanguage) => {
-  return fetch(`/target-info/${type}/${sourceLanguage}?targetLanguage=${targetLanguage}`).then((data) => {
+  return fetch(`/target-info/${type}/${sourceLanguage}?targetLanguage=${targetLanguage}`).then(safeErrorHandling).then((data) => {
     if (!data.ok) {
       throw Error(data.statusText || 'HTTP error');
     } else {
@@ -137,30 +137,48 @@ const getLanguageTargetInfo = (type, sourceLanguage, targetLanguage) => {
   });
 };
 
-const showFucntionalCards = (type, from, to) => {
-  try {
-    getLanguageTargetInfo(type, from, to).then(languagePairs => {
-      const { hasTarget, isAllContributed } = languagePairs;
-      let contributeCard = $("#left");
-      let validateCard = $("#right");
-      if (hasTarget && !isAllContributed) {
-        contributeCard.removeClass("cont-validate-disabled");
-        validateCard.removeClass("validate-disabled");
-      } else if (hasTarget && isAllContributed) {
-        validateCard.removeClass("validate-disabled");
-        contributeCard.addClass("cont-validate-disabled");
-      } else if (!hasTarget && !isAllContributed) {
-        contributeCard.removeClass("cont-validate-disabled");
-        validateCard.addClass("validate-disabled");
-      } else {
+const safeErrorHandling = (data) => {
+  if (data && !data.ok)
+    showErrorPopup();
+  return data;
+}
+const showFunctionalCards = (type, fromLanguage, toLanguage) => {
+  let contributeCard = $("#left");
+  let validateCard = $("#right");
+  getJson('/aggregated-json/languagesWithData.json')
+    .then(languagesWithDataJson => {
+      var hasTarget, isAllContributed;
+      const hasData = languagesWithDataJson.filter(data => data.type == type && data.language == fromLanguage)[0] ? true : false
+      if (hasData) {
+        getJson('/aggregated-json/enableDisableCards.json')
+          .then(jsonData => {
+            var language = fromLanguage
+            if (type == 'parallel' && toLanguage) {
+              language = `${fromLanguage}-${toLanguage}`
+            }
+            const filteredData = jsonData.filter(data => data.type == type && data.language == language)[0] || {};
+            hasTarget = filteredData.hastarget || false;
+            isAllContributed = filteredData.isallcontributed || false;
+            if (hasTarget && !isAllContributed) {
+              contributeCard.removeClass("cont-validate-disabled");
+              validateCard.removeClass("validate-disabled");
+            } else if (hasTarget && isAllContributed) {
+              validateCard.removeClass("validate-disabled");
+              contributeCard.addClass("cont-validate-disabled");
+            } else if (!hasTarget && !isAllContributed) {
+              contributeCard.removeClass("cont-validate-disabled");
+              validateCard.addClass("validate-disabled");
+            } else {
+              contributeCard.addClass("cont-validate-disabled");
+              validateCard.addClass("validate-disabled");
+            }
+          }).catch(e => console.log(e))
+      }
+      else {
         contributeCard.addClass("cont-validate-disabled");
         validateCard.addClass("validate-disabled");
       }
-    });
-
-  } catch (error) {
-    console.log(error);
-  }
+    }).catch(e => console.log(e))
 }
 
 const isInTopLanguage = function (sortingLanguages = [], contributionLanguage) {
@@ -622,4 +640,9 @@ const showErrorPopup = () => {
   $errorDialog.modal('show');
 }
 
-module.exports = { isMobileDevice, showErrorPopup, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFucntionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, landToHome, showOrHideExtensionCloseBtn, hasUserRegistered, updateGoalProgressBar, replaceSubStr, getTopLanguage, isInTopLanguage, getTop3Languages, setCurrentProgress, getCountBasedOnSource, updateGoalProgressBarFromJson, languageFilter, reduceList };
+const safeJqueryErrorHandling = (e) => {
+  if (e && e.statusText !== "error")
+    showErrorPopup();
+}
+
+module.exports = { safeJqueryErrorHandling, isMobileDevice, safeErrorHandling, showErrorPopup, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFunctionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, landToHome, showOrHideExtensionCloseBtn, hasUserRegistered, updateGoalProgressBar, replaceSubStr, getTopLanguage, isInTopLanguage, getTop3Languages, setCurrentProgress, getCountBasedOnSource, updateGoalProgressBarFromJson, languageFilter, reduceList };

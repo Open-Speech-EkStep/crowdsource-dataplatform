@@ -79,7 +79,18 @@ class LocaleProcessor:
                 columns.append(value)
         filtered_sheet = df[columns]
         sheet_no_na = filtered_sheet.dropna(subset=[self.english_column_name], inplace=False)
+        for i, row in sheet_no_na.iterrows():
+            if pd.notna(row[language_name]):
+                row[language_name] = str(row[language_name]).strip()
+            if pd.notna(row[self.english_column_name]):
+                row[self.english_column_name] = str(row[self.english_column_name]).strip()
         return sheet_no_na
+
+    def clean_meta_df(self, df):
+        for i, row in df.iterrows():
+            if pd.notna(row[self.english_column_name]):
+                row[self.english_column_name] = str(row[self.english_column_name]).strip()
+        return df
 
     def clean_merged_excel(self, df, language_name):
         excel_df = df.copy()
@@ -93,6 +104,7 @@ class LocaleProcessor:
         tmp_df = meta_excel_df[['Key', self.language_name]]
         del meta_excel_df[self.language_name]
         excel_df = self.clean_translation_excel(excel_df, self.language_name)
+        meta_excel_df = self.clean_meta_df(meta_excel_df)
         merged_excel_df = pd.merge(excel_df, meta_excel_df, on=self.english_column_name,
                                    how='inner')
 
@@ -125,8 +137,12 @@ class LocaleProcessor:
             '/out_meta_meta.xlsx',
             [])
         for index, o_row in tmp_df.iterrows():
+            # try:
             n_row = new_meta[new_meta['Key'] == o_row['Key']].iloc[0]
             merged_excel_df_row = merged_excel_df[merged_excel_df['Key'] == o_row['Key']].iloc[0]
             name = self.language_name
             if o_row[name] != n_row[name]:
                 print(name, "\n\t", o_row[name], "\n\t", n_row[name], "\n\t", merged_excel_df_row[name], "\n")
+            # except Exception as e:
+            #     print(o_row['Key'], len(o_row['Key']), len(o_row['Key'].strip()))
+            #     print(e)

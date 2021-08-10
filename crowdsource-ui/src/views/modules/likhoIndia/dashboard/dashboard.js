@@ -75,7 +75,7 @@ function updateLanguage(language) {
     const activeDurationText = $('#duration').find('.active')[0].dataset.value;
     getJson("/aggregated-json/lastUpdatedAtQuery.json")
         .then(res => {
-            const lastUpdatedAt = moment(res['timezone']).format('DD-MM-YYYY, h:mm:ss a')
+            const lastUpdatedAt = moment(res[0]['timezone']).format('DD-MM-YYYY, h:mm:ss a')
             if (lastUpdatedAt) {
                 $('#data-updated').text(` ${lastUpdatedAt}`);
                 $('#data-updated').removeClass('d-none');
@@ -195,7 +195,9 @@ const executeOnLoad = function () {
         addToLanguage('to-dash-language', languages);
         $('#to-language option:first-child').attr("selected", "selected");
         toLanguage = $('#to-language option:first-child').val();
-        updateLanguage("");
+        if (toLanguage == "" && fromLanguage == "") {
+            updateLanguage("");
+        }
     });
 
     $('#to-dash-language').on('change', (e) => {

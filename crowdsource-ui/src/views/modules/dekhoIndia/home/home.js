@@ -1,5 +1,5 @@
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
-const { redirectToLocalisedPage, showFucntionalCards, hasUserRegistered, updateLocaleLanguagesDropdown, updateGoalProgressBarFromJson } = require('../common/common');
+const { redirectToLocalisedPage, showFunctionalCards, hasUserRegistered, updateLocaleLanguagesDropdown, updateGoalProgressBarFromJson } = require('../common/common');
 const { getLocaleString } = require('../common/utils');
 const {
   setUserModalOnShown,
@@ -47,7 +47,7 @@ function initializeBlock() {
     sessionStorage.setItem("i18n", "en");
     redirectToLocalisedPage();
     getStatsSummary('/stats/summary/ocr', MODULE.dekho, () => { });
-    showFucntionalCards('ocr', fromLanguage);
+    showFunctionalCards('ocr', fromLanguage);
   });
 
   $('#start_recording').on('click', () => {
@@ -72,7 +72,7 @@ function initializeBlock() {
     }
   })
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  showFucntionalCards('ocr', language);
+  showFunctionalCards('ocr', language);
   updateGoalProgressBarFromJson(MODULE.dekho['api-type']);
   getStatsSummary('/stats/summary/ocr', MODULE.dekho, () => { });
   const $startRecordBtn = $('#proceed-box');

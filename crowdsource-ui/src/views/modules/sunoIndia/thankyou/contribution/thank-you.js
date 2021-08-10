@@ -19,7 +19,7 @@ const {
 } = require("../common/utils");
 const { downloadPdf } = require('../common/downloadableBadges');
 const { initializeFeedbackModal } = require('../common/feedback')
-const { setBadge, showByHoursChartThankyouPage, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage, showErrorPopup } = require('../common/common');
+const { setBadge, showByHoursChartThankyouPage, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage } = require('../common/common');
 
 const sunoCountKey = 'sunoCount';
 const CURRENT_INDEX = "sunoCurrentIndex";
@@ -110,8 +110,7 @@ const getLanguageStats = function () {
       } else {
         updateShareContent("", 0);
       }
-    })
-    .catch(() => { showErrorPopup() });
+    });
 };
 
 function setSentencesContributed() {

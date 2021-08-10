@@ -23,7 +23,7 @@
 
 @media screen and (max-width: 768px) {
   #start_recording, #start_validating {
-    width: 100px;
+    width: 85px;
   }
   .left-active #left-p-2, .right-active #right-p-2 {
     position: relative !important;

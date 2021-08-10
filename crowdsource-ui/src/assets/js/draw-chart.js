@@ -1,6 +1,6 @@
 const fetch = require('./fetch')
 const { generateIndiaMap } = require('./home-page-charts');
-const { calculateTime, formatTime, getJson } = require('./utils');
+const { calculateTime, formatTime, getJson, translate } = require('./utils');
 const $chartRow = $('.chart-row');
 const $chartLoaders = $chartRow.find('.loader');
 const $charts = $chartRow.find('.chart');
@@ -54,23 +54,23 @@ const getGenderData = (genderData) => {
                 if (gType === "transgender") {
                     formattedGenderData.push({
                         ...item,
-                        gender: "Others",
+                        gender: translate("Others"),
                         tooltipText: `
                                 <div>
-                                    <h6 style="text-align: left; font-weight: bold">${item.gender}</h6>
-                                    <div>Contributed: <label>${contributedHours}</label></div>
-                                    <div style="text-align: left;">Speakers: <label>${item.speakers}</label></div>
+                                    <h6 style="text-align: left; font-weight: bold">${translate(item.gender)}</h6>
+                                    <div>${translate('Contributed')}: <label>${contributedHours}</label></div>
+                                    <div style="text-align: left;">${translate('Speakers')}: <label>${item.speakers}</label></div>
                                 </div>`
                     });
                 } else {
                     formattedGenderData.push({
                         ...item,
-                        gender: genderType,
+                        gender: translate(genderType),
                         tooltipText: `
                                 <div>
-                                    <h6 style="text-align: left; font-weight: bold">${genderType}</h6>
-                                    <div>Contributed: <label>${contributedHours}</label></div>
-                                    <div style="text-align: left;">Speakers: <label>${item.speakers}</label></div>
+                                    <h6 style="text-align: left; font-weight: bold">${translate(genderType)}</h6>
+                                    <div>${translate('Contributed')}: <label>${contributedHours}</label></div>
+                                    <div style="text-align: left;">${translate('Speakers')}: <label>${item.speakers}</label></div>
                                 </div>`
                     });
                 }
@@ -197,6 +197,7 @@ function buildGraphs(language, timeframe) {
 const drawAgeGroupChart = (chartData) => {
     const chartColors = ['#85A8F9', '#B7D0FE', '#6C85CE', '#316AFF', '#294691'];
     const chart = am4core.create('age-group-chart', am4charts.PieChart3D);
+    chartData.forEach(data=> data.age_group = translate(data.age_group))
     chart.data = chartData;
     chart.paddingBottom = 50;
     chart.innerRadius = am4core.percent(40);
@@ -270,7 +271,7 @@ const drawGenderChart = (chartData) => {
         valueAxis.renderer.labels.template.fill = '#000';
         valueAxis.renderer.grid.template.strokeDasharray = "3,3";
         valueAxis.renderer.labels.template.fontSize = 12;
-        valueAxis.title.text = 'Contribution (in hours)';
+        valueAxis.title.text = translate('Contribution (in hours)');
         valueAxis.title.fontSize = 12;
         // Create series
         const series = chart.series.push(new am4charts.ColumnSeries());
@@ -333,7 +334,7 @@ const drawTimelineChart = (timelineData) => {
         dateAxis.renderer.grid.template.disabled = true;
         dateAxis.renderer.baseGrid.disabled = false;
         dateAxis.renderer.labels.template.fill = '#000';
-        dateAxis.title.text = 'Month';
+        dateAxis.title.text = translate('Month');
         dateAxis.renderer.labels.template.fontSize = 12;
         dateAxis.title.fontSize = 12;
 
@@ -342,7 +343,7 @@ const drawTimelineChart = (timelineData) => {
         hourAxis.renderer.minGridDistance = 50;
         hourAxis.renderer.grid.template.strokeDasharray = "3,3";
         hourAxis.renderer.labels.template.fill = '#000';
-        hourAxis.title.text = 'Contribution (in hours)';
+        hourAxis.title.text = translate('Contribution (in hours)');
         hourAxis.renderer.labels.template.fontSize = 12;
         hourAxis.title.fontSize = 12;
 
@@ -355,8 +356,8 @@ const drawTimelineChart = (timelineData) => {
         series.tooltipHTML = `
             <div>
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
-                <div>Contributed: <label>{contributedHours}</label></div>
-                <div style="text-align: left;">Validated: <label>{validatedHours}</label></div>
+                <div>${translate('Contributed')}: <label>{contributedHours}</label></div>
+                <div style="text-align: left;">${translate('Validated')}: <label>{validatedHours}</label></div>
             </div>`;
         series.tooltip.getFillFromObject = false;
         series.tooltip.autoTextColor = false;
@@ -364,7 +365,7 @@ const drawTimelineChart = (timelineData) => {
         series.tooltip.label.fill = am4core.color("#000000");
         series.sequencedInterpolation = true;
         series.stroke = am4core.color("#FCC232");
-        series.name = "Contributed";
+        series.name = translate("Contributed");
 
         // Create series
         var series2 = chart.series.push(new am4charts.LineSeries());
@@ -374,7 +375,7 @@ const drawTimelineChart = (timelineData) => {
         series2.tensionX = 0.8;
         series2.strokeWidth = 3;
         series2.stroke = am4core.color("#83E661");
-        series2.name = "Validated";
+        series2.name = translate("Validated");
 
         if (chartData.length === 1) {
             const circleBullet = series.bullets.push(new am4charts.CircleBullet());

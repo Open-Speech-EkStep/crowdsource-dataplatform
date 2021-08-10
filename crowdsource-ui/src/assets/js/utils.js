@@ -78,6 +78,20 @@ function toggleFooterPosition() {
   // $footer.toggleClass('bottom')
 }
 
+const safeJson = (res) => {
+  if(!res) return res;
+  if(typeof res.json === "function")  return res.json();
+  return res;
+}
+
+const safeJsonParse = (value, fallBack = {}) => {
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    return fallBack;
+  }
+}
+
 function fetchLocationInfo() {
   //https://api.ipify.org/?format=json
   let regionName = localStorage.getItem("state_region") || "NOT_PRESENT";
@@ -128,9 +142,11 @@ const getLocaleString = function() {
         const locale = sessionStorage.getItem("i18n") ?? "en";
         performAPIRequest(`/get-locale-strings/${locale}`)
         .then((response) => {
+          if(response){
             localStorage.setItem('localeString', JSON.stringify(response));
             resolve(response);
-        }).catch((err)=>reject(err));
+          }
+        }).catch((err)=>{ reject(err)});
     });
 }
 
@@ -157,6 +173,11 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
     return {hours, minutes};
   }
 };
+
+const translate = function(state) {
+  const localeStrings = JSON.parse(localStorage.getItem('localeString'));
+  return localeStrings[state] || state;
+}
 
 const formatTime = function (hours, minutes = 0, seconds = 0, translate=true) {
   const localsStrings = JSON.parse(localStorage.getItem('localeString'));
@@ -237,14 +258,14 @@ const getJson = (path) => {
     return new Promise((resolve) => {
       $.getJSON(path, (data) => {
         resolve(data);
-      }).fail(() => {
-        const $errorDialog = $('#errorPopup');
-        $errorDialog.modal('show');
+      }).fail((e) => {
+        if(e.statusText !== "error") {
+          const $errorDialog = $('#errorPopup');
+          $errorDialog.modal('show');
+        }
       });
     })
 }
-
-
 
 const covertStringToCapitalised = (tempStr) => {
   if (tempStr) {
@@ -262,6 +283,8 @@ const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType)
 
 
 module.exports = {
+  safeJsonParse,
+  safeJson,
   toggleFooterPosition,
   fetchLocationInfo,
   updateLocaleLanguagesDropdown,
@@ -281,5 +304,6 @@ module.exports = {
   getDeviceInfo,
   getBrowserInfo,
   formatTimeForLegends,
-  getLanguageBadge
+  getLanguageBadge,
+  translate
 }

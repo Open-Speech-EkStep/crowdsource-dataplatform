@@ -1,4 +1,4 @@
-const { calculateTime, formatTime, formatTimeForLegends, formatTransAndImages, getJson } = require('./utils');
+const { calculateTime, formatTime, formatTimeForLegends, formatTransAndImages, getJson, translate } = require('./utils');
 
 const statesInformation = [
   { id: 'IN-TG', state: 'Telangana', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
@@ -71,47 +71,48 @@ const drawMap = function (response, moduleType) {
         minutes: vMinutes,
         seconds: vSeconds,
       } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
-      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : formatTime(cHours, cMinutes, cSeconds, false);
-      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_validation_count) : formatTime(vHours, vMinutes, vSeconds, false);
+      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : formatTime(cHours, cMinutes, cSeconds);
+      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_validation_count) : formatTime(vHours, vMinutes, vSeconds);
       st.value = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
       st.total_speakers = ele.total_speakers;
     } else {
-      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0, 0, 0, false);
-      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0, 0, 0, false);
+      st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0, 0, 0);
+      st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0, 0, 0);
       st.value = 0;
       st.total_speakers = 0;
     }
+    st.state = translate(st.state);
   });
   const sunoTooltip = `<div style="text-align: left;">
                           <h6>{state}</h6> 
-                          <div style="text-align: left;">{total_speakers} People</div>
+                          <div style="text-align: left;">{total_speakers} ${translate('People')}</div>
                           <div style="text-align: left;">
-                            <label>Transcribed: </label>
+                            <label>${translate('Transcribed')}: </label>
                             <label style="margin-left: 8px">{contributed_time}</label>
                           </div>
                           <div style="text-align: left;">
-                            Validated:  <label style="margin-left: 8px">{validated_time}</label>
+                            ${translate('Validated')}:  <label style="margin-left: 8px">{validated_time}</label>
                           </div>
                         </div>`
   const likhoTooltip = `<div style="text-align: left;">
                           <h6>{state}</h6> 
-                          <div style="text-align: left;">{total_speakers} People</div>
+                          <div style="text-align: left;">{total_speakers} ${translate('People')}</div>
                           <div style="text-align: left;">
-                            <label>Translations done: </label>
+                            <label>${translate('Translations done')}: </label>
                             <label style="margin-left: 8px">{contributed_time}</label>
                           </div> 
-                          <div style="text-align: left;">Translations validated:  
+                          <div style="text-align: left;">${translate('Translations validated')}:  
                             <label style="margin-left: 8px">{validated_time}</label>
                           </div>
                         </div>`
   const dekhoTooltip = `<div style="text-align: left;">
                           <h6>{state}</h6> 
-                          <div style="text-align: left;">{total_speakers} People</div>
+                          <div style="text-align: left;">{total_speakers} ${translate('People')}</div>
                           <div style="text-align: left;">
-                            <label>Images labelled: </label> 
+                            <label>${translate('Images labelled')}: </label> 
                             <label style="margin-left: 8px">{contributed_time}</label>
                           </div> 
-                          <div style="text-align: left;">Images validated:
+                          <div style="text-align: left;">${translate('Images validated')}:
                             <label style="margin-left: 8px">{validated_time}</label>
                           </div>
                         </div>`
@@ -268,7 +269,7 @@ function getStatistics(response) {
   const { hours, minutes, seconds } = calculateTime(
     Number(response.total_contributions) * 60 * 60
   );
-  $speakersDataHoursValue.text(formatTime(hours, minutes, seconds, false));
+  $speakersDataHoursValue.text(formatTime(hours, minutes, seconds));
   $speakersDataSpeakerValue.text(response.total_speakers);
   $speakersDataLanguagesValue.text(response.total_languages);
   $speakersDataLoader.addClass("d-none");

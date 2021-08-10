@@ -1,6 +1,6 @@
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
-const { calculateTime, formatTime, formatTimeForLegends, getJson } = require('./utils');
+const { calculateTime, formatTime, formatTimeForLegends, getJson, translate } = require('./utils');
 const { drawTopLanguageChart } = require('../../../build/js/common/verticalGraph');
 
 const statesInformation = [
@@ -72,16 +72,17 @@ const drawMap = function (response) {
         minutes: vMinutes,
         seconds: vSeconds,
       } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
-      st.contributed_time = formatTime(cHours, cMinutes, cSeconds, false);
-      st.validated_time = formatTime(vHours, vMinutes, vSeconds, false);
+      st.contributed_time = formatTime(cHours, cMinutes, cSeconds);
+      st.validated_time = formatTime(vHours, vMinutes, vSeconds);
       st.value = Number(ele.total_contributions);
       st.total_speakers = ele.total_speakers;
     } else {
-      st.contributed_time = formatTime(0,0,0, false);
-      st.validated_time = formatTime(0,0,0, false);
+      st.contributed_time = formatTime(0,0,0);
+      st.validated_time = formatTime(0,0,0);
       st.value = 0;
       st.total_speakers = 0;
     }
+    st.state = translate(st.state)
   });
 
   var chart = am4core.create("indiaMapChart", am4maps.MapChart);
@@ -101,12 +102,12 @@ const drawMap = function (response) {
   var polygonTemplate = polygonSeries.mapPolygons.template;
   polygonTemplate.tooltipHTML = `<div style="text-align: left;">
                                       <h6>{state}</h6> 
-                                      <div style="text-align: left;">{total_speakers} Speakers </div>
+                                      <div style="text-align: left;">{total_speakers} ${translate('Speakers')} </div>
                                       <div style="text-align: left;"> 
-                                        <label>Contributed: </label>
+                                        <label>${translate('Contributed')}: </label>
                                         <label style="margin-left: 8px">{contributed_time}</label>
                                       </div> 
-                                      <div style="text-align: left;">Validated:  
+                                      <div style="text-align: left;">${translate('Validated')}:  
                                         <label style="margin-left: 8px">{validated_time}</label>
                                       </div>
                                   </div>`;
@@ -208,8 +209,8 @@ function getStatistics(response) {
   const { hours: validate_hrs, minutes: validate_min, seconds: validate_sec } = calculateTime(
     Number(response && response.total_validations || 0) * 60 * 60
   );
-  $speakersDataHoursValue.text(formatTime(hours, minutes,seconds, false));
-  $validatedValue.text(formatTime(validate_hrs,validate_min,validate_sec, false));
+  $speakersDataHoursValue.text(formatTime(hours, minutes,seconds));
+  $validatedValue.text(formatTime(validate_hrs,validate_min,validate_sec));
   $speakersDataSpeakerValue.text(response && response.total_speakers || 0);
   $speakersDataLanguagesValue.text(response && response.total_languages || 0);
   $speakersDataLoader.addClass("d-none");

@@ -5,7 +5,7 @@ const {
   setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording,getDeviceInfo, getBrowserInfo,getLocaleString } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup } = require('../common/common');
+const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup,safeErrorHandling } = require('../common/common');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { cdn_url } = require('../common/env-api');
@@ -61,10 +61,10 @@ function uploadToServer(cb) {
     mode: 'cors',
     body: fd,
   })
+  .then(safeErrorHandling)
     .then((res) => res.json())
     .then(() => {
     })
-    .catch(() => {showErrorPopup()})
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -144,12 +144,13 @@ function skipValidation(action) {
       'Content-Type': 'application/json',
     },
   })
+  .then(safeErrorHandling)
     .then(
       (data) => {
         if (!data.ok) {
           throw Error(data.statusText || 'HTTP error');
         }
-      }).catch(() =>  {showErrorPopup()});
+      });
 }
 
 const openEditor = function (){
@@ -456,7 +457,9 @@ const executeOnLoad = function () {
     fetch(`/contributions/${type}?from=${language}&to=''&username=${localSpeakerDataParsed.userName}`, {
       credentials: 'include',
       mode: 'cors'
-    }).then((data) => {
+    })
+    .then(safeErrorHandling)
+    .then((data) => {
       if (!data.ok) {
         throw Error(data.statusText || 'HTTP error');
       } else {
@@ -481,9 +484,7 @@ const executeOnLoad = function () {
       setFooterPosition();
 
       initializeComponent();
-    }).catch(() => {
-      showErrorPopup();
-    })
+    });
   }
 };
 

@@ -18,7 +18,7 @@ const {
 } = require("../common/utils");
 const { downloadPdf } = require('../common/downloadableBadges');
 const { showUserProfile, onChangeUser, onOpenUserDropDown } = require('../common/header');
-const { showByHoursChartThankyouPage, setBadge, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage, showErrorPopup } = require('../common/common');
+const { showByHoursChartThankyouPage, setBadge, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage } = require('../common/common');
 
 const { initializeFeedbackModal } = require('../common/feedback');
 const dekhoCountKey = 'dekhoCount';
@@ -112,8 +112,7 @@ const getLanguageStats = function () {
       } else {
         updateShareContent("", 0);
       }
-    })
-    .catch(() => { showErrorPopup() });
+    });
 };
 
 function setSentencesContributed() {

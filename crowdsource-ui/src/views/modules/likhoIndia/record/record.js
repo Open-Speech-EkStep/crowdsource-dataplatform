@@ -12,7 +12,7 @@ const {
 } = require('../common/utils');
 const {LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, CONTRIBUTION_LANGUAGE } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
-const { isKeyboardExtensionPresent,showErrorPopup, enableCancelButton, disableCancelButton, isMobileDevice, updateLikhoLocaleLanguagesDropdown, showOrHideExtensionCloseBtn } = require('../common/common');
+const { isKeyboardExtensionPresent,showErrorPopup, safeErrorHandling,enableCancelButton, disableCancelButton, isMobileDevice, updateLikhoLocaleLanguagesDropdown, showOrHideExtensionCloseBtn } = require('../common/common');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const speakerDetailsKey = 'speakerDetails';
@@ -48,11 +48,9 @@ function uploadToServer(cb) {
     mode: 'cors',
     body: fd,
   })
+  .then(safeErrorHandling)
     .then((res) => res.json())
     .then(() => {
-    })
-    .catch(() => {
-      showErrorPopup();
     })
     .then(() => {
       if (cb && typeof cb === 'function') {
@@ -127,10 +125,10 @@ function markContributionSkipped() {
     },
     body: JSON.stringify(reqObj),
   })
+  .then(safeErrorHandling)
     .then((res) => res.json())
     .then(() => {
-    })
-    .catch(() => {showErrorPopup();})
+    });
 }
 
 function addListeners() {
@@ -420,6 +418,7 @@ function executeOnLoad() {
           'Content-Type': 'application/json',
         },
       })
+      .then(safeErrorHandling)
         .then((data) => {
           if (!data.ok) {
             throw Error(data.statusText || 'HTTP error');
@@ -456,15 +455,12 @@ function executeOnLoad() {
           setFooterPosition();
           initialize();
         })
-        .catch(() => {
-          showErrorPopup();
-        })
         .then(() => {
           $loader.hide();
         });
     }
   } catch (err) {
-    showErrorPopup();
+    console.log(err);
   }
 }
 

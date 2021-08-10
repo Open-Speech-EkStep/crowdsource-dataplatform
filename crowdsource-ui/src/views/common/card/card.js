@@ -1,4 +1,5 @@
 const {LOCALE_STRINGS,AGGREGATED_DATA_BY_LANGUAGE}=require('./constants');
+const  {updateLocaleLanguagesDropdown, calculateTime, formatTime} = require("./utils");
 
 const $left = $('#left');
 const $right = $('#right');
@@ -12,14 +13,27 @@ const updateLocaleText = function (total_contributions, total_validations, langu
   const $left_p_3 = $("#left-p-3");
   const $right_p_3 = $("#right-p-3");
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-  let hrsRecordedIn = localeStrings['hrs recorded in'];
-  hrsRecordedIn = hrsRecordedIn.replace("<x>", total_contributions);
-  hrsRecordedIn = hrsRecordedIn.replace("<y>", language);
+  const {
+      hours: cHours,
+      minutes: cMinutes,
+      seconds: cSeconds
+  } = calculateTime(parseFloat(total_contributions).toFixed(3) * 60 * 60);
+  const {
+      hours: vHours,
+      minutes: vMinutes,
+      seconds: vSeconds
+  } = calculateTime(parseFloat(total_validations).toFixed(3) * 60 * 60);
+
+  const localeLanguage = localeStrings[language];
+
+  let hrsRecordedIn = localeStrings['Contribution so far in <y> - <x>'];
+  hrsRecordedIn = hrsRecordedIn.replace("<x>", formatTime(cHours, cMinutes, cSeconds));
+  hrsRecordedIn = hrsRecordedIn.replace("<y>", localeLanguage);
   $left_p_3.text(hrsRecordedIn);
 
-  let hrsValidatedIn = localeStrings['hrs validated in'];
-  hrsValidatedIn = hrsValidatedIn.replace("<x>", total_validations);
-  hrsValidatedIn = hrsValidatedIn.replace("<y>", language);
+  let hrsValidatedIn = localeStrings['Validation so far in <y> - <x>'];
+  hrsValidatedIn = hrsValidatedIn.replace("<x>", formatTime(vHours, vMinutes, vSeconds));
+  hrsValidatedIn = hrsValidatedIn.replace("<y>", localeLanguage);
   $right_p_3.text(hrsValidatedIn);
 }
 
@@ -37,6 +51,7 @@ function updateHrsForCards(language) {
   }
   $leftLoader.addClass('d-none');
   $rightLoader.addClass('d-none');
+  updateLocaleLanguagesDropdown(language);
 }
 
 $left.hover(() => {

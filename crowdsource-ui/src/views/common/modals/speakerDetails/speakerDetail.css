@@ -4,37 +4,104 @@
 }
 
 #userModal #proceed-box{
-  min-width: 240px;
   padding: 8px 20px 8px 20px;
-  font-size: 18px;
-  line-height: 32px;
-  border-width: 0;
+}
+
+#userModal .close{
+  font-size:20px;
+  font-weight: 400;
+}
+
+#userModal .modal-content{
+  border-radius: 12px;
 }
 
 @media (max-width: 767px) {
-  #userModal .speakerDetails {
-    height: 500px;
-    overflow: auto;
+  #userModal .close{
+    right: 20px !important;
+    top: 12px !important;
+  }
+
+  #userModal #proceed-box{
+    min-width: 290px !important;
+    max-width: 290px;
+    font-size: 16px;
+    height: 44px;
+    line-height: inherit !important;
   }
 
   #userModal .user-name-hint{
     line-height: 12px;
     font-size: 11px;
   }
+
+  #userModal #form-sub-heading{
+    padding-bottom: 16px;
+    font-size: 12px;
+  }
+
+  #userModal .form-group label,
+  #userModal .form-group input,
+  #userModal .form-group select{
+    font-size: 14px !important;
+  }
+
+  #userModal .form-group{
+    margin-bottom: 12px;
+  }
+
+  #userModal label {
+    margin-bottom: 3px !important;
+  }
+
+  #userModal .modal-body  {
+    max-height: 390px;
+    overflow: auto;
+  }
+
+
+  #userModal .modal-title{
+    font-size: 20px !important;
+  }
 }
 
 @media (min-width: 767px) {
-  #userModal .speakerDetails {
-    height: 700px;
+ 
+  #userModal .close{
+    right:25px;
+    top:16px;
+    font-size: 30px !important;
+  }
+
+  #userModal .form-group{
+    margin-bottom: 16px;
+  }
+  
+  #userModal .speakerdetails-popup {
+    height: 670px;
+    overflow: auto;
+  }
+
+  #userModal .modal-content , #userModal .speakerdetails-popup{
+    max-height: 670px;
+  }
+
+  #userModal .modal-body  {
+    height: 430px;
     overflow: auto;
   }
 
   #userModal .modal-title{
+    font-size: 28px !important;
     line-height: 38px;
   }
 
+  #userModal .modal-lg, #userModal .modal-xl{
+    max-width: 600px !important;
+  }
+
   #userModal #form-sub-heading{
-    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
   }
 
   #userModal .user-name-hint{
@@ -44,10 +111,6 @@
 
   #userModal .username-error {
     font-size: 13px;
-  }
-
-  #userModal .form-group {
-    margin-bottom: 1.25rem;
   }
 
   #userModal .form-label{
@@ -81,12 +144,13 @@
     font-size: 18px;
     line-height: 32px;
     border-width: 0;
+    height: 48px;
   }
 }
 
 .px-6 {
-  padding-right: 6vw !important;
-  padding-left: 6vw !important;
+  padding-right: 2vw !important;
+  padding-left: 2vw !important;
 }
 
 .user-name-hint {

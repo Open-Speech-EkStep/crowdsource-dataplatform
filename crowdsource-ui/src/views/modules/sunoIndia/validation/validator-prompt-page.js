@@ -15,7 +15,7 @@ const {
 const { onChangeUser,onOpenUserDropDown, showUserProfile } = require('../common/header');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent, isMobileDevice, showOrHideExtensionCloseBtn, showErrorPopup} = require('../common/common');
+const {isKeyboardExtensionPresent, isMobileDevice, showOrHideExtensionCloseBtn, showErrorPopup, safeErrorHandling} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {cdn_url} = require('../common/env-api');
 const {initializeFeedbackModal} = require('../common/feedback');
@@ -77,10 +77,10 @@ function uploadToServer(cb) {
     mode: 'cors',
     body: fd,
   })
+  .then(safeErrorHandling)
     .then((res) => res.json())
     .then(() => {
     })
-    .catch(() => {showErrorPopup()})
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -648,7 +648,9 @@ const executeOnLoad = function () {
     fetch(`/contributions/${type}?from=${language}&to=${toLanguage}&username=${localSpeakerDataParsed.userName}`, {
       credentials: 'include',
       mode: 'cors'
-    }).then((data) => {
+    })
+    .then(safeErrorHandling)
+    .then((data) => {
       if (!data.ok) {
         throw Error(data.statusText || 'HTTP error');
       } else {
@@ -673,9 +675,7 @@ const executeOnLoad = function () {
 
 
       initializeComponent();
-    }).catch(() => {
-      showErrorPopup();
-    })
+    });
   }
 }
 

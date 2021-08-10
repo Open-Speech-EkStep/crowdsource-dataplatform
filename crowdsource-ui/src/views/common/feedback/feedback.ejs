@@ -7,248 +7,249 @@
 <div class="modal fade" id="feedback_modal" tabindex="-1" aria-labelledby="FeedbackModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div id="modal_feeback" class="modal-dialog modal-md modal-dialog-centered custom-modal">
         <div class="modal-content border-2" style="padding-top:12px">
-            <div class="modal-header d-block border-0">
-                <h4 class="modal-title text-center">
-                    <%= __('Your Feedback') %>
-                </h4>
-                <div class="text-center" style="margin-top:9px;margin-bottom:24px">
-                    <%= __('We would like to get your feedback to improve this platform') %>
-                </div>
-                <button type="button" id="feedback_close_btn" class="btn btn-close text-muted" aria-label="Close">
-                    &times;
-                </button>
-            </div>
-            <div class="border-top"></div>
-            <div class="modal-body" style="padding:20px 34px 45px 32px">
-                
-
-                <div class="mb-3 email-component" style="display:none">
-                    <label class="form-check-label label-color-feedback" for="email">
-                        <%= __('Email') %> <span class="required">(<%= __('*required')%>)</span>
-                    </label>
-                </div>
-                <div class="mb-3 email-component" style="display:none">
-                    <input class="form-control" name="email" id="email" type="email" required>
-                </div>
-                <div class="mb-3 content-component" style="display:none">
-                    <label class="form-check-label label-color-feedback">
-                        <%= __('Giving Feedback for?') %> <span class="required">(<%= __('*required')%>)</span>
-                    </label>
-                </div>
-                <div class="mb-4 content-component" style="display:none">
-                    <div class="form-row">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="bolo_id" value="bolo">
-                            <label class="form-check-label xs-radio-label" for="bolo_id">
-                                <%= __('Bolo') %>
-                            </label>
-                        </div>
-
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="suno_id" value="suno">
-                            <label class="form-check-label xs-radio-label" for="suno_id">
-                                <%= __('Suno') %>
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="likho_id" value="likho">
-                            <label class="form-check-label xs-radio-label" for="likho_id">
-                                <%= __('Likho') %>
-                            </label>
-                        </div>
+            <div class="feedbacks px-4 pb-4">
+                <div class="modal-header d-block border-0 py-0 px-lg-3 px-md-3 p-0">
+                    <h4 class="modal-title text-center mt-3 font-family-Rowdies">
+                        <%= __('Your Feedback') %>
+                    </h4>
+                    <div class="text-center border-bottom paragraph" style="margin-top:10px">
+                        <%= __('We would like to get your feedback to improve this platform') %>
                     </div>
+                    <button type="button" id="feedback_close_btn" class="btn btn-close text-muted" aria-label="Close">
+                        &times;
+                    </button>
                 </div>
-                <div class="mb-4 content-component" style="display:none">
-                    <div class="form-row">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="dekho_id" value="dekho">
-                            <label class="form-check-label xs-radio-label" for="dekho_id">
-                                <%= __('Dekho') %>
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="moduleSelectRadio" id="others_id" value="others">
-                            <label class="form-check-label xs-radio-label" for="others_id">
-                                <%= __('Others')%>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3 page-type-component" style="display:none">
-                    <label class="form-check-label label-color-feedback" for="select_page_id">
-                        Select page <span class="required">(*required)</span>
-                    </label>
-                </div>
-                <div class="md-4 page-type-component" style="display:none">
-                    <div class="form-row">
-                        <select class="form-control" id="select_page_id" name="select_page_id">
-                        </select>
-                        <% if (typeof page !=='undefined' ) { %>
-                            <input type="hidden" id="target_page" value="<%-page%>">
-                        <% } %>
-
-                    </div>
-                </div>
-
-                
-                <div class="mb-4 mt-4">
-                    <label class="form-check-label label-color-feedback">
-                        <%= __('What is your opinion of this page') %> <span class="required">(<%= __('*required')%>)</span>
-                    </label>
-                </div>
-                <div class="mb-4 mt-4">
-                    <div class="form-row opinion">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input very_sad" type="radio" name="opinionRadio" id="very_sad_id" value="very_sad">
-                            <label class="form-check-label xs-radio-label opinion-label" id="very_sad_label" for="very_sad_id">
-                                <svg id="very_sad-svg" width="44" height="44" viewBox="-1 -1 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path id="very_sad_svg_boundary" d="M21.6667 43.3333C33.6328 43.3333 43.3333 33.6328 43.3333 21.6667C43.3333 9.7005 33.6328 0 21.6667 0C9.7005 0 0 9.7005 0 21.6667C0 33.6328 9.7005 43.3333 21.6667 43.3333Z" fill="#FCE6E6"/>
-                                    <path class="double-stroke" d="M13 15.2753V15.0586" stroke="#E30606" stroke-width="2" stroke-linecap="round"/>
-                                    <path class="double-stroke" d="M30.332 15.2753V15.0586" stroke="#E30606" stroke-width="2" stroke-linecap="round"/>
-                                    <path d="M30.3333 30.3359C29.25 27.0859 26.455 23.8359 21.6667 23.8359C16.8783 23.8359 14.0833 27.0859 13 30.3359" stroke="#E30606" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </label>
-                        </div>
-
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input sad" type="radio" name="opinionRadio" id="sad_id" value="sad">
-                            <label class="form-check-label xs-radio-label opinion-label" id="sad_label" for="sad_id">
-                                <svg id="sad-svg" width="44" height="44" viewBox="-1 -1 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path id="sad_svg_boundary" d="M21.6667 43.3333C33.6328 43.3333 43.3333 33.6328 43.3333 21.6667C43.3333 9.7005 33.6328 0 21.6667 0C9.7005 0 0 9.7005 0 21.6667C0 33.6328 9.7005 43.3333 21.6667 43.3333Z" fill="#FDF4EC"/>
-                                    <path class="double-stroke" d="M13 15.2753V15.0586" stroke="#EA913F" stroke-width="2" stroke-linecap="round"/>
-                                    <path class="double-stroke" d="M30.332 15.2753V15.0586" stroke="#EA913F" stroke-width="2" stroke-linecap="round"/>
-                                    <path d="M14.084 30.3333L29.2507 26" stroke="#EA913F" stroke-linecap="round"/>
-                                </svg>
-                            </label>
-                        </div>
-
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input neutral" type="radio" name="opinionRadio" id="neutral_id" value="neutral">
-                            <label class="form-check-label xs-radio-label opinion-label" id="neutral_label" for="neutral_id">
-                                <svg id="neutral-svg" width="44" height="44" viewBox="-1 -1 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path id="neutral_svg_boundary" d="M21.6667 43.3333C33.6328 43.3333 43.3333 33.6328 43.3333 21.6667C43.3333 9.7005 33.6328 0 21.6667 0C9.7005 0 0 9.7005 0 21.6667C0 33.6328 9.7005 43.3333 21.6667 43.3333Z" fill="#E6F2FF"/>
-                                    <path class="double-stroke" d="M13 15.2753V15.0586" stroke="#007BFF" stroke-width="2" stroke-linecap="round"/>
-                                    <path class="double-stroke" d="M30.332 15.2753V15.0586" stroke="#007BFF" stroke-width="2" stroke-linecap="round"/>
-                                    <path d="M13.2572 26.5713C13.0205 26.4292 12.7133 26.506 12.5713 26.7428C12.4292 26.9795 12.506 27.2867 12.7428 27.4287L13.2572 26.5713ZM31.2572 27.4287C31.494 27.2867 31.5708 26.9795 31.4287 26.7428C31.2867 26.506 30.9795 26.4292 30.7428 26.5713L31.2572 27.4287ZM12.7428 27.4287C15.3373 28.9855 18.6813 29.75 22 29.75C25.3187 29.75 28.6627 28.9855 31.2572 27.4287L30.7428 26.5713C28.3373 28.0145 25.1813 28.75 22 28.75C18.8187 28.75 15.6627 28.0145 13.2572 26.5713L12.7428 27.4287Z" fill="#007BFF"/>
-                                </svg>
-                            </label>
-                        </div>
-
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input happy" type="radio" name="opinionRadio" id="happy_id" value="happy">
-                            <label class="form-check-label xs-radio-label opinion-label" id="happy_label" for="happy_id">
-                                <svg id="happy-svg" width="44" height="44" viewBox="-1 -1 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path id="happy_svg_boundary" d="M21.6667 43.3333C33.6328 43.3333 43.3333 33.6328 43.3333 21.6667C43.3333 9.7005 33.6328 0 21.6667 0C9.7005 0 0 9.7005 0 21.6667C0 33.6328 9.7005 43.3333 21.6667 43.3333Z" fill="#EDFBEB"/>
-                                    <path class="double-stroke" d="M13 15.2753V15.0586" stroke="#4ED738" stroke-width="2" stroke-linecap="round"/>
-                                    <path class="double-stroke" d="M30.332 15.2753V15.0586" stroke="#4ED738" stroke-width="2" stroke-linecap="round"/>
-                                    <path d="M30.3333 26C29.25 29.25 26.455 32.5 21.6667 32.5C16.8783 32.5 14.0833 29.25 13 26" stroke="#4ED738" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>       
-                            </label>
-                        </div>
-
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input very-happy" type="radio" name="opinionRadio" id="very_happy_id" value="very_happy">
-                            <label class="form-check-label xs-radio-label opinion-label" id="very_happy_label" for="very_happy_id">
-                                <svg id="very-happy-svg" width="44" height="44" viewBox="-1 -1 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path id="very_happy_svg_boundary" d="M21.6667 43.3333C33.6328 43.3333 43.3333 33.6328 43.3333 21.6667C43.3333 9.7005 33.6328 0 21.6667 0C9.7005 0 0 9.7005 0 21.6667C0 33.6328 9.7005 43.3333 21.6667 43.3333Z" fill="#DFEDDA"/>
-                                    <path class="double-stroke" d="M13 15.2753V15.0586" stroke="#2A8908" stroke-width="2" stroke-linecap="round"/>
-                                    <path class="double-stroke" d="M30.334 15.2753V15.0586" stroke="#2A8908" stroke-width="2" stroke-linecap="round"/>
-                                    <path d="M21.6667 34.6667C23.9652 34.6667 26.1696 33.7536 27.7949 32.1283C29.4202 30.5029 30.3333 28.2985 30.3333 26H13C13 28.2985 13.9131 30.5029 15.5384 32.1283C17.1637 33.7536 19.3681 34.6667 21.6667 34.6667Z" stroke="#2A8908" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-bottom:16px">
-                    <label class="form-check-label label-color-feedback" for="category_id">
-                        <%= __('Please select your feedback category') %> <span>(<%= __('optional')%>)</span>
-                    </label>
-                    <div class="form-row">
-                        <select id="category_id" class="form-control">
-                            <option value="category" selected="selected">
-                                <%= __('Select a category') %>
-                            </option>
-                            <option value="suggestion">
-                                <%= __('Suggestion') %>
-                            </option>
-                            <option value="error">
-                                <%= __('Error') %>
-                            </option>
-                            <option value="complaint">
-                                <%= __('Complaint') %>
-                            </option>
-                            <option value="compliment">
-                                <%= __('Compliment') %>
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="md-4">
-                    <div class="form-row">
-                        <label class="form-check-label label-color-feedback" for="feedback_textarea" style="margin-top:16px;margin-bottom:5px">
-                            <%= __('Share your feedback below:') %> <span>(<%= __('optional')%>)</span>
+                <div class="modal-body py-3 px-lg-3 px-md-3 px-0">
+                    <div class="mb-3 email-component" style="display:none">
+                        <label class="form-check-label label-color-feedback" for="email">
+                            <%= __('Email') %> <span class="required">(<%= __('*required')%>)</span>
                         </label>
                     </div>
-                </div>
-                <textarea name="feedback_textarea" maxlength="1000" id="feedback_description" class="w-100 p-3 other-reason mb-4 label-color-feedback" rows="3" placeholder="<%= __('Type here...')%>" style="background-color:#fff;border:1px solid rgba(149,149,149,.6)"></textarea>
-
-                <div class="form-group mb-4">
-                    <label for="recommend" class="form-label label-color-feedback">
-                        <%= __('Would you recommend Bhasha Daan to your friends & family?') %>  <span>(<%= __('optional')%>)</span>
-                    </label>
-                    <div class="justify-content-between">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="recommend" id="yes-check" value="yes">
-                            <label class="form-check-label mx-2" for="yes-check">
-                                <%= __('Yes') %>
-                            </label>
+                    <div class="mb-3 email-component" style="display:none">
+                        <input class="form-control" name="email" id="email" type="email" required>
+                    </div>
+                    <div class="mb-3 content-component" style="display:none">
+                        <label class="form-check-label label-color-feedback">
+                            <%= __('Giving Feedback for?') %> <span class="required">(<%= __('*required')%>)</span>
+                        </label>
+                    </div>
+                    <div class="mb-4 content-component" style="display:none">
+                        <div class="form-row">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="bolo_id" value="bolo">
+                                <label class="form-check-label xs-radio-label" for="bolo_id">
+                                    <%= __('Bolo') %>
+                                </label>
+                            </div>
+    
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="suno_id" value="suno">
+                                <label class="form-check-label xs-radio-label" for="suno_id">
+                                    <%= __('Suno') %>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="likho_id" value="likho">
+                                <label class="form-check-label xs-radio-label" for="likho_id">
+                                    <%= __('Likho') %>
+                                </label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="recommend" id="no-check" value="no">
-                            <label class="form-check-label mx-2" for="no-check">
-                                <%= __('No') %>
-                            </label>
+                    </div>
+                    <div class="mb-4 content-component" style="display:none">
+                        <div class="form-row">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="dekho_id" value="dekho">
+                                <label class="form-check-label xs-radio-label" for="dekho_id">
+                                    <%= __('Dekho') %>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="others_id" value="others">
+                                <label class="form-check-label xs-radio-label" for="others_id">
+                                    <%= __('Others')%>
+                                </label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="recommend" id="maybe-check" value="maybe">
-                            <label class="form-check-label mx-2" for="maybe-check">
-                                <%= __('Maybe') %>
+                    </div>
+                    <div class="mb-3 page-type-component" style="display:none">
+                        <label class="form-check-label label-color-feedback" for="select_page_id">
+                            Select page <span class="required">(*required)</span>
+                        </label>
+                    </div>
+                    <div class="md-4 page-type-component" style="display:none">
+                        <div class="form-row">
+                            <select class="form-control" id="select_page_id" name="select_page_id">
+                            </select>
+                            <% if (typeof page !=='undefined' ) { %>
+                                <input type="hidden" id="target_page" value="<%-page%>">
+                            <% } %>
+    
+                        </div>
+                    </div>
+    
+                    
+                    <div class="mb-2">
+                        <label class="form-check-label label-color-feedback">
+                            <%= __('What is your opinion of this page') %> <span class="required">(<%= __('*required')%>)</span>
+                        </label>
+                    </div>
+                    <div class="mb-4 mt-1">
+                        <div class="form-row m-0 opinion">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input very_sad" type="radio" name="opinionRadio" id="very_sad_id" value="very_sad">
+                                <label class="form-check-label xs-radio-label opinion-label" id="very_sad_label" for="very_sad_id">
+                                    <svg id="very_sad-svg" width="44" height="44" viewBox="-1 -1 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="very_sad_svg_boundary" d="M21.6667 43.3333C33.6328 43.3333 43.3333 33.6328 43.3333 21.6667C43.3333 9.7005 33.6328 0 21.6667 0C9.7005 0 0 9.7005 0 21.6667C0 33.6328 9.7005 43.3333 21.6667 43.3333Z" fill="#FCE6E6"/>
+                                        <path class="double-stroke" d="M13 15.2753V15.0586" stroke="#E30606" stroke-width="2" stroke-linecap="round"/>
+                                        <path class="double-stroke" d="M30.332 15.2753V15.0586" stroke="#E30606" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M30.3333 30.3359C29.25 27.0859 26.455 23.8359 21.6667 23.8359C16.8783 23.8359 14.0833 27.0859 13 30.3359" stroke="#E30606" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </label>
+                            </div>
+    
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input sad" type="radio" name="opinionRadio" id="sad_id" value="sad">
+                                <label class="form-check-label xs-radio-label opinion-label" id="sad_label" for="sad_id">
+                                    <svg id="sad-svg" width="44" height="44" viewBox="-1 -1 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="sad_svg_boundary" d="M21.6667 43.3333C33.6328 43.3333 43.3333 33.6328 43.3333 21.6667C43.3333 9.7005 33.6328 0 21.6667 0C9.7005 0 0 9.7005 0 21.6667C0 33.6328 9.7005 43.3333 21.6667 43.3333Z" fill="#FDF4EC"/>
+                                        <path class="double-stroke" d="M13 15.2753V15.0586" stroke="#EA913F" stroke-width="2" stroke-linecap="round"/>
+                                        <path class="double-stroke" d="M30.332 15.2753V15.0586" stroke="#EA913F" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M14.084 30.3333L29.2507 26" stroke="#EA913F" stroke-linecap="round"/>
+                                    </svg>
+                                </label>
+                            </div>
+    
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input neutral" type="radio" name="opinionRadio" id="neutral_id" value="neutral">
+                                <label class="form-check-label xs-radio-label opinion-label" id="neutral_label" for="neutral_id">
+                                    <svg id="neutral-svg" width="44" height="44" viewBox="-1 -1 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="neutral_svg_boundary" d="M21.6667 43.3333C33.6328 43.3333 43.3333 33.6328 43.3333 21.6667C43.3333 9.7005 33.6328 0 21.6667 0C9.7005 0 0 9.7005 0 21.6667C0 33.6328 9.7005 43.3333 21.6667 43.3333Z" fill="#E6F2FF"/>
+                                        <path class="double-stroke" d="M13 15.2753V15.0586" stroke="#007BFF" stroke-width="2" stroke-linecap="round"/>
+                                        <path class="double-stroke" d="M30.332 15.2753V15.0586" stroke="#007BFF" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M13.2572 26.5713C13.0205 26.4292 12.7133 26.506 12.5713 26.7428C12.4292 26.9795 12.506 27.2867 12.7428 27.4287L13.2572 26.5713ZM31.2572 27.4287C31.494 27.2867 31.5708 26.9795 31.4287 26.7428C31.2867 26.506 30.9795 26.4292 30.7428 26.5713L31.2572 27.4287ZM12.7428 27.4287C15.3373 28.9855 18.6813 29.75 22 29.75C25.3187 29.75 28.6627 28.9855 31.2572 27.4287L30.7428 26.5713C28.3373 28.0145 25.1813 28.75 22 28.75C18.8187 28.75 15.6627 28.0145 13.2572 26.5713L12.7428 27.4287Z" fill="#007BFF"/>
+                                    </svg>
+                                </label>
+                            </div>
+    
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input happy" type="radio" name="opinionRadio" id="happy_id" value="happy">
+                                <label class="form-check-label xs-radio-label opinion-label" id="happy_label" for="happy_id">
+                                    <svg id="happy-svg" width="44" height="44" viewBox="-1 -1 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="happy_svg_boundary" d="M21.6667 43.3333C33.6328 43.3333 43.3333 33.6328 43.3333 21.6667C43.3333 9.7005 33.6328 0 21.6667 0C9.7005 0 0 9.7005 0 21.6667C0 33.6328 9.7005 43.3333 21.6667 43.3333Z" fill="#EDFBEB"/>
+                                        <path class="double-stroke" d="M13 15.2753V15.0586" stroke="#4ED738" stroke-width="2" stroke-linecap="round"/>
+                                        <path class="double-stroke" d="M30.332 15.2753V15.0586" stroke="#4ED738" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M30.3333 26C29.25 29.25 26.455 32.5 21.6667 32.5C16.8783 32.5 14.0833 29.25 13 26" stroke="#4ED738" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>       
+                                </label>
+                            </div>
+    
+                            <div class="form-check form-check-inline m-0">
+                                <input class="form-check-input very-happy" type="radio" name="opinionRadio" id="very_happy_id" value="very_happy">
+                                <label class="form-check-label xs-radio-label opinion-label" id="very_happy_label" for="very_happy_id">
+                                    <svg id="very-happy-svg" width="44" height="44" viewBox="-1 -1 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="very_happy_svg_boundary" d="M21.6667 43.3333C33.6328 43.3333 43.3333 33.6328 43.3333 21.6667C43.3333 9.7005 33.6328 0 21.6667 0C9.7005 0 0 9.7005 0 21.6667C0 33.6328 9.7005 43.3333 21.6667 43.3333Z" fill="#DFEDDA"/>
+                                        <path class="double-stroke" d="M13 15.2753V15.0586" stroke="#2A8908" stroke-width="2" stroke-linecap="round"/>
+                                        <path class="double-stroke" d="M30.334 15.2753V15.0586" stroke="#2A8908" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M21.6667 34.6667C23.9652 34.6667 26.1696 33.7536 27.7949 32.1283C29.4202 30.5029 30.3333 28.2985 30.3333 26H13C13 28.2985 13.9131 30.5029 15.5384 32.1283C17.1637 33.7536 19.3681 34.6667 21.6667 34.6667Z" stroke="#2A8908" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="mb-4">
+                        <label class="form-check-label label-color-feedback" for="category_id">
+                            <%= __('Please select your feedback category') %> <span class="text-primary-muted">(<%= __('optional')%>)</span>
+                        </label>
+                        <div class="form-row m-0">
+                            <select id="category_id" class="form-control">
+                                <option value="category" selected="selected">
+                                    <%= __('Select a category') %>
+                                </option>
+                                <option value="suggestion">
+                                    <%= __('Suggestion') %>
+                                </option>
+                                <option value="error">
+                                    <%= __('Error') %>
+                                </option>
+                                <option value="complaint">
+                                    <%= __('Complaint') %>
+                                </option>
+                                <option value="compliment">
+                                    <%= __('Compliment') %>
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+    
+                    <div class="md-4">
+                        <div class="form-row m-0">
+                            <label class="form-check-label label-color-feedback" for="feedback_textarea">
+                                <%= __('Share your feedback below:') %> <span class="text-primary-muted">(<%= __('optional')%>)</span>
                             </label>
                         </div>
                     </div>
-                </div>
-
-                <div class="form-group mb-4">
-                    <label for="revisit" class="form-label label-color-feedback">
-                        <%= __('Would you revisit Bhasha Daan?') %>  <span>(<%= __('optional')%>)</span>
-                    </label>
-                    <div class="justify-content-between">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="revisit" id="revisit-yes-check" value="yes">
-                            <label class="form-check-label mx-2" for="yes-check">
-                                <%= __('Yes') %>
-                            </label>
+                    <textarea name="feedback_textarea" maxlength="1000" id="feedback_description" class="w-100 p-3 other-reason mb-3 label-color-feedback" rows="3" placeholder="<%= __('Type here...')%>" style="background-color:#fff;border:1px solid rgba(149,149,149,.6)"></textarea>
+    
+                    <div class="form-group mb-4">
+                        <label for="recommend" class="form-label label-color-feedback mb-0">
+                            <%= __('Would you recommend Bhasha Daan to your friends & family?') %>  <span class="text-primary-muted">(<%= __('optional')%>)</span>
+                        </label>
+                        <div class="justify-content-between">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="recommend" id="yes-check" value="yes">
+                                <label class="form-check-label mx-2" for="yes-check">
+                                    <%= __('Yes') %>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="recommend" id="no-check" value="no">
+                                <label class="form-check-label mx-2" for="no-check">
+                                    <%= __('No') %>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="recommend" id="maybe-check" value="maybe">
+                                <label class="form-check-label mx-2" for="maybe-check">
+                                    <%= __('Maybe') %>
+                                </label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="revisit" id="revisit-no-check" value="no">
-                            <label class="form-check-label mx-2" for="no-check">
-                                <%= __('No') %>
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="revisit" id="revisit-maybe-check" value="maybe">
-                            <label class="form-check-label mx-2" for="maybe-check">
-                                <%= __('Maybe') %>
-                            </label>
+                    </div>
+    
+                    <div class="form-group m-0">
+                        <label for="revisit" class="form-label label-color-feedback mb-0">
+                            <%= __('Would you revisit Bhasha Daan?') %>  <span class="text-primary-muted">(<%= __('optional')%>)</span>
+                        </label>
+                        <div class="justify-content-between">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="revisit" id="revisit-yes-check" value="yes">
+                                <label class="form-check-label mx-2" for="yes-check">
+                                    <%= __('Yes') %>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="revisit" id="revisit-no-check" value="no">
+                                <label class="form-check-label mx-2" for="no-check">
+                                    <%= __('No') %>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="revisit" id="revisit-maybe-check" value="maybe">
+                                <label class="form-check-label mx-2" for="maybe-check">
+                                    <%= __('Maybe') %>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center mt-5">
-                    <button id="submit_btn" class="btn btn-primary submit-btn-feedback" disabled="disabled">
-                        <%= __('Submit')%>
-                    </button>
+                <div class="modal-footer border-0 p-0">
+                    <div class="d-flex row m-0 w-100 justify-content-center">
+                        <button id="submit_btn" class="btn btn-custom-primary" disabled="disabled">
+                            <%= __('Submit')%>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -258,21 +259,21 @@
 
 <div class="modal fade" id="feedback_thanku_modal" tabindex="-1" aria-labelledby="FeedbackThankYou" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-md modal-dialog-centered">
-        <div class="modal-content p-4 border-2">
-            <div class="modal-header d-block border-0">
+        <div class="modal-content px-4 py-5 border-2" style="border-radius:12px">
+            <div class="modal-header p-0 d-block border-0">
                 <button type="button" id="feedback_thanku_close_btn" class="btn btn-close text-muted" data-bs-dismiss="modal" aria-label="Close">
                     &times;
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="row justify-content-center py-2">
-                    <img src="/img/success.svg" alt="Success">
+            <div class="modal-body py-0">
+                <div class="row justify-content-center pb-2">
+                    <img src="/img/success.svg" alt="Success" height="48" width="48">
                 </div>
 
-                <div class="text-center py-2" style="font-size:16px">
+                <div class="text-center pt-2 success-feedback">
                     <%= __('Submitted successfully')%>
                 </div>
-                <div class="text-center py-2 pb-5" style="font-family:Lato;font-size:20px"><%= __('Thank you for your feedback!')%>
+                <div class="text-center thanks-feedback"><%= __('Thank you for your feedback!')%>
                 </div>
             </div>
         </div>

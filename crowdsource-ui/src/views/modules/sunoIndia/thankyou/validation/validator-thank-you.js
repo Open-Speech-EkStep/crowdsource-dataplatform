@@ -20,7 +20,7 @@ const {
 } = require("../common/utils");
 
 const { downloadPdf } = require('../common/downloadableBadges');
-const { showByHoursChartThankyouPage, setBadge, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage, showErrorPopup } = require('../common/common');
+const { showByHoursChartThankyouPage, setBadge, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage } = require('../common/common');
 
 const CURRENT_INDEX = "sunoValidationCurrentIndex";
 const SPEAKER_DETAILS = "speakerDetails";
@@ -111,8 +111,7 @@ const getLanguageStats = function () {
       } else {
         updateShareContent("", 0);
       }
-    })
-    .catch(() => { showErrorPopup() });
+    });
 };
 
 function setSentencesContributed() {

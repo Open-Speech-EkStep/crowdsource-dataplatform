@@ -19,7 +19,7 @@ const {
 const { downloadPdf } = require('../common/downloadableBadges');
 const { initializeFeedbackModal } = require('../common/feedback')
 
-const { setBadge, showByHoursChartThankyouPage, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage, showErrorPopup } = require('../common/common');
+const { setBadge, showByHoursChartThankyouPage, updateGoalProgressBarFromJson, replaceSubStr, getTopLanguage } = require('../common/common');
 const { onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
 
 const CURRENT_INDEX = "currentIndex";
@@ -144,7 +144,6 @@ const getLanguageStats = function () {
         updateShareContent("", 0);
       }
     })
-    .catch(() => { showErrorPopup() });
 };
 
 function executeOnLoad() {

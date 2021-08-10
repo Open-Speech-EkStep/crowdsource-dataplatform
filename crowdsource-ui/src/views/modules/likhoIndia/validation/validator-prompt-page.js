@@ -13,7 +13,7 @@ const {
 } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup, updateLikhoLocaleLanguagesDropdown} = require('../common/common');
+const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup,safeErrorHandling, updateLikhoLocaleLanguagesDropdown} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { setDataSource } = require('../common/sourceInfo');
@@ -87,10 +87,10 @@ function uploadToServer(cb) {
     mode: 'cors',
     body: fd,
   })
+  .then(safeErrorHandling)
     .then((res) => res.json())
     .then(() => {
     })
-    .catch(() => {showErrorPopup()})
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -170,12 +170,13 @@ function skipValidation(action) {
       'Content-Type': 'application/json',
     },
   })
+  .then(safeErrorHandling)
     .then(
       (data) => {
         if (!data.ok) {
           throw Error(data.statusText || 'HTTP error');
         }
-      }).catch(() => {showErrorPopup()});
+      });
 }
 
 const openEditor = function () {
@@ -457,6 +458,7 @@ const executeOnLoad = function () {
       credentials: 'include',
       mode: 'cors'
     })
+    .then(safeErrorHandling)
       .then((data) => {
         if (!data.ok) {
           throw Error(data.statusText || 'HTTP error');
@@ -482,9 +484,7 @@ const executeOnLoad = function () {
       setFooterPosition();
 
       initializeComponent();
-    }).catch(() => {
-      showErrorPopup();
-    })
+    });
   }
 };
 

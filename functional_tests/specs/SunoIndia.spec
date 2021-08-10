@@ -8,19 +8,10 @@ Tags: component
 * Validate Suno India content
 * User should see the top Language graph and other stats
 
-## Both cards should be disabled when there is no data for Malayalam / Transcribe card is disabled & Validate is enabled when data is already contributed for Telugu
-* Select Contribution Language as "മലയാളം"
-* Check "Transcribe" option should be "disabled" on Home page
-* Check "Validate" option should be "disabled" on Home page
-* Select Contribution Language as "తెలుగు"
-* Check "Transcribe" option should be "disabled" on Home page
-* Check "Validate" option should be "enabled" on Home page
 
 ## Validate Transcribe card should be enabled when the data is not contributed for Odia language
 * User should store the progress bar for "Suno India"
 * Select Contribution Language as "ଓଡିଆ"
-* Check "Transcribe" option should be "enabled" on Home page
-* Check "Validate" option should be "disabled" on Home page
 * Navigate to "Transcribe" and add username "T User" then click Lets go
 //* When user clicks on Data Source button, popup should open and they should see source information
 * When user clicks on Play button, Pause button should appear and when user clicks on pause, resume should appear
@@ -30,8 +21,6 @@ Tags: component
 * User click on "edit" field and type "ହାଏ ଓଡିଆ ଓଡିଆ" submit and cancel button should be enabled
 * When user clicks on submit button for Odia language user should see "Thank you for contributing!"
 * When user clicks on back button, user should land on home page
-//* Validate the updated progress bar value with "2" for "Suno India"
-* Check "Validate" option should be "enabled" on Home page
 
 ## Validate Transcribe flow
 * Select Contribution Language as "ಕನ್ನಡ"
@@ -108,10 +97,10 @@ Tags: component
 * When user select "ಕನ್ನಡ" Language from dropdown then "Languages" should not visible
 * When user clicks on back button, user should land on home page
 
-## Validate profanity configuration
-* Select Contribution Language as "ગુજરાતી"
-* Check "Transcribe" option should be "disabled" on Home page
-* Check "Validate" option should be "disabled" on Home page
+//## Validate profanity configuration
+//* Select Contribution Language as "ગુજરાતી"
+//* Check "Transcribe" option should be "disabled" on Home page
+//* Check "Validate" option should be "disabled" on Home page
 
 
 ## Validate My Badge flow and check Badges

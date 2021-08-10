@@ -1,7 +1,7 @@
 const { redirectToLocalisedPage } = require('./locale');
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('./header');
 const { getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
-const { updateLocaleLanguagesDropdown, getLocaleString, calculateTime, formatTime } = require('./utils')
+const { updateLocaleLanguagesDropdown, getLocaleString } = require('./utils')
 const {
     setUserModalOnShown,
     setUserNameOnInputFocus,
@@ -9,9 +9,10 @@ const {
     setStartRecordingBtnOnClick,
 } = require('./speakerDetails');
 
-const { getContributedAndTopLanguage,hasUserRegistered, showErrorPopup } = require('./common');
+const { getContributedAndTopLanguage,hasUserRegistered,safeJqueryErrorHandling } = require('./common');
 const { addToLanguage } = require('../../views/common/languageNavBar/languageNavBar');
-const { updateGoalProgressBarFromJson } = require('../../../build/js/common/common')
+const { updateGoalProgressBarFromJson, showFunctionalCards } = require('../../../build/js/common/common')
+
 
 const {
     DEFAULT_CON_LANGUAGE,
@@ -25,51 +26,7 @@ const {
     SPEAKER_DETAILS_KEY
 } = require('./constants');
 const { context_root } = require('./env-api');
-
-const updateLocaleText = function (total_contributions, total_validations, language) {
-    const $say_p_3 = $("#say-p-3");
-    const $listen_p_3 = $("#listen-p-3");
-    const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
-    const {
-        hours: cHours,
-        minutes: cMinutes,
-        seconds: cSeconds
-    } = calculateTime(parseFloat(total_contributions).toFixed(3) * 60 * 60);
-    const {
-        hours: vHours,
-        minutes: vMinutes,
-        seconds: vSeconds
-    } = calculateTime(parseFloat(total_validations).toFixed(3) * 60 * 60);
-
-    const localeLanguage = localeStrings[language];
-
-    let hrsRecordedIn = localeStrings['Contribution so far in <y> - <x>'];
-    hrsRecordedIn = hrsRecordedIn.replace("<x>", formatTime(cHours, cMinutes, cSeconds));
-    hrsRecordedIn = hrsRecordedIn.replace("<y>", localeLanguage);
-    $say_p_3.text(hrsRecordedIn);
-
-    let hrsValidatedIn = localeStrings['Validation so far in <y> - <x>'];
-    hrsValidatedIn = hrsValidatedIn.replace("<x>", formatTime(vHours, vMinutes, vSeconds));
-    hrsValidatedIn = hrsValidatedIn.replace("<y>", localeLanguage);
-    $listen_p_3.text(hrsValidatedIn);
-}
-
-function updateHrsForSayAndListen(language) {
-    const $sayLoader = $('#say-loader');
-    const $listenLoader = $('#listen-loader');
-    $sayLoader.removeClass('d-none');
-    $listenLoader.removeClass('d-none');
-    const aggregateDetails = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE));
-    const totalInfo = aggregateDetails && aggregateDetails.find((element) => element.language === language);
-    if (totalInfo) {
-        updateLocaleText(totalInfo.total_contributions, totalInfo.total_validations, language);
-    } else {
-        updateLocaleText(0, 0, language);
-    }
-    $sayLoader.addClass('d-none');
-    $listenLoader.addClass('d-none');
-    updateLocaleLanguagesDropdown(language);
-}
+const { updateHrsForCards } = require('../../../build/js/common/card');
 
 const clearLocalStorage = function () {
     localStorage.removeItem(TOP_LANGUAGES_BY_HOURS);
@@ -86,8 +43,8 @@ const getStatsSummary = function () {
             bData.total_speakers = bData2.count || 0;
             getStatistics(bData || {});
         });
-    }).fail(() => {
-        showErrorPopup();
+    }).fail((e) => {
+        safeJqueryErrorHandling(e);
     });
     $.getJSON(`${context_root}/aggregated-json/topLanguagesByHoursContributed.json`, (jsonData) => {
         const top_languages_by_hours = jsonData.filter(d => d.type == "text");
@@ -106,16 +63,16 @@ const getStatsSummary = function () {
         }
 
         const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
-        updateHrsForSayAndListen(contributionLanguage);
-    }).fail(() => {
-        showErrorPopup();
+        updateHrsForCards(contributionLanguage);
+    }).fail((e) => {
+        safeJqueryErrorHandling(e);
     });
     $.getJSON(`${context_root}/aggregated-json/topLanguagesBySpeakerContributions.json`, (jsonData) => {
         const top_languages_by_speakers = jsonData.filter(d => d.type == "text");
         const speakers = getContributedAndTopLanguage(top_languages_by_speakers, "speakers");
         localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(speakers));
-    }).fail(() => {
-        showErrorPopup();
+    }).fail((e) => {
+        safeJqueryErrorHandling(e); 
     });
 }
 
@@ -141,7 +98,8 @@ function initializeBlock() {
         top_lang = fromLanguage;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
         sessionStorage.setItem("i18n", "en");
-        updateHrsForSayAndListen(fromLanguage);
+        updateHrsForCards(fromLanguage);
+        showFunctionalCards('text', fromLanguage);
         redirectToLocalisedPage();
         getStatsSummary();
     });
@@ -175,7 +133,8 @@ function initializeBlock() {
             showBySpeakersChart();
         }
     });
-
+    const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+    showFunctionalCards('text', language);
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
 
@@ -191,31 +150,6 @@ function initializeBlock() {
         showUserProfile(localSpeakerDataParsed.userName);
     }
 
-    const $say = $('#say');
-    const $listen = $('#listen');
-    const $listen_p_2 = $('#listen-p-2');
-    const $say_p_2 = $('#say-p-2');
-    const $say_container = $('#say_container');
-    const $listen_container = $('#listen_container');
-    $say.hover(() => {
-        $(".card1").css("box-shadow", "0 8px 0 #43c0d7,0 0 32px #43c0d7")
-        $say_p_2.removeClass('d-none');
-        $say_container.addClass('say-active');
-    }, () => {
-        $(".card1").css("box-shadow", "0 8px 0 #43c0d7, 0px 0px 32px rgb(0 0 0 / 10%)")
-        $say_p_2.addClass('d-none');
-        $say_container.removeClass('say-active');
-    });
-
-    $listen.hover(() => {
-        $(".card2").css("box-shadow", "0 8px 0 #43c0d7,0 0 32px #43c0d7")
-        $listen_p_2.removeClass('d-none');
-        $listen_container.addClass('listen-active');
-    }, () => {
-        $(".card2").css("box-shadow", "0 8px 0 #43c0d7, 0px 0px 32px rgb(0 0 0 / 10%)")
-        $listen_p_2.addClass('d-none');
-        $listen_container.removeClass('listen-active');
-    });
     updateGoalProgressBarFromJson(MODULE.bolo['api-type']);
     getStatsSummary();
 }
@@ -233,6 +167,5 @@ $(document).ready(function () {
 });
 
 module.exports = {
-    updateHrsForSayAndListen,
     getStatsSummary
 };

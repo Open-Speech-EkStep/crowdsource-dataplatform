@@ -1,5 +1,5 @@
 const fetch = require('./fetch')
-const { calculateTime, formatTime, getJson } = require('./utils');
+const { calculateTime, formatTime, getJson, translate } = require('./utils');
 const { CURRENT_MODULE, MODULE } = require('./constants');
 
 const $timelineLoader = $('#timeline-loader');
@@ -50,23 +50,23 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     if(currentModule == MODULE.suno.value){
     tooltipContent = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
-                <div>Transcribed: <label>{contributedHours}</label></div>
-                <div style="text-align: left;">Validated: <label>{validatedHours}</label></div>
+                <div>${translate('Transcribed')}: <label>{contributedHours}</label></div>
+                <div style="text-align: left;">${translate('Validated')}: <label>{validatedHours}</label></div>
             </div>`;
     }
     if(currentModule == MODULE.likho.value){
       tooltipContent = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
-                <div style="text-align: left;">Translated: <label>{contributedHours}</label></div>
-                <div style="text-align: left;">Validated: <label>{validatedHours}</label></div>
+                <div style="text-align: left;">${translate('Translated')}: <label>{contributedHours}</label></div>
+                <div style="text-align: left;">${translate('Validated')}: <label>{validatedHours}</label></div>
             </div>`;
     }
 
     if(currentModule == MODULE.dekho.value){
       tooltipContent = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
-                <div style="text-align: left;">Labelled: <label>{contributedHours}</label></div>
-                <div style="text-align: left;">Validated: <label>{validatedHours}</label></div>
+                <div style="text-align: left;">${translate('Labelled')}: <label>{contributedHours}</label></div>
+                <div style="text-align: left;">${translate('Validated')}: <label>{validatedHours}</label></div>
             </div>`;
     }
 
@@ -78,7 +78,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     dateAxis.renderer.grid.template.disabled = true;
     dateAxis.renderer.baseGrid.disabled = false;
     dateAxis.renderer.labels.template.fill = '#000';
-    dateAxis.title.text = 'Month';
+    dateAxis.title.text = translate('Month');
     dateAxis.renderer.labels.template.fontSize = 12;
     dateAxis.title.fontSize = 12;
 
@@ -87,7 +87,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     hourAxis.renderer.minGridDistance = 50;
     hourAxis.renderer.grid.template.strokeDasharray = "3,3";
     hourAxis.renderer.labels.template.fill = '#000';
-    hourAxis.title.text = currentModule == "dekho" ? "Images" : currentModule == MODULE.likho.value ? "Sentences" : 'Contribution (in hours)';
+    hourAxis.title.text = currentModule == "dekho" ? translate("Images") : currentModule == MODULE.likho.value ? translate("Sentences") : translate('Contribution (in hours)');
     hourAxis.renderer.labels.template.fontSize = 12;
     hourAxis.title.fontSize = 12;
 
@@ -104,7 +104,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     series.tooltip.label.fill = am4core.color("#000000");
     series.sequencedInterpolation = true;
     series.stroke = am4core.color("#FCC232");
-    series.name = series1Name;
+    series.name = translate(series1Name);
 
     // Create series
     var series2 = chart.series.push(new am4charts.LineSeries());
@@ -114,7 +114,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     series2.tensionX = 0.8;
     series2.strokeWidth = 3;
     series2.stroke = am4core.color("#83E661");
-    series2.name = series2Name;
+    series2.name = translate(series2Name);
 
     if (chartData.length === 1) {
       const circleBullet = series.bullets.push(new am4charts.CircleBullet());

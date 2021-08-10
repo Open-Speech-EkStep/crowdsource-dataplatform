@@ -7,7 +7,7 @@ const {
   covertStringToCapitalised
 } = require('./utils');
 const {onChangeUser, showUserProfile,onOpenUserDropDown} = require('./header');
-const {isMobileDevice, hasUserRegistered, showErrorPopup} = require('./common');
+const {isMobileDevice, hasUserRegistered, safeErrorHandling} = require('./common');
 
 const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type, localeString, language) => {
   return `
@@ -168,6 +168,7 @@ const getBadgesForUser = (userName) => {
       credentials: 'include',
       mode: 'cors'
     })
+    .then(safeErrorHandling)
       .then((res) => res.json())
       .then((result) => {
         let mappedData = [];
@@ -217,8 +218,7 @@ const getBadgesForUser = (userName) => {
             getBadgeRow(element, id, type, localeString);
           });
           resolve(result);
-      })
-      .catch(()=> {showErrorPopup()});
+      });
   })
 }
 

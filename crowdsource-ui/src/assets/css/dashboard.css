@@ -329,7 +329,7 @@ body.modal-open .supreme-container {
 
 @media (min-width: 1360px) {
   .container {
-    max-width: 1560px;
+    max-width: 1360px;
   }
 }
 
@@ -381,11 +381,12 @@ body.modal-open .supreme-container {
     padding: 0.75rem;
   }
   .modal-title {
-    font-size: 2rem;
+    font-size: 20px;
+  }
+  .para-dash{
+    font-size: 12px;
   }
   .modal-body {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
     font-size: 0.75rem;
     margin-bottom: 0.75rem;
   }

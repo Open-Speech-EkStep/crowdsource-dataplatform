@@ -17,16 +17,26 @@
   filter: drop-shadow(0 4px 12px rgba(15, 39, 73, 0.32));
 }
 
+#modal_feeback.modal-dialog, #modal_feeback  .feedbacks {
+  max-width: 600px;
+  max-height: 670px;
+}
+
+.paragraph {
+  padding-bottom: 1.25rem;
+}
+
+
+#modal_feeback .modal-content{
+  border-radius: 12px;
+  border: 1px solid #0f2749;
+}
+
 .my-float{
   left: 8.33%;
   right: 25%;
   top: 25%;
   bottom: 9.31%;
-}
-
-.custom-modal {
-  max-width: 700px;
-  min-height: 867px;
 }
 
 .submit-btn-feedback {
@@ -38,11 +48,7 @@
   width: 160px;
   height: 48px;
 }
-.submit-btn-feedback:disabled{
-  background-color: #d7d7d7;
-  border: none;
-  font-weight: 700;
-}
+
 
 .opinion input[type='radio'] {
   display: none;
@@ -73,9 +79,9 @@ label .required {
 
 #feedback_close_btn, #feedback_thanku_close_btn {
   position: absolute;
-  right: 1rem;
+  right: 16px;
   top: 0;
-  font-size: 2.5rem;
+  font-size: 30px;
   padding: 0;
 }
 
@@ -136,13 +142,25 @@ label .required {
 }
 
 @media (max-width: 700px) {
+  #feedback_close_btn, #feedback_thanku_close_btn{
+    right: 16px;
+    top: 5px !important;
+    font-size: 20px !important;
+  }
+  .paragraph {
+    font-size: 12px !important;
+  }
   .float{
     position:fixed;
     right : 20px;
     bottom : 20px;
     padding: 9px;
   }
-
+  #modal_feeback .btn-custom-primary {
+    height: 44px !important;
+    min-width: 290px !important;
+    max-width: 290px !important;
+  }
   #feedback_button{
     height: 48px;
     width: 48px;
@@ -154,4 +172,63 @@ label .required {
     height: 28px;
     width: 28px;
   }
+  #modal_feeback .modal-body {
+    max-height: 410px;
+    overflow: auto;
+  }
+  #modal_feeback .modal-title {
+    font-size: 20px !important;
+  }
+  #modal_feeback label,
+  #modal_feeback input,
+  #modal_feeback select{
+    font-size: 14px !important;
+  }
+  .success-feedback {
+    font-size: 14px;
+  }
+  .thanks-feedback {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 767px) {
+  #feedback_thanku_modal .modal-dialog {
+    max-width: 400px !important;
+  }
+  #modal_feeback #feedback_close_btn{
+    right:25px;
+    top:5px;
+    font-size: 30px !important;
+  }
+  #feedback_modal .modal-title{
+    font-size: 28px !important;
+    line-height: 38px;
+  }
+  #modal_feeback .btn-custom-primary {
+    height: 48px !important;
+    width: 240px !important;
+  }
+
+  .success-feedback {
+    font-size: 16px;
+  }
+
+  .thanks-feedback {
+    font-size: 16px;
+  }
+
+  #modal_feeback .modal-body  {
+    height: 475px;
+    overflow: auto;
+  }
+}
+
+#feedback_close_btn {
+  box-shadow: none !important;
+}
+
+.text-primary-muted {
+  color: #0f2749;
+  opacity: 0.4;
 }

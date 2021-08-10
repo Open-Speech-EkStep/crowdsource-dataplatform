@@ -23,3 +23,5 @@ select dataset_row_id from dataset_row where (type='parallel') and (media->> 'la
 );
 
 delete from dataset_row where (type='parallel') and (media->> 'language'='Odia');
+
+

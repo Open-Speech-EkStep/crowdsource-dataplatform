@@ -24,6 +24,42 @@ jobs:
           paths:
             - .
 
+  setup_functional_tests:
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+      env_name:
+        type: string
+      db_name:
+        type: string
+    executor: azure-aks/default
+    steps:
+      - *fast-checkout
+      - azure-aks/update-kubeconfig-with-credentials:
+          cluster-name: << parameters.cluster-name >>
+          install-kubectl: true
+          perform-login: true
+          resource-group: ${AZURE_RESOURCE_GROUP}
+      - run:
+          name: Setup for Functional tests
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y python3 python3-pip
+            sudo apt-get install -y postgresql-client
+            
+            ENV_IMAGE_NAME=${AZURE_LOGIN_SERVER_NAME}/${AZURE_REPO}:<< parameters.env_name >>
+            ENV_IMAGE_NAME_DB_REFRESHER=${AZURE_LOGIN_SERVER_NAME}/${DB_REFRESHER_REPO}:<< parameters.env_name >>
+
+            AZURE_DB_USER=$(python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(sys.argv[1]))" $AZURE_DB_USER)
+            AZURE_DB_PASS=$(python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(sys.argv[1]))" $AZURE_DB_PASS)
+
+            psql "postgresql://${AZURE_DB_USER}:${AZURE_DB_PASS}@${AZURE_DB_HOST}/<< parameters.db_name >>" -f functional_tests/sql/setupDummyData.sql
+            kubectl -n << parameters.env_name >> patch cronjob refresh-data  -p '{"spec":{"schedule": "* * * * *"}}'
+            
+            sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env_name >> apply  -f -
+            
   run_functional_tests:
     parameters:
       env_name:
@@ -182,8 +218,8 @@ workflows:
             - node/test
           filters:
             branches:
-              only: [master, test_translation_scripts, caching]
-
+              only: [master, test_translation_scripts]
+      
       - db_migrate_azure:
           name: migrate_dev_azure
           db_name: ${AZURE_DEV_DB_NAME}
@@ -238,13 +274,21 @@ workflows:
             - push_dev_image
             - push_db_refresher_image
 
-      - run_functional_tests:
-          name: functional_tests_dev
+      - setup_functional_tests:
+          name: setup_ft_dev
+          cluster-name: ${AZURE_CLUSTER_NAME}
           env_name: dev
           db_name: ${AZURE_DEV_DB_NAME}
           requires:
             - dev_deployment_aks
             - build_dev_ui
+
+      - run_functional_tests:
+          name: functional_tests_dev
+          env_name: dev
+          db_name: ${AZURE_DEV_DB_NAME}
+          requires:
+            - setup_ft_dev
 
       - approve_to_deploy:
           name: approve_test_deployment_aks
@@ -298,13 +342,21 @@ workflows:
           requires:
             - push_test_image
 
-      - run_functional_tests:
-          name: functional_tests_test
+      - setup_functional_tests:
+          name: setup_ft_test
+          cluster-name: ${AZURE_CLUSTER_NAME}
           env_name: test
           db_name: ${AZURE_TEST_DB_NAME}
           requires:
             - test_deployment_aks
             - build_test_ui
+
+      - run_functional_tests:
+          name: functional_tests_test
+          env_name: test
+          db_name: ${AZURE_TEST_DB_NAME}
+          requires:
+            - setup_ft_test
 
       - approve_to_deploy:
           name: approve_uat_deployment_aks

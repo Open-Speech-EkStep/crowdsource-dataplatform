@@ -43,12 +43,12 @@
             <div class="row justify-content-center" id="dekho-image">
                 <div class="col-lg-8 col-md-5 col-12">
                     <%- include ../common/image.ejs %>
-                    <span id="expand-view" class="position-absolute text-muted" style="cursor:pointer;right:16px;font-size:14px;margin-top:5px"> <%= __('Click to open expanded view') %></span>
+                    <span id="expand-view" class="position-absolute text-muted expand-view-text"> <%= __('Click to open expanded view') %></span>
                 </div>
             </div>
-            <div class="row m-0 justify-content-center mb-2 mb-lg-2 mb-md-2 mt-5 position-relative" id="textarea-row">
+            <div class="row m-0 justify-content-center pt-2 pt-lg-0 pt-md-0 mb-2 mb-lg-2 mb-md-2 mt-5 position-relative" id="textarea-row">
                 <div class="form-group green-border-focus col-lg-8 col-md-5 col-12 m-0" id="edit-text" style="border-radius:12px">
-                    <label><%- __('Add Text') %> ( <span id="edit-language"></span> )</label>
+                    <label class="mb-0 mb-lg-2 mb-md-2"><%- __('Add Text') %> ( <span id="edit-language"></span> )</label>
                     <textarea class="form-control edit-area" maxlength="1000" id="edit" rows="3" placeholder="<%= __('Start typing here...')%>" style="resize:none"></textarea>
                     <%- include ../common/virtualKeyboardBtn.ejs %>
                 </div>

@@ -1,9 +1,9 @@
 const fetch = require('./fetch')
-const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo } = require('./utils');
+const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, safeJson } = require('./utils');
 const { LOCALE_STRINGS,MODULE,CONTRIBUTION_LANGUAGE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
 const { onChangeUser , showUserProfile,onOpenUserDropDown} = require('./header');
-const { showErrorPopup } = require('./common');
+const { showErrorPopup, safeErrorHandling } = require('./common');
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
@@ -426,10 +426,10 @@ const initialize = () => {
             },
             body: JSON.stringify(reqObj),
         })
+        .then(safeErrorHandling)
             .then((res) => res.json())
             .then(() => {
             })
-            .catch(() => {})
             .then(() => {
                 if (cb && typeof cb === 'function') {
                     cb();
@@ -462,11 +462,9 @@ const initialize = () => {
             mode: 'cors',
             body: fd,
         })
+        .then(safeErrorHandling)
             .then((res) => res.json())
             .then(() => {
-            })
-            .catch(() => {
-                showErrorPopup();
             })
             .then(() => {
                 if (cb && typeof cb === 'function') {
@@ -577,7 +575,7 @@ function executeOnLoad() {
     });
 
     fetchLocationInfo().then(res => {
-        return res.json()
+        return  safeJson(res);
     }).then(response => {
         localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);
@@ -631,6 +629,7 @@ function executeOnLoad() {
                     'Content-Type': 'application/json',
                 },
             })
+            .then(safeErrorHandling)
                 .then((data) => {
                     if (!data.ok) {
                         throw Error(data.statusText || 'HTTP error');
@@ -668,17 +667,12 @@ function executeOnLoad() {
                     setFooterPosition();
                     initialize();
                 })
-                .catch((err) => {
-                    console.log(err);
-                    showErrorPopup();
-                })
                 .then(() => {
                     $loader.hide();
                 });
         }
     } catch (err) {
         console.log(err);
-        showErrorPopup();
     }
 }
 

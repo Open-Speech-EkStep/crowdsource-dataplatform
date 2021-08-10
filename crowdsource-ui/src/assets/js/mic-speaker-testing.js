@@ -1,7 +1,7 @@
 const { LOCALE_STRINGS } = require('../js/constants');
 const fetch = require('./fetch');
 
-const { getLocaleString } = require('./utils');
+const { getLocaleString,safeJsonParse } = require('./utils');
 const executeOnReady = function () {
 
   let audioData = [];
@@ -29,7 +29,7 @@ const executeOnReady = function () {
   const $testMicCloseBtn = $('#test-mic-close');
   const $noNoise = $('#no-noise');
   const $noise = $('#noise')
-  const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const localeStrings = safeJsonParse(localStorage.getItem(LOCALE_STRINGS));
 
   function generateWavBlob(finalBuffer, defaultSampleRate) {
     const buffer = new ArrayBuffer(44 + finalBuffer.length * 2);

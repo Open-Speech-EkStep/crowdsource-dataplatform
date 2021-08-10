@@ -1,6 +1,6 @@
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
 
-const { redirectToLocalisedPage, showFucntionalCards, updateLocaleLanguagesDropdown, updateGoalProgressBarFromJson, hasUserRegistered, showByHoursChart } = require('../common/common');
+const { redirectToLocalisedPage, showFunctionalCards, updateLocaleLanguagesDropdown, updateGoalProgressBarFromJson, hasUserRegistered, showByHoursChart } = require('../common/common');
 const { getLocaleString } = require('../common/utils');
 const {
   setUserModalOnShown,
@@ -45,7 +45,7 @@ function initializeBlock() {
     sessionStorage.setItem("i18n", "en");
     redirectToLocalisedPage();
     getStatsSummary('/stats/summary/asr', MODULE.suno, () => { });
-    showFucntionalCards('asr', fromLanguage);
+    showFunctionalCards('asr', fromLanguage);
   });
 
   $('#start_recording').on('click', () => {
@@ -73,7 +73,7 @@ function initializeBlock() {
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const $startRecordBtn = $('#proceed-box');
   const $startRecordBtnTooltip = $startRecordBtn.parent();
-  showFucntionalCards('asr', language);
+  showFunctionalCards('asr', language);
   setUserModalOnShown($userName);
   $startRecordBtnTooltip.tooltip('disable');
   setGenderRadioButtonOnClick();
