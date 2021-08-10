@@ -351,6 +351,10 @@ a.text-primary:hover {
   .stats-label {
     color: $text-white;
   }
+  .spinner {
+    border-color: #ffffff;
+    border-top-color: #2961ad;
+  }
 }
 
 audio {
@@ -548,7 +552,7 @@ select {
   border: 1px solid rgba(20, 39, 69, 0.2);
 }
 
-#locale_language_dropdown.active{ 
+#locale_language_dropdown.active{
   border-bottom: 2px solid $primary-color;
 }
 

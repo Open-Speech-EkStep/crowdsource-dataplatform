@@ -44,7 +44,7 @@ const setParticipationData = (data) => {
   $likhoIndiaParticipation.text(data.likho_india_participation);
   $sunoIndiaParticipation.text(data.suno_india_participation);
   $dekhoIndiaParticipation.text(data.dekho_india_participation);
-  $contributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
+  $contributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3');
 }
 
 const getCountOrZero = (obj) => {
@@ -66,7 +66,7 @@ const setParticipationDataFromJson = (data) => {
   $likhoIndiaParticipation.text(getCountOrZero(lData));
   $sunoIndiaParticipation.text(getCountOrZero(sData));
   $dekhoIndiaParticipation.text(getCountOrZero(dData));
-  $contributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3')
+  $contributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3');
 }
 
 const setSpeakerData = function (data, language, moduleType) {
