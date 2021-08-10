@@ -87,7 +87,7 @@ step("Move tab to <tabName>", async function (tabName) {
 
 
 step("Click <name> Link", async function (name) {
-	await taiko.waitFor(1500)
+	await taiko.waitFor(3000)
 		assert.ok(await link(name).exists());
 		await click(link(name));
 });

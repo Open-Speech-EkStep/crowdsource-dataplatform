@@ -195,6 +195,11 @@ const translate = function (state) {
   return localeStrings[state] || state;
 }
 
+const toPascalCase = function (text) {
+  return text.replace(/\w+/g,
+    function(w){return w[0].toUpperCase() + w.slice(1).toLowerCase();});
+}
+
 const formatTime = function (hours, minutes = 0, seconds = 0, translate = true) {
   const localsStrings = JSON.parse(localStorage.getItem('localeString'));
   const hrStr = translate ? localsStrings['hour(s)'] : 'hour(s)';
@@ -321,5 +326,6 @@ module.exports = {
   getBrowserInfo,
   formatTimeForLegends,
   formatTransAndImages,
-  translate
+  translate,
+  toPascalCase
 }

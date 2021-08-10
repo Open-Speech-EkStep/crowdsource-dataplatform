@@ -4,7 +4,7 @@ const {
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { changeLocale, showLanguagePopup } = require('./locale');
 const fetch = require('./fetch');
-const { performAPIRequest, getLanguageBadge, calculateTime, formatTime, getJson, translate } = require('./utils');
+const { performAPIRequest, getLanguageBadge, calculateTime, formatTime, getJson, translate, toPascalCase } = require('./utils');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('./header');
 const { setUserModalOnShown,
   setUserNameOnInputFocus,
@@ -339,7 +339,8 @@ const setBadge = function (data, localeStrings, functionalFlow) {
       $("#showParticipateMsg").append(participateMsgMob);
       const badgeType = data.currentBadgeType;
       $("#thankyou-last-badge").attr('src', getLanguageBadge(contributionLanguage, data.currentBadgeType.toLowerCase(), 'contribute', module));
-      $("#last-bagde-earned").html(badgeType);
+      const badgeTypeTranslation = toPascalCase(translate(badgeType.toLowerCase()))
+      $("#last-bagde-earned").html(badgeTypeTranslation);
     }
     $(".new-badge-msg").addClass("d-none");
     $(".thankyou-page-heading").addClass('d-none');
@@ -347,7 +348,6 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $("#before_badge_content").removeClass("d-none");
     $("#user-contribution-msg").removeClass("d-none");
   }
-
 
   const $bronzeBadgeLink = $("#bronze_badge_link_img");
   const $bronzeBadge = $("#bronze_badge_link");
