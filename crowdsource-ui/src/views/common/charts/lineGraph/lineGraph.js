@@ -46,28 +46,38 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
       chartData[i].validatedHours = currentModule == "dekho" || currentModule == "likho" ? chartData[i].total_validation_count : formatTime(vHours, vMinutes, vSeconds, false);
     }
 
-    let tooltipContent
-    if(currentModule == MODULE.suno.value){
-    tooltipContent = `<div style="padding: 10px;">
+    let contributeTooltip;
+    let validateTooltip;
+    if (currentModule == MODULE.suno.value) {
+      contributeTooltip = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div>${translate('Transcribed')}: <label>{contributedHours}</label></div>
-                <div style="text-align: left;">${translate('Validated')}: <label>{validatedHours}</label></div>
             </div>`;
+      validateTooltip = `<div style="padding: 10px;">
+            <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
+            <div style="text-align: left;">${translate('Validated')}: <label>{validatedHours}</label></div>
+        </div>`;
     }
-    if(currentModule == MODULE.likho.value){
-      tooltipContent = `<div style="padding: 10px;">
+    if (currentModule == MODULE.likho.value) {
+      contributeTooltip = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div style="text-align: left;">${translate('Translated')}: <label>{contributedHours}</label></div>
-                <div style="text-align: left;">${translate('Validated')}: <label>{validatedHours}</label></div>
             </div>`;
+      validateTooltip = `<div style="padding: 10px;">
+            <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
+            <div style="text-align: left;">${translate('Validated')}: <label>{validatedHours}</label></div>
+        </div>`;
     }
 
-    if(currentModule == MODULE.dekho.value){
-      tooltipContent = `<div style="padding: 10px;">
+    if (currentModule == MODULE.dekho.value) {
+      contributeTooltip = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div style="text-align: left;">${translate('Labelled')}: <label>{contributedHours}</label></div>
-                <div style="text-align: left;">${translate('Validated')}: <label>{validatedHours}</label></div>
             </div>`;
+      validateTooltip = `<div style="padding: 10px;">
+            <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
+            <div style="text-align: left;">${translate('Validated')}: <label>{validatedHours}</label></div>
+        </div>`;
     }
 
 
@@ -97,10 +107,10 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     series.dataFields.valueY = currentModule == "dekho" || currentModule == MODULE.likho.value ? "total_contribution_count" : "cumulative_contributions";
     series.strokeWidth = 3;
     series.tensionX = 0.8;
-    series.tooltipHTML = tooltipContent;
+    series.tooltipHTML = contributeTooltip;
     series.tooltip.getFillFromObject = false;
     series.tooltip.autoTextColor = false;
-    series.tooltip.background.fill = am4core.color("#F1F1F2");
+    series.tooltip.background.fill = am4core.color("rgba(252,194,50,0.2)");
     series.tooltip.label.fill = am4core.color("#000000");
     series.sequencedInterpolation = true;
     series.stroke = am4core.color("#FCC232");
@@ -112,6 +122,11 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     series2.dataFields.valueY = currentModule == "dekho" || currentModule == "likho" ? "total_validation_count" : "cumulative_validations";
     series2.sequencedInterpolation = true;
     series2.tensionX = 0.8;
+    series2.tooltipHTML = validateTooltip;
+    series2.tooltip.getFillFromObject = false;
+    series2.tooltip.autoTextColor = false;
+    series2.tooltip.background.fill = am4core.color("rgba(131,230,97,0.2)");
+    series2.tooltip.label.fill = am4core.color("#000000");
     series2.strokeWidth = 3;
     series2.stroke = am4core.color("#83E661");
     series2.name = translate(series2Name);

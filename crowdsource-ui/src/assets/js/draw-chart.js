@@ -357,11 +357,10 @@ const drawTimelineChart = (timelineData) => {
             <div>
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div>${translate('Contributed')}: <label>{contributedHours}</label></div>
-                <div style="text-align: left;">${translate('Validated')}: <label>{validatedHours}</label></div>
             </div>`;
         series.tooltip.getFillFromObject = false;
         series.tooltip.autoTextColor = false;
-        series.tooltip.background.fill = am4core.color("#F1F1F2");
+        series.tooltip.background.fill = am4core.color("rgba(252,194,50,0.2)");
         series.tooltip.label.fill = am4core.color("#000000");
         series.sequencedInterpolation = true;
         series.stroke = am4core.color("#FCC232");
@@ -374,6 +373,15 @@ const drawTimelineChart = (timelineData) => {
         series2.sequencedInterpolation = true;
         series2.tensionX = 0.8;
         series2.strokeWidth = 3;
+        series2.tooltipHTML = `
+        <div>
+            <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
+            <div style="text-align: left;">${translate('Validated')}: <label>{validatedHours}</label></div>
+        </div>`;
+        series2.tooltip.getFillFromObject = false;
+        series2.tooltip.autoTextColor = false;
+        series2.tooltip.background.fill = am4core.color("rgba(131,230,97,0.2)");
+        series2.tooltip.label.fill = am4core.color("#000000");
         series2.stroke = am4core.color("#83E661");
         series2.name = translate("Validated");
 

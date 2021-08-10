@@ -723,5 +723,7 @@
 	"Month": "Month",
 	"People": "People",
 	"Labelled": "Labelled",
-	"Translated": "Translated"
+	"Translated": "Translated",
+	"We are processing multiple requests at the moment. Please try again after sometime.": "We are processing multiple requests at the moment. Please try again after sometime.",
+	"Your Badges": "Your Badges"
 }
