@@ -8,6 +8,7 @@ const HOUR_IN_SECONDS = 3600;
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
 const AGGREGATED_DATA_BY_LANGUAGE = "aggregateDataCountByLanguage";
+const CUMULATIVE_DATA = "cumulativeDataByLanguage";
 const AGGREGATED_DATA_BY_TOP_LANGUAGE = "aggregateDataCountByTopLanguage";
 const LOCALE_STRINGS = 'localeString';
 const SELECTED_MODULE = "selectedModule";
@@ -142,5 +143,6 @@ module.exports = {
   FEEDBACK_CATEGORY,
   OPINION_RATING_MAPPING,
   MOTHER_TONGUE,
-  AGGREGATED_DATA_BY_TOP_LANGUAGE
+  AGGREGATED_DATA_BY_TOP_LANGUAGE,
+  CUMULATIVE_DATA
 }

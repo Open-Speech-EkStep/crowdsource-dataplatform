@@ -9,7 +9,7 @@ const {
     setStartRecordingBtnOnClick,
 } = require('./speakerDetails');
 
-const { getContributedAndTopLanguage,hasUserRegistered,safeJqueryErrorHandling } = require('./common');
+const { getContributedAndTopLanguage, hasUserRegistered, safeJqueryErrorHandling } = require('./common');
 const { addToLanguage } = require('../../views/common/languageNavBar/languageNavBar');
 const { updateGoalProgressBarFromJson, showFunctionalCards } = require('../../../build/js/common/common')
 
@@ -19,6 +19,7 @@ const {
     TOP_LANGUAGES_BY_HOURS,
     TOP_LANGUAGES_BY_SPEAKERS,
     AGGREGATED_DATA_BY_LANGUAGE,
+    CUMULATIVE_DATA,
     CONTRIBUTION_LANGUAGE,
     LOCALE_STRINGS,
     ALL_LANGUAGES,
@@ -32,6 +33,7 @@ const clearLocalStorage = function () {
     localStorage.removeItem(TOP_LANGUAGES_BY_HOURS);
     localStorage.removeItem(TOP_LANGUAGES_BY_SPEAKERS);
     localStorage.removeItem(AGGREGATED_DATA_BY_LANGUAGE);
+    localStorage.removeItem(CUMULATIVE_DATA);
     localStorage.removeItem(LOCALE_STRINGS);
 }
 
@@ -61,9 +63,6 @@ const getStatsSummary = function () {
             $("#view_all_btn").show();
             $("#contribution_stats").show();
         }
-
-        const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
-        updateHrsForCards(contributionLanguage);
     }).fail((e) => {
         safeJqueryErrorHandling(e);
     });
@@ -72,8 +71,15 @@ const getStatsSummary = function () {
         const speakers = getContributedAndTopLanguage(top_languages_by_speakers, "speakers");
         localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(speakers));
     }).fail((e) => {
-        safeJqueryErrorHandling(e); 
+        safeJqueryErrorHandling(e);
     });
+    $.getJSON(`${context_root}/aggregated-json/cumulativeDataByLanguage.json`, (jsonData) => {
+        const cumulativeData = jsonData.filter(d => d.type == "text") || [];
+
+        localStorage.setItem(CUMULATIVE_DATA, JSON.stringify(cumulativeData));
+        const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
+        updateHrsForCards(contributionLanguage);
+    })
 }
 
 

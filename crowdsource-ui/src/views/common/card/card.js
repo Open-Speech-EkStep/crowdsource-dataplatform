@@ -1,5 +1,5 @@
-const {LOCALE_STRINGS,AGGREGATED_DATA_BY_LANGUAGE}=require('./constants');
-const  {updateLocaleLanguagesDropdown, calculateTime, formatTime} = require("./utils");
+const { LOCALE_STRINGS, CUMULATIVE_DATA } = require('./constants');
+const { updateLocaleLanguagesDropdown, calculateTime, formatTime } = require("./utils");
 
 const $left = $('#left');
 const $right = $('#right');
@@ -14,14 +14,14 @@ const updateLocaleText = function (total_contributions, total_validations, langu
   const $right_p_3 = $("#right-p-3");
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const {
-      hours: cHours,
-      minutes: cMinutes,
-      seconds: cSeconds
+    hours: cHours,
+    minutes: cMinutes,
+    seconds: cSeconds
   } = calculateTime(parseFloat(total_contributions).toFixed(3) * 60 * 60);
   const {
-      hours: vHours,
-      minutes: vMinutes,
-      seconds: vSeconds
+    hours: vHours,
+    minutes: vMinutes,
+    seconds: vSeconds
   } = calculateTime(parseFloat(total_validations).toFixed(3) * 60 * 60);
 
   const localeLanguage = localeStrings[language];
@@ -42,7 +42,7 @@ function updateHrsForCards(language) {
   const $rightLoader = $('#right-loader');
   $leftLoader.removeClass('d-none');
   $rightLoader.removeClass('d-none');
-  const aggregateDetails = JSON.parse(localStorage.getItem(AGGREGATED_DATA_BY_LANGUAGE));
+  const aggregateDetails = JSON.parse(localStorage.getItem(CUMULATIVE_DATA));
   const totalInfo = aggregateDetails && aggregateDetails.find((element) => element.language === language);
   if (totalInfo) {
     updateLocaleText(totalInfo.total_contributions, totalInfo.total_validations, language);
@@ -55,23 +55,23 @@ function updateHrsForCards(language) {
 }
 
 $left.hover(() => {
-  $(".card1").css("box-shadow","0 8px 0 #43c0d7,0 0 32px #43c0d7")
+  $(".card1").css("box-shadow", "0 8px 0 #43c0d7,0 0 32px #43c0d7")
   $left_p_2.removeClass('d-none');
   $left_container.addClass('left-active');
 }, () => {
-  $(".card1").css("box-shadow","0 8px 0 #43c0d7, 0px 0px 32px rgb(0 0 0 / 10%)")
+  $(".card1").css("box-shadow", "0 8px 0 #43c0d7, 0px 0px 32px rgb(0 0 0 / 10%)")
   $left_p_2.addClass('d-none');
   $left_container.removeClass('left-active');
 });
 
 $right.hover(() => {
-  $(".card2").css("box-shadow","0 8px 0 #43c0d7,0 0 32px #43c0d7")
+  $(".card2").css("box-shadow", "0 8px 0 #43c0d7,0 0 32px #43c0d7")
   $right_p_2.removeClass('d-none');
   $right_container.addClass('right-active');
 }, () => {
-  $(".card2").css("box-shadow","0 8px 0 #43c0d7, 0px 0px 32px rgb(0 0 0 / 10%)")
+  $(".card2").css("box-shadow", "0 8px 0 #43c0d7, 0px 0px 32px rgb(0 0 0 / 10%)")
   $right_p_2.addClass('d-none');
   $right_container.removeClass('right-active');
 });
 
-module.exports = {updateHrsForCards}
+module.exports = { updateHrsForCards }

@@ -8,6 +8,7 @@ const HOUR_IN_SECONDS = 3600;
 const TOP_LANGUAGES_BY_HOURS = "topLanguagesByHours";
 const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
 const AGGREGATED_DATA_BY_LANGUAGE = "aggregateDataCountByLanguage";
+const CUMULATIVE_DATA = "cumulativeDataByLanguage";
 const LOCALE_STRINGS = 'localeString';
 const CONTRIBUTION_LANGUAGE = "contributionLanguage";
 const SPEAKER_DETAILS_KEY = 'speakerDetails';
@@ -113,5 +114,6 @@ module.exports = {
     LIKHOPAGE,
     LIKHO_TO_LANGUAGE,
     LIKHO_FROM_LANGUAGE,
-    ErrorStatusCode
+    ErrorStatusCode,
+    CUMULATIVE_DATA
 }
