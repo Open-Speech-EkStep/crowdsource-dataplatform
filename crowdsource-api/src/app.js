@@ -440,7 +440,9 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'Labelled',
             'Translated',
             'Images labelled',
-            'Images validated'
+            'Images validated',
+            'An unexpected error has occurred.',
+            'We are processing multiple requests at the moment. Please try again after sometime.'
         ];
 
         const langSttr = {};

@@ -4,11 +4,12 @@ const {
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { changeLocale, showLanguagePopup } = require('./locale');
 const fetch = require('./fetch');
-const { performAPIRequest, getLanguageBadge, calculateTime, formatTime, getJson } = require('./utils');
+const { performAPIRequest, getLanguageBadge, calculateTime, formatTime, getJson, translate } = require('./utils');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('./header');
 const { setUserModalOnShown,
   setUserNameOnInputFocus,
   setGenderRadioButtonOnClick } = require("./speakerDetails");
+const { ErrorStatusCode } = require('./enum');
 
 const getContributedAndTopLanguage = (topLanguagesData, type) => {
   if (topLanguagesData && topLanguagesData.length) {
@@ -138,10 +139,21 @@ const getLanguageTargetInfo = (type, sourceLanguage, targetLanguage) => {
 };
 
 const safeErrorHandling = (data) => {
-  if (data && !data.ok)
+  if (data && !data.ok)  {
+    bindErrorText(data);
     showErrorPopup();
+  }
   return data;
 }
+
+const bindErrorText = (data) => {
+  const $errorText = $("#error-text");
+  $errorText.text("");
+  $errorText.text(data.status === ErrorStatusCode.TOOMANYREQUEST? translate("We are processing multiple requests at the moment. Please try again after sometime.") 
+  : translate("An unexpected error has occurred."));
+}
+
+
 const showFunctionalCards = (type, fromLanguage, toLanguage) => {
   let contributeCard = $("#left");
   let validateCard = $("#right");
@@ -641,8 +653,12 @@ const showErrorPopup = () => {
 }
 
 const safeJqueryErrorHandling = (e) => {
-  if (e && e.statusText !== "error")
+  if (e && e.statusText !== "error") {
+    const $errorText = $("#error-text");
+    $errorText.text("");
+    $errorText.text(translate("An unexpected error has occurred."));
     showErrorPopup();
+  }
 }
 
 module.exports = { safeJqueryErrorHandling, isMobileDevice, safeErrorHandling, showErrorPopup, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFunctionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, landToHome, showOrHideExtensionCloseBtn, hasUserRegistered, updateGoalProgressBar, replaceSubStr, getTopLanguage, isInTopLanguage, getTop3Languages, setCurrentProgress, getCountBasedOnSource, updateGoalProgressBarFromJson, languageFilter, reduceList };

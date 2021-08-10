@@ -1,6 +1,7 @@
 const {
-    CONTRIBUTION_LANGUAGE, CURRENT_MODULE,SPEAKER_DETAILS_KEY
+    CONTRIBUTION_LANGUAGE, CURRENT_MODULE,SPEAKER_DETAILS_KEY, ErrorStatusCode
   } = require('./constants');
+const { translate } = require('./utils');
 
 const getContributedAndTopLanguage = (topLanguagesData, type) => {
   if(topLanguagesData  && topLanguagesData.length) {
@@ -65,14 +66,27 @@ const hasUserRegistered = function (){
 }
 
 const safeErrorHandling = (data) => {
-  if (data && !data.ok) 
+  if (data && !data.ok)  {
+    bindErrorText(data);
     showErrorPopup();
+  }
   return data;
 }
 
+const bindErrorText = (data) => {
+  const $errorText = $("#error-text");
+  $errorText.text("");
+  $errorText.text(data.status === ErrorStatusCode.TOOMANYREQUEST? translate("We are processing multiple requests at the moment. Please try again after sometime.") 
+  : translate("An unexpected error has occurred."));
+}
+
 const safeJqueryErrorHandling = (e) => {
-  if(e && e.statusText !== "error")
-  showErrorPopup();
+  if (e && e.statusText !== "error") {
+    const $errorText = $("#error-text");
+    $errorText.text("");
+    $errorText.text(translate("An unexpected error has occurred."));
+    showErrorPopup();
+  }
 }
 
 

@@ -1,4 +1,4 @@
-const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES,CONTRIBUTION_LANGUAGE,DEFAULT_CON_LANGUAGE } = require("./constants");
+const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES,CONTRIBUTION_LANGUAGE,DEFAULT_CON_LANGUAGE, ErrorStatusCode } = require("./constants");
 const fetch = require('./fetch')
 const platform = require('./platform');
 
@@ -124,7 +124,7 @@ const performAPIRequest = (url) => {
   return fetch(url, {
     credentials: 'include',
     mode: 'cors'
-  }).then((data) => {
+  }).then(errorHandling).then((data) => {
     if (!data.ok) {
       throw Error(data.statusText || 'HTTP error');
     } else {
@@ -132,9 +132,23 @@ const performAPIRequest = (url) => {
     }
   })
   .catch(()=> {
+    showErrorModal();
+  });
+}
+
+const errorHandling = (data) => {
+  if (data && !data.ok) {
+    bindErrorText(data);
     const $errorDialog = $('#errorPopup');
     $errorDialog.modal('show');
-  });
+  }
+  return data;
+}
+
+const bindErrorText = (data) => {
+  const $errorText = $("#error-text");
+  $errorText.text(data.status === ErrorStatusCode.TOOMANYREQUEST? translate("We are processing multiple requests at the moment. Please try again after sometime.") 
+  : translate("An unexpected error has occurred."));
 }
 
 const getLocaleString = function() {
@@ -260,8 +274,7 @@ const getJson = (path) => {
         resolve(data);
       }).fail((e) => {
         if(e.statusText !== "error") {
-          const $errorDialog = $('#errorPopup');
-          $errorDialog.modal('show');
+          showErrorModal();
         }
       });
     })
@@ -273,6 +286,14 @@ const covertStringToCapitalised = (tempStr) => {
   } else {
     return tempStr;
   }
+}
+
+const showErrorModal = () => {
+  const $errorText = $("#error-text");
+  $errorText.text("");
+  $errorText.text(translate("An unexpected error has occurred."));
+  const $errorDialog = $('#errorPopup');
+  $errorDialog.modal('show');
 }
 
 const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType) => {

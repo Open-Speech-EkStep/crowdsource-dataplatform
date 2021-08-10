@@ -2,29 +2,30 @@ const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require("./constants");
 const fetch = require('./fetch')
 const platform = require('./platform');
 const { context_root } = require('./env-api');
+const { ErrorStatusCode } = require("./enum");
 
 function getDeviceInfo() {
   const os = platform.os;
   let info = "";
-  if(os.family){
+  if (os.family) {
     info = info + os.family;
   }
-  if(os.version){
-    info = info + " "+ os.version;
+  if (os.version) {
+    info = info + " " + os.version;
   }
   if (platform.product) {
-      info = info + " " + platform.product;
+    info = info + " " + platform.product;
   }
   return info.trim();
 }
 
 function getBrowserInfo() {
   let info = "";
-  if(platform.name){
+  if (platform.name) {
     info = info + platform.name;
   }
-  if(platform.version){
-    info = info + " "+ platform.version;
+  if (platform.version) {
+    info = info + " " + platform.version;
   }
   return info.trim();
 }
@@ -38,13 +39,13 @@ const afterHover = function (btn) {
 }
 
 function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toGMTString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toGMTString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-const formatTransAndImages= (source,target,type) =>{
+const formatTransAndImages = (source, target, type) => {
   const localsStrings = JSON.parse(localStorage.getItem('localeString'));
   const translations = localsStrings['Translations'];
   const images = localsStrings['Images'];
@@ -53,19 +54,19 @@ const formatTransAndImages= (source,target,type) =>{
 }
 
 function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
     }
-    return "";
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
 
 function showElement(element) {
@@ -100,7 +101,7 @@ function fetchLocationInfo() {
   let countryName = localStorage.getItem("country") || "NOT_PRESENT";
   if (regionName !== "NOT_PRESENT" && countryName !== "NOT_PRESENT" && regionName.length > 0 && countryName.length > 0) {
     return new Promise((resolve) => {
-      resolve({"regionName": regionName, "country": countryName})
+      resolve({ "regionName": regionName, "country": countryName })
     })
   }
   return fetch('https://www.cloudflare.com/cdn-cgi/trace').then(res => res.text()).then(ipAddressText => {
@@ -126,39 +127,55 @@ const performAPIRequest = (url) => {
   return fetch(url, {
     credentials: 'include',
     mode: 'cors'
-  }).then((data) => {
+  }).then(errorHandling).then((data) => {
     if (!data.ok) {
       throw Error(data.statusText || 'HTTP error');
     } else {
       return Promise.resolve(data.json());
     }
   })
-  .catch(() => {
-    const $errorDialog = $('#errorPopup');
-    $errorDialog.modal('show');
-  });
-}
-
-const getLocaleString = function() {
-    return new Promise(function(resolve, reject) {
-        const locale = sessionStorage.getItem("i18n") ?? "en";
-        performAPIRequest(`/get-locale-strings/${locale}`)
-        .then((response) => {
-            localStorage.setItem('localeString', JSON.stringify(response));
-            resolve(response);
-        }).catch((err)=>reject(err));
+    .catch(() => {
+     showErrorModal();
     });
 }
 
+const errorHandling = (data) => {
+  if (data && !data.ok) {
+    bindErrorText(data);
+    const $errorDialog = $('#errorPopup');
+    $errorDialog.modal('show');
+  }
+  return data;
+}
+
+const bindErrorText = (data) => {
+  const $errorText = $("#error-text");
+  $errorText.text("");
+  $errorText.text(data.status === ErrorStatusCode.TOOMANYREQUEST ? translate("We are processing multiple requests at the moment. Please try again after sometime.")
+    : translate("An unexpected error has occurred."));
+}
+
+
+const getLocaleString = function () {
+  return new Promise(function (resolve, reject) {
+    const locale = sessionStorage.getItem("i18n") ?? "en";
+    performAPIRequest(`/get-locale-strings/${locale}`)
+      .then((response) => {
+        localStorage.setItem('localeString', JSON.stringify(response));
+        resolve(response);
+      }).catch((err) => reject(err));
+  });
+}
+
 const updateLocaleLanguagesDropdown = (language) => {
-    const dropDown = $('#localisation_dropdown');
-    const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
-    if(language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
-        dropDown.html('<a id="english" class="dropdown-item d-flex align-items-center" href="#" locale="en">English</a>');
-    } else {
-        dropDown.html(`<a id="english" class="dropdown-item d-flex align-items-center" href="#" locale="en">English</a>
+  const dropDown = $('#localisation_dropdown');
+  const localeLang = ALL_LANGUAGES.find(ele => ele.value === language);
+  if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
+    dropDown.html('<a id="english" class="dropdown-item d-flex align-items-center" href="#" locale="en">English</a>');
+  } else {
+    dropDown.html(`<a id="english" class="dropdown-item d-flex align-items-center" href="#" locale="en">English</a>
         <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-    }
+  }
 }
 
 const calculateTime = function (totalSeconds, isSeconds = true) {
@@ -167,22 +184,22 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
   const minutes = Math.floor(remainingAfterHours / SIXTY);
   const seconds = Math.round(remainingAfterHours % SIXTY);
   if (isSeconds) {
-    return {hours, minutes, seconds};
+    return { hours, minutes, seconds };
   } else {
-    return {hours, minutes};
+    return { hours, minutes };
   }
 };
 
-const translate = function(state) {
+const translate = function (state) {
   const localeStrings = JSON.parse(localStorage.getItem('localeString'));
   return localeStrings[state] || state;
 }
 
 const formatTime = function (hours, minutes = 0, seconds = 0, translate = true) {
   const localsStrings = JSON.parse(localStorage.getItem('localeString'));
-  const hrStr = translate ? localsStrings['hour(s)']: 'hour(s)';
-  const minStr = translate ? localsStrings['minute(s)']: 'minute(s)';
-  const secStr = translate ? localsStrings['second(s)']: 'second(s)';
+  const hrStr = translate ? localsStrings['hour(s)'] : 'hour(s)';
+  const minStr = translate ? localsStrings['minute(s)'] : 'minute(s)';
+  const secStr = translate ? localsStrings['second(s)'] : 'second(s)';
   let result = "";
   if (hours > 0) {
     result += `${hours} ${hrStr} `;
@@ -194,18 +211,18 @@ const formatTime = function (hours, minutes = 0, seconds = 0, translate = true) 
     result += `${seconds} ${secStr} `;
   }
 
-  if(hours === 0 && minutes === 0 && seconds === 0){
+  if (hours === 0 && minutes === 0 && seconds === 0) {
     result += `0 ${secStr} `;
   }
 
-  if(result.charAt(result.length - 1 ) !== ' ')
+  if (result.charAt(result.length - 1) !== ' ')
     return result.substr(0, result.length);
-  else 
+  else
     return result.substr(0, result.length - 1);
 };
 
 
-const formatTimeForLegends = function (hours, minutes = 0, seconds = 0, isLabelRequired=true) {
+const formatTimeForLegends = function (hours, minutes = 0, seconds = 0, isLabelRequired = true) {
   const localsStrings = JSON.parse(localStorage.getItem('localeString'));
   const hrStr = localsStrings['hours'];
   const minStr = localsStrings['minutes'];
@@ -233,38 +250,45 @@ const setFooterPosition = () => {
 }
 
 const reportSentenceOrRecording = (reqObj) => {
-    return new Promise(function(resolve, reject) {
-        try {
-            fetch('/report', {
-                method: "POST",
-                credentials: 'include',
-                mode: 'cors',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(reqObj),
-            })
-            .then((res) => res.json())
-            .then((resp) => {
-                resolve(resp);
-            })
-        } catch(err) {
-            reject(err);
-        }
-    });
+  return new Promise(function (resolve, reject) {
+    try {
+      fetch('/report', {
+        method: "POST",
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reqObj),
+      })
+        .then((res) => res.json())
+        .then((resp) => {
+          resolve(resp);
+        })
+    } catch (err) {
+      reject(err);
+    }
+  });
 }
 
 const getJson = (path) => {
-    return new Promise((resolve) => {
-      $.getJSON(`${context_root}${path}`, (data) => {
-        resolve(data);
-      }).fail((e) => {
-        if(e.statusText !== "error") {
-          const $errorDialog = $('#errorPopup');
-          $errorDialog.modal('show');
-        }
-      });
-    })
+  return new Promise((resolve) => {
+    $.getJSON(`${context_root}${path}`, (data) => {
+      resolve(data);
+    }).fail((e) => {
+      if (e.statusText !== "error") {
+        showErrorModal();
+      }
+    });
+  })
+}
+
+const showErrorModal = () => {
+  const $errorText = $("#error-text");
+  $errorText.text("");
+  $errorText.text(translate("An unexpected error has occurred."));
+  const $errorDialog = $('#errorPopup');
+  $errorDialog.modal('show');
 }
 
 const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType) => {
@@ -274,7 +298,8 @@ const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType)
 }
 
 
-module.exports = { setPageContentHeight,
+module.exports = {
+  setPageContentHeight,
   toggleFooterPosition,
   fetchLocationInfo,
   getLanguageBadge,
@@ -286,8 +311,8 @@ module.exports = { setPageContentHeight,
   showElement,
   hideElement,
   setFooterPosition,
-  reportSentenceOrRecording, 
-  getCookie, 
+  reportSentenceOrRecording,
+  getCookie,
   setCookie,
   getJson,
   onHover,

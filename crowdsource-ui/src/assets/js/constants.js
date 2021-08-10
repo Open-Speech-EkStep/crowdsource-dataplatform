@@ -14,6 +14,11 @@ const SPEAKER_DETAILS_KEY = 'speakerDetails';
 const LIKHO_TO_LANGUAGE = "likho_to-language";
 const LIKHO_FROM_LANGUAGE = "likho_from-language";
 
+const ErrorStatusCode = {
+    SUCCESS: 200,
+    TOOMANYREQUEST: 429,
+};
+
 let ALL_LANGUAGES = getAllLanguages()
 
 if (enabled_languages != null && !enabled_languages.includes('@@')) {
@@ -108,4 +113,5 @@ module.exports = {
     LIKHOPAGE,
     LIKHO_TO_LANGUAGE,
     LIKHO_FROM_LANGUAGE,
+    ErrorStatusCode
 }
