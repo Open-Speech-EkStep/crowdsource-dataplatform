@@ -4,7 +4,7 @@ var bluebird = require("bluebird");
 
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
-console.log(config);
+
 const prefix = config["envName"];
 const cachingEnabled = config.caching ? config.caching == "enabled" : false;
 

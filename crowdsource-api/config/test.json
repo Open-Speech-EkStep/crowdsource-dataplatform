@@ -2,5 +2,6 @@
     "whitelistingEmail":"disabled",
     "envName": "test",
     "caching": "disabled",
-    "validation_count": "3"
+    "validation_count": "3",
+    "cache_timeout": "600"
 }

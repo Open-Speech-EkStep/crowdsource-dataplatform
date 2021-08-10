@@ -6,9 +6,10 @@ const {
 } = require('./cacheDbQueries');
 const cache = require('./cache');
 const config = require('config');
-console.log(config);
+
 const cachingEnabled = config.caching ? config.caching == "enabled" : false;
 const validation_count = config.validation_count ? Number(config.validation_count) : 5; 
+const expiry = config.cache_timeout || Number(config.cache_timeout) || 1800;
 
 const getRandom = (arr, n) => {
 	var len = arr.length;
@@ -97,7 +98,7 @@ module.exports = {
 			db.any(type == 'parallel' ? getParallelContributionDataForCaching : getContributionDataForCaching, [type, language, toLanguage])
 				.then(async (data) => {
 					console.log("cacheLength", data.length)
-					await cache.setAsync(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(data), 1800);
+					await cache.setAsync(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(data), expiry);
 				})
 				.catch((err) => {
 					console.log(err);
@@ -131,7 +132,7 @@ module.exports = {
 			const cacheData = JSON.parse(cacheResponse);
 			let data = cacheData.filter(o => o.dataset_row_id != dataset_row_id);
 			console.log("cacheLength", data.length)
-			await cache.setAsync(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(data), 1800);
+			await cache.setAsync(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(data), expiry);
 		} catch (err) {
 			console.log("CACHING ERROR: " + err)
 		}
@@ -154,7 +155,7 @@ module.exports = {
 						objAtIndex.skipped_by = `${userId}-${userName}`;
 					}
 				}
-				await cache.setAsync(`dataset_row_${type}_${fromLanguage}_${toLanguage}`, JSON.stringify(cacheData), 1800);
+				await cache.setAsync(`dataset_row_${type}_${fromLanguage}_${toLanguage}`, JSON.stringify(cacheData), expiry);
 			}
 		} catch (err) {
 			console.log("CACHING ERROR: " + err)
@@ -169,7 +170,7 @@ module.exports = {
 				.then(async (data) => {
 					console.log("cacheLength", data.length)
 					data = sortAndFilterValidationData(data);
-					await cache.setAsync(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(data), 1800);
+					await cache.setAsync(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(data), expiry);
 				})
 				.catch((err) => {
 					console.log(err);
@@ -216,7 +217,7 @@ module.exports = {
 					}
 				}
 				cacheData = sortAndFilterValidationData(cacheData);
-				await cache.setAsync(`contributions_${type}_${fromLanguage}_${toLanguage}`, JSON.stringify(cacheData), 1800);
+				await cache.setAsync(`contributions_${type}_${fromLanguage}_${toLanguage}`, JSON.stringify(cacheData), expiry);
 			}
 		} catch (err) {
 			console.log("CACHING ERROR: " + err)

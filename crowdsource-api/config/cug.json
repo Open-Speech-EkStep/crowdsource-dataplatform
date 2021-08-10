@@ -2,5 +2,6 @@
   "whitelistingEmail":"enabled",
   "envName": "cug",
   "caching": "disabled",
-  "validation_count": "5"
+  "validation_count": "5",
+  "cache_timeout": "1800"
 }
