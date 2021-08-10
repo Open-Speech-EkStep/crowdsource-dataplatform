@@ -101,6 +101,7 @@
   #userNavBar .dropdown-menu {
     position: absolute !important;
     margin-left: -140% !important;
+    font-size: 14px !important;
   }
 
   .navbar-toggler {

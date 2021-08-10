@@ -7,7 +7,7 @@
 <div class="modal fade" id="feedback_modal" tabindex="-1" aria-labelledby="FeedbackModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div id="modal_feeback" class="modal-dialog modal-md modal-dialog-centered custom-modal">
         <div class="modal-content border-2" style="padding-top:12px">
-            <div class="feedbacks px-4 pb-3">
+            <div class="feedbacks px-4 pb-4">
                 <div class="modal-header d-block border-0 py-0 px-lg-3 px-md-3 p-0">
                     <h4 class="modal-title text-center mt-3 font-family-Rowdies">
                         <%= __('Your Feedback') %>
@@ -19,7 +19,7 @@
                         &times;
                     </button>
                 </div>
-                <div class="modal-body py-3 px-lg-3 px-md-3 pl-0">
+                <div class="modal-body py-3 px-lg-3 px-md-3 px-0">
                     <div class="mb-3 email-component" style="display:none">
                         <label class="form-check-label label-color-feedback" for="email">
                             <%= __('Email') %> <span class="required">(<%= __('*required')%>)</span>
@@ -244,7 +244,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer border-0">
+                <div class="modal-footer border-0 p-0">
                     <div class="d-flex row m-0 w-100 justify-content-center">
                         <button id="submit_btn" class="btn btn-custom-primary" disabled="disabled">
                             <%= __('Submit')%>

@@ -676,6 +676,37 @@ body {
   #badge-profile-content p {
     margin-top: 30px !important;
   }
+  #warning-msg {
+    display: none;
+    top: 5px;
+    left: 7%;
+    font-style: italic;
+    width: 95%;
+    padding: 8px 15px;
+    min-height: 38px;
+    border-radius: 12px;
+    background: rgba(77, 130, 247, .1);
+  }
+
+  #warning-msg p {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  #cont-warning-msg {
+    display: none;
+    top: 5px;
+    left: 7%;
+    font-style: italic;
+    width: 95%;
+    padding: 8px 15px;
+    min-height: 38px;
+    border-radius: 12px;
+  }
+
+  #con-warning-msg p {
+    font-size: 12px;
+    margin-top: 4px;
+  }
 }
 
 .btn-custom-primary {

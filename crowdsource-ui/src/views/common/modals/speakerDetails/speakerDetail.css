@@ -18,15 +18,16 @@
 
 @media (max-width: 767px) {
   #userModal .close{
-    right: 20px;
-    top: 12px;
+    right: 20px !important;
+    top: 12px !important;
   }
 
   #userModal #proceed-box{
-    min-width: 290px;
+    min-width: 290px !important;
     max-width: 290px;
     font-size: 16px;
     height: 44px;
+    line-height: inherit !important;
   }
 
   #userModal .user-name-hint{
@@ -36,12 +37,31 @@
 
   #userModal #form-sub-heading{
     padding-bottom: 16px;
+    font-size: 12px;
+  }
+
+  #userModal .form-group label,
+  #userModal .form-group input,
+  #userModal .form-group select{
+    font-size: 14px !important;
+  }
+
+  #userModal .form-group{
+    margin-bottom: 12px;
+  }
+
+  #userModal label {
+    margin-bottom: 3px !important;
+  }
+
+  #userModal .modal-body  {
+    max-height: 390px;
+    overflow: auto;
   }
 
 
-  #userModal .modal-body  {
-    height: 300px;
-    overflow: auto;
+  #userModal .modal-title{
+    font-size: 20px !important;
   }
 }
 
@@ -51,6 +71,10 @@
     right:25px;
     top:16px;
     font-size: 30px !important;
+  }
+
+  #userModal .form-group{
+    margin-bottom: 16px;
   }
   
   #userModal .speakerdetails-popup {
@@ -63,7 +87,7 @@
   }
 
   #userModal .modal-body  {
-    height: 410px;
+    height: 430px;
     overflow: auto;
   }
 
@@ -77,7 +101,6 @@
   }
 
   #userModal #form-sub-heading{
-    margin-bottom: 1.25rem;
     padding-bottom: 1.25rem;
   }
 
@@ -88,10 +111,6 @@
 
   #userModal .username-error {
     font-size: 13px;
-  }
-
-  #userModal .form-group {
-    margin-bottom: 1.25rem;
   }
 
   #userModal .form-label{

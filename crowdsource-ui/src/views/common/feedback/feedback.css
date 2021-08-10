@@ -173,8 +173,16 @@ label .required {
     width: 28px;
   }
   #modal_feeback .modal-body {
-    max-height: 300px;
+    max-height: 410px;
     overflow: auto;
+  }
+  #modal_feeback .modal-title {
+    font-size: 20px !important;
+  }
+  #modal_feeback label,
+  #modal_feeback input,
+  #modal_feeback select{
+    font-size: 14px !important;
   }
   .success-feedback {
     font-size: 14px;
@@ -211,7 +219,7 @@ label .required {
   }
 
   #modal_feeback .modal-body  {
-    height: 410px;
+    height: 475px;
     overflow: auto;
   }
 }
