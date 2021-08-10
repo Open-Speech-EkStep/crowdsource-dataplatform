@@ -454,7 +454,8 @@ const executeOnLoad = function () {
   } else {
     localStorage.removeItem(currentIndexKey);
     const type = 'ocr';
-    fetch(`/contributions/${type}?from=${language}&to=''&username=${localSpeakerDataParsed.userName}`, {
+    const toLanguage = '';
+    fetch(`/contributions/${type}?from=${language}&to=${toLanguage}&username=${localSpeakerDataParsed.userName}`, {
       credentials: 'include',
       mode: 'cors'
     })
