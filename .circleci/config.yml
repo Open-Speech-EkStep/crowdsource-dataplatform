@@ -53,8 +53,8 @@ jobs:
             AZURE_DB_PASS=$(python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(sys.argv[1]))" $AZURE_DB_PASS)
 
             psql "postgresql://${AZURE_DB_USER}:${AZURE_DB_PASS}@${AZURE_DB_HOST}/<< parameters.db_name >>" -f functional_tests/sql/setupDummyData.sql
-
-            kubectl -n << parameters.env_name >> create job test-job --from=cronjob/refresh-data
+            kubectl -n << parameters.env_name >> patch cronjob refresh-data  -p '{"spec":{"schedule": "* * * * *"}}'
+            # kubectl -n << parameters.env_name >> create job test-job --from=cronjob/refresh-data
             
   run_functional_tests:
     parameters:
