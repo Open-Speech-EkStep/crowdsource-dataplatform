@@ -217,7 +217,7 @@ step("Check Data Source button should not be visible", async () => {
 });
 
 step("User should be able to see bronze Badge after winning with <contributionLeft> <label> contribution left", async function(contributionLeft, label) {
-	assert.ok(await text("Your are a Bronze Validator").isVisible());
+	assert.ok(await text("You are a Bronze Validator").isVisible());
 	assert.ok(await text("Your Badge").isVisible());
 	assert.ok(await text("Share on").isVisible());
 	assert.ok(await text(`Validate ${contributionLeft} ${label} to earn your Silver Badge.`).isVisible());
