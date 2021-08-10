@@ -34,8 +34,7 @@ jobs:
         type: string
       db_name:
         type: string
-    executor:
-      name: node/default
+    executor: azure-aks/default
     steps:
       - *fast-checkout
       - azure-aks/update-kubeconfig-with-credentials:
