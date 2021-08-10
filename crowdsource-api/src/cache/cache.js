@@ -19,7 +19,7 @@ client.on("end", function (err) {
     console.log("RedisEnd " + err);
 });
 
-connect = function () {
+const connect = function () {
     client = redis.createClient(6380, process.env.REDISCACHEHOSTNAME,
         { auth_pass: process.env.REDISCACHEKEY, tls: { servername: process.env.REDISCACHEHOSTNAME } });
 }
