@@ -11,14 +11,16 @@ const cachingEnabled = config.caching ? config.caching == "enabled" : false;
 var client = cachingEnabled ? redis.createClient(6380, process.env.REDISCACHEHOSTNAME,
     { auth_pass: process.env.REDISCACHEKEY, tls: { servername: process.env.REDISCACHEHOSTNAME } }) : {};
 
-client.on("error", function (err) {
-    setTimeout(connect, 15000);
-    console.log("RedisError " + err);
-});
-client.on("end", function (err) {
-    setTimeout(connect, 15000);
-    console.log("RedisEnd " + err);
-});
+if (cachingEnabled) {
+    client.on("error", function (err) {
+        setTimeout(connect, 15000);
+        console.log("RedisError " + err);
+    });
+    client.on("end", function (err) {
+        setTimeout(connect, 15000);
+        console.log("RedisEnd " + err);
+    });
+}
 
 const connect = function () {
     client = redis.createClient(6380, process.env.REDISCACHEHOSTNAME,
