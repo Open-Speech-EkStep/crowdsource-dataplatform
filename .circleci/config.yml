@@ -54,7 +54,7 @@ jobs:
 
             psql "postgresql://${AZURE_DB_USER}:${AZURE_DB_PASS}@${AZURE_DB_HOST}/<< parameters.db_name >>" -f functional_tests/sql/setupDummyData.sql
 
-            kubectl -n << parameters.env_name >> create job --from=cronjob/refresh-data test-job
+            kubectl -n << parameters.env_name >> create job test-job --from=cronjob/refresh-data
             
   run_functional_tests:
     parameters:
