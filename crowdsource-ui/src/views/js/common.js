@@ -339,7 +339,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
       $("#showParticipateMsg").append(participateMsgMob);
       const badgeType = data.currentBadgeType;
       $("#thankyou-last-badge").attr('src', getLanguageBadge(contributionLanguage, data.currentBadgeType.toLowerCase(), 'contribute', module));
-      $("#last-bagde-earned").html(badgeType + " Contributor");
+      $("#last-bagde-earned").html(badgeType);
     }
     $(".new-badge-msg").addClass("d-none");
     $(".thankyou-page-heading").addClass('d-none');

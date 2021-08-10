@@ -254,6 +254,20 @@
     }
   },
   {
+    "json_key": "You are a <span class=\"text-orange\" id=\"last-bagde-earned\"></span> contributor",
+    "excel_key": "You are a <badge-color> contributor",
+    "replacements": {
+      "<badge-color>": "<span class=\"text-orange\" id=\"last-bagde-earned\"></span>"
+    }
+  },
+  {
+    "json_key": "You are a <span class=\"text-orange\" id=\"last-bagde-earned\"></span> validator",
+    "excel_key": "You are a <badge-color> validator",
+    "replacements": {
+      "<badge-color>": "<span class=\"text-orange\" id=\"last-bagde-earned\"></span>"
+    }
+  },
+  {
     "json_key": "You have helped us validate <span id=\"spn-validation-count\" class=\"font-wt-900\"></span> recordings",
     "excel_key": ""
   },
@@ -296,5 +310,15 @@
   {
     "json_key": "Validated <span id=\"current_badge_count_likho\"></span> <span id=\"likhoLanguages\"></span> <span>image(s)</span>",
     "excel_key": ""
+  },
+  {
+    "json_key": "Your Badges",
+    "excel_key": "Your badges",
+    "replacements": {}
+  },
+  {
+    "json_key": "View all details",
+    "excel_key": "VIEW ALL DETAILS",
+    "replacements": {}
   }
 ]
