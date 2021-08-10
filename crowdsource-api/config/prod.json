@@ -1,6 +1,6 @@
 { 
     "whitelistingEmail":"disabled",
     "envName": "prod",
-    "caching": "enabled",
+    "caching": "disabled",
     "validation_count": "5"
 }
