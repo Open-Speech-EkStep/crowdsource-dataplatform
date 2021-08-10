@@ -46,6 +46,12 @@ function initializeBlock() {
     redirectToLocalisedPage();
     getStatsSummary('/stats/summary/asr', MODULE.suno, () => { });
     showFunctionalCards('asr', fromLanguage);
+    const chartRadio = document.querySelector(
+      'input[name = "topLanguageChart"][value="hours"]'
+    );
+    if (chartRadio) {
+      chartRadio.checked = true;
+    } 
   });
 
   $('#start_recording').on('click', () => {

@@ -108,6 +108,12 @@ function initializeBlock() {
         showFunctionalCards('text', fromLanguage);
         redirectToLocalisedPage();
         getStatsSummary();
+        const chartRadio = document.querySelector(
+            'input[name = "topLanguageChart"][value="hours"]'
+        );
+        if (chartRadio) {
+            chartRadio.checked = true;
+        } 
     });
 
     $('#start_recording').on('click', () => {
