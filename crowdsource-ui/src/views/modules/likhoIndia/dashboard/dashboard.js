@@ -75,7 +75,7 @@ function updateLanguage(language) {
     const activeDurationText = $('#duration').find('.active')[0].dataset.value;
     getJson("/aggregated-json/lastUpdatedAtQuery.json")
         .then(res => {
-            const lastUpdatedAt = moment(res['timezone']).format('DD-MM-YYYY, h:mm:ss a')
+            const lastUpdatedAt = moment(res[0]['timezone']).format('DD-MM-YYYY, h:mm:ss a')
             if (lastUpdatedAt) {
                 $('#data-updated').text(` ${lastUpdatedAt}`);
                 $('#data-updated').removeClass('d-none');
