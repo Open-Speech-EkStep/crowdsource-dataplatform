@@ -222,6 +222,8 @@ workflows:
           cluster-name: ${AZURE_CLUSTER_NAME}
           env_name: dev
           db_name: ${AZURE_DEV_DB_NAME}
+          requires:
+            - create-workspace
           
       - db_migrate_azure:
           name: migrate_dev_azure
