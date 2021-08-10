@@ -68,10 +68,13 @@ const addToLanguage = function (id, list) {
 }
 
 function handleLanguagePairDisableBehavior() {
-    if ($('#from-dash-language').val() === '') {
-        $('#to-dash-language').attr('disabled', true);
+    const $fromDashLanguage = $('#from-dash-language');
+    const $toDashLanguage = $('#to-dash-language')
+
+    if ($fromDashLanguage.val() === '') {
+        $toDashLanguage.attr('disabled', true);
     } else {
-        $('#to-dash-language').removeAttr('disabled');
+        $toDashLanguage.removeAttr('disabled');
     }
 }
 
