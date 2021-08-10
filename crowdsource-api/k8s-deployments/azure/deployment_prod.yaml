@@ -90,6 +90,16 @@ spec:
                 secretKeyRef:
                   name: vakyansh-secret
                   key: AZURE_STORAGE_CONNECTION_STRING
+            - name: REDISCACHEHOSTNAME
+              valueFrom:
+                secretKeyRef:
+                  name: vakyansh-secret
+                  key: REDISCACHEHOSTNAME
+            - name: REDISCACHEKEY
+              valueFrom:
+                secretKeyRef:
+                  name: vakyansh-secret
+                  key: REDISCACHEKEY
           ports:
             - containerPort: 8080
 

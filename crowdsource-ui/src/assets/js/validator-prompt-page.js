@@ -252,7 +252,9 @@ function recordValidation(action) {
             country: localStorage.getItem('country') || "",
             userName: speakerDetails && speakerDetails.userName,
             device: getDeviceInfo(),
-            browser: getBrowserInfo()
+            browser: getBrowserInfo(),
+            type: MODULE.bolo["api-type"],
+            fromLanguage: localStorage.getItem('contributionLanguage')
         }),
         headers: {
             'Content-Type': 'application/json',

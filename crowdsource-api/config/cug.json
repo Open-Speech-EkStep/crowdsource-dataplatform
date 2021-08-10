@@ -1,3 +1,6 @@
 {
-  "whitelistingEmail":"enabled"
+  "whitelistingEmail":"enabled",
+  "envName": "cug",
+  "caching": "disabled",
+  "validation_count": "5"
 }

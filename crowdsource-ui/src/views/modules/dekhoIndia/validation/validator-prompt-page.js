@@ -54,6 +54,7 @@ function uploadToServer(cb) {
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
   fd.append('browser', getBrowserInfo());
+  fd.append('type', MODULE.dekho["api-type"]);
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -135,7 +136,9 @@ function skipValidation(action) {
       country: localStorage.getItem('country') || "",
       userName: speakerDetails && speakerDetails.userName,
       device: getDeviceInfo(),
-      browser: getBrowserInfo()
+      browser: getBrowserInfo(),
+      type: MODULE.dekho["api-type"],
+      fromLanguage: localStorage.getItem("contributionLanguage")
     }),
     headers: {
       'Content-Type': 'application/json',

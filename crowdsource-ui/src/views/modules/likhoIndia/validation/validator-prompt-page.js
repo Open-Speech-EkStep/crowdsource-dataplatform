@@ -74,11 +74,13 @@ function uploadToServer(cb) {
   fd.append('userInput', likhoIndiaValidator.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localStorage.getItem(LIKHO_TO_LANGUAGE));
+  fd.append('fromLanguage', localStorage.getItem(CONTRIBUTION_LANGUAGE));
   fd.append('sentenceId', likhoIndiaValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
   fd.append('browser', getBrowserInfo());
+  fd.append('type', MODULE.likho["api-type"]);
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -159,7 +161,10 @@ function skipValidation(action) {
       country: localStorage.getItem('country') || "",
       userName: speakerDetails && speakerDetails.userName,
       device: getDeviceInfo(),
-      browser: getBrowserInfo()
+      browser: getBrowserInfo(),
+      type: MODULE.likho["api-type"],
+      fromLanguage: localStorage.getItem("contributionLanguage"),
+      language: localStorage.getItem(LIKHO_TO_LANGUAGE)
     }),
     headers: {
       'Content-Type': 'application/json',

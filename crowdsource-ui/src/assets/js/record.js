@@ -413,7 +413,9 @@ const initialize = () => {
             device: getDeviceInfo(),
             browser: getBrowserInfo(),
             state_region: state_region,
-            country: country
+            country: country,
+            type: MODULE.bolo["api-type"],
+            language: localStorage.getItem(CONTRIBUTION_LANGUAGE)
         };
         fetch('/skip', {
             method: 'POST',
@@ -453,6 +455,7 @@ const initialize = () => {
         fd.append('audioDuration', crowdSource.audioDuration);
         fd.append('device', getDeviceInfo());
         fd.append('browser', getBrowserInfo());
+        fd.append('type', MODULE.bolo["api-type"]);
         fetch('/store', {
             method: 'POST',
             credentials: 'include',

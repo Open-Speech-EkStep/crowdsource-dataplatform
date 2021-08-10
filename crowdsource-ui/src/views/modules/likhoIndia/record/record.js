@@ -35,11 +35,13 @@ function uploadToServer(cb) {
   fd.append('userInput', likhoIndia.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localStorage.getItem(LIKHO_TO_LANGUAGE));
+  fd.append('fromLanguage', localStorage.getItem(CONTRIBUTION_LANGUAGE));
   fd.append('sentenceId', likhoIndia.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
   fd.append('browser', getBrowserInfo());
+  fd.append('type', MODULE.likho["api-type"]);
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -110,7 +112,9 @@ function markContributionSkipped() {
     device: getDeviceInfo(),
     browser: getBrowserInfo(),
     state_region: state_region,
-    country: country
+    country: country,
+    type: MODULE.likho["api-type"],
+    fromLanguage: localStorage.getItem(CONTRIBUTION_LANGUAGE)
   };
   fetch('/skip', {
     method: 'POST',
