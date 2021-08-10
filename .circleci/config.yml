@@ -49,8 +49,8 @@ jobs:
             sudo apt-get install -y python3 python3-pip
             sudo apt-get install -y postgresql-client
             
-            ENV_IMAGE_NAME=${AZURE_LOGIN_SERVER_NAME}/${AZURE_REPO}:<< parameters.env-name >>
-            ENV_IMAGE_NAME_DB_REFRESHER=${AZURE_LOGIN_SERVER_NAME}/${DB_REFRESHER_REPO}:<< parameters.env-name >>
+            ENV_IMAGE_NAME=${AZURE_LOGIN_SERVER_NAME}/${AZURE_REPO}:<< parameters.env_name >>
+            ENV_IMAGE_NAME_DB_REFRESHER=${AZURE_LOGIN_SERVER_NAME}/${DB_REFRESHER_REPO}:<< parameters.env_name >>
 
             AZURE_DB_USER=$(python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(sys.argv[1]))" $AZURE_DB_USER)
             AZURE_DB_PASS=$(python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(sys.argv[1]))" $AZURE_DB_PASS)
@@ -58,7 +58,7 @@ jobs:
             psql "postgresql://${AZURE_DB_USER}:${AZURE_DB_PASS}@${AZURE_DB_HOST}/<< parameters.db_name >>" -f functional_tests/sql/setupDummyData.sql
             kubectl -n << parameters.env_name >> patch cronjob refresh-data  -p '{"spec":{"schedule": "* * * * *"}}'
             
-            sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env-name >> apply  -f -
+            sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env_name >> apply  -f -
             
   run_functional_tests:
     parameters:
