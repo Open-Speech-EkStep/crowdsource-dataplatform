@@ -86,7 +86,7 @@ h6,
     font-weight: 400 !important;
   }
   #start_recording, #start_validating {
-    width: 100px;
+    width: 85px;
   }
   .say-active #say-p-2, .listen-active #listen-p-2 {
     position: relative !important;
