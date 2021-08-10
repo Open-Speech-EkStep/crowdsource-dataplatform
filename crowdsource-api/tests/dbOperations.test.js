@@ -750,6 +750,7 @@ describe("Running tests for dbOperations", () => {
 
         test('should call addValidationQuery and updateMediaWithValidatedState if action is accept/reject', async () => {
             spyDBnone.mockReturnValue(Promise.resolve())
+            spyDBresult.mockReturnValue(Promise.resolve())
             when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
             const action = 'accept';
 
@@ -757,12 +758,13 @@ describe("Running tests for dbOperations", () => {
 
             await dbOperations.updateTablesAfterValidation(req, res);
 
-            expect(spyDBnone).toHaveBeenNthCalledWith(1, addValidationQuery, [contributorId, datasetId, action, contributionId, state, country, device, browser]);
-            expect(spyDBresult).toHaveBeenNthCalledWith(1, updateMediaWithValidatedState, [datasetId, contributionId])
+            expect(spyDBresult).toHaveBeenNthCalledWith(1, addValidationQuery, [contributorId, datasetId, action, contributionId, state, country, device, browser]);
+            expect(spyDBresult).toHaveBeenNthCalledWith(2, updateMediaWithValidatedState, [datasetId, contributionId])
         });
 
         test('should only call addValidationQuery if action is skip', async () => {
             spyDBnone.mockReturnValue(Promise.resolve())
+            spyDBresult.mockReturnValue(Promise.resolve())
             when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
             const action = 'skip';
 
@@ -770,8 +772,8 @@ describe("Running tests for dbOperations", () => {
 
             await dbOperations.updateTablesAfterValidation(req, res);
 
-            expect(spyDBnone).toBeCalledWith(addValidationQuery, [contributorId, datasetId, action, contributionId, state, country, device, browser]);
-            expect(spyDBnone).toBeCalledTimes(1);
+            expect(spyDBresult).toBeCalledWith(addValidationQuery, [contributorId, datasetId, action, contributionId, state, country, device, browser]);
+            expect(spyDBresult).toBeCalledTimes(1);
         })
     })
 

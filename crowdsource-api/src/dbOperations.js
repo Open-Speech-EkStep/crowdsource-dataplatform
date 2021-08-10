@@ -298,8 +298,12 @@ const updateTablesAfterValidation = async (req, res) => {
     const { sentenceId, state = "", country = "", userName = "", device = "", browser = "" } = req.body;
     const { action, contributionId } = req.params;
     const validatorId = await getContributorId(userId, userName);
-    return db.none(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country, device, browser])
-        .then(async () => {
+    return db.result(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country, device, browser])
+        .then(async (insertResult) => {
+            if(insertResult && insertResult.rowCount === 0){
+                res.status(422).send("Contributor cannot validate his own contribution");
+                return;
+            }
             if (action !== 'skip') {
                 db.result(updateMediaWithValidatedState, [sentenceId, contributionId]).then(result=>{
                     if(result.rowCount == 0){

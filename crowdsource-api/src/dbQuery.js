@@ -170,7 +170,7 @@ from contributions con
 
 const addValidationQuery = `insert into validations (contribution_id, action, validated_by, date, state_region, country, device, browser) 
 select contribution_id, $3, $1, now(), $5, $6, $7, $8 from contributions inner join dataset_row on dataset_row.dataset_row_id=contributions.dataset_row_id 
-where dataset_row.dataset_row_id=$2 and contribution_id=$4;`
+where dataset_row.dataset_row_id=$2 and contribution_id=$4 and contributions.contributed_by != $1;`
 
 const updateMediaWithValidatedState = `update dataset_row set state = 
 'validated' where dataset_row_id = $1 and (select count(*) from validations where contribution_id=$2 and action!='skip') >= 
