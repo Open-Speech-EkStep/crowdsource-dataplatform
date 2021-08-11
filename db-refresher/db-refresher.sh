@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 echo "Db refresh Initiating...";
 cd /usr/src/app/tb_files
 
