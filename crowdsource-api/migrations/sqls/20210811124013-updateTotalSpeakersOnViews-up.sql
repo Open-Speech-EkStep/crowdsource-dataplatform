@@ -1,4 +1,5 @@
-/* Replace with your SQL commands */CREATE MATERIALIZED VIEW public.contributions_and_demo_stats_newest
+/* Replace with your SQL commands */
+CREATE MATERIALIZED VIEW public.contributions_and_demo_stats_newest
 TABLESPACE pg_default
 AS
  SELECT contributions.contributed_by,
@@ -140,7 +141,7 @@ AS
             round(sum(contributions_and_demo_stats.contribution_audio_duration) FILTER (WHERE contributions_and_demo_stats.audio_row_num_per_contribution_id = 1)::numeric / 3600::numeric, 3) AS total_contributions,
             contributions_and_demo_stats.type,
             count(DISTINCT contributions_and_demo_stats.contribution_id) AS total_contribution_count
-           FROM contributions_and_demo_stats contributions_and_demo_stats
+           FROM contributions_and_demo_stats_newest contributions_and_demo_stats
           WHERE contributions_and_demo_stats.is_system = false
           GROUP BY contributions_and_demo_stats.type, contributions_and_demo_stats.contributions_state_region, contributions_and_demo_stats.language, contributions_and_demo_stats.contributed_by) cs
      FULL JOIN ( SELECT contributions_and_demo_stats.validations_state_region AS state,
@@ -149,7 +150,7 @@ AS
             round(sum(contributions_and_demo_stats.validation_audio_duration)::numeric / 3600::numeric, 3) AS total_validations,
             contributions_and_demo_stats.type,
             sum(contributions_and_demo_stats.is_validated) AS total_validation_count
-           FROM contributions_and_demo_stats contributions_and_demo_stats
+           FROM contributions_and_demo_stats_newest contributions_and_demo_stats
           GROUP BY contributions_and_demo_stats.type, contributions_and_demo_stats.validations_state_region, contributions_and_demo_stats.language, contributions_and_demo_stats.validated_by) vs 
 		  ON cs.state = vs.state AND cs.language = vs.language AND cs.type = vs.type and cs.contribute_id = vs.validate_id
 	group by COALESCE(cs.state, vs.state),
@@ -178,7 +179,7 @@ AS
             round(sum(contributions_and_demo_stats.contribution_audio_duration) FILTER (WHERE contributions_and_demo_stats.audio_row_num_per_contribution_id = 1)::numeric / 3600::numeric, 3) AS total_contributions,
             contributions_and_demo_stats.type,
             count(DISTINCT contributions_and_demo_stats.contribution_id) AS total_contribution_count
-           FROM contributions_and_demo_stats contributions_and_demo_stats
+           FROM contributions_and_demo_stats_newest contributions_and_demo_stats
           WHERE contributions_and_demo_stats.is_system = false
           GROUP BY contributions_and_demo_stats.type, contributions_and_demo_stats.language,
 		contribute_id) as contribution_by_language
@@ -189,7 +190,7 @@ AS
             round(sum(contributions_and_demo_stats.validation_audio_duration)::numeric / 3600::numeric, 3) AS total_validations,
             contributions_and_demo_stats.type,
             sum(contributions_and_demo_stats.is_validated) AS total_validation_count
-           FROM contributions_and_demo_stats contributions_and_demo_stats
+           FROM contributions_and_demo_stats_newest contributions_and_demo_stats
           GROUP BY contributions_and_demo_stats.type, contributions_and_demo_stats.language,
 			   contributions_and_demo_stats.validated_by 
 			   ) validation_by_language ON contribution_by_language.language = validation_by_language.language AND contribution_by_language.language = validation_by_language.type
@@ -219,7 +220,7 @@ AS
             round(sum(contributions_and_demo_stats.contribution_audio_duration) FILTER (WHERE contributions_and_demo_stats.audio_row_num_per_contribution_id = 1)::numeric / 3600::numeric, 3) AS total_contributions,
             contributions_and_demo_stats.type,
             count(DISTINCT contributions_and_demo_stats.contribution_id) AS total_contribution_count
-           FROM contributions_and_demo_stats contributions_and_demo_stats
+           FROM contributions_and_demo_stats_newest contributions_and_demo_stats
           WHERE contributions_and_demo_stats.is_system = false
           GROUP BY contributions_and_demo_stats.type, contributions_and_demo_stats.contributions_state_region,
 		contribute_id) as contribution_by_state
@@ -230,7 +231,7 @@ AS
             round(sum(contributions_and_demo_stats.validation_audio_duration)::numeric / 3600::numeric, 3) AS total_validations,
             contributions_and_demo_stats.type,
             sum(contributions_and_demo_stats.is_validated) AS total_validation_count
-           FROM contributions_and_demo_stats contributions_and_demo_stats
+           FROM contributions_and_demo_stats_newest contributions_and_demo_stats
           GROUP BY contributions_and_demo_stats.type, contributions_and_demo_stats.validations_state_region,
 			   contributions_and_demo_stats.validated_by 
 			   ) validation_by_state ON contribution_by_state.state = validation_by_state.state AND contribution_by_state.type = validation_by_state.type
