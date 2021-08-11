@@ -41,6 +41,7 @@ const getFormattedTime = (totalSeconds) => {
 
 const updateShareContent = function (language, rank) {
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
+  const localisedLanguage = sessionStorage.getItem("i18n");
   const boloIndiaTitle = "Bhasha Daan: A crowdsourcing initiative for Indian languages";
   let localeText = "";
   if (rank === 0) {
@@ -64,7 +65,7 @@ const updateShareContent = function (language, rank) {
   const $linkedinShare = $("#linkedin_share");
   $linkedinShare.attr(
     "href",
-    `https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan&title=${localeStrings[boloIndiaTitle]}&summary=${localeText}`
+    `https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/${localisedLanguage}/home.html&title=${localeStrings[boloIndiaTitle]}&summary=${localeText}`
   );
 };
 
