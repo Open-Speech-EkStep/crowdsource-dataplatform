@@ -134,7 +134,7 @@ AS
     sum(vs.total_validations) as total_validations,
     sum(cs.total_contribution_count) as total_contribution_count,
     sum(vs.total_validation_count) as total_validation_count,
-    COALESCE(cs.type,vs.type)
+    COALESCE(cs.type,vs.type) as type
    FROM ( SELECT contributions_and_demo_stats.contributions_state_region AS state,
             contributions_and_demo_stats.language,
             contributions_and_demo_stats.contributed_by as contribute_id,
