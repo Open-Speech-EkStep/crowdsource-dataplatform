@@ -118,8 +118,7 @@ app.use(function (req, res, next) {
         res.cookie('userId', uuidv4(), {
             maxAge: ONE_YEAR,
             httpOnly: true,
-            secure: true,
-            sameSite:'none'
+            secure: true
         });
     }
     next();
