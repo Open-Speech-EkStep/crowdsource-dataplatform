@@ -298,7 +298,7 @@ const initialize = () => {
             crowdSource.audioBlob = blob;
             $player.prop('src', bloburl);
             $player.on('loadedmetadata', () => {
-                const duration = $player[0].duration;
+                const duration = $player[0].duration === +Infinity ? 0 : $player[0].duration
                 const isValidAudio = handleAudioDurationError(duration);
                 if (isValidAudio) {
                     crowdSource.audioDuration = duration
