@@ -489,21 +489,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
-  #userDropDown {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-  }
-}
-
 @media (min-width: 700px) and (max-width: 767px) {
-  #userDropDown {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-  }
-
   .btn-custom-primary {
     min-width: 240px;
     max-width: 240px;
