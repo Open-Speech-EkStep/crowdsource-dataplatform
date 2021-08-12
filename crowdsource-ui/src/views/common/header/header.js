@@ -103,7 +103,7 @@ const setDropdownValues = ()  => {
   document.getElementById('localisation_dropdown').innerHTML = '';
   ALL_LANGUAGES.forEach(localeLang => {
     if(localeLang.hasLocaleText)
-    dropDown.append(`<a id=${localeLang.value} class="dropdown-item d-flex align-items-center" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+    dropDown.append(`<a id=${localeLang.value} class="dropdown-item d-flex align-items-center py-3 py-md-2 py-lg-2" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
   });
 }
 

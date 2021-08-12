@@ -111,10 +111,10 @@ const updateLocaleLanguagesDropdown = (language) => {
   language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
   const localeLang = ALL_LANGUAGES.find(ele => ele.value.toLowerCase() === language.toLowerCase());
   if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
-    dropDown.html('<a id="english" class="dropdown-item" href="#" locale="en">English</a>');
+    dropDown.html('<a id="english" class="dropdown-item py-3 py-md-2 py-lg-2" href="#" locale="en">English</a>');
   } else {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-      <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+    dropDown.html(`<a id="english" class="dropdown-item py-3 py-md-2 py-lg-2" href="#" locale="en">English</a>
+      <a id=${localeLang.value} class="dropdown-item py-3 py-md-2 py-lg-2" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
   }
 }
 
@@ -484,10 +484,10 @@ const updateLikhoLocaleLanguagesDropdown = (language) => {
   const dropDown = $('#localisation_dropdown');
   const localeLang = ALL_LANGUAGES.find(ele => ele.value == language);
   if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>`);
+    dropDown.html(`<a id="english" class="dropdown-item py-3 py-md-2 py-lg-2" href="#" locale="en">English</a>`);
   } else {
-    dropDown.html(`<a id="english" class="dropdown-item" href="#" locale="en">English</a>
-    <a id=${localeLang.value} class="dropdown-item" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
+    dropDown.html(`<a id="english" class="dropdown-item py-3 py-md-2 py-lg-2" href="#" locale="en">English</a>
+    <a id=${localeLang.value} class="dropdown-item py-3 py-md-2 py-lg-2" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
   }
 }
 
