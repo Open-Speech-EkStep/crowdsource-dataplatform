@@ -1,8 +1,8 @@
-const { 
-	getContributionDataForCaching, 
-	getParallelContributionDataForCaching, 
-	getValidationDataForCaching, 
-	getParallelValidationDataForCaching 
+const {
+	getContributionDataForCaching,
+	getParallelContributionDataForCaching,
+	getValidationDataForCaching,
+	getParallelValidationDataForCaching
 } = require('./cacheDbQueries');
 const cache = require('./cache');
 const config = require('config');
@@ -34,13 +34,13 @@ const generateResponse = (data, desiredCount, userId, userName) => {
 	while (response.length < itemLength && skipCount < (data.length - response.length)) {
 		if (randomItems[i].skipped_by && randomItems[i].skipped_by.includes(`${userId}-${userName}`)) {
 			skipCount++;
-			 let obj = getRandom(data, 1)[0];
-			 if (includedIds.includes(obj.dataset_row_id)) {
+			let obj = getRandom(data, 1)[0];
+			if (includedIds.includes(obj.dataset_row_id)) {
 				randomItems.splice(i, 1);
-			 }
-			 else {
+			}
+			else {
 				randomItems[i] = obj;
-			 }
+			}
 		}
 		else {
 			delete randomItems[i]["skipped_by"];
@@ -53,7 +53,7 @@ const generateResponse = (data, desiredCount, userId, userName) => {
 }
 
 const sortAndFilterValidationData = (data) => {
-	data = data.filter(d => d.validation_count && d.validation_count < validation_count);
+	data = data.filter(d => d.validation_count != undefined && d.validation_count < validation_count);
 	data
 		.sort(function (a, b) {
 			return a.validation_count - b.validation_count;
@@ -70,13 +70,13 @@ const generateValidationResponse = (data, desiredCount, userId, userName) => {
 	while (response.length < itemLength && skipCount < (data.length - response.length)) {
 		if ((randomItems[i].skipped_by && randomItems[i].skipped_by.includes(`${userId}-${userName}`))
 			|| (randomItems[i].contributed_by && randomItems[i].contributed_by == `${userId}-${userName}`)) {
-				if (itemLength + skipCount < data.length) {
-					randomItems[i] = data[itemLength + skipCount]
-				}
-				else {
-					randomItems.splice(i, 1);
-				}
-				skipCount++;
+			if (itemLength + skipCount < data.length) {
+				randomItems[i] = data[itemLength + skipCount]
+			}
+			else {
+				randomItems.splice(i, 1);
+			}
+			skipCount++;
 		}
 		else {
 			delete randomItems[i]["skipped_by"];
