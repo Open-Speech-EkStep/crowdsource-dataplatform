@@ -2,46 +2,47 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/theme.css">
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/contributionLangChange.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-app-primary pl-0 py-lg-0 py-0 pr-0 text-white font-family-Rowdies header-fixed" id="header-nav-bar">
-    <div class="row m-0 header-logo-size pl-3 pl-lg-0 pl-md-0">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon" style="height:18px;width:18px"></span></button>
+    <div class="row m-0 header-logo-size pl-lg-0 pl-md-0">
+        <button class="navbar-toggler px-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon" style="height:18px;width:18px"></span></button>
         <div class="d-flex align-items-center">
             <a class="logo-text" href="/">
                 <h2 class="mb-0" id="bhasini_logo">
-                    <img src="<%- `/img/${locale}-logo.svg` %>" alt="Bhaashini" width="200px" height="65px">
+                    <img src="<%- `/img/${locale}-logo.svg` %>" class="d-none d-md-block d-lg-block" alt="Bhaashini" width="200px" height="65px">
+                    <img src="<%- `/img/${locale}-logo-sm.svg` %>" class="d-block d-sm-block d-md-none d-lg-none mobile-logo" alt="Bhaashini" width="48" height="48">
                 </h2>
             </a>
-            <div class="vertical-line"></div>
+            <div class="vertical-line ml-1 ml-lg-0"></div>
             <%- include ./bhasadaanLogoText.ejs %>
             <div id="logo_separator" class="ml-3 mr-0"></div>
         </div>
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav" id="module_name">
-            <li class="nav-item module-item p-2 d-none" value="home"><a href="<%= home %>" class="nav-link text-muted-white">
+        <ul class="navbar-nav pt-3 pt-lg-0 pt-md-0" id="module_name">
+            <li class="nav-item module-item p-2 d-none" value="home"><a href="<%= home %>" class="nav-link text-muted-white pl-2 p-lg-2 p-md-2">
                     <%= __('Home') %>
                 </a></li>
-            <li class="nav-item module-item p-2 d-flex align-items-center" value="suno"><a id="suno_india_tab" href="<%= suno %>" class="nav-link text-muted-white">
+            <li class="nav-item module-item pl-4 pt-2 pb-2 pr-2 p-lg-2 p-md-2 d-flex align-items-center" value="suno"><a id="suno_india_tab" href="<%= suno %>" class="nav-link text-muted-white pl-2 p-lg-2 p-md-2">
                     <span>
                         <%= __('Suno') %>
                     </span> <span>
                         <%= __('India') %>
                     </span>
                 </a></li>
-            <li class="nav-item module-item p-2 d-flex align-items-center" value="bolo"><a id="bolo_india_tab" href="<%= bolo %>" class="nav-link text-muted-white">
+            <li class="nav-item module-item pl-4 pt-2 pb-2 pr-2 p-lg-2 p-md-2 d-flex align-items-center" value="bolo"><a id="bolo_india_tab" href="<%= bolo %>" class="nav-link text-muted-white pl-2 p-lg-2 p-md-2">
                     <span>
                         <%= __('Bolo') %>
                     </span> <span>
                         <%= __('India') %>
                     </span>
                 </a></li>
-            <li class="nav-item module-item p-2 d-flex align-items-center" value="likho"><a id="likho_india_tab" href="<%= likho %>" class="nav-link text-muted-white">
+            <li class="nav-item module-item pl-4 pt-2 pb-2 pr-2 p-lg-2 p-md-2 d-flex align-items-center" value="likho"><a id="likho_india_tab" href="<%= likho %>" class="nav-link text-muted-white pl-2 p-lg-2 p-md-2">
                     <span>
                         <%= __('Likho') %>
                     </span> <span>
                         <%= __('India') %>
                     </span>
                 </a></li>
-            <li class="nav-item module-item p-2 d-flex align-items-center" value="dekho"><a id="dekho_india_tab" href="<%= dekho %>" class="nav-link text-muted-white">
+            <li class="nav-item module-item pl-4 pt-2 pb-2 pr-2 p-lg-2 p-md-2 d-flex align-items-center" value="dekho"><a id="dekho_india_tab" href="<%= dekho %>" class="nav-link text-muted-white pl-2 p-lg-2 p-md-2">
                     <span>
                         <%= __('Dekho') %>
                     </span> <span>
@@ -49,7 +50,7 @@
                     </span>
                 </a></li>
         </ul>
-        <ul class="navbar-nav ml-auto" id="about-us">
+        <ul class="navbar-nav ml-auto pb-3 pb-lg-0 pb-md-0" id="about-us">
             <li class="nav-item p-2 module-item dropdown d-flex align-items-center" id="locale_language_dropdown">
                 <a class="nav-link dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="/img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
@@ -63,20 +64,20 @@
             </li>
         </ul>
     </div>
-    <ul class="navbar-nav" id="userNavBar">
-        <li class="nav-item pr-lg-2 module-item dropdown d-flex align-items-center" id="userDropDown">
+    <ul class="navbar-nav mr-3" id="userNavBar">
+        <li class="nav-item module-item dropdown d-flex align-items-center" id="userDropDown">
             <a class="nav-link d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="/img/usericon.svg" alt="usericon" class="align-middle mx-1">
+                <img src="/img/usericon.svg" alt="usericon" class="align-middle">
                 <span id="nav-username" class="text-muted-white"></span>
             </a>
 
-            <div id="user_profile_dropdown" class="dropdown-menu" aria-labelledby="nav-user">
-                <a id="user_profile_name" class="dropdown-item point-none align-items-center" href="#"></a>
-                <a id="anonymous_user" class="dropdown-item point-none align-items-center" href="#"><%= __('(No Username)')%></a>
-                <a id="change_user" class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal" data-target="#userModal">
+            <div id="user_profile_dropdown" class="dropdown-menu font-family-Lato" aria-labelledby="nav-user">
+                <a id="user_profile_name" class="dropdown-item point-none align-items-center py-3 py-md-2 py-lg-2" href="#"></a>
+                <a id="anonymous_user" class="dropdown-item point-none align-items-center py-3 py-md-2 py-lg-2" href="#"><%= __('(No Username)')%></a>
+                <a id="change_user" class="dropdown-item d-flex align-items-center py-3 py-md-2 py-lg-2" href="#" data-toggle="modal" data-target="#userModal">
                     <%= __('Change User')%>
                 </a>
-                <a id="profile_user" class="dropdown-item d-flex align-items-center" href="<%- `${path}my-badges.html`%>"><%= __('My Badges')%></a>
+                <a id="profile_user" class="dropdown-item d-flex align-items-center py-3" href="<%- `${path}my-badges.html`%>"><%= __('My Badges')%></a>
             </div>
         </li>
     </ul>

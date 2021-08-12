@@ -6,9 +6,11 @@
   cursor: no-drop !important;
 }
 
-#userNavBar.active {
-  background: rgba(159, 200, 255, 0.39) !important;
-  border-bottom: 2px solid #142745 !important;
+@media (min-width: 992px) {
+  #userNavBar.active {
+    background: rgba(159, 200, 255, 0.39) !important;
+    border-bottom: 2px solid #142745 !important;
+  }
 }
 
 
@@ -23,7 +25,7 @@
   margin-top: 14px;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
 
   #header-nav-bar .dropdown-item{
     height: 40px;
@@ -74,17 +76,10 @@
     margin-top: 5px;
   }
 
-  #logo_separator{
-    width: .5px;
-    height: 46px;
-    margin-right: 12px;
-    background: #000000;
-    opacity: 10%;
-  }
 }
 
 /*  Ipad */
-@media (max-width: 768px) {
+@media (max-width: 700px) {
   .beta-version {
     position: absolute;
     bottom: -4px;
@@ -105,20 +100,38 @@
   }
 
   .navbar-toggler {
-    padding: 0 !important;
     font-size: 1rem !important;
     border: 0 !important;
   }
+}
 
-  #bhashadaan_logo .font-size-lg-40{
-    font-size: 18px;
+
+@media (min-width: 1200px) {
+  #logo_separator{
+    width: .5px;
+    height: 46px;
+    margin-right: 12px;
+    background: #000000;
+    opacity: 10%;
   }
 }
 
 
 /* Mobile Css */
 
+@media (max-width: 992px) {
+
+  #userDropDown{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+  }
+}
+
 @media (max-width: 767px) {
+  #navbarSupportedContent {
+    font-size: 14px !important;
+  }
   .header-logo-size {
     height: 56px;
   }
@@ -137,26 +150,33 @@
     margin-top: 5px;
   }
 
-  #userDropDown{
-    position: absolute;
-    top: 10px;
-    right: 20px;
-  }
 
   #userNavBar .dropdown-menu {
     position: absolute !important;
-    margin-left: -140% !important;
+    margin-left: -222% !important;
   }
 
   .navbar-toggler {
-    padding: 0 !important;
     font-size: 1rem !important;
     border: 0 !important;
   }
 
-  #bhasini_logo img{
-    width: 100px;
-    height: 36px;
+  #bhashini_logo .mobile-logo {
+    width: 48px !important;
+    height: 48px !important;
+  }
+ 
+}
+
+@media (min-width: 576px) and (max-width: 768px){
+  #bhashadaan_logo .font-size-lg-40{
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 575px){
+  #bhashadaan_logo .font-size-lg-40{
+    font-size: 14px;
   }
 }
 
@@ -179,8 +199,13 @@
 
 .dropdown-toggle:after {
   vertical-align: 0.1em !important;
+  margin-left: 0;
 }
 
 #header-nav-bar  .dropdown-item:focus, .dropdown-item:hover {
   background-color: rgba(159,200,255,.39) !important;
+}
+
+.navbar-light .navbar-toggler {
+  border-color: transparent;
 }

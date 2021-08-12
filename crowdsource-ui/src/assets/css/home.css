@@ -299,6 +299,7 @@ body.modal-open .supreme-container {
   border-radius: 20px;
   min-height: 190px;
   background-repeat: no-repeat;
+  border: 1px solid rgba(67 ,192, 215, 1);
 }
 
 #topLanguageSpinner, #chartSpinner {

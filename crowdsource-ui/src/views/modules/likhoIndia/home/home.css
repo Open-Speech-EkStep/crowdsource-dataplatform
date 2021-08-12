@@ -383,6 +383,8 @@ body.modal-open .supreme-container {
 .validate-disabled {
   background-color: rgb(230 230 230 / 50%);
   cursor: no-drop;
+  box-shadow:  rgba(67, 192, 215, 0.5) 0 8px 0, rgb(0 0 0 / 10%) 0 0 32px !important;
+  border: 1px solid rgba(67 ,192, 215, 0.5) !important;
 }
 
 .validate-disabled #left_container,
@@ -398,6 +400,8 @@ body.modal-open .supreme-container {
 .cont-validate-disabled {
   background-color:  rgb(230 230 230 / 50%);
   cursor: no-drop;
+  box-shadow:  rgba(67, 192, 215, 0.5) 0 8px 0, rgb(0 0 0 / 10%) 0 0 32px !important;
+  border: 1px solid rgba(67 ,192, 215, 0.5) !important;
 }
 
 .cont-validate-disabled #left_container,

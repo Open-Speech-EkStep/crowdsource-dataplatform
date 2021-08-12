@@ -40,6 +40,12 @@
   .card{
     height: 400px;
   }
+  .card1:hover {
+    box-shadow: 0 8px 0 #43c0d7,0 0 32px #43c0d7;
+  }
+  .card2:hover {
+    box-shadow: 0 8px 0 #43c0d7,0 0 32px #43c0d7;
+  }
 }
 @media screen and (min-width: 992px) and (max-width: 1279px) {
   .card img {
@@ -89,6 +95,7 @@
   border-radius: 20px;
   min-height: 190px;
   background-repeat: no-repeat;
+  border: 1px solid rgba(67 ,192, 215, 1);
   box-shadow: rgb(67 192 215) 0 8px 0, rgb(0 0 0 / 10%) 0 0 32px;
 }
 

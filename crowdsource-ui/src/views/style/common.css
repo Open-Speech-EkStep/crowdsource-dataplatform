@@ -163,6 +163,8 @@ body {
 .validate-disabled {
   background-color: rgb(230 230 230 / 50%);
   cursor: no-drop;
+  box-shadow:  rgba(67, 192, 215, 0.5) 0 8px 0, rgb(0 0 0 / 10%) 0 0 32px !important;
+  border: 1px solid rgba(67 ,192, 215, 0.5) !important;
 }
 
 .validate-disabled #left_container,
@@ -179,6 +181,8 @@ body {
 .cont-validate-disabled {
   background-color: rgb(230 230 230 / 50%);
   cursor: no-drop;
+  box-shadow:  rgba(67, 192, 215, 0.5) 0 8px 0, rgb(0 0 0 / 10%) 0 0 32px !important;
+  border: 1px solid rgba(67 ,192, 215, 0.5) !important;
 }
 
 .cont-validate-disabled #left_container,
@@ -195,24 +199,45 @@ body {
 @media (min-width: 962px) {
   #cont-warning-msg {
     display: none;
-    top: 25px;
+    top: 15px;
     left: 7%;
     font-style: italic;
-    width: 89%;
-    padding: 8px 15px;
-    height: 44px;
+    width: 92%;
+    padding: 9px 15px;
     border-radius: 12px;
   }
 
 
   #warning-msg {
     display: none;
-    top: 25px;
+    top: 15px;
     left: 7%;
     font-style: italic;
-    width: 89%;
-    padding: 8px 15px;
-    height: 44px;
+    width: 92%;
+    padding: 9px 15px;
+    border-radius: 12px;
+    background: rgba(77, 130, 247, .1);
+  }
+}
+
+@media (min-width: 1400px) {
+  #cont-warning-msg {
+    display: none;
+    top: 15px;
+    left: 6%;
+    font-style: italic;
+    width: 92%;
+    padding: 9px 15px;
+    border-radius: 12px;
+  }
+
+  #warning-msg {
+    display: none;
+    top: 15px;
+    left: 6%;
+    font-style: italic;
+    width: 92%;
+    padding: 9px 15px;
     border-radius: 12px;
     background: rgba(77, 130, 247, .1);
   }
@@ -240,8 +265,7 @@ body {
     left: 10%;
     font-style: italic;
     width: 89%;
-    padding: 0 10px;
-    height: 44px;
+    padding: 3px 10px;
     border-radius: 12px;
   }
 
@@ -252,8 +276,7 @@ body {
     left: 10%;
     font-style: italic;
     width: 89%;
-    padding: 0 10px;
-    height: 44px;
+    padding: 3px 10px;
     border-radius: 12px;
     background: rgba(77, 130, 247, .1);
   }
@@ -286,7 +309,7 @@ body {
 
   #cont-warning-msg {
     display: none;
-    top: 5px;
+    top: 8px;
     left: 7%;
     font-style: italic;
     width: 95%;
@@ -303,7 +326,7 @@ body {
 
   #warning-msg {
     display: none;
-    top: 5px;
+    top: 8px;
     left: 7%;
     font-style: italic;
     width: 95%;
