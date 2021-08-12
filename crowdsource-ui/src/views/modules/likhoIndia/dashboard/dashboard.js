@@ -67,6 +67,17 @@ const addToLanguage = function (id, list) {
     selectBar.innerHTML = options;
 }
 
+function handleLanguagePairDisableBehavior() {
+    const $fromDashLanguage = $('#from-dash-language');
+    const $toDashLanguage = $('#to-dash-language')
+
+    if ($fromDashLanguage.val() === '') {
+        $toDashLanguage.attr('disabled', true);
+    } else {
+        $toDashLanguage.removeAttr('disabled');
+    }
+}
+
 function updateLanguage(language) {
     const $speakersData = $('#speaker-data');
     const $speakerDataDetails = $speakersData.find('#contribution-details');
@@ -113,6 +124,8 @@ function updateLanguage(language) {
                                 $('#no-data-found').addClass('d-none');
                             }, 5000);
                         }
+
+                        handleLanguagePairDisableBehavior();
                     } catch (error) { console.log(error) }
                 })
                 .catch((err) => { console.log(err) });
@@ -195,6 +208,8 @@ const executeOnLoad = function () {
         if (toLanguage == "" && fromLanguage == "") {
             updateLanguage("");
         }
+
+        handleLanguagePairDisableBehavior();
     });
 
     $('#to-dash-language').on('change', (e) => {
