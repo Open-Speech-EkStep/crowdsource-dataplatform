@@ -76,7 +76,7 @@ const safeErrorHandling = (data) => {
 const bindErrorText = (data) => {
   const $errorText = $("#error-text");
   $errorText.text("");
-  $errorText.text(data.status === ErrorStatusCode.TOOMANYREQUEST? translate("We are processing multiple requests at the moment. Please try again after sometime.") 
+  $errorText.text(data.status === ErrorStatusCode.SERVICE_UNAVAILABLE? translate("We are processing multiple requests at the moment. Please try again after sometime.") 
   : translate("An unexpected error has occurred."));
 }
 

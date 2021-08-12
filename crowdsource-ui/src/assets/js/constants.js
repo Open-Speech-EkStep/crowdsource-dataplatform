@@ -17,7 +17,8 @@ const LIKHO_FROM_LANGUAGE = "likho_from-language";
 
 const ErrorStatusCode = {
     SUCCESS: 200,
-    TOOMANYREQUEST: 429,
+    TOO_MANY_REQUEST: 429,
+    SERVICE_UNAVAILABLE: 503
 };
 
 let ALL_LANGUAGES = getAllLanguages()

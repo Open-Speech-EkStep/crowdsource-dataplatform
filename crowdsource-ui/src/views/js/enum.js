@@ -1,5 +1,6 @@
 export const ErrorStatusCode = {
     SUCCESS: 200,
-    TOOMANYREQUEST: 429,
+    TOO_MANY_REQUEST: 429,
+    SERVICE_UNAVAILABLE: 503
 };
 Object.freeze(ErrorStatusCode);
