@@ -15,7 +15,8 @@ const {
   performAPIRequest,
   showElement,
   hideElement,
-  getJson
+  getJson,
+  translate
 } = require("../common/utils");
 
 const { downloadPdf } = require('../common/downloadableBadges');
@@ -45,7 +46,7 @@ const updateShareContent = function (language, rank) {
     localeText = localeStrings["social sharing text without rank"];
   } else {
     localeText = localeStrings["social sharing text with rank"];
-    localeText = localeText.replace("<x>", language);
+    localeText = localeText.replace("<x>", translate(language));
     localeText = localeText.replace("<y>", rank);
   }
   //const text = `I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Our ${language} language ranks ${rank} on BoloIndia. Do your bit and empower the language?`;
