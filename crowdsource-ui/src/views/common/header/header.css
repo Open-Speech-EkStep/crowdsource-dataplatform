@@ -22,9 +22,6 @@
   #header-nav-bar .dropdown-item{
     height: 40px;
   }
-  #userNavBar {
-    height: 65px;
-  }
 
   #user_profile_dropdown {
     width: 175px;
@@ -88,17 +85,6 @@
   .navbar-toggler {
     font-size: 1rem !important;
     border: 0 !important;
-  }
-}
-
-
-@media (min-width: 1200px) {
-  #logo_separator{
-    width: .5px;
-    height: 46px;
-    margin-right: 12px;
-    background: #000000;
-    opacity: 10%;
   }
 }
 
@@ -182,29 +168,25 @@
   border-color: transparent;
 }
 
-.locale-selector, .user-options {
+.nav-right {
+  display: flex;
   position: absolute;
   top: 0;
+  right: 0;
+  height: 56px;
+}
+
+.locale-selector, .user-options {
   margin: 0;
   padding: 0;
-  height: 100%;
   list-style-type: none;
-  width: 56px;
 }
 
-.locale-selector {
-  right: 56px;
-}
-
-.user-options {
-  right: 0;
-}
-
-@media (max-width: 991px) {
-  .user-options .nav-username {
+@media (max-width: 1199px) {
+  .locale-selector .language-text {
     display: none;
   }
-  .locale-selector .language-text {
+  .user-options .nav-username-text {
     display: none;
   }
 }
@@ -249,21 +231,12 @@
     width: auto;
   }
 
-  .locale-selector, .user-options {
-    width: auto;
-  }
-
   .localisation-dropdown, .user-profile-dropdown {
     top: 65px !important;
   }
 
-  .locale-selector .module-item.active {
-    background: rgba(159,200,255,.39) !important;
-    border-bottom: 2px solid #0f2749 !important;
-  }
-
-  .locale-selector {
-    right: 65px;
+  .nav-right {
+    height: 65px;
   }
 
   .locale-selector .nav-link, .user-options .nav-link {
@@ -272,13 +245,26 @@
 }
 
 @media (min-width: 992px) {
-  .locale-selector {
-    right: 96px;
-  }
   #userNavBar.active {
     background: rgba(159, 200, 255, 0.39) !important;
     border-bottom: 2px solid #142745 !important;
   }
+
+  .locale-selector .module-item.active {
+    background: rgba(159,200,255,.39) !important;
+    border-bottom: 2px solid #0f2749 !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  #logo_separator{
+    width: .5px;
+    height: 46px;
+    margin-right: 12px;
+    background: #000000;
+    opacity: 10%;
+  }
+
   .locale-selector .nav-link, .user-options .nav-link {
     width: auto;
   }

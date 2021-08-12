@@ -53,36 +53,38 @@
             </ul>
         </div>
     </nav>
-    <ul class="locale-selector" id="about-us">
-        <li class="nav-item module-item dropdown p-0" id="locale_language_dropdown">
-            <a class="nav-link dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="/img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
-                <span id="selected-locale-dropdown" class="language-text text-muted-white mr-md-1">
+    <div class='nav-right'>
+        <ul class="locale-selector" id="about-us">
+            <li class="nav-item module-item dropdown p-0" id="locale_language_dropdown">
+                <a class="nav-link dropdown-toggle cursor-pointer" id="localeDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="/img/locale_logo.svg" alt="locale_logo" class="align-middle mx-1">
+                    <span id="selected-locale-dropdown" class="language-text text-muted-white mr-md-1">
                     <%= __('Language') %>
                 </span>
-            </a>
-            <div id="localisation_dropdown" class="localisation-dropdown dropdown-menu font-family-Lato" aria-labelledby="localeDropdownMenuButton">
-
-            </div>
-        </li>
-    </ul>
-    <ul class="user-options" id="userNavBar">
-        <li class="nav-item module-item dropdown p-0" id="userDropDown">
-            <a class="nav-link d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="/img/usericon.svg" alt="usericon" class="align-middle">
-                <span id="nav-username" class="text-muted-white mr-md-1"></span>
-            </a>
-
-            <div id="user_profile_dropdown" class="user-profile-dropdown dropdown-menu font-family-Lato" aria-labelledby="nav-user">
-                <a id="user_profile_name" class="dropdown-item point-none align-items-center py-3 py-md-2 py-lg-2" href="#"></a>
-                <a id="anonymous_user" class="dropdown-item point-none align-items-center py-3 py-md-2 py-lg-2" href="#"><%= __('(No Username)')%></a>
-                <a id="change_user" class="dropdown-item d-flex align-items-center py-3 py-md-2 py-lg-2" href="#" data-toggle="modal" data-target="#userModal">
-                    <%= __('Change User')%>
                 </a>
-                <a id="profile_user" class="dropdown-item d-flex align-items-center py-3" href="<%- `${path}my-badges.html`%>"><%= __('My Badges')%></a>
-            </div>
-        </li>
-    </ul>
+                <div id="localisation_dropdown" class="localisation-dropdown dropdown-menu font-family-Lato" aria-labelledby="localeDropdownMenuButton">
+
+                </div>
+            </li>
+        </ul>
+        <ul class="user-options" id="userNavBar">
+            <li class="nav-item module-item dropdown p-0" id="userDropDown">
+                <a class="nav-link d-none dropdown-toggle cursor-pointer" id="nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="/img/usericon.svg" alt="usericon" class="align-middle">
+                    <span id="nav-username" class="nav-username-text text-muted-white mr-md-1"></span>
+                </a>
+
+                <div id="user_profile_dropdown" class="user-profile-dropdown dropdown-menu font-family-Lato" aria-labelledby="nav-user">
+                    <a id="user_profile_name" class="dropdown-item point-none align-items-center py-3 py-md-2 py-lg-2" href="#"></a>
+                    <a id="anonymous_user" class="dropdown-item point-none align-items-center py-3 py-md-2 py-lg-2" href="#"><%= __('(No Username)')%></a>
+                    <a id="change_user" class="dropdown-item d-flex align-items-center py-3 py-md-2 py-lg-2" href="#" data-toggle="modal" data-target="#userModal">
+                        <%= __('Change User')%>
+                    </a>
+                    <a id="profile_user" class="dropdown-item d-flex align-items-center py-3 py-md-2 py-lg-2" href="<%- `${path}my-badges.html`%>"><%= __('My Badges')%></a>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
 <%- include ./error-popup.ejs %>
 <%- include ./contributionLangChange.ejs %>
