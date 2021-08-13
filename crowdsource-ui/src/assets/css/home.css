@@ -464,3 +464,20 @@ body.modal-open .supreme-container {
   max-width:1200px;
   margin:auto;
 }
+
+.medal-img {
+  width: 142px;
+  margin: 0 10px;
+}
+
+.medal-img:first-child {
+  margin-left: 0;
+}
+
+.medal-img:last-child {
+  margin-right: 0;
+}
+
+.medal-img img {
+  max-width: 100%;
+}
