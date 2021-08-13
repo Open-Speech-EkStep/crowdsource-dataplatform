@@ -937,7 +937,9 @@ select (select contributor_id from contributors where user_name = 'Badge User' a
 REFRESH MATERIALIZED VIEW contributions_and_demo_stats;
 REFRESH MATERIALIZED VIEW daily_stats_complete;
 REFRESH MATERIALIZED VIEW gender_group_contributions;
+REFRESH MATERIALIZED VIEW gender_and_language_group_contributions;
 REFRESH MATERIALIZED VIEW age_group_contributions;
+REFRESH MATERIALIZED VIEW age_group_and_language_contributions;
 REFRESH MATERIALIZED VIEW language_group_contributions;
 REFRESH MATERIALIZED VIEW state_group_contributions;
 REFRESH MATERIALIZED VIEW language_and_state_group_contributions;

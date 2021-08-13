@@ -94,6 +94,14 @@ const MODULE = {
     },
 };
 
+const AGE_GROUP = [
+    '',
+    'upto 10',
+    '10 - 30',
+    '30 - 60',
+    '60+',
+  ];
+
 module.exports = {
     DEFAULT_CON_LANGUAGE,
     AUDIO_DURATION,
@@ -116,5 +124,6 @@ module.exports = {
     LIKHO_TO_LANGUAGE,
     LIKHO_FROM_LANGUAGE,
     ErrorStatusCode,
-    CUMULATIVE_DATA
+    CUMULATIVE_DATA,
+    AGE_GROUP
 }

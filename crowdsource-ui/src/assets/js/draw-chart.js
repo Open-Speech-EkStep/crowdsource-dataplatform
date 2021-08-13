@@ -1,5 +1,6 @@
 const fetch = require('./fetch')
 const { generateIndiaMap } = require('./home-page-charts');
+const { AGE_GROUP } = require('./constants');
 const { calculateTime, formatTime, getJson, translate } = require('./utils');
 const $chartRow = $('.chart-row');
 const $chartLoaders = $chartRow.find('.loader');
@@ -33,8 +34,10 @@ function getAgeGroupData(data, key) {
     const years = 'years';
     let formattedData = [];
     data.forEach(item => {
-        item[key] === "" ? item[key] = 'Not Specified' : item[key] = `${item[key]} ${years}`;
-        formattedData.push(item);
+        if (AGE_GROUP.includes(item[key])) {
+            item[key] === "" ? item[key] = 'Not Specified' : item[key] = `${item[key]} ${years}`;
+            formattedData.push(item);
+        }
     });
     return formattedData;
 }
@@ -43,7 +46,7 @@ const getGenderData = (genderData) => {
     const genderOrder = ['male', 'female', 'not Specified', 'transgender'];
     const formattedGenderData = [];
     genderOrder.forEach(gender => {
-        genderData.data.forEach(item => {
+        genderData.forEach(item => {
             let gType = item.gender;
             if (item.gender === "") item.gender = 'not Specified';
             if (item.gender.toLowerCase().indexOf('transgender') > -1 || item.gender.toLowerCase().indexOf('rather') > -1) gType = "transgender";
@@ -111,34 +114,34 @@ const getTimelineUrl = (language, timeframe = "weekly") => {
     }
     url += ".json";
     return url;
-  }
-  
-  function getLanguageSpecificData(data, lang) {
+}
+
+function getLanguageSpecificData(data, lang) {
     const returnData = [];
     data.forEach(item => {
-      if (item.language.toLowerCase() === lang.toLowerCase()) {
-        returnData.push(item);
-      }
+        if (item.language.toLowerCase() === lang.toLowerCase()) {
+            returnData.push(item);
+        }
     });
     return returnData;
-  }
+}
 
 const buildTimelineGraph = (language, timeframe) => {
     const url = getTimelineUrl(language, timeframe);
     getJson(url)
-    .then((data) => {
-        $timelineLoader.hide().removeClass('d-flex');
-        $timelineChart.removeClass('d-none');
-        data = data.filter(d => d.type == "text") || [];
-        data = language !== "" ? getLanguageSpecificData(data, language) : data;
-        drawTimelineChart(data);
-    }).catch((err) => {
-        console.log(err);
-    });
+        .then((data) => {
+            $timelineLoader.hide().removeClass('d-flex');
+            $timelineChart.removeClass('d-none');
+            data = data.filter(d => d.type == "text") || [];
+            data = language !== "" ? getLanguageSpecificData(data, language) : data;
+            drawTimelineChart(data);
+        }).catch((err) => {
+            console.log(err);
+        });
 }
 
 function buildGraphs(language, timeframe) {
-   
+
     const url = getTimelineUrl(language, timeframe);
     getJson(url)
         .then(timelineData => {
@@ -151,20 +154,31 @@ function buildGraphs(language, timeframe) {
             $charts.addClass('d-none');
         });
 
+    var genderStatsUrl = '/aggregated-json/genderGroupContributions.json';
+    var ageStatsUrl = '/aggregated-json/ageGroupContributions.json';
+    if (language) {
+        genderStatsUrl = '/aggregated-json/genderGroupAndLanguageContributions.json';
+        ageStatsUrl = '/aggregated-json/ageGroupAndLanguageContributions.json';
+    }
+
     Promise.all([
-        fetch(`/stats/contributions/gender/text?language=${language}`),
-        fetch(`/stats/contributions/age/text?language=${language}`)
+        getJson(genderStatsUrl),
+        getJson(ageStatsUrl)
     ]).then(function (responses) {
         return Promise.all(responses.map(function (response) {
-            return response.json();
+            return response;
         }));
     }).then((data) => {
         try {
             $chartLoaders.hide().removeClass('d-flex');
             $charts.removeClass('d-none');
 
+            if (language) {
+                data[0] = data[0].filter(d => d.language == language);
+                data[1] = data[1].filter(d => d.language == language);
+            }
             const genderData = getGenderData(data[0]);
-            const ageGroupData = getAgeGroupData(data[1].data, 'age_group').sort((a, b) => Number(a.speakers) - Number(b.speakers));
+            const ageGroupData = getAgeGroupData(data[1], 'age_group').sort((a, b) => Number(a.speakers) - Number(b.speakers));
 
             // Draw gender chart
             drawGenderChart(genderData);
@@ -197,7 +211,7 @@ function buildGraphs(language, timeframe) {
 const drawAgeGroupChart = (chartData) => {
     const chartColors = ['#85A8F9', '#B7D0FE', '#6C85CE', '#316AFF', '#294691'];
     const chart = am4core.create('age-group-chart', am4charts.PieChart3D);
-    chartData.forEach(data=> data.age_group = translate(data.age_group))
+    chartData.forEach(data => data.age_group = translate(data.age_group))
     chart.data = chartData;
     chart.paddingBottom = 50;
     chart.innerRadius = am4core.percent(40);
@@ -295,16 +309,16 @@ const drawGenderChart = (chartData) => {
             var axis = ev.target;
             var cellWidth = axis.pixelWidth / (axis.endIndex - axis.startIndex);
             if (cellWidth < axis.renderer.labels.template.maxWidth) {
-              axis.renderer.labels.template.rotation = -45;
-              axis.renderer.labels.template.horizontalCenter = "right";
-              axis.renderer.labels.template.verticalCenter = "middle";
+                axis.renderer.labels.template.rotation = -45;
+                axis.renderer.labels.template.horizontalCenter = "right";
+                axis.renderer.labels.template.verticalCenter = "middle";
             }
             else {
-              axis.renderer.labels.template.rotation = 0;
-              axis.renderer.labels.template.horizontalCenter = "middle";
-              axis.renderer.labels.template.verticalCenter = "top";
+                axis.renderer.labels.template.rotation = 0;
+                axis.renderer.labels.template.horizontalCenter = "middle";
+                axis.renderer.labels.template.verticalCenter = "top";
             }
-          });
+        });
     });
 };
 
