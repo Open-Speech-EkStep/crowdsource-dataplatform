@@ -119,6 +119,6 @@ describe("showUserProfile",()=> {
     expect($navUserName.text()).toEqual("");
     expect($userProfileName.hasClass('d-none')).toEqual(true);
     expect($anonymousUser.hasClass('d-none')).toEqual(false);
-    expect($anonymousUser.text()).toEqual("<%= __('(No Username)')%>");
+    expect($anonymousUser.text().trim()).toEqual("<%= __('(No Username)')%>");
   })
 })

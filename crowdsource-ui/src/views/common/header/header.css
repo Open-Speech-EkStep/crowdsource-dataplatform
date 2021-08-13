@@ -6,14 +6,6 @@
   cursor: no-drop !important;
 }
 
-@media (min-width: 992px) {
-  #userNavBar.active {
-    background: rgba(159, 200, 255, 0.39) !important;
-    border-bottom: 2px solid #142745 !important;
-  }
-}
-
-
 /* Web Css */
 
 #tilt_line {
@@ -29,9 +21,6 @@
 
   #header-nav-bar .dropdown-item{
     height: 40px;
-  }
-  #userNavBar {
-    height: 65px;
   }
 
   #user_profile_dropdown {
@@ -87,12 +76,6 @@
     font-size: 8px;
   }
 
-  #userDropDown{
-    position: absolute;
-    top: 5px;
-    right: 20px;
-  }
-
   #userNavBar .dropdown-menu {
     position: absolute !important;
     margin-left: -140% !important;
@@ -106,27 +89,7 @@
 }
 
 
-@media (min-width: 1200px) {
-  #logo_separator{
-    width: .5px;
-    height: 46px;
-    margin-right: 12px;
-    background: #000000;
-    opacity: 10%;
-  }
-}
-
-
 /* Mobile Css */
-
-@media (max-width: 992px) {
-
-  #userDropDown{
-    position: absolute;
-    top: 10px;
-    right: 20px;
-  }
-}
 
 @media (max-width: 767px) {
   #navbarSupportedContent {
@@ -165,7 +128,6 @@
     width: 48px !important;
     height: 48px !important;
   }
- 
 }
 
 @media (min-width: 576px) and (max-width: 768px){
@@ -181,10 +143,6 @@
 }
 
 @media (max-width: 320px) {
-  #userDropDown{
-    top: 0;
-  }
-
   #bhashadaan_logo .font-size-lg-40{
     font-size: 16px;
   }
@@ -208,4 +166,106 @@
 
 .navbar-light .navbar-toggler {
   border-color: transparent;
+}
+
+.nav-right {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 56px;
+}
+
+.locale-selector, .user-options {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+@media (max-width: 1199px) {
+  .locale-selector .language-text {
+    display: none;
+  }
+  .user-options .nav-username-text {
+    display: none;
+  }
+}
+
+.locale-selector .nav-link, .user-options .nav-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 56px;
+}
+
+.locale-selector .module-item.active {
+  background: none !important;
+  border-bottom: none !important;
+}
+
+.locale-selector li, .user-options li {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.localisation-dropdown, .user-profile-dropdown {
+  top: 56px !important;
+  transform: none !important;
+  right: 0 !important;
+  left: auto !important;
+  margin: 0;
+}
+
+.mobile-nav {
+  position: absolute;
+  top: 56px;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .mobile-nav {
+    position: static;
+    width: auto;
+  }
+
+  .localisation-dropdown, .user-profile-dropdown {
+    top: 65px !important;
+  }
+
+  .nav-right {
+    height: 65px;
+  }
+
+  .locale-selector .nav-link, .user-options .nav-link {
+    width: 65px;
+  }
+}
+
+@media (min-width: 992px) {
+  #userNavBar.active {
+    background: rgba(159, 200, 255, 0.39) !important;
+    border-bottom: 2px solid #142745 !important;
+  }
+
+  .locale-selector .module-item.active {
+    background: rgba(159,200,255,.39) !important;
+    border-bottom: 2px solid #0f2749 !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  #logo_separator{
+    width: .5px;
+    height: 46px;
+    margin-right: 12px;
+    background: #000000;
+    opacity: 10%;
+  }
+
+  .locale-selector .nav-link, .user-options .nav-link {
+    width: auto;
+  }
 }
