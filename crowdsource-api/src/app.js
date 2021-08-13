@@ -118,7 +118,8 @@ app.use(function (req, res, next) {
         res.cookie('userId', uuidv4(), {
             maxAge: ONE_YEAR,
             httpOnly: true,
-            secure: true
+            secure: true,
+            sameSite: "lax"
         });
     }
     next();
