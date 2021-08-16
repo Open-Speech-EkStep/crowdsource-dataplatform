@@ -1,8 +1,15 @@
 .module-intro-row-cover{
-  background-image: url('/img/characters.svg');
+  background-image: url('/img/characters-mobile.svg');
   background-position: right;
   background-repeat: no-repeat;
   background-size: initial;
+  margin-left: 15px;
+}
+
+@media (min-width: 768px) {
+  .module-intro-row-cover {
+    background-image: url('/img/characters.svg');
+  }
 }
 
 #moduleLogo img{
