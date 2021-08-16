@@ -163,6 +163,9 @@
 }
 
 .platform_button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 48px;
 }
 
@@ -669,7 +672,6 @@
     max-width: 240px;
     height: 44px !important;
     font-size: 16px !important;
-    line-height: 32px !important;
     margin-bottom: 20px;
   }
 
@@ -708,7 +710,6 @@
   .platform_button{
     height: 44px !important;
     font-size: 16px !important;
-    line-height: 32px !important;
     min-width: 280px !important;
     margin-top: 28px !important;
   }
@@ -724,7 +725,6 @@
   .platform_button{
     height: 40px !important;
     font-size: 12px !important;
-    line-height: 28px !important;
     min-width: 240px !important;
     max-width: 240px !important;
   }
