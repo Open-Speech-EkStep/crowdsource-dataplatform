@@ -429,7 +429,7 @@ const handleSubmitFeedback = function () {
       });
       $("#other_text").val("");
     }else {
-      $("#report_sentence_modal").modal('hide'); showErrorPopup();
+      $("#report_sentence_modal").modal('hide'); showErrorPopup(resp.statusCode);
   }
   }).catch(()=> { $("#report_sentence_modal").modal('hide'); showErrorPopup()});
 }

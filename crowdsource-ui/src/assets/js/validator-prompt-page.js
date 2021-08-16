@@ -361,7 +361,7 @@ const handleSubmitFeedback = function () {
             });
             $("#other_text").val("");
         }else {
-            $("#report_recording_modal").modal('hide'); showErrorPopup();
+            $("#report_recording_modal").modal('hide'); showErrorPopup(resp.statusCode);
         }
     }).catch(()=> { $("#report_recording_modal").modal('hide'); showErrorPopup()});
 }

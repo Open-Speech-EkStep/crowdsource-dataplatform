@@ -214,7 +214,7 @@ const handleFeedbackSubmit = () => {
         }
         else{
             $("#feedback_modal").modal("hide");
-            showErrorPopup();
+            showErrorPopup(response.statusCode);
         }
     })
     .catch(() => { $("#feedback_modal").modal("hide");showErrorPopup();});

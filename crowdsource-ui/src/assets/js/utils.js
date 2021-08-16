@@ -121,7 +121,9 @@ function fetchLocationInfo() {
   });
 }
 
-const showErrorPopup = () => {
+const showErrorPopup = (status = 500) => {
+  const text = getErrorText(status);
+  bindErrorText(text);
   const $errorDialog = $('#errorPopup');
   $errorDialog.modal('show');
 }
@@ -144,17 +146,15 @@ const performAPIRequest = (url) => {
     mode: 'cors'
   }).then((data) => {
     if (!data.ok) {
-      const text = getErrorText(data.status);
-      bindErrorText(text);
-      throw Error(data.statusText || 'HTTP error');
+      throw (data.status || 500);
     } else {
       return Promise.resolve(data.json());
     }
   })
-    .catch(err => {
-      showErrorPopup();
-      throw err
-    });
+  .catch(errStatus => {
+    showErrorPopup(errStatus);
+    throw errStatus
+  });
 }
 
 const getLocaleString = function () {

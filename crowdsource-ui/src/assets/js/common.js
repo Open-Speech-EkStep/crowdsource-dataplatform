@@ -54,9 +54,23 @@ const isMobileDevice = () => {
   }
 }
 
-const showErrorPopup = () => {
+const showErrorPopup = (status = 500) => {
+  const text = getErrorText(status);
+  bindErrorText(text);
   const $errorDialog = $('#errorPopup');
   $errorDialog.modal('show');
+}
+
+const getErrorText = (status) => {
+  const errorText = status === ErrorStatusCode.SERVICE_UNAVAILABLE ?
+    "We are processing multiple requests at the moment. Please try again after sometime."
+    : "An unexpected error has occurred.";
+  return errorText;
+}
+
+const bindErrorText = (text) => {
+  const $errorText = $("#error-text");
+  $errorText.text(text);
 }
 
 const hasUserRegistered = function (){
@@ -71,13 +85,6 @@ const safeErrorHandling = (data) => {
     showErrorPopup();
   }
   return data;
-}
-
-const bindErrorText = (data) => {
-  const $errorText = $("#error-text");
-  $errorText.text("");
-  $errorText.text(data.status === ErrorStatusCode.SERVICE_UNAVAILABLE? translate("We are processing multiple requests at the moment. Please try again after sometime.") 
-  : translate("An unexpected error has occurred."));
 }
 
 const safeJqueryErrorHandling = (e) => {
