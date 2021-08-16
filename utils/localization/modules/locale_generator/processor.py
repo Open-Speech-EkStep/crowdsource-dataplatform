@@ -30,8 +30,12 @@ class LocaleProcessor:
                     replacements_ = replacer['replacements']
                     for replacer_key in replacements_.keys():
                         if pd.notnull(df_row[self.language_name]) and len(str(df_row[self.language_name]).strip()) != 0:
+                            tmp = df_row[self.language_name]
                             df_row[self.language_name] = df_row[self.language_name].replace(replacer_key,
                                                                                             replacements_[replacer_key])
+                            if tmp == df_row[self.language_name]:
+                                print("In", replacer['excel_key'], "=> ", replacer_key, 'is not changed')
+                                print("Out", df_row[self.language_name], "=> ", replacer_key, 'is not changed')
                     break
         return df
 
@@ -42,12 +46,12 @@ class LocaleProcessor:
             if "<s>" in df_row[self.language_name]:
                 df_row[self.language_name] = df_row[self.language_name].replace("<s>", "<span>")
             if "</s>" in df_row[self.language_name]:
-                df_row[self.language_name] = df_row[self.language_name].replace("</s>", "<span>")
+                df_row[self.language_name] = df_row[self.language_name].replace("</s>", "</span>")
         if self.english_column_name in column_names and pd.notna(df_row[self.language_name]):
             if "<s>" in df_row[self.english_column_name]:
                 df_row[self.english_column_name] = df_row[self.english_column_name].replace("<s>", "<span>")
             if "</s>" in df_row[self.english_column_name]:
-                df_row[self.english_column_name] = df_row[self.english_column_name].replace("</s>", "<span>")
+                df_row[self.english_column_name] = df_row[self.english_column_name].replace("</s>", "</span>")
 
         for value in self.allowed_values:
             if value in column_names and pd.notna(df_row[value]):
@@ -137,12 +141,12 @@ class LocaleProcessor:
             '/out_meta_meta.xlsx',
             [])
         for index, o_row in tmp_df.iterrows():
-            # try:
             n_row = new_meta[new_meta['Key'] == o_row['Key']].iloc[0]
+            # try:
             merged_excel_df_row = merged_excel_df[merged_excel_df['Key'] == o_row['Key']].iloc[0]
             name = self.language_name
             if o_row[name] != n_row[name]:
                 print(name, "\n\t", o_row[name], "\n\t", n_row[name], "\n\t", merged_excel_df_row[name], "\n")
             # except Exception as e:
-            #     print(o_row['Key'], len(o_row['Key']), len(o_row['Key'].strip()))
+            #     print(o_row['Key'], len(n_row['Key']))
             #     print(e)
