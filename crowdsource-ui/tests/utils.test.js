@@ -1,5 +1,5 @@
-const { calculateTime, formatTime, showElement, hideElement, performAPIRequest, formatTimeForLegends } = require("../src/assets/js/utils");
-const { stringToHTML, mockLocalStorage, translate } = require("./utils");
+const { calculateTime, formatTime, showElement, hideElement, performAPIRequest, formatTimeForLegends, translate } = require("../src/assets/js/utils");
+const { stringToHTML, mockLocalStorage } = require("./utils");
 const fetchMock = require("fetch-mock");
 const { readFileSync } = require("fs");
 
@@ -206,7 +206,7 @@ describe('test utils', () => {
 
         test('should return english/default string where localeString not present', () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({test1:'A'}))
+            localStorage.setItem('localeString', JSON.stringify({ test1: 'A' }))
             expect(translate('test2')).toEqual("test2");
             localStorage.clear();
         })
