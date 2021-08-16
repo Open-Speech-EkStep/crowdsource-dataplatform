@@ -27,7 +27,7 @@ describe("visualizer", () => {
       expect(canvas.getContext).toHaveBeenCalledWith('2d')
       expect(canvasWidth).toBe(100)
       expect(canvasHeight).toBe(50)
-      expect(canvasCtx.fillStyle).toBe('rgb(255, 255, 255, 0.8)')
+      expect(canvasCtx.fillStyle).toBe('rgb(255, 255, 255, 0)')
       expect(canvasCtx.fillRect).toHaveBeenCalledWith(0, 0, 100, 50)
       expect(canvasCtx.lineWidth).toBe(2)
       expect(canvasCtx.strokeStyle).toBe('rgb(0,123,255)')

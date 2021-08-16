@@ -4,7 +4,7 @@ class Visualizer {
         const canvasCtx = $canvas.getContext('2d');
         const canvasWidth = $canvas.width;
         const canvasHeight = $canvas.height;
-        canvasCtx.fillStyle = 'rgb(255, 255, 255, 0.8)';
+        canvasCtx.fillStyle = 'rgb(255, 255, 255, 0)';
         canvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
         canvasCtx.lineWidth = 2;
         canvasCtx.strokeStyle = 'rgb(0,123,255)';
