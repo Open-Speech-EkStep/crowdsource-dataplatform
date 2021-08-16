@@ -480,8 +480,7 @@ audio {
 .functional-page-bg {
   background-color: $text-light;
   background-repeat: no-repeat;
-  background-size: contain;
-  background-attachment: fixed;
+  background-size: cover;
 }
 
 .badge-widget {

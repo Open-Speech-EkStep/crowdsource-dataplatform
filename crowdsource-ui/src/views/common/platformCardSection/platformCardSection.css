@@ -119,7 +119,8 @@
 
 #platform_section .platform_card {
   background-image: url('/img/tri_color.svg');
-  background-size: auto;
+  background-size: cover;
+  background-position: center;
   max-width: 1200px;
   min-height: 400px;
   background-repeat: no-repeat;
@@ -470,6 +471,10 @@
   .platform-intro-section-text {
     padding-left: 45px !important;
   }
+
+  .platform_button{
+    margin-bottom: 20px;
+  }
 }
 
 @media screen and (max-width: 699px) {
@@ -501,11 +506,6 @@
 
   #platform_section{
     margin-top: 46px;
-  }
-
-  #platform_section .platform_card {
-    background-image: url('/img/tri_color_sm.svg') !important;
-    background-size: cover;
   }
 
   #platform_inner {
@@ -738,7 +738,7 @@
 }
 
 /* body{
-     
+
  } */
 .img-border{
   /* border: solid 7px #3A4245; */
@@ -747,7 +747,7 @@
   height: auto;
   max-width: 100%;
 }
-.h1{    
+.h1{
   font-size: 50px;
   line-height: 48px;
   font-weight: 500;

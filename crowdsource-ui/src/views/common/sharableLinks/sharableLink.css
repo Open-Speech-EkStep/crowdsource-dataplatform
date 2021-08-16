@@ -5,13 +5,12 @@
   position: absolute;
   bottom: 0;
   border-radius: 20px;
-  width: max-content;
   padding: 3px 12px 7px;
 }
 
 /* mobile */
 
-@media (max-width: 767px) {
+@media (max-width: 992px) {
   .social-share-block {
     position: inherit;
     bottom: 0;
