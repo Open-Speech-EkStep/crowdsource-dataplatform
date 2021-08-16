@@ -55,7 +55,7 @@ const getBadgeRow = (result, id, type, localeString) => {
                  </div>
                </div>`: `<div class="col-lg-5 col-md-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
                <div class="row mx-0 mb-2 d-lg-none">
-                 <h6 class="text-custom-muted font-weight-normal font-family-Rowdies"> Contribution </h6>
+                 <h6 class="text-custom-muted font-weight-normal font-family-Rowdies"> ${localeString['Contribution']} </h6>
                  </div>
                <div class="row m-0">
                  <div class="col-3 pl-0">
@@ -92,7 +92,7 @@ const getBadgeRow = (result, id, type, localeString) => {
                </div>
              </div>` : `<div class="col-lg-5 col-md-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
              <div class="row mx-0 mb-2 d-lg-none">
-             <h6 class="text-custom-muted font-weight-normal font-family-Rowdies"> Validation </h6>
+             <h6 class="text-custom-muted font-weight-normal font-family-Rowdies"> ${localeString['Validation']} </h6>
              </div>
              <div class="row m-0">
                <div class="col-3 pl-0">
