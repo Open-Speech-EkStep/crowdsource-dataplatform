@@ -1,15 +1,12 @@
-#module-intro-row-cover{
+.module-intro-row-cover{
   background-image: url('/img/characters.svg');
   background-position: right;
   background-repeat: no-repeat;
   background-size: initial;
 }
 
-@media (min-width: 769px) and  (max-width: 1024px){
-  #moduleLogo img{
-    width: 70px !important;
-    height: 80px !important;
-  }
+#moduleLogo img{
+  max-width: 100%;
 }
 
 @media (max-width: 767px) {

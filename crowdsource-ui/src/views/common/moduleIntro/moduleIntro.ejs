@@ -1,14 +1,14 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/moduleIntro.css">
 <div class="col-lg-10 col-md-12 col-12 mt-4 mx-lg-auto p-lg-5 py-3 px-4">
-    <div class="p-0 m-0" id="module-intro-row-cover">
+    <div class="p-0 m-0">
         <div class="row m-0 pb-2" id="module-intro-row">
-            <div class="col-lg-1 col-2 align-self-center" id="moduleLogo">
+            <div id="moduleLogo">
                 <img src="<%= `/img/${locale}-${img}`%>" alt="logo" width="84" height="76">
             </div>
-            <div class="col-lg-11 col-10 pl-2">
-                <h1 class="col-12 pl-lg-0 pl-md-0 module-intro-heading font-size-lg-40 font-weight-normal" style="font-family:Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747;font-weight:200"><span class="text-primary"><%= __(name) %></span> <span><%= __('India')%></span>
+            <div class="col-10 module-intro-row-cover">
+                <h1 class="module-intro-heading font-size-lg-40 font-weight-normal" style="font-family:Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;color:#142747;font-weight:200"><span class="text-primary"><%= __(name) %></span> <span><%= __('India')%></span>
                 </h1>
-                <p class="col-12 pl-lg-0 pl-md-0 para-font font-size-lg-20 text-primary" style="font-family:Roboto,'Helvetica Neue',Helvetica,Arial,sans-serif;color:#000">
+                <p class="para-font font-size-lg-20 text-primary" style="font-family:Roboto,'Helvetica Neue',Helvetica,Arial,sans-serif;color:#000">
                     <%= __(intro) %>
                 </p>
             </div>
