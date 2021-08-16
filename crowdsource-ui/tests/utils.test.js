@@ -1,5 +1,5 @@
-const { calculateTime, formatTime, showElement,hideElement,performAPIRequest, formatTimeForLegends} = require("../src/assets/js/utils");
-const { stringToHTML, mockLocalStorage} = require("./utils");
+const { calculateTime, formatTime, showElement, hideElement, performAPIRequest, formatTimeForLegends } = require("../src/assets/js/utils");
+const { stringToHTML, mockLocalStorage, translate } = require("./utils");
 const fetchMock = require("fetch-mock");
 const { readFileSync } = require("fs");
 
@@ -74,87 +74,92 @@ describe('test utils', () => {
     describe("formatTime", () => {
         test("should formats h only for given h", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({"hour(s)":"hour(s)", "second(s)": "second(s)", "minute(s)":"minute(s)"}))
+            localStorage.setItem('localeString', JSON.stringify({ "hour(s)": "hour(s)", "second(s)": "second(s)", "minute(s)": "minute(s)" }))
             expect(formatTime(162)).toEqual("162 hour(s)");
             localStorage.clear();
         });
 
         test("should format h and min for given h and m", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({"hour(s)":"hour(s)", "second(s)": "second(s)", "minute(s)":"minute(s)"}))
+            localStorage.setItem('localeString', JSON.stringify({ "hour(s)": "hour(s)", "second(s)": "second(s)", "minute(s)": "minute(s)" }))
             expect(formatTime(162, 12)).toEqual("162 hour(s) 12 minute(s)");
             localStorage.clear()
         });
 
         test("should format in s when hours and minutes are 0", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({"hour(s)":"hour(s)", "second(s)": "second(s)", "minute(s)":"minute(s)"}))
+            localStorage.setItem('localeString', JSON.stringify({ "hour(s)": "hour(s)", "second(s)": "second(s)", "minute(s)": "minute(s)" }))
             expect(formatTime(0, 0, 2)).toEqual("2 second(s)");
             localStorage.clear();
         });
 
         test("should show 0s when hours, minutes and seconds are 0", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({"hour(s)":"hour(s)", "second(s)": "second(s)", "minute(s)":"minute(s)"}))
+            localStorage.setItem('localeString', JSON.stringify({ "hour(s)": "hour(s)", "second(s)": "second(s)", "minute(s)": "minute(s)" }))
             expect(formatTime(0, 0, 0)).toEqual("0 second(s)");
             localStorage.clear();
         });
 
+        test("should show hours and minutes text in english no translation present in local storage", () => {
+            mockLocalStorage();
+            expect(formatTime(10, 5, 0)).toEqual("10 hour(s) 5 minute(s)");
+            localStorage.clear();
+        });
     });
 
     describe("formatTimeForLegends", () => {
         test("should formats hours only for given hours when labels are allowed", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            localStorage.setItem('localeString', JSON.stringify({ hours: "hours", seconds: "seconds", minutes: "minutes" }))
             expect(formatTimeForLegends(162, 0, 0, true)).toEqual("162 hours");
             localStorage.clear()
         });
 
         test("should formats hours only for given hours when labels are not allowed", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            localStorage.setItem('localeString', JSON.stringify({ hours: "hours", seconds: "seconds", minutes: "minutes" }))
             expect(formatTimeForLegends(162, 0, 0, false)).toEqual("162");
             localStorage.clear();
         });
 
         test("should format hours for given hours and minutes when labels are allowed", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
-            expect(formatTimeForLegends(162, 12 , 0, true)).toEqual("162.12 hours");
+            localStorage.setItem('localeString', JSON.stringify({ hours: "hours", seconds: "seconds", minutes: "minutes" }))
+            expect(formatTimeForLegends(162, 12, 0, true)).toEqual("162.12 hours");
             localStorage.clear();
         });
 
         test("should format hours for given hours and minutes when labels are not allowed", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
-            expect(formatTimeForLegends(162, 12 , 0, false)).toEqual("162.12");
+            localStorage.setItem('localeString', JSON.stringify({ hours: "hours", seconds: "seconds", minutes: "minutes" }))
+            expect(formatTimeForLegends(162, 12, 0, false)).toEqual("162.12");
             localStorage.clear();
         });
 
         test("should format in s when hours and minutes are 0 when labels are allowed", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            localStorage.setItem('localeString', JSON.stringify({ hours: "hours", seconds: "seconds", minutes: "minutes" }))
             expect(formatTimeForLegends(0, 0, 2, true)).toEqual("2 seconds");
             localStorage.clear();
         });
 
         test("should format in s when hours and minutes are 0 when labels are not allowed", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            localStorage.setItem('localeString', JSON.stringify({ hours: "hours", seconds: "seconds", minutes: "minutes" }))
             expect(formatTimeForLegends(0, 0, 2, false)).toEqual("2");
             localStorage.clear();
         });
 
         test("should format in minutes  when hours, minutes and seconds are 0  when labels are allowed", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            localStorage.setItem('localeString', JSON.stringify({ hours: "hours", seconds: "seconds", minutes: "minutes" }))
             expect(formatTimeForLegends(0, 20, 0, true)).toEqual("20 minutes");
             localStorage.clear();
         });
 
         test("should format in minutes  when hours, minutes and seconds are 0  when labels are allowed", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            localStorage.setItem('localeString', JSON.stringify({ hours: "hours", seconds: "seconds", minutes: "minutes" }))
             expect(formatTimeForLegends(0, 20, 0, false)).toEqual("20");
             localStorage.clear();
         });
@@ -162,19 +167,17 @@ describe('test utils', () => {
 
         test("should show 0s when hours, minutes and seconds are 0  when labels are allowed", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            localStorage.setItem('localeString', JSON.stringify({ hours: "hours", seconds: "seconds", minutes: "minutes" }))
             expect(formatTimeForLegends(0, 0, 0, true)).toEqual("0 seconds");
             localStorage.clear();
         });
 
         test("should show 0s when hours, minutes and seconds are 0  when labels are not allowed", () => {
             mockLocalStorage();
-            localStorage.setItem('localeString', JSON.stringify({hours:"hours", seconds: "seconds", minutes:"minutes"}))
+            localStorage.setItem('localeString', JSON.stringify({ hours: "hours", seconds: "seconds", minutes: "minutes" }))
             expect(formatTimeForLegends(0, 0, 0, false)).toEqual("0");
             localStorage.clear();
         });
-
-
     });
 
     describe("showElement", () => {
@@ -193,4 +196,19 @@ describe('test utils', () => {
         });
     });
 
+    describe('Test translate method', () => {
+        test('should return translated string', () => {
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({ test: "A" }))
+            expect(translate('test')).toEqual("A");
+            localStorage.clear();
+        })
+
+        test('should return english/default string where localeString not present', () => {
+            mockLocalStorage();
+            localStorage.setItem('localeString', JSON.stringify({test1:'A'}))
+            expect(translate('test2')).toEqual("test2");
+            localStorage.clear();
+        })
+    })
 })

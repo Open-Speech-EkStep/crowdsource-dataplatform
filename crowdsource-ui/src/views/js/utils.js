@@ -127,34 +127,37 @@ const performAPIRequest = (url) => {
   return fetch(url, {
     credentials: 'include',
     mode: 'cors'
-  }).then(errorHandling).then((data) => {
+  }).then(data => {
     if (!data.ok) {
+      const text = getErrorText(data.status);
+      bindErrorText(text);
       throw Error(data.statusText || 'HTTP error');
     } else {
       return Promise.resolve(data.json());
     }
   })
-    .catch(() => {
-     showErrorModal();
+    .catch(err => {
+      showErrorPopup();
+      throw err
     });
 }
 
-const errorHandling = (data) => {
-  if (data && !data.ok) {
-    bindErrorText(data);
-    const $errorDialog = $('#errorPopup');
-    $errorDialog.modal('show');
-  }
-  return data;
+const showErrorPopup = () => {
+  const $errorDialog = $('#errorPopup');
+  $errorDialog.modal('show');
 }
 
-const bindErrorText = (data) => {
+const getErrorText = (status) => {
+  const errorText = status === ErrorStatusCode.SERVICE_UNAVAILABLE ?
+    "We are processing multiple requests at the moment. Please try again after sometime."
+    : "An unexpected error has occurred.";
+  return errorText;
+}
+
+const bindErrorText = (text) => {
   const $errorText = $("#error-text");
-  $errorText.text("");
-  $errorText.text(data.status === ErrorStatusCode.SERVICE_UNAVAILABLE ? translate("We are processing multiple requests at the moment. Please try again after sometime.")
-    : translate("An unexpected error has occurred."));
+  $errorText.text(text);
 }
-
 
 const getLocaleString = function () {
   return new Promise(function (resolve, reject) {
@@ -190,21 +193,21 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
   }
 };
 
-const translate = function (state) {
+const translate = function (string) {
   const localeStrings = JSON.parse(localStorage.getItem('localeString'));
-  return localeStrings[state] || state;
+  return localeStrings[string] || string;
 }
 
 const toPascalCase = function (text) {
   return text.replace(/\w+/g,
-    function(w){return w[0].toUpperCase() + w.slice(1).toLowerCase();});
+    function (w) { return w[0].toUpperCase() + w.slice(1).toLowerCase(); });
 }
 
 const formatTime = function (hours, minutes = 0, seconds = 0, translate = true) {
-  const localsStrings = JSON.parse(localStorage.getItem('localeString'));
-  const hrStr = translate ? localsStrings['hour(s)'] : 'hour(s)';
-  const minStr = translate ? localsStrings['minute(s)'] : 'minute(s)';
-  const secStr = translate ? localsStrings['second(s)'] : 'second(s)';
+  const localeStrings = JSON.parse(localStorage.getItem('localeString') || "{}");
+  const hrStr = translate ? localeStrings['hour(s)'] || 'hour(s)' : 'hour(s)';
+  const minStr = translate ? localeStrings['minute(s)'] || 'minute(s)' : 'minute(s)';
+  const secStr = translate ? localeStrings['second(s)'] || 'second(s)' : 'second(s)';
   let result = "";
   if (hours > 0) {
     result += `${hours} ${hrStr} `;
@@ -301,7 +304,6 @@ const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType)
   const langaugePrefix = language ? language.id : 'en';
   return `/img/${langaugePrefix}_${initiativeType}_${badgeType}_${source}.svg`;
 }
-
 
 module.exports = {
   setPageContentHeight,

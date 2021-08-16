@@ -1,4 +1,4 @@
-const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES,CONTRIBUTION_LANGUAGE,DEFAULT_CON_LANGUAGE, ErrorStatusCode } = require("./constants");
+const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES, CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE, ErrorStatusCode } = require("./constants");
 const fetch = require('./fetch')
 const platform = require('./platform');
 const { context_root } = require('./env-api');
@@ -7,50 +7,50 @@ const { context_root } = require('./env-api');
 function getDeviceInfo() {
   const os = platform.os;
   let info = "";
-  if(os.family){
+  if (os.family) {
     info = info + os.family;
   }
-  if(os.version){
-    info = info + " "+ os.version;
+  if (os.version) {
+    info = info + " " + os.version;
   }
   if (platform.product) {
-      info = info + " " + platform.product;
+    info = info + " " + platform.product;
   }
   return info.trim();
 }
 
 function getBrowserInfo() {
   let info = "";
-  if(platform.name){
+  if (platform.name) {
     info = info + platform.name;
   }
-  if(platform.version){
-    info = info + " "+ platform.version;
+  if (platform.version) {
+    info = info + " " + platform.version;
   }
   return info.trim();
 }
 
 function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toGMTString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toGMTString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
     }
-    return "";
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
 
 function showElement(element) {
@@ -80,8 +80,8 @@ function toggleFooterPosition() {
 }
 
 const safeJson = (res) => {
-  if(!res) return res;
-  if(typeof res.json === "function")  return res.json();
+  if (!res) return res;
+  if (typeof res.json === "function") return res.json();
   return res;
 }
 
@@ -99,7 +99,7 @@ function fetchLocationInfo() {
   let countryName = localStorage.getItem("country") || "NOT_PRESENT";
   if (regionName !== "NOT_PRESENT" && countryName !== "NOT_PRESENT" && regionName.length > 0 && countryName.length > 0) {
     return new Promise((resolve) => {
-      resolve({"regionName": regionName, "country": countryName})
+      resolve({ "regionName": regionName, "country": countryName })
     })
   }
   return fetch('https://www.cloudflare.com/cdn-cgi/trace').then(res => res.text()).then(ipAddressText => {
@@ -121,60 +121,65 @@ function fetchLocationInfo() {
   });
 }
 
+const showErrorPopup = () => {
+  const $errorDialog = $('#errorPopup');
+  $errorDialog.modal('show');
+}
+
+const getErrorText = (status) => {
+  const errorText = status === ErrorStatusCode.SERVICE_UNAVAILABLE ?
+    translate("We are processing multiple requests at the moment. Please try again after sometime.")
+    : translate("An unexpected error has occurred.");
+  return errorText;
+}
+
+const bindErrorText = (text) => {
+  const $errorText = $("#error-text");
+  $errorText.text(text);
+}
+
 const performAPIRequest = (url) => {
   return fetch(url, {
     credentials: 'include',
     mode: 'cors'
-  }).then(errorHandling).then((data) => {
+  }).then((data) => {
     if (!data.ok) {
+      const text = getErrorText(data.status);
+      bindErrorText(text);
       throw Error(data.statusText || 'HTTP error');
     } else {
       return Promise.resolve(data.json());
     }
   })
-  .catch(()=> {
-    showErrorModal();
-  });
-}
-
-const errorHandling = (data) => {
-  if (data && !data.ok) {
-    bindErrorText(data);
-    const $errorDialog = $('#errorPopup');
-    $errorDialog.modal('show');
-  }
-  return data;
-}
-
-const bindErrorText = (data) => {
-  const $errorText = $("#error-text");
-  $errorText.text(data.status === ErrorStatusCode.SERVICE_UNAVAILABLE? translate("We are processing multiple requests at the moment. Please try again after sometime.") 
-  : translate("An unexpected error has occurred."));
-}
-
-const getLocaleString = function() {
-    return new Promise(function(resolve, reject) {
-        const locale = sessionStorage.getItem("i18n") ?? "en";
-        performAPIRequest(`/get-locale-strings/${locale}`)
-        .then((response) => {
-          if(response){
-            localStorage.setItem('localeString', JSON.stringify(response));
-            resolve(response);
-          }
-        }).catch((err)=>{ reject(err)});
+    .catch(err => {
+      showErrorPopup();
+      throw err
     });
 }
 
+const getLocaleString = function () {
+  return new Promise(function (resolve, reject) {
+    const locale = sessionStorage.getItem("i18n") ?? "en";
+    performAPIRequest(`/get-locale-strings/${locale}`)
+      .then((response) => {
+        if (response) {
+          localStorage.setItem('localeString', JSON.stringify(response));
+          resolve(response);
+        }
+      }).catch((err) => { reject(err) });
+  });
+}
+
 const updateLocaleLanguagesDropdown = (language) => {
-    const dropDown = $('#localisation_dropdown');
-    language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
-    const localeLang = ALL_LANGUAGES.find(ele => ele.value.toLowerCase() === language.toLowerCase());
-    if(language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
-        dropDown.html('<a id="english" class="dropdown-item d-flex align-items-center py-3 py-md-2 py-lg-2" href="#" locale="en">English</a>');
-    } else {
-        dropDown.html(`<a id="english" class="dropdown-item py-3 py-md-2 py-lg-2" href="#" locale="en">English</a>
+  const dropDown = $('#localisation_dropdown');
+  language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || DEFAULT_CON_LANGUAGE;
+  const localeLang = ALL_LANGUAGES.find(ele => ele.value.toLowerCase() === language.toLowerCase());
+  if (language.toLowerCase() === "english" || localeLang.hasLocaleText === false) {
+    dropDown.html('<a id="english" class="dropdown-item d-flex align-items-center py-3 py-md-2 py-lg-2" href="#" locale="en">English</a>');
+  } else {
+    dropDown.html(`<a id="english" class="dropdown-item py-3 py-md-2 py-lg-2" href="#" locale="en">English</a>
         <a id=${localeLang.value} class="dropdown-item d-flex align-items-center py-3 py-md-2 py-lg-2" href="#" locale="${localeLang.id}">${localeLang.text}</a>`);
-    }
+  }
 }
 
 const calculateTime = function (totalSeconds, isSeconds = true) {
@@ -183,22 +188,22 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
   const minutes = Math.floor(remainingAfterHours / SIXTY);
   const seconds = Math.round(remainingAfterHours % SIXTY);
   if (isSeconds) {
-    return {hours, minutes, seconds};
+    return { hours, minutes, seconds };
   } else {
-    return {hours, minutes};
+    return { hours, minutes };
   }
 };
 
-const translate = function(state) {
+const translate = function (string) {
   const localeStrings = JSON.parse(localStorage.getItem('localeString'));
-  return localeStrings[state] || state;
+  return localeStrings[string] || string;
 }
 
-const formatTime = function (hours, minutes = 0, seconds = 0, translate=true) {
-  const localsStrings = JSON.parse(localStorage.getItem('localeString'));
-  const hrStr = translate ? localsStrings['hour(s)']: 'hour(s)';
-  const minStr = translate ? localsStrings['minute(s)']: 'minute(s)';
-  const secStr = translate ? localsStrings['second(s)']: 'second(s)';
+const formatTime = function (hours, minutes = 0, seconds = 0, translate = true) {
+  const localeStrings = JSON.parse(localStorage.getItem('localeString') || "{}");
+  const hrStr = translate ? localeStrings['hour(s)'] || 'hour(s)' : 'hour(s)';
+  const minStr = translate ? localeStrings['minute(s)'] || 'minute(s)' : 'minute(s)';
+  const secStr = translate ? localeStrings['second(s)'] || 'second(s)' : 'second(s)';
   let result = "";
   if (hours > 0) {
     result += `${hours} ${hrStr} `;
@@ -210,17 +215,17 @@ const formatTime = function (hours, minutes = 0, seconds = 0, translate=true) {
     result += `${seconds} ${secStr} `;
   }
 
-  if(hours === 0 && minutes === 0 && seconds === 0){
+  if (hours === 0 && minutes === 0 && seconds === 0) {
     result += `0 ${secStr} `;
   }
 
-  if(result.charAt(result.length - 1 ) !== ' ')
+  if (result.charAt(result.length - 1) !== ' ')
     return result.substr(0, result.length);
   else
     return result.substr(0, result.length - 1);
 };
 
-const formatTimeForLegends = function (hours, minutes = 0, seconds = 0, isLabelRequired=true) {
+const formatTimeForLegends = function (hours, minutes = 0, seconds = 0, isLabelRequired = true) {
   const localsStrings = JSON.parse(localStorage.getItem('localeString'));
   const hrStr = localsStrings['hours'];
   const minStr = localsStrings['minutes'];
@@ -248,37 +253,37 @@ const setFooterPosition = () => {
 }
 
 const reportSentenceOrRecording = (reqObj) => {
-    return new Promise(function(resolve, reject) {
-        try {
-            fetch('/report', {
-                method: "POST",
-                credentials: 'include',
-                mode: 'cors',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(reqObj),
-            })
-            .then((res) => res.json())
-            .then((resp) => {
-                resolve(resp);
-            })
-        } catch(err) {
-            reject(err);
-        }
-    });
+  return new Promise(function (resolve, reject) {
+    try {
+      fetch('/report', {
+        method: "POST",
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reqObj),
+      })
+        .then((res) => res.json())
+        .then((resp) => {
+          resolve(resp);
+        })
+    } catch (err) {
+      reject(err);
+    }
+  });
 }
 
 const getJson = (path) => {
-    return new Promise((resolve) => {
-      $.getJSON(`${context_root}${path}`, (data) => {
-        resolve(data);
-      }).fail((e) => {
-        if(e.statusText !== "error") {
-          showErrorModal();
-        }
-      });
-    })
+  return new Promise((resolve) => {
+    $.getJSON(`${context_root}${path}`, (data) => {
+      resolve(data);
+    }).fail((e) => {
+      if (e.statusText !== "error") {
+        showErrorModal();
+      }
+    });
+  })
 }
 
 const covertStringToCapitalised = (tempStr) => {
@@ -298,7 +303,7 @@ const showErrorModal = () => {
 }
 
 const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType) => {
-  const language = ALL_LANGUAGES.find(language=>language.value.toLowerCase() === contibutedLanguage.toLowerCase());
+  const language = ALL_LANGUAGES.find(language => language.value.toLowerCase() === contibutedLanguage.toLowerCase());
   const langaugePrefix = language ? language.id : 'en';
   return `/img/${langaugePrefix}_${initiativeType}_${badgeType}_${source}.svg`;
 }

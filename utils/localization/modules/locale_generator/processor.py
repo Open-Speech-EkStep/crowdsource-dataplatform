@@ -137,7 +137,7 @@ class LocaleProcessor:
     def compare_and_update_extracted_tags(self, tmp_df, merged_excel_df):
         excel_reader = ExcelReader()
         new_meta = excel_reader.read_as_df(
-            '/Users/nireshkumarr/Documents/ekstep/crowdsource-dataplatform/utils/localization/resources/backup'
+            '/Users/sreejithv/TW/projects/ekStep/crowdsource-dataplatform/utils/localization/resources/backup'
             '/out_meta_meta.xlsx',
             [])
         for index, o_row in tmp_df.iterrows():

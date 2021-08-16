@@ -51,7 +51,7 @@ function initializeBlock() {
     );
     if (chartRadio) {
       chartRadio.checked = true;
-    } 
+    }
   });
 
   $('#start_recording').on('click', () => {
