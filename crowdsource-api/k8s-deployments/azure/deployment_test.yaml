@@ -14,12 +14,6 @@ spec:
       labels:
         app: vakyansh
     spec:
-
-      tolerations:
-        - key: "env"
-          operator: "Equal"
-          value: "prod"
-          effect: "NoSchedule"
       containers:
         - image: IMAGE_NAME
           imagePullPolicy: Always
@@ -106,6 +100,4 @@ spec:
           resources:
             limits:
               cpu: 500m
-              memory: 1Gi
-
-          
+              memory: 400Mi

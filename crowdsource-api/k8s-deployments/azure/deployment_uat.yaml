@@ -14,14 +14,13 @@ spec:
       labels:
         app: vakyansh
     spec:
-
       tolerations:
         - key: "env"
           operator: "Equal"
-          value: "prod"
+          value: "uat"
           effect: "NoSchedule"
       containers:
-        - image: IMAGE_NAME
+        - image: vakyansh.azurecr.io/vakyansh:uat
           imagePullPolicy: Always
           name: vakyansh
           env:
@@ -107,5 +106,3 @@ spec:
             limits:
               cpu: 500m
               memory: 1Gi
-
-          
