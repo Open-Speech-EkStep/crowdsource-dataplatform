@@ -3,7 +3,9 @@ const { calculateTime, formatTime } = require('./utils');
 const $chartRow = $('.chart-row');
 const $chartLoaders = $chartRow.find('.loader');
 const $charts = $chartRow.find('.chart');
+const { context_root } = require('./env-api');
 
+import origFetch from 'node-fetch';
 const chartReg = {};
 
 function updateBarGraph(language, timeframe) {
@@ -101,7 +103,7 @@ function buildGraphs(language) {
         );
         fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
         fetch('https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css');
-        fetch('/css/record.css');
+        origFetch(`${context_root}/css/record.css`);
       }, 2000);
     } catch (error) {
       console.log(error);

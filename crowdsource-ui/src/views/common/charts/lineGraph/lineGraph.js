@@ -1,6 +1,8 @@
 const fetch = require('./fetch')
 const { calculateTime, formatTime, getJson, translate } = require('./utils');
 const { CURRENT_MODULE, MODULE } = require('./constants');
+import origFetch from 'node-fetch';
+const { context_root } = require('./env-api');
 
 const $timelineLoader = $('#timeline-loader');
 const $timelineChart = $('#timeline');
@@ -185,7 +187,7 @@ function buildLineGraphs(language, timeframe, module, series1Name, series2Name) 
         );
         fetch('https://fonts.googleapis.com/icon?family=Material+Icons');
         fetch('https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css');
-        fetch('/css/record.css');
+        origFetch(`${context_root}/css/record.css`);
       }, 2000);
     } catch (error) {
       console.log(error);
