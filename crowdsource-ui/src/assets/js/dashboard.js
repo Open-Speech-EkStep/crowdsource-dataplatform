@@ -1,12 +1,12 @@
 const { updateGraph } = require('./draw-chart');
-const { onChangeUser, showUserProfile,onOpenUserDropDown } = require('./header');
+const { onChangeUser, showUserProfile, onOpenUserDropDown } = require('./header');
 const {
     setUserModalOnShown,
     setUserNameOnInputFocus,
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick } = require('./speakerDetails');
-const {  updateLocaleLanguagesDropdown, calculateTime, getLocaleString, formatTime, getJson } = require('./utils');
-const { DEFAULT_CON_LANGUAGE,MODULE,CONTRIBUTION_LANGUAGE ,SPEAKER_DETAILS_KEY} = require('../../../build/js/common/constants');
+const { updateLocaleLanguagesDropdown, calculateTime, getLocaleString, formatTime, getJson } = require('./utils');
+const { DEFAULT_CON_LANGUAGE, MODULE, CONTRIBUTION_LANGUAGE, SPEAKER_DETAILS_KEY } = require('../../../build/js/common/constants');
 const { hasUserRegistered } = require('./common');
 const fetch = require('./fetch');
 const moment = require('moment');
@@ -36,15 +36,15 @@ const getSpeakersData = (data, lang) => {
         validations: 0
     }
     if (!lang) {
-        speakersData.languages = parseInt(data[0].total_languages);
-        speakersData.speakers = parseInt(data[0].total_speakers);
-        speakersData.contributions = parseFloat(data[0].total_contributions);
-        speakersData.validations = parseFloat(data[0].total_validations);
+        speakersData.languages = parseInt(data[0].total_languages) || 0;
+        speakersData.speakers = parseInt(data[0].total_speakers) || 0;
+        speakersData.contributions = parseFloat(data[0].total_contributions) || 0;
+        speakersData.validations = parseFloat(data[0].total_validations) || 0;
     } else {
         const langSpeakersData = data.filter(item => item.language.toLowerCase() === lang.toLowerCase());
-        speakersData.speakers = parseInt(langSpeakersData[0].total_speakers);
-        speakersData.contributions = parseFloat(langSpeakersData[0].total_contributions);
-        speakersData.validations = parseFloat(langSpeakersData[0].total_validations);
+        speakersData.speakers = parseInt(langSpeakersData[0].total_speakers) || 0;
+        speakersData.contributions = parseFloat(langSpeakersData[0].total_contributions) || 0;
+        speakersData.validations = parseFloat(langSpeakersData[0].total_validations) || 0;
     }
     return speakersData;
 }
@@ -148,10 +148,10 @@ function updateLanguage(language) {
 
 const initializeBlock = function () {
     localStorage.removeItem('previousLanguage');
-    localStorage.setItem('module','bolo');
+    localStorage.setItem('module', 'bolo');
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
-            const $startRecordBtnTooltip = $startRecordBtn.parent();
+    const $startRecordBtnTooltip = $startRecordBtn.parent();
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
     const $userName = $('#username');
     updateLanguage('');
@@ -189,22 +189,22 @@ const initializeBlock = function () {
     const noDataFoundEl = document.getElementById('no-data-found');
     noDataFoundEl.addEventListener('touchstart', function () {
         clearTimeout(timer);
-    }, {passive: true});
+    }, { passive: true });
     noDataFoundEl.addEventListener('touchend', function () {
         timer = setTimeout(() => {
             $('#no-data-found').addClass('d-none');
         }, 5000);
-    }, {passive: true});
+    }, { passive: true });
 
     $("#contribute-now").on('click', () => {
         sessionStorage.setItem("i18n", "en");
         localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
         localStorage.setItem("selectedType", "contribute");
-        if(!hasUserRegistered()){
+        if (!hasUserRegistered()) {
             $('#userModal').modal('show');
-            setStartRecordingBtnOnClick('./record.html',MODULE.bolo.value);
+            setStartRecordingBtnOnClick('./record.html', MODULE.bolo.value);
         } else {
-            location.href ='./record.html';
+            location.href = './record.html';
         }
     });
 
@@ -212,21 +212,21 @@ const initializeBlock = function () {
     $startRecordBtnTooltip.tooltip('disable');
     setUserNameOnInputFocus();
     setUserModalOnShown($userName);
-    if(hasUserRegistered()){
+    if (hasUserRegistered()) {
         const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
         const localSpeakerDataParsed = JSON.parse(speakerDetails);
         showUserProfile(localSpeakerDataParsed.userName);
     }
-    onChangeUser('./dashboard.html',MODULE.bolo.value);
+    onChangeUser('./dashboard.html', MODULE.bolo.value);
     onOpenUserDropDown();
 };
 
 $(document).ready(function () {
-    getLocaleString().then(()=>{
+    getLocaleString().then(() => {
         initializeBlock();
     }).catch(() => {
         initializeBlock();
     });
 });
 
-module.exports = {fetchDetail, getSpeakersData, isLanguageAvailable, updateLanguage}
+module.exports = { fetchDetail, getSpeakersData, isLanguageAvailable, updateLanguage }

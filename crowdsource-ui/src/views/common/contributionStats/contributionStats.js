@@ -25,7 +25,7 @@ const getSpeakersData = (data, lang, moduleType) => {
       if (langSpeakersData.length == 0) {
         return speakersData;
       }
-      speakersData.speakers = parseInt(langSpeakersData[0].total_speakers);
+      speakersData.speakers = parseInt(langSpeakersData[0].total_speakers) || 0;
       speakersData.contributions = moduleType === "likho" || moduleType === "dekho" ? parseFloat(langSpeakersData[0].total_contribution_count) : parseFloat(langSpeakersData[0].total_contributions);
       speakersData.validations = moduleType === "likho" || moduleType === "dekho" ? parseFloat(langSpeakersData[0].total_validation_count) : parseFloat(langSpeakersData[0].total_validations);
     }
