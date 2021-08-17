@@ -23,7 +23,7 @@
       <div class="row">
         <%- include('../../build/views/common/back-btn.ejs',{url:"/"}) %>
       </div>
-      <div id="badge-container" class="container-fluid p-0">
+      <div id="badge-container" class="container-fluid p-0 my-badge-container">
         <div class="row m-0 position-relative">
           <div class="header"></div>
           <div class="col-12 p-0 text-center position-absolute">
@@ -35,48 +35,28 @@
             </h2>
           </div>
         </div>
-        <div class="row mx-0 badge-mt-34">
+        <div class="row mx-lg-0 mx-md-0 badge-mt-34">
           <div class="col-12 p-0">
             <div class="row m-0">
-              <ul class="nav nav-tabs w-100 border-0 bg-white" id="myTab" role="tablist">
-                <li class="nav-item col-3 p-0 text-center">
+              <ul class="nav nav-tabs w-100 border-0 bg-white" id="my-badge" role="tablist">
+                <li class="nav-item col-lg-3 col-md-3 p-0 text-center">
                   <a class="nav-link border-0 active light-bg font-family-Rowdies" id="suno-tab" data-toggle="tab" href="#suno" role="tab" aria-controls="suno" aria-selected="true">
-                    <span>
-                      <%= __('Suno')%>
-                    </span>
-                    <span>
-                      <%= __('India')%>
-                    </span>
+                      <%= __('Suno India')%>
                   </a>
                 </li>
-                <li class="nav-item col-3 p-0 text-center">
+                <li class="nav-item col-lg-3 col-md-3 p-0 text-center">
                   <a class="nav-link border-0 light-bg font-family-Rowdies" id="bolo-tab" data-toggle="tab" href="#bolo" role="tab" aria-controls="bolo" aria-selected="true">
-                    <span>
-                      <%= __('Bolo')%>
-                    </span>
-                    <span>
-                      <%= __('India')%>
-                    </span>
+                      <%= __('Bolo India')%>
                   </a>
                 </li>
-                <li class="nav-item col-3 p-0 text-center">
+                <li class="nav-item col-lg-3 col-md-3 p-0 text-center">
                   <a class="nav-link border-0 light-bg font-family-Rowdies" id="likho-tab" data-toggle="tab" href="#likho" role="tab" aria-controls="likho" aria-selected="true">
-                    <span>
-                      <%= __('Likho')%>
-                    </span>
-                    <span>
-                      <%= __('India')%>
-                    </span>
+                      <%= __('Likho India')%>
                   </a>
                 </li>
-                <li class="nav-item col-3 p-0 text-center">
+                <li class="nav-item col-lg-3 col-md-3 p-0 text-center">
                   <a class="nav-link border-0 light-bg font-family-Rowdies" id="dekho-tab" data-toggle="tab" href="#dekho" role="tab" aria-controls="dekho" aria-selected="true">
-                    <span>
-                      <%= __('Dekho')%>
-                    </span>
-                    <span>
-                      <%= __('India')%>
-                    </span>
+                      <%= __('Dekho India')%>
                   </a>
                 </li>
               </ul>

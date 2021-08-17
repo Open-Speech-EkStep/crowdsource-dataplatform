@@ -82,7 +82,7 @@ html {
 #initiative{
   border-bottom: 1px solid #0f2749;
 }
-#initiative a{
+#initiative a, #my-badge a{
   opacity: 0.8;
   height: 64px;
   padding-top: 15px;

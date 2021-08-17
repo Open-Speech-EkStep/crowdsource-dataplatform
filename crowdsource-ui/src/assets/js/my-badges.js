@@ -234,6 +234,52 @@ const getBadgesForUser = (userName) => {
 $(document).ready(() => {
   localStorage.setItem("module","others");
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
+
+  const $sunoTab = $('#suno-tab');
+  const $boloTab = $('#bolo-tab');
+  const $likhoTab = $('#likho-tab');
+  const $dekhoTab = $('#dekho-tab');
+
+  $sunoTab.on('click', function () {
+    const $tabBar = document.getElementById('my-badge');
+    sideScroll($tabBar,'left',25,100,10);
+  });
+
+  $boloTab.on('click', function () {
+    const prev = $('.my-badge-container .nav-tabs li>a.active');
+    const $tabBar = document.getElementById('my-badge');
+    const prevActiveTab = prev[0].id;
+    const direction = prevActiveTab == $sunoTab[0].id ? 'right' :'left';
+    sideScroll($tabBar,direction,25,160,10);
+  });
+
+  $likhoTab.on('click', function () {
+    const prev = $('.my-badge-container .nav-tabs li>a.active');
+    const $tabBar = document.getElementById('my-badge');
+    const prevActiveTab = prev[0].id;
+    const direction = prevActiveTab == $dekhoTab[0].id ? 'left' :'right';
+    sideScroll($tabBar,direction,25,160,10);
+  });
+
+  $dekhoTab.on('click', function () {
+    const $tabBar = document.getElementById('my-badge');
+    sideScroll($tabBar,'right',25,100,10);
+  });
+
+  function sideScroll(element,direction,speed,distance,step){
+    let scrollAmount = 0;
+    const slideTimer = setInterval(function(){
+      if(direction == 'left'){
+        element.scrollLeft -= step;
+      } else {
+        element.scrollLeft += step;
+      }
+      scrollAmount += step;
+      if(scrollAmount >= distance){
+        window.clearInterval(slideTimer);
+      }
+    }, speed);
+  }
   updateLocaleLanguagesDropdown(language);
   const details = JSON.parse(localStorage.getItem("speakerDetails"));
   const username = details && details.userName ? details.userName: '';

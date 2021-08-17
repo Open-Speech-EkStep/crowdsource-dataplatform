@@ -181,17 +181,12 @@ a.text-primary:hover {
   color: $primary-color;
 }
 
-.btn-transparent {
-  &:hover {
-    background-color: rgba(15, 39, 73, 0.1) !important;
-    box-shadow:  rgba(15, 39, 73, 0.1) !important;
-  }
-}
 
 .btn-transparent {
   &:active {
     color: $primary-color !important;
-    border: 1px solid $primary-color;
+    background-color: rgba(15, 39, 73, 0.1) !important;
+    border: transparent !important;
   }
 }
 
@@ -203,7 +198,7 @@ a.text-primary:hover {
 }
 
 .btn-custom-outline-primary {
-  &:hover {
+  &:active {
     background-color: $primary-color-shade1 !important;
     border: 1px solid  $text-white;
     color: $primary-color !important;
@@ -211,10 +206,10 @@ a.text-primary:hover {
   }
 }
 
+
 .btn-custom-outline-primary {
   &:focus {
-    background-color: $primary-color-shade2;
-    box-shadow: 0 8px 24px rgb(15 39 73 / 40%) !important;
+    box-shadow: 0 8px 24px rgb(15 39 73 / 20%) !important;
   }
 }
 
@@ -377,6 +372,22 @@ audio {
 }
 
 @media screen and (min-width: 767px) {
+  .btn-transparent {
+    &:hover {
+      background-color: rgba(15, 39, 73, 0.1) !important;
+      box-shadow:  rgba(15, 39, 73, 0.1) !important;
+    }
+  }
+
+.btn-custom-outline-primary {
+  &:hover {
+    background-color: $primary-color-shade1 !important;
+    border: 1px solid  $text-white;
+    color: $primary-color !important;
+    box-shadow: 0px 8px 24px rgba(15, 39, 73, 0.4);
+  }
+}
+
   .functional-page-bg {
     height: 100%;
   }
