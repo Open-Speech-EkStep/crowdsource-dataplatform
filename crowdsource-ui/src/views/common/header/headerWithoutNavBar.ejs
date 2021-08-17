@@ -14,11 +14,11 @@
                         <img src="<%- `/img/${locale}-logo-sm.svg` %>" class="d-block d-sm-block d-md-none d-lg-none mobile-logo" alt="Bhaashini" width="48" height="48">
                     </h2>
                 </a>
-                <div class="vertical-line"></div>
+                <div class="vertical-line ml-1 ml-lg-0"></div>
                 <%- include ./bhasadaanLogoText.ejs %>
+                <div id="logo_separator" class="ml-3 mr-0"></div>
             </div>
         </div>
-        <div id="logo_separator" class="ml-3"></div>
         <div class="row ml-1 d-none-mob">
             <img src="<%= `/img/${locale}-${img}`%>" alt="module_logo" width="50" height="40" id="module_header_logo">
             <a class="m-0 align-self-center text-decoration-none text-primary" style="padding-right:10px;padding-left:10px" href="<%= homePath %>">
@@ -32,7 +32,7 @@
             </p>
         </div>
         <div class="mobile-nav collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav pt-3 pt-lg-0 pt-md-0 d-block d-sm-block d-md-none d-lg-none" id="module_name">
+            <ul class="navbar-nav py-3 py-lg-0 py-md-0 d-block d-sm-block d-md-none d-lg-none" id="module_name">
                 <li class="nav-item module-item p-2 d-none" value="home"><a href="" class="nav-link text-muted-white">
                         <%= __('Home') %>
                     </a></li>
