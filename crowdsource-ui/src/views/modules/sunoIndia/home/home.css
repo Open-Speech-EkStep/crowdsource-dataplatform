@@ -314,7 +314,7 @@ body.modal-open .supreme-container {
 .card{
   background-image: url('/img/tri_color.svg');
   background-position: center;
-  background-size: auto;
+  background-size: cover;
   mix-blend-mode: normal;
   border-radius: 20px;
   min-height: 190px;
