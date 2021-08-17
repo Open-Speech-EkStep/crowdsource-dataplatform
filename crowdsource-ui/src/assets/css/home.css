@@ -292,7 +292,7 @@ body.modal-open .supreme-container {
 
 .card{
   background-image: url('/img/tri_color.svg');
-  background-size: auto;
+  background-size: cover;
   background-position: center;
   mix-blend-mode: normal;
   box-shadow: 0 0 32px rgba(0, 0, 0, 0.1);
@@ -442,10 +442,6 @@ body.modal-open .supreme-container {
 @media screen and (max-width: 767px) {
   .contribution-details {
     padding: 0 3rem;
-  }
-  .card{
-    background-image: url('/img/card_bg_sm.svg') !important;
-    background-size: cover !important;
   }
   .contribution-data.col-md-3 {
     flex: 0 0 100%;
