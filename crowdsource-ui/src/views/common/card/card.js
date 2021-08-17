@@ -1,4 +1,4 @@
-const { LOCALE_STRINGS, CUMULATIVE_DATA, CURRENT_MODULE } = require('./constants');
+const { LOCALE_STRINGS, CUMULATIVE_DATA } = require('./constants');
 const { updateLocaleLanguagesDropdown, calculateTime, formatTime } = require("./utils");
 
 const $left = $('#left');
@@ -55,12 +55,7 @@ function updateHrsForCards(language) {
 }
 
 $left.hover(() => {
-  const currentModule = localStorage.getItem(CURRENT_MODULE);
   $(".card1").css("box-shadow", "0 8px 0 #43c0d7,0 0 32px #43c0d7");
-  if (currentModule === 'bolo') {
-    $left_p_2.removeClass('d-none');
-    $left_container.addClass('left-active');
-  }
 }, () => {
   $(".card1").css("box-shadow", "0 8px 0 #43c0d7, 0px 0px 32px rgb(0 0 0 / 10%)")
   $left_p_2.addClass('d-none');
@@ -68,12 +63,7 @@ $left.hover(() => {
 });
 
 $right.hover(() => {
-  const currentModule = localStorage.getItem(CURRENT_MODULE);
   $(".card2").css("box-shadow", "0 8px 0 #43c0d7,0 0 32px #43c0d7")
-  if (currentModule === 'bolo') {
-    $right_p_2.removeClass('d-none');
-    $right_container.addClass('right-active');
-  }
 }, () => {
   $(".card2").css("box-shadow", "0 8px 0 #43c0d7, 0px 0px 32px rgb(0 0 0 / 10%)")
   $right_p_2.addClass('d-none');

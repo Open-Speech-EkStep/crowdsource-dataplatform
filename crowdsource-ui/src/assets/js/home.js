@@ -116,9 +116,7 @@ function initializeBlock() {
         } 
     });
 
-    $('#start_recording').on('click', () => {
-        $('#left-p-2').addClass('d-none');
-        $('#left_container').removeClass('left-active');
+    $('#left').on('click', () => {
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
         localStorage.setItem("selectedType", "contribute");
         if (!hasUserRegistered()) {
@@ -129,9 +127,7 @@ function initializeBlock() {
         }
     });
 
-    $('#start_validating').on('click', () => {
-        $('#right-p-2').addClass('d-none');
-        $('#right_container').removeClass('right-active');
+    $('#right').on('click', () => {
         localStorage.setItem(CONTRIBUTION_LANGUAGE, top_lang);
         localStorage.setItem("selectedType", "validate");
         if (!hasUserRegistered()) {

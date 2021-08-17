@@ -98,7 +98,7 @@ function initializeBlock() {
     updatePage(fromLanguage, toLanguage);
   });
 
-  $('#start_recording').on('click', () => {
+  $('#left').on('click', () => {
     localStorage.setItem("selectedType", "contribute");
     if (!hasUserRegistered()) {
       $('#userModal').modal('show');
@@ -109,7 +109,7 @@ function initializeBlock() {
 
   });
 
-  $('#start_validating').on('click', () => {
+  $('#right').on('click', () => {
     localStorage.setItem("selectedType", "validate");
     if (!hasUserRegistered()) {
       $('#userModal').modal('show');

@@ -275,15 +275,15 @@ const reportSentenceOrRecording = (reqObj) => {
 }
 
 const getJson = (path) => {
-  return new Promise((resolve) => {
-    $.getJSON(`${context_root}${path}`, (data) => {
-      resolve(data);
-    }).fail((e) => {
-      if (e.statusText !== "error") {
-        showErrorModal();
-      }
-    });
-  })
+    return new Promise((resolve) => {
+      $.getJSON(path, (data) => {
+        resolve(data);
+      }).fail((e) => {
+        if(e && e.statusText !== "error") {
+          showErrorModal();
+        }
+      });
+    })
 }
 
 const covertStringToCapitalised = (tempStr) => {

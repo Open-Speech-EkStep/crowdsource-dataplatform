@@ -54,7 +54,7 @@ function initializeBlock() {
     }
   });
 
-  $('#start_recording').on('click', () => {
+  $('#left').on('click', () => {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
     localStorage.setItem("selectedType", "contribute");
     if (!hasUserRegistered()) {
@@ -65,7 +65,7 @@ function initializeBlock() {
     }
   });
 
-  $('#start_validating').on('click', () => {
+  $('#right').on('click', () => {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, sentenceLanguage);
     localStorage.setItem("selectedType", "validate");
     if (!hasUserRegistered()) {

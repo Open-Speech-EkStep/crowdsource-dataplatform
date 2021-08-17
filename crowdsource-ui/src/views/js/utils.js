@@ -284,7 +284,7 @@ const getJson = (path) => {
     $.getJSON(`${context_root}${path}`, (data) => {
       resolve(data);
     }).fail((e) => {
-      if (e.statusText !== "error") {
+      if (e && e.statusText !== "error") {
         showErrorModal();
       }
     });
