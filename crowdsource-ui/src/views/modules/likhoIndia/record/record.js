@@ -274,7 +274,7 @@ const handleSubmitFeedback = function () {
       });
       $("#other_text").val("");
     }else {
-      $("#report_sentence_modal").modal('hide'); showErrorPopup(resp.statusCode);
+      $("#report_sentence_modal").modal('hide'); showErrorPopup(resp.status);
   }
   }).catch(()=> { $("#report_sentence_modal").modal('hide'); showErrorPopup()});
 }

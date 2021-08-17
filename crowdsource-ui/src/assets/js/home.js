@@ -21,21 +21,12 @@ const {
     AGGREGATED_DATA_BY_LANGUAGE,
     CUMULATIVE_DATA,
     CONTRIBUTION_LANGUAGE,
-    LOCALE_STRINGS,
     ALL_LANGUAGES,
     MODULE,
     SPEAKER_DETAILS_KEY
 } = require('./constants');
 const { context_root } = require('./env-api');
 const { updateHrsForCards } = require('../../../build/js/common/card');
-
-const clearLocalStorage = function () {
-    localStorage.removeItem(TOP_LANGUAGES_BY_HOURS);
-    localStorage.removeItem(TOP_LANGUAGES_BY_SPEAKERS);
-    localStorage.removeItem(AGGREGATED_DATA_BY_LANGUAGE);
-    localStorage.removeItem(CUMULATIVE_DATA);
-    localStorage.removeItem(LOCALE_STRINGS);
-}
 
 const getStatsSummary = function () {
     $.getJSON(`${context_root}/aggregated-json/cumulativeCount.json`, (jsonData) => {
@@ -81,7 +72,6 @@ const getStatsSummary = function () {
         updateHrsForCards(contributionLanguage);
     })
 }
-
 
 function initializeBlock() {
     const $userName = $('#username');
@@ -168,7 +158,6 @@ function initializeBlock() {
 
 $(document).ready(function () {
     localStorage.setItem('module', 'bolo');
-    clearLocalStorage();
     onActiveNavbar('bolo');
     getLocaleString().then(() => {
         initializeBlock();

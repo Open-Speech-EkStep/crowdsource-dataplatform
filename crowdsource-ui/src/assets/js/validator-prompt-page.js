@@ -345,7 +345,7 @@ const handleSubmitFeedback = function () {
             });
             $("#other_text").val("");
         }else {
-            $("#report_recording_modal").modal('hide'); showErrorPopup(resp.statusCode);
+            $("#report_recording_modal").modal('hide'); showErrorPopup(resp.status);
         }
     }).catch(()=> { $("#report_recording_modal").modal('hide'); showErrorPopup()});
 }
