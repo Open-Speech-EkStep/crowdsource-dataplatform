@@ -16,7 +16,7 @@ const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showErrorPopup,safeErrorHandling, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showErrorPopup, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
 const { initializeFeedbackModal } = require('../common/feedback');
 const { setDataSource } = require('../common/sourceInfo');
@@ -66,10 +66,17 @@ function uploadToServer(cb) {
     mode: 'cors',
     body: fd,
   })
-   .then(safeErrorHandling)
-    .then((res) => res.json())
-    .then(() => {
-    })
+  .then(data => {
+    if (!data.ok) {
+      throw (data.status || 500);
+    } else {
+      return Promise.resolve(data.json());
+    }
+  })
+  .catch(errStatus => {
+    showErrorPopup(errStatus);
+    throw errStatus
+  })
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -269,10 +276,17 @@ function markContributionSkipped() {
     },
     body: JSON.stringify(reqObj),
   })
-  .then(safeErrorHandling)
-    .then((res) => res.json())
-    .then(() => {
-    });
+  .then(data => {
+    if (!data.ok) {
+      throw (data.status || 500);
+    } else {
+      return Promise.resolve(data.json());
+    }
+  })
+  .catch(errStatus => {
+    showErrorPopup(errStatus);
+    throw errStatus
+  })
 }
 
 function addListeners() {
@@ -559,14 +573,17 @@ function executeOnLoad() {
           'Content-Type': 'application/json',
         },
       })
-      .then(safeErrorHandling)
-        .then((data) => {
-          if (!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
-          } else {
-            return data.json();
-          }
-        })
+      .then(data => {
+        if (!data.ok) {
+          throw (data.status || 500);
+        } else {
+          return Promise.resolve(data.json());
+        }
+      })
+      .catch(errStatus => {
+        showErrorPopup(errStatus);
+        throw errStatus
+      })
         .then((sentenceData) => {
           sunoIndia.sentences = sentenceData.data ? sentenceData.data : [];
           localStorage.setItem(sunoCountKey, sunoIndia.sentences.length);

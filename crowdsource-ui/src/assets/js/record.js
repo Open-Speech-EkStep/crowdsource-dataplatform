@@ -3,7 +3,7 @@ const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, 
 const { LOCALE_STRINGS,MODULE,CONTRIBUTION_LANGUAGE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
 const { onChangeUser , showUserProfile,onOpenUserDropDown} = require('./header');
-const { showErrorPopup, safeErrorHandling } = require('./common');
+const { showErrorPopup } = require('./common');
 
 const speakerDetailsKey = 'speakerDetails';
 const sentencesKey = 'sentences';
@@ -426,10 +426,17 @@ const initialize = () => {
             },
             body: JSON.stringify(reqObj),
         })
-        .then(safeErrorHandling)
-            .then((res) => res.json())
-            .then(() => {
-            })
+        .then(data => {
+            if (!data.ok) {
+              throw (data.status || 500);
+            } else {
+              return Promise.resolve(data.json());
+            }
+          })
+          .catch(errStatus => {
+            showErrorPopup(errStatus);
+            throw errStatus
+          })
             .then(() => {
                 if (cb && typeof cb === 'function') {
                     cb();
@@ -462,10 +469,17 @@ const initialize = () => {
             mode: 'cors',
             body: fd,
         })
-        .then(safeErrorHandling)
-            .then((res) => res.json())
-            .then(() => {
-            })
+        .then(data => {
+            if (!data.ok) {
+              throw (data.status || 500);
+            } else {
+              return Promise.resolve(data.json());
+            }
+          })
+          .catch(errStatus => {
+            showErrorPopup(errStatus);
+            throw errStatus
+          })
             .then(() => {
                 if (cb && typeof cb === 'function') {
                     cb();
@@ -629,14 +643,17 @@ function executeOnLoad() {
                     'Content-Type': 'application/json',
                 },
             })
-            .then(safeErrorHandling)
-                .then((data) => {
-                    if (!data.ok) {
-                        throw Error(data.statusText || 'HTTP error');
-                    } else {
-                        return data.json();
-                    }
-                })
+            .then(data => {
+                if (!data.ok) {
+                  throw (data.status || 500);
+                } else {
+                  return Promise.resolve(data.json());
+                }
+              })
+              .catch(errStatus => {
+                showErrorPopup(errStatus);
+                throw errStatus
+              })
                 .then((sentenceData) => {
                     crowdSource.sentences = sentenceData.data ? sentenceData.data : [];
                     crowdSource.count = sentenceData.data.length;

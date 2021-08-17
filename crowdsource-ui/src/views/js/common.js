@@ -648,8 +648,8 @@ const showErrorPopup = (status = 500) => {
 
 const getErrorText = (status) => {
   const errorText = status === ErrorStatusCode.SERVICE_UNAVAILABLE ?
-    "We are processing multiple requests at the moment. Please try again after sometime."
-    : "An unexpected error has occurred.";
+    translate("We are processing multiple requests at the moment. Please try again after sometime.")
+    : translate("An unexpected error has occurred.");
   return errorText;
 }
 
@@ -660,9 +660,6 @@ const bindErrorText = (text) => {
 
 const safeJqueryErrorHandling = (e) => {
   if (e && e.statusText !== "error") {
-    const $errorText = $("#error-text");
-    $errorText.text("");
-    $errorText.text(translate("An unexpected error has occurred."));
     showErrorPopup();
   }
 }

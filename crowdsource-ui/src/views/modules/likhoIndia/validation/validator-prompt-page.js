@@ -13,7 +13,7 @@ const {
 } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup,safeErrorHandling, updateLikhoLocaleLanguagesDropdown} = require('../common/common');
+const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup, updateLikhoLocaleLanguagesDropdown} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { setDataSource } = require('../common/sourceInfo');
@@ -87,10 +87,17 @@ function uploadToServer(cb) {
     mode: 'cors',
     body: fd,
   })
-  .then(safeErrorHandling)
-    .then((res) => res.json())
-    .then(() => {
-    })
+  .then(data => {
+    if (!data.ok) {
+      throw (data.status || 500);
+    } else {
+      return Promise.resolve(data.json());
+    }
+  })
+  .catch(errStatus => {
+    showErrorPopup(errStatus);
+    throw errStatus
+  })
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -170,13 +177,17 @@ function skipValidation(action) {
       'Content-Type': 'application/json',
     },
   })
-  .then(safeErrorHandling)
-    .then(
-      (data) => {
-        if (!data.ok) {
-          throw Error(data.statusText || 'HTTP error');
-        }
-      });
+  .then(data => {
+    if (!data.ok) {
+      throw (data.status || 500);
+    } else {
+      return Promise.resolve(data.json());
+    }
+  })
+  .catch(errStatus => {
+    showErrorPopup(errStatus);
+    throw errStatus
+  })
 }
 
 const openEditor = function () {
@@ -458,14 +469,17 @@ const executeOnLoad = function () {
       credentials: 'include',
       mode: 'cors'
     })
-    .then(safeErrorHandling)
-      .then((data) => {
-        if (!data.ok) {
-          throw Error(data.statusText || 'HTTP error');
-        } else {
-          return data.json();
-        }
-      }).then(result => {
+    .then(data => {
+      if (!data.ok) {
+        throw (data.status || 500);
+      } else {
+        return Promise.resolve(data.json());
+      }
+    })
+    .catch(errStatus => {
+      showErrorPopup(errStatus);
+      throw errStatus
+    }).then(result => {
       likhoIndiaValidator.sentences = result.data ? result.data : [];
       localStorage.setItem(likhoValidatorCountKey, likhoIndiaValidator.sentences.length);
       localStorage.setItem(

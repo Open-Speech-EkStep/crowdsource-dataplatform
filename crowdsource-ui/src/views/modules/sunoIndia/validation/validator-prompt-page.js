@@ -15,7 +15,7 @@ const {
 const { onChangeUser,onOpenUserDropDown, showUserProfile } = require('../common/header');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent, isMobileDevice, showOrHideExtensionCloseBtn, showErrorPopup, safeErrorHandling} = require('../common/common');
+const {isKeyboardExtensionPresent, isMobileDevice, showOrHideExtensionCloseBtn, showErrorPopup} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {cdn_url} = require('../common/env-api');
 const {initializeFeedbackModal} = require('../common/feedback');
@@ -77,10 +77,17 @@ function uploadToServer(cb) {
     mode: 'cors',
     body: fd,
   })
-  .then(safeErrorHandling)
-    .then((res) => res.json())
-    .then(() => {
-    })
+  .then(data => {
+    if (!data.ok) {
+      throw (data.status || 500);
+    } else {
+      return Promise.resolve(data.json());
+    }
+  })
+  .catch(errStatus => {
+    showErrorPopup(errStatus);
+    throw errStatus
+  })
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -649,13 +656,16 @@ const executeOnLoad = function () {
       credentials: 'include',
       mode: 'cors'
     })
-    .then(safeErrorHandling)
-    .then((data) => {
+    .then(data => {
       if (!data.ok) {
-        throw Error(data.statusText || 'HTTP error');
+        throw (data.status || 500);
       } else {
-        return data.json();
+        return Promise.resolve(data.json());
       }
+    })
+    .catch(errStatus => {
+      showErrorPopup(errStatus);
+      throw errStatus
     }).then((result) => {
       sunoIndiaValidator.sentences = result.data ? result.data : [];
       localStorage.setItem(sunoValidatorCountKey, sunoIndiaValidator.sentences.length);

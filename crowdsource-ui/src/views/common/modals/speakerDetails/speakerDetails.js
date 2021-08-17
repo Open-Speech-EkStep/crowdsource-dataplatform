@@ -2,7 +2,6 @@ const { DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRIN
 const { getLocaleString } = require('./utils');
 const fetch = require('./fetch')
 const {whitelisting_email} = require('./env-api')
-const {safeErrorHandling} = require('./common');
 
 function validateUserName($userName, $userNameError) {
     const userNameValue = $userName.val().trim();
@@ -195,7 +194,17 @@ const verifyUser = (userName) => {
             'Content-Type': 'application/json',
         },
     })
-    .then(safeErrorHandling);
+    .then((data) => {
+        if (!data.ok) {
+          throw (data.status || 500);
+        } else {
+          return Promise.resolve(data.json());
+        }
+      })
+      .catch(errStatus => {
+        showErrorPopup(errStatus);
+        throw errStatus
+      });
 }
 
 const storeToLocal = (speakerDetailsKey, speakerDetails, contributionLanguage, url) => {

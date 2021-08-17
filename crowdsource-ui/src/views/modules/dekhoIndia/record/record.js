@@ -15,7 +15,7 @@ const {
 const { cdn_url } = require('../common/env-api');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showOrHideExtensionCloseBtn,isMobileDevice,  showErrorPopup, safeErrorHandling} = require('../common/common');
+const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showOrHideExtensionCloseBtn,isMobileDevice,  showErrorPopup} = require('../common/common');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { setDataSource } = require('../common/sourceInfo');
@@ -69,13 +69,18 @@ function markContributionSkipped() {
     },
     body: JSON.stringify(reqObj),
   })
-  .then(safeErrorHandling)
-    .then((res) => res.json())
-    .then(() => {
-    })
+  .then(data => {
+    if (!data.ok) {
+      throw (data.status || 500);
+    } else {
+      return Promise.resolve(data.json());
+    }
+  })
+  .catch(errStatus => {
+    showErrorPopup(errStatus);
+    throw errStatus
+  })
 }
-
-
 
 function uploadToServer(cb) {
   const fd = new FormData();
@@ -98,10 +103,17 @@ function uploadToServer(cb) {
     mode: 'cors',
     body: fd,
   })
-  .then(safeErrorHandling)
-    .then((res) => res.json())
-    .then(() => {
-    })
+  .then(data => {
+    if (!data.ok) {
+      throw (data.status || 500);
+    } else {
+      return Promise.resolve(data.json());
+    }
+  })
+  .catch(errStatus => {
+    showErrorPopup(errStatus);
+    throw errStatus
+  })
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -158,13 +170,17 @@ function skipValidation(action) {
       'Content-Type': 'application/json',
     },
   })
-  .then(safeErrorHandling)
-    .then(
-      (data) => {
-        if (!data.ok) {
-          throw Error(data.statusText || 'HTTP error');
-        }
-      });
+  .then(data => {
+    if (!data.ok) {
+      throw (data.status || 500);
+    } else {
+      return Promise.resolve(data.json());
+    }
+  })
+  .catch(errStatus => {
+    showErrorPopup(errStatus);
+    throw errStatus
+  })
 }
 
 const openEditor = function () {
@@ -465,13 +481,16 @@ const executeOnLoad = function () {
           'Content-Type': 'application/json',
         },
       })
-      .then(safeErrorHandling)
-      .then((data) => {
+      .then(data => {
         if (!data.ok) {
-          throw Error(data.statusText || 'HTTP error');
+          throw (data.status || 500);
         } else {
-          return data.json();
+          return Promise.resolve(data.json());
         }
+      })
+      .catch(errStatus => {
+        showErrorPopup(errStatus);
+        throw errStatus
       }).then((sentenceData) => {
         dekhoIndia.sentences = sentenceData.data ? sentenceData.data : [];
         localStorage.setItem(dekhoCountKey, dekhoIndia.sentences.length);
