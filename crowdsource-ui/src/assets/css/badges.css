@@ -398,6 +398,10 @@ ul#initiative {
 }
 
 @media (min-width: 768px) {
+
+  .badge-mt-34 {
+    margin-top: 38px;
+  }
   .font-weight-light-lg {
     font-weight: 300 !important;
   }
@@ -471,9 +475,6 @@ ul#initiative {
   line-height: 28px;
 }
 
-.badge-mt-34 {
-  margin-top: 38px;
-}
 
 .badge-detail-container .badge-mt-34 {
   margin-top: 37px;

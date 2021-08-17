@@ -873,3 +873,18 @@ body {
   opacity: 1 !important;
   border-bottom: 4px solid #0f2749 !important;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+ul#my-badge::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+ul#my-badge {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+#my-badge {
+  border-bottom: 1px solid #0f2749;
+}
