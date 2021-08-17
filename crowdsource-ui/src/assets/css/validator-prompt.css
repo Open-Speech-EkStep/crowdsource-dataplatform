@@ -138,7 +138,7 @@ a {
 
   /* Modal Content (image) */
   #myModal .modal-content {
-    height: 85px;
+    height: auto;
     padding: 20px 40px !important;
   }
 
