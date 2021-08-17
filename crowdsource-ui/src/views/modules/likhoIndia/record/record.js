@@ -195,7 +195,7 @@ function addListeners() {
     setInput("");
     $('#submit-edit-button').attr('disabled', true);
     hideElement($('#edit-error-row'))
-    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
+    $("#edit-text").removeClass('edit-error-area');
     markContributionSkipped();
     getNextSentence();
     showElement($('#sentences-row'));

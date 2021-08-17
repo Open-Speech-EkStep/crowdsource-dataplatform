@@ -258,7 +258,7 @@ function addListeners() {
     showElement($('#textarea-row'));
     showElement($('#progress-row'));
     hideElement($('#edit-error-row'))
-    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
+    $("#edit-text").removeClass('edit-error-area');
     $("#cancel-edit-button").attr("disabled", true);
     closeEditor();
   })
