@@ -150,10 +150,10 @@ const performAPIRequest = (url) => {
       return Promise.resolve(data.json());
     }
   })
-  .catch(errStatus => {
-    showErrorPopup(errStatus);
-    throw errStatus
-  });
+    .catch(errStatus => {
+      showErrorPopup(errStatus);
+      throw errStatus
+    });
 }
 
 const getLocaleString = function () {
@@ -194,7 +194,7 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
 };
 
 const translate = function (string) {
-  const localeStrings = JSON.parse(localStorage.getItem('localeString'));
+  const localeStrings = JSON.parse(localStorage.getItem('localeString') || "{}");
   return localeStrings[string] || string;
 }
 
@@ -274,15 +274,15 @@ const reportSentenceOrRecording = (reqObj) => {
 }
 
 const getJson = (path) => {
-    return new Promise((resolve) => {
-      $.getJSON(path, (data) => {
-        resolve(data);
-      }).fail((e) => {
-        if(e && e.statusText !== "error") {
-          showErrorModal();
-        }
-      });
-    })
+  return new Promise((resolve) => {
+    $.getJSON(path, (data) => {
+      resolve(data);
+    }).fail((e) => {
+      if (e && e.statusText !== "error") {
+        showErrorModal();
+      }
+    });
+  })
 }
 
 const covertStringToCapitalised = (tempStr) => {

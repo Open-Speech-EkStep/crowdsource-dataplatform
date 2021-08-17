@@ -46,9 +46,10 @@ function setCookie(cname, cvalue, exdays) {
 }
 
 const formatTransAndImages = (source, target, type) => {
-  const localsStrings = JSON.parse(localStorage.getItem('localeString'));
-  const translations = localsStrings['Translations'];
-  const images = localsStrings['Images'];
+  const localsStrings = JSON.parse(localStorage.getItem('localeString') || {});
+  const translationString = 'Translations', imagesString = 'Images';
+  const translations = localsStrings[translationString] || translationString;
+  const images = localsStrings[imagesString] || imagesString;
   const sourceType = type == 'images' ? images : translations;
   return source && source.length ? `${source} - ${target} ${sourceType}` : `${target} ${sourceType}`
 }
@@ -194,7 +195,7 @@ const calculateTime = function (totalSeconds, isSeconds = true) {
 };
 
 const translate = function (string) {
-  const localeStrings = JSON.parse(localStorage.getItem('localeString'));
+  const localeStrings = JSON.parse(localStorage.getItem('localeString') || "{}");
   return localeStrings[string] || string;
 }
 
@@ -231,10 +232,10 @@ const formatTime = function (hours, minutes = 0, seconds = 0, translate = true) 
 
 
 const formatTimeForLegends = function (hours, minutes = 0, seconds = 0, isLabelRequired = true) {
-  const localsStrings = JSON.parse(localStorage.getItem('localeString'));
-  const hrStr = localsStrings['hours'];
-  const minStr = localsStrings['minutes'];
-  const secStr = localsStrings['seconds'];
+  const localsStrings = JSON.parse(localStorage.getItem('localeString') || {});
+  const hrStr = localsStrings['hours'] || 'hours';
+  const minStr = localsStrings['minutes'] || 'minutes';
+  const secStr = localsStrings['seconds'] || 'seconds';
   if (hours && minutes) {
     return isLabelRequired ? `${hours}.${minutes} ${hrStr}` : `${hours}.${minutes}`;
   }
