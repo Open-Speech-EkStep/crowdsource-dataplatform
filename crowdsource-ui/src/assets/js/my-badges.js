@@ -7,7 +7,7 @@ const {
   covertStringToCapitalised
 } = require('./utils');
 const {onChangeUser, showUserProfile,onOpenUserDropDown} = require('./header');
-const {isMobileDevice, hasUserRegistered} = require('./common');
+const {isMobileDevice, hasUserRegistered, showErrorPopup} = require('./common');
 
 const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type, localeString, language) => {
   return `

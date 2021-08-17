@@ -94,7 +94,6 @@ const initialize = () => {
     const $recordingRow = $('#recording-row');
     const $recordingSign = $('#recording-sign');
     const $progressBar = $('.progress-bar');
-    const $pageContent = $('#page-content');
     const $audioSmallError = $('#audio-small-error');
     const $autoStopWarning = document.getElementById("count-down");
     const totalItems = sentences.length;
@@ -146,18 +145,6 @@ const initialize = () => {
     //     placement: screen.availWidth > 900 ? 'right' : 'bottom',
     // });
 
-    const animateCSS = ($element, animationName, callback) => {
-        $element.addClass(`animated ${animationName}`);
-
-        function handleAnimationEnd() {
-            $element.removeClass(`animated ${animationName}`);
-            $element.off('animationend');
-            if (typeof callback === 'function') callback();
-        }
-
-        $element.on('animationend', handleAnimationEnd);
-    };
-
     const setProgressBar = (currentIndex) => {
         $progressBar.width((currentIndex + 1) * 20 + '%');
         $progressBar.prop('aria-valuenow', currentIndex + 1);
@@ -166,7 +153,6 @@ const initialize = () => {
     const setSentenceText = (index) => {
         const $sentenceLbl = $('#sentenceLbl');
         $sentenceLbl[0].innerText = sentences[index].media_data;
-        animateCSS($sentenceLbl, 'lightSpeedIn');
         setProgressBar(currentIndex);
         setDataSource(sentences[index].source_info);
     };
@@ -364,10 +350,6 @@ const initialize = () => {
             }
             $skipBtn.addClass('d-none');
             currentIndex++;
-            animateCSS($pageContent, 'zoomOut', () => {
-                $pageContent.addClass('d-none');
-                $('footer').removeClass('bottom').addClass('fixed-bottom');
-            });
             setProgressBar(currentIndex);
             const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
             Object.assign(sentencesObj, { sentences: [] });

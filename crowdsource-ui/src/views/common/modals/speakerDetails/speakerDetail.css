@@ -55,7 +55,8 @@
   }
 
   #userModal .modal-body  {
-    max-height: 390px;
+    min-height: 405px;
+    max-height: 405px;
     overflow: auto;
   }
 

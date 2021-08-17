@@ -167,22 +167,10 @@ const setAudioPlayer = function () {
 // eslint-disable-next-line no-unused-vars
 let currentIndex = 0, validationCount = 0;
 
-const animateCSS = ($element, animationName, callback) => {
-    $element.addClass(`animated ${animationName}`);
-
-    function handleAnimationEnd() {
-        $element.removeClass(`animated ${animationName}`);
-        $element.off('animationend');
-        if (typeof callback === 'function') callback();
-    }
-
-    $element.on('animationend', handleAnimationEnd);
-};
 
 function setSentenceLabel(index) {
     const $sentenceLabel = $('#sentenceLabel')
     $sentenceLabel[0].innerText = boloIndiaValidator.sentences[index].sentence;
-    animateCSS($sentenceLabel, 'lightSpeedIn');
     setDataSource(boloIndiaValidator.sentences[index].source_info);
 }
 
@@ -306,10 +294,6 @@ function addListeners() {
         }
         recordValidation(SKIP_ACTION)
         getNextSentence();
-    })
-
-    $skipButton.mousedown(() => {
-        $skipButton.css('background-color', '#bfddf5')
     })
 }
 
