@@ -136,6 +136,10 @@ a.text-primary:hover {
   color: #7F8EA4;
 }
 
+.btn-custom-outline-primary:disabled img {
+  opacity: 0.5;
+}
+
 .btn-primary {
   background-color: $primary-color !important;
   color: $text-white !important;
