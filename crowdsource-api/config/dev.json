@@ -1,7 +1,7 @@
 { 
     "whitelistingEmail":"disabled",
     "envName": "dev",
-    "caching": "enabled",
+    "caching": "disabled",
     "validation_count": "3",
     "cache_timeout": "600"
 }
