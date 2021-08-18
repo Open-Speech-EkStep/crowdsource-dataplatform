@@ -19,7 +19,6 @@ jest.mock('config', () => ({
 const mockCache = require('../src/cache/cache')
 
 describe("Running tests for cacheOperations", () => {
-    let type = 'text';
     const spyDBany = jest.spyOn(mockDB, 'any');
 
     beforeEach(() => {
@@ -33,7 +32,7 @@ describe("Running tests for cacheOperations", () => {
     })
 
     test("setContributionDataForCaching should return expected result", async () => {
-        type = 'asr'
+        const type = 'asr'
         const mockResult = [
             { dataset_row_id: 1, media_data: "some text", source_info: null, skipped_by: null },
             { dataset_row_id: 2, media_data: "some text 2", source_info: null, skipped_by: null },
@@ -47,7 +46,7 @@ describe("Running tests for cacheOperations", () => {
         expect(mockCache.setAsync).toBeCalledWith(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(mockResult), 600);
     });
     test("getDataForContribution should return expected result", async () => {
-        type = 'asr'
+        const type = 'asr'
         const userId = 'userId';
         const userName = 'userName';
         const mockResult = [
@@ -65,7 +64,7 @@ describe("Running tests for cacheOperations", () => {
         expect(result).toEqual(resultObj);
     });
     test("getDataForContribution should return expected result remove the skipped one", async () => {
-        type = 'asr'
+        const type = 'asr'
         const userId = 'userId';
         const userName = 'userName';
         const mockResult = [
@@ -84,7 +83,7 @@ describe("Running tests for cacheOperations", () => {
         expect(result).toEqual([resultObj[1]]);
     });
     test("removeItemFromCache should return expected result remove the skipped one", async () => {
-        type = 'asr'
+        const type = 'asr'
         const userId = 'userId';
         const userName = 'userName';
         const mockResult = [
@@ -102,7 +101,7 @@ describe("Running tests for cacheOperations", () => {
         expect(mockCache.setAsync).toBeCalledWith(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(resultObj), 600);
     });
     test("markContributionSkippedInCache should return expected result should add details to skipped_by", async () => {
-        type = 'asr'
+        const type = 'asr'
         const userId = 'userId';
         const userName = 'userName';
         const mockResult = [
@@ -120,7 +119,7 @@ describe("Running tests for cacheOperations", () => {
         expect(mockCache.setAsync).toBeCalledWith(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(mockResult), 600);
     });
     test("markContributionSkippedInCache should return expected result should append details to skipped_by", async () => {
-        type = 'asr'
+        const type = 'asr'
         const userId = 'userId';
         const userName = 'userName';
         const mockResult = [
@@ -138,7 +137,7 @@ describe("Running tests for cacheOperations", () => {
         expect(mockCache.setAsync).toBeCalledWith(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(mockResult), 600);
     });
     test("setContributionDataForCaching should return expected result for parallel", async () => {
-        type = 'parallel'
+        const type = 'parallel'
         const mockResult = [
             { dataset_row_id: 1, media_data: "some text", source_info: null, skipped_by: null },
             { dataset_row_id: 2, media_data: "some text 2", source_info: null, skipped_by: null },
@@ -153,7 +152,7 @@ describe("Running tests for cacheOperations", () => {
     });
 
     test("setValidationDataForCaching should return expected result validation", async () => {
-        type = 'asr'
+        const type = 'asr'
         const mockResult = [
             { dataset_row_id: 1, sentence: "some text 1", contribution: "some contribution 1", contribution_id: 11, source_info: null, contributed_by: null, skipped_by: null, validation_count: 2 },
             { dataset_row_id: 2, sentence: "some text 2", contribution: "some contribution 2", contribution_id: 22,source_info: null, contributed_by: null, skipped_by: null, validation_count: 1 },
@@ -167,7 +166,7 @@ describe("Running tests for cacheOperations", () => {
         expect(mockCache.setAsync).toBeCalledWith(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(mockResult), 600);
     });
     test("setValidationDataForCaching should return expected result validation remove validation_count", async () => {
-        type = 'asr'
+        const type = 'asr'
         const mockResult = [
             { dataset_row_id: 1, sentence: "some text 1", contribution: "some contribution 1", contribution_id: 11, source_info: null, contributed_by: null, skipped_by: null, validation_count: 2 },
             { dataset_row_id: 2, sentence: "some text 2", contribution: "some contribution 2", contribution_id: 22,source_info: null, contributed_by: null, skipped_by: null, validation_count: 1 },
@@ -184,7 +183,7 @@ describe("Running tests for cacheOperations", () => {
         expect(mockCache.setAsync).toBeCalledWith(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(lesserThanValidationCount), 600);
     });
     test("setValidationDataForCaching should return expected result validation sort by validation_count", async () => {
-        type = 'asr'
+        const type = 'asr'
         const mockResult = [
             { dataset_row_id: 1, sentence: "some text 1", contribution: "some contribution 1", contribution_id: 11, source_info: null, contributed_by: null, skipped_by: null, validation_count: 2 },
             { dataset_row_id: 2, sentence: "some text 2", contribution: "some contribution 2", contribution_id: 22,source_info: null, contributed_by: null, skipped_by: null, validation_count: 1 },
@@ -206,7 +205,7 @@ describe("Running tests for cacheOperations", () => {
         expect(mockCache.setAsync).toBeCalledWith(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(lesserThanValidationCount), 600);
     });
     test("setValidationDataForCaching should return expected result for parallel validation", async () => {
-        type = 'parallel'
+        const type = 'parallel'
         const mockResult = [
             { dataset_row_id: 1, sentence: "some text 1", contribution: "some contribution 1", contribution_id: 11, source_info: null, contributed_by: null, skipped_by: null, validation_count: 2 },
             { dataset_row_id: 2, sentence: "some text 2", contribution: "some contribution 2", contribution_id: 22, source_info: null, contributed_by: null, skipped_by: null, validation_count: 1 },
@@ -220,7 +219,7 @@ describe("Running tests for cacheOperations", () => {
         expect(mockCache.setAsync).toBeCalledWith(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(mockResult), 600);
     });
     test("setValidationDataForCaching should return expected result for parallel validation remove validation count", async () => {
-        type = 'parallel'
+        const type = 'parallel'
         const mockResult = [
             { dataset_row_id: 1, sentence: "some text 1", contribution: "some contribution 1", contribution_id: 11, source_info: null, contributed_by: null, skipped_by: null, validation_count: 2 },
             { dataset_row_id: 2, sentence: "some text 2", contribution: "some contribution 2", contribution_id: 22, source_info: null, contributed_by: null, skipped_by: null, validation_count: 1 },
@@ -236,7 +235,7 @@ describe("Running tests for cacheOperations", () => {
         expect(mockCache.setAsync).toBeCalledWith(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(lesserThanValidationCount), 600);
     });
     test("setValidationDataForCaching should return expected result for parallel validation sort validation count", async () => {
-        type = 'parallel'
+        const type = 'parallel'
         const mockResult = [
             { dataset_row_id: 1, sentence: "some text 1", contribution: "some contribution 1", contribution_id: 11, source_info: null, contributed_by: null, skipped_by: null, validation_count: 2 },
             { dataset_row_id: 2, sentence: "some text 2", contribution: "some contribution 2", contribution_id: 22, source_info: null, contributed_by: null, skipped_by: null, validation_count: 1 },
@@ -257,7 +256,7 @@ describe("Running tests for cacheOperations", () => {
         expect(mockCache.setAsync).toBeCalledWith(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(lesserThanValidationCount), 600);
     });
     test("updateCacheAfterValidation should return expected result should add details to skipped_by", async () => {
-        type = 'asr'
+        const type = 'asr'
         const userId = 'userId';
         const userName = 'userName';
         const mockResult = [
@@ -282,7 +281,7 @@ describe("Running tests for cacheOperations", () => {
         expect(mockCache.setAsync).toBeCalledWith(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(lesserThanValidationCount), 600);
     });
     test("updateCacheAfterValidation should return expected result should append details to skipped_by", async () => {
-        type = 'asr'
+        const type = 'asr'
         const userId = 'userId';
         const userName = 'userName';
         const mockResult = [
@@ -307,7 +306,7 @@ describe("Running tests for cacheOperations", () => {
         expect(mockCache.setAsync).toBeCalledWith(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(lesserThanValidationCount), 600);
     });
     test("updateCacheAfterValidation should return expected result should not update validation_count when skiping", async () => {
-        type = 'asr'
+        const type = 'asr'
         const userId = 'userId';
         const userName = 'userName';
         const mockResult = [
@@ -332,7 +331,7 @@ describe("Running tests for cacheOperations", () => {
     });
 
     test("updateCacheAfterValidation should return expected result should update validation_count when not skiping", async () => {
-        type = 'asr'
+        const type = 'asr'
         const userId = 'userId';
         const userName = 'userName';
         const mockResult = [
@@ -357,7 +356,7 @@ describe("Running tests for cacheOperations", () => {
         expect(mockCache.setAsync).toBeCalledWith(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(lesserThanValidationCount), 600);
     });
     test("getDataForValidation should return expected result", async () => {
-        type = 'asr'
+        const type = 'asr'
         const userId = 'userId';
         const userName = 'userName';
         const mockResult = [
@@ -379,7 +378,7 @@ describe("Running tests for cacheOperations", () => {
         expect(result).toEqual(resultObj);
     });
     test("getDataForValidation should return expected result should remove the one which has contributed_by", async () => {
-        type = 'asr'
+        const type = 'asr'
         const userId = 'userId';
         const userName = 'userName';
         const mockResult = [
@@ -402,7 +401,7 @@ describe("Running tests for cacheOperations", () => {
         expect(result).toEqual(resultObj);
     });
     test("getDataForValidation should return expected result should remove the one which has skipped_by", async () => {
-        type = 'asr'
+        const type = 'asr'
         const userId = 'userId';
         const userName = 'userName';
         const mockResult = [
