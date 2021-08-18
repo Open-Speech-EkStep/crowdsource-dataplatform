@@ -1,4 +1,4 @@
-const {CURRENT_MODULE,MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, OPINION_RATING_MAPPING, ALL_LANGUAGES} = require('./constants');
+const { CURRENT_MODULE, MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, OPINION_RATING_MAPPING, ALL_LANGUAGES } = require('./constants');
 const fetch = require('./fetch')
 const { feedback_top_component } = require('./env-api');
 const { showErrorPopup } = require('./common');
@@ -7,29 +7,27 @@ const { showErrorPopup } = require('./common');
 const fetchUsername = () => {
     const speakerDetails = JSON.parse(localStorage.getItem('speakerDetails'));
 
-    if(speakerDetails !== null)
-    {
+    if (speakerDetails !== null) {
         $('#email').val(speakerDetails['userName']);
     }
 }
 
 const checkGivingFeedbackFor = () => {
-        const currentModule = localStorage.getItem(CURRENT_MODULE);
-        document.querySelectorAll('input[name="moduleSelectRadio"]').forEach((component) => {
-            try{
-                if(component.value === MODULE[currentModule].value)
-                {
-                    component.checked = true;
-                }
-            } catch(error){
-                document.querySelector('#others_id').checked = true;            
+    const currentModule = localStorage.getItem(CURRENT_MODULE);
+    document.querySelectorAll('input[name="moduleSelectRadio"]').forEach((component) => {
+        try {
+            if (component.value === MODULE[currentModule].value) {
+                component.checked = true;
             }
-        });
+        } catch (error) {
+            document.querySelector('#others_id').checked = true;
+        }
+    });
 };
 
 const addColorPathSVG = (element, color, svg) => {
-    $(element).attr("stroke", color);   
-    $(svg).css("background-color",color);         
+    $(element).attr("stroke", color);
+    $(svg).css("background-color", color);
 };
 
 const removeShadowSVG = (element) => {
@@ -55,7 +53,7 @@ const resetSVG = () => {
 }
 
 const selectEmoji = (element, stroke, rgba, svg) => {
-    $(svg).css("background-color",stroke);
+    $(svg).css("background-color", stroke);
     $(element).find("path, polygon, circle").attr("stroke", stroke);
     $(element).css('-webkit-box-shadow', `0px 4px 12px ${rgba}`);
     $(element).css('-moz-box-shadow', `0px 4px 12px ${rgba}`);
@@ -67,32 +65,27 @@ const selectEmoji = (element, stroke, rgba, svg) => {
 
 const updateOpinionSVGColor = () => {
     $(document).ready(() => {
-        $('input[name="opinionRadio"]').click(function(){ 
+        $('input[name="opinionRadio"]').click(function () {
             $(this).not(':checked').prop("checked", true);
         });
 
-        $('input[name="opinionRadio"]').on('change', function() {
+        $('input[name="opinionRadio"]').on('change', function () {
             resetSVG();
 
-            if($('input[name="opinionRadio"]:checked').val() === 'very_sad')
-            {
-                selectEmoji("#very_sad_label", "#E30606", "rgba(227, 6, 6, 0.5)","#very_sad-svg");
+            if ($('input[name="opinionRadio"]:checked').val() === 'very_sad') {
+                selectEmoji("#very_sad_label", "#E30606", "rgba(227, 6, 6, 0.5)", "#very_sad-svg");
             }
-            else if($('input[name="opinionRadio"]:checked').val() === 'sad')
-            {
-                selectEmoji("#sad_label", "#EA913F", "rgba(234, 145, 63, 0.5)","#sad-svg");
+            else if ($('input[name="opinionRadio"]:checked').val() === 'sad') {
+                selectEmoji("#sad_label", "#EA913F", "rgba(234, 145, 63, 0.5)", "#sad-svg");
             }
-            else if($('input[name="opinionRadio"]:checked').val() === 'neutral')
-            {
-                selectEmoji("#neutral_label", "#007BFF", "rgba(0, 123, 255, 0.5)","#neutral-svg");
+            else if ($('input[name="opinionRadio"]:checked').val() === 'neutral') {
+                selectEmoji("#neutral_label", "#007BFF", "rgba(0, 123, 255, 0.5)", "#neutral-svg");
             }
-            else if($('input[name="opinionRadio"]:checked').val() === 'happy')
-            {
-                selectEmoji("#happy_label", "#4ED738", "rgba(78, 215, 56, 0.5)","#happy-svg")
+            else if ($('input[name="opinionRadio"]:checked').val() === 'happy') {
+                selectEmoji("#happy_label", "#4ED738", "rgba(78, 215, 56, 0.5)", "#happy-svg")
             }
-            else if($('input[name="opinionRadio"]:checked').val() === 'very_happy')
-            {
-                selectEmoji("#very_happy_label", "#2A8908", "rgba(42, 137, 8, 0.5)","#very-happy-svg")
+            else if ($('input[name="opinionRadio"]:checked').val() === 'very_happy') {
+                selectEmoji("#very_happy_label", "#2A8908", "rgba(42, 137, 8, 0.5)", "#very-happy-svg")
             }
         });
     });
@@ -100,29 +93,27 @@ const updateOpinionSVGColor = () => {
 
 const updateSelectPageWhenModuleChanges = () => {
     $("#select_page_id").find('option').remove().end();
-    $('input[name="moduleSelectRadio"]').on('change', function() {
+    $('input[name="moduleSelectRadio"]').on('change', function () {
         $("#select_page_id").find('option').remove().end();
         SELECT_PAGE_OPTIONS_FEEDBACK.forEach((data) => {
-            if($('input[name="moduleSelectRadio"]:checked').val() == data.module)
-            {
+            if ($('input[name="moduleSelectRadio"]:checked').val() == data.module) {
                 data.pages.forEach((item) => {
-                    $("#select_page_id").append($('<option>', {value: item, text: item}));
-                });   
+                    $("#select_page_id").append($('<option>', { value: item, text: item }));
+                });
             }
         });
     });
 
     SELECT_PAGE_OPTIONS_FEEDBACK.forEach((data) => {
-        if($('input[name="moduleSelectRadio"]:checked').val() == data.module)
-        {
+        if ($('input[name="moduleSelectRadio"]:checked').val() == data.module) {
             data.pages.forEach((item) => {
-                $("#select_page_id").append($('<option>', {value: item, text: item}));
+                $("#select_page_id").append($('<option>', { value: item, text: item }));
             });
 
-            try { 
+            try {
                 const page = $('#target_page').val();
                 $("#select_page_id").find('option[value="' + page + '"]').attr("selected", "selected");
-               
+
             } catch (error) {
                 console.log(error);
             }
@@ -133,18 +124,16 @@ const updateSelectPageWhenModuleChanges = () => {
 const enableSubmit = function () {
     $('input[name="opinionRadio"]').on('change', () => {
         const isEmailValid = $('#email').val().length > 0 || feedback_top_component === 'false';
-        if($('input[name="opinionRadio"]').is(':checked') && isEmailValid)
-        {    
+        if ($('input[name="opinionRadio"]').is(':checked') && isEmailValid) {
             $("#submit_btn").attr('disabled', false);
         }
         else {
             $("#submit_btn").attr('disabled', true);
         }
-    })    
-    if(feedback_top_component === 'true'){
+    })
+    if (feedback_top_component === 'true') {
         $('#email').on('input', () => {
-            if($('input[name="opinionRadio"]').is(':checked') && $('#email').val().length > 0)
-            {    
+            if ($('input[name="opinionRadio"]').is(':checked') && $('#email').val().length > 0) {
                 $("#submit_btn").attr('disabled', false);
             }
             else {
@@ -166,23 +155,24 @@ const handleFeedbackSubmit = () => {
     const revisitRadioBtn = document.querySelectorAll('input[name = "revisit"]');
     const revisitStatus = Array.from(revisitRadioBtn).filter((el) => el.checked);
     let revisit = revisitStatus.length ? revisitStatus[0].value : '';
-    if(language === null){
+    if (language === null) {
         ALL_LANGUAGES.forEach((lang) => {
-            if(lang.id === sessionStorage.getItem("i18n")) { language = lang.value; }});
+            if (lang.id === sessionStorage.getItem("i18n")) { language = lang.value; }
+        });
     }
-        
+
 
     const fd = new FormData();
     OPINION_RATING_MAPPING.forEach((op) => {
-        if(op.opinion === $('input[name = "opinionRadio"]:checked').val()){
+        if (op.opinion === $('input[name = "opinionRadio"]:checked').val()) {
             rating = op.value;
         }
     });
 
-    if(category === 'category'){
+    if (category === 'category') {
         category = '';
-    } 
-    if($("#feedback_description").val().length === 0){
+    }
+    if ($("#feedback_description").val().length === 0) {
         category = '';
     }
 
@@ -205,18 +195,23 @@ const handleFeedbackSubmit = () => {
         mode: 'cors',
         body: fd,
     })
-    .then((res) => res.json())
-    .then((response) => {
-        $("#feedback_modal").modal("hide");
-        if(response.statusCode == 200){
-            $("#feedback_thanku_modal").modal("show");  
-            resetFeedback();      
-        }
-        else {
-            showErrorPopup(response.status);
-        }
-    })
-    .catch(() => { $("#feedback_modal").modal("hide");showErrorPopup();});
+        .then((data) => {
+            if (!data.ok) {
+                throw (data.status || 500);
+            } else {
+                return Promise.resolve(data.json());
+            }
+        })
+        .catch(errStatus => {
+            showErrorPopup(errStatus);
+            throw errStatus
+        })
+        .then(() => {
+            $("#feedback_modal").modal("hide");
+            $("#feedback_thanku_modal").modal("show");
+            resetFeedback();
+        })
+        .catch(() => { $("#feedback_modal").modal("hide"); });
 };
 
 const resetFeedback = () => {
@@ -225,16 +220,16 @@ const resetFeedback = () => {
     const feedback = document.querySelector("#feedback_description");
     const recommendedFeedback = document.querySelector(
         'input[name = "recommend"]:checked'
-      );
-      const revisitFeedback = document.querySelector(
+    );
+    const revisitFeedback = document.querySelector(
         'input[name = "revisit"]:checked'
-      );
-      if (recommendedFeedback) recommendedFeedback.checked = false;
-      if (revisitFeedback) revisitFeedback.checked = false;
+    );
+    if (recommendedFeedback) recommendedFeedback.checked = false;
+    if (revisitFeedback) revisitFeedback.checked = false;
 
-    if(category) category.selected = true;
+    if (category) category.selected = true;
     feedback.value = '';
-    if(opinion) opinion.checked = false;
+    if (opinion) opinion.checked = false;
     resetSVG();
     $("#submit_btn").attr('disabled', true);
     checkGivingFeedbackFor();
@@ -243,7 +238,7 @@ const resetFeedback = () => {
 }
 
 const initializeFeedbackModal = () => {
-    
+
     $(() => {
         $("#feedback_close_btn").click(() => {
             $("#feedback_modal").modal("hide");
@@ -263,7 +258,7 @@ const initializeFeedbackModal = () => {
     $('#feedback_button').on('click', () => {
         enableSubmit();
     })
-    if(feedback_top_component === 'true'){
+    if (feedback_top_component === 'true') {
         $('.email-component').show()
         $('.content-component').show()
         $('.page-type-component').show()

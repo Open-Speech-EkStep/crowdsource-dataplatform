@@ -274,9 +274,9 @@ const handleSubmitFeedback = function () {
       });
       $("#other_text").val("");
     }else {
-      $("#report_sentence_modal").modal('hide'); showErrorPopup(resp.status);
+      $("#report_sentence_modal").modal('hide');
   }
-  }).catch(()=> { $("#report_sentence_modal").modal('hide'); showErrorPopup()});
+  }).catch(()=> { $("#report_sentence_modal").modal('hide'); });
 }
 
 const setSentence = function (text) {

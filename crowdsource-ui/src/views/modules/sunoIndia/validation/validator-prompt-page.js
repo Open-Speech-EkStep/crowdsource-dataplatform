@@ -496,10 +496,10 @@ const handleSubmitFeedback = function () {
         $(this).prop("checked", false);
       });
       $("#other_text").val("");
-    }else {
-      $("#report_sentence_modal").modal('hide'); showErrorPopup(resp.status);
+    } else {
+      $("#report_sentence_modal").modal('hide');
   }
-  }).catch(()=> { $("#report_sentence_modal").modal('hide'); showErrorPopup()});
+  }).catch(()=> { $("#report_sentence_modal").modal('hide'); });
 }
 
 let selectedReportVal = '';
