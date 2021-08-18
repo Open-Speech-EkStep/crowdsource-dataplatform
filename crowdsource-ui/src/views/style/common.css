@@ -110,7 +110,7 @@ body {
   display: none;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   #report_btn {
     margin-right: 0;
     margin-left: 1rem;
@@ -252,6 +252,12 @@ body {
   #report_sentence_modal  .modal-body {
     height: 410px;
     overflow: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .padding-top-65 {
+    padding-top: 65px !important;
   }
 }
 

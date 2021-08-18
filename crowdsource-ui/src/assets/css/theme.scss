@@ -371,7 +371,7 @@ audio {
   color: $primary-color;
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 768px) {
   .btn-transparent {
     &:hover {
       background-color: rgba(15, 39, 73, 0.1) !important;
@@ -423,7 +423,7 @@ audio {
   }
 }
 
-@media screen and (max-width: 766px) {
+@media screen and (max-width: 767px) {
   .expand-view-text {
     font-size: 13px !important;
     margin-top: 4px !important;
