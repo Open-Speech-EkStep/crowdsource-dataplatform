@@ -119,3 +119,6 @@
   max-width: 90%;
 }
 
+.cursor-no-drop {
+  cursor: no-drop;
+}

@@ -1,40 +1,43 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/card.css">
-<div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card card1 mr-lg-3 mr-md-4 justify-content-center align-items-center pb-0 py-md-3 py-lg-3 cursor-pointer" id="left" style="min-height:190px!important">
-    <div class="row position-absolute" id="cont-warning-msg">
-        <div class="warning-mesg d-flex align-items-center">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.953 2C6.465 2 2 6.486 2 12C2 17.514 6.486 22 12 22C17.514 22 22 17.514 22 12C22 6.486 17.493 2 11.953 2ZM12 20C7.589 20 4 16.411 4 12C4 7.589 7.567 4 11.953 4C16.391 4 20 7.589 20 12C20 16.411 16.411 20 12 20Z" fill="#0f2749"/>
-                <path d="M11 7H13V14H11V7ZM11 15H13V17H11V15Z" fill="#0f2749"/>
-                </svg>
-                
-             <p class="pl-2 m-0"><%= __('Only validations invited for the selected language')%></p>
-        </div>
-     </div>
-    <div id="left_container" class="row align-items-center py-lg-5 position-relative col-10 card_container px-0" style="height:100%">
-        <div class="col-8 col-md-9 px-0">
-            <h1 class="display-5">
-                <%= left.h1 %>
-            </h1>
-            <div class="mt-3 font-weight-normal">
-                <%= left.h2 %>
+<div class="row col-12 p-0 col-md-5 col-lg-5 justify-content-center align-items-center m-0 w-100 h-100" id="contribute-row">
+    <div class="col-12 text-dark mt-4 card card1 mr-lg-3 mr-md-4 justify-content-center align-items-center pb-0 py-md-3 py-lg-3 cursor-pointer" id="left" style="min-height:190px!important">
+        <div class="row position-absolute" id="cont-warning-msg">
+            <div class="warning-mesg d-flex align-items-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.953 2C6.465 2 2 6.486 2 12C2 17.514 6.486 22 12 22C17.514 22 22 17.514 22 12C22 6.486 17.493 2 11.953 2ZM12 20C7.589 20 4 16.411 4 12C4 7.589 7.567 4 11.953 4C16.391 4 20 7.589 20 12C20 16.411 16.411 20 12 20Z" fill="#0f2749"/>
+                    <path d="M11 7H13V14H11V7ZM11 15H13V17H11V15Z" fill="#0f2749"/>
+                    </svg>
+                    
+                 <p class="pl-2 m-0"><%= __('Only validations invited for the selected language')%></p>
             </div>
-        </div>
-        <div class="col-4 col-md-3 text-right px-0 pt-3 pt-lg-0 pt-md-0">
-            <img src="<%= left.img %>" alt="speaker" id="start_recording" class="cursor-pointer left-logo img-fluid" width="140px" height="140px">
-        </div>
-
-        <div id="left-p-2" class="col-12 d-none position-absolute px-0" style="bottom:1rem">
-            <div>
-                <%= left.p1 %>
+         </div>
+        <div id="left_container" class="row align-items-center py-lg-5 position-relative col-10 card_container px-0" style="height:100%">
+            <div class="col-8 col-md-9 px-0">
+                <h1 class="display-5">
+                    <%= left.h1 %>
+                </h1>
+                <div class="mt-3 font-weight-normal">
+                    <%= left.h2 %>
+                </div>
             </div>
-            <div class="col-5 col-lg-5 col-xl-4 d-none" id="left-loader">
-                <div><span class="spinner"></span></div>
+            <div class="col-4 col-md-3 text-right px-0 pt-3 pt-lg-0 pt-md-0">
+                <img src="<%= left.img %>" alt="speaker" id="start_recording" class="cursor-pointer left-logo img-fluid" width="140px" height="140px">
             </div>
-            <div id="left-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
+    
+            <div id="left-p-2" class="col-12 d-none position-absolute px-0" style="bottom:1rem">
+                <div>
+                    <%= left.p1 %>
+                </div>
+                <div class="col-5 col-lg-5 col-xl-4 d-none" id="left-loader">
+                    <div><span class="spinner"></span></div>
+                </div>
+                <div id="left-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
+            </div>
         </div>
     </div>
 </div>
-<div class="col-12 col-md-5 col-lg-5 text-dark mt-4 card min-height-190 card2 ml-lg-3 ml-md-4 justify-content-center align-items-center pb-0 py-md-3 py-lg-3 cursor-pointer" id="right" style="min-height:190px!important">
+<div class="row col-12 p-0 col-md-5 col-lg-5 justify-content-center align-items-center m-0 w-100 h-100" id="validate-row">
+<div class="col-12 text-dark mt-4 card min-height-190 card2 ml-lg-3 ml-md-4 justify-content-center align-items-center pb-0 py-md-3 py-lg-3 cursor-pointer" id="right" style="min-height:190px!important">
     <div class="row position-absolute" id="warning-msg">
        <div class="warning-mesg d-flex align-items-center">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,5 +69,6 @@
             <div id="right-p-3" class="font-wt-900 mt-2 mt-lg-2"></div>
         </div>
     </div>
+</div>
 </div>
 <script src="/js/common/card.js"></script>

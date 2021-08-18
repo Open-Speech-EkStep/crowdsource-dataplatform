@@ -149,6 +149,8 @@ const safeErrorHandling = (data) => {
 const showFunctionalCards = (type, fromLanguage, toLanguage) => {
   let contributeCard = $("#left");
   let validateCard = $("#right");
+  let contributeCardRow = $("#contribute-row");
+  let validateCardRow = $("#validate-row");
   getJson('/aggregated-json/languagesWithData.json')
     .then(languagesWithDataJson => {
       var hasTarget, isAllContributed;
@@ -165,22 +167,31 @@ const showFunctionalCards = (type, fromLanguage, toLanguage) => {
             isAllContributed = filteredData.isallcontributed || false;
             if (hasTarget && !isAllContributed) {
               contributeCard.removeClass("cont-validate-disabled");
+              contributeCardRow.removeClass("cursor-no-drop");
               validateCard.removeClass("validate-disabled");
             } else if (hasTarget && isAllContributed) {
               validateCard.removeClass("validate-disabled");
+              validateCardRow.removeClass("cursor-no-drop");
+              contributeCardRow.addClass("cursor-no-drop");
               contributeCard.addClass("cont-validate-disabled");
             } else if (!hasTarget && !isAllContributed) {
               contributeCard.removeClass("cont-validate-disabled");
+              contributeCardRow.removeClass("cursor-no-drop");
               validateCard.addClass("validate-disabled");
+              validateCardRow.addClass("cursor-no-drop");
             } else {
               contributeCard.addClass("cont-validate-disabled");
               validateCard.addClass("validate-disabled");
+              validateCardRow.addClass("cursor-no-drop");
+              contributeCardRow.addClass("cursor-no-drop");
             }
           }).catch(e => console.log(e))
       }
       else {
         contributeCard.addClass("cont-validate-disabled");
         validateCard.addClass("validate-disabled");
+        validateCardRow.addClass("cursor-no-drop");
+        contributeCardRow.addClass("cursor-no-drop");
       }
     }).catch(e => console.log(e))
 }
