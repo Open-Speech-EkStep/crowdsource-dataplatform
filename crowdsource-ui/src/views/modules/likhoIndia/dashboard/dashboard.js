@@ -11,7 +11,7 @@ const {
     // toggleFooterPosition,
     getLocaleString
 } = require('../common/utils');
-const { hasUserRegistered, updateLikhoLocaleLanguagesDropdown } = require('../common/common');
+const { hasUserRegistered, updateLikhoLocaleLanguagesDropdown, showErrorPopup } = require('../common/common');
 const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE, SPEAKER_DETAILS_KEY, CONTRIBUTION_LANGUAGE,
     LIKHO_TO_LANGUAGE } = require('../common/constants');
 const fetch = require('../common/fetch');
@@ -29,13 +29,17 @@ let languageToRecord = '';
 
 const fetchDetail = (language) => {
     const url = language ? '/aggregate-data-count/parallel?byLanguage=true' : '/aggregate-data-count/parallel'
-    return fetch(url).then((data) => {
+    return fetch(url).then(data => {
         if (!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
+          throw (data.status || 500);
         } else {
-            return Promise.resolve(data.json());
+          return Promise.resolve(data.json());
         }
-    });
+      })
+      .catch(errStatus => {
+        showErrorPopup(errStatus);
+        throw errStatus
+      }) 
 };
 
 function isLanguageAvailable(data, lang) {

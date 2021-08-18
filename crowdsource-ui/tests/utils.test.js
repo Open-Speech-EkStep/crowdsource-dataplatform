@@ -15,6 +15,73 @@ describe('test utils', () => {
             jest.resetAllMocks();
         })
 
+        test("should show error popup with default message if server responds not ok", async () => {
+
+            Object.setPrototypeOf(
+                $('#errorPopup'),
+                Object.assign(
+                    Object.getPrototypeOf($('#errorPopup')),
+                    { modal: jest.fn()}
+                )
+            )
+
+            Object.setPrototypeOf(
+                $('#error-text'),
+                Object.assign(
+                    Object.getPrototypeOf($('#error-text')),
+                    { text: jest.fn()}
+                )
+            )
+
+            origFetch.mockImplementation(() => {
+                const res = {};
+                res.ok = false;
+                return Promise.resolve(res);
+            });
+
+            return performAPIRequest("/aggregate-data-count").catch(() => {
+                expect($('#errorPopup').modal).toHaveBeenCalledWith('show');
+                expect($("#error-text").text).toHaveBeenCalledWith("An unexpected error has occurred.")
+            }).then(() => {
+                delete Object.getPrototypeOf($('#errorPopup')).modal;
+                delete Object.getPrototypeOf($('#error-text')).text;
+            });
+        });
+
+        test("should show error popup with message specific for 503 if server responds not ok and status is 503", async () => {
+
+            Object.setPrototypeOf(
+                $('#errorPopup'),
+                Object.assign(
+                    Object.getPrototypeOf($('#errorPopup')),
+                    { modal: jest.fn()}
+                )
+            )
+
+            Object.setPrototypeOf(
+                $('#error-text'),
+                Object.assign(
+                    Object.getPrototypeOf($('#error-text')),
+                    { text: jest.fn()}
+                )
+            )
+
+            origFetch.mockImplementation(() => {
+                const res = {};
+                res.ok = false;
+                res.status = 503;
+                return Promise.resolve(res);
+            });
+
+            return performAPIRequest("/aggregate-data-count").catch(() => {
+                expect($('#errorPopup').modal).toHaveBeenCalledWith('show');
+                expect($("#error-text").text).toHaveBeenCalledWith("We are processing multiple requests at the moment. Please try again after sometime.")
+            }).then(() => {
+                delete Object.getPrototypeOf($('#errorPopup')).modal;
+                delete Object.getPrototypeOf($('#error-text')).text;
+            });
+        });
+
         test("should give details for given language if server responds ok", async () => {
             const testData = {
                 data: [{

@@ -2,6 +2,7 @@ const { LOCALE_STRINGS } = require("./constants");
 const fetch = require("./fetch");
 
 const { getLocaleString } = require("./utils");
+const { showErrorPopup } = require("./common");
 const executeOnReady = function () {
   let audioData = [];
   let recordingLength = 0;
@@ -217,13 +218,20 @@ const executeOnReady = function () {
       method: "POST",
       body: fd,
     })
-      .then((res) => res.json())
+    .then(data => {
+      if (!data.ok) {
+        throw (data.status || 500);
+      } else {
+        return Promise.resolve(data.json());
+      }
+    })
       .then((result) => {
         showAmbientNoise(result);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(errStatus => {
+        showErrorPopup(errStatus);
+        throw errStatus
+      })
   };
 
   const testMic = (btnDataAttr) => {
