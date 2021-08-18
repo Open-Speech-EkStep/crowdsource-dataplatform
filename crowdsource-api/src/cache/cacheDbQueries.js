@@ -10,7 +10,7 @@ and coalesce(mds.is_active, true) = true
 and (conf.value=1 or is_profane=false)
 and (conf2.value=0 or for_demo=true)
 group by dataset_row.dataset_row_id, dataset_row.media->>'data'
-limit 10000;`;
+limit $4;`;
 
 const getParallelContributionDataForCaching = `with existingData as 
 (select con.dataset_row_id from contributions con 
@@ -33,7 +33,7 @@ where ((state is null) or ((state='contributed' or state='validated') and ed.dat
 and coalesce(mds.is_active, true) = true
  and (conf.value=1 or is_profane=false)
  and (conf2.value=0 or for_demo=true)
-  group by dr."dataset_row_id", dr.media->>'data' limit 10000;`;
+  group by dr."dataset_row_id", dr.media->>'data' limit $4;`;
 
 const getValidationDataForCaching = `select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id, null as source_info, 
 cont.contributor_identifier::text || '-' || cont.user_name as contributed_by, string_agg(cont2.contributor_identifier::text || '-' || cont2.user_name, ', ') as skipped_by,
@@ -56,7 +56,7 @@ count(distinct val.validation_id) as validation_count
 	group by con.dataset_row_id, ds.media->>'data', con.contribution_id, conf.value, cont.contributor_identifier, cont.user_name
 	having count(distinct val.validation_id)<conf.value
     order by count(val.*) desc
-	limit 10000;`;
+	limit $4;`;
 
 const getParallelValidationDataForCaching = `select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id, null as source_info, 
 cont.contributor_identifier::text || '-' || cont.user_name as contributed_by, string_agg(cont2.contributor_identifier::text || '-' || cont2.user_name, ', ') as skipped_by, 
@@ -77,7 +77,7 @@ count(distinct val.validation_id) validation_count
   and (conf3.value=0 or for_demo=true)
   group by con.dataset_row_id, ds.media->>'data', con.media->>'data', con.contribution_id, conf.value, cont.contributor_identifier, cont.user_name
   having count(distinct val.validation_id)<conf.value
-  limit 10000;`;
+  limit $4;`;
 
 module.exports = {
   getContributionDataForCaching,

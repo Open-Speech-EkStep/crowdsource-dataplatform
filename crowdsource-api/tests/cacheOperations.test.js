@@ -13,7 +13,8 @@ jest.mock('../src/cache/cache', () => ({
 jest.mock('config', () => ({
     "caching": "enabled",
     "validation_count": 3,
-    "cache_timeout": 600
+    "cache_timeout": 600,
+    "cache_batch_size": 1000
 }));
 
 const mockCache = require('../src/cache/cache')
@@ -25,7 +26,7 @@ describe("Running tests for cacheOperations", () => {
 
     })
 
-    const language = "Hindi", toLanguage = "Tamil"
+    const language = "Hindi", toLanguage = "Tamil", limit = 1000;
 
     afterEach(() => {
         jest.clearAllMocks();
@@ -39,7 +40,7 @@ describe("Running tests for cacheOperations", () => {
             { dataset_row_id: 3, media_data: "some text 3", source_info: null, skipped_by: null },
         ];
 
-        when(spyDBany).calledWith(getContributionDataForCaching, [type, language, toLanguage]).mockReturnValue(Promise.resolve(mockResult));
+        when(spyDBany).calledWith(getContributionDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
 
         await cacheOperations.setContributionDataForCaching(mockDB, type, language, toLanguage);
 
@@ -144,7 +145,7 @@ describe("Running tests for cacheOperations", () => {
             { dataset_row_id: 3, media_data: "some text 3", source_info: null, skipped_by: null },
         ];
 
-        when(spyDBany).calledWith(getParallelContributionDataForCaching, [type, language, toLanguage]).mockReturnValue(Promise.resolve(mockResult));
+        when(spyDBany).calledWith(getParallelContributionDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
 
         await cacheOperations.setContributionDataForCaching(mockDB, type, language, toLanguage);
 
@@ -159,7 +160,7 @@ describe("Running tests for cacheOperations", () => {
             { dataset_row_id: 3, sentence: "some text 3", contribution: "some contribution 3", contribution_id: 33,source_info: null, contributed_by: null, skipped_by: null, validation_count: 0 },
         ];
 
-        when(spyDBany).calledWith(getValidationDataForCaching, [type, language, toLanguage]).mockReturnValue(Promise.resolve(mockResult));
+        when(spyDBany).calledWith(getValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
 
         await cacheOperations.setValidationDataForCaching(mockDB, type, language, toLanguage);
 
@@ -176,7 +177,7 @@ describe("Running tests for cacheOperations", () => {
 
         const lesserThanValidationCount = mockResult.filter(d => d.validation_count < 3);
 
-        when(spyDBany).calledWith(getValidationDataForCaching, [type, language, toLanguage]).mockReturnValue(Promise.resolve(mockResult));
+        when(spyDBany).calledWith(getValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
 
         await cacheOperations.setValidationDataForCaching(mockDB, type, language, toLanguage);
 
@@ -198,7 +199,7 @@ describe("Running tests for cacheOperations", () => {
 		})
 		.reverse();
 
-        when(spyDBany).calledWith(getValidationDataForCaching, [type, language, toLanguage]).mockReturnValue(Promise.resolve(mockResult));
+        when(spyDBany).calledWith(getValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
 
         await cacheOperations.setValidationDataForCaching(mockDB, type, language, toLanguage);
 
@@ -212,7 +213,7 @@ describe("Running tests for cacheOperations", () => {
             { dataset_row_id: 3, sentence: "some text 3", contribution: "some contribution 3", contribution_id: 33, source_info: null, contributed_by: null, skipped_by: null, validation_count: 0 },
         ];
 
-        when(spyDBany).calledWith(getParallelValidationDataForCaching, [type, language, toLanguage]).mockReturnValue(Promise.resolve(mockResult));
+        when(spyDBany).calledWith(getParallelValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
 
         await cacheOperations.setValidationDataForCaching(mockDB, type, language, toLanguage);
 
@@ -228,7 +229,7 @@ describe("Running tests for cacheOperations", () => {
         ];
         const lesserThanValidationCount = mockResult.filter(d => d.validation_count < 3);
 
-        when(spyDBany).calledWith(getParallelValidationDataForCaching, [type, language, toLanguage]).mockReturnValue(Promise.resolve(mockResult));
+        when(spyDBany).calledWith(getParallelValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
 
         await cacheOperations.setValidationDataForCaching(mockDB, type, language, toLanguage);
 
@@ -249,7 +250,7 @@ describe("Running tests for cacheOperations", () => {
 		})
 		.reverse();
 
-        when(spyDBany).calledWith(getParallelValidationDataForCaching, [type, language, toLanguage]).mockReturnValue(Promise.resolve(mockResult));
+        when(spyDBany).calledWith(getParallelValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
 
         await cacheOperations.setValidationDataForCaching(mockDB, type, language, toLanguage);
 

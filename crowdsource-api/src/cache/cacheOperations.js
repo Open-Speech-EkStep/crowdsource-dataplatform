@@ -10,6 +10,7 @@ const config = require('config');
 const cachingEnabled = config.caching ? config.caching == "enabled" : false;
 const validation_count = config.validation_count ? Number(config.validation_count) : 5; 
 const expiry = config.cache_timeout || Number(config.cache_timeout) || 1800;
+const batchSize = config.cache_batch_size || 5000; 
 
 const getRandom = (arr, n) => {
 	var len = arr.length;
@@ -95,7 +96,7 @@ module.exports = {
 			return;
 		}
 		try {
-			db.any(type == 'parallel' ? getParallelContributionDataForCaching : getContributionDataForCaching, [type, language, toLanguage])
+			db.any(type == 'parallel' ? getParallelContributionDataForCaching : getContributionDataForCaching, [type, language, toLanguage, batchSize])
 				.then(async (data) => {
 					console.log("cacheLength", data.length)
 					await cache.setAsync(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(data), expiry);
@@ -166,7 +167,7 @@ module.exports = {
 			return;
 		}
 		try {
-			db.any(type == 'parallel' ? getParallelValidationDataForCaching : getValidationDataForCaching, [type, language, toLanguage])
+			db.any(type == 'parallel' ? getParallelValidationDataForCaching : getValidationDataForCaching, [type, language, toLanguage, batchSize])
 				.then(async (data) => {
 					console.log("cacheLength", data.length)
 					data = sortAndFilterValidationData(data);

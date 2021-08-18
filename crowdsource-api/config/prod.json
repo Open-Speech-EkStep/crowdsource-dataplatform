@@ -3,5 +3,6 @@
     "envName": "prod",
     "caching": "disabled",
     "validation_count": "5",
-    "cache_timeout": "1800"
+    "cache_timeout": "1800",
+    "cache_batch_size": "7500"
 }
