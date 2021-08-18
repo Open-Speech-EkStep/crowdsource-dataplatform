@@ -195,17 +195,6 @@ const verifyUser = (userName) => {
             'Content-Type': 'application/json',
         },
     })
-    .then((data) => {
-        if (!data.ok) {
-          throw (data.status || 500);
-        } else {
-          return Promise.resolve(data.json());
-        }
-      })
-      .catch(errStatus => {
-        showErrorPopup(errStatus);
-        throw errStatus
-      });
 }
 
 const storeToLocal = (speakerDetailsKey, speakerDetails, contributionLanguage, url) => {

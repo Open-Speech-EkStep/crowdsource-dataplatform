@@ -2,7 +2,7 @@ const { updateLineGraph } = require('../common/lineGraph');
 const { generateIndiaMap } = require('../common/map');
 const { setUserNameOnInputFocus, setStartRecordingBtnOnClick, setUserModalOnShown,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
 const { updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
-const { hasUserRegistered } = require('../common/common');
+const { hasUserRegistered, showErrorPopup } = require('../common/common');
 const { DEFAULT_CON_LANGUAGE,CURRENT_MODULE ,CONTRIBUTION_LANGUAGE,MODULE,SPEAKER_DETAILS_KEY} = require('../common/constants');
 const fetch = require('../common/fetch');
 const {setSpeakerData} = require('../common/contributionStats');
@@ -16,13 +16,17 @@ let timer;
 let languageToRecord = '';
 const fetchDetail = (language) => {
     const url = language ? '/aggregate-data-count/ocr?byLanguage=true' : '/aggregate-data-count/ocr'
-    return fetch(url).then((data) => {
+    return fetch(url).then(data => {
         if (!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
+          throw (data.status || 500);
         } else {
-            return Promise.resolve(data.json());
+          return Promise.resolve(data.json());
         }
-    });
+      })
+      .catch(errStatus => {
+        showErrorPopup(errStatus);
+        throw errStatus
+      });
 };
 
 function isLanguageAvailable(data, lang) {

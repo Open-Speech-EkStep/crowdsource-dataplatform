@@ -13,11 +13,11 @@ const {
   getDeviceInfo
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS} = require('../common/constants');
-const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showOrHideExtensionCloseBtn,isMobileDevice,  showErrorPopup} = require('../common/common');
-const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
-const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS } = require('../common/constants');
+const { showKeyboard, setInput } = require('../common/virtualKeyboard');
+const { isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, showOrHideExtensionCloseBtn, isMobileDevice, showErrorPopup } = require('../common/common');
+const { showUserProfile, onChangeUser, onOpenUserDropDown } = require('../common/header');
+const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const { setDataSource } = require('../common/sourceInfo');
 
 const { initializeFeedbackModal } = require('../common/feedback');
@@ -53,7 +53,7 @@ function markContributionSkipped() {
   const reqObj = {
     sentenceId: dekhoIndia.sentences[currentIndex].dataset_row_id,
     userName: speakerDetails.userName,
-    language:contributionLanguage,
+    language: contributionLanguage,
     device: getDeviceInfo(),
     browser: getBrowserInfo(),
     state_region: state_region,
@@ -69,17 +69,17 @@ function markContributionSkipped() {
     },
     body: JSON.stringify(reqObj),
   })
-  .then(data => {
-    if (!data.ok) {
-      throw (data.status || 500);
-    } else {
-      return Promise.resolve(data.json());
-    }
-  })
-  .catch(errStatus => {
-    showErrorPopup(errStatus);
-    throw errStatus
-  })
+    .then(data => {
+      if (!data.ok) {
+        throw (data.status || 500);
+      } else {
+        return Promise.resolve(data.json());
+      }
+    })
+    .catch(errStatus => {
+      showErrorPopup(errStatus);
+      throw errStatus
+    })
 }
 
 function uploadToServer(cb) {
@@ -103,17 +103,17 @@ function uploadToServer(cb) {
     mode: 'cors',
     body: fd,
   })
-  .then(data => {
-    if (!data.ok) {
-      throw (data.status || 500);
-    } else {
-      return Promise.resolve(data.json());
-    }
-  })
-  .catch(errStatus => {
-    showErrorPopup(errStatus);
-    throw errStatus
-  })
+    .then(data => {
+      if (!data.ok) {
+        throw (data.status || 500);
+      } else {
+        return Promise.resolve(data.json());
+      }
+    })
+    .catch(errStatus => {
+      showErrorPopup(errStatus);
+      throw errStatus
+    })
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -128,7 +128,7 @@ let validationCount = 0;
 function getNextSentence() {
   if (currentIndex < dekhoIndia.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length);
+    updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length);
     const encodedUrl = encodeURIComponent(dekhoIndia.sentences[currentIndex].media_data);
     setDekhoImage(`${cdn_url}/${encodedUrl}`);
     setDataSource(dekhoIndia.sentences[currentIndex].source_info);
@@ -170,17 +170,17 @@ function skipValidation(action) {
       'Content-Type': 'application/json',
     },
   })
-  .then(data => {
-    if (!data.ok) {
-      throw (data.status || 500);
-    } else {
-      return Promise.resolve(data.json());
-    }
-  })
-  .catch(errStatus => {
-    showErrorPopup(errStatus);
-    throw errStatus
-  })
+    .then(data => {
+      if (!data.ok) {
+        throw (data.status || 500);
+      } else {
+        return Promise.resolve(data.json());
+      }
+    })
+    .catch(errStatus => {
+      showErrorPopup(errStatus);
+      throw errStatus
+    })
 }
 
 const openEditor = function () {
@@ -216,7 +216,7 @@ function addListeners() {
   $("#edit").focus(function () {
     const isPhysicalKeyboardOn = localStorage.getItem("physicalKeyboard");
 
-    if(!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false' && !isMobileDevice()){
+    if (!isKeyboardExtensionPresent() && isPhysicalKeyboardOn === 'false' && !isMobileDevice()) {
       showElement($('#keyboardBox'));
     }
   });
@@ -348,10 +348,10 @@ const handleSubmitFeedback = function () {
         $(this).prop("checked", false);
       });
       $("#other_text").val("");
-    }else {
+    } else {
       $("#report_sentence_modal").modal('hide'); showErrorPopup(resp.status);
-  }
-  }).catch(()=> { $("#report_sentence_modal").modal('hide'); showErrorPopup()});
+    }
+  }).catch(() => { $("#report_sentence_modal").modal('hide'); showErrorPopup() });
 }
 
 const initializeComponent = () => {
@@ -402,7 +402,7 @@ const initializeComponent = () => {
     setDataSource(validationData.source_info);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1,dekhoIndia.sentences.length)
+    updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length)
   }
 
 }
@@ -413,7 +413,7 @@ const getLocationInfo = () => {
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
-  }).catch((err) => {console.log(err)});
+  }).catch((err) => { console.log(err) });
 }
 
 let selectedReportVal = '';
@@ -428,7 +428,7 @@ const executeOnLoad = function () {
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const localeLanguage = localeStrings[language];
   $('#keyboardLayoutName').text(localeLanguage);
-  showKeyboard(language.toLowerCase(),enableCancelButton,disableCancelButton);
+  showKeyboard(language.toLowerCase(), enableCancelButton, disableCancelButton);
   hideElement($('#keyboardBox'));
 
   if (language) {
@@ -454,7 +454,7 @@ const executeOnLoad = function () {
     }
 
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./record.html',MODULE.dekho.value);
+    onChangeUser('./record.html', MODULE.dekho.value);
     onOpenUserDropDown();
     const isExistingUser = localSentencesParsed &&
       localSentencesParsed.userName === localSpeakerDataParsed.userName
@@ -481,41 +481,41 @@ const executeOnLoad = function () {
           'Content-Type': 'application/json',
         },
       })
-      .then(data => {
-        if (!data.ok) {
-          throw (data.status || 500);
-        } else {
-          return Promise.resolve(data.json());
-        }
-      })
-      .catch(errStatus => {
-        showErrorPopup(errStatus);
-        throw errStatus
-      }).then((sentenceData) => {
-        dekhoIndia.sentences = sentenceData.data ? sentenceData.data : [];
-        localStorage.setItem(dekhoCountKey, dekhoIndia.sentences.length);
-        localStorage.setItem(
-          sentencesKey,
-          JSON.stringify({
-            userName: localSpeakerDataParsed.userName,
-            sentences: dekhoIndia.sentences,
-            language: localSpeakerDataParsed.language,
-            toLanguage: ''
-          })
-        );
-        if (dekhoIndia.sentences.length === 0) {
-          showNoSentencesMessage();
-          return;
-        }
-        if (!isExistingUser) {
-          $validationInstructionModal.removeClass("d-none");
+        .then(data => {
+          if (!data.ok) {
+            throw (data.status || 500);
+          } else {
+            return Promise.resolve(data.json());
+          }
+        })
+        .catch(errStatus => {
+          showErrorPopup(errStatus);
+          throw errStatus
+        }).then((sentenceData) => {
+          dekhoIndia.sentences = sentenceData.data ? sentenceData.data : [];
+          localStorage.setItem(dekhoCountKey, dekhoIndia.sentences.length);
+          localStorage.setItem(
+            sentencesKey,
+            JSON.stringify({
+              userName: localSpeakerDataParsed.userName,
+              sentences: dekhoIndia.sentences,
+              language: localSpeakerDataParsed.language,
+              toLanguage: ''
+            })
+          );
+          if (dekhoIndia.sentences.length === 0) {
+            showNoSentencesMessage();
+            return;
+          }
+          if (!isExistingUser) {
+            $validationInstructionModal.removeClass("d-none");
+            setFooterPosition();
+          }
           setFooterPosition();
-        }
-        setFooterPosition();
 
-        initializeComponent();
-      }).then(() => {
-      });
+          initializeComponent();
+        }).then(() => {
+        });
     }
   } catch (err) {
     console.log(err);
@@ -525,10 +525,10 @@ const executeOnLoad = function () {
 $(document).ready(() => {
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
-  if(isMobileDevice()) {
+  if (isMobileDevice()) {
     hideElement($('#virtualKeyBoardBtn'));
   }
-  if(isMobileDevice() || isNotChrome){
+  if (isMobileDevice() || isNotChrome) {
     hideElement($('#extension-bar'));
   } else {
     showOrHideExtensionCloseBtn();

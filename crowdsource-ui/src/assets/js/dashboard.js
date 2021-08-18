@@ -7,7 +7,7 @@ const {
     setStartRecordingBtnOnClick } = require('./speakerDetails');
 const { updateLocaleLanguagesDropdown, calculateTime, getLocaleString, formatTime, getJson } = require('./utils');
 const { DEFAULT_CON_LANGUAGE, MODULE, CONTRIBUTION_LANGUAGE, SPEAKER_DETAILS_KEY } = require('../../../build/js/common/constants');
-const { hasUserRegistered } = require('./common');
+const { hasUserRegistered, showErrorPopup } = require('./common');
 const fetch = require('./fetch');
 const moment = require('moment');
 const LOCALE_STRINGS = 'localeString';
@@ -18,13 +18,17 @@ let languageToRecord = '';
 
 const fetchDetail = (language) => {
     const url = language ? '/aggregate-data-count/text?byLanguage=true' : '/aggregate-data-count/text'
-    return fetch(url).then((data) => {
+    return fetch(url).then(data => {
         if (!data.ok) {
-            throw Error(data.statusText || 'HTTP error');
+          throw (data.status || 500);
         } else {
-            return Promise.resolve(data.json());
+          return Promise.resolve(data.json());
         }
-    });
+      })
+      .catch(errStatus => {
+        showErrorPopup(errStatus);
+        throw errStatus
+      })
 };
 
 const getSpeakersData = (data, lang) => {

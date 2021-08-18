@@ -325,9 +325,9 @@ const updateTablesAfterValidation = async (req, res) => {
                         res.sendStatus(500);
                     });
                 db.none(updateViews).then().catch(console.log);
-                res.sendStatus(200);
+                res.status(200).send({message: "Validate Successfull"});
             }
-            else res.sendStatus(200);
+            else  res.status(200).send({message: "Skip Successfull"});
 
             cacheOperation.updateCacheAfterValidation(contributionId, type, fromLanguage, language, action, userId, userName);
         })

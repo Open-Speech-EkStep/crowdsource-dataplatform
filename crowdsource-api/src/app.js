@@ -168,7 +168,7 @@ router.post('/verify-user', async (req, res) => {
     const { userName } = req.body;
     try {
         await userVerify(userName, ROLE_UAT);
-        res.sendStatus(200);
+        res.status(200).send({ message: "User Verified Successfully" });
     } catch (err) {
         // console.log(err);
         res.sendStatus(401);

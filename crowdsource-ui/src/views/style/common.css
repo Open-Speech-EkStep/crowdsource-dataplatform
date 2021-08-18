@@ -247,7 +247,7 @@ body {
 
 @media (min-width: 700px){
   .padding-top-65 {
-    padding-top: 68px !important;
+    padding-top: 65px !important;
   }
   #report_sentence_modal  .modal-body {
     height: 410px;
