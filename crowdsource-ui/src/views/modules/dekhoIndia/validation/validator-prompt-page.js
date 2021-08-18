@@ -79,23 +79,10 @@ function uploadToServer(cb) {
     });
 }
 
-
-const animateCSS = ($element, animationName, callback) => {
-  $element.addClass(`animated ${animationName}`);
-
-  function handleAnimationEnd() {
-    $element.removeClass(`animated ${animationName}`);
-    $element.off('animationend');
-    if (typeof callback === 'function') callback();
-  }
-  $element.on('animationend', handleAnimationEnd);
-};
-
 function setCapturedText(index) {
   const $capturedtext = $('#original-text');
   const capturedText = dekhoIndiaValidator.sentences[index].contribution;
   $capturedtext.text(capturedText);
-  animateCSS($capturedtext, 'lightSpeedIn');
   $('#captured-text').text(capturedText);
   $('#edit').text(capturedText);
 }

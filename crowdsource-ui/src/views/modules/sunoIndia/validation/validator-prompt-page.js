@@ -217,23 +217,10 @@ let currentIndex = localStorage.getItem(currentIndexKey) || 0;
 // eslint-disable-next-line no-unused-vars
 let validationCount = 0;
 
-const animateCSS = ($element, animationName, callback) => {
-  $element.addClass(`animated ${animationName}`);
-
-  function handleAnimationEnd() {
-    $element.removeClass(`animated ${animationName}`);
-    $element.off('animationend');
-    if (typeof callback === 'function') callback();
-  }
-
-  $element.on('animationend', handleAnimationEnd);
-};
-
 function setSentenceLabel(index) {
   const $sentenceLabel = $('#sentenceLabel');
   const originalText = sunoIndiaValidator.sentences[index].contribution;
   $sentenceLabel[0].innerText = originalText;
-  animateCSS($sentenceLabel, 'lightSpeedIn');
   $('#original-text').text(originalText);
   $('#edit').text(originalText);
 }
