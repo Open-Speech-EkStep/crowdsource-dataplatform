@@ -270,10 +270,17 @@ const reportSentenceOrRecording = (reqObj) => {
         },
         body: JSON.stringify(reqObj),
       })
-        .then((res) => res.json())
-        .then((resp) => {
-          resolve(resp);
-        })
+      .then(data => {
+        if (!data.ok) {
+          throw (data.status || 500);
+        } else {
+          return Promise.resolve(data.json());
+        }
+      })
+      .catch(errStatus => {
+        showErrorPopup(errStatus);
+        throw errStatus
+      })  
     } catch (err) {
       reject(err);
     }
