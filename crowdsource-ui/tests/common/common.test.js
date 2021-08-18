@@ -626,40 +626,6 @@ describe('test common js', () => {
         expect($progressBar.css("width")).toEqual("50%")
       })
     })
-
-    test("should set current progress metric in progress bar for suno or bolo", () => {
-      // import * as Commons from '../../build/js/common' 
-      // const Commons = require('../../build/js/common/common.js')
-      // const replaceSubStr = jest.spyOn(Commons, 'replaceSubStr')
-      // jest.mock('../../build/js/common/common.js')
-      // const { replaceSubStr, updateGoalProgressBar: updateGoalProgressBarMock } = require('../../build/js/common/common.js')
-
-      // replaceSubStr.mockImplementation(() => {
-      //   console.log('hello');
-      // })
-
-      // updateGoalProgressBarMock.mockImplementation((url) => {
-      //   return updateGoalProgressBar(url)
-      // })
-
-      // const replaceSubStrSpy = jest.spyOn(Commons, 'replaceSubStr')
-      // localStorage.setItem('localeString', JSON.stringify({ "hour(s)": "hour(s)", "minute(s)": "minute(s)", "second(s)": "second(s)" }));
-      // localStorage.setItem(CURRENT_MODULE, 'suno');
-
-      // const origFetch = require('node-fetch');
-      // origFetch.mockImplementation(() => {
-      //   const res = {};
-      //   res.ok = true;
-      //   res.json = () => ({ goal: 100, 'current-progress': 1.25 });
-      //   return Promise.resolve(res);
-      // });
-
-      // return Commons.updateGoalProgressBar('/asr').then(() => {
-      //   const progressMetric = $("#contribution-made");
-      //   expect(replaceSubStr).toBeCalled()
-      //   // expect(progressMetric.html()).toEqual("1 hour(s) 15 minute(s)/100 Hour(s)");
-      // })
-    })
   })
 
   describe("hasUserRegistered", () => {

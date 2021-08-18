@@ -207,13 +207,12 @@ const handleFeedbackSubmit = () => {
     })
     .then((res) => res.json())
     .then((response) => {
-        if(response.statusCode == 200 && response.ok){
-            $("#feedback_modal").modal("hide");
+        $("#feedback_modal").modal("hide");
+        if(response.statusCode == 200){
             $("#feedback_thanku_modal").modal("show");  
             resetFeedback();      
         }
-        else{
-            $("#feedback_modal").modal("hide");
+        else {
             showErrorPopup(response.status);
         }
     })

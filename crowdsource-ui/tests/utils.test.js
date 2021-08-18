@@ -1,6 +1,7 @@
+jest.mock('node-fetch');
+const origFetch = require('node-fetch');
 const { calculateTime, formatTime, showElement, hideElement, performAPIRequest, formatTimeForLegends, translate } = require("../src/assets/js/utils");
 const { stringToHTML, mockLocalStorage } = require("./utils");
-const fetchMock = require("fetch-mock");
 const { readFileSync } = require("fs");
 
 document.body = stringToHTML(
@@ -9,42 +10,48 @@ document.body = stringToHTML(
 
 describe('test utils', () => {
     describe("performAPIRequest", () => {
-        test("should give details for given language if server responds ok", () => {
-            fetchMock.get("/aggregate-data-count", {
-                data: [
-                    {
-                        total_languages: "2",
-                        total_speakers: "80",
-                        total_contributions: "0.348",
-                        total_validations: "0.175",
-                    },
-                ],
+
+        afterEach(() => {
+            jest.resetAllMocks();
+        })
+
+        test("should give details for given language if server responds ok", async () => {
+            const testData = {
+                data: [{
+                    total_languages: "2",
+                    total_speakers: "80",
+                    total_contributions: "0.348",
+                    total_validations: "0.175",
+                }]
+            }
+
+            origFetch.mockImplementation(() => {
+                const res = {};
+                res.ok = true;
+                res.json = () => (testData);
+                return Promise.resolve(res);
             });
-            performAPIRequest("/aggregate-data-count").then((data) => {
-                expect(data).toEqual({
-                    data: [
-                        {
-                            total_languages: "2",
-                            total_speakers: "80",
-                            total_contributions: "0.348",
-                            total_validations: "0.175",
-                        },
-                    ],
-                });
-                fetchMock.reset();
+
+            return performAPIRequest("/aggregate-data-count").then(data => {
+                expect(data).toEqual(testData);
             });
         });
 
         test("should give details for all language if server responds ok", () => {
-            fetchMock.get(`/aggregate-data-count?byLanguage=${true}`, {
+            const testData = {
                 data: [{ language: "Hindi", count: 5 }],
+            }
+
+            origFetch.mockImplementation(() => {
+                const res = {};
+                res.ok = true;
+                res.json = () => (testData);
+                return Promise.resolve(res);
             });
-            performAPIRequest(`/aggregate-data-count?byLanguage=${true}`).then(
-                (data) => {
-                    expect(data).toEqual({ data: [{ language: "Hindi", count: 5 }] });
-                    fetchMock.reset();
-                }
-            );
+
+            return performAPIRequest(`/aggregate-data-count?byLanguage=${true}`).then(data => {
+                expect(data).toEqual(testData);
+            });
         });
 
         test("should give list for top-5 languages based on no. of contributions if server responds ok", () => {
@@ -52,10 +59,16 @@ describe('test utils', () => {
                 { language: "Hindi", contributions: 5 },
                 { language: "Odia", contributions: 4 },
             ];
-            fetchMock.get("/top-languages-by-hours", response);
-            performAPIRequest("/top-languages-by-hours").then((data) => {
+
+            origFetch.mockImplementation(() => {
+                const res = {};
+                res.ok = true;
+                res.json = () => (response);
+                return Promise.resolve(res);
+            });
+
+            return performAPIRequest("/top-languages-by-hours").then((data) => {
                 expect(data).toEqual(response);
-                fetchMock.reset();
             });
         });
     });

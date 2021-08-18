@@ -13,7 +13,6 @@ const { getContributedAndTopLanguage, hasUserRegistered, safeJqueryErrorHandling
 const { addToLanguage } = require('../../views/common/languageNavBar/languageNavBar');
 const { updateGoalProgressBarFromJson, showFunctionalCards } = require('../../../build/js/common/common')
 
-
 const {
     DEFAULT_CON_LANGUAGE,
     TOP_LANGUAGES_BY_HOURS,

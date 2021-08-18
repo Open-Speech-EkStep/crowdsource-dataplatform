@@ -60,11 +60,11 @@ document.body = stringToHTML(
 // });
 
 
-describe("getSummaryApi",()=>{
+describe("getSummaryApi", () => {
   const $contributionDiv = $('#contribution_stats');
-  const $verticalGraph =  $("#bar_charts_container");
-  const $viewAllButton =    $("#view_all_btn");
-  test("should call get summary api with no data",async ()=>{
+  const $verticalGraph = $("#bar_charts_container");
+  const $viewAllButton = $("#view_all_btn");
+  test("should call get summary api with no data", async () => {
     fetchMock.get(`/stats/summary/asr`, {
       aggregate_data_by_language: [],
       aggregate_data_by_state: [],
