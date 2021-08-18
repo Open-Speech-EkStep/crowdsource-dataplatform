@@ -87,9 +87,9 @@ step("Move tab to <tabName>", async function (tabName) {
 
 
 step("Click <name> Link", async function (name) {
-	await taiko.waitFor(3000)
-		assert.ok(await link(name).exists());
-		await click(link(name));
+	await taiko.waitFor(2000)
+	assert.ok(await link(name).exists());
+	await click(link(name));
 });
 
 step("Should select <lang> from localisation dropdown <id>", async function (lang, id) {
