@@ -16,6 +16,17 @@
   border-radius: 12px;
 }
 
+.speakerdetails-popup {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.speakerdetails-popup .modal-body {
+  flex: 1;
+  overflow: auto;
+}
+
 @media (max-width: 767px) {
   #userModal .close{
     right: 20px !important;
@@ -37,7 +48,7 @@
 
   #userModal #form-sub-heading{
     padding-bottom: 16px;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   #userModal .form-group label,
@@ -54,19 +65,16 @@
     margin-bottom: 3px !important;
   }
 
-  #userModal .modal-body  {
-    min-height: 405px;
-    max-height: 405px;
-    overflow: auto;
-  }
-
-
   #userModal .modal-title{
     font-size: 20px !important;
   }
 }
 
-@media (min-width: 767px) {
+
+@media (min-width: 768px) {
+  .speakerdetails-popup {
+    height: 670px;
+  }
  
   #userModal .close{
     right:25px;
@@ -78,18 +86,8 @@
     margin-bottom: 16px;
   }
   
-  #userModal .speakerdetails-popup {
-    height: 670px;
-    overflow: auto;
-  }
-
-  #userModal .modal-content , #userModal .speakerdetails-popup{
+  #userModal .modal-content {
     max-height: 670px;
-  }
-
-  #userModal .modal-body  {
-    height: 430px;
-    overflow: auto;
   }
 
   #userModal .modal-title{
