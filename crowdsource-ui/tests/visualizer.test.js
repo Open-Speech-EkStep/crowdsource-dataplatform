@@ -9,7 +9,7 @@ describe("visualizer", () => {
   const visualizer = new Visualizer();
 
   const testCanvasCtx = {
-    fillStyle: "", fillRect: () => {
+    fillStyle: "", clearRect: () => {}, fillRect: () => {
     }, beginPath: () => {
     }, moveTo: () => {
     }, lineTo: () => {
@@ -21,14 +21,16 @@ describe("visualizer", () => {
     test('should set canvas after initializing visualizer', () => {
       const canvas = {getContext: () => testCanvasCtx, width: 100, height: 50};
       jest.spyOn(canvas, 'getContext');
-      jest.spyOn(testCanvasCtx, 'fillRect');
+      // jest.spyOn(testCanvasCtx, 'fillRect');
+      jest.spyOn(testCanvasCtx, 'clearRect');
       const {canvasCtx, canvasWidth, canvasHeight} = visualizer.setCanvasCtx(canvas);
 
       expect(canvas.getContext).toHaveBeenCalledWith('2d')
       expect(canvasWidth).toBe(100)
       expect(canvasHeight).toBe(50)
-      expect(canvasCtx.fillStyle).toBe('rgb(255, 255, 255, 0)')
-      expect(canvasCtx.fillRect).toHaveBeenCalledWith(0, 0, 100, 50)
+      // expect(canvasCtx.fillStyle).toBe('rgb(255, 255, 255, 0)')
+      // expect(canvasCtx.fillRect).toHaveBeenCalledWith(0, 0, 100, 50)
+      expect(canvasCtx.clearRect).toHaveBeenCalledWith(0, 0, 100, 50)
       expect(canvasCtx.lineWidth).toBe(2)
       expect(canvasCtx.strokeStyle).toBe('rgb(0,123,255)')
       jest.clearAllMocks();
@@ -40,6 +42,7 @@ describe("visualizer", () => {
       jest.spyOn(visualizer, 'setCanvasCtx').mockImplementation()
       visualizer.setCanvasCtx.mockReturnValue({canvasCtx: testCanvasCtx, width: 100, height: 50})
       jest.spyOn(testCanvasCtx, 'fillRect');
+      jest.spyOn(testCanvasCtx, 'clearRect');
       jest.spyOn(testCanvasCtx, 'beginPath');
       jest.spyOn(testCanvasCtx, 'moveTo');
       jest.spyOn(testCanvasCtx, 'lineTo');
@@ -90,6 +93,7 @@ describe("visualizer", () => {
       jest.spyOn(visualizer, 'setCanvasCtx').mockImplementation()
       visualizer.setCanvasCtx.mockReturnValue({canvasCtx: testCanvasCtx, width: 100, height: 50})
       jest.spyOn(testCanvasCtx, 'fillRect');
+      jest.spyOn(testCanvasCtx, 'clearRect');
       jest.spyOn(testCanvasCtx, 'beginPath');
       jest.spyOn(testCanvasCtx, 'moveTo');
       jest.spyOn(testCanvasCtx, 'lineTo');

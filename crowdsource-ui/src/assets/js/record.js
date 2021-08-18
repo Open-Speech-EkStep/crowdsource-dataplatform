@@ -482,8 +482,9 @@ const initialize = () => {
             // and sending floatarray with each call...
             requestAnimationFrame(draw);
             analyser.getByteTimeDomainData(dataArray);
-            canvasCtx.fillStyle = 'rgb(255, 255, 255, 0)';
-            canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+            // canvasCtx.fillStyle = 'rgb(255, 255, 255, 0)';
+            // canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+            canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
             canvasCtx.lineWidth = 2;
             canvasCtx.strokeStyle = 'rgb(0,123,255)';
             canvasCtx.beginPath();
