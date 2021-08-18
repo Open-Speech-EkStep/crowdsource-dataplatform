@@ -32,3 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# include public folder which is excluded at root level
+!public
