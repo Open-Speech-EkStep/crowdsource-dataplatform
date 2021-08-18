@@ -8,7 +8,6 @@ html {
 }
 
 .container {
-  padding-top: 50px;
   padding-bottom: 50px;
 }
 
@@ -291,6 +290,10 @@ body.modal-open .supreme-container {
 
   .chart-row .state-chart {
     height: 40rem;
+  }
+
+  .container {
+    padding-top: 50px;
   }
 }
 
