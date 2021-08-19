@@ -1,15 +1,5 @@
 var Redis = require("ioredis");
 Redis.Promise = require("bluebird");
-const client = cachingEnabled ? new Redis.Cluster(
-    [{ "host": process.env.REDISCACHEHOSTNAME, port: 6379 }]
-    , {
-        scaleReads: 'all',
-        slotsRefreshTimeout: 2000,
-        dnsLookup: (address, callback) => callback(null, address),
-        redisOptions: {
-            password: process.env.REDISCACHEKEY
-        }
-    }) : {};
    
 const config = require('config');
 //var redis = require("redis");
@@ -20,6 +10,17 @@ const config = require('config');
 
 const prefix = config["envName"];
 const cachingEnabled = config.caching ? config.caching == "enabled" : false;
+
+const client = cachingEnabled ? new Redis.Cluster(
+    [{ "host": process.env.REDISCACHEHOSTNAME, port: 6379 }]
+    , {
+        scaleReads: 'all',
+        slotsRefreshTimeout: 2000,
+        dnsLookup: (address, callback) => callback(null, address),
+        redisOptions: {
+            password: process.env.REDISCACHEKEY
+        }
+    }) : {};
 
 // var client = cachingEnabled ? redis.createClient(6380, process.env.REDISCACHEHOSTNAME,
     // { auth_pass: process.env.REDISCACHEKEY, tls: { servername: process.env.REDISCACHEHOSTNAME } }) : {};
