@@ -363,8 +363,9 @@ audio {
 .dashboard-bg {
   background-image: url(/img/dashboard_bg.svg);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-color: $text-light;
+  background-position: top center;
 }
 
 .back-btn a {
@@ -476,7 +477,7 @@ audio {
 
 .dashboard-bg {
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-color: $text-light;
 }
 
@@ -496,6 +497,8 @@ audio {
   background-color: $text-light;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: top center;
+  height: 100%;
 }
 
 .badge-widget {
