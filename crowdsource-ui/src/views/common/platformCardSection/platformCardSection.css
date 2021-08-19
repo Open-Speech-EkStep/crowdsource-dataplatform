@@ -118,18 +118,37 @@
 }
 
 #platform_section .platform_card {
-  background-image: url('/img/tri_color.svg');
-  background-size: cover;
-  background-position: center;
+  background: linear-gradient(
+    180.52deg,
+    #ffbe58 -33.42%,
+    #ffba3f -19.59%,
+    #ffb44f -5.75%,
+    #ffea9c 5.15%,
+    #ffffff 19.03%,
+    #ffffff 81.54%,
+    #eaf6e0 87.7%,
+    #99e090 99.7%,
+    #00ba06 118.97%
+  );
   max-width: 1200px;
   min-height: 400px;
-  background-repeat: no-repeat;
   margin: auto;
   border-radius: 32px;
-  background-position-y: center;
-  background-color: #ffffff;
-  padding: 24px 0 0 0;
   box-shadow: 0 8px 0 #43c0d7;
+  overflow: hidden;
+}
+
+.platform-card-top {
+  background-image: url('/img/orange_bg.svg');
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.platform-card-bottom {
+  background-image: url('/img/green_bg.svg');
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  padding: 24px 0 0 0;
 }
 
 #platform_inner {
