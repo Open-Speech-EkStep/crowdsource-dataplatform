@@ -315,12 +315,12 @@ workflows:
       - failed-notification:
           name: dev-failed-notification
           requires:
-            - run_functional_tests
+            - functional_tests_dev
 
       - success-notification:
           name: dev-success-notification
           requires:
-            - run_functional_tests
+            - functional_tests_dev
 
       - approve_to_deploy:
           name: approve_test_deployment_aks
