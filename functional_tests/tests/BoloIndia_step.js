@@ -74,7 +74,7 @@ step("Open Website", async () => {
 });
 
 step("Validate about us content", async function () {
-    
+
     assert.ok(await text('A crowdsourcing initiative for Indian languages').exists());
     assert.ok(await text('This is an effort by MeitY, Government of India, under the National Language Translation Mission (NLTM).').exists());
 });
@@ -220,7 +220,7 @@ step("When user skips all the rest of the <count> sentences , User should see Th
         console.log(i)
     }
     await taiko.waitFor(3000)
-    assert.ok(await text('Contribute to your language!').exists()) 
+    assert.ok(await text('Contribute to your language!').exists())
 });
 
 
@@ -241,7 +241,7 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
         // await hover(startRecordingButton);
         await taiko.waitFor(1500)
         await click(startRecordingButton);
-        
+
     }
 
     else if (arg0 == "Validate") {
@@ -275,7 +275,7 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
         const startRecordingButton = taiko.image({ id: "start_recording" });
         assert.ok(await startRecordingButton.exists());
         // await hover(startRecordingButton);
-         await taiko.waitFor(1500)
+        await taiko.waitFor(1500)
         await click(startRecordingButton);
 
     } else if (arg0 == "Translate") {
@@ -383,6 +383,7 @@ step("User skips the next <count> sentences user should land on Thank you page i
 });
 
 step("User should see the <arg> button", async function (arg) {
+    await taiko.waitFor(1500);
     assert.ok(await link(arg).exists());
 });
 
@@ -535,7 +536,7 @@ step("User clicks back button", async function () {
     }
 });
 
-step("Validate Bolo India content", async function() {
+step("Validate Bolo India content", async function () {
     assert.ok(await text('Enrich your language by donating your voice').exists());
     assert.ok(await text('Speak').exists());
     assert.ok(await text('Validate').exists());

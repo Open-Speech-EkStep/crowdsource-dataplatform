@@ -436,6 +436,7 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             '30 - 60 years',
             '60+ years',
             'Month',
+            "No badge earned for <initiative>",
             'People',
             'Labelled',
             'Translated',

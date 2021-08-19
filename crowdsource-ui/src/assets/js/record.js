@@ -1,5 +1,5 @@
 const fetch = require('./fetch')
-const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, safeJson } = require('./utils');
+const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, setFooterPosition, getLocaleString, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, safeJson, translate } = require('./utils');
 const { LOCALE_STRINGS,MODULE,CONTRIBUTION_LANGUAGE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
 const { onChangeUser , showUserProfile,onOpenUserDropDown} = require('./header');
@@ -24,7 +24,8 @@ const showElement = function (element){
 }
 
 function showNoSentencesMessage() {
-    $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+    const contributionLanguage = localStorage.getItem('contributionLanguage');
+    $('#spn-validation-language').html(translate(contributionLanguage));
     hideElement($('#functional-row'));
     showElement($('#no-sentences-row'))
     showElement($('#page-content'))
@@ -32,7 +33,7 @@ function showNoSentencesMessage() {
     hideElement($('#validation-instruction-modal'))
     hideElement($('#report_btn'));
     hideElement($("#test-mic-speakers"));
-    $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
+    $('#start-validation-language').html(contributionLanguage);
 }
 
 

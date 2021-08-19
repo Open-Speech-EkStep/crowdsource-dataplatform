@@ -3,7 +3,7 @@ const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
 const { showUserProfile,onOpenUserDropDown } = require('../../../build/js/common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
-const { setPageContentHeight, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition, getDeviceInfo, getBrowserInfo} = require('./utils');
+const { setPageContentHeight, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition, getDeviceInfo, getBrowserInfo, translate} = require('./utils');
 const { cdn_url } = require('./env-api');
 const { onChangeUser } = require('./header');
 const { MODULE, CONTRIBUTION_LANGUAGE } = require('./constants');
@@ -311,7 +311,8 @@ function showThankYou() {
 }
 
 function showNoSentencesMessage() {
-    $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+    const contributionLanguage = localStorage.getItem('contributionLanguage');
+    $('#spn-validation-language').html(translate(contributionLanguage));
     hideElement($('#instructions-row'));
     hideElement($('#sentences-row'));
     hideElement($('#audio-row'))
@@ -388,7 +389,7 @@ $(document).ready(() => {
 
     $("#report_sentence_thanks_close_id").on("click", function () {
         $("#report_sentence_thanks_modal").modal('hide');
-        $('#skipBtn').click();
+        $('#skip_button').click();
     });
 
     $("input[type=radio][name=reportRadio]").on("change", function () {

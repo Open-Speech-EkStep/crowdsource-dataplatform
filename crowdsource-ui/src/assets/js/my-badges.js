@@ -4,10 +4,13 @@ const {
   updateLocaleLanguagesDropdown,
   getLocaleString,
   getLanguageBadge,
-  covertStringToCapitalised
+  covertStringToCapitalised,
+  translate
 } = require('./utils');
 const {onChangeUser, showUserProfile,onOpenUserDropDown} = require('./header');
 const {isMobileDevice, hasUserRegistered, showErrorPopup} = require('./common');
+
+const NO_BADGE_EARNED_TEXT = 'No badge earned for <initiative>'; 
 
 const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type, localeString, language) => {
   return `
@@ -115,9 +118,12 @@ const getBadgeRow = (result, id, type, localeString) => {
     });
   } else {
     $(`#${type}-type`).addClass('d-none');
+    const translatedError = translate(NO_BADGE_EARNED_TEXT);
+    const initiative = translate(`${covertStringToCapitalised(type)} India`);
+    const finalErrorMessage = translatedError.replace("<initiative>", initiative);
     const row = ` <div class="col-12 p-0">
     <div class="row mx-0 text-center mt-5">
-      <h4 class="w-100"> No badge earned for ${covertStringToCapitalised(type)} India</h4>
+      <h4 class="w-100"> ${finalErrorMessage}</h4>
     </div>
     </div>
     `

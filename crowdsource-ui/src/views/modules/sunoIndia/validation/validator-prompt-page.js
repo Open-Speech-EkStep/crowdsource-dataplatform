@@ -10,7 +10,8 @@ const {
   reportSentenceOrRecording,
   getBrowserInfo,
   getDeviceInfo,
-  getLocaleString
+  getLocaleString,
+  translate
 } = require('../common/utils');
 const { onChangeUser,onOpenUserDropDown, showUserProfile } = require('../common/header');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE,LOCALE_STRINGS} = require('../common/constants');
@@ -451,7 +452,8 @@ function showThankYou() {
 }
 
 function showNoSentencesMessage() {
-  $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+  const contributionLanguage = localStorage.getItem('contributionLanguage');
+  $('#spn-validation-language').html(translate(contributionLanguage));
   hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#virtualKeyBoardBtn'));
@@ -470,8 +472,7 @@ function showNoSentencesMessage() {
   hideElement($('#thankyou-text'));
   hideElement($('#keyboardBox'));
   $("#validation-container").removeClass("validation-container");
-  $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
-
+  $('#start-validation-language').html(contributionLanguage);
 }
 
 const handleSubmitFeedback = function () {
@@ -600,7 +601,7 @@ const executeOnLoad = function () {
 
   $("#report_sentence_thanks_close_id").on("click", function () {
     $("#report_sentence_thanks_modal").modal('hide');
-    $('#skipBtn').click();
+    $('#skip_button').click();
   });
 
   $("input[type=radio][name=reportRadio]").on("change", function () {

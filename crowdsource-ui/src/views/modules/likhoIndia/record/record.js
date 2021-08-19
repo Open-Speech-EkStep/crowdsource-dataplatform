@@ -8,7 +8,9 @@ const {
   hideElement,
   fetchLocationInfo,
   reportSentenceOrRecording,
-  getDeviceInfo, getBrowserInfo
+  getDeviceInfo, 
+  getBrowserInfo,
+  translate
 } = require('../common/utils');
 const {LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, CONTRIBUTION_LANGUAGE } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
@@ -231,7 +233,8 @@ function showThankYou() {
 }
 
 function showNoSentencesMessage() {
-  $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  $('#spn-validation-language').html(translate(contributionLanguage));
   hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#virtualKeyBoardBtn'));
@@ -338,7 +341,7 @@ const initialize = function () {
 
   $("#report_sentence_thanks_close_id").on("click", function () {
     $("#report_sentence_thanks_modal").modal('hide');
-    $('#skipBtn').click();
+    $('#skip_button').click();
   });
 
   $("input[type=radio][name=reportRadio]").on("change", function () {

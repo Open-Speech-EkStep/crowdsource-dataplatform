@@ -2,7 +2,7 @@ const fetch = require('../common/fetch')
 const {
   setPageContentHeight,
   // toggleFooterPosition,
-  setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording,getDeviceInfo, getBrowserInfo,getLocaleString } = require('../common/utils');
+  setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, getLocaleString, translate } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup } = require('../common/common');
@@ -281,7 +281,8 @@ function showThankYou() {
 }
 
 function showNoSentencesMessage() {
-  $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
+  const contributionLanguage = localStorage.getItem('contributionLanguage');
+  $('#spn-validation-language').html(translate(contributionLanguage));
   hideElement($('#extension-bar'));
   hideElement($('#textarea-row'));
   hideElement($('#virtualKeyBoardBtn'));
@@ -418,7 +419,7 @@ const executeOnLoad = function () {
 
   $("#report_sentence_thanks_close_id").on("click", function () {
     $("#report_sentence_thanks_modal").modal('hide');
-    $('#skipBtn').click();
+    $('#skip_button').click();
   });
 
   $("input[type=radio][name=reportRadio]").on("change", function () {

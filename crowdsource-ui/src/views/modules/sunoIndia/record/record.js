@@ -9,7 +9,8 @@ const {
   fetchLocationInfo,
   reportSentenceOrRecording,
   getDeviceInfo,
-  getBrowserInfo
+  getBrowserInfo,
+  translate
 } = require('../common/utils');
 const { onChangeUser,onOpenUserDropDown, showUserProfile } = require('../common/header');
 const { cdn_url } = require('../common/env-api');
@@ -399,7 +400,8 @@ function showThankYou() {
 }
 
 function showNoSentencesMessage() {
-  $('#spn-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  $('#spn-validation-language').html(translate(contributionLanguage));
   hideElement($('#extension-bar'));
   hideElement($('#sentences-row'));
   hideElement($('#audio-row'))
@@ -423,7 +425,6 @@ const handleSubmitFeedback = function () {
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const otherText = $("#other_text").val();
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-  const $skipButton =  $('#skip_button');
 
   const reqObj = {
     sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
@@ -481,7 +482,7 @@ const initialize = function () {
 
   $("#report_sentence_thanks_close_id").on("click", function () {
     $("#report_sentence_thanks_modal").modal('hide');
-    $('#skipBtn').click();
+    $('#skip_button').click();
   });
 
   $("input[type=radio][name=reportRadio]").on("change", function () {

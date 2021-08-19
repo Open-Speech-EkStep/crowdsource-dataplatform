@@ -727,5 +727,6 @@
 	"We are processing multiple requests at the moment. Please try again after sometime.": "We are processing multiple requests at the moment. Please try again after sometime.",
 	"Your Badges": "Your Badges",
 	"You are a <span class=\"text-orange\" id=\"last-bagde-earned\"></span> contributor": "You are a <span class=\"text-orange\" id=\"last-bagde-earned\"></span> contributor",
-	"You are a <span class=\"text-orange\" id=\"last-bagde-earned\"></span> validator": "You are a <span class=\"text-orange\" id=\"last-bagde-earned\"></span> validator"
+	"You are a <span class=\"text-orange\" id=\"last-bagde-earned\"></span> validator": "You are a <span class=\"text-orange\" id=\"last-bagde-earned\"></span> validator",
+	"No badge earned for <initiative>": "No badge earned for <initiative>"
 }
