@@ -48,7 +48,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y python3 python3-pip
             sudo apt-get install -y postgresql-client
-            
+
             ENV_IMAGE_NAME=${AZURE_LOGIN_SERVER_NAME}/${AZURE_REPO}:<< parameters.env_name >>
             ENV_IMAGE_NAME_DB_REFRESHER=${AZURE_LOGIN_SERVER_NAME}/${DB_REFRESHER_REPO}:<< parameters.env_name >>
 
@@ -57,11 +57,11 @@ jobs:
 
             psql "postgresql://${AZURE_DB_USER}:${AZURE_DB_PASS}@${AZURE_DB_HOST}/<< parameters.db_name >>" -f functional_tests/sql/setupDummyData.sql
             kubectl -n << parameters.env_name >> patch cronjob refresh-data  -p '{"spec":{"schedule": "* * * * *"}}'
-            
+
             sleep 40
 
             sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env_name >> apply  -f -
-            
+
   run_functional_tests:
     parameters:
       env_name:
@@ -130,7 +130,7 @@ jobs:
               ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/bhashadaan/" --cache-control "max-age=1200" --recursive
             else
               ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --cache-control "max-age=1200" --recursive
-            fi 
+            fi
 
   db_migrate_azure:
     parameters:
@@ -202,6 +202,32 @@ jobs:
             sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env-name >> apply  -f -
           name: Deploy container
 
+  failed-notification:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          name: Chat Notification Fail
+          # when: on_fail
+          command: >
+            curl --header "Content-Type: application/json"
+            --request POST
+            --data "{\"cards\":[{\"header\":{\"title\":\"Oops. Build ${CIRCLE_BUILD_NUM} failed.\",\"subtitle\":\"${CIRCLE_PROJECT_REPONAME}\",\"imageUrl\":\"https://png.pngtree.com/svg/20170406/icon_failed__1325447.png\",\"imageStyle\":\"IMAGE\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"topLabel\":\"${CIRCLE_TAG}\",\"content\":\"${CIRCLE_SHA1}\"}}]},{\"widgets\":[{\"buttons\":[{\"textButton\":{\"text\":\"DETAILS\",\"onClick\":{\"openLink\":{\"url\":\"${CIRCLE_BUILD_URL}\"}}}}]}]}]}]}"
+            $CHAT_WEBHOOK_URL
+
+  success-notification:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          name: Chat Notification Success
+          # when: on_success
+          command: >
+            curl --header "Content-Type: application/json"
+            --request POST
+            --data "{\"cards\":[{\"header\":{\"title\":\"Build ${CIRCLE_BUILD_NUM} passed.\",\"subtitle\":\"${CIRCLE_PROJECT_REPONAME}\",\"imageUrl\":\"https://png.pngtree.com/svg/20170510/success_404253.png\",\"imageStyle\":\"IMAGE\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"topLabel\":\"${CIRCLE_TAG}\",\"content\":\"${CIRCLE_SHA1}\"}}]},{\"widgets\":[{\"buttons\":[{\"textButton\":{\"text\":\"DETAILS\",\"onClick\":{\"openLink\":{\"url\":\"${CIRCLE_BUILD_URL}\"}}}}]}]}]}]}"
+            $CHAT_WEBHOOK_URL
+
 workflows:
   build_test_deploy:
     jobs:
@@ -215,7 +241,7 @@ workflows:
           filters:
             branches:
               only: [master, test_translation_scripts]
-      
+
       - db_migrate_azure:
           name: migrate_dev_azure
           db_name: ${AZURE_DEV_DB_NAME}
@@ -285,6 +311,18 @@ workflows:
           db_name: ${AZURE_DEV_DB_NAME}
           requires:
             - setup_ft_dev
+
+      - failed-notification:
+          name: dev-failed-notification
+          when: on_fail
+          requires:
+            - run_functional_tests
+
+      - sucess-notification:
+          name: dev-success-notification
+          when: on_success
+          requires:
+            - run_functional_tests
 
       - approve_to_deploy:
           name: approve_test_deployment_aks
