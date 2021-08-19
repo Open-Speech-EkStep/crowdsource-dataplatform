@@ -208,7 +208,7 @@ jobs:
     steps:
       - run:
           name: Chat Notification Fail
-          # when: on_fail
+          when: on_fail
           command: >
             curl --header "Content-Type: application/json"
             --request POST
@@ -221,7 +221,7 @@ jobs:
     steps:
       - run:
           name: Chat Notification Success
-          # when: on_success
+          when: on_success
           command: >
             curl --header "Content-Type: application/json"
             --request POST
@@ -314,13 +314,11 @@ workflows:
 
       - failed-notification:
           name: dev-failed-notification
-          when: on_fail
           requires:
             - run_functional_tests
 
-      - sucess-notification:
+      - success-notification:
           name: dev-success-notification
-          when: on_success
           requires:
             - run_functional_tests
 
