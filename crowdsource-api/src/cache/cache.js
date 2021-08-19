@@ -1,6 +1,8 @@
 var Redis = require("ioredis");
 Redis.Promise = require("bluebird");
-   
+Redis.Promise.onPossiblyUnhandledRejection(function (error) {
+    console.log("ioredis error:", error);
+  });   
 const config = require('config');
 //var redis = require("redis");
 // var bluebird = require("bluebird");
