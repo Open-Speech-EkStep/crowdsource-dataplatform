@@ -64,11 +64,8 @@ Tags: component
 * Once user clicks on Others Radio button, Submit button should be enabled
 * When user submits , Thank you pop up should come & close button should close the pop up
 
-//## Check About Us Page
-//* Navigate to "About Us" button and click "About Us" button
-//* Validate about us content
-//* Start Recording button is disabled
-//* Select Language "Hindi" enables the Start Recording button
+## Validate Home page content
+* Validate Bolo India content
 
 ## Check Terms and Condition links from Footer
 * Navigate to "Terms & Conditions" button and click "Terms & Conditions" button
@@ -77,9 +74,3 @@ Tags: component
 ## Check Privacy and Policy links from Footer
 * Navigate to "Privacy Policy" button and click "Privacy Policy" button
 * Validate Privacy Policy content
-
-## Validate Home page content
-* Validate Bolo India content
-
-___
-* User clicks back button
