@@ -87,6 +87,14 @@ jobs:
             npm run install:ft
             npm run functional_test -- -- --env <<parameters.env_name>>
             psql "postgresql://${AZURE_DB_USER}:${AZURE_DB_PASS}@${AZURE_DB_HOST}/<< parameters.db_name >>" -f functional_tests/sql/deleteSeedData.sql
+      - run:
+          name: Chat Notification Fail
+          when: on_fail
+          command: >
+            curl --header "Content-Type: application/json"
+            --request POST
+            --data "{\"cards\":[{\"header\":{\"title\":\"Oops. Build ${CIRCLE_BUILD_NUM} failed.\",\"subtitle\":\"${CIRCLE_PROJECT_REPONAME}\",\"imageUrl\":\"https://png.pngtree.com/svg/20170406/icon_failed__1325447.png\",\"imageStyle\":\"IMAGE\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"topLabel\":\"${CIRCLE_TAG}\",\"content\":\"${CIRCLE_SHA1}\"}}]},{\"widgets\":[{\"buttons\":[{\"textButton\":{\"text\":\"DETAILS\",\"onClick\":{\"openLink\":{\"url\":\"${CIRCLE_BUILD_URL}\"}}}}]}]}]}]}"
+            $CHAT_WEBHOOK_URL
       - store_artifacts:
           path: functional_tests/reports
           destination: reports
