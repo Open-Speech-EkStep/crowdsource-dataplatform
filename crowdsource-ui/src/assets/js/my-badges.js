@@ -285,8 +285,8 @@ $(document).ready(() => {
   const username = details && details.userName ? details.userName: '';
   getLocaleString().then(() => {
     getBadgesForUser(username);
-  }).catch(() => {
-    window.location.href = "/";
+  }).catch(err => {
+    console.log(err);
   });
   let moduleType = localStorage.getItem("module");
   if(hasUserRegistered()){

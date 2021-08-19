@@ -141,10 +141,7 @@ const initialise = () => {
     getBadgeData(initiativeValue, source, selectedLanguage,initiative,badge_color);
   });
 
-
-
   $('#participation-radios').on('change', (e) => {
-
     source = e.target.value;
     const selectedParticipation = document.querySelector(
       'input[name = "participation"]:checked'
@@ -160,8 +157,8 @@ const initialise = () => {
 $(document).ready(function () {
   getLocaleString().then(() => {
     initialise();
-  }).catch(() => {
-    window.location.href = "/";
+  }).catch(err => {
+    console.log(err);
   })
   let moduleType = localStorage.getItem("module");
   const type = localStorage.getItem("selectedType");
