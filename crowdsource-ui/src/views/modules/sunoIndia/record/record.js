@@ -434,7 +434,6 @@ const handleSubmitFeedback = function () {
   };
   reportSentenceOrRecording(reqObj).then(function (resp) {
     if (resp.statusCode === 200) {
-      $skipButton.click();
       $("#report_sentence_modal").modal('hide');
       $("#report_sentence_thanks_modal").modal('show');
       $("#report_submit_id").attr("disabled", true);
@@ -482,6 +481,7 @@ const initialize = function () {
 
   $("#report_sentence_thanks_close_id").on("click", function () {
     $("#report_sentence_thanks_modal").modal('hide');
+    $('#skipBtn').click();
   });
 
   $("input[type=radio][name=reportRadio]").on("change", function () {
