@@ -88,6 +88,7 @@ step("Move tab to <tabName>", async function (tabName) {
 
 step("Click <name> Link", async function (name) {
 	await taiko.waitFor(2000)
+	await taiko.scrollDown();
 	assert.ok(await link(name).exists());
 	await click(link(name));
 });

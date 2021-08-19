@@ -36,6 +36,7 @@ step("Username field should be present", async function () {
 });
 
 step("When user clicks on View all Details buttton user should be able to see <arg0> , <arg1>", async function (arg0, arg1) {
+    await taiko.scrollDown();
     await click(taiko.link({ id: 'viewAllDetailsBtn' }))
     await taiko.waitFor(1000)
     assert.ok(await text(arg0).exists());
