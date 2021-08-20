@@ -8,8 +8,7 @@ h4,
 }
 
 .thankyou-content-wrapper {
-  margin-top: 58px;
-  padding-top: 57px;
+  margin-top: 56px;
 }
 
 .user-contribution-msg span {
@@ -84,8 +83,10 @@ h4,
   width: 85%;
   margin: 0 auto;
 }
-.top-back-btn {
-  top: 100px;
+
+.thankyou-content-wrapper .top-back-btn {
+  top: -18px;
+  left: 0;
 }
 
 .overlay__content {
@@ -138,7 +139,7 @@ h4,
 }
 
 
-.stats-container {
+.thankyou-content-wrapper.stats-container {
   border-radius: 34px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -231,12 +232,7 @@ h4,
   }
 }
 
-@media screen and (max-width: 768px) {
-  .thankyou-content-wrapper {
-    margin-top: 55px;
-    padding-top: 57px;
-  }
-
+@media screen and (max-width: 767px) {
   .download-badge-btn {
     text-align: center !important;
     margin-bottom: 15px !important;
@@ -285,11 +281,6 @@ h4,
     height: auto;
   }
 
-  .top-back-btn {
-    top: 80px;
-    left: 20px;
-  }
-
   #language-goal {
     position: initial;
     bottom: 32px;
@@ -297,13 +288,6 @@ h4,
     width: 100%;
     padding: 20px;
     min-width: 320px;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .top-back-btn {
-    top: 100px !important;
-    left: 35px !important;
   }
 }
 
@@ -374,6 +358,12 @@ h4,
   .reward-img {
     width: 80px;
     height: auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .thankyou-content-wrapper {
+    margin-top: 65px;
   }
 }
 

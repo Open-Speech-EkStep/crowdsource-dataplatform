@@ -28,7 +28,8 @@
 <body class="d-flex h-100 flex-column">
 <%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:__('Validate'),img:"SunoIndiaLogo.svg",homePath:"./home.html"}); %>
 <div id="content-wrapper" class="container-fluid thankyou-content-wrapper pb-4 pb-lg-2 pb-md-2 px-3 px-lg-3 px-md-3 px-4 px-md-5 flex-grow-1 bg-tri-color">
-    <div class="text-center pt-2 pt-lg-0 pt-md-0">
+    <%- include('../common/breadcrumb.ejs', {MODULE:"Suno", PAGE_TITLE:__('Validate'),img:"SunoIndiaLogo.svg", homePath:"./home.html"}) %>
+    <div class="text-center pt-2 pt-lg-0 pt-md-0 mt-5 position-relative">
         <div class="row position-absolute top-back-btn">
             <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
         </div>

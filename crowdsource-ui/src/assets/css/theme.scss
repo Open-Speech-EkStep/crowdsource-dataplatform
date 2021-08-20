@@ -447,7 +447,7 @@ audio {
 
   .bg-tri-color {
     background-position: top center;
-    background-size: contain;
+    background-size: cover;
     background-image: url(/img/thankyou_bg_fn.svg);
   }
 
@@ -473,6 +473,7 @@ audio {
 .bg-tri-color {
   background-repeat: no-repeat;
   background-color: $text-light;
+  background-position: top center;
 }
 
 .dashboard-bg {
