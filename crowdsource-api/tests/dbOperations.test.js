@@ -219,7 +219,6 @@ describe("Running tests for dbOperations", () => {
                     [testDatasetId]
                 );
 
-                expect(spyDBnone).toHaveBeenCalledWith(updateViews);
                 //expect(spyDBnone).toHaveBeenCalledWith(updateMaterializedViews);
             });
 
