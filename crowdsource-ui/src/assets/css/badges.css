@@ -19,9 +19,17 @@ html {
   }
 }
 
+.my-badges-heading {
+  display: none;
+}
+
 @media (min-width: 992px) {
   html {
     font-size: 15px;
+  }
+
+  .my-badges-heading {
+    display: flex;
   }
 }
 

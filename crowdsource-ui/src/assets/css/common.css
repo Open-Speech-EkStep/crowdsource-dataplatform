@@ -468,15 +468,8 @@ body {
     font-size: 18px !important;
   }
   .my-badge-image {
-    height: 74px;
-    width: 60px;
+    max-width: 100%;
     margin-top: 10px;
-  }
-  .badge-widget {
-    height: 120px;
-  }
-  .badge-widget-placeholder {
-    height: 120px;
   }
 
   #badge-profile-content h6 {
@@ -488,9 +481,6 @@ body {
   }
   .header {
     height: 135px;
-  }
-  #badge-profile-content p {
-    margin-top: 40px !important;
   }
 
   #my-badge a{
@@ -600,12 +590,7 @@ body {
     font-size: 14px;
     width: max-content;
   }
-  .badge-widget {
-    height: 88px;
-  }
-  .badge-widget-placeholder {
-    height: 88px;
-  }
+
   .modal-footer {
     border-top: 0 !important;
   }
@@ -672,8 +657,7 @@ body {
     margin-right: 1rem !important;
   }
   .my-badge-image {
-    height: 44px;
-    width: 44px;
+    max-width: 100%;
     margin-top: 10px;
   }
 
@@ -690,9 +674,7 @@ body {
   .header {
     height: 120px;
   }
-  #badge-profile-content p {
-    margin-top: 30px !important;
-  }
+
   #warning-msg {
     display: none;
     top: 8px;
@@ -797,11 +779,17 @@ body {
 
 #badge-profile-content p {
   font-weight: 300 !important;
+  margin: 0;
 }
 
 .badge-widget-placeholder {
   opacity: 0.5;
   border-radius: 8px;
+  height: 100%;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .badge-section {

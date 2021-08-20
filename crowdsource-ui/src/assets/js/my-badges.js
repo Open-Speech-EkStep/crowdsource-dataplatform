@@ -34,10 +34,10 @@ const getBadgeRow = (result, id, type, localeString) => {
     result.language.forEach(item => {
       const row = ` <div class="col-12 p-0 my-2">
               <div class="row m-0">
-                <div class="col-lg-2 col-md-3 p-0 p-lg-3 p-md-3 col-12 m-auto">
+                <div class="col-lg-2 p-0 p-lg-3 p-md-3 col-12 m-auto">
                   <h4 class="font-family-Rowdies my-4 my-lg-0 my-md-0">${localeString[item.name]}</h4> 
                  </div>
-                 ${item.contribute && item.contribute.length ? ` <div class="col-lg-5 col-md-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
+                 ${item.contribute && item.contribute.length ? ` <div class="col-lg-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
                  <div class="row mx-0 mb-2 d-lg-none">
                    <h6 class="font-weight-normal font-family-Rowdies"> ${localeString['Contribution']} </h6>
                    </div>
@@ -56,7 +56,7 @@ const getBadgeRow = (result, id, type, localeString) => {
                    ${item.contribute[3] && item.contribute[3].grade == 'Platinum' ? getWidgetWithBadge(getLanguageBadge(item.name, 'platinum', 'contribute', type), 'platinum', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('platinum', 'contribution', localeString,type, item.name)}
                    </div>
                  </div>
-               </div>`: `<div class="col-lg-5 col-md-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
+               </div>`: `<div class="col-lg-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
                <div class="row mx-0 mb-2 d-lg-none">
                  <h6 class="font-weight-normal font-family-Rowdies"> ${localeString['Contribution']} </h6>
                  </div>
@@ -75,7 +75,7 @@ const getBadgeRow = (result, id, type, localeString) => {
                  </div>
                </div>
              </div>`}
-               ${item.validate && item.validate.length ? `  <div class="col-lg-5 col-md-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
+               ${item.validate && item.validate.length ? `  <div class="col-lg-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
                <div class="row mx-0 mb-2 d-lg-none">
                <h6 class="font-weight-normal font-family-Rowdies"> ${localeString['Validation']} </h6>
                </div>
@@ -93,7 +93,7 @@ const getBadgeRow = (result, id, type, localeString) => {
                    ${item.validate[3] && item.validate[3].grade == 'Platinum' ? getWidgetWithBadge(getLanguageBadge(item.name, 'platinum', 'validate', type),'platinum', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('platinum', 'validation', localeString,type, item.name)}
                    </div>
                </div>
-             </div>` : `<div class="col-lg-5 col-md-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
+             </div>` : `<div class="col-lg-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
              <div class="row mx-0 mb-2 d-lg-none">
              <h6 class="font-weight-normal font-family-Rowdies"> ${localeString['Validation']} </h6>
              </div>
