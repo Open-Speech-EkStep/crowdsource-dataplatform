@@ -14,13 +14,19 @@ const prefix = config["envName"];
 const cachingEnabled = config.caching ? config.caching == "enabled" : false;
 
 const client = cachingEnabled ? new Redis.Cluster(
-    [{ "host": process.env.REDISCACHEHOSTNAME, port: 6379 }]
+    [{ "host": process.env.REDISCACHEHOSTNAME, port: 6380 }]
     , {
         scaleReads: 'all',
         slotsRefreshTimeout: 2000,
         dnsLookup: (address, callback) => callback(null, address),
         redisOptions: {
-            password: process.env.REDISCACHEKEY
+            password: process.env.REDISCACHEKEY,
+            tls: {
+                checkServerIdentity: (servername, cert) => {
+                    // skip certificate hostname validation
+                    return undefined;
+                },
+            }
         }
     }) : {};
 
