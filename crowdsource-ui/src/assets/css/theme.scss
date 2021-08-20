@@ -491,7 +491,8 @@ audio {
 .bg-badge {
   background-color: $text-light !important;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+  background-position: top center;
 }
 
 .functional-page-bg {

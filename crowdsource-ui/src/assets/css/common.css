@@ -553,7 +553,7 @@ body {
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 767px) {
   #my-badge a {
     height: 52px;
     padding: 16px 32px 12px 32px;
