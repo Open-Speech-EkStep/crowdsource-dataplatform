@@ -33,10 +33,6 @@ html {
   }
 }
 
-.bg-tri-color{
-  background-size: contain !important;
-}
-
 #initiative .light-bg.active{
   border-bottom: 4px solid #0f2749 !important;
 }
@@ -253,6 +249,10 @@ ul#initiative {
   }
 
   .selected-badge-card{
+    max-width: 1200px;
+    background: #ffffff;
+    box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
+    border-radius: 20px;
     padding: 22px 20px;
   }
 
@@ -379,10 +379,6 @@ ul#initiative {
 
 
   .selected-badge-card{
-    max-width: 1200px;
-    background: #ffffff;
-    box-shadow: 0 4px 40px rgba(0, 123, 255, 0.4);
-    border-radius: 20px;
     padding: 24px 20px 35px 20px;
   }
 
