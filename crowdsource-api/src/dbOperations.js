@@ -172,7 +172,7 @@ const updateDbWithAudioPath = async (
                     console.log(`Update Query Failure: Dataset with id = ${datasetId} , failed to be updated by contributor with id = ${contributor_id}`)
                 }
             });
-            db.none(updateViews).then();
+
             cb(200, { success: true });
             cacheOperation.removeItemFromCache(datasetId, type, language, '');
         })
@@ -324,7 +324,6 @@ const updateTablesAfterValidation = async (req, res) => {
                         console.log(err);
                         res.sendStatus(500);
                     });
-                db.none(updateViews).then().catch(console.log);
                 res.status(200).send({message: "Validate Successfull"});
             }
             else  res.status(200).send({message: "Skip Successfull"});
@@ -696,7 +695,6 @@ const updateDbWithUserInput = async (
                     console.log(`Update Query Failure: Dataset with id = ${datasetId} , failed to be updated by contributor with id = ${contributor_id}`)
                 }
             });
-            db.none(updateViews).then();
             
             if (type != 'parallel') {
                 fromLanguage = language;
