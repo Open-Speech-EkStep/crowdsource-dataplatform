@@ -702,8 +702,8 @@ const updateDbWithUserInput = async (
                 fromLanguage = language;
                 language = '';
             }
-            cacheOperation.removeItemFromCache(datasetId, type, fromLanguage, language);
             cb(200, { success: true });
+            cacheOperation.removeItemFromCache(datasetId, type, fromLanguage, language);
         })
         .catch((err) => {
             console.log(err);
