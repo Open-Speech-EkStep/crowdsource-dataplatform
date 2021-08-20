@@ -310,6 +310,7 @@ const updateTablesAfterValidation = async (req, res) => {
     const validatorId = await getContributorId(userId, userName);
     return db.result(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country, device, browser])
         .then(async (insertResult) => {
+            console.log("/validate after validation insertion")
             if(insertResult && insertResult.rowCount === 0){
                 res.status(422).send("Contributor cannot validate his own contribution");
                 return;
@@ -328,7 +329,9 @@ const updateTablesAfterValidation = async (req, res) => {
             }
             else  res.status(200).send({message: "Skip Successfull"});
 
+            console.log("/validate after response set")
             cacheOperation.updateCacheAfterValidation(contributionId, type, fromLanguage, language, action, userId, userName);
+            console.log("/validate after cache set")
         })
         .catch((err) => {
             console.log(err);
@@ -690,18 +693,21 @@ const updateDbWithUserInput = async (
         browser
     ])
         .then(() => {
+            console.log("/store after contribution insertion")
             db.result(updateMediaWithContributedState, [datasetId]).then(result=>{
                 if(result.rowCount == 0){
                     console.log(`Update Query Failure: Dataset with id = ${datasetId} , failed to be updated by contributor with id = ${contributor_id}`)
                 }
             });
             
+            cb(200, { success: true });
             if (type != 'parallel') {
                 fromLanguage = language;
                 language = '';
             }
-            cb(200, { success: true });
+            console.log("/store after response set");
             cacheOperation.removeItemFromCache(datasetId, type, fromLanguage, language);
+            console.log("/store after cache updated")
         })
         .catch((err) => {
             console.log(err);
