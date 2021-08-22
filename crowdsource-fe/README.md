@@ -1,34 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# crowdsource-fe
 
-## Getting Started
+> Frontend for Crowdsourcing Platform.
 
-First, run the development server:
+## Features
+
+- Supports [these](https://nextjs.org/docs/basic-features/supported-browsers-features) browsers and features.
+
+## Development
+
+- Make sure your following requirements for npm and node are met:
+
+| Package | Version |
+| ------- | ------- |
+| npm     | 6.9.0   |
+| node    | 12.16.0 |
+
+If you are using [nvm](https://github.com/nvm-sh/nvm), you can run `nvm use` in the root directory to install the correct version of node.
+
+- Open your favorite Terminal and run these commands:
 
 ```bash
+npm install
+
 npm run dev
-# or
-yarn dev
+
+# Local dev server will automatically starts on http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Available Scripts
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+In the project directory, you can run:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### `npm run dev`
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Learn More
+The page will reload if you make edits.
 
-To learn more about Next.js, take a look at the following resources:
+### `npm run build`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Builds the app for production to the `build` folder.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### `npm start`
 
-## Deploy on Vercel
+It will start the production server on [http://localhost:3000](http://localhost:3000). Please ensure you ran `npm run build` first before running this command.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### `npm run lint`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+For running eslint on source code.
+
+### `npm run lint:fix`
+
+For fixing eslint errors.
+
+### `npm run format`
+
+For running prettier on the source code.
+
+### `npm run test`
+
+Launches the test runner in the interactive watch mode.
+
+### `npm run test:coverage`
+
+Launches the test runner with coverage.
+
+### `npm run test:lh-ci`
+
+For running [lighthouse-ci](https://github.com/GoogleChrome/lighthouse-ci). Please ensure you ran `npm run build` first before running this command.
+
+### `npm run check`
+
+For running lint and test with coverage.
