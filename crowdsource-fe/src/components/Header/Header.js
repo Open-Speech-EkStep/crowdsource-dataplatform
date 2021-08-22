@@ -30,7 +30,7 @@ function Header() {
   const { t } = useTranslation();
 
   return (
-    <header role="banner" className={classnames('position-sticky', styles.root)}>
+    <header data-testid="Header" role="banner" className={classnames('position-sticky', styles.root)}>
       <nav className="navbar navbar-expand-lg navbar-light container-fluid flex-wrap flex-md-nowrap">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           <li className="nav-item">

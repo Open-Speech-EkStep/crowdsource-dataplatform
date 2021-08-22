@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 function Link({ href, locale, ...rest }) {
   const { locale: currentLocale, defaultLocale } = useRouter();
   const isDefaultLocale = locale ? locale === defaultLocale : currentLocale === defaultLocale;
-  const hrefWithLocale = isDefaultLocale ? `/${defaultLocale}${href}` : href;
+  const hrefWithLocale = isDefaultLocale && defaultLocale ? `/${defaultLocale}${href}` : href;
 
   return <NextLink {...rest} href={hrefWithLocale} locale={locale} />;
 }

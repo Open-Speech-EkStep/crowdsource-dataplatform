@@ -5,7 +5,11 @@ import styles from './Footer.module.css';
 function Footer() {
   const { t } = useTranslation();
 
-  return <footer className={styles.root}>{t('termsAndConditions')}</footer>;
+  return (
+    <footer data-testid="Footer" className={styles.root}>
+      {t('termsAndConditions')}
+    </footer>
+  );
 }
 
 export default Footer;

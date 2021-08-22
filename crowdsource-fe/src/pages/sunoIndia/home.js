@@ -5,7 +5,7 @@ function SunoIndiaHome() {
   const { t } = useTranslation();
 
   return (
-    <h1>
+    <h1 data-testid="SunoIndiaHome">
       {t('suno')} {t('india')}
     </h1>
   );
