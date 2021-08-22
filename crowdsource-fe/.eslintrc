@@ -45,7 +45,7 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "moduleDirectory": ["."],
+        "moduleDirectory": ["src"],
         "extensions": [".js", ".jsx"]
       }
     }

@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --dir components --dir constants --dir hooks --dir pages --dir utils"
+    "lint": "next lint --dir src"
   },
   "dependencies": {
     "bootstrap": "^5.1.0",
