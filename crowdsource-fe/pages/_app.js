@@ -1,3 +1,5 @@
+import { appWithTranslation } from 'next-i18next';
+
 import 'bootstrap/dist/css/bootstrap.css';
 
 import 'styles/theme.css';
@@ -13,4 +15,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp);

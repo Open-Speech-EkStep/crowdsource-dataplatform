@@ -1,17 +1,20 @@
-import Link from 'next/link';
+import classnames from 'classnames';
 import { useRouter } from 'next/router';
 
-import translationConstants from 'constants/translationConstants';
+import Link from 'components/Link';
+import { DISPLAY_LANGUAGES } from 'constants/localesConstants';
 
 function LanguageSwitcher() {
-  const { asPath: currentRoutePath, locales, pathname, query } = useRouter();
+  const { asPath: currentRoutePath, locale: currentLocale, locales } = useRouter();
 
   return (
     <ul className="navbar-nav">
       {locales.map(locale => (
         <li key={locale} className="nav-item">
-          <Link href={{ pathname, query }} as={currentRoutePath} locale={locale}>
-            <a className="nav-link">{translationConstants[locale]}</a>
+          <Link href={currentRoutePath} locale={locale}>
+            <a className={classnames('nav-link', { active: currentLocale === locale })}>
+              {DISPLAY_LANGUAGES[locale]}
+            </a>
           </Link>
         </li>
       ))}

@@ -1,11 +1,11 @@
-import useTranslate from 'hooks/useTranslate';
+import { useTranslation } from 'next-i18next';
 
 import styles from './Footer.module.css';
 
 function Footer() {
-  const { translate } = useTranslate();
+  const { t } = useTranslation();
 
-  return <footer className={styles.root}>{translate('termsAndConditions')}</footer>;
+  return <footer className={styles.root}>{t('termsAndConditions')}</footer>;
 }
 
 export default Footer;
