@@ -3,7 +3,7 @@ module.exports = {
     'src/**/*.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
     '!**/node_modules/**',
-    '!src/pages/index.js',
+    '!src/pages/index.page.js',
   ],
   coverageThreshold: {
     global: {
