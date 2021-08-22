@@ -14,6 +14,7 @@
     "format": "prettier --write src public",
     "test": "jest --watch",
     "test:coverage": "npm test -- --coverage --watchAll=false",
+    "test:lh-ci": "rimraf .lighthouseci/ && cross-env LIGHTHOUSE_CI_PORT=3000 lhci --config=./.lighthouserc.js autorun",
     "check": "npm run lint && cross-env CI=true npm run test:coverage"
   },
   "dependencies": {
@@ -27,6 +28,7 @@
     "swr": "^0.5.6"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.8.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/react-hooks": "^7.0.1",
@@ -43,6 +45,8 @@
     "jest-fetch-mock": "^3.0.3",
     "jest-watch-typeahead": "^0.6.4",
     "next-router-mock": "^0.2.2",
-    "prettier": "^2.3.2"
+    "prettier": "^2.3.2",
+    "puppeteer": "^10.2.0",
+    "rimraf": "^3.0.2"
   }
 }
