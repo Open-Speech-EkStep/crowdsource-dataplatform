@@ -1,6 +1,6 @@
 import { render } from 'utils/testUtils';
 
-import FourOFour from '../404';
+import FourOFour from '../404.page';
 
 describe('FourOFour', () => {
   const setup = () => render(<FourOFour />);

@@ -1,6 +1,6 @@
 import { render } from 'utils/testUtils';
 
-import SunoIndiaHome from '../home';
+import SunoIndiaHome from '../home.page';
 
 describe('SunoIndiaHome', () => {
   const setup = () => render(<SunoIndiaHome />);

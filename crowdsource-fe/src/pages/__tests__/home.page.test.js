@@ -1,6 +1,6 @@
 import { render } from 'utils/testUtils';
 
-import Home from '../home';
+import Home from '../home.page';
 
 describe('Home', () => {
   const setup = () => render(<Home />);

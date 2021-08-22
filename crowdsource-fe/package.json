@@ -38,6 +38,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^24.4.0",
     "identity-obj-proxy": "^3.0.0",
+    "ignore-loader": "^0.1.2",
     "jest": "^27.0.6",
     "jest-fetch-mock": "^3.0.3",
     "jest-watch-typeahead": "^0.6.4",

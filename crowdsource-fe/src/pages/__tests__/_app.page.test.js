@@ -1,6 +1,6 @@
 import { render } from 'utils/testUtils';
 
-import App from '../_app';
+import App from '../_app.page';
 
 describe('App', () => {
   const setup = () => {
