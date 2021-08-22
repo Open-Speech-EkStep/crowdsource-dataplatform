@@ -1,3 +1,3 @@
-export default {
-  locales: locale => `/locales/${locale}.json`,
-};
+const apiPaths = {};
+
+export default apiPaths;
