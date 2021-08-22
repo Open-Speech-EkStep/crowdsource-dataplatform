@@ -7,6 +7,9 @@
     "next/core-web-vitals",
     "prettier"
   ],
+  "globals": {
+    "fetchMock": true
+  },
   "rules": {
     "no-unused-vars": 2,
     "no-undef": 2,

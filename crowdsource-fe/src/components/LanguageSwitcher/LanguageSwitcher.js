@@ -8,7 +8,7 @@ function LanguageSwitcher() {
   const { asPath: currentRoutePath, locale: currentLocale, locales } = useRouter();
 
   return (
-    <ul className="navbar-nav">
+    <ul data-testid="LanguageSwitcher" className="navbar-nav">
       {locales.map(locale => (
         <li key={locale} className="nav-item">
           <Link href={currentRoutePath} locale={locale}>

@@ -9,7 +9,7 @@ function Layout({ children }) {
   const { t } = useTranslation();
 
   return (
-    <>
+    <div data-testid="Layout">
       <Head>
         <title>{t('metaTitle')}</title>
         <meta charSet="UTF-8" />
@@ -26,7 +26,7 @@ function Layout({ children }) {
       <Header />
       <Body>{children}</Body>
       <Footer />
-    </>
+    </div>
   );
 }
 

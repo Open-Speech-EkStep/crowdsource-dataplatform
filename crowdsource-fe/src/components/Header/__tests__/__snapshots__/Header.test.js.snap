@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <header
+    class="position-sticky root"
+    data-testid="Header"
+    role="banner"
+  >
+    <nav
+      class="navbar navbar-expand-lg navbar-light container-fluid flex-wrap flex-md-nowrap"
+    >
+      <ul
+        class="navbar-nav me-auto mb-2 mb-lg-0"
+      >
+        <li
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            href="/home"
+          >
+            home
+          </a>
+        </li>
+        <li
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            href="/sunoIndia/home"
+          >
+            suno india
+          </a>
+        </li>
+      </ul>
+      <ul
+        class="navbar-nav"
+        data-testid="LanguageSwitcher"
+      >
+        <li
+          class="nav-item"
+        >
+          <a
+            class="nav-link active"
+            href=""
+          >
+            English
+          </a>
+        </li>
+        <li
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            href=""
+          >
+            हिंदी
+          </a>
+        </li>
+        <li
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            href=""
+          >
+            ગુજરાતી
+          </a>
+        </li>
+        <li
+          class="nav-item"
+        >
+          <a
+            class="nav-link"
+            href=""
+          >
+            ਪੰਜਾਬੀ
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+</DocumentFragment>
+`;

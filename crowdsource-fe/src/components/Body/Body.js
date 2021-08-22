@@ -1,6 +1,6 @@
 function Body({ children }) {
   return (
-    <main role="main" className="container-xxl my-md-4">
+    <main data-testid="Body" role="main" className="container-xxl my-md-4">
       {children}
     </main>
   );

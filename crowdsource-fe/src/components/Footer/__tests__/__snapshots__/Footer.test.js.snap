@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <footer
+    class="root"
+    data-testid="Footer"
+  >
+    termsAndConditions
+  </footer>
+</DocumentFragment>
+`;

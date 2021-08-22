@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Body should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <main
+    class="container-xxl my-md-4"
+    data-testid="Body"
+    role="main"
+  >
+    Hello World
+  </main>
+</DocumentFragment>
+`;
