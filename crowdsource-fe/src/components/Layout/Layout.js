@@ -1,9 +1,14 @@
 import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 
 import Body from 'components/Body';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
+
+const propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 function Layout({ children }) {
   const { t } = useTranslation();
@@ -29,5 +34,7 @@ function Layout({ children }) {
     </div>
   );
 }
+
+Layout.propTypes = propTypes;
 
 export default Layout;
