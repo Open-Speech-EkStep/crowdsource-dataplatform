@@ -98,6 +98,21 @@ $locale_language_dropdown.off('hide.bs.dropdown').on('hide.bs.dropdown',()=>{
   $locale_language_dropdown.removeClass('active')
 })
 
+const collapseMobileNavigation = () => {
+  const $navbar = $('.navbar-collapse');
+  if($navbar.hasClass('show')) {
+    $navbar.collapse('hide');
+  }
+};
+
+$('#localeDropdownMenuButton').click(() => {
+  collapseMobileNavigation();
+});
+
+$('#nav-user').click(() => {
+  collapseMobileNavigation();
+});
+
 module.exports = {
   onActiveNavbar,
   onChangeUser,
