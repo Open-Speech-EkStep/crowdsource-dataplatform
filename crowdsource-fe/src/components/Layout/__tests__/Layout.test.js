@@ -1,4 +1,4 @@
-import { render, verifyAxeTest} from 'utils/testUtils';
+import { render, verifyAxeTest } from 'utils/testUtils';
 
 import Layout from '../Layout';
 
