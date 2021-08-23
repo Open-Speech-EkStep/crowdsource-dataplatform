@@ -49,7 +49,7 @@
     "import/resolver": {
       "node": {
         "moduleDirectory": ["src"],
-        "extensions": [".js", ".jsx"]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
   }
