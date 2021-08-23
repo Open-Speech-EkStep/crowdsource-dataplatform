@@ -1,3 +1,5 @@
+import { axe } from 'jest-axe';
+
 import { render } from 'utils/testUtils';
 
 import App from '../_app.page';
@@ -8,6 +10,12 @@ describe('App', () => {
 
     return render(<App Component={Component} />);
   };
+
+  it('should not fail an axe audit', async () => {
+    const { container } = setup();
+
+    expect(await axe(container)).toHaveNoViolations();
+  });
 
   it('should render the Layout component', () => {
     const { getByTestId } = setup();
