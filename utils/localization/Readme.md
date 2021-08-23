@@ -24,7 +24,7 @@ This utility allows users to generate excel file(with all keys / delta keys) fro
 
 1. To generate from 'en' locale file, run from the following:
    ```
-   python all_keys_excel_generator.py -j ./../../crowdsource-ui/locales -o 
+   python all_keys_excel_generator.py -j ./../../crowdsource-ui/locales -o \
             ./out/en.xlsx --only-en -v ./../../crowdsource-ui/src/views
    ```
 
@@ -34,7 +34,7 @@ This utility allows users to generate excel file(with all keys / delta keys) fro
 
    To generate for all languages, run from the following:
    ```
-   python all_keys_excel_generator.py -j ./../../crowdsource-ui/locales -o 
+   python all_keys_excel_generator.py -j ./../../crowdsource-ui/locales -o \
             ./out/out.xlsx -v ./../../crowdsource-ui/src/views
    ```
 
@@ -57,6 +57,16 @@ This utility allows users to generate excel file(with all keys / delta keys) fro
 (For more info on above command, use -h for help)
 In `./out/` folder all locale files are generated after the above command is ran. This will have all the updated corrections. This folder should be used in delta generation. 
 
+#### Below described are the possibilities:
+```
+ only-delta, all-keys
+    1. separate sheets - all languages
+    2. separate sheets - specific languages
+    3. single sheet - all languages
+    4. single sheet - specific languages
+```
+
+
 #### Generation of delta files for all the locales:
 
 1. To generate delta , run one of the following:
@@ -69,13 +79,13 @@ In `./out/` folder all locale files are generated after the above command is ran
          
    - For all keys, but specific languages on a single excel sheet:
    ```
-   python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -l gu pa --all-keys --output-type SINGLE_SHEET
+   python delta_generator.py -i ./all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -l gu pa --all-keys --output-type SINGLE_SHEET
    ```
    
    - For all keys, all languages on a single excel sheet:
    
    ```
-   python delta_generator.py -i ./../all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -a --all-keys --output-type SINGLE_SHEET
+   python delta_generator.py -i ./all_keys_json_out -o ./delta_out -v ./../../crowdsource-ui/src/views -a --all-keys --output-type SINGLE_SHEET
    ```
    
 2. This will provide `out-meta` folder and `out-sme` folder inside /delta_out. Copy these to another location for later use(** Mandatory **).
@@ -112,12 +122,13 @@ In `./out/` folder all locale files are generated after the above command is ran
 
    - For all languages taking single translation file that has all languages as input:
    ```
-   python locale_generator.py -j ./../../crowdsource_ui/locales 
-                               -e ./translation_excel_files 
-                               -m ./translation_meta_files 
-                               -o ./locale_output 
-                               -t combined
-                               -a
+   python locale_generator.py \
+               -j ./all_keys_json_out \
+               -e ./delta_out/out-sme/out_sme.xlsx \
+               -m ./delta_out/out-meta/out_meta.xlsx \
+               -o ./locale_generation_out \
+               -t combined \
+               -a
    ```
                                                
    - For all languages taking separate translation files for each language as input:

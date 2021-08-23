@@ -28,6 +28,13 @@ def reformat_json(json_obj):
 
 
 def set_variables(df_row):
+    try:
+        if "<s>" in df_row[english_col]:
+            df_row[english_col] = df_row[english_col].replace("<s>", "<span>")
+        if "</s>" in df_row[english_col]:
+            df_row[english_col] = df_row[english_col].replace("</s>", "</span>")
+    except:
+        pass
     for value in allowed_values:
         try:
             if pd.notna(df_row[value]):

@@ -63,16 +63,19 @@ class LocaleProcessor:
 
         if self.a_tag_replacement in column_names and self.language_name in column_names:
             if pd.notna(df_row[self.a_tag_replacement]):
-                start_index = df_row[self.language_name].find('<a') + 2
-                end_index = df_row[self.language_name].find('>')
+                try:
+                    start_index = df_row[self.language_name].find('<a') + 2
+                    end_index = df_row[self.language_name].find('>')
 
-                if self.language_name in column_names and pd.notna(df_row[self.language_name]):
-                    df_row[self.language_name] = df_row[self.language_name][:start_index] + df_row[
-                        self.a_tag_replacement] + \
-                                                 df_row[self.language_name][end_index:]
+                    if self.language_name in column_names and pd.notna(df_row[self.language_name]):
+                        df_row[self.language_name] = df_row[self.language_name][:start_index] + df_row[
+                            self.a_tag_replacement] + \
+                                                     df_row[self.language_name][end_index:]
 
-                df_row[self.english_column_name] = df_row[self.english_column_name][:start_index] + df_row[
-                    self.a_tag_replacement] + df_row[self.english_column_name][end_index:]
+                    df_row[self.english_column_name] = df_row[self.english_column_name][:start_index] + df_row[
+                        self.a_tag_replacement] + df_row[self.english_column_name][end_index:]
+                except Exception as e:
+                    print(e, df_row[self.english_column_name])
 
         return df_row
 
@@ -112,7 +115,7 @@ class LocaleProcessor:
         merged_excel_df = pd.merge(excel_df, meta_excel_df, on=self.english_column_name,
                                    how='inner')
 
-        self.compare_and_update_extracted_tags(tmp_df, merged_excel_df)
+        # self.compare_and_update_extracted_tags(tmp_df, merged_excel_df)
 
         merged_excel_df = merged_excel_df.apply(self.restructure_extracted_tags, axis=1)
         merged_excel_df = self.clean_merged_excel(merged_excel_df, self.language_name)
