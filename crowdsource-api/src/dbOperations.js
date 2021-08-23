@@ -310,7 +310,7 @@ const updateTablesAfterValidation = async (req, res) => {
     const validatorId = await getContributorId(userId, userName);
     return db.result(addValidationQuery, [validatorId, sentenceId, action, contributionId, state, country, device, browser])
         .then(async (insertResult) => {
-            console.log("/validate after validation insertion")
+            console.log("/validate after validation insertion " + contributionId)
             if(insertResult && insertResult.rowCount === 0){
                 res.status(422).send("Contributor cannot validate his own contribution");
                 return;
@@ -329,9 +329,9 @@ const updateTablesAfterValidation = async (req, res) => {
             }
             else  res.status(200).send({message: "Skip Successfull"});
 
-            console.log("/validate after response set")
+            console.log("/validate after response set " + contributionId)
             cacheOperation.updateCacheAfterValidation(contributionId, type, fromLanguage, language, action, userId, userName);
-            console.log("/validate after cache set")
+            console.log("/validate after cache set " + contributionId)
         })
         .catch((err) => {
             console.log(err);
@@ -693,7 +693,7 @@ const updateDbWithUserInput = async (
         browser
     ])
         .then(() => {
-            console.log("/store after contribution insertion")
+            console.log("/store after contribution insertion" + datasetId)
             db.result(updateMediaWithContributedState, [datasetId]).then(result=>{
                 if(result.rowCount == 0){
                     console.log(`Update Query Failure: Dataset with id = ${datasetId} , failed to be updated by contributor with id = ${contributor_id}`)
@@ -705,9 +705,9 @@ const updateDbWithUserInput = async (
                 fromLanguage = language;
                 language = '';
             }
-            console.log("/store after response set");
+            console.log("/store after response set " + datasetId);
             cacheOperation.removeItemFromCache(datasetId, type, fromLanguage, language);
-            console.log("/store after cache updated")
+            console.log("/store after cache updated" + datasetId)
         })
         .catch((err) => {
             console.log(err);
