@@ -305,7 +305,7 @@ step("When user clicks on View all Details buttton , user shall land on Dashboar
     await click(taiko.link({ id: 'viewAllDetailsBtn' }))
     await taiko.waitFor(1000)
     assert.ok(await text("Languages").exists());
-    assert.ok(await text("Speakers contributed").exists());
+    assert.ok(await text("People participated").exists());
     assert.ok(await text("Duration recorded").exists());
     assert.ok(await text("Duration recorded").exists());
 });

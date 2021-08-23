@@ -3,6 +3,18 @@ const TOP_LANGUAGES_BY_SPEAKERS = "topLanguagesBySpeakers";
 const { calculateTime, formatTime, formatTimeForLegends, getJson, translate } = require('./utils');
 const { drawTopLanguageChart } = require('../../../build/js/common/verticalGraph');
 
+const getTotalParticipation = (data) => {
+  let validation_count = 0;
+  let contribution_count = 0;
+  if(data.total_validations){
+    validation_count = Number(data.total_validations);
+  }
+  if(data.total_contributions){
+    contribution_count = Number(data.total_contributions);
+  }
+  return validation_count + contribution_count;
+}
+
 const statesInformation = [
   { id: 'IN-TG', state: 'Telangana', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
   { id: 'IN-AN', state: 'Andaman and Nicobar Islands', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
@@ -49,7 +61,7 @@ const drawMap = function (response) {
   const maxContribution = Math.max.apply(
     Math,
     response.map(function (ele) {
-      return Number(ele.total_contributions);
+      return getTotalParticipation(ele);
     })
   );
   let quarterVal;
@@ -74,7 +86,7 @@ const drawMap = function (response) {
       } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
       st.contributed_time = formatTime(cHours, cMinutes, cSeconds);
       st.validated_time = formatTime(vHours, vMinutes, vSeconds);
-      st.value = Number(ele.total_contributions);
+      st.value = getTotalParticipation(ele);
       st.total_speakers = ele.total_speakers;
     } else {
       st.contributed_time = formatTime(0,0,0);

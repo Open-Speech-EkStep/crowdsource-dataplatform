@@ -1,5 +1,28 @@
 const { calculateTime, formatTime, formatTimeForLegends, formatTransAndImages, getJson, translate } = require('./utils');
 
+
+const getTotalParticipation = (data, moduleType) => {
+  let validation_count = 0;
+  let contribution_count = 0;
+
+  if( moduleType == "parallel" || moduleType == "ocr" ){
+    if(data.total_validation_count){
+      validation_count = Number(data.total_validation_count);
+    }
+    if(data.total_contribution_count){
+      contribution_count = Number(data.total_contribution_count);
+    }
+  } else {
+    if(data.total_validations){
+      validation_count = Number(data.total_validations);
+    }
+    if(data.total_contributions){
+      contribution_count = Number(data.total_contributions);
+    }
+  }
+  return validation_count + contribution_count;
+}
+
 const statesInformation = [
   { id: 'IN-TG', state: 'Telangana', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
   { id: 'IN-AN', state: 'Andaman and Nicobar Islands', contributed_time: "0s", validated_time: "0s", total_speakers: 0 },
@@ -49,7 +72,7 @@ const drawMap = function (response, moduleType) {
   const maxContribution = Math.max.apply(
     Math,
     response.map(function (ele) {
-      return moduleType === "parallel" || moduleType === "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
+      return getTotalParticipation(ele, moduleType);
     })
   );
   let quarterVal;
@@ -73,7 +96,7 @@ const drawMap = function (response, moduleType) {
       } = calculateTime(Number(ele.total_validations) * 60 * 60, true);
       st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : formatTime(cHours, cMinutes, cSeconds);
       st.validated_time = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_validation_count) : formatTime(vHours, vMinutes, vSeconds);
-      st.value = moduleType == "parallel" || moduleType == "ocr" ? Number(ele.total_contribution_count) : Number(ele.total_contributions);
+      st.value = getTotalParticipation(ele, moduleType);
       st.total_speakers = ele.total_speakers;
     } else {
       st.contributed_time = moduleType == "parallel" || moduleType == "ocr" ? '0' : formatTime(0, 0, 0);
