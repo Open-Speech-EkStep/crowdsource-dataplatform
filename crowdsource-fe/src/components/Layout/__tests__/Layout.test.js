@@ -1,15 +1,22 @@
+import { axe } from 'jest-axe';
+
 import { render } from 'utils/testUtils';
 
 import Layout from '../Layout';
 
 describe('Layout', () => {
-  const setup = () => {
-    return render(
+  const setup = () =>
+    render(
       <Layout>
         <div>Hello World</div>
       </Layout>
     );
-  };
+
+  it('should not fail an axe audit', async () => {
+    const { container } = setup();
+
+    expect(await axe(container)).toHaveNoViolations();
+  });
 
   it('should render the Header component', () => {
     const { getByTestId } = setup();

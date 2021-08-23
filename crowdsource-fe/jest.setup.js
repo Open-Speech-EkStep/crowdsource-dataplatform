@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
+import { configureAxe, toHaveNoViolations } from 'jest-axe';
 import jestFetchMock from 'jest-fetch-mock';
 
 jest.mock('next/router', () => {
@@ -35,3 +36,13 @@ jest.mock('react-i18next', () => ({
 }));
 
 jestFetchMock.enableMocks();
+
+// As we're testing on the JSDOM, color-contrast testing can't run.
+// The types of results fetched are limited for performance reasons
+configureAxe({
+  rules: {
+    'color-contrast': { enabled: false },
+  },
+  resultTypes: ['violations', 'incomplete'],
+});
+expect.extend(toHaveNoViolations);

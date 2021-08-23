@@ -1,3 +1,4 @@
+import { axe } from 'jest-axe';
 import router from 'next/router';
 
 import routePaths from 'constants/routePaths';
@@ -7,6 +8,12 @@ import Header from '../Header';
 
 describe('Header', () => {
   const setup = () => render(<Header />);
+
+  it('should not fail an axe audit', async () => {
+    const { container } = setup();
+
+    expect(await axe(container)).toHaveNoViolations();
+  });
 
   it('should render the component and matches it against stored snapshot', () => {
     const { asFragment } = setup();
