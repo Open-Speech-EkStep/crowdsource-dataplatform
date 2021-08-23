@@ -1,6 +1,4 @@
-import { axe } from 'jest-axe';
-
-import { render } from 'utils/testUtils';
+import { render, verifyAxeTest} from 'utils/testUtils';
 
 import Layout from '../Layout';
 
@@ -12,11 +10,7 @@ describe('Layout', () => {
       </Layout>
     );
 
-  it('should not fail an axe audit', async () => {
-    const { container } = setup();
-
-    expect(await axe(container)).toHaveNoViolations();
-  });
+  verifyAxeTest(setup());
 
   it('should render the Header component', () => {
     const { getByTestId } = setup();
