@@ -46,3 +46,6 @@ configureAxe({
   resultTypes: ['violations', 'incomplete'],
 });
 expect.extend(toHaveNoViolations);
+
+// increased limit to support `next-router-mock`
+require('events').prototype.setMaxListeners(200);

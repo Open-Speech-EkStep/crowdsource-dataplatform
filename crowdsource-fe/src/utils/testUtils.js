@@ -1,4 +1,6 @@
-import { render } from '@testing-library/react';
+/* eslint-disable jest/no-export */
+import { render, act } from '@testing-library/react';
+import { axe } from 'jest-axe';
 
 const Wrapper = ({ children }) => children;
 
@@ -11,3 +13,15 @@ export { renderHook } from '@testing-library/react-hooks';
 
 // override render method
 export { customRender as render };
+
+export const verifyAxeTest = ({ container }) => {
+  it('should not fail an axe audit', async () => {
+    let axeResult;
+
+    await act(async () => {
+      axeResult = await axe(container);
+    });
+
+    expect(axeResult).toHaveNoViolations();
+  });
+};

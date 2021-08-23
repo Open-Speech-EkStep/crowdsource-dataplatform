@@ -1,7 +1,6 @@
-import { axe } from 'jest-axe';
 import router from 'next/router';
 
-import { render } from 'utils/testUtils';
+import { render, verifyAxeTest } from 'utils/testUtils';
 
 import Link from '../Link';
 
@@ -23,11 +22,7 @@ describe('Link', () => {
       </Link>
     );
 
-  it('should not fail an axe audit', async () => {
-    const { container } = setup();
-
-    expect(await axe(container)).toHaveNoViolations();
-  });
+  verifyAxeTest(setup());
 
   it('should render the component and matches it against stored snapshot', () => {
     const { asFragment } = setup();
