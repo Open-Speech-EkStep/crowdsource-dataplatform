@@ -12,8 +12,8 @@
 
 | Package | Version |
 | ------- | ------- |
-| npm     | 6.9.0   |
-| node    | 12.16.0 |
+| npm     | 6.14.14 |
+| node    | 14.17.5 |
 
 If you are using [nvm](https://github.com/nvm-sh/nvm), you can run `nvm use` in the root directory to install the correct version of node.
 
