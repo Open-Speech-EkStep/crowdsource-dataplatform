@@ -28,15 +28,17 @@ const getRandom = (arr, n) => {
 const generateResponse = (data, desiredCount, userId, userName) => {
 	let response = [];
 	let randomItems = getRandom(data, desiredCount);
+	const randomItemsDataSetRowIds = randomItems.map(i => i.dataset_row_id);
+	data = data.filter(d => !randomItemsDataSetRowIds.includes(d.dataset_row_id));
 	const itemLength = randomItems.length;
 	let i = 0;
 	let skipCount = 0;
 	let includedIds = [];
-	while (response.length < itemLength && skipCount < (data.length - response.length)) {
+	while (response.length + skipCount < itemLength) {
 		if (randomItems[i].skipped_by && randomItems[i].skipped_by.includes(`${userId}-${userName}`)) {
 			skipCount++;
 			let obj = getRandom(data, 1)[0];
-			if (includedIds.includes(obj.dataset_row_id)) {
+			if (!obj || includedIds.includes(obj.dataset_row_id)) {
 				randomItems.splice(i, 1);
 			}
 			else {
