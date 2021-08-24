@@ -1,4 +1,4 @@
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { render, screen, verifyAxeTest } from 'utils/testUtils';
 
 import App from '../_app.page';
 
@@ -12,14 +12,14 @@ describe('App', () => {
   verifyAxeTest(setup());
 
   it('should render the Layout component', () => {
-    const { getByTestId } = setup();
+    setup();
 
-    expect(getByTestId('Layout')).toBeInTheDocument();
+    expect(screen.getByTestId('Layout')).toBeInTheDocument();
   });
 
   it('should render the passed component', () => {
-    const { getByText } = setup();
+    setup();
 
-    expect(getByText('Hello World')).toBeInTheDocument();
+    expect(screen.getByText('Hello World')).toBeInTheDocument();
   });
 });

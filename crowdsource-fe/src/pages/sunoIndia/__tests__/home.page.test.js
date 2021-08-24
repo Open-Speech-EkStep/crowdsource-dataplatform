@@ -1,4 +1,4 @@
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { render, screen, verifyAxeTest } from 'utils/testUtils';
 
 import SunoIndiaHome from '../home.page';
 
@@ -8,8 +8,8 @@ describe('SunoIndiaHome', () => {
   verifyAxeTest(setup());
 
   it('should render the suno India homepage', () => {
-    const { getByTestId } = setup();
+    setup();
 
-    expect(getByTestId('SunoIndiaHome')).toBeInTheDocument();
+    expect(screen.getByTestId('SunoIndiaHome')).toBeInTheDocument();
   });
 });

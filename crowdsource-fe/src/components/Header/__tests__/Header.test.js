@@ -1,7 +1,7 @@
 import router from 'next/router';
 
 import routePaths from 'constants/routePaths';
-import { render, fireEvent, verifyAxeTest } from 'utils/testUtils';
+import { render, fireEvent, screen, verifyAxeTest } from 'utils/testUtils';
 
 import Header from '../Header';
 
@@ -17,17 +17,17 @@ describe('Header', () => {
   });
 
   it('should change the url to suno India homepage when navigated through its nav link', () => {
-    const { getByRole } = setup();
+    setup();
 
-    fireEvent.click(getByRole('link', { name: 'suno india' }));
+    fireEvent.click(screen.getByRole('link', { name: 'suno india' }));
 
     expect(router.pathname).toBe(routePaths.sunoIndiaHome);
   });
 
   it('should change the url to homepage when navigated through its nav link', () => {
-    const { getByRole } = setup();
+    setup();
 
-    fireEvent.click(getByRole('link', { name: 'home' }));
+    fireEvent.click(screen.getByRole('link', { name: 'home' }));
 
     expect(router.pathname).toBe(routePaths.home);
   });

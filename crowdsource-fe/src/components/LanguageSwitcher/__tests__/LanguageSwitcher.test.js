@@ -1,6 +1,6 @@
 import router from 'next/router';
 
-import { render, fireEvent, verifyAxeTest } from 'utils/testUtils';
+import { render, fireEvent, screen, verifyAxeTest } from 'utils/testUtils';
 
 import LanguageSwitcher from '../LanguageSwitcher';
 
@@ -16,9 +16,9 @@ describe('LanguageSwitcher', () => {
   });
 
   it('should change the locale to hindi', () => {
-    const { getByRole } = setup();
+    setup();
 
-    fireEvent.click(getByRole('link', { name: 'हिंदी' }));
+    fireEvent.click(screen.getByRole('link', { name: 'हिंदी' }));
 
     expect(router.locale).toBe('hi');
   });

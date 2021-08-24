@@ -1,4 +1,4 @@
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { render, screen, verifyAxeTest } from 'utils/testUtils';
 
 import FourOFour from '../404.page';
 
@@ -8,9 +8,9 @@ describe('FourOFour', () => {
   verifyAxeTest(setup());
 
   it('should render the 404 page', () => {
-    const { getByText } = setup();
+    setup();
 
-    expect(getByText('404')).toBeInTheDocument();
-    expect(getByText('404Title.')).toBeInTheDocument();
+    expect(screen.getByText('404')).toBeInTheDocument();
+    expect(screen.getByText('404Title.')).toBeInTheDocument();
   });
 });
