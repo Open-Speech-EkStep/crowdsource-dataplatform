@@ -7,6 +7,7 @@ function Home() {
   return <h1 data-testid="Home">{t('home')}</h1>;
 }
 
+/* istanbul ignore next */
 export async function getStaticProps({ locale }) {
   return {
     props: {

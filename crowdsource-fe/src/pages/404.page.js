@@ -8,6 +8,7 @@ function FourOFour() {
   return <ErrorComponent statusCode={404} title={t('404Title')} />;
 }
 
+/* istanbul ignore next */
 export async function getStaticProps({ locale }) {
   return {
     props: {
