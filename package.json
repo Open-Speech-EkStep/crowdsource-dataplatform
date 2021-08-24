@@ -48,6 +48,8 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "del": "^5.1.0",
     "fetch-mock": "^9.11.0",
     "glob-parent": "^5.1.2",
