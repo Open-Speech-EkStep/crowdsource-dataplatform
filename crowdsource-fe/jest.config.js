@@ -4,13 +4,14 @@ module.exports = {
     '!**/*.d.ts',
     '!**/node_modules/**',
     '!src/pages/index.page.js',
+    '!src/**/index.js',
   ],
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 80,
-      lines: 90,
-      statements: 90,
+      branches: 95,
+      functions: 95,
+      lines: 95,
+      statements: 95,
     },
   },
   moduleNameMapper: {

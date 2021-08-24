@@ -11,6 +11,7 @@ function SunoIndiaHome() {
   );
 }
 
+/* istanbul ignore next */
 export async function getStaticProps({ locale }) {
   return {
     props: {
