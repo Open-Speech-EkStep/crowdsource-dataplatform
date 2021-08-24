@@ -1,4 +1,4 @@
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { render, screen, verifyAxeTest } from 'utils/testUtils';
 
 import Home from '../home.page';
 
@@ -8,8 +8,8 @@ describe('Home', () => {
   verifyAxeTest(setup());
 
   it('should render the homepage', () => {
-    const { getByTestId } = setup();
+    setup();
 
-    expect(getByTestId('Home')).toBeInTheDocument();
+    expect(screen.getByTestId('Home')).toBeInTheDocument();
   });
 });

@@ -1,4 +1,4 @@
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { render, screen, verifyAxeTest } from 'utils/testUtils';
 
 import Layout from '../Layout';
 
@@ -13,21 +13,21 @@ describe('Layout', () => {
   verifyAxeTest(setup());
 
   it('should render the Header component', () => {
-    const { getByTestId } = setup();
+    setup();
 
-    expect(getByTestId('Header')).toBeInTheDocument();
+    expect(screen.getByTestId('Header')).toBeInTheDocument();
   });
 
   it('should render the Body component', () => {
-    const { getByTestId, getByText } = setup();
+    setup();
 
-    expect(getByTestId('Body')).toBeInTheDocument();
-    expect(getByText('Hello World')).toBeInTheDocument();
+    expect(screen.getByTestId('Body')).toBeInTheDocument();
+    expect(screen.getByText('Hello World')).toBeInTheDocument();
   });
 
   it('should render the Footer component', () => {
-    const { getByTestId } = setup();
+    setup();
 
-    expect(getByTestId('Footer')).toBeInTheDocument();
+    expect(screen.getByTestId('Footer')).toBeInTheDocument();
   });
 });
