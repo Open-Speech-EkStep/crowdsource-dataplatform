@@ -4,20 +4,67 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+
 <url>
   <loc>https://bhashini.gov.in/bhashadaan</loc>
-  <lastmod>2020-06-18T12:14:29+00:00</lastmod>
+  <lastmod>2021-08-19T06:54:32+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://bhashini.gov.in/bhashadaan</loc>
-  <lastmod>2020-06-18T12:14:29+00:00</lastmod>
+  <loc>https://bhashini.gov.in/bhashadaan/en/sunoIndia/home.html</loc>
+  <lastmod>2021-08-19T06:54:43+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bhashini.gov.in/bhashadaan/en/boloIndia/home.html</loc>
+  <lastmod>2021-08-19T06:54:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bhashini.gov.in/bhashadaan/en/likhoIndia/home.html</loc>
+  <lastmod>2021-08-19T06:54:26+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bhashini.gov.in/bhashadaan/en/dekhoIndia/home.html</loc>
+  <lastmod>2021-08-19T06:54:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bhashini.gov.in/bhashadaan/en/my-badges.html</loc>
+  <lastmod>2021-08-19T06:54:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bhashini.gov.in/bhashadaan/en/badges.html</loc>
+  <lastmod>2021-08-19T06:54:46+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://bhashini.gov.in/bhashadaan/en/terms-and-conditions.html</loc>
-  <lastmod>2020-06-18T12:14:29+00:00</lastmod>
+  <lastmod>2021-08-19T06:54:33+00:00</lastmod>
   <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bhashini.gov.in/bhashadaan/en/sunoIndia/dashboard.html</loc>
+  <lastmod>2021-08-19T06:54:38+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bhashini.gov.in/bhashadaan/en/boloIndia/dashboard.html</loc>
+  <lastmod>2021-08-19T06:54:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bhashini.gov.in/bhashadaan/en/likhoIndia/dashboard.html</loc>
+  <lastmod>2021-08-19T06:54:44+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bhashini.gov.in/bhashadaan/en/dekhoIndia/dashboard.html</loc>
+  <lastmod>2021-08-19T06:54:39+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 
 
