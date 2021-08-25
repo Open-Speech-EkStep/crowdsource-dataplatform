@@ -2,6 +2,8 @@ import '@testing-library/jest-dom/extend-expect';
 import { configureAxe, toHaveNoViolations } from 'jest-axe';
 import jestFetchMock from 'jest-fetch-mock';
 
+require('next-router-mock').default.events = require('mitt')();
+
 jest.mock('next/router', () => {
   const router = require('next-router-mock');
   const i18nConfig = require('./next-i18next.config');
@@ -46,6 +48,3 @@ configureAxe({
   resultTypes: ['violations', 'incomplete'],
 });
 expect.extend(toHaveNoViolations);
-
-// increased limit to support `next-router-mock`
-require('events').prototype.setMaxListeners(200);
