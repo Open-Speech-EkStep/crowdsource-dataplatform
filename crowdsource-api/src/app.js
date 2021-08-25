@@ -117,12 +117,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(express.static('../crowdsource-ui/target'));
-
-router.get('/', function (req, res) {
-    // #swagger.ignore = true
-    res.redirect('en/home.html');
-});
+app.use(express.static('../crowdsource-ui/target', { redirect: false }));
 
 router.get('/profanity/:type', function (req, res) {
     // #swagger.ignore = true
@@ -175,7 +170,7 @@ router.post('/media/:type', validateUserInfo, (req, res) => {
                 description: 'user id cookie',
                 required: true,
                 schema: 123
-        } 
+        }
         #swagger.responses[200] = {
         description: 'response data',
         schema: {"data": [{"dataset_row_id": "123", "media_data": "qwe", "source_info": "abc"}]}
@@ -325,7 +320,7 @@ router.post('/skip', validateInputForSkip, markContributionSkippedInCache, (req,
                     "state_region": "Punjab",
                     "country": "India",
                     "device": "deviceName",
-                    "browser": "browserName", 
+                    "browser": "browserName",
                     "type": "parallel"}
     } */
     const language = req.body.language || ''
@@ -366,7 +361,7 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
             "state": "Punjab",
             "country": "India",
             "device": "deviceName",
-            "browser": "browserName", 
+            "browser": "browserName",
             "type": "parallel",
             "fromLanguage": "English"
             }
@@ -649,7 +644,7 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
 router.get('/rewards', validateRewardsInput, async (req, res) => {
     // #swagger.tags = ['Thank you']
     //  #swagger.description = 'Endpoint for reward details of user'
-    /*    
+    /*
         #swagger.parameters['userId'] = {
                 in: 'cookies',
                 type: 'string',
@@ -689,7 +684,7 @@ router.get('/rewards', validateRewardsInput, async (req, res) => {
             "badgeId": "1324",
             "currentBadgeType": "silver",
             "nextBadgeType": "gold",
-            "sequence": "3rd",   
+            "sequence": "3rd",
             "currentMilestone": "25",
             "nextMilestone": "100",
             "contributionCount": "30",
@@ -730,7 +725,7 @@ router.get('/rewards-info', validateRewardsInfoInput, async (req, res) => {
         required: true,
         in: 'query',
         schema: 'Hindi'
-        } 
+        }
         #swagger.responses[200] = {
         description: 'response data',
         schema: [{
@@ -767,7 +762,7 @@ router.get('/user-rewards/:username?', async (req, res) => {
         required: false,
         in: 'query',
         schema: 'name'
-        } 
+        }
         #swagger.responses[200] = {
         description: 'response data',
         schema: [{

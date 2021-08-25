@@ -6,16 +6,18 @@
     "node": "14.17.5"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "clean": "rimraf .next out .lighthouseci coverage",
+    "dev": "node server.js",
     "lint": "next lint --dir src",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write src public",
     "test": "jest --watch",
     "test:coverage": "npm test -- --coverage --watchAll=false",
-    "test:lh-ci": "rimraf .lighthouseci/ && cross-env LIGHTHOUSE_CI_PORT=3000 lhci --config=./.lighthouserc.js autorun",
-    "check": "npm run lint && cross-env CI=true npm run test:coverage"
+    "test:lh-ci": "rimraf .lighthouseci/ && cross-env LIGHTHOUSE_CI_PORT=8080 lhci --config=./.lighthouserc.js autorun",
+    "check": "npm run lint && cross-env CI=true npm run test:coverage",
+    "prebuild": "npm run check",
+    "build": "next build",
+    "start": "cross-env NODE_ENV=production node server.js"
   },
   "dependencies": {
     "bootstrap": "^5.1.0",
@@ -34,7 +36,10 @@
     "@testing-library/react-hooks": "^7.0.1",
     "@testing-library/user-event": "^13.2.1",
     "babel-jest": "^27.0.6",
+    "chalk": "^4.1.2",
+    "config": "^3.3.6",
     "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.0",
     "eslint-config-prettier": "^8.3.0",
@@ -45,6 +50,7 @@
     "jest-axe": "^5.0.1",
     "jest-fetch-mock": "^3.0.3",
     "jest-watch-typeahead": "^0.6.4",
+    "mitt": "^3.0.0",
     "next-router-mock": "^0.2.2",
     "prettier": "^2.3.2",
     "puppeteer": "^10.2.0",

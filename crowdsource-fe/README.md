@@ -24,27 +24,23 @@ npm install
 
 npm run dev
 
-# Local dev server will automatically starts on http://localhost:3000
+# Local dev server will automatically starts on http://localhost:8080
 ```
 
 ## Available Scripts
 
 In the project directory, you can run:
 
+### `npm run clean`
+
+Clean up cached or build folders.
+
 ### `npm run dev`
 
 Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 
 The page will reload if you make edits.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.
-
-### `npm start`
-
-It will start the production server on [http://localhost:3000](http://localhost:3000). Please ensure you ran `npm run build` first before running this command.
 
 ### `npm run lint`
 
@@ -73,3 +69,11 @@ For running [lighthouse-ci](https://github.com/GoogleChrome/lighthouse-ci). Plea
 ### `npm run check`
 
 For running lint and test with coverage.
+
+### `npm run build`
+
+Builds the app for production to the `.next` folder.
+
+### `npm start`
+
+It will start the production server on [http://localhost:8080](http://localhost:8080). Please ensure you ran `npm run build` first before running this command.
