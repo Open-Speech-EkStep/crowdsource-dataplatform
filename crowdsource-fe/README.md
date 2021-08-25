@@ -42,6 +42,10 @@ Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 
 The page will reload if you make edits.
 
+### `npm run dev:axe`
+
+Similar to `npm run dev` but also runs [@axe-core/react](https://github.com/dequelabs/axe-core-npm).
+
 ### `npm run lint`
 
 For running eslint on source code.

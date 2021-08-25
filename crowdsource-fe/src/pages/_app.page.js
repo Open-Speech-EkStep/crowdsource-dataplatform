@@ -23,4 +23,16 @@ function MyApp({ Component, pageProps = {} }) {
 
 MyApp.propTypes = propTypes;
 
+if (
+  typeof window !== 'undefined' &&
+  process.env.NODE_ENV !== 'production' &&
+  process.env.NEXT_PUBLIC_AXE_CORE
+) {
+  const React = require('react');
+  const ReactDOM = require('react-dom');
+  const axe = require('@axe-core/react');
+
+  axe(React, ReactDOM, 1000);
+}
+
 export default appWithTranslation(MyApp);
