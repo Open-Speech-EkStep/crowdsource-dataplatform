@@ -4,13 +4,16 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Rajat Singhal",
   "license": "ISC",
   "dependencies": {
-    "pg": "^8.3.2",
     "csvtojson": "2.0.10",
+    "pg": "^8.3.2",
     "xlsx": "0.17.0"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
   }
 }

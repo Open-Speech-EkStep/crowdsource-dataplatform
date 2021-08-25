@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { conn, insertMaster } = require('../common/dbUtils')
+const { conn, insertMaster } = require('../../common/dbUtils')
 
 const ingest1 = async (datasetId, datasetType, client, language, rows, paired) => {
     const values = rows

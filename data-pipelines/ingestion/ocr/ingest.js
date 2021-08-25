@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const { conn, insertMaster } = require('../common/dbUtils')
+const { conn, insertMaster } = require('../../common/dbUtils')
 
 const ingest1 = async (datasetId, datasetType, client, datset_base_path, language, png_paths, paired, profanity_check_required) => {
     const values = png_paths.map(path => {

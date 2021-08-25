@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const { conn, insertMaster } = require('../../common/dbUtils')
+const { conn, insertMaster } = require('../../../common/dbUtils')
 
 const MIN_DURATION = 1
 const MAX_DURATION = 15

@@ -2,7 +2,7 @@ const fs = require('fs');
 const csv = require("csvtojson");
 const xlsx = require("xlsx");
 
-const { conn, insertMaster } = require('../common/dbUtils');
+const { conn, insertMaster } = require('../../common/dbUtils');
 
 const MAX_WORD_LENGTH = 20
 
