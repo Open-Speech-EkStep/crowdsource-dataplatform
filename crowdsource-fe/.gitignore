@@ -44,3 +44,6 @@ yarn-error.log*
 
 # cache folder
 .cache
+
+# include typings folder which is excluded at root level
+!typings
