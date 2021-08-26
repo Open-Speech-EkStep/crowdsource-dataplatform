@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 
-import styles from './Footer.module.css';
+import styles from './Footer.module.scss';
 
 const Footer = () => {
   const { t } = useTranslation();
