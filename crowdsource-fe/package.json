@@ -9,7 +9,7 @@
     "clean": "rimraf .next out .lighthouseci coverage tsconfig.tsbuildinfo",
     "dev": "node server.js",
     "dev:axe": "cross-env NEXT_PUBLIC_AXE_CORE=true npm run dev",
-    "lint": "next lint --dir src",
+    "lint": "next lint --dir src --cache --cache-location .cache/eslint/",
     "lint:fix": "npm run lint -- --fix",
     "stylelint": "stylelint \"src/**/*.scss\" --cache --cache-location .cache/stylelint/",
     "stylelint:fix": "npm run stylelint -- --fix",
