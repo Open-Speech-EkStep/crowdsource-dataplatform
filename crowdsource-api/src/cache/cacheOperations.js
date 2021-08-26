@@ -225,5 +225,6 @@ module.exports = {
 		} catch (err) {
 			console.log("CACHING ERROR: " + err)
 		}
-	}
+	},
+	sortAndFilterValidationData
 }
