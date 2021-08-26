@@ -23,6 +23,7 @@ function MyApp({ Component, pageProps = {} }) {
 
 MyApp.propTypes = propTypes;
 
+/* istanbul ignore next */
 if (
   typeof window !== 'undefined' &&
   process.env.NODE_ENV !== 'production' &&
