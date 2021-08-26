@@ -58,6 +58,10 @@ For fixing eslint errors.
 
 For running prettier on the source code.
 
+### `npm run typecheck`
+
+For running typescript typecheck.
+
 ### `npm run test`
 
 Launches the test runner in the interactive watch mode.
@@ -72,7 +76,7 @@ For running [lighthouse-ci](https://github.com/GoogleChrome/lighthouse-ci). Plea
 
 ### `npm run check`
 
-For running lint and test with coverage.
+For running lint, typecheck and test with coverage.
 
 ### `npm run build`
 

@@ -2,7 +2,7 @@ import { useTranslation } from 'next-i18next';
 
 import styles from './Footer.module.css';
 
-function Footer() {
+const Footer = () => {
   const { t } = useTranslation();
 
   return (
@@ -10,6 +10,6 @@ function Footer() {
       {t('termsAndConditions')}
     </footer>
   );
-}
+};
 
 export default Footer;

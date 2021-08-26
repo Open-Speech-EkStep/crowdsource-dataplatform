@@ -15,7 +15,7 @@ describe('Link', () => {
     router.defaultLocale = defaultLocale;
   });
 
-  const setup = locale =>
+  const setup = (locale?: string) =>
     render(
       <Link href="/some/path" locale={locale}>
         <a>Some link</a>

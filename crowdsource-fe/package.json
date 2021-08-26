@@ -6,16 +6,17 @@
     "node": "14.17.5"
   },
   "scripts": {
-    "clean": "rimraf .next out .lighthouseci coverage",
+    "clean": "rimraf .next out .lighthouseci coverage tsconfig.tsbuildinfo",
     "dev": "node server.js",
     "dev:axe": "cross-env NEXT_PUBLIC_AXE_CORE=true npm run dev",
     "lint": "next lint --dir src",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write src public",
+    "format": "prettier --write src public typings",
+    "typecheck": "tsc --noEmit -p ./tsconfig.json",
     "test": "jest --watch",
     "test:coverage": "npm test -- --coverage --watchAll=false",
     "test:lh-ci": "rimraf .lighthouseci/ && cross-env LIGHTHOUSE_CI_PORT=8080 lhci --config=./.lighthouserc.js autorun",
-    "check": "npm run lint && cross-env CI=true npm run test:coverage",
+    "check": "npm run lint && npm run typecheck && cross-env CI=true npm run test:coverage",
     "prebuild": "npm run check",
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js"
@@ -25,7 +26,6 @@
     "classnames": "^2.3.1",
     "next": "11.1.0",
     "next-i18next": "^8.6.0",
-    "prop-types": "^15.7.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "swr": "^0.5.6"
@@ -37,6 +37,7 @@
     "@testing-library/react": "^12.0.0",
     "@testing-library/react-hooks": "^7.0.1",
     "@testing-library/user-event": "^13.2.1",
+    "@types/jest-axe": "^3.5.2",
     "babel-jest": "^27.0.6",
     "chalk": "^4.1.2",
     "config": "^3.3.6",
@@ -56,6 +57,7 @@
     "next-router-mock": "^0.2.2",
     "prettier": "^2.3.2",
     "puppeteer": "^10.2.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "typescript": "^4.3.5"
   }
 }

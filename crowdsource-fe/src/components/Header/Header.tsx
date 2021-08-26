@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { AriaAttributes, useCallback } from 'react';
 
 import classnames from 'classnames';
 import { useTranslation } from 'next-i18next';
@@ -15,7 +15,7 @@ const useNavLink = () => {
   const getNavLinkProps = useCallback(
     routePath => ({
       className: classnames('nav-link', { active: currentRoutePath === routePath }),
-      'aria-current': currentRoutePath === routePath ? 'page' : undefined,
+      'aria-current': currentRoutePath === routePath ? 'page' : (undefined as AriaAttributes['aria-current']),
     }),
     [currentRoutePath]
   );
@@ -25,7 +25,7 @@ const useNavLink = () => {
   };
 };
 
-function Header() {
+const Header = () => {
   const { getNavLinkProps } = useNavLink();
   const { t } = useTranslation();
 
@@ -50,6 +50,6 @@ function Header() {
       </nav>
     </header>
   );
-}
+};
 
 export default Header;
