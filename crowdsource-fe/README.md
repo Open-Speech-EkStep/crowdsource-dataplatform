@@ -54,6 +54,14 @@ For running eslint on source code.
 
 For fixing eslint errors.
 
+### `npm run stylelint`
+
+For running stylelint on source code.
+
+### `npm run stylelint:fix`
+
+For fixing stylelint errors.
+
 ### `npm run format`
 
 For running prettier on the source code.
@@ -76,7 +84,7 @@ For running [lighthouse-ci](https://github.com/GoogleChrome/lighthouse-ci). Plea
 
 ### `npm run check`
 
-For running lint, typecheck and test with coverage.
+For running lint, stylelint, typecheck and test with coverage.
 
 ### `npm run build`
 

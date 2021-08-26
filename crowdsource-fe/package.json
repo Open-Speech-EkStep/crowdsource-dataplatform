@@ -11,12 +11,14 @@
     "dev:axe": "cross-env NEXT_PUBLIC_AXE_CORE=true npm run dev",
     "lint": "next lint --dir src",
     "lint:fix": "npm run lint -- --fix",
+    "stylelint": "stylelint \"src/**/*.scss\" --cache --cache-location .cache/stylelint/",
+    "stylelint:fix": "npm run stylelint -- --fix",
     "format": "prettier --write src public typings",
     "typecheck": "tsc --noEmit -p ./tsconfig.json",
     "test": "jest --watch",
     "test:coverage": "npm test -- --coverage --watchAll=false",
     "test:lh-ci": "rimraf .lighthouseci/ && cross-env LIGHTHOUSE_CI_PORT=8080 lhci --config=./.lighthouserc.js autorun",
-    "check": "npm run lint && npm run typecheck && cross-env CI=true npm run test:coverage",
+    "check": "npm run lint && npm run stylelint && npm run typecheck && cross-env CI=true npm run test:coverage",
     "prebuild": "npm run check",
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js"
@@ -59,6 +61,8 @@
     "puppeteer": "^10.2.0",
     "rimraf": "^3.0.2",
     "sass": "^1.38.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-sass-guidelines": "^8.0.0",
     "typescript": "^4.3.5"
   }
 }

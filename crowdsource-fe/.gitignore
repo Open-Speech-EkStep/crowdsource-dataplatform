@@ -41,3 +41,6 @@ yarn-error.log*
 
 # TypeScript cache
 *.tsbuildinfo
+
+# cache folder
+.cache
