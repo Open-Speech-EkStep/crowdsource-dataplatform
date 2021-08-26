@@ -327,11 +327,11 @@ const getDataRowInfo = `select type, media->>'language' as language from dataset
 
 const userVerifyQuery = `select id from users where LOWER(username) = LOWER($1) and role = $2`;
 
-const getUserRewardsQuery = `select r.generated_at, r.generated_badge_id, r.contributor_id, rm.language, rm.milestone, rm.type, rm.category, rc.grade 
+const getUserRewardsQuery = `select r.generated_at, r.generated_badge_id, rm.language, rm.milestone, rm.type, rm.category, rc.grade 
   from rewards r
   inner join reward_milestones rm on r.milestone_id = rm.milestone_id
   inner join reward_catalogue rc on rm.reward_catalogue_id=rc.id
-  where contributor_id=$1`;
+  where contributor_id=$1 order by r.generated_at desc, rm.milestone desc`;
 
 module.exports = {
   userVerifyQuery,

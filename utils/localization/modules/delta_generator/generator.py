@@ -162,7 +162,7 @@ def gen_delta(languages, input_base_path, meta_out_base_path, sme_out_base_path,
     else:
         items = list(languages.items())
         all_df = language_dfs[items[0][0]]
-        language_name_list = []
+        language_name_list = [items[0][1]]
         for language_code, language_name in items[1:]:
             df = language_dfs[language_code]
             cols_to_include = ['Key', 'English copy', languages[language_code]]

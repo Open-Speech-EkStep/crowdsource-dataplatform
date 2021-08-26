@@ -41,7 +41,8 @@ const {
     getContributionHoursForText,
     getValidationHoursForText,
     getContributionHoursForAsr,
-    getValidationHoursForAsr
+    getValidationHoursForAsr,
+    getUserRewardsQuery
 } = require('./../src/dbQuery');
 
 const {
@@ -1191,5 +1192,13 @@ describe("Running tests for dbOperations", () => {
             dbOperations.getParticipationStats()
             expect(spyDBmany).toBeCalledWith(participationStatsQuery)
         })
+    })
+
+    test('Test getUserRewards', async () => {
+        const userId = 123;
+        const userName = 'name';
+        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: 1 })
+        await dbOperations.getUserRewards(userId, userName);
+        expect(spyDBany).toBeCalledWith(getUserRewardsQuery, [1])
     })
 });
