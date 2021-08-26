@@ -7,7 +7,7 @@ describe('#useFetch', () => {
     fetchMock.resetMocks();
   });
 
-  const setup = url => {
+  const setup = (url: string) => {
     const renderHookResult = renderHook(() => useFetch(url, { dedupingInterval: 0 }));
 
     return renderHookResult;

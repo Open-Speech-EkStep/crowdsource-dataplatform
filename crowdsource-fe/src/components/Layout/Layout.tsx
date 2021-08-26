@@ -1,16 +1,17 @@
+import type { ReactNode } from 'react';
+
 import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
-import PropTypes from 'prop-types';
 
 import Body from 'components/Body';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 
-const propTypes = {
-  children: PropTypes.node.isRequired,
-};
+interface LayoutProps {
+  children: ReactNode;
+}
 
-function Layout({ children }) {
+const Layout = ({ children }: LayoutProps) => {
   const { t } = useTranslation();
 
   return (
@@ -33,8 +34,6 @@ function Layout({ children }) {
       <Footer />
     </div>
   );
-}
-
-Layout.propTypes = propTypes;
+};
 
 export default Layout;

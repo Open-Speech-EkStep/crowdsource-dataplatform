@@ -1,5 +1,5 @@
 import { appWithTranslation } from 'next-i18next';
-import PropTypes from 'prop-types';
+import type { AppProps } from 'next/app';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -8,20 +8,15 @@ import 'styles/globals.css';
 
 import Layout from 'components/Layout';
 
-const propTypes = {
-  Component: PropTypes.func.isRequired,
-  pageProps: PropTypes.object,
-};
+type MyAppProps = Partial<Exclude<AppProps, 'Component'>> & { Component: AppProps['Component'] };
 
-function MyApp({ Component, pageProps = {} }) {
+const MyApp = ({ Component, pageProps = {} }: MyAppProps) => {
   return (
     <Layout>
       <Component {...pageProps} />
     </Layout>
   );
-}
-
-MyApp.propTypes = propTypes;
+};
 
 /* istanbul ignore next */
 if (
@@ -36,4 +31,6 @@ if (
   axe(React, ReactDOM, 1000);
 }
 
-export default appWithTranslation(MyApp);
+const App = appWithTranslation(MyApp) as typeof MyApp;
+
+export default App;

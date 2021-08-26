@@ -38,3 +38,6 @@ yarn-error.log*
 
 # lighthouse CI report
 .lighthouseci
+
+# TypeScript cache
+*.tsbuildinfo

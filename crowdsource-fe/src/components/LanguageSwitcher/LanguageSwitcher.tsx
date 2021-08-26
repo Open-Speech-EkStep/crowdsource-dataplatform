@@ -4,12 +4,12 @@ import { useRouter } from 'next/router';
 import Link from 'components/Link';
 import { DISPLAY_LANGUAGES } from 'constants/localesConstants';
 
-function LanguageSwitcher() {
+const LanguageSwitcher = () => {
   const { asPath: currentRoutePath, locale: currentLocale, locales } = useRouter();
 
   return (
     <ul data-testid="LanguageSwitcher" className="navbar-nav">
-      {locales.map(locale => (
+      {locales?.map(locale => (
         <li key={locale} className="nav-item">
           <Link href={currentRoutePath} locale={locale}>
             <a className={classnames('nav-link', { active: currentLocale === locale })}>
@@ -20,6 +20,6 @@ function LanguageSwitcher() {
       ))}
     </ul>
   );
-}
+};
 
 export default LanguageSwitcher;

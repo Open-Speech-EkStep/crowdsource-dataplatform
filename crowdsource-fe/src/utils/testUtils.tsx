@@ -1,10 +1,13 @@
 /* eslint-disable jest/no-export */
-import { render, act } from '@testing-library/react';
+import type { ReactNode, ReactElement, ComponentType } from 'react';
+
+import { render, act, RenderOptions, RenderResult } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
-const Wrapper = ({ children }) => children;
+const Wrapper: ComponentType = ({ children }: { children?: ReactNode }) => children as ReactElement;
 
-const customRender = (ui, options) => render(ui, { wrapper: Wrapper, ...options });
+const customRender = (ui: ReactElement, options?: RenderOptions) =>
+  render(ui, { wrapper: Wrapper, ...options });
 
 // re-export everything
 export * from '@testing-library/react';
@@ -14,7 +17,7 @@ export { renderHook } from '@testing-library/react-hooks';
 // override render method
 export { customRender as render };
 
-export const verifyAxeTest = ({ container }) => {
+export const verifyAxeTest = ({ container }: { container: RenderResult['container'] }) => {
   it('should not fail an axe audit', async () => {
     let axeResult;
 
