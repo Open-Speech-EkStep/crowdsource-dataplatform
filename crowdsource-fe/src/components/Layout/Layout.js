@@ -26,7 +26,7 @@ function Layout({ children }) {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={t('metaOGSiteName')} />
         <meta property="og:url" content="https://bhashini.gov.in/bhashadaan" />
-        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="icon" type="image/png" href="/img/favicon.png" />
       </Head>
       <Header />
       <Body>{children}</Body>
