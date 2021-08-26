@@ -277,7 +277,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENV=dev
+          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
           repo: ${AZURE_REPO}
           tag: dev
           checkout: false
@@ -290,7 +290,7 @@ workflows:
           registry-name: ${AZURE_REGISTRY}
           dockerfile: Dockerfile-dbRefresh
           path: ./db-refresher
-          extra-build-args: --build-arg NODE_ENV=dev
+          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
           repo: ${DB_REFRESHER_REPO}
           tag: "dev,test,prod,uat"
           requires:
@@ -368,7 +368,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENV=test
+          extra-build-args: --build-arg NODE_CONFIG_ENV=test
           repo: ${AZURE_REPO}
           tag: test
           checkout: false
@@ -436,7 +436,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENV=uat
+          extra-build-args: --build-arg NODE_CONFIG_ENV=uat
           repo: ${AZURE_REPO}
           tag: uat
           checkout: false
@@ -486,7 +486,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_ENV=prod
+          extra-build-args: --build-arg NODE_CONFIG_ENV=prod
           repo: ${AZURE_REPO}
           tag: prod
           checkout: false

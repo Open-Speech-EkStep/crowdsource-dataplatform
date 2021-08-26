@@ -19,9 +19,10 @@ RUN mv WadaSNR /opt/binaries/
 RUN rm wada_snr.tar.gz
 RUN ls /opt/binaries/WadaSNR/
 
-ARG NODE_ENV=default
+ARG NODE_CONFIG_ENV=default
 
-ENV NODE_ENV=${NODE_ENV}
+ENV NODE_CONFIG_ENV=${NODE_CONFIG_ENV}
+ENV NODE_ENV=production
 EXPOSE 8080
 
 CMD [ "node", "src/server.js","azure" ]
