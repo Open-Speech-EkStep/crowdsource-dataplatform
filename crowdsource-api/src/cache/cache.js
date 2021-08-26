@@ -1,17 +1,15 @@
-var Redis = require("ioredis");
-Redis.Promise = require("bluebird");
-Redis.Promise.onPossiblyUnhandledRejection(function (error) {
-    console.log("ioredis error:", error);
-  });   
 const config = require('config');
-//var redis = require("redis");
-// var bluebird = require("bluebird");
+const Redlock = require('redlock');
+const Redis = require("ioredis");
+Redis.Promise = require("bluebird");
 
-// bluebird.promisifyAll(redis.RedisClient.prototype);
-// bluebird.promisifyAll(redis.Multi.prototype);
-
+const expiry = config.cache_timeout || Number(config.cache_timeout) || 1800;
 const prefix = config["envName"];
 const cachingEnabled = config.caching ? config.caching == "enabled" : false;
+
+Redis.Promise.onPossiblyUnhandledRejection(function (error) {
+    console.log("ioredis error:", error);
+});
 
 const client = cachingEnabled ? new Redis.Cluster(
     [{ "host": process.env.REDISCACHEHOSTNAME, port: 6380 }]
@@ -23,37 +21,58 @@ const client = cachingEnabled ? new Redis.Cluster(
             password: process.env.REDISCACHEKEY,
             tls: {
                 checkServerIdentity: (servername, cert) => {
-                    // skip certificate hostname validation
                     return undefined;
                 },
             }
         }
     }) : {};
 
-// var client = cachingEnabled ? redis.createClient(6380, process.env.REDISCACHEHOSTNAME,
-    // { auth_pass: process.env.REDISCACHEKEY, tls: { servername: process.env.REDISCACHEHOSTNAME } }) : {};
+const distributeRedisdLock = new Redlock(
+    [client],
+    {
+        driftFactor: 0.01, // time in ms
+        retryCount: -1,
+        retryDelay: 200 // time in ms
+    }
+);
 
-// if (cachingEnabled) {
-//     client.on("error", function (err) {
-//         setTimeout(connect, 15000);
-//         console.log("RedisError " + err);
-//     });
-//     client.on("end", function (err) {
-//         setTimeout(connect, 15000);
-//         console.log("RedisEnd " + err);
-//     });
-// }
+distributeRedisdLock.on('clientError', function (err) {
+    console.log('A redlock error has occurred:', JSON.stringify(err));
+});
 
-const connect = function () {
-    // client = redis.createClient(6380, process.env.REDISCACHEHOSTNAME,
-    //     { auth_pass: process.env.REDISCACHEKEY, tls: { servername: process.env.REDISCACHEHOSTNAME } });
+const setWithLock = async (key, db, query, params, callback) => {
+    let lock = await distributeRedisdLock.acquire(`lock:${key}`, 20000);
+    const cacheStatus = await getAsync(`${key}_status`);
+    if (cacheStatus === 'done' || cacheStatus === 'in progress') {
+        await lock.unlock();
+        return;
+    }
+    await setAsync(`${key}_status`, 'in progress', expiry);
+
+    db.any(query, params)
+        .then(async (data) => {
+            console.log("cacheLength", data.length);
+            if (callback)
+                data = callback(data);
+            await setAsync(`${key}`, JSON.stringify(data), expiry);
+            await setAsync(`${key}_status`, 'done', 1);
+            await lock.unlock();
+        })
+        .catch((err) => {
+            console.log(err);
+            lock.unlock();
+        });
+
+}
+const setAsync = (key, value, expiryTime) => {
+    return client.set(prefix + "_" + key, value, 'EX', expiryTime);
+}
+const getAsync = (key) => {
+    return client.get(prefix + "_" + key);
 }
 
 module.exports = {
-    setAsync: (key, value, expiry) => {
-        return client.set(prefix + "_" + key, value, 'EX', expiry);
-    },
-    getAsync: (key) => {
-        return client.get(prefix + "_" + key);
-    }
+    setAsync,
+    getAsync,
+    setWithLock
 }

@@ -93,19 +93,18 @@ const generateValidationResponse = (data, desiredCount, userId, userName) => {
 }
 
 module.exports = {
-	setContributionDataForCaching: (db, type, language, toLanguage) => {
+	setContributionDataForCaching: async (db, type, language, toLanguage) => {
 		if (!cachingEnabled) {
 			return;
 		}
 		try {
-			db.any(type == 'parallel' ? getParallelContributionDataForCaching : getContributionDataForCaching, [type, language, toLanguage, batchSize])
-				.then(async (data) => {
-					console.log("cacheLength", data.length)
-					await cache.setAsync(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(data), expiry);
-				})
-				.catch((err) => {
-					console.log(err);
-				});
+			const query = type == 'parallel' ? getParallelContributionDataForCaching : getContributionDataForCaching;
+			await cache.setWithLock(
+				`dataset_row_${type}_${language}_${toLanguage}`,
+				db,
+				query,
+				[type, language, toLanguage, batchSize]);
+
 		} catch (err) {
 			console.log("CACHING ERROR: " + err)
 		}
@@ -164,20 +163,21 @@ module.exports = {
 			console.log("CACHING ERROR: " + err)
 		}
 	},
-	setValidationDataForCaching: (db, type, language, toLanguage) => {
+	setValidationDataForCaching: async (db, type, language, toLanguage) => {
 		if (!cachingEnabled) {
 			return;
 		}
 		try {
-			db.any(type == 'parallel' ? getParallelValidationDataForCaching : getValidationDataForCaching, [type, language, toLanguage, batchSize])
-				.then(async (data) => {
-					console.log("cacheLength", data.length)
-					data = sortAndFilterValidationData(data);
-					await cache.setAsync(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(data), expiry);
-				})
-				.catch((err) => {
-					console.log(err);
+			const query = type == 'parallel' ? getParallelValidationDataForCaching : getValidationDataForCaching
+			await cache.setWithLock(
+				`contributions_${type}_${language}_${toLanguage}`,
+				db,
+				query,
+				[type, language, toLanguage, batchSize],
+				(data) => {
+					sortAndFilterValidationData(data)
 				});
+
 		} catch (err) {
 			console.log("CACHING ERROR: " + err)
 		}
