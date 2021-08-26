@@ -8,7 +8,7 @@ import LanguageSwitcher from 'components/LanguageSwitcher';
 import Link from 'components/Link';
 import routePaths from 'constants/routePaths';
 
-import styles from './Header.module.css';
+import styles from './Header.module.scss';
 
 const useNavLink = () => {
   const { asPath: currentRoutePath } = useRouter();
