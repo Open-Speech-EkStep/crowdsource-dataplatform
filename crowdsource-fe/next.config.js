@@ -1,3 +1,9 @@
+const path = require('path');
+
+process.env['NODE_CONFIG_DIR'] = path.resolve(__dirname, '../crowdsource-api/config');
+
+const config = require('config');
+
 const { i18n } = require('./next-i18next.config');
 
 // @ts-check
@@ -30,6 +36,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  productionBrowserSourceMaps: config.util.getEnv('NODE_CONFIG_ENV') === 'dev',
 };
 
 module.exports = nextConfig;
