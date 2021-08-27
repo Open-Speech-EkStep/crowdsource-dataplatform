@@ -3,7 +3,7 @@
 exports[`Body should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <main
-    class="container-xxl my-md-4"
+    class="my-md-4 container-xxl"
     data-testid="Body"
     role="main"
   >
