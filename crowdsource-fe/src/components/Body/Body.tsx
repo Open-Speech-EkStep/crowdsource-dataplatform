@@ -1,14 +1,16 @@
 import type { ReactNode } from 'react';
 
+import Container from 'react-bootstrap/Container';
+
 interface BodyProps {
   children: ReactNode;
 }
 
 const Body = ({ children }: BodyProps) => {
   return (
-    <main data-testid="Body" role="main" className="container-xxl my-md-4">
+    <Container as="main" data-testid="Body" role="main" fluid="xxl" className="my-md-4">
       {children}
-    </main>
+    </Container>
   );
 };
 
