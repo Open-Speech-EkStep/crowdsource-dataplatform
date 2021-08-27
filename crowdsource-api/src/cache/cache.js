@@ -55,7 +55,7 @@ const setWithLock = async (key, db, query, params, callback) => {
             if (callback)
                 data = callback(data);
             await setAsync(`${key}`, JSON.stringify(data), expiry);
-            await setAsync(`${key}_status`, 'done', 1);
+            await setAsync(`${key}_status`, 'done', 20000);
             await lock.unlock();
         })
         .catch((err) => {
