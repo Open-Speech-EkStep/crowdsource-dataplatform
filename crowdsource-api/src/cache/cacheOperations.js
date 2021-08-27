@@ -12,18 +12,15 @@ const validation_count = config.validation_count ? Number(config.validation_coun
 const expiry = config.cache_timeout || Number(config.cache_timeout) || 1800;
 const batchSize = config.cache_batch_size || 5000; 
 
-const getRandom = (arr, n) => {
-	var len = arr.length;
-	if (n > len)
-		n = len;
-	var result = new Array(n),
-		taken = new Array(len);
-	while (n--) {
-		var x = Math.floor(Math.random() * len);
-		result[n] = arr[x in taken ? taken[x] : x];
-		taken[x] = --len in taken ? taken[len] : len;
+const getRandom = (datasetList, requireElements) => {
+	let len = datasetList.length;
+	
+	while (len) {
+		const randomIndex = Math.floor(Math.random() * len--);
+		[datasetList[len], datasetList[randomIndex]] = [datasetList[randomIndex], datasetList[len]];
 	}
-	return result;
+
+	return datasetList.slice(0, requireElements);
 }
 
 const generateResponse = (data, desiredCount, userId, userName) => {
