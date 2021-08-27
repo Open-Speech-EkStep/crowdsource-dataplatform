@@ -1,9 +1,7 @@
 # Test Home Page
 Tags: page
 
-//## Validate First Section
-//* Click "Know More" Button
-//* "About Us" page should be displayed
+* Open Website
 
 ## Validate Carousel Section
 * Section should have text "One Platform, multiple Crowdsourcing Initiatives"

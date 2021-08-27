@@ -57,10 +57,10 @@ gauge.screenshotFn = async function () {
 };
 
 
-beforeSpec(async () => {
-    await goto(testUrl, { waitForEvents: ['loadEventFired'] });
-    await taiko.waitFor(700)
-})
+// beforeSpec(async () => {
+//     await goto(testUrl, { waitForEvents: ['loadEventFired'] });
+//     await taiko.waitFor(700)
+// })
 
 // beforeScenario(async () => {
 //     await taiko.waitFor(10000);
@@ -71,23 +71,6 @@ step("Open Website", async () => {
     //await taiko.waitFor(500)
     await goto(testUrl, { waitForEvents: ['loadEventFired'] });
     await taiko.waitFor(500)
-});
-
-step("Validate about us content", async function () {
-
-    assert.ok(await text('A crowdsourcing initiative for Indian languages').exists());
-    assert.ok(await text('This is an effort by MeitY, Government of India, under the National Language Translation Mission (NLTM).').exists());
-});
-
-step("Start Recording button is disabled", async function () {
-    assert.ok(await taiko.button({ id: 'start_recording' }).isDisabled())
-});
-
-step("Select Language <language> enables the Start Recording button", async function (language) {
-    const selectLanguageDropDown = taiko.dropDown({ id: 'languageTop' })
-    await selectLanguageDropDown.select(language)
-    await taiko.waitFor(1000)
-    assert.ok(!await taiko.button({ id: 'start_recording' }).isDisabled(), 'the start recording button is disabled')
 });
 
 step("User details popup should appear and close button should close the pop up", async function () {
