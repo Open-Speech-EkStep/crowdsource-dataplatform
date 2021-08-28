@@ -6,10 +6,10 @@ const { drawTopLanguageChart } = require('../../../build/js/common/verticalGraph
 const getTotalParticipation = (data) => {
   let validation_count = 0;
   let contribution_count = 0;
-  if(data.total_validations){
+  if (data.total_validations) {
     validation_count = Number(data.total_validations);
   }
-  if(data.total_contributions){
+  if (data.total_contributions) {
     contribution_count = Number(data.total_contributions);
   }
   return validation_count + contribution_count;
@@ -89,8 +89,8 @@ const drawMap = function (response) {
       st.value = getTotalParticipation(ele);
       st.total_speakers = ele.total_speakers;
     } else {
-      st.contributed_time = formatTime(0,0,0);
-      st.validated_time = formatTime(0,0,0);
+      st.contributed_time = formatTime(0, 0, 0);
+      st.validated_time = formatTime(0, 0, 0);
       st.value = 0;
       st.total_speakers = 0;
     }
@@ -127,7 +127,7 @@ const drawMap = function (response) {
   polygonTemplate.strokeWidth = 0.5;
   polygonTemplate.stroke = am4core.color("#929292")
   polygonTemplate.fill = am4core.color("#fff");
-  polygonTemplate.maxWidth=50;
+  polygonTemplate.maxWidth = 50;
   // Create hover state and set alternative fill color
   var hs = polygonTemplate.states.create("hover");
   hs.properties.fill = chart.colors.getIndex(1).brighten(-0.5);
@@ -152,6 +152,10 @@ const drawMap = function (response) {
     }
   );
   chart.series.push(polygonSeries);
+  chart.events.on('sizechanged', () => {
+    chart.projection = new am4maps.projections.Miller();
+  })
+
   const $quarter = $("#quarter .legend-val");
   const $half = $("#half .legend-val");
   const $threeQuarter = $("#threeQuarter .legend-val");
@@ -169,9 +173,9 @@ const drawMap = function (response) {
     false
   );
   $quarter.text(`0 - ${formatTimeForLegends(qHours, qMinuts, 0, true)}`);
-  $half.text(`${formatTimeForLegends(qHours, qMinuts, 0 , false)} - ${formatTimeForLegends(hHours, hMinuts, 0, true)}`);
+  $half.text(`${formatTimeForLegends(qHours, qMinuts, 0, false)} - ${formatTimeForLegends(hHours, hMinuts, 0, true)}`);
   $threeQuarter.text(
-    `${formatTimeForLegends(hHours, hMinuts, 0, false)} - ${formatTimeForLegends(tQHours, tQMinuts, 0 , true)}`
+    `${formatTimeForLegends(hHours, hMinuts, 0, false)} - ${formatTimeForLegends(tQHours, tQMinuts, 0, true)}`
   );
   $full.text(`> ${formatTimeForLegends(tQHours, tQMinuts, 0, true)}`);
   $legendDiv.removeClass("d-none").addClass("d-flex");
@@ -210,15 +214,15 @@ function getStatistics(response) {
   const $speakerContributionData = $speakersData.find('.contribution-data');
   const $validatedValue = $("#validated-value");
 
-  const {hours, minutes, seconds} = calculateTime(
+  const { hours, minutes, seconds } = calculateTime(
     Number(response && response.total_contributions || 0) * 60 * 60
   );
 
   const { hours: validate_hrs, minutes: validate_min, seconds: validate_sec } = calculateTime(
     Number(response && response.total_validations || 0) * 60 * 60
   );
-  $speakersDataHoursValue.text(formatTime(hours, minutes,seconds));
-  $validatedValue.text(formatTime(validate_hrs,validate_min,validate_sec));
+  $speakersDataHoursValue.text(formatTime(hours, minutes, seconds));
+  $validatedValue.text(formatTime(validate_hrs, validate_min, validate_sec));
   $speakersDataSpeakerValue.text(response && response.total_speakers || 0);
   $speakersDataLanguagesValue.text(response && response.total_languages || 0);
   $speakerContributionData.removeClass('col-12 col-md-4 col-lg-4 col-xl-4 col-xs-6');
@@ -243,7 +247,7 @@ function showBySpeakersChart() {
     TOP_LANGUAGES_BY_SPEAKERS
   );
   const chartData = topLanguagesBySpeakers ? JSON.parse(topLanguagesBySpeakers).reverse() : [];
-  drawTopLanguageChart(chartData, "bolo","speaker")
+  drawTopLanguageChart(chartData, "bolo", "speaker")
 }
 
 module.exports = {

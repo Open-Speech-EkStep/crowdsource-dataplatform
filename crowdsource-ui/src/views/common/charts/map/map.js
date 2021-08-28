@@ -206,6 +206,9 @@ const drawMap = function (response, moduleType) {
     }
   );
   chart.series.push(polygonSeries);
+  chart.events.on('sizechanged', () => {
+    chart.projection = new am4maps.projections.Miller();
+  })
   const $quarter = $("#quarter .legend-val");
   const $half = $("#half .legend-val");
   const $threeQuarter = $("#threeQuarter .legend-val");
