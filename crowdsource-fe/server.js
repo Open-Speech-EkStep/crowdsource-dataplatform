@@ -1,6 +1,7 @@
 const path = require('path');
 
-process.env['NODE_CONFIG_DIR'] = path.resolve(__dirname, '../crowdsource-api/config');
+process.env['NODE_CONFIG_DIR'] =
+  path.resolve(__dirname, '../crowdsource-api/config') + path.delimiter + path.resolve(__dirname, './config');
 
 require('config');
 require('dotenv').config({

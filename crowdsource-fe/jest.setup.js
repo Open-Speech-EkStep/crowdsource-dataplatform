@@ -2,6 +2,8 @@ import '@testing-library/jest-dom/extend-expect';
 import { configureAxe, toHaveNoViolations } from 'jest-axe';
 import jestFetchMock from 'jest-fetch-mock';
 
+import nodeConfig from './config/local.json';
+
 require('next-router-mock').default.events = require('mitt')();
 
 jest.mock('next/router', () => {
@@ -48,3 +50,5 @@ configureAxe({
   resultTypes: ['violations', 'incomplete'],
 });
 expect.extend(toHaveNoViolations);
+
+global.CROWDSOURCE_FE_NODE_CONFIG = nodeConfig;
