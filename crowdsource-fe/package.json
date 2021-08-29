@@ -44,6 +44,7 @@
     "babel-jest": "^27.0.6",
     "chalk": "^4.1.2",
     "config": "^3.3.6",
+    "config-webpack": "^1.0.5",
     "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "eslint": "7.32.0",

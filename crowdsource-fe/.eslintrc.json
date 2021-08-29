@@ -8,7 +8,8 @@
     "prettier"
   ],
   "globals": {
-    "fetchMock": true
+    "fetchMock": true,
+    "CROWDSOURCE_FE_NODE_CONFIG": true
   },
   "rules": {
     "no-unused-vars": 2,

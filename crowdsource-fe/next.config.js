@@ -1,8 +1,4 @@
-const path = require('path');
-
-process.env['NODE_CONFIG_DIR'] = path.resolve(__dirname, '../crowdsource-api/config');
-
-const config = require('config');
+const ConfigWebpackPlugin = require('config-webpack');
 
 const { i18n } = require('./next-i18next.config');
 
@@ -18,6 +14,8 @@ const nextConfig = {
   pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
   webpack: config => {
     config.module.rules.push({ test: /\.test.(jsx?|tsx?)$/, loader: 'ignore-loader' });
+
+    config.plugins.push(new ConfigWebpackPlugin('CROWDSOURCE_FE_NODE_CONFIG'));
 
     return config;
   },
@@ -36,7 +34,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  productionBrowserSourceMaps: config.util.getEnv('NODE_CONFIG_ENV') === 'dev',
+  productionBrowserSourceMaps: process.env.NODE_CONFIG_ENV === 'dev',
 };
 
 module.exports = nextConfig;

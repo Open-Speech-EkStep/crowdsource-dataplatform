@@ -1,0 +1,12 @@
+{
+  "fe": {
+    "apiUrl": "https://uat-api.vakyansh.in",
+    "cdnUrl": "https://uat-data-crowdsource.azureedge.net",
+    "whitelistingEmail": false,
+    "showDataSource": false,
+    "feedbackTopComponent": false,
+    "bhashadaanLogoUrl": "/",
+    "contextRoot": "",
+    "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"]
+  }
+}

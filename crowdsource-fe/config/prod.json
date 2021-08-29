@@ -1,0 +1,12 @@
+{
+  "fe": {
+    "apiUrl": "https://bhashadaan-api.bhashini.gov.in",
+    "cdnUrl": "https://prod-data-crowdsource.azureedge.net",
+    "whitelistingEmail": false,
+    "showDataSource": false,
+    "feedbackTopComponent": false,
+    "bhashadaanLogoUrl": "/bhashadaan",
+    "contextRoot": "/bhashadaan",
+    "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"]
+  }
+}
