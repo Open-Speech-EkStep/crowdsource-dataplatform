@@ -15,8 +15,8 @@
     "stylelint:fix": "npm run stylelint -- --fix",
     "format": "prettier --write src public typings",
     "typecheck": "tsc --noEmit -p ./tsconfig.json",
-    "test": "jest --watch",
-    "test:coverage": "npm test -- --coverage --watchAll=false",
+    "test": "jest --watch --cacheDirectory .cache/jest/",
+    "test:coverage": "npm test -- --coverage --watchAll=false --bail",
     "test:lh-ci": "rimraf .lighthouseci/ && cross-env LIGHTHOUSE_CI_PORT=8080 lhci --config=./.lighthouserc.js autorun",
     "check": "npm run lint && npm run stylelint && npm run typecheck && cross-env CI=true npm run test:coverage",
     "prebuild": "npm run check",
@@ -31,7 +31,7 @@
     "react": "17.0.2",
     "react-bootstrap": "^2.0.0-beta.6",
     "react-dom": "17.0.2",
-    "swr": "^0.5.6"
+    "swr": "^1.0.0"
   },
   "devDependencies": {
     "@axe-core/react": "^4.2.2",
@@ -41,7 +41,7 @@
     "@testing-library/react-hooks": "^7.0.1",
     "@testing-library/user-event": "^13.2.1",
     "@types/jest-axe": "^3.5.2",
-    "babel-jest": "^27.0.6",
+    "babel-jest": "^27.1.0",
     "chalk": "^4.1.2",
     "config": "^3.3.6",
     "config-webpack": "^1.0.5",
@@ -53,7 +53,7 @@
     "eslint-plugin-jest": "^24.4.0",
     "identity-obj-proxy": "^3.0.0",
     "ignore-loader": "^0.1.2",
-    "jest": "^27.0.6",
+    "jest": "^27.1.0",
     "jest-axe": "^5.0.1",
     "jest-fetch-mock": "^3.0.3",
     "jest-watch-typeahead": "^0.6.4",
@@ -62,7 +62,7 @@
     "prettier": "^2.3.2",
     "puppeteer": "^10.2.0",
     "rimraf": "^3.0.2",
-    "sass": "^1.38.1",
+    "sass": "^1.38.2",
     "stylelint": "^13.13.1",
     "stylelint-config-sass-guidelines": "^8.0.0",
     "typescript": "^4.4.2"

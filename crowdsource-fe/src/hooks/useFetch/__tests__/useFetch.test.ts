@@ -21,9 +21,7 @@ describe('#useFetch', () => {
 
     const { result } = setup(url);
 
-    await waitFor(() => expect(result.current.isValidating).toBe(false));
-
-    expect(result.current.data).toStrictEqual(successResponse);
+    await waitFor(() => expect(result.current.data).toStrictEqual(successResponse));
   });
 
   it('should use fetch and gets the failed response', async () => {
@@ -34,8 +32,6 @@ describe('#useFetch', () => {
 
     const { result } = setup(url);
 
-    await waitFor(() => expect(result.current.isValidating).toBe(false));
-
-    expect(result.current.error).toStrictEqual(errorResponse);
+    await waitFor(() => expect(result.current.error).toStrictEqual(errorResponse));
   });
 });
