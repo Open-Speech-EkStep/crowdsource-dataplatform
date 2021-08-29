@@ -45,6 +45,9 @@
     ],
     "crowdsource-ui/**/*.js": [
       "npm run eslint"
+    ],
+    "crowdsource-fe/**/*.{js,jsx,ts,tsx,json,html,scss,css,md}": [
+      "prettier --config ./.prettierrc --write"
     ]
   },
   "devDependencies": {
