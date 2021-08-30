@@ -17,13 +17,13 @@ function setupScroll() {
     const navPrivacyPolicy = document.getElementById("nav-privacy-policy");
     const navCopyright = document.getElementById("nav-copyright");
     navTermsOfUse.onclick = () => {
-        scrollTo(0, $termsOfUsePosition.top - navRowHeight);
+        scrollTo(0, $termsOfUsePosition.top - navRowHeight  - 100);
     };
     navPrivacyPolicy.onclick = () => {
         scrollTo(0, $privacyPolicyPosition.top - navRowHeight);
     };
     navCopyright.onclick = () => {
-        scrollTo(0, $copyrightPosition.top - navRowHeight);
+        scrollTo(0, $copyrightPosition.top + 10000);
     };
 
     window.onscroll = () => {
