@@ -1,0 +1,1212 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Crowdsource API",
+    "description": "Swagger API Documentation for Crowdsource",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/changeLocale/{locale}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {},
+        "deprecated": true
+      }
+    },
+    "/getDetails/{language}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/verify-user": {
+      "post": {
+        "tags": [
+          "uat"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "body",
+            "type": "string",
+            "description": "media type",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/getAllInfo/{language}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/media/{type}": {
+      "post": {
+        "tags": [
+          "Contribution"
+        ],
+        "description": "Endpoint to get media for contribution",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "media type",
+            "schema": {
+              "type": "string",
+              "example": "asr"
+            }
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "description": "User info",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "language": {
+                  "type": "string",
+                  "example": "Hindi"
+                },
+                "toLanguage": {
+                  "type": "string",
+                  "example": "English"
+                },
+                "age": {
+                  "type": "string",
+                  "example": "upto 10"
+                }
+              }
+            }
+          },
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/contributions/{type}": {
+      "get": {
+        "tags": [
+          "Validation"
+        ],
+        "description": "Endpoint to get contributed data for validation. parameter \"to\" is only required if type=parallel.",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "media type",
+            "schema": {
+              "type": "string",
+              "example": "asr"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "type": "string",
+            "description": "From language",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Hindi"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "type": "string",
+            "description": "To language",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "English"
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/validate/{contributionId}/{action}": {
+      "post": {
+        "tags": [
+          "Validation"
+        ],
+        "description": "Endpoint to store validation for a contributed data.",
+        "parameters": [
+          {
+            "name": "contributionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          },
+          {
+            "name": "action",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Validation action taken (accept/reject/skip)",
+            "schema": {
+              "type": "string",
+              "example": "accept"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "description": "Validation details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sentenceId": {
+                  "type": "number",
+                  "example": 1123
+                },
+                "state": {
+                  "type": "string",
+                  "example": "Punjab"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "India"
+                },
+                "userName": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "device": {
+                  "type": "string",
+                  "example": "device"
+                },
+                "browser": {
+                  "type": "string",
+                  "example": "browser_name"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "asr"
+                },
+                "fromLanguage": {
+                  "type": "string",
+                  "example": "Hindi"
+                },
+                "language": {
+                  "type": "string",
+                  "example": "English"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/media-object/{source}/{entityId}": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "source",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/report": {
+      "post": {
+        "tags": [
+          "Support"
+        ],
+        "description": "Endpoint to store report entry.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sentenceId": {
+                  "type": "number",
+                  "example": 123
+                },
+                "reportText": {
+                  "type": "string",
+                  "example": "Report message"
+                },
+                "language": {
+                  "type": "string",
+                  "example": "Hindi"
+                },
+                "userName": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "source": {
+                  "type": "string",
+                  "example": "contribution"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/skip": {
+      "post": {
+        "tags": [
+          "Contribution"
+        ],
+        "description": "Endpoint to mark contribution as skipped",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "language": {
+                  "type": "string",
+                  "example": "Hindi"
+                },
+                "sentenceId": {
+                  "type": "number",
+                  "example": 123
+                },
+                "userName": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "fromLanguage": {
+                  "type": "string",
+                  "example": "English"
+                },
+                "state_region": {
+                  "type": "string",
+                  "example": "Punjab"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "India"
+                },
+                "device": {
+                  "type": "string",
+                  "example": "deviceName"
+                },
+                "browser": {
+                  "type": "string",
+                  "example": "browserName"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "parallel"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/store": {
+      "post": {
+        "tags": [
+          "Contribution"
+        ],
+        "description": "Endpoint to store contribution data",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sentenceId": {
+                  "type": "number",
+                  "example": 123
+                },
+                "audioDuration": {
+                  "type": "number",
+                  "example": 3
+                },
+                "userInput": {
+                  "type": "string",
+                  "example": "text contribution sentence"
+                },
+                "speakerDetails": {
+                  "type": "object",
+                  "properties": {
+                    "userName": {
+                      "type": "string",
+                      "example": "name"
+                    },
+                    "motherTongue": {
+                      "type": "string",
+                      "example": "Hindi"
+                    },
+                    "gender": {
+                      "type": "string",
+                      "example": "Male"
+                    },
+                    "age": {
+                      "type": "string",
+                      "example": "upto 10"
+                    }
+                  }
+                },
+                "language": {
+                  "type": "string",
+                  "example": "Hindi"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "Punjab"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "India"
+                },
+                "device": {
+                  "type": "string",
+                  "example": "deviceName"
+                },
+                "browser": {
+                  "type": "string",
+                  "example": "browserName"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "parallel"
+                },
+                "fromLanguage": {
+                  "type": "string",
+                  "example": "English"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/audio/snr": {
+      "post": {
+        "tags": [
+          "Support"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/location-info": {
+      "get": {
+        "tags": [
+          "Support"
+        ],
+        "description": "Endpoint to get location info",
+        "parameters": [
+          {
+            "name": "ip",
+            "in": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/get-locale-strings/{locale}": {
+      "get": {
+        "tags": [
+          "Support"
+        ],
+        "description": "Endpoint to get translated string for locale",
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "string",
+              "example": "hi"
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/feedback": {
+      "post": {
+        "tags": [
+          "Support"
+        ],
+        "description": "Endpoint to store user feedbacks",
+        "parameters": [
+          {
+            "name": "obj",
+            "type": "object",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "feedback": {
+                  "type": "string",
+                  "example": "user feedback text"
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Complaint"
+                },
+                "language": {
+                  "type": "string",
+                  "example": "Hindi"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "email@mail.com"
+                },
+                "module": {
+                  "type": "string",
+                  "example": "Bolo India"
+                },
+                "target_page": {
+                  "type": "string",
+                  "example": "Home page"
+                },
+                "opinion_rating": {
+                  "type": "string",
+                  "example": "5"
+                },
+                "recommended": {
+                  "type": "string",
+                  "example": "Yes"
+                },
+                "revisit": {
+                  "type": "string",
+                  "example": "Yes"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/rewards": {
+      "get": {
+        "tags": [
+          "Thank you"
+        ],
+        "description": "Endpoint for reward details of user",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string",
+            "description": "Type of initiative (asr/text/ocr/parallel)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "asr"
+            }
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "Source (contribute/validate)",
+            "schema": {
+              "type": "string",
+              "example": "contribute"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Hindi"
+            }
+          },
+          {
+            "name": "userName",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "name"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "502": {
+            "description": "Bad Gateway"
+          }
+        }
+      }
+    },
+    "/rewards-info": {
+      "get": {
+        "tags": [
+          "Thank you"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string",
+            "description": "Type of initiative (asr/text/ocr/parallel)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "asr"
+            }
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "Source (contribute/validate)",
+            "schema": {
+              "type": "string",
+              "example": "contribute"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Hindi"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/user-rewards/{username?}": {
+      "get": {
+        "tags": [
+          "Badges"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "username?",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "schema": {
+              "type": "string",
+              "example": "name"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          }
+        ],
+        "responses": {
+          "502": {
+            "description": "Bad Gateway"
+          }
+        }
+      }
+    },
+    "/language-goal/{type}/{language}/{source}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "source",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/available-languages/{type}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/target-info/{type}/{sourceLanguage}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceLanguage",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetLanguage",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/top-languages-by-hours": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/top-languages-by-speakers": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {},
+        "deprecated": true
+      }
+    },
+    "/top-languages": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/aggregate-data-count/{type}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "byLanguage",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "byState",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/languages": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {},
+        "deprecated": true
+      }
+    },
+    "/v2/stats/summary/{type}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/stats/summary/{type}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/stats/categories/{type}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "timeframe",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/stats/contributions/age/{type}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/stats/contributions/gender/{type}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/timeline/{type}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "timeframe",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/progress/{type}/{language?}/{source?}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language?",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "source?",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/participation-stats": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {},
+        "deprecated": true
+      }
+    }
+  },
+  "definitions": {}
+}

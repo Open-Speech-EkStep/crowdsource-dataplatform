@@ -38,7 +38,7 @@ const {
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
-const { ONE_YEAR, MOTHER_TONGUE, LANGUAGES, WADASNR_BIN_PATH, MIN_SNR_LEVEL, ROLE_UAT } = require('./constants');
+const { ONE_YEAR, WADASNR_BIN_PATH, MIN_SNR_LEVEL, ROLE_UAT } = require('./constants');
 const {
     validateUserInputAndFile,
     validateUserInfo,
@@ -128,23 +128,25 @@ app.use(function (req, res, next) {
 app.use(express.static('../crowdsource-ui/target'));
 
 app.get('/changeLocale/:locale', function (req, res) {
+    // #swagger.deprecated = true
+    res.cookie('contributionLanguage', req.params.locale);
     if (
         ['hi', 'en', 'ta', 'kn', 'gu', 'mr', 'te', 'bn', 'as', 'pa', 'or', 'ml'].indexOf(req.params.locale) > -1
     ) {
-        res.cookie('contributionLanguage', req.params.locale);
         res.cookie('i18n', req.params.locale);
     } else {
-        res.cookie('contributionLanguage', req.params.locale);
         res.cookie('i18n', 'en');
     }
     res.redirect(req.headers.referer);
 });
 
 router.get('/', function (req, res) {
+    // #swagger.ignore = true
     res.redirect('en/home.html');
 });
 
 router.get('/profanity/:type', function (req, res) {
+    // #swagger.ignore = true
     const type = req.params.type;
     if (!['sunoindia', 'likhoindia', 'dekhoindia', 'boloindia'].includes(type)) {
         res.redirect('/en/not-found.html');
@@ -154,6 +156,7 @@ router.get('/profanity/:type', function (req, res) {
 });
 
 router.get('/getDetails/:language', async function (req, res) {
+    // #swagger.deprecated = true
     try {
         const currentLanguage = req.params.language;
         const allDetails = await getAllDetails(currentLanguage);
@@ -165,6 +168,14 @@ router.get('/getDetails/:language', async function (req, res) {
 });
 
 router.post('/verify-user', async (req, res) => {
+    // #swagger.tags = ['uat']
+    /* #swagger.parameters['userName'] = {
+                in: 'body',
+                type: 'string',
+                description: 'media type',
+                required: true,
+                schema: "name"
+        }*/
     const { userName } = req.body;
     try {
         await userVerify(userName, ROLE_UAT);
@@ -176,6 +187,7 @@ router.post('/verify-user', async (req, res) => {
 })
 
 router.get('/getAllInfo/:language', async function (req, res) {
+    // #swagger.deprecated = true
     try {
         const currentLanguage = req.params.language;
         const allDetails = await getAllInfo(currentLanguage);
@@ -191,15 +203,133 @@ router.get('/getAllInfo/:language', async function (req, res) {
     }
 });
 
-router.post('/media/:type', validateUserInfo, (req, res) => updateAndGetMedia(req, res));
+router.post('/media/:type', validateUserInfo, (req, res) => {
+    //  #swagger.tags = ['Contribution'],
+    //  #swagger.description = 'Endpoint to get media for contribution',
+    /*  #swagger.parameters['type'] = {
+                type: 'string',
+                description: 'media type',
+                required: true,
+                schema: "asr"
+        },
+        #swagger.parameters['obj'] = {
+                in: 'body',
+                type: 'object',
+                description: 'User info',
+                required: true,
+                schema: {"userName": "name", "language": "Hindi", "toLanguage": "English", "age": "upto 10" }
+        }
+        #swagger.parameters['userId'] = {
+                in: 'cookies',
+                type: 'string',
+                description: 'user id cookie',
+                required: true,
+                schema: 123
+        } */
+    return updateAndGetMedia(req, res)
+});
 
-router.get('/contributions/:type', validateGetContributionsInput, (req, res) => getContributionList(req, res));
+router.get('/contributions/:type', validateGetContributionsInput, (req, res) => {
+    //  #swagger.tags = ['Validation']
+    //  #swagger.description = 'Endpoint to get contributed data for validation. parameter "to" is only required if type=parallel.',
+    /*  #swagger.parameters['userId'] = {
+                in: 'cookies',
+                type: 'string',
+                description: 'user id cookie',
+                required: true,
+                schema: 123
+        }
+        #swagger.parameters['type'] = {
+                type: 'string',
+                description: 'media type',
+                required: true,
+                schema: "asr"
+        },
+        #swagger.parameters['from'] = {
+                in: 'query',
+                type: 'string',
+                description: 'From language',
+                required: true,
+                schema: "Hindi"
+        }
+        #swagger.parameters['to'] = {
+                in: 'query',
+                type: 'string',
+                description: 'To language',
+                required: true,
+                schema: "English"
+        } */
+    return getContributionList(req, res)
+});
 
-router.post('/validate/:contributionId/:action', validateInputsForValidateEndpoint, (req, res) => updateTablesAfterValidation(req, res))
+router.post('/validate/:contributionId/:action', validateInputsForValidateEndpoint, (req, res) => {
+    // #swagger.tags = ['Validation']
+    //  #swagger.description = 'Endpoint to store validation for a contributed data.',
+    /*  #swagger.parameters['userId'] = {
+                in: 'cookies',
+                type: 'string',
+                description: 'user id cookie',
+                required: true,
+                schema: 123
+        }
+        #swagger.parameters['contributionId'] = {
+                type: 'string',
+                required: true,
+                schema: 123
+        },
+        #swagger.parameters['action'] = {
+                type: 'string',
+                description: 'Validation action taken (accept/reject/skip)',
+                required: true,
+                schema: 'accept'
+        }
+        #swagger.parameters['obj'] = {
+                in: 'body',
+                type: 'object',
+                description: 'Validation details',
+                required: true,
+                schema: {
+                    "sentenceId": 1123,
+                    "state": "Punjab",
+                    "country": "India",
+                    "userName": "name",
+                    "device": "device",
+                    "browser": "browser_name",
+                    "type": "asr",
+                    "fromLanguage": "Hindi",
+                    "language": "English"
+                        }
+        }*/
+    return updateTablesAfterValidation(req, res)
+})
 
-router.post('/media-object/:source/:entityId', validateContributedMediaInput, (req, res) => getMediaObject(req, res, objectStorage))
+router.post('/media-object/:source/:entityId', validateContributedMediaInput, (req, res) => {
+    // #swagger.deprecated = true
+    return getMediaObject(req, res, objectStorage)
+})
 
 router.post('/report', async (req, res) => {
+    /*  #swagger.tags = ['Support']
+        #swagger.description = 'Endpoint to store report entry.',
+        #swagger.parameters['userId'] = {
+                in: 'cookies',
+                type: 'string',
+                description: 'user id cookie',
+                required: true,
+                schema: 123
+        }
+        #swagger.parameters['obj'] = {
+                in: 'body',
+                type: 'object',
+                required: true,
+                schema: {
+                    "sentenceId": 123,
+                    "reportText": "Report message",
+                    "language": "Hindi",
+                    "userName": "name",
+                    "source": "contribution"
+                }
+        }, */
     const userId = req.cookies.userId || '';
     //in case source is validation, we get the contribution id in the sentenceId field, for easier tracking
     const { sentenceId = '', reportText = '', language = '', userName = '', source = '' } = req.body;
@@ -222,6 +352,29 @@ router.post('/report', async (req, res) => {
 });
 
 router.post('/skip', validateInputForSkip, markContributionSkippedInCache, (req, res) => {
+    /*  #swagger.tags = ['Contribution']
+        #swagger.description = 'Endpoint to mark contribution as skipped',
+        #swagger.parameters['userId'] = {
+                in: 'cookies',
+                type: 'string',
+                description: 'user id cookie',
+                required: true,
+                schema: 123
+        }
+        #swagger.parameters['obj'] = {
+        in: 'body',
+        type: 'object',
+        required: true,
+        schema: {"language": "Hindi",
+                    "sentenceId": 123,
+                    "userName": "name",
+                    "fromLanguage": "English",
+                    "state_region": "Punjab",
+                    "country": "India",
+                    "device": "deviceName",
+                    "browser": "browserName", 
+                    "type": "parallel"}
+    } */
     const language = req.body.language || ''
     markContributionSkipped(req.cookies.userId, req.body.sentenceId, req.body.userName, language, req.body.state_region, req.body.country, req.body.device, req.body.browser)
         .then(() => {
@@ -234,6 +387,37 @@ router.post('/skip', validateInputForSkip, markContributionSkippedInCache, (req,
 });
 
 router.post('/store', validateUserInputAndFile, (req, res) => {
+    /*  #swagger.tags = ['Contribution']
+        #swagger.description = 'Endpoint to store contribution data',
+        #swagger.parameters['userId'] = {
+                in: 'cookies',
+                type: 'string',
+                description: 'user id cookie',
+                required: true,
+                schema: 123
+        }
+        #swagger.parameters['obj'] = {
+        in: 'body',
+        type: 'object',
+        required: true,
+        schema: {
+            "sentenceId": 123,
+            "audioDuration": 3,
+            "userInput": 'text contribution sentence',
+            "speakerDetails": {"userName":  "name",
+                                "motherTongue": "Hindi",
+                                "gender": "Male",
+                                "age": "upto 10",
+                                },
+            "language": "Hindi",
+            "state": "Punjab",
+            "country": "India",
+            "device": "deviceName",
+            "browser": "browserName", 
+            "type": "parallel",
+            "fromLanguage": "English"
+            }
+    } */
     const file = req.file;
     const datasetId = req.body.sentenceId;
     const { userId } = req.cookies;
@@ -273,6 +457,7 @@ router.post('/store', validateUserInputAndFile, (req, res) => {
 });
 
 router.post('/audio/snr', async (req, res) => {
+    // #swagger.tags = ['Support']
     const file = req.file;
     const filePath = file.path;
     const command = buildWadaSnrCommand(filePath);
@@ -290,6 +475,12 @@ router.post('/audio/snr', async (req, res) => {
 });
 
 router.get('/location-info', (req, res) => {
+    // #swagger.tags = ['Support']
+    // #swagger.description = 'Endpoint to get location info'
+    /*  #swagger.parameters['ip'] = {
+                in: 'query',
+                required: true,
+        }, */
     const ip = req.query.ip || null;
     if (ip === null) {
         res.sendStatus(400);
@@ -306,6 +497,12 @@ router.get('/location-info', (req, res) => {
 });
 
 app.get('/get-locale-strings/:locale', function (req, res) {
+    //  #swagger.tags = ['Support']
+    //  #swagger.description = 'Endpoint to get translated string for locale'
+    /*  #swagger.parameters['locale'] = {
+        type: 'string',
+        required: true,
+        schema: 'hi'} */
     let locale = req.params.locale;
     fs.readFile(`${__dirname}/../locales/${locale}.json`, (err, body) => {
         if (err) {
@@ -455,6 +652,23 @@ app.get('/get-locale-strings/:locale', function (req, res) {
 });
 
 router.post('/feedback', validateUserInputForFeedback, (req, res) => {
+    //  #swagger.tags = ['Support']
+    //  #swagger.description = 'Endpoint to store user feedbacks'
+    /*  #swagger.parameters['obj'] = {
+        type: 'object',
+        required: true,
+        in: 'body',
+        schema: {
+            "feedback": "user feedback text",
+            "category": "Complaint",
+            "language": "Hindi",
+            "email": "email@mail.com",
+            "module": "Bolo India",
+            "target_page": "Home page",
+            "opinion_rating": "5",
+            "recommended": "Yes",
+            "revisit": "Yes"
+        }} */
     const feedback = req.body.feedback.trim();
     const category = req.body.category.trim();
     const language = req.body.language.trim();
@@ -480,6 +694,42 @@ router.post('/feedback', validateUserInputForFeedback, (req, res) => {
 });
 
 router.get('/rewards', validateRewardsInput, async (req, res) => {
+    // #swagger.tags = ['Thank you']
+    //  #swagger.description = 'Endpoint for reward details of user'
+    /*    
+        #swagger.parameters['userId'] = {
+                in: 'cookies',
+                type: 'string',
+                description: 'user id cookie',
+                required: true,
+                schema: 123
+        }
+        #swagger.parameters['type'] = {
+        in: 'query',
+        type: 'string',
+        description: 'Type of initiative (asr/text/ocr/parallel)',
+        required: true,
+        schema: 'asr'
+        }
+        #swagger.parameters['source'] = {
+        type: 'string',
+        required: true,
+        description: 'Source (contribute/validate)',
+        in: 'query',
+        schema: 'contribute'
+        }
+        #swagger.parameters['language'] = {
+        type: 'string',
+        required: true,
+        in: 'query',
+        schema: 'Hindi'
+        }
+        #swagger.parameters['userName'] = {
+        type: 'string',
+        required: true,
+        in: 'query',
+        schema: 'name'
+        }*/
     const userId = req.cookies.userId;
     const { type, source, language, userName = '' } = req.query;
     try {
@@ -491,6 +741,27 @@ router.get('/rewards', validateRewardsInput, async (req, res) => {
 });
 
 router.get('/rewards-info', validateRewardsInfoInput, async (req, res) => {
+    // #swagger.tags = ['Thank you']
+    /* #swagger.parameters['type'] = {
+        in: 'query',
+        type: 'string',
+        description: 'Type of initiative (asr/text/ocr/parallel)',
+        required: true,
+        schema: 'asr'
+        }
+        #swagger.parameters['source'] = {
+        type: 'string',
+        required: true,
+        description: 'Source (contribute/validate)',
+        in: 'query',
+        schema: 'contribute'
+        }
+        #swagger.parameters['language'] = {
+        type: 'string',
+        required: true,
+        in: 'query',
+        schema: 'Hindi'
+        } */
     const { type, source, language } = req.query;
 
     const info = await getRewardsInfo(type, source, language);
@@ -502,6 +773,21 @@ router.get('/rewards-info', validateRewardsInfoInput, async (req, res) => {
 });
 
 router.get('/user-rewards/:username?', async (req, res) => {
+    // #swagger.tags = ['Badges']
+    /*
+        #swagger.parameters['userId'] = {
+                in: 'cookies',
+                type: 'string',
+                description: 'user id cookie',
+                required: true,
+                schema: 123
+        }
+        #swagger.parameters['username?'] = {
+        type: 'string',
+        required: false,
+        in: 'query',
+        schema: 'name'
+        }*/
     const userId = req.cookies.userId || '';
     const userName = req.params.username || '';
     try {
@@ -513,11 +799,20 @@ router.get('/user-rewards/:username?', async (req, res) => {
     }
 });
 
-router.get('/language-goal/:type/:language/:source', validateLanguageGoalInput, (req, res) => languageGoal(req, res));
+router.get('/language-goal/:type/:language/:source', validateLanguageGoalInput, (req, res) => {
+    // #swagger.deprecated = true
+    return languageGoal(req, res)
+});
 
-router.get('/available-languages/:type', validateMediaTypeInput, (req, res) => getAvailableLanguages(req, res));
+router.get('/available-languages/:type', validateMediaTypeInput, (req, res) => {
+    // #swagger.deprecated = true
+    return getAvailableLanguages(req, res)
+});
 
-router.get('/target-info/:type/:sourceLanguage', (req, res) => getTargetInfo(req, res));
+router.get('/target-info/:type/:sourceLanguage', (req, res) => {
+    // #swagger.deprecated = true
+    return getTargetInfo(req, res)
+});
 
 profanityApi(router)
 require('./dashboard-api')(router);

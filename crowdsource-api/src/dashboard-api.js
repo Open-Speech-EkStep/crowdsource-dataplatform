@@ -67,6 +67,7 @@ const dashboardRoutes = (router) => {
 
     // Optional
     router.get('/top-languages-by-hours', async (req, res) => {
+        // #swagger.deprecated = true
         try {
             const topLanguagesByHours = await getTopLanguageByHours();
             res.send({ "data": topLanguagesByHours });
@@ -79,11 +80,13 @@ const dashboardRoutes = (router) => {
 
     // Optional
     router.get('/top-languages-by-speakers', async (req, res) => {
+        // #swagger.deprecated = true
         const topLanguagesBySpeakers = await getTopLanguageBySpeakers();
         res.send({ "data": topLanguagesBySpeakers });
     });
 
     router.get('/top-languages', async (req, res) => {
+        // #swagger.deprecated = true
         try {
             const topLanguagesByHours = await getTopLanguageByHours();
             const topLanguagesBySpeakers = await getTopLanguageBySpeakers();
@@ -97,6 +100,7 @@ const dashboardRoutes = (router) => {
 
     //Optional
     router.get('/aggregate-data-count/:type', validateMediaTypeInput, async (req, res) => {
+        // #swagger.deprecated = true
         const byLanguage = req.query.byLanguage || false;
         const byState = req.query.byState || false;
         const type = req.params.type;
@@ -108,12 +112,14 @@ const dashboardRoutes = (router) => {
 
     //Optional
     router.get('/languages', async (req, res) => {
+        // #swagger.deprecated = true
         const languagesData = await getLanguages();
         const lastUpdatedDateTime = await getLastUpdatedAt();
         res.send({ "data": languagesData.map(data => data.language), last_updated_at: lastUpdatedDateTime });
     });
 
     router.get('/v2/stats/summary/:type', validateMediaTypeInput, async (req, res) => {
+        // #swagger.deprecated = true
 
         const resultFields = Object.keys(validateAndReturnRequiredStatsFields(req.query));
         const type = req.params.type;
@@ -153,6 +159,7 @@ const dashboardRoutes = (router) => {
     });
 
     router.get('/stats/summary/:type', validateMediaTypeInput, async (req, res) => {
+        // #swagger.deprecated = true
 
         const resultFields = Object.keys(validateAndReturnRequiredStatsFields(req.query));
         const type = req.params.type;
@@ -200,6 +207,7 @@ const dashboardRoutes = (router) => {
     });
 
     router.get('/stats/categories/:type', async (req, res) => {
+        // #swagger.deprecated = true
         let result = {};
 
         const resultFields = Object.keys(validateAndReturnRequiredStatsCategoryFields(req.query));
@@ -242,6 +250,7 @@ const dashboardRoutes = (router) => {
 
     // Optional
     router.get('/stats/contributions/age/:type', validateMediaTypeInput, async (req, res) => {
+        // #swagger.deprecated = true
         const language = req.query.language || '';
         const type = req.params.type;
 
@@ -252,6 +261,7 @@ const dashboardRoutes = (router) => {
 
     //Optional
     router.get('/stats/contributions/gender/:type', validateMediaTypeInput, async (req, res) => {
+        // #swagger.deprecated = true
         const language = req.query.language || '';
         const type = req.params.type;
 
@@ -264,6 +274,7 @@ const dashboardRoutes = (router) => {
 
     //Optional
     router.get('/timeline/:type', validateMediaTypeInput, async (req, res) => {
+        // #swagger.deprecated = true
         const allowedTimeFrames = ['weekly', 'monthly', 'daily', 'quarterly'];
 
         const language = req.query.language || '';
@@ -292,6 +303,7 @@ const dashboardRoutes = (router) => {
     });
 
     router.get('/progress/:type/:language?/:source?', validateMediaTypeInput, async (req, res) => {
+        // #swagger.deprecated = true
         const type = req.params.type || '';
         const language = req.params.language || '';
         const source = req.params.source || '';
@@ -305,6 +317,7 @@ const dashboardRoutes = (router) => {
     });
 
     router.get('/participation-stats', async (req, res) => {
+        // #swagger.deprecated = true
         const participationData = await getParticipationStats();
         const intitativeProperties = {
             'parallel': 'likho_india_participation', 'ocr': 'dekho_india_participation',
