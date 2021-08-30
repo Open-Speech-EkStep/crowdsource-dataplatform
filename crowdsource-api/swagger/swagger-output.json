@@ -5,7 +5,7 @@
     "description": "Swagger API Documentation for Crowdsource",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "localhost:8080",
   "basePath": "/",
   "tags": [],
   "schemes": [
@@ -156,7 +156,35 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "response data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "dataset_row_id": {
+                        "type": "string",
+                        "example": "123"
+                      },
+                      "media_data": {
+                        "type": "string",
+                        "example": "qwe"
+                      },
+                      "source_info": {
+                        "type": "string",
+                        "example": "abc"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -223,7 +251,43 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "response data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "contribution_id": {
+                        "type": "string",
+                        "example": "123"
+                      },
+                      "dataset_row_id": {
+                        "type": "number",
+                        "example": 321
+                      },
+                      "sentence": {
+                        "type": "string",
+                        "example": "Text 1"
+                      },
+                      "contribution": {
+                        "type": "string",
+                        "example": "contribution/1"
+                      },
+                      "source_info": {
+                        "type": "string",
+                        "example": "info"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -758,6 +822,61 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "response data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "badgeId": {
+                  "type": "string",
+                  "example": "1324"
+                },
+                "currentBadgeType": {
+                  "type": "string",
+                  "example": "silver"
+                },
+                "nextBadgeType": {
+                  "type": "string",
+                  "example": "gold"
+                },
+                "sequence": {
+                  "type": "string",
+                  "example": "3rd"
+                },
+                "currentMilestone": {
+                  "type": "string",
+                  "example": "25"
+                },
+                "nextMilestone": {
+                  "type": "string",
+                  "example": "100"
+                },
+                "contributionCount": {
+                  "type": "string",
+                  "example": "30"
+                },
+                "isNewBadge": {
+                  "type": "string",
+                  "example": "true"
+                },
+                "badges": {
+                  "type": "string",
+                  "example": "[{ 'grade': 'bronze, 'generated_badge_id': '3321' }]"
+                },
+                "currentAmount": {
+                  "type": "string",
+                  "example": "0.62"
+                },
+                "languageGoal": {
+                  "type": "string",
+                  "example": "100"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
           "400": {
             "description": "Bad Request"
           },
@@ -808,6 +927,28 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "response data",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "contributions": {
+                    "type": "string",
+                    "example": "100"
+                  },
+                  "badge": {
+                    "type": "string",
+                    "example": "silver"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
           "400": {
             "description": "Bad Request"
           },
@@ -847,6 +988,48 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "response data",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "generated_at": {
+                    "type": "string",
+                    "example": "10:00"
+                  },
+                  "generated_badge_id": {
+                    "type": "string",
+                    "example": "113"
+                  },
+                  "language": {
+                    "type": "string",
+                    "example": "Hindi"
+                  },
+                  "milestone": {
+                    "type": "string",
+                    "example": "100"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "asr"
+                  },
+                  "category": {
+                    "type": "string",
+                    "example": "contribute"
+                  },
+                  "grade": {
+                    "type": "string",
+                    "example": "bronze"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
           "502": {
             "description": "Bad Gateway"
           }

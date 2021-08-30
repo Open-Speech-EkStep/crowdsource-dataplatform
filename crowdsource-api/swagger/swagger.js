@@ -5,7 +5,7 @@ const doc = {
     title: 'Crowdsource API',
     description: 'Swagger API Documentation for Crowdsource',
   },
-  host: 'localhost:3000',
+  host: 'localhost:8080',
   schemes: ['http'],
 };
 

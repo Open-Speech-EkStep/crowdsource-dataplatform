@@ -225,6 +225,10 @@ router.post('/media/:type', validateUserInfo, (req, res) => {
                 description: 'user id cookie',
                 required: true,
                 schema: 123
+        } 
+        #swagger.responses[200] = {
+        description: 'response data',
+        schema: {"data": [{"dataset_row_id": "123", "media_data": "qwe", "source_info": "abc"}]}
         } */
     return updateAndGetMedia(req, res)
 });
@@ -258,6 +262,10 @@ router.get('/contributions/:type', validateGetContributionsInput, (req, res) => 
                 description: 'To language',
                 required: true,
                 schema: "English"
+        }
+        #swagger.responses[200] = {
+        description: 'response data',
+        schema: {"data": [{"contribution_id": "123", "dataset_row_id":321, "sentence": "Text 1", "contribution":"contribution/1", "source_info": "info"}]}
         } */
     return getContributionList(req, res)
 });
@@ -729,7 +737,23 @@ router.get('/rewards', validateRewardsInput, async (req, res) => {
         required: true,
         in: 'query',
         schema: 'name'
-        }*/
+        }
+        #swagger.responses[200] = {
+        description: 'response data',
+        schema: {
+            "badgeId": "1324",
+            "currentBadgeType": "silver",
+            "nextBadgeType": "gold",
+            "sequence": "3rd",   
+            "currentMilestone": "25",
+            "nextMilestone": "100",
+            "contributionCount": "30",
+            "isNewBadge": 'true',
+            "badges": "[{ 'grade': 'bronze, 'generated_badge_id': '3321' }]",
+            "currentAmount": "0.62",
+            "languageGoal": "100"
+            }
+        } */
     const userId = req.cookies.userId;
     const { type, source, language, userName = '' } = req.query;
     try {
@@ -761,6 +785,17 @@ router.get('/rewards-info', validateRewardsInfoInput, async (req, res) => {
         required: true,
         in: 'query',
         schema: 'Hindi'
+        } 
+        #swagger.responses[200] = {
+        description: 'response data',
+        schema: [{
+            "contributions": "50",
+            "badge": "bronze"
+            },
+            {
+            "contributions": "100",
+            "badge": "silver"
+            }]
         } */
     const { type, source, language } = req.query;
 
@@ -787,7 +822,19 @@ router.get('/user-rewards/:username?', async (req, res) => {
         required: false,
         in: 'query',
         schema: 'name'
-        }*/
+        } 
+        #swagger.responses[200] = {
+        description: 'response data',
+        schema: [{
+            "generated_at": "10:00",
+            "generated_badge_id": "113",
+            "language": "Hindi",
+            "milestone": "100",
+            "type": 'asr',
+            "category": 'contribute',
+            "grade": "bronze"
+            }]
+        } */
     const userId = req.cookies.userId || '';
     const userName = req.params.username || '';
     try {
