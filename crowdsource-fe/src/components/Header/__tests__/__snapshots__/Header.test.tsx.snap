@@ -3,83 +3,155 @@
 exports[`Header should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <header
-    class="position-sticky root"
+    class="root"
     data-testid="Header"
     role="banner"
   >
-    <nav
-      class="navbar navbar-expand-lg navbar-light container-fluid flex-wrap flex-md-nowrap"
+    <div
+      class="navigation"
     >
-      <ul
-        class="navbar-nav me-auto mb-2 mb-lg-0"
+      <nav
+        class="bar navbar navbar-expand-lg navbar-light"
+        data-testid="Navigation"
       >
-        <li
-          class="nav-item"
+        <button
+          aria-label="Toggle navigation"
+          class="toggle navbar-toggler collapsed"
+          type="button"
         >
-          <a
-            class="nav-link"
-            href="/home"
-          >
-            home
-          </a>
-        </li>
-        <li
-          class="nav-item"
+          <span
+            class="toggleBar"
+          />
+          <span
+            class="toggleBar"
+          />
+          <span
+            class="toggleBar"
+          />
+        </button>
+        <div
+          class="collapse navbar-collapse collapse"
         >
-          <a
-            class="nav-link"
-            href="/sunoIndia/home"
+          <div
+            class="navbar-nav"
           >
-            suno india
-          </a>
-        </li>
-      </ul>
-      <ul
-        class="navbar-nav"
-        data-testid="LanguageSwitcher"
+            <a
+              class="link nav-link"
+              data-rr-ui-event-key="/sunoIndia/home.html"
+              href="/sunoIndia/home.html"
+            >
+              suno india
+            </a>
+            <a
+              class="link nav-link"
+              data-rr-ui-event-key="/boloIndia/home.html"
+              href="/boloIndia/home.html"
+            >
+              bolo india
+            </a>
+            <a
+              class="link nav-link"
+              data-rr-ui-event-key="/likhoIndia/home.html"
+              href="/likhoIndia/home.html"
+            >
+              likho india
+            </a>
+            <a
+              class="link nav-link"
+              data-rr-ui-event-key="/dekhoIndia/home.html"
+              href="/dekhoIndia/home.html"
+            >
+              dekho india
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div
+      class="logo"
+    >
+      <div
+        class="root"
+        data-testid="Logo"
       >
-        <li
-          class="nav-item"
+        <a
+          class="img imgMobile"
+          href="/"
         >
-          <a
-            class="nav-link active"
-            href=""
+          <div
+            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
           >
-            English
-          </a>
-        </li>
-        <li
-          class="nav-item"
+            <div
+              style="box-sizing: border-box; display: block; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+              />
+            </div>
+            <noscript />
+            <img
+              alt="bhashiniLogo"
+              data-nimg="true"
+              decoding="async"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+          </div>
+        </a>
+        <a
+          class="img imgDesktop"
+          href="/"
         >
-          <a
-            class="nav-link"
-            href=""
+          <div
+            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
           >
-            हिंदी
-          </a>
-        </li>
-        <li
-          class="nav-item"
+            <div
+              style="box-sizing: border-box; display: block; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjcwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIvPg=="
+                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+              />
+            </div>
+            <noscript />
+            <img
+              alt="bhashiniLogo"
+              data-nimg="true"
+              decoding="async"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+          </div>
+        </a>
+        <span
+          class="sep"
+        />
+        <a
+          class="label"
+          href="/home"
         >
-          <a
-            class="nav-link"
-            href=""
+          bhasha
+          <span
+            class="labelSecondHalf"
           >
-            ગુજરાતી
-          </a>
-        </li>
-        <li
-          class="nav-item"
-        >
-          <a
-            class="nav-link"
-            href=""
+            daan
+          </span>
+          <span
+            class="betaText"
           >
-            ਪੰਜਾਬੀ
-          </a>
-        </li>
-      </ul>
-    </nav>
+            beta
+          </span>
+        </a>
+      </div>
+      <span
+        class="sep"
+      />
+    </div>
   </header>
 </DocumentFragment>
 `;

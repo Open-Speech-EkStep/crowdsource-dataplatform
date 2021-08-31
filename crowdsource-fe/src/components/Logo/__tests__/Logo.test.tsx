@@ -1,9 +1,8 @@
+import Logo from 'components/Logo/Logo';
 import { render, verifyAxeTest } from 'utils/testUtils';
 
-import Header from '../Header';
-
-describe('Header', () => {
-  const setup = () => render(<Header />);
+describe('Logo', () => {
+  const setup = () => render(<Logo />);
 
   verifyAxeTest(setup());
 

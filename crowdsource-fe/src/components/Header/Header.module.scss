@@ -1,10 +1,47 @@
 .root {
-  align-items: center;
   background-color: var(--text-white);
   color: var(--primary-color);
   display: flex;
   filter: drop-shadow(0 2px 12px var(--text-light-blue));
-  padding: 1rem;
+  height: 56px;
+  padding: 0;
+  position: sticky;
   top: 0;
+  width: 100%;
   z-index: var(--header-z-index);
+
+  @include media-breakpoint-up(md) {
+    height: 72px;
+  }
+}
+
+.navigation {
+  display: flex;
+  order: 1;
+
+  @include media-breakpoint-up(lg) {
+    order: 2;
+  }
+}
+
+.logo {
+  display: flex;
+  order: 2;
+
+  @include media-breakpoint-up(lg) {
+    order: 1;
+  }
+}
+
+.sep {
+  display: none;
+
+  @include media-breakpoint-up(xl) {
+    align-self: center;
+    border: 1px solid #0f2749;
+    display: block;
+    height: 2.5rem;
+    margin: 0 10px;
+    opacity: 0.1;
+  }
 }

@@ -1,0 +1,56 @@
+.bar {
+  align-items: stretch;
+  display: flex;
+  padding: 0;
+}
+
+.toggle {
+  align-items: center;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  height: 3.5rem;
+  justify-content: center;
+  padding: 0;
+  width: 3.5rem;
+
+  @include media-breakpoint-up(md) {
+    height: 4.5rem;
+    width: 4.5rem;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.toggleBar {
+  background-color: #0f2749;
+  height: 2px;
+  margin-top: 0.25rem;
+  position: relative;
+  width: 20px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.collapse {
+  align-items: stretch;
+  background-color: #fff;
+  padding: 0.5rem 0;
+  position: absolute;
+  top: 3.5rem;
+  width: 100vw;
+
+  @include media-breakpoint-up(md) {
+    top: 4.5rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding: 0;
+    position: static;
+    width: auto;
+  }
+}
