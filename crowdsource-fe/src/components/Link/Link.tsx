@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
 
-import NextLink from 'next/link';
+import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 
-interface LinkProps {
+interface LinkProps extends NextLinkProps {
   children: ReactNode;
   href: string;
   locale?: string;
