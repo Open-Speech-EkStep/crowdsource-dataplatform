@@ -1,4 +1,4 @@
-import type { ReactNode, PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
