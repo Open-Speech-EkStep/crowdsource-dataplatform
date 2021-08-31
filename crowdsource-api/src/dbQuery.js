@@ -192,21 +192,7 @@ const updateViews = 'CALL update_view_data();';
 
 const updateMediaWithContributedState = `update dataset_row set state='contributed' where "dataset_row_id"=$1 and state is null`;
 
-const getCountOfTotalSpeakerAndRecordedAudio = `select  count(DISTINCT(con.*)), 0 as index, 0 as duration \
-from "contributors" con inner join "contributions" cont on con.contributor_id = cont.contributed_by and cont.action=\'completed\' inner join "dataset_row" s on  s."dataset_row_id" = cont."dataset_row_id"  where s.language = $1 \
-UNION ALL (select count(*),1 as index, sum(cont.audio_duration) as duration from dataset_row s inner join "contributions" cont on cont."dataset_row_id" = s."dataset_row_id" and cont.action=\'completed\' where s.language = $1);`
-
-const getMotherTonguesData = 'select data."mother_tongue", count (*) from (select con."mother_tongue" from dataset_row s inner join "contributions" cont on s."dataset_row_id" = cont."dataset_row_id" and "action"=\'completed\' inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."mother_tongue", con.user_name, con.contributor_identifier) as data group by data."mother_tongue";'
-
-const getAgeGroupsData = 'select data."age_group", count (*) from (select con."age_group" from dataset_row s inner join "contributions" cont on s."dataset_row_id" = cont."dataset_row_id" and "action"=\'completed\' inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."age_group", con.user_name, con.contributor_identifier) as data group by data."age_group";'
-
-const getGenderData = 'select data."gender", count (*) from (select con."gender" from dataset_row s inner join "contributions" cont on s."dataset_row_id" = cont."dataset_row_id" and "action"=\'completed\' inner join "contributors" con on con.contributor_id = cont.contributed_by where s.language = $1 group by con."gender", con.user_name, con.contributor_identifier) as data group by data."gender";'
-
 const feedbackInsertion = 'Insert into feedbacks (email, feedback, category, language, module, target_page, opinion_rating, recommended, revisit) values ($1,$2,$3,$4,$5,$6,$7,$8,$9);'
-
-const getPathFromContribution = `select media ->> 'data' as path from contributions where contribution_id = $1;`
-
-const getPathFromMasterDataSet = `select media ->> 'data' as path from dataset_row where dataset_row_id = $1;`
 
 const saveReportQuery = `
 INSERT INTO reports (reported_by, media_id, report_text, language,source) \
@@ -299,32 +285,6 @@ const getLanguageGoalQuery = `select goal from language_goals where category=$1 
 const getContributionLanguagesQuery = `select dr.media->>'language' as from_language,con.media->>'language' as to_language from dataset_row dr inner join 
 contributions con on con.dataset_row_id=dr.dataset_row_id and con.action='completed' where dr.type=$1 group by dr.media->>'language',con.media->>'language',dr.type`;
 
-const getDatasetLanguagesQuery = `select distinct(media->>'language') as language from dataset_row where type=$1 
-and ((state is null) or (state='contributed'))`;
-
-const hasTargetQuery = `select exists(select 1 from contributions con inner join dataset_row dr on con.dataset_row_id=dr.dataset_row_id left join validations val on 
-  con.contribution_id=val.contribution_id and val.action!='skip' inner join configurations conf on conf.config_name='validation_count'
-  inner join configurations conf2 on conf2.config_name='include_profane' 
-  inner join configurations conf3 on conf3.config_name='show_demo_data'
-  left join master_dataset mds on dr.master_dataset_id=mds.master_dataset_id
-where type=$1 and dr.media->>'language'=$2 and con.media->>'language'=$3 and con.action='completed'
-and (conf2.value=1 or is_profane=false) 
-and (conf3.value=0 or for_demo=true)
-and coalesce(mds.is_active, true) = true
-group by val.contribution_id,conf.value having count(val.*)<conf.value) as result`;
-
-const isAllContributedQuery = `select not exists(
-	select dataset_row.dataset_row_id from dataset_row
-	left join contributions con on con.dataset_row_id=dataset_row.dataset_row_id and action='completed' and (type!='parallel' or con.media->>'language'=$3)
-  inner join configurations conf2 on conf2.config_name='include_profane'
-  inner join configurations conf3 on conf3.config_name='show_demo_data' 
-  left join master_dataset mds on dataset_row.master_dataset_id=mds.master_dataset_id
-  where type=$1 and dataset_row.media->>'language'=$2 and con.contribution_id is null
-  and (conf2.value=1 or is_profane=false)
-  and (conf3.value=0 or for_demo=true)
-  and coalesce(mds.is_active, true) = true
-	) as result`;
-
 const getDataRowInfo = `select type, media->>'language' as language from dataset_row where dataset_row_id=$1`;
 
 const userVerifyQuery = `select id from users where LOWER(username) = LOWER($1) and role = $2`;
@@ -349,15 +309,10 @@ module.exports = {
   getContributionListQuery,
   getContributionListForParallel,
   updateContributionDetails,
-  getCountOfTotalSpeakerAndRecordedAudio,
-  getMotherTonguesData,
-  getGenderData,
-  getAgeGroupsData,
   updateMediaWithContributedState,
   addValidationQuery,
   updateMediaWithValidatedState,
   feedbackInsertion,
-  getPathFromContribution,
   saveReportQuery,
   getMediaForLaunch,
   markContributionSkippedQuery,
@@ -385,11 +340,7 @@ module.exports = {
   getValidationHoursForText,
   getLanguageGoalQuery,
   updateContributionDetailsWithUserInput,
-  getPathFromMasterDataSet,
   getContributionLanguagesQuery,
-  getDatasetLanguagesQuery,
-  hasTargetQuery,
-  isAllContributedQuery,
   getDataRowInfo,
   getUserRewardsQuery
 }

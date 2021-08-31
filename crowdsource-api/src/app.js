@@ -19,22 +19,17 @@ const {
     updateDbWithAudioPath,
     updateAndGetMedia,
     getContributionList,
-    getAllDetails,
-    getAllInfo,
     updateTablesAfterValidation,
-    getMediaObject,
     insertFeedback,
     saveReport,
     markContributionSkipped,
     getRewards,
     getRewardsInfo,
     updateDbWithUserInput,
-    getAvailableLanguages,
-    getTargetInfo,
     userVerify,
-    languageGoal,
     getUserRewards
 } = require('./dbOperations');
+
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const compression = require('compression');
@@ -46,11 +41,8 @@ const {
     validateInputForSkip,
     validateRewardsInput,
     validateRewardsInfoInput,
-    validateContributedMediaInput,
     validateInputsForValidateEndpoint,
-    validateGetContributionsInput,
-    validateMediaTypeInput,
-    validateLanguageGoalInput
+    validateGetContributionsInput
 } = require('./middleware/validateUserInputs');
 const { markContributionSkippedInCache } = require('./middleware/cacheMiddleware')
 
@@ -155,18 +147,6 @@ router.get('/profanity/:type', function (req, res) {
     res.redirect(`/en/profanity-home.html?type=${type}`);
 });
 
-router.get('/getDetails/:language', async function (req, res) {
-    // #swagger.deprecated = true
-    try {
-        const currentLanguage = req.params.language;
-        const allDetails = await getAllDetails(currentLanguage);
-        res.status(200).send(allDetails);
-    } catch (err) {
-        console.log(err);
-        res.sendStatus(500);
-    }
-});
-
 router.post('/verify-user', async (req, res) => {
     // #swagger.tags = ['uat']
     /* #swagger.parameters['userName'] = {
@@ -185,23 +165,6 @@ router.post('/verify-user', async (req, res) => {
         res.sendStatus(401);
     }
 })
-
-router.get('/getAllInfo/:language', async function (req, res) {
-    // #swagger.deprecated = true
-    try {
-        const currentLanguage = req.params.language;
-        const allDetails = await getAllInfo(currentLanguage);
-
-        res.status(200).send({
-            genderData: allDetails[0],
-            ageGroups: allDetails[1],
-            motherTongues: allDetails[2],
-        });
-    } catch (err) {
-        console.log(err);
-        res.sendStatus(500);
-    }
-});
 
 router.post('/media/:type', validateUserInfo, (req, res) => {
     //  #swagger.tags = ['Contribution'],
@@ -309,11 +272,6 @@ router.post('/validate/:contributionId/:action', validateInputsForValidateEndpoi
                         }
         }*/
     return updateTablesAfterValidation(req, res)
-})
-
-router.post('/media-object/:source/:entityId', validateContributedMediaInput, (req, res) => {
-    // #swagger.deprecated = true
-    return getMediaObject(req, res, objectStorage)
 })
 
 router.post('/report', async (req, res) => {
@@ -844,21 +802,6 @@ router.get('/user-rewards/:username?', async (req, res) => {
         console.log(error);
         res.status(502).send({ statusCode: 502, message: error.message });
     }
-});
-
-router.get('/language-goal/:type/:language/:source', validateLanguageGoalInput, (req, res) => {
-    // #swagger.deprecated = true
-    return languageGoal(req, res)
-});
-
-router.get('/available-languages/:type', validateMediaTypeInput, (req, res) => {
-    // #swagger.deprecated = true
-    return getAvailableLanguages(req, res)
-});
-
-router.get('/target-info/:type/:sourceLanguage', (req, res) => {
-    // #swagger.deprecated = true
-    return getTargetInfo(req, res)
 });
 
 profanityApi(router)

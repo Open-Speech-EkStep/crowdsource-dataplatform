@@ -4,10 +4,6 @@ const {
     updateContributionDetails,
     updateContributionDetailsWithUserInput,
     updateMediaWithContributedState,
-    getCountOfTotalSpeakerAndRecordedAudio,
-    getGenderData,
-    getAgeGroupsData,
-    getMotherTonguesData,
     feedbackInsertion,
     saveReportQuery,
     markContributionSkippedQuery,
@@ -24,17 +20,8 @@ const {
     addValidationQuery,
     updateMediaWithValidatedState,
     getContributionHoursForLanguage,
-    getOrderedMediaQuery,
-    updateViews,
-    updateMaterializedViews,
-    getContributionListQuery,
-    getDatasetLanguagesQuery,
-    getContributionLanguagesQuery,
-    hasTargetQuery,
-    isAllContributedQuery,
     getDataRowInfo,
     getOrderedUniqueMediaQuery,
-    getLanguageGoal,
     getLanguageGoalQuery,
     getContributionAmount,
     getValidationAmount,
@@ -379,29 +366,6 @@ describe("Running tests for dbOperations", () => {
     //     jest.clearAllMocks();
     // });
 
-    test('Get all Details should call getCountOfTotalSpeakerAndRecordedAudio query once with language', () => {
-        const language = 'testLanguage';
-        const spyDBany = jest.spyOn(mockDB, 'any')
-
-        dbOperations.getAllDetails(language);
-
-        expect(spyDBany).toHaveBeenCalledWith(getCountOfTotalSpeakerAndRecordedAudio, [language]);
-        jest.clearAllMocks();
-    });
-
-    test('Get All Info should call age, gender and mother tongue data query each once with given language', async () => {
-        const language = 'testLanguage';
-        const spyDBany = jest.spyOn(mockDB, 'any')
-
-        await dbOperations.getAllInfo(language);
-
-        expect(spyDBany).toHaveBeenCalledTimes(3)
-        expect(spyDBany).toHaveBeenCalledWith(getGenderData, [language])
-        expect(spyDBany).toHaveBeenCalledWith(getAgeGroupsData, [language])
-        expect(spyDBany).toHaveBeenCalledWith(getMotherTonguesData, [language])
-    });
-
-
     test('Get top language by hours', () => {
         const spyDBany = jest.spyOn(mockDB, 'any')
 
@@ -718,25 +682,6 @@ describe("Running tests for dbOperations", () => {
         })
     });
 
-    describe('Test language-goal', () => {
-
-        test('should call getLanguageGoalQuery and return goal', async () => {
-            const goal = 100;
-            const type = 'text', language = 'Hindi', source = 'contribute';
-            const mockSend = { send: jest.fn() };
-            const mockStatus = { status: jest.fn().mockReturnValue(mockSend), send: jest.fn() };
-            const response = mockStatus;
-            const req = { params: { type, language, source } }
-
-            when(spyDBoneOrNone).calledWith(getLanguageGoalQuery, [source, type, language]).mockReturnValue({ goal });
-
-            await dbOperations.languageGoal(req, response);
-
-            expect(mockStatus.status).toBeCalledWith(200)
-            expect(mockSend.send).toBeCalledWith({ goal })
-        });
-    })
-
     describe('Test Update Tables after validation', () => {
         const datasetId = 1;
         const contributionId = 1;
@@ -776,102 +721,6 @@ describe("Running tests for dbOperations", () => {
             expect(spyDBresult).toBeCalledTimes(1);
         })
     })
-
-    describe('Test getAvailableLanguages', () => {
-        const type = 'text'
-        const req = { params: { type: type } };
-
-        test('should call getDatasetLanguagesQuery and getContributionLanguagesQuery', async () => {
-            when(spyDBany).calledWith(getDatasetLanguagesQuery, [type]).mockReturnValue([{ language: '' }]);
-
-            await dbOperations.getAvailableLanguages(req, res);
-
-            expect(spyDBany).toBeCalledWith(getDatasetLanguagesQuery, [type]);
-        })
-
-        test('should return results in given format', async () => {
-            const langOne = 'language1';
-            const langTwo = 'language2';
-            const mockSend = { send: jest.fn() };
-            const mockStatus = { status: jest.fn().mockReturnValue(mockSend) };
-            const response = mockStatus;
-            when(spyDBany).calledWith(getDatasetLanguagesQuery, [type]).mockReturnValue([{ language: langOne }, { language: langTwo }]);
-            const spySend = jest.spyOn(mockSend, 'send')
-            const spyStatus = jest.spyOn(mockStatus, 'status')
-
-            await dbOperations.getAvailableLanguages(req, response);
-
-            expect(spyStatus).toBeCalledWith(200)
-            expect(spySend).toBeCalledWith({ "datasetLanguages": ["language1", "language2"] })
-        })
-    });
-
-    describe('get Target info', () => {
-        const textType = 'text';
-        const asrType = 'asr';
-        const ocrType = 'ocr';
-        const parallelType = 'parallel';
-        const sourceLanguage = 'Hindi';
-        const targetLanguage = 'English';
-        when(spyDBone).calledWith(hasTargetQuery, [textType, sourceLanguage, sourceLanguage]).mockReturnValue({ result: true });
-        when(spyDBone).calledWith(hasTargetQuery, [asrType, sourceLanguage, sourceLanguage]).mockReturnValue({ result: true });
-        when(spyDBone).calledWith(hasTargetQuery, [ocrType, sourceLanguage, sourceLanguage]).mockReturnValue({ result: true });
-        when(spyDBone).calledWith(hasTargetQuery, [parallelType, sourceLanguage, targetLanguage]).mockReturnValue({ result: true });
-        when(spyDBone).calledWith(isAllContributedQuery, [textType, sourceLanguage, sourceLanguage]).mockReturnValue({ result: true });
-        when(spyDBone).calledWith(isAllContributedQuery, [asrType, sourceLanguage, sourceLanguage]).mockReturnValue({ result: true });
-        when(spyDBone).calledWith(isAllContributedQuery, [ocrType, sourceLanguage, sourceLanguage]).mockReturnValue({ result: true });
-        when(spyDBone).calledWith(isAllContributedQuery, [parallelType, sourceLanguage, targetLanguage]).mockReturnValue({ result: true });
-
-        test('should call queries with target as source language for text type', async () => {
-            const req = { params: { type: textType, sourceLanguage: sourceLanguage }, query: {} }
-
-            await dbOperations.getTargetInfo(req, res);
-
-            expect(spyDBone).toBeCalledWith(hasTargetQuery, [textType, sourceLanguage, sourceLanguage]);
-            expect(spyDBone).toBeCalledWith(isAllContributedQuery, [textType, sourceLanguage, sourceLanguage]);
-        });
-
-        test('should call queries with target as source language for asr type', async () => {
-            const req = { params: { type: asrType, sourceLanguage: sourceLanguage }, query: {} }
-
-            await dbOperations.getTargetInfo(req, res);
-
-            expect(spyDBone).toBeCalledWith(hasTargetQuery, [asrType, sourceLanguage, sourceLanguage]);
-            expect(spyDBone).toBeCalledWith(isAllContributedQuery, [asrType, sourceLanguage, sourceLanguage]);
-        });
-
-        test('should call queries with target as source language for ocr type', async () => {
-            const req = { params: { type: ocrType, sourceLanguage: sourceLanguage }, query: {} }
-
-            await dbOperations.getTargetInfo(req, res);
-
-            expect(spyDBone).toBeCalledWith(hasTargetQuery, [ocrType, sourceLanguage, sourceLanguage]);
-            expect(spyDBone).toBeCalledWith(isAllContributedQuery, [ocrType, sourceLanguage, sourceLanguage]);
-        });
-
-        test('should call queries with target language for parallel type', async () => {
-            const req = { params: { type: parallelType, sourceLanguage: sourceLanguage }, query: { targetLanguage: targetLanguage } }
-
-            await dbOperations.getTargetInfo(req, res);
-
-            expect(spyDBone).toBeCalledWith(hasTargetQuery, [parallelType, sourceLanguage, targetLanguage]);
-            expect(spyDBone).toBeCalledWith(isAllContributedQuery, [parallelType, sourceLanguage, targetLanguage]);
-        });
-
-        test('should return result in given format', async () => {
-
-            const req = { params: { type: textType, sourceLanguage: sourceLanguage }, query: {} }
-            const mockSend = { send: jest.fn() };
-            const res = { status: jest.fn().mockReturnValue(mockSend) };
-            const spySend = jest.spyOn(mockSend, 'send')
-            const spyStatus = jest.spyOn(res, 'status')
-
-            await dbOperations.getTargetInfo(req, res);
-
-            // expect(spyStatus).toBeCalledWith(200);
-            // expect(spySend).toBeCalledWith({ hasTarget: true, isAllContributed: true });
-        })
-    });
 
     describe('add remaining genders to data', () => {
 

@@ -8,8 +8,8 @@ const { validateUserInputAndFile,
     validateContributedMediaInput,
     validateInputsForValidateEndpoint,
     validateGetContributionsInput,
-    validateMediaTypeInput,
-    validateLanguageGoalInput } = require('../src/middleware/validateUserInputs')
+    validateMediaTypeInput
+} = require('../src/middleware/validateUserInputs')
 
 describe('middleware test', function () {
     const cookie = { 'userId': '123' };
@@ -537,96 +537,6 @@ describe('middleware test', function () {
             validateRewardsInfoInput(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1)
-        });
-    });
-
-    describe('Validate language-goal inputs', () => {
-        const validLanguage = 'Hindi';
-        const validSource = 'contribute';
-        const validType = 'text';
-
-        afterEach(() => {
-            jest.clearAllMocks();
-        })
-
-        test('should fail for invalid media type', () => {
-            const req = { params: { type: 'someType', language: validLanguage, source: validSource } };
-
-            validateLanguageGoalInput(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(1);
-        });
-
-        test('should fail for invalid language', () => {
-            const req = { params: { type: validType, language: 'someLanguage', source: validSource } };
-
-            validateLanguageGoalInput(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(1);
-        });
-
-        test('should fail for invalid source', () => {
-            const req = { params: { type: validType, language: validLanguage, source: 'someSource' } };
-
-            validateLanguageGoalInput(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(1);
-        });
-
-        test('should pass if all parameters are valid', () => {
-            const req = { params: { type: validType, language: validLanguage, source: validSource } };
-
-            validateLanguageGoalInput(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(0);
-            expect(nextSpy).toHaveBeenCalledTimes(1);
-        });
-    })
-
-    describe('Validate Contributed media input', () => {
-
-        afterEach(() => {
-            jest.clearAllMocks();
-        })
-
-        test('should call next() if correct inputs are given in params', () => {
-            const req = { params: { source: "contribute", entityId: 123 } };
-            validateContributedMediaInput(req, res, nextSpy);
-
-            expect(nextSpy).toHaveBeenCalledTimes(1)
-            expect(res.send).toHaveBeenCalledTimes(0)
-        });
-
-        test('should call next() if correct inputs are given in params 2', () => {
-            const req = { params: { source: "validate", entityId: 123 } };
-            validateContributedMediaInput(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(0)
-            expect(nextSpy).toHaveBeenCalledTimes(1)
-        });
-
-        test('should return 400 if entityid is not passed', () => {
-            const req = { params: { source: "contribute" } };
-            validateContributedMediaInput(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(1)
-            expect(nextSpy).toHaveBeenCalledTimes(0)
-        });
-
-        test('should return 400 if nothing is passed', () => {
-            const req = {};
-            validateContributedMediaInput(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(1)
-            expect(nextSpy).toHaveBeenCalledTimes(0)
-        });
-
-        test('should return 400 if source is not valid', () => {
-            const req = { params: { source: "contributed", entityId: 123 } };
-            validateContributedMediaInput(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(1)
-            expect(nextSpy).toHaveBeenCalledTimes(0)
         });
     });
 

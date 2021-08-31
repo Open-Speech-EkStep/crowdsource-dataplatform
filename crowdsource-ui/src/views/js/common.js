@@ -118,16 +118,6 @@ const updateLocaleLanguagesDropdown = (language) => {
   }
 }
 
-const getAvailableLanguages = (type) => {
-  return fetch(`/available-languages/${type}`).then((data) => {
-    if (!data.ok) {
-      throw Error(data.statusText || 'HTTP error');
-    } else {
-      return Promise.resolve(data.json());
-    }
-  });
-};
-
 const getLanguageTargetInfo = (type, sourceLanguage, targetLanguage) => {
   return fetch(`/target-info/${type}/${sourceLanguage}?targetLanguage=${targetLanguage}`).then(safeErrorHandling).then((data) => {
     if (!data.ok) {
@@ -675,4 +665,4 @@ const safeJqueryErrorHandling = (e) => {
   }
 }
 
-module.exports = { safeJqueryErrorHandling, isMobileDevice, safeErrorHandling, showErrorPopup, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFunctionalCards, getAvailableLanguages, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, landToHome, showOrHideExtensionCloseBtn, hasUserRegistered, updateGoalProgressBar, replaceSubStr, getTopLanguage, isInTopLanguage, getTop3Languages, setCurrentProgress, getCountBasedOnSource, updateGoalProgressBarFromJson, languageFilter, reduceList };
+module.exports = { safeJqueryErrorHandling, isMobileDevice, safeErrorHandling, showErrorPopup, setLocalisationAndProfile, getContributedAndTopLanguage, updateLikhoLocaleLanguagesDropdown, updateLocaleLanguagesDropdown, getLanguageTargetInfo, showByHoursChartThankyouPage, showByHoursChart, redirectToLocalisedPage, setBadge, showFunctionalCards, isKeyboardExtensionPresent, enableCancelButton, disableCancelButton, landToHome, showOrHideExtensionCloseBtn, hasUserRegistered, updateGoalProgressBar, replaceSubStr, getTopLanguage, isInTopLanguage, getTop3Languages, setCurrentProgress, getCountBasedOnSource, updateGoalProgressBarFromJson, languageFilter, reduceList };

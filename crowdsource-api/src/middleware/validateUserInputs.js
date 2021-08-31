@@ -167,28 +167,6 @@ const validateRewardsInfoInput = (req, res, next) => {
     next();
 }
 
-const validateLanguageGoalInput = (req, res, next) => {
-    const type = req.params ? req.params.type : null;
-    const language = req.params ? req.params.language : null;
-    const source = req.params ? req.params.source : null;
-    const validMediaType = MEDIA_TYPES.includes(type);
-    const validLanguage = isValidLanguage(language)
-    const validSource = (source == 'contribute' || source == 'validate');
-    if (!validMediaType || !validLanguage || !validSource) {
-        return res.status(400).send('Invalid params.');
-    }
-
-    next();
-}
-
-const validateContributedMediaInput = (req, res, next) => {
-    if (!(req.params && req.params.entityId && req.params.source && SOURCES.includes(req.params.source))) {
-        return res.status(400).send('Invalid params.');
-    }
-
-    next();
-}
-
 const validateInputsForValidateEndpoint = (req, res, next) => {
     if (!(req.cookies && req.cookies.userId && req.body && req.body.sentenceId
         && req.params && req.params.contributionId && req.params.action
@@ -233,4 +211,4 @@ const validateUserInfoForProfanity = (req, res, next) => {
     next();
 }
 
-module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoInput, validateContributedMediaInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput, validateUserInfoForProfanity, validateLanguageGoalInput }
+module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput, validateUserInfoForProfanity }

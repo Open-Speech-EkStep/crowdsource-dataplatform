@@ -4,26 +4,13 @@ const moment = require('moment');
 const {
     updateContributionDetails,
     updateContributionDetailsWithUserInput,
-    unassignIncompleteMedia,
-    updateAndGetMediaQuery,
-    updateAndGetUniqueMediaQuery,
-    updateAndGetOrderedMediaQuery,
     userVerifyQuery,
     getContributionListQuery,
-    mediaCount,
-    getCountOfTotalSpeakerAndRecordedAudio,
-    getGenderData,
-    getAgeGroupsData,
-    getMotherTonguesData,
-    unassignIncompleteMediaWhenLanChange,
     updateMediaWithContributedState,
     addValidationQuery,
     updateMediaWithValidatedState,
     feedbackInsertion,
-    getPathFromContribution,
-    getPathFromMasterDataSet,
     saveReportQuery,
-    getMediaForLaunch,
     markContributionSkippedQuery,
     rewardsInfoQuery,
     getTotalUserContribution,
@@ -35,17 +22,8 @@ const {
     findRewardInfo,
     markMediaReported,
     markContributionReported,
-    updateMaterializedViews,
-    updateViews,
-    getBadges,
     addContributorQuery,
-    getContributionHoursForLanguage,
     getLanguageGoalQuery,
-    getOrderedMediaQuery,
-    getContributionLanguagesQuery,
-    getDatasetLanguagesQuery,
-    hasTargetQuery,
-    isAllContributedQuery,
     getDataRowInfo,
     getOrderedUniqueMediaQuery,
     getOrderedUniqueMediaForParallel,
@@ -56,8 +34,7 @@ const {
     getValidationHoursForText,
     getContributionAmount,
     getValidationAmount,
-    getUserRewardsQuery,
-    getContributionDataForCaching
+    getUserRewardsQuery
 } = require('./dbQuery');
 
 const {
@@ -277,32 +254,6 @@ const getContributionList = async function (req, res) {
         });
 };
 
-const getMediaObject = (req, res, objectStorage) => {
-    const entityId = req.params.entityId;
-    const query = req.params.source == "contribute" ? getPathFromMasterDataSet : getPathFromContribution;
-    db.one(query, [entityId]).then(async (data) => {
-        const downloadFile = downloader(objectStorage);
-
-        try {
-            const file = await downloadFile(data.path);
-
-            if (file == null) {
-                res.sendStatus(404);
-            } else {
-                const readStream = file.createReadStream();
-                readStream.pipe(res);
-            }
-        } catch (err) {
-            res.sendStatus(500);
-        }
-    })
-        .catch((err) => {
-            console.log(err);
-            res.sendStatus(500);
-        });
-
-}
-
 const updateTablesAfterValidation = async (req, res) => {
     const userId = req.cookies.userId;
     const { sentenceId, state = "", country = "", userName = "", device = "", browser = "", type, fromLanguage, language = "" } = req.body;
@@ -338,17 +289,6 @@ const updateTablesAfterValidation = async (req, res) => {
             res.sendStatus(500);
         });
 }
-
-const getAllDetails = function (language) {
-    return db.any(getCountOfTotalSpeakerAndRecordedAudio, [language]);
-};
-
-const getAllInfo = function (language) {
-    const genderData = db.any(getGenderData, [language]);
-    const ageGroups = db.any(getAgeGroupsData, [language]);
-    const motherTongues = db.any(getMotherTonguesData, [language]);
-    return Promise.all([genderData, ageGroups, motherTongues]);
-};
 
 const getTypeFilter = (type) => {
     const typeFilter = `type='${type}'`;
@@ -648,17 +588,6 @@ const getLanguageGoal = async (language, source, type) => {
     return languageGoal['goal'];
 }
 
-const languageGoal = async (req, res) => {
-    try {
-        const { type, language, source } = req.params;
-        const goal = await getLanguageGoal(language, source, type);
-        res.status(200).send({ goal });
-    } catch (err) {
-        console.log(err);
-        res.send(500);
-    }
-}
-
 const updateDbWithUserInput = async (
     userName,
     userId,
@@ -713,34 +642,6 @@ const updateDbWithUserInput = async (
             console.log(err);
             cb(500, { error: true });
         });
-}
-
-const getAvailableLanguages = async (req, res) => {
-    const type = req.params.type
-    let datasetLanguageList = []
-    try {
-        datasetLanguageList = await db.any(getDatasetLanguagesQuery, [type]);
-
-        const datasetLanguages = datasetLanguageList.map((value) => value.language);
-
-        res.status(200).send({ datasetLanguages })
-
-    } catch (err) {
-        console.log(err);
-        res.sendStatus(500);
-    }
-}
-
-const getTargetInfo = async (req, res) => {
-    const { type, sourceLanguage } = req.params;
-    const { targetLanguage = '' } = req.query;
-    const toLanguage = type == 'parallel' ? targetLanguage : sourceLanguage;
-    const hasTargetQ = db.one(hasTargetQuery, [type, sourceLanguage, toLanguage]);
-    const isAllContributedQ = db.one(isAllContributedQuery, [type, sourceLanguage, toLanguage]);
-    Promise.all([hasTargetQ, isAllContributedQ])
-    .then(response => {
-        res.status(200).send({ hasTarget: response[0].result, isAllContributed: response[1].result });
-    })    
 }
 
 const getSentencesForProfanityChecking = (username, type, language) => {
@@ -895,9 +796,6 @@ module.exports = {
     getContributionList,
     updateDbWithAudioPath,
     updateTablesAfterValidation,
-    getAllDetails,
-    getAllInfo,
-    getMediaObject,
     getTopLanguageByHours,
     getTopLanguageByContributionCount,
     getSentencesForProfanityCheckingForCorrection,
@@ -917,10 +815,7 @@ module.exports = {
     markContributionSkipped,
     getRewards,
     getRewardsInfo,
-    languageGoal,
     updateDbWithUserInput,
-    getAvailableLanguages,
-    getTargetInfo,
     getSentencesForProfanityChecking,
     updateProfanityStatus,
     releaseMedia,
