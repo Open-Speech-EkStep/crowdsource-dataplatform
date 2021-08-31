@@ -1,0 +1,19 @@
+.link {
+  align-items: center;
+  color: #0f2749;
+  display: flex;
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5rem;
+  opacity: 0.8;
+  padding: 0.5rem 1rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 16px;
+  }
+
+  &:global(.active) {
+    color: #0f2749;
+  }
+}

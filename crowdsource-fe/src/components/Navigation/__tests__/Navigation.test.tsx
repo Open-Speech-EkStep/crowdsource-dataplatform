@@ -1,9 +1,8 @@
+import Navigation from 'components/Navigation/Navigation';
 import { render, verifyAxeTest } from 'utils/testUtils';
 
-import Header from '../Header';
-
-describe('Header', () => {
-  const setup = () => render(<Header />);
+describe('Navigation', () => {
+  const setup = () => render(<Navigation />);
 
   verifyAxeTest(setup());
 

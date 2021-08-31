@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationList should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="nav"
+  >
+    <a
+      class="link nav-link"
+      data-rr-ui-event-key="/sunoIndia/home.html"
+      href="/sunoIndia/home.html"
+    >
+      suno india
+    </a>
+    <a
+      class="link nav-link"
+      data-rr-ui-event-key="/boloIndia/home.html"
+      href="/boloIndia/home.html"
+    >
+      bolo india
+    </a>
+    <a
+      class="link nav-link"
+      data-rr-ui-event-key="/likhoIndia/home.html"
+      href="/likhoIndia/home.html"
+    >
+      likho india
+    </a>
+    <a
+      class="link nav-link"
+      data-rr-ui-event-key="/dekhoIndia/home.html"
+      href="/dekhoIndia/home.html"
+    >
+      dekho india
+    </a>
+  </div>
+</DocumentFragment>
+`;
