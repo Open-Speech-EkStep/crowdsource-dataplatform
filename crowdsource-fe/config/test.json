@@ -5,7 +5,6 @@
     "whitelistingEmail": false,
     "showDataSource": true,
     "feedbackTopComponent": false,
-    "bhashadaanLogoUrl": "/",
     "contextRoot": "",
     "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"]
   }

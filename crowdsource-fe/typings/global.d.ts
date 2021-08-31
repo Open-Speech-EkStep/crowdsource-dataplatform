@@ -7,7 +7,6 @@ interface CrowdsourceFENodeConfig {
     whitelistingEmail: boolean;
     showDataSource: boolean;
     feedbackTopComponent: boolean;
-    bhashadaanLogoUrl: string;
     contextRoot: string;
     enabled_languages: string[];
   };
