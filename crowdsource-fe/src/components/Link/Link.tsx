@@ -1,13 +1,9 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, PropsWithChildren } from 'react';
 
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 
-interface LinkProps extends NextLinkProps {
-  children: ReactNode;
-}
-
-const Link = ({ href, locale = undefined, ...rest }: LinkProps) => {
+const Link = ({ href, locale = undefined, ...rest }: PropsWithChildren<NextLinkProps>) => {
   const { locale: currentLocale, defaultLocale } = useRouter();
   const isDefaultLocale = locale ? locale === defaultLocale : currentLocale === defaultLocale;
   const hrefWithLocale = isDefaultLocale && defaultLocale ? `/${defaultLocale}${href}` : href;
