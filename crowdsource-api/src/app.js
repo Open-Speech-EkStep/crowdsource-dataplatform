@@ -805,8 +805,6 @@ router.get('/user-rewards/:username?', async (req, res) => {
 });
 
 profanityApi(router)
-require('./dashboard-api')(router);
-
 
 app.use('/', router);
 

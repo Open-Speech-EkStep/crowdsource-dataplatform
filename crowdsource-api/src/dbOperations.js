@@ -1,4 +1,3 @@
-const { downloader } = require('./downloader/objDownloader')
 const moment = require('moment');
 
 const {
@@ -38,32 +37,6 @@ const {
 } = require('./dbQuery');
 
 const {
-    topLanguagesBySpeakerContributions,
-    topLanguagesByHoursContributed,
-    cumulativeCount,
-    cumulativeDataByState,
-    cumulativeDataByLanguage,
-    cumulativeDataByLanguageV2,
-    cumulativeDataByLanguageAndState,
-    listLanguages,
-    dailyTimeline,
-    ageGroupContributions,
-    genderGroupContributions,
-    dailyTimelineCumulative,
-    weeklyTimeline,
-    weeklyTimelineCumulative,
-    monthlyTimeline,
-    monthlyTimelineCumulative,
-    quarterlyTimeline,
-    quarterlyTimelineCumulative,
-    lastUpdatedAtQuery,
-    topLanguagesByContributionCount,
-    languageGoalQuery,
-    currentProgressQuery,
-    participationStatsQuery
-} = require('./dashboardDbQueries');
-
-const {
     getSentencesForProfanityCheck,
     updateSentenceWithProfanity,
     releaseMediaQuery,
@@ -72,7 +45,7 @@ const {
     releaseMediaQueryForCorrection
 } = require('./profanityCheckerQueries')
 
-const { KIDS_AGE_GROUP, ADULT, KIDS, AGE_GROUP, BADGE_SEQUENCE } = require('./constants');
+const { KIDS_AGE_GROUP, ADULT, KIDS, BADGE_SEQUENCE } = require('./constants');
 
 const cacheOperation = require('./cache/cacheOperations')
 
@@ -288,153 +261,6 @@ const updateTablesAfterValidation = async (req, res) => {
             console.log(err);
             res.sendStatus(500);
         });
-}
-
-const getTypeFilter = (type) => {
-    const typeFilter = `type='${type}'`;
-    return pgp.as.format('$1:raw', [typeFilter])
-}
-
-const getTopLanguageByHours = (type) => {
-    const filter = getTypeFilter(type);
-    return db.any(topLanguagesByHoursContributed, filter);
-};
-
-const getTopLanguageByContributionCount = (type) => {
-    const filter = getTypeFilter(type);
-    return db.any(topLanguagesByContributionCount, filter);
-};
-
-const getTopLanguageBySpeakers = (type) => {
-    const filter = getTypeFilter(type);
-    return db.any(topLanguagesBySpeakerContributions, filter);
-};
-
-const getAggregateDataCount = (language, state, type) => {
-    const typeFilter = `type='${type}'`;
-    let filter = pgp.as.format('$1:raw', [typeFilter])
-    let query = "";
-    if (typeof language !== "boolean") {
-        language = language === 'true' ? true : false;
-    }
-    if (typeof state !== "boolean") {
-        state = state === 'true' ? true : false;
-    }
-    if (language && state && language === true && state === true) {
-        query = cumulativeDataByLanguageAndState;
-    } else if (language && language === true) {
-        query = cumulativeDataByLanguage;
-    } else if (state && state === true) {
-        query = cumulativeDataByState;
-    } else {
-        query = cumulativeCount;
-    }
-    return db.any(query, filter);
-}
-
-const getAggregateDataCountV2 = (language, state, type) => {
-    const typeFilter = `type='${type}'`;
-    let filter = pgp.as.format('$1:raw', [typeFilter])
-    let query = "select 1";
-    if (typeof language !== "boolean") {
-        language = language === 'true' ? true : false;
-    }
-    if (typeof state !== "boolean") {
-        state = state === 'true' ? true : false;
-    }
-    if (language && state && language === true && state === true) {
-        // query = cumulativeDataByLanguageAndState;
-    } else if (language && language === true) {
-        query = cumulativeDataByLanguageV2;
-    } else if (state && state === true) {
-        // query = cumulativeDataByState;
-    } else {
-        // query = cumulativeCount;
-    }
-    return db.any(query, filter);
-}
-
-const getLanguages = (type) => {
-    const filter = getTypeFilter(type);
-    return db.any(listLanguages, filter);
-}
-
-const normalTimeLineQueries = {
-    "weekly": weeklyTimeline,
-    "daily": dailyTimeline,
-    "monthly": monthlyTimeline,
-    "quarterly": quarterlyTimeline
-}
-
-const cumulativeTimeLineQueries = {
-    "weekly": weeklyTimelineCumulative,
-    "daily": dailyTimelineCumulative,
-    "monthly": monthlyTimelineCumulative,
-    "quarterly": quarterlyTimelineCumulative
-}
-
-const getTimeline = (timeframe, type, language = "") => {
-    timeframe = timeframe.toLowerCase();
-    const typeFilter = `type='${type}'`;
-    if (language.length !== 0) {
-        let languageFilter = `language iLike '${language}'`
-        let filter = pgp.as.format('$1:raw', [`${typeFilter} and ${languageFilter}`])
-        let query = normalTimeLineQueries[timeframe] || weeklyTimeline;
-        return db.any(query, filter);
-    } else {
-        let query = cumulativeTimeLineQueries[timeframe] || weeklyTimelineCumulative;
-        let filter = pgp.as.format('$1:raw', [typeFilter])
-        return db.any(query, filter);
-    }
-}
-
-const getGenderGroupData = (type, language = '') => {
-    let languageFilter = `type = '${type}'`;
-    if (language.length !== 0) {
-        languageFilter += ` and language iLike '${language}'`
-    }
-    let filter = pgp.as.format('$1:raw', [languageFilter])
-    return db.any(genderGroupContributions, filter);
-}
-
-const getAgeGroupData = async (type, language = '') => {
-    let languageFilter = `type = '${type}'`;
-    if (language.length !== 0) {
-        languageFilter += ` and language iLike '${language}'`
-    }
-    let filter = pgp.as.format('$1:raw', [languageFilter])
-    const data = await db.any(ageGroupContributions, filter);
-    let response = [];
-    for (let ind in AGE_GROUP) {
-        const age = AGE_GROUP[ind];
-        let isPresent = false, item = {};
-        for (let d in data) {
-            item = data[d];
-            if (item['age_group'] === age) {
-                isPresent = true;
-                break;
-            }
-        }
-        if (isPresent) {
-            response.push(item);
-        } else {
-            response.push({ "age_group": age, "contributions": 0, "hours_contributed": 0, "hours_validated": 0, "speakers": 0 })
-        }
-    }
-    return response;
-}
-
-const getLastUpdatedAt = async () => {
-    const lastUpdatedAt = await db.one(lastUpdatedAtQuery, []);
-    let lastUpdatedDateTime = "";
-    if ("timezone" in lastUpdatedAt) {
-        try {
-            lastUpdatedDateTime = moment(lastUpdatedAt['timezone']).format('DD-MM-YYYY, h:mm:ss a');
-        } catch (err) {
-            console.log(err);
-        }
-    }
-    return lastUpdatedDateTime;
 }
 
 const insertFeedback = (email, feedback, category, language, module, target_page, opinion_rating, recommended, revisit) => {
@@ -701,114 +527,15 @@ const addRemainingGenders = (genderGroupData, allGenders) => {
     return genderGroupData;
 }
 
-const getGoalForContributionProgress = async(type, language, source) => {
-    if(type === 'parallel'){
-        language = language.split('-')[0];
-    }
-    let goalFilter = `1=1`;
-    if (type && type.length !== 0) {
-        goalFilter += ` and type = '${type}'`
-    }
-    if (language && language.length !== 0) {
-        goalFilter += ` and LOWER(language) = LOWER('${language}')`;
-    }
-    if (source && source.length !== 0) {
-        goalFilter += ` and category = '${source}'`
-    }
-    
-    let filter = pgp.as.format('$1:raw', [goalFilter]);
-    const goalResult = await db.any(languageGoalQuery, filter);
-    
-    return goalResult && goalResult[0] && goalResult[0].goal ? goalResult[0].goal : 0;
-}
-const getProgressForContributionProgress = async (type, language) => {
-    let progressFilter = `1=1`;
-    if (type && type.length !== 0) {
-        progressFilter += ` and type = '${type}'`
-    }
-    if (language && language.length !== 0) {
-        progressFilter +=` and LOWER(language) = LOWER('${language}')`;
-    }
-    let filter = pgp.as.format('$1:raw', [progressFilter]);
-    
-    const progressResult = await db.any(currentProgressQuery, filter);
-
-    return progressResult && progressResult[0] ? progressResult[0] : { total_contributions: 0, total_validations: 0, total_contribution_count: 0, total_validation_count: 0 };
-}
-const getProgressResultBasedOnTypeAndSource = (progressResult, type, source) => {
-    let progress = 0;
-    if (progressResult && progressResult.length != 0) {
-
-        let resultObj = { contribute: 0, validate: 0 };
-
-        if (['text', 'asr'].includes(type)) {
-            resultObj.contribute = progressResult.total_contributions;
-            resultObj.validate = progressResult.total_validations;
-        }
-        else {
-            resultObj.contribute = progressResult.total_contribution_count;
-            resultObj.validate = progressResult.total_validation_count;
-        }
-
-        if (source && source.length > 0) {
-            progress = Number(resultObj[source] || 0);
-        }
-        else {
-            progress = (Number(resultObj['contribute'] || 0) + Number(resultObj['validate']) || 0) || 0;
-        }
-    }
-    if (['text', 'asr'].includes(type)) {
-        return progress.toFixed(3);
-    }
-    return progress;
-}
-
-const increaseGoalIfLessThanCurrentProgress = (progress, goal) => {
-    if (goal === 0) return goal;
-    while(goal - 5 < progress) {
-        goal *= 2;
-    }
-    return goal;
-}
-
-const getContributionProgress = async (type, language, source) => {
-    let goal = await getGoalForContributionProgress(type, language, source);
-    
-    const progressResult = await getProgressForContributionProgress(type, language);
-    
-    const progress = getProgressResultBasedOnTypeAndSource(progressResult, type, source);
-    
-    goal = increaseGoalIfLessThanCurrentProgress(progress, goal);
-
-    return {
-        'goal': goal,
-        'currentProgress': progress
-    }
-}
-
-const getParticipationStats = () => {
-    return db.many(participationStatsQuery);
-}
-
 module.exports = {
     userVerify,
     updateAndGetMedia,
     getContributionList,
     updateDbWithAudioPath,
     updateTablesAfterValidation,
-    getTopLanguageByHours,
-    getTopLanguageByContributionCount,
     getSentencesForProfanityCheckingForCorrection,
     updateProfanityStatusForCorrection,
     releaseMediaForCorrection,
-    getAggregateDataCount,
-    getAggregateDataCountV2,
-    getTopLanguageBySpeakers,
-    getLanguages,
-    getTimeline,
-    getAgeGroupData,
-    getGenderGroupData,
-    getLastUpdatedAt,
     getMediaBasedOnAge,
     insertFeedback,
     saveReport,
@@ -820,11 +547,5 @@ module.exports = {
     updateProfanityStatus,
     releaseMedia,
     getUserRewards,
-    addRemainingGenders,
-    getContributionProgress,
-    getGoalForContributionProgress,
-    getProgressForContributionProgress,
-    getProgressResultBasedOnTypeAndSource,
-    increaseGoalIfLessThanCurrentProgress,
-    getParticipationStats
+    addRemainingGenders
 };

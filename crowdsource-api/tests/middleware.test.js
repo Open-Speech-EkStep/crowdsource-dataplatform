@@ -1,14 +1,11 @@
 const { validateUserInputAndFile,
-    validateUserInfo,
     convertIntoMB,
     validateUserInputForFeedback,
     validateInputForSkip,
     validateRewardsInput,
     validateRewardsInfoInput,
-    validateContributedMediaInput,
     validateInputsForValidateEndpoint,
-    validateGetContributionsInput,
-    validateMediaTypeInput
+    validateGetContributionsInput
 } = require('../src/middleware/validateUserInputs')
 
 describe('middleware test', function () {
@@ -708,50 +705,5 @@ describe('middleware test', function () {
 
             expect(res.send).toHaveBeenCalledTimes(1)
         });
-    });
-
-    describe('Validate Media type input', () => {
-        const type = "text";
-
-        afterEach(() => {
-            jest.clearAllMocks();
-        })
-
-        test('should call next() if correct inputs are given in params', () => {
-            const req = { params: { type: type } };
-            validateMediaTypeInput(req, res, nextSpy);
-
-            expect(nextSpy).toHaveBeenCalledTimes(1)
-            expect(res.send).toHaveBeenCalledTimes(0)
-        });
-
-        test('should return 400 if params not passed', () => {
-            const req = {};
-            validateMediaTypeInput(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(1)
-        });
-
-        test('should return 400 if type not passed', () => {
-            const req = { params: {} };
-            validateMediaTypeInput(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(1)
-        });
-
-        test('should return 400 if type is not sent', () => {
-            const req = { params: {} };
-            validateMediaTypeInput(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(1)
-        });
-
-        test('should return 400 if type is invalid', () => {
-            const req = { params: { type: 'sometype' } };
-            validateMediaTypeInput(req, res, nextSpy);
-
-            expect(res.send).toHaveBeenCalledTimes(1)
-        });
-
     });
 });
