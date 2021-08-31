@@ -119,19 +119,6 @@ app.use(function (req, res, next) {
 
 app.use(express.static('../crowdsource-ui/target'));
 
-app.get('/changeLocale/:locale', function (req, res) {
-    // #swagger.deprecated = true
-    res.cookie('contributionLanguage', req.params.locale);
-    if (
-        ['hi', 'en', 'ta', 'kn', 'gu', 'mr', 'te', 'bn', 'as', 'pa', 'or', 'ml'].indexOf(req.params.locale) > -1
-    ) {
-        res.cookie('i18n', req.params.locale);
-    } else {
-        res.cookie('i18n', 'en');
-    }
-    res.redirect(req.headers.referer);
-});
-
 router.get('/', function (req, res) {
     // #swagger.ignore = true
     res.redirect('en/home.html');
