@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/ekstep2/ektep-crowdsource-platform#readme",
   "engines": {
-    "node": "12.16.0"
+    "node": "14.17.5"
   },
   "lint-staged": {
     "crowdsource-ui/**/*.css": [

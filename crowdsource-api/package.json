@@ -53,7 +53,7 @@
         "xss": "^1.0.8"
     },
     "engines": {
-        "node": "12.16.0"
+        "node": "14.17.5"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.12.11",

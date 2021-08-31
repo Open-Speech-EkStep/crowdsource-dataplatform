@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const livereload = require('gulp-livereload');
 const gulpFlatten = require('gulp-flatten');
 const cleanCss = require('gulp-clean-css');
 const htmlmin = require('gulp-htmlmin');
@@ -17,7 +18,7 @@ const filename = 'env.config.' + env + '.json';
 const settings = JSON.parse(fs.readFileSync('src/assets/config/' + filename, 'utf8'));
 
 gulp.task('common-ejs-gen', function () {
-  return gulp.src(['src/views/common/**/*.ejs']).pipe(gulpFlatten()).pipe(gulp.dest('build/views/common'));
+  return gulp.src(['src/views/common/**/*.ejs']).pipe(gulpFlatten()).pipe(gulp.dest('build/views/common')).pipe(livereload());
 });
 
 gulp.task('html-gen-common', function (callback) {
@@ -49,28 +50,32 @@ gulp.task('ejs-gen-boloIndia', function () {
   return gulp
     .src(['src/views/modules/boloIndia/**/*.ejs'])
     .pipe(gulpFlatten())
-    .pipe(gulp.dest('build/views/boloIndia'));
+    .pipe(gulp.dest('build/views/boloIndia'))
+    .pipe(livereload());
 });
 
 gulp.task('ejs-gen-sunoIndia', function () {
   return gulp
     .src(['src/views/modules/sunoIndia/**/*.ejs'])
     .pipe(gulpFlatten())
-    .pipe(gulp.dest('build/views/sunoIndia'));
+    .pipe(gulp.dest('build/views/sunoIndia'))
+    .pipe(livereload());
 });
 
 gulp.task('ejs-gen-likhoIndia', function () {
   return gulp
     .src(['src/views/modules/likhoIndia/**/*.ejs'])
     .pipe(gulpFlatten())
-    .pipe(gulp.dest('build/views/likhoIndia'));
+    .pipe(gulp.dest('build/views/likhoIndia'))
+    .pipe(livereload());
 });
 
 gulp.task('ejs-gen-dekhoIndia', function () {
   return gulp
     .src(['src/views/modules/dekhoIndia/**/*.ejs'])
     .pipe(gulpFlatten())
-    .pipe(gulp.dest('build/views/dekhoIndia'));
+    .pipe(gulp.dest('build/views/dekhoIndia'))
+    .pipe(livereload());
 });
 
 gulp.task('html', function () {
@@ -84,7 +89,8 @@ gulp.task('html', function () {
         minifyJS: true,
       })
     )
-    .pipe(gulp.dest('src/views'));
+    .pipe(gulp.dest('src/views'))
+    .pipe(livereload());
 });
 
 gulp.task('js', function () {
@@ -350,6 +356,35 @@ gulp.task('copy locales', () =>
   gulp.src(['locales/*.json'])
     .pipe(gulp.dest('./../crowdsource-api/locales'))
 );
+
+gulp.task('watch', function() {
+  livereload.listen();
+  gulp.watch('src/views/**/*.ejs', gulp.series(
+    // 'html',
+    'common-ejs-gen',
+    'html-gen-common',
+    'ejs-gen-boloIndia',
+    'html-gen-boloIndia',
+    'ejs-gen-sunoIndia',
+    'html-gen-sunoIndia',
+    'ejs-gen-likhoIndia',
+    'html-gen-likhoIndia',
+    'ejs-gen-dekhoIndia',
+    'html-gen-dekhoIndia'));
+  gulp.watch('src/views/**/*.css', gulp.parallel(
+    'css',
+    'scss',
+    'css-common',
+    'css-sunoIndia',
+    'css-boloIndia',
+    'css-likhoIndia',
+    'css-dekhoIndia',
+  ));
+  gulp.watch('src/assets/css/*.css', gulp.parallel(
+    'css',
+    'scss',
+  ));
+});
 
 gulp.task(
   'default',
