@@ -5,8 +5,6 @@ import { useRouter } from 'next/router';
 
 interface LinkProps extends NextLinkProps {
   children: ReactNode;
-  href: string;
-  locale?: string;
 }
 
 const Link = ({ href, locale = undefined, ...rest }: LinkProps) => {
