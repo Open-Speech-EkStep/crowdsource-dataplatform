@@ -11,6 +11,7 @@
     "fetchMock": true,
     "CROWDSOURCE_FE_NODE_CONFIG": true
   },
+  "plugins": ["@typescript-eslint"],
   "rules": {
     "no-unused-vars": 2,
     "no-undef": 2,
@@ -52,10 +53,15 @@
           {
             "name": "next/link",
             "message": "Please use 'components/Link' instead."
+          },
+          {
+            "name": "react-bootstrap",
+            "message": "Please use 'react-bootstrap/*' components instead. Eg. 'react-bootstrap/Button'"
           }
         ]
       }
-    ]
+    ],
+    "@typescript-eslint/consistent-type-imports": 2
   },
   "settings": {
     "import/resolver": {
