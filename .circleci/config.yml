@@ -240,7 +240,7 @@ workflows:
   build_test_deploy:
     jobs:
       - node/test:
-          version: "14.15"
+          version: "14.17.5"
 
       - create-workspace:
           name: create-workspace
