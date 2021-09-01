@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
 
-import Body from 'components/Body';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 
@@ -30,7 +29,7 @@ const Layout = ({ children }: LayoutProps) => {
         <link rel="icon" type="image/png" href="/img/favicon.png" />
       </Head>
       <Header />
-      <Body>{children}</Body>
+      <main>{children}</main>
       <Footer />
     </div>
   );

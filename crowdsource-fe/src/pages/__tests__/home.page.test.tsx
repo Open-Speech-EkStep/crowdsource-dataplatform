@@ -10,6 +10,7 @@ describe('Home', () => {
   it('should render the homepage', () => {
     setup();
 
-    expect(screen.getByTestId('Home')).toBeInTheDocument();
+    expect(screen.getByTestId('PageBackground')).toBeInTheDocument();
+    expect(screen.getByTestId('Hero')).toBeInTheDocument();
   });
 });

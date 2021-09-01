@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageBackground should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <section
+    data-testid="PageBackground"
+    style="background-image: url(/images/some-image.svg); background-size: cover; background-repeat: no-repeat;"
+  >
+    <div>
+      Child Component
+    </div>
+  </section>
+</DocumentFragment>
+`;

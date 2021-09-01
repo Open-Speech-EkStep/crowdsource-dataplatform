@@ -21,7 +21,6 @@ describe('Layout', () => {
   it('should render the Body component', () => {
     setup();
 
-    expect(screen.getByTestId('Body')).toBeInTheDocument();
     expect(screen.getByText('Hello World')).toBeInTheDocument();
   });
 

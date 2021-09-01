@@ -1,9 +1,8 @@
+import Hero from 'components/Hero';
 import { render, verifyAxeTest } from 'utils/testUtils';
 
-import Body from '../Body';
-
-describe('Body', () => {
-  const setup = () => render(<Body>Hello World</Body>);
+describe('Hero', () => {
+  const setup = () => render(<Hero />);
 
   verifyAxeTest(setup());
 
