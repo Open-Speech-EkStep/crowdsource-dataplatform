@@ -1,13 +1,19 @@
-import type { NextPage, GetStaticProps } from 'next';
-import { useTranslation } from 'next-i18next';
+import type { GetStaticProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { Container } from 'react-bootstrap';
 
+import Hero from 'components/Hero';
+import PageBackground from 'components/PageBackground';
 import { DEFAULT_LOCALE } from 'constants/localesConstants';
 
 const Home: NextPage = () => {
-  const { t } = useTranslation();
-
-  return <h1 data-testid="Home">{t('home')}</h1>;
+  return (
+    <PageBackground image="home-page-bg.svg">
+      <Container fluid="lg">
+        <Hero />
+      </Container>
+    </PageBackground>
+  );
 };
 
 /* istanbul ignore next */
