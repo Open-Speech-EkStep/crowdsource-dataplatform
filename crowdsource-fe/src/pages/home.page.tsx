@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Container } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
 
 import Hero from 'components/Hero';
 import PageBackground from 'components/PageBackground';

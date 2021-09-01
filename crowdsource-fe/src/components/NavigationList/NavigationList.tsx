@@ -1,9 +1,10 @@
-import { AriaAttributes, useCallback } from 'react';
+import type { AriaAttributes } from 'react';
+import { useCallback } from 'react';
 
 import classnames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Nav } from 'react-bootstrap';
+import Nav from 'react-bootstrap/Nav';
 
 import Link from 'components/Link';
 import styles from 'components/NavigationList/NavigationList.module.scss';

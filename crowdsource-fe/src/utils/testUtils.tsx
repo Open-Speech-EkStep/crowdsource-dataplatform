@@ -1,7 +1,8 @@
 /* eslint-disable jest/no-export */
 import type { ReactNode, ReactElement, ComponentType } from 'react';
 
-import { render, act, RenderOptions, RenderResult } from '@testing-library/react';
+import type { RenderOptions, RenderResult } from '@testing-library/react';
+import { render, act } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
 const Wrapper: ComponentType = ({ children }: { children?: ReactNode }) => children as ReactElement;
