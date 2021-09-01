@@ -127,7 +127,7 @@ jobs:
           name: build_ui
           command: |
             npm run gulp -- -- --env=<< parameters.env_name >>
-            wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux 
+            wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux
             tar -xf azcopy_v10.tar.gz --strip-components=1
 
             ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
@@ -204,9 +204,9 @@ jobs:
 
             ENV_IMAGE_NAME_DB_REFRESHER=${AZURE_LOGIN_SERVER_NAME}/${DB_REFRESHER_REPO}:<< parameters.env-name >>
             kubectl -n << parameters.env-name >> apply  -f ${HOME}/project/crowdsource-api/k8s-deployments/autoscaler_<< parameters.env-name >>.yaml
-     
-            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment_<< parameters.env-name >>.yaml | kubectl -n << parameters.env-name >> apply  -f -     
-            
+
+            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment_<< parameters.env-name >>.yaml | kubectl -n << parameters.env-name >> apply  -f -
+
             sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env-name >> apply  -f -
           name: Deploy container
 
@@ -236,16 +236,45 @@ jobs:
             --data "{\"cards\":[{\"header\":{\"title\":\"Build ${CIRCLE_BUILD_NUM} passed.\",\"subtitle\":\"${CIRCLE_PROJECT_REPONAME}\",\"imageUrl\":\"https://png.pngtree.com/svg/20170510/success_404253.png\",\"imageStyle\":\"IMAGE\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"topLabel\":\"${CIRCLE_TAG}\",\"content\":\"${CIRCLE_SHA1}\"}}]},{\"widgets\":[{\"buttons\":[{\"textButton\":{\"text\":\"DETAILS\",\"onClick\":{\"openLink\":{\"url\":\"${CIRCLE_BUILD_URL}\"}}}}]}]}]}]}"
             $CHAT_WEBHOOK_URL
 
+  check_fe:
+    executor:
+        name: node/default
+    parameters:
+      env_name:
+        type: string
+    steps:
+      - checkout
+      - run: rm -rf .git
+      - run:
+          name: Code check
+          command: |
+            cd crowdsource-fe
+            npm i
+            NODE_CONFIG_ENV=<< parameters.env_name >> npm run build
+            NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:lh-ci
+      - store_artifacts:
+          path: .lighthouseci
+          destination: .lighthouseci
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+
 workflows:
   build_test_deploy:
     jobs:
       - node/test:
           version: "14.17.5"
 
+      - check_fe:
+          name: check_fe
+          env_name: dev
+          requires:
+            - node/test
+
       - create-workspace:
           name: create-workspace
           requires:
-            - node/test
+            - check_fe
           filters:
             branches:
               only: [master, test_translation_scripts]
