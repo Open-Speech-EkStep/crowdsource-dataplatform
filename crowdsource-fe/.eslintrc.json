@@ -44,6 +44,17 @@
         "specialLink": ["hrefLeft", "hrefRight"],
         "aspects": ["invalidHref", "preferButton"]
       }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "next/link",
+            "message": "Please use 'components/Link' instead."
+          }
+        ]
+      }
     ]
   },
   "settings": {
