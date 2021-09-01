@@ -42,7 +42,6 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
     { value: "Bengali",text: "বাংলা" },
     { value: "Bodo",  text: "Bodo" },
     { value: "Dogri",  text: "Dogri" },
-    { value: "English",  text: "English" },
     { value: "Gujarati",  text: "ગુજરાતી" },
     { value: "Hindi",  text: "हिंदी"},
     { value: "Kannada", text: "ಕನ್ನಡ" },
