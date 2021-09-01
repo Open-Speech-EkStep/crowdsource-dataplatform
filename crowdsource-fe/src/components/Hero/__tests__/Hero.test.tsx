@@ -1,5 +1,6 @@
-import Hero from 'components/Hero';
 import { render, verifyAxeTest } from 'utils/testUtils';
+
+import Hero from '../Hero';
 
 describe('Hero', () => {
   const setup = () => render(<Hero />);

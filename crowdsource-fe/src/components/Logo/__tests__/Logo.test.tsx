@@ -1,5 +1,6 @@
-import Logo from 'components/Logo/Logo';
 import { render, verifyAxeTest } from 'utils/testUtils';
+
+import Logo from '../Logo';
 
 describe('Logo', () => {
   const setup = () => render(<Logo />);

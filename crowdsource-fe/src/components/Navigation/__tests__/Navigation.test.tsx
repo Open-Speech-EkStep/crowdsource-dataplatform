@@ -1,5 +1,6 @@
-import Navigation from 'components/Navigation/Navigation';
 import { render, verifyAxeTest } from 'utils/testUtils';
+
+import Navigation from '../Navigation';
 
 describe('Navigation', () => {
   const setup = () => render(<Navigation />);

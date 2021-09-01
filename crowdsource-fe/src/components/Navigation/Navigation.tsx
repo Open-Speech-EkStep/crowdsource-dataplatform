@@ -1,7 +1,8 @@
 import Navbar from 'react-bootstrap/Navbar';
 
-import styles from 'components/Navigation/Navigation.module.scss';
-import NavigationList from 'components/NavigationList/NavigationList';
+import NavigationList from 'components/NavigationList';
+
+import styles from './Navigation.module.scss';
 
 const Navigation = () => {
   return (

@@ -1,8 +1,8 @@
 import router from 'next/router';
 
-import NavigationList from 'components/NavigationList/NavigationList';
-import routePaths from 'constants/routePaths';
 import { render, verifyAxeTest, fireEvent, screen } from 'utils/testUtils';
+
+import NavigationList from '../NavigationList';
 
 describe('NavigationList', () => {
   const setup = () => render(<NavigationList />);
@@ -20,6 +20,6 @@ describe('NavigationList', () => {
 
     fireEvent.click(screen.getByRole('link', { name: 'suno india' }));
 
-    expect(router.pathname).toBe(routePaths.sunoIndiaHome);
+    expect(router.pathname).toBe('/sunoIndia/home.html');
   });
 });

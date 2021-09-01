@@ -7,8 +7,9 @@ import { useRouter } from 'next/router';
 import Nav from 'react-bootstrap/Nav';
 
 import Link from 'components/Link';
-import styles from 'components/NavigationList/NavigationList.module.scss';
 import routePaths from 'constants/routePaths';
+
+import styles from './NavigationList.module.scss';
 
 const useNavLink = () => {
   const { asPath: currentRoutePath } = useRouter();
