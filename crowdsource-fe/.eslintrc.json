@@ -46,6 +46,19 @@
         "aspects": ["invalidHref", "preferButton"]
       }
     ],
+    "import/no-internal-modules": [
+      "error",
+      {
+        "allow": ["*/*"]
+      }
+    ],
+    "import/no-duplicates": ["error", { "considerQueryString": true }],
+    "import/no-useless-path-segments": [
+      "error",
+      {
+        "noUselessIndex": true
+      }
+    ],
     "no-restricted-imports": [
       "error",
       {
@@ -63,6 +76,19 @@
     ],
     "@typescript-eslint/consistent-type-imports": 2
   },
+  "overrides": [
+    {
+      "files": ["src/**/*.test.{js,jsx,ts,tsx}"],
+      "rules": {
+        "import/no-internal-modules": [
+          "error",
+          {
+            "allow": ["utils/testUtils", "next/router"]
+          }
+        ]
+      }
+    }
+  ],
   "settings": {
     "import/resolver": {
       "node": {

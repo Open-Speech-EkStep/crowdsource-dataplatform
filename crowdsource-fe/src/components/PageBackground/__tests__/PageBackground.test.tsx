@@ -1,5 +1,6 @@
-import PageBackground from 'components/PageBackground/PageBackground';
 import { render, verifyAxeTest } from 'utils/testUtils';
+
+import PageBackground from '../PageBackground';
 
 describe('PageBackground', () => {
   const setup = () =>
