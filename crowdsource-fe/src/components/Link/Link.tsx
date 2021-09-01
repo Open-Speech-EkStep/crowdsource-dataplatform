@@ -1,5 +1,8 @@
 import type { PropsWithChildren } from 'react';
 
+// NOTE: We are disabling `no-restricted-imports` rule for this line because we encourage people to import
+// current component instead of `next/link`.
+/* eslint-disable-next-line no-restricted-imports */
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 
