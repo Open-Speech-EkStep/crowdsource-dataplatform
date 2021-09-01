@@ -1,81 +1,81 @@
 \a
 \t
 \o ageGroupContributions.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT age_group, contributions, hours_contributed, hours_validated, speakers from age_group_contributions)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT age_group, contributions, hours_contributed, hours_validated, speakers from age_group_contributions)t;
 
 \o ageGroupAndLanguageContributions.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT age_group, contributions, hours_contributed, hours_validated, speakers, language from age_group_and_language_contributions)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT age_group, contributions, hours_contributed, hours_validated, speakers, language from age_group_and_language_contributions)t;
 
 \o genderGroupContributions.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  gender, contributions, hours_contributed, hours_validated, speakers from gender_group_contributions)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  gender, contributions, hours_contributed, hours_validated, speakers from gender_group_contributions)t;
 
 \o genderGroupAndLanguageContributions.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  gender, contributions, hours_contributed, hours_validated, speakers, language from gender_and_language_group_contributions)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  gender, contributions, hours_contributed, hours_validated, speakers, language from gender_and_language_group_contributions)t;
 
 \o dailyTimeline.json
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select day, month, year, language, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type from daily_cumulative_stats_per_language)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select day, month, year, language, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type from daily_cumulative_stats_per_language)t;
 
 \o dailyTimelineCumulative.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select day, month, year, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type from daily_cumulative_stats_all)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select day, month, year, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type from daily_cumulative_stats_all)t;
 
 \o weeklyTimeline.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  year, week,language, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type from weekly_cumulative_stats_per_language )t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  year, week,language, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type from weekly_cumulative_stats_per_language )t;
 
 \o weeklyTimelineCumulative.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  year, week, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type FROM weekly_cumulative_stats_all)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  year, week, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type FROM weekly_cumulative_stats_all)t;
 
 \o monthlyTimeline.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  year, month, language, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type from monthly_cumulative_stats_per_language )t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  year, month, language, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type from monthly_cumulative_stats_per_language )t;
 
 \o monthlyTimelineCumulative.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  year, month, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type FROM monthly_cumulative_stats_all)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  year, month, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type FROM monthly_cumulative_stats_all)t;
 
 \o quarterlyTimeline.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  year, quarter, language, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type from quarterly_cumulative_stats_per_language )t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  year, quarter, language, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type from quarterly_cumulative_stats_per_language )t;
 
 \o quarterlyTimelineCumulative.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  year, quarter, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type FROM quarterly_cumulative_stats_all)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  year, quarter, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type FROM quarterly_cumulative_stats_all)t;
 
 \o cumulativeCount.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  count(distinct(language)) as total_languages,
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  count(distinct(language)) as total_languages,
 ROUND((sum(contribution_audio_duration) FILTER (WHERE audio_row_num_per_contribution_id = 1 and is_system = false))::numeric/3600,3)  as total_contributions,ROUND(sum(contributions_and_demo_stats.validation_audio_duration)::numeric/3600, 3)  as total_validations, count(distinct contribution_id) FILTER (WHERE contributions_and_demo_stats.is_system = false) total_contribution_count, sum(contributions_and_demo_stats.is_validated) total_validation_count, contributions_and_demo_stats.type from contributions_and_demo_stats group by contributions_and_demo_stats.type)t;
 
 \o cumulativeDataByState.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select state, total_speakers, total_contributions, total_validations, total_contribution_count, total_validation_count, type from state_group_contributions)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select state, total_speakers, total_contributions, total_validations, total_contribution_count, total_validation_count, type from state_group_contributions)t;
 
 
 \o cumulativeDataByLanguage.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select language, total_speakers, total_contributions, total_validations, total_contribution_count, total_validation_count, type from language_group_contributions)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select language, total_speakers, total_contributions, total_validations, total_contribution_count, total_validation_count, type from language_group_contributions)t;
 
 \o cumulativeDataByLanguageAndState.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select state, language, total_speakers, total_contributions, total_validations, total_contribution_count, total_validation_count, type from language_and_state_group_contributions)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select state, language, total_speakers, total_contributions, total_validations, total_contribution_count, total_validation_count, type from language_and_state_group_contributions)t;
 
 \o listLanguages.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  distinct(language), type from contributions_and_demo_stats)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  distinct(language), type from contributions_and_demo_stats)t;
 
 \o topLanguagesBySpeakerContributions.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select language, total_speakers, type from (select language, total_speakers, type, row_number() OVER ( PARTITION BY type ORDER BY total_speakers DESC ) rank from language_group_contributions) as language_data where  rank < 6)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select language, total_speakers, type from (select language, total_speakers, type, row_number() OVER ( PARTITION BY type ORDER BY total_speakers DESC ) rank from language_group_contributions) as language_data where  rank < 6)t;
 
 \o topLanguagesByHoursContributed.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select language, coalesce(total_contributions, 0) total_contributions, total_contribution_count, type from (select language,(total_contributions+total_validations) as total_contributions, (total_contribution_count+total_validation_count) as total_contribution_count, row_number() OVER ( PARTITION BY type ORDER BY total_contributions DESC ) rank, type from language_group_contributions ) as language_data where  rank < 6)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select language, coalesce(total_contributions, 0) total_contributions, total_contribution_count, type from (select language,(total_contributions+total_validations) as total_contributions, (total_contribution_count+total_validation_count) as total_contribution_count, row_number() OVER ( PARTITION BY type ORDER BY total_contributions DESC ) rank, type from language_group_contributions ) as language_data where  rank < 6)t;
 
 \o lastUpdatedAtQuery.json 
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( SELECT  max(lastupdated) AT TIME ZONE 'Asia/Kolkata' from audit_load_log)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  max(lastupdated) AT TIME ZONE 'Asia/Kolkata' from audit_load_log)t;
 
 \o participationStats.json
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select count(distinct(users)) as count, type from (SELECT contributed_by AS users, type FROM contributions_and_demo_stats UNION SELECT validated_by as users, type FROM contributions_and_demo_stats) as cds group by type)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select count(distinct(users)) as count, type from (SELECT contributed_by AS users, type FROM contributions_and_demo_stats UNION SELECT validated_by as users, type FROM contributions_and_demo_stats) as cds group by type)t;
 
 \o initiativeGoals.json
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select sum(goal) FILTER (WHERE category = 'contribute') as contribution_goal, sum(goal) FILTER (WHERE category = 'validate') as validation_goal, type from language_goals group by type )t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select sum(goal) FILTER (WHERE category = 'contribute') as contribution_goal, sum(goal) FILTER (WHERE category = 'validate') as validation_goal, type from language_goals group by type )t;
 
 \o initiativeGoalsByLanguage.json
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select sum(goal) FILTER (WHERE category = 'contribute') as contribution_goal, sum(goal) FILTER (WHERE category = 'validate') as validation_goal, type, language from language_goals group by type, language )t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select sum(goal) FILTER (WHERE category = 'contribute') as contribution_goal, sum(goal) FILTER (WHERE category = 'validate') as validation_goal, type, language from language_goals group by type, language )t;
 
 \o languagesWithData.json
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select type, media->>'language' as language from dataset_row group by type, language )t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select type, media->>'language' as language from dataset_row group by type, language )t;
 
 \o enableDisableCards.json
-SELECT array_to_json(array_agg(row_to_json (t))) FROM ( select coalesce(has_target.type,all_contributed.type) as type, coalesce(has_target.language,all_contributed.language) as language, coalesce(has_target.hasTarget,false) as hasTarget, coalesce(all_contributed.isAllContributed,false) as isAllContributed 
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select coalesce(has_target.type,all_contributed.type) as type, coalesce(has_target.language,all_contributed.language) as language, coalesce(has_target.hasTarget,false) as hasTarget, coalesce(all_contributed.isAllContributed,false) as isAllContributed 
 from
 (select type,
 CASE
