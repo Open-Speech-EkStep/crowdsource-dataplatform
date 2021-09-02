@@ -6,7 +6,7 @@ import nodeConfig from './config/local.json';
 
 require('next-router-mock').default.events = require('mitt')();
 
-jest.mock('next/router', () => {
+jest.mock('next/dist/client/router', () => {
   const router = require('next-router-mock');
   const i18nConfig = require('./next-i18next.config');
 
@@ -14,25 +14,6 @@ jest.mock('next/router', () => {
   router.default.locale = i18nConfig.i18n.defaultLocale;
 
   return router;
-});
-
-jest.mock('next/link', () => {
-  const { cloneElement } = require('react');
-  const router = require('next-router-mock');
-
-  return ({ children, href, replace, as, shallow, locale, scroll }) => {
-    const onClick = () =>
-      router.default[replace ? 'replace' : 'push'](href, as, {
-        shallow,
-        locale,
-        scroll,
-      });
-
-    return cloneElement(children, {
-      href,
-      onClick,
-    });
-  };
 });
 
 jest.mock('react-i18next', () => ({
