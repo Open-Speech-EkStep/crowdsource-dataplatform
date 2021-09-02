@@ -244,7 +244,9 @@ jobs:
         type: string
     steps:
       - checkout
-      - run: rm -rf .git
+      - run:
+          name: Remove .git folder
+          command: rm -rf .git
       - run:
           name: Update apt-get
           command: sudo apt-get update
@@ -267,7 +269,7 @@ jobs:
 
             fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
       - run:
-          name: Code check
+          name: Build code with check
           command: |
             cd crowdsource-api
             npm i
@@ -275,12 +277,14 @@ jobs:
             cd crowdsource-fe
             npm i
             CI=true NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run build
-            NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:lh-ci
+      - run:
+          name: Lighthouse
+          command: NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:lh-ci
       - store_artifacts:
-          path: .lighthouseci
+          path: crowdsource-fe/.lighthouseci
           destination: .lighthouseci
       - store_artifacts:
-          path: coverage
+          path: crowdsource-fe/coverage
           destination: coverage
 
 workflows:
