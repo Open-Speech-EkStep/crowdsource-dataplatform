@@ -248,9 +248,12 @@ jobs:
       - run:
           name: Code check
           command: |
+            cd crowdsource-api
+            npm i
+            cd ..
             cd crowdsource-fe
             npm i
-            NODE_CONFIG_ENV=<< parameters.env_name >> npm run build
+            CI=true NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run build
             NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:lh-ci
       - store_artifacts:
           path: .lighthouseci
