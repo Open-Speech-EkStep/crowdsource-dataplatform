@@ -1,17 +1,16 @@
 const puppeteer = require('puppeteer');
 
 const port = process.env.LIGHTHOUSE_CI_PORT;
-const isCI = 'CI' in process.env;
 
 module.exports = {
   ci: {
     collect: {
       chromePath: puppeteer.executablePath(),
       settings: {
-        chromeFlags: ['--headless', isCI && '--no-sandbox'].filter(Boolean),
+        chromeFlags: ['--headless', 'CI' in process.env && '--no-sandbox'].filter(Boolean),
       },
       numberOfRuns: 1,
-      startServerCommand: [isCI && 'cd crowdsource-fe', 'npm start'].filter(Boolean).join(' && '),
+      startServerCommand: 'npm start',
       startServerReadyPattern: 'ready - started server',
       startServerReadyTimeout: 10000,
       url: [`http://localhost:${port}/en/home`],
