@@ -9,7 +9,7 @@ module.exports = {
       settings: {
         chromeFlags: ['--headless', 'CI' in process.env && '--no-sandbox'].filter(Boolean),
       },
-      numberOfRuns: 1,
+      numberOfRuns: 3,
       startServerCommand: 'npm start',
       startServerReadyPattern: 'ready - started server',
       startServerReadyTimeout: 10000,
