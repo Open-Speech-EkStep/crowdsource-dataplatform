@@ -7,7 +7,7 @@ module.exports = {
     collect: {
       chromePath: puppeteer.executablePath(),
       settings: {
-        chromeFlags: ['--headless', 'CI' in process.env && '--no-sandbox'].filter(Boolean),
+        chromeFlags: ['--headless', 'CI' in process.env && '--collect.settings.chromeFlags=--no-sandbox'].filter(Boolean),
       },
       numberOfRuns: 1,
       startServerCommand: 'npm start',
