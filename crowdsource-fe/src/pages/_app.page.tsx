@@ -1,8 +1,7 @@
 import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
 
-import 'bootstrap/dist/css/bootstrap.css';
-
+import 'styles/custom.scss';
 import 'styles/theme.scss';
 import 'styles/globals.scss';
 
