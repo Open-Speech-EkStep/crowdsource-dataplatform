@@ -279,7 +279,9 @@ jobs:
             CI=true NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run build
       - run:
           name: Lighthouse
-          command: NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:lh-ci
+          command: |
+            cd crowdsource-fe
+            NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:lh-ci
       - store_artifacts:
           path: crowdsource-fe/.lighthouseci
           destination: .lighthouseci
