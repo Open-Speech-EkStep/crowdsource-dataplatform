@@ -254,7 +254,7 @@ jobs:
             cd crowdsource-fe
             npm i
             CI=true NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run build
-            NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:lh-ci
+            NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:lh-ci -- --collect.settings.chromeFlags=--no-sandbox
       - store_artifacts:
           path: .lighthouseci
           destination: .lighthouseci
