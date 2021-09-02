@@ -13,7 +13,7 @@ module.exports = {
       startServerCommand: 'npm start',
       startServerReadyPattern: 'ready - started server',
       startServerReadyTimeout: 10000,
-      url: [`http://localhost:${port}/en/home`],
+      url: [`http://0.0.0.0:${port}/en/home`],
     },
     assert: {
       assertions: {
