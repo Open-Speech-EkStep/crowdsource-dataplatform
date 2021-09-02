@@ -4,8 +4,6 @@ import jestFetchMock from 'jest-fetch-mock';
 
 import nodeConfig from './config/local.json';
 
-require('next-router-mock').default.events = require('mitt')();
-
 jest.mock('next/dist/client/router', () => {
   const router = require('next-router-mock');
   const i18nConfig = require('./next-i18next.config');
