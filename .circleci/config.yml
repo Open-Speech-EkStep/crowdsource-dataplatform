@@ -289,7 +289,7 @@ jobs:
           path: crowdsource-fe/coverage
           destination: coverage
       - store_test_results:
-          path: test-results
+          path: crowdsource-fe/test-results
 
 workflows:
   build_test_deploy:
