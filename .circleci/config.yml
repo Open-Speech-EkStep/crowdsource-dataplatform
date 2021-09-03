@@ -288,6 +288,8 @@ jobs:
       - store_artifacts:
           path: crowdsource-fe/coverage
           destination: coverage
+      - store_test_results:
+          path: crowdsource-fe/coverage
 
 workflows:
   build_test_deploy:
