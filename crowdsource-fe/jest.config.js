@@ -27,6 +27,7 @@ module.exports = {
     '^.+\\.(jpg|jpeg|png|gif|webp|svg)$': `<rootDir>/__mocks__/fileMock.js`,
   },
   modulePaths: ['src', 'node_modules'],
+  reporters: ['default', ['jest-junit', { outputDirectory: 'test-results/jest', outputName: 'results.xml' }]],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
