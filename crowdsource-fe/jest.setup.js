@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
+import { configure } from '@testing-library/react';
 import { configureAxe, toHaveNoViolations } from 'jest-axe';
 import jestFetchMock from 'jest-fetch-mock';
 
@@ -41,3 +42,9 @@ window.matchMedia =
       removeListener: function () {},
     };
   };
+
+jest.setTimeout(30000);
+
+configure({
+  asyncUtilTimeout: 15000,
+});
