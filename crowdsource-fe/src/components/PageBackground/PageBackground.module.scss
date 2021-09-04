@@ -1,0 +1,9 @@
+.root {
+  background-image: var(--background--image-mobile);
+  background-repeat: no-repeat;
+  background-size: var(--background-size);
+
+  @include media-breakpoint-up(sm) {
+    background-image: var(--background--image);
+  }
+}

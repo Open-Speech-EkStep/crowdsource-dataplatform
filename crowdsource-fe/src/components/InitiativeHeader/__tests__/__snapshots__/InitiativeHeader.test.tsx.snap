@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InitiativeHeader should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="row"
+    >
+      <div
+        class="col-auto"
+      >
+        <div
+          class="initiativeHeaderImg"
+        >
+          <img
+            alt="sunoLogo"
+            src="/images/en-sunoIndiaLogo.svg"
+          />
+        </div>
+      </div>
+      <div
+        class="d-flex align-items-center col"
+      >
+        <div
+          class="initiativeHeaderText"
+        >
+          sunoSloganText
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

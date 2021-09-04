@@ -31,3 +31,13 @@ configureAxe({
 expect.extend(toHaveNoViolations);
 
 global.CROWDSOURCE_FE_NODE_CONFIG = nodeConfig;
+
+window.matchMedia =
+  window.matchMedia ||
+  function () {
+    return {
+      matches: false,
+      addListener: function () {},
+      removeListener: function () {},
+    };
+  };
