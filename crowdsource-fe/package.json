@@ -18,7 +18,7 @@
     "test": "jest --watch --cacheDirectory .cache/jest/",
     "test:coverage": "jest --coverage --watchAll=false --bail",
     "test:lh-ci": "rimraf .lighthouseci/ && cross-env LIGHTHOUSE_CI_PORT=8080 lhci --config=./.lighthouserc.js autorun",
-    "check": "npm run lint && npm run stylelint && npm run typecheck && cross-env CI=true npm run test:coverage",
+    "check": "npm run lint && npm run stylelint && npm run typecheck && cross-env CI=true npm run test:coverage -- --runInBand",
     "prebuild": "npm run check",
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js"
