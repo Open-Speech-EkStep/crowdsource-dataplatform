@@ -1,0 +1,26 @@
+.action {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  max-width: 14rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
+.actionIcon {
+  width: 5rem;
+
+  @include media-breakpoint-up(md) {
+    width: 8.125rem;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.actionText {
+  margin-top: 1rem;
+}

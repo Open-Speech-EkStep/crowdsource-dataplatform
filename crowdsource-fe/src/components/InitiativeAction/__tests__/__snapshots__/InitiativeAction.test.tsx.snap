@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InitiativeAction should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="action d-flex flex-column align-items-center text-center"
+  >
+    <div
+      class="actionIcon"
+    >
+      <img
+        alt="initiativeAction"
+        src="/images/some-action-icon.svg"
+      />
+    </div>
+    <div
+      class="actionText"
+    >
+      sunoContributionSubtext
+    </div>
+  </div>
+</DocumentFragment>
+`;

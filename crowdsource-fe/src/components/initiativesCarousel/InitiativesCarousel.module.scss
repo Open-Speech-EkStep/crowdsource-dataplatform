@@ -1,0 +1,76 @@
+.root {
+  border-radius: 1.25rem;
+  box-shadow: 0 0 32px rgb(0 123 255 / 40%);
+}
+
+.bottomShadow {
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 0 #43c0d7;
+  overflow: hidden;
+}
+
+.labelCarousel {
+  :global(.slick-slide) {
+    text-align: center;
+  }
+}
+
+/* stylelint-disable */
+.initiativesCarousel {
+  :global(.slick-current) {
+    .slideLabel {
+      opacity: 1;
+
+      &::after {
+        background-color: var(--primary-color);
+        border-radius: 0.75rem;
+        bottom: 0;
+        content: '';
+        height: 0.25rem;
+        left: 0;
+        position: absolute;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.slideLabel {
+  cursor: pointer;
+  font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  opacity: 0.6;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
+.initiative {
+  font-family: Roboto, sans-serif;
+}
+
+.initiativeText {
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.startParticipatingBtn {
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 1.5rem;
+  color: #fff;
+  font-size: 1rem;
+  height: 2.25rem;
+  line-height: 1.5rem;
+  max-width: 17.5rem;
+
+  @include media-breakpoint-up(md) {
+    border-radius: 3rem;
+    font-size: 1.125rem;
+    height: 3rem;
+  }
+}

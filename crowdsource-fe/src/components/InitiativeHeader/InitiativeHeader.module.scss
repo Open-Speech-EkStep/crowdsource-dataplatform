@@ -1,0 +1,21 @@
+.initiativeHeaderImg {
+  width: 3.75rem;
+
+  @include media-breakpoint-up(md) {
+    width: 6.875rem;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.initiativeHeaderText {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}

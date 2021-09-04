@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import 'styles/custom.scss';
 import 'styles/theme.scss';
 import 'styles/globals.scss';
+import 'styles/slickCarousel.scss';
 
 import Layout from 'components/Layout';
 

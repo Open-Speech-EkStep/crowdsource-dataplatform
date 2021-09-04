@@ -3,8 +3,9 @@
 exports[`PageBackground should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <section
+    class="root"
     data-testid="PageBackground"
-    style="background-image: url(/images/some-image.svg); background-size: cover; background-repeat: no-repeat;"
+    style="--background--image: url(/images/some-image.svg); --background--image-mobile: url(/images/some-image.svg); --background-size: cover;"
   >
     <div>
       Child Component

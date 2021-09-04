@@ -1,6 +1,6 @@
 import nodeConfig from 'constants/nodeConfig';
 
-const routePaths = {
+const routePaths: { [key: string]: string } = {
   root: '/',
   home: `${nodeConfig.contextRoot}/home`,
   sunoIndiaHome: `${nodeConfig.contextRoot}/sunoIndia/home.html`,
