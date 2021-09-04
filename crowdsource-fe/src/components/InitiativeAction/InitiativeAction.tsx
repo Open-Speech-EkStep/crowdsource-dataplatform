@@ -1,4 +1,5 @@
 import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 
 import styles from './InitiativeAction.module.scss';
 
@@ -13,7 +14,7 @@ const InitiativeAction = ({ initiative, actionIcon }: InitiativeActionProps) => 
   return (
     <div className={`${styles.action} d-flex flex-column align-items-center text-center`}>
       <div className={styles.actionIcon}>
-        <img src={`/images/${actionIcon}`} alt={t('initiativeAction')} />
+        <Image src={`/images/${actionIcon}`} alt={t('initiativeAction')} width="160" height="160" />
       </div>
       <div className={styles.actionText}>{t(`${initiative}ContributionSubtext`)}</div>
     </div>

@@ -3,7 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Container from 'react-bootstrap/Container';
 
 import Hero from 'components/Hero';
-import InitiativesCarousel from 'components/initiativesCarousel';
+import InitiativesCarousel from 'components/InitiativesCarousel';
 import PageBackground from 'components/PageBackground';
 import { DEFAULT_LOCALE } from 'constants/localesConstants';
 
