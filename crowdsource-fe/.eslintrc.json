@@ -74,7 +74,8 @@
         ]
       }
     ],
-    "@typescript-eslint/consistent-type-imports": 2
+    "@typescript-eslint/consistent-type-imports": 2,
+    "@next/next/no-img-element": 2
   },
   "overrides": [
     {

@@ -1,4 +1,5 @@
 import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -18,7 +19,12 @@ const InitiativeHeader = ({ initiative }: PageHeaderProps) => {
       <Row>
         <Col xs="auto">
           <div className={styles.initiativeHeaderImg}>
-            <img src={`/images/${currentLocale}-${initiative}IndiaLogo.svg`} alt={t(`${initiative}Logo`)} />
+            <Image
+              src={`/images/${currentLocale}-${initiative}IndiaLogo.svg`}
+              alt={t(`${initiative}Logo`)}
+              width="126"
+              height="103"
+            />
           </div>
         </Col>
         <Col className="d-flex align-items-center">
