@@ -16,7 +16,7 @@
     "format": "prettier --write src public typings",
     "typecheck": "tsc --noEmit -p ./tsconfig.json",
     "test": "jest --watch --cacheDirectory .cache/jest/",
-    "test:coverage": "jest --coverage --watchAll=false --bail",
+    "test:coverage": "jest --coverage --watchAll=false",
     "test:lh-ci": "rimraf .lighthouseci/ && cross-env LIGHTHOUSE_CI_PORT=8080 lhci --config=./.lighthouserc.js autorun",
     "check": "npm run lint && npm run stylelint && npm run typecheck && cross-env CI=true npm run test:coverage",
     "prebuild": "npm run check",
