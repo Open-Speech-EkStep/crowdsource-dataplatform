@@ -7,6 +7,7 @@ const routePaths: { [key: string]: string } = {
   boloIndiaHome: `${nodeConfig.contextRoot}/boloIndia/home.html`,
   likhoIndiaHome: `${nodeConfig.contextRoot}/likhoIndia/home.html`,
   dekhoIndiaHome: `${nodeConfig.contextRoot}/dekhoIndia/home.html`,
+  badges: `${nodeConfig.contextRoot}/badges.html`,
 } as const;
 
 export default routePaths;
