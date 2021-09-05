@@ -245,9 +245,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Remove .git folder
-          command: rm -rf .git
-      - run:
           name: Update apt-get
           command: sudo apt-get update
       - run:
