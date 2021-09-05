@@ -42,9 +42,10 @@ export const verifyVRTest = (title: string, url: string) => {
 
     it('match snapshot', async () => {
       const page = await browser.newPage();
+      const bodyHeight = await page.evaluate(() => document.body.scrollHeight);
       await page.setViewport({
         width: 1920,
-        height: 1080,
+        height: bodyHeight,
         deviceScaleFactor: 1,
       });
       await page.goto(url, {
