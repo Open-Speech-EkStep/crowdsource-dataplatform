@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContributionStats should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <header
+      class="d-flex flex-column align-items-center flex-md-row justify-content-md-between"
+    >
+      <h1
+        class="header mb-0"
+      >
+        totalParticipation
+      </h1>
+    </header>
+    <div
+      class="mt-4 mt-md-5"
+    >
+      <div
+        class="stats px-7 px-md-0 py-md-7"
+      >
+        <div
+          class="row"
+        >
+          <div
+            class="stat col-md-3 col-12"
+          >
+            <div
+              class="d-flex flex-column align-items-center py-7 py-md-0"
+            >
+              <span
+                class="count"
+              >
+                10345
+              </span>
+              <span
+                class="initiative mt-1"
+              >
+                suno india
+              </span>
+            </div>
+          </div>
+          <div
+            class="stat col-md-3 col-12"
+          >
+            <div
+              class="d-flex flex-column align-items-center py-7 py-md-0"
+            >
+              <span
+                class="count"
+              >
+                10345
+              </span>
+              <span
+                class="initiative mt-1"
+              >
+                bolo india
+              </span>
+            </div>
+          </div>
+          <div
+            class="stat col-md-3 col-12"
+          >
+            <div
+              class="d-flex flex-column align-items-center py-7 py-md-0"
+            >
+              <span
+                class="count"
+              >
+                10345
+              </span>
+              <span
+                class="initiative mt-1"
+              >
+                likho india
+              </span>
+            </div>
+          </div>
+          <div
+            class="stat col-md-3 col-12"
+          >
+            <div
+              class="d-flex flex-column align-items-center py-7 py-md-0"
+            >
+              <span
+                class="count"
+              >
+                10345
+              </span>
+              <span
+                class="initiative mt-1"
+              >
+                dekho india
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

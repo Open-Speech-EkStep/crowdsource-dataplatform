@@ -2,6 +2,7 @@ import type { GetStaticProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Container from 'react-bootstrap/Container';
 
+import ContributionStats from 'components/ContributionStats';
 import Hero from 'components/Hero';
 import InitiativesCarousel from 'components/InitiativesCarousel';
 import PageBackground from 'components/PageBackground';
@@ -16,6 +17,9 @@ const Home: NextPage = () => {
         </section>
         <section className="py-8 py-md-9">
           <InitiativesCarousel />
+        </section>
+        <section className="py-8 py-md-9">
+          <ContributionStats />
         </section>
       </Container>
     </PageBackground>
