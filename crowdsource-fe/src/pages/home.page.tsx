@@ -3,6 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Container from 'react-bootstrap/Container';
 
 import BadgesIntro from 'components/BadgesIntro';
+import BronzeContribute from 'components/BronzeContribute';
 import ContributionStats from 'components/ContributionStats';
 import Hero from 'components/Hero';
 import InitiativesCarousel from 'components/InitiativesCarousel';
@@ -24,6 +25,9 @@ const Home: NextPage = () => {
         </section>
         <section className="py-8 py-md-9">
           <BadgesIntro />
+        </section>
+        <section className="py-8 py-md-9">
+          <BronzeContribute />
         </section>
       </Container>
     </PageBackground>
