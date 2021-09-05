@@ -37,15 +37,17 @@ export const verifyVRTest = (title: string, url: string) => {
     let browser: Browser;
 
     beforeAll(async () => {
-      browser = await puppeteer.launch({ headless: true });
+      browser = await puppeteer.launch({
+        headless: true,
+        args: ['--window-size=1920,1080'],
+      });
     });
 
     it('match snapshot', async () => {
       const page = await browser.newPage();
-      const bodyHeight = await page.evaluate(() => document.body.scrollHeight);
       await page.setViewport({
         width: 1920,
-        height: bodyHeight,
+        height: 1080,
         deviceScaleFactor: 1,
       });
       await page.goto(url, {
