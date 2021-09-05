@@ -2,6 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { configure } from '@testing-library/react';
 import { configureAxe, toHaveNoViolations } from 'jest-axe';
 import jestFetchMock from 'jest-fetch-mock';
+import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
 import nodeConfig from './config/local.json';
 
@@ -48,3 +49,5 @@ jest.setTimeout(30000);
 configure({
   asyncUtilTimeout: 15000,
 });
+
+expect.extend({ toMatchImageSnapshot });

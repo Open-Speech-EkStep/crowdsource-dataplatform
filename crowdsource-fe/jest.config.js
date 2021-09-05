@@ -5,6 +5,8 @@ module.exports = {
     '!**/node_modules/**',
     '!src/pages/index.page.js',
     '!src/**/index.{js,jsx,ts,tsx}',
+    '!src/**/*.vr.{js,jsx,ts,tsx}',
+    '!src/utils/testUtils.tsx',
   ],
   coverageThreshold: {
     global: {
@@ -27,7 +29,11 @@ module.exports = {
     '^.+\\.(jpg|jpeg|png|gif|webp|svg)$': `<rootDir>/__mocks__/fileMock.js`,
   },
   modulePaths: ['src', 'node_modules'],
-  reporters: ['default', ['jest-junit', { outputDirectory: 'test-results/jest', outputName: 'results.xml' }]],
+  reporters: [
+    'default',
+    ['jest-junit', { outputDirectory: 'test-results/jest', outputName: 'results.xml' }],
+    'jest-image-snapshot/src/outdated-snapshot-reporter.js',
+  ],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
