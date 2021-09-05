@@ -238,7 +238,7 @@ jobs:
 
   check_fe:
     executor:
-        name: node/default
+      name: node/default
     parameters:
       env_name:
         type: string
@@ -278,6 +278,11 @@ jobs:
             npm i
             CI=true NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run build
       - run:
+          name: VR Tests
+          command: |
+            cd crowdsource-fe
+            NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:vr
+      - run:
           name: Lighthouse
           command: |
             cd crowdsource-fe
@@ -295,7 +300,7 @@ workflows:
   build_test_deploy:
     jobs:
       - node/test:
-          version: "14.17.5"
+          version: '14.17.5'
 
       - check_fe:
           name: check_fe
@@ -353,7 +358,7 @@ workflows:
           path: ./db-refresher
           extra-build-args: --build-arg NODE_CONFIG_ENV=dev
           repo: ${DB_REFRESHER_REPO}
-          tag: "dev,test,prod,uat"
+          tag: 'dev,test,prod,uat'
           requires:
             - migrate_dev_azure
 

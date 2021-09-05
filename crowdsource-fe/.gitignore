@@ -48,3 +48,5 @@ yarn-error.log*
 
 # include typings folder which is excluded at root level
 !typings
+
+**/__image_snapshots__/__diff_output__

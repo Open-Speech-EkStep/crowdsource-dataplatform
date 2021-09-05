@@ -15,3 +15,11 @@ interface CrowdsourceFENodeConfig {
 declare global {
   const CROWDSOURCE_FE_NODE_CONFIG: CrowdsourceFENodeConfig;
 }
+
+declare global {
+  namespace jest {
+    interface Matchers<R> {
+      toMatchImageSnapshot(): R;
+    }
+  }
+}
