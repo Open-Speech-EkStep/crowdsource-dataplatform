@@ -31,7 +31,7 @@ fileignoreconfig:
   - filename: src/components/Navigation/__tests__/__snapshots__/Navigation.test.tsx.snap
     checksum: a2f1540f704a6e694f1b60ac3954fe1f18af23c05a658c8a0d2a23e28cf953a8
   - filename: src/hooks/useFetch/useFetch.ts
-    checksum: dfb15d23a123980742c9e17fb81db7825da1d0deceae7514771977de1d1eeba9
+    checksum: 3bda080ff94e4ef9ad80b4e21acad53c13b833bbcb6bf1f7a4f7700168737239
   - filename: src/hooks/useFetch/__tests__/useFetch.test.ts
     checksum: 3ae9bc10f648ad66d882b2c464df1a3d1658aafcccdad4a28c03d03f0ad9b2b0
   - filename: src/components/InitiativesCarousel/InitiativesCarousel.tsx
