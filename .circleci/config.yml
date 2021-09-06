@@ -273,12 +273,12 @@ jobs:
             cd ..
             cd crowdsource-fe
             npm i
+            unzip ./public/aggregated-json.zip
             CI=true NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run build
       - run:
           name: Lighthouse
           command: |
             cd crowdsource-fe
-            unzip ./public/aggregated-json.zip
             PORT=8080 NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:lh-ci
       - store_artifacts:
           path: crowdsource-fe/.lighthouseci
