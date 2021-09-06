@@ -33,6 +33,7 @@ module.exports = {
     'default',
     ['jest-junit', { outputDirectory: 'test-results/jest', outputName: 'results.xml' }],
     'jest-image-snapshot/src/outdated-snapshot-reporter.js',
+    '<rootDir>/jest.vr.reporter.js',
   ],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jsdom',
