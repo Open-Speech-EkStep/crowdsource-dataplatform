@@ -176,7 +176,7 @@ const updateAndGetMedia = async (req, res) => {
     const type = req.params.type;
 
     const ageGroup = req.body.age;
-    const cacheResponse = await cacheOperation.getDataForContribution(type, language, toLanguage, userId, userName);
+    const cacheResponse = await cacheOperation.getDataForContribution(type, language, toLanguage, userId, userName,db);
     if (cacheResponse) {// && cacheResponse.length > 0
         console.log("from cache")
         res.status(200).send({ data: cacheResponse });
@@ -209,7 +209,7 @@ const getContributionList = async function (req, res) {
     const userId = req.cookies.userId;
     const userName = req.query.username || '';
     const contributorId = await getContributorId(userId, userName);
-    const cacheResponse = await cacheOperation.getDataForValidation(type, fromLanguage, toLanguage, userId, userName);
+    const cacheResponse = await cacheOperation.getDataForValidation(type, fromLanguage, toLanguage, userId, userName,db);
     if (cacheResponse) {// && cacheResponse.length > 0
         console.log("from cache")
         res.status(200).send({ data: cacheResponse });

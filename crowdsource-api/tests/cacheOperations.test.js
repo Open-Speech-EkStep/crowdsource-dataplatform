@@ -50,6 +50,7 @@ describe("Running tests for cacheOperations", () => {
 
         expect(mockCache.setWithLock).toBeCalledWith(`dataset_row_${type}_${language}_${toLanguage}`, mockDB, getContributionDataForCaching, [type, language, toLanguage, limit]);
     });
+
     test("getDataForContribution should return expected result", async () => {
         const type = 'asr'
         const userId = 'userId';
@@ -68,6 +69,7 @@ describe("Running tests for cacheOperations", () => {
 
         expect(result).toEqual(resultObj);
     });
+
     test("getDataForContribution should return expected result remove the skipped one", async () => {
         const type = 'asr'
         const userId = 'userId';
@@ -123,6 +125,7 @@ describe("Running tests for cacheOperations", () => {
         
         expect(mockCache.setAsync).toBeCalledWith(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(mockResult), 600);
     });
+
     test("markContributionSkippedInCache should return expected result should append details to skipped_by", async () => {
         const type = 'asr'
         const userId = 'userId';
@@ -141,6 +144,7 @@ describe("Running tests for cacheOperations", () => {
         
         expect(mockCache.setAsync).toBeCalledWith(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(mockResult), 600);
     });
+
     // test("setContributionDataForCaching should return expected result for parallel", async () => {
     //     const type = 'parallel'
     //     const mockResult = [
@@ -192,6 +196,7 @@ describe("Running tests for cacheOperations", () => {
 
         expect(mockCache.setWithLock).toBeCalledWith(`contributions_${type}_${language}_${toLanguage}`, mockDB, getValidationDataForCaching, [type, language, toLanguage, limit], expect.any(Function));
     });
+
     // test("setValidationDataForCaching should return expected result validation remove validation_count", async () => {
     //     const type = 'asr'
     //     const mockResult = [
@@ -339,6 +344,7 @@ describe("Running tests for cacheOperations", () => {
         
         expect(mockCache.setAsync).toBeCalledWith(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(lesserThanValidationCount), 600);
     });
+
     test("updateCacheAfterValidation should return expected result should not update validation_count when skiping", async () => {
         const type = 'asr'
         const userId = 'userId';
@@ -389,6 +395,7 @@ describe("Running tests for cacheOperations", () => {
         
         expect(mockCache.setAsync).toBeCalledWith(`contributions_${type}_${language}_${toLanguage}`, JSON.stringify(lesserThanValidationCount), 600);
     });
+
     test("getDataForValidation should return expected result", async () => {
         const type = 'asr'
         const userId = 'userId';
@@ -400,7 +407,7 @@ describe("Running tests for cacheOperations", () => {
         
         when(mockCache.getAsync).calledWith(`contributions_${type}_${language}_${toLanguage}`).mockReturnValue(Promise.resolve(JSON.stringify(mockResult)));
         
-        const result = await cacheOperations.getDataForValidation(type, language, toLanguage, userId, userName);
+        const result = await cacheOperations.getDataForValidation(type, language, toLanguage, userId, userName,mockDB);
         
         const resultObj = mockResult.slice()
         resultObj.forEach(d => {
@@ -411,6 +418,33 @@ describe("Running tests for cacheOperations", () => {
 
         expect(result).toEqual(resultObj);
     });
+
+    test("getDataForValidation should call set data when data is null", async () => {
+        const type = 'asr'
+        const userId = 'userId';
+        const userName = 'userName';
+        const mockResult = null;
+        const mockResult1 = [
+            { dataset_row_id: 1, sentence: "some text 1", contribution: "some contribution 1", contribution_id: 111, source_info: null, contributed_by: null, skipped_by: null, validation_count: 1 },
+            { dataset_row_id: 2, sentence: "some text 2", contribution: "some contribution 2", contribution_id: 212,source_info: null, contributed_by: null, skipped_by: null, validation_count: 0 },
+        ];
+        
+        when(mockCache.getAsync).calledWith(`contributions_${type}_${language}_${toLanguage}`).mockReturnValueOnce(Promise.resolve(mockResult)).mockReturnValueOnce(Promise.resolve(JSON.stringify(mockResult1)));
+
+        
+        const result = await cacheOperations.getDataForValidation(type, language, toLanguage, userId, userName,mockDB);
+        
+        const resultObj = mockResult1.slice()
+        resultObj.forEach(d => {
+            delete d.skipped_by;
+			delete d.contributed_by;
+			delete d.validation_count;
+        })
+
+
+        expect(result).toEqual(resultObj);
+    });
+
     test("getDataForValidation should return expected result should remove the one which has contributed_by", async () => {
         const type = 'asr'
         const userId = 'userId';
@@ -422,7 +456,7 @@ describe("Running tests for cacheOperations", () => {
         
         when(mockCache.getAsync).calledWith(`contributions_${type}_${language}_${toLanguage}`).mockReturnValue(Promise.resolve(JSON.stringify(mockResult)));
         
-        const result = await cacheOperations.getDataForValidation(type, language, toLanguage, userId, userName);
+        const result = await cacheOperations.getDataForValidation(type, language, toLanguage, userId, userName,mockDB);
         
         const resultObj = mockResult.slice();
         resultObj.pop();
@@ -445,7 +479,7 @@ describe("Running tests for cacheOperations", () => {
         
         when(mockCache.getAsync).calledWith(`contributions_${type}_${language}_${toLanguage}`).mockReturnValue(Promise.resolve(JSON.stringify(mockResult)));
         
-        const result = await cacheOperations.getDataForValidation(type, language, toLanguage, userId, userName);
+        const result = await cacheOperations.getDataForValidation(type, language, toLanguage, userId, userName,mockDB);
         
         const resultObj = mockResult.slice();
         resultObj.pop();

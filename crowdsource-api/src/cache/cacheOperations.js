@@ -117,15 +117,19 @@ const setContributionDataForCaching = async (db, type, language, toLanguage) => 
 	}
 }
 
-const getDataForContribution = async (type, language, toLanguage, userId, userName) => {
+const getDataForContribution = async (type, language, toLanguage, userId, userName,db) => {
 	if (!cachingEnabled) {
 		return null;
 	}
 	try {
-		const cacheResponse = await cache.getAsync(`dataset_row_${type}_${language}_${toLanguage}`);
-		if (cacheResponse == null)
-			return null;
+		let cacheResponse = await cache.getAsync(`dataset_row_${type}_${language}_${toLanguage}`);
 
+		if (cacheResponse == null){
+			await setContributionDataForCaching(db, type, language, toLanguage)
+
+			cacheResponse = await cache.getAsync(`dataset_row_${type}_${language}_${toLanguage}`);
+
+		}
 		const cacheData = JSON.parse(cacheResponse);
 		
 		return generateResponse(cacheData, 5, userId, userName);
@@ -201,14 +205,16 @@ const setValidationDataForCaching = async (db, type, language, toLanguage) => {
 	}
 }
 
-const getDataForValidation = async (type, language, toLanguage, userId, userName) => {
+const getDataForValidation = async (type, language, toLanguage, userId, userName,db) => {
 	if (!cachingEnabled) {
 		return null;
 	}
 	try {
-		const cacheResponse = await cache.getAsync(`contributions_${type}_${language}_${toLanguage}`);
-		if (cacheResponse == null)
-			return null;
+		let cacheResponse = await cache.getAsync(`contributions_${type}_${language}_${toLanguage}`);
+		if (cacheResponse == null){
+			await setValidationDataForCaching(db, type, language, toLanguage)
+			cacheResponse = await cache.getAsync(`contributions_${type}_${language}_${toLanguage}`);
+		}
 
 		const cacheData = JSON.parse(cacheResponse);
 		
