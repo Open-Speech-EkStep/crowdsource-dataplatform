@@ -275,11 +275,6 @@ jobs:
             npm i
             CI=true NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run build
       - run:
-          name: VR Tests
-          command: |
-            cd crowdsource-fe
-            PORT=8080 NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:vr
-      - run:
           name: Lighthouse
           command: |
             cd crowdsource-fe
@@ -292,8 +287,6 @@ jobs:
           destination: coverage
       - store_test_results:
           path: crowdsource-fe/test-results
-      - store_test_results:
-          path: crowdsource-fe/**/__image_snapshots__/__diff_output__
 
 workflows:
   build_test_deploy:
