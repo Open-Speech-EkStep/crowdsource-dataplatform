@@ -17,7 +17,7 @@ exports[`Stats should render the component and matches it against stored snapsho
           <span
             class="count"
           >
-            10345
+            9
           </span>
           <span
             class="initiative mt-1"
@@ -35,7 +35,7 @@ exports[`Stats should render the component and matches it against stored snapsho
           <span
             class="count"
           >
-            10345
+            283
           </span>
           <span
             class="initiative mt-1"
@@ -53,7 +53,7 @@ exports[`Stats should render the component and matches it against stored snapsho
           <span
             class="count"
           >
-            10345
+            0
           </span>
           <span
             class="initiative mt-1"
@@ -71,7 +71,7 @@ exports[`Stats should render the component and matches it against stored snapsho
           <span
             class="count"
           >
-            10345
+            53
           </span>
           <span
             class="initiative mt-1"

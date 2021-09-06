@@ -1,14 +1,44 @@
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { render, verifyAxeTest, screen, waitForElementToBeRemoved } from 'utils/testUtils';
 
 import Stats from '../Stats';
 
 describe('Stats', () => {
-  const setup = () => render(<Stats />);
+  beforeEach(() => {
+    fetchMock.resetMocks();
+  });
 
-  verifyAxeTest(setup());
+  const setup = async () => {
+    fetchMock.doMockOnceIf('/aggregated-json/participationStats.json').mockResponseOnce(
+      JSON.stringify([
+        {
+          count: '9',
+          type: 'asr',
+        },
+        {
+          count: '283',
+          type: 'text',
+        },
+        {
+          count: '53',
+          type: 'ocr',
+        },
+        {
+          type: 'parallel',
+        },
+      ])
+    );
 
-  it('should render the component and matches it against stored snapshot', () => {
-    const { asFragment } = setup();
+    const renderResult = render(<Stats />);
+
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+
+    return renderResult;
+  };
+
+  async () => verifyAxeTest(await setup());
+
+  it('should render the component and matches it against stored snapshot', async () => {
+    const { asFragment } = await setup();
 
     expect(asFragment()).toMatchSnapshot();
   });

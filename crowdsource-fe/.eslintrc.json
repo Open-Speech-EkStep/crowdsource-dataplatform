@@ -84,7 +84,7 @@
         "import/no-internal-modules": [
           "error",
           {
-            "allow": ["utils/testUtils", "next/router"]
+            "allow": ["utils/testUtils", "next/router", "__fixtures__/mockComponentsWithSideEffects"]
           }
         ]
       }
