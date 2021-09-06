@@ -6,7 +6,7 @@
     "node": "14.17.5"
   },
   "scripts": {
-    "clean": "rimraf .next out .lighthouseci coverage tsconfig.tsbuildinfo .cache test-results",
+    "clean": "rimraf .next out .lighthouseci coverage tsconfig.tsbuildinfo .cache test-results __failed__vr__snapshots__",
     "dev": "node server.js",
     "dev:axe": "cross-env NEXT_PUBLIC_AXE_CORE=true npm run dev",
     "lint": "next lint --dir src --cache --cache-location .cache/eslint/",

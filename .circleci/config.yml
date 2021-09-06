@@ -248,7 +248,7 @@ jobs:
           name: Update apt-get
           command: sudo apt-get update
       - run:
-          name: Install Headless Chrome dependencies
+          name: Install Headless Chrome & unix dependencies
           command: >
             sudo apt-get install -yq \
 
@@ -276,6 +276,16 @@ jobs:
             unzip ./public/do-no-unzip-aggregated-json.zip -d ./public
             CI=true NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run build
       - run:
+          name: VR Tests
+          command: |
+            cd crowdsource-fe
+            PORT=8080 NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:vr
+      -run:
+          name: Copy failed VR snapshots (if any)
+          command: |
+            cd crowdsource-fe
+            mkdir -p __failed__vr__snapshots__ && cp -r **/__image_snapshots__/__diff_output__/* ./__failed__vr__snapshots__/
+      - run:
           name: Lighthouse
           command: |
             cd crowdsource-fe
@@ -286,6 +296,9 @@ jobs:
       - store_artifacts:
           path: crowdsource-fe/coverage
           destination: coverage
+      - store_artifacts:
+          path: crowdsource-fe/__failed__vr__snapshots__
+          destination: __failed__vr__snapshots__
       - store_test_results:
           path: crowdsource-fe/test-results
 
