@@ -1,3 +1,5 @@
+import '__fixtures__/mockComponentsWithSideEffects';
+
 import { render, screen, verifyAxeTest } from 'utils/testUtils';
 
 import Home from '../home.page';

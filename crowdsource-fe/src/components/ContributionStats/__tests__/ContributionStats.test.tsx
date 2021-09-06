@@ -1,3 +1,5 @@
+import '__fixtures__/mockComponentsWithSideEffects';
+
 import { render, verifyAxeTest } from 'utils/testUtils';
 
 import ContributionStats from '../ContributionStats';
