@@ -47,6 +47,7 @@ export const verifyVRTest = (title: string, url: string, cb?: (page: Page) => Pr
 
     it('match snapshot', async () => {
       const page = await browser.newPage();
+      await page.setViewport({ width: 1920, height: 1080 });
 
       await page.goto(url, {
         waitUntil: 'networkidle2',
