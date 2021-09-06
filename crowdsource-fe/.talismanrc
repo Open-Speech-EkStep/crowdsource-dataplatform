@@ -39,4 +39,4 @@ fileignoreconfig:
   - filename: src/components/BadgesIntro/BadgesIntro.tsx
     checksum: dfc54662a74c4d5fe859e64ef38cde81d376942550f5a77aa1cb1c65892be128
   - filename: src/components/Stats/Stats.tsx
-    checksum: 76237ca8beb0a97b79d7daf9b767888a7acf0f32753e6f4c33dfad905863bee4  
+    checksum: db63dfc117b8ae3b8da765fcc8eff2ec2e3dbc493fda6c0b2eaaf79f9a66df84

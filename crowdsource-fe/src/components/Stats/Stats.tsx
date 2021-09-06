@@ -44,7 +44,7 @@ const Stats = () => {
                     {stat ? (
                       stat.count || 0
                     ) : (
-                      <Spinner data-testid="StatsSpinner" animation="border" variant="primary" />
+                      <Spinner data-testid="StatsSpinner" animation="border" variant="light" />
                     )}
                   </span>
                 }

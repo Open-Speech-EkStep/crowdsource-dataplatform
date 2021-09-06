@@ -264,7 +264,7 @@ jobs:
             libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1
             libxtst6 ca-certificates \
 
-            fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
+            fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget unzip
       - run:
           name: Build code with check
           command: |
@@ -278,6 +278,7 @@ jobs:
           name: Lighthouse
           command: |
             cd crowdsource-fe
+            unzip ./public/aggregated-json.zip
             PORT=8080 NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:lh-ci
       - store_artifacts:
           path: crowdsource-fe/.lighthouseci
