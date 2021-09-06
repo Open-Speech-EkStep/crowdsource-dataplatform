@@ -292,6 +292,8 @@ jobs:
           destination: coverage
       - store_test_results:
           path: crowdsource-fe/test-results
+      - store_test_results:
+          path: crowdsource-fe/**/__image_snapshots__/__diff_output__
 
 workflows:
   build_test_deploy:
