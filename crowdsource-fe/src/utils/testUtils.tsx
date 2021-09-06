@@ -39,31 +39,38 @@ export const verifyVRTest = (title: string, url: string) => {
     beforeAll(async () => {
       browser = await puppeteer.launch({
         headless: true,
+        devtools: false,
+        ignoreHTTPSErrors: true,
+        args: ['--start-fullscreen'],
       });
     });
 
     it('match snapshot', async () => {
       const page = await browser.newPage();
-      await page.setViewport({
-        width: 1920,
-        height: 0,
-        deviceScaleFactor: 1,
-      });
+      await page.setViewport({ width: 1920, height: 1080 });
+
       await page.goto(url, {
         waitUntil: 'networkidle2',
       });
 
-      const bodyHandle = await page.$('body');
-      const boundingBox = await bodyHandle?.boundingBox();
-      const image = await page.screenshot({
-        clip: {
-          x: 0,
-          y: 0,
-          width: boundingBox?.width as number,
-          height: boundingBox?.height as number,
-        },
+      await page.addStyleTag({
+        content: `
+      *,
+      *::after,
+      *::before {
+          transition-delay: 0s !important;
+          transition-duration: 0s !important;
+          animation-delay: -0.0001s !important;
+          animation-duration: 0s !important;
+          animation-play-state: paused !important;
+          caret-color: transparent !important;
+      }
+      `,
       });
-      // const image = await page.screenshot({ fullPage: true });
+
+      const image = await page.screenshot({
+        fullPage: true,
+      });
 
       expect(image).toMatchImageSnapshot();
     });

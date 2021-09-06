@@ -51,6 +51,7 @@ yarn-error.log*
 
 # vr failed snapshots
 **/__image_snapshots__/__diff_output__
+/__failed__vr__snapshots__/
 
 # mock data
 /public/aggregated-json
