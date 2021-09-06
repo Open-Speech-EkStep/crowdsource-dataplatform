@@ -280,7 +280,7 @@ jobs:
           command: |
             cd crowdsource-fe
             PORT=8080 NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:vr
-      -run:
+      - run:
           name: Copy failed VR snapshots (if any)
           command: |
             cd crowdsource-fe
