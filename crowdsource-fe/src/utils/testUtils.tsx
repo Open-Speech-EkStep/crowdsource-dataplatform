@@ -39,7 +39,6 @@ export const verifyVRTest = (title: string, url: string) => {
     beforeAll(async () => {
       browser = await puppeteer.launch({
         headless: true,
-        args: ['--window-size=1920,1080'],
       });
     });
 
@@ -47,14 +46,24 @@ export const verifyVRTest = (title: string, url: string) => {
       const page = await browser.newPage();
       await page.setViewport({
         width: 1920,
-        height: 1080,
+        height: 0,
         deviceScaleFactor: 1,
       });
       await page.goto(url, {
         waitUntil: 'networkidle2',
       });
 
-      const image = await page.screenshot({ fullPage: true });
+      const bodyHandle = await page.$('body');
+      const boundingBox = await bodyHandle?.boundingBox();
+      const image = await page.screenshot({
+        clip: {
+          x: 0,
+          y: 0,
+          width: boundingBox?.width as number,
+          height: boundingBox?.height as number,
+        },
+      });
+      // const image = await page.screenshot({ fullPage: true });
 
       expect(image).toMatchImageSnapshot();
     });
