@@ -5,7 +5,7 @@ import type { RenderOptions, RenderResult } from '@testing-library/react';
 import { render, act } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import puppeteer from 'puppeteer';
-import type { Browser } from 'puppeteer';
+import type { Browser, Page } from 'puppeteer';
 
 const Wrapper: ComponentType = ({ children }: { children?: ReactNode }) => children as ReactElement;
 
@@ -32,7 +32,7 @@ export const verifyAxeTest = ({ container }: { container: RenderResult['containe
   });
 };
 
-export const verifyVRTest = (title: string, url: string) => {
+export const verifyVRTest = (title: string, url: string, cb?: (page: Page) => Promise<void>) => {
   describe(`${title} VR test`, () => {
     let browser: Browser;
 
@@ -47,7 +47,6 @@ export const verifyVRTest = (title: string, url: string) => {
 
     it('match snapshot', async () => {
       const page = await browser.newPage();
-      await page.setViewport({ width: 1920, height: 1080 });
 
       await page.goto(url, {
         waitUntil: 'networkidle2',
@@ -67,6 +66,8 @@ export const verifyVRTest = (title: string, url: string) => {
       }
       `,
       });
+
+      cb && (await cb(page));
 
       const image = await page.screenshot({
         fullPage: true,
