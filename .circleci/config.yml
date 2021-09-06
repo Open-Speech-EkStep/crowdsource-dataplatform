@@ -281,11 +281,6 @@ jobs:
             cd crowdsource-fe
             PORT=8080 NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:vr
       - run:
-          name: Copy failed VR snapshots (if any)
-          command: |
-            cd crowdsource-fe
-            mkdir -p __failed__vr__snapshots__ && cp -r **/__image_snapshots__/__diff_output__/* ./__failed__vr__snapshots__/
-      - run:
           name: Lighthouse
           command: |
             cd crowdsource-fe
