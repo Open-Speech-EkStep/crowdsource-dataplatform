@@ -1,10 +1,10 @@
 import { useTranslation } from 'next-i18next';
 
 import Stats from 'components/Stats';
+import apiPaths from 'constants/apiPaths';
+import useFetch from 'hooks/useFetch';
 
 import styles from './ContributionStats.module.scss';
-import useFetch from 'hooks/useFetch';
-import apiPaths from 'constants/apiPaths';
 
 const SUNO = 'suno';
 const BOLO = 'bolo';

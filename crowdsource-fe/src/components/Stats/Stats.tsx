@@ -4,17 +4,17 @@ import Spinner from 'react-bootstrap/Spinner';
 
 import styles from './Stats.module.scss';
 
-interface contentInterface {
+interface ContentInterface {
   id: string;
   stat: string | null;
   label: string;
 }
 
-interface statsProps {
-  contents: Array<contentInterface>;
+interface StatsProps {
+  contents: Array<ContentInterface>;
 }
 
-const Stats = ({ contents }: statsProps) => {
+const Stats = ({ contents }: StatsProps) => {
   return (
     <div className={`${styles.stats} px-7 px-md-0 py-md-7`}>
       <Row>
@@ -26,11 +26,7 @@ const Stats = ({ contents }: statsProps) => {
               <div className="d-flex flex-column align-items-center py-7 py-md-0">
                 {
                   <span className={styles.count}>
-                    {stat ? (
-                      stat
-                    ) : (
-                      <Spinner data-testid="StatsSpinner" animation="border" variant="light" />
-                    )}
+                    {stat ? stat : <Spinner data-testid="StatsSpinner" animation="border" variant="light" />}
                   </span>
                 }
                 <span className={`${styles.initiative} mt-1`}>{content.label}</span>
