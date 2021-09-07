@@ -17,12 +17,12 @@ exports[`Stats should render the component and matches it against stored snapsho
           <span
             class="count"
           >
-            9
+            a
           </span>
           <span
             class="initiative mt-1"
           >
-            suno india
+            l1
           </span>
         </div>
       </div>
@@ -35,48 +35,12 @@ exports[`Stats should render the component and matches it against stored snapsho
           <span
             class="count"
           >
-            283
+            b
           </span>
           <span
             class="initiative mt-1"
           >
-            bolo india
-          </span>
-        </div>
-      </div>
-      <div
-        class="stat col-md-3 col-12"
-      >
-        <div
-          class="d-flex flex-column align-items-center py-7 py-md-0"
-        >
-          <span
-            class="count"
-          >
-            0
-          </span>
-          <span
-            class="initiative mt-1"
-          >
-            likho india
-          </span>
-        </div>
-      </div>
-      <div
-        class="stat col-md-3 col-12"
-      >
-        <div
-          class="d-flex flex-column align-items-center py-7 py-md-0"
-        >
-          <span
-            class="count"
-          >
-            53
-          </span>
-          <span
-            class="initiative mt-1"
-          >
-            dekho india
+            l2
           </span>
         </div>
       </div>
