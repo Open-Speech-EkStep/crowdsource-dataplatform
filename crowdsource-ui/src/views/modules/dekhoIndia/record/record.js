@@ -28,7 +28,6 @@ const REJECT_ACTION = 'reject';
 
 const dekhoCountKey = 'dekhoCount';
 const currentIndexKey = 'dekhoCurrentIndex';
-const sentencesKey = 'dekhoSentencesKey';
 
 
 window.dekhoIndia = {};
@@ -136,9 +135,6 @@ function getNextSentence() {
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
   } else {
-    const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
-    Object.assign(sentencesObj, { sentences: [] });
-    localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
     // showThankYou();
     disableSkipButton();
@@ -441,8 +437,6 @@ const executeOnLoad = function () {
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
-    const localSentences = localStorage.getItem(sentencesKey);
-    const localSentencesParsed = JSON.parse(localSentences);
 
     setPageContentHeight();
     $("#instructions_close_btn").on("click", function () {
@@ -458,16 +452,6 @@ const executeOnLoad = function () {
     showUserProfile(localSpeakerDataParsed.userName);
     onChangeUser('./record.html', MODULE.dekho.value);
     onOpenUserDropDown();
-    const isExistingUser = localSentencesParsed &&
-      localSentencesParsed.userName === localSpeakerDataParsed.userName
-      &&
-      localSentencesParsed.language === localSpeakerDataParsed.language;
-
-    if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === language) {
-      setFooterPosition();
-      dekhoIndia.sentences = localSentencesParsed.sentences;
-      initializeComponent();
-    } else {
       localStorage.removeItem(currentIndexKey);
       const type = 'ocr';
       fetch(`/media/${type}`, {
@@ -496,29 +480,15 @@ const executeOnLoad = function () {
         }).then((sentenceData) => {
           dekhoIndia.sentences = sentenceData.data ? sentenceData.data : [];
           localStorage.setItem(dekhoCountKey, dekhoIndia.sentences.length);
-          localStorage.setItem(
-            sentencesKey,
-            JSON.stringify({
-              userName: localSpeakerDataParsed.userName,
-              sentences: dekhoIndia.sentences,
-              language: localSpeakerDataParsed.language,
-              toLanguage: ''
-            })
-          );
           if (dekhoIndia.sentences.length === 0) {
             showNoSentencesMessage();
             return;
-          }
-          if (!isExistingUser) {
-            $validationInstructionModal.removeClass("d-none");
-            setFooterPosition();
           }
           setFooterPosition();
 
           initializeComponent();
         }).then(() => {
         });
-    }
   } catch (err) {
     console.log(err);
   }

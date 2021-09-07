@@ -26,7 +26,6 @@ const SKIP_ACTION = 'skip';
 const {initializeFeedbackModal} = require('../common/feedback');
 
 const currentIndexKey = 'likhoValidatorCurrentIndex';
-const sentencesKey = 'likhoValidatorSentencesKey';
 const likhoValidatorCountKey = 'likhoValidatorCount';
 
 function getValue(number, maxValue) {
@@ -132,9 +131,6 @@ function getNextSentence() {
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
   } else {
-    const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
-    Object.assign(sentencesObj, {sentences: []});
-    localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
     // showThankYou();
     disableSkipButton();
@@ -444,8 +440,6 @@ const executeOnLoad = function () {
   getLocationInfo();
   const localSpeakerData = localStorage.getItem(speakerDetailsKey);
   const localSpeakerDataParsed = JSON.parse(localSpeakerData);
-  const localSentences = localStorage.getItem(sentencesKey);
-  const localSentencesParsed = JSON.parse(localSentences);
   setPageContentHeight();
 
   if (!localSpeakerDataParsed) {
@@ -455,16 +449,6 @@ const executeOnLoad = function () {
   showUserProfile(localSpeakerDataParsed.userName)
   onChangeUser('./validator-page.html',MODULE.likho.value);
   onOpenUserDropDown();
-  const isExistingUser = localSentencesParsed &&
-    localSentencesParsed.userName === localSpeakerDataParsed.userName
-    &&
-    localSentencesParsed.language === localSpeakerDataParsed.language;
-
-  if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === fromLanguage && localSentencesParsed.toLanguage === toLanguage) {
-    setFooterPosition();
-    likhoIndiaValidator.sentences = localSentencesParsed.sentences;
-    initializeComponent();
-  } else {
     localStorage.removeItem(currentIndexKey);
     const type = 'parallel';
     fetch(`/contributions/${type}?from=${fromLanguage}&to=${toLanguage}&username=${localSpeakerDataParsed.userName}`, {
@@ -484,15 +468,6 @@ const executeOnLoad = function () {
     }).then(result => {
       likhoIndiaValidator.sentences = result.data ? result.data : [];
       localStorage.setItem(likhoValidatorCountKey, likhoIndiaValidator.sentences.length);
-      localStorage.setItem(
-        sentencesKey,
-        JSON.stringify({
-          userName: localSpeakerDataParsed.userName,
-          sentences: likhoIndiaValidator.sentences,
-          language: fromLanguage,
-          toLanguage: toLanguage
-        })
-      );
       if (likhoIndiaValidator.sentences.length == 0) {
         showNoSentencesMessage();
         return;
@@ -501,7 +476,6 @@ const executeOnLoad = function () {
 
       initializeComponent();
     });
-  }
 };
 
 $(document).ready(() => {

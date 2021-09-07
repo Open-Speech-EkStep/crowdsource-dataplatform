@@ -6,7 +6,7 @@ const { onChangeUser , showUserProfile,onOpenUserDropDown} = require('./header')
 const { showErrorPopup } = require('./common');
 
 const speakerDetailsKey = 'speakerDetails';
-const sentencesKey = 'sentences';
+const lastUserDetail = 'lastUserDetail';
 const currentIndexKey = 'currentIndex';
 const skipCountKey = 'skipCount';
 const countKey = 'count';
@@ -147,7 +147,8 @@ const initialize = () => {
     // });
 
     const setProgressBar = (currentIndex) => {
-        $progressBar.width((currentIndex + 1) * 20 + '%');
+        const multiplier = 10 * (10 / totalItems);
+        $progressBar.width((currentIndex + 1) * multiplier + '%');
         $progressBar.prop('aria-valuenow', currentIndex + 1);
     };
 
@@ -352,9 +353,6 @@ const initialize = () => {
             $skipBtn.addClass('d-none');
             currentIndex++;
             setProgressBar(currentIndex);
-            const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
-            Object.assign(sentencesObj, { sentences: [] });
-            localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
             localStorage.setItem(currentIndexKey, currentIndex);
             // const msg = localeStrings['Congratulations!!! You have completed this batch of sentences'];
             // notyf.success(msg);
@@ -581,9 +579,8 @@ function executeOnLoad() {
     try {
         const localSpeakerData = localStorage.getItem(speakerDetailsKey);
         const localSpeakerDataParsed = JSON.parse(localSpeakerData);
-        const localSentences = localStorage.getItem(sentencesKey);
+        const localSentences = localStorage.getItem(lastUserDetail);
         const localSentencesParsed = JSON.parse(localSentences);
-        const localCount = Number(localStorage.getItem(countKey));
 
         setPageContentHeight();
         $("#instructions_close_btn").on("click", function () {
@@ -600,18 +597,9 @@ function executeOnLoad() {
         onChangeUser('./record.html',MODULE.bolo.value);
         onOpenUserDropDown();
         const isExistingUser = localSentencesParsed &&
-            localSentencesParsed.userName === localSpeakerDataParsed.userName
-            &&
-            localSentencesParsed.language === localSpeakerDataParsed.language;
-
-        if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === contributionLanguage) {
-            crowdSource.sentences = localSentencesParsed.sentences;
-            crowdSource.count = localCount;
-            $loader.hide();
-            $pageContent.removeClass('d-none');
-            setFooterPosition();
-            initialize();
-        } else {
+        localSentencesParsed.userName === localSpeakerDataParsed.userName
+        &&
+        localSentencesParsed.language === localSpeakerDataParsed.language;
             localStorage.removeItem(currentIndexKey);
             localStorage.removeItem(skipCountKey);
             const type = 'text';
@@ -643,10 +631,9 @@ function executeOnLoad() {
                     crowdSource.count = sentenceData.data.length;
                     $loader.hide();
                     localStorage.setItem(
-                      sentencesKey,
+                      lastUserDetail,
                       JSON.stringify({
                           userName: localSpeakerDataParsed.userName,
-                          sentences: crowdSource.sentences,
                           language: localSpeakerDataParsed.language,
                       })
                     );
@@ -657,10 +644,7 @@ function executeOnLoad() {
                         return;
                     }
                     if (!isExistingUser) {
-                        //$instructionModal.modal('show');
                         $validationInstructionModal.removeClass("d-none");
-                        setFooterPosition();
-                        // toggleFooterPosition();
                     }
                     $pageContent.removeClass('d-none');
                     // toggleFooterPosition();
@@ -671,7 +655,6 @@ function executeOnLoad() {
                 .then(() => {
                     $loader.hide();
                 });
-        }
     } catch (err) {
         console.log(err);
     }
