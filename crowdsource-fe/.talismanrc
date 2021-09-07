@@ -18,6 +18,8 @@ fileignoreconfig:
     checksum: dfc54662a74c4d5fe859e64ef38cde81d376942550f5a77aa1cb1c65892be128
   - filename: src/components/InitiativesCarousel/__tests__/__snapshots__/InitiativesCarousel.test.tsx.snap
     checksum: 8d1e2f79cfdfa4000d610defa41cd268d3f468a84c1fb48b5ec669ef26e8c2ab
+  - filename: src/components/InitiativesCarousel/InitiativesCarousel.tsx
+    checksum: 86c7242a6308d54c8e4c0934ee65f793b7b02c8f0e67a64a4e40134a5ee31863
   - filename: src/components/Layout/Layout.tsx
     checksum: 4fda9de4521e082085ada821a2d9e8efd5cd45dbf0e3d481b6c17a2a8bf188e1
   - filename: src/components/Navigation/__tests__/__snapshots__/Navigation.test.tsx.snap
@@ -43,8 +45,11 @@ fileignoreconfig:
   - filename: src/pages/__vr__/__image_snapshots__/404-page-vr-tsx-404-vr-test-match-snapshot-1-snap.png
     checksum: 9c5f2ed826ea450397bc8b16266155f52b736f2bb35b6e4b271bdb83c01da810
   - filename: src/components/Feedback/__tests__/__snapshots__/Feedback.test.tsx.snap
-    checksum: be717be7396ed12a5f9ef10e822a800e53b9a22c2f3155648f328b2444cc4a58
+    checksum: 865d0506dbed5a7678aa3bb3ef8f4d56c029e24e1b780e699841e9659a338077
   - filename: src/components/FeedbackForm/FeedbackForm.tsx
-    checksum: 7e4ee193898402970e61737d039a067195a672c9290afdecfa1e6ce813805588
-  - filename: src/components/InitiativesCarousel/InitiativesCarousel.tsx
-    checksum: 86c7242a6308d54c8e4c0934ee65f793b7b02c8f0e67a64a4e40134a5ee31863
+    checksum: 9d168e07b5d5ebe885fa63fd33351db6cfa4c788236fe7a35d15b476a84bf70d
+  - filename: src/hooks/useFetch/__tests__/useSubmit.test.ts
+    checksum: 28889db88825266668120b2c41ad08a82a0f4e47b04c781e3671b040ef22a5ef
+  - filename: src/hooks/useFetch/useSubmit.ts
+    checksum: b0eba108983d3799c81bf40cc729400ef7da18a85ad03c952e539267bb62f6bf
+
