@@ -1,0 +1,19 @@
+.root {
+  background-color: #fff;
+  border: 1px solid rgba(15, 39, 73, 0.32);
+  border-radius: 50%;
+  bottom: 1.5rem;
+  box-sizing: border-box;
+  filter: drop-shadow(0 0.25rem 0.75rem rgba(15, 39, 73, 0.32));
+  height: 3.75rem;
+  position: fixed;
+  right: 1.5rem;
+  width: 3.75rem;
+
+  &:hover,
+  &:focus {
+    background-color: var(--text-white);
+    border-color: rgba(15, 39, 73, 0.32);
+    color: #fff;
+  }
+}

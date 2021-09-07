@@ -6,6 +6,7 @@ import 'styles/theme.scss';
 import 'styles/globals.scss';
 import 'styles/slickCarousel.scss';
 
+import Feedback from 'components/Feedback';
 import Layout from 'components/Layout';
 
 type MyAppProps = Partial<Exclude<AppProps, 'Component'>> & { Component: AppProps['Component'] };
@@ -14,6 +15,7 @@ const MyApp = ({ Component, pageProps = {} }: MyAppProps) => {
   return (
     <Layout>
       <Component {...pageProps} />
+      <Feedback />
     </Layout>
   );
 };

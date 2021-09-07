@@ -1,0 +1,335 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeedbackForm should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <form
+    class="root py-2"
+  >
+    <div
+      class="py-3"
+    >
+      <label
+        class="mb-3 form-label"
+        for="opinionRating"
+      >
+        What is your opinion of this page 
+        <span
+          class="red"
+        >
+          (*required)
+        </span>
+      </label>
+      <div
+        class="opinions"
+      >
+        <div
+          class="me-5"
+        >
+          <label
+            class="opinion opinion1"
+            for="opinion1"
+          >
+            <span
+              class="opinionLabel position-absolute opacity-0"
+            >
+              1
+            </span>
+            <input
+              class="opinionInput position-absolute opacity-0"
+              id="opinion1"
+              name="opinion"
+              type="radio"
+              value="1"
+            />
+          </label>
+        </div>
+        <div
+          class="me-5"
+        >
+          <label
+            class="opinion opinion2"
+            for="opinion2"
+          >
+            <span
+              class="opinionLabel position-absolute opacity-0"
+            >
+              2
+            </span>
+            <input
+              class="opinionInput position-absolute opacity-0"
+              id="opinion2"
+              name="opinion"
+              type="radio"
+              value="2"
+            />
+          </label>
+        </div>
+        <div
+          class="me-5"
+        >
+          <label
+            class="opinion opinion3"
+            for="opinion3"
+          >
+            <span
+              class="opinionLabel position-absolute opacity-0"
+            >
+              3
+            </span>
+            <input
+              class="opinionInput position-absolute opacity-0"
+              id="opinion3"
+              name="opinion"
+              type="radio"
+              value="3"
+            />
+          </label>
+        </div>
+        <div
+          class="me-5"
+        >
+          <label
+            class="opinion opinion4"
+            for="opinion4"
+          >
+            <span
+              class="opinionLabel position-absolute opacity-0"
+            >
+              4
+            </span>
+            <input
+              class="opinionInput position-absolute opacity-0"
+              id="opinion4"
+              name="opinion"
+              type="radio"
+              value="4"
+            />
+          </label>
+        </div>
+        <div
+          class="me-5"
+        >
+          <label
+            class="opinion opinion5"
+            for="opinion5"
+          >
+            <span
+              class="opinionLabel position-absolute opacity-0"
+            >
+              5
+            </span>
+            <input
+              class="opinionInput position-absolute opacity-0"
+              id="opinion5"
+              name="opinion"
+              type="radio"
+              value="5"
+            />
+          </label>
+        </div>
+      </div>
+    </div>
+    <div
+      class="py-3"
+    >
+      <label
+        class="mb-1 form-label"
+        for="category"
+      >
+        Please select your feedback category 
+        <span
+          class="grey"
+        >
+          (optional)
+        </span>
+      </label>
+      <select
+        aria-label="Default select example"
+        class="select form-select"
+        id="category"
+      >
+        <option>
+          Select a category
+        </option>
+        <option
+          value="1"
+        >
+          Suggestion
+        </option>
+        <option
+          value="2"
+        >
+          Error
+        </option>
+        <option
+          value="3"
+        >
+          Complaint
+        </option>
+        <option
+          value="4"
+        >
+          Compliment
+        </option>
+      </select>
+    </div>
+    <div
+      class="py-3"
+    >
+      <label
+        class="mb-1 form-label"
+        for="feedback"
+      >
+        Share your feedback below: 
+        <span
+          class="grey"
+        >
+          (optional)
+        </span>
+      </label>
+      <textarea
+        class="form-control"
+        id="feedback"
+        placeholder="Type here..."
+        rows="3"
+      />
+    </div>
+    <div
+      class="py-3"
+    >
+      <label
+        class="mb-1 form-label"
+        for="recommended"
+      >
+        Would you recommend Bhasha Daan to your friends & family? 
+        <span
+          class="grey"
+        >
+          (optional)
+        </span>
+      </label>
+      <div>
+        <div
+          class="radio me-8 mb-0 form-check form-check-inline"
+        >
+          <input
+            class="form-check-input"
+            id="recommend1"
+            name="recommend"
+            type="radio"
+          />
+          <label
+            class="form-check-label"
+            for="recommend1"
+            title=""
+          >
+            recommend
+          </label>
+        </div>
+        <div
+          class="radio me-8 mb-0 form-check form-check-inline"
+        >
+          <input
+            class="form-check-input"
+            id="recommend2"
+            name="recommend"
+            type="radio"
+          />
+          <label
+            class="form-check-label"
+            for="recommend2"
+            title=""
+          >
+            No
+          </label>
+        </div>
+        <div
+          class="radio me-8 mb-0 form-check form-check-inline"
+        >
+          <input
+            class="form-check-input"
+            id="recommend3"
+            name="recommend"
+            type="radio"
+          />
+          <label
+            class="form-check-label"
+            for="recommend3"
+            title=""
+          >
+            Maybe
+          </label>
+        </div>
+      </div>
+    </div>
+    <div
+      class="py-3"
+    >
+      <label
+        class="mb-1 form-label"
+        for="revisit"
+      >
+        Would you revisit Bhasha Daan? 
+        <span
+          class="grey"
+        >
+          (optional)
+        </span>
+      </label>
+      <div>
+        <div
+          class="radio me-8 mb-0 form-check form-check-inline"
+        >
+          <input
+            class="form-check-input"
+            id="revisit1"
+            name="revisit"
+            type="radio"
+          />
+          <label
+            class="form-check-label"
+            for="revisit1"
+            title=""
+          >
+            Yes
+          </label>
+        </div>
+        <div
+          class="radio me-8 mb-0 form-check form-check-inline"
+        >
+          <input
+            class="form-check-input"
+            id="revisit2"
+            name="revisit"
+            type="radio"
+          />
+          <label
+            class="form-check-label"
+            for="revisit2"
+            title=""
+          >
+            No
+          </label>
+        </div>
+        <div
+          class="radio me-8 mb-0 form-check form-check-inline"
+        >
+          <input
+            class="form-check-input"
+            id="revisit3"
+            name="revisit"
+            type="radio"
+          />
+          <label
+            class="form-check-label"
+            for="revisit3"
+            title=""
+          >
+            Maybe
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+</DocumentFragment>
+`;
