@@ -1,16 +1,41 @@
-import '__fixtures__/mockComponentsWithSideEffects';
-
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { render, verifyAxeTest, screen, waitForElementToBeRemoved } from 'utils/testUtils';
 
 import ContributionStats from '../ContributionStats';
 
 describe('ContributionStats', () => {
-  const setup = () => render(<ContributionStats />);
+  const setup = async () => {
+    fetchMock.doMockOnceIf('/aggregated-json/participationStats.json').mockResponseOnce(
+      JSON.stringify([
+        {
+          count: '9',
+          type: 'asr',
+        },
+        {
+          count: '283',
+          type: 'text',
+        },
+        {
+          count: '53',
+          type: 'ocr',
+        },
+        {
+          count: null,
+          type: 'parallel',
+        },
+      ])
+    );
 
-  verifyAxeTest(setup());
+    const renderResult = render(<ContributionStats />);
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    return renderResult;
+  };
 
-  it('should render the component and matches it against stored snapshot', () => {
-    const { asFragment } = setup();
+  async () => {
+    verifyAxeTest(await setup());
+  };
+
+  it('should render the component and matches it against stored snapshot', async () => {
+    const { asFragment } = await setup();
 
     expect(asFragment()).toMatchSnapshot();
   });

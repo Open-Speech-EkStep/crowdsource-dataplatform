@@ -15,7 +15,86 @@ exports[`ContributionStats should render the component and matches it against st
     <div
       class="mt-4 mt-md-5"
     >
-      Stats
+      <div
+        class="stats px-7 px-md-0 py-md-7"
+      >
+        <div
+          class="row"
+        >
+          <div
+            class="stat col-md-3 col-12"
+          >
+            <div
+              class="d-flex flex-column align-items-center py-7 py-md-0"
+            >
+              <span
+                class="count"
+              >
+                9
+              </span>
+              <span
+                class="initiative mt-1"
+              >
+                suno india
+              </span>
+            </div>
+          </div>
+          <div
+            class="stat col-md-3 col-12"
+          >
+            <div
+              class="d-flex flex-column align-items-center py-7 py-md-0"
+            >
+              <span
+                class="count"
+              >
+                283
+              </span>
+              <span
+                class="initiative mt-1"
+              >
+                bolo india
+              </span>
+            </div>
+          </div>
+          <div
+            class="stat col-md-3 col-12"
+          >
+            <div
+              class="d-flex flex-column align-items-center py-7 py-md-0"
+            >
+              <span
+                class="count"
+              >
+                0
+              </span>
+              <span
+                class="initiative mt-1"
+              >
+                likho india
+              </span>
+            </div>
+          </div>
+          <div
+            class="stat col-md-3 col-12"
+          >
+            <div
+              class="d-flex flex-column align-items-center py-7 py-md-0"
+            >
+              <span
+                class="count"
+              >
+                53
+              </span>
+              <span
+                class="initiative mt-1"
+              >
+                dekho india
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </DocumentFragment>
