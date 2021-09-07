@@ -223,7 +223,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
             for="recommend1"
             title=""
           >
-            recommend
+            Yes
           </label>
         </div>
         <div
