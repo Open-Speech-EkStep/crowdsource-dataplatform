@@ -275,11 +275,11 @@ jobs:
             npm i
             unzip ./public/do-no-unzip-aggregated-json.zip -d ./public
             CI=true NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run build
-      - run:
-          name: VR Tests
-          command: |
-            cd crowdsource-fe
-            PORT=8080 NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:vr
+      # - run:
+      #     name: VR Tests
+      #     command: |
+      #       cd crowdsource-fe
+      #       PORT=8080 NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:vr
       - run:
           name: Lighthouse
           command: |
