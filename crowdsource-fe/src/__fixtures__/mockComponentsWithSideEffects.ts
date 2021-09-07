@@ -1,3 +1,3 @@
-jest.mock('components/Stats', () => () => 'Stats');
+jest.mock('components/ContributionStats', () => () => 'ContributionStats');
 
 export {};
