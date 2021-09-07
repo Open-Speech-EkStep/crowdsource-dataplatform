@@ -20,7 +20,7 @@ exports[`Feedback should render the component and matches it against stored snap
         />
       </div>
       <img
-        alt="feedbackIcon"
+        alt="feedbackIconAlt"
         data-nimg="intrinsic"
         decoding="async"
         src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"

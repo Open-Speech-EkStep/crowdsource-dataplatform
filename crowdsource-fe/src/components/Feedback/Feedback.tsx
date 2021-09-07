@@ -9,7 +9,7 @@ import FeedbackModal from 'components/FeedbackModal';
 import styles from './Feedback.module.scss';
 
 const Feedback = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const [modalShow, setModalShow] = useState(false);
 
   const showModalFn = () => {
@@ -22,12 +22,7 @@ const Feedback = () => {
         onClick={showModalFn()}
         className={`${styles.root} d-inline-flex justify-content-center align-items-center`}
       >
-        <Image
-          src="/images/feedback-icon.svg"
-          width="32"
-          height="32"
-          alt={t('feedbackIcon')}
-        />
+        <Image src="/images/feedback-icon.svg" width="32" height="32" alt={t('feedbackIconAlt')} />
       </Button>
       <FeedbackModal show={modalShow} onHide={() => setModalShow(false)} />
     </Fragment>

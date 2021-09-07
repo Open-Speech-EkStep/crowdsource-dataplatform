@@ -12,11 +12,11 @@ exports[`FeedbackForm should render the component and matches it against stored 
         class="mb-3 form-label"
         for="opinionRating"
       >
-        What is your opinion of this page 
+        opinionQuestionText 
         <span
           class="red"
         >
-          (*required)
+          (required)
         </span>
       </label>
       <div
@@ -136,7 +136,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
         class="mb-1 form-label"
         for="category"
       >
-        Please select your feedback category 
+        feedbackCategoryQuestionText 
         <span
           class="grey"
         >
@@ -149,27 +149,27 @@ exports[`FeedbackForm should render the component and matches it against stored 
         id="category"
       >
         <option>
-          Select a category
+          selectCategory
         </option>
         <option
           value="1"
         >
-          Suggestion
+          suggestion
         </option>
         <option
           value="2"
         >
-          Error
+          error
         </option>
         <option
           value="3"
         >
-          Complaint
+          complaint
         </option>
         <option
           value="4"
         >
-          Compliment
+          compliment
         </option>
       </select>
     </div>
@@ -180,7 +180,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
         class="mb-1 form-label"
         for="feedback"
       >
-        Share your feedback below: 
+        feedbackShareText 
         <span
           class="grey"
         >
@@ -190,7 +190,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
       <textarea
         class="form-control"
         id="feedback"
-        placeholder="Type here..."
+        placeholder="typeHere"
         rows="3"
       />
     </div>
@@ -201,7 +201,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
         class="mb-1 form-label"
         for="recommended"
       >
-        Would you recommend Bhasha Daan to your friends & family? 
+        recommendQuestionText 
         <span
           class="grey"
         >
@@ -223,7 +223,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
             for="recommend1"
             title=""
           >
-            Yes
+            yes
           </label>
         </div>
         <div
@@ -240,7 +240,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
             for="recommend2"
             title=""
           >
-            No
+            no
           </label>
         </div>
         <div
@@ -257,7 +257,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
             for="recommend3"
             title=""
           >
-            Maybe
+            mayBe
           </label>
         </div>
       </div>
@@ -269,7 +269,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
         class="mb-1 form-label"
         for="revisit"
       >
-        Would you revisit Bhasha Daan? 
+        revisitQuestionText 
         <span
           class="grey"
         >
@@ -291,7 +291,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
             for="revisit1"
             title=""
           >
-            Yes
+            yes
           </label>
         </div>
         <div
@@ -308,7 +308,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
             for="revisit2"
             title=""
           >
-            No
+            no
           </label>
         </div>
         <div
@@ -325,7 +325,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
             for="revisit3"
             title=""
           >
-            Maybe
+            mayBe
           </label>
         </div>
       </div>
