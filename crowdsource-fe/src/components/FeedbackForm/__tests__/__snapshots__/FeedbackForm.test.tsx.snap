@@ -37,7 +37,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
             <input
               class="opinionInput position-absolute opacity-0"
               id="opinion1"
-              name="opinion"
+              name="opinion_rating"
               type="radio"
               value="1"
             />
@@ -58,7 +58,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
             <input
               class="opinionInput position-absolute opacity-0"
               id="opinion2"
-              name="opinion"
+              name="opinion_rating"
               type="radio"
               value="2"
             />
@@ -79,7 +79,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
             <input
               class="opinionInput position-absolute opacity-0"
               id="opinion3"
-              name="opinion"
+              name="opinion_rating"
               type="radio"
               value="3"
             />
@@ -100,7 +100,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
             <input
               class="opinionInput position-absolute opacity-0"
               id="opinion4"
-              name="opinion"
+              name="opinion_rating"
               type="radio"
               value="4"
             />
@@ -121,7 +121,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
             <input
               class="opinionInput position-absolute opacity-0"
               id="opinion5"
-              name="opinion"
+              name="opinion_rating"
               type="radio"
               value="5"
             />
@@ -147,27 +147,30 @@ exports[`FeedbackForm should render the component and matches it against stored 
         aria-label="Default select example"
         class="select form-select"
         id="category"
+        name="category"
       >
-        <option>
+        <option
+          value=""
+        >
           selectCategory
         </option>
         <option
-          value="1"
+          value="Suggestion"
         >
           suggestion
         </option>
         <option
-          value="2"
+          value="Error"
         >
           error
         </option>
         <option
-          value="3"
+          value="Complaint"
         >
           complaint
         </option>
         <option
-          value="4"
+          value="Compliment"
         >
           compliment
         </option>
@@ -190,6 +193,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
       <textarea
         class="form-control"
         id="feedback"
+        name="feedback"
         placeholder="typeHere"
         rows="3"
       />
@@ -208,58 +212,59 @@ exports[`FeedbackForm should render the component and matches it against stored 
           (optional)
         </span>
       </label>
-      <div>
-        <div
-          class="radio me-8 mb-0 form-check form-check-inline"
+      <div
+        class="radio me-8 mb-0 form-check form-check-inline"
+      >
+        <input
+          class="form-check-input"
+          id="feedbackFormYesCheckbox"
+          name="recommend"
+          type="radio"
+          value="Yes"
+        />
+        <label
+          class="form-check-label"
+          for="feedbackFormYesCheckbox"
+          title=""
         >
-          <input
-            class="form-check-input"
-            id="recommend1"
-            name="recommend"
-            type="radio"
-          />
-          <label
-            class="form-check-label"
-            for="recommend1"
-            title=""
-          >
-            yes
-          </label>
-        </div>
-        <div
-          class="radio me-8 mb-0 form-check form-check-inline"
+          yes
+        </label>
+      </div>
+      <div
+        class="radio me-8 mb-0 form-check form-check-inline"
+      >
+        <input
+          class="form-check-input"
+          id="feedbackFormNoCheckbox"
+          name="recommend"
+          type="radio"
+          value="No"
+        />
+        <label
+          class="form-check-label"
+          for="feedbackFormNoCheckbox"
+          title=""
         >
-          <input
-            class="form-check-input"
-            id="recommend2"
-            name="recommend"
-            type="radio"
-          />
-          <label
-            class="form-check-label"
-            for="recommend2"
-            title=""
-          >
-            no
-          </label>
-        </div>
-        <div
-          class="radio me-8 mb-0 form-check form-check-inline"
+          no
+        </label>
+      </div>
+      <div
+        class="radio me-8 mb-0 form-check form-check-inline"
+      >
+        <input
+          class="form-check-input"
+          id="feedbackFormMaybeCheckbox"
+          name="recommend"
+          type="radio"
+          value="Maybe"
+        />
+        <label
+          class="form-check-label"
+          for="feedbackFormMaybeCheckbox"
+          title=""
         >
-          <input
-            class="form-check-input"
-            id="recommend3"
-            name="recommend"
-            type="radio"
-          />
-          <label
-            class="form-check-label"
-            for="recommend3"
-            title=""
-          >
-            mayBe
-          </label>
-        </div>
+          mayBe
+        </label>
       </div>
     </div>
     <div
@@ -276,60 +281,68 @@ exports[`FeedbackForm should render the component and matches it against stored 
           (optional)
         </span>
       </label>
-      <div>
-        <div
-          class="radio me-8 mb-0 form-check form-check-inline"
+      <div
+        class="radio me-8 mb-0 form-check form-check-inline"
+      >
+        <input
+          class="form-check-input"
+          id="revisit1"
+          name="revisit"
+          type="radio"
+          value="Yes"
+        />
+        <label
+          class="form-check-label"
+          for="revisit1"
+          title=""
         >
-          <input
-            class="form-check-input"
-            id="revisit1"
-            name="revisit"
-            type="radio"
-          />
-          <label
-            class="form-check-label"
-            for="revisit1"
-            title=""
-          >
-            yes
-          </label>
-        </div>
-        <div
-          class="radio me-8 mb-0 form-check form-check-inline"
+          yes
+        </label>
+      </div>
+      <div
+        class="radio me-8 mb-0 form-check form-check-inline"
+      >
+        <input
+          class="form-check-input"
+          id="revisit2"
+          name="revisit"
+          type="radio"
+          value="No"
+        />
+        <label
+          class="form-check-label"
+          for="revisit2"
+          title=""
         >
-          <input
-            class="form-check-input"
-            id="revisit2"
-            name="revisit"
-            type="radio"
-          />
-          <label
-            class="form-check-label"
-            for="revisit2"
-            title=""
-          >
-            no
-          </label>
-        </div>
-        <div
-          class="radio me-8 mb-0 form-check form-check-inline"
+          no
+        </label>
+      </div>
+      <div
+        class="radio me-8 mb-0 form-check form-check-inline"
+      >
+        <input
+          class="form-check-input"
+          id="revisit3"
+          name="revisit"
+          type="radio"
+          value="Maybe"
+        />
+        <label
+          class="form-check-label"
+          for="revisit3"
+          title=""
         >
-          <input
-            class="form-check-input"
-            id="revisit3"
-            name="revisit"
-            type="radio"
-          />
-          <label
-            class="form-check-label"
-            for="revisit3"
-            title=""
-          >
-            mayBe
-          </label>
-        </div>
+          mayBe
+        </label>
       </div>
     </div>
+    <button
+      class="submitButton"
+      disabled=""
+      type="submit"
+    >
+      submit
+    </button>
   </form>
 </DocumentFragment>
 `;

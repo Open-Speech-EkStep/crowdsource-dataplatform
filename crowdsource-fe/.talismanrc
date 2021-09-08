@@ -18,7 +18,7 @@ fileignoreconfig:
   - filename: src/components/Stats/Stats.tsx
     checksum: 959c3f0d37e9c9cafc713a53c61704c65b6f3073c0b3b36541b9ebafde280a7c
   - filename: src/components/FeedbackForm/FeedbackForm.tsx
-    checksum: eaaf09b11f7914db7d54a4d522d69db1cde744c4a6baac06e06b69217afa9342
+    checksum: bdf4edc5c1505bf31616f99a0fa3e898a27eabb32c58b534016f34fb47e5972d
   - filename: src/components/BronzeContribute/BronzeContribute.tsx
     checksum: d0d400f1f4c6cde2b5301455e7c205a7bb579b81c8879feabb4e547867002f72
   - filename: src/components/BadgesIntro/BadgesIntro.tsx
