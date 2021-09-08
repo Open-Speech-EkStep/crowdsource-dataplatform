@@ -55,7 +55,8 @@
   "typeHere": "Type here...",
   "404Title": "This page could not be found",
 
-  "feedbackIconAlt": "Feedback Icon",
   "bhashiniLogoAlt": "Bhashini Logo",
-  "initiativeLogo": "Initiative Logo"
+  "initiativeLogo": "Initiative Logo",
+  "feedbackIconAlt": "Feedback Icon",
+  "languageIconAlt": "Language Icon"
 }

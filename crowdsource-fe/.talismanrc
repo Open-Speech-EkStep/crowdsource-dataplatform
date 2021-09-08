@@ -25,3 +25,6 @@ fileignoreconfig:
     checksum: dfc54662a74c4d5fe859e64ef38cde81d376942550f5a77aa1cb1c65892be128
   - filename: src/components/InitiativesCarousel/InitiativesCarousel.tsx
     checksum: 86c7242a6308d54c8e4c0934ee65f793b7b02c8f0e67a64a4e40134a5ee31863
+  - filename: src/components/LanguageSwitcher/LanguageSwitcher.tsx
+    checksum: f1d80714f5fb263724f3f86fd2f1d81349b7a802aa2e61d2fb8b31743408fed4
+
