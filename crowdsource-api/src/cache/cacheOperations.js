@@ -25,6 +25,9 @@ const getRandom = (datasetList, requireElements) => {
 
 const generateResponse = (data, desiredCount, userId, userName) => {
 	let response = [];
+	if (!data || data.length == 0) {
+		return response;
+	}
 	let randomItems = getRandom(data, desiredCount);
 	const randomItemsDataSetRowIds = randomItems.map(i => i.dataset_row_id);
 	data = data.filter(d => !randomItemsDataSetRowIds.includes(d.dataset_row_id));
@@ -81,6 +84,9 @@ const deleteProperties = (obj, properties) => {
 
 const generateValidationResponse = (data, desiredCount, userId, userName) => {
 	let response = [];
+	if (!data || data.length == 0) {
+		return response;
+	}
 	let randomItems = data.slice(0, desiredCount);
 	const itemLength = randomItems.length;
 	let i = 0;
