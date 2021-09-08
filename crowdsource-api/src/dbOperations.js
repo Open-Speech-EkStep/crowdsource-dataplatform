@@ -172,7 +172,7 @@ const updateAndGetMedia = async (req, res) => {
         res.status(200).send({ data: cacheResponse });
         return;
     }
-
+    console.log("from db")
     const media = getMediaBasedOnAge(
         ageGroup,
         userId,
