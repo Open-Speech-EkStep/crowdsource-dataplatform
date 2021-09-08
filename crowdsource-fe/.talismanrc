@@ -8,7 +8,7 @@ fileignoreconfig:
   - filename: src/hooks/useFetch/useFetch.ts
     checksum: 3bda080ff94e4ef9ad80b4e21acad53c13b833bbcb6bf1f7a4f7700168737239
   - filename: src/hooks/useFetch/useSubmit.ts
-    checksum: d3d2b269d268de859464903b64714176ab5c838d8a7a28e152d48b80a35c4d52
+    checksum: 523b8c84fca8e37860a17cb210f8a6aee107eff586cb53d47195cd6d2971a874
   - filename: src/hooks/useFetch/__tests__/useFetch.test.ts
     checksum: 3ae9bc10f648ad66d882b2c464df1a3d1658aafcccdad4a28c03d03f0ad9b2b0
   - filename: src/hooks/useFetch/__tests__/useSubmit.test.ts
