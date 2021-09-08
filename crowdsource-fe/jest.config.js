@@ -7,6 +7,7 @@ module.exports = {
     '!src/**/index.{js,jsx,ts,tsx}',
     '!src/**/*.vr.{js,jsx,ts,tsx}',
     '!src/utils/testUtils.tsx',
+    '!src/pages/_document.page.tsx',
   ],
   coverageThreshold: {
     global: {
