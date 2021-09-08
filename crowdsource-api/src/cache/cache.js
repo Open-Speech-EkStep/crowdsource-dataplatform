@@ -41,21 +41,21 @@ distributeRedisdLock.on('clientError', function (err) {
 });
 
 const setWithLock = async (key, db, query, params, callback) => {
-    console.log("waiting for lock")
+    console.log(`waiting for lock ${key}`)
     const lockTimeOut = Math.floor(Number.MAX_SAFE_INTEGER / 10);
     let lock = await distributeRedisdLock.acquire(`lock:${key}`, lockTimeOut);
-    console.log("lock acquired")
+    console.log(`lock acquired ${key}`)
     try {
-        console.log("checking status")
+        console.log(`checking status ${key}`)
         const cacheStatus = await getAsync(`${key}_status`);
         console.log(cacheStatus);
         if (cacheStatus === 'done' || cacheStatus === 'in progress') {
             await lock.unlock();
-            console.log("returning")
+            console.log(`returning ${key}`)
             return;
         }
         await setAsync(`${key}_status`, 'in progress', expiry);
-        console.log("status set")
+        console.log(`status set ${key}`)
         let data = await db.any(query, params);
 
         console.log("cacheLength", data.length);
@@ -63,7 +63,7 @@ const setWithLock = async (key, db, query, params, callback) => {
             data = callback(data);
         await setAsync(`${key}`, JSON.stringify(data), expiry);
         await setAsync(`${key}_status`, 'done', expiry);
-        console.log("lock released")
+        console.log(`lock released ${key}`)
         await lock.unlock();
     }
     catch (err) {
