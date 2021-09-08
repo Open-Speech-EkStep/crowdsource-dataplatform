@@ -1,7 +1,15 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import type { DocumentContext } from 'next/document';
+import { withRouter } from 'next/router';
+import type { NextRouter } from 'next/router';
 
-class MyDocument extends Document {
+interface WithRouterProps {
+  router: NextRouter;
+}
+
+interface MyDocumentProps extends WithRouterProps {}
+
+class MyDocument extends Document<MyDocumentProps> {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps };
@@ -9,7 +17,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang={this.props.locale}>
         <Head>
           <link
             rel="preload"
@@ -33,4 +41,4 @@ class MyDocument extends Document {
   }
 }
 
-export default MyDocument;
+export default withRouter(MyDocument);
