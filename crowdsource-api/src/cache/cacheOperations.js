@@ -53,12 +53,15 @@ const generateResponse = (data, desiredCount, userId, userName) => {
 }
 
 const sortAndFilterValidationData = (data) => {
-	data = data.filter(d => d.validation_count != undefined && d.validation_count < validation_count);
-	data.sort(function (a, b) {
-		return a.validation_count - b.validation_count;
-	})
-		.reverse();
-	return data;
+	if (data && data.length > 0) {
+		data = data.filter(d => d.validation_count != undefined && d.validation_count < validation_count);
+		data.sort(function (a, b) {
+			return a.validation_count - b.validation_count;
+		})
+			.reverse();
+		return data;
+	}
+	return [];
 }
 
 const userIncludedIn = (property, userInfo) => {
@@ -195,9 +198,8 @@ const setValidationDataForCaching = async (db, type, language, toLanguage) => {
 			db,
 			query,
 			[type, language, toLanguage, batchSize],
-			(data) => {
-				sortAndFilterValidationData(data)
-			});
+			(data) => sortAndFilterValidationData(data)
+			);
 
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)
