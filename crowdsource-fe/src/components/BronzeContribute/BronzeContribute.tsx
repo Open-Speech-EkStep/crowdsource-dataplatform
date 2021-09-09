@@ -16,7 +16,7 @@ const BronzeContribute = () => {
   const initiatives = ['suno', 'bolo', 'likho', 'dekho'];
 
   return (
-    <div className={`${styles.root} text-center text-md-start`}>
+    <div data-testid="BronzeContribute" className={`${styles.root} text-center text-md-start`}>
       <div className="p-3 py-md-5 px-md-10">
         <Row>
           <Col xs="12" md="2">
@@ -36,11 +36,12 @@ const BronzeContribute = () => {
               {initiatives.map(initiative => {
                 return (
                   <Link href={routePaths[`${initiative}IndiaHome`]} key={initiative}>
-                    <button
+                    <a
+                      data-testid={`${initiative}Home`}
                       className={`${styles.link} d-flex align-items-center justify-content-center text-uppercase`}
                     >
                       {t(`${initiative}`)} {t('india')}
-                    </button>
+                    </a>
                   </Link>
                 );
               })}

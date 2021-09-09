@@ -68,6 +68,10 @@
   line-height: 1.5rem;
   max-width: 17.5rem;
 
+  &:hover {
+    color: var(--text-white);
+  }
+
   @include media-breakpoint-up(md) {
     border-radius: 3rem;
     font-size: 1.125rem;

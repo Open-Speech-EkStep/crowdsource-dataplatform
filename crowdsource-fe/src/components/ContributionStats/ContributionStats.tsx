@@ -41,7 +41,7 @@ const ContributionStats = () => {
   });
 
   return (
-    <div>
+    <div data-testid="ContributionStats">
       <header className="d-flex flex-column align-items-center flex-md-row justify-content-md-between">
         <h1 className={`${styles.header} mb-0`}>{t('totalParticipation')}</h1>
       </header>

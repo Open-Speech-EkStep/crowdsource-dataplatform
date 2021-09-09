@@ -41,6 +41,9 @@ $form-select-focus-box-shadow: 0 0 0 0.2rem rgb(20 39 69 / 50%);
 $form-check-input-checked-bg-color: var(--primary-color);
 $form-check-input-checked-border-color: var(--primary-color);
 $form-check-input-focus-box-shadow: 0 0 0 0.2rem rgb(20 39 69 / 50%);
+$navbar-light-color: var(--primary-color);
+$navbar-light-hover-color: var(--primary-color);
+
 /****************************/
 
 // TODO: Please optimize this before going to production. Pick only those components which are needed.

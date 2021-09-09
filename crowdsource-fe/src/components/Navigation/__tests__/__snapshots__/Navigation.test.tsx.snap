@@ -25,7 +25,7 @@ exports[`Navigation should render the component and matches it against stored sn
       class="collapse navbar-collapse collapse"
     >
       <div
-        class="navbar-nav"
+        class="root navbar-nav"
       >
         <a
           class="link nav-link"

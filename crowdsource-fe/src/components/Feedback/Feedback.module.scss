@@ -2,13 +2,18 @@
   background-color: #fff;
   border: 1px solid rgba(15, 39, 73, 0.32);
   border-radius: 50%;
-  bottom: 1.5rem;
+  bottom: 1rem;
   box-sizing: border-box;
   filter: drop-shadow(0 0.25rem 0.75rem rgba(15, 39, 73, 0.32));
   height: 3.75rem;
   position: fixed;
-  right: 1.5rem;
+  right: 1rem;
   width: 3.75rem;
+
+  @include media-breakpoint-up(lg) {
+    bottom: 6.875rem;
+    right: 2rem;
+  }
 
   &:hover,
   &:focus {

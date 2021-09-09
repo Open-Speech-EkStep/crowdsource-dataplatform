@@ -72,7 +72,7 @@ const InitiativesCarousel = () => {
   }, []);
 
   return (
-    <div className={`${styles.root} mx-auto`}>
+    <div data-testid="InitiativesCarousel" className={`${styles.root} mx-auto`}>
       <div className={styles.bottomShadow}>
         <TriColorBackground>
           <div className={`${styles.initiativesCarousel} slickCarousel pt-6 pb-3 py-md-8`}>
@@ -106,9 +106,12 @@ const InitiativesCarousel = () => {
                       </Col>
                       <Col className="mt-3 d-flex justify-content-center justify-content-md-start">
                         <Link href={routePaths[`${initiative}IndiaHome`]}>
-                          <button className={`${styles.startParticipatingBtn} w-100`}>
+                          <a
+                            data-testid="StartParticipating"
+                            className={`${styles.startParticipatingBtn} d-flex justify-content-center align-items-center w-100`}
+                          >
                             {t('startParticipating')}
-                          </button>
+                          </a>
                         </Link>
                       </Col>
                     </Row>

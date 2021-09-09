@@ -13,7 +13,7 @@ const LanguageSwitcher = () => {
   const { t } = useTranslation();
 
   return (
-    <Dropdown id="languageSwitcher" className={styles.root} align="end">
+    <Dropdown data-testid="languageSwitcher" id="languageSwitcher" className={styles.root} align="end">
       <Dropdown.Toggle
         id="languageSwitcherToggle"
         variant="light"

@@ -4,6 +4,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
 <DocumentFragment>
   <div
     class="root mx-auto"
+    data-testid="InitiativesCarousel"
   >
     <div
       class="bottomShadow"
@@ -277,11 +278,13 @@ exports[`InitiativesCarousel should render the component and matches it against 
                               <div
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
-                                <button
-                                  class="startParticipatingBtn w-100"
+                                <a
+                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  data-testid="StartParticipating"
+                                  href="/dekhoIndia/home.html"
                                 >
                                   startParticipating
-                                </button>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -433,11 +436,13 @@ exports[`InitiativesCarousel should render the component and matches it against 
                               <div
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
-                                <button
-                                  class="startParticipatingBtn w-100"
+                                <a
+                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  data-testid="StartParticipating"
+                                  href="/sunoIndia/home.html"
                                 >
                                   startParticipating
-                                </button>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -589,11 +594,13 @@ exports[`InitiativesCarousel should render the component and matches it against 
                               <div
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
-                                <button
-                                  class="startParticipatingBtn w-100"
+                                <a
+                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  data-testid="StartParticipating"
+                                  href="/boloIndia/home.html"
                                 >
                                   startParticipating
-                                </button>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -745,11 +752,13 @@ exports[`InitiativesCarousel should render the component and matches it against 
                               <div
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
-                                <button
-                                  class="startParticipatingBtn w-100"
+                                <a
+                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  data-testid="StartParticipating"
+                                  href="/likhoIndia/home.html"
                                 >
                                   startParticipating
-                                </button>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -901,11 +910,13 @@ exports[`InitiativesCarousel should render the component and matches it against 
                               <div
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
-                                <button
-                                  class="startParticipatingBtn w-100"
+                                <a
+                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  data-testid="StartParticipating"
+                                  href="/dekhoIndia/home.html"
                                 >
                                   startParticipating
-                                </button>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -1057,11 +1068,13 @@ exports[`InitiativesCarousel should render the component and matches it against 
                               <div
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
-                                <button
-                                  class="startParticipatingBtn w-100"
+                                <a
+                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  data-testid="StartParticipating"
+                                  href="/sunoIndia/home.html"
                                 >
                                   startParticipating
-                                </button>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -1213,11 +1226,13 @@ exports[`InitiativesCarousel should render the component and matches it against 
                               <div
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
-                                <button
-                                  class="startParticipatingBtn w-100"
+                                <a
+                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  data-testid="StartParticipating"
+                                  href="/boloIndia/home.html"
                                 >
                                   startParticipating
-                                </button>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -1369,11 +1384,13 @@ exports[`InitiativesCarousel should render the component and matches it against 
                               <div
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
-                                <button
-                                  class="startParticipatingBtn w-100"
+                                <a
+                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  data-testid="StartParticipating"
+                                  href="/likhoIndia/home.html"
                                 >
                                   startParticipating
-                                </button>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -1525,11 +1542,13 @@ exports[`InitiativesCarousel should render the component and matches it against 
                               <div
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
-                                <button
-                                  class="startParticipatingBtn w-100"
+                                <a
+                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  data-testid="StartParticipating"
+                                  href="/dekhoIndia/home.html"
                                 >
                                   startParticipating
-                                </button>
+                                </a>
                               </div>
                             </div>
                           </div>

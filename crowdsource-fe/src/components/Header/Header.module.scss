@@ -41,7 +41,7 @@
 .sep {
   display: none;
 
-  @include media-breakpoint-up(xl) {
+  @include media-breakpoint-up(lg) {
     align-self: center;
     border: 1px solid #0f2749;
     display: block;

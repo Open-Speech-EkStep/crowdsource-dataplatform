@@ -45,9 +45,10 @@
   background-color: #0f2749;
   border: 0;
   border-radius: 1.5rem;
-  color: #fff;
+  color: var(--text-white);
   font-size: 1rem;
   font-weight: 700;
+  height: 2.5rem;
   line-height: 1.75rem;
   margin: 0.5rem;
   width: 9rem;
@@ -65,6 +66,10 @@
     line-height: 2rem;
     margin: 0 1.25rem;
     width: 11.25rem;
+  }
+
+  &:hover {
+    color: var(--text-white);
   }
 
   &:first-child {

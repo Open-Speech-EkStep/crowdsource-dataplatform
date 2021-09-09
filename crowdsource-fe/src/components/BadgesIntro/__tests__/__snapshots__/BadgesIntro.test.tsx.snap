@@ -4,6 +4,7 @@ exports[`BadgesIntro should render the component and matches it against stored s
 <DocumentFragment>
   <div
     class="row"
+    data-testid="BadgesIntro"
   >
     <div
       class="col-lg-5 col-12"

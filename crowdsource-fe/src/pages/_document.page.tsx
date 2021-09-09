@@ -21,7 +21,7 @@ class MyDocument extends Document<MyDocumentProps> {
         <Head>
           <link
             rel="preload"
-            href="https://fonts.googleapis.com/css?family=Rowdies:700&display=swap"
+            href="https://fonts.googleapis.com/css?family=Rowdies:400,700&display=swap"
             as="style"
           />
           <link
@@ -29,7 +29,10 @@ class MyDocument extends Document<MyDocumentProps> {
             href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
             as="style"
           />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rowdies:700&display=swap" />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Rowdies:400,700&display=swap"
+          />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" />
         </Head>
         <body>

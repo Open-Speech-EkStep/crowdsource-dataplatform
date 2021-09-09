@@ -33,7 +33,7 @@ exports[`Header should render the component and matches it against stored snapsh
           class="collapse navbar-collapse collapse"
         >
           <div
-            class="navbar-nav"
+            class="root navbar-nav"
           >
             <a
               class="link nav-link"
@@ -157,6 +157,7 @@ exports[`Header should render the component and matches it against stored snapsh
     >
       <div
         class="root dropdown"
+        data-testid="languageSwitcher"
         id="languageSwitcher"
       >
         <button

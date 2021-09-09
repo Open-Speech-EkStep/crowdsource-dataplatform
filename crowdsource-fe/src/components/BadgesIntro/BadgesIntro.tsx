@@ -15,7 +15,7 @@ const BadgesIntro = () => {
   const { locale: currentLocale } = useRouter();
 
   return (
-    <Row>
+    <Row data-testid="BadgesIntro">
       <Col xs="12" lg="5">
         <h1 className={`${styles.header} text-center text-md-start`}>{t('badgesIntroHeading')}</h1>
         <Link href={routePaths.badges}>

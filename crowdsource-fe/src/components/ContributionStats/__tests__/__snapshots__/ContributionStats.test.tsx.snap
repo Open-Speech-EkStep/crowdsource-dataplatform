@@ -2,7 +2,9 @@
 
 exports[`ContributionStats should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
-  <div>
+  <div
+    data-testid="ContributionStats"
+  >
     <header
       class="d-flex flex-column align-items-center flex-md-row justify-content-md-between"
     >
