@@ -1,30 +1,8 @@
+threshold: medium
 fileignoreconfig:
   - filename: package-lock.json
     checksum:
     ignore_detectors: [filename, filesize, filecontent]
 
-  - filename: src/constants/routePaths.ts
-    checksum: 651392ecf7b7e59b9315793c70db7d10faa74e33c01c59cd7e532109c6579d91
-  - filename: src/hooks/useFetch/useFetch.ts
-    checksum: 3bda080ff94e4ef9ad80b4e21acad53c13b833bbcb6bf1f7a4f7700168737239
-  - filename: src/hooks/useFetch/useSubmit.ts
-    checksum: 523b8c84fca8e37860a17cb210f8a6aee107eff586cb53d47195cd6d2971a874
-  - filename: src/hooks/useFetch/__tests__/useFetch.test.ts
-    checksum: 3ae9bc10f648ad66d882b2c464df1a3d1658aafcccdad4a28c03d03f0ad9b2b0
-  - filename: src/hooks/useFetch/__tests__/useSubmit.test.ts
-    checksum: 28889db88825266668120b2c41ad08a82a0f4e47b04c781e3671b040ef22a5ef
   - filename: src/components/Layout/Layout.tsx
     checksum: 4fda9de4521e082085ada821a2d9e8efd5cd45dbf0e3d481b6c17a2a8bf188e1
-  - filename: src/components/Stats/Stats.tsx
-    checksum: 959c3f0d37e9c9cafc713a53c61704c65b6f3073c0b3b36541b9ebafde280a7c
-  - filename: src/components/FeedbackForm/FeedbackForm.tsx
-    checksum: c6af740395bbab0eccaec7b7fba46d6becef8cdac1e85a2c37d50774563e214f
-  - filename: src/components/BronzeContribute/BronzeContribute.tsx
-    checksum: d0d400f1f4c6cde2b5301455e7c205a7bb579b81c8879feabb4e547867002f72
-  - filename: src/components/BadgesIntro/BadgesIntro.tsx
-    checksum: dfc54662a74c4d5fe859e64ef38cde81d376942550f5a77aa1cb1c65892be128
-  - filename: src/components/InitiativesCarousel/InitiativesCarousel.tsx
-    checksum: 86c7242a6308d54c8e4c0934ee65f793b7b02c8f0e67a64a4e40134a5ee31863
-  - filename: src/components/LanguageSwitcher/LanguageSwitcher.tsx
-    checksum: f1d80714f5fb263724f3f86fd2f1d81349b7a802aa2e61d2fb8b31743408fed4
-

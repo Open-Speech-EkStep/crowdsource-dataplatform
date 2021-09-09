@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Form from 'react-bootstrap/Form';
@@ -8,11 +8,13 @@ import { useSubmit } from 'hooks/useFetch';
 
 import styles from './FeedbackForm.module.scss';
 
-const FeedbackForm = ({ hideModal }: { hideModal: () => void }) => {
-  const { t } = useTranslation();
-  const opinions = [1, 2, 3, 4, 5];
+const opinions = [1, 2, 3, 4, 5];
 
-  const { isLoading, submit } = useSubmit(apiPaths.feedback);
+const FeedbackForm = ({ onSuccess: showThankyou }: { onSuccess: () => void }) => {
+  const { t } = useTranslation();
+  const showThankyouRef = useRef(showThankyou);
+
+  const { isLoading, data, submit } = useSubmit(apiPaths.feedback);
 
   const [formData, setFormData] = useState({
     opinion_rating: undefined,
@@ -34,11 +36,19 @@ const FeedbackForm = ({ hideModal }: { hideModal: () => void }) => {
     e.preventDefault();
 
     submit(JSON.stringify(formData));
-
-    hideModal();
   };
 
-  const isButtonEnabled = !isLoading && formData.opinion_rating;
+  useEffect(() => {
+    showThankyouRef.current = showThankyou;
+  }, [showThankyou]);
+
+  useEffect(() => {
+    if (data) {
+      showThankyouRef.current();
+    }
+  }, [data]);
+
+  const isButtonEnabled = !isLoading && formData.opinion_rating && !data;
 
   return (
     <Form onSubmit={handleSubmit} className={`${styles.root} py-2`}>

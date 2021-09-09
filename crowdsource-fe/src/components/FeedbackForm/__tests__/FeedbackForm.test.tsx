@@ -7,7 +7,7 @@ describe('FeedbackForm', () => {
     fetchMock.resetMocks();
   });
 
-  const setup = () => render(<FeedbackForm hideModal={() => {}} />);
+  const setup = () => render(<FeedbackForm onSuccess={() => {}} />);
 
   verifyAxeTest(setup());
 
@@ -59,5 +59,7 @@ describe('FeedbackForm', () => {
         }),
       });
     });
+
+    expect(screen.getByRole('button', { name: /submit/i })).toBeDisabled();
   });
 });

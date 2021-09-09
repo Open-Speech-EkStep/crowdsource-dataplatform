@@ -7,10 +7,11 @@ import styles from './FeedbackModal.module.scss';
 
 interface FeedbackModalProps {
   onHide: () => void;
+  onSuccess: () => void;
   show: Boolean;
 }
 
-const FeedbackModal = (props: FeedbackModalProps) => {
+const FeedbackModal = ({ onSuccess, ...props }: FeedbackModalProps) => {
   const { t } = useTranslation();
 
   return (
@@ -30,7 +31,7 @@ const FeedbackModal = (props: FeedbackModalProps) => {
       </Modal.Header>
       <Modal.Body>
         <div className={styles.form}>
-          <FeedbackForm hideModal={props.onHide} />
+          <FeedbackForm onSuccess={onSuccess} />
         </div>
       </Modal.Body>
       <Modal.Footer>

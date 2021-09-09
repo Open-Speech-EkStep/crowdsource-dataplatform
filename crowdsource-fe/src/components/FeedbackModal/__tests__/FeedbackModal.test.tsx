@@ -3,7 +3,7 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import FeedbackModal from '../FeedbackModal';
 
 describe('FeedbackModal', () => {
-  const setup = () => render(<FeedbackModal show={false} onHide={() => {}} />);
+  const setup = () => render(<FeedbackModal show={false} onHide={() => {}} onSuccess={() => {}} />);
 
   verifyAxeTest(setup());
 

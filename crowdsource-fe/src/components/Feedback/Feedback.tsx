@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Button from 'react-bootstrap/Button';
 
+import FeedbackSuccessModal from 'components/FeedbackSuccessModal';
+
 import styles from './Feedback.module.scss';
 
 const FeedbackModal = dynamic(() => import('components/FeedbackModal'), { ssr: false });
@@ -12,20 +14,30 @@ const FeedbackModal = dynamic(() => import('components/FeedbackModal'), { ssr: f
 const Feedback = () => {
   const { t } = useTranslation();
   const [modalShow, setModalShow] = useState(false);
+  const [feedbackSuccess, setFeedbackSuccess] = useState(false);
 
-  const showModalFn = () => {
-    return () => setModalShow(true);
+  const showModal = () => setModalShow(true);
+  const hideModal = () => setModalShow(false);
+
+  const showFeedbackSuccess = () => {
+    hideModal();
+    setFeedbackSuccess(true);
+  };
+
+  const hideFeedbackSuccess = () => {
+    setFeedbackSuccess(false);
   };
 
   return (
     <Fragment>
       <Button
-        onClick={showModalFn()}
+        onClick={showModal}
         className={`${styles.root} d-inline-flex justify-content-center align-items-center`}
       >
         <Image src="/images/feedback-icon.svg" width="32" height="32" alt={t('feedbackIconAlt')} />
       </Button>
-      <FeedbackModal show={modalShow} onHide={() => setModalShow(false)} />
+      <FeedbackModal show={modalShow} onHide={hideModal} onSuccess={showFeedbackSuccess} />
+      <FeedbackSuccessModal show={feedbackSuccess} onHide={hideFeedbackSuccess} />
     </Fragment>
   );
 };

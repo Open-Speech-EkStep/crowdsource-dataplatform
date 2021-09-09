@@ -1,3 +1,4 @@
+import '__fixtures__/mockComponentsWithSideEffects';
 import { render, screen, verifyAxeTest } from 'utils/testUtils';
 
 import App from '../_app.page';
@@ -21,5 +22,11 @@ describe('App', () => {
     setup();
 
     expect(screen.getByText('Hello World')).toBeInTheDocument();
+  });
+
+  it('should render the Feedback component', () => {
+    setup();
+
+    expect(screen.getByText('Feedback')).toBeInTheDocument();
   });
 });
