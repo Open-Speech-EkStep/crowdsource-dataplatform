@@ -197,13 +197,13 @@ const getContributionList = async function (req, res) {
     const type = req.params.type;
     const userId = req.cookies.userId;
     const userName = req.query.username || '';
-    const contributorId = await getContributorId(userId, userName);
     const cacheResponse = await cacheOperation.getDataForValidation(type, fromLanguage, toLanguage, userId, userName,db);
     if (cacheResponse) {
         console.log("from cache")
         res.status(200).send({ data: cacheResponse });
         return;
     }
+    const contributorId = await getContributorId(userId, userName);
     const query = type == 'parallel' ? getContributionListForParallel : getContributionListQuery
     db.any(query, [contributorId, type, fromLanguage, toLanguage])
         .then((response) => {
