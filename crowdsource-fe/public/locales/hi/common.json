@@ -53,6 +53,31 @@
   "mayBe": "शायद",
   "submit": "सबमिट करें",
   "typeHere": "यहां टाइप करें...",
+  "changeUser": "उपयोगकर्ता बदलें",
+  "myBadges": "मेरे बैज",
+
+  "changeUserModalHeading": "उपयोगकर्ता की जानकारी",
+  "changeUserModalSubHeading": "सभी फ़ील्ड वैकल्पिक हैं, लेकिन आप अपनी जनसांख्यिकीय जानकारी देकर अपने डेटासेट के योगदान को बढ़ा सकते हैं।",
+  "name": "नाम",
+  "enterUsername": "उपयोगकर्ता का नाम लिखें",
+  "userNameHint": "केवल 12 वर्ण संभव (उदाहरण: name.surname, name_surname12 आदि)",
+  "motherTongue": "मातृभाषा",
+  "selectMotherTongue": "मातृभाषा चुनें",
+  "ageGroup": "आयु वर्ग",
+  "selectAgeGroup": "आयु वर्ग चुनें",
+
+  "kidAgeGroup": "10 वर्ष तक (बच्चे)",
+  "youthAgeGroup": "10 - 30 वर्ष (युवा)",
+  "adultAgeGroup": "30 - 60 वर्ष (वयस्क)",
+  "seniorAgeGroup": "60+ वर्ष (वरिष्ठ)",
+
+  "gender": "लिंग",
+  "male": "पुरुष",
+  "female": "महिला",
+  "others": "अन्य",
+  "termsConditionsText": "आगे बढ़ने का मतलब, आप इन <a href=\"./terms-and-conditions.html\" target=\"_blank\"> नियम और शर्तों </a> से सहमत हैं",
+  "Done": "समाप्त",
+
   "404Title": "यह पृष्ठ नहीं मिला",
 
   "bhashiniLogoAlt": "Bhashini Logo",
