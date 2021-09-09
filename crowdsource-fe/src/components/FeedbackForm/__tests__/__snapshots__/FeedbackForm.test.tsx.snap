@@ -218,7 +218,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
         <input
           class="form-check-input"
           id="feedbackFormYesCheckbox"
-          name="recommend"
+          name="recommended"
           type="radio"
           value="Yes"
         />

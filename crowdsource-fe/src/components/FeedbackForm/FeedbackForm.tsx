@@ -15,12 +15,12 @@ const FeedbackForm = ({ hideModal }: { hideModal: () => void }) => {
   const { isLoading, submit } = useSubmit(apiPaths.feedback);
 
   const [formData, setFormData] = useState({
-    opinion_rating: 0,
+    opinion_rating: undefined,
     category: '',
     feedback: '',
-    recommend: '',
+    recommended: '',
     revisit: '',
-    email: 'test',
+    email: 'Anonymous',
     language: 'English',
     module: 'm1',
     target_page: 'p1',
@@ -38,7 +38,7 @@ const FeedbackForm = ({ hideModal }: { hideModal: () => void }) => {
     hideModal();
   };
 
-  const isButtonEnabled = !isLoading && formData.opinion_rating > 0;
+  const isButtonEnabled = !isLoading && formData.opinion_rating;
 
   return (
     <Form onSubmit={handleSubmit} className={`${styles.root} py-2`}>
@@ -108,7 +108,7 @@ const FeedbackForm = ({ hideModal }: { hideModal: () => void }) => {
           type="radio"
           label={t('yes')}
           value="Yes"
-          name="recommend"
+          name="recommended"
           id="feedbackFormYesCheckbox"
           className={`${styles.radio} me-8 mb-0`}
           onChange={handleChange}
