@@ -85,6 +85,8 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
 
     chart.data = chartData;
 
+    console.log(chartData);
+
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
     dateAxis.renderer.minGridDistance = 10;
     dateAxis.renderer.grid.template.disabled = true;
