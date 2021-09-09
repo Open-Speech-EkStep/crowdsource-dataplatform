@@ -1,6 +1,6 @@
 const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
 const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE ,CURRENT_MODULE,MODULE, DEFAULT_CON_LANGUAGE} = require("./constants");
-const { base_url, context_root } = require('./env-api');
+const { context_root } = require('./env-api');
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');
@@ -78,7 +78,7 @@ $(document).ready(function () {
         const currentLocale = splitValues.filter(value => allLocales.includes(value))[0] || 'en';
         sessionStorage.setItem('i18n', currentLocale);
     }
-    $("#bhashadaan_logo").attr('href', base_url);
+    // $("#bhashadaan_logo").attr('href', base_url);
     registerEvents();
 })
 

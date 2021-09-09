@@ -1,6 +1,6 @@
 const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
 const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE } = require("./constants");
-const { base_url,context_root } = require('./env-api');
+const { context_root } = require('./env-api');
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');
@@ -60,7 +60,7 @@ function redirectToLocalisedPage() {
 }
 
 $(document).ready(function () {
-    $("#bhashadaan_logo").attr('href', base_url);
+    // $("#bhashadaan_logo").attr('href', base_url);
     registerEvents();
 })
 

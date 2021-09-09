@@ -6,14 +6,14 @@
         <div class="row m-0 header-logo-size pl-lg-0 pl-md-0">
             <button class="navbar-toggler px-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon" style="height:18px;width:18px"></span></button>
             <div class="d-flex align-items-center">
-                <a class="logo-text" href="/">
+                <a class="logo-text" href="<%- `/${locale}/home` %>">
                     <h2 class="mb-0" id="bhasini_logo">
                         <img src="<%- `/img/${locale}-logo.svg` %>" class="d-none d-md-block d-lg-block" alt="Bhaashini" width="200px" height="65px">
                         <img src="<%- `/img/${locale}-logo-sm.svg` %>" class="d-block d-sm-block d-md-none d-lg-none mobile-logo" alt="Bhaashini" width="48" height="48">
                     </h2>
                 </a>
                 <div class="vertical-line ml-1 ml-lg-0"></div>
-                <%- include ./bhasadaanLogoText.ejs %>
+                <%- include('./bhasadaanLogoText.ejs',{url:`/${locale}/home`}) %>
                 <div id="logo_separator" class="ml-3 mr-0"></div>
             </div>
         </div>
