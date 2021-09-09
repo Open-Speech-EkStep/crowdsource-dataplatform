@@ -1,15 +1,29 @@
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { screen, render, verifyAxeTest, fireEvent } from 'utils/testUtils';
 
 import Feedback from '../Feedback';
 
 describe('Feedback', () => {
-  const setup = () => render(<Feedback />);
+  const setup = async () => {
+    const result = render(<Feedback />);
+    await screen.findByRole('button', { name: 'feedbackIconAlt' });
+    return result;
+  };
 
-  verifyAxeTest(setup());
+  async () => {
+    verifyAxeTest(await setup());
+  };
 
-  it('should render the component and matches it against stored snapshot', () => {
-    const { asFragment } = setup();
+  it('should render the component and matches it against stored snapshot', async () => {
+    const { asFragment } = await setup();
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('should open feedback if button clicked', async () => {
+    await setup();
+
+    fireEvent.click(screen.getByRole('button', { name: 'feedbackIconAlt' }));
+
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 });

@@ -23,7 +23,6 @@ const { initializeFeedbackModal } = require('../common/feedback');
 const { setDataSource } = require('../common/sourceInfo');
 const sunoCountKey = 'sunoCount';
 const currentIndexKey = 'sunoCurrentIndex';
-const sentencesKey = 'sunoSentencesKey';
 let localeStrings;
 window.sunoIndia = {};
 
@@ -213,9 +212,6 @@ function getNextSentence() {
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
   } else {
-    const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
-    Object.assign(sentencesObj, {sentences: []});
-    localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
     resetValidation();
     // showThankYou();
@@ -511,7 +507,6 @@ function executeOnLoad() {
   // toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
-  // const $validationInstructionModal = $("#validation-instruction-modal");
   const $loader = $('#loader');
   const $pageContent = $('#page-content');
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -532,14 +527,8 @@ function executeOnLoad() {
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
-    const localSentences = localStorage.getItem(sentencesKey);
-    const localSentencesParsed = JSON.parse(localSentences);
 
     setPageContentHeight();
-    // $("#instructions_close_btn").on("click", function () {
-    //   $validationInstructionModal.addClass("d-none");
-    //   setFooterPosition();
-    // })
     if (!localSpeakerDataParsed) {
       location.href = './home.html';
       return;
@@ -547,18 +536,7 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName)
     onChangeUser('./record.html',MODULE.suno.value);
     onOpenUserDropDown();
-    const isExistingUser = localSentencesParsed &&
-      localSentencesParsed.userName === localSpeakerDataParsed.userName
-      &&
-      localSentencesParsed.language === localSpeakerDataParsed.language;
 
-    if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === contributionLanguage) {
-      $loader.hide();
-      $pageContent.removeClass('d-none');
-      setFooterPosition();
-      sunoIndia.sentences = localSentencesParsed.sentences;
-      initialize();
-    } else {
       localStorage.setItem("contribution_audioPlayed",false);
       localStorage.removeItem(currentIndexKey);
       const type = 'asr';
@@ -589,33 +567,18 @@ function executeOnLoad() {
           sunoIndia.sentences = sentenceData.data ? sentenceData.data : [];
           localStorage.setItem(sunoCountKey, sunoIndia.sentences.length);
           $loader.hide();
-          localStorage.setItem(
-            sentencesKey,
-            JSON.stringify({
-              userName: localSpeakerDataParsed.userName,
-              sentences: sunoIndia.sentences,
-              language: localSpeakerDataParsed.language,
-            })
-          );
           if (sunoIndia.sentences.length === 0) {
             showNoSentencesMessage();
             return;
           }
-          if (!isExistingUser) {
-            //$instructionModal.modal('show');
-            // $validationInstructionModal.removeClass("d-none");
-            setFooterPosition();
-            // toggleFooterPosition();
-          }
+          
           $pageContent.removeClass('d-none');
-
           setFooterPosition();
           initialize();
         })
         .then(() => {
           $loader.hide();
         });
-    }
   } catch (err) {
     console.log(err);
   }

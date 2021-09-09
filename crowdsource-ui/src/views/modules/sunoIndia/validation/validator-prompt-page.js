@@ -28,7 +28,6 @@ const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
 const currentIndexKey = 'sunoValidationCurrentIndex';
-const sentencesKey = 'sunoValidatorSentencesKey';
 const sunoValidatorCountKey = 'sunoValidatorCount';
 
 window.sunoIndiaValidator = {};
@@ -238,9 +237,6 @@ function getNextSentence() {
     setSentenceLabel(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
-    const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
-    Object.assign(sentencesObj, {sentences: []});
-    localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
     resetValidation();
     // showThankYou();
@@ -618,8 +614,6 @@ const executeOnLoad = function () {
 
   const localSpeakerData = localStorage.getItem(speakerDetailsKey);
   const localSpeakerDataParsed = JSON.parse(localSpeakerData);
-  const localSentences = localStorage.getItem(sentencesKey);
-  const localSentencesParsed = JSON.parse(localSentences);
   setPageContentHeight();
 
   if (!localSpeakerDataParsed) {
@@ -631,16 +625,6 @@ const executeOnLoad = function () {
   onChangeUser('./validator-page.html',MODULE.suno.value);
   onOpenUserDropDown();
 
-  const isExistingUser = localSentencesParsed &&
-    localSentencesParsed.userName === localSpeakerDataParsed.userName
-    &&
-    localSentencesParsed.language === localSpeakerDataParsed.language;
-
-  if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === language) {
-    setFooterPosition();
-    sunoIndiaValidator.sentences = localSentencesParsed.sentences;
-    initializeComponent();
-  } else {
     localStorage.setItem("validation_audioPlayed", false);
     localStorage.removeItem(currentIndexKey);
     const type = 'asr';
@@ -662,14 +646,6 @@ const executeOnLoad = function () {
     }).then((result) => {
       sunoIndiaValidator.sentences = result.data ? result.data : [];
       localStorage.setItem(sunoValidatorCountKey, sunoIndiaValidator.sentences.length);
-      localStorage.setItem(
-        sentencesKey,
-        JSON.stringify({
-          userName: localSpeakerDataParsed.userName,
-          sentences: sunoIndiaValidator.sentences,
-          language: localSpeakerDataParsed.language,
-        })
-      );
       if (sunoIndiaValidator.sentences.length === 0) {
         showNoSentencesMessage();
         return;
@@ -680,7 +656,6 @@ const executeOnLoad = function () {
       initializeComponent();
     });
   }
-}
 
 $(document).ready(() => {
   getLocaleString().then(() => {

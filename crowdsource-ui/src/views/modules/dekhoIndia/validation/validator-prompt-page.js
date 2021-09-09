@@ -22,7 +22,6 @@ let currentIndex ;
 let validationCount = 0;
 
 const currentIndexKey = 'dekhoValidatorCurrentIndex';
-const sentencesKey = 'dekhoValidatorSentencesKey';
 const dekhoValidatorCountKey = 'dekhoValidatorCount';
 
 function getValue(number, maxValue) {
@@ -98,9 +97,6 @@ function getNextSentence() {
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
   } else {
-    const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
-    Object.assign(sentencesObj, { sentences: [] });
-    localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
     // showThankYou();
     disableSkipButton();
@@ -430,8 +426,6 @@ const executeOnLoad = function () {
   getLocationInfo();
   const localSpeakerData = localStorage.getItem(speakerDetailsKey);
   const localSpeakerDataParsed = JSON.parse(localSpeakerData);
-  const localSentences = localStorage.getItem(sentencesKey);
-  const localSentencesParsed = JSON.parse(localSentences);
   setPageContentHeight();
 
   if (!localSpeakerDataParsed) {
@@ -441,16 +435,6 @@ const executeOnLoad = function () {
   showUserProfile(localSpeakerDataParsed.userName);
   onChangeUser('./validator-page.html',MODULE.dekho.value);
   onOpenUserDropDown();
-  const isExistingUser = localSentencesParsed &&
-    localSentencesParsed.userName === localSpeakerDataParsed.userName
-    &&
-    localSentencesParsed.language === localSpeakerDataParsed.language;
-
-  if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === language) {
-    setFooterPosition();
-    dekhoIndiaValidator.sentences = localSentencesParsed.sentences;
-    initializeComponent();
-  } else {
     localStorage.removeItem(currentIndexKey);
     const type = 'ocr';
     const toLanguage = '';
@@ -471,15 +455,6 @@ const executeOnLoad = function () {
     }).then(result => {
       dekhoIndiaValidator.sentences = result.data ? result.data : [];
       localStorage.setItem(dekhoValidatorCountKey, dekhoIndiaValidator.sentences.length);
-      localStorage.setItem(
-        sentencesKey,
-        JSON.stringify({
-          userName: localSpeakerDataParsed.userName,
-          sentences: dekhoIndiaValidator.sentences,
-          language: language,
-          toLanguage: ''
-        })
-      );
       if(dekhoIndiaValidator.sentences.length === 0){
         showNoSentencesMessage();
         return;
@@ -488,7 +463,6 @@ const executeOnLoad = function () {
 
       initializeComponent();
     });
-  }
 };
 
 $(document).ready(() => {

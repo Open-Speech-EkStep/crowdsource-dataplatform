@@ -1,3 +1,4 @@
+import LanguageSwitcher from 'components/LanguageSwitcher';
 import Logo from 'components/Logo';
 import Navigation from 'components/Navigation';
 
@@ -12,6 +13,9 @@ const Header = () => {
       <div className={styles.logo}>
         <Logo />
         <span className={styles.sep} />
+      </div>
+      <div className="d-flex order-3 ms-auto">
+        <LanguageSwitcher />
       </div>
     </header>
   );

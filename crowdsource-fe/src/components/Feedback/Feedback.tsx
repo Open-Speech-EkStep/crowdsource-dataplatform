@@ -1,12 +1,13 @@
 import { Fragment, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Button from 'react-bootstrap/Button';
 
-import FeedbackModal from 'components/FeedbackModal';
-
 import styles from './Feedback.module.scss';
+
+const FeedbackModal = dynamic(() => import('components/FeedbackModal'), { ssr: false });
 
 const Feedback = () => {
   const { t } = useTranslation();

@@ -3,10 +3,10 @@ const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
 const { showUserProfile,onOpenUserDropDown } = require('../../../build/js/common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
-const { setPageContentHeight, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording ,setFooterPosition, getDeviceInfo, getBrowserInfo, translate} = require('./utils');
+const { setPageContentHeight, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, translate} = require('./utils');
 const { cdn_url } = require('./env-api');
 const { onChangeUser } = require('./header');
-const { MODULE, CONTRIBUTION_LANGUAGE } = require('./constants');
+const { MODULE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
 const { showErrorPopup } = require('./common');
 const visualizer = new Visualizer();
@@ -16,7 +16,6 @@ const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
 const currentIndexKey = 'boloValidationCurrentIndex';
-const sentencesKey = 'boloValidatorSentencesKey';
 const boloValidatorCountKey = 'boloValidatorCount';
 
 window.boloIndiaValidator = {};
@@ -184,9 +183,6 @@ function getNextSentence() {
         setSentenceLabel(currentIndex);
         localStorage.setItem(currentIndexKey,currentIndex);
     } else {
-        const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
-        Object.assign(sentencesObj, { sentences: [] });
-        localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
         localStorage.setItem(currentIndexKey, currentIndex);
         resetValidation();
         setTimeout(showThankYou, 1000);
@@ -406,8 +402,6 @@ $(document).ready(() => {
 
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
-    const localSentences = localStorage.getItem(sentencesKey);
-    const localSentencesParsed = JSON.parse(localSentences);
 
   if (!localSpeakerDataParsed) {
     location.href = './home.html';
@@ -418,15 +412,6 @@ $(document).ready(() => {
   onChangeUser('./validator-page.html',MODULE.bolo.value);
     onOpenUserDropDown();
 
-  const isExistingUser = localSentencesParsed &&
-    localSentencesParsed.userName === localSpeakerDataParsed.userName
-    &&
-    localSentencesParsed.language === localSpeakerDataParsed.language;
-  if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language == language) {
-    setFooterPosition();
-    boloIndiaValidator.sentences = localSentencesParsed.sentences;
-    initializeComponent();
-  } else {
     localStorage.removeItem(currentIndexKey);
     const type = 'text';
     const toLanguage = ""; //can be anything
@@ -449,14 +434,6 @@ $(document).ready(() => {
 
         boloIndiaValidator.sentences = sentenceData.data ? sentenceData.data : [];
         localStorage.setItem(boloValidatorCountKey, boloIndiaValidator.sentences.length);
-        localStorage.setItem(
-          sentencesKey,
-          JSON.stringify({
-              userName: localSpeakerDataParsed.userName,
-              sentences: boloIndiaValidator.sentences,
-              language: localStorage.getItem(CONTRIBUTION_LANGUAGE),
-          })
-        );
       if (boloIndiaValidator.sentences.length === 0) {
         showNoSentencesMessage();
         return;
@@ -464,7 +441,6 @@ $(document).ready(() => {
 
       initializeComponent();
     });
-  }
 });
 
 const initializeComponent = function () {

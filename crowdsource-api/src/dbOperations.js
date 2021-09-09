@@ -141,22 +141,12 @@ const getMediaBasedOnAge = function (
     toLanguage
 ) {
     let languageLabel = ADULT;
-    // let query = updateAndGetMediaQuery;
 
     if (ageGroup === KIDS_AGE_GROUP) {
         languageLabel = KIDS;
     }
 
-    if (showUniqueMedia) {
-        // query = updateAndGetUniqueMediaQuery;
-    }
-
-    const launchUser = envVars.LAUNCH_USER || 'launch_user';
     const launchIds = envVars.LAUNCH_IDS || '';
-
-    if (userName == launchUser) {
-        // query = getMediaForLaunch;
-    }
 
     let query = getOrderedUniqueMediaQuery;
     let params = [userId, userName, languageLabel, language, type, launchIds.split(', ')];
@@ -176,8 +166,8 @@ const updateAndGetMedia = async (req, res) => {
     const type = req.params.type;
 
     const ageGroup = req.body.age;
-    const cacheResponse = await cacheOperation.getDataForContribution(type, language, toLanguage, userId, userName,db);
-    if (cacheResponse) {// && cacheResponse.length > 0
+    const cacheResponse = await cacheOperation.getDataForContribution(type, language, toLanguage, userId, userName, db);
+    if (cacheResponse) {
         console.log("from cache")
         res.status(200).send({ data: cacheResponse });
         return;
@@ -194,7 +184,6 @@ const updateAndGetMedia = async (req, res) => {
     Promise.all([media])
         .then((response) => {
             res.status(200).send({ data: response[0] });
-            cacheOperation.setContributionDataForCaching(db, type, language, toLanguage);
         })
         .catch((err) => {
             console.log(err);
@@ -210,7 +199,7 @@ const getContributionList = async function (req, res) {
     const userName = req.query.username || '';
     const contributorId = await getContributorId(userId, userName);
     const cacheResponse = await cacheOperation.getDataForValidation(type, fromLanguage, toLanguage, userId, userName,db);
-    if (cacheResponse) {// && cacheResponse.length > 0
+    if (cacheResponse) {
         console.log("from cache")
         res.status(200).send({ data: cacheResponse });
         return;
@@ -219,7 +208,6 @@ const getContributionList = async function (req, res) {
     db.any(query, [contributorId, type, fromLanguage, toLanguage])
         .then((response) => {
             res.status(200).send({ data: response });
-            cacheOperation.setValidationDataForCaching(db, type, fromLanguage, toLanguage);
         })
         .catch((err) => {
             console.log(err);

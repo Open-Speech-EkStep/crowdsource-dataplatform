@@ -8,13 +8,13 @@ const cache = require('./cache');
 const config = require('config');
 
 const cachingEnabled = config.caching ? config.caching == "enabled" : false;
-const validation_count = config.validation_count ? Number(config.validation_count) : 5; 
+const validation_count = config.validation_count ? Number(config.validation_count) : 5;
 const expiry = config.cache_timeout || Number(config.cache_timeout) || 1800;
-const batchSize = config.cache_batch_size || 5000; 
+const batchSize = config.cache_batch_size || 5000;
 
 const getRandom = (datasetList, requireElements) => {
 	let len = datasetList.length;
-	
+
 	while (len) {
 		const randomIndex = Math.floor(Math.random() * len--);
 		[datasetList[len], datasetList[randomIndex]] = [datasetList[randomIndex], datasetList[len]];
@@ -55,8 +55,8 @@ const generateResponse = (data, desiredCount, userId, userName) => {
 const sortAndFilterValidationData = (data) => {
 	data = data.filter(d => d.validation_count != undefined && d.validation_count < validation_count);
 	data.sort(function (a, b) {
-			return a.validation_count - b.validation_count;
-		})
+		return a.validation_count - b.validation_count;
+	})
 		.reverse();
 	return data;
 }
@@ -117,21 +117,20 @@ const setContributionDataForCaching = async (db, type, language, toLanguage) => 
 	}
 }
 
-const getDataForContribution = async (type, language, toLanguage, userId, userName,db) => {
+const getDataForContribution = async (type, language, toLanguage, userId, userName, db) => {
 	if (!cachingEnabled) {
 		return null;
 	}
 	try {
 		let cacheResponse = await cache.getAsync(`dataset_row_${type}_${language}_${toLanguage}`);
 
-		if (cacheResponse == null){
+		if (cacheResponse == null) {
 			await setContributionDataForCaching(db, type, language, toLanguage)
-
 			cacheResponse = await cache.getAsync(`dataset_row_${type}_${language}_${toLanguage}`);
-
 		}
+
 		const cacheData = JSON.parse(cacheResponse);
-		
+
 		return generateResponse(cacheData, 5, userId, userName);
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)
@@ -144,11 +143,11 @@ const removeItemFromCache = async (dataset_row_id, type, language, toLanguage) =
 	}
 	try {
 		const cacheResponse = await cache.getAsync(`dataset_row_${type}_${language}_${toLanguage}`);
-		
+
 		const cacheData = JSON.parse(cacheResponse);
-		
+
 		let data = cacheData.filter(dataset => dataset.dataset_row_id != dataset_row_id);
-		
+
 		await cache.setAsync(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(data), expiry);
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)
@@ -205,19 +204,19 @@ const setValidationDataForCaching = async (db, type, language, toLanguage) => {
 	}
 }
 
-const getDataForValidation = async (type, language, toLanguage, userId, userName,db) => {
+const getDataForValidation = async (type, language, toLanguage, userId, userName, db) => {
 	if (!cachingEnabled) {
 		return null;
 	}
 	try {
 		let cacheResponse = await cache.getAsync(`contributions_${type}_${language}_${toLanguage}`);
-		if (cacheResponse == null){
+		if (cacheResponse == null) {
 			await setValidationDataForCaching(db, type, language, toLanguage)
 			cacheResponse = await cache.getAsync(`contributions_${type}_${language}_${toLanguage}`);
 		}
 
 		const cacheData = JSON.parse(cacheResponse);
-		
+
 		return generateValidationResponse(cacheData, 5, userId, userName);
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)

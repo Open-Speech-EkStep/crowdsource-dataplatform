@@ -22,7 +22,6 @@ const {initializeFeedbackModal} = require('../common/feedback');
 const { setDataSource } = require('../common/sourceInfo');
 
 const currentIndexKey = 'likhoCurrentIndex';
-const sentencesKey = 'likhoSentencesKey';
 const likhoCountKey = 'likhoCount';
 let localeStrings;
 
@@ -95,9 +94,6 @@ function getNextSentence() {
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
   } else {
-    const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
-    Object.assign(sentencesObj, { sentences: [] });
-    localStorage.setItem(sentencesKey, JSON.stringify(sentencesObj));
     localStorage.setItem(currentIndexKey, currentIndex);
     // showThankYou();
     disableSkipButton();
@@ -391,8 +387,6 @@ function executeOnLoad() {
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
-    const localSentences = localStorage.getItem(sentencesKey);
-    const localSentencesParsed = JSON.parse(localSentences);
 
     setPageContentHeight();
     $("#instructions_close_btn").on("click", function () {
@@ -408,18 +402,6 @@ function executeOnLoad() {
     showUserProfile(localSpeakerDataParsed.userName);
     onChangeUser('./record.html',MODULE.likho.value);
     onOpenUserDropDown();
-    const isExistingUser = localSentencesParsed &&
-      localSentencesParsed.userName === localSpeakerDataParsed.userName
-      &&
-      localSentencesParsed.language === localSpeakerDataParsed.language;
-
-    if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === fromLanguage && localSentencesParsed.toLanguage === toLanguage) {
-      $loader.hide();
-      $pageContent.removeClass('d-none');
-      setFooterPosition();
-      likhoIndia.sentences = localSentencesParsed.sentences;
-      initialize();
-    } else {
       localStorage.removeItem(currentIndexKey);
       const type = 'parallel';
       fetch(`/media/${type}`, {
@@ -450,35 +432,17 @@ function executeOnLoad() {
           likhoIndia.sentences = sentenceData.data ? sentenceData.data : [];
           localStorage.setItem(likhoCountKey, likhoIndia.sentences.length);
           $loader.hide();
-          localStorage.setItem(
-            sentencesKey,
-            JSON.stringify({
-              userName: localSpeakerDataParsed.userName,
-              sentences: likhoIndia.sentences,
-              language: fromLanguage,
-              toLanguage: toLanguage
-            })
-          );
           if (likhoIndia.sentences.length === 0) {
             showNoSentencesMessage();
             return;
           }
-
-          if (!isExistingUser) {
-            $validationInstructionModal.removeClass("d-none");
-            setFooterPosition();
-          }
           $pageContent.removeClass('d-none');
-          setFooterPosition();
-
-
           setFooterPosition();
           initialize();
         })
         .then(() => {
           $loader.hide();
         });
-    }
   } catch (err) {
     console.log(err);
   }

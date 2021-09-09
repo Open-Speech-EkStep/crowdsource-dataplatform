@@ -30,15 +30,11 @@ const FeedbackModal = (props: FeedbackModalProps) => {
       </Modal.Header>
       <Modal.Body>
         <div className={styles.form}>
-          <FeedbackForm />
+          <FeedbackForm hideModal={props.onHide} />
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <footer className={`${styles.footer} d-flex justify-content-center w-100 m-0 pt-4 pt-2`}>
-          <button type="submit" className={styles.submitButton}>
-            {t('submit')}
-          </button>
-        </footer>
+        <footer className={`${styles.footer} d-flex justify-content-center w-100 m-0 pt-4 pt-2`}></footer>
       </Modal.Footer>
     </Modal>
   );

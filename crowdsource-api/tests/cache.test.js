@@ -51,7 +51,7 @@ describe("Running tests for cache", () => {
         expect(mockRedlock.prototype.acquire).toBeCalledWith(`lock:${key}`, 20000);
         expect(mockIoRedis.Cluster.prototype.set).toHaveBeenNthCalledWith(1, "ut" + "_" + key + "_status", 'in progress', 'EX', 600);
         expect(mockIoRedis.Cluster.prototype.set).toHaveBeenNthCalledWith(2, "ut" + "_" + key, JSON.stringify(mockResult), 'EX', 600);
-        // expect(lockObj.unlock).toHaveBeenCalled();
+        expect(lockObj.unlock).toHaveBeenCalled();
     });
     test("setContributionDataForCaching should return expected result for parallel", async () => {
         const type = 'parallel'
@@ -62,10 +62,12 @@ describe("Running tests for cache", () => {
         ];
         const key = `dataset_row_${type}_${language}_${toLanguage}`;
         when(spyDBany).calledWith(getParallelContributionDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getParallelContributionDataForCaching, [type, language, toLanguage, limit]);
 
         expect(mockIoRedis.Cluster.prototype.set).toHaveBeenNthCalledWith(2, "ut" + "_" + key, JSON.stringify(mockResult), 'EX', 600);
+        expect(lockObj.unlock).toHaveBeenCalled();
     });
 
     test("setValidationDataForCaching should return expected result validation", async () => {
@@ -77,10 +79,12 @@ describe("Running tests for cache", () => {
         ];
         const key = `contributions_${type}_${language}_${toLanguage}`;
         when(spyDBany).calledWith(getValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getValidationDataForCaching, [type, language, toLanguage, limit]);
 
         expect(mockIoRedis.Cluster.prototype.set).toHaveBeenNthCalledWith(2, "ut" + "_" + key, JSON.stringify(mockResult), 'EX', 600);
+        expect(lockObj.unlock).toHaveBeenCalled();
     });
     test("setValidationDataForCaching should return expected result validation remove validation_count", async () => {
         const type = 'asr'
@@ -94,10 +98,12 @@ describe("Running tests for cache", () => {
         const lesserThanValidationCount = mockResult.filter(d => d.validation_count < 3);
 
         when(spyDBany).calledWith(getValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getValidationDataForCaching, [type, language, toLanguage, limit], cacheOperations.sortAndFilterValidationData);
 
         expect(mockIoRedis.Cluster.prototype.set).toHaveBeenNthCalledWith(2, "ut" + "_" + key, JSON.stringify(lesserThanValidationCount), 'EX', 600);
+        expect(lockObj.unlock).toHaveBeenCalled();
     });
     test("setValidationDataForCaching should return expected result validation sort by validation_count", async () => {
         const type = 'asr'
@@ -116,10 +122,12 @@ describe("Running tests for cache", () => {
 		.reverse();
 
         when(spyDBany).calledWith(getValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getValidationDataForCaching, [type, language, toLanguage, limit], cacheOperations.sortAndFilterValidationData);
 
         expect(mockIoRedis.Cluster.prototype.set).toHaveBeenNthCalledWith(2, "ut" + "_" + key, JSON.stringify(lesserThanValidationCount), 'EX', 600);
+        expect(lockObj.unlock).toHaveBeenCalled();
     });
     test("setValidationDataForCaching should return expected result for parallel validation", async () => {
         const type = 'parallel'
@@ -130,10 +138,12 @@ describe("Running tests for cache", () => {
         ];
         const key = `contributions_${type}_${language}_${toLanguage}`;
         when(spyDBany).calledWith(getParallelValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getParallelValidationDataForCaching, [type, language, toLanguage, limit]);
 
         expect(mockIoRedis.Cluster.prototype.set).toHaveBeenNthCalledWith(2, "ut" + "_" + key, JSON.stringify(mockResult), 'EX', 600);
+        expect(lockObj.unlock).toHaveBeenCalled();
     });
     test("setValidationDataForCaching should return expected result for parallel validation remove validation count", async () => {
         const type = 'parallel'
@@ -147,10 +157,12 @@ describe("Running tests for cache", () => {
         const key = `contributions_${type}_${language}_${toLanguage}`;
 
         when(spyDBany).calledWith(getParallelValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getParallelValidationDataForCaching, [type, language, toLanguage, limit], cacheOperations.sortAndFilterValidationData);
 
         expect(mockIoRedis.Cluster.prototype.set).toHaveBeenNthCalledWith(2, "ut" + "_" + key, JSON.stringify(lesserThanValidationCount), 'EX', 600);
+        expect(lockObj.unlock).toHaveBeenCalled();
     });
     test("setValidationDataForCaching should return expected result for parallel validation sort validation count", async () => {
         const type = 'parallel'
@@ -169,10 +181,11 @@ describe("Running tests for cache", () => {
         const key = `contributions_${type}_${language}_${toLanguage}`;
 
         when(spyDBany).calledWith(getParallelValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getParallelValidationDataForCaching, [type, language, toLanguage, limit], cacheOperations.sortAndFilterValidationData);
 
         expect(mockIoRedis.Cluster.prototype.set).toHaveBeenNthCalledWith(2, "ut" + "_" + key, JSON.stringify(lesserThanValidationCount), 'EX', 600);
+        expect(lockObj.unlock).toHaveBeenCalled();
     });
-
 });

@@ -4,10 +4,6 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import Stats from '../Stats';
 
 describe('Stats', () => {
-  beforeEach(() => {
-    fetchMock.resetMocks();
-  });
-
   const setup = () => {
     const statsContents: Array<{ id: string; stat: string | null; label: string }> = [
       { id: '1', stat: 'a', label: 'l1' },
