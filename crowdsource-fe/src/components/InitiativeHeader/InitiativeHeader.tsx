@@ -17,17 +17,22 @@ const InitiativeHeader = ({ initiative }: PageHeaderProps) => {
   return (
     <div>
       <Row>
-        <Col xs="auto">
+        <Col xs="12" md="4" className="d-flex justify-content-center">
           <div className={styles.initiativeHeaderImg}>
             <Image
               src={`/images/${currentLocale}-${initiative}IndiaLogo.svg`}
               alt={t(`${initiative}Logo`)}
               width="126"
               height="103"
+              priority
             />
           </div>
         </Col>
-        <Col className="d-flex align-items-center">
+        <Col
+          xs="12"
+          md="8"
+          className="d-flex justify-content-center justify-content-md-start text-center align-items-md-center text-md-start"
+        >
           <div className={styles.initiativeHeaderText}>{t(`${initiative}SloganText`)}</div>
         </Col>
       </Row>

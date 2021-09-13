@@ -12,7 +12,9 @@ describe('Home', () => {
   it('should render the homepage', () => {
     setup();
 
-    expect(screen.getByTestId('PageBackground')).toBeInTheDocument();
-    expect(screen.getByTestId('Hero')).toBeInTheDocument();
+    expect(screen.getByTestId('HomePageBackground')).toBeInTheDocument();
+    expect(screen.getByTestId('BronzeContribute')).toBeInTheDocument();
+    expect(screen.getByTestId('BadgesIntro')).toBeInTheDocument();
+    expect(screen.getByText('ContributionStats')).toBeInTheDocument();
   });
 });

@@ -1,6 +1,7 @@
 .root {
   border-radius: 1.25rem;
   box-shadow: 0 0 32px rgb(0 123 255 / 40%);
+  z-index: 1;
 }
 
 .bottomShadow {
@@ -67,12 +68,15 @@
   height: 2.25rem;
   line-height: 1.5rem;
   max-width: 17.5rem;
+  position: absolute;
+  bottom: 0;
 
   &:hover {
     color: var(--text-white);
   }
 
   @include media-breakpoint-up(md) {
+    position: static;
     border-radius: 3rem;
     font-size: 1.125rem;
     height: 3rem;

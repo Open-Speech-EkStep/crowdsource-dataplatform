@@ -7,32 +7,21 @@ import Container from 'react-bootstrap/Container';
 import BadgesIntro from 'components/BadgesIntro';
 import BronzeContribute from 'components/BronzeContribute';
 import ContributionStats from 'components/ContributionStats';
-import Hero from 'components/Hero';
-import InitiativesCarousel from 'components/InitiativesCarousel';
-import PageBackground from 'components/PageBackground';
+import HomePageBackground from 'components/HomePageBackground';
 import { DEFAULT_LOCALE } from 'constants/localesConstants';
 
 const Home: NextPage = () => {
   return (
     <Fragment>
-      <PageBackground image="home-page-bg.svg" imageMobile="landingpage_bg_sm.svg">
-        <Container fluid="lg" className="pt-7 pt-md-9">
-          <section className="py-8 py-md-9">
-            <Hero />
-          </section>
-          <section className="py-8 py-md-9">
-            <InitiativesCarousel />
-          </section>
-        </Container>
-      </PageBackground>
-      <Container fluid="lg" className="py-7 py-md-9">
+      <HomePageBackground />
+      <Container fluid="lg" className="pb-7 pb-md-9">
         <section className="py-8 py-md-9">
           <ContributionStats />
         </section>
         <section className="py-8 py-md-9">
           <BadgesIntro />
         </section>
-        <section className="pb-8 pb-md-9">
+        <section className="py-8 py-md-9">
           <BronzeContribute />
         </section>
       </Container>

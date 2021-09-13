@@ -28,7 +28,7 @@ const InitiativesCarousel = () => {
     infinite: true,
     autoplay: true,
     autoplaySpeed: 5000,
-    speed: 2000,
+    speed: 500,
   };
 
   const labelCarouselSettings = {
@@ -75,7 +75,7 @@ const InitiativesCarousel = () => {
     <div data-testid="InitiativesCarousel" className={`${styles.root} mx-auto`}>
       <div className={styles.bottomShadow}>
         <TriColorBackground>
-          <div className={`${styles.initiativesCarousel} slickCarousel pt-6 pb-3 py-md-8`}>
+          <div className={`${styles.initiativesCarousel} slickCarousel pt-6 pb-5 pb-md-3 py-md-8`}>
             <div className={`${styles.labelCarousel} mb-4`}>
               <Slider {...labelCarouselSettings}>
                 {initiatives.map(initiative => (
@@ -90,15 +90,24 @@ const InitiativesCarousel = () => {
             <div className="py-md-5">
               <Slider {...initiativeCarouselSettings}>
                 {initiatives.map(initiative => (
-                  <div key={initiative} className={`${styles.initiative} px-5 px-md-9 px-lg-14`}>
+                  <div
+                    key={initiative}
+                    className={`${styles.initiative} px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0`}
+                  >
                     <Row>
-                      <Col xs="12" md="6" lg="4" className="d-flex align-items-center py-6">
+                      <Col
+                        xs="12"
+                        md="6"
+                        lg="4"
+                        className="d-flex justify-content-center justify-content-md-start align-items-md-center py-6"
+                      >
                         <InitiativeHeader initiative={initiative} />
                       </Col>
                       <Col xs="6" md="3" lg="4" className="d-flex justify-content-center py-5 ">
                         <InitiativeAction
-                          actionIcon={`${initiative}-contribute-icon.svg`}
+                          actionIcon={`${initiative}_contribute_icon.svg`}
                           initiative={initiative}
+                          shadow="Green"
                         />
                       </Col>
                       <Col xs="6" md="3" lg="4" className="d-flex justify-content-center py-5">

@@ -9,7 +9,7 @@ interface PageBackgroundProps {
   size?: string;
 }
 
-const PageBackground = ({ children, image, imageMobile = image, size = 'cover' }: PageBackgroundProps) => {
+const PageBackground = ({ children, image, imageMobile = image, size = 'auto' }: PageBackgroundProps) => {
   const style: CSSProperties = {
     ['--background--image' as any]: `url(/images/${image})`,
     ['--background--image-mobile' as any]: `url(/images/${imageMobile})`,

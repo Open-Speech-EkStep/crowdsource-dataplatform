@@ -22,7 +22,7 @@ const Logo = () => {
       </a>
       <span className={styles.sep} />
       <Link href={routePaths.home}>
-        <a className={styles.label}>
+        <a className={`${styles.label} px-xl-2`}>
           {t('bhasha')}
           <span className={styles.labelSecondHalf}>{t('daan')}</span>
           <span className={styles.betaText}>{t('beta')}</span>

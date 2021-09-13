@@ -6,15 +6,16 @@ import styles from './InitiativeAction.module.scss';
 interface InitiativeActionProps {
   initiative: string;
   actionIcon: string;
+  shadow?: 'Blue' | 'Green';
 }
 
-const InitiativeAction = ({ initiative, actionIcon }: InitiativeActionProps) => {
+const InitiativeAction = ({ initiative, actionIcon, shadow = 'Blue' }: InitiativeActionProps) => {
   const { t } = useTranslation();
 
   return (
     <div className={`${styles.action} d-flex flex-column align-items-center text-center`}>
-      <div className={styles.actionIcon}>
-        <Image src={`/images/${actionIcon}`} alt={t('initiativeAction')} width="160" height="160" />
+      <div className={`${styles.actionIcon} ${styles[`actionIcon${shadow}`]} d-flex rounded-circle`}>
+        <Image src={`/images/${actionIcon}`} alt={t('initiativeAction')} width="160" height="160" priority />
       </div>
       <div className={styles.actionText}>{t(`${initiative}ContributionSubtext`)}</div>
     </div>

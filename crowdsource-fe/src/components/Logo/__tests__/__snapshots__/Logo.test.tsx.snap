@@ -64,7 +64,7 @@ exports[`Logo should render the component and matches it against stored snapshot
       class="sep"
     />
     <a
-      class="label"
+      class="label px-xl-2"
       href="/home"
     >
       bhasha

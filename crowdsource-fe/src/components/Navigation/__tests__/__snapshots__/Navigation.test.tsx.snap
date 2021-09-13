@@ -28,28 +28,28 @@ exports[`Navigation should render the component and matches it against stored sn
         class="root navbar-nav"
       >
         <a
-          class="link nav-link"
+          class="link mx-xl-3 nav-link"
           data-rr-ui-event-key="/sunoIndia/home.html"
           href="/sunoIndia/home.html"
         >
           suno india
         </a>
         <a
-          class="link nav-link"
+          class="link mx-xl-3 nav-link"
           data-rr-ui-event-key="/boloIndia/home.html"
           href="/boloIndia/home.html"
         >
           bolo india
         </a>
         <a
-          class="link nav-link"
+          class="link mx-xl-3 nav-link"
           data-rr-ui-event-key="/likhoIndia/home.html"
           href="/likhoIndia/home.html"
         >
           likho india
         </a>
         <a
-          class="link nav-link"
+          class="link mx-xl-3 nav-link"
           data-rr-ui-event-key="/dekhoIndia/home.html"
           href="/dekhoIndia/home.html"
         >
