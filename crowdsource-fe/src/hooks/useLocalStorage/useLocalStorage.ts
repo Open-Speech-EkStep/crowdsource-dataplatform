@@ -11,7 +11,7 @@ const parseJSON = <T>(stringifiedJSON: string | null, fallbackValue: T) => {
 
     return JSON.parse(stringifiedJSON);
   } catch (e) {
-    return fallbackValue;
+    return stringifiedJSON;
   }
 };
 
@@ -20,7 +20,7 @@ const removeItemFromLocalStorage = (key: string) => {
 };
 
 const addItemToLocalStorage = <T>(key: string, value: T) => {
-  localStorage.setItem(key, JSON.stringify(value));
+  localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value));
 };
 
 const getItemFromLocalStorage = <T>(key: string, fallbackValue: T) =>

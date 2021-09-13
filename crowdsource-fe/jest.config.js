@@ -11,7 +11,8 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      branches: 95,
+      // Branches are very tough to test using unit tests. Try to test those scenarios using integration tests.
+      branches: 90,
       functions: 95,
       lines: 95,
       statements: 95,

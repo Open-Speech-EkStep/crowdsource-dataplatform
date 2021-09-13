@@ -4,13 +4,16 @@ import { useRouter } from 'next/router';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 import Link from 'components/Link';
-import { DEFAULT_LOCALE, DISPLAY_LANGUAGES } from 'constants/localesConstants';
+import { DEFAULT_LOCALE, DISPLAY_LANGUAGES, RAW_LANGUAGES } from 'constants/localesConstants';
+import localStorageConstants from 'constants/localStorageConstants';
+import useLocalStorage from 'hooks/useLocalStorage';
 
 import styles from './LanguageSwitcher.module.scss';
 
 const LanguageSwitcher = () => {
   const { asPath: currentRoutePath, locale: currentLocale = DEFAULT_LOCALE, locales } = useRouter();
   const { t } = useTranslation();
+  const [, setContributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
   return (
     <Dropdown data-testid="languageSwitcher" id="languageSwitcher" className={styles.root} align="end">
@@ -26,7 +29,11 @@ const LanguageSwitcher = () => {
       <Dropdown.Menu>
         {locales?.map(locale => (
           <Link key={locale} href={currentRoutePath} locale={locale} passHref>
-            <Dropdown.Item eventKey={locale} className={styles.item}>
+            <Dropdown.Item
+              eventKey={locale}
+              className={styles.item}
+              onClick={() => setContributionLanguage(RAW_LANGUAGES[locale])}
+            >
               {DISPLAY_LANGUAGES[locale]}
             </Dropdown.Item>
           </Link>

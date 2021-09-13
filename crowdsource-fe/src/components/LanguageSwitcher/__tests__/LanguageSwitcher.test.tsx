@@ -25,5 +25,7 @@ describe('LanguageSwitcher', () => {
     fireEvent.click(screen.getByRole('link', { name: 'हिंदी' }));
 
     expect(router.locale).toBe('hi');
+
+    expect(localStorage.setItem).toHaveBeenCalledWith('contributionLanguage', 'Hindi');
   });
 });
