@@ -5,15 +5,28 @@ import ReactBootstrapModal from 'react-bootstrap/Modal';
 
 import styles from './Modal.module.scss';
 
+const noop = () => {};
+
 interface ModalProps {
   children: ReactNode;
   title?: string;
   subTitle?: string;
   footer?: ReactNode;
   size?: 'sm' | 'lg' | 'xl';
+  show?: Boolean;
+  onHide?: () => void;
 }
 
-const Modal = ({ children, size = 'lg', title = '', subTitle = '', footer = null, ...rest }: ModalProps) => {
+const Modal = ({
+  children,
+  size = 'lg',
+  title = '',
+  subTitle = '',
+  footer = null,
+  show = false,
+  onHide = noop,
+  ...rest
+}: ModalProps) => {
   const hasHeader = title || subTitle;
 
   return (
@@ -21,11 +34,12 @@ const Modal = ({ children, size = 'lg', title = '', subTitle = '', footer = null
       data-testid="Modal"
       {...rest}
       size={size}
-      q
       centered
       dialogClassName={styles.root}
       contentClassName={styles.content}
       scrollable
+      show={show}
+      onHide={onHide}
     >
       <ReactBootstrapModal.Header closeButton>
         {hasHeader && (

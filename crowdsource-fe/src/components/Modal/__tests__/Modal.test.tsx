@@ -1,11 +1,23 @@
-import { render, verifyAxeTest } from 'utils/testUtils';
+import type { ReactNode } from 'react';
+
+import { render, verifyAxeTest, screen } from 'utils/testUtils';
 
 import Modal from '../Modal';
 
 describe('Modal', () => {
-  const setup = () =>
+  const setup = (
+    props: {
+      title?: string;
+      subTitle?: string;
+      footer?: ReactNode;
+    } = {
+      title: 'title',
+      subTitle: 'subTitle',
+      footer: <button type="submit">Done</button>,
+    }
+  ) =>
     render(
-      <Modal title="title" subTitle="subTitle" footer={<button type="submit">Done</button>}>
+      <Modal {...props} show>
         <div>Hello world</div>
       </Modal>
     );
@@ -13,8 +25,14 @@ describe('Modal', () => {
   verifyAxeTest(setup());
 
   it('should render the component and matches it against stored snapshot', () => {
-    const { asFragment } = setup();
+    setup();
 
-    expect(asFragment()).toMatchSnapshot();
+    expect(screen.getByTestId('Modal')).toMatchSnapshot();
+  });
+
+  it('should render the component and matches it against stored snapshot with default prop values', () => {
+    setup({});
+
+    expect(screen.getByTestId('Modal')).toMatchSnapshot();
   });
 });

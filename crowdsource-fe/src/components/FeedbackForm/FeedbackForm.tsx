@@ -2,14 +2,15 @@ import { useState, useEffect, useRef } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Form from 'react-bootstrap/Form';
 import Image from 'next/image';
+import Form from 'react-bootstrap/Form';
+
 import apiPaths from 'constants/apiPaths';
+import localStorageConstants from 'constants/localStorageConstants';
 import { useSubmit } from 'hooks/useFetch';
+import useLocalStorage from 'hooks/useLocalStorage';
 
 import styles from './FeedbackForm.module.scss';
-import useLocalStorage from 'hooks/useLocalStorage';
-import localStorageConstants from 'constants/localStorageConstants';
 
 const opinions = [1, 2, 3, 4, 5];
 

@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
-import Modal from 'react-bootstrap/Modal';
 import Image from 'next/image';
+import Modal from 'react-bootstrap/Modal';
 
 interface FeedbackSuccessModalProps {
   onHide: () => void;

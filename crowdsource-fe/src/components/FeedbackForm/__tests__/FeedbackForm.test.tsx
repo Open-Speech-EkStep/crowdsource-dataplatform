@@ -53,9 +53,9 @@ describe('FeedbackForm', () => {
           recommended: '',
           revisit: '',
           email: 'Anonymous',
-          language: 'English',
-          module: 'm1',
-          target_page: 'p1',
+          language: null,
+          module: null,
+          target_page: 'Home Page',
         }),
       });
     });
