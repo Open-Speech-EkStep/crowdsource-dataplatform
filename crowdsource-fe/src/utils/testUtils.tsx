@@ -20,12 +20,15 @@ export { renderHook } from '@testing-library/react-hooks';
 // override render method
 export { customRender as render };
 
-export const verifyAxeTest = ({ container }: { container: RenderResult['container'] }) => {
+type VerifyAxeTestParams =
+  | { container: RenderResult['container'] }
+  | (() => { container: RenderResult['container'] });
+export const verifyAxeTest = (params: VerifyAxeTestParams) => {
   it('should not fail an axe audit', async () => {
     let axeResult;
 
     await act(async () => {
-      axeResult = await axe(container);
+      axeResult = await axe(typeof params === 'function' ? params().container : params.container);
     });
 
     expect(axeResult).toHaveNoViolations();

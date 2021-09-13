@@ -18,6 +18,7 @@ jest.mock('next/dist/client/router', () => {
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({ t: key => key }),
+  Trans: () => null,
 }));
 
 // As we're testing on the JSDOM, color-contrast testing can't run.
