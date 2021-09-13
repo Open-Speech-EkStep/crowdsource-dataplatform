@@ -61,5 +61,7 @@
   "bhashiniLogoAlt": "Bhashini Logo",
   "initiativeLogo": "Initiative Logo",
   "feedbackIconAlt": "Feedback Icon",
-  "languageIconAlt": "Language Icon"
+  "languageIconAlt": "Language Icon",
+  "submitSuccess": "सफलतापूर्वक सबमिट किया",
+  "feedbackThankYou": "फीडबैक देने के लिए धन्यवाद"
 }

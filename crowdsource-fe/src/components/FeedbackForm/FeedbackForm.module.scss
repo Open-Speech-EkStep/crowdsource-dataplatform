@@ -17,34 +17,49 @@
   width: 0;
 }
 
-.opinion1 {
-  background: url('/images/opinions.png') -10px -10px;
+.opinion-active1 {
+  filter: drop-shadow(0px 4px 12px rgba(42, 137, 8, 0.5));
   height: 2.5rem;
   width: 2.5rem;
+  &:hover {
+    box-shadow: rgb(227 6 6 / 50%) 0px 4px 12px;
+  }
 }
 
-.opinion2 {
-  background: url('/images/opinions.png') -70px -10px;
+.opinion-active2 {
+  filter: drop-shadow(0px 4px 12px rgba(42, 137, 8, 0.5));
   height: 2.5rem;
   width: 2.5rem;
+  &:hover {
+    box-shadow: 0 4px 12px rgb(234 145 63 / 50%);
+  }
 }
 
-.opinion3 {
-  background: url('/images/opinions.png') -10px -70px;
+.opinion-active3 {
+  filter: drop-shadow(0px 4px 12px rgba(42, 137, 8, 0.5));
   height: 2.5rem;
   width: 2.5rem;
+  &:hover {
+    box-shadow: 0 4px 12px rgb(0 123 255 / 50%);
+  }
 }
 
-.opinion4 {
-  background: url('/images/opinions.png') -70px -70px;
+.opinion-active4 {
+  filter: drop-shadow(0px 4px 12px rgba(42, 137, 8, 0.5));
   height: 2.5rem;
   width: 2.5rem;
+  &:hover {
+    box-shadow: 0 4px 12px rgb(78 215 56 / 50%);
+  }
 }
 
-.opinion5 {
-  background: url('/images/opinions.png') -130px -10px;
+.opinion-active5 {
+  filter: drop-shadow(0px 4px 12px rgba(42, 137, 8, 0.5));
   height: 2.5rem;
   width: 2.5rem;
+  &:hover {
+    box-shadow: 0 4px 12px rgb(42 137 8 / 50%);
+  }
 }
 
 .red {
@@ -70,6 +85,13 @@
   height: 2.25rem;
   line-height: 1.5rem;
   width: 15rem;
+
+  &:disabled {
+    background-color: #7f8ea4;
+    color: #c7cfda;
+    border-color: #7f8ea4;
+    box-shadow: 0px 8px 24px rgba(15, 39, 73, 0.1) !important;
+  }
 
   @include media-breakpoint-up(md) {
     border-radius: 3rem;

@@ -3,11 +3,13 @@ import type { ChangeEvent, FormEvent } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Form from 'react-bootstrap/Form';
-
+import Image from 'next/image';
 import apiPaths from 'constants/apiPaths';
 import { useSubmit } from 'hooks/useFetch';
 
 import styles from './FeedbackForm.module.scss';
+import useLocalStorage from 'hooks/useLocalStorage';
+import localStorageConstants from 'constants/localStorageConstants';
 
 const opinions = [1, 2, 3, 4, 5];
 
@@ -17,26 +19,36 @@ const FeedbackForm = ({ onSuccess: showThankyou }: { onSuccess: () => void }) =>
 
   const { isLoading, data, submit } = useSubmit(apiPaths.feedback);
 
+  const [speakerDetails] = useLocalStorage<{ userName: string }>(localStorageConstants.speakerDetails);
+  const [currentModule] = useLocalStorage<string>(localStorageConstants.currentModule);
+  const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
+  const [selectedOpinionValue, setSelectedOpinionValue] = useState<number>(0);
+
   const [formData, setFormData] = useState({
     opinion_rating: undefined,
     category: '',
     feedback: '',
     recommended: '',
     revisit: '',
-    email: 'Anonymous',
-    language: 'English',
-    module: 'm1',
-    target_page: 'p1',
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSelectedOpinionValue(Number(e.target.value));
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    submit(JSON.stringify(formData));
+    submit(
+      JSON.stringify({
+        ...formData,
+        email: speakerDetails?.userName || 'Anonymous',
+        language: contributionLanguage,
+        module: currentModule,
+        target_page: 'Home Page',
+      })
+    );
   };
 
   useEffect(() => {
@@ -62,8 +74,16 @@ const FeedbackForm = ({ onSuccess: showThankyou }: { onSuccess: () => void }) =>
             <div key={opinion} className="me-5">
               <label
                 htmlFor={`opinion${opinion}`}
-                className={`${styles.opinion} ${styles[`opinion${opinion}`]}`}
+                className={`${styles.opinion} ${
+                  selectedOpinionValue === opinion ? '' : styles[`opinion-active${opinion}`]
+                } rounded-circle`}
               >
+                <Image
+                  src={`/images/opinion${opinion}${selectedOpinionValue === opinion ? '-active' : ''}.svg`}
+                  width="40"
+                  height="40"
+                  alt="icon"
+                />
                 <span className={`${styles.opinionLabel} position-absolute opacity-0`}>{opinion}</span>
                 <input
                   type="radio"
@@ -90,10 +110,10 @@ const FeedbackForm = ({ onSuccess: showThankyou }: { onSuccess: () => void }) =>
           onChange={handleChange as any}
         >
           <option value="">{t('selectCategory')}</option>
-          <option value="Suggestion">{t('suggestion')}</option>
-          <option value="Error">{t('error')}</option>
-          <option value="Complaint">{t('complaint')}</option>
-          <option value="Compliment">{t('compliment')}</option>
+          <option value="suggestion">{t('suggestion')}</option>
+          <option value="error">{t('error')}</option>
+          <option value="complaint">{t('complaint')}</option>
+          <option value="compliment">{t('compliment')}</option>
         </Form.Select>
       </Form.Group>
 
@@ -111,7 +131,7 @@ const FeedbackForm = ({ onSuccess: showThankyou }: { onSuccess: () => void }) =>
       </Form.Group>
 
       <Form.Group className="py-3" controlId="recommended">
-        <Form.Label className="mb-1">
+        <Form.Label className="mb-1 w-100">
           {t('recommendQuestionText')} <span className={styles.grey}>({t('optional')})</span>
         </Form.Label>
         <Form.Check
@@ -147,7 +167,7 @@ const FeedbackForm = ({ onSuccess: showThankyou }: { onSuccess: () => void }) =>
       </Form.Group>
 
       <Form.Group className="py-3" controlId="revisit">
-        <Form.Label className="mb-1">
+        <Form.Label className="mb-1 w-100">
           {t('revisitQuestionText')} <span className={styles.grey}>({t('optional')})</span>
         </Form.Label>
         <Form.Check
