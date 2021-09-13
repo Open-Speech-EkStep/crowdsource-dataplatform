@@ -20,8 +20,6 @@ jest.mock('react-i18next', () => ({
   useTranslation: () => ({ t: key => key }),
 }));
 
-jestFetchMock.enableMocks();
-
 // As we're testing on the JSDOM, color-contrast testing can't run.
 // The types of results fetched are limited for performance reasons
 configureAxe({
@@ -56,6 +54,20 @@ console.error = message => {
   throw new Error(message);
 };
 
-jest.spyOn(Storage.prototype, 'getItem');
-jest.spyOn(Storage.prototype, 'setItem');
-jest.spyOn(Storage.prototype, 'removeItem');
+beforeEach(() => {
+  jestFetchMock.enableMocks();
+
+  localStorage.clear();
+
+  jest.spyOn(Storage.prototype, 'getItem');
+  jest.spyOn(Storage.prototype, 'setItem');
+  jest.spyOn(Storage.prototype, 'removeItem');
+});
+
+afterEach(() => {
+  fetchMock.resetMocks();
+
+  Storage.prototype.getItem.mockClear();
+  Storage.prototype.setItem.mockClear();
+  Storage.prototype.removeItem.mockClear();
+});

@@ -3,10 +3,6 @@ import { renderHook, waitFor } from 'utils/testUtils';
 import useFetch from '../useFetch';
 
 describe('#useFetch', () => {
-  beforeEach(() => {
-    fetchMock.resetMocks();
-  });
-
   const setup = (url: string) => {
     const renderHookResult = renderHook(() => useFetch(url, { dedupingInterval: 0 }));
 

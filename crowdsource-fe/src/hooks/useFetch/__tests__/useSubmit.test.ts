@@ -3,10 +3,6 @@ import { act, renderHook, waitFor } from 'utils/testUtils';
 import useSubmit from '../useSubmit';
 
 describe('#useSubmit', () => {
-  beforeEach(() => {
-    fetchMock.resetMocks();
-  });
-
   const setup = (url: string) => {
     const renderHookResult = renderHook(() => useSubmit(url));
 

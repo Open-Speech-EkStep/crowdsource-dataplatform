@@ -3,10 +3,6 @@ import { render, verifyAxeTest, screen, waitForElementToBeRemoved } from 'utils/
 import ContributionStats from '../ContributionStats';
 
 describe('ContributionStats', () => {
-  beforeEach(() => {
-    fetchMock.resetMocks();
-  });
-
   const setup = async () => {
     fetchMock.doMockOnceIf('/aggregated-json/participationStats.json').mockResponseOnce(
       JSON.stringify([

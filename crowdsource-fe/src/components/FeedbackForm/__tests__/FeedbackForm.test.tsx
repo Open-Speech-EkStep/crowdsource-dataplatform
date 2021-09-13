@@ -3,10 +3,6 @@ import { screen, render, verifyAxeTest, fireEvent, waitFor } from 'utils/testUti
 import FeedbackForm from '../FeedbackForm';
 
 describe('FeedbackForm', () => {
-  beforeEach(() => {
-    fetchMock.resetMocks();
-  });
-
   const setup = () => render(<FeedbackForm onSuccess={() => {}} />);
 
   verifyAxeTest(setup());

@@ -3,11 +3,6 @@ import { renderHook, act } from 'utils/testUtils';
 import useLocalStorage from '../useLocalStorage';
 
 describe('#useLocalStorage', () => {
-  beforeEach(() => {
-    localStorage.clear();
-    jest.clearAllMocks();
-  });
-
   const setup = () => {
     const localStorageKey = 'localStorageKey';
 
