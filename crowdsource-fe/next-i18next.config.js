@@ -8,5 +8,6 @@ module.exports = {
   i18n: {
     defaultLocale: LOCALES_MAPPING.en,
     locales: Object.values(LOCALES_MAPPING),
+    reloadOnPrerender: true,
   },
 };
