@@ -55,3 +55,7 @@ expect.extend({ toMatchImageSnapshot });
 console.error = message => {
   throw new Error(message);
 };
+
+jest.spyOn(Storage.prototype, 'getItem');
+jest.spyOn(Storage.prototype, 'setItem');
+jest.spyOn(Storage.prototype, 'removeItem');

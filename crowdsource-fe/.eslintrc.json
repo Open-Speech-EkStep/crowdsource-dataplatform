@@ -15,7 +15,7 @@
   "rules": {
     "no-unused-vars": 0,
     "@typescript-eslint/no-unused-vars": 2,
-    "no-undef": 2,
+    "no-undef": 0,
     "import/no-extraneous-dependencies": 2,
     "import/no-unresolved": 2,
     "react/jsx-uses-react": 0,
