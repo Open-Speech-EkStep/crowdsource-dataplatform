@@ -51,3 +51,7 @@ configure({
 });
 
 expect.extend({ toMatchImageSnapshot });
+
+console.error = message => {
+  throw new Error(message);
+};

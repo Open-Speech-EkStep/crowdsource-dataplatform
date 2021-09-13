@@ -19,6 +19,8 @@ class MyDocument extends Document<MyDocumentProps> {
     return (
       <Html lang={this.props.locale}>
         <Head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
           <link
             rel="preload"
             href="https://fonts.googleapis.com/css?family=Rowdies:400,700&display=swap"

@@ -94,9 +94,13 @@ For running VR tests.
 
 For update VR test snapshots.
 
+### `npm run node-talisman`
+
+For running talisman on the source code.
+
 ### `npm run check`
 
-For running lint, stylelint, typecheck and test with coverage.
+For running lint, stylelint, typecheck, test with coverage and talisman.
 
 ### `npm run build`
 

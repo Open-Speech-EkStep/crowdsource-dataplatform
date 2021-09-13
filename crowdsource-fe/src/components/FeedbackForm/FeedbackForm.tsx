@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Form from 'react-bootstrap/Form';
@@ -28,11 +29,11 @@ const FeedbackForm = ({ onSuccess: showThankyou }: { onSuccess: () => void }) =>
     target_page: 'p1',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     submit(JSON.stringify(formData));

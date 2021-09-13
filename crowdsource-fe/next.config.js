@@ -14,6 +14,7 @@ const nextConfig = {
   pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
   webpack: config => {
     config.module.rules.push({ test: /\.test.(jsx?|tsx?)$/, loader: 'ignore-loader' });
+    config.module.rules.push({ test: /\.svg$/, use: ['@svgr/webpack'] });
 
     config.plugins.push(new ConfigWebpackPlugin('CROWDSOURCE_FE_NODE_CONFIG'));
 
