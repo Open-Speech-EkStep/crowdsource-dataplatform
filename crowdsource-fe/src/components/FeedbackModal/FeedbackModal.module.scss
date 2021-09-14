@@ -81,3 +81,112 @@
     padding: 0 2.5rem;
   }
 }
+
+.submitButton {
+  background-color: var(--primary-color);
+  border: 0;
+  border-radius: 1.5rem;
+  color: #fff;
+  font-size: 1rem;
+  height: 2.25rem;
+  line-height: 1.5rem;
+  width: 15rem;
+
+  @include media-breakpoint-up(md) {
+    border-radius: 3rem;
+    font-size: 1.125rem;
+    height: 3rem;
+  }
+
+  &:disabled {
+    background-color: #7f8ea4;
+    border-color: #7f8ea4;
+    box-shadow: 0 8px 24px rgba(15, 39, 73, 0.1) !important;
+    color: #c7cfda;
+  }
+}
+
+.root {
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+}
+
+.opinions {
+  display: flex;
+}
+
+.opinion {
+  cursor: pointer;
+  height: 2.75rem;
+  width: 2.75rem;
+}
+
+.opinionLabel,
+.opinionInput {
+  height: 0;
+  width: 0;
+}
+
+.opinion1 {
+  &:hover {
+    box-shadow: 0 4px 8px rgba(227, 6, 6, 0.4);
+  }
+}
+
+.opinion1-active {
+  box-shadow: 0 4px 12px rgba(227, 6, 6, 0.5);
+}
+
+.opinion2 {
+  &:hover {
+    box-shadow: 0 4px 8px rgba(255, 122, 0, 0.4);
+  }
+}
+
+.opinion2-active {
+  box-shadow: 0 4px 8px rgba(255, 122, 0, 0.5);
+}
+
+.opinion3 {
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+  }
+}
+
+.opinion3-active {
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.5);
+}
+
+.opinion4 {
+  &:hover {
+    box-shadow: 0 4px 8px rgba(24, 175, 0, 0.4);
+  }
+}
+
+.opinion4-active {
+  box-shadow: 0 4px 8px rgba(24, 175, 0, 0.5);
+}
+
+.opinion5 {
+  &:hover {
+    box-shadow: 0 4px 8px rgba(42, 137, 8, 0.4);
+  }
+}
+
+.opinion5-active {
+  box-shadow: 0 4px 8px rgba(42, 137, 8, 0.5);
+}
+
+.red {
+  color: #c45757;
+  font-style: italic;
+}
+
+.grey {
+  font-style: italic;
+  opacity: 0.4;
+}
+
+.radio label {
+  line-height: 1.375rem;
+}
