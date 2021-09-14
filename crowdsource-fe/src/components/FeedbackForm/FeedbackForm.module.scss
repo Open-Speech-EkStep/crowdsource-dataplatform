@@ -9,6 +9,8 @@
 
 .opinion {
   cursor: pointer;
+  height: 2.75rem;
+  width: 2.75rem;
 }
 
 .opinionLabel,
@@ -17,49 +19,54 @@
   width: 0;
 }
 
-.opinion-active1 {
-  filter: drop-shadow(0 4px 12px rgba(42, 137, 8, 0.5));
-  height: 2.5rem;
-  width: 2.5rem;
+.opinion1 {
   &:hover {
-    box-shadow: rgb(227 6 6 / 50%) 0 4px 12px;
+    box-shadow: 0 4px 8px rgba(227, 6, 6, 0.4);
   }
 }
 
-.opinion-active2 {
-  filter: drop-shadow(0 4px 12px rgba(42, 137, 8, 0.5));
-  height: 2.5rem;
-  width: 2.5rem;
+.opinion1-active {
+  box-shadow: 0 4px 12px rgba(227, 6, 6, 0.5);
+}
+
+.opinion2 {
   &:hover {
-    box-shadow: 0 4px 12px rgb(234 145 63 / 50%);
+    box-shadow: 0 4px 8px rgba(255, 122, 0, 0.4);
   }
 }
 
-.opinion-active3 {
-  filter: drop-shadow(0 4px 12px rgba(42, 137, 8, 0.5));
-  height: 2.5rem;
-  width: 2.5rem;
+.opinion2-active {
+  box-shadow: 0 4px 8px rgba(255, 122, 0, 0.5);
+}
+
+.opinion3 {
   &:hover {
-    box-shadow: 0 4px 12px rgb(0 123 255 / 50%);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
   }
 }
 
-.opinion-active4 {
-  filter: drop-shadow(0 4px 12px rgba(42, 137, 8, 0.5));
-  height: 2.5rem;
-  width: 2.5rem;
+.opinion3-active {
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.5);
+}
+
+.opinion4 {
   &:hover {
-    box-shadow: 0 4px 12px rgb(78 215 56 / 50%);
+    box-shadow: 0 4px 8px rgba(24, 175, 0, 0.4);
   }
 }
 
-.opinion-active5 {
-  filter: drop-shadow(0 4px 12px rgba(42, 137, 8, 0.5));
-  height: 2.5rem;
-  width: 2.5rem;
+.opinion4-active {
+  box-shadow: 0 4px 8px rgba(24, 175, 0, 0.5);
+}
+
+.opinion5 {
   &:hover {
-    box-shadow: 0 4px 12px rgb(42 137 8 / 50%);
+    box-shadow: 0 4px 8px rgba(42, 137, 8, 0.4);
   }
+}
+
+.opinion5-active {
+  box-shadow: 0 4px 8px rgba(42, 137, 8, 0.5);
 }
 
 .red {

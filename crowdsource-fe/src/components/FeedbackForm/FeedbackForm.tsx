@@ -76,13 +76,15 @@ const FeedbackForm = ({ onSuccess: showThankyou }: { onSuccess: () => void }) =>
               <label
                 htmlFor={`opinion${opinion}`}
                 className={`${styles.opinion} ${
-                  selectedOpinionValue === opinion ? '' : styles[`opinion-active${opinion}`]
+                  selectedOpinionValue === opinion
+                    ? styles[`opinion${opinion}-active`]
+                    : styles[`opinion${opinion}`]
                 } rounded-circle`}
               >
                 <Image
                   src={`/images/opinion${opinion}${selectedOpinionValue === opinion ? '-active' : ''}.svg`}
-                  width="40"
-                  height="40"
+                  width="44"
+                  height="44"
                   alt="icon"
                 />
                 <span className={`${styles.opinionLabel} position-absolute opacity-0`}>{opinion}</span>

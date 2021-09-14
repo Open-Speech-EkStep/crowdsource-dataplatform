@@ -26,7 +26,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
           class="me-5"
         >
           <label
-            class="opinion opinion-active1 rounded-circle"
+            class="opinion opinion1 rounded-circle"
             for="opinion1"
           >
             <div
@@ -38,7 +38,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
                 <img
                   alt=""
                   aria-hidden="true"
-                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDQiIGhlaWdodD0iNDQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
                   style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
                 />
               </div>
@@ -69,7 +69,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
           class="me-5"
         >
           <label
-            class="opinion opinion-active2 rounded-circle"
+            class="opinion opinion2 rounded-circle"
             for="opinion2"
           >
             <div
@@ -81,7 +81,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
                 <img
                   alt=""
                   aria-hidden="true"
-                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDQiIGhlaWdodD0iNDQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
                   style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
                 />
               </div>
@@ -112,7 +112,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
           class="me-5"
         >
           <label
-            class="opinion opinion-active3 rounded-circle"
+            class="opinion opinion3 rounded-circle"
             for="opinion3"
           >
             <div
@@ -124,7 +124,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
                 <img
                   alt=""
                   aria-hidden="true"
-                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDQiIGhlaWdodD0iNDQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
                   style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
                 />
               </div>
@@ -155,7 +155,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
           class="me-5"
         >
           <label
-            class="opinion opinion-active4 rounded-circle"
+            class="opinion opinion4 rounded-circle"
             for="opinion4"
           >
             <div
@@ -167,7 +167,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
                 <img
                   alt=""
                   aria-hidden="true"
-                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDQiIGhlaWdodD0iNDQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
                   style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
                 />
               </div>
@@ -198,7 +198,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
           class="me-5"
         >
           <label
-            class="opinion opinion-active5 rounded-circle"
+            class="opinion opinion5 rounded-circle"
             for="opinion5"
           >
             <div
@@ -210,7 +210,7 @@ exports[`FeedbackForm should render the component and matches it against stored 
                 <img
                   alt=""
                   aria-hidden="true"
-                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDQiIGhlaWdodD0iNDQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
                   style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
                 />
               </div>
