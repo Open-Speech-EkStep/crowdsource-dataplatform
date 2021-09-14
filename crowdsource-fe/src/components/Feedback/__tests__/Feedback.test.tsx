@@ -1,11 +1,4 @@
-import {
-  screen,
-  render,
-  verifyAxeTest,
-  fireEvent,
-  waitFor,
-  waitForElementToBeRemoved,
-} from 'utils/testUtils';
+import { screen, render, verifyAxeTest, fireEvent, waitFor } from 'utils/testUtils';
 
 import Feedback from '../Feedback';
 
@@ -31,7 +24,9 @@ describe('Feedback', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'feedbackIconAlt' }));
 
-    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
   });
 
   it('should show success modal if feedback submitted', async () => {
@@ -42,7 +37,9 @@ describe('Feedback', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'feedbackIconAlt' }));
 
-    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
 
     fetchMock.doMockOnceIf(url).mockResponseOnce(JSON.stringify(successResponse));
 
@@ -59,6 +56,6 @@ describe('Feedback', () => {
     });
 
     fireEvent.click(screen.getByRole('button', { name: 'Close' }));
-    await waitForElementToBeRemoved(() => screen.queryByText('submitSuccess'));
+    expect(screen.queryByText('submitSuccess')).not.toBeInTheDocument();
   });
 });

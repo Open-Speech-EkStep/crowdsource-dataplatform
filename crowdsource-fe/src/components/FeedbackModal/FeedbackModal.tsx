@@ -69,17 +69,10 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
   useEffect(() => {
     if (data) {
       showThankyouRef.current();
-      setFormData({
-        opinion_rating: undefined,
-        category: '',
-        feedback: '',
-        recommended: '',
-        revisit: '',
-      });
     }
   }, [data]);
 
-  const isButtonEnabled = !isLoading && formData.opinion_rating;
+  const isButtonEnabled = !isLoading && formData.opinion_rating && !data;
 
   return (
     <Modal

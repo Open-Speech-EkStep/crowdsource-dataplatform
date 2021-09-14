@@ -36,8 +36,8 @@ const Feedback = () => {
       >
         <Image src="/images/feedback-icon.svg" width="32" height="32" alt={t('feedbackIconAlt')} />
       </Button>
-      <FeedbackModal show={modalShow} onHide={hideModal} onSuccess={showFeedbackSuccess} />
-      <FeedbackSuccessModal show={feedbackSuccess} onHide={hideFeedbackSuccess} />
+      {modalShow && <FeedbackModal show={modalShow} onHide={hideModal} onSuccess={showFeedbackSuccess} />}
+      {feedbackSuccess && <FeedbackSuccessModal show={feedbackSuccess} onHide={hideFeedbackSuccess} />}
     </Fragment>
   );
 };
