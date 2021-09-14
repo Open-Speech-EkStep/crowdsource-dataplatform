@@ -7,7 +7,7 @@ import styles from './HomePageBackground.module.scss';
 
 const HomePageBackground = () => {
   return (
-    <div data-testid="HomePageBackground" className={styles.root}>
+    <div data-testid="HomePageBackground" className={`${styles.root} px-2 px-lg-0`}>
       <Container fluid="lg" className="pt-7 pt-md-9">
         <section className="py-8 py-md-9 px-8 px-md-0">
           <Hero />

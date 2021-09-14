@@ -14,17 +14,19 @@ const Home: NextPage = () => {
   return (
     <Fragment>
       <HomePageBackground />
-      <Container fluid="lg" className="pb-7 pb-md-9">
-        <section className="py-8 py-md-9">
-          <ContributionStats />
-        </section>
-        <section className="py-8 py-md-9">
-          <BadgesIntro />
-        </section>
-        <section className="py-8 py-md-9">
-          <BronzeContribute />
-        </section>
-      </Container>
+      <div className="px-2 px-lg-0">
+        <Container fluid="lg" className="pb-7 pb-md-9">
+          <section className="py-8 py-md-9">
+            <ContributionStats />
+          </section>
+          <section className="py-8 py-md-9">
+            <BadgesIntro />
+          </section>
+          <section className="py-8 py-md-9">
+            <BronzeContribute />
+          </section>
+        </Container>
+      </div>
     </Fragment>
   );
 };
