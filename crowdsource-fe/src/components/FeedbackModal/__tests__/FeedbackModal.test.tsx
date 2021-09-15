@@ -1,6 +1,6 @@
 import { when } from 'jest-when';
 
-import { screen, render, verifyAxeTest, fireEvent, waitFor } from 'utils/testUtils';
+import { screen, render, verifyAxeTest, userEvent, waitFor } from 'utils/testUtils';
 
 import FeedbackModal from '../FeedbackModal';
 
@@ -20,7 +20,7 @@ describe('FeedbackModal', () => {
 
     expect(screen.getByRole('button', { name: /submit/i })).toBeDisabled();
 
-    fireEvent.click(screen.getAllByRole('radio')[0]);
+    userEvent.click(screen.getAllByRole('radio')[0]);
 
     expect(screen.getByRole('button', { name: /submit/i })).toBeEnabled();
   });
@@ -45,11 +45,11 @@ describe('FeedbackModal', () => {
 
     setup();
 
-    fireEvent.click(screen.getAllByRole('radio')[0]);
+    userEvent.click(screen.getAllByRole('radio')[0]);
 
     expect(screen.getByRole('button', { name: /submit/i })).toBeEnabled();
 
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+    userEvent.click(screen.getByRole('button', { name: /submit/i }));
 
     await waitFor(() => expect(screen.getByRole('button', { name: /submit/i })).toBeDisabled());
     await waitFor(() => {
@@ -94,11 +94,11 @@ describe('FeedbackModal', () => {
 
     setup();
 
-    fireEvent.click(screen.getAllByRole('radio')[0]);
+    userEvent.click(screen.getAllByRole('radio')[0]);
 
     expect(screen.getByRole('button', { name: /submit/i })).toBeEnabled();
 
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+    userEvent.click(screen.getByRole('button', { name: /submit/i }));
 
     await waitFor(() => expect(screen.getByRole('button', { name: /submit/i })).toBeDisabled());
     await waitFor(() => {

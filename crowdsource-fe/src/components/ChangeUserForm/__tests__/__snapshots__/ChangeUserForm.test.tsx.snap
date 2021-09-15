@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChangeUserForm should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <form
+    class="root py-2"
+    data-testid="ChangeUserForm"
+    id="changeUserForm"
+    novalidate=""
+  >
+    <div
+      class="py-3"
+    >
+      <label
+        class="form-label"
+        for="userName"
+      >
+        name
+      </label>
+      <input
+        class="form-control"
+        id="userName"
+        maxlength="12"
+        name="userName"
+        placeholder="enterUsername"
+        type="text"
+        value=""
+      />
+      <small
+        class="d-block text-muted mt-1 form-text"
+      >
+        userNameHint
+      </small>
+    </div>
+    <div
+      class="py-3"
+    >
+      <label
+        class="mb-1 form-label"
+        for="motherTongue"
+      >
+        motherTongue
+      </label>
+      <select
+        class="select form-select"
+        id="motherTongue"
+        name="motherTongue"
+      >
+        <option
+          value=""
+        >
+          selectMotherTongue
+        </option>
+        <option
+          value="English"
+        >
+          English
+        </option>
+        <option
+          value="Hindi"
+        >
+          हिंदी
+        </option>
+      </select>
+    </div>
+    <div
+      class="py-3"
+    >
+      <label
+        class="mb-1 form-label"
+        for="age"
+      >
+        ageGroup
+      </label>
+      <select
+        class="select form-select"
+        id="age"
+        name="age"
+      >
+        <option
+          value=""
+        >
+          selectAgeGroup
+        </option>
+        <option
+          value="upto 10"
+        >
+          kidAgeGroup
+        </option>
+        <option
+          value="10 - 30"
+        >
+          youthAgeGroup
+        </option>
+        <option
+          value="30 - 60"
+        >
+          adultAgeGroup
+        </option>
+        <option
+          value="60+"
+        >
+          seniorAgeGroup
+        </option>
+      </select>
+    </div>
+    <div
+      class="py-3"
+    >
+      <label
+        class="mb-1 form-label"
+        for="gender"
+      >
+        gender
+      </label>
+      <div>
+        <div
+          class="radio me-8 mb-0 form-check form-check-inline"
+        >
+          <input
+            class="form-check-input"
+            id="male"
+            name="gender"
+            type="radio"
+            value="male"
+          />
+          <label
+            class="form-check-label"
+            for="male"
+            title=""
+          >
+            male
+          </label>
+        </div>
+        <div
+          class="radio me-8 mb-0 form-check form-check-inline"
+        >
+          <input
+            class="form-check-input"
+            id="female"
+            name="gender"
+            type="radio"
+            value="female"
+          />
+          <label
+            class="form-check-label"
+            for="female"
+            title=""
+          >
+            female
+          </label>
+        </div>
+        <div
+          class="radio me-8 mb-0 form-check form-check-inline"
+        >
+          <input
+            class="form-check-input"
+            id="others"
+            name="gender"
+            type="radio"
+            value=""
+          />
+          <label
+            class="form-check-label"
+            for="others"
+            title=""
+          >
+            others
+          </label>
+        </div>
+      </div>
+    </div>
+    <p
+      class="py-3 mb-0"
+    />
+  </form>
+  <button
+    form="changeUserForm"
+  >
+    submit
+  </button>
+</DocumentFragment>
+`;

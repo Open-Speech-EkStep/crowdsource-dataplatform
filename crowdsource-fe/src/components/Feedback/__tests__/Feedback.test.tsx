@@ -1,4 +1,4 @@
-import { screen, render, verifyAxeTest, fireEvent, waitFor } from 'utils/testUtils';
+import { screen, render, verifyAxeTest, userEvent, waitFor } from 'utils/testUtils';
 
 import Feedback from '../Feedback';
 
@@ -22,7 +22,7 @@ describe('Feedback', () => {
   it('should open feedback if button clicked', async () => {
     await setup();
 
-    fireEvent.click(screen.getByRole('button', { name: 'feedbackIconAlt' }));
+    userEvent.click(screen.getByRole('button', { name: 'feedbackIconAlt' }));
 
     await waitFor(() => {
       expect(screen.getByRole('dialog')).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe('Feedback', () => {
 
     await setup();
 
-    fireEvent.click(screen.getByRole('button', { name: 'feedbackIconAlt' }));
+    userEvent.click(screen.getByRole('button', { name: 'feedbackIconAlt' }));
 
     await waitFor(() => {
       expect(screen.getByRole('dialog')).toBeInTheDocument();
@@ -43,11 +43,11 @@ describe('Feedback', () => {
 
     fetchMock.doMockOnceIf(url).mockResponseOnce(JSON.stringify(successResponse));
 
-    fireEvent.click(screen.getAllByRole('radio')[0]);
+    userEvent.click(screen.getAllByRole('radio')[0]);
 
     expect(screen.getByRole('button', { name: /submit/i })).toBeEnabled();
 
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+    userEvent.click(screen.getByRole('button', { name: /submit/i }));
 
     expect(screen.getByRole('button', { name: /submit/i })).toBeDisabled();
 
@@ -55,7 +55,7 @@ describe('Feedback', () => {
       expect(screen.getByText('submitSuccess')).toBeInTheDocument();
     });
 
-    fireEvent.click(screen.getByRole('button', { name: 'Close' }));
+    userEvent.click(screen.getByRole('button', { name: 'Close' }));
     expect(screen.queryByText('submitSuccess')).not.toBeInTheDocument();
   });
 });

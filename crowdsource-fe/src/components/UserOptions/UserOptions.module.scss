@@ -1,0 +1,62 @@
+.root:global(.show) {
+  position: relative;
+
+  @include media-breakpoint-up(lg) {
+    &::before {
+      background-color: var(--primary-color);
+      bottom: 0;
+      content: '';
+      height: 0.125rem;
+      position: absolute;
+      width: 100%;
+    }
+  }
+
+  .toggle {
+    background-color: var(--text-white);
+    border-radius: 0;
+
+    @include media-breakpoint-up(lg) {
+      background-color: rgba(159, 200, 255, 0.39);
+    }
+  }
+}
+
+.toggle {
+  @include media-breakpoint-up(md) {
+    width: 4.5rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: auto;
+  }
+
+  &:hover {
+    background-color: var(--text-white);
+    color: var(--primary-color);
+  }
+}
+
+.toggle,
+.toggle:focus {
+  background-color: var(--text-white);
+  border: 0;
+  border-radius: 0;
+}
+
+.item {
+  color: var(--primary-color);
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1rem;
+  }
+
+  &:visited,
+  &:hover,
+  &:active {
+    background-color: rgba(159, 200, 255, 0.39);
+    color: var(--primary-color);
+  }
+}

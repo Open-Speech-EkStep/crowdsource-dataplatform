@@ -14,7 +14,7 @@ const customRender = (ui: ReactElement, options?: RenderOptions) =>
 
 // re-export everything
 export * from '@testing-library/react';
-export * from '@testing-library/user-event';
+export { default as userEvent } from '@testing-library/user-event';
 export { renderHook } from '@testing-library/react-hooks';
 
 // override render method

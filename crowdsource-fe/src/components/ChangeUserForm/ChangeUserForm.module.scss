@@ -1,0 +1,67 @@
+.root {
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+}
+
+.opinions {
+  display: flex;
+}
+
+.opinion {
+  cursor: pointer;
+}
+
+.opinionLabel,
+.opinionInput {
+  height: 0;
+  width: 0;
+}
+
+.opinion1 {
+  background: url('/images/opinions.png') -10px -10px;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.opinion2 {
+  background: url('/images/opinions.png') -70px -10px;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.opinion3 {
+  background: url('/images/opinions.png') -10px -70px;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.opinion4 {
+  background: url('/images/opinions.png') -70px -70px;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.opinion5 {
+  background: url('/images/opinions.png') -130px -10px;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.red {
+  color: #c45757;
+  font-style: italic;
+}
+
+.grey {
+  font-style: italic;
+  opacity: 0.4;
+}
+
+.radio label {
+  line-height: 1.375rem;
+}
+
+.termsAndConditionsLink {
+  color: #007bff;
+  font-family: Roboto, sans-serif;
+}

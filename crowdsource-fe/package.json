@@ -24,7 +24,6 @@
     "test:vr:update": "npm run test:vr:setup 'cross-env JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE=1 jest --testMatch=\"**/__vr__/**/*.[jt]s?(x)\" -u'",
     "node-talisman": "node-talisman --pattern=\"src/**/*.ts\" && node-talisman --pattern=\"src/**/*.tsx\"",
     "check": "npm run lint && npm run stylelint && npm run typecheck && cross-env CI=true npm run test:coverage -- --runInBand && npm run node-talisman",
-    "prebuild": "npm run check",
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js"
   },
