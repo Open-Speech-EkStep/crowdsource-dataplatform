@@ -61,6 +61,56 @@ exports[`ChangeUserForm should render the component and matches it against store
         >
           हिंदी
         </option>
+        <option
+          value="Tamil"
+        >
+          தமிழ்
+        </option>
+        <option
+          value="Telugu"
+        >
+          తెలుగు
+        </option>
+        <option
+          value="Assamese"
+        >
+          অসমীয়া
+        </option>
+        <option
+          value="Bengali"
+        >
+          বাংলা
+        </option>
+        <option
+          value="Gujarati"
+        >
+          ગુજરાતી
+        </option>
+        <option
+          value="Kannada"
+        >
+          ಕನ್ನಡ
+        </option>
+        <option
+          value="Malayalam"
+        >
+          മലയാളം
+        </option>
+        <option
+          value="Marathi"
+        >
+          मराठी
+        </option>
+        <option
+          value="Odia"
+        >
+          ଓଡିଆ
+        </option>
+        <option
+          value="Punjabi"
+        >
+          ਪੰਜਾਬੀ
+        </option>
       </select>
     </div>
     <div

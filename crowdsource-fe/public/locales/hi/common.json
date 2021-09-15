@@ -11,7 +11,6 @@
   "dekho": "देखो",
   "bhasha": "भाषा",
   "daan": "दान",
-  "beta": "Beta",
   "india": "इंडिया",
   "heroSecondaryHeading": "प्लैटफ़ॉर्म एक,  क्राउडसोर्सिंग उपक्रम अनेक",
   "heroText": "अपनी भाषा को डिज़िटल रूप से समृद्ध करने के लिए डेटा की ओपन रिपॉज़िटरी बनाने में मदद करें",
@@ -56,7 +55,6 @@
   "noUsername": "कोई उपयोगकर्ता नहीं",
   "changeUser": "उपयोगकर्ता बदलें",
   "myBadges": "मेरे बैज",
-
   "changeUserModalHeading": "उपयोगकर्ता की जानकारी",
   "changeUserModalSubHeading": "सभी फ़ील्ड वैकल्पिक हैं, लेकिन आप अपनी जनसांख्यिकीय जानकारी देकर अपने डेटासेट के योगदान को बढ़ा सकते हैं।",
   "name": "नाम",
@@ -67,12 +65,10 @@
   "selectMotherTongue": "मातृभाषा चुनें",
   "ageGroup": "आयु वर्ग",
   "selectAgeGroup": "आयु वर्ग चुनें",
-
   "kidAgeGroup": "10 वर्ष तक (बच्चे)",
   "youthAgeGroup": "10 - 30 वर्ष (युवा)",
   "adultAgeGroup": "30 - 60 वर्ष (वयस्क)",
   "seniorAgeGroup": "60+ वर्ष (वरिष्ठ)",
-
   "gender": "लिंग",
   "male": "पुरुष",
   "female": "महिला",
@@ -83,16 +79,11 @@
   "termsConditionsText": "आगे बढ़ने का मतलब, आप इन <TermsAndConditionsLink /> से सहमत हैं",
   "termsAndConditionsTextValue": "नियम और शर्तों",
   "Done": "समाप्त",
-
   "404Title": "यह पृष्ठ नहीं मिला",
   "privacyPolicy": "निजता नीति",
   "footerSocialShareText": "अपने दोस्तों और परिवार के सदस्यों के साथ शेयर करें",
   "socialSharingTextWithoutRank": "मैंने  https://bhashini.gov.in/bhashadaan पर भारत के लिए ओपन लैंग्वेज रिपोजिटरी बनाने में योगदान दिया है। हम और आप भाषा दान में योगदान देकर एक बदलाव ला सकते हैं जो मशीनों को हमारी भाषा सीखने और अच्छी भाषाई एप्लिकेशन्स के माध्यम से हमारे साथ संपर्क करने में मदद कर सकता है। अपना योगदान दें और भाषा को सशक्त बनाएं।",
-
-  "bhashiniLogoAlt": "Bhashini Logo",
-  "initiativeLogo": "Initiative Logo",
-  "feedbackIconAlt": "Feedback Icon",
-  "languageIconAlt": "Language Icon",
+  "initiativeLogo": "",
   "submitSuccess": "सफलतापूर्वक सबमिट किया",
   "feedbackThankYou": "फीडबैक देने के लिए धन्यवाद"
 }

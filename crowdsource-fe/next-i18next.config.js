@@ -1,6 +1,16 @@
 const LOCALES_MAPPING = {
   en: 'en',
   hi: 'hi',
+  ta: 'ta',
+  te: 'te',
+  as: 'as',
+  bn: 'bn',
+  gu: 'gu',
+  kn: 'kn',
+  ml: 'ml',
+  mr: 'mr',
+  or: 'or',
+  pa: 'pa',
 };
 
 module.exports = {
