@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PageBackground should render the component and matches it against stored snapshot 1`] = `
+exports[`Background should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <section
     class="root"
-    data-testid="PageBackground"
+    data-testid="Background"
     style="--background--image: url(/images/some-image.svg); --background--image-mobile: url(/images/some-image.svg); --background-size: cover;"
   >
     <div>

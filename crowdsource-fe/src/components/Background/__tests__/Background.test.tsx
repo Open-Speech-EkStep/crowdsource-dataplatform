@@ -1,13 +1,13 @@
 import { render, verifyAxeTest } from 'utils/testUtils';
 
-import PageBackground from '../PageBackground';
+import Background from '../Background';
 
-describe('PageBackground', () => {
+describe('Background', () => {
   const setup = () =>
     render(
-      <PageBackground image="some-image.svg" size="cover">
+      <Background image="some-image.svg" size="cover">
         <div>Child Component</div>
-      </PageBackground>
+      </Background>
     );
 
   verifyAxeTest(setup());
