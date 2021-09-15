@@ -155,6 +155,10 @@ const removeItemFromCache = async (dataset_row_id, type, language, toLanguage) =
 
 		const cacheData = JSON.parse(cacheResponse);
 
+		if (cacheData == null) {
+			return;
+		}
+
 		let data = cacheData.filter(dataset => dataset.dataset_row_id != dataset_row_id);
 
 		await cache.setAsync(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(data), expiry);
