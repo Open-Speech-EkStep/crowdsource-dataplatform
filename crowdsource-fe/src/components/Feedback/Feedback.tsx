@@ -34,7 +34,7 @@ const Feedback = () => {
         onClick={showModal}
         className={`${styles.root} d-inline-flex justify-content-center align-items-center`}
       >
-        <Image src="/images/feedback-icon.svg" width="32" height="32" alt={t('feedbackIconAlt')} />
+        <Image src="/images/feedback_icon.svg" width="32" height="32" alt={t('feedbackIconAlt')} />
       </Button>
       {modalShow && <FeedbackModal show={modalShow} onHide={hideModal} onSuccess={showFeedbackSuccess} />}
       {feedbackSuccess && <FeedbackSuccessModal show={feedbackSuccess} onHide={hideFeedbackSuccess} />}

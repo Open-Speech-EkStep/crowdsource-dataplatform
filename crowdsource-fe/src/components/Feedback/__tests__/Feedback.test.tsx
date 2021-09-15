@@ -13,12 +13,6 @@ describe('Feedback', () => {
     verifyAxeTest(await setup());
   };
 
-  it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup();
-
-    expect(asFragment()).toMatchSnapshot();
-  });
-
   it('should open feedback if button clicked', async () => {
     await setup();
 
