@@ -315,7 +315,7 @@ workflows:
             - check_fe
           filters:
             branches:
-              only: [master, test_translation_scripts]
+              only: [master, nextjs-basic-setup]
 
       - db_migrate_azure:
           name: migrate_dev_azure
@@ -324,6 +324,9 @@ workflows:
           db_user: ${AZURE_DB_USER}
           requires:
             - create-workspace
+          filters:
+            branches:
+              only: [master]
 
       - build_ui_push_to_blob_storage:
           name: build_dev_ui
@@ -349,7 +352,7 @@ workflows:
           tag: dev
           checkout: false
           requires:
-            - migrate_dev_azure
+            - create-workspace
 
       - azure-acr/build-and-push-image:
           pre-steps:
