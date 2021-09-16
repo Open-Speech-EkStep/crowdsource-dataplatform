@@ -28,7 +28,7 @@ const BadgesIntro = () => {
             return (
               <div key={badge} className={styles.badge}>
                 <Image
-                  src={`/images/${currentLocale}/${currentLocale}_bolo_${badge}_contribute.svg`}
+                  src={`/images/${currentLocale}/badges/${currentLocale}_bolo_${badge}_contribute.svg`}
                   width="140"
                   height="180"
                   alt={`${badge} Badge ${currentLocale}`}

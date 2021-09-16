@@ -21,7 +21,7 @@ const BronzeContribute = () => {
         <Row>
           <Col xs="12" md="2">
             <Image
-              src={`/images/${currentLocale}/${currentLocale}_bolo_bronze_contribute.svg`}
+              src={`/images/${currentLocale}/badges/${currentLocale}_bolo_bronze_contribute.svg`}
               width="125"
               height="160"
               alt={`Bronze Badge ${currentLocale}`}
