@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 
 import Link from 'components/Link';
 import TriColorBorder from 'components/TriColorBorder';
+import { INITIATIVES } from 'constants/initiativeConstants';
 import routePaths from 'constants/routePaths';
 
 import styles from './BronzeContribute.module.scss';
@@ -13,8 +14,6 @@ import styles from './BronzeContribute.module.scss';
 const BronzeContribute = () => {
   const { locale: currentLocale } = useRouter();
   const { t } = useTranslation();
-  const initiatives = ['suno', 'bolo', 'likho', 'dekho'];
-
   return (
     <div data-testid="BronzeContribute" className={`${styles.root} text-center text-md-start`}>
       <div className="p-3 py-md-5 px-md-10">
@@ -33,7 +32,7 @@ const BronzeContribute = () => {
             <div
               className={`${styles.initiatives} d-flex flex-wrap justify-content-center justify-content-md-start mt-6`}
             >
-              {initiatives.map(initiative => {
+              {INITIATIVES.map(initiative => {
                 return (
                   <Link href={routePaths[`${initiative}IndiaHome`]} key={initiative}>
                     <a

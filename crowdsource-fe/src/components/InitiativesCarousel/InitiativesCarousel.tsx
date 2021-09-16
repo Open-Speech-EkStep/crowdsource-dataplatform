@@ -10,12 +10,13 @@ import InitiativeAction from 'components/InitiativeAction';
 import InitiativeHeader from 'components/InitiativeHeader';
 import Link from 'components/Link';
 import TriColorBackground from 'components/TriColorBackground';
+import { INITIATIVES } from 'constants/initiativeConstants';
 import routePaths from 'constants/routePaths';
 
 import styles from './InitiativesCarousel.module.scss';
 
 const InitiativesCarousel = () => {
-  const initiatives = ['suno', 'bolo', 'likho', 'dekho'];
+  const initiatives = INITIATIVES;
   const { t } = useTranslation();
   const [sliders, setNavs] = useState({ sliderOne: undefined, sliderTwo: undefined });
   const sliderOneRef = useRef(undefined);
