@@ -9,7 +9,8 @@ const mockDB = {
 jest.mock('../src/cache/cache', () => ({
     getAsync: jest.fn(() => Promise.resolve()),
     setAsync: jest.fn(() => Promise.resolve()),
-    setWithLock: jest.fn(() => Promise.resolve())
+    setWithLock: jest.fn(() => Promise.resolve()),
+    doOperationWithLock: jest.fn((key, operation) => Promise.resolve(operation()))
 }));
 jest.mock('config', () => ({
     "caching": "enabled",

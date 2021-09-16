@@ -72,6 +72,21 @@ const setWithLock = async (key, db, query, params, callback) => {
     }
 }
 
+const doOperationWithLock = async (key, operation, lockTimeOut) => {
+    console.log(`waiting for lock ${key}`)
+    let lock = await distributeRedisdLock.acquire(`lock:${key}`, lockTimeOut);
+    console.log(`lock acquired ${key}`)
+    try {
+        await operation();
+        await lock.unlock();
+        console.log(`lock released ${key}`)
+    }
+    catch (err) {
+        console.log(err);
+        lock.unlock();
+    }
+}
+
 const setAsync = (key, value, expiryTime) => {
     return client.set(prefix + "_" + key, value, 'EX', expiryTime);
 }
@@ -83,5 +98,6 @@ const getAsync = (key) => {
 module.exports = {
     setAsync,
     getAsync,
-    setWithLock
+    setWithLock,
+    doOperationWithLock
 }

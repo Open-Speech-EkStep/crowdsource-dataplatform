@@ -186,12 +186,20 @@ const markContributionSkippedInCache = async (type, fromLanguage, toLanguage, da
 		return;
 	}
 	try {
-		const cacheResponse = await cache.getAsync(`dataset_row_${type}_${fromLanguage}_${toLanguage}`);
-		if (cacheResponse) {
-			let cacheData = JSON.parse(cacheResponse);
-			cacheData = updateSkippedByForItem(cacheData, dataset_row_id, userId, userName);
-			await cache.setAsync(`dataset_row_${type}_${fromLanguage}_${toLanguage}`, JSON.stringify(cacheData), expiry);
-		}
+
+		const key = `dataset_row_${type}_${fromLanguage}_${toLanguage}`;
+
+		const operation = async () => {
+			const cacheResponse = await cache.getAsync(key);
+			if (cacheResponse) {
+				let cacheData = JSON.parse(cacheResponse);
+				cacheData = updateSkippedByForItem(cacheData, dataset_row_id, userId, userName);
+				await cache.setAsync(key, JSON.stringify(cacheData), expiry);
+			}
+		};
+
+		await cache.doOperationWithLock(key, operation, 5000);
+
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)
 	}
@@ -209,7 +217,7 @@ const setValidationDataForCaching = async (db, type, language, toLanguage) => {
 			query,
 			[type, language, toLanguage, batchSize],
 			(data) => sortAndFilterValidationData(data)
-			);
+		);
 
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)
@@ -257,13 +265,20 @@ const updateCacheAfterValidation = async (contribution_id, type, fromLanguage, t
 		return;
 	}
 	try {
-		const cacheResponse = await cache.getAsync(`contributions_${type}_${fromLanguage}_${toLanguage}`);
-		if (cacheResponse) {
-			let cacheData = JSON.parse(cacheResponse);
-			cacheData = updateValidationCountForItem(cacheData, contribution_id, userId, userName, action);
-			cacheData = sortAndFilterValidationData(cacheData);
-			await cache.setAsync(`contributions_${type}_${fromLanguage}_${toLanguage}`, JSON.stringify(cacheData), expiry);
-		}
+		const key = `contributions_${type}_${fromLanguage}_${toLanguage}`;
+
+		const operation = async () => {
+			const cacheResponse = await cache.getAsync(key);
+			if (cacheResponse) {
+				let cacheData = JSON.parse(cacheResponse);
+				cacheData = updateValidationCountForItem(cacheData, contribution_id, userId, userName, action);
+				cacheData = sortAndFilterValidationData(cacheData);
+				await cache.setAsync(key, JSON.stringify(cacheData), expiry);
+			}
+		};
+
+		await cache.doOperationWithLock(key, operation, 5000);
+
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)
 	}
