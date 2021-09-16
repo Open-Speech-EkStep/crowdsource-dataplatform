@@ -21,12 +21,12 @@ const FeedbackSuccessModal = (props: FeedbackSuccessModalProps) => {
       centered
     >
       <Modal.Header closeButton className={styles.modalHeader} />
-      <Modal.Body className="pt-0">
+      <Modal.Body className={`pt-0 ${styles.modalBody}`}>
         <div className="text-center">
           <Image src="/images/success.svg" width="48" height="48" alt="success" />
         </div>
-        <div className="text-center pt-3">{t('submitSuccess')}</div>
-        <div className="text-center pt-1">{t('feedbackThankYou')}!</div>
+        <div className="text-center pt-2">{t('submitSuccess')}</div>
+        <div className="text-center">{t('feedbackThankYou')}!</div>
       </Modal.Body>
     </Modal>
   );

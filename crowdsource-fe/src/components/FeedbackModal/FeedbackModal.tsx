@@ -150,6 +150,7 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
             <Form.Control
               as="textarea"
               rows={3}
+              maxLength={1000}
               placeholder={t('typeHere')}
               name="feedback"
               onChange={handleChange}

@@ -7,6 +7,14 @@
   }
 }
 
+.modalBody {
+  padding-bottom: 2rem;
+
+  @include media-breakpoint-up(md) {
+    padding-bottom: 2.5rem;
+  }
+}
+
 .root {
   max-width: 25rem;
 
