@@ -8,6 +8,7 @@ module.exports = {
     '!src/**/*.vr.{js,jsx,ts,tsx}',
     '!src/utils/testUtils.tsx',
     '!src/pages/_document.page.tsx',
+    '!src/pages/style-guide.page.tsx',
   ],
   coverageThreshold: {
     global: {

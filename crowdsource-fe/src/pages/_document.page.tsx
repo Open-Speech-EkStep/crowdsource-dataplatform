@@ -22,16 +22,6 @@ class MyDocument extends Document<MyDocumentProps> {
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
           <link
-            rel="preload"
-            href="https://fonts.googleapis.com/css?family=Rowdies:400,700&display=swap"
-            as="style"
-          />
-          <link
-            rel="preload"
-            href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
-            as="style"
-          />
-          <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Rowdies:400,700&display=swap"
           />
