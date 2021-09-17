@@ -15,10 +15,20 @@ const Logo = () => {
   return (
     <div data-testid="Logo" className={styles.root}>
       <a href={routePaths.root} className={classnames(styles.img, styles.imgMobile)}>
-        <Image src={`/images/${currentLocale}-logo-sm.svg`} alt={t('bhashiniLogo')} width="48" height="48" />
+        <Image
+          src={`/images/${currentLocale}/logos/${currentLocale}-logo-sm.svg`}
+          alt={t('bhashiniLogo')}
+          width="48"
+          height="48"
+        />
       </a>
       <a href={routePaths.root} className={classnames(styles.img, styles.imgDesktop)}>
-        <Image src={`/images/${currentLocale}-logo.svg`} alt={t('bhashiniLogo')} width="192" height="70" />
+        <Image
+          src={`/images/${currentLocale}/logos/${currentLocale}-logo.svg`}
+          alt={t('bhashiniLogo')}
+          width="192"
+          height="70"
+        />
       </a>
       <span className={styles.sep} />
       <Link href={routePaths.home}>

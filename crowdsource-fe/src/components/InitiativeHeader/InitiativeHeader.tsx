@@ -20,7 +20,7 @@ const InitiativeHeader = ({ initiative }: PageHeaderProps) => {
         <Col xs="12" md="4" className="d-flex justify-content-center">
           <div className={styles.initiativeHeaderImg}>
             <Image
-              src={`/images/${currentLocale}-${initiative}IndiaLogo.svg`}
+              src={`/images/${currentLocale}/logos/${currentLocale}-${initiative}IndiaLogo.svg`}
               alt={t(`${initiative}Logo`)}
               width="126"
               height="103"
