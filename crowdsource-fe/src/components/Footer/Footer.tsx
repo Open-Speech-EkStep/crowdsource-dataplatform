@@ -12,7 +12,7 @@ const Footer = () => {
 
   return (
     <footer data-testid="Footer" className={`${styles.root} py-4`}>
-      <Container fluid="lg" className="d-flex flex-column flex-lg-row justify-content-lg-between">
+      <Container fluid="lg" className="d-flex flex-column flex-lg-row">
         <div className="d-flex flex-column flex-lg-row align-items-center order-2 order-lg-1">
           <Link href={routePaths.termsAndConditions}>
             <a target="_blank" className={`${styles.link} me-lg-12 py-2 py-lg-0`}>
@@ -25,7 +25,7 @@ const Footer = () => {
             </a>
           </Link>
         </div>
-        <div className="order-1 order-lg-2">
+        <div className="order-1 order-lg-2 ms-lg-12">
           <SocialShare />
         </div>
       </Container>

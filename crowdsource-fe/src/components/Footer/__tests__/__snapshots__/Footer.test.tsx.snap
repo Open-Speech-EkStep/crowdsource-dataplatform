@@ -7,7 +7,7 @@ exports[`Footer should render the component and matches it against stored snapsh
     data-testid="Footer"
   >
     <div
-      class="d-flex flex-column flex-lg-row justify-content-lg-between container-lg"
+      class="d-flex flex-column flex-lg-row container-lg"
     >
       <div
         class="d-flex flex-column flex-lg-row align-items-center order-2 order-lg-1"
@@ -28,7 +28,7 @@ exports[`Footer should render the component and matches it against stored snapsh
         </a>
       </div>
       <div
-        class="order-1 order-lg-2"
+        class="order-1 order-lg-2 ms-lg-12"
       >
         <div
           class="d-flex flex-column flex-lg-row align-items-center"
