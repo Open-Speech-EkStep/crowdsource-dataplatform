@@ -129,7 +129,7 @@ const StyleGuide: NextPage = () => {
             <em>Italics-1</em>
           </p>
           <p className="display-3 mb-2">
-            <em>Italics-1</em>
+            <em>Italics-2</em>
           </p>
         </section>
       </article>
