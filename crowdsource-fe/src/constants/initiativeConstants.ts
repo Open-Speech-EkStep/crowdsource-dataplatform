@@ -10,4 +10,4 @@ export const INITIATIVES = Object.keys(INITIATIVES_MAPPING);
 export const INITIATIVE_ACTIONS = {
   transcribe: 'Transcribe',
   validate: 'Validate',
-};
+} as const;

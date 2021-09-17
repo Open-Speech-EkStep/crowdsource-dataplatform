@@ -1,0 +1,98 @@
+.root {
+  border: 1px solid rgba(67, 192, 215, 1);
+  border-radius: 1.25rem;
+  box-shadow: rgb(67 192 215) 0 8px 0, rgb(0 0 0 / 10%) 0 0 32px;
+}
+
+.cardGradient {
+  background: linear-gradient(
+    180.52deg,
+    #FF9A1C -33.42%,
+    #FFBA3F -19.59%,
+    #FFDE66 -5.75%,
+    #FFEA9C 5.15%,
+    #FFFFFF 19.03%,
+    #FFFFFF 81.54%,
+    #EAF6E0 87.7%,
+    #99E090 99.7%,
+    #00BA06 118.97%
+  );
+}
+
+.card {
+  height: 12.5rem;
+
+  @include media-breakpoint-up(md) {
+    height: 25rem;
+  }
+}
+
+.cardTopBg {
+  background: url('/images/card_orange_bg_mobile.svg') no-repeat top center;
+
+  @include media-breakpoint-up(md) {
+    background: url('/images/card_orange_bg.svg') no-repeat top center;
+  }
+}
+
+.cardBottomBg {
+  background: url('/images/card_green_bg_mobile.svg') no-repeat bottom center;
+
+  @include media-breakpoint-up(md) {
+    background: url('/images/card_green_bg.svg') no-repeat bottom center;
+  }
+}
+
+.type {
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 2rem;
+    line-height: 3.25rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    font-size: 2.5rem;
+    line-height: 3.25rem;
+  }
+}
+
+.text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
+.icon {
+  width: 5rem;
+
+  @include media-breakpoint-up(md) {
+    width: 6rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: 7.5rem;
+  }
+}
+
+.iconShadowGreen {
+  box-shadow: none;
+
+  @include media-breakpoint-up(md) {
+    box-shadow: 0 0 12px 8px rgba(66, 178, 198, 0.4);
+  }
+}
+
+.iconShadowBlue {
+  box-shadow: none;
+
+  @include media-breakpoint-up(md) {
+    box-shadow: 0 0 12px 8px rgba(102, 176, 255, 0.4);
+  }
+}

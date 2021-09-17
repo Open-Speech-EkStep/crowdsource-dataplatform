@@ -1,0 +1,36 @@
+.root {
+  background-color: var(--bg-light-color);
+  font-family: Roboto, sans-serif;
+
+  &:before {
+    content: '';
+    width: 29px;
+    height: 40px;
+    background: url('/images/page_top_left_bg_mobile.svg') no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    @include media-breakpoint-up(xl) {
+      width: 65px;
+      height: 144px;
+      background: url('/images/page_top_left_bg.svg') no-repeat;
+    }
+  }
+
+  &:after {
+    content: '';
+    width: 48px;
+    height: 49px;
+    background: url('/images/page_bottom_right_bg_mobile.svg') no-repeat;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    @include media-breakpoint-up(xl) {
+      width: 74px;
+      height: 74px;
+      background: url('/images/page_bottom_right_bg.svg') no-repeat;
+    }
+  }
+}
