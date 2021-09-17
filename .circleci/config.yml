@@ -273,7 +273,7 @@ jobs:
             cd ..
             cd crowdsource-fe
             npm i
-            unzip ./public/do-no-unzip-aggregated-json.zip -d ./public
+            unzip ./public/do-not-unzip-aggregated-json.zip -d ./public
             CI=true NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run build
       # - run:
       #     name: VR Tests

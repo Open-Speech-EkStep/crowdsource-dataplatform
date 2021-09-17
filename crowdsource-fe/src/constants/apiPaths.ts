@@ -1,6 +1,8 @@
+import nodeConfig from './nodeConfig';
+
 const apiPaths = {
-  participationStats: '/aggregated-json/participationStats.json',
-  feedback: '/feedback',
+  participationStats: nodeConfig.cdnUrl + '/aggregated-json/participationStats.json',
+  feedback: nodeConfig.apiUrl + '/feedback',
 };
 
 export default apiPaths;
