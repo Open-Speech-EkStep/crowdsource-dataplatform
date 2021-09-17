@@ -3,11 +3,12 @@ import { render, screen, verifyAxeTest } from 'utils/testUtils';
 import HomePageBackground from '../HomePageBackground';
 
 describe('HomePageBackground', () => {
-  const setup = () => render(
-    <HomePageBackground>
-      <div>Some Content</div>
-    </HomePageBackground>
-  );
+  const setup = () =>
+    render(
+      <HomePageBackground>
+        <div>Some Content</div>
+      </HomePageBackground>
+    );
 
   verifyAxeTest(setup());
 
