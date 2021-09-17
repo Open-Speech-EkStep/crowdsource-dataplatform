@@ -26,6 +26,7 @@
     "check": "npm run lint && npm run stylelint && npm run typecheck && cross-env CI=true npm run test:coverage -- --runInBand && npm run node-talisman",
     "prebuild": "npm run check",
     "build": "next build",
+    "build:docker": "next build",
     "start": "cross-env NODE_ENV=production node server.js"
   },
   "dependencies": {
