@@ -346,7 +346,7 @@ workflows:
           name: push_dev_image_next_ui
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
-          path: ./crowdsource-fe
+          path: ./
           extra-build-args: --build-arg NODE_CONFIG_ENV=dev
           repo: ${AZURE_REPO_UI}
           tag: dev
