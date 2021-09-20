@@ -48,3 +48,8 @@ export const convertTimeFormat = (value: any) => {
   const data = formatTime(hours, minutes, seconds);
   return data;
 };
+
+export const isSunoOrBoloInitiative = (value: string) => {
+  const boloOrSuno = ['suno', 'bolo'];
+  return boloOrSuno.includes(value);
+};

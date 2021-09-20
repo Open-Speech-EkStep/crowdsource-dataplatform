@@ -2,7 +2,10 @@ import { useTranslation } from 'next-i18next';
 
 import Stats from 'components/Stats';
 import apiPaths from 'constants/apiPaths';
+import { INITIATIVES_MAPPING, INITIATIVE_CUMULATIVE_VALUE } from 'constants/initiativeConstants';
 import useFetch from 'hooks/useFetch';
+import type { CumulativeCountModel } from 'interface';
+import { convertIntoHrsFormat, formatTime, isSunoOrBoloInitiative } from 'utils/utils';
 
 import styles from './ContributionStats.module.scss';
 
@@ -18,27 +21,63 @@ const typeMap: Record<string, string> = {
   dekho: 'ocr',
 };
 
-const ContributionStats = () => {
+interface ContributionStatsProps {
+  initiative: any;
+  initiativeMedia?: string;
+}
+
+const ContributionStats = (props: ContributionStatsProps) => {
   const { t } = useTranslation();
 
   const { data: participationStats, error } = useFetch<Array<{ count: string; type: string }>>(
     apiPaths.participationStats
   );
 
+  const { data: cumulativeCountData } = useFetch<Array<CumulativeCountModel>>(apiPaths.cumulativeCount);
   const statsContents: Array<{
     id: string;
     stat: string | null;
     label: string;
   }> = [];
 
-  initiativeOrder.forEach(initiative => {
-    const stat =
-      !participationStats || error
-        ? null
-        : participationStats.filter(stats => stats['type'] === typeMap[initiative])[0]?.count || '0';
+  const setStatsForInitiatives = () => {
+    const initiativeData: any =
+      cumulativeCountData && cumulativeCountData.find(item => item.type === props.initiativeMedia);
+    if (initiativeData) {
+      initiativeData.peopleParticipated = participationStats?.find(
+        item => item.type === props.initiativeMedia
+      )?.count;
+      INITIATIVE_CUMULATIVE_VALUE.suno.forEach((ele, index) => {
+        let statValue;
+        if (isSunoOrBoloInitiative(INITIATIVES_MAPPING.suno) && ele.isFormat === 'true') {
+          const { hours, minutes, seconds } = convertIntoHrsFormat(
+            Number(initiativeData[Object.values(ele)[0]!]) * 60 * 60
+          );
+          statValue = formatTime(hours, minutes, seconds);
+        } else {
+          statValue = initiativeData[Object.values(ele)[0]!];
+        }
+        statsContents.push({
+          id: index.toString(),
+          stat: initiativeData && statValue,
+          label: `${t(Object.keys(ele)[0])}`,
+        });
+      });
+    }
+  };
 
-    statsContents.push({ id: initiative, stat: stat, label: `${t(initiative)} ${t('india')}` });
-  });
+  if (!props.initiativeMedia) {
+    initiativeOrder.forEach(initiative => {
+      const stat =
+        !participationStats || error
+          ? null
+          : participationStats.filter(stats => stats['type'] === typeMap[initiative])[0]?.count || '0';
+
+      statsContents.push({ id: initiative, stat: stat, label: `${t(initiative)} ${t('india')}` });
+    });
+  } else {
+    setStatsForInitiatives();
+  }
 
   return (
     <div data-testid="ContributionStats">

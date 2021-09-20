@@ -24,9 +24,9 @@ export const INITIATIVE_ACTIONS = {
 
 export const INITIATIVE_CUMULATIVE_VALUE = {
   suno: [
-    { Languages: 'total_languages' },
-    { 'People participated': 'peopleParticipated' },
-    { 'Duration transcribed': 'total_contributions' },
-    { 'Duration Validated': 'total_validations' },
+    { Languages: 'total_languages', isFormat: 'false' },
+    { 'People participated': 'peopleParticipated', isFormat: 'false' },
+    { 'Duration transcribed': 'total_contributions', isFormat: 'true' },
+    { 'Duration Validated': 'total_validations', isFormat: 'true' },
   ],
 };

@@ -30,6 +30,7 @@
     "start": "cross-env NODE_ENV=production node server.js"
   },
   "dependencies": {
+    "@amcharts/amcharts4": "^4.10.22",
     "bootstrap": "^5.1.1",
     "classnames": "^2.3.1",
     "next": "11.1.2",
