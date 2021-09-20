@@ -247,6 +247,11 @@ const updateTablesAfterValidation = async (req, res) => {
         })
         .catch((err) => {
             console.log(err);
+            if (err.message.includes('uc_validated_contribution')) {
+                res.status(200).send({message: "Successfull"});
+                cacheOperation.updateCacheAfterValidation(contributionId, type, fromLanguage, language, action, userId, userName);
+                return;
+            }
             res.sendStatus(500);
         });
 }

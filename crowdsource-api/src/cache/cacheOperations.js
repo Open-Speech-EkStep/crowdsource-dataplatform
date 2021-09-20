@@ -189,16 +189,13 @@ const markContributionSkippedInCache = async (type, fromLanguage, toLanguage, da
 
 		const key = `dataset_row_${type}_${fromLanguage}_${toLanguage}`;
 
-		const operation = async () => {
-			const cacheResponse = await cache.getAsync(key);
-			if (cacheResponse) {
-				let cacheData = JSON.parse(cacheResponse);
-				cacheData = updateSkippedByForItem(cacheData, dataset_row_id, userId, userName);
-				await cache.setAsync(key, JSON.stringify(cacheData), expiry);
-			}
-		};
+		const cacheResponse = await cache.getAsync(key);
+		if (cacheResponse) {
+			let cacheData = JSON.parse(cacheResponse);
+			cacheData = updateSkippedByForItem(cacheData, dataset_row_id, userId, userName);
+			await cache.setAsync(key, JSON.stringify(cacheData), expiry);
+		}
 
-		await cache.doOperationWithLock(key, operation, 5000);
 
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)
@@ -267,17 +264,13 @@ const updateCacheAfterValidation = async (contribution_id, type, fromLanguage, t
 	try {
 		const key = `contributions_${type}_${fromLanguage}_${toLanguage}`;
 
-		const operation = async () => {
-			const cacheResponse = await cache.getAsync(key);
-			if (cacheResponse) {
-				let cacheData = JSON.parse(cacheResponse);
-				cacheData = updateValidationCountForItem(cacheData, contribution_id, userId, userName, action);
-				cacheData = sortAndFilterValidationData(cacheData);
-				await cache.setAsync(key, JSON.stringify(cacheData), expiry);
-			}
-		};
-
-		await cache.doOperationWithLock(key, operation, 5000);
+		const cacheResponse = await cache.getAsync(key);
+		if (cacheResponse) {
+			let cacheData = JSON.parse(cacheResponse);
+			cacheData = updateValidationCountForItem(cacheData, contribution_id, userId, userName, action);
+			cacheData = sortAndFilterValidationData(cacheData);
+			await cache.setAsync(key, JSON.stringify(cacheData), expiry);
+		}
 
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)
