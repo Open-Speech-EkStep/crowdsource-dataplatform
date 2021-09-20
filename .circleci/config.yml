@@ -331,7 +331,7 @@ workflows:
 
       - check_fe:
           name: check_fe
-          env_name: dev
+          env_name: prod
           requires:
             - node/test
 
