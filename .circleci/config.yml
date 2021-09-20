@@ -234,7 +234,7 @@ jobs:
           command: |
             ENV_IMAGE_NAME=${AZURE_LOGIN_SERVER_NAME}/${AZURE_REPO_UI}:<< parameters.env-name >>
 
-            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-fe/k8s-deployments/azure/deployment_<< parameters.env-name >>.yaml | kubectl -n << parameters.env-name >> apply  -f -
+            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-fe/k8s-deployments/deployment_<< parameters.env-name >>.yaml | kubectl -n << parameters.env-name >> apply  -f -
 
   failed-notification:
     docker:
