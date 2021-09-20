@@ -1,6 +1,6 @@
 import { render, verifyAxeTest } from 'utils/testUtils';
 
-import PageHeader from '../TriColorBorder';
+import PageHeader from '../../TriColorBorder';
 
 describe('TriColorBorder', () => {
   const setup = () => render(<PageHeader />);
