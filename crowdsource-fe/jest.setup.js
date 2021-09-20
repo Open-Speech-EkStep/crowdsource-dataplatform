@@ -33,6 +33,7 @@ global.CROWDSOURCE_FE_NODE_CONFIG = {
   fe: {
     apiUrl: '',
     cdnUrl: '',
+    staticFileUrl: '',
     whitelistingEmail: false,
     showDataSource: false,
     feedbackTopComponent: false,
