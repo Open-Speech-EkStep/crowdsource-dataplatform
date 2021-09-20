@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vakyansh
+spec:
+  selector:
+    matchLabels:
+      app: vakyansh
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        commit_sha: CIRCLE_SHA1
+      labels:
+        app: vakyansh
+    spec:
+      containers:
+      - image: IMAGE_NAME
+        imagePullPolicy: Always
+        name: vakyansh
+        ports:
+        - containerPort: 3000
+
+        # resources:
+        #   request:
+        #     cpu: 2000m
+        #     memory: Gi
