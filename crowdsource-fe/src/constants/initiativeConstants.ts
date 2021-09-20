@@ -5,6 +5,13 @@ export const INITIATIVES_MAPPING = {
   dekho: 'dekho',
 } as const;
 
+export const INITIATIVES_MEDIA_MAPPING = {
+  suno: 'asr',
+  bolo: 'text',
+  likho: 'parallel',
+  dekho: 'ocr',
+} as const;
+
 export const INITIATIVES = Object.keys(INITIATIVES_MAPPING);
 
 export const INITIATIVE_ACTIONS = {

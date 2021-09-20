@@ -1,1 +1,1 @@
-export { default } from './TargetProgress'
+export { default } from './TargetProgress';

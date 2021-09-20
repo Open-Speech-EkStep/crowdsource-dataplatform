@@ -31,7 +31,7 @@ const NavigationList = () => {
 
   return (
     <Nav className={styles.root}>
-      <Link href={routePaths.sunoIndiaHome} prefetch={false} passHref>
+      <Link href={routePaths.sunoIndiaHome} passHref>
         <Nav.Link {...getNavLinkProps(routePaths.sunoIndiaHome)}>
           {t('suno')} {t('india')}
         </Nav.Link>

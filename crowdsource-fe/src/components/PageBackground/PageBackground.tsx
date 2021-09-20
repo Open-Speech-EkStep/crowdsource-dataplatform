@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import styles from './PageBackground.module.scss';
 
 interface PageBackgroundProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 const PageBackground = (props: PageBackgroundProps) => {

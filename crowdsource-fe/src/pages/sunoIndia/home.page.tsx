@@ -9,7 +9,7 @@ import ContributionStats from 'components/ContributionStats';
 import PageBackground from 'components/PageBackground';
 import PageHeader from 'components/PageHeader';
 import TargetProgress from 'components/TargetProgress';
-import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
+import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import { DEFAULT_LOCALE } from 'constants/localesConstants';
 
 const HomePage: NextPage = () => (
@@ -20,14 +20,14 @@ const HomePage: NextPage = () => (
           <PageHeader initiative={INITIATIVES_MAPPING.suno} />
         </header>
         <section className="mt-7 mt-md-9">
-          <ContributionActions />
+          <ContributionActions initiativeMedia={INITIATIVES_MEDIA_MAPPING.suno} />
         </section>
       </Container>
     </PageBackground>
     <section className="py-9 py-md-11 px-2 px-lg-0">
       <Container fluid="lg">
         <section>
-          <TargetProgress />
+          <TargetProgress initiative={INITIATIVES_MAPPING.suno} />
         </section>
         <section className="mt-9 mt-md-12">
           <ContributionStats />
