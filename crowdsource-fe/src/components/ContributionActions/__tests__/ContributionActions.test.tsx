@@ -3,7 +3,7 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import ContributionActions from '../ContributionActions';
 
 describe('ContributionActions', () => {
-  const setup = () => render(<ContributionActions />);
+  const setup = () => render(<ContributionActions initiativeMedia="'asr'" />);
 
   verifyAxeTest(setup());
 
