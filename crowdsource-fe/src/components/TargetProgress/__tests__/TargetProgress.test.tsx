@@ -3,7 +3,7 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import TargetProgress from '../TargetProgress';
 
 describe('TargetProgress', () => {
-  const setup = () => render(<TargetProgress />);
+  const setup = () => render(<TargetProgress initiative="'suno'" initiativeMedia="'asr'" />);
 
   verifyAxeTest(setup());
 

@@ -1,0 +1,50 @@
+export const convertIntoHrsFormat = (data: any, isSeconds = true) => {
+  const hours = Math.floor(data / 3600);
+  const remainingAfterHours = data % 3600;
+  const minutes = Math.floor(remainingAfterHours / 60);
+  const seconds = Math.round(remainingAfterHours % 60);
+  if (isSeconds) {
+    return { hours, minutes, seconds };
+  } else {
+    return { hours, minutes };
+  }
+};
+
+export const roundOffValue = (average: any, precision: number) => {
+  const formattedAverage = average.toFixed(precision);
+  return formattedAverage;
+};
+
+export const capitalizeFirstLetter = (strValue: string) => {
+  return strValue.charAt(0).toUpperCase() + strValue.slice(1);
+};
+
+export const formatTime = function (hours: number, minutes = 0, seconds = 0, translate = true) {
+  const localeStrings = JSON.parse(localStorage.getItem('localeString') || '{}');
+  const hrStr = translate ? localeStrings['hour(s)'] || 'hour(s)' : 'hour(s)';
+  const minStr = translate ? localeStrings['minute(s)'] || 'minute(s)' : 'minute(s)';
+  const secStr = translate ? localeStrings['second(s)'] || 'second(s)' : 'second(s)';
+  let result = '';
+  if (hours > 0) {
+    result += `${hours} ${hrStr} `;
+  }
+  if (minutes > 0) {
+    result += `${minutes} ${minStr} `;
+  }
+  if (hours === 0 && minutes === 0 && seconds > 0) {
+    result += `${seconds} ${secStr} `;
+  }
+
+  if (hours === 0 && minutes === 0 && seconds === 0) {
+    result += `0 ${secStr} `;
+  }
+
+  if (result.charAt(result.length - 1) !== ' ') return result.substr(0, result.length);
+  else return result.substr(0, result.length - 1);
+};
+
+export const convertTimeFormat = (value: any) => {
+  const { hours, minutes, seconds } = convertIntoHrsFormat(Number(value) * 60 * 60);
+  const data = formatTime(hours, minutes, seconds);
+  return data;
+};

@@ -27,10 +27,16 @@ const HomePage: NextPage = () => (
     <section className="py-9 py-md-11 px-2 px-lg-0">
       <Container fluid="lg">
         <section>
-          <TargetProgress initiative={INITIATIVES_MAPPING.suno} />
+          <TargetProgress
+            initiative={INITIATIVES_MAPPING.suno}
+            initiativeMedia={INITIATIVES_MEDIA_MAPPING.suno}
+          />
         </section>
         <section className="mt-9 mt-md-12">
-          <ContributionStats />
+          <ContributionStats
+            initiativeMedia={INITIATIVES_MEDIA_MAPPING.suno}
+            initiative={INITIATIVES_MAPPING.suno}
+          />
         </section>
       </Container>
     </section>
