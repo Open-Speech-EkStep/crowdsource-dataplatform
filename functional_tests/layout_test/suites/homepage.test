@@ -1,0 +1,15 @@
+@@ set domain localhost:8080
+
+@@ parameterized
+    | browser   |
+    | firefox	| 
+
+@@ parameterized
+    | deviceName | tags    | size     |
+    | Desktop    | desktop | 1024x768 |
+
+@@ groups home_page
+Checking the responsiveness for home page in ${browser} browser on ${deviceName}
+	selenium ${browser} https://${domain} ${size}
+		wait 10s 
+		check ././Specs/home_new.gspec --include "${tags}"
