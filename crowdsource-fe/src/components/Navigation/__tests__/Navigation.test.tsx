@@ -1,9 +1,15 @@
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { render, verifyAxeTest, userEvent, screen, waitFor } from 'utils/testUtils';
 
 import Navigation from '../Navigation';
 
 describe('Navigation', () => {
-  const setup = () => render(<Navigation />);
+  const setup = () =>
+    render(
+      <>
+        <Navigation />
+        <button>Test Button</button>
+      </>
+    );
 
   verifyAxeTest(setup());
 
@@ -11,5 +17,33 @@ describe('Navigation', () => {
     const { asFragment } = setup();
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('should handle navbar toggle behaviour', async () => {
+    const { container } = setup();
+
+    expect(container.querySelector('.navbar-collapse')).not.toHaveClass('show');
+
+    userEvent.click(screen.getByRole('button', { name: /Toggle navigation/ }));
+
+    await waitFor(() => expect(container.querySelector('.navbar-collapse')).toHaveClass('show'));
+
+    userEvent.click(screen.getByRole('button', { name: /Toggle navigation/ }));
+
+    await waitFor(() => expect(container.querySelector('.navbar-collapse')).not.toHaveClass('show'));
+  });
+
+  it('should collapse when clicked outside', async () => {
+    const { container } = setup();
+
+    expect(container.querySelector('.navbar-collapse')).not.toHaveClass('show');
+
+    userEvent.click(screen.getByRole('button', { name: /Toggle navigation/ }));
+
+    await waitFor(() => expect(container.querySelector('.navbar-collapse')).toHaveClass('show'));
+
+    userEvent.click(screen.getByRole('button', { name: /Test Button/ }));
+
+    await waitFor(() => expect(container.querySelector('.navbar-collapse')).not.toHaveClass('show'));
   });
 });

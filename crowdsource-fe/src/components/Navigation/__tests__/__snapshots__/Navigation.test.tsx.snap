@@ -2,61 +2,67 @@
 
 exports[`Navigation should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
-  <nav
-    class="bar navbar navbar-expand-lg navbar-light"
-    data-testid="Navigation"
-  >
-    <button
-      aria-label="Toggle navigation"
-      class="toggle navbar-toggler collapsed"
-      type="button"
+  <div>
+    <nav
+      class="bar navbar navbar-expand-lg navbar-light"
+      data-testid="Navigation"
     >
-      <span
-        class="toggleBar"
-      />
-      <span
-        class="toggleBar"
-      />
-      <span
-        class="toggleBar"
-      />
-    </button>
-    <div
-      class="collapse navbar-collapse collapse"
-    >
-      <div
-        class="root navbar-nav"
+      <button
+        aria-label="Toggle navigation"
+        class="toggle navbar-toggler collapsed"
+        type="button"
       >
-        <a
-          class="link mx-xl-3 nav-link"
-          data-rr-ui-event-key="/sunoIndia/home.html"
-          href="/sunoIndia/home.html"
+        <span
+          class="toggleBar"
+        />
+        <span
+          class="toggleBar"
+        />
+        <span
+          class="toggleBar"
+        />
+      </button>
+      <div
+        class="collapse navbar-collapse collapse"
+      >
+        <div
+          class="root navbar-nav"
+          data-testid="NavigationList"
         >
-          suno india
-        </a>
-        <a
-          class="link mx-xl-3 nav-link"
-          data-rr-ui-event-key="/boloIndia/home.html"
-          href="/boloIndia/home.html"
-        >
-          bolo india
-        </a>
-        <a
-          class="link mx-xl-3 nav-link"
-          data-rr-ui-event-key="/likhoIndia/home.html"
-          href="/likhoIndia/home.html"
-        >
-          likho india
-        </a>
-        <a
-          class="link mx-xl-3 nav-link"
-          data-rr-ui-event-key="/dekhoIndia/home.html"
-          href="/dekhoIndia/home.html"
-        >
-          dekho india
-        </a>
+          <a
+            class="link mx-xl-3 nav-link"
+            data-rr-ui-event-key="/sunoIndia/home.html"
+            href="/sunoIndia/home.html"
+          >
+            suno india
+          </a>
+          <a
+            class="link mx-xl-3 nav-link"
+            data-rr-ui-event-key="/boloIndia/home.html"
+            href="/boloIndia/home.html"
+          >
+            bolo india
+          </a>
+          <a
+            class="link mx-xl-3 nav-link"
+            data-rr-ui-event-key="/likhoIndia/home.html"
+            href="/likhoIndia/home.html"
+          >
+            likho india
+          </a>
+          <a
+            class="link mx-xl-3 nav-link"
+            data-rr-ui-event-key="/dekhoIndia/home.html"
+            href="/dekhoIndia/home.html"
+          >
+            dekho india
+          </a>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </div>
+  <button>
+    Test Button
+  </button>
 </DocumentFragment>
 `;

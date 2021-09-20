@@ -30,7 +30,7 @@ const NavigationList = () => {
   const { t } = useTranslation();
 
   return (
-    <Nav className={styles.root}>
+    <Nav data-testid="NavigationList" className={styles.root}>
       <Link href={routePaths.sunoIndiaHome} prefetch={false} passHref>
         <Nav.Link {...getNavLinkProps(routePaths.sunoIndiaHome)}>
           {t('suno')} {t('india')}

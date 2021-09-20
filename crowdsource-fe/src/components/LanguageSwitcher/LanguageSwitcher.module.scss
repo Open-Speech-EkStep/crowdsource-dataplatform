@@ -1,3 +1,18 @@
+.root {
+  position: relative;
+
+  :global(.dropdown-menu) {
+    left: auto !important;
+    right: 0 !important;
+    top: 3.5rem !important;
+    transform: none !important;
+
+    @include media-breakpoint-up(md) {
+      top: 4.5rem !important;
+    }
+  }
+}
+
 .root:global(.show) {
   position: relative;
 
