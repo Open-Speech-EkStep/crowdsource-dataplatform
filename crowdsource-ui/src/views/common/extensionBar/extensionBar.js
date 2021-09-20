@@ -43,10 +43,16 @@ const addListenerToExtensionBarElements = ()=>{
 // setExtensionVideoFlag();
 
 $(document).ready(function () {
-  const src = $('#extension_video source').attr('src');
-  $('#extension_video source').attr('src', `${base_url}${src}`);
+  addBaseUrlToVideoSrc();
   addListenerToExtensionBarElements();
 });
+
+const addBaseUrlToVideoSrc = () => {
+  const videoElement = $('#extension_video');
+  const src = videoElement.find('source').attr('src');
+  videoElement.find('source').attr('src', `${base_url}${src}`);
+  videoElement[0].load();
+}
 
 module.exports = {addListenerToExtensionBarElements}
 
