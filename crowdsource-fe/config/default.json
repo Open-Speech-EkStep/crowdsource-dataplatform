@@ -2,6 +2,7 @@
   "fe": {
     "apiUrl": "http://localhost:8080",
     "cdnUrl": "",
+    "staticFileUrl": "",
     "whitelistingEmail": false,
     "showDataSource": false,
     "feedbackTopComponent": false,

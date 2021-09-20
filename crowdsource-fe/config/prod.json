@@ -2,6 +2,7 @@
   "fe": {
     "apiUrl": "https://bhashadaan-api.bhashini.gov.in",
     "cdnUrl": "https://prod-data-crowdsource.azureedge.net",
+    "staticFileUrl": "https://crowdsource1.blob.core.windows.net/static-content-vakyansh-prod",
     "whitelistingEmail": false,
     "showDataSource": false,
     "feedbackTopComponent": false,
