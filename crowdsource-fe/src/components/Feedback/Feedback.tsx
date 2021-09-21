@@ -31,6 +31,7 @@ const Feedback = () => {
   return (
     <Fragment>
       <Button
+        data-testid="FeedbackBtn"
         onClick={showModal}
         className={`${styles.root} d-inline-flex justify-content-center align-items-center`}
       >
