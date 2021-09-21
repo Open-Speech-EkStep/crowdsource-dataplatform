@@ -1,26 +1,19 @@
-const path = require('path');
-
-process.env['NODE_CONFIG_DIR'] =
-  path.resolve(__dirname, '../crowdsource-api/config') + path.delimiter + path.resolve(__dirname, './config');
-
-require('config');
-require('dotenv').config({
-  path: path.resolve(__dirname, '../crowdsource-api/.env'),
-});
-
 const chalk = require('chalk');
+const express = require('express');
 const next = require('next');
-
-const app = require('../crowdsource-api/src/app');
 
 const { togglePages } = require('./serverUtils');
 
-const port = parseInt(process.env.PORT, 10) || 443;
+const app = express();
+
+const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 
 nextApp.prepare().then(() => {
+  app.use(express.static('target', { redirect: false }));
+
   app.all('*', (req, res) => {
     return togglePages(req, res, () => handle(req, res));
   });

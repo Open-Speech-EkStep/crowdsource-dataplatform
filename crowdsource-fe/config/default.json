@@ -1,0 +1,18 @@
+{
+  "fe": {
+    "apiUrl": "http://localhost:8080",
+    "cdnUrl": "",
+    "staticFileUrl": "",
+    "whitelistingEmail": false,
+    "showDataSource": false,
+    "feedbackTopComponent": false,
+    "contextRoot": "",
+    "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"],
+    "enabledPages": {
+      "error": true,
+      "home": true,
+      "sunoIndiaHome": true,
+      "styleGuide": true
+    }
+  }
+}

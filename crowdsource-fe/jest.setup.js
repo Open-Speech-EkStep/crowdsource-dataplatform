@@ -4,8 +4,6 @@ import { configureAxe, toHaveNoViolations } from 'jest-axe';
 import jestFetchMock from 'jest-fetch-mock';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
-import nodeConfig from './config/local.json';
-
 jest.mock('next/dist/client/router', () => {
   const router = require('next-router-mock');
   const i18nConfig = require('./next-i18next.config');
@@ -31,7 +29,18 @@ configureAxe({
 });
 expect.extend(toHaveNoViolations);
 
-global.CROWDSOURCE_FE_NODE_CONFIG = nodeConfig;
+global.CROWDSOURCE_FE_NODE_CONFIG = {
+  fe: {
+    apiUrl: '',
+    cdnUrl: '',
+    staticFileUrl: '',
+    whitelistingEmail: false,
+    showDataSource: false,
+    feedbackTopComponent: false,
+    contextRoot: '',
+    enabled_languages: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te'],
+  },
+};
 
 window.matchMedia =
   window.matchMedia ||

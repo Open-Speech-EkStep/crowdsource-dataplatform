@@ -2,21 +2,29 @@
 FROM node:14-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+RUN mkdir fe
+COPY crowdsource-fe/package*.json ./fe/
+RUN mkdir ui
+COPY crowdsource-ui/. ./ui/
+RUN cd fe && npm install && cd ..
+RUN cd ui && npm install && npm run gulp
 
 # Rebuild the source code only when needed
 FROM node:14-alpine AS builder
+ARG NODE_CONFIG_ENV=dev
+ENV NODE_CONFIG_ENV=${NODE_CONFIG_ENV}
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
 WORKDIR /app
-COPY . .
-COPY --from=deps /app/node_modules ./node_modules
+COPY ./crowdsource-fe .
+COPY --from=deps /app/fe/node_modules ./node_modules/
+RUN mkdir target
+COPY --from=deps /app/ui/target ./target/
 RUN npm run build:docker
 
 # Production image, copy all the files and run next
 FROM node:14-alpine AS runner
 WORKDIR /app
-
-ENV NODE_ENV production
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
@@ -24,6 +32,9 @@ RUN adduser -S nextjs -u 1001
 # You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/next-i18next.config.js ./
+COPY --from=builder /app/serverUtils.js ./
+COPY --from=builder /app/server.docker.js ./
+COPY --from=builder /app/target ./target
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
@@ -33,9 +44,4 @@ USER nextjs
 
 EXPOSE 3000
 
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry.
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-CMD ["npx", "next", "start"]
+CMD ["npm", "run", "start:docker"]

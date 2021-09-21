@@ -27,7 +27,8 @@
     "prebuild": "npm run check",
     "build": "next build",
     "build:docker": "next build",
-    "start": "cross-env NODE_ENV=production node server.js"
+    "start": "cross-env NODE_ENV=production node server.js",
+    "start:docker": "cross-env NODE_ENV=production node server.docker.js"
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.22",
@@ -63,6 +64,7 @@
     "eslint-config-next": "11.1.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^24.4.0",
+    "express": "^4.17.1",
     "glob": "^7.1.7",
     "identity-obj-proxy": "^3.0.0",
     "ignore-loader": "^0.1.2",

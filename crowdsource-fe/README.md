@@ -106,6 +106,14 @@ For running lint, stylelint, typecheck, test with coverage and talisman.
 
 Builds the app for production to the `.next` folder.
 
+### `npm run build:docker`
+
+Same as `npm run build` but for docker.
+
 ### `npm start`
 
 It will start the production server on [http://localhost:8080](http://localhost:8080). Please ensure you ran `npm run build` first before running this command.
+
+### `npm run start:docker`
+
+It will start the production server on [http://localhost:3000](http://localhost:3000) for docker. Please ensure you ran `npm run build:docker` first before running this command.
