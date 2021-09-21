@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 import { useTranslation } from 'next-i18next';
 
 import Stats from 'components/Stats';
@@ -6,8 +8,6 @@ import { INITIATIVES_MAPPING, INITIATIVE_CUMULATIVE_VALUE } from 'constants/init
 import useFetch from 'hooks/useFetch';
 import type { CumulativeCountModel } from 'interface';
 import { convertIntoHrsFormat, formatTime, isSunoOrBoloInitiative } from 'utils/utils';
-
-import styles from './ContributionStats.module.scss';
 
 const SUNO = 'suno';
 const BOLO = 'bolo';
@@ -22,6 +22,7 @@ const typeMap: Record<string, string> = {
 };
 
 interface ContributionStatsProps {
+  children: ReactNode;
   initiativeMedia?: string;
 }
 
@@ -33,6 +34,7 @@ const ContributionStats = (props: ContributionStatsProps) => {
   );
 
   const { data: cumulativeCountData } = useFetch<Array<CumulativeCountModel>>(apiPaths.cumulativeCount);
+
   const statsContents: Array<{
     id: string;
     stat: string | null;
@@ -80,9 +82,7 @@ const ContributionStats = (props: ContributionStatsProps) => {
 
   return (
     <div data-testid="ContributionStats">
-      <header className="d-flex flex-column align-items-center flex-md-row justify-content-md-between">
-        <h1 className={`${styles.header} mb-0`}>{t('totalParticipation')}</h1>
-      </header>
+      {props.children}
       <div className="mt-4 mt-md-5">
         <Stats contents={statsContents} />
       </div>

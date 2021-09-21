@@ -4,6 +4,7 @@ exports[`ContributionActions should render the component and matches it against 
 <DocumentFragment>
   <div
     class=""
+    data-testid="ContributionTracker"
   />
 </DocumentFragment>
 `;

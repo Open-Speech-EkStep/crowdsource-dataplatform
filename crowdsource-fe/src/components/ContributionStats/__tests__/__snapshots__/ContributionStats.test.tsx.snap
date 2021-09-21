@@ -5,15 +5,7 @@ exports[`ContributionStats should render the component and matches it against st
   <div
     data-testid="ContributionStats"
   >
-    <header
-      class="d-flex flex-column align-items-center flex-md-row justify-content-md-between"
-    >
-      <h1
-        class="header mb-0"
-      >
-        totalParticipation
-      </h1>
-    </header>
+     
     <div
       class="mt-4 mt-md-5"
     >

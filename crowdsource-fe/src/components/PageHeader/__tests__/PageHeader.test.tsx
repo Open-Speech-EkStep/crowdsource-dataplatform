@@ -1,9 +1,9 @@
 import { render, verifyAxeTest } from 'utils/testUtils';
 
-import PageHeader from '../../TriColorBorder';
+import PageHeader from '../PageHeader';
 
-describe('TriColorBorder', () => {
-  const setup = () => render(<PageHeader />);
+describe('PageHeadeer', () => {
+  const setup = () => render(<PageHeader initiative="'suno'" />);
 
   verifyAxeTest(setup());
 

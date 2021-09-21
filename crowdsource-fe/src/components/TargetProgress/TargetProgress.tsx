@@ -96,7 +96,7 @@ const TargetProgress = (props: TargetProgressProps) => {
   }
 
   return (
-    <div className={`${styles.root} d-flex flex-column`}>
+    <div className={`${styles.root} d-flex flex-column`} data-testid="TargetProgress">
       <div className={`${styles.details} d-flex justify-content-between align-items-center`}>
         <div className={styles.percentage}>
           <span className={styles.count}>{formattedAverage}%</span> {t('of')}{' '}

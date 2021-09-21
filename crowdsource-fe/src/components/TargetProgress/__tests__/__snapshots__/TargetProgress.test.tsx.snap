@@ -4,6 +4,7 @@ exports[`TargetProgress should render the component and matches it against store
 <DocumentFragment>
   <div
     class="root d-flex flex-column"
+    data-testid="TargetProgress"
   >
     <div
       class="details d-flex justify-content-between align-items-center"

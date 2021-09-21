@@ -48,7 +48,11 @@ const ContributionTracker = () => {
 
   //   console.log(topLanguagesByHoursData, topLanguagesBySpeakerData, error, error1, chartData);
 
-  return <div className="">{/* <BarChart id="bar_chart" data={chartData} /> */}</div>;
+  return (
+    <div className="" data-testid="ContributionTracker">
+      {/* <BarChart id="bar_chart" data={chartData} /> */}
+    </div>
+  );
 };
 
 export default ContributionTracker;
