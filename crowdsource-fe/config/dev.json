@@ -23,6 +23,12 @@
       "kas",
       "si",
       "kok"
-    ]
+    ],
+    "enabledPages": {
+      "error": false,
+      "home": false,
+      "sunoIndiaHome": false,
+      "styleGuide": false
+    }
   }
 }

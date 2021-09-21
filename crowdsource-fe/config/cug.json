@@ -30,6 +30,12 @@
       "sat",
       "sa",
       "mai"
-    ]
+    ],
+    "enabledPages": {
+      "error": false,
+      "home": false,
+      "sunoIndiaHome": false,
+      "styleGuide": false
+    }
   }
 }

@@ -10,6 +10,7 @@ interface CrowdsourceFENodeConfig {
     feedbackTopComponent: boolean;
     contextRoot: string;
     enabled_languages: string[];
+    enabledPages: Record<string, boolean>;
   };
 }
 

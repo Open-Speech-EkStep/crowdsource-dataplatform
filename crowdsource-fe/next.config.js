@@ -1,3 +1,6 @@
+process.env.NODE_CONFIG_ENV = process.env.NODE_CONFIG_ENV || 'default';
+
+const config = require('config');
 const ConfigWebpackPlugin = require('config-webpack');
 
 const { i18n } = require('./next-i18next.config');
@@ -8,6 +11,7 @@ const { i18n } = require('./next-i18next.config');
  * @type {import('next').NextConfig}
  **/
 const nextConfig = {
+  basePath: config.get('fe.contextRoot'),
   reactStrictMode: true,
   i18n,
   // Force .page prefix on page files (ex. index.page.tsx) so generated files can be included in /pages directory without Next.js throwing build errors

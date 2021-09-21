@@ -7,6 +7,12 @@
     "showDataSource": false,
     "feedbackTopComponent": false,
     "contextRoot": "",
-    "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"]
+    "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"],
+    "enabledPages": {
+      "error": false,
+      "home": false,
+      "sunoIndiaHome": false,
+      "styleGuide": false
+    }
   }
 }
