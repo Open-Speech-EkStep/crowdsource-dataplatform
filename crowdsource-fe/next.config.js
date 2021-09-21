@@ -1,5 +1,3 @@
-process.env.NODE_CONFIG_ENV = process.env.NODE_CONFIG_ENV || 'default';
-
 const config = require('config');
 const ConfigWebpackPlugin = require('config-webpack');
 
