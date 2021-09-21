@@ -5,17 +5,26 @@ exports[`ActionCard should render the component and match it against stored snap
   <div
     class="root overflow-hidden"
   >
-    <section
-      class="root"
+    <div
+      class="cardGradient"
     >
       <div
-        class="topBg"
+        class="cardTopBg"
       >
         <div
-          class="bottomBg"
+          class="cardBottomBg"
         >
           <div
-            class="card d-flex p-5 p-md-9 align-items-center"
+            class="d-none"
+          >
+            <p
+              class="pl-2 m-0"
+            >
+              Only validations invited for the selected language
+            </p>
+          </div>
+          <div
+            class="card d-flex p-5 p-md-7 p-xl-9 align-items-center"
           >
             <div
               class="flex-grow-1"
@@ -26,13 +35,13 @@ exports[`ActionCard should render the component and match it against stored snap
                 translate
               </h1>
               <p
-                class="text mt-1 mt-md-2"
+                class="text mt-1 mt-md-2 mb-0"
               >
                 some-text
               </p>
             </div>
             <div
-              class="icon"
+              class="icon iconShadowundefined d-flex rounded-circle flex-shrink-0"
             >
               <div
                 style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
@@ -60,7 +69,7 @@ exports[`ActionCard should render the component and match it against stored snap
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </DocumentFragment>
 `;

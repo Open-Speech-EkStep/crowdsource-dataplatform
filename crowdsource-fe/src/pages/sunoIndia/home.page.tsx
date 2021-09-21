@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 
 import ContributionActions from 'components/ContributionActions';
 import ContributionStats from 'components/ContributionStats';
+import ContributionTracker from 'components/ContributionTracker';
 import PageBackground from 'components/PageBackground';
 import PageHeader from 'components/PageHeader';
 import TargetProgress from 'components/TargetProgress';
@@ -33,10 +34,10 @@ const HomePage: NextPage = () => (
           />
         </section>
         <section className="mt-9 mt-md-12">
-          <ContributionStats
-            initiativeMedia={INITIATIVES_MEDIA_MAPPING.suno}
-            initiative={INITIATIVES_MAPPING.suno}
-          />
+          <ContributionStats initiativeMedia={INITIATIVES_MEDIA_MAPPING.suno} />
+        </section>
+        <section className="mt-9 mt-md-12">
+          <ContributionTracker />
         </section>
       </Container>
     </section>

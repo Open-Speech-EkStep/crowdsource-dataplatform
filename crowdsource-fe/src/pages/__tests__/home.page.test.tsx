@@ -18,5 +18,6 @@ describe('Home', () => {
     expect(screen.getByTestId('BronzeContribute')).toBeInTheDocument();
     expect(screen.getByTestId('BadgesIntro')).toBeInTheDocument();
     expect(screen.getByText('ContributionStats')).toBeInTheDocument();
+    expect(screen.getByText('ContributionTracker')).toBeInTheDocument();
   });
 });

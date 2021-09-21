@@ -12,8 +12,8 @@
     #ffba3f -19.59%,
     #ffde66 -5.75%,
     #ffea9c 5.15%,
-    #ffffff 19.03%,
-    #ffffff 81.54%,
+    #fff 19.03%,
+    #fff 81.54%,
     #eaf6e0 87.7%,
     #99e090 99.7%,
     #00ba06 118.97%
@@ -99,16 +99,15 @@
 }
 
 .cardWarning {
-  background-color: rgb(230 230 230 / 50%);
-  cursor: no-drop !important;
-  pointer-events: none;
-  box-shadow: rgba(67, 192, 215, 0.5) 0 8px 0, rgb(0 0 0 / 10%) 0 0 32px !important;
-  border: 1px solid rgba(67, 192, 215, 0.5) !important;
-  top: 15px;
-  left: 6%;
-  font-style: italic;
-  width: 92%;
-  padding: 9px 15px;
-  border-radius: 12px;
   background: rgba(77, 130, 247, 0.1);
+  background-color: rgb(230 230 230 / 50%);
+  border: 1px solid rgba(67, 192, 215, 0.5) !important;
+  border-radius: 12px;
+  box-shadow: rgba(67, 192, 215, 0.5) 0 8px 0, rgb(0 0 0 / 10%) 0 0 32px !important;
+  font-style: italic;
+  left: 6%;
+  padding: 9px 15px;
+  pointer-events: none;
+  top: 15px;
+  width: 92%;
 }

@@ -23,8 +23,8 @@
 
 .hours {
   font-family: Roboto, sans-serif;
-  font-weight: bold;
   font-size: 14px;
+  font-weight: bold;
   line-height: 20px;
 
   @include media-breakpoint-up(md) {

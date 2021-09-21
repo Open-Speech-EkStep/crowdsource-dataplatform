@@ -5,6 +5,8 @@ const apiPaths = {
   initiativeGoals: '/aggregated-json/initiativeGoals.json',
   cumulativeCount: '/aggregated-json/cumulativeCount.json',
   feedback: '/feedback',
+  topLanguagesByHoursContributed: '/aggregated-json/topLanguagesByHoursContributed.json',
+  topLanguagesBySpeakerContributions: '/aggregated-json/topLanguagesBySpeakerContributions.json',
 };
 
 export default apiPaths;

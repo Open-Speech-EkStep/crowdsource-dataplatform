@@ -57,7 +57,7 @@ exports[`BronzeContribute should render the component and matches it against sto
             <a
               class="link d-flex align-items-center justify-content-center text-uppercase"
               data-testid="sunoHome"
-              href="/sunoIndia/home.html"
+              href="/sunoIndia/home"
             >
               suno india
             </a>

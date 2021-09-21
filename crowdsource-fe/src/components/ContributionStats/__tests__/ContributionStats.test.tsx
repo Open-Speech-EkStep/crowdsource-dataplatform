@@ -25,7 +25,7 @@ describe('ContributionStats', () => {
       ])
     );
 
-    const renderResult = render(<ContributionStats />);
+    const renderResult = render(<ContributionStats initiativeMedia="'asr'" />);
     await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
     return renderResult;
   };

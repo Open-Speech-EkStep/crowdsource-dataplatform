@@ -22,7 +22,6 @@ const typeMap: Record<string, string> = {
 };
 
 interface ContributionStatsProps {
-  initiative: any;
   initiativeMedia?: string;
 }
 

@@ -445,7 +445,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
                                   data-testid="StartParticipating"
-                                  href="/sunoIndia/home.html"
+                                  href="/sunoIndia/home"
                                 >
                                   startParticipating
                                 </a>
@@ -1089,7 +1089,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
                                   data-testid="StartParticipating"
-                                  href="/sunoIndia/home.html"
+                                  href="/sunoIndia/home"
                                 >
                                   startParticipating
                                 </a>

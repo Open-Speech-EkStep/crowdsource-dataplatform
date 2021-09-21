@@ -24,39 +24,8 @@ const ContributionActions = (props: ContributionActionProps) => {
   const { locales } = useRouter();
   const { t } = useTranslation();
   const initiative = INITIATIVES_MAPPING.suno;
-  // const barChartColor = ['#5d6d9a', '#85A8F9', '#B7D0FE', '#6C85CE'];
-  // const data = {
-  //   id: 'line_chart',
-  //   data: [
-  //     {
-  //       category: 'Male',
-  //       value: 2025,
-  //     },
-  //     {
-  //       category: 'Female',
-  //       value: 1882,
-  //     },
-  //     {
-  //       category: 'Specified',
-  //       value: 1809,
-  //     },
-  //     {
-  //       category: 'Others',
-  //       value: 1322,
-  //     },
-  //   ],
-  //   isScrollbar: false,
-  //   colors: ['#85A8F9', '#B7D0FE', '#6C85CE', '#316AFF', '#294691', '#6C85CE'],
-  //   tooltipTemplate: `<div>
-  //           <h6 style="text-align: left; font-weight: bold">Not Specified</h6>
-  //           <div>Contributed: <label>57  minute(s)</label></div>
-  //           <div style="text-align: left;">Speakers: <label>8</label></div>
-  //       </div>`,
-  //   xAxisLabel: 'Month',
-  //   yAxisLabel: 'Contribution (in hours)',
-  // };
 
-  const [contributionLanguage, setContributionLanguage] = useLocalStorage<string>(
+  const [contributionLanguage, setContributionLanguage] = useLocalStorage<string | null>(
     localStorageConstants.contributionLanguage
   );
 
@@ -106,6 +75,7 @@ const ContributionActions = (props: ContributionActionProps) => {
                 {t('Select the language for contribution')}:
               </Form.Label>
               <Form.Select
+                value={contributionLanguage! || ''}
                 aria-label="Select the language for contribution"
                 className={`${styles.selectContributionLanguage} mt-3 mt-md-0 ms-md-2`}
                 name="category"
@@ -137,15 +107,6 @@ const ContributionActions = (props: ContributionActionProps) => {
             shadow="Blue"
             disabled={!isValidationEnabled}
           />
-        </Col>
-        <Col xs="12">
-          {/* <BarChart
-            id="bar_chart"
-            colors={barChartColor}
-            isScrollbar={true}
-            data={data}
-            yAxisLabel="Translations (in sentences)"
-          /> */}
         </Col>
       </Row>
     </div>
