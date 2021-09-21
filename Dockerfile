@@ -1,5 +1,7 @@
 # Install dependencies only when needed
 FROM node:14-alpine AS deps
+ARG NODE_CONFIG_ENV=dev
+ENV NODE_CONFIG_ENV=${NODE_CONFIG_ENV}
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 RUN mkdir fe
@@ -7,7 +9,7 @@ COPY crowdsource-fe/package*.json ./fe/
 RUN mkdir ui
 COPY crowdsource-ui/. ./ui/
 RUN cd fe && npm install && cd ..
-RUN cd ui && npm install && npm run gulp
+RUN cd ui && npm install && npm run gulp -- --env=${NODE_CONFIG_ENV}
 
 # Rebuild the source code only when needed
 FROM node:14-alpine AS builder
