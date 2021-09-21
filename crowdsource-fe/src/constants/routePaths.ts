@@ -1,7 +1,7 @@
 const routePaths: { [key: string]: string } = {
   root: '/',
   home: '/home',
-  sunoIndiaHome: '/sunoIndia/home.html',
+  sunoIndiaHome: '/sunoIndia/home',
   boloIndiaHome: '/boloIndia/home.html',
   likhoIndiaHome: '/likhoIndia/home.html',
   dekhoIndiaHome: '/dekhoIndia/home.html',
