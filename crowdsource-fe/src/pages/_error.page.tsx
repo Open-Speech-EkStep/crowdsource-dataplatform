@@ -38,7 +38,7 @@
 
   export default FourOFour;`
 */
-import type { GetServerSideProps } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import ErrorComponent from 'next/error';
@@ -48,7 +48,11 @@ import nodeConfig from 'constants/nodeConfig';
 
 const is404 = (statusCode: number) => statusCode === 404;
 
-const Error = ({ statusCode }: { statusCode: number }) => {
+interface ErrorProps {
+  statusCode: number;
+}
+
+const Error: NextPage<ErrorProps> = ({ statusCode }: ErrorProps) => {
   const { t } = useTranslation();
 
   return <ErrorComponent statusCode={statusCode} title={is404(statusCode) ? t('404Title') : undefined} />;

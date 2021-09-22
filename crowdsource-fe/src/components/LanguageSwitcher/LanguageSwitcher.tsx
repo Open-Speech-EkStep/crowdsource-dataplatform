@@ -16,7 +16,7 @@ const LanguageSwitcher = () => {
   const [, setContributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
   return (
-    <Dropdown data-testid="languageSwitcher" id="languageSwitcher" className={styles.root} align="end">
+    <Dropdown data-testid="LanguageSwitcher" id="languageSwitcher" className={styles.root} align="end">
       <Dropdown.Toggle
         id="languageSwitcherToggle"
         variant="light"

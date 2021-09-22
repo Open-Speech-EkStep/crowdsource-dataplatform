@@ -4,7 +4,7 @@ exports[`LanguageSwitcher should render the component and matches it against sto
 <DocumentFragment>
   <div
     class="root dropdown"
-    data-testid="languageSwitcher"
+    data-testid="LanguageSwitcher"
     id="languageSwitcher"
   >
     <button
