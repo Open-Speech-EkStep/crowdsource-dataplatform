@@ -16,11 +16,11 @@ exports[`Hero should render the component and matches it against stored snapshot
         daan
       </span>
     </h1>
-    <h2
+    <p
       class="heroSecondaryHeading"
     >
       heroSecondaryHeading
-    </h2>
+    </p>
     <p
       class="heroText"
     >

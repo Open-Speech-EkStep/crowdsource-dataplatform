@@ -15,12 +15,12 @@ const Footer = () => {
       <Container fluid="lg" className="d-flex flex-column flex-lg-row">
         <div className="d-flex flex-column flex-lg-row align-items-center order-2 order-lg-1">
           <Link href={routePaths.termsAndConditions}>
-            <a target="_blank" className={`${styles.link} me-lg-12 py-2 py-lg-0`}>
+            <a target="_blank" className={`${styles.link} me-lg-12 py-2 py-lg-0 text-primary`}>
               {t('termsAndConditions')}
             </a>
           </Link>
           <Link href={routePaths.privacyPolicy}>
-            <a target="_blank" className={`${styles.link} py-2 py-lg-0`}>
+            <a target="_blank" className={`${styles.link} py-2 py-lg-0 text-primary`}>
               {t('privacyPolicy')}
             </a>
           </Link>

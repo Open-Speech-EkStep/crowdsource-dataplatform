@@ -10,7 +10,7 @@ const Hero = () => {
       <h1 className={styles.heroPrimaryHeading}>
         {t('bhasha')} <span className={styles.yellowText}>{t('daan')}</span>
       </h1>
-      <h2 className={styles.heroSecondaryHeading}>{t('heroSecondaryHeading')}</h2>
+      <p className={styles.heroSecondaryHeading}>{t('heroSecondaryHeading')}</p>
       <p className={styles.heroText}>{t('heroText')}</p>
     </section>
   );
