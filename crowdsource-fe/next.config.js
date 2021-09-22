@@ -2,6 +2,7 @@ process.env.NODE_CONFIG_ENV = process.env.NODE_CONFIG_ENV || 'default';
 
 const config = require('config');
 const ConfigWebpackPlugin = require('config-webpack');
+const withTM = require('next-transpile-modules')(['@amcharts/amcharts4']);
 
 const { i18n } = require('./next-i18next.config');
 
@@ -50,4 +51,4 @@ const nextConfig = {
   productionBrowserSourceMaps: process.env.NODE_CONFIG_ENV === 'dev',
 };
 
-module.exports = nextConfig;
+module.exports = withTM(nextConfig);

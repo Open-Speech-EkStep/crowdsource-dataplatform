@@ -20,15 +20,16 @@ exports[`ContributionActions should render the component and matches it against 
           >
             <label
               class="label mb-0 form-label"
-              for="formGroupContributionLanguage"
+              for="contribution"
             >
               Select the language for contribution:
             </label>
             <select
               aria-label="Select the language for contribution"
               class="selectContributionLanguage mt-3 mt-md-0 ms-md-2 form-select"
-              id="formGroupContributionLanguage"
-              name="category"
+              data-testid="select"
+              id="contribution"
+              name="contribution"
             >
               <option
                 value="English"
@@ -99,6 +100,7 @@ exports[`ContributionActions should render the component and matches it against 
       >
         <div
           class="root overflow-hidden"
+          data-testid="ActionCard"
         >
           <div
             class="cardGradient"
@@ -111,6 +113,7 @@ exports[`ContributionActions should render the component and matches it against 
               >
                 <div
                   class="d-none"
+                  data-testid="ActionCardWarningMessage"
                 >
                   <p
                     class="pl-2 m-0"
@@ -172,6 +175,7 @@ exports[`ContributionActions should render the component and matches it against 
       >
         <div
           class="root overflow-hidden"
+          data-testid="ActionCard"
         >
           <div
             class="cardGradient"
@@ -183,7 +187,8 @@ exports[`ContributionActions should render the component and matches it against 
                 class="cardBottomBg"
               >
                 <div
-                  class="cardWarning  position-absolute"
+                  class="cardWarning position-absolute"
+                  data-testid="ActionCardWarningMessage"
                 >
                   <p
                     class="pl-2 m-0"

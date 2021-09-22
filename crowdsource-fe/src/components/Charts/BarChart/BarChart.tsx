@@ -1,5 +1,4 @@
-/* eslint-disable import/no-internal-modules */
-import React, { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect } from 'react';
 
 import * as am4charts from '@amcharts/amcharts4/charts';
 import * as am4core from '@amcharts/amcharts4/core';
@@ -16,11 +15,11 @@ interface ChartProps {
   };
 }
 
-const BarChart = (props: ChartProps | any) => {
+const BarChart = (props: ChartProps) => {
   const chart = useRef({});
 
   useLayoutEffect(() => {
-    let x = am4core.create(props.id, am4charts.XYChart);
+    const x = am4core.create(props.id, am4charts.XYChart);
 
     x.paddingRight = 20;
     x.data = props.data.data;
@@ -33,12 +32,12 @@ const BarChart = (props: ChartProps | any) => {
     // categoryAxis.renderer.grid.template.disabled = true;
     categoryAxis.renderer.labels.template.fontSize = 12;
     categoryAxis.renderer.grid.template.location = 0;
-    let label = categoryAxis.renderer.labels.template;
+    const label = categoryAxis.renderer.labels.template;
     // label.wrap = true;
     label.truncate = true;
     label.maxWidth = 120;
 
-    let valueAxis: any = x.yAxes.push(new am4charts.ValueAxis());
+    const valueAxis: any = x.yAxes.push(new am4charts.ValueAxis());
     valueAxis.min = 0;
     valueAxis.renderer.labels.template.fill = '#142745';
     valueAxis.renderer.grid.template.strokeDasharray = '3,3';
@@ -65,14 +64,13 @@ const BarChart = (props: ChartProps | any) => {
     columnTemplate.tooltipX = am4core.percent(50);
     columnTemplate.tooltipY = am4core.percent(0);
     columnTemplate.adapter.add('fill', (value: any, target: any) => {
-      return am4core.color(props.data.colors[props.data.colors.length - 1 - target.dataItem.index]);
+      return am4core.color(props.data.colors?.[props.data.colors.length - 1 - target.dataItem.index]);
     });
     columnTemplate.adapter.add('stroke', (value: any, target: any) => {
-      console.log(props.data.colors, target.dataItem.index);
-      return am4core.color(props.data.colors[props.data.colors.length - 1 - target.dataItem.index]);
+      return am4core.color(props.data.colors?.[props.data.colors.length - 1 - target.dataItem.index]);
     });
     if (props.data.isScrollbar) {
-      let scrollbarX = new am4charts.XYChartScrollbar();
+      const scrollbarX = new am4charts.XYChartScrollbar();
       scrollbarX.series.push(series);
       x.scrollbarX = scrollbarX;
     }

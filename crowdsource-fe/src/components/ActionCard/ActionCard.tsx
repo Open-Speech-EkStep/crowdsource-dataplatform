@@ -16,11 +16,14 @@ const ActionCard = (props: ActionCardProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className={`${styles.root} overflow-hidden`}>
+    <div data-testid="ActionCard" className={`${styles.root} overflow-hidden`}>
       <div className={styles.cardGradient}>
         <div className={`${styles.cardTopBg}`}>
           <div className={`${styles.cardBottomBg}`}>
-            <div className={`${props.disabled ? `${styles.cardWarning}  position-absolute` : 'd-none'}`}>
+            <div
+              data-testid="ActionCardWarningMessage"
+              className={`${props.disabled ? `${styles.cardWarning} position-absolute` : 'd-none'}`}
+            >
               <p className="pl-2 m-0">{t('Only validations invited for the selected language')}</p>
             </div>
             <div className={`${styles.card} d-flex p-5 p-md-7 p-xl-9 align-items-center`}>

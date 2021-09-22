@@ -5,7 +5,7 @@ exports[`Background should render the component and matches it against stored sn
   <section
     class="root"
     data-testid="Background"
-    style="--background--image: url(/images/some-image.svg); --background--image-mobile: url(/images/some-image.svg); --background-size: cover;"
+    style="--background--image: url(/images/some-image.svg); --background--image-mobile: url(/images/some-image.svg); --background-size: auto;"
   >
     <div>
       Child Component

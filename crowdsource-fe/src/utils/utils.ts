@@ -39,8 +39,7 @@ export const formatTime = function (hours: number, minutes = 0, seconds = 0, tra
     result += `0 ${secStr} `;
   }
 
-  if (result.charAt(result.length - 1) !== ' ') return result.substr(0, result.length);
-  else return result.substr(0, result.length - 1);
+  return result.substr(0, result.length - 1);
 };
 
 export const convertTimeFormat = (value: any) => {

@@ -64,7 +64,7 @@ describe('FeedbackModal', () => {
           revisit: '',
           email: 'Anonymous',
           language,
-          module,
+          module: '',
           target_page: '',
         }),
       });
@@ -113,7 +113,7 @@ describe('FeedbackModal', () => {
           revisit: '',
           email: userName,
           language,
-          module,
+          module: '',
           target_page: '',
         }),
       });

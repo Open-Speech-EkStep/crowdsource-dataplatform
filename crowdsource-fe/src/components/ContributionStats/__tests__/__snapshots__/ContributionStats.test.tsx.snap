@@ -14,6 +14,7 @@ exports[`ContributionStats should render the component and matches it against st
       >
         <div
           class="row"
+          data-testid="StatsRow"
         >
           <div
             class="stat col-md-3 col-12"
@@ -24,7 +25,10 @@ exports[`ContributionStats should render the component and matches it against st
               <span
                 class="count"
               >
-                9
+                <div
+                  class="spinner-border text-light"
+                  data-testid="StatsSpinner"
+                />
               </span>
               <span
                 class="initiative mt-1"
@@ -42,7 +46,10 @@ exports[`ContributionStats should render the component and matches it against st
               <span
                 class="count"
               >
-                283
+                <div
+                  class="spinner-border text-light"
+                  data-testid="StatsSpinner"
+                />
               </span>
               <span
                 class="initiative mt-1"
@@ -60,7 +67,10 @@ exports[`ContributionStats should render the component and matches it against st
               <span
                 class="count"
               >
-                0
+                <div
+                  class="spinner-border text-light"
+                  data-testid="StatsSpinner"
+                />
               </span>
               <span
                 class="initiative mt-1"
@@ -78,7 +88,10 @@ exports[`ContributionStats should render the component and matches it against st
               <span
                 class="count"
               >
-                53
+                <div
+                  class="spinner-border text-light"
+                  data-testid="StatsSpinner"
+                />
               </span>
               <span
                 class="initiative mt-1"

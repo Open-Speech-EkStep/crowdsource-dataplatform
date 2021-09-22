@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-// import { BarChart } from 'components/Charts';
+import { BarChart } from 'components/Charts';
 import type { ChartPropModel } from 'interface';
 
 const ContributionTracker = () => {
@@ -38,7 +38,7 @@ const ContributionTracker = () => {
   //     apiPaths.topLanguagesBySpeakerContributions
   //   );
 
-  //   if (topLanguagesByHoursData && topLanguagesByHoursData.length) {
+  //   if (topLanguagesByHoursData?.length && topLanguagesBySpeakerData?.length) {
   //     console.log(topLanguagesByHoursData, 'topLanguagesByHoursData');
   //     setChartData({
   //       ...chartData,
@@ -50,7 +50,7 @@ const ContributionTracker = () => {
 
   return (
     <div className="" data-testid="ContributionTracker">
-      {/* <BarChart id="bar_chart" data={chartData} /> */}
+      <BarChart id="bar_chart" data={chartData} />
     </div>
   );
 };

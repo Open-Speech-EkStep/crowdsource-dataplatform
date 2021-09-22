@@ -17,7 +17,7 @@ exports[`TargetProgress should render the component and matches it against store
         >
           %
         </span>
-         of 'suno' India Target Achieved
+         of Suno India Target Achieved
       </div>
       <span
         class="hours d-none d-md-block"

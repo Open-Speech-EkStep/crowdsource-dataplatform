@@ -7,6 +7,7 @@ exports[`Stats should render the component and matches it against stored snapsho
   >
     <div
       class="row"
+      data-testid="StatsRow"
     >
       <div
         class="stat col-md-3 col-12"

@@ -25,7 +25,7 @@ const ContributionActions = (props: ContributionActionProps) => {
   const { t } = useTranslation();
   const initiative = INITIATIVES_MAPPING.suno;
 
-  const [contributionLanguage, setContributionLanguage] = useLocalStorage<string | null>(
+  const [contributionLanguage, setContributionLanguage] = useLocalStorage<string>(
     localStorageConstants.contributionLanguage
   );
 
@@ -36,7 +36,7 @@ const ContributionActions = (props: ContributionActionProps) => {
   const isLanguageAvailable = (languageData: any) => {
     return languageData &&
       languageData.find(
-        (data: any) => data.type === props.initiativeMedia && data.language == contributionLanguage
+        (data: any) => data.type === props.initiativeMedia && data.language === contributionLanguage
       )
       ? true
       : false;
@@ -68,17 +68,18 @@ const ContributionActions = (props: ContributionActionProps) => {
         <Col xs="12">
           <div className="contributionLanguage">
             <Form.Group
-              controlId="formGroupContributionLanguage"
+              controlId="contribution"
               className="d-flex flex-column flex-md-row align-items-md-center"
             >
               <Form.Label className={`${styles.label} mb-0`}>
                 {t('Select the language for contribution')}:
               </Form.Label>
               <Form.Select
-                value={contributionLanguage! || ''}
+                data-testid="select"
+                value={contributionLanguage || ''}
                 aria-label="Select the language for contribution"
                 className={`${styles.selectContributionLanguage} mt-3 mt-md-0 ms-md-2`}
-                name="category"
+                name="contribution"
                 onChange={handleChange as any}
               >
                 {locales?.map(locale => (

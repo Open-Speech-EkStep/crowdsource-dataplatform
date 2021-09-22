@@ -81,3 +81,7 @@ afterEach(() => {
   Storage.prototype.setItem.mockClear();
   Storage.prototype.removeItem.mockClear();
 });
+
+class SVGPathElement extends HTMLElement {}
+
+window.SVGPathElement = SVGPathElement;

@@ -76,6 +76,7 @@
     "jest-watch-typeahead": "^0.6.4",
     "jest-when": "^3.3.1",
     "next-router-mock": "^0.3.0",
+    "next-transpile-modules": "^8.0.0",
     "node-talisman": "^1.22.2",
     "prettier": "^2.4.0",
     "puppeteer": "^10.2.0",

@@ -9,7 +9,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'components/Modal';
 import apiPaths from 'constants/apiPaths';
 import localStorageConstants from 'constants/localStorageConstants';
-import pageRouteConstants from 'constants/pageRouteConstants';
+import { pageRouteConstants, pageInitiativeRouteContants } from 'constants/pageRouteConstants';
 import { useSubmit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 
@@ -41,7 +41,6 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
   const route = useRouter();
 
   const [speakerDetails] = useLocalStorage<{ userName: string }>(localStorageConstants.speakerDetails);
-  const [currentModule] = useLocalStorage<string>(localStorageConstants.currentModule);
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +55,7 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
         ...formData,
         email: speakerDetails?.userName || 'Anonymous',
         language: contributionLanguage,
-        module: currentModule,
+        module: pageInitiativeRouteContants[route.asPath] || '',
         target_page: pageRouteConstants[route.asPath] || '',
       })
     );

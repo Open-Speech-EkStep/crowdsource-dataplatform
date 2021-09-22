@@ -4,6 +4,7 @@ exports[`ActionCard should render the component and match it against stored snap
 <DocumentFragment>
   <div
     class="root overflow-hidden"
+    data-testid="ActionCard"
   >
     <div
       class="cardGradient"
@@ -16,6 +17,7 @@ exports[`ActionCard should render the component and match it against stored snap
         >
           <div
             class="d-none"
+            data-testid="ActionCardWarningMessage"
           >
             <p
               class="pl-2 m-0"

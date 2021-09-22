@@ -28,4 +28,18 @@ describe('LanguageSwitcher', () => {
 
     expect(localStorage.setItem).toHaveBeenCalledWith('contributionLanguage', 'Hindi');
   });
+
+  it('should change the locale to English', async () => {
+    setup();
+
+    userEvent.click(screen.getByText('हिंदी'));
+
+    await waitFor(() => expect(screen.getByRole('link', { name: 'English' })).toBeInTheDocument());
+
+    userEvent.click(screen.getByRole('link', { name: 'English' }));
+
+    expect(router.locale).toBe('en');
+
+    expect(localStorage.setItem).toHaveBeenCalledWith('contributionLanguage', 'English');
+  });
 });

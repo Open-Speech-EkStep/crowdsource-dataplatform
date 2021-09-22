@@ -1,9 +1,9 @@
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { render, screen } from 'utils/testUtils';
 
 import TargetProgress from '../TargetProgress';
 
 describe('TargetProgress', () => {
-  const setup = async () => {
+  const setup = async (initiativeValue: any, sourceValue?: string, contributionLanguage?: string) => {
     fetchMock.doMockOnceIf('/aggregated-json/cumulativeCount.json').mockResponseOnce(
       JSON.stringify([
         {
@@ -58,29 +58,62 @@ describe('TargetProgress', () => {
           validation_goal: 60000,
         },
         {
-          contribution_goal: 60000,
+          contribution_goal: 60,
           type: 'asr',
-          validation_goal: 60000,
+          validation_goal: 60,
         },
         {
-          contribution_goal: 60000,
+          contribution_goal: 60,
           type: 'text',
-          validation_goal: 60000,
+          validation_goal: 60,
         },
       ])
     );
 
-    const renderResult = render(<TargetProgress initiative="'suno'" initiativeMedia="'asr'" />);
+    const renderResult = render(
+      <TargetProgress
+        initiative={initiativeValue}
+        initiativeMedia="asr"
+        source={sourceValue}
+        language={contributionLanguage}
+      />
+    );
     return renderResult;
   };
 
-  async () => {
-    verifyAxeTest(await setup());
-  };
-
   it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup();
+    const { asFragment } = await setup('suno');
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('should render the result for suno and bolo initiative home page', async () => {
+    await setup('suno');
+
+    expect(screen.getByText('of Suno India Target Achieved')).toBeInTheDocument();
+  });
+
+  it('should render the result for suno and bolo initiative thank you page with source', async () => {
+    await setup('bolo', 'Contribute');
+
+    expect(screen.getByText('of Bolo India Target Achieved')).toBeInTheDocument();
+  });
+
+  it('should render the result for likho initiative home page', async () => {
+    await setup('likho', 'Contribute');
+
+    expect(screen.getByText('of Likho India Target Achieved')).toBeInTheDocument();
+  });
+
+  it('should render the result for dekho initiative home page', async () => {
+    await setup('dekho', 'Validate');
+
+    expect(screen.getByText('of Dekho India Target Achieved')).toBeInTheDocument();
+  });
+
+  it('should render the result for likho initiative dashboard page', async () => {
+    await setup('likho', 'Contribute', 'English-Hindi');
+
+    expect(screen.getByText('of Likho India Target Achieved')).toBeInTheDocument();
   });
 });

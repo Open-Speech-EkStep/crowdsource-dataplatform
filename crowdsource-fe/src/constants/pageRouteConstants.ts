@@ -1,7 +1,15 @@
+import { INITIATIVES_MAPPING } from './initiativeConstants';
 import routePaths from './routePaths';
 
-const pageRouteConstants = {
+export const pageRouteConstants = {
   [routePaths.home]: 'Home Page',
+  [routePaths.sunoIndiaHome]: 'Suno India',
 } as const;
 
-export default pageRouteConstants;
+export const pageInitiativeRouteContants = {
+  [routePaths.home]: 'Others',
+  [routePaths.sunoIndiaHome]: INITIATIVES_MAPPING.suno,
+  [routePaths.boloIndiaHome]: INITIATIVES_MAPPING.bolo,
+  [routePaths.likhoIndiaHome]: INITIATIVES_MAPPING.likho,
+  [routePaths.dekhoIndiaHome]: INITIATIVES_MAPPING.dekho,
+};

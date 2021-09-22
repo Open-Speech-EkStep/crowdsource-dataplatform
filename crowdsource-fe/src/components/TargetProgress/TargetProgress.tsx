@@ -42,7 +42,6 @@ const TargetProgress = (props: TargetProgressProps) => {
     if (initiativeType === INITIATIVES_MAPPING.likho && language) {
       language = language.split('-')[0];
     }
-    if (language) return data.filter((d: any) => d.language.split('-')[0] == language);
     return data;
   };
 
@@ -61,9 +60,6 @@ const TargetProgress = (props: TargetProgressProps) => {
     goalDataList = languageFilter(goalDataList, props.initiative, props.language);
     const goalData = reduceList(goalDataList);
     const totalGoal = getSourceCount(props.source, goalData.contribution_goal, goalData.validation_goal) || 1;
-    if (!totalGoal) {
-      throw Error('Invalid progress goal');
-    }
     return totalGoal;
   };
 
