@@ -4,10 +4,10 @@ const { setDropdownValues } = require('../../../build/js/common/header');
 const { setParticipationDataFromJson } = require('../../../build/js/common/contributionStats.js');
 const { CONTRIBUTION_LANGUAGE, SPEAKER_DETAILS_KEY, DEFAULT_CON_LANGUAGE } = require('./constants');
 const { hasUserRegistered, safeJqueryErrorHandling } = require('./common');
-const { context_root } = require('./env-api');
+const { json_url } = require('./env-api');
 
 $(document).ready(function () {
-  $.getJSON(`${context_root}/aggregated-json/participationStats.json`, (jsonData) => {
+  $.getJSON(`${json_url}/aggregated-json/participationStats.json`, (jsonData) => {
     setParticipationDataFromJson(jsonData);
   }).fail((e) => {
     safeJqueryErrorHandling(e);
