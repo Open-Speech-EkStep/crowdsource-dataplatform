@@ -135,6 +135,16 @@ gulp.task('js', function () {
       replace({
         patterns: [
           {
+            match: 'jsonUrl',
+            replacement: settings.jsonUrl,
+          },
+        ],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
             match: 'cdnUrl',
             replacement: settings.cdnUrl,
           },
