@@ -6,7 +6,7 @@
     "whitelistingEmail": false,
     "showDataSource": false,
     "feedbackTopComponent": false,
-    "contextRoot": "",
+    "contextRoot": "https://crowdsource1.blob.core.windows.net/static-content-vakyansh-dev",
     "enabled_languages": [
       "as",
       "bn",
