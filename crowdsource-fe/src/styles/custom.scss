@@ -35,6 +35,8 @@ $spacers: (
 );
 
 // Colors
+$link-color: #007bff;
+
 $theme-colors: (
   'primary': #0f2749,
   'secondary': #eff5ff,
@@ -56,6 +58,14 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 :root {
   --primary-color: #{map-get($theme-colors, 'primary')};
+  --secondary-color: #{map-get($theme-colors, 'secondary')};
+  --success-color: #{map-get($theme-colors, 'success')};
+  --info-color: #{map-get($theme-colors, 'info')};
+  --warning-color: #{map-get($theme-colors, 'warning')};
+  --danger-color: #{map-get($theme-colors, 'danger')};
+  --light-color: #{map-get($theme-colors, 'light')};
+  --dark-color: #{map-get($theme-colors, 'dark')};
+  --link-color: #{$link-color};
 }
 
 // Typography
@@ -367,7 +377,6 @@ $form-check-input-checked-border-color: var(--primary-color);
 $form-check-input-focus-box-shadow: 0 0 0 0.2rem rgb(20 39 69 / 50%);
 $navbar-light-color: var(--primary-color);
 $navbar-light-hover-color: var(--primary-color);
-$link-color: #007bff;
 
 :root {
   /* Z-Indexes */

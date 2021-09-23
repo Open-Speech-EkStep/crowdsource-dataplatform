@@ -89,7 +89,7 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
         <Form id="feedbackForm" onSubmit={handleSubmit} className={`${styles.root} py-2`}>
           <Form.Group className="py-3" controlId="opinionRating">
             <Form.Label className="mb-3">
-              {t('opinionQuestionText')} <span className={styles.red}>({t('required')})</span>
+              {t('opinionQuestionText')} <span className="text-danger fst-italic">({t('required')})</span>
             </Form.Label>
             <div className={styles.opinions}>
               {opinions.map(opinion => (
@@ -127,7 +127,8 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
 
           <Form.Group className="py-3" controlId="category">
             <Form.Label className="mb-1">
-              {t('feedbackCategoryQuestionText')} <span className={styles.grey}>({t('optional')})</span>
+              {t('feedbackCategoryQuestionText')}{' '}
+              <span className={`${styles.grey} fst-italic`}>({t('optional')})</span>
             </Form.Label>
             <Form.Select
               aria-label="Default select example"

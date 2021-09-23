@@ -13,14 +13,14 @@ exports[`Footer should render the component and matches it against stored snapsh
         class="d-flex flex-column flex-lg-row align-items-center order-2 order-lg-1"
       >
         <a
-          class="link me-lg-12 py-2 py-lg-0 text-primary"
+          class="link me-lg-12 py-2 py-lg-0"
           href="/terms-and-conditions.html"
           target="_blank"
         >
           termsAndConditions
         </a>
         <a
-          class="link py-2 py-lg-0 text-primary"
+          class="link py-2 py-lg-0"
           href="/terms-and-conditions.html#privacy-policy"
           target="_blank"
         >

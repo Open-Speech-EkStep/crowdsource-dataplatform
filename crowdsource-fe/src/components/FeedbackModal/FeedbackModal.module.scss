@@ -47,7 +47,7 @@
   background-color: var(--primary-color);
   border: 0;
   border-radius: 1.5rem;
-  color: #fff;
+  color: var(--light-color);
   font-size: 1rem;
   height: 2.25rem;
   line-height: 1.5rem;
@@ -138,13 +138,7 @@
   box-shadow: 0 4px 8px rgba(42, 137, 8, 0.5);
 }
 
-.red {
-  color: #c45757;
-  font-style: italic;
-}
-
 .grey {
-  font-style: italic;
   opacity: 0.4;
 }
 

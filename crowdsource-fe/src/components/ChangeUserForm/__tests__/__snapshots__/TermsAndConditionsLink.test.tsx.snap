@@ -3,7 +3,6 @@
 exports[`TermsAndConditionsLink should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <a
-    class="termsAndConditionsLink"
     href="/terms-and-conditions.html"
     target="_blank"
   >

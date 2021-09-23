@@ -11,17 +11,25 @@
   font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   &:hover {
-    color: #0f2749;
+    color: var(--primary-color);
   }
 }
 
 .labelSecondHalf {
-  color: #ffcc35;
+  color: var(--warning-color);
   margin-left: 3px;
 }
 
 .betaText {
   bottom: 0.5rem;
-
+  font-family: Roboto, sans-serif;
   right: 0;
+
+  @include media-breakpoint-up(md) {
+    bottom: 0.75rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    right: 0.5rem;
+  }
 }

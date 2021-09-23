@@ -7,9 +7,10 @@
 }
 
 .link {
+  color: var(--primary-color);
   font-weight: bold;
 
   &:hover {
-    color: var(--primary-color);
+    color: var(--link-color);
   }
 }
