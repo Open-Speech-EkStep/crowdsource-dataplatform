@@ -82,18 +82,6 @@ Launches the test runner with coverage.
 
 For running [lighthouse-ci](https://github.com/GoogleChrome/lighthouse-ci). Please ensure you ran `npm run build` first before running this command.
 
-### `npm run test:vr:setup`
-
-DO NOT RUN THIS SCRIPT. THIS IS ONLY FOR VR SETUP.
-
-### `npm run test:vr`
-
-For running VR tests.
-
-### `npm run test:vr:update`
-
-For update VR test snapshots.
-
 ### `npm run node-talisman`
 
 For running talisman on the source code.

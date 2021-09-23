@@ -20,8 +20,8 @@ const FeedbackSuccessModal = (props: FeedbackSuccessModalProps) => {
       contentClassName={styles.content}
       centered
     >
-      <Modal.Header closeButton className={styles.modalHeader} />
-      <Modal.Body className={`pt-0 ${styles.modalBody}`}>
+      <Modal.Header closeButton className={`${styles.modalHeader} border-bottom-0`} />
+      <Modal.Body className="pt-0 pb-8 pb-md-9">
         <div className="text-center">
           <Image src="/images/success.svg" width="48" height="48" alt="success" />
         </div>

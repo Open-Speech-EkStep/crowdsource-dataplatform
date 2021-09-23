@@ -135,6 +135,16 @@ gulp.task('js', function () {
       replace({
         patterns: [
           {
+            match: 'jsonUrl',
+            replacement: settings.jsonUrl,
+          },
+        ],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
             match: 'cdnUrl',
             replacement: settings.cdnUrl,
           },
@@ -186,6 +196,16 @@ gulp.task('js-common-flat', function () {
         ],
       })
     )
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'jsonUrl',
+            replacement: settings.jsonUrl,
+          },
+        ],
+      })
+    )
     .pipe(gulp.dest('build/js/common'));
 });
 
@@ -199,6 +219,16 @@ function jsFlatten(moduleName) {
           {
             match: 'contextRoot',
             replacement: settings.contextRoot,
+          },
+        ],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'jsonUrl',
+            replacement: settings.jsonUrl,
           },
         ],
       })
@@ -251,6 +281,16 @@ function jsGulp(moduleName) {
           {
             match: 'contextRoot',
             replacement: settings.contextRoot,
+          },
+        ],
+      })
+    )
+    .pipe(
+      replace({
+        patterns: [
+          {
+            match: 'jsonUrl',
+            replacement: settings.jsonUrl,
           },
         ],
       })

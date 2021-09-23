@@ -5,7 +5,7 @@ exports[`UserOptions should not render the component when speaker details are no
 exports[`UserOptions should render the component when speaker details are present 1`] = `
 <DocumentFragment>
   <div
-    class="root dropdown"
+    class="root position-relative dropdown"
     data-testid="UserOptions"
     id="userOptions"
   >
@@ -50,7 +50,7 @@ exports[`UserOptions should render the component when speaker details are presen
 exports[`UserOptions should render the component when speaker details are present but username is not present 1`] = `
 <DocumentFragment>
   <div
-    class="root dropdown"
+    class="root position-relative dropdown"
     data-testid="UserOptions"
     id="userOptions"
   >

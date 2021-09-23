@@ -3,7 +3,7 @@
 exports[`BronzeContribute should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="root text-center text-md-start"
+    class="root bg-secondary text-center text-md-start"
     data-testid="BronzeContribute"
   >
     <div
@@ -41,42 +41,42 @@ exports[`BronzeContribute should render the component and matches it against sto
         <div
           class="col-md-10 col-12"
         >
-          <h1
-            class="header mt-1 mt-md-0"
+          <h2
+            class="mt-1 mt-md-0"
           >
             bronzeBhashaSamarthakBadge
-          </h1>
+          </h2>
           <p
-            class="text mt-5 mt-md-3 mb-0"
+            class="text display-3 mt-5 mt-md-3 mb-0"
           >
             bronzeContributeFive
           </p>
           <div
-            class="initiatives d-flex flex-wrap justify-content-center justify-content-md-start mt-6"
+            class="fx-bold d-flex flex-wrap justify-content-center justify-content-md-start mt-6"
           >
             <a
-              class="link d-flex align-items-center justify-content-center text-uppercase"
+              class="link bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="sunoHome"
               href="/sunoIndia/home"
             >
               suno india
             </a>
             <a
-              class="link d-flex align-items-center justify-content-center text-uppercase"
+              class="link bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="boloHome"
               href="/boloIndia/home.html"
             >
               bolo india
             </a>
             <a
-              class="link d-flex align-items-center justify-content-center text-uppercase"
+              class="link bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="likhoHome"
               href="/likhoIndia/home.html"
             >
               likho india
             </a>
             <a
-              class="link d-flex align-items-center justify-content-center text-uppercase"
+              class="link bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="dekhoHome"
               href="/dekhoIndia/home.html"
             >

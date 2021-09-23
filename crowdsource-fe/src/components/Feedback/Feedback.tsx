@@ -33,7 +33,7 @@ const Feedback = () => {
       <Button
         data-testid="FeedbackBtn"
         onClick={showModal}
-        className={`${styles.root} d-inline-flex justify-content-center align-items-center`}
+        className={`${styles.root} d-inline-flex justify-content-center align-items-center bg-light border border-1 border-primary-40 rounded-circle`}
       >
         <Image src="/images/feedback_icon.svg" width="32" height="32" alt={t('feedbackIconAlt')} />
       </Button>

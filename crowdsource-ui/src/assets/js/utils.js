@@ -1,7 +1,7 @@
 const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES, CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE, ErrorStatusCode } = require("./constants");
 const fetch = require('./fetch')
 const platform = require('./platform');
-const { context_root } = require('./env-api');
+const { json_url } = require('./env-api');
 
 
 function getDeviceInfo() {
@@ -286,7 +286,7 @@ const reportSentenceOrRecording = (reqObj) => {
 
 const getJson = (path) => {
   return new Promise((resolve) => {
-    $.getJSON(`${context_root}${path}`, (data) => {
+    $.getJSON(`${json_url}${path}`, (data) => {
       resolve(data);
     }).fail((e) => {
       if (e && e.statusText !== "error") {

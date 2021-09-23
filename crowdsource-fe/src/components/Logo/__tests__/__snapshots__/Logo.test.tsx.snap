@@ -3,11 +3,11 @@
 exports[`Logo should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="root"
+    class="d-flex"
     data-testid="Logo"
   >
     <a
-      class="img imgMobile"
+      class="d-flex align-items-center d-md-none"
       href="/"
     >
       <div
@@ -34,7 +34,7 @@ exports[`Logo should render the component and matches it against stored snapshot
       </div>
     </a>
     <a
-      class="img imgDesktop"
+      class="d-none align-items-center d-md-flex"
       href="/"
     >
       <div
@@ -61,10 +61,10 @@ exports[`Logo should render the component and matches it against stored snapshot
       </div>
     </a>
     <span
-      class="sep"
+      class="sep d-flex align-self-center border border-1 border-primary mx-3"
     />
     <a
-      class="label px-xl-2"
+      class="label d-flex align-items-center text-primary px-xl-2 display-1 position-relative"
       href="/home"
     >
       bhasha
@@ -74,7 +74,7 @@ exports[`Logo should render the component and matches it against stored snapshot
         daan
       </span>
       <span
-        class="betaText"
+        class="betaText display-10 position-absolute"
       >
         beta
       </span>

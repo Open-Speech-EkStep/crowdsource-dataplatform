@@ -10,7 +10,7 @@ exports[`ContributionStats should render the component and matches it against st
       class="mt-4 mt-md-5"
     >
       <div
-        class="stats px-7 px-md-0 py-md-7"
+        class="root bg-info px-7 px-md-0 py-md-7"
       >
         <div
           class="row"
@@ -23,7 +23,7 @@ exports[`ContributionStats should render the component and matches it against st
               class="d-flex flex-column align-items-center py-7 py-md-0"
             >
               <span
-                class="count"
+                class="count text-warning display-1"
               >
                 <div
                   class="spinner-border text-light"
@@ -31,7 +31,7 @@ exports[`ContributionStats should render the component and matches it against st
                 />
               </span>
               <span
-                class="initiative mt-1"
+                class="initiative mt-1 display-2"
               >
                 suno india
               </span>
@@ -44,7 +44,7 @@ exports[`ContributionStats should render the component and matches it against st
               class="d-flex flex-column align-items-center py-7 py-md-0"
             >
               <span
-                class="count"
+                class="count text-warning display-1"
               >
                 <div
                   class="spinner-border text-light"
@@ -52,7 +52,7 @@ exports[`ContributionStats should render the component and matches it against st
                 />
               </span>
               <span
-                class="initiative mt-1"
+                class="initiative mt-1 display-2"
               >
                 bolo india
               </span>
@@ -65,7 +65,7 @@ exports[`ContributionStats should render the component and matches it against st
               class="d-flex flex-column align-items-center py-7 py-md-0"
             >
               <span
-                class="count"
+                class="count text-warning display-1"
               >
                 <div
                   class="spinner-border text-light"
@@ -73,7 +73,7 @@ exports[`ContributionStats should render the component and matches it against st
                 />
               </span>
               <span
-                class="initiative mt-1"
+                class="initiative mt-1 display-2"
               >
                 likho india
               </span>
@@ -86,7 +86,7 @@ exports[`ContributionStats should render the component and matches it against st
               class="d-flex flex-column align-items-center py-7 py-md-0"
             >
               <span
-                class="count"
+                class="count text-warning display-1"
               >
                 <div
                   class="spinner-border text-light"
@@ -94,7 +94,7 @@ exports[`ContributionStats should render the component and matches it against st
                 />
               </span>
               <span
-                class="initiative mt-1"
+                class="initiative mt-1 display-2"
               >
                 dekho india
               </span>

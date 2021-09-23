@@ -1,4 +1,44 @@
-import type { GetServerSideProps } from 'next';
+// TODO: Convert this file to 404.page.tsx once we remove all the page toggles.
+// Content of that file should be:
+/*
+  import type { NextPage, GetStaticProps } from 'next';
+  import { useTranslation } from 'next-i18next';
+  import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+  import ErrorComponent from 'next/error';
+
+  import { DEFAULT_LOCALE } from 'constants/localesConstants';
+
+  const FourOFour: NextPage = () => {
+    const { t } = useTranslation();
+
+    return <ErrorComponent statusCode={404} title={t('404Title')} />;
+  };
+
+  import type { NextPage, GetStaticProps } from 'next';
+  import { useTranslation } from 'next-i18next';
+  import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+  import ErrorComponent from 'next/error';
+
+  import { DEFAULT_LOCALE } from 'constants/localesConstants';
+
+  const FourOFour: NextPage = () => {
+    const { t } = useTranslation();
+
+    return <ErrorComponent statusCode={404} title={t('404Title')} />;
+  };
+
+  /* istanbul ignore next * /
+  export const getStaticProps: GetStaticProps = async ({ locale = DEFAULT_LOCALE }) => {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ['common'])),
+      },
+    };
+  };
+
+  export default FourOFour;`
+*/
+import type { GetServerSideProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import ErrorComponent from 'next/error';
@@ -8,7 +48,11 @@ import nodeConfig from 'constants/nodeConfig';
 
 const is404 = (statusCode: number) => statusCode === 404;
 
-const Error = ({ statusCode }: { statusCode: number }) => {
+interface ErrorProps {
+  statusCode: number;
+}
+
+const Error: NextPage<ErrorProps> = ({ statusCode }: ErrorProps) => {
   const { t } = useTranslation();
 
   return <ErrorComponent statusCode={statusCode} title={is404(statusCode) ? t('404Title') : undefined} />;
@@ -22,7 +66,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (!nodeConfig.enabledPages['error'] && is404(statusCode)) {
     return {
       redirect: {
-        destination: '/',
+        destination: `/${locale}/not-found.html`,
         permanent: false,
       },
     };

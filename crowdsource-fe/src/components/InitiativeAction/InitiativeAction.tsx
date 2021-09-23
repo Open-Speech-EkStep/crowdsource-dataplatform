@@ -13,11 +13,11 @@ const InitiativeAction = ({ initiative, actionIcon, shadow = 'Blue' }: Initiativ
   const { t } = useTranslation();
 
   return (
-    <div className={`${styles.action} d-flex flex-column align-items-center text-center`}>
+    <div className={`${styles.action} d-flex flex-column align-items-center text-center display-3`}>
       <div className={`${styles.actionIcon} ${styles[`actionIcon${shadow}`]} d-flex rounded-circle`}>
         <Image src={`/images/${actionIcon}`} alt={t('initiativeAction')} width="160" height="160" priority />
       </div>
-      <div className={styles.actionText}>{t(`${initiative}ContributionSubtext`)}</div>
+      <div className="mt-4">{t(`${initiative}ContributionSubtext`)}</div>
     </div>
   );
 };

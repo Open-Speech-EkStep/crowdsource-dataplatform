@@ -74,16 +74,16 @@ const InitiativesCarousel = () => {
 
   return (
     <div data-testid="InitiativesCarousel" className={`${styles.root} mx-auto`}>
-      <div className={styles.bottomShadow}>
+      <div className={`${styles.bottomShadow} overflow-hidden`}>
         <TriColorBackground>
           <div className={`${styles.initiativesCarousel} slickCarousel pt-6 pb-5 pb-md-3 py-md-8`}>
             <div className={`${styles.labelCarousel} mb-4`}>
               <Slider {...labelCarouselSettings}>
                 {initiatives.map(initiative => (
                   <div key={initiative}>
-                    <span className={`${styles.slideLabel} d-inline-block position-relative pb-2`}>{`${t(
-                      `${initiative}`
-                    )} ${t('india')}`}</span>
+                    <span
+                      className={`${styles.slideLabel} d-inline-block position-relative pb-2 display-2`}
+                    >{`${t(`${initiative}`)} ${t('india')}`}</span>
                   </div>
                 ))}
               </Slider>
@@ -91,10 +91,7 @@ const InitiativesCarousel = () => {
             <div className="py-md-5">
               <Slider {...initiativeCarouselSettings}>
                 {initiatives.map(initiative => (
-                  <div
-                    key={initiative}
-                    className={`${styles.initiative} px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0`}
-                  >
+                  <div key={initiative} className="px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0">
                     <Row>
                       <Col
                         xs="12"

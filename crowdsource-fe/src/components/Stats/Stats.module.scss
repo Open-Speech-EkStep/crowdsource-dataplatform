@@ -1,5 +1,4 @@
-.stats {
-  background-color: #2961ad;
+.root {
   border-radius: 1.25rem;
   box-shadow: #ffbf00 0 8px 0;
 }
@@ -22,26 +21,11 @@
 }
 
 .count {
-  color: #ffcc35;
   font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 1.75rem;
-  line-height: 2.25rem;
-
-  @include media-breakpoint-up(md) {
-    font-size: 2rem;
-    line-height: 2.5rem;
-  }
 }
 
 .initiative {
   color: #fff;
-  font-family: Roboto, sans-serif;
-  font-size: 1.125rem;
-  line-height: 1.5rem;
-  text-transform: uppercase;
 
-  @include media-breakpoint-up(md) {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
+  text-transform: uppercase;
 }

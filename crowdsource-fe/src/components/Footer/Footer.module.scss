@@ -1,9 +1,5 @@
 .root {
-  align-items: center;
-  background-color: var(--text-white);
   box-shadow: 0 -2px 12px 0 var(--text-light-blue);
-  color: var(--primary-color);
-  display: flex;
 
   @include media-breakpoint-up(lg) {
     height: 4rem;
@@ -11,9 +7,7 @@
 }
 
 .link {
-  font-family: Roboto, sans-serif;
   font-weight: bold;
-  line-height: 1.5rem;
 
   &:hover {
     color: var(--primary-color);

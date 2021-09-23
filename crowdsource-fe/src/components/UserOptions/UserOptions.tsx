@@ -27,7 +27,12 @@ const UserOptions = () => {
 
   return (
     <Fragment>
-      <Dropdown data-testid="UserOptions" id="userOptions" className={styles.root} align="end">
+      <Dropdown
+        data-testid="UserOptions"
+        id="userOptions"
+        className={`${styles.root} position-relative`}
+        align="end"
+      >
         <Dropdown.Toggle
           id="languageSwitcherToggle"
           variant="light"
@@ -43,11 +48,16 @@ const UserOptions = () => {
           {!speakerDetails.userName && (
             <Dropdown.Item className={classnames(styles.item, 'disabled')}>({t('noUsername')})</Dropdown.Item>
           )}
-          <Dropdown.Item className={styles.item} onClick={() => setModalShow(true)}>
+          <Dropdown.Item
+            className={`${styles.item} text-primary display-5 py-2 px-4`}
+            onClick={() => setModalShow(true)}
+          >
             {t('changeUser')}
           </Dropdown.Item>
           <Link href={routePaths.myBadges} passHref>
-            <Dropdown.Item className={styles.item}>{t('myBadges')}</Dropdown.Item>
+            <Dropdown.Item className={`${styles.item} text-primary display-5 py-2 px-4`}>
+              {t('myBadges')}
+            </Dropdown.Item>
           </Link>
         </Dropdown.Menu>
       </Dropdown>

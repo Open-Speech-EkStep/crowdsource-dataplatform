@@ -3,7 +3,7 @@
 exports[`Stats should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="stats px-7 px-md-0 py-md-7"
+    class="root bg-info px-7 px-md-0 py-md-7"
   >
     <div
       class="row"
@@ -16,12 +16,12 @@ exports[`Stats should render the component and matches it against stored snapsho
           class="d-flex flex-column align-items-center py-7 py-md-0"
         >
           <span
-            class="count"
+            class="count text-warning display-1"
           >
             a
           </span>
           <span
-            class="initiative mt-1"
+            class="initiative mt-1 display-2"
           >
             l1
           </span>
@@ -34,12 +34,12 @@ exports[`Stats should render the component and matches it against stored snapsho
           class="d-flex flex-column align-items-center py-7 py-md-0"
         >
           <span
-            class="count"
+            class="count text-warning display-1"
           >
             b
           </span>
           <span
-            class="initiative mt-1"
+            class="initiative mt-1 display-2"
           >
             l2
           </span>

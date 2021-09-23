@@ -43,9 +43,9 @@ const Modal = ({
     >
       <ReactBootstrapModal.Header closeButton>
         {hasHeader && (
-          <header className={classnames(styles.header, 'text-center flex-grow-1')}>
-            {title && <h1 className={styles.heading}>{title}</h1>}
-            {subTitle && <p className={classnames(styles.subHeading, 'mt-2 mt-md-3')}>{subTitle}</p>}
+          <header className={classnames(styles.header, 'text-center flex-grow-1 pb-2 pb-md-3')}>
+            {title && <h3>{title}</h3>}
+            {subTitle && <p className="display-5 mt-2 mt-md-3">{subTitle}</p>}
           </header>
         )}
       </ReactBootstrapModal.Header>

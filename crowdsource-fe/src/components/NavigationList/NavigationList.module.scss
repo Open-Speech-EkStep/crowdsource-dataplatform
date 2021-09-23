@@ -1,15 +1,6 @@
 .link {
-  align-items: center;
-  color: #0f2749;
-  display: flex;
   font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5rem;
   opacity: 0.8;
-
-  @include media-breakpoint-up(md) {
-    font-size: 1rem;
-  }
 
   &:global(.active) {
     color: #0f2749;

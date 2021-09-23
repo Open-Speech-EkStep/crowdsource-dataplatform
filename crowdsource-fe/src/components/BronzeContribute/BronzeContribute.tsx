@@ -15,7 +15,7 @@ const BronzeContribute = () => {
   const { locale: currentLocale } = useRouter();
   const { t } = useTranslation();
   return (
-    <div data-testid="BronzeContribute" className={`${styles.root} text-center text-md-start`}>
+    <div data-testid="BronzeContribute" className={`${styles.root} bg-secondary text-center text-md-start`}>
       <div className="p-3 py-md-5 px-md-10">
         <Row>
           <Col xs="12" md="2">
@@ -27,17 +27,15 @@ const BronzeContribute = () => {
             />
           </Col>
           <Col xs="12" md="10">
-            <h1 className={`${styles.header} mt-1 mt-md-0`}>{t('bronzeBhashaSamarthakBadge')}</h1>
-            <p className={`${styles.text} mt-5 mt-md-3 mb-0`}>{t('bronzeContributeFive')}</p>
-            <div
-              className={`${styles.initiatives} d-flex flex-wrap justify-content-center justify-content-md-start mt-6`}
-            >
+            <h2 className="mt-1 mt-md-0">{t('bronzeBhashaSamarthakBadge')}</h2>
+            <p className={`${styles.text} display-3 mt-5 mt-md-3 mb-0`}>{t('bronzeContributeFive')}</p>
+            <div className={`fx-bold d-flex flex-wrap justify-content-center justify-content-md-start mt-6`}>
               {INITIATIVES.map(initiative => {
                 return (
                   <Link href={routePaths[`${initiative}IndiaHome`]} key={initiative}>
                     <a
                       data-testid={`${initiative}Home`}
-                      className={`${styles.link} d-flex align-items-center justify-content-center text-uppercase`}
+                      className={`${styles.link} bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase`}
                     >
                       {t(`${initiative}`)} {t('india')}
                     </a>

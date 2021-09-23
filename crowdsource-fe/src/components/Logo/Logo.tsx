@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -13,8 +12,8 @@ const Logo = () => {
   const { locale: currentLocale } = useRouter();
 
   return (
-    <div data-testid="Logo" className={styles.root}>
-      <a href={routePaths.root} className={classnames(styles.img, styles.imgMobile)}>
+    <div data-testid="Logo" className="d-flex">
+      <a href={routePaths.root} className="d-flex align-items-center d-md-none">
         <Image
           src={`/images/${currentLocale}/logos/${currentLocale}-logo-sm.svg`}
           alt={t('bhashiniLogo')}
@@ -22,7 +21,7 @@ const Logo = () => {
           height="48"
         />
       </a>
-      <a href={routePaths.root} className={classnames(styles.img, styles.imgDesktop)}>
+      <a href={routePaths.root} className="d-none align-items-center d-md-flex">
         <Image
           src={`/images/${currentLocale}/logos/${currentLocale}-logo.svg`}
           alt={t('bhashiniLogo')}
@@ -30,12 +29,14 @@ const Logo = () => {
           height="70"
         />
       </a>
-      <span className={styles.sep} />
+      <span className={`${styles.sep} d-flex align-self-center border border-1 border-primary mx-3`} />
       <Link href={routePaths.home}>
-        <a className={`${styles.label} px-xl-2`}>
+        <a
+          className={`${styles.label} d-flex align-items-center text-primary px-xl-2 display-1 position-relative`}
+        >
           {t('bhasha')}
           <span className={styles.labelSecondHalf}>{t('daan')}</span>
-          <span className={styles.betaText}>{t('beta')}</span>
+          <span className={`${styles.betaText} display-10 position-absolute`}>{t('beta')}</span>
         </a>
       </Link>
     </div>

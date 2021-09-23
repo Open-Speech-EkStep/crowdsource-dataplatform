@@ -1,3 +1,6 @@
+import router from 'next/router';
+import type { Router } from 'next/router';
+
 import '__fixtures__/mockComponentsWithSideEffects';
 import { render, screen, verifyAxeTest } from 'utils/testUtils';
 
@@ -7,7 +10,7 @@ describe('App', () => {
   const setup = () => {
     const Component = () => <div>Hello World</div>;
 
-    return render(<App Component={Component} />);
+    return render(<App Component={Component} pageProps={{}} router={(router as unknown) as Router} />);
   };
 
   verifyAxeTest(setup());

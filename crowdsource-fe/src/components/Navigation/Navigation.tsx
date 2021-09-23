@@ -33,16 +33,18 @@ const Navigation = () => {
       <Navbar
         data-testid="Navigation"
         expand="lg"
-        className={styles.bar}
+        className="d-flex align-items-stretch h-100 p-0"
         expanded={isExpanded}
         onToggle={handleToggle}
       >
-        <Navbar.Toggle className={styles.toggle}>
-          <span className={styles.toggleBar} />
-          <span className={styles.toggleBar} />
-          <span className={styles.toggleBar} />
+        <Navbar.Toggle
+          className={`${styles.toggle} align-items-center border-0 flex-column justify-content-center p-0`}
+        >
+          <span className={`${styles.toggleBar} bg-primary position-relative mt-1`} />
+          <span className={`${styles.toggleBar} bg-primary position-relative mt-1`} />
+          <span className={`${styles.toggleBar} bg-primary position-relative mt-1`} />
         </Navbar.Toggle>
-        <Navbar.Collapse className={styles.collapse}>
+        <Navbar.Collapse className={`${styles.collapse} align-items-stretch bg-light py-2 p-lg-0`}>
           <NavigationList />
         </Navbar.Collapse>
       </Navbar>

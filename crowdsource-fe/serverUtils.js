@@ -1,3 +1,4 @@
+// TODO: Remove this file once we remove all the page toggles.
 const url = require('url');
 
 const config = require('config');

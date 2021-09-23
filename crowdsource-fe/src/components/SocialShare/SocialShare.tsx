@@ -2,15 +2,13 @@ import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import styles from './SocialShare.module.scss';
-
 const SocialShare = () => {
   const { t } = useTranslation();
   const { locale: currentLocale } = useRouter();
 
   return (
     <div data-testid="SocialShare" className="d-flex flex-column flex-lg-row align-items-center">
-      <span className={styles.text}>{t('footerSocialShareText')}</span>
+      <span className="fw-bold">{t('footerSocialShareText')}</span>
       <div className="py-3 mt-lg-0 ms-lg-6">
         <a
           href={`https://www.facebook.com/sharer/sharer.php?u=bhashini.gov.in/bhashadaan/${currentLocale}/home.html`}

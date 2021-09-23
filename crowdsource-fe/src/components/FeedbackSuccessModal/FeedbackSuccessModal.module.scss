@@ -1,17 +1,8 @@
 .modalHeader {
-  border-bottom: 0;
   height: 2rem;
 
   @include media-breakpoint-up(md) {
     height: 2.5rem;
-  }
-}
-
-.modalBody {
-  padding-bottom: 2rem;
-
-  @include media-breakpoint-up(md) {
-    padding-bottom: 2.5rem;
   }
 }
 

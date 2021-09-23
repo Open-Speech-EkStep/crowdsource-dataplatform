@@ -1,25 +1,9 @@
-import { when } from 'jest-when';
-
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { render, verifyAxeTest, screen } from 'utils/testUtils';
 
 import Header from '../Header';
 
 describe('Header', () => {
-  const setup = () => {
-    const speakerDetails = {
-      gender: 'male',
-      age: '',
-      motherTongue: 'Hindi',
-      userName: 'abcd',
-      language: 'Hindi',
-      toLanguage: '',
-    };
-    when(localStorage.getItem)
-      .calledWith('speakerDetails')
-      .mockImplementation(() => JSON.stringify(speakerDetails));
-
-    return render(<Header />);
-  };
+  const setup = () => render(<Header />);
 
   verifyAxeTest(() => setup());
 
@@ -27,5 +11,17 @@ describe('Header', () => {
     const { asFragment } = setup();
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('should render LanguageSwitcher', () => {
+    setup();
+
+    expect(screen.getByTestId('LanguageSwitcher')).toBeInTheDocument();
+  });
+
+  it('should not render UserOptions', () => {
+    setup();
+
+    expect(screen.queryByTestId('UserOptions')).not.toBeInTheDocument();
   });
 });

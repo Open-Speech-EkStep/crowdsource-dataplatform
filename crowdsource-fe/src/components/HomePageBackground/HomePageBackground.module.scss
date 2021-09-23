@@ -1,6 +1,5 @@
 .root {
   background: url('/images/home_page_bg_mobile.svg') no-repeat top center;
-  position: relative;
 
   @include media-breakpoint-up(md) {
     background: url('/images/home_page_bg.svg') no-repeat top center;

@@ -25,11 +25,11 @@ const Stats = ({ contents }: StatsProps) => {
             <Col xs="12" md="3" className={styles.stat} key={content.id}>
               <div className="d-flex flex-column align-items-center py-7 py-md-0">
                 {
-                  <span className={styles.count}>
+                  <span className={`${styles.count} text-warning display-1`}>
                     {stat ? stat : <Spinner data-testid="StatsSpinner" animation="border" variant="light" />}
                   </span>
                 }
-                <span className={`${styles.initiative} mt-1`}>{content.label}</span>
+                <span className={`${styles.initiative} mt-1 display-2`}>{content.label}</span>
               </div>
             </Col>
           );

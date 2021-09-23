@@ -7,7 +7,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
     data-testid="InitiativesCarousel"
   >
     <div
-      class="bottomShadow"
+      class="bottomShadow overflow-hidden"
     >
       <section
         class="root"
@@ -47,7 +47,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                             tabindex="-1"
                           >
                             <span
-                              class="slideLabel d-inline-block position-relative pb-2"
+                              class="slideLabel d-inline-block position-relative pb-2 display-2"
                             >
                               suno india
                             </span>
@@ -67,7 +67,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                             tabindex="-1"
                           >
                             <span
-                              class="slideLabel d-inline-block position-relative pb-2"
+                              class="slideLabel d-inline-block position-relative pb-2 display-2"
                             >
                               bolo india
                             </span>
@@ -87,7 +87,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                             tabindex="-1"
                           >
                             <span
-                              class="slideLabel d-inline-block position-relative pb-2"
+                              class="slideLabel d-inline-block position-relative pb-2 display-2"
                             >
                               likho india
                             </span>
@@ -107,7 +107,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                             tabindex="-1"
                           >
                             <span
-                              class="slideLabel d-inline-block position-relative pb-2"
+                              class="slideLabel d-inline-block position-relative pb-2 display-2"
                             >
                               dekho india
                             </span>
@@ -141,7 +141,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                       >
                         <div>
                           <div
-                            class="initiative px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
+                            class="px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
                             style="width: 100%; display: inline-block;"
                             tabindex="-1"
                           >
@@ -190,7 +190,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       class="d-flex justify-content-center justify-content-md-start text-center align-items-md-center text-md-start col-md-8 col-12"
                                     >
                                       <div
-                                        class="initiativeHeaderText"
+                                        class="initiativeHeaderText display-3"
                                       >
                                         dekhoSloganText
                                       </div>
@@ -202,7 +202,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5  col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
@@ -232,7 +232,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     dekhoContributionSubtext
                                   </div>
@@ -242,7 +242,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5 col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
@@ -272,7 +272,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     dekhoContributionSubtext
                                   </div>
@@ -302,7 +302,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                       >
                         <div>
                           <div
-                            class="initiative px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
+                            class="px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
                             style="width: 100%; display: inline-block;"
                             tabindex="-1"
                           >
@@ -351,7 +351,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       class="d-flex justify-content-center justify-content-md-start text-center align-items-md-center text-md-start col-md-8 col-12"
                                     >
                                       <div
-                                        class="initiativeHeaderText"
+                                        class="initiativeHeaderText display-3"
                                       >
                                         sunoSloganText
                                       </div>
@@ -363,7 +363,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5  col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
@@ -393,7 +393,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     sunoContributionSubtext
                                   </div>
@@ -403,7 +403,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5 col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
@@ -433,7 +433,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     sunoContributionSubtext
                                   </div>
@@ -463,7 +463,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                       >
                         <div>
                           <div
-                            class="initiative px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
+                            class="px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
                             style="width: 100%; display: inline-block;"
                             tabindex="-1"
                           >
@@ -512,7 +512,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       class="d-flex justify-content-center justify-content-md-start text-center align-items-md-center text-md-start col-md-8 col-12"
                                     >
                                       <div
-                                        class="initiativeHeaderText"
+                                        class="initiativeHeaderText display-3"
                                       >
                                         boloSloganText
                                       </div>
@@ -524,7 +524,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5  col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
@@ -554,7 +554,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     boloContributionSubtext
                                   </div>
@@ -564,7 +564,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5 col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
@@ -594,7 +594,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     boloContributionSubtext
                                   </div>
@@ -624,7 +624,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                       >
                         <div>
                           <div
-                            class="initiative px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
+                            class="px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
                             style="width: 100%; display: inline-block;"
                             tabindex="-1"
                           >
@@ -673,7 +673,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       class="d-flex justify-content-center justify-content-md-start text-center align-items-md-center text-md-start col-md-8 col-12"
                                     >
                                       <div
-                                        class="initiativeHeaderText"
+                                        class="initiativeHeaderText display-3"
                                       >
                                         likhoSloganText
                                       </div>
@@ -685,7 +685,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5  col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
@@ -715,7 +715,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     likhoContributionSubtext
                                   </div>
@@ -725,7 +725,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5 col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
@@ -755,7 +755,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     likhoContributionSubtext
                                   </div>
@@ -785,7 +785,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                       >
                         <div>
                           <div
-                            class="initiative px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
+                            class="px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
                             style="width: 100%; display: inline-block;"
                             tabindex="-1"
                           >
@@ -834,7 +834,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       class="d-flex justify-content-center justify-content-md-start text-center align-items-md-center text-md-start col-md-8 col-12"
                                     >
                                       <div
-                                        class="initiativeHeaderText"
+                                        class="initiativeHeaderText display-3"
                                       >
                                         dekhoSloganText
                                       </div>
@@ -846,7 +846,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5  col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
@@ -876,7 +876,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     dekhoContributionSubtext
                                   </div>
@@ -886,7 +886,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5 col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
@@ -916,7 +916,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     dekhoContributionSubtext
                                   </div>
@@ -946,7 +946,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                       >
                         <div>
                           <div
-                            class="initiative px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
+                            class="px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
                             style="width: 100%; display: inline-block;"
                             tabindex="-1"
                           >
@@ -995,7 +995,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       class="d-flex justify-content-center justify-content-md-start text-center align-items-md-center text-md-start col-md-8 col-12"
                                     >
                                       <div
-                                        class="initiativeHeaderText"
+                                        class="initiativeHeaderText display-3"
                                       >
                                         sunoSloganText
                                       </div>
@@ -1007,7 +1007,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5  col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
@@ -1037,7 +1037,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     sunoContributionSubtext
                                   </div>
@@ -1047,7 +1047,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5 col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
@@ -1077,7 +1077,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     sunoContributionSubtext
                                   </div>
@@ -1107,7 +1107,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                       >
                         <div>
                           <div
-                            class="initiative px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
+                            class="px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
                             style="width: 100%; display: inline-block;"
                             tabindex="-1"
                           >
@@ -1156,7 +1156,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       class="d-flex justify-content-center justify-content-md-start text-center align-items-md-center text-md-start col-md-8 col-12"
                                     >
                                       <div
-                                        class="initiativeHeaderText"
+                                        class="initiativeHeaderText display-3"
                                       >
                                         boloSloganText
                                       </div>
@@ -1168,7 +1168,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5  col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
@@ -1198,7 +1198,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     boloContributionSubtext
                                   </div>
@@ -1208,7 +1208,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5 col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
@@ -1238,7 +1238,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     boloContributionSubtext
                                   </div>
@@ -1268,7 +1268,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                       >
                         <div>
                           <div
-                            class="initiative px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
+                            class="px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
                             style="width: 100%; display: inline-block;"
                             tabindex="-1"
                           >
@@ -1317,7 +1317,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       class="d-flex justify-content-center justify-content-md-start text-center align-items-md-center text-md-start col-md-8 col-12"
                                     >
                                       <div
-                                        class="initiativeHeaderText"
+                                        class="initiativeHeaderText display-3"
                                       >
                                         likhoSloganText
                                       </div>
@@ -1329,7 +1329,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5  col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
@@ -1359,7 +1359,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     likhoContributionSubtext
                                   </div>
@@ -1369,7 +1369,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5 col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
@@ -1399,7 +1399,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     likhoContributionSubtext
                                   </div>
@@ -1429,7 +1429,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                       >
                         <div>
                           <div
-                            class="initiative px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
+                            class="px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0"
                             style="width: 100%; display: inline-block;"
                             tabindex="-1"
                           >
@@ -1478,7 +1478,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       class="d-flex justify-content-center justify-content-md-start text-center align-items-md-center text-md-start col-md-8 col-12"
                                     >
                                       <div
-                                        class="initiativeHeaderText"
+                                        class="initiativeHeaderText display-3"
                                       >
                                         dekhoSloganText
                                       </div>
@@ -1490,7 +1490,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5  col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
@@ -1520,7 +1520,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     dekhoContributionSubtext
                                   </div>
@@ -1530,7 +1530,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="d-flex justify-content-center py-5 col-lg-4 col-md-3 col-6"
                               >
                                 <div
-                                  class="action d-flex flex-column align-items-center text-center"
+                                  class="action d-flex flex-column align-items-center text-center display-3"
                                 >
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
@@ -1560,7 +1560,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="actionText"
+                                    class="mt-4"
                                   >
                                     dekhoContributionSubtext
                                   </div>

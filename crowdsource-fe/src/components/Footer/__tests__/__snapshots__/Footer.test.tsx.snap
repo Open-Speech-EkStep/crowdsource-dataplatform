@@ -3,7 +3,7 @@
 exports[`Footer should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <footer
-    class="root py-4"
+    class="root d-flex align-items-center bg-light text-primary py-4"
     data-testid="Footer"
   >
     <div
@@ -13,14 +13,14 @@ exports[`Footer should render the component and matches it against stored snapsh
         class="d-flex flex-column flex-lg-row align-items-center order-2 order-lg-1"
       >
         <a
-          class="link me-lg-12 py-2 py-lg-0"
+          class="link me-lg-12 py-2 py-lg-0 text-primary"
           href="/terms-and-conditions.html"
           target="_blank"
         >
           termsAndConditions
         </a>
         <a
-          class="link py-2 py-lg-0"
+          class="link py-2 py-lg-0 text-primary"
           href="/terms-and-conditions.html#privacy-policy"
           target="_blank"
         >
@@ -35,7 +35,7 @@ exports[`Footer should render the component and matches it against stored snapsh
           data-testid="SocialShare"
         >
           <span
-            class="text"
+            class="fw-bold"
           >
             footerSocialShareText
           </span>

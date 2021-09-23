@@ -9,7 +9,7 @@ const { setLangNavBar } = require('../common/languageNavBar')
 
 const { getContributedAndTopLanguage, showByHoursChart, updateLocaleLanguagesDropdown, safeJqueryErrorHandling } = require('./common');
 const { setSpeakerData } = require('./contributionStats');
-const { context_root } = require('./env-api');
+const { json_url } = require('./env-api');
 
 function getStatistics(response, language, module) {
   const $speakersData = $("#speaker-data");
@@ -79,8 +79,8 @@ const setDefaultLang = function () {
   setLangNavBar(targetedDiv, contributionLanguage, $languageNavBar);
 }
 const getStats = (module) => {
-  $.getJSON(`${context_root}/aggregated-json/cumulativeCount.json`, (jsonData) => {
-    $.getJSON(`${context_root}/aggregated-json/participationStats.json`, (jsonData2) => {
+  $.getJSON(`${json_url}/aggregated-json/cumulativeCount.json`, (jsonData) => {
+    $.getJSON(`${json_url}/aggregated-json/participationStats.json`, (jsonData2) => {
       const bData2 = jsonData2.find(d => d.type == module["api-type"]) || {};
       const bData = jsonData.find(d => d.type == module["api-type"]) || {};
       bData.total_speakers = bData2.count || 0;
@@ -91,7 +91,7 @@ const getStats = (module) => {
   });
 }
 const getChartStats = (module) => {
-  $.getJSON(`${context_root}/aggregated-json/topLanguagesByHoursContributed.json`, (jsonData) => {
+  $.getJSON(`${json_url}/aggregated-json/topLanguagesByHoursContributed.json`, (jsonData) => {
     const top_languages_by_hours = jsonData.filter(d => d.type == module["api-type"]);
     localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
     const languages = getContributedAndTopLanguage(top_languages_by_hours, module.value);
@@ -112,7 +112,7 @@ const getChartStats = (module) => {
   });
 }
 const getSpeakerChartStats = (module) => {
-  $.getJSON(`${context_root}/aggregated-json/topLanguagesBySpeakerContributions.json`, (jsonData) => {
+  $.getJSON(`${json_url}/aggregated-json/topLanguagesBySpeakerContributions.json`, (jsonData) => {
     const top_languages_by_speakers = jsonData.filter(d => d.type == module["api-type"]);
     localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(top_languages_by_speakers));
   }).fail((e) => {

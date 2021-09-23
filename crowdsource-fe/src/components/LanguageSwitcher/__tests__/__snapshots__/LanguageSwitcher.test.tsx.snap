@@ -3,8 +3,8 @@
 exports[`LanguageSwitcher should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="root dropdown"
-    data-testid="languageSwitcher"
+    class="root position-relative dropdown"
+    data-testid="LanguageSwitcher"
     id="languageSwitcher"
   >
     <button
