@@ -1,6 +1,6 @@
 # Install dependencies only when needed
 FROM node:14-alpine AS deps
-ARG NODE_CONFIG_ENV=dev
+ARG NODE_CONFIG_ENV=default
 ENV NODE_CONFIG_ENV=${NODE_CONFIG_ENV}
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
@@ -13,7 +13,7 @@ RUN cd ui && npm install && npm run gulp -- --env=${NODE_CONFIG_ENV}
 
 # Rebuild the source code only when needed
 FROM node:14-alpine AS builder
-ARG NODE_CONFIG_ENV=dev
+ARG NODE_CONFIG_ENV=default
 ENV NODE_CONFIG_ENV=${NODE_CONFIG_ENV}
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
@@ -26,6 +26,10 @@ RUN npm run build:docker
 
 # Production image, copy all the files and run next
 FROM node:14-alpine AS runner
+ARG NODE_CONFIG_ENV=default
+ENV NODE_CONFIG_ENV=${NODE_CONFIG_ENV}
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
 WORKDIR /app
 
 RUN addgroup -g 1001 -S nodejs
