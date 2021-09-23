@@ -3,7 +3,7 @@
 exports[`BronzeContribute should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="root text-center text-md-start"
+    class="root bg-secondary text-center text-md-start"
     data-testid="BronzeContribute"
   >
     <div
@@ -52,31 +52,31 @@ exports[`BronzeContribute should render the component and matches it against sto
             bronzeContributeFive
           </p>
           <div
-            class="initiatives d-flex flex-wrap justify-content-center justify-content-md-start mt-6"
+            class="fx-bold d-flex flex-wrap justify-content-center justify-content-md-start mt-6"
           >
             <a
-              class="link d-flex align-items-center justify-content-center text-uppercase"
+              class="link bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="sunoHome"
               href="/sunoIndia/home.html"
             >
               suno india
             </a>
             <a
-              class="link d-flex align-items-center justify-content-center text-uppercase"
+              class="link bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="boloHome"
               href="/boloIndia/home.html"
             >
               bolo india
             </a>
             <a
-              class="link d-flex align-items-center justify-content-center text-uppercase"
+              class="link bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="likhoHome"
               href="/likhoIndia/home.html"
             >
               likho india
             </a>
             <a
-              class="link d-flex align-items-center justify-content-center text-uppercase"
+              class="link bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="dekhoHome"
               href="/dekhoIndia/home.html"
             >

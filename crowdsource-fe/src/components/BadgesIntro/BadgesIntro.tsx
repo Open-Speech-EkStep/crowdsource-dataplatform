@@ -19,7 +19,9 @@ const BadgesIntro = () => {
       <Col xs="12" lg="5">
         <h1 className="text-center text-md-start">{t('badgesIntroHeading')}</h1>
         <Link href={routePaths.badges}>
-          <a className={`${styles.knowMore} display-3 d-none d-lg-block mt-6`}>{t('knowMore')}</a>
+          <a className="display-3 d-none d-lg-block mt-6">
+            <b>{t('knowMore')}</b>
+          </a>
         </Link>
       </Col>
       <Col xs="12" lg="7">
@@ -41,7 +43,9 @@ const BadgesIntro = () => {
       <Col xs="12">
         <div className="d-flex justify-content-center justify-content-md-start mt-6 d-lg-none">
           <Link href={routePaths.badges}>
-            <a className={`${styles.knowMore} display-3`}>{t('knowMore')}</a>
+            <a className="display-3">
+              <b>{t('knowMore')}</b>
+            </a>
           </Link>
         </div>
       </Col>

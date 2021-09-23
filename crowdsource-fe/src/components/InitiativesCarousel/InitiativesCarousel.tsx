@@ -91,10 +91,7 @@ const InitiativesCarousel = () => {
             <div className="py-md-5">
               <Slider {...initiativeCarouselSettings}>
                 {initiatives.map(initiative => (
-                  <div
-                    key={initiative}
-                    className={`${styles.initiative} px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0`}
-                  >
+                  <div key={initiative} className="px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0">
                     <Row>
                       <Col
                         xs="12"

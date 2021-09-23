@@ -15,10 +15,12 @@ exports[`BadgesIntro should render the component and matches it against stored s
         badgesIntroHeading
       </h1>
       <a
-        class="knowMore display-3 d-none d-lg-block mt-6"
+        class="display-3 d-none d-lg-block mt-6"
         href="/badges.html"
       >
-        knowMore
+        <b>
+          knowMore
+        </b>
       </a>
     </div>
     <div
@@ -140,10 +142,12 @@ exports[`BadgesIntro should render the component and matches it against stored s
         class="d-flex justify-content-center justify-content-md-start mt-6 d-lg-none"
       >
         <a
-          class="knowMore display-3"
+          class="display-3"
           href="/badges.html"
         >
-          knowMore
+          <b>
+            knowMore
+          </b>
         </a>
       </div>
     </div>

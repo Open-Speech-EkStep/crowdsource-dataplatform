@@ -35,17 +35,14 @@ $spacers: (
 );
 
 // Colors
-$primary: #0f2749;
-$light: #fff;
-
 $theme-colors: (
-  'primary': $primary,
+  'primary': #0f2749,
   'secondary': #eff5ff,
   'success': $success,
   'info': #2961ad,
   'warning': #ffcc35,
   'danger': #d32f2f,
-  'light': $light,
+  'light': #fff,
   'dark': #000,
 );
 $custom-colors: (
@@ -57,8 +54,12 @@ $custom-colors: (
 );
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
+:root {
+  --primary-color: #{map-get($theme-colors, 'primary')};
+}
+
 // Typography
-$font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, Rowdies, 'Helvetica Neue', Arial, 'Noto Sans',
+$font-family-base: Roboto, system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans',
   'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 $font-size-base: 1rem;
 $line-height-base: 1.5;
@@ -71,7 +72,7 @@ $h5-font-size: $font-size-base * 1.125; // 18px
 $h6-font-size: $font-size-base; // 16px
 
 $headings-margin-bottom: 0;
-$headings-font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$headings-font-family: Rowdies;
 $headings-font-style: normal;
 $headings-font-weight: 400;
 $headings-line-height: $line-height-base;
