@@ -26,6 +26,8 @@ const LanguageSwitcher = () => {
     localStorageConstants.contributionLanguage
   );
 
+  const doSetContributionLanguage = contributionLanguage && currentRoutePath !== routePaths.home;
+
   if (contributionLanguage && currentRoutePath !== routePaths.home) {
     const filteredLanguage = locales?.filter(locale => locale === LOCALE_LANGUAGES[contributionLanguage]);
     filteredLanguage && filteredLanguage.includes(LOCALES_MAPPING.en) ? '' : filteredLanguage?.unshift('en');
@@ -51,7 +53,9 @@ const LanguageSwitcher = () => {
             <Dropdown.Item
               eventKey={locale}
               className={styles.item}
-              onClick={() => setContributionLanguage(RAW_LANGUAGES[locale])}
+              onClick={() =>
+                doSetContributionLanguage ? null : setContributionLanguage(RAW_LANGUAGES[locale])
+              }
             >
               {DISPLAY_LANGUAGES[locale]}
             </Dropdown.Item>

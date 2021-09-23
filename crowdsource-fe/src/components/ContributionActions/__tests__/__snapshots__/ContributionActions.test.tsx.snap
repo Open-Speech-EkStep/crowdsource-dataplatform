@@ -10,92 +10,6 @@ exports[`ContributionActions should render the component and matches it against 
       class="row"
     >
       <div
-        class="col-12"
-      >
-        <div
-          class="contributionLanguage"
-        >
-          <div
-            class="d-flex flex-column flex-md-row align-items-md-center"
-          >
-            <label
-              class="label mb-0 form-label"
-              for="contribution"
-            >
-              Select the language for contribution:
-            </label>
-            <select
-              aria-label="Select the language for contribution"
-              class="selectContributionLanguage mt-3 mt-md-0 ms-md-2 form-select"
-              data-testid="select"
-              id="contribution"
-              name="contribution"
-            >
-              <option
-                value="English"
-              >
-                English
-              </option>
-              <option
-                value="Hindi"
-              >
-                हिंदी
-              </option>
-              <option
-                value="Tamil"
-              >
-                தமிழ்
-              </option>
-              <option
-                value="Telugu"
-              >
-                తెలుగు
-              </option>
-              <option
-                value="Assamese"
-              >
-                অসমীয়া
-              </option>
-              <option
-                value="Bengali"
-              >
-                বাংলা
-              </option>
-              <option
-                value="Gujarati"
-              >
-                ગુજરાતી
-              </option>
-              <option
-                value="Kannada"
-              >
-                ಕನ್ನಡ
-              </option>
-              <option
-                value="Malayalam"
-              >
-                മലയാളം
-              </option>
-              <option
-                value="Marathi"
-              >
-                मराठी
-              </option>
-              <option
-                value="Odia"
-              >
-                ଓଡିଆ
-              </option>
-              <option
-                value="Punjabi"
-              >
-                ਪੰਜਾਬੀ
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div
         class="mt-7 mt-md-9 col-md-6"
       >
         <div
@@ -112,13 +26,13 @@ exports[`ContributionActions should render the component and matches it against 
                 class="cardBottomBg"
               >
                 <div
-                  class="d-none"
+                  class="cardWarning position-absolute"
                   data-testid="ActionCardWarningMessage"
                 >
                   <p
                     class="pl-2 m-0"
                   >
-                    Only validations invited for the selected language
+                    contributeWarningMsg
                   </p>
                 </div>
                 <div
@@ -193,7 +107,7 @@ exports[`ContributionActions should render the component and matches it against 
                   <p
                     class="pl-2 m-0"
                   >
-                    Only validations invited for the selected language
+                    validateWarningMsg
                   </p>
                 </div>
                 <div

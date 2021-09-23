@@ -22,7 +22,7 @@ exports[`ActionCard should render the component and match it against stored snap
             <p
               class="pl-2 m-0"
             >
-              Only validations invited for the selected language
+              Only contributions invited for the selected language
             </p>
           </div>
           <div

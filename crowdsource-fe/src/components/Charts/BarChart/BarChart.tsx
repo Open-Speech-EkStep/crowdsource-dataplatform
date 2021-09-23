@@ -3,16 +3,11 @@ import { useRef, useLayoutEffect } from 'react';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import * as am4core from '@amcharts/amcharts4/core';
 
+import type { ChartDetails } from 'types/Chart';
+
 interface ChartProps {
   id: string;
-  data: {
-    data: Array<any>;
-    colors?: Array<string>;
-    isScrollbar?: boolean;
-    tooltipTemplate?: string;
-    xAxisLabel?: string | any;
-    yAxisLabel?: string | any;
-  };
+  data: ChartDetails;
 }
 
 const BarChart = (props: ChartProps) => {

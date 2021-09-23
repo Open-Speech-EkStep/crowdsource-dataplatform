@@ -5,7 +5,10 @@ import { render, userEvent, screen, verifyAxeTest, waitFor } from 'utils/testUti
 import LanguageSwitcher from '../LanguageSwitcher';
 
 describe('LanguageSwitcher', () => {
-  const setup = () => render(<LanguageSwitcher />);
+  const setup = () => {
+    const renderResult = render(<LanguageSwitcher />);
+    return renderResult;
+  };
 
   verifyAxeTest(setup());
 

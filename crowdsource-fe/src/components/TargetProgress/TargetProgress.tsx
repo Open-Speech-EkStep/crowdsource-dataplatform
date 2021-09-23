@@ -4,7 +4,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import apiPaths from 'constants/apiPaths';
 import { INITIATIVES_MAPPING, INITIATIVE_ACTIONS } from 'constants/initiativeConstants';
 import useFetch from 'hooks/useFetch';
-import type { CumulativeCountModel } from 'interface';
+import type { CumulativeCount } from 'types/Chart';
 import { capitalizeFirstLetter, convertIntoHrsFormat, formatTime, roundOffValue } from 'utils/utils';
 
 import styles from './TargetProgress.module.scss';
@@ -17,8 +17,9 @@ interface TargetProgressProps {
 }
 
 const TargetProgress = (props: TargetProgressProps) => {
-  const { data: cumulativeCountData } = useFetch<Array<CumulativeCountModel>>(apiPaths.cumulativeCount);
+  const { data: cumulativeCountData } = useFetch<Array<CumulativeCount>>(apiPaths.cumulativeCount);
   const { t } = useTranslation();
+
   const { data: initiativeGoalData } = useFetch<
     Array<{ contribution_goal: number; type: string; validation_goal: number }>
   >(apiPaths.initiativeGoals);
@@ -63,7 +64,7 @@ const TargetProgress = (props: TargetProgressProps) => {
     return totalGoal;
   };
 
-  if (cumulativeCountData && initiativeGoalData) {
+  if (cumulativeCountData && cumulativeCountData.length && initiativeGoalData && initiativeGoalData.length) {
     const initiativeCumulativeData: any =
       cumulativeCountData && cumulativeCountData.find(item => item.type === props.initiativeMedia);
     if (props.initiative === INITIATIVES_MAPPING.suno || props.initiative === INITIATIVES_MAPPING.bolo) {

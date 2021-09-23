@@ -1,4 +1,4 @@
-export interface CumulativeCountModel {
+export interface CumulativeCount {
   total_contribution_count: number;
   total_contributions: number;
   total_languages: number;
@@ -7,7 +7,7 @@ export interface CumulativeCountModel {
   type: string;
 }
 
-export interface ChartPropModel {
+export interface ChartDetails {
   data: Array<any>;
   colors?: Array<string>;
   isScrollbar?: boolean;
@@ -16,14 +16,14 @@ export interface ChartPropModel {
   yAxisLabel?: string | any;
 }
 
-export interface TopLanguagesByHoursModel {
+export interface TopLanguagesByHours {
   language: string;
   total_contribution_count: number;
   total_contributions: number;
   type: string;
 }
 
-export interface TopLanguagesBySpeakerModel {
+export interface TopLanguagesBySpeaker {
   language: string;
   total_speakers: number;
   type: string;

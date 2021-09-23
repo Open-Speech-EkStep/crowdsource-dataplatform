@@ -96,5 +96,7 @@
   "submitSuccess": "Submitted successfully",
   "feedbackThankYou": "Thank you for your feedback",
   "contributionTrackerHeader": "Contributions made to Suno India",
-  "contributionTrackerSubHeader": "Overall Summary"
+  "contributionTrackerSubHeader": "Overall Summary",
+  "validateWarningMsg": "Only contributions invited for the selected language",
+  "contributeWarningMsg": "Only validations invited for the selected language"
 }

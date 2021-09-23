@@ -13,8 +13,6 @@ import HomePageBackground from 'components/HomePageBackground';
 import InitiativesCarousel from 'components/InitiativesCarousel';
 import { DEFAULT_LOCALE } from 'constants/localesConstants';
 
-import styles from './pages.module.scss';
-
 const Home: NextPage = () => {
   const { t } = useTranslation();
 
@@ -35,7 +33,7 @@ const Home: NextPage = () => {
           <section className="py-8 py-md-9">
             <ContributionStats>
               <header className="d-flex flex-column align-items-center flex-md-row justify-content-md-between">
-                <h1 className={`${styles.header} mb-0`}>{t('totalParticipation')}</h1>
+                <h1 className="mb-0">{t('totalParticipation')}</h1>
               </header>
             </ContributionStats>
           </section>

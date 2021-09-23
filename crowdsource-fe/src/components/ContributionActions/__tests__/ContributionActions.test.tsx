@@ -1,6 +1,6 @@
 import { when } from 'jest-when';
 
-import { render, verifyAxeTest, screen, userEvent } from 'utils/testUtils';
+import { render, verifyAxeTest, screen } from 'utils/testUtils';
 
 import ContributionActions from '../ContributionActions';
 
@@ -55,7 +55,7 @@ describe('ContributionActions', () => {
       ])
     );
 
-    const renderResult = render(<ContributionActions initiativeMedia="asr" />);
+    const renderResult = render(<ContributionActions initiativeMedia="asr" contributionLanguage="Hindi" />);
     return renderResult;
   };
 
@@ -67,19 +67,6 @@ describe('ContributionActions', () => {
     const { asFragment } = await setup();
 
     expect(asFragment()).toMatchSnapshot();
-  });
-
-  it('should select the contribution language', async () => {
-    await setup();
-
-    userEvent.selectOptions(screen.getByTestId('select'), 'हिंदी');
-
-    expect(screen.getByRole('combobox', { name: 'Select the language for contribution' })).toHaveValue(
-      'Hindi'
-    );
-    expect(localStorage.setItem).toHaveBeenCalledWith('contributionLanguage', 'Hindi');
-
-    expect(screen.getAllByTestId('ActionCardWarningMessage')[1]).toHaveClass('cardWarning');
   });
 
   it('should render the result of card state', async () => {

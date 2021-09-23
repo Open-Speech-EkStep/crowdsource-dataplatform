@@ -3,7 +3,15 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import ActionCard from '../ActionCard';
 
 describe('ActionCard', () => {
-  const setup = () => render(<ActionCard icon="some-icon.svg" type="translate" text="some-text" />);
+  const setup = () =>
+    render(
+      <ActionCard
+        icon="some-icon.svg"
+        type="translate"
+        text="some-text"
+        warningMsg="Only contributions invited for the selected language"
+      />
+    );
 
   verifyAxeTest(setup());
 

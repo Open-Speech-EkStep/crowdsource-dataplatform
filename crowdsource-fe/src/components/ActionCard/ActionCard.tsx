@@ -7,6 +7,7 @@ interface ActionCardProps {
   type: string;
   icon: string;
   text: string;
+  warningMsg: string;
   shadow?: 'Blue' | 'Green';
   disabled?: boolean;
 }
@@ -24,7 +25,7 @@ const ActionCard = (props: ActionCardProps) => {
               data-testid="ActionCardWarningMessage"
               className={`${props.disabled ? `${styles.cardWarning} position-absolute` : 'd-none'}`}
             >
-              <p className="pl-2 m-0">{t('Only validations invited for the selected language')}</p>
+              <p className="pl-2 m-0">{t(props.warningMsg)}</p>
             </div>
             <div className={`${styles.card} d-flex p-5 p-md-7 p-xl-9 align-items-center`}>
               <div className="flex-grow-1">

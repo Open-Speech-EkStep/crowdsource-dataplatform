@@ -13,9 +13,7 @@ describe('Suno Home page', () => {
   it('should render the suno india homepage', () => {
     setup();
 
-    expect(screen.getByTestId('PageHeader')).toBeInTheDocument();
-    expect(screen.getByTestId('ContributionActions')).toBeInTheDocument();
-    expect(screen.getByTestId('TargetProgress')).toBeInTheDocument();
-    expect(screen.getByText('ContributionStats')).toBeInTheDocument();
+    expect(screen.getByTestId('SunoIndiaActions')).toBeInTheDocument();
+    expect(screen.getByTestId('SunoIndiaDetails')).toBeInTheDocument();
   });
 });

@@ -6,7 +6,7 @@ import Stats from 'components/Stats';
 import apiPaths from 'constants/apiPaths';
 import { INITIATIVES_MAPPING, INITIATIVE_CUMULATIVE_VALUE } from 'constants/initiativeConstants';
 import useFetch from 'hooks/useFetch';
-import type { CumulativeCountModel } from 'interface';
+import type { CumulativeCount } from 'types/Chart';
 import { convertIntoHrsFormat, formatTime, isSunoOrBoloInitiative } from 'utils/utils';
 
 const SUNO = 'suno';
@@ -33,7 +33,7 @@ const ContributionStats = (props: ContributionStatsProps) => {
     apiPaths.participationStats
   );
 
-  const { data: cumulativeCountData } = useFetch<Array<CumulativeCountModel>>(apiPaths.cumulativeCount);
+  const { data: cumulativeCountData } = useFetch<Array<CumulativeCount>>(apiPaths.cumulativeCount);
 
   const statsContents: Array<{
     id: string;
