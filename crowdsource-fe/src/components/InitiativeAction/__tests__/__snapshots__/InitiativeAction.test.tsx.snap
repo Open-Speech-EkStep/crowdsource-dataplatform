@@ -3,7 +3,7 @@
 exports[`InitiativeAction should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="action d-flex flex-column align-items-center text-center"
+    class="action d-flex flex-column align-items-center text-center display-3"
   >
     <div
       class="actionIcon actionIconBlue d-flex rounded-circle"
@@ -33,7 +33,7 @@ exports[`InitiativeAction should render the component and matches it against sto
       </div>
     </div>
     <div
-      class="actionText"
+      class="mt-4"
     >
       sunoContributionSubtext
     </div>

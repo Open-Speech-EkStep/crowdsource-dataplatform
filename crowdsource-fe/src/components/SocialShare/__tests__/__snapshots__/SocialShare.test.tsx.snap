@@ -7,7 +7,7 @@ exports[`SocialShare should render the component and matches it against stored s
     data-testid="SocialShare"
   >
     <span
-      class="text"
+      class="fw-bold"
     >
       footerSocialShareText
     </span>

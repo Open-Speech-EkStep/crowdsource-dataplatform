@@ -4,8 +4,6 @@ import Stats from 'components/Stats';
 import apiPaths from 'constants/apiPaths';
 import useFetch from 'hooks/useFetch';
 
-import styles from './ContributionStats.module.scss';
-
 const SUNO = 'suno';
 const BOLO = 'bolo';
 const LIKHO = 'likho';
@@ -43,7 +41,7 @@ const ContributionStats = () => {
   return (
     <div data-testid="ContributionStats">
       <header className="d-flex flex-column align-items-center flex-md-row justify-content-md-between">
-        <h1 className={`${styles.header} mb-0`}>{t('totalParticipation')}</h1>
+        <h2>{t('totalParticipation')}</h2>
       </header>
       <div className="mt-4 mt-md-5">
         <Stats contents={statsContents} />

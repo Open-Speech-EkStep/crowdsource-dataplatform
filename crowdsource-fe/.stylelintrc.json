@@ -1,6 +1,7 @@
 {
   "extends": ["stylelint-config-sass-guidelines", "stylelint-config-prettier"],
   "rules": {
-    "selector-class-pattern": null
+    "selector-class-pattern": null,
+    "selector-max-id": 1
   }
 }

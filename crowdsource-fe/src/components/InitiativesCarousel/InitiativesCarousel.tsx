@@ -74,16 +74,16 @@ const InitiativesCarousel = () => {
 
   return (
     <div data-testid="InitiativesCarousel" className={`${styles.root} mx-auto`}>
-      <div className={styles.bottomShadow}>
+      <div className={`${styles.bottomShadow} overflow-hidden`}>
         <TriColorBackground>
           <div className={`${styles.initiativesCarousel} slickCarousel pt-6 pb-5 pb-md-3 py-md-8`}>
             <div className={`${styles.labelCarousel} mb-4`}>
               <Slider {...labelCarouselSettings}>
                 {initiatives.map(initiative => (
                   <div key={initiative}>
-                    <span className={`${styles.slideLabel} d-inline-block position-relative pb-2`}>{`${t(
-                      `${initiative}`
-                    )} ${t('india')}`}</span>
+                    <span
+                      className={`${styles.slideLabel} d-inline-block position-relative pb-2 display-2`}
+                    >{`${t(`${initiative}`)} ${t('india')}`}</span>
                   </div>
                 ))}
               </Slider>

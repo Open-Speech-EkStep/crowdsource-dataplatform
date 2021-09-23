@@ -14,28 +14,6 @@
   }
 }
 
-.header {
-  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
-  line-height: 2rem;
-
-  @include media-breakpoint-up(md) {
-    font-size: 2rem;
-    line-height: 2.5rem;
-  }
-}
-
-.text {
-  font-family: Roboto, sans-serif;
-  font-size: 1rem;
-  line-height: 1.5rem;
-
-  @include media-breakpoint-up(md) {
-    font-size: 1.25rem;
-    line-height: 1.5rem;
-  }
-}
-
 .initiatives {
   font-family: Roboto, sans-serif;
   font-weight: 700;

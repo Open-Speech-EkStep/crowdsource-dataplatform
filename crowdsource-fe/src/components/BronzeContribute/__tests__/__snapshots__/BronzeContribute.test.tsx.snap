@@ -41,13 +41,13 @@ exports[`BronzeContribute should render the component and matches it against sto
         <div
           class="col-md-10 col-12"
         >
-          <h1
-            class="header mt-1 mt-md-0"
+          <h2
+            class="mt-1 mt-md-0"
           >
             bronzeBhashaSamarthakBadge
-          </h1>
+          </h2>
           <p
-            class="text mt-5 mt-md-3 mb-0"
+            class="text display-3 mt-5 mt-md-3 mb-0"
           >
             bronzeContributeFive
           </p>

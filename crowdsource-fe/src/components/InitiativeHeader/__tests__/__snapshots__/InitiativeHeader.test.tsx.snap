@@ -41,7 +41,7 @@ exports[`InitiativeHeader should render the component and matches it against sto
         class="d-flex justify-content-center justify-content-md-start text-center align-items-md-center text-md-start col-md-8 col-12"
       >
         <div
-          class="initiativeHeaderText"
+          class="initiativeHeaderText display-3"
         >
           sunoSloganText
         </div>

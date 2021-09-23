@@ -3,63 +3,63 @@
 exports[`Header should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <header
-    class="root"
+    class="root d-flex bg-light text-primary p-0 position-sticky w-100"
     data-testid="Header"
     role="banner"
   >
     <div
-      class="navigation"
+      class="d-flex order-1 order-lg-2"
     >
       <div>
         <nav
-          class="bar navbar navbar-expand-lg navbar-light"
+          class="d-flex align-items-stretch h-100 p-0 navbar navbar-expand-lg navbar-light"
           data-testid="Navigation"
         >
           <button
             aria-label="Toggle navigation"
-            class="toggle navbar-toggler collapsed"
+            class="toggle align-items-center border-0 flex-column justify-content-center p-0 navbar-toggler collapsed"
             type="button"
           >
             <span
-              class="toggleBar"
+              class="toggleBar bg-primary position-relative mt-1"
             />
             <span
-              class="toggleBar"
+              class="toggleBar bg-primary position-relative mt-1"
             />
             <span
-              class="toggleBar"
+              class="toggleBar bg-primary position-relative mt-1"
             />
           </button>
           <div
-            class="collapse navbar-collapse collapse"
+            class="collapse align-items-stretch bg-light py-2 p-lg-0 navbar-collapse collapse"
           >
             <div
               class="root navbar-nav"
               data-testid="NavigationList"
             >
               <a
-                class="link mx-xl-3 nav-link"
+                class="link d-flex align-items-center text-primary display-5 mx-xl-3 nav-link"
                 data-rr-ui-event-key="/sunoIndia/home.html"
                 href="/sunoIndia/home.html"
               >
                 suno india
               </a>
               <a
-                class="link mx-xl-3 nav-link"
+                class="link d-flex align-items-center text-primary display-5 mx-xl-3 nav-link"
                 data-rr-ui-event-key="/boloIndia/home.html"
                 href="/boloIndia/home.html"
               >
                 bolo india
               </a>
               <a
-                class="link mx-xl-3 nav-link"
+                class="link d-flex align-items-center text-primary display-5 mx-xl-3 nav-link"
                 data-rr-ui-event-key="/likhoIndia/home.html"
                 href="/likhoIndia/home.html"
               >
                 likho india
               </a>
               <a
-                class="link mx-xl-3 nav-link"
+                class="link d-flex align-items-center text-primary display-5 mx-xl-3 nav-link"
                 data-rr-ui-event-key="/dekhoIndia/home.html"
                 href="/dekhoIndia/home.html"
               >
@@ -71,14 +71,14 @@ exports[`Header should render the component and matches it against stored snapsh
       </div>
     </div>
     <div
-      class="logo"
+      class="d-flex order-2 order-lg-1"
     >
       <div
-        class="root"
+        class="d-flex"
         data-testid="Logo"
       >
         <a
-          class="img imgMobile"
+          class="d-flex align-items-center d-md-none"
           href="/"
         >
           <div
@@ -105,7 +105,7 @@ exports[`Header should render the component and matches it against stored snapsh
           </div>
         </a>
         <a
-          class="img imgDesktop"
+          class="d-none align-items-center d-md-flex"
           href="/"
         >
           <div
@@ -132,10 +132,10 @@ exports[`Header should render the component and matches it against stored snapsh
           </div>
         </a>
         <span
-          class="sep"
+          class="sep d-flex align-self-center border border-1 border-primary mx-3"
         />
         <a
-          class="label px-xl-2"
+          class="label d-flex align-items-center text-primary px-xl-2 display-1 position-relative"
           href="/home"
         >
           bhasha
@@ -145,21 +145,21 @@ exports[`Header should render the component and matches it against stored snapsh
             daan
           </span>
           <span
-            class="betaText"
+            class="betaText display-10 position-absolute"
           >
             beta
           </span>
         </a>
       </div>
       <span
-        class="sep"
+        class="sep d-none d-lg-flex border border-1 border-primary align-self-center mx-3"
       />
     </div>
     <div
       class="d-flex order-3 ms-auto"
     >
       <div
-        class="root dropdown"
+        class="root position-relative dropdown"
         data-testid="LanguageSwitcher"
         id="languageSwitcher"
       >

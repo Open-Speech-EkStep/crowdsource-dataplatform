@@ -1,12 +1,5 @@
 .action {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
   max-width: 14rem;
-
-  @include media-breakpoint-up(md) {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
 }
 
 .actionIcon {
@@ -27,8 +20,4 @@
   &Blue {
     box-shadow: 0 0 12px 8px rgba(102, 176, 255, 0.12);
   }
-}
-
-.actionText {
-  margin-top: 1rem;
 }

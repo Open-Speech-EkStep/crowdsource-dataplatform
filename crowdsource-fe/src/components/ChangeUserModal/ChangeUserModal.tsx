@@ -27,7 +27,7 @@ const ChangeUserModal = ({ onHide, ...rest }: ChangeUserModalProps) => {
         </Button>
       }
     >
-      <div className={styles.form}>
+      <div className="px-5 px-md-9">
         <ChangeUserForm onSubmit={onHide} />
       </div>
     </Modal>

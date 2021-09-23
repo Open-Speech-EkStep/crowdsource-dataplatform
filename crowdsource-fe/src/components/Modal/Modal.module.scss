@@ -1,5 +1,5 @@
 .root {
-  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Roboto, sans-serif;
 
   @include media-breakpoint-up(sm) {
     max-width: 34rem;
@@ -37,27 +37,6 @@
 
 .header {
   border-bottom: 1px solid #dee2e6;
-}
-
-.heading {
-  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 1.25rem;
-  line-height: 1.5rem;
-
-  @include media-breakpoint-up(md) {
-    font-size: 1.75rem;
-    line-height: 2.25rem;
-  }
-}
-
-.subHeading {
-  font-size: 0.875rem;
-  line-height: 1.125rem;
-
-  @include media-breakpoint-up(md) {
-    font-size: 1rem;
-    line-height: 1.25rem;
-  }
 }
 
 .content {

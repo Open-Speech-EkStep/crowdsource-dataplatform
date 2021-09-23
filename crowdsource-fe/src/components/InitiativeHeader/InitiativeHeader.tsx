@@ -33,7 +33,7 @@ const InitiativeHeader = ({ initiative }: PageHeaderProps) => {
           md="8"
           className="d-flex justify-content-center justify-content-md-start text-center align-items-md-center text-md-start"
         >
-          <div className={styles.initiativeHeaderText}>{t(`${initiative}SloganText`)}</div>
+          <div className={`${styles.initiativeHeaderText} display-3`}>{t(`${initiative}SloganText`)}</div>
         </Col>
       </Row>
     </div>

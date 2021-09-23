@@ -8,7 +8,7 @@ interface HomePageBackgroundPorps {
 
 const HomePageBackground = (props: HomePageBackgroundPorps) => {
   return (
-    <div data-testid="HomePageBackground" className={`${styles.root} px-2 px-lg-0`}>
+    <div data-testid="HomePageBackground" className={`${styles.root} position-relative px-2 px-lg-0`}>
       {props.children}
     </div>
   );

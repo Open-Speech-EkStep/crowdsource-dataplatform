@@ -27,8 +27,8 @@ const BronzeContribute = () => {
             />
           </Col>
           <Col xs="12" md="10">
-            <h1 className={`${styles.header} mt-1 mt-md-0`}>{t('bronzeBhashaSamarthakBadge')}</h1>
-            <p className={`${styles.text} mt-5 mt-md-3 mb-0`}>{t('bronzeContributeFive')}</p>
+            <h2 className="mt-1 mt-md-0">{t('bronzeBhashaSamarthakBadge')}</h2>
+            <p className={`${styles.text} display-3 mt-5 mt-md-3 mb-0`}>{t('bronzeContributeFive')}</p>
             <div
               className={`${styles.initiatives} d-flex flex-wrap justify-content-center justify-content-md-start mt-6`}
             >

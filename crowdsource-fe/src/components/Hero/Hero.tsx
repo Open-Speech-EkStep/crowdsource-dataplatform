@@ -1,17 +1,15 @@
 import { useTranslation } from 'next-i18next';
 
-import styles from './Hero.module.scss';
-
 const Hero = () => {
   const { t } = useTranslation();
 
   return (
-    <section data-testid="Hero" className={styles.root}>
-      <h1 className={styles.heroPrimaryHeading}>
-        {t('bhasha')} <span className={styles.yellowText}>{t('daan')}</span>
+    <section data-testid="Hero" className="d-flex align-items-center flex-column text-center">
+      <h1>
+        {t('bhasha')} <span className="text-warning">{t('daan')}</span>
       </h1>
-      <p className={styles.heroSecondaryHeading}>{t('heroSecondaryHeading')}</p>
-      <p className={styles.heroText}>{t('heroText')}</p>
+      <p className="display-1 mt-7">{t('heroSecondaryHeading')}</p>
+      <p className="display-3 mt-5">{t('heroText')}</p>
     </section>
   );
 };

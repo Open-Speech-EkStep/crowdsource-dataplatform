@@ -16,7 +16,12 @@ const LanguageSwitcher = () => {
   const [, setContributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
   return (
-    <Dropdown data-testid="LanguageSwitcher" id="languageSwitcher" className={styles.root} align="end">
+    <Dropdown
+      data-testid="LanguageSwitcher"
+      id="languageSwitcher"
+      className={`${styles.root} position-relative`}
+      align="end"
+    >
       <Dropdown.Toggle
         id="languageSwitcherToggle"
         variant="light"
@@ -31,7 +36,7 @@ const LanguageSwitcher = () => {
           <Link key={locale} href={currentRoutePath} locale={locale} passHref>
             <Dropdown.Item
               eventKey={locale}
-              className={styles.item}
+              className={`${styles.item} text-primary display-5 px-4 py-2`}
               onClick={() => setContributionLanguage(RAW_LANGUAGES[locale])}
             >
               {DISPLAY_LANGUAGES[locale]}

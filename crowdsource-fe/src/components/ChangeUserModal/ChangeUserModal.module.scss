@@ -1,11 +1,3 @@
-.form {
-  padding: 0 1.25rem;
-
-  @include media-breakpoint-up(md) {
-    padding: 0 2.5rem;
-  }
-}
-
 .submitButton {
   background-color: var(--primary-color);
   border: 0;

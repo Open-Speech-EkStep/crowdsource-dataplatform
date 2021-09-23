@@ -12,15 +12,13 @@ exports[`Modal should render the component and matches it against stored snapsho
       class="modal-header"
     >
       <header
-        class="header text-center flex-grow-1"
+        class="header text-center flex-grow-1 pb-2 pb-md-3"
       >
-        <h1
-          class="heading"
-        >
+        <h3>
           title
-        </h1>
+        </h3>
         <p
-          class="subHeading mt-2 mt-md-3"
+          class="display-5 mt-2 mt-md-3"
         >
           subTitle
         </p>
