@@ -10,7 +10,7 @@ exports[`ContributionStats should render the component and matches it against st
       class="mt-4 mt-md-5"
     >
       <div
-        class="root bg-info px-7 px-md-0 py-md-7"
+        class="stats px-7 px-md-0 py-md-7"
       >
         <div
           class="row"
