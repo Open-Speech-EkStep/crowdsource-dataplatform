@@ -1,9 +1,17 @@
+import { when } from 'jest-when';
+
 import { render, screen } from 'utils/testUtils';
 
 import TargetProgress from '../TargetProgress';
 
 describe('TargetProgress', () => {
   const setup = async (initiativeValue: any, sourceValue?: string, contributionLanguage?: string) => {
+    const language = 'Hindi';
+
+    when(localStorage.getItem)
+      .calledWith('contributionLanguage')
+      .mockImplementation(() => language);
+
     fetchMock.doMockOnceIf('/aggregated-json/cumulativeCount.json').mockResponseOnce(
       JSON.stringify([
         {

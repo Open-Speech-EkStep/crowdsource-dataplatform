@@ -1,9 +1,13 @@
+import { useEffect } from 'react';
+
 import { useTranslation } from 'next-i18next';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
 import apiPaths from 'constants/apiPaths';
 import { INITIATIVES_MAPPING, INITIATIVE_ACTIONS } from 'constants/initiativeConstants';
+import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
+import useLocalStorage from 'hooks/useLocalStorage';
 import type { CumulativeCount } from 'types/Chart';
 import { capitalizeFirstLetter, convertIntoHrsFormat, formatTime, roundOffValue } from 'utils/utils';
 
@@ -17,12 +21,23 @@ interface TargetProgressProps {
 }
 
 const TargetProgress = (props: TargetProgressProps) => {
-  const { data: cumulativeCountData } = useFetch<Array<CumulativeCount>>(apiPaths.cumulativeCount);
+  const { data: cumulativeCountData, mutate: cumulativeMutate } = useFetch<Array<CumulativeCount>>(
+    apiPaths.cumulativeCount,
+    { revalidateOnMount: false }
+  );
   const { t } = useTranslation();
+  const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
-  const { data: initiativeGoalData } = useFetch<
+  const { data: initiativeGoalData, mutate: initiativeGoalMutate } = useFetch<
     Array<{ contribution_goal: number; type: string; validation_goal: number }>
-  >(apiPaths.initiativeGoals);
+  >(apiPaths.initiativeGoals, { revalidateOnMount: false });
+
+  useEffect(() => {
+    if (contributionLanguage) {
+      cumulativeMutate();
+      initiativeGoalMutate();
+    }
+  }, [initiativeGoalMutate, cumulativeMutate, contributionLanguage]);
 
   let totalProgress;
   let formattedAverage;

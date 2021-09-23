@@ -28,7 +28,7 @@ const SunoIndiaDetails = () => {
           </ContributionStats>
         </section>
         <section className="mt-9 mt-md-12">
-          <ContributionTracker />
+          <ContributionTracker initiativeMedia={INITIATIVES_MEDIA_MAPPING.suno} />
         </section>
       </Container>
     </section>

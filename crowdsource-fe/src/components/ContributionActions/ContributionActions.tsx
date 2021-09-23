@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
@@ -10,31 +12,36 @@ import useLocalStorage from 'hooks/useLocalStorage';
 
 import styles from './ContributionActions.module.scss';
 
+const initiative = INITIATIVES_MAPPING.suno;
+
+interface LanguageWithData {
+  count: string;
+  type: string;
+  language: string;
+}
+
 interface ContributionActionProps {
   initiativeMedia: string;
   contributionLanguage: string;
 }
 
 const ContributionActions = (props: ContributionActionProps) => {
-  const initiative = INITIATIVES_MAPPING.suno;
-
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
-  const { data: languageWithData } = useFetch<Array<{ count: string; type: string }>>(
-    apiPaths.languagesWithData
-  );
+  const { data: languageWithData, mutate } = useFetch<LanguageWithData[]>(apiPaths.languagesWithData, {
+    revalidateOnMount: false,
+  });
 
-  // useEffect(() => {
-  //   if (contributionLanguage) mutate();
-  // }, [contributionLanguage, mutate]);
+  useEffect(() => {
+    if (contributionLanguage) {
+      mutate();
+    }
+  }, [contributionLanguage, mutate]);
 
-  const isLanguageAvailable = (languageData: any) => {
-    return languageData &&
-      languageData.find(
-        (data: any) => data.type === props.initiativeMedia && data.language === contributionLanguage
-      )
-      ? true
-      : false;
+  const isLanguageAvailable = (languageData?: LanguageWithData[]) => {
+    return !!languageData?.find(
+      data => data.type === props.initiativeMedia && data.language === contributionLanguage
+    );
   };
 
   const { data: cardState } = useFetch<Array<{ count: string; type: string }>>(

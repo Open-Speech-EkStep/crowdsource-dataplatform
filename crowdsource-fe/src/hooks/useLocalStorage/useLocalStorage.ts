@@ -49,7 +49,6 @@ const useLocalStorage = <T = {}>(key: string, initialValue: T | null = null) => 
 
   useEffect(() => {
     const storageListener = ({ detail }: CustomEventInit) => {
-      console.log('local', detail.key, key);
       if (detail.key === key) {
         setStoredItem(detail.item);
       }

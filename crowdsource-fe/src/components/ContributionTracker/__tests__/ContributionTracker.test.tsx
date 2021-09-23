@@ -1,15 +1,33 @@
+import { when } from 'jest-when';
+
 import { render, screen, userEvent } from 'utils/testUtils';
 
 import ContributionTracker from '../ContributionTracker';
 
 describe('ContributionActions', () => {
   const setup = async () => {
+    const language = 'Hindi';
+
+    when(localStorage.getItem)
+      .calledWith('contributionLanguage')
+      .mockImplementation(() => language);
+
     fetchMock.doMockOnceIf('/aggregated-json/topLanguagesByHoursContributed.json').mockResponseOnce(
       JSON.stringify([
         {
           language: 'Hindi',
           total_contributions: 0.049,
-          type: 'text',
+          type: 'ocr',
+        },
+        {
+          language: 'English',
+          total_contributions: 0.049,
+          type: 'asr',
+        },
+        {
+          language: 'Punjabi',
+          total_contributions: 0.069,
+          type: 'asr',
         },
         {
           language: 'Hindi',
@@ -44,12 +62,53 @@ describe('ContributionActions', () => {
         {
           language: 'Hindi',
           total_speakers: 13,
-          type: 'ocr',
+          type: 'asr',
+        },
+        {
+          language: 'Tamil',
+          total_speakers: 14,
+          type: 'asr',
+        },
+        {
+          language: 'English',
+          total_speakers: 13,
+          type: 'asr',
         },
       ])
     );
 
-    const renderResult = render(<ContributionTracker />);
+    const renderResult = render(<ContributionTracker initiativeMedia="asr" />);
+    return renderResult;
+  };
+
+  const setupWithNoData = async () => {
+    const language = 'Hindi';
+
+    when(localStorage.getItem)
+      .calledWith('contributionLanguage')
+      .mockImplementation(() => language);
+
+    fetchMock.doMockOnceIf('/aggregated-json/topLanguagesByHoursContributed.json').mockResponseOnce(
+      JSON.stringify([
+        {
+          language: 'Hindi',
+          total_contributions: 0.049,
+          type: 'text',
+        },
+      ])
+    );
+
+    fetchMock.doMockOnceIf('/aggregated-json/topLanguagesBySpeakerContributions.json').mockResponseOnce(
+      JSON.stringify([
+        {
+          language: 'English',
+          total_speakers: 13,
+          type: 'text',
+        },
+      ])
+    );
+
+    const renderResult = render(<ContributionTracker initiativeMedia="asr" />);
     return renderResult;
   };
 
@@ -69,6 +128,12 @@ describe('ContributionActions', () => {
     await setup();
 
     userEvent.click(screen.getAllByRole('radio')[1]);
+    expect(screen.getByTestId('ContributionTracker').children.length).toBe(2);
+  });
+
+  it('should render the chart component after api gives no data', async () => {
+    await setupWithNoData();
+
     expect(screen.getByTestId('ContributionTracker').children.length).toBe(2);
   });
 });

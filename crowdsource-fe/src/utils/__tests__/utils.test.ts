@@ -1,4 +1,10 @@
-import { convertIntoHrsFormat, roundOffValue, convertTimeFormat, formatTime } from '../utils';
+import {
+  convertIntoHrsFormat,
+  roundOffValue,
+  convertTimeFormat,
+  formatTime,
+  isSunoOrBoloInitiative,
+} from '../utils';
 import '__fixtures__/mockComponentsWithSideEffects';
 
 describe('Utils', () => {
@@ -44,6 +50,13 @@ describe('Utils', () => {
     expect(formatedTime).toEqual(expectedOutput);
   });
 
+  it('should test the format time method with hrs & minute "0" but seconds greater than "0"', () => {
+    const formatedTime = formatTime(0, 0, 0.45);
+
+    const expectedOutput = '0.45 second(s)';
+    expect(formatedTime).toEqual(expectedOutput);
+  });
+
   it('should test the format time method with "no minutes and seconds" paramter', () => {
     const formatedTime = formatTime(0);
 
@@ -56,5 +69,12 @@ describe('Utils', () => {
 
     const expectedOutput = '45 minute(s)';
     expect(formatedTime).toEqual(expectedOutput);
+  });
+
+  it('should test the isSunoOrBoloInitiative method', () => {
+    const roundValue = isSunoOrBoloInitiative('suno');
+
+    const expectedOutput = true;
+    expect(roundValue).toEqual(expectedOutput);
   });
 });

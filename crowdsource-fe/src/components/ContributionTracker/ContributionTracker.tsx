@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
 
 import { useTranslation } from 'next-i18next';
@@ -6,44 +6,39 @@ import Form from 'react-bootstrap/Form';
 
 import { BarChart } from 'components/Charts';
 import apiPaths from 'constants/apiPaths';
+import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
-// import useLocalStorage from 'hooks/useLocalStorage';
+import useLocalStorage from 'hooks/useLocalStorage';
 import type { TopLanguagesByHours, TopLanguagesBySpeaker } from 'types/Chart';
 
 import styles from './ContributionTracker.module.scss';
 
-// import localStorageConstants from 'constants/localStorageConstants';
-
 type ChartFilterType = 'byDuration' | 'bySpeaker';
 
-// const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
-
-// const mapChartData = (data: any, key: string) => {
-//   if (contributionLanguage && data && data.length) {
-//     const contributedLanguageHours = data.find(
-//       (item: any) => item.language === contributionLanguage && item.type === 'asr'
-//     );
-//     let topLanguages = [];
-//     const topLanguageArray = [];
-//     console.log(contributedLanguageHours);
-//     if (contributedLanguageHours && contributedLanguageHours.language != data[0].language) {
-//       topLanguageArray.push(contributedLanguageHours);
-//       let remainingLanguage = data.filter((item: any) => item?.language !== contributionLanguage);
-//       remainingLanguage = remainingLanguage.sort((a: any, b: any) =>
-//         Number(a[key]) > Number(b[key]) ? -1 : 1
-//       );
-//       topLanguages = remainingLanguage.slice(0, 3);
-//     }
-//     console.log(topLanguageArray.concat(topLanguages).reverse());
-//     return topLanguageArray.concat(topLanguages).reverse();
-//   }
-// };
+const mapChartData = (data: any, key: string, langauge: string, initiativeMedia: string) => {
+  if (langauge && data && data.length) {
+    const contributedLanguageHours = data.find(
+      (item: any) => item.language === langauge && item.type === initiativeMedia
+    );
+    const topLanguageArray = [];
+    if (contributedLanguageHours) {
+      topLanguageArray.push(contributedLanguageHours);
+    } else {
+      topLanguageArray.push({ language: langauge, total_contributions: '0.000' });
+    }
+    let remainingLanguage = data.filter((item: any) => item?.language !== langauge);
+    remainingLanguage = remainingLanguage.sort((a: any, b: any) =>
+      Number(a[key]) > Number(b[key]) ? -1 : 1
+    );
+    return topLanguageArray.concat(remainingLanguage.slice(0, 3));
+  }
+};
 
 const getTopLanguagesByHoursChartData = (topLanguagesByHours?: TopLanguagesByHours[]) => {
   return (
     topLanguagesByHours?.map(topLanguageByHours => ({
-      category: topLanguageByHours.language,
-      value: topLanguageByHours.total_contributions,
+      category: topLanguageByHours?.language,
+      value: topLanguageByHours?.total_contributions,
     })) ?? []
   );
 };
@@ -51,29 +46,64 @@ const getTopLanguagesByHoursChartData = (topLanguagesByHours?: TopLanguagesByHou
 const getTopLanguagesBySpeakerChartData = (topLanguagesBySpeaker?: TopLanguagesBySpeaker[]) => {
   return (
     topLanguagesBySpeaker?.map(topLanguagesBySpeaker => ({
-      category: topLanguagesBySpeaker.language,
-      value: topLanguagesBySpeaker.total_speakers,
+      category: topLanguagesBySpeaker?.language,
+      value: topLanguagesBySpeaker?.total_speakers,
     })) ?? []
   );
 };
 
-const ContributionTracker = () => {
+interface ContributionTrackerProps {
+  initiativeMedia: string;
+}
+
+const ContributionTracker = (props: ContributionTrackerProps) => {
   const { t } = useTranslation();
   const [chartFilterType, setChartFilterType] = useState<ChartFilterType>('byDuration');
-
-  const { data: topLanguagesByHoursData } = useFetch<Array<TopLanguagesByHours>>(
-    apiPaths.topLanguagesByHoursContributed
+  const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
+  const { data: topLanguagesByHoursData, mutate: hrsMutate } = useFetch<Array<TopLanguagesByHours>>(
+    apiPaths.topLanguagesByHoursContributed,
+    { revalidateOnMount: false }
   );
 
-  const { data: topLanguagesBySpeakerData } = useFetch<Array<TopLanguagesBySpeaker>>(
-    apiPaths.topLanguagesBySpeakerContributions
+  const { data: topLanguagesBySpeakerData, mutate: speakerMutate } = useFetch<Array<TopLanguagesBySpeaker>>(
+    apiPaths.topLanguagesBySpeakerContributions,
+    { revalidateOnMount: false }
+  );
+
+  useEffect(() => {
+    if (contributionLanguage) {
+      hrsMutate();
+      speakerMutate();
+    }
+  }, [contributionLanguage, speakerMutate, hrsMutate]);
+
+  let hoursData = topLanguagesByHoursData;
+  let speakersData = topLanguagesBySpeakerData;
+
+  hoursData = topLanguagesByHoursData?.filter(
+    topLanguageByHours => topLanguageByHours.type === props.initiativeMedia
+  );
+  const topLanguageHrsData = mapChartData(
+    hoursData,
+    'total_contributions',
+    contributionLanguage ?? '',
+    props.initiativeMedia
+  );
+
+  speakersData = topLanguagesBySpeakerData?.filter(
+    topLanguagesBySpeaker => topLanguagesBySpeaker.type === props.initiativeMedia
+  );
+  const topSpeakersData = mapChartData(
+    speakersData,
+    'total_speakers',
+    contributionLanguage ?? '',
+    props.initiativeMedia
   );
 
   const chartLegendDeails = useMemo(
     () => ({
       colors: ['#F7CC56', '#F7CC56', '#F7CC56', '#EF8537'],
       xAxisLabel: t('Month'),
-      yAxisLabel: t('Contribution (in hours)'),
     }),
     [t]
   );
@@ -82,11 +112,13 @@ const ContributionTracker = () => {
     () => ({
       data:
         chartFilterType === 'byDuration'
-          ? getTopLanguagesByHoursChartData(topLanguagesByHoursData)
-          : getTopLanguagesBySpeakerChartData(topLanguagesBySpeakerData),
+          ? getTopLanguagesByHoursChartData(topLanguageHrsData)
+          : getTopLanguagesBySpeakerChartData(topSpeakersData),
+      yAxisLabel:
+        chartFilterType === 'byDuration' ? t('Contribution (in hours)') : t('Contribution (in sentences)'),
       ...chartLegendDeails,
     }),
-    [chartFilterType, chartLegendDeails, topLanguagesByHoursData, topLanguagesBySpeakerData]
+    [chartFilterType, chartLegendDeails, t, topLanguageHrsData, topSpeakersData]
   );
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

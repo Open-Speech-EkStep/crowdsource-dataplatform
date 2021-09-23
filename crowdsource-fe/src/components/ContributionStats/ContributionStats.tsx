@@ -28,7 +28,6 @@ interface ContributionStatsProps {
 
 const ContributionStats = (props: ContributionStatsProps) => {
   const { t } = useTranslation();
-
   const { data: participationStats, error } = useFetch<Array<{ count: string; type: string }>>(
     apiPaths.participationStats
   );
