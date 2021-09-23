@@ -484,7 +484,7 @@ workflows:
 
       - cdn_invalidation:
           name: cdn_invalidation_test
-          env-name: test
+          env-name: test-vakyansh
           resource-group: ${AZURE_RESOURCE_GROUP}
           profile-name: ${AZURE_PROFILE_NAME}
           requires:
@@ -554,7 +554,7 @@ workflows:
 
       - cdn_invalidation:
           name: cdn_invalidation_uat
-          env-name: uat
+          env-name: uat-vakyansh
           resource-group: ${AZURE_RESOURCE_GROUP}
           profile-name: ${AZURE_PROFILE_NAME}
           requires:
@@ -606,7 +606,7 @@ workflows:
 
       - cdn_invalidation:
           name: cdn_invalidation_prod
-          env-name: prod
+          env-name: prod-vakyansh
           resource-group: ${AZURE_RESOURCE_GROUP}
           profile-name: ${AZURE_PROFILE_NAME}
           requires:
