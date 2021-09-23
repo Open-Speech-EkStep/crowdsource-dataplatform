@@ -169,6 +169,14 @@ jobs:
         description: |
           Name of the env
         type: string
+      resource-group:
+        description: |
+          Azure resource group
+        type: string
+      profile-name:
+        description: |
+          Azure profile name
+        type: string
 
     steps:
       - azure-cli/install
@@ -177,7 +185,7 @@ jobs:
       - run:
           name: cdn_invalidation
           command: |
-            az cdn endpoint purge -g ${AZURE_RESOURCE_GROUP} -n << parameters.env-name >>-vakyansh --profile-name ${AZURE_PROFILE_NAME} --content-paths '/'
+            az cdn endpoint purge -g << parameters.resource-group >> -n << parameters.env-name >> --profile-name << parameters.profile-name >> --content-paths '/'
 
   aks_deployment:
     executor: azure-aks/default
@@ -354,7 +362,9 @@ workflows:
 
       - cdn_invalidation:
           name: cdn_invalidation_dev
-          env-name: dev
+          env-name: dev-vakyansh
+          resource-group: ${AZURE_RESOURCE_GROUP}
+          profile-name: ${AZURE_PROFILE_NAME}
           requires:
             - build_dev_ui
 
@@ -378,6 +388,14 @@ workflows:
           env-name: dev
           requires:
             - push_dev_image_next_ui
+      
+      - cdn_invalidation:
+          name: cdn_invalidation_ui_dev
+          env-name: dev-ui
+          resource-group: ${AZURE_RESOURCE_GROUP}
+          profile-name: ${AZURE_PROFILE_NAME}
+          requires:
+            - dev_ui_deployment_aks
 
       - azure-acr/build-and-push-image:
           pre-steps:
@@ -466,7 +484,9 @@ workflows:
 
       - cdn_invalidation:
           name: cdn_invalidation_test
-          env-name: dev
+          env-name: test
+          resource-group: ${AZURE_RESOURCE_GROUP}
+          profile-name: ${AZURE_PROFILE_NAME}
           requires:
             - build_test_ui
 
@@ -534,7 +554,9 @@ workflows:
 
       - cdn_invalidation:
           name: cdn_invalidation_uat
-          env-name: dev
+          env-name: uat
+          resource-group: ${AZURE_RESOURCE_GROUP}
+          profile-name: ${AZURE_PROFILE_NAME}
           requires:
             - build_uat_ui
 
@@ -584,7 +606,9 @@ workflows:
 
       - cdn_invalidation:
           name: cdn_invalidation_prod
-          env-name: dev
+          env-name: prod
+          resource-group: ${AZURE_RESOURCE_GROUP}
+          profile-name: ${AZURE_PROFILE_NAME}
           requires:
             - build_prod_ui
 
