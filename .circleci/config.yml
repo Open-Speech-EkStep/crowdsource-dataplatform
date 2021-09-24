@@ -109,6 +109,8 @@ jobs:
     parameters:
       env_name:
         type: string
+      azure_acc_url:
+        type: string
     machine:
       image: ubuntu-1604:202104-01
     steps:
@@ -135,9 +137,9 @@ jobs:
             if [ << parameters.env_name >> == 'prod' ]
             then
               echo "Deploying to prod"
-              ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/bhashadaan/" --cache-control "max-age=1200" --recursive
+              ./azcopy copy "crowdsource-ui/target/*" "<< parameters.azure_acc_url >>/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/bhashadaan/" --cache-control "max-age=1200" --recursive
             else
-              ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --cache-control "max-age=1200" --recursive
+              ./azcopy copy "crowdsource-ui/target/*" "<< parameters.azure_acc_url >>/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --cache-control "max-age=1200" --recursive
             fi
 
   db_migrate_azure:
@@ -165,9 +167,17 @@ jobs:
   cdn_invalidation:
     executor: azure-cli/default
     parameters:
-      env-name:
+      azure_resource_group:
         description: |
-          Name of the env
+          Name of the resource group
+        type: string
+      azure_profile_name:
+        description: |
+          Name of the cdn profile
+        type: string
+      azure_endpoint_name:
+        description: |
+          Name of the cdn profile
         type: string
 
     steps:
@@ -177,7 +187,7 @@ jobs:
       - run:
           name: cdn_invalidation
           command: |
-            az cdn endpoint purge -g ${AZURE_RESOURCE_GROUP} -n << parameters.env-name >>-vakyansh --profile-name ${AZURE_PROFILE_NAME} --content-paths '/'
+            az cdn endpoint purge -g << parameters.azure_resource_group >> -n << parameters.azure_endpoint_name >> --profile-name << parameters.azure_profile_name >> --content-paths '/'
 
   aks_deployment:
     executor: azure-aks/default
@@ -190,6 +200,10 @@ jobs:
         description: |
           Name of the env
         type: string
+      azure_resource_group:
+        description: |
+          Name of the resource group
+        type: string
 
     steps:
       - *fast-checkout
@@ -197,7 +211,7 @@ jobs:
           cluster-name: << parameters.cluster-name >>
           install-kubectl: true
           perform-login: true
-          resource-group: ${AZURE_RESOURCE_GROUP}
+          resource-group: << parameters.azure_resource_group >>
       - run:
           command: |
             ENV_IMAGE_NAME=${AZURE_LOGIN_SERVER_NAME}/${AZURE_REPO}:<< parameters.env-name >>
@@ -261,12 +275,15 @@ workflows:
       - build_ui_push_to_blob_storage:
           name: build_dev_ui
           env_name: dev
+          azure_acc_url: ${AZURE_ACC_URL}
           requires:
             - migrate_dev_azure
 
       - cdn_invalidation:
           name: cdn_invalidation_dev
-          env-name: dev
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_profile_name: ${AZURE_PROFILE_NAME}
+          azure_endpoint_name: dev-vakyansh
           requires:
             - build_dev_ui
 
@@ -300,6 +317,7 @@ workflows:
           name: dev_deployment_aks
           cluster-name: ${AZURE_CLUSTER_NAME}
           env-name: dev
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
           requires:
             - push_dev_image
             - push_db_refresher_image
@@ -352,12 +370,15 @@ workflows:
       - build_ui_push_to_blob_storage:
           name: build_test_ui
           env_name: test
+          azure_acc_url: ${AZURE_ACC_URL}
           requires:
             - migrate_test_azure
 
       - cdn_invalidation:
           name: cdn_invalidation_test
-          env-name: dev
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_profile_name: ${AZURE_PROFILE_NAME}
+          azure_endpoint_name: test-vakyansh
           requires:
             - build_test_ui
 
@@ -379,6 +400,7 @@ workflows:
           name: test_deployment_aks
           cluster-name: ${AZURE_CLUSTER_NAME}
           env-name: test
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
           requires:
             - push_test_image
 
@@ -420,12 +442,15 @@ workflows:
       - build_ui_push_to_blob_storage:
           name: build_uat_ui
           env_name: uat
+          azure_acc_url: ${AZURE_ACC_URL}
           requires:
             - migrate_uat_azure
 
       - cdn_invalidation:
           name: cdn_invalidation_uat
-          env-name: dev
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_profile_name: ${AZURE_PROFILE_NAME}
+          azure_endpoint_name: uat-vakyansh
           requires:
             - build_uat_ui
 
@@ -447,6 +472,7 @@ workflows:
           name: uat_deployment_aks
           cluster-name: ${AZURE_CLUSTER_NAME}
           env-name: uat
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
           requires:
             - push_uat_image
 
@@ -470,12 +496,15 @@ workflows:
       - build_ui_push_to_blob_storage:
           name: build_prod_ui
           env_name: prod
+          azure_acc_url: ${AZURE_ACC_URL}
           requires:
             - migrate_prod_azure
 
       - cdn_invalidation:
           name: cdn_invalidation_prod
-          env-name: dev
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_profile_name: ${AZURE_PROFILE_NAME}
+          azure_endpoint_name: prod-vakyansh
           requires:
             - build_prod_ui
 
@@ -497,5 +526,6 @@ workflows:
           name: prod_deployment_eks
           cluster-name: ${AZURE_PROD_CLUSTER_NAME}
           env-name: prod
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
           requires:
             - push_prod_image
