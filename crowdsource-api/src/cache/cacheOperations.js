@@ -25,6 +25,9 @@ const getRandom = (datasetList, requireElements) => {
 
 const generateResponse = (data, desiredCount, userId, userName) => {
 	let response = [];
+	if (!data || data.length == 0) {
+		return response;
+	}
 	let randomItems = getRandom(data, desiredCount);
 	const randomItemsDataSetRowIds = randomItems.map(i => i.dataset_row_id);
 	data = data.filter(d => !randomItemsDataSetRowIds.includes(d.dataset_row_id));
@@ -53,12 +56,15 @@ const generateResponse = (data, desiredCount, userId, userName) => {
 }
 
 const sortAndFilterValidationData = (data) => {
-	data = data.filter(d => d.validation_count != undefined && d.validation_count < validation_count);
-	data.sort(function (a, b) {
-		return a.validation_count - b.validation_count;
-	})
-		.reverse();
-	return data;
+	if (data && data.length > 0) {
+		data = data.filter(d => d.validation_count != undefined && d.validation_count < validation_count);
+		data.sort(function (a, b) {
+			return a.validation_count - b.validation_count;
+		})
+			.reverse();
+		return data;
+	}
+	return [];
 }
 
 const userIncludedIn = (property, userInfo) => {
@@ -78,6 +84,9 @@ const deleteProperties = (obj, properties) => {
 
 const generateValidationResponse = (data, desiredCount, userId, userName) => {
 	let response = [];
+	if (!data || data.length == 0) {
+		return response;
+	}
 	let randomItems = data.slice(0, desiredCount);
 	const itemLength = randomItems.length;
 	let i = 0;
@@ -146,6 +155,10 @@ const removeItemFromCache = async (dataset_row_id, type, language, toLanguage) =
 
 		const cacheData = JSON.parse(cacheResponse);
 
+		if (cacheData == null) {
+			return;
+		}
+
 		let data = cacheData.filter(dataset => dataset.dataset_row_id != dataset_row_id);
 
 		await cache.setAsync(`dataset_row_${type}_${language}_${toLanguage}`, JSON.stringify(data), expiry);
@@ -173,12 +186,17 @@ const markContributionSkippedInCache = async (type, fromLanguage, toLanguage, da
 		return;
 	}
 	try {
-		const cacheResponse = await cache.getAsync(`dataset_row_${type}_${fromLanguage}_${toLanguage}`);
+
+		const key = `dataset_row_${type}_${fromLanguage}_${toLanguage}`;
+
+		const cacheResponse = await cache.getAsync(key);
 		if (cacheResponse) {
 			let cacheData = JSON.parse(cacheResponse);
 			cacheData = updateSkippedByForItem(cacheData, dataset_row_id, userId, userName);
-			await cache.setAsync(`dataset_row_${type}_${fromLanguage}_${toLanguage}`, JSON.stringify(cacheData), expiry);
+			await cache.setAsync(key, JSON.stringify(cacheData), expiry);
 		}
+
+
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)
 	}
@@ -195,9 +213,8 @@ const setValidationDataForCaching = async (db, type, language, toLanguage) => {
 			db,
 			query,
 			[type, language, toLanguage, batchSize],
-			(data) => {
-				sortAndFilterValidationData(data)
-			});
+			(data) => sortAndFilterValidationData(data)
+		);
 
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)
@@ -245,13 +262,16 @@ const updateCacheAfterValidation = async (contribution_id, type, fromLanguage, t
 		return;
 	}
 	try {
-		const cacheResponse = await cache.getAsync(`contributions_${type}_${fromLanguage}_${toLanguage}`);
+		const key = `contributions_${type}_${fromLanguage}_${toLanguage}`;
+
+		const cacheResponse = await cache.getAsync(key);
 		if (cacheResponse) {
 			let cacheData = JSON.parse(cacheResponse);
 			cacheData = updateValidationCountForItem(cacheData, contribution_id, userId, userName, action);
 			cacheData = sortAndFilterValidationData(cacheData);
-			await cache.setAsync(`contributions_${type}_${fromLanguage}_${toLanguage}`, JSON.stringify(cacheData), expiry);
+			await cache.setAsync(key, JSON.stringify(cacheData), expiry);
 		}
+
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)
 	}

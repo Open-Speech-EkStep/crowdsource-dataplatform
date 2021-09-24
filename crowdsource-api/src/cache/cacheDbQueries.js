@@ -40,7 +40,7 @@ cont.contributor_identifier::text || '-' || cont.user_name as contributed_by, st
 count(distinct val.validation_id) as validation_count
     from contributions con 
     inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id 
-	and ds.type=$1 and con.media->>'language'=$2
+	and ds.type=$1 and con.media->>'language'=$2 and ds.state <> 'validated'
 	inner join contributors cont on con.contributed_by=cont.contributor_id
   left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
   	left join validations val2 on val2.contribution_id=con.contribution_id
