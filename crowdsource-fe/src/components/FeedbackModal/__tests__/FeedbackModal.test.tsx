@@ -1,4 +1,5 @@
 import { when } from 'jest-when';
+import router from 'next/router';
 
 import { screen, render, verifyAxeTest, userEvent, waitFor } from 'utils/testUtils';
 
@@ -27,13 +28,9 @@ describe('FeedbackModal', () => {
 
   it('should post data with anonymous username on form submit', async () => {
     const language = 'Hindi';
-    const module = 'm1';
     when(localStorage.getItem)
       .calledWith('contributionLanguage')
       .mockImplementation(() => language);
-    when(localStorage.getItem)
-      .calledWith('selectedModule')
-      .mockImplementation(() => module);
     when(localStorage.getItem)
       .calledWith('speakerDetails')
       .mockImplementation(() => null);
@@ -42,6 +39,7 @@ describe('FeedbackModal', () => {
     const successResponse = { k: 'response' };
 
     fetchMock.doMockOnceIf(url).mockResponseOnce(JSON.stringify(successResponse));
+    await router.push('/home');
 
     setup();
 
@@ -64,8 +62,8 @@ describe('FeedbackModal', () => {
           revisit: '',
           email: 'Anonymous',
           language,
-          module,
-          target_page: '',
+          module: 'Others',
+          target_page: 'Home Page',
         }),
       });
     });
@@ -75,14 +73,11 @@ describe('FeedbackModal', () => {
 
   it('should post data on form submit', async () => {
     const language = 'Hindi';
-    const module = 'm1';
     const userName = 'test';
+
     when(localStorage.getItem)
       .calledWith('contributionLanguage')
       .mockImplementation(() => language);
-    when(localStorage.getItem)
-      .calledWith('selectedModule')
-      .mockImplementation(() => module);
     when(localStorage.getItem)
       .calledWith('speakerDetails')
       .mockImplementation(() => JSON.stringify({ userName }));
@@ -91,6 +86,7 @@ describe('FeedbackModal', () => {
     const successResponse = { k: 'response' };
 
     fetchMock.doMockOnceIf(url).mockResponseOnce(JSON.stringify(successResponse));
+    await router.push('/home');
 
     setup();
 
@@ -113,8 +109,8 @@ describe('FeedbackModal', () => {
           revisit: '',
           email: userName,
           language,
-          module,
-          target_page: '',
+          module: 'Others',
+          target_page: 'Home Page',
         }),
       });
     });
