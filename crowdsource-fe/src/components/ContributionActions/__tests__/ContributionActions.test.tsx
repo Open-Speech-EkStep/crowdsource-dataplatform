@@ -55,7 +55,9 @@ describe('ContributionActions', () => {
       ])
     );
 
-    const renderResult = render(<ContributionActions initiativeMedia="asr" contributionLanguage="Hindi" />);
+    const renderResult = render(
+      <ContributionActions initiativeMedia="asr" initiative="suno" contributionLanguage="Hindi" />
+    );
     return renderResult;
   };
 

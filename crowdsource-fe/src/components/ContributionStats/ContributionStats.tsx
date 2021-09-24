@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 
 import Stats from 'components/Stats';
 import apiPaths from 'constants/apiPaths';
-import { INITIATIVES_MAPPING, INITIATIVE_CUMULATIVE_VALUE } from 'constants/initiativeConstants';
+import { INITIATIVE_CUMULATIVE_VALUE } from 'constants/initiativeConstants';
 import useFetch from 'hooks/useFetch';
 import type { CumulativeCount } from 'types/Chart';
 import { convertIntoHrsFormat, formatTime, isSunoOrBoloInitiative } from 'utils/utils';
@@ -24,6 +24,7 @@ const typeMap: Record<string, string> = {
 interface ContributionStatsProps {
   children: ReactNode;
   initiativeMedia?: string;
+  initiative: string;
 }
 
 const ContributionStats = (props: ContributionStatsProps) => {
@@ -31,7 +32,6 @@ const ContributionStats = (props: ContributionStatsProps) => {
   const { data: participationStats, error } = useFetch<Array<{ count: string; type: string }>>(
     apiPaths.participationStats
   );
-
   const { data: cumulativeCountData } = useFetch<Array<CumulativeCount>>(apiPaths.cumulativeCount);
 
   const statsContents: Array<{
@@ -49,7 +49,7 @@ const ContributionStats = (props: ContributionStatsProps) => {
       )?.count;
       INITIATIVE_CUMULATIVE_VALUE.suno.forEach((ele, index) => {
         let statValue;
-        if (isSunoOrBoloInitiative(INITIATIVES_MAPPING.suno) && ele.isFormat === 'true') {
+        if (isSunoOrBoloInitiative(props.initiative) && ele.isFormat === 'true') {
           const { hours, minutes, seconds } = convertIntoHrsFormat(
             Number(initiativeData[Object.values(ele)[0]!]) * 60 * 60
           );

@@ -98,5 +98,7 @@
   "contributionTrackerHeader": "Contributions made to Suno India",
   "contributionTrackerSubHeader": "Overall Summary",
   "validateWarningMsg": "Only contributions invited for the selected language",
-  "contributeWarningMsg": "Only validations invited for the selected language"
+  "contributeWarningMsg": "Only validations invited for the selected language",
+  "contributionInHrs": "Contribution (in hours)",
+  "contributionInSentences": "Contribution (in sentences)"
 }

@@ -5,14 +5,12 @@ import Row from 'react-bootstrap/Row';
 
 import ActionCard from 'components/ActionCard';
 import apiPaths from 'constants/apiPaths';
-import { INITIATIVE_ACTIONS, INITIATIVES_MAPPING } from 'constants/initiativeConstants';
+import { INITIATIVE_ACTIONS } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 
 import styles from './ContributionActions.module.scss';
-
-const initiative = INITIATIVES_MAPPING.suno;
 
 interface LanguageWithData {
   count: string;
@@ -21,6 +19,7 @@ interface LanguageWithData {
 }
 
 interface ContributionActionProps {
+  initiative: string;
   initiativeMedia: string;
   contributionLanguage: string;
 }
@@ -66,11 +65,12 @@ const ContributionActions = (props: ContributionActionProps) => {
         <Col md="6" className="mt-7 mt-md-9">
           <ActionCard
             type={INITIATIVE_ACTIONS.transcribe}
-            icon={`${initiative}_contribute_icon.svg`}
+            icon={`${props.initiative}_contribute_icon.svg`}
             text="Type what you hear"
             shadow="Green"
             disabled={isContributionEnabled}
             warningMsg="contributeWarningMsg"
+            initiative={props.initiative}
           />
         </Col>
         <Col md="6" className="mt-9 mt-md-9">
@@ -81,6 +81,7 @@ const ContributionActions = (props: ContributionActionProps) => {
             shadow="Blue"
             disabled={!isValidationEnabled}
             warningMsg="validateWarningMsg"
+            initiative={props.initiative}
           />
         </Col>
       </Row>

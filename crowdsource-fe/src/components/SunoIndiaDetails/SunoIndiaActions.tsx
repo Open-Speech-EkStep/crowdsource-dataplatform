@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 import ContributionActions from 'components/ContributionActions';
-import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
+import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import { DISPLAY_LANGUAGES, RAW_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -59,6 +59,7 @@ const SunoIndiaActions = () => {
       <ContributionActions
         initiativeMedia={INITIATIVES_MEDIA_MAPPING.suno}
         contributionLanguage={contributionLanguage ?? ''}
+        initiative={INITIATIVES_MAPPING.suno}
       />
     </section>
   );

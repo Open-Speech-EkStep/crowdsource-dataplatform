@@ -20,7 +20,10 @@ const SunoIndiaDetails = () => {
           />
         </section>
         <section className="mt-9 mt-md-12">
-          <ContributionStats initiativeMedia={INITIATIVES_MEDIA_MAPPING.suno}>
+          <ContributionStats
+            initiativeMedia={INITIATIVES_MEDIA_MAPPING.suno}
+            initiative={INITIATIVES_MAPPING.suno}
+          >
             <header className="d-flex flex-column">
               <h1 className={`${styles.header} mb-0 w-100`}>{t('contributionTrackerHeader')}</h1>
               <span className={`${styles.subHeader} mt-4 mb-0`}>{t('contributionTrackerSubHeader')}</span>

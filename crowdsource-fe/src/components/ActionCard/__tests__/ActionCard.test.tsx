@@ -7,8 +7,9 @@ describe('ActionCard', () => {
     render(
       <ActionCard
         icon="some-icon.svg"
-        type="translate"
+        type="Transcribe"
         text="some-text"
+        initiative="suno"
         warningMsg="Only contributions invited for the selected language"
       />
     );

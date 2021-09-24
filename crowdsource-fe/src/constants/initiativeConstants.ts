@@ -29,4 +29,4 @@ export const INITIATIVE_CUMULATIVE_VALUE = {
     { 'Duration transcribed': 'total_contributions', isFormat: 'true' },
     { 'Duration Validated': 'total_validations', isFormat: 'true' },
   ],
-};
+} as const;

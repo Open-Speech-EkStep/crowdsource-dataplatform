@@ -57,7 +57,11 @@ describe('ContributionStats', () => {
       ])
     );
 
-    const renderResult = render(<ContributionStats initiativeMedia={value}> </ContributionStats>);
+    const renderResult = render(
+      <ContributionStats initiativeMedia={value} initiative="suno">
+        {' '}
+      </ContributionStats>
+    );
     value !== 'asr' ? waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner')) : null;
     return renderResult;
   };
@@ -72,6 +76,11 @@ describe('ContributionStats', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
+  it('should not render the data when "no" data is present for inititative', async () => {
+    await setup('parallel');
+    expect(screen.getByTestId('StatsRow').children.length).toEqual(0);
+  });
+
   it('should render the result for initiative home page', async () => {
     await setup('asr');
     expect(screen.getByText('People participated')).toBeInTheDocument();
@@ -80,11 +89,6 @@ describe('ContributionStats', () => {
     expect(screen.getByText('Languages')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
     expect(screen.getByText('9')).toBeInTheDocument();
-  });
-
-  it('should not render the data when "no" data is present for inititative', async () => {
-    await setup('parallel');
-    expect(screen.getByTestId('StatsRow').children.length).toEqual(0);
   });
 
   it('should render the result for landing page', async () => {

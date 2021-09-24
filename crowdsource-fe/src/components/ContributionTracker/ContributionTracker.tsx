@@ -114,8 +114,7 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
         chartFilterType === 'byDuration'
           ? getTopLanguagesByHoursChartData(topLanguageHrsData)
           : getTopLanguagesBySpeakerChartData(topSpeakersData),
-      yAxisLabel:
-        chartFilterType === 'byDuration' ? t('Contribution (in hours)') : t('Contribution (in sentences)'),
+      yAxisLabel: chartFilterType === 'byDuration' ? t('contributionInHrs') : t('contributionInSentences'),
       ...chartLegendDeails,
     }),
     [chartFilterType, chartLegendDeails, t, topLanguageHrsData, topSpeakersData]
