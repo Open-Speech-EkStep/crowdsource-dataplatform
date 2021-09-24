@@ -4,6 +4,7 @@
   "description": "This will hold the crowdsourcing platform to be used to store voice data from various speakers",
   "main": "server.js",
   "scripts": {
+    "dev": "cd crowdsource-fe && npm run dev",
     "start": "cd crowdsource-api && npm start",
     "watch": "run-s gulp watch:nodemon",
     "watch:nodemon": "cd crowdsource-api && npm run watch",

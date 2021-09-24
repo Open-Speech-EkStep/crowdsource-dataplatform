@@ -7,7 +7,6 @@ interface HomePageBackgroundPorps {
 }
 
 const HomePageBackground = (props: HomePageBackgroundPorps) => {
-  console.log('test deployment');
   return (
     <div data-testid="HomePageBackground" className={`${styles.root} position-relative px-2 px-lg-0`}>
       {props.children}
