@@ -222,7 +222,14 @@ exports[`ChangeUserForm should render the component and matches it against store
     </div>
     <p
       class="py-3 mb-0"
-    />
+    >
+      <a
+        href="/terms-and-conditions.html"
+        target="_blank"
+      >
+        termsAndConditionsTextValue
+      </a>
+    </p>
   </form>
   <button
     form="changeUserForm"
