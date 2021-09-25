@@ -7,7 +7,7 @@
   },
   "scripts": {
     "clean": "rimraf .next out .lighthouseci coverage tsconfig.tsbuildinfo .cache test-results",
-    "dev": "node server.js",
+    "dev": "nodemon -w ../crowdsource-api node server.js",
     "dev:axe": "cross-env NEXT_PUBLIC_AXE_CORE=true npm run dev",
     "lint": "next lint --dir src --cache --cache-location .cache/eslint/",
     "lint:fix": "npm run lint -- --fix",
@@ -71,6 +71,7 @@
     "jest-when": "^3.4.0",
     "next-router-mock": "^0.5.2",
     "node-talisman": "^1.22.2",
+    "nodemon": "^2.0.13",
     "prettier": "^2.4.1",
     "puppeteer": "^10.4.0",
     "rimraf": "^3.0.2",
