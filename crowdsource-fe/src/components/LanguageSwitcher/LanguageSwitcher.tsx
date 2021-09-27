@@ -24,6 +24,8 @@ const localeCookieName = 'NEXT_LOCALE';
 const LanguageSwitcher = () => {
   const { asPath: currentRoutePath, locale: currentLocale = DEFAULT_LOCALE, locales } = useRouter();
   const { t } = useTranslation();
+  const [cookie, setCookie] = useCookies([localeCookieName]);
+
   let localeValues: any | undefined;
   const [contributionLanguage, setContributionLanguage] = useLocalStorage<string>(
     localStorageConstants.contributionLanguage
@@ -36,12 +38,8 @@ const LanguageSwitcher = () => {
     filteredLanguage && filteredLanguage.includes(LOCALES_MAPPING.en) ? '' : filteredLanguage?.unshift('en');
     localeValues = filteredLanguage;
   } else {
-    localeValues = locales;
+    localeValues = locales?.sort();
   }
-  const [cookie, setCookie] = useCookies([localeCookieName]);
-
-  locales?.sort();
-
   return (
     <Dropdown
       data-testid="LanguageSwitcher"
@@ -65,7 +63,7 @@ const LanguageSwitcher = () => {
               eventKey={locale}
               className={`${styles.item} text-primary display-5 px-4 py-2`}
               onClick={() => {
-                setContributionLanguage(RAW_LANGUAGES[locale]);
+                doSetContributionLanguage ? null : setContributionLanguage(RAW_LANGUAGES[locale]);
 
                 if (cookie.NEXT_LOCALE !== locale) {
                   // TODO: Some issue is still there with redirection to locale set in cookie.

@@ -19,11 +19,10 @@ export const capitalizeFirstLetter = (strValue: string) => {
   return strValue.charAt(0).toUpperCase() + strValue.slice(1);
 };
 
-export const formatTime = function (hours: number, minutes = 0, seconds = 0, translate = true) {
-  const localeStrings = JSON.parse(localStorage.getItem('localeString') || '{}');
-  const hrStr = translate ? localeStrings['hour(s)'] || 'hour(s)' : 'hour(s)';
-  const minStr = translate ? localeStrings['minute(s)'] || 'minute(s)' : 'minute(s)';
-  const secStr = translate ? localeStrings['second(s)'] || 'second(s)' : 'second(s)';
+export const formatTime = (hours: number, minutes = 0, seconds = 0) => {
+  const hrStr = 'hours';
+  const minStr = 'minutes';
+  const secStr = 'seconds';
   let result = '';
   if (hours > 0) {
     result += `${hours} ${hrStr} `;
