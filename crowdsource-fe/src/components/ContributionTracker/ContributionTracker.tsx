@@ -103,7 +103,7 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
   const chartLegendDeails = useMemo(
     () => ({
       colors: ['#F7CC56', '#F7CC56', '#F7CC56', '#EF8537'],
-      xAxisLabel: t('Month'),
+      xAxisLabel: t('month'),
     }),
     [t]
   );
@@ -114,7 +114,8 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
         chartFilterType === 'byDuration'
           ? getTopLanguagesByHoursChartData(topLanguageHrsData)
           : getTopLanguagesBySpeakerChartData(topSpeakersData),
-      yAxisLabel: chartFilterType === 'byDuration' ? t('contributionInHrs') : t('contributionInSentences'),
+      yAxisLabel:
+        chartFilterType === 'byDuration' ? t('contributionGraphYLabel1') : t('contributionGraphYLabel2'),
       ...chartLegendDeails,
     }),
     [chartFilterType, chartLegendDeails, t, topLanguageHrsData, topSpeakersData]

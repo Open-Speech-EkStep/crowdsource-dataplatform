@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { useTranslation } from 'next-i18next';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
@@ -25,6 +26,7 @@ interface ContributionActionProps {
 }
 
 const ContributionActions = (props: ContributionActionProps) => {
+  const { t } = useTranslation();
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
   const { data: languageWithData, mutate } = useFetch<LanguageWithData[]>(apiPaths.languagesWithData, {
@@ -66,7 +68,7 @@ const ContributionActions = (props: ContributionActionProps) => {
           <ActionCard
             type={INITIATIVE_ACTIONS.transcribe}
             icon={`${props.initiative}_contribute_icon.svg`}
-            text="Type what you hear"
+            text={t('sunoContributionTagline')}
             shadow="Green"
             disabled={isContributionEnabled}
             warningMsg="contributeWarningMsg"
@@ -77,7 +79,7 @@ const ContributionActions = (props: ContributionActionProps) => {
           <ActionCard
             type={INITIATIVE_ACTIONS.validate}
             icon="validate.svg"
-            text="Validate what others have contributed"
+            text={t('sunoValidationTagline')}
             shadow="Blue"
             disabled={!isValidationEnabled}
             warningMsg="validateWarningMsg"

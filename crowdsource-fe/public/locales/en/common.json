@@ -1,9 +1,4 @@
 {
-  "metaTitle": "Bhasha Daan: A crowdsourcing initiative for Indian languages (Beta)",
-  "metaDescription": "Bhasha Daan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice",
-  "metaOGTitle": "Bhasha Daan: A crowdsourcing initiative for Indian languages",
-  "metaOGDescription": "social sharing text without rank",
-  "metaOGSiteName": "Bhasha Daan",
   "home": "Home",
   "suno": "Suno",
   "bolo": "Bolo",
@@ -11,7 +6,6 @@
   "dekho": "Dekho",
   "bhasha": "Bhasha",
   "daan": "Daan",
-  "beta": "Beta",
   "india": "India",
   "heroSecondaryHeading": "One platform, multiple crowdsourcing initiatives",
   "heroText": "Help to build an open repository of data to digitally enrich your language",
@@ -95,10 +89,27 @@
   "languageIconAlt": "Language Icon",
   "submitSuccess": "Submitted successfully",
   "feedbackThankYou": "Thank you for your feedback",
-  "contributionTrackerHeader": "Contributions made to Suno India",
+  "contributionTrackerHeader": "Contributions made to {{initiativeName}}",
   "contributionTrackerSubHeader": "Overall Summary",
   "validateWarningMsg": "Only contributions invited for the selected language",
   "contributeWarningMsg": "Only validations invited for the selected language",
-  "contributionInHrs": "Contribution (in hours)",
-  "contributionInSentences": "Contribution (in sentences)"
+
+  "sunoContributionTagline": "Type what you hear",
+  "sunoValidationTagline": "Validate what others have contributed",
+  "month": "Month",
+  "contributionGraphYLabel1": "Contribution (in hours)",
+  "contributionGraphYLabel2": "Contribution (total sentences)",
+  "selectLanguagePrompt1": "Select the language for contribution",
+  "selectLanguagePrompt2": "Select the language pair for contribution",
+  "hours": "hour(s)",
+  "sentences": "sentence(s)",
+  "images": "image(s)",
+  "progressStatus": "<span>{{average}}%</span> of {{initiativeName}} Target Achieved",
+
+  "beta": "Beta",
+  "metaTitle": "Bhasha Daan: A crowdsourcing initiative for Indian languages (Beta)",
+  "metaDescription": "Bhasha Daan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice",
+  "metaOGTitle": "Bhasha Daan: A crowdsourcing initiative for Indian languages",
+  "metaOGDescription": "social sharing text without rank",
+  "metaOGSiteName": "Bhasha Daan"
 }

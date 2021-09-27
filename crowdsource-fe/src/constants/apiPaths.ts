@@ -1,12 +1,14 @@
 import nodeConfig from './nodeConfig';
 
 const apiPaths = {
-  languagesWithData: '/aggregated-json/languagesWithData.json',
-  enableDisableCards: '/aggregated-json/enableDisableCards.json',
-  initiativeGoals: '/aggregated-json/initiativeGoals.json',
-  cumulativeCount: '/aggregated-json/cumulativeCount.json',
-  topLanguagesByHoursContributed: '/aggregated-json/topLanguagesByHoursContributed.json',
-  topLanguagesBySpeakerContributions: '/aggregated-json/topLanguagesBySpeakerContributions.json',
+  languagesWithData: nodeConfig.staticFileUrl + '/aggregated-json/languagesWithData.json',
+  enableDisableCards: nodeConfig.staticFileUrl + '/aggregated-json/enableDisableCards.json',
+  initiativeGoals: nodeConfig.staticFileUrl + '/aggregated-json/initiativeGoals.json',
+  cumulativeCount: nodeConfig.staticFileUrl + '/aggregated-json/cumulativeCount.json',
+  topLanguagesByHoursContributed:
+    nodeConfig.staticFileUrl + '/aggregated-json/topLanguagesByHoursContributed.json',
+  topLanguagesBySpeakerContributions:
+    nodeConfig.staticFileUrl + '/aggregated-json/topLanguagesBySpeakerContributions.json',
   participationStats: nodeConfig.staticFileUrl + '/aggregated-json/participationStats.json',
   feedback: nodeConfig.apiUrl + '/feedback',
 };

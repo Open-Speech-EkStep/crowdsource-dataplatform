@@ -1,3 +1,5 @@
+import { i18n } from 'next-i18next';
+
 export const convertIntoHrsFormat = (data: any, isSeconds = true) => {
   const hours = Math.floor(data / 3600);
   const remainingAfterHours = data % 3600;
@@ -19,10 +21,12 @@ export const capitalizeFirstLetter = (strValue: string) => {
   return strValue.charAt(0).toUpperCase() + strValue.slice(1);
 };
 
+const translateText = (text: string) => i18n?.t(text);
+
 export const formatTime = (hours: number, minutes = 0, seconds = 0) => {
-  const hrStr = 'hours';
-  const minStr = 'minutes';
-  const secStr = 'seconds';
+  const hrStr = translateText('hours');
+  const minStr = translateText('minutes');
+  const secStr = translateText('seconds');
   let result = '';
   if (hours > 0) {
     result += `${hours} ${hrStr} `;

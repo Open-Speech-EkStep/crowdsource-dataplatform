@@ -52,7 +52,7 @@ exports[`ContributionActions should render the component and matches it against 
                       <p
                         class="text mt-1 mt-md-2 mb-0"
                       >
-                        Type what you hear
+                        sunoContributionTagline
                       </p>
                     </div>
                     <div
@@ -131,7 +131,7 @@ exports[`ContributionActions should render the component and matches it against 
                       <p
                         class="text mt-1 mt-md-2 mb-0"
                       >
-                        Validate what others have contributed
+                        sunoValidationTagline
                       </p>
                     </div>
                     <div

@@ -4,6 +4,7 @@ import {
   convertTimeFormat,
   formatTime,
   isSunoOrBoloInitiative,
+  capitalizeFirstLetter,
 } from '../utils';
 import '__fixtures__/mockComponentsWithSideEffects';
 
@@ -76,5 +77,12 @@ describe('Utils', () => {
 
     const expectedOutput = true;
     expect(roundValue).toEqual(expectedOutput);
+  });
+
+  it('should test the capitalizeFirstLetter method', () => {
+    const capitalizeValue = capitalizeFirstLetter('suno');
+
+    const expectedOutput = 'Suno';
+    expect(capitalizeValue).toEqual(expectedOutput);
   });
 });

@@ -12,18 +12,8 @@ exports[`TargetProgress should render the component and matches it against store
       <div
         class="percentage"
       >
-        <span
-          class="count"
-        >
-          %
-        </span>
-         of Suno India Target Achieved
+        progressStatus
       </div>
-      <span
-        class="hours d-none d-md-block"
-      >
-        / undefined
-      </span>
     </div>
     <div
       class="mt-2 mt-md-1 progress"
@@ -36,9 +26,9 @@ exports[`TargetProgress should render the component and matches it against store
       />
     </div>
     <span
-      class="hours d-md-none mt-2 align-self-end"
+      class="hours mt-2 align-self-end"
     >
-      / undefined
+      / 
     </span>
   </div>
 </DocumentFragment>

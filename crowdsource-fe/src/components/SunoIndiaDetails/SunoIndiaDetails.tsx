@@ -10,6 +10,7 @@ import styles from './SunoIndiaDetails.module.scss';
 
 const SunoIndiaDetails = () => {
   const { t } = useTranslation();
+  const initiativeName = `${t('suno')} ${t('india')}`;
   return (
     <section data-testid="SunoIndiaDetails" className="py-9 py-md-11 px-2 px-lg-0">
       <Container fluid="lg">
@@ -25,7 +26,9 @@ const SunoIndiaDetails = () => {
             initiative={INITIATIVES_MAPPING.suno}
           >
             <header className="d-flex flex-column">
-              <h1 className={`${styles.header} mb-0 w-100`}>{t('contributionTrackerHeader')}</h1>
+              <h1 className={`${styles.header} mb-0 w-100`}>
+                {t('contributionTrackerHeader', { initiativeName })}
+              </h1>
               <span className={`${styles.subHeader} mt-4 mb-0`}>{t('contributionTrackerSubHeader')}</span>
             </header>
           </ContributionStats>
