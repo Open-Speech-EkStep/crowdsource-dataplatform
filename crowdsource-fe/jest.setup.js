@@ -14,14 +14,16 @@ jest.mock('next/dist/client/router', () => {
 });
 
 jest.mock('react-i18next', () => {
-  const { Fragment } = require('react');
-
   return {
     useTranslation: () => ({ t: key => key }),
-    Trans: ({ components }) =>
-      Object.values(components).map((component, index) => <Fragment key={index}>{component}</Fragment>),
+    Trans: ({ defaults }) => defaults,
   };
 });
+
+jest.mock('next-i18next', () => ({
+  ...jest.requireActual('next-i18next'),
+  i18n: { t: key => key },
+}));
 
 // As we're testing on the JSDOM, color-contrast testing can't run.
 // The types of results fetched are limited for performance reasons
@@ -84,3 +86,7 @@ afterEach(() => {
   Storage.prototype.setItem.mockClear();
   Storage.prototype.removeItem.mockClear();
 });
+
+class SVGPathElement extends HTMLElement {}
+
+window.SVGPathElement = SVGPathElement;

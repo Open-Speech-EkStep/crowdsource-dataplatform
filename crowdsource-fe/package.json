@@ -27,6 +27,7 @@
     "start:docker": "cross-env NODE_ENV=production node server.docker.js"
   },
   "dependencies": {
+    "@amcharts/amcharts4": "^4.10.22",
     "bootstrap": "^5.1.1",
     "classnames": "^2.3.1",
     "next": "11.1.2",
@@ -68,8 +69,9 @@
     "jest-fetch-mock": "^3.0.3",
     "jest-junit": "^12.3.0",
     "jest-watch-typeahead": "^0.6.4",
-    "jest-when": "^3.4.0",
-    "next-router-mock": "^0.5.2",
+    "jest-when": "^3.3.1",
+    "next-router-mock": "^0.3.0",
+    "next-transpile-modules": "^8.0.0",
     "node-talisman": "^1.22.2",
     "nodemon": "^2.0.13",
     "prettier": "^2.4.1",

@@ -5,9 +5,17 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { useCookies } from 'react-cookie';
 
 import Link from 'components/Link';
-import { DEFAULT_LOCALE, DISPLAY_LANGUAGES, RAW_LANGUAGES } from 'constants/localesConstants';
+import {
+  DEFAULT_LOCALE,
+  DISPLAY_LANGUAGES,
+  LOCALE_LANGUAGES,
+  RAW_LANGUAGES,
+} from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
+import routePaths from 'constants/routePaths';
 import useLocalStorage from 'hooks/useLocalStorage';
+
+import { LOCALES_MAPPING } from '../../../next-i18next.config';
 
 import styles from './LanguageSwitcher.module.scss';
 
@@ -16,11 +24,22 @@ const localeCookieName = 'NEXT_LOCALE';
 const LanguageSwitcher = () => {
   const { asPath: currentRoutePath, locale: currentLocale = DEFAULT_LOCALE, locales } = useRouter();
   const { t } = useTranslation();
-  const [, setContributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
   const [cookie, setCookie] = useCookies([localeCookieName]);
 
-  locales?.sort();
+  let localeValues: any | undefined;
+  const [contributionLanguage, setContributionLanguage] = useLocalStorage<string>(
+    localStorageConstants.contributionLanguage
+  );
 
+  const doSetContributionLanguage = contributionLanguage && currentRoutePath !== routePaths.home;
+
+  if (contributionLanguage && currentRoutePath !== routePaths.home) {
+    const filteredLanguage = locales?.filter(locale => locale === LOCALE_LANGUAGES[contributionLanguage]);
+    filteredLanguage && filteredLanguage.includes(LOCALES_MAPPING.en) ? '' : filteredLanguage?.unshift('en');
+    localeValues = filteredLanguage;
+  } else {
+    localeValues = locales?.sort();
+  }
   return (
     <Dropdown
       data-testid="LanguageSwitcher"
@@ -38,13 +57,13 @@ const LanguageSwitcher = () => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        {locales?.map(locale => (
-          <Link key={locale} href={currentRoutePath} locale={locale} passHref>
+        {localeValues?.map((locale: any, index: number) => (
+          <Link key={index} href={currentRoutePath} locale={locale} passHref>
             <Dropdown.Item
               eventKey={locale}
               className={`${styles.item} text-primary display-5 px-4 py-2`}
               onClick={() => {
-                setContributionLanguage(RAW_LANGUAGES[locale]);
+                doSetContributionLanguage ? null : setContributionLanguage(RAW_LANGUAGES[locale]);
 
                 if (cookie.NEXT_LOCALE !== locale) {
                   // TODO: Some issue is still there with redirection to locale set in cookie.

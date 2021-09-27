@@ -3,9 +3,9 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import Background from '../Background';
 
 describe('Background', () => {
-  const setup = () =>
+  const setup = (size?: string) =>
     render(
-      <Background image="some-image.svg" size="cover">
+      <Background image="some-image.svg" size={size}>
         <div>Child Component</div>
       </Background>
     );

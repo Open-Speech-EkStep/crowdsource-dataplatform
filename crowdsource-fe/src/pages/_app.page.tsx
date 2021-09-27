@@ -11,7 +11,7 @@ import Layout from 'components/Layout';
 
 type MyAppProps = Partial<Exclude<AppProps, 'Component'>> & { Component: AppProps['Component'] };
 
-const MyApp = ({ Component, pageProps = {} }: MyAppProps) => {
+const MyApp = ({ Component, pageProps }: MyAppProps) => {
   return (
     <Layout>
       <Component {...pageProps} />

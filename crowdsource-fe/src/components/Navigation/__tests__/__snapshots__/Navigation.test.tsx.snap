@@ -31,8 +31,8 @@ exports[`Navigation should render the component and matches it against stored sn
         >
           <a
             class="link d-flex align-items-center text-primary display-5 mx-xl-3 nav-link"
-            data-rr-ui-event-key="/sunoIndia/home.html"
-            href="/sunoIndia/home.html"
+            data-rr-ui-event-key="/sunoIndia/home"
+            href="/sunoIndia/home"
           >
             suno india
           </a>

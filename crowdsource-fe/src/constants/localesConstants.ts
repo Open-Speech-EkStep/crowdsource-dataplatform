@@ -31,3 +31,33 @@ export const RAW_LANGUAGES = {
   [LOCALES_MAPPING.or]: 'Odia',
   [LOCALES_MAPPING.pa]: 'Punjabi',
 } as const;
+
+export const LOCALES_LANGUAGE_MAPPING = {
+  English: 'English',
+  Hindi: 'Hindi',
+  Tamil: 'Tamil',
+  Telugu: 'Telugu',
+  Assamese: 'Assamese',
+  Bengali: 'Bengali',
+  Gujarati: 'Gujarati',
+  Kannada: 'Kannada',
+  Malayalam: 'Malayalam',
+  Marathi: 'Marathi',
+  Odia: 'Odia',
+  Punjabi: 'Punjabi',
+};
+
+export const LOCALE_LANGUAGES = {
+  [LOCALES_LANGUAGE_MAPPING.English]: 'en',
+  [LOCALES_LANGUAGE_MAPPING.Hindi]: 'hi',
+  [LOCALES_LANGUAGE_MAPPING.Tamil]: 'ta',
+  [LOCALES_LANGUAGE_MAPPING.Telugu]: 'te',
+  [LOCALES_LANGUAGE_MAPPING.Assamese]: 'as',
+  [LOCALES_LANGUAGE_MAPPING.Bengali]: 'bn',
+  [LOCALES_LANGUAGE_MAPPING.Gujarati]: 'gu',
+  [LOCALES_LANGUAGE_MAPPING.Kannada]: 'kn',
+  [LOCALES_LANGUAGE_MAPPING.Malayalam]: 'ml',
+  [LOCALES_LANGUAGE_MAPPING.Marathi]: 'mr',
+  [LOCALES_LANGUAGE_MAPPING.Odia]: 'or',
+  [LOCALES_LANGUAGE_MAPPING.Punjabi]: 'pa',
+} as const;

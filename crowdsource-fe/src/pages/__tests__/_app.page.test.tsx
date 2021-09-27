@@ -10,7 +10,7 @@ describe('App', () => {
   const setup = () => {
     const Component = () => <div>Hello World</div>;
 
-    return render(<App Component={Component} pageProps={{}} router={router as unknown as Router} />);
+    return render(<App Component={Component} pageProps={{}} router={(router as unknown) as Router} />);
   };
 
   verifyAxeTest(setup());

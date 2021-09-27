@@ -1,8 +1,9 @@
 import { INITIATIVES_MAPPING } from './initiativeConstants';
 import routePaths from './routePaths';
 
-const pageRouteConstants = {
+export const pageRouteConstants = {
   [routePaths.home]: 'Home Page',
+  [routePaths.sunoIndiaHome]: 'Suno India',
 } as const;
 
 export const pageInitiativeRouteConstants = {

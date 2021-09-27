@@ -447,7 +447,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
-                                  href="/sunoIndia/home.html"
+                                  href="/sunoIndia/home"
                                   role="button"
                                   tabindex="0"
                                 >
@@ -1099,7 +1099,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
-                                  href="/sunoIndia/home.html"
+                                  href="/sunoIndia/home"
                                   role="button"
                                   tabindex="0"
                                 >

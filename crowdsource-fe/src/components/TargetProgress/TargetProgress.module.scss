@@ -1,0 +1,34 @@
+.root {
+  position: relative;
+}
+
+.percentage {
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: normal;
+
+  @include media-breakpoint-up(md) {
+    font-size: 24px;
+  }
+}
+
+.count {
+  color: var(--text-orange);
+  font-size: 28px;
+
+  @include media-breakpoint-up(md) {
+    font-size: 40px;
+  }
+}
+
+.hours {
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+
+  @include media-breakpoint-up(md) {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}

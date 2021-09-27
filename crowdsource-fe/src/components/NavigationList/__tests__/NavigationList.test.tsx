@@ -20,6 +20,6 @@ describe('NavigationList', () => {
 
     userEvent.click(screen.getByRole('link', { name: 'suno india' }));
 
-    expect(router.pathname).toBe('/sunoIndia/home.html');
+    expect(router.pathname).toBe('/sunoIndia/home');
   });
 });

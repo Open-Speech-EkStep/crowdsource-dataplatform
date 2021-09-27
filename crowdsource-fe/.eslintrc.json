@@ -50,7 +50,7 @@
     "import/no-internal-modules": [
       "error",
       {
-        "allow": ["*/*"]
+        "allow": ["*/*", "@amcharts/amcharts4/charts", "@amcharts/amcharts4/core"]
       }
     ],
     "import/no-duplicates": ["error", { "considerQueryString": true }],

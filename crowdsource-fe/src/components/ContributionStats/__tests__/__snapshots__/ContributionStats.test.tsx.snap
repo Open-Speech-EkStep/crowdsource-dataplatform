@@ -5,13 +5,7 @@ exports[`ContributionStats should render the component and matches it against st
   <div
     data-testid="ContributionStats"
   >
-    <header
-      class="d-flex flex-column align-items-center flex-md-row justify-content-md-between"
-    >
-      <h2>
-        totalParticipation
-      </h2>
-    </header>
+     
     <div
       class="mt-4 mt-md-5"
     >
@@ -20,6 +14,7 @@ exports[`ContributionStats should render the component and matches it against st
       >
         <div
           class="row"
+          data-testid="StatsRow"
         >
           <div
             class="stat col-md-3 col-12"
@@ -30,7 +25,10 @@ exports[`ContributionStats should render the component and matches it against st
               <span
                 class="count text-warning display-1"
               >
-                9
+                <div
+                  class="spinner-border text-light"
+                  data-testid="StatsSpinner"
+                />
               </span>
               <span
                 class="text-light text-uppercase mt-1 display-2"
@@ -48,7 +46,10 @@ exports[`ContributionStats should render the component and matches it against st
               <span
                 class="count text-warning display-1"
               >
-                283
+                <div
+                  class="spinner-border text-light"
+                  data-testid="StatsSpinner"
+                />
               </span>
               <span
                 class="text-light text-uppercase mt-1 display-2"
@@ -66,7 +67,10 @@ exports[`ContributionStats should render the component and matches it against st
               <span
                 class="count text-warning display-1"
               >
-                0
+                <div
+                  class="spinner-border text-light"
+                  data-testid="StatsSpinner"
+                />
               </span>
               <span
                 class="text-light text-uppercase mt-1 display-2"
@@ -84,7 +88,10 @@ exports[`ContributionStats should render the component and matches it against st
               <span
                 class="count text-warning display-1"
               >
-                53
+                <div
+                  class="spinner-border text-light"
+                  data-testid="StatsSpinner"
+                />
               </span>
               <span
                 class="text-light text-uppercase mt-1 display-2"

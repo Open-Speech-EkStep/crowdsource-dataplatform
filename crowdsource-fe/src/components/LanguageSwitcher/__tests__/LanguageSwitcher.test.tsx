@@ -5,7 +5,10 @@ import { render, userEvent, screen, verifyAxeTest, waitFor } from 'utils/testUti
 import LanguageSwitcher from '../LanguageSwitcher';
 
 describe('LanguageSwitcher', () => {
-  const setup = () => render(<LanguageSwitcher />);
+  const setup = () => {
+    const renderResult = render(<LanguageSwitcher />);
+    return renderResult;
+  };
 
   verifyAxeTest(setup());
 
@@ -49,5 +52,19 @@ describe('LanguageSwitcher', () => {
     expect(localStorage.setItem).toHaveBeenCalledWith('contributionLanguage', 'Hindi');
 
     expect(document.cookie).toBe('NEXT_LOCALE=hi');
+  });
+
+  it('should change the locale to English', async () => {
+    setup();
+
+    userEvent.click(screen.getByText('हिंदी'));
+
+    await waitFor(() => expect(screen.getByRole('link', { name: 'English' })).toBeInTheDocument());
+
+    userEvent.click(screen.getByRole('link', { name: 'English' }));
+
+    expect(router.locale).toBe('en');
+
+    expect(localStorage.setItem).toHaveBeenCalledWith('contributionLanguage', 'English');
   });
 });
