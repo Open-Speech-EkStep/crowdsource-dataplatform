@@ -204,6 +204,14 @@ jobs:
         description: |
           Name of the resource group
         type: string
+      azure_login_server_name:
+        description: |
+          Name of the acr
+        type: string
+      azure_repo_api:
+        description: |
+          Name of the image repo
+        type: string
 
     steps:
       - *fast-checkout
@@ -215,8 +223,9 @@ jobs:
       - run:
           command: |
             ENV_IMAGE_NAME=${AZURE_LOGIN_SERVER_NAME}/${AZURE_REPO}:<< parameters.env-name >>
+            ENV_IMAGE_NAME=<< parameters.azure_login_server_name >>/<< parameters.azure_repo_api >>:<< parameters.env-name >>
 
-            ENV_IMAGE_NAME_DB_REFRESHER=${AZURE_LOGIN_SERVER_NAME}/${DB_REFRESHER_REPO}:<< parameters.env-name >>
+            ENV_IMAGE_NAME_DB_REFRESHER=<< parameters.env-name >>/${DB_REFRESHER_REPO}:<< parameters.env-name >>
             kubectl -n << parameters.env-name >> apply  -f ${HOME}/project/crowdsource-api/k8s-deployments/autoscaler_<< parameters.env-name >>.yaml
      
             sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment_<< parameters.env-name >>.yaml | kubectl -n << parameters.env-name >> apply  -f -     
@@ -318,6 +327,8 @@ workflows:
           cluster-name: ${AZURE_CLUSTER_NAME}
           env-name: dev
           azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
+          azure_repo_api: ${AZURE_REPO}
           requires:
             - push_dev_image
             - push_db_refresher_image
@@ -401,6 +412,8 @@ workflows:
           cluster-name: ${AZURE_CLUSTER_NAME}
           env-name: test
           azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
+          azure_repo_api: ${AZURE_REPO}
           requires:
             - push_test_image
 
@@ -473,6 +486,8 @@ workflows:
           cluster-name: ${AZURE_CLUSTER_NAME}
           env-name: uat
           azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
+          azure_repo_api: ${AZURE_REPO}
           requires:
             - push_uat_image
 
@@ -496,24 +511,39 @@ workflows:
       - build_ui_push_to_blob_storage:
           name: build_prod_ui
           env_name: prod
-          azure_acc_url: ${AZURE_ACC_URL}
+          azure_acc_url: ${AZURE_ACC_URL_PROD}
           requires:
             - migrate_prod_azure
 
       - cdn_invalidation:
           name: cdn_invalidation_prod
-          azure_resource_group: ${AZURE_RESOURCE_GROUP}
-          azure_profile_name: ${AZURE_PROFILE_NAME}
-          azure_endpoint_name: prod-vakyansh
+          azure_resource_group: ${AZURE_RESOURCE_GROUP_PROD} 
+          azure_profile_name: ${AZURE_PROFILE_NAME_PROD}
+          azure_endpoint_name: bhashadaan
           requires:
             - build_prod_ui
 
       - azure-acr/build-and-push-image:
           pre-steps:
             - *fast-checkout
+          name: push_db_refresher_image_prod
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD} 
+          registry-name: ${AZURE_REGISTRY_PROD}
+          dockerfile: Dockerfile-dbRefresh
+          path: ./db-refresher
+          extra-build-args: --build-arg NODE_CONFIG_ENV=prod
+          repo: ${DB_REFRESHER_REPO}
+          tag: "prod"
+          checkout: false
+          requires:
+            - cdn_invalidation_prod
+
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
           name: push_prod_image
-          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-          registry-name: ${AZURE_REGISTRY}
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+          registry-name: ${AZURE_REGISTRY_PROD}
           path: ./crowdsource-api
           extra-build-args: --build-arg NODE_CONFIG_ENV=prod
           repo: ${AZURE_REPO}
@@ -526,6 +556,8 @@ workflows:
           name: prod_deployment_eks
           cluster-name: ${AZURE_PROD_CLUSTER_NAME}
           env-name: prod
-          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_resource_group: ${AZURE_RESOURCE_GROUP_PROD}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+          azure_repo_api: ${AZURE_REPO}
           requires:
             - push_prod_image
