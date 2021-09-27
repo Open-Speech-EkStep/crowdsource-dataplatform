@@ -96,36 +96,48 @@ $headings-line-height: $line-height-base;
 $headings-color: map-get($theme-colors, 'primary');
 
 h1 {
+  font-size: $h1-font-size !important;
+
   @include media-breakpoint-up(md) {
     font-size: $font-size-base * 2.5 !important; // 40px
   }
 }
 
 h2 {
+  font-size: $h2-font-size !important;
+
   @include media-breakpoint-up(md) {
     font-size: $font-size-base * 2 !important; // 32px
   }
 }
 
 h3 {
+  font-size: $h3-font-size !important;
+
   @include media-breakpoint-up(md) {
     font-size: $font-size-base * 1.75 !important; // 28px
   }
 }
 
 h4 {
+  font-size: $h4-font-size !important;
+
   @include media-breakpoint-up(md) {
     font-size: $font-size-base * 1.5 !important; // 24px
   }
 }
 
 h5 {
+  font-size: $h5-font-size !important;
+
   @include media-breakpoint-up(md) {
     font-size: $font-size-base * 1.25 !important; // 20px
   }
 }
 
 h6 {
+  font-size: $h6-font-size !important;
+
   @include media-breakpoint-up(md) {
     font-size: $font-size-base * 1.125 !important; // 18px
   }
