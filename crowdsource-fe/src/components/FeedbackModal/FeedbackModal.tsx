@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Form from 'react-bootstrap/Form';
 
+import Button from 'components/Button';
 import Modal from 'components/Modal';
 import apiPaths from 'constants/apiPaths';
 import { DEFAULT_LOCALE, RAW_LANGUAGES } from 'constants/localesConstants';
@@ -83,9 +84,9 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
       title={t('feedbackModalHeading')}
       subTitle={t('feedbackModalSubHeading')}
       footer={
-        <button disabled={!isButtonEnabled} form="feedbackForm" type="submit" className={styles.submitButton}>
+        <Button disabled={!isButtonEnabled} form="feedbackForm" type="submit">
           {t('submit')}
-        </button>
+        </Button>
       }
     >
       <div className={styles.form}>

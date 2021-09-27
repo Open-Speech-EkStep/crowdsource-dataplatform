@@ -3,8 +3,8 @@ import { Fragment, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import Button from 'react-bootstrap/Button';
 
+import Button from 'components/Button';
 import FeedbackSuccessModal from 'components/FeedbackSuccessModal';
 
 import styles from './Feedback.module.scss';
@@ -32,6 +32,7 @@ const Feedback = () => {
     <Fragment>
       <Button
         data-testid="FeedbackBtn"
+        variant="normal"
         onClick={showModal}
         className={`${styles.root} d-inline-flex justify-content-center align-items-center bg-light border border-1 border-primary-40 rounded-circle`}
       >

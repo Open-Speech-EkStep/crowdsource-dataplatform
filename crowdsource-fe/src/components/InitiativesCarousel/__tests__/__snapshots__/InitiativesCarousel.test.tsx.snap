@@ -282,9 +282,11 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
                                 <a
-                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
                                   href="/dekhoIndia/home.html"
+                                  role="button"
+                                  tabindex="0"
                                 >
                                   startParticipating
                                 </a>
@@ -443,9 +445,11 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
                                 <a
-                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
                                   href="/sunoIndia/home.html"
+                                  role="button"
+                                  tabindex="0"
                                 >
                                   startParticipating
                                 </a>
@@ -604,9 +608,11 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
                                 <a
-                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
                                   href="/boloIndia/home.html"
+                                  role="button"
+                                  tabindex="0"
                                 >
                                   startParticipating
                                 </a>
@@ -765,9 +771,11 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
                                 <a
-                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
                                   href="/likhoIndia/home.html"
+                                  role="button"
+                                  tabindex="0"
                                 >
                                   startParticipating
                                 </a>
@@ -926,9 +934,11 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
                                 <a
-                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
                                   href="/dekhoIndia/home.html"
+                                  role="button"
+                                  tabindex="0"
                                 >
                                   startParticipating
                                 </a>
@@ -1087,9 +1097,11 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
                                 <a
-                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
                                   href="/sunoIndia/home.html"
+                                  role="button"
+                                  tabindex="0"
                                 >
                                   startParticipating
                                 </a>
@@ -1248,9 +1260,11 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
                                 <a
-                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
                                   href="/boloIndia/home.html"
+                                  role="button"
+                                  tabindex="0"
                                 >
                                   startParticipating
                                 </a>
@@ -1409,9 +1423,11 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
                                 <a
-                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
                                   href="/likhoIndia/home.html"
+                                  role="button"
+                                  tabindex="0"
                                 >
                                   startParticipating
                                 </a>
@@ -1570,9 +1586,11 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 class="mt-3 d-flex justify-content-center justify-content-md-start col"
                               >
                                 <a
-                                  class="startParticipatingBtn d-flex justify-content-center align-items-center w-100"
+                                  class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
                                   href="/dekhoIndia/home.html"
+                                  role="button"
+                                  tabindex="0"
                                 >
                                   startParticipating
                                 </a>

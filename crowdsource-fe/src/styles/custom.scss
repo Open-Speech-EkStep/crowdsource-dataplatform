@@ -66,6 +66,13 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   --light-color: #{map-get($theme-colors, 'light')};
   --dark-color: #{map-get($theme-colors, 'dark')};
   --link-color: #{$link-color};
+  --primary-10-color: #{map-get($custom-colors, 'primary-10')};
+  --primary-40-color: #{map-get($custom-colors, 'primary-40')};
+  --btn-grey-color: #e7e9ed;
+  --btn-primary-disabled-bg-color: #9fa9b6;
+  --btn-primary-disabled-text-color: #cfd4da;
+  --btn-secondary-disabled-bg-color: #f9fbff;
+  --btn-tertiary-disabled-text-color: #6f7d92;
 }
 
 // Typography
