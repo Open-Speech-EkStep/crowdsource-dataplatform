@@ -6,7 +6,7 @@ import Stats from 'components/Stats';
 import apiPaths from 'constants/apiPaths';
 import { INITIATIVE_CUMULATIVE_VALUE } from 'constants/initiativeConstants';
 import useFetch from 'hooks/useFetch';
-import type { CumulativeCount } from 'types/Chart';
+import type { CumulativeCount } from 'types/CumulativeCount';
 import { convertIntoHrsFormat, formatTime, isSunoOrBoloInitiative } from 'utils/utils';
 
 const SUNO = 'suno';

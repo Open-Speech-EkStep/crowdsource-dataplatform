@@ -81,37 +81,6 @@ describe('ContributionActions', () => {
     return renderResult;
   };
 
-  const setupWithNoData = async () => {
-    const language = 'Hindi';
-
-    when(localStorage.getItem)
-      .calledWith('contributionLanguage')
-      .mockImplementation(() => language);
-
-    fetchMock.doMockOnceIf('/aggregated-json/topLanguagesByHoursContributed.json').mockResponseOnce(
-      JSON.stringify([
-        {
-          language: 'Hindi',
-          total_contributions: 0.049,
-          type: 'text',
-        },
-      ])
-    );
-
-    fetchMock.doMockOnceIf('/aggregated-json/topLanguagesBySpeakerContributions.json').mockResponseOnce(
-      JSON.stringify([
-        {
-          language: 'English',
-          total_speakers: 13,
-          type: 'text',
-        },
-      ])
-    );
-
-    const renderResult = render(<ContributionTracker initiativeMedia="asr" />);
-    return renderResult;
-  };
-
   it('should render the component and matches it against stored snapshot', async () => {
     const { asFragment } = await setup();
 
@@ -128,12 +97,6 @@ describe('ContributionActions', () => {
     await setup();
 
     userEvent.click(screen.getAllByRole('radio')[1]);
-    expect(screen.getByTestId('ContributionTracker').children.length).toBe(2);
-  });
-
-  it('should render the chart component after api gives no data', async () => {
-    await setupWithNoData();
-
     expect(screen.getByTestId('ContributionTracker').children.length).toBe(2);
   });
 });

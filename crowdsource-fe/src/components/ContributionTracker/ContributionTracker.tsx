@@ -9,7 +9,7 @@ import apiPaths from 'constants/apiPaths';
 import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
-import type { TopLanguagesByHours, TopLanguagesBySpeaker } from 'types/Chart';
+import type { TopLanguagesByHours, TopLanguagesBySpeaker } from 'types/TopLanguages';
 
 import styles from './ContributionTracker.module.scss';
 

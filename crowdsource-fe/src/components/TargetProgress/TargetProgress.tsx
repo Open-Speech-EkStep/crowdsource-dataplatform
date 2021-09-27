@@ -8,7 +8,7 @@ import { INITIATIVES_MAPPING, INITIATIVE_ACTIONS } from 'constants/initiativeCon
 import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
-import type { CumulativeCount } from 'types/Chart';
+import type { CumulativeCount } from 'types/CumulativeCount';
 import { capitalizeFirstLetter, convertIntoHrsFormat, formatTime, roundOffValue } from 'utils/utils';
 
 import styles from './TargetProgress.module.scss';
